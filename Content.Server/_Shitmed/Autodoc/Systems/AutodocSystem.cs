@@ -1,14 +1,11 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
+using Content.Server.Chat;
 using Content.Server.Chat.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared._Shitmed.Autodoc.Components;
 using Content.Shared._Shitmed.Autodoc.Systems;
-using Content.Shared.Body.Components;
-using Content.Shared.Chat;
 
 namespace Content.Server._Shitmed.Autodoc.Systems;
 

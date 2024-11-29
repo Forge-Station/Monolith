@@ -75,6 +75,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<SurgeryCloseIncisionConditionComponent, SurgeryValidEvent>(OnCloseIncisionValid);
         //SubscribeLocalEvent<SurgeryLarvaConditionComponent, SurgeryValidEvent>(OnLarvaValid);
         SubscribeLocalEvent<SurgeryCorticalBorerConditionComponent, SurgeryValidEvent>(OnCorticalBorerValid);
+        SubscribeLocalEvent<SurgeryHasBodyConditionComponent, SurgeryValidEvent>(OnHasBodyConditionValid);
         SubscribeLocalEvent<SurgeryPartConditionComponent, SurgeryValidEvent>(OnPartConditionValid);
         SubscribeLocalEvent<SurgeryOrganConditionComponent, SurgeryValidEvent>(OnOrganConditionValid);
         SubscribeLocalEvent<SurgeryHasBodyConditionComponent, SurgeryValidEvent>(OnHasBodyConditionValid);
@@ -104,6 +105,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     {
         if (!_timing.IsFirstTimePredicted)
             return;
+
         if (args.Cancelled)
         {
             var failEv = new SurgeryStepFailedEvent(args.User, ent, args.Surgery, args.Step);
@@ -183,7 +185,13 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnPartComponentConditionValid(Entity<SurgeryPartComponentConditionComponent> ent, ref SurgeryValidEvent args)
+    private void OnHasBodyConditionValid(Entity<SurgeryHasBodyConditionComponent> ent, ref SurgeryValidEvent args)
+    {
+        if (CompOrNull<BodyPartComponent>(args.Part)?.Body == null)
+            args.Cancelled = true;
+    }
+
+    private void OnPartConditionValid(Entity<SurgeryPartConditionComponent> ent, ref SurgeryValidEvent args)
     {
         var present = true;
         foreach (var reg in ent.Comp.Components.Values)

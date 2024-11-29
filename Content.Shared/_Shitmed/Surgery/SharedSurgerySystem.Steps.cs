@@ -766,7 +766,7 @@ public abstract partial class SharedSurgerySystem
                     if (TryComp(tool, out SurgeryToolComponent? toolComp) &&
                         toolComp.StartSound != null)
                     {
-                        _audio.PlayEntity(toolComp.StartSound, user, tool);
+                        _audio.PlayPvs(toolComp.StartSound, tool);
                     }
                 }
             }

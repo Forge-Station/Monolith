@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.DoAfter;
+using Content.Shared._Goobstation.DoAfter;
 using Content.Goobstation.Shared.Factory.Filters;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
@@ -133,7 +133,7 @@ public abstract class SharedInteractorSystem : EntitySystem
 
     private void UpdateToolAppearance(EntityUid uid)
     {
-        var state = _hands.ActiveHandIsEmpty(uid) == false
+        var state = _handsQuery.CompOrNull(uid)?.ActiveHand?.IsEmpty == false
             ? InteractorState.Inactive
             : InteractorState.Empty;
         UpdateAppearance(uid, state);

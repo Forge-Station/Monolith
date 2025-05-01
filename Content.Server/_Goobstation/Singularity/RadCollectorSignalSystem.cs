@@ -1,4 +1,4 @@
-using Content.Shared._Goobstation.Factory;
+using Content.Goobstation.Shared.Factory;
 using Content.Server.DeviceLinking.Systems;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Singularity.Components;

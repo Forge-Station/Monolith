@@ -48,8 +48,13 @@ public sealed partial class AutomatedHand : AutomationSlot
 
     public override bool CanInsert(EntityUid item)
     {
-        return base.CanInsert(item)
-            && _hands.CanPickupToHand(Owner, item, HandName);
+        if (!base.CanInsert(item))
+            return false;
+
+        if (Hand == null)
+            return false;
+
+        return _hands.CanPickupToHand(Owner, item, Hand);
     }
 
     public override EntityUid? GetItem(EntityUid? filter)

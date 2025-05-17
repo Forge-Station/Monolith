@@ -54,7 +54,7 @@ public sealed partial class MeleeWeaponSystem
         {
             if (user != weapon
                 && TryComp(weapon, out SpriteComponent? weaponSpriteComponent))
-                sprite.CopyFrom(weaponSpriteComponent);
+                _sprite.CopySprite((weapon, weaponSpriteComponent), (animationUid, sprite));
 
             spriteRotation = meleeWeaponComponent.WideAnimationRotation;
 //            var distance = Math.Clamp(localPos.Length() / 2f, 0.2f, 1f); // Forge-Change
@@ -66,7 +66,8 @@ public sealed partial class MeleeWeaponSystem
             offset = meleeWeaponComponent.AnimationOffset;
 // Forge-Change-End
         }
-        sprite.Rotation = localPos.ToWorldAngle();
+        _sprite.SetRotation((animationUid, sprite), localPos.ToWorldAngle());
+        var distance = Math.Clamp(localPos.Length() / 2f, 0.2f, 1f);
 
         var xform = _xformQuery.GetComponent(animationUid);
         TrackUserComponent track;
@@ -154,7 +155,7 @@ public sealed partial class MeleeWeaponSystem
         };
     }
 
-    private Animation GetThrustAnimation(SpriteComponent sprite, float offset, Angle spriteRotation, float length) // Forge-Change: added offset, float length. Removed distance
+    private Animation GetThrustAnimation(Entity<SpriteComponent> sprite, float offset, Angle spriteRotation, float length) // Forge-Change: added offset, float length. Removed distance
     {
 //        const float thrustEnd = 0.05f; // Forge-Change Commented
 //        const float length = 0.15f; // Forge-Change Commented
@@ -162,9 +163,9 @@ public sealed partial class MeleeWeaponSystem
 //        var endOffset = sprite.Rotation.RotateVec(new Vector2(0f, -distance)); // Forge-Change Commented
 // Forge-Change-Start
         var startOffset = Vector2.Zero;
-        var endOffset = sprite.Rotation.RotateVec(new Vector2(0f, -offset * 1.2f));
+        var endOffset = sprite.Comp.Rotation.RotateVec(new Vector2(0f, -offset * 1.2f));
 // Forge-Change-End
-        sprite.Rotation += spriteRotation;
+        _sprite.SetRotation(sprite.AsNullable(), sprite.Comp.Rotation + spriteRotation);
 
         return new Animation()
         {

@@ -25,6 +25,7 @@ public sealed partial class GhostToggleSelfVisibility : LocalizedEntityCommands
         if (!EntityManager.TryGetComponent(attachedEntity, out SpriteComponent? spriteComponent))
             return;
 
-        _sprite.SetVisible((attachedEntity.Value, spriteComponent), !spriteComponent.Visible);
+        var spriteSys = entityManager.System<SpriteSystem>();
+        spriteSys.SetVisible((attachedEntity.Value, spriteComponent), !spriteComponent.Visible);
     }
 }

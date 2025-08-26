@@ -61,6 +61,21 @@ public abstract partial class SharedMechSystem : EntitySystem
     {
         base.Initialize();
         Subs.CVar(_config, GoobCVars.MechGunOutsideMech, value => _canUseMechGunOutside = value, false); // Goobstation
+        SubscribeLocalEvent<MechComponent, MechToggleEquipmentEvent>(OnToggleEquipmentAction);
+        SubscribeLocalEvent<MechComponent, MechEjectPilotEvent>(OnEjectPilotEvent);
+        SubscribeLocalEvent<MechComponent, UserActivateInWorldEvent>(RelayInteractionEvent);
+        SubscribeLocalEvent<MechComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<MechComponent, DestructionEventArgs>(OnDestruction);
+        SubscribeLocalEvent<MechComponent, EntityStorageIntoContainerAttemptEvent>(OnEntityStorageDump);
+        SubscribeLocalEvent<MechComponent, GetAdditionalAccessEvent>(OnGetAdditionalAccess);
+        SubscribeLocalEvent<MechComponent, DragDropTargetEvent>(OnDragDrop);
+        SubscribeLocalEvent<MechComponent, CanDropTargetEvent>(OnCanDragDrop);
+
+        SubscribeLocalEvent<MechPilotComponent, GetMeleeWeaponEvent>(OnGetMeleeWeapon);
+        SubscribeLocalEvent<MechPilotComponent, CanAttackFromContainerEvent>(OnCanAttackFromContainer);
+        SubscribeLocalEvent<MechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
+
+        InitializeRelay();
     }
 
     [SubscribeLocalEvent]
@@ -238,12 +253,25 @@ public abstract partial class SharedMechSystem : EntitySystem
         UpdateUserInterface(uid, component);
     }
 
+    /// <summary>
+    /// Removes an equipment item from a mech.
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="toRemove"></param>
+    /// <param name="component"></param>
+    /// <param name="equipmentComponent"></param>
+    /// <param name="forced">
+    ///     Whether or not the removal can be cancelled, and if non-mech equipment should be ejected.
+    /// </param>
     public void RemoveEquipment(EntityUid uid, EntityUid toRemove, MechComponent? component = null,
         MechEquipmentComponent? equipmentComponent = null, bool forced = false)
     {
         if (!Resolve(uid, ref component))
             return;
 
+        // When forced, we also want to handle the possibility that the "equipment" isn't actually equipment.
+        // This /shouldn't/ be possible thanks to OnEntityStorageDump, but there's been quite a few regressions
+        // with entities being hardlock stuck inside mechs.
         if (!Resolve(toRemove, ref equipmentComponent) && !forced)
             return;
 

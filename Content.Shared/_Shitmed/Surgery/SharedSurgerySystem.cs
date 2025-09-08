@@ -21,6 +21,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
+using Content.Shared.Stacks;
 using Content.Shared.Standing;
 using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
@@ -48,9 +49,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private RotateToFaceSystem _rotateToFace = default!;
     [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedCorticalBorerSystem _corticalBorer = default!;
 
+
+    private EntityQuery<StackComponent> _stackQuery;
 
     /// <summary>
     /// Cache of all surgery prototypes' singleton entities.
@@ -68,6 +72,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _stackQuery = GetEntityQuery<StackComponent>();
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
@@ -101,6 +107,25 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         _surgeries.Clear();
     }
 
+    private void OnMapInit(Entity<SurgeryTargetComponent> ent, ref MapInitEvent args)
+    {
+        var data = new InterfaceData("SurgeryBui");
+        _ui.SetUi(ent.Owner, SurgeryUIKey.Key, data);
+    }
+
+    private void OnBeforeTargetDoAfter(Entity<SurgeryTargetComponent> ent,
+        ref DoAfterAttemptEvent<SurgeryDoAfterEvent> args)
+    {
+        if (_net.IsClient
+            || !args.Event.Repeat) // We only wanna do this laggy shit on repeatables. One-time stuff idc.
+            return;
+
+        if (args.Event.Target is not { } target
+            || !IsSurgeryValid(ent, target, args.Event.Surgery, args.Event.Step, args.Event.User, out var surgery, out var part, out var _)
+            || IsStepComplete(ent, part, args.Event.Step, surgery))
+            args.Cancel();
+    }
+
     private void OnTargetDoAfter(Entity<SurgeryTargetComponent> ent, ref SurgeryDoAfterEvent args)
     {
         if (!_timing.IsFirstTimePredicted)
@@ -113,11 +138,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
+        var tool = _hands.GetActiveItemOrSelf(args.User);
         if (args.Handled
             || args.Target is not { } target
             || !IsSurgeryValid(ent, target, args.Surgery, args.Step, args.User, out var surgery, out var part, out var step)
             || !PreviousStepsComplete(ent, part, surgery, args.Step)
-            || !CanPerformStep(args.User, ent, part, step, false))
+            || !CanPerformStep(args.User, ent, part, step, tool, false))
         {
             Log.Warning($"{ToPrettyString(args.User)} tried to start invalid surgery.");
             return;
@@ -129,6 +155,16 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         var ev = new SurgeryStepEvent(args.User, ent, part, GetTools(args.User), surgery, step, complete);
         RaiseLocalEvent(step, ref ev);
         RaiseLocalEvent(args.User, ref ev);
+
+        // consume the tool if it's something like using LV cable as stitches
+        if (args.ToolUsed)
+        {
+            if (_stackQuery.TryComp(tool, out var stack))
+                _stack.Use(tool, 1, stack);
+            else
+                PredictedQueueDel(tool);
+        }
+
         RefreshUI(ent);
     }
 

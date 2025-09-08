@@ -2,16 +2,15 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._Shitmed.Medical.Surgery.Tools;
 
+/// <summary>
+///     It lets you fucking stitch your ass up
+/// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class CauteryComponent : Component, ISurgeryToolComponent
+public sealed partial class StitchesComponent : Component, ISurgeryToolComponent
 {
-    public string ToolName => "a cautery";
+    public string ToolName => "stitches";
     [DataField]
     public bool? Used { get; set; } = null;
-    
-    /// <summary>
-    ///     Multiply the step's doafter by this value.
-    /// </summary>
     [DataField]
     public float Speed { get; set; } = 1f;
 }

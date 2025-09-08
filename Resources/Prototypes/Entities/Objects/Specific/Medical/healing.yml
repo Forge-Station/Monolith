@@ -213,6 +213,22 @@
     count: 15 #Was 10, Buffed due to surgery changes (Goobstation)
   - type: StackPrice
     price: 80 # Mono - 40->80
+  # <Shitmed>
+  - type: Stitches
+    speed: 2 # actual stitches cost nothing to use so these are faster, shits expensive
+    used: true
+  - type: SurgeryTool
+    startSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+    endSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+  # </Shitmed>
 
 - type: entity
   id: BrutepackAdvanced1

@@ -10,7 +10,6 @@ using Content.MapRenderer.Painters;
 using Content.Shared.Maps;
 using Newtonsoft.Json;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 using Robust.UnitTesting.Pool;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Webp;

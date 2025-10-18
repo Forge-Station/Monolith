@@ -59,6 +59,10 @@
     - !type:AutomatedMaterialStorage
       input: AutomationSlotMaterials
       output: null
+    - !type:AutomatedPorts
+      sinks:
+      - LathePrint
+  - type: LatheAutomation # Goobstation
   - type: TechnologyDatabase
   - type: MaterialStorageMagnetPickup # Frontier
     range: 1.50 # Mono

@@ -82,6 +82,12 @@
           components:
           - AutomationFilter
   - type: RoboticArm
+  # ports are exclusive, you can't have it pull from multiple machines / push to multiple machines
+  # use storage bins or conveyors to work around this, probably using filters too
+  - type: ExclusiveInputSlot
+    port: RoboticArmInput
+  - type: ExclusiveOutputSlot
+    port: RoboticArmOutput
   - type: FilterSlot
   - type: AutomationSlots
     slots:
@@ -93,13 +99,14 @@
   - type: DeviceLinkSink
     ports:
     - RoboticArmInput
-    # - On
-    # - Off
-    # TODO: ports to disable it
+    - Toggle
+    - On
+    - Off
   - type: DeviceLinkSource
     ports:
     - RoboticArmOutput
     - RoboticArmMoved
+    - Powered
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
@@ -109,6 +116,7 @@
   - type: ApcPowerReceiver
     powerLoad: 300 # imp, static 300 power draw instead of idle 50 -> active 3000
   - type: PowerSwitch
+  - type: SignalPowerSwitch
   # Guide
   - type: GuideHelp
     guides:

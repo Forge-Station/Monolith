@@ -9,6 +9,7 @@
   - ConstructorCircuitboard
   - StorageBinCircuitboard
   - InteractorCircuitboard
+  - PlumbingPumpCircuitboard
 
 - type: latheRecipePack
   id: ServiceBoardsGoob 

@@ -1,3 +1,29 @@
+# SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: sinkPort
+  id: MaterialSiloUtilizer
+  name: signal-port-name-material-silo-utilizer
+  description: signal-port-description-material-silo-utilizer
+
+# Plumbing
+
+- type: sinkPort
+  id: PlumbingInput
+  name: signal-port-name-plumbing-input
+  description: signal-port-description-plumbing-input
+
+- type: sinkPort
+  id: PlumbingDispenser
+  name: signal-port-name-plumbing-dispenser
+  description: signal-port-description-plumbing-dispenser
+
 # Robotic Arm
 
 - type: sinkPort
@@ -73,6 +99,13 @@
   id: AutomationSlotGasTank
   name: signal-port-name-automation-slot-gas-tank
   description: signal-port-description-automation-slot-gas-tank
+
+# ChemMaster
+
+- type: sinkPort
+  id: AutomationSlotBottles
+  name: signal-port-name-automation-slot-bottles
+  description: signal-port-description-automation-slot-bottles
 
 # Lathe
 

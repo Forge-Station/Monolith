@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.DeltaV.CartridgeLoader.Cartridges;
+namespace Content.Shared._DV.CartridgeLoader.Cartridges;
 
 [Serializable, NetSerializable]
 public sealed class NanoChatUiState : BoundUserInterfaceState

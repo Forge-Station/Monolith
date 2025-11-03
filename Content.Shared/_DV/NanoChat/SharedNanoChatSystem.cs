@@ -1,8 +1,8 @@
-using Content.Shared.DeltaV.CartridgeLoader.Cartridges;
+using Content.Shared._DV.CartridgeLoader.Cartridges;
 using Content.Shared.Examine;
 using Robust.Shared.Timing;
 
-namespace Content.Shared.DeltaV.NanoChat;
+namespace Content.Shared._DV.NanoChat;
 
 /// <summary>
 ///     Base system for NanoChat functionality shared between client and server.
@@ -34,8 +34,11 @@ public abstract class SharedNanoChatSystem : EntitySystem
     /// <summary>
     ///     Helper Method for truncating a string to maximum length
     /// </summary>
-    public static string Truncate(string text, int maxLength, string overflowText = "...")
+    public static string Truncate(string? text, int maxLength, string overflowText = "...") // Funky station - made text nullable because weird shit was happening that I could not bother to debug.
     {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+
         return text.Length > maxLength
             ? text[..(maxLength - overflowText.Length)] + overflowText
             : text;

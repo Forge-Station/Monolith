@@ -31,10 +31,14 @@ public sealed partial class NanoChatEntry : BoxContainer
         _pressHandler = _ => OnPressed?.Invoke(_number);
         ChatButton.OnPressed += _pressHandler;
 
-        NameLabel.Text = SharedNanoChatSystem.Truncate(recipient.Name, IdCardConsoleComponent.MaxFullNameLength);
+        // Funky Station - Added "Unknown" fallback for name, was having weird issues when implementing group chats.
+        NameLabel.Text = SharedNanoChatSystem.Truncate(recipient.Name ?? "Unknown", IdCardConsoleComponent.MaxFullNameLength);
         JobLabel.Text = SharedNanoChatSystem.Truncate(recipient.JobTitle ?? "", IdCardConsoleComponent.MaxJobTitleLength);
         JobLabel.Visible = !string.IsNullOrEmpty(recipient.JobTitle);
         UnreadIndicator.Visible = recipient.HasUnread;
+
+        // Funky Station - Show group icon for group chats
+        GroupIcon.Visible = recipient.IsGroup;
 
         ChatButton.ModulateSelfOverride = isSelected ? NanoChatMessageBubble.OwnMessageColor : null;
     }

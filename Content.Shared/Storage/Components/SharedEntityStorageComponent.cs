@@ -159,10 +159,10 @@ public sealed class EntityStorageComponentState : ComponentState
 }
 
 [ByRefEvent]
-public record struct InsertIntoEntityStorageAttemptEvent(EntityUid ItemToInsert, EntityUid Container, bool Cancelled = false);
+public record struct InsertIntoEntityStorageAttemptEvent(BaseContainer Container, EntityUid ItemToInsert, bool Cancelled = false);
 
 [ByRefEvent]
-public record struct StoreMobInItemContainerAttemptEvent(bool Handled, bool Cancelled = false);
+public record struct EntityStorageInsertedIntoAttemptEvent(BaseContainer Container, EntityUid ItemToInsert, bool Cancelled = false);
 
 /// <summary>
 /// Raised on the Container's owner whenever an entity storage tries to dump its

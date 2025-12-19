@@ -32,4 +32,11 @@ public sealed partial class RadioSpeakerComponent : Component
     /// </summary>
     [DataField]
     public InGameICChatType OutputChatType = InGameICChatType.Whisper;
+
+    // Goob
+    /// <summary>
+    /// Does the radio need to be on a power grid to work?
+    /// </summary>
+    [DataField]
+    public bool PowerRequired;
 }

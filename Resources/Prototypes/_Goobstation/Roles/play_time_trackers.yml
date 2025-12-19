@@ -15,3 +15,6 @@
 
 - type: playTimeTracker
   id: JobGovernmentMan
+
+- type: playTimeTracker
+  id: JobRadioHost

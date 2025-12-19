@@ -79,6 +79,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Security",
         "Sergeant", // Frontier
         "Service",
+<<<<<<< HEAD
         "StationTrafficController", // Frontier
         "TsfmcEngineering", // Forge Change
         //"USSP", // Mono
@@ -91,6 +92,8 @@ public sealed partial class IdCardConsoleComponent : Component
         "EmpireCommander", // Forge Change
         "EmpireDiplomacy", // Forge Change
         "TsfDiplomacy", // Forge Change
+        "Robotics", //Goob
+        "Journalism" //Goob
     };
 
     [Serializable, NetSerializable]

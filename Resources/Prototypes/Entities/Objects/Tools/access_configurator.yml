@@ -46,6 +46,8 @@
       - Mercenary # Frontier
       - Quartermaster
       - Research
+      - Robotics # goobstation
+      - Journalism # goobstation
       - ResearchDirector
       - Salvage
       - Security
@@ -130,6 +132,13 @@
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
+<<<<<<< HEAD
+=======
+    - NanotrasenRepresentative # goobstation
+    - BlueshieldOfficer # goobstation
+    - Robotics # goobstation
+    - Journalism # goobstation
+>>>>>>> 685d28d71 (Radio host job (#5365))
     - Wizard
     - USSPCommand # Mono
     - USSPHigh # Mono

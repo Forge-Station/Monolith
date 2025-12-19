@@ -13,6 +13,10 @@ job-name-diplomat = TSF Diplomat
 job-name-exec = Executive Access
 job-name-governmentman = The G-Man
 
+# Misc
+
+job-name-radiohost = Radio Host
+
 # Role timers - Make these alphabetical or I cut you (dont listen to upstream, i copied and pasted this, make it very un-alphabetical :godo:)
 
 JobNavyOfficer = Winter Solstice Officer
@@ -20,3 +24,4 @@ JobNavyOfficerUndercover = Winter Solstice Operative
 JobNavyCaptain = Winter Solstice HiCom
 JobDiplomat = TSF Diplomat
 JobGovernmentMan = The G-Man
+JobRadioHost = Radio Host

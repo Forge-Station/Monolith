@@ -169,3 +169,96 @@
     heldPrefix: blue
   - type: PresetIdCard
     job: GovernmentMan
+
+# Syndicate!
+
+- type: entity
+  parent: SyndicateIDCard
+  id: HighCommandIDCard
+  name: high command ID card
+  description: A particularly extravagent Syndicate identification card. This one has an in-built access breaker to open nearly any door.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/id_cards.rsi
+    layers:
+    - state: idhighcommand
+  - type: PresetIdCard
+    job: SyndicateHighCommander
+  - type: Emag
+    emagType: Access
+
+# event-resctricted jobs
+
+- type: entity
+  parent: IDCardStandard
+  id: SecurityClownIDCard
+  name: security clown ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idsecurityclown
+  - type: PresetIdCard
+    job: SecurityClown
+
+- type: entity
+  parent: IDCardStandard
+  id: CommandMaidIDCard
+  name: command maid ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idcommandmaid
+  - type: PresetIdCard
+    job: CommandMaid
+
+- type: entity
+  parent: IDCardStandard
+  id: PartyMakerIDCard
+  name: party maker ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idpartymaker
+  - type: PresetIdCard
+    job: PartyMaker
+
+# Crew
+
+- type: entity
+  parent: IDCardStandard
+  id: RoboticistIDCard
+  name: roboticist ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idroboticist
+  - type: PresetIdCard
+    job: Roboticist
+
+- type: entity
+  parent: IDCardStandard
+  id: RadioHostIDCard
+  name: radio host ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idradiohost
+  - type: PresetIdCard
+    job: RadioHost
+
+- type: entity
+  parent: IDCardStandard
+  id: VirologistIDCard
+  name: virology ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idvirologist
+  - type: PresetIdCard
+    job: Virologist

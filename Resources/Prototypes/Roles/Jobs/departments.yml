@@ -159,5 +159,7 @@
   description: department-Specific-description
   color: "#9FED58"
   weight: -91
+  roles:
+  - RadioHost # Goobstation
   primary: false
   editorHidden: true # Frontier

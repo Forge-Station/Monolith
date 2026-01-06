@@ -86,6 +86,7 @@
   description: It's a box with basic internals inside.
   suffix: Security
   components:
+<<<<<<< HEAD
   - type: StorageFill
     contents:
     - id: ClothingMaskGasSecurity
@@ -94,6 +95,18 @@
     - id: Flare
     - id: FoodSnackNutribrick
     - id: DrinkWaterBottleFull
+=======
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskGasSecurity
+        - id: DoubleEmergencyOxygenTankFilled # Corvax-Wega-Edit
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+>>>>>>> d72243823a ( Небольшое обновление СБ (#288))
   - type: Sprite
     layers:
     - state: internals
@@ -104,6 +117,7 @@
   id: BoxSurvivalSecurityNitrogen
   suffix: Security N2
   components:
+<<<<<<< HEAD
   - type: StorageFill
     contents:
     - id: ClothingMaskGasSecurity
@@ -112,6 +126,18 @@
     - id: Flare
     - id: FoodSnackNutribrick
     - id: DrinkWaterBottleFull
+=======
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskGasSecurity
+        - id: DoubleEmergencyNitrogenTankFilled # Corvax-Wega-Edit
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+>>>>>>> d72243823a ( Небольшое обновление СБ (#288))
   - type: Sprite
     layers:
     - state: internals

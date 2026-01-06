@@ -1010,6 +1010,17 @@
   - SeniorOfficerJumpsuit
   - SeniorOfficerJumpskirt
   - TrooperUniform
+<<<<<<< HEAD
+=======
+# Corvax-Wega-add-start
+  - JumpskirtTurtleneckRed
+  - JumpsuitTurtleneckRed
+  - JumpskirtTurtleneckBlack
+  - JumpsuitTurtleneckBlack
+  - JumpskirtTurtleneckBlackSleeveless
+  - JumpsuitTurtleneckBlackSleeveless
+# Corvax-Wega-add-end
+>>>>>>> d72243823a ( Небольшое обновление СБ (#288))
 
 - type: loadoutGroup
   id: SecurityBackpack
@@ -1084,8 +1095,28 @@
   id: SecurityCadetJumpsuit
   name: loadout-group-security-cadet-jumpsuit
   loadouts:
+<<<<<<< HEAD
   - RedJumpsuit
   - RedJumpskirt
+=======
+  - SecurityJumpsuitGrey # Corvax-Resprite
+  - SecurityJumpskirtGrey # Corvax-Resprite
+# Corvax-Wega-add-start
+  - JumpskirtTurtleneckRed
+  - JumpsuitTurtleneckRed
+  - JumpskirtTurtleneckBlack
+  - JumpsuitTurtleneckBlack
+  - JumpskirtTurtleneckBlackSleeveless
+  - JumpsuitTurtleneckBlackSleeveless
+# Corvax-Wega-add-end
+
+- type: loadoutGroup
+  id: SecurityCadetJobTrinkets
+  name: loadout-group-jobtrinkets
+  minLimit: 0
+  loadouts:
+  - LizardPlushieSecurityCadet
+>>>>>>> d72243823a ( Небольшое обновление СБ (#288))
 
 - type: loadoutGroup
   id: SurvivalSecurity

@@ -2,7 +2,8 @@ name: Build & Test Debug
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # auto-cancel active runs.
+  cancel-in-progress: false # Forge-Change
 
 on:
   push:

@@ -1827,7 +1827,7 @@ entities:
       parent: 79
     - type: ContainerContainer
       containers:
-        toggleable-clothing: !type:Container { }
+        toggleable-clothing: !type:Container
           showEnts: False
           occludes: True
           ent: null

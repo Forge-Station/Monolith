@@ -18,13 +18,17 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-    - uses: tspascoal/get-user-teams-membership@v3
-      id: checkUserMember
-      with:
-        username: ${{ github.actor }}
-        team: "content-maintainers,junior-maintainers"
-        GITHUB_TOKEN: ${{ secrets.LABELER_PAT }}
-    - if: ${{ steps.checkUserMember.outputs.isTeamMember == 'true' }}
-      uses: actions-ecosystem/action-add-labels@v1
-      with:
-        labels: "S: Approved"
+      - id: checkUserMember
+        run: |
+          ROLE="${{ github.event.review.author_association }}"
+          if [[ "$ROLE" == "MEMBER" || "$ROLE" == "OWNER" || "$ROLE" == "COLLABORATOR" ]]; then
+            echo "is_authorized=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_authorized=false" >> $GITHUB_OUTPUT
+          fi
+
+      - if: ${{ steps.checkUserMember.outputs.is_authorized == 'true' }}
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: "S: Approved"
+          

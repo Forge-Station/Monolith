@@ -8,6 +8,7 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;

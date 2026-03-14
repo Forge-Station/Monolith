@@ -10,6 +10,7 @@ using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Systems;
 using Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Radiation.Components;

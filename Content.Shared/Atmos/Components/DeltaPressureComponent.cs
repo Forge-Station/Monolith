@@ -1,8 +1,7 @@
-using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 
-namespace Content.Server.Atmos.Components;
+namespace Content.Shared.Atmos.Components;
 
 /// <summary>
 /// Entities that have this component will have damage done to them depending on the local pressure
@@ -22,7 +21,6 @@ public sealed partial class DeltaPressureComponent : Component
     /// </summary>
     [DataField(readOnly: true)]
     [ViewVariables(VVAccess.ReadOnly)]
-    [Access(typeof(DeltaPressureSystem), typeof(AtmosphereSystem))]
     public bool InProcessingList;
 
     /// <summary>
@@ -30,7 +28,6 @@ public sealed partial class DeltaPressureComponent : Component
     /// </summary>
     [DataField(readOnly: true)]
     [ViewVariables(VVAccess.ReadOnly)]
-    [Access(typeof(DeltaPressureSystem), typeof(AtmosphereSystem))]
     public bool IsTakingDamage;
 
     /// <summary>

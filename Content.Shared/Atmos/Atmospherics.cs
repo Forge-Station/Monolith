@@ -15,6 +15,11 @@ namespace Content.Shared.Atmos
         public const float R = 8.314462618f;
 
         /// <summary>
+        ///     Minimum mole count treated as present when checking fuel and oxidizer.
+        /// </summary>
+        public const float Epsilon = 0.001f;
+
+        /// <summary>
         ///     1 ATM in kPA.
         /// </summary>
         public const float OneAtmosphere = 101.325f;

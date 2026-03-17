@@ -7,7 +7,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
-
+using Content.Shared.Preferences;
 
 namespace Content.Shared.Humanoid;
 
@@ -108,6 +108,9 @@ public sealed partial class HumanoidAppearanceComponent : Component
     /// </summary>
     [DataField]
     public HashSet<HumanoidVisualLayers> HideLayersOnEquip = [HumanoidVisualLayers.Hair];
+
+    [ViewVariables]
+    public HumanoidCharacterProfile? LastProfileLoaded;
 }
 
 [DataDefinition]

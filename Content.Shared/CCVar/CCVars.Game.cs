@@ -420,7 +420,7 @@ public sealed partial class CCVars
     ///     Enable dynamic adjustment of role timers and whitelists based on player count.
     /// </summary>
     public static readonly CVarDef<bool> DynamicRolesEnabled =
-         CVarDef.Create("game.dynamic_roles.enabled", true, CVar.SERVERONLY | CVar.ARCHIVE);
+         CVarDef.Create("game.dynamic_roles.enabled", false, CVar.SERVERONLY | CVar.ARCHIVE);
 
     /// <summary>
     ///     The player count at or below which role timers and whitelists are disabled if dynamic roles are enabled.
@@ -428,4 +428,11 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<int> DynamicRolesPlayerThreshold =
          CVarDef.Create("game.dynamic_roles.player_threshold", 5, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Forge-change: add
+    ///     Master Switch for Contractors
+    /// </summary>
+    public static readonly CVarDef<bool> ContractorsEnabled =
+        CVarDef.Create("contractors.enabled", true, CVar.SERVER | CVar.REPLICATED);
 }

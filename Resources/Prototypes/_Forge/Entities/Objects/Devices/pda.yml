@@ -1,0 +1,111 @@
+- type: entity
+  parent: BasePDA
+  id: BaseEmpirePDA
+  description: A basic personal computer for access restriction and organization, manufactured in the Holy Empire of Vermillion's.
+  abstract: true
+  components:
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - BountyContractsCartridge
+    - AstroNavCartridge
+  - type: Sprite
+    sprite: Forge/Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - sprite: _Mono/Objects/Devices/pda.rsi
+      state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - sprite: _Mono/Objects/Devices/pda.rsi
+      state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Icon
+    sprite: Forge/Objects/Devices/pda.rsi
+    state: pda
+
+- type: entity
+  parent: BaseEmpirePDA
+  id: EmpirePDA
+  name: empire PDA
+  components:
+  - type: Pda
+    id: EmpireIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-empire
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#ab7a52"
+
+- type: entity
+  parent: BaseEmpirePDA
+  id: EmpireGoldPDA
+  name: empire PDA
+  components:
+  - type: Pda
+    id: EmpireGoldIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-empire
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#ab7a52"
+
+- type: entity
+  parent: BaseEmpirePDA
+  id: EmpireInqPDA
+  name: inquisitor PDA
+  components:
+  - type: Pda
+    id: EmpireInqIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-inq
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#393545"
+
+- type: entity
+  parent: BaseEmpirePDA
+  id: EmpireCommanderPDA
+  name: commander PDA
+  components:
+  - type: Pda
+    id: EmpireCommanderIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-lord
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#ab7a52"

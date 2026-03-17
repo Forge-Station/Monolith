@@ -7,3 +7,4 @@
   markingLimits: MobHumanMarkingLimits
   dollPrototype: MobDwarfDummy
   skinColoration: HumanToned
+  averageHeight: 150.0 # Forge-change

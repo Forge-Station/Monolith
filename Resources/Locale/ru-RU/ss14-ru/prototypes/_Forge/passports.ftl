@@ -1,0 +1,11 @@
+ent-BasePassport = паспорт
+    .desc = Документ, удостоверяющий национальность и личность человека.
+ent-SolFedPassport = { ent-BasePassport }
+    .desc = { ent-BasePassport.desc }
+    .suffix = Солфед
+ent-ImperialPassport = { ent-BasePassport }
+    .desc = { ent-BasePassport.desc }
+    .suffix = Империя
+ent-USSPPassport = { ent-BasePassport }
+    .desc = { ent-BasePassport.desc }
+    .suffix = СССП

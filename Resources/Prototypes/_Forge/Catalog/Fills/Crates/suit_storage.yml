@@ -1,0 +1,47 @@
+- type: entity
+  id: SuitStorageEmpire14m
+  parent: SuitStorageBase
+  suffix: HVE-14m
+  components:
+  - type: StorageFill
+    contents:
+        - id: OxygenTankFilled
+        - id: NitrogenTankFilled
+        - id: ClothingOuterHardsuitEmpire14m
+        - id: ClothingMaskGasSecurity
+        - id: JetpackVoidFilled
+        - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["Empire"]]
+
+- type: entity
+  id: SuitStorageCommander
+  parent: SuitStorageBase
+  suffix: Empire Commander
+  components:
+  - type: StorageFill
+    contents:
+        - id: OxygenTankFilled
+        - id: NitrogenTankFilled
+        - id: ClothingOuterHardsuitEmpire14mCom
+        - id: ClothingMaskGasSecurity
+        - id: JetpackVoidFilled
+        - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["EmpireCommander"]]
+
+- type: entity
+  id: SuitStorageInqusitor
+  parent: SuitStorageBase
+  suffix: Empire Inqusitor
+  components:
+  - type: StorageFill
+    contents:
+        - id: OxygenTankFilled
+        - id: NitrogenTankFilled
+        - id: ClothingOuterHardsuitEmpire14mInq
+        - id: ClothingMaskGasSecurity
+        - id: JetpackVoidFilled
+        - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["EmpireInqusitor"]]

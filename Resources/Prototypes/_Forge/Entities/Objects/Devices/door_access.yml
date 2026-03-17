@@ -1,0 +1,39 @@
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsEmpire
+  suffix: Empire Secure, Locked
+  components:
+  - type: AccessReader
+    access: [["Empire"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsEmpireOfficer
+  suffix: Empire Officer, Locked
+  components:
+  - type: AccessReader
+    access: [["EmpireOfficer"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsEmpireInqusitor
+  suffix: Empire Inqusitor, Locked
+  components:
+  - type: AccessReader
+    access: [["EmpireInqusitor"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsEmpireCommander
+  suffix: Empire Commander, Locked
+  components:
+  - type: AccessReader
+    access: [["EmpireCommander"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsEmpireDiplomacy
+  suffix: Empire Diplomacy, Locked
+  components:
+  - type: AccessReader
+    access: [["EmpireDiplomacy"]]

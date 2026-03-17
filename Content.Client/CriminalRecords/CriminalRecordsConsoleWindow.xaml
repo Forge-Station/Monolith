@@ -57,6 +57,15 @@
                            Margin="0 0 0 5"
                            StyleClasses="LabelBig" />
                     <BoxContainer Orientation="Horizontal"
+                                Margin="0 0 0 5">
+                        <Label Text="{Loc 'crew-monitoring-user-interface-nationality'}"
+                            FontColorOverride="DarkGray" />
+                        <Label Text=":"
+                            Margin="0 0 6 0"
+                            FontColorOverride="DarkGray" />
+                        <Label Name="PersonNationality" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal"
                                   Margin="0 0 0 5">
                         <Label Text="{Loc 'crew-monitoring-user-interface-job'}"
                                FontColorOverride="DarkGray" />

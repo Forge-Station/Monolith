@@ -1,0 +1,88 @@
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpireArbiter
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_arbitr
+  jobName: forge-job-name-arbiter
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpireAuxilia
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_auxil
+  jobName: forge-job-name-auxilia
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpireCardinal
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_astra
+  jobName: forge-job-name-cardinal
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpireConsul
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_diplomacy
+  jobName: forge-job-name-consul
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpireInquisitor
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_inq
+  jobName: forge-job-name-inquisitor
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpireNeophyte
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_neofit
+  jobName: forge-job-name-neophyte
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpirePraefect
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_lord
+  jobName: forge-job-name-praefect
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpirePraetorian
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_pretor
+  jobName: forge-job-name-praetorian
+
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpireDekuron
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_dekuron
+  jobName: forge-job-name-dekuron
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpireApotek
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_medic
+  jobName: forge-job-name-apotek
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconEmpireTechnican
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_tech
+  jobName: forge-job-name-technican

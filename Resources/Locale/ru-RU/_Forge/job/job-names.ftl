@@ -1,3 +1,6 @@
+# departament's
+department-Empire = Священная Империя Вермиллионов
+
 # Outpost
 forge-job-name-outpostmedic = Врач АФ
 forge-job-name-outpostengineer = Инженер АФ
@@ -20,3 +23,17 @@ job-title-msf-rep = представитель флота
 
 # Nfsd
 forge-job-name-engineernfsd = Специалист
+
+# Empire
+forge-job-name-praefect = Лорд-Префект
+forge-job-name-cardinal = Астра-Кардинал
+forge-job-name-arbiter = Архи-Арбитр
+forge-job-name-praetorian = Претор
+forge-job-name-consul = Консул
+forge-job-name-inquisitor = Эклезиарх
+forge-job-name-auxilia = Ауксилий
+forge-job-name-neophyte = Неофит
+
+forge-job-name-dekuron = Декурнон
+forge-job-name-apotek = Апотекарий
+forge-job-name-technican = Техножрец

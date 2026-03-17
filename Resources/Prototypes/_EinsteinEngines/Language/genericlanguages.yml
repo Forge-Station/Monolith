@@ -307,10 +307,15 @@
   obfuscation:
     !type:ReplacementObfuscation
     replacement:
-    - something
-    - a cryptic message
-    - a signal
-    - a message
+    # Forge-change
+    # - something
+    # - a cryptic message
+    # - a signal
+    # - a message
+    - что-то
+    - загадочный жест
+    - сигнал
+    - послание
 
     #Used for Xenoglossy, and anything else with the UniversalLanguageSpeaker component
 - type: language

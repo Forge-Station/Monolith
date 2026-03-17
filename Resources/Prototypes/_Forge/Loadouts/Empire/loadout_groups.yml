@@ -1,0 +1,153 @@
+# region Empire All
+- type: loadoutGroup
+  id: EmpireHead
+  name: loadout-group-contractor-head
+  minLimit: 0
+  loadouts:
+  - TsfmcHelmet
+  - TsfmcBeret
+
+- type: loadoutGroup
+  id: EmpireNeck
+  name: loadout-group-contractor-neck
+  hidden: true # No point in showing this, it gets auto-selected.
+  minLimit: 1
+  loadouts:
+  - TsfmcClothingNeckIFFCyan
+
+- type: loadoutGroup
+  id: EmpireFace
+  name: loadout-group-contractor-face
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - TsfmcGaiter
+  - TsfmcGasmask
+  fallbacks:
+  - TsfmcGaiter
+
+- type: loadoutGroup
+  id: EmpireGlasses
+  name: loadout-group-contractor-glasses
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - TsfmcHud
+  fallbacks:
+  - TsfmcHud
+
+- type: loadoutGroup
+  id: EmpireBalaclava
+  name: loadout-group-contractor-balaclava
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - TsfmcBalaclava
+  - TsfmcBalaclavaAlt
+
+- type: loadoutGroup
+  id: EmpireJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - EmpireClothingUniformJumpsuitEmpire
+  - EmpireClothingUniformJumpsuitEmpireGuard
+  fallbacks:
+  - EmpireClothingUniformJumpsuitEmpire
+
+- type: loadoutGroup
+  id: EmpireOuterClothing
+  name: loadout-group-contractor-outerclothing
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - EmpireClothingOuterCoatEmpireWindbreaker
+  # fallbacks:
+  # -
+
+- type: loadoutGroup
+  id: EmpireBelt
+  name: loadout-group-contractor-belt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - EmpireClothingBeltWebbingsNormalBlack
+  - EmpireClothingBeltWebbingsBigBlack
+  - EmpireClothingBeltMilitaryWebbing
+  - EmpireClothingBeltWebbingsBigBase
+  - EmpireClothingBeltSecurityFilled
+  fallbacks:
+  - EmpireClothingBeltWebbingsNormalBlack
+
+- type: loadoutGroup
+  id: EmpireGloves
+  name: loadout-group-contractor-gloves
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - EmpireClothingHandsGlovesTacticalCombatBlack
+  - EmpireClothingHandsGlovesTacticalCombatCoyoteBrown
+  - EmpireClothingHandsGlovesCombatUpgrade
+  fallbacks:
+  - EmpireClothingHandsGlovesTacticalCombatBlack
+
+- type: loadoutGroup
+  id: EmpireShoes
+  name: loadout-group-contractor-shoes
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - EmpireClothingShoesBootsCombatFilled
+  - EmpireClothingShoesBootsJackFilled
+  fallbacks:
+  - EmpireClothingShoesBootsCombatFilled
+
+- type: loadoutGroup
+  id: EmpireBackpack
+  name: loadout-group-contractor-backpack
+  minLimit: 1
+  loadouts:
+  - MonoSecurityGuardBackpack
+  - MonoSecurityGuardSatchel
+  - MonoSecurityGuardDuffel
+  fallbacks:
+  - MonoSecurityGuardBackpack
+
+# region Officer
+- type: loadoutGroup
+  id: EmpireOfficerJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - EmpireClothingUniformJumpsuitEmpireOfficer
+  fallbacks:
+  - EmpireClothingUniformJumpsuitEmpireOfficer
+
+# region Inquisitor
+- type: loadoutGroup
+  id: EmpireInquisitorJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - EmpireClothingUniformJumpsuitEmpireInq
+  fallbacks:
+  - EmpireClothingUniformJumpsuitEmpireInq
+
+- type: loadoutGroup
+  id: EmpireInquisitorOuterClothing
+  name: loadout-group-contractor-outerclothing
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - EmpireClothingOuterCoatEmpireInqWindbreaker
+  # fallbacks:
+  # -
+
+# region Commander
+- type: loadoutGroup
+  id: EmpireCommanderJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - EmpireClothingUniformJumpsuitEmpireCommanderFormal
+  fallbacks:
+  - EmpireClothingUniformJumpsuitEmpireCommanderFormal

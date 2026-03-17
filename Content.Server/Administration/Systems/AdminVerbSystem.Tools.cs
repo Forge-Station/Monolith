@@ -37,6 +37,10 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.Roles.Jobs; // Forge-change: _EE nationality
+using Content.Shared.Mind; // Forge-change: _EE nationality
+using Content.Server.Mind; // Forge-change: _EE nationality
+using Content.Shared._EE.Contractors.Systems; // Forge-change: _EE nationality
 
 namespace Content.Server.Administration.Systems;
 
@@ -54,6 +58,8 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly BatterySystem _batterySystem = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly GunSystem _gun = default!;
+    [Dependency] private readonly SharedPassportSystem _passportSystem = default!; // Forge-change: _EE nationality
+    [Dependency] private readonly SharedJobSystem _jobSystem = default!; // Forge-change: _EE nationality
 
     private void AddTricksVerbs(GetVerbsEvent<Verb> args)
     {
@@ -126,6 +132,28 @@ public sealed partial class AdminVerbSystem
                 };
                 args.Verbs.Add(rejuvenate);
             }
+
+            // Forge-change-start: _EE nationality
+            if (TryComp<ActorComponent>(args.Target, out var targetActor) && _mindSystem.TryGetMind(args.Target, out var mindId, out _) && _jobSystem.MindTryGetJob(mindId, out var job))
+            {
+                Verb spawnPassport = new()
+                {
+                    Text = "Spawn Passport",
+                    Category = VerbCategory.Tricks,
+                    Icon = new SpriteSpecifier.Texture(new("/Textures/Forge/Interface/Misc/spawnpassport.png")),
+                    Act = () =>
+                    {
+                        var profile = _ticker.GetPlayerProfile(targetActor.PlayerSession);
+
+                        _passportSystem.SpawnPassportForPlayer(args.Target, profile, job.ID);
+                    },
+                    Impact = LogImpact.Medium,
+                    Message = Loc.GetString("command-description-spawnpassport"),
+                    Priority = (int) TricksVerbPriorities.SpawnPassport,
+                };
+                args.Verbs.Add(spawnPassport);
+            }
+            // Forge-change-end
 
             if (!HasComp<GodmodeComponent>(args.Target))
             {
@@ -880,5 +908,6 @@ public sealed partial class AdminVerbSystem
         SnapJoints = -27,
         MakeMinigun = -28,
         SetBulletAmount = -29,
+        SpawnPassport = -30, // Forge-change: _EE nationality
     }
 }

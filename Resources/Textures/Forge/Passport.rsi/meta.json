@@ -1,0 +1,29 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "v6st for Forge",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "passport_imperial_closed"
+        },
+        {
+            "name": "passport_imperial_open"
+        },
+        {
+            "name": "passport_solfed_closed"
+        },
+        {
+            "name": "passport_solfed_open"
+        },
+        {
+            "name": "passport_ussp_closed"
+        },
+        {
+            "name": "passport_ussp_open"
+        }
+    ]
+}

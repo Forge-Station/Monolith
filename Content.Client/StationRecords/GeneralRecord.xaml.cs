@@ -24,6 +24,8 @@ public sealed partial class GeneralRecord : Control
             ("fingerprint", record.Fingerprint ?? Loc.GetString("generic-not-available-shorthand")));
         Dna.Text = Loc.GetString("general-station-record-console-record-dna",
             ("dna", record.DNA ?? Loc.GetString("generic-not-available-shorthand")));
+        Nationality.Text = Loc.GetString("general-station-record-console-record-nationality",
+            ("nationality", record.Nationality ?? Loc.GetString("generic-not-available-shorthand"))); // Forge-change: add _EE nationality to records
 
         if (canDelete && id != null )
         {

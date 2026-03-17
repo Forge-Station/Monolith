@@ -18,3 +18,25 @@
     - type: Sprite
       sprite: Forge/Structures/Wallmounts/posters.rsi
       state: ren
+
+- type: entity
+  parent: PosterBase
+  id: PosterContrabandUSSP
+  name: Strength in unity
+  description: A poster calling for unity in the name of revolution.
+  suffix: Forge, USSP
+  components:
+    - type: Sprite
+      sprite: Forge/Structures/Wallmounts/posters.rsi
+      state: cf_poster2_contraband
+
+- type: entity
+  parent: PosterBase
+  id: PosterContrabandAutsider
+  name: Wanted
+  description: Wanted poster for a certain moth Stryukov'a.
+  suffix: Forge, Fun
+  components:
+    - type: Sprite
+      sprite: Forge/Structures/Wallmounts/posters.rsi
+      state: cf_poster3_contraband

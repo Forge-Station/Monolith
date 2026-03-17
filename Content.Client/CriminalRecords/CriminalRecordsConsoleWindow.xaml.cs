@@ -264,6 +264,7 @@ public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
         var na = Loc.GetString("generic-not-available-shorthand");
         PersonName.Text = stationRecord.Name;
         PersonJob.Text = stationRecord.JobTitle ?? na;
+        PersonNationality.Text = stationRecord.Nationality ?? na; // Forge-change
 
         // Job icon
         if (_proto.TryIndex<JobIconPrototype>(stationRecord.JobIcon, out var proto))

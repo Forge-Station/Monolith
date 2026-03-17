@@ -15,7 +15,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
 
 - type: entity
   parent: ClothingNeckBase
@@ -34,7 +34,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
 
 - type: entity
   parent: ClothingHeadBase

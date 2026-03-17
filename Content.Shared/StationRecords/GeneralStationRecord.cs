@@ -68,4 +68,8 @@ public sealed record GeneralStationRecord
     /// </summary>
     [DataField]
     public string? DNA;
+
+    // Forge-change: add _EE nationality to stationRecord
+    [DataField]
+    public string? Nationality;
 }

@@ -63,3 +63,64 @@
     radius: 5
     energy: 2
     color: "#00ffff"
+
+# region Empire
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitEmpire14m
+  name: HVE-14m helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitEmpire14m
+  id: ClothingHeadHelmetHardsuitEmpire14mCom
+  name: HVE-14m helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight_commander.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight_commander.rsi
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitEmpire14m
+  id: ClothingHeadHelmetHardsuitEmpire14mInq
+  name: HVE-14m helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight_violet.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight_violet.rsi
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision

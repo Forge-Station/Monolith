@@ -1,0 +1,39 @@
+- type: nationality
+  id: Imperial
+  nameKey: nationality_name_imperial
+  descriptionKey: nationality_description_imperial
+  hostile:
+  - USSP
+  special:
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - Freespeak
+    languagesUnderstood:
+    - Freespeak
+  passportPrototype: ImperialPassport
+
+- type: nationality
+  id: TransSolarFederation
+  nameKey: nationality_name_solfed
+  descriptionKey: nationality_description_solfed
+  special:
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - SolCommon
+    languagesUnderstood:
+    - SolCommon
+  passportPrototype: SolFedPassport
+
+- type: nationality
+  id: USSP
+  nameKey: nationality_name_ussp
+  descriptionKey: nationality_description_ussp
+  hostile:
+  - Imperial
+  special:
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - ForgeSibera
+    languagesUnderstood:
+    - ForgeSibera
+  passportPrototype: USSPPassport

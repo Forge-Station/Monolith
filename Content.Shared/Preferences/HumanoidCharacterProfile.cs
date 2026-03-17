@@ -89,6 +89,10 @@ namespace Content.Shared.Preferences
         [DataField]
         public ProtoId<SpeciesPrototype> Species { get; set; } = SharedHumanoidAppearanceSystem.DefaultSpecies;
 
+        // Forge-change: _EE nationality
+        [DataField]
+        public string Nationality { get; set; } = SharedHumanoidAppearanceSystem.DefaultNationality;
+
         [DataField]
         public int Age { get; set; } = 18;
 
@@ -156,6 +160,7 @@ namespace Content.Shared.Preferences
             string name,
             string flavortext,
             string species,
+            string nationality, // Forge-change: _EE nationality
             string voice, // Corvax-TTS
             int age,
             Sex sex,
@@ -174,6 +179,7 @@ namespace Content.Shared.Preferences
             Name = name;
             FlavorText = flavortext;
             Species = species;
+            Nationality = nationality; // Forge-change: _EE nationality
             Voice = voice; // Corvax-TTS
             Age = age;
             Sex = sex;
@@ -197,7 +203,7 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts)
-            : this(other.Name, other.FlavorText, other.Species, other.Voice, other.Age, other.Sex, other.Gender, other.BankBalance, other.Appearance, other.SpawnPriority,
+            : this(other.Name, other.FlavorText, other.Species, other.Nationality, other.Voice, other.Age, other.Sex, other.Gender, other.BankBalance, other.Appearance, other.SpawnPriority,
                 jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.BarkVoice, other.Company)
         {
         }
@@ -207,6 +213,7 @@ namespace Content.Shared.Preferences
             : this(other.Name,
                 other.FlavorText,
                 other.Species,
+                other.Nationality, // Forge-change: _EE nationality
                 other.Voice, // Forge-Change
                 other.Age,
                 other.Sex,
@@ -243,6 +250,7 @@ namespace Content.Shared.Preferences
             return new()
             {
                 Species = species,
+                Nationality = SharedHumanoidAppearanceSystem.DefaultNationality, // Forge-change: _EE nationality
             };
         }
 
@@ -288,7 +296,7 @@ namespace Content.Shared.Preferences
 
             var name = GetName(species, gender);
             // Forge-Change-Start
-            var barkvoiceId = SharedHumanoidAppearanceSystem.DefaultBarkVoice; 
+            var barkvoiceId = SharedHumanoidAppearanceSystem.DefaultBarkVoice;
             var barks = prototypeManager.EnumeratePrototypes<BarkPrototype>().Where(o => o.RoundStart).ToArray();
             if (barks.Length > 0) // Forge-Change
                 barkvoiceId = random.Pick(barks).ID;
@@ -314,6 +322,7 @@ namespace Content.Shared.Preferences
         {
             return new(this) { FlavorText = flavorText };
         }
+        public HumanoidCharacterProfile WithNationality(string nationality) => new(this) { Nationality = nationality }; // Forge-change: _EE nationality
 
         public HumanoidCharacterProfile WithAge(int age)
         {
@@ -545,6 +554,7 @@ namespace Content.Shared.Preferences
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (SpawnPriority != other.SpawnPriority) return false;
             if (Species != other.Species) return false;
+            if (Nationality != other.Nationality) return false; // Forge-change: _EE nationality
             if (Company != other.Company) return false;
             if (Voice != other.Voice) return false; // Corvax-TTS
             if (BarkVoice != other.BarkVoice) return false; // Corvax-Frontier-Barks
@@ -840,6 +850,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(Name);
             hashCode.Add(FlavorText);
             hashCode.Add(Species);
+            hashCode.Add(Nationality); // Forge-change: _EE nationality
             hashCode.Add(Age);
             hashCode.Add((int)Sex);
             hashCode.Add((int)Gender);

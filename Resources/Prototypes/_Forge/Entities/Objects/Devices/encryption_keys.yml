@@ -1,0 +1,165 @@
+- type: entity
+  parent: [EncryptionKey, BaseC3SyndicateContraband]
+  id: EncryptionKeySmuggler
+  name: ключ шифрования контрабандиста
+  categories: [ DoNotMap ]
+  description: Ключ шифрования используемый контрабандным отделением синдиката.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Syndicate
+    # - SyndicateSmuggler
+    defaultChannel: Syndicate
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_red
+    - state: synd_label
+
+- type: entity
+  parent: [EncryptionKey, BaseC3SyndicateContraband]
+  id: EncryptionKeyShturm
+  name: ключ шифрования жнецов
+  categories: [ DoNotMap ]
+  description: Ключ шифрования используемый штурмовым отделением синдиката.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Syndicate
+    - SyndicateShturm
+    defaultChannel: Syndicate
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_red_alt
+    - state: synd_label_alt
+
+- type: entity
+  parent: [ EncryptionKey ]
+  id: EncryptionKeyMercenaryFM
+  name: ключ шифрования наёмников
+  description: Ключ шифрования, используемый для более удобной работы с заказами.
+  components:
+  - type: EncryptionKey
+    channels:
+    - MercenaryFM
+    defaultChannel: MercenaryFM
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_merc
+    - state: merc_label
+
+- type: entity
+  parent: [ EncryptionKey ]
+  id: EncryptionKeyHospital
+  name: hospital encrypt key
+  description: hospital encrypt key desc.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Hospital
+    defaultChannel: Hospital
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_silver
+    - state: hospital_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyPlantManager
+  name: plant manager encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for coordinating plant technicans.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Common
+    - Engineering
+    - Command
+    defaultChannel: Common
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_silver
+    - state: pm_label
+
+- type: entity
+  parent: [EncryptionKey, BaseC3Contraband]
+  id: EncryptionKeyRenegade
+  suffix: Ренегаты
+  name: renegade encryption key
+  description: An encryption key used byrenegades, who may or may not have an affiliation. It looks like it's worn out.
+  components:
+    - type: EncryptionKey
+      channels:
+      - Renegade
+      defaultChannel: Renegade
+    - type: Sprite
+      sprite: Forge/Objects/Devices/encryption_keys.rsi
+      layers:
+        - state: crypt_renegade
+        - state: ren_label
+
+- type: entity
+  parent: [EncryptionKey, BaseC3Contraband]
+  id: EncryptionKeyRenegadeTech
+  suffix: Ренегаты
+  name: technical renegade encryption key
+  description: An encryption key used byrenegades, who may or may not have an affiliation. It looks like it's worn out.
+  components:
+    - type: EncryptionKey
+      channels:
+      - Renegade
+      - TechRenegade
+      defaultChannel: TechRenegade
+    - type: Sprite
+      sprite: Forge/Objects/Devices/encryption_keys.rsi
+      layers:
+        - state: crypt_renegade
+        - state: techren_label
+
+- type: entity
+  parent: [EncryptionKey, BaseC3Contraband]
+  id: EncryptionKeyRenegadeCom
+  suffix: Ренегаты
+  name: command renegade encryption key
+  description: An encryption key used byrenegades, who may or may not have an affiliation. It looks like it's worn out.
+  components:
+    - type: EncryptionKey
+      channels:
+      - Renegade
+      - TechRenegade
+      - ComRenegade
+      defaultChannel: ComRenegade
+    - type: Sprite
+      sprite: Forge/Objects/Devices/encryption_keys.rsi
+      layers:
+        - state: crypt_renegade
+        - state: comren_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyEmpire
+  name: empire encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for coordinating empire guardians.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Empire
+    defaultChannel: Empire
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_silver
+    - state: emp_label

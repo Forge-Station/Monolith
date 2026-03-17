@@ -1,0 +1,15 @@
+ent-DoorElectronicsEmpire = { ent-DoorElectronics }
+    .suffix = Forge, СИВ
+    .desc = { ent-DoorElectronics.desc }
+ent-DoorElectronicsEmpireOfficer = { ent-DoorElectronics }
+    .suffix = Forge, СИВ, Офицер
+    .desc = { ent-DoorElectronics.desc }
+ent-DoorElectronicsEmpireInqusitor = { ent-DoorElectronics }
+    .suffix = Forge, СИВ, Эклезиарх
+    .desc = { ent-DoorElectronics.desc }
+ent-DoorElectronicsEmpireCommander = { ent-DoorElectronics }
+    .suffix = Forge, СИВ, Лорд
+    .desc = { ent-DoorElectronics.desc }
+ent-DoorElectronicsEmpireDiplomacy = { ent-DoorElectronics }
+    .suffix = Forge, СИВ, Консул
+    .desc = { ent-DoorElectronics.desc }

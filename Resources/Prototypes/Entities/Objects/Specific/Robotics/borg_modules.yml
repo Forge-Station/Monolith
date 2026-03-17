@@ -29,7 +29,7 @@
   - type: SelectableBorgModule
   - type: ContainerContainer
     containers:
-      provided_container: !type:Container { }
+      provided_container: !type:Container
 
 - type: entity
   id: ActionBorgSwapModule

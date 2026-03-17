@@ -1,0 +1,51 @@
+- type: entity
+  parent: IDCardStandard
+  id: EmpireIDCard
+  name: empire silver ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: imperial
+    - state: idempsilver
+  - type: PresetIdCard
+    job: Auxilia
+
+- type: entity
+  parent: IDCardStandard
+  id: EmpireGoldIDCard
+  name: empire gold ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: imperial
+    - state: idempgold
+  - type: PresetIdCard
+    job: Praetorian
+
+- type: entity
+  parent: IDCardStandard
+  id: EmpireInqIDCard
+  name: empire inquisitor ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: imperial
+    - state: idempinq
+  - type: PresetIdCard
+    job: Inquisitor
+
+- type: entity
+  parent: IDCardStandard
+  id: EmpireCommanderIDCard
+  name: empire commander ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: imperial
+    - state: idemplord
+  - type: PresetIdCard
+    job: Praefect

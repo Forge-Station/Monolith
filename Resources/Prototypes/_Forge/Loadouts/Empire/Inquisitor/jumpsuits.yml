@@ -1,0 +1,5 @@
+- type: loadout
+  id: EmpireClothingUniformJumpsuitEmpireInq
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEmpireInq

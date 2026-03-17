@@ -1,0 +1,51 @@
+- type: accessLevel
+  id: Empire
+  name: id-card-access-level-empire
+
+- type: accessLevel
+  id: EmpireOfficer
+  name: id-card-access-level-empire-officer
+
+- type: accessLevel
+  id: EmpireInqusitor
+  name: id-card-access-level-empire-inqusitor
+
+- type: accessLevel
+  id: EmpireCommander
+  name: id-card-access-level-empire-commander
+
+- type: accessLevel
+  id: EmpireDiplomacy
+  name: id-card-access-level-empire-diplomacy
+
+# yay
+- type: accessGroup
+  id: GeneralEmpireAccess
+  tags:
+  - Maintenance
+  - External
+  - Empire
+  - Mercenary
+
+- type: accessGroup
+  id: SpecialEmpireAccess
+  tags:
+  - Maintenance
+  - External
+  - Command
+  - Mercenary
+  - Captain
+  - Empire
+  - EmpireOfficer
+
+- type: accessGroup
+  id: CommandEmpireAccess
+  tags:
+  - Maintenance
+  - External
+  - Command
+  - Armory
+  - Mercenary
+  - Captain
+  - Empire
+  - EmpireOfficer

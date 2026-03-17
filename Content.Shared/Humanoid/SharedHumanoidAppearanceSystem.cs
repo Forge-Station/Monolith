@@ -20,6 +20,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using YamlDotNet.RepresentationModel;
+using Content.Shared._EE.Contractors.Prototypes; // Forge-change: _EE nationality
 
 namespace Content.Shared.Humanoid;
 
@@ -43,6 +44,11 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
     [ValidatePrototypeId<SpeciesPrototype>]
     public const string DefaultSpecies = "Human";
+
+    // Forge-change: take _EE nationality
+    [ValidatePrototypeId<NationalityPrototype>]
+    public const string DefaultNationality = "TransSolarFederation";
+
     // Corvax-Frontier-Barks-start
     [ValidatePrototypeId<BarkPrototype>]
     public const string DefaultBarkVoice = "BarksGoonSpeak1";
@@ -385,6 +391,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         SetSex(uid, profile.Sex, false, humanoid);
         humanoid.EyeColor = profile.Appearance.EyeColor;
 
+        humanoid.LastProfileLoaded = profile; //Set the loaded profile because Traits are about to need it
         SetSkinColor(uid, profile.Appearance.SkinColor, false);
 
         humanoid.MarkingSet.Clear();
@@ -461,6 +468,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
             _appearance.SetData(uid, ScaleVisuals.Scale, new Vector2(profile.Appearance.Width, profile.Appearance.Height), appearance);
         }
 
+        humanoid.LastProfileLoaded = profile; //But traits can also modify the profile so we need to set it again.
         RaiseLocalEvent(uid, new ProfileLoadFinishedEvent()); // Shitmed Change
         Dirty(uid, humanoid);
     }

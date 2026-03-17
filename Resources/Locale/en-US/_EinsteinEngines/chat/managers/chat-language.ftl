@@ -61,3 +61,5 @@ chat-language-DroneTalk-name = Drone
 
 # Added here by Mono
 chat-language-Blob-name = Blob
+
+chat-language-ForgeSibera-name = Sibera

@@ -1,0 +1,25 @@
+- type: loadoutGroup
+  id: EmpireFirearm
+  name: loadout-group-weapon
+  minLimit: 1
+  loadouts:
+  - FactionEnergyGunLoadout
+  - FactionC20RLoadout
+  - FactionWt550Loadout
+  - FactionAk220Loadout
+  - FactionBanditLoadout
+  fallbacks:
+  - FactionEnergyGunLoadout
+
+- type: loadoutGroup
+  id: EmpireMag
+  name: loadout-group-magazine
+  minLimit: 1
+  loadouts:
+  - FactionRechargerLoadout #Energy
+  - Faction9x19SMGAmmoLoadout #C20r
+  - Faction46x30mmTopAmmo #WT550
+  - Faction762x39mmAmmoLoadout #AKM
+  - Faction8x65mmAmmoLoadout #Bandit
+  fallbacks:
+  - FactionRechargerLoadout #Energy

@@ -36,6 +36,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
+using Content.Shared._EE.Contractors.Prototypes; // Forge-change: take _EE nationality
 
 namespace Content.Client.Lobby.UI
 {
@@ -89,7 +90,7 @@ namespace Content.Client.Lobby.UI
         public HumanoidCharacterProfile? Profile;
 
         private List<SpeciesPrototype> _species = new();
-
+        private List<NationalityPrototype> _nationalies = new(); // Forge-change: take _EE nationality
         private List<(string, RequirementsSelector)> _jobPriorities = new();
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
@@ -225,6 +226,20 @@ namespace Content.Client.Lobby.UI
                 UpdateHairPickers();
                 OnSkinColorOnValueChanged();
             };
+
+            // Forge-change-start: take _EE nationality
+            #region Contractors
+
+            RefreshNationalities();
+
+            NationalityButton.OnItemSelected += args =>
+            {
+                NationalityButton.SelectId(args.Id);
+                SetNationality(_nationalies[args.Id].ID);
+            };
+
+            #endregion Contractors
+            // Forge-change-end
 
             #region Skin
 
@@ -1049,6 +1064,43 @@ namespace Content.Client.Lobby.UI
             }
         }
 
+        // Forge-change start: take _EE nationality
+        public void RefreshNationalities()
+        {
+            NationalityButton.Clear();
+            _nationalies.Clear();
+
+            _nationalies.AddRange(_prototypeManager.EnumeratePrototypes<NationalityPrototype>()
+                .Where(o => _requirements.CheckRoleRequirements(
+                    o.Requirements?.ToHashSet(),
+                    Profile ?? HumanoidCharacterProfile.DefaultWithSpecies(),
+                    out _)));
+
+            var nationalityIds = _nationalies.Select(o => o.ID).ToList();
+
+            for (var i = 0; i < _nationalies.Count; i++)
+            {
+                NationalityButton.AddItem(Loc.GetString(_nationalies[i].NameKey), i);
+
+                if (Profile?.Nationality == _nationalies[i].ID)
+                    NationalityButton.SelectId(i);
+            }
+
+            // If our nationality isn't available, reset it to default
+            if (Profile != null && !nationalityIds.Contains(Profile.Nationality))
+                SetNationality(SharedHumanoidAppearanceSystem.DefaultNationality);
+
+            if(Profile != null)
+                UpdateNationalityDescription(Profile.Nationality);
+        }
+
+        private void UpdateNationalityDescription(string nationality)
+        {
+            var prototype = _prototypeManager.Index<NationalityPrototype>(nationality);
+            NationalityDescriptionLabel.SetMessage(Loc.GetString(prototype.DescriptionKey));
+        }
+        // Forge-change end
+
         public void RefreshAntags()
         {
             // Frontier: no antags
@@ -1217,6 +1269,7 @@ namespace Content.Client.Lobby.UI
             RefreshJobs();
             RefreshLoadouts();
             RefreshSpecies();
+            RefreshNationalities(); // Forge-change: _EE nationality
             RefreshTraits();
             RefreshFlavorText();
             RefreshTTS(); // Corvax-TTS
@@ -1686,6 +1739,15 @@ namespace Content.Client.Lobby.UI
             ReloadPreview();
         }
 
+        // Forge-change-start: take _EE nationality
+        private void SetNationality(string newNationality)
+        {
+            Profile = Profile?.WithNationality(newNationality);
+            IsDirty = true;
+            ReloadProfilePreview();
+        }
+        // Forge-change-end
+
         private void EnforceSpeciesTraitRestrictions()
         {
             if (Profile == null)
@@ -1723,7 +1785,7 @@ namespace Content.Client.Lobby.UI
             _entManager.System<MetaDataSystem>().SetEntityName(PreviewDummy, newName);
         }
 
-        private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority) 
+        private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)
         {
             Profile = Profile?.WithSpawnPriorityPreference(newSpawnPriority);
             SetDirty();

@@ -127,7 +127,7 @@
     containers:
       borg_brain: !type:ContainerSlot { }
       cell_slot: !type:ContainerSlot { }
-      borg_module: !type:Container { }
+      borg_module: !type:Container
       part-container: !type:Container
   - type: PowerCellSlot
     cellSlotId: cell_slot

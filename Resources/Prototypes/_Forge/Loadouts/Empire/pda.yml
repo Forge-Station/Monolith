@@ -1,0 +1,55 @@
+- type: loadout
+  id: EmpirePDA
+  equipment:
+    id: EmpirePDA
+
+- type: loadoutGroup
+  id: EmpirePDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - EmpirePDA
+  fallbacks:
+  - EmpirePDA
+
+- type: loadout
+  id: EmpireGoldPDA
+  equipment:
+    id: EmpireGoldPDA
+
+- type: loadoutGroup
+  id: EmpireGoldPDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - EmpireGoldPDA
+  fallbacks:
+  - EmpireGoldPDA
+
+- type: loadout
+  id: EmpireInqPDA
+  equipment:
+    id: EmpireInqPDA
+
+- type: loadoutGroup
+  id: EmpireInqPDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - EmpireInqPDA
+  fallbacks:
+  - EmpireInqPDA
+
+- type: loadout
+  id: EmpireCommanderPDA
+  equipment:
+    id: EmpireCommanderPDA
+
+- type: loadoutGroup
+  id: EmpireCommanderPDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - EmpireCommanderPDA
+  fallbacks:
+  - EmpireCommanderPDA

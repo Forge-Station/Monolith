@@ -10,7 +10,17 @@
     minSyllables: 1 # Replacements are really short
     maxSyllables: 2
     replacement:
-    - click
-    - clack
-    - buzz
-    - bizz
+    # Forge-change
+    # - click
+    # - clack
+    # - buzz
+    # - bizz
+    - клик
+    - клац
+    - бзз
+    - бзик
+    - чик
+    - чк
+    - крр
+    - трр
+    - скр

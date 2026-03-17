@@ -28,3 +28,29 @@
         Heat: 0.8
         Cold: 0.8
         Shock: 0.8
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadEmpireWBHood
+  name: empire guardian windbreaker hood
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/empwbhood.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/empwbhood.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadEmpireInqWBHood
+  name: empire inquisitor windbreaker hood
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/empinqwbhood.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/empinqwbhood.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair

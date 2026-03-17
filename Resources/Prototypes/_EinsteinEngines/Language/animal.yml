@@ -6,10 +6,15 @@
     minSyllables: 1
     maxSyllables: 2
     replacement:
-    - murr
-    - meow
-    - purr
-    - mrow
+    # Forge-change
+    # - murr
+    # - meow
+    # - purr
+    # - mrow
+    - мрр
+    - мяу
+    - мурр
+    - мрау
 
 - type: language
   id: Dog
@@ -18,12 +23,20 @@
     minSyllables: 1
     maxSyllables: 2
     replacement:
-    - woof
-    - bark
-    - ruff
-    - bork
-    - raff
-    - garr
+    # Forge-change
+    # - woof
+    # - bark
+    # - ruff
+    # - bork
+    # - raff
+    # - garr
+    - гав
+    - лай
+    - ррр
+    - тяв
+    - урр
+    - хрр
+
 
 - type: language
   id: Fox
@@ -32,12 +45,19 @@
     minSyllables: 1
     maxSyllables: 2
     replacement:
-    - ruff
-    - raff
-    - garr
-    - yip
-    - yap
-    - myah
+    # Forge-change
+    # - ruff
+    # - raff
+    # - garr
+    # - yip
+    # - yap
+    # - myah
+    - ррр
+    - хрр
+    - гяр
+    - йип
+    - йап
+    - мяа
 
 - type: language
   id: Xeno
@@ -46,8 +66,14 @@
     minSyllables: 1
     maxSyllables: 8 # I was crazy once
     replacement:
-    - s
-    - S
+    # Forge-change
+    # - s
+    # - S
+    - с
+    - ш
+    - С
+    - сс
+    - й
 
 - type: language
   id: Monkey
@@ -56,15 +82,27 @@
     minSyllables: 1
     maxSyllables: 4 # They locked me in a room... #Mono: 8 >> 4
     replacement: #Mono: Expanded just o and k with a more monke syllable set
-    - A
-    - AA
-    - AH
-    - HA
-    - HH
-    - O
-    - OO
-    - OOK
-    - OKO
+    # Forge-change
+    # - A
+    # - AA
+    # - AH
+    # - HA
+    # - HH
+    # - O
+    # - OO
+    # - OOK
+    # - OKO
+    - А
+    - Аа
+    - Ах
+    - У
+    - Хя
+    - О
+    - УО
+    - УУК
+    - ОКУ
+    - УУ
+    - ОУ
 
 - type: language
   id: Mouse
@@ -73,14 +111,23 @@
     minSyllables: 2
     maxSyllables: 3
     replacement:
-    - squ
-    - eak
-    - pi
-    - ep
-    - chuu
-    - ee
-    - fwi
-    - he
+    # Forge-change
+    # - squ
+    # - eak
+    # - pi
+    # - ep
+    # - chuu
+    # - ee
+    # - fwi
+    # - he
+    - пис
+    - пии
+    - чии
+    - чуу
+    - иии
+    - фви
+    - сквик
+    - эп
 
 - type: language
   id: Chicken
@@ -89,9 +136,14 @@
     minSyllables: 1
     maxSyllables: 3
     replacement:
-    - co
-    - coo
-    - ot
+    # Forge-change
+    # - co
+    # - coo
+    # - ot
+    - ко
+    - коо
+    - курр
+    - кок
 
 - type: language
   id: Duck
@@ -100,9 +152,13 @@
     minSyllables: 1
     maxSyllables: 3
     replacement:
-    - qu
-    - ack
-    - quack
+    # Forge-change
+    # - qu
+    # - ack
+    # - quack
+    - кря
+    - кряк
+    - квак
 
 - type: language
   id: Cow
@@ -111,8 +167,12 @@
     minSyllables: 1
     maxSyllables: 3
     replacement:
-    - moo
-    - mooo
+    # Forge-change
+    # - moo
+    # - mooo
+    - му
+    - муу
+    - мууу
 
 - type: language
   id: Sheep
@@ -121,9 +181,13 @@
     minSyllables: 1
     maxSyllables: 3
     replacement:
-    - ba
-    - baa
-    - aa
+    # Forge-change
+    # - ba
+    # - baa
+    # - aa
+    - бе
+    - бее
+    - мее
 
 - type: language
   id: Kangaroo
@@ -132,10 +196,16 @@
     minSyllables: 1
     maxSyllables: 3
     replacement:
-    - shre
-    - ack
-    - chuu
-    - choo
+    # Forge-change
+    # - shre
+    # - ack
+    # - chuu
+    # - choo
+    - шрр
+    - ак
+    - чуу
+    - чо
+    - хоп
 
 - type: language
   id: Pig
@@ -144,7 +214,11 @@
     minSyllables: 1
     maxSyllables: 3
     replacement:
-    - oink # Please someone come up with something better
+    # Forge-change
+    # - oink # Please someone come up with something better
+    - хрю
+    - хрюк
+    - оинк
 
 - type: language
   id: Crab
@@ -153,13 +227,21 @@
     minSyllables: 1
     maxSyllables: 3
     replacement:
-    - click
-    - clack
-    - ti
-    - pi
-    - tap
-    - cli
-    - ick
+    # Forge-change
+    # - click
+    # - clack
+    # - ti
+    # - pi
+    # - tap
+    # - cli
+    # - ick
+    - щелк
+    - клац
+    - клак
+    - тик
+    - пи
+    - тап
+    - клик
 
 - type: language
   id: Kobold
@@ -168,17 +250,29 @@
     minSyllables: 2
     maxSyllables: 4
     replacement:
-    - yip
-    - yap
-    - gar
-    - grr
-    - ar
-    - scre
-    - et
-    - gronk
-    - hiss
-    - ss
-    - ee
+    # Forge-change
+    # - yip
+    # - yap
+    # - gar
+    # - grr
+    # - ar
+    # - scre
+    # - et
+    # - gronk
+    # - hiss
+    # - ss
+    # - ee
+    - йип
+    - йап
+    - гар
+    - грр
+    - ар
+    - скре
+    - ет
+    - гронак
+    - хисс
+    - сс
+    - еэ
 
 - type: language
   id: Hissing
@@ -187,10 +281,15 @@
     minSyllables: 2
     maxSyllables: 4
     replacement:
-    - hss
-    - iss
-    - ss
-    - is
+    # Forge-change
+    # - hss
+    # - iss
+    # - ss
+    # - is
+    - хсс
+    - исс
+    - ссс
+    - иш
 
 - type: language
   id: Penguin
@@ -199,11 +298,20 @@
     minSyllables: 2
     maxSyllables: 3
     replacement: # I'm out of ideas
-    - pen
-    - peng
-    - won
-    - wonk
-    - wong
+    # Forge-change
+    # - pen
+    # - peng
+    # - won
+    # - wonk
+    # - wong
+    - пен
+    - пенг
+    - пинг
+    - понг
+    - пнг
+    - вонк
+    - вунк
+    - уинк
 
 - type: language # Goobstation - For Deer
   id: Deer
@@ -212,6 +320,11 @@
     minSyllables: 1
     maxSyllables: 3
     replacement:
-    - neigh
-    - ni
-    - brr
+    # Forge-change
+    # - neigh
+    # - ni
+    # - brr
+    - мее
+    - ни
+    - брр
+    - бру

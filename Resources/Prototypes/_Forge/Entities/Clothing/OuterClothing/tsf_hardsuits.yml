@@ -1,0 +1,190 @@
+- type: entity
+  parent: ClothingOuterHardsuitNfsdBronze
+  id: ClothingOuterHardsuitTSFLow
+  name: TSF light hardsuit
+  description: A light issue TSF hardsuit tuned for mobility.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFLow
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitNfsdSilver
+  id: ClothingOuterHardsuitTSFMid
+  name: TSF standard hardsuit
+  description: A standard issue TSF hardsuit for general combat deployment.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_mid.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_mid.rsi
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFMid
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitNfsdCombat
+  id: ClothingOuterHardsuitTSFHigh
+  name: TSF heavy hardsuit
+  description: A heavy TSF hardsuit with reinforced armor plating.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_high.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_high.rsi
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFHigh
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitNfsdBrigmedic
+  id: ClothingOuterHardsuitTSFMedic
+  name: TSF corpsman hardsuit
+  description: A TSF hardsuit with medical markings and field treatment accommodations.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_medic.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_medic.rsi
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFMedic
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitPilot
+  id: ClothingOuterHardsuitTSFKalenval
+  name: TSF TBS-4 Kalenval hardsuit
+  description: A scout-oriented TSF hardsuit built to stay nimble in vacuum.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFKalenval
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitM86
+  id: ClothingOuterHardsuitTSFVprysk
+  name: TSF TBS-5 Vprysk hardsuit
+  description: A specialist TSF hardsuit with extra armor and breaching utility.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFVprysk
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitNfsdCommand
+  id: ClothingOuterHardsuitTSFZazhiganie
+  name: TSF TBS-2 Zazhiganie hardsuit
+  description: A command-grade TSF hardsuit with enhanced communications support.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_zazhiganie.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_zazhiganie.rsi
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFZazhiganie
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitNfsdSheriff
+  id: ClothingOuterHardsuitTSFMidas
+  name: TSF UVP-1 Midas hardsuit
+  description: A commander's TSF hardsuit with top-tier protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_midas.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_midas.rsi
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFMidas
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitContractorStealh
+  id: ClothingOuterHardsuitTSFStealthMark1
+  name: TSF stealth suit Mk.1
+  description: A stealth-focused TSF hardsuit with active camouflage support.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_stealth_mark1.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_stealth_mark1.rsi
+  - type: ToggleableClothing
+    clothingPrototype: null
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFStealthMark1
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitM86
+  id: ClothingOuterHardsuitTSFPorshen
+  name: TSF TBS-12 Porshen hardsuit
+  description: A heavily armored TSF breaching hardsuit.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_porshen.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_porshen.rsi
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFPorshen
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock

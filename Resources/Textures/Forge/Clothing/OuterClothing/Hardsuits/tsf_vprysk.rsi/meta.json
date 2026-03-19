@@ -1,0 +1,31 @@
+﻿{
+  "version": 2,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Drawn for Forge by kekssizumom",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "equipped-OUTERCLOTHING-reptilian",
+      "directions": 4
+    }
+  ]
+}
+

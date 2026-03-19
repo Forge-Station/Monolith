@@ -1,0 +1,28 @@
+- type: vessel
+  id: pereval
+  parent: BaseVessel
+  name: Перевал
+  description:  Ударный линейный линкор , все по старым традициям . Рекомендованный состав 3-6 человек
+  price: 137000
+  category: Medium
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/pereval.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+- type: gameMap
+  id: pereval
+  mapName: 'Перевал'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/pereval.yml
+  minPlayers: 0
+  stations:
+    pereval:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Перевал{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

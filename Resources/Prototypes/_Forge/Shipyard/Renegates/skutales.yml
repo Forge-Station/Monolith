@@ -1,0 +1,28 @@
+- type: vessel
+  id: skutales
+  parent: BaseVessel
+  name: Скиталец
+  description: Легкий истребитель общего назначения. Рекомендованный состав 2-4 человека
+  price: 49000
+  category: Medium
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/skutales.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+- type: gameMap
+  id: skutales
+  mapName: 'Скиталец'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/skutales.yml
+  minPlayers: 0
+  stations:
+    skutales:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Скиталец{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

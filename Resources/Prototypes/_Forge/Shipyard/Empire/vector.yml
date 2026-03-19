@@ -20,7 +20,7 @@
   mapPath: /Maps/_Forge/Shuttles/Empire/vector.yml
   minPlayers: 0
   stations:
-    terra:
+    vector:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup

@@ -20,7 +20,7 @@
   mapPath: /Maps/_Forge/Shuttles/Empire/striz.yml
   minPlayers: 0
   stations:
-    terra:
+    striz:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup

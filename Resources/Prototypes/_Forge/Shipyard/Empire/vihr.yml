@@ -17,10 +17,10 @@
 - type: gameMap
   id: vihr
   mapName: 'EPS Вихрь'
-  mapPath: /Maps/_Forge/Shuttles/Empire/aid.yml
+  mapPath: /Maps/_Forge/Shuttles/Empire/vihr.yml
   minPlayers: 0
   stations:
-    terra:
+    vihr:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup

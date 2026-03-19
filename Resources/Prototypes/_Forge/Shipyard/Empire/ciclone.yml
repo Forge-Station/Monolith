@@ -20,7 +20,7 @@
   mapPath: /Maps/_Forge/Shuttles/Empire/ciclone.yml
   minPlayers: 0
   stations:
-    terra:
+    ciclone:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup

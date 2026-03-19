@@ -17,10 +17,10 @@
 - type: gameMap
   id: egida
   mapName: 'EMMS Эгида'
-  mapPath: /Maps/_Forge/Shuttles/Empire/ciclone.yml
+  mapPath: /Maps/_Forge/Shuttles/Empire/egida.yml
   minPlayers: 0
   stations:
-    terra:
+    egida:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup

@@ -20,7 +20,7 @@
   mapPath: /Maps/_Forge/Shuttles/Empire/tiranis.yml
   minPlayers: 0
   stations:
-    terra:
+    tiranis:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup

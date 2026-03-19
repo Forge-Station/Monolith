@@ -20,7 +20,7 @@
   mapPath: /Maps/_Forge/Shuttles/Empire/kostelom.yml
   minPlayers: 0
   stations:
-    terra:
+    kostelom:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup

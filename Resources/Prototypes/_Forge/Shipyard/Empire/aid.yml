@@ -20,7 +20,7 @@
   mapPath: /Maps/_Forge/Shuttles/Empire/aid.yml
   minPlayers: 0
   stations:
-    terra:
+    aid:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup

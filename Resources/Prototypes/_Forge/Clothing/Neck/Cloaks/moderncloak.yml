@@ -13,7 +13,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
   - type: PirateBountyItem
     id: ModernNeckAll
 
@@ -50,7 +50,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
   - type: PirateBountyItem
     id: ModernNeckAll
 
@@ -87,7 +87,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
   - type: PirateBountyItem
     id: ModernNeckAll
 
@@ -124,7 +124,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
   - type: PirateBountyItem
     id: ModernNeckAll
 
@@ -161,7 +161,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
   - type: PirateBountyItem
     id: ModernNeckAll
 
@@ -198,7 +198,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
   - type: PirateBountyItem
     id: ModernNeckAll
 
@@ -235,7 +235,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
   - type: PirateBountyItem
     id: ModernNeckAll
 
@@ -272,7 +272,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
   - type: PirateBountyItem
     id: ModernNeckAll
 
@@ -309,7 +309,7 @@
     slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container { }
+      toggleable-clothing: !type:Container
   - type: PirateBountyItem
     id: ModernNeckAll
 

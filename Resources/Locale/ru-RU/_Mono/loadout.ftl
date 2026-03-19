@@ -1,0 +1,10 @@
+loadout-group-weapon = Вооружение
+loadout-group-weapon-civilian = Самозащита
+loadout-group-pistol = Пистолет
+loadout-group-magazine = Боеприпасы
+loadout-group-special-gun = Специальное вооружение
+loadout-group-contractor-balaclava = Балаклава
+loadout-group-ussp-jumpsuit = Униформа СССП
+loadout-group-ussp-head = Голова СССП
+loadout-group-ussp-outerclothing = Верхняя одежда СССП
+loadout-group-ussp-backpack = Рюкзак СССП

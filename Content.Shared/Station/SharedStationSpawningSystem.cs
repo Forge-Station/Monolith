@@ -12,6 +12,9 @@ using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Shared.Humanoid; // Forge-change
+using Content.Shared.Preferences; // Forge-change
+using System.Diagnostics.CodeAnalysis; // Forge-change
 
 namespace Content.Shared.Station;
 
@@ -221,4 +224,24 @@ public abstract class SharedStationSpawningSystem : EntitySystem
             RaiseLocalEvent(entity, ref ev);
         }
     }
+
+    // Forge-change-start: _EE
+    public bool GetProfile(EntityUid? uid, [NotNullWhen(true)] out HumanoidCharacterProfile? profile)
+    {
+        if (!TryComp(uid, out HumanoidAppearanceComponent? appearance))
+        {
+            profile = null;
+            return false;
+        }
+
+        if (appearance.LastProfileLoaded is { } lastProfileLoaded)
+        {
+            profile = lastProfileLoaded;
+            return true;
+        }
+
+        profile = HumanoidCharacterProfile.DefaultWithSpecies(appearance.Species);
+        return true;
+    }
+    // Forge-change-end
 }

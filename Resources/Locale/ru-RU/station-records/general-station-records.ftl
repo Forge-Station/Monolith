@@ -17,3 +17,5 @@ general-station-record-console-reset-filters = Сброс
 general-station-record-console-delete = Удалить
 general-station-record-job-filter = Должность
 general-station-record-species-filter = Раса
+
+general-station-record-console-record-nationality = Национальность: { $nationality }

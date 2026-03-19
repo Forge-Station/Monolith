@@ -1,0 +1,66 @@
+ent-Translator = переводчик
+    .desc = Специальный переводчик, помогающий понимать предустановленный язык.
+
+ent-TranslatorUnpowered = { ent-Translator }
+    .desc = { ent-Translator.desc }
+
+ent-TranslatorPoweredBase = { ent-Translator }
+    .desc = { ent-Translator.desc }
+
+ent-TranslatorForeigner = { ent-Translator }
+    .desc = Специальный переводчик, помогающий иностранцам говорить и понимать Общегалактический.
+    .suffix = Не использовать, Новичковый
+
+ent-CanilunztTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Канилунцт
+ent-BubblishTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Пузырчатый
+ent-NekomimeticTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Некотетик
+ent-DraconicTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Драконий
+ent-RootSpeakTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Корневая речь
+ent-MofficTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Моффик
+ent-XenoTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Кспилиан
+ent-AnimalTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Животные
+ent-ValyrianStandardTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Валирийский
+ent-AzazibaTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Не использовать, Азазиба
+ent-ChittinTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Читтин
+ent-SiikMaasTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Сиик'маас
+ent-MarishTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Мариш
+ent-SolCommonTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Соларный
+ent-NovuNedericTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = НоваНедерик
+ent-FreespeakTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Кадрис
+
+# Forge-change add
+ent-ForgeSiberaTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc }
+    .suffix = Сибера

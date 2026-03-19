@@ -191,7 +191,8 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
             Gender = gender,
             DisplayPriority = jobPrototype.RealDisplayWeight,
             Fingerprint = mobFingerprint,
-            DNA = dna
+            DNA = dna,
+            Nationality = profile.Nationality // Forge-change
         };
 
         var key = AddRecordEntry(station, record);

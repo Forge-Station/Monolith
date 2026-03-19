@@ -1,14 +1,15 @@
 - type: entity
-  id: RenegateLockerBaseSecure
+  id: ForgeLockerBaseSecure # RenegateLockerBaseSecure to ForgeLockerBaseSecure
   parent: LockerBaseSecure
   abstract: true
   components:
   - type: Sprite
-    sprite: Forge/Structures/Storage/ren_closet.rsi
+    sprite: Forge/Structures/Storage/closet.rsi
 
+# region Renegate
 - type: entity
   id: LockerRenBaron
-  parent: [RenegateLockerBaseSecure, LockerSecurity]
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
   name: Renegate Baron locker
   suffix: Ренегаты, Барон
   components:
@@ -19,7 +20,7 @@
 
 - type: entity
   id: LockerRenRnd
-  parent: [RenegateLockerBaseSecure, LockerSecurity]
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
   name: Renegate Scientist locker
   suffix: Ренегаты, Куратор
   components:
@@ -30,7 +31,7 @@
 
 - type: entity
   id: LockerRenCom
-  parent: [RenegateLockerBaseSecure, LockerSecurity]
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
   name: Renegate Comander locker
   suffix: Ренегаты, Смотрящий
   components:
@@ -41,7 +42,7 @@
 
 - type: entity
   id: LockerRenMed
-  parent: [RenegateLockerBaseSecure, LockerSecurity]
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
   name: Renegate Medical locker
   suffix: Ренегаты, Костоправ
   components:
@@ -52,7 +53,7 @@
 
 - type: entity
   id: LockerRenSpec
-  parent: [RenegateLockerBaseSecure, LockerSecurity]
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
   name: Renegate Specialist locker
   suffix: Ренегаты, Штейгер
   components:
@@ -63,7 +64,7 @@
 
 - type: entity
   id: LockerRen
-  parent: [RenegateLockerBaseSecure, LockerSecurity]
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
   name: Renegate locker
   suffix: Ренегаты
   components:
@@ -71,3 +72,64 @@
     stateBaseClosed: renegate
     stateDoorOpen: renegate_open
     stateDoorClosed: renegate_door
+
+# region Empire
+- type: entity
+  id: LockerEmpire
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
+  name: empire locker
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: imperial
+    stateDoorOpen: imperial_open
+    stateDoorClosed: imperial_door
+  - type: AccessReader
+    access: [["Empire"]]
+
+- type: entity
+  id: LockerEmpireOfficer
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
+  name: empire officer locker
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: imperial
+    stateDoorOpen: imperial_open
+    stateDoorClosed: imperial_door
+  - type: AccessReader
+    access: [["EmpireOfficer"]]
+
+- type: entity
+  id: LockerEmpireInq
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
+  name: inquisitor locker
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: imperial
+    stateDoorOpen: imperial_open
+    stateDoorClosed: impinq_door
+  - type: AccessReader
+    access: [["EmpireInqusitor"]]
+
+- type: entity
+  id: LockerEmpireCommander
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
+  name: commander locker
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: implord
+    stateDoorOpen: implord_open
+    stateDoorClosed: implord_door
+  - type: AccessReader
+    access: [["EmpireCommander"]]
+
+- type: entity
+  id: LockerEmpireDiplomacy
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
+  name: empire diplomacy locker
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: imperial
+    stateDoorOpen: imperial_open
+    stateDoorClosed: imperial_door
+  - type: AccessReader
+    access: [["EmpireDiplomacy"]]

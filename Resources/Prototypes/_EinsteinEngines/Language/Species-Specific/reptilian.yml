@@ -9,90 +9,172 @@
     minSyllables: 2
     maxSyllables: 4
     replacement:
-    - za
-    - az
-    - ze
-    - ez
-    - zi
-    - iz
-    - zo
-    - oz
-    - zu
-    - uz
-    - zs
-    - sz
-    - ha
-    - ah
-    - he
-    - eh
-    - hi
-    - ih
-    - ho
-    - oh
-    - hu
-    - uh
-    - hs
-    - sh
-    - la
-    - al
-    - le
-    - el
-    - li
-    - il
-    - lo
-    - ol
-    - lu
-    - ul
-    - ls
-    - sl
-    - ka
-    - ak
-    - ke
-    - ek
-    - ki
-    - ik
-    - ko
-    - ok
-    - ku
-    - uk
-    - ks
-    - sk
-    - sa
-    - as
-    - se
-    - es
-    - si
-    - is
-    - so
-    - os
-    - su
-    - us
-    - ss
-    - ss
-    - ra
-    - ar
-    - re
-    - er
-    - ri
-    - ir
-    - ro
-    - or
-    - ru
-    - ur
-    - rs
-    - sr
-    - a
-    - a
-    - e
-    - e
-    - i
-    - i
-    - o
-    - o
-    - u
-    - u
-    - s
-    - s
+    # Forge-change
+    # - za
+    # - az
+    # - ze
+    # - ez
+    # - zi
+    # - iz
+    # - zo
+    # - oz
+    # - zu
+    # - uz
+    # - zs
+    # - sz
+    # - ha
+    # - ah
+    # - he
+    # - eh
+    # - hi
+    # - ih
+    # - ho
+    # - oh
+    # - hu
+    # - uh
+    # - hs
+    # - sh
+    # - la
+    # - al
+    # - le
+    # - el
+    # - li
+    # - il
+    # - lo
+    # - ol
+    # - lu
+    # - ul
+    # - ls
+    # - sl
+    # - ka
+    # - ak
+    # - ke
+    # - ek
+    # - ki
+    # - ik
+    # - ko
+    # - ok
+    # - ku
+    # - uk
+    # - ks
+    # - sk
+    # - sa
+    # - as
+    # - se
+    # - es
+    # - si
+    # - is
+    # - so
+    # - os
+    # - su
+    # - us
+    # - ss
+    # - ss
+    # - ra
+    # - ar
+    # - re
+    # - er
+    # - ri
+    # - ir
+    # - ro
+    # - or
+    # - ru
+    # - ur
+    # - rs
+    # - sr
+    # - a
+    # - a
+    # - e
+    # - e
+    # - i
+    # - i
+    # - o
+    # - o
+    # - u
+    # - u
+    # - s
+    # - s
+    - за
+    - аз
+    - зе
+    - эз
+    - зи
+    - из
+    - зо
+    - оз
+    - зу
+    - уз
+    - жс
+    - шз
+    - ха
+    - ах
+    - хе
+    - ех
+    - хи
+    - их
+    - хо
+    - ох
+    - ху
+    - ух
+    - хс
+    - ш
+    - ла
+    - ал
+    - ле
+    - ел
+    - ли
+    - ил
+    - ло
+    - ол
+    - лу
+    - ул
+    - лс
+    - сл
+    - ка
+    - ак
+    - ке
+    - ек
+    - ки
+    - ик
+    - ко
+    - ок
+    - ку
+    - ук
+    - кс
+    - ск
+    - са
+    - ас
+    - се
+    - ес
+    - си
+    - ис
+    - со
+    - ос
+    - су
+    - ус
+    - сс
+    - рра
+    - ар
+    - ре
+    - ер
+    - ри
+    - ир
+    - ро
+    - ор
+    - ру
+    - ур
+    - рс
+    - ср
+    - а
+    - э
+    - и
+    - о
+    - у
+    - с
+    - шр
+    - хр
+    - кр
+    - гр
 
 # Reptilian-Specific "Rare" Language
 # !Do Not Make A Translator For This Language.
@@ -105,14 +187,43 @@
     minSyllables: 2
     maxSyllables: 4
     replacement:
-    - azs
-    - zis
-    - zau
-    - azua
-    - skiu
-    - zuakz
-    - izo
-    - aei
-    - ki
-    - kut
-    - zo
+    # Forge-change
+    # - azs
+    # - zis
+    # - zau
+    # - azua
+    # - skiu
+    # - zuakz
+    # - izo
+    # - aei
+    # - ki
+    # - kut
+    # - zo
+    - азс
+    - зис
+    - зау
+    - азуа
+    - скиу
+    - зуакз
+    - изо
+    - аеи
+    - ки
+    - кут
+    - зо
+    - жза
+    - шзу
+    - хзи
+    - крза
+    - грзу
+    - рзау
+    - срзи
+    - хрзу
+    - жрза
+    - шрзу
+    - зуаѣ
+    - азѫ
+    - зуѣ
+    - исѫ
+    - хѣз
+    - крѫ
+    - грѣ

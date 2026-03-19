@@ -131,6 +131,9 @@ public sealed partial class SpeciesPrototype : IPrototype
 
     [DataField("sponsorLevel")]
     public SponsorLevel SponsorLevel = SponsorLevel.None;
+
+    [DataField("averageHeight")]
+    public float AverageHeight = 176.1f;
     // Forge-Change-End
 }
 

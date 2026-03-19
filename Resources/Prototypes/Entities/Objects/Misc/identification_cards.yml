@@ -866,6 +866,13 @@
     - TsfmcEngineering # Mono
     - GrandVizier
     - PDVCommand # Mono
+    # Forge-change start
+    - Empire
+    - EmpireOfficer
+    - EmpireInqusitor
+    - EmpireCommander
+    - EmpireDiplomacy
+    # Forge-change end
   - type: Tag #  Ignore Chameleon tags
     tags:
     - DoorBumpOpener

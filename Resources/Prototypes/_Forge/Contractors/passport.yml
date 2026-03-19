@@ -1,0 +1,132 @@
+- type: entity
+  name: passport
+  parent: BaseItem
+  id: BasePassport
+  abstract: true
+  description: A passport denoting an individual's nationality and identity.
+  components:
+    - type: Passport
+    - type: UseDelay
+      delay: 0.5
+    - type: Sprite
+      sprite: _EE/Contractors/Passport.rsi
+      layers:
+      - state: passport_biesel_open
+    - type: Appearance
+    - type: EmitSoundOnPickup
+      sound: /Audio/_Goobstation/Items/handling/book_pickup.ogg
+    - type: EmitSoundOnDrop
+      sound: /Audio/_Goobstation/Items/handling/book_drop.ogg
+    - type: EmitSoundOnLand
+      sound: /Audio/_Goobstation/Items/handling/book_drop.ogg
+
+- type: entity
+  name: паспорт
+  description: Документ, удостоверяющий национальность и личность человека.
+  parent: BasePassport
+  id: SolFedPassport
+  components:
+    - type: Sprite
+      sprite: Forge/Passport.rsi
+      layers:
+      - state: passport_solfed_open # todo: allow people to toggle open and closed
+    - type: ExtendDescription
+      descriptionList:
+      - description: "Очередной гражданин федерации"
+        fontSize: 12
+        color: "#77ff77"
+        requireDetailRange: true
+        requirements:
+          - !type:NationalityRequirement
+            nationalities:
+              - TransSolarFederation
+      - description: "Ещё один солфед.."
+        fontSize: 12
+        color: "#ad4141"
+        requireDetailRange: true
+        requirements:
+          - !type:NationalityRequirement
+            nationalities:
+              - Imperial
+      - description: "Капиталист."
+        fontSize: 12
+        color: "#ad4141"
+        requireDetailRange: true
+        requirements:
+          - !type:NationalityRequirement
+            nationalities:
+              - USSP
+
+- type: entity
+  name: паспорт
+  description: Документ, удостоверяющий национальность и личность человека.
+  parent: BasePassport
+  id: ImperialPassport
+  components:
+    - type: Sprite
+      sprite: Forge/Passport.rsi
+      layers:
+      - state: passport_imperial_open # todo: allow people to toggle open and closed
+    - type: ExtendDescription
+      descriptionList:
+      - description: "Имперский подданный, как и многие"
+        fontSize: 12
+        color: "#ad4141"
+        requireDetailRange: true
+        requirements:
+          - !type:NationalityRequirement
+            nationalities:
+              - TransSolarFederation
+      - description: "Подданный Империи"
+        fontSize: 12
+        color: "#77ff77"
+        requireDetailRange: true
+        requirements:
+          - !type:NationalityRequirement
+            nationalities:
+              - Imperial
+      - description: "Из угнетателей"
+        fontSize: 12
+        color: "#ad4141"
+        requireDetailRange: true
+        requirements:
+          - !type:NationalityRequirement
+            nationalities:
+              - USSP
+
+- type: entity
+  name: паспорт
+  description: Документ, удостоверяющий национальность и личность человека.
+  parent: BasePassport
+  id: USSPPassport
+  components:
+    - type: Sprite
+      sprite: Forge/Passport.rsi
+      layers:
+      - state: passport_ussp_open # todo: allow people to toggle open and closed
+    - type: ExtendDescription
+      descriptionList:
+      - description: "Красный из отколовшихся систем"
+        fontSize: 12
+        color: "#ad4141"
+        requireDetailRange: true
+        requirements:
+          - !type:NationalityRequirement
+            nationalities:
+              - TransSolarFederation
+      - description: "Из числа красных мятежников"
+        fontSize: 12
+        color: "#ad4141"
+        requireDetailRange: true
+        requirements:
+          - !type:NationalityRequirement
+            nationalities:
+              - Imperial
+      - description: "Товарищ!"
+        fontSize: 12
+        color: "#77ff77"
+        requireDetailRange: true
+        requirements:
+          - !type:NationalityRequirement
+            nationalities:
+              - USSP

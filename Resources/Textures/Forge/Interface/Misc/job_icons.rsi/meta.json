@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Create by autsaider_m, StRep Eifall, overlord by goster",
+    "copyright": "Create by autsaider_m, StRep Eifall, overlord by goster, emp_ icons by v6st for Forge",
 
     "size": {
         "x": 8,
@@ -46,6 +46,39 @@
         },
         {
             "name": "strep"
+        },
+        {
+            "name": "emp_arbitr"
+        },
+        {
+            "name": "emp_astra"
+        },
+        {
+            "name": "emp_auxil"
+        },
+        {
+            "name": "emp_dekuron"
+        },
+        {
+            "name": "emp_diplomacy"
+        },
+        {
+            "name": "emp_inq"
+        },
+        {
+            "name": "emp_lord"
+        },
+        {
+            "name": "emp_medic"
+        },
+        {
+            "name": "emp_neofit"
+        },
+        {
+            "name": "emp_pretor"
+        },
+        {
+            "name": "emp_tech"
         }
     ]
 }

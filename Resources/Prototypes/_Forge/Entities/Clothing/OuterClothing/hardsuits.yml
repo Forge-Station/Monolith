@@ -73,3 +73,92 @@
     tags:
     - Hardsuit
     - WhitelistChameleon
+
+# region Imperial
+- type: entity
+  parent: [ ClothingOuterHardsuitBase, BaseFactionGearTSFT2]
+  id: ClothingOuterHardsuitEmpire14m
+  name: HVE-14m Guard hardsuit
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.65
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.55
+        Heat: 0.7
+        Radiation: 0.65
+        Caustic: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.25
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitEmpire14m
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 7500
+
+- type: entity
+  parent: ClothingOuterHardsuitEmpire14m
+  id: ClothingOuterHardsuitEmpire14mCom
+  name: HVE-14m Guard Commander hardsuit
+  description: A hardsuit issued to Imperial guardian commander operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_commander.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_commander.rsi
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitEmpire14mCom
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 6500
+    vendPrice: 9500
+
+- type: entity
+  parent: ClothingOuterHardsuitEmpire14m
+  id: ClothingOuterHardsuitEmpire14mInq
+  name: HVE-14m Inquisitor hardsuit
+  description: A hardsuit issued to Imperial Inquisitor operating in low-pressure and high-risk environments.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_violet.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_violet.rsi
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitEmpire14mInq
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 6000
+    vendPrice: 8500

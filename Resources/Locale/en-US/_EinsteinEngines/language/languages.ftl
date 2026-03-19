@@ -57,6 +57,12 @@ language-Freespeak-description =
     A rarely heard language outside of the colossus sector, developed over time through isolation from the main systems and lost colonies abandoned to die on this edge of civilized space.
     Usually equated to slurred speach, relying more on tone to have the words mean something.
 
+language-ForgeSibera-name = Sibera
+language-ForgeSibera-description =
+    A divergent dialect of Sol Common that became the primary language of the Union of Socialist Planets.
+    To its speakers it feels natural, but to outsiders it sounds harsh, clipped, and distant.
+    Its intonation is abrupt and chopped, with softened consonants and heavy reduction of vowels, giving an impression of severity and detachment.
+
 # Mono - edited to remove mentions of elyran republic, or whatever it was
 language-Elyran-name = Elyran Standard
 language-Elyran-description =

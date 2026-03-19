@@ -1,0 +1,23 @@
+- type: playTimeTracker
+  id: JobPraefect
+
+- type: playTimeTracker
+  id: JobArbiter
+
+- type: playTimeTracker
+  id: JobCardinal
+
+- type: playTimeTracker
+  id: JobInquisitor
+
+- type: playTimeTracker
+  id: JobConsul
+
+- type: playTimeTracker
+  id: JobPraetorian
+
+- type: playTimeTracker
+  id: JobAuxilia
+
+- type: playTimeTracker
+  id: JobNeophyte

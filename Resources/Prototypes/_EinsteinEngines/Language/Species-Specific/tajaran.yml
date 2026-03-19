@@ -12,68 +12,115 @@
     minSyllables: 2 # this is mostly based on the name generator, 2-4 is there so it goes here too
     maxSyllables: 4
     replacement:
-    - mrr
-    - rr
-    - tajr
-    - kir
-    - raj
-    - kii
-    - mir
-    - kra
-    - ahk
-    - nal
-    - vah
-    - khaz
-    - jri
-    - ran
-    - darr
-    - mi
-    - jri
-    - dynh
-    - manq
-    - rhe
-    - zar
-    - rrhaz
-    - kal
-    - chur
-    - eech
-    - thaa
-    - dra
-    - jurl
-    - mah
-    - sanu
-    - dra
-    - ii'r
-    - ka
-    - aasi
-    - far
-    - wa
-    - baq
-    - ara
-    - qara
-    - zir
-    - sam
-    - mak
-    - hrar
-    - nja
-    - rir
-    - khan
-    - jun
-    - dar
-    - rik
-    - kah
-    - hal
-    - ket
-    - jurl
-    - mah
-    - tul
-    - cresh
-    - azu
-    - ragh
-    - mro
-    - mra
-    - mrro
-    - mrra
+    # Forge-change
+    # - mrr
+    # - rr
+    # - tajr
+    # - kir
+    # - raj
+    # - kii
+    # - mir
+    # - kra
+    # - ahk
+    # - nal
+    # - vah
+    # - khaz
+    # - jri
+    # - ran
+    # - darr
+    # - mi
+    # - jri
+    # - dynh
+    # - manq
+    # - rhe
+    # - zar
+    # - rrhaz
+    # - kal
+    # - chur
+    # - eech
+    # - thaa
+    # - dra
+    # - jurl
+    # - mah
+    # - sanu
+    # - dra
+    # - ii'r
+    # - ka
+    # - aasi
+    # - far
+    # - wa
+    # - baq
+    # - ara
+    # - qara
+    # - zir
+    # - sam
+    # - mak
+    # - hrar
+    # - nja
+    # - rir
+    # - khan
+    # - jun
+    # - dar
+    # - rik
+    # - kah
+    # - hal
+    # - ket
+    # - jurl
+    # - mah
+    # - tul
+    # - cresh
+    # - azu
+    # - ragh
+    # - mro
+    # - mra
+    # - mrro
+    # - mrra
+    - мрр
+    - рр
+    - кир
+    - раж
+    - кии
+    - мир
+    - кра
+    - ахк
+    - нал
+    - вах
+    - храз
+    - жри
+    - ран
+    - дарр
+    - мии
+    - динх
+    - манк
+    - ррхе
+    - зар
+    - кал
+    - чур
+    - еч
+    - тхаа
+    - дра
+    - мах
+    - сану
+    - фар
+    - баq
+    - ара
+    - зир
+    - сам
+    - мак
+    - храр
+    - нжа
+    - рир
+    - хан
+    - дар
+    - рик
+    - хал
+    - кет
+    - азу
+    - рагх
+    - мро
+    - мра
+    - мрро
+    - мрра
 
 # Tajaran sign language. Crucially, only tajara can "speak" it, due to need for tajara body language
 # (if they cut off your tail or ears you shouldn't be able to speak it, but well)
@@ -139,68 +186,107 @@
     minSyllables: 2
     maxSyllables: 3 # shorter cuz dual lingo i suppose
     replacement:
-    - mrr
-    - rr
-    - tajr
-    - kir
-    - raj
-    - kii
-    - mir
-    - kra
-    - ahk
-    - nal
-    - vah
-    - khaz
-    - jri
-    - ran
-    - darr
-    - mi
-    - jri
-    - dynh
-    - manq
-    - rhe
-    - zar
-    - rrhaz
-    - kal
-    - chur
-    - eech
-    - thaa
-    - dra
-    - jurl
-    - mah
-    - sanu
-    - dra
-    - ii'r
-    - ka
-    - aasi
-    - far
-    - wa
-    - baq
-    - ara
-    - qara
-    - zir
-    - sam
-    - mak
-    - hrar
-    - nja
-    - rir
-    - khan
-    - jun
-    - dar
-    - rik
-    - kah
-    - hal
-    - ket
-    - jurl
-    - mah
-    - tul
-    - cresh
-    - azu
-    - ragh
-    - mro
-    - mra
-    - mrro
-    - mrra
+    # Forge-change
+    # - mrr
+    # - rr
+    # - tajr
+    # - kir
+    # - raj
+    # - kii
+    # - mir
+    # - kra
+    # - ahk
+    # - nal
+    # - vah
+    # - khaz
+    # - jri
+    # - ran
+    # - darr
+    # - mi
+    # - jri
+    # - dynh
+    # - manq
+    # - rhe
+    # - zar
+    # - rrhaz
+    # - kal
+    # - chur
+    # - eech
+    # - thaa
+    # - dra
+    # - jurl
+    # - mah
+    # - sanu
+    # - dra
+    # - ii'r
+    # - ka
+    # - aasi
+    # - far
+    # - wa
+    # - baq
+    # - ara
+    # - qara
+    # - zir
+    # - sam
+    # - mak
+    # - hrar
+    # - nja
+    # - rir
+    # - khan
+    # - jun
+    # - dar
+    # - rik
+    # - kah
+    # - hal
+    # - ket
+    # - jurl
+    # - mah
+    # - tul
+    # - cresh
+    # - azu
+    # - ragh
+    # - mro
+    # - mra
+    # - mrro
+    # - mrra
+    - мрр
+    - рр
+    - таяр
+    - кир
+    - раж
+    - мир
+    - кра
+    - ахк
+    - нал
+    - вах
+    - жрр
+    - шрр
+    - ран
+    - дар
+    - динх
+    - манк
+    - ррх
+    - кал
+    - чур
+    - тха
+    - дра
+    - мах
+    - сану
+    - фар
+    - ара
+    - зир
+    - сам
+    - мак
+    - храр
+    - нжа
+    - рир
+    - хан
+    - рик
+    - хал
+    - кет
+    - азу
+    - мро
+    - мра
 
 
 # One of 5 languages that Tajara could speak, this one is your classic "The Nobility Language", also should have no translators availible
@@ -217,68 +303,116 @@
     minSyllables: 3
     maxSyllables: 5 # since it's for nobility, we can make it a lil longer
     replacement:
-    - hrr
-    - rhr
-    - tarj
-    - khir
-    - rajh
-    - kir
-    - mier
-    - kre
-    - ahek
-    - nlhal
-    - veh
-    - khaz
-    - dri
-    - rhan
-    - darrer
-    - mi
-    - jhri
-    - dynher
-    - manqi
-    - rhas
-    - shar
-    - drhaz
-    - kalh
-    - shur
-    - echi
-    - tha
-    - draer
-    - jurl
-    - maher
-    - sanii
-    - dra
-    - ii'r
-    - kan
-    - aesi
-    - fare
-    - we
-    - bash
-    - arha
-    - quara
-    - zhir
-    - sem
-    - make
-    - hrer
-    - nja
-    - rir
-    - can
-    - jhun
-    - dar
-    - rik
-    - kah
-    - hal
-    - kete
-    - juril
-    - mah
-    - tul
-    - cresh
-    - azu
-    - ragh
-    - miro
-    - mara
-    - mrero
-    - mrara
+    # Forge-change
+    # - hrr
+    # - rhr
+    # - tarj
+    # - khir
+    # - rajh
+    # - kir
+    # - mier
+    # - kre
+    # - ahek
+    # - nlhal
+    # - veh
+    # - khaz
+    # - dri
+    # - rhan
+    # - darrer
+    # - mi
+    # - jhri
+    # - dynher
+    # - manqi
+    # - rhas
+    # - shar
+    # - drhaz
+    # - kalh
+    # - shur
+    # - echi
+    # - tha
+    # - draer
+    # - jurl
+    # - maher
+    # - sanii
+    # - dra
+    # - ii'r
+    # - kan
+    # - aesi
+    # - fare
+    # - we
+    # - bash
+    # - arha
+    # - quara
+    # - zhir
+    # - sem
+    # - make
+    # - hrer
+    # - nja
+    # - rir
+    # - can
+    # - jhun
+    # - dar
+    # - rik
+    # - kah
+    # - hal
+    # - kete
+    # - juril
+    # - mah
+    # - tul
+    # - cresh
+    # - azu
+    # - ragh
+    # - miro
+    # - mara
+    # - mrero
+    # - mrara
+    - хрр
+    - ррх
+    - тарж
+    - хир
+    - ражх
+    - кир
+    - миер
+    - кре
+    - ахек
+    - нлхал
+    - вех
+    - храз
+    - дри
+    - рхан
+    - дарер
+    - джри
+    - динхер
+    - манки
+    - ррас
+    - шар
+    - дрhaz
+    - калх
+    - шур
+    - ечи
+    - драер
+    - джурил
+    - махер
+    - сании
+    - аеси
+    - арха
+    - квара
+    - жхир
+    - сем
+    - хрер
+    - нжа
+    - рир
+    - джун
+    - дар
+    - рик
+    - хал
+    - кетэ
+    - азу
+    - рагх
+    - миро
+    - мара
+    - мреро
+    - мрара
 
 
 # One of 5 languages that Tajara could speak, this one is the dialect lingo
@@ -296,65 +430,114 @@
     minSyllables: 2
     maxSyllables: 4 # again, normal length
     replacement:
-    - mrr
-    - rr
-    - tajr
-    - kir
-    - raj
-    - kii
-    - mir
-    - kra
-    - ahk
-    - nal
-    - vah
-    - khaz
-    - jri
-    - ran
-    - darr
-    - mi
-    - jri
-    - dynh
-    - manq
-    - rhe
-    - zar
-    - rrhaz
-    - kal
-    - chur
-    - eech
-    - thaa
-    - dra
-    - jurl
-    - mah
-    - sanu
-    - dra
-    - ii'r
-    - ka
-    - aasi
-    - far
-    - wa
-    - baq
-    - ara
-    - qara
-    - zir
-    - sam
-    - mak
-    - hrar
-    - nja
-    - rir
-    - khan
-    - jun
-    - dar
-    - rik
-    - kah
-    - hal
-    - ket
-    - jurl
-    - mah
-    - tul
-    - cresh
-    - azu
-    - ragh
-    - mro
-    - mra
-    - mrro
-    - mrra
+    # Forge-change
+    # - mrr
+    # - rr
+    # - tajr
+    # - kir
+    # - raj
+    # - kii
+    # - mir
+    # - kra
+    # - ahk
+    # - nal
+    # - vah
+    # - khaz
+    # - jri
+    # - ran
+    # - darr
+    # - mi
+    # - jri
+    # - dynh
+    # - manq
+    # - rhe
+    # - zar
+    # - rrhaz
+    # - kal
+    # - chur
+    # - eech
+    # - thaa
+    # - dra
+    # - jurl
+    # - mah
+    # - sanu
+    # - dra
+    # - ii'r
+    # - ka
+    # - aasi
+    # - far
+    # - wa
+    # - baq
+    # - ara
+    # - qara
+    # - zir
+    # - sam
+    # - mak
+    # - hrar
+    # - nja
+    # - rir
+    # - khan
+    # - jun
+    # - dar
+    # - rik
+    # - kah
+    # - hal
+    # - ket
+    # - jurl
+    # - mah
+    # - tul
+    # - cresh
+    # - azu
+    # - ragh
+    # - mro
+    # - mra
+    # - mrro
+    # - mrra
+    - мрр
+    - рр
+    - кир
+    - раж
+    - мир
+    - кра
+    - ахк
+    - нал
+    - вах
+    - храз
+    - жри
+    - ран
+    - дарр
+    - динх
+    - манк
+    - ррхе
+    - зар
+    - кал
+    - чур
+    - еч
+    - тхаа
+    - дра
+    - мах
+    - сану
+    - фар
+    - ара
+    - зир
+    - сам
+    - мак
+    - храр
+    - нжа
+    - рир
+    - хан
+    - дар
+    - рик
+    - хал
+    - кет
+    - азу
+    - рагх
+    - мро
+    - мра
+    - мрро
+    - мрра
+    - снр
+    - дрр
+    - зах
+    - шрр
+    - жрр

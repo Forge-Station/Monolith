@@ -5,3 +5,33 @@
   components:
   - type: Sprite
     sprite: Forge/Structures/Doors/Glass/ren_glass.rsi
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockGlassEmpirePublic
+  suffix: Empire, Public
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Glass/emp_public.rsi
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockGlassEmpire
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Glass/emp_public.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpire ]
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockGlassEmpireOfficer
+  suffix: Empire, Officer
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Glass/emp_public.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpireOfficer ]

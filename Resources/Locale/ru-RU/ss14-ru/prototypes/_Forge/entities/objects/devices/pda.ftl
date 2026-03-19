@@ -18,3 +18,12 @@ ent-CentcomIDCardMSFSpecOpsOfficer = КПК офицера
     .desc = Сам списывает штрафы со счёта ДСБФ.
 ent-MSFRepPDA = КПК УСФ
     .desc = Светло-зелёный символ ходячей бюрократии.
+
+ent-EmpirePDA = КПК имперца
+    .desc = { ent-BasePDA.desc }
+ent-EmpireGoldPDA = КПК имперца
+    .desc = { ent-BasePDA.desc }
+ent-EmpireInqPDA = КПК Эклизиарха
+    .desc = { ent-BasePDA.desc }
+ent-EmpireCommanderPDA = КПК Лорда-Префекта
+    .desc = { ent-BasePDA.desc }

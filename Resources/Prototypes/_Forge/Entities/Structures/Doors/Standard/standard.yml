@@ -13,3 +13,66 @@
   components:
   - type: Sprite
     sprite: Forge/Structures/Doors/Standard/ren_command.rsi
+
+- type: entity
+  parent: Airlock
+  id: AirlockEmpirePublic
+  suffix: Empire, Public
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Standard/emp_public.rsi
+
+- type: entity
+  parent: Airlock
+  id: AirlockEmpire
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Standard/emp_public.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpire ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockEmpireOfficer
+  suffix: Empire, Officer
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Standard/emp_public.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpireOfficer ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockEmpireInquisitor
+  suffix: Empire, Inquisitor
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Standard/emp_inq.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpireInqusitor ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockEmpireCommander
+  suffix: Empire, Commander
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Standard/emp_commander.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpireCommander ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockEmpireDiplomacy
+  suffix: Empire, Diplomacy
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Standard/emp_diplomacy.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpireDiplomacy ]

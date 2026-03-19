@@ -16,6 +16,7 @@
   components:
   - type: Sprite
     sprite: Nyanotrasen/Structures/Wallmounts/last_idiot.rsi
+    snapCardinals: false # Forge-change
     state: icon
     offset: "0.5,0"
 

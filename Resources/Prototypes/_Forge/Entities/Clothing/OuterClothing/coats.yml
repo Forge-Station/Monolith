@@ -47,3 +47,119 @@
     reduction: 0.7
   - type: ExplosionResistance
     damageCoefficient: 0.5
+
+- type: entity
+  parent: [ ClothingOuterStorageFoldableBase ]
+  id: ClothingOuterCoatEmpireWindbreaker
+  name: empire guardian windbreaker
+  description: Windbreaker for empire guardians
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Coats/empirewindbreaker.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Coats/empirewindbreaker.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.85
+        Heat: 0.9
+        Caustic: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.75
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      toggleable-clothing: !type:Container
+        ents: []
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadEmpireWBHood
+    requiredSlot:
+    - OUTERCLOTHING
+    slot: head
+
+- type: entity
+  parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatEmpireWindbreaker]
+  id: ClothingOuterCoatEmpireWindbreakerOpened
+  name: empire guardian windbreaker
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Caustic: 0.85
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        showEnts: false
+        occludes: true
+        ents: []
+      toggleable-clothing: !type:Container
+        showEnts: false
+        occludes: true
+        ents: []
+
+- type: entity
+  parent: [ ClothingOuterStorageFoldableBase ]
+  id: ClothingOuterCoatEmpireInqWindbreaker
+  name: empire inquisitor windbreaker
+  description: Windbreaker for empire inquisitor
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Coats/empireinqwindbreaker.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Coats/empireinqwindbreaker.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.85
+        Heat: 0.9
+        Caustic: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.75
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      toggleable-clothing: !type:Container
+        ents: []
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadEmpireInqWBHood
+    requiredSlot:
+    - OUTERCLOTHING
+    slot: head
+
+- type: entity
+  parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatEmpireInqWindbreaker]
+  id: ClothingOuterCoatEmpireInqWindbreakerOpened
+  name: empire inquisitor windbreaker
+  components:
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        showEnts: false
+        occludes: true
+        ents: []
+      toggleable-clothing: !type:Container
+        showEnts: false
+        occludes: true
+        ents: []
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Caustic: 0.85
+  - type: ExplosionResistance
+    damageCoefficient: 0.9

@@ -1,6 +1,7 @@
 <Control xmlns="https://spacestation14.io">
     <BoxContainer Orientation="Vertical" Margin="5">
         <Label Name="RecordName" StyleClasses="LabelBig"/>
+        <Label Name="Nationality"/>
         <Label Name="Age"/>
         <Label Name="Title"/>
         <Label Name="Job"/>

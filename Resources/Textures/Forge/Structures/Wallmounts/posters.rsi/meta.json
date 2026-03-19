@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-NC-SA-4.0",
-  "copyright": "Created by autsaider_m, ren by Weilpatient",
+  "copyright": "Created by autsaider_m, ren by Weilpatient, contraband poster 2 by LeoNoth, contraband poster 3 by v6st for Autsider",
   "size": {
     "x": 32,
     "y": 32
@@ -9,6 +9,12 @@
   "states": [
     {
       "name": "cf_poster1_contraband"
+    },
+    {
+      "name": "cf_poster2_contraband"
+    },
+    {
+      "name": "cf_poster3_contraband"
     },
     {
       "name": "ren"

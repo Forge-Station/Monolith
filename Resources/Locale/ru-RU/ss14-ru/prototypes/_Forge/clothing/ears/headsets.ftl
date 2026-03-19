@@ -6,3 +6,6 @@ ent-ClothingHeadsetAltSyndicateComShturm = полноразмерная кров
     .desc = Модифицированный модульный интерком синдиката, надеваемый на голову, и содержащий ключ шифрования.
 ent-ClothingHeadsetAltSyndicateShturm = полноразмерная кроваво-красная гарнитура
     .desc = Модифицированный модульный интерком синдиката, надеваемый на голову, и содержащий ключ шифрования.
+
+ent-ClothingHeadsetEmpire = имперская гарнитура
+    .desc = { ent-ClothingHeadset.desc }

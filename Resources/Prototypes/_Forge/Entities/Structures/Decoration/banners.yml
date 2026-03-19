@@ -39,3 +39,14 @@
   - type: Sprite
     sprite: Forge/Structures/Decoration/banner.rsi
     state: banner_renegate
+
+- type: entity
+  id: BannerEmpire
+  parent: BannerBase
+  name: Banner Empire
+  description: Banner of the Holy Empire of Vermillion's dynasty.
+  suffix: Forge
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Decoration/banner.rsi
+    state: banner_empire

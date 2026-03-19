@@ -8,3 +8,27 @@
   - type: Sprite
     sprite: Forge/Structures/Wallmounts/flags.rsi
     state: scrap_tech
+
+- type: entity
+  parent: BaseFlag
+  id: EmpireFlag
+  name: Empire Flag
+  description: Holy Empire of Vermillon's dynasty..
+  suffix: Forge
+  components:
+  - type: Sprite
+    snapCardinals: false
+    drawdepth: WallMountedItems
+    sprite: Forge/Structures/Wallmounts/flags_64x32.rsi
+    state: hev_flag
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.75,-0.10,0.75,0.35"
+        density: 75
+        mask:
+          - FullTileMask
+        layer:
+          - WallLayer

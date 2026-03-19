@@ -1,0 +1,15 @@
+- type: loadout
+  id: EmpireClothingHandsGlovesTacticalCombatBlack
+  equipment:
+    gloves: ClothingHandsGlovesTacticalCombatBlack
+
+- type: loadout
+  id: EmpireClothingHandsGlovesTacticalCombatCoyoteBrown
+  equipment:
+    gloves: ClothingHandsGlovesTacticalCombatCoyoteBrown
+
+- type: loadout
+  id: EmpireClothingHandsGlovesCombatUpgrade
+  price: 500
+  equipment:
+    gloves: ClothingHandsGlovesCombatUpgrade

@@ -340,3 +340,20 @@
     requires:
     - TauCetiBasic
     - NewKinPidgin
+
+- type: entity
+  id: FreespeakTranslator
+  parent: [ TranslatorPoweredBase ]
+  name: Freespeak translator
+  description: Translates speech between Sol Common and Galactic Common. Like a true Earthman!
+  components:
+  - type: HandheldTranslator
+    spoken:
+    - TauCetiBasic
+    - Freespeak
+    understood:
+    - TauCetiBasic
+    - Freespeak
+    requires:
+    - TauCetiBasic
+    - Freespeak

@@ -9,19 +9,36 @@
     minSyllables: 1
     maxSyllables: 3
     replacement:
-    - bab
-    - bob
-    - beb
-    - bub
-    - gab
-    - gob
-    - geb
-    - gub
-    - blab
-    - blob
-    - bleb
-    - blub
-    - glab
-    - glob
-    - gleb
-    - glub
+    # Forge-change
+    # - bab
+    # - bob
+    # - beb
+    # - bub
+    # - gab
+    # - gob
+    # - geb
+    # - gub
+    # - blab
+    # - blob
+    # - bleb
+    # - blub
+    # - glab
+    # - glob
+    # - gleb
+    # - glub
+    - баб
+    - боб
+    - беб
+    - буб
+    - габ
+    - гоб
+    - геб
+    - губ
+    - блаб
+    - блоб
+    - блеб
+    - блуб
+    - глаб
+    - глоб
+    - глеб
+    - глюб

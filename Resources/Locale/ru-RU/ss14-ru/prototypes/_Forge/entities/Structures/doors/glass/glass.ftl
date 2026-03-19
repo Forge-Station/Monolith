@@ -1,1 +1,10 @@
 ent-AirlockGlassRenegades = стеклянный шлюз ренегатов
+
+ent-AirlockGlassEmpirePublic = { ent-AirlockGlass }
+    .desc = { ent-AirlockGlass.desc }
+ent-AirlockGlassEmpire = { ent-AirlockGlass }
+    .suffix = Forge, СИВ
+    .desc = { ent-AirlockGlass.desc }
+ent-AirlockGlassEmpireOfficer = { ent-AirlockGlass }
+    .suffix = Forge, СИВ, Офицер
+    .desc = { ent-AirlockGlass.desc }

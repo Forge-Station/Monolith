@@ -7,14 +7,17 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: _Mono/Structures/steel_catwalk.rsi
-    state: catwalk_preview
+    sprite: Forge/Structures/Catwalk/MonoCatwalk/steel_catwalk.rsi # Forge-change
+    # state: catwalk_preview # Forge-change
     drawdepth: FloorTiles
   - type: Icon
-    sprite: _Mono/Structures/steel_catwalk.rsi
+    sprite: Forge/Structures/Catwalk/MonoCatwalk/steel_catwalk.rsi # Forge-change
     state: catwalk_preview
   - type: Transform
     anchored: true
+  - type: IconSmooth # Forge-change
+    key: catwalk
+    base: catwalk_
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepCatwalk
@@ -60,11 +63,11 @@
   parent: CatwalkMono
   components:
   - type: Sprite
-    sprite: _Mono/Structures/dark_steel_catwalk.rsi
-    state: catwalk_preview
+    sprite: Forge/Structures/Catwalk/MonoCatwalk/dark_steel_catwalk.rsi # Forge-change
+    # state: catwalk_preview # Forge-change
     drawdepth: FloorTiles
   - type: Icon
-    sprite: _Mono/Structures/dark_steel_catwalk.rsi
+    sprite: Forge/Structures/Catwalk/MonoCatwalk/dark_steel_catwalk.rsi # Forge-change
     state: catwalk_preview
   - type: Construction
     graph: DarkMonoCatwalk
@@ -75,11 +78,11 @@
   parent: CatwalkMono
   components:
   - type: Sprite
-    sprite: _Mono/Structures/white_steel_catwalk.rsi
-    state: catwalk_preview
+    sprite: Forge/Structures/Catwalk/MonoCatwalk/white_steel_catwalk.rsi # Forge-change
+    # state: catwalk_preview # Forge-change
     drawdepth: FloorTiles
   - type: Icon
-    sprite: _Mono/Structures/white_steel_catwalk.rsi
+    sprite: Forge/Structures/Catwalk/MonoCatwalk/white_steel_catwalk.rsi # Forge-change
     state: catwalk_preview
   - type: Construction
     graph: WhiteMonoCatwalk
@@ -127,7 +130,7 @@
     - Lattice
     - Plating
   icon:
-    sprite: _Mono/Structures/steel_catwalk.rsi
+    sprite: Forge/Structures/Catwalk/MonoCatwalk/steel_catwalk.rsi # Forge-change
     state: catwalk_preview
   objectType: Structure
   placementMode: SnapgridCenter
@@ -175,7 +178,7 @@
     - Lattice
     - Plating
   icon:
-    sprite: _Mono/Structures/dark_steel_catwalk.rsi
+    sprite: Forge/Structures/Catwalk/MonoCatwalk/dark_steel_catwalk.rsi # Forge-change
     state: catwalk_preview
   objectType: Structure
   placementMode: SnapgridCenter
@@ -223,7 +226,7 @@
     - Lattice
     - Plating
   icon:
-    sprite: _Mono/Structures/white_steel_catwalk.rsi
+    sprite: Forge/Structures/Catwalk/MonoCatwalk/white_steel_catwalk.rsi # Forge-change
     state: catwalk_preview
   objectType: Structure
   placementMode: SnapgridCenter

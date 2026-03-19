@@ -10,7 +10,6 @@
   shuttlePath: /Maps/_Forge/Shuttles/Empire/vihr.yml
   guidebookPage: Null
   class:
-  - Empire
   - Patrol
   engine:
   - Plasma

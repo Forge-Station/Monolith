@@ -10,7 +10,6 @@
   shuttlePath: /Maps/_Forge/Shuttles/Empire/aid.yml
   guidebookPage: Null
   class:
-  - Empire
   - Fighter
   engine:
   - Uranium

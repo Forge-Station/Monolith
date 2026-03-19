@@ -10,7 +10,6 @@
   shuttlePath: /Maps/_Forge/Shuttles/Empire/forgeCarrion.yml
   guidebookPage: Null
   class:
-  - Empire
   - Fighter
   engine:
   - Plasma

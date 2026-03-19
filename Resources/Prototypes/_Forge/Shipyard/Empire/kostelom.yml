@@ -10,7 +10,6 @@
   shuttlePath: /Maps/_Forge/Shuttles/Empire/kostelom.yml
   guidebookPage: Null
   class:
-  - Empire
   - Salvage
   engine:
   - Uranium

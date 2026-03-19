@@ -10,7 +10,6 @@
   shuttlePath: /Maps/_Forge/Shuttles/Empire/tiranis.yml
   guidebookPage: Null
   class:
-  - Empire
   - Fighter
   engine:
   - AME

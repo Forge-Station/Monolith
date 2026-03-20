@@ -46,5 +46,5 @@ id-card-access-level-central-command = Central Command
 
 id-card-access-level-wizard = Wizard
 
-#Forge Change
+# Forge Change
 id-card-access-level-tsf-diplomacy = Federation Diplomacy

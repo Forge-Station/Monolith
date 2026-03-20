@@ -14,7 +14,7 @@ job-supervisors-science = Scientists and the Research Director
 job-supervisors-hire = whoever hires you
 job-supervisors-everyone = absolutely everyone
 
-#Forge Change
+# Forge Change
 job-supervisors-tsf-high-command = Federation High Command
 job-supervisors-tsf-commanding-officer = the commanding officer
 job-supervisors-tsf-officers = the commanding officer and senior officers

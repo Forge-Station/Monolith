@@ -123,7 +123,7 @@ JobVisitor = Visitor
 JobWarden = TSFMC Captain
 JobZookeeper = Zookeeper
 
-#Forge Change
+# Forge Change
 JobTsfCommandingOfficer = Commanding Officer
 JobTsfExecutiveOfficer = Executive Officer
 JobTsfSeniorOfficer = Senior Officer
@@ -132,7 +132,7 @@ JobTsfAmbassador = Federation Ambassador
 JobTsfRanger = Ranger
 JobTsfRecruit = Recruit
 
-#Forge Change
+# Forge Change
 department-TSF = Trans-Solar Federation
 job-name-tsf-commanding-officer = Commanding Officer
 job-name-tsf-senior-officer = Senior Officer

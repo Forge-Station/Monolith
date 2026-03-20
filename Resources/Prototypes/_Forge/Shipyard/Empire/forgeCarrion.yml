@@ -1,0 +1,30 @@
+- type: vessel
+  id: forgeCarrion
+  parent: BaseVessel
+  name: Падальщик
+  description: Легкий одноместный шаттл Империи, вооруженный ЭМИ-пушками и тремя лазерными орудиями.
+  price: 39000
+  category: Small
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/forgeCarrion.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: forgeCarrion
+  mapName: 'Падальщик'
+  mapPath: /Maps/_Forge/Shuttles/Empire/forgeCarrion.yml
+  minPlayers: 0
+  stations:
+    forgeCarrion:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Падальщик{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

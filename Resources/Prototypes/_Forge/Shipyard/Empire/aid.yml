@@ -1,0 +1,30 @@
+- type: vessel
+  id: aid
+  parent: BaseVessel
+  name: ELS Аид
+  description: Большой шаттл готовый взять весь огонь на себя и свои рога.Отличный козырь в рукаве во время битвы.
+  price: 125000
+  category: Medium
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/aid.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: aid
+  mapName: 'ELS Аид'
+  mapPath: /Maps/_Forge/Shuttles/Empire/aid.yml
+  minPlayers: 0
+  stations:
+    aid:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'ELS Аид{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

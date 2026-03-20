@@ -1,0 +1,160 @@
+- type: entity
+  id: SuitStorageTSFLow
+  parent: SuitStorageBase
+  suffix: TSF Light
+  components:
+  - type: StorageFill
+    contents:
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: ClothingOuterHardsuitTSFLow
+      - id: ClothingMaskGasSecurity
+      - id: JetpackNfsdFilled
+      - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: SuitStorageTSFMid
+  parent: SuitStorageBase
+  suffix: TSF Standard
+  components:
+  - type: StorageFill
+    contents:
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: ClothingOuterHardsuitTSFMid
+      - id: ClothingMaskGasSecurity
+      - id: JetpackNfsdFilled
+      - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: SuitStorageTSFHigh
+  parent: SuitStorageBase
+  suffix: TSF Heavy
+  components:
+  - type: StorageFill
+    contents:
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: ClothingOuterHardsuitTSFHigh
+      - id: ClothingMaskGasSecurity
+      - id: JetpackNfsdFilled
+      - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: SuitStorageTSFMedic
+  parent: SuitStorageBase
+  suffix: TSF Corpsman
+  components:
+  - type: StorageFill
+    contents:
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: ClothingOuterHardsuitTSFMedic
+      - id: ClothingMaskGasSecurity
+      - id: JetpackNfsdFilled
+      - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: SuitStorageTSFKalenval
+  parent: SuitStorageBase
+  suffix: TSF Kalenval
+  components:
+  - type: StorageFill
+    contents:
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: ClothingOuterHardsuitTSFKalenval
+      - id: ClothingMaskGasSecurity
+      - id: JetpackNfsdFilled
+      - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: SuitStorageTSFVprysk
+  parent: SuitStorageBase
+  suffix: TSF Vprysk
+  components:
+  - type: StorageFill
+    contents:
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: ClothingOuterHardsuitTSFVprysk
+      - id: ClothingMaskGasSecurity
+      - id: JetpackNfsdFilled
+      - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: SuitStorageTSFZazhiganie
+  parent: SuitStorageBase
+  suffix: TSF Zazhiganie
+  components:
+  - type: StorageFill
+    contents:
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: ClothingOuterHardsuitTSFZazhiganie
+      - id: ClothingMaskGasSecurity
+      - id: JetpackNfsdFilled
+      - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: SuitStorageTSFMidas
+  parent: SuitStorageBase
+  suffix: TSF Midas
+  components:
+  - type: StorageFill
+    contents:
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: ClothingOuterHardsuitTSFMidas
+      - id: ClothingMaskGasSecurity
+      - id: JetpackNfsdFilled
+      - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: SuitStorageTSFStealthMark1
+  parent: SuitStorageBase
+  suffix: TSF Stealth Mk.1
+  components:
+  - type: StorageFill
+    contents:
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: ClothingOuterHardsuitTSFStealthMark1
+      - id: ClothingMaskGasSecurity
+      - id: JetpackNfsdFilled
+      - id: ClothingShoesBootsMagSecurity
+      - id: PowerCellMedium
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: SuitStorageTSFPorshen
+  parent: SuitStorageBase
+  suffix: TSF Porshen
+  components:
+  - type: StorageFill
+    contents:
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: ClothingOuterHardsuitTSFPorshen
+      - id: ClothingMaskGasSecurity
+      - id: JetpackNfsdFilled
+      - id: ClothingShoesBootsMagSecurity
+  - type: AccessReader
+    access: [["Security"]]

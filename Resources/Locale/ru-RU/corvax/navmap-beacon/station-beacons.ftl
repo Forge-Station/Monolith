@@ -17,7 +17,6 @@ station-beacon-Corvax12 = Мед_1
 station-beacon-Corvax13 = Мед_2
 station-beacon-Corvax14 = Морг
 station-beacon-Corvax15 = Инженерный отдел
-station-beacon-Corvax16 = Колизей
 station-beacon-Corvax17 = Наём/Эксп_1
 station-beacon-Corvax18 = Наём/Эксп_2
 station-beacon-Corvax19 = Наём/Эксп_3

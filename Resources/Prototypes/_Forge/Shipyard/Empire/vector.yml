@@ -1,0 +1,30 @@
+- type: vessel
+  id: vector
+  parent: BaseVessel
+  name: EES Вектор
+  description: Вектор - средний инженерный шаттл для починки тех, кто был выведен из строя. Для боя не предназначен, но может продержаться какое-то время.
+  price: 102000
+  category: Medium
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/vector.yml
+  guidebookPage: Null
+  class:
+  - Engineering
+  engine:
+  - Bananium
+
+- type: gameMap
+  id: vector
+  mapName: 'EES Вектор'
+  mapPath: /Maps/_Forge/Shuttles/Empire/vector.yml
+  minPlayers: 0
+  stations:
+    vector:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'EES Вектор{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

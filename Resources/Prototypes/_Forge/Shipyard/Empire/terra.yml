@@ -1,0 +1,30 @@
+- type: vessel
+  id: terra
+  parent: BaseVessel
+  name: EMF Терра
+  description: Небольшой шаттл, оснащенный двумя автопушками, лазерным вооружением и ЭМИ-ракетами. На борту есть небольшая кухня и хим. лаборатория.
+  price: 75000
+  category: Small
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/terra.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: terra
+  mapName: 'EMF Терра'
+  mapPath: /Maps/_Forge/Shuttles/Empire/terra.yml
+  minPlayers: 0
+  stations:
+    terra:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'EMF Терра{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

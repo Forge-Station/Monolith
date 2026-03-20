@@ -1,0 +1,30 @@
+- type: vessel
+  id: ciclone
+  parent: BaseVessel
+  name: ESF Циклон
+  description: Циклон - малый шаттл для быстрого прилёта в зону боевых действий или же патруля сектора в одиночку. Отличный вариант для обездвиживания шаттлов врага, или же для тех, кто опоздал на сражение.
+  price: 70000
+  category: Small
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/ciclone.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: ciclone
+  mapName: 'ESF Циклон'
+  mapPath: /Maps/_Forge/Shuttles/Empire/ciclone.yml
+  minPlayers: 0
+  stations:
+    ciclone:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'ESF Циклон{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

@@ -170,15 +170,6 @@
 
 - type: entity
   parent: DefaultStationBeacon
-  id: DefaultStationBeaconFrontierCorvax16
-  suffix: Corvax Колизей
-  components:
-  - type: NavMapBeacon
-    defaultText: station-beacon-Corvax16
-    color: "#FFA07AFF"
-
-- type: entity
-  parent: DefaultStationBeacon
   id: DefaultStationBeaconFrontierCorvax17
   suffix: Corvax Наём/Эксп_1
   components:

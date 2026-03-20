@@ -1,0 +1,30 @@
+- type: vessel
+  id: striz
+  parent: BaseVessel
+  name: EFS Стриж
+  description: Стриж - средний шаттл для тех, кто не боится врагов и готов биться до конца . Хорошая мобильность, но задних ход оставляет желать лучшего.
+  price: 59000
+  category: Small
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/striz.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: striz
+  mapName: 'EFS Стриж'
+  mapPath: /Maps/_Forge/Shuttles/Empire/striz.yml
+  minPlayers: 0
+  stations:
+    striz:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'EFS Стриж{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

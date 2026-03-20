@@ -41,7 +41,7 @@
     - 0,0,7,4
 
 - type: entity
-  parent: [NFClothingBackpack, BaseC3Contraband, ContrabandClothing]
+  parent: [ClothingBackpack, BaseC3Contraband, ContrabandClothing]
   id: ClothingBackpackRenegade
   name: backpack renegade
   suffix: Ренегаты
@@ -50,7 +50,4 @@
   - type: Sprite
     sprite: Forge/Clothing/Back/Backpacks/renegade.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.1
-  - type: Storage
-    grid:
-    - 0,0,7,4
+    damageCoefficient: 0.9

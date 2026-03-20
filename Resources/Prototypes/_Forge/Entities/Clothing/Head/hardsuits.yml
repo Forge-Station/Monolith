@@ -124,3 +124,174 @@
     pulseTime: 3
     isEquipment: true
     toggleAction: PulseThermalVision
+
+# region Renegates
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitRenegatebsii20
+  name: BSII-20 "Requiem" helmet
+  description: The interchangeable helmet system for the majority of BSII-20 hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/renegatelight.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/renegatelight.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitRenegatebsii30
+  name: BSII-30 "Locksmith" helmet
+  description: The interchangeable helmet system for the majority of BSII-20 hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/renegatearmed.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/renegatearmed.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons ]
+  id: ClothingHeadHelmetHardsuitRenegatecriii200
+  name: CRIII-200 "Bug" helmet
+  description: The interchangeable helmet system for the majority of CRIII-200 hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/renegatecommand.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/renegatecommand.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons ]
+  id: ClothingHeadHelmetHardsuitRenegateoiii18
+  name: OIII-18 "Omega" helmet
+  description: The interchangeable helmet system for the majority of OIII-18 hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/renegateadvanced.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/renegateadvanced.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons ]
+  id: ClothingHeadHelmetHardsuitRenegateyiv3020
+  name: YIV3020 "Svyatogor" helmet
+  description: The interchangeable helmet system for the majority of YIV3020 hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/renegatejuggernaut.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/renegatejuggernaut.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide

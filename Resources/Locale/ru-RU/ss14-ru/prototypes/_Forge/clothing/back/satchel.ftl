@@ -4,3 +4,5 @@ ent-ClothingBackpackSatchelSyndicateMed = медициская сумка син
     .desc = Приятная на ощупь красная-черная сумка. С белым крестом.
 ent-ClothingBackpackSatchelSyndicate = сумка синдиката
     .desc = Приятная на ощупь красная-черная сумка.
+ent-ClothingBackpackSatchelRenegade = сумка ренегатов
+    .desc = Удобная, мало весит и невероятно стильная.

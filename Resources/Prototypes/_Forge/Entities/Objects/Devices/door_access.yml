@@ -37,3 +37,19 @@
   components:
   - type: AccessReader
     access: [["EmpireDiplomacy"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsRenegate
+  suffix: Ренегаты, Locked
+  components:
+  - type: AccessReader
+    access: [["Renegate"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsRenegateOfficer
+  suffix: Ренегаты, Locked
+  components:
+  - type: AccessReader
+    access: [["RenegateOfficer"]]

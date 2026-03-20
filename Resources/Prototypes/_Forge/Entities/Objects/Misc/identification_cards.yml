@@ -49,3 +49,89 @@
     - state: idemplord
   - type: PresetIdCard
     job: Praefect
+
+#region Renegates
+
+- type: entity
+  parent: IDCardStandard
+  id: RenegateBaronIDCard
+  suffix: Ренегаты
+  name: renegates baron ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: renegate
+    - state: idrenbaron
+  - type: PresetIdCard
+    job: Baron
+
+- type: entity
+  parent: IDCardStandard
+  id: RenegateDraftsmanIDCard
+  suffix: Ренегаты
+  name: renegates draftsman ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: renegate
+    - state: idrendraftsman
+  - type: PresetIdCard
+    job: Draftsman
+
+- type: entity
+  parent: IDCardStandard
+  id: RenegateOverseerIDCard
+  suffix: Ренегаты
+  name: renegates overseer ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: renegate
+    - state: idrenoverseer
+  - type: PresetIdCard
+    job: Overseer
+
+- type: entity
+  parent: IDCardStandard
+  id: RenegateQuackIDCard
+  suffix: Ренегаты
+  name: renegates quack ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: renegate
+    - state: idrenquack
+  - type: PresetIdCard
+    job: Quack
+
+- type: entity
+  parent: IDCardStandard
+  id: RenegateForemanIDCard
+  suffix: Ренегаты
+  name: renegates foreman ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: renegate
+    - state: idrenforeman
+  - type: PresetIdCard
+    job: Foreman
+
+- type: entity
+  parent: IDCardStandard
+  id: RenegateFlunkyIDCard
+  suffix: Ренегаты
+  name: renegates flunky ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: renegate
+    - state: idrenflunky
+  - type: PresetIdCard
+    job: Flunky

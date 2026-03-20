@@ -2,7 +2,10 @@
   parent: AirlockHatch
   id: AirlockHatchRenegades
   name: airtight hatch
-  suffix: Ренегаты
+  suffix: Ренегаты, Locked
   components:
   - type: Sprite
     sprite: Forge/Structures/Doors/Hatch/ren_hatch.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRenegate ]

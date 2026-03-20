@@ -1,0 +1,12 @@
+# region Renegates
+- type: entity
+  parent: [UnsensoredClothingUniformBase]
+  suffix: Ренегаты
+  id: ClothingUniformDressRenegates
+  name: renegates dress
+  description: Uniform for elite syndicate operatives performing tactical operations in deep space.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Dresses/renegatedress.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Dresses/renegatedress.rsi

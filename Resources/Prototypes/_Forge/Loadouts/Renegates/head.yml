@@ -1,0 +1,19 @@
+- type: loadout
+  id: RenegateHelmet
+  equipment:
+    head: ClothingHeadHelmetRenegate
+
+- type: loadout
+  id: RenegateBeret
+  equipment:
+    head: ClothingHeadHatRenegateBeret
+
+- type: loadout
+  id: RenegatePadHelm
+  equipment:
+    head: ClothingHeadRenegatePadHelm
+
+- type: loadout
+  id: RenegateEars
+  equipment:
+   head: ClothingHeadHatRenegatesCatEars

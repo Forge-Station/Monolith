@@ -27,3 +27,12 @@ ent-ClothingUniformJumpsuitEmpireCommanderFormal = парадная команд
     .desc = Парадная форма командования Имперской Гвардии, предназначенная для церемоний и официальных приёмов.
 ent-ClothingUniformJumpsuitEmpireInq = униформа эклезиарха
     .desc = Тёмный свитер в расцветке карательного отряда. Вроде и свитер, а встреча с ним редко согревает.
+
+ent-ClothingUniformJumpsuitRenegates = униформа ренегатов
+    .desc = Обычная форма, лишённая каких либо датчиков.
+ent-ClothingUniformJumpskirtRenegates = юбка-комбинезон ренегатов
+    .desc = Юбка лишённая датчиков.
+ent-ClothingUniformDressRenegates = платье ренегатов
+    .desc = Зачем? С другой стороны, оно удобное.
+ent-ClothingUniformSuitRenegates = комбинезон ренегатов
+    .desc = Штабная вариация униформы восставших колоний.

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Made by BombasterDS - https://github.com/MetalSage/space-stories-archive/commit/26812e79c19c5f998bcbc445afbdceea625bc887, pda-highcommand based on syndi PDA and drawn by SolsticeOfTheWinter, pda-syndi-agent drawn by Ubaser",
+  "copyright": "Made by BombasterDS - https://github.com/MetalSage/space-stories-archive/commit/26812e79c19c5f998bcbc445afbdceea625bc887, pda-highcommand based on syndi PDA and drawn by SolsticeOfTheWinter, pda-syndi-agent drawn by Ubaser, pda-renegate by sodakent (discord)",
   "size": {
     "x": 32,
     "y": 32
@@ -42,6 +42,15 @@
 	},
 	{
 	  "name": "pda-lord"
+	},
+	{
+	  "name": "pda-renegate"
+	},
+	{
+	  "name": "pda-renegate-adv"
+	},
+	{
+	  "name": "pda-renegate-com"
 	},
     {
       "name": "pda",

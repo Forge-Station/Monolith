@@ -1,0 +1,44 @@
+- type: loadout
+  id: ClothingHeadsetRenegade
+  equipment:
+    ears: ClothingHeadsetRenegade
+
+- type: loadoutGroup
+  id: RenegateEars
+  name: loadout-group-contractor-ears
+  hidden: true # No point in showing this, it gets auto-selected.
+  minLimit: 1
+  loadouts:
+  - ClothingHeadsetRenegade
+  fallbacks:
+  - ClothingHeadsetRenegade
+
+- type: loadout
+  id: ClothingHeadsetRenegadeTech
+  equipment:
+    ears: ClothingHeadsetRenegadeTech
+
+- type: loadoutGroup
+  id: RenegateAdvEars
+  name: loadout-group-contractor-ears
+  hidden: true # No point in showing this, it gets auto-selected.
+  minLimit: 1
+  loadouts:
+  - ClothingHeadsetRenegadeTech
+  fallbacks:
+  - ClothingHeadsetRenegadeTech
+
+- type: loadout
+  id: ClothingHeadsetRenegadedCom
+  equipment:
+    ears: ClothingHeadsetRenegadedCom
+
+- type: loadoutGroup
+  id: RenegateComEars
+  name: loadout-group-contractor-ears
+  hidden: true # No point in showing this, it gets auto-selected.
+  minLimit: 1
+  loadouts:
+  - ClothingHeadsetRenegadedCom
+  fallbacks:
+  - ClothingHeadsetRenegadedCom

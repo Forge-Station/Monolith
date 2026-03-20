@@ -1,0 +1,24 @@
+- type: accessLevel
+  id: Renegate
+  name: id-card-access-level-renegate
+
+- type: accessLevel
+  id: RenegateOfficer
+  name: id-card-access-level-renegate-officer
+
+- type: accessGroup
+  id: GeneralRenegateAccess
+  tags:
+  - Maintenance
+  - External
+  - Renegate
+  - Mercenary
+
+- type: accessGroup
+  id: CommandRenegateAccess
+  tags:
+  - Maintenance
+  - External
+  - Mercenary
+  - Renegate
+  - RenegateOfficer

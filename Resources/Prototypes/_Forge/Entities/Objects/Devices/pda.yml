@@ -109,3 +109,162 @@
     attachedToSuit: true # Mono
   - type: PdaBorderColor
     borderColor: "#ab7a52"
+
+#region Renegates
+- type: entity
+  parent: BasePDA
+  id: BaseRenegatePDA
+  description: A basic personal computer for access restriction and organization, manufactured in the Holy Empire of Vermillion's.
+  abstract: true
+  components:
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - BountyContractsCartridge
+    - AstroNavCartridge
+  - type: Sprite
+    sprite: Forge/Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - sprite: _Mono/Objects/Devices/pda.rsi
+      state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - sprite: _Mono/Objects/Devices/pda.rsi
+      state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Icon
+    sprite: Forge/Objects/Devices/pda.rsi
+    state: pda
+
+- type: entity
+  parent: BaseRenegatePDA
+  id: RenegatePDA
+  name: renegates flunky PDA
+  suffix: Ренегаты
+  components:
+  - type: Pda
+    id: RenegateFlunkyIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-renegate
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#070707"
+
+- type: entity
+  parent: BaseRenegatePDA
+  id: RenegateQuackPDA
+  name: renegates quack PDA
+  suffix: Ренегаты
+  components:
+  - type: Pda
+    id: RenegateQuackIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-renegate-adv
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#070707"
+
+- type: entity
+  parent: BaseRenegatePDA
+  id: RenegateForemanPDA
+  name: renegates foreman PDA
+  suffix: Ренегаты
+  components:
+  - type: Pda
+    id: RenegateForemanIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-renegate-adv
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#070707"
+
+- type: entity
+  parent: BaseRenegatePDA
+  id: RenegateOverseerPDA
+  name: renegates overseer PDA
+  suffix: Ренегаты
+  components:
+  - type: Pda
+    id: RenegateOverseerIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-renegate-com
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#070707"
+
+- type: entity
+  parent: BaseRenegatePDA
+  id: RenegateDraftsmanPDA
+  name: renegates draftsman PDA
+  suffix: Ренегаты
+  components:
+  - type: Pda
+    id: RenegateDraftsmanIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-renegate-com
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#070707"
+
+- type: entity
+  parent: BaseRenegatePDA
+  id: RenegateBaronPDA
+  name: renegates baron PDA
+  suffix: Ренегаты
+  components:
+  - type: Pda
+    id: RenegateBaronIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-renegate-com
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#070707"

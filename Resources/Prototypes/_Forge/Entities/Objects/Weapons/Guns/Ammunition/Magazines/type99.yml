@@ -1,0 +1,168 @@
+# Empty mags
+- type: entity
+  id: BaseMagazinetype99762x51mm
+  name: "magazine (7.62x51mm FMJ)"
+  parent: [ BaseItem, RecyclableItemSteelTiny ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - Magazinetype99762x51mmFMJ
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - Cartridge762x51mmFMJ
+    proto: Cartridge762x51mmFMJ
+    capacity: 45
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/type99mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+# Magazines
+- type: entity
+  id: Magazinetype99762x51mmFMJ
+  name: "magazine (7.62x51mm FMJ)"
+  parent: BaseMagazinetype99762x51mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x51mmFMJ
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: Magazinetype99762x51mmEmpty
+  name: "magazine (7.62x51mm any)"
+  suffix: empty
+  parent: Magazinetype99762x51mmFMJ
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: Magazinetype99762x51mmPractice
+  name: "magazine (7.62x51mm practice)"
+  parent: BaseMagazinetype99762x51mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x51mmPractice
+  - type: Sprite
+    layers:
+    - state: practice
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: Magazinetype99762x51mmUranium
+  name: "magazine (7.62x51mm uranium)"
+  parent: BaseMagazinetype99762x51mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x51mmUranium
+  - type: Sprite
+    layers:
+    - state: uranium
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: Magazinetype99762x51mmIncendiary
+  name: "magazine (7.62x51mm incendiary)"
+  parent: Magazinetype99762x51mmFMJ
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x51mmIncendiary
+  - type: Sprite
+    layers:
+    - state: red
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: Magazinetype99762x51mmRubber
+  name: "magazine (7.62x51mm rubber)"
+  parent: Magazinetype99762x51mmFMJ
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x51mmRubber
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/type99mag.rsi
+    layers:
+    - state: rubber
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+
+# Mono AP syst
+#anti-flesh:
+- type: entity
+  id: Magazinetype99762x51mmHP
+  name: "magazine (7.62x51mm hollow-point)"
+  parent: BaseMagazinetype99762x51mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x51mmHP
+  - type: Sprite
+    layers:
+    - state: HP
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: Magazinetype99762x51mmRIP
+  name: "magazine (7.62x51mm RIP)"
+  parent: BaseMagazinetype99762x51mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x51mmRIP
+  - type: Sprite
+    layers:
+    - state: RIP
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+#armor-piercing:
+
+- type: entity
+  id: Magazinetype99762x51mmPlasteelAP
+  name: "magazine (7.62x51mm AP)"
+  parent: BaseMagazinetype99762x51mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x51mmPlasteelAP
+  - type: Sprite
+    layers:
+    - state: plasteelAP
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

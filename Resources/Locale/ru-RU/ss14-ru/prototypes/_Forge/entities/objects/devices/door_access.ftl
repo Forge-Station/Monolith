@@ -13,3 +13,8 @@ ent-DoorElectronicsEmpireCommander = { ent-DoorElectronics }
 ent-DoorElectronicsEmpireDiplomacy = { ent-DoorElectronics }
     .suffix = Forge, СИВ, Консул
     .desc = { ent-DoorElectronics.desc }
+
+ent-DoorElectronicsRenegate = { ent-DoorElectronics }
+    .suffix = Forge, Ренегаты
+ent-DoorElectronicsRenegateOfficer = { ent-DoorElectronics }
+    .suffix = Forge, Ренегаты, Командный

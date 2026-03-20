@@ -1,0 +1,51 @@
+- type: loadoutGroup
+  id: RenegateFirearm
+  name: loadout-group-weapon
+  minLimit: 1
+  loadouts:
+  - FactionAr220Loadout
+  - FactionOar308Loadout
+  - FactionDefensie12Loadout
+  - FactionEnergyGunLoadout
+  fallbacks:
+  - FactionAr220Loadout
+
+- type: loadoutGroup
+  id: RenegateMag
+  name: loadout-group-magazine
+  minLimit: 1
+  loadouts:
+  - Faction556x45mmAmmoLoadout #AR-220
+  - Faction762x51mmAmmoLoadout #OAR-308
+  - Faction12GaugeAmmoLoadout #Defensie-12
+  - FactionRechargerLoadout #Energy
+  fallbacks:
+  - Faction556x45mmAmmoLoadout #AR-220
+
+- type: loadout
+  id: FactionAr220Loadout
+  price: 0
+  storage:
+    back:
+    - WeaponRifleAR220
+
+- type: loadout
+  id: FactionOar308Loadout
+  price: 0
+  storage:
+    back:
+    - WeaponRifleoar308
+
+- type: loadout
+  id: FactionDefensie12Loadout
+  price: 0
+  storage:
+    back:
+    - WeaponShotgunDefensie
+
+- type: loadout
+  id: Faction12GaugeAmmoLoadout
+  price: 0
+  storage:
+    back:
+    - AmmoBox12_gaugeBuckshot

@@ -1,0 +1,23 @@
+- type: loadout
+  id: RenegateClothingUniformJumpsuitRenegate
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitRenegates
+
+- type: loadout
+  id: RenegateClothingUniformSuitRenegate
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformSuitRenegates
+
+- type: loadout
+  id: RenegateClothingUniformJumpskirtRenegate
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtRenegates
+
+- type: loadout
+  id: RenegateClothingUniformDressRenegates
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformDressRenegates

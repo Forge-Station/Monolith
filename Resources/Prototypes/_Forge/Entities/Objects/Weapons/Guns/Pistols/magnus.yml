@@ -1,6 +1,7 @@
 - type: entity
   name: NEK'o Magnus (.45 magnum)
   parent: BaseWeaponRevolver
+  suffix: Ренегаты
   id: WeaponRevolverMagnus
   description: A revolver. Powerful, spectacular. Like any good revolver.
   components:

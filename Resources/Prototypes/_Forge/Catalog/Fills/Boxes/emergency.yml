@@ -1,0 +1,29 @@
+- type: entity
+  parent: BoxBaseSurvivalMono
+  id: RenegateBoxSurvivalMonoOxygenExtended
+  suffix: Oxygen
+  components:
+  - type: StorageFill
+    contents:
+      - id: DoubleEmergencyOxygenTankFilled
+      - id: SpaceMedipen
+      - id: EmergencyMedipen
+      - id: ClothingMaskGasRenegate
+      - id: MonoMRE # Mono - replace PSB and water bottle w/ MRE
+      - id: CrowbarPocket
+      - id: HandHeldMassScanner
+
+- type: entity
+  parent: BoxBaseSurvivalMono
+  id: RenegateBoxSurvivalMonoNitrogenExtended
+  suffix: Nitrogen
+  components:
+  - type: StorageFill
+    contents:
+      - id: DoubleEmergencyNitrogenTankFilled
+      - id: SpaceMedipen
+      - id: EmergencyMedipen
+      - id: ClothingMaskGasRenegate
+      - id: MonoMRE # Mono - replace PSB and water bottle w/ MRE
+      - id: CrowbarPocket
+      - id: HandHeldMassScanner

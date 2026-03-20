@@ -1,0 +1,11 @@
+- type: entity
+  parent: ClothingHeadHelmetMercenary
+  id: ClothingHeadHelmetRenegate
+  name: renegates combat helmet
+  suffix: Ренегаты
+  description: The combat helmet is commonly used by renegates, is strong, light and smells like gunpowder and the urban sprawl.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Helmets/renegates.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Helmets/renegates.rsi

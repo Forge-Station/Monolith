@@ -1,3 +1,4 @@
+# region Empire
 - type: jobIcon
   parent: JobIcon
   id: JobIconEmpireArbiter
@@ -86,3 +87,53 @@
     sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_tech
   jobName: forge-job-name-technican
+
+# region Renegates
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconRenegateBaron
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: ren_baron
+  jobName: forge-job-name-baron
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconRenegateDraftsman
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: ren_draftsman
+  jobName: forge-job-name-draftsman
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconRenegateOverseer
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: ren_overseer
+  jobName: forge-job-name-overseer
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconRenegateForeman
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: ren_foreman
+  jobName: forge-job-name-foreman
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconRenegateQuack
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: ren_quack
+  jobName: forge-job-name-quack
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconRenegateFlunky
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: ren_flunky
+  jobName: forge-job-name-flunky

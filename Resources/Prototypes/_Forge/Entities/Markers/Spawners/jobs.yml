@@ -68,3 +68,64 @@
   components:
   - type: SpawnPoint
     job_id: Neophyte
+
+#region Renegates
+- type: entity
+  id: ForgeSpawnPointRenegateFlunky
+  parent: SpawnPointJobBase
+  name: spawn point Flunky
+  suffix: Ренегаты
+  components:
+  - type: SpawnPoint
+    job_id: Flunky
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: Forge/Structures/Decoration/banner.rsi
+      state: banner_renegate
+
+- type: entity
+  id: ForgeSpawnPointRenegateQuack
+  parent: ForgeSpawnPointRenegateFlunky
+  name: spawn point Quack
+  suffix: Ренегаты
+  components:
+  - type: SpawnPoint
+    job_id: Quack
+
+- type: entity
+  id: ForgeSpawnPointRenegateForeman
+  parent: ForgeSpawnPointRenegateFlunky
+  name: spawn point Foreman
+  suffix: Ренегаты
+  components:
+  - type: SpawnPoint
+    job_id: Foreman
+
+- type: entity
+  id: ForgeSpawnPointRenegateOverseer
+  parent: ForgeSpawnPointRenegateFlunky
+  name: spawn point Overseer
+  suffix: Ренегаты
+  components:
+  - type: SpawnPoint
+    job_id: Overseer
+
+- type: entity
+  id: ForgeSpawnPointRenegateDraftsman
+  parent: ForgeSpawnPointRenegateFlunky
+  name: spawn point Draftsman
+  suffix: Ренегаты
+  components:
+  - type: SpawnPoint
+    job_id: Draftsman
+
+- type: entity
+  id: ForgeSpawnPointRenegateBaron
+  parent: ForgeSpawnPointRenegateFlunky
+  name: spawn point Baron
+  suffix: Ренегаты
+  components:
+  - type: SpawnPoint
+    job_id: Baron

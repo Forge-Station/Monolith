@@ -54,3 +54,45 @@
   - type: HideLayerClothing
     slots:
     - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRenegateBeret
+  name: renegate beret
+  suffix: Ренегаты
+  description: A black beret with a white star emblem. For those that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/renegateberet.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/renegateberet.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadRenegatePadHelm
+  name: renegates padded helmet
+  suffix: Ренегаты
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/renegatespadhelm.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/renegatespadhelm.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRenegatesCatEars
+  name: cat ears
+  description: "NYAH!"
+  suffix: Ренегаты
+  components:
+  - type: Tag
+    tags: [] # ignore "WhitelistChameleon" tag
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/renegatesears.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/renegatesears.rsi
+  - type: AddAccentClothing
+    accent: OwOAccent

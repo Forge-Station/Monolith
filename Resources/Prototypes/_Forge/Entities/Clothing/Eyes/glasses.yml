@@ -44,3 +44,15 @@
     pulseTime: 2
     isEquipment: true
     toggleAction: PulseThermalVision
+
+- type: entity
+  parent: [ ClothingEyesBase, ShowSecurityIcons ]
+  id: ClothingEyesGlassesRenegate
+  name: renegates ballistic goggles
+  suffix: Ренегаты
+  description: Standard ballistic goggles mostly used by Renegates.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/renegates.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/renegates.rsi

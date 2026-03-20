@@ -37,6 +37,76 @@
     minAngle: -1
     maxAngle: -4
 
+- type: entity
+  name: BaseWeaponShotgunRevolver
+  parent: BaseItem
+  id: BaseWeaponShotgunRevolver
+  description: A rooty tooty point and shooty.
+  abstract: true
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Large
+    shape:
+    - 1,1,1,1
+    - 1,1,1,1
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Revolvers/deckard.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+    - Belt
+  - type: AmmoCounter
+  - type: Gun
+    selectedMode: SemiAuto
+    fireRate: 2
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/revolver.ogg
+    projectileSpeed: 45 # Mono
+  - type: UseDelay
+    delay: 0.66
+  - type: ContainerContainer
+    containers:
+      revolver-ammo: !type:Container
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+        - ShellShotgun12_gaugeBuckshot
+        - ShellShotgun12_gaugeLight
+        - Cartridge
+    mayTransfer: true # Frontier
+    proto: ShellShotgun12_gaugeBuckshot
+    capacity: 12
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+    soundEject:
+      path: /Audio/Weapons/Guns/MagOut/revolver_magout.ogg
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
+  - type: StaticPrice
+    price: 50
+  - type: ItemTax # Mono
+    taxAccounts:
+      nfsd: 0.2
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
+      state: all
+  # Goobstation edit start
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RevolversPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RevolversDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: RevolversDrop
+  # Goobstation edit end
+
 #region chamber
 - type: entity
   id: ForgeBaseWeaponShotgunChamber50

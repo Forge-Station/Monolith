@@ -53,6 +53,12 @@
             PirateFirstMate: [ -1, -1]
             PDVDenasvar: [ -1, -1] #Mono
             Pirate: [ -1, -1]
+            Flunky: [ -1, -1]
+            Quack: [ -1, -1]
+            Foreman: [ -1, -1]
+            Draftsman: [ -1, -1]
+            Overseer: [ -1, -1]
+            Baron: [ -1, -1]
             PDVInfiltrator: [ -1, -1] # Mono]
             # Prisoner: [ -1, -1] # Mono
             # USSPCommissar: [ -1, -1]

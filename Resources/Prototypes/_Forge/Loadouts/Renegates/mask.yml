@@ -1,0 +1,5 @@
+- type: loadout
+  id: RenegateGasmask
+  storage:
+    back:
+    - ClothingMaskGasRenegate

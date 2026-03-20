@@ -1,5 +1,6 @@
 # departament's
 department-Empire = Священная Империя Вермиллионов
+department-Renegates = Восставшие колонии Ренегатов
 
 # Outpost
 forge-job-name-outpostmedic = Врач АФ
@@ -37,3 +38,11 @@ forge-job-name-neophyte = Неофит
 forge-job-name-dekuron = Декурнон
 forge-job-name-apotek = Апотекарий
 forge-job-name-technican = Техножрец
+
+# Renegates
+forge-job-name-baron = Барон
+forge-job-name-draftsman = Чертёжник
+forge-job-name-overseer = Смотрящий
+forge-job-name-quack = Костоправ
+forge-job-name-foreman = Штейгер
+forge-job-name-flunky = Шестёрка

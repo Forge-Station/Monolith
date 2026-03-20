@@ -1,0 +1,19 @@
+- type: loadout
+  id: RenegateCloak
+  equipment:
+    neck: ClothingNeckCloakRenegade
+
+- type: loadout
+  id: RenegatePoncho
+  equipment:
+    neck: ClothingNeckCloakRenegadePoncho
+
+- type: loadout
+  id: RenegateCloakCaptain
+  equipment:
+    neck: ClothingNeckCloakRenegadeCaptain
+
+- type: loadout
+  id: RenegateMantle
+  equipment:
+    neck: ClothingNeckMantleRenegade

@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Create by autsaider_m, StRep Eifall, overlord by goster, emp_ icons by v6st for Forge",
+    "copyright": "Create by autsaider_m, StRep Eifall, overlord by goster, emp_ icons by v6st, ren_ icons by sodakent (discord) for Forge",
 
     "size": {
         "x": 8,
@@ -79,6 +79,24 @@
         },
         {
             "name": "emp_tech"
+        },
+        {
+            "name": "ren_baron"
+        },
+        {
+            "name": "ren_draftsman"
+        },
+        {
+            "name": "ren_overseer"
+        },
+        {
+            "name": "ren_foreman"
+        },
+        {
+            "name": "ren_quack"
+        },
+        {
+            "name": "ren_flunky"
         }
     ]
 }

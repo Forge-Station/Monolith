@@ -1,0 +1,17 @@
+- type: loadout
+  id: RenegatesCombatWebbing
+  name: chest rig
+  equipment:
+    belt: ClothingBeltWebbingsNormalRenegate
+
+- type: loadout
+  id: RenegatesCombatWebbingLarge
+  name: large chest rig
+  equipment:
+    belt: ClothingBeltWebbingsBigRenegate
+
+- type: loadout
+  id: Renegatesbandolier
+  name: bandolier
+  equipment:
+    belt: ClothingBeltBandolier

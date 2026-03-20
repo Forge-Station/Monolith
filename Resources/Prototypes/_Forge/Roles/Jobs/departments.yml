@@ -15,6 +15,20 @@
   - Neophyte
 
 - type: department
+  id: Renegates
+  name: department-Renegates
+  description: department-Renegates-description
+  color: "#111111"
+  weight: 50
+  roles:
+  - Baron
+  - Draftsman
+  - Overseer
+  - Quack
+  - Foreman
+  - Flunky
+  
+- type: department
   id: TSF
   name: department-TSF
   description: department-TSF-description

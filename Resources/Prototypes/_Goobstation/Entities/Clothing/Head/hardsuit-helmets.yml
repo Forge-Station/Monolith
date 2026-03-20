@@ -65,4 +65,3 @@
     - type: StealthOnMove
       passiveVisibilityRate: -0.4
       movementVisibilityRate: 0.4
-

@@ -1,0 +1,42 @@
+- type: job
+  id: Overseer
+  name: forge-job-name-overseer
+  description: forge-job-desc-overseer
+  playTimeTracker: JobOverseer
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 129600 # 36 hours
+    - !type:DepartmentTimeRequirement
+      department: Renegates
+      time: 64800 # 18 hours
+  alternateRequirementSets:
+    longerPlaytimeLessSec:
+    - !type:RoleTimeRequirement
+      role: JobDraftsman
+      time: 21600 # 6 hours
+  startingGear: OverseerGear
+  alwaysUseSpawner: true
+  icon: JobIconRenegateOverseer
+  requireAdminNotify: true
+  supervisors: job-supervisors-baron
+  weight: 50
+  displayWeight: 50
+  canBeAntag: false
+  setPreference: true
+  access:
+  - RenegateOfficer
+  accessGroups:
+  - CommandRenegateAccess
+  # special:
+  # - !type:AddImplantSpecial
+  #   implants: # Неизвестно
+  # - !type:AddComponentSpecial
+  #   components:
+  #     - type: CommandStaff
+  #     - type: PreventShipyardTitleOverwrite
+
+- type: startingGear
+  id: OverseerGear
+  equipment:
+    pocket1: WeaponRevolverMagnus
+    pocket2: EnergyCutlass

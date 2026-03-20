@@ -57,9 +57,4 @@
   - type: Sprite
     sprite: Forge/Clothing/Back/Satchels/renegade.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.1
-  - type: Storage
-    grid:
-    - 0,0,1,4
-    - 3,0,6,4
-    - 8,0,9,4
+    damageCoefficient: 0.9

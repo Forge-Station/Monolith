@@ -17,6 +17,8 @@
     stateBaseClosed: renegate_com
     stateDoorOpen: renegate_com_open
     stateDoorClosed: renegate_com_door
+  - type: AccessReader
+    access: [["RenegateOfficer"]]
 
 - type: entity
   id: LockerRenRnd
@@ -28,6 +30,8 @@
     stateBaseClosed: renegate_rnd
     stateDoorOpen: renegate_rnd_open
     stateDoorClosed: renegate_rnd_door
+  - type: AccessReader
+    access: [["RenegateOfficer"]]
 
 - type: entity
   id: LockerRenCom
@@ -39,6 +43,8 @@
     stateBaseClosed: renegate_idk
     stateDoorOpen: renegate_idk_open
     stateDoorClosed: renegate_idk_door
+  - type: AccessReader
+    access: [["RenegateOfficer"]]
 
 - type: entity
   id: LockerRenMed
@@ -50,6 +56,8 @@
     stateBaseClosed: renegate_med
     stateDoorOpen: renegate_med_open
     stateDoorClosed: renegate_med_door
+  - type: AccessReader
+    access: [["Renegate"]]
 
 - type: entity
   id: LockerRenSpec
@@ -61,6 +69,8 @@
     stateBaseClosed: renegate_salt
     stateDoorOpen: renegate_salt_open
     stateDoorClosed: renegate_salt_door
+  - type: AccessReader
+    access: [["Renegate"]]
 
 - type: entity
   id: LockerRen
@@ -72,6 +82,8 @@
     stateBaseClosed: renegate
     stateDoorOpen: renegate_open
     stateDoorClosed: renegate_door
+  - type: AccessReader
+    access: [["Renegate"]]
 
 # region Empire
 - type: entity

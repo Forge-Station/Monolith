@@ -620,3 +620,195 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.90
     sprintModifier: 0.90
+
+- type: entity
+  name: NEK'o AR-220 (5.56x45mm)
+  parent: BaseWeaponRifle
+  suffix: Ренегаты
+  id: WeaponRifleAR220
+  description: Mass-produced battle rifle. Reliable enough and decent; an image of two stars can be seen on the grip. Firing the 5.56x45mm round. Also accepts 6.8x52mm STANAG magazines to assist with standardization.
+  components:
+  - type: Item # Mono
+    size: Huge
+    sprite: Forge/Objects/Weapons/Guns/Rifles/ar220_inhands_32x.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Rifles/ar220.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Rifles/ar220_inhands_32x.rsi
+  - type: ChamberMagazineAmmoProvider # Mono
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/light_rifle_1.ogg # Mono
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine556x45mmFMJ # Mono
+        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/m16_magin.ogg # Mono
+        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/skm_magout.ogg # Mono
+        priority: 2
+        whitelist:
+          tags:
+            - Magazine68x52mmCaseless # Mono
+            - Magazine556x45mmFMJ # Mono
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge556x45mmFMJ # Mono
+        priority: 1
+        whitelist:
+          tags:
+            - Cartridge68x52mmCaseless # Mono
+            - Cartridge556x45mmFMJ # Mono
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice # Mono
+    price: 750
+
+- type: entity
+  name: NEK'o Gauss Rifle (5.56x45mm)
+  parent: BaseWeaponGaussRifle
+  suffix: Ренегаты
+  id: WeaponRifleGaussRifle
+  description: A prototype rifle. It accelerates bullets, but the acceleration device could very well be broken. A rare item, but in your case, it might even be useless.
+  components:
+  - type: Item # Mono
+    size: Huge
+    sprite: Forge/Objects/Weapons/Guns/Rifles/gauss_inhands_32x.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Rifles/gauss.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Rifles/gauss_inhands_32x.rsi
+  - type: ChamberMagazineAmmoProvider # Mono
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/dmr.ogg # Mono
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine556x45mmFMJ # Mono
+        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/m16_magin.ogg # Mono
+        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/skm_magout.ogg # Mono
+        priority: 2
+        whitelist:
+          tags:
+            - Magazine556x45mmFMJ # Mono
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge556x45mmFMJ # Mono
+        priority: 1
+        whitelist:
+          tags:
+            - Cartridge556x45mmFMJ # Mono
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice # Mono
+    price: 1000
+
+- type: entity
+  name: NEK'o OAR-308 (7.62x51mm)
+  parent: [BaseWeaponRifle, BaseGunWieldable]
+  suffix: Ренегаты
+  id: WeaponRifleoar308
+  description: A slightly outdated but reliable rifle. Previously used on Earth as assault rifle. Due to mass production, the ability to switch firing rates was removed from the design, but a modified variation of changing firing modes was added.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Rifles/oar308.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Large
+    sprite: Forge/Objects/Weapons/Guns/Rifles/oar308_inhands_32x.rsi
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Rifles/oar308_inhands_32x.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: GunWieldBonus
+    minAngle: -12
+    maxAngle: -18
+  - type: Gun
+    minAngle: 13
+    maxAngle: 20
+    angleIncrease: 5
+    angleDecay: 25
+    fireRate: 5.5
+    shotsPerBurst: 4
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    # Mono
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    # Mono end
+  - type: ChamberMagazineAmmoProvider
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine762x51mmFMJ
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - Magazine762x51mmFMJ
+            - Magazine762x51mmLowCapacityFMJ
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge762x51mmFMJ
+        priority: 1
+        whitelist:
+          tags:
+            - Cartridge762x51mmFMJ
+  - type: SpeedModifiedOnWield # Mono
+    walkModifier: 1
+    sprintModifier: 1
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 1300

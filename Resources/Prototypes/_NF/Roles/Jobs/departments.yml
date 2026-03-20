@@ -24,17 +24,17 @@
   - MailCarrier # nyano
   - SecurityGuard
 
-- type: department
-  id: Antag
-  name: department-Antag
-  description: department-NFAntag-description
-  color: "#DE3A3A"
-  weight: 115 # Mono
-  roles:
-  - PirateCaptain
-  - PirateFirstMate
-  - PDVDenasvar # Mono
-  - Pirate
-  - PDVInfiltrator # Mono
-  - PdvBorg # Mono
-  - Prisoner #nyano
+# - type: department
+  # id: Antag
+  # name: department-Antag
+  # description: department-NFAntag-description
+  # color: "#DE3A3A"
+  # weight: 115 # Mono
+  # roles:
+  # - PirateCaptain
+  # - PirateFirstMate
+  # - PDVDenasvar # Mono
+  # - Pirate
+  # - PDVInfiltrator # Mono
+  # - PdvBorg # Mono
+  # - Prisoner #nyano

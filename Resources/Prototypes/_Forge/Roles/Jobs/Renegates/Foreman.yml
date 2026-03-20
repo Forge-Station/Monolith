@@ -1,0 +1,42 @@
+- type: job
+  id: Foreman
+  name: forge-job-name-foreman
+  description: forge-job-desc-foreman
+  playTimeTracker: JobForeman
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 72000 # 20 hours
+    - !type:DepartmentTimeRequirement
+      department: Renegates
+      time: 18000 # 5 hours
+  startingGear: ForemanGear
+  alwaysUseSpawner: true
+  icon: JobIconRenegateForeman
+  requireAdminNotify: true
+  supervisors: job-supervisors-Draftsman
+  weight: 50
+  displayWeight: 50
+  canBeAntag: false
+  setPreference: true
+  access:
+  - Renegate
+  accessGroups:
+  - GeneralRenegateAccess
+  # special:
+  # - !type:AddImplantSpecial
+  #   implants: # Неизвестно
+  # - !type:AddComponentSpecial
+  #   components:
+  #     - type: CommandStaff
+  #     - type: PreventShipyardTitleOverwrite
+
+- type: startingGear
+  id: ForemanGear
+  # equipment:
+  #   ears:
+  #   belt:
+  #   pocket1:
+  #   pocket2:
+  # storage:
+  #   back:
+  #   - RadioHandheldNF

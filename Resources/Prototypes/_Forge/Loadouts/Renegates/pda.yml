@@ -1,0 +1,83 @@
+- type: loadout
+  id: RenegatePDA
+  equipment:
+    id: RenegatePDA
+
+- type: loadoutGroup
+  id: RenegatePDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - RenegatePDA
+  fallbacks:
+  - RenegatePDA
+
+- type: loadout
+  id: RenegateQuackPDA
+  equipment:
+    id: RenegateQuackPDA
+
+- type: loadoutGroup
+  id: RenegateQuackPDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - RenegateQuackPDA
+  fallbacks:
+  - RenegateQuackPDA
+
+- type: loadout
+  id: RenegateForemanPDA
+  equipment:
+    id: RenegateForemanPDA
+
+- type: loadoutGroup
+  id: RenegateForemanPDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - RenegateForemanPDA
+  fallbacks:
+  - RenegateForemanPDA
+
+- type: loadout
+  id: RenegateOverseerPDA
+  equipment:
+    id: RenegateOverseerPDA
+
+- type: loadoutGroup
+  id: RenegateOverseerPDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - RenegateOverseerPDA
+  fallbacks:
+  - RenegateOverseerPDA
+
+- type: loadout
+  id: RenegateDraftsmanPDA
+  equipment:
+    id: RenegateDraftsmanPDA
+
+- type: loadoutGroup
+  id: RenegateDraftsmanPDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - RenegateDraftsmanPDA
+  fallbacks:
+  - RenegateDraftsmanPDA
+
+- type: loadout
+  id: RenegateBaronPDA
+  equipment:
+    id: RenegateBaronPDA
+
+- type: loadoutGroup
+  id: RenegateBaronPDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - RenegateBaronPDA
+  fallbacks:
+  - RenegateBaronPDA

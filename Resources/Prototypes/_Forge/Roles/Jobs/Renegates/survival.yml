@@ -1,0 +1,20 @@
+#Survival boxes all replaced with mono versions with extended tanks.
+- type: loadout
+  id: RenegateBoxSurvivalNFOxygenExtended
+  name: extended-oxygen survival box
+  hideEffects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherNF
+  storage:
+    back:
+    - RenegateBoxSurvivalMonoOxygenExtended
+
+- type: loadout
+  id: RenegateBoxSurvivalNFNitrogenExtended
+  name: extended-nitrogen survival box
+  hideEffects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherNF
+  storage:
+    back:
+    - RenegateBoxSurvivalMonoNitrogenExtended

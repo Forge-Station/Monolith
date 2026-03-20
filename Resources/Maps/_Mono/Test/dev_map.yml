@@ -7891,6 +7891,48 @@ entities:
     - type: Transform
       pos: -4.5,2.5
       parent: 2
+- proto: ForgeSpawnPointRenegateFlunky
+  entities:
+  - uid: 1878
+    components:
+    - type: Transform
+      pos: -4.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointRenegateQuack
+  entities:
+  - uid: 1879
+    components:
+    - type: Transform
+      pos: -4.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointRenegateForeman
+  entities:
+  - uid: 1880
+    components:
+    - type: Transform
+      pos: -4.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointRenegateOverseer
+  entities:
+  - uid: 1881
+    components:
+    - type: Transform
+      pos: -4.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointRenegateDraftsman
+  entities:
+  - uid: 1882
+    components:
+    - type: Transform
+      pos: -4.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointRenegateBaron
+  entities:
+  - uid: 1883
+    components:
+    - type: Transform
+      pos: -4.5,2.5
+      parent: 2
 - proto: SpawnPointPilot
   entities:
   - uid: 1136

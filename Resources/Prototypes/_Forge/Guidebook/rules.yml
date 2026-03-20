@@ -1,0 +1,140 @@
+- type: guideEntry
+  id: ForgeRuleset
+  name: guide-entry-frontier-rules
+  text: "/ServerInfo/_Forge/Rules/CorvaxFrontierRuleset.xml"
+  priority: -2
+  ruleEntry: true
+  children:
+    - CorvaxFrontierRuleZERO
+    - CorvaxFrontierRule1
+    - CorvaxFrontierRule2
+    - CorvaxFrontierRule2_1
+    - CorvaxFrontierRule2_2
+    - CorvaxFrontierRule3
+    - CorvaxFrontierRule3_1
+    - CorvaxFrontierRule3_2
+    - CorvaxFrontierRule4
+    - CorvaxFrontierRule4_1
+    - CorvaxFrontierRule4_2
+    - CorvaxFrontierRule5
+    - CorvaxFrontierRule6
+    - CorvaxFrontierRule7
+    - CorvaxFrontierRule7_1
+    - CorvaxFrontierRule7_2
+    - CorvaxFrontierRule8
+    - CorvaxFrontierRule9
+    - CorvaxFrontierRule10
+
+- type: guideEntry
+  id: CorvaxFrontierRuleZERO
+  name: guide-entry-frontier-rule-zero-tolerance
+  text: "/ServerInfo/_Forge/Rules/0_Admin.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule1
+  name: guide-entry-frontier-rule-1
+  text: "/ServerInfo/_Forge/Rules/1_Griffing.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule2
+  name: guide-entry-frontier-rule-2
+  text: "/ServerInfo/_Forge/Rules/2_Escalation.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule2_1
+  name: guide-entry-frontier-rule-2.1
+  text: "/ServerInfo/_Forge/Rules/2-1_Escalation.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule2_2
+  name: guide-entry-frontier-rule-2.2
+  text: "/ServerInfo/_Forge/Rules/2-2_FactionConflicts.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule3
+  name: guide-entry-frontier-rule-3
+  text: "/ServerInfo/_Forge/Rules/3_Atmosphere.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule3_1
+  name: guide-entry-frontier-rule-3.1
+  text: "/ServerInfo/_Forge/Rules/3-1_Respect.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule3_2
+  name: guide-entry-frontier-rule-3.2
+  text: "/ServerInfo/_Forge/Rules/3-2_RoundEnd.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule4
+  name: guide-entry-frontier-rule-4
+  text: "/ServerInfo/_Forge/Rules/4_CharacterBehavior.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule4_1
+  name: guide-entry-frontier-rule-4.1
+  text: "/ServerInfo/_Forge/Rules/4-1_CoopMeta.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule4_2
+  name: guide-entry-frontier-rule-4.2
+  text: "/ServerInfo/_Forge/Rules/4-2_Suicide.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule5
+  name: guide-entry-frontier-rule-5
+  text: "/ServerInfo/_Forge/Rules/5_AntagsPiracy.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule6
+  name: guide-entry-frontier-rule-6
+  text: "/ServerInfo/_Forge/Rules/6_Maraud.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule7
+  name: guide-entry-frontier-rule-7
+  text: "/ServerInfo/_Forge/Rules/7_SafeZones.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule7_1
+  name: guide-entry-frontier-rule-7.1
+  text: "/ServerInfo/_Forge/Rules/7-1_FactionBases.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule7_2
+  name: guide-entry-frontier-rule-7.2
+  text: "/ServerInfo/_Forge/Rules/8-1_FactionCommanders.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule8
+  name: guide-entry-frontier-rule-8
+  text: "/ServerInfo/_Forge/Rules/8_FactionRules.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule9
+  name: guide-entry-frontier-rule-9
+  text: "/ServerInfo/_Forge/Rules/9_ERP.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: CorvaxFrontierRule10
+  name: guide-entry-frontier-rule-10
+  text: "/ServerInfo/_Forge/Rules/10_Cheating.xml"
+  ruleEntry: true

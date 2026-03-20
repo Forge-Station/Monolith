@@ -1,10 +1,13 @@
 - type: entity
   parent: AirlockGlass
   id: AirlockGlassRenegades
-  suffix: Ренегаты
+  suffix: Ренегаты, Locked
   components:
   - type: Sprite
     sprite: Forge/Structures/Doors/Glass/ren_glass.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRenegate ]
 
 - type: entity
   parent: AirlockGlass

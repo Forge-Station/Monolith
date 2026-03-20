@@ -1,0 +1,42 @@
+- type: job
+  id: Draftsman
+  name: forge-job-name-draftsman
+  description: forge-job-desc-draftsman
+  playTimeTracker: JobDraftsman
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 129600 # 36 hours
+    - !type:DepartmentTimeRequirement
+      department: Renegates
+      time: 64800 # 18 hours
+  alternateRequirementSets:
+    longerPlaytimeLessSec:
+    - !type:RoleTimeRequirement
+      role: JobOverseer
+      time: 21600 # 6 hours
+  startingGear: DraftsmanGear
+  alwaysUseSpawner: true
+  icon: JobIconRenegateDraftsman
+  requireAdminNotify: true
+  supervisors: job-supervisors-baron
+  weight: 50
+  displayWeight: 50
+  canBeAntag: false
+  setPreference: true
+  access:
+  - RenegateOfficer
+  accessGroups:
+  - CommandRenegateAccess
+  # special:
+  # - !type:AddImplantSpecial
+  #   implants: # Неизвестно
+  # - !type:AddComponentSpecial
+  #   components:
+  #     - type: CommandStaff
+  #     - type: PreventShipyardTitleOverwrite
+
+- type: startingGear
+  id: DraftsmanGear
+  equipment:
+    pocket1: WeaponRevolverMagnus
+    pocket2: EnergyCutlass

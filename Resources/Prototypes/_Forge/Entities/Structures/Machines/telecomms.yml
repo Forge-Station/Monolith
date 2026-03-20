@@ -1,0 +1,13 @@
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerRenegaded
+  name: renegade telecom server
+  suffix: Ренегаты
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyRenegade
+      - EncryptionKeyRenegadeTech
+      - EncryptionKeyRenegadeCom

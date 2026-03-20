@@ -1,0 +1,39 @@
+- type: job
+  id: Flunky
+  name: forge-job-name-flunky
+  description: forge-job-desc-flunky
+  playTimeTracker: JobFlunky
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hours
+  startingGear: FlunkyGear
+  alwaysUseSpawner: true
+  icon: JobIconRenegateFlunky
+  requireAdminNotify: true
+  supervisors: job-supervisors-Overseer
+  weight: 50
+  displayWeight: 50
+  canBeAntag: false
+  setPreference: true
+  access:
+  - Renegate
+  accessGroups:
+  - GeneralRenegateAccess
+  # special:
+  # - !type:AddImplantSpecial
+  #   implants: # Неизвестно
+  # - !type:AddComponentSpecial
+  #   components:
+  #     - type: CommandStaff
+  #     - type: PreventShipyardTitleOverwrite
+
+- type: startingGear
+  id: FlunkyGear
+  # equipment:
+  #   ears:
+  #   belt:
+  #   pocket1:
+  #   pocket2:
+  # storage:
+  #   back:
+  #   - RadioHandheldNF

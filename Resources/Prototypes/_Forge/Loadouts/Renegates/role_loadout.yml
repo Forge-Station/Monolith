@@ -1,0 +1,167 @@
+# region Flunky
+- type: roleLoadout
+  id: JobFlunky
+  groups:
+  # - RenegateHead
+  # - RenegateNeck
+  - RenegateFace
+  - RenegateEyes
+  - RenegateBalaclava
+  - RenegateJumpsuit
+  - RenegateOuterClothing
+  - RenegateBelt
+  - RenegateGloves
+  - RenegateShoes
+  - RenegateBackpack
+  - RenegateEars
+  - RenegateBoxSurvival
+  - RenegatePDA
+  - ContractorWallet
+  - ContractorCartridge
+#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+  - ContractorEncryptionKey
+  - ContractorFun
+  - ContractorTrinkets
+  - RenegateFirearm
+  - RenegateMag
+  canCustomizeName: true
+
+# region Quack
+- type: roleLoadout
+  id: JobQuack
+  groups:
+  - RenegateHead
+  # - RenegateNeck
+  - RenegateFace
+  - RenegateEyes
+  - RenegateBalaclava
+  - RenegateJumpsuit
+  - RenegateOuterClothing
+  - RenegateBelt
+  - RenegateGloves
+  - RenegateShoes
+  - RenegateBackpack
+  - RenegateAdvEars
+  - RenegateBoxSurvival
+  - RenegateQuackPDA
+  - ContractorWallet
+  - ContractorCartridge
+#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+  - ContractorEncryptionKey
+  - ContractorFun
+  - ContractorTrinkets
+  - RenegateFirearm
+  - RenegateMag
+  canCustomizeName: true
+
+# region Foreman
+- type: roleLoadout
+  id: JobForeman
+  groups:
+  - RenegateHead
+  # - RenegateNeck
+  - RenegateFace
+  - RenegateEyes
+  - RenegateBalaclava
+  - RenegateJumpsuit
+  - RenegateOuterClothing
+  - RenegateBelt
+  - RenegateGloves
+  - RenegateShoes
+  - RenegateBackpack
+  - RenegateAdvEars
+  - RenegateBoxSurvival
+  - RenegateForemanPDA
+  - ContractorWallet
+  - ContractorCartridge
+#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+  - ContractorEncryptionKey
+  - ContractorFun
+  - ContractorTrinkets
+  - RenegateFirearm
+  - RenegateMag
+  canCustomizeName: true
+
+# region Overseer
+- type: roleLoadout
+  id: JobOverseer
+  groups:
+  - RenegateHead
+  - RenegateNeck
+  - RenegateFace
+  - RenegateEyes
+  - RenegateBalaclava
+  - RenegateJumpsuit
+  - RenegateOuterClothing
+  - RenegateBelt
+  - RenegateGloves
+  - RenegateShoes
+  - RenegateBackpack
+  - RenegateComEars
+  - RenegateBoxSurvival
+  - RenegateOverseerPDA
+  - ContractorWallet
+  - ContractorCartridge
+#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+  - ContractorEncryptionKey
+  - ContractorFun
+  - ContractorTrinkets
+  - RenegateFirearm
+  - RenegateMag
+  canCustomizeName: true
+
+# region Draftsman
+- type: roleLoadout
+  id: JobDraftsman
+  groups:
+  - RenegateHead
+  - RenegateNeck
+  - RenegateFace
+  - RenegateEyes
+  - RenegateBalaclava
+  - RenegateJumpsuit
+  - RenegateOuterClothing
+  - RenegateBelt
+  - RenegateGloves
+  - RenegateShoes
+  - RenegateBackpack
+  - RenegateComEars
+  - RenegateBoxSurvival
+  - RenegateDraftsmanPDA
+  - ContractorWallet
+  - ContractorCartridge
+#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+  - ContractorEncryptionKey
+  - ContractorFun
+  - ContractorTrinkets
+  - RenegateFirearm
+  - RenegateMag
+  canCustomizeName: true
+
+# region Baron
+- type: roleLoadout
+  id: JobBaron
+  groups:
+  - RenegateHead
+  - RenegateNeck
+  - RenegateFace
+  - RenegateEyes
+  - RenegateBalaclava
+  - RenegateJumpsuit
+  - RenegateOuterClothing
+  - RenegateBelt
+  - RenegateGloves
+  - RenegateShoes
+  - RenegateBackpack
+  - RenegateComEars
+  - RenegateBoxSurvival
+  - RenegateBaronPDA
+  - ContractorWallet
+  - ContractorCartridge
+#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+  - ContractorEncryptionKey
+  - ContractorFun
+  - ContractorTrinkets
+  - RenegateFirearm
+  - RenegateMag
+  canCustomizeName: true

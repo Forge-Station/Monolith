@@ -238,3 +238,93 @@
     sprite: Forge/Objects/Weapons/Guns/Shotguns/chimera.rsi
   - type: PirateBountyItem
     id: FTechLogisticGuns
+
+- type: entity
+  name: NEK'o HP-12 Saigak (12 gauge)
+  # Don't parent to BaseWeaponShotgun because it differs significantly
+  parent: [BaseItem, BaseGunWieldable]
+  suffix: Ренегаты
+  id: WeaponShotgunSaigak
+  description: The same Saiga known to many, but made from slightly different materials. Uses 12 gauge shotgun shells.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/Saigak.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Large
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/Saigak_inhands_64x.rsi
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/Saigak_inhands_64x.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: AmmoCounter
+  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  - type: Gun
+    fireRate: 2.25
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine12_gaugeBuckshot
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine12_gaugeBuckshot
+        whitelistFailPopup: gun-magazine-whitelist-fail
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineAmmoProvider
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 1500
+
+- type: entity
+  name: PaxChry Defensie-12 (12 gauge)
+  parent: [BaseWeaponShotgunRevolver, BaseGunWieldable]
+  suffix: Ренегаты
+  id: WeaponShotgunDefensie
+  description: A simple hunting shotgun equipped with a non-removable drum magazine, which makes it slightly uncomfortable to handle. In your case, you will be hunting a larger target. It can only be loaded manually, so don't forget to bring a bandolier.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/Defensie.rsi
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/Defensie_inhands_64x.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/Defensie_inhands_64x.rsi
+    shape: # Goobstation
+    - 0,0,4,1
+  - type: BallisticAmmoProvider
+    capacity: 12
+  - type: GunRequiresWield
+  - type: Gun
+    fireRate: 2.5
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg

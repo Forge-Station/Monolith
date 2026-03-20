@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/d917f4c2a088419d5c3aec7656b7ff8cebd1822e | idsr state Eifall, emp by v6st for Forge",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/d917f4c2a088419d5c3aec7656b7ff8cebd1822e | idsr state Eifall, emp by v6st, ren by sodakent (discord) for Forge",
   "size": {
     "x": 32,
     "y": 32
@@ -9,6 +9,9 @@
   "states": [
     {
       "name": "imperial"
+    },
+    {
+      "name": "renegate"
     },
     {
       "name": "default"
@@ -46,6 +49,24 @@
     },
     {
       "name": "idempsilver"
+    },
+    {
+      "name": "idrenbaron"
+    },
+    {
+      "name": "idrendraftsman"
+    },
+    {
+      "name": "idrenoverseer"
+    },
+    {
+      "name": "idrenquack"
+    },
+    {
+      "name": "idrenforeman"
+    },
+    {
+      "name": "idrenflunky"
     }
   ]
 }

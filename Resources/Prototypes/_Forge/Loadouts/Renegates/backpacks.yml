@@ -1,0 +1,19 @@
+- type: loadout
+  id: RenegateClothingBackpack
+  equipment:
+    back: ClothingBackpackRenegade
+
+- type: loadout
+  id: RenegateClothingDuffel
+  equipment:
+    back: ClothingDuffelRenegade
+
+- type: loadout
+  id: RenegateClothingSatchel
+  equipment:
+    back: ClothingBackpackSatchelRenegade
+
+- type: loadout
+  id: RenegateClothingMessenger
+  equipment:
+    back: ClothingBackpackMessengerRenegade

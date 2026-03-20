@@ -1,18 +1,24 @@
 - type: entity
   parent: Airlock
   id: AirlockRenegade
-  suffix: Ренегаты
+  suffix: Ренегаты, Locked
   components:
   - type: Sprite
     sprite: Forge/Structures/Doors/Standard/ren_door.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRenegate ]
 
 - type: entity
   parent: Airlock
   id: AirlockRenegadeCom
-  suffix: Ренегаты, Командование
+  suffix: Ренегаты, Командование, Locked
   components:
   - type: Sprite
     sprite: Forge/Structures/Doors/Standard/ren_command.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRenegateOfficer ]
 
 - type: entity
   parent: Airlock

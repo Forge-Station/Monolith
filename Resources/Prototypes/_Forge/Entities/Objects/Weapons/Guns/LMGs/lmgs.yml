@@ -40,3 +40,131 @@
         Piercing: 0.95
         Heat: 0.95
         Caustic: 0.95
+
+- type: entity
+  name: NEK'o AR-400 (5.56x45mm)
+  parent: [BaseWeaponLightMachineGun, BaseGunWieldable]
+  suffix: Ренегаты
+  id: WeaponLmgAR400
+  description: This is likely a makeshift modified machine gun, given the lack of a bipod and the attached foregrip. Be careful when firing, and brace yourself for terrible recoil. Chambered in 5.56x45mm, accepts both box and standard magazines.
+  components:
+  - type: Item # Mono
+    size: Huge
+    sprite: Forge/Objects/Weapons/Guns/LMGs/ar400_inhands_32x.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/LMGs/ar400.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/LMGs/ar400_inhands_32x.rsi
+  - type: ChamberMagazineAmmoProvider # Mono
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/heavy_rifle_1.ogg # Mono
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: AmmoBox556x45mmBigFMJ # Mono
+        insertSound: /Audio/Weapons/Guns/MagIn/lmg_magin.ogg # Mono
+        ejectSound: /Audio/Weapons/Guns/MagOut/lmg_magout.ogg # Mono
+        priority: 2
+        whitelist:
+          tags:
+            - Magazine556x45mmFMJ # Mono
+            - Magazine556x45mmBox # Mono
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge556x45mmFMJ # Mono
+        priority: 1
+        whitelist:
+          tags:
+            - Cartridge556x45mmFMJ # Mono
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: HeldSpeedModifier
+  - type: ClothingSpeedModifier
+    sprintModifier: 0.9
+    walkModifier: 0.9
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.4
+    sprintModifier: 0.35
+  - type: WieldDelay
+    baseDelay: 2
+    modifiedDelay: 2
+    preventFiring: true
+  - type: Appearance
+  - type: StaticPrice # Mono
+    price: 2000
+
+- type: entity
+  name: NEK'o Raskolnikov 99-LMG (7.62x51mm)
+  parent: [BaseWeaponLightMachineGun, BaseGunWieldable]
+  suffix: Ренегаты
+  id: WeaponLmgType99
+  description: An old machine gun whose design dates back to the Terran Wars. Surprisingly, its "pirated" versions are circulating online with blueprints. Your machine guns version has been modified for assault operations and ship boardings, resulting in the fixed bipod. This is for those who hold onto old beliefs and convictions.
+  components:
+  - type: Item # Mono
+    size: Huge
+    sprite: Forge/Objects/Weapons/Guns/LMGs/type99_inhands_32x.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/LMGs/type99.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/LMGs/type99_inhands_32x.rsi
+  - type: ChamberMagazineAmmoProvider # Mono
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/heavy_rifle_1.ogg # Mono
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazinetype99762x51mmFMJ # Mono
+        insertSound: /Audio/Weapons/Guns/MagIn/lmg_magin.ogg # Mono
+        ejectSound: /Audio/Weapons/Guns/MagOut/lmg_magout.ogg # Mono
+        priority: 2
+        whitelist:
+          tags:
+            - Magazinetype99762x51mmFMJ # Mono
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge762x51mmFMJ # Mono
+        priority: 1
+        whitelist:
+          tags:
+            - Cartridge762x51mmFMJ # Mono
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: WieldDelay
+    baseDelay: 1
+    modifiedDelay: 1
+    preventFiring: true
+  - type: Appearance
+  - type: StaticPrice # Mono
+    price: 1000

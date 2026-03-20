@@ -1,0 +1,28 @@
+- type: vessel
+  id: dodo
+  parent: BaseVessel
+  name: Давай-Делай
+  description: Маскировочный шаттл деверсионно/рейдерского назначения . Рекомендованная команда 2-3 человек
+  price: 69000
+  category: Medium
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/dodo.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+- type: gameMap
+  id: dodo
+  mapName: 'Давай-Делай'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/dodo.yml
+  minPlayers: 0
+  stations:
+    dodo:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Давай-Делай{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

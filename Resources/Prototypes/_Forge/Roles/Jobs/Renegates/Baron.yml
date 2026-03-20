@@ -1,0 +1,43 @@
+- type: job
+  id: Baron
+  name: forge-job-name-baron
+  description: forge-job-desc-baron
+  playTimeTracker: JobBaron
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 129600 # 36 hours
+    - !type:DepartmentTimeRequirement
+      department: Renegates
+      time: 108000 # 30 hours
+    - !type:RoleTimeRequirement
+      role: JobDraftsman
+      time: 21600 # 6 hours
+    - !type:RoleTimeRequirement
+      role: JobOverseer
+      time: 21600 # 6 hours
+  startingGear: BaronGear
+  alwaysUseSpawner: true
+  icon: JobIconRenegateBaron
+  requireAdminNotify: true
+  supervisors: job-supervisors-nobody
+  weight: 50
+  displayWeight: 50
+  canBeAntag: false
+  setPreference: true
+  access:
+  - RenegateOfficer
+  accessGroups:
+  - CommandRenegateAccess
+  # special:
+  # - !type:AddImplantSpecial
+  #   implants: # Неизвестно
+  # - !type:AddComponentSpecial
+  #   components:
+  #     - type: CommandStaff
+  #     - type: PreventShipyardTitleOverwrite
+
+- type: startingGear
+  id: BaronGear
+  equipment:
+    pocket1: WeaponRevolverMagnus
+    pocket2: EnergyCutlass

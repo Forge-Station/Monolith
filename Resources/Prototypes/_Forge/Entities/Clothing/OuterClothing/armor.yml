@@ -53,3 +53,29 @@
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 1
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: ClothingOuterArmorRenegates
+  name: Renegates ballistic vest
+  suffix: Ренегаты
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Armor/renegates.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Armor/renegates.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.6
+        Cold: 0.6
+        Radiation: 0.6
+        Shock: 0.6
+        Caustic: 0.6
+  - type: FireProtection
+    reduction: 0.6
+  - type: ExplosionResistance
+    damageCoefficient: 0.6

@@ -22,6 +22,26 @@
 - type: playTimeTracker
   id: JobNeophyte
 
+#region Renegates
+
+- type: playTimeTracker
+  id: JobBaron
+
+- type: playTimeTracker
+  id: JobDraftsman
+
+- type: playTimeTracker
+  id: JobOverseer
+
+- type: playTimeTracker
+  id: JobQuack
+
+- type: playTimeTracker
+  id: JobForeman
+
+- type: playTimeTracker
+  id: JobFlunky
+
 - type: playTimeTracker
   id: JobTsfCommandingOfficer
 

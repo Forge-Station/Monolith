@@ -296,3 +296,29 @@
       sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor.rsi
     - type: Clothing
       sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor.rsi
+
+# region Renegates
+
+- type: entity
+  parent: [UnsensoredClothingUniformBase]
+  suffix: Ренегаты
+  id: ClothingUniformJumpsuitRenegates
+  name: renegates jumpsuit
+  description: Uniform for renegate operatives performing tactical operations in deep space.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate.rsi
+
+- type: entity
+  parent: [UnsensoredClothingUniformBase]
+  suffix: Ренегаты
+  id: ClothingUniformSuitRenegates
+  name: renegates suit
+  description: Uniform for renegate operatives performing tactical operations in deep space.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi

@@ -1,0 +1,4 @@
+- type: loadout
+  id: RenegateGlasses
+  equipment:
+    eyes: ClothingEyesGlassesRenegate

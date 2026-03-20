@@ -1,0 +1,13 @@
+- type: entity
+  parent: ClothingMaskGasSecurity
+  id: ClothingMaskGasRenegate
+  name: renegates gas mask
+  suffix: Ренегаты
+  description: A standard issue renegates gas mask.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/renegate.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/renegate.rsi

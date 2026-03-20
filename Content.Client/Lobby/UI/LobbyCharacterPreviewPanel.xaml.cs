@@ -55,11 +55,12 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     }
     // End Company Display
 
+    // Forge-Change-delete
     // MonoCoins Display
-    public void SetMonoCoinsText(string value)
-    {
-        MonoCoins.Text = value;
-    }
+    // public void SetMonoCoinsText(string value)
+    // {
+    //     MonoCoins.Text = value;
+    // }
     // End MonoCoins Display
 
     public void SetSprite(EntityUid uid)

@@ -1,0 +1,42 @@
+- type: job
+  id: Quack
+  name: forge-job-name-quack
+  description: forge-job-desc-quack
+  playTimeTracker: JobQuack
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 72000 # 20 hours
+    - !type:DepartmentTimeRequirement
+      department: Renegates
+      time: 18000 # 5 hours
+  startingGear: QuackGear
+  alwaysUseSpawner: true
+  icon: JobIconRenegateQuack
+  requireAdminNotify: true
+  supervisors: job-supervisors-overseer
+  weight: 50
+  displayWeight: 50
+  canBeAntag: false
+  setPreference: true
+  access:
+  - Renegate
+  accessGroups:
+  - GeneralRenegateAccess
+  # special:
+  # - !type:AddImplantSpecial
+  #   implants: # Неизвестно
+  # - !type:AddComponentSpecial
+  #   components:
+  #     - type: CommandStaff
+  #     - type: PreventShipyardTitleOverwrite
+
+- type: startingGear
+  id: QuackGear
+  # equipment:
+  #   ears:
+  #   belt:
+  #   pocket1:
+  #   pocket2:
+  # storage:
+  #   back:
+  #   - RadioHandheldNF

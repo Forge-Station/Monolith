@@ -1,0 +1,48 @@
+<Document>
+  <ColorBox Color="#3a3a3a" OutlineColor="#5a5a5a" OutlineThickness="2" Margin="5">
+    <Box Orientation="Vertical">
+      <Box Orientation="Horizontal" HorizontalAlignment="Center">
+        # Правила сервера Corvax Frontier
+      </Box>
+      <Box Orientation="Vertical" Margin="10">
+        Эти правила применяются в любое время, включая периоды между раундами.
+
+        Краткое содержание правил приведено ниже. Нажмите на любое правило для получения дополнительной информации.
+      </Box>
+    </Box>
+  </ColorBox>
+
+  <ColorBox Color="#333333" OutlineColor="#555555">
+    <Box Orientation="Vertical" HorizontalAlignment="Left">
+      <Box Orientation="Vertical">
+        - [textlink="0. Не будь мудаком" link="CorvaxFrontierRuleZERO"]
+        - [textlink="1. Гриф" link="CorvaxFrontierRule1"]
+        - [textlink="2. Эскалация" link="CorvaxFrontierRule2"]
+        <Box Margin="5" Orientation="Vertical" HorizontalAlignment="Left">
+          - [textlink="2.1 Киллбоксы" link="CorvaxFrontierRule2_1"]
+          - [textlink="2.2 Конфликты фракций" link="CorvaxFrontierRule2_2"]
+        </Box>
+        - [textlink="3. Нарушение игровой атмосферы" link="CorvaxFrontierRule3"]
+        <Box Margin="5" Orientation="Vertical" HorizontalAlignment="Left">
+          - [textlink="3.1. Поддержание уважительной обстановки" link="CorvaxFrontierRule3_1"]
+          - [textlink="3.2. Окончание раунда" link="CorvaxFrontierRule3_2"]
+        </Box>
+        - [textlink="4. Поведение персонажа" link="CorvaxFrontierRule4"]
+        <Box Margin="5" Orientation="Vertical" HorizontalAlignment="Left">
+          - [textlink="4.1 КООП и мета-информация" link="CorvaxFrontierRule4_1"]
+          - [textlink="4.2 Выход из роли" link="CorvaxFrontierRule4_2"]
+        </Box>
+        - [textlink="5. Отыгрыш антагонистов и пиратство" link="CorvaxFrontierRule5"]
+        - [textlink="6. Мародёрство" link="CorvaxFrontierRule6"]
+        - [textlink="7. Безопасная зона" link="CorvaxFrontierRule7"]
+        <Box Margin="5" Orientation="Vertical" HorizontalAlignment="Left">
+        - [textlink="7.1 Правило баз фракций" link="CorvaxFrontierRule7_1"]
+        - [textlink="8.1 Командиры фракций" link="CorvaxFrontierRule7_2"]
+        </Box>
+        - [textlink="8. Правила фракций" link="CorvaxFrontierRule8"]
+        - [textlink="9. ERP" link="CorvaxFrontierRule9"]
+        - [textlink="10. Нечестная игра" link="CorvaxFrontierRule10"]
+      </Box>
+    </Box>
+  </ColorBox>
+</Document>

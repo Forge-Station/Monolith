@@ -52,7 +52,13 @@
             PirateCaptain: [ -1, -1]
             PirateFirstMate: [ -1, -1]
             PDVDenasvar: [ -1, -1] #Mono
-            Pirate: [ -1, -1]
+            Pirate: [ -1, -1] #Forge-Change
+            Flunky: [ -1, -1] #Forge-Change
+            Quack: [ -1, -1] #Forge-Change
+            Foreman: [ -1, -1] #Forge-Change
+            Draftsman: [ -1, -1] #Forge-Change
+            Overseer: [ -1, -1] #Forge-Change
+            Baron: [ -1, -1] #Forge-Change
             PDVInfiltrator: [ -1, -1] # Mono]
             # Prisoner: [ -1, -1] # Mono
             # USSPCommissar: [ -1, -1]

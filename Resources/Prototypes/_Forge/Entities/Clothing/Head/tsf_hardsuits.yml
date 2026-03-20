@@ -1,0 +1,132 @@
+- type: entity
+  parent: ClothingHeadHelmetHardsuitNfsdBronze
+  id: ClothingHeadHelmetHardsuitTSFLow
+  name: TSF light hardsuit helmet
+  description: A light TSF hardsuit helmet.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_low.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_low.rsi
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitNfsdSilver
+  id: ClothingHeadHelmetHardsuitTSFMid
+  name: TSF standard hardsuit helmet
+  description: A standard TSF hardsuit helmet.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitNfsdCombat
+  id: ClothingHeadHelmetHardsuitTSFHigh
+  name: TSF heavy hardsuit helmet
+  description: A heavily armored TSF hardsuit helmet.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_high.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_high.rsi
+
+- type: entity
+  parent: [ ClothingHeadHelmetHardsuitNfsdBrigmedic, ShowMedicalIcons ]
+  id: ClothingHeadHelmetHardsuitTSFMedic
+  name: TSF corpsman hardsuit helmet
+  description: A TSF hardsuit helmet with medical overlays.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_medic.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_medic.rsi
+  - type: PointLight
+    color: "#7fe8ff"
+    radius: 5
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitPilot
+  id: ClothingHeadHelmetHardsuitTSFKalenval
+  name: TSF TBS-4 Kalenval helmet
+  description: A scout TSF hardsuit helmet.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_kalenval.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_kalenval.rsi
+  - type: PointLight
+    color: "#ffdbad"
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitNfsdCombat
+  id: ClothingHeadHelmetHardsuitTSFVprysk
+  name: TSF TBS-5 Vprysk helmet
+  description: A specialist TSF hardsuit helmet.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_vprysk.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_vprysk.rsi
+  - type: PointLight
+    color: "#ffb05c"
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitNfsdCommand
+  id: ClothingHeadHelmetHardsuitTSFZazhiganie
+  name: TSF TBS-2 Zazhiganie helmet
+  description: A command TSF hardsuit helmet.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitNfsdSheriff
+  id: ClothingHeadHelmetHardsuitTSFMidas
+  name: TSF UVP-1 Midas helmet
+  description: A commander's TSF hardsuit helmet.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_midas.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_midas.rsi
+
+- type: entity
+  parent: ClothingHeadHealmetContractorStealh
+  id: ClothingHeadHelmetHardsuitTSFStealthMark1
+  name: TSF stealth suit helmet Mk.1
+  description: A stealth TSF hardsuit helmet with active camouflage controls.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_stealth_mark1.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_stealth_mark1.rsi
+  - type: ToggleClothing
+    action: ActionTogglePhaseCloak
+    disableOnUnequip: true
+  - type: ComponentToggler
+    parent: true
+    components:
+    - type: Stealth
+      minVisibility: 0.01
+      lastVisibility: 0.01
+  - type: UseDelay
+    delay: 2
+  - type: PowerCellDraw
+    drawRate: 2
+  - type: ToggleCellDraw
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitNfsdCombat
+  id: ClothingHeadHelmetHardsuitTSFPorshen
+  name: TSF TBS-12 Porshen helmet
+  description: A heavy TSF breaching hardsuit helmet.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_porshen.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_porshen.rsi
+  - type: PointLight
+    color: "#ffb347"

@@ -70,6 +70,9 @@
 - type: Tag
   id: Magazine762x51mmBoxBig
 
+- type: Tag #Forge-Change
+  id: Magazinetype99762x51mmFMJ #Forge-Change
+
 #762x54mmR tags
 
 - type: Tag

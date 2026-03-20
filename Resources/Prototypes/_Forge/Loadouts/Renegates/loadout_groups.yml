@@ -1,0 +1,123 @@
+# region Renegate All
+- type: loadoutGroup
+  id: RenegateHead
+  name: loadout-group-contractor-head
+  minLimit: 0
+  loadouts:
+  - RenegateHelmet
+  - RenegateBeret
+  - RenegatePadHelm
+  - RenegateEars
+
+- type: loadoutGroup
+  id: RenegateNeck
+  name: loadout-group-contractor-neck
+  minLimit: 1
+  loadouts:
+  - RenegateCloak
+  - RenegateCloakCaptain
+  - RenegatePoncho
+  - RenegateMantle
+
+- type: loadoutGroup
+  id: RenegateFace
+  name: loadout-group-contractor-face
+  minLimit: 1
+  loadouts:
+  - RenegateGasmask
+  fallbacks:
+  - RenegateGasmask
+
+- type: loadoutGroup
+  id: RenegateEyes
+  name: loadout-group-contractor-glasses
+  minLimit: 1
+  loadouts:
+  - RenegateGlasses
+  fallbacks:
+  - RenegateGlasses
+
+- type: loadoutGroup
+  id: RenegateBalaclava
+  name: loadout-group-contractor-balaclava
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - TsfmcBalaclava
+  - TsfmcBalaclavaAlt
+
+- type: loadoutGroup
+  id: RenegateJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - RenegateClothingUniformJumpsuitRenegate
+  - RenegateClothingUniformSuitRenegate
+  - RenegateClothingUniformJumpskirtRenegate
+  - RenegateClothingUniformDressRenegates
+  fallbacks:
+  - RenegateClothingUniformJumpsuitRenegate
+
+- type: loadoutGroup
+  id: RenegateOuterClothing
+  name: loadout-group-contractor-outerclothing
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - RenegateClothingArmorOuterclothing
+
+- type: loadoutGroup
+  id: RenegateBelt
+  name: loadout-group-contractor-belt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RenegatesCombatWebbing
+  - RenegatesCombatWebbingLarge
+  - Renegatesbandolier
+  fallbacks:
+  - RenegatesCombatWebbing
+
+- type: loadoutGroup
+  id: RenegateGloves
+  name: loadout-group-contractor-gloves
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - TsfmcCombatGloves
+  fallbacks:
+  - TsfmcCombatGloves
+
+- type: loadoutGroup
+  id: RenegateShoes
+  name: loadout-group-contractor-shoes
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - TsfmcCombatBoots
+  - TsfmcJackboots
+  fallbacks:
+  - TsfmcCombatBoots
+
+- type: loadoutGroup
+  id: RenegateBackpack
+  name: loadout-group-contractor-backpack
+  minLimit: 1
+  loadouts:
+  - RenegateClothingBackpack
+  - RenegateClothingDuffel
+  - RenegateClothingSatchel
+  - RenegateClothingMessenger
+  fallbacks:
+  - RenegateClothingBackpack
+
+- type: loadoutGroup
+  id: RenegateBoxSurvival
+  name: loadout-group-contractor-survival-box
+  minLimit: 1
+  loadouts:
+  - RenegateBoxSurvivalNFOxygenExtended
+  - RenegateBoxSurvivalNFNitrogenExtended
+  fallbacks:
+  - RenegateBoxSurvivalNFOxygenExtended
+  - RenegateBoxSurvivalNFNitrogenExtended

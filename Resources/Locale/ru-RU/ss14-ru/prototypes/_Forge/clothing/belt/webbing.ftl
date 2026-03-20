@@ -8,3 +8,7 @@ ent-ClothingBeltMilitaryWebbingSyndicateEng = РПС техника синдик
     .desc = Ременно-плечевая система тактических ремней.
 ent-ClothingBeltMilitaryWebbingSyndicateMed = РПС санитара синдиката
     .desc = Ременно-плечевая система тактических ремней.
+ent-ClothingBeltWebbingsNormalRenegate = РПС ренегатов
+    .desc = Ременно-плечевая система тактических ремней.
+ent-ClothingBeltWebbingsBigRenegate = большая РПС ренегатов
+    .desc = Ременно-плечевая система тактических ремней. Этот больше!

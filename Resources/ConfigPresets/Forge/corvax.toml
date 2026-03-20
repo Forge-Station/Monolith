@@ -76,7 +76,7 @@ maximum_width = 26
 
 [server]
 id = "frontier_main"
-rules_file = "FrontierRuleset"
+rules_file = "ForgeRuleset"
 
 [infolinks]
 discord = "https://discord.gg/Forge-Change"

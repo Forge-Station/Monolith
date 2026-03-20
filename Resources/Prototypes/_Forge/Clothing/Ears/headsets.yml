@@ -69,6 +69,7 @@
     containers:
       key_slots:
       - EncryptionKeyRenegade
+      - EncryptionKeyCommon
   - type: Sprite
     sprite: Forge/Clothing/Ears/Headsets/headset_renegade.rsi
   - type: Clothing
@@ -85,6 +86,7 @@
     containers:
       key_slots:
       - EncryptionKeyRenegadeTech
+      - EncryptionKeyCommon
   - type: Sprite
     sprite: Forge/Clothing/Ears/Headsets/headset_renegade.rsi
   - type: Clothing
@@ -101,6 +103,7 @@
     containers:
       key_slots:
       - EncryptionKeyRenegadeCom
+      - EncryptionKeyCommon
   - type: Sprite
     sprite: Forge/Clothing/Ears/Headsets/headset_renegade.rsi
   - type: Clothing

@@ -45,3 +45,83 @@
         - id: ClothingShoesBootsMagSecurity
   - type: AccessReader
     access: [["EmpireInqusitor"]]
+
+- type: entity
+  id: SuitStoragebsii20
+  parent: SuitStorageBase
+  suffix: BSII-20 "Requiem" Hardsuit, Ренегаты
+  components:
+  - type: StorageFill
+    contents:
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+    - id: ClothingOuterHardsuitRenegatebsii20
+    - id: JetpackBlackFilled
+    - id: ClothingShoesBootsMagRenegade
+    - id: ClothingMaskGasRenegate
+  - type: AccessReader
+    access: [["Renegate"]]
+
+- type: entity
+  id: SuitStoragebsii30
+  parent: SuitStorageBase
+  suffix: BSII-30 "Locksmith" Hardsuit, Ренегаты
+  components:
+  - type: StorageFill
+    contents:
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+    - id: ClothingOuterHardsuitRenegatebsii30
+    - id: JetpackBlackFilled
+    - id: ClothingShoesBootsMagRenegade
+    - id: ClothingMaskGasRenegate
+  - type: AccessReader
+    access: [["Renegate"]]
+
+- type: entity
+  id: SuitStoragecriii200
+  parent: SuitStorageBase
+  suffix: CRIII-200 "Bug" Hardsuit, Commander, Ренегаты
+  components:
+  - type: StorageFill
+    contents:
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+    - id: ClothingOuterHardsuitRenegatecriii200
+    - id: JetpackBlackFilled
+    - id: ClothingShoesBootsMagRenegade
+    - id: ClothingMaskGasRenegate
+  - type: AccessReader
+    access: [["RenegateOfficer"]]
+
+- type: entity
+  id: SuitStorageoiii18
+  parent: SuitStorageBase
+  suffix: OIII-18 "Omega" Hardsuit, Ренегаты
+  components:
+  - type: StorageFill
+    contents:
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+    - id: ClothingOuterHardsuitRenegateoiii18
+    - id: JetpackBlackFilled
+    - id: ClothingShoesBootsMagRenegade
+    - id: ClothingMaskGasRenegate
+  - type: AccessReader
+    access: [["Renegate"]]
+
+- type: entity
+  id: SuitStorageyiv3020
+  parent: SuitStorageBase
+  suffix: YIV-3020 "Svyatogor" Hardsuit, Ренегаты
+  components:
+  - type: StorageFill
+    contents:
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+    - id: ClothingOuterHardsuitRenegateyiv3020
+    - id: JetpackBlackFilled
+    - id: ClothingShoesBootsMagRenegade
+    - id: ClothingMaskGasRenegate
+  - type: AccessReader
+    access: [["Renegate"]]

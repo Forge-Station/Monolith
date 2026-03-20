@@ -13,7 +13,7 @@
   - Fighter
 
 - type: gameMap
-  id: skutales
+  id: spider
   mapName: 'Паук'
   mapPath: /Maps/_Forge/Shuttles/Renegates/spider.yml
   minPlayers: 0

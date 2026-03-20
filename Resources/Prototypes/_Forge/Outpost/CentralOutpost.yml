@@ -1,7 +1,7 @@
 - type: gameMap
   id: Frontier
   mapName: 'Центральный Аванпост'
-  mapPath: /Maps/_Forge/Maps/Outpost/CentralOutpost.yml # Forge
+  mapPath: /Maps/_Forge/Outpost/CentralOutpost.yml # Forge
   minPlayers: 0
   maxPlayers: 100
   randomRotation: false

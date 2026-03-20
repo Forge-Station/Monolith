@@ -1,4 +1,2 @@
-ent-ComputerShipyardRenegate = renegate shipyard console
-    .desc = Shipyard console with renegates shuttles.
-ent-ComputerShipyardEngineering = engineer shipyard console
-    .desc = Shipyard console with engineers shuttles.
+ent-ComputerShipyardRenegate = консоль верфи ренегатов
+    .desc = Консоль верфи с шаттлами ренегатов.

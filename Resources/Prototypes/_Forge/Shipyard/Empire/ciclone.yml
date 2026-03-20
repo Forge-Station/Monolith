@@ -15,7 +15,7 @@
   - Uranium
 
 - type: gameMap
-  id: aid
+  id: ciclone
   mapName: 'ESF Циклон'
   mapPath: /Maps/_Forge/Shuttles/Empire/ciclone.yml
   minPlayers: 0

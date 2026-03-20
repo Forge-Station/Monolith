@@ -30,7 +30,7 @@ public enum ShipyardConsoleUiKey : byte
     Debug, // Forge-Change
     Engineering, // Forge-Change
     Modules, // Forge-Change
-    Renegates, // Forge-Change
+    Renegate, // Forge-Change
     Empire, // Forge-Change
     Federation // Forge-Change
 

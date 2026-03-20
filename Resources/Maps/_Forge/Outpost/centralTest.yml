@@ -108,8 +108,6 @@ entities:
     - type: GridPacifier
     - type: GridRaider
       protectedEntities: []
-    - type: BecomesStation
-      id: Frontier
     - type: InitRepairSnapshot
     - type: MapGrid
       chunks:

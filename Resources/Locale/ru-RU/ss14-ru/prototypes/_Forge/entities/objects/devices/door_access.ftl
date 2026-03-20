@@ -16,5 +16,7 @@ ent-DoorElectronicsEmpireDiplomacy = { ent-DoorElectronics }
 
 ent-DoorElectronicsRenegate = { ent-DoorElectronics }
     .suffix = Forge, Ренегаты
+    .desc = { ent-DoorElectronics.desc }
 ent-DoorElectronicsRenegateOfficer = { ent-DoorElectronics }
     .suffix = Forge, Ренегаты, Командный
+    .desc = { ent-DoorElectronics.desc }

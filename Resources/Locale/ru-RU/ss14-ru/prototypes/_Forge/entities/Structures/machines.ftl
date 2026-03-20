@@ -7,6 +7,9 @@ ent-FSyndicateProtolathe = синдилат
 ent-NFTelecomServerFilled = { ent-TelecomServer }
     .suffix = Мастер-ключ
     .desc = { ent-TelecomServer.desc }
+ent-TelecomServerRenegaded = { ent-TelecomServer }
+    .suffix = Ренегаты
+    .desc = { ent-TelecomServer.desc }
 
 ent-ForgeHolopadLocal = голопад
     .desc = Напольное устройство для проецирования голографических изображений, обеспечивающее связь в пределах корабля или станции.

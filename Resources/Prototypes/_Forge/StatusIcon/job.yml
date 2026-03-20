@@ -86,3 +86,59 @@
     sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_tech
   jobName: forge-job-name-technican
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconTsfCommandingOfficer
+  icon:
+    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
+    state: nfsdsheriff
+  jobName: job-name-tsf-commanding-officer
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconTsfExecutiveOfficer
+  icon:
+    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
+    state: nfsdbailiff
+  jobName: job-name-tsf-executive-officer
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconTsfSeniorOfficer
+  icon:
+    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
+    state: nfsdsergeant
+  jobName: job-name-tsf-senior-officer
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconTsfSeniorAide
+  icon:
+    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
+    state: publicaffairsliaison
+  jobName: job-name-tsf-senior-aide
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconTsfAmbassador
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_diplomacy
+  jobName: job-name-tsf-ambassador
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconTsfRanger
+  icon:
+    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
+    state: nfsddeputy
+  jobName: job-name-tsf-ranger
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconTsfRecruit
+  icon:
+    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
+    state: nfsdcadet
+  jobName: job-name-tsf-recruit

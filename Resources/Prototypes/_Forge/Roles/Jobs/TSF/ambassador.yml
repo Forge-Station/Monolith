@@ -1,0 +1,49 @@
+- type: job
+  id: TsfAmbassador
+  name: job-name-tsf-ambassador
+  description: job-description-tsf-ambassador
+  playTimeTracker: JobTsfAmbassador
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 43200
+  whitelisted: true
+  startingGear: TsfAmbassadorGear
+  icon: JobIconTsfAmbassador
+  supervisors: job-supervisors-tsf-commanding-officer
+  weight: 30
+  displayWeight: 30
+  canBeAntag: false
+  guides: [ BasicLore, TransSolarFederation ]
+  access:
+  - TsfDiplomacy
+  accessGroups:
+  - TsfGeneralAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - TSFMC
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, TrackingImplant ]
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - SolCommon
+    languagesUnderstood:
+    - SolCommon
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: TsfAmbassadorGear
+  equipment:
+    pocket1: HyperlinkBookSpaceLaw
+    pocket2: BoxFolderClipboardPal
+  storage:
+    back:
+    - Flash
+    - BoxFolderPalBrown
+    - BoxFolderNfsdForms
+    - RubberStampPal
+    - PhoneInstrumentHigh

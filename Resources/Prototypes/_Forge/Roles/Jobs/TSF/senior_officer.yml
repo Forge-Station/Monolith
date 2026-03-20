@@ -1,26 +1,24 @@
 - type: job
-  id: SeniorOfficer
-  name: job-name-senior-officer
-  description: job-description-senior-officer
-  playTimeTracker: JobSeniorOfficer
+  id: TsfSeniorOfficer
+  name: job-name-tsf-senior-officer
+  description: job-description-tsf-senior-officer
+  playTimeTracker: JobTsfSeniorOfficer
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 72000 # 20 hours # mono
+      time: 72000
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 28800 # 8 hours # mono
+      time: 28800
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer
-      time: 36000 # 10 hours # mono
-  startingGear: SeniorOfficerGear
-  icon: JobIconSergeant
-  setPreference: false #Forge Change
-  supervisors: job-supervisors-sheriff
+      time: 36000
+  startingGear: TsfSeniorOfficerGear
+  icon: JobIconTsfSeniorOfficer
+  supervisors: job-supervisors-tsf-commanding-officer
   weight: 140
   displayWeight: 50
-  hideConsoleVisibility: true #Forge Change
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ] # Mono
+  guides: [ BasicLore, TransSolarFederation ]
   access:
   - Armory
   - Sergeant
@@ -29,7 +27,7 @@
   - Chemistry
   - TsfmcEngineering
   accessGroups:
-  - GeneralNfsdAccess
+  - TsfGeneralAccess
   special:
   - !type:AddComponentSpecial
     components:
@@ -38,7 +36,7 @@
       - TSFMC
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TrackingImplant ]
-  - !type:AddLanguageSpecial # Monolith - Languages
+  - !type:AddLanguageSpecial
     languagesSpoken:
     - SolCommon
     languagesUnderstood:
@@ -48,12 +46,11 @@
     prototype: FrontierBirthdayGift
 
 - type: startingGear
-  id: SeniorOfficerGear
+  id: TsfSeniorOfficerGear
   equipment:
-    pocket1: WeaponPistolMk58 #WeaponPistolMk58Nonlethal
+    pocket1: WeaponPistolMk58
   storage:
     back:
     - Magazine45_ACPPistolFMJ
     - BaseSecurityUplinkRadioOfficer
-#    - ShipVoucherNfsdSergeant # Mono
-    - RadioHandheldNF # Mono
+    - RadioHandheldNF

@@ -1,26 +1,24 @@
 - type: job
-  id: Cadet
-  name: job-name-cadet-nf
-  description: job-description-cadet-nf
-  playTimeTracker: JobSecurityCadet
+  id: TsfRecruit
+  name: job-name-tsf-recruit
+  description: job-description-tsf-recruit
+  playTimeTracker: JobTsfRecruit
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 32400 # 9 hours # mono
+      time: 32400
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 72000 # 20 hours # mono
-      inverted: true # Leave slots open for newer, less confident players.
-  startingGear: CadetGear
-  icon: JobIconCadetNF
-  supervisors: job-supervisors-cadet
+      time: 72000
+      inverted: true
+  startingGear: TsfRecruitGear
+  icon: JobIconTsfRecruit
+  supervisors: job-supervisors-tsf-rangers
   weight: 70
   displayWeight: 10
-  hideConsoleVisibility: true #Forge Change
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ] # Mono
-  setPreference: false # mono
+  guides: [ BasicLore, TransSolarFederation ]
   accessGroups:
-  - CadetNfsdAccess
+  - TsfCadetAccess
   special:
   - !type:AddComponentSpecial
     components:
@@ -29,7 +27,7 @@
       - TSFMC
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TrackingImplant ]
-  - !type:AddLanguageSpecial # Monolith - Languages
+  - !type:AddLanguageSpecial
     languagesSpoken:
     - SolCommon
     languagesUnderstood:
@@ -39,13 +37,13 @@
     prototype: FrontierBirthdayGift
 
 - type: startingGear
-  id: CadetGear
+  id: TsfRecruitGear
   equipment:
-    pocket1: WeaponPistolMk58 #WeaponPistolMk58Nonlethal
+    pocket1: WeaponPistolMk58
     pocket2: BookSecurity
   storage:
     back:
     - Magazine45_ACPPistolFMJ
     - FederationMilitaryCredit50
     - BaseSecurityUplinkRadio
-    - RadioHandheldNF # Mono
+    - RadioHandheldNF

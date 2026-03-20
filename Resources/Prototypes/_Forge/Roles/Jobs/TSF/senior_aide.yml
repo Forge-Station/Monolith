@@ -1,29 +1,27 @@
 - type: job
-  id: PublicAffairsLiaison
-  name: job-name-pal
-  description: job-description-public-affairs-liaison
-  playTimeTracker: JobPublicAffairsLiaison
+  id: TsfSeniorAide
+  name: job-name-tsf-senior-aide
+  description: job-description-tsf-senior-aide
+  playTimeTracker: JobTsfSeniorAide
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 28800 # 8 hours # mono
+      time: 28800
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 7200 # 2 hours # mono
+      time: 7200
   alternateRequirementSets:
     longerPlaytimeLessSec:
     - !type:OverallPlaytimeRequirement
-      time: 36000 # 10 hours # mono
-  startingGear: PublicAffairGear
-  icon: "JobIconPublicAffairsLiaison"
-  supervisors: job-supervisors-cadet
+      time: 36000
+  startingGear: TsfSeniorAideGear
+  icon: JobIconTsfSeniorAide
+  supervisors: job-supervisors-tsf-commanding-officer
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ] # Mono
+  guides: [ BasicLore, TransSolarFederation ]
   weight: 105
   displayWeight: 16
-  setPreference: false # mono
-  hideConsoleVisibility: true #Forge Change
   accessGroups:
-  - CadetNfsdAccess
+  - TsfGeneralAccess
   special:
   - !type:AddComponentSpecial
     components:
@@ -32,7 +30,7 @@
       - TSFMC
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TrackingImplant ]
-  - !type:AddLanguageSpecial # Monolith - Languages
+  - !type:AddLanguageSpecial
     languagesSpoken:
     - SolCommon
     languagesUnderstood:
@@ -42,7 +40,7 @@
     prototype: FrontierBirthdayGift
 
 - type: startingGear
-  id: PublicAffairGear
+  id: TsfSeniorAideGear
   equipment:
     pocket1: HyperlinkBookSpaceLaw
     pocket2: BoxFolderClipboardPal

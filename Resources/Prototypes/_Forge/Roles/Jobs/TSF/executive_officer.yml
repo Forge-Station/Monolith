@@ -1,35 +1,33 @@
 - type: job
-  id: Bailiff
-  name: job-name-bailiff
-  description: job-description-bailiff
-  playTimeTracker: JobWarden
-  requirements: # mono - lowers all of these tbh
+  id: TsfExecutiveOfficer
+  name: job-name-tsf-executive-officer
+  description: job-description-tsf-executive-officer
+  playTimeTracker: JobTsfExecutiveOfficer
+  requirements:
     - !type:OverallPlaytimeRequirement
-      time: 72000 # 20 hours
+      time: 72000
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 36000 # 10 hours
+      time: 36000
     - !type:RoleTimeRequirement
       role: JobSeniorOfficer
-      time: 10800 # 3 hours
-  startingGear: BailiffGear
-  icon: JobIconBailiff
-  setPreference: false #Forge Change
-  supervisors: job-supervisors-sheriff
+      time: 10800
+  startingGear: TsfExecutiveOfficerGear
+  icon: JobIconTsfExecutiveOfficer
+  supervisors: job-supervisors-tsf-commanding-officer
   weight: 150
   displayWeight: 60
-  hideConsoleVisibility: true #Forge Change
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ] # Mono
+  guides: [ BasicLore, TransSolarFederation ]
   access:
   - Armory
   - Sergeant
   - Bailiff
   - Medical
   - Chemistry
-  - TsfmcEngineering # Mono
+  - TsfmcEngineering
   accessGroups:
-  - GeneralNfsdAccess
+  - TsfGeneralAccess
   special:
   - !type:AddComponentSpecial
     components:
@@ -48,13 +46,12 @@
     prototype: FrontierBirthdayGift
 
 - type: startingGear
-  id: BailiffGear
+  id: TsfExecutiveOfficerGear
   equipment:
-    pocket1: WeaponPistolMk58 #WeaponPistolMk58Nonlethal
+    pocket1: WeaponPistolMk58
   storage:
     back:
     - Magazine45_ACPPistolFMJ
     - BaseSecurityUplinkRadioCaptain
-#    - ShipVoucherNfsdBailiff # Mono
     - RubberStampBailiff
-    - RadioHandheldNF # Mono
+    - RadioHandheldNF

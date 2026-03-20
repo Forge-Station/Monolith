@@ -21,6 +21,7 @@
   canBeAntag: false
   guides: [ BasicLore, TransSolarFederation ] # Mono
   setPreference: false # mono
+  hideConsoleVisibility: true #Forge Change
   access:
   - Detective
   accessGroups:

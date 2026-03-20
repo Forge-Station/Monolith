@@ -48,13 +48,15 @@
           lobbySortOrder: 2
         - type: StationJobs
           availableJobs:
-            Sheriff: [ 1, 1 ]
-            Bailiff: [1, 1 ]
-            SeniorOfficer: [ 3, 3 ] # Mono
-            Brigmedic: [ 2, 2 ] # Mono
-            Deputy: [ -1, -1 ] # Mono
+            #Forge Change
+            TsfCommandingOfficer: [ 1, 1 ]
+            TsfExecutiveOfficer: [ 1, 1 ]
+            TsfSeniorOfficer: [ 1, 1 ]
+            TsfSeniorAide: [ 1, 1 ]
+            TsfAmbassador: [ 1, 1 ]
+            TsfRanger: [ -1, -1 ]
+            TsfRecruit: [ -1, -1 ]
             TsfEngineer: [ 2, 2 ]
-            TsfBorg: [ 2, 2 ]
           tags:
           - HeadOfPersonnel
           - HeadOfSecurity

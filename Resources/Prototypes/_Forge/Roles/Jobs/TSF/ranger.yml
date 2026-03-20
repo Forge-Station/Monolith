@@ -1,0 +1,43 @@
+- type: job
+  id: TsfRanger
+  name: job-name-tsf-ranger
+  description: job-description-tsf-ranger
+  playTimeTracker: JobTsfRanger
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 36000
+  startingGear: TsfRangerGear
+  icon: JobIconTsfRanger
+  supervisors: job-supervisors-tsf-officers
+  weight: 130
+  displayWeight: 40
+  canBeAntag: false
+  guides: [ BasicLore, TransSolarFederation ]
+  accessGroups:
+  - TsfGeneralAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - TSFMC
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, TrackingImplant ]
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - SolCommon
+    languagesUnderstood:
+    - SolCommon
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: TsfRangerGear
+  equipment:
+    pocket1: WeaponPistolMk58
+  storage:
+    back:
+    - Magazine45_ACPPistolFMJ
+    - BaseSecurityUplinkRadioDeputy
+    - RadioHandheldNF

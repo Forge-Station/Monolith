@@ -79,6 +79,7 @@
   - StationRepresentative # Frontier
   - Sheriff  # Frontier
   - StationTrafficController # Frontier
+  - TsfCommandingOfficer #Forge Change
   - DirectorOfCare # Mono
   primary: false
   weight: 100
@@ -108,6 +109,7 @@
   description: department-NFSecurity-description # Frontier
   color: "#326DA8" # Mono
   weight: 120 # Mono
+  editorHidden: true #Forge Change
   roles:
 #  - Detective # Frontier
 #  - HeadOfSecurity # Frontier
@@ -124,8 +126,7 @@
   - Sheriff # Frontier
   - SeniorOfficer # Frontier
   - PublicAffairsLiaison # Frontier
-  - TsfEngineer # Mono
-  - TsfBorg # Mono
+  #Forge Change - TSF engineer and borg moved to the dedicated TSF department.
 
 - type: department
   id: Science

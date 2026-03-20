@@ -21,3 +21,24 @@
 
 - type: playTimeTracker
   id: JobNeophyte
+
+- type: playTimeTracker
+  id: JobTsfCommandingOfficer
+
+- type: playTimeTracker
+  id: JobTsfExecutiveOfficer
+
+- type: playTimeTracker
+  id: JobTsfSeniorOfficer
+
+- type: playTimeTracker
+  id: JobTsfSeniorAide
+
+- type: playTimeTracker
+  id: JobTsfRanger
+
+- type: playTimeTracker
+  id: JobTsfRecruit
+
+- type: playTimeTracker
+  id: JobTsfAmbassador

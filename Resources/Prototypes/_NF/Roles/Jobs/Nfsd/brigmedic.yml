@@ -15,9 +15,11 @@
       time: 108000 # 30 hours - mono
   startingGear: BrigmedicGear
   icon: JobIconBrigmedicNF
+  setPreference: false #Forge Change
   supervisors: job-supervisors-bailiff
   weight: 125
   displayWeight: 35
+  hideConsoleVisibility: true #Forge Change
   canBeAntag: false
   guides: [ BasicLore, TransSolarFederation ] # Mono
   accessGroups:

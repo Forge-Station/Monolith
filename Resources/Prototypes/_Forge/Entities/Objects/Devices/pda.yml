@@ -109,3 +109,59 @@
     attachedToSuit: true # Mono
   - type: PdaBorderColor
     borderColor: "#ab7a52"
+
+- type: entity
+  parent: SheriffPDA
+  id: TsfCommandingOfficerPDA
+  name: commanding officer PDA
+  components:
+  - type: Pda
+    id: TsfCommandingOfficerIDCard
+
+- type: entity
+  parent: BailiffPDA
+  id: TsfExecutiveOfficerPDA
+  name: executive officer PDA
+  components:
+  - type: Pda
+    id: TsfExecutiveOfficerIDCard
+
+- type: entity
+  parent: SergeantPDA
+  id: TsfSeniorOfficerPDA
+  name: senior officer PDA
+  components:
+  - type: Pda
+    id: TsfSeniorOfficerIDCard
+
+- type: entity
+  parent: PublicAffairsLiaisonPDA
+  id: TsfSeniorAidePDA
+  name: senior aide PDA
+  components:
+  - type: Pda
+    id: TsfSeniorAideIDCard
+
+- type: entity
+  parent: SrPDA
+  id: TsfAmbassadorPDA
+  name: federation ambassador PDA
+  components:
+  - type: Pda
+    id: TsfAmbassadorIDCard
+
+- type: entity
+  parent: DeputyPDA
+  id: TsfRangerPDA
+  name: ranger PDA
+  components:
+  - type: Pda
+    id: TsfRangerIDCard
+
+- type: entity
+  parent: CadetPDA
+  id: TsfRecruitPDA
+  name: recruit PDA
+  components:
+  - type: Pda
+    id: TsfRecruitIDCard

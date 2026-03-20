@@ -80,15 +80,17 @@ public sealed partial class IdCardConsoleComponent : Component
         "Sergeant", // Frontier
         "Service",
         "StationTrafficController", // Frontier
+        "TsfmcEngineering", // Forge Change
         //"USSP", // Mono
         //"USSPHigh", // Mono
         //"USSPCommand", // Mono
         //"Theatre",
-        "Empire", // Forge-change
-        "EmpireOfficer", // Forge-change
-        "EmpireInqusitor", // Forge-change
-        "EmpireCommander", // Forge-change
-        "EmpireDiplomacy", // Forge-change
+        "Empire", // Forge Change
+        "EmpireOfficer", // Forge Change
+        "EmpireInqusitor", // Forge Change
+        "EmpireCommander", // Forge Change
+        "EmpireDiplomacy", // Forge Change
+        "TsfDiplomacy", // Forge Change
     };
 
     [Serializable, NetSerializable]

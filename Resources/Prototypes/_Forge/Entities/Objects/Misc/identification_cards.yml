@@ -49,3 +49,59 @@
     - state: idemplord
   - type: PresetIdCard
     job: Praefect
+
+- type: entity
+  parent: ShriffIDCard
+  id: TsfCommandingOfficerIDCard
+  name: TSF commanding officer ID card
+  components:
+  - type: PresetIdCard
+    job: TsfCommandingOfficer
+
+- type: entity
+  parent: BailiffIDCard
+  id: TsfExecutiveOfficerIDCard
+  name: TSF executive officer ID card
+  components:
+  - type: PresetIdCard
+    job: TsfExecutiveOfficer
+
+- type: entity
+  parent: SergeantIDCard
+  id: TsfSeniorOfficerIDCard
+  name: TSF senior officer ID card
+  components:
+  - type: PresetIdCard
+    job: TsfSeniorOfficer
+
+- type: entity
+  parent: PublicAffairsIDCard
+  id: TsfSeniorAideIDCard
+  name: TSF senior aide ID card
+  components:
+  - type: PresetIdCard
+    job: TsfSeniorAide
+
+- type: entity
+  parent: SrIDCard
+  id: TsfAmbassadorIDCard
+  name: federation ambassador ID card
+  components:
+  - type: PresetIdCard
+    job: TsfAmbassador
+
+- type: entity
+  parent: DeputyIDCard
+  id: TsfRangerIDCard
+  name: TSF ranger ID card
+  components:
+  - type: PresetIdCard
+    job: TsfRanger
+
+- type: entity
+  parent: CadetIDCard
+  id: TsfRecruitIDCard
+  name: TSF recruit ID card
+  components:
+  - type: PresetIdCard
+    job: TsfRecruit

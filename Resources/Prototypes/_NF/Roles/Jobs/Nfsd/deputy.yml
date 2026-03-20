@@ -8,9 +8,11 @@
       time: 36000 # 10 hours
   startingGear: DeputyGear
   icon: JobIconDeputy
+  setPreference: false #Forge Change
   supervisors: job-supervisors-sergeant
   weight: 130
   displayWeight: 40
+  hideConsoleVisibility: true #Forge Change
   canBeAntag: false
   guides: [ BasicLore, TransSolarFederation ] # Mono
   accessGroups:

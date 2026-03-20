@@ -1,0 +1,22 @@
+- type: accessLevel
+  id: TsfDiplomacy
+  name: id-card-access-level-tsf-diplomacy
+
+- type: accessGroup
+  id: TsfCadetAccess
+  tags:
+  - Maintenance
+  - External
+  - Security
+  - Brig
+
+- type: accessGroup
+  id: TsfGeneralAccess
+  tags:
+  - Maintenance
+  - External
+  - Command
+  - Brig
+  - Security
+  - Mercenary
+  - Captain

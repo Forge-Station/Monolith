@@ -122,3 +122,22 @@ JobVisitor = Visitor
 # Mono: Warden<TSFMC Captain
 JobWarden = TSFMC Captain
 JobZookeeper = Zookeeper
+
+#Forge Change
+JobTsfCommandingOfficer = Commanding Officer
+JobTsfExecutiveOfficer = Executive Officer
+JobTsfSeniorOfficer = Senior Officer
+JobTsfSeniorAide = Senior Aide
+JobTsfAmbassador = Federation Ambassador
+JobTsfRanger = Ranger
+JobTsfRecruit = Recruit
+
+#Forge Change
+department-TSF = Trans-Solar Federation
+job-name-tsf-commanding-officer = Commanding Officer
+job-name-tsf-senior-officer = Senior Officer
+job-name-tsf-executive-officer = Executive Officer
+job-name-tsf-senior-aide = Senior Aide
+job-name-tsf-ambassador = Federation Ambassador
+job-name-tsf-ranger = Ranger
+job-name-tsf-recruit = Recruit

@@ -1,32 +1,30 @@
 - type: job
-  id: Sheriff
-  name: job-name-sheriff
-  description: job-description-sheriff
-  playTimeTracker: JobHeadOfSecurity
+  id: TsfCommandingOfficer
+  name: job-name-tsf-commanding-officer
+  description: job-description-tsf-commanding-officer
+  playTimeTracker: JobTsfCommandingOfficer
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 144000 # 40 hours - mono
+      time: 144000
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 90000 # 25 hours - mono
+      time: 90000
     - !type:RoleTimeRequirement
       role: JobWarden
-      time: 18000 # 5 hours - mono
+      time: 18000
   whitelisted: true
-  startingGear: SheriffGear
+  startingGear: TsfCommandingOfficerGear
   alwaysUseSpawner: true
-  icon: JobIconSheriff
+  icon: JobIconTsfCommandingOfficer
   requireAdminNotify: true
-  setPreference: false #Forge Change
-  supervisors: job-supervisors-centcom
+  supervisors: job-supervisors-tsf-high-command
   weight: 180
   displayWeight: 70
-  hideConsoleVisibility: true #Forge Change
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ] # Mono
+  guides: [ BasicLore, TransSolarFederation ]
   accessGroups:
   - AllAccess
-  access: # Mono
+  access:
   - TsfmcEngineering
   special:
   - !type:AddComponentSpecial
@@ -39,7 +37,7 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-  - !type:AddLanguageSpecial # Monolith - Languages
+  - !type:AddLanguageSpecial
     languagesSpoken:
     - SolCommon
     languagesUnderstood:
@@ -49,9 +47,9 @@
     prototype: FrontierBirthdayGift
 
 - type: startingGear
-  id: SheriffGear
+  id: TsfCommandingOfficerGear
   equipment:
-    pocket1: WeaponEnergyGunMultiphase # DeltaV gun
+    pocket1: WeaponEnergyGunMultiphase
     pocket2: EnergySwordNfsd
   storage:
     back:

@@ -1,0 +1,97 @@
+- type: loadout
+  id: LoadoutTsfCommandingOfficerPDA
+  equipment:
+    id: TsfCommandingOfficerPDA
+
+- type: loadoutGroup
+  id: TsfCommandingOfficerPDA
+  name: loadout-group-contractor-id
+  hidden: true
+  loadouts:
+  - LoadoutTsfCommandingOfficerPDA
+  fallbacks:
+  - LoadoutTsfCommandingOfficerPDA
+
+- type: loadout
+  id: LoadoutTsfExecutiveOfficerPDA
+  equipment:
+    id: TsfExecutiveOfficerPDA
+
+- type: loadoutGroup
+  id: TsfExecutiveOfficerPDA
+  name: loadout-group-contractor-id
+  hidden: true
+  loadouts:
+  - LoadoutTsfExecutiveOfficerPDA
+  fallbacks:
+  - LoadoutTsfExecutiveOfficerPDA
+
+- type: loadout
+  id: LoadoutTsfSeniorOfficerPDA
+  equipment:
+    id: TsfSeniorOfficerPDA
+
+- type: loadoutGroup
+  id: TsfSeniorOfficerPDA
+  name: loadout-group-contractor-id
+  hidden: true
+  loadouts:
+  - LoadoutTsfSeniorOfficerPDA
+  fallbacks:
+  - LoadoutTsfSeniorOfficerPDA
+
+- type: loadout
+  id: LoadoutTsfSeniorAidePDA
+  equipment:
+    id: TsfSeniorAidePDA
+
+- type: loadoutGroup
+  id: TsfSeniorAidePDA
+  name: loadout-group-contractor-id
+  hidden: true
+  loadouts:
+  - LoadoutTsfSeniorAidePDA
+  fallbacks:
+  - LoadoutTsfSeniorAidePDA
+
+- type: loadout
+  id: LoadoutTsfAmbassadorPDA
+  equipment:
+    id: TsfAmbassadorPDA
+
+- type: loadoutGroup
+  id: TsfAmbassadorPDA
+  name: loadout-group-contractor-id
+  hidden: true
+  loadouts:
+  - LoadoutTsfAmbassadorPDA
+  fallbacks:
+  - LoadoutTsfAmbassadorPDA
+
+- type: loadout
+  id: LoadoutTsfRangerPDA
+  equipment:
+    id: TsfRangerPDA
+
+- type: loadoutGroup
+  id: TsfRangerPDA
+  name: loadout-group-contractor-id
+  hidden: true
+  loadouts:
+  - LoadoutTsfRangerPDA
+  fallbacks:
+  - LoadoutTsfRangerPDA
+
+- type: loadout
+  id: LoadoutTsfRecruitPDA
+  equipment:
+    id: TsfRecruitPDA
+
+- type: loadoutGroup
+  id: TsfRecruitPDA
+  name: loadout-group-contractor-id
+  hidden: true
+  loadouts:
+  - LoadoutTsfRecruitPDA
+  fallbacks:
+  - LoadoutTsfRecruitPDA

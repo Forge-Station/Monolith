@@ -45,3 +45,6 @@ id-card-access-level-syndicate-agent = Syndicate Agent
 id-card-access-level-central-command = Central Command
 
 id-card-access-level-wizard = Wizard
+
+#Forge Change
+id-card-access-level-tsf-diplomacy = Federation Diplomacy

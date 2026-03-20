@@ -3,11 +3,12 @@
   name: job-name-tsf-borg
   description: job-description-tsf-borg
   playTimeTracker: JobTsfBorg
-  setPreference: true
+  setPreference: false #Forge Change
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 43200
   canBeAntag: false
+  hideConsoleVisibility: true #Forge Change
   icon: JobIconBorg
   supervisors: job-supervisors-hire
   jobEntity: PlayerBorgTSF

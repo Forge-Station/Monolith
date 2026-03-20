@@ -68,3 +68,60 @@
   components:
   - type: SpawnPoint
     job_id: Neophyte
+
+# region TSF
+- type: entity
+  id: ForgeSpawnPointTsfCommandingOfficer
+  parent: SpawnPointSheriff
+  name: spawn point Commanding Officer
+  components:
+  - type: SpawnPoint
+    job_id: TsfCommandingOfficer
+
+- type: entity
+  id: ForgeSpawnPointTsfExecutiveOfficer
+  parent: SpawnPointBailiff
+  name: spawn point Executive Officer
+  components:
+  - type: SpawnPoint
+    job_id: TsfExecutiveOfficer
+
+- type: entity
+  id: ForgeSpawnPointTsfSeniorOfficer
+  parent: NFSpawnPointSeniorOfficer
+  name: spawn point Senior Officer
+  components:
+  - type: SpawnPoint
+    job_id: TsfSeniorOfficer
+
+- type: entity
+  id: ForgeSpawnPointTsfSeniorAide
+  parent: SpawnPointPublicAffairsLiaison
+  name: spawn point Senior Aide
+  components:
+  - type: SpawnPoint
+    job_id: TsfSeniorAide
+
+- type: entity
+  id: ForgeSpawnPointTsfAmbassador
+  parent: SpawnPointPublicAffairsLiaison
+  name: spawn point Federation Ambassador
+  components:
+  - type: SpawnPoint
+    job_id: TsfAmbassador
+
+- type: entity
+  id: ForgeSpawnPointTsfRanger
+  parent: SpawnPointDeputy
+  name: spawn point Ranger
+  components:
+  - type: SpawnPoint
+    job_id: TsfRanger
+
+- type: entity
+  id: ForgeSpawnPointTsfRecruit
+  parent: SpawnPointCadet
+  name: spawn point Recruit
+  components:
+  - type: SpawnPoint
+    job_id: TsfRecruit

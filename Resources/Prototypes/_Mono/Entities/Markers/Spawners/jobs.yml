@@ -1,26 +1,26 @@
 
 #PDV
-- type: entity
-  id: SpawnPointPDVDenasvar
-  parent: SpawnPointJobBase
-  name: PDV Denasvar
-  components:
-  - type: SpawnPoint
-    job_id: PDVDenasvar
-  - type: Sprite
-    sprite: Structures/Decoration/banner.rsi
-    state: banner-red
+#- type: entity # Forge-Change-delete: job PDVDenasvar
+#  id: SpawnPointPDVDenasvar
+#  parent: SpawnPointJobBase
+#  name: PDV Denasvar
+#  components:
+#  - type: SpawnPoint
+#    job_id: PDVDenasvar
+#  - type: Sprite
+#    sprite: Structures/Decoration/banner.rsi
+#    state: banner-red
 
-- type: entity
-  id: SpawnPointPDVInfiltrator
-  parent: SpawnPointJobBase
-  name: pdv infiltrator
-  components:
-  - type: SpawnPoint
-    job_id: PDVInfiltrator
-  - type: Sprite
-    sprite: Structures/Decoration/banner.rsi
-    state: banner-red
+#- type: entity # Forge-Change-delete: job PDVInfiltrator
+#  id: SpawnPointPDVInfiltrator
+#  parent: SpawnPointJobBase
+#  name: pdv infiltrator
+#  components:
+#  - type: SpawnPoint
+#    job_id: PDVInfiltrator
+#  - type: Sprite
+#    sprite: Structures/Decoration/banner.rsi
+#    state: banner-red
 
 - type: entity
   id: SpawnPointPDVBorg

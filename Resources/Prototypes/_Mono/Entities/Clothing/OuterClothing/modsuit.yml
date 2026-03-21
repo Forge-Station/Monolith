@@ -113,7 +113,7 @@
     reduction: 0.5
 
 - type: entity
-  parent: [ ClothingOuterBase, GeigerCounterClothing, BaseFactionGearPDVT3 ] # Mono - add geiger
+  parent: [ ClothingOuterBase, GeigerCounterClothing ] # Mono - add geiger # Forge-Change-delete: BaseFactionGearPDVT3
   id: ClothingModsuitChestplateRogue
   name: RX-01 modsuit chestplate
   description: The chestpiece has some warning label on the inside about radiation leaks- and a note next to it 'Remove this label in the final product - Felix
@@ -234,7 +234,7 @@
 # Gallóglach
 
 - type: entity
-  parent: [ ClothingOuterBase ] # Mono 
+  parent: [ ClothingOuterBase ] # Mono
   id: ClothingModsuitChestplateMercenary
   name: mercenary modsuit chestplate
   description: A well rounded modsuit that focuses on mobility with its Actuator Enhancement System allowing its wearer to leap across the battlefield for rapid redeployment.

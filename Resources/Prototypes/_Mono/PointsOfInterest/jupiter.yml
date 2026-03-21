@@ -40,10 +40,7 @@
           stationDescription: 'frontier-lobby-jupiter-description'
           lobbySortOrder: 2
         - type: StationJobs
-          availableJobs:
-            PirateFirstMate: [ 1, 1 ] # Mono
-            PDVDenasvar: [ 2, 2 ]
-            Pirate: [ 8, 8 ] # Mono
+          availableJobs: {} # Forge-Change-delete: was PirateFirstMate, PDVDenasvar, Pirate
           tags:
           - PDVCommand
         - type: StationDeadDropReporting

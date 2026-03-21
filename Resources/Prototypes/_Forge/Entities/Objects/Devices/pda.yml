@@ -273,6 +273,7 @@
   parent: SheriffPDA
   id: TsfCommandingOfficerPDA
   name: commanding officer PDA
+  suffix: ТСФ
   components:
   - type: Pda
     id: TsfCommandingOfficerIDCard
@@ -281,6 +282,7 @@
   parent: BailiffPDA
   id: TsfExecutiveOfficerPDA
   name: executive officer PDA
+  suffix: ТСФ
   components:
   - type: Pda
     id: TsfExecutiveOfficerIDCard
@@ -289,6 +291,7 @@
   parent: SergeantPDA
   id: TsfSeniorOfficerPDA
   name: senior officer PDA
+  suffix: ТСФ
   components:
   - type: Pda
     id: TsfSeniorOfficerIDCard
@@ -297,6 +300,7 @@
   parent: PublicAffairsLiaisonPDA
   id: TsfSeniorAidePDA
   name: senior aide PDA
+  suffix: ТСФ
   components:
   - type: Pda
     id: TsfSeniorAideIDCard
@@ -305,6 +309,7 @@
   parent: SrPDA
   id: TsfAmbassadorPDA
   name: federation ambassador PDA
+  suffix: ТСФ
   components:
   - type: Pda
     id: TsfAmbassadorIDCard
@@ -313,6 +318,7 @@
   parent: DeputyPDA
   id: TsfRangerPDA
   name: ranger PDA
+  suffix: ТСФ
   components:
   - type: Pda
     id: TsfRangerIDCard
@@ -321,6 +327,7 @@
   parent: CadetPDA
   id: TsfRecruitPDA
   name: recruit PDA
+  suffix: ТСФ
   components:
   - type: Pda
     id: TsfRecruitIDCard

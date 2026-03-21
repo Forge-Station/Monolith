@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBase, BaseFactionGearPDVT2, ShowSecurityIcons, ClothingHeadSuitWithLightBase]
+  parent: [ClothingHeadHardsuitBase, ShowSecurityIcons, ClothingHeadSuitWithLightBase] # Forge-Change-delete: BaseFactionGearPDVT2
   id: ClothingHeadHelmetHardsuitPirateScaf
   name: PDV SCAF hardsuit helmet
   description: An old SCAF suit painted in an PDV tan color scheme. Has been outfitted with a thermal pulse scanner.

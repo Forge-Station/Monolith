@@ -49,17 +49,17 @@
             Deputy: [ -1, -1]
             # Cadet: [ -1, -1] Mono
             # PublicAffairsLiaison: [ -1, -1] Mono
-            PirateCaptain: [ -1, -1]
-            PirateFirstMate: [ -1, -1]
-            PDVDenasvar: [ -1, -1] #Mono
-            Pirate: [ -1, -1] #Forge-Change
+            # PirateCaptain: [ -1, -1] # Forge-Change-delete
+            # PirateFirstMate: [ -1, -1] # Forge-Change-delete
+            # PDVDenasvar: [ -1, -1] #Mono # Forge-Change-delete
+            # Pirate: [ -1, -1] #Forge-Change # Forge-Change-delete
             Flunky: [ -1, -1] #Forge-Change
             Quack: [ -1, -1] #Forge-Change
             Foreman: [ -1, -1] #Forge-Change
             Draftsman: [ -1, -1] #Forge-Change
             Overseer: [ -1, -1] #Forge-Change
             Baron: [ -1, -1] #Forge-Change
-            PDVInfiltrator: [ -1, -1] # Mono]
+            # PDVInfiltrator: [ -1, -1] # Mono] # Forge-Change-delete
             # Prisoner: [ -1, -1] # Mono
             # USSPCommissar: [ -1, -1]
             # USSPSergeant: [ -1, -1]

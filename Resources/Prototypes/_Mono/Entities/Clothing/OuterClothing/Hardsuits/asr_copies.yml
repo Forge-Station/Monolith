@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndie, BaseFactionGearPDVT2 ]
+  parent: [ ClothingOuterHardsuitSyndie ] # Forge-Change-delete: BaseFactionGearPDVT2
   id: ClothingOuterHardsuitAshen
   name: PDV CV-32 combat tacsuit
   description: A combat tacsuit designed by the Phaethon Dynasty. A heavier but still general-purpose hardsuit.

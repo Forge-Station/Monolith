@@ -18,9 +18,7 @@
   parent: BaseFactionGearT0
   id: BaseFactionGearPDVT0
   abstract: true
-  components:
-  - type: Contraband
-    allowedDepartments: [ Antag ]
+  # allowedDepartments Antag removed — Forge-Change-delete
 
 - type: entity
   parent: BaseFactionGearPDVT0

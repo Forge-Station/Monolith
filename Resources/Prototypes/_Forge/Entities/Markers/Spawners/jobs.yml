@@ -134,6 +134,7 @@
   id: ForgeSpawnPointTsfCommandingOfficer
   parent: SpawnPointSheriff
   name: spawn point Commanding Officer
+  suffix: ТСФ
   components:
   - type: SpawnPoint
     job_id: TsfCommandingOfficer
@@ -142,6 +143,7 @@
   id: ForgeSpawnPointTsfExecutiveOfficer
   parent: SpawnPointBailiff
   name: spawn point Executive Officer
+  suffix: ТСФ
   components:
   - type: SpawnPoint
     job_id: TsfExecutiveOfficer
@@ -150,6 +152,7 @@
   id: ForgeSpawnPointTsfSeniorOfficer
   parent: NFSpawnPointSeniorOfficer
   name: spawn point Senior Officer
+  suffix: ТСФ
   components:
   - type: SpawnPoint
     job_id: TsfSeniorOfficer
@@ -158,6 +161,7 @@
   id: ForgeSpawnPointTsfSeniorAide
   parent: SpawnPointPublicAffairsLiaison
   name: spawn point Senior Aide
+  suffix: ТСФ
   components:
   - type: SpawnPoint
     job_id: TsfSeniorAide
@@ -166,6 +170,7 @@
   id: ForgeSpawnPointTsfAmbassador
   parent: SpawnPointPublicAffairsLiaison
   name: spawn point Federation Ambassador
+  suffix: ТСФ
   components:
   - type: SpawnPoint
     job_id: TsfAmbassador
@@ -174,6 +179,7 @@
   id: ForgeSpawnPointTsfRanger
   parent: SpawnPointDeputy
   name: spawn point Ranger
+  suffix: ТСФ
   components:
   - type: SpawnPoint
     job_id: TsfRanger
@@ -182,6 +188,7 @@
   id: ForgeSpawnPointTsfRecruit
   parent: SpawnPointCadet
   name: spawn point Recruit
+  suffix: ТСФ
   components:
   - type: SpawnPoint
     job_id: TsfRecruit

@@ -139,6 +139,7 @@
 - type: entity
   parent: ShriffIDCard
   id: TsfCommandingOfficerIDCard
+  suffix: ТСФ
   name: TSF commanding officer ID card
   components:
   - type: PresetIdCard
@@ -147,6 +148,7 @@
 - type: entity
   parent: BailiffIDCard
   id: TsfExecutiveOfficerIDCard
+  suffix: ТСФ
   name: TSF executive officer ID card
   components:
   - type: PresetIdCard
@@ -155,6 +157,7 @@
 - type: entity
   parent: SergeantIDCard
   id: TsfSeniorOfficerIDCard
+  suffix: ТСФ
   name: TSF senior officer ID card
   components:
   - type: PresetIdCard
@@ -163,6 +166,7 @@
 - type: entity
   parent: PublicAffairsIDCard
   id: TsfSeniorAideIDCard
+  suffix: ТСФ
   name: TSF senior aide ID card
   components:
   - type: PresetIdCard
@@ -171,6 +175,7 @@
 - type: entity
   parent: SrIDCard
   id: TsfAmbassadorIDCard
+  suffix: ТСФ
   name: federation ambassador ID card
   components:
   - type: PresetIdCard
@@ -179,6 +184,7 @@
 - type: entity
   parent: DeputyIDCard
   id: TsfRangerIDCard
+  suffix: ТСФ
   name: TSF ranger ID card
   components:
   - type: PresetIdCard
@@ -187,6 +193,7 @@
 - type: entity
   parent: CadetIDCard
   id: TsfRecruitIDCard
+  suffix: ТСФ
   name: TSF recruit ID card
   components:
   - type: PresetIdCard

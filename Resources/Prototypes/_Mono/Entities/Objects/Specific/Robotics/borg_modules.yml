@@ -60,7 +60,7 @@
 
 - type: entity
   id: BorgModulePDVStandardWeapon
-  parent: [ BaseBorgModule, BaseProviderBorgModule, BaseFactionGearPDVT2 ]
+  parent: [ BaseBorgModule, BaseProviderBorgModule ] # Forge-Change-delete: BaseFactionGearPDVT2
   name: PDV weapon cyborg module
   components:
   - type: Sprite
@@ -78,7 +78,7 @@
 
 - type: entity
   id: BorgModulePDVAdvancedWeapon
-  parent: [ BaseBorgModule, BaseProviderBorgModule, BaseFactionGearPDVT3 ]
+  parent: [ BaseBorgModule, BaseProviderBorgModule ] # Forge-Change-delete: BaseFactionGearPDVT3
   name: PDV advanced weapon cyborg module
   components:
   - type: Sprite

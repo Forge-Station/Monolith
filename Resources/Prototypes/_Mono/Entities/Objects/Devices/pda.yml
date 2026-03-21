@@ -331,7 +331,6 @@
   - type: PdaBorderColor
     borderColor: "#9c8245"
 
-
 - type: entity
   parent: BasePDVPDA
   id: PDVSpasakaPDA

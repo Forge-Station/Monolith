@@ -143,14 +143,15 @@
     heldPrefix: blue
 
 # MARK: PDV
+# PresetIdCard jobs removed (prototypes commented); IdCard jobTitle placeholder — Forge-Change-delete
 
 - type: entity
   parent: PirateIDCard
   id: PDVRakhshanIDCard
   name: PDV rakhshan id card
   components:
-  - type: PresetIdCard
-    job: Pirate
+  - type: IdCard
+    jobTitle: job-title-visitor
   - type: Sprite
     sprite: _Mono/Objects/Misc/id_cards.rsi
     layers:
@@ -163,8 +164,8 @@
   name: PDV Denasvar ID card
   description: An identification card of one of the veteran foot soldiers among the Dynasty's Vanguard.
   components:
-  - type: PresetIdCard
-    job: PDVDenasvar
+  - type: IdCard
+    jobTitle: job-title-visitor
   - type: Sprite
     sprite: _Mono/Objects/Misc/id_cards.rsi
     layers:
@@ -176,8 +177,8 @@
   id: PDVAsvaranIDCard
   name: PDV asvaran ID card
   components:
-  - type: PresetIdCard
-    job: PirateFirstMate
+  - type: IdCard
+    jobTitle: job-title-visitor
   - type: Sprite
     sprite: _Mono/Objects/Misc/id_cards.rsi
     layers:
@@ -189,8 +190,8 @@
   id: PDVGrandVizierIDCard
   name: PDV grand vizier ID card
   components:
-  - type: PresetIdCard
-    job: PirateCaptain
+  - type: IdCard
+    jobTitle: job-title-visitor
   - type: Sprite
     sprite: _Mono/Objects/Misc/id_cards.rsi
     layers:
@@ -203,8 +204,8 @@
   id: PDVSpasakaIDCard
   suffix: Chameleon
   components:
-  - type: PresetIdCard
-    job: PDVInfiltrator
+  - type: IdCard
+    jobTitle: job-title-visitor
   - type: Access
     tags:
     - Maintenance

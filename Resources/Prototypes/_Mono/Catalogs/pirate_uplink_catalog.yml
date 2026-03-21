@@ -250,9 +250,9 @@
     whitelist:
       tags:
       - PirateUplink
-  - !type:BuyerJobCondition
-    whitelist:
-      - PirateCaptain
+  # - !type:BuyerJobCondition # Forge-Change-delete: PirateCaptain
+  #   whitelist:
+  #     - PirateCaptain
 
 - type: listing
   id: UplinkPirateSyndicateMagboots
@@ -1018,11 +1018,11 @@
     whitelist:
       tags:
       - PirateUplink
-  - !type:BuyerJobCondition
-    whitelist:
-      - PDVDenasvar
-      - PirateFirstMate
-      - PirateCaptain
+  # - !type:BuyerJobCondition # Forge-Change-delete: PDVDenasvar, PirateFirstMate, PirateCaptain
+  #   whitelist:
+  #     - PDVDenasvar
+  #     - PirateFirstMate
+  #     - PirateCaptain
 
 #MARK: Equipment
 

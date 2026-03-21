@@ -19,7 +19,7 @@
   weight: 110
   displayWeight: 20
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ] # Mono
+ # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   setPreference: false # mono
   hideConsoleVisibility: true #Forge Change
   access:

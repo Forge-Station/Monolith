@@ -16,7 +16,7 @@
   weight: 70
   displayWeight: 10
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ]
+ # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   accessGroups:
   - TsfCadetAccess
   special:

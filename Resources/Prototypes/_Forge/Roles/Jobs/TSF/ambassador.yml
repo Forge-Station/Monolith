@@ -13,7 +13,7 @@
   weight: 30
   displayWeight: 30
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ]
+ # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   access:
   - TsfDiplomacy
   accessGroups:

@@ -14,7 +14,7 @@
   displayWeight: 40
   hideConsoleVisibility: true #Forge Change
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ] # Mono
+ # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   accessGroups:
   - GeneralNfsdAccess
   special:

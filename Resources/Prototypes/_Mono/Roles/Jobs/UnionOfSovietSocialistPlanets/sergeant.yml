@@ -15,7 +15,7 @@
   icon: "JobIconSeniorOfficer" # TODO - new USSP icons
   supervisors: job-supervisors-ussp-commissars
   canBeAntag: false
-  guides: [ BasicLore, UnitedSovietSocialistPlanets ] # Mono
+ # guides: [ BasicLore, UnitedSovietSocialistPlanets ] # Forge-Change-delete
   weight: 30
   displayWeight: 30
   special:

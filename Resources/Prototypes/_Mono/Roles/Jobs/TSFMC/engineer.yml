@@ -12,7 +12,7 @@
   weight: 130
   displayWeight: 20
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ] # Mono
+ # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   access:
   - TsfmcEngineering
   accessGroups:

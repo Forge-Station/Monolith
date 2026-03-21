@@ -15,7 +15,7 @@
   icon: "JobIconBrigmedic" # TODO - new USSP icons
   supervisors: job-supervisors-ussp-sergeant
   canBeAntag: false
-  guides: [ BasicLore, UnitedSovietSocialistPlanets ] # Mono
+ # guides: [ BasicLore, UnitedSovietSocialistPlanets ] # Forge-Change-delete
   weight: 15
   displayWeight: 15
   special:

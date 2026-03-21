@@ -21,7 +21,7 @@
   weight: 180
   displayWeight: 70
   canBeAntag: false
-  guides: [ BasicLore, TransSolarFederation ]
+ # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   accessGroups:
   - AllAccess
   access:

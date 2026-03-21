@@ -4109,27 +4109,6 @@ entities:
     - type: Transform
       pos: -1.5,16.5
       parent: 1
-- proto: SpawnPointPirate
-  entities:
-  - uid: 578
-    components:
-    - type: Transform
-      pos: 0.5,13.5
-      parent: 1
-- proto: SpawnPointPirateCaptain
-  entities:
-  - uid: 579
-    components:
-    - type: Transform
-      pos: 0.5,13.5
-      parent: 1
-- proto: SpawnPointPirateFirstMate
-  entities:
-  - uid: 580
-    components:
-    - type: Transform
-      pos: 0.5,13.5
-      parent: 1
 - proto: StairDark
   entities:
   - uid: 581

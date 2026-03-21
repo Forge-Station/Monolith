@@ -925,7 +925,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 5
-      - invalid
   - uid: 20
     components:
     - type: Transform
@@ -2867,7 +2866,6 @@ entities:
       deviceLists:
       - 2
       - 5
-      - invalid
   - uid: 339
     components:
     - type: Transform
@@ -3477,7 +3475,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 5
-      - invalid
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 415
@@ -3524,7 +3521,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 5
-      - invalid
     - type: AtmosPipeLayers
       pipeLayer: Tertiary
     - type: AtmosPipeColor

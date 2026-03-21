@@ -41,12 +41,12 @@
             CCServiceWorker: [ -1, -1 ]
             NFJanitor: [ -1, -1 ]
             MailCarrier: [ -1, -1 ]
-            Sheriff: [ -1, -1]
+            # Sheriff: [ -1, -1] # Forge-Change-delete
             # Bailiff: [ -1, -1] Mono
-            SeniorOfficer: [ -1, -1]
-            Brigmedic: [ -1, -1]
+            # SeniorOfficer: [ -1, -1] # Forge-Change-delete
+            # Brigmedic: [ -1, -1] # Forge-Change-delete
             # NFDetective: [ -1, -1] Mono
-            Deputy: [ -1, -1]
+            # Deputy: [ -1, -1] # Forge-Change-delete
             # Cadet: [ -1, -1] Mono
             # PublicAffairsLiaison: [ -1, -1] Mono
             # PirateCaptain: [ -1, -1] # Forge-Change-delete

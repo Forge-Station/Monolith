@@ -454,6 +454,7 @@ namespace Content.IntegrationTests.Tests
                 // Frontier: FIXME - hacky test fix
                 .Where(x =>
                     x.ID == PoolManager.TestMap || // Frontier: check test map
+                    x.MapPath.ToString().StartsWith("/Maps/_Forge/Outpost") || // Forge: station/outpost game maps (e.g. Frontier)
                     (x.MapPath.ToString().StartsWith("/Maps/_Mono") && // Mono: check Mono maps only
                     !x.MapPath.ToString().StartsWith("/Maps/_Mono/Shuttles") && // Mono: skip shuttles (not loaded as maps)
                     !x.MapPath.ToString().StartsWith("/Maps/_Mono/Deprecated") && // Mono: skip deprecated (not loaded as maps)

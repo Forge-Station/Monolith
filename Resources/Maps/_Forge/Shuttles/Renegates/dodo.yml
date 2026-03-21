@@ -1047,8 +1047,6 @@ entities:
     - type: BecomesStation
       id: dodo
     - type: RadiationGridResistance
-    - type: BecomesStation
-      id: Pathfinder
     - type: ShipGridLock
       locked: False
 - proto: AirAlarm

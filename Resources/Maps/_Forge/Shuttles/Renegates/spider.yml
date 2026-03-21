@@ -2118,8 +2118,6 @@ entities:
     - type: BecomesStation
       id: spider
     - type: RadiationGridResistance
-    - type: BecomesStation
-      id: Sprinter
     - type: ShipGridLock
       locked: False
 - proto: AirAlarm

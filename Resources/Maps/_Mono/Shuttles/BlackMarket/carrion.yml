@@ -1406,13 +1406,6 @@ entities:
     - type: Transform
       pos: 0.5,2.5
       parent: 2
-- proto: SpawnPointPirate
-  entities:
-  - uid: 249
-    components:
-    - type: Transform
-      pos: 0.5,2.5
-      parent: 2
 - proto: SubstationBasic
   entities:
   - uid: 47

@@ -14,41 +14,41 @@
 
 #region PDV
 
-- type: entity
-  parent: BaseFactionGearT0
-  id: BaseFactionGearPDVT0
-  abstract: true
-  # allowedDepartments Antag removed — Forge-Change-delete
+#- type: entity # Forge-Change-delete: BaseFactionGearPDVT0
+#  parent: BaseFactionGearT0
+#  id: BaseFactionGearPDVT0
+#  abstract: true
+  # allowedDepartments # #Forge-Change-delete
 
-- type: entity
-  parent: BaseFactionGearPDVT0
-  id: BaseFactionGearPDVT1
-  abstract: true
-  components:
-  - type: Contraband
-    severity: FactionGear1
-    turnInValues:
-      FederationMilitaryCredit: 5
+#- type: entity
+#  parent: BaseFactionGearPDVT0
+#  id: BaseFactionGearPDVT1
+#  abstract: true
+#  components:
+#  - type: Contraband
+#    severity: FactionGear1
+#    turnInValues:
+#      FederationMilitaryCredit: 5
 
-- type: entity
-  parent: BaseFactionGearPDVT0
-  id: BaseFactionGearPDVT2
-  abstract: true
-  components:
-  - type: Contraband
-    severity: FactionGear2
-    turnInValues:
-      FederationMilitaryCredit: 15
+#- type: entity
+#  parent: BaseFactionGearPDVT0
+#  id: BaseFactionGearPDVT2
+#  abstract: true
+#  components:
+#  - type: Contraband
+#    severity: FactionGear2
+#    turnInValues:
+#      FederationMilitaryCredit: 15
 
-- type: entity
-  parent: BaseFactionGearPDVT0
-  id: BaseFactionGearPDVT3
-  abstract: true
-  components:
-  - type: Contraband
-    severity: FactionGear3
-    turnInValues:
-      FederationMilitaryCredit: 45
+#- type: entity
+#  parent: BaseFactionGearPDVT0
+#  id: BaseFactionGearPDVT3
+#  abstract: true
+#  components:
+#  - type: Contraband
+#    severity: FactionGear3
+#    turnInValues:
+#      FederationMilitaryCredit: 45
 
 #endregion
 

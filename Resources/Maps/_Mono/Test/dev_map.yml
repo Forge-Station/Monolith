@@ -7877,20 +7877,6 @@ entities:
     - type: Transform
       pos: -4.5,4.5
       parent: 2
-- proto: SpawnPointPDVDenasvar
-  entities:
-  - uid: 1703
-    components:
-    - type: Transform
-      pos: -4.5,2.5
-      parent: 2
-- proto: SpawnPointPDVInfiltrator
-  entities:
-  - uid: 1877
-    components:
-    - type: Transform
-      pos: -4.5,2.5
-      parent: 2
 - proto: ForgeSpawnPointRenegateFlunky
   entities:
   - uid: 1878
@@ -7936,27 +7922,6 @@ entities:
 - proto: SpawnPointPilot
   entities:
   - uid: 1136
-    components:
-    - type: Transform
-      pos: -4.5,2.5
-      parent: 2
-- proto: SpawnPointPirate
-  entities:
-  - uid: 1137
-    components:
-    - type: Transform
-      pos: -4.5,2.5
-      parent: 2
-- proto: SpawnPointPirateCaptain
-  entities:
-  - uid: 1138
-    components:
-    - type: Transform
-      pos: -4.5,2.5
-      parent: 2
-- proto: SpawnPointPirateFirstMate
-  entities:
-  - uid: 1139
     components:
     - type: Transform
       pos: -4.5,2.5

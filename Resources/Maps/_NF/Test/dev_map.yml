@@ -7197,34 +7197,6 @@ entities:
     - type: Transform
       pos: -3.5,2.5
       parent: 179
-- proto: SpawnPointPirate
-  entities:
-  - uid: 1466
-    components:
-    - type: Transform
-      pos: -3.5,2.5
-      parent: 179
-- proto: SpawnPointPirateCaptain
-  entities:
-  - uid: 1465
-    components:
-    - type: Transform
-      pos: -3.5,2.5
-      parent: 179
-- proto: SpawnPointPirateFirstMate
-  entities:
-  - uid: 1464
-    components:
-    - type: Transform
-      pos: -3.5,2.5
-      parent: 179
-- proto: SpawnPointPrisoner
-  entities:
-  - uid: 1459
-    components:
-    - type: Transform
-      pos: -3.5,2.5
-      parent: 179
 - proto: SpawnPointPrisonGuard
   entities:
   - uid: 1491

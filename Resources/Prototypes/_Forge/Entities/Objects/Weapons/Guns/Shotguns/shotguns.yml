@@ -300,7 +300,7 @@
 
 - type: entity
   name: PaxChry Defensie-12 (12 gauge)
-  parent: [BaseWeaponShotgunRevolver, BaseGunWieldable]
+  parent: [ ForgeBaseWeaponFrameShotgunWieldable ]
   suffix: Ренегаты
   id: WeaponShotgunDefensie
   description: A simple hunting shotgun equipped with a non-removable drum magazine, which makes it slightly uncomfortable to handle. In your case, you will be hunting a larger target. It can only be loaded manually, so don't forget to bring a bandolier.
@@ -313,14 +313,26 @@
     - Back
     - suitStorage
   - type: Item
+    size: Large
     sprite: Forge/Objects/Weapons/Guns/Shotguns/Defensie_inhands_64x.rsi
     shape: # Goobstation
     - 0,0,4,1
   - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - ShellShotgun12_gaugeBuckshot
+      - ShellShotgun12_gaugeLight
+      - Cartridge
+    mayTransfer: true
+    proto: ShellShotgun12_gaugeBuckshot
     capacity: 12
-  - type: GunRequiresWield
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
   - type: Gun
     fireRate: 2.5
+    projectileSpeed: 45
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -328,3 +340,19 @@
       path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: ItemTax # Mono
+    taxAccounts:
+      nfsd: 0.2
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
+      state: all
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RevolversPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RevolversDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: RevolversDrop

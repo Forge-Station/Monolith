@@ -88,8 +88,6 @@ entities:
       bodyType: Dynamic
     - type: Fixtures
       fixtures: {}
-    - type: BecomesStation
-      id: Tethys
     - type: OccluderTree
     - type: Shuttle
       dampingModifier: 0.25
@@ -2912,8 +2910,6 @@ entities:
       pos: 2.5,-0.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 14
     - type: AtmosPipeColor

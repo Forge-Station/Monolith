@@ -19757,23 +19757,6 @@ entities:
     - type: Transform
       pos: -7.5,25.5
       parent: 1
-- proto: SpawnPointPirate
-  entities:
-  - uid: 3650
-    components:
-    - type: Transform
-      pos: -9.5,25.5
-      parent: 1
-  - uid: 3651
-    components:
-    - type: Transform
-      pos: -8.5,25.5
-      parent: 1
-  - uid: 3652
-    components:
-    - type: Transform
-      pos: -7.5,25.5
-      parent: 1
 - proto: SpeedLoader45_magnumFMJ
   entities:
   - uid: 1898

@@ -76,9 +76,10 @@
   - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
-  - MonoAISTCShuttleSpawnerScheduler
-  - MonoAISTCShuttleSpawnerSchedulerTier2
-  - MonoAsakimSTCShuttleSpawnerScheduler
+  # Forge-Change: включить надо позже шаттлы
+  # - MonoAISTCShuttleSpawnerScheduler
+  # - MonoAISTCShuttleSpawnerSchedulerTier2
+  # - MonoAsakimSTCShuttleSpawnerScheduler
   - MonoMonolithicEventsScheduler
 
 - type: gamePreset
@@ -94,7 +95,8 @@
   - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
-  - MonoChimeraSTCShuttleSpawnerScheduler
+  # Forge-Change: включить надо позже шаттлы
+  # - MonoChimeraSTCShuttleSpawnerScheduler
   - MonoMonolithicEventsScheduler
 
 - type: gamePreset
@@ -110,10 +112,11 @@
   - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
-  - MonoChimeraSTCShuttleSpawnerSchedulerSlow
-  - MonoAISTCShuttleSpawnerSchedulerSlow
-  - MonoAISTCShuttleSpawnerSchedulerTier2Slow
-  - MonoAsakimSTCShuttleSpawnerSchedulerSlow
+  # Forge-Change: включить надо позже шаттлы
+  # - MonoChimeraSTCShuttleSpawnerSchedulerSlow
+  # - MonoAISTCShuttleSpawnerSchedulerSlow
+  # - MonoAISTCShuttleSpawnerSchedulerTier2Slow
+  # - MonoAsakimSTCShuttleSpawnerSchedulerSlow
   - MonoMonolithicEventsScheduler
 
 - type: gamePreset
@@ -129,8 +132,9 @@
   - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
-  - MonoChimeraSTCShuttleSpawnerSchedulerApocalypse
-  - MonoAISTCShuttleSpawnerSchedulerApocalypse
-  - MonoAsakimSTCShuttleSpawnerSchedulerApocalypse
+  # Forge-Change: включить надо позже шаттлы
+  # - MonoChimeraSTCShuttleSpawnerSchedulerApocalypse
+  # - MonoAISTCShuttleSpawnerSchedulerApocalypse
+  # - MonoAsakimSTCShuttleSpawnerSchedulerApocalypse
   - MonoMonolithicEventsScheduler
 

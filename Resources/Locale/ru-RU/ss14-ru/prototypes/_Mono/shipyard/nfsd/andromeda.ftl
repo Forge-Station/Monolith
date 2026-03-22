@@ -1,2 +1,2 @@
-vessel-andromeda-name = TSF-CRSW Andromeda
-vessel-andromeda-desc = A experimental heavy frigate, with heavy burst frontal firepower and fast maneuveability.
+vessel-andromeda-name = ТСФ-CRSW «Андромеда»
+vessel-andromeda-desc = Экспериментальный тяжёлый фрегат с мощным залпом по курсу и высокой манёвренностью.

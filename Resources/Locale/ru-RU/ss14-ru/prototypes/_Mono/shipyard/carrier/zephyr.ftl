@@ -1,2 +1,2 @@
-vessel-zephyr-name = TSF-СКР Zephyr
-vessel-zephyr-desc = A fighter refurbished from recovered remnant Razor hulls.
+vessel-zephyr-name = ТСФ-СКР «Зефир»
+vessel-zephyr-desc = Истребитель, собранный из восстановленных корпусов Razor.

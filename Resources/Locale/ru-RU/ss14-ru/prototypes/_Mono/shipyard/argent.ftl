@@ -1,2 +1,2 @@
-vessel-argent-name = TSF-СКР Argent
-vessel-argent-desc = A retired frigate gutted out and refurbished for cargo transport.
+vessel-argent-name = ТСФ-СКР «Аргент»
+vessel-argent-desc = Выведенный из эксплуатации фрегат, освобождённый от боевых систем и переоборудованный под грузоперевозки.

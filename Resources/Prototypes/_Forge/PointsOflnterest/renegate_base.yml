@@ -41,7 +41,7 @@
           availableJobs:
             Baron: [ 1, 1 ]
             Draftsman: [ 1, 1 ]
-            Flunky: [ -1, -1 ]
+            Flunky: [ 5, 5 ]
             Foreman: [ 2, 2 ]
             Overseer: [ 1, 1]
             Quack: [ 2, 2 ]

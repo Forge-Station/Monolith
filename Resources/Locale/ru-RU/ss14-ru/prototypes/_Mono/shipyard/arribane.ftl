@@ -1,2 +1,2 @@
-vessel-arribane-name = HES Arribane
-vessel-arribane-desc = A shuttle purpose built by Horizon Energy for atmospheric work and gas mining. Living quarters are cramped, but comfortable.
+vessel-arribane-name = ХЭС «Аррибан»
+vessel-arribane-desc = Шаттл, специально построенный Horizon Energy для атмосферных работ и газодобычи. Жилые отсеки тесные, но удобные.

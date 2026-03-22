@@ -1,2 +1,2 @@
-vessel-dagger-name = TSF-СКР Dagger
-vessel-dagger-desc = Straight from the shipyards of Sol, this ship is equipped with a mass driver as its main armament for long-range fire support.
+vessel-dagger-name = ТСФ-СКР «Даггер»
+vessel-dagger-desc = Прямо с верфей Сола: основное вооружение — масс-драйвер для дальней огневой поддержки.

@@ -1,2 +1,2 @@
-vessel-padval-name = ПБ Padval
-vessel-padval-desc = The Padval is a factory and store, all in one. This ship is dedicated to producing goods to sell to the colossus sector at large.
+vessel-padval-name = ПБ «Подвал»
+vessel-padval-desc = «Подвал» совмещает фабрику и магазин: производство товаров для продажи по всему сектору Колосс.

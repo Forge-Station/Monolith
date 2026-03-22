@@ -1,2 +1,2 @@
-vessel-kopye-name = BYP Kopye
-vessel-kopye-desc = A thin, pointed ram made to fit the connection port of the Ledokol.
+vessel-kopye-name = БЯП «Копьё»
+vessel-kopye-desc = Узкий заострённый таранный модуль, стыкующийся со стыковочным портом «Ледокола».

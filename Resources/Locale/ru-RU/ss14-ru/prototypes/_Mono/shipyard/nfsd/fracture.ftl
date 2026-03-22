@@ -1,2 +1,2 @@
-vessel-fracture-name = TSF-СКР Fracture
-vessel-fracture-desc = A beefed up hull similar in signature to the Legionnaire. Carries weapons suitable for hunting and disabling ships quite larger than it. Does not come with ammo for 150mm TARNYXs.
+vessel-fracture-name = ТСФ-СКР «Фрактура»
+vessel-fracture-desc = Усиленный корпус со схожей сигнатурой с «Легионером». Вооружение для охоты и вывода из строя кораблей заметно крупнее себя. Боезапас к 150-мм TARNYX в комплект не входит.

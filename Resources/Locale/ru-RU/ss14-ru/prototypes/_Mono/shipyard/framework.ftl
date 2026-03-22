@@ -1,2 +1,2 @@
-vessel-framework-name = UNJ Framework
-vessel-framework-desc = The cheapest hunk of junk this side of the Rogue. Not meant to last, but has the potential to be anything.
+vessel-framework-name = УНЖ «Фреймворк»
+vessel-framework-desc = Самый дешёвый металлолом на этой стороне Рога. Не рассчитан на долгий век, но из него можно сделать что угодно.

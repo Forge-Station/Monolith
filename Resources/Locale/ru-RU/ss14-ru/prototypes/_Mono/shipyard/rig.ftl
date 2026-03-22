@@ -1,2 +1,2 @@
-vessel-rig-name = DIS Rig
-vessel-rig-desc = A heavy-class flying refinery straight from the DIS. Originally used as a marketing tool to encourage opportunistic newcomers to mine cheaply for the company, thanks to it's mining platform and industrial ore утилизатор it took a hold on the public market.
+vessel-rig-name = ДИС «Риг»
+vessel-rig-desc = Тяжёлый летающий НПЗ от DIS. Сначала задумывался как рекламный ход, чтобы новички дёшево копали на компанию; благодаря шахтёрской платформе и промышленному переработчику руды укоренился на гражданском рынке.

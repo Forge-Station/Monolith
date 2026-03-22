@@ -1,2 +1,2 @@
-vessel-borer-name = SHS-DIS Borer
-vessel-borer-desc = designed by SHM and produced in cooperation with DI, the borer is a cost effective ship for salvaging and derilect ломping.
+vessel-borer-name = ШХС-ДИС «Борер»
+vessel-borer-desc = Разработан SHM и выпускается совместно с DI: «Борер» — недорогой корабль для сальважа и разборки брошенных обломков.

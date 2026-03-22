@@ -1,2 +1,2 @@
-vessel-triage-name = МИ Triage
-vessel-triage-desc = Крайне компактный медицинский корабль, который наносит удар.
+vessel-triage-name = МИ «Триаж»
+vessel-triage-desc = Крайне компактный медицинский корабль с неожиданно богатым оснащением.

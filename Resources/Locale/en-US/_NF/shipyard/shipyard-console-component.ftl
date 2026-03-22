@@ -36,8 +36,12 @@ shipyard-console-menu-class-label = Class:{" "}
 shipyard-console-menu-engine-label = Engine:{" "}
 
 shipyard-console-purchase-available = Purchase
+shipyard-console-sell-button = Sell
 shipyard-console-guidebook = Manual
 shipyard-console-unassign-deed = Unassign
+shipyard-console-registered-none = None
+shipyard-console-rename-button = Rename
+shipyard-console-rename-placeholder = Name
 shipyard-console-deed-unassigned = Deed unassigned from ID card successfully.
 shipyard-console-confirm-unassign = Are you sure?
 shipyard-console-unassign-cooldown = Wait {$minutes} minute(s) before unassigning another deed.

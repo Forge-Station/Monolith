@@ -1,2 +1,2 @@
-vessel-sirius-name = СКР Sirius
-vessel-sirius-desc = An expedition ship outfitted with 4 57mms, 2 90mms, and a full chemistry setup.
+vessel-sirius-name = ТСФ-СКР «Сириус»
+vessel-sirius-desc = Экспедиционное судно: четыре 57-мм, два 90-мм и полноценная химлаборатория.

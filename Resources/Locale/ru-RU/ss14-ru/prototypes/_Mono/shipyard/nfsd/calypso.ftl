@@ -1,2 +1,2 @@
-vessel-calypso-name = TSF-СКР Calypso
-vessel-calypso-desc = A light corvette designed to help counter ships such as the Scorpion and Europa. Equipped with 2x CYREXAs, 4x L85, and 2x AK570, as well as 2x ASM-220 torpedoes.
+vessel-calypso-name = ТСФ-СКР «Калипсо»
+vessel-calypso-desc = Лёгкий корвет против кораблей вроде «Скорпиона» и «Европы». Вооружение: 2× CYREXA, 4× L85, 2× AK570 и 2× торпеды ASM-220.

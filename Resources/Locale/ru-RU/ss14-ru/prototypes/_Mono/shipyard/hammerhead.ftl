@@ -1,2 +1,2 @@
-vessel-hammerhead-name = UI-СКР Hammerhead
-vessel-hammerhead-desc = A multipurpose mercenary ship with an armament of 4 225mm cannons, 4 20mm PD guns, and 6 57mm autocannons. Lacks a bit in protection compared to proper military ships of this size.
+vessel-hammerhead-name = УИ-СКР «Молотоголов»
+vessel-hammerhead-desc = Многоцелевой наёмный корабль: четыре 225-мм орудия, четыре 20-мм зенитных автомата, шесть 57-мм автопушек. Защита скромнее, чем у полноценных военных кораблей такого размера.

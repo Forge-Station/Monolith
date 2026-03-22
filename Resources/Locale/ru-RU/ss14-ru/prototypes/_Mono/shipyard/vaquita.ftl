@@ -1,2 +1,2 @@
-vessel-vaquita-name = DIS Vaquita
-vessel-vaquita-desc = A small craft equipped with all the necessary gear for optimal lone salvaging. Including camera mounted mining pulsers and a large thrusters for those quick getaways. "Mine from the cockpit without lifting a finger !" or at least, that's how the DIS advertises it.
+vessel-vaquita-name = DIS «Вакита»
+vessel-vaquita-desc = Небольшое судно со всем нужным для сольного сальважа: майнинг-пульсары на камерах и мощные маневровые двигатели для быстрого отхода. «Копай из кабины, не шевеля пальцем!» — так, по крайней мере, рекламирует DIS.

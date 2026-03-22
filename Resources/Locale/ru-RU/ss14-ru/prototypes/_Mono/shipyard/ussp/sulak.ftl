@@ -1,2 +1,2 @@
-vessel-sulak-name = NCS Sulak
-vessel-sulak-desc = A medium sized destroyer armed with a Charon Massdriver for taking down large targets.
+vessel-sulak-name = НКС «Сулак»
+vessel-sulak-desc = Эсминец среднего размера с массдрайвером Charon для борьбы с крупными целями.

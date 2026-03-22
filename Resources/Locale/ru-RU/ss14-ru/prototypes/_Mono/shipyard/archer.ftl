@@ -1,2 +1,2 @@
-vessel-archer-name = TSF-СКР Archer
-vessel-archer-desc = A combat ship outfitted with 4 plasma turrets and 6 light autocannons. This ship has a military IFF designation.
+vessel-archer-name = ТСФ-СКР «Лучник»
+vessel-archer-desc = Боевой корабль с четырьмя плазменными турелями и шестью лёгкими автопушками. Имеет военную маркировку IFF.

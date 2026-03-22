@@ -1,2 +1,2 @@
-vessel-autumn-name = TSF-СКР Autumn
-vessel-autumn-desc = A long-range cargo freighter. The cargo bay is (relatively) heavily armored with a plastitanium inner layer, and the ship is equipped with a heavy FTL drive. Armed with 4x 57mms.
+vessel-autumn-name = ТСФ-СКР «Осень»
+vessel-autumn-desc = Дальнобойный грузовой фрейтер. Грузовой отсек (относительно) сильно бронирован внутренним слоем пластитания, установлен тяжёлый БСД-диск. Вооружение: четыре 57-мм орудия.

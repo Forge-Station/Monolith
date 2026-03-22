@@ -1,2 +1,2 @@
-vessel-ethereal-name = NS Ethereal
-vessel-ethereal-desc = A science vessel shaped like a butterfly. Comes facilities to accomodate botany and artifact research, as well as chemistry. Comes with a pool & bar.
+vessel-ethereal-name = НС «Эфирный»
+vessel-ethereal-desc = Научное судно в форме бабочки: ботаника, исследование артефактов и химия. Есть бассейн и бар.

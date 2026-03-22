@@ -1,2 +1,2 @@
-vessel-duran-name = SRA Duran
-vessel-duran-desc = A general-purpose expeditionary vessel with a complementary kitchen. Cheap, slow, and has the structural integrity of a crunchy autumn leaf, but by god does it have soul.
+vessel-duran-name = SRA «Дуран»
+vessel-duran-desc = Универсальное экспедиционное судно с кухней на борту. Дёшево, медленно, прочность как у хрустящего осеннего листа — зато с душой.

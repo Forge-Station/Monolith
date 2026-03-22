@@ -1,2 +1,2 @@
-vessel-scorpion-name = PDV Scorpion
-vessel-scorpion-desc = An unusual variant from the same shipyards manufacturing Anacondas, using a mix of missile pods and 2 large-caliber cannons.
+vessel-scorpion-name = ПДВ «Скорпион»
+vessel-scorpion-desc = Нестандартная модификация с тех же верфей, что «Анаконды»: смесь ракетных ПУ и двух крупнокалиберных орудий.

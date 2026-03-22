@@ -1,2 +1,2 @@
-vessel-vulture-name = UI Vulture
-vessel-vulture-desc = A heavy material reclaiming ship manufacted by Ullman industries originally for deep-space mining and planet cracking, but has been up-gunned and sold to the Phaethon Dynasty in recent days. Equiped with a full array or PTKs and 3, 255mm Bofors cannons.
+vessel-vulture-name = УИ «Стервятник»
+vessel-vulture-desc = Тяжёлый корабль утилизации материалов Ullman Industries — изначально для глубокого космоса и «раскалывания» планет; недавно усилен и продан династии Фаэтон. Полный комплект ПТК и три 255-мм Bofors.

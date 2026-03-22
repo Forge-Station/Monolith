@@ -1,2 +1,2 @@
-vessel-molotok-name = BYP Molotok
-vessel-molotok-desc = A broad-headed ram made to fit the connection port of the Ledokol.
+vessel-molotok-name = БЯП «Молоток»
+vessel-molotok-desc = Широкий таранный модуль, стыкующийся со стыковочным портом «Ледокола».

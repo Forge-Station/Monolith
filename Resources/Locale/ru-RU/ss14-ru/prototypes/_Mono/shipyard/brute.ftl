@@ -1,2 +1,2 @@
-vessel-brute-name = DIS Brute
-vessel-brute-desc = What is essentially a heavy-class cargo freighter is being advertised by the DIS marketing department as a new wonder of cargo transportation. With quadruple the layer of walls to protect your precious cargo while drunk driving.
+vessel-brute-name = ДИС «Брут»
+vessel-brute-desc = По сути тяжёлый грузовой фрейтер, который маркетинг DIS выдаёт за новый виток грузоперевозок. Четыре слоя стен защищают груз — даже если пилот ведёт себя за штурвалом, мягко говоря, неосторожно.

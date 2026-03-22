@@ -1,2 +1,2 @@
-vessel-picses-name = СКР Picses
-vessel-picses-desc = A compact but capable expedition ship, with durable hull plating too. This ship has a military IFF designation.
+vessel-picses-name = ТСФ-СКР «Пиксис»
+vessel-picses-desc = Компактное, но ударное экспедиционное судно с прочным бронированием корпуса. Имеет военную маркировку IFF.

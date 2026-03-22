@@ -1,2 +1,2 @@
-vessel-magus-name = SHM Magus
-vessel-magus-desc = An armed, PMC-rated medical lighter designed for planetary expeditions.
+vessel-magus-name = SHM «Магус»
+vessel-magus-desc = Вооружённый медицинский лайтер рейтинга ЧВК, рассчитанный на планетарные экспедиции.

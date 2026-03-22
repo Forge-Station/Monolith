@@ -1,2 +1,2 @@
-vessel-piva-name = ПБ Piva
-vessel-piva-desc = A small yet agile cargo shuttle, sporting a sideway shutter in order to facilitate the exchange of cargo in space without docking.
+vessel-piva-name = ПБ «Пива»
+vessel-piva-desc = Небольшой манёвренный грузовой шаттл с боковым шлюзом: можно перекидывать груз в открытом космосе без стыковки.

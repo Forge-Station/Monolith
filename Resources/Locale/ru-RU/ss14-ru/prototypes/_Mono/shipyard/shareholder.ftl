@@ -1,2 +1,2 @@
-vessel-shareholder-name = DME Shareholder
-vessel-shareholder-desc = Cheap and affordable salvage vessel that comes with a comfortable lounge at the cost of leaving no budget for the rest.
+vessel-shareholder-name = ДМЕ «Акционер»
+vessel-shareholder-desc = Дешёвый сальвейджер с уютным лаунжем — за счёт того, что на всё остальное бюджета не осталось.

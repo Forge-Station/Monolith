@@ -1,2 +1,2 @@
-vessel-worm-name = Worm
-vessel-worm-desc = Micro-fighter equipped with EMP Launcher. Drone server included.
+vessel-worm-name = «Червь»
+vessel-worm-desc = Микро-истребитель с ПУ EMP. Сервер дронов в комплекте.

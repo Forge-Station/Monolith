@@ -1,2 +1,2 @@
-vessel-tokarev-name = VIN Tokarev
-vessel-tokarev-desc = A multipurpose ship that can acompany medical staff in exploring the new frontier in research while allways being ready to help those in need.
+vessel-tokarev-name = ВИН «Токарев»
+vessel-tokarev-desc = Многоцелевой корабль: сопровождает медиков в исследовании нового фронтира и всегда готов помочь нуждающимся.

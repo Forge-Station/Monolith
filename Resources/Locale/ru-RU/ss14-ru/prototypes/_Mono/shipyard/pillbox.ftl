@@ -1,2 +1,2 @@
-vessel-pillbox-name = TPC Pillbox
-vessel-pillbox-desc = A modified Takeaway shuttle, turned from a nice little restaurant into a travelling pharmacy and bar, with everything a chemist would need to peddle their wares. The Solars were sniped, and the generator replaced with a Pinch Fusion reactor
+vessel-pillbox-name = ТПК «Пиллбокс»
+vessel-pillbox-desc = Переделанный шаттл Takeaway: из уютной забегаловки — в передвижную аптеку с баром, со всем, что нужно химику для торговли. Солнечные панели убрали, генератор заменили на пинч-термоядерный реактор.

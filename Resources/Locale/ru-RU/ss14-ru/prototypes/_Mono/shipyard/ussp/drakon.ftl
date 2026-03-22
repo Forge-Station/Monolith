@@ -1,2 +1,2 @@
-vessel-drakon-name = NCS Drakon
-vessel-drakon-desc = A fast brawler with heavy armor and ballistic armaments.
+vessel-drakon-name = НКС «Дракон»
+vessel-drakon-desc = Быстрый забияга с тяжёлой бронёй и баллистическим вооружением.

@@ -1,2 +1,2 @@
-vessel-littora-name = СКР Littora
-vessel-littora-desc = A medium-to-large sized expedition ship with salvage equipment.
+vessel-littora-name = ТСФ-СКР «Литтора»
+vessel-littora-desc = Экспедиционное судно среднего и крупного размера с сальважным оборудованием.

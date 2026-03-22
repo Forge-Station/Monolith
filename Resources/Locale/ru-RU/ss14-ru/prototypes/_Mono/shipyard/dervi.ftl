@@ -1,2 +1,2 @@
-vessel-dervi-name = NEI Dervi
-vessel-dervi-desc = Unique-shaped medical vessel with two protective shieldings. Comes with basic medbay, chemistry and cloning installation.
+vessel-dervi-name = НЭИ «Дерви»
+vessel-dervi-desc = Медицинское судно необычной формы с двумя защитными экранами. Базовый медблок, химия и клонер.

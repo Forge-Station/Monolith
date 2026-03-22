@@ -1,2 +1,2 @@
-vessel-phantom-name = IB Phantom
-vessel-phantom-desc = Experimental ship with enormous thruster power. CTLA-25s included.
+vessel-phantom-name = ИБ «Фантом»
+vessel-phantom-desc = Экспериментальный корабль с огромной тягой двигателей. В комплекте CTLA-25.

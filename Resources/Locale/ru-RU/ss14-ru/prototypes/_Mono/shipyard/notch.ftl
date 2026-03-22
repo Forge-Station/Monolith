@@ -1,2 +1,2 @@
-vessel-notch-name = DIS Notch
-vessel-notch-desc = A small salvage shuttle featuring the bare minimum for any fresh aspiring scavenger in the sector. Fast and compact. A proud piece of Drake Industries' civilian spacecrafts collection.
+vessel-notch-name = ДИС «Нотч»
+vessel-notch-desc = Небольшой сальвейдж-шаттл с минимумом снаряжения для начинающего стервятника в секторе. Быстрый и компактный. Гордость гражданской линейки Drake Industries.

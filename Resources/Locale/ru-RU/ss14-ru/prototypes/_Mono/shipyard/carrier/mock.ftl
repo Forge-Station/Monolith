@@ -1,2 +1,2 @@
-vessel-mock-name = IED Brawler Drone 'Mock
-vessel-mock-desc = A lightly armored fighter equipped with 2 90mm autocannons for harassing targets and taking down enemy fighters.
+vessel-mock-name = ИИД дрон-боец «Мок»
+vessel-mock-desc = Легкобронированный истребитель с двумя 90-мм автопушками для давления на цель и сбития вражеских истребителей.

@@ -1,2 +1,2 @@
-vessel-sakuratsu-name = СКР Sakuratsu
-vessel-sakuratsu-desc = A xenoarcheology ship with a dedicated, reinforced chamber. Contains mining equipment too.
+vessel-sakuratsu-name = СКР «Сакурацу»
+vessel-sakuratsu-desc = Судно для ксеноархеологии с отдельной усиленной камерой. Есть и шахтёрское оборудование.

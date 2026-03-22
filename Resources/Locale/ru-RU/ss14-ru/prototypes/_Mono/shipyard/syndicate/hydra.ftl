@@ -1,2 +1,2 @@
-vessel-hydra-name = Hydra
-vessel-hydra-desc = A syndicate missile corvette meant for stealthy hit and runs and harassment.
+vessel-hydra-name = «Гидра»
+vessel-hydra-desc = Ракетный корвет Синдиката для скрытных налётов с отходом и изматывания противника.

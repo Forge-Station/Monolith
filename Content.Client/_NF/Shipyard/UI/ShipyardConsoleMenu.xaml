@@ -99,7 +99,7 @@
             <Button Name="TargetIdButton" Access="Public"
                     StyleClasses="ButtonSquare"/>
             <controls:ConfirmButton Name="SellShipButton"
-                Text="Sell"
+                Text="{Loc 'shipyard-console-sell-button'}"
                 ConfirmationText="{Loc 'shipyard-console-confirm-unassign'}"
                 StyleClasses="ButtonSquare"
                 Disabled="True" />
@@ -118,11 +118,11 @@
         </PanelContainer>
         <BoxContainer Orientation="Horizontal" Margin="0 2 0 2" Name="RenameContainer" Visible="False">
             <LineEdit Name="RenameLineEdit"
-                      PlaceHolder="Name"
+                      PlaceHolder="{Loc 'shipyard-console-rename-placeholder'}"
                       MinWidth="140"
                       Editable="False" />
             <Button Name="RenameButton"
-                    Text="Rename"
+                    Text="{Loc 'shipyard-console-rename-button'}"
                     Disabled="True" />
         </BoxContainer>
 

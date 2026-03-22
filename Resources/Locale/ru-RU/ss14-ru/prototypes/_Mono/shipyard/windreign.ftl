@@ -1,2 +1,2 @@
-vessel-windreign-name = HES Windreign
-vessel-windreign-desc = A massive, high-end Horizon Energy vessel built for long-term atmospheric work and gas mining. Carrier-capable with a small fleet of gas mining and salvage shuttles. Features a large, luxurious crew area. Recommended crew is 2-6.
+vessel-windreign-name = HES «Виндрейн»
+vessel-windreign-desc = Крупное высокотехнологичное судно Horizon Energy для длительной атмосферной работы и добычи газа. Может нести небольшой парк шаттлов для газодобычи и сальважа. Просторная комфортная жилая зона. Рекомендуемый экипаж: 2–6 человек.

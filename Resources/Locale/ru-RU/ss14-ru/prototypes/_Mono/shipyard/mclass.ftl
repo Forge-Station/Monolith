@@ -1,2 +1,2 @@
-vessel-m-class-name = TSF-СКР M-Class Salvage Carrier
-vessel-m-class-desc = A large salvage carrier with space for 2 salvage microshuttles to dock.
+vessel-m-class-name = ТСФ-СКР носитель сальважа класса M
+vessel-m-class-desc = Большой сальвейдж-носитель с местом для стыковки двух микрошаттлов сальважа.

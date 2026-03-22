@@ -1,2 +1,2 @@
-vessel-tethys-name = PDV Tethys
-vessel-tethys-desc = A medical Phaethon Dynasty shuttle. It comes equipped with 4 90mm turrets and 2 tovek missile launchers. Hot damn.
+vessel-tethys-name = ПДВ «Тефия»
+vessel-tethys-desc = Медицинский шаттл династии Фаэтон. Четыре 90-мм башни и две ПУ ракет Tovek. Ничего себе.

@@ -1,2 +1,2 @@
-vessel-plutomkii-name = DIS Pluto MK. II
-vessel-plutomkii-desc = A light-weight cargo runner manufactured by DIS. The replacement of the venerable Pluto. Performing better than it's predecessor in every way. Larger cargo bay, faster top speed and sleeker design.
+vessel-plutomkii-name = ДИС «Плутон MK. II»
+vessel-plutomkii-desc = Лёгкий грузовой бегун от DIS. Смена легендарного «Плутона»: во всём лучше предшественника — просторнее трюм, выше скорость, стройнее корпус.

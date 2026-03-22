@@ -1,2 +1,2 @@
-vessel-valkyrie-name = PDW Valkyrie
-vessel-valkyrie-desc = An ancient phaethon dynasty interceptor. It's instruments are outdated and it's hull is rusted. However the Valkyrie still contends with vessels of similar class.
+vessel-valkyrie-name = PDW «Валькирия»
+vessel-valkyrie-desc = Древний перехватчик династии Фаэтон. Приборы устарели, корпус покрыт ржавчиной — но «Валькирия» всё ещё держит планку среди кораблей своего класса.

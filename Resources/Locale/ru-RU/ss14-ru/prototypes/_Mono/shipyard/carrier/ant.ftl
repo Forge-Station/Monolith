@@ -1,2 +1,2 @@
-vessel-ant-name = Ant
-vessel-ant-desc = Fragile but powerful combat vessel. Equipped with charonette and EMP launchers.
+vessel-ant-name = «Муравей»
+vessel-ant-desc = Хрупкий, но мощный боевой корабль. Вооружение: Charonette и ПУ EMP.

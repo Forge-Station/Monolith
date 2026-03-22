@@ -1,2 +1,2 @@
-vessel-takeaway-name = УВ Takeaway
-vessel-takeaway-desc = An aptly named medium botanical-kitchen vessel with a customer-facing gantry for ordering to-go. Also comes with dine-in.
+vessel-takeaway-name = УВ «Тейкэвэй»
+vessel-takeaway-desc = Средний ботанико-кулинарный шаттл с зоной выдачи заказов навынос и местом для приёма пищи на борту. Название говорит само за себя.

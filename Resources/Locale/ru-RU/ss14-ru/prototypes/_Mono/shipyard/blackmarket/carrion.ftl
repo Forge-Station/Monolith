@@ -1,2 +1,2 @@
-vessel-carrion-name = ELH Carrion
-vessel-carrion-desc = A fighter armed with 4x 90mm DRAVON autocannons and a GPOB-L bomb bay, built for reconnaissance and extreme-speed skirmishing.
+vessel-carrion-name = ЭЛХ «Каррион»
+vessel-carrion-desc = Истребитель: четыре 90-мм автопушки DRAVON и бомбоотсек GPOB-L — для разведки и стремительных стычек.

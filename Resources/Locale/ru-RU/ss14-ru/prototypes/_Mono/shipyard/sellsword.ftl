@@ -1,2 +1,2 @@
-vessel-sellsword-name = УВ Sellsword
-vessel-sellsword-desc = An escort picket comprising a claustrophobic, cast-plastitanium coffin enrobing a 203mm gun and VESPERA swarm missile pod. Combat life expectancy of 4 minutes. Has a military IFF designation.
+vessel-sellsword-name = УВ «Селлсворд»
+vessel-sellsword-desc = Пикет сопровождения: клаустрофобный гроб из литого пластитания вокруг 203-мм орудия и ракетного блока роя VESPERA. Ожидаемое время жизни в бою — 4 минуты. Военная маркировка IFF.

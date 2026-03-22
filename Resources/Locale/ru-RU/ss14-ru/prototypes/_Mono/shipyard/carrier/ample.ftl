@@ -1,2 +1,2 @@
-vessel-ample-name = СКР Ample
-vessel-ample-desc = A very light mining shuttle equipped with a PTK-1500e
+vessel-ample-name = СКР «Ампл»
+vessel-ample-desc = Очень лёгкий шахтёрский шаттл с ПТК-1500е.

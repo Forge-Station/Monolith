@@ -1,2 +1,2 @@
-vessel-polaris-ship-name = TSF-СКР Polaris
-vessel-polaris-ship-desc = A heavily-armed frigate with 6 CYREXAs and 1 CHARON mass-driver. While having heavy firepower, and multiple redundant substations and SMES systems, it lacks heavily in PD.
+vessel-polaris-ship-name = ТСФ-СКР «Поларис»
+vessel-polaris-ship-desc = Тяжело вооружённый фрегат: 6 CYREXA и масс-драйвер CHARON. Сильный залп, дублирующие подстанции и СМЭС — зато противоракетная оборона слабая.

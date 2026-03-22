@@ -1,2 +1,2 @@
-vessel-tayfun-name = NCS Tayfun
-vessel-tayfun-desc = An armored gunship with 4 90mms, 2 30mms, and 2 VESPERA missile pods.
+vessel-tayfun-name = НКС «Тайфун»
+vessel-tayfun-desc = Бронированный ганшип: четыре 90-мм, два 30-мм и два блока ракет VESPERA.

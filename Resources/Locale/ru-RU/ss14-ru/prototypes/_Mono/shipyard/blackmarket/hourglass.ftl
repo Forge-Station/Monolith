@@ -1,2 +1,2 @@
-vessel-hourglass-name = BSB Hourglass
-vessel-hourglass-desc = The Hourglass is a bulky slow ship with two 90mm autocannons in the front. It has a medbay and a kitchen. Comes with FTL.
+vessel-hourglass-name = БСБ «Песочные часы»
+vessel-hourglass-desc = Громоздкий медленный корабль с двумя 90-мм автопушками в носу. Есть медблок и кухня. ГПС в комплекте.

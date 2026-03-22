@@ -1,2 +1,2 @@
-vessel-gruznyk-name = PPU Gruznyk
-vessel-gruznyk-desc = A cramped USSP cargo shuttle, used for transporting legal or illicit goods. Comes with light arnament and armor, aswell as an FTL. Recommended crew size is 1-3 people. Produced by People's Production Union.
+vessel-gruznyk-name = ППС «Грузник»
+vessel-gruznyk-desc = Тесный грузовой шаттл USSP для легальных или сомнительных грузов. Лёгкое вооружение и броня, БСД. Рекомендуемый экипаж — 1–3 человека. Выпуск Народного производственного союза.

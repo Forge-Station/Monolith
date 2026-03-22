@@ -1,2 +1,2 @@
-vessel-flashpoint-name = PBB Flashpoint
-vessel-flashpoint-desc = The Plastitanium Big Boy Shipwork™ Flashpoint mercenary capital ship. This one is second hand and is missing some machinery. It comes with an empty AI core, boarding countermeasures and exped capabilities.
+vessel-flashpoint-name = PBB «Флэшпойнт»
+vessel-flashpoint-desc = Наёмный капитальный корабль линейки Plastitanium Big Boy Shipwork™ «Флэшпойнт». Бывший в употреблении, без части оборудования. Пустое ядро ИИ, противоабордажные меры, возможности для экспедиций.

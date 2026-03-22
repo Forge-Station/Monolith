@@ -1,2 +1,2 @@
-vessel-kupol-name = BYP Kupol
-vessel-kupol-desc = A gunnery unit made to make up for the lacking fire-power of the Ledokol.
+vessel-kupol-name = БЯП «Купол»
+vessel-kupol-desc = Артиллерийский блок, усиливающий недостаточную огневую мощь «Ледокола».

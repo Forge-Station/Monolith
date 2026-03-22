@@ -1,2 +1,2 @@
-vessel-talon-name = Talon
-vessel-talon-desc = A heavy syndicate interceptor, with 4 forward facing Fang autocannons and 2 sidemounted Adder scatter cannons
+vessel-talon-name = «Коготь»
+vessel-talon-desc = Тяжёлый перехватчик Синдиката: четыре носовых автопушки Fang и два бортовых дробовика Adder.

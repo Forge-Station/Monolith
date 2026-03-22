@@ -1,2 +1,2 @@
-vessel-strato-rat-name = HES Strato-Rat
-vessel-strato-rat-desc = A extremley basic, cost cutting gas mining vessel. Features a 120 KMol gas chamber, and single M25 Mining Pulser.
+vessel-strato-rat-name = ХЭС «Страто-Крыса»
+vessel-strato-rat-desc = Примитивное дешёвое судно для газодобычи. Камера на 120 кмоль газа и один шахтёрский пульсер М25.

@@ -1,2 +1,2 @@
-vessel-praetorian-name = TSF-СКР Praetorian
-vessel-praetorian-desc = A more compact and advanced Archer, outfitted with a shield gen, 4 AK570s, 2 L85s, and 2 MARAUDERS. This ship has a military IFF designation.
+vessel-praetorian-name = ТСФ-СКР «Преториан»
+vessel-praetorian-desc = Более компактный и продвинутый «Лучник»: генератор щита, четыре AK570, два L85 и два MARAUDERS. Военная маркировка IFF.

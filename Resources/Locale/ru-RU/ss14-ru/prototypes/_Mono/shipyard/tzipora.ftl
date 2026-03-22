@@ -1,2 +1,2 @@
-vessel-tzipora-name = СКР Tzipora
-vessel-tzipora-desc = An advanced medical ship, outfitted with cryo, chem, and surgical capabilities.
+vessel-tzipora-name = ТСФ-СКР «Ципора»
+vessel-tzipora-desc = Продвинутое медицинское судно: криокапсулы, химлаборатория и полноценная хирургия.

@@ -1,2 +1,2 @@
-vessel-twilightmk2-name = ЗОБ Twilight MkII
-vessel-twilightmk2-desc = A CIV-Twilight hull modified with ill-advised retrofits to be a combat capable ship. Mostly used by the desperate and the cheap. EVA protection is required.
+vessel-twilightmk2-name = ЗОБ «Сумерки MkII»
+vessel-twilightmk2-desc = Корпус гражданского «Сумерка» с сомнительными доработками под боевые задачи. Чаще у отчаявшихся и экономящих. Нужна защита для выхода в открытый космос (EVA).

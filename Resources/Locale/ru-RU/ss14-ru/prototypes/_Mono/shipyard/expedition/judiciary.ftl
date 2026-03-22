@@ -1,2 +1,2 @@
-vessel-judiciary-name = SHM Judiciary
-vessel-judiciary-desc = A refitted research vessel armed with expedition-rated combat equipment.
+vessel-judiciary-name = SHM «Джудишери»
+vessel-judiciary-desc = Переоборудованное исследовательское судно с боевым оснащением экспедиционного класса.

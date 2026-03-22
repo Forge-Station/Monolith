@@ -1,2 +1,2 @@
-vessel-sekunda-name = PPU Sekunda
-vessel-sekunda-desc = A USSP corpsman and fire support ship, comes with an FTL drive, tiny medical and chemical bay, light armament and a cramped interior. Produced by People's Production Union.
+vessel-sekunda-name = ППС «Секунда»
+vessel-sekunda-desc = Корабль санитаров и огневой поддержки USSP: БСД, крошечные медицинский и химический отсеки, лёгкое вооружение и тесные помещения. Выпуск Народного производственного союза.

@@ -1,2 +1,2 @@
-vessel-mite-name = Mite
-vessel-mite-desc = A heap of лом of unknown origin, seemingly retrofitted by salvagers into a military ship using salvage weaponry. Was found as a derelict in space and now is being resold without even as much as a cleanup.
+vessel-mite-name = «Клещ»
+vessel-mite-desc = Груда металлолома неизвестного происхождения, похоже, перебранная сальважерами в военный корабль с ломовым вооружением. Найден как брошенный в космосе и перепродаётся даже без нормальной зачистки.

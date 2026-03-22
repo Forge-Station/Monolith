@@ -1,2 +1,2 @@
-vessel-victoria-name = IHR Victoria
-vessel-victoria-desc = A reworked hull from an unknown salvage ship manufacturer refitted for xenoarcheology that still holds onto some of its mining and salvaging capabilities.
+vessel-victoria-name = IHR «Виктория»
+vessel-victoria-desc = Переделанный корпус неизвестного производителя сальважных судов, переоборудованный под ксеноархеологию; часть майнингового и сальважного оснащения сохранилась.

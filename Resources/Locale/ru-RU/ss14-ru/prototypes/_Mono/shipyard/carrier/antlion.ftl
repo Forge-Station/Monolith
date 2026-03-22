@@ -1,2 +1,2 @@
-vessel-antlion-name = DIS Antlion
-vessel-antlion-desc = A mining drone commissioned by Horizon Energy to the DIS. Basically a chunk of metal with a mining pulser slapped onto it. EVA suit and oxygen not included.
+vessel-antlion-name = ДИС «Антлион»
+vessel-antlion-desc = Шахтёрский дрон по заказу Horizon Energy у DIS. По сути кусок металла с прицепленным шахтёрским пульсером. Скафандр и кислород в комплект не входят.

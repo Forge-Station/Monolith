@@ -1,2 +1,2 @@
-vessel-infiltrator-name = Infiltrator
-vessel-infiltrator-desc = A light syndicate frigate meant for raiding enemy stations. Armed to the teeth with missiles and Hydras.
+vessel-infiltrator-name = «Инфильтратор»
+vessel-infiltrator-desc = Лёгкий фрегат Синдиката для рейдов на вражеские станции. Набит ракетами и пусковыми установками «Гидра».

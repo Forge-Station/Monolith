@@ -1,2 +1,2 @@
-vessel-artemis-name = HME Artemis
-vessel-artemis-desc = The Artemis is a compact ambulance ship, designed to rescue patients quickly, and exfiltrate as fast as they arrived.
+vessel-artemis-name = ХМЕ «Артемида»
+vessel-artemis-desc = Компактный санитарный корабль: быстрый приём пациентов и столь же быстрый уход с места происшествия.

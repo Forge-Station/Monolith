@@ -1,2 +1,2 @@
-vessel-spessbite-name = PTI Spessbite
-vessel-spessbite-desc = A food truck, equipped with all manners of amenities cramped into an almost claustrophobic interior. Very cozy, though.
+vessel-spessbite-name = ПТИ «Спессбайт»
+vessel-spessbite-desc = Фудтрак со всеми удобствами, утрамбованными в почти клаустрофобный салон. Зато очень уютно.

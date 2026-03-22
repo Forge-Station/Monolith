@@ -1,2 +1,2 @@
-vessel-insect-name = Insect
-vessel-insect-desc = Micro-fighter equipped with AK570. Drone server included.
+vessel-insect-name = «Насекомое»
+vessel-insect-desc = Микро-истребитель с АК570. Сервер дронов в комплекте.

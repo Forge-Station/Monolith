@@ -1,2 +1,2 @@
-vessel-veska-name = RG Veska
-vessel-veska-desc = A modified Ample that tears out the mining equipment and installs a light autocannon.
+vessel-veska-name = РГ «Веска»
+vessel-veska-desc = Переделанный «Ампл»: снято шахтёрское оборудование, установлена лёгкая автопушка.

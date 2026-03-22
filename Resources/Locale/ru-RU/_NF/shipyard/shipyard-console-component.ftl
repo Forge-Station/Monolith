@@ -75,6 +75,11 @@ shipyard-console-menu-engine-label = Питание:{" "}
 shipyard-console-purchase-available = Приобрести
 shipyard-console-sell-button = Продать
 shipyard-console-guidebook = Документация
+shipyard-console-registered-none = Нет
+shipyard-console-rename-button = Переименовать
+shipyard-console-rename-placeholder = Название
+shipyard-console-confirm-unassign = Вы уверены?
+shipyard-console-unassign-deed = Отвязать
 
 shipyard-console-contraband-onboard = На борту обнаружена контрабанда.
 shipyard-console-station-resources = На борту обнаружены жизненно важные ресурсы станции.

@@ -1,2 +1,2 @@
-vessel-tiger-name = NSK Tiger
-vessel-tiger-desc = A retired racing ship, the Tiger hull has been found in use by the Nova Sharks as both a hotrod, as well as a ludicriously fast haulcraft.
+vessel-tiger-name = НСК «Тайгер»
+vessel-tiger-desc = Выведенный из гонок корпус «Тайгера» Nova Sharks используют и как хот-род, и как безумно быстрый грузовик.

@@ -1,2 +1,2 @@
-vessel-q-j490-name = СКР QJ-490 Air Superiority Fighter
-vessel-q-j490-desc = Equipped with 4 Type-54C autopulsers and a light munitions bay.
+vessel-q-j490-name = СКР «QJ-490» (истребитель воздушного превосходства)
+vessel-q-j490-desc = Четыре автопульсера типа 54С и один лёгкий отсек боеприпасов.

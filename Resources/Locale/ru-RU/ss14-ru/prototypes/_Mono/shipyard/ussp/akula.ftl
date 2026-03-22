@@ -1,2 +1,2 @@
-vessel-akula-name = PPU Akula
-vessel-akula-desc = A USSP long range harasser, meant for hit and runs. Comes with two dravons and CTLA-25.
+vessel-akula-name = ППС «Акула»
+vessel-akula-desc = Дальнобойный корабль USSP для рейдов «удар — отход». Вооружение: два «дравона» и CTLA-25.

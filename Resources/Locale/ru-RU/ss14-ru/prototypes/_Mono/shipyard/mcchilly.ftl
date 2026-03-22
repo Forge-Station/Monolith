@@ -1,2 +1,2 @@
-vessel-mc-chilly-name = AES McChilly
-vessel-mc-chilly-desc = A small ice cream ship. For when the heat is up, its best to take it- who wrote this shit?.
+vessel-mc-chilly-name = АЭС «Макчилли»
+vessel-mc-chilly-desc = Небольшое судно с мороженым. Когда припекает — лучше взять с собой… кто это вообще писал?

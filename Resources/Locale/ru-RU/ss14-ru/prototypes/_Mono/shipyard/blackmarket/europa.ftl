@@ -1,2 +1,2 @@
-vessel-europa-name = IDY Europa
-vessel-europa-desc = A repurposed interdyne medical frigate, with a focus on broadside firepower and shields.
+vessel-europa-name = ИДИ «Европа»
+vessel-europa-desc = Переоборудованный медицинский фрегат Interdyne: упор на бортовой залп и броню.

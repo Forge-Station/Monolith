@@ -1,2 +1,2 @@
-vessel-remontnik-name = PPU Remontnik
-vessel-remontnik-desc = A USSP engineering and mining vessel designed by PPU. Comes with an FTL, potatoes with butter and alcohol in the fridge.
+vessel-remontnik-name = ППС «Ремонтник»
+vessel-remontnik-desc = Инженерно-шахтёрский корабль USSP от ППС. Есть БСД, картошка со сливочным маслом и алкоголь в холодильнике.

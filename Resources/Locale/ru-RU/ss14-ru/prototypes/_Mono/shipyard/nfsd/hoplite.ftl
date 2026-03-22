@@ -1,2 +1,2 @@
-vessel-hoplite-name = TSF-PIN Hoplite
-vessel-hoplite-desc = A patrol craft meant to intercept smugglers and light enemy craft with powerful engines and EMPs. It is equipped with 2 RUBICON, two plasma pulsers and two MARAUDER plasma cannons
+vessel-hoplite-name = ТСФ-PIN «Гоплит»
+vessel-hoplite-desc = Патрульный перехватчик контрабанды и лёгких целей: мощные двигатели и ЭМИ. Вооружение: 2 RUBICON, два плазменных пульсара и две плазменные пушки MARAUDER.

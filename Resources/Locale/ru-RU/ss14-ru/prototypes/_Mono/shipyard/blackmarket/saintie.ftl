@@ -1,2 +1,2 @@
-vessel-saintie-name = PDW Saintie
-vessel-saintie-desc = An expensive Frigate designed by the Phaethon Divine Shipworks, utilised by imperial vanguard for swift ambush attacks against enemy fleets.
+vessel-saintie-name = ПДВ «Сенти»
+vessel-saintie-desc = Дорогой фрегат Phaethon Divine Shipworks для имперского авангарда: быстрые засады по вражеским флотам.

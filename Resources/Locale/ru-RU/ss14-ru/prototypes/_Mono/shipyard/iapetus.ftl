@@ -1,2 +1,2 @@
-vessel-iapetus-name = TSF-СКР Iapetus
-vessel-iapetus-desc = A basic artifact research ship, with minimal armament.
+vessel-iapetus-name = ТСФ-СКР «Япет»
+vessel-iapetus-desc = Базовое судно для исследования артефактов с минимальным вооружением.

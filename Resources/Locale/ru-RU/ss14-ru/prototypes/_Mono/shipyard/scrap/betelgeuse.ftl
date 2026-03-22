@@ -1,2 +1,2 @@
-vessel-betelgeuse-name = Betelgeuse
-vessel-betelgeuse-desc = Cramped salvage vessel that is ran on hopes and dreams, but includes one of the most powerful mining-grade shipguns in this sector.
+vessel-betelgeuse-name = «Бетельгейзе»
+vessel-betelgeuse-desc = Тесный сальважный корабль, держится на надежде и упорстве, но несёт одно из самых мощных шахтёрских корабельных орудий в этом секторе.

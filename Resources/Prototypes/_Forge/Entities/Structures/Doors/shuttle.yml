@@ -5,8 +5,6 @@
   id: AirlockShuttleEmpire
   suffix: Empire, Docking
   components:
-  - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/emp_public.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsEmpire ]
@@ -16,8 +14,6 @@
   id: AirlockGlassShuttleEmpire
   suffix: Empire, Glass, Docking
   components:
-  - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/emp_public.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsEmpire ]

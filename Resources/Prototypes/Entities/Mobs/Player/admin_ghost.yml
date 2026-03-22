@@ -115,6 +115,9 @@
     - Biological
     - Inorganic
   - type: ShowSyndicateIcons # Monolith
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 16
+    baseWalkSpeed: 40
 
 - type: entity
   id: ActionAGhostShowSolar

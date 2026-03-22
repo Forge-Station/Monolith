@@ -557,9 +557,9 @@ namespace Content.Server.Ghost
                 return null;
             }
 
-            var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
-
-            // Forge-Change-Start
+            // Forge-Change: spawn exactly one observer — do not call SpawnAtPosition here and then Spawn again
+            // (that leaked a MobObserver on every ghost/latejoin observer, stacking dozens at the spawn point).
+            EntityUid ghost;
             var user = mind.Comp.UserId;
             try
             {
@@ -570,7 +570,7 @@ namespace Content.Server.Ghost
                 }
                 else
                 {
-                    ghost = Spawn(GameTicker.ObserverPrototypeName, spawnPosition.Value);
+                    ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
                 }
 
                 if (!HasComp<GhostComponent>(ghost))
@@ -584,7 +584,6 @@ namespace Content.Server.Ghost
                 Log.Error($"Failed to spawn ghost: {ex}");
                 return null;
             }
-            // Forge-Change-End
 
             var ghostComponent = Comp<GhostComponent>(ghost);
 

@@ -872,6 +872,8 @@
     - EmpireInqusitor
     - EmpireCommander
     - EmpireDiplomacy
+    - Renegate
+    - RenegateOfficer
     # Forge-change end
   - type: Tag #  Ignore Chameleon tags
     tags:

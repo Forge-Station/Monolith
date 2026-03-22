@@ -50,6 +50,14 @@ frontier-lobby-renegate-description = Outpost of the rebel colonies. Here you ca
    - Hunt bounties and trade on your own terms
    - Crew up with others who turned away from the core powers
 
+frontier-lobby-empire-subtext = Forward operating base of the Imperium in the sector.
+frontier-lobby-empire-description = Imperial outpost. Here you can:
+   - Serve in the Imperial chain of command
+   - Purchase ships at the Imperial shipyard
+   - Dock at Empire-designated docking ports
+   - Coordinate with command staff and the garrison
+ Some roles on this station are whitelist-only and require an application on Discord to be accepted.
+
 # Crew Menu
 frontier-lobby-crew-vessel = [bold][color=#A88B5E]Vessel:[/color][/bold] {$name}
 frontier-lobby-crew-class-prefix = [bold][color=#A88B5E]Classes:[/color][/bold]{" "}

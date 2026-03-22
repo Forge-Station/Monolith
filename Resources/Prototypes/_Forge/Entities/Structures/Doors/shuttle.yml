@@ -1,0 +1,23 @@
+# Empire docking: PriorityDock tag DockEmpire — used when purchasing Empire vessels (ShipyardSystem FTL dock priority).
+
+- type: entity
+  parent: AirlockShuttle
+  id: AirlockShuttleEmpire
+  suffix: Empire, Docking
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Standard/emp_public.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpire ]
+
+- type: entity
+  parent: AirlockGlassShuttle
+  id: AirlockGlassShuttleEmpire
+  suffix: Empire, Glass, Docking
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Glass/emp_public.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpire ]

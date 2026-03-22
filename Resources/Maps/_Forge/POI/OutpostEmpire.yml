@@ -63,8 +63,6 @@ entities:
     - type: Transform
       pos: -0.53125,-0.5
       parent: invalid
-    - type: BecomesStation
-      id: OutpostEmpire  
     - type: MapGrid
       chunks:
         0,0:

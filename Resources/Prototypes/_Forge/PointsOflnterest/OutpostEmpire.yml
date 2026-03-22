@@ -18,7 +18,7 @@
   mapPath: /Maps/_Forge/POI/OutpostEmpire.yml
   minPlayers: 0
   stations:
-    RenegateFortress:
+    OutpostEmpire:
       stationProto: StandardFrontierOutpost
       gridComponents:
       - type: VesselInfo

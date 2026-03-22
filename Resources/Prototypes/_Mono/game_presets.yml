@@ -78,7 +78,7 @@
   - FrontierRoundstartVariation
   - MonoAISTCShuttleSpawnerScheduler
   - MonoAISTCShuttleSpawnerSchedulerTier2
-  - MonoAsakimSTCShuttleSpawnerScheduler
+#  - MonoAsakimSTCShuttleSpawnerScheduler
   - MonoMonolithicEventsScheduler
 
 - type: gamePreset
@@ -113,7 +113,7 @@
   - MonoChimeraSTCShuttleSpawnerSchedulerSlow
   - MonoAISTCShuttleSpawnerSchedulerSlow
   - MonoAISTCShuttleSpawnerSchedulerTier2Slow
-  - MonoAsakimSTCShuttleSpawnerSchedulerSlow
+#  - MonoAsakimSTCShuttleSpawnerSchedulerSlow
   - MonoMonolithicEventsScheduler
 
 - type: gamePreset
@@ -131,6 +131,6 @@
   - FrontierRoundstartVariation
   - MonoChimeraSTCShuttleSpawnerSchedulerApocalypse
   - MonoAISTCShuttleSpawnerSchedulerApocalypse
-  - MonoAsakimSTCShuttleSpawnerSchedulerApocalypse
+#  - MonoAsakimSTCShuttleSpawnerSchedulerApocalypse
   - MonoMonolithicEventsScheduler
 

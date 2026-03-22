@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretEmpire
+  name: imperial ballistic turret
+  suffix: Империя
+  description: A sentry programmed to fire on anyone not registered as imperial personnel.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - EmpireTurret

@@ -17,6 +17,8 @@ public sealed partial class OverallPlaytimeRequirement : JobRequirement
     [DataField(required: true)]
     public TimeSpan Time;
 
+    public override bool BypassedByGlobalWhitelist => true;
+
     public override bool Check(IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,

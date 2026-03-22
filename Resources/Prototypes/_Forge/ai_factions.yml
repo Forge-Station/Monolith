@@ -1,0 +1,14 @@
+# Imperial forces — NPC faction relations (see TSFMC / TSFMCTurret pattern)
+
+- type: npcFaction
+  id: Empire
+  neutral:
+  - NanoTrasen
+  - SimpleNeutral
+  defaultHostile: true
+
+- type: npcFaction
+  id: EmpireTurret
+  friendly:
+  - Empire
+  defaultHostile: true

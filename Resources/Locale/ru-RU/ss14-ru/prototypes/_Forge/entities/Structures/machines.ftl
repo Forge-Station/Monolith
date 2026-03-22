@@ -10,6 +10,9 @@ ent-NFTelecomServerFilled = { ent-TelecomServer }
 ent-TelecomServerRenegaded = { ent-TelecomServer }
     .suffix = Ренегаты
     .desc = { ent-TelecomServer.desc }
+ent-TelecomServerEmpire = { ent-TelecomServer }
+    .suffix = Империя
+    .desc = { ent-TelecomServer.desc }
 
 ent-ForgeHolopadLocal = голопад
     .desc = Напольное устройство для проецирования голографических изображений, обеспечивающее связь в пределах корабля или станции.

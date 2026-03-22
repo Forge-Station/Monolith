@@ -46,6 +46,8 @@
   - PetsNT
   - TSFMC
   - TSFMCTurret
+  - Empire
+  - EmpireTurret
   defaultHostile: true
 
 - type: npcFaction

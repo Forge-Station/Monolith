@@ -148,6 +148,7 @@
 - type: entity
   parent: EncryptionKey
   id: EncryptionKeyEmpire
+  suffix: Империя
   name: empire encryption key
   categories: [ DoNotMap ]
   description: An encryption key for coordinating empire guardians.
@@ -163,3 +164,24 @@
     layers:
     - state: crypt_silver
     - state: emp_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyEmpireCommand
+  suffix: Империя
+  name: empire command encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for imperial command staff. Grants general imperial and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Empire
+    - EmpireCommand
+    defaultChannel: EmpireCommand
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_silver
+    - state: comren_label

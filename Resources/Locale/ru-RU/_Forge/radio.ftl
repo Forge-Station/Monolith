@@ -7,3 +7,4 @@ chat-radio-tech-renegade = Тех. Ренегаты
 chat-radio-com-renegade = Команд. Ренегаты
 
 chat-radio-imperial = Имперский
+chat-radio-imperial-command = Команд. Империя

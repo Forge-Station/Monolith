@@ -11,3 +11,15 @@
       - EncryptionKeyRenegade
       - EncryptionKeyRenegadeTech
       - EncryptionKeyRenegadeCom
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerEmpire
+  name: empire telecommunication server
+  suffix: Империя
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyEmpire
+      - EncryptionKeyEmpireCommand

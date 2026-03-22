@@ -8,13 +8,18 @@ namespace Content.Shared.Roles;
 
 public static class JobRequirements
 {
+    /// <param name="bypassPlaytimeForGlobalWhitelist">
+    /// When true, playtime-related requirements are treated as satisfied (for globally whitelisted accounts).
+    /// Species, age, traits, and other gates still apply.
+    /// </param>
     public static bool TryRequirementsMet(
         JobPrototype job,
         IReadOnlyDictionary<string, TimeSpan> playTimes,
         [NotNullWhen(false)] out FormattedMessage? reason,
         IEntityManager entManager,
         IPrototypeManager protoManager,
-        HumanoidCharacterProfile? profile)
+        HumanoidCharacterProfile? profile,
+        bool bypassPlaytimeForGlobalWhitelist = false)
     {
         var sys = entManager.System<SharedRoleSystem>();
         var requirements = sys.GetJobRequirement(job);
@@ -27,6 +32,9 @@ public static class JobRequirements
         bool success = true;
         foreach (var requirement in requirements)
         {
+            if (bypassPlaytimeForGlobalWhitelist && requirement.BypassedByGlobalWhitelist)
+                continue;
+
             if (!requirement.Check(entManager, protoManager, profile, playTimes, out reason))
             {
                 success = false;
@@ -42,6 +50,9 @@ public static class JobRequirements
             success = true;
             foreach (var requirement in requirementSet)
             {
+                if (bypassPlaytimeForGlobalWhitelist && requirement.BypassedByGlobalWhitelist)
+                    continue;
+
                 // Frontier: do not accumulate reasons for alternate job requirements.
                 if (!requirement.Check(entManager, protoManager, profile, playTimes, out _))
                 {
@@ -72,6 +83,11 @@ public abstract partial class JobRequirement
 {
     [DataField]
     public bool Inverted;
+
+    /// <summary>
+    /// When true, globally whitelisted players skip this requirement (intended for playtime-only gates).
+    /// </summary>
+    public virtual bool BypassedByGlobalWhitelist => false;
 
     public abstract bool Check(
         IEntityManager entManager,

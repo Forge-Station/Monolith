@@ -39,13 +39,12 @@
   - EmpireCommander
   accessGroups:
   - CommandEmpireAccess
-  # special:
-  # - !type:AddImplantSpecial
-  #   implants: # Неизвестно
-  # - !type:AddComponentSpecial
-  #   components:
-  #     - type: CommandStaff
-  #     - type: PreventShipyardTitleOverwrite
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
 
 - type: startingGear
   id: PraefectGear

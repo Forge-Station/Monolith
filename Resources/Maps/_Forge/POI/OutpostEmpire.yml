@@ -151419,7 +151419,7 @@ entities:
     - type: Transform
       pos: 40.5,-28.5
       parent: 1
-- proto: WeaponTurretSyndicate
+- proto: WeaponTurretEmpire
   entities:
   - uid: 23650
     components:

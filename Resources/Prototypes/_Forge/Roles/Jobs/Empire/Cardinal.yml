@@ -46,9 +46,12 @@
   setPreference: true
   accessGroups:
   - CommandEmpireAccess
-  # special:
-  # - !type:AddImplantSpecial
-  #   implants: # Неизвестно
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
 
 - type: startingGear
   id: CardinalGear

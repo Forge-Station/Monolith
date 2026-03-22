@@ -19,7 +19,7 @@
         - Vox
         - Diona
         - Goblin
-        # - Vulpkanin
+        - Vulpkanin
         # - Tajaran
         # - Reptilian
         # - Oni
@@ -40,9 +40,12 @@
   setPreference: true
   accessGroups:
   - GeneralEmpireAccess
-  # special:
-  # - !type:AddImplantSpecial
-  #   implants: # Неизвестно, ежели неизвестно - комменти полностью, хе-хе
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
 
 - type: startingGear
   id: AuxuilaGear

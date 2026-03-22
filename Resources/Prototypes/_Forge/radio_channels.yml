@@ -55,3 +55,10 @@
   keycode: 'й'
   frequency: 1246
   color: "#ab7a52"
+
+- type: radioChannel
+  id: EmpireCommand
+  name: chat-radio-imperial-command
+  keycode: 'ф'
+  frequency: 1247
+  color: "#c49a6c"

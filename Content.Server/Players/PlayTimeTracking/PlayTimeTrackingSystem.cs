@@ -195,9 +195,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
 
-        var isWhitelisted = player.ContentData()?.Whitelisted ?? false; // Forge-Change: bypass role timers for globally whitelisted players
-        if (isWhitelisted)
-            return true; // Forge-Change
+        var isWhitelisted = player.ContentData()?.Whitelisted ?? false;
 
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
         {
@@ -205,7 +203,9 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             playTimes = new Dictionary<string, TimeSpan>();
         }
 
-        return JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter);
+        return JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes,
+            (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter,
+            bypassPlaytimeForGlobalWhitelist: isWhitelisted);
     }
 
     public HashSet<ProtoId<JobPrototype>> GetDisallowedJobs(ICommonSession player)
@@ -214,9 +214,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         if (!_cfg.GetCVar(CCVars.GameRoleTimers))
             return roles;
 
-        var isWhitelisted = player.ContentData()?.Whitelisted ?? false; // Forge-Change: globally whitelisted players ignore disallowed-jobs timer checks
-        if (isWhitelisted)
-            return roles; // Forge-Change
+        var isWhitelisted = player.ContentData()?.Whitelisted ?? false;
 
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
         {
@@ -224,9 +222,12 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             playTimes = new Dictionary<string, TimeSpan>();
         }
 
+        var profile = (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter;
+
         foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
         {
-            if (JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter))
+            if (!JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, profile,
+                    bypassPlaytimeForGlobalWhitelist: isWhitelisted))
                 roles.Add(job.ID);
         }
 
@@ -245,15 +246,14 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             Log.Error($"Playtimes weren't ready yet for {player} on roundstart!");
             playTimes ??= new Dictionary<string, TimeSpan>();
         }
-        var isWhitelisted = player.ContentData()?.Whitelisted ?? false; // DeltaV - Whitelist requirement
-
-        if (isWhitelisted)
-            return; // Forge-Change: do not filter jobs by playtime for globally whitelisted players
+        var isWhitelisted = player.ContentData()?.Whitelisted ?? false;
 
         for (var i = 0; i < jobs.Count; i++)
         {
             if (_prototypes.TryIndex(jobs[i], out var job)
-                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter))
+                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes,
+                    (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter,
+                    bypassPlaytimeForGlobalWhitelist: isWhitelisted))
             {
                 continue;
             }

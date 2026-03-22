@@ -145,12 +145,15 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
     {
         reason = null;
 
-        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers) || _whitelisted) // Forge-Change: bypass client-side role timers for globally whitelisted players
+        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
 
         var reasons = new List<string>();
         foreach (var requirement in requirements)
         {
+            if (_whitelisted && requirement.BypassedByGlobalWhitelist)
+                continue;
+
             if (requirement.Check(_entManager, _prototypes, profile, _roles, out var jobReason))
                 continue;
 

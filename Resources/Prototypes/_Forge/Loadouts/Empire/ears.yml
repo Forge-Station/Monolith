@@ -3,6 +3,11 @@
   equipment:
     ears: ClothingHeadsetEmpire
 
+- type: loadout
+  id: ClothingHeadsetEmpireCommand
+  equipment:
+    ears: ClothingHeadsetEmpireCommand
+
 - type: loadoutGroup
   id: EmpireEars
   name: loadout-group-contractor-ears
@@ -12,3 +17,13 @@
   - ClothingHeadsetEmpire
   fallbacks:
   - ClothingHeadsetEmpire
+
+- type: loadoutGroup
+  id: EmpireEarsCommand
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - ClothingHeadsetEmpireCommand
+  fallbacks:
+  - ClothingHeadsetEmpireCommand

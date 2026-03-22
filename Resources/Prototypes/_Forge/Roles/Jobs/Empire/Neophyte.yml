@@ -16,7 +16,7 @@
         - Vox
         - Diona
         - Goblin
-        # - Vulpkanin
+        - Vulpkanin
         # - Tajaran
         # - Reptilian
         # - Oni
@@ -32,9 +32,12 @@
   setPreference: true
   accessGroups:
   - GeneralEmpireAccess
-  # special:
-  # # - !type:AddImplantSpecial
-  # #   implants: # Неизвестно
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
 
 - type: startingGear
   id: NeophyteGear

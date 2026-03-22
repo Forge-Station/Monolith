@@ -124,3 +124,20 @@
       key_slots:
       - EncryptionKeyCommon
       - EncryptionKeyEmpire
+
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: ClothingHeadsetEmpireCommand
+  name: Empire command headset
+  description: An imperial officer headset with command encryption. Takes encryption keys.
+  suffix: Империя
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Ears/Headsets/headset_emp.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Ears/Headsets/headset_emp.rsi
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyEmpireCommand

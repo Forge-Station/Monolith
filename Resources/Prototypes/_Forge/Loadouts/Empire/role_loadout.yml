@@ -71,7 +71,7 @@
   - EmpireGloves
   - EmpireShoes
   - EmpireBackpack
-  - EmpireEars
+  - EmpireEarsCommand
   # - EmpireBoxSurvival
   - EmpireGoldPDA
   - ContractorWallet
@@ -101,7 +101,7 @@
   - EmpireGloves
   - EmpireShoes
   - EmpireBackpack
-  - EmpireEars
+  - EmpireEarsCommand
   # - EmpireBoxSurvival
   - EmpireGoldPDA
   - ContractorWallet
@@ -130,7 +130,7 @@
   - EmpireGloves
   - EmpireShoes
   - EmpireBackpack
-  - EmpireEars
+  - EmpireEarsCommand
   # - EmpireBoxSurvival
   - EmpireInqPDA
   - ContractorWallet
@@ -159,7 +159,7 @@
   - EmpireGloves
   - EmpireShoes
   - EmpireBackpack
-  - EmpireEars
+  - EmpireEarsCommand
   # - EmpireBoxSurvival
   - EmpireGoldPDA
   - ContractorWallet
@@ -188,7 +188,7 @@
   - EmpireGloves
   - EmpireShoes
   - EmpireBackpack
-  - EmpireEars
+  - EmpireEarsCommand
   # - EmpireBoxSurvival
   - EmpireGoldPDA
   - ContractorWallet
@@ -217,7 +217,7 @@
   - EmpireGloves
   - EmpireShoes
   - EmpireBackpack
-  - EmpireEars
+  - EmpireEarsCommand
   # - EmpireBoxSurvival
   - EmpireCommanderPDA
   - ContractorWallet

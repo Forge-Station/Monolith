@@ -11,4 +11,11 @@
   id: EmpireTurret
   friendly:
   - Empire
+  neutral:
+  - NanoTrasen
+  - Cat
+  - PetsNT
+  - SimpleNeutral
+  - MD
+  - ContrabandDetection
   defaultHostile: true

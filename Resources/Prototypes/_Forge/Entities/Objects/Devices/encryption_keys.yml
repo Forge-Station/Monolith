@@ -184,4 +184,4 @@
     sprite: Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_silver
-    - state: comren_label
+    - state: emp_label

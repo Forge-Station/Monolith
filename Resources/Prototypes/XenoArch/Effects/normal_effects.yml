@@ -106,6 +106,7 @@
 - type: artifactEffect
   id: EffectPointLight
   targetDepth: 0
+  effectHint: artifact-effect-hint-visual # Forge-Change: add effect hint to the analyzer
   components:
   - type: PointLight
     radius: 8

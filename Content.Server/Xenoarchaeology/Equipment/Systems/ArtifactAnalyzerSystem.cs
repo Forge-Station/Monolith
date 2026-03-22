@@ -331,27 +331,24 @@ public sealed class ArtifactAnalyzerSystem : EntitySystem
         msg.PushNewline();
 
         msg.PushNewline();
-        var needSecondNewline = false;
 
         var triggerProto = _prototype.Index<ArtifactTriggerPrototype>(n.Trigger);
-        if (triggerProto.TriggerHint != null)
-        {
-            msg.AddMarkupOrThrow(Loc.GetString("analysis-console-info-trigger",
-                ("trigger", Loc.GetString(triggerProto.TriggerHint))) + "\n");
-            needSecondNewline = true;
-        }
+        // Forge-Change-start: add trigger hint to the analyzer
+        var triggerHintText = triggerProto.TriggerHint != null
+            ? Loc.GetString(triggerProto.TriggerHint)
+            : Loc.GetString("artifact-analyzer-hint-prototype-fallback", ("id", n.Trigger));
+        msg.AddMarkupOrThrow(Loc.GetString("analysis-console-info-trigger",
+            ("trigger", triggerHintText)) + "\n");
 
         var effectproto = _prototype.Index<ArtifactEffectPrototype>(n.Effect);
-        if (effectproto.EffectHint != null)
-        {
-            msg.AddMarkupOrThrow(Loc.GetString("analysis-console-info-effect",
-                ("effect", Loc.GetString(effectproto.EffectHint))) + "\n");
-            needSecondNewline = true;
-        }
+        var effectHintText = effectproto.EffectHint != null
+            ? Loc.GetString(effectproto.EffectHint)
+            : Loc.GetString("artifact-analyzer-hint-prototype-fallback", ("id", n.Effect));
+        msg.AddMarkupOrThrow(Loc.GetString("analysis-console-info-effect",
+            ("effect", effectHintText)) + "\n");
 
-        if (needSecondNewline)
-            msg.PushNewline();
-
+        msg.PushNewline();
+        // Forge-Change-end: add trigger hint to the analyzer
         msg.AddMarkupOrThrow(Loc.GetString("analysis-console-info-edges", ("edges", n.Edges.Count)));
         msg.PushNewline();
 

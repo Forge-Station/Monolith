@@ -8,6 +8,7 @@
 - type: artifactTrigger
   id: TriggerTimer
   targetDepth: 0
+  triggerHint: artifact-trigger-hint-timer # Forge-Change: add trigger hint to the analyzer
   components:
   - type: ArtifactTimerTrigger
 

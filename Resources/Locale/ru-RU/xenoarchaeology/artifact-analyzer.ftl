@@ -15,6 +15,7 @@ analysis-console-info-effect = [font="Monospace" size=11]Эффект: [color=gr
 analysis-console-info-trigger = [font="Monospace" size=11]Стимуляторы: [color=gray]{ $trigger }[/color][/font]
 analysis-console-info-edges = [font="Monospace" size=11]СВЯЗЕЙ: { $edges }[/font]
 analysis-console-info-value = [font="Monospace" size=11]НЕИЗВЛЕЧЁННОЕ_ЗНАЧЕНИЕ: { $value }[/font]
+artifact-analyzer-hint-prototype-fallback = (нет подсказки — { $id })
 analysis-console-info-class = [font="Monospace" size=11]Класс:[/font]
 analysis-console-info-class-value = [font="Monospace" size=11]{ $class }[/font]
 analysis-console-info-locked = [font="Monospace" size=11]Статус:[/font]

@@ -23,6 +23,7 @@ analysis-console-info-effect = REACTION: {$effect}
 analysis-console-info-trigger = STIMULUS: {$trigger}
 analysis-console-info-edges = EDGES: {$edges}
 analysis-console-info-value = UNEXTRACTED_VALUE: {$value}
+artifact-analyzer-hint-prototype-fallback = (no hint — {$id})
 
 analysis-console-info-scanner = Scanning...
 analysis-console-info-scanner-paused = Paused.

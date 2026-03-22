@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: EPF Тиранис
   description: Захваченный в сражении с СССП, Тиранис был отбуксирован на верфь СИВ и принят на вооружение после модернизации. Серьезная боевая мощь.
-  price: 156000
+  price: 424000
   category: Medium
   group: Empire
   access: Empire

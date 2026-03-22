@@ -124,7 +124,7 @@ public sealed class TTSManager
                 _cacheKeysSeq.Remove(firstKey);
             }
 
-            _sawmill.Verbose($"Generated new audio for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
+            _sawmill.Debug($"Generated new audio for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
             RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
 
             return soundData;

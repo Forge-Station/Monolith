@@ -1,6 +1,6 @@
-using Content.Shared.Chat;
 using Content.Shared._Forge;
 using Content.Shared._Forge.TTS;
+using Content.Shared.Chat;
 using Robust.Client.Audio;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Audio;
@@ -71,6 +71,9 @@ public sealed class TTSSystem : EntitySystem
 
     private void OnPlayTTS(PlayTTSEvent ev)
     {
+        if (!_cfg.GetCVar(ForgeVars.LocalTTSEnabled))
+            return;
+
         _sawmill.Verbose($"Play TTS audio {ev.Data.Length} bytes from {ev.SourceUid} entity");
 
         var filePath = new ResPath($"{_fileIdx++}.ogg");

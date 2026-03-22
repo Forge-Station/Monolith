@@ -33,7 +33,7 @@
         - type: StationJobs
           availableJobs:
             Praefect: [ 1, 1 ]
-            Inquisitor: [ 1, 1 ]
+            Inquisitor: [ 2, 2 ]
             Consul: [ 1, 1 ]
             Cardinal: [ 1, 1 ]
             Arbiter: [ 1, 1]

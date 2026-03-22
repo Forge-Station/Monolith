@@ -1,9 +1,9 @@
 - type: vessel
   id: santia
   parent: BaseVessel
-  name: Сантия
+  name: Шанти
   description: Среднегабаритный многоцеловой шаттл добывающего назначения . Рекомендованный состав 2-4 человека
-  price: 120000
+  price: 55000
   category: Medium
   group: Renegate
   access: Renegate
@@ -14,7 +14,7 @@
 
 - type: gameMap
   id: santia
-  mapName: 'Сантия'
+  mapName: 'Шанти'
   mapPath: /Maps/_Forge/Shuttles/Renegates/santia.yml
   minPlayers: 0
   stations:
@@ -22,7 +22,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Сантия{1}'
+          mapNameTemplate: 'Шанти{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

@@ -1,9 +1,9 @@
 - type: vessel
   id: kostelom
   parent: BaseVessel
-  name: ЕУС Костелом
-  description: Костелом - шаттл для настоящих утилизаторов, достаточно защищеный, но для атаки не предназначен. Может постоять за себя.
-  price: 102000
+  name: EUS КостеЛом
+  description: КостеЛом - шаттл для настоящих утилизаторов, достаточно защищеный, но для атаки не предназначен. Может постоять за себя.
+  price: 48000
   category: Small
   group: Empire
   access: Empire
@@ -16,7 +16,7 @@
 
 - type: gameMap
   id: kostelom
-  mapName: 'ЕУС Костелом'
+  mapName: 'EUS КостеЛом'
   mapPath: /Maps/_Forge/Shuttles/Empire/kostelom.yml
   minPlayers: 0
   stations:
@@ -24,7 +24,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'ЕУС Костелом{1}'
+          mapNameTemplate: 'EUS КостеЛом{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

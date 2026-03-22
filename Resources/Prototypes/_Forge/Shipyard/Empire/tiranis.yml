@@ -1,9 +1,9 @@
 - type: vessel
   id: tiranis
   parent: BaseVessel
-  name: ЕПФ Тиранис
+  name: EPF Тиранис
   description: Захваченный в сражении с СССП, Тиранис был отбуксирован на верфь СИВ и принят на вооружение после модернизации. Серьезная боевая мощь.
-  price: 425000
+  price: 156000
   category: Medium
   group: Empire
   access: Empire
@@ -16,7 +16,7 @@
 
 - type: gameMap
   id: tiranis
-  mapName: 'ЕПФ Тиранис'
+  mapName: 'EPF Тиранис'
   mapPath: /Maps/_Forge/Shuttles/Empire/tiranis.yml
   minPlayers: 0
   stations:
@@ -24,7 +24,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'ЕПФ Тиранис{1}'
+          mapNameTemplate: 'EPF Тиранис{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

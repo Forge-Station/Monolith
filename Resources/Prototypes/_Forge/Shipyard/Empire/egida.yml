@@ -1,9 +1,9 @@
 - type: vessel
   id: egida
   parent: BaseVessel
-  name: ЕММС Эгида
+  name: EMMS Эгида
   description: Эгида - маленький медецинский шаттл для тех, кто любит летать в одиночку или парами. Имеет небольшую хим. лабораторию и запасы медецины. Для боя не предназначен, но может немного постоять за себя.
-  price: 53000
+  price: 47000
   category: Small
   group: Empire
   access: Empire
@@ -16,7 +16,7 @@
 
 - type: gameMap
   id: egida
-  mapName: 'ЕММС Эгида'
+  mapName: 'EMMS Эгида'
   mapPath: /Maps/_Forge/Shuttles/Empire/egida.yml
   minPlayers: 0
   stations:
@@ -24,7 +24,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'ЕММС Эгида{1}'
+          mapNameTemplate: 'EMMS Эгида{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

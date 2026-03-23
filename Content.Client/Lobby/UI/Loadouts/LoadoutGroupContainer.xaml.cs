@@ -83,7 +83,9 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
             var enabled = loadout.IsValid(profile, session, loadoutProto, collection, out var reason);
             var loadoutContainer = new LoadoutContainer(loadoutProto, !enabled, reason);
             loadoutContainer.Select.Pressed = pressed;
-            loadoutContainer.Text = string.IsNullOrEmpty(loadProto.Name) ? loadoutSystem.GetName(loadProto) : loadProto.Name; // Frontier: allow overriding loadout names
+            loadoutContainer.Text = string.IsNullOrEmpty(loadProto.Name)
+                ? loadoutSystem.GetName(loadProto)
+                : Loc.GetString(loadProto.Name); // Frontier: allow overriding loadout names via localization keys
 
             loadoutContainer.Select.OnPressed += args =>
             {
@@ -116,7 +118,9 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
                 var enabled = loadout.IsValid(profile, session, loadoutProto, collection, out var reason);
                 var loadoutContainer = new LoadoutContainer(loadoutProto, !enabled, reason);
                 loadoutContainer.Select.Pressed = pressed;
-                loadoutContainer.Text = string.IsNullOrEmpty(loadProto.Name) ? loadoutSystem.GetName(loadProto) : loadProto.Name; // Frontier: allow overriding loadout names
+                loadoutContainer.Text = string.IsNullOrEmpty(loadProto.Name)
+                    ? loadoutSystem.GetName(loadProto)
+                    : Loc.GetString(loadProto.Name); // Frontier: allow overriding loadout names via localization keys
 
                 loadoutContainer.Select.OnPressed += args =>
                 {

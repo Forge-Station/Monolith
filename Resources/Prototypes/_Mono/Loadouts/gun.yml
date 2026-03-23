@@ -2,6 +2,7 @@
 
 - type: loadout #MK32 Universal
   id: ContractorMk32Loadout
+  name: loadout-contractor-mk32
   price: 0
   storage:
     back:
@@ -10,12 +11,12 @@
 - type: loadout #MK32 Universal Ammo
   id: Contractor9x19mmPistolAmmoLoadout
   price: 500
-  storage:
-    back:
-    - BoxMagazine9x19mmFMJ
+  inhand:
+  - BoxMagazine9x19mmFMJ
 
 - type: loadout #Disabler
   id: ContractorDisablerLoadout
+  name: loadout-contractor-disabler
   price: 0
   storage:
     back:
@@ -23,6 +24,7 @@
 
 - type: loadout #Svalinn
   id: ContractorSvalinnLoadout
+  name: loadout-contractor-svalinn
   price: 2000
   storage:
     back:
@@ -30,6 +32,7 @@
 
 - type: loadout #Makeshift Laser
   id: ContractorLaserLoadout
+  name: loadout-contractor-makeshift-laser
   price: 0
   storage:
     back:
@@ -37,6 +40,7 @@
 
 - type: loadout #Argenti
   id: ContractorArgentiLoadout
+  name: loadout-contractor-argenti
   price: 2000
   storage:
     back:
@@ -45,12 +49,12 @@
 - type: loadout #Argenti Ammo
   id: Contractor556x45mmAmmoLoadout
   price: 1000
-  storage:
-    back:
-    - BoxMagazineSpeedLoader556x45mmFMJ
+  inhand:
+  - BoxMagazineSpeedLoader556x45mmFMJ
 
 - type: loadout # Survival Knife
   id: ContractorSurvivalKnifeLoadout
+  name: loadout-contractor-survival-knife
   price: 0
   storage:
     back:
@@ -60,6 +64,7 @@
 
 - type: loadout #Double Barrel Beanbag
   id: ContractorDoubleBarreledLoadout
+  name: loadout-contractor-double-barreled-shotgun
   price: 3000
   storage:
     back:
@@ -68,9 +73,8 @@
 - type: loadout #Beanbag Shells
   id: ContractorBeanbagAmmoLoadout
   price: 200
-  storage:
-    back:
-    - AmmoBox12_gaugeBeanbag
+  inhand:
+  - AmmoBox12_gaugeBeanbag
 
 
 #region Mercenary
@@ -86,6 +90,7 @@
 
 - type: loadout # Prometheus
   id: MercenaryPrometheusLoadout
+  name: loadout-mercenary-prometheus
   price: 15000
   storage:
     back:
@@ -128,6 +133,7 @@
 
 - type: loadout #Vulcan-C
   id: MercenaryVulcanCLoadout
+  name: loadout-mercenary-vulcan-c
   price: 30000
   storage:
     back:
@@ -135,6 +141,7 @@
 
 - type: loadout #Lee Enfield
   id: MercenaryLeeEnfieldLoadout
+  name: loadout-mercenary-lee-enfield
   price: 15000
   storage:
     back:
@@ -149,6 +156,7 @@
 
 - type: loadout #Mosin
   id: MercenaryMosinLoadout
+  name: loadout-mercenary-mosin
   price: 5000
   storage:
     back:
@@ -156,6 +164,7 @@
 
 - type: loadout #SVS42
   id: MercenarySvsLoadout
+  name: loadout-mercenary-svs42
   price: 15000
   storage:
     back:
@@ -216,6 +225,7 @@
 
 - type: loadout #Keyboard
   id: MercenaryKeyboardLoadout
+  name: loadout-mercenary-keyboard
   price: 5000
   storage:
     back:
@@ -230,6 +240,7 @@
 
 - type: loadout #AK220
   id: MercenaryAk220Loadout
+  name: loadout-mercenary-ak220
   price: 5000
   storage:
     back:
@@ -265,6 +276,7 @@
 
 - type: loadout # Knallstock
   id: MercenaryKnallstockLoadout
+  name: loadout-mercenary-knallstock
   price: 5000
   storage:
     back:
@@ -541,6 +553,7 @@
 
 - type: loadout #Lecter
   id: FactionLecterLoadout
+  name: loadout-tsfmc-weapon-lecter
   price: 0
   storage:
     back:
@@ -555,6 +568,7 @@
 
 - type: loadout #Vulcan
   id: FactionVulcanLoadout
+  name: loadout-tsfmc-weapon-vulcan
   price: 0
   storage:
     back:
@@ -562,6 +576,7 @@
 
 - type: loadout #Vulcan Ammo
   id: Faction762x51mmAmmoLoadout
+  name: loadout-tsfmc-ammo-762x51
   price: 0
   storage:
     back:
@@ -569,6 +584,7 @@
 
 - type: loadout #Bandit
   id: FactionBanditLoadout
+  name: loadout-tsfmc-weapon-bandit
   price: 0
   storage:
     back:
@@ -627,6 +643,7 @@
 
 - type: loadout #Drozd
   id: FactionDrozdLoadout
+  name: loadout-tsfmc-weapon-drozd
   price: 0
   storage:
     back:
@@ -634,6 +651,7 @@
 
 - type: loadout #Drozd Ammo
   id: FactionAcpSmgAmmoLoadout
+  name: loadout-tsfmc-ammo-45acp-smg
   price: 0
   storage:
     back:
@@ -641,6 +659,7 @@
 
 - type: loadout #Drozd EMP Ammo
   id: FactionAcpSmgEmpAmmoLoadout
+  name: loadout-tsfmc-ammo-45acp-smg-emp
   price: 0
   storage:
     back:
@@ -715,6 +734,7 @@
 
 - type: loadout #Energy Gun
   id: FactionEnergyGunLoadout
+  name: loadout-tsfmc-weapon-energy-gun
   price: 0
   storage:
     back:
@@ -722,6 +742,7 @@
 
 - type: loadout #Energy Recharger Flatpack
   id: FactionRechargerLoadout
+  name: loadout-tsfmc-recharger-flatpack
   price: 0
   storage:
     back:
@@ -729,6 +750,7 @@
 
 - type: loadout #Colonel EN-5
   id: FactionFrostLoadout
+  name: loadout-tsfmc-weapon-frost
   price: 0
   storage:
     back:
@@ -738,6 +760,7 @@
 
 - type: loadout #MK58 Ammo
   id: FactionAcpPistolAmmoLoadout
+  name: loadout-tsfmc-ammo-45acp-pistol
   price: 0
   storage:
     back:

@@ -1,19 +1,23 @@
 - type: loadout
   id: TsfmcClothingJumpsuit
+  name: loadout-tsfmc-jumpsuit
   equipment:
     jumpsuit: ClothingUniformTSFMC
 
 - type: loadout
   id: TsfmcClothingJumpsuitType47D
+  name: loadout-tsfmc-jumpsuit-type47d
   equipment:
     jumpsuit: ClothingUniformTSFMCDesert
 
 - type: loadout
   id: TsfmcEngineeringClothingJumpsuit
+  name: loadout-tsfmc-jumpsuit-engineering
   equipment:
     jumpsuit: ClothingUniformTSFMCEngi
 
 - type: loadout
   id: TsfmcClothingDressUniform
+  name: loadout-tsfmc-dress-uniform
   equipment:
     jumpsuit: ClothingUniformTSFMCDress

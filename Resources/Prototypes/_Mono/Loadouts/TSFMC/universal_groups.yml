@@ -6,9 +6,6 @@
   - TsfmcClothingBackpack
   - TsfmcClothingSatchel
   - TsfmcClothingDuffel
-  - MonoSecurityGuardBackpack
-  - MonoSecurityGuardSatchel
-  - MonoSecurityGuardDuffel
   fallbacks:
   - TsfmcClothingBackpack
 
@@ -22,9 +19,6 @@
   - TsfmcClothingBackpack
   - TsfmcClothingSatchel
   - TsfmcClothingDuffel
-  - MonoSecurityGuardBackpack
-  - MonoSecurityGuardSatchel
-  - MonoSecurityGuardDuffel
   fallbacks:
   - TsfmcEngiClothingModsuit
 

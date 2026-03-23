@@ -27,7 +27,6 @@
 
 - type: loadout
   id: MonoSecurityGuardWebbing
-  name: security carrier (filled)
   equipment:
     belt: ClothingBeltSecurityWebbingFilled
 
@@ -43,13 +42,12 @@
 
 - type: loadout
   id: MonoSecurityGuardAssaultBelt
-  name: assault belt
   equipment:
     belt: ClothingBeltAssault
 
 - type: loadoutGroup
   id: MonoSecurityGuardGaiter
-  name: loadout-group-contractor-face
+  name: loadout-group-contractor-balaclava # Forge-Change: Balaclava -> face
   loadouts:
   - MonoSecurityGuardNeckGaiter
   - MonoSecurityGuardNeckGaiterRed

@@ -143,7 +143,6 @@
 
 - type: loadout
   id: ContractorMimePowersImplanter
-  name: mime vow implanter
   description: For the budding mime. Take your vow today.
   effects:
   - !type:GroupLoadoutEffect

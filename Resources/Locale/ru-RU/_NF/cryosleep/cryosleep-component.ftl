@@ -22,3 +22,7 @@ cryopod-verb-target-unknown = Неизвестно
 
 accept-cryo-window-prompt-stored = Ваше тело будет храниться {PLAYTIME($time)}.
 accept-cryo-window-prompt-not-stored = Ваше тело не будет храниться в капсуле, но ваша должность будет освобождена.
+
+# Mono
+cryopod-radio-location = {$character} погрузился в криосон в {$location}.
+cryopod-radio-coordinates = {$character} погрузился в криосон по координатам ({$x}, {$y}).

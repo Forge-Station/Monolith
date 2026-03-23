@@ -1,24 +1,29 @@
 - type: loadout
   id: TsfmcClothingBackpack
+  name: loadout-tsfmc-backpack
   equipment:
     back: ClothingBackpackTsfmc
 
 - type: loadout
   id: TsfmcClothingSatchel
+  name: loadout-tsfmc-satchel
   equipment:
     back: ClothingBackpackSatchelTsfmc
 
 - type: loadout
   id: TsfmcClothingDuffel
+  name: loadout-tsfmc-duffel
   equipment:
     back: ClothingBackpackDuffelTsfmc
 
 - type: loadout
   id: TsfmcEngiClothingModsuit2
+  name: loadout-tsfmc-modsuit-engineering
   equipment:
     back: ClothingModsuitEngineerPowerCell
 
 - type: loadout
   id: TsfmcEngiClothingModsuit
+  name: loadout-tsfmc-modsuit-volta
   equipment:
     back: ClothingModsuitVoltaPowerCell

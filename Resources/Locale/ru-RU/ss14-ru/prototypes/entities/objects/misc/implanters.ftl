@@ -10,13 +10,13 @@ ent-BaseImplantOnlyImplanter = { ent-Implanter }
 ent-BaseImplantOnlyImplanterSyndi = { ent-BaseImplantOnlyImplanter }
     .desc = Компактный одноразовый шприц, специально предназначенный для введения подкожных имплантов.
 # Corvax anti-meta localization start
-ent-SadTromboneImplanter = { ent-Implanter }
+ent-SadTromboneImplanter = имплантер «грустный тромбон»
     .desc = { ent-BaseImplantOnlyImplanter.desc }
     .suffix = Грустный тромбон
-ent-LightImplanter = { ent-Implanter }
+ent-LightImplanter = имплантер «фонарик»
     .desc = { ent-BaseImplantOnlyImplanter.desc }
     .suffix = Свет
-ent-BikeHornImplanter = { ent-Implanter }
+ent-BikeHornImplanter = имплантер «хонк»
     .desc = { ent-BaseImplantOnlyImplanter.desc }
     .suffix = Хонк-имплант
 ent-TrackingImplanter = { ent-Implanter }

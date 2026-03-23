@@ -1,9 +1,11 @@
 - type: loadout
   id: TsfmcBalaclava
+  name: loadout-tsfmc-balaclava-black
   equipment:
     balaclava: ClothingBalaclavaSkiMaskBlack
 
 - type: loadout
   id: TsfmcBalaclavaAlt
+  name: loadout-tsfmc-balaclava-gray
   equipment:
     balaclava: ClothingBalaclavaSkiMaskGray

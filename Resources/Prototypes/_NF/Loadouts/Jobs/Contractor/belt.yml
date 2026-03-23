@@ -1,25 +1,27 @@
 - type: loadout
   id: ContractorClothingBeltPlant
+  name: loadout-contractor-belt-plant-empty
   price: 0 # Mono
   equipment:
     belt: ClothingBeltPlant
 
 - type: loadout
   id: ContractorClothingBeltPlantFilled
-  name: botanical belt (filled)
+  name: loadout-contractor-belt-plant-filled
   price: 0 # Mono
   equipment:
     belt: ClothingBeltPlantFilled
 
 - type: loadout
   id: ContractorClothingBeltChef
+  name: loadout-contractor-belt-chef-empty
   price: 0 # Mono
   equipment:
     belt: ClothingBeltChef
 
 - type: loadout
   id: ContractorClothingBeltChefFilled
-  name: chef belt (filled)
+  name: loadout-contractor-belt-chef-filled
   price: 0 # Mono
   equipment:
     belt: ClothingBeltChefFilled
@@ -32,52 +34,56 @@
 
 - type: loadout
   id: ContractorClothingBeltMedical
+  name: loadout-contractor-belt-medical-empty
   price: 0 # Mono
   equipment:
     belt: ClothingBeltMedical
 
 - type: loadout
   id: ContractorClothingBeltMedicalFilled
-  name: medical belt (filled)
+  name: loadout-contractor-belt-medical-filled
   price: 0 # Mono
   equipment:
     belt: ClothingBeltMedicalFilled
 
 - type: loadout
   id: ContractorClothingBeltMedicalEMT
+  name: loadout-contractor-belt-emt-empty
   price: 0 # Mono
   equipment:
     belt: ClothingBeltMedicalEMT
 
 - type: loadout
   id: ContractorClothingBeltMedicalEMTFilled
-  name: EMT belt (filled)
+  name: loadout-contractor-belt-emt-filled
   price: 0 # Mono
   equipment:
     belt: ClothingBeltMedicalEMTFilled
 
 - type: loadout
   id: ContractorClothingBeltUtility
+  name: loadout-contractor-belt-utility-empty
   price: 0 # Mono
   equipment:
     belt: ClothingBeltUtility
 
 - type: loadout
   id: ContractorClothingBeltUtilityFilled
-  name: utility belt (filled)
+  name: loadout-contractor-belt-utility-filled
   price: 0 # Mono
   equipment:
     belt: ClothingBeltUtilityEngineering
 
 - type: loadout
   id: ContractorClothingBeltSalvageWebbing
+  name: loadout-contractor-belt-salvage-empty
   price: 0 # Mono
   equipment:
     belt: ClothingBeltSalvageWebbing
 
 - type: loadout
   id: ContractorClothingBeltSalvageWebbingFilledNF
-  name: salvage rig (filled)
+  name: loadout-contractor-belt-salvage-filled
   price: 0 # Mono
   equipment:
     belt: ClothingBeltSalvageWebbingFilledNF
@@ -99,6 +105,7 @@
 
 - type: loadout
   id: ContractorClothingBeltPilot
+  name: loadout-contractor-belt-pilot-empty
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -108,7 +115,7 @@
 
 - type: loadout
   id: ContractorClothingBeltPilotFilled
-  name: pilot webbing (filled)
+  name: loadout-contractor-belt-pilot-filled
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -136,6 +143,7 @@
 
 - type: loadout
   id: ContractorClothingBeltChaplainSash
+  name: loadout-contractor-belt-chaplain-empty
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -145,7 +153,7 @@
 
 - type: loadout
   id: ContractorClothingBeltChaplainSashFilled
-  name: chaplain sash (filled)
+  name: loadout-contractor-belt-chaplain-filled
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -210,7 +218,7 @@
 
 - type: loadout
   id: ContractorClothingBeltPunkRandomized
-  name: punk belt (random)
+  name: loadout-contractor-belt-punk-empty
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
@@ -220,7 +228,7 @@
 
 - type: loadout
   id: ContractorClothingBeltPunkRandomizedFilled
-  name: punk belt (random, filled)
+  name: loadout-contractor-belt-punk-filled
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
@@ -240,7 +248,6 @@
 
 - type: loadout
   id: ContractorClothingBeltSheathFilled #mono
-  name: sabre sheath (with sabre)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3

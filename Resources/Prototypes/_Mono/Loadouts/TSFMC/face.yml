@@ -1,11 +1,13 @@
 - type: loadout
   id: TsfmcGasmask
+  name: loadout-tsfmc-gasmask
   storage:
     back:
     - ClothingMaskGasSecurity
 
 - type: loadout
   id: TsfmcGaiter
+  name: loadout-tsfmc-gaiter
   storage:
     back:
     - ClothingMaskNeckGaiter

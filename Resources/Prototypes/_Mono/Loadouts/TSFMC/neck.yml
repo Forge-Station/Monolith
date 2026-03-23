@@ -1,14 +1,17 @@
 - type: loadout
   id: TsfmcClothingNeckIFFCyan
+  name: loadout-tsfmc-iff-cyan
   equipment:
     neck: ClothingNeckIFFCyan
 
 - type: loadout
   id: TsfmcClothingNeckIFFOrange
+  name: loadout-tsfmc-iff-orange
   equipment:
     neck: ClothingNeckIFFOrange
 
 - type: loadout
   id: TsfmcClothingNeckIFFWhite
+  name: loadout-tsfmc-iff-white
   equipment:
     neck: ClothingNeckIFFNeutral

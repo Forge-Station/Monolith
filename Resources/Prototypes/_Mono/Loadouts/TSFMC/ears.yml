@@ -1,9 +1,11 @@
 - type: loadout
   id: TsfmcHeadsetGrunt
+  name: loadout-tsfmc-headset-grunt
   equipment:
     ears: ClothingHeadsetTsfmc
 
 - type: loadout
   id: TsfmcHeadsetSenior
+  name: loadout-tsfmc-headset-senior
   equipment:
     ears: ClothingHeadsetAltTsfmc

@@ -855,7 +855,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtBlackElegantDress
-  name: black elegant dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -865,7 +864,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtRedElegantDress
-  name: red elegant dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -875,7 +873,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtGreenElegantDress
-  name: green elegant dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -885,7 +882,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtBlueElegantDress
-  name: blue elegant dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -895,7 +891,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtPurpleElegantDress
-  name: purple elegant dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -905,7 +900,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtCyanStripedDress
-  name: cyan striped dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -915,7 +909,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtRedStripedDress
-  name: red striped dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -925,7 +918,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtGreenStripedDress
-  name: green striped dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -935,7 +927,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtPinkStripedDress
-  name: pink striped dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -945,7 +936,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtOrangeStripedDress
-  name: orange striped dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -955,7 +945,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtPurpleTurtleneckDress
-  name: purple turtleneck dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -965,7 +954,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtRedTurtleneckDress
-  name: red turtleneck dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -975,7 +963,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtGreenTurtleneckDress
-  name: green turtleneck dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -985,7 +972,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtBlueTurtleneckDress
-  name: blue turtleneck dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -995,7 +981,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtYellowTurtleneckDress
-  name: yellow turtleneck dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1005,7 +990,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformJumpskirtYellowOldDress
-  name: yellow old dress
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1016,7 +1000,6 @@
 # Punk stuff
 - type: loadout
   id: PirateContractorClothingUniformRandomPunkCroptop
-  name: punk croptop jumpsuit (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1026,7 +1009,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformRandomPunkTanktop
-  name: punk tanktop jumpsuit (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1036,7 +1018,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformRandomArmlessNoSkirt
-  name: sleeveless jumpsuit (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1046,7 +1027,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformRandomPunkCroptopShorts
-  name: punk croptop with shorts (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1056,7 +1036,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformRandomPunkTanktopShorts
-  name: punk tanktop with shorts (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1066,7 +1045,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformRandomArmless
-  name: colorful sleeveless top and pants (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1076,7 +1054,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformRandomStandard
-  name: colorful top and pants (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1086,7 +1063,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformRandomShorts
-  name: colorful pants (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1099,7 +1075,6 @@
 
 - type: loadout
   id: PirateContractorClothingUniformRandomShirt
-  name: colorful patterned top and pants (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1109,7 +1084,6 @@
 
 - type: loadout
   id: PirateContractorClothingSkirtUniformRandomArmless
-  name: colorful sleeveless top and skirt (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1119,7 +1093,6 @@
 
 - type: loadout
   id: PirateContractorClothingSkirtUniformRandomStandard
-  name: colorful top and skirt (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1129,7 +1102,6 @@
 
 - type: loadout
   id: PirateContractorClothingSkirtUniformRandomBra
-  name: colorful bra and skirt (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1139,7 +1111,6 @@
 
 - type: loadout
   id: PirateContractorClothingSkirtUniformRandomShorts
-  name: colorful skirt (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -1152,7 +1123,6 @@
 
 - type: loadout
   id: PirateContractorClothingSkirtUniformRandomShirt
-  name: colorful patterned top and skirt (random)
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1

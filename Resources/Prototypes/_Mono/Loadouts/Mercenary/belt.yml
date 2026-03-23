@@ -59,7 +59,6 @@
     belt: ClothingBeltBandolier
 
 - type: loadout
-  name: security belt (empty)
   id: MercenaryClothingBeltSecurityEmpty
   price: 0
   equipment:

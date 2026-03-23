@@ -1,14 +1,17 @@
 - type: loadout
   id: TsfmcCombatGloves
+  name: loadout-tsfmc-combat-gloves
   equipment:
     gloves: ClothingHandsGlovesTacticalCombatBlack
 
 - type: loadout
   id: TsfmcNitrileGloves
+  name: loadout-tsfmc-gloves-nitrile
   equipment:
     gloves: ClothingHandsGlovesNitrile
 
 - type: loadout
   id: TsfmcLatexGloves
+  name: loadout-tsfmc-gloves-latex
   equipment:
     gloves: ClothingHandsGlovesLatex

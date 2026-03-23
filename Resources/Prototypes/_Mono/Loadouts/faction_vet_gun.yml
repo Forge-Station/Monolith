@@ -28,7 +28,6 @@
 
 - type: loadout
   id: ContractorSpecialGunEg4
-  name: EG-4 gun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivTSFVet
@@ -38,7 +37,6 @@
 
 - type: loadout
   id: ContractorSpecialGunAnnie
-  name: annie gun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivTSFVet
@@ -48,7 +46,6 @@
 
 - type: loadout
   id: ContractorSpecialGunVulcan
-  name: vulcan gun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivTSFVet
@@ -58,7 +55,6 @@
 
 - type: loadout
   id: ContractorSpecialGunEnforcer
-  name: enforcer gun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivTSFVet
@@ -68,7 +64,6 @@
 
 - type: loadout
   id: ContractorSpecialGunVector9mm
-  name: vector gun case (9mm)
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivTSFVet
@@ -78,7 +73,6 @@
 
 - type: loadout
   id: ContractorSpecialGunVector45Acp
-  name: vector gun case (.45 ACP)
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivTSFVet
@@ -88,7 +82,6 @@
 
 - type: loadout
   id: ContractorSpecialGunBandit
-  name: MR-3C bandit gun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivTSFVet
@@ -100,7 +93,6 @@
 
 - type: loadout
   id: ContractorSpecialGunAk502
-  name: AK-502 gun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivVet
@@ -110,7 +102,6 @@
 
 - type: loadout
   id: ContractorSpecialGunBigLeady
-  name: big leady gun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivVet
@@ -122,7 +113,6 @@
 
 - type: loadout
   id: ContractorSpecialGunAnaconda
-  name: anaconda gun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivRogueDefector
@@ -132,7 +122,6 @@
 
 - type: loadout
   id: ContractorSpecialGunMla73
-  name: MlA-73 gun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivRogueDefector
@@ -142,7 +131,6 @@
 
 - type: loadout
   id: ContractorSpecialGunWspr
-  name: WSPR gun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivRogueDefector
@@ -154,7 +142,6 @@
 
 - type: loadout
   id: ContractorSpecialGunSmartSMG
-  name: abielle smartgun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivSkilled
@@ -164,7 +151,6 @@
 
 - type: loadout
   id: ContractorSpecialGunMla34
-  name: MlA-34 smartgun case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivSkilled
@@ -174,7 +160,6 @@
 
 - type: loadout
   id: ContractorSpecialGunMla79
-  name: MlA-79 smart LMG case
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivPro

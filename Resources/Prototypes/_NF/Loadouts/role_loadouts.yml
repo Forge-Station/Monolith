@@ -241,31 +241,30 @@
 - type: roleLoadout
   id: JobSecurityGuard
   groups:
-  # Mono Start
-  - MonoSecurityGuardOuterClothing
-  - MonoSecurityGuardBelt
-  - MonoSecurityGuardGaiter
-  - MonoSecurityGuardHud
-  - MonoSecurityGuardShoes
+  - SecurityGuardHead
   - MonoSecurityGuardJumpsuit
   - MonoSecurityGuardBack
-  - SecurityGuardFirearm
-  - SecurityGuardPistol
-  - SecurityGuardAmmo
-  # Mono End
+  - MonoSecurityGuardOuterClothing
+  - MonoSecurityGuardShoes
   - SecurityGuardGloves
-  - SecurityGuardHead
+  - SecurityGuardFace
+  - MonoSecurityGuardGaiter
+  - MonoSecurityGuardBelt
   - SecurityGuardEars
-  - NfsdBoxSurvival
-  - SecurityGuardPDA
   - ContractorWallet
   - ContractorCartridge
+  - SecurityGuardPDA
+  - NfsdBoxSurvival
+  - ContractorEncryptionKey
   - ContractorImplanter
   - ContractorUtility # Mono
-  - ContractorEncryptionKey
   - ContractorFun
   - ContractorTrinkets
   - ContractorBureaucracy
+  - SecurityGuardFirearm
+  - SecurityGuardPistol
+  - SecurityGuardAmmo
+  - MonoSecurityGuardHud
   - NFSpeciesSpecific
 
 - type: roleLoadout

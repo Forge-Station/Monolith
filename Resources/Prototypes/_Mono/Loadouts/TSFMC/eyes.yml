@@ -1,10 +1,12 @@
 - type: loadout
   id: TsfmcHud
+  name: loadout-tsfmc-hud
   equipment:
     eyes: ClothingEyesHudNfsd
 
 - type: loadout
   id: TsfmcMedSec
+  name: loadout-tsfmc-hud-medsec
   equipment:
     eyes: ClothingEyesHudMedSec
 
@@ -19,10 +21,12 @@
 
 - type: loadout
   id: TsfmcEngiGoggles
+  name: loadout-tsfmc-goggles-meson
   equipment:
     eyes: ClothingEyesGlassesMeson
 
 - type: loadout
   id: TsfmcDiagnostic
+  name: loadout-tsfmc-hud-diagnostic
   equipment:
     eyes: ClothingEyesHudDiagnostic

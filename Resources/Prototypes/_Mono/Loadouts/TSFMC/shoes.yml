@@ -1,9 +1,11 @@
 - type: loadout
   id: TsfmcCombatBoots
+  name: loadout-tsfmc-combat-boots
   equipment:
     shoes: ClothingShoesBootsCombatFilled
 
 - type: loadout
   id: TsfmcJackboots
+  name: loadout-tsfmc-jackboots
   equipment:
     shoes: ClothingShoesBootsJackFilled

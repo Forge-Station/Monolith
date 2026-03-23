@@ -1,0 +1,11 @@
+job-preset-id-card-console-window-job-selection-label = Available ranks
+job-preset-id-card-console-window-job-selection-description = Assigns the selected rank, its access, and job icon.
+job-preset-id-card-console-window-current-rank-label = Current rank:
+job-preset-id-card-console-window-current-rank = Current rank
+job-preset-id-card-console-window-rank-unknown = Unknown
+job-preset-id-card-console-window-hint-insert-privileged = Insert a privileged ID card.
+job-preset-id-card-console-window-hint-insert-target = Insert a target ID card.
+job-preset-id-card-console-window-hint-unauthorized = The privileged ID card is not authorized for this console.
+job-preset-id-card-console-window-hint-authorized = The privileged ID card must cover the access set of the current and target rank.
+job-preset-id-card-console-window-missing-access = Missing access
+job-preset-id-card-console-window-invalid-preset = Invalid preset

@@ -1,0 +1,11 @@
+job-preset-id-card-console-window-job-selection-label = Доступные звания
+job-preset-id-card-console-window-job-selection-description = Выдаёт выбранное звание, его доступы и иконку должности.
+job-preset-id-card-console-window-current-rank-label = Текущее звание:
+job-preset-id-card-console-window-current-rank = Текущее звание
+job-preset-id-card-console-window-rank-unknown = Неизвестно
+job-preset-id-card-console-window-hint-insert-privileged = Вставьте основную ID-карту.
+job-preset-id-card-console-window-hint-insert-target = Вставьте целевую ID-карту.
+job-preset-id-card-console-window-hint-unauthorized = Основная ID-карта не авторизована для этой консоли.
+job-preset-id-card-console-window-hint-authorized = Основная ID-карта должна покрывать доступы текущего и целевого звания.
+job-preset-id-card-console-window-missing-access = Не хватает доступов
+job-preset-id-card-console-window-invalid-preset = Некорректная предустановка

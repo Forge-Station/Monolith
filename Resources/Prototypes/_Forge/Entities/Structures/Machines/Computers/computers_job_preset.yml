@@ -1,0 +1,72 @@
+- type: entity
+  parent: [BaseStructureIndestructible, BaseComputerAiAccess]
+  id: ComputerTsfRank
+  name: Консоль званий TSF
+  description: Терминал для назначения званий TSF и предустановленных доступов.
+  components:
+  - type: JobPresetIdCardConsole
+    rankPresets:
+    - TsfCommandingOfficer
+    - TsfSeniorOfficer
+    - TsfExecutiveOfficer
+    - TsfSeniorAide
+    - TsfAmbassador
+    - TsfRanger
+    - TsfRecruit
+    - TsfEngineer
+    privilegedIdSlot:
+      name: id-card-console-privileged-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+    targetIdSlot:
+      name: id-card-console-target-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+  - type: ActivatableUI
+    key: enum.JobPresetIdCardConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.JobPresetIdCardConsoleUiKey.Key:
+        type: TsfRankConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: id
+    - map: ["computerLayerKeys"]
+      state: id_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: Computer
+    board: TsfRankComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#3c5eb5"
+  - type: Tag
+    tags:
+    - AccessBreakerImmune
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+      JobPresetIdCardConsole-privilegedId: !type:ContainerSlot
+      JobPresetIdCardConsole-targetId: !type:ContainerSlot
+  - type: ShipRepairable
+    repairTime: 4
+    repairCost: 8

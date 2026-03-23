@@ -1,0 +1,14 @@
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: TsfRankComputerCircuitboard
+  name: TSF rank console board
+  description: A computer printed circuit board for a TSF rank console.
+  components:
+    - type: Sprite
+      state: cpu_command
+    - type: ComputerBoard
+      prototype: ComputerTsfRank
+    - type: Tag
+      tags:
+      - DroneUsable
+      - HighRiskItem

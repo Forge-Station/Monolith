@@ -24,18 +24,20 @@
   languagesUnderstood:
   - Nekomimetic
 
-- type: trait
-  id: MonoElyran
-  name: trait-language-elyran-name
-  description: trait-language-elyran-desc
-  category: LanguageTraits
-  cost: 1
-  components:
-  - type: LanguageSpeaker
-  languagesSpoken:
-  - Elyran
-  languagesUnderstood:
-  - Elyran
+# Forge-Change-delete-start
+#- type: trait
+#  id: MonoElyran
+#  name: trait-language-elyran-name
+#  description: trait-language-elyran-desc
+#  category: LanguageTraits
+#  cost: 1
+#  components:
+#  - type: LanguageSpeaker
+#  languagesSpoken:
+#  - Elyran
+#  languagesUnderstood:
+#  - Elyran
+# Forge-Change-delete-end
 
 - type: trait
   id: MonoGary

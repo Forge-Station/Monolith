@@ -8,4 +8,5 @@ ent-ClothingHeadsetUSSPCommand = USSP command headset
 ent-ClothingHeadsetUSSP = USSP headset
     .desc = Штатная гарнитура оборонительного флота USSP десятилетиями. Принимает стандартные ключи шифрования, по умолчанию — канал тактической связи USSP.
 ent-ClothingHeadsetAltVanguardCommand = vanguard command over-ear headset
-ent-ClothingHeadsetAltCentComSR = ClothingHeadsetAltCentComSR
+ent-ClothingHeadsetAltCentComSR = { ent-ClothingHeadsetAltCentCom }
+    .desc = { ent-ClothingHeadsetAltCentCom.desc }

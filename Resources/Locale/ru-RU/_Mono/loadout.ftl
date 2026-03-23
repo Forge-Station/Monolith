@@ -48,6 +48,7 @@ loadout-tsfmc-commander-headset = командирская гарнитура Т
 loadout-tsfmc-colonel-cloak = плащ полковника ТСФ
 loadout-tsfmc-captain-cloak = плащ капитана ТСФ
 loadout-tsfmc-weapon-frost = EN-5 «Фрост»
+loadout-tsfmc-weapon-energy-gun = энергетическая винтовка
 loadout-tsfmc-weapon-drozd = Дрозд (.45 ACP)
 loadout-tsfmc-weapon-lecter = Лектер (6.8x52мм)
 loadout-tsfmc-weapon-vulcan = Вулкан (7.62x51мм)

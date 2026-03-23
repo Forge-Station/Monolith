@@ -1,89 +1,149 @@
 - type: loadout
   id: ContractorClothingHeadsetGreyCommon
   price: 0
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetGreyCommon
 
 - type: loadout
   id: ContractorClothingHeadsetCargoCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetCargoCommon
 
 - type: loadout
   id: ContractorClothingHeadsetMiningCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetMiningCommon
 
 - type: loadout
   id: ContractorClothingHeadsetCommandCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetCommandCommon
 
 - type: loadout
   id: ContractorClothingHeadsetEngineeringCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetEngineeringCommon
 
 - type: loadout
   id: ContractorClothingHeadsetMedicalCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetMedicalCommon
 
 - type: loadout
   id: ContractorClothingHeadsetScienceCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetScienceCommon
 
 - type: loadout
   id: ContractorClothingHeadsetMedicalScienceCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetMedicalScienceCommon
 
 - type: loadout
   id: ContractorClothingHeadsetRoboticsCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetRoboticsCommon
 
 - type: loadout
   id: ContractorClothingHeadsetServiceCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetServiceCommon
 
 - type: loadout
   id: ContractorClothingHeadsetAltCargoCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetAltCargoCommon
 
 - type: loadout
   id: ContractorClothingHeadsetAltCommandCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetAltCommandCommon
 
 - type: loadout
   id: ContractorClothingHeadsetAltEngineeringCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetAltEngineeringCommon
 
 - type: loadout
   id: ContractorClothingHeadsetAltMedicalCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetAltMedicalCommon
 
 - type: loadout
   id: ContractorClothingHeadsetAltScienceCommon
   price: 0 # Mono
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetAltScienceCommon

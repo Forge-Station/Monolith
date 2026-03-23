@@ -1,9 +1,17 @@
 - type: loadout
   id: USSPHeadset
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetUSSP
 
 - type: loadout
   id: USSPHeadsetCommand
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
   equipment:
     ears: ClothingHeadsetUSSPCommand

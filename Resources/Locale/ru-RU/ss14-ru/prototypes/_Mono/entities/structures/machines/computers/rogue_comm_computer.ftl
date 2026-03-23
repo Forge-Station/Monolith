@@ -1,2 +1,2 @@
-ent-RogueComputerComms = imperial vanguard communications computer
-    .desc = The Imperial Vanguard's primary communications computer for issuing announcements.
+ent-RogueComputerComms = коммуникационный компьютер Имперского Авангарда
+    .desc = Основной коммуникационный компьютер Имперского Авангарда для публикации объявлений.

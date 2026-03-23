@@ -2,26 +2,26 @@ ent-WallRivetedOutpost = { ent-WallRiveted }
     .desc = { ent-WallRiveted.desc }
     .suffix = АВАНПОСТ
 
-ent-WallReinforcedOutpost = OUTPOST ONLY
+ent-WallReinforcedOutpost = { ent-WallReinforced }
     .desc = { ent-WallReinforced.desc }
     .suffix = АВАНПОСТ
 
-ent-WallReinforcedDiagonalOutpost = diagonal, OUTPOST ONLY
+ent-WallReinforcedDiagonalOutpost = { ent-WallReinforcedDiagonal }
     .desc = { ent-WallReinforcedDiagonal.desc }
     .suffix = Диагональ, АВАНПОСТ
 
-ent-WallPlastitaniumOutpost = OUTPOST ONLY
+ent-WallPlastitaniumOutpost = { ent-WallPlastitaniumIndestructible }
     .desc = { ent-WallPlastitaniumIndestructible.desc }
     .suffix = АВАНПОСТ
 
-ent-WallPlastitaniumDiagonalOutpost = diagonal, OUTPOST ONLY
+ent-WallPlastitaniumDiagonalOutpost = { ent-WallPlastitaniumDiagonal }
     .desc = { ent-WallPlastitaniumDiagonal.desc }
     .suffix = Диагональ, АВАНПОСТ
 
-ent-WallPlastitaniumCapital = CAPITAL ONLY
+ent-WallPlastitaniumCapital = { ent-WallPlastitaniumIndestructible }
     .desc = { ent-WallPlastitaniumIndestructible.desc }
     .suffix = КАПИТАЛ, 20к
 
-ent-WallPlastitaniumDiagonalCapital = diagonal, CAPITAL ONLY
+ent-WallPlastitaniumDiagonalCapital = { ent-WallPlastitaniumDiagonal }
     .desc = { ent-WallPlastitaniumDiagonal.desc }
-    .suffix = Диагональ, АВАНПОСТ
+    .suffix = Диагональ, КАПИТАЛ, 20к

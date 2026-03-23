@@ -1,4 +1,4 @@
-ent-ScuttleDeviceWyvern = antimatter annihilation assembly
-    .desc = Uses the power of antimatter to completely scuttle a ship. Will sell for more if unlocked.
-ent-ScuttleDeviceRazorN = atomizer assembly
-    .desc = Why are you stopping to read this?!
+ent-ScuttleDeviceWyvern = антиматерийный модуль аннигиляции
+    .desc = Использует энергию антиматерии, чтобы полностью уничтожить корабль. Если разблокирован, можно продать дороже.
+ent-ScuttleDeviceRazorN = модуль атомизации
+    .desc = Почему вы остановились, чтобы это прочитать?!

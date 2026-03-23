@@ -1,2 +1,2 @@
-ent-CrystalMonolithic = small
-    .desc = A mysterious crystalline solid. Seems highly energetic, but fragile.
+ent-CrystalMonolithic = маленький кристалл
+    .desc = Загадочное кристаллическое вещество. Выглядит очень энергонасыщенным, но хрупким.

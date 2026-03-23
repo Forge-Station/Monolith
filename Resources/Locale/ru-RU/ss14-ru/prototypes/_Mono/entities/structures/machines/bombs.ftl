@@ -1,2 +1,2 @@
-ent-SyndicateBombSilicon = Silicon
-    .desc = A bomb for Syndicate operatives and agents alike. Looks like this one explodes from physical impact
+ent-SyndicateBombSilicon = кремниевая бомба
+    .desc = Бомба для оперативников и агентов Синдиката. Похоже, эта срабатывает от физического удара.

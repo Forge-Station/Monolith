@@ -1,3 +1,3 @@
-ent-PowerCellCombat = Full
-    .desc = A rechargeable standardized power cell. This combat brand is equipped with partial protection from power spikes.
-ent-PowerCellCombatPrinted = Empty
+ent-PowerCellCombat = полная боевая батарея
+    .desc = Перезаряжаемый стандартный батарея. Эта боевая модель оснащена частичной защитой от скачков напряжения.
+ent-PowerCellCombatPrinted = пустая боевая батарея

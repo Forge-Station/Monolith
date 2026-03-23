@@ -1,4 +1,4 @@
-ent-MachineSalvageRadar = salvage radar
-    .desc = This radar increases asteroid and wreck detection range, allowing rocks to be hit from farther away. Essential tool for salvagers.
-ent-SalvageRadarFlatpack = salvage radar flatpack
-    .desc = A flatpack used for constructing salvage radar.
+ent-MachineSalvageRadar = радар утилизации
+    .desc = Этот радар увеличивает дальность обнаружения астероидов и обломков, позволяя работать по камням с большей дистанции. Незаменим для утилизаторов.
+ent-SalvageRadarFlatpack = комплект радара утилизации
+    .desc = Плоская упаковка для сборки радара утилизации.

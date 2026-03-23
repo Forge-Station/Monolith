@@ -1,2 +1,2 @@
-ent-StationAiUploadComputerUnlocked = Unlocked
-    .desc = Used to update the laws of the vessel AI.
+ent-StationAiUploadComputerUnlocked = разблокированная консоль ИИ
+    .desc = Используется для обновления законов корабельного ИИ.

@@ -1,2 +1,2 @@
-ent-MachineCarpCaller = carp caller
-    .desc = A device that seems interesting to wild space carp.
+ent-MachineCarpCaller = приманка для карпов
+    .desc = Устройство, которое почему-то очень нравится диким космическим карпам.

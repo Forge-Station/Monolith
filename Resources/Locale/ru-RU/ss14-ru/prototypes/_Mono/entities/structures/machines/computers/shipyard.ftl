@@ -1,6 +1,6 @@
-ent-ComputerShipyardUSSP = USSP shipyard console
-    .desc = Used to buy ships from USSP naval reserves.
-ent-ComputerShipyardSHM = SHM shipyard console
-    .desc = Used to transfer ships from the SHM employ reserves.
-ent-ComputerShipyardDrakeIndustries = drake industries shipyard console
-    .desc = Used by Drake Industries affiliates to purchase specialty cargo shuttles.
+ent-ComputerShipyardUSSP = консоль верфи USSP
+    .desc = Используется для покупки кораблей из военно-морского резерва USSP.
+ent-ComputerShipyardSHM = консоль верфи SHM
+    .desc = Используется для передачи кораблей из резервов сотрудников SHM.
+ent-ComputerShipyardDrakeIndustries = консоль верфи Drake Industries
+    .desc = Используется аффилированными с Drake Industries для покупки специализированных грузовых шаттлов.

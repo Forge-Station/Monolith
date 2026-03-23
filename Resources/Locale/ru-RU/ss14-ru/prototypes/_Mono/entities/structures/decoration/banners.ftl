@@ -1,4 +1,4 @@
-ent-BannerNGC = TSF banner
-    .desc = A banner proudly displaying the stars of the Trans-Solar Federation.
-ent-BannerSHM = SHM banner
-    .desc = A banner effectively representing the iconography of Steel Hammer Manufacturing Inc.
+ent-BannerNGC = знамя TSF
+    .desc = Знамя с гордостью демонстрирует звёзды Транссолнечной Федерации.
+ent-BannerSHM = знамя SHM
+    .desc = Знамя с узнаваемой символикой Steel Hammer Manufacturing Inc.

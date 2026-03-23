@@ -1,6 +1,6 @@
-ent-CrateTradeSecureSalvage = abandoned cargo crate
-    .desc = Forgotten export from an era bygone. The exterior has held fast, keeping its contents commercially viable despite countless cycles of solar radiation. The label indicates a fivefold freight commission upon delivery.
-ent-CrateNanotrasen = NT crate
-    .desc = A white and blue crate with the Nanotrasen Symbol.
-ent-CrateNanotrasenDS = menacing NT crate
-    .desc = A red and black crate with a menacing aura, it sends chills down your spine looking at it
+ent-CrateTradeSecureSalvage = заброшенный грузовой ящик
+    .desc = Забытый груз из давно ушедшей эпохи. Прочный корпус сохранил содержимое пригодным к продаже, несмотря на бесчисленные циклы солнечной радиации. На маркировке указана пятикратная надбавка к фрахту при доставке.
+ent-CrateNanotrasen = ящик Nanotrasen
+    .desc = Бело-синий ящик с символом Nanotrasen.
+ent-CrateNanotrasenDS = зловещий ящик Nanotrasen
+    .desc = Красно-чёрный ящик с пугающей аурой - от одного взгляда по спине пробегает холод.

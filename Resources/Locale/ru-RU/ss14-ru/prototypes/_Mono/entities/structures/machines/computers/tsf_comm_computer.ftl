@@ -1,2 +1,2 @@
-ent-TSFComputerComms = TSFMC communications computer
-    .desc = A communications console used by Trans-Solar installations to make sector-wide announcements.
+ent-TSFComputerComms = коммуникационный компьютер TSFMC
+    .desc = Консоль связи, используемая объектами Транссолнечной Федерации для объявлений на весь сектор.

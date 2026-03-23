@@ -1,4 +1,4 @@
-ent-FactionLathe = military multi-purpose assembler
-    .desc = Prints out items researched with TSFMC/Rogue R&D servers.
-ent-CentrifugeLatheMini = miniature economy centrifuge
-    .desc = A medium sized industrial gas centrifuge for "bulk" processing isotopes, materials and generally making things go spinny. Not as fast or efficient as its station-bound brother, but useful for smaller operations.
+ent-FactionLathe = военный многоцелевой сборщик
+    .desc = Печатает предметы, исследованные на серверах R&D TSFMC/Rogue.
+ent-CentrifugeLatheMini = миниатюрная экономичная центрифуга
+    .desc = Промышленная газовая центрифуга среднего размера для "массовой" обработки изотопов и материалов. Не такая быстрая и эффективная, как её стационарный аналог, но полезна для небольших операций.

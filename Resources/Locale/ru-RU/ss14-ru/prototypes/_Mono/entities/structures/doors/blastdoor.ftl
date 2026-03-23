@@ -1,4 +1,4 @@
-ent-BlastDoorIndestructible = indestructible
-    .desc = An exceptionally tough blast door, good luck blasting through this.
-ent-BlastDoorMonolithic = monolith tenebris crack
-    .desc = Some kind of break in the surrounding dark tenebris.
+ent-BlastDoorIndestructible = неразрушимая взрывная дверь
+    .desc = Исключительно прочная взрывная дверь. Удачи с попыткой пробить её.
+ent-BlastDoorMonolithic = разлом монолитного тенебриса
+    .desc = Похоже на трещину в окружающем тёмном тенебрисе.

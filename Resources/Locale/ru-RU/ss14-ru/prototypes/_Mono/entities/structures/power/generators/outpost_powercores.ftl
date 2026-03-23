@@ -1,2 +1,2 @@
-ent-MachineOutpostCore = 200kw
-    .desc = A modified FTL drive, safely refitted to release large amounts of power consistently.
+ent-MachineOutpostCore = энергомодуль 200 кВт
+    .desc = Модифицированный FTL-привод, безопасно переоборудованный для стабильной выработки большого количества энергии.

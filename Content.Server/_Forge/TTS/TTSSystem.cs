@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Content.Server._EinsteinEngines.Language;
 using Content.Server.Chat.Systems;
 using Content.Server.Radio.Components;
@@ -146,10 +146,11 @@ public sealed partial class TTSSystem : EntitySystem
             var xform = xformQuery.GetComponent(listener);
             var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
 
-            if (distance > ChatSystem.VoiceRange * ChatSystem.VoiceRange) continue;
+            if (distance > ChatSystem.VoiceRange) continue;
             var canUnderstand = _language.CanUnderstand(listener, language.ID);
+            var getsClearWhisper = !isWhisper || distance <= ChatSystem.WhisperClearRange;
 
-            RaiseNetworkEvent(canUnderstand ? fullTtsEvent : obfTtsEvent, session);
+            RaiseNetworkEvent(canUnderstand && getsClearWhisper ? fullTtsEvent : obfTtsEvent, session);
         }
     }
 

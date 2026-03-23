@@ -1,58 +1,59 @@
-- type: job
-  id: Praefect
-  name: forge-job-name-praefect
-  description: forge-job-desc-praefect
-  playTimeTracker: JobPraefect
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 129600 # 36 hours
-    - !type:DepartmentTimeRequirement
-      department: Empire
-      time: 108000 # 30 hours
-    - !type:RoleTimeRequirement
-      role: JobCardinal
-      time: 21600 # 6 hours
-    - !type:RoleTimeRequirement
-      role: JobArbiter
-      time: 21600 # 6 hours
-    - !type:SpeciesRequirement
-      species:
-        - Human
-  # alternateRequirementSets:
-  #   longerPlaytimeLessSec:
-  #   - !type:OverallPlaytimeRequirement
-  #     time: 216000 # 60 hours
-  #   # - !type:RoleTimeRequirement
-  #   #   role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
-  #   #   time: 43200 # 12 hours
-  startingGear: PraefectGear
-  alwaysUseSpawner: true
-  icon: JobIconEmpirePraefect
-  requireAdminNotify: true
-  supervisors: job-supervisors-nobody
-  weight: 50
-  displayWeight: 50
-  canBeAntag: false
-  salary: 12000
-  setPreference: true
-  access:
-  - EmpireCommander
-  accessGroups:
-  - CommandEmpireAccess
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: NpcFactionMember
-      factions:
-      - Empire
-
-- type: startingGear
-  id: PraefectGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF
+# Empire role disabled.
+# - type: job
+#   id: Praefect
+#   name: forge-job-name-praefect
+#   description: forge-job-desc-praefect
+#   playTimeTracker: JobPraefect
+#   requirements:
+#     - !type:OverallPlaytimeRequirement
+#       time: 129600 # 36 hours
+#     - !type:DepartmentTimeRequirement
+#       department: Empire
+#       time: 108000 # 30 hours
+#     - !type:RoleTimeRequirement
+#       role: JobCardinal
+#       time: 21600 # 6 hours
+#     - !type:RoleTimeRequirement
+#       role: JobArbiter
+#       time: 21600 # 6 hours
+#     - !type:SpeciesRequirement
+#       species:
+#         - Human
+#   # alternateRequirementSets:
+#   #   longerPlaytimeLessSec:
+#   #   - !type:OverallPlaytimeRequirement
+#   #     time: 216000 # 60 hours
+#   #   # - !type:RoleTimeRequirement
+#   #   #   role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
+#   #   #   time: 43200 # 12 hours
+#   startingGear: PraefectGear
+#   alwaysUseSpawner: true
+#   icon: JobIconEmpirePraefect
+#   requireAdminNotify: true
+#   supervisors: job-supervisors-nobody
+#   weight: 50
+#   displayWeight: 50
+#   canBeAntag: false
+#   salary: 12000
+#   setPreference: true
+#   access:
+#   - EmpireCommander
+#   accessGroups:
+#   - CommandEmpireAccess
+#   special:
+#   - !type:AddComponentSpecial
+#     components:
+#     - type: NpcFactionMember
+#       factions:
+#       - Empire
+#
+# - type: startingGear
+#   id: PraefectGear
+#   # equipment:
+#   #   ears:
+#   #   belt:
+#   #   pocket1:
+#   #   pocket2:
+#   # storage:
+#   #   back:
+#   #   - RadioHandheldNF

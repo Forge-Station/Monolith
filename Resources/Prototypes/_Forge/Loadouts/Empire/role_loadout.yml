@@ -1,232 +1,233 @@
-# region Cadet
-- type: roleLoadout
-  id: JobNeophyte # Cadet
-  groups:
-  # - EmpireHead
-  # - EmpireNeck
-  # - EmpireFace
-  # - EmpireGlasses
-  # - EmpireBalaclava
-  - EmpireJumpsuit
-  - EmpireOuterClothing
-  - EmpireBelt
-  - EmpireGloves
-  - EmpireShoes
-  - EmpireBackpack
-  - EmpireEars
-  # - EmpireBoxSurvival
-  - EmpirePDA
-  - ContractorWallet
-  - ContractorCartridge
-#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
-  - ContractorEncryptionKey
-  - ContractorFun
-  - ContractorTrinkets
-  # - EmpireSpeciesSpecific
-  - EmpireFirearm
-  - EmpireMag
-  canCustomizeName: true
-
-# region Soldier
-- type: roleLoadout
-  id: JobAuxilia # Soldier
-  groups:
-  # - EmpireHead
-  # - EmpireNeck
-  # - EmpireFace
-  # - EmpireGlasses
-  # - EmpireBalaclava
-  - EmpireJumpsuit
-  - EmpireOuterClothing
-  - EmpireBelt
-  - EmpireGloves
-  - EmpireShoes
-  - EmpireBackpack
-  - EmpireEars
-  # - EmpireBoxSurvival
-  - EmpirePDA
-  - ContractorWallet
-  - ContractorCartridge
-#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
-  - ContractorEncryptionKey
-  - ContractorFun
-  - ContractorTrinkets
-  # - EmpireSpeciesSpecific
-  - EmpireFirearm
-  - EmpireMag
-  canCustomizeName: true
-
-# region Officer
-- type: roleLoadout
-  id: JobPraetorian # Officer
-  groups:
-  # - EmpireHead
-  # - EmpireNeck
-  # - EmpireFace
-  # - EmpireGlasses
-  # - EmpireBalaclava
-  - EmpireOfficerJumpsuit
-  - EmpireOuterClothing
-  - EmpireBelt
-  - EmpireGloves
-  - EmpireShoes
-  - EmpireBackpack
-  - EmpireEarsCommand
-  # - EmpireBoxSurvival
-  - EmpireGoldPDA
-  - ContractorWallet
-  - ContractorCartridge
-#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
-  - ContractorEncryptionKey
-  - ContractorFun
-  - ContractorTrinkets
-  # - EmpireSpeciesSpecific
-  - EmpireFirearm
-  - EmpireMag
-  canCustomizeName: true
-
-# region Diplomacy
-# TODO: Another loadout
-- type: roleLoadout
-  id: JobConsul # Diplomacy
-  groups:
-  # - EmpireHead
-  # - EmpireNeck
-  # - EmpireFace
-  # - EmpireGlasses
-  # - EmpireBalaclava
-  - EmpireOfficerJumpsuit
-  - EmpireOuterClothing
-  - EmpireBelt
-  - EmpireGloves
-  - EmpireShoes
-  - EmpireBackpack
-  - EmpireEarsCommand
-  # - EmpireBoxSurvival
-  - EmpireGoldPDA
-  - ContractorWallet
-  - ContractorCartridge
-#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
-  - ContractorEncryptionKey
-  - ContractorFun
-  - ContractorTrinkets
-  # - EmpireSpeciesSpecific
-  - EmpireFirearm
-  - EmpireMag
-  canCustomizeName: true
-
-# region Inquisitor
-- type: roleLoadout
-  id: JobInquisitor # Inquisitor
-  groups:
-  # - EmpireHead
-  # - EmpireNeck
-  # - EmpireFace
-  # - EmpireGlasses
-  # - EmpireBalaclava
-  - EmpireInquisitorJumpsuit
-  - EmpireInquisitorOuterClothing
-  - EmpireBelt
-  - EmpireGloves
-  - EmpireShoes
-  - EmpireBackpack
-  - EmpireEarsCommand
-  # - EmpireBoxSurvival
-  - EmpireInqPDA
-  - ContractorWallet
-  - ContractorCartridge
-#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
-  - ContractorEncryptionKey
-  - ContractorFun
-  - ContractorTrinkets
-  # - EmpireSpeciesSpecific
-  - EmpireFirearm
-  - EmpireMag
-  canCustomizeName: true
-
-# region Cardinal
-- type: roleLoadout
-  id: JobCardinal # Cardinal
-  groups:
-  # - EmpireHead
-  # - EmpireNeck
-  # - EmpireFace
-  # - EmpireGlasses
-  # - EmpireBalaclava
-  - EmpireOfficerJumpsuit
-  - EmpireOuterClothing
-  - EmpireBelt
-  - EmpireGloves
-  - EmpireShoes
-  - EmpireBackpack
-  - EmpireEarsCommand
-  # - EmpireBoxSurvival
-  - EmpireGoldPDA
-  - ContractorWallet
-  - ContractorCartridge
-#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
-  - ContractorEncryptionKey
-  - ContractorFun
-  - ContractorTrinkets
-  # - EmpireSpeciesSpecific
-  - EmpireFirearm
-  - EmpireMag
-  canCustomizeName: true
-
-# region Bailiff
-- type: roleLoadout
-  id: JobArbiter # Arbiter (Bailiff)
-  groups:
-  # - EmpireHead
-  # - EmpireNeck
-  # - EmpireFace
-  # - EmpireGlasses
-  # - EmpireBalaclava
-  - EmpireOfficerJumpsuit
-  - EmpireOuterClothing
-  - EmpireBelt
-  - EmpireGloves
-  - EmpireShoes
-  - EmpireBackpack
-  - EmpireEarsCommand
-  # - EmpireBoxSurvival
-  - EmpireGoldPDA
-  - ContractorWallet
-  - ContractorCartridge
-#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
-  - ContractorEncryptionKey
-  - ContractorFun
-  - ContractorTrinkets
-  # - EmpireSpeciesSpecific
-  - EmpireFirearm
-  - EmpireMag
-  canCustomizeName: true
-
-# region Lord
-- type: roleLoadout
-  id: JobPraefect # Lord
-  groups:
-  # - EmpireHead
-  # - EmpireNeck
-  # - EmpireFace
-  # - EmpireGlasses
-  # - EmpireBalaclava
-  - EmpireCommanderJumpsuit
-  - EmpireOuterClothing
-  - EmpireBelt
-  - EmpireGloves
-  - EmpireShoes
-  - EmpireBackpack
-  - EmpireEarsCommand
-  # - EmpireBoxSurvival
-  - EmpireCommanderPDA
-  - ContractorWallet
-  - ContractorCartridge
-#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
-  - ContractorEncryptionKey
-  - ContractorFun
-  - ContractorTrinkets
-  # - EmpireSpeciesSpecific
-  - EmpireFirearm
-  - EmpireMag
-  canCustomizeName: true
+# Empire role loadouts disabled with Empire jobs.
+# # region Cadet
+# - type: roleLoadout
+#   id: JobNeophyte # Cadet
+#   groups:
+#   # - EmpireHead
+#   # - EmpireNeck
+#   # - EmpireFace
+#   # - EmpireGlasses
+#   # - EmpireBalaclava
+#   - EmpireJumpsuit
+#   - EmpireOuterClothing
+#   - EmpireBelt
+#   - EmpireGloves
+#   - EmpireShoes
+#   - EmpireBackpack
+#   - EmpireEars
+#   # - EmpireBoxSurvival
+#   - EmpirePDA
+#   - ContractorWallet
+#   - ContractorCartridge
+##  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+#   - ContractorEncryptionKey
+#   - ContractorFun
+#   - ContractorTrinkets
+#   # - EmpireSpeciesSpecific
+#   - EmpireFirearm
+#   - EmpireMag
+#   canCustomizeName: true
+#
+# # region Soldier
+# - type: roleLoadout
+#   id: JobAuxilia # Soldier
+#   groups:
+#   # - EmpireHead
+#   # - EmpireNeck
+#   # - EmpireFace
+#   # - EmpireGlasses
+#   # - EmpireBalaclava
+#   - EmpireJumpsuit
+#   - EmpireOuterClothing
+#   - EmpireBelt
+#   - EmpireGloves
+#   - EmpireShoes
+#   - EmpireBackpack
+#   - EmpireEars
+#   # - EmpireBoxSurvival
+#   - EmpirePDA
+#   - ContractorWallet
+#   - ContractorCartridge
+##  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+#   - ContractorEncryptionKey
+#   - ContractorFun
+#   - ContractorTrinkets
+#   # - EmpireSpeciesSpecific
+#   - EmpireFirearm
+#   - EmpireMag
+#   canCustomizeName: true
+#
+# # region Officer
+# - type: roleLoadout
+#   id: JobPraetorian # Officer
+#   groups:
+#   # - EmpireHead
+#   # - EmpireNeck
+#   # - EmpireFace
+#   # - EmpireGlasses
+#   # - EmpireBalaclava
+#   - EmpireOfficerJumpsuit
+#   - EmpireOuterClothing
+#   - EmpireBelt
+#   - EmpireGloves
+#   - EmpireShoes
+#   - EmpireBackpack
+#   - EmpireEarsCommand
+#   # - EmpireBoxSurvival
+#   - EmpireGoldPDA
+#   - ContractorWallet
+#   - ContractorCartridge
+##  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+#   - ContractorEncryptionKey
+#   - ContractorFun
+#   - ContractorTrinkets
+#   # - EmpireSpeciesSpecific
+#   - EmpireFirearm
+#   - EmpireMag
+#   canCustomizeName: true
+#
+# # region Diplomacy
+# # TODO: Another loadout
+# - type: roleLoadout
+#   id: JobConsul # Diplomacy
+#   groups:
+#   # - EmpireHead
+#   # - EmpireNeck
+#   # - EmpireFace
+#   # - EmpireGlasses
+#   # - EmpireBalaclava
+#   - EmpireOfficerJumpsuit
+#   - EmpireOuterClothing
+#   - EmpireBelt
+#   - EmpireGloves
+#   - EmpireShoes
+#   - EmpireBackpack
+#   - EmpireEarsCommand
+#   # - EmpireBoxSurvival
+#   - EmpireGoldPDA
+#   - ContractorWallet
+#   - ContractorCartridge
+##  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+#   - ContractorEncryptionKey
+#   - ContractorFun
+#   - ContractorTrinkets
+#   # - EmpireSpeciesSpecific
+#   - EmpireFirearm
+#   - EmpireMag
+#   canCustomizeName: true
+#
+# # region Inquisitor
+# - type: roleLoadout
+#   id: JobInquisitor # Inquisitor
+#   groups:
+#   # - EmpireHead
+#   # - EmpireNeck
+#   # - EmpireFace
+#   # - EmpireGlasses
+#   # - EmpireBalaclava
+#   - EmpireInquisitorJumpsuit
+#   - EmpireInquisitorOuterClothing
+#   - EmpireBelt
+#   - EmpireGloves
+#   - EmpireShoes
+#   - EmpireBackpack
+#   - EmpireEarsCommand
+#   # - EmpireBoxSurvival
+#   - EmpireInqPDA
+#   - ContractorWallet
+#   - ContractorCartridge
+##  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+#   - ContractorEncryptionKey
+#   - ContractorFun
+#   - ContractorTrinkets
+#   # - EmpireSpeciesSpecific
+#   - EmpireFirearm
+#   - EmpireMag
+#   canCustomizeName: true
+#
+# # region Cardinal
+# - type: roleLoadout
+#   id: JobCardinal # Cardinal
+#   groups:
+#   # - EmpireHead
+#   # - EmpireNeck
+#   # - EmpireFace
+#   # - EmpireGlasses
+#   # - EmpireBalaclava
+#   - EmpireOfficerJumpsuit
+#   - EmpireOuterClothing
+#   - EmpireBelt
+#   - EmpireGloves
+#   - EmpireShoes
+#   - EmpireBackpack
+#   - EmpireEarsCommand
+#   # - EmpireBoxSurvival
+#   - EmpireGoldPDA
+#   - ContractorWallet
+#   - ContractorCartridge
+##  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+#   - ContractorEncryptionKey
+#   - ContractorFun
+#   - ContractorTrinkets
+#   # - EmpireSpeciesSpecific
+#   - EmpireFirearm
+#   - EmpireMag
+#   canCustomizeName: true
+#
+# # region Bailiff
+# - type: roleLoadout
+#   id: JobArbiter # Arbiter (Bailiff)
+#   groups:
+#   # - EmpireHead
+#   # - EmpireNeck
+#   # - EmpireFace
+#   # - EmpireGlasses
+#   # - EmpireBalaclava
+#   - EmpireOfficerJumpsuit
+#   - EmpireOuterClothing
+#   - EmpireBelt
+#   - EmpireGloves
+#   - EmpireShoes
+#   - EmpireBackpack
+#   - EmpireEarsCommand
+#   # - EmpireBoxSurvival
+#   - EmpireGoldPDA
+#   - ContractorWallet
+#   - ContractorCartridge
+##  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+#   - ContractorEncryptionKey
+#   - ContractorFun
+#   - ContractorTrinkets
+#   # - EmpireSpeciesSpecific
+#   - EmpireFirearm
+#   - EmpireMag
+#   canCustomizeName: true
+#
+# # region Lord
+# - type: roleLoadout
+#   id: JobPraefect # Lord
+#   groups:
+#   # - EmpireHead
+#   # - EmpireNeck
+#   # - EmpireFace
+#   # - EmpireGlasses
+#   # - EmpireBalaclava
+#   - EmpireCommanderJumpsuit
+#   - EmpireOuterClothing
+#   - EmpireBelt
+#   - EmpireGloves
+#   - EmpireShoes
+#   - EmpireBackpack
+#   - EmpireEarsCommand
+#   # - EmpireBoxSurvival
+#   - EmpireCommanderPDA
+#   - ContractorWallet
+#   - ContractorCartridge
+##  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+#   - ContractorEncryptionKey
+#   - ContractorFun
+#   - ContractorTrinkets
+#   # - EmpireSpeciesSpecific
+#   - EmpireFirearm
+#   - EmpireMag
+#   canCustomizeName: true

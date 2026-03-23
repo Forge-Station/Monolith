@@ -1392,8 +1392,10 @@ namespace Content.Client.Lobby.UI
                     JobList.AddChild(category);
                 }
 
-                var jobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
-                    .Where(job => job.SetPreference)
+                var jobs = department.Roles
+                    .Select(jobId => _prototypeManager.TryIndex(jobId, out JobPrototype? job) ? job : null)
+                    .Where(job => job is { SetPreference: true })
+                    .Cast<JobPrototype>()
                     .ToArray();
 
                 Array.Sort(jobs, JobUIComparer.Instance);

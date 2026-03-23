@@ -1,59 +1,60 @@
-- type: job
-  id: Praetorian
-  name: forge-job-name-praetorian
-  description: forge-job-desc-praetorian
-  playTimeTracker: JobPraetorian
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 64800 # 18 hours
-    - !type:DepartmentTimeRequirement
-      department: Empire
-      time: 43200 # 12 hours
-    - !type:SpeciesRequirement
-      inverted: true
-      species:
-        - SlimePerson
-        - Arachnid
-        - Chitinid
-        - Resomi
-        - Vox
-        - Diona
-        - Goblin
-        - Hydrakin
-        - Vulpkanin
-        - Tajaran
-        - Reptilian
-        # - Oni
-        - Moth
-  # alternateRequirementSets:
-  #   longerPlaytimeLessSec:
-  #   - !type:RoleTimeRequirement
-  #     role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
-  #     time: 43200 # 12 hours
-  startingGear: PraetorianGear
-  icon: JobIconEmpirePraetorian
-  supervisors: job-supervisors-cardinal
-  weight: 20
-  displayWeight: 20
-  canBeAntag: false
-  salary: 9000
-  setPreference: true
-  accessGroups:
-  - SpecialEmpireAccess
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: NpcFactionMember
-      factions:
-      - Empire
-
-- type: startingGear
-  id: PraetorianGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF
+# Empire role disabled.
+# - type: job
+#   id: Praetorian
+#   name: forge-job-name-praetorian
+#   description: forge-job-desc-praetorian
+#   playTimeTracker: JobPraetorian
+#   requirements:
+#     - !type:OverallPlaytimeRequirement
+#       time: 64800 # 18 hours
+#     - !type:DepartmentTimeRequirement
+#       department: Empire
+#       time: 43200 # 12 hours
+#     - !type:SpeciesRequirement
+#       inverted: true
+#       species:
+#         - SlimePerson
+#         - Arachnid
+#         - Chitinid
+#         - Resomi
+#         - Vox
+#         - Diona
+#         - Goblin
+#         - Hydrakin
+#         - Vulpkanin
+#         - Tajaran
+#         - Reptilian
+#         # - Oni
+#         - Moth
+#   # alternateRequirementSets:
+#   #   longerPlaytimeLessSec:
+#   #   - !type:RoleTimeRequirement
+#   #     role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
+#   #     time: 43200 # 12 hours
+#   startingGear: PraetorianGear
+#   icon: JobIconEmpirePraetorian
+#   supervisors: job-supervisors-cardinal
+#   weight: 20
+#   displayWeight: 20
+#   canBeAntag: false
+#   salary: 9000
+#   setPreference: true
+#   accessGroups:
+#   - SpecialEmpireAccess
+#   special:
+#   - !type:AddComponentSpecial
+#     components:
+#     - type: NpcFactionMember
+#       factions:
+#       - Empire
+#
+# - type: startingGear
+#   id: PraetorianGear
+#   # equipment:
+#   #   ears:
+#   #   belt:
+#   #   pocket1:
+#   #   pocket2:
+#   # storage:
+#   #   back:
+#   #   - RadioHandheldNF

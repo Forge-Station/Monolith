@@ -71,17 +71,17 @@ public class SharedPassportSystem : EntitySystem
     // Forge-change-start: i know, that shit. But, in my defense - im using _Mono/Company code as a reference.
     // private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev) =>
     //     SpawnPassportForPlayer(ev.Mob, ev.Profile, ev.JobId);
-    private readonly HashSet<string> _imperialJobs = new()
-    {
-        "Praefect",
-        "Arbiter",
-        "Cardinal",
-        "Inquisitor",
-        "Consul",
-        "Praetorian",
-        "Auxilia",
-        "Neophyte",
-    };
+//    private readonly HashSet<string> _imperialJobs = new() // Forge-change-delete
+//    {
+//        "Praefect",
+//        "Arbiter",
+//        "Cardinal",
+//        "Inquisitor",
+//        "Consul",
+//        "Praetorian",
+//        "Auxilia",
+//        "Neophyte",
+//    };
 
     private readonly HashSet<string> _tsfJobs = new()
     {
@@ -105,11 +105,11 @@ public class SharedPassportSystem : EntitySystem
 
         if (ev.JobId != null)
         {
-            if (_imperialJobs.Contains(ev.JobId))
-            {
-                profile.Nationality = "Imperial";
-            }
-            else if (_tsfJobs.Contains(ev.JobId))
+//            if (_imperialJobs.Contains(ev.JobId))
+//            {
+//                profile.Nationality = "Imperial";
+//            }
+            if (_tsfJobs.Contains(ev.JobId))
             {
                 profile.Nationality = "TransSolarFederation";
             }

@@ -1,0 +1,44 @@
+- type: latheRecipe
+  parent: BaseAmmoFMJFullyPoweredMagazineRecipe
+  id: Magazinetype99762x51mmFMJ
+  result: Magazinetype99762x51mmFMJ
+
+- type: latheRecipe
+  parent: BaseAmmoPlasteelAPFullyPoweredMagazineRecipe
+  id: Magazinetype99762x51mmPlasteelAP
+  result: Magazinetype99762x51mmPlasteelAP
+
+- type: latheRecipe
+  parent: BaseAmmoRubberFullyPoweredMagazineRecipe
+  id: Magazinetype99762x51mmRubber
+  result: Magazinetype99762x51mmRubber
+
+- type: latheRecipe
+  parent: BaseAmmoIncendiaryFullyPoweredMagazineRecipe
+  id: Magazinetype99762x51mmIncendiary
+  result: Magazinetype99762x51mmIncendiary
+
+- type: latheRecipe
+  parent: BaseAmmoPracticeFullyPoweredMagazineRecipe
+  id: Magazinetype99762x51mmPractice
+  result: Magazinetype99762x51mmPractice
+
+- type: latheRecipe
+  parent: BaseAmmoEmptyFullyPoweredMagazineRecipe
+  id: Magazinetype99762x51mmEmpty
+  result: Magazinetype99762x51mmEmpty
+
+- type: latheRecipe
+  parent: BaseAmmoUraniumFullyPoweredMagazineRecipe
+  id: Magazinetype99762x51mmUranium
+  result: Magazinetype99762x51mmUranium
+
+- type: latheRecipe
+  parent: BaseAmmoHPFullyPoweredMagazineRecipe
+  id: Magazinetype99762x51mmHP
+  result: Magazinetype99762x51mmHP
+
+- type: latheRecipe
+  parent: BaseAmmoRIPFullyPoweredMagazineRecipe
+  id: Magazinetype99762x51mmRIP
+  result: Magazinetype99762x51mmRIP

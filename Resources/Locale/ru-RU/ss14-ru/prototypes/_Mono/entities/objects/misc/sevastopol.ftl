@@ -1,2 +1,2 @@
-﻿ent-SevastopolPlushie = плюшевый Highfleet
+ent-SevastopolPlushie = плюшевый «Хайфлит»
     .desc = Обнаружена тепловая сигнатура!

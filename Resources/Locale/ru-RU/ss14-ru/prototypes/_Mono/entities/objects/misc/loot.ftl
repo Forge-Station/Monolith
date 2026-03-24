@@ -1,6 +1,9 @@
-﻿ent-MonolithicCrystalSmall = маленький монолитный кристалл
+ent-MonolithicCrystalSmall = маленький монолитный кристалл
+    .suffix = 15 FMC/Data
     .desc = Загадочное кристаллическое тело. Выглядит высокоэнергетическим, но хрупким. Местные фракции и исследователи очень заинтересованы в нём.
-ent-MonolithicCrystalMedium = 25 FMC/Data
-    .desc = A mysterious crystalline solid. Seems highly energetic, but fragile. Notably large. Local factions and researchers are very interested in this.
-ent-MonolithicCrystalLarge = 50 FMC/Data
-    .desc = A mysterious crystalline solid. Seems highly energetic, but fragile. It is of rare size! Local factions and researchers are very interested in this.
+ent-MonolithicCrystalMedium = средний монолитный кристалл
+    .suffix = 25 FMC/Data
+    .desc = Загадочное кристаллическое тело. Выглядит высокоэнергетическим, но хрупким. Заметно крупнее обычного. Местные фракции и исследователи очень заинтересованы в нём.
+ent-MonolithicCrystalLarge = большой монолитный кристалл
+    .suffix = 50 FMC/Data
+    .desc = Загадочное кристаллическое тело. Выглядит высокоэнергетическим, но хрупким. Редко крупный экземпляр. Местные фракции и исследователи очень заинтересованы в нём.

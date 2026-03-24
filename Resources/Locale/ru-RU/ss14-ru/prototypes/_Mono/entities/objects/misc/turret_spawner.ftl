@@ -1,5 +1,10 @@
-﻿ent-SpawnMobWeaponTurretLaserTSFMC = спаунер лазерной турели ВСКМП
-ent-SpawnMobWeaponTurretLaserSilicon = Silicon, Frontier
-ent-SpawnMobWeaponTurretTFSMC = TSFMC, Frontier
-ent-SpawnMobWeaponTurretUSSP = USSP
-ent-SpawnMobWeaponTurretPDV = PDV, Frontier
+ent-SpawnMobWeaponTurretLaserTSFMC = спавнер лазерной турели ТСКМП
+    .suffix = ТСКМП, Фронтир
+ent-SpawnMobWeaponTurretLaserSilicon = спавнер лазерной турели силиконов
+    .suffix = Силиконы, Фронтир
+ent-SpawnMobWeaponTurretTFSMC = спавнер баллистической турели ТСКМП
+    .suffix = ТСКМП, Фронтир
+ent-SpawnMobWeaponTurretUSSP = спавнер баллистической турели СССП
+    .suffix = СССП
+ent-SpawnMobWeaponTurretPDV = спавнер баллистической турели ФДА
+    .suffix = ФДА, Фронтир

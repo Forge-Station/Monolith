@@ -1,6 +1,9 @@
 ent-MonoRamDroneSpawnerT1 = спаунер таранного дрона T1
 ent-MonoRamDroneSpawnerT2Inner = спаунер таранного дрона T2 (внутренний)
 ent-MonoRamDroneSpawnerT2Middle = спаунер таранного дрона T2 (средний)
+ent-MonoDroneSpawnerT1 = спавнер дрона T1
+ent-MonoDroneSpawnerT2Inner = спавнер дрона T2 (внутренний)
+ent-MonoDroneSpawnerT2Middle = спавнер дрона T2 (средний)
 ent-SpawnDroneBase = спаунер базового дрона
 ent-SpawnDroneNeedle = спаунер дрона «Игла»
 ent-SpawnDroneWedge = спаунер дрона «Клин»

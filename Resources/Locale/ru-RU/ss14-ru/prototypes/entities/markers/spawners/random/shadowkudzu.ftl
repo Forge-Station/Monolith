@@ -1,2 +1,2 @@
-ent-ShadowKudzuLootSpawner = { ent-MarkerBase }
+ent-ShadowKudzuLootSpawner = спавнер лута теневого кудзу
     .desc = { ent-MarkerBase.desc }

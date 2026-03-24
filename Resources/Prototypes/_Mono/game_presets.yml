@@ -110,7 +110,7 @@
   - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
-  - MonoChimeraSTCShuttleSpawnerSchedulerSlow
+#  - MonoChimeraSTCShuttleSpawnerSchedulerSlow
   - MonoAISTCShuttleSpawnerSchedulerSlow
   - MonoAISTCShuttleSpawnerSchedulerTier2Slow
 #  - MonoAsakimSTCShuttleSpawnerSchedulerSlow

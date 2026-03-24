@@ -1,5 +1,5 @@
 ent-IntercomNfsd = { ent-IntercomSecurity }
-    .suffix = ДСБФ
+    .suffix = ТСФ
     .desc = { ent-IntercomSecurity.desc }
 
 ent-ShuttleIntercomSyndicate = ShuttleIntercomSyndicate

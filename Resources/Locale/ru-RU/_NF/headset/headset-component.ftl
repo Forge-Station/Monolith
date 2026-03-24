@@ -1,2 +1,2 @@
 chat-radio-traffic = Диспетчерская
-chat-radio-nfsd = ДСБФ
+chat-radio-nfsd = ТСФ

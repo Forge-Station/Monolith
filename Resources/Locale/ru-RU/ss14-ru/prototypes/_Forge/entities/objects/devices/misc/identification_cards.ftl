@@ -1,4 +1,4 @@
-ent-EngineerNfsdIDCard = ID карта специалиста дсбф
+ent-EngineerNfsdIDCard = ID карта специалиста ТСФ
     .desc = { ent-CadetIDCard.desc }
 
 ent-EmpireIDCard = ID карта

@@ -13,7 +13,7 @@
 - type: pointOfInterest
   id: TSFMCHalcyon
   parent: [BasePOI, BaseRepairablePOI]
-  name: 'Флагман ДСБФ «Халкион»'
+  name: 'Флагман ТСФ «Халкион»'
   minimumDistance: 2500 # Mono
   maximumDistance: 4000 # Mono
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
@@ -28,7 +28,7 @@
 
 - type: gameMap
   id: TSFMCHalcyon
-  mapName: 'Флагман ДСБФ «Халкион»'
+  mapName: 'Флагман ТСФ «Халкион»'
   mapPath: /Maps/_Mono/POI/tsfmchalcyon.yml
   minPlayers: 0
   randomRotation: false
@@ -37,10 +37,10 @@
       stationProto: SecurityFrontierOutpost
       gridComponents:
       - type: VesselInfo
-        description: "Законсервированный линкор, переделанный в передовую базу, — штаб операций ДСБФ."
+        description: "Законсервированный линкор, переделанный в передовую базу, — штаб операций ТСФ."
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Флагман ДСБФ «Халкион»'
+          mapNameTemplate: 'Флагман ТСФ «Халкион»'
         - type: ExtraStationInformation
           iconPath: /Textures/_NF/Structures/Decoration/banner.rsi/nfsd-banner.png
           stationSubtext: 'frontier-lobby-nfsd-subtext'

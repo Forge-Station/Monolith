@@ -14,9 +14,9 @@ forge-research-technology-shipammo57aphe = Каморные 57-ми миллим
 forge-research-technology-bombmerc = Неуправляемая 50-ти килограммовая бомба
 
 # NFSD research
-ent-ForgeRnDNFSDServer = сервер ДСБФ
+ent-ForgeRnDNFSDServer = сервер ТСФ
     .desc = { ent-ResearchAndDevelopmentServer.desc }
-forge-techdiscipline-nfsdtech = ДСБФ
+forge-techdiscipline-nfsdtech = ТСФ
 forge-research-technology-shipammoall = Базовые корабельные боеприпасы
 forge-research-technology-nfsd-base = Привелегия сильного
 forge-research-technology-nfsd-hardsuit = Боевые и патрульные скафандры

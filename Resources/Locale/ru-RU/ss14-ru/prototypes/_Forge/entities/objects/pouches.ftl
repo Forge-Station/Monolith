@@ -1,4 +1,4 @@
-ent-PouchNFSDTech = сумка специалиста ДСБФ
+ent-PouchNFSDTech = сумка специалиста ТСФ
     .desc = { ent-NFPouchBase.desc }
 ent-PouchNFSDMed = сумка коронера
     .desc = { ent-NFPouchBase.desc }

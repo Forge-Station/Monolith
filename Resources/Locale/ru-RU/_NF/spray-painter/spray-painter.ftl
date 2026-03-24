@@ -1,21 +1,21 @@
 # Airlocks
 spray-painter-style-airlockstandard-mercenary = Наёмники
-spray-painter-style-airlockstandard-nfsd = ДСБФ
+spray-painter-style-airlockstandard-nfsd = ТСФ
 
 spray-painter-style-airlockglass-mercenary = Наёмники
-spray-painter-style-airlockglass-nfsd = ДСБФ
+spray-painter-style-airlockglass-nfsd = ТСФ
 
 # Lockers
 spray-painter-style-locker-mail = Почтольон
 spray-painter-style-locker-mercenary = Наёмники
 spray-painter-style-locker-janitor = Уборщик
 spray-painter-style-locker-pilot = Пилот
-spray-painter-style-locker-nfsd = ДСБФ
-spray-painter-style-locker-nfsd-copper = ДСБФ (бронза)
-spray-painter-style-locker-nfsd-silver = ДСБФ (серебро)
-spray-painter-style-locker-nfsd-brigmedic = ДСБФ (Коронер)
-spray-painter-style-locker-nfsd-gold = ДСБФ (золото)
-spray-painter-style-locker-nfsd-sheriff = ДСБФ (Шериф)
+spray-painter-style-locker-nfsd = ТСФ
+spray-painter-style-locker-nfsd-copper = ТСФ (бронза)
+spray-painter-style-locker-nfsd-silver = ТСФ (серебро)
+spray-painter-style-locker-nfsd-brigmedic = ТСФ (Коронер)
+spray-painter-style-locker-nfsd-gold = ТСФ (золото)
+spray-painter-style-locker-nfsd-sheriff = ТСФ (Шериф)
 spray-painter-style-locker-station-representative = Представитель Фронтира
 spray-painter-style-locker-fsb = FSB
 
@@ -33,9 +33,9 @@ spray-painter-style-cratesecure-private-security = Частная охрана
 spray-painter-style-cratesecure-mercenary-ammo = Боеприпасы
 spray-painter-style-cratesecure-firearms = Огнестрельное оружие
 spray-painter-style-cratesecure-uranium = Уран
-spray-painter-style-cratesecure-brigmedic = ДСБФ (Коронер)
-spray-painter-style-cratesecure-nfsd1 = ДСБФ
-spray-painter-style-cratesecure-nfsd2 = ДСБФ (полосы)
+spray-painter-style-cratesecure-brigmedic = ТСФ (Коронер)
+spray-painter-style-cratesecure-nfsd1 = ТСФ
+spray-painter-style-cratesecure-nfsd2 = ТСФ (полосы)
 
 # Canisters
 spray-painter-style-canisters-liquid-oxygen = Кислород (жидкий)

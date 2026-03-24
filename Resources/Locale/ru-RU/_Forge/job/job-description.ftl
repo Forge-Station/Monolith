@@ -15,7 +15,7 @@ forge-job-desc-stormtrooper = Штурмовик подчиняющийся ко
 # paraMedical
 forge-job-desc-paramedical = Полевой медик занимающийся спасением раненых.
 # Nfsd
-forge-job-desc-engineernfsd = Инженер ДСБФ. Собирайте ресурсы, производите снаряжение.
+forge-job-desc-engineernfsd = Инженер ТСФ. Собирайте ресурсы, производите снаряжение.
 
 # Empire
 forge-job-desc-praefect = Верховный командующий силами Священной Империи Вермиллионов в регионе.

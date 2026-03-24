@@ -1,3 +1,3 @@
-ent-EnergyShieldNfsd = энергощит ДСБФ
+ent-EnergyShieldNfsd = энергощит ТСФ
     .desc = { ent-EnergyShield.desc }
 ent-TSFEnergyWeapon = TSFEnergyWeapon

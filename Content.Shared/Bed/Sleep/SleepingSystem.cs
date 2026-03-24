@@ -64,10 +64,13 @@ public sealed partial class SleepingSystem : EntitySystem
         SubscribeLocalEvent<SleepingComponent, InteractHandEvent>(OnInteractHand);
 
         SubscribeLocalEvent<ForcedSleepingComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<ForcedSleepingComponent, MobStateChangedEvent>(OnForcedSleepMobStateChanged); // Forge-Change: added forced sleep mob state changed event
+        SubscribeLocalEvent<ForcedSleepingComponent, SpeakAttemptEvent>(OnForcedSleepSpeakAttempt); // Forge-Change: added forced sleep speak attempt event
+        SubscribeLocalEvent<ForcedSleepingComponent, EmoteAttemptEvent>(OnForcedSleepEmoteAttempt); // Forge-Change: added forced sleep emote attempt event
         SubscribeLocalEvent<SleepingComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
         SubscribeLocalEvent<SleepingComponent, EmoteAttemptEvent>(OnEmoteAttempt);
 
-        SubscribeLocalEvent<SleepingComponent, BeforeForceSayEvent>(OnChangeForceSay, after: new []{typeof(PainNumbnessSystem)});
+        SubscribeLocalEvent<SleepingComponent, BeforeForceSayEvent>(OnChangeForceSay, after: new[] { typeof(PainNumbnessSystem) }); // Forge-Change: added forced sleep before force say event
     }
 
     private void OnUnbuckleAttempt(Entity<SleepingComponent> ent, ref UnbuckleAttemptEvent args)
@@ -221,7 +224,7 @@ public sealed partial class SleepingSystem : EntitySystem
             return;
 
         // Wake up if either damage or healing exceeds the threshold
-        if ((totalChange > 0 || -totalChange > 0) && 
+        if ((totalChange > 0 || -totalChange > 0) &&
             (totalChange >= ent.Comp.WakeThreshold || -totalChange >= ent.Comp.WakeThreshold)
             && !HasComp<ForcedSleepingComponent>(ent))
             TryWaking((ent, ent.Comp));
@@ -235,8 +238,9 @@ public sealed partial class SleepingSystem : EntitySystem
     {
         if (args.NewMobState == MobState.Dead)
         {
-            RemComp<SpamEmitSoundComponent>(ent);
-            RemComp<SleepingComponent>(ent);
+            // Ensure forced sleep from chems/gases does not persist through death-revive loops.
+            _statusEffectsSystem.TryRemoveStatusEffect(ent.Owner, "ForcedSleep"); // Forge-Change: removed forced sleep status effect
+            TryWaking((ent, ent.Comp), force: true); // Forge-Change: woke up entity
             return;
         }
         if (TryComp<SpamEmitSoundComponent>(ent, out var spam))
@@ -248,6 +252,28 @@ public sealed partial class SleepingSystem : EntitySystem
         TrySleeping(ent.Owner);
     }
 
+    // Forge-Change-start: added forced sleep mob state changed event
+    private void OnForcedSleepMobStateChanged(Entity<ForcedSleepingComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        _statusEffectsSystem.TryRemoveStatusEffect(ent.Owner, "ForcedSleep");
+        if (TryComp<SleepingComponent>(ent, out var sleeping))
+            TryWaking((ent.Owner, sleeping), force: true);
+        RemComp<ForcedSleepingComponent>(ent);
+    }
+
+    private void OnForcedSleepSpeakAttempt(Entity<ForcedSleepingComponent> ent, ref SpeakAttemptEvent args)
+    {
+        args.Cancel();
+    }
+
+    private void OnForcedSleepEmoteAttempt(Entity<ForcedSleepingComponent> ent, ref EmoteAttemptEvent args)
+    {
+        args.Cancel();
+    }
+    // Forge-Change-end: added forced sleep mob state changed event
     private void Wake(Entity<SleepingComponent> ent)
     {
         RemComp<SleepingComponent>(ent);

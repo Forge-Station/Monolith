@@ -1,10 +1,15 @@
 ent-SpawnMobWeaponTurretLaserTSFMC = спавнер лазерной турели ТСКМП
     .suffix = ТСКМП, Фронтир
+    .desc = { ent-MarkerBase.desc }
 ent-SpawnMobWeaponTurretLaserSilicon = спавнер лазерной турели силиконов
     .suffix = Силиконы, Фронтир
+    .desc = { ent-MarkerBase.desc }
 ent-SpawnMobWeaponTurretTFSMC = спавнер баллистической турели ТСКМП
     .suffix = ТСКМП, Фронтир
+    .desc = { ent-MarkerBase.desc }
 ent-SpawnMobWeaponTurretUSSP = спавнер баллистической турели СССП
     .suffix = СССП
+    .desc = { ent-MarkerBase.desc }
 ent-SpawnMobWeaponTurretPDV = спавнер баллистической турели ФДА
     .suffix = ФДА, Фронтир
+    .desc = { ent-MarkerBase.desc }

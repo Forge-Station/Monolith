@@ -1,5 +1,6 @@
 ent-VendingMachineAmmoPOIMercenary = автомат снабжения PMC
 ent-VendingMachineBluespaceDrive = торговый автомат блюспейс-приводов
+    .suffix = POI
     .desc = Продаёт блюспейс-приводы в компактной упаковке.
 ent-VendingMachineUSSP = автомат реквизиции USSP
     .desc = Продаёт различное оборудование USSP.

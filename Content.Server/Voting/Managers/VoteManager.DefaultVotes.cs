@@ -580,7 +580,13 @@ namespace Content.Server.Voting.Managers
 
         private void TimeoutStandardVote(StandardVoteType type)
         {
-            var timeout = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteSameTypeTimeout));
+            // Forge-Change-Start
+            var timeoutSeconds = type == StandardVoteType.Preset
+                ? _cfg.GetCVar(CCVars.VotePresetTimeout)
+                : _cfg.GetCVar(CCVars.VoteSameTypeTimeout);
+
+            var timeout = TimeSpan.FromSeconds(timeoutSeconds);
+            // Forge-Change-End
             _standardVoteTimeout[type] = _timing.RealTime + timeout;
             DirtyCanCallVoteAll();
         }

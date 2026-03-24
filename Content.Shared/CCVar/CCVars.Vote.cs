@@ -59,6 +59,13 @@ public sealed partial class CCVars
         CVarDef.Create("vote.same_type_timeout", 240f, CVar.SERVERONLY);
 
     /// <summary>
+    ///     Forge-Change
+    ///     The delay between gamemode/preset votes, in seconds.
+    /// </summary>
+    public static readonly CVarDef<float> VotePresetTimeout =
+        CVarDef.Create("vote.preset_timeout", 3600f, CVar.SERVERONLY);
+
+    /// <summary>
     ///     Sets the duration of the map vote timer.
     /// </summary>
     public static readonly CVarDef<int>

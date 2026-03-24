@@ -1,11 +1,14 @@
 using System.Linq;
 using Content.Server.Access.Systems;
+using Content.Server.Players.PlayTimeTracking; // Forge-Change
+using Content.Server.Roles.Jobs; // Forge-Change
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Players; // Forge-Change
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
 using Content.Shared.StatusIcon;
@@ -14,6 +17,7 @@ using Content.Shared._Forge.Access.Components;
 using Content.Shared._Forge.Access.Systems;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
+using Robust.Server.Player; // Forge-Change
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
@@ -29,6 +33,9 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly StationRecordsSystem _record = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!; // Forge-Change
+    [Dependency] private readonly JobSystem _job = default!; // Forge-Change
+    [Dependency] private readonly PlayTimeTrackingManager _playtime = default!; // Forge-Change
 
     public override void Initialize()
     {
@@ -144,6 +151,7 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
         Dirty(targetId, targetCard);
 
         UpdateStationRecord(targetId, job);
+        UpdateHolderJobRoleAndPlaytime(targetId, job.ID); // Forge-Change
 
         var changedAccess = newTags
             .Union(currentTags)
@@ -315,5 +323,32 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
 
         var privilegedId = component.PrivilegedIdSlot.Item;
         return privilegedId != null && _accessReader.IsAllowed(privilegedId.Value, uid, reader);
+    }
+
+    /// <summary>
+    /// Forge-Change: UpdateHolderJobRoleAndPlaytime
+    /// If the edited ID belongs to an online player, switch their active job role and refresh playtime trackers.
+    /// </summary>
+    private void UpdateHolderJobRoleAndPlaytime(EntityUid targetId, ProtoId<JobPrototype> jobId)
+    {
+        foreach (var session in _playerManager.Sessions)
+        {
+            if (session.AttachedEntity is not { Valid: true } attached)
+                continue;
+
+            if (!_idCard.TryFindIdCard(attached, out var holderId)
+                || holderId.Owner != targetId)
+            {
+                continue;
+            }
+
+            var contentData = _playerManager.GetPlayerData(session.UserId).ContentData();
+            if (contentData?.Mind is not { } mind)
+                return;
+
+            _job.MindAddJob(mind, jobId);
+            _playtime.QueueRefreshTrackers(session);
+            return;
+        }
     }
 }

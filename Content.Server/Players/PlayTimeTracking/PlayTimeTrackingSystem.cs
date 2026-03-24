@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.Access.Systems;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.Afk;
@@ -9,6 +10,7 @@ using Content.Server.Mind;
 using Content.Server.Preferences.Managers;
 using Content.Server.Station.Events;
 using Content.Shared.CCVar;
+using Content.Shared.Access.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -39,6 +41,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
+    [Dependency] private readonly IdCardSystem _idCard = default!;
 
     public override void Initialize()
     {
@@ -111,16 +114,42 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         }
     }
 
+    // Forge-Change-start
     private IEnumerable<string> GetTimedRoles(ICommonSession session)
     {
+        var result = new HashSet<string>();
         var contentData = _playerManager.GetPlayerData(session.UserId).ContentData();
 
-        if (contentData?.Mind == null)
-            return Enumerable.Empty<string>();
+        if (contentData?.Mind is { } mind)
+            result.UnionWith(GetTimedRoles(mind));
 
-        return GetTimedRoles(contentData.Mind.Value);
+        if (TryGetTrackerFromIdCard(session, out var idCardTracker))
+            result.Add(idCardTracker);
+
+        return result;
     }
 
+    /// <summary>
+    /// Adds tracker from the player's current ID card job so playtime follows post-round job reassignment.
+    /// </summary>
+    private bool TryGetTrackerFromIdCard(ICommonSession session, out string tracker)
+    {
+        tracker = string.Empty;
+
+        if (session.AttachedEntity is not { Valid: true } attached
+            || !_idCard.TryFindIdCard(attached, out var idCard)
+            || !TryComp<IdCardComponent>(idCard, out var idCardComp)
+            || string.IsNullOrWhiteSpace(idCardComp.JobPrototype)
+            || !_prototypes.TryIndex<JobPrototype>(idCardComp.JobPrototype, out var job)
+            || string.IsNullOrWhiteSpace(job.PlayTimeTracker))
+        {
+            return false;
+        }
+
+        tracker = _prototypes.Index<PlayTimeTrackerPrototype>(job.PlayTimeTracker).ID;
+        return true;
+    }
+    /// Forge-Change-end
     private void OnRoleEvent(RoleEvent ev)
     {
         if (_minds.TryGetSession(ev.Mind, out var session))

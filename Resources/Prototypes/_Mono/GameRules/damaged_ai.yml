@@ -12,7 +12,7 @@
     children:
     - id: UnknownShuttleZenithE
     - id: UnknownShuttleRazorN
-    - id: UnknownShuttleWyvern
+    #- id: UnknownShuttleWyvern # Forge-change: disabled Wyvern spawner
 
 - type: entity
   parent: BaseRandomShuttleRule

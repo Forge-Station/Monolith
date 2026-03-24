@@ -8,7 +8,7 @@
     - id: UnknownShuttleZenithEApoc
     - id: UnknownShuttleWyrmApoc
     - id: UnknownShuttleNebulaApoc
-    - id: UnknownShuttleWyvernApoc
+    #- id: UnknownShuttleWyvernApoc # Forge-change: disabled Wyvern spawner
 
 - type: entity
   parent: BaseRandomShuttleRule

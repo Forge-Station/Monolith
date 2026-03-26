@@ -3,7 +3,7 @@
 - type: radioChannel
   id: Traffic
   name: chat-radio-traffic
-  keycode: 'd'
+  keycode: 'в'
   frequency: 1022
   color: "#CC6633"
   maxRange: 1500
@@ -13,7 +13,7 @@
 - type: radioChannel
   id: Nfsd
   name: chat-radio-ncmc
-  keycode: 's'
+  keycode: 'ч'
   frequency: 1023
   color: "#0c8ad3"
 

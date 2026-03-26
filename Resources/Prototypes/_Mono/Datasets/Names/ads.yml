@@ -1,95 +1,95 @@
 - type: dataset
   id: MonoRemnantBorgTitle
   values:
-  - ADM
+  - names-mono-remnant-borg-title-dataset-1
 
 - type: dataset
   id: MonoRemnantCoreTitle
   values:
-  - ADC
+  - names-mono-remnant-core-title-dataset-1
 
 - type: dataset
   id: MonoRemnantAdjective
   values:
-  - Violet
-  - Red
-  - Purple
-  - Yellow
-  - Green
-  - Blue
-  - Cyan
-  - Crimson
-  - Steel
-  - Obsidian
-  - Prismatic
-  - Sudden
-  - Militant
-  - Void
-  - Lightspeed
-  - Cleansing
-  - Burning
-  - Frozen
-  - Molten
-  - Flying
-  - Marching
-  - Spectral
-  - Piercing
-  - Glass
+  - names-mono-remnant-adjective-dataset-1
+  - names-mono-remnant-adjective-dataset-2
+  - names-mono-remnant-adjective-dataset-3
+  - names-mono-remnant-adjective-dataset-4
+  - names-mono-remnant-adjective-dataset-5
+  - names-mono-remnant-adjective-dataset-6
+  - names-mono-remnant-adjective-dataset-7
+  - names-mono-remnant-adjective-dataset-8
+  - names-mono-remnant-adjective-dataset-9
+  - names-mono-remnant-adjective-dataset-10
+  - names-mono-remnant-adjective-dataset-11
+  - names-mono-remnant-adjective-dataset-12
+  - names-mono-remnant-adjective-dataset-13
+  - names-mono-remnant-adjective-dataset-14
+  - names-mono-remnant-adjective-dataset-15
+  - names-mono-remnant-adjective-dataset-16
+  - names-mono-remnant-adjective-dataset-17
+  - names-mono-remnant-adjective-dataset-18
+  - names-mono-remnant-adjective-dataset-19
+  - names-mono-remnant-adjective-dataset-20
+  - names-mono-remnant-adjective-dataset-21
+  - names-mono-remnant-adjective-dataset-22
+  - names-mono-remnant-adjective-dataset-23
+  - names-mono-remnant-adjective-dataset-24
 
 - type: dataset
   id: MonoRemnantNoun
   values:
-  - Sword
-  - Strider
-  - Courser
-  - Patron
-  - Flood
-  - Weapon
-  - Static
-  - Signal
-  - Arrow
-  - Arbiter
-  - Protocol
-  - Titan
-  - Vector
-  - Requiem
-  - Watcher
-  - Eye
-  - Tower
-  - Terminal
-  - Sentinel
-  - Echo
-  - Nemesis
-  - Daemon # this one fits into modifiers too but sounds better here i think
-  - Locust
-  - Wraith
-  - Lens
-  - Prophet
+  - names-mono-remnant-noun-dataset-1
+  - names-mono-remnant-noun-dataset-2
+  - names-mono-remnant-noun-dataset-3
+  - names-mono-remnant-noun-dataset-4
+  - names-mono-remnant-noun-dataset-5
+  - names-mono-remnant-noun-dataset-6
+  - names-mono-remnant-noun-dataset-7
+  - names-mono-remnant-noun-dataset-8
+  - names-mono-remnant-noun-dataset-9
+  - names-mono-remnant-noun-dataset-10
+  - names-mono-remnant-noun-dataset-11
+  - names-mono-remnant-noun-dataset-12
+  - names-mono-remnant-noun-dataset-13
+  - names-mono-remnant-noun-dataset-14
+  - names-mono-remnant-noun-dataset-15
+  - names-mono-remnant-noun-dataset-16
+  - names-mono-remnant-noun-dataset-17
+  - names-mono-remnant-noun-dataset-18
+  - names-mono-remnant-noun-dataset-19
+  - names-mono-remnant-noun-dataset-20
+  - names-mono-remnant-noun-dataset-21
+  - names-mono-remnant-noun-dataset-22 # this one fits into modifiers too but sounds better here i think
+  - names-mono-remnant-noun-dataset-23
+  - names-mono-remnant-noun-dataset-24
+  - names-mono-remnant-noun-dataset-25
+  - names-mono-remnant-noun-dataset-26
 
 - type: dataset
   id: MonoRemnantModifier
   values:
-  - Adjunct
-  - Joint
-  - Mechanism
-  - Wire
-  - Cog
-  - Machine
-  - Relay
-  - Modem
-  - Node
-  - Unit
-  - Segment
-  - Index
-  - Branch
-  - Module
-  - Factor
-  - Scion
-  - Offset
-  - Fragment
-  - Routine
-  - Sector
-  - Link
-  - Process
-  - Servo
-  - Trait
+  - names-mono-remnant-modifier-dataset-1
+  - names-mono-remnant-modifier-dataset-2
+  - names-mono-remnant-modifier-dataset-3
+  - names-mono-remnant-modifier-dataset-4
+  - names-mono-remnant-modifier-dataset-5
+  - names-mono-remnant-modifier-dataset-6
+  - names-mono-remnant-modifier-dataset-7
+  - names-mono-remnant-modifier-dataset-8
+  - names-mono-remnant-modifier-dataset-9
+  - names-mono-remnant-modifier-dataset-10
+  - names-mono-remnant-modifier-dataset-11
+  - names-mono-remnant-modifier-dataset-12
+  - names-mono-remnant-modifier-dataset-13
+  - names-mono-remnant-modifier-dataset-14
+  - names-mono-remnant-modifier-dataset-15
+  - names-mono-remnant-modifier-dataset-16
+  - names-mono-remnant-modifier-dataset-17
+  - names-mono-remnant-modifier-dataset-18
+  - names-mono-remnant-modifier-dataset-19
+  - names-mono-remnant-modifier-dataset-20
+  - names-mono-remnant-modifier-dataset-21
+  - names-mono-remnant-modifier-dataset-22
+  - names-mono-remnant-modifier-dataset-23
+  - names-mono-remnant-modifier-dataset-24

@@ -768,9 +768,32 @@ namespace Content.Server.GameTicking
                 }
 
                 // Prepare base embed content
-                var title = "Round End Summary";
-                var description = "Round **" + RoundId + "** has ended with **" + manifestLines.Count + "** total characters involved.";
-                var footerText = serverName + " - Round " + RoundId;
+                // Forge-Change-start
+                var orderedProfitData = orderedData.ToList();
+                var antagCount = sortedPlayers.Count(p => p.Antag);
+                var profitableCount = orderedProfitData.Count(p => p.Profit > 0);
+                var lossCount = orderedProfitData.Count(p => p.Profit < 0);
+                var roundDuration = RoundDuration();
+                var durationText = $"{(int) roundDuration.TotalHours:D2}:{roundDuration.Minutes:D2}:{roundDuration.Seconds:D2}";
+
+                var totalProfit = orderedProfitData.Sum(p => p.Profit);
+                var embedColor = totalProfit switch
+                {
+                    > 0 => 0x2ECC71,
+                    < 0 => 0xE74C3C,
+                    _ => 0x3498DB
+                };
+
+                var title = Loc.GetString("discord-round-manifest-title");
+                var description = Loc.GetString("discord-round-manifest-description",
+                    ("id", RoundId),
+                    ("duration", durationText),
+                    ("characters", manifestLines.Count));
+                var footerText = Loc.GetString("discord-round-manifest-footer",
+                    ("serverName", serverName),
+                    ("id", RoundId));
+                var embedTimestamp = DateTimeOffset.UtcNow.ToString("O");
+                // Forge-Change-end
 
                 // Calculate base embed character count (title + description + footer)
                 var baseCharacterCount = title.Length + description.Length + footerText.Length;
@@ -790,9 +813,10 @@ namespace Content.Server.GameTicking
                         {
                             Title = embedCount == 0 ? title : title + " (continued)",
                             Description = embedCount == 0 ? description : "",
-                            Color = 0x9999FF,
+                            Color = embedColor, // Forge-Change
                             Fields = new List<WebhookEmbedField>(currentFields),
-                            Footer = new WebhookEmbedFooter { Text = footerText }
+                            Footer = new WebhookEmbedFooter { Text = footerText }, // Forge-Change
+                            Timestamp = embedTimestamp // Forge-Change
                         });
                         embedCount++;
                         currentFields.Clear();
@@ -800,6 +824,77 @@ namespace Content.Server.GameTicking
                     }
                 }
 
+                // Add compact summary fields for quick reading.
+                // Forge-Change-start
+                var statsLines = new List<string>
+                {
+                    Loc.GetString("discord-round-manifest-stats-antags", ("count", antagCount)),
+                    Loc.GetString("discord-round-manifest-stats-profit-entries", ("count", orderedProfitData.Count)),
+                    Loc.GetString("discord-round-manifest-stats-positive", ("count", profitableCount)),
+                    Loc.GetString("discord-round-manifest-stats-negative", ("count", lossCount)),
+                    Loc.GetString("discord-round-manifest-stats-net", ("amount", totalProfit))
+                };
+
+                var overviewName = Loc.GetString("discord-round-manifest-overview");
+                currentFields.Add(new WebhookEmbedField
+                {
+                    Name = overviewName,
+                    Value = string.Join("\n", statsLines),
+                    Inline = true
+                });
+                currentEmbedCharacterCount += overviewName.Length + string.Join("\n", statsLines).Length;
+
+                if (orderedProfitData.Count > 0)
+                {
+                    var topProfitEntries = orderedProfitData
+                        .Where(p => p.Profit > 0)
+                        .Take(3)
+                        .ToList();
+
+                    var topLossEntries = orderedProfitData
+                        .Where(p => p.Profit < 0)
+                        .OrderBy(p => p.Profit)
+                        .Take(3)
+                        .ToList();
+
+                    if (topProfitEntries.Count > 0)
+                    {
+                        var topProfitLines = topProfitEntries
+                            .Select((data, i) => $"{i + 1}. {adventureSystem.ConvertBankDataToString(data, true)}")
+                            .ToList();
+                        var topProfitName = Loc.GetString("discord-round-manifest-top-profit");
+
+                        currentFields.Add(new WebhookEmbedField
+                        {
+                            Name = topProfitName,
+                            Value = string.Join("\n", topProfitLines),
+                            Inline = true
+                        });
+                        currentEmbedCharacterCount += topProfitName.Length + string.Join("\n", topProfitLines).Length;
+                    }
+
+                    if (topLossEntries.Count > 0)
+                    {
+                        var topLossLines = topLossEntries
+                            .Select((data, i) => $"{i + 1}. {adventureSystem.ConvertBankDataToString(data, true)}")
+                            .ToList();
+                        var topLossName = Loc.GetString("discord-round-manifest-top-loss");
+
+                        currentFields.Add(new WebhookEmbedField
+                        {
+                            Name = topLossName,
+                            Value = string.Join("\n", topLossLines),
+                            Inline = true
+                        });
+                        currentEmbedCharacterCount += topLossName.Length + string.Join("\n", topLossLines).Length;
+                    }
+                }
+
+                var manifestFieldName = Loc.GetString("discord-round-manifest-players");
+                var manifestFieldNameContinued = Loc.GetString("discord-round-manifest-players-continued");
+                var bankFieldName = Loc.GetString("discord-round-manifest-bank");
+                var bankFieldNameContinued = Loc.GetString("discord-round-manifest-bank-continued");
+                // Forge-Change-end
                 // Process manifest lines
                 var currentFieldLines = new List<string>();
                 var currentFieldLength = 0;
@@ -810,7 +905,7 @@ namespace Content.Server.GameTicking
                     // Check if adding this line would exceed field value limit
                     if (currentFieldLength + line.Length + 1 > MaxFieldValueLength - 20 && currentFieldLines.Count > 0)
                     {
-                        var fieldName = manifestFieldCount == 0 ? "Player Manifest" : "Player Manifest (continued)";
+                        var fieldName = manifestFieldCount == 0 ? manifestFieldName : manifestFieldNameContinued; // Forge-Change
                         var fieldValue = string.Join("\n", currentFieldLines);
                         var fieldCharacterCount = fieldName.Length + fieldValue.Length;
 
@@ -840,7 +935,7 @@ namespace Content.Server.GameTicking
                 // Add remaining manifest lines
                 if (currentFieldLines.Count > 0)
                 {
-                    var fieldName = manifestFieldCount == 0 ? "Player Manifest" : "Player Manifest (continued)";
+                    var fieldName = manifestFieldCount == 0 ? manifestFieldName : manifestFieldNameContinued; // Forge-Change
                     var fieldValue = string.Join("\n", currentFieldLines);
                     var fieldCharacterCount = fieldName.Length + fieldValue.Length;
 
@@ -872,7 +967,7 @@ namespace Content.Server.GameTicking
                         // Check if adding this line would exceed field value limit
                         if (currentProfitLength + line.Length + 1 > MaxFieldValueLength - 20 && currentProfitLines.Count > 0)
                         {
-                            var fieldName = profitFieldCount == 0 ? "TSF Central Bank" : "TSF Central Bank (continued)";
+                            var fieldName = profitFieldCount == 0 ? bankFieldName : bankFieldNameContinued; // Forge-Change
                             var fieldValue = string.Join("\n", currentProfitLines);
                             var fieldCharacterCount = fieldName.Length + fieldValue.Length;
 
@@ -902,7 +997,7 @@ namespace Content.Server.GameTicking
                     // Add remaining profit lines
                     if (currentProfitLines.Count > 0)
                     {
-                        var fieldName = profitFieldCount == 0 ? "TSF Central Bank" : "TSF Central Bank (continued)";
+                        var fieldName = profitFieldCount == 0 ? bankFieldName : bankFieldNameContinued; // Forge-Change
                         var fieldValue = string.Join("\n", currentProfitLines);
                         var fieldCharacterCount = fieldName.Length + fieldValue.Length;
 

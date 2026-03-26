@@ -39,3 +39,17 @@
   keycode: 'ф'
   frequency: 1247
   color: "#c49a6c"
+
+- type: radioChannel
+  id: SyndicateShturm
+  name: chat-radio-syndicate
+  keycode: 'э'
+  frequency: 1214
+  color: "#9f5253"
+
+- type: radioChannel
+  id: Hospital
+  name: chat-radio-medical
+  keycode: 'ю'
+  frequency: 1356
+  color: "#57b8f0"

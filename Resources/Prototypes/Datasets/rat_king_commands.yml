@@ -1,26 +1,23 @@
-﻿- type: dataset
+- type: localizedDataset
   id: RatKingCommandStay
   values:
-    - "Sit!"
-    - "Stay!"
-    - "Stop!"
+    prefix: rat-king-command-stay-dataset-
+    count: 3
 
-- type: dataset
+- type: localizedDataset
   id: RatKingCommandFollow
   values:
-    - "Heel!"
-    - "Follow!"
+    prefix: rat-king-command-follow-dataset-
+    count: 2
 
-- type: dataset
+- type: localizedDataset
   id: RatKingCommandCheeseEm
   values:
-    - "Attack!"
-    - "Sic!"
-    - "Kill!"
-    - "Cheese 'Em!"
+    prefix: rat-king-command-cheese-em-dataset-
+    count: 4
 
-- type: dataset
+- type: localizedDataset
   id: RatKingCommandLoose
   values:
-    - "Free!"
-    - "Loose!"
+    prefix: rat-king-command-loose-dataset-
+    count: 2

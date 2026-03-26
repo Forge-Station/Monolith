@@ -1,0 +1,11 @@
+rat-king-command-stay-dataset-1 = Сидеть!
+rat-king-command-stay-dataset-2 = Стоять!
+rat-king-command-stay-dataset-3 = Стоп!
+rat-king-command-follow-dataset-1 = Рядом!
+rat-king-command-follow-dataset-2 = За мной!
+rat-king-command-cheese-em-dataset-1 = Атакуй!
+rat-king-command-cheese-em-dataset-2 = Фас!
+rat-king-command-cheese-em-dataset-3 = Убей!
+rat-king-command-cheese-em-dataset-4 = Сырни их!
+rat-king-command-loose-dataset-1 = Вольно!
+rat-king-command-loose-dataset-2 = Свободно!

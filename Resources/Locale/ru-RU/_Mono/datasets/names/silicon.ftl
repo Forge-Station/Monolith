@@ -1,0 +1,61 @@
+names-mono-pdv-borg-dataset-1 = Юнит Авангарда
+names-mono-pdv-borg-dataset-2 = Модуль подавления ПДВ
+names-mono-pdv-borg-dataset-3 = Страж ПДВ
+names-mono-pdv-borg-dataset-4 = Оборонительный юнит Династии
+
+names-mono-tsf-borg-dataset-1 = Силикон Федерации
+names-mono-tsf-borg-dataset-2 = Юнит соответствия ТСФМП
+names-mono-tsf-borg-dataset-3 = ТСФМП Сержант Безрассудный
+names-mono-tsf-borg-dataset-4 = ТСФМП Судья и Присяжные
+
+names-mono-vessel-core-dataset-1 = Стивен
+names-mono-vessel-core-dataset-2 = Робин
+names-mono-vessel-core-dataset-3 = Алекс
+names-mono-vessel-core-dataset-4 = Боб
+names-mono-vessel-core-dataset-5 = Александр
+names-mono-vessel-core-dataset-6 = Стив
+names-mono-vessel-core-dataset-7 = Кира
+names-mono-vessel-core-dataset-8 = Вар:Тим
+
+names-mono-tsfmc-core-dataset-1 = ТСФ Наблюдатель
+names-mono-tsfmc-core-dataset-2 = ТСФ Блюститель
+names-mono-tsfmc-core-dataset-3 = ТСФ Робокоп
+names-mono-tsfmc-core-dataset-4 = ТСФ Силикон
+names-mono-tsfmc-core-dataset-5 = TSFMCAI.exe
+names-mono-tsfmc-core-dataset-6 = ТСФ Пёс
+names-mono-tsfmc-core-dataset-7 = ТСФ Юнит
+
+names-mono-pdv-core-dataset-1 = Имперский Надзиратель
+names-mono-pdv-core-dataset-2 = Имперский Позитроник
+names-mono-pdv-core-dataset-3 = Имперская Сеть
+names-mono-pdv-core-dataset-4 = Имперский Рой
+names-mono-pdv-core-dataset-5 = PDVAI.sh
+names-mono-pdv-core-dataset-6 = Имперский Кот
+names-mono-pdv-core-dataset-7 = Имперский Экземпляр
+
+names-mono-remnant-ship-dataset-1 = ADS-Блик
+names-mono-remnant-ship-dataset-2 = ADS-Орион
+names-mono-remnant-ship-dataset-3 = ADS-Простор
+names-mono-remnant-ship-dataset-4 = ADS-Симфония
+names-mono-remnant-ship-dataset-5 = ADS-Хор
+names-mono-remnant-ship-dataset-6 = ADS-ТочкаВспышки
+names-mono-remnant-ship-dataset-7 = ADS-Форон
+names-mono-remnant-ship-dataset-8 = ADS-Покорение
+names-mono-remnant-ship-dataset-9 = ADS-Прайм
+names-mono-remnant-ship-dataset-10 = ADS-ОгненныйШторм
+names-mono-remnant-ship-dataset-11 = ADS-Возмездие
+names-mono-remnant-ship-dataset-12 = ADS-Горизонт
+names-mono-remnant-ship-dataset-13 = ADS-Меткий
+names-mono-remnant-ship-dataset-14 = ADS-Баррикада
+names-mono-remnant-ship-dataset-15 = ADS-Жила
+names-mono-remnant-ship-dataset-16 = ADS-Ноль
+names-mono-remnant-ship-dataset-17 = ADS-Полночь
+names-mono-remnant-ship-dataset-18 = ADS-Перехват
+names-mono-remnant-ship-dataset-19 = ADS-Туман
+names-mono-remnant-ship-dataset-20 = ADS-Гранит
+names-mono-remnant-ship-dataset-21 = ADS-Тайфун
+names-mono-remnant-ship-dataset-22 = ADS-Шторм
+names-mono-remnant-ship-dataset-23 = ADS-Рубикон
+names-mono-remnant-ship-dataset-24 = ADS-Каутеризатор
+names-mono-remnant-ship-dataset-25 = ADS-Уклонение
+names-mono-remnant-ship-dataset-26 = ADS-Задержание

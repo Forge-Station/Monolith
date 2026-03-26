@@ -1,82 +1,38 @@
-- type: dataset
+- type: localizedDataset
   id: MonoPDVBorgNameset
   values:
-  - Vanguard Unit
-  - PDV Enforcer Module
-  - PDV Sentinel
-  - Dynast Defense Unit
+    prefix: names-mono-pdv-borg-dataset-
+    count: 4
 
-- type: dataset
+- type: localizedDataset
   id: MonoTSFBorgNameset
   values:
-  - Federation Silicon
-  - TSFMC Compliance Unit
-  - TSFMC Sgt. Reckless
-  - TSFMC Judge & Jury
+    prefix: names-mono-tsf-borg-dataset-
+    count: 4
 
-- type: dataset
+- type: localizedDataset
   id: VesselCoreNameset
   values:
-  - Steven
-  - Robyn
-  - Alex
-  - Bob
-  - Alexander
-  - Steve
-  - Kira
-  - Var:Tim
+    prefix: names-mono-vessel-core-dataset-
+    count: 8
 
-- type: dataset
+- type: localizedDataset
   id: TSFMCCoreNameset
   values:
-  - TSFMC Watcher
-  - TSFMC Upholder
-  - TSFMC Robocop
-  - TSFMC Silicon
-  - TSFMCAI.exe
-  - TSFMC Dog
-  - TSFMC Unit
+    prefix: names-mono-tsfmc-core-dataset-
+    count: 7
 
-- type: dataset
+- type: localizedDataset
   id: PDVCoreNameset
   values:
-  - Imperial Overseer
-  - Imperial Positronic
-  - Imperial Grid
-  - Imperial Hivemind
-  - PDVAI.sh
-  - Imperial Cat
-  - Imperial Instance
+    prefix: names-mono-pdv-core-dataset-
+    count: 7
 
-- type: dataset
+- type: localizedDataset
   id: MonoRemnantShipNameset # eventually this will have a use... randommetadata component dont work with grids though...
   values:
-  - ADS-Glimmer
-  - ADS-Orion
-  - ADS-Expanse
-  - ADS-Symphony
-  - ADS-Chorus
-  - ADS-Flashpoint
-  - ADS-Phoron
-  - ADS-Conquest
-  - ADS-Prime
-  - ADS-Firestorm
-  - ADS-Retaliation
-  - ADS-Horizon
-  - ADS-Marksman
-  - ADS-Barricade
-  - ADS-Vein
-  - ADS-Zero
-  - ADS-Midnight
-  - ADS-Interdiction
-  - ADS-Mist
-  - ADS-Granite
-  - ADS-Typhoon
-  - ADS-Storm
-  - ADS-Rubicon
-  - ADS-Cauterizer
-  - ADS-Evasion
-  - ADS-Apprehension
+    prefix: names-mono-remnant-ship-dataset-
+    count: 26
 
 # base stats for faction borgs
 

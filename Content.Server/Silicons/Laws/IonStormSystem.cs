@@ -26,7 +26,7 @@ public sealed class IonStormSystem : EntitySystem
     private const string Threats = "IonStormThreats";
     [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Objects = "IonStormObjects";
-    [ValidatePrototypeId<DatasetPrototype>]
+    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Crew = "IonStormCrew";
     [ValidatePrototypeId<LocalizedDatasetPrototype>]
     private const string Adjectives = "IonStormAdjectives";

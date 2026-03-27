@@ -1,7 +1,6 @@
 - type: entity
   parent: AirlockHatch
   id: AirlockHatchRenegades
-  name: airtight hatch
   suffix: Ренегаты, Locked
   components:
   - type: Sprite
@@ -9,3 +8,39 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsRenegate ]
+
+- type: entity
+  parent: AirlockHatch
+  id: AirlockHatchEmpireOfficer
+  suffix: Forge, Empire, Officer
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpireOfficer ]
+
+- type: entity
+  parent: AirlockHatch
+  id: AirlockHatchEmpire
+  suffix: Forge, Empire
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpire ]
+
+- type: entity
+  parent: AirlockHatchMaintenance
+  id: AirlockHatchMaintenanceEmpireOfficer
+  suffix: Forge, Empire, Officer
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpireOfficer ]
+
+- type: entity
+  parent: AirlockHatchMaintenance
+  id: AirlockHatchMaintenanceEmpire
+  suffix: Forge, Empire
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpire ]

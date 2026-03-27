@@ -1,3 +1,5 @@
+using Content.Shared.FixedPoint; // Forge-Change
+
 namespace Content.Server.Nutrition;
 
 /// <summary>
@@ -36,3 +38,17 @@ public sealed class FoodSlicedEvent : EntityEventArgs
         Slice = slice;
     }
 }
+// Forge-Change-start
+public enum IngestionTrackedType : byte
+{
+    Food = 0,
+    Drink = 1
+}
+
+/// <summary>
+/// Raised when an entity successfully consumes food or drink.
+/// Amount is the ingested solution volume.
+/// </summary>
+[ByRefEvent]
+public readonly record struct IngestionTrackedEvent(EntityUid Consumer, FixedPoint2 Amount, IngestionTrackedType Type);
+// Forge-Change-end

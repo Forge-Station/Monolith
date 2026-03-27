@@ -22,3 +22,6 @@ discord-round-manifest-stats-profit-entries = - Profit entries: **{$count}**
 discord-round-manifest-stats-positive = - Positive: **{$count}**
 discord-round-manifest-stats-negative = - Negative: **{$count}**
 discord-round-manifest-stats-net = - Net: **{$amount}**
+discord-round-manifest-stats-food-consumed = - Food consumed: **{$amount}**
+discord-round-manifest-stats-water-consumed = - Water consumed: **{$amount}**
+discord-round-manifest-player-entry = - {$playerOOCName} was {$playerICName} playing role of {$roleName}. Role deaths: {$roleDeaths}, total deaths: {$totalDeaths}.

@@ -22,3 +22,6 @@ discord-round-manifest-stats-profit-entries = - Записей по банку: 
 discord-round-manifest-stats-positive = - В плюс: **{ $count }**
 discord-round-manifest-stats-negative = - В минус: **{ $count }**
 discord-round-manifest-stats-net = - Итого: **{ $amount }**
+discord-round-manifest-stats-food-consumed = - Съедено еды: **{ $amount }**
+discord-round-manifest-stats-water-consumed = - Выпито воды: **{ $amount }**
+discord-round-manifest-player-entry = - { $playerOOCName } был(а) { $playerICName } на роли { $roleName }. Смертей на роли: { $roleDeaths }, всего смертей: { $totalDeaths }.

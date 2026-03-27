@@ -283,6 +283,8 @@ public sealed class FoodSystem : EntitySystem
 
         _reaction.DoEntityReaction(args.Target.Value, solution, ReactionMethod.Ingestion);
         _stomach.TryTransferSolution(stomachToUse!.Value.Owner, split, stomachToUse);
+        var ingestionEvent = new IngestionTrackedEvent(args.Target.Value, split.Volume, IngestionTrackedType.Food); // Forge-Change
+        RaiseLocalEvent(ref ingestionEvent); // Forge-Change
 
         var flavors = args.FlavorMessage;
 

@@ -15,7 +15,6 @@ pirate-bounty-item-cappy = Шляпа капитана
 pirate-bounty-item-cultistNeck = Ожерелье культиста
 pirate-bounty-item-nfsdCampaign = Шляпа ТСФ (любая)
 pirate-bounty-item-scafsuit = Скуфандр
-pirate-bounty-item-rtg = РИТЭГ
 pirate-bounty-item-mercgas = Противогаз наёмника
 pirate-bounty-item-rdhardsuit = Экспериментальный исследовательский костюм
 pirate-bounty-item-mk58 = МК58
@@ -34,4 +33,3 @@ pirate-bounty-item-hypo = Гипоспрей
 pirate-bounty-item-diamond = Алмаз
 pirate-bounty-item-akms = АКМС
 
-pirate-bounty-description-generic = Вперёд, бездельник! Добудь мне это добро!

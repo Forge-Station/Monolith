@@ -18,5 +18,5 @@
     chance: 0.75
     offset: 0.0
     rarePrototypes:
-    - BitcoinGoidacoin
+    - BitcoinCorvaxcoin # Forge-Change
     rareChance: 0.1

@@ -11,6 +11,7 @@ using Content.Server.Roles;
 using Content.Server.Station.Systems;
 using Content.Server._NF.Bank;
 using Content.Server._NF.GameRule;
+using Content.Server.Nutrition; // Forge-Change
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -28,6 +29,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Robust.Server.Player; // Forge-Change
 // Goob Station - End of Round Screen
 using Content.Shared._Goobstation.LastWords;
 using Content.Shared.Damage;
@@ -68,6 +70,10 @@ namespace Content.Server.GameTicking
         private RoundEndMessageEvent.RoundEndPlayerInfo[]? _replayRoundPlayerInfo;
 
         private string? _replayRoundText;
+        private readonly Dictionary<NetUserId, int> _roundPlayerTotalDeaths = new(); // Forge-Change
+        private readonly Dictionary<(NetUserId UserId, string Role), int> _roundPlayerRoleDeaths = new(); // Forge-Change
+        private FixedPoint2 _roundFoodConsumed = FixedPoint2.Zero; // Forge-Change
+        private FixedPoint2 _roundDrinkConsumed = FixedPoint2.Zero; // Forge-Change
 
         [ViewVariables]
         public GameRunLevel RunLevel
@@ -94,6 +100,67 @@ namespace Content.Server.GameTicking
             return RunLevel == GameRunLevel.PreRoundLobby &&
                    _roundStartTime - RoundPreloadTime > _gameTiming.CurTime;
         }
+        // Forge-Change-start
+        private void InitializeRoundDeathTracking()
+        {
+            SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChangedForRoundDeathTracking);
+            SubscribeLocalEvent<IngestionTrackedEvent>(OnIngestionTracked);
+        }
+
+        private void OnMobStateChangedForRoundDeathTracking(MobStateChangedEvent args)
+        {
+            if (RunLevel != GameRunLevel.InRound)
+                return;
+
+            if (args.NewMobState != MobState.Dead || args.OldMobState == MobState.Dead)
+                return;
+
+            if (!TryComp<ActorComponent>(args.Target, out var actor))
+                return;
+
+            // Count only real players that currently have a valid game session.
+            var userId = actor.PlayerSession.UserId;
+            if (!_playerManager.ValidSessionId(userId))
+                return;
+
+            if (!_mind.TryGetMind(args.Target, out var mindId, out _))
+                return;
+
+            var roles = _roles.MindGetAllRoleInfo(mindId);
+            var antag = _roles.MindIsAntagonist(mindId);
+            var roleInfo = antag
+                ? roles.FirstOrDefault(role => role.Antagonist)
+                : roles.FirstOrDefault();
+            var role = string.IsNullOrEmpty(roleInfo.Name)
+                ? Loc.GetString("game-ticker-unknown-role")
+                : roleInfo.Name;
+
+            _roundPlayerTotalDeaths[userId] = _roundPlayerTotalDeaths.GetValueOrDefault(userId) + 1;
+
+            (NetUserId UserId, string Role) roleKey = (userId, role);
+            _roundPlayerRoleDeaths[roleKey] = _roundPlayerRoleDeaths.GetValueOrDefault(roleKey) + 1;
+        }
+
+        private void OnIngestionTracked(ref IngestionTrackedEvent args)
+        {
+            if (RunLevel != GameRunLevel.InRound)
+                return;
+
+            if (!TryComp<ActorComponent>(args.Consumer, out var actor))
+                return;
+
+            if (!_playerManager.ValidSessionId(actor.PlayerSession.UserId))
+                return;
+
+            if (args.Amount <= FixedPoint2.Zero)
+                return;
+
+            if (args.Type == IngestionTrackedType.Food)
+                _roundFoodConsumed += args.Amount;
+            else
+                _roundDrinkConsumed += args.Amount;
+        }
+        // Forge-Change-end
 
         /// <summary>
         ///     Loads all the maps for the given round.
@@ -604,6 +671,11 @@ namespace Content.Server.GameTicking
                 }
 
                 #endregion
+                // Forge-Change-start
+                var currentRole = antag
+                    ? roles.First(role => role.Antagonist).Name
+                    : roles.FirstOrDefault().Name ?? Loc.GetString("game-ticker-unknown-role");
+                // Forge-Change-end
 
                 var playerEndRoundInfo = new RoundEndMessageEvent.RoundEndPlayerInfo()
                 {
@@ -614,14 +686,14 @@ namespace Content.Server.GameTicking
                     PlayerICName = playerIcName,
                     PlayerGuid = userId,
                     PlayerNetEntity = GetNetEntity(entity),
-                    Role = antag
-                        ? roles.First(role => role.Antagonist).Name
-                        : roles.FirstOrDefault().Name ?? Loc.GetString("game-ticker-unknown-role"),
+                    Role = currentRole, // Forge-Change
                     Antag = antag,
                     JobPrototypes = roles.Where(role => !role.Antagonist).Select(role => role.Prototype).ToArray(),
                     AntagPrototypes = roles.Where(role => role.Antagonist).Select(role => role.Prototype).ToArray(),
                     Observer = observer,
                     Connected = connected,
+                    TotalDeaths = userId != null ? _roundPlayerTotalDeaths.GetValueOrDefault(userId.Value) : 0, // Forge-Change
+                    RoleDeaths = userId != null ? _roundPlayerRoleDeaths.GetValueOrDefault((userId.Value, currentRole)) : 0, // Forge-Change
                     // Goob Station - End of Round Screen
                     LastWords = lastWords,
                     EntMobState = mobState,
@@ -735,7 +807,14 @@ namespace Content.Server.GameTicking
                 {
                     // Use localization to get the proper job name instead of the key
                     var roleName = Loc.GetString(player.Role);
-                    var playerLine = "- " + player.PlayerOOCName + " was " + player.PlayerICName + " playing role of " + roleName + ".";
+                    // Forge-Change-start
+                    var playerLine = Loc.GetString("discord-round-manifest-player-entry",
+                        ("playerOOCName", player.PlayerOOCName),
+                        ("playerICName", player.PlayerICName ?? "Unknown"),
+                        ("roleName", roleName),
+                        ("roleDeaths", player.RoleDeaths),
+                        ("totalDeaths", player.TotalDeaths));
+                    // Forge-Change-end
 
                     // Only add manifest line if we haven't seen this exact entry before
                     if (seenManifestEntries.Add(playerLine))
@@ -832,7 +911,9 @@ namespace Content.Server.GameTicking
                     Loc.GetString("discord-round-manifest-stats-profit-entries", ("count", orderedProfitData.Count)),
                     Loc.GetString("discord-round-manifest-stats-positive", ("count", profitableCount)),
                     Loc.GetString("discord-round-manifest-stats-negative", ("count", lossCount)),
-                    Loc.GetString("discord-round-manifest-stats-net", ("amount", totalProfit))
+                    Loc.GetString("discord-round-manifest-stats-net", ("amount", totalProfit)),
+                    Loc.GetString("discord-round-manifest-stats-food-consumed", ("amount", _roundFoodConsumed)),
+                    Loc.GetString("discord-round-manifest-stats-water-consumed", ("amount", _roundDrinkConsumed))
                 };
 
                 var overviewName = Loc.GetString("discord-round-manifest-overview");
@@ -1047,6 +1128,11 @@ namespace Content.Server.GameTicking
             // If this game ticker is a dummy, do nothing!
             if (DummyTicker)
                 return;
+
+            _roundPlayerTotalDeaths.Clear(); // Forge-Change
+            _roundPlayerRoleDeaths.Clear(); // Forge-Change
+            _roundFoodConsumed = FixedPoint2.Zero; // Forge-Change
+            _roundDrinkConsumed = FixedPoint2.Zero; // Forge-Change
 
             ReplayEndRound();
 

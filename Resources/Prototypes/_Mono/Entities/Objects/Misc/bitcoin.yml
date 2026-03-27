@@ -64,8 +64,8 @@
 
 - type: entity
   parent: BaseBitcoin
-  id: BitcoinGoidacoin
-  name: Goidacoin™
+  id: BitcoinCorvaxcoin # Forge-Change
+  name: CorvaxCoin™ # Forge-Change
   description: An absurdly valuable and rare bitcoin, made up of tons of high(?)-quality code and generic systems. Highly volatile.
   components:
   - type: Sprite

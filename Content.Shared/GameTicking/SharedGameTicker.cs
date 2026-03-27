@@ -249,6 +249,12 @@ namespace Content.Shared.GameTicking
 
             public bool Connected;
 
+            [DataField]
+            public int RoleDeaths;
+
+            [DataField]
+            public int TotalDeaths;
+
             #region Goob Station
             public string? LastWords;
 

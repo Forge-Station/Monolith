@@ -1,0 +1,41 @@
+# Author Info
+# GitHub: -
+# Discord: dryaken
+
+# Maintainer Info
+# GitHub: Suvorov Pavel
+# Discord: mersen
+
+- type: vessel
+  id: dreadnought
+  parent: BaseVessel
+  name: PMSC-A Дредноут
+  description: Ударный шаттл предназначенный для боя, имеет хорошую лицевую броню, но при этом уязвим сзади. Основное вооружение 2 хейдеса и 2 цирексы
+  price: 120000
+  category: Medium
+  group: Shipyard
+  access: Mercenary
+  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/Dreadnought.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+- type: gameMap
+  id: dreadnought
+  mapName: 'PMSC-A Дредноут'
+  mapPath: /Maps/_Forge/Shuttles/Mercenary/Dreadnought.yml
+  minPlayers: 0
+  stations:
+    dreadnought:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'PMSC-A Дредноут{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

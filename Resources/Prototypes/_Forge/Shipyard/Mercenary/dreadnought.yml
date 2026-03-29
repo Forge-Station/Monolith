@@ -11,7 +11,7 @@
   parent: BaseVessel
   name: PMSC-A Дредноут
   description: Ударный шаттл предназначенный для боя, имеет хорошую лицевую броню, но при этом уязвим сзади. Основное вооружение 2 хейдеса и 2 цирексы
-  price: 120000
+  price: 270000
   category: Medium
   group: Shipyard
   access: Mercenary

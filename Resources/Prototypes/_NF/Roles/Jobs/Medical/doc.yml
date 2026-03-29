@@ -5,18 +5,18 @@
   playTimeTracker: JobDirectorOfCare
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 162000 # mono - 45 hours
+      time: 162000 # Forge - 45 hours
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 72000 # mono - 20 hours
+      time: 72000 # Forge - 20 hours
   startingGear: DocGear
   alwaysUseSpawner: true
   assignedCompany: MD
-  icon: "JobIconDoc"
+  icon: "JobIconDoc" # Forge
   requireAdminNotify: true
   supervisors: job-supervisors-sr # Mono
   weight: 170
-  displayWeight: 40
+  displayWeight: 40 # Forge
   canBeAntag: false
   accessGroups:
   - AllAccessSR

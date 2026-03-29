@@ -2,4 +2,5 @@
 department-PMC = Private Military Contractors
 department-UnionOfSovietSocialistPlanets = Union of Soviet Socialist Planets
 department-UnionOfSovietSocialistPlanets-description = Serve the glorious Union in space against TSFMC and PDV forces.
+# Forge
 department-Medical = Trauma Team International

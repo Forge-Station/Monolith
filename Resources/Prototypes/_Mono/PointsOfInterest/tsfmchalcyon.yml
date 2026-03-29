@@ -13,7 +13,7 @@
 - type: pointOfInterest
   id: TSFMCHalcyon
   parent: [BasePOI, BaseRepairablePOI]
-  name: 'Флагман ДСБФ «Халкион»'
+  name: 'Флагман ТСФ «Халкион»'
   minimumDistance: 4500 # Mono
   maximumDistance: 5500 # Mono
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
@@ -54,11 +54,10 @@
             TsfCommandingOfficer: [ 1, 1 ]
             TsfExecutiveOfficer: [ 1, 1 ]
             TsfSeniorOfficer: [ 1, 1 ]
-            TsfSeniorAide: [ 1, 1 ]
+            TsfSeniorAide: [ 2, 2 ]
             TsfAmbassador: [ 1, 1 ]
             TsfRanger: [ -1, -1 ]
             TsfRecruit: [ -1, -1 ]
-            TsfEngineer: [ 2, 2 ]
           tags:
           - HeadOfPersonnel
           - HeadOfSecurity

@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Examine;
+using Content.Shared.Localizations; // Forge-Change
 using Content.Shared.Stacks;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -20,7 +21,9 @@ namespace Content.Shared.Construction.Steps
         {
             var material = IoCManager.Resolve<IPrototypeManager>().Index<StackPrototype>(MaterialPrototypeId);
 
-            examinedEvent.PushMarkup(Loc.GetString("construction-insert-material-entity", ("amount", Amount), ("materialName", material.Name)));
+            var matLoc = StackMaterialFluentKey.FromStackPrototypeId(MaterialPrototypeId); // Forge-Change
+            var matDisplay = Loc.TryGetString(matLoc, out var matLocalized) ? matLocalized : material.Name; // Forge-Change
+            examinedEvent.PushMarkup(Loc.GetString("construction-insert-material-entity", ("amount", Amount), ("materialName", matDisplay))); // Forge-Change
         }
 
         public override bool EntityValid(EntityUid uid, IEntityManager entityManager, IComponentFactory compFactory)
@@ -45,7 +48,7 @@ namespace Content.Shared.Construction.Steps
             return new ConstructionGuideEntry()
             {
                 Localization = "construction-presenter-material-step",
-                Arguments = new (string, object)[]{("amount", Amount), ("material", material.Name)},
+                Arguments = new (string, object)[]{("amount", Amount), ("material", StackMaterialFluentKey.FromStackPrototypeId(MaterialPrototypeId))}, // Forge-Change
                 Icon = material.Icon,
             };
         }

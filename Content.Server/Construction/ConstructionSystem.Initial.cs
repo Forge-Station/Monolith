@@ -592,12 +592,12 @@ namespace Content.Server.Construction
             }
             finally
             {
-                if (senderSession is { } session
-                    && _beingBuilt.TryGetValue(session, out var builtSet))
+                if (senderSession != null
+                    && _beingBuilt.TryGetValue(senderSession, out var builtSet))
                 {
                     builtSet.Remove(ack);
                     if (builtSet.Count == 0)
-                        _beingBuilt.Remove(session);
+                        _beingBuilt.Remove(senderSession);
                 }
             }
             // Forge-Change-end

@@ -8,12 +8,20 @@
       time: 72000 # 20 hrs
     - !type:RoleTimeRequirement
       role: JobSecurityGuard
-      time: 7200 # 2 hrs as security guard - mono
-  whitelisted: true
+      time: 21600 # 6 hrs
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 21600 # 6 hours
+    - !type:RoleTimeRequirement
+      role: JobStc
+      time: 7200 # 2 hrs
+    - !type:RoleTimeRequirement
+      role: JobCCServiceWorker
+      time: 7200 # 2 hrs
   startingGear: SrGear
   alwaysUseSpawner: true
   assignedCompany: Colonial
-  icon: "JobIconHeadOfSecurity" # Mono
+  icon: "JobIconSr" # Mono
   requireAdminNotify: true
   supervisors: job-supervisors-centcom
   weight: 170

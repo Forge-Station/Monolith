@@ -5,13 +5,10 @@
   playTimeTracker: JobTsfExecutiveOfficer
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 72000
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 36000
+      time: 129600
     - !type:RoleTimeRequirement
-      role: JobSeniorOfficer
-      time: 10800
+      role: JobTsfSeniorAide
+      time: 64800
   startingGear: TsfExecutiveOfficerGear
   icon: JobIconTsfExecutiveOfficer
   supervisors: job-supervisors-tsf-commanding-officer
@@ -54,5 +51,4 @@
     back:
     - Magazine45_ACPPistolFMJ
     - BaseSecurityUplinkRadioCaptain
-    - RubberStampBailiff
     - RadioHandheldNF

@@ -10,7 +10,7 @@
       time: 54000 # 20 hrs # mono - change to 15 hr
     - !type:RoleTimeRequirement
       role: JobSecurityGuard
-      time: 3600 # 3 hrs as security guard # mono - change to 1 hr
+      time: 10800 # 3 hrs as security guard # mono - change to 1 hr
   canBeAntag: false
   icon: "JobIconStc"
   assignedCompany: Colonial
@@ -25,6 +25,8 @@
   - Frontier
   - StationTrafficController
   special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
   - !type:GiveItemOnHolidaySpecial
     holiday: FrontierBirthday
     prototype: FrontierBirthdayGift

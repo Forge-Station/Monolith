@@ -9,10 +9,6 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 72000 # mono - 20 hours
-  alternateRequirementSets: # mono
-    longerPlaytimeLessSec: # mono
-    - !type:OverallPlaytimeRequirement # mono
-      time: 234000 # mono 65 hours
   startingGear: DocGear
   alwaysUseSpawner: true
   assignedCompany: MD
@@ -20,7 +16,7 @@
   requireAdminNotify: true
   supervisors: job-supervisors-sr # Mono
   weight: 170
-  displayWeight: 60 # Second from the top # mono - first from top
+  displayWeight: 40
   canBeAntag: false
   accessGroups:
   - AllAccessSR
@@ -42,11 +38,12 @@
 - type: startingGear
   id: DocGear
   equipment:
-    pocket1: HypoMini
-    pocket2: MedicalAppraisalTool
+    pocket1: Hypospray # Forge
+    pocket2: OmnimedTool # Forge
   storage:
     back:
     - RubberStampDoc
     - BoxFolderMedicalDoctor
     - StationAdministrationConsoleFlatpack
     - PhoneInstrumentHigh
+    - WeaponCaseShortN1984Expedition

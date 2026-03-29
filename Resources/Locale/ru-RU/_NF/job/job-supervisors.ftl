@@ -1,4 +1,4 @@
-job-supervisors-sr = представителю фронтира
+job-supervisors-sr = представителю нанотразен
 job-supervisors-sheriff = Шерифу
 job-supervisors-bailiff = Бейлифу
 job-supervisors-sergeant = лейтенанту
@@ -8,7 +8,7 @@ job-supervisors-nfsd = Шерифу, Бейлифу и Лейтинантам
 job-supervisors-pirate = боцману и капитану
 job-supervisors-nobody = никому
 job-supervisors-syndicate = Командиру Синдиката
-job-supervisors-MMO = Менеджеру Медицинских Операций
+job-supervisors-doc = директору TTI
 job-supervisors-freebooters-union = Союзу фриланса
 job-supervisors-nf-pirate = Пирату
 job-supervisors-nf-pirate-captain = Капитану

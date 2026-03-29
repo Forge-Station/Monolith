@@ -4,6 +4,7 @@
   name: loadout-group-contractor-jumpsuit
   loadouts:
   - MedicalDoctorJumpsuit
+  - MedicalTraumaJumpsuit
   - MedicalDoctorJumpskirt
   - MedicalBlueScrubs
   - MedicalGreenScrubs
@@ -30,7 +31,6 @@
   - MdMedicClothingModsuitParamedicPowerCell
   subgroups:
   - DocBackpack
-  - ContractorBackpack
   fallbacks:
   - DocClothingBackpackMedical
 

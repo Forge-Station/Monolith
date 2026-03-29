@@ -96,13 +96,13 @@
   jobName: job-name-station-traffic-controller
 #  allowSelection: false # Frontier: no impersonating command staff, literally 1984 - Mono Revert
 
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconValet
-  icon:
-    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
-    state: valet
-  jobName: job-name-valet
+#- type: jobIcon
+#  parent: JobIcon
+#  id: JobIconValet
+#  icon:
+ #   sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
+ #   state: valet
+ # jobName: job-name-valet
 
 # NFSD positions
 
@@ -173,11 +173,11 @@
 
   # Medical positions
 
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconDoc
-  icon:
-    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
-    state: nfmsdoc
-  jobName: job-name-doc
+#- type: jobIcon
+#  parent: JobIcon
+#  id: JobIconDoc
+#  icon:
+#    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
+#    state: nfmsdoc
+#  jobName: job-name-doc
 #  allowSelection: false # Frontier: no impersonating command staff, literally 1984 - Mono Revert

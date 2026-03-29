@@ -11,7 +11,7 @@
   icon: JobIconTsfAmbassador
   supervisors: job-supervisors-tsf-commanding-officer
   weight: 30
-  displayWeight: 30
+  displayWeight: 55
   assignedCompany: TSF
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete

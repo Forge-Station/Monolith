@@ -1,0 +1,17 @@
+- type: loadoutGroup
+  id: MdMedicBelt
+  name: loadout-group-contractor-belt
+  minLimit: 0
+  loadouts:
+  - ContractorClothingBeltPlant
+  - ContractorClothingBeltPlantFilled
+  - ContractorClothingBeltMedical
+  - ContractorClothingBeltMedicalFilled
+  - ContractorClothingBeltMedicalEMT
+  - ContractorClothingBeltMedicalEMTFilled
+  - ContractorClothingBeltUtility
+  - ContractorClothingBeltUtilityFilled
+  - ContractorBoxFolderClipboard
+  - ContractorChemBag
+  - ContractorPlantBag
+  - ContractorClothingBeltSheathFilled # Mono

@@ -5,13 +5,13 @@
   playTimeTracker: MdMedic
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 54000 # 15 hrs
+      time: 108000 # 30 hrs
   startingGear: MdMedicGear
   alwaysUseSpawner: true
-  icon: "JobIconMedicalDoctor"
+  icon: "JobIconParamedic"
   supervisors: job-supervisors-doc
   weight: 170
-  displayWeight: 55 # Second from the top
+  displayWeight: 39
   assignedCompany: MD
   canBeAntag: false
   accessGroups:

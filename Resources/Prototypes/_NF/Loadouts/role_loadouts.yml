@@ -275,14 +275,17 @@
   - DocJumpsuit
   - DocGloves
   - MdMedicBackpack
-  - ContractorOuterClothing
+  - DocOuterClothing
   - DocShoes
   - ContractorFace
   - ContractorGlasses
-  - ContractorBelt
+  - MdMedicBelt
   - DocEars
   - ContractorBoxSurvival
   - DocPDA
+  - MercenaryFirearm
+  - MercenaryMag
+  - CivGunCaseSpecial
   - ContractorWallet
   - ContractorCartridge
   - ContractorImplanter

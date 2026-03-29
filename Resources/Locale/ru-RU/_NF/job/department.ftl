@@ -1,2 +1,2 @@
-department-Frontier = Фронтир
+department-Frontier = НаноТрейзен
 department-Antag = Криминал

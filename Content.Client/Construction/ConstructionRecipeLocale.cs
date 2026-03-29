@@ -12,9 +12,6 @@ namespace Content.Client.Construction;
 public static class ConstructionRecipeLocale
 {
     private static readonly Regex KebabRegex = new("([A-Z])", RegexOptions.Compiled);
-    /// <summary>
-    /// PascalCase yields "MachineFrame2x1" → "machine-frame2x1"; insert dash before digit runs ("machine-frame-2x1").
-    /// </summary>
     private static readonly Regex LetterBeforeDigitRegex = new(@"([a-z])([0-9])", RegexOptions.Compiled);
 
     public static string PrototypeIdToRecipeKeySuffix(string id)

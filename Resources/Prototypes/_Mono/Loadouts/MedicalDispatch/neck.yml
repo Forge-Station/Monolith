@@ -10,7 +10,7 @@
   - MdMedicClothingNeckLightBlueScarf
   - MdMedicClothingNeckBlueScarf
   fallbacks:
-  - MdMedicMedicalPDA
+  - MdMedicClothingNeckIFFWhite
 
 - type: loadout
   id: MdMedicClothingNeckIFFWhite
@@ -48,11 +48,6 @@
   equipment:
     neck: ClothingNeckScarfStripedBlue
 
-- type: loadout
-  id: MdMedicClothingNeckLightBlueScarf
-  price: 0
-  equipment:
-    neck: ClothingNeckScarfStripedLightBlue
 
 - type: loadout
   id: MdMedicClothingNeckStethoscope

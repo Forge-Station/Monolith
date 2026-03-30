@@ -80,7 +80,7 @@
   - Sheriff  # Frontier
   - StationTrafficController # Frontier
   - TsfCommandingOfficer #Forge Change
-  - DirectorOfCare # Mono
+  # - DirectorOfCare # Mono # Forge-Change-delete
   primary: false
   weight: 100
   editorHidden: true #Forge Change

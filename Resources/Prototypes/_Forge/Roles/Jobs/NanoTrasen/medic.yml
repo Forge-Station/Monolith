@@ -1,20 +1,17 @@
 - type: job
-  id: MdMedic
-  name: job-name-md-medic
-  description: job-description-md-medic
-  playTimeTracker: MdMedic
+  id: NtMedic
+  name: job-name-nt-medic
+  description: job-description-nt-medic
+  playTimeTracker: NtMedic
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 108000 # 30 hrs
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 36000 # Forge - 10 hours
-  startingGear: MdMedicGear
+      time: 21600 # 6 hrs
+  startingGear: NtMedicGear
   alwaysUseSpawner: true
-  icon: "JobIconParamedic"
+  icon: "JobIconntmedic"
   supervisors: job-supervisors-doc
   weight: 170
-  displayWeight: 39
+  displayWeight: 38
   assignedCompany: MD
   canBeAntag: false
   accessGroups:
@@ -35,9 +32,9 @@
     prototype: FrontierBirthdayGift
 
 - type: startingGear
-  id: MdMedicGear
+  id: NtMedicGear
   equipment:
-    pocket1: HypoBrigmedic
+    pocket1: HypoMini
     pocket2: MedicalAppraisalTool
   storage:
     back:

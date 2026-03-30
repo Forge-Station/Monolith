@@ -5,10 +5,13 @@
   playTimeTracker: JobDirectorOfCare
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 162000 # mono - 45 hours
+      time: 144000 # forge - 40 hours
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 72000 # mono - 20 hours
+      time: 72000 # forge - 20 hours
+    - !type:RoleTimeRequirement
+      role: MdMedic
+      time: 18000 # forge - 5 hours
   startingGear: DocGear
   alwaysUseSpawner: true
   assignedCompany: MD

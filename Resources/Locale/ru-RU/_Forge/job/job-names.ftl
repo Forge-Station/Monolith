@@ -18,6 +18,7 @@ forge-job-name-stormtrooper = Штурмовик
 # paraMedical
 forge-job-name-paramedical = Парамедик
 job-name-md-medic = Парамедик TTI
+job-name-nt-medic = Врач TTI
 
 # Managment of the Sectoral Fleet
 job-title-msf-admiral = адмирал Флота

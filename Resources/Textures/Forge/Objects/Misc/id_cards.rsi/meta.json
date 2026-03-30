@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/d917f4c2a088419d5c3aec7656b7ff8cebd1822e | idsr state Eifall, emp by v6st, ren by sodakent (discord) for Forge",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/d917f4c2a088419d5c3aec7656b7ff8cebd1822e | idsr state Eifall, emp by v6st, ren & tti by sodakent (discord) for Forge",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,9 @@
     },
     {
       "name": "renegate"
+    },
+    {
+      "name": "tti"
     },
     {
       "name": "default"
@@ -67,6 +70,15 @@
     },
     {
       "name": "idrenflunky"
+    },
+    {
+      "name": "iddoc"
+    },
+    {
+      "name": "idparamed"
+    },
+    {
+      "name": "idntmed"
     }
   ]
 }

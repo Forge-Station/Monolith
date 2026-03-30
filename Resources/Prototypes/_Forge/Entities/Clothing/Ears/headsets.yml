@@ -1,6 +1,7 @@
 - type: entity
   parent: ClothingHeadset
   id: ClothingHeadsetMdMedical
+  suffix: TTI
   name: medical headset
   description: A headset for the trained staff of the medbay.
   components:

@@ -25,6 +25,7 @@
   - SecurityGuard
   - DirectorOfCare
   - MdMedic
+  - NtMedic
 
 # - type: department
   # id: Antag

@@ -198,6 +198,7 @@
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitATU
   name: armed trauma unit jumpsuit
+  suffix: TTI # Forge
   description: Standard fatigues of the Armed Trauma Unit.
   components:
   - type: Sprite

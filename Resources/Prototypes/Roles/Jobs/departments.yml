@@ -104,6 +104,7 @@
   roles: # Mono
   - DirectorOfCare # Mono
   - MdMedic # Mono
+  - NtMedic # Forge
 
 - type: department
   id: Security

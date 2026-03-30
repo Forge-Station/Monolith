@@ -1,9 +1,9 @@
 - type: loadout
   id: MdMedicMedicalPDA
   equipment:
-    id: MedicalPDA
+    id: TTIParamedPDA
 
-- type: loadout
-  id: MdMedicSeniorPhysicianPDA
-  equipment:
-    id: SeniorPhysicianPDA
+# Forge - type: loadout
+#   id: MdMedicSeniorPhysicianPDA
+#   equipment:
+#     id: SeniorPhysicianPDA

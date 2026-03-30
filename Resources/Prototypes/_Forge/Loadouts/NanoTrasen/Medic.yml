@@ -1,0 +1,28 @@
+- type: roleLoadout
+  id: JobNtMedic
+  groups:
+  - MdMedicHead # Forge
+  - MdMedicNeck # Forge
+  - MdMedicJumpsuit # Forge
+  - MdMedicGloves
+  - MdMedicBackpack
+  - ContractorOuterClothing
+  - ContractorShoes
+  - ContractorFace
+  - ContractorGlasses
+  - MdMedicBelt # Forge
+  - MdMedicEars
+  - ContractorBoxSurvival
+  - NtMedicPDA
+  - MercenaryFirearm
+  - MercenaryPistol
+  - MercenaryMag
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorUtility
+  - ContractorEncryptionKey
+  - ContractorFun
+  - ContractorTrinkets
+  - ContractorBureaucracy
+  - NFSpeciesSpecific

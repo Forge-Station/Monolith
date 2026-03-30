@@ -16,6 +16,7 @@
 #      - EncryptionKeyCommand #Mono
 #      - EncryptionKeyNfsd #Mono
       - EncryptionKeyTraffic
+      - EncryptionKeyHospital
 
 - type: entity
   parent: TelecomServer

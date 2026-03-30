@@ -229,3 +229,11 @@
     sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: nt_worker
   jobName: job-name-valet
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconntmedic
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: ntmedic
+  jobName: job-name-ntmedic

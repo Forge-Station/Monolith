@@ -55,6 +55,13 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
         var state = EnsureComp<GridCleanupGridComponent>(uid);
 
         var tiles = body.FixturesMass / ShuttleSystem.TileMassMultiplier;
+
+        // Forge-Change
+        // If a grid lost all of its tiles, delete it immediately so stale
+        // systems/components such as IFF cannot linger on an empty grid shell.
+        if (tiles <= 0f)
+            return true;
+
         var scale = MathF.Min(tiles / _aggressiveTiles, 1f);
 
         if (HasComp<MapComponent>(uid) // if we're a planetmap ignore

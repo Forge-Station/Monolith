@@ -760,6 +760,7 @@
   - type: CommunicationsConsole
     title: comms-console-announcement-title-station
     global: true #SR WILL NOT BE IGNORED
+    canIncreaseAlertLevel: false
   - type: DeviceNetwork
     deviceNetId: Wireless # Frontier
     transmitFrequencyId: ShuttleTimer
@@ -811,6 +812,7 @@
     canShuttle: false
     global: true #announce to everyone they're about to fuck shit up
     sound: /Audio/Announcements/war.ogg
+    canIncreaseAlertLevel: false
   - type: Computer
     board: SyndicateCommsComputerCircuitboard
   - type: PointLight
@@ -844,6 +846,7 @@
     canShuttle: false
     global: true #announce to everyone they're about to fuck shit up
     sound: /Audio/Announcements/war.ogg
+    canIncreaseAlertLevel: false
   - type: Computer
     board: WizardCommsComputerCircuitboard
   - type: PointLight
@@ -876,6 +879,7 @@
     color: "#1d8bad"
     canShuttle: false
     global: true
+    canIncreaseAlertLevel: false
   - type: Computer
     board: CentcommCommsComputerCircuitboard
   - type: PointLight

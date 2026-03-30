@@ -3,15 +3,18 @@ using Content.Server.Atmos.Components;
 using Content.Server.Body.Systems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.NodeContainer.EntitySystems;
+using Content.Shared.Atmos.Components; // Forge-Change
 using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Decals;
 using Content.Shared.Doors.Components;
 using Content.Shared.Maps;
 using JetBrains.Annotations;
+using Prometheus; // Forge-Change
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Physics.Components; // Forge-Change
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using System.Linq;
@@ -24,6 +27,30 @@ namespace Content.Server.Atmos.EntitySystems;
 [UsedImplicitly]
 public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
 {
+    // Forge-Change-start
+    private static readonly Gauge AtmosGridCountGauge = Metrics.CreateGauge(
+        "forge_atmos_grids",
+        "Number of simulated grids with GridAtmosphereComponent.");
+
+    private static readonly Gauge AtmosTileCountGauge = Metrics.CreateGauge(
+        "forge_atmos_tiles_total",
+        "Total tile entries tracked by atmos.");
+
+    private static readonly Gauge AtmosActiveTileCountGauge = Metrics.CreateGauge(
+        "forge_atmos_tiles_active",
+        "Active atmos tiles queued for processing.");
+
+    private static readonly Gauge AtmosInvalidatedTileCountGauge = Metrics.CreateGauge(
+        "forge_atmos_tiles_invalidated",
+        "Invalidated atmos tiles waiting for revalidation.");
+
+    private static readonly Gauge AtmosHotspotTileCountGauge = Metrics.CreateGauge(
+        "forge_atmos_hotspots",
+        "Tiles with active hotspot simulation.");
+
+    private const float MetricsUpdateInterval = 30f;
+    private float _metricsTimer;
+    // Forge-Change-end
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
@@ -46,6 +73,10 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
     private EntityQuery<MapAtmosphereComponent> _mapAtmosQuery;
     private EntityQuery<AirtightComponent> _airtightQuery;
     private EntityQuery<FirelockComponent> _firelockQuery;
+    private EntityQuery<PhysicsComponent> _physicsQuery; // Forge-Change
+    private EntityQuery<TransformComponent> _xformQuery; // Forge-Change
+    private EntityQuery<MetaDataComponent> _metaQuery; // Forge-Change
+    private EntityQuery<MovedByPressureComponent> _movedByPressureQuery; // Forge-Change
     private HashSet<EntityUid> _entSet = new();
 
     private string[] _burntDecals = [];
@@ -67,6 +98,10 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
         _atmosQuery = GetEntityQuery<GridAtmosphereComponent>();
         _airtightQuery = GetEntityQuery<AirtightComponent>();
         _firelockQuery = GetEntityQuery<FirelockComponent>();
+        _physicsQuery = GetEntityQuery<PhysicsComponent>(); // Forge-Change
+        _xformQuery = GetEntityQuery<TransformComponent>(); // Forge-Change
+        _metaQuery = GetEntityQuery<MetaDataComponent>(); // Forge-Change
+        _movedByPressureQuery = GetEntityQuery<MovedByPressureComponent>(); // Forge-Change
 
         SubscribeLocalEvent<TileChangedEvent>(OnTileChanged);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
@@ -102,6 +137,15 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
         UpdateProcessing(frameTime);
         UpdateHighPressure(frameTime);
 
+        // Forge-Change-start
+        _metricsTimer += frameTime;
+        if (_metricsTimer >= MetricsUpdateInterval)
+        {
+            _metricsTimer -= MetricsUpdateInterval;
+            UpdateAtmosMetrics();
+        }
+        // Forge-Change-end
+
         _exposedTimer += frameTime;
 
         if (_exposedTimer < ExposedUpdateDelay)
@@ -126,4 +170,30 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
     {
         _burntDecals = _protoMan.EnumeratePrototypes<DecalPrototype>().Where(x => x.Tags.Contains("burnt")).Select(x => x.ID).ToArray();
     }
+    // Forge-Change-start
+    private void UpdateAtmosMetrics()
+    {
+        var grids = 0;
+        var tiles = 0;
+        var activeTiles = 0;
+        var invalidated = 0;
+        var hotspots = 0;
+
+        var query = EntityQueryEnumerator<GridAtmosphereComponent>();
+        while (query.MoveNext(out _, out var atmos))
+        {
+            grids++;
+            tiles += atmos.Tiles.Count;
+            activeTiles += atmos.ActiveTiles.Count;
+            invalidated += atmos.InvalidatedCoords.Count;
+            hotspots += atmos.HotspotTiles.Count;
+        }
+
+        AtmosGridCountGauge.Set(grids);
+        AtmosTileCountGauge.Set(tiles);
+        AtmosActiveTileCountGauge.Set(activeTiles);
+        AtmosInvalidatedTileCountGauge.Set(invalidated);
+        AtmosHotspotTileCountGauge.Set(hotspots);
+    }
+    // Forge-Change-end
 }

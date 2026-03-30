@@ -150,9 +150,15 @@ public sealed partial class AtmosphereSystem
         atmos.SuperconductivityTiles.Clear();
         atmos.HighPressureDelta.Clear();
         atmos.CurrentRunTiles.Clear();
+        atmos.CurrentRunTileIndex = 0; // Forge-Change
         atmos.CurrentRunExcitedGroups.Clear();
+        atmos.CurrentRunExcitedGroupIndex = 0; // Forge-Change
         atmos.InvalidatedCoords.Clear();
         atmos.CurrentRunInvalidatedTiles.Clear();
+        atmos.CurrentRunPipeNet.Clear(); // Forge-Change
+        atmos.CurrentRunPipeNetIndex = 0; // Forge-Change
+        atmos.CurrentRunAtmosDevices.Clear(); // Forge-Change
+        atmos.CurrentRunAtmosDeviceIndex = 0; // Forge-Change
         atmos.PossiblyDisconnectedTiles.Clear();
         atmos.Tiles.Clear();
 

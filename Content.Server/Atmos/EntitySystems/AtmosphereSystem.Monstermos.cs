@@ -38,6 +38,16 @@ namespace Content.Server.Atmos.EntitySystems
 
             var startingMoles = tile.Air.TotalMoles;
             var runAtmos = false;
+            var budgetCheckCounter = 0; // Forge-Change
+
+            bool ShouldYieldBudget() // Forge-Change
+            {
+                if (budgetCheckCounter++ < LagCheckIterations) // Forge-Change
+                    return false; // Forge-Change
+
+                budgetCheckCounter = 0; // Forge-Change
+                return _simulationStopwatch.Elapsed.TotalMilliseconds >= AtmosMaxProcessTime; // Forge-Change
+            }
 
             // We need to figure if this is necessary
             for (var i = 0; i < Atmospherics.Directions; i++)
@@ -97,6 +107,9 @@ namespace Content.Server.Atmos.EntitySystems
                         return;
                     }
                 }
+
+                if (ShouldYieldBudget()) // Forge-Change
+                    return; // Forge-Change
             }
 
             if (tileCount > Atmospherics.MonstermosTileLimit)
@@ -177,6 +190,9 @@ namespace Content.Server.Atmos.EntitySystems
                         otherTile.MonstermosInfo.MoleDelta -= molesToMove;
                         otherTile.AdjacentTiles[j]!.MonstermosInfo.MoleDelta += molesToMove;
                     }
+
+                    if (ShouldYieldBudget()) // Forge-Change
+                        return; // Forge-Change
                 }
 
                 giverTilesLength = 0;
@@ -251,6 +267,9 @@ namespace Content.Server.Atmos.EntitySystems
                                 }
                             }
                         }
+
+                        if (ShouldYieldBudget()) // Forge-Change
+                            return; // Forge-Change
                     }
 
                     // Putting this loop here helps make it O(n^2) over O(n^3)
@@ -265,6 +284,9 @@ namespace Content.Server.Atmos.EntitySystems
                             otherTile.MonstermosInfo.CurrentTransferAmount = 0;
                         }
                     }
+
+                    if (ShouldYieldBudget()) // Forge-Change
+                        return; // Forge-Change
                 }
             }
             else
@@ -318,6 +340,9 @@ namespace Content.Server.Atmos.EntitySystems
                                 }
                             }
                         }
+
+                        if (ShouldYieldBudget()) // Forge-Change
+                            return; // Forge-Change
                     }
 
                     for (var i = queueLength - 1; i >= 0; i--)
@@ -332,6 +357,9 @@ namespace Content.Server.Atmos.EntitySystems
                             .MonstermosInfo.CurrentTransferAmount += otherTile.MonstermosInfo.CurrentTransferAmount;
                         otherTile.MonstermosInfo.CurrentTransferAmount = 0;
                     }
+
+                    if (ShouldYieldBudget()) // Forge-Change
+                        return; // Forge-Change
                 }
             }
 

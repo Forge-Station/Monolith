@@ -24,6 +24,7 @@ public sealed class AutoUnstuckSystem : EntitySystem
     private readonly Dictionary<EntityUid, float> _stuckSeconds = new();
     private readonly List<EntityUid> _clearTimer = new();
     private readonly List<EntityUid> _purgeStale = new();
+    private readonly List<Entity<PhysicsComponent, TransformComponent>> _awakeSnapshot = new();
 
     public override void Update(float frameTime)
     {
@@ -51,8 +52,14 @@ public sealed class AutoUnstuckSystem : EntitySystem
             return;
 
         _clearTimer.Clear();
-
+        _awakeSnapshot.Clear();
+        _awakeSnapshot.EnsureCapacity(_physics.AwakeBodies.Count);
         foreach (var awake in _physics.AwakeBodies)
+        {
+            _awakeSnapshot.Add(awake);
+        }
+
+        foreach (var awake in _awakeSnapshot)
         {
             var uid = awake.Owner;
             var body = awake.Comp1;

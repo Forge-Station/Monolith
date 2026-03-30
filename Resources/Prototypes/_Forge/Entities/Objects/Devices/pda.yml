@@ -353,20 +353,18 @@
     sprite: Forge/Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
-      state: "pda"
-    - sprite: _Mono/Objects/Devices/pda.rsi
-      state: "light_overlay"
+      state: "pda-tti"
+    - state: "light_overlay"
       map: [ "enum.PdaVisualLayers.Flashlight" ]
       shader: "unshaded"
       visible: false
-    - sprite: _Mono/Objects/Devices/pda.rsi
-      state: "id_overlay"
+    - state: "id_overlay"
       map: [ "enum.PdaVisualLayers.IdLight" ]
       shader: "unshaded"
       visible: false
   - type: Icon
     sprite: Forge/Objects/Devices/pda.rsi
-    state: pda
+    state: pda-tti
 
 - type: entity
   parent: BaseTTIPDA

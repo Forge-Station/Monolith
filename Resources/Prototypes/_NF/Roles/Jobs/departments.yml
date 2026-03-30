@@ -14,8 +14,8 @@
   id: Frontier
   name: department-Frontier
   description: department-NF-description
-  color: "#334e6d"
-  weight: 80 # accounted for in jobs
+  color: "#334e6d" # Forge
+  weight: 80 # Forge
   roles:
   - StationRepresentative
   - StationTrafficController

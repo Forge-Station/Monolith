@@ -11,10 +11,10 @@
       time: 36000 # Forge - 10 hours
   startingGear: MdMedicGear
   alwaysUseSpawner: true
-  icon: "JobIconParamedic"
+  icon: "JobIconParamedic" # Forge
   supervisors: job-supervisors-doc
   weight: 170
-  displayWeight: 39
+  displayWeight: 39 # Forge
   assignedCompany: MD
   canBeAntag: false
   accessGroups:

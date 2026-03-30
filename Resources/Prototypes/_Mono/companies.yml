@@ -26,15 +26,15 @@
 - type: company
   id: MD
   form: Protagonist
-  name: Trauma Team International
-  color: "#00d1a0"
+  name: Trauma Team International # Forge
+  color: "#00d1a0" # Forge
   disabled: true
 
 - type: company
   id: Colonial
   form: Protagonist
-  name: NanoTrasen
-  color: "#334e6d"
+  name: NanoTrasen # Forge
+  color: "#334e6d" # Forge
   disabled: true
 
 - type: company

@@ -93,6 +93,7 @@ namespace Content.Client.Construction.UI
 
             Title = Loc.GetString("construction-menu-title");
 
+            SearchBar.PlaceHolder = Loc.GetString("construction-menu-search"); // Forge-Change
             BuildButton.Text = Loc.GetString("construction-menu-place-ghost");
             Recipes.OnItemSelected += obj => RecipeSelected?.Invoke(this, obj.ItemList[obj.ItemIndex]);
             Recipes.OnItemDeselected += _ => RecipeSelected?.Invoke(this, null);

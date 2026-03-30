@@ -480,138 +480,127 @@ namespace Content.Server.Construction
             {
                 if (_beingBuilt.TryGetValue(session, out var set))
                 {
+                    // Same ghost clicked again while construction is in progress (e.g. spam / do-after running).
+                    // Forge-Change-start
                     if (!set.Add(ack))
-                    {
-                        _popup.PopupEntity(Loc.GetString("construction-system-already-building"), user, user);
                         return false;
-                    }
                 }
                 else
                 {
-                    var newSet = new HashSet<int> {ack};
-                    _beingBuilt[session] = newSet;
+                    _beingBuilt[session] = new HashSet<int> { ack };
                 }
             }
 
-            // Goobstation - can only realistically happen for sus clients, but ignore this for constructor
-            HandsComponent? hands = null;
-            if (senderSession != null && !TryComp<HandsComponent>(user, out hands))
-                return false;
-
-            foreach (var condition in constructionPrototype.Conditions)
+            try
             {
-                if (!condition.Condition(user, location, angle.GetCardinalDir()))
-                {
-                    Cleanup();
+                // Goobstation - can only realistically happen for sus clients, but ignore this for constructor
+                HandsComponent? hands = null;
+                if (senderSession != null && !TryComp<HandsComponent>(user, out hands))
                     return false;
-                }
-            }
 
-            void Cleanup()
-            {
-                if (senderSession is {} session) // Goobstation - not added for constructor
-                    _beingBuilt[session].Remove(ack);
-            }
-
-            // Goobstation
-            EntityUid? entWith = with == null ? null : GetEntity(with);
-            if (with != null && entWith != null)
-            {
-                // sus client can't use steel half the station away to build
-                var userPos = _transformSystem.GetMapCoordinates(user);
-                var withPos = _transformSystem.GetMapCoordinates(entWith.Value);
-                if (!_container.IsInSameOrParentContainer(user, entWith.Value)
-                    || !_interactionSystem.InRangeUnobstructed(userPos, withPos, ConstructGrabRange))
+                foreach (var condition in constructionPrototype.Conditions)
                 {
-                    Cleanup();
-                    return false;
+                    if (!condition.Condition(user, location, angle.GetCardinalDir()))
+                        return false;
                 }
-            }
-            else if (hands != null)
-            {
-                entWith = hands.ActiveHandEntity;
-            }
 
-            if (!_actionBlocker.CanInteract(user, null)
-                || (senderSession != null && entWith == null)) // Goobstation
-            {
-                Cleanup();
-                return false;
-            }
-
-            var mapPos = location.ToMap(EntityManager, _transformSystem);
-            var predicate = GetPredicate(constructionPrototype.CanBuildInImpassable, mapPos);
-
-            if (!_interactionSystem.InRangeUnobstructed(user, mapPos, predicate: predicate))
-            {
-                Cleanup();
-                return false;
-            }
-
-            if (pathFind == null)
-                throw new InvalidDataException($"Can't find path from starting node to target node in construction! Recipe: {prototypeName}");
-
-            var edge = startNode.GetEdge(pathFind[0].Name);
-
-            if(edge == null)
-                throw new InvalidDataException($"Can't find edge from starting node to the next node in pathfinding! Recipe: {prototypeName}");
-
-            if (senderSession != null) // Goobstation - don't check this for constructor machine
-            {
-                var valid = false;
-
-                if (entWith is not {Valid: true} holding) // Goobstation - don't check for constructor machine
+                // Goobstation
+                EntityUid? entWith = with == null ? null : GetEntity(with);
+                if (with != null && entWith != null)
                 {
-                    Cleanup();
-                    return false;
-                }
-                // No support for conditions here!
-
-                foreach (var step in edge.Steps)
-                {
-                    switch (step)
+                    // sus client can't use steel half the station away to build
+                    var userPos = _transformSystem.GetMapCoordinates(user);
+                    var withPos = _transformSystem.GetMapCoordinates(entWith.Value);
+                    if (!_container.IsInSameOrParentContainer(user, entWith.Value)
+                        || !_interactionSystem.InRangeUnobstructed(userPos, withPos, ConstructGrabRange))
                     {
-                        case EntityInsertConstructionGraphStep entityInsert:
-                            if (entityInsert.EntityValid(holding, EntityManager, _factory))
-                                valid = true;
+                        return false;
+                    }
+                }
+                else if (hands != null)
+                {
+                    entWith = hands.ActiveHandEntity;
+                }
+
+                if (!_actionBlocker.CanInteract(user, null)
+                    || (senderSession != null && entWith == null)) // Goobstation
+                {
+                    return false;
+                }
+
+                var mapPos = location.ToMap(EntityManager, _transformSystem);
+                var predicate = GetPredicate(constructionPrototype.CanBuildInImpassable, mapPos);
+
+                if (!_interactionSystem.InRangeUnobstructed(user, mapPos, predicate: predicate))
+                    return false;
+
+                if (pathFind == null)
+                    throw new InvalidDataException($"Can't find path from starting node to target node in construction! Recipe: {prototypeName}");
+
+                var edge = startNode.GetEdge(pathFind[0].Name);
+
+                if (edge == null)
+                    throw new InvalidDataException($"Can't find edge from starting node to the next node in pathfinding! Recipe: {prototypeName}");
+
+                if (senderSession != null) // Goobstation - don't check this for constructor machine
+                {
+                    var valid = false;
+
+                    if (entWith is not { Valid: true } holding) // Goobstation - don't check for constructor machine
+                        return false;
+                    // No support for conditions here!
+
+                    foreach (var step in edge.Steps)
+                    {
+                        switch (step)
+                        {
+                            case EntityInsertConstructionGraphStep entityInsert:
+                                if (entityInsert.EntityValid(holding, EntityManager, _factory))
+                                    valid = true;
+                                break;
+                            case ToolConstructionGraphStep _:
+                                throw new InvalidDataException("Invalid first step for item recipe!");
+                        }
+
+                        if (valid)
                             break;
-                        case ToolConstructionGraphStep _:
-                            throw new InvalidDataException("Invalid first step for item recipe!");
                     }
 
-                    if (valid)
-                        break;
+                    if (!valid)
+                        return false;
                 }
 
-                if (!valid)
+                if (await Construct(user,
+                        (ack + constructionPrototype.GetHashCode()).ToString(),
+                        constructionGraph,
+                        edge,
+                        targetNode,
+                        location,
+                        constructionPrototype.CanRotate ? angle : Angle.Zero) is not { Valid: true } structure)
                 {
-                    Cleanup();
                     return false;
                 }
+
+                // <Goobstation>
+                var constructedEv = new ConstructedEvent(structure);
+                RaiseLocalEvent(user, ref constructedEv);
+                // </Goobstation>
+
+                RaiseNetworkEvent(new AckStructureConstructionMessage(ack, GetNetEntity(structure)), user);
+                _adminLogger.Add(LogType.Construction, LogImpact.Low, $"{ToPrettyString(user):player} has turned a {prototypeName} construction ghost into {ToPrettyString(structure)} at {Transform(structure).Coordinates}");
+                return true;
             }
-
-
-            if (await Construct(user,
-                    (ack + constructionPrototype.GetHashCode()).ToString(),
-                    constructionGraph,
-                    edge,
-                    targetNode,
-                    location,
-                    constructionPrototype.CanRotate ? angle : Angle.Zero) is not {Valid: true} structure)
+            finally
             {
-                Cleanup();
-                return false;
+                if (senderSession != null
+                    && _beingBuilt.TryGetValue(senderSession, out var builtSet))
+                {
+                    builtSet.Remove(ack);
+                    if (builtSet.Count == 0)
+                        _beingBuilt.Remove(senderSession);
+                }
             }
-
-            // <Goobstation>
-            var constructedEv = new ConstructedEvent(structure);
-            RaiseLocalEvent(user, ref constructedEv);
-            // </Goobstation>
-
-            RaiseNetworkEvent(new AckStructureConstructionMessage(ack, GetNetEntity(structure)), user);
-            _adminLogger.Add(LogType.Construction, LogImpact.Low, $"{ToPrettyString(user):player} has turned a {prototypeName} construction ghost into {ToPrettyString(structure)} at {Transform(structure).Coordinates}");
-            Cleanup();
-            return true;
+            // Forge-Change-end
         }
     }
 }

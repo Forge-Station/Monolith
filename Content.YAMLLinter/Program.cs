@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -10,11 +11,14 @@ using Robust.Shared.Serialization.Markdown.Validation;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Robust.UnitTesting;
+using Robust.UnitTesting.Pool;
 
 namespace Content.YAMLLinter
 {
     internal static class Program
     {
+        private static readonly ExternalTestContext TestContext = new("YAML Linter", StreamWriter.Null);
+
         private static async Task<int> Main(string[] _)
         {
             PoolManager.Startup();
@@ -36,7 +40,9 @@ namespace Content.YAMLLinter
             {
                 foreach (var errorNode in errorHashset)
                 {
-                    Console.WriteLine($"::error file={file},line={errorNode.Node.Start.Line},col={errorNode.Node.Start.Column}::{file}({errorNode.Node.Start.Line},{errorNode.Node.Start.Column})  {errorNode.ErrorReason}");
+                    // TODO YAML LINTER Fix inheritance
+                    // If a parent/abstract prototype has na error, this will misreport the file name (but with the correct line/column).
+                    Console.WriteLine($"::error in {file}({errorNode.Node.Start.Line},{errorNode.Node.Start.Column})  {errorNode.ErrorReason}");
                 }
             }
 
@@ -53,7 +59,7 @@ namespace Content.YAMLLinter
         private static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
             ValidateClient()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            await using var pair = await PoolManager.GetServerClient(testContext: TestContext);
             var client = pair.Client;
             var result = await ValidateInstance(client);
             await pair.CleanReturnAsync();
@@ -63,7 +69,7 @@ namespace Content.YAMLLinter
         private static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
             ValidateServer()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            await using var pair = await PoolManager.GetServerClient(testContext: TestContext);
             var server = pair.Server;
             var result = await ValidateInstance(server);
             await pair.CleanReturnAsync();
@@ -143,22 +149,24 @@ namespace Content.YAMLLinter
             foreach (var (key, val) in clientErrors.YamlErrors)
             {
                 var newErrors = val.Where(n => n.AlwaysRelevant).ToHashSet();
-                if (newErrors.Count == 0)
-                    continue;
-
-                if (yamlErrors.TryGetValue(key, out var errors))
-                    errors.UnionWith(val.Where(n => n.AlwaysRelevant));
-                else
-                    yamlErrors[key] = newErrors;
 
                 // Include any errors that relate to client-only types
                 foreach (var errorNode in val)
                 {
-                    if (errorNode is FieldNotFoundErrorNode fieldNotFoundNode && !serverTypes.Contains(fieldNotFoundNode.FieldType.Name))
+                    if (errorNode is FieldNotFoundErrorNode fieldNotFoundNode
+                        && !serverTypes.Contains(fieldNotFoundNode.FieldType.Name))
                     {
                         newErrors.Add(errorNode);
                     }
                 }
+
+                if (newErrors.Count == 0)
+                    continue;
+
+                if (yamlErrors.TryGetValue(key, out var errors))
+                    errors.UnionWith(newErrors);
+                else
+                    yamlErrors[key] = newErrors;
             }
 
             // Finally, combine the prototype ID field errors.
@@ -173,7 +181,7 @@ namespace Content.YAMLLinter
         private static async Task<(Assembly[] clientAssemblies, Assembly[] serverAssemblies)>
             GetClientServerAssemblies()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            await using var pair = await PoolManager.GetServerClient(testContext: TestContext);
 
             var result = (GetAssemblies(pair.Client), GetAssemblies(pair.Server));
 

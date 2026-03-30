@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: EPS Вихрь
   description: Вихрь - шаттл для разведки и патруля в одиночку, так же может перевозить или забирать тех, кто остался без шаттла, отлично ломает двигатели.
-  price: 37000
+  price: 43000
   category: Small
   group: Empire
   access: Empire

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client.Construction; // Forge-Change
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared.Construction.Prototypes;
@@ -192,7 +193,10 @@ namespace Content.Client.Construction.UI
 
                 if (!string.IsNullOrEmpty(search))
                 {
-                    if (!recipe.Name.ToLowerInvariant().Contains(search.Trim().ToLowerInvariant()))
+                    var q = search.Trim().ToLowerInvariant(); // Forge-Change
+                    var displayName = ConstructionRecipeLocale.GetLocalizedName(recipe); // Forge-Change
+                    if (!displayName.ToLowerInvariant().Contains(q) &&
+                        !recipe.Name.ToLowerInvariant().Contains(q)) // Forge-Change
                         continue;
                 }
 
@@ -214,7 +218,11 @@ namespace Content.Client.Construction.UI
                 recipes.Add(recipe);
             }
 
-            recipes.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.InvariantCulture));
+            // Forge-Change
+            recipes.Sort((a, b) => string.Compare(
+                ConstructionRecipeLocale.GetLocalizedName(a),
+                ConstructionRecipeLocale.GetLocalizedName(b),
+                StringComparison.CurrentCultureIgnoreCase));
 
             var recipesList = _constructionView.Recipes;
             recipesList.Clear();
@@ -229,12 +237,13 @@ namespace Content.Client.Construction.UI
             {
                 foreach (var recipe in recipes)
                 {
+                    var displayName = ConstructionRecipeLocale.GetLocalizedName(recipe); // Forge-Change
                     var itemButton = new TextureButton
                     {
                         TextureNormal = _spriteSystem.Frame0(recipe.Icon),
                         VerticalAlignment = Control.VAlignment.Center,
-                        Name = recipe.Name,
-                        ToolTip = recipe.Name,
+                        Name = displayName, // Forge-Change
+                        ToolTip = displayName, // Forge-Change
                         Scale = new Vector2(1.35f),
                         ToggleMode = true,
                     };
@@ -250,7 +259,7 @@ namespace Content.Client.Construction.UI
 
                         if (buttonToggledEventArgs.Pressed &&
                             _selected != null &&
-                            _recipeButtons.TryGetValue(_selected.Name, out var oldButton))
+                            _recipeButtons.TryGetValue(_selected.ID, out var oldButton)) // Forge-Change
                         {
                             oldButton.Pressed = false;
                             SelectGridButton(oldButton, false);
@@ -260,7 +269,7 @@ namespace Content.Client.Construction.UI
                     };
 
                     recipesGrid.AddChild(itemButtonPanelContainer);
-                    _recipeButtons[recipe.Name] = itemButton;
+                    _recipeButtons[recipe.ID] = itemButton; // Forge-Change
                     var isCurrentButtonSelected = _selected == recipe;
                     itemButton.Pressed = isCurrentButtonSelected;
                     SelectGridButton(itemButton, isCurrentButtonSelected);
@@ -336,7 +345,9 @@ namespace Content.Client.Construction.UI
             _constructionView.ClearRecipeInfo();
 
             _constructionView.SetRecipeInfo(
-                prototype.Name, prototype.Description, _spriteSystem.Frame0(prototype.Icon),
+                ConstructionRecipeLocale.GetLocalizedName(prototype), // Forge-Change
+                ConstructionRecipeLocale.GetLocalizedDescription(prototype), // Forge-Change
+                _spriteSystem.Frame0(prototype.Icon), // Forge-Change
                 prototype.Type != ConstructionType.Item,
                 !_favoritedRecipes.Contains(prototype));
 
@@ -374,10 +385,10 @@ namespace Content.Client.Construction.UI
             return new(itemList)
             {
                 Metadata = recipe,
-                Text = recipe.Name,
+                Text = ConstructionRecipeLocale.GetLocalizedName(recipe), // Forge-Change
                 Icon = _spriteSystem.Frame0(recipe.Icon),
                 TooltipEnabled = true,
-                TooltipText = recipe.Description,
+                TooltipText = ConstructionRecipeLocale.GetLocalizedDescription(recipe), // Forge-Change
             };
         }
 

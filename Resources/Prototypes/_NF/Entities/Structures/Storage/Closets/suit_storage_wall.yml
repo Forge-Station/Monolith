@@ -17,10 +17,11 @@
       map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
   - type: EntityStorageVisuals
-    stateBase: generic
     stateBaseClosed: generic
+    stateBaseOpen: generic
     stateDoorOpen: generic_open
     stateDoorClosed: generic_door
+  - type: LockVisuals
     stateLocked: locked
     stateUnlocked: unlocked
   - type: EntityStorage

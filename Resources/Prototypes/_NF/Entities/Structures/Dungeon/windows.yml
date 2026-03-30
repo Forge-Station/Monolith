@@ -51,7 +51,6 @@
   - type: Icon
     sprite: _NF/Structures/Windows/window.rsi # Frontier
     state: full
-    color: "#ffd38c"
 
 # Reinforced window
 - type: entity
@@ -67,7 +66,7 @@
     color: "#ffd38c"
   - type: Icon
     sprite: _NF/Structures/Windows/reinforced_window.rsi # Frontier
-    color: "#ffd38c"
+    state: full
 
 # Mining window
 - type: entity
@@ -83,7 +82,7 @@
     color: "#ffd38c"
   - type: Icon
     sprite: Structures/Windows/mining.rsi
-    color: "#ffd38c"
+    state: full
   - type: Destructible # Made it as durable as common window
     thresholds:
     - trigger:
@@ -115,7 +114,7 @@
     color: "#ffd38c"
   - type: Icon
     sprite: _NF/Structures/Windows/plasma_window.rsi # Frontier
-    color: "#ffd38c"
+    state: full
 
 # Plasma reinforced window
 - type: entity
@@ -131,7 +130,7 @@
     color: "#ffd38c"
   - type: Icon
     sprite: _NF/Structures/Windows/reinforced_plasma_window.rsi # Frontier
-    color: "#ffd38c"
+    state: full
 
 # Uranium reinforced window
 - type: entity
@@ -147,7 +146,7 @@
     color: "#ffd38c"
   - type: Icon
     sprite: _NF/Structures/Windows/reinforced_uranium_window.rsi # Frontier
-    color: "#ffd38c"
+    state: full
 
 # Directional
 - type: entity
@@ -165,7 +164,6 @@
   - type: Icon
     sprite: Structures/Windows/directional.rsi
     state: window
-    color: "#ffd38c"
 
 - type: entity
   id: WindowFrostedDirectionalDungeon
@@ -181,7 +179,6 @@
   - type: Icon
     sprite: Structures/Windows/directional.rsi
     state: frosted_window
-    color: "#ffd38c"
 
 - type: entity
   id: WindowReinforcedDirectionalDungeon
@@ -197,7 +194,6 @@
   - type: Icon
     sprite: Structures/Windows/directional.rsi
     state: reinforced_window
-    color: "#ffd38c"
 
 - type: entity
   id: PlasmaWindowDirectionalDungeon
@@ -213,7 +209,6 @@
   - type: Icon
     sprite: Structures/Windows/directional.rsi
     state: plasma_window
-    color: "#ffd38c"
 
 - type: entity
   id: PlasmaReinforcedWindowDirectionalDungeon
@@ -229,7 +224,6 @@
   - type: Icon
     sprite: Structures/Windows/directional.rsi
     state: plasma_reinforced_window
-    color: "#ffd38c"
 
 - type: entity
   id: UraniumWindowDirectionalDungeon
@@ -245,7 +239,6 @@
   - type: Icon
     sprite: Structures/Windows/directional.rsi
     state: uranium_window
-    color: "#ffd38c"
 
 - type: entity
   id: UraniumReinforcedWindowDirectionalDungeon
@@ -261,4 +254,3 @@
   - type: Icon
     sprite: Structures/Windows/directional.rsi
     state: uranium_reinforced_window
-    color: "#ffd38c"

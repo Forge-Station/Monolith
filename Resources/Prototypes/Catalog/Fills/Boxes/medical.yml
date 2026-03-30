@@ -98,13 +98,17 @@
     contents:
       - id: BodyBagFolded
         amount: 4
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,2
+    whitelist:
+      tags:
+        - BodyBag
   - type: Sprite
     layers:
       - state: box
       - state: bodybags
-    whitelist:
-      tags:
-        - BodyBag
 
 - type: entity
   name: vial box

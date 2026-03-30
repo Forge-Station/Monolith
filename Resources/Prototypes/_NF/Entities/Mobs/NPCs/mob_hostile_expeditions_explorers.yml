@@ -21,7 +21,6 @@
       60: 0.7
       80: 0.5
   - type: DamageStateVisuals
-    rotate: true
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 90

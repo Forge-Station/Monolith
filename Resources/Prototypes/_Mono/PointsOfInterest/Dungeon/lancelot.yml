@@ -36,5 +36,3 @@
         - type: StationNameSetup
           mapNameTemplate: 'Горнодобывающий аванпост «Ланселот»'
         - type: StationDeadDropHintExempt
-        - type: TradeCrateWildcardDestination
-          valueMultiplier: 0.1

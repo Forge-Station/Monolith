@@ -5,16 +5,12 @@
   playTimeTracker: JobTsfRecruit
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 32400
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 72000
-      inverted: true
+      time: 21600
   startingGear: TsfRecruitGear
   icon: JobIconTsfRecruit
   supervisors: job-supervisors-tsf-rangers
   weight: 70
-  displayWeight: 10
+  displayWeight: 25
   assignedCompany: TSF
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete

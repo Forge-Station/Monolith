@@ -7,16 +7,16 @@
   alwaysUseSpawner: true
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 54000 # 20 hrs # mono - change to 15 hr
+      time: 54000 # 20 hrs, Forge
     - !type:RoleTimeRequirement
       role: JobSecurityGuard
-      time: 3600 # 3 hrs as security guard # mono - change to 1 hr
+      time: 10800 # 3 hrs as security guard, Forge
   canBeAntag: false
   icon: "JobIconStc"
   assignedCompany: Colonial
-  supervisors: job-supervisors-sr
+  supervisors: job-supervisors-sr 
   weight: 160
-  displayWeight: 50 # Second from the top
+  displayWeight: 50 # Second from the top, Forge
   setPreference: true
   access:
   - Service
@@ -25,6 +25,8 @@
   - Frontier
   - StationTrafficController
   special:
+  - !type:AddImplantSpecial # Forge
+    implants: [ MindShieldImplant ] # Forge
   - !type:GiveItemOnHolidaySpecial
     holiday: FrontierBirthday
     prototype: FrontierBirthdayGift

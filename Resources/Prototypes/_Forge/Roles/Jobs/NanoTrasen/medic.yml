@@ -1,0 +1,41 @@
+- type: job
+  id: NtMedic
+  name: job-name-nt-medic
+  description: job-description-nt-medic
+  playTimeTracker: NtMedic
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hrs
+  startingGear: NtMedicGear
+  alwaysUseSpawner: true
+  icon: "JobIconntmedic"
+  supervisors: job-supervisors-doc
+  weight: 170
+  displayWeight: 38
+  assignedCompany: MD
+  canBeAntag: false
+  accessGroups:
+  - GeneralAccess
+  - Medical
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, TrackingImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: NpcFactionMember
+        factions:
+        - MD
+      - type: SurgerySpeedModifier
+        SpeedModifier: 1.75
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: NtMedicGear
+  equipment:
+    pocket1: HypoMini
+    pocket2: MedicalAppraisalTool
+  storage:
+    back:
+    - BoxFolderMedicalDoctor

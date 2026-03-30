@@ -11,7 +11,9 @@ nf-holopad-general-frontier-outpost-lobby = Аванпост Фронтира - 
 nf-holopad-general-trade-station-stc = Торговая Станция - Диспетчерская
 nf-holopad-general-trade-station-cafeteria = Торговая Станция - Кафетерий
 nf-holopad-general-medical-dispatch = Госпиталь - Приёмная
-nf-holopad-general-medical-dispatch-doc = Госпиталь - Офис ММО
+# Forge
+nf-holopad-general-medical-dispatch-doc = Госпиталь - Офис Директора TTI
+# Forge end
 nf-holopad-general-nfsd-sheriff-office = ТСФ - Офис Шерифа
 nf-holopad-general-nfsd-reception = ТСФ - Приёмная
 nf-holopad-general-nfsd-lobby = ТСФ - Лобби

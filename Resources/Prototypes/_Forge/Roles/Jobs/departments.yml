@@ -19,7 +19,7 @@
   id: Renegates
   name: department-Renegates
   description: department-Renegates-description
-  color: "#111111"
+  color: "#333333"
   weight: 50
   roles:
   - Baron
@@ -28,7 +28,7 @@
   - Quack
   - Foreman
   - Flunky
-  
+
 - type: department
   id: TSF
   name: department-TSF
@@ -43,4 +43,4 @@
   - TsfAmbassador
   - TsfRanger
   - TsfRecruit
-  - TsfEngineer
+  # - TsfEngineer

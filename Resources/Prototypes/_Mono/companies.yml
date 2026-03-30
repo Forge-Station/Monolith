@@ -26,15 +26,15 @@
 - type: company
   id: MD
   form: Protagonist
-  name: MED
-  color: "#3B8EEA"
+  name: Trauma Team International # Forge
+  color: "#00d1a0" # Forge
   disabled: true
 
 - type: company
   id: Colonial
   form: Protagonist
-  name: Colonial Staff
-  color: "#279659"
+  name: NanoTrasen # Forge
+  color: "#334e6d" # Forge
   disabled: true
 
 - type: company
@@ -259,7 +259,7 @@
 - type: company
   id: RedSailCorsairs
   form: Antagonist
-  name: RedSail Corsairs 
+  name: RedSail Corsairs
   description: redsail-corsairs-description
   color: "#930000"
   image: /Textures/_Mono/Companies/redsailcorsairs.png
@@ -282,7 +282,7 @@
   - Ether
   - MapleSilk
   - Spacepeing
-  - zigcraft 
+  - zigcraft
   - burrrkeye
   - enkidienne
   - chugaa

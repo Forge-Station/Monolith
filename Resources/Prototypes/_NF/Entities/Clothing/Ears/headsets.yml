@@ -125,6 +125,7 @@
 - type: entity
   parent: ClothingHeadsetCMO
   id: ClothingHeadsetDoc
+  suffix: TTI
   name: doc's headset
   description: Letting the DoC know what's up. Takes encryption keys.
   components:
@@ -132,3 +133,4 @@
     containers:
       key_slots:
       - EncryptionKeyDoc
+      - EncryptionKeyHospital # Forge

@@ -5,13 +5,16 @@
   playTimeTracker: MdMedic
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 54000 # 15 hrs
+      time: 108000 # 30 hrs
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 36000 # Forge - 10 hours
   startingGear: MdMedicGear
   alwaysUseSpawner: true
-  icon: "JobIconMedicalDoctor"
+  icon: "JobIconParamedic" # Forge
   supervisors: job-supervisors-doc
   weight: 170
-  displayWeight: 55 # Second from the top
+  displayWeight: 39 # Forge
   assignedCompany: MD
   canBeAntag: false
   accessGroups:
@@ -34,9 +37,8 @@
 - type: startingGear
   id: MdMedicGear
   equipment:
-    pocket1: HypoMini
+    pocket1: HypoBrigmedic
     pocket2: MedicalAppraisalTool
   storage:
     back:
-    - RubberStampDoc
     - BoxFolderMedicalDoctor

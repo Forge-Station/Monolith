@@ -69629,6 +69629,27 @@ entities:
     - type: Transform
       pos: -15.5,48.5
       parent: 2
+- proto: SpawnPointNtMedic
+  entities:
+  - uid: 19999
+    components:
+    - type: Transform
+      pos: 24.5,64.5
+      parent: 2
+- proto: SpawnPointMdMedic
+  entities:
+  - uid: 20000
+    components:
+    - type: Transform
+      pos: 34.5,63.5
+      parent: 2
+- proto: SpawnPointDirectorOfCare
+  entities:
+  - uid: 20001
+    components:
+    - type: Transform
+      pos: 9.5,73.5
+      parent: 2
 - proto: SpeedLoader45_magnumAP
   entities:
   - uid: 11536

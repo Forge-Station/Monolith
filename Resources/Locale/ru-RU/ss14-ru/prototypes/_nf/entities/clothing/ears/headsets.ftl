@@ -37,7 +37,9 @@ ent-ClothingHeadsetBrigmedicCommon = { ent-ClothingHeadsetBrigmedic }
     .desc = { ent-ClothingHeadsetBrigmedic.desc }
 ent-ClothingHeadsetServiceCommon = { ent-ClothingHeadsetService }
     .desc = { ent-ClothingHeadsetService.desc }
-ent-ClothingHeadsetDoc = гарнитура ММО
-    .desc = Дает знать о случившемся ММО. Забирает ключи шифрования.
+# Forge
+ent-ClothingHeadsetDoc = гарнитура Директора TTI
+    .desc = Дает знать о случившемся директору. Забирает ключи шифрования.
 ent-ClothingHeadsetNfsdCreamMed = { ent-ClothingHeadsetNfsdCream }
     .desc = { ent-ClothingHeadsetNfsdCream.desc }
+# Forge end

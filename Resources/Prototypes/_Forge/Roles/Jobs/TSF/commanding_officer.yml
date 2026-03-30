@@ -5,14 +5,16 @@
   playTimeTracker: JobTsfCommandingOfficer
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 144000
+      time: 129600
     - !type:DepartmentTimeRequirement
-      department: Security
-      time: 90000
+      department: TSF
+      time: 108000
     - !type:RoleTimeRequirement
-      role: JobWarden
-      time: 18000
-  whitelisted: true
+      role: JobTsfExecutiveOfficer
+      time: 21600
+    - !type:RoleTimeRequirement
+      role: JobTsfSeniorOfficer
+      time: 21600
   startingGear: TsfCommandingOfficerGear
   alwaysUseSpawner: true
   icon: JobIconTsfCommandingOfficer

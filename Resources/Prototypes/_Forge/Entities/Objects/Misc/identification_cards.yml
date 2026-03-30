@@ -136,6 +136,8 @@
   - type: PresetIdCard
     job: Flunky
 
+# region Federation
+
 - type: entity
   parent: ShriffIDCard
   id: TsfCommandingOfficerIDCard
@@ -198,3 +200,47 @@
   components:
   - type: PresetIdCard
     job: TsfRecruit
+
+# region NanoTrasen
+
+- type: entity
+  parent: IDCardStandard
+  id: TTIDirectorIDCard
+  name: TTI Director ID card
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: tti
+    - state: iddoc
+  - type: PresetIdCard
+    job: DirectorOfCare
+
+- type: entity
+  parent: IDCardStandard
+  id: TTIParamedicIDCard
+  name: TTI Paramedic ID card
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: tti
+    - state: idparamed
+  - type: PresetIdCard
+    job: MdMedic
+
+- type: entity
+  parent: IDCardStandard
+  id: TTIDoctorIDCard
+  name: TTI Doctor ID card
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: tti
+    - state: idntmed
+  - type: PresetIdCard
+    job: NtMedic

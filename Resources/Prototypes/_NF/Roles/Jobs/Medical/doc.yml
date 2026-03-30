@@ -5,22 +5,21 @@
   playTimeTracker: JobDirectorOfCare
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 162000 # mono - 45 hours
+      time: 144000 # forge - 40 hours
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 72000 # mono - 20 hours
-  alternateRequirementSets: # mono
-    longerPlaytimeLessSec: # mono
-    - !type:OverallPlaytimeRequirement # mono
-      time: 234000 # mono 65 hours
+      time: 72000 # forge - 20 hours
+    - !type:RoleTimeRequirement
+      role: MdMedic
+      time: 18000 # forge - 5 hours
   startingGear: DocGear
   alwaysUseSpawner: true
   assignedCompany: MD
-  icon: "JobIconDoc"
+  icon: "JobIconDoc" # Forge
   requireAdminNotify: true
   supervisors: job-supervisors-sr # Mono
   weight: 170
-  displayWeight: 60 # Second from the top # mono - first from top
+  displayWeight: 40 # Forge
   canBeAntag: false
   accessGroups:
   - AllAccessSR
@@ -42,11 +41,12 @@
 - type: startingGear
   id: DocGear
   equipment:
-    pocket1: HypoMini
-    pocket2: MedicalAppraisalTool
+    pocket1: Hypospray # Forge
+    pocket2: OmnimedTool # Forge
   storage:
     back:
     - RubberStampDoc
     - BoxFolderMedicalDoctor
     - StationAdministrationConsoleFlatpack
     - PhoneInstrumentHigh
+    - WeaponCaseShortN1984Expedition # Forge

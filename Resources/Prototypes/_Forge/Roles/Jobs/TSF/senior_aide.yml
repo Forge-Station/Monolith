@@ -5,21 +5,17 @@
   playTimeTracker: JobTsfSeniorAide
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 28800
+      time: 48000
     - !type:DepartmentTimeRequirement
-      department: Security
-      time: 7200
-  alternateRequirementSets:
-    longerPlaytimeLessSec:
-    - !type:OverallPlaytimeRequirement
-      time: 36000
+      department: TSF
+      time: 43200
   startingGear: TsfSeniorAideGear
   icon: JobIconTsfSeniorAide
-  supervisors: job-supervisors-tsf-commanding-officer
+  supervisors: job-supervisors-tsf-officers
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   weight: 105
-  displayWeight: 16
+  displayWeight: 50
   assignedCompany: TSF
   accessGroups:
   - TsfGeneralAccess
@@ -43,11 +39,9 @@
 - type: startingGear
   id: TsfSeniorAideGear
   equipment:
-    pocket1: HyperlinkBookSpaceLaw
-    pocket2: BoxFolderClipboardPal
+    pocket1: WeaponPistolMk58
   storage:
     back:
-    - Flash
-    - BoxFolderPalBrown
-    - BoxFolderNfsdForms
-    - RubberStampPal
+    - Magazine45_ACPPistolFMJ
+    - BaseSecurityUplinkRadioOfficer
+    - RadioHandheldNF

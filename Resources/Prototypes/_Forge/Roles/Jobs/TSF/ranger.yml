@@ -5,7 +5,10 @@
   playTimeTracker: JobTsfRanger
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 36000
+      time: 72000
+    - !type:RoleTimeRequirement
+      role: JobTsfRecruit
+      time: 18000
   startingGear: TsfRangerGear
   icon: JobIconTsfRanger
   supervisors: job-supervisors-tsf-officers

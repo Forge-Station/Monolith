@@ -7853,6 +7853,13 @@ entities:
     - type: Transform
       pos: -4.5,2.5
       parent: 2
+- proto: SpawnPointNtMedic # Forge
+  entities:
+  - uid: 1900
+    components:
+    - type: Transform
+      pos: -4.5,2.5
+      parent: 2
 - proto: SpawnPointMercenary
   entities:
   - uid: 1137

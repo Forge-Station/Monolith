@@ -5,19 +5,27 @@
   playTimeTracker: JobHeadOfPersonnel
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 72000 # 20 hrs
+      time: 72000 # 20 hrs, forge
     - !type:RoleTimeRequirement
       role: JobSecurityGuard
-      time: 7200 # 2 hrs as security guard - mono
-  whitelisted: true
+      time: 21600 # 6 hrs, forge
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 21600 # 6 hours, forge
+    - !type:RoleTimeRequirement
+      role: JobStc
+      time: 7200 # 2 hrs, forge
+    - !type:RoleTimeRequirement
+      role: JobCCServiceWorker
+      time: 7200 # 2 hrs, forge
   startingGear: SrGear
   alwaysUseSpawner: true
   assignedCompany: Colonial
-  icon: "JobIconHeadOfSecurity" # Mono
+  icon: "JobIconSr" # Forge
   requireAdminNotify: true
   supervisors: job-supervisors-centcom
   weight: 170
-  displayWeight: 60 # Top
+  displayWeight: 60 # Forge
   canBeAntag: false
   accessGroups:
   - AllAccessSR

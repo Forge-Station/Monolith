@@ -138,28 +138,30 @@
     state: ren_flunky
   jobName: forge-job-name-flunky
 
+# region Federation
+
 - type: jobIcon
   parent: JobIcon
   id: JobIconTsfCommandingOfficer
   icon:
-    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
-    state: nfsdsheriff
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: tsf_com
   jobName: job-name-tsf-commanding-officer
 
 - type: jobIcon
   parent: JobIcon
   id: JobIconTsfExecutiveOfficer
   icon:
-    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
-    state: nfsdbailiff
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: tsf_exec
   jobName: job-name-tsf-executive-officer
 
 - type: jobIcon
   parent: JobIcon
   id: JobIconTsfSeniorOfficer
   icon:
-    sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
-    state: nfsdsergeant
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: tsf_sen
   jobName: job-name-tsf-senior-officer
 
 - type: jobIcon
@@ -167,7 +169,7 @@
   id: JobIconTsfSeniorAide
   icon:
     sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
-    state: publicaffairsliaison
+    state: nfsdsergeant
   jobName: job-name-tsf-senior-aide
 
 - type: jobIcon
@@ -193,3 +195,45 @@
     sprite: /Textures/_NF/Interface/Misc/job_icons.rsi
     state: nfsdcadet
   jobName: job-name-tsf-recruit
+
+# region NanoTrasen
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSr
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: nt_rep
+  jobName: job-name-sr
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconDoc
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: doc
+  jobName: job-name-doc
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconParamedic
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: paramed
+  jobName: job-name-md-medic
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconValet
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: nt_worker
+  jobName: job-name-valet
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconntmedic
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: ntmedic
+  jobName: job-name-nt-medic

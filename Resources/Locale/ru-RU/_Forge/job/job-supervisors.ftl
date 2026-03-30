@@ -8,5 +8,5 @@ job-supervisors-Draftsman = Чертёжнику
 
 job-supervisors-tsf-high-command = высшему командованию Федерации
 job-supervisors-tsf-commanding-officer = командующему офицеру
-job-supervisors-tsf-officers = командующему офицеру и старшим офицерам
-job-supervisors-tsf-rangers = рейнджерам и офицерам
+job-supervisors-tsf-officers = командующему составу
+job-supervisors-tsf-rangers = морпехам и офицерам

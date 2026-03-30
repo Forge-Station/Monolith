@@ -113,7 +113,13 @@
   id: MedicalPurpleScrubs
   equipment:
     jumpsuit: UniformScrubsColorPurple
-
+# Forge
+- type: loadout
+  id: MedicalTraumaJumpsuit
+  price: 500
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitATU
+# Forge end
 # Back
 - type: loadout
   id: MedicalDoctorBackpack

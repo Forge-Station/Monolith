@@ -12,7 +12,7 @@
   requireAdminNotify: true
   supervisors: job-supervisors-Overseer
   weight: 50
-  displayWeight: 50
+  displayWeight: 10
   assignedCompany: Renegates
   canBeAntag: false
   setPreference: true

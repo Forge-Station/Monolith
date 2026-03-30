@@ -9,10 +9,8 @@
     - !type:DepartmentTimeRequirement
       department: Renegates
       time: 64800 # 18 hours
-  alternateRequirementSets:
-    longerPlaytimeLessSec:
     - !type:RoleTimeRequirement
-      role: JobOverseer
+      role: JobForeman
       time: 21600 # 6 hours
   startingGear: DraftsmanGear
   alwaysUseSpawner: true

@@ -268,7 +268,9 @@
     attachedToSuit: true # Mono
   - type: PdaBorderColor
     borderColor: "#070707"
-    
+
+# region Federation
+
 - type: entity
   parent: SheriffPDA
   id: TsfCommandingOfficerPDA
@@ -331,3 +333,98 @@
   components:
   - type: Pda
     id: TsfRecruitIDCard
+
+# region NanoTrasen
+
+- type: entity
+  parent: BasePDA
+  id: BaseTTIPDA
+  description: A basic personal computer for access restriction and organization, manufactured in the NanoTrasen for Trauma Team workers.
+  abstract: true
+  components:
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - BountyContractsCartridge
+    - AstroNavCartridge
+  - type: Sprite
+    sprite: Forge/Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda-tti"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Icon
+    sprite: Forge/Objects/Devices/pda.rsi
+    state: pda-tti
+
+- type: entity
+  parent: BaseTTIPDA
+  id: TTIDocPDA
+  name: TTI Director PDA
+  suffix: TTI
+  components:
+  - type: Pda
+    id: TTIDirectorIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-tti
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#070707"
+
+- type: entity
+  parent: BaseTTIPDA
+  id: TTIParamedPDA
+  name: TTI Paramedic PDA
+  suffix: TTI
+  components:
+  - type: Pda
+    id: TTIParamedicIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-tti
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#070707"
+
+- type: entity
+  parent: BaseTTIPDA
+  id: TTIMedicPDA
+  name: TTI Doctor PDA
+  suffix: TTI
+  components:
+  - type: Pda
+    id: TTIDoctorIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-tti
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#070707"

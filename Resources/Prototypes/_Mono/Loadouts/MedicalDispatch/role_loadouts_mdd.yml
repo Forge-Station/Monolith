@@ -1,22 +1,23 @@
 - type: roleLoadout
   id: JobMdMedic
   groups:
-  - ContractorHead
-  - ContractorNeck
-  - MdMedicJumpsuit
+  - MdMedicHead # Forge
+  - MdMedicNeck # Forge
+  - MdMedicJumpsuit # Forge
   - MdMedicGloves
   - MdMedicBackpack
-  - ContractorOuterClothing
+  - MdMedicOuterClothing # Forge
   - ContractorShoes
   - ContractorFace
   - ContractorGlasses
-  - ContractorBelt
+  - MdMedicBelt # Forge
   - MdMedicEars
   - ContractorBoxSurvival
   - MdMedicPDA
   - MercenaryFirearm
   - MercenaryPistol
   - MercenaryMag
+  - CivGunCaseSpecial # Forge
   - ContractorWallet
   - ContractorCartridge
   - ContractorImplanter

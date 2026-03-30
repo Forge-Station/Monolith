@@ -4,6 +4,7 @@
   name: loadout-group-contractor-jumpsuit
   loadouts:
   - MedicalDoctorJumpsuit
+  - MedicalTraumaJumpsuit # Forge
   - MedicalDoctorJumpskirt
   - MedicalBlueScrubs
   - MedicalGreenScrubs
@@ -30,16 +31,15 @@
   - MdMedicClothingModsuitParamedicPowerCell
   subgroups:
   - DocBackpack
-  - ContractorBackpack
   fallbacks:
   - DocClothingBackpackMedical
 
 - type: loadoutGroup
   id: MdMedicPDA
   name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
   loadouts:
-  - MedicalDoctorPDA
-  - ContractorSeniorPhysicianPDA
+  - MdMedicMedicalPDA
   fallbacks:
   - MdMedicMedicalPDA
 

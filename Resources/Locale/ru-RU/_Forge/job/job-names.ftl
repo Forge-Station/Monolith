@@ -1,11 +1,13 @@
 # departament's
 department-Empire = Священная Империя Вермиллионов
 department-Renegates = Восставшие колонии Ренегатов
+department-TSF = Транс-Солнечная Федерация
 
 # Outpost
 forge-job-name-outpostmedic = Врач АФ
 forge-job-name-outpostengineer = Инженер АФ
 forge-job-name-outpostservice = Работник АФ
+job-name-service-worker = Корпоративный Рабочий НТ
 # Syndicate
 forge-job-name-syndicommander = Командир
 forge-job-name-medsyn = Санитар Синдиката
@@ -15,6 +17,8 @@ forge-job-name-smugglerbodyguard = Телохранитель
 forge-job-name-stormtrooper = Штурмовик
 # paraMedical
 forge-job-name-paramedical = Парамедик
+job-name-md-medic = Парамедик TTI
+job-name-nt-medic = Врач TTI
 
 # Managment of the Sectoral Fleet
 job-title-msf-admiral = адмирал Флота
@@ -50,17 +54,16 @@ forge-job-name-flunky = Шестёрка
 JobTsfCommandingOfficer = Командующий Офицер
 JobTsfExecutiveOfficer = Исполнительный Офицер
 JobTsfSeniorOfficer = Старший Офицер
-JobTsfSeniorAide = Старший помощник
+JobTsfSeniorAide = Младший Офицер
 JobTsfAmbassador = Посол Федерации
-JobTsfRanger = Рейнджер
+JobTsfRanger = Морпех
 JobTsfRecruit = Новобранец
-department-TSF = Транс-Солнечная Федерация
 job-name-tsf-commanding-officer = Командующий Офицер
 job-name-tsf-senior-officer = Старший Офицер
 job-name-tsf-executive-officer = Исполнительный Офицер
-job-name-tsf-senior-aide = Старший помощник
+job-name-tsf-senior-aide = Младший Офицер
 job-name-tsf-ambassador = Посол Федерации
-job-name-tsf-ranger = Рейнджер
+job-name-tsf-ranger = Морпех
 job-name-tsf-recruit = Новобранец
 JobTsfEngineer = Инженер ТСФ
 job-name-tsf-engineer = Инженер ТСФ

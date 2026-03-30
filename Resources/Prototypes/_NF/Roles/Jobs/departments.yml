@@ -14,15 +14,18 @@
   id: Frontier
   name: department-Frontier
   description: department-NF-description
-  color: "#334E6D"
-  weight: 50 # accounted for in jobs
+  color: "#334e6d" # Forge
+  weight: 80 # Forge
   roles:
   - StationRepresentative
   - StationTrafficController
   - CCServiceWorker # nyano
-  - NFJanitor
-  - MailCarrier # nyano
+#  - NFJanitor
+#  - MailCarrier # nyano
   - SecurityGuard
+  - DirectorOfCare
+  - MdMedic
+  - NtMedic
 
 # - type: department
   # id: Antag

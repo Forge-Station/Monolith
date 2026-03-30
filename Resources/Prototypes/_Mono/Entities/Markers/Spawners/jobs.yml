@@ -98,6 +98,7 @@
 
 - type: entity
   id: SpawnPointMdMedic
+  suffix: TTI # Forge
   parent: SpawnPointJobBase
   name: Emergency Responder
   components:
@@ -108,6 +109,22 @@
     layers:
       - state: green
       - state: medic
+
+# Forge
+- type: entity
+  id: SpawnPointNtMedic
+  suffix: TTI
+  parent: SpawnPointJobBase
+  name: TTI Doctor
+  components:
+  - type: SpawnPoint
+    job_id: NtMedic
+  - type: Sprite
+    sprite: _NF/Markers/jobs.rsi
+    layers:
+      - state: green
+      - state: medic
+# Forge end
 
 #TSF
 

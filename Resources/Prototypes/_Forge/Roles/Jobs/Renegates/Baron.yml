@@ -21,7 +21,7 @@
   requireAdminNotify: true
   supervisors: job-supervisors-nobody
   weight: 50
-  displayWeight: 50
+  displayWeight: 60
   assignedCompany: Renegates
   canBeAntag: false
   setPreference: true

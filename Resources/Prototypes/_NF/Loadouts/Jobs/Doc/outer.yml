@@ -1,0 +1,17 @@
+# Forge all
+- type: loadout
+  id: DocOuterClothingTraumaT53
+  price: 50000
+  equipment:
+    outerClothing: ClothingOuterHardsuitTraumaLeader
+
+- type: loadoutGroup
+  id: DocOuterClothing
+  name: loadout-group-contractor-outerclothing
+  minLimit: 1
+  loadouts:
+  - MdMedicOuterClothingEVA
+  - DocOuterClothingTraumaT53
+  - MdMedicOuterClothingLightHardsuit
+  fallbacks:
+  - MdMedicOuterClothingEVA

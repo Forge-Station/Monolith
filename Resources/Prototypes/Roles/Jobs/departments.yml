@@ -80,9 +80,10 @@
   - Sheriff  # Frontier
   - StationTrafficController # Frontier
   - TsfCommandingOfficer #Forge Change
-  - DirectorOfCare # Mono
+  # - DirectorOfCare # Mono # Forge-Change-delete
   primary: false
   weight: 100
+  editorHidden: true #Forge Change
 
 - type: department
   id: Engineering
@@ -97,11 +98,13 @@
   id: Medical
   name: department-Medical
   description: department-Medical-description
-  color: "#52B4E9"
+  color: "#009e79"
   weight: 0
+  editorHidden: true #Forge Change
   roles: # Mono
   - DirectorOfCare # Mono
   - MdMedic # Mono
+  - NtMedic # Forge
 
 - type: department
   id: Security

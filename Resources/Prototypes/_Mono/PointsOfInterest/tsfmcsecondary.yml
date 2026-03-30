@@ -44,7 +44,6 @@
         - type: StationJobs
           availableJobs:
             #Forge Change
-            TsfSeniorOfficer: [ 0, 1 ]
             TsfSeniorAide: [ 0, 1 ]
             TsfRanger: [ -1, -1 ]
             TsfRecruit: [ -1, -1 ]

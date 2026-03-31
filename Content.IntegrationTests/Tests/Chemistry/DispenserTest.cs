@@ -25,6 +25,10 @@ public sealed class DispenserTest : InteractionTest
 
         // Open BUI
         await Activate();
+        for (var i = 0; i < 10 && !IsUiOpen(ReagentDispenserUiKey.Key); i++)
+        {
+            await RunTicks(1);
+        }
         Assert.That(IsUiOpen(ReagentDispenserUiKey.Key));
 
         // Eject beaker via BUI.

@@ -79,13 +79,15 @@ public sealed class ShipShieldOverlay : Overlay
         // If "Transforms" ever get deprecated go ahead and check how DebugPHysicsSystem is drawing chains in this hellworld future
         var transform = _physics.GetPhysicsTransform(uid);
 
-        for (int i = 1; i < chain.Count; i++)
+        for (var i = 0; i < chain.Count; i++)
         {
+            var next = (i + 1) % chain.Count;
+
             // top left corner
-            var leftVertex = VertexToWorldPos(chain.Vertices[i - 1], transform);
+            var leftVertex = VertexToWorldPos(chain.Vertices[i], transform);
 
             // top right corner
-            var rightVertex = VertexToWorldPos(chain.Vertices[i], transform);
+            var rightVertex = VertexToWorldPos(chain.Vertices[next], transform);
 
             // bottom left corner
             var leftCorner = Corner(localPos, leftVertex, transform);

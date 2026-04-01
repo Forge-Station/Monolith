@@ -95,6 +95,64 @@ namespace Content.Server.Atmos.EntitySystems
 
             runIndex = 0;
         }
+
+        private enum ChunkRunType : byte
+        {
+            Revalidate,
+            Active,
+            HighPressure,
+            Hotspot,
+            Superconductivity,
+        }
+
+        private void BeginRunChunks(GridAtmosphereComponent atmosphere, EntityUid gridUid, ChunkRunType type)
+        {
+            atmosphere.CurrentRunChunks.Clear();
+
+            foreach (var (chunkIndex, chunkState) in atmosphere.Chunks)
+            {
+                var hasWork = type switch
+                {
+                    ChunkRunType.Revalidate => chunkState.InvalidatedCoords.Count > 0,
+                    ChunkRunType.Active => chunkState.ActiveTiles.Count > 0 || chunkState.InvalidatedCoords.Count > 0,
+                    ChunkRunType.HighPressure => chunkState.HighPressureTiles.Count > 0,
+                    ChunkRunType.Hotspot => chunkState.HotspotTiles.Count > 0,
+                    ChunkRunType.Superconductivity => chunkState.SuperconductivityTiles.Count > 0,
+                    _ => false,
+                };
+
+                if (!hasWork)
+                    continue;
+
+                if (type != ChunkRunType.Revalidate && !ShouldProcessChunk(gridUid, atmosphere, chunkIndex, chunkState))
+                    continue;
+
+                atmosphere.CurrentRunChunks.Add(chunkIndex);
+            }
+
+            atmosphere.CurrentRunChunkIndex = 0;
+        }
+
+        private void BeginRunTilesFromChunks(
+            GridAtmosphereComponent atmosphere,
+            Func<AtmosChunkState, HashSet<TileAtmosphere>> selector)
+        {
+            atmosphere.CurrentRunTiles.Clear();
+
+            for (var i = 0; i < atmosphere.CurrentRunChunks.Count; i++)
+            {
+                var chunkIndex = atmosphere.CurrentRunChunks[i];
+                if (!TryGetChunkState(atmosphere, chunkIndex, out var chunk) || chunk == null)
+                    continue;
+
+                foreach (var tile in selector(chunk))
+                {
+                    atmosphere.CurrentRunTiles.Add(tile);
+                }
+            }
+
+            atmosphere.CurrentRunTileIndex = 0;
+        }
         // Forge-Change-end
         private TileAtmosphere GetOrNewTile(EntityUid owner, GridAtmosphereComponent atmosphere, Vector2i index, bool invalidateNew = true)
         {
@@ -103,10 +161,11 @@ namespace Content.Server.Atmos.EntitySystems
                 return tile;
 
             if (invalidateNew)
-                atmosphere.InvalidatedCoords.Add(index);
+                AddInvalidatedTile(atmosphere, index);
 
             tile.GridIndex = owner;
             tile.GridIndices = index;
+            TouchChunk(atmosphere, index);
             return tile;
         }
 
@@ -133,16 +192,28 @@ namespace Content.Server.Atmos.EntitySystems
 
             if (!atmosphere.ProcessingPaused)
             {
+                BeginRunChunks(atmosphere, uid, ChunkRunType.Revalidate);
                 atmosphere.CurrentRunInvalidatedTiles.Clear();
                 atmosphere.CurrentRunInvalidatedTiles.EnsureCapacity(atmosphere.InvalidatedCoords.Count);
-                foreach (var indices in atmosphere.InvalidatedCoords)
-                {
-                    var tile = GetOrNewTile(uid, atmosphere, indices, invalidateNew: false);
-                    atmosphere.CurrentRunInvalidatedTiles.Enqueue(tile);
 
-                    // Update tile.IsSpace and tile.MapAtmosphere, and tile.AirtightData.
-                    UpdateTileData(ent, mapAtmos, tile);
+                for (var i = 0; i < atmosphere.CurrentRunChunks.Count; i++)
+                {
+                    var chunkIndex = atmosphere.CurrentRunChunks[i];
+                    if (!TryGetChunkState(atmosphere, chunkIndex, out var chunk) || chunk == null)
+                        continue;
+
+                    foreach (var indices in chunk.InvalidatedCoords)
+                    {
+                        var tile = GetOrNewTile(uid, atmosphere, indices, invalidateNew: false);
+                        atmosphere.CurrentRunInvalidatedTiles.Enqueue(tile);
+
+                        // Update tile.IsSpace and tile.MapAtmosphere, and tile.AirtightData.
+                        UpdateTileData(ent, mapAtmos, tile);
+                    }
+
+                    chunk.InvalidatedCoords.Clear();
                 }
+
                 atmosphere.InvalidatedCoords.Clear();
 
                 if (_simulationStopwatch.Elapsed.TotalMilliseconds >= AtmosMaxProcessTime)
@@ -226,6 +297,15 @@ namespace Content.Server.Atmos.EntitySystems
                 if (!connected)
                 {
                     RemoveActiveTile(atmos, tile);
+                    if (TryGetChunkState(atmos, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
+                    {
+                        chunk.HotspotTiles.Remove(tile);
+                        chunk.HighPressureTiles.Remove(tile);
+                        chunk.SuperconductivityTiles.Remove(tile);
+                    }
+                    atmos.HotspotTiles.Remove(tile);
+                    atmos.HighPressureDelta.Remove(tile);
+                    atmos.SuperconductivityTiles.Remove(tile);
                     atmos.Tiles.Remove(tile.GridIndices);
                 }
             }
@@ -350,7 +430,17 @@ namespace Content.Server.Atmos.EntitySystems
             processed = 0; // Forge-Change
             var atmosphere = ent.Comp1;
             if (!atmosphere.ProcessingPaused)
-                BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.ActiveTiles); // Forge-Change
+            {
+                if (AtmosForceFullGridDebug)
+                {
+                    BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.ActiveTiles);
+                }
+                else
+                {
+                    BeginRunChunks(atmosphere, ent.Owner, ChunkRunType.Active);
+                    BeginRunTilesFromChunks(atmosphere, chunk => chunk.ActiveTiles);
+                }
+            }
 
             var number = 0;
             while (atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count) // Forge-Change
@@ -379,7 +469,17 @@ namespace Content.Server.Atmos.EntitySystems
             processed = 0; // Forge-Change
             var atmosphere = ent.Comp1;
             if(!atmosphere.ProcessingPaused)
-                BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.ActiveTiles); // Forge-Change
+            {
+                if (AtmosForceFullGridDebug)
+                {
+                    BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.ActiveTiles);
+                }
+                else
+                {
+                    BeginRunChunks(atmosphere, ent.Owner, ChunkRunType.Active);
+                    BeginRunTilesFromChunks(atmosphere, chunk => chunk.ActiveTiles);
+                }
+            }
 
             var number = 0;
             while (atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count) // Forge-Change
@@ -451,7 +551,17 @@ namespace Content.Server.Atmos.EntitySystems
             processed = 0; // Forge-Change
             var atmosphere = ent.Comp;
             if (!atmosphere.ProcessingPaused)
-                BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.HighPressureDelta); // Forge-Change
+            {
+                if (AtmosForceFullGridDebug)
+                {
+                    BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.HighPressureDelta);
+                }
+                else
+                {
+                    BeginRunChunks(atmosphere, ent.Owner, ChunkRunType.HighPressure);
+                    BeginRunTilesFromChunks(atmosphere, chunk => chunk.HighPressureTiles);
+                }
+            }
 
             // Note: This is still processed even if space wind is turned off since this handles playing the sounds.
 
@@ -470,6 +580,8 @@ namespace Content.Server.Atmos.EntitySystems
                 tile.PressureDirection = AtmosDirection.Invalid;
                 tile.PressureSpecificTarget = null;
                 atmosphere.HighPressureDelta.Remove(tile);
+                if (TryGetChunkState(atmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
+                    chunk.HighPressureTiles.Remove(tile);
                 processed++; // Forge-Change
 
                 if (number++ < LagCheckIterations)
@@ -491,7 +603,17 @@ namespace Content.Server.Atmos.EntitySystems
             processed = 0; // Forge-Change
             var atmosphere = ent.Comp1;
             if(!atmosphere.ProcessingPaused)
-                BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.HotspotTiles); // Forge-Change
+            {
+                if (AtmosForceFullGridDebug)
+                {
+                    BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.HotspotTiles);
+                }
+                else
+                {
+                    BeginRunChunks(atmosphere, ent.Owner, ChunkRunType.Hotspot);
+                    BeginRunTilesFromChunks(atmosphere, chunk => chunk.HotspotTiles);
+                }
+            }
 
             var number = 0;
             while (atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count) // Forge-Change
@@ -514,11 +636,22 @@ namespace Content.Server.Atmos.EntitySystems
             return true;
         }
 
-        private bool ProcessSuperconductivity(GridAtmosphereComponent atmosphere, out int processed) // Forge-Change
+        private bool ProcessSuperconductivity(Entity<GridAtmosphereComponent> ent, out int processed) // Forge-Change
         {
             processed = 0; // Forge-Change
+            var atmosphere = ent.Comp;
             if(!atmosphere.ProcessingPaused)
-                BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.SuperconductivityTiles); // Forge-Change
+            {
+                if (AtmosForceFullGridDebug)
+                {
+                    BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.SuperconductivityTiles);
+                }
+                else
+                {
+                    BeginRunChunks(atmosphere, ent.Owner, ChunkRunType.Superconductivity);
+                    BeginRunTilesFromChunks(atmosphere, chunk => chunk.SuperconductivityTiles);
+                }
+            }
 
             var number = 0;
             while (atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count) // Forge-Change
@@ -641,6 +774,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             if (!_simulationPaused)
             {
+                RefreshInterestChunks();
                 _currentRunAtmosphereIndex = 0;
                 _currentRunAtmosphere.Clear();
 
@@ -787,7 +921,7 @@ namespace Content.Server.Atmos.EntitySystems
                     case AtmosphereProcessingState.Superconductivity:
                     {
                         var phaseStart = _simulationStopwatch.Elapsed.TotalMilliseconds; // Forge-Change
-                        var success = ProcessSuperconductivity(atmosphere, out var processed); // Forge-Change
+                        var success = ProcessSuperconductivity((ent, ent), out var processed); // Forge-Change
                         ObservePhaseMetrics(AtmosphereProcessingState.Superconductivity, _simulationStopwatch.Elapsed.TotalMilliseconds - phaseStart, processed); // Forge-Change
                         if (!success) // Forge-Change
                         {

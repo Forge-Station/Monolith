@@ -34,7 +34,10 @@ namespace Content.Server.Atmos.EntitySystems
             var gridAtmosphere = ent.Comp1;
             if (!tile.Hotspot.Valid)
             {
-                gridAtmosphere.HotspotTiles.Remove(tile);
+                if (TryGetChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
+                    RemoveChunkTile(gridAtmosphere.HotspotTiles, chunk.HotspotTiles, tile);
+                else
+                    gridAtmosphere.HotspotTiles.Remove(tile);
                 return;
             }
 
@@ -185,7 +188,8 @@ namespace Content.Server.Atmos.EntitySystems
                 };
 
                 AddActiveTile(gridAtmosphere, tile);
-                gridAtmosphere.HotspotTiles.Add(tile);
+                var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
+                AddChunkTile(gridAtmosphere.HotspotTiles, chunk.HotspotTiles, tile);
             }
         }
 

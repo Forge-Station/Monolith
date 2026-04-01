@@ -48,6 +48,22 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
         "forge_atmos_hotspots",
         "Tiles with active hotspot simulation.");
 
+    private static readonly Gauge AtmosChunkCountGauge = Metrics.CreateGauge(
+        "forge_atmos_chunks_total",
+        "Total atmos chunks tracked in all grids.");
+
+    private static readonly Gauge AtmosDirtyChunkCountGauge = Metrics.CreateGauge(
+        "forge_atmos_chunks_dirty",
+        "Atmos chunks with pending revalidation work.");
+
+    private static readonly Gauge AtmosHotChunkCountGauge = Metrics.CreateGauge(
+        "forge_atmos_chunks_hot",
+        "Atmos chunks with active simulation sets.");
+
+    private static readonly Gauge AtmosColdChunkCountGauge = Metrics.CreateGauge(
+        "forge_atmos_chunks_cold",
+        "Atmos chunks that are idle this sample.");
+
     private const float MetricsUpdateInterval = 30f;
     private float _metricsTimer;
     // Forge-Change-end
@@ -178,6 +194,10 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
         var activeTiles = 0;
         var invalidated = 0;
         var hotspots = 0;
+        var chunks = 0;
+        var dirtyChunks = 0;
+        var hotChunks = 0;
+        var coldChunks = 0;
 
         var query = EntityQueryEnumerator<GridAtmosphereComponent>();
         while (query.MoveNext(out _, out var atmos))
@@ -187,6 +207,24 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
             activeTiles += atmos.ActiveTiles.Count;
             invalidated += atmos.InvalidatedCoords.Count;
             hotspots += atmos.HotspotTiles.Count;
+            chunks += atmos.Chunks.Count;
+
+            foreach (var chunk in atmos.Chunks.Values)
+            {
+                var isDirty = chunk.InvalidatedCoords.Count > 0;
+                var isHot = chunk.ActiveTiles.Count > 0
+                    || chunk.HighPressureTiles.Count > 0
+                    || chunk.HotspotTiles.Count > 0
+                    || chunk.SuperconductivityTiles.Count > 0;
+
+                if (isDirty)
+                    dirtyChunks++;
+
+                if (isHot)
+                    hotChunks++;
+                else
+                    coldChunks++;
+            }
         }
 
         AtmosGridCountGauge.Set(grids);
@@ -194,6 +232,10 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
         AtmosActiveTileCountGauge.Set(activeTiles);
         AtmosInvalidatedTileCountGauge.Set(invalidated);
         AtmosHotspotTileCountGauge.Set(hotspots);
+        AtmosChunkCountGauge.Set(chunks);
+        AtmosDirtyChunkCountGauge.Set(dirtyChunks);
+        AtmosHotChunkCountGauge.Set(hotChunks);
+        AtmosColdChunkCountGauge.Set(coldChunks);
     }
     // Forge-Change-end
 }

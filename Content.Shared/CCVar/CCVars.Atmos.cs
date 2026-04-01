@@ -129,6 +129,18 @@ public sealed partial class CCVars
         CVarDef.Create("atmos.tickrate", 15f, CVar.SERVERONLY);
 
     /// <summary>
+    ///     Number of atmos cycles between updates for chunks outside player interest.
+    /// </summary>
+    public static readonly CVarDef<int> AtmosColdChunkRateDivider =
+        CVarDef.Create("atmos.cold_chunk_rate_divider", 4, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     If true, bypasses dirty-chunk scheduler and processes full grid sets.
+    /// </summary>
+    public static readonly CVarDef<bool> AtmosForceFullGridDebug =
+        CVarDef.Create("atmos.force_full_grid_debug", false, CVar.SERVERONLY);
+
+    /// <summary>
     ///     Scale factor for how fast things happen in our atmosphere
     ///     simulation compared to real life. 1x means pumps run at 1x
     ///     speed. Players typically expect things to happen faster

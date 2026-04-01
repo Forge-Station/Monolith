@@ -80,8 +80,10 @@ public partial class AtmosphereSystem
 
     public void InvalidateTile(Entity<GridAtmosphereComponent?> entity, Vector2i tile)
     {
-        if (_atmosQuery.Resolve(entity.Owner, ref entity.Comp, false))
-            entity.Comp.InvalidatedCoords.Add(tile);
+        if (!_atmosQuery.Resolve(entity.Owner, ref entity.Comp, false))
+            return;
+
+        AddInvalidatedTile(entity.Comp, tile);
     }
 
     public GasMixture?[]? GetTileMixtures(

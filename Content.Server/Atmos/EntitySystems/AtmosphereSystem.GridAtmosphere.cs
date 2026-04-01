@@ -103,8 +103,8 @@ public sealed partial class AtmosphereSystem
                 // That looks bad, of course. We want to avoid that! Anyway that's a bit more complicated so out of scope.
 
                 // Invalidate the tile, it's redundant but redundancy is good! Also HashSet so really, no duplicates.
-                originalGridAtmos.InvalidatedCoords.Add(indices);
-                newGridAtmos.InvalidatedCoords.Add(indices);
+                AddInvalidatedTile(originalGridAtmos, indices);
+                AddInvalidatedTile(newGridAtmos, indices);
             }
         }
     }
@@ -323,13 +323,13 @@ public sealed partial class AtmosphereSystem
 
         foreach (var indices in atmos.Tiles.Keys)
         {
-            atmos.InvalidatedCoords.Add(indices);
+            AddInvalidatedTile(atmos, indices);
         }
 
         var enumerator = _map.GetAllTilesEnumerator(uid, grid);
         while (enumerator.MoveNext(out var tile))
         {
-            atmos.InvalidatedCoords.Add(tile.Value.GridIndices);
+            AddInvalidatedTile(atmos, tile.Value.GridIndices);
         }
     }
 

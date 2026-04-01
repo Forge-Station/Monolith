@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
 using Content.Server.Destructible;
 using Content.Server.NPC.Systems;
+using Content.Shared.CCVar;
 using Content.Shared.Access.Components;
 using Content.Shared.Administration;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Doors.Components;
 using Content.Shared.NPC;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -41,6 +43,7 @@ namespace Content.Server.NPC.Pathfinding
          */
 
         [Dependency] private readonly IAdminManager _adminManager = default!;
+        [Dependency] private readonly IConfigurationManager _configManager = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly IParallelManager _parallel = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -76,6 +79,18 @@ namespace Content.Server.NPC.Pathfinding
         private EntityQuery<MapGridComponent> _gridQuery;
         private EntityQuery<TransformComponent> _xformQuery;
 
+        private float _pathCacheTtl;
+        private float _pathCacheTargetThreshold;
+
+        [ViewVariables]
+        public int LastFrameQueueDepth { get; private set; }
+
+        [ViewVariables]
+        public int LastFrameProcessedRequests { get; private set; }
+
+        [ViewVariables]
+        public int LastFrameCompletedRequests { get; private set; }
+
         public override void Initialize()
         {
             base.Initialize();
@@ -89,6 +104,8 @@ namespace Content.Server.NPC.Pathfinding
             _xformQuery = GetEntityQuery<TransformComponent>();
 
             _playerManager.PlayerStatusChanged += OnPlayerChange;
+            Subs.CVar(_configManager, CCVars.NPCPathCacheTTL, value => _pathCacheTtl = value, true);
+            Subs.CVar(_configManager, CCVars.NPCPathCacheTargetThreshold, value => _pathCacheTargetThreshold = value, true);
             InitializeGrid();
             SubscribeNetworkEvent<RequestPathfindingDebugMessage>(OnBreadcrumbs);
         }
@@ -111,8 +128,11 @@ namespace Content.Server.NPC.Pathfinding
 
             UpdateGrid(options);
             _stopwatch.Restart();
+            LastFrameQueueDepth = _pathRequests.Count;
             var amount = Math.Min(PathTickLimit, _pathRequests.Count);
             var results = ArrayPool<PathResult>.Shared.Rent(amount);
+            LastFrameProcessedRequests = amount;
+            LastFrameCompletedRequests = 0;
 
 
             Parallel.For(0, amount, options, i =>
@@ -168,6 +188,7 @@ namespace Content.Server.NPC.Pathfinding
                     case PathResult.PartialPath:
                     case PathResult.Path:
                     case PathResult.NoPath:
+                        LastFrameCompletedRequests++;
                         SendDebug(path);
                         // Don't use RemoveSwap because we still want to try and process them in order.
                         _pathRequests.RemoveAt(resultIndex);
@@ -181,6 +202,23 @@ namespace Content.Server.NPC.Pathfinding
             }
 
             ArrayPool<PathResult>.Shared.Return(results);
+        }
+
+        public bool CanReuseRecentPath(EntityCoordinates requestedTarget, EntityCoordinates cachedTarget, TimeSpan cachedAt)
+        {
+            if (_pathCacheTtl <= 0f || _pathCacheTargetThreshold <= 0f)
+                return false;
+
+            if (!requestedTarget.IsValid(EntityManager) || !cachedTarget.IsValid(EntityManager))
+                return false;
+
+            if (_timing.CurTime - cachedAt > TimeSpan.FromSeconds(_pathCacheTtl))
+                return false;
+
+            if (!requestedTarget.TryDistance(EntityManager, cachedTarget, out var targetDelta))
+                return false;
+
+            return targetDelta <= _pathCacheTargetThreshold;
         }
 
         /// <summary>

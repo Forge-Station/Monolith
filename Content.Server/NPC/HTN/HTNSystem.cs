@@ -14,6 +14,8 @@ using JetBrains.Annotations;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Map; // Mono
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.Worldgen; // Frontier
 using Content.Server.Worldgen.Components; // Frontier
@@ -25,7 +27,9 @@ namespace Content.Server.NPC.HTN;
 public sealed class HTNSystem : EntitySystem
 {
     [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
     [Dependency] private readonly NPCUtilitySystem _utility = default!;
     // Frontier
@@ -156,10 +160,12 @@ public sealed class HTNSystem : EntitySystem
         component.PlanAccumulator = 0f;
     }
 
-    public void UpdateNPC(ref int count, int maxUpdates, float frameTime)
+    public HTNUpdateStats UpdateNPC(ref int count, int maxUpdates, float frameTime)
     {
         _planQueue.Process();
         var query = EntityQueryEnumerator<ActiveNPCComponent, HTNComponent>();
+        var stats = new HTNUpdateStats();
+        var curTime = _timing.CurTime;
 
         // Move ahead "count" entries in the query.
         // This is to ensure that if we didn't process all the npcs the first time,
@@ -177,7 +183,13 @@ public sealed class HTNSystem : EntitySystem
             if (updates >= maxUpdates)
             {
                 // Intentional return. We don't want to go to the end logic and reset count.
-                return;
+                return stats;
+            }
+
+            if (!CanUpdateNow(comp, curTime))
+            {
+                stats.SkippedByCadence++;
+                continue;
             }
 
             if (comp.PlanningJob != null)
@@ -264,13 +276,45 @@ public sealed class HTNSystem : EntitySystem
             }
 
             Update(comp, frameTime);
+            ScheduleNextUpdate(comp, curTime);
             count++;
             updates++;
+            stats.Processed++;
         }
 
         // only reset our counter back to 0 if we finish iterating.
         // otherwise it lets us know where we left off.
         count = 0;
+        return stats;
+    }
+
+    private bool CanUpdateNow(HTNComponent component, TimeSpan curTime)
+    {
+        if (component.AiUpdateInterval <= 0f)
+            return true;
+
+        return curTime >= component.NextAiUpdateAt;
+    }
+
+    private void ScheduleNextUpdate(HTNComponent component, TimeSpan curTime)
+    {
+        var interval = Math.Max(0f, component.AiUpdateInterval);
+        var jitter = Math.Max(0f, component.AiUpdateJitter);
+
+        if (interval <= 0f)
+        {
+            component.NextAiUpdateAt = curTime;
+            return;
+        }
+
+        var offset = interval;
+        if (jitter > 0f)
+        {
+            offset += _random.NextFloat(-jitter, jitter);
+            offset = Math.Max(0.01f, offset);
+        }
+
+        component.NextAiUpdateAt = curTime + TimeSpan.FromSeconds(offset);
     }
 
     private void AppendDebugText(HTNTask task, StringBuilder text, List<int> planBtr, List<int> btr, ref int level)
@@ -536,4 +580,10 @@ public enum HTNOperatorStatus : byte
     /// Was a better plan than this found?
     /// </summary>
     BetterPlan,
+}
+
+public struct HTNUpdateStats
+{
+    public int Processed;
+    public int SkippedByCadence;
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.NPC.Components;
 using Content.Server.NPC.HTN;
@@ -11,6 +12,7 @@ using Content.Shared.NPC;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Server.NPC.Systems
 {
@@ -25,6 +27,7 @@ namespace Content.Server.NPC.Systems
         [Dependency] private readonly NPCSteeringSystem _steering = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private readonly IGameTiming _timing = default!;
 
         /// <summary>
         /// Whether any NPCs are allowed to run at all.
@@ -40,6 +43,27 @@ namespace Content.Server.NPC.Systems
         private float _playerDistanceCheckTimer;
         private const float PlayerDistanceCheckInterval = 2.0f; // Check every 2 seconds
 
+        private float _lodNearDistance;
+        private float _lodMidDistance;
+        private float _lodFarDistance;
+        private float _aiNearUpdateInterval;
+        private float _aiMidUpdateInterval;
+        private float _aiFarUpdateInterval;
+        private float _aiUpdateJitter;
+        private float _pathNearRepathInterval;
+        private float _pathMidRepathInterval;
+        private float _pathFarRepathInterval;
+        private float _pathRepathJitter;
+
+        [ViewVariables]
+        public int LastFrameHtnUpdates { get; private set; }
+
+        [ViewVariables]
+        public int LastFrameHtnCadenceSkips { get; private set; }
+
+        [ViewVariables]
+        public int MaxFrameHtnUpdates { get; private set; }
+
         /// <inheritdoc />
         public override void Initialize()
         {
@@ -49,6 +73,17 @@ namespace Content.Server.NPC.Systems
             Subs.CVar(_configurationManager, CCVars.NPCMaxUpdates, obj => _maxUpdates = obj, true);
             Subs.CVar(_configurationManager, CCVars.NPCPauseWhenNoPlayersInRange, value => _pauseWhenNoPlayersInRange = value, true);
             Subs.CVar(_configurationManager, CCVars.NPCPlayerPauseDistance, value => _playerPauseDistance = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCAiLodNearDistance, value => _lodNearDistance = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCAiLodMidDistance, value => _lodMidDistance = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCAiLodFarDistance, value => _lodFarDistance = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCAiNearUpdateInterval, value => _aiNearUpdateInterval = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCAiMidUpdateInterval, value => _aiMidUpdateInterval = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCAiFarUpdateInterval, value => _aiFarUpdateInterval = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCAiUpdateJitter, value => _aiUpdateJitter = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCPathNearRepathInterval, value => _pathNearRepathInterval = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCPathMidRepathInterval, value => _pathMidRepathInterval = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCPathFarRepathInterval, value => _pathFarRepathInterval = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCPathRepathJitter, value => _pathRepathJitter = value, true);
         }
 
         public void OnPlayerNPCAttach(EntityUid uid, HTNComponent component, PlayerAttachedEvent args)
@@ -113,6 +148,7 @@ namespace Content.Server.NPC.Systems
 
             Log.Debug($"Waking {ToPrettyString(uid)}");
             EnsureComp<ActiveNPCComponent>(uid);
+            InitializeCadence(uid, component);
         }
 
         public void SleepNPC(EntityUid uid, HTNComponent? component = null)
@@ -158,7 +194,10 @@ namespace Content.Server.NPC.Systems
             }
 
             // Add your system here.
-            _htn.UpdateNPC(ref _count, _maxUpdates, frameTime);
+            var stats = _htn.UpdateNPC(ref _count, _maxUpdates, frameTime);
+            LastFrameHtnUpdates = stats.Processed;
+            LastFrameHtnCadenceSkips = stats.SkippedByCadence;
+            MaxFrameHtnUpdates = Math.Max(MaxFrameHtnUpdates, LastFrameHtnUpdates);
         }
 
         private void CheckPlayerDistancesAndPauseNPCs()
@@ -181,6 +220,7 @@ namespace Content.Server.NPC.Systems
 
                 var npcCoords = npcTransform.Coordinates;
                 var hasNearbyPlayer = false;
+                var nearestDistance = float.MaxValue;
 
                 // Check distance to all players.
                 var allPlayerData = _playerManager.GetAllPlayerData();
@@ -200,8 +240,12 @@ namespace Content.Server.NPC.Systems
                         distance <= minDistance)
                     {
                         hasNearbyPlayer = true;
+                        nearestDistance = Math.Min(nearestDistance, distance);
                         break;
                     }
+
+                    if (npcCoords.TryDistance(EntityManager, playerCoords, out distance))
+                        nearestDistance = Math.Min(nearestDistance, distance);
                 }
 
                 var isAwake = IsAwake(npcUid, htn);
@@ -222,7 +266,71 @@ namespace Content.Server.NPC.Systems
                         WakeNPC(npcUid, htn);
                     }
                 }
+
+                ApplyLodSettings(npcUid, htn, nearestDistance);
             }
+        }
+
+        private void InitializeCadence(EntityUid uid, HTNComponent component)
+        {
+            component.UpdatePhaseSeed = uid.GetHashCode();
+            if (component.AiUpdateInterval <= 0f)
+            {
+                component.NextAiUpdateAt = _timing.CurTime;
+                return;
+            }
+
+            var phase = (Math.Abs(component.UpdatePhaseSeed) % 1000) / 1000f;
+            component.NextAiUpdateAt = _timing.CurTime + TimeSpan.FromSeconds(component.AiUpdateInterval * phase);
+        }
+
+        private void ApplyLodSettings(EntityUid uid, HTNComponent htn, float nearestDistance)
+        {
+            var tier = GetLodTier(nearestDistance);
+            float aiInterval;
+            float pathInterval;
+
+            switch (tier)
+            {
+                case NpcAiLodTier.Near:
+                    aiInterval = _aiNearUpdateInterval;
+                    pathInterval = _pathNearRepathInterval;
+                    break;
+                case NpcAiLodTier.Mid:
+                    aiInterval = _aiMidUpdateInterval;
+                    pathInterval = _pathMidRepathInterval;
+                    break;
+                default:
+                    aiInterval = _aiFarUpdateInterval;
+                    pathInterval = _pathFarRepathInterval;
+                    break;
+            }
+
+            if (nearestDistance > _lodFarDistance)
+            {
+                aiInterval *= 1.5f;
+                pathInterval *= 1.5f;
+            }
+
+            htn.AiUpdateInterval = Math.Max(0f, aiInterval);
+            htn.AiUpdateJitter = Math.Max(0f, _aiUpdateJitter);
+
+            if (TryComp<NPCSteeringComponent>(uid, out var steering))
+            {
+                steering.RepathInterval = Math.Max(0.01f, pathInterval);
+                steering.RepathJitter = Math.Max(0f, _pathRepathJitter);
+            }
+        }
+
+        private NpcAiLodTier GetLodTier(float nearestDistance)
+        {
+            if (nearestDistance <= _lodNearDistance)
+                return NpcAiLodTier.Near;
+
+            if (nearestDistance <= _lodMidDistance)
+                return NpcAiLodTier.Mid;
+
+            return NpcAiLodTier.Far;
         }
 
         public void OnMobStateChange(EntityUid uid, HTNComponent component, MobStateChangedEvent args)
@@ -241,5 +349,12 @@ namespace Content.Server.NPC.Systems
                     break;
             }
         }
+    }
+
+    public enum NpcAiLodTier : byte
+    {
+        Near,
+        Mid,
+        Far,
     }
 }

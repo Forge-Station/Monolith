@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -94,6 +95,15 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
 
     private object _obstacles = new();
 
+    [ViewVariables]
+    public int LastFrameSteeringUpdates { get; private set; }
+
+    [ViewVariables]
+    public int LastFramePathRequests { get; private set; }
+
+    [ViewVariables]
+    public int LastFramePathCacheHits { get; private set; }
+
     public override void Initialize()
     {
         base.Initialize();
@@ -178,11 +188,14 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
             component.PathfindToken?.Cancel();
             component.PathfindToken = null;
             component.CurrentPath.Clear();
+            component.ForceRepath = true;
+            component.NextRepathAt = _timing.CurTime;
         }
         else
         {
             component = AddComp<NPCSteeringComponent>(uid);
             component.Flags = _pathfindingSystem.GetFlags(uid);
+            component.NextRepathAt = _timing.CurTime;
         }
 
         ResetStuck(component, Transform(uid).Coordinates);
@@ -267,6 +280,9 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
         if (!_enabled)
             return;
 
+        LastFramePathRequests = 0;
+        LastFramePathCacheHits = 0;
+
         // Not every mob has the modifier component so do it as a separate query.
         var npcs = new (EntityUid, NPCSteeringComponent, InputMoverComponent, TransformComponent)[Count<ActiveNPCComponent>()];
 
@@ -291,6 +307,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
             var (uid, steering, mover, xform) = npcs[i];
             Steer(uid, steering, mover, xform, frameTime, curTime);
         });
+        LastFrameSteeringUpdates = index;
 
 
         if (_subscribedSessions.Count > 0)
@@ -480,10 +497,15 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
         {
             steering.CurrentPath.Clear();
             steering.CurrentPath.Enqueue(targetPoly);
+            steering.ForceRepath = false;
+            ScheduleNextRepath(steering);
             return;
         }
 
         steering.PathfindToken = new CancellationTokenSource();
+        steering.ForceRepath = false;
+        ScheduleNextRepath(steering);
+        LastFramePathRequests++;
 
         var flags = _pathfindingSystem.GetFlags(uid);
 
@@ -515,6 +537,21 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
 
         PrunePath(uid, ourPos, targetPos.Position - ourPos.Position, result.Path);
         steering.CurrentPath = new Queue<PathPoly>(result.Path);
+        steering.LastPath = new Queue<PathPoly>(result.Path);
+        steering.LastPathTarget = steering.Coordinates;
+        steering.LastPathComputedAt = _timing.CurTime;
+    }
+
+    private void ScheduleNextRepath(NPCSteeringComponent steering)
+    {
+        var interval = Math.Max(0.01f, steering.RepathInterval);
+        var jitter = Math.Max(0f, steering.RepathJitter);
+        var offset = interval;
+
+        if (jitter > 0f)
+            offset += _random.NextFloat(-jitter, jitter);
+
+        steering.NextRepathAt = _timing.CurTime + TimeSpan.FromSeconds(Math.Max(0.01f, offset));
     }
 
     // TODO: Move these to movercontroller

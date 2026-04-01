@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using System.Threading;
 using Content.Server.NPC.Pathfinding;
@@ -87,6 +88,27 @@ public sealed partial class NPCSteeringComponent : Component
     /// Current path we're following to our coordinates.
     /// </summary>
     [ViewVariables] public Queue<PathPoly> CurrentPath = new();
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float RepathInterval = 0.3f;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float RepathJitter = 0.1f;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan NextRepathAt = TimeSpan.Zero;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool ForceRepath = true;
+
+    [ViewVariables]
+    public Queue<PathPoly> LastPath = new();
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public EntityCoordinates LastPathTarget = EntityCoordinates.Invalid;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan LastPathComputedAt = TimeSpan.Zero;
 
     /// <summary>
     /// End target that we're trying to move to.

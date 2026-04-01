@@ -1,4 +1,5 @@
 using System; // Mono
+using System.Diagnostics;
 using System.Linq;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.Power.Components;
@@ -13,6 +14,7 @@ using Prometheus; // Forge-Change
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Threading;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Power.EntitySystems
 {
@@ -46,6 +48,35 @@ namespace Content.Server.Power.EntitySystems
         private static readonly Gauge PowerDirtyBatteriesGauge = Metrics.CreateGauge(
             "power_dirty_batteries_last_tick",
             "Number of pow3r batteries that changed on the last solver tick.");
+
+        private static readonly Gauge PowerReconnectQueueGauge = Metrics.CreateGauge(
+            "power_reconnect_queue_size",
+            "Number of queued power-net reconnects for the current tick.");
+
+        private static readonly Gauge ApcReconnectQueueGauge = Metrics.CreateGauge(
+            "power_apc_reconnect_queue_size",
+            "Number of queued APC-net reconnects for the current tick.");
+
+        private static readonly Gauge PowerDirtyNetworkGauge = Metrics.CreateGauge(
+            "power_dirty_network_count",
+            "Number of dirty power topology networks.");
+
+        private static readonly Gauge PowerDirtyEdgeGauge = Metrics.CreateGauge(
+            "power_dirty_edge_count",
+            "Number of dirty power topology edges.");
+
+        private static readonly Counter PowerIncrementalGroupRebuildCounter = Metrics.CreateCounter(
+            "power_incremental_group_rebuild_total",
+            "Number of incremental grouped-network rebuilds.");
+
+        private static readonly Histogram PowerPhaseDurationMs = Metrics.CreateHistogram(
+            "power_phase_duration_ms",
+            "Execution time per power update phase (milliseconds).",
+            new HistogramConfiguration
+            {
+                LabelNames = ["phase"],
+                Buckets = Histogram.ExponentialBuckets(0.01, 2, 12),
+            });
         // Forge-Change-end
         [Dependency] private readonly AppearanceSystem _appearance = default!;
         [Dependency] private readonly PowerNetConnectorSystem _powerNetConnector = default!;
@@ -70,6 +101,8 @@ namespace Content.Server.Power.EntitySystems
         private readonly HashSet<EntityUid> _activeApcBatteryReceivers = new();
         private readonly List<EntityUid> _apcProcessBuffer = new();
         private readonly List<EntityUid> _processBuffer = new();
+        private readonly Stopwatch _phaseStopwatch = new();
+        private float _batterySupplyEpsilon = 0.01f;
         // Forge-Change-end
         private BatteryRampPegSolver _solver = new();
 
@@ -111,6 +144,7 @@ namespace Content.Server.Power.EntitySystems
             SubscribeLocalEvent<PowerSupplierComponent, EntityUnpausedEvent>(PowerSupplierUnpaused);
 
             Subs.CVar(_cfg, CCVars.DebugPow3rDisableParallel, DebugPow3rDisableParallelChanged);
+            Subs.CVar(_cfg, CCVars.PowerBatterySupplyEventEpsilon, val => _batterySupplyEpsilon = MathF.Max(0f, val));
         }
 
         private void DebugPow3rDisableParallelChanged(bool val)
@@ -223,37 +257,39 @@ namespace Content.Server.Power.EntitySystems
         public void InitPowerNet(PowerNet powerNet)
         {
             AllocNetwork(powerNet.NetworkNode);
-            _powerState.GroupedNets = null;
+            MarkTopologyDirty(powerNet.NetworkNode.Id, requireFullRebuild: true);
         }
 
         public void DestroyPowerNet(PowerNet powerNet)
         {
+            MarkTopologyDirty(powerNet.NetworkNode.Id, requireFullRebuild: true);
+            RemoveTopologyEdges(powerNet.NetworkNode.Id);
             _powerState.Networks.Free(powerNet.NetworkNode.Id);
-            _powerState.GroupedNets = null;
         }
 
         public void QueueReconnectPowerNet(PowerNet powerNet)
         {
             _powerNetReconnectQueue.Add(powerNet);
-            _powerState.GroupedNets = null;
+            MarkTopologyDirty(powerNet.NetworkNode.Id);
         }
 
         public void InitApcNet(ApcNet apcNet)
         {
             AllocNetwork(apcNet.NetworkNode);
-            _powerState.GroupedNets = null;
+            MarkTopologyDirty(apcNet.NetworkNode.Id, requireFullRebuild: true);
         }
 
         public void DestroyApcNet(ApcNet apcNet)
         {
+            MarkTopologyDirty(apcNet.NetworkNode.Id, requireFullRebuild: true);
+            RemoveTopologyEdges(apcNet.NetworkNode.Id);
             _powerState.Networks.Free(apcNet.NetworkNode.Id);
-            _powerState.GroupedNets = null;
         }
 
         public void QueueReconnectApcNet(ApcNet apcNet)
         {
             _apcNetReconnectQueue.Add(apcNet);
-            _powerState.GroupedNets = null;
+            MarkTopologyDirty(apcNet.NetworkNode.Id);
         }
 
         public PowerStatistics GetStatistics()
@@ -331,20 +367,22 @@ namespace Content.Server.Power.EntitySystems
                 return;
             _updateAccumulator -= _updateInterval;
 
-            ReconnectNetworks();
+            var queuedPowerReconnects = _powerNetReconnectQueue.Count;
+            var queuedApcReconnects = _apcNetReconnectQueue.Count;
+            ObservePhase("reconnect", ReconnectNetworks);
 
             // Synchronize batteries
-            RaiseLocalEvent(new NetworkBatteryPreSync());
+            ObservePhase("battery_pre_sync", () => RaiseLocalEvent(new NetworkBatteryPreSync()));
 
             // Mono - replace frameTime with update interval
             // Run power solver.
-            _solver.Tick((float)_updateInterval.TotalSeconds, _powerState, _parMan);
+            ObservePhase("solver", () => _solver.Tick((float)_updateInterval.TotalSeconds, _powerState, _parMan));
 
             // Synchronize batteries, the other way around.
-            RaiseLocalEvent(new NetworkBatteryPostSync());
+            ObservePhase("battery_post_sync", () => RaiseLocalEvent(new NetworkBatteryPostSync()));
 
 
-            CollectDirtyFromSolver();
+            ObservePhase("collect_dirty", CollectDirtyFromSolver);
 
             PowerNetworkCountGauge.Set(_powerState.Networks.Count);
             PowerLoadCountGauge.Set(_powerState.Loads.Count);
@@ -352,10 +390,16 @@ namespace Content.Server.Power.EntitySystems
             PowerBatteryCountGauge.Set(_powerState.Batteries.Count);
             PowerDirtyLoadsGauge.Set(_solver.DirtyLoads.Count);
             PowerDirtyBatteriesGauge.Set(_solver.DirtyBatteries.Count);
+            PowerReconnectQueueGauge.Set(queuedPowerReconnects);
+            ApcReconnectQueueGauge.Set(queuedApcReconnects);
+            PowerDirtyNetworkGauge.Set(_powerState.DirtyNetworks.Count);
+            PowerDirtyEdgeGauge.Set(_powerState.DirtyEdges.Count);
+            if (_solver.LastTopologyRebuildWasIncremental)
+                PowerIncrementalGroupRebuildCounter.Inc();
 
-            UpdateApcPowerReceivers((float) _updateInterval.TotalSeconds); // Mono
-            UpdatePowerConsumers();
-            UpdateNetworkBatteries();
+            ObservePhase("update_apc_receivers", () => UpdateApcPowerReceivers((float) _updateInterval.TotalSeconds)); // Mono
+            ObservePhase("update_consumers", UpdatePowerConsumers);
+            ObservePhase("update_batteries", UpdateNetworkBatteries);
         }
 
         private void CollectDirtyFromSolver()
@@ -412,6 +456,8 @@ namespace Content.Server.Power.EntitySystems
             }
 
             _powerNetReconnectQueue.Clear();
+
+            ValidateTopologyCache();
         }
 
         // Forge-Change-start
@@ -548,13 +594,15 @@ namespace Content.Server.Power.EntitySystems
 
                 var lastSupply = powerNetBattery.LastSupply;
                 var currentSupply = powerNetBattery.CurrentSupply;
+                var hasSupply = currentSupply > _batterySupplyEpsilon;
+                var hadSupply = lastSupply > _batterySupplyEpsilon;
 
-                if (lastSupply == 0f && currentSupply != 0f)
+                if (!hadSupply && hasSupply)
                 {
                     var ev = new PowerNetBatterySupplyEvent(true);
                     RaiseLocalEvent(uid, ref ev);
                 }
-                else if (lastSupply > 0f && currentSupply == 0f)
+                else if (hadSupply && !hasSupply)
                 {
                     var ev = new PowerNetBatterySupplyEvent(false);
                     RaiseLocalEvent(uid, ref ev);
@@ -601,6 +649,7 @@ namespace Content.Server.Power.EntitySystems
         private void DoReconnectApcNet(ApcNet net)
         {
             var netNode = net.NetworkNode;
+            RemoveTopologyEdges(netNode.Id);
 
             netNode.Loads.Clear();
             netNode.BatterySupplies.Clear();
@@ -624,11 +673,15 @@ namespace Content.Server.Power.EntitySystems
                 netNode.BatterySupplies.Add(netBattery.NetworkBattery.Id);
                 netBattery.NetworkBattery.LinkedNetworkDischarging = netNode.Id;
             }
+
+            RebuildTopologyEdges(netNode);
+            MarkTopologyDirty(netNode.Id);
         }
 
         private void DoReconnectPowerNet(PowerNet net)
         {
             var netNode = net.NetworkNode;
+            RemoveTopologyEdges(netNode.Id);
 
             netNode.Loads.Clear();
             netNode.Supplies.Clear();
@@ -650,6 +703,9 @@ namespace Content.Server.Power.EntitySystems
                 netNode.BatterySupplies.Add(battery.NetworkBattery.Id);
                 battery.NetworkBattery.LinkedNetworkDischarging = netNode.Id;
             }
+
+            RebuildTopologyEdges(netNode);
+            MarkTopologyDirty(netNode.Id);
         }
 
         private void DoReconnectBasePowerNet<TNetType>(BasePowerNet<TNetType> net, PowerState.Network netNode)
@@ -674,6 +730,94 @@ namespace Content.Server.Power.EntitySystems
         public void Validate()
         {
             _solver.Validate(_powerState);
+        }
+
+        private void ObservePhase(string phase, Action action)
+        {
+            _phaseStopwatch.Restart();
+            action();
+            PowerPhaseDurationMs.WithLabels(phase).Observe(_phaseStopwatch.Elapsed.TotalMilliseconds);
+        }
+
+        private void MarkTopologyDirty(PowerState.NodeId networkId, bool requireFullRebuild = false)
+        {
+            if (_powerState.Networks.Contains(networkId))
+                _powerState.DirtyNetworks.Add(networkId);
+
+            _powerState.TopologyVersion++;
+            if (requireFullRebuild)
+                _powerState.RequireFullTopologyRebuild = true;
+        }
+
+        private void RemoveTopologyEdges(PowerState.NodeId networkId)
+        {
+            if (_powerState.TopologyChildren.TryGetValue(networkId, out var children))
+            {
+                foreach (var child in children)
+                {
+                    if (_powerState.TopologyParents.TryGetValue(child, out var parents))
+                        parents.Remove(networkId);
+                    _powerState.DirtyEdges.Add(new(networkId, child));
+                }
+
+                children.Clear();
+            }
+
+            if (_powerState.TopologyParents.TryGetValue(networkId, out var parentSet))
+            {
+                foreach (var parent in parentSet)
+                {
+                    if (_powerState.TopologyChildren.TryGetValue(parent, out var siblings))
+                        siblings.Remove(networkId);
+                    _powerState.DirtyEdges.Add(new(parent, networkId));
+                }
+
+                parentSet.Clear();
+            }
+        }
+
+        private void RebuildTopologyEdges(PowerState.Network netNode)
+        {
+            foreach (var batteryId in netNode.BatteryLoads)
+            {
+                ref var battery = ref _powerState.Batteries[batteryId];
+                var source = battery.LinkedNetworkDischarging;
+                if (source == default || !_powerState.Networks.Contains(source))
+                    continue;
+
+                if (!_powerState.TopologyChildren.TryGetValue(netNode.Id, out var children))
+                    _powerState.TopologyChildren[netNode.Id] = children = new();
+                if (!_powerState.TopologyParents.TryGetValue(source, out var parents))
+                    _powerState.TopologyParents[source] = parents = new();
+
+                children.Add(source);
+                parents.Add(netNode.Id);
+                _powerState.DirtyEdges.Add(new(netNode.Id, source));
+            }
+        }
+
+        [Conditional("DEBUG")]
+        private void ValidateTopologyCache()
+        {
+            foreach (var (parent, children) in _powerState.TopologyChildren)
+            {
+                DebugTools.Assert(_powerState.Networks.Contains(parent));
+                foreach (var child in children)
+                {
+                    DebugTools.Assert(_powerState.Networks.Contains(child));
+                    DebugTools.Assert(_powerState.TopologyParents.TryGetValue(child, out var parents) && parents.Contains(parent));
+                }
+            }
+
+            foreach (var (child, parents) in _powerState.TopologyParents)
+            {
+                DebugTools.Assert(_powerState.Networks.Contains(child));
+                foreach (var parent in parents)
+                {
+                    DebugTools.Assert(_powerState.Networks.Contains(parent));
+                    DebugTools.Assert(_powerState.TopologyChildren.TryGetValue(parent, out var children) && children.Contains(child));
+                }
+            }
         }
         // Forge-Change-end
     }

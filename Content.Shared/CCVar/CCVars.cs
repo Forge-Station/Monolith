@@ -38,6 +38,12 @@ public sealed partial class CCVars : CVars
     public static readonly CVarDef<bool> DebugPow3rDisableParallel =
         CVarDef.Create("debug.pow3r_disable_parallel", true, CVar.SERVERONLY);
 
+    /// <summary>
+    /// Epsilon threshold for toggling battery supply events.
+    /// </summary>
+    public static readonly CVarDef<float> PowerBatterySupplyEventEpsilon =
+        CVarDef.Create("power.battery_supply_event_epsilon", 0.01f, CVar.SERVERONLY);
+
     #region Surgery
 
     public static readonly CVarDef<bool> CanOperateOnSelf =

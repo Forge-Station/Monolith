@@ -3,7 +3,7 @@
 - type: radioChannel
   id: Traffic
   name: chat-radio-traffic
-  keycode: 'd'
+  keycode: 'в'
   frequency: 1459
   color: "#2cdb2c"
   maxRange: 1500

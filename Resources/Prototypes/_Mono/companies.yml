@@ -283,6 +283,12 @@
   - Siege_Of_Malta_Never_Happened
   - gelliii
   - Uranio
+  - Jinryuu
+  - FervantTwo8
+  - Exsa
+  - DesriTheRacoon
+  - AngusBeef
+  - ShirouAjisai
   special: # Forge-change
   - !type:GiveItemSpecial
     prototype: EncryptionKeyViperGroup
@@ -296,7 +302,7 @@
   image: /Textures/_Mono/Companies/redsailcorsairs.png
   disabled: true
   hidden: true # Forge-change: hide
-  logins: # 20 total
+  logins: # merged upstream april1st + Forge
   - Corrupt
   - Jasos
   - Luksu
@@ -304,13 +310,11 @@
   - Wawa_pull
   - Pffy
   - SouthernSaint
-  - Birdadoido
   - Abbyssl
   - MSMarvin
   - Dusky
-  - Middleagedman
-  - EmmaFaith
   - soulvapor
+  - EmmaFaith
   - Ether
   - MapleSilk
   - Spacepeing
@@ -318,3 +322,12 @@
   - burrrkeye
   - enkidienne
   - chugaa
+  - SLDuggy
+  - Middleagedman
+
+- type: company
+  id: 65company
+  form: Antagonist
+  name: YARA KAMERONI (羢啇槳揯劶) INDUSTRIES INCORPORATED (钭欆龸)
+  description: 65company-description
+  color: "#14515E"

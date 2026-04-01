@@ -1,1 +1,5 @@
 ent-BaseMagazine556x45mm = магазин (5.56x45мм FMJ)
+ent-Magazine556x45mmPlasteelAP = магазин (5.56x45мм бронебойные)
+ent-Magazine556x45mmRIP = магазин (5.56x45мм RIP)
+ent-Magazine556x45mmIncendiary = магазин (5.56x45мм зажигательные)
+ent-Magazine556x45mmUranium = магазин (5.56x45мм урановые)

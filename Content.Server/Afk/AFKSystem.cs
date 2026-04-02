@@ -5,6 +5,7 @@ using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Input;
+using Robust.Shared.Localization; // Forge-Change
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -22,6 +23,7 @@ public sealed class AFKSystem : EntitySystem
     [Dependency] private readonly GameTicker _ticker = default!;
 
     private float _checkDelay;
+    private float _autoKickDelay; // Forge-Change
     private TimeSpan _checkTime;
 
     private readonly HashSet<ICommonSession> _afkPlayers = new();
@@ -31,6 +33,7 @@ public sealed class AFKSystem : EntitySystem
         base.Initialize();
         _playerManager.PlayerStatusChanged += OnPlayerChange;
         Subs.CVar(_configManager, CCVars.AfkTime, SetAfkDelay, true);
+        Subs.CVar(_configManager, CCVars.AfkAutoKickTime, SetAutoKickDelay, true); // Forge-Change
 
         SubscribeNetworkEvent<FullInputCmdMessage>(HandleInputCmd);
     }
@@ -43,6 +46,11 @@ public sealed class AFKSystem : EntitySystem
     private void SetAfkDelay(float obj)
     {
         _checkDelay = obj;
+    }
+
+    private void SetAutoKickDelay(float obj) // Forge-Change
+    {
+        _autoKickDelay = obj; // Forge-Change
     }
 
     private void OnPlayerChange(object? sender, SessionStatusEventArgs e)
@@ -82,6 +90,14 @@ public sealed class AFKSystem : EntitySystem
         foreach (var pSession in Filter.GetAllPlayers())
         {
             if (pSession.Status != SessionStatus.InGame) continue;
+
+            if (_autoKickDelay > 0 && // Forge-Change
+                _afkManager.GetInactiveTime(pSession) > TimeSpan.FromSeconds(_autoKickDelay)) // Forge-Change
+            {
+                pSession.Channel.Disconnect(Loc.GetString("afk-autokick-disconnect-message")); // Forge-Change
+                continue; // Forge-Change
+            }
+
             var isAfk = _afkManager.IsAfk(pSession);
 
             if (isAfk && _afkPlayers.Add(pSession))

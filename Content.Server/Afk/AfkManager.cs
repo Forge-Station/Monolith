@@ -1,4 +1,4 @@
-﻿using Content.Server.Administration.Managers;
+using Content.Server.Administration.Managers;
 using Content.Shared.CCVar;
 using JetBrains.Annotations;
 using Robust.Server.Player;
@@ -29,6 +29,12 @@ namespace Content.Server.Afk
         /// </summary>
         /// <param name="player">The player to set AFK status for.</param>
         void PlayerDidAction(ICommonSession player);
+
+        /// <summary>
+        /// Forge-Change
+        /// Returns how long the player has been inactive.
+        /// </summary>
+        TimeSpan GetInactiveTime(ICommonSession player);
 
         void Initialize();
     }
@@ -63,17 +69,22 @@ namespace Content.Server.Afk
 
         public bool IsAfk(ICommonSession player)
         {
+            var timeOut = _adminManager.IsAdmin(player) // Forge-Change
+                ? TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.AdminAfkTime)) // Forge-Change
+                : TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.AfkTime)); // Forge-Change
+
+            return GetInactiveTime(player) > timeOut; // Forge-Change
+        }
+
+        public TimeSpan GetInactiveTime(ICommonSession player) // Forge-Change
+        {
             if (!_lastActionTimes.TryGetValue(player, out var time))
             {
-                // Some weird edge case like disconnected clients. Just say true I guess.
-                return true;
+                // Some weird edge case like disconnected clients.
+                return TimeSpan.MaxValue; // Forge-Change
             }
 
-            var timeOut = _adminManager.IsAdmin(player)
-                ? TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.AdminAfkTime))
-                : TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.AfkTime));
-
-            return _gameTiming.RealTime - time > timeOut;
+            return _gameTiming.RealTime - time; // Forge-Change
         }
 
         private void PlayerStatusChanged(object? sender, SessionStatusEventArgs e)

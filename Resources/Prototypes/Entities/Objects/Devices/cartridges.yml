@@ -87,7 +87,7 @@
     - type: Cartridge
       programName: log-probe-program-name
       icon:
-        sprite: _NF/Structures/Doors/Airlocks/Standard/nfsd.rsi # Frontier: Swap security to NFSD
+        sprite: Forge/Structures/Doors/Airlocks/Standard/nfsd.rsi # Frontier: Swap security to NFSD # Forge-Change
         state: closed
     - type: LogProbeCartridge
     - type: GuideHelp

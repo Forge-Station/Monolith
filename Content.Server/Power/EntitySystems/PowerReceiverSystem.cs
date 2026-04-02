@@ -72,15 +72,11 @@ namespace Content.Server.Power.EntitySystems
 
         private void OnProviderShutdown(EntityUid uid, ApcPowerProviderComponent component, ComponentShutdown args)
         {
-            var queueReconnect = false;
             foreach (var receiver in component.LinkedReceivers)
             {
                 receiver.NetworkLoad.LinkedNetwork = default;
-                queueReconnect = true;
-            }
-
-            if (queueReconnect)
                 component.Net?.QueueNetworkReconnect();
+            }
 
             component.LinkedReceivers.Clear();
         }

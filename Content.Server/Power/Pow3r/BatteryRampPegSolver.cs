@@ -10,13 +10,12 @@ namespace Content.Server.Power.Pow3r
     {
         private UpdateNetworkJob _networkJob;
         private bool _disableParallel;
-        private readonly HashSet<NodeId> _dirtyLoads = new(); // Forge-Change
-        private readonly HashSet<NodeId> _dirtyBatteries = new(); // Forge-Change
+        private readonly List<NodeId> _dirtyLoads = new(); // Forge-Change
+        private readonly List<NodeId> _dirtyBatteries = new(); // Forge-Change
         private readonly object _dirtyLock = new(); // Forge-Change
 
-        public IReadOnlyCollection<NodeId> DirtyLoads => _dirtyLoads; // Forge-Change
-        public IReadOnlyCollection<NodeId> DirtyBatteries => _dirtyBatteries; // Forge-Change
-        public bool LastTopologyRebuildWasIncremental { get; private set; } // Forge-Change
+        public IReadOnlyList<NodeId> DirtyLoads => _dirtyLoads; // Forge-Change
+        public IReadOnlyList<NodeId> DirtyBatteries => _dirtyBatteries; // Forge-Change
 
         public BatteryRampPegSolver(bool disableParallel = false)
         {
@@ -46,15 +45,14 @@ namespace Content.Server.Power.Pow3r
 
             ClearLoadsAndSupplies(state);
 
-            EnsureNetworkGroups(state);
-            var groupedNets = state.GroupedNets!;
-            DebugTools.Assert(groupedNets.Select(x => x.Count).Sum() == state.Networks.Count);
+            state.GroupedNets ??= GroupByNetworkDepth(state);
+            DebugTools.Assert(state.GroupedNets.Select(x => x.Count).Sum() == state.Networks.Count);
             _networkJob.State = state;
             _networkJob.FrameTime = frameTime;
-            ValidateNetworkGroups(state, groupedNets);
+            ValidateNetworkGroups(state, state.GroupedNets);
 
             // Each network height layer can be run in parallel without issues.
-            foreach (var group in groupedNets)
+            foreach (var group in state.GroupedNets)
             {
                 // Note that many net-layers only have a handful of networks.
                 // E.g., the number of nets from lowest to highest for box and saltern are:
@@ -370,114 +368,6 @@ namespace Content.Server.Power.Pow3r
 
             ValidateNetworkGroups(state, groupedNetworks);
             return groupedNetworks;
-        }
-
-        private void EnsureNetworkGroups(PowerState state)
-        {
-            if (state.GroupedNets == null || state.RequireFullTopologyRebuild)
-            {
-                state.GroupedNets = GroupByNetworkDepth(state);
-                state.GroupedNetsBuiltForVersion = state.TopologyVersion;
-                state.RequireFullTopologyRebuild = false;
-                state.DirtyNetworks.Clear();
-                state.DirtyEdges.Clear();
-                LastTopologyRebuildWasIncremental = false;
-                return;
-            }
-
-            if (state.GroupedNetsBuiltForVersion == state.TopologyVersion)
-            {
-                LastTopologyRebuildWasIncremental = false;
-                return;
-            }
-
-            if (state.DirtyNetworks.Count == 0 && state.DirtyEdges.Count == 0)
-            {
-                state.GroupedNetsBuiltForVersion = state.TopologyVersion;
-                LastTopologyRebuildWasIncremental = false;
-                return;
-            }
-
-            if (state.DirtyNetworks.Count > Math.Max(16, state.Networks.Count / 4))
-            {
-                state.GroupedNets = GroupByNetworkDepth(state);
-                LastTopologyRebuildWasIncremental = false;
-            }
-            else
-            {
-                IncrementalRebuildNetworkDepth(state, state.GroupedNets);
-                LastTopologyRebuildWasIncremental = true;
-            }
-
-            state.GroupedNetsBuiltForVersion = state.TopologyVersion;
-            state.DirtyNetworks.Clear();
-            state.DirtyEdges.Clear();
-            state.RequireFullTopologyRebuild = false;
-        }
-
-        private void IncrementalRebuildNetworkDepth(PowerState state, List<List<Network>> groupedNetworks)
-        {
-            var affected = CollectAffectedNetworks(state);
-            if (affected.Count == 0)
-                return;
-
-            foreach (var netId in affected)
-            {
-                if (!state.Networks.Contains(netId))
-                    continue;
-
-                var net = state.Networks[netId];
-                net.Height = -1;
-            }
-
-            foreach (var layer in groupedNetworks)
-            {
-                layer.RemoveAll(net => affected.Contains(net.Id));
-            }
-
-            foreach (var netId in affected)
-            {
-                if (!state.Networks.Contains(netId))
-                    continue;
-
-                var net = state.Networks[netId];
-                if (net.Height == -1)
-                    RecursivelyEstimateNetworkDepth(state, net, groupedNetworks);
-            }
-        }
-
-        private HashSet<NodeId> CollectAffectedNetworks(PowerState state)
-        {
-            var affected = new HashSet<NodeId>(state.DirtyNetworks);
-            foreach (var edge in state.DirtyEdges)
-            {
-                affected.Add(edge.From);
-                affected.Add(edge.To);
-            }
-
-            var queue = new Queue<NodeId>(affected);
-            while (queue.TryDequeue(out var current))
-            {
-                if (state.TopologyChildren.TryGetValue(current, out var children))
-                {
-                    foreach (var child in children)
-                    {
-                        if (affected.Add(child))
-                            queue.Enqueue(child);
-                    }
-                }
-
-                if (state.TopologyParents.TryGetValue(current, out var parents))
-                {
-                    foreach (var parent in parents)
-                    {
-                        if (affected.Add(parent))
-                            queue.Enqueue(parent);
-                    }
-                }
-            }
-
-            return affected;
         }
 
         public void Validate(PowerState state) // Forge-Change

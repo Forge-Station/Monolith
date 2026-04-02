@@ -22,15 +22,6 @@ namespace Content.Server.Power.Pow3r
         public GenIdStorage<Load> Loads = new();
         public GenIdStorage<Battery> Batteries = new();
         public List<List<Network>>? GroupedNets;
-        [JsonIgnore] public ulong TopologyVersion;
-        [JsonIgnore] public ulong GroupedNetsBuiltForVersion;
-        [JsonIgnore] public bool RequireFullTopologyRebuild;
-        [JsonIgnore] public readonly HashSet<NodeId> DirtyNetworks = new();
-        [JsonIgnore] public readonly HashSet<TopologyEdge> DirtyEdges = new();
-        [JsonIgnore] public readonly Dictionary<NodeId, HashSet<NodeId>> TopologyChildren = new();
-        [JsonIgnore] public readonly Dictionary<NodeId, HashSet<NodeId>> TopologyParents = new();
-
-        public readonly record struct TopologyEdge(NodeId From, NodeId To);
 
         public readonly struct NodeId : IEquatable<NodeId>
         {
@@ -129,15 +120,6 @@ namespace Content.Server.Power.Pow3r
 
                     return ref slot.Value;
                 }
-            }
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool Contains(NodeId id)
-            {
-                if ((uint) id.Index >= (uint) _storage.Length)
-                    return false;
-
-                return _storage[id.Index].Generation == id.Generation;
             }
 
             public GenIdStorage()

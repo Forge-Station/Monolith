@@ -1,4 +1,4 @@
-using Robust.Shared.Configuration;
+﻿using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
@@ -32,14 +32,6 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<float> AfkTime =
         CVarDef.Create("afk.time", 60f, CVar.SERVERONLY);
-
-    /// <summary>
-    ///     Forge-Change
-    ///     How long a client can go without any input before they are automatically kicked.
-    ///     Set to 0 or below to disable AFK auto-kick.
-    /// </summary>
-    public static readonly CVarDef<float> AfkAutoKickTime =
-        CVarDef.Create("afk.autokick_time", 1800f, CVar.SERVERONLY);
 
     /// <summary>
     ///     Flavor limit. This is to ensure that having a large mass of flavors in

@@ -1,4 +1,4 @@
-cmd-whitelistadd-desc = Adds the player with the given username to the server whitelist.
+﻿cmd-whitelistadd-desc = Adds the player with the given username to the server whitelist.
 cmd-whitelistadd-help = Usage: whitelistadd <username or User ID>
 cmd-whitelistadd-existing = {$username} is already on the whitelist!
 cmd-whitelistadd-added = {$username} added to the whitelist
@@ -63,4 +63,3 @@ ipintel-unknown = This server uses a security system with external verification,
 ipintel-suspicious = You seem to be connecting through a datacenter or VPN. For administrative reasons we do not allow VPN connections to play. Please contact the administration team of the server for assistance if you believe this is false.
 
 hwid-required = Your client has refused to send a hardware id. Please contact the administration team for further assistance.
-afk-autokick-disconnect-message = You were kicked from the server for inactivity.

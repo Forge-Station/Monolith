@@ -49,7 +49,7 @@ entities:
       pos: -1.203125,0.6875
       parent: invalid
     - type: BecomesStation
-      id: Dreadnought
+      id: dreadnought
     - type: MapGrid
       chunks:
         0,0:

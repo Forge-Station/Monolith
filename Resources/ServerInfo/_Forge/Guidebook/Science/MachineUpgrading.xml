@@ -1,0 +1,38 @@
+<Document>
+# Улучшение машин
+
+Машины помогают станции работать бесперебойно, и, будучи ученым, вы можете помочь им работать еще лучше!
+
+## Детали
+<Box>Стандартные детали:</Box>
+<Box>
+<GuideEntityEmbed Entity="CapacitorStockPart"/>
+<GuideEntityEmbed Entity="MatterBinStockPart"/>
+<GuideEntityEmbed Entity="MicroManipulatorStockPart"/>
+</Box>
+Вы можете осмотреть каждую деталь машины, чтобы увидеть как тип, так и рейтинг, который варьируется от 1 до 4.
+
+Детали более высокого уровня могут быть исследованы, а также найдены среди артефактов или обломков.
+<Box>
+<GuideEntityEmbed Entity="AdvancedMatterBinStockPart"/>
+<GuideEntityEmbed Entity="SuperMatterBinStockPart"/>
+<GuideEntityEmbed Entity="BluespaceMatterBinStockPart"/>
+</Box>
+Детали машин могут быть использованы для создания многих машин.
+
+## Улучшение
+Чтобы узнать, можно ли улучшить машину, вы можете осмотреть ее и проверить наличие значка [color=#a4885c]молнии[/color] в правом нижнем углу. Нажав на него, вы увидите, какие улучшения есть у машины.
+
+Чтобы проверить, какие детали нужны машине, вы можете осмотреть ее плату. Попробуйте здесь:
+<Box Orientation="Vertical">
+<GuideEntityEmbed Entity="ProtolatheMachineCircuitboard"/>
+<GuideEntityEmbed Entity="CloningPodMachineCircuitboard"/>
+<GuideEntityEmbed Entity="ThermomachineFreezerMachineCircuitBoard"/>
+</Box>
+Вы можете использовать детали любого рейтинга для любых требований к деталям. Использование деталей более высокого рейтинга повысит эффективность машины.
+
+Если вы хотите улучшить существующую машину, просто разберите ее с помощью отвертки и монтировки и замените существующие детали на детали более высокого уровня.
+
+Вы также можете быстро улучшать машины, используя RPED, загрузив в него детали машин, а затем нажав на машину. Она будет быстро улучшена с помощью любых вставленных деталей.
+<GuideEntityEmbed Entity="RPED"/>
+</Document>

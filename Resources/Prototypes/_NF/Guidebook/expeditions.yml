@@ -1,7 +1,7 @@
 - type: guideEntry
   id: Expeditions
   name: guide-entry-expeditions
-  text: "/ServerInfo/_NF/Guidebook/Expeditions.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/Expeditions.xml" # Forge-change
   priority: 5
   children:
   - MobsExpeditionGuideAberrantFlesh
@@ -19,54 +19,54 @@
 - type: guideEntry
   id: MobsExpeditionGuideAberrantFlesh
   name: guide-entry-expedition-aberrant-flesh
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/aberrant_flesh.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/aberrant_flesh.xml" # Forge-change
 
 - type: guideEntry
   id: MobsExpeditionGuideArgocytes
   name: guide-entry-expedition-argocytes
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/argocytes.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/argocytes.xml" # Forge-change
 
 - type: guideEntry
   id: MobsExpeditionGuideBloodCult
   name: guide-entry-expedition-blood-cultists
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/blood_cultists.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/blood_cultists.xml" # Forge-change
 
 - type: guideEntry
   id: MobsExpeditionGuideCarps
   name: guide-entry-expedition-carps
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/carps.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/carps.xml" # Forge-change
 
 - type: guideEntry
   id: MobsExpeditionGuideDinosaurs
   name: guide-entry-expedition-dinosaurs
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/dinosaurs.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/dinosaurs.xml" # Forge-change
 
 - type: guideEntry
   id: MobsExpeditionGuideExplorers
   name: guide-entry-expedition-explorers
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/explorers.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/explorers.xml" # Forge-change
 
 - type: guideEntry
   id: MobsExpeditionGuideMercenaries
   name: guide-entry-expedition-mercenaries
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/mercenaries.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/mercenaries.xml" # Forge-change
 
 - type: guideEntry
   id: MobsExpeditionGuideGangers
   name: guide-entry-expedition-gangers
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/punk_gangers.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/punk_gangers.xml" # Forge-change
 
 - type: guideEntry
   id: MobsExpeditionGuideSilicons
   name: guide-entry-expedition-silicons
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/rogue_silicons.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/rogue_silicons.xml" # Forge-change
 
 - type: guideEntry
   id: MobsExpeditionGuideSyndicate
   name: guide-entry-expedition-syndicate-naval-forces
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/syndicate.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/syndicate.xml" # Forge-change
 
 - type: guideEntry
   id: MobsExpeditionGuideXenos
   name: guide-entry-expedition-xenos
-  text: "/ServerInfo/_NF/Guidebook/MobsHostileExpedition/xenos.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/MobsHostileExpedition/xenos.xml" # Forge-change

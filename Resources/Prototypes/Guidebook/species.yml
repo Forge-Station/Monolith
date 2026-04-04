@@ -1,7 +1,7 @@
 - type: guideEntry
   id: Species
   name: guide-entry-species
-  text: "/ServerInfo/Guidebook/Mobs/Species.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/Species.xml" # Forge-change
   children:
   - Arachnid
   - Diona # Note: Frontier changes inside
@@ -18,7 +18,7 @@
   - Oni # DeltaV
   - Chitinid # DeltaV
   - Resomi # Floof
-  - Protogen # Mono
+ # - Protogen # Mono
   - IPC # EE
   - Rodentia # DeltaV
   - Tajaran # Goobstation
@@ -27,64 +27,64 @@
 - type: guideEntry
   id: Arachnid
   name: species-name-arachnid
-  text: "/ServerInfo/Guidebook/Mobs/Arachnid.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/Arachnid.xml" # Forge-change
 
 - type: guideEntry
   id: Diona
   name: species-name-diona
-  text: "/ServerInfo/_NF/Guidebook/Mobs/Diona.xml" # Frontier: moved to _NF folder
+  text: "/ServerInfo/_Forge/Guidebook/_NF/Mobs/Diona.xml" # Forge-change
 
 - type: guideEntry
   id: Dwarf
   name: species-name-dwarf
-  text: "/ServerInfo/_NF/Guidebook/Mobs/Dwarf.xml" # Frontier: moved to _NF folder
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/Dwarf.xml" # Forge-change
 
 - type: guideEntry
   id: Human
   name: species-name-human
-  text: "/ServerInfo/Guidebook/Mobs/Human.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/Human.xml" # Forge-change
 
 - type: guideEntry
   id: Moth
   name: species-name-moth
-  text: "/ServerInfo/Guidebook/Mobs/Moth.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/Moth.xml" # Forge-change
 
 - type: guideEntry
   id: Reptilian
   name: species-name-reptilian
-  text: "/ServerInfo/Guidebook/Mobs/_Mono/MonoReptilian.xml" # Mono
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_Mono/MonoReptilian.xml" # Forge-change
 
 - type: guideEntry
   id: SlimePerson
   name: species-name-slime
-  text: "/ServerInfo/Guidebook/Mobs/SlimePerson.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/SlimePerson.xml" # Forge-change
 
 - type: guideEntry
   id: Vox
   name: species-name-vox
-  text: "/ServerInfo/Guidebook/Mobs/Vox.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/Vox.xml" # Forge-change
 
 - type: guideEntry
   id: Resomi
   name: species-name-resomi
-  text: "/ServerInfo/Guidebook/Mobs/Resomi.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/Resomi.xml" # Forge-change
 
-- type: guideEntry
-  id: Protogen
-  name: species-name-protogen
-  text: "/ServerInfo/Guidebook/Mobs/Protogen.xml"
+#- type: guideEntry
+#  id: Protogen
+#  name: species-name-protogen
+#  text: "/ServerInfo/Guidebook/Mobs/Protogen.xml"
 
 - type: guideEntry
   id: IPC
   name: species-name-ipc
-  text: "/ServerInfo/Guidebook/Mobs/IPCs.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/IPCs.xml" # Forge-change
 
 - type: guideEntry
   id: Tajaran
   name: species-name-tajaran
-  text: "/ServerInfo/Guidebook/Mobs/Tajaran.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/Tajaran.xml" # Forge-change
 
 - type: guideEntry
   id: Hydrakin
   name: species-name-hydrakin
-  text: "/ServerInfo/Guidebook/Mobs/Hydrakin.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/Hydrakin.xml" # Forge-change

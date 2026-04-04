@@ -2,9 +2,9 @@ meta:
   format: 7
   category: Grid
   engineVersion: 275.2.0
-  forkId: frontier_mapping
-  forkVersion: fe5a7e4c278da6895bef9d0a84220990b1dd29b0
-  time: 04/01/2026 23:12:45
+  forkId: ""
+  forkVersion: ""
+  time: 04/04/2026 16:32:21
   entityCount: 1428
 maps: []
 grids:
@@ -48,6 +48,8 @@ entities:
     - type: Transform
       pos: -1.203125,0.6875
       parent: invalid
+    - type: BecomesStation
+      id: Dreadnought
     - type: MapGrid
       chunks:
         0,0:
@@ -92,10 +94,10 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
       spreadQueues:
-        Puddle: []
         Smoke: []
-        MetalFoam: []
         Kudzu: []
+        Puddle: []
+        MetalFoam: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -1719,8 +1721,6 @@ entities:
       pos: 4.5,-1.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 15
       - 1404
@@ -1731,8 +1731,6 @@ entities:
       pos: 24.5,-5.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 1086
       - 1099
@@ -4818,7 +4816,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 95
+      startingCharge: 92.5
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerRadar
@@ -4854,7 +4852,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 97.5
+      startingCharge: 95
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerTabletopStationRecords
@@ -5382,13 +5380,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 18.5,-4.5
       parent: 2
-- proto: FactionLathe
-  entities:
-  - uid: 311
-    components:
-    - type: Transform
-      pos: -8.5,-3.5
-      parent: 2
 - proto: FaxMachineShip
   entities:
   - uid: 609
@@ -5491,8 +5482,6 @@ entities:
       pos: -0.5,-4.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 15
       - 1404
@@ -5513,8 +5502,6 @@ entities:
       pos: 9.5,-4.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 15
       - 1404
@@ -5555,8 +5542,6 @@ entities:
       pos: 23.5,-5.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 1086
       - 1099
@@ -5566,8 +5551,6 @@ entities:
       pos: 6.5,-2.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 15
       - 1404
@@ -6999,6 +6982,13 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 5.5,-11.5
+      parent: 2
+- proto: MercenaryTechFab
+  entities:
+  - uid: 311
+    components:
+    - type: Transform
+      pos: -8.5,-3.5
       parent: 2
 - proto: NFHolopadShip
   entities:

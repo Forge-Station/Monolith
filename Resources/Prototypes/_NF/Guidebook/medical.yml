@@ -1,9 +1,9 @@
 - type: guideEntry
   id: MedicalBounties
   name: guide-entry-medical-bounties
-  text: "/ServerInfo/_NF/Guidebook/Medical/MedicalBounties.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/Medical/MedicalBounties.xml" # Forge-change
 
 - type: guideEntry
   id: DirectorOfCare
   name: guide-entry-medical-doc
-  text: "/ServerInfo/_NF/Guidebook/Medical/Doc.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/Medical/Doc.xml" # Forge-change

@@ -1,7 +1,7 @@
 ﻿- type: guideEntry
   id: Security
   name: guide-entry-security
-  text: "/ServerInfo/Guidebook/Security/Security.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Security/Security.xml" # Forge-change
   children:
   - Forensics
   - Defusal
@@ -12,17 +12,17 @@
 - type: guideEntry
   id: Forensics
   name: guide-entry-forensics
-  text: "/ServerInfo/Guidebook/Security/Forensics.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Security/Forensics.xml" # Forge-change
 
 - type: guideEntry
   id: Defusal
   name: guide-entry-defusal
-  text: "/ServerInfo/Guidebook/Security/Defusal.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Security/Defusal.xml" # Forge-change
 
 - type: guideEntry
   id: CriminalRecords
   name: guide-entry-criminal-records
-  text: "/ServerInfo/Guidebook/Security/CriminalRecords.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Security/CriminalRecords.xml" # Forge-change
 
 # Frontier: not our lawset, shouldn't show up
 # - type: guideEntry

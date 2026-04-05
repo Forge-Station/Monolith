@@ -151,13 +151,10 @@ namespace Content.Server.Preferences.Managers
             if (!_protos.TryIndex<CompanyPrototype>(profile.Company, out var company))
                 return profile.WithCompany("None");
 
-            if (!company.Disabled)
+            if (!company.Whitelisted)
                 return profile;
 
             if (await _db.IsCompanyWhitelisted(userId.UserId, company.ID))
-                return profile;
-
-            if (company.Logins.Contains(session.Name))
                 return profile;
 
             return profile.WithCompany("None");

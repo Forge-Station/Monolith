@@ -41,4 +41,5 @@
     pocket2: MedicalAppraisalTool
   storage:
     back:
+    - EncryptionKeyService # Forge-change
     - BoxFolderMedicalDoctor

@@ -18,7 +18,7 @@
   supervisors: job-supervisors-bailiff
   weight: 110
   displayWeight: 20
-  assignedCompany: TSF
+  assignedCompany: TSF # Forge-Change
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   setPreference: false # mono

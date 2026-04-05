@@ -1,0 +1,37 @@
+<Document>
+# Обслуживание
+
+[color=#9fed58]Обслуживание[/color] поддерживает станцию в чистоте, эффективности и здравом уме, чтобы все остальные отделы могли лучше выполнять свою работу и поддерживать счастье своего персонала. Они также в итоге делают большую часть бумажной работы на станции.
+
+## Персонал
+
+В штат [color=#9fed58]Обслуживания[/color] входят работники сферы обслуживания, повара, ботаники, бармены, уборщики, священники, клоуны, мимы, музыканты, юристы, библиотекари и пассажиры. Обслуживанием руководит Глава персонала.
+
+  <Box>
+    <GuideEntityEmbed Entity="ToyFigurineChef" Caption="Повар"/>
+    <GuideEntityEmbed Entity="ToyFigurineBotanist" Caption="Ботаник"/>
+    <GuideEntityEmbed Entity="ToyFigurineBartender" Caption="Бармен"/>
+    <GuideEntityEmbed Entity="ToyFigurineJanitor" Caption="Уборщик"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="ToyFigurineChaplain" Caption="Священник"/>
+    <GuideEntityEmbed Entity="ToyFigurineClown" Caption="Клоун"/>
+    <GuideEntityEmbed Entity="ToyFigurineMime" Caption="Мим"/>
+    <GuideEntityEmbed Entity="ToyFigurineMusician" Caption="Музыкант"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="ToyFigurineLawyer" Caption="Юрист"/>
+    <GuideEntityEmbed Entity="ToyFigurineLibrarian" Caption="Библиотекарь"/>
+    <GuideEntityEmbed Entity="ToyFigurinePassenger" Caption="Пассажир"/>
+    <GuideEntityEmbed Entity="ToyFigurineHeadOfPersonnel" Caption="ГП"/>
+  </Box>
+
+## Работа вместе
+
+[color=#9fed58]Обслуживание[/color], несмотря на то, что является самым разнообразным, как правило, является на данный момент самым [color=#a4885c]взаимосвязанным[/color] отделом.
+Большинство работ в сфере [color=#9fed58]Обслуживания[/color] требуют [color=#a4885c]сотрудничества[/color] между работниками.
+Поварам часто нужны ингредиенты, которые могут эффективно выращивать только ботаники. Бармен может попросить бананы, которые в изобилии есть только у клоунов.
+Юрист может пригласить мима сыграть в шарады, чтобы убедить судью в невиновности своего клиента.
+
+Для [color=#a4885c]совместной работы[/color] внутри и вне [color=#9fed58]Обслуживания[/color] необходимо многое. Часто [color=#9fed58]Обслуживание[/color] требуется другим отделам, так что будьте начеку.
+</Document>

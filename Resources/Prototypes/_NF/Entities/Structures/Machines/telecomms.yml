@@ -17,6 +17,14 @@
 #      - EncryptionKeyNfsd #Mono
       - EncryptionKeyTraffic
       - EncryptionKeyHospital
+      # Forge-change-start: Company Key's
+      - EncryptionKeyViperGroup
+      - EncryptionKeyPaycheckBratva
+      - EncryptionKeyMidnightArmsCo
+      - EncryptionKeyUNSA
+      - EncryptionKeyUllmanIndustries
+      - EncryptionKeyBlackhawk
+      - EncryptionKeyTechnicLogistic
 
 - type: entity
   parent: TelecomServer

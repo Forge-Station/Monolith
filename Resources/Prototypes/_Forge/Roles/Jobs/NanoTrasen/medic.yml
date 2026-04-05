@@ -38,4 +38,5 @@
     pocket2: MedicalAppraisalTool
   storage:
     back:
+    - EncryptionKeyService
     - BoxFolderMedicalDoctor

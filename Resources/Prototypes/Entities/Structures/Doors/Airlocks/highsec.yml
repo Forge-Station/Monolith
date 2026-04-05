@@ -9,7 +9,7 @@
   - type: StationAiWhitelist
   - type: InteractionOutline
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/highsec/highsec.rsi
+    sprite: Forge/Structures/Doors/Airlocks/highsec/highsec.rsi # Forge-Change
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
@@ -70,6 +70,7 @@
     fuel: 10
     time: 10
   - type: Airlock
+    openUnlitVisible: true # Forge-Change
   - type: NavMapDoor
   - type: DoorBolt
   - type: AccessReader

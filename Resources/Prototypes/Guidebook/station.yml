@@ -18,5 +18,5 @@
 - type: guideEntry
   id: Survival
   name: guide-entry-survival
-  text: "/ServerInfo/Guidebook/Survival.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Survival.xml" # Forge-change
   priority: 3 # Frontier

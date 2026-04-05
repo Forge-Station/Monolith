@@ -1,13 +1,9 @@
-# ==== DO NOT TOUCH - ADMIN COMPANIES ====
-# On a less serious note, these are just companies that are auto-assigned to jobs.
-# You can add to this in CompanySystem.cs in Content.Server
-
 - type: company
   id: Imperial
   form: Antagonist
   name: Священная Империя Вермиллионов
   color: "#ab7a52"
-  disabled: true
+  whitelisted: true
   hidden: true
 
 - type: company
@@ -17,13 +13,12 @@
   description: company-techniclogistic-description
   note: techniclogistic-company-note
   color: "#83489d"
-  entityIcon: BannerTL
-  disabled: true
-  logins:
-    - Eifall
-    - IMERATOR
-    - mersen
-    - v6st
+  icon: TL
+  whitelisted: true
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyTechnicLogistic
 
 - type: company
   id: Nexus
@@ -31,7 +26,7 @@
   name: Nexus Star Consortium
   description: company-nexus-description
   color: "#0f3b62"
-  entityIcon: BannerNSC
+  icon: Nexus
 
 - type: company
   id: Renegates
@@ -39,4 +34,4 @@
   name: Восставшие колонии Ренегатов
   description: renegate-resistance-description
   color: "#6B2D2D"
-  disabled: true
+  whitelisted: true

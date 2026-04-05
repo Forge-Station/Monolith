@@ -204,7 +204,7 @@
 - type: entity
   parent: [EncryptionKey, RecyclableItemDeviceTiny]
   id: EncryptionKeyService
-  name: colonial staff encryption key # Mono
+  name: NT encryption key # Forge-change
   categories: [ DoNotMap ] # Frontier
   description: An encryption key used by the service staff, tasked with keeping the station full, happy and clean.
   components:
@@ -212,10 +212,13 @@
     channels:
     - Service
     defaultChannel: Service
-  - type: Sprite
+  - type: Item # Forge-change
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite # Forge-change
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
     layers:
-    - state: crypt_gray
-    - state: service_label
+    - state: crypt_blue
+    - state: nt_label
 
 - type: entity
   parent: EncryptionKey

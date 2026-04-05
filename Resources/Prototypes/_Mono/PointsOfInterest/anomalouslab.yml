@@ -13,7 +13,7 @@
   parent: BasePOI
   name: 'Аномальная лаборатория'
   minimumDistance: 7000
-  maximumDistance: 10800
+  maximumDistance: 13800 # Forge-change
   spawnGroup: ScienceLab
   gridPath: /Maps/_Mono/POI/anomalouslab.yml
   addComponents:

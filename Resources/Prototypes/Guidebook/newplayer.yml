@@ -2,7 +2,7 @@
   id: NewPlayer
   name: guide-entry-newplayer
   priority: -3 # Frontier: 0<-3
-  text: "/ServerInfo/Guidebook/NewPlayer/NewPlayer.xml"
+  text: "/ServerInfo/_Forge/Guidebook/NewPlayer/NewPlayer.xml" # Forge-change
   children:
   - Controls
   - CharacterCreation
@@ -11,19 +11,19 @@
 - type: guideEntry
   id: Controls
   name: guide-entry-controls
-  text: "/ServerInfo/Guidebook/NewPlayer/Controls/Controls.xml"
+  text: "/ServerInfo/_Forge/Guidebook/NewPlayer/Controls/Controls.xml" # Forge-change
   children:
   - Radio
 
 - type: guideEntry
   id: Radio
   name: guide-entry-radio
-  text: "/ServerInfo/Guidebook/NewPlayer/Controls/Radio.xml"
+  text: "/ServerInfo/_Forge/Guidebook/NewPlayer/Controls/Radio.xml" # Forge-change
 
 - type: guideEntry
   id: CharacterCreation
   name: guide-entry-charactercreation
-  text: "/ServerInfo/Guidebook/NewPlayer/CharacterCreation.xml"
+  text: "/ServerInfo/_Forge/Guidebook/NewPlayer/CharacterCreation.xml" # Forge-change
   children:
   - YourFirstCharacter
   - Species
@@ -31,4 +31,4 @@
 - type: guideEntry
   id: YourFirstCharacter
   name: guide-entry-yourfirstcharacter
-  text: "/ServerInfo/Guidebook/NewPlayer/YourFirstCharacter.xml"
+  text: "/ServerInfo/_Forge/Guidebook/NewPlayer/YourFirstCharacter.xml" # Forge-change

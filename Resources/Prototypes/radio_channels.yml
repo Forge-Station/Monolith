@@ -53,7 +53,7 @@
   name: chat-radio-service
   keycode: 'м'
   frequency: 1349
-  color: "#09b96d"
+  color: "#334e6d" # Forge-change
 
 - type: radioChannel
   id: Supply

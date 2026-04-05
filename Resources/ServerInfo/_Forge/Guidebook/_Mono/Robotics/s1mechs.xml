@@ -1,0 +1,58 @@
+<Document>
+# Боевые мехи Серии 1
+
+Самые дешевые и наиболее часто развертываемые мехи, чаще всего используемые как силовая броня для пехотных конфликтов и абордажных операций.
+
+Все мехи S1 имеют космическую изоляцию, обеспечивают пригодную для дыхания атмосферу и оснащены маневровыми двигателями.
+
+  <Box>
+    <GuideEntityEmbed Entity="MechGygax"/>
+    <GuideEntityEmbed Entity="MechDurand"/>
+  </Box>
+
+## Gygax
+
+Gygax — это быстрая, легкобронированная ударная платформа. Она уязвима для ручного оружия, но обеспечивает оператору защиту от распространенных боевых травм.
+
+## Durand
+
+Durand — это медленный, неуклюжий, тяжелобронированный танк. Он уязвим для концентрированного огня, но достаточно прочен, чтобы пережить повреждения, которые вывели бы из строя или уничтожили Gygax.
+
+## Вооружение
+  <Box>
+    <GuideEntityEmbed Entity="WeaponMechCombatUltraRifle"/>
+    <GuideEntityEmbed Entity="WeaponMechCombatShotgun" Caption="LBX AC-10"/>
+    <GuideEntityEmbed Entity="WeaponMechCombatShotgunIncendiary"/>
+    <GuideEntityEmbed Entity="WeaponMechCombatMissileRack8"/>
+  </Box>
+ - Ultra AC-2 — это высокоточный легкий пулемет.
+ - LBX AC-10 — это легкий автоматический дробовик, стреляющий стандартной картечью 12-го калибра.
+ - FNX-99 Hades Carbine — это легкий автоматический дробовик, стреляющий зажигательными патронами 12-го калибра.
+ - SRM-8 — легкая ракетная установка с самонаведением, полезная для взлома дверей шлюзов.
+  <Box>
+    <GuideEntityEmbed Entity="WeaponMechCombatDisabler"/>
+    <GuideEntityEmbed Entity="WeaponMechCombatFlashbangLauncher"/>
+  </Box>
+  - CH-PD Disabler — это устанавливаемая на мех версия стандартного ручного Disabler'а.
+  - SGL-6 Flashbang Launcher делает именно то, что вы ожидаете, при удивительно низкой стоимости.
+  <Box>
+    <GuideEntityEmbed Entity="WeaponMechCombatFiredartLaser"/>
+    <GuideEntityEmbed Entity="WeaponMechCombatSolarisLaser"/>
+    <GuideEntityEmbed Entity="WeaponMechCombatImmolationGun"/>
+  </Box>
+  - CH-PS Firedart — это устанавливаемый на мех аналог самодельного лазерного пистолета.
+  - CH-LC Solaris — это аналог стандартной лазерной винтовки.
+  - ZFI Immolation Beam Gun — это аналог лазерной пушки.
+
+## Мехи Синдиката
+
+[color=crimson]Синдикат[/color] создал вариации стандартных мехов силовой брони, которые предоставлялись ядерным оперативникам в их операциях по уничтожению станций. Их все еще редко можно встретить развернутыми в Секторе Колосс.
+
+  <Box>
+    <GuideEntityEmbed Entity="MechGygaxSyndie"/>
+    <GuideEntityEmbed Entity="MechMaulerSyndie"/>
+  </Box>
+
+  Эти мехи неизменно лучше стандартных версий, обладая значительными улучшениями броневых плит и расширенной вместимостью оборудования.
+
+</Document>

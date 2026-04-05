@@ -29,8 +29,37 @@
           position: "0,-0.5"
         hard: false
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/shuttle.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Standard/shuttle.rsi # Forge-Change
     snapCardinals: false
+    # Forge-Change-Start
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+      visible: false
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: bolted_unlit
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: emergency_unlit
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+      shader: unshaded
+    - state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: electrified_ai
+      sprite: Interface/Misc/ai_hud.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.HUD"]
+    - state: electrified
+      sprite: Effects/electricity.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.Sparks"]
+    # Forge-Change-End
   - type: Wires
     layoutId: Docking
   - type: Door
@@ -81,7 +110,7 @@
   description: Necessary for connecting two space craft together.
   components:
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/shuttle.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/shuttle.rsi # Forge-Change
   - type: Occluder
     enabled: false
   - type: PaintableAirlock
@@ -109,7 +138,7 @@
     noRot: false
   - type: Rotatable
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/shuttle.rsi # Frontier: Glass<Standard
+    sprite: Forge/Structures/Doors/Airlocks/Standard/shuttle.rsi # Frontier: Glass<Standard # Forge-Change
     state: closed
     snapCardinals: false
   - type: Construction
@@ -124,7 +153,7 @@
   description: Necessary for connecting two space craft together.
   components:
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/shuttle_syndicate.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/shuttle_syndicate.rsi # Forge-Change
 
 - type: entity
   parent: AirlockShuttle
@@ -134,4 +163,4 @@
   description: Necessary for connecting two space craft together.
   components:
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/shuttle_syndicate.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Standard/shuttle_syndicate.rsi # Forge-Change

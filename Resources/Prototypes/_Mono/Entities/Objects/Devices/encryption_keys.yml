@@ -9,12 +9,12 @@
     - Ussp
     defaultChannel: Ussp
   - type: Item
-    sprite: Objects/Devices/encryption_keys.rsi
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Objects/Devices/encryption_keys.rsi
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_rusted
-    - state: sec_label
+    - state: ussp_label
   - type: PirateBountyItem
     id: EncryptionKeyFaction
 

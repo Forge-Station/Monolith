@@ -1,0 +1,23 @@
+- type: guideEntry
+  id: BasicLore
+  name: Лор # Forge-change
+  text: "/ServerInfo/_Forge/Guidebook/Lore/BasicLore.xml" # Forge-change
+  children:
+  - PhaethonDynasty
+  - TransSolarFederation
+  - UnitedSovietSocialistPlanets
+
+- type: guideEntry
+  id: PhaethonDynasty
+  name: Династия Фаэтон # Forge-change
+  text: "/ServerInfo/_Forge/Guidebook/Lore/PhaethonDynasty.xml" # Forge-change
+
+- type: guideEntry
+  id: TransSolarFederation
+  name: Транс-Солнечная Федерация # Forge-change
+  text: "/ServerInfo/_Forge/Guidebook/Lore/TransSolarFederation.xml" # Forge-change
+
+- type: guideEntry
+  id: UnitedSovietSocialistPlanets
+  name: Союз Советских Социалистических Планет # Forge-change
+  text: "/ServerInfo/_Forge/Guidebook/Lore/UnitedSovietSocialistPlanets.xml" # Forge-change

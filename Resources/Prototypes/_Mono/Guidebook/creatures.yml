@@ -1,7 +1,7 @@
 - type: guideEntry
   id: Creatures
   name: guide-entry-creatures
-  text: "/ServerInfo/_Mono/Guidebook/Creatures/Creatures.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_Mono/Creatures/Creatures.xml" # Forge-change
   priority: 8
   children:
   - CorticalBorerGuide
@@ -11,17 +11,17 @@
 - type: guideEntry
   id: CorticalBorerGuide
   name: guide-entry-cortical-borer
-  text: "/ServerInfo/_Mono/Guidebook/Creatures/CorticalBorer.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_Mono/Creatures/CorticalBorer.xml" # Forge-change
   priority: 1
 
 - type: guideEntry
   id: Letoferol
   name: guide-entry-letoferol
-  text: "/ServerInfo/_Mono/Guidebook/Creatures/Chimera.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_Mono/Creatures/Chimera.xml" # Forge-change
   priority: 1
 
 - type: guideEntry
   id: Asakim
   name: guide-entry-asakim
-  text: "/ServerInfo/_Mono/Guidebook/Creatures/Asakim.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_Mono/Creatures/Asakim.xml" # Forge-change
   priority: 1

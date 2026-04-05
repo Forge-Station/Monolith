@@ -1,29 +1,29 @@
 - type: guideEntry
   id: Felinid
   name: species-name-felinid
-  text: "/ServerInfo/Guidebook/Mobs/_DV/Felinid.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_DV/Felinid.xml" # Forge-change
 
 - type: guideEntry
   id: Harpy
   name: species-name-harpy
-  text: "/ServerInfo/Guidebook/Mobs/_DV/Harpy.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_DV/Harpy.xml" # Forge-change
 
 - type: guideEntry
   id: Vulpkanin
   name: species-name-vulpkanin
-  text: "/ServerInfo/Guidebook/Mobs/_DV/Vulpkanin.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_DV/Vulpkanin.xml" # Forge-change
 
 - type: guideEntry
   id: Oni
   name: species-name-oni
-  text: "/ServerInfo/Guidebook/Mobs/_DV/Oni.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_DV/Oni.xml" # Forge-change
 
 - type: guideEntry
   id: Rodentia
   name: species-name-rodentia
-  text: "/ServerInfo/Guidebook/Mobs/_DV/Rodentia.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_DV/Rodentia.xml" # Forge-change
 
 - type: guideEntry
   id: Chitinid
   name: species-name-chitinid
-  text: "/ServerInfo/Guidebook/Mobs/_DV/Chitinid.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_DV/Chitinid.xml" # Forge-change

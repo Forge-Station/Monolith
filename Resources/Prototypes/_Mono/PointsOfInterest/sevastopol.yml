@@ -11,8 +11,8 @@
   id: Sevastopol
   parent: BasePOI
   name: 'Центр хранения данных «Севастополь»'
-  minimumDistance: 3500
-  maximumDistance: 7500
+  minimumDistance: 4500
+  maximumDistance: 9500 # Forge-change
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/sevastopol.yml
   addComponents:

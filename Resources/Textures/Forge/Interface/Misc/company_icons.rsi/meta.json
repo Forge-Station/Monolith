@@ -1,0 +1,63 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Company icons by v6st",
+
+    "size": {
+        "x": 8,
+        "y": 8
+    },
+    "states": [
+        {
+            "name": "aetherion"
+        },
+        {
+            "name": "blackhawk"
+        },
+        {
+            "name": "dme"
+        },
+        {
+            "name": "drake"
+        },
+        {
+            "name": "harmony"
+        },
+        {
+            "name": "hive"
+        },
+        {
+            "name": "horizon"
+        },
+        {
+            "name": "mac"
+        },
+        {
+            "name": "nexus"
+        },
+        {
+            "name": "nosske"
+        },
+        {
+            "name": "paycheck"
+        },
+        {
+            "name": "shm"
+        },
+        {
+            "name": "tl"
+        },
+        {
+            "name": "ullman"
+        },
+        {
+            "name": "unsa"
+        },
+        {
+            "name": "ussp"
+        },
+        {
+            "name": "viper"
+        }
+    ]
+}

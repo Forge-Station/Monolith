@@ -20,7 +20,7 @@
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   weight: 105
   displayWeight: 16
-  assignedCompany: TSF
+  assignedCompany: TSF # Forge-Change
   setPreference: false # mono
   hideConsoleVisibility: true #Forge Change
   accessGroups:

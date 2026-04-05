@@ -216,6 +216,24 @@ public sealed partial class SsdIconPrototype : StatusIconPrototype, IInheritingP
     public bool Abstract { get; private set; }
 }
 
+// Forge-change-start
+/// <summary>
+/// StatusIcons for company membership
+/// </summary>
+[Prototype]
+public sealed partial class CompanyIconPrototype : StatusIconPrototype, IInheritingPrototype
+{
+    /// <inheritdoc />
+    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<CompanyIconPrototype>))]
+    public string[]? Parents { get; private set; }
+
+    /// <inheritdoc />
+    [NeverPushInheritance]
+    [AbstractDataField]
+    public bool Abstract { get; private set; }
+}
+    // Forge-change-end
+
 [Serializable, NetSerializable]
 public enum StatusIconLocationPreference : byte
 {

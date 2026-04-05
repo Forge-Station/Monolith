@@ -394,7 +394,8 @@ namespace Content.Server.Power.Pow3r
 
             // == Runtime parameters ==
             [ViewVariables(VVAccess.ReadWrite)] public float ReceivingPower;
-            [ViewVariables(VVAccess.ReadWrite)] public float LastReceivingPower; // Forge-Change
+
+            [JsonIgnore] public float LastReceivingPower;
 
             [ViewVariables] [JsonIgnore] public NodeId LinkedNetwork;
         }
@@ -427,7 +428,7 @@ namespace Content.Server.Power.Pow3r
             // == Runtime parameters ==
             [ViewVariables(VVAccess.ReadWrite)] public float SupplyRampPosition;
             [ViewVariables(VVAccess.ReadWrite)] public float CurrentSupply;
-            [ViewVariables(VVAccess.ReadWrite)] public float LastCurrentSupply; // Forge-Change
+            [JsonIgnore] public float LastCurrentSupply; // Forge-Change
             [ViewVariables(VVAccess.ReadWrite)] public float CurrentStorage;
             [ViewVariables(VVAccess.ReadWrite)] public float CurrentReceiving;
             [ViewVariables(VVAccess.ReadWrite)] public float LoadingNetworkDemand;

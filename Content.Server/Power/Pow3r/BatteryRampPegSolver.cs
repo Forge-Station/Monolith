@@ -12,7 +12,6 @@ namespace Content.Server.Power.Pow3r
         private bool _disableParallel;
         private readonly List<NodeId> _dirtyLoads = new(); // Forge-Change
         private readonly List<NodeId> _dirtyBatteries = new(); // Forge-Change
-        private readonly object _dirtyLock = new(); // Forge-Change
 
         public IReadOnlyList<NodeId> DirtyLoads => _dirtyLoads; // Forge-Change
         public IReadOnlyList<NodeId> DirtyBatteries => _dirtyBatteries; // Forge-Change
@@ -85,14 +84,9 @@ namespace Content.Server.Power.Pow3r
                 if (load.Paused)
                     continue;
 
-                load.LastReceivingPower = load.ReceivingPower; // Forge-Change
-                if (load.LastReceivingPower != 0f) // Forge-Change
-                {
-                    lock (_dirtyLock) // Forge-Change
-                    {
-                        _dirtyLoads.Add(load.Id); // Forge-Change
-                    }
-                }
+                load.LastReceivingPower = load.ReceivingPower;
+
+                if (load.LastReceivingPower != 0f) _dirtyLoads.Add(load.Id);
 
                 load.ReceivingPower = 0;
             }
@@ -223,16 +217,11 @@ namespace Content.Server.Power.Pow3r
                 if (!load.Enabled || load.DesiredPower == 0 || load.Paused)
                     continue;
 
-                var newReceiving = load.DesiredPower * supplyRatio; // Forge-Change
-                if (!MathHelper.CloseToPercent(load.LastReceivingPower, newReceiving)) // Forge-Change
-                {
-                    lock (_dirtyLock) // Forge-Change
-                    {
-                        _dirtyLoads.Add(loadId); // Forge-Change
-                    }
-                }
+                var newReceiving = load.DesiredPower * supplyRatio;
+                if (!MathHelper.CloseToPercent(load.LastReceivingPower, newReceiving))
+                    _dirtyLoads.Add(loadId);
 
-                load.ReceivingPower = newReceiving; // Forge-Change
+                load.ReceivingPower = newReceiving;
             }
 
             // Distribute supply to batteries
@@ -341,14 +330,9 @@ namespace Content.Server.Power.Pow3r
                 battery.LoadingMarked = false;
 
                 if (!MathHelper.CloseToPercent(battery.LastCurrentSupply, battery.CurrentSupply)) // Forge-Change
-                {
-                    lock (_dirtyLock) // Forge-Change
-                    {
-                        _dirtyBatteries.Add(battery.Id); // Forge-Change
-                    }
-                }
+                    _dirtyBatteries.Add(battery.Id);
 
-                battery.LastCurrentSupply = battery.CurrentSupply; // Forge-Change
+                battery.LastCurrentSupply = battery.CurrentSupply;
             }
         }
 

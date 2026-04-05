@@ -515,7 +515,8 @@ namespace Content.Server.Atmos.EntitySystems
                 var otherTile = _depressurizeProgressionOrder[i];
                 if (otherTile?.Air == null) { continue;}
                 if (otherTile.MonstermosInfo.CurrentTransferDirection == AtmosDirection.Invalid) continue;
-                gridAtmosphere.HighPressureDelta.Add(otherTile);
+                var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(otherTile.GridIndices));
+                AddChunkTile(gridAtmosphere.HighPressureDelta, chunk.HighPressureTiles, otherTile);
                 AddActiveTile(gridAtmosphere, otherTile);
                 var otherTile2 = otherTile.AdjacentTiles[otherTile.MonstermosInfo.CurrentTransferDirection.ToIndex()];
                 if (otherTile2?.Air == null)

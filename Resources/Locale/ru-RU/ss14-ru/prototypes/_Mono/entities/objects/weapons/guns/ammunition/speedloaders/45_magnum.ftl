@@ -1,1 +1,5 @@
 ent-BaseSpeedLoader45_magnum = спидлоадер (.45 магнум)
+ent-SpeedLoader45_magnumPlasteelAP = спидлоадер (.45 магнум бронебойные)
+ent-SpeedLoader45_magnumRIP = спидлоадер (.45 магнум RIP)
+ent-SpeedLoader45_magnumIncendiary = спидлоадер (.45 магнум зажигательные)
+ent-SpeedLoader45_magnumUranium = спидлоадер (.45 магнум урановые)

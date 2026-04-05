@@ -1,5 +1,5 @@
-﻿ent-BaseAmmoBox68x52mmCaseless = BaseAmmoBox68x52mmCaseless
-ent-AmmoBox68x52mmCaseless = ammunition box (6.8x52mm STANAG Caseless)
-ent-AmmoBox68x52mmCaselessPractice = ammunition box (6.8x52mm STANAG Caseless practice)
-ent-AmmoBox68x52mmCaselessRubber = ammunition box (6.8x52mm STANAG Caseless rubber)
-ent-AmmoBox68x52mmCaselessBig = Big
+ent-BaseAmmoBox68x52mmCaseless = коробка боеприпасов (6.8x52мм STANAG безгильзовые)
+ent-AmmoBox68x52mmCaseless = коробка боеприпасов (6.8x52мм STANAG безгильзовые)
+ent-AmmoBox68x52mmCaselessPractice = коробка боеприпасов (6.8x52мм STANAG безгильзовые учебные)
+ent-AmmoBox68x52mmCaselessRubber = коробка боеприпасов (6.8x52мм STANAG безгильзовые резиновые)
+ent-AmmoBox68x52mmCaselessBig = большая коробка боеприпасов (6.8x52мм STANAG безгильзовые)

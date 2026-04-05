@@ -187,7 +187,8 @@ namespace Content.Server.Atmos.EntitySystems
         // Called from AtmosphereSystem.LINDA.cs with SpaceWind CVar check handled there.
         private void ConsiderPressureDifference(GridAtmosphereComponent gridAtmosphere, TileAtmosphere tile, AtmosDirection differenceDirection, float difference)
         {
-            gridAtmosphere.HighPressureDelta.Add(tile);
+            var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
+            AddChunkTile(gridAtmosphere.HighPressureDelta, chunk.HighPressureTiles, tile);
 
             if (difference <= tile.PressureDifference)
                 return;

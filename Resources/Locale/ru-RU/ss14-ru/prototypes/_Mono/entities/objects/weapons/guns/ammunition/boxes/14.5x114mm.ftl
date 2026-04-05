@@ -1,3 +1,3 @@
-﻿ent-BaseAmmoBox145x114mm = BaseAmmoBox145x114mm
-ent-AmmoBox145x114mm = ammunition box (14.5x114mm)
-ent-AmmoBox145x114mmBig = Big (30)
+ent-BaseAmmoBox145x114mm = коробка боеприпасов (14.5x114мм)
+ent-AmmoBox145x114mm = коробка боеприпасов (14.5x114мм)
+ent-AmmoBox145x114mmBig = большая коробка боеприпасов (14.5x114мм, 30 шт.)

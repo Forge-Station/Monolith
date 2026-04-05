@@ -1,1 +1,5 @@
 ent-BaseMagazine45_magnum = пистолетный магазин (.45 магнум FMJ)
+ent-Magazine45_magnumPistolPlasteelAP = пистолетный магазин (.45 магнум бронебойные)
+ent-Magazine45_magnumPistolRIP = пистолетный магазин (.45 магнум RIP)
+ent-Magazine45_magnumPistolIncendiary = пистолетный магазин (.45 магнум зажигательные)
+ent-Magazine45_magnumPistolUranium = пистолетный магазин (.45 магнум урановые)

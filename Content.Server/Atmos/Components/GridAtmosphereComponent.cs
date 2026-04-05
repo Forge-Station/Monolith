@@ -28,6 +28,9 @@ namespace Content.Server.Atmos.Components
         [IncludeDataField(customTypeSerializer:typeof(TileAtmosCollectionSerializer))]
         public Dictionary<Vector2i, TileAtmosphere> Tiles = new(128); // Forge-Change
 
+        [ViewVariables]
+        public readonly Dictionary<Vector2i, AtmosChunkState> Chunks = new(64);
+
         private HashSet<TileAtmosphere>? _mapTiles; // Forge-Change
 
         [ViewVariables]
@@ -75,6 +78,12 @@ namespace Content.Server.Atmos.Components
         public readonly List<TileAtmosphere> CurrentRunTiles = new(256); // Forge-Change
 
         [ViewVariables]
+        public readonly List<Vector2i> CurrentRunChunks = new(64);
+
+        [ViewVariables]
+        public int CurrentRunChunkIndex;
+
+        [ViewVariables]
         public int CurrentRunTileIndex; // Forge-Change
 
         [ViewVariables]
@@ -112,5 +121,30 @@ namespace Content.Server.Atmos.Components
 
         [ViewVariables]
         public AtmosphereProcessingState State { get; set; } = AtmosphereProcessingState.Revalidate;
+    }
+
+    [Serializable]
+    public sealed class AtmosChunkState
+    {
+        [ViewVariables]
+        public readonly HashSet<Vector2i> InvalidatedCoords = new(16);
+
+        [ViewVariables]
+        public readonly HashSet<TileAtmosphere> ActiveTiles = new(32);
+
+        [ViewVariables]
+        public readonly HashSet<TileAtmosphere> HighPressureTiles = new(16);
+
+        [ViewVariables]
+        public readonly HashSet<TileAtmosphere> HotspotTiles = new(16);
+
+        [ViewVariables]
+        public readonly HashSet<TileAtmosphere> SuperconductivityTiles = new(16);
+
+        [ViewVariables]
+        public int NextColdCycle;
+
+        [ViewVariables]
+        public int LastTouchedCycle;
     }
 }

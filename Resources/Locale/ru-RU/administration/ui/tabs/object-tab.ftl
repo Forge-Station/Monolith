@@ -5,6 +5,7 @@ object-tab-object-search = Поиск...
 object-tab-object-type-grids = Гриды
 object-tab-object-type-maps = Карты
 object-tab-object-type-stations = Станции
+object-tab-grid-count = Всего гридов: { $count }
 object-tab-refresh-button = Обновить
 object-tab-entity-teleport = Телепортировать
 object-tab-entity-delete = Удалить

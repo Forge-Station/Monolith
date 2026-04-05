@@ -32,6 +32,14 @@
   description: company-nexus-description
   color: "#0f3b62"
   entityIcon: BannerNSC
+  disabled: true
+  logins:
+    - LeviyNosok
+    - Ryan_Z
+    - WeilPatent
+    - Eifall
+    - mersen
+    - v6st
 
 - type: company
   id: Renegates

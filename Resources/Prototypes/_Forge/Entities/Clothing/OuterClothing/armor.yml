@@ -79,3 +79,14 @@
     reduction: 0.6
   - type: ExplosionResistance
     damageCoefficient: 0.6
+
+- type: entity
+  parent: ClothingOuterVestWebMercenary
+  name: nexus web vest
+  id: ClothingOuterVestWebNexus
+  suffix: Нексус
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Armor/nexus_vest.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Armor/nexus_vest.rsi

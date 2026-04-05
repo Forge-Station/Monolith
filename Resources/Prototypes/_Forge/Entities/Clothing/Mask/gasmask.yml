@@ -11,3 +11,17 @@
     sprite: Forge/Clothing/Mask/renegate.rsi
   - type: Clothing
     sprite: Forge/Clothing/Mask/renegate.rsi
+
+- type: entity
+  parent: ClothingMaskGasSecurity
+  id: ClothingMaskGasNexus
+  name: nexus gas mask
+  suffix: Нексус
+  description: A standard issue Nexus gas mask.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/nexus_mask.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/nexus_mask.rsi

@@ -44,6 +44,7 @@
   id: NSCFlag
   name: flag NSC
   description: The flag of the trade alliance Nexus Star Consortium smells like expensive paint.
+  suffix: Нексус
   components:
   - type: Sprite
     sprite: Forge/Structures/Wallmounts/flags.rsi

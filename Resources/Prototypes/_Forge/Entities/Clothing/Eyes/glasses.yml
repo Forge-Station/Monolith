@@ -56,3 +56,15 @@
     sprite: Forge/Clothing/Eyes/Goggles/renegates.rsi
   - type: Clothing
     sprite: Forge/Clothing/Eyes/Goggles/renegates.rsi
+
+- type: entity
+  parent: [ ClothingEyesBase, ShowSecurityIcons ]
+  id: ClothingEyesGlassesNexus
+  name: nexus ballistic goggles
+  suffix: Нексус
+  description: Standard ballistic goggles mostly used by Nexus security forces.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/nexus.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/nexus.rsi

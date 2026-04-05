@@ -230,6 +230,42 @@
       - state: equipped-decor-contractor-tac
         color: "#424242" # mono
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNexusTurtleneck
+  name: nexus turtleneck
+  description: Nexus base jumpsuit
+  suffix: Нексус
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_turtleneck.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_turtleneck.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNexusWorker
+  name: nexus worker suit
+  description: Nexus workers suit
+  suffix: Нексус
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_worker.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_worker.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNexusSecurity
+  name: nexus security uniform
+  description: Nexus security uniform
+  suffix: Нексус
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_security.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_security.rsi
+
 # region Empire
 - type: entity
   parent: ClothingUniformBase

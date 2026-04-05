@@ -35,6 +35,16 @@ public sealed class SponsorData
         { SponsorLevel.Level6, "#ffd700" }
     };
 
+    public static readonly Dictionary<SponsorLevel, string> SponsorNames = new()
+    {
+        { SponsorLevel.Level1, "Подмастерье Форжа" },
+        { SponsorLevel.Level2, "Оружейник" },
+        { SponsorLevel.Level3, "Мастер Кузни" },
+        { SponsorLevel.Level4, "Великий Кузнец" },
+        { SponsorLevel.Level5, "Архитектор Горна" },
+        { SponsorLevel.Level6, "Демиург Форжа" }
+    };
+
     public static readonly Dictionary<SponsorLevel, string> SponsorGhost = new()
     {
         { SponsorLevel.Level3, "MobObserver" },

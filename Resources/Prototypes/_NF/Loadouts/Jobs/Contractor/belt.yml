@@ -90,6 +90,9 @@
 
 - type: loadout
   id: ContractorClothingBeltDrakeIndustries
+  effects:
+  - !type:SponsorLoadoutEffect
+    level: 3
   price: 0 # Mono
   equipment:
     belt: ClothingBeltDrakeIndustries

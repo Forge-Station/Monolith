@@ -12,7 +12,7 @@
           "/Audio/Weapons/smash.ogg"
   - type: InteractionOutline
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/basic.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Standard/basic.rsi # Forge-Change
     snapCardinals: true
     layers:
     - state: closed
@@ -41,6 +41,12 @@
       shader: unshaded
       visible: false
       map: ["enum.ElectrifiedLayers.Sparks"]
+    # Forge-Change-Start
+    - state: sparks
+      map: ["enum.DoorVisualLayers.BaseEmagging"]
+      shader: unshaded
+      visible: false
+    # Forge-Change-End
   - type: AnimationPlayer
   - type: Physics
   - type: Fixtures
@@ -79,6 +85,7 @@
     fuel: 5
     time: 3
   - type: Airlock
+    openUnlitVisible: true # Forge-Change
   - type: NavMapDoor
   - type: DoorBolt
   - type: Appearance
@@ -209,7 +216,7 @@
   - type: Occluder
     enabled: false
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/glass.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/glass.rsi # Forge-Change
   - type: AnimationPlayer
   - type: Fixtures
     fixtures:

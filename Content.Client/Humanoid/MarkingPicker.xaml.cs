@@ -218,7 +218,10 @@ public sealed partial class MarkingPicker : Control
         var sortedMarkings = GetMarkings(_selectedMarkingCategory).Values.Where(m =>
             m.ID.ToLower().Contains(filter.ToLower()) ||
             GetMarkingName(m).ToLower().Contains(filter.ToLower())
-        ).OrderBy(p => Loc.GetString(GetMarkingName(p)));
+        // `GetMarkingName()` already returns localized text (via Loc.GetString).
+        // Calling Loc.GetString() again turns the localized value (e.g. "Torso Incision")
+        // into a messageId, which doesn't exist and triggers "Unknown messageId" warnings.
+        ).OrderBy(p => GetMarkingName(p));  // Forge-Change: added Forge-Change prefix to the function name
 
         foreach (var marking in sortedMarkings)
         {
@@ -255,8 +258,13 @@ public sealed partial class MarkingPicker : Control
                 continue;
             }
 
-            var text = Loc.GetString(marking.Forced ? "marking-used-forced" : "marking-used", ("marking-name", $"{GetMarkingName(newMarking)}"),
-                ("marking-category", Loc.GetString($"markings-category-{newMarking.MarkingCategory}")));
+            // `marking-used` expects `marking-name` to be a localization message id.
+            // Passing already-localized text leads to "Unknown messageId" warnings
+            // for values like "Torso Incision" / "Хирургический шрам (Короткий)".
+            // Forge-Change: added Forge-Change prefix to the function name
+            var text = Loc.GetString(marking.Forced ? "marking-used-forced" : "marking-used", ("marking-name", $"marking-{newMarking.ID}"),
+                // `marking-category` is also treated as a localization message id by `marking-used`.
+                ("marking-category", $"markings-category-{newMarking.MarkingCategory}"));
 
             var _item = new ItemList.Item(CMarkingsUsed)
             {
@@ -517,7 +525,8 @@ public sealed partial class MarkingPicker : Control
         CMarkingsUnused.Remove(_selectedUnusedMarking);
         var item = new ItemList.Item(CMarkingsUsed)
         {
-            Text = Loc.GetString("marking-used", ("marking-name", $"{GetMarkingName(marking)}"), ("marking-category", Loc.GetString($"markings-category-{marking.MarkingCategory}"))),
+            Text = Loc.GetString("marking-used", ("marking-name", $"marking-{marking.ID}"), // Forge-Change: added Forge-Change prefix to the function name
+                ("marking-category", $"markings-category-{marking.MarkingCategory}")),
             Icon = GetMarkingPreviewTexture(marking),
             Selectable = true,
             Metadata = marking,

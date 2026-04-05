@@ -78,6 +78,7 @@ namespace Content.Server.StationEvents
         private EntityTableSystem? _entityTable;
         private IComponentFactory? _compFac;
         private IRobustRandom? _random;
+        private IPrototypeManager? _proto;
 
         /// <summary>
         ///     Estimates the expected number of times an event will run over the course of X rounds, taking into account weights and
@@ -94,8 +95,10 @@ namespace Content.Server.StationEvents
         ///     to even exist) so I think it's fine.
         /// </remarks>
         [CommandImplementation("simulate")]
-        public IEnumerable<(string, float)> Simulate(EntityPrototype eventScheduler, int rounds, int playerCount, float roundEndMean, float roundEndStdDev)
+        public IEnumerable<(string, float)> Simulate(EntProtoId eventSchedulerId, int rounds, int playerCount, float roundEndMean, float roundEndStdDev)
         {
+            _proto ??= IoCManager.Resolve<IPrototypeManager>();
+            var eventScheduler = _proto.Index(eventSchedulerId);
             _stationEvent ??= GetSys<EventManagerSystem>();
             _entityTable ??= GetSys<EntityTableSystem>();
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
@@ -146,8 +149,10 @@ namespace Content.Server.StationEvents
         }
 
         [CommandImplementation("lsprob")]
-        public IEnumerable<(string, float)> LsProb(EntityPrototype eventScheduler)
+        public IEnumerable<(string, float)> LsProb(EntProtoId eventSchedulerId)
         {
+            _proto ??= IoCManager.Resolve<IPrototypeManager>();
+            var eventScheduler = _proto.Index(eventSchedulerId);
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
             _stationEvent ??= GetSys<EventManagerSystem>();
 
@@ -166,8 +171,10 @@ namespace Content.Server.StationEvents
         }
 
         [CommandImplementation("lsprobtime")]
-        public IEnumerable<(string, float)> LsProbTime(EntityPrototype eventScheduler, float time)
+        public IEnumerable<(string, float)> LsProbTime(EntProtoId eventSchedulerId, float time)
         {
+            _proto ??= IoCManager.Resolve<IPrototypeManager>();
+            var eventScheduler = _proto.Index(eventSchedulerId);
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
             _stationEvent ??= GetSys<EventManagerSystem>();
 
@@ -188,8 +195,10 @@ namespace Content.Server.StationEvents
         }
 
         [CommandImplementation("prob")]
-        public float Prob(EntityPrototype eventScheduler, string eventId)
+        public float Prob(EntProtoId eventSchedulerId, string eventId)
         {
+            _proto ??= IoCManager.Resolve<IPrototypeManager>();
+            var eventScheduler = _proto.Index(eventSchedulerId);
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
             _stationEvent ??= GetSys<EventManagerSystem>();
 

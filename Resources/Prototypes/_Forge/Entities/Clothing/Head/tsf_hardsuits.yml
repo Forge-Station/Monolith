@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHeadHelmetHardsuitNfsdBronze
+  parent: NFClothingHeadHardsuitWithLightBaseNfsd
   id: ClothingHeadHelmetHardsuitTSFLow
   name: TSF light hardsuit helmet
   description: A light TSF hardsuit helmet.
@@ -10,7 +10,7 @@
     sprite: Forge/Clothing/Head/Hardsuits/tsf_low.rsi
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitNfsdSilver
+  parent: NFClothingHeadHardsuitWithLightBaseNfsd
   id: ClothingHeadHelmetHardsuitTSFMid
   name: TSF standard hardsuit helmet
   description: A standard TSF hardsuit helmet.
@@ -21,7 +21,7 @@
     sprite: Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitNfsdCombat
+  parent: NFClothingHeadHardsuitWithLightBaseNfsd
   id: ClothingHeadHelmetHardsuitTSFHigh
   name: TSF heavy hardsuit helmet
   description: A heavily armored TSF hardsuit helmet.
@@ -32,7 +32,7 @@
     sprite: Forge/Clothing/Head/Hardsuits/tsf_high.rsi
 
 - type: entity
-  parent: [ ClothingHeadHelmetHardsuitNfsdBrigmedic, ShowMedicalIcons ]
+  parent: [ NFClothingHeadHardsuitWithLightBaseNfsd, ShowMedicalIcons ]
   id: ClothingHeadHelmetHardsuitTSFMedic
   name: TSF corpsman hardsuit helmet
   description: A TSF hardsuit helmet with medical overlays.
@@ -46,7 +46,7 @@
     radius: 5
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitPilot
+  parent: NFClothingHeadHardsuitWithLightBaseNfsd
   id: ClothingHeadHelmetHardsuitTSFKalenval
   name: TSF TBS-4 Kalenval helmet
   description: A scout TSF hardsuit helmet.
@@ -59,7 +59,7 @@
     color: "#ffdbad"
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitNfsdCombat
+  parent: NFClothingHeadHardsuitWithLightBaseNfsd
   id: ClothingHeadHelmetHardsuitTSFVprysk
   name: TSF TBS-5 Vprysk helmet
   description: A specialist TSF hardsuit helmet.
@@ -72,7 +72,7 @@
     color: "#ffb05c"
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitNfsdCommand
+  parent: NFClothingHeadHardsuitWithLightBaseNfsd
   id: ClothingHeadHelmetHardsuitTSFZazhiganie
   name: TSF TBS-2 Zazhiganie helmet
   description: A command TSF hardsuit helmet.
@@ -83,7 +83,7 @@
     sprite: Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitNfsdSheriff
+  parent: NFClothingHeadHardsuitWithLightBaseNfsd
   id: ClothingHeadHelmetHardsuitTSFMidas
   name: TSF UVP-1 Midas helmet
   description: A commander's TSF hardsuit helmet.
@@ -119,7 +119,7 @@
   - type: ToggleCellDraw
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitNfsdCombat
+  parent: NFClothingHeadHardsuitWithLightBaseNfsd
   id: ClothingHeadHelmetHardsuitTSFPorshen
   name: TSF TBS-12 Porshen helmet
   description: A heavy TSF breaching hardsuit helmet.

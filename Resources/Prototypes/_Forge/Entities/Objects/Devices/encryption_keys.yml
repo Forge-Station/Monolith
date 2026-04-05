@@ -185,3 +185,44 @@
     layers:
     - state: crypt_silver
     - state: emp_label
+
+# Company
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyViperGroup
+  suffix: ViperGuard
+  name: viper encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for imperial command staff. Grants general imperial and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - ViperGroup
+    defaultChannel: ViperGroup
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_red
+    - state: synd_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyPaycheckBratva
+  suffix: PaycheckBratva
+  name: paycheck bratva encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for imperial command staff. Grants general imperial and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - PaycheckBratva
+    defaultChannel: PaycheckBratva
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_red_alt
+    - state: synd_label_alt

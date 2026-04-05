@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -74,6 +74,14 @@ public sealed class TTSManager
 
         _sawmill.Verbose($"Generate new audio for '{text}' speech by '{speaker}' speaker");
 
+        // When TTS is enabled but the API isn't configured (common in local dev),
+        // avoid spamming error logs with "invalid request URI" exceptions.
+        if (string.IsNullOrWhiteSpace(_apiUrl))
+            return null;
+
+        if (!Uri.TryCreate(_apiUrl, UriKind.Absolute, out _))
+            return null;
+
         var body = new GenerateVoiceRequest
         {
             ApiToken = _apiToken,
@@ -138,6 +146,15 @@ public sealed class TTSManager
         catch (Exception e)
         {
             RequestTimings.WithLabels("Error").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
+            if (e is InvalidOperationException ioe &&
+                ioe.Message.Contains("invalid request URI", StringComparison.OrdinalIgnoreCase))
+            {
+                // Keep misconfiguration noise out of logs; it is expected when API URL is not set.
+                _sawmill.Debug(
+                    $"TTS request skipped due to invalid request URI for '{text}' speech by '{speaker}' speaker");
+                return null;
+            }
+
             _sawmill.Error($"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
             return null;
         }

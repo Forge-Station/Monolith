@@ -1,73 +1,74 @@
 # region Empire
-- type: entity
-  id: ForgeSpawnPointPraefect
-  parent: SpawnPointJobBase
-  name: spawn point Praefect
-  components:
-  - type: SpawnPoint
-    job_id: Praefect
-  - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: Forge/Structures/Decoration/banner.rsi
-      state: banner_empire
-
-- type: entity
-  id: ForgeSpawnPointArbiter
-  parent: ForgeSpawnPointPraefect
-  name: spawn point Arbiter
-  components:
-  - type: SpawnPoint
-    job_id: Arbiter
-
-- type: entity
-  id: ForgeSpawnPointCardinal
-  parent: ForgeSpawnPointPraefect
-  name: spawn point Cardinal
-  components:
-  - type: SpawnPoint
-    job_id: Cardinal
-
-- type: entity
-  id: ForgeSpawnPointInquisitor
-  parent: ForgeSpawnPointPraefect
-  name: spawn point Inquisitor
-  components:
-  - type: SpawnPoint
-    job_id: Inquisitor
-
-- type: entity
-  id: ForgeSpawnPointConsul
-  parent: ForgeSpawnPointPraefect
-  name: spawn point Consul
-  components:
-  - type: SpawnPoint
-    job_id: Consul
-
-- type: entity
-  id: ForgeSpawnPointPraetorian
-  parent: ForgeSpawnPointPraefect
-  name: spawn point Praetorian
-  components:
-  - type: SpawnPoint
-    job_id: Praetorian
-
-- type: entity
-  id: ForgeSpawnPointAuxilia
-  parent: ForgeSpawnPointPraefect
-  name: spawn point Auxilia
-  components:
-  - type: SpawnPoint
-    job_id: Auxilia
-
-- type: entity
-  id: ForgeSpawnPointNeophyte
-  parent: ForgeSpawnPointPraefect
-  name: spawn point Neophyte
-  components:
-  - type: SpawnPoint
-    job_id: Neophyte
+# Empire spawn points disabled with Empire jobs.
+# - type: entity
+#   id: ForgeSpawnPointPraefect
+#   parent: SpawnPointJobBase
+#   name: spawn point Praefect
+#   components:
+#   - type: SpawnPoint
+#     job_id: Praefect
+#   - type: Sprite
+#     layers:
+#     - sprite: Markers/jobs.rsi
+#       state: green
+#     - sprite: Forge/Structures/Decoration/banner.rsi
+#       state: banner_empire
+#
+# - type: entity
+#   id: ForgeSpawnPointArbiter
+#   parent: ForgeSpawnPointPraefect
+#   name: spawn point Arbiter
+#   components:
+#   - type: SpawnPoint
+#     job_id: Arbiter
+#
+# - type: entity
+#   id: ForgeSpawnPointCardinal
+#   parent: ForgeSpawnPointPraefect
+#   name: spawn point Cardinal
+#   components:
+#   - type: SpawnPoint
+#     job_id: Cardinal
+#
+# - type: entity
+#   id: ForgeSpawnPointInquisitor
+#   parent: ForgeSpawnPointPraefect
+#   name: spawn point Inquisitor
+#   components:
+#   - type: SpawnPoint
+#     job_id: Inquisitor
+#
+# - type: entity
+#   id: ForgeSpawnPointConsul
+#   parent: ForgeSpawnPointPraefect
+#   name: spawn point Consul
+#   components:
+#   - type: SpawnPoint
+#     job_id: Consul
+#
+# - type: entity
+#   id: ForgeSpawnPointPraetorian
+#   parent: ForgeSpawnPointPraefect
+#   name: spawn point Praetorian
+#   components:
+#   - type: SpawnPoint
+#     job_id: Praetorian
+#
+# - type: entity
+#   id: ForgeSpawnPointAuxilia
+#   parent: ForgeSpawnPointPraefect
+#   name: spawn point Auxilia
+#   components:
+#   - type: SpawnPoint
+#     job_id: Auxilia
+#
+# - type: entity
+#   id: ForgeSpawnPointNeophyte
+#   parent: ForgeSpawnPointPraefect
+#   name: spawn point Neophyte
+#   components:
+#   - type: SpawnPoint
+#     job_id: Neophyte
 
 #region Renegates
 - type: entity

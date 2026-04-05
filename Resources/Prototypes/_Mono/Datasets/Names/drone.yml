@@ -1,8 +1,8 @@
-- type: dataset
+- type: localizedDataset
   id: DroneTitle
   values:
-  - UNIT
-  - INSTANCE
+    prefix: names-drone-title-dataset-
+    count: 2
 
 - type: dataset
   id: DroneHex

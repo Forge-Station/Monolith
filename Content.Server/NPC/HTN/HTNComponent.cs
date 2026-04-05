@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Content.Server.NPC.Components;
 
@@ -39,6 +40,18 @@ public sealed partial class HTNComponent : NPCComponent
 
     [DataField]
     public bool ConstantlyReplan = true;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float AiUpdateInterval = 0f;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float AiUpdateJitter = 0f;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan NextAiUpdateAt = TimeSpan.Zero;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public int UpdatePhaseSeed = 0;
 
     [ViewVariables]
     public HTNPlanJob? PlanningJob = null;

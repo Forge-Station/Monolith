@@ -10,7 +10,7 @@ using Robust.Shared.Network;
 
 namespace Content.Server.Whitelist;
 
-[AdminCommand(AdminFlags.Whitelist)] // DeltaV - Custom permission for whitelist
+[AdminCommand(AdminFlags.WhitelistManager)] // DeltaV - Custom permission for whitelist
 public sealed class AddWhitelistCommand : LocalizedCommands
 {
     [Dependency] private readonly JobWhitelistManager _jobWhitelist = default!; // Frontier
@@ -61,7 +61,7 @@ public sealed class AddWhitelistCommand : LocalizedCommands
     }
 }
 
-[AdminCommand(AdminFlags.Ban)]
+[AdminCommand(AdminFlags.WhitelistManager)] // Forge-Change: whitelist
 public sealed class RemoveWhitelistCommand : LocalizedCommands
 {
     [Dependency] private readonly JobWhitelistManager _jobWhitelist = default!; // Frontier

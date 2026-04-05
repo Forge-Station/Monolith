@@ -1,7 +1,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
-namespace Content.Shared._Forge.Speech.Synthesis.Components;
+namespace Content.Shared._Forge.Barks;
 
 /// <summary>
 /// Applies bark sounds to the essence.

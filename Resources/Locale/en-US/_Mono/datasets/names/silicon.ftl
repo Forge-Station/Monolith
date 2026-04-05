@@ -1,0 +1,61 @@
+names-mono-pdv-borg-dataset-1 = Vanguard Unit
+names-mono-pdv-borg-dataset-2 = PDV Enforcer Module
+names-mono-pdv-borg-dataset-3 = PDV Sentinel
+names-mono-pdv-borg-dataset-4 = Dynast Defense Unit
+
+names-mono-tsf-borg-dataset-1 = Federation Silicon
+names-mono-tsf-borg-dataset-2 = TSFMC Compliance Unit
+names-mono-tsf-borg-dataset-3 = TSFMC Sgt. Reckless
+names-mono-tsf-borg-dataset-4 = TSFMC Judge & Jury
+
+names-mono-vessel-core-dataset-1 = Steven
+names-mono-vessel-core-dataset-2 = Robyn
+names-mono-vessel-core-dataset-3 = Alex
+names-mono-vessel-core-dataset-4 = Bob
+names-mono-vessel-core-dataset-5 = Alexander
+names-mono-vessel-core-dataset-6 = Steve
+names-mono-vessel-core-dataset-7 = Kira
+names-mono-vessel-core-dataset-8 = Var:Tim
+
+names-mono-tsfmc-core-dataset-1 = TSFMC Watcher
+names-mono-tsfmc-core-dataset-2 = TSFMC Upholder
+names-mono-tsfmc-core-dataset-3 = TSFMC Robocop
+names-mono-tsfmc-core-dataset-4 = TSFMC Silicon
+names-mono-tsfmc-core-dataset-5 = TSFMCAI.exe
+names-mono-tsfmc-core-dataset-6 = TSFMC Dog
+names-mono-tsfmc-core-dataset-7 = TSFMC Unit
+
+names-mono-pdv-core-dataset-1 = Imperial Overseer
+names-mono-pdv-core-dataset-2 = Imperial Positronic
+names-mono-pdv-core-dataset-3 = Imperial Grid
+names-mono-pdv-core-dataset-4 = Imperial Hivemind
+names-mono-pdv-core-dataset-5 = PDVAI.sh
+names-mono-pdv-core-dataset-6 = Imperial Cat
+names-mono-pdv-core-dataset-7 = Imperial Instance
+
+names-mono-remnant-ship-dataset-1 = ADS-Glimmer
+names-mono-remnant-ship-dataset-2 = ADS-Orion
+names-mono-remnant-ship-dataset-3 = ADS-Expanse
+names-mono-remnant-ship-dataset-4 = ADS-Symphony
+names-mono-remnant-ship-dataset-5 = ADS-Chorus
+names-mono-remnant-ship-dataset-6 = ADS-Flashpoint
+names-mono-remnant-ship-dataset-7 = ADS-Phoron
+names-mono-remnant-ship-dataset-8 = ADS-Conquest
+names-mono-remnant-ship-dataset-9 = ADS-Prime
+names-mono-remnant-ship-dataset-10 = ADS-Firestorm
+names-mono-remnant-ship-dataset-11 = ADS-Retaliation
+names-mono-remnant-ship-dataset-12 = ADS-Horizon
+names-mono-remnant-ship-dataset-13 = ADS-Marksman
+names-mono-remnant-ship-dataset-14 = ADS-Barricade
+names-mono-remnant-ship-dataset-15 = ADS-Vein
+names-mono-remnant-ship-dataset-16 = ADS-Zero
+names-mono-remnant-ship-dataset-17 = ADS-Midnight
+names-mono-remnant-ship-dataset-18 = ADS-Interdiction
+names-mono-remnant-ship-dataset-19 = ADS-Mist
+names-mono-remnant-ship-dataset-20 = ADS-Granite
+names-mono-remnant-ship-dataset-21 = ADS-Typhoon
+names-mono-remnant-ship-dataset-22 = ADS-Storm
+names-mono-remnant-ship-dataset-23 = ADS-Rubicon
+names-mono-remnant-ship-dataset-24 = ADS-Cauterizer
+names-mono-remnant-ship-dataset-25 = ADS-Evasion
+names-mono-remnant-ship-dataset-26 = ADS-Apprehension

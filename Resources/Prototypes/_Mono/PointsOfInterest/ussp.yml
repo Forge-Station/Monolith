@@ -14,7 +14,7 @@
   name: 'Станция «Камелот»'
   minimumDistance: 10650
   maximumDistance: 12400
-  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/camelot.yml
   addComponents:
@@ -38,7 +38,9 @@
         - type: StationNameSetup
           mapNameTemplate: 'Станция «Камелот»'
         - type: ExtraStationInformation
-          iconPath: /Textures/_NF/Structures/Storage/Crates/secure_ammo.rsi/icon.png
+          icon:
+            sprite: _NF/Structures/Storage/Crates/secure_ammo.rsi
+            state: icon
           stationSubtext: 'frontier-lobby-camelot-subtext'
           stationDescription: 'frontier-lobby-camelot-description'
           lobbySortOrder: 4

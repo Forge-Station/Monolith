@@ -28,4 +28,21 @@ public sealed partial class CCVars
     ///     Mono: Distance threshold for pausing NPCs when no players are in range.
     /// </summary>
     public static readonly CVarDef<float> NPCPlayerPauseDistance = CVarDef.Create("npc.player_pause_distance", 32f);
+
+    public static readonly CVarDef<float> NPCAiLodNearDistance = CVarDef.Create("npc.ai_lod_near_distance", 8f);
+    public static readonly CVarDef<float> NPCAiLodMidDistance = CVarDef.Create("npc.ai_lod_mid_distance", 16f);
+    public static readonly CVarDef<float> NPCAiLodFarDistance = CVarDef.Create("npc.ai_lod_far_distance", 24f);
+
+    public static readonly CVarDef<float> NPCAiNearUpdateInterval = CVarDef.Create("npc.ai_near_update_interval", 0f);
+    public static readonly CVarDef<float> NPCAiMidUpdateInterval = CVarDef.Create("npc.ai_mid_update_interval", 0.08f);
+    public static readonly CVarDef<float> NPCAiFarUpdateInterval = CVarDef.Create("npc.ai_far_update_interval", 0.22f);
+    public static readonly CVarDef<float> NPCAiUpdateJitter = CVarDef.Create("npc.ai_update_jitter", 0.03f);
+
+    public static readonly CVarDef<float> NPCPathNearRepathInterval = CVarDef.Create("npc.path_near_repath_interval", 0.2f);
+    public static readonly CVarDef<float> NPCPathMidRepathInterval = CVarDef.Create("npc.path_mid_repath_interval", 0.45f);
+    public static readonly CVarDef<float> NPCPathFarRepathInterval = CVarDef.Create("npc.path_far_repath_interval", 0.9f);
+    public static readonly CVarDef<float> NPCPathRepathJitter = CVarDef.Create("npc.path_repath_jitter", 0.12f);
+
+    public static readonly CVarDef<float> NPCPathCacheTTL = CVarDef.Create("npc.path_cache_ttl", 1.5f);
+    public static readonly CVarDef<float> NPCPathCacheTargetThreshold = CVarDef.Create("npc.path_cache_target_threshold", 1.25f);
 }

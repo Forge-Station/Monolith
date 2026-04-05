@@ -11,10 +11,12 @@ nf-holopad-general-frontier-outpost-lobby = Аванпост Фронтира - 
 nf-holopad-general-trade-station-stc = Торговая Станция - Диспетчерская
 nf-holopad-general-trade-station-cafeteria = Торговая Станция - Кафетерий
 nf-holopad-general-medical-dispatch = Госпиталь - Приёмная
-nf-holopad-general-medical-dispatch-doc = Госпиталь - Офис ММО
-nf-holopad-general-nfsd-sheriff-office = ДСБФ - Офис Шерифа
-nf-holopad-general-nfsd-reception = ДСБФ - Приёмная
-nf-holopad-general-nfsd-lobby = ДСБФ - Лобби
+# Forge
+nf-holopad-general-medical-dispatch-doc = Госпиталь - Офис Директора TTI
+# Forge end
+nf-holopad-general-nfsd-sheriff-office = ТСФ - Офис Шерифа
+nf-holopad-general-nfsd-reception = ТСФ - Приёмная
+nf-holopad-general-nfsd-lobby = ТСФ - Лобби
 nf-holopad-general-edison-reception = Электростанция Эдисона - Приёмная
 nf-holopad-general-tinnia = Ресторан Тринньки
 nf-holopad-general-barrier-gate = Барьерные врата

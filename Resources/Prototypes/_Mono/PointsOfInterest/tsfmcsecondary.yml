@@ -11,10 +11,10 @@
 - type: pointOfInterest
   id: TSFMCOutpost
   parent: [BasePOI, BaseRepairablePOI]
-  name: 'Вторичный аванпост ДСБФ'
+  name: 'Вторичный аванпост ТСФ'
   minimumDistance: 11000
   maximumDistance: 14000
-  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/tsfmcoutpost.yml
   addComponents:
@@ -25,7 +25,7 @@
 
 - type: gameMap
   id: TSFMCOutpost
-  mapName: 'Вторичный аванпост ДСБФ'
+  mapName: 'Вторичный аванпост ТСФ'
   mapPath: /Maps/_Mono/POI/tsfmcoutpost.yml
   minPlayers: 0
   stations:
@@ -33,16 +33,17 @@
       stationProto: SecurityFrontierOutpost
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Вторичный аванпост ДСБФ'
+          mapNameTemplate: 'Вторичный аванпост ТСФ'
         - type: ExtraStationInformation
-          iconPath: /Textures/_NF/Structures/Decoration/banner.rsi/nfsd-banner.png
+          icon:
+            sprite: _NF/Structures/Decoration/banner.rsi
+            state: nfsd-banner
           stationSubtext: 'frontier-lobby-tsfmc-secondary-subtext'
           stationDescription: 'frontier-lobby-tsfmc-secondary-description'
           lobbySortOrder: 2
         - type: StationJobs
           availableJobs:
             #Forge Change
-            TsfSeniorOfficer: [ 0, 1 ]
             TsfSeniorAide: [ 0, 1 ]
             TsfRanger: [ -1, -1 ]
             TsfRecruit: [ -1, -1 ]

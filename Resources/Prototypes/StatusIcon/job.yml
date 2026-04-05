@@ -293,13 +293,13 @@
     state: MedicalDoctor
   jobName: job-name-doctor
 
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconParamedic
-  icon:
-    sprite: /Textures/Interface/Misc/job_icons.rsi
-    state: Paramedic
-  jobName: job-name-paramedic
+#- type: jobIcon
+#  parent: JobIcon
+#  id: JobIconParamedic
+#  icon:
+ #   sprite: /Textures/Interface/Misc/job_icons.rsi
+ #   state: Paramedic
+ # jobName: job-name-paramedic
 
 - type: jobIcon
   parent: JobIcon

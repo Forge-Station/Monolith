@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Content.Shared._Mono.Company; // Forge-Change: company whitelist
 using Content.Shared.CCVar;
 using Content.Shared.Preferences;
 using Robust.Server.Player;
@@ -87,10 +88,11 @@ namespace Content.Server.Preferences.Managers
             if (message.Profile == null)
                 _sawmill.Error($"User {userId} sent a {nameof(MsgUpdateCharacter)} with a null profile in slot {message.Slot}.");
             else
-                await SetProfile(userId, message.Slot, message.Profile);
+                await SetProfile(userId, message.Slot, message.Profile, false);
         }
 
-        public async Task SetProfile(NetUserId userId, int slot, ICharacterProfile profile)
+        public async Task SetProfile(NetUserId userId, int slot, ICharacterProfile profile,
+            bool authoritative = true) // Mono
         {
             if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
             {
@@ -104,6 +106,14 @@ namespace Content.Server.Preferences.Managers
             var curPrefs = prefsData.Prefs!;
             var session = _playerManager.GetSessionById(userId);
             profile.EnsureValid(session, _dependencies);
+            // Mono
+            if (!authoritative && profile is HumanoidCharacterProfile humanoid)
+            {
+                if (curPrefs.Characters.TryGetValue(slot, out var oldProfile) && oldProfile is HumanoidCharacterProfile oldHumanoid)
+                    profile = humanoid.WithBankBalance(oldHumanoid.BankBalance);
+                else
+                    profile = humanoid.WithBankBalance(HumanoidCharacterProfile.DefaultBalance);
+            }
 
             // Forge-Change-Start: set increased starting bank balance for new globally whitelisted characters
             if (profile is HumanoidCharacterProfile humanoidProfile &&
@@ -119,6 +129,11 @@ namespace Content.Server.Preferences.Managers
             }
             // Forge-Change-End
 
+            if (profile is HumanoidCharacterProfile companyProfile)
+            {
+                profile = await ValidateCompanySelection(userId, session, companyProfile);
+            }
+
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
 
             {
@@ -129,6 +144,23 @@ namespace Content.Server.Preferences.Managers
 
             if (ShouldStorePrefs(session.Channel.AuthType))
                 await _db.SaveCharacterSlotAsync(userId, profile, slot);
+        }
+
+        private async Task<ICharacterProfile> ValidateCompanySelection(NetUserId userId, ICommonSession session, HumanoidCharacterProfile profile)
+        {
+            if (!_protos.TryIndex<CompanyPrototype>(profile.Company, out var company))
+                return profile.WithCompany("None");
+
+            if (!company.Disabled)
+                return profile;
+
+            if (await _db.IsCompanyWhitelisted(userId.UserId, company.ID))
+                return profile;
+
+            if (company.Logins.Contains(session.Name))
+                return profile;
+
+            return profile.WithCompany("None");
         }
 
         private async void HandleDeleteCharacterMessage(MsgDeleteCharacter message)

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Robust.Client.Input;
 using Robust.Shared.Input;
 using Robust.Shared.Utility;
@@ -10,7 +10,12 @@ public static class BoundKeyHelper
     public static string ShortKeyName(BoundKeyFunction keyFunction)
     {
         // need to use shortened key names so they fit in the buttons.
-        return TryGetShortKeyName(keyFunction, out var name) ? Loc.GetString(name) : " ";
+        // Forge-Change: added Forge-Change prefix to the function name
+        // `name` is already a short, user-facing key label (e.g. "Tab", "0", "Esc").
+        // Some of these labels are not present in locale files, so avoid `Loc.GetString`
+        // warnings by falling back to the raw label if translation isn't available.
+        return TryGetShortKeyName(keyFunction, out var name) &&
+               Loc.TryGetString(name, out var localized) ? localized : name ?? " ";
     }
 
     public static bool IsBound(BoundKeyFunction keyFunction)

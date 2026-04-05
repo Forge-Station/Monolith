@@ -54,7 +54,7 @@
 - type: entity
   parent: DefaultStationBeacon
   id: DefaultStationBeaconFrontierCorvax3
-  suffix: Corvax ДСБФ_1
+  suffix: Corvax ТСФ_1
   components:
   - type: NavMapBeacon
     defaultText: station-beacon-Corvax3
@@ -63,7 +63,7 @@
 - type: entity
   parent: DefaultStationBeacon
   id: DefaultStationBeaconFrontierCorvax4
-  suffix: Corvax ДСБФ_2
+  suffix: Corvax ТСФ_2
   components:
   - type: NavMapBeacon
     defaultText: station-beacon-Corvax4

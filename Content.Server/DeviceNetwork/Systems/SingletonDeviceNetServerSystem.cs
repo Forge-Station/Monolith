@@ -1,7 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.DeviceNetwork.Components;
 using Content.Server.Medical.CrewMonitoring;
-using Content.Server.Station.Systems;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Power;
 using Robust.Shared.Map;
@@ -15,8 +14,6 @@ namespace Content.Server.DeviceNetwork.Systems;
 public sealed class SingletonDeviceNetServerSystem : EntitySystem
 {
     [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -51,27 +48,36 @@ public sealed class SingletonDeviceNetServerSystem : EntitySystem
         >();
 
         (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? last = default;
+        (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? active = default; // Forge-Change
 
         while (servers.MoveNext(out var uid, out var server, out var device, out _, out var xform))
         {
-            // Frontier PR 1053 QoL tweaks to displayed coordinates
-            //if (!_stationSystem.GetOwningStation(uid)?.Equals(stationId) ?? true)
-            if (xform.MapID != map) //Frontier
+            if (xform.MapID != map) // Forge-Change
                 continue;
 
             if (!server.Available)
             {
-                DisconnectServer(uid,server, device);
+                DisconnectServer(uid, server, device); // Forge-Change
                 continue;
             }
 
             last = (uid, server, device);
 
-            if (!server.Active || string.IsNullOrEmpty(device.Address))
+            if (!server.Active) // Forge-Change
                 continue;
 
+            if (!active.HasValue) // Forge-Change
+                active = (uid, server, device); // Forge-Change
+        }
+
+        if (active.HasValue) // Forge-Change
+        {
+            var (id, server, device) = active.Value; // Forge-Change
+            if (string.IsNullOrEmpty(device.Address)) // Forge-Change
+                ConnectServer(id, server, device); // Forge-Change
+
             address = device.Address;
-            return true;
+            return !string.IsNullOrEmpty(address); // Forge-Change
         }
 
         //If there was no active server for the station make the last available inactive one active
@@ -79,13 +85,70 @@ public sealed class SingletonDeviceNetServerSystem : EntitySystem
         {
             ConnectServer(last.Value.id, last.Value.server, last.Value.device);
             address = last.Value.device.Address;
-            return true;
+            return !string.IsNullOrEmpty(address); // Forge-Change
+        }
+
+        address = null; // Forge-Change
+        return false; // Forge-Change
+    }
+
+    // Forge-Change-start
+    public bool TryGetActiveServerAddressGlobal<TComp>([NotNullWhen(true)] out string? address)
+        where TComp : IComponent
+    {
+        var servers = EntityQueryEnumerator<
+            SingletonDeviceNetServerComponent,
+            DeviceNetworkComponent,
+            TComp
+        >();
+
+        (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? lastAvailable = null;
+        (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? active = null;
+
+        while (servers.MoveNext(out var uid, out var server, out var device, out _))
+        {
+            if (!server.Available)
+            {
+                DisconnectServer(uid, server, device);
+                continue;
+            }
+
+            lastAvailable = (uid, server, device);
+
+            if (!server.Active)
+                continue;
+
+            if (active.HasValue)
+            {
+                DisconnectServer(uid, server, device);
+                continue;
+            }
+
+            active = (uid, server, device);
+        }
+
+        if (active.HasValue)
+        {
+            var (id, server, device) = active.Value;
+            if (string.IsNullOrEmpty(device.Address))
+                ConnectServer(id, server, device);
+
+            address = device.Address;
+            return !string.IsNullOrEmpty(address);
+        }
+
+        if (lastAvailable.HasValue)
+        {
+            var (id, serv, dev) = lastAvailable.Value;
+            ConnectServer(id, serv, dev);
+            address = dev.Address;
+            return !string.IsNullOrEmpty(address);
         }
 
         address = null;
-        return address != null;
+        return false;
     }
-
+    // Forge-Change-end
     /// <summary>
     /// Disconnects the server losing power
     /// </summary>

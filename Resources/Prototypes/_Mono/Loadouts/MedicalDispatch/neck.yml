@@ -1,0 +1,57 @@
+# All forge
+- type: loadoutGroup
+  id: MdMedicNeck
+  name: loadout-group-contractor-neck
+  loadouts:
+  - MdMedicClothingNeckIFFWhite
+  - MdMedicClothingNeckIFFCyan
+  - MdMedicClothingNeckIFFGreen
+  - MdMedicClothingNeckIFFBlue
+  - MdMedicClothingNeckStethoscope
+  - MdMedicClothingNeckLightBlueScarf
+  - MdMedicClothingNeckBlueScarf
+  fallbacks:
+  - MdMedicClothingNeckIFFWhite
+
+- type: loadout
+  id: MdMedicClothingNeckIFFWhite
+  price: 0
+  equipment:
+    neck: ClothingNeckIFFNeutral
+
+- type: loadout
+  id: MdMedicClothingNeckIFFCyan
+  price: 0
+  equipment:
+    neck: ClothingNeckIFFCyan
+
+- type: loadout
+  id: MdMedicClothingNeckIFFGreen
+  price: 0
+  equipment:
+    neck: ClothingNeckIFFGreen
+
+- type: loadout
+  id: MdMedicClothingNeckIFFBlue
+  price: 0
+  equipment:
+    neck: ClothingNeckIFFBlue
+
+- type: loadout
+  id: MdMedicClothingNeckLightBlueScarf
+  price: 0
+  equipment:
+    neck: ClothingNeckScarfStripedLightBlue
+
+- type: loadout
+  id: MdMedicClothingNeckBlueScarf
+  price: 0
+  equipment:
+    neck: ClothingNeckScarfStripedBlue
+
+
+- type: loadout
+  id: MdMedicClothingNeckStethoscope
+  price: 0
+  equipment:
+    neck: ClothingNeckStethoscope

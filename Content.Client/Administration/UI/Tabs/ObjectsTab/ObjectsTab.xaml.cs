@@ -49,6 +49,7 @@ public sealed partial class ObjectsTab : Control
         SearchList.DataFilterCondition += DataFilterCondition;
         SearchList.ItemKeyBindDown += (args, data) => OnEntryKeyBindDown?.Invoke(args, data);
         RefreshListButton.OnPressed += _ => RefreshObjectList();
+        GridCountLabel.Visible = false; // Forge-Change
 
         var defaultSelection = ObjectsTabSelection.Grids;
         ObjectTypeOptions.SelectId((int)defaultSelection);
@@ -73,6 +74,7 @@ public sealed partial class ObjectsTab : Control
     private void RefreshObjectList(ObjectsTabSelection selection)
     {
         var entities = new List<(string Name, NetEntity Entity)>();
+        var isGridsSelection = selection == ObjectsTabSelection.Grids; // Forge-Change
         switch (selection)
         {
             case ObjectsTabSelection.Stations:
@@ -100,6 +102,12 @@ public sealed partial class ObjectsTab : Control
             }
             default:
                 throw new ArgumentOutOfRangeException(nameof(selection), selection, null);
+        }
+
+        GridCountLabel.Visible = isGridsSelection; // Forge-Change
+        if (isGridsSelection)
+        {
+            GridCountLabel.Text = Loc.GetString("object-tab-grid-count", ("count", entities.Count));
         }
 
         entities.Sort((a, b) =>

@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Падальщик
   description: Легкий одноместный шаттл Империи, вооруженный ЭМИ-пушками и тремя лазерными орудиями.
-  price: 39000
+  price: 45200
   category: Small
   group: Empire
   access: Empire

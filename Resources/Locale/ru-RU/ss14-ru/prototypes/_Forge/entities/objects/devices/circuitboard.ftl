@@ -5,4 +5,4 @@ ent-FComputerShuttleAntagCircuitboard = консоль управления ша
 
 ent-DoorElectronicsSergeant = { ent-DoorElectronics }
     .desc = { ent-DoorElectronics.desc }
-    .suffix = Лейтенант, ДСБФ
+    .suffix = Лейтенант, ТСФ

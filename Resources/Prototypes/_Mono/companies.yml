@@ -2,7 +2,7 @@
 - type: company
   id: None
   form: Neutral # Do NOT apply "Neutral" to anywhere outside "None"
-  name: None
+  name: Безработный
   color: "#FFFFFF"
 
 # ====DO NOT TOUCH - ADMIN COMPANIES====
@@ -12,7 +12,8 @@
 - type: company
   id: TSF
   form: Protagonist
-  name: TSF
+  name: Транс-Солнечная Федерация # Forge-change: locale
+  description: solarfed-company-description # Forge-change
   color: "#047ABD"
   disabled: true
 
@@ -22,20 +23,23 @@
   name: PDV
   color: "#D2B48C"
   disabled: true
+  hidden: true # Forge-change: hide
 
 - type: company
   id: MD
   form: Protagonist
-  name: MED
-  color: "#3B8EEA"
+  name: Trauma Team International # Forge-change
+  color: "#00d1a0" # Forge-change
   disabled: true
+  hidden: true # Forge-change: hide cauz' i dont have description and im lazy to create it. If u add the desc: please switch to false
 
 - type: company
   id: Colonial
   form: Protagonist
-  name: Colonial Staff
-  color: "#279659"
+  name: NanoTrasen # Forge-change
+  color: "#334e6d" # Forge-change
   disabled: true
+  hidden: true # Forge-change: hide cauz' i dont have description and im lazy to create it. If u add the desc: please switch to false
 
 - type: company
   id: TSFHighComm
@@ -44,6 +48,7 @@
   description: winter-solstice-description
   color: "#008CE3"
   disabled: true
+  hidden: true # Forge-change
   logins: # admins only here !!! or your PR will be CLOSED!!!! also serves as a example for ur whitelisted factions
   - localhost@Ark
   - Ark
@@ -73,6 +78,7 @@
   form: Protagonist
   name: Drake Industries
   description: drake-industries-description
+  note: drake-industries-company-note
   color: "#C97D7D"
   image: /Textures/_Mono/Companies/drake_industries.png
 
@@ -81,6 +87,7 @@
   form: Protagonist
   name: Steel Hammer Manufacturing
   description: steel-hammer-description
+  note: steel-hammer-company-note
   color: "#92a2a1"
   image: /Textures/_Mono/Companies/steel_hammer.png
 
@@ -103,10 +110,13 @@
 - type: company
   id: USSP
   form: Antagonist
-  name: USSP
+  name: СССП(К) # Forge-change: locale and small rename: К = Кораблей
   color: "#B01340"
   disabled: false # Mercs are now USSP-pilled.
   description: ussp-description
+  note: ussp-company-note
+  spawnSound: !type:SoundPathSpecifier
+    path: "/Audio/Ambience/Antag/headrev_start.ogg"
 
 # Major companies
 
@@ -143,6 +153,8 @@
   description: universal-states-of-america-description
   color: "#0A3161"
   image: /Textures/_Mono/Companies/UNSA.png
+  disabled: true # Forge-change: hide
+  hidden: true # Forge-change: hide
 
 - type: company
   id: CivilDefenseMilita
@@ -150,6 +162,8 @@
   name: Civil Defense Militia
   description: civil-defense-milita-description
   color: "#666600"
+  disabled: true
+  hidden: true # Forge-change: hide
 
 - type: company
   id: UllmanIndustries
@@ -158,6 +172,8 @@
   description: ullman-industries-description
   color: "#52326A"
   image: /Textures/_Mono/Companies/ullman_industries.png
+  spawnSound: !type:SoundPathSpecifier
+    path: "/Audio/Ambience/Antag/pirate_start.ogg"
 
 - type: company
   id: NosskeEienResearchandDevelopment
@@ -174,7 +190,6 @@
   description: blackhawkpmc-description
   color: "#419E23"
   image: /Textures/_Mono/Companies/BMC.png
-
 
 # Religious groups
 
@@ -196,9 +211,11 @@
 - type: company
   id: TheHive
   form: Protagonist
-  name: The Hive
+  name: Улей # Forge-change: locale The Hive
   description: The-Hive-description
   color: "#5918a8"
+  spawnSound: !type:SoundPathSpecifier
+    path: "/Audio/Ambience/ambimystery.ogg"
 
 # Black Market Companies
 
@@ -207,7 +224,13 @@
   form: Antagonist
   name: Paycheck Bratva
   description: paycheck-bratva-description
-  color: "#7a0303"
+  note: paycheck-bratva-company-note
+  color: "#971f47"
+  spawnSound: !type:SoundPathSpecifier
+    path: "/Audio/Ambience/Antag/pirate_start.ogg"
+  special: # Forge-change
+  - !type:GiveItemSpecial
+    prototype: EncryptionKeyPaycheckBratva
 
 - type: company
   id: CerberusSurplusProvisions
@@ -217,6 +240,7 @@
   color: "#aa1010"
   image: /Textures/_Mono/Companies/CSP.png
   disabled: true
+  hidden: true # Forge-change: hide
   logins:
     - GoobieWoob
     - Coolzman
@@ -229,15 +253,17 @@
     - Administratorx # Hopefully this doesnt get denied because it has adminstrator in it smh
     - MSMarvin
 
-# ====Rogue / Antag. Companies====
 - type: company
   id: TheViperGroup
   form: Antagonist
-  name: The Viper Group
+  name: Viper Group
   description: viper-group-description
-  color: "#D82918"
+  note: viper-group-company-note
+  color: "#B82121"
   image: /Textures/_Mono/Companies/thevipergroup.png # Example
   disabled: true
+  spawnSound: !type:SoundPathSpecifier
+    path: "/Audio/_Forge/Ambience/Antag/cut_reaper_spawn.ogg"
   logins:
   - Schizm1253
   - Androidonator
@@ -250,9 +276,45 @@
   - Ghost581
   - hellcat76
   - HungryCuban
-  - Kiterny
-  - plazmasniper_2005
-  - Redrover1760
   - Scyron
   - SwadianSupremacy
   - Traildog
+  - PH77SER
+  - Siege_Of_Malta_Never_Happened
+  - gelliii
+  - Uranio
+  special: # Forge-change
+  - !type:GiveItemSpecial
+    prototype: EncryptionKeyViperGroup
+
+- type: company
+  id: RedSailCorsairs
+  form: Antagonist
+  name: RedSail Corsairs
+  description: redsail-corsairs-description
+  color: "#930000"
+  image: /Textures/_Mono/Companies/redsailcorsairs.png
+  disabled: true
+  hidden: true # Forge-change: hide
+  logins: # 20 total
+  - Corrupt
+  - Jasos
+  - Luksu
+  - FervantTwo8
+  - Wawa_pull
+  - Pffy
+  - SouthernSaint
+  - Birdadoido
+  - Abbyssl
+  - MSMarvin
+  - Dusky
+  - Middleagedman
+  - EmmaFaith
+  - soulvapor
+  - Ether
+  - MapleSilk
+  - Spacepeing
+  - zigcraft
+  - burrrkeye
+  - enkidienne
+  - chugaa

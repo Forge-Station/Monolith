@@ -8,3 +8,7 @@ chat-radio-com-renegade = Команд. Ренегаты
 
 chat-radio-imperial = Имперский
 chat-radio-imperial-command = Команд. Империя
+chat-radio-trauma = Травма тим
+
+chat-radio-vipergroup = Viper Group
+chat-radio-paycheck = Братва

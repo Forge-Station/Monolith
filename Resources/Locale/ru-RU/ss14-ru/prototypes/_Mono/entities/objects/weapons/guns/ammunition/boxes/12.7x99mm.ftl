@@ -1,3 +1,3 @@
-﻿ent-BaseAmmoBox127x99mm = коробка боеприпасов (12.7x99мм противоматериальные)
-ent-AmmoBox127x99mm = AmmoBox127x99mm
-ent-AmmoBox127x99mmExplosive = ammunition box (12.7x99mm high-explosive)
+ent-BaseAmmoBox127x99mm = коробка боеприпасов (12.7x99мм противоматериальные)
+ent-AmmoBox127x99mm = коробка боеприпасов (12.7x99мм противоматериальные)
+ent-AmmoBox127x99mmExplosive = коробка боеприпасов (12.7x99мм фугасные)

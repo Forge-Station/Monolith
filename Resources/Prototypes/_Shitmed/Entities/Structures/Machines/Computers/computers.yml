@@ -9,3 +9,4 @@
     - type: CommunicationsConsole
       title: comms-console-announcement-title-centcom
       global: true
+      canIncreaseAlertLevel: true

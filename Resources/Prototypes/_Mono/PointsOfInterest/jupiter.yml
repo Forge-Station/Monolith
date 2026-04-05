@@ -37,7 +37,7 @@
         - type: StationNameSetup
           mapNameTemplate: 'Авианосец класса «Юпитер» ПДВ'
         - type: ExtraStationInformation
-          iconPath: /Textures/_NF/Interface/Pirate/piratelogo.png
+          icon: /Textures/_NF/Interface/Pirate/piratelogo.png
           stationSubtext: 'frontier-lobby-jupiter-subtext'
           stationDescription: 'frontier-lobby-jupiter-description'
           lobbySortOrder: 2

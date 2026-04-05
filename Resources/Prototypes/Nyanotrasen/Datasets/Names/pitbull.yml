@@ -1,34 +1,5 @@
-- type: dataset
+- type: localizedDataset
   id: names_pitbull
   values:
-  - Zeus
-  - 45_magnum
-  - Diesel
-  - Satan
-  - Dante
-  - Midas
-  - Blue
-  - Petunia
-  - Luna
-  - Bubbles
-  - Rainbow
-  - Echo
-  - Cuddles
-  - Killer
-  - Paisley
-  - Echo
-  - Sweetie
-  - Tutu
-  - Reaper
-  - Peaches
-  - Cujo
-  - Cuddles
-  - Lucifer
-  - Daisy
-  - Blaze
-  - Lady
-  - Franny
-  - Hades
-  - Baby
-  - Demon
-  - Trixie
+    prefix: names-pitbull-dataset-
+    count: 31

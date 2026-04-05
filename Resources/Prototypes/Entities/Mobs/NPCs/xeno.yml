@@ -82,7 +82,6 @@
       groups:
         Brute: 18
   - type: DamageStateVisuals
-    rotate: true
     states:
       Alive:
         Base: running

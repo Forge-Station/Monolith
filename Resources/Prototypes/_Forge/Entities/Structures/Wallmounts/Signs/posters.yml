@@ -40,3 +40,25 @@
     - type: Sprite
       sprite: Forge/Structures/Wallmounts/posters.rsi
       state: cf_poster3_contraband
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitArdenteGroup
+  name: Ardente Group
+  description: Welcome to Ardente.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Wallmounts/posters.rsi
+    state: cf_poster_ardente
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitArdenteAM
+  name: Ardente Advanced Manufacturing
+  description: Entrust your ship to us.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Wallmounts/posters.rsi
+    state: cf_poster_aam

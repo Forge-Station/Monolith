@@ -1,8 +1,3 @@
-ent-AirlockExternalShuttleRenegades = Стыковочный шлюз
-ent-AirlockExternalShuttlePlasmaRenegades = наружный шлюз (плазма)
-ent-AirlockExternalShuttleBrassRenegades = наружный шлюз (латунь)
-ent-AirlockExternalGlassShuttlePostman = Стыковочный шлюз
-
 ent-AirlockEmpirePublic = { ent-Airlock }
     .desc = { ent-Airlock.desc }
 ent-AirlockEmpire = { ent-Airlock }
@@ -19,4 +14,8 @@ ent-AirlockEmpireCommander = { ent-Airlock }
     .desc = { ent-Airlock.desc }
 ent-AirlockEmpireDiplomacy = { ent-Airlock }
     .suffix = Forge, СИВ, Консул
+    .desc = { ent-Airlock.desc }
+ent-AirlockRenegade = { ent-Airlock }
+    .desc = { ent-Airlock.desc }
+ent-AirlockRenegadeCom = { ent-Airlock }
     .desc = { ent-Airlock.desc }

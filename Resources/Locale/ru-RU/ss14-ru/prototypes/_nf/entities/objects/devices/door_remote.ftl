@@ -1,2 +1,2 @@
-ent-DoorRemoteNfsd = пульт от шлюзов дсбф
+ent-DoorRemoteNfsd = пульт от шлюзов ТСФ
     .desc = { ent-DoorRemoteDefault.desc }

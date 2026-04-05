@@ -6,7 +6,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences.Loadouts;
-using Content.Shared._Forge.Speech.Synthesis; // Forge-Change
+using Content.Shared._Forge.Barks; // Corvax-Frontier-Barks
 using Content.Shared._Forge.TTS; // Corvax-Frontier-Barks
 using Content.Shared.Roles;
 using Content.Shared.Traits;

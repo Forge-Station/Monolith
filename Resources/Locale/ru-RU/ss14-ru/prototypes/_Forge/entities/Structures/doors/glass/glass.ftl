@@ -1,5 +1,5 @@
-ent-AirlockGlassRenegades = стеклянный шлюз ренегатов
-
+ent-AirlockGlassRenegades = { ent-AirlockGlass }
+    .desc = { ent-AirlockGlass.desc }
 ent-AirlockGlassEmpirePublic = { ent-AirlockGlass }
     .desc = { ent-AirlockGlass.desc }
 ent-AirlockGlassEmpire = { ent-AirlockGlass }

@@ -51,6 +51,7 @@ names-oni-last-female-dataset-16 = Мидзу
 # epic references
 names-oni-last-female-dataset-17 = Сютэн
 names-oni-last-female-dataset-18 = Суйка
+names-oni-last-female-dataset-19 = Хосико
 
 # Location
 names-oni-location-dataset-1 = Амибоси

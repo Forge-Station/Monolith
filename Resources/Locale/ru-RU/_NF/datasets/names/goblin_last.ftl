@@ -209,3 +209,4 @@ names-goblin-last-dataset-207 = Слайфайр
 names-goblin-last-dataset-208 = Фоамскрю
 names-goblin-last-dataset-209 = Физлбаб
 names-goblin-last-dataset-210 = Хардфолт
+names-goblin-last-dataset-211 = Гримскрю

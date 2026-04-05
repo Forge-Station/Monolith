@@ -1,5 +1,11 @@
-﻿ent-GooglyEyes = бегающие глаза
+ent-GooglyEyes = бегающие глаза
     .desc = Приклейте на что-нибудь, чтобы сделать это смешным.
-ent-GooglyEyesAdmeme = пластитаниевая
-ent-GooglyEyesWatchful = Watchful
-ent-GooglyEyesWatchfulAdmeme = Admeme, Watchful
+ent-GooglyEyesAdmeme = { ent-GooglyEyes }
+    .suffix = Адмем
+    .desc = { ent-GooglyEyes.desc }
+ent-GooglyEyesWatchful = { ent-GooglyEyes }
+    .suffix = Наблюдательные
+    .desc = { ent-GooglyEyes.desc }
+ent-GooglyEyesWatchfulAdmeme = { ent-GooglyEyes }
+    .suffix = Адмем, Наблюдательные
+    .desc = { ent-GooglyEyes.desc }

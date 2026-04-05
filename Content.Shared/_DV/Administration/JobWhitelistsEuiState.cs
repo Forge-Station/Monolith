@@ -12,13 +12,20 @@ public sealed class JobWhitelistsEuiState : EuiStateBase
     public string PlayerName;
     public HashSet<ProtoId<JobPrototype>> Whitelists;
     public HashSet<ProtoId<GhostRolePrototype>> GhostRoleWhitelists;
+    public HashSet<string> CompanyWhitelists; // Forge-Change: company whitelist
     public bool GlobalWhitelist;
 
-    public JobWhitelistsEuiState(string playerName, HashSet<ProtoId<JobPrototype>> whitelists, HashSet<ProtoId<GhostRolePrototype>> ghostRoleWhitelists, bool globalWhitelist)
+    public JobWhitelistsEuiState(
+        string playerName,
+        HashSet<ProtoId<JobPrototype>> whitelists,
+        HashSet<ProtoId<GhostRolePrototype>> ghostRoleWhitelists,
+        HashSet<string> companyWhitelists, // Forge-Change: company whitelist
+        bool globalWhitelist)
     {
         PlayerName = playerName;
         Whitelists = whitelists;
         GhostRoleWhitelists = ghostRoleWhitelists;
+        CompanyWhitelists = companyWhitelists; // Forge-Change: company whitelist
         GlobalWhitelist = globalWhitelist;
     }
 }
@@ -68,3 +75,21 @@ public sealed class SetGlobalWhitelistMessage : EuiMessageBase
         Whitelisting = whitelisting;
     }
 }
+
+/// <summary>
+/// Forge-Change-start: company whitelist
+/// Tries to add or remove a company whitelist for a player.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class SetCompanyWhitelistedMessage : EuiMessageBase
+{
+    public string CompanyId;
+    public bool Whitelisting;
+
+    public SetCompanyWhitelistedMessage(string companyId, bool whitelisting)
+    {
+        CompanyId = companyId;
+        Whitelisting = whitelisting;
+    }
+}
+/// Forge-Change-end: company whitelist

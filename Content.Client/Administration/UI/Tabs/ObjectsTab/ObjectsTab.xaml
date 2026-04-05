@@ -1,4 +1,4 @@
-﻿<Control xmlns="https://spacestation14.io"
+<Control xmlns="https://spacestation14.io"
          xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
          xmlns:ot="clr-namespace:Content.Client.Administration.UI.Tabs.ObjectsTab"
          xmlns:co="clr-namespace:Content.Client.UserInterface.Controls">
@@ -6,6 +6,7 @@
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc object-tab-object-type}" />
             <OptionButton Name="ObjectTypeOptions" HorizontalAlignment="Left" />
+            <Label Name="GridCountLabel" HorizontalAlignment="Left" /> <!-- Forge-Change -->
             <LineEdit Name="SearchLineEdit" PlaceHolder="{Loc object-tab-object-search}" HorizontalExpand="True"
                       SizeFlagsStretchRatio="1" />
             <Button Name="RefreshListButton" Text="{Loc object-tab-refresh-button}" ToggleMode="False" />

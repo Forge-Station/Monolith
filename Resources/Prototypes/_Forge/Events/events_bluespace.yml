@@ -34,11 +34,11 @@
         - type: PreventPilot
         paths:
 #        - /Maps/_Forge/Shuttles/Scrap/canister.yml # Too small
-        - /Maps/_Forge/Shuttles/Scrap/disciple.yml
-        - /Maps/_Forge/Shuttles/Scrap/nugget.yml
-        - /Maps/_Forge/Shuttles/Scrap/orange.yml
-        - /Maps/_Forge/Shuttles/Scrap/point.yml
-        - /Maps/_Forge/Shuttles/Scrap/tide.yml
+        - /Maps/_Forge/Shuttles/Archive/Scrap/disciple.yml
+        - /Maps/_Forge/Shuttles/Archive/Scrap/nugget.yml
+        - /Maps/_Forge/Shuttles/Archive/Scrap/orange.yml
+        - /Maps/_Forge/Shuttles/Archive/Scrap/point.yml
+        - /Maps/_Forge/Shuttles/Archive/Scrap/tide.yml
         - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedHauler.yml
         - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedBarge.yml
         - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedCourser.yml

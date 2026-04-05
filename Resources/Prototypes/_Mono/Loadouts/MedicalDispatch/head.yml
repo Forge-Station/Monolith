@@ -1,0 +1,21 @@
+# All forge
+- type: loadoutGroup
+  id: MdMedicHead
+  name: loadout-group-contractor-head
+  minLimit: 0
+  loadouts:
+  - ContractorClothingHeadHatParamedicsoft
+  - ContractorClothingHeadNurseHat
+  - ContractorClothingHeadHatBeretMedic
+  - MdMedicClothingHeadBeretBrigmedic
+  - ContractorClothingHeadHatBeretSeniorPhysician
+  - ContractorClothingHeadHatSurgcapGreen
+  - ContractorClothingHeadHatSurgcapBlue
+  - ContractorClothingHeadHatSurgcapPurple
+  - ContractorClothingHeadHatHoodBioScientist
+
+- type: loadout
+  id: MdMedicClothingHeadBeretBrigmedic
+  price: 0
+  equipment:
+    head: ClothingHeadHatBeretBrigmedic

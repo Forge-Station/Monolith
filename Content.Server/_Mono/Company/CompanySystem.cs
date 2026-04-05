@@ -4,9 +4,14 @@ using Content.Shared.Access.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Content.Server.Database; // Forge-Change: company whitelist
+using System.Threading.Tasks; // Forge-Change: company whitelist
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Server.Audio; // Forge-change: spawnSound
+using Robust.Shared.Audio; // Forge-change: spawnSound
 
 namespace Content.Server._Mono.Company;
 
@@ -21,58 +26,12 @@ public sealed class CompanySystem : EntitySystem
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
+    [Dependency] private readonly AudioSystem _audio = default!; // Forge-change: SpawnSound
+    [Dependency] private readonly IServerDbManager _db = default!; // Forge-Change: company whitelist
+
 
     // Dictionary to store original company preferences for players
     private readonly Dictionary<string, string> _playerOriginalCompanies = new();
-
-    private readonly HashSet<string> _tsfJobs = new()
-    {
-        "Sheriff",
-        "Bailiff",
-        "SeniorOfficer", // Sergeant
-        "Deputy",
-        "Brigmedic",
-        "NFDetective",
-        "PublicAffairsLiaison",
-        "Cadet",
-        "TsfEngineer",
-        "TsfBorg",
-    };
-
-    private readonly HashSet<string> _rogues = new()
-    {
-        "PirateCaptain",
-        "PirateFirstMate",
-        "Pirate",
-        "PDVDenasvar",
-        "PDVInfiltrator",
-        "PdvBorg",
-    };
-
-    // private readonly HashSet<string> _usspJobs = new()
-    // {
-    //    "USSPCommissar",
-    //    "USSPSergeant",
-    //    "USSPCorporal",
-    //    "USSPMedic",
-    //    "USSPRifleman"
-    //};
-
-    private readonly HashSet<string> _colonialJobs = new()
-    {
-        "StationRepresentative",
-        "StationTrafficController",
-        "SecurityGuard",
-        "NFJanitor",
-        "MailCarrier",
-        "Valet",
-    };
-
-    private readonly HashSet<string> _mdJobs = new()
-    {
-        "DirectorOfCare",
-        "MdMedic",
-    };
 
     public override void Initialize()
     {
@@ -91,10 +50,10 @@ public sealed class CompanySystem : EntitySystem
         _playerOriginalCompanies.Remove(args.Player.UserId.ToString());
     }
 
-    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args)
+    private async void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args) // Forge-Change: company whitelist
     {
         // Add the company component with the player's saved company
-        var companyComp = EnsureComp<Shared._Mono.Company.CompanyComponent>(args.Mob);
+        var companyComp = EnsureComp<CompanyComponent>(args.Mob);
 
         var playerId = args.Player.UserId.ToString();
         var profileCompany = args.Profile.Company;
@@ -105,36 +64,14 @@ public sealed class CompanySystem : EntitySystem
             _playerOriginalCompanies[playerId] = profileCompany;
         }
 
-        // todo - make this a switch statement or something lol. who cares.
-        // Check if player's job is one of the TSF jobs
-        if (args.JobId != null && _tsfJobs.Contains(args.JobId))
+        var assigned = false;
+        if (args.JobId != null)
         {
-            // Assign TSF company
-            companyComp.CompanyName = "TSF";
+            var job = _prototypeManager.Index<JobPrototype>(args.JobId);
+            companyComp.CompanyName = job.AssignedCompany;
+            assigned = companyComp.CompanyName != "None";
         }
-        // Check if player's job is one of the Rogue jobs
-        else if (args.JobId != null && _rogues.Contains(args.JobId))
-        {
-            // Assign Rogue company
-            companyComp.CompanyName = "PDV";
-        }
-        // Check if player's job is one of the USSP jobs
-        //else if (args.JobId != null && _usspJobs.Contains(args.JobId))
-        //{
-        //    // Assign USSP company
-        //    companyComp.CompanyName = "USSP";
-        //}
-        else if (args.JobId != null && _colonialJobs.Contains(args.JobId))
-        {
-            // Assign MD company
-            companyComp.CompanyName = "Colonial";
-        }
-        else if (args.JobId != null && _mdJobs.Contains(args.JobId))
-        {
-            // Assign MD company
-            companyComp.CompanyName = "MD";
-        }
-        else
+        if (!assigned)
         {
             // Only consider whitelist if the player has NO specific company preference
             bool loginFound = false;
@@ -146,7 +83,7 @@ public sealed class CompanySystem : EntitySystem
                 // Check for company login whitelists
                 foreach (var companyProto in _prototypeManager.EnumeratePrototypes<CompanyPrototype>())
                 {
-                    if (companyProto.Logins.Contains(args.Player.Name))
+                    if (await IsCompanyWhitelisted(args.Player, companyProto)) // Forge-Change: company whitelist
                     {
                         companyComp.CompanyName = companyProto.ID;
                         loginFound = true;
@@ -162,10 +99,34 @@ public sealed class CompanySystem : EntitySystem
                 if (string.IsNullOrEmpty(profileCompany))
                     profileCompany = "None";
 
+                // Forge-Change-start: company whitelist
+                // Make sure players cannot force-select a restricted company via edited profile packet.
+                if (_prototypeManager.TryIndex<CompanyPrototype>(profileCompany, out var profileCompanyProto)
+                    && !await IsCompanySelectable(args.Player, profileCompanyProto))
+                {
+                    profileCompany = "None";
+                }
+                // Forge-Change-end: company whitelist
                 // Restore the player's original company preference
                 companyComp.CompanyName = profileCompany;
             }
         }
+
+        // Forge-change-start
+        if (_prototypeManager.TryIndex<CompanyPrototype>(companyComp.CompanyName, out var proto))
+        {
+            if (proto.SpawnSound != null)
+            {
+                var audioParams = AudioParams.Default.WithVolume(-5f);
+                _audio.PlayPvs(proto.SpawnSound, args.Mob, audioParams);
+            }
+
+            foreach (var special in proto.Special)
+            {
+                special.AfterEquip(args.Mob);
+            }
+        }
+        // Forge-change-end
 
         // Ensure the component is networked to clients
         Dirty(args.Mob, companyComp);
@@ -173,6 +134,24 @@ public sealed class CompanySystem : EntitySystem
         // Update the player's ID card with the company information
         UpdateIdCardCompany(args.Mob, companyComp.CompanyName);
     }
+
+    // Forge-Change-start: company whitelist
+    private async Task<bool> IsCompanySelectable(ICommonSession session, CompanyPrototype company)
+    {
+        if (!company.Disabled)
+            return true;
+
+        return await IsCompanyWhitelisted(session, company);
+    }
+
+    private async Task<bool> IsCompanyWhitelisted(ICommonSession session, CompanyPrototype company)
+    {
+        if (company.Logins.Contains(session.Name))
+            return true;
+
+        return await _db.IsCompanyWhitelisted(session.UserId.UserId, company.ID);
+    }
+    // Forge-Change-end: company whitelist
 
     /// <summary>
     /// Updates the player's ID card with their company information

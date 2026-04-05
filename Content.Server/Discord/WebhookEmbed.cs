@@ -17,6 +17,9 @@ public struct WebhookEmbed
     [JsonPropertyName("footer")]
     public WebhookEmbedFooter? Footer { get; set; } = null;
 
+    [JsonPropertyName("timestamp")] // Forge-Change
+    public string? Timestamp { get; set; } = null; // Forge-Change
+
 
     [JsonPropertyName("fields")]
     public List<WebhookEmbedField> Fields { get; set; } = default!;

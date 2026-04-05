@@ -1,4 +1,6 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.Audio; // Forge-change
+using Content.Shared.Roles; // Forge-change
 
 namespace Content.Shared._Mono.Company;
 
@@ -6,7 +8,7 @@ namespace Content.Shared._Mono.Company;
 /// Prototype for a company that can be assigned to players.
 /// </summary>
 [Prototype("company")]
-public sealed class CompanyPrototype : IPrototype
+public sealed partial class CompanyPrototype : IPrototype
 {
     /// <inheritdoc/>
     [IdDataField]
@@ -59,4 +61,25 @@ public sealed class CompanyPrototype : IPrototype
     /// </summary>
     [DataField("image")]
     public string? Image { get; private set; }
+
+    // Forge-change-start
+    [DataField("entityIcon", required: false)]
+    public EntProtoId? EntityIcon { get; private set; }
+
+    [DataField("spawnSound")]
+    public SoundSpecifier? SpawnSound;
+
+    [DataField("special", serverOnly: true)]
+    public JobSpecial[] Special { get; private set; } = Array.Empty<JobSpecial>();
+
+    // Disabled = closed company, hidden = hide. ok im stupid but ehehe
+    [DataField("hidden")]
+    public bool Hidden { get; private set; } = false;
+
+    /// <summary>
+    /// Note about the company.
+    /// </summary>
+    [DataField("note", required: false)]
+    public string Note { get; private set; } = string.Empty;
+    // Forge-change-end
 }

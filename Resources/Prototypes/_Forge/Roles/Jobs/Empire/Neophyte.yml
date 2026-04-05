@@ -1,52 +1,53 @@
-- type: job
-  id: Neophyte
-  name: forge-job-name-neophyte
-  description: forge-job-desc-neophyte
-  playTimeTracker: JobNeophyte
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 21600 # 6 hours
-    - !type:SpeciesRequirement
-      inverted: true
-      species:
-        # - SlimePerson
-        - Arachnid
-        - Chitinid
-        - Resomi
-        - Vox
-        - Diona
-        - Goblin
-        - Hydrakin
-        - Vulpkanin
-        # - Tajaran
-        # - Reptilian
-        # - Oni
-        # - Moth
-        # - IPC
-  startingGear: NeophyteGear
-  icon: JobIconEmpireNeophyte
-  supervisors: job-supervisors-praetorian
-  weight: 10
-  displayWeight: 10
-  canBeAntag: false
-  salary: 7000
-  setPreference: true
-  accessGroups:
-  - GeneralEmpireAccess
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: NpcFactionMember
-      factions:
-      - Empire
-
-- type: startingGear
-  id: NeophyteGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF
+# Empire role disabled.
+# - type: job
+#   id: Neophyte
+#   name: forge-job-name-neophyte
+#   description: forge-job-desc-neophyte
+#   playTimeTracker: JobNeophyte
+#   requirements:
+#     - !type:OverallPlaytimeRequirement
+#       time: 21600 # 6 hours
+#     - !type:SpeciesRequirement
+#       inverted: true
+#       species:
+#         # - SlimePerson
+#         - Arachnid
+#         - Chitinid
+#         - Resomi
+#         - Vox
+#         - Diona
+#         - Goblin
+#         - Hydrakin
+#         - Vulpkanin
+#         # - Tajaran
+#         # - Reptilian
+#         # - Oni
+#         # - Moth
+#         # - IPC
+#   startingGear: NeophyteGear
+#   icon: JobIconEmpireNeophyte
+#   supervisors: job-supervisors-praetorian
+#   weight: 10
+#   displayWeight: 10
+#   canBeAntag: false
+#   salary: 7000
+#   setPreference: true
+#   accessGroups:
+#   - GeneralEmpireAccess
+#   special:
+#   - !type:AddComponentSpecial
+#     components:
+#     - type: NpcFactionMember
+#       factions:
+#       - Empire
+#
+# - type: startingGear
+#   id: NeophyteGear
+#   # equipment:
+#   #   ears:
+#   #   belt:
+#   #   pocket1:
+#   #   pocket2:
+#   # storage:
+#   #   back:
+#   #   - RadioHandheldNF

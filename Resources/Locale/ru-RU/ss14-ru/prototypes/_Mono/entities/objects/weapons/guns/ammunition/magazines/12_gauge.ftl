@@ -1,1 +1,6 @@
 ent-BaseMagazine12_gauge = барабан боеприпасов (12 калибр)
+ent-Magazine12_gaugeIncendiary = барабан боеприпасов (12 калибр зажигательные)
+ent-Magazine12_gaugeUranium = барабан боеприпасов (12 калибр урановые)
+ent-Magazine12_gaugeSlugRIP = барабан боеприпасов (12 калибр пуля RIP)
+ent-Magazine12_gaugeSlugAP = барабан боеприпасов (12 калибр бронебойная пуля)
+ent-Magazine12_gaugeFlechette = барабан боеприпасов (12 калибр флешетта)

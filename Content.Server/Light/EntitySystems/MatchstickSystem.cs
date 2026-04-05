@@ -9,6 +9,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -86,7 +87,7 @@ namespace Content.Server.Light.EntitySystems
             // Change state
             SetState(matchstick, component, SmokableState.Lit);
             _litMatches.Add(matchstick);
-            matchstick.Owner.SpawnTimer(component.Duration * 1000, delegate
+            Timer.Spawn((int)(component.Duration * 1000), () =>
             {
                 SetState(matchstick, component, SmokableState.Burnt);
                 _litMatches.Remove(matchstick);

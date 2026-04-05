@@ -1,0 +1,87 @@
+- type: job
+  id: Praefect
+  name: forge-job-name-praefect
+  description: forge-job-desc-praefect
+  playTimeTracker: JobPraefect
+  setPreference: false
+  canBeAntag: false
+  hideConsoleVisibility: true
+  icon: JobIconEmpirePraefect
+  supervisors: job-supervisors-nobody
+
+- type: job
+  id: Arbiter
+  name: forge-job-name-arbiter
+  description: forge-job-desc-arbiter
+  playTimeTracker: JobArbiter
+  setPreference: false
+  canBeAntag: false
+  hideConsoleVisibility: true
+  icon: JobIconEmpireArbiter
+  supervisors: job-supervisors-nobody
+
+- type: job
+  id: Cardinal
+  name: forge-job-name-cardinal
+  description: forge-job-desc-cardinal
+  playTimeTracker: JobCardinal
+  setPreference: false
+  canBeAntag: false
+  hideConsoleVisibility: true
+  icon: JobIconEmpireCardinal
+  supervisors: job-supervisors-nobody
+
+- type: job
+  id: Inquisitor
+  name: forge-job-name-inquisitor
+  description: forge-job-desc-inquisitor
+  playTimeTracker: JobInquisitor
+  setPreference: false
+  canBeAntag: false
+  hideConsoleVisibility: true
+  icon: JobIconEmpireInquisitor
+  supervisors: job-supervisors-nobody
+
+- type: job
+  id: Consul
+  name: forge-job-name-consul
+  description: forge-job-desc-consul
+  playTimeTracker: JobConsul
+  setPreference: false
+  canBeAntag: false
+  hideConsoleVisibility: true
+  icon: JobIconEmpireConsul
+  supervisors: job-supervisors-nobody
+
+- type: job
+  id: Praetorian
+  name: forge-job-name-praetorian
+  description: forge-job-desc-praetorian
+  playTimeTracker: JobPraetorian
+  setPreference: false
+  canBeAntag: false
+  hideConsoleVisibility: true
+  icon: JobIconEmpirePraetorian
+  supervisors: job-supervisors-nobody
+
+- type: job
+  id: Auxilia
+  name: forge-job-name-auxilia
+  description: forge-job-desc-auxilia
+  playTimeTracker: JobAuxilia
+  setPreference: false
+  canBeAntag: false
+  hideConsoleVisibility: true
+  icon: JobIconEmpireAuxilia
+  supervisors: job-supervisors-nobody
+
+- type: job
+  id: Neophyte
+  name: forge-job-name-neophyte
+  description: forge-job-desc-neophyte
+  playTimeTracker: JobNeophyte
+  setPreference: false
+  canBeAntag: false
+  hideConsoleVisibility: true
+  icon: JobIconEmpireNeophyte
+  supervisors: job-supervisors-nobody

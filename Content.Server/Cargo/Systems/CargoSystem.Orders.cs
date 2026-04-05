@@ -37,8 +37,6 @@ namespace Content.Server.Cargo.Systems
         /// </summary>
         private float _timer;
 
-        [Dependency] private readonly BankSystem _bankSystem = default!;
-
         private void InitializeConsole()
         {
             SubscribeLocalEvent<CargoOrderConsoleComponent, CargoConsoleAddOrderMessage>(OnAddOrderMessage);
@@ -221,6 +219,14 @@ namespace Content.Server.Cargo.Systems
                 return;
             }
 
+            // Forge-Change: check if the player has enough balance
+            if (!_bank.TryBankWithdraw(player, cost))
+            {
+                ConsolePopup(args.Actor, Loc.GetString("cargo-console-insufficient-funds", ("cost", cost)));
+                PlayDenySound(uid, component);
+                return;
+            }
+
             // Frontier: no cargo fulfillment check
             //var ev = new FulfillCargoOrderEvent((station.Value, stationData), order, (uid, component));
             //RaiseLocalEvent(ref ev); // Frontier
@@ -272,9 +278,8 @@ namespace Content.Server.Cargo.Systems
                 if (!float.IsFinite(taxCoeff) || taxCoeff <= 0.0f)
                     continue;
                 var tax = (int)Math.Floor(cost * taxCoeff);
-                _bankSystem.TrySectorDeposit(account, tax, LedgerEntryType.CargoTax);
+                _bank.TrySectorDeposit(account, tax, LedgerEntryType.CargoTax);
             }
-            _bankSystem.TryBankWithdraw(player, cost);
             // End Frontier
 
             UpdateOrders(station.Value);

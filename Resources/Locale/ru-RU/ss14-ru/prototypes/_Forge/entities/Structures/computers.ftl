@@ -1,9 +1,9 @@
 # Traffic
-ent-ComputerShuttleNFSDOutpostLocal = Консоль трафика Аванпоста ДСБФ
-    .desc = Отслеживает движение вокруг Аванпоста ДСБФ.
+ent-ComputerShuttleNFSDOutpostLocal = Консоль трафика Аванпоста ТСФ
+    .desc = Отслеживает движение вокруг Аванпоста ТСФ.
     .suffix = Локальная
-ent-ComputerShuttleNFSDOutpostRemote = Консоль трафика Аванпоста ДСБФ
-    .desc = Отслеживает движение вокруг Аванпоста ДСБФ.
+ent-ComputerShuttleNFSDOutpostRemote = Консоль трафика Аванпоста ТСФ
+    .desc = Отслеживает движение вокруг Аванпоста ТСФ.
     .suffix = Удалённая
 
 ent-ComputerShuttleEdisonOutpostLocal = Консоль трафика Электростанции Эдисона

@@ -1,1 +1,5 @@
 ent-BaseMagazine762x51mm = магазин (7.62x51мм FMJ)
+ent-Magazine762x51mmPlasteelAP = магазин (7.62x51мм бронебойные)
+ent-Magazine762x51mmRIP = магазин (7.62x51мм RIP)
+ent-Magazine762x51mmIncendiary = магазин (7.62x51мм зажигательные)
+ent-Magazine762x51mmUranium = магазин (7.62x51мм урановые)

@@ -15,6 +15,7 @@
  # guides: [ BasicLore, UnitedSovietSocialistPlanets ] # Forge-Change-delete
   weight: 10
   displayWeight: 10
+  assignedCompany: USSP # Forge-Change: added assigned company
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, UsspTrackingImplant ]

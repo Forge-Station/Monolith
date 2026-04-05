@@ -15,6 +15,7 @@ public sealed class JobWhitelistsEui : BaseEui
         Window.OnSetJob += (id, whitelisted) => SendMessage(new SetJobWhitelistedMessage(id, whitelisted));
         Window.OnSetGhostRole += (id, whitelisted) => SendMessage(new SetGhostRoleWhitelistedMessage(id, whitelisted)); // Frontier
         Window.OnSetGlobal += (whitelisted) => SendMessage(new SetGlobalWhitelistMessage(whitelisted)); // Frontier
+        Window.OnSetCompany += (id, whitelisted) => SendMessage(new SetCompanyWhitelistedMessage(id, whitelisted)); // Forge-Change: company whitelist
     }
 
     public override void HandleState(EuiStateBase state)

@@ -1,5 +1,5 @@
 ent-ThrusterBigSyndiMachineCircuitboard = большой ракетный двигатель синдиката (машинная плата)
-ent-ThrusterBigNfsdMachineCircuitboard = большой ракетный двигатель ДСБФ (машинная плата)
+ent-ThrusterBigNfsdMachineCircuitboard = большой ракетный двигатель ТСФ (машинная плата)
 ent-ThrusterBigMercMachineCircuitboard = большой ракетный двигатель наёмников (машинная плата)
 ent-ThrusterMediumMachineCircuitboard = средний ракетный двигатель (машинная плата)
 ent-ThrusterMLongSyndiMachineCircuitboard = длинный ракетный двигатель синдиката (машинная плата)
@@ -10,8 +10,8 @@ ent-ThrusterBigCentComMachineCircuitboard = большой ракетный дв
     .desc = A machine board for a syndicate
 ent-ThrusterMLongMachineCircuitboard = длинный ракетный двигатель (машинная плата)
 ent-ThrusterCentcomMachineCircuitboard = ракетный двигатель УСФ (машинная плата)
-ent-ThrusterMLongNfsdMachineCircuitboard = длинный ракетный двигатель ДСБФ (машинная плата)
-ent-ThrusterMediumNfsdMachineCircuitboard = средний ракетный двигатель ДСБФ (машинная плата)
+ent-ThrusterMLongNfsdMachineCircuitboard = длинный ракетный двигатель ТСФ (машинная плата)
+ent-ThrusterMediumNfsdMachineCircuitboard = средний ракетный двигатель ТСФ (машинная плата)
 ent-ThrusterMLongCentcomMachineCircuitboard = длинный ракетный двигатель УСФ (машинная плата)
 ent-ThrusterMLongMercMachineCircuitboard = длинный ракетный двигатель наёмников (машинная плата)
 ent-ThrusterMediumCentcomMachineCircuitboard = средний ракетный двигатель УСФ (машинная плата)

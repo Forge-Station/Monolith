@@ -233,7 +233,9 @@ namespace Content.Server.Voting.Managers
 
             foreach (var (k, v) in presets)
             {
-                options.Options.Add((Loc.GetString(v), k));
+                options.Options.Add((Loc.GetString(v.Name), k));
+                if (v.Weight != 1f)
+                    options.Weights.Add(k, v.Weight);
             }
 
             WirePresetVoteInitiator(options, initiator);
@@ -247,13 +249,13 @@ namespace Content.Server.Voting.Managers
                 {
                     picked = (string) _random.Pick(args.Winners);
                     _chatManager.DispatchServerAnnouncement(
-                        Loc.GetString("ui-vote-gamemode-tie", ("picked", Loc.GetString(presets[picked]))));
+                        Loc.GetString("ui-vote-gamemode-tie", ("picked", Loc.GetString(presets[picked].Name))));
                 }
                 else
                 {
                     picked = (string) args.Winner;
                     _chatManager.DispatchServerAnnouncement(
-                        Loc.GetString("ui-vote-gamemode-win", ("winner", Loc.GetString(presets[picked]))));
+                        Loc.GetString("ui-vote-gamemode-win", ("winner", Loc.GetString(presets[picked].Name))));
                 }
                 _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Preset vote finished: {picked}");
                 var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
@@ -580,14 +582,20 @@ namespace Content.Server.Voting.Managers
 
         private void TimeoutStandardVote(StandardVoteType type)
         {
-            var timeout = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteSameTypeTimeout));
+            // Forge-Change-Start
+            var timeoutSeconds = type == StandardVoteType.Preset
+                ? _cfg.GetCVar(CCVars.VotePresetTimeout)
+                : _cfg.GetCVar(CCVars.VoteSameTypeTimeout);
+
+            var timeout = TimeSpan.FromSeconds(timeoutSeconds);
+            // Forge-Change-End
             _standardVoteTimeout[type] = _timing.RealTime + timeout;
             DirtyCanCallVoteAll();
         }
 
-        private Dictionary<string, string> GetGamePresets()
+        private Dictionary<string, (string Name, float Weight)> GetGamePresets() // Mono - add weight
         {
-            var presets = new Dictionary<string, string>();
+            var presets = new Dictionary<string, (string, float)>();
 
             foreach (var preset in _prototypeManager.EnumeratePrototypes<GamePresetPrototype>())
             {
@@ -600,7 +608,7 @@ namespace Content.Server.Voting.Managers
                 if(_playerManager.PlayerCount > (preset.MaxPlayers ?? int.MaxValue))
                     continue;
 
-                presets[preset.ID] = preset.ModeTitle;
+                presets[preset.ID] = (preset.ModeTitle, preset.Weight);
             }
             return presets;
         }

@@ -1,95 +1,29 @@
-- type: dataset
+- type: localizedDataset
   id: MonoRemnantBorgTitle
   values:
-  - ADM
+    prefix: names-mono-remnant-borg-title-dataset-
+    count: 1
 
-- type: dataset
+- type: localizedDataset
   id: MonoRemnantCoreTitle
   values:
-  - ADC
+    prefix: names-mono-remnant-core-title-dataset-
+    count: 1
 
-- type: dataset
+- type: localizedDataset
   id: MonoRemnantAdjective
   values:
-  - Violet
-  - Red
-  - Purple
-  - Yellow
-  - Green
-  - Blue
-  - Cyan
-  - Crimson
-  - Steel
-  - Obsidian
-  - Prismatic
-  - Sudden
-  - Militant
-  - Void
-  - Lightspeed
-  - Cleansing
-  - Burning
-  - Frozen
-  - Molten
-  - Flying
-  - Marching
-  - Spectral
-  - Piercing
-  - Glass
+    prefix: names-mono-remnant-adjective-dataset-
+    count: 24
 
-- type: dataset
+- type: localizedDataset
   id: MonoRemnantNoun
   values:
-  - Sword
-  - Strider
-  - Courser
-  - Patron
-  - Flood
-  - Weapon
-  - Static
-  - Signal
-  - Arrow
-  - Arbiter
-  - Protocol
-  - Titan
-  - Vector
-  - Requiem
-  - Watcher
-  - Eye
-  - Tower
-  - Terminal
-  - Sentinel
-  - Echo
-  - Nemesis
-  - Daemon # this one fits into modifiers too but sounds better here i think
-  - Locust
-  - Wraith
-  - Lens
-  - Prophet
+    prefix: names-mono-remnant-noun-dataset-
+    count: 26
 
-- type: dataset
+- type: localizedDataset
   id: MonoRemnantModifier
   values:
-  - Adjunct
-  - Joint
-  - Mechanism
-  - Wire
-  - Cog
-  - Machine
-  - Relay
-  - Modem
-  - Node
-  - Unit
-  - Segment
-  - Index
-  - Branch
-  - Module
-  - Factor
-  - Scion
-  - Offset
-  - Fragment
-  - Routine
-  - Sector
-  - Link
-  - Process
-  - Servo
-  - Trait
+    prefix: names-mono-remnant-modifier-dataset-
+    count: 24

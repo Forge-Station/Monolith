@@ -130,6 +130,11 @@ namespace Content.Shared.Administration
         Whitelist = 1 << 25,
 
         /// <summary>
+        ///     Permission to manage player/company whitelist access.
+        /// </summary>
+        WhitelistManager = 1 << 22,
+
+        /// <summary>
         ///     Dangerous host permissions like scsi.
         /// </summary>
         Host = 1u << 31,

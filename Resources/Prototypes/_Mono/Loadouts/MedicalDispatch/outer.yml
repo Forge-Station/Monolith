@@ -1,0 +1,37 @@
+# All Forge
+
+- type: loadout
+  id: MdMedicOuterClothingEVA
+  price: 0
+  equipment:
+    outerClothing: ClothingOuterEVASuitMedic
+
+- type: loadout
+  id: MdMedicOuterClothingLightHardsuit
+  price: 5000
+  equipment:
+    outerClothing: ClothingOuterHardsuitMedical
+
+- type: loadout
+  id: MdMedicOuterClothingERTMed
+  price: 50000
+  equipment:
+    outerClothing: ClothingOuterHardsuitERTMedical
+
+- type: loadout
+  id: MdMedicOuterClothingTraumaT23
+  price: 50000
+  equipment:
+    outerClothing: ClothingOuterHardsuitTrauma
+
+- type: loadoutGroup
+  id: MdMedicOuterClothing
+  name: loadout-group-contractor-outerclothing
+  minLimit: 1
+  loadouts:
+  - MdMedicOuterClothingEVA
+  - MdMedicOuterClothingERTMed
+  - MdMedicOuterClothingTraumaT23
+  - MdMedicOuterClothingLightHardsuit
+  fallbacks:
+  - MdMedicOuterClothingEVA

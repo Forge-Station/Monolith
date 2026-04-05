@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadBase, BaseC2ContrabandUnredeemable]
+  parent: ClothingHeadBase
   id: ClothingHeadHatBeretTL
   name: Sub-lieutenant beret
   suffix: TechnicLogistic
@@ -11,7 +11,7 @@
     sprite: Forge/Clothing/Head/Hats/beret_techniclogistic.rsi
 
 - type: entity
-  parent: [ClothingShoesMilitaryBase, BaseC2ContrabandUnredeemable]
+  parent: ClothingShoesMilitaryBase
   id: ClothingShoesBootsCombatTL
   name: boots TL
   suffix: TechnicLogistic
@@ -23,7 +23,7 @@
     sprite: Forge/Clothing/Shoes/Boots/boots_techniclogistic.rsi
 
 - type: entity
-  parent: [ClothingOuterStorageBase, BaseC2ContrabandUnredeemable]
+  parent: ClothingOuterStorageBase
   id: ClothingOuterCoatLongCoatTL
   name: coat TL
   suffix: TechnicLogistic
@@ -35,7 +35,7 @@
     sprite: Forge/Clothing/OuterClothing/Coats/Sub-lieutenant/coat_techniclogistic.rsi
 
 - type: entity
-  parent: [ClothingEyesGlassesSecurity, BaseC2ContrabandUnredeemable]
+  parent: [ClothingEyesGlassesSecurity, BaseFactionGearOtherFactionT0]
   id: ClothingEyesGlassesTL
   name: glasses TL
   suffix: TechnicLogistic
@@ -47,7 +47,7 @@
     sprite: Forge/Clothing/Eyes/Goggles/glasses_techniclogistic.rsi
 
 - type: entity
-  parent: [ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC2ContrabandUnredeemable]
+  parent: [ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseFactionGearOtherFactionT1]
   id: NFClothingEyesNightVisionGoggleTL
   name: night vision TL
   suffix: TechnicLogistic
@@ -68,7 +68,7 @@
     isEquipment: true
 
 - type: entity
-  parent: [ClothingHandsGlovesSyntheticBase, BaseC2ContrabandUnredeemable]
+  parent: [ClothingHandsGlovesSyntheticBase, BaseFactionGearOtherFactionT0]
   id: ClothingHandsGlovesCombatTL
   suffix: TechnicLogistic
   name: TechnicLogistic Combat Gloves
@@ -93,7 +93,7 @@
     mustBeEquippedToUse: true
 
 - type: entity
-  parent: [ClothingUniformBase, BaseC2ContrabandUnredeemable]
+  parent: ClothingUniformBase
   id: ClothingUniformJumpsuitTL
   name: uniform TL
   suffix: TechnicLogistic
@@ -105,7 +105,7 @@
     sprite: Forge/Clothing/Uniforms/Jumpsuits/jumpsuit_techniclogistic.rsi
 
 - type: entity
-  parent: [ClothingMaskGas, BaseC2ContrabandUnredeemable]
+  parent: [ClothingMaskGas, BaseFactionGearOtherFactionT0]
   id: ClothingMaskGasTL
   name: gas mask TL
   suffix: TechnicLogistic
@@ -126,7 +126,7 @@
         Heat: 0.94
 
 - type: entity
-  parent: [NFClothingBeltStorageBase, BaseC2ContrabandUnredeemable]
+  parent: NFClothingBeltStorageBase
   id: ClothingBeltTL
   name: РПС TechnicLogistic
   suffix: TechnicLogistic
@@ -138,7 +138,7 @@
     sprite: Forge/Clothing/Belt/belt_techniclogistic.rsi
 
 - type: entity
-  parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase, BaseC2ContrabandUnredeemable]
+  parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase, ClothingArmorPlate, BaseFactionGearOtherFactionT0]
   id: ClothingOuterArmorTL
   name: Self-Defense TechnicLogistic
   suffix: TechnicLogistic
@@ -151,7 +151,7 @@
     equippedState: equipped-OUTHERCLOTHING
 
 - type: entity
-  parent: [BaseC2ContrabandUnredeemable, ClothingHeadHelmetBasic]
+  parent: [BaseFactionGearOtherFactionT0, ClothingHeadHelmetBasic]
   id: ClothingHeadHelmetTL
   name: Forces TechnicLogistic
   suffix: TechnicLogistic
@@ -163,7 +163,7 @@
     sprite: Forge/Clothing/Head/Helmets/helmet_techniclogistic.rsi
 
 - type: entity
-  parent: [ClothingHeadsetAlt, BaseC2ContrabandUnredeemable]
+  parent: [ClothingHeadsetAlt, BaseFactionGearOtherFactionT0]
   id: ClothingHeadsetAltTL
   name: Headset TechnicLogistic
   suffix: TechnicLogistic
@@ -179,7 +179,7 @@
     sprite: Forge/Clothing/Ears/Headsets/headset_techniclogistic.rsi
 
 - type: entity
-  parent: [ClothingBackpackDuffel, BaseC2ContrabandUnredeemable]
+  parent: ClothingBackpackDuffel
   id: ClothingBackpackDuffelTL
   name:  Back TechnicLogistic
   suffix: TechnicLogistic

@@ -3,6 +3,8 @@ using Content.Server._EinsteinEngines.Language;
 using Content.Server.Chat.Systems;
 using Content.Server.Radio.Components;
 using Content.Shared._EinsteinEngines.Language;
+using Content.Shared._EinsteinEngines.Language.Components;
+using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared._Forge;
 using Content.Shared._Forge.TTS;
 using Content.Shared.GameTicking;
@@ -147,11 +149,23 @@ public sealed partial class TTSSystem : EntitySystem
             var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
 
             if (distance > ChatSystem.VoiceRange) continue;
-            var canUnderstand = _language.CanUnderstand(listener, language.ID);
+            var canUnderstand = CanUnderstandLanguage(listener, language.ID);
             var getsClearWhisper = !isWhisper || distance <= ChatSystem.WhisperClearRange;
 
             RaiseNetworkEvent(canUnderstand && getsClearWhisper ? fullTtsEvent : obfTtsEvent, session);
         }
+    }
+
+    private bool CanUnderstandLanguage(EntityUid listener, string languageId)
+    {
+        if (languageId == SharedLanguageSystem.UniversalPrototype || languageId == SharedLanguageSystem.PsychomanticPrototype)
+            return true;
+
+        if (TryComp<UniversalLanguageSpeakerComponent>(listener, out var universal) && universal.Enabled)
+            return true;
+
+        return TryComp<LanguageSpeakerComponent>(listener, out var speaker)
+               && speaker.UnderstoodLanguages.Contains(languageId);
     }
 
     // ReSharper disable once InconsistentNaming

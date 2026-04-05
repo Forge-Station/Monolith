@@ -1,0 +1,12 @@
+<!-- Forge-Change-full: whitelist -->
+<DefaultWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    Title="{Loc admin-whitelist-window-title}" MinSize="425 250">
+    <BoxContainer Orientation="Vertical">
+        <cc:PlayerListControl Name="PlayerList" VerticalExpand="True" />
+        <BoxContainer Orientation="Horizontal">
+            <Button Name="OpenWhitelistsButton" Text="{Loc admin-whitelist-window-open}" Disabled="True"/>
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

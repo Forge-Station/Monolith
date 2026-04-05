@@ -1,3 +1,4 @@
+using System.Linq;  // Forge-Change: company whitelist
 using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
 using Content.Server.Database;
@@ -8,6 +9,7 @@ using Content.Shared._DV.Administration;
 using Content.Shared.Eui;
 using Content.Shared.Ghost.Roles; // Frontier
 using Content.Shared.Roles;
+using Content.Shared._Mono.Company; // Forge-Change: company whitelist
 using Robust.Shared.Log;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -29,6 +31,7 @@ public sealed class JobWhitelistsEui : BaseEui
 
     public HashSet<ProtoId<JobPrototype>> Whitelists = new();
     public HashSet<ProtoId<GhostRolePrototype>> GhostRoleWhitelists = new(); // Frontier
+    public HashSet<string> CompanyWhitelists = new(); // Forge-Change: company whitelist
     public bool GlobalWhitelist = false;
 
     public JobWhitelistsEui(NetUserId playerId, string playerName)
@@ -53,20 +56,21 @@ public sealed class JobWhitelistsEui : BaseEui
         }
 
         GlobalWhitelist = await _db.GetWhitelistStatusAsync(PlayerId); // Frontier: get global whitelist
+        CompanyWhitelists = (await _db.GetCompanyWhitelists(PlayerId.UserId)).ToHashSet(); // Forge-Change: company whitelist
 
         StateDirty();
     }
 
     public override EuiStateBase GetNewState()
     {
-        return new JobWhitelistsEuiState(PlayerName, Whitelists, GhostRoleWhitelists, GlobalWhitelist);
+        return new JobWhitelistsEuiState(PlayerName, Whitelists, GhostRoleWhitelists, CompanyWhitelists, GlobalWhitelist); // Forge-Change: company whitelist
     }
 
     public override void HandleMessage(EuiMessageBase msg)
     {
         base.HandleMessage(msg);
 
-        if (!_admin.HasAdminFlag(Player, AdminFlags.Whitelist))
+        if (!_admin.HasAdminFlag(Player, AdminFlags.WhitelistManager))  // Forge-Change: company whitelist
         {
             _sawmill.Warning($"{Player.Name} ({Player.UserId}) tried to change role whitelists for {PlayerName} without whitelists flag");
             return;
@@ -129,6 +133,26 @@ public sealed class JobWhitelistsEui : BaseEui
                     GlobalWhitelist = false;
                 }
                 break;
+            // Forge-Change-start: company whitelist
+            case SetCompanyWhitelistedMessage:
+                var companyArgs = (SetCompanyWhitelistedMessage)msg;
+                if (!_proto.HasIndex<CompanyPrototype>(companyArgs.CompanyId))
+                    return;
+
+                added = companyArgs.Whitelisting;
+                role = $"company:{companyArgs.CompanyId}";
+                if (added)
+                {
+                    _ = _db.AddCompanyWhitelist(PlayerId.UserId, companyArgs.CompanyId);
+                    CompanyWhitelists.Add(companyArgs.CompanyId);
+                }
+                else
+                {
+                    _ = _db.RemoveCompanyWhitelist(PlayerId.UserId, companyArgs.CompanyId);
+                    CompanyWhitelists.Remove(companyArgs.CompanyId);
+                }
+                break;
+            // Forge-Change-end: company whitelist
             default:
                 return;
         }

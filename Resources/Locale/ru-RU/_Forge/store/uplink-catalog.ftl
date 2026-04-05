@@ -1,7 +1,7 @@
 store-category-mech = Мехи
 
 uplink-security-mech-ares-name = Арес
-uplink-security-mech-ares-desc = Тяжелый аргумент для подавления беспорядков, прорыва укреплений, эвакуации под огнем и противодействия тяжелым угрозам внутренней и внешней безопасности. "Железный кулак" ДСБФ.
+uplink-security-mech-ares-desc = Тяжелый аргумент для подавления беспорядков, прорыва укреплений, эвакуации под огнем и противодействия тяжелым угрозам внутренней и внешней безопасности. "Железный кулак" ТСФ.
 
 uplink-security-mech-bpearl-name = Чёрная Жемчужина
 uplink-security-mech-bpearl-desc =
@@ -42,14 +42,14 @@ uplink-syndie-laser-desc = Новейшая поставка с рынков Vit
 uplink-syndie-laser-pistol-name = пистолет "Сокол"
 uplink-syndie-laser-pistol-desc = Новейшая поставка с рынков Vitezstvi. Мощный лазерный пистолет, кандидат на лучшее вторичное оружие для мародёров Горлакса.
 
-uplink-security-nfsdgasalt-name = тактический противогаз ДСБФ
-uplink-security-nfsdgasalt-desc = Модифицированная версия стандартного противогаза ДСБФ, обеспечивающая повышенный комфорт при длительном ношении.
-uplink-security-nfsdgascoroner-name = противогаз коронера ДСБФ
+uplink-security-nfsdgasalt-name = тактический противогаз ТСФ
+uplink-security-nfsdgasalt-desc = Модифицированная версия стандартного противогаза ТСФ, обеспечивающая повышенный комфорт при длительном ношении.
+uplink-security-nfsdgascoroner-name = противогаз коронера ТСФ
 uplink-security-nfsdgascoroner-desc = Продвинутый медицинский противогаз, предназначенный для работы в зонах заражения и при оказании помощи под обстрелом.
-uplink-security-nfsdgasup-name = продвинутый противогаз ДСБФ
+uplink-security-nfsdgasup-name = продвинутый противогаз ТСФ
 uplink-security-nfsdgasup-desc = Версия противогаза, разработанная для опасных операций и экстремальных условий.
-uplink-security-engibelt-name = пояс специалиста ДСБФ (Заполненный)
-uplink-security-engibelt-desc = Тактический пояс с креплениями под инструменты специалиста и аварийное оборудование. Включает в себя комплект инструментов ДСБФ.
+uplink-security-engibelt-name = пояс специалиста ТСФ (Заполненный)
+uplink-security-engibelt-desc = Тактический пояс с креплениями под инструменты специалиста и аварийное оборудование. Включает в себя комплект инструментов ТСФ.
 
 uplink-security-PowerCellNFSD-name = { ent-PowerCellNFSD }
 uplink-security-PowerCellNFSD-desc = { ent-PowerCellNFSD.desc }
@@ -73,7 +73,7 @@ uplink-FSyndicateProtolathe-desc = { ent-FSyndicateProtolathe.desc }
 uplink-ClothingBackpackSyndicateRaidBundle-name = комплект рейдерского костюма синдиката
 uplink-ClothingBackpackSyndicateRaidBundle-desc = Комплект, в который входит рейдерский костюм и шлем, противогаз и боевые перчатки.
 
-forge-uplink-security-magbootspro-name = продвинутые магнитные сапоги ДСБФ
+forge-uplink-security-magbootspro-name = продвинутые магнитные сапоги ТСФ
 forge-uplink-security-magbootspro-desc = Магнитные ботинки со встроенным джетпаком и местом под личное оружие, не замедляющие движения своего владельца благодаря ослабленному магнитному притяжению.
 
 uplink-150mmApShell = снаряд 150мм (APHE)

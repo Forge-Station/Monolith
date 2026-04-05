@@ -207,3 +207,4 @@ names-goblin-first-female-dataset-205 = Часизиа
 names-goblin-first-female-dataset-206 = Сиогенсиа
 names-goblin-first-female-dataset-207 = Траарлиота
 names-goblin-first-female-dataset-208 = Уиагкинкеа
+names-goblin-first-female-dataset-209 = Грикзия

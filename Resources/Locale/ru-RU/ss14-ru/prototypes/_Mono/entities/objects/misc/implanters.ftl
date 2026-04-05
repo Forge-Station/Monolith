@@ -1,1 +1,3 @@
-ent-RadioImplanterUssp = radio Ussp
+ent-RadioImplanterUssp = имплантер радиомаяка СССП
+    .suffix = Радио, СССП
+    .desc = Имплантер для установки радиомаяка слежения.

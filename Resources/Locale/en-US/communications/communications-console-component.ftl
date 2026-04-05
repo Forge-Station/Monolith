@@ -18,6 +18,7 @@ comms-console-menu-time-remaining = Time remaining: {$time}
 comms-console-permission-denied = Permission denied
 comms-console-shuttle-unavailable = Shuttle is currently unavailable
 comms-console-message-too-long = Message is too long
+comms-console-alert-level-increase-disabled = Raising the alert level is disabled on this console.
 
 # Placeholder values
 comms-console-announcement-sent-by = Sent by

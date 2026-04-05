@@ -13,6 +13,7 @@
                 <CheckBox Name="Global" Margin="4"/>
                 <BoxContainer Name="Departments" Orientation="Vertical"/>
                 <BoxContainer Name="GhostRoles" Orientation="Vertical"/> <!-- Frontier: ghost roles -->
+                <BoxContainer Name="Companies" Orientation="Vertical"/> <!-- Forge-Change: company whitelist -->
             </BoxContainer>
             <!-- End Frontier: global checkbox -->
         </ScrollContainer>

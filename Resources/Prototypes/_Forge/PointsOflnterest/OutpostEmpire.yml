@@ -1,47 +1,48 @@
-- type: pointOfInterest
-  id: OutpostEmpire
-  parent: [BasePOI, BaseRepairablePOI]
-  name: 'Аванпост СИВ'
-  minimumDistance: 7500
-  maximumDistance: 9500
-  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
-  spawnGroup: Required
-  gridPath: /Maps/_Forge/POI/OutpostEmpire.yml
-  addComponents:
-  - type: IFF
-    color: "#53377A"
-    readOnly: true # mono
-
-- type: gameMap
-  id: OutpostEmpire
-  mapName: 'Аванпост СИВ'
-  mapPath: /Maps/_Forge/POI/OutpostEmpire.yml
-  minPlayers: 0
-  stations:
-    OutpostEmpire:
-      stationProto: StandardFrontierOutpost
-      gridComponents:
-      - type: VesselInfo
-        description: "Аванпост Империи"
-      components:
-        - type: StationNameSetup
-          mapNameTemplate: 'Аванпост СИВ'
-        - type: ExtraStationInformation
-          iconPath: /Textures/_NF/Interface/Pirate/piratelogo.png
-          stationSubtext: 'frontier-lobby-empire-subtext'
-          stationDescription: 'frontier-lobby-empire-description'
-        - type: StationJobs
-          availableJobs:
-            Praefect: [ 1, 1 ]
-            Inquisitor: [ 2, 2 ]
-            Consul: [ 1, 1 ]
-            Cardinal: [ 1, 1 ]
-            Arbiter: [ 1, 1]
-            Auxilia: [ -1, -1 ]
-            Praetorian: [ 2, 2]
-            Neophyte: [ -1, -1]
-        - type: StationDeadDropReporting
-          messageSet: Pirate
-        - type: StationDeadDropHintExempt
-        - type: TradeCrateWildcardDestination
-          valueMultiplier: 1.0 # Mono
+# Empire outpost temporarily disabled.
+# - type: pointOfInterest
+#   id: OutpostEmpire
+#   parent: [BasePOI, BaseRepairablePOI]
+#   name: 'Аванпост СИВ'
+#   minimumDistance: 7500
+#   maximumDistance: 9500
+#   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
+#   spawnGroup: Required
+#   gridPath: /Maps/_Forge/POI/OutpostEmpire.yml
+#   addComponents:
+#   - type: IFF
+#     color: "#53377A"
+#     readOnly: true # mono
+#
+# - type: gameMap
+#   id: OutpostEmpire
+#   mapName: 'Аванпост СИВ'
+#   mapPath: /Maps/_Forge/POI/OutpostEmpire.yml
+#   minPlayers: 0
+#   stations:
+#     OutpostEmpire:
+#       stationProto: StandardFrontierOutpost
+#       gridComponents:
+#       - type: VesselInfo
+#         description: "Аванпост Империи"
+#       components:
+#         - type: StationNameSetup
+#           mapNameTemplate: 'Аванпост СИВ'
+#         - type: ExtraStationInformation
+#           iconPath: /Textures/_NF/Interface/Pirate/piratelogo.png
+#           stationSubtext: 'frontier-lobby-empire-subtext'
+#           stationDescription: 'frontier-lobby-empire-description'
+#         - type: StationJobs
+#           availableJobs:
+#             Praefect: [ 1, 1 ]
+#             Inquisitor: [ 2, 2 ]
+#             Consul: [ 1, 1 ]
+#             Cardinal: [ 1, 1 ]
+#             Arbiter: [ 1, 1]
+#             Auxilia: [ -1, -1 ]
+#             Praetorian: [ 2, 2]
+#             Neophyte: [ -1, -1]
+#         - type: StationDeadDropReporting
+#           messageSet: Pirate
+#         - type: StationDeadDropHintExempt
+#         - type: TradeCrateWildcardDestination
+#           valueMultiplier: 1.0 # Mono

@@ -208,3 +208,4 @@ names-goblin-first-male-dataset-206 = Абнилб
 names-goblin-first-male-dataset-207 = Врузекс
 names-goblin-first-male-dataset-208 = Лиогаз
 names-goblin-first-male-dataset-209 = Врадсирд
+names-goblin-first-male-dataset-210 = Кразгит

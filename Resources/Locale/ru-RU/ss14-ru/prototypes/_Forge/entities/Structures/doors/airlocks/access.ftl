@@ -1,9 +1,9 @@
 ent-AirlockSergeantGlassLocked = { ent-AirlockNfsdGlass }
     .desc = { ent-AirlockNfsdGlass.desc }
-    .suffix = ДСБФ, Лейтенант
+    .suffix = ТСФ, Лейтенант
 ent-AirlockSergeantLocked = { ent-AirlockNfsd }
     .desc = { ent-AirlockNfsd.desc }
-    .suffix = ДСБФ, Лейтенант
+    .suffix = ТСФ, Лейтенант
 
 ent-AirlockShuttleSyndicatePirateLocked = герметичный люк
     .desc = Он открывается, он закрывается, и он может вас

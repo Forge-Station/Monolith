@@ -19,8 +19,9 @@
   weight: 150
   displayWeight: 60
   hideConsoleVisibility: true #Forge Change
-  canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
+  assignedCompany: TSF
+  canBeAntag: false
   access:
   - Armory
   - Sergeant

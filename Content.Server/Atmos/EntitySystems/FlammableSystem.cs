@@ -28,6 +28,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Content.Server._NF.Atmos.Components; // Frontier
 
 namespace Content.Server.Atmos.EntitySystems
@@ -397,7 +398,7 @@ namespace Content.Server.Atmos.EntitySystems
             _stunSystem.TryKnockdown(uid, TimeSpan.FromSeconds(2f), true);
 
             // TODO FLAMMABLE: Make this not use TimerComponent...
-            uid.SpawnTimer(2000, () =>
+            Timer.Spawn(2000, () =>
             {
                 flammable.Resisting = false;
                 flammable.FireStacks -= 1f;

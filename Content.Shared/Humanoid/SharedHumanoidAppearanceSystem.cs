@@ -1,11 +1,10 @@
-using Content.Shared._Forge.Speech.Synthesis;
+using Content.Shared._Forge.Barks; // Corvax-Frontier-Barks
 using Content.Shared._Shitmed.Humanoid.Events; // Shitmed Change
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Preferences;
-using Content.Shared._Forge.Speech.Synthesis.Components; // Forge-Change
 using Content.Shared._Forge.TTS; // Corvax-Frontier-Barks
 using Robust.Shared;
 using Robust.Shared.Configuration;
@@ -21,6 +20,7 @@ using System.Linq;
 using System.Numerics;
 using YamlDotNet.RepresentationModel;
 using Content.Shared._EE.Contractors.Prototypes; // Forge-change: _EE nationality
+using Content.Shared.Sprite;
 
 namespace Content.Shared.Humanoid;
 

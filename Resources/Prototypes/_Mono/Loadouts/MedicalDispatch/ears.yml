@@ -1,4 +1,4 @@
 - type: loadout
   id: MdMedicClothingHeadsetMedical
   equipment:
-    ears: ClothingHeadsetMedical
+    ears: ClothingHeadsetMdMedical # Forge

@@ -19,6 +19,7 @@ chat-radio-service = Сервис
 chat-radio-supply = Снабжение
 chat-radio-syndicate = Синдикат
 chat-radio-freelance = Фриланс
+chat-radio-vanguard-command = Командование Авангарда
 # not headset but whatever
 chat-radio-handheld = Портативный
 chat-radio-binary = Двоичный

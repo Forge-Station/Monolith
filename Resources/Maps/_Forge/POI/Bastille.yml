@@ -46849,7 +46849,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 9.5,-38.5
       parent: 1
-    - type: Timer
   - uid: 5784
     components:
     - type: Transform
@@ -46877,7 +46876,6 @@ entities:
     - type: Transform
       pos: 5.5,-42.5
       parent: 1
-    - type: Timer
   - uid: 5789
     components:
     - type: Transform

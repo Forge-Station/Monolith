@@ -1,60 +1,61 @@
-- type: job
-  id: Auxilia
-  name: forge-job-name-auxilia
-  description: forge-job-desc-auxilia
-  playTimeTracker: JobAuxilia
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 43200 # 12 hours
-    - !type:DepartmentTimeRequirement
-      department: Empire
-      time: 21600 # 6 hours
-    - !type:SpeciesRequirement
-      inverted: true
-      species:
-        # - SlimePerson
-        - Arachnid
-        - Chitinid
-        - Resomi
-        - Vox
-        - Diona
-        - Goblin
-        - Hydrakin
-        - Vulpkanin
-        # - Tajaran
-        # - Reptilian
-        # - Oni
-        # - Moth
-        # - IPC
-  # alternateRequirementSets:
-  #   longerPlaytimeLessSec:
-  #   - !type:RoleTimeRequirement
-  #     role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
-  #     time: 43200 # 12 hours
-  startingGear: AuxuilaGear
-  icon: JobIconEmpireAuxilia
-  supervisors: job-supervisors-praetorian
-  weight: 15
-  displayWeight: 15
-  canBeAntag: false
-  salary: 8000
-  setPreference: true
-  accessGroups:
-  - GeneralEmpireAccess
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: NpcFactionMember
-      factions:
-      - Empire
-
-- type: startingGear
-  id: AuxuilaGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF
+# Empire role disabled.
+# - type: job
+#   id: Auxilia
+#   name: forge-job-name-auxilia
+#   description: forge-job-desc-auxilia
+#   playTimeTracker: JobAuxilia
+#   requirements:
+#     - !type:OverallPlaytimeRequirement
+#       time: 43200 # 12 hours
+#     - !type:DepartmentTimeRequirement
+#       department: Empire
+#       time: 21600 # 6 hours
+#     - !type:SpeciesRequirement
+#       inverted: true
+#       species:
+#         # - SlimePerson
+#         - Arachnid
+#         - Chitinid
+#         - Resomi
+#         - Vox
+#         - Diona
+#         - Goblin
+#         - Hydrakin
+#         - Vulpkanin
+#         # - Tajaran
+#         # - Reptilian
+#         # - Oni
+#         # - Moth
+#         # - IPC
+#   # alternateRequirementSets:
+#   #   longerPlaytimeLessSec:
+#   #   - !type:RoleTimeRequirement
+#   #     role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
+#   #     time: 43200 # 12 hours
+#   startingGear: AuxuilaGear
+#   icon: JobIconEmpireAuxilia
+#   supervisors: job-supervisors-praetorian
+#   weight: 15
+#   displayWeight: 15
+#   canBeAntag: false
+#   salary: 8000
+#   setPreference: true
+#   accessGroups:
+#   - GeneralEmpireAccess
+#   special:
+#   - !type:AddComponentSpecial
+#     components:
+#     - type: NpcFactionMember
+#       factions:
+#       - Empire
+#
+# - type: startingGear
+#   id: AuxuilaGear
+#   # equipment:
+#   #   ears:
+#   #   belt:
+#   #   pocket1:
+#   #   pocket2:
+#   # storage:
+#   #   back:
+#   #   - RadioHandheldNF

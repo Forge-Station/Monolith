@@ -15,7 +15,8 @@
   requireAdminNotify: true
   supervisors: job-supervisors-Draftsman
   weight: 50
-  displayWeight: 50
+  displayWeight: 20
+  assignedCompany: Renegates
   canBeAntag: false
   setPreference: true
   access:

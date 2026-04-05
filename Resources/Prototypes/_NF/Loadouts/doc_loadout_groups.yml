@@ -4,6 +4,7 @@
   loadouts:
   - ChiefMedicalOfficerJumpsuit
   - ChiefMedicalOfficerJumpskirt
+  - MedicalTraumaJumpsuit # Forge
   - ChiefMedicalOfficerTurtleneckJumpsuit
   - ChiefMedicalOfficerTurtleneckJumpskirt
   fallbacks:
@@ -39,7 +40,7 @@
   - ChiefMedicalOfficerBeret
   - CMOMedicalHeadMirror
   subgroups:
-  - ContractorHead
+  - MdMedicHead # Forge
 
 - type: loadoutGroup
   id: DocEars
@@ -57,6 +58,8 @@
   loadouts:
   - DocClothingCloakCmo
   - DocClothingNeckMantleCMO
+  subgroups:
+  - MdMedicNeck # Forge
 
 - type: loadoutGroup
   id: DocPDA

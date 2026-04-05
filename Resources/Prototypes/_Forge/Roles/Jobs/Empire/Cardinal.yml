@@ -1,66 +1,67 @@
-- type: job
-  id: Cardinal
-  name: forge-job-name-cardinal
-  description: forge-job-desc-cardinal
-  playTimeTracker: JobCardinal
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 86400 # 24 hours
-    - !type:DepartmentTimeRequirement
-      department: Empire
-      time: 64800 # 18 hours
-    - !type:RoleTimeRequirement
-      role: JobPraetorian
-      time: 21600 # 6 hours
-    - !type:SpeciesRequirement
-      inverted: true
-      species:
-        - SlimePerson
-        - Arachnid
-        - Chitinid
-        - Resomi
-        - Vox
-        - Diona
-        - Goblin
-        - Hydrakin
-        - Vulpkanin
-        - Tajaran
-        - Reptilian
-        # - Oni
-        - Moth
-        - IPC
-  # alternateRequirementSets:
-  #   longerPlaytimeLessSec:
-  #   - !type:OverallPlaytimeRequirement
-  #     time: 216000 # 60 hours
-  #   # - !type:RoleTimeRequirement
-  #   #   role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
-  #   #   time: 43200 # 12 hours
-  startingGear: CardinalGear
-  alwaysUseSpawner: true
-  icon: JobIconEmpireCardinal
-  supervisors: job-supervisors-praefect
-  weight: 40
-  displayWeight: 40
-  canBeAntag: false
-  salary: 11000
-  setPreference: true
-  accessGroups:
-  - CommandEmpireAccess
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: NpcFactionMember
-      factions:
-      - Empire
-
-- type: startingGear
-  id: CardinalGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF
+# Empire role disabled.
+# - type: job
+#   id: Cardinal
+#   name: forge-job-name-cardinal
+#   description: forge-job-desc-cardinal
+#   playTimeTracker: JobCardinal
+#   requirements:
+#     - !type:OverallPlaytimeRequirement
+#       time: 86400 # 24 hours
+#     - !type:DepartmentTimeRequirement
+#       department: Empire
+#       time: 64800 # 18 hours
+#     - !type:RoleTimeRequirement
+#       role: JobPraetorian
+#       time: 21600 # 6 hours
+#     - !type:SpeciesRequirement
+#       inverted: true
+#       species:
+#         - SlimePerson
+#         - Arachnid
+#         - Chitinid
+#         - Resomi
+#         - Vox
+#         - Diona
+#         - Goblin
+#         - Hydrakin
+#         - Vulpkanin
+#         - Tajaran
+#         - Reptilian
+#         # - Oni
+#         - Moth
+#         - IPC
+#   # alternateRequirementSets:
+#   #   longerPlaytimeLessSec:
+#   #   - !type:OverallPlaytimeRequirement
+#   #     time: 216000 # 60 hours
+#   #   # - !type:RoleTimeRequirement
+#   #   #   role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
+#   #   #   time: 43200 # 12 hours
+#   startingGear: CardinalGear
+#   alwaysUseSpawner: true
+#   icon: JobIconEmpireCardinal
+#   supervisors: job-supervisors-praefect
+#   weight: 40
+#   displayWeight: 40
+#   canBeAntag: false
+#   salary: 11000
+#   setPreference: true
+#   accessGroups:
+#   - CommandEmpireAccess
+#   special:
+#   - !type:AddComponentSpecial
+#     components:
+#     - type: NpcFactionMember
+#       factions:
+#       - Empire
+#
+# - type: startingGear
+#   id: CardinalGear
+#   # equipment:
+#   #   ears:
+#   #   belt:
+#   #   pocket1:
+#   #   pocket2:
+#   # storage:
+#   #   back:
+#   #   - RadioHandheldNF

@@ -337,6 +337,10 @@ namespace Content.Server.Database
         Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job);
 
         Task<bool> RemoveJobWhitelist(Guid player, ProtoId<JobPrototype> job);
+        Task<bool> AddCompanyWhitelist(Guid player, string companyId); // Forge-Change: company whitelist
+        Task<List<string>> GetCompanyWhitelists(Guid player, CancellationToken cancel = default); // Forge-Change: company whitelist
+        Task<bool> IsCompanyWhitelisted(Guid player, string companyId); // Forge-Change: company whitelist
+        Task<bool> RemoveCompanyWhitelist(Guid player, string companyId); // Forge-Change: company whitelist
         Task AddGhostRoleWhitelist(Guid player, ProtoId<GhostRolePrototype> ghostRole); // Frontier
         Task<bool> IsGhostRoleWhitelisted(Guid player, ProtoId<GhostRolePrototype> ghostRole); // Frontier
         Task<bool> RemoveGhostRoleWhitelist(Guid player, ProtoId<GhostRolePrototype> ghostRole); // Frontier
@@ -1058,7 +1062,31 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveJobWhitelist(player, job));
         }
-        
+        // Forge-Change-start: company whitelist
+        public Task<bool> AddCompanyWhitelist(Guid player, string companyId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddCompanyWhitelist(player, companyId));
+        }
+
+        public Task<List<string>> GetCompanyWhitelists(Guid player, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyWhitelists(player, cancel));
+        }
+
+        public Task<bool> IsCompanyWhitelisted(Guid player, string companyId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.IsCompanyWhitelisted(player, companyId));
+        }
+
+        public Task<bool> RemoveCompanyWhitelist(Guid player, string companyId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveCompanyWhitelist(player, companyId));
+        }
+        // Forge-Change-end: company whitelist
         // Frontier: ghost role DB ops
         public Task AddGhostRoleWhitelist(Guid player, ProtoId<GhostRolePrototype> ghostRole)
         {

@@ -431,7 +431,7 @@ uplink-vest-web-elite-name = элитный тактический жилет
 uplink-vest-web-elite-desc = Синтетический бронежилет. У этого имеются дополнительные ремни и термостойкие волокна.в
 uplink-military-webbing-med-name = { ent-ClothingBeltMilitaryWebbingMed }
 uplink-military-webbing-med-desc = { ent-ClothingBeltMilitaryWebbingMed.desc }
-#Chemicals
+# Chemicals
 uplink-syndi-hypo-name = { ent-SyndiHypo }
 uplink-syndi-hypo-desc = { ent-SyndiHypo.desc }
 uplink-defibrillator-syndicate-name = { ent-DefibrillatorSyndicate }

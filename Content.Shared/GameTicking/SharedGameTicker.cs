@@ -179,13 +179,13 @@ namespace Content.Shared.GameTicking
     public sealed class StationDisplayInformation(
         LocId? stationSubtext,
         LocId? stationDescription,
-        ResPath? stationIcon,
+        SpriteSpecifier? stationIcon,
         int lobbySortOrder
         )
     {
         public LocId? StationSubtext { get; } = stationSubtext;
         public LocId? StationDescription { get; } = stationDescription;
-        public ResPath? StationIcon { get; } = stationIcon;
+        public SpriteSpecifier? StationIcon { get; } = stationIcon;
         public int LobbySortOrder { get; } = lobbySortOrder;
     }
 
@@ -248,6 +248,12 @@ namespace Content.Shared.GameTicking
             public bool Observer;
 
             public bool Connected;
+
+            [DataField]
+            public int RoleDeaths;
+
+            [DataField]
+            public int TotalDeaths;
 
             #region Goob Station
             public string? LastWords;

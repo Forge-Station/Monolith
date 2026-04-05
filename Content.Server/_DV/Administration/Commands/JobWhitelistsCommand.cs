@@ -9,7 +9,7 @@ namespace Content.Server._DV.Administration.Commands;
 /// Opens the job whitelists panel for editing player whitelists.
 /// To use this ingame it's easiest to first open the player panel, then hit Job Whitelists.
 /// </summary>
-[AdminCommand(AdminFlags.Whitelist)]
+[AdminCommand(AdminFlags.WhitelistManager)] // Forge-Change: whitelist
 public sealed class JobWhitelistsCommand : LocalizedCommands
 {
     [Dependency] private readonly EuiManager _eui = default!;

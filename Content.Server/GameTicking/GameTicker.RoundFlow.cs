@@ -11,6 +11,7 @@ using Content.Server.Roles;
 using Content.Server.Station.Systems;
 using Content.Server._NF.Bank;
 using Content.Server._NF.GameRule;
+using Content.Server.Nutrition; // Forge-Change
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -28,6 +29,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Robust.Server.Player; // Forge-Change
 // Goob Station - End of Round Screen
 using Content.Shared._Goobstation.LastWords;
 using Content.Shared.Damage;
@@ -68,6 +70,10 @@ namespace Content.Server.GameTicking
         private RoundEndMessageEvent.RoundEndPlayerInfo[]? _replayRoundPlayerInfo;
 
         private string? _replayRoundText;
+        private readonly Dictionary<NetUserId, int> _roundPlayerTotalDeaths = new(); // Forge-Change
+        private readonly Dictionary<(NetUserId UserId, string Role), int> _roundPlayerRoleDeaths = new(); // Forge-Change
+        private FixedPoint2 _roundFoodConsumed = FixedPoint2.Zero; // Forge-Change
+        private FixedPoint2 _roundDrinkConsumed = FixedPoint2.Zero; // Forge-Change
 
         [ViewVariables]
         public GameRunLevel RunLevel
@@ -94,6 +100,67 @@ namespace Content.Server.GameTicking
             return RunLevel == GameRunLevel.PreRoundLobby &&
                    _roundStartTime - RoundPreloadTime > _gameTiming.CurTime;
         }
+        // Forge-Change-start
+        private void InitializeRoundDeathTracking()
+        {
+            SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChangedForRoundDeathTracking);
+            SubscribeLocalEvent<IngestionTrackedEvent>(OnIngestionTracked);
+        }
+
+        private void OnMobStateChangedForRoundDeathTracking(MobStateChangedEvent args)
+        {
+            if (RunLevel != GameRunLevel.InRound)
+                return;
+
+            if (args.NewMobState != MobState.Dead || args.OldMobState == MobState.Dead)
+                return;
+
+            if (!TryComp<ActorComponent>(args.Target, out var actor))
+                return;
+
+            // Count only real players that currently have a valid game session.
+            var userId = actor.PlayerSession.UserId;
+            if (!_playerManager.ValidSessionId(userId))
+                return;
+
+            if (!_mind.TryGetMind(args.Target, out var mindId, out _))
+                return;
+
+            var roles = _roles.MindGetAllRoleInfo(mindId);
+            var antag = _roles.MindIsAntagonist(mindId);
+            var roleInfo = antag
+                ? roles.FirstOrDefault(role => role.Antagonist)
+                : roles.FirstOrDefault();
+            var role = string.IsNullOrEmpty(roleInfo.Name)
+                ? Loc.GetString("game-ticker-unknown-role")
+                : roleInfo.Name;
+
+            _roundPlayerTotalDeaths[userId] = _roundPlayerTotalDeaths.GetValueOrDefault(userId) + 1;
+
+            (NetUserId UserId, string Role) roleKey = (userId, role);
+            _roundPlayerRoleDeaths[roleKey] = _roundPlayerRoleDeaths.GetValueOrDefault(roleKey) + 1;
+        }
+
+        private void OnIngestionTracked(ref IngestionTrackedEvent args)
+        {
+            if (RunLevel != GameRunLevel.InRound)
+                return;
+
+            if (!TryComp<ActorComponent>(args.Consumer, out var actor))
+                return;
+
+            if (!_playerManager.ValidSessionId(actor.PlayerSession.UserId))
+                return;
+
+            if (args.Amount <= FixedPoint2.Zero)
+                return;
+
+            if (args.Type == IngestionTrackedType.Food)
+                _roundFoodConsumed += args.Amount;
+            else
+                _roundDrinkConsumed += args.Amount;
+        }
+        // Forge-Change-end
 
         /// <summary>
         ///     Loads all the maps for the given round.
@@ -580,7 +647,7 @@ namespace Content.Server.GameTicking
 
                 if (TryGetEntity(mind.OriginalOwnedEntity, out var entity) && pvsOverride)
                 {
-                    _pvsOverride.AddGlobalOverride(GetNetEntity(entity.Value), recursive: true);
+                    _pvsOverride.AddGlobalOverride(entity.Value);
                 }
 
                 var roles = _roles.MindGetAllRoleInfo(mindId);
@@ -604,6 +671,11 @@ namespace Content.Server.GameTicking
                 }
 
                 #endregion
+                // Forge-Change-start
+                var currentRole = antag
+                    ? roles.First(role => role.Antagonist).Name
+                    : roles.FirstOrDefault().Name ?? Loc.GetString("game-ticker-unknown-role");
+                // Forge-Change-end
 
                 var playerEndRoundInfo = new RoundEndMessageEvent.RoundEndPlayerInfo()
                 {
@@ -614,14 +686,14 @@ namespace Content.Server.GameTicking
                     PlayerICName = playerIcName,
                     PlayerGuid = userId,
                     PlayerNetEntity = GetNetEntity(entity),
-                    Role = antag
-                        ? roles.First(role => role.Antagonist).Name
-                        : roles.FirstOrDefault().Name ?? Loc.GetString("game-ticker-unknown-role"),
+                    Role = currentRole, // Forge-Change
                     Antag = antag,
                     JobPrototypes = roles.Where(role => !role.Antagonist).Select(role => role.Prototype).ToArray(),
                     AntagPrototypes = roles.Where(role => role.Antagonist).Select(role => role.Prototype).ToArray(),
                     Observer = observer,
                     Connected = connected,
+                    TotalDeaths = userId != null ? _roundPlayerTotalDeaths.GetValueOrDefault(userId.Value) : 0, // Forge-Change
+                    RoleDeaths = userId != null ? _roundPlayerRoleDeaths.GetValueOrDefault((userId.Value, currentRole)) : 0, // Forge-Change
                     // Goob Station - End of Round Screen
                     LastWords = lastWords,
                     EntMobState = mobState,
@@ -735,7 +807,14 @@ namespace Content.Server.GameTicking
                 {
                     // Use localization to get the proper job name instead of the key
                     var roleName = Loc.GetString(player.Role);
-                    var playerLine = "- " + player.PlayerOOCName + " was " + player.PlayerICName + " playing role of " + roleName + ".";
+                    // Forge-Change-start
+                    var playerLine = Loc.GetString("discord-round-manifest-player-entry",
+                        ("playerOOCName", player.PlayerOOCName),
+                        ("playerICName", player.PlayerICName ?? "Unknown"),
+                        ("roleName", roleName),
+                        ("roleDeaths", player.RoleDeaths),
+                        ("totalDeaths", player.TotalDeaths));
+                    // Forge-Change-end
 
                     // Only add manifest line if we haven't seen this exact entry before
                     if (seenManifestEntries.Add(playerLine))
@@ -768,9 +847,32 @@ namespace Content.Server.GameTicking
                 }
 
                 // Prepare base embed content
-                var title = "Round End Summary";
-                var description = "Round **" + RoundId + "** has ended with **" + manifestLines.Count + "** total characters involved.";
-                var footerText = serverName + " - Round " + RoundId;
+                // Forge-Change-start
+                var orderedProfitData = orderedData.ToList();
+                var antagCount = sortedPlayers.Count(p => p.Antag);
+                var profitableCount = orderedProfitData.Count(p => p.Profit > 0);
+                var lossCount = orderedProfitData.Count(p => p.Profit < 0);
+                var roundDuration = RoundDuration();
+                var durationText = $"{(int) roundDuration.TotalHours:D2}:{roundDuration.Minutes:D2}:{roundDuration.Seconds:D2}";
+
+                var totalProfit = orderedProfitData.Sum(p => p.Profit);
+                var embedColor = totalProfit switch
+                {
+                    > 0 => 0x2ECC71,
+                    < 0 => 0xE74C3C,
+                    _ => 0x3498DB
+                };
+
+                var title = Loc.GetString("discord-round-manifest-title");
+                var description = Loc.GetString("discord-round-manifest-description",
+                    ("id", RoundId),
+                    ("duration", durationText),
+                    ("characters", manifestLines.Count));
+                var footerText = Loc.GetString("discord-round-manifest-footer",
+                    ("serverName", serverName),
+                    ("id", RoundId));
+                var embedTimestamp = DateTimeOffset.UtcNow.ToString("O");
+                // Forge-Change-end
 
                 // Calculate base embed character count (title + description + footer)
                 var baseCharacterCount = title.Length + description.Length + footerText.Length;
@@ -790,9 +892,10 @@ namespace Content.Server.GameTicking
                         {
                             Title = embedCount == 0 ? title : title + " (continued)",
                             Description = embedCount == 0 ? description : "",
-                            Color = 0x9999FF,
+                            Color = embedColor, // Forge-Change
                             Fields = new List<WebhookEmbedField>(currentFields),
-                            Footer = new WebhookEmbedFooter { Text = footerText }
+                            Footer = new WebhookEmbedFooter { Text = footerText }, // Forge-Change
+                            Timestamp = embedTimestamp // Forge-Change
                         });
                         embedCount++;
                         currentFields.Clear();
@@ -800,6 +903,79 @@ namespace Content.Server.GameTicking
                     }
                 }
 
+                // Add compact summary fields for quick reading.
+                // Forge-Change-start
+                var statsLines = new List<string>
+                {
+                    Loc.GetString("discord-round-manifest-stats-antags", ("count", antagCount)),
+                    Loc.GetString("discord-round-manifest-stats-profit-entries", ("count", orderedProfitData.Count)),
+                    Loc.GetString("discord-round-manifest-stats-positive", ("count", profitableCount)),
+                    Loc.GetString("discord-round-manifest-stats-negative", ("count", lossCount)),
+                    Loc.GetString("discord-round-manifest-stats-net", ("amount", totalProfit)),
+                    Loc.GetString("discord-round-manifest-stats-food-consumed", ("amount", _roundFoodConsumed)),
+                    Loc.GetString("discord-round-manifest-stats-water-consumed", ("amount", _roundDrinkConsumed))
+                };
+
+                var overviewName = Loc.GetString("discord-round-manifest-overview");
+                currentFields.Add(new WebhookEmbedField
+                {
+                    Name = overviewName,
+                    Value = string.Join("\n", statsLines),
+                    Inline = true
+                });
+                currentEmbedCharacterCount += overviewName.Length + string.Join("\n", statsLines).Length;
+
+                if (orderedProfitData.Count > 0)
+                {
+                    var topProfitEntries = orderedProfitData
+                        .Where(p => p.Profit > 0)
+                        .Take(3)
+                        .ToList();
+
+                    var topLossEntries = orderedProfitData
+                        .Where(p => p.Profit < 0)
+                        .OrderBy(p => p.Profit)
+                        .Take(3)
+                        .ToList();
+
+                    if (topProfitEntries.Count > 0)
+                    {
+                        var topProfitLines = topProfitEntries
+                            .Select((data, i) => $"{i + 1}. {adventureSystem.ConvertBankDataToString(data, true)}")
+                            .ToList();
+                        var topProfitName = Loc.GetString("discord-round-manifest-top-profit");
+
+                        currentFields.Add(new WebhookEmbedField
+                        {
+                            Name = topProfitName,
+                            Value = string.Join("\n", topProfitLines),
+                            Inline = true
+                        });
+                        currentEmbedCharacterCount += topProfitName.Length + string.Join("\n", topProfitLines).Length;
+                    }
+
+                    if (topLossEntries.Count > 0)
+                    {
+                        var topLossLines = topLossEntries
+                            .Select((data, i) => $"{i + 1}. {adventureSystem.ConvertBankDataToString(data, true)}")
+                            .ToList();
+                        var topLossName = Loc.GetString("discord-round-manifest-top-loss");
+
+                        currentFields.Add(new WebhookEmbedField
+                        {
+                            Name = topLossName,
+                            Value = string.Join("\n", topLossLines),
+                            Inline = true
+                        });
+                        currentEmbedCharacterCount += topLossName.Length + string.Join("\n", topLossLines).Length;
+                    }
+                }
+
+                var manifestFieldName = Loc.GetString("discord-round-manifest-players");
+                var manifestFieldNameContinued = Loc.GetString("discord-round-manifest-players-continued");
+                var bankFieldName = Loc.GetString("discord-round-manifest-bank");
+                var bankFieldNameContinued = Loc.GetString("discord-round-manifest-bank-continued");
+                // Forge-Change-end
                 // Process manifest lines
                 var currentFieldLines = new List<string>();
                 var currentFieldLength = 0;
@@ -810,7 +986,7 @@ namespace Content.Server.GameTicking
                     // Check if adding this line would exceed field value limit
                     if (currentFieldLength + line.Length + 1 > MaxFieldValueLength - 20 && currentFieldLines.Count > 0)
                     {
-                        var fieldName = manifestFieldCount == 0 ? "Player Manifest" : "Player Manifest (continued)";
+                        var fieldName = manifestFieldCount == 0 ? manifestFieldName : manifestFieldNameContinued; // Forge-Change
                         var fieldValue = string.Join("\n", currentFieldLines);
                         var fieldCharacterCount = fieldName.Length + fieldValue.Length;
 
@@ -840,7 +1016,7 @@ namespace Content.Server.GameTicking
                 // Add remaining manifest lines
                 if (currentFieldLines.Count > 0)
                 {
-                    var fieldName = manifestFieldCount == 0 ? "Player Manifest" : "Player Manifest (continued)";
+                    var fieldName = manifestFieldCount == 0 ? manifestFieldName : manifestFieldNameContinued; // Forge-Change
                     var fieldValue = string.Join("\n", currentFieldLines);
                     var fieldCharacterCount = fieldName.Length + fieldValue.Length;
 
@@ -872,7 +1048,7 @@ namespace Content.Server.GameTicking
                         // Check if adding this line would exceed field value limit
                         if (currentProfitLength + line.Length + 1 > MaxFieldValueLength - 20 && currentProfitLines.Count > 0)
                         {
-                            var fieldName = profitFieldCount == 0 ? "TSF Central Bank" : "TSF Central Bank (continued)";
+                            var fieldName = profitFieldCount == 0 ? bankFieldName : bankFieldNameContinued; // Forge-Change
                             var fieldValue = string.Join("\n", currentProfitLines);
                             var fieldCharacterCount = fieldName.Length + fieldValue.Length;
 
@@ -902,7 +1078,7 @@ namespace Content.Server.GameTicking
                     // Add remaining profit lines
                     if (currentProfitLines.Count > 0)
                     {
-                        var fieldName = profitFieldCount == 0 ? "TSF Central Bank" : "TSF Central Bank (continued)";
+                        var fieldName = profitFieldCount == 0 ? bankFieldName : bankFieldNameContinued; // Forge-Change
                         var fieldValue = string.Join("\n", currentProfitLines);
                         var fieldCharacterCount = fieldName.Length + fieldValue.Length;
 
@@ -952,6 +1128,11 @@ namespace Content.Server.GameTicking
             // If this game ticker is a dummy, do nothing!
             if (DummyTicker)
                 return;
+
+            _roundPlayerTotalDeaths.Clear(); // Forge-Change
+            _roundPlayerRoleDeaths.Clear(); // Forge-Change
+            _roundFoodConsumed = FixedPoint2.Zero; // Forge-Change
+            _roundDrinkConsumed = FixedPoint2.Zero; // Forge-Change
 
             ReplayEndRound();
 

@@ -332,6 +332,8 @@ public sealed class DrinkSystem : SharedDrinkSystem
 
         _reaction.DoEntityReaction(args.Target.Value, solution, ReactionMethod.Ingestion);
         _stomach.TryTransferSolution(firstStomach.Value.Owner, drained, firstStomach.Value.Comp1);
+            var ingestionEvent = new IngestionTrackedEvent(args.Target.Value, drained.Volume, IngestionTrackedType.Drink); // Forge-Change
+            RaiseLocalEvent(ref ingestionEvent); // Forge-Change
 
         _forensics.TransferDna(entity, args.Target.Value);
 

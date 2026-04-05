@@ -70,6 +70,11 @@ namespace Content.Server.Communications
                     comp.AnnouncementCooldownRemaining -= frameTime;
                 }
 
+                if (comp.BroadcastCooldownRemaining >= 0f) // Forge-Change
+                {
+                    comp.BroadcastCooldownRemaining -= frameTime; // Forge-Change
+                }
+
                 comp.UIUpdateAccumulator += frameTime;
 
                 if (comp.UIUpdateAccumulator < UIUpdateInterval)
@@ -87,6 +92,7 @@ namespace Content.Server.Communications
         public void OnCommunicationsConsoleMapInit(EntityUid uid, CommunicationsConsoleComponent comp, MapInitEvent args)
         {
             comp.AnnouncementCooldownRemaining = comp.InitialDelay;
+            comp.BroadcastCooldownRemaining = 0f; // Forge-Change
         }
 
         /// <summary>
@@ -149,10 +155,16 @@ namespace Content.Server.Communications
                         levels = new();
                         foreach (var (id, detail) in alertComp.AlertLevels.Levels)
                         {
-                            if (detail.Selectable)
+                            if (!detail.Selectable) // Forge-Change
+                                continue; // Forge-Change
+
+                            if (!comp.CanIncreaseAlertLevel && // Forge-Change
+                                IsAlertLevelIncrease(alertComp, alertComp.CurrentLevel, id)) // Forge-Change
                             {
-                                levels.Add(id);
+                                continue; // Forge-Change
                             }
+
+                            levels.Add(id); // Forge-Change
                         }
                     }
 
@@ -163,6 +175,7 @@ namespace Content.Server.Communications
 
             _uiSystem.SetUiState(uid, CommunicationsConsoleUiKey.Key, new CommunicationsConsoleInterfaceState(
                 CanAnnounce(comp),
+                CanBroadcast(comp), // Forge-Change
                 CanCallOrRecall(comp),
                 levels,
                 currentLevel,
@@ -174,6 +187,11 @@ namespace Content.Server.Communications
         private static bool CanAnnounce(CommunicationsConsoleComponent comp)
         {
             return comp.AnnouncementCooldownRemaining <= 0f;
+        }
+
+        private static bool CanBroadcast(CommunicationsConsoleComponent comp) // Forge-Change
+        {
+            return comp.BroadcastCooldownRemaining <= 0f; // Forge-Change
         }
 
         private bool CanUse(EntityUid user, EntityUid console)
@@ -224,6 +242,14 @@ namespace Content.Server.Communications
             var stationUid = _stationSystem.GetOwningStation(uid);
             if (stationUid != null)
             {
+                if (!comp.CanIncreaseAlertLevel // Forge-Change
+                    && TryComp(stationUid.Value, out AlertLevelComponent? alertComp) // Forge-Change
+                    && IsAlertLevelIncrease(alertComp, alertComp.CurrentLevel, message.Level)) // Forge-Change
+                {
+                    _popupSystem.PopupCursor(Loc.GetString("comms-console-alert-level-increase-disabled"), message.Actor, PopupType.Medium); // Forge-Change
+                    return; // Forge-Change
+                }
+
                 _alertLevelSystem.SetLevel(stationUid.Value, message.Level, true, true);
             }
         }
@@ -293,16 +319,47 @@ namespace Content.Server.Communications
             }
             // End Frontier
 
+            if (!CanBroadcast(component)) // Forge-Change
+                return; // Forge-Change
+
             var payload = new NetworkPayload
             {
                 [ScreenMasks.Text] = message.Message
             };
 
             _deviceNetworkSystem.QueuePacket(uid, null, payload, net.TransmitFrequency);
+            component.BroadcastCooldownRemaining = component.BroadcastDelay; // Forge-Change
+            UpdateCommsConsoleInterface(uid, component); // Forge-Change
 
             _adminLogger.Add(LogType.DeviceNetwork, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following broadcast: {message.Message:msg}");
         }
+        // Forge-Change-start
+        private static bool IsAlertLevelIncrease(AlertLevelComponent alertComp, string fromLevel, string toLevel)
+        {
+            if (alertComp.AlertLevels == null)
+                return false;
 
+            var i = 0;
+            var fromIndex = -1;
+            var toIndex = -1;
+
+            foreach (var level in alertComp.AlertLevels.Levels.Keys)
+            {
+                if (level == fromLevel)
+                    fromIndex = i;
+
+                if (level == toLevel)
+                    toIndex = i;
+
+                i++;
+            }
+
+            if (fromIndex == -1 || toIndex == -1)
+                return false;
+
+            return toIndex > fromIndex;
+        }
+        // Forge-Change-end
         private void OnCallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleCallEmergencyShuttleMessage message)
         {
             if (!CanCallOrRecall(comp))

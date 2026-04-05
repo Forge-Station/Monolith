@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Forge.Speech.Synthesis;
+namespace Content.Shared._Forge.Barks;
 
 [Serializable, NetSerializable]
 public sealed class RequestPreviewBarkEvent(string barkVoiceId) : EntityEventArgs

@@ -1,4 +1,5 @@
 using Content.Server.Gravity;
+using Content.Server.Power.EntitySystems; // Forge-Change
 using Content.Server.Power.Components;
 using Content.Shared.Gravity;
 using Robust.Shared.GameObjects;
@@ -40,6 +41,8 @@ namespace Content.IntegrationTests.Tests
             var entityMan = server.EntMan;
             var mapMan = server.MapMan;
             var mapSys = entityMan.System<SharedMapSystem>();
+            var powerReceiverSys = entityMan.System<PowerReceiverSystem>(); // Forge-Change
+            var powerNetSys = entityMan.System<PowerNetSystem>(); // Forge-Change
 
             EntityUid generator = default;
             Entity<MapGridComponent> grid1 = default;
@@ -63,7 +66,8 @@ namespace Content.IntegrationTests.Tests
                 });
 
                 var powerComponent = entityMan.GetComponent<ApcPowerReceiverComponent>(generator);
-                powerComponent.NeedsPower = false;
+                powerReceiverSys.SetNeedsPower(generator, false, powerComponent); // Forge-Change
+                powerNetSys.QueueApcPowerReceiverUpdate(generator); // Forge-Change
             });
 
             await server.WaitRunTicks(25); // Mono change: increase from 5 due to power update change
@@ -82,10 +86,11 @@ namespace Content.IntegrationTests.Tests
 
                 // Re-enable needs power so it turns off again.
                 // Charge rate is ridiculously high so it finishes in one tick.
-                powerComponent.NeedsPower = true;
+                powerReceiverSys.SetNeedsPower(generator, true, powerComponent);
+                powerNetSys.QueueApcPowerReceiverUpdate(generator); // Forge-Change
             });
 
-            await server.WaitRunTicks(25); // Mono change: increase from 5 due to power update change
+            await server.WaitRunTicks(60); // Forge-Change: increase from 60 to 60 due to power update change
 
             await server.WaitAssertion(() =>
             {

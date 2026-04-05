@@ -106,4 +106,22 @@ public sealed class ForgeVars
     /// </summary>
     public static readonly CVarDef<bool> QueueEnabled =
         CVarDef.Create("queue.enabled", true, CVar.SERVERONLY); // Forge-Change
+
+    /// <summary>
+    ///     Nudge entities that stay in hard contact with static geometry for a long time (anti-stuck).
+    /// </summary>
+    public static readonly CVarDef<bool> AutoUnstuckEnabled =
+        CVarDef.Create("forge.physics.auto_unstuck", true, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Seconds of continuous static hard contact before a nudge is applied.
+    /// </summary>
+    public static readonly CVarDef<float> AutoUnstuckAfterSeconds =
+        CVarDef.Create("forge.physics.auto_unstuck_after", 10f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     World-space displacement applied when unsticking (meters).
+    /// </summary>
+    public static readonly CVarDef<float> AutoUnstuckNudge =
+        CVarDef.Create("forge.physics.auto_unstuck_nudge", 2f, CVar.SERVERONLY);
 }

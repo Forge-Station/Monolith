@@ -3759,7 +3759,7 @@ entities:
       pos: 25.5,-6.5
       parent: 1
     - type: Docking
-      name: ДСБФ 2
+      name: ТСФ 2
   - uid: 62
     components:
     - type: Transform
@@ -3804,7 +3804,7 @@ entities:
       pos: -24.5,-6.5
       parent: 1
     - type: Docking
-      name: ДСБФ 1
+      name: ТСФ 1
   - uid: 70
     components:
     - type: Transform

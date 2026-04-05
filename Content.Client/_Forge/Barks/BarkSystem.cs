@@ -1,5 +1,5 @@
 using Content.Client.Audio;
-using Content.Shared._Forge.Speech.Synthesis;
+using Content.Shared._Forge.Barks;
 using Content.Shared.Chat;
 using Content.Shared._Forge;
 using Robust.Client.Audio;
@@ -11,7 +11,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Client._Forge.Speech.Synthesis.System;
+namespace Content.Client._Forge.Barks;
 
 /// <summary>
 /// The system responsible for the sound transmission for each subscriber

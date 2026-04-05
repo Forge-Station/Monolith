@@ -1,0 +1,29 @@
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Roles;
+using JetBrains.Annotations;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+
+namespace Content.Server.Jobs
+{
+    [UsedImplicitly]
+    [DataDefinition]
+    public sealed partial class GiveItemSpecial : JobSpecial
+    {
+        [DataField("prototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        public string Prototype { get; private set; } = string.Empty;
+
+        public override void AfterEquip(EntityUid mob)
+        {
+            if (string.IsNullOrEmpty(Prototype))
+                return;
+
+            var sysMan = IoCManager.Resolve<IEntitySystemManager>();
+            var entMan = IoCManager.Resolve<IEntityManager>();
+
+            var entity = entMan.SpawnEntity(Prototype, entMan.GetComponent<TransformComponent>(mob).Coordinates);
+
+            sysMan.GetEntitySystem<SharedHandsSystem>().PickupOrDrop(mob, entity);
+        }
+    }
+}

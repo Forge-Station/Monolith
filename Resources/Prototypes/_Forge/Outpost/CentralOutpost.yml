@@ -21,7 +21,7 @@
 #            !type:NanotrasenNameGenerator
 #            prefixCreator: '14'
         - type: ExtraStationInformation
-          iconPath: /Textures/_Mono/Logo/icon/icon-256x256.png # used the biggest one, looks better when downscaling than upscaling
+          icon: /Textures/Forge/Logo/Icon/banner_engineering.png # used the biggest one, looks better when downscaling than upscaling
           stationSubtext: 'frontier-lobby-frontier-subtext'
           stationDescription: 'frontier-lobby-frontier-description'
           lobbySortOrder: 1
@@ -34,9 +34,12 @@
             StationRepresentative: [ 1, 1 ]
             StationTrafficController: [ 2, 2 ]
             SecurityGuard: [ 3, 3 ]
-            CCServiceWorker: [ 2, 2 ]
-            NFJanitor: [ 2, 2 ]
-            MailCarrier: [ 2, 2 ]
+            CCServiceWorker: [ 4, 4 ]
+          # NFJanitor: [ 2, 2 ]
+          # MailCarrier: [ 2, 2 ]
+            MdMedic: [ -1, -1 ]
+            NtMedic: [ -1, -1 ]
+            DirectorOfCare: [ 1, 1 ]
           tags:
           - HeadOfPersonnel
           - HeadOfSecurity

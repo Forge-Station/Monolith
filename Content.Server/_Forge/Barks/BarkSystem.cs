@@ -1,7 +1,6 @@
 using Content.Server.Chat.Systems;
 using Content.Shared._Forge;
-using Content.Shared._Forge.Speech.Synthesis;
-using Content.Shared._Forge.Speech.Synthesis.Components;
+using Content.Shared._Forge.Barks;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;

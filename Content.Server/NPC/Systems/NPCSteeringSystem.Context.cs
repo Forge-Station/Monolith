@@ -176,6 +176,7 @@ public sealed partial class NPCSteeringSystem
                 // Try to get the next node temporarily.
                 targetCoordinates = GetTargetCoordinates(steering);
                 needsPath = true;
+                steering.ForceRepath = true;
                 ResetStuck(steering, ourCoordinates);
             }
         }
@@ -311,6 +312,7 @@ public sealed partial class NPCSteeringSystem
                 // and I don't want to spam grafana even harder than it gets spammed rn.
                 Log.Debug($"NPC {ToPrettyString(uid)} found stuck at {ourCoordinates}");
                 needsPath = true;
+                steering.ForceRepath = true;
 
                 if (stuckTime.TotalSeconds > maxStuckTime * 3)
                 {
@@ -460,8 +462,42 @@ public sealed partial class NPCSteeringSystem
         // Request the new path.
         if (needsPath)
         {
+            if (TryReuseCachedPath(uid, steering, xform))
+            {
+                LastFramePathCacheHits++;
+                return;
+            }
+
+            if (!steering.ForceRepath && _timing.CurTime < steering.NextRepathAt)
+                return;
+
             RequestPath(uid, steering, xform, targetDistance);
         }
+    }
+
+    private bool TryReuseCachedPath(EntityUid uid, NPCSteeringComponent steering, TransformComponent xform)
+    {
+        if (steering.LastPath.Count == 0)
+            return false;
+
+        if (!_pathfindingSystem.CanReuseRecentPath(steering.Coordinates, steering.LastPathTarget, steering.LastPathComputedAt))
+            return false;
+
+        var cachedNodes = steering.LastPath.ToList();
+        if (cachedNodes.Count == 0)
+            return false;
+
+        var targetPos = _transform.ToMapCoordinates(steering.Coordinates);
+        var ourPos = _transform.GetMapCoordinates(uid, xform: xform);
+        PrunePath(uid, ourPos, targetPos.Position - ourPos.Position, cachedNodes);
+
+        if (cachedNodes.Count == 0)
+            return false;
+
+        steering.CurrentPath = new Queue<PathPoly>(cachedNodes);
+        steering.ForceRepath = false;
+        ScheduleNextRepath(steering);
+        return true;
     }
 
     /// <summary>

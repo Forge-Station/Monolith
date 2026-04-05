@@ -1,64 +1,65 @@
-- type: job
-  id: Consul
-  name: forge-job-name-consul
-  description: forge-job-desc-consul
-  playTimeTracker: JobConsul
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 43200 # 12 hours
-    - !type:DepartmentTimeRequirement
-      department: Empire
-      time: 21600 # 6 hours
-    - !type:SpeciesRequirement
-      inverted: true
-      species:
-        - SlimePerson
-        - Arachnid
-        - Chitinid
-        - Resomi
-        - Vox
-        - Diona
-        - Goblin
-        - Hydrakin
-        - Vulpkanin
-        - Tajaran
-        - Reptilian
-        # - Oni
-        - Moth
-        - IPC
-  # alternateRequirementSets:
-  #   longerPlaytimeLessSec:
-  #   - !type:RoleTimeRequirement
-  #     role: # Требования попросили оставить низкими для людей с whitelist
-  #     time: 43200 # 12 hours
-  whitelisted: true
-  startingGear: ConsulGear
-  alwaysUseSpawner: true
-  icon: JobIconEmpireConsul
-  supervisors: job-supervisors-nobody
-  weight: 30
-  displayWeight: 30
-  canBeAntag: false
-  salary: 10000
-  setPreference: true
-  access:
-  - EmpireDiplomacy
-  accessGroups:
-  - SpecialEmpireAccess
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: NpcFactionMember
-      factions:
-      - Empire
-
-- type: startingGear
-  id: ConsulGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF
+# Empire role disabled.
+# - type: job
+#   id: Consul
+#   name: forge-job-name-consul
+#   description: forge-job-desc-consul
+#   playTimeTracker: JobConsul
+#   requirements:
+#     - !type:OverallPlaytimeRequirement
+#       time: 43200 # 12 hours
+#     - !type:DepartmentTimeRequirement
+#       department: Empire
+#       time: 21600 # 6 hours
+#     - !type:SpeciesRequirement
+#       inverted: true
+#       species:
+#         - SlimePerson
+#         - Arachnid
+#         - Chitinid
+#         - Resomi
+#         - Vox
+#         - Diona
+#         - Goblin
+#         - Hydrakin
+#         - Vulpkanin
+#         - Tajaran
+#         - Reptilian
+#         # - Oni
+#         - Moth
+#         - IPC
+#   # alternateRequirementSets:
+#   #   longerPlaytimeLessSec:
+#   #   - !type:RoleTimeRequirement
+#   #     role: # Требования попросили оставить низкими для людей с whitelist
+#   #     time: 43200 # 12 hours
+#   whitelisted: true
+#   startingGear: ConsulGear
+#   alwaysUseSpawner: true
+#   icon: JobIconEmpireConsul
+#   supervisors: job-supervisors-nobody
+#   weight: 30
+#   displayWeight: 30
+#   canBeAntag: false
+#   salary: 10000
+#   setPreference: true
+#   access:
+#   - EmpireDiplomacy
+#   accessGroups:
+#   - SpecialEmpireAccess
+#   special:
+#   - !type:AddComponentSpecial
+#     components:
+#     - type: NpcFactionMember
+#       factions:
+#       - Empire
+#
+# - type: startingGear
+#   id: ConsulGear
+#   # equipment:
+#   #   ears:
+#   #   belt:
+#   #   pocket1:
+#   #   pocket2:
+#   # storage:
+#   #   back:
+#   #   - RadioHandheldNF

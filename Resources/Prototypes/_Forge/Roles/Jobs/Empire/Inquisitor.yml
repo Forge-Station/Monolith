@@ -1,50 +1,51 @@
-- type: job
-  id: Inquisitor
-  name: forge-job-name-inquisitor
-  description: forge-job-desc-inquisitor
-  playTimeTracker: JobInquisitor
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 43200 # 12 hours
-    - !type:DepartmentTimeRequirement
-      department: Empire
-      time: 21600 # 6 hours
-    - !type:SpeciesRequirement
-      species:
-        - Human
-  # alternateRequirementSets:
-  #   longerPlaytimeLessSec:
-  #   - !type:RoleTimeRequirement
-  #     role: # Требования попросили оставить низкими для людей с whitelist
-  #     time: 43200 # 12 hours
-  whitelisted: true
-  startingGear: InquisitorGear
-  alwaysUseSpawner: true
-  icon: JobIconEmpireInquisitor
-  supervisors: job-supervisors-praefect
-  weight: 30
-  displayWeight: 30
-  canBeAntag: false
-  salary: 10000
-  setPreference: true
-  access:
-  - EmpireInqusitor
-  accessGroups:
-  - SpecialEmpireAccess
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: NpcFactionMember
-      factions:
-      - Empire
-
-- type: startingGear
-  id: InquisitorGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF
+# Empire role disabled.
+# - type: job
+#   id: Inquisitor
+#   name: forge-job-name-inquisitor
+#   description: forge-job-desc-inquisitor
+#   playTimeTracker: JobInquisitor
+#   requirements:
+#     - !type:OverallPlaytimeRequirement
+#       time: 43200 # 12 hours
+#     - !type:DepartmentTimeRequirement
+#       department: Empire
+#       time: 21600 # 6 hours
+#     - !type:SpeciesRequirement
+#       species:
+#         - Human
+#   # alternateRequirementSets:
+#   #   longerPlaytimeLessSec:
+#   #   - !type:RoleTimeRequirement
+#   #     role: # Требования попросили оставить низкими для людей с whitelist
+#   #     time: 43200 # 12 hours
+#   whitelisted: true
+#   startingGear: InquisitorGear
+#   alwaysUseSpawner: true
+#   icon: JobIconEmpireInquisitor
+#   supervisors: job-supervisors-praefect
+#   weight: 30
+#   displayWeight: 30
+#   canBeAntag: false
+#   salary: 10000
+#   setPreference: true
+#   access:
+#   - EmpireInqusitor
+#   accessGroups:
+#   - SpecialEmpireAccess
+#   special:
+#   - !type:AddComponentSpecial
+#     components:
+#     - type: NpcFactionMember
+#       factions:
+#       - Empire
+#
+# - type: startingGear
+#   id: InquisitorGear
+#   # equipment:
+#   #   ears:
+#   #   belt:
+#   #   pocket1:
+#   #   pocket2:
+#   # storage:
+#   #   back:
+#   #   - RadioHandheldNF

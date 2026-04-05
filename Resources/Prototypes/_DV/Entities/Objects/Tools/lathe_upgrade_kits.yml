@@ -29,6 +29,7 @@
       materialUseMultiplier: 0.8
       timeMultiplier: 1.5
     - type: LatheHeatProducing
+      energyPerSecond: 5000 # Forge-Change: 5000
       temperatureCap: 373.15
     - type: ReagentSpeed
       solution: lube

@@ -1,4 +1,4 @@
-ent-EngineerNfsdIDCard = ID карта специалиста дсбф
+ent-EngineerNfsdIDCard = ID карта специалиста ТСФ
     .desc = { ent-CadetIDCard.desc }
 
 ent-EmpireIDCard = ID карта
@@ -12,13 +12,29 @@ ent-EmpireCommanderIDCard = ID карта
 
 ent-RenegateFlunkyIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }
+    .suffix = Шестёрка, Ренегаты
 ent-RenegateQuackIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }
+    .suffix = Костоправ, Ренегаты
 ent-RenegateForemanIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }
+    .suffix = Штейгер, Ренегаты
 ent-RenegateOverseerIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }
+    .suffix = Смотрящий, Ренегаты
 ent-RenegateDraftsmanIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }
+    .suffix = Чертёжник, Ренегаты
 ent-RenegateBaronIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }
+    .suffix = Барон, Ренегаты
+
+ent-TTIDirectorIDCard = ID карта
+    .desc = { ent-IDCardStandard.desc }
+    .suffix = Директор TTI
+ent-TTIParamedicIDCard = ID карта
+    .desc = { ent-IDCardStandard.desc }
+    .suffix = Парамедик TTI
+ent-TTIDoctorIDCard = ID карта
+    .desc = { ent-IDCardStandard.desc }
+    .suffix = Врач TTI

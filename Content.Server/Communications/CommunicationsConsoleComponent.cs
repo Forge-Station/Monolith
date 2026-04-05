@@ -40,7 +40,14 @@ namespace Content.Server.Communications
         /// </summary>
         [ViewVariables]
         [DataField]
-        public int Delay = 90;
+        public int Delay = 600; // Forge-Change
+
+        /// <summary>
+        /// Time in seconds between text broadcasts on a per-console basis.
+        /// </summary>
+        [ViewVariables]
+        [DataField]
+        public int BroadcastDelay = 600; // Forge-Change
 
         /// <summary>
         /// Time in seconds of announcement cooldown when a new console is created on a per-console basis
@@ -48,6 +55,14 @@ namespace Content.Server.Communications
         [ViewVariables]
         [DataField]
         public int InitialDelay = 30;
+
+        /// <summary>
+        /// If false, users cannot raise the alert level from this console.
+        /// Lowering the alert level is still allowed.
+        /// </summary>
+        [ViewVariables]
+        [DataField]
+        public bool CanIncreaseAlertLevel = true; // Forge-Change
 
         /// <summary>
         /// Can call or recall the shuttle

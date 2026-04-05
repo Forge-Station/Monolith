@@ -1,0 +1,11 @@
+rat-king-command-stay-dataset-1 = Sit!
+rat-king-command-stay-dataset-2 = Stay!
+rat-king-command-stay-dataset-3 = Stop!
+rat-king-command-follow-dataset-1 = Heel!
+rat-king-command-follow-dataset-2 = Follow!
+rat-king-command-cheese-em-dataset-1 = Attack!
+rat-king-command-cheese-em-dataset-2 = Sic!
+rat-king-command-cheese-em-dataset-3 = Kill!
+rat-king-command-cheese-em-dataset-4 = Cheese 'Em!
+rat-king-command-loose-dataset-1 = Free!
+rat-king-command-loose-dataset-2 = Loose!

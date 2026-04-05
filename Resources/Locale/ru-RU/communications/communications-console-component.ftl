@@ -10,6 +10,7 @@ comms-console-menu-time-remaining = Оставшееся время: { $time }
 comms-console-permission-denied = В доступе отказано
 comms-console-shuttle-unavailable = В настоящее время шаттл недоступен
 comms-console-message-too-long = Сообщение слишком длинное
+comms-console-alert-level-increase-disabled = На этой консоли повышение уровня угрозы отключено.
 # Placeholder values
 comms-console-announcement-sent-by = Отправитель
 comms-console-announcement-unknown-sender = Неизвестный

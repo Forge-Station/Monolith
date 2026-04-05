@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingOuterHardsuitNfsdBronze
+  parent: ClothingOuterHardsuitM82c
   id: ClothingOuterHardsuitTSFLow
   name: TSF light hardsuit
   description: A light issue TSF hardsuit tuned for mobility.
@@ -18,7 +18,7 @@
       helmetattachment: ClothingHeadHelmetAttachmentBlock
 
 - type: entity
-  parent: ClothingOuterHardsuitNfsdSilver
+  parent: ClothingOuterHardsuitM86
   id: ClothingOuterHardsuitTSFMid
   name: TSF standard hardsuit
   description: A standard issue TSF hardsuit for general combat deployment.
@@ -37,7 +37,7 @@
       helmetattachment: ClothingHeadHelmetAttachmentBlock
 
 - type: entity
-  parent: ClothingOuterHardsuitNfsdCombat
+  parent: ClothingOuterHardsuitNfsdSheriff
   id: ClothingOuterHardsuitTSFHigh
   name: TSF heavy hardsuit
   description: A heavy TSF hardsuit with reinforced armor plating.
@@ -56,7 +56,7 @@
       helmetattachment: ClothingHeadHelmetAttachmentBlock
 
 - type: entity
-  parent: ClothingOuterHardsuitNfsdBrigmedic
+  parent: ClothingOuterHardsuitM82b
   id: ClothingOuterHardsuitTSFMedic
   name: TSF corpsman hardsuit
   description: A TSF hardsuit with medical markings and field treatment accommodations.
@@ -113,7 +113,7 @@
       helmetattachment: ClothingHeadHelmetAttachmentBlock
 
 - type: entity
-  parent: ClothingOuterHardsuitNfsdCommand
+  parent: ClothingOuterHardsuitNfsdSheriff
   id: ClothingOuterHardsuitTSFZazhiganie
   name: TSF TBS-2 Zazhiganie hardsuit
   description: A command-grade TSF hardsuit with enhanced communications support.

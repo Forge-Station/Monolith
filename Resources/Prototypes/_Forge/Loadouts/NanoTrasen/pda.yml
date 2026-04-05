@@ -1,0 +1,13 @@
+- type: loadout
+  id: NtMedicMedicalPDA
+  equipment:
+    id: TTIMedicPDA
+
+- type: loadoutGroup
+  id: NtMedicPDA
+  name: loadout-group-contractor-id
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - NtMedicMedicalPDA
+  fallbacks:
+  - NtMedicMedicalPDA

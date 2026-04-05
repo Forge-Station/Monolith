@@ -26,37 +26,44 @@ namespace Content.Server.Atmos.Components
 
         [ViewVariables]
         [IncludeDataField(customTypeSerializer:typeof(TileAtmosCollectionSerializer))]
-        public Dictionary<Vector2i, TileAtmosphere> Tiles = new(1000);
+        public Dictionary<Vector2i, TileAtmosphere> Tiles = new(128); // Forge-Change
 
         [ViewVariables]
-        public HashSet<TileAtmosphere> MapTiles = new(1000);
+        public readonly Dictionary<Vector2i, AtmosChunkState> Chunks = new(64);
+
+        private HashSet<TileAtmosphere>? _mapTiles; // Forge-Change
 
         [ViewVariables]
-        public readonly HashSet<TileAtmosphere> ActiveTiles = new(1000);
+        public HashSet<TileAtmosphere> MapTiles => _mapTiles ??= new HashSet<TileAtmosphere>(64); // Forge-Change
+
+        [ViewVariables]
+        public readonly HashSet<TileAtmosphere> ActiveTiles = new(128); // Forge-Change
 
         [ViewVariables]
         public int ActiveTilesCount => ActiveTiles.Count;
 
         [ViewVariables]
-        public readonly HashSet<ExcitedGroup> ExcitedGroups = new(1000);
+        public readonly HashSet<ExcitedGroup> ExcitedGroups = new(64); // Forge-Change
 
         [ViewVariables]
         public int ExcitedGroupCount => ExcitedGroups.Count;
 
         [ViewVariables]
-        public readonly HashSet<TileAtmosphere> HotspotTiles = new(1000);
+        public readonly HashSet<TileAtmosphere> HotspotTiles = new(64); // Forge-Change
 
         [ViewVariables]
         public int HotspotTilesCount => HotspotTiles.Count;
 
         [ViewVariables]
-        public readonly HashSet<TileAtmosphere> SuperconductivityTiles = new(1000);
+        public readonly HashSet<TileAtmosphere> SuperconductivityTiles = new(64); // Forge-Change
 
         [ViewVariables]
         public int SuperconductivityTilesCount => SuperconductivityTiles.Count;
 
+        private HashSet<TileAtmosphere>? _highPressureDelta; // Forge-Change
+
         [ViewVariables]
-        public HashSet<TileAtmosphere> HighPressureDelta = new(1000);
+        public HashSet<TileAtmosphere> HighPressureDelta => _highPressureDelta ??= new HashSet<TileAtmosphere>(64); // Forge-Change
 
         [ViewVariables]
         public int HighPressureDeltaCount => HighPressureDelta.Count;
@@ -68,19 +75,37 @@ namespace Content.Server.Atmos.Components
         public readonly HashSet<Entity<AtmosDeviceComponent>> AtmosDevices = new();
 
         [ViewVariables]
-        public readonly Queue<TileAtmosphere> CurrentRunTiles = new();
+        public readonly List<TileAtmosphere> CurrentRunTiles = new(256); // Forge-Change
 
         [ViewVariables]
-        public readonly Queue<ExcitedGroup> CurrentRunExcitedGroups = new();
+        public readonly List<Vector2i> CurrentRunChunks = new(64);
 
         [ViewVariables]
-        public readonly Queue<IPipeNet> CurrentRunPipeNet = new();
+        public int CurrentRunChunkIndex;
 
         [ViewVariables]
-        public readonly Queue<Entity<AtmosDeviceComponent>> CurrentRunAtmosDevices = new();
+        public int CurrentRunTileIndex; // Forge-Change
 
         [ViewVariables]
-        public readonly HashSet<Vector2i> InvalidatedCoords = new(1000);
+        public readonly List<ExcitedGroup> CurrentRunExcitedGroups = new(128); // Forge-Change
+
+        [ViewVariables]
+        public int CurrentRunExcitedGroupIndex; // Forge-Change
+
+        [ViewVariables]
+        public readonly List<IPipeNet> CurrentRunPipeNet = new(64); // Forge-Change
+
+        [ViewVariables]
+        public int CurrentRunPipeNetIndex; // Forge-Change
+
+        [ViewVariables]
+        public readonly List<Entity<AtmosDeviceComponent>> CurrentRunAtmosDevices = new(128); // Forge-Change
+
+        [ViewVariables]
+        public int CurrentRunAtmosDeviceIndex; // Forge-Change
+
+        [ViewVariables]
+        public readonly HashSet<Vector2i> InvalidatedCoords = new(128); // Forge-Change
 
         [ViewVariables]
         public readonly Queue<TileAtmosphere> CurrentRunInvalidatedTiles = new();
@@ -96,5 +121,30 @@ namespace Content.Server.Atmos.Components
 
         [ViewVariables]
         public AtmosphereProcessingState State { get; set; } = AtmosphereProcessingState.Revalidate;
+    }
+
+    [Serializable]
+    public sealed class AtmosChunkState
+    {
+        [ViewVariables]
+        public readonly HashSet<Vector2i> InvalidatedCoords = new(16);
+
+        [ViewVariables]
+        public readonly HashSet<TileAtmosphere> ActiveTiles = new(32);
+
+        [ViewVariables]
+        public readonly HashSet<TileAtmosphere> HighPressureTiles = new(16);
+
+        [ViewVariables]
+        public readonly HashSet<TileAtmosphere> HotspotTiles = new(16);
+
+        [ViewVariables]
+        public readonly HashSet<TileAtmosphere> SuperconductivityTiles = new(16);
+
+        [ViewVariables]
+        public int NextColdCycle;
+
+        [ViewVariables]
+        public int LastTouchedCycle;
     }
 }

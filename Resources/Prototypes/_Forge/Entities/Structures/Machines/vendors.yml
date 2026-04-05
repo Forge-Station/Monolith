@@ -1,0 +1,25 @@
+- type: entity
+  parent: [VendingMachineAstroVend, BaseStructureDisableToolUse, BaseStructureAccessReaderImmuneToEmag]
+  id: VendingMachineCompanyTL
+  name: TL Vendor
+  description: Sells various TL equipment.
+  components:
+  - type: VendingMachine
+    pack: CompanyVendInventoryTL
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: MarketModifier
+    mod: 8
+  - type: Sprite
+    sprite: Forge/Structures/Machines/terminal_tl.rsi
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: panel
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+  - type: CompanyAccessReader
+    requiredCompany: TechnicLogistic

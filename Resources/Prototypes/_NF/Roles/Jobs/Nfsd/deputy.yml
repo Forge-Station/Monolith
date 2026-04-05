@@ -15,6 +15,7 @@
   hideConsoleVisibility: true #Forge Change
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
+  assignedCompany: TSF
   accessGroups:
   - GeneralNfsdAccess
   special:

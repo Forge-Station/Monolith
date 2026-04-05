@@ -1,6 +1,6 @@
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
-using Content.Shared._Forge.Speech.Synthesis; // Forge-Change
+using Content.Shared._Forge.Barks; // Corvax-Frontier-Barks
 using Content.Shared._Forge.TTS; // Corvax-Frontier-Barks
 using Robust.Shared.Enums;
 using Robust.Shared.GameStates;

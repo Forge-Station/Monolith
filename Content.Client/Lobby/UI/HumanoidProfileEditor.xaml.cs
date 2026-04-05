@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using Content.Client.Humanoid;
+using Content.Client.Lobby.UI.Company; // Forge-Change: company whitelist
 using Content.Client.Lobby.UI.Loadouts;
 using Content.Client.Lobby.UI.Roles;
 using Content.Client.Message;
@@ -60,9 +61,51 @@ namespace Content.Client.Lobby.UI
 
         // One at a time.
         private LoadoutWindow? _loadoutWindow;
+        private CompanyWindow? _companyWindow; // Forge-Change: company whitelist
 
         private bool _exporting;
         private bool _imaging;
+        private string? _preferredNonFactionCompany; // Forge-Change: company whitelist
+
+        // Forge-Change-start: company whitelist
+        private static readonly Dictionary<string, string> ForcedFactionCompaniesByJob = new()
+        {
+            // TSF
+            ["TsfCommandingOfficer"] = "TSF",
+            ["TsfExecutiveOfficer"] = "TSF",
+            ["TsfSeniorOfficer"] = "TSF",
+            ["TsfSeniorAide"] = "TSF",
+            ["TsfAmbassador"] = "TSF",
+            ["TsfRanger"] = "TSF",
+            ["TsfRecruit"] = "TSF",
+            ["TsfEngineer"] = "TSF",
+            // Empire
+            ["Praefect"] = "Imperial",
+            ["Arbiter"] = "Imperial",
+            ["Cardinal"] = "Imperial",
+            ["Inquisitor"] = "Imperial",
+            ["Consul"] = "Imperial",
+            ["Praetorian"] = "Imperial",
+            ["Auxilia"] = "Imperial",
+            ["Neophyte"] = "Imperial",
+            // Renegates
+            ["Baron"] = "Renegates",
+            ["Draftsman"] = "Renegates",
+            ["Overseer"] = "Renegates",
+            ["Quack"] = "Renegates",
+            ["Foreman"] = "Renegates",
+            ["Flunky"] = "Renegates",
+            // CC
+            ["StationRepresentative"] = "Colonial",
+            ["StationTrafficController"] = "Colonial",
+            ["CCServiceWorker"] = "Colonial",
+            ["SecurityGuard"] = "Colonial",
+            // MD
+            ["DirectorOfCare"] = "MD",
+            ["MdMedic"] = "MD",
+            ["NtMedic"] = "MD",
+        };
+        // Forge-Change-end: company whitelist
 
         /// <summary>
         /// If we're attempting to save.
@@ -98,6 +141,7 @@ namespace Content.Client.Lobby.UI
         private Direction _previewRotation = Direction.North;
 
         private ColorSelectorSliders _rgbSkinColorSelector;
+
 
         private bool _isDirty;
 
@@ -465,79 +509,79 @@ namespace Content.Client.Lobby.UI
 
             RefreshTraits();
 
-            #region Company
+            // #region Company
 
-            TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-company-tab"));
+            // TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-company-tab"));
 
-            // Clear any existing items
-            CompanyButton.Clear();
+            // // Clear any existing items
+            // CompanyButton.Clear();
 
-            var username = _playerManager.LocalPlayer?.Session?.Name; //Lua modified - company login support
+            // var username = _playerManager.LocalPlayer?.Session?.Name; //Lua modified - company login support
 
-            // Add all companies from prototypes - use consistent sorting with UpdateCompanyControls
-            var companies = _prototypeManager.EnumeratePrototypes<CompanyPrototype>()
-                //.Where(c => !c.Disabled) // Filter out disabled companies
-                .Where(c => !c.Disabled || (username != null && c.Logins.Contains(username))) //Lua modified - company login support
-                .ToList();
-            companies.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
+            // // Add all companies from prototypes - use consistent sorting with UpdateCompanyControls
+            // var companies = _prototypeManager.EnumeratePrototypes<CompanyPrototype>()
+            //     //.Where(c => !c.Disabled) // Filter out disabled companies
+            //     .Where(c => !c.Disabled || (username != null && c.Logins.Contains(username))) //Lua modified - company login support
+            //     .ToList();
+            // companies.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
 
-            // Make sure "None" is first in the list
-            var noneIndex = companies.FindIndex(c => c.ID == "None");
-            if (noneIndex != -1)
-            {
-                var none = companies[noneIndex];
-                companies.RemoveAt(noneIndex);
-                companies.Insert(0, none);
-            }
+            // // Make sure "None" is first in the list
+            // var noneIndex = companies.FindIndex(c => c.ID == "None");
+            // if (noneIndex != -1)
+            // {
+            //     var none = companies[noneIndex];
+            //     companies.RemoveAt(noneIndex);
+            //     companies.Insert(0, none);
+            // }
 
-            // Add to TSF company dropdown
-            for (var i = 0; i < companies.Count; i++)
-            {
-                CompanyButton.AddItem(companies[i].Name, i);
-                //Logger.Debug($"Added company to dropdown: {i} - {companies[i].ID} - {companies[i].Name}");
-            }
+            // // Add to TSF company dropdown
+            // for (var i = 0; i < companies.Count; i++)
+            // {
+            //     CompanyButton.AddItem(companies[i].Name, i);
+            //     //Logger.Debug($"Added company to dropdown: {i} - {companies[i].ID} - {companies[i].Name}");
+            // }
 
-            CompanyButton.OnItemSelected += args =>
-            {
-                CompanyButton.SelectId(args.Id);
-                if (args.Id >= 0 && args.Id < companies.Count)
-                {
-                    var companyId = companies[args.Id].ID;
+            // CompanyButton.OnItemSelected += args =>
+            // {
+            //     CompanyButton.SelectId(args.Id);
+            //     if (args.Id >= 0 && args.Id < companies.Count)
+            //     {
+            //         var companyId = companies[args.Id].ID;
 
-                    // Description of Company (pointed-to in prototype, defined in Locale)
-                    CompanyDescriptionLabel.SetMessage(!string.IsNullOrEmpty(companies[args.Id].Description)
-                        ? Loc.GetString(companies[args.Id].Description)
-                        : "N/A"); // Only if there's a description. If not, then set to N/A.
+            //         // Description of Company (pointed-to in prototype, defined in Locale)
+            //         CompanyDescriptionLabel.SetMessage(!string.IsNullOrEmpty(companies[args.Id].Description)
+            //             ? Loc.GetString(companies[args.Id].Description)
+            //             : "N/A"); // Only if there's a description. If not, then set to N/A.
 
-                    // Display company image if available
-                    if (!string.IsNullOrEmpty(companies[args.Id].Image))
-                    {
-                        CompanyImage.Texture = IoCManager.Resolve<IResourceCache>().GetResource<TextureResource>(companies[args.Id].Image!).Texture;
-                        CompanyImage.Visible = true;
-                    }
-                    else
-                    {
-                        CompanyImage.Visible = false;
-                    }
+            //         // Display company image if available
+            //         if (!string.IsNullOrEmpty(companies[args.Id].Image))
+            //         {
+            //             CompanyImage.Texture = IoCManager.Resolve<IResourceCache>().GetResource<TextureResource>(companies[args.Id].Image!).Texture;
+            //             CompanyImage.Visible = true;
+            //         }
+            //         else
+            //         {
+            //             CompanyImage.Visible = false;
+            //         }
 
-                    // Get the current profile for comparison
-                    var oldCompany = Profile?.Company;
-                    // Update the profile with the new company
-                    Profile = Profile?.WithCompany(companyId);
+            //         // Get the current profile for comparison
+            //         var oldCompany = Profile?.Company;
+            //         // Update the profile with the new company
+            //         Profile = Profile?.WithCompany(companyId);
 
-                    // Debug logging to verify selection
-                    //Logger.Debug($"Company changed from {oldCompany} to {companyId}");
+            //         // Debug logging to verify selection
+            //         //Logger.Debug($"Company changed from {oldCompany} to {companyId}");
 
-                    // Explicitly call SetDirty to update save button state
-                    SetDirty();
-                }
-            };
+            //         // Explicitly call SetDirty to update save button state
+            //         SetDirty();
+            //     }
+            // };
 
-            #endregion Company
+            // #endregion Company
 
             #region Markings
 
-            TabContainer.SetTabTitle(4, Loc.GetString("humanoid-profile-editor-markings-tab"));
+            TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-markings-tab")); // Forge-Change: company whitelist
 
             Markings.OnMarkingAdded += OnMarkingChange;
             Markings.OnMarkingRemoved += OnMarkingChange;
@@ -574,7 +618,7 @@ namespace Content.Client.Lobby.UI
             SpeciesInfoButton.OnPressed += OnSpeciesInfoButtonPressed;
 
             UpdateSpeciesGuidebookIcon();
-            UpdateCompanyControls();
+            // UpdateCompanyControls(); // Forge-Change: company whitelist
             IsDirty = false;
         }
 
@@ -1243,6 +1287,16 @@ namespace Content.Client.Lobby.UI
         public void SetProfile(HumanoidCharacterProfile? profile, int? slot)
         {
             Profile = profile?.Clone();
+            // Forge-Change-start: company whitelist
+            if (Profile != null)
+            {
+                var forcedCompany = GetForcedCompanyFromProfile(Profile);
+                if (forcedCompany == null || Profile.Company != forcedCompany)
+                    _preferredNonFactionCompany = Profile.Company;
+            }
+
+            TryApplyForcedFactionCompany(markDirty: false);
+            // Forge-Change-end: company whitelist
             CharacterSlot = slot;
             IsDirty = false;
             JobOverride = null;
@@ -1263,7 +1317,7 @@ namespace Content.Client.Lobby.UI
             UpdateHairPickers();
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
-            UpdateCompanyControls();
+            // UpdateCompanyControls(); // Forge-Change: company whitelist
 
             RefreshAntags();
             RefreshJobs();
@@ -1392,8 +1446,10 @@ namespace Content.Client.Lobby.UI
                     JobList.AddChild(category);
                 }
 
-                var jobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
-                    .Where(job => job.SetPreference)
+                var jobs = department.Roles
+                    .Select(jobId => _prototypeManager.TryIndex(jobId, out JobPrototype? job) ? job : null)
+                    .Where(job => job is { SetPreference: true })
+                    .Cast<JobPrototype>()
                     .ToArray();
 
                 Array.Sort(jobs, JobUIComparer.Instance);
@@ -1433,6 +1489,17 @@ namespace Content.Client.Lobby.UI
                     {
                         var selectedJobPrio = (JobPriority) selectedPrio;
                         Profile = Profile?.WithJobPriority(job.ID, selectedJobPrio);
+                        // Forge-Change-start: company whitelist
+                        var selectedFactionCompany = GetForcedFactionCompany(job.ID);
+
+                        if (selectedJobPrio != JobPriority.Never &&
+                            ForcedFactionCompaniesByJob.TryGetValue(job.ID, out var forcedCompanyId) &&
+                            Profile != null &&
+                            Profile.Company != forcedCompanyId)
+                        {
+                            Profile = Profile.WithCompany(forcedCompanyId);
+                        }
+                        // Forge-Change-end: company whitelist
 
                         foreach (var (jobId, other) in _jobPriorities)
                         {
@@ -1443,13 +1510,40 @@ namespace Content.Client.Lobby.UI
                                 continue;
                             }
 
-                            if (selectedJobPrio != JobPriority.High || (JobPriority) other.Selected != JobPriority.High)
+                            // Forge-Change-start: company whitelist
+
+                            // Faction rough-check:
+                            // If a faction role is selected, every role outside that faction becomes Never.
+                            // If a non-faction role is selected, all faction roles become Never.
+                            if (selectedJobPrio != JobPriority.Never && Profile != null)
+                            {
+                                var otherPrio = (JobPriority)other.Selected;
+                                if (otherPrio != JobPriority.Never)
+                                {
+                                    var otherFactionCompany = GetForcedFactionCompany(jobId);
+                                    var incompatible = selectedFactionCompany != null
+                                        ? otherFactionCompany != selectedFactionCompany
+                                        : otherFactionCompany != null;
+
+                                    if (incompatible)
+                                    {
+                                        other.Select((int)JobPriority.Never);
+                                        Profile = Profile.WithJobPriority(jobId, JobPriority.Never);
+                                        continue;
+                                    }
+                                }
+                            }
+
+                            if (selectedJobPrio != JobPriority.High || (JobPriority)other.Selected != JobPriority.High)
+                            // Forge-Change-end: company whitelist
                                 continue;
 
                             // Lower any other high priorities to medium.
                             other.Select((int)JobPriority.Medium);
                             Profile = Profile?.WithJobPriority(jobId, JobPriority.Medium);
                         }
+
+                        TryApplyForcedFactionCompany(markDirty: false); // Forge-Change: company whitelist
 
                         // TODO: Only reload on high change (either to or from).
                         ReloadPreview();
@@ -1465,6 +1559,18 @@ namespace Content.Client.Lobby.UI
                         VerticalAlignment = VAlignment.Center,
                         Margin = new Thickness(3f, 3f, 0f, 0f),
                     };
+
+                    // Forge-Change-start: company whitelist
+                    var companyWindowBtn = new Button()
+                    {
+                        Text = Loc.GetString("humanoid-profile-editor-company-tab"),
+                        HorizontalAlignment = HAlignment.Right,
+                        VerticalAlignment = VAlignment.Center,
+                        Margin = new Thickness(3f, 3f, 0f, 0f),
+                    };
+                    companyWindowBtn.OnPressed += _ => OpenCompanyWindow();
+                    companyWindowBtn.Visible = !ForcedFactionCompaniesByJob.ContainsKey(job.ID);
+                    // Forge-Change-end: company whitelist
 
                     var collection = IoCManager.Instance!;
                     var protoManager = collection.Resolve<IPrototypeManager>();
@@ -1498,6 +1604,7 @@ namespace Content.Client.Lobby.UI
                     _jobPriorities.Add((job.ID, selector));
                     jobContainer.AddChild(selector);
                     jobContainer.AddChild(loadoutWindowBtn);
+                    jobContainer.AddChild(companyWindowBtn); // Forge-Change: company whitelist
                     category.AddChild(jobContainer);
                 }
             }
@@ -1563,6 +1670,47 @@ namespace Content.Client.Lobby.UI
 
             UpdateJobPriorities();
         }
+
+        // Forge-Change-start: company whitelist
+        private void OpenCompanyWindow()
+        {
+            _companyWindow?.Dispose();
+            _companyWindow = null;
+
+            if (Profile is null)
+                return;
+
+            var username = _playerManager.LocalPlayer?.Session?.Name;
+            var companies = _prototypeManager.EnumeratePrototypes<CompanyPrototype>()
+                .OrderBy(c => c.Name)
+                .ToList();
+            var selectableCompanies = companies
+                .Where(c => !c.Disabled || _requirements.IsCompanyWhitelisted(c.ID) || (username != null && c.Logins.Contains(username)))
+                .Select(c => c.ID)
+                .ToHashSet();
+
+            var noneIndex = companies.FindIndex(c => c.ID == "None");
+            if (noneIndex != -1)
+            {
+                var none = companies[noneIndex];
+                companies.RemoveAt(noneIndex);
+                companies.Insert(0, none);
+            }
+
+            _companyWindow = new CompanyWindow
+            {
+                Title = Loc.GetString("humanoid-profile-editor-company-tab"),
+            };
+            _companyWindow.Populate(companies, selectableCompanies, Profile.Company);
+            _companyWindow.OnCompanySelected += companyId =>
+            {
+                Profile = Profile?.WithCompany(companyId);
+                _preferredNonFactionCompany = companyId;
+                SetDirty();
+            };
+            _companyWindow.OpenCenteredLeft();
+        }
+        // Forge-Change-end: company whitelist
 
         private void OnFlavorTextChange(string content)
         {
@@ -1673,6 +1821,8 @@ namespace Content.Client.Lobby.UI
 
             _loadoutWindow?.Dispose();
             _loadoutWindow = null;
+            _companyWindow?.Dispose(); // Forge-Change: company whitelist
+            _companyWindow = null; // Forge-Change: company whitelist
         }
 
         protected override void EnteredTree()
@@ -1876,6 +2026,65 @@ namespace Content.Client.Lobby.UI
             }
         }
 
+        // Forge-Change-start: company whitelist
+        private void TryApplyForcedFactionCompany(bool markDirty)
+        {
+            if (Profile == null)
+                return;
+
+            var forcedCompany = GetForcedCompanyFromProfile(Profile);
+
+            if (forcedCompany != null)
+            {
+                if (Profile.Company != forcedCompany)
+                {
+                    _preferredNonFactionCompany = Profile.Company;
+                    Profile = Profile.WithCompany(forcedCompany);
+
+                    if (markDirty)
+                        SetDirty();
+                }
+
+                return;
+            }
+
+            if (string.IsNullOrEmpty(_preferredNonFactionCompany) || Profile.Company == _preferredNonFactionCompany)
+                return;
+
+            Profile = Profile.WithCompany(_preferredNonFactionCompany);
+
+            if (markDirty)
+                SetDirty();
+        }
+
+        private static string? GetForcedFactionCompany(string jobId)
+        {
+            return ForcedFactionCompaniesByJob.TryGetValue(jobId, out var companyId)
+                ? companyId
+                : null;
+        }
+
+        private static string? GetForcedCompanyFromProfile(HumanoidCharacterProfile profile)
+        {
+            var bestPriority = JobPriority.Never;
+            string? forcedCompany = null;
+
+            foreach (var (jobId, priority) in profile.JobPriorities)
+            {
+                if (priority == JobPriority.Never)
+                    continue;
+
+                var companyId = GetForcedFactionCompany(jobId);
+                if (companyId == null || priority < bestPriority)
+                    continue;
+
+                bestPriority = priority;
+                forcedCompany = companyId;
+            }
+
+            return forcedCompany;
+        }
+        // Forge-Change-end: company whitelist
         private void UpdateSexControls()
         {
             if (Profile == null)
@@ -2282,74 +2491,75 @@ namespace Content.Client.Lobby.UI
             ExportButton.Disabled = false;
         }
 
-        private void UpdateCompanyControls()
-        {
-            if (Profile is null)
-                return;
+        // private void UpdateCompanyControls()
+        // {
+        //     if (Profile is null)
+        //         return;
 
-            var username = _playerManager.LocalPlayer?.Session?.Name; //Lua modified - company login support
+        //     var username = _playerManager.LocalPlayer?.Session?.Name; //Lua modified - company login support
 
-            var companies = _prototypeManager.EnumeratePrototypes<CompanyPrototype>()
-                //.Where(c => !c.Disabled) // Filter out disabled companies
-                .Where(c => !c.Disabled || (username != null && c.Logins.Contains(username))) //Lua modified - company login support
-                .ToList();
-            companies.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
+        //     var companies = _prototypeManager.EnumeratePrototypes<CompanyPrototype>()
+        //         //.Where(c => !c.Disabled) // Filter out disabled companies
+        //         .Where(c => !c.Disabled || (username != null && c.Logins.Contains(username))) //Lua modified - company login support
+        //         .ToList();
+        //     companies.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
 
-            // Make sure "None" is first in the list
-            var noneIndex = companies.FindIndex(c => c.ID == "None");
-            if (noneIndex != -1)
-            {
-                var none = companies[noneIndex];
-                companies.RemoveAt(noneIndex);
-                companies.Insert(0, none);
-            }
+        //     // Make sure "None" is first in the list
+        //     var noneIndex = companies.FindIndex(c => c.ID == "None");
+        //     if (noneIndex != -1)
+        //     {
+        //         var none = companies[noneIndex];
+        //         companies.RemoveAt(noneIndex);
+        //         companies.Insert(0, none);
+        //     }
 
-            //Logger.Debug($"Updating company controls." +
-                         //$"Current profile company: {Profile.Company}\n");
+        //     //Logger.Debug($"Updating company controls." +
+        //     //$"Current profile company: {Profile.Company}\n");
 
-            // Find the company in the list and select it
-            bool found = false;
-            for (var i = 0; i < companies.Count; i++)
-            {
-                if (companies[i].ID != Profile.Company)
-                    continue; // Short circuit.
+        //     // Find the company in the list and select it
+        //     bool found = false;
+        //     for (var i = 0; i < companies.Count; i++)
+        //     {
+        //         if (companies[i].ID != Profile.Company)
+        //             continue; // Short circuit.
 
-                //Logger.Debug($"Found company at index {i}: {companies[i].ID} - {companies[i].Name}");
-                CompanyButton.SelectId(i);
+        //         //Logger.Debug($"Found company at index {i}: {companies[i].ID} - {companies[i].Name}");
+        //         CompanyButton.SelectId(i);
 
-                // Description of Company (pointed-to in prototype, defined in Locale)
-                CompanyDescriptionLabel.SetMessage(!string.IsNullOrEmpty(companies[i].Description)
-                    ? Loc.GetString(companies[i].Description)
-                    : "N/A"); // Only if there's a description. If not, then set to N/A.
+        //         // Description of Company (pointed-to in prototype, defined in Locale)
+        //         CompanyDescriptionLabel.SetMessage(!string.IsNullOrEmpty(companies[i].Description)
+        //             ? Loc.GetString(companies[i].Description)
+        //             : "N/A"); // Only if there's a description. If not, then set to N/A.
 
-                // Display company image if available
-                if (!string.IsNullOrEmpty(companies[i].Image))
-                {
-                    CompanyImage.Texture = IoCManager.Resolve<IResourceCache>().GetResource<TextureResource>(companies[i].Image!).Texture;
-                    CompanyImage.Visible = true;
-                }
-                else
-                {
-                    CompanyImage.Visible = false;
-                }
+        //         // Display company image if available
+        //         if (!string.IsNullOrEmpty(companies[i].Image))
+        //         {
+        //             CompanyImage.Texture = IoCManager.Resolve<IResourceCache>().GetResource<TextureResource>(companies[i].Image!).Texture;
+        //             CompanyImage.Visible = true;
+        //         }
+        //         else
+        //         {
+        //             CompanyImage.Visible = false;
+        //         }
 
-                found = true;
-                break;
-            }
+        //         found = true;
+        //         break;
+        //     }
 
-            // If company wasn't found, default to "None" (index 0)
-            if (!found)
-            {
-                //Logger.Debug($"Company {Profile.Company} not found in list, defaulting to None");
-                CompanyButton.SelectId(0);
-                CompanyImage.Visible = false;
+        //     // If company wasn't found, default to "None" (index 0)
+        //     if (!found)
+        //     {
+        //         //Logger.Debug($"Company {Profile.Company} not found in list, defaulting to None");
+        //         CompanyButton.SelectId(0);
+        //         CompanyImage.Visible = false;
 
-                // Also reset the profile's company to None if the current one is disabled
-                if (_prototypeManager.TryIndex<CompanyPrototype>(Profile.Company, out var companyProto) && companyProto.Disabled)
-                {
-                    Profile = Profile.WithCompany("None");
-                }
-            }
-        }
+        //         // Also reset the profile's company to None if the current one is disabled
+        //         if (_prototypeManager.TryIndex<CompanyPrototype>(Profile.Company, out var companyProto) && companyProto.Disabled)
+        //         {
+        //             Profile = Profile.WithCompany("None");
+        //         }
+        //     }
+        // }
+
     }
 }

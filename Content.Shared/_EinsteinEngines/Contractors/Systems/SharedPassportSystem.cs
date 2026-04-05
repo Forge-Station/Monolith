@@ -24,6 +24,7 @@ public class SharedPassportSystem : EntitySystem
 {
     public const int CurrentYear = 3026;
     const string PIDChars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789";
+    private static readonly TimeSpan ToggleCooldown = TimeSpan.FromSeconds(1);  // Forge-Change
 
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -71,17 +72,17 @@ public class SharedPassportSystem : EntitySystem
     // Forge-change-start: i know, that shit. But, in my defense - im using _Mono/Company code as a reference.
     // private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev) =>
     //     SpawnPassportForPlayer(ev.Mob, ev.Profile, ev.JobId);
-    private readonly HashSet<string> _imperialJobs = new()
-    {
-        "Praefect",
-        "Arbiter",
-        "Cardinal",
-        "Inquisitor",
-        "Consul",
-        "Praetorian",
-        "Auxilia",
-        "Neophyte",
-    };
+//    private readonly HashSet<string> _imperialJobs = new() // Forge-change-delete
+//    {
+//        "Praefect",
+//        "Arbiter",
+//        "Cardinal",
+//        "Inquisitor",
+//        "Consul",
+//        "Praetorian",
+//        "Auxilia",
+//        "Neophyte",
+//    };
 
     private readonly HashSet<string> _tsfJobs = new()
     {
@@ -95,6 +96,14 @@ public class SharedPassportSystem : EntitySystem
         "Cadet",
         "TsfEngineer",
         "TsfBorg",
+        "TsfCommandingOfficer",
+        "TsfExecutiveOfficer",
+        "TsfSeniorOfficer",
+        "TsfSeniorAide",
+        "TsfAmbassador",
+        "TsfRanger",
+        "TsfRecruit",
+        "TsfEngineer",
     };
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
@@ -105,11 +114,11 @@ public class SharedPassportSystem : EntitySystem
 
         if (ev.JobId != null)
         {
-            if (_imperialJobs.Contains(ev.JobId))
-            {
-                profile.Nationality = "Imperial";
-            }
-            else if (_tsfJobs.Contains(ev.JobId))
+//            if (_imperialJobs.Contains(ev.JobId))
+//            {
+//                profile.Nationality = "Imperial";
+//            }
+            if (_tsfJobs.Contains(ev.JobId))
             {
                 profile.Nationality = "TransSolarFederation";
             }
@@ -171,6 +180,14 @@ public class SharedPassportSystem : EntitySystem
             return;
 
         evt.Handled = true;
+
+        // Forge-Change-start
+        // Cooldown prevents rapid open/close spam and also reduces client/server prediction desync.
+        if (_timing.CurTime < passport.Comp.ToggleCooldownEnd)
+            return;
+
+        passport.Comp.ToggleCooldownEnd = _timing.CurTime + ToggleCooldown;
+        // Forge-Change-end
         passport.Comp.IsClosed = !passport.Comp.IsClosed;
 
         var passportEvent = new PassportToggleEvent();

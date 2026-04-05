@@ -1,0 +1,45 @@
+# Forge-Change-full
+- type: dataset
+  id: TraitorCorporations
+  values:
+  - traitor-corporations-dataset-1
+  - traitor-corporations-dataset-2
+  - traitor-corporations-dataset-3
+  - traitor-corporations-dataset-4
+  - traitor-corporations-dataset-5
+  - traitor-corporations-dataset-6
+  - traitor-corporations-dataset-7
+  - traitor-corporations-dataset-8
+  - traitor-corporations-dataset-9
+
+- type: dataset
+  id: verbs
+  values:
+  - verbs-dataset-1
+  - verbs-dataset-2
+  - verbs-dataset-3
+  - verbs-dataset-4
+  - verbs-dataset-5
+  - verbs-dataset-6
+  - verbs-dataset-7
+  - verbs-dataset-8
+  - verbs-dataset-9
+  - verbs-dataset-10
+  - verbs-dataset-11
+  - verbs-dataset-12
+
+- type: dataset
+  id: adjectives
+  values:
+  - adjectives-dataset-1
+  - adjectives-dataset-2
+  - adjectives-dataset-3
+  - adjectives-dataset-4
+  - adjectives-dataset-5
+  - adjectives-dataset-6
+  - adjectives-dataset-7
+  - adjectives-dataset-8
+  - adjectives-dataset-9
+  - adjectives-dataset-10
+  - adjectives-dataset-11
+  - adjectives-dataset-12

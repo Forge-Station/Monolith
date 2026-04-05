@@ -9,3 +9,7 @@ admin-player-actions-window-admin-logs = Админ логи
 admin-player-actions-window-admin-notes = Админ заметки
 admin-player-actions-window-admin-fax = Админ факс
 admin-player-actions-window-admin-chat = Админ чат
+admin-player-actions-window-whitelists = ВЛ доступы
+
+admin-whitelist-window-title = Панель ВЛ доступов
+admin-whitelist-window-open = Открыть ВЛ

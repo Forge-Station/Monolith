@@ -1,24 +1,25 @@
-- type: department
-  id: Empire
-  name: department-Empire
-  description: department-Empire-description
-  color: "#ab7a52"
-  weight: 50
-  roles:
-  - Praefect
-  - Arbiter
-  - Cardinal
-  - Inquisitor
-  - Consul
-  - Praetorian
-  - Auxilia
-  - Neophyte
+# Empire department temporarily disabled with its jobs.
+# - type: department
+#   id: Empire
+#   name: department-Empire
+#   description: department-Empire-description
+#   color: "#ab7a52"
+#   weight: 50
+#   roles:
+#   - Praefect
+#   - Arbiter
+#   - Cardinal
+#   - Inquisitor
+#   - Consul
+#   - Praetorian
+#   - Auxilia
+#   - Neophyte
 
 - type: department
   id: Renegates
   name: department-Renegates
   description: department-Renegates-description
-  color: "#111111"
+  color: "#333333"
   weight: 50
   roles:
   - Baron
@@ -27,7 +28,7 @@
   - Quack
   - Foreman
   - Flunky
-  
+
 - type: department
   id: TSF
   name: department-TSF
@@ -42,4 +43,4 @@
   - TsfAmbassador
   - TsfRanger
   - TsfRecruit
-  - TsfEngineer
+  # - TsfEngineer

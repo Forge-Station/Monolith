@@ -89,7 +89,15 @@
   components:
   - type: JobPresetIdCardConsole
     rankPresets:
+    - DirectorOfCare
+    - MdMedic
     - NtMedic
+    - NFJanitor
+    - MailCarrier
+    - StationEngineer
+    - Scientist
+    - SecurityOfficer
+    - CCServiceWorker
   - type: Sprite
     sprite: Structures/Machines/computers.rsi
     layers:

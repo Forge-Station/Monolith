@@ -159,8 +159,10 @@ public sealed class AdminSystem : EntitySystem
     {
         var session = _minds.GetSession(ev.Mind);
 
+        // Forge change Start
         if (session == null)
             return;
+        // Forge change End
 
         UpdatePlayerList(session);
     }

@@ -118,6 +118,7 @@ public abstract class SharedRoleSystem : EntitySystem
                 LogImpact.Low,
                 $"Job Role of {ToPrettyString(mind.OwnedEntity)} changed from '{jobRole.Value.Comp1.JobPrototype}' to '{jobPrototype}'");
 
+            // Forge change Start
             jobRole.Value.Comp1.JobPrototype = jobPrototype;
             Dirty(jobRole.Value.Owner, jobRole.Value.Comp1);
 
@@ -128,6 +129,7 @@ public abstract class SharedRoleSystem : EntitySystem
             // replaying the full job greeting to the player.
             var message = new RoleAddedEvent(mindId, mind, update, true);
             RaiseLocalEvent(mindId, message, true);
+            // Forge change End
         }
         else
             MindAddRoleDo(mindId, "MindRoleJob", mind, silent, jobPrototype);

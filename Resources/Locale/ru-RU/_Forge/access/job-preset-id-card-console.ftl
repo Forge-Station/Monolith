@@ -18,3 +18,6 @@ job-reassignment-injector-popup-fail = Инжектор не смог переп
 job-reassignment-injector-popup-success-user = Вы переписываете профессию { $target } на { $job }.
 job-reassignment-injector-popup-success-target = Ваша профессия была изменена на { $job }.
 job-preset-id-card-console-window-create-injector-short = Инжектор
+ent-JobReassignmentInjector = инжектор переназначения
+desc-JobReassignmentInjector = Одноразовый инжектор, закодированный профилем переназначения.
+job-preset-id-card-console-window-create-injector-action = Создать

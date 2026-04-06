@@ -100,6 +100,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             var targetIdComponent = EntityManager.GetComponent<IdCardComponent>(targetId);
             var targetAccessComponent = EntityManager.GetComponent<AccessComponent>(targetId);
 
+            // Forge change Start
             ProtoId<JobPrototype> jobProto = string.Empty;
             if (targetIdComponent.JobPrototype is { } currentJobProto
                 && !string.IsNullOrWhiteSpace(currentJobProto))
@@ -113,6 +114,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             {
                 jobProto = record.JobPrototype;
             }
+            // Forge change End
 
             string?[]? shuttleNameParts = null;
             var hasShuttle = false;
@@ -170,6 +172,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             _idCard.TryChangeJobDepartment(targetId, job);
         }
 
+        // Forge change Start
         if (targetIdComponent.JobPrototype != newJobProto)
         {
             targetIdComponent.JobPrototype = newJobProto;
@@ -177,6 +180,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         }
 
         UpdateStationRecord(uid, targetId, newFullName, newJobTitle, newJobProto, job);
+        // Forge change End
 
         if (!newAccessList.TrueForAll(x => component.AccessLevels.Contains(x)))
         {
@@ -292,7 +296,10 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
 
         record.Name = newFullName;
         record.JobTitle = newJobTitle;
+
+        // Forge change Start
         record.JobPrototype = newJobProtoId;
+        // Forge change End
 
         if (newJobProto != null)
         {

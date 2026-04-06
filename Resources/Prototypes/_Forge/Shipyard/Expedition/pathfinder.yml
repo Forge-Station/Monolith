@@ -3,6 +3,7 @@
   parent: BaseVessel
   name: 'EXP Следопыт'
   description: Малый экспедиционный шаттл. Без вооружения
+  price: 47000
   category: Small
   group: Expedition
   shuttlePath: /Maps/_Forge/Shuttles/Expedition/pathfinder.yml

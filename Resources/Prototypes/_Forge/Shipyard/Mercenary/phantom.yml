@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: 'MIL Фантом'
   description: Тяжеловооруженный шаттл наемников для исследований в экстремальных боевых условиях
-  price: 220000
+  price: 185000
   category: Medium
   group: Shipyard
   access: Mercenary

@@ -3,6 +3,7 @@
   parent: BaseVessel
   name: 'EXP Спринтер'
   description: Средний экспедиционный шаттл.
+  price: 78000
   category: Medium
   group: Expedition
   shuttlePath: /Maps/_Forge/Shuttles/Expedition/sprinter.yml
@@ -18,7 +19,7 @@
   mapPath: /Maps/_Forge/Shuttles/Expedition/sprinter.yml
   minPlayers: 0
   stations:
-    Duran:
+    sprinter:
       stationProto: StandardFrontierExpeditionVessel
       components:
         - type: StationNameSetup

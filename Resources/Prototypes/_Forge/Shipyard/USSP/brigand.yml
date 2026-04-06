@@ -3,7 +3,7 @@
   parent: BaseVesselAntag
   name: MIL Диверсант
   description: Крепкий орешек. Среднего размера, но вооружен до зубов.
-  price: 74200
+  price: 139999
   category: Medium
   group: Ussp
   access: Mercenary

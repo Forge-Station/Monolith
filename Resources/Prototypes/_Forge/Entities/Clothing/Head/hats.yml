@@ -96,3 +96,27 @@
     sprite: Forge/Clothing/Head/Hats/renegatesears.rsi
   - type: AddAccentClothing
     accent: OwOAccent
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatNexusBeret
+  name: nexus beret
+  suffix: Нексус
+  description: A black beret with a white star emblem. For those that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/nexus_beret.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/nexus_beret.rsi
+
+- type: entity
+  parent: ClothingHeadHeadHatBaseFlippable
+  id: ClothingHeadHatNexusCap
+  name: nexus cap
+  suffix: Нексус
+  description: "It's a baseball hat in a tasteless blue colour."
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi

@@ -12,8 +12,8 @@
   id: LPBravo
   parent: BasePOI
   name: 'Пункт наблюдения «Браво»'
-  minimumDistance: 10000
-  maximumDistance: 13000
+  minimumDistance: 12000
+  maximumDistance: 15000 # Forge-change
   spawnGroup: SyndicateFOB
   gridPath: /Maps/_NF/POI/lpbravo.yml
   hideWarp: true

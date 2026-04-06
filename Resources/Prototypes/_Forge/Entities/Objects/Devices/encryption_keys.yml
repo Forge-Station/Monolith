@@ -186,7 +186,7 @@
     - state: crypt_silver
     - state: emp_label
 
-# Company
+# region Company
 - type: entity
   parent: EncryptionKey
   id: EncryptionKeyViperGroup
@@ -204,8 +204,8 @@
   - type: Sprite
     sprite: Forge/Objects/Devices/encryption_keys.rsi
     layers:
-    - state: crypt_red
-    - state: synd_label
+    - state: crypt_red_alt
+    - state: viper_label
 
 - type: entity
   parent: EncryptionKey
@@ -224,5 +224,105 @@
   - type: Sprite
     sprite: Forge/Objects/Devices/encryption_keys.rsi
     layers:
-    - state: crypt_red_alt
-    - state: synd_label_alt
+    - state: crypt_black
+    - state: paycheck_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyMidnightArmsCo
+  suffix: MAC
+  name: MAC encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for imperial command staff. Grants general imperial and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - MAC
+    defaultChannel: MAC
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_black
+    - state: mac_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyUNSA
+  suffix: UNSA
+  name: UNSA encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for imperial command staff. Grants general imperial and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - UNSA
+    defaultChannel: UNSA
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_merc
+    - state: unsa_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyUllmanIndustries
+  suffix: Ullman
+  name: Ullman encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for imperial command staff. Grants general imperial and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Ullman
+    defaultChannel: Ullman
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_black
+    - state: ullman_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyBlackhawk
+  suffix: Blackhawk
+  name: Blackhawk encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for imperial command staff. Grants general imperial and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Blackhawk
+    defaultChannel: Blackhawk
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_merc
+    - state: blackhawk_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyTechnicLogistic
+  suffix: TL
+  name: TL encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for imperial command staff. Grants general imperial and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - TL
+    defaultChannel: TL
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_merc
+    - state: tl_label

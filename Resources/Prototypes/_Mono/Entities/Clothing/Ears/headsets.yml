@@ -94,7 +94,7 @@
     containers:
       key_slots:
       - EncryptionKeyCommon
-      - EncryptionKeyUssp
+      # - EncryptionKeyUssp # Forge-change
 
 - type: entity
   parent: ClothingHeadsetAlt
@@ -110,7 +110,7 @@
     containers:
       key_slots:
       - EncryptionKeyCommon
-      - EncryptionKeyUssp
+      # - EncryptionKeyUssp # Forge-change
 
 #PDV
 - type: entity

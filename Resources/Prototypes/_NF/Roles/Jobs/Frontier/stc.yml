@@ -14,7 +14,7 @@
   canBeAntag: false
   icon: "JobIconStc"
   assignedCompany: Colonial
-  supervisors: job-supervisors-sr 
+  supervisors: job-supervisors-sr
   weight: 160
   displayWeight: 50 # Second from the top, Forge
   setPreference: true

@@ -35,3 +35,16 @@
     animation: WeaponArcFist
     mustBeEquippedToUse: true
   - type: Insulated
+
+- type: entity
+  parent: ClothingHandsGlovesCaptain
+  id: ClothingHandsGlovesCombatNexus
+  name: nexus security combat gloves
+  description: High-quality combat gloves made for Nexus security forces.
+  suffix: Нексус
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Hands/Gloves/nexus_gloves.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Hands/Gloves/nexus_gloves.rsi
+  - type: Insulated

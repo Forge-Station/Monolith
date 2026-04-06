@@ -34,6 +34,7 @@
       - NFCoin
       - NFShipyardVoucher
       - Card # single cards
+      - Passport # Forge-change
     blacklist:
       tags:
       - Book
@@ -53,6 +54,7 @@
           - Paper
           - NFShipyardVoucher
           - Card
+          - Passport # Forge-change
       closed-cash:
         whitelist:
           components:

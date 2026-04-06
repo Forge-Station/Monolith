@@ -4,4 +4,4 @@
   suffix: TSFMC, Glass
   components:
   - type: Sprite
-    sprite: _NF/Structures/Doors/Airlocks/Glass/externalnfsd.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/external_nfsd.rsi # Forge-Change

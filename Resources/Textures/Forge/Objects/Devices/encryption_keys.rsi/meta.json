@@ -20,6 +20,15 @@
             "name": "crypt_silver"
         },
         {
+            "name": "crypt_black"
+        },
+        {
+            "name": "crypt_rusted"
+        },
+        {
+            "name": "crypt_blue"
+        },
+        {
             "name": "crypt_renegade"
         },
         {
@@ -48,6 +57,33 @@
         },
         {
             "name": "emp_label"
+        },
+        {
+            "name": "blackhawk_label"
+        },
+        {
+            "name": "tl_label"
+        },
+        {
+            "name": "unsa_label"
+        },
+        {
+            "name": "viper_label"
+        },
+        {
+            "name": "ullman_label"
+        },
+        {
+            "name": "mac_label"
+        },
+        {
+            "name": "paycheck_label"
+        },
+        {
+            "name": "ussp_label"
+        },
+        {
+            "name": "nt_label"
         }
     ]
 }

@@ -5,6 +5,7 @@ using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Content.Shared._EE.Contractors.Prototypes; // Forge-change
 
 namespace Content.Shared.Roles
 {
@@ -84,7 +85,6 @@ namespace Content.Shared.Roles
         /// </summary>
         [DataField]
         public ProtoId<CompanyPrototype> AssignedCompany { get; private set; } = "None";
-
 
         /// <summary>
         ///     Should the selected traits be applied for this job?

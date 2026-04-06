@@ -9,7 +9,7 @@ namespace Content.Shared._EE.Contractors.Prototypes;
 /// <summary>
 /// Prototype representing a character's nationality in YAML.
 /// </summary>
-[Prototype("nationality")]
+[Prototype]
 public sealed partial class NationalityPrototype : IPrototype
 {
     [IdDataField, ViewVariables]

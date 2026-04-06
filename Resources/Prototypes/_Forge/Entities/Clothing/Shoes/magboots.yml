@@ -23,3 +23,23 @@
     state: icon
   name: alerts-magboots-name
   description: alerts-magboots-desc
+
+- type: entity
+  parent: [ClothingShoesBootsMag, ClothingShoesBootsCombat]
+  id: ClothingShoesBootsMagNexus
+  name: nexus magboots
+  description: Nexus security magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle.
+  suffix: Нексус
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Boots/nexus_magboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/Shoes/Boots/nexus_magboots.rsi
+  - type: Magboots
+    magbootsAlert: MagbootsSecurity
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.75

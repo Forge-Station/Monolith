@@ -12,7 +12,7 @@
   parent: [BasePOI, BaseRepairablePOI]
   name: 'Заброшенная буровая'
   minimumDistance: 5500
-  maximumDistance: 9500
+  maximumDistance: 10500 # Forge-change
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/derelictdrillsite.yml
   addComponents:

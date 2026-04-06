@@ -14,13 +14,13 @@
       time: 10800 # 3 hours
   startingGear: BailiffGear
   icon: JobIconBailiff
-  setPreference: false #Forge Change
+  setPreference: false #Forge-Change
   supervisors: job-supervisors-sheriff
   weight: 150
   displayWeight: 60
-  hideConsoleVisibility: true #Forge Change
+  hideConsoleVisibility: true #Forge-Change
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
-  assignedCompany: TSF
+  assignedCompany: TSF # Forge-Change
   canBeAntag: false
   access:
   - Armory

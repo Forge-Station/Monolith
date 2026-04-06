@@ -1,9 +1,16 @@
 - type: radioChannel
   id: MercenaryFM
   name: mercenaryfm-radio
-  keycode: 'р'
+  keycode: '1' # I NEED MORE RU CHAR
   frequency: 1063
   color: "#376333"
+
+- type: radioChannel
+  id: SyndicateShturm
+  name: chat-radio-syndicate
+  keycode: '2' # I NEED MORE RU CHAR
+  frequency: 1214
+  color: "#9f5253"
 
 - type: radioChannel
   id: Renegade
@@ -41,32 +48,58 @@
   color: "#c49a6c"
 
 - type: radioChannel
-  id: SyndicateShturm
-  name: chat-radio-syndicate
-  keycode: 'э'
-  frequency: 1214
-  color: "#9f5253"
-
-- type: radioChannel
   id: Hospital
   name: chat-radio-trauma
   keycode: 'и'
   frequency: 1356
   color: "#009e79"
 
-# Company channel
+# region Company
 - type: radioChannel
   id: ViperGroup
   name: chat-radio-vipergroup
-  keycode: 'v'
+  keycode: 'р'
   frequency: 7001
   color: "#B82121"
-  longRange: true
 
 - type: radioChannel
   id: PaycheckBratva
   name: chat-radio-paycheck
-  keycode: 'b'
+  keycode: 'б'
   frequency: 7002
   color: "#971f47"
-  longRange: true
+
+- type: radioChannel
+  id: Blackhawk
+  name: chat-radio-blackhawk
+  keycode: 'х'
+  frequency: 7003
+  color: "#419E23"
+
+- type: radioChannel
+  id: MAC
+  name: chat-radio-mac
+  keycode: 'э'
+  frequency: 7004
+  color: "#FF2E2E"
+
+- type: radioChannel
+  id: Ullman
+  name: chat-radio-ullman
+  keycode: 'л'
+  frequency: 7005
+  color: "#52326A"
+
+- type: radioChannel
+  id: UNSA
+  name: chat-radio-unsa
+  keycode: 'ъ'
+  frequency: 7007
+  color: "#0A3161"
+
+- type: radioChannel
+  id: TL
+  name: chat-radio-tl
+  keycode: 'ж'
+  frequency: 7008
+  color: "#83489d"

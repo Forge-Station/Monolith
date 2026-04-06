@@ -10,8 +10,6 @@ using Content.Server.Database; // Forge-Change: company whitelist
 using System.Threading.Tasks; // Forge-Change: company whitelist
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Server.Audio; // Forge-change: spawnSound
-using Robust.Shared.Audio; // Forge-change: spawnSound
 
 namespace Content.Server._Mono.Company;
 
@@ -26,7 +24,6 @@ public sealed class CompanySystem : EntitySystem
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly AudioSystem _audio = default!; // Forge-change: SpawnSound
     [Dependency] private readonly IServerDbManager _db = default!; // Forge-Change: company whitelist
 
 
@@ -115,12 +112,6 @@ public sealed class CompanySystem : EntitySystem
         // Forge-change-start
         if (_prototypeManager.TryIndex<CompanyPrototype>(companyComp.CompanyName, out var proto))
         {
-            if (proto.SpawnSound != null)
-            {
-                var audioParams = AudioParams.Default.WithVolume(-5f);
-                _audio.PlayPvs(proto.SpawnSound, args.Mob, audioParams);
-            }
-
             foreach (var special in proto.Special)
             {
                 special.AfterEquip(args.Mob);
@@ -138,17 +129,17 @@ public sealed class CompanySystem : EntitySystem
     // Forge-Change-start: company whitelist
     private async Task<bool> IsCompanySelectable(ICommonSession session, CompanyPrototype company)
     {
-        if (!company.Disabled)
+        if (!company.Whitelisted)
             return true;
+
+        if (company.Hidden)
+            return false;
 
         return await IsCompanyWhitelisted(session, company);
     }
 
     private async Task<bool> IsCompanyWhitelisted(ICommonSession session, CompanyPrototype company)
     {
-        if (company.Logins.Contains(session.Name))
-            return true;
-
         return await _db.IsCompanyWhitelisted(session.UserId.UserId, company.ID);
     }
     // Forge-Change-end: company whitelist

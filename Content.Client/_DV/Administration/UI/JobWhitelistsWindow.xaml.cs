@@ -111,6 +111,11 @@ public sealed partial class JobWhitelistsWindow : FancyWindow
         // Forge-Change-start: company whitelist
         Companies.RemoveAllChildren();
         var companyIds = _proto.EnumeratePrototypes<CompanyPrototype>()
+            // Show only WL company & don't show hidden and "None" company in menu
+            .Where(c => !c.Hidden)
+            .Where(c => c.ID != "None")
+            .Where(c => c.Whitelisted)
+
             .Select(c => c.ID)
             .OrderBy(id => id)
             .ToList();

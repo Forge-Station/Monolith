@@ -23,3 +23,30 @@
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
   - type: CompanyAccessReader
     requiredCompany: TechnicLogistic
+
+- type: entity
+  parent: [VendingMachineAstroVend, BaseStructureDisableToolUse, BaseStructureAccessReaderImmuneToEmag]
+  id: VendingMachineCompanyNSC
+  name: NSC Vendor
+  suffix: Нексус
+  description: Sells various NSC equipment.
+  components:
+  - type: VendingMachine
+    pack: CompanyVendInventoryNSC
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: MarketModifier
+    mod: 8
+  - type: Sprite
+    sprite: Forge/Structures/Machines/terminal_nsc.rsi
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: panel
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+  - type: CompanyAccessReader
+    requiredCompany: Nexus

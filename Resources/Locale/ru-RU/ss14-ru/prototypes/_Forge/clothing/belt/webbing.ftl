@@ -12,3 +12,7 @@ ent-ClothingBeltWebbingsNormalRenegate = РПС ренегатов
     .desc = Ременно-плечевая система тактических ремней.
 ent-ClothingBeltWebbingsBigRenegate = большая РПС ренегатов
     .desc = Ременно-плечевая система тактических ремней. Этот больше!
+ent-ClothingBeltWebbingsNormalNexus = РПС нексуса
+    .desc = Ременно-плечевая система тактических ремней.
+ent-ClothingBeltWebbingsBigNexus = большая РПС нексуса
+    .desc = Ременно-плечевая система тактических ремней, пользуется популярностью среди сил охранения корпорации Nexus Star Consortium.

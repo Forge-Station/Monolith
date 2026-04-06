@@ -770,7 +770,7 @@
   category: construction-category-structures
   description: This is a firelock - it locks an area when a fire alarm in the area is triggered. Don't get squished!
   icon:
-    sprite: Structures/Doors/Airlocks/Standard/firelock.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Standard/firelock.rsi # Forge-Change
     state: closed
   objectType: Structure
   placementMode: SnapgridCenter
@@ -788,7 +788,7 @@
   category: construction-category-structures
   description: This is a firelock - it locks an area when a fire alarm in the area is triggered. Don't get squished!
   icon:
-    sprite: Structures/Doors/Airlocks/Glass/firelock.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/firelock.rsi # Forge-Change
     state: closed
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1270,7 +1270,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you.
   icon:
-    sprite: Structures/Doors/Airlocks/Standard/basic.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Standard/basic.rsi # Forge-Change
     state: assembly
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1287,7 +1287,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you.
   icon:
-    sprite: Structures/Doors/Airlocks/Glass/glass.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/glass.rsi # Forge-Change
     state: assembly
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1304,7 +1304,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you.
   icon:
-    sprite: Structures/Doors/Airlocks/Standard/clockwork_pinion.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Standard/clockwork_pinion.rsi # Forge-Change
     state: assembly
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1321,7 +1321,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you.
   icon:
-    sprite: Structures/Doors/Airlocks/Glass/clockwork_pinion.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/clockwork_pinion.rsi # Forge-Change
     state: assembly
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1338,7 +1338,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you. Necessary for connecting two space craft together.
   icon:
-    sprite: Structures/Doors/Airlocks/Standard/shuttle.rsi # Frontier: Airlocks/Glass<Airlocks/Standard
+    sprite: Forge/Structures/Doors/Airlocks/Standard/shuttle.rsi # Frontier: Airlocks/Glass<Airlocks/Standard # Forge-Change
     state: closed
   #  state: assembly
   objectType: Structure
@@ -1356,7 +1356,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you. Necessary for connecting two space craft together. This one has a window.
   icon:
-    sprite: Structures/Doors/Airlocks/Glass/shuttle.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/shuttle.rsi # Forge-Change
     state: closed
   #  state: assembly
   objectType: Structure

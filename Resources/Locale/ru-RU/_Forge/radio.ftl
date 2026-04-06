@@ -12,3 +12,8 @@ chat-radio-trauma = Травма тим
 
 chat-radio-vipergroup = Viper Group
 chat-radio-paycheck = Братва
+chat-radio-blackhawk = Blackhawk
+chat-radio-mac = MAC
+chat-radio-ullman = Ullman
+chat-radio-unsa = UNSA
+chat-radio-tl = TechnicLogistic

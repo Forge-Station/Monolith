@@ -1,0 +1,48 @@
+<Document>
+# Служба безопасности
+
+Обеспечение безопасности как станции, так и экипажа является главным приоритетом для [color=#cb0000]Службы безопасности[/color]. Они готовы к любой ситуации, и [color=#cb0000]Служба безопасности[/color] всегда рядом, чтобы поддерживать порядок и контролировать толпу.
+
+Они противостоят [textlink="Агентам Синдиката" link="Traitors"], [textlink="Ядерным оперативникам" link="NuclearOperatives"], [textlink="Зомби" link="Zombies"] и недисциплинированному персоналу.
+
+## Персонал
+
+В штат [color=#cb0000]Службы безопасности[/color] входят кадеты безопасности, офицеры безопасности и детектив. [color=#cb0000]Службой безопасности[/color] руководят Смотритель и Глава службы безопасности.
+
+  <Box>
+    <GuideEntityEmbed Entity="ToyFigurineSecurity" Caption="Офицер безопасности"/>
+    <GuideEntityEmbed Entity="ToyFigurineDetective" Caption="Детектив"/>
+    <GuideEntityEmbed Entity="ToyFigurineWarden" Caption="Смотритель"/>
+    <GuideEntityEmbed Entity="ToyFigurineHeadOfSecurity" Caption="ГСБ"/>
+  </Box>
+
+## Снаряжение
+
+Сначала рассмотрим нелетальное оружие, которое на шаг выше простого требования сотрудничать. И парализатор, и дубинка-шокер способны ограничить подвижность нападающего, в то время как наручники можно применить, чтобы лишить преступника свободы передвижения и использования рук.
+  <Box>
+    <GuideEntityEmbed Entity="Stunbaton"/>
+    <GuideEntityEmbed Entity="Handcuffs"/>
+   <GuideEntityEmbed Entity="WeaponDisabler"/>
+  </Box>
+
+## Вспышки
+
+[color=#a4885c]Флеши[/color] — это эффективное средство для разгона толпы и задержания особо уклончивых целей. Большая площадь воздействия ослепляет всех, у кого нет защиты.
+Стоит отметить, что флеши можно использовать как по большой площади (горячая клавиша [color=yellow]Z[/color]), так и атакуя кого-то им при [color=red]боевом режиме[/color]. Важно помнить, что локальные вспышки действуют в [color=yellow]2,5[/color] раза дольше, чем областные.
+[color=#cb0000]Сотрудники безопасности[/color] и [color=#a4885c]некоторые[/color] другие члены экипажа имеют защиту глаз от светошумовых гранат и флешей.
+  <Box>
+    <GuideEntityEmbed Entity="Flash"/>
+    <GuideEntityEmbed Entity="ClothingEyesGlassesSecurity"/>
+    <GuideEntityEmbed Entity="GrenadeFlashBang"/>
+  </Box>
+  
+## Летальное оружие
+
+Если ситуация потребует, у [color=#cb0000]Службы безопасности[/color] есть доступ к лазерным винтовкам, дробовикам, пистолетам и автоматическим винтовкам, способным обеспечить значительный ответный огонь против любого, кто выступит против станции.
+  <Box>
+    <GuideEntityEmbed Entity="WeaponLaserCarbine"/>
+    <GuideEntityEmbed Entity="WeaponShotgunKammerer"/>
+    <GuideEntityEmbed Entity="WeaponPistolMk58"/>
+    <GuideEntityEmbed Entity="WeaponRifleLecter"/>
+  </Box>
+</Document>

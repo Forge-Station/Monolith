@@ -24,6 +24,7 @@
   parent: BannerBase
   name: Banner NSC
   description: The banner of the trade alliance Nexus Star Consortium smells like expensive paint.
+  suffix: Нексус
   components:
   - type: Sprite
     sprite: Forge/Structures/Decoration/banner.rsi

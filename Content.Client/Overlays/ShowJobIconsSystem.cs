@@ -5,6 +5,7 @@ using Content.Shared.PDA;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Prototypes;
+using Content.Shared._Mono.Company;
 
 namespace Content.Client.Overlays;
 
@@ -29,6 +30,7 @@ public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponen
             return;
 
         var iconId = JobIconForNoId;
+        string? companyName = null;
 
         if (_accessReader.FindAccessItemsInventory(uid, out var items))
         {
@@ -38,6 +40,7 @@ public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponen
                 if (TryComp<IdCardComponent>(item, out var id))
                 {
                     iconId = id.JobIcon;
+                    companyName = id.CompanyName; // Forge-change
                     break;
                 }
 
@@ -47,14 +50,32 @@ public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponen
                     && TryComp(pda.ContainedId, out id))
                 {
                     iconId = id.JobIcon;
+                    companyName = id.CompanyName; // Forge-change
                     break;
                 }
             }
         }
 
+        // Forge-change-start
         if (_prototype.TryIndex<JobIconPrototype>(iconId, out var iconPrototype))
             ev.StatusIcons.Add(iconPrototype);
         else
-            Log.Error($"Invalid job icon prototype: {iconPrototype}");
+            Log.Error($"Invalid job icon prototype: {iconId}");
+
+        TryAddCompanyIcon(companyName, ref ev);
+    }
+
+    private void TryAddCompanyIcon(string? companyName, ref GetStatusIconsEvent ev)
+    {
+        if (string.IsNullOrEmpty(companyName))
+            return;
+
+        if (_prototype.TryIndex<CompanyPrototype>(companyName, out var company) &&
+            company.Icon != null &&
+            _prototype.TryIndex<CompanyIconPrototype>(company.Icon.Value, out var companyIcon))
+        {
+            ev.StatusIcons.Add(companyIcon);
+        }
+    // Forge-change-end
     }
 }

@@ -35,7 +35,7 @@
         - !type:DoActsBehavior
           acts: ["Destruction"]
     - type: Sprite
-      sprite: Structures/Doors/Airlocks/Standard/firelock.rsi
+      sprite: Forge/Structures/Doors/Airlocks/Standard/firelock.rsi # Forge-Change
       snapCardinals: true
       layers:
         - state: closed
@@ -52,6 +52,26 @@
           visible: false
         - state: panel_open
           map: ["enum.WiresVisualLayers.MaintenancePanel"]
+        # Forge-Change-Start
+        - state: pressure_unlit
+          visible: false
+          shader: unshaded
+          map: ["enum.FirelockVisualLayersPressure.Base"]
+        - state: temperature_unlit
+          visible: false
+          shader: unshaded
+          map: ["enum.FirelockVisualLayersTemperature.Base"]
+    - type: GenericVisualizer
+      visuals:
+        enum.FirelockVisuals.PressureWarning:
+          enum.FirelockVisualLayersPressure.Base:
+            True: { visible: true }
+            False: { visible: false }
+        enum.FirelockVisuals.TemperatureWarning:
+          enum.FirelockVisualLayersTemperature.Base:
+            True: { visible: true }
+            False: { visible: false }
+    # Forge-Change-End
     - type: AnimationPlayer
     - type: Fixtures
       fixtures:
@@ -153,7 +173,7 @@
   components:
     - type: StationAiWhitelist
     - type: Sprite
-      sprite: Structures/Doors/Airlocks/Glass/firelock.rsi
+      sprite: Forge/Structures/Doors/Airlocks/Glass/firelock.rsi # Forge-Change
     - type: Occluder
       enabled: false
     - type: Fixtures
@@ -179,7 +199,7 @@
   components:
     - type: StationAiWhitelist
     - type: Sprite
-      sprite: Structures/Doors/edge_door_hazard.rsi
+      sprite: Forge/Structures/Doors/edge_door_hazard.rsi # Forge-Change
       snapCardinals: false
     - type: Airtight
       airBlocked: false

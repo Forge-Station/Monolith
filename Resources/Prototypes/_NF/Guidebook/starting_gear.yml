@@ -1,4 +1,4 @@
 - type: guideEntry
   id: StartingGear
   name: guide-entry-startinggear
-  text: "/ServerInfo/_NF/Guidebook/StartingGear.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_NF/StartingGear.xml" # Forge-change

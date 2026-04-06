@@ -33,7 +33,7 @@
         - type: VesselMusic
           ambientMusicPrototype: CamelotMusic
         - type: VesselInfo
-          description: "Хлипкая старая станция, когда-то принадлежавшая угасшей межзвёздной державе. Холодно и темно."
+          description: "Хлипкая старая станция, когда-то принадлежавшая межзвёздной державе. Холодно и темно."
       components:
         - type: StationNameSetup
           mapNameTemplate: 'Станция «Камелот»'
@@ -51,7 +51,7 @@
             # USSPCorporal: [6, 6]
             # USSPMedic: [4, 4]
             # USSPRifleman: [-1, -1]
-            Contractor: [-1, -1]
+            # Contractor: [-1, -1] # Forge-change
             Pilot: [0, -1]
             Mercenary: [0, -1]
           tags:

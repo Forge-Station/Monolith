@@ -1,0 +1,125 @@
+- type: companyIcon
+  id: CompanyIconBase
+  abstract: true
+  locationPreference: Right
+  priority: 2
+  isShaded: true
+
+- type: companyIcon
+  id: Drake
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: drake
+
+- type: companyIcon
+  id: SteelHammerManufacturing
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: shm
+
+- type: companyIcon
+  id: HarmonyMedicalEnterprises
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: harmony
+
+- type: companyIcon
+  id: MidnightArmsCo
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: mac
+
+- type: companyIcon
+  id: USSP
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: ussp
+
+- type: companyIcon
+  id: DarkMatterEnterprises
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: dme
+
+- type: companyIcon
+  id: AetherionDynamics
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: aetherion
+
+- type: companyIcon
+  id: HorizonEnergy
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: horizon
+
+- type: companyIcon
+  id: UniversalStatesOfAmerica
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: unsa
+
+- type: companyIcon
+  id: UllmanIndustries
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: ullman
+
+- type: companyIcon
+  id: Nosske
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: nosske
+
+- type: companyIcon
+  id: Blackhawk
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: blackhawk
+
+- type: companyIcon
+  id: TheHive
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: hive
+
+- type: companyIcon
+  id: Paycheck
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: paycheck
+
+- type: companyIcon
+  id: ViperGroup
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: viper
+
+- type: companyIcon
+  id: TL
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: tl
+
+- type: companyIcon
+  id: Nexus
+  parent: CompanyIconBase
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
+    state: nexus

@@ -70,8 +70,8 @@
   loadouts:
   - StationRepClothingNeckCloakSr
   - StationRepClothingNeckMantleSr
-  - ClothingNeckCloakHos
-  - ClothingNeckMantleHOS
+  - StationRepClothingNeckCloakHos
+  - StationRepClothingNeckMantleHOS
 
 - type: loadoutGroup
   id: StationRepHead

@@ -1,0 +1,33 @@
+- type: vessel
+  id: pathfinder
+  parent: BaseVessel
+  name: 'EXP Следопыт'
+  description: Малый экспедиционный шаттл. Без вооружения
+  category: Small
+  group: Expedition
+  shuttlePath: /Maps/_Forge/Shuttles/Expedition/pathfinder.yml
+  guidebookPage: null
+  class:
+  - Expedition
+  engine:
+  - AME
+
+- type: gameMap
+  id: pathfinder
+  mapName: 'EXP Следопыт'
+  mapPath: /Maps/_Forge/Shuttles/Expedition/pathfinder.yml
+  minPlayers: 0
+  stations:
+    Duran:
+      stationProto: StandardFrontierExpeditionVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'EXP Следопыт{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

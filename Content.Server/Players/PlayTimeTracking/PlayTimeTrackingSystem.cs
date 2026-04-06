@@ -115,10 +115,12 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     {
         var contentData = _playerManager.GetPlayerData(session.UserId).ContentData();
 
-        if (contentData?.Mind == null)
-            return Enumerable.Empty<string>();
+        // Forge change Start
+        if (contentData?.Mind is { } mind)
+            return GetTimedRoles(mind);
 
-        return GetTimedRoles(contentData.Mind.Value);
+        return Enumerable.Empty<string>();
+        // Forge change End
     }
 
     private void OnRoleEvent(RoleEvent ev)

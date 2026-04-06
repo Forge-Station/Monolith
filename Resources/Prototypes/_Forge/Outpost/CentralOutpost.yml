@@ -21,7 +21,7 @@
 #            !type:NanotrasenNameGenerator
 #            prefixCreator: '14'
         - type: ExtraStationInformation
-          icon: /Textures/Forge/Logo/Icon/banner_engineering.png # used the biggest one, looks better when downscaling than upscaling
+          icon: /Textures/Forge/Logo/Icon/banner_nanotrasen.png # used the biggest one, looks better when downscaling than upscaling
           stationSubtext: 'frontier-lobby-frontier-subtext'
           stationDescription: 'frontier-lobby-frontier-description'
           lobbySortOrder: 1

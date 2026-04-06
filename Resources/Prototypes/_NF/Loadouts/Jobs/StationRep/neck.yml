@@ -10,3 +10,15 @@
   price: 0
   equipment:
     neck: ClothingNeckMantleSr
+
+- type: loadout
+  id: StationRepClothingNeckMantleHOS
+  price: 0
+  equipment:
+    neck: ClothingNeckMantleHOS
+
+- type: loadout
+  id: StationRepClothingNeckCloakHos
+  price: 0
+  equipment:
+    neck: ClothingNeckCloakHos

@@ -1,0 +1,41 @@
+- type: entity
+  id: RenegateTechFab
+  parent: FactionLathe
+  name: renegate techfab
+  description: Military-grade fabricator used by Renegate crews.
+  suffix: Ренегаты
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/ren_techfab.rsi
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: renegate
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    staticPacks:
+    - StaticAmmoRecipePack
+    dynamicPacks:
+    - RenegateWeaponsDynamic
+    - RenegateEquipmentDynamic
+    - RenegateAmmoDynamic
+
+- type: entity
+  id: ProtolatheRenegate
+  parent: Protolathe
+  name: renegate protolathe
+  suffix: Ренегаты
+
+- type: entity
+  id: AutolatheRenegate
+  parent: Autolathe
+  name: renegate autolathe
+  suffix: Ренегаты

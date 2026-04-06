@@ -1,0 +1,37 @@
+- type: latheRecipePack
+  id: RenegateWeaponsDynamic
+  recipes:
+  - WeaponRifleAR220Rogue
+  - WeaponShotgunSaigakRogue
+  - WeaponShotgunDefensieRogue
+  - WeaponRevolverMagnusRogue
+  - WeaponLmgAR400Rogue
+  - WeaponRifleGaussRifleRogue
+  - HFKatanaRogue
+  - WeaponLmgType99Rogue
+
+- type: latheRecipePack
+  id: RenegateEquipmentDynamic
+  recipes:
+  - ClothingOuterHardsuitRenegatebsii20Rogue
+  - ClothingOuterHardsuitRenegatebsii30Rogue
+  - ClothingOuterArmorRenegatesRogue
+  - ClothingHeadHelmetRenegateRogue
+  - ClothingShoesBootsMagRenegadeRogue
+  - ClothingOuterHardsuitRenegatecriii200Rogue
+  - ClothingOuterHardsuitRenegateoiii18Rogue
+  - ClothingOuterHardsuitRenegateyiv3020Rogue
+
+- type: latheRecipePack
+  id: RenegateAmmoDynamic
+  recipes:
+  - Magazinetype99762x51mmFMJ
+  - Magazinetype99762x51mmPlasteelAP
+  - Magazinetype99762x51mmRubber
+  - Magazinetype99762x51mmIncendiary
+  - Magazinetype99762x51mmPractice
+  - Magazinetype99762x51mmEmpty
+  - Magazinetype99762x51mmUranium
+  - Magazinetype99762x51mmHP
+  - Magazinetype99762x51mmRIP
+  - AmmoBox762x51mmBigFMJ

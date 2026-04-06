@@ -1,0 +1,65 @@
+- type: latheRecipe
+  id: ClothingOuterHardsuitRenegatebsii20Rogue
+  parent: MonoHardsuitT1Recipe
+  result: ClothingOuterHardsuitRenegatebsii20
+
+- type: latheRecipe
+  id: ClothingOuterHardsuitRenegatebsii30Rogue
+  parent: MonoHardsuitT1Recipe
+  result: ClothingOuterHardsuitRenegatebsii30
+  materials:
+    Glass: 800
+    Steel: 3000
+    Plastic: 1500
+    Plasteel: 4000
+    Durathread: 2250 # very slightly higher durathread cost
+    Silver: 500
+    Gold: 500
+
+- type: latheRecipe
+  id: ClothingOuterArmorRenegatesRogue
+  categories:
+  - ArmorNF
+  - ClothesNF
+  - FactionEquipment
+  parent: NFBaseArmorRecipe
+  result: ClothingOuterArmorRenegates
+
+- type: latheRecipe
+  id: ClothingHeadHelmetRenegateRogue
+  categories:
+  - ArmorNF
+  - ClothesNF
+  - FactionEquipment
+  parent: NFBaseHelmetRecipe
+  result: ClothingHeadHelmetRenegate
+
+- type: latheRecipe
+  id: ClothingShoesBootsMagRenegadeRogue
+  categories:
+  - ClothesNF
+  - FactionEquipment
+  result: ClothingShoesBootsMagRenegade
+  completetime: 5
+  materials:
+    Steel: 1000
+    Silver: 750
+    Plasteel: 300
+    Plastic: 300
+    Plasma: 350
+    Uranium: 100
+
+- type: latheRecipe
+  id: ClothingOuterHardsuitRenegatecriii200Rogue
+  parent: MonoHardsuitT2Recipe
+  result: ClothingOuterHardsuitRenegatecriii200
+
+- type: latheRecipe
+  id: ClothingOuterHardsuitRenegateoiii18Rogue
+  parent: MonoHardsuitT3Recipe
+  result: ClothingOuterHardsuitRenegateoiii18
+
+- type: latheRecipe
+  id: ClothingOuterHardsuitRenegateyiv3020Rogue
+  parent: MonoHardsuitT3TsfRecipe
+  result: ClothingOuterHardsuitRenegateyiv3020

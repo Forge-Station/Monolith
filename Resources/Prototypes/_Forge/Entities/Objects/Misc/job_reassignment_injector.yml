@@ -1,0 +1,22 @@
+- type: entity
+  parent: BaseItem
+  id: JobReassignmentInjector
+  name: reassignment injector
+  description: A disposable injector encoded with a reassignment profile.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Medical/nt_implanter.rsi
+    state: implanter1
+    layers:
+    - state: implanter0
+    - state: implanter1
+  - type: Item
+    sprite: _Goobstation/Objects/Specific/Medical/nt_implanter.rsi
+    heldPrefix: 0
+    size: Small
+  - type: JobReassignmentInjector
+  - type: Tag
+    tags:
+    - Trash
+  - type: StaticPrice
+    price: 35

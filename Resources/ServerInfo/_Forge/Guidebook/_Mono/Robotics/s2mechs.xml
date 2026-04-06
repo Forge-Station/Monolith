@@ -8,7 +8,6 @@
   <Box>
     <GuideEntityEmbed Entity="AFInterceptor"/>
     <GuideEntityEmbed Entity="AFInterceptorM"/>
-    <GuideEntityEmbed Entity="AFInterceptorG"/>
   </Box>
 
 ## Broadsword

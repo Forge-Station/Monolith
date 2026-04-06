@@ -1,0 +1,67 @@
+- type: technology
+  id: RogueRenegateWeaponsT1
+  name: research-technology-rogue-renegate-weapons-t1
+  entityIcon: WeaponRifleAR220
+  discipline: RenegateWeaponry
+  tier: 1
+  cost: 25000
+  recipeUnlocks:
+  - WeaponRifleAR220Rogue
+  - WeaponShotgunSaigakRogue
+  - WeaponRevolverMagnusRogue
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 13, 1
+
+- type: technology
+  id: RogueRenegateWeaponsT2
+  name: research-technology-rogue-renegate-weapons-t2
+  entityIcon: WeaponLmgAR400
+  discipline: RenegateWeaponry
+  tier: 2
+  cost: 35000
+  recipeUnlocks:
+  - WeaponLmgAR400Rogue
+  - WeaponRifleGaussRifleRogue
+  - WeaponShotgunDefensieRogue
+  technologyPrerequisites:
+  - RogueRenegateWeaponsT1
+  - UniversalMaterialResearchT2
+  position: 13, 6
+
+- type: technology
+  id: RogueRenegateMeleeWeaponsT2
+  name: research-technology-rogue-renegate-melee-weapons-t2
+  entityIcon: WeaponHFKatana
+  discipline: RenegateWeaponry
+  tier: 2
+  cost: 25000
+  recipeUnlocks:
+  - HFKatanaRogue
+  technologyPrerequisites:
+  - RogueRenegateWeaponsT2
+  position: 14, 6
+
+- type: technology
+  id: RogueRenegateWeaponsT3
+  name: research-technology-rogue-renegate-weapons-t3
+  entityIcon: WeaponLmgType99
+  discipline: RenegateWeaponry
+  tier: 3
+  cost: 40000
+  recipeUnlocks:
+  - WeaponLmgType99Rogue
+  - Magazinetype99762x51mmFMJ
+  - Magazinetype99762x51mmPlasteelAP
+  - Magazinetype99762x51mmRubber
+  - Magazinetype99762x51mmIncendiary
+  - Magazinetype99762x51mmPractice
+  - Magazinetype99762x51mmEmpty
+  - Magazinetype99762x51mmUranium
+  - Magazinetype99762x51mmHP
+  - Magazinetype99762x51mmRIP
+  - AmmoBox762x51mmBigFMJ
+  technologyPrerequisites:
+  - RogueRenegateWeaponsT2
+  - UniversalMaterialResearchT3
+  position: 13, 11

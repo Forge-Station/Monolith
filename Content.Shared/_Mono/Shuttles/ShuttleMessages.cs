@@ -12,3 +12,13 @@ public sealed class ShuttleConsoleAutopilotPositionMessage : BoundUserInterfaceM
     public MapCoordinates Coordinates;
     public Angle Angle;
 }
+
+/// <summary>
+/// Forge-Change - BioScan
+/// Raised on the client when it wishes to scan a shuttle for biological threats.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class ShuttleConsoleBioScanPositionMessage : BoundUserInterfaceMessage
+{
+    public MapCoordinates Coordinates;
+}

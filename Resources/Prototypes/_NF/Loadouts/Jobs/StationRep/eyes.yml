@@ -1,0 +1,5 @@
+# Forge
+- type: loadout
+  id: StationRepEyes
+  equipment:
+    eyes: ClothingEyesGlassesCommand

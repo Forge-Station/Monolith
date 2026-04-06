@@ -29,6 +29,7 @@ public sealed partial class ShuttleConsoleBoundUserInterface : BoundUserInterfac
         _window.RequestFTL += OnFTLRequest;
         _window.RequestBeaconFTL += OnFTLBeaconRequest;
         _window.RequestAutopilot += OnAutopilotRequest; // Mono
+        _window.RequestBioScan += OnBioScanRequest; // Forge-Change - BioScan
         _window.DockRequest += OnDockRequest;
         _window.UndockRequest += OnUndockRequest;
         _window.UndockAllRequest += OnUndockAllRequest;
@@ -89,6 +90,14 @@ public sealed partial class ShuttleConsoleBoundUserInterface : BoundUserInterfac
         {
             Coordinates = obj,
             Angle = angle,
+        });
+    }
+
+    private void OnBioScanRequest(MapCoordinates obj) // Forge-Change - BioScan
+    {
+        SendMessage(new ShuttleConsoleBioScanPositionMessage()
+        {
+            Coordinates = obj,
         });
     }
 

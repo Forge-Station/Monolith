@@ -1,0 +1,31 @@
+- type: entity
+  id: ForgeRnDRenegateServer
+  parent: ResearchAndDevelopmentServer
+  name: renegate R&D server
+  description: Contains the collective knowledge of the Renegates in this sector.
+  suffix: Ренегаты
+  components:
+  - type: TechnologyDatabase
+    supportedDisciplines:
+    - Industrial
+    - Arsenal
+    - Experimental
+    - CivilianServices
+    - MechaEngineering
+    - FactionUniversal
+    - RenegateWeaponry
+    - RenegateEquipment
+  - type: Sprite
+    sprite: Forge/Structures/Machines/server.rsi
+    snapCardinals: true
+    layers:
+    - state: ren_server-off
+    - state: ren_server-on
+      visible: false
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: variant-ren
+    - state: server_o
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: ResearchPointSource
+    pointsPerSecond: 1
+    active: true

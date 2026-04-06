@@ -1,0 +1,60 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:controls="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
+              Access="Public"
+              Orientation="Vertical"
+              SeparationOverride="0"
+              HorizontalExpand="True">
+    <PanelContainer StyleClasses="AngleRect"
+                    HorizontalExpand="True">
+        <BoxContainer Orientation="Horizontal"
+                      SeparationOverride="0">
+            <Button Name="CreateInjectorButton"
+                    Access="Public"
+                    MinWidth="96"
+                    MinHeight="64"
+                    StyleClasses="OpenRight">
+                <BoxContainer Orientation="Vertical"
+                              SeparationOverride="1"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Margin="8 6">
+                    <Label Text="{Loc 'job-preset-id-card-console-window-create-injector-action'}"
+                           HorizontalAlignment="Center" />
+                    <Label Text="{Loc 'job-preset-id-card-console-window-create-injector-short'}"
+                           StyleClasses="LabelSubText"
+                           HorizontalAlignment="Center" />
+                </BoxContainer>
+            </Button>
+            <Button Name="ApplyButton"
+                    ToggleMode="True"
+                    HorizontalExpand="True"
+                    MinSize="0 64"
+                    StyleClasses="OpenLeft">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="10" Margin="12 8">
+                    <PanelContainer StyleClasses="Inset"
+                                    MinSize="30 30"
+                                    MaxSize="30 30"
+                                    Margin="0 2 0 0">
+                        <TextureRect Name="JobIcon"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Stretch="KeepCentered"
+                                     TextureScale="2 2"
+                                     SetSize="16 16" />
+                    </PanelContainer>
+                    <BoxContainer Orientation="Vertical"
+                                  SeparationOverride="2"
+                                  VerticalAlignment="Center"
+                                  HorizontalExpand="True">
+                        <Label Name="JobTitle"
+                               HorizontalExpand="True"
+                               ClipText="True" />
+                        <controls:RichTextLabel Name="JobSubtitle"
+                                                StyleClasses="LabelSubText"
+                                                HorizontalExpand="True" />
+                    </BoxContainer>
+                </BoxContainer>
+            </Button>
+        </BoxContainer>
+    </PanelContainer>
+</BoxContainer>

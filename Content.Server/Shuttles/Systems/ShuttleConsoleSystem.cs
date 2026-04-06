@@ -28,6 +28,7 @@ using Content.Shared.Construction.Components; // Frontier
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Shared._Mono.FireControl;
+using Content.Shared._Mono.Shuttles; // Forge-Change - BioScan
 using Content.Shared._Mono.Ships.Components;
 using Content.Shared.Verbs;
 
@@ -79,6 +80,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         {
             subs.Event<ShuttleConsoleFTLBeaconMessage>(OnBeaconFTLMessage);
             subs.Event<ShuttleConsoleFTLPositionMessage>(OnPositionFTLMessage);
+            subs.Event<ShuttleConsoleBioScanPositionMessage>(OnBioScanPositionMessage); // Forge-Change - BioScan
             subs.Event<ToggleFTLLockRequestMessage>(OnToggleFTLLock);
             subs.Event<BoundUIClosedEvent>(OnConsoleUIClose);
         });
@@ -100,6 +102,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         SubscribeLocalEvent<FTLDestinationComponent, ComponentShutdown>(OnFtlDestShutdown);
 
         InitializeFTL();
+        InitializeBioScan(); // Forge-Change - BioScan
 
         InitializeNFDrone(); // Frontier: add our drone subscriptions
     }
@@ -405,7 +408,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         if (shuttleGridUid != null && entity != null)
         {
             navState = GetNavState(entity.Value, dockState.Docks);
-            mapState = GetMapState(shuttleGridUid.Value);
+            mapState = GetMapState(consoleUid, shuttleGridUid.Value); // Forge-Change - BioScan
         }
         else
         {
@@ -414,7 +417,10 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
                 FTLState.Invalid,
                 default,
                 new List<ShuttleBeaconObject>(),
-                new List<ShuttleExclusionObject>());
+                new List<ShuttleExclusionObject>(),
+                default, // Forge-Change - BioScan
+                ShuttleBioScanStatus.None, // Forge-Change - BioScan
+                false); // Forge-Change - BioScan
         }
 
         if (_ui.HasUi(consoleUid, ShuttleConsoleUiKey.Key))
@@ -426,6 +432,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+        UpdateBioScans(); // Forge-Change - BioScan
 
         var toRemove = new ValueList<(EntityUid, PilotComponent)>();
         var query = EntityQueryEnumerator<PilotComponent>();
@@ -575,10 +582,13 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     /// <summary>
     /// Specific to a particular shuttle.
     /// </summary>
-    public ShuttleMapInterfaceState GetMapState(Entity<FTLComponent?> shuttle)
+    public ShuttleMapInterfaceState GetMapState(EntityUid consoleUid, Entity<FTLComponent?> shuttle) // Forge-Change - BioScan
     {
         FTLState ftlState = FTLState.Available;
         StartEndTime stateDuration = default;
+        StartEndTime bioScanTime = default; // Forge-Change - BioScan
+        var bioScanStatus = ShuttleBioScanStatus.None; // Forge-Change - BioScan
+        var bioScanAvailable = false; // Forge-Change - BioScan
 
         if (Resolve(shuttle, ref shuttle.Comp, false) && shuttle.Comp.LifeStage < ComponentLifeStage.Stopped)
         {
@@ -590,12 +600,23 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         List<ShuttleExclusionObject>? exclusions = null;
         GetBeacons(ref beacons);
         GetExclusions(ref exclusions);
+        // Forge-Change-start - BioScan
+        if (TryComp<ShuttleConsoleComponent>(consoleUid, out var console))
+        {
+            bioScanTime = console.BioScanTime;
+            bioScanStatus = console.BioScanStatus;
+            bioScanAvailable = CanUseBioScan((consoleUid, console), shuttle.Owner);
+        }
 
         return new ShuttleMapInterfaceState(
             ftlState,
             stateDuration,
             beacons ?? new List<ShuttleBeaconObject>(),
-            exclusions ?? new List<ShuttleExclusionObject>());
+            exclusions ?? new List<ShuttleExclusionObject>(),
+            bioScanTime,
+            bioScanStatus,
+            bioScanAvailable);
+        // Forge-Change-end - BioScan
     }
 
     /// <summary>

@@ -53,6 +53,9 @@ public sealed partial class MapScreen : BoxContainer
 
     // Mono
     private bool _autopilotTargeting = false;
+    private bool _bioScanTargeting = false; // Forge-Change - BioScan
+    private StartEndTime _bioScanTime; // Forge-Change - BioScan
+    private ShuttleBioScanStatus _bioScanStatus = ShuttleBioScanStatus.None; // Forge-Change - BioScan
 
     private float _minMapDequeue = 0.05f;
     private float _maxMapDequeue = 0.25f;
@@ -64,6 +67,7 @@ public sealed partial class MapScreen : BoxContainer
 
     // Mono
     public event Action<MapCoordinates, Angle>? RequestAutopilot;
+    public event Action<MapCoordinates>? RequestBioScan; // Forge-Change - BioScan
 
     private readonly Dictionary<MapId, BoxContainer> _mapHeadings = new();
     private readonly Dictionary<MapId, List<IMapObject>> _mapObjects = new();
@@ -93,6 +97,7 @@ public sealed partial class MapScreen : BoxContainer
 
         MapFTLButton.OnToggled += FtlPreviewToggled;
         MapAutopilotButton.OnToggled += AutopilotPreviewToggled; // Mono
+        MapBioScanButton.OnToggled += BioScanPreviewToggled; // Forge-Change - BioScan
 
         _ftlStyle = new StyleBoxFlat(Color.LimeGreen);
         FTLBar.ForegroundStyleBoxOverride = _ftlStyle;
@@ -100,10 +105,15 @@ public sealed partial class MapScreen : BoxContainer
         // Just pass it on up.
         MapRadar.RequestFTL += (coords, angle) =>
         {
-            if (_autopilotTargeting) // Mono
+            if (_bioScanTargeting)
+            {
+                RequestBioScan?.Invoke(coords); // Forge-Change - BioScan
+                SetTargeting(MapTargetingMode.None); // Forge-Change - BioScan
+            }
+            else if (_autopilotTargeting) // Mono
             {
                 RequestAutopilot?.Invoke(coords, angle);
-                SetTargeting(false, true);
+                SetTargeting(MapTargetingMode.None); // Forge-Change - BioScan
             }
             else
             {
@@ -130,8 +140,12 @@ public sealed partial class MapScreen : BoxContainer
         _exclusions = state.Exclusions;
         _state = state.FTLState;
         _ftlTime = state.FTLTime;
+        _bioScanTime = state.BioScanTime; // Forge-Change - BioScan
+        _bioScanStatus = state.BioScanStatus; // Forge-Change - BioScan
         MapRadar.InFtl = true;
         MapFTLState.Text = Loc.GetString($"shuttle-console-ftl-state-{_state.ToString()}");
+        MapBioScanState.Text = Loc.GetString($"shuttle-console-bioscan-status-{_bioScanStatus.ToString()}"); // Forge-Change - BioScan
+        MapBioScanButton.Disabled = _bioScanStatus == ShuttleBioScanStatus.InProgress || !state.BioScanAvailable; // Forge-Change - BioScan
 
         //frontier - we only allow pre-approved vessels to FTL
         if (!_entManager.HasComponent<ShuttleFTLComponent>(_shuttleEntity))
@@ -207,34 +221,54 @@ public sealed partial class MapScreen : BoxContainer
 
     private void FtlPreviewToggled(BaseButton.ButtonToggledEventArgs obj)
     {
-        SetTargeting(obj.Pressed, false);
+        SetTargeting(obj.Pressed ? MapTargetingMode.Ftl : MapTargetingMode.None); // Forge-Change - BioScan
     }
 
     // Mono
     private void AutopilotPreviewToggled(BaseButton.ButtonToggledEventArgs obj)
     {
-        SetTargeting(obj.Pressed, true);
+        SetTargeting(obj.Pressed ? MapTargetingMode.Autopilot : MapTargetingMode.None); // Forge-Change
     }
 
-    // Mono
-    private void SetTargeting(bool pressed, bool isAutopilot)
+    // Forge-Change-start - BioScan
+    private void BioScanPreviewToggled(BaseButton.ButtonToggledEventArgs obj)
     {
-        if (pressed)
+        SetTargeting(obj.Pressed ? MapTargetingMode.BioScan : MapTargetingMode.None);
+    }
+
+    private enum MapTargetingMode : byte
+    {
+        None,
+        Ftl,
+        Autopilot,
+        BioScan,
+    }
+
+    private void SetTargeting(MapTargetingMode mode)
+    {
+        if (mode != MapTargetingMode.None)
         {
             MapRadar.FtlMode = true;
             MapRadar.ShowFTLRangeOnly = false;
-            MapRadar.ShowFTLRange = !isAutopilot;
-            MapRadar.NoFTLRange = isAutopilot;
-            MapFTLButton.Pressed = !isAutopilot;
-            MapAutopilotButton.Pressed = isAutopilot;
-            _autopilotTargeting = isAutopilot;
+            MapRadar.ShowFTLRange = mode == MapTargetingMode.Ftl;
+            MapRadar.NoFTLRange = mode != MapTargetingMode.Ftl;
+            MapFTLButton.Pressed = mode == MapTargetingMode.Ftl;
+            MapAutopilotButton.Pressed = mode == MapTargetingMode.Autopilot;
+            MapBioScanButton.Pressed = mode == MapTargetingMode.BioScan;
+            _autopilotTargeting = mode == MapTargetingMode.Autopilot;
+            _bioScanTargeting = mode == MapTargetingMode.BioScan;
         }
         else
         {
             MapRadar.FtlMode = false;
+            MapFTLButton.Pressed = false;
+            MapAutopilotButton.Pressed = false;
+            MapBioScanButton.Pressed = false;
+            _autopilotTargeting = false;
+            _bioScanTargeting = false;
         }
     }
-
+    // Forge-Change-end - BioScan
     public void SetConsole(EntityUid? console)
     {
         _console = console;
@@ -593,6 +627,18 @@ public sealed partial class MapScreen : BoxContainer
 
         var progress = _ftlTime.ProgressAt(curTime);
         FTLBar.Value = float.IsFinite(progress) ? progress : 1;
+
+        // Forge-Change-start - BioScan
+        if (_bioScanStatus == ShuttleBioScanStatus.InProgress)
+        {
+            var scanProgress = _bioScanTime.ProgressAt(curTime);
+            BioScanBar.Value = float.IsFinite(scanProgress) ? scanProgress : 0;
+        }
+        else
+        {
+            BioScanBar.Value = _bioScanStatus == ShuttleBioScanStatus.Clean || _bioScanStatus == ShuttleBioScanStatus.ThreatDetected ? 1 : 0;
+        }
+        // Forge-Change-end - BioScan
     }
 
     protected override void Draw(DrawingHandleScreen handle)

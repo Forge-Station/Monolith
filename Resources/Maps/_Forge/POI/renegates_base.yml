@@ -4068,7 +4068,7 @@ entities:
     - type: Transform
       pos: 32.43188,44.604347
       parent: 1
-- proto: AmmoTechFab
+- proto: RenegateTechFab
   entities:
   - uid: 106
     components:
@@ -24684,7 +24684,7 @@ entities:
     - type: Transform
       pos: -6.5,17.5
       parent: 1
-- proto: ResearchAndDevelopmentServer
+- proto: ForgeRnDRenegateServer
   entities:
   - uid: 3315
     components:

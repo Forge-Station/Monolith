@@ -1,0 +1,72 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               SetSize="960 760"
+               MinSize="840 620">
+    <BoxContainer Orientation="Vertical"
+                  SeparationOverride="6"
+                  Margin="10">
+        <PanelContainer StyleClasses="AngleRect">
+            <BoxContainer Orientation="Vertical"
+                          SeparationOverride="5"
+                          Margin="10">
+                <BoxContainer Orientation="Horizontal"
+                              SeparationOverride="6">
+                    <Label Text="{Loc 'id-card-console-window-privileged-id'}"
+                           MinWidth="110" />
+                    <Button Name="PrivilegedIdButton"
+                            Access="Public"
+                            MinWidth="90" />
+                    <Label Name="PrivilegedIdLabel"
+                           HorizontalExpand="True"
+                           ClipText="True" />
+                </BoxContainer>
+
+                <BoxContainer Orientation="Horizontal"
+                              SeparationOverride="6">
+                    <Label Text="{Loc 'id-card-console-window-target-id'}"
+                           MinWidth="110" />
+                    <Button Name="TargetIdButton"
+                            Access="Public"
+                            MinWidth="90" />
+                    <Label Name="TargetIdLabel"
+                           HorizontalExpand="True"
+                           ClipText="True" />
+                </BoxContainer>
+
+                <PanelContainer StyleClasses="LowDivider" />
+
+                <BoxContainer Orientation="Horizontal"
+                              SeparationOverride="6">
+                    <Label Text="{Loc 'job-preset-id-card-console-window-current-rank-label'}"
+                           MinWidth="110" />
+                    <Label Name="CurrentRankValue"
+                           StyleClasses="LabelBig"
+                           HorizontalExpand="True"
+                           ClipText="True" />
+                </BoxContainer>
+
+                <Label Name="PermissionHintLabel"
+                       StyleClasses="LabelSubText" />
+            </BoxContainer>
+        </PanelContainer>
+
+        <BoxContainer Orientation="Vertical"
+                      SeparationOverride="1"
+                      Margin="2 0 0 1">
+            <Label Text="{Loc 'job-preset-id-card-console-window-job-selection-label'}"
+                   StyleClasses="LabelBig" />
+            <Label Text="{Loc 'job-preset-id-card-console-window-job-selection-description'}"
+                   StyleClasses="LabelSubText" />
+        </BoxContainer>
+
+        <PanelContainer VerticalExpand="True"
+                        StyleClasses="Inset">
+            <ScrollContainer VerticalExpand="True"
+                             HScrollEnabled="False">
+                <BoxContainer Name="RankPresetContainer"
+                              Orientation="Vertical"
+                              SeparationOverride="3"
+                              Margin="5" />
+            </ScrollContainer>
+        </PanelContainer>
+    </BoxContainer>
+</DefaultWindow>

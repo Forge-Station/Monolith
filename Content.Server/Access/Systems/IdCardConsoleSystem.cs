@@ -1,7 +1,10 @@
+using Content.Server.StationRecords.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Roles;
+using Content.Shared.StationRecords;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
@@ -19,6 +22,7 @@ namespace Content.Server.Access.Systems;
 public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly StationRecordsSystem _record = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly AccessSystem _access = default!;
@@ -96,6 +100,14 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             var targetIdComponent = EntityManager.GetComponent<IdCardComponent>(targetId);
             var targetAccessComponent = EntityManager.GetComponent<AccessComponent>(targetId);
 
+            var jobProto = new ProtoId<JobPrototype>(string.Empty); // Frontier: AccessLevelPrototype<JobPrototype
+            if (TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
+                && keyStorage.Key is {} key
+                && _record.TryGetRecord<GeneralStationRecord>(key, out var record))
+            {
+                jobProto = record.JobPrototype;
+            }
+
             string?[]? shuttleNameParts = null;
             var hasShuttle = false;
             if (EntityManager.TryGetComponent<ShuttleDeedComponent>(targetId, out var comp))
@@ -114,7 +126,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
                 shuttleNameParts, // Frontier
                 targetAccessComponent.Tags.ToList(),
                 possibleAccess,
-                string.Empty,
+                jobProto,
                 privilegedIdName,
                 Name(targetId));
         }
@@ -149,6 +161,8 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             _idCard.TryChangeJobIcon(targetId, jobIcon, player: player);
             _idCard.TryChangeJobDepartment(targetId, job);
         }
+
+        UpdateStationRecord(uid, targetId, newFullName, newJobTitle, job);
 
         if (!newAccessList.TrueForAll(x => component.AccessLevels.Contains(x)))
         {
@@ -245,6 +259,27 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
 
         var privilegedId = component.PrivilegedIdSlot.Item;
         return privilegedId != null && _accessReader.IsAllowed(privilegedId.Value, uid, reader);
+    }
+
+    private void UpdateStationRecord(EntityUid uid, EntityUid targetId, string newFullName, string newJobTitle, JobPrototype? newJobProto)
+    {
+        if (!TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
+            || keyStorage.Key is not { } key
+            || !_record.TryGetRecord<GeneralStationRecord>(key, out var record))
+        {
+            return;
+        }
+
+        record.Name = newFullName;
+        record.JobTitle = newJobTitle;
+
+        if (newJobProto != null)
+        {
+            record.JobPrototype = newJobProto.ID;
+            record.JobIcon = newJobProto.Icon;
+        }
+
+        _record.Synchronize(key);
     }
 
 }

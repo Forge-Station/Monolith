@@ -1,0 +1,108 @@
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponRifleAR220Rogue
+  result: WeaponRifleAR220
+  categories:
+  - Rifles
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 1200
+    Plasteel: 1000
+    Plastic: 900
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponShotgunSaigakRogue
+  result: WeaponShotgunSaigak
+  categories:
+  - Shotguns
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 1600
+    Plasteel: 1000
+    Plastic: 1200
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponShotgunDefensieRogue
+  result: WeaponShotgunDefensie
+  categories:
+  - Shotguns
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 2200
+    Plasteel: 1200
+    Plastic: 900
+
+- type: latheRecipe
+  parent: BaseWeaponRecipe
+  id: WeaponRevolverMagnusRogue
+  result: WeaponRevolverMagnus
+  categories:
+  - Sidearms
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 1200
+    Plasteel: 700
+    Plastic: 600
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponLmgAR400Rogue
+  result: WeaponLmgAR400
+  categories:
+  - GPMGs
+  - MGs
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 3200
+    Plasteel: 1800
+    Plastic: 1300
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponRifleGaussRifleRogue
+  result: WeaponRifleGaussRifle
+  categories:
+  - Rifles
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 1700
+    Plasteel: 1300
+    Plastic: 1000
+    Silver: 300
+    Uranium: 300
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponLmgType99Rogue
+  result: WeaponLmgType99
+  categories:
+  - GPMGs
+  - MGs
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 3600
+    Plasteel: 2200
+    Plastic: 1400
+    Silver: 500
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: HFKatanaRogue
+  categories:
+  - Energy
+  - Weapons
+  result: WeaponHFKatana
+  materials:
+    Steel: 1200
+    Plasteel: 3000
+    Plastic: 400
+    Plasma: 3000

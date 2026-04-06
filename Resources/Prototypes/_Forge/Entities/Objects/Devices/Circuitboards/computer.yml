@@ -1,0 +1,89 @@
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: TsfRankComputerCircuitboard
+  name: TSF rank console board
+  description: A computer printed circuit board for a TSF rank console.
+  components:
+    - type: Sprite
+      state: cpu_command
+    - type: ComputerBoard
+      prototype: ComputerTsfRank
+    - type: Tag
+      tags:
+      - DroneUsable
+      - HighRiskItem
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: NtRankComputerCircuitboard
+  name: NT rank console board
+  description: A computer printed circuit board for a NT rank console.
+  components:
+    - type: Sprite
+      state: cpu_command
+    - type: ComputerBoard
+      prototype: ComputerNtRank
+    - type: Tag
+      tags:
+      - DroneUsable
+      - HighRiskItem
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: TtiRankComputerCircuitboard
+  name: TTI rank console board
+  description: A computer printed circuit board for a TTI rank console.
+  components:
+    - type: Sprite
+      state: cpu_command
+    - type: ComputerBoard
+      prototype: ComputerTtiRank
+    - type: Tag
+      tags:
+      - DroneUsable
+      - HighRiskItem
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: UspRankComputerCircuitboard
+  name: USP rank console board
+  description: A computer printed circuit board for a USP rank console.
+  components:
+    - type: Sprite
+      state: cpu_command
+    - type: ComputerBoard
+      prototype: ComputerUspRank
+    - type: Tag
+      tags:
+      - DroneUsable
+      - HighRiskItem
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: RngRankComputerCircuitboard
+  name: RNG rank console board
+  description: A computer printed circuit board for a RNG rank console.
+  components:
+    - type: Sprite
+      state: cpu_command
+    - type: ComputerBoard
+      prototype: ComputerRngRank
+    - type: Tag
+      tags:
+      - DroneUsable
+      - HighRiskItem
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: EmpRankComputerCircuitboard
+  name: EMP rank console board
+  description: A computer printed circuit board for a EMP rank console.
+  components:
+    - type: Sprite
+      state: cpu_command
+    - type: ComputerBoard
+      prototype: ComputerEmpRank
+    - type: Tag
+      tags:
+      - DroneUsable
+      - HighRiskItem

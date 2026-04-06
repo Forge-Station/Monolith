@@ -1,9 +1,11 @@
 using System.Numerics;
 using Content.Shared._NF.Shuttles.Events;
 using Content.Shared.DeviceLinking;
+using Content.Shared.Shuttles.BUIStates; // Forge-Change - BioScan
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.Timing; // Forge-Change - BioScan
 
 // Mono
 using Robust.Shared.Audio;
@@ -65,6 +67,32 @@ namespace Content.Server.Shuttles.Components
 
         [DataField]
         public SoundSpecifier? AutopilotDoneSound = new SoundPathSpecifier("/Audio/Effects/Shuttle/radar_ping.ogg");
+        // Forge-Change-start - BioScan
+
+        [DataField]
+        public float BioScanRange = 300f;
+
+        [DataField]
+        public float BioScanDuration = 8f;
+
+        [DataField]
+        public float BioScanMaxVelocity = 0.05f;
+
+        [DataField]
+        public float BioScanMaxAngularVelocity = 0.01f;
+
+        [ViewVariables]
+        public StartEndTime BioScanTime;
+
+        [ViewVariables]
+        public bool BioScanActive;
+
+        [ViewVariables]
+        public EntityUid? BioScanTarget;
+
+        [ViewVariables]
+        public ShuttleBioScanStatus BioScanStatus = ShuttleBioScanStatus.None;
+        // Forge-Change-end - BioScan
         // </Mono>
 
         // Network Port Button Source Ports

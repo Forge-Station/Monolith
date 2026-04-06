@@ -57,6 +57,26 @@
                                       Value="1.0"/>
                 </controls:PanelContainer>
                 </controls1:StripeBack>
+                <!-- Forge-Change - BioScan -->
+                <controls:Label Name="MapBioScanState"
+                                Text="{controls:Loc 'shuttle-console-bioscan-status-None'}"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Center"/>
+                <controls1:StripeBack
+                    Margin="5 5 5 5"
+                    HorizontalExpand="False"
+                    VerticalExpand="False">
+                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 2">
+                    <controls:PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
+                    </controls:PanelContainer.PanelOverride>
+                <controls:ProgressBar Name="BioScanBar" HorizontalExpand="True"
+                                      Margin="5"
+                                      MinValue="0.0"
+                                      MaxValue="1.0"
+                                      Value="0.0"/>
+                </controls:PanelContainer>
+                </controls1:StripeBack>
                     </controls:BoxContainer>
                 </controls:PanelContainer>
                 <controls:BoxContainer Orientation="Vertical">
@@ -86,6 +106,12 @@
                 <controls:Button Name="MapAutopilotButton"
                                  ToggleMode="True"
                                  Text="{controls:Loc 'shuttle-console-autopilot-button'}"
+                                 TextAlign="Center"
+                                 StyleClasses="ButtonSquare"/>
+                <!-- Forge-Change - BioScan -->
+                <controls:Button Name="MapBioScanButton"
+                                 ToggleMode="True"
+                                 Text="{controls:Loc 'shuttle-console-bioscan-button'}"
                                  TextAlign="Center"
                                  StyleClasses="ButtonSquare"/>
                 <controls:Button Name="MapRebuildButton"

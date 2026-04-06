@@ -22,6 +22,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
 
     // Mono
     public event Action<MapCoordinates, Angle>? RequestAutopilot;
+    public event Action<MapCoordinates>? RequestBioScan; // Forge-Change - BioScan
 
     public event Action<NetEntity, NetEntity>? DockRequest;
     public event Action<NetEntity>? UndockRequest;
@@ -62,6 +63,11 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         MapContainer.RequestAutopilot += (coords, angle) =>
         {
             RequestAutopilot?.Invoke(coords, angle);
+        };
+
+        MapContainer.RequestBioScan += coords => // Forge-Change - BioScan
+        {
+            RequestBioScan?.Invoke(coords);
         };
 
         DockContainer.DockRequest += (entity, netEntity) =>

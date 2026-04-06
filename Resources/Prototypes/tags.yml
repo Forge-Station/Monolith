@@ -73,6 +73,9 @@
   id: BikeHorn
 
 - type: Tag
+  id: BioScanWhitelist
+
+- type: Tag
   id: Bloodpack
 
 - type: Tag

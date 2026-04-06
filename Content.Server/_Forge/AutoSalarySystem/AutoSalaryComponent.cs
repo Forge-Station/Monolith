@@ -5,4 +5,7 @@ public sealed partial class AutoSalaryComponent : Component
 {
     [DataField]
     public TimeSpan LastSalaryAt = TimeSpan.Zero;
+
+    [DataField]
+    public string? JobPrototype;
 }

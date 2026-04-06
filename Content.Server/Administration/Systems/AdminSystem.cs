@@ -159,7 +159,7 @@ public sealed class AdminSystem : EntitySystem
     {
         var session = _minds.GetSession(ev.Mind);
 
-        if (!ev.RoleTypeUpdate || session == null)
+        if (session == null)
             return;
 
         UpdatePlayerList(session);

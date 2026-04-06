@@ -119,6 +119,15 @@ public abstract class SharedRoleSystem : EntitySystem
                 $"Job Role of {ToPrettyString(mind.OwnedEntity)} changed from '{jobRole.Value.Comp1.JobPrototype}' to '{jobPrototype}'");
 
             jobRole.Value.Comp1.JobPrototype = jobPrototype;
+            Dirty(jobRole.Value.Owner, jobRole.Value.Comp1);
+
+            var update = MindRolesUpdate((mindId, mind));
+
+            // Treat a mid-round job swap as a role refresh so downstream systems
+            // can update playtime, admin UI and job-derived caches without
+            // replaying the full job greeting to the player.
+            var message = new RoleAddedEvent(mindId, mind, update, true);
+            RaiseLocalEvent(mindId, message, true);
         }
         else
             MindAddRoleDo(mindId, "MindRoleJob", mind, silent, jobPrototype);

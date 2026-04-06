@@ -1,19 +1,10 @@
 - type: entity
   parent: [BaseStructureIndestructible, BaseComputerAiAccess]
-  id: ComputerTsfRank
-  name: Консоль званий TSF
-  description: Терминал для назначения званий TSF и предустановленных доступов.
+  id: BaseComputerJobPreset
+  abstract: true
   components:
   - type: JobPresetIdCardConsole
-    rankPresets:
-    - TsfCommandingOfficer
-    - TsfSeniorOfficer
-    - TsfExecutiveOfficer
-    - TsfSeniorAide
-    - TsfAmbassador
-    - TsfRanger
-    - TsfRecruit
-    - TsfEngineer
+    rankPresets: []
     privilegedIdSlot:
       name: id-card-console-privileged-id
       ejectSound: /Audio/Machines/id_swipe.ogg
@@ -40,20 +31,6 @@
         type: TsfRankConsoleBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
-  - type: Sprite
-    layers:
-    - map: ["computerLayerBody"]
-      state: computer
-    - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
-    - map: ["computerLayerScreen"]
-      state: id
-    - map: ["computerLayerKeys"]
-      state: id_key
-    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
-      state: generic_panel_open
-  - type: Computer
-    board: TsfRankComputerCircuitboard
   - type: PointLight
     radius: 1.5
     energy: 1.6
@@ -70,3 +47,183 @@
   - type: ShipRepairable
     repairTime: 4
     repairCost: 8
+
+- type: entity
+  parent: BaseComputerJobPreset
+  id: ComputerTsfRank
+  name: Консоль должностей TSF
+  description: Терминал для назначения должностей TSF и предустановленных доступов.
+  components:
+  - type: JobPresetIdCardConsole
+    rankPresets:
+    - TsfCommandingOfficer
+    - TsfSeniorOfficer
+    - TsfExecutiveOfficer
+    - TsfSeniorAide
+    - TsfAmbassador
+    - TsfRanger
+    - TsfRecruit
+    - TsfEngineer
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
+      state: tsf
+    - map: ["computerLayerKeys"]
+      state: id_key
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: Computer
+    board: TsfRankComputerCircuitboard
+
+- type: entity
+  parent: BaseComputerJobPreset
+  id: ComputerNtRank
+  name: Консоль должностей NT
+  description: Терминал для назначения должностей NT и предустановленных доступов.
+  components:
+  - type: JobPresetIdCardConsole
+    rankPresets:
+    - NtMedic
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
+      state: nt
+    - map: ["computerLayerKeys"]
+      state: id_key
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: Computer
+    board: NtRankComputerCircuitboard
+
+- type: entity
+  parent: BaseComputerJobPreset
+  id: ComputerTtiRank
+  name: Консоль должностей TTI
+  description: Терминал для назначения должностей TTI и предустановленных доступов.
+  components:
+  - type: JobPresetIdCardConsole
+    rankPresets:
+    - DirectorOfCare
+    - MdMedic
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
+      state: tti
+    - map: ["computerLayerKeys"]
+      state: id_key
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: Computer
+    board: TtiRankComputerCircuitboard
+
+- type: entity
+  parent: BaseComputerJobPreset
+  id: ComputerUspRank
+  name: Консоль должностей USP
+  description: Терминал для назначения должностей USP и предустановленных доступов.
+  components:
+  - type: JobPresetIdCardConsole
+    rankPresets:
+    - USSPCommissar
+    - USSPSergeant
+    - USSPMedic
+    - USSPCorporal
+    - USSPRifleman
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
+      state: usp
+    - map: ["computerLayerKeys"]
+      state: id_key
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: Computer
+    board: UspRankComputerCircuitboard
+
+- type: entity
+  parent: BaseComputerJobPreset
+  id: ComputerRngRank
+  name: Консоль должностей RNG
+  description: Терминал для назначения должностей RNG и предустановленных доступов.
+  components:
+  - type: JobPresetIdCardConsole
+    rankPresets:
+    - Baron
+    - Draftsman
+    - Overseer
+    - Quack
+    - Foreman
+    - Flunky
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
+      state: rng
+    - map: ["computerLayerKeys"]
+      state: id_key
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: Computer
+    board: RngRankComputerCircuitboard
+
+- type: entity
+  parent: BaseComputerJobPreset
+  id: ComputerEmpRank
+  name: Консоль должностей EMP
+  description: Терминал для назначения должностей EMP и предустановленных доступов.
+  components:
+  - type: JobPresetIdCardConsole
+    rankPresets:
+    - Praefect
+    - Arbiter
+    - Cardinal
+    - Inquisitor
+    - Consul
+    - Praetorian
+    - Auxilia
+    - Neophyte
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
+      state: emp
+    - map: ["computerLayerKeys"]
+      state: id_key
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: Computer
+    board: EmpRankComputerCircuitboard

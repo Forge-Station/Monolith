@@ -5,7 +5,6 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
-using Content.Shared.StatusIcon;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
@@ -101,10 +100,16 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             var targetIdComponent = EntityManager.GetComponent<IdCardComponent>(targetId);
             var targetAccessComponent = EntityManager.GetComponent<AccessComponent>(targetId);
 
-            var jobProto = new ProtoId<JobPrototype>(string.Empty); // Frontier: AccessLevelPrototype<JobPrototype
-            if (TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
+            ProtoId<JobPrototype> jobProto = string.Empty;
+            if (targetIdComponent.JobPrototype is { } currentJobProto
+                && !string.IsNullOrWhiteSpace(currentJobProto))
+            {
+                jobProto = currentJobProto;
+            }
+            else if (TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
                 && keyStorage.Key is {} key
-                && _record.TryGetRecord<GeneralStationRecord>(key, out var record))
+                && _record.TryGetRecord<GeneralStationRecord>(key, out var record)
+                && !string.IsNullOrWhiteSpace(record.JobPrototype))
             {
                 jobProto = record.JobPrototype;
             }
@@ -153,6 +158,8 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         if (component.TargetIdSlot.Item is not { Valid: true } targetId || !PrivilegedIdIsAuthorized(uid, component))
             return;
 
+        var targetIdComponent = Comp<IdCardComponent>(targetId);
+
         _idCard.TryChangeFullName(targetId, newFullName, player: player);
         _idCard.TryChangeJobTitle(targetId, newJobTitle, player: player);
 
@@ -163,7 +170,13 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             _idCard.TryChangeJobDepartment(targetId, job);
         }
 
-        UpdateStationRecord(uid, targetId, newFullName, newJobTitle, job);
+        if (targetIdComponent.JobPrototype != newJobProto)
+        {
+            targetIdComponent.JobPrototype = newJobProto;
+            Dirty(targetId, targetIdComponent);
+        }
+
+        UpdateStationRecord(uid, targetId, newFullName, newJobTitle, newJobProto, job);
 
         if (!newAccessList.TrueForAll(x => component.AccessLevels.Contains(x)))
         {
@@ -262,7 +275,13 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         return privilegedId != null && _accessReader.IsAllowed(privilegedId.Value, uid, reader);
     }
 
-    private void UpdateStationRecord(EntityUid uid, EntityUid targetId, string newFullName, ProtoId<AccessLevelPrototype> newJobTitle, JobPrototype? newJobProto)
+    private void UpdateStationRecord(
+        EntityUid uid,
+        EntityUid targetId,
+        string newFullName,
+        ProtoId<AccessLevelPrototype> newJobTitle,
+        ProtoId<JobPrototype> newJobProtoId,
+        JobPrototype? newJobProto)
     {
         if (!TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
             || keyStorage.Key is not { } key
@@ -273,10 +292,10 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
 
         record.Name = newFullName;
         record.JobTitle = newJobTitle;
+        record.JobPrototype = newJobProtoId;
 
         if (newJobProto != null)
         {
-            record.JobPrototype = newJobProto.ID;
             record.JobIcon = newJobProto.Icon;
         }
 

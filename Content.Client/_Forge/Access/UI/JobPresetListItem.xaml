@@ -1,31 +1,46 @@
-<Button xmlns="https://spacestation14.io"
-        xmlns:controls="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
-        Access="Public"
-        ToggleMode="True"
-        HorizontalExpand="True"
-        MinSize="0 60">
-    <BoxContainer Orientation="Horizontal" SeparationOverride="10" Margin="10 6">
-        <PanelContainer StyleClasses="Inset"
-                        MinSize="28 28"
-                        MaxSize="28 28"
-                        Margin="0 2 0 0">
-            <TextureRect Name="JobIcon"
-                         HorizontalAlignment="Center"
-                         VerticalAlignment="Center"
-                         Stretch="KeepCentered"
-                         TextureScale="2 2"
-                         SetSize="16 16" />
-        </PanelContainer>
-        <BoxContainer Orientation="Vertical"
-                      SeparationOverride="2"
-                      VerticalAlignment="Center"
-                      HorizontalExpand="True">
-            <Label Name="JobTitle"
-                   HorizontalExpand="True"
-                   ClipText="True" />
-            <controls:RichTextLabel Name="JobSubtitle"
-                                    StyleClasses="LabelSubText"
-                                    HorizontalExpand="True" />
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:controls="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
+              Access="Public"
+              Orientation="Vertical"
+              SeparationOverride="4"
+              HorizontalExpand="True">
+    <Button Name="ApplyButton"
+            ToggleMode="True"
+            HorizontalExpand="True"
+            MinSize="0 56">
+        <BoxContainer Orientation="Horizontal" SeparationOverride="10" Margin="10 6">
+            <PanelContainer StyleClasses="Inset"
+                            MinSize="28 28"
+                            MaxSize="28 28"
+                            Margin="0 2 0 0">
+                <TextureRect Name="JobIcon"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Stretch="KeepCentered"
+                             TextureScale="2 2"
+                             SetSize="16 16" />
+            </PanelContainer>
+            <BoxContainer Orientation="Vertical"
+                          SeparationOverride="2"
+                          VerticalAlignment="Center"
+                          HorizontalExpand="True">
+                <Label Name="JobTitle"
+                       HorizontalExpand="True"
+                       ClipText="True" />
+                <controls:RichTextLabel Name="JobSubtitle"
+                                        StyleClasses="LabelSubText"
+                                        HorizontalExpand="True" />
+            </BoxContainer>
         </BoxContainer>
+    </Button>
+    <BoxContainer Orientation="Horizontal"
+                  HorizontalExpand="True"
+                  SeparationOverride="4">
+        <Control HorizontalExpand="True" />
+        <Button Name="CreateInjectorButton"
+                Access="Public"
+                MinWidth="92"
+                MinHeight="24"
+                Text="{Loc 'job-preset-id-card-console-window-create-injector-short'}" />
     </BoxContainer>
-</Button>
+</BoxContainer>

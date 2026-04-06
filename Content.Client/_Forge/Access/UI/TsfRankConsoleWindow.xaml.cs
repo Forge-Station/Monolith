@@ -64,9 +64,10 @@ public sealed partial class TsfRankConsoleWindow : DefaultWindow
                 GetJobIcon(job)))
             {
                 Group = buttonGroup,
-                ToolTip = job.LocalizedName,
             };
-            button.OnPressed += _ => _owner.ApplyPreset(job.ID);
+            button.SetTooltips(job.LocalizedName);
+            button.ApplyPressed += () => _owner.ApplyPreset(job.ID);
+            button.CreateInjectorPressed += () => _owner.CreateInjector(job.ID);
 
             RankPresetContainer.AddChild(button);
             _presetButtons[job.ID] = new PresetButtonEntry(button, job);
@@ -119,9 +120,10 @@ public sealed partial class TsfRankConsoleWindow : DefaultWindow
             var subtitleColor = blockReason == null ? Color.LightGray : Color.Red;
 
             entry.Button.Pressed = isCurrent;
-            entry.Button.Disabled = !interfaceEnabled || blockReason != null;
+            entry.Button.ApplyDisabled = !interfaceEnabled || blockReason != null;
+            entry.Button.InjectorDisabled = !interfaceEnabled || blockReason != null;
             entry.Button.SetSubtitle(subtitle, subtitleColor);
-            entry.Button.ToolTip = blockReason ?? entry.Job.LocalizedDescription ?? entry.Job.LocalizedName;
+            entry.Button.SetTooltips(blockReason ?? entry.Job.LocalizedDescription ?? entry.Job.LocalizedName);
         }
     }
 

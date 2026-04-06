@@ -17,6 +17,17 @@ public sealed class JobPresetIdCardConsoleApplyMessage : BoundUserInterfaceMessa
 }
 
 [Serializable, NetSerializable]
+public sealed class JobPresetIdCardConsoleCreateInjectorMessage : BoundUserInterfaceMessage
+{
+    public readonly ProtoId<JobPrototype> JobPrototype;
+
+    public JobPresetIdCardConsoleCreateInjectorMessage(ProtoId<JobPrototype> jobPrototype)
+    {
+        JobPrototype = jobPrototype;
+    }
+}
+
+[Serializable, NetSerializable]
 public sealed class JobPresetIdCardConsoleBoundUserInterfaceState : BoundUserInterfaceState
 {
     public readonly string PrivilegedIdName;

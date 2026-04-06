@@ -66,4 +66,9 @@ public sealed class TsfRankConsoleBoundUserInterface : BoundUserInterface
     {
         SendMessage(new JobPresetIdCardConsoleApplyMessage(jobPrototype));
     }
+
+    public void CreateInjector(ProtoId<JobPrototype> jobPrototype)
+    {
+        SendMessage(new JobPresetIdCardConsoleCreateInjectorMessage(jobPrototype));
+    }
 }

@@ -54,5 +54,6 @@
     - EncryptionKeyCentCom
     - EncryptionKeyStationMasterSR #Mono start
     - EncryptionKeyDiplomacy
+    - EncryptionKeyHospital # Forge
     - ShipVoucherFrontierGuard
     - PhoneInstrumentHigh

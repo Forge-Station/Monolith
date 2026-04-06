@@ -1,11 +1,11 @@
 - type: loadout
   id: StationRepClothingOuterArmorSrCarapace
-  price: 1800
+  price: 0 # Forge
   equipment:
     outerClothing: ClothingOuterArmorSrCarapace
 
 - type: loadout
   id: StationRepClothingOuterJacketSr
-  price: 800
+  price: 0 # Forge
   equipment:
     outerClothing: ClothingOuterJacketSr

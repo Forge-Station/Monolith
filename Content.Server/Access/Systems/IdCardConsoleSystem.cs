@@ -1,10 +1,7 @@
-using Content.Server.StationRecords.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
-using Content.Shared.Roles;
-using Content.Shared.StationRecords;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
@@ -22,7 +19,6 @@ namespace Content.Server.Access.Systems;
 public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly StationRecordsSystem _record = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly AccessSystem _access = default!;
@@ -100,22 +96,6 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             var targetIdComponent = EntityManager.GetComponent<IdCardComponent>(targetId);
             var targetAccessComponent = EntityManager.GetComponent<AccessComponent>(targetId);
 
-            // Forge change Start
-            ProtoId<JobPrototype> jobProto = string.Empty;
-            if (targetIdComponent.JobPrototype is { } currentJobProto
-                && !string.IsNullOrWhiteSpace(currentJobProto))
-            {
-                jobProto = currentJobProto;
-            }
-            else if (TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
-                && keyStorage.Key is {} key
-                && _record.TryGetRecord<GeneralStationRecord>(key, out var record)
-                && !string.IsNullOrWhiteSpace(record.JobPrototype))
-            {
-                jobProto = record.JobPrototype;
-            }
-            // Forge change End
-
             string?[]? shuttleNameParts = null;
             var hasShuttle = false;
             if (EntityManager.TryGetComponent<ShuttleDeedComponent>(targetId, out var comp))
@@ -134,7 +114,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
                 shuttleNameParts, // Frontier
                 targetAccessComponent.Tags.ToList(),
                 possibleAccess,
-                jobProto,
+                string.Empty,
                 privilegedIdName,
                 Name(targetId));
         }
@@ -160,8 +140,6 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         if (component.TargetIdSlot.Item is not { Valid: true } targetId || !PrivilegedIdIsAuthorized(uid, component))
             return;
 
-        var targetIdComponent = Comp<IdCardComponent>(targetId);
-
         _idCard.TryChangeFullName(targetId, newFullName, player: player);
         _idCard.TryChangeJobTitle(targetId, newJobTitle, player: player);
 
@@ -171,16 +149,6 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             _idCard.TryChangeJobIcon(targetId, jobIcon, player: player);
             _idCard.TryChangeJobDepartment(targetId, job);
         }
-
-        // Forge change Start
-        if (targetIdComponent.JobPrototype != newJobProto)
-        {
-            targetIdComponent.JobPrototype = newJobProto;
-            Dirty(targetId, targetIdComponent);
-        }
-
-        UpdateStationRecord(uid, targetId, newFullName, newJobTitle, newJobProto, job);
-        // Forge change End
 
         if (!newAccessList.TrueForAll(x => component.AccessLevels.Contains(x)))
         {
@@ -279,33 +247,4 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         return privilegedId != null && _accessReader.IsAllowed(privilegedId.Value, uid, reader);
     }
 
-    private void UpdateStationRecord(
-        EntityUid uid,
-        EntityUid targetId,
-        string newFullName,
-        ProtoId<AccessLevelPrototype> newJobTitle,
-        ProtoId<JobPrototype> newJobProtoId,
-        JobPrototype? newJobProto)
-    {
-        if (!TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
-            || keyStorage.Key is not { } key
-            || !_record.TryGetRecord<GeneralStationRecord>(key, out var record))
-        {
-            return;
-        }
-
-        record.Name = newFullName;
-        record.JobTitle = newJobTitle;
-
-        // Forge change Start
-        record.JobPrototype = newJobProtoId;
-        // Forge change End
-
-        if (newJobProto != null)
-        {
-            record.JobIcon = newJobProto.Icon;
-        }
-
-        _record.Synchronize(key);
-    }
 }

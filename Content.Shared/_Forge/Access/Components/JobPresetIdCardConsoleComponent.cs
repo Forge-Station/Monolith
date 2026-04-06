@@ -21,4 +21,7 @@ public sealed partial class JobPresetIdCardConsoleComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<JobPrototype>> RankPresets = new();
+
+    [DataField]
+    public List<EntProtoId> BodyImplants = new();
 }

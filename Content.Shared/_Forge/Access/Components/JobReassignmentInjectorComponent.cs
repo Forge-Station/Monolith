@@ -24,6 +24,9 @@ public sealed partial class JobReassignmentInjectorComponent : Component
     public List<ProtoId<AccessLevelPrototype>> AuthorizedAccess = new();
 
     [DataField]
+    public List<EntProtoId> BodyImplants = new();
+
+    [DataField]
     public TimeSpan InjectDelay = TimeSpan.FromSeconds(2);
 
     [DataField]

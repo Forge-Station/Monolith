@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Content.Server._Forge.Access.Components;
 using Content.Server._NF.CryoSleep;
 using Content.Server.Access.Components;
 using Content.Server.Access.Systems;
+using Content.Server.Jobs;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Roles.Jobs;
@@ -10,6 +13,8 @@ using Content.Server.StationRecords.Systems;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Database;
+using Content.Shared.Implants;
+using Content.Shared.Implants.Components;
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
 using Content.Shared.StatusIcon;
@@ -33,6 +38,7 @@ public sealed class JobReassignmentSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly StationRecordsSystem _record = default!;
+    [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
 
     public bool TryResolveJobData(ProtoId<JobPrototype> jobId, out JobReassignmentData data)
     {
@@ -146,12 +152,13 @@ public sealed class JobReassignmentSystem : EntitySystem
         ProtoId<JobPrototype> jobId,
         HashSet<ProtoId<AccessLevelPrototype>>? authorizedTags = null,
         EntityUid? actor = null,
-        bool syncCurrentIdCard = true)
+        bool syncCurrentIdCard = true,
+        IEnumerable<EntProtoId>? extraImplants = null)
     {
         if (!TryResolveJobData(jobId, out var data))
             return false;
 
-        return TryApplyToEntity(target, data, authorizedTags, actor, syncCurrentIdCard);
+        return TryApplyToEntity(target, data, authorizedTags, actor, syncCurrentIdCard, extraImplants);
     }
 
     public bool TryApplyToEntity(
@@ -159,7 +166,8 @@ public sealed class JobReassignmentSystem : EntitySystem
         JobReassignmentData data,
         HashSet<ProtoId<AccessLevelPrototype>>? authorizedTags = null,
         EntityUid? actor = null,
-        bool syncCurrentIdCard = true)
+        bool syncCurrentIdCard = true,
+        IEnumerable<EntProtoId>? extraImplants = null)
     {
         if (!_mind.TryGetMind(target, out var mindId, out var mind))
             return false;
@@ -183,6 +191,8 @@ public sealed class JobReassignmentSystem : EntitySystem
             playerJob.JobPrototype = data.Job.ID;
             Dirty(target, playerJob);
         }
+
+        EnsureJobImplants(target, data.Job, extraImplants);
 
         return true;
     }
@@ -230,5 +240,61 @@ public sealed class JobReassignmentSystem : EntitySystem
         record.DisplayPriority = job.RealDisplayWeight;
 
         _record.Synchronize(key);
+    }
+
+    private void EnsureJobImplants(EntityUid target, JobPrototype job, IEnumerable<EntProtoId>? extraImplants)
+    {
+        var requiredImplants = job.Special
+            .OfType<AddImplantSpecial>()
+            .SelectMany(special => special.Implants)
+            .Where(implantId => !string.IsNullOrWhiteSpace(implantId))
+            .ToHashSet(StringComparer.Ordinal);
+
+        if (extraImplants != null)
+        {
+            foreach (var implantId in extraImplants)
+            {
+                var implantIdString = implantId.ToString();
+                if (!string.IsNullOrWhiteSpace(implantIdString))
+                    requiredImplants.Add(implantIdString);
+            }
+        }
+
+        var existingImplants = new HashSet<string>(StringComparer.Ordinal);
+        var implantsToRemove = new List<EntityUid>();
+
+        if (TryComp<ImplantedComponent>(target, out var implanted))
+        {
+            foreach (var implant in implanted.ImplantContainer.ContainedEntities)
+            {
+                if (MetaData(implant).EntityPrototype?.ID is not { } implantId)
+                    continue;
+
+                existingImplants.Add(implantId);
+
+                if (HasComp<JobReassignmentManagedImplantComponent>(implant)
+                    && !requiredImplants.Contains(implantId))
+                {
+                    implantsToRemove.Add(implant);
+                }
+            }
+        }
+
+        foreach (var implant in implantsToRemove)
+        {
+            _implant.ForceRemove(target, implant);
+        }
+
+        if (requiredImplants.Count == 0)
+            return;
+
+        foreach (var implantId in requiredImplants)
+        {
+            if (existingImplants.Contains(implantId))
+                continue;
+
+            if (_implant.AddImplant(target, implantId) is { } implant)
+                EnsureComp<JobReassignmentManagedImplantComponent>(implant);
+        }
     }
 }

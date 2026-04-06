@@ -199,6 +199,7 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
 
         injectorComp.JobPrototype = jobData.Job.ID;
         injectorComp.AuthorizedAccess = requiredAccess.OrderBy(tag => tag).ToList();
+        injectorComp.BodyImplants = component.BodyImplants.ToList();
         Dirty(injector, injectorComp);
 
         _metaData.SetEntityName(injector,

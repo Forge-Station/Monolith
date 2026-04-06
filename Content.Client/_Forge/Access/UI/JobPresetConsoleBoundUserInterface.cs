@@ -8,11 +8,11 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._Forge.Access.UI;
 
 [UsedImplicitly]
-public sealed class TsfRankConsoleBoundUserInterface : BoundUserInterface
+public sealed class JobPresetConsoleBoundUserInterface : BoundUserInterface
 {
-    private TsfRankConsoleWindow? _window;
+    private JobPresetConsoleWindow? _window;
 
-    public TsfRankConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    public JobPresetConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
 
@@ -30,7 +30,7 @@ public sealed class TsfRankConsoleBoundUserInterface : BoundUserInterface
             rankPresets = new List<ProtoId<JobPrototype>>();
         }
 
-        _window = new TsfRankConsoleWindow(this, rankPresets)
+        _window = new JobPresetConsoleWindow(this, rankPresets)
         {
             Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName,
         };

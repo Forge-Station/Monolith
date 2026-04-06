@@ -16,21 +16,21 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._Forge.Access.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class TsfRankConsoleWindow : DefaultWindow
+public sealed partial class JobPresetConsoleWindow : DefaultWindow
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
 
-    private readonly TsfRankConsoleBoundUserInterface _owner;
+    private readonly JobPresetConsoleBoundUserInterface _owner;
     private readonly Dictionary<ProtoId<JobPrototype>, PresetButtonEntry> _presetButtons = new();
     private readonly SpriteSystem _spriteSystem;
     private readonly ISawmill _sawmill;
 
     private sealed record PresetButtonEntry(JobPresetListItem Button, JobPrototype Job);
 
-    public TsfRankConsoleWindow(
-        TsfRankConsoleBoundUserInterface owner,
+    public JobPresetConsoleWindow(
+        JobPresetConsoleBoundUserInterface owner,
         List<ProtoId<JobPrototype>> rankPresets)
     {
         RobustXamlLoader.Load(this);

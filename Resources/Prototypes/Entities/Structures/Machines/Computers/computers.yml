@@ -130,7 +130,7 @@
   abstract: true
   components:
   - type: ShuttleConsole
-  - type: ShuttleBioScanAccess
+  - type: ShuttleBioScanAccess # Forge-Change - BioScan
     allowedClasses:
     - Medical
     allowedCompanies:
@@ -143,8 +143,8 @@
     - Chimera
     threatFactions:
     - Chimera
-    threatEntityPrototypes:
-    - MobCorticalBorer
+#    threatEntityPrototypes:
+#    - MobCorticalBorer
   - type: TargetSeekingTarget # Mono
   - type: ShipNpcTarget # Mono
     needPower: true

@@ -28,7 +28,7 @@
   - type: UserInterface
     interfaces:
       enum.JobPresetIdCardConsoleUiKey.Key:
-        type: TsfRankConsoleBoundUserInterface
+        type: JobPresetConsoleBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: PointLight

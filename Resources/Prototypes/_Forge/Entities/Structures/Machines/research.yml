@@ -27,5 +27,5 @@
     - state: server_o
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: ResearchPointSource
-    pointspersecond: 1
+    pointsPerSecond: 1
     active: true

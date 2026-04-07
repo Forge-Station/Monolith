@@ -10,7 +10,7 @@
       role: JobTsfRecruit
       time: 18000
   startingGear: TsfCrewOfficerGear
-  icon: JobIconTsfCrewOfficer
+  icon: JobIconTsfOfficerCrew
   supervisors: job-supervisors-tsf-officers
   weight: 130
   displayWeight: 42

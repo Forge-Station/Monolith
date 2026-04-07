@@ -214,7 +214,7 @@
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconTsfCrew
+  id: JobIconTsfOfficerCrew
   icon:
     sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: tsf_crewofficer

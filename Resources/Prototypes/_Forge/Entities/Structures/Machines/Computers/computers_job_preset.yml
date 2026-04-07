@@ -61,11 +61,15 @@
     - TsfCommandingOfficer
     - TsfSeniorOfficer
     - TsfExecutiveOfficer
-    - TsfSeniorAide
     - TsfAmbassador
+    - TsfSeniorAide
+    - TsfCrewOfficer
+    - TsfSl
+    - TsfMedic
+    - TsfEngineer
+    - TsfCrew
     - TsfRanger
     - TsfRecruit
-    - TsfEngineer
   - type: Sprite
     sprite: Structures/Machines/computers.rsi
     layers:

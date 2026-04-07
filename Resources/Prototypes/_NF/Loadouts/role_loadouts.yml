@@ -219,13 +219,13 @@
 #  - ContractorShoes
 #  - ContractorFace
 #  - ContractorGlasses
-#  - ContractorBelt
-  - MonoSecurityGuardHud
+  - ContractorBelt # Forge
+  - StationRepGlasses
   - StationRepEars
   - MonoSecurityGuardShoes
-  - HeadofSecurityHead
-  - HeadofSecurityJumpsuit
-  - HeadofSecurityNeck
+  - StationRepHead # Forge
+  - StationRepJumpsuit # Forge
+  - StationRepNeck # Forge
   - ColonialLiaisonFirearm # Mono
   - ContractorBoxSurvival
   - StationRepPDA

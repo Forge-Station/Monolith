@@ -1,10 +1,8 @@
 using Content.Server._NF.Bank;
+using Content.Server._NF.CryoSleep;
 using Content.Server.Mind;
+using Content.Server.Roles.Jobs;
 using Content.Shared._NF.Bank.Components;
-using Content.Shared.Access.Components;
-using Content.Shared.GameTicking;
-using Content.Shared.Inventory;
-using Content.Shared.PDA;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Server.Popups;
@@ -12,36 +10,50 @@ using Robust.Shared.Prototypes;
 using Robust.Server.Player;
 using Content.Shared.Roles;
 using Robust.Shared.Timing;
-using Content.Server.Access.Components;
 
 namespace Content.Server._Forge.AutoSalarySystem;
 
 public sealed class AutoSalarySystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
-    [Dependency] private readonly InventorySystem _inv = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly BankSystem _bank = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    public override void Initialize()
-    {
-        SubscribeLocalEvent<BankAccountComponent, PlayerSpawnCompleteEvent>(OnPlayerSpawned);
-    }
-
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<AutoSalaryComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        var query = EntityQueryEnumerator<BankAccountComponent>();
+        while (query.MoveNext(out var uid, out _))
         {
-            if (!TryGetIdCard(uid, out var id) || id == null)
-                continue;
+            if (!TryGetCurrentJob(uid, out var job)
+                || job.Salary <= 0)
+            {
+                if (HasComp<AutoSalaryComponent>(uid))
+                    RemCompDeferred<AutoSalaryComponent>(uid);
 
-            if (!_proto.TryIndex(id.JobPrototype, out var job))
                 continue;
+            }
+
+            if (!TryComp<AutoSalaryComponent>(uid, out var comp))
+            {
+                comp = EnsureComp<AutoSalaryComponent>(uid);
+                comp.LastSalaryAt = _timing.CurTime;
+                comp.JobPrototype = job.ID;
+                Dirty(uid, comp);
+                continue;
+            }
+
+            if (comp.JobPrototype != job.ID)
+            {
+                comp.LastSalaryAt = _timing.CurTime;
+                comp.JobPrototype = job.ID;
+                Dirty(uid, comp);
+                continue;
+            }
 
             if (comp.LastSalaryAt + job.SalaryInterval > _timing.CurTime)
                 continue;
@@ -50,22 +62,8 @@ public sealed class AutoSalarySystem : EntitySystem
                 TryPaySalary(uid, job.Salary);
 
             comp.LastSalaryAt = _timing.CurTime;
+            Dirty(uid, comp);
         }
-    }
-
-    private void OnPlayerSpawned(EntityUid uid, BankAccountComponent _, PlayerSpawnCompleteEvent ev)
-    {
-        if (ev.JobId == null)
-            return;
-
-        if (!_proto.TryIndex<JobPrototype>(ev.JobId, out var job))
-            return;
-
-        if (job.Salary <= 0)
-            return;
-
-        var comp = EnsureComp<AutoSalaryComponent>(uid);
-        comp.LastSalaryAt = _timing.CurTime; // just not to pay salary just when player spawned
     }
 
     private bool HasActivePlayer(EntityUid body)
@@ -101,26 +99,30 @@ public sealed class AutoSalarySystem : EntitySystem
         }
     }
 
-    private bool TryGetIdCard(EntityUid body, out IdCardComponent? id)
+    private bool TryGetCurrentJob(EntityUid body, out JobPrototype job)
     {
-        id = null;
+        job = default!;
+        ProtoId<JobPrototype>? jobId = null;
 
-        var enumerator = _inv.GetHandOrInventoryEntities(body);
-        foreach (var ent in enumerator)
+        if (_mindSystem.TryGetMind(body, out var mindId, out _)
+            && _jobs.MindTryGetJobId(mindId, out var currentMindJobId)
+            && !string.IsNullOrWhiteSpace(currentMindJobId))
         {
-            if (!TryComp<PdaComponent>(ent, out var pda))
-                continue;
-
-            if (pda.ContainedId != null)
-            {
-                if (HasComp<AgentIDCardComponent>(pda.ContainedId))
-                    return false;
-
-                if (TryComp(pda.ContainedId, out id))
-                    return true;
-            }
+            jobId = currentMindJobId;
+        }
+        else if (TryComp<PlayerJobComponent>(body, out var playerJob)
+                 && !string.IsNullOrWhiteSpace(playerJob.JobPrototype))
+        {
+            jobId = playerJob.JobPrototype;
         }
 
+        if (jobId is not { } resolvedJobId
+            || !_proto.TryIndex(resolvedJobId, out JobPrototype? resolvedJob))
+        {
+            return false;
+        }
+
+        job = resolvedJob;
         return true;
     }
 }

@@ -15819,6 +15819,9 @@ entities:
     - type: Transform
       pos: 0.5,42.5
       parent: 1
+    - type: Tag
+      tags:
+      - BioScanWhitelist
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery

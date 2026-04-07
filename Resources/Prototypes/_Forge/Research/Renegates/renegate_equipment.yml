@@ -1,0 +1,45 @@
+- type: technology
+  id: RogueRenegateEquipmentT1
+  name: research-technology-rogue-renegate-equipment-t1
+  entityIcon: ClothingOuterHardsuitRenegatebsii20
+  discipline: RenegateEquipment
+  tier: 1
+  cost: 35000
+  recipeUnlocks:
+  - ClothingOuterHardsuitRenegatebsii20Rogue
+  - ClothingOuterHardsuitRenegatebsii30Rogue
+  - ClothingOuterArmorRenegatesRogue
+  - ClothingHeadHelmetRenegateRogue
+  - ClothingShoesBootsMagRenegadeRogue
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 11, 1
+
+- type: technology
+  id: RogueRenegateEquipmentT2
+  name: research-technology-rogue-renegate-equipment-t2
+  entityIcon: ClothingOuterHardsuitRenegatecriii200
+  discipline: RenegateEquipment
+  tier: 2
+  cost: 75000
+  recipeUnlocks:
+  - ClothingOuterHardsuitRenegatecriii200Rogue
+  technologyPrerequisites:
+  - RogueRenegateEquipmentT1
+  - UniversalMaterialResearchT2
+  position: 11, 6
+
+- type: technology
+  id: RogueRenegateEquipmentT3
+  name: research-technology-rogue-renegate-equipment-t3
+  entityIcon: ClothingOuterHardsuitRenegateoiii18
+  discipline: RenegateEquipment
+  tier: 3
+  cost: 185000
+  recipeUnlocks:
+  - ClothingOuterHardsuitRenegateoiii18Rogue
+  - ClothingOuterHardsuitRenegateyiv3020Rogue
+  technologyPrerequisites:
+  - RogueRenegateEquipmentT2
+  - UniversalMaterialResearchT3
+  position: 11, 11

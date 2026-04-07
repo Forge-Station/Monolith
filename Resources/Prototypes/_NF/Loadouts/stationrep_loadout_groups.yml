@@ -5,6 +5,8 @@
   name: loadout-group-contractor-outerclothing
   minLimit: 0
   loadouts:
+  - StationRepClothingOuterArmorSrCarapace # Forge
+  - StationRepClothingOuterJacketSr # Forge
   - StationRepClothingOuterHardsuitSecurityRed
   subgroups:
   - HeadofSecurityOuterClothing
@@ -14,6 +16,7 @@
   name: loadout-group-contractor-backpack
   loadouts:
   - StationRepClothingModsuitHeadOfSecurityPowerCell
+  - StationRepClothingBackpackMessengerSr # Forge
   subgroups:
   - SecurityBackpack
 
@@ -37,6 +40,8 @@
   minLimit: 0
   loadouts:
   - StationRepClothingHandsGlovesCombat # Mono
+  subgroups:
+  - ContractorGloves # Forge
 
 - type: loadoutGroup
   id: StationRepPDA
@@ -56,3 +61,47 @@
   - StationRepNFPouchSr
   subgroups:
   - ContractorTrinkets
+
+# All Forge
+- type: loadoutGroup
+  id: StationRepNeck
+  name: loadout-group-contractor-neck
+  minLimit: 0
+  loadouts:
+  - StationRepClothingNeckCloakSr
+  - StationRepClothingNeckMantleSr
+  - StationRepClothingNeckCloakHos
+  - StationRepClothingNeckMantleHOS
+
+- type: loadoutGroup
+  id: StationRepHead
+  name: loadout-group-contractor-head
+  minLimit: 0
+  loadouts:
+  - StationRepClothingHeadHatSrCap
+  - StationRepClothingHeadHatSrBeret
+  - HeadofSecurityHead
+  - HeadofSecurityBeret
+
+- type: loadoutGroup
+  id: StationRepJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  loadouts:
+  - StationRepClothingUniformJumpsuitSr
+  - StationRepClothingUniformJumpskirtSr
+  - StationRepClothingUniformJumpsuitMilitarySr
+  - HeadofSecurityJumpsuit
+  - HeadofSecurityJumpskirt
+  - HeadofSecurityTurtleneck
+  - HeadofSecurityTurtleneckSkirt
+  - HeadofSecurityFormalSuit
+  - HeadofSecurityFormalSkirt
+
+- type: loadoutGroup
+  id: StationRepGlasses
+  name: loadout-group-contractor-glasses
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - StationRepEyes
+  fallbacks:
+  - StationRepEyes

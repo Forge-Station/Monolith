@@ -121,7 +121,7 @@
 [color=#a4885c]Летун[/color]: существо левитирует над землей и может преодолевать низкие препятствия, такие как столы, каркасы машин или перила, не блокируясь и не замедляясь.
 
 <Box>
-<GuideEntityEmbed Entity="NFMobDragonDungeon"/>
+<GuideEntityEmbed Entity="MobDragonDungeon"/>
 </Box>
 - [bold][color=#a4885c]Пороги здоровья:[/color][/bold] 200 (смерть)
 - [bold][color=#a4885c]Скорость бега:[/color][/bold] 5 м/с
@@ -134,7 +134,7 @@
 # Цели миссий
 ## Уничтожение
 <Box>
-<GuideEntityEmbed Entity="NFMobDragonDungeon"/>
+<GuideEntityEmbed Entity="MobDragonDungeon"/>
 </Box>
 Уничтожить крупное и опасное существо — [color=#a4885c]космического дракона[/color] в установленные временные рамки, чтобы получить денежное вознаграждение.
 

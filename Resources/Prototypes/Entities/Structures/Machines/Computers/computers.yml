@@ -130,6 +130,21 @@
   abstract: true
   components:
   - type: ShuttleConsole
+  - type: ShuttleBioScanAccess # Forge-Change - BioScan
+    allowedClasses:
+    - Medical
+    allowedCompanies:
+    - AetherionDynamics
+    allowedSpecies:
+    - Asakim
+    allowedTags:
+    - BioScanWhitelist
+    threatTags:
+    - Chimera
+    threatFactions:
+    - Chimera
+#    threatEntityPrototypes:
+#    - MobCorticalBorer
   - type: TargetSeekingTarget # Mono
   - type: ShipNpcTarget # Mono
     needPower: true

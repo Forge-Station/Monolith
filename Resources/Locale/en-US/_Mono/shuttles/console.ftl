@@ -1,2 +1,15 @@
 shuttle-console-autopilot-button = Autopilot
 shuttle-console-autopilot-popup-done = Autopilot Arrived
+shuttle-console-bioscan-button = Scan
+shuttle-console-bioscan-status-None = Bio-threat scan idle
+shuttle-console-bioscan-status-InProgress = Scanning in progress
+shuttle-console-bioscan-status-Clean = Scan complete: no biological threat
+shuttle-console-bioscan-status-ThreatDetected = Scan complete: biological threat detected
+shuttle-console-bioscan-status-InvalidTarget = Scan failed: invalid target
+shuttle-console-bioscan-status-TargetTooFar = Scan failed: target is beyond 300m
+shuttle-console-bioscan-status-TargetMoving = Scan failed: target is moving
+shuttle-console-bioscan-status-NoAccess = Scan unavailable on this shuttle
+shuttle-console-bioscan-complete-clean = Bio-threat scan complete: shuttle presents no biological threat.
+shuttle-console-bioscan-complete-threat = Bio-threat scan complete: biological threat detected.
+shuttle-console-bioscan-radio-warning = Warning to all units: shuttle {$shuttle} contains biological threats. Do not approach without proper preparation.
+shuttle-console-bioscan-infected-prefix = (infected)

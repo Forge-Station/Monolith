@@ -1,0 +1,42 @@
+- type: job
+  id: TsfSl
+  name: job-name-tsf-sl
+  description: job-description-tsf-sl
+  playTimeTracker: JobTsfsl
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 72000
+    - !type:RoleTimeRequirement
+      role: JobTsfRecruit
+      time: 18000
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: TsfSlGear
+  icon: JobIconTsfSl
+  supervisors: job-supervisors-tsf-officers
+  weight: 130
+  displayWeight: 41
+  assignedCompany: TSF
+  canBeAntag: false
+ # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
+  accessGroups:
+  - TsfGeneralAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - TSFMC
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, TrackingImplant ]
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - SolCommon
+    languagesUnderstood:
+    - SolCommon
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: TsfSlGear

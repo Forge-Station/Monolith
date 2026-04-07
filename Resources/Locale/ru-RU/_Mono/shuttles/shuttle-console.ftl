@@ -1,1 +1,16 @@
 shuttle-console-crewed = Вы не сможете использовать консоль управления и консоль орудий виесте на этом шаттле.. Найдите ещё одного!
+shuttle-console-autopilot-button = Автопилот
+shuttle-console-autopilot-popup-done = Автопилот прибыл
+shuttle-console-bioscan-button = Сканировать на наличии биоугрозы
+shuttle-console-bioscan-status-None = Биоскан: ожидание
+shuttle-console-bioscan-status-InProgress = Биоскан: в процессе
+shuttle-console-bioscan-status-Clean = Биоскан: чисто
+shuttle-console-bioscan-status-ThreatDetected = Биоскан: угроза
+shuttle-console-bioscan-status-InvalidTarget = Биоскан: неверная цель
+shuttle-console-bioscan-status-TargetTooFar = Биоскан: цель далеко
+shuttle-console-bioscan-status-TargetMoving = Биоскан: цель движется
+shuttle-console-bioscan-status-NoAccess = Биоскан: недоступно
+shuttle-console-bioscan-complete-clean = Сканирование биоугроз завершено: шаттл не представляет биологической угрозы.
+shuttle-console-bioscan-complete-threat = Сканирование биоугроз завершено: обнаружена биологическая угроза.
+shuttle-console-bioscan-radio-warning = Внимание всем: шаттл {$shuttle} содержит биоугрозу. Не приближайтесь без соответствующей подготовки.
+shuttle-console-bioscan-infected-prefix = (заражён)

@@ -43,4 +43,8 @@
   - TsfAmbassador
   - TsfRanger
   - TsfRecruit
-  # - TsfEngineer
+  - TsfEngineer
+  - TsfMedic
+  - TsfSl
+  - TsfCrew
+  - TsfCrewOfficer

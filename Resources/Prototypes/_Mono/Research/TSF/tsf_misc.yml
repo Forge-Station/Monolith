@@ -49,7 +49,7 @@
   - ClothingHandsGlovesMoppTsf
   technologyPrerequisites:
   - TsfmcAdvancedEquipment
-  position: 13, 6
+  position: 13, 5
 
 - type: technology
   id: TsfEshield

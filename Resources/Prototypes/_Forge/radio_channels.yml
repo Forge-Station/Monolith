@@ -36,7 +36,7 @@
 - type: radioChannel
   id: Empire
   name: chat-radio-imperial
-  keycode: 'й'
+  keycode: 'ю'
   frequency: 1246
   color: "#ab7a52"
 

@@ -4,7 +4,7 @@
   entityIcon: WeaponRifleAR220
   discipline: RenegateWeaponry
   tier: 1
-  cost: 25000
+  cost: 45000
   recipeUnlocks:
   - WeaponRifleAR220Rogue
   - WeaponShotgunSaigakRogue
@@ -19,7 +19,7 @@
   entityIcon: WeaponLmgAR400
   discipline: RenegateWeaponry
   tier: 2
-  cost: 35000
+  cost: 75000
   recipeUnlocks:
   - WeaponLmgAR400Rogue
   - WeaponRifleGaussRifleRogue
@@ -35,7 +35,7 @@
   entityIcon: WeaponHFKatana
   discipline: RenegateWeaponry
   tier: 2
-  cost: 25000
+  cost: 40000
   recipeUnlocks:
   - HFKatanaRogue
   technologyPrerequisites:
@@ -48,7 +48,7 @@
   entityIcon: WeaponLmgType99
   discipline: RenegateWeaponry
   tier: 3
-  cost: 40000
+  cost: 120000
   recipeUnlocks:
   - WeaponLmgType99Rogue
   - Magazinetype99762x51mmFMJ

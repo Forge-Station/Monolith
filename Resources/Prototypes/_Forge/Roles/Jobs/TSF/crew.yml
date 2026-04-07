@@ -9,6 +9,8 @@
     - !type:RoleTimeRequirement
       role: JobTsfRecruit
       time: 18000
+  setPreference: false
+  overrideConsoleVisibility: true
   startingGear: TsfCrewGear
   icon: JobIconTsfCrew
   supervisors: job-supervisors-tsf-officers

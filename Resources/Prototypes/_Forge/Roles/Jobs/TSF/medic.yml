@@ -9,6 +9,8 @@
     - !type:RoleTimeRequirement
       role: JobTsfRecruit
       time: 18000
+  setPreference: false
+  overrideConsoleVisibility: true
   startingGear: TsfMedicGear
   icon: JobIconBrigmedicNF
   supervisors: job-supervisors-tsf-officers

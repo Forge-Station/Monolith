@@ -34,7 +34,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: Phantom
+      name: seeker
     - type: Transform
       pos: 0.671875,1.328125
       parent: invalid
@@ -1188,7 +1188,7 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: BecomesStation
-      id: phantom
+      id: seeker
     - type: ShipGridLock
       locked: False
 - proto: AirAlarm

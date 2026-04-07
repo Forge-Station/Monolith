@@ -1,28 +1,28 @@
 - type: vessel
-  id: phantom
+  id: seeker
   parent: BaseVessel
-  name: 'MIL Фантом'
+  name: 'MIL Искатель'
   description: Тяжеловооруженный шаттл наемников для исследований в экстремальных боевых условиях
   price: 185000
   category: Medium
   group: Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/Phantom.yml
+  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/seeker.yml
   guidebookPage: Null
   class:
   - Fighter
 
 - type: gameMap
-  id: phantom
+  id: seeker
   mapName: 'MIL Фантом'
-  mapPath: /Maps/_Forge/Shuttles/Mercenary/Phantom.yml
+  mapPath: /Maps/_Forge/Shuttles/Mercenary/seeker.yml
   minPlayers: 0
   stations:
     dreadnought:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'MIL Фантом{1}'
+          mapNameTemplate: 'MIL Искатель{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

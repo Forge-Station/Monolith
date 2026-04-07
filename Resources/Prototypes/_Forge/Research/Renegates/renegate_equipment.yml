@@ -13,7 +13,7 @@
   - ClothingShoesBootsMagRenegadeRogue
   technologyPrerequisites:
   - UniversalMaterialResearchT1
-  position: 12, 1
+  position: 11, 1
 
 - type: technology
   id: RogueRenegateEquipmentT2
@@ -27,7 +27,7 @@
   technologyPrerequisites:
   - RogueRenegateEquipmentT1
   - UniversalMaterialResearchT2
-  position: 12, 6
+  position: 11, 6
 
 - type: technology
   id: RogueRenegateEquipmentT3
@@ -42,4 +42,4 @@
   technologyPrerequisites:
   - RogueRenegateEquipmentT2
   - UniversalMaterialResearchT3
-  position: 12, 11
+  position: 11, 11

@@ -1,0 +1,49 @@
+- type: job
+  id: TsfCrewOfficer
+  name: job-name-tsf-crewofficer
+  description: job-description-tsf-crewofficer
+  playTimeTracker: JobTsfCrewOfficer
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 72000
+    - !type:RoleTimeRequirement
+      role: JobTsfRecruit
+      time: 18000
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: TsfCrewOfficerGear
+  icon: JobIconTsfOfficerCrew
+  supervisors: job-supervisors-tsf-officers
+  weight: 130
+  displayWeight: 42
+  assignedCompany: TSF
+  canBeAntag: false
+ # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
+  access:
+  - Armory
+  - Sergeant
+  - Bailiff
+  - Medical
+  - Chemistry
+  - TsfmcEngineering
+  accessGroups:
+  - TsfGeneralAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - TSFMC
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, TrackingImplant ]
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - SolCommon
+    languagesUnderstood:
+    - SolCommon
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: TsfCrewOfficerGear

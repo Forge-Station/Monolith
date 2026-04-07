@@ -196,6 +196,30 @@
     state: nfsdcadet
   jobName: job-name-tsf-recruit
 
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconTsfSl
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: tsf_sl
+  jobName: job-name-tsf-sl
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconTsfCrew
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: tsf_crew
+  jobName: job-name-tsf-crew
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconTsfOfficerCrew
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: tsf_crewofficer
+  jobName: job-name-tsf-crewofficer
+
 # region NanoTrasen
 
 - type: jobIcon

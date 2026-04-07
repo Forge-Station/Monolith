@@ -114,6 +114,15 @@
             "name": "tsf_mp"
         },
         {
+            "name": "tsf_sl"
+        },
+        {
+            "name": "tsf_crew"
+        },
+        {
+            "name": "tsf_crewofficer"
+        },
+        {
             "name": "nt_rep"
         },
         {

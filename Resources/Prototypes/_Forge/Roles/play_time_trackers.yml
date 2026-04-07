@@ -65,6 +65,18 @@
 - type: playTimeTracker
   id: JobTsfAmbassador
 
+- type: playTimeTracker
+  id: JobTsfMedic
+
+- type: playTimeTracker
+  id: JobTsfsl
+
+- type: playTimeTracker
+  id: JobTsfCrew
+
+- type: playTimeTracker
+  id: JobTsfCrewOfficer
+
 # region NanoTrasen
 - type: playTimeTracker
   id: NtMedic

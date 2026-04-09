@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Client._Mono.Company;
+
 // Forge-Change-delete
 // using Content.Client._Mono.MonoCoins;
 using Content.Client.Guidebook;
@@ -43,6 +45,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [Dependency] private readonly IStateManager _stateManager = default!;
     [Dependency] private readonly JobRequirementsManager _requirements = default!;
     [Dependency] private readonly MarkingManager _markings = default!;
+    [Dependency] private readonly CompanyManager _companyManager = default!; // Mono
     [UISystemDependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [UISystemDependency] private readonly ClientInventorySystem _inventory = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
@@ -353,7 +356,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             _prototypeManager,
             _resourceCache,
             _requirements,
-            _markings);
+            _markings,
+            _companyManager); // Mono
 
         _profileEditor.OnOpenGuidebook += _guide.OpenHelp;
 

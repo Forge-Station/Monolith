@@ -52,6 +52,11 @@ language-Tradeband-description =
     Descended from latin and romance languages of old Earth - Tradeband remains the main tongue of the upper class of humanity.
     The language sounds elegant and well structured to most ears. It remains in popular use with traders - diplomats - and those seeking to hold onto a piece of a romantic past.
 
+language-Ilasir-name = Ilasir
+language-Ilasir-description =
+    A melodic Ariral language full of purrs, trills, and softened consonants.
+    To outsiders it sounds playful and flowing, but native speakers can pack a surprising amount of nuance into even the shortest phrase.
+
 language-Freespeak-name = Asher
 language-Freespeak-description =
     A rarely heard language outside of the colossus sector, developed over time through isolation from the main systems and lost colonies abandoned to die on this edge of civilized space.

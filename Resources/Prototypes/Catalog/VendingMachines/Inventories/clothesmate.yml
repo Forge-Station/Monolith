@@ -21,6 +21,16 @@
     ClothingSkirtUniformRandomBra: 6 # Frontier
     ClothingSkirtUniformRandomShorts: 6 # Frontier
     ClothingSkirtUniformRandomShirt: 6 # Frontier
+    ClothingShoesHeelsBlack: 2 # Forge-Change wega heels
+    ClothingShoesHeelsGray: 2 # Forge-Change wega heels
+    ClothingShoesHeelsBlue: 2 # Forge-Change wega heels
+    ClothingShoesHeelsGreen: 2 # Forge-Change wega heels
+    ClothingShoesHeelsTurquoise: 2 # Forge-Change wega heels
+    ClothingShoesHeelsPink: 2 # Forge-Change wega heels
+    ClothingShoesHeelsPurple: 2 # Forge-Change wega heels
+    ClothingShoesHeelsRed: 2 # Forge-Change wega heels
+    ClothingShoesHeelsOrange: 2 # Forge-Change wega heels
+    ClothingShoesHeelsYellow: 2 # Forge-Change wega heels
     # ClothingHeadHatBeret: 4
     # ClothingHeadBandBlack: 2
     # ClothingHeadBandBlue: 2

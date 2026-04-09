@@ -19,7 +19,6 @@
 
 - type: company
   id: PDV
-  form: Antagonist
   name: PDV
   color: "#D2B48C"
   whitelisted: true
@@ -43,7 +42,6 @@
 
 - type: company
   id: TSFHighComm
-  form: Protagonist
   name: Winter Solstice
   description: winter-solstice-description
   color: "#008CE3"
@@ -76,7 +74,6 @@
 
 - type: company
   id: DrakeIndustries
-  form: Protagonist
   name: Drake Industries
   description: drake-industries-description
   color: "#C97D7D"
@@ -87,7 +84,6 @@
 
 - type: company
   id: SteelHammerManufacturing
-  form: Protagonist
   name: Steel Hammer Manufacturing
   description: steel-hammer-description
   color: "#92a2a1"
@@ -98,7 +94,6 @@
 
 - type: company
   id: HarmonyMedicalEnterprises
-  form: Protagonist
   name: Harmony Medical Enterprises
   description: harmony-medical-enterprises-description
   color: "#FC7303"
@@ -107,7 +102,6 @@
 
 - type: company
   id: MidnightArmsCo
-  form: Protagonist
   name: Midnight Arms Co.
   description: midnight-arms-co-description
   color: "#FF2E2E"
@@ -144,7 +138,6 @@
 
 - type: company
   id: DarkMatterEnterprises
-  form: Protagonist
   name: Dark Matter Enterprises
   description: dark-matter-enterprises-description
   color: "#BF00B9"
@@ -153,7 +146,6 @@
 
 - type: company
   id: AetherionDynamics
-  form: Protagonist
   name: Aetherion Dynamics
   description: aetherion-dynamics-description
   color: "#7E72B2"
@@ -161,7 +153,6 @@
 
 - type: company
   id: HorizonEnergy
-  form: Protagonist
   name: Horizon Energy
   description: horizon-energy-description
   color: "#69E37F"
@@ -173,7 +164,6 @@
 
 - type: company
   id: UniversalStatesOfAmerica
-  form: Protagonist
   name: Universal States of America
   description: universal-states-of-america-description
   color: "#0A3161"
@@ -187,7 +177,6 @@
 
 - type: company
   id: CivilDefenseMilita
-  form: Protagonist
   name: Civil Defense Militia
   description: civil-defense-milita-description
   color: "#666600"
@@ -196,7 +185,6 @@
 
 - type: company
   id: UllmanIndustries
-  form: Protagonist
   name: Ullman Industries
   description: ullman-industries-description
   color: "#52326A"
@@ -216,7 +204,6 @@
 
 - type: company
   id: NosskeEienResearchandDevelopment
-  form: Protagonist
   name: Nosske-Eien Research and Development
   description: nosske-eien-rnd-description
   color: "#9573AF"
@@ -225,7 +212,6 @@
 
 - type: company
   id: blackhawkpmc
-  form: Protagonist
   name: Blackhawk Military Contracting
   description: blackhawkpmc-description
   color: "#419E23"
@@ -241,14 +227,12 @@
 
 #- type: company
 #  id: ZealotsOfBalaam
-#  form: Protagonist
 #  name: Zealots Of Balaam
 #  description: zealots-of-balaam-description
 #  color: "#BC7F58"
 
 #- type: company
 #  id: CultOfTheMachineGod
-#  form: Protagonist
 #  name: Cult of the Machine God
 #  description: cult-of-the-machine-god-description
 #  color: "#DEBC50"
@@ -274,7 +258,6 @@
 
 - type: company
   id: paycheckbratva
-  form: Antagonist
   name: Paycheck Bratva
   description: paycheck-bratva-description
   color: "#971f47"
@@ -288,7 +271,6 @@
 
 - type: company
   id: CerberusSurplusProvisions
-  form: Antagonist
   name: Cerberus Surplus Provisionaries
   description: cerberus-surplus-provisions
   color: "#aa1010"
@@ -309,7 +291,6 @@
 
 - type: company
   id: TheViperGroup
-  form: Antagonist
   name: Viper Group
   description: viper-group-description
   color: "#B82121"

@@ -2,7 +2,7 @@
   parent: ClothingDuffelContractorForge
   id: ClothingDuffelContractorForgeEVA
   name: вещмешок DCN™
-  description: Большой вещмешок для хранения предтательских предметов. Выглядит стильно и оригинально.
+  description: Большой вещмешок для хранения предательских предметов. Выглядит стильно и оригинально.
   suffix: Заполненный, ВКД
   components:
   - type: StorageFill
@@ -18,7 +18,7 @@
   parent: ClothingDuffelContractorForge
   id: ClothingDuffelContractorForgeStealh
   name: вещмешок DCN™
-  description: Большой вещмешок для хранения предтательских предметов. Выглядит стильно и оригинально.
+  description: Большой вещмешок для хранения предательских предметов. Выглядит стильно и оригинально.
   suffix: Заполненный, Стелс костюм
   components:
   - type: StorageFill
@@ -34,7 +34,7 @@
   parent: ClothingDuffelContractorForge
   id: ClothingDuffelContractorForgeCombat
   name: вещмешок DCN™
-  description: Большой вещмешок для хранения предтательских предметов. Выглядит стильно и оригинально.
+  description: Большой вещмешок для хранения предательских предметов. Выглядит стильно и оригинально.
   suffix: Заполненный, Боевой скафандр
   components:
   - type: StorageFill
@@ -49,7 +49,7 @@
   parent: ClothingDuffelContractorForge
   id: ClothingDuffelContractorForgeC4Bundle
   name: вещмешок DCN™
-  description: Большой вещмешок для хранения предтательских предметов. Выглядит стильно и оригинально.
+  description: Большой вещмешок для хранения предательских предметов. Выглядит стильно и оригинально.
   suffix: "Заполненный, C4"
   components:
     - type: StorageFill
@@ -61,7 +61,7 @@
   parent: ClothingDuffelContractorForge
   id: ClothingDuffelContractorForgeAmmoFilled
   name: вещмешок DCN™
-  description: Большой вещмешок для хранения предтательских предметов. Выглядит стильно и оригинально.
+  description: Большой вещмешок для хранения предательских предметов. Выглядит стильно и оригинально.
   suffix: "Заполненный, Набор боеприпасов"
   components:
   - type: StorageFill
@@ -74,3 +74,18 @@
         amount: 4
       - id: ForgeMagazineRifle20Overpressure
         amount: 4
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelWitchBundle
+  name: duffel bag
+  description: It looks rumpled, but it smells like flowers.
+  components:
+    - type: StorageFill
+      contents:
+        - id: PlumberClothingHeadHatWitch
+          amount: 1
+        - id: PlumberClothingNeckCloakWhitch
+          amount: 1
+        - id: PlumberClothingOuterWitch
+          amount: 1

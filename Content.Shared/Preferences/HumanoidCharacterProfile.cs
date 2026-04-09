@@ -558,7 +558,15 @@ namespace Content.Shared.Preferences
             if (Company != other.Company) return false;
             if (Voice != other.Voice) return false; // Corvax-TTS
             if (BarkVoice != other.BarkVoice) return false; // Corvax-Frontier-Barks
-            if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
+            // Forge-Change-Start
+            if (_jobPriorities.Count != other._jobPriorities.Count)
+                return false;
+            foreach (var (jobId, priority) in _jobPriorities)
+            {
+                if (!other._jobPriorities.TryGetValue(jobId, out var otherPriority) || otherPriority != priority)
+                    return false;
+            }
+            // Forge-Change-End
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
             if (FlavorText != other.FlavorText) return false;
@@ -572,8 +580,8 @@ namespace Content.Shared.Preferences
             {
                 if (!other.Loadouts.TryGetValue(key, out var otherLoadout))
                     return false;
-
-                if (loadout != otherLoadout)
+                // Forge-Change
+                if (!loadout.Equals(otherLoadout))
                     return false;
             }
 

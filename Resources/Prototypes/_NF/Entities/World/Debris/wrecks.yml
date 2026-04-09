@@ -86,6 +86,9 @@
         # Room
         - id: NFWreckRoomMarker
           prob: 0.01
+        # Other Forge-Change
+        - id: SchoolgirlUniformSpawner
+          prob: 0.23
       Plating: *floor
       Lattice:
         - prob: 1 # Intentional blank.

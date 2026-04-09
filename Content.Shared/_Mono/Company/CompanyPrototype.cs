@@ -21,8 +21,8 @@ public sealed partial class CompanyPrototype : IPrototype
     /// Assign "Protagonist"
     /// Assign "Antagonist"
     /// </summary>
-    [DataField(required: true)]
-    public string Form { get; private set; } = default!;
+    [DataField]
+    public string Form { get; private set; } = "Neutral";
 
 
     /// <summary>

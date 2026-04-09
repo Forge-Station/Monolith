@@ -43,13 +43,13 @@
   - type: Computer
     board: Null
 
-# Concrete consoles
+#Concrete consoles
 - type: entity
   parent: ComputerShipyardBase
   id: ComputerShipyard
   components:
   - type: ShipyardConsole
-    newJobTitle: Captain
+#    newJobTitle: Captain
 
 - type: entity
   id: ComputerShipyardSecurity

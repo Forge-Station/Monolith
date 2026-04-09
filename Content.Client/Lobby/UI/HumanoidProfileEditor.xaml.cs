@@ -37,7 +37,8 @@ using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
-using Content.Shared._EE.Contractors.Prototypes; // Forge-change: take _EE nationality
+using Content.Shared._EE.Contractors.Prototypes;
+using Content.Client._Mono.Company; // Forge-change: take _EE nationality
 
 namespace Content.Client.Lobby.UI
 {
@@ -55,6 +56,7 @@ namespace Content.Client.Lobby.UI
         private readonly JobRequirementsManager _requirements;
         private readonly LobbyUIController _controller;
         private readonly EntityWhitelistSystem _whitelist; // Frontier
+        private readonly CompanyManager _companyManager; // Mono
 
         private FlavorText.FlavorText? _flavorText;
         private TextEdit? _flavorTextEdit;
@@ -145,6 +147,15 @@ namespace Content.Client.Lobby.UI
 
         private bool _isDirty;
 
+        /// <summary>
+        /// Forge-Change
+        /// Инста снимок персонажа
+        /// Изменённое состояние тперь сравнивается с этим, а не с "IClientPreferencesManager.Preferences"
+        /// </summary>
+        private HumanoidCharacterProfile? _dirtyCompareBaseline;
+
+        private bool _profileEditorInitializing;
+
         [ValidatePrototypeId<GuideEntryPrototype>]
         private const string DefaultSpeciesGuidebook = "Species";
 
@@ -162,7 +173,8 @@ namespace Content.Client.Lobby.UI
             IPrototypeManager prototypeManager,
             IResourceManager resManager,
             JobRequirementsManager requirements,
-            MarkingManager markings)
+            MarkingManager markings,
+            CompanyManager manager) // Mono
         {
             RobustXamlLoader.Load(this);
             _sawmill = logManager.GetSawmill("profile.editor");
@@ -173,6 +185,7 @@ namespace Content.Client.Lobby.UI
             _prototypeManager = prototypeManager;
             _markingManager = markings;
             _preferencesManager = preferencesManager;
+            _companyManager = manager; // Mono
             _resManager = resManager;
             _requirements = requirements;
             _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
@@ -316,8 +329,9 @@ namespace Content.Client.Lobby.UI
             {
                 if (Profile is null)
                     return;
+                var hairColorList = new List<Robust.Shared.Maths.Color>(newColor.marking.MarkingColors); // Forge-Change Corvax-Wega-Hair-Extended
                 Profile = Profile.WithCharacterAppearance(
-                    Profile.Appearance.WithHairColor(newColor.marking.MarkingColors[0]));
+                    Profile.Appearance.WithHairColor(hairColorList));// Forge-Change Corvax-Wega-Hair-Extended
                 UpdateCMarkingsHair();
                 ReloadPreview();
             };
@@ -1145,31 +1159,27 @@ namespace Content.Client.Lobby.UI
 
         private void SetDirty()
         {
-            // If profile is null, we can't be dirty
             if (Profile == null)
             {
                 IsDirty = false;
                 return;
             }
 
-            // If we have no selected character to compare against, we're dirty
-            if (_preferencesManager.Preferences?.SelectedCharacter == null)
+            if (_profileEditorInitializing)
+                return;
+
+            if (_dirtyCompareBaseline != null)
+            {
+                IsDirty = !Profile.MemberwiseEquals(_dirtyCompareBaseline);
+                return;
+            }
+
+            if (_preferencesManager.Preferences?.SelectedCharacter is not HumanoidCharacterProfile selectedCharacter)
             {
                 IsDirty = true;
                 return;
             }
 
-            // Get the selected character for comparison
-            var selectedCharacter = (HumanoidCharacterProfile)_preferencesManager.Preferences.SelectedCharacter;
-
-            // Check explicitly if company changed
-            if (selectedCharacter.Company != Profile.Company)
-            {
-                IsDirty = true;
-                return;
-            }
-
-            // Check if entire profile matches
             IsDirty = !selectedCharacter.MemberwiseEquals(Profile);
         }
 
@@ -1213,60 +1223,69 @@ namespace Content.Client.Lobby.UI
                 _preferencesManager.Preferences?.SelectedCharacterIndex);
         }
 
-        /// <summary>
-        /// Sets the editor to the specified profile with the specified slot.
-        /// </summary>
+        // Forge-Change-Start
         public void SetProfile(HumanoidCharacterProfile? profile, int? slot)
         {
-            Profile = profile?.Clone();
-            // Forge-Change-start: company whitelist
-            if (Profile != null)
-            {
-                var forcedCompany = GetForcedCompanyFromProfile(Profile);
-                if (forcedCompany == null || Profile.Company != forcedCompany)
-                    _preferredNonFactionCompany = Profile.Company;
-            }
-
-            TryApplyForcedFactionCompany(markDirty: false);
-            // Forge-Change-end: company whitelist
-            CharacterSlot = slot;
+            _profileEditorInitializing = true;
+            _dirtyCompareBaseline = null;
             IsDirty = false;
-            JobOverride = null;
-
-            UpdateNameEdit();
-            UpdateFlavorTextEdit();
-            UpdateSexControls();
-            UpdateGenderControls();
-            UpdateSkinColor();
-            UpdateSpawnPriorityControls();
-            UpdateHeightControls();
-            UpdateWidthControls();
-            UpdateBarkVoicesControls(); // Corvax-Frontier-Barks
-            UpdateAgeEdit();
-            UpdateEyePickers();
-            UpdateSaveButton();
-            UpdateMarkings();
-            UpdateHairPickers();
-            UpdateCMarkingsHair();
-            UpdateCMarkingsFacialHair();
-            // UpdateCompanyControls(); // Forge-Change: company whitelist
-
-            RefreshAntags();
-            RefreshJobs();
-            RefreshLoadouts();
-            RefreshSpecies();
-            RefreshNationalities(); // Forge-change: _EE nationality
-            RefreshTraits();
-            RefreshFlavorText();
-            RefreshTTS(); // Corvax-TTS
-            UpdateTTSControls(); // Corvax-TTS
-            ReloadPreview();
-
-            if (Profile != null)
+            try
             {
-                PreferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
+                Profile = profile?.Clone();
+                // Forge-Change-start: company whitelist
+                if (Profile != null)
+                {
+                    var forcedCompany = GetForcedCompanyFromProfile(Profile);
+                    if (forcedCompany == null || Profile.Company != forcedCompany)
+                        _preferredNonFactionCompany = Profile.Company;
+                }
+
+                TryApplyForcedFactionCompany(markDirty: false);
+                // Forge-Change-end: company whitelist
+                CharacterSlot = slot;
+                JobOverride = null;
+
+                UpdateNameEdit();
+                UpdateFlavorTextEdit();
+                UpdateSexControls();
+                UpdateGenderControls();
+                UpdateSkinColor();
+                UpdateSpawnPriorityControls();
+                UpdateHeightControls();
+                UpdateWidthControls();
+                UpdateBarkVoicesControls(); // Corvax-Frontier-Barks
+                UpdateAgeEdit();
+                UpdateEyePickers();
+                UpdateMarkings();
+                UpdateHairPickers();
+                UpdateCMarkingsHair();
+                UpdateCMarkingsFacialHair();
+                // UpdateCompanyControls(); // Forge-Change: company whitelist
+
+                RefreshAntags();
+                RefreshJobs();
+                RefreshLoadouts();
+                RefreshSpecies();
+                RefreshNationalities(); // Forge-change: _EE nationality
+                RefreshTraits();
+                RefreshFlavorText();
+                RefreshTTS(); // Corvax-TTS
+                UpdateTTSControls(); // Corvax-TTS
+                ReloadPreview();
+
+                if (Profile != null)
+                {
+                    PreferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
+                }
+            }
+            finally
+            {
+                _profileEditorInitializing = false;
+                _dirtyCompareBaseline = Profile?.Clone();
+                SetDirty();
             }
         }
+        // Forge-Change-End
 
 
         /// <summary>
@@ -1699,6 +1718,22 @@ namespace Content.Client.Lobby.UI
                         Profile = Profile.WithCharacterAppearance(Profile.Appearance.WithSkinColor(color));
                         break;
                     }
+                // Forge-Change-Start wega ariral
+                case HumanoidSkinColor.AriralPale:
+                {
+                    if (!Skin.Visible)
+                    {
+                        Skin.Visible = true;
+                        RgbSkinColorContainer.Visible = false;
+                    }
+
+                    var color = SkinColor.AriralColor((int)Skin.Value);
+
+                    Markings.CurrentSkinColor = color;
+                    Profile = Profile.WithCharacterAppearance(Profile.Appearance.WithSkinColor(color));
+                    break;
+                }
+                // Forge-Change-End wega ariral
                 // Goobstation Section End - Tajaran
                 case HumanoidSkinColor.Hues:
                 {
@@ -2108,6 +2143,20 @@ namespace Content.Client.Lobby.UI
 
                         break;
                     }
+                // Forge-Change-Start wega ariral
+                case HumanoidSkinColor.AriralPale:
+                {
+                    if (!Skin.Visible)
+                    {
+                        Skin.Visible = true;
+                        RgbSkinColorContainer.Visible = false;
+                    }
+
+                    Skin.Value = SkinColor.AriralSkinToneFromColor(Profile.Appearance.SkinColor);
+
+                    break;
+                }
+                // Forge-Change-End wega ariral
                 // Goobstation Section Start - Tajaran
                 case HumanoidSkinColor.AnimalFur: // Goobstation - Tajaran
                     {
@@ -2205,7 +2254,7 @@ namespace Content.Client.Lobby.UI
             var hairMarking = Profile.Appearance.HairStyleId switch
             {
                 HairStyles.DefaultHairStyle => new List<Marking>(),
-                _ => new() { new(Profile.Appearance.HairStyleId, new List<Color>() { Profile.Appearance.HairColor }) },
+                _ => new() { new Marking(Profile.Appearance.HairStyleId, Profile.Appearance.HairColor) } // Forge-Change Corvax-Wega-Hair-Extended
             };
 
             var facialHairMarking = Profile.Appearance.FacialHairStyleId switch
@@ -2232,31 +2281,29 @@ namespace Content.Client.Lobby.UI
             }
 
             // hair color
-            Color? hairColor = null;
-            if ( Profile.Appearance.HairStyleId != HairStyles.DefaultHairStyle &&
-                _markingManager.Markings.TryGetValue(Profile.Appearance.HairStyleId, out var hairProto)
-            )
+            // Forge-Change-Start Corvax-Wega-Hair-Extended-Edit
+            List<Color>? hairColor = null;
+            if (Profile.Appearance.HairStyleId != HairStyles.DefaultHairStyle &&
+                _markingManager.Markings.TryGetValue(Profile.Appearance.HairStyleId, out var hairProto))
             {
                 if (_markingManager.CanBeApplied(Profile.Species, Profile.Sex, hairProto, _prototypeManager))
                 {
-                    if (_markingManager.MustMatchSkin(Profile.Species, HumanoidVisualLayers.Hair, out var _, _prototypeManager))
+                    if (_markingManager.MustMatchSkin(Profile.Species, HumanoidVisualLayers.Hair, out var hairAlpha, _prototypeManager))
                     {
-                        hairColor = Profile.Appearance.SkinColor;
+                        hairColor = new List<Color> { Profile.Appearance.SkinColor.WithAlpha(hairAlpha) };
+                        if (Profile.Appearance.HairColor.Count > 1)
+                            hairColor.AddRange(Profile.Appearance.HairColor.Skip(1));
                     }
                     else
                     {
-                        hairColor = Profile.Appearance.HairColor;
+                        hairColor = Profile.Appearance.HairColor.ToList();
                     }
                 }
             }
-            if (hairColor != null)
-            {
-                Markings.HairMarking = new (Profile.Appearance.HairStyleId, new List<Color>() { hairColor.Value });
-            }
-            else
-            {
-                Markings.HairMarking = null;
-            }
+            Markings.HairMarking = hairColor != null
+                ? new Marking(Profile.Appearance.HairStyleId, hairColor)
+                : null;
+            // Forge-Change-End Corvax-Wega-Hair-Extended-Edit
         }
 
         private void UpdateCMarkingsFacialHair()
@@ -2319,9 +2366,12 @@ namespace Content.Client.Lobby.UI
         private void RandomizeEverything()
         {
             var oldBank = Profile?.BankBalance ?? HumanoidCharacterProfile.DefaultBalance; // Frontier
+            var saved = _preferencesManager.Preferences?.SelectedCharacter as HumanoidCharacterProfile; // Forge-Change
             Profile = HumanoidCharacterProfile.Random().WithBankBalance(oldBank); // Frontier: add WithBankBalance(oldBank)
             SetProfile(Profile, CharacterSlot);
-            SetDirty();
+            // Forge-Change
+            IsDirty = saved == null || !Profile!.MemberwiseEquals(saved);
+            UpdateSaveButton();
         }
 
         private void RandomizeName()

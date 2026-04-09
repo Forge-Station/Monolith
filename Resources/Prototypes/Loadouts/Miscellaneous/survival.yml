@@ -21,6 +21,7 @@
     - Protogen
     - Yowie # Goobstation
     - Tajaran # Goobstation
+    - Ariral # Forge-Change wega ariral
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVox

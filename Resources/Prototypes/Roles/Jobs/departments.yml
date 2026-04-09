@@ -59,7 +59,7 @@
   name: department-Command
   description: department-NFCommand-description # Frontier
   color: "#334E6D"
-  roles:
+  roles: []
   # - Captain # Frontier
   # - ChiefEngineer # Frontier
   # - ChiefMedicalOfficer # Frontier

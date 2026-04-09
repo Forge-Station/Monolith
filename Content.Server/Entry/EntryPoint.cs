@@ -2,6 +2,7 @@ using Content.Server._Forge.Discord; // Forge-Change
 using Content.Server._Forge.JoinQueue;
 using Content.Server._Forge.Sponsor;
 using Content.Server._Forge.TTS; // Forge-Change
+using Content.Server._Mono.Company;
 using Content.Server._NF.Auth;
 using Content.Server.Acz;
 using Content.Server.Administration;
@@ -162,6 +163,7 @@ namespace Content.Server.Entry
 
                 _euiManager.Initialize();
 
+                IoCManager.Resolve<CompanyManager>().Initialize(); // Mono
                 IoCManager.Resolve<IGameMapManager>().Initialize();
                 IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<GameTicker>().PostInitialize();
                 IoCManager.Resolve<IBanManager>().Initialize();

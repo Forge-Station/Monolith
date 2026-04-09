@@ -45,7 +45,7 @@
 - type: startingGear
   id: SrGear
   equipment:
-    pocket1: WeaponDisabler
+    pocket1: WeaponEnergyGunLawbringer
   storage:
     back:
     - Flash

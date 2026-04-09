@@ -21,7 +21,6 @@ namespace Content.Server._Mono.Company;
 public sealed class CompanySystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly IServerDbManager _db = default!; // Forge-Change: company whitelist
@@ -77,7 +76,6 @@ public sealed class CompanySystem : EntitySystem
             // or if their preference is "None"
             if (string.IsNullOrEmpty(profileCompany))
             {
-                // Check for company login whitelists
                 foreach (var companyProto in _prototypeManager.EnumeratePrototypes<CompanyPrototype>())
                 {
                     if (await IsCompanyWhitelisted(args.Player, companyProto)) // Forge-Change: company whitelist

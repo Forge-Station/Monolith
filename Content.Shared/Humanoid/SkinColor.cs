@@ -291,6 +291,54 @@ public static class SkinColor
         return Color.ToHsv(color).Z >= MinHuesLightness;
     }
 
+    // Forge-Change-Start Wega Ariral
+    public static Color AriralColor(int tone)
+    {
+        tone = Math.Clamp(tone, 0, 100);
+
+        const float minValue = 0.55f;
+        const float maxValue = 1.0f;
+
+        const float minSaturation = 0.0f;
+        const float maxSaturation = 0.08f;
+
+        float tNorm = tone / 100f;
+        float value = minValue + tNorm * (maxValue - minValue);
+        float saturation = minSaturation + (1 - tNorm) * (maxSaturation - minSaturation);
+
+        return Color.FromHsv(new Vector4(0f, saturation, value, 1f));
+    }
+
+    public static float AriralSkinToneFromColor(Color color)
+    {
+        var hsv = Color.ToHsv(color);
+
+        const float minValue = 0.55f;
+        const float maxValue = 1.0f;
+
+        float v = Math.Clamp(hsv.Z, minValue, maxValue);
+        float tone = (v - minValue) / (maxValue - minValue) * 100f;
+
+        tone = MathF.Round(tone);
+        tone = Math.Clamp(tone, 0f, 100f);
+
+        return tone;
+    }
+
+    public static bool VerifyAriralColor(Color color)
+    {
+        var hsv = Color.ToHsv(color);
+
+        if (hsv.Y > 0.08f)
+            return false;
+
+        if (hsv.Z < 0.55f)
+            return false;
+
+        return true;
+    }
+    // Forge-Change-End Wega Ariral
+
     public static bool VerifySkinColor(HumanoidSkinColor type, Color color)
     {
         return type switch
@@ -300,6 +348,7 @@ public static class SkinColor
             HumanoidSkinColor.Hues => VerifyHues(color),
             HumanoidSkinColor.VoxFeathers => VerifyVoxFeathers(color),
             HumanoidSkinColor.AnimalFur => VerifyAnimalFur(color),
+            HumanoidSkinColor.AriralPale => VerifyAriralColor(color), // Forge-Change Wega Ariral
             _ => false,
         };
     }
@@ -313,6 +362,7 @@ public static class SkinColor
             HumanoidSkinColor.Hues => MakeHueValid(color),
             HumanoidSkinColor.VoxFeathers => ClosestVoxColor(color),
             HumanoidSkinColor.AnimalFur => ClosestAnimalFurColor(color),
+            HumanoidSkinColor.AriralPale => AriralColor(100),
             _ => color
         };
     }
@@ -325,4 +375,5 @@ public enum HumanoidSkinColor : byte
     VoxFeathers, // Vox feathers are limited to a specific color range
     TintedHues, //This gives a color tint to a humanoid's skin (10% saturation with full hue range).
     AnimalFur, // Goob - Tajaran
+    AriralPale, // Forge-Change Wega-Ariral
 }

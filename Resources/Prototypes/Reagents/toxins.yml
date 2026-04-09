@@ -528,6 +528,9 @@
           - !type:OrganType
             type: Animal
             shouldHave: false
+          - !type:OrganType # Forge-Change wega ariral
+            type: Ariral
+            shouldHave: false
           - !type:OrganType # Goobstation - Yowie
             type: Yowie
             shouldHave: false
@@ -541,6 +544,9 @@
           - !type:OrganType
             type: Animal
             shouldHave: false
+          - !type:OrganType # Forge-Change wega ariral
+            type: Ariral
+            shouldHave: false
           - !type:OrganType # Goobstation - Yowie
             type: Yowie
             shouldHave: false
@@ -548,6 +554,9 @@
         conditions:
         - !type:OrganType
           type: Animal
+          shouldHave: false
+        - !type:OrganType # Forge-Change wega ariral
+          type: Ariral
           shouldHave: false
         - !type:OrganType # Goobstation - Yowie
           type: Yowie
@@ -560,6 +569,12 @@
         - !type:OrganType
           type: Animal
           shouldHave: true
+        reagent: Protein
+        amount: 0.5
+      - !type:AdjustReagent
+        conditions:
+        - !type:OrganType # Forge-Change wega ariral
+          type: Ariral
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent # Frontier: Goblin

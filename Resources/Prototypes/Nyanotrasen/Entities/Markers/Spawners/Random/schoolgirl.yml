@@ -1,0 +1,32 @@
+- type: entity
+  name: Schoolgirl Uniform Spawner
+  id: SchoolgirlUniformSpawner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Nyanotrasen/Clothing/Uniforms/Costume/Schoolgirl/blue.rsi
+          state: icon
+    - type: RandomSpawner
+      prototypes:
+        - UniformSchoolgirlRed
+        - UniformSchoolgirlBlack
+        - UniformSchoolgirlBlue
+        - UniformSchoolgirlCyan
+        - UniformSchoolgirlGreen
+        - UniformSchoolgirlOrange
+        - UniformSchoolgirlPink
+        - UniformSchoolgirlPurple
+        - ClothingUniformJumpskirtBlackElegantDress #Forge-Change
+        - ClothingUniformJumpskirtPurpleElegantDress #Forge-Change
+        - ClothingUniformJumpskirtBlueElegantDress #Forge-Change
+        - ClothingUniformJumpskirtRedElegantDress #Forge-Change
+        - ClothingUniformJumpskirtGreenElegantDress #Forge-Change
+      chance: 0.65
+      rarePrototypes:
+        - ClothingUniformJumpskirtSchool #Forge-Change
+        - ClothingOuterSuitShrineMaiden
+        - ClothingUniformJumpskirtElegantMaid #Forge-Change
+        - ClothingBackpackDuffelWitchBundle #Forge-Change
+      rareChance: 0.05

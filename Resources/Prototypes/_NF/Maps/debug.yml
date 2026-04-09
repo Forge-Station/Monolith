@@ -67,6 +67,6 @@
             # USSPCorporal: [ -1, -1]
             # USSPMedic: [ -1, -1]
             # USSPRifleman: [ -1, -1]
-            TsfEngineer: [ -1, -1 ]
+            # TsfEngineer: [ -1, -1 ] # Not a roundstart-selectable job (`setPreference: false`)
         - type: StationDeadDrop
           maxDeadDrops: 20 # Testing

@@ -10,6 +10,7 @@ chat-language-NovuNederic-name = Novu-Nederic
 chat-language-NovaCygniBasic-name = Nova-Cygni Basic
 chat-language-TauCetiBasic-name = Basic
 chat-language-Tradeband-name = Tradeband
+chat-language-Ilasir-name = Ilasir
 chat-language-Freespeak-name = Freespeak
 chat-language-Elyran-name = Elyran
 chat-language-Canilunzt-name = Canilunzt

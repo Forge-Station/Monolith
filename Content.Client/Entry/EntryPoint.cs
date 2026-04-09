@@ -22,6 +22,7 @@ using Content.Client.Stylesheets;
 using Content.Client.UserInterface;
 using Content.Client.Viewport;
 using Content.Client.Voting;
+using Content.Client._Mono.Company; // Mono
 using Content.Shared.Ame.Components;
 using Content.Shared.Gravity;
 using Content.Shared.Localizations;
@@ -78,6 +79,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly DebugMonitorManager _debugMonitorManager = default!;
         [Dependency] private readonly TitleWindowManager _titleWindowManager = default!;
         [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+        [Dependency] private readonly CompanyManager _companyManager = default!; // Mono
         [Dependency] private readonly DiscordAuthManager _discordAuth = default!; // Forge-Change
         [Dependency] private readonly SponsorManager _sponsorMan = default!; // Forge-Change
         [Dependency] private readonly JoinQueueManager _joinQueue = default!; // Forge-Change
@@ -143,6 +145,7 @@ namespace Content.Client.Entry
             _extendedDisconnectInformation.Initialize();
             _jobRequirements.Initialize();
             _playbackMan.Initialize();
+            _companyManager.Initialize(); // Mono
             _sponsorMan.Initialize(); // Forge-Change
 
             //AUTOSCALING default Setup!

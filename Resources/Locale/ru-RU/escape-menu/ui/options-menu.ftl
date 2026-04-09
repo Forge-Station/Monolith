@@ -11,6 +11,7 @@ ui-options-apply = Сохранить и применить
 ui-options-reset-all = Сброс изменений
 ui-options-default = Сброс к настройкам по умолчанию
 ui-options-value-percent = { TOSTRING($value, "P0") }
+ui-options-radio-noise = Звуки сообщений по рации (Пшк, пилик)
 
 # Misc/General menu
 
@@ -369,3 +370,15 @@ ui-options-admin-enable-overlay-starting-job = Показывать старто
 ui-options-admin-overlay-merge-distance = Расстояние объединения
 ui-options-admin-overlay-ghost-fade-distance = Затухание призраков от курсора
 ui-options-admin-overlay-ghost-hide-distance = Скрытие призраков от курсора
+ui-options-function-toggle-focus = Фокус зрения
+ui-options-header-targeting = Таргетирование
+ui-options-function-target-head = Таргет на голову
+ui-options-function-target-torso = Таргет на туловище
+ui-options-function-target-left-arm = Таргет на левую руку
+ui-options-function-target-right-arm = Таргет на правую руку
+ui-options-function-target-left-leg = Таргет на левую ногу
+ui-options-function-target-right-leg = Таргет на правую ногу
+ui-options-combat-music-label = Боевая музыка
+ui-options-combat-music-volume = Громкость боевой музыки:
+ui-options-combat-music-windup = Задержка активации боевой музыки:
+ui-options-combat-music-winddown = Задержка деактивации боевой музыки:

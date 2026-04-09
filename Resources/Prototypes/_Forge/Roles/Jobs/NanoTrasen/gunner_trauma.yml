@@ -1,0 +1,37 @@
+- type: job
+  id: NtMedicGunner
+  name: job-name-nt-medic-gunner
+  description: job-description-nt-medic-gunner
+  playTimeTracker: NtMedicGunner
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hrs
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: NtMedicGunnerGear
+  alwaysUseSpawner: true
+  icon: "JobIconntmedicgunner"
+  supervisors: job-supervisors-doc
+  weight: 170
+  displayWeight: 38
+  assignedCompany: MD
+  canBeAntag: false
+  accessGroups:
+  - GeneralAccess
+  - Medical
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, TrackingImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: NpcFactionMember
+        factions:
+        - MD
+      - type: SurgerySpeedModifier
+        SpeedModifier: 1.75
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: NtMedicGunnerGear

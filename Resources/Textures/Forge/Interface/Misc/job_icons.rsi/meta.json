@@ -133,6 +133,12 @@
         },
         {
             "name": "ntmedic"
+        },
+        {
+            "name": "nt_medpilot"
+        },
+        {
+            "name": "nt_medgunner"
         }
     ]
 }

@@ -80,3 +80,21 @@
 # region NanoTrasen
 - type: playTimeTracker
   id: NtMedic
+
+- type: playTimeTracker
+  id: NtMedicPilot
+
+- type: playTimeTracker
+  id: NtMedicGunner
+
+- type: playTimeTracker
+  id: JobNtScientist
+
+- type: playTimeTracker
+  id: JobNtEngineer
+
+- type: playTimeTracker
+  id: JobNtBotanist
+
+- type: playTimeTracker
+  id: JobNtCook

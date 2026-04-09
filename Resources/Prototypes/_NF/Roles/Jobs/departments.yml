@@ -21,12 +21,18 @@
   - StationRepresentative
   - StationTrafficController
   - CCServiceWorker # nyano
-#  - NFJanitor
-#  - MailCarrier # nyano
+  - Nt_Scientist # Forge
+  - Nt_Engineer # Forge
+  - Nt_Botanist # Forge
+  - Nt_Cook # Forge
+  - NFJanitor
+  - MailCarrier # nyano
   - SecurityGuard
-  - DirectorOfCare
-  - MdMedic
-  - NtMedic
+  #- DirectorOfCare
+  #- MdMedic
+  #- NtMedic
+  #- NtMedicGunner
+  #- NtMedicPilot
 
 # - type: department
   # id: Antag

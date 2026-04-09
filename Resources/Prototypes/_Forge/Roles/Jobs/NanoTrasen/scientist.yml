@@ -1,0 +1,33 @@
+- type: job
+  id: Nt_Scientist
+  name: job-name-scientist
+  description: job-description-scientist
+  playTimeTracker: JobNtScientist
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 36000 # Frontier - 10 hrs
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: NtScientistGear
+  alwaysUseSpawner: true
+  icon: "JobIconScientist"
+  supervisors: job-supervisors-sr
+  assignedCompany: Colonial
+  weight: 80
+  displayWeight: 20
+  canBeAntag: false
+  access:
+  - Service
+  - External
+  - Captain
+  - Frontier
+  - Research
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: NtScientistGear

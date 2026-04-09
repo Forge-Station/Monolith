@@ -1,0 +1,33 @@
+- type: job
+  id: Nt_Engineer
+  name: job-name-engineer
+  description: job-description-engineer
+  playTimeTracker: JobNtEngineer
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 36000 # Frontier - 10 hrs
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: NtEngineerGear
+  alwaysUseSpawner: true
+  icon: "JobIconStationEngineer"
+  supervisors: job-supervisors-sr
+  assignedCompany: Colonial
+  weight: 80
+  displayWeight: 20
+  canBeAntag: false
+  access:
+  - Maintenance
+  - Service
+  - External
+  - Captain
+  - Frontier
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: NtEngineerGear

@@ -8,6 +8,8 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 10800
+  setPreference: false
+  overrideConsoleVisibility: true
   icon: "JobIconMailCarrier"
   supervisors: job-supervisors-sr
   weight: 90 # Frontier

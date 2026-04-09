@@ -1,0 +1,32 @@
+- type: job
+  id: Nt_Cook
+  name: job-name-chef
+  description: job-description-chef
+  playTimeTracker: JobNtCook
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 36000 # Frontier - 10 hrs
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: NtCookGear
+  alwaysUseSpawner: true
+  icon: "JobIconChef"
+  supervisors: job-supervisors-sr
+  assignedCompany: Colonial
+  weight: 80
+  displayWeight: 20
+  canBeAntag: false
+  access:
+  - Service
+  - External
+  - Captain
+  - Frontier
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: NtCookGear

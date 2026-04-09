@@ -71,3 +71,5 @@ job-name-tsf-medic = ТСФ Полевой Фельдшер
 job-name-tsf-sl = ТСФ Командир Отделения
 job-name-tsf-crew = ТСФ Экипаж «Халкиона»
 job-name-tsf-crewofficer = ТСФ Офицер «Халкиона»
+job-name-nt-medic-pilot = Пилот TTI
+job-name-nt-medic-gunner = Стрелок TTI

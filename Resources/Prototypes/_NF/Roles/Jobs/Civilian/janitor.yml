@@ -6,6 +6,8 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 7200 # mono - change to 2 hr
+  setPreference: false
+  overrideConsoleVisibility: true
   startingGear: NFJanitorGear
   alwaysUseSpawner: true
   icon: "JobIconJanitor"

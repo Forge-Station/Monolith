@@ -1,4 +1,4 @@
-job-name-mail-carrier = Почтальон
+job-name-mail-carrier = Почтальон НТ
 job-name-prisoner = Заключенный
 job-name-valet = Консьерж
 job-name-guard = Тюремный охранник

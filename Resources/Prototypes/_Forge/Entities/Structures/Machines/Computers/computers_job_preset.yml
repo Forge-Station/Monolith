@@ -97,11 +97,13 @@
     bodyImplants:
     - MindShieldImplant
     rankPresets:
-    - NFJanitor
+    - SecurityGuard
     - MailCarrier
-    - StationEngineer
-    - Scientist
-    - SecurityOfficer
+    - Nt_Scientist
+    - Nt_Engineer
+    - Nt_Cook
+    - Nt_Botanist
+    - NFJanitor
     - CCServiceWorker
   - type: Sprite
     sprite: Structures/Machines/computers.rsi
@@ -130,6 +132,8 @@
     rankPresets:
     - DirectorOfCare
     - MdMedic
+    - NtMedicGunner
+    - NtMedicPilot
     - NtMedic
   - type: Sprite
     sprite: Structures/Machines/computers.rsi

@@ -261,3 +261,19 @@
     sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: ntmedic
   jobName: job-name-nt-medic
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconntmedicpilot
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: nt_medpilot
+  jobName: job-name-nt-medic-pilot
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconntmedicgunner
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: nt_medgunner
+  jobName: job-name-nt-medic-gunner

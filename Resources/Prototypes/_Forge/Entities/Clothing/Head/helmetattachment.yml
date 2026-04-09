@@ -12,3 +12,8 @@
     clothingVisuals:
       helmetattachment:
       - state: equipped-HELMETATTACHMENT
+  - type: NightVision
+    flashDurationMultiplier: 3
+    isEquipment: true
+  - type: IdentityBlocker
+    coverage: EYES

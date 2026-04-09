@@ -1,18 +1,18 @@
 - type: vendingMachineInventory
   id: CompanyVendInventoryNSC
   startingInventory:
-    ClothingHeadHelmetNexus: 5
-    ClothingHelmetAttachmentNVGsNexus: 5
-    ClothingHeadHatNexusBeret: 5
-    ClothingHeadHatNexusCap: 5
-    ClothingEyesGlassesNexus: 5
-    ClothingMaskGasNexus: 5
-    ClothingBeltWebbingsNormalNexus: 5
-    ClothingBeltWebbingsBigNexus: 5
-    ClothingOuterVestWebNexus: 5
-    ClothingUniformJumpsuitNexusTurtleneck: 5
-    ClothingUniformJumpsuitNexusWorker: 5
-    ClothingUniformJumpsuitNexusSecurity: 5
-    ClothingHandsGlovesCombatNexus: 5
-    ClothingShoesBootsMagNexus: 5
-    ClothingModsuitVanguardNexusPowerCell: 5
+    ClothingHeadHelmetNexus: 15
+    ClothingHelmetAttachmentNVGsNexus: 15
+    ClothingHeadHatNexusBeret: 15
+    ClothingHeadHatNexusCap: 15
+    ClothingEyesGlassesNexus: 15
+    ClothingMaskGasNexus: 15
+    ClothingBeltWebbingsNormalNexus: 15
+    ClothingBeltWebbingsBigNexus: 15
+    ClothingOuterVestWebNexus: 15
+    ClothingUniformJumpsuitNexusTurtleneck: 15
+    ClothingUniformJumpsuitNexusWorker: 15
+    ClothingUniformJumpsuitNexusSecurity: 15
+    ClothingHandsGlovesCombatNexus: 15
+    ClothingShoesBootsMagNexus: 15
+    ClothingModsuitVanguardNexusPowerCell: 15

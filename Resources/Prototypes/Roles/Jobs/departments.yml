@@ -54,12 +54,12 @@
   editorHidden: true
   weight: 120
 
-#- type: department   All hiden for Forge
-#  id: Command
-#  name: department-Command
-#  description: department-NFCommand-description # Frontier
-#  color: "#334E6D"
-#  roles:
+- type: department
+  id: Command
+  name: department-Command
+  description: department-NFCommand-description # Frontier
+  color: "#334E6D"
+  roles:
   # - Captain # Frontier
   # - ChiefEngineer # Frontier
   # - ChiefMedicalOfficer # Frontier
@@ -81,9 +81,9 @@
  # - StationTrafficController # Frontier
  # - TsfCommandingOfficer #Forge Change
   # - DirectorOfCare # Mono # Forge-Change-delete
- # primary: false
- # weight: 100
- # editorHidden: true #Forge Change
+  primary: false
+  weight: 100
+  editorHidden: true #Forge Change
 
 - type: department
   id: Engineering

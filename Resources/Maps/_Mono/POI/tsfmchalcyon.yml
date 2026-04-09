@@ -53590,7 +53590,7 @@ entities:
     - type: Transform
       pos: -5.300394,-11.105583
       parent: 1
-- proto: TSFComputerComms
+- proto: ComputerCommsTSF
   entities:
   - uid: 8054
     components:

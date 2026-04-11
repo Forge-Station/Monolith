@@ -33,6 +33,10 @@ company-nexus-description =
 
     В суровых условиях космического пространства, альянс вынужден иметь свои войска, преимущественно состоящих из простых наёмников, которым хорошо заплатили, в целях защиты своих интересов в регионе.
 
+company-nexus-note = [bold][color=#0f3b62]«Nexus»[/color] негативно относится к [color=#971f47]Paycheck Bratva[/color], [color=#B01340]СССП(К)[/color] и [color=#52326A]Ullman Industries[/color], но их отношения ещё не перешли грань.
+    Компании [color=#0f3b62]«Nexus»[/color] и [color=#B82121]Viper Group[/color] являются врагами за пределами Безопасной Зоны. Учитывайте это.
+    Компания [color=#0f3b62]«Nexus»[/color] поддерживает дружеские отношения с [color=#0A3161]Universal States of America[/color], [color=#FC7303]Harmony Medical Enterprises[/color], [color=#7E72B2]Aetherion Dynamics[/color] и [color=#9573AF]Nosske-Eien[/color].[/bold]
+
 company-techniclogistic-description = [color=#83489d]TechnicLogistic[/color] — автономная корпорация, которая обладающая собственной подконтрольной территорией в пределах [italic][color=#e3e4e4]Свободной Экономической Зоны[/color][/italic].
     В [color=#83489d]TechnicLogistic[/color] преобладает жесткая иерархическая система с четким разделением обязанностей. Сама корпорация является сеткой из множества департаментов и советов во главе которой стоит Совет девяти - группа из девяти самых влиятельных членов корпорации, совместно контролирующих ~60% акций компании.
 

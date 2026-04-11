@@ -7,7 +7,7 @@
   description: A fast brawler with heavy armor and ballistic armaments.
   price: 85290
   category: Medium
-  group: Ussp
+  group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
   shuttlePath: /Maps/_Mono/Shuttles/USSP/drakon.yml
   guidebookPage: Null

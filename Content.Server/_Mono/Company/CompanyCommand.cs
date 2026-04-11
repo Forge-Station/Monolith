@@ -29,8 +29,8 @@ public sealed class CompanyCommand : ToolshedCommand
         }
 
         if (ctx.Session == null
-            || !_admin.HasAdminFlag(ctx.Session, AdminFlags.Whitelist)
-                && !_company.IsOwner(ctx.Session, company)) // owner can add members
+            || (!_admin.HasAdminFlag(ctx.Session, AdminFlags.Whitelist)
+                && !_company.IsOwner(ctx.Session, company))) // owner can add members
         {
             ctx.WriteLine(Loc.GetString("cmd-company-not-enough-permissions"));
             return;
@@ -61,8 +61,8 @@ public sealed class CompanyCommand : ToolshedCommand
         [CommandArgument] ICommonSession session)
     {
         if (ctx.Session == null
-            || !_admin.HasAdminFlag(ctx.Session, AdminFlags.Whitelist)
-                && ctx.Session != session) // allow looking at own companies
+            || (!_admin.HasAdminFlag(ctx.Session, AdminFlags.Whitelist)
+                && ctx.Session != session))// allow looking at own companies
         {
             ctx.WriteLine(Loc.GetString("cmd-company-not-enough-permissions"));
             return;
@@ -88,8 +88,8 @@ public sealed class CompanyCommand : ToolshedCommand
         }
 
         if (ctx.Session == null
-            || !_admin.HasAdminFlag(ctx.Session, AdminFlags.Whitelist)
-                && !_company.IsMember(ctx.Session.UserId, company)) // members can see other members
+            || (!_admin.HasAdminFlag(ctx.Session, AdminFlags.Whitelist)
+                && !_company.IsMember(ctx.Session.UserId, company))) // members can see other members
         {
 
             ctx.WriteLine(Loc.GetString("cmd-company-not-enough-permissions"));
@@ -157,8 +157,8 @@ public sealed class CompanyCommand : ToolshedCommand
         }
 
         if (ctx.Session == null
-            || !_admin.HasAdminFlag(ctx.Session, AdminFlags.Whitelist)
-                && !_company.IsOwner(ctx.Session, company)) // owner can remove members
+            || (!_admin.HasAdminFlag(ctx.Session, AdminFlags.Whitelist)
+                && !_company.IsOwner(ctx.Session, company))) // owner can remove members
         {
 
             ctx.WriteLine(Loc.GetString("cmd-company-not-enough-permissions"));

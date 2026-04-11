@@ -99,6 +99,7 @@
   color: "#FC7303"
   image: /Textures/_Mono/Companies/HME.png
   icon: HarmonyMedicalEnterprises # Forge-change
+  note: harmony-medical-enterprises-note # Forge-change
 
 - type: company
   id: MidnightArmsCo
@@ -150,6 +151,7 @@
   description: aetherion-dynamics-description
   color: "#7E72B2"
   icon: AetherionDynamics # Forge-change
+  note: aetherion-dynamics-note # Forge-change
 
 - type: company
   id: HorizonEnergy
@@ -169,6 +171,7 @@
   color: "#0A3161"
   image: /Textures/_Mono/Companies/UNSA.png
   # Forge-change: add icon & special's
+  note: universal-states-of-america-note
   icon: UniversalStatesOfAmerica
   special:
   - !type:GiveItemSpecial
@@ -209,6 +212,7 @@
   color: "#9573AF"
   image: /Textures/_Mono/Companies/ne_rd.png
   icon: Nosske # Forge-change
+  note: nosske-eien-rnd-note # Forge-change
 
 - type: company
   id: blackhawkpmc

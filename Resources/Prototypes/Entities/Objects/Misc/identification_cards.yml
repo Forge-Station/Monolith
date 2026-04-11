@@ -867,6 +867,8 @@
     - GrandVizier
     - PDVCommand # Mono
     # Forge-change start
+    - Remnant
+    - TsfDiplomacy
     - Empire
     - EmpireOfficer
     - EmpireInqusitor

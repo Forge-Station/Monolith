@@ -6,7 +6,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - EncryptionKeyCentCom
+#      - EncryptionKeyCentCom # Forge-Change-Remove
       - EncryptionKeyStationMaster
   - type: Sprite
     sprite: _Goobstation/Clothing/Ears/Headsets/deathsquad.rsi

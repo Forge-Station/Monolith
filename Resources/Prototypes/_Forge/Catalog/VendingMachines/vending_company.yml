@@ -1,0 +1,80 @@
+- type: vendingMachineInventory
+  id: CompanyVendInventoryTL
+  startingInventory:
+    ClothingHeadHelmetTL: 3
+    ClothingEyesGlassesTL: 3
+    NFClothingEyesNightVisionGoggleTL: 2
+    ClothingMaskGasTL: 3
+    ClothingBeltTL: 3
+    ClothingOuterArmorTL: 3
+    ClothingUniformJumpsuitTL: 3
+    ClothingHandsGlovesCombatTL: 3
+    ClothingShoesBootsCombatTL: 3
+    ClothingBackpackDuffelTL: 3
+    TelecomServerFlatpack: 1
+    EncryptionKeyTechnicLogistic: 2
+
+- type: vendingMachineInventory
+  id: CompanyVendInventoryViper
+  startingInventory:
+    ClothingUniformJumpsuitViperGroupUniform: 3
+    ClothingUniformJumpsuitViperGroupTurtleneck: 3
+    ClothingNeckViperGroupMantle: 2
+    TelecomServerFlatpack: 1
+    EncryptionKeyViperGroup: 2
+    DisciplinesDiskVG: 2
+
+- type: vendingMachineInventory
+  id: CompanyVendInventoryUllman
+  startingInventory:
+    ClothingOuterHardsuitUIPilot: 1
+    ClothingOuterHardsuitUllmanEngineer: 1
+    ClothingUniformJumpsuitSalvageSpecialist: 2
+    ClothingNeckUllimanOvercoat: 3
+    ClothingNeckHeavyUllimanOvercoat: 1
+    WeaponPistolUllmanSmartMagnumMK5: 1
+    TelecomServerFlatpack: 1
+    EncryptionKeyUllmanIndustries: 2
+    DisciplinesDiskUllman: 2
+
+- type: vendingMachineInventory
+  id: CompanyVendInventoryUSSP
+  startingInventory:
+    MagazineDP29: 6 # Infinite
+    Magazine762x39mmFMJ: 3 # Infinite
+    Magazine762x39mmLowCapacityFMJ: 6 # Infinite
+    Magazine762x54mmRFMJ: 6 # Infinite
+    Magazine9x19mmPistolFMJ: 6 # Infinite
+    Magazine9x19mmPistolHighCapacityFMJ: 6
+    SpeedLoader762x39mmFMJ: 6 # Infinite
+    SpeedLoader762x54mmRFMJ: 6 # Infinite
+    AmmoBox23x75mmSlug: 6 # 4 gauge
+    AmmoBox23x75mmBuckshot: 6 # 4 gauge
+    AmmoBox23x75mmBeanbag: 6 # 4 gauge
+    AmmoBox23x75mmDozd: 6 # 4 gauge
+    AmmoBox23x75mmFlashbang: 6 # 4 gauge
+    AmmoBox762x39mmFMJ: 6 # 762x39mm
+    AmmoBox762x39mmBigFMJ: 6 # 762x39mm
+    AmmoBox762x54mmRFMJ: 6 # 762x54mmR
+    AmmoBox762x54mmRBigFMJ: 6 # 762x54mmR
+    AmmoBox9x19mmFMJ: 6 # 9x19mm
+    AmmoBox9x19mmBigFMJ: 6 # 9x19mm
+    AmmoBox45_magnumFMJ: 6 # .45 magnum
+    WeaponSniperMosin: 3 # Infinite
+    WeaponRifleSVS: 3 # Infinite
+    CombatKnife: 6 # Infinite
+    SurvivalKnife: 6 # Infinite
+    ClothingUniformUSSP: 6 # Infinite
+    ClothingHeadsetUSSP: 6 # Infinite
+    EncryptionKeyUssp: 6
+    ClothingOuterHardsuitUsspL27: 4 # Infinite
+    ClothingOuterHardsuitUsspL10: 4 # Infinite
+    ClothingOuterHardsuitUsspM10: 4 # Infinite
+    ClothingOuterCoatUSSP: 4 # Infinite
+    ClothingHeadHelmetHeavyUSSP: 4 # Infinite
+    WeaponRifleAK502: 3 # Infinite
+    WeaponShotgunBigLeady: 3 # Infinite
+    WeaponDP29: 3 # Infinite
+    DisciplinesDiskUssp: 2
+    FactionLatheFlatpack: 2
+

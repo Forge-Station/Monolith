@@ -121,7 +121,31 @@ public sealed class AccessReaderSystem : EntitySystem
         // Forge-change-start
         if (!string.IsNullOrEmpty(reader.RequiredCompany))
         {
-            if (!TryComp<CompanyComponent>(user, out var userCompany) || userCompany.CompanyName != reader.RequiredCompany)
+            string? idCompanyName = null;
+
+            if (FindAccessItemsInventory(user, out var items))
+            {
+                foreach (var item in items)
+                {
+                    // ID Card
+                    if (TryComp<IdCardComponent>(item, out var id))
+                    {
+                        idCompanyName = id.CompanyName;
+                        break;
+                    }
+
+                    // PDA
+                    if (TryComp<PdaComponent>(item, out var pda)
+                        && pda.ContainedId != null
+                        && TryComp(pda.ContainedId, out id))
+                    {
+                        idCompanyName = id.CompanyName;
+                        break;
+                    }
+                }
+            }
+
+            if (idCompanyName != reader.RequiredCompany)
             {
                 return false;
             }

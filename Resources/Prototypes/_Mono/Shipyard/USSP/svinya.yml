@@ -12,7 +12,7 @@
   description: A compact attack craft, bristling with small caliber armament.
   price: 39000 # appraised at ~33200
   category: Small
-  group: Ussp
+  group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
   shuttlePath: /Maps/_Mono/Shuttles/USSP/svinya.yml
   guidebookPage: Null

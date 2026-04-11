@@ -204,3 +204,6 @@
 
 - type: Tag
   id: ShellShotgunLight
+
+- type: Tag
+  id: NoGridGodmode

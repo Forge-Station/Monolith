@@ -9,6 +9,7 @@ using Content.Shared._DV.Administration;
 using Content.Shared.Eui;
 using Content.Shared.Ghost.Roles; // Frontier
 using Content.Shared.Roles;
+using Content.Server._Mono.Company; // Forge-Change: company whitelist
 using Content.Shared._Mono.Company; // Forge-Change: company whitelist
 using Robust.Shared.Log;
 using Robust.Shared.Network;
@@ -23,6 +24,7 @@ public sealed class JobWhitelistsEui : BaseEui
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly JobWhitelistManager _jobWhitelist = default!;
+    [Dependency] private readonly CompanyManager _companyManager = default!;
 
     private readonly ISawmill _sawmill;
 
@@ -31,7 +33,7 @@ public sealed class JobWhitelistsEui : BaseEui
 
     public HashSet<ProtoId<JobPrototype>> Whitelists = new();
     public HashSet<ProtoId<GhostRolePrototype>> GhostRoleWhitelists = new(); // Frontier
-    public HashSet<string> CompanyWhitelists = new(); // Forge-Change: company whitelist
+    public HashSet<ProtoId<CompanyPrototype>> CompanyWhitelists = new(); // Forge-Change: company whitelist
     public bool GlobalWhitelist = false;
 
     public JobWhitelistsEui(NetUserId playerId, string playerName)
@@ -56,14 +58,14 @@ public sealed class JobWhitelistsEui : BaseEui
         }
 
         GlobalWhitelist = await _db.GetWhitelistStatusAsync(PlayerId); // Frontier: get global whitelist
-        CompanyWhitelists = (await _db.GetCompanyWhitelists(PlayerId.UserId)).ToHashSet(); // Forge-Change: company whitelist
+        CompanyWhitelists = _companyManager.GetPlayerCompanies(PlayerId); // Forge-Change: company whitelist
 
         StateDirty();
     }
 
     public override EuiStateBase GetNewState()
     {
-        return new JobWhitelistsEuiState(PlayerName, Whitelists, GhostRoleWhitelists, CompanyWhitelists, GlobalWhitelist); // Forge-Change: company whitelist
+        return new JobWhitelistsEuiState(PlayerName, Whitelists, GhostRoleWhitelists, CompanyWhitelists.Select(c => c).ToHashSet(), GlobalWhitelist); // Forge-Change: company whitelist
     }
 
     public override void HandleMessage(EuiMessageBase msg)
@@ -143,12 +145,12 @@ public sealed class JobWhitelistsEui : BaseEui
                 role = $"company:{companyArgs.CompanyId}";
                 if (added)
                 {
-                    _ = _db.AddCompanyWhitelist(PlayerId.UserId, companyArgs.CompanyId);
+                    _companyManager.AddMember(PlayerId, companyArgs.CompanyId);
                     CompanyWhitelists.Add(companyArgs.CompanyId);
                 }
                 else
                 {
-                    _ = _db.RemoveCompanyWhitelist(PlayerId.UserId, companyArgs.CompanyId);
+                    _ = _companyManager.RemoveMember(PlayerId, companyArgs.CompanyId);
                     CompanyWhitelists.Remove(companyArgs.CompanyId);
                 }
                 break;

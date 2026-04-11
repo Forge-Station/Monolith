@@ -132,7 +132,7 @@
     - UsspShipyard
     - UsspEquipment
     - UsspWeapons
-    - ViperGroup
+    # - ViperGroup # Forge-change
     - FactionUniversal
     - Industrial
     - Arsenal
@@ -166,6 +166,8 @@
     - UsspWeapons
     - FactionUniversal
     - MechaEngineering
+    - Ullman # Forge-change
+    - ViperGroup # Forge-change
 
 - type: entity
   parent: ResearchAndDevelopmentServer

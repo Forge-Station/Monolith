@@ -6152,33 +6152,6 @@ entities:
     - type: Transform
       pos: -6.632983,17.52343
       parent: 1
-- proto: BusSchedule
-  entities:
-  - uid: 57
-    components:
-    - type: Transform
-      pos: -13.5,24.5
-      parent: 1
-  - uid: 602
-    components:
-    - type: Transform
-      pos: -22.5,-1.5
-      parent: 1
-  - uid: 604
-    components:
-    - type: Transform
-      pos: 23.5,-1.5
-      parent: 1
-  - uid: 627
-    components:
-    - type: Transform
-      pos: 18.5,18.5
-      parent: 1
-  - uid: 2578
-    components:
-    - type: Transform
-      pos: 3.5,19.5
-      parent: 1
 - proto: CableApcExtension
   entities:
   - uid: 203
@@ -10071,20 +10044,6 @@ entities:
     components:
     - type: Transform
       pos: -12.5,23.5
-      parent: 1
-- proto: ComputerShipyardMercenary
-  entities:
-  - uid: 392
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 1.5,-14.5
-      parent: 1
-  - uid: 2271
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,-14.5
       parent: 1
 - proto: ComputerSolarControl
   entities:
@@ -17307,14 +17266,6 @@ entities:
     - type: Transform
       pos: -13.658259,17.687283
       parent: 1
-- proto: MercenaryExchanger
-  entities:
-  - uid: 2790
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 0.5,-14.5
-      parent: 1
 - proto: MopItem
   entities:
   - uid: 956
@@ -17358,35 +17309,6 @@ entities:
     components:
     - type: Transform
       pos: 6.535731,10.07715
-      parent: 1
-- proto: NFBoxMagazinePistol35Practice
-  entities:
-  - uid: 2047
-    components:
-    - type: Transform
-      pos: 10.545279,13.4767
-      parent: 1
-  - uid: 2048
-    components:
-    - type: Transform
-      pos: 10.404654,14.429825
-      parent: 1
-  - uid: 2049
-    components:
-    - type: Transform
-      pos: 10.607779,15.429825
-      parent: 1
-  - uid: 2050
-    components:
-    - type: Transform
-      pos: 10.498404,16.429825
-      parent: 1
-- proto: NFHolopadExpeditionLodge
-  entities:
-  - uid: 2576
-    components:
-    - type: Transform
-      pos: 6.5,8.5
       parent: 1
 - proto: NFSignDock
   entities:
@@ -17507,18 +17429,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -11.5,18.5
-      parent: 1
-- proto: NFWeaponEnergyRifleCarbinePractice
-  entities:
-  - uid: 2512
-    components:
-    - type: Transform
-      pos: 7.6572943,14.637034
-      parent: 1
-  - uid: 2513
-    components:
-    - type: Transform
-      pos: 7.5947943,15.324534
       parent: 1
 - proto: NitrogenCanister
   entities:
@@ -20750,13 +20660,6 @@ entities:
     - type: Transform
       pos: -10.5,11.5
       parent: 1
-- proto: VendingMachineAmmoPOIMers
-  entities:
-  - uid: 2783
-    components:
-    - type: Transform
-      pos: -1.5,-14.5
-      parent: 1
 - proto: VendingMachineAstroVendPOI
   entities:
   - uid: 3225
@@ -20839,25 +20742,6 @@ entities:
     components:
     - type: Transform
       pos: -13.5,16.5
-      parent: 1
-- proto: VendingMachinePickNPackPOI
-  entities:
-  - uid: 1049
-    components:
-    - type: Transform
-      pos: 12.5,11.5
-      parent: 1
-  - uid: 2656
-    components:
-    - type: Transform
-      pos: -11.5,11.5
-      parent: 1
-- proto: VendingMachinePickNPackPOIMers
-  entities:
-  - uid: 2782
-    components:
-    - type: Transform
-      pos: 2.5,-14.5
       parent: 1
 - proto: VendingMachineSalvagePOI
   entities:

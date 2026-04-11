@@ -3,6 +3,7 @@ using Content.Shared.Ghost.Roles;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Content.Shared._Mono.Company; // Forge-Change: company whitelist
 
 namespace Content.Shared._DV.Administration;
 
@@ -12,14 +13,14 @@ public sealed class JobWhitelistsEuiState : EuiStateBase
     public string PlayerName;
     public HashSet<ProtoId<JobPrototype>> Whitelists;
     public HashSet<ProtoId<GhostRolePrototype>> GhostRoleWhitelists;
-    public HashSet<string> CompanyWhitelists; // Forge-Change: company whitelist
+    public HashSet<ProtoId<CompanyPrototype>> CompanyWhitelists; // Forge-Change: company whitelist
     public bool GlobalWhitelist;
 
     public JobWhitelistsEuiState(
         string playerName,
         HashSet<ProtoId<JobPrototype>> whitelists,
         HashSet<ProtoId<GhostRolePrototype>> ghostRoleWhitelists,
-        HashSet<string> companyWhitelists, // Forge-Change: company whitelist
+        HashSet<ProtoId<CompanyPrototype>> companyWhitelists, // Forge-Change: company whitelist
         bool globalWhitelist)
     {
         PlayerName = playerName;

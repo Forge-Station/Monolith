@@ -1,5 +1,5 @@
-ent-ClothingUniformJumpsuitNexusSecurity = униформа охранников нексуса
-    .desc = Сделанная на скорую руку военная форма для сил охранения корпорации NSC.
+ent-ClothingUniformJumpsuitNexusSecurity = униформа наёмников VSS
+    .desc = Сделанная на скорую руку военная форма для наёмников ЧВК "Vanguard Security Systems".
 ent-ClothingUniformJumpsuitNexusWorker = комбинезон рабочего нексуса
     .desc = Должен вас защищать. По крайней мере, так написано на бумаге.
 ent-ClothingUniformJumpsuitNexusTurtleneck = водолазка нексуса

@@ -294,9 +294,9 @@
 
 - type: listing
   id: UplinkSecurityFactionRDServer
-  name:  uplink-faction-server-name
+  name: uplink-faction-server-name
   description: uplink-faction-server-desc
-  productEntity: RDServerTSFFlatpack
+  productEntity: DisciplinesDiskTSF # Forge-change
   cost:
     FederationMilitaryCredit: 100
   categories:

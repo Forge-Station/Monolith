@@ -31,6 +31,12 @@ public sealed partial class AccessComponent : Component
     [DataField(readOnly: true)]
     [AutoNetworkedField]
     public HashSet<ProtoId<AccessGroupPrototype>> Groups = new();
+
+    /// <summary>
+    /// Forge-change
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public string? CompanyName;
 }
 
 /// <summary>

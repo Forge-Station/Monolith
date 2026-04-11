@@ -40,3 +40,6 @@
         - SmallMobMask
         layer:
         - MachineLayer
+  - type: Tag
+    tags:
+      - NoGridGodmode

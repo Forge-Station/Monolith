@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
-using Content.Shared._Mono.Company; // Forge-Change: company whitelist
 using Content.Shared.CCVar;
 using Content.Shared.Preferences;
 using Robust.Server.Player;
@@ -129,11 +128,6 @@ namespace Content.Server.Preferences.Managers
             }
             // Forge-Change-End
 
-            if (profile is HumanoidCharacterProfile companyProfile)
-            {
-                profile = await ValidateCompanySelection(userId, session, companyProfile);
-            }
-
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
 
             {
@@ -144,20 +138,6 @@ namespace Content.Server.Preferences.Managers
 
             if (ShouldStorePrefs(session.Channel.AuthType))
                 await _db.SaveCharacterSlotAsync(userId, profile, slot);
-        }
-
-        private async Task<ICharacterProfile> ValidateCompanySelection(NetUserId userId, ICommonSession session, HumanoidCharacterProfile profile)
-        {
-            if (!_protos.TryIndex<CompanyPrototype>(profile.Company, out var company))
-                return profile.WithCompany("None");
-
-            if (!company.Whitelisted)
-                return profile;
-
-            if (await _db.IsCompanyWhitelisted(userId.UserId, company.ID))
-                return profile;
-
-            return profile.WithCompany("None");
         }
 
         private async void HandleDeleteCharacterMessage(MsgDeleteCharacter message)

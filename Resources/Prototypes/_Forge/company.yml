@@ -25,6 +25,7 @@
   form: Protagonist
   name: Nexus Star Consortium
   description: company-nexus-description
+  note: company-nexus-note
   color: "#0f3b62"
   icon: Nexus
   whitelisted: true

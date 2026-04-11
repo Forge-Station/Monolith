@@ -4,7 +4,7 @@
   name: Кастрюля
   description:   Среднегабаритный многоцелевой шаттл , отличающийся крупной броней . Рекомендованный состав 4-5 человек
 
-  price: 169000
+  price: 179000
   category: Medium
   group: Renegate
   access: Renegate
@@ -23,7 +23,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Кастрюля{1}'
+          mapNameTemplate: 'Кастрюля MIL{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

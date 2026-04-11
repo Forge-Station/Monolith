@@ -26,6 +26,7 @@
   - External
   - Empire
   - Mercenary
+  - Captain
 
 - type: accessGroup
   id: SpecialEmpireAccess
@@ -49,3 +50,12 @@
   - Captain
   - Empire
   - EmpireOfficer
+
+- type: accessGroup
+  id: EmpireAllAccess
+  tags:
+  - Empire
+  - EmpireOfficer
+  - EmpireInqusitor
+  - EmpireCommander
+  - EmpireDiplomacy

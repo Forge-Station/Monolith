@@ -8,6 +8,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Map.Components;
+using Content.Shared.Tag; // Forge-change
 
 namespace Content.Server._Mono;
 
@@ -19,6 +20,7 @@ public sealed class GridGodModeSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly GodmodeSystem _godmode = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly TagSystem _tag = default!; // Forge-change
 
     public override void Initialize()
     {
@@ -125,6 +127,12 @@ public sealed class GridGodModeSystem : EntitySystem
 
         // Also check for anything with HTN such as NPCs, such as turrets.
         if (HasComp<HTNComponent>(entityUid))
+        {
+            return true;
+        }
+
+        // Forge-change-add: check for anything with NoGridGodmode tag
+        if (_tag.HasTag(entityUid, "NoGridGodmode"))
         {
             return true;
         }

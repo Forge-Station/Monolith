@@ -61,7 +61,7 @@
   - type: EyeProtection
   - type: StaticPrice
     price: 600
-    vendPrice: 900
+    vendPrice: 8900
   - type: ShowHealthBars
   - type: NightVision
     color: "#ba8207"

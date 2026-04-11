@@ -1,0 +1,20 @@
+- type: technology
+  id: VGRogueWeapon
+  name: research-technology-rogue-subsonic
+  entityIcon: WeaponSubMachineGunMla73
+  discipline: ViperGroup
+  tier: 2
+  cost: 55000
+  recipeUnlocks:
+  - WeaponRifleWSPRRogue
+  - Magazine762x39mmSubsonic
+  - AmmoBox762x39mmSubsonic
+  - WeaponSubMachineGunMla73Rogue
+  - Magazine635x40mmCaseless # vsixst: I NEED THAT AMMO!
+  - AmmoBox635x40mmCaseless
+  - MagazineAsmgtUniversal635x40mm
+  - AmmoBox635x40mmCaselessBig
+  technologyPrerequisites:
+  - ViperGroupApparel
+  - UniversalMaterialResearchT3
+  position: 19, 2

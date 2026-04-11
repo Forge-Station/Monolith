@@ -1,0 +1,135 @@
+- type: entity
+  id: DisciplinesDiskUssp
+  parent: BaseItem
+  name: technology disk (USSP)
+  description: Disk with USSP technology.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - Ussp
+    - UsspShipyard
+    - UsspEquipment
+    - UsspWeapons
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: ussp
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 15000
+
+- type: entity
+  id: DisciplinesDiskTSF
+  parent: BaseItem
+  name: technology disk (TSF)
+  description: Disk with TSF technology.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - TsfmcWeaponry
+    - TsfmcGear
+    - TsfmcEquipment
+    - TsfmcShipyard
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: tsf
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 15000
+
+- type: entity
+  id: DisciplinesDiskRogue
+  parent: BaseItem
+  name: technology disk (PDV)
+  description: Disk with PDV technology.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - RogueWeaponry
+    - RogueGear
+    - RogueEquipment
+    - RogueShipyard
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: noname
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 15000
+
+- type: entity
+  id: DisciplinesDiskVG
+  parent: BaseItem
+  name: technology disk (VG)
+  description: Disk with VG technology.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - ViperGroup
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: viper
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 15000
+
+- type: entity
+  id: DisciplinesDiskUllman
+  parent: BaseItem
+  name: technology disk (U.I.)
+  description: Disk with Ullman Industries technology.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - Ullman
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: ullman
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 8000
+
+- type: entity
+  id: DisciplinesDiskRenegate
+  parent: BaseItem
+  name: technology disk (Renegate)
+  description: Disk with Renegates technology.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - RenegateWeaponry
+    - RenegateEquipment
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: noname
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 8000

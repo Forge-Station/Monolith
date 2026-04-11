@@ -5,6 +5,9 @@
   description: A modular hardsuit control module unit equipped with enhanced actuators in the legs to allow for rapid assault or retreat actions.
   suffix: Нексус
   components:
+  - type: StaticPrice
+    price: 4500
+    vendPrice: 15000
   - type: Appearance
   - type: Sprite
     sprite: Forge/Clothing/Back/Modsuits/nexusmod.rsi

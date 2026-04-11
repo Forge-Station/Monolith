@@ -20,6 +20,6 @@ public sealed partial class CompanyWindow : FancyWindow
 
     public void Populate(List<CompanyPrototype> companies, HashSet<string> selectableCompanyIds, string? currentCompanyId)
     {
-        CompanySelect.Populate(companies, selectableCompanyIds, currentCompanyId);
+        CompanySelect.Populate(companies, currentCompanyId);
     }
 }

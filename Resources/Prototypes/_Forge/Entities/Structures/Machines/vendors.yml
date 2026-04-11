@@ -9,6 +9,8 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    ejectState: eject-unshaded
+    denyState: deny-unshaded
   - type: MarketModifier
     mod: 8
   - type: Sprite
@@ -50,3 +52,71 @@
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
   - type: AccessReader
     requiredCompany: Nexus
+
+- type: entity
+  parent: [VendingMachineAstroVend, BaseStructureDisableToolUse, BaseStructureAccessReaderImmuneToEmag]
+  id: VendingMachineCompanyViper
+  name: VG Vendor
+  description: Sells various VG equipment.
+  components:
+  - type: VendingMachine
+    pack: CompanyVendInventoryViper
+    offState: server-nopower
+    brokenState: server-nopower
+    normalState: server-off
+    ejectState: server-on
+    denyState: server-off
+  - type: MarketModifier
+    mod: 8
+  - type: Sprite
+    sprite: Forge/Structures/Specific/Syndicate/syndicatedataconventor.rsi
+    layers:
+    - state: "server-nopower"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "server-off"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: "server-nopower"
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+  - type: AccessReader
+    requiredCompany: TheViperGroup
+
+- type: entity
+  parent: [VendingMachineWallmount, BaseStructureDisableToolUse, BaseStructureAccessReaderImmuneToEmag]
+  id: VendingMachineCompanyUllman
+  name: U.I. Vendor
+  description: Sells various U.I. equipment.
+  components:
+  - type: VendingMachine
+    pack: CompanyVendInventoryUllman
+    requiresCash: true
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    denyState: deny-unshaded
+  - type: MarketModifier
+    mod: 8
+  - type: Sprite
+    sprite: Forge/Structures/Machines/VendingMachines/wallullman.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    requiredCompany: UllmanIndustries
+
+- type: entity
+  parent: VendingMachineUSSP
+  id: VendingMachineCompanyUSSP
+  name: USSP Automated Requisition Vendor
+  description: Sells various USSP equipment.
+  suffix: Central
+  components:
+  - type: VendingMachine
+    pack: CompanyVendInventoryUSSP
+  - type: AccessReader
+    requiredCompany: USSP

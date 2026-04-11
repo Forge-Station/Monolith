@@ -13,12 +13,13 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Client._Mono.Company; // Forge-Change: company whitelist
 
 namespace Content.Client.Players.PlayTimeTracking;
 
 public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
 {
-    private const string CompanyWhitelistPrefix = "company:"; // Forge-Change: company whitelist
+    [Dependency] private readonly CompanyManager _companyManager = default!; // Forge-Change: company whitelist
 
     [Dependency] private readonly IBaseClient _client = default!;
     [Dependency] private readonly IClientNetManager _net = default!;
@@ -187,7 +188,7 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
 
     public bool IsCompanyWhitelisted(string companyId) // Forge-Change: company whitelist
     {
-        return _jobWhitelists.Contains($"{CompanyWhitelistPrefix}{companyId}"); // Forge-Change: company whitelist
+        return _companyManager.IsPlayerWhitelisted(companyId); // Forge-Change: company whitelist
     }
 
     public TimeSpan FetchOverallPlaytime()

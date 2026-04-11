@@ -125,7 +125,7 @@ public sealed partial class JobWhitelistsWindow : FancyWindow
             "Company whitelists",
             Color.FromHex("#8db9ff"),
             _proto,
-            state.CompanyWhitelists);
+            state.CompanyWhitelists.Select(c => c.ToString()).ToHashSet());
         companyPanel.OnSetCompany += (id, whitelisting) => OnSetCompany?.Invoke(id, whitelisting);
         Companies.AddChild(companyPanel);
         // Forge-Change-end: company whitelist

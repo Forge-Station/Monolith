@@ -1793,15 +1793,6 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         #endregion
 
         #region Job Whitelists
-
-        // Forge-Change-start: company whitelist
-        private const string CompanyWhitelistPrefix = "company:";
-
-        private static string ToCompanyWhitelistRoleId(string companyId)
-        {
-            return $"{CompanyWhitelistPrefix}{companyId}";
-        }
-        // Forge-Change-end: company whitelist
         public async Task<bool> AddJobWhitelist(Guid player, ProtoId<JobPrototype> job)
         {
             await using var db = await GetDb();
@@ -1856,68 +1847,6 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
             return true;
         }
-
-        // Forge-Change-start: company whitelist
-        public async Task<bool> AddCompanyWhitelist(Guid player, string companyId)
-        {
-            await using var db = await GetDb();
-            var roleId = ToCompanyWhitelistRoleId(companyId);
-            var exists = await db.DbContext.RoleWhitelists
-                .Where(w => w.PlayerUserId == player)
-                .Where(w => w.RoleId == roleId)
-                .AnyAsync();
-
-            if (exists)
-                return false;
-
-            db.DbContext.RoleWhitelists.Add(new RoleWhitelist
-            {
-                PlayerUserId = player,
-                RoleId = roleId,
-            });
-
-            await db.DbContext.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<List<string>> GetCompanyWhitelists(Guid player, CancellationToken cancel = default)
-        {
-            await using var db = await GetDb(cancel);
-
-            return await db.DbContext.RoleWhitelists
-                .Where(w => w.PlayerUserId == player)
-                .Where(w => EF.Functions.Like(w.RoleId, $"{CompanyWhitelistPrefix}%"))
-                .Select(w => w.RoleId.Substring(CompanyWhitelistPrefix.Length))
-                .ToListAsync(cancellationToken: cancel);
-        }
-
-        public async Task<bool> IsCompanyWhitelisted(Guid player, string companyId)
-        {
-            await using var db = await GetDb();
-            var roleId = ToCompanyWhitelistRoleId(companyId);
-            return await db.DbContext.RoleWhitelists
-                .Where(w => w.PlayerUserId == player)
-                .Where(w => w.RoleId == roleId)
-                .AnyAsync();
-        }
-
-        public async Task<bool> RemoveCompanyWhitelist(Guid player, string companyId)
-        {
-            await using var db = await GetDb();
-            var roleId = ToCompanyWhitelistRoleId(companyId);
-            var entry = await db.DbContext.RoleWhitelists
-                .Where(w => w.PlayerUserId == player)
-                .Where(w => w.RoleId == roleId)
-                .SingleOrDefaultAsync();
-
-            if (entry == null)
-                return false;
-
-            db.DbContext.RoleWhitelists.Remove(entry);
-            await db.DbContext.SaveChangesAsync();
-            return true;
-        }
-        // Forge-Change-end: company whitelist
         // Frontier: Ghost role handling
         # endregion
 

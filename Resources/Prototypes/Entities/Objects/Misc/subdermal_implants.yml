@@ -351,16 +351,16 @@
      tags:
        - MindShield
 
-# Centcomm implants
+# Centcomm implants - Forge-Change-Remove
 
-- type: entity
-  parent: BaseSubdermalImplant
-  id: RadioImplantCentcomm
-  name: radio implant
-  description: This implant grants access to the Centcomm channel without a headset. Only authorized for Centcomm employees.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SubdermalImplant
-  - type: RadioImplant
-    radioChannels:
-    - CentCom
+#- type: entity
+#  parent: BaseSubdermalImplant
+#  id: RadioImplantCentcomm
+#  name: radio implant
+#  description: This implant grants access to the Centcomm channel without a headset. Only authorized for Centcomm employees.
+#  categories: [ HideSpawnMenu ]
+#  components:
+#  - type: SubdermalImplant
+#  - type: RadioImplant
+#    radioChannels:
+#    - CentCom

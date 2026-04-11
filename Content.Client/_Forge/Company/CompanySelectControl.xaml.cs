@@ -4,6 +4,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Localization;
 using Content.Shared._Mono.Company;
+using Content.Client._Mono.Company;
 using System.Linq;
 using Robust.Shared.Utility;
 
@@ -12,10 +13,10 @@ namespace Content.Client._Forge.Company.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CompanySelectControl : BoxContainer
 {
+    [Dependency] private readonly CompanyManager _companyManager = default!;
     public event Action<string>? OnCompanySelected;
 
     private List<CompanyPrototype> _companies = new();
-    private HashSet<string> _selectableCompanyIds = new();
     private readonly Dictionary<string, Button> _companyButtons = new();
     private string? _selectedCompanyId;
     private string _currentCompanyId = "None";
@@ -23,12 +24,13 @@ public sealed partial class CompanySelectControl : BoxContainer
     public CompanySelectControl()
     {
         RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
         JoinCompanyButton.OnPressed += _ =>
         {
             if (string.IsNullOrEmpty(_selectedCompanyId))
                 return;
 
-            if (!_selectableCompanyIds.Contains(_selectedCompanyId))
+            if (!_companyManager.IsAllowed(_selectedCompanyId))
                 return;
 
             _currentCompanyId = _selectedCompanyId;
@@ -47,10 +49,9 @@ public sealed partial class CompanySelectControl : BoxContainer
         };
     }
 
-    public void Populate(List<CompanyPrototype> companies, HashSet<string> selectableCompanyIds, string? selectedCompanyId = null)
+    public void Populate(List<CompanyPrototype> companies, string? selectedCompanyId = null)
     {
         _companies = companies;
-        _selectableCompanyIds = selectableCompanyIds;
         _currentCompanyId = string.IsNullOrEmpty(selectedCompanyId) ? "None" : selectedCompanyId;
         _selectedCompanyId = _currentCompanyId;
         _companyButtons.Clear();
@@ -110,7 +111,7 @@ public sealed partial class CompanySelectControl : BoxContainer
         }
 
         CompanyDescriptionPanel.Visible = true;
-        var isSelectable = _selectableCompanyIds.Contains(company.ID);
+        var isSelectable = _companyManager.IsAllowed(company.ID);
         CompanyLockedStripe.Visible = !isSelectable;
 
         var text = !string.IsNullOrEmpty(company.Description)
@@ -139,7 +140,7 @@ public sealed partial class CompanySelectControl : BoxContainer
         JoinCompanyButton.Disabled = string.IsNullOrEmpty(selected)
             || selected == "None"
             || selected == _currentCompanyId
-            || !_selectableCompanyIds.Contains(selected);
+            || !_companyManager.IsAllowed(selected);
 
         LeaveCompanyButton.Disabled = _currentCompanyId == "None";
     }

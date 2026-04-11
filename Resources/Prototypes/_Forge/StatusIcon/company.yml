@@ -107,8 +107,8 @@
   id: ViperGroup
   parent: CompanyIconBase
   icon:
-    sprite: /Textures/Forge/Interface/Misc/company_icons.rsi
-    state: viper
+    sprite: /Textures/_Mono/Interface/Misc/research_disciplines_viper_group.rsi
+    state: tech_tree
 
 - type: companyIcon
   id: TL

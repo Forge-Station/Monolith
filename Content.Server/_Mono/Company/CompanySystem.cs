@@ -23,7 +23,7 @@ public sealed class CompanySystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly IServerDbManager _db = default!; // Forge-Change: company whitelist
+    [Dependency] private readonly CompanyManager _manager = default!;
 
 
     // Dictionary to store original company preferences for players
@@ -46,7 +46,7 @@ public sealed class CompanySystem : EntitySystem
         _playerOriginalCompanies.Remove(args.Player.UserId.ToString());
     }
 
-    private async void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args) // Forge-Change: company whitelist
+    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args)
     {
         // Add the company component with the player's saved company
         var companyComp = EnsureComp<CompanyComponent>(args.Mob);
@@ -78,7 +78,7 @@ public sealed class CompanySystem : EntitySystem
             {
                 foreach (var companyProto in _prototypeManager.EnumeratePrototypes<CompanyPrototype>())
                 {
-                    if (await IsCompanyWhitelisted(args.Player, companyProto)) // Forge-Change: company whitelist
+                    if (_manager.IsAllowed(args.Player, companyProto))
                     {
                         companyComp.CompanyName = companyProto.ID;
                         loginFound = true;
@@ -94,14 +94,6 @@ public sealed class CompanySystem : EntitySystem
                 if (string.IsNullOrEmpty(profileCompany))
                     profileCompany = "None";
 
-                // Forge-Change-start: company whitelist
-                // Make sure players cannot force-select a restricted company via edited profile packet.
-                if (_prototypeManager.TryIndex<CompanyPrototype>(profileCompany, out var profileCompanyProto)
-                    && !await IsCompanySelectable(args.Player, profileCompanyProto))
-                {
-                    profileCompany = "None";
-                }
-                // Forge-Change-end: company whitelist
                 // Restore the player's original company preference
                 companyComp.CompanyName = profileCompany;
             }
@@ -123,24 +115,6 @@ public sealed class CompanySystem : EntitySystem
         // Update the player's ID card with the company information
         UpdateIdCardCompany(args.Mob, companyComp.CompanyName);
     }
-
-    // Forge-Change-start: company whitelist
-    private async Task<bool> IsCompanySelectable(ICommonSession session, CompanyPrototype company)
-    {
-        if (!company.Whitelisted)
-            return true;
-
-        if (company.Hidden)
-            return false;
-
-        return await IsCompanyWhitelisted(session, company);
-    }
-
-    private async Task<bool> IsCompanyWhitelisted(ICommonSession session, CompanyPrototype company)
-    {
-        return await _db.IsCompanyWhitelisted(session.UserId.UserId, company.ID);
-    }
-    // Forge-Change-end: company whitelist
 
     /// <summary>
     /// Updates the player's ID card with their company information

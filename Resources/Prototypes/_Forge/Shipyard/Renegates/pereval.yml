@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Перевал
   description:  Ударный линейный линкор , все по старым традициям . Рекомендованный состав 3-6 человек
-  price: 183000
+  price: 203000
   category: Medium
   group: Renegate
   access: Renegate
@@ -22,7 +22,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Перевал{1}'
+          mapNameTemplate: 'Перевал MIL{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "by v6st fot Forge",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "noname"
+    },
+    {
+      "name": "nosske"
+    },
+    {
+      "name": "shm"
+    },
+    {
+      "name": "tl"
+    },
+    {
+      "name": "tsf"
+    },
+    {
+      "name": "ullman"
+    },
+    {
+      "name": "unsa"
+    },
+    {
+      "name": "ussp"
+    },
+    {
+      "name": "viper"
+    }
+  ]
+}

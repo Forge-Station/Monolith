@@ -17,3 +17,6 @@
     isEquipment: true
   - type: IdentityBlocker
     coverage: EYES
+  - type: StaticPrice
+    price: 600
+    vendPrice: 9000

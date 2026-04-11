@@ -2,7 +2,7 @@
   id: UllmanPulseAdv
   name: research-technology-ullmanpulse-adv
   entityIcon: UllmanWeaponPulsePistol
-  discipline: Arsenal
+  discipline: Ullman # Forge-change
   tier: 2
   cost: 25000
   recipeUnlocks:
@@ -16,7 +16,7 @@
   id: UllmanWeaponHiEnd
   name: research-technology-ullmanpulse-high-end
   entityIcon: UllmanWeaponPulseSniper
-  discipline: Arsenal
+  discipline: Ullman # Forge-change
   tier: 3
   cost: 50000
   recipeUnlocks:
@@ -35,7 +35,7 @@
   id: UllmanHardsuitBasic
   name: research-technology-ullmansuits-basic
   entityIcon: ClothingOuterHardsuitUIPilot
-  discipline: Arsenal
+  discipline: Ullman # Forge-change
   tier: 2
   cost: 25000
   recipeUnlocks:
@@ -50,7 +50,7 @@
   id: UllmanHardsuitHiEnd
   name: research-technology-ullmansuits-high-end
   entityIcon: ClothingOuterHardsuitUIEnforcer
-  discipline: Arsenal
+  discipline: Ullman # Forge-change
   tier: 3
   cost: 50000
   recipeUnlocks:

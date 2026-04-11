@@ -7,7 +7,7 @@
   description: An armored gunship with 4 90mms, 2 30mms, and 2 VESPERA missile pods.
   price: 74200
   category: Medium
-  group: Ussp
+  group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
   shuttlePath: /Maps/_Mono/Shuttles/USSP/tayfun.yml
   guidebookPage: Null

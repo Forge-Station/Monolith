@@ -60,6 +60,19 @@
     containers:
       machine_board: !type:Container
       machine_parts: !type:Container
+      disk_slot: !type:ContainerSlot
+        showEnts: false
+        occludes: true
+        ent: null
+  - type: ItemSlots
+    slots:
+      disk_slot:
+        name: disk-slot-name
+        insertSound: /Audio/Machines/terminal_insert_disc.ogg
+        ejectSound: /Audio/Machines/terminal_insert_disc.ogg
+        whitelist:
+          components:
+          - DisciplinesDisk
   - type: GuideHelp
     guides:
     - Science

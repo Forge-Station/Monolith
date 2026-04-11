@@ -1,6 +1,6 @@
 ent-ClothingHandsGlovesCombatSyndicate = боевые перчатки синдиката
     .desc = Пара перчаток, изготовленных из лучших армированных материалов. Защищает от воздействия электричества, а также частично кислоты и огня. Покажите этим НТшным свиньям на пальцах, кто здесь главный!
-ent-ClothingHandsGlovesCombatNexus = боевые перчатки Нексуса
+ent-ClothingHandsGlovesCombatNexus = боевые перчатки VSS
     .desc = Простые боевые перчатки хорошего качества с резким запахом краски.
-ent-ClothingModsuitGauntletsVanguardNSC = перчатки модкостюма NSC «Авангард»
+ent-ClothingModsuitGauntletsVanguardNSC = перчатки модкостюма VSS «Авангард»
     .desc = Подвижные и гибкие перчатки для мод костюма.

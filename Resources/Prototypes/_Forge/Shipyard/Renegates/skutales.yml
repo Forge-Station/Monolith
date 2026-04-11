@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Скиталец
   description: Легкий истребитель общего назначения. Рекомендованный состав 2-4 человека
-  price: 49000
+  price: 103990
   category: Medium
   group: Renegate
   access: Renegate
@@ -22,7 +22,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Скиталец{1}'
+          mapNameTemplate: 'Скиталец MIL{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

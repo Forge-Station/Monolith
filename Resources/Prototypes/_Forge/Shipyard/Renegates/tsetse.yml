@@ -1,0 +1,28 @@
+- type: vessel
+  id: tsetse
+  parent: BaseVessel
+  name: Це-Це
+  description: Легкий истребитель восставших колоний. Ты правда собрался на этом воевать?
+  price: 35000
+  category: Small
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/tsetse.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+
+- type: gameMap
+  id: tsetse
+  mapName: 'Це-Це'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/tsetse.yml
+  minPlayers: 0
+  stations:
+    tsetse:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Це-Це MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

@@ -58,7 +58,7 @@
       - EncryptionKeyTraffic
       - EncryptionKeyMedical
       - EncryptionKeySecurity
-      - EncryptionKeyCentCom
+#      - EncryptionKeyCentCom # Forge-Change-Remove
   - type: Sprite
     sprite: Clothing/Ears/Headsets/security.rsi
   - type: Clothing
@@ -73,7 +73,7 @@
     containers:
       key_slots:
       - EncryptionKeyStationMaster
-      - EncryptionKeyCentCom
+#      - EncryptionKeyCentCom # Forge-Change-Remove
   - type: Sprite
     sprite: Clothing/Ears/Headsets/security.rsi
   - type: Clothing
@@ -140,7 +140,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - EncryptionKeyCentCom
+#      - EncryptionKeyCentCom # Forge-Change-Remove
       - EncryptionKeyStationMasterSR
       - EncryptionKeyDiplomacy
       - EncryptionKeyHospital

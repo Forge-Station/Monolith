@@ -51,7 +51,7 @@
     - Flash
     - RubberStampSr
     - DoorRemoteCommand
-    - EncryptionKeyCentCom
+#    - EncryptionKeyCentCom # Forge-Change-Remove
     - EncryptionKeyStationMasterSR #Mono start
     - EncryptionKeyDiplomacy
     - EncryptionKeyHospital # Forge

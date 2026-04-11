@@ -2,6 +2,7 @@
   id: CompanyVendInventoryNSC
   startingInventory:
     ClothingHeadHelmetNexus: 15
+    ClothingBalaclavaSkiMaskBlack: 15
     ClothingHelmetAttachmentNVGsNexus: 15
     ClothingHeadHatNexusBeret: 15
     ClothingHeadHatNexusCap: 15

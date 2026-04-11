@@ -1,0 +1,34 @@
+- type: vessel
+  id: sprinter
+  parent: BaseVessel
+  name: 'Спринтер'
+  description: Средний экспедиционный шаттл.
+  price: 96000
+  category: Medium
+  group: Expedition
+  shuttlePath: /Maps/_Forge/Shuttles/Expedition/sprinter.yml
+  guidebookPage: null
+  class:
+  - Expedition
+  engine:
+  - AME
+
+- type: gameMap
+  id: sprinter
+  mapName: 'Спринтер'
+  mapPath: /Maps/_Forge/Shuttles/Expedition/sprinter.yml
+  minPlayers: 0
+  stations:
+    sprinter:
+      stationProto: StandardFrontierExpeditionVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Спринтер EXP{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

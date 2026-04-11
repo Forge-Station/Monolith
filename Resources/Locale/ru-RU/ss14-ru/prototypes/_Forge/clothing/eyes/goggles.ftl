@@ -3,5 +3,5 @@ ent-NFClothingEyesNightVisionGoggleContractor = прибор ночного ви
 
 ent-ClothingEyesGlassesRenegate = баллистические очки ренегатов
     .desc = Имеют встроенный визор! Правда эта трещина на стекле ещё долго будет вам помехой.
-ent-ClothingEyesGlassesNexus = баллистические очки нексуса
+ent-ClothingEyesGlassesNexus = баллистические очки VSS
     .desc = Продвинутые защитные очки, имеющие в себе минимальную электронику в виде сенсорного дисплея.

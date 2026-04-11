@@ -18,6 +18,7 @@
   - USSPCommand
   - Mercenary
   - Cryogenics
+  - Captain # Forge
 
 - type: accessGroup
   id: USSPHigh
@@ -25,9 +26,11 @@
   - USSP
   - USSPHigh
   - Mercenary
+  - Captain # Forge
 
 - type: accessGroup
   id: USSPLow
   tags:
   - USSP
   - Mercenary
+  - Captain # Forge

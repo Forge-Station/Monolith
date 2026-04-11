@@ -15,7 +15,7 @@ ent-MagbootsParamed = магнитные сапоги
 
 ent-ClothingShoesBootsMagRenegade = магнитные сапоги ренегатов
     .desc = Стандартные магнитные ботинки с грубо нанесённой краской.
-ent-ClothingShoesBootsMagNexus = магнитные сапоги нексуса
+ent-ClothingShoesBootsMagNexus = боевые магнитные сапоги VSS
     .desc = Стандартные магнитные ботинки с грубо нанесённой краской.
-ent-ClothingModsuitBootsVanguardNSC = магнитные сапоги модкостюма NSC «Авангард»
+ent-ClothingModsuitBootsVanguardNSC = магнитные сапоги модкостюма VSS «Авангард»
     .desc = Стойкие и надёжные магнитные сапоги для мод костюма.

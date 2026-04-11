@@ -46,21 +46,22 @@
     - state: crypt_gray
     - state: cargo_label
 
-- type: entity
-  parent: EncryptionKey
-  id: EncryptionKeyCentCom
-  name: central command encryption key
-  categories: [ DoNotMap ] # Frontier
-  description: An encryption key used by captain's bosses.
-  components:
-  - type: EncryptionKey
-    channels:
-    - CentCom
-    defaultChannel: CentCom
-  - type: Sprite
-    layers:
-    - state: crypt_blue
-    - state: nano_label
+# Forge-Change-Remove
+#- type: entity
+#  parent: EncryptionKey
+#  id: EncryptionKeyCentCom
+#  name: central command encryption key
+#  categories: [ DoNotMap ] # Frontier
+#  description: An encryption key used by captain's bosses.
+#  components:
+#  - type: EncryptionKey
+#    channels:
+#    - CentCom
+#    defaultChannel: CentCom
+#  - type: Sprite
+#    layers:
+#    - state: crypt_blue
+#    - state: nano_label
 
 - type: entity
   parent: EncryptionKey

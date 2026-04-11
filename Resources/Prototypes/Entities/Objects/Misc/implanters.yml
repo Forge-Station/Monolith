@@ -302,12 +302,12 @@
     - type: Implanter
       implant: MindShieldImplant
 
-# Centcomm implanters
+# Centcomm implanters - Forge-Change-Remove
 
-- type: entity
-  id: RadioImplanterCentcomm
-  suffix: radio Centcomm
-  parent: BaseImplantOnlyImplanter
-  components:
-  - type: Implanter
-    implant: RadioImplantCentcomm
+#- type: entity
+#  id: RadioImplanterCentcomm
+#  suffix: radio Centcomm
+#  parent: BaseImplantOnlyImplanter
+#  components:
+#  - type: Implanter
+#    implant: RadioImplantCentcomm

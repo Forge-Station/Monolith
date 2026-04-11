@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Давай-Делай
   description: Маскировочный шаттл деверсионно/рейдерского назначения . Рекомендованная команда 2-3 человек
-  price: 69000
+  price: 75000
   category: Medium
   group: Renegate
   access: Renegate
@@ -22,7 +22,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Давай-Делай{1}'
+          mapNameTemplate: 'Давай-Делай MIL{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

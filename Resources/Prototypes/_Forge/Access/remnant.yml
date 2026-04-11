@@ -1,4 +1,3 @@
 - type: accessLevel
   id: Remnant
   name: id-card-access-level-basic-remnant
-  canAddToIdCard: false

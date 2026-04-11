@@ -1,0 +1,35 @@
+- type: vessel
+  id: RedBrigand
+  parent: BaseVesselAntag
+  name: Диверсант
+  description: Крепкий орешек. Среднего размера, но вооружен до зубов.
+  price: 155999
+  category: Medium
+  group: Ussp
+  access: Mercenary
+  shuttlePath: /Maps/_Forge/Shuttles/USSP/RedBrigand.yml
+  guidebookPage: Null
+  class:
+  - Pursuit
+  - Corvette
+  engine:
+  - AME
+
+- type: gameMap
+  id: RedBrigand
+  mapName: 'Диверсант'
+  mapPath: /Maps/_Forge/Shuttles/USSP/RedBrigand.yml
+  minPlayers: 0
+  stations:
+    RedBrigand:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Диверсант MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Mercenary: [ 0, 0 ]
+            Pilot: [ 0, 0 ]

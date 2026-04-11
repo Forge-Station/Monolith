@@ -55,6 +55,5 @@
     - PowerDrill
     - WelderExperimental
     - BluespaceLifelineImplanter # Stops stealing of their gear
-    - RadioImplanterCentcomm # Headset theft means nothing!
+#    - RadioImplanterCentcomm # Headset theft means nothing! - Forge-Change-Remove
     - HandHeldMassScannerBorg # Just for the infiniste battery
-    

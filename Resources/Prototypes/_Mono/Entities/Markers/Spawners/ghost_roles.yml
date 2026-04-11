@@ -48,7 +48,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-    - MobAsakimGhostrole
+    - MobAsakimWarrior # MobAsakimGhostrole is ignored (see IgnoredPrototypes); use Forge warrior ghost role
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:

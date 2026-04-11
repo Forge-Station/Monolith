@@ -69,10 +69,10 @@ public abstract partial class SharedStorageSystem : EntitySystem
     [Dependency] protected SharedUserInterfaceSystem UI = default!;
     [Dependency] protected UseDelaySystem UseDelay = default!;
 
-    private EntityQuery<ItemComponent> _itemQuery;
-    private EntityQuery<StackComponent> _stackQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
-    private EntityQuery<UserInterfaceUserComponent> _userQuery;
+    [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
+    [Dependency] private readonly EntityQuery<StackComponent> _stackQuery = default!;
+    [Dependency] private readonly EntityQuery<TransformComponent> _xformQuery = default!;
+    [Dependency] private readonly EntityQuery<UserInterfaceUserComponent> _userQuery = default!;
 
     /// <summary>
     /// Whether we're allowed to go up-down storage via UI.
@@ -116,10 +116,6 @@ public abstract partial class SharedStorageSystem : EntitySystem
     {
         base.Initialize();
 
-        _itemQuery = GetEntityQuery<ItemComponent>();
-        _stackQuery = GetEntityQuery<StackComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
-        _userQuery = GetEntityQuery<UserInterfaceUserComponent>();
         _prototype.PrototypesReloaded += OnPrototypesReloaded;
 
         Subs.CVar(_cfg, CCVars.StorageLimit, OnStorageLimitChanged, true);

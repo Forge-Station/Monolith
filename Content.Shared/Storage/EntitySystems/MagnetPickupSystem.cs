@@ -27,6 +27,7 @@ public sealed partial class MagnetPickupSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private SharedItemSystem _item = default!; // Frontier
 
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private static readonly TimeSpan ScanDelay = TimeSpan.FromSeconds(1);
     private const int MaxEntitiesToInsert = 15; // Frontier
@@ -36,12 +37,10 @@ public sealed partial class MagnetPickupSystem : EntitySystem
     /// </summary>
     private readonly List<EntityUid> _nearby = [];
 
-    private EntityQuery<PhysicsComponent> _physicsQuery;
 
     public override void Initialize()
     {
         base.Initialize();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
         SubscribeLocalEvent<MagnetPickupComponent, MapInitEvent>(OnMagnetMapInit);
         SubscribeLocalEvent<MagnetPickupComponent, ExaminedEvent>(OnExamined); // Frontier
         SubscribeLocalEvent<MagnetPickupComponent, GetVerbsEvent<AlternativeVerb>>(AddToggleMagnetVerb); // Frontier

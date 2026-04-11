@@ -3,7 +3,6 @@ using Content.Server._NF.Shuttles.Components;
 using Content.Shared._Crescent.ShipShields;
 using Content.Shared._Mono;
 using Content.Shared.Atmos.Components;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Audio;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
@@ -12,7 +11,6 @@ using Content.Shared.Database;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
-using Content.Shared.Projectiles;
 using Content.Shared.Slippery;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
@@ -68,9 +66,7 @@ public sealed partial class ShuttleSystem
     private readonly ProtoId<ContentTileDefinition> _platingId = "Plating";
     private readonly EntProtoId _sparkEffect = "EffectSparks";
 
-    private EntityQuery<DamageableComponent> _dmgQuery;
-    private EntityQuery<ProjectileComponent> _projQuery;
-
+    [Dependency] private readonly EntityQuery<DamageableComponent> _dmgQuery = default!;
     private HashSet<EntityUid> _countedEnts = new();
     private HashSet<EntityUid> _intersecting = new();
     // for _adminLogSpacing
@@ -100,8 +96,6 @@ public sealed partial class ShuttleSystem
     {
         SubscribeLocalEvent<ShuttleComponent, StartCollideEvent>(OnShuttleCollide);
 
-        _dmgQuery = GetEntityQuery<DamageableComponent>();
-        _projQuery = GetEntityQuery<ProjectileComponent>();
 
         Subs.CVar(_cfg, CCVars.ImpactEnabled, value => _enabled = value, true);
         Subs.CVar(_cfg, CCVars.MinimumImpactInertia, value => _minimumImpactInertia = value, true);
@@ -481,7 +475,7 @@ public sealed partial class ShuttleSystem
             if (direction.LengthSquared() > minsq)
             {
                 _stuns.TryKnockdown(ent.Owner, knockdownTime, true);
-                _throwing.TryThrow(ent, direction, ent.Comp, Transform(ent), _projQuery, direction.Length(), playSound: false);
+                _throwing.TryThrow(ent, direction, ent.Comp, Transform(ent), direction.Length(), playSound: false);
             }
             else
             {
@@ -637,7 +631,7 @@ public sealed partial class ShuttleSystem
                 else
                 {
                     var direction = throwDirection * tileData.DistanceFactor;
-                    _throwing.TryThrow(localEnt, direction, physics, localEnt.Comp, _projQuery, direction.Length(), playSound: false);
+                    _throwing.TryThrow(localEnt, direction, physics, localEnt.Comp, direction.Length(), playSound: false);
                 }
             }
 

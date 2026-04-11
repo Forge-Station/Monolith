@@ -38,6 +38,8 @@ public abstract partial class SharedAnomalySystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedAnomalyCoreSystem _anomalyCore = default!; // Frontier
 
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physQuery = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -388,7 +390,6 @@ public abstract partial class SharedAnomalySystem : EntitySystem
         if (tilerefs.Count == 0)
             return null;
 
-        var physQuery = GetEntityQuery<PhysicsComponent>();
         var resultList = new List<TileRef>();
         while (resultList.Count < amount)
         {
@@ -410,7 +411,7 @@ public abstract partial class SharedAnomalySystem : EntitySystem
                 var valid = true;
                 foreach (var ent in _map.GetAnchoredEntities(xform.GridUid.Value, grid, tileref.GridIndices))
                 {
-                    if (!physQuery.TryGetComponent(ent, out var body))
+                    if (!_physQuery.TryGetComponent(ent, out var body))
                         continue;
 
                     if (body.BodyType != BodyType.Static ||

@@ -34,9 +34,8 @@ namespace Content.Shared.Damage
         [Dependency] private SharedChemistryGuideDataSystem _chemistryGuideData = default!;
         [Dependency] private SharedExplosionSystem _explosion = default!;
 
-        private EntityQuery<AppearanceComponent> _appearanceQuery;
-        private EntityQuery<DamageableComponent> _damageableQuery;
-
+        [Dependency] private readonly EntityQuery<AppearanceComponent> _appearanceQuery = default!;
+        [Dependency] private readonly EntityQuery<DamageableComponent> _damageableQuery = default!;
         public float UniversalAllDamageModifier { get; private set; } = 1f;
         public float UniversalAllHealModifier { get; private set; } = 1f;
         public float UniversalMeleeDamageModifier { get; private set; } = 1f;
@@ -56,8 +55,6 @@ namespace Content.Shared.Damage
             SubscribeLocalEvent<DamageableComponent, OnIrradiatedEvent>(OnIrradiated);
             SubscribeLocalEvent<DamageableComponent, RejuvenateEvent>(OnRejuvenate);
 
-            _appearanceQuery = GetEntityQuery<AppearanceComponent>();
-            _damageableQuery = GetEntityQuery<DamageableComponent>();
 
             // Damage modifier CVars are updated and stored here to be queried in other systems.
             // Note that certain modifiers requires reloading the guidebook.

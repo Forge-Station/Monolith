@@ -331,7 +331,7 @@
     radius: 1.5
     energy: 1.6
     color: "#ab7a52"
-    
+
 - type: entity
   parent: ComputerComms
   id: ComputerCommsUSSP
@@ -389,7 +389,7 @@
     radius: 1.5
     energy: 1.6
     color: "#39507a"
-    
+
 - type: entity
   parent: ComputerComms
   id: ComputerCommsTTI
@@ -413,12 +413,12 @@
     access: [["Command"]]
   - type: CommunicationsConsole
     title: comms-console-announcement-title-tti
-    color: "#39507a"
+    color: "#009e79"
   - type: PointLight
     radius: 1.5
     energy: 1.6
-    color: "#39507a"
-    
+    color: "#009e79"
+
 - type: entity
   parent: ComputerComms
   id: ComputerCommsADS
@@ -439,7 +439,7 @@
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: AccessReader
-    access: [["HeadOfPersonnel"], ["HeadOfSecurity"]]
+    access: [["Remnant"]]
   - type: CommunicationsConsole
     title: comms-console-announcement-title-ads
     color: "#21b0a4"

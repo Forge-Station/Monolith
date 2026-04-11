@@ -26,6 +26,7 @@
   - External
   - Empire
   - Mercenary
+  - Captain
 
 - type: accessGroup
   id: SpecialEmpireAccess

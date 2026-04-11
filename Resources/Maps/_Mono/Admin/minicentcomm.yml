@@ -8910,20 +8910,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -6.5,-13.5
       parent: 1
-- proto: RadioImplanterCentcomm
-  entities:
-  - uid: 1297
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -5.4329147,-11.244717
-      parent: 1
-  - uid: 1299
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -5.547498,-11.244717
-      parent: 1
 - proto: RagItem
   entities:
   - uid: 1292

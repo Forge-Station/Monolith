@@ -73,7 +73,6 @@
     channels:
     - Common
     - Command
-    - CentCom
     - Engineering
     - Medical
     - Science

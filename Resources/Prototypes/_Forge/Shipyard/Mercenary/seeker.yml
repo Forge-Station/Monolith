@@ -1,0 +1,33 @@
+- type: vessel
+  id: seeker
+  parent: BaseVessel
+  name: 'Искатель'
+  description: Тяжеловооруженный шаттл наемников для исследований в экстремальных боевых условиях
+  price: 165000
+  category: Medium
+  group: Shipyard
+  access: Mercenary
+  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/seeker.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+- type: gameMap
+  id: seeker
+  mapName: 'Искатель'
+  mapPath: /Maps/_Forge/Shuttles/Mercenary/seeker.yml
+  minPlayers: 0
+  stations:
+    seeker:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Искатель MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

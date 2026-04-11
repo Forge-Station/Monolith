@@ -187,6 +187,8 @@
     state: burnt-icon
   - type: Smokable
     state: Burnt
+  - type: TimedDespawn
+    lifetime: 600
   - type: SolutionContainerManager
     solutions:
       smokable:

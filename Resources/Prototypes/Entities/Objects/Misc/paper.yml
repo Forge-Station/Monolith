@@ -110,6 +110,8 @@
     - Document
     - Trash
     - Paper
+  - type: TimedDespawn
+    lifetime: 600
   - type: Sprite
     layers:
     - state: scrap

@@ -61,6 +61,8 @@
     state: Burnt
   - type: SpaceGarbage
     cleanupExempt: false # Mono
+  - type: TimedDespawn
+    lifetime: 600
   - type: SolutionContainerManager
     solutions:
       smokable:

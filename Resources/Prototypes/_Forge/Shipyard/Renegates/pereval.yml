@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Перевал
   description:  Ударный линейный линкор , все по старым традициям . Рекомендованный состав 3-6 человек
-  price: 193000
+  price: 203000
   category: Medium
   group: Renegate
   access: Renegate

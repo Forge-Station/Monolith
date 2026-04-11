@@ -3,7 +3,7 @@
   parent: BaseVesselAntag
   name: Диверсант
   description: Крепкий орешек. Среднего размера, но вооружен до зубов.
-  price: 119999
+  price: 155999
   category: Medium
   group: Ussp
   access: Mercenary

@@ -9,6 +9,7 @@
   - External
   - Security
   - Brig
+  - Captain
 
 - type: accessGroup
   id: TsfGeneralAccess

@@ -2,7 +2,7 @@ translator-component-shutoff = {$translator} отключен.
 translator-component-turnon = {$translator} работает.
 
 translator-implanter-refuse = {$implanter} не оказывает никакого эффекта на {$target}.
-translator-implanter-success = {$implanter} успешно внедрён в {$target}.
+translator-implanter-success = {$implanter} успешно применён к {$target}.
 translator-implanter-ready = Этот имплантер, похоже, готов к использованию.
 translator-implanter-used = Этот имплантер, похоже, пуст.
 

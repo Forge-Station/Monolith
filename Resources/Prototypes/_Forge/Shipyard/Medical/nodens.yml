@@ -1,0 +1,40 @@
+# Author Info
+# GitHub: Primusirius
+# Discord: Primusirius
+
+# Shuttle Notes:
+#
+- type: vessel
+  id: Nodens
+  parent: BaseVessel
+  name: G3 «Ноденс»
+  description: Вооружённый шаттл для работы в зонах конфликтов, имеющий на борту хим. лабораторию, операционную и набор для криогенетики.
+  price: 180000 #Sell price 155k + 15%
+  category: Small
+  group: Medical
+  shuttlePath: /Maps/_Forge/Shuttles/Medical/nodens.yml
+  guidebookPage: null
+  class:
+  - Medical
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: Nodens
+  mapName: 'G3 «Ноденс»'
+  mapPath: /Maps/_Forge/Shuttles/Medical/nodens.yml
+  minPlayers: 0
+  stations:
+    Nodens:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Ноденс MED{1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Contractor: [ 0, 0 ]
+          MdMedic: [ 0, 0 ]
+          Pilot: [ 0, 0 ]
+          Mercenary: [ 0, 0 ]

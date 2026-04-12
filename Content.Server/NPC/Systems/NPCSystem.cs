@@ -11,6 +11,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -42,6 +43,7 @@ namespace Content.Server.NPC.Systems
         private float _playerPauseDistance;
         private float _playerDistanceCheckTimer;
         private const float PlayerDistanceCheckInterval = 2.0f; // Check every 2 seconds
+        private readonly List<EntityCoordinates> _cachedPlayerCoordinates = new();
 
         private float _lodNearDistance;
         private float _lodMidDistance;
@@ -202,6 +204,23 @@ namespace Content.Server.NPC.Systems
 
         private void CheckPlayerDistancesAndPauseNPCs()
         {
+            _cachedPlayerCoordinates.Clear();
+            var allPlayerData = _playerManager.GetAllPlayerData();
+            foreach (var playerData in allPlayerData)
+            {
+                var exists = _playerManager.TryGetSessionById(playerData.UserId, out var session);
+
+                if (!exists || session == null
+                    || session.AttachedEntity is not { Valid: true } playerEnt
+                    || HasComp<GhostComponent>(playerEnt)
+                    || TryComp<MobStateComponent>(playerEnt, out var playerState) && playerState.CurrentState != MobState.Alive)
+                {
+                    continue;
+                }
+
+                _cachedPlayerCoordinates.Add(Transform(playerEnt).Coordinates);
+            }
+
             // Get all NPCs with HTN components (both active and inactive).
             var npcQuery = EntityQueryEnumerator<HTNComponent, TransformComponent>();
 
@@ -223,19 +242,8 @@ namespace Content.Server.NPC.Systems
                 var nearestDistance = float.MaxValue;
 
                 // Check distance to all players.
-                var allPlayerData = _playerManager.GetAllPlayerData();
-                foreach (var playerData in allPlayerData)
+                foreach (var playerCoords in _cachedPlayerCoordinates)
                 {
-                    var exists = _playerManager.TryGetSessionById(playerData.UserId, out var session);
-
-                    if (!exists || session == null
-                        || session.AttachedEntity is not { Valid: true } playerEnt
-                        || HasComp<GhostComponent>(playerEnt)
-                        || TryComp<MobStateComponent>(playerEnt, out var state) && state.CurrentState != MobState.Alive)
-                        continue;
-
-                    var playerCoords = Transform(playerEnt).Coordinates;
-
                     if (npcCoords.TryDistance(EntityManager, playerCoords, out var distance) &&
                         distance <= minDistance)
                     {

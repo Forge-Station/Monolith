@@ -81,22 +81,20 @@ public sealed class LocalityLoaderSystem : BaseWorldSystem
     // Frontier
     private void OnDebrisDespawn(EntityUid entity, SpaceDebrisComponent component, EntityTerminatingEvent e)
     {
-        if (entity != null)
+        if (TryComp<SalvageMobRestrictionsGridComponent>(entity, out var restrictions))
         {
-            // Handle mobrestrictions getting deleted
-            var query = AllEntityQuery<NFSalvageMobRestrictionsComponent>();
-
-            while (query.MoveNext(out var salvUid, out var salvMob))
+            foreach (var salvUid in restrictions.MobsToKill)
             {
-                if (entity == salvMob.LinkedGridEntity && salvMob.DespawnIfOffLinkedGrid) // Mono - fix
+                if (TryComp<NFSalvageMobRestrictionsComponent>(salvUid, out var salvMob) &&
+                    salvMob.DespawnIfOffLinkedGrid) // Mono - fix
                 {
                     QueueDel(salvUid);
                 }
             }
-
-            // Do not delete the grid, it is being deleted.
-            _linkedLifecycleGrid.UnparentPlayersFromGrid(grid: entity, deleteGrid: false, ignoreLifeStage: true);
         }
+
+        // Do not delete the grid, it is being deleted.
+        _linkedLifecycleGrid.UnparentPlayersFromGrid(grid: entity, deleteGrid: false, ignoreLifeStage: true);
     }
     // Frontier
 }

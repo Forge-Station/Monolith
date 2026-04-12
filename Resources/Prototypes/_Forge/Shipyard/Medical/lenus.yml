@@ -9,7 +9,7 @@
   parent: BaseVessel
   name: G3 «Ленус»
   description: Ранний прототип "Домры". Относительно слабовооружённый медицинский шаттл, оборудованный для проведения полного спектра операций на борту. Оборудован хим. лабораторией и медицинским фабрикатором конечностей.
-  price: 147200 #Sell price 128k + 15%
+  price: 154860 #Sell price 128k + 15%
   category: Small
   group: Medical
   shuttlePath: /Maps/_Forge/Shuttles/Medical/lenus.yml

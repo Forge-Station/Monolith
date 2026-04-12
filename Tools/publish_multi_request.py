@@ -75,15 +75,10 @@ def get_files_to_publish() -> Iterable[str]:
 
 
 def get_engine_version() -> str:
-    proc = subprocess.run(
-        ["git", "rev-parse", "--abbrev-ref", "HEAD"],
-        stdout=subprocess.PIPE,
-        cwd="RobustToolbox",
-        check=True,
-        encoding="UTF-8"
-    )
-
-    return proc.stdout.strip()
+    proc = subprocess.run(["git", "describe","--tags", "--abbrev=0"], stdout=subprocess.PIPE, cwd="RobustToolbox", check=True, encoding="UTF-8")
+    tag = proc.stdout.strip()
+    assert tag.startswith("v")
+    return tag[1:] # Cut off v prefix.
 
 
 if __name__ == '__main__':

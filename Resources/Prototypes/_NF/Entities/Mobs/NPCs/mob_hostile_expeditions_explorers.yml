@@ -3,8 +3,7 @@
   name: explorer
   abstract: true
   parent:
-  # - MobNonHumanHostileBase # Forge-Change-Del
-  - MobHumanoidHostileBase # Forge-Change
+  - MobNonHumanHostileBase
   - MobHumanoidInvetory
   - NFMobRestrictions
   id: MobExplorerBase

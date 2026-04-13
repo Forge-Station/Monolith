@@ -4,8 +4,7 @@
   abstract: true
   parent:
   - BaseC3MobHuman
-  # - MobNonHumanHostileBase # Forge-Change-Del
-  - MobHumanoidHostileBase # Forge-Change
+  - MobNonHumanHostileBase
   - MobHumanoidInvetorySimplified
   - MobHumanoidHostileAISimpleRanged
   - NFMobRestrictions

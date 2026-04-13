@@ -1,9 +1,9 @@
 ent-ForgeBaseWeaponFramePistolCybersun = пистолет Cybersun
-ent-ForgeBaseWeaponPistolChamber35HighCapacityOverpressure = магазин
-ent-ForgeBaseWeaponPistolChamber35HighCapacityRubber = патронник
-ent-ForgeBaseWeaponPistolChamber = патронник пистолета
-ent-ForgeBaseWeaponPistolChamber35 = магазин
+ent-ForgeBaseWeaponPistolChamber35HighCapacityOverpressure = пистолет .35 (увеличенный магазин, повышенное давление)
+ent-ForgeBaseWeaponPistolChamber35HighCapacityRubber = пистолет .35 (увеличенный магазин, резина)
+ent-ForgeBaseWeaponPistolChamber = базовый пистолет (патронник)
+ent-ForgeBaseWeaponPistolChamber35 = пистолет .35 (магазин и патронник)
+ent-ForgeBaseWeaponPistolChamber45 = пистолет .45 (магазин и патронник)
+ent-ForgeBaseWeaponPistolChamber35HighCapacity = пистолет .35 (увеличенный магазин)
 ent-ForgeBaseWeaponFramePistol = пистолет
-ent-ForgeBaseWeaponPistolChamber45 = патронник
-ent-ForgeBaseWeaponPistolChamber35HighCapacity = патронник
 ent-ForgeBaseWeaponFramePistolNanotrasen = пистолет Nanotrasen

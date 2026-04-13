@@ -32,6 +32,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Spawners; // Forge-Change
 using Robust.Shared.Timing;
 
 namespace Content.Server.Fluids.EntitySystems;
@@ -41,6 +42,8 @@ namespace Content.Server.Fluids.EntitySystems;
 /// </summary>
 public sealed partial class PuddleSystem : SharedPuddleSystem
 {
+    private const float PuddleAutoDespawnSeconds = 10f * 60f; // Forge-Change
+
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
@@ -507,6 +510,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         }
 
         _solutionContainerSystem.AddSolution(puddleComponent.Solution.Value, addedSolution);
+        EnsureComp<TimedDespawnComponent>(puddleUid).Lifetime = PuddleAutoDespawnSeconds; // Forge-Change
 
         if (checkForOverflow && IsOverflowing(puddleUid, puddleComponent))
         {

@@ -92,3 +92,5 @@
   - type: Tag
     tags:
     - Trash
+  - type: TimedDespawn
+    lifetime: 600

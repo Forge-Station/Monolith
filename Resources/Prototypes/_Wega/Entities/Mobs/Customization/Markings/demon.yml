@@ -122,7 +122,6 @@
   id: DemonDrakeTileAnimated
   bodyPart: Tail
   markingCategory: Tail
-  markingType: NonGenetics
   speciesRestriction: []
   coloring:
     default:

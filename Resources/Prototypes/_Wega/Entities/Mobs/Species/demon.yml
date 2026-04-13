@@ -42,14 +42,6 @@
       types:
         Bloodloss: -2
     bleedReductionAmount: 0.2
-  - type: Speech
-    speechSounds: Lizard
-    speechVerb: Reptilian
-  - type: Vocal
-    sounds:
-      Male: MaleReptilian
-      Female: FemaleReptilian
-      Unsexed: MaleReptilian
   - type: LanguageKnowledge
     speaks:
     - TauCetiBasic

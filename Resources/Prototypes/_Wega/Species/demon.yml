@@ -8,9 +8,14 @@
   dollPrototype: MobDemonDummy
   defaultSkinTone: "#34a223"
   skinColoration: Hues
-  maleFirstNames: names_reptilian_male
-  femaleFirstNames: names_reptilian_female
-  naming: FirstDashFirst
+  maleFirstNames: names_first_male
+  femaleFirstNames: names_first_female
+  lastNames: names_last
+  naming: FirstLast
+  minAge: 50
+  youngAge: 100
+  oldAge: 350
+  maxAge: 500
 
 - type: speciesBaseSprites
   id: MobDemonSprites

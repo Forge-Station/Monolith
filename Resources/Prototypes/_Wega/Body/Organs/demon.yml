@@ -1,26 +1,26 @@
 - type: entity
   id: OrganDemonStomach
-  parent: OrganAnimalStomach
+  parent: OrganHumanStomach
   name: stomach
   categories: [ HideSpawnMenu ]
   components:
   - type: Metabolizer
-    metabolizerTypes: [ Animal ]
+    metabolizerTypes: [ Human, Demon ]
 
 - type: entity
   id: OrganDemonLiver
-  parent: OrganAnimalLiver
+  parent: OrganHumanLiver
   name: liver
   categories: [ HideSpawnMenu ]
   components:
   - type: Metabolizer
-    metabolizerTypes: [ Animal ]
+    metabolizerTypes: [ Human, Demon ]
 
 - type: entity
   id: OrganDemonHeart
-  parent: OrganAnimalHeart
+  parent: OrganHumanHeart
   name: heart
   categories: [ HideSpawnMenu ]
   components:
   - type: Metabolizer
-    metabolizerTypes: [ Animal ]
+    metabolizerTypes: [ Human, Demon ]

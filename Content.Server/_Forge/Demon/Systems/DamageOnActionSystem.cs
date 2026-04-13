@@ -25,6 +25,7 @@ public sealed class DamageOnActionSystem : EntitySystem
     private void OnCompInit(Entity<DamageOnActionComponent> ent, ref ComponentInit args)
     {
         _actions.AddAction(ent.Owner, ref ent.Comp.ActionEntity, ent.Comp.Action, ent.Owner);
+        _actions.SetUseDelay(ent.Comp.ActionEntity, ent.Comp.Delay);
     }
 
     private void OnAction(Entity<DamageOnActionComponent> ent, ref DamageOnActionEvent args)
@@ -44,7 +45,6 @@ public sealed class DamageOnActionSystem : EntitySystem
 
         _hunger.ModifyHunger(ent.Owner, -ent.Comp.HungerPerUse, hunger);
         _damageable.TryChangeDamage(ent.Owner, ent.Comp.Damage, true, false, damageable);
-        _actions.SetCooldown(ent.Comp.ActionEntity, ent.Comp.Delay);
         args.Handled = true;
     }
 }

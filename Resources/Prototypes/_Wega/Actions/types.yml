@@ -1,0 +1,10 @@
+- type: entity
+  id: InstantRegeneration
+  name: Instant regeneration
+  description: "Your second wind, your second chance"
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Wega/Demon/Interface/Actions/action_demon.rsi
+      state: instant_regeneration
+    event: !type:DamageOnActionEvent

@@ -66,6 +66,8 @@
     state: Burnt
   - type: SpaceGarbage # Mono
     cleanupExempt: false # Mono
+  - type: TimedDespawn
+    lifetime: 600
   - type: StaticPrice
     price: 1
 

@@ -1,2 +1,2 @@
-ent-TMagazineGrenadeFrag = магазин осколочных гранат
-ent-TMagazineGrenadeEMP = магазин ЭМИ-гранат
+ent-TMagazineGrenadeFrag = магазин (осколочные гранаты)
+ent-TMagazineGrenadeEMP = магазин (ЭМИ-гранаты)

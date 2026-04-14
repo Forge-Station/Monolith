@@ -7,11 +7,14 @@ using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
+using Robust.Shared.Spawners; // Forge-Change
 
 namespace Content.Server.Implants;
 
 public sealed partial class ImplanterSystem : SharedImplanterSystem
 {
+    private const float ImplanterAutoDespawnSeconds = 10f * 60f; // Forge-Change
+
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -60,7 +63,11 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
 
             //Implant self instantly, otherwise try to inject the target.
             if (args.User == target)
+            {
+                var hadImplantBefore = HasImplantLoaded(component); // Forge-Change
                 Implant(target, target, uid, component);
+                TryScheduleImplanterDespawn(uid, component, hadImplantBefore, usedForImplant: true); // Forge-Change
+            }
             else
                 TryImplant(component, args.User, target, uid);
         }
@@ -120,7 +127,9 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         if (args.Cancelled || args.Handled || args.Target == null || args.Used == null)
             return;
 
+        var hadImplantBefore = HasImplantLoaded(component); // Forge-Change
         Implant(args.User, args.Target.Value, args.Used.Value, component);
+        TryScheduleImplanterDespawn(uid, component, hadImplantBefore, usedForImplant: true); // Forge-Change
 
         args.Handled = true;
     }
@@ -130,8 +139,29 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         if (args.Cancelled || args.Handled || args.Used == null || args.Target == null)
             return;
 
+        var hadImplantBefore = HasImplantLoaded(component); // Forge-Change
         Draw(args.Used.Value, args.User, args.Target.Value, component);
+        TryScheduleImplanterDespawn(uid, component, hadImplantBefore, usedForImplant: false); // Forge-Change
 
         args.Handled = true;
     }
+    // Forge-Change-start
+    private bool HasImplantLoaded(ImplanterComponent component)
+    {
+        return component.ImplanterSlot.ContainerSlot?.ContainedEntities.Count > 0;
+    }
+
+    private void TryScheduleImplanterDespawn(EntityUid uid, ImplanterComponent component, bool hadImplantBefore, bool usedForImplant)
+    {
+        var hasImplantAfter = HasImplantLoaded(component);
+        var success = usedForImplant
+            ? hadImplantBefore && !hasImplantAfter
+            : !hadImplantBefore && hasImplantAfter;
+
+        if (!success)
+            return;
+
+        EnsureComp<TimedDespawnComponent>(uid).Lifetime = ImplanterAutoDespawnSeconds;
+    }
+    // Forge-Change-end
 }

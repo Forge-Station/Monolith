@@ -1,5 +1,5 @@
-implanter-label-bike-horn = Хонк
-implanter-label-light = Фонарик
-implanter-label-medical-tracking = Медицинский трекер
-implanter-label-sad-trombone = Грустный трамбон
-implanter-label-storage = Хранилище
+implanter-label-bike-horn = велосипедный гудок
+implanter-label-light = фонарик
+implanter-label-medical-tracking = медицинский трекер
+implanter-label-sad-trombone = грустный тромбон
+implanter-label-storage = хранилище

@@ -9,7 +9,7 @@
   parent: BaseVessel
   name: G3 «Ноденс»
   description: Вооружённый шаттл для работы в зонах конфликтов, имеющий на борту хим. лабораторию, операционную и набор для криогенетики.
-  price: 180000 #Sell price 155k + 15%
+  price: 185079 #Sell price 155k + 15%
   category: Small
   group: Medical
   shuttlePath: /Maps/_Forge/Shuttles/Medical/nodens.yml

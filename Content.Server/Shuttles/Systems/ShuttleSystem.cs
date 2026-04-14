@@ -16,6 +16,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
+using Content.Shared.Popups;
 using Content.Shared.Salvage;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
@@ -62,6 +63,8 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly PvsOverrideSystem _pvs = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    // Forge-Change:add poi-capture-popup
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedSalvageSystem _salvage = default!;
@@ -92,6 +95,9 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         InitializeFTL();
         InitializeGridFills();
         InitializeIFF();
+        // Forge-Change:start add-poi-capture-init
+        InitializeForgePoiCapture();
+        // Forge-Change:end add-poi-capture-init
         InitializeImpact();
 
         SubscribeLocalEvent<ShuttleComponent, ComponentStartup>(OnShuttleStartup);
@@ -111,6 +117,9 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     {
         base.Update(frameTime);
         UpdateHyperspace();
+        // Forge-Change:start add-poi-capture-update
+        UpdateForgePoiCapture();
+        // Forge-Change:end add-poi-capture-update
     }
 
     private void OnGridFixtureChange(EntityUid uid, FixturesComponent manager, GridFixtureChangeEvent args)

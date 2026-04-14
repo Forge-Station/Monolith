@@ -90,7 +90,7 @@
   - MonoUSSPHead # Mono
   - PilotHead
   - ContractorHead
-  - MonoMercenaryHead
+  # - MonoMercenaryHead # Forge-Change-Del
 
 - type: loadoutGroup
   id: MercenaryEars

@@ -76,6 +76,7 @@
     - state: voucherservice
   - type: ShipyardVoucher
     consoleType: Shipyard
+    companyName: Colonial
     vessels:
     - Jitterbug
     - McChicken
@@ -96,6 +97,7 @@
   - type: Item
     heldPrefix: blue
   - type: ShipyardVoucher
+    companyName: Colonial
     destroyOnEmpty: true
     consoleType: Sr
     access:
@@ -112,6 +114,7 @@
     - state: blue
     - state: vouchermailcarrier
   - type: ShipyardVoucher
+    companyName: Colonial
     access:
     - Mail
 
@@ -126,5 +129,6 @@
     - state: blue
     - state: voucherstationguard
   - type: ShipyardVoucher
+    companyName: Colonial
     access:
     - Brig # odd, but potentially restricts cadets in lieu of a security guard-only access level

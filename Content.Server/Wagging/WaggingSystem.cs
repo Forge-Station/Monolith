@@ -1,5 +1,6 @@
 using Content.Server.Actions;
 using Content.Server.Humanoid;
+using Content.Shared.Actions; // Forge-Change
 using Content.Shared._Shitmed.Humanoid.Events; // Forge-Change
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -80,6 +81,10 @@ public sealed class WaggingSystem : EntitySystem
             component.Wagging = false;
             return;
         }
+
+        // The action container can still be uninitialized during profile load (e.g. integration map init spawn paths).
+        if (!TryComp<ActionsContainerComponent>(uid, out var actionContainer) || !actionContainer.Initialized)
+            return;
 
         _actions.AddAction(uid, ref component.ActionEntity, component.Action, uid);
     }

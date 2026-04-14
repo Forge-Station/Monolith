@@ -1,0 +1,12 @@
+ore-magnet-requires-grid = Магнит должен быть закреплен на гриде.
+ore-magnet-bound-to-grid = Магнит привязан к другому гриду до конца перезарядки.
+ore-magnet-cooldown-active = Магнит перезаряжается: осталось {$minutes} мин.
+ore-magnet-no-orebox-on-grid = На этом гриде не найден ни один рудный ящик.
+ore-magnet-cycle-busy = Магнит еще обрабатывает предыдущий цикл.
+ore-magnet-cycle-started = Цикл магнита запущен. Руды в очереди: {$count}.
+ore-magnet-pull-success = Притянуто руды: {$count}.
+ore-magnet-pull-empty = В радиусе нет руды.
+ore-magnet-overflow-dropped = {$count} ед. руды не поместилось в ящики и было перемещено рядом с магнитом.
+ore-magnet-cooldown-upgrade = перезарядка
+ore-magnet-linked-state-auto = автоматически по ближайшему рудному ящику
+ore-magnet-examine-linked = Подключенный контейнер: {$state}.

@@ -1,0 +1,12 @@
+ore-magnet-requires-grid = This magnet must be anchored on a grid.
+ore-magnet-bound-to-grid = This magnet is bound to another grid until cooldown ends.
+ore-magnet-cooldown-active = Magnet is recharging: {$minutes} minute(s) left.
+ore-magnet-no-orebox-on-grid = No ore box found on this grid.
+ore-magnet-cycle-busy = Magnet is already processing a previous cycle.
+ore-magnet-cycle-started = Magnet cycle started. Queued ore: {$count}.
+ore-magnet-pull-success = Pulled {$count} ore item(s).
+ore-magnet-pull-empty = No ore found in range.
+ore-magnet-overflow-dropped = {$count} ore item(s) did not fit and were moved near the magnet.
+ore-magnet-cooldown-upgrade = cooldown
+ore-magnet-linked-state-auto = automatic by nearest ore box
+ore-magnet-examine-linked = Linked container: {$state}.

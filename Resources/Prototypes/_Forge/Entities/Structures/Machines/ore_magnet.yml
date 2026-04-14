@@ -1,0 +1,24 @@
+- type: entity
+  parent: [BaseMachinePowered, ConstructibleMachine]
+  id: OreMagnetMachine
+  name: ore magnet
+  description: Pulls all nearby ore into a linked container.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/salvage.rsi
+    layers:
+    - state: salvage-magnet
+  - type: ApcPowerReceiver
+    powerLoad: 1500
+  - type: Machine
+    board: OreMagnetMachineCircuitboard
+  - type: OreMagnet
+    range: 100
+    maxRange: 100
+    baseCooldown: 90
+    minCooldown: 30
+    batchSize: 10
+    maxPendingOres: 0
+    batchDelay: 5
+    machinePartCooldown: Capacitor
+    partRatingCooldownMultiplier: 0.75

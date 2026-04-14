@@ -1,9 +1,7 @@
 name: Diff RSIs
 
 on:
-  pull_request_target:
-    paths:
-      - '**.rsi/**.png'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

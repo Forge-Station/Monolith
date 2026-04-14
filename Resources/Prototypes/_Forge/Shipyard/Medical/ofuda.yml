@@ -1,0 +1,40 @@
+# Author Info
+# GitHub: Primusirius
+# Discord: Primusirius
+
+# Shuttle Notes:
+#
+- type: vessel
+  id: Ofuda
+  parent: BaseVessel
+  name: G3 «Офуда»
+  description: Тяжеловооружённый медицинский шаттл для проведения спасательных операций в дальнем космосе. Оборудован щитом, БС приводом, хим. лабораторией и внутренней турелью, для борьбы с нежелательными гостями.
+  price: 223500 #Sell price 190k + 15%
+  category: Small
+  group: Medical
+  shuttlePath: /Maps/_Forge/Shuttles/Medical/ofuda.yml
+  guidebookPage: null
+  class:
+  - Medical
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: Ofuda
+  mapName: 'G3 «Офуда»'
+  mapPath: /Maps/_Forge/Shuttles/Medical/ofuda.yml
+  minPlayers: 0
+  stations:
+    Ofuda:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Офуда MED{1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Contractor: [ 0, 0 ]
+          MdMedic: [ 0, 0 ]
+          Pilot: [ 0, 0 ]
+          Mercenary: [ 0, 0 ]

@@ -29,7 +29,7 @@
     - StreetGangNF
   # - type: Body # Forge-Change-Del
   #   prototype: NFHumanNoHands
-    requiredLegs: 2
+  #   requiredLegs: 2
   - type: RechargeBasicEntityAmmo
     rechargeCooldown: 1.5
     rechargeSound:

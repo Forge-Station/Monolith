@@ -72,6 +72,8 @@ public sealed partial class PoiCaptureConsoleWindow : FancyWindow,
             "iff-console-capture-attacker-prefix",
             state.AttackerCompanyId,
             state.AttackerFactionId);
+        CaptureByLabel.Text = Loc.GetString("iff-console-capture-by-label-value",
+            ("name", string.IsNullOrWhiteSpace(state.LastCapturedByName) ? Loc.GetString("iff-console-capture-by-none") : state.LastCapturedByName));
         CaptureInterruptButton.Disabled = !state.CaptureInProgress;
 
         RebuildTransferOptions(state);

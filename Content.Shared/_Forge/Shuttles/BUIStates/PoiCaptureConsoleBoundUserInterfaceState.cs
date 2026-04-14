@@ -14,6 +14,7 @@ public sealed class PoiCaptureConsoleBoundUserInterfaceState : BoundUserInterfac
     public string CurrentOwnerFactionId = "None";
     public string AttackerCompanyId = "None";
     public string AttackerFactionId = "None";
+    public string LastCapturedByName = "None";
     public List<ForgeIffTransferListEntry> TransferCompanies = new();
 }
 

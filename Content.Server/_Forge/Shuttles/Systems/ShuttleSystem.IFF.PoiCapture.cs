@@ -43,6 +43,8 @@ public sealed partial class ShuttleSystem
             capture.CurrentOwnerFactionId = capture.AttackerFactionId;
             capture.AttackerCompanyId = "None";
             capture.AttackerFactionId = "None";
+            capture.LastCapturedByName = NormalizeForgeOwner(capture.AttackerLeaderName);
+            capture.AttackerLeaderName = "None";
 
             ApplyForgeOwnership(gridUid, capture.CurrentOwnerCompanyId, capture.CurrentOwnerFactionId, capture.CaptureLeaderUserId);
             RefreshForgeIffConsolesForGrid(gridUid);
@@ -81,6 +83,7 @@ public sealed partial class ShuttleSystem
         capture.AttackerCompanyId = actorCompanyId;
         capture.AttackerFactionId = actorFactionId;
         capture.CaptureLeaderUserId = actorSession.UserId;
+        capture.AttackerLeaderName = actorSession.Name;
 
         RefreshForgeIffConsolesForGrid(gridUid);
         _popup.PopupEntity(Loc.GetString("iff-console-capture-started"), uid, actor, PopupType.Medium);
@@ -109,6 +112,7 @@ public sealed partial class ShuttleSystem
         capture.AttackerCompanyId = "None";
         capture.AttackerFactionId = "None";
         capture.CaptureLeaderUserId = null;
+        capture.AttackerLeaderName = "None";
         RefreshForgeIffConsolesForGrid(gridUid);
         _popup.PopupEntity(Loc.GetString("iff-console-capture-interrupted"), uid, actor, PopupType.Medium);
     }
@@ -257,6 +261,7 @@ public sealed partial class ShuttleSystem
         state.CurrentOwnerFactionId = capture.CurrentOwnerFactionId;
         state.AttackerCompanyId = capture.AttackerCompanyId;
         state.AttackerFactionId = capture.AttackerFactionId;
+        state.LastCapturedByName = capture.LastCapturedByName;
         FillForgeCaptureTransferLists(state);
         return state;
     }

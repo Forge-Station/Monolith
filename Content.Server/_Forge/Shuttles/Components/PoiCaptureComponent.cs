@@ -28,4 +28,10 @@ public sealed partial class PoiCaptureComponent : Component
 
     [DataField]
     public NetUserId? CaptureLeaderUserId;
+
+    [DataField]
+    public string AttackerLeaderName = "None";
+
+    [DataField]
+    public string LastCapturedByName = "None";
 }

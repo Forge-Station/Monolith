@@ -151,6 +151,40 @@ public sealed class NFCCVars
     public static readonly CVarDef<float> ShipyardAutoDeleteCheckIntervalSeconds =
         CVarDef.Create("shuttle.shipyard_auto_delete_check_interval_seconds", 60f, CVar.SERVERONLY);
 
+    // Forge-Change: crypto market tuning.
+    public static readonly CVarDef<float> CryptoBasePrice =
+        CVarDef.Create("forge.crypto.base_price", 10000f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> CryptoMinPriceMultiplier =
+        CVarDef.Create("forge.crypto.min_price_multiplier", 0.2f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> CryptoMaxPriceMultiplier =
+        CVarDef.Create("forge.crypto.max_price_multiplier", 2.5f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> CryptoAbsoluteMaxPrice =
+        CVarDef.Create("forge.crypto.absolute_max_price", 50000f, CVar.SERVERONLY); // Forge-Change
+
+    public static readonly CVarDef<float> CryptoPassiveGrowthRate =
+        CVarDef.Create("forge.crypto.passive_growth_rate", 0.005f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> CryptoBaseDrop =
+        CVarDef.Create("forge.crypto.base_drop", 0.06f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> CryptoVolumeDropFactor =
+        CVarDef.Create("forge.crypto.volume_drop_factor", 0.025f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> CryptoMomentumDropFactor =
+        CVarDef.Create("forge.crypto.momentum_drop_factor", 0.015f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> CryptoMinDropMultiplier =
+        CVarDef.Create("forge.crypto.min_drop_multiplier", 0.35f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> CryptoVolumeDecayPerSecond =
+        CVarDef.Create("forge.crypto.volume_decay_per_second", 0.92f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> CryptoHistoryLength =
+        CVarDef.Create("forge.crypto.history_length", 24, CVar.SERVERONLY);
+
     /*
      * Salvage
      */

@@ -243,14 +243,14 @@
   equipment:
     neck: ClothingNeckPonchoArctic
 
-- type: loadout
-  id: ContractorClothingNeckPonchoBlack # Monolith
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: ContractorT2
-  price: 0 # Mono
-  equipment:
-    neck: ClothingNeckPonchoArctic
+# - type: loadout # Forge-Change-Del
+#   id: ContractorClothingNeckPonchoBlack # Monolith
+#   effects:
+#   - !type:GroupLoadoutEffect
+#     proto: ContractorT2
+#   price: 0 # Mono
+#   equipment:
+#     neck: ClothingNeckPonchoArctic
 
 - type: loadout
   id: ContractorClothingNeckUIOvercoat # Monolith

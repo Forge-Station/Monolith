@@ -6,7 +6,7 @@ import os
 import subprocess
 from typing import Iterable
 
-PUBLISH_TOKEN = os.environ["/home/shintra/github/Monolith/Tools/publish_multi_request_mapping.py"]
+PUBLISH_TOKEN = os.environ["PUBLISH_MAPPING_TOKEN"]
 VERSION = os.environ["GITHUB_SHA"]
 FORK_ID = "shintra"
 

@@ -44,8 +44,10 @@
     bleedReductionAmount: 0.2
   - type: LanguageKnowledge
     speaks:
+    - Kelael
     - TauCetiBasic
     understands:
+    - Kelael
     - TauCetiBasic
   - type: Temperature
     heatDamageThreshold: 343

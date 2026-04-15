@@ -39,6 +39,16 @@
     Plastic: 50
     Gold: 50
 
+- type: latheRecipe # Forge Change begin
+  id: KelaelTranslator
+  result: KelaelTranslator
+  completetime: 2
+  materials:
+    Steel: 500
+    Glass: 100
+    Plastic: 50
+    Gold: 50 # Forge Change end
+
 - type: latheRecipe
   id: SolCommonTranslator
   result: SolCommonTranslator
@@ -189,6 +199,17 @@
 - type: latheRecipe
   id: DraconicTranslatorImplanter
   result: DraconicTranslatorImplanter
+  completetime: 2
+  materials:
+    Steel: 500
+    Glass: 500
+    Plastic: 100
+    Gold: 50
+    Silver: 50
+
+- type: latheRecipe
+  id: KelaelTranslatorImplanter
+  result: KelaelTranslatorImplanter
   completetime: 2
   materials:
     Steel: 500

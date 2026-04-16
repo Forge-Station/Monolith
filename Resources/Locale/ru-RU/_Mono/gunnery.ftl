@@ -8,6 +8,21 @@ gunnery-gun-select = {$name}
 gunnery-gun-select-ammo = {$name}: {$ammo}
 
 gunnery-server-examine-detail = Сервер использует [color={$valueColor}]{$usedProcessingPower}/{$processingPower}[/color] своей вычислительной мощности.
+gunnery-server-examine-slots = Сервер сейчас поддерживает [color={$valueColor}]{$usedSlots}/{$maxSlots}[/color] оружейных слотов.
+gunnery-server-tier-low = маломощный сервер управления орудиями
+gunnery-server-tier-medium = средний сервер управления орудиями
+gunnery-server-tier-high = мощный сервер управления орудиями
+gunnery-server-tier-ultra = сверхмощный сервер управления орудиями
+gunnery-server-tier-omega = омега-сервер управления орудиями
+gunnery-upgrade-panel-closed = Сначала откройте техническую панель.
+gunnery-upgrade-already-max = Этот сервер орудий уже достиг максимального уровня.
+gunnery-upgrade-invalid-board = Эта плата апгрейда не подходит текущему уровню сервера ({$currentTier}). Требуется: {$requiredTier}.
+gunnery-upgrade-requires-parts = Для улучшения требуется набор деталей для следующего уровня.
+gunnery-upgrade-success = Сервер управления орудиями улучшен до уровня {$tier}.
+gunnery-upgrade-part-installed = Деталь успешно установлена в сервер управления орудиями.
+gunnery-upgrade-construction-started = Начато улучшение сервера до уровня {$tier}. Установите требуемые детали.
+gunnery-upgrade-construction-active = Идёт улучшение сервера до уровня {$tier}.
+gunnery-upgrade-construction-part = Требуется {$part}: {$inserted}/{$required}
 
 gunnery-select-ballistic = Баллистические
 gunnery-select-energy = Энергетические
@@ -44,6 +59,9 @@ research-technology-shuttle-friendshippirate = Базовое кинетичес
 research-technology-shuttle-cannonball = Продвинутая баллистика
 research-technology-shuttle-grenadeemp = Электромагнитная баллистика
 research-technology-shuttle-gunduster = Автоматизированная подача
+research-technology-shuttle-gunnery-high-upgrade = Усиленный сервер наведения
+research-technology-shuttle-gunnery-ultra-upgrade = Сверхтяжёлая сеть наведения
+research-technology-shuttle-gunnery-omega-upgrade = Омега-ядро наведения
 research-technology-turret-one-ap = Бронебойные пулемётные снаряды
 research-technology-shields = Щиты
 research-technology-turret-two-ap = Бронебойные миномётные снаряды

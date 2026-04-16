@@ -168,5 +168,7 @@
       prob: 0.6
     - id: SpawnLootTechDisksT3Fracture
       prob: 0.2
+    - id: TechDiskOmegaGunnery # Forge-Change
+      prob: 0.05 # Forge-Change: 5%
     sound:
       path: /Audio/Machines/windoor_open.ogg

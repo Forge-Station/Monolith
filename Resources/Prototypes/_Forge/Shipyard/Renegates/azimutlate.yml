@@ -1,0 +1,29 @@
+- type: vessel
+  id: azimutlate
+  parent: BaseVessel
+  name: Азимут-Лайт
+  description: Линейный фрегат, лайт Версия азимута,слабее но не значит хуже . Рекомендованный состав 3-6 человек
+  price: 300000
+  purchasable: false
+  category: Large
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/azimutlate.yml
+  guidebookPage: Null
+  class:
+  - Fighter  
+
+- type: gameMap
+  id: azimutlate
+  mapName: 'Азимут-Лайт'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/azimutlate.yml
+  minPlayers: 0
+  stations:
+    azimutlate:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Азимут-Лайт MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

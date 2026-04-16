@@ -1,0 +1,47 @@
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: AzimutVoucherRenegat
+  result: ShipVoucherAzimut
+  completetime: 10
+  materials:
+    Steel: 42000
+    Plasteel: 55000
+    Plastic: 50000
+    Glass: 9000
+    Plasma: 500
+    UraniumFissile: 1000
+    UraniumDepleted: 5000
+    Silver: 5000
+    Gold: 5000
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: AzimutlateVoucherRenegat
+  result: ShipVoucherAzimutlate
+  completetime: 10
+  materials:
+    Steel: 30000
+    Plasteel: 35000
+    Plastic: 20000
+    Glass: 4000
+    Plasma: 200
+    UraniumFissile: 450
+    UraniumDepleted: 1500
+    Silver: 1500
+    Gold: 2700
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: GalandeVoucherRenegat
+  result: ShipVoucherGalandec
+  completetime: 10
+  materials:
+    Steel: 40000
+    Plasteel: 45000
+    Plastic: 40000
+    Glass: 7000
+    Plasma: 400
+    UraniumFissile: 700
+    UraniumDepleted: 3500
+    Silver: 4000
+    Gold: 4000

@@ -1,6 +1,6 @@
 - type: technology
   id: ShuttleAdvancedComponents
-  name: research-technology-shuttle-advanced-components 
+  name: research-technology-shuttle-advanced-components
   entityIcon: ComputerAdvancedRadar
   discipline: CivilianServices
   tier: 3
@@ -10,8 +10,7 @@
 #  - MachineShieldMS225Circuitboard
   - GunneryControlComputerCircuitboard
   - MachineGCSLowCircuitboard
-  - MachineGCSMediumCircuitboard
-  - MachineGCSHighCircuitboard
+  - GCSMediumUpgradeCircuitboard # Forge-Change
   - AdvancedRadarConsoleCircuitboard
   - ComputerIFFCircuitboard
   - MachineDriveCTLA25Circuitboard
@@ -20,6 +19,35 @@
   - SuperParts
   position: -6, 7
 
+# Forge-Change-Start
+- type: technology
+  id: ShuttleGunneryHighUpgradeResearch
+  name: research-technology-shuttle-gunnery-high-upgrade
+  entityIcon: GunneryServerHigh
+  discipline: Experimental
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - GCSHighUpgradeCircuitboard
+  technologyPrerequisites:
+  - ShuttleAdvancedComponents
+  - SuperParts
+  position: -5, 8
+
+- type: technology
+  id: ShuttleGunneryUltraUpgradeResearch
+  name: research-technology-shuttle-gunnery-ultra-upgrade
+  entityIcon: GunneryServerUltra
+  discipline: Experimental
+  tier: 3
+  cost: 85000
+  recipeUnlocks:
+  - GCSUltraUpgradeCircuitboard
+  technologyPrerequisites:
+  - ShuttleGunneryHighUpgradeResearch
+  - ShuttleCtlaAdvancedDriveResearch
+  position: -5, 10
+# Forge-Change-end
 
 - type: technology
   id: ShuttleCtlaAdvancedDriveResearch

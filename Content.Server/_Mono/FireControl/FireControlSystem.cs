@@ -57,6 +57,7 @@ public sealed partial class FireControlSystem : EntitySystem
 
         InitializeConsole();
         InitializeTargetGuided();
+        InitializeUpgrades(); // Forge-Change
 
         _artilleryQuery = GetEntityQuery<SpaceArtilleryComponent>();
         _fireRotateQuery = GetEntityQuery<FireControlRotateComponent>();
@@ -93,6 +94,16 @@ public sealed partial class FireControlSystem : EntitySystem
                 ("valueColor", component.UsedProcessingPower <= component.ProcessingPower - 2 ? "green" : "yellow")
             )
         );
+        // Forge-Change-Start
+        args.PushMarkup(
+            Loc.GetString(
+                "gunnery-server-examine-slots",
+                ("usedSlots", component.Controlled.Count),
+                ("maxSlots", component.MaxWeapons),
+                ("valueColor", component.Controlled.Count < component.MaxWeapons ? "green" : "yellow")
+            )
+        );
+        // Forge-Change-end
     }
 
     private void OnControllablePowerChanged(EntityUid uid, FireControllableComponent component, PowerChangedEvent args)
@@ -276,6 +287,12 @@ public sealed partial class FireControlSystem : EntitySystem
         var processingPowerCost = GetProcessingPowerCost(controllable, component);
 
         if (processingPowerCost > GetRemainingProcessingPower(gridServer.ServerUid.Value, gridServer.ServerComponent))
+            return false;
+
+        // Forge-Change-Start
+        if (gridServer.ServerComponent.Controlled.Count >= gridServer.ServerComponent.MaxWeapons)
+            return false;
+        // Forge-Change-end
             return false;
 
         if (gridServer.ServerComponent.Controlled.Add(controllable))

@@ -1,2 +1,2 @@
-ent-SmgPulse = импульсный ПП
-ent-SmgPulseSniper = импульсная снайперская
+ent-SmgPulse = импульсный луч (ПП)
+ent-SmgPulseSniper = импульсный луч (снайперский, ПП)

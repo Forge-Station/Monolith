@@ -424,10 +424,10 @@
     blockUnequipWhenAttached: true
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingModsuitHelmetMercenary
-      gloves: ClothingModsuitGauntletsMercenary
-      outerClothing: ClothingModsuitChestplateMercenary
-      shoes: ClothingModsuitBootsMercenary
+      head: ClothingModsuitHelmetGalloglass
+      gloves: ClothingModsuitGauntletsGalloglass
+      outerClothing: ClothingModsuitChestplateGalloglass
+      shoes: ClothingModsuitBootsGalloglass
   - type: WiresPanel
   - type: ItemSlots
     slots:

@@ -208,7 +208,7 @@
     armorPenetration: 0.2
 
 - type: entity
-  name: радиактивный снаряд
+  name: radioactive bolt
   id: ForgeBulletXrayLaser
   parent: ForgeBaseBulletLaser
   categories: [ HideSpawnMenu ]
@@ -288,7 +288,7 @@
     armorPenetration: 0.5
 
 - type: entity
-  name: Уничтожить
+  name: narrow pulse volley
   id: ForgeBulletHeavyPulseNarrow
   categories: [ HideSpawnMenu ]
   parent: ForgeBulletPulse
@@ -300,7 +300,7 @@
 
 - type: entity
   id: ForgeBulletDisablerHeavy
-  name: Обезвредить
+  name: heavy disabler bolt
   parent: BulletDisabler
   categories: [ HideSpawnMenu ]
   components:

@@ -1,5 +1,5 @@
 ent-ForgeBaseItemWeaponGunMagazineFed = огнестрельное оружие с магазином
-ent-ForgeBaseWeaponEncumbranceMachinePistol = малогабаритный пистолет
+ent-ForgeBaseWeaponEncumbranceMachinePistol = пистолет-пулемёт компактный
 ent-ForgeBaseWeaponEncumbranceSubMachineGun = пистолет-пулемёт
 ent-ForgeBaseWeaponEncumbrancePistol = пистолет
 ent-ForgeBaseWeaponEncumbranceLauncher = гранатомёт

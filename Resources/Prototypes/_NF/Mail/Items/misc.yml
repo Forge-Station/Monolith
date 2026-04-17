@@ -187,6 +187,8 @@
     state: burnt-icon
   - type: Smokable
     state: Burnt
+  - type: TimedDespawn
+    lifetime: 600
   - type: SolutionContainerManager
     solutions:
       smokable:
@@ -208,3 +210,10 @@
   - type: PneumaticCannon
     throwItems: false # must be false to get the TOOMP
     baseProjectileSpeed: 25.0 # zoom
+
+- type: entity
+  id: DrinkBottleVisualsNoInHand
+  abstract: true
+  components:
+  - type: SolutionContainerVisuals
+    inHandsMaxFillLevels: 0

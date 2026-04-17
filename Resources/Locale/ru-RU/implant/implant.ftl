@@ -1,28 +1,37 @@
-## Implanter Attempt Messages
+## Сообщения при использовании имплантера
 
-implanter-component-implanting-target = { $user } пытается что-то в вас имплантировать!
-implanter-component-implant-failed = { $implant } нельзя имплантировать в { $target }!
-implanter-draw-failed-permanent = { $implant } вросся в { $target } и не может быть удалён!
-implanter-draw-failed = Вы пытаетесь удалить имплант, но ничего не находите.
-implanter-component-implant-already = { $target } уже имеет { $implant }!
+implanter-component-implanting-target = {$user} пытается что-то вам имплантировать!
+implanter-component-implant-failed = Имплант «{$implant}» нельзя ввести субъекту {$target}!
+implanter-draw-failed-permanent = Имплант «{$implant}» у { OBJECT($target) } сросся с телом и не может быть извлечён!
+implanter-draw-failed = Вы пытаетесь извлечь имплант, но не находите подходящего.
+implanter-draw-failed-catastrophically = Имплантер ничего не находит и даёт сбой, вливая горячий материал в руку {$user}!
+implanter-component-implant-already = У {$target} уже есть «{$implant}»!
 
-## UI
+## Интерфейс
 
-implanter-draw-text = Извлечение
-implanter-inject-text = Установка
-implanter-empty-text = Пусто
-implanter-label = [color=green]{ $implantName }[/color] Режим: [color=white]{ $modeString }[/color]
-implanter-contained-implant-text = [color=green]{ $desc }[/color]
-
-## Implanter Actions
-
-scramble-implant-activated-popup = Вы превратились в { $identity }
-deathrattle-implant-dead-message = Зафиксирована смерть { $user } { $position }.
-deathrattle-implant-critical-message = Жизненные показатели { $user } критические, требуется немедленная помощь { $position }.
-implanter-draw-failed-catastrophically = Имплантер ничего не находит и выдаёт фатальную ошибку, вбрасывая генетический материал в руку {$user}!
-implanter-set-draw-verb = Установить извлечение импланта
-implanter-set-draw-window = Установить извлечение импланта
-implanter-set-draw-info = Выберите тип импланта для извлечения:
+implanter-set-draw-verb = Настроить извлечение импланта
+implanter-set-draw-window = Настроить извлечение импланта
+implanter-set-draw-info = Выберите тип импланта, который этот имплантер должен извлекать:
 implanter-set-draw-type = Тип импланта:
-implanter-label-inject = [color=green]{$implantName}[/color] Режим: [color=white]{$modeString}[/color]
-implanter-label-draw = [color=red]{$implantName}[/color] Режим: [color=white]{$modeString}[/color]
+
+implanter-draw-text = Извлечь
+implanter-inject-text = Ввести
+
+implanter-empty-text = Пусто
+
+implanter-label-inject = [color=green]{$implantName}[/color]
+    Режим: [color=white]{$modeString}[/color]
+
+implanter-label-draw = [color=red]{$implantName}[/color]
+    Режим: [color=white]{$modeString}[/color]
+
+implanter-contained-implant-text = [color=green]{$desc}[/color]
+
+## Всплывающие сообщения имплантов
+
+scramble-implant-activated-popup = Ваша внешность меняется!
+
+## Сообщения имплантов
+
+deathrattle-implant-dead-message = {$user}{$specie} погиб. Место: {$grid}{$position}.
+deathrattle-implant-critical-message = {$user}{$specie}: жизненные показатели критические, требуется немедленная помощь. Место: {$grid}{$position}.

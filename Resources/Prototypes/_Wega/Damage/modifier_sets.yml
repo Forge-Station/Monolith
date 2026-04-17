@@ -7,3 +7,13 @@
     Cold: 1.25
     Heat: 1.25
     Poison: 0.8
+
+- type: damageModifierSet
+  id: Demon
+  coefficients:
+    Blunt: 1.05
+    Slash: 1.05
+    Piercing: 1.05
+    Cold: 0.9
+    Heat: 0.85
+    Poison: 0.85

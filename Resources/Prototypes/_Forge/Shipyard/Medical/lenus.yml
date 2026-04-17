@@ -1,0 +1,40 @@
+# Author Info
+# GitHub: Primusirius
+# Discord: Primusirius
+
+# Shuttle Notes:
+#
+- type: vessel
+  id: Lenus
+  parent: BaseVessel
+  name: G3 «Ленус»
+  description: Ранний прототип "Домры". Относительно слабовооружённый медицинский шаттл, оборудованный для проведения полного спектра операций на борту. Оборудован хим. лабораторией и медицинским фабрикатором конечностей.
+  price: 178000 #Sell price 152k + 15%
+  category: Medium
+  group: Medical
+  shuttlePath: /Maps/_Forge/Shuttles/Medical/lenus.yml
+  guidebookPage: null
+  class:
+  - Medical
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: Lenus
+  mapName: 'G3 «Ленус»'
+  mapPath: /Maps/_Forge/Shuttles/Medical/lenus.yml
+  minPlayers: 0
+  stations:
+    Lenus:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Ленус MED{1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Contractor: [ 0, 0 ]
+          MdMedic: [ 0, 0 ]
+          Pilot: [ 0, 0 ]
+          Mercenary: [ 0, 0 ]

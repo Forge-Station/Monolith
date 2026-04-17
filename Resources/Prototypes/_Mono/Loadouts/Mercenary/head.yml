@@ -1,5 +1,5 @@
-- type: loadout
-  id: MercenaryClothingHeadHatBH
-  price: 0
-  equipment:
-    head: ClothingHeadHatBH
+# - type: loadout # Forge-Change-Del 
+#   id: MercenaryClothingHeadHatBH
+#   price: 0
+#   equipment:
+#     head: ClothingHeadHatBH

@@ -1,0 +1,69 @@
+- type: reagent
+  id: AntiSepticFluid
+  parent: BaseDrink
+  name: reagent-name-antiseptic
+  group: Toxins
+  desc: reagent-desc-antiseptic
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: antiseptic
+  color: "#457c7d"
+  recognizable: true
+  boilingPoint: 100.0
+  meltingPoint: 0.0
+  plantMetabolism:
+  - !type:PlantAdjustWater
+    amount: -0.5
+  - !type:PlantAdjustToxins
+    amount: 0.2
+  slipData:
+    requiredSlipSpeed: 3.5
+  metabolisms:
+    Drink:
+      effects:
+      # Shouldn't drink this.
+      - !type:SatiateThirst
+        factor: -0.2
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.05
+
+- type: reagent
+  id: NFZombieBiteToxin
+  name: reagent-name-zombie-bite-toxin
+  group: Toxins
+  desc: reagent-desc-zombie-bite-toxin
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: bitter
+  color: "#6c805c"
+  plantMetabolism:
+  - !type:PlantAdjustToxins
+    amount: 10
+  - !type:PlantAdjustHealth
+    amount: -5
+  metabolisms:
+    Poison:
+      metabolismRate : 0.05
+      effects:
+      - !type:SatiateThirst
+        factor: -0.2
+      - !type:SatiateHunger
+        factor: -0.2
+      - !type:MovespeedModifier
+        conditions:
+        - !type:ReagentThreshold
+          min: 1.75
+        walkSpeedModifier: 0.85
+        sprintSpeedModifier: 0.85
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 4
+        damage:
+          types:
+            Poison: 1
+      - !type:PopupMessage
+        type: Local
+        visualType: MediumCaution
+        messages: [ "generic-reagent-effect-burning-insides" ]
+        probability: 0.2

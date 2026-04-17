@@ -10,6 +10,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Localization;   //Forge-Change: add localization manager
 using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.BaseButton;
+using Robust.Client.UserInterface; //Forge-Change: wiki redirect button
 
 namespace Content.Client._NF.Shipyard.UI;
 
@@ -49,6 +50,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
         SellShipButton.OnPressed += (args) => { OnSellShip?.Invoke(args); };
         UnassignDeedButton.OnPressed += (args) => { OnUnassignDeed?.Invoke(args); };
         RenameButton.OnPressed += OnRenameButtonPressed;
+        ShipWikiButton.OnPressed += OnShipWikiButtonPressed; //Forge-Change: wiki redirect button
     }
 
 
@@ -84,6 +86,14 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
 
         OnRenameShip?.Invoke(newName);
         RenameLineEdit.Text = "";
+    }
+
+    //Forge-Change: wiki redirect button
+    private void OnShipWikiButtonPressed(ButtonEventArgs args)
+    {
+        var uriOpener = IoCManager.Resolve<IUriOpener>();
+        var link = "https://station14.ru/wiki/Frontier:Шаттлы";
+        uriOpener.OpenUri(link);
     }
 
     private void OnSearchBarTextChanged(LineEdit.LineEditEventArgs args)

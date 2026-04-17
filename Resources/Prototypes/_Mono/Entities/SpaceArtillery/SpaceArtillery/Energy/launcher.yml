@@ -184,7 +184,7 @@
   parent:
   - BallisticArtillery
   - BallisticArtilleryTier0HP
-  - ConstructibleMachine #Could possibly create a ConstructibleTurret proto if more are added; comps currently do nothing upgrade wise
+  # Forge-Change: no longer manually assembled through generic machine frames
   description: Uses mechanisms to launch... something. Destroys rock easily. Limited range.
   components:
   - type: StaticPrice
@@ -224,12 +224,6 @@
   - type: ProjectileBatteryAmmoProvider
     proto: ShipM25Projectile
     fireCost: 100
-  - type: Machine
-    board: WeaponTurretM25Circuitboard
-  - type: ContainerContainer
-    containers:
-      machine_board: !type:Container
-      machine_parts: !type:Container
   - type: RadarBlip
     radarColor: "#C92BCC"
     scale: 1

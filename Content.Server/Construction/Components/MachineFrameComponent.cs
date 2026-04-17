@@ -1,7 +1,8 @@
-﻿using Content.Shared.Construction.Components;
+using Content.Shared.Construction.Components;
 using Content.Shared.Construction.Prototypes; // Frontier: upgradeable machine parts
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary; // Frontier: upgradeable machine parts
@@ -43,6 +44,12 @@ namespace Content.Server.Construction.Components
 
         [ViewVariables]
         public Container BoardContainer = default!;
+
+        [DataField("boardWhitelist")]
+        public EntityWhitelist? BoardWhitelist;
+
+        [DataField("boardBlacklist")]
+        public EntityWhitelist? BoardBlacklist;
 
         [ViewVariables]
         public Container PartContainer = default!;

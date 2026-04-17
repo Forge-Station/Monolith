@@ -1,6 +1,6 @@
 - type: technology
   id: ShuttleAdvancedComponents
-  name: research-technology-shuttle-advanced-components 
+  name: research-technology-shuttle-advanced-components
   entityIcon: ComputerAdvancedRadar
   discipline: CivilianServices
   tier: 3
@@ -15,10 +15,11 @@
   - AdvancedRadarConsoleCircuitboard
   - ComputerIFFCircuitboard
   - MachineDriveCTLA25Circuitboard
+  - ShipWeaponFabricatorCircuitboard # Forge-Change
   technologyPrerequisites:
   - Shuttlecraft
   - SuperParts
-  position: -6, 7
+  position: -4, 5
 
 
 - type: technology
@@ -34,4 +35,4 @@
   technologyPrerequisites:
   - ShuttleAdvancedComponents
   - PortableFission
-  position: -6, 9
+  position: -5, 5

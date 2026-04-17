@@ -1,0 +1,80 @@
+# SpaceArtillery classification used by this tree:
+# T1: L85, M25, Phalanx
+# T2: RAC-30, AK570, Dravon, Type-35, M220, Vespera, Vanyk
+# T3: Cerberus, Bofors, Tarnyx, Prometheus, Serpent, Tovek, Trident, Light Munitions Bay
+# T4: Longbow, Cyrexa, M381 Charon, Apollo
+# Special: faction-only, ADS-only, drone-only, utility-only, and Tier5+ outliers stay outside this chain.
+
+- type: technology
+  id: ForgeShipWeaponsT1Research
+  name: forge-research-technology-shipweapons-t1
+  entityIcon: WeaponTurretL85Autocannon
+  discipline: Experimental
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - WeaponTurretL85AutocannonCircuitboard
+  - WeaponTurretM25Circuitboard
+  - WeaponLaserTurretL1PhalanxCircuitboard
+  technologyPrerequisites:
+  - BasicShuttleArmament
+  - ShuttleAdvancedComponents
+  position: -2, 4
+
+- type: technology
+  id: ForgeShipWeaponsT2Research
+  name: forge-research-technology-shipweapons-t2
+  entityIcon: WeaponTurretAK570
+  discipline: Experimental
+  tier: 3
+  cost: 90000
+  recipeUnlocks:
+  - WeaponTurretRAC30Circuitboard
+  - WeaponTurretAK570Circuitboard
+  - WeaponTurretDravonCircuitboard
+  - WeaponTurretType35Circuitboard
+  - WeaponTurretM220Circuitboard
+  - WeaponTurretVesperaCircuitboard
+  - WeaponTurretVanykCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponsT1Research
+  - ShuttleGunneryHighUpgradeResearch
+  position: -1, 4
+
+- type: technology
+  id: ForgeShipWeaponsT3Research
+  name: forge-research-technology-shipweapons-t3
+  entityIcon: WeaponTurretBofors
+  discipline: Experimental
+  tier: 3
+  cost: 130000
+  recipeUnlocks:
+  - WeaponTurretCerberusCircuitboard
+  - WeaponTurretBoforsCircuitboard
+  - WeaponTurretTarnyxReloadCircuitboard
+  - WeaponLaserTurretPrometheusCircuitboard
+  - WeaponTurretSerpentMissileCircuitboard
+  - WeaponTurretTovekCircuitboard
+  - WeaponTurretASM220Circuitboard
+  - WeaponTurretLightMunitionsBayCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponsT2Research
+  - ShuttleGunneryUltraUpgradeResearch
+  position: -1, 5
+
+- type: technology
+  id: ForgeShipWeaponsT4Research
+  name: forge-research-technology-shipweapons-t4
+  entityIcon: WeaponTurretCyrexa
+  discipline: Experimental
+  tier: 3
+  cost: 190000
+  recipeUnlocks:
+  - WeaponTurretLongbowCircuitboard
+  - WeaponTurretCyrexaCircuitboard
+  - WeaponTurretCharonReloadCircuitboard
+  - WeaponLaserTurretApolloCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponsT3Research
+  - ShuttleCtlaAdvancedDriveResearch
+  position: -2, 5

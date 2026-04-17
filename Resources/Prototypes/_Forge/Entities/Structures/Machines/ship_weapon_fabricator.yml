@@ -1,0 +1,74 @@
+- type: entity
+  id: ShipWeaponFabricator
+  parent: [BaseMachinePowered, ConstructibleMachine]
+  name: naval weapon fabricator
+  description: An industrial assembly machine for building ship weapons from researched blueprints and loaded components.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/flatpacker.rsi
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: screen
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: packing
+      map: ["fabricating"]
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+      enum.ShipWeaponFabricatorVisuals.Fabricating:
+        fabricating:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  - type: Machine
+    board: ShipWeaponFabricatorCircuitboard
+  - type: ShipWeaponFabricator
+    boardWhitelist:
+      components:
+      - ShipWeaponBoard
+    powerLoadIdle: 1500
+    powerLoadActive: 12000
+    outputFlatpackPrototype: ForgeShipWeaponFlatpack
+  - type: ActivatableUI
+    key: enum.ShipWeaponFabricatorUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ShipWeaponFabricatorUiKey.Key:
+        type: ShipWeaponFabricatorBoundUserInterface
+  - type: WiresPanel
+  - type: WiresVisuals
+  - type: AmbientSound
+    enabled: false
+    volume: 4
+    range: 3
+    sound:
+      path: /Audio/Items/rped.ogg
+  - type: MaterialStorage
+    storageLimit: 60000
+    canEjectStoredMaterials: true # Forge-Change: allow manual resource extraction from fabricator
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      weapon_board: !type:ContainerSlot
+      weapon_parts: !type:Container
+  - type: Construction
+    containers:
+    - machine_parts
+    - machine_board
+    - weapon_board
+    - weapon_parts

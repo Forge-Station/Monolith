@@ -1,0 +1,317 @@
+- type: entity
+  id: ForgeShipWeaponCircuitboardT1
+  parent: BaseMachineCircuitboard
+  abstract: true
+  components:
+  - type: Sprite
+    state: security
+  - type: ShipWeaponBoard
+    fabricationTime: 8
+    requiredPartRating: 1
+  - type: MachineBoard
+    flatpackable: false
+    requirements:
+      Capacitor: 1
+      Manipulator: 2
+      MatterBin: 1
+    stackRequirements:
+      Steel: 10
+      Glass: 6
+      CableHV: 2
+
+- type: entity
+  id: ForgeShipWeaponCircuitboardT2
+  parent: BaseMachineCircuitboard
+  abstract: true
+  components:
+  - type: Sprite
+    state: security
+  - type: ShipWeaponBoard
+    fabricationTime: 12
+    requiredPartRating: 2
+  - type: MachineBoard
+    flatpackable: false
+    requirements:
+      Capacitor: 2
+      Manipulator: 2
+      MatterBin: 1
+    stackRequirements:
+      Steel: 16
+      Glass: 8
+      CableHV: 3
+      Plasteel: 5
+      Gold: 3
+
+- type: entity
+  id: ForgeShipWeaponCircuitboardT3
+  parent: BaseMachineCircuitboard
+  abstract: true
+  components:
+  - type: Sprite
+    state: security
+  - type: ShipWeaponBoard
+    fabricationTime: 18
+    requiredPartRating: 3
+  - type: MachineBoard
+    flatpackable: false
+    requirements:
+      Capacitor: 3
+      Manipulator: 3
+      MatterBin: 2
+    stackRequirements:
+      Steel: 24
+      Glass: 12
+      CableHV: 4
+      Plasteel: 10
+      Gold: 5
+      Plasma: 5
+      Uranium: 3
+
+- type: entity
+  id: ForgeShipWeaponCircuitboardT4
+  parent: BaseMachineCircuitboard
+  abstract: true
+  components:
+  - type: Sprite
+    state: security
+  - type: ShipWeaponBoard
+    fabricationTime: 25
+    requiredPartRating: 4
+  - type: MachineBoard
+    flatpackable: false
+    requirements:
+      Capacitor: 4
+      Manipulator: 4
+      MatterBin: 2
+    stackRequirements:
+      Steel: 32
+      Glass: 16
+      CableHV: 6
+      Plasteel: 20
+      Gold: 8
+      Plasma: 10
+      Uranium: 8
+      Bluespace: 3
+      Diamond: 3
+
+- type: entity
+  id: WeaponTurretL85AutocannonCircuitboard
+  parent: ForgeShipWeaponCircuitboardT1
+  name: L85 autocannon machine board
+  description: A machine printed circuit board for an L85 20mm autocannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretL85Autocannon
+
+- type: entity
+  id: WeaponTurretM25Circuitboard
+  parent: ForgeShipWeaponCircuitboardT1
+  name: M25 mining pulser machine board
+  description: A machine printed circuit board for an M25 mining pulser.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretM25
+
+- type: entity
+  id: WeaponLaserTurretL1PhalanxCircuitboard
+  parent: ForgeShipWeaponCircuitboardT1
+  name: L-1 Phalanx machine board
+  description: A machine printed circuit board for an L-1 Phalanx light laser emplacement.
+  components:
+  - type: MachineBoard
+    prototype: WeaponLaserTurretL1Phalanx
+
+- type: entity
+  id: WeaponTurretRAC30Circuitboard
+  parent: ForgeShipWeaponCircuitboardT2
+  name: RAC-30 autocannon machine board
+  description: A machine printed circuit board for a RAC-30 Draupnir autocannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretRAC30
+  - type: Tag
+    tags:
+    - MachineBoard2x1
+
+- type: entity
+  id: WeaponTurretAK570Circuitboard
+  parent: ForgeShipWeaponCircuitboardT2
+  name: AK570 autocannon machine board
+  description: A machine printed circuit board for an AK570 57mm autocannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretAK570
+
+- type: entity
+  id: WeaponTurretDravonCircuitboard
+  parent: ForgeShipWeaponCircuitboardT2
+  name: DRAVON autocannon machine board
+  description: A machine printed circuit board for an ADBP-7 DRAVON 90mm autocannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretDravon
+
+- type: entity
+  id: WeaponTurretType35Circuitboard
+  parent: ForgeShipWeaponCircuitboardT2
+  name: Type-35 plasma cannon machine board
+  description: A machine printed circuit board for a Type-35 MARAUDER-type plasma cannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretType35
+
+- type: entity
+  id: WeaponTurretM220Circuitboard
+  parent: ForgeShipWeaponCircuitboardT2
+  name: M220 RUBICON machine board
+  description: A machine printed circuit board for an M220 RUBICON EMP launcher.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretM220
+
+- type: entity
+  id: WeaponTurretVesperaCircuitboard
+  parent: ForgeShipWeaponCircuitboardT2
+  name: VESPERA missile rack machine board
+  description: A machine printed circuit board for an ADMP-50 VESPERA missile rack.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretVespera
+
+- type: entity
+  id: WeaponTurretVanykCircuitboard
+  parent: ForgeShipWeaponCircuitboardT2
+  name: Vanyk missile pod machine board
+  description: A machine printed circuit board for an ASM-150 Vanyk missile pod.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretVanyk
+
+- type: entity
+  id: WeaponTurretCerberusCircuitboard
+  parent: ForgeShipWeaponCircuitboardT3
+  name: Cerberus scattercannon machine board
+  description: A machine printed circuit board for a TPC Cerberus plasma scattercannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretCerberus
+  - type: Tag
+    tags:
+    - MachineBoard2x1
+
+- type: entity
+  id: WeaponTurretBoforsCircuitboard
+  parent: ForgeShipWeaponCircuitboardT3
+  name: Bofors cannon machine board
+  description: A machine printed circuit board for a Bofors 255mm cannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretBofors
+  - type: Tag
+    tags:
+    - MachineBoard2x2
+
+- type: entity
+  id: WeaponTurretTarnyxReloadCircuitboard
+  parent: ForgeShipWeaponCircuitboardT3
+  name: TARNYX EMP cannon machine board
+  description: A machine printed circuit board for a ship-grade ADBX-31 TARNYX EMP cannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretTarnyxReload
+
+- type: entity
+  id: WeaponLaserTurretPrometheusCircuitboard
+  parent: ForgeShipWeaponCircuitboardT3
+  name: Prometheus laser cannon machine board
+  description: A machine printed circuit board for a TPC Prometheus laser cannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponLaserTurretPrometheus
+  - type: Tag
+    tags:
+    - MachineBoard2x1
+
+- type: entity
+  id: WeaponTurretSerpentMissileCircuitboard
+  parent: ForgeShipWeaponCircuitboardT3
+  name: Serpent torpedo launcher machine board
+  description: A machine printed circuit board for a Serpent torpedo launcher.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretSerpentMissile
+
+- type: entity
+  id: WeaponTurretTovekCircuitboard
+  parent: ForgeShipWeaponCircuitboardT3
+  name: TOVEK missile pod machine board
+  description: A machine printed circuit board for an ADMX-250 TOVEK missile pod.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretTovek
+
+- type: entity
+  id: WeaponTurretASM220Circuitboard
+  parent: ForgeShipWeaponCircuitboardT3
+  name: Trident torpedo rack machine board
+  description: A machine printed circuit board for an ASM-220 Trident torpedo rack.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretASM220
+
+- type: entity
+  id: WeaponTurretLightMunitionsBayCircuitboard
+  parent: ForgeShipWeaponCircuitboardT3
+  name: light munitions bay machine board
+  description: A machine printed circuit board for a GPOB-L light munitions bay.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretLightMunitionsBay
+
+- type: entity
+  id: WeaponTurretLongbowCircuitboard
+  parent: ForgeShipWeaponCircuitboardT4
+  name: Longbow autocannon machine board
+  description: A machine printed circuit board for an L65 Longbow 90mm autocannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretLongbow
+  - type: Tag
+    tags:
+    - MachineBoard2x2
+
+- type: entity
+  id: WeaponTurretCyrexaCircuitboard
+  parent: ForgeShipWeaponCircuitboardT4
+  name: CYREXA cannon machine board
+  description: A machine printed circuit board for a CYREXA 220mm cannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretCyrexa
+  - type: Tag
+    tags:
+    - MachineBoard2x2
+
+- type: entity
+  id: WeaponTurretCharonReloadCircuitboard
+  parent: ForgeShipWeaponCircuitboardT4
+  name: CHARON mass driver machine board
+  description: A machine printed circuit board for an M381 CHARON mass driver.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretCharonReload
+  - type: Tag
+    tags:
+    - MachineBoard2x2
+
+- type: entity
+  id: WeaponLaserTurretApolloCircuitboard
+  parent: ForgeShipWeaponCircuitboardT4
+  name: Apollo laser cannon machine board
+  description: A machine printed circuit board for an L-20 Apollo mining laser cannon.
+  components:
+  - type: MachineBoard
+    prototype: WeaponLaserTurretApollo
+  - type: Tag
+    tags:
+    - MachineBoard2x2

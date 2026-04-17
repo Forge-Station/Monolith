@@ -1,0 +1,7 @@
+- type: entity
+  id: ForgeShipWeaponFlatpack
+  parent: BaseNFFlatpack
+  name: ship weapon flatpack
+  description: A packed naval weapon assembly crate. Use a multitool to deploy.
+  components:
+  - type: Flatpack

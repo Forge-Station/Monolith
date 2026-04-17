@@ -35,7 +35,7 @@ signal-port-name-weapons-input = Порт вооружения
 signal-port-name-weapons-input-description = Соедините входной порт с выходным портом здесь.
 
 research-discipline-shiparmory = Корабельное вооружение
-research-technology-basic-weaponpad = Система наведения
+research-technology-basic-weaponpad = Система управления огня
 research-technology-basic-weapon = Базовое энергетическое вооружение
 research-technology-shuttle-powercage = Улучшенное хранение энергии
 research-technology-shuttle-perforator = Энергоёмкие конденсаторы

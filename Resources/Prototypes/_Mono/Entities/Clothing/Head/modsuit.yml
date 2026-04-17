@@ -384,7 +384,7 @@
 # Gallóglach
 - type: entity
   parent: BaseClothingModsuitHelmet
-  id: ClothingModsuitHelmetMercenary
+  id: ClothingModsuitHelmetGalloglass
   name: mercenary modsuit helmet
   description: The visor is sky blue, so your enemies don't realize you haven't put them on their backs yet. Comes with a built in Mass Scanner in its HUD.
   categories: [ HideSpawnMenu ]

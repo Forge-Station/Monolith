@@ -11,6 +11,12 @@
   id: MobMercenaryBase
   description: A mercenary, merc, soldier of fortune, hired gun, dog of war.
   components:
+  # Forge-Change-Start
+  - type: Body
+    prototype: Human
+    requiredLegs: 2
+  - type: ComplexInteraction
+  # Forge-Change-End
   - type: Damageable
     damageModifierSet: MobMercenaryDamageModifierSet
   - type: NpcFactionMember

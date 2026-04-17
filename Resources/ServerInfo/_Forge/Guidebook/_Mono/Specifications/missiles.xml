@@ -1,13 +1,13 @@
 <Document>
-  # Missile Weapons Specifications
-  Notes:
-  - Munition range & ammo capacity is taken from the standard magazine & ammunition that comes loaded with the weapon.
-  - For munitions that accelerate over time (such as missiles), range is a rough estimate.
-  - For munitions that are fired at a static speed (such as normal weapons), range is simply just the launch velocity * projectile lifetime.
-  - RPS may not be accurate due to it being capped by server tick speed (usually 20 or 30 ticks/second).
-  - Rare guns such as ADS/NT/Syndicate shipguns will not be included.
+# Характеристики ракетного оружия
+  Примечания:
+  - Дальность боеприпасов и ёмкость магазина указаны для стандартного магазина и боеприпасов, которыми оружие заряжено по умолчанию.
+  - Для боеприпасов, разгоняющихся со временем (например, ракеты), дальность является приблизительной оценкой.
+  - Для боеприпасов, которые выстреливаются с постоянной скоростью (например, обычное оружие), дальность рассчитывается как скорость вылета, умноженная на время существования снаряда.
+  - Количество выстрелов в секунду (RPS) может быть неточным, так как ограничено частотой тиков сервера (обычно 20 или 30 тиков/секунду).
+  - Редкое оружие, такое как корабельные пушки ADS/NT/Синдиката, не будет включено в список.
 
-  ## Specifications (as of 24-Oct-2025)
+  ## Технические характеристики (по состоянию на 24 октября 2025 г.)
   <Table Columns="7">
     <ColorBox>
       <Box>

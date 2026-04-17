@@ -178,7 +178,11 @@ public abstract partial class InteractionTest
             }
         });
 
-        await RunTicks(1);
+        for (var i = 0; i < 10 && Hands.ActiveHandEntity != item; i++) // Forge-Change
+        {
+            await RunTicks(1);
+        }
+
         Assert.That(Hands.ActiveHandEntity, Is.EqualTo(item));
         if (enableToggleable && itemToggle != null)
             Assert.That(itemToggle.Activated);
@@ -215,7 +219,11 @@ public abstract partial class InteractionTest
             Assert.That(HandSys.TryPickup(SEntMan.GetEntity(Player), uid.Value, Hands.ActiveHand, false, false, Hands, item));
         });
 
-        await RunTicks(1);
+        for (var i = 0; i < 10 && Hands.ActiveHandEntity != uid; i++) // Forge-Change
+        {
+            await RunTicks(1);
+        }
+
         Assert.That(Hands.ActiveHandEntity, Is.EqualTo(uid));
     }
 

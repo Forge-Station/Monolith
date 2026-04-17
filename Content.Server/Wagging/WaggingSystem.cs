@@ -1,5 +1,7 @@
-﻿using Content.Server.Actions;
+using Content.Server.Actions;
 using Content.Server.Humanoid;
+using Content.Shared.Actions; // Forge-Change
+using Content.Shared._Shitmed.Humanoid.Events; // Forge-Change
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Mobs;
@@ -26,11 +28,17 @@ public sealed class WaggingSystem : EntitySystem
         SubscribeLocalEvent<WaggingComponent, ComponentShutdown>(OnWaggingShutdown);
         SubscribeLocalEvent<WaggingComponent, ToggleActionEvent>(OnWaggingToggle);
         SubscribeLocalEvent<WaggingComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<WaggingComponent, ProfileLoadFinishedEvent>(OnProfileLoadFinished); // Forge-Change
     }
 
     private void OnWaggingMapInit(EntityUid uid, WaggingComponent component, MapInitEvent args)
     {
-        _actions.AddAction(uid, ref component.ActionEntity, component.Action, uid);
+        UpdateWaggingAction(uid, component);
+    }
+
+    private void OnProfileLoadFinished(EntityUid uid, WaggingComponent component, ProfileLoadFinishedEvent args)
+    {
+        UpdateWaggingAction(uid, component);
     }
 
     private void OnWaggingShutdown(EntityUid uid, WaggingComponent component, ComponentShutdown args)
@@ -51,6 +59,36 @@ public sealed class WaggingSystem : EntitySystem
         if (component.Wagging)
             TryToggleWagging(uid, wagging: component);
     }
+
+    // Forge-Change-start: only provide wagging action when the entity has a tail marking.
+    private void UpdateWaggingAction(EntityUid uid, WaggingComponent component, HumanoidAppearanceComponent? humanoid = null)
+    {
+        if (!Resolve(uid, ref humanoid, false))
+        {
+            _actions.RemoveAction(uid, component.ActionEntity);
+            component.ActionEntity = null;
+            component.Wagging = false;
+            return;
+        }
+
+        var hasTail = humanoid.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var markings) &&
+                      markings.Count > 0;
+
+        if (!hasTail)
+        {
+            _actions.RemoveAction(uid, component.ActionEntity);
+            component.ActionEntity = null;
+            component.Wagging = false;
+            return;
+        }
+
+        // The action container can still be uninitialized during profile load (e.g. integration map init spawn paths).
+        if (!TryComp<ActionsContainerComponent>(uid, out var actionContainer) || !actionContainer.Initialized)
+            return;
+
+        _actions.AddAction(uid, ref component.ActionEntity, component.Action, uid);
+    }
+    // Forge-Change-end
 
     public bool TryToggleWagging(EntityUid uid, WaggingComponent? wagging = null, HumanoidAppearanceComponent? humanoid = null)
     {

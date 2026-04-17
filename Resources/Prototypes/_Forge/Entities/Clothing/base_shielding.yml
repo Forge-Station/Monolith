@@ -1,0 +1,72 @@
+- type: entity
+  abstract: true
+  id: RenegateEnergyShieldClothing
+  components:
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/Weapons/ebladeon.ogg
+    soundDeactivate:
+      path: /Audio/Weapons/ebladeoff.ogg
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+    onUse: false
+    onAltUse: true
+    onActivate: false
+  - type: PointLight
+    enabled: false
+    radius: 1.4
+    energy: 2
+    color: "#ff3c00"
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      startValue: 0.1
+      endValue: 2.0
+      isLooped: true
+  - type: ItemTogglePointLight
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Weapons/ebladehum.ogg
+  - type: UseDelay
+    delay: 0.5
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.7
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.7
+      flatReductions:
+        Heat: 5
+        Piercing: 5
+    passiveBlockFraction: 0.6
+    activeBlockFraction: 0.6
+    isClothing: true
+  - type: Damageable
+    damageContainer: Shield
+  - type: Battery
+    maxCharge: 40
+    startingCharge: 40
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 5
+  - type: RechargeableBlocking

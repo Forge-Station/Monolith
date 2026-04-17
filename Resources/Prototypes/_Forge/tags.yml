@@ -210,3 +210,12 @@
 
 - type: Tag
   id: 40mmCartridge
+
+- type: Tag
+  id: HEVPowerCellShotgun
+
+- type: Tag
+  id: HEVPowerCellLMG
+
+- type: Tag
+  id: HEVPowerCellRifle

@@ -1,0 +1,223 @@
+#region HV Prototype 2
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitHVp2
+  name: HV-p2 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitHVp2
+  id: ClothingHeadHelmetHardsuitHVp2Com
+  name: HV-p2 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight_commander.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight_commander.rsi
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitHVp2
+  id: ClothingHeadHelmetHardsuitHVp2Inq
+  name: HV-p2 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight_violet.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight_violet.rsi
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+
+#region RI-14 Light
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitRI14
+  name: RI-14 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/light.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/light.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# region RI-22 Medium
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitRI22
+  name: RI-22 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/medium.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/medium.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitRI22c
+  name: RI-22c helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/medium_lord.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/medium_lord.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitRI22i
+  name: RI-22 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/medium_inquisitor.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/medium_inquisitor.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+
+# region HV-7 Heavy
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitHV7
+  name: HV-7 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/heavy.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/heavy.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide

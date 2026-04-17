@@ -1,19 +1,19 @@
-# Empire department temporarily disabled with its jobs.
-# - type: department
-#   id: Empire
-#   name: department-Empire
-#   description: department-Empire-description
-#   color: "#ab7a52"
-#   weight: 50
-#   roles:
-#   - Praefect
-#   - Arbiter
-#   - Cardinal
-#   - Inquisitor
-#   - Consul
-#   - Praetorian
-#   - Auxilia
-#   - Neophyte
+# Empire department temporarily HIDDEN.
+- type: department
+  id: Empire
+  name: department-Empire
+  description: department-Empire-description
+  color: "#ab7a52"
+  weight: 50
+  roles:
+  - Praefect
+  - Arbiter
+  - Cardinal
+  - Inquisitor
+  - Consul
+  - Praetorian
+  - Auxilia
+  - Neophyte
 
 - type: department
   id: Renegates

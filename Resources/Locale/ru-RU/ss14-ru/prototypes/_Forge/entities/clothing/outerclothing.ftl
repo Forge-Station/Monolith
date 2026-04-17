@@ -18,19 +18,6 @@ ent-ClothingOuterHardsuitDOC = продвинутый медицинский с�
 ent-ClothingHeadHelmetHardsuitDOC = шлем продвинутого медицинского скафандра
     .desc = Специализированный шлем для скафандра Менеджера Медицинских Операций.
 
-ent-ClothingOuterHardsuitEmpire14m = RI-14M
-    .desc = Стандартный бронескафандр Имперской Гвардии, серийно выпускаемый Ranis Industrial для фронтовых подразделений.
-ent-ClothingHeadHelmetHardsuitEmpire14m = шлем RI-14M
-    .desc = Герметичный шлем бронескафандра RI-14M со встроенными системами жизнеобеспечения.
-ent-ClothingOuterHardsuitEmpire14mCom = RI-14M
-    .desc = Командирский вариант стандартного бронескафандра Имперской Гвардии с отличительной окраской и знаками власти.
-ent-ClothingHeadHelmetHardsuitEmpire14mCom = шлем RI-14M
-    .desc = Герметичный шлем бронескафандра RI-14M с командирской маркировкой.
-ent-ClothingOuterHardsuitEmpire14mInq = RI-14M
-    .desc = Вариант стандартного бронескафандра Имперской Гвардии в расцветке карательных подразделений.
-ent-ClothingHeadHelmetHardsuitEmpire14mInq = шлем RI-14M
-    .desc = Герметичный шлем бронескафандра RI-14M с маркировкой карательных подразделений.
-
 ent-ClothingOuterCoatEmpireWindbreaker = ветровка имперской гвардии
     .desc = Лёгкая служебная ветровка Имперской Гвардии, защищающая от мелких угроз.
 ent-ClothingOuterCoatEmpireWindbreakerOpened = { ent-ClothingOuterCoatEmpireWindbreaker }

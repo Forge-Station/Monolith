@@ -77,25 +77,58 @@
       "name": "renegate_med"
     },
     {
-      "name": "imperial_door"
+      "name": "emp"
     },
     {
-      "name": "imperial_open"
+      "name": "emp_door"
     },
     {
-      "name": "imperial"
+      "name": "emp_open"
     },
     {
-      "name": "implord_door"
+      "name": "emp_o"
     },
     {
-      "name": "implord_open"
+      "name": "emp_o_door"
     },
     {
-      "name": "implord"
+      "name": "emp_o_open"
     },
     {
-      "name": "impinq_door"
+      "name": "emp_lord"
+    },
+    {
+      "name": "emp_lord_door"
+    },
+    {
+      "name": "emp_lord_open"
+    },
+    {
+      "name": "emp_inq"
+    },
+    {
+      "name": "emp_inq_door"
+    },
+    {
+      "name": "emp_inq_open"
+    },
+    {
+      "name": "emp_dip"
+    },
+    {
+      "name": "emp_dip_door"
+    },
+    {
+      "name": "emp_dip_open"
+    },
+    {
+      "name": "emp_med"
+    },
+    {
+      "name": "emp_med_door"
+    },
+    {
+      "name": "emp_med_open"
     }
   ]
 }

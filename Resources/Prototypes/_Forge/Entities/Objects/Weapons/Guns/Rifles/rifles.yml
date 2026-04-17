@@ -621,6 +621,7 @@
     walkModifier: 0.90
     sprintModifier: 0.90
 
+#region Renegate
 - type: entity
   name: NEK'o AR-220 (5.56x45mm)
   parent: BaseWeaponRifle
@@ -812,3 +813,69 @@
   - type: Appearance
   - type: StaticPrice
     price: 1300
+
+#region Empire
+- type: entity
+  parent: BaseWeaponCustomCell
+  id: WeaponEnergyRifleUnion
+  name: AE E-AR 'Union'
+  description: An improved energy machine gun with reinforced components for sustained fire. Uses specialized power cells.
+  components:
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,4,2
+    sprite: Forge/Objects/Weapons/Guns/Rifles/union_inhands.rsi
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -20
+  - type: Gun
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 4
+    angleDecay: 16
+    fireRate: 6
+    selectedMode: Burst
+    shotsPerBurst: 3
+    burstCooldown: 0.5
+    burstFireRate: 12
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: gun_magazine
+        startingItem: MagazinePowerUnion
+        whitelist:
+          tags:
+          - HEVPowerCellRifle
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Rifles/union.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: energy-4
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: energy
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Rifles/union_inhands.rsi
+    quickEquip: false
+    slots:
+    - back
+    - suitStorage
+  - type: GunRequiresWield
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.7
+    sprintModifier: 0.6
+  - type: AmmoCounter
+  - type: BatterySlotRequiresToggle
+    itemSlot: gun_magazine

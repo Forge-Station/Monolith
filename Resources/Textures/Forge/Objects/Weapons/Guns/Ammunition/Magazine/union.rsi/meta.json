@@ -1,0 +1,32 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "made by v6st on Discord",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "o1"
+        },
+        {
+            "name": "o2"
+        },
+        {
+            "name": "o3"
+        },
+        {
+            "name": "hitscan"
+        },
+        {
+            "name": "disabler"
+        },
+        {
+            "name": "xray"
+        }
+    ]
+}

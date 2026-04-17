@@ -6,7 +6,7 @@
   completetime: 30
   materials:
     Biomass: 30
-    
+
 - type: latheRecipe
   id: PigCube
   result: PigCube

@@ -1,0 +1,227 @@
+#region Empire
+
+# Shotgun
+- type: entity
+  parent: BaseMilitaryPowerCell
+  id: MagazinePowerShotgun
+  name: shotgun power cell
+  description: A power cell for energy shotguns that fires laser spreads.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/energyshotgun.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: icon
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o3
+      shader: unshaded
+  - type: Item
+    size: Small
+  - type: ProjectileBatteryAmmoProvider
+    proto: HEVBulletEnergyShotgunSpread
+    fireCost: 200
+  - type: Battery
+    maxCharge: 1200
+    startingCharge: 1200
+  - type: Tag
+    tags:
+    - HEVPowerCellShotgun
+
+# Heavion
+- type: entity
+  parent: BaseMilitaryPowerCell
+  id: MagazinePowerHeavion
+  name: LMG power cell
+  description: A power cell for energy LMGs that fires laser projectiles.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/heavion.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: icon
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o3
+      shader: unshaded
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - HEVPowerCellLMG
+  - type: ProjectileBatteryAmmoProvider
+    proto: HEVBulletEnergyLMG
+    fireCost: 100
+  - type: Battery
+    maxCharge: 5500
+    startingCharge: 5500
+
+# Union
+- type: entity
+  parent: BaseMilitaryPowerCell
+  id: MagazinePowerUnion
+  name: Union power cell
+  description: A compact power cell for energy rifle's.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: icon
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o3
+      shader: unshaded
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - HEVPowerCellRifle
+  - type: ProjectileBatteryAmmoProvider
+    proto: HEVBulletEnergyRifle
+    fireCost: 100
+  - type: Battery
+    maxCharge: 2500
+    startingCharge: 2500
+
+- type: entity
+  parent: BaseMilitaryPowerCell
+  id: MagazinePowerUnionXRay
+  name: XRay Union power cell
+  description: A compact power cell for energy rifle's.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: icon
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: xray
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o3
+      shader: unshaded
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - HEVPowerCellRifle
+  - type: ProjectileBatteryAmmoProvider
+    proto: HEVBulletEnergyRifleXRay
+    fireCost: 100
+  - type: Battery
+    maxCharge: 1500
+    startingCharge: 1500
+
+- type: entity
+  parent: BaseMilitaryPowerCell
+  id: MagazinePowerUnionDisabler
+  name: disabler power cell
+  description: A compact power cell for energy rifle's.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: icon
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: disabler
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o3
+      shader: unshaded
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - HEVPowerCellRifle
+  - type: ProjectileBatteryAmmoProvider
+    proto: HEVBulletEnergyRifleDisabler
+    fireCost: 100
+  - type: Battery
+    maxCharge: 2000
+    startingCharge: 2000
+
+# hitscan's
+- type: entity
+  parent: BaseMilitaryPowerCell
+  id: MagazinePowerUnionOverpressure
+  name: Union power cell
+  description: A compact power cell for energy rifle's.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: icon
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: hitscan
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o3
+      shader: unshaded
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - HEVPowerCellRifle
+  - type: HitscanBatteryAmmoProvider
+    proto: HEVHitscanEnergyRifle
+    fireCost: 100
+  - type: Battery
+    maxCharge: 1900
+    startingCharge: 1900
+
+- type: entity
+  parent: BaseMilitaryPowerCell
+  id: MagazinePowerUnionOverpressureXRay
+  name: XRay Union power cell
+  description: A compact power cell for energy rifle's.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: icon
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: xray
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: hitscan
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o3
+      shader: unshaded
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - HEVPowerCellRifle
+  - type: HitscanBatteryAmmoProvider
+    proto: HEVHitscanEnergyRifleXRay
+    fireCost: 100
+  - type: Battery
+    maxCharge: 1300
+    startingCharge: 1300
+
+- type: entity
+  parent: BaseMilitaryPowerCell
+  id: MagazinePowerUnionOverpressureDisabler
+  name: disabler power cell
+  description: A compact power cell for energy rifle's.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: icon
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: disabler
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: hitscan
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o3
+      shader: unshaded
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - HEVPowerCellRifle
+  - type: HitscanBatteryAmmoProvider
+    proto: HEVHitscanEnergyRifleDisabler
+    fireCost: 100
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000

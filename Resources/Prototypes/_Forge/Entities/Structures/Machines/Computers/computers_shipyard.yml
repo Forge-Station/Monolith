@@ -34,13 +34,11 @@
     sprite: Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
-      state: computer_engi
-    - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
+      state: computer_emp
     - map: ["computerLayerScreen"]
-      state: shipyard_engi
+      state: emp_shuttle
     - map: ["computerLayerKeys"]
-      state: telesci_key
+      state: emp_key
   - type: ActivatableUI
     key: enum.ShipyardConsoleUiKey.Empire
   - type: UserInterface

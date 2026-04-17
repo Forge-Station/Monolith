@@ -92,9 +92,21 @@
   name: empire locker
   components:
   - type: EntityStorageVisuals
-    stateBaseClosed: imperial
-    stateDoorOpen: imperial_open
-    stateDoorClosed: imperial_door
+    stateBaseClosed: emp
+    stateDoorOpen: emp_open
+    stateDoorClosed: emp_door
+  - type: AccessReader
+    access: [["Empire"]]
+
+- type: entity
+  id: LockerEmpireMedical
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
+  name: empire medical locker
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: emp_med
+    stateDoorOpen: emp_med_open
+    stateDoorClosed: emp_med_door
   - type: AccessReader
     access: [["Empire"]]
 
@@ -104,9 +116,9 @@
   name: empire officer locker
   components:
   - type: EntityStorageVisuals
-    stateBaseClosed: imperial
-    stateDoorOpen: imperial_open
-    stateDoorClosed: imperial_door
+    stateBaseClosed: emp_o
+    stateDoorOpen: emp_o_open
+    stateDoorClosed: emp_o_door
   - type: AccessReader
     access: [["EmpireOfficer"]]
 
@@ -116,9 +128,9 @@
   name: inquisitor locker
   components:
   - type: EntityStorageVisuals
-    stateBaseClosed: imperial
-    stateDoorOpen: imperial_open
-    stateDoorClosed: impinq_door
+    stateBaseClosed: emp_inq
+    stateDoorOpen: emp_inq_open
+    stateDoorClosed: emp_inq_door
   - type: AccessReader
     access: [["EmpireInqusitor"]]
 
@@ -128,9 +140,9 @@
   name: commander locker
   components:
   - type: EntityStorageVisuals
-    stateBaseClosed: implord
-    stateDoorOpen: implord_open
-    stateDoorClosed: implord_door
+    stateBaseClosed: emp_lord
+    stateDoorOpen: emp_lord_open
+    stateDoorClosed: emp_lord_door
   - type: AccessReader
     access: [["EmpireCommander"]]
 
@@ -140,8 +152,8 @@
   name: empire diplomacy locker
   components:
   - type: EntityStorageVisuals
-    stateBaseClosed: imperial
-    stateDoorOpen: imperial_open
-    stateDoorClosed: imperial_door
+    stateBaseClosed: emp_dip
+    stateDoorOpen: emp_dip_open
+    stateDoorClosed: emp_dip_door
   - type: AccessReader
     access: [["EmpireDiplomacy"]]

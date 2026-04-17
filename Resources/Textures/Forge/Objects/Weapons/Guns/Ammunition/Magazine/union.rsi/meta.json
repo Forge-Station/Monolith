@@ -27,6 +27,12 @@
         },
         {
             "name": "xray"
+        },
+        {
+            "name": "disabler_hs"
+        },
+        {
+            "name": "xray_hs"
         }
     ]
 }

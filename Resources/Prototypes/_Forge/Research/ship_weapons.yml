@@ -38,7 +38,7 @@
   - WeaponTurretVanykCircuitboard
   technologyPrerequisites:
   - ForgeShipWeaponsT1Research
-  - ShuttleGunneryHighUpgradeResearch
+#  - ShuttleGunneryHighUpgradeResearch НЕ ЗАБУДЬ МЕНЯЯЯЯЯЯЯЯЯЯЯЯЯ
   position: -1, 4
 
 - type: technology
@@ -59,7 +59,7 @@
   - WeaponTurretLightMunitionsBayCircuitboard
   technologyPrerequisites:
   - ForgeShipWeaponsT2Research
-  - ShuttleGunneryUltraUpgradeResearch
+#  - ShuttleGunneryUltraUpgradeResearch НЕ ЗАБУДЬ МЕНЯЯЯЯЯЯЯЯЯЯЯЯЯ
   position: -1, 5
 
 - type: technology

@@ -12,7 +12,6 @@
   - Maintenance
   - External
   - Renegate
-  - Mercenary
   - Captain
 
 - type: accessGroup
@@ -20,7 +19,6 @@
   tags:
   - Maintenance
   - External
-  - Mercenary
   - Renegate
   - RenegateOfficer
   - Captain

@@ -288,7 +288,17 @@ public abstract partial class InteractionTest
         // (e.g., servers attempt to assemble construction examine hints).
         if (Target != null)
         {
-            await Client.WaitPost(() => ExamineSys.DoExamine(CEntMan.GetEntity(Target.Value)));
+            // Forge-Change-start
+            await Client.WaitPost(() =>
+            {
+                if (CEntMan.TryGetEntity(Target.Value, out var target) &&
+                    target.Value.Valid &&
+                    CEntMan.EntityExists(target.Value))
+                {
+                    ExamineSys.DoExamine(target.Value);
+                }
+            });
+            // Forge-Change-end
         }
 
         await PlaceInHands(entity);

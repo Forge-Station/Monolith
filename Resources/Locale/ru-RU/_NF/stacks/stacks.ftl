@@ -97,7 +97,6 @@ stack-anomalite = аномалит
 stack-fuel-grade-plasma = плазма топливного качества
 stack-fuel-grade-uranium = уран топливного качества
 stack-fuel-grade-bananium = бананиум топливного качества
-stack-skrungle = скрангл
 
 # Напольные покрытия
 stack-dark-grass-floor = темный травяной пол

@@ -229,3 +229,58 @@
     walkModifier: 1
     sprintModifier: 1
   - type: HeldSpeedModifier
+
+- type: entity
+  parent: [ClothingOuterHardsuitAsakimUnremoveable, EnergyShieldClothing]
+  id: ClothingOuterHardsuitAsakimUnremoveableForge
+  description: An advanced pre-fracture harness. Incredibly rare, and practically alien in technology compared to modern tacsuits. Once equipped, the armor binds itself with the wearer and cannot be removed without external release. This one is fully binded to a warrior, and will take a long time to remove.
+  suffix: Forge
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.75
+        Slash: 0.55
+        Piercing: 0.25
+        Heat: 0.25
+        Radiation: 0
+        Shock: 0.3
+        Poison: 0.3
+        Caustic: 0.3
+  - type: FireProtection
+    reduction: 0.35
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.5
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.5
+      flatReductions:
+        Heat: 5
+        Piercing: 15
+    passiveBlockFraction: 0.6
+    activeBlockFraction: 0.6
+    isClothing: true
+  - type: Damageable
+    damageContainer: Shield
+  - type: Battery
+    maxCharge: 200
+    startingCharge: 200
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 0.15
+  - type: RechargeableBlocking
+  - type: UseDelay
+    delay: 10
+  - type: PointLight
+    enabled: false
+    radius: 1.4
+    energy: 2
+    color: "#ff3aef"

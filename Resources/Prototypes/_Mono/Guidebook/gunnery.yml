@@ -1,7 +1,7 @@
 - type: guideEntry
   id: WeaponsSystems
   name: guide-entry-gunnery
-  text: "/ServerInfo/_Mono/Guidebook/ShipCombat.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_Mono/ShipCombat.xml" # Forge-change
   priority: 7
   children:
   - BallisticsTable
@@ -11,18 +11,18 @@
 - type: guideEntry
   id: BallisticsTable
   name: guide-entry-ballistics
-  text: "/ServerInfo/_Mono/Guidebook/Specifications/ballistics.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_Mono/Specifications/ballistics.xml" # Forge-change
   priority: 1
 
 - type: guideEntry
   id: EnergyTable
   name: guide-entry-energy
-  text: "/ServerInfo/_Mono/Guidebook/Specifications/energy.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_Mono/Specifications/energy.xml" # Forge-change
   priority: 2
 
 - type: guideEntry
   id: MissilesTable
   name: guide-entry-missiles
-  text: "/ServerInfo/_Mono/Guidebook/Specifications/missiles.xml"
+  text: "/ServerInfo/_Forge/Guidebook/_Mono/Specifications/missiles.xml" # Forge-change
   priority: 3
 

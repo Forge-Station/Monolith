@@ -235,7 +235,7 @@
 
 - type: entity
   parent: [ ClothingOuterBase ] # Mono
-  id: ClothingModsuitChestplateMercenary
+  id: ClothingModsuitChestplateGalloglass
   name: mercenary modsuit chestplate
   description: A well rounded modsuit that focuses on mobility with its Actuator Enhancement System allowing its wearer to leap across the battlefield for rapid redeployment.
   categories: [ HideSpawnMenu ]

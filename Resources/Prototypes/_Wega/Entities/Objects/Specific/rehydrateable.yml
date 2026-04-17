@@ -1,0 +1,8 @@
+- type: entity
+  parent: MonkeyCube
+  id: MonkeyDemonCube
+  name: monkey demon cube
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobMonkeyDemon

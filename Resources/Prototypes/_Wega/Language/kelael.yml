@@ -1,0 +1,31 @@
+# Spoken by Arkans (Demon species).
+- type: language
+  id: Kelael
+  isVisibleLanguage: true
+  speech:
+    color: "#c9a7ebdd"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 4
+    maxSyllables: 6
+    replacement:
+    - ae
+    - ael
+    - iae
+    - lae
+    - elia
+    - liora
+    - naia
+    - raeli
+    - selia
+    - velia
+    - aniel
+    - eira
+    - aurel
+    - siona
+    - liria
+    - riela
+    - aevia
+    - eliora
+    - naelia
+    - sariae

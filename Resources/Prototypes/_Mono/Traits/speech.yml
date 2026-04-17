@@ -24,6 +24,19 @@
   languagesUnderstood:
   - Nekomimetic
 
+- type: trait # Forge Change begin
+  id: MonoKelael
+  name: trait-language-kelael-name
+  description: trait-language-kelael-desc
+  category: LanguageTraits
+  cost: 1
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+  - Kelael
+  languagesUnderstood:
+  - Kelael # Forge Change end
+
 # Forge-Change-delete-start
 #- type: trait
 #  id: MonoElyran

@@ -48,11 +48,11 @@
   - MercenaryClothingEyesBallisticGlassesGreen
   - MercenaryClothingEyesBallisticGlassesOrange
 
-- type: loadoutGroup
-  id: MonoMercenaryHead # ONLY TO BE USED AS A SUBGROUP FOR _NF MERCENARY GROUPS
-  name: loadout-group-contractor-head
-  loadouts:
-  - MercenaryClothingHeadHatBH # Mono
+# - type: loadoutGroup # Forge-Change-Del
+#   id: MonoMercenaryHead # ONLY TO BE USED AS A SUBGROUP FOR _NF MERCENARY GROUPS
+#   name: loadout-group-contractor-head
+#   loadouts:
+#   - MercenaryClothingHeadHatBH # Mono
 
 - type: loadoutGroup
   id: MonoMercenaryOuterClothing # ONLY TO BE USED AS A SUBGROUP FOR _NF MERCENARY GROUPS

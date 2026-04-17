@@ -1,7 +1,7 @@
 ﻿- type: guideEntry
   id: Engineering
   name: guide-entry-engineering
-  text: "/ServerInfo/Guidebook/Engineering/Engineering.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Engineering.xml"  # Forge-change
   children:
   - Construction
   - Power
@@ -13,7 +13,7 @@
 - type: guideEntry
   id: Construction
   name: guide-entry-construction
-  text: "/ServerInfo/Guidebook/Engineering/Construction.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Construction.xml" # Forge-change
   children:
   - Airlocks
   - ExpandingRepairingStation
@@ -22,29 +22,29 @@
 - type: guideEntry
   id: ExpandingRepairingStation
   name: guide-entry-expandingrepairingstation
-  text: "/ServerInfo/Guidebook/Engineering/ExpandingRepairingStation.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/ExpandingRepairingStation.xml" # Forge-change
 
 - type: guideEntry
   id: Airlocks
   name: guide-entry-airlocks
-  text: "/ServerInfo/Guidebook/Engineering/Airlocks.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Airlocks.xml" # Forge-change
   children:
   - AirlockSecurity
 
 - type: guideEntry
   id: WirePanels
   name: guide-entry-wirepanels
-  text: "/ServerInfo/Guidebook/Engineering/WirePanels.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/WirePanels.xml" # Forge-change
 
 - type: guideEntry
   id: AirlockSecurity
   name: guide-entry-airlock-security
-  text: "/ServerInfo/Guidebook/Engineering/AirlockSecurity.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AirlockSecurity.xml" # Forge-change
 
 - type: guideEntry
   id: Atmospherics
   name: guide-entry-atmospherics
-  text: "/ServerInfo/Guidebook/Engineering/Atmospherics.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Atmospherics.xml" # Forge-change
   children:
   - GasManipulation
   - AtmosphericsSystems
@@ -56,7 +56,7 @@
 - type: guideEntry
   id: GasManipulation
   name: guide-entry-gasmanipulation
-  text: "/ServerInfo/Guidebook/Engineering/GasManipulation.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/GasManipulation.xml" # Forge-change
   children:
   - AtmosphereInOut
   - Pipes
@@ -70,17 +70,17 @@
 - type: guideEntry
   id: Pipes
   name: guide-entry-pipes
-  text: "/ServerInfo/Guidebook/Engineering/Pipes.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Pipes.xml" # Forge-change
 
 - type: guideEntry
   id: Pumps
   name: guide-entry-pumps
-  text: "/ServerInfo/Guidebook/Engineering/Pumps.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Pumps.xml" # Forge-change
 
 - type: guideEntry
   id: AtmosphereInOut
   name: guide-entry-atmosphereinout
-  text: "/ServerInfo/Guidebook/Engineering/AtmosphereInOut.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AtmosphereInOut.xml" # Forge-change
   children:
   - AirVent
   - PassiveVent
@@ -91,32 +91,32 @@
 - type: guideEntry
   id: AirVent
   name: guide-entry-airvent
-  text: "/ServerInfo/Guidebook/Engineering/AirVent.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AirVent.xml" # Forge-change
 
 - type: guideEntry
   id: PassiveVent
   name: guide-entry-passivevent
-  text: "/ServerInfo/Guidebook/Engineering/PassiveVent.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/PassiveVent.xml" # Forge-change
 
 - type: guideEntry
   id: AirInjector
   name: guide-entry-airinjector
-  text: "/ServerInfo/Guidebook/Engineering/AirInjector.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AirInjector.xml" # Forge-change
 
 - type: guideEntry
   id: AirScrubber
   name: guide-entry-airscrubber
-  text: "/ServerInfo/Guidebook/Engineering/AirScrubber.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AirScrubber.xml" # Forge-change
 
 - type: guideEntry
   id: PortableScrubber
   name: guide-entry-portablescrubber
-  text: "/ServerInfo/Guidebook/Engineering/PortableScrubber.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/PortableScrubber.xml" # Forge-change
 
 - type: guideEntry
   id: Valves
   name: guide-entry-valves
-  text: "/ServerInfo/Guidebook/Engineering/Valves.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Valves.xml" # Forge-change
   children:
   - ManualValve
   - SignalValve
@@ -127,59 +127,59 @@
 - type: guideEntry
   id: ManualValve
   name: guide-entry-manualvalve
-  text: "/ServerInfo/Guidebook/Engineering/ManualValve.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/ManualValve.xml" # Forge-change
 
 - type: guideEntry
   id: SignalValve
   name: guide-entry-signalvalve
-  text: "/ServerInfo/Guidebook/Engineering/SignalValve.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/SignalValve.xml" # Forge-change
 
 - type: guideEntry
   id: PneumaticValve
   name: guide-entry-pneumaticvalve
-  text: "/ServerInfo/Guidebook/Engineering/PneumaticValve.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/PneumaticValve.xml" # Forge-change
 
 - type: guideEntry
   id: PassiveGate
   name: guide-entry-passivegate
-  text: "/ServerInfo/Guidebook/Engineering/PassiveGate.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/PassiveGate.xml" # Forge-change
 
 - type: guideEntry
   id: PressureRegulator
   name: guide-entry-ressureregulator
-  text: "/ServerInfo/Guidebook/Engineering/PressureRegulator.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/PressureRegulator.xml" # Forge-change
 
 - type: guideEntry
   id: MixingAndFiltering
   name: guide-entry-mixingandfiltering
-  text: "/ServerInfo/Guidebook/Engineering/MixingAndFiltering.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/MixingAndFiltering.xml" # Forge-change
 
 - type: guideEntry
   id: GasCanisters
   name: guide-entry-gascanisters
-  text: "/ServerInfo/Guidebook/Engineering/GasCanisters.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/GasCanisters.xml" # Forge-change
 
 - type: guideEntry
   id: Thermomachines
   name: guide-entry-thermomachines
-  text: "/ServerInfo/Guidebook/Engineering/Thermomachines.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Thermomachines.xml" # Forge-change
   children:
   - Radiators
 
 - type: guideEntry
   id: GasCondensing
   name: guide-entry-gascondensing
-  text: "/ServerInfo/Guidebook/Engineering/GasCondensing.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/GasCondensing.xml" # Forge-change
 
 - type: guideEntry
   id: Radiators
   name: guide-entry-radiators
-  text: "/ServerInfo/Guidebook/Engineering/Radiators.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Radiators.xml" # Forge-change
 
 - type: guideEntry
   id: AtmosphericsSystems
   name: guide-entry-atmosphericssystems
-  text: "/ServerInfo/Guidebook/Engineering/AtmosphericsSystems.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AtmosphericsSystems.xml" # Forge-change
   children:
   - PipeNetworks
   - DeviceMonitoringAndControl
@@ -189,12 +189,12 @@
 - type: guideEntry
   id: PipeNetworks
   name: guide-entry-pipenetworks
-  text: "/ServerInfo/Guidebook/Engineering/PipeNetworks.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/PipeNetworks.xml" # Forge-change
 
 - type: guideEntry
   id: DeviceMonitoringAndControl
   name: guide-entry-devicemonitoringandcontrol
-  text: "/ServerInfo/Guidebook/Engineering/DeviceMonitoringAndControl.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/DeviceMonitoringAndControl.xml" # Forge-change
   children:
   - AirAlarms
   - AtmosphericAlertsComputer
@@ -203,32 +203,32 @@
 - type: guideEntry
   id: AirAlarms
   name: guide-entry-airalarms
-  text: "/ServerInfo/Guidebook/Engineering/AirAlarms.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AirAlarms.xml" # Forge-change
 
 - type: guideEntry
   id: AtmosphericAlertsComputer
   name: guide-entry-atmosphericalertscomputer
-  text: "/ServerInfo/Guidebook/Engineering/AtmosphericAlertsComputer.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AtmosphericAlertsComputer.xml" # Forge-change
 
 - type: guideEntry
   id: AtmosphericNetworkMonitor
   name: guide-entry-atmosphericnetworkmonitor
-  text: "/ServerInfo/Guidebook/Engineering/AtmosphericNetworkMonitor.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AtmosphericNetworkMonitor.xml" # Forge-change
 
 - type: guideEntry
   id: FireAndGasControl
   name: guide-entry-fireandgascontrol
-  text: "/ServerInfo/Guidebook/Engineering/FireAndGasControl.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/FireAndGasControl.xml" # Forge-change
 
 - type: guideEntry
   id: GasMiningAndStorage
   name: guide-entry-gasminingandstorage
-  text: "/ServerInfo/Guidebook/Engineering/GasMiningAndStorage.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/GasMiningAndStorage.xml" # Forge-change
 
 - type: guideEntry
   id: AtmosphericUpsets
   name: guide-entry-atmosphericupsets
-  text: "/ServerInfo/Guidebook/Engineering/AtmosphericUpsets.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AtmosphericUpsets.xml" # Forge-change
   children:
   - Fires
   - Spacing
@@ -236,44 +236,44 @@
 - type: guideEntry
   id: Fires
   name: guide-entry-fires
-  text: "/ServerInfo/Guidebook/Engineering/Fires.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Fires.xml" # Forge-change
 
 - type: guideEntry
   id: Spacing
   name: guide-entry-spacing
-  text: "/ServerInfo/Guidebook/Engineering/Spacing.xml"
+  text: "/ServerInfo/Guidebook/Engineering/Spacing.xml" # Forge-change
 
 - type: guideEntry
   id: AtmosTools
   name: guide-entry-atmostools
-  text: "/ServerInfo/Guidebook/Engineering/AtmosTools.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AtmosTools.xml" # Forge-change
 
 - type: guideEntry
   id: Gasses
   name: guide-entry-gasses
-  text: "/ServerInfo/Guidebook/Engineering/Gasses.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Gasses.xml" # Forge-change
 
 - type: guideEntry
   id: ShuttleCraft
   name: guide-entry-shuttle-craft
-  text: "/ServerInfo/Guidebook/Engineering/Shuttlecraft.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Shuttlecraft.xml" # Forge-change
 
 - type: guideEntry
   id: Networking
   name: guide-entry-networking
-  text: "/ServerInfo/Guidebook/Engineering/Networking.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Networking.xml" # Forge-change
   children:
   - AccessConfigurator
 
 - type: guideEntry
   id: AccessConfigurator
   name: guide-entry-access-configurator
-  text: "/ServerInfo/Guidebook/Engineering/AccessConfigurator.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AccessConfigurator.xml" # Forge-change
 
 - type: guideEntry
   id: Power
   name: guide-entry-power
-  text: "/ServerInfo/Guidebook/Engineering/Power.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Power.xml" # Forge-change
   children:
     - Generators
     - InspectingPower
@@ -284,27 +284,27 @@
 - type: guideEntry
   id: InspectingPower
   name: guide-entry-inspectingpower
-  text: "/ServerInfo/Guidebook/Engineering/InspectingPower.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/InspectingPower.xml" # Forge-change
 
 - type: guideEntry
   id: PowerStorage
   name: guide-entry-powerstorage
-  text: "/ServerInfo/Guidebook/Engineering/PowerStorage.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/PowerStorage.xml" # Forge-change
 
 - type: guideEntry
   id: Ramping
   name: guide-entry-ramping
-  text: "/ServerInfo/Guidebook/Engineering/Ramping.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Ramping.xml" # Forge-change
 
 - type: guideEntry
   id: VoltageNetworks
   name: guide-entry-voltagenetworks
-  text: "/ServerInfo/Guidebook/Engineering/VoltageNetworks.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/VoltageNetworks.xml" # Forge-change
 
 - type: guideEntry
   id: Generators
   name: guide-entry-generators
-  text: "/ServerInfo/Guidebook/Engineering/Generators.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Generators.xml" # Forge-change
   children:
   - PortableGenerator
   - AME
@@ -316,12 +316,12 @@
 - type: guideEntry
   id: AME
   name: guide-entry-ame
-  text: "/ServerInfo/Guidebook/Engineering/AME.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/AME.xml" # Forge-change
 
 - type: guideEntry
   id: SingularityTeslaEngine
   name: guide-entry-singularityteslaengine
-  text: "/ServerInfo/Guidebook/Engineering/SingularityTeslaEngine.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/SingularityTeslaEngine.xml" # Forge-change
   children:
   - SingularityEngine
   - TeslaEngine
@@ -329,29 +329,29 @@
 - type: guideEntry
   id: SingularityEngine
   name: guide-entry-singularityengine
-  text: "/ServerInfo/Guidebook/Engineering/SingularityEngine.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/SingularityEngine.xml" # Forge-change
 
 - type: guideEntry
   id: TeslaEngine
   name: guide-entry-teslaengine
-  text: "/ServerInfo/Guidebook/Engineering/TeslaEngine.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/TeslaEngine.xml" # Forge-change
 
 - type: guideEntry
   id: TEG
   name: guide-entry-teg
-  text: "/ServerInfo/Guidebook/Engineering/TEG.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/TEG.xml" # Forge-change
 
 - type: guideEntry
   id: RTG
   name: guide-entry-rtg
-  text: "/ServerInfo/Guidebook/Engineering/RTG.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/RTG.xml" # Forge-change
 
 - type: guideEntry
   id: PortableGenerator
   name: guide-entry-portable-generator
-  text: "/ServerInfo/Guidebook/Engineering/PortableGenerator.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/PortableGenerator.xml" # Forge-change
 
 - type: guideEntry
   id: SolarPanels
   name: guide-entry-solarpanels
-  text: "/ServerInfo/Guidebook/Engineering/SolarPanels.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/SolarPanels.xml" # Forge-change

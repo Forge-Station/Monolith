@@ -189,7 +189,7 @@
 # Gallóglach
 - type: entity
   parent: ClothingShoesBase
-  id: ClothingModsuitBootsMercenary
+  id: ClothingModsuitBootsGalloglass
   name: mercenary modsuit boots
   description: The suits Actuator Enhancement System paired with the built in magboots make boarding actions a breeze.
   categories: [ HideSpawnMenu ]

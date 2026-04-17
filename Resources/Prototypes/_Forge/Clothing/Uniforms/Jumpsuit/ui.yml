@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitUI
+  name: Комбинезон U.I
+  description: Удобная водолазка Ульман индузтриз. Обычно идёт с боевым скафандром, но вам хватит и этого.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/ui.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/ui.rsi

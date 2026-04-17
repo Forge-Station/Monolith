@@ -12,7 +12,6 @@ using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reagent;
 using FancyWindow = Content.Client.UserInterface.Controls.FancyWindow;
 using Robust.Client.UserInterface;
-using Content.Shared.IdentityManagement;
 using Robust.Client.Graphics;
 
 namespace Content.Client.VendingMachines.UI
@@ -22,7 +21,6 @@ namespace Content.Client.VendingMachines.UI
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
-        private readonly Dictionary<EntProtoId, EntityUid> _dummies = [];
 
         public event Action<GUIBoundKeyEventArgs, ListData>? OnItemSelected;
 
@@ -38,22 +36,6 @@ namespace Content.Client.VendingMachines.UI
             VendingContents.DataFilterCondition += DataFilterCondition;
             VendingContents.GenerateItem += GenerateButton;
             VendingContents.ItemKeyBindDown += (args, data) => OnItemSelected?.Invoke(args, data);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            // Don't clean up dummies during disposal or we'll just have to spawn them again
-            if (!disposing)
-                return;
-
-            // Delete any dummy items we spawned
-            foreach (var entity in _dummies.Values)
-            {
-                _entityManager.QueueDeleteEntity(entity);
-            }
-            _dummies.Clear();
         }
 
         private bool DataFilterCondition(string filter, ListData data)
@@ -82,7 +64,12 @@ namespace Content.Client.VendingMachines.UI
         /// Populates the list of available items on the vending machine interface
         /// and sets icons based on their prototypes
         /// </summary>
-        public void Populate(List<VendingMachineInventoryEntry> inventory, float priceModifier, int balance, int? cashSlotBalance, bool requiresCash) // Frontier: add balance, cashSlotBalance
+        public void Populate(List<VendingMachineInventoryEntry> inventory,
+            bool enabled, // Forge-Change
+            float priceModifier,
+            int balance,
+            int? cashSlotBalance,
+            bool requiresCash) // Frontier: add balance, cashSlotBalance
         {
             UpdateBalance(balance); // Frontier
             UpdateCashSlotBalance(cashSlotBalance); // Frontier
@@ -118,13 +105,7 @@ namespace Content.Client.VendingMachines.UI
                 if (!_prototypeManager.TryIndex(entry.ID, out var prototype))
                     continue;
 
-                if (!_dummies.TryGetValue(entry.ID, out var dummy))
-                {
-                    dummy = _entityManager.Spawn(entry.ID);
-                    _dummies.Add(entry.ID, dummy);
-                }
-
-                var itemName = Identity.Name(dummy, _entityManager);
+                var itemName = Loc.GetString(prototype.Name); // Forge-Change
                 var cost = 0; // mono
                 if (requiresCash) // frontier
                     cost = GetPrice(entry, prototype, priceModifier);

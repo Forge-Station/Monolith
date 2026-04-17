@@ -55,6 +55,11 @@ trait-language-azaziba-desc =
     A language of Moghes consisting of a combination of spoken word and gesticulation.
     While waning since Moghes entered the galactic stage - it enjoys popular use by Unathi that never fell to the Hegemony's cultural dominance.
 
+trait-language-kelael-name = Kela'el
+trait-language-kelael-desc =
+    A refined infernal tongue with melodic cadence and flowing phonemes.
+    Spoken by Arkans and occasionally studied by linguists and occultists.
+
 trait-language-SiikMaas-name = Siik'maas
 trait-language-SiikMaas-desc = 
     The ancient religious tongue of the Tajara, now the most widely spoken and taught language on Adhomai.

@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 
 namespace Content.Server.GameTicking.Rules.Components;
 
@@ -9,16 +9,42 @@ namespace Content.Server.GameTicking.Rules.Components;
 public sealed partial class MaxTimeRestartRuleComponent : Component
 {
     /// <summary>
-    /// The max amount of time the round can last
+    /// Forge-Change-start
+    /// Legacy relative timer: if non-zero, restart sequence starts after this delay.
     /// </summary>
-    [DataField("roundMaxTime", required: true)]
-    public TimeSpan RoundMaxTime = TimeSpan.FromMinutes(5);
+    [DataField("roundMaxTime")]
+    public TimeSpan RoundMaxTime = TimeSpan.Zero;
 
     /// <summary>
-    /// The amount of time between the round completing and the lobby appearing.
+    /// Legacy post-round delay used by older tests and prototypes.
     /// </summary>
-    [DataField("roundEndDelay", required: true)]
-    public TimeSpan RoundEndDelay = TimeSpan.FromSeconds(10);
+    [DataField("roundEndDelay")]
+    public TimeSpan RoundEndDelay = TimeSpan.Zero;
+
+    /// <summary>
+    /// Restart interval, aligned to UTC hour boundaries.
+    /// </summary>
+    [DataField("restartInterval", required: true)]
+    public TimeSpan RestartInterval = TimeSpan.FromHours(8);
+
+    /// <summary>
+    /// Time from evacuation call to round end.
+    /// </summary>
+    [DataField("evacuationCallDuration", required: true)]
+    public TimeSpan EvacuationCallDuration = TimeSpan.FromMinutes(10);
+
+    /// <summary>
+    /// Time spent in post-round before switching to lobby.
+    /// </summary>
+    [DataField("postRoundDuration", required: true)]
+    public TimeSpan PostRoundDuration = TimeSpan.FromMinutes(2);
+
+    /// <summary>
+    /// Time spent in lobby before the next round starts.
+    /// </summary>
+    [DataField("lobbyDuration", required: true)]
+    public TimeSpan LobbyDuration = TimeSpan.FromMinutes(3);
+    /// Forge-Change-end
 
     public CancellationTokenSource TimerCancel = new();
 }

@@ -168,7 +168,6 @@
       types:
         Heat: 19
         Piercing: 3
-    armorPenetration: 0.15
 
 - type: entity
   parent: HEVBulletEnergyRifle
@@ -216,7 +215,6 @@
         Heat: 11
         Piercing: 1
         Radiation: 11
-    armorPenetration: 0.2
 
 - type: entity
   parent: HEVBulletEnergyRifle
@@ -264,7 +262,6 @@
     damage:
       types:
         Heat: 7
-    armorPenetration: 0.015
   - type: StaminaDamageOnCollide
     damage: 18
 

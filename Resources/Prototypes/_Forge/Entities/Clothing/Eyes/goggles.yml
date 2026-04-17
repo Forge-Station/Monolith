@@ -226,4 +226,18 @@
     flashDurationMultiplier: 2
     pulseTime: 2
     isEquipment: true
-    toggleAction: PulseThermalVisio
+    toggleAction: PulseThermalVision
+
+- type: entity
+  parent: [ ClothingEyesBase, ShowSecurityIcons ]
+  id: ClothingEyesUIGoogles
+  name: Солнцезащитные очки U.I
+  description: Стильные фиолетовые очки с возможностью просмотра профессии и компаний
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5

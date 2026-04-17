@@ -312,27 +312,14 @@
         Shock: 0.65
         Caustic: 0.75
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.6
+    walkModifier: 1
+    sprintModifier: 1
   - type: SpaceFlightProfile
     thrustMultiplier: 1
     controlMultiplier: 1
     fuelUsageMultiplier: 1
     combatStabilityBonus: 0
   - type: HeldSpeedModifier
-  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
-    requiredSlot: outerclothing
-    blockUnequipWhenAttached: false
-    replaceCurrentClothing: true
-    clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitRenegateyiv3020
-      helmetcover: ClothingHeadHelmetCoverBlock
-      helmetattachment: ClothingHeadHelmetAttachmentBlock
-  - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.4
-  - type: StaticPrice
-    price: 25000
-    vendPrice: 30000
 
 - type: entity
   parent: [ClothingOuterHardsuitAsakimUnremoveable, EnergyShieldClothing]

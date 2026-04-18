@@ -1,0 +1,63 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      xmlns:forge="clr-namespace:Content.Client._Forge.Crypto.UI"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      SetSize="620 450"
+                      MinSize="560 420">
+    <BoxContainer Orientation="Vertical" Margin="8 6 8 8" SeparationOverride="6">
+        <PanelContainer HorizontalExpand="True">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BorderThickness="2" BorderColor="#35556e" BackgroundColor="#10151d"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical" Margin="8 6 8 8" SeparationOverride="4">
+                <GridContainer Columns="2" HSeparationOverride="8">
+                    <Label Text="{Loc 'crypto-console-current-price'}"/>
+                    <Label Name="CurrentPriceValueLabel" HorizontalAlignment="Right" Text="{Loc 'crypto-console-value-empty'}"/>
+
+                    <Label Text="{Loc 'crypto-console-trend'}"/>
+                    <Label Name="TrendValueLabel" HorizontalAlignment="Right" Text="{Loc 'crypto-console-value-empty'}"/>
+
+                    <Label Text="{Loc 'crypto-console-inserted'}"/>
+                    <Label Name="InsertedValueLabel" HorizontalAlignment="Right" Text="{Loc 'crypto-console-inserted-none-value'}"/>
+
+                    <Label Text="{Loc 'crypto-console-units'}"/>
+                    <Label Name="UnitsValueLabel" HorizontalAlignment="Right" Text="0"/>
+
+                    <Label Text="{Loc 'crypto-console-payout'}"/>
+                    <Label Name="PreviewValueLabel" HorizontalAlignment="Right" Text="{Loc 'crypto-console-value-empty'}"/>
+
+                    <Label Text="{Loc 'crypto-console-buy-one'}"/>
+                    <Label Name="BuyOneCostValueLabel" HorizontalAlignment="Right" Text="{Loc 'crypto-console-value-empty'}"/>
+                </GridContainer>
+            </BoxContainer>
+        </PanelContainer>
+
+        <PanelContainer VerticalExpand="True" HorizontalExpand="True">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BorderThickness="2" BorderColor="#2e3d4e" BackgroundColor="#0c1117"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical" Margin="8 6 8 8" SeparationOverride="4">
+                <TabContainer Name="MarketTabs" HorizontalExpand="True">
+                    <Control />
+                    <Control />
+                    <Control />
+                </TabContainer>
+                <Label Text="{Loc 'crypto-console-history'}" />
+                <forge:PriceHistoryGraphControl Name="HistoryGraph" MinSize="0 190" VerticalExpand="True" />
+                <Label Name="HistoryRangeLabel" Text="{Loc 'crypto-console-range-empty'}" />
+            </BoxContainer>
+        </PanelContainer>
+
+        <PanelContainer HorizontalExpand="True">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BorderThickness="2" BorderColor="#2a2a2a" BackgroundColor="#111111"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Horizontal" SeparationOverride="6" Margin="6 6 6 6">
+                <Button Name="InsertButton" Access="Public" HorizontalExpand="True" Text="{Loc 'crypto-console-button-insert-eject'}" />
+                <Button Name="SellButton" Access="Public" HorizontalExpand="True" Text="{Loc 'crypto-console-button-sell'}" />
+                <Button Name="BuyOneButton" Access="Public" HorizontalExpand="True" Text="{Loc 'crypto-console-button-buy-one'}" />
+                <Button Name="EjectButton" Access="Public" HorizontalExpand="True" Text="{Loc 'crypto-console-button-eject-hands'}" />
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</controls:FancyWindow>

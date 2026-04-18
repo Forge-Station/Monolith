@@ -1,0 +1,47 @@
+- type: entity
+  id: ComputerCryptoSell
+  parent: BaseComputerAiAccess
+  name: crypto exchange console
+  description: Accepts mined bitcoins and sells them at the current station exchange rate.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: supply
+    - map: ["computerLayerKeys"]
+      state: tech_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: CryptoSellConsole
+    bitcoinSlot:
+      name: crypto-console-slot
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - CryptoCoin
+  - type: ActivatableUI
+    key: enum.CryptoSellConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.CryptoSellConsoleUiKey.Key:
+        type: CryptoSellConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Computer
+    board: CargoSaleComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+      CryptoSellConsole-bitcoin: !type:ContainerSlot

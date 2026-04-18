@@ -1,0 +1,25 @@
+- type: pointOfInterest
+  id: AbandonedEmpireBunker
+  parent: BasePOI
+  name: 'Заброшенный бункер Империи'
+  minimumDistance: 10500
+  maximumDistance: 11500 
+  spawnGroup: Required
+  gridPath: /Maps/_Forge/POI/AbandonedEmpireBunker.yml
+  addComponents:
+  - type: IFF
+    color: "#b6692e"
+
+- type: gameMap
+  id: AbandonedEmpireBunker
+  mapName: 'Заброшенный бункер Империи'
+  mapPath: /Maps/_Forge/POI/AbandonedEmpireBunker.yml
+  minPlayers: 0
+  stations:
+    AbandonedEmpireBunker:
+      stationProto: RecordsFrontierOutpostCargo
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Заброшенный бункер Империи'
+        - type: StationDeadDrop
+          maxDeadDrops: 6

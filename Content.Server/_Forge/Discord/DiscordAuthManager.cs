@@ -30,7 +30,7 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
     private bool _enabled = false;
     private string _apiUrl = string.Empty;
     private string _apiKey = string.Empty;
-    private string _discordGuild = String.Empty;
+    private string _discordGuild = string.Empty;
     public event EventHandler<ICommonSession>? PlayerVerified;
 
     public void PostInject()
@@ -162,8 +162,6 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
 
     private async Task<bool> CheckGuild(NetUserId userId, CancellationToken cancel = default)
     {
-        if (RolesCache.ContainsKey(userId))
-            return true;
 
         var requestUrl = $"{_apiUrl}/guilds?method=uid&id={userId}";
         var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
@@ -188,14 +186,6 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
 
     public async Task<List<string>?> GetRoles(NetUserId userId)
     {
-        if (RolesCache.TryGetValue(userId, out var cached))
-        {
-            if (cached.Expiry > DateTimeOffset.Now)
-                return cached.Roles;
-
-            RolesCache.Remove(userId);
-        }
-
         var requestUrl = $"{_apiUrl}/roles?method=uid&id={userId}&guildId={_discordGuild}";
         var response = await _httpClient.GetAsync(requestUrl);
 
@@ -213,7 +203,6 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
         if (responseContent == null)
             return null;
 
-        RolesCache[userId] = (DateTimeOffset.Now.AddHours(1), responseContent.Roles.ToList());
         return responseContent.Roles.ToList();
     }
 

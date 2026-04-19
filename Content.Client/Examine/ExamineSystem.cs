@@ -154,10 +154,13 @@ namespace Content.Client.Examine
             // Tooltips coming in from the server generally prioritize
             // opening at the old tooltip rather than the cursor/another entity,
             // since there's probably one open already if it's coming in from the server.
-            var entity = GetEntity(ev.EntityUid);
+            // Forge-Change-start
+            if (!TryGetEntity(ev.EntityUid, out var entity) || !entity.Value.Valid || !EntityManager.EntityExists(entity.Value))
+                return;
 
-            OpenTooltip(player.Value, entity, ev.CenterAtCursor, ev.OpenAtOldTooltip, ev.KnowTarget);
-            UpdateTooltipInfo(player.Value, entity, ev.Message, ev.Verbs);
+            OpenTooltip(player.Value, entity.Value, ev.CenterAtCursor, ev.OpenAtOldTooltip, ev.KnowTarget);
+            UpdateTooltipInfo(player.Value, entity.Value, ev.Message, ev.Verbs);
+            // Forge-Change-end
         }
 
         public override void SendExamineTooltip(EntityUid player, EntityUid target, FormattedMessage message, bool getVerbs, bool centerAtCursor)

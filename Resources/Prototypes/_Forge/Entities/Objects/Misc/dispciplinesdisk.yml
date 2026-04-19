@@ -122,6 +122,7 @@
     disciplines:
     - RenegateWeaponry
     - RenegateEquipment
+    - RenegateVouchers
   - type: Item
     size: Small
   - type: Sprite

@@ -272,6 +272,8 @@
     - SmartGun # Goobstation
     # Einstein Engines Packs
     - Translators
+    # Forge-change
+    - BSparts
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - DynamicAmmoRecipePack

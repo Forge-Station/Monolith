@@ -161,7 +161,7 @@
 # Gallóglach
 - type: entity
   parent: ClothingHandsBase
-  id: ClothingModsuitGauntletsMercenary
+  id: ClothingModsuitGauntletsGalloglass
   name: mercenary modsuit gauntlets
   description: The knuckle guards glow when you seal the suit...for no apparent reason. Doubles as literal Finger Guns chambered in .45, so they literally pack a punch and then some.
   categories: [ HideSpawnMenu ]

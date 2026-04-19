@@ -73,6 +73,4 @@ public sealed partial class DiscordAuthManager
         [JsonPropertyName("roles")]
         public string[] Roles { get; set; } = [];
     }
-
-    public Dictionary<NetUserId, (DateTimeOffset Expiry, List<string> Roles)> RolesCache = new();
 }

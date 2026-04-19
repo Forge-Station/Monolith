@@ -1,0 +1,31 @@
+- type: vessel
+  id: azimut
+  parent: BaseVessel
+  name: Азимут
+  description: Линейный фрегат, отличающийся крупным и скорострельным вооружением . Рекомендованный состав 5-6 человек
+
+  price: 490000
+  purchasable: false
+  limit: 2
+  category: Large
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/azimut.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+- type: gameMap
+  id: azimut
+  mapName: 'Азимут'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/azimut.yml
+  minPlayers: 0
+  stations:
+    azimut:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Азимут MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

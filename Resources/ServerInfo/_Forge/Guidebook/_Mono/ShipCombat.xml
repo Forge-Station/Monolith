@@ -1,31 +1,30 @@
 <Document>
-  # Ship Warfare
+  # Корабельный бой
 
-Warfare on the frontier is usually done via the means of [color=orange]ship gunnery[/color].
+Война на фронтире обычно ведется с помощью [color=orange]корабельной артиллерии[/color].
 
   <Box>
     <GuideEntityEmbed Entity="WeaponTurretL85Autocannon"/>
     <GuideEntityEmbed Entity="GunneryServerMedium"/>
   </Box>
 
-There are 3 types of ship weaponry available:
- - [color=gold]Ballistics[/color], which are weapons like autocannons, railguns, and all other unguided chemical-propellant weapons.
- - [color=MediumVioletRed]Energy[/color], which are weapons like plasma weaponry, lasers, and other similar non-chemical based weapons. These have infinite ammo usually.
- - [color=GreenYellow]Missiles[/color], which are all guided munitions. It explains itself.
+Доступны 3 типа корабельного вооружения:
+ - [color=gold]Баллистическое[/color]: такое оружие, как автоматические пушки, рельсотроны и все прочие виды неуправляемого химического метательного оружия.
+ - [color=MediumVioletRed]Энергетическое[/color]: такое оружие, как плазменные пушки, лазеры и другое подобное оружие, не основанное на химических реакторах. Обычно имеет бесконечный боезапас.
+ - [color=GreenYellow]Ракетное[/color]: сюда входят все управляемые боеприпасы. Говорящее само за себя название.
 
-Ship weapons all need a [color=orange]gunnery control console[/color] and a [color=slateblue]gunnery control server[/color] to function. They will be abbreviated to [color=orange]GCC[/color] and [color=slateblue]GCS[/color] in most instances.
- - [color=gold]Ballistics[/color] and [color=GreenYellow]Missiles[/color] also require ammunition.
- - Ammunition can be [color=red]very volatile[/color] if damaged.
+Для работы всему корабельному оружию требуется [color=orange]консоль управления стрельбой[/color] и [color=slateblue]сервер управления стрельбой[/color]. В большинстве случаев они обозначаются аббревиатурами [color=orange]КУС[/color] и [color=slateblue]СУС[/color].
+ - Для [color=gold]Баллистического[/color] и [color=GreenYellow]Ракетного[/color] оружия также требуются боеприпасы.
+ - Боеприпасы могут быть [color=red]очень нестабильными[/color] при повреждении.
 
-Ship weapons only fire if they are selected and if your cursor on the [color=orange]GCC[/color] is in the FOV of the turret.
+Корабельное оружие стреляет только в том случае, если оно выбрано и ваш курсор на [color=orange]КУС[/color] находится в поле обзора (FOV) турели.
 
   <Box>
-    <GuideEntityEmbed Entity="ShipMissileASM302"/>
     <GuideEntityEmbed Entity="WeaponTurretVanyk"/>
   </Box>
 
-Missiles will only track grids with a shuttle console, and are immediately pointed towards their tracked target upon detecting a target. Take into account the detection angle of your missiles, you can fire a lot farther than what the FOV of your turrets will allow if you do.
+Ракеты отслеживают только те сетки, на которых есть консоль шаттла, и при обнаружении цели немедленно наводятся на отслеживаемую цель. Учитывайте угол обнаружения ваших ракет: при правильном подходе вы можете стрелять на гораздо большее расстояние, чем позволяет поле обзора ваших турелей.
 
-Most missiles have a tracking delay before attempting to seek out targets, and will not lock onto targets around 200 meters or less away from the origin ship, depending on the missile size.
+Большинство ракет имеют задержку перед началом поиска цели и не захватывают цели на расстоянии около 200 метров или менее от корабля-носителя (в зависимости от размера ракеты).
 
 </Document>

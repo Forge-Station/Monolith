@@ -1,0 +1,35 @@
+#by g33ka for forge-station
+
+- type: vessel
+  id: Domra
+  parent: BaseVessel
+  name: G3 «Домра»
+  description: рупногабаритный экспедиционно-исследовательский шаттл. На борту имеется кухня, бар, мед отсек и полу-разрушенная хим. лаборатория. Рекомендованный размер команды 2-5 человек.
+  price: 227500 #sell price 175,422$ * 1.3
+  category: Large
+  group: Expedition
+  shuttlePath: /Maps/_Forge/Shuttles/Expedition/domra.yml
+  guidebookPage: ShipyardDomra
+  class:
+  - Expedition
+  engine:
+  - AME
+
+- type: gameMap
+  id: Domra
+  mapName: G3 «Домра»
+  mapPath: /Maps/_Forge/Shuttles/Expedition/domra.yml
+  minPlayers: 0
+  stations:
+    Domra:
+      stationProto: StandardFrontierExpeditionVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Домра EXP{1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Contractor: [ 0, 0 ]
+          Pilot: [ 0, 0 ]
+          Mercenary: [ 0, 0 ]

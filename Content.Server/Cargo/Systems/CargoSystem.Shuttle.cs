@@ -19,6 +19,7 @@ using Content.Shared._NF.Bank.BUI;
 using Content.Shared._NF.Trade;
 using Content.Shared.Mech.Components;
 using Robust.Shared.Toolshed.Commands.Math; // Mono
+using Content.Shared._Forge.Crypto.Components; // Forge-Change
 
 
 namespace Content.Server.Cargo.Systems;
@@ -376,6 +377,9 @@ public sealed partial class CargoSystem
                 // End Frontier
 
                 if (_blacklistQuery.HasComponent(ent))
+                    continue;
+
+                if (HasComp<CryptoCoinComponent>(ent)) // Forge-Change: bitcoin can only be sold in crypto console.
                     continue;
 
                 // Mono: Use vending machine discount pricing for cargo sales

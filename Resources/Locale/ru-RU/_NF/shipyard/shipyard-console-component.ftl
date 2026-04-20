@@ -23,6 +23,7 @@ shipyard-console-sale-unknown-reason = Шаттл не может быть пр�
 shipyard-console-deed-label = Зарегистрированный шаттл:
 shipyard-console-appraisal-label = Оценочная стоимость шаттла:{ " " }
 shipyard-console-no-voucher-redemptions = Все ваучеры использованы.
+shipyard-console-shipwiki-button = Документация шаттлов
 
 shipyard-console-engine-All = Все
 shipyard-console-engine-AME = ДАМ

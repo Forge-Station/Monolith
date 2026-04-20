@@ -23,3 +23,16 @@
     2: 0.5
     3: 0.5
   uiName: REN-EQ
+
+- type: techDiscipline
+  id: RenegateVouchers
+  name: research-discipline-renegate-shipyard
+  color: "#8d4821"
+  icon:
+    sprite: _Mono/Interface/Misc/research_disciplines_rogue.rsi
+    state: shipyard
+  tierPrerequisites:
+    1: 0
+    2: 0.6
+    3: 0.6
+  uiName: REN-VH

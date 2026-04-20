@@ -2472,5 +2472,19 @@ namespace Content.Client.Lobby.UI
             ImportButton.Disabled = false;
             ExportButton.Disabled = false;
         }
+
+        private void UpdateCompanyControls()
+        {
+            if (Profile is null)
+                return;
+
+            // Company selection is handled by CompanyWindow now; keep this method as a
+            // lightweight validity check for any legacy callers.
+            if (!_prototypeManager.TryIndex<CompanyPrototype>(Profile.Company, out var companyProto) ||
+                companyProto.Hidden)
+            {
+                Profile = Profile.WithCompany("None");
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+using Content.Shared.Store;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio; // Forge-change
 using Content.Shared.Roles; // Forge-change
@@ -84,4 +85,10 @@ public sealed partial class CompanyPrototype : IPrototype
     [DataField("icon")]
     public ProtoId<CompanyIconPrototype>? Icon { get; private set; }
     // Forge-change-end
+    /// <summary>
+    /// The (typically Uplink) Currency Prototype bound to the Company.
+    /// Used for handling printing contraband items.
+    /// </summary>
+    [DataField]
+    public ProtoId<CurrencyPrototype>? CompanyUplinkCurrency { get; private set; }
 }

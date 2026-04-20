@@ -33,7 +33,15 @@
                     Text="{Loc 'shipyard-console-no-deed'}" />
             </BoxContainer>
         </BoxContainer>
+        <!-- Forge - g33ka start-->
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Orientation="Horizontal">
+                <Button Name="ShipWikiButton"
+                    Text="{Loc 'shipyard-console-shipwiki-button'}" />
             </BoxContainer>
+        </BoxContainer>
+        </BoxContainer>
+        <!-- Forge - g33ka end-->
         </PanelContainer>
         <BoxContainer Orientation="Horizontal">
             <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="0 8 0 2">

@@ -67,6 +67,21 @@
     requires:
     - TauCetiBasic
 
+- type: entity # Forge Change begin
+  parent: BaseSubdermalImplant
+  id: KelaelTranslatorImplant
+  name: kela'el translator implant
+  description: An implant giving the ability to understand and speak Kela'el.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TranslatorImplant
+    understood:
+    - Kelael
+    spoken:
+    - Kelael
+    requires:
+    - TauCetiBasic # Forge Change end
+
 - type: entity
   parent: BaseSubdermalImplant
   id: CanilunztTranslatorImplant

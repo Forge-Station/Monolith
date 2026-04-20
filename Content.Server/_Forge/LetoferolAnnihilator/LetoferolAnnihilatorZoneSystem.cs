@@ -22,6 +22,8 @@ namespace Content.Server._Forge.LetoferolAnnihilator
         [Dependency] private readonly PvsOverrideSystem _pvsSys = default!;
 
         private const string ZonePrototype = "AnnihilatorZone";
+        private readonly List<EntityUid> _toDeleteBuffer = new();
+        private readonly List<(EntityUid source, EntityUid parentGrid)> _toCreateBuffer = new();
 
         public override void Initialize()
         {
@@ -32,8 +34,8 @@ namespace Content.Server._Forge.LetoferolAnnihilator
         {
             base.Update(frameTime);
 
-            var toDeleteBuffer = new List<EntityUid>();
-            var toCreateBuffer = new List<(EntityUid source, EntityUid parentGrid)>();
+            _toDeleteBuffer.Clear();
+            _toCreateBuffer.Clear();
 
             var query = EntityQueryEnumerator<LetoferolAnnihilatorZoneComponent>();
             while (query.MoveNext(out var uid, out var component))
@@ -42,12 +44,7 @@ namespace Content.Server._Forge.LetoferolAnnihilator
                 {
                     if (component.Generator != null && !EntityManager.EntityExists(component.Generator.Value))
                     {
-                        toDeleteBuffer.Add(uid);
-                        if (component.Generator != null && TryComp<LetoferolAnnihilatorZoneComponent>(component.Generator.Value, out var sourceComp))
-                        {
-                            sourceComp.Generator = null;
-                            sourceComp.GridZone = null;
-                        }
+                        _toDeleteBuffer.Add(uid);
                     }
                     continue;
                 }
@@ -63,16 +60,16 @@ namespace Content.Server._Forge.LetoferolAnnihilator
 
                 if (component.Generator == null)
                 {
-                    toCreateBuffer.Add((uid, parent.Value));
+                    _toCreateBuffer.Add((uid, parent.Value));
                 }
             }
 
-            foreach (var zone in toDeleteBuffer)
+            foreach (var zone in _toDeleteBuffer)
             {
                 EntityManager.QueueDeleteEntity(zone);
             }
 
-            foreach (var (source, parentGrid) in toCreateBuffer)
+            foreach (var (source, parentGrid) in _toCreateBuffer)
             {
                 if (!TryComp<LetoferolAnnihilatorZoneComponent>(source, out var sourceComp))
                     continue;
@@ -88,22 +85,24 @@ namespace Content.Server._Forge.LetoferolAnnihilator
 
         private void UpdateDamageState(EntityUid uid, LetoferolAnnihilatorZoneComponent component)
         {
-            var damage = component.Damage;
-            if (damage == null || damage.Empty)
-                return;
-
             var transform = Transform(uid);
             var entities = _lookup.GetEntitiesInRange(transform.Coordinates, component.Radius);
+            var hasThreat = false;
+            var damage = component.Damage;
+            var shouldApplyDamage = damage != null && !damage.Empty;
 
             foreach (var entity in entities)
             {
                 if (!_factionSystem.IsMember(entity, component.Target))
                     continue;
 
-                _damageable.TryChangeDamage(entity, damage, ignoreResistances: false);
+                hasThreat = true;
+                if (shouldApplyDamage)
+                    _damageable.TryChangeDamage(entity, damage!, ignoreResistances: false);
             }
 
-            component.NextUpdate = _gameTiming.CurTime + component.UpdateInterval;
+            component.ThreatActive = hasThreat;
+            component.NextUpdate = _gameTiming.CurTime + (hasThreat ? component.CombatCheckInterval : component.IdleCheckInterval);
         }
 
         private EntityUid ZonedEntity(EntityUid entity, EntityUid? source = null, MapGridComponent? mapGrid = null)

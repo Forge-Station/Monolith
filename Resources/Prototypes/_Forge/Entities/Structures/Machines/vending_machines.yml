@@ -1,0 +1,73 @@
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineSnackDonkNT
+  name: Любимые Снэки Donk
+  description: Насладитесь потрясающим вкусом любого из наших продуктов, которые считаются лучшими в мире для откорма и вредны для здоровья! ДОНК!!
+  components:
+  - type: VendingMachine
+    pack: SnackDonkNTPack
+    dispenseOnHitChance: 0.25
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    ejectState: eject-unshaded
+    denyState: deny-unshaded
+    initialStockQuality: 0.69
+  - type: MarketModifier
+    mod: 200
+  - type: Advertise
+    pack: GetmoreChocolateCorpAds
+  - type: SpeakOnUIClosed
+    pack: GetmoreChocolateCorpGoodbyes
+  - type: Sprite
+    sprite: Forge/Structures/Machines/VendingMachines/donkvendNT.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#4682B4"
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineSnackDonkSyndi
+  name: Любимые Снэки Donk
+  description: Насладитесь потрясающим вкусом любого из наших продуктов, которые считаются лучшими в мире для откорма и вредны для здоровья! ДОНК!!
+  components:
+  - type: VendingMachine
+    pack: SnackDonkSyndiPack
+    dispenseOnHitChance: 0.25
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    ejectState: eject-unshaded
+    denyState: deny-unshaded
+    initialStockQuality: 1
+  - type: MarketModifier
+    mod: 200
+  - type: Advertise
+    pack: GetmoreChocolateCorpAds
+  - type: SpeakOnUIClosed
+    pack: GetmoreChocolateCorpGoodbyes
+  - type: Sprite
+    sprite: Forge/Structures/Machines/VendingMachines/donkvendSY.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#800000"

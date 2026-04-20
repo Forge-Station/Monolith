@@ -1,47 +1,47 @@
 <Document>
-  # Colossus Shipyards
+  # Корабельные верфи Икара
 
-To assist in developing the Colossus Sector, shuttles from SHM or various corporations can be rented for use.
-All rentals last for one shift. Rented shuttles return to the corporate parent company at the end of shift.
-The value of shuttles is returned to the purchaser when ended through a ship console.
-To avoid losses, [bold]make sure you end your rental before ending your shift[/bold].
+Для содействия развитию Системы Икара шаттлы от SHM или различных корпораций могут быть взяты в аренду.
+Все аренды действуют в течение одной смены. Арендованные шаттлы возвращаются материнской компании в конце смены.
+Стоимость шаттлов возвращается покупателю при завершении аренды через корабельную консоль.
+Чтобы избежать потерь, [bold]убедитесь, что вы завершили аренду до окончания вашей смены[/bold].
 
-## Shipyard Console
+## Корабельная консоль
   <Box>
     <GuideEntityEmbed Entity="PassengerIDCard"/>
     <GuideEntityEmbed Entity="SpaceCash1000"/>
     <GuideEntityEmbed Entity="ComputerShipyard"/>
   </Box>
-  To rent a ship:
-- Eject the ID card from your PDA.
-- Insert the ID card into an unused [color=#cccc00]shipyard console[/color].
-- Use the shipyard console to bring up its interface.
-- Select the ship you would like to rent.
-- Press the Purchase button on the console.
-- Press the Eject button to remove your ID from the console.
-- Reinsert your ID card into your PDA.
+  Чтобы арендовать корабль:
+- Извлеките ID-карту из вашего КПК.
+- Вставьте ID-карту в свободную [color=#cccc00]корабельную консоль[/color].
+- Используйте корабельную консоль, чтобы открыть её интерфейс.
+- Выберите корабль, который вы хотите арендовать.
+- Нажмите кнопку "Купить" на консоли.
+- Нажмите кнопку "Извлечь", чтобы удалить вашу ID-карту из консоли.
+- Вставьте вашу ID-карту обратно в ваш КПК.
 
-Congratulations, you're now the Captain of your own ship!
+Поздравляем, теперь вы капитан собственного корабля!
 
-To end your rental:
-- Make sure your rented ship is docked with Colonial Outpost.
-- Make sure nobody is aboard the ship.
-- Eject the ID card [bold]used to purchase the ship[/bold] from your PDA.
-- Insert the ID card into an unused [color=#cccc00]shipyard console[/color].
-- Use the shipyard console to bring up its interface.
-- Press the Sell button on the console. The value will be deposited into your bank account.
-- Press the Eject button to remove your ID from the console.
-- Reinsert your ID card into your PDA.
+Чтобы завершить аренду:
+- Убедитесь, что ваш арендованный корабль пристыкован к Колониальному аванпосту.
+- Убедитесь, что на корабле никого нет.
+- Извлеките ID-карту, [bold]использованную для покупки корабля[/bold], из вашего КПК.
+- Вставьте ID-карту в свободную [color=#cccc00]корабельную консоль[/color].
+- Используйте корабельную консоль, чтобы открыть её интерфейс.
+- Нажмите кнопку "Продать" на консоли. Стоимость будет зачислена на ваш банковский счет.
+- Нажмите кнопку "Извлечь", чтобы удалить вашу ID-карту из консоли.
+- Вставьте вашу ID-карту обратно в ваш КПК.
 
-## Provisions
+## Снаряжение
   <Box>
     <GuideEntityEmbed Entity="LockerCaptain"/>
     <GuideEntityEmbed Entity="SuitStorageBase"/>
     <GuideEntityEmbed Entity="LockerParamedic"/>
   </Box>
-  Ships come equipped with the tools and supplies needed to perform one or more tasks in the Colossus Sector (e.g. mining, research, medical, food services).
+  Корабли поставляются с инструментами и припасами, необходимыми для выполнения одной или нескольких задач в Секторе Колосс (например, добыча, исследования, медицина, пищевые услуги).
 
-Ships, especially larger ones, work best with a crew. Refer to the [bold]Hiring[/bold] section for more info.
-Space is a lonely, dangerous place, and you'll have a much better time when you work with a crew.
+Корабли, особенно большие, лучше всего работают с экипажем. Обратитесь к разделу [bold]Найм[/bold] для получения дополнительной информации.
+Космос — одинокое, опасное место, и вам будет гораздо лучше, когда вы работаете с командой.
 
 </Document>

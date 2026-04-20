@@ -183,14 +183,14 @@ public sealed class MonoCoinsSystem : EntitySystem
             Logger.Info($"Awarded {RoundEndReward} MonoCoins to player {session.Name} ({session.UserId}). New balance: {newBalance}");
 
             // Notify the player via chat
-            var notificationMessage = $"Round ended! You earned {RoundEndReward} MonoCoins. Your new balance: {newBalance}";
-            _chatManager.ChatMessageToOne(
-                ChatChannel.Notifications,
-                notificationMessage,
-                notificationMessage,
-                EntityUid.Invalid,
-                false,
-                session.Channel);
+//            var notificationMessage = $"Round ended! You earned {RoundEndReward} MonoCoins. Your new balance: {newBalance}";
+//            _chatManager.ChatMessageToOne(
+//                ChatChannel.Notifications,
+//                notificationMessage,
+//                notificationMessage,
+//                EntityUid.Invalid,
+//                false,
+//                session.Channel); // Forge-Change
         }
         catch (Exception ex)
         {

@@ -53,6 +53,8 @@
   id: AirlockHatchRemnant
   suffix: Forge, Remnant
   components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Standard/remnant_hatch.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsRemnant ]

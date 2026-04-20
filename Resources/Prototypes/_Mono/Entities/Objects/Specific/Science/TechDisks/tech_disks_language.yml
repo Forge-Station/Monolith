@@ -22,6 +22,7 @@
     - BubblishTranslator # Slimes
     - NekomimeticTranslator # Oni/Felinids
     - DraconicTranslator # Lizards
+    - KelaelTranslator # Arkans Forge Change
     - RootSpeakTranslator # Dionae
     - MofficTranslator # Moths
     - ValyrianStandardTranslator # Harpies
@@ -54,6 +55,7 @@
     - BubblishTranslator
     - NekomimeticTranslator
     - DraconicTranslator
+    - KelaelTranslator
     #- SolCommonTranslator # Rogues dont have craftable freespeak translators, why should TSF?
     - RootSpeakTranslator
     - MofficTranslator
@@ -68,6 +70,7 @@
     - BubblishTranslatorImplanter
     - NekomimeticTranslatorImplanter
     - DraconicTranslatorImplanter
+    - KelaelTranslatorImplanter
     #- SolCommonTranslatorImplanter # Rogues dont have craftable freespeak translators, why should TSF?
     - RootSpeakTranslatorImplanter
     - MofficTranslatorImplanter

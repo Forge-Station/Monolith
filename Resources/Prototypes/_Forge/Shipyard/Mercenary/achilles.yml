@@ -11,7 +11,7 @@
   parent: BaseVessel
   name: NSC «Ахиллес»
   description: Основной боевой фрегат-охотник компании Nexus Star Consoritum. Имеет 4 орудия «Лонгбоу», 4 плазмометателей «Цербер» и 2 лазера «Фаланг».
-  price: 220000
+  price: 215000
   category: Medium
   group: Shipyard
   access: Mercenary

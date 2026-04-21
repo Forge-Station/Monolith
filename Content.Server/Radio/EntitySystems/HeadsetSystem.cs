@@ -11,6 +11,8 @@ using Content.Shared.Chat;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Shared._Forge.TTS;
+using Content.Server._Forge.TTS;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -20,7 +22,8 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
 
-
+    [Dependency] private readonly ChatSystem _chat = default !;
+    [Dependency] private readonly TTSSystem _tts = default !;
     public override void Initialize()
     {
         base.Initialize();
@@ -66,9 +69,8 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     protected override void OnGotEquipped(EntityUid uid, HeadsetComponent component, GotEquippedEvent args)
     {
         base.OnGotEquipped(uid, component, args);
-        if (component.IsEquipped && component.Enabled)
-        {
-            EnsureComp<WearingHeadsetComponent>(args.Equipee).Headset = uid;
+        if (component.IsEquipped && component.Enabled) {
+            EnsureComp < WearingHeadsetComponent > (args.Equipee).Headset = uid;
             UpdateRadioChannels(uid, component);
         }
     }
@@ -77,8 +79,11 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     {
         base.OnGotUnequipped(uid, component, args);
         component.IsEquipped = false;
-        RemComp<ActiveRadioComponent>(uid);
         RemComp<WearingHeadsetComponent>(args.Equipee);
+        if (component.Enabled)
+            UpdateRadioChannels(uid, component);
+        else
+            RemComp<ActiveRadioComponent>(uid);
     }
 
     public void SetEnabled(EntityUid uid, bool value, HeadsetComponent? component = null)
@@ -105,26 +110,40 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
     private void OnHeadsetReceive(EntityUid uid, HeadsetComponent component, ref RadioReceiveEvent args)
     {
-        if (TryComp(Transform(uid).ParentUid, out ActorComponent? actor))
-        {
-            // Einstein Engines - Language begin
-            var canUnderstand = _language.CanUnderstand(Transform(uid).ParentUid, args.Language.ID);
-            var msg = new MsgChatMessage
-            {
+        TTSComponent ? headsetTts = null;
+
+        if (TryComp(uid, out headsetTts) && TryComp(args.MessageSource, out TTSComponent ? speakerTts)) {
+            headsetTts.VoicePrototypeId = speakerTts.VoicePrototypeId;
+            Dirty(uid, headsetTts);
+        }
+
+        var parent = Transform(uid).ParentUid;
+
+        if (parent == args.MessageSource)
+            return;
+
+        if (TryComp(parent, out ActorComponent ? actor)) {
+            var canUnderstand = _language.CanUnderstand(parent, args.Language.ID);
+
+            var msg = new MsgChatMessage {
                 Message = canUnderstand ? args.OriginalChatMsg : args.LanguageObfuscatedChatMsg
             };
+
             _netMan.ServerSendMessage(msg, actor.PlayerSession.Channel);
 
-            // Einstein Engines - Language end
+            var heardEv = new RadioMessageHeardEvent(uid, msg, args.Channel);
 
-            // Mono - Borers begin
-            var ev = new RadioMessageHeardEvent(uid, msg, args.Channel);
-            RaiseLocalEvent(Transform(uid).ParentUid, ref ev);
-            // Mono - Borers end
+            RaiseLocalEvent(parent, ref heardEv);
 
-            // Send radio noise event to client
             var radioNoiseEvent = new RadioNoiseEvent(GetNetEntity(uid), args.Channel.ID);
+
             RaiseNetworkEvent(radioNoiseEvent, actor.PlayerSession);
+
+            if (headsetTts?.VoicePrototypeId != null) {
+                _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, headsetTts.VoicePrototypeId, actor.PlayerSession, true, args.Language);
+            }
+
+            return;
         }
     }
 

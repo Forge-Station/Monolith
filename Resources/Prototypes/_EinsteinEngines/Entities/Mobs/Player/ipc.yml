@@ -127,6 +127,7 @@
   - type: EmitBuzzWhileDamaged
   - type: CanHostGuardian
   - type: WeldingHealable
+  - type: TTS
 
 - type: entity
   save: false

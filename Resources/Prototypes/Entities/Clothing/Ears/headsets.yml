@@ -26,7 +26,8 @@
   - type: GuideHelp
     guides:
     - Radio
-
+  - type: TTS
+  
 - type: entity
   parent: ClothingHeadset
   id: ClothingHeadsetGrey

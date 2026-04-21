@@ -16,6 +16,7 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
     // Public fields
     public TechnologyPrototype Prototype;
     public Action<TechnologyPrototype, ResearchAvailability>? SelectAction;
+    public Action<TechnologyPrototype, ResearchAvailability>? OverrideAction;
     public ResearchAvailability Availability;
 
     // Some visuals
@@ -27,6 +28,22 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
     public Color BorderColor = DefaultBorderColor;
     public Color HoveredColor = DefaultHoveredColor;
     public Color SelectedColor = DefaultHoveredColor;
+    public Color PreviewColor = DefaultHoveredColor;
+    public bool IsGhostPreview;
+
+    private bool _isPreviewTarget;
+    public bool IsPreviewTarget
+    {
+        get => _isPreviewTarget;
+        set
+        {
+            if (_isPreviewTarget == value)
+                return;
+
+            _isPreviewTarget = value;
+            UpdateColor();
+        }
+    }
 
     // Selection state
     private bool _isSelected = false;
@@ -95,6 +112,7 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
         HoveredColor = Color.InterpolateBetween(disciplineColor, Color.White, 0.3f);
         // Create an even brighter version for selection (persistent bright highlight)
         SelectedColor = Color.InterpolateBetween(disciplineColor, Color.White, 0.5f);
+        PreviewColor = new Color(disciplineColor.R, disciplineColor.G, disciplineColor.B, 0.35f);
         // Only border color varies by availability
         BorderColor = availabilityBorderColor;
 
@@ -110,6 +128,11 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
         UpdateColor();
     }
 
+    public void SetInteractive(bool interactive)
+    {
+        Button.Disabled = !interactive;
+    }
+
     private void UpdateColor()
     {
         if (Panel.PanelOverride is RoundedStyleBoxFlat panel)
@@ -117,6 +140,8 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
             // Priority: Selected > Hovered > Normal
             if (IsSelected)
                 panel.BackgroundColor = SelectedColor;
+            else if (IsPreviewTarget)
+                panel.BackgroundColor = PreviewColor;
             else if (Button.IsHovered)
                 panel.BackgroundColor = HoveredColor;
             else
@@ -124,6 +149,15 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
 
             panel.BorderColor = BorderColor;
         }
+
+        ResearchDisplay.ModulateSelfOverride = IsPreviewTarget
+            ? new Color(1f, 1f, 1f, 0.45f)
+            : Color.White;
+
+        if (IsGhostPreview)
+            ModulateSelfOverride = new Color(1f, 1f, 1f, 0.7f);
+        else
+            ModulateSelfOverride = Color.White;
     }
 
     protected override void ExitedTree()
@@ -135,6 +169,12 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
 
     private void Selected(BaseButton.ButtonEventArgs args)
     {
+        if (OverrideAction != null)
+        {
+            OverrideAction.Invoke(Prototype, Availability);
+            return;
+        }
+
         SelectAction?.Invoke(Prototype, Availability);
     }
 }

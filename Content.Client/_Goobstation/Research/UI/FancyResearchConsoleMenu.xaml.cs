@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using Content.Client.Parallax; // Frontier: Parallax control for the background
 using Content.Client.Research;
@@ -65,6 +66,36 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     private Vector2 _position = DefaultPosition;
 
     /// <summary>
+    /// Currently selected research discipline tab.
+    /// </summary>
+    private string? _selectedDiscipline;
+
+    /// <summary>
+    /// Cached viewport offset for each discipline tab.
+    /// </summary>
+    private readonly Dictionary<string, Vector2> _disciplinePositions = new();
+
+    /// <summary>
+    /// Tracks visible technology controls for selection and navigation.
+    /// </summary>
+    private readonly Dictionary<string, FancyResearchConsoleItem> _visibleTechnologyItems = new();
+
+    /// <summary>
+    /// Temporary ghost shown when target research is on another tab.
+    /// </summary>
+    private FancyResearchConsoleItem? _crossDisciplinePreviewItem;
+
+    /// <summary>
+    /// Tech focused in the tree viewport.
+    /// </summary>
+    private string? _focusedTech;
+
+    /// <summary>
+    /// Original tech kept visible in the info panel while navigating prerequisites.
+    /// </summary>
+    private string? _previewTargetTech;
+
+    /// <summary>
     /// Captures the initial position to use with recenter button
     /// </summary>
     private Vector2 _initialViewPosition;
@@ -127,6 +158,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         DragContainer.OnKeyBindDown += OnKeybindDown;
         DragContainer.OnKeyBindUp += OnKeybindUp;
         RecenterButton.OnPressed += _ => Recenter();
+        ResearchesContainer.OnResized += RefreshCurrentDisciplineView;
 
         // Empty initialization
         UpdatePanels(List);
@@ -137,24 +169,40 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
     public void UpdatePanels(Dictionary<string, ResearchAvailability> dict)
     {
-        DragContainer.RemoveAllChildren();
         List = dict;
+        var supportedDisciplines = GetSupportedDisciplineIds();
+
+        EnsureSelectedDiscipline(supportedDisciplines);
+        BuildDisciplineTabs(supportedDisciplines);
+        RefreshTechnologyGrid();
+        RefreshCurrentInfoPanel();
+    }
+
+    private void RefreshTechnologyGrid()
+    {
+        DragContainer.RemoveAllChildren();
+        _visibleTechnologyItems.Clear();
+        _crossDisciplinePreviewItem = null;
 
         foreach (var tech in List)
         {
             var proto = _prototype.Index<TechnologyPrototype>(tech.Key);
 
+            if (_selectedDiscipline != null && proto.Discipline != _selectedDiscipline)
+                continue;
+
             var control = new FancyResearchConsoleItem(proto, _sprite, tech.Value);
             DragContainer.AddChild(control);
+            _visibleTechnologyItems[proto.ID] = control;
 
             // Set position for all tech, relating to _position
             var uiPosition = _position + proto.Position * GridSize;
             LayoutContainer.SetPosition(control, uiPosition);
             control.SelectAction += SelectTech;
-
-            if (tech.Key == CurrentTech)
-                SelectTech(proto, tech.Value);
         }
+
+        AddCrossDisciplinePreviewGhost();
+        UpdateSelectedTechVisuals();
     }
 
     public void UpdateInformationPanel(int points)
@@ -168,6 +216,14 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
         if (!_entity.TryGetComponent(Entity, out TechnologyDatabaseComponent? database))
             return;
+
+        var previousDiscipline = _selectedDiscipline;
+        var supportedDisciplines = GetSupportedDisciplineIds();
+        EnsureSelectedDiscipline(supportedDisciplines);
+        BuildDisciplineTabs(supportedDisciplines);
+
+        if (previousDiscipline != _selectedDiscipline)
+            RefreshTechnologyGrid();
 
         TierDisplayContainer.RemoveAllChildren();
         foreach (var disciplineId in database.SupportedDisciplines)
@@ -212,6 +268,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         // Frontier: bound motion to a box
         var originalPosition = _position;
         _position += args.Relative;
+        CacheCurrentDisciplinePosition();
 
         var diff = _position - originalPosition;
         // End Frontier: bound motion to a box
@@ -252,13 +309,22 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     /// <param name="availability">Tech availability</param>
     public void SelectTech(TechnologyPrototype proto, ResearchAvailability availability)
     {
+        CurrentTech = proto.ID;
+        _focusedTech = proto.ID;
+        _previewTargetTech = null;
+        ShowTechnologyInfo(proto, availability);
+        UpdateSelectedTechVisuals();
+    }
+
+    private void ShowTechnologyInfo(TechnologyPrototype proto, ResearchAvailability availability)
+    {
         InfoContainer.RemoveAllChildren();
         if (!_player.LocalEntity.HasValue)
             return;
 
-        CurrentTech = proto.ID;
         var control = new FancyTechnologyInfoPanel(proto, _accessReader.IsAllowed(_player.LocalEntity.Value, Entity), availability, _sprite);
         control.BuyAction += args => OnTechnologyCardPressed?.Invoke(args.ID);
+        control.NavigateToTechnologyAction += NavigateToTechnology;
         InfoContainer.AddChild(control);
     }
 
@@ -267,11 +333,17 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     /// </summary>
     public void Recenter()
     {
+        if (_selectedDiscipline == null)
+            return;
+
+        var defaultPosition = GetDefaultDisciplinePosition(_selectedDiscipline);
+
         // Preserve the current tech items but reset the positions
-        var diff = _initialViewPosition - _position;
+        var diff = defaultPosition - _position;
 
         // First update the master position
-        _position = _initialViewPosition;
+        _position = defaultPosition;
+        CacheCurrentDisciplinePosition();
 
         // Now update all child positions by the same delta
         foreach (var child in DragContainer.Children)
@@ -285,8 +357,256 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         base.Close();
 
         DragContainer.RemoveAllChildren();
+        DisciplineTabsContainer.RemoveAllChildren();
         InfoContainer.RemoveAllChildren();
+        _visibleTechnologyItems.Clear();
+        _crossDisciplinePreviewItem = null;
         _firstInitialization = true;
+        _selectedDiscipline = null;
+        _disciplinePositions.Clear();
+        _focusedTech = null;
+        _previewTargetTech = null;
+    }
+
+    private List<string> GetSupportedDisciplineIds()
+    {
+        if (!_entity.TryGetComponent(Entity, out TechnologyDatabaseComponent? database))
+            return new List<string>();
+
+        return database.SupportedDisciplines
+            .Where(disciplineId => _prototype.HasIndex<TechDisciplinePrototype>(disciplineId))
+            .ToList();
+    }
+
+    private void EnsureSelectedDiscipline(IReadOnlyList<string> supportedDisciplines)
+    {
+        if (supportedDisciplines.Count == 0)
+        {
+            _selectedDiscipline = null;
+            _position = DefaultPosition;
+            return;
+        }
+
+        if (_selectedDiscipline != null && supportedDisciplines.Contains(_selectedDiscipline))
+        {
+            _position = GetDisciplinePosition(_selectedDiscipline);
+            return;
+        }
+
+        _selectedDiscipline = supportedDisciplines[0];
+        _position = GetDisciplinePosition(_selectedDiscipline);
+    }
+
+    private void BuildDisciplineTabs(IReadOnlyList<string> supportedDisciplines)
+    {
+        DisciplineTabsContainer.RemoveAllChildren();
+
+        if (supportedDisciplines.Count == 0)
+            return;
+
+        var group = new ButtonGroup();
+
+        foreach (var disciplineId in supportedDisciplines)
+        {
+            var discipline = _prototype.Index<TechDisciplinePrototype>(disciplineId);
+            var button = new DisciplineButton(discipline)
+            {
+                ToggleMode = true,
+                Group = group,
+                Pressed = disciplineId == _selectedDiscipline,
+                Text = discipline.UiName,
+                ToolTip = Loc.GetString(discipline.Name),
+                MinHeight = 32,
+                MinWidth = 80,
+            };
+
+            button.OnPressed += _ => SelectDiscipline(disciplineId);
+            DisciplineTabsContainer.AddChild(button);
+        }
+    }
+
+    private void SelectDiscipline(string disciplineId)
+    {
+        if (_selectedDiscipline == disciplineId)
+            return;
+
+        _selectedDiscipline = disciplineId;
+        _position = GetDisciplinePosition(disciplineId);
+        RefreshTechnologyGrid();
+    }
+
+    private Vector2 GetDisciplinePosition(string disciplineId)
+    {
+        if (_disciplinePositions.TryGetValue(disciplineId, out var position))
+            return position;
+
+        var defaultPosition = GetDefaultDisciplinePosition(disciplineId);
+        _disciplinePositions[disciplineId] = defaultPosition;
+        return defaultPosition;
+    }
+
+    private void CacheCurrentDisciplinePosition()
+    {
+        if (_selectedDiscipline == null)
+            return;
+
+        _disciplinePositions[_selectedDiscipline] = _position;
+    }
+
+    private Vector2 GetDefaultDisciplinePosition(string disciplineId)
+    {
+        var technologies = List.Keys
+            .Select(id => _prototype.Index<TechnologyPrototype>(id))
+            .Where(proto => proto.Discipline == disciplineId)
+            .ToList();
+
+        if (technologies.Count == 0)
+            return DefaultPosition;
+
+        var min = new Vector2(float.MaxValue, float.MaxValue);
+        var max = new Vector2(float.MinValue, float.MinValue);
+
+        foreach (var technology in technologies)
+        {
+            var topLeft = (Vector2) technology.Position * GridSize;
+            var bottomRight = topLeft + new Vector2(CardSize, CardSize);
+            min = Vector2.Min(min, topLeft);
+            max = Vector2.Max(max, bottomRight);
+        }
+
+        var treeCenter = (min + max) / 2f;
+        var viewportSize = GetViewportSize();
+        var viewportCenter = viewportSize / 2f;
+
+        return viewportCenter - treeCenter;
+    }
+
+    private Vector2 GetViewportSize()
+    {
+        var width = MathF.Max(ResearchesContainer.Size.X, 700f);
+        var height = MathF.Max(ResearchesContainer.Size.Y, 550f);
+        return new Vector2(width, height);
+    }
+
+    private void NavigateToTechnology(TechnologyPrototype technology)
+    {
+        TechnologyPrototype? sourceTechnology = null;
+        if (CurrentTech != null && _prototype.TryIndex(CurrentTech, out TechnologyPrototype? source))
+            sourceTechnology = source;
+
+        _focusedTech = technology.ID;
+        _previewTargetTech = sourceTechnology?.ID;
+        _selectedDiscipline = technology.Discipline;
+
+        _position = sourceTechnology != null && sourceTechnology.Discipline == technology.Discipline
+            ? GetNavigationPosition(sourceTechnology, technology)
+            : GetCenteredPositionForTechnology(technology);
+
+        CacheCurrentDisciplinePosition();
+        BuildDisciplineTabs(GetSupportedDisciplineIds());
+        RefreshTechnologyGrid();
+    }
+
+    private Vector2 GetCenteredPositionForTechnology(TechnologyPrototype technology)
+    {
+        var viewportCenter = GetViewportSize() / 2f;
+        var technologyCenter = (Vector2) technology.Position * GridSize + new Vector2(CardSize / 2f, CardSize / 2f);
+        return viewportCenter - technologyCenter;
+    }
+
+    private void RefreshCurrentDisciplineView()
+    {
+        if (_selectedDiscipline == null)
+            return;
+
+        if (_disciplinePositions.TryGetValue(_selectedDiscipline, out var cachedPosition))
+            _position = cachedPosition;
+        else
+            _position = GetDefaultDisciplinePosition(_selectedDiscipline);
+
+        RefreshTechnologyGrid();
+    }
+
+    private void RefreshCurrentInfoPanel()
+    {
+        if (CurrentTech == null || !List.TryGetValue(CurrentTech, out var availability))
+            return;
+
+        if (!_prototype.TryIndex(CurrentTech, out TechnologyPrototype? proto))
+            return;
+
+        ShowTechnologyInfo(proto, availability);
+    }
+
+    private void AddCrossDisciplinePreviewGhost()
+    {
+        if (_previewTargetTech == null || _focusedTech == null)
+            return;
+
+        if (_visibleTechnologyItems.ContainsKey(_previewTargetTech))
+            return;
+
+        if (!_visibleTechnologyItems.TryGetValue(_focusedTech, out var focusedItem))
+            return;
+
+        if (!_prototype.TryIndex(_previewTargetTech, out TechnologyPrototype? previewProto))
+            return;
+
+        var availability = List.TryGetValue(previewProto.ID, out var previewAvailability)
+            ? previewAvailability
+            : ResearchAvailability.Unavailable;
+
+        var previewItem = new FancyResearchConsoleItem(previewProto, _sprite, availability)
+        {
+            IsGhostPreview = true,
+            IsPreviewTarget = true,
+            OverrideAction = (_, _) => ReturnToPreviewTarget(),
+        };
+        DragContainer.AddChild(previewItem);
+        _crossDisciplinePreviewItem = previewItem;
+
+        var previewPosition = focusedItem.Position + new Vector2(0f, -GridSize);
+        LayoutContainer.SetPosition(previewItem, previewPosition);
+    }
+
+    private void ReturnToPreviewTarget()
+    {
+        if (_previewTargetTech == null)
+            return;
+
+        if (!_prototype.TryIndex(_previewTargetTech, out TechnologyPrototype? previewProto))
+            return;
+
+        if (!List.TryGetValue(previewProto.ID, out var availability))
+            return;
+
+        CurrentTech = previewProto.ID;
+        _focusedTech = previewProto.ID;
+        _selectedDiscipline = previewProto.Discipline;
+        _previewTargetTech = null;
+        _position = GetCenteredPositionForTechnology(previewProto);
+        CacheCurrentDisciplinePosition();
+        BuildDisciplineTabs(GetSupportedDisciplineIds());
+        RefreshTechnologyGrid();
+        ShowTechnologyInfo(previewProto, availability);
+    }
+
+    private Vector2 GetNavigationPosition(TechnologyPrototype source, TechnologyPrototype prerequisite)
+    {
+        var viewportCenter = GetViewportSize() / 2f;
+        var sourceCenter = (Vector2) source.Position * GridSize + new Vector2(CardSize / 2f, CardSize / 2f);
+        var prerequisiteCenter = (Vector2) prerequisite.Position * GridSize + new Vector2(CardSize / 2f, CardSize / 2f);
+        var navigationCenter = Vector2.Lerp(prerequisiteCenter, sourceCenter, 0.45f);
+        return viewportCenter - navigationCenter;
+    }
+
+    private void UpdateSelectedTechVisuals()
+    {
+        foreach (var (techId, item) in _visibleTechnologyItems)
+        {
+            item.IsSelected = techId == _focusedTech;
+            item.IsPreviewTarget = techId == _previewTargetTech;
+        }
     }
 
     private sealed partial class DisciplineButton(TechDisciplinePrototype proto) : Button

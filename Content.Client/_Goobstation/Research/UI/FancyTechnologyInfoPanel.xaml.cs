@@ -23,6 +23,7 @@ public sealed partial class FancyTechnologyInfoPanel : Control
     private ISawmill _sawmill = default!; // Frontier: added debug log
     public TechnologyPrototype Prototype;
     public Action<TechnologyPrototype>? BuyAction;
+    public Action<TechnologyPrototype>? NavigateToTechnologyAction;
 
     public FancyTechnologyInfoPanel(TechnologyPrototype proto, bool hasAccess, ResearchAvailability availability, SpriteSystem sprite)
     {
@@ -124,7 +125,9 @@ public sealed partial class FancyTechnologyInfoPanel : Control
         {
             var tech = _proto.Index(techId);
             var description = research.GetTechnologyDescription(tech, true, false, true);
-            RequiredTechContainer.AddChild(new MiniTechnologyCardControl(tech, _proto, sprite, description));
+            var card = new MiniTechnologyCardControl(tech, _proto, sprite, description);
+            card.OnTechnologyPressed += args => NavigateToTechnologyAction?.Invoke(args);
+            RequiredTechContainer.AddChild(card);
         }
     }
 

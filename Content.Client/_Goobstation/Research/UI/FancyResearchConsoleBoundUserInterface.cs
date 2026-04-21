@@ -42,7 +42,7 @@ public sealed class FancyResearchConsoleBoundUserInterface : BoundUserInterface
     {
         base.OnProtoReload(args);
 
-        if (!args.WasModified<TechnologyPrototype>())
+        if (!args.WasModified<TechnologyPrototype>() && !args.WasModified<TechDisciplinePrototype>())
             return;
 
         if (State is not ResearchConsoleBoundInterfaceState rState)
@@ -65,7 +65,6 @@ public sealed class FancyResearchConsoleBoundUserInterface : BoundUserInterface
             return;
         if (!_consoleMenu.List.SequenceEqual(castState.Researches))
             _consoleMenu.UpdatePanels(castState.Researches);
-        if (_consoleMenu.Points != castState.Points)
-            _consoleMenu.UpdateInformationPanel(castState.Points);
+        _consoleMenu.UpdateInformationPanel(castState.Points);
     }
 }

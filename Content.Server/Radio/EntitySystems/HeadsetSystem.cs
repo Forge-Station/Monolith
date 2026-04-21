@@ -143,7 +143,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
             RaiseNetworkEvent(radioNoiseEvent, actor.PlayerSession);
 
-            if (headsetTts?.VoicePrototypeId != null && _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeVars.LocalRadioTTSEnabled)) {
+            if (headsetTts?.VoicePrototypeId != null) {
                 _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, headsetTts.VoicePrototypeId, actor.PlayerSession, true, args.Language);
             }
 

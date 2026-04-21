@@ -31,6 +31,9 @@
     basePrice: 10000
     stability: 0.4
     driftRate: 0.025
+  - type: CryptoCoin # Forge-Change
+    basePrice: 10000 # Forge-Change
+    growthMultiplier: 1.0 # Forge-Change
 
 - type: entity
   parent: BaseBitcoin
@@ -43,6 +46,13 @@
     layers:
     - state: icon
     - state: fluffcoin
+  - type: CryptoCoin # Forge-Change
+    marketId: contribcoin # Forge-Change
+    basePrice: 9000 # Forge-Change
+    growthMultiplier: 0.9 # Forge-Change
+  - type: Stack # Forge-Change
+    stackType: BitcoinContribcoinStack # Forge-Change
+    count: 1 # Forge-Change
 
 - type: entity
   parent: BaseBitcoin
@@ -61,6 +71,13 @@
     basePrice: 15000
     stability: 0.2
     driftRate: 0.05
+  - type: CryptoCoin # Forge-Change
+    marketId: ideascoin # Forge-Change
+    basePrice: 14000 # Forge-Change
+    growthMultiplier: 1.1 # Forge-Change
+  - type: Stack # Forge-Change
+    stackType: BitcoinIdeascoinStack # Forge-Change
+    count: 1 # Forge-Change
 
 - type: entity
   parent: BaseBitcoin
@@ -79,3 +96,28 @@
     basePrice: 20000
     stability: 0.1
     driftRate: 0.1
+  - type: CryptoCoin # Forge-Change
+    marketId: corvaxcoin # Forge-Change
+    basePrice: 22000 # Forge-Change
+    growthMultiplier: 1.35 # Forge-Change
+  - type: Stack # Forge-Change
+    stackType: BitcoinCorvaxcoinStack # Forge-Change
+    count: 1 # Forge-Change
+
+- type: stack
+  id: BitcoinContribcoinStack # Forge-Change
+  name: Contribcoin™ # Forge-Change
+  spawn: BitcoinContribcoin # Forge-Change
+  maxCount: 100 # Forge-Change
+
+- type: stack
+  id: BitcoinIdeascoinStack # Forge-Change
+  name: Ideascoin™ # Forge-Change
+  spawn: BitcoinIdeascoin # Forge-Change
+  maxCount: 100 # Forge-Change
+
+- type: stack
+  id: BitcoinCorvaxcoinStack # Forge-Change
+  name: CorvaxCoin™ # Forge-Change
+  spawn: BitcoinCorvaxcoin # Forge-Change
+  maxCount: 100 # Forge-Change

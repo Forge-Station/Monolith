@@ -56,6 +56,7 @@
       types:
         Heat: 0.35
   - type: NightVision
+    color: "#808080"
     activateSound: null
     deactivateSound: null
   - type: TemperatureSpeed

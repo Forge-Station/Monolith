@@ -1,12 +1,11 @@
 - type: guideEntry
   id: Jobs
   name: guide-entry-jobs
-  text: "/ServerInfo/Guidebook/Jobs.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Jobs.xml" # Forge-change
   children:
   - Service
   # - Cargo # Frontier: irrelevant
   - Medical
   - Science
   - Engineering
-  - Security
   - Command

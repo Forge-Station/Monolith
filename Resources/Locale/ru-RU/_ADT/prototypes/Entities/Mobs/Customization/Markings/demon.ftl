@@ -7,12 +7,22 @@ marking-DemonElfEars = Аркана, уши (Эльфийские)
 marking-DemonElfEars-ears_elf = Уши
 
 # Хвост
+marking-DemomTail = Аркана, хвост
+marking-DemomTail-tail = Хвост
 marking-DemomTail1 = Аркана, хвост (Демонические)
 marking-DemomTail1-demon_tail = Хвост
 marking-DemomTailLong = Аркана, хвост (Длинный демонические)
 marking-DemomTailLong-long = Хвост
 marking-DemomTailUp = Аркана, хвост (Демонические вверх)
 marking-DemomTailUp-up = Хвост
+marking-DemomTailAnimated = Аркана, хвост (Анимированный)
+marking-DemomTailAnimated-tail_waggin = Хвост
+marking-DemomTail1Animated = Аркана, хвост (Демонический, анимированный)
+marking-DemomTail1Animated-demon_tail_waggin = Хвост
+marking-DemomTailLongAnimated = Аркана, хвост (Длинный, анимированный)
+marking-DemomTailLongAnimated-long_waggin = Хвост
+marking-DemomTailUpAnimated = Аркана, хвост (Вверх, анимированный)
+marking-DemomTailUpAnimated-up_waggin = Хвост
 
 # Туловище
 marking-DemonChestCowSpots = Аркана, туловище (Коровьи пятна)
@@ -36,6 +46,28 @@ marking-ADTDemonrigth_eye = Аркана, Правый глаз
 marking-ADTDemonrigth_eye-tattoo_eye_r = Глаз
 marking-ADTDemonleft_eye = Аркана, Левый глаз
 marking-ADTDemonleft_eye-tattoo_eye_l = Глаз
+marking-DemonrigthEye = Аркана, Правый глаз
+marking-DemonrigthEye-tattoo_eye_r = Глаз
+marking-DemonleftEye = Аркана, Левый глаз
+marking-DemonleftEye-tattoo_eye_l = Глаз
+
+# Прочее
+marking-Allsuccubus = Аркана, Суккуб
+marking-Allsuccubus-succubus = Узор
+
+# Порождения лаваленда
+marking-DemonDrakeTile = Аркана, хвост Дрейка
+marking-DemonDrakeTile-tail_drake = Хвост
+marking-DemonDrakeTile-tail_drake_secondary = Шипы
+marking-DemonDrakeTileAnimated = Аркана, хвост Дрейка (Анимированный)
+marking-DemonDrakeTileAnimated-tail_drake_wagging = Хвост
+marking-DemonDrakeTileAnimated-tail_drake_wagging_secondary = Шипы
+marking-DemonDrakeSpine = Аркана, позвоночник Дрейка
+marking-DemonDrakeSpine-drake_spine = Позвоночник
+marking-DemonDrakeLArm = Аркана, рука Дрейка (левая)
+marking-DemonDrakeLArm-l_drake_arm = Рука
+marking-DemonDrakeRArm = Аркана, рука Дрейка (правая)
+marking-DemonDrakeRArm-r_drake_arm = Рука
 
 # Рога
 marking-DemonCowHorns = Аркана, рога (Коровьи)

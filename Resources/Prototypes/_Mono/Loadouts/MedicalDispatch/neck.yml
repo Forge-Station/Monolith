@@ -8,6 +8,7 @@
   - MdMedicClothingNeckIFFGreen
   - MdMedicClothingNeckIFFBlue
   - MdMedicClothingNeckTTIParamedicCloak #forge by g33ka
+  - MdMedicClothingNeckTTIParamedicCloakAlt #forge by g33ka
   - MdMedicClothingNeckStethoscope
   - MdMedicClothingNeckLightBlueScarf
   - MdMedicClothingNeckBlueScarf
@@ -61,3 +62,9 @@
   price: 6000
   equipment:
     neck: ClothingNeckCloakTTIParamedic
+
+- type: loadout
+  id: MdMedicClothingNeckTTIParamedicCloakAlt
+  price: 12000
+  equipment:
+    neck: ClothingNeckCloakTTIParamedicAlt

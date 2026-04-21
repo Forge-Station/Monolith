@@ -1,16 +1,29 @@
 <Document>
 <Box>
-<GuideEntityEmbed Entity="MachineMiniAnomalyGenerator"/>
+<GuideEntityEmbed Entity="ResearchAndDevelopmentServer"/>
 <GuideEntityEmbed Entity="MachineArtifactAnalyzer"/>
+<GuideEntityEmbed Entity="MercenaryTechFab"/>
 </Box>
-[color=#7a6ff2]Средний научно-добывающий фрегат "Домра" от верфи GS[/color]
+Крупный научно-добывающий фрегат [color=#7a6ff2]"Домра"[/color] от верфи [color=#7a6ff2]G3[/color]
   <Box>
     <GuideEntityEmbed Entity="ShuttleMapDomra" Caption=""/>
   </Box>
 [color=#a4885c]Размер шаттла:[/color] Большой [color=#a4885c]Рекомендованный экипаж:[/color] 2-4 [color=#a4885c]Тип питания:[/color] ДАМ [color=#a4885c]Консоль экспедиций:[/color] Есть
 <Box>
   <GuideEntityEmbed Entity="OreProcessor"/>
+  <GuideEntityEmbed Entity="ScrapProcessor"/>
+  <GuideEntityEmbed Entity="MaterialReclaimer"/>
   <GuideEntityEmbed Entity="MiningDrill"/>
 </Box>
-Корабль оборудован двумя гермозатворами для удобной добычи образцов с астеройдов, а так же конвейерным лентами, доставляющими ящики и предметы с носа корабля на центральный склад неподалёку от отсека утилизации. Химическая лаборатория давно не используется на кораблях этого типа, так что возможно вам придётся поработать над ней.
+  Корабль оборудован двумя гермозатворами для удобной добычи образцов с астеройдов, а так же конвейерным лентами, доставляющими ящики и предметы с носа корабля на центральный склад неподалёку от отсека утилизации. Химическая лаборатория давно не используется на кораблях этого типа, так что возможно вам придётся поработать над ней.
+<Box>
+  <GuideEntityEmbed Entity="WeaponTurretDravon"/>
+  <GuideEntityEmbed Entity="WeaponLaserTurretL1Phalanx"/>
+  <GuideEntityEmbed Entity="WeaponTurretType35"/>
+</Box>
+<Box>
+  <GuideEntityEmbed Entity="WeaponTurretType54"/>
+  <GuideEntityEmbed Entity="WeaponTurretAK570"/>
+</Box>
+  По каждому из бортов шаттл вооружён Автопушкой "Дравон" в носу, лазерной турелью типа "Фаланга", плазменным орудием типа "Мародёр", энергетической пушкой Тип-54 и автопушкой проекта АК570, прикрывающей тыл.
 </Document>

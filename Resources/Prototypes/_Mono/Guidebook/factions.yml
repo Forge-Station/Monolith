@@ -1,0 +1,16 @@
+#- type: guideEntry
+#  id: Factions
+#  name: Factions
+#  text: "/ServerInfo/_Mono/Guidebook/Factions/factions.xml"
+#  priority: 1
+#  children:
+#  - TSFMC_Entry
+
+#- type: guideEntry
+#  id: TSFMC_Entry
+#  name: TSFMC
+#  text: "/ServerInfo/_Mono/Guidebook/Factions/TSFMC.xml"
+#  priority: 2
+#  children:
+#  - Smuggling
+#  - Defusal

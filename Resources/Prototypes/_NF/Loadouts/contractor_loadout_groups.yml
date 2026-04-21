@@ -436,6 +436,7 @@
   loadouts:
   - ContractorClothingShoesColorBlack
   - ContractorClothingShoesClothwrap
+  - ContractorClothingShoesClothwrapBlack # Mono
   - ContractorClothingShoesTourist
   - ContractorClothingShoesBootsSalvage
   - ContractorClothingShoesChef
@@ -658,7 +659,7 @@
   - ContractorClothingNeckPonchoSmallOrange # Monolith
   - ContractorClothingNeckPonchoSmallBlack # Monolith
   - ContractorClothingNeckPonchoSmallWhite # Monolith
-  - ContractorClothingNeckPonchoBlack # Monolith
+  # - ContractorClothingNeckPonchoBlack # Forge-change # Monolith
   - ContractorClothingNeckPonchoArctic # Monolith
   - ContractorClothingNeckCloakBlack # Monolith
   - ContractorClothingNeckCloakCOG # Monolith
@@ -978,3 +979,12 @@
   - ContractorRubberStampTrader
   - ContractorRubberStampClown
   - ContractorRubberStampMime
+
+- type: loadoutGroup
+  id: ContractorArmorPlates
+  name: loadout-group-contractor-armorplates
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ContractorArmorPlateBlunt_Slash
+  - ContractorArmorPlatePierce

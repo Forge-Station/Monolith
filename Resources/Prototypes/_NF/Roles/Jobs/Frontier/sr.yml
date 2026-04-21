@@ -28,7 +28,9 @@
   displayWeight: 60 # Forge
   canBeAntag: false
   accessGroups:
-  - AllAccessSR
+  - AllAccessMono #Mono
+  access:
+  - HeadOfPersonnel #Mono
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ] # Mono - remove TSFMC implant

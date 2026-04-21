@@ -15,6 +15,7 @@
     - FactionUniversal
     - RenegateWeaponry
     - RenegateEquipment
+    - RenegateVouchers
   - type: Sprite
     sprite: Forge/Structures/Machines/server.rsi
     snapCardinals: true

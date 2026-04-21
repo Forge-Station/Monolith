@@ -15,7 +15,7 @@ public sealed class DispenserTest : InteractionTest
     public async Task InsertEjectBuiTest()
     {
         await SpawnTarget("ChemDispenser");
-        ToggleNeedPower();
+        await ToggleNeedPower(); // Forge-Change
 
         await RunTicks(20); // Mono
 

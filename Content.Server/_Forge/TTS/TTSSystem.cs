@@ -183,7 +183,7 @@ public sealed partial class TTSSystem : EntitySystem
             ssmlTraits = SoundTraits.PitchVerylow;
         var textSsml = ToSsmlText(textSanitized, ssmlTraits);
 
-        return await _ttsManager.ConvertTextToSpeech(speaker, textSsml);
+        return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized);
     }
 
     public void OnlyPlayerTTS(EntityUid source, string message, string? voiceId, ICommonSession session, bool ifWhisper, LanguagePrototype language)

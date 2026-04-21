@@ -9,9 +9,9 @@
   - NFMobRestrictions
   id: MobSyndicateNavalBase
   components:
-  - type: Body
-    prototype: HumanSyntheticOrgans # New set of synthetic organs grants faster removal of toxins from bloodstream
-    requiredLegs: 2
+  # - type: Body # Forge-Change-Del
+  #   prototype: HumanSyntheticOrgans # New set of synthetic organs grants faster removal of toxins from bloodstream
+  #   requiredLegs: 2
   - type: NpcFactionMember
     factions:
     - SyndicateNF

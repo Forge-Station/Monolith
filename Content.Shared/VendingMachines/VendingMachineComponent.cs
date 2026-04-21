@@ -251,7 +251,7 @@ namespace Content.Shared.VendingMachines
         /// <summary>
         /// Mono: Makes all positions in vending machines free if set false
         /// </summary>
-        [DataField]
+        [DataField, AutoNetworkedField]
         public bool RequiresCash = false;
     }
 

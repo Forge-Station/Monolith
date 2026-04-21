@@ -497,6 +497,35 @@
 - type: Tag
   id: PaycheckBratvaStamp
 
+- type: Tag
+  id: WinterSolsticeStamp
+
+- type: Tag
+  id: TSFCaptainStamp
+
+- type: Tag
+  id: TSFColonelStamp
+
+- type: Tag
+  id: PDVOverwatchStamp
+
+- type: Tag
+  id: PDVVizierStamp
+
+- type: Tag
+  id: PDVAsvaranStamp
+
+- type: Tag
+  id: PDVSpasakaStamp
+
+- type: Tag
+  id: USSPTaccommStamp
+
+- type: Tag
+  id: USSPStratcommStamp
+
+- type: Tag
+  id: USSPStamp
 # Multi-tile lathe board tags
 
 - type: Tag
@@ -543,3 +572,8 @@
 
 - type: Tag
   id: BombCollar
+
+# Asakim
+
+- type: Tag
+  id: AsakimBrain

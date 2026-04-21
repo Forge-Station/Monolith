@@ -57,7 +57,6 @@ namespace Content.Server.Shuttles.Components
         [DataField, ViewVariables(VVAccess.ReadWrite)]
         public InertiaDampeningMode DampeningMode = InertiaDampeningMode.Dampen;
         // End Frontier
-
         // <Mono>
         [DataField]
         public string AutopilotTargetKey = "Target";
@@ -67,7 +66,7 @@ namespace Content.Server.Shuttles.Components
 
         [DataField]
         public SoundSpecifier? AutopilotDoneSound = new SoundPathSpecifier("/Audio/Effects/Shuttle/radar_ping.ogg");
-        // Forge-Change-start - BioScan
+        // Forge-Change-start
 
         [DataField]
         public float BioScanRange = 300f;
@@ -92,7 +91,22 @@ namespace Content.Server.Shuttles.Components
 
         [ViewVariables]
         public ShuttleBioScanStatus BioScanStatus = ShuttleBioScanStatus.None;
-        // Forge-Change-end - BioScan
+
+        /// <summary>
+        /// Maximum allowed shuttle speed set via BUI request.
+        /// </summary>
+        [DataField]
+        public float MaxPilotSetSpeed = 100f;
+
+        /// <summary>
+        /// Minimum delay between shuttle speed update requests.
+        /// </summary>
+        [DataField]
+        public float SpeedSetRateLimit = 0.2f;
+
+        [ViewVariables]
+        public TimeSpan NextSpeedSetTime = TimeSpan.Zero;
+        // Forge-Change-end
         // </Mono>
 
         // Network Port Button Source Ports

@@ -79,8 +79,11 @@
   parent: BaseGameRule
   components:
   - type: MaxTimeRestartRule
-    roundMaxTime: 300
-    roundEndDelay: 10
+    restartInterval: 28800 # Forge-Change
+    utcSlotAnchorHour: 7 # Forge-Change: boundaries 07:00 / 15:00 / 23:00 UTC (was 00/08/16)
+    evacuationCallDuration: 600 # Forge-Change-start 600->900
+    postRoundDuration: 120 # Forge-Change-start 120->180
+    lobbyDuration: 180 # Forge-Change-start 180->270
 
 - type: entity
   abstract: true

@@ -1,0 +1,4 @@
+- type: guideEntry
+  id: Demon
+  name: species-name-demon
+  text: "/ServerInfo/_Wega/Guidebook/Mobs/Demon.xml"

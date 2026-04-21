@@ -27,9 +27,9 @@
   - type: NpcFactionMember
     factions:
     - StreetGangNF
-  - type: Body
-    prototype: NFHumanNoHands
-    requiredLegs: 2
+  # - type: Body # Forge-Change-Del
+  #   prototype: NFHumanNoHands
+  #   requiredLegs: 2
   - type: RechargeBasicEntityAmmo
     rechargeCooldown: 1.5
     rechargeSound:

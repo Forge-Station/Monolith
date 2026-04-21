@@ -1,9 +1,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Shared._Forge;
@@ -20,7 +18,7 @@ public sealed class TTSManager
         "Timings of TTS API requests",
         new HistogramConfiguration()
         {
-            LabelNames = new[] {"type"},
+            LabelNames = new[] { "type" },
             Buckets = Histogram.ExponentialBuckets(.1, 1.5, 10),
         });
 
@@ -65,6 +63,7 @@ public sealed class TTSManager
     {
         WantedCount.Inc();
         var cacheKey = GenerateCacheKey(speaker, text);
+
         if (_cache.TryGetValue(cacheKey, out var data))
         {
             ReusedCount.Inc();
@@ -74,27 +73,23 @@ public sealed class TTSManager
 
         _sawmill.Verbose($"Generate new audio for '{text}' speech by '{speaker}' speaker");
 
-        // When TTS is enabled but the API isn't configured (common in local dev),
-        // avoid spamming error logs with "invalid request URI" exceptions.
-        if (string.IsNullOrWhiteSpace(_apiUrl))
-            return null;
-
-        if (!Uri.TryCreate(_apiUrl, UriKind.Absolute, out _))
-            return null;
-
-        var body = new GenerateVoiceRequest
-        {
-            ApiToken = _apiToken,
-            Text = text,
-            Speaker = speaker,
-        };
-
         var reqTime = DateTime.UtcNow;
+
         try
         {
             var timeout = _cfg.GetCVar(ForgeVars.TTSApiTimeout);
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
-            var response = await _httpClient.PostAsJsonAsync(_apiUrl, body, cts.Token);
+
+            var url = $"{_apiUrl}?speaker={Uri.EscapeDataString(speaker)}" +
+                $"&text={Uri.EscapeDataString(text)}" +
+                $"&ext=ogg";
+
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _apiToken);
+
+            var response = await _httpClient.SendAsync(request, cts.Token);
+
             if (!response.IsSuccessStatusCode)
             {
                 if (response.StatusCode == HttpStatusCode.TooManyRequests)
@@ -103,28 +98,21 @@ public sealed class TTSManager
                     return null;
                 }
 
-                _sawmill.Error($"TTS request returned bad status code: {response.StatusCode}");
+                _sawmill.Error($"TTS bad status code: {response.StatusCode}");
                 return null;
             }
 
-            var json = await response.Content.ReadFromJsonAsync<GenerateVoiceResponse>(cancellationToken: cts.Token);
-            if (json.Results == null || json.Results.Count == 0)
+            var soundData = await response.Content.ReadAsByteArrayAsync(cts.Token);
+
+            if (soundData.Length == 0)
             {
-                _sawmill.Error($"TTS API returned empty results for '{text}'");
+                _sawmill.Error($"TTS returned empty audio for '{text}'");
                 return null;
             }
-
-            var firstResult = json.Results[0];
-            if (string.IsNullOrEmpty(firstResult.Audio))
-            {
-                _sawmill.Error($"TTS API returned empty audio data for '{text}'");
-                return null;
-            }
-
-            var soundData = Convert.FromBase64String(firstResult.Audio);
 
             _cache.Add(cacheKey, soundData);
             _cacheKeysSeq.Add(cacheKey);
+
             if (_cache.Count > _maxCachedCount)
             {
                 var firstKey = _cacheKeysSeq.First();
@@ -132,7 +120,7 @@ public sealed class TTSManager
                 _cacheKeysSeq.Remove(firstKey);
             }
 
-            _sawmill.Debug($"Generated new audio for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
+            _sawmill.Debug($"Generated TTS '{text}' ({soundData.Length} bytes)");
             RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
 
             return soundData;
@@ -140,22 +128,13 @@ public sealed class TTSManager
         catch (TaskCanceledException)
         {
             RequestTimings.WithLabels("Timeout").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-            _sawmill.Error($"Timeout of request generation new audio for '{text}' speech by '{speaker}' speaker");
+            _sawmill.Error($"Timeout TTS '{text}'");
             return null;
         }
         catch (Exception e)
         {
             RequestTimings.WithLabels("Error").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-            if (e is InvalidOperationException ioe &&
-                ioe.Message.Contains("invalid request URI", StringComparison.OrdinalIgnoreCase))
-            {
-                // Keep misconfiguration noise out of logs; it is expected when API URL is not set.
-                _sawmill.Debug(
-                    $"TTS request skipped due to invalid request URI for '{text}' speech by '{speaker}' speaker");
-                return null;
-            }
-
-            _sawmill.Error($"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
+            _sawmill.Error($"TTS error '{text}'\n{e}");
             return null;
         }
     }
@@ -173,54 +152,5 @@ public sealed class TTSManager
         var sha256 = System.Security.Cryptography.SHA256.Create();
         var bytes = sha256.ComputeHash(keyData);
         return Convert.ToHexString(bytes);
-    }
-
-    private struct GenerateVoiceRequest
-    {
-        public GenerateVoiceRequest()
-        {
-        }
-
-        [JsonPropertyName("api_token")]
-        public string ApiToken { get; set; } = "";
-
-        [JsonPropertyName("text")]
-        public string Text { get; set; } = "";
-
-        [JsonPropertyName("speaker")]
-        public string Speaker { get; set; } = "";
-
-        [JsonPropertyName("ssml")]
-        public bool SSML { get; private set; } = true;
-
-        [JsonPropertyName("word_ts")]
-        public bool WordTS { get; private set; } = false;
-
-        [JsonPropertyName("put_accent")]
-        public bool PutAccent { get; private set; } = true;
-
-        [JsonPropertyName("put_yo")]
-        public bool PutYo { get; private set; } = false;
-
-        [JsonPropertyName("sample_rate")]
-        public int SampleRate { get; private set; } = 24000;
-
-        [JsonPropertyName("format")]
-        public string Format { get; private set; } = "ogg";
-    }
-
-    private struct GenerateVoiceResponse
-    {
-        [JsonPropertyName("results")]
-        public List<VoiceResult> Results { get; set; }
-
-        [JsonPropertyName("original_sha1")]
-        public string Hash { get; set; }
-    }
-
-    private struct VoiceResult
-    {
-        [JsonPropertyName("audio")]
-        public string Audio { get; set; }
     }
 }

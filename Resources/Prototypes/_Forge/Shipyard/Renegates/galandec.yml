@@ -1,0 +1,33 @@
+- type: vessel
+  id: galandec
+  parent: BaseVessel
+  name: Голландец
+  description: Шаттл Артелерийской поддержки, отличающийся крупным курсовым вооружением . Рекомендованный состав 5-6 человек
+
+  price: 389050
+  purchasable: false
+  limit: 5
+  category: Large
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/galandec.yml
+  guidebookPage: Null
+  class:
+  - Fighter  
+  engine:
+  - AME
+
+- type: gameMap
+  id: galandec
+  mapName: 'Голландец'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/galandec.yml
+  minPlayers: 0
+  stations:
+    galandec:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Голландец MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

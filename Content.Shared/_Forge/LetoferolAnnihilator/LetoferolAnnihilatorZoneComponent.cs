@@ -14,6 +14,12 @@ namespace Content.Shared._Forge.LetoferolAnnihilator
         [DataField]
         public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
 
+        [DataField]
+        public TimeSpan IdleCheckInterval = TimeSpan.FromSeconds(15);
+
+        [DataField]
+        public TimeSpan CombatCheckInterval = TimeSpan.FromSeconds(2);
+
         [DataField, AutoNetworkedField]
         public int Radius = 5;
 
@@ -31,5 +37,8 @@ namespace Content.Shared._Forge.LetoferolAnnihilator
 
         [ViewVariables]
         public EntityUid? GridZone;
+
+        [ViewVariables]
+        public bool ThreatActive;
     }
 }

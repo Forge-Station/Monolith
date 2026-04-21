@@ -35,3 +35,10 @@
   - Magazinetype99762x51mmHP
   - Magazinetype99762x51mmRIP
   - AmmoBox762x51mmBigFMJ
+
+- type: latheRecipePack
+  id: RenegateVoucherDynamic
+  recipes:
+  - AzimutVoucherRenegat
+  - AzimutlateVoucherRenegat
+  - GalandeVoucherRenegat

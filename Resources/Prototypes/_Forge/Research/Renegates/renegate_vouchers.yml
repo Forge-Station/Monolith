@@ -1,0 +1,41 @@
+- type: technology
+  id: RogueRenegateVouchersAzimutlateT2
+  name: research-technology-rogue-renegate-vouchers-t2
+  entityIcon: ShipVoucherAzimutlate
+  discipline: RenegateVouchers
+  tier: 2
+  cost: 105000
+  recipeUnlocks:
+  - AzimutlateVoucherRenegat
+  technologyPrerequisites:
+  - RogueRenegateEquipmentT2
+  - UniversalMaterialResearchT3
+  position: 14, 12
+
+- type: technology
+  id: RogueRenegateVouchersAzimutT3
+  name: research-technology-rogue-renegate-voucherscapital-t3
+  entityIcon: ShipVoucherAzimut
+  discipline: RenegateVouchers
+  tier: 3
+  cost: 185000
+  recipeUnlocks:
+  - AzimutVoucherRenegat 
+  technologyPrerequisites:
+  - RogueRenegateVouchersAzimutlateT2
+  - UniversalMaterialResearchT3
+  position: 15, 13
+
+- type: technology
+  id: RogueRenegateVouchersGalandecT3
+  name: research-technology-rogue-renegate-vouchers-t3
+  entityIcon: ShipVoucherGalandec
+  discipline: RenegateVouchers
+  tier: 3
+  cost: 155000
+  recipeUnlocks:
+  - GalandeVoucherRenegat
+  technologyPrerequisites:
+  - RogueRenegateVouchersAzimutlateT2
+  - UniversalMaterialResearchT3
+  position: 16, 14

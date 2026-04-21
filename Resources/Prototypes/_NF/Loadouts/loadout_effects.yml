@@ -15,6 +15,7 @@
     - Arachnid
     - Diona
     - Dwarf
+    - Demon # Wega
     - Human
     - Moth
     - Reptilian
@@ -56,6 +57,7 @@
     - IPC # Goob
     - Tajaran # Goob
     - Diona # Mono
+    - Demon # Wega
     - Hydrakin # Mono
 
 - type: loadoutEffectGroup

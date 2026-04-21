@@ -260,6 +260,11 @@ public sealed partial class OptionsTabControlRow : Control
     {
         return value.ToString();
     }
+
+    internal void AddOptionPercentSlider(CVarDef<float> tTSRadioVolume, object sliderVolumeRadioTts, float scale)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 /// <summary>

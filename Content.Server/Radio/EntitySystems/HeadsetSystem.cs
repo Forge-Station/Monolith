@@ -13,6 +13,9 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Content.Shared._Forge.TTS;
 using Content.Server._Forge.TTS;
+using Content.Shared._Forge;
+
+using Robust.Shared.Configuration;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -22,8 +25,9 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
 
-    [Dependency] private readonly ChatSystem _chat = default !;
-    [Dependency] private readonly TTSSystem _tts = default !;
+    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly TTSSystem _tts = default!;
+    [Dependency] private readonly INetConfigurationManager _cfg = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -139,7 +143,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
             RaiseNetworkEvent(radioNoiseEvent, actor.PlayerSession);
 
-            if (headsetTts?.VoicePrototypeId != null) {
+            if (headsetTts?.VoicePrototypeId != null && _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeVars.LocalRadioTTSEnabled)) {
                 _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, headsetTts.VoicePrototypeId, actor.PlayerSession, true, args.Language);
             }
 

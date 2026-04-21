@@ -42,6 +42,11 @@ public sealed partial class AudioTab : Control
             ForgeVars.TTSVolume,
             SliderVolumeTts,
             scale: ContentAudioSystem.TtsMultiplier);
+
+        Control.AddOptionPercentSlider(
+            ForgeVars.TTSRadioVolume,
+            SliderVolumeRadioTts,
+            scale: ContentAudioSystem.TtsRadioMultiplier);
         // Corvax-TTS-End
 
         Control.AddOptionPercentSlider(

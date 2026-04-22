@@ -30,6 +30,11 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.85
+    controlMultiplier: 1.05
+    fuelUsageMultiplier: 1.25
+    combatStabilityBonus: 0.05
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -225,6 +230,11 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.7
+    controlMultiplier: 1.15
+    fuelUsageMultiplier: 1.6
+    combatStabilityBonus: 0.1
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -317,6 +327,11 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.65
     sprintModifier: 0.65
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.55
+    controlMultiplier: 1.25
+    fuelUsageMultiplier: 2.1
+    combatStabilityBonus: 0.14
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing

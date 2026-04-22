@@ -73,3 +73,13 @@ job-name-tsf-crew = ТСФ Экипаж «Халкиона»
 job-name-tsf-crewofficer = ТСФ Офицер «Халкиона»
 job-name-nt-medic-pilot = Пилот TTI
 job-name-nt-medic-gunner = Стрелок TTI
+
+job-name-USSPCommissarF = СССП Комиссар
+job-name-USSPAdjutant = СССП Адъютант
+job-name-USSPCommandant = СССП Коммандант
+job-name-USSPAgitator = СССП Агитатор
+job-name-USSPSL = СССП Командир Звена
+job-name-USSPMedicF = СССП Санитар
+job-name-USSPSapper = СССП Сапёр
+job-name-USSPRiflemanF = СССП Красноармеец
+job-name-USSPTrainee = СССП Курсант

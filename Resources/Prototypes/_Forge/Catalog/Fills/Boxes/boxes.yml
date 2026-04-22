@@ -16,6 +16,6 @@
   - type: StorageFill
     contents:
       - id: EmpireIDCard
-        amount: 3
-      - id: EmpireGoldIDCard
         amount: 2
+      - id: EmpireGoldIDCard
+        amount: 1

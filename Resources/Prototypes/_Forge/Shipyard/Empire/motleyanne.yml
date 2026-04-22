@@ -1,0 +1,111 @@
+# Original Author: Thoughtlessuser on Github, [I'M NOT SURE] on Discord.
+# Small remap for Empire by v6st.
+
+- type: vessel
+  id: HEVMotleyAnne
+  parent: BaseVesselAntag
+  name: HV-SC Мотли Анни
+  description: Корабль типа "Поддержка-Контроллер", предназначенный для усиления тыловой линии боевых действий с помощью беспилотных дронов или для пополнения запасов на более близком расстоянии.
+  price: 280000
+  limit: 2
+  purchasable: false
+  category: Medium
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Mono/Shuttles/BlackMarket/motleyanne.yml
+  guidebookPage: Null # ShipyardMotleyAnne
+  class:
+  - Pursuit
+  - Patrol
+  engine:
+  - AME
+
+- type: gameMap
+  id: HEVMotleyAnne
+  mapName: 'Мотли Анни'
+  mapPath: /Maps/_Mono/Shuttles/BlackMarket/motleyanne.yml
+  minPlayers: 0
+  stations:
+    HEVMotleyAnne:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Мотли Анни HEV{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs: {} # Forge-Change-delete: was Pirate
+
+#region Drones
+- type: vessel
+  id: HEVInertia
+  parent: BaseVessel
+  name: Дрон-перехватчик 'Инерция'
+  description: Дрон-перехватчик, обладающий высокой мобильностью и оснащенный двумя орудиями RAC-30 Драупнир.
+  limit: 6
+  price: 15000
+  purchasable: false #voucher only
+  category: Small
+  group: Custom
+  mapchecker_group_override: Shipyard  # Treat this as a Shipyard vessel for mapchecker purposes
+  shuttlePath: /Maps/_Mono/Shuttles/Carrier/inertia.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  - Pursuit
+  engine:
+  - APU
+
+- type: gameMap
+  id: HEVInertia
+  mapName: 'QJ-490'
+  mapPath: /Maps/_Mono/Shuttles/Carrier/inertia.yml
+  minPlayers: 0
+  stations:
+    HEVInertia:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Инерция HEV{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs: {}
+
+- type: vessel
+  id: HEVMock
+  parent: BaseVessel
+  name: Дрон-истребитель 'Мокк'
+  description: Легкобронированный дрон-истребитель, оснащенный двумя 90-мм автоматическими пушками для поражения целей и уничтожения вражеских истребителей.
+  limit: 4
+  price: 13500
+  purchasable: false #voucher only
+  category: Small
+  group: Custom
+  mapchecker_group_override: Shipyard  # Treat this as a Shipyard vessel for mapchecker purposes
+  shuttlePath: /Maps/_Mono/Shuttles/Carrier/mock.yml
+  guidebookPage: Null
+  class:
+  - Pursuit
+  - Fighter
+  engine:
+  - APU
+
+- type: gameMap
+  id: HEVMock
+  mapName: 'Mock'
+  mapPath: /Maps/_Mono/Shuttles/Carrier/mock.yml
+  minPlayers: 0
+  stations:
+    HEVMock:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Мокк HEV{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs: {}

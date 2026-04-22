@@ -1,58 +1,36 @@
 # region Empire
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitEmpire
-  name: Imperial guardian uniform
-  description: Imperial guardian uniform.
+  id: ClothingUniformJumpsuitEmpireConsul
+  name: Imperial consul uniform
+  description: Cool Imperial consul uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire.rsi
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/navy_gold.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire.rsi
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/navy_gold.rsi
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitEmpireGuard
-  name: Imperial guardian uniform
-  description: Another Imperial guardian uniform.
+  id: ClothingUniformJumpsuitEmpireTech
+  name: Imperial technican uniform
+  description: Cool Imperial inquisitor uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_guard.rsi
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tech.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_guard.rsi
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tech.rsi
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitEmpireOfficer
-  name: Imperial guardian officer uniform
-  description: Imperial guardian officer uniform.
+  id: ClothingUniformJumpsuitEmpireSweater
+  name: Imperial sweater
+  description: Cool Imperial sweater.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_commander.rsi
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_sweater.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_commander.rsi
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitEmpireGuardCommander
-  name: Imperial guardian commander uniform
-  description: Another Imperial guardian commander uniform.
-  components:
-    - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_guardcom.rsi
-    - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_guardcom.rsi
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitEmpireCommanderFormal
-  name: Imperial guardian commander uniform
-  description: Cool Imperial guardian commander uniform.
-  components:
-    - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_golden.rsi
-    - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_golden.rsi
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_sweater.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -64,6 +42,138 @@
       sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor.rsi
     - type: Clothing
       sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNeophyte
+  name: neophyte uniform
+  description: Empire neophyte uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_neo.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_neo.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNeophyteAlt
+  name: neophyte uniform
+  description: Empire neophyte uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_neo_alt.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_neo_alt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitAuxilia
+  name: auxilia uniform
+  description: Empire auxilia uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_aux.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_aux.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitAuxiliaAlt
+  name: auxilia uniform
+  description: Empire auxilia uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_aux_alt.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_aux_alt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitPraetorian
+  name: praetorian uniform
+  description: Empire praetorian uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_pre.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_pre.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitPraetorianAlt
+  name: praetorian uniform
+  description: Empire praetorian uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_pre_alt.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_pre_alt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitTessarian
+  name: tessarian uniform
+  description: Empire tessarian uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tessarian.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tessarian.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitTessarianAlt
+  name: tessarian uniform
+  description: Empire tessarian uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tes_alt.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tes_alt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitLordPreaf
+  name: lord uniform
+  description: Empire lord uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitLordPreafAlt
+  name: lord uniform
+  description: Empire lord uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_alt.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_alt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitLordPreafInitialD
+  name: lord uniform
+  description: Empire lord uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_d.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_d.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitLordPreafFormal
+  name: lord uniform
+  description: Empire lord uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_formal.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_formal.rsi
 
 # region Renegates
 

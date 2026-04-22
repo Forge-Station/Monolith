@@ -111,6 +111,18 @@
     access: [["Empire"]]
 
 - type: entity
+  id: LockerEmpireTechnican
+  parent: [ForgeLockerBaseSecure, LockerSecurity]
+  name: empire technican locker
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: emp
+    stateDoorOpen: emp_open
+    stateDoorClosed: emp_tech_door
+  - type: AccessReader
+    access: [["Empire"]]
+
+- type: entity
   id: LockerEmpireOfficer
   parent: [ForgeLockerBaseSecure, LockerSecurity]
   name: empire officer locker

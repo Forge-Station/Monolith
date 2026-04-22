@@ -47,3 +47,24 @@
         type: ShipyardConsoleBoundUserInterface
   - type: ShipyardConsole
     shipyardChannel: Empire
+
+# region Carrier
+- type: entity
+  id: HEVMotleyAnneCarrierComputer
+  parent: BaseCarrierComputer
+  name: motley anne shipyard console
+  components:
+  - type: ShipyardListing
+    shuttles:
+    # - Snakelet
+    - HEVInertia
+    - HEVMock
+  - type: Sprite
+    sprite: Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer_emp
+    - map: ["computerLayerScreen"]
+      state: emp_shuttle
+    - map: ["computerLayerKeys"]
+      state: emp_key

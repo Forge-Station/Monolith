@@ -1,0 +1,14 @@
+- type: loadout
+  id: EmpireBackpack
+  equipment:
+    back: ClothingBackpackPDV
+
+- type: loadout
+  id: EmpireDuffel
+  equipment:
+    back: ClothingBackpackDuffelPDV
+
+- type: loadout
+  id: EmpireSatchel
+  equipment:
+    back: ClothingBackpackSatchelPDV

@@ -1,17 +1,11 @@
 - type: loadout
-  id: EmpireClothingUniformJumpsuitEmpire
+  id: ClothingUniformJumpsuitAuxilia
   price: 0
   equipment:
-    jumpsuit: ClothingUniformJumpsuitEmpire
+    jumpsuit: ClothingUniformJumpsuitAuxilia
 
 - type: loadout
-  id: EmpireClothingUniformJumpsuitEmpireGuard
+  id: ClothingUniformJumpsuitAuxiliaAlt
   price: 0
   equipment:
-    jumpsuit: ClothingUniformJumpsuitEmpireGuard
-
-- type: loadout
-  id: EmpireClothingUniformJumpsuitEmpireOfficer
-  price: 0
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitEmpireOfficer
+    jumpsuit: ClothingUniformJumpsuitAuxiliaAlt

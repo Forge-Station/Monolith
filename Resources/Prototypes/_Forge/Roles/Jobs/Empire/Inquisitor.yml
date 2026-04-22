@@ -21,7 +21,7 @@
   startingGear: InquisitorGear
   alwaysUseSpawner: true
   icon: JobIconEmpireInquisitor
-  supervisors: job-supervisors-praefect
+  supervisors: job-supervisors-inquisitor-grand
   weight: 30
   displayWeight: 30
   canBeAntag: false

@@ -1,0 +1,46 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Based on sprite by _starch_ (discord); and recolor, sc_ ship_ strip_ by v6st",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "etech-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "etech-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "etech"
+    },
+    {
+      "name": "sc_dark"
+    },
+    {
+      "name": "sc_red"
+    },
+    {
+      "name": "ship_int"
+    },
+    {
+      "name": "ship_mant"
+    },
+    {
+      "name": "ship_military"
+    },
+    {
+      "name": "ship_mock"
+    },
+    {
+      "name": "strip_bronze"
+    },
+    {
+      "name": "strip_silver"
+    }
+  ]
+}

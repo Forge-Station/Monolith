@@ -1,0 +1,248 @@
+<Document>
+
+  <ColorBox Color="#2b2620" OutlineColor="#a4885c" OutlineThickness="2" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      # Священная Империя Вермиллионов
+      [color=#666666]Имперское присутствие в удалённом секторе[/color]
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#1f1b17" OutlineColor="#5a4a32" OutlineThickness="1" Margin="5">
+    <Box Orientation="Horizontal" HorizontalAlignment="Center" Margin="6">
+      <Box MaxWidth="480">
+        [color=#d6c6a5][italic]« Священная Империя Вермиллионов не отступает. Она закрепляется. Даже там, где её присутствие кажется временным. »[/italic][/color]
+      </Box>
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#26221d" OutlineColor="#5a4a32" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      Этот сектор не принадлежит Империи полностью.
+
+      Он разделён между державами, объединёнными прежними соглашениями об исследовании удалённых регионов космоса. Здесь нет открытой войны — но есть напряжение, интересы и постоянное соперничество.
+
+      Присутствие Империи здесь — не вопрос силы, а вопрос влияния.
+
+      Каждый приказ, каждое решение и каждое действие отражаются далеко за пределами этого региона.
+
+      И именно поэтому сюда не отправляют случайных людей.
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#22201c" OutlineColor="#4a3f2c" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Высшая власть
+
+      <Box Orientation="Vertical">
+
+        <ColorBox Color="#2a2520" OutlineColor="#5a4a32" OutlineThickness="1" Margin="2">
+          <Box Orientation="Horizontal" Margin="6">
+
+            <Box MinWidth="42">
+              <GuideEntityEmbed Entity="ForgeIconEmpirePreafect" Caption=""/>
+            </Box>
+
+            <Box Orientation="Vertical">
+
+              [color=#a4885c][textlink="Лорд-Префект" link="ForgeGuideRolePreafect"][/color]
+
+              [color=#9f8f70]
+              Высокородный аристократ и верховная власть Империи в регионе. Его решения определяют ход всей кампании, распределение ресурсов и общее направление действий.
+              [/color]
+
+            </Box>
+          </Box>
+        </ColorBox>
+
+        <ColorBox Color="#2a2520" OutlineColor="#5a4a32" OutlineThickness="1" Margin="2">
+          <Box Orientation="Horizontal" Margin="6">
+
+            <Box MinWidth="42">
+              <GuideEntityEmbed Entity="ForgeIconEmpireConsul" Caption=""/>
+            </Box>
+
+            <Box Orientation="Vertical">
+
+              [color=#5bc0de][textlink="Консул" link="ForgeGuideRoleConsul"][/color]
+
+              [color=#8faab3]
+              Полномочный представитель Империи, отвечающий за дипломатическое равновесие. Следит за последствиями решений и не допускает шагов, способных привести к нежелательной эскалации.
+              [/color]
+
+            </Box>
+          </Box>
+        </ColorBox>
+
+        <ColorBox Color="#2a2520" OutlineColor="#5a4a32" OutlineThickness="1" Margin="2">
+          <Box Orientation="Horizontal" Margin="6">
+
+            <Box MinWidth="42">
+              <GuideEntityEmbed Entity="ForgeIconEmpireInquisitor" Caption=""/>
+            </Box>
+
+            <Box Orientation="Vertical">
+
+              [color=#9b59b6][textlink="Эклезиарх" link="ForgeGuideRoleInquisitor"][/color]
+
+              [color=#a98fb5]
+              Высший служитель веры, определяющий границы допустимого. Его задача — сохранять чистоту доктрины и направлять действия Империи в соответствии с её духовными законами.
+              [/color]
+
+            </Box>
+          </Box>
+        </ColorBox>
+
+      </Box>
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#22201c" OutlineColor="#4a3f2c" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Офицерский состав
+
+      <Box Orientation="Vertical">
+
+        <ColorBox Color="#2a2520" OutlineColor="#5a4a32" OutlineThickness="1" Margin="2">
+          <Box Orientation="Horizontal" Margin="6">
+
+            <Box MinWidth="42">
+              <GuideEntityEmbed Entity="ForgeIconEmpireTessarian" Caption=""/>
+            </Box>
+
+            <Box Orientation="Vertical">
+
+              [color=#a4885c]Тессариан[/color]
+
+              [color=#9f8f70]
+              Старший офицер, отвечающий за координацию подразделений и контроль исполнения приказов. Он формирует структуру командования и обеспечивает её устойчивость.
+              [/color]
+
+            </Box>
+          </Box>
+        </ColorBox>
+
+
+        <ColorBox Color="#2a2520" OutlineColor="#5a4a32" OutlineThickness="1" Margin="2">
+          <Box Orientation="Horizontal" Margin="6">
+
+            <Box MinWidth="42">
+              <GuideEntityEmbed Entity="ForgeIconEmpirePraetorian" Caption=""/>
+            </Box>
+
+            <Box Orientation="Vertical">
+
+              [color=#a4885c]Претор[/color]
+
+              [color=#9f8f70]
+              Младший офицер, непосредственно руководящий бойцами. Он превращает приказы в конкретные действия и отвечает за их исполнение на практике.
+              [/color]
+
+            </Box>
+          </Box>
+        </ColorBox>
+
+      </Box>
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#22201c" OutlineColor="#4a3f2c" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Личный состав
+
+      <Box Orientation="Vertical">
+
+        <ColorBox Color="#2a2520" OutlineColor="#5a4a32" OutlineThickness="1" Margin="2">
+          <Box Orientation="Horizontal" Margin="6">
+
+            <Box MinWidth="42">
+              <GuideEntityEmbed Entity="ForgeIconEmpireAuxilia" Caption=""/>
+            </Box>
+
+            <Box Orientation="Vertical">
+
+              [color=#a4885c]Ауксилий[/color]
+
+              [color=#9f8f70]
+              Рядовой боец Имперской Гвардии. Основа системы, на которой держится вся структура — дисциплина, исполнение приказов и постоянное присутствие.
+              [/color]
+
+            </Box>
+          </Box>
+        </ColorBox>
+
+
+        <ColorBox Color="#2a2520" OutlineColor="#5a4a32" OutlineThickness="1" Margin="2">
+          <Box Orientation="Horizontal" Margin="6">
+
+            <Box MinWidth="42">
+              <GuideEntityEmbed Entity="ForgeIconEmpireNeophyte" Caption=""/>
+            </Box>
+
+            <Box Orientation="Vertical">
+
+              [color=#a4885c]Неофит[/color]
+
+              [color=#9f8f70]
+              Новобранец, ещё не ставший частью полноценной структуры. Его роль — учиться, подчиняться и доказать, что он достоин занять место среди солдат Империи.
+              [/color]
+
+            </Box>
+          </Box>
+        </ColorBox>
+
+      </Box>
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#1c1c22" OutlineColor="#3a3a5a" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Назначения
+
+      Империя сохраняет гибкость даже в жёсткой иерархии.
+
+      В ходе операции бойцы могут получать дополнительные роли, расширяющие их обязанности и сферу ответственности.
+
+      <Box>
+        <GuideEntityEmbed Entity="ForgeIconEmpireApotek" Caption="Апотекарий"/>
+        <GuideEntityEmbed Entity="ForgeIconEmpireTechnican" Caption="Техник"/>
+        <GuideEntityEmbed Entity="ForgeIconEmpireSmallInq" Caption="Инквизитор"/>
+      </Box>
+
+      Эти назначения не меняют вашего положения в структуре —
+      но определяют, каким образом вы служите Империи здесь и сейчас.
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#1c1c22" OutlineColor="#5a4a32" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      Империя не держится на одном человеке.
+
+      Она держится на балансе власти, долга и веры.
+
+      И пока этот баланс сохраняется —
+      Империя остаётся.
+
+    </Box>
+  </ColorBox>
+
+</Document>

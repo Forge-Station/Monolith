@@ -1,0 +1,11 @@
+- type: loadout
+  id: ClothingUniformJumpsuitTessarian
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTessarian
+
+- type: loadout
+  id: ClothingUniformJumpsuitTessarianAlt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTessarianAlt

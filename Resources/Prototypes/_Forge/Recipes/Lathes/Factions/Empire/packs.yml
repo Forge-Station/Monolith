@@ -1,0 +1,53 @@
+#region Clothing
+- type: latheRecipePack
+  id: ClothingEmpirePack
+  recipes:
+  # Jumpsuit's
+  - ClothingUniformJumpsuitEmpireTech
+  - ClothingUniformJumpsuitEmpireSweater
+  - ClothingUniformJumpsuitNeophyte
+  - ClothingUniformJumpsuitNeophyteAlt
+  - ClothingUniformJumpsuitAuxilia
+  - ClothingUniformJumpsuitAuxiliaAlt
+  - ClothingUniformJumpsuitPraetorian
+  - ClothingUniformJumpsuitPraetorianAlt
+  - ClothingUniformJumpsuitTessarian
+  - ClothingUniformJumpsuitTessarianAlt
+  # Outer's
+  - ClothingOuterCoatEmpireWindbreaker
+  - ClothingOuterCoatEmpireInqWindbreaker
+
+#region Hardsuit
+- type: latheRecipePack
+  id: HardsuitEmpirePack
+  recipes:
+  # Ancient
+  - ForgeEmpireAncientProtytype
+  - ForgeEmpireAncientProtytypeCom
+  - ForgeEmpireAncientProtytypeInq
+  # Light
+  - ClothingOuterHardsuitRI14
+  - ClothingOuterHardsuitRI14m
+  - ClothingOuterHardsuitRI14i
+  # Battle
+  - ClothingOuterHardsuitRI22
+  - ClothingOuterHardsuitRI22i
+  - ClothingOuterHardsuitRI22c
+  # Heavy
+  - ClothingOuterHardsuitHV7
+  - ClothingOuterHardsuitHV7c
+  - ClothingOuterHardsuitHV7i
+
+#region Ship
+- type: latheRecipePack
+  id: ShipVoucherEmpire
+  recipes:
+  # Support ship's
+  - EmpireVoucherMotleyAnne
+
+- type: latheRecipePack
+  id: ShipVoucherEmpireDrones
+  recipes:
+  # Motley Drone's
+  - EmpireVoucherMock
+  - EmpireVoucherInertia

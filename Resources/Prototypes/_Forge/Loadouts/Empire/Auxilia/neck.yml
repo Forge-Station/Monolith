@@ -1,0 +1,9 @@
+- type: loadout
+  id: EmpireIFFOrange
+  equipment:
+    neck: ClothingNeckIFFOrange
+
+- type: loadout
+  id: EmpireIFFPurple
+  equipment:
+    neck: ClothingNeckIFFPurple

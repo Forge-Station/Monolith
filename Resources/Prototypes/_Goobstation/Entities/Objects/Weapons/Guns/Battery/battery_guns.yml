@@ -1,6 +1,6 @@
 - type: entity
   name: VFD EG-4 energy revolver
-  parent: BaseWeaponCustomCellSmall # Forge-change: BaseWeaponPowerCellSmall to BaseWeaponCustomCellSmall # Mono - C2 contra instead of command contra
+  parent: [ BaseFactionGearTSFT2, BaseWeaponBatterySmall ] # Mono
   id: WeaponEnergyRevolver
   description: A highly advanced energy revolver capable of firing both lethal and disabling bullets.
   components:
@@ -66,7 +66,7 @@
 
 - type: entity
   name: DT-12 Lawbringer
-  parent: BaseWeaponCustomCellSmall # Forge-change: BaseWeaponPowerCellSmall to BaseWeaponCustomCellSmall
+  parent: [BaseWeaponBatterySmall]
   id: WeaponEnergyGunLawbringer
   description: Sometimes rank is a function of firepower. A versatile energy gun with a myriad of firing modes designed for the Judges. Self-recharges after a 5 second delay.
   components:

@@ -1,3 +1,4 @@
+#region Renegate
 - type: entity
   parent: BaseShipLPC
   id: ShipVoucherAzimut
@@ -57,3 +58,73 @@
     - galandec
   - type: StaticPrice
     vendPrice: 510000
+
+#region Empire
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherEmpireMotley
+  name: Motley Anne LPC
+  description: A small card that authorizes the procurement of a Motley Anne.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    layers:
+    - state: etech
+    - state: strip_silver
+    - state: sc_red
+      shader: unshded
+    - state: ship_mant
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Empire
+    companyName: Imperial
+    vessels:
+    - HEVMotleyAnne
+  - type: StaticPrice
+    vendPrice: 195000
+
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherEmpireMock
+  name: HEV Mock LPC
+  description: A small card that authorizes the procurement of a Mock aboard the Motley Anne.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    layers:
+    - state: etech
+    - state: strip_bronze
+    - state: sc_dark
+      shader: unshded
+    - state: ship_mock
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Custom
+    companyName: Imperial
+    vessels:
+    - HEVMock
+  - type: StaticPrice
+    vendPrice: 30000
+
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherEmpireInertia
+  name: HEV Inertia LPC
+  description: A small card that authorizes the procurement of an Inertia aboard the Motley Anne.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    layers:
+    - state: etech
+    - state: strip_bronze
+    - state: sc_dark
+      shader: unshded
+    - state: ship_int
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Custom
+    companyName: Imperial
+    vessels:
+    - HEVInertia
+  - type: StaticPrice
+    vendPrice: 30000

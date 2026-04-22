@@ -7,10 +7,9 @@
   weight: 50
   roles:
   - Praefect
-  - Arbiter
-  - Cardinal
   - Inquisitor
   - Consul
+  - Tessarian
   - Praetorian
   - Auxilia
   - Neophyte

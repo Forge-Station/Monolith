@@ -1,0 +1,30 @@
+- type: job
+  id: EmpireApotek
+  name: forge-job-name-apotek
+  description: forge-desc-name-apotek
+  supervisors: job-supervisors-praetorian
+  playTimeTracker: JobEmpireApotek
+  icon: JobIconEmpireApotek
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hrs
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: EmpireApotekGear
+  alwaysUseSpawner: true
+  weight: 170
+  displayWeight: 38
+  canBeAntag: false
+  assignedCompany: Imperial
+  accessGroups:
+  - GeneralEmpireAccess
+  - Medical
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
+
+- type: startingGear
+  id: EmpireApotekGear

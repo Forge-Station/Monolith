@@ -57,13 +57,16 @@
             "name": "emp_auxil"
         },
         {
-            "name": "emp_dekuron"
+            "name": "emp_tes"
         },
         {
             "name": "emp_diplomacy"
         },
         {
             "name": "emp_inq"
+        },
+        {
+            "name": "emp_inq_small"
         },
         {
             "name": "emp_lord"

@@ -1,11 +1,24 @@
 - type: loadout
-  id: EmpireClothingUniformJumpsuitEmpireGuardCommander
+  id: ClothingUniformJumpsuitLordPreaf
   price: 0
   equipment:
-    jumpsuit: ClothingUniformJumpsuitEmpireGuardCommander
+    jumpsuit: ClothingUniformJumpsuitLordPreaf
 
 - type: loadout
-  id: EmpireClothingUniformJumpsuitEmpireCommanderFormal
+  id: ClothingUniformJumpsuitLordPreafAlt
   price: 0
   equipment:
-    jumpsuit: ClothingUniformJumpsuitEmpireCommanderFormal
+    jumpsuit: ClothingUniformJumpsuitLordPreafAlt
+
+- type: loadout
+  id: ClothingUniformJumpsuitLordPreafInitialD
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLordPreafInitialD
+
+- type: loadout
+  id: ClothingUniformJumpsuitLordPreafFormal
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLordPreafFormal
+

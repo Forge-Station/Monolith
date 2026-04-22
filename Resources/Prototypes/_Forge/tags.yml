@@ -219,3 +219,6 @@
 
 - type: Tag
   id: HEVPowerCellRifle
+
+- type: Tag
+  id: EmpireUplink

@@ -1,0 +1,111 @@
+<Document>
+
+  <ColorBox Color="#2b2620" OutlineColor="#a4885c" OutlineThickness="2" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+      # Лорд-Префект
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#1f1b17" OutlineColor="#5a4a32" OutlineThickness="1" Margin="5">
+    <Box Orientation="Horizontal" HorizontalAlignment="Center" Margin="6">
+      <Box MaxWidth="420">
+        [italic]« Вы - Империя там, где она не может присутствовать напрямую. »[/italic]
+      </Box>
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#26221d" OutlineColor="#5a4a32" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Описание роли
+
+      Итак, вы [color=#a4885c]Лорд-Префект[/color]...
+
+      Вы - высшая власть Империи в регионе, где она не имеет полного контроля.
+
+      Это не центр.
+      Не приоритет.
+      И не место, где легко добиться славы.
+
+      Но именно здесь ваши решения имеют вес.
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#22201c" OutlineColor="#4a3f2c" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Отыгрыш и позиция
+
+      <Box Orientation="Horizontal" Margin="6">
+        <Box MinWidth="42">
+          <GuideEntityEmbed Entity="ChairBrass" Caption=""/>
+        </Box>
+      </Box>
+
+      Вы не на передовой.
+
+      Вы над ней.
+
+      Вы принимаете решения, последствия которых реализуют другие.
+
+      Вы можете быть:
+      - стратегом
+      - аристократом
+      - жёстким управленцем
+
+      Но вы не можете позволить себе слабость.
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#1f1d1a" OutlineColor="#5a2a2a" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Обязанности
+
+      Вы отвечаете за [color=#cb0000]результат[/color].
+
+      Ваша задача:
+      - определять курс действий
+      - управлять офицерами
+      - распределять ресурсы
+      - удерживать контроль
+      - представлять интересы Империи
+
+      Всё, что происходит - происходит от вашего имени.
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#1c1c22" OutlineColor="#3a3a5a" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Примечания
+
+      Вы - высшая власть.
+
+      Но не единственная.
+
+      - [color=#5bc0de]Консул[/color] - ограничивает последствия
+      - [color=#9b59b6]Эклезиарх[/color] - ограничивает допустимое
+
+      Вы можете их игнорировать.
+
+      Но не последствия этого.
+
+      <Box>
+        <GuideEntityEmbed Entity="EmpireFlag" Caption=""/>
+      </Box>
+
+      Ответственность всегда остаётся за вами.
+
+    </Box>
+  </ColorBox>
+
+</Document>

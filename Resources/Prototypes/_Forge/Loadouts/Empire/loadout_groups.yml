@@ -13,7 +13,7 @@
   hidden: true # No point in showing this, it gets auto-selected.
   minLimit: 1
   loadouts:
-  - TsfmcClothingNeckIFFCyan
+  - EmpireIFFOrange
 
 - type: loadoutGroup
   id: EmpireFace
@@ -49,10 +49,8 @@
   name: loadout-group-contractor-jumpsuit
   minLimit: 1
   loadouts:
-  - EmpireClothingUniformJumpsuitEmpire
-  - EmpireClothingUniformJumpsuitEmpireGuard
-  fallbacks:
-  - EmpireClothingUniformJumpsuitEmpire
+  - ClothingUniformJumpsuitEmpireTech
+  - ClothingUniformJumpsuitEmpireSweater
 
 - type: loadoutGroup
   id: EmpireOuterClothing
@@ -106,21 +104,77 @@
   name: loadout-group-contractor-backpack
   minLimit: 1
   loadouts:
+  - ClothingBackpackSatchelPDV
+  - ClothingBackpackDuffelPDV
+  - ClothingBackpackPDV
+  - MonoSecurityGuardDuffel
   - MonoSecurityGuardBackpack
   - MonoSecurityGuardSatchel
-  - MonoSecurityGuardDuffel
   fallbacks:
-  - MonoSecurityGuardBackpack
+  - ClothingBackpackSatchelPDV
 
-# region Officer
+# region Praefect
 - type: loadoutGroup
-  id: EmpireOfficerJumpsuit
+  id: EmpireCommanderJumpsuit
   name: loadout-group-contractor-jumpsuit
   minLimit: 1
   loadouts:
-  - EmpireClothingUniformJumpsuitEmpireOfficer
+  - ClothingUniformJumpsuitLordPreafAlt
+  - ClothingUniformJumpsuitLordPreafInitialD
+  - ClothingUniformJumpsuitLordPreafFormal
+  - ClothingUniformJumpsuitLordPreaf
   fallbacks:
-  - EmpireClothingUniformJumpsuitEmpireOfficer
+  - ClothingUniformJumpsuitLordPreafAlt
+
+# region Tessarian
+- type: loadoutGroup
+  id: EmpireTessarianJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - ClothingUniformJumpsuitTessarianAlt
+  - ClothingUniformJumpsuitTessarian
+  fallbacks:
+  - ClothingUniformJumpsuitTessarianAlt
+
+# region Praetorian
+- type: loadoutGroup
+  id: EmpirePraetorianJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - ClothingUniformJumpsuitPraetorianAlt
+  - ClothingUniformJumpsuitPraetorian
+  fallbacks:
+  - ClothingUniformJumpsuitPraetorianAlt
+  subgroups:
+  - EmpireJumpsuit
+
+# region Auxilia
+- type: loadoutGroup
+  id: EmpireAuxiliaJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - ClothingUniformJumpsuitAuxiliaAlt
+  - ClothingUniformJumpsuitAuxilia
+  fallbacks:
+  - ClothingUniformJumpsuitAuxiliaAlt
+  subgroups:
+  - EmpireJumpsuit
+
+# region Neophyte
+- type: loadoutGroup
+  id: EmpireNeophyteJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - ClothingUniformJumpsuitNeophyteAlt
+  - ClothingUniformJumpsuitNeophyte
+  fallbacks:
+  - ClothingUniformJumpsuitNeophyteAlt
+  subgroups:
+  - EmpireJumpsuit
 
 # region Inquisitor
 - type: loadoutGroup
@@ -140,14 +194,11 @@
   loadouts:
   - EmpireClothingOuterCoatEmpireInqWindbreaker
   # fallbacks:
-  # -
 
-# region Commander
 - type: loadoutGroup
-  id: EmpireCommanderJumpsuit
-  name: loadout-group-contractor-jumpsuit
+  id: EmpireInquisitorNeck
+  name: loadout-group-contractor-neck
+  hidden: true # No point in showing this, it gets auto-selected.
   minLimit: 1
   loadouts:
-  - EmpireClothingUniformJumpsuitEmpireCommanderFormal
-  fallbacks:
-  - EmpireClothingUniformJumpsuitEmpireCommanderFormal
+  - EmpireIFFPurple

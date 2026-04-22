@@ -1,0 +1,107 @@
+<Document>
+
+  <ColorBox Color="#2b2620" OutlineColor="#9b59b6" OutlineThickness="2" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+      # Эклезиарх
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#1f1b17" OutlineColor="#5a4a32" OutlineThickness="1" Margin="5">
+    <Box Orientation="Horizontal" HorizontalAlignment="Center" Margin="6">
+      <Box MaxWidth="420">
+        [color=#d6c6a5][italic]« Империя может пережить многое. Но не утрату веры. »[/italic][/color]
+      </Box>
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#26221d" OutlineColor="#5a4a32" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Описание роли
+
+      Итак, вы [color=#9b59b6]Эклезиарх[/color]...
+
+      Вы - голос веры в месте, где слишком легко забыть, ради чего всё это происходит.
+
+      Здесь нет храмов в привычном смысле.
+      Нет центра.
+      Нет опоры.
+
+      Поэтому вы - и есть эта опора.
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#22201c" OutlineColor="#4a3f2c" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Отыгрыш и позиция
+
+      <Box Margin="6">
+        <GuideEntityEmbed Entity="ChairBrass" Caption=""/>
+      </Box>
+
+      Вы не стремитесь к удобству.
+
+      Вы стремитесь к истине.
+
+      Вы видите ересь там, где другие видят компромисс.
+      Вы слышите сомнение там, где другие слышат аргументы.
+
+      Вы можете быть:
+      - фанатиком
+      - догматиком
+      - тихим наблюдателем
+
+      Но вы не допускаете отклонений.
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#1f1d1a" OutlineColor="#5a2a2a" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Обязанности
+
+      Вы отвечаете перед [color=#9b59b6]верой[/color].
+
+      Ваша задача:
+      - выявлять отклонения
+      - проводить проверки и допросы
+      - направлять действия Империи
+      - использовать помощников и Инквизиторов
+
+      Истина не обсуждается.
+
+      Она либо соблюдается - либо нарушается.
+
+    </Box>
+  </ColorBox>
+
+
+  <ColorBox Color="#1c1c22" OutlineColor="#3a3a5a" OutlineThickness="1" Margin="5">
+    <Box Orientation="Vertical" Margin="6">
+
+      ## Примечания
+
+      Вы действуете иначе.
+
+      - [color=#a4885c]Лорд-Префект[/color] - управляет
+      - [color=#5bc0de]Консул[/color] - сдерживает
+
+      Вы - определяете границы допустимого.
+
+      <Box>
+        <GuideEntityEmbed Entity="EmpireFlag" Caption=""/>
+      </Box>
+
+      Ересь редко выглядит как ересь.
+
+    </Box>
+  </ColorBox>
+
+</Document>

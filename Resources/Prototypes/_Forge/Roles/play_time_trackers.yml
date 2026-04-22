@@ -14,6 +14,9 @@
   id: JobConsul
 
 - type: playTimeTracker
+  id: JobTessarian
+
+- type: playTimeTracker
   id: JobPraetorian
 
 - type: playTimeTracker
@@ -21,6 +24,15 @@
 
 - type: playTimeTracker
   id: JobNeophyte
+
+- type: playTimeTracker
+  id: JobEmpireTechnican
+
+- type: playTimeTracker
+  id: JobIconEmpireSmallInq
+
+- type: playTimeTracker
+  id: JobEmpireApotek
 
 #region Renegates
 

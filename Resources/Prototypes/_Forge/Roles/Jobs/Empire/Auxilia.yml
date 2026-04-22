@@ -1,8 +1,10 @@
 - type: job
-  id: Auxilia
+  id: Auxilia # Soldier
   name: forge-job-name-auxilia
   description: forge-job-desc-auxilia
+  supervisors: job-supervisors-praetorian
   playTimeTracker: JobAuxilia
+  icon: JobIconEmpireAuxilia
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 43200 # 12 hours
@@ -32,12 +34,11 @@
   #     role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
   #     time: 43200 # 12 hours
   startingGear: AuxuilaGear
-  icon: JobIconEmpireAuxilia
-  supervisors: job-supervisors-praetorian
   weight: 15
   displayWeight: 15
   canBeAntag: false
   setPreference: true
+  assignedCompany: Imperial
   accessGroups:
   - GeneralEmpireAccess
   special:

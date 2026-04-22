@@ -1,0 +1,23 @@
+- type: loadout
+  id: ClothingUniformJumpsuitNeophyte
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNeophyte
+
+- type: loadout
+  id: ClothingUniformJumpsuitNeophyteAlt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNeophyteAlt
+
+- type: loadout
+  id: ClothingUniformJumpsuitEmpireTech
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEmpireTech
+
+- type: loadout
+  id: ClothingUniformJumpsuitEmpireSweater
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEmpireSweater

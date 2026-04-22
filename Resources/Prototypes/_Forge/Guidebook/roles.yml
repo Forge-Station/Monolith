@@ -1,0 +1,131 @@
+- type: guideEntry
+  id: ForgeEmpireRoles
+  name: guide-entry-roles-empire
+  text: "/ServerInfo/_Forge/Guidebook/Roles/Empire.xml"
+  children:
+    - ForgeGuideRolePreafect
+    - ForgeGuideRoleConsul
+    - ForgeGuideRoleInquisitor
+
+- type: guideEntry
+  id: ForgeEmpireRolesWIP
+  name: guide-entry-roles-empire
+  text: "/ServerInfo/_Forge/Guidebook/Roles/EmpireWIP.xml"
+
+- type: guideEntry
+  id: ForgeGuideRolePreafect
+  name: guide-entry-roles-preafect
+  text: "/ServerInfo/_Forge/Guidebook/Roles/Preafect.xml"
+
+- type: guideEntry
+  id: ForgeGuideRoleInquisitor
+  name: guide-entry-roles-inquisitor
+  text: "/ServerInfo/_Forge/Guidebook/Roles/Inquisitor.xml"
+
+- type: guideEntry
+  id: ForgeGuideRoleConsul
+  name: guide-entry-roles-consul
+  text: "/ServerInfo/_Forge/Guidebook/Roles/Consul.xml"
+
+# region Entity
+- type: entity
+  parent: BaseItem
+  id: ForgeIconEmpirePreafect
+  name: 1
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Interface/Misc/job_icons.rsi
+    state: emp_lord
+
+- type: entity
+  parent: BaseItem
+  id: ForgeIconEmpireInquisitor
+  name: 2
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Interface/Misc/job_icons.rsi
+    state: emp_inq
+
+- type: entity
+  parent: BaseItem
+  id: ForgeIconEmpireConsul
+  name: 3
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Interface/Misc/job_icons.rsi
+    state: emp_diplomacy
+
+- type: entity
+  parent: BaseItem
+  id: ForgeIconEmpireTessarian
+  name: 4
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Interface/Misc/job_icons.rsi
+    state: emp_tes
+
+- type: entity
+  parent: BaseItem
+  id: ForgeIconEmpirePraetorian
+  name: 5
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Interface/Misc/job_icons.rsi
+    state: emp_pretor
+
+- type: entity
+  parent: BaseItem
+  id: ForgeIconEmpireAuxilia
+  name: 6
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Interface/Misc/job_icons.rsi
+    state: emp_auxil
+
+- type: entity
+  parent: BaseItem
+  id: ForgeIconEmpireNeophyte
+  name: 7
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Interface/Misc/job_icons.rsi
+    state: emp_neofit
+
+
+
+- type: entity
+  parent: BaseItem
+  id: ForgeIconEmpireApotek
+  name: Apotek
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Interface/Misc/job_icons.rsi
+    state: emp_medic
+
+- type: entity
+  parent: BaseItem
+  id: ForgeIconEmpireTechnican
+  name: Technican
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Interface/Misc/job_icons.rsi
+    state: emp_tech
+
+- type: entity
+  parent: BaseItem
+  id: ForgeIconEmpireSmallInq
+  name: SmallInq
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Interface/Misc/job_icons.rsi
+    state: emp_inq_small

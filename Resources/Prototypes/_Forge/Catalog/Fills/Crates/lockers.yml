@@ -1,0 +1,134 @@
+- type: entity
+  parent: LockerEmpireMedical
+  id: LockerEmpireMedicalFilled
+  name: empire medical locker
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: EpinephrineChemistryBottle
+        amount: 1
+      - id: BoxSyringe
+      - id: BoxBeaker
+        amount: 2
+      - id: BoxPillCanister
+      - id: BoxBottle
+      - id: BoxVial
+      - id: PlasmaChemistryVial
+      - id: ChemBag
+      - id: HandheldHealthAnalyzer
+      - id: ClothingHandsGlovesLatex
+      - id: ClothingMaskSterile
+      - id: ClothingBeltMedicalFilled
+      - id: MedkitFilled
+
+- type: entity
+  parent: LockerEmpireTechnican
+  id: LockerEmpireTechnicanFilled
+  name: empire technican locker
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingMaskGas
+      - id: ClothingUniformJumpsuitEmpireTech
+      - id: ClothingHandsGlovesColorYellow
+      - id: ConstructionBag
+      - id: AirGrenade
+        amount: 3
+      - id: MetalFoamGrenade
+        amount: 3
+      - id: trayScanner
+      - id: ClothingBeltUtilityEngineering
+      - id: RadioJammer
+
+- type: entity
+  parent: LockerEmpire
+  id: LockerEmpireFilled
+  name: empire locker
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingUniformJumpsuitNeophyte
+      - id: ClothingUniformJumpsuitNeophyteAlt
+      - id: ClothingOuterCoatEmpireWindbreaker
+      - id: ClothingShoesBootsJackFilled
+      - id: ClothingBeltWebbingsBigBlack
+      - id: ClothingBackpackPDV
+
+- type: entity
+  parent: LockerEmpireOfficer
+  id: LockerEmpireOfficerFilled
+  name: empire officer locker
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingUniformJumpsuitPraetorian
+      - id: ClothingUniformJumpsuitPraetorianAlt
+      - id: ClothingOuterCoatEmpireWindbreaker
+      - id: ClothingShoesBootsJackFilled
+      - id: ClothingBeltWebbingsBigBlack
+      - id: ClothingBackpackPDV
+      - id: WeaponRevolverPython
+      - id: SpeedLoader45_magnumFMJ
+
+- type: entity
+  parent: LockerEmpireInq
+  id: LockerEmpireInqFilled
+  name: empire technican locker
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingMaskGas
+
+- type: entity
+  parent: LockerEmpireCommander
+  id: LockerEmpireCommanderFilled
+  name: empire Commander locker
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: MedalCase
+      - id: Demag
+      - id: WeaponRevolverDragoon
+      - id: WeaponVizierShamshir
+      - id: ClothingBeltSheathVizier
+      - id: EmpireCommanderIDCard
+      - id: BoxHandcuff
+      - id: BoxCardboardIDCardEmpire
+      - id: BoxCardboardEncryptKeyEmpire
+      - id: WeaponCaseShortBombCollar
+
+- type: entity
+  parent: Dresser
+  id: DresserCommanderFilled
+  name: empire commander dresser
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingUniformJumpsuitLordPreaf
+      - id: ClothingUniformJumpsuitLordPreafAlt
+      - id: ClothingUniformJumpsuitLordPreafFormal
+      - id: ClothingUniformJumpsuitLordPreafInitialD
+      - id: ClothingHandsGlovesHeavyGoldenTrim
+
+- type: entity
+  parent: LockerEmpireDiplomacy
+  id: LockerEmpireDiplomacyFilled
+  name: empire technican locker
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingUniformJumpsuitEmpireConsul
+      - id: ClothingHandsGlovesHeavyGoldenTrim
+      - id: ClothingShoesBootsJackFilled
+      - id: ClothingBackpackSatchelPDV
+      - id: BoxHandcuff
+      - id: BoxCardboardIDCardEmpire
+      - id: BoxCardboardEncryptKeyEmpire

@@ -1,8 +1,10 @@
 - type: job
-  id: Praetorian
+  id: Praetorian # Officer
   name: forge-job-name-praetorian
   description: forge-job-desc-praetorian
+  supervisors: job-supervisors-tessarian
   playTimeTracker: JobPraetorian
+  icon: JobIconEmpirePraetorian
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 64800 # 18 hours
@@ -31,8 +33,6 @@
   #     role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
   #     time: 43200 # 12 hours
   startingGear: PraetorianGear
-  icon: JobIconEmpirePraetorian
-  supervisors: job-supervisors-cardinal
   weight: 20
   displayWeight: 20
   canBeAntag: false

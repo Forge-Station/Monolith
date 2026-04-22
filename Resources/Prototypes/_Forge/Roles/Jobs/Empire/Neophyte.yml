@@ -1,8 +1,10 @@
 - type: job
-  id: Neophyte
+  id: Neophyte # Cadet
   name: forge-job-name-neophyte
   description: forge-job-desc-neophyte
+  supervisors: job-supervisors-praetorian
   playTimeTracker: JobNeophyte
+  icon: JobIconEmpireNeophyte
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 21600 # 6 hours
@@ -24,12 +26,11 @@
         # - Moth
         # - IPC
   startingGear: NeophyteGear
-  icon: JobIconEmpireNeophyte
-  supervisors: job-supervisors-praetorian
   weight: 10
   displayWeight: 10
   canBeAntag: false
   setPreference: true
+  assignedCompany: Imperial
   accessGroups:
   - GeneralEmpireAccess
   special:

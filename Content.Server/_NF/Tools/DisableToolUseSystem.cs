@@ -19,16 +19,23 @@ public sealed class DisableToolUseSystem : EntitySystem
         // Check each tool quality being cancelled.
         foreach (var quality in args.Qualities)
         {
-            if (Disabled(component, quality))
+            if (Disabled(uid, component, quality))
                 args.Cancel();
         }
     }
 
-    private bool Disabled(DisableToolUseComponent component, ProtoId<ToolQualityPrototype> quality)
+    private bool Disabled(EntityUid uid, DisableToolUseComponent component, ProtoId<ToolQualityPrototype> quality)
     {
         switch (quality)
         {
             case "Anchoring":
+                // Forge-change-start
+                if (component.AnchoringFalse)
+                {
+                    var transform = Transform(uid);
+                    return !transform.Anchored;
+                }
+                // Forge-change-end
                 return component.Anchoring;
             case "Prying":
                 return component.Prying;

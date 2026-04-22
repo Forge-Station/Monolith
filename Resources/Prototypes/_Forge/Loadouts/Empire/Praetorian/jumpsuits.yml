@@ -1,0 +1,11 @@
+- type: loadout
+  id: ClothingUniformJumpsuitPraetorian
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPraetorian
+
+- type: loadout
+  id: ClothingUniformJumpsuitPraetorianAlt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPraetorianAlt

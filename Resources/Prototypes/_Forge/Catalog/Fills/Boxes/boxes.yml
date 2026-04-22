@@ -1,0 +1,21 @@
+- type: entity
+  parent: BoxCardboard
+  id: BoxCardboardEncryptKeyEmpire
+  suffix: Empire, Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: EncryptionKeyEmpire
+        amount: 5
+
+- type: entity
+  parent: BoxCardboard
+  id: BoxCardboardIDCardEmpire
+  suffix: Empire, Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: EmpireIDCard
+        amount: 3
+      - id: EmpireGoldIDCard
+        amount: 2

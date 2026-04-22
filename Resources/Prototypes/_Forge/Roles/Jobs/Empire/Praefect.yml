@@ -10,11 +10,8 @@
       department: Empire
       time: 108000 # 30 hours
     - !type:RoleTimeRequirement
-      role: JobCardinal
-      time: 21600 # 6 hours
-    - !type:RoleTimeRequirement
-      role: JobArbiter
-      time: 21600 # 6 hours
+      role: JobTessarian
+      time: 43200 # 12 hours
     - !type:SpeciesRequirement
       species:
         - Human

@@ -1,0 +1,86 @@
+#region HV Prototype 2
+- type: latheRecipe
+  parent: MonoHardsuitT1Recipe
+  id: ForgeEmpireAncientProtytype
+  result: ClothingOuterHardsuitHVp2
+  completetime: 8
+
+- type: latheRecipe
+  parent: MonoHardsuitT1Recipe
+  id: ForgeEmpireAncientProtytypeCom
+  result: ClothingOuterHardsuitHVp2Com
+  completetime: 8
+
+- type: latheRecipe
+  parent: MonoHardsuitT1Recipe
+  id: ForgeEmpireAncientProtytypeInq
+  result: ClothingOuterHardsuitHVp2Inq
+  completetime: 8
+
+#region RI-14 Light
+- type: latheRecipe
+  parent: MonoHardsuitT2Recipe
+  id: ClothingOuterHardsuitRI14
+  result: ClothingOuterHardsuitRI14
+  completetime: 8
+
+- type: latheRecipe
+  parent: MonoHardsuitT2Recipe
+  id: ClothingOuterHardsuitRI14m
+  result: ClothingOuterHardsuitRI14m
+  completetime: 16
+
+- type: latheRecipe
+  parent: MonoHardsuitT2Recipe
+  id: ClothingOuterHardsuitRI14i
+  result: ClothingOuterHardsuitRI14i
+  completetime: 16
+
+#region RI-22 Medium
+- type: latheRecipe
+  parent: MonoHardsuitT3TsfRecipe
+  id: ClothingOuterHardsuitRI22
+  result: ClothingOuterHardsuitRI22
+  completetime: 8
+
+- type: latheRecipe
+  parent: MonoHardsuitT3TsfRecipe
+  id: ClothingOuterHardsuitRI22i
+  result: ClothingOuterHardsuitRI22i
+  completetime: 16
+
+- type: latheRecipe
+  parent: MonoHardsuitT3TsfRecipe
+  id: ClothingOuterHardsuitRI22c
+  result: ClothingOuterHardsuitRI22c
+  completetime: 16
+
+#region HV-7 Heavy
+- type: latheRecipe
+  parent: MonoHardsuitT3TsfRecipe
+  id: ClothingOuterHardsuitHV7
+  result: ClothingOuterHardsuitHV7
+  completetime: 22
+  materials:
+    Plastic: 1300
+    Steel: 4500
+    Plastitanium: 1500
+    Plasteel: 5500
+    Durathread: 3500
+    Silver: 500
+    Gold: 500
+    Brass: 1000
+    UraniumDepleted: 50
+    UraniumFissile: 100
+
+- type: latheRecipe
+  parent: ClothingOuterHardsuitHV7
+  id: ClothingOuterHardsuitHV7c
+  result: ClothingOuterHardsuitHV7c
+  completetime: 22
+
+- type: latheRecipe
+  parent: ClothingOuterHardsuitHV7
+  id: ClothingOuterHardsuitHV7i
+  result: ClothingOuterHardsuitHV7i
+  completetime: 22

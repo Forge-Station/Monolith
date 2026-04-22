@@ -1,0 +1,134 @@
+<Document>
+
+# Священная Империя Вермиллионов
+[color=#666666]Имперское присутствие в удалённом секторе[/color]
+
+<Box>
+[color=#d6c6a5][italic]« Священная Империя Вермиллионов не отступает. Она закрепляется. Даже там, где её присутствие кажется временным. »[/italic][/color]
+</Box>
+
+Этот сектор не принадлежит Империи полностью.
+
+Он разделён между державами, объединёнными прежними соглашениями об исследовании удалённых регионов космоса. Здесь нет открытой войны — но есть напряжение, интересы и постоянное соперничество.
+
+Присутствие Империи здесь — не вопрос силы, а вопрос влияния.
+
+Каждый приказ, каждое решение и каждое действие отражаются далеко за пределами этого региона.
+
+И именно поэтому сюда не отправляют случайных людей.
+
+---
+
+## Высшая власть
+
+<Box>
+<GuideEntityEmbed Entity="ForgeIconEmpirePreafect" Caption=""/>
+[color=#a4885c][textlink="Лорд-Префект" link="ForgeGuideRolePreafect"][/color]
+</Box>
+<Box>
+[color=#9f8f70]
+Высокородный аристократ и верховная власть Империи в регионе. Определяет стратегию, распределяет ресурсы и задаёт направление всей кампании.
+[/color]
+</Box>
+
+
+<ColorBox Color="#22201c" OutlineColor="#4a3f2c" OutlineThickness="1" Margin="5">
+<Box>
+<GuideEntityEmbed Entity="ForgeIconEmpireConsul" Caption=""/>
+[color=#5bc0de][textlink="Консул" link="ForgeGuideRoleConsul"][/color]
+</Box>
+<Box>
+[color=#8faab3]
+Дипломатический представитель Империи. Следит за последствиями решений и предотвращает нежелательную эскалацию.
+[/color]
+</Box>
+</ColorBox>
+
+
+<ColorBox Color="#22201c" OutlineColor="#4a3f2c" OutlineThickness="1" Margin="5">
+  <Box>
+  <GuideEntityEmbed Entity="ForgeIconEmpireInquisitor" Caption=""/>
+  [color=#9b59b6][textlink="Эклезиарх" link="ForgeGuideRoleInquisitor"][/color]
+  </Box>
+
+  <Box>
+  [color=#a98fb5]
+  Высший служитель веры. Определяет границы допустимого и следит за чистотой доктрины.
+  [/color]
+  </Box>
+</ColorBox>
+
+---
+
+## Офицерский состав
+
+<Box>
+<GuideEntityEmbed Entity="ForgeIconEmpireTessarian" Caption=""/>
+[color=#a4885c]Тессариан[/color]
+
+[color=#9f8f70]
+Старший офицер, координирующий подразделения и обеспечивающий выполнение приказов.
+[/color]
+</Box>
+
+<Box>
+<GuideEntityEmbed Entity="ForgeIconEmpirePraetorian" Caption=""/>
+[color=#a4885c]Претор[/color]
+
+[color=#9f8f70]
+Младший офицер, руководящий бойцами и реализующий приказы на практике.
+[/color]
+</Box>
+
+---
+
+## Личный состав
+
+<Box>
+<GuideEntityEmbed Entity="ForgeIconEmpireAuxilia" Caption=""/>
+[color=#a4885c]Ауксилий[/color]
+
+[color=#9f8f70]
+Рядовой боец Имперской Гвардии. Основа всей структуры — дисциплина и исполнение приказов.
+[/color]
+</Box>
+
+<Box>
+<GuideEntityEmbed Entity="ForgeIconEmpireNeophyte" Caption=""/>
+[color=#a4885c]Неофит[/color]
+
+[color=#9f8f70]
+Новобранец, проходящий обучение и ещё не занявший полноценное место в системе.
+[/color]
+</Box>
+
+---
+
+## Назначения
+
+Империя сохраняет гибкость даже в жёсткой иерархии.
+
+<Box>
+<GuideEntityEmbed Entity="ForgeIconEmpireApotek" Caption="Апотекарий"/>
+<GuideEntityEmbed Entity="ForgeIconEmpireTechnican" Caption="Техник"/>
+<GuideEntityEmbed Entity="ForgeIconEmpireSmallInq" Caption="Инквизитор"/>
+</Box>
+
+Эти роли не меняют положение в иерархии —
+но определяют, каким образом вы служите Империи в данный момент.
+
+---
+
+## Склад и снабжение
+[color=#666666](Раздел в разработке — здесь будет информация про логистику, закупки и ресурсы)[/color]
+
+---
+
+Империя не держится на одном человеке.
+
+Она держится на балансе власти, долга и веры.
+
+И пока этот баланс сохраняется —
+Империя остаётся.
+
+</Document>

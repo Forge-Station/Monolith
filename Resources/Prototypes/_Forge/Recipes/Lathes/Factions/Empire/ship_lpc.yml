@@ -1,0 +1,41 @@
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: EmpireVoucherMotleyAnne
+  result: ShipVoucherEmpireMotley
+  materials:
+    Steel: 50000
+    Plasteel: 25000
+    Plastic: 10000
+    Glass: 5000
+    Plasma: 5000
+    Uranium: 5000
+    Silver: 5000
+    Gold: 5000
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: EmpireVoucherMock
+  result: ShipVoucherEmpireMock
+  materials:
+    Steel: 4500
+    Plasteel: 5000
+    Plastic: 3500
+    Glass: 2000
+    Plasma: 1000
+    Uranium: 1000
+    Silver: 2500
+    Gold: 2500
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: EmpireVoucherInertia
+  result: ShipVoucherEmpireInertia
+  materials:
+    Steel: 7500
+    Plasteel: 6500
+    Plastic: 3500
+    Glass: 5000
+    Plasma: 2000
+    Uranium: 2000
+    Silver: 4500
+    Gold: 4500

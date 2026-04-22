@@ -19,12 +19,12 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.55
-        Heat: 0.7
-        Radiation: 0.65
-        Caustic: 0.8
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.5
+        Heat: 0.6
+        Radiation: 0.55
+        Caustic: 0.6
   - type: StaminaDamageResistance
     coefficient: 0.25
   - type: ClothingSpeedModifier
@@ -108,10 +108,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
+        Blunt: 0.65
+        Slash: 0.65
         Piercing: 0.55
-        Heat: 0.7
+        Heat: 0.65
         Radiation: 0.65
         Caustic: 0.8
   - type: StaminaDamageResistance
@@ -147,10 +147,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.65
-        Heat: 0.8
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.55
+        Heat: 0.75
         Radiation: 0.5
         Caustic: 0.7
   - type: StaminaDamageResistance
@@ -305,18 +305,18 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.3
-        Slash: 0.3
+        Blunt: 0.4
+        Slash: 0.25
         Piercing: 0.25
         Shock: 0.6
-        Heat: 0.45
+        Heat: 0.4
         Radiation: 0.6
         Caustic: 0.6
   - type: StaminaDamageResistance
     coefficient: 0.2
   - type: ClothingSpeedModifier
-    walkModifier: 0.35
-    sprintModifier: 0.35
+    walkModifier: 0.65
+    sprintModifier: 0.65
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing

@@ -447,3 +447,26 @@
     radius: 1.5
     energy: 1.6
     color: "#21b0a4"
+
+- type: entity
+  parent: ComputerId
+  id: ComputerIdEmpire
+  name: empire ID computer
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer_emp
+    - map: ["computerLayerScreen"]
+      state: emp_shuttle
+    - map: ["computerLayerKeys"]
+      state: emp_key
+  - type: IdCardConsole
+    accessLevels:
+    - Empire
+    - EmpireOperator
+    - EmpireOfficer
+    - EmpireInqusitor
+    - EmpireCommander
+    - EmpireDiplomacy

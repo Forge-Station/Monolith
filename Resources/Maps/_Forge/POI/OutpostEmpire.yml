@@ -27939,13 +27939,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -10.257894,36.57213
       parent: 1
-- proto: BaseResearchAndDevelopmentPointSource
-  entities:
-  - uid: 2580
-    components:
-    - type: Transform
-      pos: 57.5,24.5
-      parent: 1
 - proto: Beaker
   entities:
   - uid: 2581

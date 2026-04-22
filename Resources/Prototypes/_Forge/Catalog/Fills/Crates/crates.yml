@@ -9,3 +9,33 @@
       - id: ClothingDuffelContractorForgeEVA
       - id: ComputerIFFCircuitboard
       - id: BoxZiptie
+
+- type: entity
+  id: CrateEmpireWarcrime
+  parent: CrateEmpireSecure
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingDuffelContractorForgeEVA
+      - id: ComputerIFFCircuitboard
+      - id: BoxZiptie
+
+- type: entity
+  id: CrateEmpireShip
+  parent: CrateEmpireSecure
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingDuffelContractorForgeEVA
+      - id: ComputerIFFCircuitboard
+      - id: BoxZiptie
+
+- type: entity
+  id: CrateEmpireMaterial
+  parent: CrateEmpireStandard
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingDuffelContractorForgeEVA
+      - id: ComputerIFFCircuitboard
+      - id: BoxZiptie

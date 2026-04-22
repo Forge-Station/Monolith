@@ -1,0 +1,29 @@
+- type: job
+  id: EmpireSmallInquisitor
+  name: forge-job-name-smallinq
+  description: forge-desc-name-smallinq
+  supervisors: job-supervisors-inquisitor
+  playTimeTracker: JobEmpireSmallInquisitor
+  icon: JobIconEmpireSmallInq
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hrs
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: EmpireSmallInquisitorGear
+  alwaysUseSpawner: true
+  weight: 170
+  displayWeight: 38
+  canBeAntag: false
+  assignedCompany: Imperial
+  accessGroups:
+  - SpecialEmpireAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
+
+- type: startingGear
+  id: EmpireSmallInquisitorGear

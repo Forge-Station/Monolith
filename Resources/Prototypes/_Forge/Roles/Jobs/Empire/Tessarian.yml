@@ -1,0 +1,61 @@
+- type: job
+  id: Tessarian # aka Bailiff but in 2 people
+  name: forge-job-name-tessarian
+  description: forge-job-desc-tessarian
+  supervisors: job-supervisors-praefect
+  playTimeTracker: JobTessarian
+  icon: JobIconEmpireTessarian
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 64800 # 18 hours
+    - !type:DepartmentTimeRequirement
+      department: Empire
+      time: 43200 # 12 hours
+    - !type:RoleTimeRequirement
+      role: JobPraetorian
+      time: 21600 # 6 hours
+    - !type:SpeciesRequirement
+      inverted: true
+      species:
+        - SlimePerson
+        - Arachnid
+        - Chitinid
+        - Resomi
+        - Vox
+        - Diona
+        - Goblin
+        - Hydrakin
+        - Vulpkanin
+        - Tajaran
+        - Reptilian
+        # - Oni
+        - Moth
+  # alternateRequirementSets:
+  #   longerPlaytimeLessSec:
+  #   - !type:RoleTimeRequirement
+  #     role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
+  #     time: 43200 # 12 hours
+  startingGear: TessarianGear
+  weight: 20
+  displayWeight: 20
+  canBeAntag: false
+  setPreference: true
+  accessGroups:
+  - SpecialEmpireAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
+
+- type: startingGear
+  id: TessarianGear
+  # equipment:
+  #   ears:
+  #   belt:
+  #   pocket1:
+  #   pocket2:
+  # storage:
+  #   back:
+  #   - RadioHandheldNF

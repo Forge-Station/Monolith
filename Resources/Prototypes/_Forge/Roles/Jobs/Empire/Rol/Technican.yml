@@ -1,0 +1,29 @@
+- type: job
+  id: EmpireTechnican
+  name: forge-job-name-technican
+  description: forge-desc-name-technican
+  supervisors: job-supervisors-praetorian
+  playTimeTracker: JobEmpireTechnican
+  icon: JobIconEmpireTechnican
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hrs
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: EmpireTechnicanGear
+  alwaysUseSpawner: true
+  weight: 170
+  displayWeight: 38
+  canBeAntag: false
+  assignedCompany: Imperial
+  accessGroups:
+  - GeneralEmpireAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
+
+- type: startingGear
+  id: EmpireTechnicanGear

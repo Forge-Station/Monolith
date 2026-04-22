@@ -1,0 +1,87 @@
+#region Jumpsuit
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitEmpireTech
+  result: ClothingUniformJumpsuitEmpireTech
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitEmpireSweater
+  result: ClothingUniformJumpsuitEmpireSweater
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitNeophyte
+  result: ClothingUniformJumpsuitNeophyte
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitNeophyteAlt
+  result: ClothingUniformJumpsuitNeophyteAlt
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitAuxilia
+  result: ClothingUniformJumpsuitAuxilia
+  materials:
+    Cloth: 300
+    Durathread: 100
+    Silver: 50
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitAuxiliaAlt
+  result: ClothingUniformJumpsuitAuxiliaAlt
+  materials:
+    Cloth: 300
+    Durathread: 100
+    Silver: 50
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitPraetorian
+  result: ClothingUniformJumpsuitPraetorian
+  materials:
+    Cloth: 300
+    Durathread: 100
+    Silver: 50
+    Gold: 50
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitPraetorianAlt
+  result: ClothingUniformJumpsuitPraetorianAlt
+  materials:
+    Cloth: 300
+    Durathread: 100
+    Silver: 50
+    Gold: 50
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitTessarian
+  result: ClothingUniformJumpsuitTessarian
+  materials:
+    Cloth: 300
+    Durathread: 100
+    Gold: 100
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitTessarianAlt
+  result: ClothingUniformJumpsuitTessarianAlt
+  materials:
+    Cloth: 300
+    Durathread: 100
+    Gold: 50
+
+#region Outer
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingOuterCoatEmpireWindbreaker
+  result: ClothingOuterCoatEmpireWindbreaker
+
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingOuterCoatEmpireInqWindbreaker
+  result: ClothingOuterCoatEmpireInqWindbreaker

@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Content.Shared._Forge;
 using Prometheus;
 using Robust.Shared.Configuration;
@@ -34,12 +33,10 @@ public sealed class TTSManager
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private readonly HttpClient _httpClient = new();
-    private readonly object _cacheLock = new();
 
     private ISawmill _sawmill = default!;
     private readonly Dictionary<string, byte[]> _cache = new();
     private readonly List<string> _cacheKeysSeq = new();
-    private readonly Dictionary<string, Task<byte[]?>> _inFlight = new();
     private int _maxCachedCount = 200;
     private string _apiUrl = string.Empty;
     private string _apiToken = string.Empty;
@@ -67,62 +64,21 @@ public sealed class TTSManager
         WantedCount.Inc();
         var cacheKey = GenerateCacheKey(speaker, text);
 
-        if (TryGetCachedAudio(cacheKey, out var data))
+        if (_cache.TryGetValue(cacheKey, out var data))
         {
             ReusedCount.Inc();
             _sawmill.Verbose($"Use cached sound for '{text}' speech by '{speaker}' speaker");
             return data;
         }
 
-        Task<byte[]?> requestTask;
-        var created = false;
-        lock (_cacheLock)
-        {
-            if (_cache.TryGetValue(cacheKey, out data))
-            {
-                ReusedCount.Inc();
-                _sawmill.Verbose($"Use cached sound for '{text}' speech by '{speaker}' speaker");
-                return data;
-            }
+        _sawmill.Verbose($"Generate new audio for '{text}' speech by '{speaker}' speaker");
 
-            if (!_inFlight.TryGetValue(cacheKey, out requestTask!))
-            {
-                _sawmill.Verbose($"Generate new audio for '{text}' speech by '{speaker}' speaker");
-                requestTask = GenerateAudioAsync(cacheKey, speaker, text);
-                _inFlight[cacheKey] = requestTask;
-                created = true;
-            }
-            else
-            {
-                ReusedCount.Inc();
-                _sawmill.Verbose($"Join in-flight TTS generation for '{text}' speech by '{speaker}' speaker");
-            }
-        }
-
-        try
-        {
-            return await requestTask;
-        }
-        finally
-        {
-            if (created)
-            {
-                lock (_cacheLock)
-                {
-                    _inFlight.Remove(cacheKey);
-                }
-            }
-        }
-    }
-
-    private async Task<byte[]?> GenerateAudioAsync(string cacheKey, string speaker, string text)
-    {
         var reqTime = DateTime.UtcNow;
 
         try
         {
             var timeout = _cfg.GetCVar(ForgeVars.TTSApiTimeout);
-            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
 
             var url = $"{_apiUrl}?speaker={Uri.EscapeDataString(speaker)}" +
                 $"&text={Uri.EscapeDataString(text)}" +
@@ -154,7 +110,15 @@ public sealed class TTSManager
                 return null;
             }
 
-            StoreCachedAudio(cacheKey, soundData);
+            _cache.Add(cacheKey, soundData);
+            _cacheKeysSeq.Add(cacheKey);
+
+            if (_cache.Count > _maxCachedCount)
+            {
+                var firstKey = _cacheKeysSeq.First();
+                _cache.Remove(firstKey);
+                _cacheKeysSeq.Remove(firstKey);
+            }
 
             _sawmill.Debug($"Generated TTS '{text}' ({soundData.Length} bytes)");
             RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
@@ -177,45 +141,8 @@ public sealed class TTSManager
 
     public void ResetCache()
     {
-        lock (_cacheLock)
-        {
-            _cache.Clear();
-            _cacheKeysSeq.Clear();
-        }
-    }
-
-    private bool TryGetCachedAudio(string cacheKey, out byte[]? data)
-    {
-        lock (_cacheLock)
-        {
-            if (_cache.TryGetValue(cacheKey, out var cached))
-            {
-                data = cached;
-                return true;
-            }
-        }
-
-        data = null;
-        return false;
-    }
-
-    private void StoreCachedAudio(string cacheKey, byte[] soundData)
-    {
-        lock (_cacheLock)
-        {
-            if (_cache.ContainsKey(cacheKey))
-                return;
-
-            _cache.Add(cacheKey, soundData);
-            _cacheKeysSeq.Add(cacheKey);
-
-            if (_cache.Count > _maxCachedCount)
-            {
-                var firstKey = _cacheKeysSeq.First();
-                _cache.Remove(firstKey);
-                _cacheKeysSeq.Remove(firstKey);
-            }
-        }
+        _cache.Clear();
+        _cacheKeysSeq.Clear();
     }
 
     private string GenerateCacheKey(string speaker, string text)

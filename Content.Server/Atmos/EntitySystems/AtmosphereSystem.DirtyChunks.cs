@@ -43,6 +43,37 @@ public sealed partial class AtmosphereSystem
         return state;
     }
 
+    private static AtmosChunkWorkFlags CalculateChunkWorkFlags(AtmosChunkState state)
+    {
+        var flags = AtmosChunkWorkFlags.None;
+
+        if (state.InvalidatedCoords.Count > 0)
+            flags |= AtmosChunkWorkFlags.Revalidate;
+        if (state.ActiveTiles.Count > 0 || state.InvalidatedCoords.Count > 0)
+            flags |= AtmosChunkWorkFlags.Active;
+        if (state.HighPressureTiles.Count > 0)
+            flags |= AtmosChunkWorkFlags.HighPressure;
+        if (state.HotspotTiles.Count > 0)
+            flags |= AtmosChunkWorkFlags.Hotspot;
+        if (state.SuperconductivityTiles.Count > 0)
+            flags |= AtmosChunkWorkFlags.Superconductivity;
+
+        return flags;
+    }
+
+    private void RefreshChunkWorkFlags(AtmosChunkState state)
+    {
+        state.WorkFlags = CalculateChunkWorkFlags(state);
+    }
+
+    private void EnqueueDirtyChunk(GridAtmosphereComponent atmosphere, Vector2i chunk)
+    {
+        if (!atmosphere.DirtyChunkQueued.Add(chunk))
+            return;
+
+        atmosphere.DirtyChunkQueue.Enqueue(chunk);
+    }
+
     private bool TryGetChunkState(GridAtmosphereComponent atmosphere, Vector2i chunk, out AtmosChunkState? state)
     {
         if (atmosphere.Chunks.TryGetValue(chunk, out var existing))
@@ -60,13 +91,18 @@ public sealed partial class AtmosphereSystem
         var chunk = GetAtmosChunk(tile);
         var state = GetOrCreateChunkState(atmosphere, chunk);
         state.LastTouchedCycle = atmosphere.UpdateCounter;
+        EnqueueDirtyChunk(atmosphere, chunk);
     }
 
     private void AddInvalidatedTile(GridAtmosphereComponent atmosphere, Vector2i tile)
     {
         atmosphere.InvalidatedCoords.Add(tile);
         TouchChunk(atmosphere, tile);
-        GetOrCreateChunkState(atmosphere, GetAtmosChunk(tile)).InvalidatedCoords.Add(tile);
+        var chunkIndex = GetAtmosChunk(tile);
+        var chunkState = GetOrCreateChunkState(atmosphere, chunkIndex);
+        chunkState.InvalidatedCoords.Add(tile);
+        RefreshChunkWorkFlags(chunkState);
+        EnqueueDirtyChunk(atmosphere, chunkIndex);
         MarkChunkHaloDirty(atmosphere, tile);
     }
 
@@ -77,26 +113,52 @@ public sealed partial class AtmosphereSystem
         var localY = Math.Abs(tile.Y % SharedGasTileOverlaySystem.ChunkSize);
 
         if (localX == 0)
-            GetOrCreateChunkState(atmosphere, chunk + new Vector2i(-1, 0)).LastTouchedCycle = atmosphere.UpdateCounter;
+        {
+            var neighbor = chunk + new Vector2i(-1, 0);
+            GetOrCreateChunkState(atmosphere, neighbor).LastTouchedCycle = atmosphere.UpdateCounter;
+            EnqueueDirtyChunk(atmosphere, neighbor);
+        }
         else if (localX == SharedGasTileOverlaySystem.ChunkSize - 1)
-            GetOrCreateChunkState(atmosphere, chunk + new Vector2i(1, 0)).LastTouchedCycle = atmosphere.UpdateCounter;
+        {
+            var neighbor = chunk + new Vector2i(1, 0);
+            GetOrCreateChunkState(atmosphere, neighbor).LastTouchedCycle = atmosphere.UpdateCounter;
+            EnqueueDirtyChunk(atmosphere, neighbor);
+        }
 
         if (localY == 0)
-            GetOrCreateChunkState(atmosphere, chunk + new Vector2i(0, -1)).LastTouchedCycle = atmosphere.UpdateCounter;
+        {
+            var neighbor = chunk + new Vector2i(0, -1);
+            GetOrCreateChunkState(atmosphere, neighbor).LastTouchedCycle = atmosphere.UpdateCounter;
+            EnqueueDirtyChunk(atmosphere, neighbor);
+        }
         else if (localY == SharedGasTileOverlaySystem.ChunkSize - 1)
-            GetOrCreateChunkState(atmosphere, chunk + new Vector2i(0, 1)).LastTouchedCycle = atmosphere.UpdateCounter;
+        {
+            var neighbor = chunk + new Vector2i(0, 1);
+            GetOrCreateChunkState(atmosphere, neighbor).LastTouchedCycle = atmosphere.UpdateCounter;
+            EnqueueDirtyChunk(atmosphere, neighbor);
+        }
     }
 
-    private void AddChunkTile(HashSet<TileAtmosphere> globalSet, HashSet<TileAtmosphere> chunkSet, TileAtmosphere tile)
+    private void AddChunkTile(GridAtmosphereComponent atmosphere, HashSet<TileAtmosphere> globalSet, HashSet<TileAtmosphere> chunkSet, TileAtmosphere tile)
     {
         globalSet.Add(tile);
         chunkSet.Add(tile);
+        var chunkIndex = GetAtmosChunk(tile.GridIndices);
+        var chunkState = GetOrCreateChunkState(atmosphere, chunkIndex);
+        RefreshChunkWorkFlags(chunkState);
+        EnqueueDirtyChunk(atmosphere, chunkIndex);
     }
 
-    private void RemoveChunkTile(HashSet<TileAtmosphere> globalSet, HashSet<TileAtmosphere> chunkSet, TileAtmosphere tile)
+    private void RemoveChunkTile(GridAtmosphereComponent atmosphere, HashSet<TileAtmosphere> globalSet, HashSet<TileAtmosphere> chunkSet, TileAtmosphere tile)
     {
         globalSet.Remove(tile);
         chunkSet.Remove(tile);
+        var chunkIndex = GetAtmosChunk(tile.GridIndices);
+        if (TryGetChunkState(atmosphere, chunkIndex, out var chunkState) && chunkState != null)
+        {
+            RefreshChunkWorkFlags(chunkState);
+            EnqueueDirtyChunk(atmosphere, chunkIndex);
+        }
     }
 
     private void RefreshInterestChunks()

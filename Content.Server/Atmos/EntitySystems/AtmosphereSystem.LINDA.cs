@@ -155,7 +155,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             tile.Excited = true;
             var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
-            AddChunkTile(gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
+            AddChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             tile.Excited = false;
             if (TryGetChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
-                RemoveChunkTile(gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
+                RemoveChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
             else
                 gridAtmosphere.ActiveTiles.Remove(tile);
 

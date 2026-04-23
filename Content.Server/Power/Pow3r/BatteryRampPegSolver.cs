@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Robust.Shared.Utility;
 using System.Linq;
 using Robust.Shared.Threading;
@@ -12,6 +13,15 @@ namespace Content.Server.Power.Pow3r
         private bool _disableParallel;
         private readonly List<NodeId> _dirtyLoads = new(); // Forge-Change
         private readonly List<NodeId> _dirtyBatteries = new(); // Forge-Change
+        private readonly List<NodeId> _activeLoadsLastTick = new();
+        private readonly List<NodeId> _activeSuppliesLastTick = new();
+        private readonly List<NodeId> _activeBatteriesLastTick = new();
+        private readonly List<NodeId> _scratchLoads = new();
+        private readonly List<NodeId> _scratchSupplies = new();
+        private readonly List<NodeId> _scratchBatteries = new();
+        private readonly HashSet<long> _scratchLoadKeys = new();
+        private readonly HashSet<long> _scratchSupplyKeys = new();
+        private readonly HashSet<long> _scratchBatteryKeys = new();
 
         public IReadOnlyList<NodeId> DirtyLoads => _dirtyLoads; // Forge-Change
         public IReadOnlyList<NodeId> DirtyBatteries => _dirtyBatteries; // Forge-Change
@@ -42,7 +52,7 @@ namespace Content.Server.Power.Pow3r
             _dirtyLoads.Clear(); // Forge-Change
             _dirtyBatteries.Clear(); // Forge-Change
 
-            ClearLoadsAndSupplies(state);
+            BeginTick(state);
 
             state.GroupedNets ??= GroupByNetworkDepth(state);
             DebugTools.Assert(state.GroupedNets.Select(x => x.Count).Sum() == state.Networks.Count);
@@ -72,27 +82,34 @@ namespace Content.Server.Power.Pow3r
                     parallel.ProcessNow(_networkJob, group.Count);
             }
 
-            ClearBatteries(state);
+            EndTick(state);
 
             PowerSolverShared.UpdateRampPositions(frameTime, state);
         }
 
-        private void ClearLoadsAndSupplies(PowerState state)
+        private void BeginTick(PowerState state)
         {
-            foreach (var load in state.Loads.Values)
+            foreach (var loadId in _activeLoadsLastTick)
             {
+                ref Load load = ref GetLoadOrSkip(state, loadId, out var found);
+                if (!found)
+                    continue;
                 if (load.Paused)
                     continue;
 
                 load.LastReceivingPower = load.ReceivingPower;
 
-                if (load.LastReceivingPower != 0f) _dirtyLoads.Add(load.Id);
+                if (load.LastReceivingPower != 0f)
+                    _dirtyLoads.Add(load.Id);
 
                 load.ReceivingPower = 0;
             }
 
-            foreach (var supply in state.Supplies.Values)
+            foreach (var supplyId in _activeSuppliesLastTick)
             {
+                ref Supply supply = ref GetSupplyOrSkip(state, supplyId, out var found);
+                if (!found)
+                    continue;
                 if (supply.Paused)
                     continue;
 
@@ -218,9 +235,6 @@ namespace Content.Server.Power.Pow3r
                     continue;
 
                 var newReceiving = load.DesiredPower * supplyRatio;
-                if (!MathHelper.CloseToPercent(load.LastReceivingPower, newReceiving))
-                    _dirtyLoads.Add(loadId);
-
                 load.ReceivingPower = newReceiving;
             }
 
@@ -305,34 +319,164 @@ namespace Content.Server.Power.Pow3r
             }
         }
 
-        private void ClearBatteries(PowerState state)
+        private void EndTick(PowerState state)
         {
-            // Clear supplying/loading on any batteries that haven't been marked by usage.
-            // Because we need this data while processing ramp-pegging, we can't clear it at the start.
-            foreach (var battery in state.Batteries.Values)
+            BuildEndOfTickSets(state);
+
+            // Dirty detection for loads must happen after network solving has written current receiving power.
+            foreach (var loadId in _scratchLoads)
             {
+                ref Load load = ref GetLoadOrSkip(state, loadId, out var found);
+                if (!found || load.Paused)
+                    continue;
+
+                if (!MathHelper.CloseToPercent(load.LastReceivingPower, load.ReceivingPower))
+                    _dirtyLoads.Add(load.Id);
+            }
+
+            _activeLoadsLastTick.Clear();
+            foreach (var loadId in _scratchLoads)
+            {
+                ref Load load = ref GetLoadOrSkip(state, loadId, out var found);
+                if (!found || load.Paused)
+                    continue;
+
+                if (!MathHelper.CloseTo(load.ReceivingPower, 0f))
+                    _activeLoadsLastTick.Add(loadId);
+            }
+
+            _activeSuppliesLastTick.Clear();
+            foreach (var supplyId in _scratchSupplies)
+            {
+                ref Supply supply = ref GetSupplyOrSkip(state, supplyId, out var found);
+                if (!found || supply.Paused)
+                    continue;
+
+                if (!MathHelper.CloseTo(supply.CurrentSupply, 0f) || !MathHelper.CloseTo(supply.SupplyRampTarget, 0f))
+                    _activeSuppliesLastTick.Add(supplyId);
+            }
+
+            _activeBatteriesLastTick.Clear();
+            foreach (var batteryId in _scratchBatteries)
+            {
+                ref Battery battery = ref GetBatteryOrSkip(state, batteryId, out var found);
+                if (!found)
+                    continue;
+
+                var touched = battery.SupplyingMarked || battery.LoadingMarked;
+                FinalizeBattery(ref battery, touched);
+
                 if (battery.Paused)
                     continue;
 
-                if (!battery.SupplyingMarked)
+                if (touched || !MathHelper.CloseTo(battery.CurrentSupply, 0f) || !MathHelper.CloseTo(battery.CurrentReceiving, 0f))
+                    _activeBatteriesLastTick.Add(batteryId);
+            }
+        }
+
+        private void BuildEndOfTickSets(PowerState state)
+        {
+            _scratchLoads.Clear();
+            _scratchSupplies.Clear();
+            _scratchBatteries.Clear();
+            _scratchLoadKeys.Clear();
+            _scratchSupplyKeys.Clear();
+            _scratchBatteryKeys.Clear();
+
+            foreach (var loadId in _activeLoadsLastTick)
+                AddUnique(_scratchLoads, _scratchLoadKeys, loadId);
+            foreach (var supplyId in _activeSuppliesLastTick)
+                AddUnique(_scratchSupplies, _scratchSupplyKeys, supplyId);
+            foreach (var batteryId in _activeBatteriesLastTick)
+                AddUnique(_scratchBatteries, _scratchBatteryKeys, batteryId);
+
+            var grouped = state.GroupedNets;
+            if (grouped == null)
+                return;
+
+            foreach (var layer in grouped)
+            {
+                foreach (var net in layer)
                 {
-                    battery.CurrentSupply = 0;
-                    battery.SupplyRampTarget = 0;
-                    battery.LoadingNetworkDemand = 0;
+                    foreach (var loadId in net.Loads)
+                        AddUnique(_scratchLoads, _scratchLoadKeys, loadId);
+                    foreach (var supplyId in net.Supplies)
+                        AddUnique(_scratchSupplies, _scratchSupplyKeys, supplyId);
+                    foreach (var batteryId in net.BatteryLoads)
+                        AddUnique(_scratchBatteries, _scratchBatteryKeys, batteryId);
+                    foreach (var batteryId in net.BatterySupplies)
+                        AddUnique(_scratchBatteries, _scratchBatteryKeys, batteryId);
                 }
+            }
+        }
 
-                if (!battery.LoadingMarked)
-                {
-                    battery.CurrentReceiving = 0;
-                }
+        private static void AddUnique(List<NodeId> list, HashSet<long> keys, NodeId id)
+        {
+            if (keys.Add(id.Combined))
+                list.Add(id);
+        }
 
-                battery.SupplyingMarked = false;
-                battery.LoadingMarked = false;
+        private void FinalizeBattery(ref Battery battery, bool touched)
+        {
+            if (battery.Paused)
+                return;
 
-                if (!MathHelper.CloseToPercent(battery.LastCurrentSupply, battery.CurrentSupply)) // Forge-Change
-                    _dirtyBatteries.Add(battery.Id);
+            if (!touched)
+            {
+                battery.CurrentSupply = 0;
+                battery.SupplyRampTarget = 0;
+                battery.LoadingNetworkDemand = 0;
+                battery.CurrentReceiving = 0;
+            }
 
-                battery.LastCurrentSupply = battery.CurrentSupply;
+            battery.SupplyingMarked = false;
+            battery.LoadingMarked = false;
+
+            if (!MathHelper.CloseToPercent(battery.LastCurrentSupply, battery.CurrentSupply))
+                _dirtyBatteries.Add(battery.Id);
+
+            battery.LastCurrentSupply = battery.CurrentSupply;
+        }
+
+        private static ref Battery GetBatteryOrSkip(PowerState state, NodeId id, out bool found)
+        {
+            try
+            {
+                found = true;
+                return ref state.Batteries[id];
+            }
+            catch (KeyNotFoundException)
+            {
+                found = false;
+                return ref Unsafe.NullRef<Battery>();
+            }
+        }
+
+        private static ref Load GetLoadOrSkip(PowerState state, NodeId id, out bool found)
+        {
+            try
+            {
+                found = true;
+                return ref state.Loads[id];
+            }
+            catch (KeyNotFoundException)
+            {
+                found = false;
+                return ref Unsafe.NullRef<Load>();
+            }
+        }
+
+        private static ref Supply GetSupplyOrSkip(PowerState state, NodeId id, out bool found)
+        {
+            try
+            {
+                found = true;
+                return ref state.Supplies[id];
+            }
+            catch (KeyNotFoundException)
+            {
+                found = false;
+                return ref Unsafe.NullRef<Supply>();
             }
         }
 

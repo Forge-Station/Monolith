@@ -282,6 +282,7 @@ public partial class RCDSystem : EntitySystem
         var doAfterTarget = isRpdDeconstruct ? null : deconstructTarget;
         var doAfterArgs = new DoAfterArgs(EntityManager, user, delay*component.DelayMultiplier, ev, uid, target: doAfterTarget, used: uid) // Mono - add delay multiplier.
         {
+            NeedHand = true,
             BreakOnDamage = true,
             BreakOnHandChange = true,
             BreakOnMove = true,

@@ -56,7 +56,7 @@ public sealed class DnaModifierScannerSystem : EntitySystem
         SubscribeLocalEvent<DnaModifierScannerComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<DnaModifierScannerComponent, SolutionTransferAttemptEvent>(OnTransferAttempt);
         SubscribeLocalEvent<DnaModifierScannerComponent, SolutionTransferredEvent>(OnTransferred);
-        SubscribeLocalEvent<DnaModifierScannerComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<DnaModifierScannerComponent, SolutionChangedEvent>(OnSolutionChanged);
         SubscribeLocalEvent<DnaModifierScannerComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
         SubscribeLocalEvent<DnaModifierScannerComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
     }
@@ -225,9 +225,9 @@ public sealed class DnaModifierScannerSystem : EntitySystem
         }
     }
 
-    private void OnSolutionChanged(Entity<DnaModifierScannerComponent> ent, ref SolutionContainerChangedEvent args)
+    private void OnSolutionChanged(Entity<DnaModifierScannerComponent> ent, ref SolutionChangedEvent args)
     {
-        if (args.SolutionId != DnaModifierScannerComponent.MutagenSolution)
+        if (args.Solution.Comp.Id != DnaModifierScannerComponent.MutagenSolution)
             return;
 
         if (ent.Comp.ConnectedConsole != null)
@@ -263,7 +263,7 @@ public sealed class DnaModifierScannerSystem : EntitySystem
         if (solution.GetTotalPrototypeQuantity(scanner.MutagenReagent) < amount)
             return false;
 
-        return _solution.RemoveReagent(soln.Value, scanner.MutagenReagent.ToString(), amount);
+        return _solution.RemoveReagent(soln.Value, scanner.MutagenReagent.ToString(), amount) > FixedPoint2.Zero;
     }
 
     public static bool IsOccupied(DnaModifierScannerComponent scanner)

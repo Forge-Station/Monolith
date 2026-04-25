@@ -27,14 +27,14 @@ namespace Content.Server.Body.Systems
         [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
         private EntityQuery<OrganComponent> _organQuery;
-        private EntityQuery<SolutionContainerManagerComponent> _solutionQuery;
+        private EntityQuery<SolutionManagerComponent> _solutionQuery;
 
         public override void Initialize()
         {
             base.Initialize();
 
             _organQuery = GetEntityQuery<OrganComponent>();
-            _solutionQuery = GetEntityQuery<SolutionContainerManagerComponent>();
+            _solutionQuery = GetEntityQuery<SolutionManagerComponent>();
 
             SubscribeLocalEvent<MetabolizerComponent, ComponentInit>(OnMetabolizerInit);
             SubscribeLocalEvent<MetabolizerComponent, MapInitEvent>(OnMapInit);
@@ -103,7 +103,7 @@ namespace Content.Server.Body.Systems
             }
         }
 
-        private void TryMetabolize(Entity<MetabolizerComponent, OrganComponent?, SolutionContainerManagerComponent?> ent)
+        private void TryMetabolize(Entity<MetabolizerComponent, OrganComponent?, SolutionManagerComponent?> ent)
         {
             _organQuery.Resolve(ent, ref ent.Comp2, logMissing: false);
 
@@ -120,7 +120,7 @@ namespace Content.Server.Body.Systems
                     if (!_solutionQuery.Resolve(body, ref ent.Comp3, logMissing: false))
                         return;
 
-                    _solutionContainerSystem.TryGetSolution((body, ent.Comp3), solutionName, out soln, out solution);
+                    _solutionContainerSystem.TryGetSolution(body, solutionName, out soln, out solution);
                     solutionEntityUid = body;
                 }
             }
@@ -129,7 +129,7 @@ namespace Content.Server.Body.Systems
                 if (!_solutionQuery.Resolve(ent, ref ent.Comp3, logMissing: false))
                     return;
 
-                _solutionContainerSystem.TryGetSolution((ent, ent), solutionName, out soln, out solution);
+                _solutionContainerSystem.TryGetSolution(ent.Owner, solutionName, out soln, out solution);
                 solutionEntityUid = ent;
             }
 

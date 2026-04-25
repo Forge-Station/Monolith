@@ -87,7 +87,6 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
         var metaDataQuery = GetEntityQuery<MetaDataComponent>();
         var itemSlotsQuery = GetEntityQuery<ItemSlotsComponent>();
         var fitsInDispenserQuery = GetEntityQuery<FitsInDispenserComponent>();
-        var solutionContainerManagerQuery = GetEntityQuery<SolutionContainerManagerComponent>();
         var query = EntityQueryEnumerator<ActiveCryoPodComponent, CryoPodComponent>();
 
         while (query.MoveNext(out var uid, out _, out var cryoPod))
@@ -107,9 +106,7 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
                 && container.Value.Valid
                 && patient != null
                 && fitsInDispenserQuery.TryGetComponent(container, out var fitsInDispenserComponent)
-                && solutionContainerManagerQuery.TryGetComponent(container,
-                    out var solutionContainerManagerComponent)
-                && _solutionContainerSystem.TryGetFitsInDispenser((container.Value, fitsInDispenserComponent, solutionContainerManagerComponent),
+                && _solutionContainerSystem.TryGetFitsInDispenser((container.Value, fitsInDispenserComponent),
                     out var containerSolution, out _))
             {
                 if (!bloodStreamQuery.TryGetComponent(patient, out var bloodstream))

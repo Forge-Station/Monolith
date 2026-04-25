@@ -299,7 +299,7 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
             return;
         }
 
-        if (!_solutions.RemoveReagent(soln.Value, washReagent, WashCost))
+        if (_solutions.RemoveReagent(soln.Value, washReagent, WashCost) <= FixedPoint2.Zero)
             return;
 
         // Force visualizers to re-apply the entity's own prototype so the painted RSI is undone.

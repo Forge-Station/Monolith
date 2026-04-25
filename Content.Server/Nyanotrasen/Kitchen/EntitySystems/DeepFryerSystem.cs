@@ -3,7 +3,7 @@ using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Audio;
 using Content.Server.Cargo.Systems;
-using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Server.Chemistry.EntitySystems;
 using Content.Server.Construction;
 using Content.Server.DoAfter;
 using Content.Server.Fluids.EntitySystems;
@@ -214,13 +214,9 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
                 _temperature.ChangeHeat(item, delta, false, tempComp);
         }
 
-        if (TryComp<SolutionContainerManagerComponent>(item, out var solutions) && solutions.Solutions != null)
+        foreach (var (_, solution) in _solutionContainerSystem.EnumerateSolutions(item))
         {
-            foreach (var (_, solution) in solutions.Solutions)
-            {
-                if(_solutionContainerSystem.TryGetSolution(item, solution.Name, out var solutionRef))
-                    _solutionContainerSystem.SetTemperature(solutionRef!.Value, component.PoweredTemperature);
-            }
+            _solutionContainerSystem.SetTemperature(solution, component.PoweredTemperature);
         }
 
         // Damage non-food items and mobs.
@@ -433,8 +429,8 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
             _sawmill.Warning(
                 $"{ToPrettyString(uid)} did not have a {component.StorageName} container. It has been created.");
 
-        component.Solution =
-            _solutionContainerSystem.EnsureSolution(uid, component.SolutionName, out var solutionExisted);
+        var solutionExisted = _solutionContainerSystem.EnsureSolution(uid, component.SolutionName, out var solutionEnt);
+        component.Solution = solutionEnt.Comp.Solution;
 
         if (!solutionExisted)
             _sawmill.Warning(
@@ -653,7 +649,7 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
                 out var transferAmount))
             return;
 
-        if (!_solutionContainerSystem.TryGetSolution(component.Owner, component.Solution.Name, out var solution))
+        if (!_solutionContainerSystem.TryGetSolution(uid, component.SolutionName, out var solution))
             return;
 
         _solutionTransferSystem.Transfer(user,
@@ -736,7 +732,7 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
         if (!_solutionContainerSystem.TryGetSolution(uid, component.SolutionName, out var solution))
             return;
 
-        if (!_solutionContainerSystem.TryGetSolution(args.Used!.Value, args.Solution.Name, out var targetSolution))
+        if (!_solutionContainerSystem.TryGetRefillableSolution(args.Used!.Value, out var targetSolution, out _))
             return;
 
         _solutionContainerSystem.UpdateChemicals(solution.Value);

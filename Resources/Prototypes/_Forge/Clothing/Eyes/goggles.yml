@@ -194,3 +194,6 @@
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
+  - type: StaticPrise
+    priсe: 30
+    vendPriсe: 200

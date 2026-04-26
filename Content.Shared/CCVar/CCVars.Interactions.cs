@@ -40,6 +40,31 @@ public sealed partial class CCVars
     public static readonly CVarDef<int> InteractionRateLimitAnnounceAdminsDelay =
         CVarDef.Create("interaction.rate_limit_announce_admins_delay", 120, CVar.SERVERONLY);
 
+    // Forge-Change-start
+    /// <summary>
+    /// Maximum number of invalid interaction packets a client may send during the invalid interaction rate limit period.
+    /// </summary>
+    public static readonly CVarDef<int> InteractionInvalidRateLimitCount =
+        CVarDef.Create("interaction.invalid_rate_limit_count", 8, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Time window in seconds used to track invalid interaction packets.
+    /// </summary>
+    public static readonly CVarDef<float> InteractionInvalidRateLimitPeriod =
+        CVarDef.Create("interaction.invalid_rate_limit_period", 5f, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Minimum delay between admin alerts for invalid interaction spam.
+    /// </summary>
+    public static readonly CVarDef<int> InteractionInvalidRateLimitAnnounceAdminsDelay =
+        CVarDef.Create("interaction.invalid_rate_limit_announce_admins_delay", 120, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Whether clients should be disconnected after repeatedly sending invalid interaction packets.
+    /// </summary>
+    public static readonly CVarDef<bool> InteractionInvalidRateLimitDisconnect =
+        CVarDef.Create("interaction.invalid_rate_limit_disconnect", true, CVar.SERVERONLY);
+    // Forge-Change-end
     /// <summary>
     ///     Whether or not the storage UI is static and bound to the hotbar, or unbound and allowed to be dragged anywhere.
     /// </summary>
@@ -63,7 +88,7 @@ public sealed partial class CCVars
     /// Recommended that you utilise this in conjunction with <see cref="StaticStorageUI"/>
     /// </summary>
     public static readonly CVarDef<int> StorageLimit =
-        CVarDef.Create("control.storage_limit", 2, CVar.REPLICATED | CVar.SERVER); // Frontier: 1<2
+        CVarDef.Create("control.storage_limit", 3, CVar.REPLICATED | CVar.SERVER); // Forge-Change 2<3
 
     /// <summary>
     /// Whether or not storage can be opened recursively.

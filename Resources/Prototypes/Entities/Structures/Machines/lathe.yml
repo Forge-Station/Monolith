@@ -347,6 +347,7 @@
     - AiCoreBoard
     - S2MechBoards
     - EngineeringBoardsGoob #Goob Factorio port
+    - NanotrasenCircuitBoard # Forge-change
   - type: MaterialStorage
     whitelist:
       tags:
@@ -394,6 +395,7 @@
     # Shitmed Change
     - IPCPartsStatic
     dynamicPacks:
+    - NanotrasenMechWeapon # Forge-change
     - Robotics
     - BorgModules
     - MechParts
@@ -495,6 +497,8 @@
     - StaticAmmoRecipePack
     - SecurityWeaponsStatic
     dynamicPacks:
+    - NanotrasenWeapon # Forge-change
+    - NanotrasenEquipment # Forge-change
     - SecurityEquipment
     - SecurityExplosives
     - DynamicAmmoRecipePack
@@ -608,6 +612,8 @@
     - SurgeryStatic
     - NFMedicalStatic # Frontier
     dynamicPacks:
+    - TTISuplplies # Forge-change
+    - TTIEquipment # Forge-change
     - Chemistry
     - SyringeGuns # DeltaV
     - NFMedical # Frontier
@@ -645,6 +651,7 @@
     idleState: icon
     runningState: building
     staticPacks:
+    - NanotrasenClothing # Forge-change
     - ClothingCivilian
     - ClothingCargo
     - ClothingCommand

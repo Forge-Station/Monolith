@@ -1,0 +1,9 @@
+- type: latheRecipe
+  parent: BaseAmmoFMJPistolCaliberPistolMagazineRecipe
+  id: Magazine45_magnumPistolHighCapacityFMJ
+  result: Magazine45_magnumPistolHighCapacityFMJ
+  
+- type: latheRecipe
+  parent: BaseAmmoFMJPistolCaliberPistolMagazineRecipe
+  id: Magazine45_magnumPistolHighCapacityEmpty
+  result: Magazine45_magnumPistolHighCapacityEmpty

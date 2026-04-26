@@ -1,10 +1,14 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Collections.Concurrent; // Forge-Change
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Content.Server.Players.RateLimiting; // Forge-Change
 using Content.Shared.CCVar;
+using Content.Shared.Chat; // Forge-Change
 using Content.Shared.Preferences;
+using Content.Shared.Players.RateLimiting; // Forge-Change
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -29,12 +33,16 @@ namespace Content.Server.Preferences.Managers
         [Dependency] private readonly ILogManager _log = default!;
         [Dependency] private readonly UserDbDataManager _userDb = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
+        [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!; // Forge-Change
+        [Dependency] private readonly ISharedChatManager _chat = default!; // Forge-Change
 
         // Cache player prefs on the server so we don't need as much async hell related to them.
         private readonly Dictionary<NetUserId, PlayerPrefData> _cachedPlayerPrefs =
             new();
+        private readonly ConcurrentDictionary<(NetUserId UserId, int Slot), SemaphoreSlim> _profileSlotLocks = new(); // Forge-Change
 
         private ISawmill _sawmill = default!;
+        private const string ProfileUpdateRateLimitKey = "ProfileUpdate"; // Forge-Change
 
         private int MaxCharacterSlots => _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
 
@@ -45,6 +53,15 @@ namespace Content.Server.Preferences.Managers
             _netManager.RegisterNetMessage<MsgUpdateCharacter>(HandleUpdateCharacterMessage);
             _netManager.RegisterNetMessage<MsgDeleteCharacter>(HandleDeleteCharacterMessage);
             _sawmill = _log.GetSawmill("prefs");
+            // Forge-Change-start
+            _rateLimit.Register(ProfileUpdateRateLimitKey,
+                new RateLimitRegistration(CCVars.ProfileUpdateRateLimitPeriod,
+                    CCVars.ProfileUpdateRateLimitCount,
+                    ProfileUpdateRateLimited,
+                    CCVars.ProfileUpdateRateLimitAnnounceAdminsDelay,
+                    ProfileUpdateRateLimitAlertAdmins)
+            );
+            // Forge-Change-end
         }
 
         private async void HandleSelectCharacterMessage(MsgSelectCharacter message)
@@ -82,6 +99,10 @@ namespace Content.Server.Preferences.Managers
         private async void HandleUpdateCharacterMessage(MsgUpdateCharacter message)
         {
             var userId = message.MsgChannel.UserId;
+            var session = _playerManager.GetSessionById(userId); // Forge-Change
+
+            if (_rateLimit.CountAction(session, ProfileUpdateRateLimitKey) != RateLimitStatus.Allowed) // Forge-Change
+                return; // Forge-Change
 
             // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
             if (message.Profile == null)
@@ -93,103 +114,110 @@ namespace Content.Server.Preferences.Managers
         public async Task SetProfile(NetUserId userId, int slot, ICharacterProfile profile,
             bool authoritative = true) // Mono
         {
-            if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
+            await RunProfileSlotLocked(userId, slot, async () => // Forge-Change
             {
-                _sawmill.Error($"Tried to modify user {userId} preferences before they loaded.");
-                return;
-            }
-
-            if (slot < 0 || slot >= MaxCharacterSlots)
-                return;
-
-            var curPrefs = prefsData.Prefs!;
-            var session = _playerManager.GetSessionById(userId);
-            profile.EnsureValid(session, _dependencies);
-            // Mono
-            if (!authoritative && profile is HumanoidCharacterProfile humanoid)
-            {
-                if (curPrefs.Characters.TryGetValue(slot, out var oldProfile) && oldProfile is HumanoidCharacterProfile oldHumanoid)
-                    profile = humanoid.WithBankBalance(oldHumanoid.BankBalance);
-                else
-                    profile = humanoid.WithBankBalance(HumanoidCharacterProfile.DefaultBalance);
-            }
-
-            // Forge-Change-Start: set increased starting bank balance for new globally whitelisted characters
-            if (profile is HumanoidCharacterProfile humanoidProfile &&
-                !curPrefs.Characters.ContainsKey(slot) &&
-                humanoidProfile.BankBalance == HumanoidCharacterProfile.DefaultBalance)
-            {
-                var whitelisted = await _db.GetWhitelistStatusAsync(userId);
-                if (whitelisted)
+                if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
                 {
-                    var startingBalance = _cfg.GetCVar(CCVars.GameWhitelistedStartingBalance);
-                    profile = humanoidProfile.WithBankBalance(startingBalance);
+                    _sawmill.Error($"Tried to modify user {userId} preferences before they loaded.");
+                    return;
                 }
-            }
-            // Forge-Change-End
 
-            var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
+                if (slot < 0 || slot >= MaxCharacterSlots)
+                    return;
 
-            {
-                [slot] = profile
-            };
+                var curPrefs = prefsData.Prefs!;
+                var session = _playerManager.GetSessionById(userId);
+                profile.EnsureValid(session, _dependencies);
+                // Mono
+                if (!authoritative && profile is HumanoidCharacterProfile humanoid)
+                {
+                    if (curPrefs.Characters.TryGetValue(slot, out var oldProfile) && oldProfile is HumanoidCharacterProfile oldHumanoid)
+                        profile = humanoid.WithBankBalance(oldHumanoid.BankBalance);
+                    else
+                        profile = humanoid.WithBankBalance(HumanoidCharacterProfile.DefaultBalance);
+                }
 
-            prefsData.Prefs = new PlayerPreferences(profiles, slot, curPrefs.AdminOOCColor);
+                // Forge-Change-Start: set increased starting bank balance for new globally whitelisted characters
+                if (profile is HumanoidCharacterProfile humanoidProfile &&
+                    !curPrefs.Characters.ContainsKey(slot) &&
+                    humanoidProfile.BankBalance == HumanoidCharacterProfile.DefaultBalance)
+                {
+                    var whitelisted = await _db.GetWhitelistStatusAsync(userId);
+                    if (whitelisted)
+                    {
+                        var startingBalance = _cfg.GetCVar(CCVars.GameWhitelistedStartingBalance);
+                        profile = humanoidProfile.WithBankBalance(startingBalance);
+                    }
+                }
 
-            if (ShouldStorePrefs(session.Channel.AuthType))
-                await _db.SaveCharacterSlotAsync(userId, profile, slot);
+
+                var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
+                {
+                    [slot] = profile
+                };
+
+                prefsData.Prefs = new PlayerPreferences(profiles, slot, curPrefs.AdminOOCColor);
+
+                if (ShouldStorePrefs(session.Channel.AuthType))
+                    await _db.SaveCharacterSlotAsync(userId, profile, slot);
+            });
+             // Forge-Change-End
         }
 
         private async void HandleDeleteCharacterMessage(MsgDeleteCharacter message)
         {
             var slot = message.Slot;
             var userId = message.MsgChannel.UserId;
-
-            if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
+            // Forge-Change-start
+            await RunProfileSlotLocked(userId, slot, async () =>
             {
-                Logger.WarningS("prefs", $"User {userId} tried to modify preferences before they loaded.");
-                return;
-            }
-
-            if (slot < 0 || slot >= MaxCharacterSlots)
-            {
-                return;
-            }
-
-            var curPrefs = prefsData.Prefs!;
-
-            // If they try to delete the slot they have selected then we switch to another one.
-            // Of course, that's only if they HAVE another slot.
-            int? nextSlot = null;
-            if (curPrefs.SelectedCharacterIndex == slot)
-            {
-                // That ! on the end is because Rider doesn't like .NET 5.
-                var (ns, profile) = curPrefs.Characters.FirstOrDefault(p => p.Key != message.Slot)!;
-                if (profile == null)
+                if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
                 {
-                    // Only slot left, can't delete.
+                    Logger.WarningS("prefs", $"User {userId} tried to modify preferences before they loaded.");
                     return;
                 }
 
-                nextSlot = ns;
-            }
-
-            var arr = new Dictionary<int, ICharacterProfile>(curPrefs.Characters);
-            arr.Remove(slot);
-
-            prefsData.Prefs = new PlayerPreferences(arr, nextSlot ?? curPrefs.SelectedCharacterIndex, curPrefs.AdminOOCColor);
-
-            if (ShouldStorePrefs(message.MsgChannel.AuthType))
-            {
-                if (nextSlot != null)
+                if (slot < 0 || slot >= MaxCharacterSlots)
                 {
-                    await _db.DeleteSlotAndSetSelectedIndex(userId, slot, nextSlot.Value);
+                    return;
                 }
-                else
+
+                var curPrefs = prefsData.Prefs!;
+
+                // If they try to delete the slot they have selected then we switch to another one.
+                // Of course, that's only if they HAVE another slot.
+                int? nextSlot = null;
+                if (curPrefs.SelectedCharacterIndex == slot)
                 {
-                    await _db.SaveCharacterSlotAsync(userId, null, slot);
+                    // That ! on the end is because Rider doesn't like .NET 5.
+                    var (ns, profile) = curPrefs.Characters.FirstOrDefault(p => p.Key != message.Slot)!;
+                    if (profile == null)
+                    {
+                        // Only slot left, can't delete.
+                        return;
+                    }
+
+                    nextSlot = ns;
                 }
-            }
+
+                var arr = new Dictionary<int, ICharacterProfile>(curPrefs.Characters);
+                arr.Remove(slot);
+
+                prefsData.Prefs = new PlayerPreferences(arr, nextSlot ?? curPrefs.SelectedCharacterIndex, curPrefs.AdminOOCColor);
+
+                if (ShouldStorePrefs(message.MsgChannel.AuthType))
+                {
+                    if (nextSlot != null)
+                    {
+                        await _db.DeleteSlotAndSetSelectedIndex(userId, slot, nextSlot.Value);
+                    }
+                    else
+                    {
+                        await _db.SaveCharacterSlotAsync(userId, null, slot);
+                    }
+                }
+            });
+            // Forge-Change-end
         }
 
         // Should only be called via UserDbDataManager.
@@ -387,6 +415,32 @@ namespace Content.Server.Preferences.Managers
             return loginType.HasStaticUserId();
         }
 
+        // Forge-Change-start
+        private async Task RunProfileSlotLocked(NetUserId userId, int slot, Func<Task> action)
+        {
+            var gate = _profileSlotLocks.GetOrAdd((userId, slot), _ => new SemaphoreSlim(1, 1));
+            await gate.WaitAsync();
+            try
+            {
+                await action();
+            }
+            finally
+            {
+                gate.Release();
+            }
+        }
+
+        private void ProfileUpdateRateLimited(ICommonSession session)
+        {
+            if (_cfg.GetCVar(CCVars.ProfileUpdateRateLimitDisconnect))
+                session.Channel.Disconnect("Too many character profile update requests.");
+        }
+
+        private void ProfileUpdateRateLimitAlertAdmins(ICommonSession session)
+        {
+            _chat.SendAdminAlert($"Player {session.Name} is spamming character profile updates.");
+        }
+        // Forge-Change-end
         private sealed class PlayerPrefData
         {
             public bool PrefsLoaded;

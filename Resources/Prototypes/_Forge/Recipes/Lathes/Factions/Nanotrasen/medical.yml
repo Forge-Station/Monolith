@@ -1,0 +1,74 @@
+- type: latheRecipe
+  id: OmnizineChemistryBottle
+  result: OmnizineChemistryBottle
+  parent: BioGenFoodRecipe
+  completetime: 5 
+  materials:
+    Biomass: 100
+    Glass: 30
+    
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: Hypospray
+  result: Hypospray
+  completetime: 4
+  materials:
+    Steel: 3000
+    Silver: 2500
+    Gold: 2500
+    Plastic: 3000
+    UraniumDepleted: 100
+    
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: HypoBrigmedic
+  result: HypoBrigmedic
+  completetime: 3
+  materials:
+    Steel: 1500
+    Silver: 1000
+    Gold: 1000
+    Plastic: 1500
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: HypoMiniLimitedEdition
+  result: HypoMiniLimitedEdition
+  completetime: 3
+  materials:
+    Steel: 2000
+    Silver: 1500
+    Gold: 1500
+    Plastic: 2000
+    
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CentCommHypo
+  result: CentCommHypo
+  completetime: 5
+  materials:
+    Steel: 4000
+    Silver: 3000
+    Gold: 3000
+    Plastic: 4000
+    UraniumDepleted: 300
+    
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: MedicatedSuture
+  result: MedicatedSuture
+  completetime: 3
+  materials:
+    Steel: 3250
+    Plastic: 3250
+    
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: RegenerativeMesh
+  result: RegenerativeMesh
+  completetime: 3
+  materials:
+    Glass: 3250
+    Plastic: 3250
+    
+

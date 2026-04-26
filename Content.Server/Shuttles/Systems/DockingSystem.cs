@@ -469,8 +469,7 @@ namespace Content.Server.Shuttles.Systems
             var shuttleUid = Transform(console.Value).GridUid;
             var otherShuttleUid = Transform(targetDock.Value).GridUid; // Mono
 
-            // Mono - check both grids
-            if (!CanShuttleDock(shuttleUid) || !CanShuttleDock(otherShuttleUid))
+            if (!CanShuttleDock(shuttleUid)) // Forge-Change
             {
                 _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"));
                 return;

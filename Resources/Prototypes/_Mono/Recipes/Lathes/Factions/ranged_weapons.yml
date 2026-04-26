@@ -476,10 +476,12 @@
   - Ballistic
   - Weapons
   materials:
-    Steel: 1200
+    Steel: 2500 # Forge-change
     Plasteel: 2000
-    Plastic: 1200
-    Uranium: 500
+    Plastic: 2500 # Forge-change
+    Plasma: 3000 # Forge-change
+    Uranium: 2000 # Forge-change
+    UraniumDepleted: 200 # Forge-change
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -490,10 +492,10 @@
   - Ballistic
   - Weapons
   materials:
-    Steel: 800
-    Plasteel: 1500
-    Plastic: 800
-    Uranium: 300
+    Steel: 3000 # Forge-change
+    Plasteel: 4500 # Forge-change
+    Plastic: 2000 # Forge-change
+    Uranium: 1000 # Forge-change
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong

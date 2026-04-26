@@ -387,8 +387,15 @@
 
 - type: latheRecipe
   id: ClothingOuterHardsuitSecurity
-  parent: NFBaseHardSuitArmoredRecipe
+  parent: MonoHardsuitT1Recipe # Forge-change
   result: ClothingOuterHardsuitSecurity
+  materials:
+    Glass: 5000
+    Plastic: 2000
+    Plasteel: 3000
+    Durathread: 2000
+    Silver: 1000
+    Gold: 2000
 
 - type: latheRecipe
   id: ClothingOuterHardsuitWarden

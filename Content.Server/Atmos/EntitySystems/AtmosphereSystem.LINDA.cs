@@ -150,12 +150,20 @@ namespace Content.Server.Atmos.EntitySystems
         /// <param name="tile">Tile Atmosphere to be activated.</param>
         private void AddActiveTile(GridAtmosphereComponent gridAtmosphere, TileAtmosphere tile)
         {
-            if (tile.Air == null || tile.Excited)
+            if (tile.Air == null)
                 return;
 
-            tile.Excited = true;
             var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
-            AddChunkTile(gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
+            if (tile.Excited)
+            {
+                // Incremental chunk scheduling can surface stale run items; keep set membership consistent.
+                if (!gridAtmosphere.ActiveTiles.Contains(tile))
+                    AddChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile); // Forge-Change
+                return;
+            }
+
+            tile.Excited = true;
+            AddChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile); // Forge-Change
         }
 
         /// <summary>
@@ -166,6 +174,28 @@ namespace Content.Server.Atmos.EntitySystems
         /// <param name="disposeExcitedGroup">Whether to dispose of the tile's <see cref="ExcitedGroup"/></param>
         private void RemoveActiveTile(GridAtmosphereComponent gridAtmosphere, TileAtmosphere tile, bool disposeExcitedGroup = true)
         {
+            var inActiveSet = gridAtmosphere.ActiveTiles.Contains(tile);
+            if (tile.Excited != inActiveSet)
+            {
+                var chunkIndex = GetAtmosChunk(tile.GridIndices);
+                if (tile.Excited)
+                {
+                    var addChunkState = GetOrCreateChunkState(gridAtmosphere, chunkIndex);
+                    AddChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, addChunkState.ActiveTiles, tile); // Forge-Change
+                    inActiveSet = true;
+                }
+                else if (TryGetChunkState(gridAtmosphere, chunkIndex, out var removeChunkState) && removeChunkState != null)
+                {
+                    RemoveChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, removeChunkState.ActiveTiles, tile); // Forge-Change
+                    inActiveSet = false;
+                }
+                else
+                {
+                    gridAtmosphere.ActiveTiles.Remove(tile);
+                    inActiveSet = false;
+                }
+            }
+
             DebugTools.Assert(tile.Excited == gridAtmosphere.ActiveTiles.Contains(tile));
             DebugTools.Assert(tile.Excited || tile.ExcitedGroup == null);
 
@@ -174,7 +204,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             tile.Excited = false;
             if (TryGetChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
-                RemoveChunkTile(gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
+                RemoveChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
             else
                 gridAtmosphere.ActiveTiles.Remove(tile);
 

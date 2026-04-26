@@ -120,3 +120,30 @@
     pack: CompanyVendInventoryUSSP
   - type: AccessReader
     requiredCompany: USSP
+
+- type: entity
+  parent: [VendingMachineAstroVend, BaseStructureDisableToolUse, BaseStructureAccessReaderImmuneToEmag]
+  id: VendingMachineNanotrasen
+  name: Nanotrasen Vendor
+  suffix: Централ
+  description: Sells various Nanotrasen equipment.
+  components:
+  - type: VendingMachine
+    pack: VendingInventoryNT
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: MarketModifier
+    mod: 8
+  - type: Sprite
+    sprite: Forge/Structures/Machines/terminal_nt.rsi
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: panel
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+  - type: AccessReader
+    access: [["Command"]]

@@ -17,7 +17,6 @@
   displayWeight: 10
   assignedCompany: Renegates
   canBeAntag: false
-  setPreference: true
   access:
   - Renegate
   accessGroups:

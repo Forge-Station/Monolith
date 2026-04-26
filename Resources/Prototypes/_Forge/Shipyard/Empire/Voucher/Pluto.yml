@@ -5,9 +5,9 @@
   parent: BaseVessel
   name: CWH Плутон
   description: В космосе нет морей, но морской царь все еще опасен
-  purchasable: true
+  purchasable: false
   limit: 1
-  price: 2
+  price: 318000
   category: Large
   group: Empire
   access: Empire

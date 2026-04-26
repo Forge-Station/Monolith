@@ -4,10 +4,10 @@
   id: Hermes
   parent: BaseVessel
   name: Elite Scout "Гермес"
-  description: Крайне быстрый и маневренный истребитель Империи. Вооружен двумя ЭМИ-пушками и 6 лазерами "фаланга" на каждый борт.
-  purchasable: true
+  description: "Крайне быстрый и маневренный истребитель Империи. Вооружен двумя ЭМИ-пушками и 6 малыми лазерами на каждый борт."
+  purchasable: false
   limit: 1
-  price: 2
+  price: 82000
   category: Large
   group: Empire
   access: Empire

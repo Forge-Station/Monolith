@@ -5,9 +5,9 @@
   parent: BaseVessel
   name: CWH Теритт
   description: Капитальное судно войны Империи с тяжелой броней
-  purchasable: true
+  purchasable: false
   limit: 1
-  price: 2
+  price: 959400
   category: Large
   group: Empire
   access: Empire

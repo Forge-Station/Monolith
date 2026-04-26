@@ -5,9 +5,9 @@
   parent: BaseVessel
   name: CWH Миррко
   description: Большой военный шаттл Империи с тяжелым вооружением на борту.
-  purchasable: true
+  purchasable: false
   limit: 1
-  price: 2
+  price: 380000
   category: Large
   group: Empire
   access: Empire

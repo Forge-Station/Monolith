@@ -1,15 +1,22 @@
 using System.Numerics;
+using Content.Shared._Mono.CCVar; // Forge-Change
 using Content.Shared._Mono.Radar;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
+using Robust.Shared.Configuration; // Forge-Change
 using Robust.Shared.Map;
+using Robust.Shared.Player; // Forge-Change
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Timing;
+using Robust.Shared.Network; // Forge-Change
 
 namespace Content.Server._Mono.Radar;
 
 public sealed partial class RadarBlipSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _cfg = default!; // Forge-Change
+    [Dependency] private readonly IGameTiming _timing = default!; // Forge-Change
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
@@ -19,6 +26,7 @@ public sealed partial class RadarBlipSystem : EntitySystem
     private readonly List<EntityUid> _tempSourcesCache = new();
     private readonly List<BlipConfig> _tempPaletteCache = new();
     private readonly Dictionary<BlipConfig, ushort> _paletteIndex = new();
+    private readonly Dictionary<NetUserId, TimeSpan> _lastRequestByUser = new(); // Forge-Change
 
     public override void Initialize()
     {
@@ -29,6 +37,17 @@ public sealed partial class RadarBlipSystem : EntitySystem
 
     private void OnBlipsRequested(RequestBlipsEvent ev, EntitySessionEventArgs args)
     {
+        // Forge-Change-start
+        var userId = args.SenderSession.UserId;
+        var now = _timing.CurTime;
+        var delay = TimeSpan.FromSeconds(_cfg.GetCVar(MonoCVars.RadarBlipRequestDelay));
+        if (_lastRequestByUser.TryGetValue(userId, out var lastRequest) &&
+            now - lastRequest < delay)
+        {
+            return;
+        }
+        _lastRequestByUser[userId] = now;
+        // Forge-Change-end
         if (!TryGetEntity(ev.Radar, out var radarUid)
             || !TryComp<RadarConsoleComponent>(radarUid, out var radar)
         )

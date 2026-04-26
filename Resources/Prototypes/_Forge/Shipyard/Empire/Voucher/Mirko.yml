@@ -6,7 +6,7 @@
   name: CWH Миррко
   description: Большой военный шаттл Империи с тяжелым вооружением на борту.
   purchasable: false
-  limit: 1
+  limit: 3
   price: 380000
   category: Large
   group: Empire

@@ -3,7 +3,7 @@
 - type: vessel
   id: Pluto
   parent: BaseVessel
-  name: CWH Плутон
+  name: CWH Нептун
   description: В космосе нет морей, но морской царь все еще опасен
   purchasable: false
   limit: 1
@@ -20,15 +20,15 @@
 
 - type: gameMap
   id: Pluto
-  mapName: 'CWH Плутон'
-  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Terit.yml
+  mapName: 'CWH Нептун'
+  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Pluto.yml
   minPlayers: 0
   stations:
     Pluto:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'CWH Плутон SEW{1}'
+          mapNameTemplate: 'CWH Нептун SEW{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

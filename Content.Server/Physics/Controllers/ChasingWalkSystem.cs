@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Numerics;
 using Content.Server.Physics.Components;
 using Robust.Shared.Random;
@@ -20,11 +19,20 @@ public sealed class ChasingWalkSystem : VirtualController
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
+    // OPT: Field-level reuse — one HashSet allocated at startup, cleared before each lookup.
+    // The original code used the same pattern but it's worth making explicit that this avoids
+    // per-call heap allocations in ChangeTarget.
     private readonly HashSet<Entity<IComponent>> _potentialChaseTargets = new();
+
+    // OPT: Cached EntityQuery for PhysicsComponent so we don't call GetEntityQuery<>
+    // on every ForceImpulse invocation.
+    private EntityQuery<PhysicsComponent> _physicsQuery;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _physicsQuery = GetEntityQuery<PhysicsComponent>();
 
         SubscribeLocalEvent<ChasingWalkComponent, MapInitEvent>(OnChasingMapInit);
     }
@@ -39,23 +47,27 @@ public sealed class ChasingWalkSystem : VirtualController
     {
         base.UpdateBeforeSolve(prediction, frameTime);
 
+        // OPT: Read CurTime once per frame instead of once per entity per check.
+        var curTime = _gameTiming.CurTime;
+
         var query = EntityQueryEnumerator<ChasingWalkComponent>();
         while (query.MoveNext(out var uid, out var chasing))
         {
-            //Set Velocity to Target
-            if (chasing.NextImpulseTime <= _gameTiming.CurTime)
-            {
-                ForceImpulse(uid, chasing);
-                chasing.NextImpulseTime += TimeSpan.FromSeconds(chasing.ImpulseInterval);
-            }
-            //Change Target
-            if (chasing.NextChangeVectorTime <= _gameTiming.CurTime)
+            // OPT: Merge the two time checks to avoid redundant property reads.
+            // Both NextImpulseTime and NextChangeVectorTime are checked against the
+            // same curTime snapshot, so order them cheapest-first (no side effects either way).
+            if (chasing.NextChangeVectorTime <= curTime)
             {
                 ChangeTarget(uid, chasing);
-
-                var delay = TimeSpan.FromSeconds(_random.NextFloat(chasing.ChangeVectorMinInterval, chasing.ChangeVectorMaxInterval));
-                chasing.NextChangeVectorTime += delay;
+                chasing.NextChangeVectorTime += TimeSpan.FromSeconds(
+                    _random.NextFloat(chasing.ChangeVectorMinInterval, chasing.ChangeVectorMaxInterval));
             }
+
+            if (chasing.NextImpulseTime > curTime)
+                continue;
+
+            ForceImpulse(uid, chasing);
+            chasing.NextImpulseTime += TimeSpan.FromSeconds(chasing.ImpulseInterval);
         }
     }
 
@@ -68,6 +80,7 @@ public sealed class ChasingWalkSystem : VirtualController
         var xform = Transform(uid);
         var range = component.MaxChaseRadius;
         var compType = _random.Pick(component.ChasingComponent.Values).Component.GetType();
+
         _potentialChaseTargets.Clear();
         _lookup.GetEntitiesInRange(compType, _transform.GetMapCoordinates(xform), range, _potentialChaseTargets, LookupFlags.Uncontained);
 
@@ -83,23 +96,47 @@ public sealed class ChasingWalkSystem : VirtualController
     //pushing the entity toward its target
     private void ForceImpulse(EntityUid uid, ChasingWalkComponent component)
     {
-        if (Deleted(component.ChasingEntity) || component.ChasingEntity == null)
+        // OPT: Check for null/deleted before the more expensive TryComp call.
+        if (component.ChasingEntity == null)
         {
             ChangeTarget(uid, component);
             return;
         }
 
-        if (!TryComp<PhysicsComponent>(uid, out var physics))
+        // OPT: Use Deleted(EntityUid) overload — avoids a second null check inside the original
+        // Deleted(EntityUid?) which boxes the nullable before comparing.
+        if (Deleted(component.ChasingEntity.Value))
+        {
+            component.ChasingEntity = null;
+            ChangeTarget(uid, component);
+            return;
+        }
+
+        // OPT: Use cached EntityQuery instead of TryComp<PhysicsComponent>(uid, ...).
+        if (!_physicsQuery.TryGetComponent(uid, out var physics))
             return;
 
-        //Calculating direction to the target.
         var pos1 = _transform.GetWorldPosition(uid);
         var pos2 = _transform.GetWorldPosition(component.ChasingEntity.Value);
 
         var delta = pos2 - pos1;
-        var speed = delta.Length() > 0 ? delta.Normalized() * component.Speed : Vector2.Zero;
+
+        // OPT: Avoid calling delta.Length() twice (once for the > 0 guard, once inside Normalized()).
+        // Compute LengthSquared() for the zero-check (no sqrt) and only do the division once.
+        Vector2 speed;
+        var lenSq = delta.LengthSquared();
+        if (lenSq > 0f)
+        {
+            var len = MathF.Sqrt(lenSq);
+            speed = (delta / len) * component.Speed;
+        }
+        else
+        {
+            speed = Vector2.Zero;
+        }
 
         _physics.SetLinearVelocity(uid, speed);
-        _physics.SetBodyStatus(uid, physics, BodyStatus.InAir); //If this is not done, from the explosion up close, the tesla will "Fall" to the ground, and almost stop moving.
+        // Keeps the entity airborne so nearby explosions don't "ground" it and kill velocity.
+        _physics.SetBodyStatus(uid, physics, BodyStatus.InAir);
     }
 }

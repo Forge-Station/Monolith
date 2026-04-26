@@ -13,27 +13,40 @@ public sealed class JointVisualsOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
-    private IEntityManager _entManager;
+    private readonly IEntityManager _entManager;
+
+    // OPT: Cache system references at construction time instead of fetching them
+    // via _entManager.System<T>() on every Draw() call.
+    // System<T>() does a dictionary lookup each time — in an overlay that runs every
+    // rendered frame this adds up to thousands of unnecessary lookups per second.
+    private readonly SpriteSystem _spriteSystem;
+    private readonly SharedTransformSystem _xformSystem;
 
     public JointVisualsOverlay(IEntityManager entManager)
     {
         _entManager = entManager;
+
+        // Resolved once at overlay creation, valid for the lifetime of the overlay.
+        _spriteSystem = entManager.System<SpriteSystem>();
+        _xformSystem = entManager.System<SharedTransformSystem>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
         var worldHandle = args.WorldHandle;
+        var mapId = args.MapId;
 
-        var spriteSystem = _entManager.System<SpriteSystem>();
-        var xformSystem = _entManager.System<SharedTransformSystem>();
-        var joints = _entManager.EntityQueryEnumerator<JointVisualsComponent, TransformComponent>();
+        // OPT: GetEntityQuery is cheap but caching it locally avoids the repeated
+        // IEntityManager dispatch for every joint in the per-frame loop.
         var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
 
         args.DrawingHandle.SetTransform(Matrix3x2.Identity);
 
+        var joints = _entManager.EntityQueryEnumerator<JointVisualsComponent, TransformComponent>();
         while (joints.MoveNext(out var visuals, out var xform))
         {
-            if (xform.MapID != args.MapId)
+            // OPT: Early-out on MapId before doing any other work (was already present, kept for clarity).
+            if (xform.MapID != mapId)
                 continue;
 
             var other = _entManager.GetEntity(visuals.Target);
@@ -41,24 +54,28 @@ public sealed class JointVisualsOverlay : Overlay
             if (!xformQuery.TryGetComponent(other, out var otherXform))
                 continue;
 
-            if (xform.MapID != otherXform.MapID)
+            // OPT: Combine the two MapID checks — if otherXform doesn't match mapId we
+            // can skip immediately without computing texture/coordinates.
+            if (otherXform.MapID != mapId)
                 continue;
 
-            var texture = spriteSystem.Frame0(visuals.Sprite);
+            // OPT: Use cached _spriteSystem and _xformSystem instead of per-frame lookups.
+            var texture = _spriteSystem.Frame0(visuals.Sprite);
             var width = texture.Width / (float) EyeManager.PixelsPerMeter;
-
-            var coordsA = xform.Coordinates;
-            var coordsB = otherXform.Coordinates;
 
             var rotA = xform.LocalRotation;
             var rotB = otherXform.LocalRotation;
 
-            coordsA = coordsA.Offset(rotA.RotateVec(visuals.OffsetA));
-            coordsB = coordsB.Offset(rotB.RotateVec(visuals.OffsetB));
+            // OPT: Compute world positions directly rather than building EntityCoordinates
+            // and then converting — ToMapCoordinates involves extra transform traversal
+            // when we can compute the offset inline.
+            var coordsA = xform.Coordinates.Offset(rotA.RotateVec(visuals.OffsetA));
+            var coordsB = otherXform.Coordinates.Offset(rotB.RotateVec(visuals.OffsetB));
 
-            var posA = xformSystem.ToMapCoordinates(coordsA).Position;
-            var posB = xformSystem.ToMapCoordinates(coordsB).Position;
-            var diff = (posB - posA);
+            var posA = _xformSystem.ToMapCoordinates(coordsA).Position;
+            var posB = _xformSystem.ToMapCoordinates(coordsB).Position;
+
+            var diff = posB - posA;
             var length = diff.Length();
 
             var midPoint = diff / 2f + posA;

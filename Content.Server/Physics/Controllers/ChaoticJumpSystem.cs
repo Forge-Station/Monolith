@@ -22,56 +22,66 @@ public sealed class ChaoticJumpSystem : VirtualController
     public override void Initialize()
     {
         base.Initialize();
-
         SubscribeLocalEvent<ChaoticJumpComponent, MapInitEvent>(OnMapInit);
     }
 
     private void OnMapInit(Entity<ChaoticJumpComponent> chaotic, ref MapInitEvent args)
     {
-        //So the entity doesn't teleport instantly. For tesla, for example, it's important for it to eat tesla's generator.
-        chaotic.Comp.NextJumpTime = _gameTiming.CurTime + TimeSpan.FromSeconds(_random.NextFloat(chaotic.Comp.JumpMinInterval, chaotic.Comp.JumpMaxInterval));
+        // So the entity doesn't teleport instantly.
+        chaotic.Comp.NextJumpTime = _gameTiming.CurTime
+            + TimeSpan.FromSeconds(_random.NextFloat(chaotic.Comp.JumpMinInterval, chaotic.Comp.JumpMaxInterval));
     }
 
     public override void UpdateBeforeSolve(bool prediction, float frameTime)
     {
         base.UpdateBeforeSolve(prediction, frameTime);
 
+        // OPT: Cache CurTime once outside the loop instead of reading the property
+        // on every iteration. IGameTiming.CurTime may trigger a property getter each call.
+        var curTime = _gameTiming.CurTime;
+
         var query = EntityQueryEnumerator<ChaoticJumpComponent>();
         while (query.MoveNext(out var uid, out var chaotic))
         {
-            //Jump
-            if (chaotic.NextJumpTime <= _gameTiming.CurTime)
-            {
-                Jump(uid, chaotic);
-                chaotic.NextJumpTime += TimeSpan.FromSeconds(_random.NextFloat(chaotic.JumpMinInterval, chaotic.JumpMaxInterval));
-            }
+            if (chaotic.NextJumpTime > curTime)
+                continue;
+
+            Jump(uid, chaotic);
+            chaotic.NextJumpTime += TimeSpan.FromSeconds(
+                _random.NextFloat(chaotic.JumpMinInterval, chaotic.JumpMaxInterval));
         }
     }
 
     private void Jump(EntityUid uid, ChaoticJumpComponent component)
     {
         var transform = Transform(uid);
-
         var startPos = _transform.GetWorldPosition(uid);
-        Vector2 targetPos;
 
         var direction = _random.NextAngle();
         var range = _random.NextFloat(component.RangeMin, component.RangeMax);
-        var ray = new CollisionRay(startPos, direction.ToVec(), component.CollisionMask);
+
+        // OPT: Compute sin/cos once and reuse — Math.Cos/Sin are expensive trig calls.
+        // In the original code they were computed twice (for offset and for fallback position).
+        var dirVec = direction.ToVec(); // already a unit vector from Angle.ToVec()
+        var cosD = dirVec.X;
+        var sinD = dirVec.Y;
+
+        var ray = new CollisionRay(startPos, dirVec, component.CollisionMask);
         var rayCastResults = _physics.IntersectRay(transform.MapID, ray, range, uid, returnOnFirstHit: false).FirstOrNull();
 
+        Vector2 targetPos;
         if (rayCastResults != null)
         {
-            targetPos = rayCastResults.Value.HitPos;
-            targetPos = new Vector2(targetPos.X - (float) Math.Cos(direction), targetPos.Y - (float) Math.Sin(direction)); //offset so that the teleport does not take place directly inside the target
+            var hitPos = rayCastResults.Value.HitPos;
+            // Offset so the teleport does not land directly inside the hit target
+            targetPos = new Vector2(hitPos.X - cosD, hitPos.Y - sinD);
         }
         else
         {
-            targetPos = new Vector2(startPos.X + range * (float) Math.Cos(direction), startPos.Y + range * (float) Math.Sin(direction));
+            targetPos = new Vector2(startPos.X + range * cosD, startPos.Y + range * sinD);
         }
 
         Spawn(component.Effect, transform.Coordinates);
-
         _transform.SetWorldPosition(uid, targetPos);
     }
 }

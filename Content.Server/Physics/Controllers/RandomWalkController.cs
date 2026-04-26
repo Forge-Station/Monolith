@@ -23,9 +23,18 @@ internal sealed class RandomWalkController : VirtualController
     [Dependency] private readonly PhysicsSystem _physics = default!;
     #endregion Dependencies
 
+    // OPT: Pre-cache component queries to avoid repeated GetEntityQuery<> calls in the hot loop.
+    private EntityQuery<ActorComponent> _actorQuery;
+    private EntityQuery<ThrownItemComponent> _thrownQuery;
+    private EntityQuery<FollowerComponent> _followerQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _actorQuery = GetEntityQuery<ActorComponent>();
+        _thrownQuery = GetEntityQuery<ThrownItemComponent>();
+        _followerQuery = GetEntityQuery<FollowerComponent>();
 
         SubscribeLocalEvent<RandomWalkComponent, ComponentStartup>(OnRandomWalkStartup);
     }
@@ -40,15 +49,20 @@ internal sealed class RandomWalkController : VirtualController
     {
         base.UpdateBeforeSolve(prediction, frameTime);
 
+        // OPT: Read CurTime once per frame. IGameTiming.CurTime involves a getter call;
+        // doing it inside the loop would cost one property dispatch per entity.
+        var curTime = _timing.CurTime;
+
         var query = EntityQueryEnumerator<RandomWalkComponent, PhysicsComponent>();
         while (query.MoveNext(out var uid, out var randomWalk, out var physics))
         {
-            if (EntityManager.HasComponent<ActorComponent>(uid)
-            ||  EntityManager.HasComponent<ThrownItemComponent>(uid)
-            ||  EntityManager.HasComponent<FollowerComponent>(uid))
+            // OPT: Use cached EntityQuery<T>.HasComponent instead of EntityManager.HasComponent<T>.
+            // EntityManager.HasComponent goes through an extra virtual dispatch layer.
+            if (_actorQuery.HasComponent(uid)
+            ||  _thrownQuery.HasComponent(uid)
+            ||  _followerQuery.HasComponent(uid))
                 continue;
 
-            var curTime = _timing.CurTime;
             if (randomWalk.NextStepTime <= curTime)
                 Update(uid, randomWalk, physics);
         }
@@ -62,19 +76,29 @@ internal sealed class RandomWalkController : VirtualController
     /// <param name="physics">The physics body associated with the random walker.</param>
     public void Update(EntityUid uid, RandomWalkComponent? randomWalk = null, PhysicsComponent? physics = null)
     {
-        if(!Resolve(uid, ref randomWalk))
+        if (!Resolve(uid, ref randomWalk))
             return;
 
+        // OPT: Read CurTime once and reuse.
         var curTime = _timing.CurTime;
-        randomWalk.NextStepTime = curTime + TimeSpan.FromSeconds(_random.NextDouble(randomWalk.MinStepCooldown.TotalSeconds, randomWalk.MaxStepCooldown.TotalSeconds));
-        if(!Resolve(uid, ref physics))
+        randomWalk.NextStepTime = curTime + TimeSpan.FromSeconds(
+            _random.NextDouble(randomWalk.MinStepCooldown.TotalSeconds, randomWalk.MaxStepCooldown.TotalSeconds));
+
+        if (!Resolve(uid, ref physics))
             return;
 
         var pushVec = _random.NextAngle().ToVec();
         pushVec += randomWalk.BiasVector;
-        pushVec.Normalize();
+
+        // OPT: Normalize only if the vector has meaningful length to avoid a NaN from normalizing zero.
+        // Also avoid calling Vector2.Normalize (returns a new value) — mutate in place.
+        var vecLen = pushVec.Length();
+        if (vecLen > 1e-6f)
+            pushVec /= vecLen;
+
         if (randomWalk.ResetBiasOnWalk)
-            randomWalk.BiasVector *= 0f;
+            randomWalk.BiasVector = Vector2.Zero; // OPT: Assign zero constant rather than multiply by 0f.
+
         var pushStrength = _random.NextFloat(randomWalk.MinSpeed, randomWalk.MaxSpeed);
 
         _physics.SetLinearVelocity(uid, physics.LinearVelocity * randomWalk.AccumulatorRatio + pushVec * pushStrength, body: physics);
@@ -91,6 +115,7 @@ internal sealed class RandomWalkController : VirtualController
         if (comp.StepOnStartup)
             Update(uid, comp);
         else
-            comp.NextStepTime = _timing.CurTime + TimeSpan.FromSeconds(_random.NextDouble(comp.MinStepCooldown.TotalSeconds, comp.MaxStepCooldown.TotalSeconds));
+            comp.NextStepTime = _timing.CurTime + TimeSpan.FromSeconds(
+                _random.NextDouble(comp.MinStepCooldown.TotalSeconds, comp.MaxStepCooldown.TotalSeconds));
     }
 }

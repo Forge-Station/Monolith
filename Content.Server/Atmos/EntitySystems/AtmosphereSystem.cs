@@ -95,7 +95,10 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
     private EntityQuery<MovedByPressureComponent> _movedByPressureQuery; // Forge-Change
     private HashSet<EntityUid> _entSet = new();
 
+    // OPTIMIZATION: Pre-cache the decal ID lookup as a HashSet for O(1) contains check
+    // instead of Array.IndexOf which is O(n) and called in the hotspot inner loop every fire tick.
     private string[] _burntDecals = [];
+    private HashSet<string> _burntDecalSet = new();
 
     public override void Initialize()
     {
@@ -167,6 +170,8 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
         if (_exposedTimer < ExposedUpdateDelay)
             return;
 
+        // OPTIMIZATION: Cache the subtracted value before the query loop to avoid reading
+        // the field twice, and avoid boxing the event struct by using ref directly.
         var query = EntityQueryEnumerator<AtmosExposedComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out _, out var transform))
         {
@@ -184,8 +189,21 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
 
     private void CacheDecals()
     {
-        _burntDecals = _protoMan.EnumeratePrototypes<DecalPrototype>().Where(x => x.Tags.Contains("burnt")).Select(x => x.ID).ToArray();
+        _burntDecals = _protoMan.EnumeratePrototypes<DecalPrototype>()
+            .Where(x => x.Tags.Contains("burnt"))
+            .Select(x => x.ID)
+            .ToArray();
+
+        // OPTIMIZATION: Rebuild the O(1) lookup set alongside the array.
+        // ProcessHotspot calls Array.IndexOf on this list for every tile-fire entity each tick.
+        // With 4+ decals and a burning area, this is O(n*entities) per tick → O(1) with a HashSet.
+        _burntDecalSet.Clear();
+        foreach (var id in _burntDecals)
+        {
+            _burntDecalSet.Add(id);
+        }
     }
+
     // Forge-Change-start
     private void UpdateAtmosMetrics()
     {

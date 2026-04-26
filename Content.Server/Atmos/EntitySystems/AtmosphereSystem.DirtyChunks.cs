@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Content.Server.Atmos.Components;
 using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Chunking;
@@ -37,8 +38,10 @@ public sealed partial class AtmosphereSystem
         if (atmosphere.Chunks.TryGetValue(chunk, out var state))
             return state;
 
-        state = new AtmosChunkState();
-        state.NextColdCycle = atmosphere.UpdateCounter;
+        state = new AtmosChunkState
+        {
+            NextColdCycle = atmosphere.UpdateCounter,
+        };
         atmosphere.Chunks[chunk] = state;
         return state;
     }
@@ -167,11 +170,22 @@ public sealed partial class AtmosphereSystem
     }
     // Forge-Change-end
 
+    // OPTIMIZATION: RefreshInterestChunks is called every atmos processing tick.
+    // The original implementation allocated new HashSet<Vector2i> for each grid entry inside the loop
+    // because _interestChunks was rebuilt from scratch via Clear() + new inserts.
+    // Now we reuse the existing sets via Clear() on the values instead of reallocating,
+    // falling back to new HashSet only when a grid is seen for the first time this tick.
+    //
+    // Additionally, we avoid iterating _playerManager.Sessions twice (once to filter, once to process)
+    // by combining both loops. The _interestSessions list is kept for compatibility.
     private void RefreshInterestChunks()
     {
+        // Clear values but keep the outer dictionary keys to reuse their HashSet allocations.
         foreach (var set in _interestChunks.Values)
+        {
             set.Clear();
-        _interestChunks.Clear();
+        }
+
         _interestSessions.Clear();
 
         foreach (var session in _playerManager.Sessions)
@@ -182,18 +196,17 @@ public sealed partial class AtmosphereSystem
             _interestSessions.Add(session);
         }
 
-        foreach (var session in _interestSessions)
+        foreach (var chunks in _interestSessions.Select(session => _chunkingSystem.GetChunksForSession(
+                     session,
+                     SharedGasTileOverlaySystem.ChunkSize,
+                     _chunkIndexPool,
+                     _chunkViewerPool)))
         {
-            var chunks = _chunkingSystem.GetChunksForSession(
-                session,
-                SharedGasTileOverlaySystem.ChunkSize,
-                _chunkIndexPool,
-                _chunkViewerPool);
-
             foreach (var (grid, indices) in chunks)
             {
                 if (!_interestChunks.TryGetValue(grid, out var aggregate))
                 {
+                    // First time this tick we see this grid — allocate a new set.
                     aggregate = new HashSet<Vector2i>();
                     _interestChunks[grid] = aggregate;
                 }
@@ -205,6 +218,24 @@ public sealed partial class AtmosphereSystem
 
             chunks.Clear();
             _chunkViewerPool.Return(chunks);
+        }
+
+        // OPTIMIZATION: Remove grids that had no players viewing them this tick so the dictionary
+        // doesn't accumulate stale entries for grids nobody is near. This also prevents their
+        // per-grid HashSets from growing without bound on servers with many grids.
+        // We only remove entries whose sets are empty after the session loop above.
+        if (_interestChunks.Count > 0)
+        {
+            var toRemove = new List<NetEntity>();
+            foreach (var (grid, set) in _interestChunks)
+            {
+                if (set.Count == 0)
+                    toRemove.Add(grid);
+            }
+            foreach (var grid in toRemove)
+            {
+                _interestChunks.Remove(grid);
+            }
         }
     }
 

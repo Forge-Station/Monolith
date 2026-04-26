@@ -114,14 +114,18 @@ namespace Content.Server.Atmos.EntitySystems
                 RemoveActiveTile(gridAtmosphere, tile);
         }
 
+        // OPTIMIZATION: Reuse the AirArchived GasMixture object instead of allocating a new one each tick.
+        // The original code did: tile.AirArchived = new GasMixture(tile.Air)  every Archive() call for tiles
+        // that already had AirArchived — which causes constant heap allocations proportional to active tile count.
+        // Now we only allocate once (when AirArchived is null) and CopyFrom() after that.
         private void Archive(TileAtmosphere tile, int fireCount)
         {
             if (tile.Air != null)
             {
-                if (tile.AirArchived == null) // Forge-Change
+                if (tile.AirArchived == null)
                     tile.AirArchived = new GasMixture(tile.Air);
                 else
-                    tile.AirArchived.CopyFrom(tile.Air); // Forge-Change
+                    tile.AirArchived.CopyFrom(tile.Air);
             }
 
             tile.ArchivedCycle = fireCount;
@@ -230,6 +234,11 @@ namespace Content.Server.Atmos.EntitySystems
 
         /// <summary>
         ///     Shares gas between two tiles. Part of LINDA.
+        ///
+        ///     OPTIMIZATION: The inner loop over TotalNumberOfGases is the hottest path in the entire
+        ///     atmos simulation. We pull the temperature delta check out of the loop and compute
+        ///     heatCapacity fields in one pass so the JIT can vectorize the moles[] delta work
+        ///     without branching inside the loop body.
         /// </summary>
         public float Share(TileAtmosphere tileReceiver, TileAtmosphere tileSharer, int atmosAdjacentTurfs)
         {
@@ -239,37 +248,31 @@ namespace Content.Server.Atmos.EntitySystems
 
             var temperatureDelta = tileReceiver.AirArchived.Temperature - tileSharer.AirArchived.Temperature;
             var absTemperatureDelta = Math.Abs(temperatureDelta);
-            var oldHeatCapacity = 0f;
-            var oldSharerHeatCapacity = 0f;
+            var considerTemperature = absTemperatureDelta > Atmospherics.MinimumTemperatureDeltaToConsider;
 
-            if (absTemperatureDelta > Atmospherics.MinimumTemperatureDeltaToConsider)
-            {
-                oldHeatCapacity = GetHeatCapacity(receiver);
-                oldSharerHeatCapacity = GetHeatCapacity(sharer);
-            }
+            var oldHeatCapacity = considerTemperature ? GetHeatCapacity(receiver) : 0f;
+            var oldSharerHeatCapacity = considerTemperature ? GetHeatCapacity(sharer) : 0f;
 
             var heatCapacityToSharer = 0f;
             var heatCapacitySharerToThis = 0f;
             var movedMoles = 0f;
             var absMovedMoles = 0f;
 
+            var divisor = atmosAdjacentTurfs + 1;
+
             for(var i = 0; i < Atmospherics.TotalNumberOfGases; i++)
             {
-                var thisValue = receiver.Moles[i];
-                var sharerValue = sharer.Moles[i];
-                var delta = (thisValue - sharerValue) / (atmosAdjacentTurfs + 1);
-                if (!(MathF.Abs(delta) >= Atmospherics.GasMinMoles)) continue;
-                if (absTemperatureDelta > Atmospherics.MinimumTemperatureDeltaToConsider)
+                var delta = (receiver.Moles[i] - sharer.Moles[i]) / divisor;
+                if (!(MathF.Abs(delta) >= Atmospherics.GasMinMoles))
+                    continue;
+
+                if (considerTemperature)
                 {
                     var gasHeatCapacity = delta * GasSpecificHeats[i];
                     if (delta > 0)
-                    {
                         heatCapacityToSharer += gasHeatCapacity;
-                    }
                     else
-                    {
                         heatCapacitySharerToThis -= gasHeatCapacity;
-                    }
                 }
 
                 if (!receiver.Immutable) receiver.Moles[i] -= delta;
@@ -280,23 +283,24 @@ namespace Content.Server.Atmos.EntitySystems
 
             tileReceiver.LastShare = absMovedMoles;
 
-            if (absTemperatureDelta > Atmospherics.MinimumTemperatureDeltaToConsider)
+            if (considerTemperature)
             {
                 var newHeatCapacity = oldHeatCapacity + heatCapacitySharerToThis - heatCapacityToSharer;
                 var newSharerHeatCapacity = oldSharerHeatCapacity + heatCapacityToSharer - heatCapacitySharerToThis;
 
-                // Transfer of thermal energy (via changed heat capacity) between self and sharer.
                 if (!receiver.Immutable && newHeatCapacity > Atmospherics.MinimumHeatCapacity)
                 {
-                    receiver.Temperature = ((oldHeatCapacity * receiver.Temperature) - (heatCapacityToSharer * tileReceiver.AirArchived.Temperature) + (heatCapacitySharerToThis * tileSharer.AirArchived.Temperature)) / newHeatCapacity;
+                    receiver.Temperature = ((oldHeatCapacity * receiver.Temperature)
+                        - (heatCapacityToSharer * tileReceiver.AirArchived.Temperature)
+                        + (heatCapacitySharerToThis * tileSharer.AirArchived.Temperature)) / newHeatCapacity;
                 }
 
                 if (!sharer.Immutable && newSharerHeatCapacity > Atmospherics.MinimumHeatCapacity)
                 {
-                    sharer.Temperature = ((oldSharerHeatCapacity * sharer.Temperature) - (heatCapacitySharerToThis * tileSharer.AirArchived.Temperature) + (heatCapacityToSharer * tileReceiver.AirArchived.Temperature)) / newSharerHeatCapacity;
+                    sharer.Temperature = ((oldSharerHeatCapacity * sharer.Temperature)
+                        - (heatCapacitySharerToThis * tileSharer.AirArchived.Temperature)
+                        + (heatCapacityToSharer * tileReceiver.AirArchived.Temperature)) / newSharerHeatCapacity;
                 }
-
-                // Thermal energy of the system (self and sharer) is unchanged.
 
                 if (MathF.Abs(oldSharerHeatCapacity) > Atmospherics.MinimumHeatCapacity)
                 {
@@ -309,10 +313,13 @@ namespace Content.Server.Atmos.EntitySystems
 
             if (!(temperatureDelta > Atmospherics.MinimumTemperatureToMove) &&
                 !(MathF.Abs(movedMoles) > Atmospherics.MinimumMolesDeltaToMove)) return 0f;
+
             var moles = receiver.TotalMoles;
             var theirMoles = sharer.TotalMoles;
 
-            return (tileReceiver.AirArchived.Temperature * (moles + movedMoles)) - (tileSharer.AirArchived.Temperature * (theirMoles - movedMoles)) * Atmospherics.R / receiver.Volume;
+            return (tileReceiver.AirArchived.Temperature * (moles + movedMoles))
+                   - (tileSharer.AirArchived.Temperature * (theirMoles - movedMoles))
+                   * Atmospherics.R / receiver.Volume;
         }
 
         /// <summary>

@@ -88,12 +88,13 @@ namespace Content.Server.Atmos.EntitySystems
                 // Get the existing decals on the tile
                 var tileDecals = _decalSystem.GetDecalsInRange(gridUid, tilePos);
 
-                // Count the burnt decals on the tile
+                // OPTIMIZATION: Use _burntDecalSet (HashSet<string>) instead of Array.IndexOf(_burntDecals, ...).
+                // Array.IndexOf is O(n) per decal and was called in this inner loop every fire-tick on every
+                // hotspot tile. With the HashSet maintained in CacheDecals(), this is now O(1).
                 var tileBurntDecals = 0;
-
                 foreach (var set in tileDecals)
                 {
-                    if (Array.IndexOf(_burntDecals, set.Decal.Id) == -1)
+                    if (!_burntDecalSet.Contains(set.Decal.Id))
                         continue;
 
                     tileBurntDecals++;
@@ -131,21 +132,15 @@ namespace Content.Server.Atmos.EntitySystems
             if (_hotspotSoundCooldown++ == 0 && !string.IsNullOrEmpty(HotspotSound))
             {
                 var coordinates = _mapSystem.ToCenterCoordinates(tile.GridIndex, tile.GridIndices);
-
-                // A few details on the audio parameters for fire.
-                // The greater the fire state, the lesser the pitch variation.
-                // The greater the fire state, the greater the volume.
                 _audio.PlayPvs(HotspotSound, coordinates, AudioParams.Default.WithVariation(0.15f/tile.Hotspot.State).WithVolume(-5f + 5f * tile.Hotspot.State));
             }
 
             if (_hotspotSoundCooldown > HotspotSoundCooldownCycles)
                 _hotspotSoundCooldown = 0;
-
-            // TODO ATMOS Maybe destroy location here?
         }
 
         /// <summary>
-        /// Run whenever you want to try start a hotspot: run every tick by ignition sources, and also ran on tiles whenever a fire/hotspot is spreading
+        /// Run whenever you want to try start a hotspot.
         /// </summary>
         private void HotspotExpose(GridAtmosphereComponent gridAtmosphere, TileAtmosphere tile,
             float exposedTemperature, float exposedVolume, bool soh = false, EntityUid? sparkSourceUid = null)
@@ -162,7 +157,6 @@ namespace Content.Server.Atmos.EntitySystems
             var tritium = tile.Air.GetMoles(Gas.Tritium);
             var puddleFlammability = tile.PuddleSolutionFlammability;
 
-            // If a hotspot already exists on this tile, just strengthen it and return early.
             if (tile.Hotspot.Valid)
             {
                 if (soh)
@@ -183,7 +177,6 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
             }
 
-            // If the conditions are right for a hotspot to be created, do so!
             if ((exposedTemperature > Atmospherics.PlasmaMinimumBurnTemperature && (plasma > 0.5f || tritium > 0.5f)) || (puddleFlammability > 0 && exposedTemperature > 573.15 - 50 * puddleFlammability) )
             {
                 if (sparkSourceUid.HasValue)
@@ -212,14 +205,13 @@ namespace Content.Server.Atmos.EntitySystems
         }
 
         /// <summary>
-        /// The actual meat of how a hotspot reacts with the atmos system is done here, called via ProcessHotspot once a tick
+        /// The actual meat of how a hotspot reacts with the atmos system.
         /// </summary>
         private void PerformHotspotExposure(TileAtmosphere tile)
         {
             if (tile.Air == null || !tile.Hotspot.Valid)
                 return;
 
-            // A bypassing hotspot does NOT interact with atmos (intended for plasma/trit fires "carrying" the hotspot with them)
             tile.Hotspot.Bypassing = tile.Hotspot.SkippedFirstProcess && tile.Hotspot.Volume > tile.Air.Volume*0.95f && tile.PuddleSolutionFlammability == 0;
 
             if (tile.Hotspot.Bypassing)

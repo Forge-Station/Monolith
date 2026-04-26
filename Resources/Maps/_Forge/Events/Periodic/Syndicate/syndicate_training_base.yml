@@ -5355,9 +5355,6 @@ entities:
         1188:
           position: 2,0
           _rotation: South
-        invalid:
-          position: 2,3
-          _rotation: South
         1194:
           position: 7,1
           _rotation: South
@@ -5436,7 +5433,6 @@ entities:
           - 1192
           - 1193
           - 1188
-          - invalid
           - 1194
           - 1195
           - 1197

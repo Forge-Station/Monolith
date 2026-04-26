@@ -494,16 +494,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: SalvageMobRestrictionsGrid
-      mobsToKill:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
 - proto: AirAlarm
   entities:
   - uid: 213

@@ -43,3 +43,6 @@
     WeaponDP29: 4294967295 # Infinite
     # RDServerUSSPFlatpack: 2 # Forge-change
     FactionLatheFlatpack: 2
+    RubberStampUSSP: 4294967295 # Infinite
+    RDServerUSSPFlatpack: 4294967295 # Infinite
+    MercenaryTechFabFlatpack: 4294967295 # Infinite

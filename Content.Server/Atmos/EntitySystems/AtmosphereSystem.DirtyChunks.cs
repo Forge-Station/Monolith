@@ -43,6 +43,7 @@ public sealed partial class AtmosphereSystem
         return state;
     }
 
+    // Forge-Change-start
     private static AtmosChunkWorkFlags CalculateChunkWorkFlags(AtmosChunkState state)
     {
         var flags = AtmosChunkWorkFlags.None;
@@ -73,6 +74,7 @@ public sealed partial class AtmosphereSystem
 
         atmosphere.DirtyChunkQueue.Enqueue(chunk);
     }
+    // Forge-Change-end
 
     private bool TryGetChunkState(GridAtmosphereComponent atmosphere, Vector2i chunk, out AtmosChunkState? state)
     {
@@ -91,18 +93,20 @@ public sealed partial class AtmosphereSystem
         var chunk = GetAtmosChunk(tile);
         var state = GetOrCreateChunkState(atmosphere, chunk);
         state.LastTouchedCycle = atmosphere.UpdateCounter;
-        EnqueueDirtyChunk(atmosphere, chunk);
+        EnqueueDirtyChunk(atmosphere, chunk); // Forge-Change
     }
 
     private void AddInvalidatedTile(GridAtmosphereComponent atmosphere, Vector2i tile)
     {
         atmosphere.InvalidatedCoords.Add(tile);
         TouchChunk(atmosphere, tile);
+        // Forge-Change-start
         var chunkIndex = GetAtmosChunk(tile);
         var chunkState = GetOrCreateChunkState(atmosphere, chunkIndex);
         chunkState.InvalidatedCoords.Add(tile);
         RefreshChunkWorkFlags(chunkState);
         EnqueueDirtyChunk(atmosphere, chunkIndex);
+        // Forge-Change-end
         MarkChunkHaloDirty(atmosphere, tile);
     }
 
@@ -116,29 +120,30 @@ public sealed partial class AtmosphereSystem
         {
             var neighbor = chunk + new Vector2i(-1, 0);
             GetOrCreateChunkState(atmosphere, neighbor).LastTouchedCycle = atmosphere.UpdateCounter;
-            EnqueueDirtyChunk(atmosphere, neighbor);
+            EnqueueDirtyChunk(atmosphere, neighbor); // Forge-Change
         }
         else if (localX == SharedGasTileOverlaySystem.ChunkSize - 1)
         {
             var neighbor = chunk + new Vector2i(1, 0);
             GetOrCreateChunkState(atmosphere, neighbor).LastTouchedCycle = atmosphere.UpdateCounter;
-            EnqueueDirtyChunk(atmosphere, neighbor);
+            EnqueueDirtyChunk(atmosphere, neighbor); // Forge-Change
         }
 
         if (localY == 0)
         {
             var neighbor = chunk + new Vector2i(0, -1);
             GetOrCreateChunkState(atmosphere, neighbor).LastTouchedCycle = atmosphere.UpdateCounter;
-            EnqueueDirtyChunk(atmosphere, neighbor);
+            EnqueueDirtyChunk(atmosphere, neighbor); // Forge-Change
         }
         else if (localY == SharedGasTileOverlaySystem.ChunkSize - 1)
         {
             var neighbor = chunk + new Vector2i(0, 1);
             GetOrCreateChunkState(atmosphere, neighbor).LastTouchedCycle = atmosphere.UpdateCounter;
-            EnqueueDirtyChunk(atmosphere, neighbor);
+            EnqueueDirtyChunk(atmosphere, neighbor); // Forge-Change
         }
     }
 
+    // Forge-Change-start
     private void AddChunkTile(GridAtmosphereComponent atmosphere, HashSet<TileAtmosphere> globalSet, HashSet<TileAtmosphere> chunkSet, TileAtmosphere tile)
     {
         globalSet.Add(tile);
@@ -160,6 +165,7 @@ public sealed partial class AtmosphereSystem
             EnqueueDirtyChunk(atmosphere, chunkIndex);
         }
     }
+    // Forge-Change-end
 
     private void RefreshInterestChunks()
     {

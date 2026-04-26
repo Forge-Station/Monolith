@@ -53,7 +53,7 @@ namespace Content.Server.Atmos.EntitySystems
         ///     Check current execution time every n instances processed.
         /// </summary>
         private const int InvalidCoordinatesLagCheckIterations = 50;
-        private const int ColdChunkBackstopPerRun = 8;
+        private const int ColdChunkBackstopPerRun = 8; // Forge-Change
 
         private int _currentRunAtmosphereIndex;
         private bool _simulationPaused;
@@ -106,6 +106,7 @@ namespace Content.Server.Atmos.EntitySystems
             Superconductivity,
         }
 
+        // Forge-Change-start
         private static bool ChunkHasWorkForType(AtmosChunkState chunkState, ChunkRunType type)
         {
             return type switch
@@ -194,6 +195,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             atmosphere.CurrentRunChunkIndex = 0;
         }
+        // Forge-Change-end
 
         private void BeginRunTilesFromChunks(
             GridAtmosphereComponent atmosphere,
@@ -274,9 +276,11 @@ namespace Content.Server.Atmos.EntitySystems
                     }
 
                     chunk.InvalidatedCoords.Clear();
+                    // Forge-Change-start
                     RefreshChunkWorkFlags(chunk);
                     if (chunk.WorkFlags != AtmosChunkWorkFlags.None)
                         EnqueueDirtyChunk(atmosphere, chunkIndex);
+                    // Forge-Change-end
                 }
 
                 atmosphere.InvalidatedCoords.Clear();
@@ -362,6 +366,7 @@ namespace Content.Server.Atmos.EntitySystems
                 if (!connected)
                 {
                     RemoveActiveTile(atmos, tile);
+                    // Forge-Change-start
                     if (TryGetChunkState(atmos, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
                     {
                         RemoveChunkTile(atmos, atmos.HotspotTiles, chunk.HotspotTiles, tile);
@@ -374,6 +379,7 @@ namespace Content.Server.Atmos.EntitySystems
                         atmos.HighPressureDelta.Remove(tile);
                         atmos.SuperconductivityTiles.Remove(tile);
                     }
+                    // Forge-Change-end
                     atmos.Tiles.Remove(tile.GridIndices);
                 }
             }
@@ -647,10 +653,12 @@ namespace Content.Server.Atmos.EntitySystems
                 tile.LastPressureDirection = tile.PressureDirection;
                 tile.PressureDirection = AtmosDirection.Invalid;
                 tile.PressureSpecificTarget = null;
+                // Forge-Change-start
                 if (TryGetChunkState(atmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
                     RemoveChunkTile(atmosphere, atmosphere.HighPressureDelta, chunk.HighPressureTiles, tile);
                 else
                     atmosphere.HighPressureDelta.Remove(tile);
+                // Forge-Change-end
                 processed++; // Forge-Change
 
                 if (number++ < LagCheckIterations)

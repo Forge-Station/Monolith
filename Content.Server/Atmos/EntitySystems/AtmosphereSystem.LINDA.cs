@@ -158,12 +158,12 @@ namespace Content.Server.Atmos.EntitySystems
             {
                 // Incremental chunk scheduling can surface stale run items; keep set membership consistent.
                 if (!gridAtmosphere.ActiveTiles.Contains(tile))
-                    AddChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
+                    AddChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile); // Forge-Change
                 return;
             }
 
             tile.Excited = true;
-            AddChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
+            AddChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile); // Forge-Change
         }
 
         /// <summary>
@@ -181,12 +181,12 @@ namespace Content.Server.Atmos.EntitySystems
                 if (tile.Excited)
                 {
                     var addChunkState = GetOrCreateChunkState(gridAtmosphere, chunkIndex);
-                    AddChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, addChunkState.ActiveTiles, tile);
+                    AddChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, addChunkState.ActiveTiles, tile); // Forge-Change
                     inActiveSet = true;
                 }
                 else if (TryGetChunkState(gridAtmosphere, chunkIndex, out var removeChunkState) && removeChunkState != null)
                 {
-                    RemoveChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, removeChunkState.ActiveTiles, tile);
+                    RemoveChunkTile(gridAtmosphere, gridAtmosphere.ActiveTiles, removeChunkState.ActiveTiles, tile); // Forge-Change
                     inActiveSet = false;
                 }
                 else

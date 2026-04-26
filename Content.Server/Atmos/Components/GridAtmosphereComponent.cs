@@ -2,7 +2,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.Atmos.Serialization;
 using Content.Server.NodeContainer.NodeGroups;
-using System;
+using System; // Forge-Change
 
 namespace Content.Server.Atmos.Components
 {
@@ -32,6 +32,7 @@ namespace Content.Server.Atmos.Components
         [ViewVariables]
         public readonly Dictionary<Vector2i, AtmosChunkState> Chunks = new(64);
 
+        // Forge-Change-start
         [ViewVariables]
         public readonly Queue<Vector2i> DirtyChunkQueue = new(64);
 
@@ -40,6 +41,7 @@ namespace Content.Server.Atmos.Components
 
         [ViewVariables]
         public int ColdChunkCursor;
+        // Forge-Change-end
 
         private HashSet<TileAtmosphere>? _mapTiles; // Forge-Change
 
@@ -157,6 +159,7 @@ namespace Content.Server.Atmos.Components
         [ViewVariables]
         public int LastTouchedCycle;
 
+        // Forge-Change-start
         [ViewVariables]
         public AtmosChunkWorkFlags WorkFlags;
     }
@@ -171,4 +174,5 @@ namespace Content.Server.Atmos.Components
         Hotspot = 1 << 3,
         Superconductivity = 1 << 4,
     }
+    // Forge-Change-end
 }

@@ -127,3 +127,6 @@ ent-SuitStorageEVANfsd = { ent-SuitStorageBase }
 ent-SuitStorageEVAChaplain = { ent-SuitStorageBase }
     .suffix = ЕВА, Священник
     .desc = { ent-SuitStorageBase.desc }
+ent-SuitStorageLeaderERT = { ent-SuitStorageBase }
+    .suffix = Скафандр, НТ
+    .desc = { ent-SuitStorageBase.desc }

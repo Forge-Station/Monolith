@@ -1,0 +1,57 @@
+- type: latheRecipePack
+  id: NanotrasenClothing
+  recipes:
+  - ClothingUniformJumpsuitSec
+  - ClothingUniformJumpskirtSec
+  - ClothingUniformJumpsuitSeniorOfficer
+  - ClothingUniformJumpskirtSeniorOfficer
+  - ClothingUniformJumpsuitHoS
+  - ClothingUniformJumpskirtHoS
+  - ClothingUniformJumpsuitHoSAlt
+  - ClothingUniformJumpskirtHoSAlt
+  - ClothingUniformJumpskirtHosFormal
+  - ClothingUniformJumpsuitHosFormal
+  - ClothingUniformJumpsuitERTSecurity
+  - ClothingUniformJumpsuitERTMedic
+  - ClothingUniformJumpsuitERTMailCarrier
+  - ClothingUniformJumpsuitERTEngineer
+  - ClothingUniformJumpsuitERTJanitor
+  - ClothingUniformJumpsuitERTChaplain
+  - ClothingHeadHatBeretHoS
+  - ClothingHeadHatHoshat
+  - ClothingUniformJumpsuitATU
+  
+- type: latheRecipePack
+  id: NanotrasenEquipment
+  recipes:
+  - ClothingHeadHelmetJustice
+  - ClothingHeadHelmetERTSecurity
+  - ClothingHeadHelmetERTMedic
+  - ClothingHeadHelmetERTMailCarrier
+  - ClothingHeadHelmetERTEngineer
+  - ClothingHeadHelmetERTJanitor
+  - ClothingOuterWinterHoS
+  - ClothingOuterCoatHoSTrench
+  - ClothingOuterHardsuitSecurityRed
+  - ClothingOuterHardsuitSecurity
+  - ClothingOuterHardsuitERTSecurity
+  - ClothingMaskGasERT  
+  - ClothingBackpackERTSecurity
+  - ClothingBackpackERTMedical
+  - ClothingBackpackERTChaplain
+  - ClothingBackpackERTMailCarrier 
+  - ClothingBackpackERTEngineer
+  - ClothingBackpackERTJanitor
+  - ClothingBackpackDuffelCBURN
+  - ClothingOuterHardsuitERTChaplain
+  - ClothingOuterHardsuitERTMedical
+  - ClothingOuterHardsuitERTJanitor
+  - ClothingOuterHardsuitCBURN
+  - ClothingOuterHardsuitERTEngineer
+  - ClothingOuterHardsuitERTMailCarrier
+  
+- type: latheRecipePack
+  id: TTIEquipment
+  recipes:  
+  - ClothingOuterHardsuitTrauma
+  - ClothingOuterHardsuitTraumaLeader

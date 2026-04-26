@@ -8,6 +8,6 @@
     sprite: Forge/Clothing/Uniforms/Jumpsuits/ui.rsi
   - type: Clothing
     sprite: Forge/Clothing/Uniforms/Jumpsuits/ui.rsi
-  - type: StaticPrise
+  - type: StaticPrice
     priсe: 30
     vendPriсe: 200

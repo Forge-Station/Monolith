@@ -44,7 +44,7 @@ public sealed class RadioDeviceSystem : EntitySystem
 
     // Frontier: minimum, maximum radio frequencies
     private const int MinRadioFrequency = 1000;
-    private const int MaxRadioFrequency = 3000;
+    private const int MaxRadioFrequency = 30000;
 
     public override void Initialize()
     {

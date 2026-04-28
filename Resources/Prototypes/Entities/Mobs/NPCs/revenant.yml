@@ -84,5 +84,5 @@
       Acidic: [Touch]
   #<Forge>
   - type: TTS # Corvax-TTS
-    voice: Chen
+    voice: Glados
   #</Forge>

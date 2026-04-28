@@ -51,6 +51,7 @@
       - id: WeaponOverseerMace # Mono
       - id: PhoneInstrumentHigh # Mono
       - id: WeaponCaseShortBombCollar # Mono
+      - id: ClothingEyesNTGlasses # Forge-change
 
 - type: entity
   id: LockerNfsdSheriffFilled

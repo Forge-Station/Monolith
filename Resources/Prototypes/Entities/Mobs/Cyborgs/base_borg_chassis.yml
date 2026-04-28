@@ -271,7 +271,7 @@
   - type: SpeechSynthesis # Corvax-Frontier-Barks
     voice: BarksCitadelSynthetic2 # Corvax-Frontier-Barks
   - type: TTS # Corvax-TTS
-    voice: TrainingRobot
+    voice: Glados
   # <Forge>
   # <Mono>
   - type: ToggleableSignature

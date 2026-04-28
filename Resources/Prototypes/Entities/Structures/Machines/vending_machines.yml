@@ -142,7 +142,7 @@
     repairCost: 10
   #<Forge>
   - type: TTS # Corvax-TTS
-    voice: TrainingRobot
+    voice: Glados
   #<Forge>
 
 - type: entity

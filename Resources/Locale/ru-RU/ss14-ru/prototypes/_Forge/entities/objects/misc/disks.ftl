@@ -16,3 +16,6 @@ ent-DisciplinesDiskVG = диск технологий VG
 ent-DisciplinesDiskUllman = диск технологий U.I.
     .desc = Диск для сервера РНД, содержащий в себе технологии Ullman I.
     .suffix = DoNotMap
+ent-DisciplinesDiskNanotrasen = диск технологий НТ
+    .desc = Диск для сервера РНД, содержащий в себе технологии НТ.
+    .suffix = DoNotMap

@@ -19,77 +19,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: EngineeringTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
-  name: engineering techfab
-  description: Prints equipment and circuitboards for use by engineering department.
-  components:
-  - type: Sprite
-    sprite: Structures/Machines/techfab.rsi
-    layers:
-    - state: icon
-      map: ["enum.LatheVisualLayers.IsRunning"]
-    - state: engi
-    - state: unlit
-      shader: unshaded
-      map: ["enum.PowerDeviceVisualLayers.Powered"]
-    - state: inserting
-      map: ["enum.MaterialStorageVisualLayers.Inserting"]
-    - state: panel
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
-  - type: Machine
-    board: EngineeringTechFabCircuitboard
-  - type: Lathe
-    idleState: icon
-    runningState: icon
-    staticPacks:
-    - SharedBoardsStatic
-    - EngineeringBoardsStatic
-    - CircuitFloorsStatic
-    - ToolsStatic
-    - PartsStatic
-    - AtmosStatic
-    - CablesStatic
-    - MaterialsStatic
-    - LightsStatic
-    - PowerCellsStatic
-    - ElectronicsStatic
-    - MiscSignallersStatic
-    - NailgunStatic
-    - NailsStatic
-    dynamicPacks:
-    - ConstructionBagOfHolding
-    - AdvancedTools
-    - AtmosTools
-    - EngineeringWeapons
-    - PowerCells
-    - Equipment
-    # - ServiceWeapons
-    - SpecOpsGoogles
-    - EngineeringBoards
-    - SharedBoards
-    - CameraBoards
-    - ShuttleBoards
-    - ShuttleBoardsGoob
-    - BluespaceTheory
-    - ScienceClothing
-    - UpgradeKits
-  - type: EmagLatheRecipes
-    emagStaticPacks:
-    - NailgunEvilStatic
-    emagDynamicPacks:
-    - SecurityBoards # TF2 reference, go build fucking turrets
-    - MiningBoards
-  - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
-
-- type: entity
   id: CargoTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
+  parent: BaseLatheLube
   name: cargo techfab
   description: Prints equipment and circuitboards for use by cargo department.
   components:
@@ -125,7 +56,6 @@
     - Mining
     - PowerCells
     - Equipment
-    # - ServiceWeapons
     - MiningWeapons
     - MiningBoards
     - MiningUpgrades
@@ -134,14 +64,12 @@
     - SpecOpsGoogles
     - CargoBoards
     - SharedBoards
-    - ShuttleBoards
-    - ShuttleBoardsGoob
     - BluespaceTheory
     - ScienceClothing
     - ConstructionBagOfHolding
   - type: EmagLatheRecipes
     emagStaticPacks:
-    - SalvageExplosivesStatic # Seismic charges - they're pretty cheap in salvage vendor anyway so why not
+    - SalvageExplosivesStatic
     emagDynamicPacks:
     - SecurityExplosives
   - type: MaterialStorage
@@ -153,7 +81,7 @@
 
 - type: entity
   id: ScienceTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
+  parent: BaseLatheLube
   name: science techfab
   description: Prints equipment and circuitboards for use by science department.
   components:
@@ -179,8 +107,6 @@
     - SharedBoardsStatic
     - EngineeringBoardsStatic
     - CircuitFloorsStatic
-    - MedicalBoardsStatic
-    - MedicalBoardsStaticGoob
     - ToolsStatic
     - PartsStatic
     - AtmosStatic
@@ -192,8 +118,6 @@
     - ElectronicsStatic
     - SurgeryStatic
     - ScienceBoardsStatic
-    - ScienceExplosives # Goobstation - Roundstart Grenade Tech
-    - GrenadeTriggersStatic # Goobstation - Roundstart Grenade Tech
     - MiscSignallersStatic
     dynamicPacks:
     - AdvancedTools
@@ -206,87 +130,22 @@
     - Chemistry
     - Janitor
     - Equipment
-    # - ServiceWeapons
     - Surgery
     - SpecOpsGoogles
     - EngineeringBoards
     - SharedBoards
     - ScienceBoards
-    - ShuttleBoards
-    - ShuttleBoardsGoob
-    - MedicalBoardsGoob
     - BluespaceTheory
-    - ExperimentalScienceGoob
     - MechBoardsScience
     - Pinpointers
     - Genetics
-    # Einstein Engines Packs
     - Translators
     - TranslatorImplanters
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - MechBoardsSecurity
     - MechBoardsCargo
-    - MechBoardsCivilian # Evil ass traitor scientist in a honker... with a rocket launcher because the honker is emagged too.
-  - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
-
-- type: entity
-  id: ServiceTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
-  name: service techfab
-  description: Prints equipment and circuitboards for use by service department.
-  components:
-  - type: Sprite
-    sprite: Structures/Machines/techfab.rsi
-    layers:
-    - state: icon
-      map: ["enum.LatheVisualLayers.IsRunning"]
-    - state: service
-    - state: unlit
-      shader: unshaded
-      map: ["enum.PowerDeviceVisualLayers.Powered"]
-    - state: inserting
-      map: ["enum.MaterialStorageVisualLayers.Inserting"]
-    - state: panel
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
-  - type: Machine
-    board: ServiceTechFabCircuitboard
-  - type: Lathe
-    idleState: icon
-    runningState: icon
-    staticPacks:
-    - ServiceBoardsStatic
-    - MaterialsStatic
-    - LightsStatic
-    - ServiceStatic
-    - PowerCellsStatic
-    - LatheMiscStatic
-    - ChemistryStatic
-    - TapeRecorderStatic
-    - CondimentStatic
-    dynamicPacks:
-    - Janitor
-    - Instruments
-    - FauxTiles
-    # - ServiceWeapons
-    - MedicalMisc
     - MechBoardsCivilian
-    - MechWeaponsCivilian
-    - ServiceBoards
-    - SharedBoards
-    - CameraBoards
-    - ServiceTools
-    - ServiceBoardsGoob # goob
-    # Einstein Engines Packs
-    - Translators
-  - type: EmagLatheRecipes
-    emagStaticPacks:
-    - ServiceBoardsEvilStatic # Donk Co microwave circiutboard
   - type: MaterialStorage
     whitelist:
       tags:

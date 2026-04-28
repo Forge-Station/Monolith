@@ -20,13 +20,4 @@
     back: ClothingBackpackSatchel
     id: RadioHostPDA
 
-- type: chameleonOutfit
-  id: RadioHostChameleonOutfit
-  job: RadioHost
-  equipment:
-    eyes: ClothingEyesGlassesCheapSunglasses
-    ear: ClothingHeadsetAltRadioHost
-    jumpsuit: ClothingUniformJumpsuitHawaiBlack
-    shoes: ClothingShoesColorBlack
-    id: RadioHostPDA
 

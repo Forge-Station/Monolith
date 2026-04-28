@@ -112,7 +112,7 @@
 #Robo
 
 - type: entity
-  parent: AirlockRobotics
+  parent: AirlockServiceLocked
   id: AirlockRoboticsLocked
   suffix: Robotics, Locked
   components:

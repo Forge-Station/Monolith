@@ -79,7 +79,6 @@ public sealed partial class IdCardConsoleComponent : Component
         "Security",
         "Sergeant", // Frontier
         "Service",
-<<<<<<< HEAD
         "StationTrafficController", // Frontier
         "TsfmcEngineering", // Forge Change
         //"USSP", // Mono

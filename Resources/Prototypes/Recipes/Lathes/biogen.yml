@@ -249,5 +249,12 @@
   materials:
     Biomass: 18
 
+- type: latheRecipe  # Forge-Change-Comp
+  id: NFBioGenEveryspiceSeeds  
+  parent: BioGenSeedsRecipe  
+  result: EveryspiceSeeds  
+  icon:  
+    sprite: _NF/Objects/Specific/Hydroponics/everyspice.rsi
+    state: seed
 
 

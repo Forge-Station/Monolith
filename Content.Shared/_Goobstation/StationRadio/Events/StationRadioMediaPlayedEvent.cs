@@ -1,7 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Serialization;
 
-namespace Content.Goobstation.Shared.StationRadio.Events;
+namespace Content.Shared._Goobstation.StationRadio.Events;
 
 [Serializable, NetSerializable]
 public sealed class StationRadioMediaPlayedEvent : EntityEventArgs

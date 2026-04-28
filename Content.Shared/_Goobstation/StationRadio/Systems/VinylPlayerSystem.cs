@@ -1,5 +1,5 @@
-using Content.Goobstation.Shared.StationRadio.Components;
-using Content.Goobstation.Shared.StationRadio.Events;
+using Content.Shared._Goobstation.StationRadio.Components;
+using Content.Shared._Goobstation.StationRadio.Events;
 using Content.Shared.Destructible;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Power;
@@ -9,7 +9,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 
-namespace Content.Goobstation.Shared.StationRadio.Systems;
+namespace Content.Shared._Goobstation.StationRadio.Systems;
 
 public sealed class VinylPlayerSystem : EntitySystem
 {

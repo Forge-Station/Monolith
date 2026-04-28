@@ -1,12 +1,12 @@
-using Content.Goobstation.Shared.StationRadio.Components;
-using Content.Goobstation.Shared.StationRadio.Events;
+using Content.Shared._Goobstation.StationRadio.Components;
+using Content.Shared._Goobstation.StationRadio.Events;
 using Content.Shared.Interaction;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Goobstation.Shared.StationRadio.Systems;
+namespace Content.Shared._Goobstation.StationRadio.Systems;
 
 public sealed class StationRadioReceiverSystem : EntitySystem
 {

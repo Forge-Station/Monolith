@@ -12,9 +12,13 @@ job-name-diplomat = Дипломат TSF
 job-name-exec = Исполнительный доступ
 job-name-governmentman = Человек в костюме
 
+# Misc
+job-name-radiohost = Радиоведущий
+
 # Role timers
 JobNavyOfficer = Офицер Зимнего Солнцестояния
 JobNavyOfficerUndercover = Оперативник Зимнего Солнцестояния
 JobNavyCaptain = Капитан Зимнего Солнцестояния
 JobDiplomat = Дипломат TSF
 JobGovernmentMan = Человек в костюме
+JobRadioHost = Радиоведущий

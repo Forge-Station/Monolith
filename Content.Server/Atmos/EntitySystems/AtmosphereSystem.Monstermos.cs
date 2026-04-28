@@ -516,7 +516,7 @@ namespace Content.Server.Atmos.EntitySystems
                 if (otherTile?.Air == null) { continue;}
                 if (otherTile.MonstermosInfo.CurrentTransferDirection == AtmosDirection.Invalid) continue;
                 var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(otherTile.GridIndices));
-                AddChunkTile(gridAtmosphere.HighPressureDelta, chunk.HighPressureTiles, otherTile);
+                AddChunkTile(gridAtmosphere, gridAtmosphere.HighPressureDelta, chunk.HighPressureTiles, otherTile); // Forge-Change
                 AddActiveTile(gridAtmosphere, otherTile);
                 var otherTile2 = otherTile.AdjacentTiles[otherTile.MonstermosInfo.CurrentTransferDirection.ToIndex()];
                 if (otherTile2?.Air == null)

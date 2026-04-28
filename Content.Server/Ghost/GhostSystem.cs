@@ -28,9 +28,11 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Players.RateLimiting; // Forge-Change
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Tag;
+using Content.Server.Players.RateLimiting; // Forge-Change
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -75,6 +77,9 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
         [Dependency] private readonly SponsorManager _sponsors = default!; // Forge-Change
         [Dependency] private readonly GhostSpriteStateSystem _ghostState = default!;
+        [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!; // Forge-Change
+
+        private const string InvalidGhostRequestRateLimitKey = "GhostInvalidRequests"; // Forge-Change
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -85,7 +90,15 @@ namespace Content.Server.Ghost
 
             _ghostQuery = GetEntityQuery<GhostComponent>();
             _physicsQuery = GetEntityQuery<PhysicsComponent>();
-
+            // Forge-Change-start
+            _rateLimit.Register(InvalidGhostRequestRateLimitKey,
+                new RateLimitRegistration(CCVars.GhostInvalidRequestRateLimitPeriod,
+                    CCVars.GhostInvalidRequestRateLimitCount,
+                    OnInvalidGhostRequestRateLimited,
+                    CCVars.GhostInvalidRequestRateLimitAnnounceAdminsDelay,
+                    OnInvalidGhostRequestAlertAdmins)
+            );
+            // Forge-Change-end
             SubscribeLocalEvent<GhostComponent, ComponentStartup>(OnGhostStartup);
             SubscribeLocalEvent<GhostComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<GhostComponent, ComponentShutdown>(OnGhostShutdown);
@@ -287,7 +300,7 @@ namespace Content.Server.Ghost
                 || !ghost.CanReturnToBody
                 || !TryComp(attached, out ActorComponent? actor))
             {
-                Log.Warning($"User {args.SenderSession.Name} sent an invalid {nameof(GhostReturnToBodyRequest)}");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} sent an invalid {nameof(GhostReturnToBodyRequest)}"); // Forge-Change
                 return;
             }
 
@@ -301,7 +314,7 @@ namespace Content.Server.Ghost
             if (args.SenderSession.AttachedEntity is not {Valid: true} entity
                 || !_ghostQuery.HasComp(entity))
             {
-                Log.Warning($"User {args.SenderSession.Name} sent a {nameof(GhostWarpsRequestEvent)} without being a ghost.");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} sent a {nameof(GhostWarpsRequestEvent)} without being a ghost."); // Forge-Change
                 return;
             }
 
@@ -328,7 +341,7 @@ namespace Content.Server.Ghost
             if (args.SenderSession.AttachedEntity is not {Valid: true} attached
                 || !_ghostQuery.HasComp(attached))
             {
-                Log.Warning($"User {args.SenderSession.Name} tried to warp to {msg.Target} without being a ghost.");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to warp to {msg.Target} without being a ghost."); // Forge-Change
                 return;
             }
 
@@ -336,7 +349,7 @@ namespace Content.Server.Ghost
 
             if (!Exists(target))
             {
-                Log.Warning($"User {args.SenderSession.Name} tried to warp to an invalid entity id: {msg.Target}");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to warp to an invalid entity id: {msg.Target}"); // Forge-Change
                 return;
             }
 
@@ -345,7 +358,7 @@ namespace Content.Server.Ghost
                 TryComp<WarpPointComponent>(target, out var warpPoint) &&
                 warpPoint.AdminOnly)
             {
-                Log.Warning($"User {args.SenderSession.Name} tried to warp to an admin-only warp point: {msg.Target}");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to warp to an admin-only warp point: {msg.Target}"); // Forge-Change
                 _adminLog.Add(LogType.Action, LogImpact.Medium, $"{EntityManager.ToPrettyString(attached):player} tried to warp to admin warp point {EntityManager.ToPrettyString(msg.Target)}");
                 return;
             }
@@ -359,7 +372,7 @@ namespace Content.Server.Ghost
             if (args.SenderSession.AttachedEntity is not {} uid
                 || !_ghostQuery.HasComp(uid))
             {
-                Log.Warning($"User {args.SenderSession.Name} tried to ghostnado without being a ghost.");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to ghostnado without being a ghost."); // Forge-Change
                 return;
             }
 
@@ -463,7 +476,26 @@ namespace Content.Server.Ghost
                 yield return new GhostWarp(GetNetEntity(attached), playerInfo, false);
             }
         }
+        // Forge-Change-start
+        private void HandleInvalidGhostRequest(EntitySessionEventArgs args, string message)
+        {
+            if (_rateLimit.CountAction(args.SenderSession, InvalidGhostRequestRateLimitKey) != RateLimitStatus.Allowed)
+                return;
 
+            Log.Warning(message);
+        }
+
+        private void OnInvalidGhostRequestRateLimited(ICommonSession session)
+        {
+            if (_configurationManager.GetCVar(CCVars.GhostInvalidRequestRateLimitDisconnect))
+                session.Channel.Disconnect("Too many invalid ghost requests.");
+        }
+
+        private void OnInvalidGhostRequestAlertAdmins(ICommonSession session)
+        {
+            _chatManager.SendAdminAlert($"Player {session.Name} is spamming invalid ghost requests.");
+        }
+        // Forge-Change-end
         #endregion
 
         private void OnEntityStorageInsertAttempt(EntityUid uid, GhostComponent comp, ref InsertIntoEntityStorageAttemptEvent args)

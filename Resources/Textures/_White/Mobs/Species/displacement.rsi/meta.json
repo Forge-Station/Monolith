@@ -17,7 +17,11 @@
     {
         "name": "jumpsuit-female",
         "directions": 4
-      },
+    },
+    {
+      "name": "outerclothing",
+      "directions": 4
+    },
     {
       "name": "shoes",
       "directions" : 4

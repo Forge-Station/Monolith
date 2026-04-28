@@ -97,19 +97,10 @@ namespace Content.Server.Database
                 throw new NotImplementedException();
             }
 
-            var oldProfile = db.DbContext.Profile
-                .Include(p => p.Preference)
+            var oldProfile = await db.DbContext.Profile // Forge-Change
                 .Where(p => p.Preference.UserId == userId.UserId)
-                .Include(p => p.Jobs)
-                .Include(p => p.Antags)
-                .Include(p => p.Traits)
-                .Include(p => p.Loadouts)
-                    .ThenInclude(l => l.Groups)
-                    .ThenInclude(group => group.Loadouts)
-                .AsSplitQuery()
-                .SingleOrDefault(h => h.Slot == slot);
+                .SingleOrDefaultAsync(h => h.Slot == slot); // Forge-Change
 
-            var newProfile = ConvertProfiles(humanoid, slot, oldProfile);
             if (oldProfile == null)
             {
                 var prefs = await db.DbContext
@@ -117,9 +108,26 @@ namespace Content.Server.Database
                     .Include(p => p.Profiles)
                     .SingleAsync(p => p.UserId == userId.UserId);
 
-                prefs.Profiles.Add(newProfile);
+                prefs.Profiles.Add(ConvertProfiles(humanoid, slot)); // Forge-Change
+                await db.DbContext.SaveChangesAsync(); // Forge-Change
+                return; // Forge-Change
             }
+            // Forge-Change-start
+            await db.DbContext.Set<Job>()
+                .Where(job => job.ProfileId == oldProfile.Id)
+                .ExecuteDeleteAsync();
+            await db.DbContext.Set<Antag>()
+                .Where(antag => antag.ProfileId == oldProfile.Id)
+                .ExecuteDeleteAsync();
+            await db.DbContext.Set<Trait>()
+                .Where(trait => trait.ProfileId == oldProfile.Id)
+                .ExecuteDeleteAsync();
+            await db.DbContext.Set<ProfileRoleLoadout>()
+                .Where(loadout => loadout.ProfileId == oldProfile.Id)
+                .ExecuteDeleteAsync();
 
+            ConvertProfiles(humanoid, slot, oldProfile);
+            // Forge-Change-end
             await db.DbContext.SaveChangesAsync();
         }
 
@@ -309,6 +317,13 @@ namespace Content.Server.Database
         private static Profile ConvertProfiles(HumanoidCharacterProfile humanoid, int slot, Profile? profile = null)
         {
             profile ??= new Profile();
+            UpdateProfileScalarFields(humanoid, slot, profile); // Forge-Change
+            PopulateProfileRelations(humanoid, profile); // Forge-Change
+            return profile;
+        }
+
+        private static void UpdateProfileScalarFields(HumanoidCharacterProfile humanoid, int slot, Profile profile) // Forge-Change
+        {
             var appearance = (HumanoidCharacterAppearance) humanoid.CharacterAppearance;
             List<string> markingStrings = new();
             foreach (var marking in appearance.Markings)
@@ -339,7 +354,11 @@ namespace Content.Server.Database
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
             profile.Company = humanoid.Company;
+            profile.BarkVoice = humanoid.BarkVoice; // Corvax-Frontier-Barks
+        }
 
+        private static void PopulateProfileRelations(HumanoidCharacterProfile humanoid, Profile profile) // Forge-Change
+        {
             profile.Jobs.Clear();
             profile.Jobs.AddRange(
                 humanoid.JobPriorities
@@ -358,8 +377,6 @@ namespace Content.Server.Database
                 humanoid.TraitPreferences
                         .Select(t => new Trait {TraitName = t})
             );
-
-            profile.BarkVoice = humanoid.BarkVoice; // Corvax-Frontier-Barks
 
             profile.Loadouts.Clear();
 
@@ -391,8 +408,6 @@ namespace Content.Server.Database
 
                 profile.Loadouts.Add(dz);
             }
-
-            return profile;
         }
         #endregion
 

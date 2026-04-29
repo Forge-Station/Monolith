@@ -2,43 +2,6 @@
 # Pattern: nf_bluespace_grids_events.yml / events_bluespace.yml (Forge audio)
 
 - type: entity
-  id: ForgeBluespacePeriodicCave
-  parent: BaseStationEventShortDelay
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-bluespace-generic-ftl-start-announcement
-    startAudio:
-      path: /Audio/_Forge/Announcements/Events/oleg_bluespace_ship_arrival.ogg
-    warningAnnouncement: station-event-bluespace-generic-ftl-warning-announcement
-    endAnnouncement: station-event-bluespace-generic-ftl-end-announcement
-    endAudio:
-      path: /Audio/_Forge/Announcements/Events/oleg_bluespace_ship_leave.ogg
-    earliestStart: 20
-    weight: 1
-    duration: 1800
-    maxDuration: 2400
-    reoccurrenceDelay: 240
-  - type: BluespaceErrorRule
-    groups:
-      grid: !type:GridSpawnGroup
-        nameLoc:
-        - station-event-bluespace-name-Cave
-        minimumDistance: 5500
-        maximumDistance: 9500
-        addComponents:
-        - type: Gravity
-          enabled: true
-          inherent: true
-        - type: IFF
-        - type: LinkedLifecycleGridParent
-        - type: ProtectedGrid
-          preventArtifactTriggers: true
-        - type: PreventPilot
-        - type: ForceAnchor
-        paths:
-        - /Maps/_Forge/Events/Periodic/Caves/cave.yml
-
-- type: entity
   id: ForgeBluespacePeriodicDinoCaves
   parent: BaseStationEventShortDelay
   components:
@@ -115,46 +78,6 @@
         - /Maps/_Forge/Events/Periodic/Cult/Cult.yml
 
 - type: entity
-  id: ForgeBluespacePeriodicFederationMages
-  parent: BaseStationEventShortDelay
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-bluespace-generic-ftl-start-announcement
-    startAudio:
-      path: /Audio/_Forge/Announcements/Events/oleg_bluespace_ship_arrival.ogg
-    warningAnnouncement: station-event-bluespace-generic-ftl-warning-announcement
-    endAnnouncement: station-event-bluespace-generic-ftl-end-announcement
-    endAudio:
-      path: /Audio/_Forge/Announcements/Events/oleg_bluespace_ship_leave.ogg
-    earliestStart: 80
-    minimumPlayers: 10
-    weight: 1
-    duration: 1800
-    maxDuration: 2400
-    reoccurrenceDelay: 360
-  - type: BluespaceErrorRule
-    groups:
-      grid: !type:GridSpawnGroup
-        nameLoc:
-        - station-event-bluespace-name-UnidentifiedVessel
-        minimumDistance: 5500
-        maximumDistance: 9500
-        addComponents:
-        - type: Gravity
-          enabled: true
-          inherent: true
-        - type: IFF
-          color: "#E10F9B"
-        - type: Shuttle
-        - type: LinkedLifecycleGridParent
-        - type: ProtectedGrid
-          preventArtifactTriggers: true
-        - type: PreventPilot
-        - type: ForceAnchor
-        paths:
-        - /Maps/_Forge/Events/Periodic/Magic/shuttleFederationMages.yml
-
-- type: entity
   id: ForgeBluespacePeriodicMercenaryShuttle
   parent: BaseStationEventShortDelay
   components:
@@ -194,46 +117,6 @@
         - /Maps/_Forge/Events/Periodic/Mercenary/mercenary_shuttle.yml
     rewardAccounts:
       Nfsd: 1.0
-
-- type: entity
-  id: ForgeBluespacePeriodicSyndicateHells
-  parent: BaseStationEventShortDelay
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-bluespace-generic-ftl-start-announcement
-    startAudio:
-      path: /Audio/_Forge/Announcements/Events/oleg_bluespace_ship_arrival.ogg
-    warningAnnouncement: station-event-bluespace-generic-ftl-warning-announcement
-    endAnnouncement: station-event-bluespace-generic-ftl-end-announcement
-    endAudio:
-      path: /Audio/_Forge/Announcements/Events/oleg_bluespace_ship_leave.ogg
-    earliestStart: 80
-    minimumPlayers: 10
-    weight: 1
-    duration: 1800
-    maxDuration: 2400
-    reoccurrenceDelay: 360
-  - type: BluespaceErrorRule
-    groups:
-      grid: !type:GridSpawnGroup
-        nameLoc:
-        - station-event-bluespace-name-SyndicateWeaponsCache
-        minimumDistance: 5500
-        maximumDistance: 9500
-        addComponents:
-        - type: Gravity
-          enabled: true
-          inherent: true
-        - type: IFF
-          color: "#E10F9B"
-        - type: Shuttle
-        - type: LinkedLifecycleGridParent
-        - type: ProtectedGrid
-          preventArtifactTriggers: true
-        - type: PreventPilot
-        - type: ForceAnchor
-        paths:
-        - /Maps/_Forge/Events/Periodic/Syndicate/syndicate_hells.yml
 
 - type: entity
   id: ForgeBluespacePeriodicSyndieFTLIntercept

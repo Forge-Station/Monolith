@@ -7,4 +7,5 @@ ent-WeaponShotgunKammererPMC = ЧВК
 ent-WeaponShotgunEnforcerPMC = ЧВК
 ent-WeaponEnergyGunPMC = энергетическое оружие ЧВК
 ent-WeaponLaserCannonPMC = лазерная пушка ЧВК
-ent-WeaponDisablerSMGPMC = обездвиживатель-ПП ЧВК
+ent-WeaponDisablerSMGPMC = станнер-пулемёт (зарегистр.)
+    .desc = Усовершенствованное оружие, которое изнуряет органические цели, пока они не свалятся с ног. На рукояти есть надпись: «Только для авторизованного использования».

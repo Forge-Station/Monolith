@@ -1,10 +1,3 @@
-# Author Info
-# GitHub: starch70
-# Discord: _starch_
-
-# Maintainer Info
-# GitHub: ???
-# Discord: ???
 - type: pointOfInterest
   id: RenegateFortress
   parent: [BasePOI, BaseRepairablePOI]
@@ -13,16 +6,16 @@
   maximumDistance: 9500
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
-  gridPath: /Maps/_Forge/POI/renegates_base.yml
+  gridPath: /Maps/_Forge/POI/RenegateFortress.yml
   addComponents:
   - type: IFF
-    color: "#53377A"
+    color: "#8066a4"
     readOnly: true # mono
 
 - type: gameMap
   id: RenegateFortress
   mapName: 'Ренегатский Аванпост'
-  mapPath: /Maps/_Forge/POI/renegates_base.yml
+  mapPath: /Maps/_Forge/POI/RenegateFortress.yml
   minPlayers: 0
   stations:
     RenegateFortress:

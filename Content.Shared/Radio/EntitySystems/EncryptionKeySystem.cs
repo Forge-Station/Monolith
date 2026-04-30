@@ -75,6 +75,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             if (TryComp<EncryptionKeyComponent>(ent, out var key))
             {
                 component.Channels.UnionWith(key.Channels);
+                // Forge-Change: configurable encryption keys add a channel, but must not steal headset default from Common.
                 component.DefaultChannel ??= key.DefaultChannel;
             }
         }

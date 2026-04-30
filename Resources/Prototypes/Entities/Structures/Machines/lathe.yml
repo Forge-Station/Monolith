@@ -669,6 +669,7 @@
     - NFFloorTilesCarpet # Frontier
     - NFWallets # Frontier
     dynamicPacks: # Frontier
+    - NanotrasenClothing # Forge: AllTechPrintableTest only indexes dynamicPacks
     - NFPouches # Frontier
   - type: EmagLatheRecipes
     emagStaticPacks:

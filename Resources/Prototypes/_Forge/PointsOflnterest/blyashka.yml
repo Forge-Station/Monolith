@@ -1,0 +1,37 @@
+- type: pointOfInterest
+  id: Blyashka
+  parent: [BasePOI, BaseRepairablePOI]
+  name: 'Бляшка'
+  minimumDistance: 7500
+  maximumDistance: 9500
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed ]
+  spawnGroup: Required
+  gridPath: /Maps/_Forge/POI/blyashka.yml
+  addComponents:
+  - type: IFF
+    color: "#8066a4"
+    readOnly: true # mono
+
+- type: gameMap
+  id: Blyashka
+  mapName: 'Бляшка'
+  mapPath: /Maps/_Forge/POI/blyashka.yml
+  minPlayers: 0
+  stations:
+    Blyashka:
+      stationProto: StandardFrontierOutpost
+      gridComponents:
+      - type: VesselInfo
+        description: "Аванпост восставших бляшек, СССП"
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Бляшка'
+        - type: ExtraStationInformation
+          icon:
+            sprite: Forge/Structures/Decoration/banner.rsi
+            state: banner_renegate
+          stationSubtext: 'frontier-lobby-blyashka-subtext'
+          stationDescription: 'frontier-lobby-blyashka-description'
+        - type: StationDeadDropHintExempt
+        - type: TradeCrateWildcardDestination
+          valueMultiplier: 1.0 # Mono

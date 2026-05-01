@@ -1,0 +1,115 @@
+# Forge FSG shield generator research tiers — see shields-fsg.ftl
+
+# --- Civilian R&D (standard station / merc server): T1 + T2 ---
+
+- type: technology
+  id: ForgeFSGShieldsCivilianT1
+  name: research-technology-forge-fsg-shields-tier1
+  entityIcon: MachineShieldFSG100Circuitboard
+  discipline: CivilianServices
+  tier: 2
+  cost: 18000
+  recipeUnlocks:
+  - MachineShieldFSG90RCircuitboard
+  - MachineShieldFSG100Circuitboard
+  - MachineShieldFSG110PCircuitboard
+  technologyPrerequisites:
+  - Shuttlecraft
+  position: -5, 6
+
+- type: technology
+  id: ForgeFSGShieldsCivilianT2
+  name: research-technology-forge-fsg-shields-tier2
+  entityIcon: MachineShieldFSG220Circuitboard
+  discipline: CivilianServices
+  tier: 3
+  cost: 42000
+  recipeUnlocks:
+  - MachineShieldFSG160CCircuitboard
+  - MachineShieldFSG220Circuitboard
+  - MachineShieldFSG250CCircuitboard
+  - MachineShieldFSG330RCircuitboard
+  technologyPrerequisites:
+  - ForgeFSGShieldsCivilianT1
+  position: -5, 8
+
+# --- Faction & company R&D: T3 (heavy / specialized arrays) ---
+
+- type: technology
+  id: ForgeFSGShieldsTSFT3
+  name: research-technology-forge-fsg-shields-tier3
+  entityIcon: MachineShieldForgeTSFHeavyCircuitboard
+  discipline: TsfmcShipyard
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - MachineShieldForgeTSFHeavyCircuitboard
+  - MachineShieldForgeTSFPrismaticCircuitboard
+  - MachineShieldForgeTSFCollisionCircuitboard
+  technologyPrerequisites:
+  - TsfAltair
+  - UniversalMaterialResearchT2
+  position: 11, 10
+
+- type: technology
+  id: ForgeFSGShieldsUsspT3
+  name: research-technology-forge-fsg-shields-tier3
+  entityIcon: MachineShieldForgeUsspHeavyCircuitboard
+  discipline: UsspShipyard
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - MachineShieldForgeUsspHeavyCircuitboard
+  - MachineShieldForgeUsspPrismaticCircuitboard
+  - MachineShieldForgeUsspCollisionCircuitboard
+  technologyPrerequisites:
+  - UsspMediumShips
+  position: 17, 9
+
+- type: technology
+  id: ForgeFSGShieldsRenegateT3
+  name: research-technology-forge-fsg-shields-tier3
+  entityIcon: MachineShieldForgeRenegateHeavyCircuitboard
+  discipline: RenegateVouchers
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - MachineShieldForgeRenegateHeavyCircuitboard
+  - MachineShieldForgeRenegatePrismaticCircuitboard
+  - MachineShieldForgeRenegateCollisionCircuitboard
+  technologyPrerequisites:
+  - RogueRenegateVouchersAzimutlateT2
+  - UniversalMaterialResearchT2
+  position: 14, 10
+
+- type: technology
+  id: ForgeFSGShieldsViperT3
+  name: research-technology-forge-fsg-shields-tier3
+  entityIcon: MachineShieldForgeViperHeavyCircuitboard
+  discipline: ViperGroup
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - MachineShieldForgeViperHeavyCircuitboard
+  - MachineShieldForgeViperPrismaticCircuitboard
+  - MachineShieldForgeViperCollisionCircuitboard
+  technologyPrerequisites:
+  - ViperGroupHardsuitBasic
+  - UniversalMaterialResearchT2
+  position: 19, 5
+
+- type: technology
+  id: ForgeFSGShieldsUllmanT3
+  name: research-technology-forge-fsg-shields-tier3
+  entityIcon: MachineShieldForgeUllmanHeavyCircuitboard
+  discipline: Ullman
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - MachineShieldForgeUllmanHeavyCircuitboard
+  - MachineShieldForgeUllmanPrismaticCircuitboard
+  - MachineShieldForgeUllmanCollisionCircuitboard
+  technologyPrerequisites:
+  - UllmanPulseAdv
+  - UniversalMaterialResearchT2
+  position: -7, -6

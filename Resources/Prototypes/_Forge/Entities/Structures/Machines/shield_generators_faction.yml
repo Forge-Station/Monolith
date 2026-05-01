@@ -1,0 +1,416 @@
+# Faction-branded heavy shield line (stats match FSG-420 / 470P / 600C).
+
+# --- TSFMC ---
+
+- type: entity
+  id: ShieldGeneratorForgeTSFHeavy
+  parent: ShieldGeneratorFSG420
+  name: TSFMC SGS-440 "Citadel" shield generator
+  description: A TSFMC-issue heavy universal screen for hulls that must hold the line under sustained fire.
+  components:
+  - type: Machine
+    board: MachineShieldForgeTSFHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#48E8A8"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#48E8A8"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#48E8A8"
+
+- type: entity
+  id: ShieldGeneratorForgeTSFPrismatic
+  parent: ShieldGeneratorFSG470P
+  name: TSFMC SGS-470P "Corona Array" shield generator
+  description: A TSFMC prismatic heavy array prioritizing reserve depth over recovery speed.
+  components:
+  - type: Machine
+    board: MachineShieldForgeTSFPrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#66CCFF"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#66CCFF"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#66CCFF"
+
+- type: entity
+  id: ShieldGeneratorForgeTSFCollision
+  parent: ShieldGeneratorFSG600C
+  name: TSFMC SGS-600C "Breakshell" shield generator
+  description: A TSFMC collision-hardened siege screen for ramming, close passes, and kinetic brawls.
+  components:
+  - type: Machine
+    board: MachineShieldForgeTSFCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#FF6B8A"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF6B8A"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF6B8A"
+
+# --- USSP ---
+
+- type: entity
+  id: ShieldGeneratorForgeUsspHeavy
+  parent: ShieldGeneratorFSG420
+  name: Union SGS-420 "Forward Redoubt" shield generator
+  description: A Union heavy screen meant to anchor convoys and hold formation under concentrated fire.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUsspHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#5EB8AA"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#5EB8AA"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#5EB8AA"
+
+- type: entity
+  id: ShieldGeneratorForgeUsspPrismatic
+  parent: ShieldGeneratorFSG470P
+  name: Union SGS-470P "Polar Lattice" shield generator
+  description: A Union prismatic lattice with a wide damage envelope and a slow, deliberate recovery curve.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUsspPrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#D9A066"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#D9A066"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#D9A066"
+
+- type: entity
+  id: ShieldGeneratorForgeUsspCollision
+  parent: ShieldGeneratorFSG600C
+  name: Union SGS-600C "Ledokol Ramfield" shield generator
+  description: A Union collision field suited to icebreaker doctrine—close passes, rams, and stubborn hull contact.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUsspCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#B84C2A"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#B84C2A"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#B84C2A"
+
+# --- Renegates ---
+
+- type: entity
+  id: ShieldGeneratorForgeRenegateHeavy
+  parent: ShieldGeneratorFSG420
+  name: RSG-420 "Dust Citadel" shield generator
+  description: A Renegate heavy citadel screen for ships that expect to be cornered and still walk away.
+  components:
+  - type: Machine
+    board: MachineShieldForgeRenegateHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#E87B45"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#E87B45"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#E87B45"
+
+- type: entity
+  id: ShieldGeneratorForgeRenegatePrismatic
+  parent: ShieldGeneratorFSG470P
+  name: RSG-470P "Azimuth Veil" shield generator
+  description: A prismatic veil tuned for long, grinding engagements where capacity matters more than bounce-back.
+  components:
+  - type: Machine
+    board: MachineShieldForgeRenegatePrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#E85BB8"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#E85BB8"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#E85BB8"
+
+- type: entity
+  id: ShieldGeneratorForgeRenegateCollision
+  parent: ShieldGeneratorFSG600C
+  name: RSG-600C "Galandec Spur" shield generator
+  description: A collision spur for hulls that treat docking lanes and enemy flanks as optional suggestions.
+  components:
+  - type: Machine
+    board: MachineShieldForgeRenegateCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#9C3D2E"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#9C3D2E"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#9C3D2E"
+
+# --- Viper Group ---
+
+- type: entity
+  id: ShieldGeneratorForgeViperHeavy
+  parent: ShieldGeneratorFSG420
+  name: VAS-420 "Copperhead Screen" shield generator
+  description: A Viper-pattern heavy screen for aggressive strike craft that insist on staying in the fight.
+  components:
+  - type: Machine
+    board: MachineShieldForgeViperHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#FF7A4A"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF7A4A"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF7A4A"
+
+- type: entity
+  id: ShieldGeneratorForgeViperPrismatic
+  parent: ShieldGeneratorFSG470P
+  name: VAS-470P "Glass Mamba Lattice" shield generator
+  description: A prismatic lattice with a brutal reserve profile—slow to forgive, hard to collapse.
+  components:
+  - type: Machine
+    board: MachineShieldForgeViperPrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#FF3344"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF3344"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF3344"
+
+- type: entity
+  id: ShieldGeneratorForgeViperCollision
+  parent: ShieldGeneratorFSG600C
+  name: VAS-600C "Fangsaw Collision Net" shield generator
+  description: A collision net for hulls that close distance fast and leave paint on the enemy's bulkhead.
+  components:
+  - type: Machine
+    board: MachineShieldForgeViperCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#991111"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#991111"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#991111"
+
+# --- Ullman Industries ---
+
+- type: entity
+  id: ShieldGeneratorForgeUllmanHeavy
+  parent: ShieldGeneratorFSG420
+  name: UIS SGD-440 "Indigo Bulwark" shield generator
+  description: An Ullman heavy bulwark emphasizing predictable performance under contract-grade tolerances.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUllmanHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#8B6CB8"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#8B6CB8"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#8B6CB8"
+
+- type: entity
+  id: ShieldGeneratorForgeUllmanPrismatic
+  parent: ShieldGeneratorFSG470P
+  name: UIS SGD-470P "Clause Lattice" shield generator
+  description: A prismatic lattice built for clients who pay for depth, not excuses—recovery is deliberately slow.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUllmanPrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#D4B8F0"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#D4B8F0"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#D4B8F0"
+
+- type: entity
+  id: ShieldGeneratorForgeUllmanCollision
+  parent: ShieldGeneratorFSG600C
+  name: UIS SGD-600C "Kinetic Escrow Ram" shield generator
+  description: A collision-rated escrow field for hulls that collect dents and invoice the other party later.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUllmanCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#5A3D7A"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#5A3D7A"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#5A3D7A"

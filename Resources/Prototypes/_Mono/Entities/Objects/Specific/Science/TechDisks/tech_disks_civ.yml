@@ -113,7 +113,7 @@
   parent: TechDiskBase
   id: TechDiskCivShipComps
   name: civilian ship components tech disk
-  description: A disk capable of adding entry-level shuttle shields and FTL drives to a server's recipes.
+  description: A disk capable of adding an entry-level shuttle shield board and FTL drives to a server's recipes.
   components:
   - type: Sprite
     layers:
@@ -127,9 +127,6 @@
     recipes:
     - MachineDriveCTLA25Circuitboard
     - MachineShieldMS100Circuitboard
-    - MachineShieldFSG90RCircuitboard
-    - MachineShieldFSG100Circuitboard
-    - MachineShieldFSG110PCircuitboard
 
 - type: entity
   parent: TechDiskBase
@@ -154,7 +151,7 @@
   parent: TechDiskBase
   id: TechDiskCivMS250
   name: civilian MS-250 shield tech disk
-  description: A disk capable of adding mid-tier shuttle shield boards to a server's recipes.
+  description: A disk capable of adding mid-tier MS shuttle shield boards to a server's recipes.
   components:
   - type: Sprite
     layers:
@@ -168,10 +165,6 @@
     recipes:
     - MachineShieldMS250Circuitboard
     - MachineShieldMS100Circuitboard
-    - MachineShieldFSG160CCircuitboard
-    - MachineShieldFSG220Circuitboard
-    - MachineShieldFSG250CCircuitboard
-    - MachineShieldFSG330RCircuitboard
 
 - type: entity
   parent: TechDiskBase
@@ -217,7 +210,7 @@
   parent: TechDiskBase
   id: TechDiskShields
   name: pre-fracture shield technology tech disk
-  description: A disk capable of adding the full shuttle shield lineup to a server's recipes.
+  description: A disk capable of adding the full MS shuttle shield lineup and the FSG-900P outpost array to a server's recipes. Other FSG tiers require normal or faction research.
   components:
   - type: Sprite
     layers:
@@ -233,16 +226,6 @@
     - MachineShieldMS500Circuitboard
     - MachineShieldMS250Circuitboard
     - MachineShieldMS100Circuitboard
-    - MachineShieldFSG90RCircuitboard
-    - MachineShieldFSG100Circuitboard
-    - MachineShieldFSG110PCircuitboard
-    - MachineShieldFSG160CCircuitboard
-    - MachineShieldFSG220Circuitboard
-    - MachineShieldFSG250CCircuitboard
-    - MachineShieldFSG330RCircuitboard
-    - MachineShieldFSG420Circuitboard
-    - MachineShieldFSG470PCircuitboard
-    - MachineShieldFSG600CCircuitboard
     - MachineShieldFSG900PCircuitboard
 
 - type: entity

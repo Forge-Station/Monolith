@@ -20,3 +20,38 @@ ent-MachineShieldFSG600CCircuitboard = плата генератора щита 
     .desc = Плата машины для генератора щита FSG-600C.
 ent-MachineShieldFSG900PCircuitboard = плата генератора щита FSG-900P
     .desc = Плата машины для генератора щита FSG-900P.
+
+ent-MachineShieldForgeTSFHeavyCircuitboard = плата щита TSFMC «Цитадель»
+    .desc = Плата машины для генератора щита TSFMC SGS-440 «Цитадель».
+ent-MachineShieldForgeTSFPrismaticCircuitboard = плата щита TSFMC «Корона»
+    .desc = Плата машины для генератора щита TSFMC SGS-470P «Корона».
+ent-MachineShieldForgeTSFCollisionCircuitboard = плата щита TSFMC «Бронелом»
+    .desc = Плата машины для генератора щита TSFMC SGS-600C «Бронелом».
+
+ent-MachineShieldForgeUsspHeavyCircuitboard = плата щита Союз «Передовой редут»
+    .desc = Плата машины для генератора щита Союз SGS-420 «Передовой редут».
+ent-MachineShieldForgeUsspPrismaticCircuitboard = плата щита Союз «Полярная решётка»
+    .desc = Плата машины для генератора щита Союз SGS-470P «Полярная решётка».
+ent-MachineShieldForgeUsspCollisionCircuitboard = плата щита Союз «Ледокольное таранное поле»
+    .desc = Плата машины для генератора щита Союз SGS-600C «Ледокольное таранное поле».
+
+ent-MachineShieldForgeRenegateHeavyCircuitboard = плата щита ренегатов «Пыльная цитадель»
+    .desc = Плата машины для генератора щита RSG-420 «Пыльная цитадель».
+ent-MachineShieldForgeRenegatePrismaticCircuitboard = плата щита ренегатов «Вуаль азимута»
+    .desc = Плата машины для генератора щита RSG-470P «Вуаль азимута».
+ent-MachineShieldForgeRenegateCollisionCircuitboard = плата щита ренегатов «Шпора Галандека»
+    .desc = Плата машины для генератора щита RSG-600C «Шпора Галандека».
+
+ent-MachineShieldForgeViperHeavyCircuitboard = плата щита Viper «Экран медянки»
+    .desc = Плата машины для генератора щита VAS-420 «Экран медянки».
+ent-MachineShieldForgeViperPrismaticCircuitboard = плата щита Viper «Стеклянная решётка мамбы»
+    .desc = Плата машины для генератора щита VAS-470P «Стеклянная решётка мамбы».
+ent-MachineShieldForgeViperCollisionCircuitboard = плата щита Viper «Сетка клыка-пилы»
+    .desc = Плата машины для генератора щита VAS-600C «Сетка клыка-пилы».
+
+ent-MachineShieldForgeUllmanHeavyCircuitboard = плата щита Ullman «Индиго-бастион»
+    .desc = Плата машины для генератора щита UIS SGD-440 «Индиго-бастион».
+ent-MachineShieldForgeUllmanPrismaticCircuitboard = плата щита Ullman «Решётка пункта договора»
+    .desc = Плата машины для генератора щита UIS SGD-470P «Решётка пункта договора».
+ent-MachineShieldForgeUllmanCollisionCircuitboard = плата щита Ullman «Кинетический эскроу-таран»
+    .desc = Плата машины для генератора щита UIS SGD-600C «Кинетический эскроу-таран».

@@ -8,7 +8,19 @@
   - MachineShieldFSG220Circuitboard
   - MachineShieldFSG250CCircuitboard
   - MachineShieldFSG330RCircuitboard
-  - MachineShieldFSG420Circuitboard
-  - MachineShieldFSG470PCircuitboard
-  - MachineShieldFSG600CCircuitboard
+  - MachineShieldForgeTSFHeavyCircuitboard
+  - MachineShieldForgeTSFPrismaticCircuitboard
+  - MachineShieldForgeTSFCollisionCircuitboard
+  - MachineShieldForgeUsspHeavyCircuitboard
+  - MachineShieldForgeUsspPrismaticCircuitboard
+  - MachineShieldForgeUsspCollisionCircuitboard
+  - MachineShieldForgeRenegateHeavyCircuitboard
+  - MachineShieldForgeRenegatePrismaticCircuitboard
+  - MachineShieldForgeRenegateCollisionCircuitboard
+  - MachineShieldForgeViperHeavyCircuitboard
+  - MachineShieldForgeViperPrismaticCircuitboard
+  - MachineShieldForgeViperCollisionCircuitboard
+  - MachineShieldForgeUllmanHeavyCircuitboard
+  - MachineShieldForgeUllmanPrismaticCircuitboard
+  - MachineShieldForgeUllmanCollisionCircuitboard
   - MachineShieldFSG900PCircuitboard

@@ -187,5 +187,12 @@ public sealed partial class MonoCVars
     public static readonly CVarDef<bool> CompanyWhitelist =
         CVarDef.Create("mono.company_whitelist", true, CVar.ARCHIVE | CVar.REPLICATED);
 
+    /// <summary>
+    ///     Forge-Change: add a cvar to control the radar blip request delay.
+    ///     Minimum delay in seconds between radar blip requests from the same client session.
+    /// </summary>
+    public static readonly CVarDef<float> RadarBlipRequestDelay =
+        CVarDef.Create("mono.radar.blip_request_delay", 0.25f, CVar.SERVERONLY);
+
     #endregion
 }

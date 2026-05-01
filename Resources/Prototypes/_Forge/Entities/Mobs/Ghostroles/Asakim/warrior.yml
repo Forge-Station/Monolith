@@ -20,6 +20,8 @@
   name: asakim warrior
   suffix: Asakim
   components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
   - type: HumanoidAppearance
     height: 1.2
     width: 1.2
@@ -41,16 +43,16 @@
     - SyndicateNamesNormal
   - type: NpcFactionMember
     factions:
-    - SiliconsExpeditionNF
+    - SyndicateNF
   - type: MobThresholds
     thresholds:
       0: Alive
-      125: Critical
+      150: Critical
       200: Dead
   - type: SlowOnDamage
     speedModifierThresholds:
-      80: 0.8
-      100: 0.5
+      100: 0.9
+      125: 0.5
   - type: Stamina
     critThreshold: 250
   - type: SurgerySpeedModifier
@@ -67,6 +69,7 @@
     - FreedomImplant
   - type: Access
     tags:
+    - SyndicateAgent
     - Remnant
     - Mercenary
   - type: LanguageKnowledge
@@ -86,7 +89,7 @@
     jumpsuit: ClothingUniformJumpsuitNinja
     back: ClothingBackpackSatchelAsakim
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterHardsuitAsakimUnremoveable
+    outerClothing: ClothingOuterHardsuitAsakimUnremoveableForge
     shoes: ClothingShoesBootsMagAsakimForge
     pocket1: SyringeCaseNaniteFilled
     pocket2: DoubleEmergencyOxygenTankFilled

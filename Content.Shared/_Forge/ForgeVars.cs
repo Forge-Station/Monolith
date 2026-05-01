@@ -124,4 +124,16 @@ public sealed class ForgeVars
     /// </summary>
     public static readonly CVarDef<float> AutoUnstuckNudge =
         CVarDef.Create("forge.physics.auto_unstuck_nudge", 2f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Minutes before kicking a latejoin player that has not clocked in.
+    /// </summary>
+    public static readonly CVarDef<float> AutoKickPendingClockInMinutes =
+        CVarDef.Create("autokick.pending_clockin_minutes", 15f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Minutes before kicking a guest without a job role for AFK.
+    /// </summary>
+    public static readonly CVarDef<float> AutoKickGuestAfkMinutes =
+        CVarDef.Create("autokick.guest_afk_minutes", 25f, CVar.SERVERONLY);
 }

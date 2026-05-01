@@ -13,3 +13,8 @@ shuttle-console-bioscan-complete-clean = Bio-threat scan complete: shuttle prese
 shuttle-console-bioscan-complete-threat = Bio-threat scan complete: biological threat detected.
 shuttle-console-bioscan-radio-warning = Warning to all units: shuttle {$shuttle} contains biological threats. Do not approach without proper preparation.
 shuttle-console-bioscan-infected-prefix = (infected)
+
+shuttle-console-button-azimuth = Toggle Azimuth Style
+shuttle-console-button-rotation = Toggle View Rotation
+shuttle-console-button-anchor = Toggle View Anchor
+shuttle-console-button-reset = Reset View

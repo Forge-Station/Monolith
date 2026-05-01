@@ -175,6 +175,7 @@
     - TechDiskHristov
     - TechDiskMla73
     - TechDiskUniversalShipAmmoAdvanced
+    - TechDiskForgeFSGCivilianT3
     chance: 0.95
     offset: 0.0
     rarePrototypes:
@@ -198,6 +199,7 @@
     prototypes:
     - TechDiskBluespaceBags
     - TechDiskTranslationPreFracture
+    - TechDiskForgeFSG900P
     chance: 0.95
     offset: 0.0
     rarePrototypes:

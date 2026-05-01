@@ -1,4 +1,28 @@
-# Mochi
+- type: entity
+  name: licorice creamsicle
+  parent: FoodFrozenBase
+  id: FoodFrozenPopsicleLicorice
+  description: Vanilla ice cream on a stick covered in a chewy licorice shell.
+  components:
+  - type: Sprite
+    layers:
+    - state: stick
+    - state: nogga # TODO: rename this or migrate & rename if deleted
+  - type: Food
+    trash:
+    - FoodFrozenPopsicleTrash
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - icecream
+    - licorice
 
 - type: entity
   name: mochi
@@ -8,7 +32,8 @@
   components:
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/frozen.rsi
-    state: mochi
+    layers:
+    - state: mochi
   - type: Food
   - type: SolutionContainerManager
     solutions:
@@ -33,7 +58,8 @@
   components:
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/frozen.rsi
-    state: bungomochi
+    layers:
+    - state: bungomochi
   - type: Food
   - type: SolutionContainerManager
     solutions:
@@ -58,7 +84,8 @@
   components:
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/frozen.rsi
-    state: cherrymochi
+    layers:
+    - state: cherrymochi
   - type: Food
   - type: SolutionContainerManager
     solutions:
@@ -83,7 +110,8 @@
   components:
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/frozen.rsi
-    state: chocomochi
+    layers:
+    - state: chocomochi
   - type: Food
   - type: SolutionContainerManager
     solutions:
@@ -108,7 +136,8 @@
   components:
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/frozen.rsi
-    state: fibermochi
+    layers:
+    - state: fibermochi
   - type: Food
   - type: SolutionContainerManager
     solutions:
@@ -135,7 +164,8 @@
   components:
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/frozen.rsi
-    state: mothmochi
+    layers:
+    - state: mothmochi
   - type: Food
   - type: SolutionContainerManager
     solutions:
@@ -153,6 +183,32 @@
     - pink
 
 - type: entity
+  name: cinnamon mochi
+  parent: FoodFrozenBase
+  id: FoodFrozenMochiSpice
+  description: A delicious blorb of chewey sticky rice encapsulating a core of ice cream. It's spicy! Is that cinnamon?
+  components:
+  - type: Sprite
+    sprite: _NF/Objects/Consumable/Food/frozen.rsi
+    layers:
+    - state: spicemochi
+  - type: Food
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 5
+  - type: FlavorProfile
+    flavors:
+    - rice
+    - icecream
+    - cinnamon
+
+- type: entity
   name: tea mochi
   parent: FoodFrozenBase
   id: FoodFrozenMochiTea
@@ -160,7 +216,8 @@
   components:
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/frozen.rsi
-    state: teamochi
+    layers:
+    - state: teamochi
   - type: Food
   - type: SolutionContainerManager
     solutions:
@@ -185,7 +242,8 @@
   components:
   - type: Sprite
     sprite: _NF/Objects/Consumable/Food/frozen.rsi
-    state: ubemochi
+    layers:
+    - state: ubemochi
   - type: Food
   - type: SolutionContainerManager
     solutions:
@@ -203,4 +261,3 @@
     - rice
     - icecream
     - antiseptic
-

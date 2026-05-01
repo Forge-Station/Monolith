@@ -10,6 +10,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Map.Components;
 using Content.Server.Shuttles.Components;
+using Content.Shared.Humanoid;
 
 namespace Content.Server._Lua.Physics;
 
@@ -54,6 +55,7 @@ public sealed class AutoUnstuckSystem : EntitySystem
         foreach (var uid in _awake)
         {
             if (!_physicsQuery.TryGetComponent(uid, out var body)) continue;
+            if (!HasComp<HumanoidAppearanceComponent>(uid)) continue; // Forge-Change
             if (body.BodyType == BodyType.Static || !body.CanCollide) continue;
             if (HasComp<MapGridComponent>(uid) || HasComp<MapComponent>(uid) || HasComp<ShuttleComponent>(uid)) continue;
             if (IsPaused(uid)) continue;

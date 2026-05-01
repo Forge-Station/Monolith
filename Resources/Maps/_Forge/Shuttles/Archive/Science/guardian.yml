@@ -2700,9 +2700,6 @@ entities:
     - type: Transform
       pos: 7.5,11.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
 - proto: FirelockGlass
   entities:
   - uid: 69

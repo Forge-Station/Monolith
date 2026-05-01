@@ -1,52 +1,52 @@
 <Document>
 
-# Microwave Recipes
+# Рецепты для микроволновой печи
 
-This is the latest published version of NanoTrasen Central Command Kitchen de Cuisine's recipe collection for chefs upon NanoTrasen vessels to prepare.
+Это последняя опубликованная версия коллекции рецептов кухни де-Куизен Центрального Командования NanoTrasen, предназначенной для приготовления поварами на судах NanoTrasen.
 
-## Pizza Pies
+## # Пиццы и пироги
 <GuideMicrowaveGroupEmbed Group="Pizza"/>
 
-## Savory Cooking
+## # Соленая кулинария
 <GuideMicrowaveGroupEmbed Group="Savory"/>
 
-## Breads
+## Хлеба
 <GuideMicrowaveGroupEmbed Group="Breads"/>
 
-## Breakfast Foods
+## Еда быстрого приготовления
 <GuideMicrowaveGroupEmbed Group="Breakfast"/>
 
-## Moth Foods
+## Завтраки
 <GuideMicrowaveGroupEmbed Group="Moth"/>
 
-## Pastas & Noodles
+## # Паста и лапша
 <GuideMicrowaveGroupEmbed Group="Pasta"/>
 
-## Pastries & Desserts
+## Выпечка и десерты
 <GuideMicrowaveGroupEmbed Group="Dessert"/>
 
-## Soups & Stews
+##  Супы и похлёбки
 <GuideMicrowaveGroupEmbed Group="Soup"/>
 
-## Pies & Tarts
+## Пироги и тарты
 <GuideMicrowaveGroupEmbed Group="Pie"/>
 
-## Bars & Cookies
+## Батончики и печенье
 <GuideMicrowaveGroupEmbed Group="BarsAndCookies"/>
 
-## Cakes
+## Пирожные
 <GuideMicrowaveGroupEmbed Group="Cake"/>
 
-## Salads
+## Салаты
 <GuideMicrowaveGroupEmbed Group="Salad"/>
 
-## Medicinal
+## Медицинские
 <GuideMicrowaveGroupEmbed Group="Medicinal"/>
 
-## Other
+## Остальное
 <GuideMicrowaveGroupEmbed Group="Other"/>
 
-## Secret
+## Секрет
 <GuideMicrowaveGroupEmbed Group="Secret"/>
 
 </Document>

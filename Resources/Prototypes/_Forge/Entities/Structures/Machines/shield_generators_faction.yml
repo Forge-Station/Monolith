@@ -13,7 +13,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#48E8A8"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -40,7 +40,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#66CCFF"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -67,7 +67,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#FF6B8A"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -96,7 +96,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#5EB8AA"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -123,7 +123,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#D9A066"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -150,7 +150,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#B84C2A"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -179,7 +179,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#E87B45"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -206,7 +206,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#E85BB8"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -233,7 +233,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#9C3D2E"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -262,7 +262,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#FF7A4A"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -289,7 +289,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#FF3344"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -316,7 +316,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#991111"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -345,7 +345,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#8B6CB8"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -372,7 +372,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#D4B8F0"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -399,7 +399,7 @@
   - type: ShipShieldEmitter
     shieldColor: "#5A3D7A"
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control

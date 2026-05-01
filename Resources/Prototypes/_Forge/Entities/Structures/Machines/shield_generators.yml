@@ -15,7 +15,7 @@
     shieldColor: "#58C6FF"
     collisionResistanceMultiplier: 0.6
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier1.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -89,7 +89,7 @@
     shieldColor: "#3399FF"
     collisionResistanceMultiplier: 0.5
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier1.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -163,7 +163,7 @@
     shieldColor: "#8E7DFF"
     collisionResistanceMultiplier: 0.55
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier1.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -237,7 +237,7 @@
     shieldColor: "#41D4FF"
     collisionResistanceMultiplier: 0.22
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -246,6 +246,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#41D4FF"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.675,-0.675,0.675,0.675"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -311,7 +322,7 @@
     shieldColor: "#62E86F"
     collisionResistanceMultiplier: 0.35
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -320,6 +331,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#62E86F"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.675,-0.675,0.675,0.675"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -385,7 +407,7 @@
     shieldColor: "#3CFFCC"
     collisionResistanceMultiplier: 0.15
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -394,6 +416,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#3CFFCC"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.675,-0.675,0.675,0.675"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -459,7 +492,7 @@
     shieldColor: "#FFD35A"
     collisionResistanceMultiplier: 0.28
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -468,6 +501,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#FFD35A"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.675,-0.675,0.675,0.675"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -533,7 +577,7 @@
     shieldColor: "#FF9346"
     collisionResistanceMultiplier: 0.18
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -542,6 +586,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#FF9346"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.9,-0.9,0.9,0.9"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -607,7 +662,7 @@
     shieldColor: "#C86BFF"
     collisionResistanceMultiplier: 0.16
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -616,6 +671,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#C86BFF"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.9,-0.9,0.9,0.9"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -681,7 +747,7 @@
     shieldColor: "#FF5E5E"
     collisionResistanceMultiplier: 0.08
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -690,6 +756,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#FF5E5E"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.9,-0.9,0.9,0.9"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -755,7 +832,7 @@
     shieldColor: "#FF66D9"
     collisionResistanceMultiplier: 0.05
   - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    sprite: Forge/Structures/Machines/shield_fsg_tier4.rsi
     snapCardinals: true
     layers:
     - state: control
@@ -764,6 +841,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#FF66D9"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.35,-1.35,1.35,1.35"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:

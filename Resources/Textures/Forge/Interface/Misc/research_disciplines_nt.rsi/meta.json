@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Made by rukilator (discord) for Forge Corvax Frontier.",
+  "size": {
+    "x": 8,
+    "y": 8
+  },
+  "states": [
+    {
+      "name": "nt"
+    },
+    {
+      "name": "tti"
+    }
+  ]
+}

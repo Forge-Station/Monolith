@@ -1,0 +1,13 @@
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponLRC21PPL
+  categories:
+  - Energy
+  - Weapons
+  result: WeaponLRC21PPL
+  materials:
+    Steel: 3000
+    Plasteel: 1000
+    Silver: 2500
+    Gold: 2500
+    Plasma: 4000

@@ -188,7 +188,7 @@ namespace Content.Server.Atmos.EntitySystems
         private void ConsiderPressureDifference(GridAtmosphereComponent gridAtmosphere, TileAtmosphere tile, AtmosDirection differenceDirection, float difference)
         {
             var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
-            AddChunkTile(gridAtmosphere.HighPressureDelta, chunk.HighPressureTiles, tile);
+            AddChunkTile(gridAtmosphere, gridAtmosphere.HighPressureDelta, chunk.HighPressureTiles, tile); // Forge-Change
 
             if (difference <= tile.PressureDifference)
                 return;

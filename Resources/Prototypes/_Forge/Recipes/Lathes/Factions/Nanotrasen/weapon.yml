@@ -1,0 +1,222 @@
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponRevolverInspector
+  result: WeaponRevolverInspector
+  categories:
+  - Sidearms
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 1500
+    Plasteel: 1000
+    Plastic: 1000
+    
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponRevolverDeckard
+  result: WeaponRevolverDeckard
+  categories:
+  - Sidearms
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 1500
+    Plasteel: 2000
+    Plastic: 1000
+    
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponRevolverMateba
+  result: WeaponRevolverMateba
+  categories:
+  - Sidearms
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 3000
+    Plasteel: 4000
+    Plastic: 1000
+    
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponPistolN1984
+  result: WeaponPistolN1984
+  categories:
+  - Sidearms
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 2000
+    Plasteel: 4000
+    Plastic: 1000
+    
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: EnergySwordBlue
+  result: EnergySwordBlue
+  categories:
+  - Energy
+  - Weapons
+  materials:
+    Steel: 1200
+    Plasteel: 3000
+    Plastic: 400
+    Plasma: 3000
+    
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: EnergyShield
+  categories:
+  - Energy
+  - Weapons
+  result: EnergyShield
+  materials:
+    Steel: 1500
+    Plasteel: 6500
+    Plastic: 800
+    Plasma: 5000
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponPulsePistol
+  categories:
+  - Energy
+  - Weapons
+  result: WeaponPulsePistol
+  materials:
+    Steel: 2500
+    Plasteel: 2500
+    Silver: 1500
+    Gold: 1000
+    Plasma: 1500
+    Plastic: 1500
+    UraniumDepleted: 100
+    UraniumFissile: 100
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponEnergyShotgun
+  categories:
+  - Energy
+  - Weapons
+  result: WeaponEnergyShotgun
+  materials:
+    Steel: 2500
+    Plasteel: 2000
+    Gold: 2000
+    Plasma: 3000
+    Plastic: 3000
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponEnergyGunLawbringer
+  categories:
+  - Energy
+  - Weapons
+  result: WeaponEnergyGunLawbringer
+  materials:
+    Steel: 3500
+    Plasteel: 2000
+    Gold: 3000
+    Silver: 3000
+    Plasma: 5000
+    Plastic: 2000
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponPulseCarbine
+  categories:
+  - Energy
+  - Weapons
+  result: WeaponPulseCarbine
+  materials:
+    Steel: 2500
+    Plasteel: 2000
+    Silver: 2000
+    Gold: 2000
+    Plasma: 5000
+    Plastic: 2000
+    UraniumDepleted: 100
+    UraniumFissile: 200 
+    
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponLauncherMPSSM
+  categories:
+  - Energy
+  - Weapons
+  result: WeaponLauncherMPSSM
+  materials:
+    Steel: 8000
+    Plasteel: 4000
+    Silver: 1500
+    Gold: 3500
+    Plasma: 3000
+    Plastic: 2500    
+    UraniumDepleted: 200
+    UraniumFissile: 200 
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponPulseRifle
+  categories:
+  - Energy
+  - Weapons
+  result: WeaponPulseRifle
+  materials:
+    Steel: 2500
+    Plasteel: 4000
+    Silver: 1500
+    Gold: 3500
+    Plasma: 5000
+    Plastic: 3000
+    UraniumDepleted: 300
+    UraniumFissile: 300 
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponHeavyPulseCannon
+  categories:
+  - Energy
+  - Weapons
+  result: WeaponHeavyPulseCannon
+  materials:
+    Steel: 4000
+    Plasteel: 5000
+    Silver: 3500
+    Gold: 4000
+    Plasma: 8000
+    Plastic: 3000
+    UraniumDepleted: 300
+    UraniumFissile: 300 
+ 
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponLauncherMk348
+  categories:
+  - Energy
+  - Weapons
+  result: WeaponLauncherMk348
+  materials:
+    Steel: 2500
+    Plasteel: 5000
+    Silver: 1000
+    Gold: 1500
+    Plasma: 2500
+    Plastic: 3500
+    UraniumDepleted: 200
+    UraniumFissile: 200  
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponMechCombatPulseRifleTSF
+  categories:
+  - MonoMechGear
+  - MonoMechHeavyWeapons
+  result: WeaponMechCombatPulseRifleTSF
+  materials:
+    Steel: 3000
+    Plastic: 3000
+    Gold: 1000
+    Silver: 1500
+    Plasma: 3000

@@ -1,2 +1,2 @@
-ent-NFPrisonerClosetWallOrangeFilled = гарнитура заключённого
+ent-ClothingHeadsetPrison = гарнитура заключённого
     .desc = Гарнитура, используемая заключёнными. Преступно неудобная.

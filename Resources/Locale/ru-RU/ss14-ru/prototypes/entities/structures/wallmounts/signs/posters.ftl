@@ -263,5 +263,5 @@ ent-PosterContrabandExoChomp = Внимание, экзоморфы!: Опасн
 
 ent-PosterContrabandLurkingExomorph = Затаившийся ксеноморф
   .desc = Постер с изображением свирепого, крадущегося инопланетного существа.
-ent-PosterContrabandExoChomp = Oppenhopper
+ent-PosterLegitOppenhopper = Oppenhopper
   .desc = Постер к давно забытому фильму. В нём рассказывается о группе упорных новичков из Сектора Grasshopper, которые отражают натиск печально известных Ядерных Оперативников. Слоган: „Ядерные операции будут продолжаться, пока робастность не улучшится.“

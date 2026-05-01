@@ -1,0 +1,30 @@
+- type: vessel
+  id: Falgo
+  parent: BaseVessel
+  name: "ESP Falgo"
+  description: Фалго - малый патрульный шаттл Империи. Вооружен двумя орудиями "Tарникс"
+  category: Small
+  group: Empire
+  access: Empire
+  price: 57000
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/Falgo.yml
+  guidebookPage: Null
+  class:
+  - Medical
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: Falgo
+  mapName: 'PSE Falgo'
+  mapPath: /Maps/_Forge/Shuttles/Empire/Falgo.yml
+  minPlayers: 0
+  stations:
+    Falgo:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'ESP Falgo{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

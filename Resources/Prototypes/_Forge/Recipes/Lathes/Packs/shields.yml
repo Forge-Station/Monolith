@@ -1,0 +1,25 @@
+- type: latheRecipePack
+  id: ForgeAdvancedShuttleComponents
+  recipes:
+  - MachineShieldFSG90RCircuitboard
+  - MachineShieldFSG100Circuitboard
+  - MachineShieldFSG110PCircuitboard
+  - MachineShieldFSG160CCircuitboard
+  - MachineShieldFSG220Circuitboard
+  - MachineShieldFSG250CCircuitboard
+  - MachineShieldFSG330RCircuitboard
+  - MachineShieldForgeTSFHeavyCircuitboard
+  - MachineShieldForgeTSFPrismaticCircuitboard
+  - MachineShieldForgeTSFCollisionCircuitboard
+  - MachineShieldForgeUsspHeavyCircuitboard
+  - MachineShieldForgeUsspPrismaticCircuitboard
+  - MachineShieldForgeUsspCollisionCircuitboard
+  - MachineShieldForgeRenegateHeavyCircuitboard
+  - MachineShieldForgeRenegatePrismaticCircuitboard
+  - MachineShieldForgeRenegateCollisionCircuitboard
+  - MachineShieldForgeViperHeavyCircuitboard
+  - MachineShieldForgeViperPrismaticCircuitboard
+  - MachineShieldForgeViperCollisionCircuitboard
+  - MachineShieldForgeUllmanHeavyCircuitboard
+  - MachineShieldForgeUllmanPrismaticCircuitboard
+  - MachineShieldForgeUllmanCollisionCircuitboard

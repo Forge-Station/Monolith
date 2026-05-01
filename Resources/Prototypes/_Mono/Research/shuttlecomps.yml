@@ -15,6 +15,7 @@
   - ComputerIFFCircuitboard
   - MachineDriveCTLA25Circuitboard
   - ShipWeaponFabricatorCircuitboard # Forge-Change
+  - LargeThrusterMachineCircuitboard
   technologyPrerequisites:
   - Shuttlecraft
   - SuperParts

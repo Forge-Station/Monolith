@@ -136,6 +136,7 @@
       params:
         volume: -5
         variation: 0.2
+  image: /Textures/_Mono/Companies/USSP.png
 
 # Major companies
 

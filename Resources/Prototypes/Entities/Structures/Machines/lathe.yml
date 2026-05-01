@@ -350,6 +350,7 @@
     - S2MechBoards
     - EngineeringBoardsGoob #Goob Factorio port
     - NanotrasenCircuitBoard # Forge-change
+    - ReactorCircuitboards # FH edit
   - type: MaterialStorage
     whitelist:
       tags:
@@ -899,6 +900,7 @@
   - type: Lathe
     idleState: limbgrower_idleoff
     runningState: limbgrower_idleon
+    productValueModifier: 0.05
     staticPacks:
     - MedicalSynthLimbsStatic
   - type: EmagLatheRecipes

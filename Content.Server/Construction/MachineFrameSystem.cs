@@ -157,6 +157,19 @@ public sealed class MachineFrameSystem : EntitySystem
             || _whitelist.IsBlacklistPass(component.BoardBlacklist, used))
             return false;
 
+        // Mono - board and frame matching
+        if (machineBoard.FrameSize != null && machineBoard.FrameSize != component.FrameSize)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("machine-frame-board-wrong-size"), uid);
+            return true;
+        }
+
+        if (machineBoard.FrameSize == null && component.FrameSize != null)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("machine-frame-board-wrong-size"), uid);
+            return true;
+        }
+        // End Mono
         if (!_container.TryRemoveFromContainer(used, false, out var wasInContainer) && wasInContainer) // Goobstation
             return false;
 

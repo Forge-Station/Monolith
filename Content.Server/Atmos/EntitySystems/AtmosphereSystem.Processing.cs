@@ -542,7 +542,7 @@ namespace Content.Server.Atmos.EntitySystems
         {
             processed = 0; // Forge-Change
             var atmosphere = ent.Comp1;
-            if(!atmosphere.ProcessingPaused)
+            if (!atmosphere.ProcessingPaused)
             {
                 if (AtmosForceFullGridDebug)
                 {

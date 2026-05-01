@@ -342,6 +342,7 @@
     - NFMedicalBoards # Frontier + Shitmed Change
     - NFServiceBoards # Frontier
     - MonoAdvancedShuttleComponents # Mono
+    - ForgeAdvancedShuttleComponents # Forge
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard

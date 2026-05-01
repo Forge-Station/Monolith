@@ -171,7 +171,7 @@
   - ContractorClothingUniformJumpsuitMilitaryChemistry
   - ContractorClothingUniformJumpsuitMilitaryVirology
   - ContractorClothingUniformJumpsuitMilitaryGenetics
- # - ContractorClothingUniformJumpsuitMilitaryCMO # Temp removed for MOM. Will return if replaced.
+  # - ContractorClothingUniformJumpsuitMilitaryCMO # Temp removed for MOM. Will return if replaced.
   - ContractorClothingUniformJumpsuitMilitaryScientist
   - ContractorClothingUniformJumpsuitMilitaryResearchDirector
   - ContractorClothingUniformJumpsuitMilitaryService
@@ -354,9 +354,9 @@
   - ContractorClothingOuterWinterMime
   - ContractorClothingOuterWinterQM
   - ContractorClothingOuterWinterRD
-#  - ContractorClothingOuterWinterCMO # Temp removed for MOM. Will return if replaced.
+  #  - ContractorClothingOuterWinterCMO # Temp removed for MOM. Will return if replaced.
   - ContractorClothingOuterWinterCE
-#  - ContractorClothingOuterCoatLabCmo # Temp removed for MOM. Will return if replaced.
+  #  - ContractorClothingOuterCoatLabCmo # Temp removed for MOM. Will return if replaced.
   - ContractorClothingOuterCoatLabSeniorPhysician
   - ContractorClothingOuterCoatRD
   - ContractorClothingOuterCoatLabSeniorResearcher
@@ -479,7 +479,7 @@
   - ContractorClothingShoesHighheelBoots
   - ContractorClothingShoesBootsCowboyFancy
   - ContractorClothingShoesBootsWinterChiefEngineer
-#  - ContractorClothingShoesBootsWinterCMO # Temp removed for MOM. Will return if replaced.
+  #  - ContractorClothingShoesBootsWinterCMO # Temp removed for MOM. Will return if replaced.
   - ContractorClothingShoesBootsWinterQM
   - ContractorClothingShoesBootsWinterRD
   - ContractorClothingShoesBootsWinterClown
@@ -542,7 +542,7 @@
   - ContractorClothingHeadHatBeretRND
   - ContractorClothingHeadHatBeretEngineering
   - ContractorClothingHeadHatBeretSeniorPhysician
-#  - ContractorClothingHeadHatBeretCmo # Temp removed for MOM. Will return if replaced.
+  #  - ContractorClothingHeadHatBeretCmo # Temp removed for MOM. Will return if replaced.
   - ContractorClothingHeadHatBeretQM
   - ContractorClothingHeadHatQMsoft
   - ContractorClothingHeadHatCardinal
@@ -688,8 +688,8 @@
   - ContractorClothingNeckCloakCapFormal
   - ContractorClothingNeckCloakQm
   - ContractorClothingNeckMantleQM
-#  - ContractorClothingCloakCmo # Temp removed for MOM. Will return if replaced.
-#  - ContractorClothingNeckMantleCMO # Temp removed for MOM. Will return if replaced.
+  #  - ContractorClothingCloakCmo # Temp removed for MOM. Will return if replaced.
+  #  - ContractorClothingNeckMantleCMO # Temp removed for MOM. Will return if replaced.
   - ContractorClothingNeckCloakRd
   - ContractorClothingNeckMantleRD
   - ContractorClothingNeckCloakCe
@@ -916,13 +916,14 @@
   id: ContractorEncryptionKey
   name: loadout-group-contractor-encryption-key
   minLimit: 0
-  maxLimit: 5
+  maxLimit: 6
   loadouts:
   - ContractorEncryptionKeyTraffic
   - ContractorEncryptionKeyMedical
   - ContractorEncryptionKeyCargo
   - ContractorEncryptionKeyEngineering
   - ContractorEncryptionKeyScience
+  - ContractorEncryptionKeyCustom
   fallbacks:
   - ContractorEncryptionKeyTraffic
 

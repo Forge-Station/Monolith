@@ -22,15 +22,15 @@
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
     - id: BluespaceCacheError
-#    - id: BluespaceCave # Mono edit
+    - id: ForgeBluespacePeriodicDinoCaves # Forge-Change
 #    - id: BluespaceVaultError
 #    - id: BluespaceVaultSmallError
-#    - id: BluespaceSyndicateFTLInterception
-# Mono edit start
-#    - id: BluespaceWizardFederationScout
-#    - id: BluespaceBloodMoon
-#    - id: BluespacePreFractureFTLInterception
-# Mono edit end
+    - id: ForgeBluespacePeriodicSyndieFTLIntercept # Forge-Change
+#    - id: BluespaceWizardFederationScout # Forge-Change
+    - id: ForgeBluespacePeriodicCult # Forge-Change
+    - id: ForgeBluespacePeriodicMercenaryShuttle # Forge-Change
+    - id: ForgeBluespacePeriodicSyntheticCore # Forge-Change
+#    - id: BluespacePreFractureFTLInterception # Forge-Change  
 
 - type: entity
   id: BluespaceDungeonEventScheduler

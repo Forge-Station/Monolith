@@ -1,2 +1,2 @@
-vessel-manus-name = Manus
-vessel-manus-desc = A claw-shaped ship with good amount of firepower. Includes 4 DRAVONs, 2 Vanyks and 1 TARNYX.
+vessel-manus-name = «Манус»
+vessel-manus-desc = Корабль, выполненный в форме когтя, с приличной огневой мощью. Оснащён 4-мя автопушками «Дравон», 2-мя ракетными контейнерами «Ванык» и 1-м орудием «TARNYX».

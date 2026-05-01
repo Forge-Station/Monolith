@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Шанти
   description: Среднегабаритный многоцеловой шаттл добывающего назначения . Рекомендованный состав 2-4 человека
-  price: 120000
+  price: 140000
   category: Medium
   group: Renegate
   access: Renegate

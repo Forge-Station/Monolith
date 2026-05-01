@@ -1,2 +1,2 @@
-vessel-hermes-name = Hermes
-vessel-hermes-desc = The mailing segment of the combined service ship, designed for speed above all. This one is designed and produced by The Pantheon Collective.
+vessel-hermes-name = «Гермес»
+vessel-hermes-desc = Почтовый отсек сервисного корабля, в котором приоритет отдан скорости. Разработан и произведён The Pantheon Collective.

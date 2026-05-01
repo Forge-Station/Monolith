@@ -9,8 +9,8 @@
 - type: vessel
   id: dreadnought
   parent: BaseVessel
-  name: PMSC-A Дредноут
-  description: Ударный шаттл предназначенный для боя, имеет хорошую лицевую броню, но при этом уязвим сзади. Основное вооружение 2 хейдеса и 2 цирексы
+  name: PMSC-A Dreadnought
+  description: An assault shuttle designed for combat, featuring strong frontal armor but vulnerable from the rear. Its primary armament consists of two HADES and two CYREXA weapons.
   price: 220000
   category: Medium
   group: Shipyard

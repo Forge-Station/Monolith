@@ -24,7 +24,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'ESF Циклон{1}'
+          mapNameTemplate: 'ESF Циклон SEW{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

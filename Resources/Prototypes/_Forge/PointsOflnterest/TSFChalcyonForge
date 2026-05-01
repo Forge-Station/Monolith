@@ -18,7 +18,7 @@
   maximumDistance: 5500 # Mono
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
-  gridPath: /Maps/_Mono/POI/tsfmchalcyon.yml
+  gridPath: /Maps/_Forge/POI/TSFChalcyonForge.yml
   addComponents:
   - type: IFF
     color: "#047abd"
@@ -29,7 +29,7 @@
 - type: gameMap
   id: TSFMCHalcyon
   mapName: 'Флагман ТСФ «Халкион»'
-  mapPath: /Maps/_Mono/POI/tsfmchalcyon.yml
+  mapPath: /Maps/_Forge/POI/TSFChalcyonForge.yml
   minPlayers: 0
   randomRotation: false
   stations:

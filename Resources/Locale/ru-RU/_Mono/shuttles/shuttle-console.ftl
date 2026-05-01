@@ -51,4 +51,4 @@ shuttle-console-verb-lock-ship = Заблокировать корабль
 shuttle-console-verb-unlock-ship = Разблокировать корабль
 
 ## Shuttle Console FTL
-shuttle-ftl-proximity = Невозможно выполнить блюспейс скачек рядом с другими кораблями.
+shuttle-ftl-proximity = Массивный объект блокирует блюспейс перемещение!

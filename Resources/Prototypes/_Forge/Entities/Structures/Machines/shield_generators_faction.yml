@@ -1,0 +1,547 @@
+# Faction heavy shields: same chassis tiers as FSG-420 / 470P / 600C, tuned per doctrine (tradeoffs on ShipShieldEmitter).
+
+# --- TSFMC — regulation-grade sustained combat; pays in baseline power or lockout ---
+
+- type: entity
+  id: ShieldGeneratorForgeTSFHeavy
+  parent: ShieldGeneratorFSG420
+  name: TSFMC SGS-440 "Citadel" shield generator
+  suffix: tier 3
+  description: >-
+    A TSFMC-issue heavy screen with markedly faster regeneration, a much higher overload ceiling and a gentler
+    damage-power curve than civilian FSG-420—at the cost of heavy baseline and peak reactor draw.
+  components:
+  - type: Machine
+    board: MachineShieldForgeTSFHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#48E8A8"
+    healPerSecond: 138
+    damageLimit: 13000
+    damageExp: 1.02
+    baseDraw: 51000
+    maxDraw: 112000
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#48E8A8"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#48E8A8"
+
+- type: entity
+  id: ShieldGeneratorForgeTSFPrismatic
+  parent: ShieldGeneratorFSG470P
+  name: TSFMC SGS-470P "Corona Array" shield generator
+  suffix: tier 3
+  description: >-
+    A TSFMC prismatic array with a much deeper buffer, faster in-combat regeneration and a sharply shorter overload lockout;
+    sustained fire makes it far thirstier than civilian Lattice, with a steeper damage-power curve.
+  components:
+  - type: Machine
+    board: MachineShieldForgeTSFPrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#66CCFF"
+    healPerSecond: 100
+    damageLimit: 15400
+    damageExp: 1.09
+    damageOverloadTimePunishment: 102
+    baseDraw: 51000
+    maxDraw: 104000
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#66CCFF"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#66CCFF"
+
+- type: entity
+  id: ShieldGeneratorForgeTSFCollision
+  parent: ShieldGeneratorFSG600C
+  name: TSFMC SGS-600C "Breakshell" shield generator
+  suffix: tier 3
+  description: >-
+    A TSFMC siege field that damps hull impacts substantially better than a stock Bastion;
+    shield face regeneration is much slower and overload lockout runs far longer if the field is abused.
+  components:
+  - type: Machine
+    board: MachineShieldForgeTSFCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#FF6B8A"
+    collisionResistanceMultiplier: 0.062
+    healPerSecond: 82
+    damageOverloadTimePunishment: 175
+    maxDraw: 102000
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF6B8A"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF6B8A"
+
+# --- USSP — economical convoy hardware; weaker peak combat regen, softer kinetic screen on ram doctrine ---
+
+- type: entity
+  id: ShieldGeneratorForgeUsspHeavy
+  parent: ShieldGeneratorFSG420
+  name: Union SGS-420 "Forward Redoubt" shield generator
+  suffix: tier 3
+  description: >-
+    A Union heavy screen that is very gentle on convoy reactors—low idle and peak draw—
+    but noticeably slower to rebuild the shield face, with a lower overload ceiling and a harsher damage-power curve.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUsspHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#5EB8AA"
+    healPerSecond: 86
+    damageLimit: 10000
+    damageExp: 1.08
+    baseDraw: 35000
+    maxDraw: 86000
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#5EB8AA"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#5EB8AA"
+
+- type: entity
+  id: ShieldGeneratorForgeUsspPrismatic
+  parent: ShieldGeneratorFSG470P
+  name: Union SGS-470P "Polar Lattice" shield generator
+  suffix: tier 3
+  description: >-
+    A Union prismatic lattice that is cheap to run and rebounds aggressively off-grid,
+    at the cost of a much smaller buffer, slower in-combat regeneration and a steep power penalty once damaged.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUsspPrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#D9A066"
+    healPerSecond: 72
+    damageLimit: 11800
+    damageExp: 1.08
+    baseDraw: 40500
+    maxDraw: 91000
+    unpoweredBonus: 5.0
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#D9A066"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#D9A066"
+
+- type: entity
+  id: ShieldGeneratorForgeUsspCollision
+  parent: ShieldGeneratorFSG600C
+  name: Union SGS-600C "Ledokol Ramfield" shield generator
+  suffix: tier 3
+  description: >-
+    A Union icebreaker field with a huge buffer, very fast face regeneration and a forgiving damage-power curve,
+    but hull-impact damping is clearly worse than a civilian Bastion—expect harder rams.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUsspCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#B84C2A"
+    collisionResistanceMultiplier: 0.108
+    healPerSecond: 128
+    damageLimit: 18500
+    damageExp: 0.92
+    baseDraw: 54500
+    maxDraw: 108000
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#B84C2A"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#B84C2A"
+
+# --- Renegates — brawler tempo: snaps back fast, thinner ceiling, thirsty when hurt ---
+
+- type: entity
+  id: ShieldGeneratorForgeRenegateHeavy
+  parent: ShieldGeneratorFSG420
+  name: RSG-420 "Dust Citadel" shield generator
+  suffix: tier 3
+  description: >-
+    A Renegate citadel screen that tears back to strength after a breach and clears overload lockout in a blink,
+    but offers a razor-thin damage wallet and punishes hull hits with a brutal spike in draw once the field is hurt.
+  components:
+  - type: Machine
+    board: MachineShieldForgeRenegateHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#E87B45"
+    healPerSecond: 138
+    damageLimit: 9600
+    damageExp: 1.14
+    baseDraw: 46500
+    maxDraw: 104000
+    damageOverloadTimePunishment: 78
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#E87B45"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#E87B45"
+
+- type: entity
+  id: ShieldGeneratorForgeRenegatePrismatic
+  parent: ShieldGeneratorFSG470P
+  name: RSG-470P "Azimuth Veil" shield generator
+  suffix: tier 3
+  description: >-
+    A Renegate prismatic veil built for enormous spike budgets and rapid overload clearance in knife-fight tempos,
+    at the cost of a shallow lattice, thirsty baseline draw and a steep power ramp under sustained fire.
+  components:
+  - type: Machine
+    board: MachineShieldForgeRenegatePrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#E85BB8"
+    healPerSecond: 100
+    damageLimit: 11800
+    damageExp: 1.08
+    baseDraw: 49000
+    maxDraw: 116000
+    damageOverloadTimePunishment: 100
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#E85BB8"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#E85BB8"
+
+- type: entity
+  id: ShieldGeneratorForgeRenegateCollision
+  parent: ShieldGeneratorFSG600C
+  name: RSG-600C "Galandec Spur" shield generator
+  suffix: tier 3
+  description: >-
+    A Renegate collision spur that damps hull impacts far better than a stock Bastion,
+    pairing very fast face regeneration with a greedy baseline draw, extended overload punishment and a modest damage wallet.
+  components:
+  - type: Machine
+    board: MachineShieldForgeRenegateCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#9C3D2E"
+    collisionResistanceMultiplier: 0.058
+    healPerSecond: 122
+    damageLimit: 15200
+    damageExp: 1.05
+    baseDraw: 60000
+    maxDraw: 118000
+    damageOverloadTimePunishment: 158
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#9C3D2E"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#9C3D2E"
+
+# --- Viper Group — strike aggression: high ceiling, narrow overload margin ---
+
+- type: entity
+  id: ShieldGeneratorForgeViperHeavy
+  parent: ShieldGeneratorFSG420
+  name: VAS-420 "Copperhead Screen" shield generator
+  suffix: tier 3
+  description: >-
+    A Viper heavy screen with savage regeneration and a towering peak draw envelope for prolonged slashing attacks,
+    but a shallow overload buffer and a vicious power ramp once damage stacks on the lattice.
+  components:
+  - type: Machine
+    board: MachineShieldForgeViperHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#FF7A4A"
+    healPerSecond: 134
+    baseDraw: 45000
+    maxDraw: 114000
+    damageExp: 1.12
+    damageLimit: 9800
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF7A4A"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF7A4A"
+
+- type: entity
+  id: ShieldGeneratorForgeViperPrismatic
+  parent: ShieldGeneratorFSG470P
+  name: VAS-470P "Glass Mamba Lattice" shield generator
+  suffix: tier 3
+  description: >-
+    A Viper prismatic lattice tuned for extreme spike demand and a very deep damage wallet,
+    trading glacial in-combat regeneration, a thirsty cruise draw and brutal overload lockouts.
+  components:
+  - type: Machine
+    board: MachineShieldForgeViperPrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#FF3344"
+    maxDraw: 118000
+    baseDraw: 52000
+    damageExp: 1.06
+    damageLimit: 14200
+    healPerSecond: 68
+    damageOverloadTimePunishment: 152
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF3344"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF3344"
+
+- type: entity
+  id: ShieldGeneratorForgeViperCollision
+  parent: ShieldGeneratorFSG600C
+  name: VAS-600C "Fangsaw Collision Net" shield generator
+  suffix: tier 3
+  description: >-
+    A Viper collision net with best-in-class impact damping among Forge factions,
+    at the cost of a noticeably smaller damage pool, sluggish face regen, and the longest overload lockouts in its class.
+  components:
+  - type: Machine
+    board: MachineShieldForgeViperCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#991111"
+    collisionResistanceMultiplier: 0.058
+    healPerSecond: 90
+    damageLimit: 14200
+    baseDraw: 54000
+    damageOverloadTimePunishment: 182
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#991111"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#991111"
+
+# --- Ullman Industries — contract efficiency: cheap cruise power, slow recovery from failure ---
+
+- type: entity
+  id: ShieldGeneratorForgeUllmanHeavy
+  parent: ShieldGeneratorFSG420
+  name: UIS SGD-440 "Indigo Bulwark" shield generator
+  suffix: tier 3
+  description: >-
+    An Ullman bulwark that is extremely cheap to keep online while pushing the overload buffer wider than civilian Redoubt,
+    but regenerates the face slowly, stretches post-breach lockouts severely and punishes a hurt field with a steeper power curve.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUllmanHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#8B6CB8"
+    baseDraw: 36500
+    maxDraw: 94000
+    healPerSecond: 94
+    damageLimit: 12400
+    damageExp: 1.07
+    damageOverloadTimePunishment: 155
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#8B6CB8"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#8B6CB8"
+
+- type: entity
+  id: ShieldGeneratorForgeUllmanPrismatic
+  parent: ShieldGeneratorFSG470P
+  name: UIS SGD-470P "Clause Lattice" shield generator
+  suffix: tier 3
+  description: >-
+    An Ullman prismatic lattice optimized for lean operating budgets—very low draw and a capped peak—
+    with a deeper wallet than stock Lattice but sluggish face regeneration, anemic off-grid rebound and long overload recovery.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUllmanPrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#D4B8F0"
+    baseDraw: 42000
+    maxDraw: 96000
+    damageLimit: 14000
+    healPerSecond: 75
+    damageExp: 1.05
+    unpoweredBonus: 2.8
+    damageOverloadTimePunishment: 145
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#D4B8F0"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#D4B8F0"
+
+- type: entity
+  id: ShieldGeneratorForgeUllmanCollision
+  parent: ShieldGeneratorFSG600C
+  name: UIS SGD-600C "Kinetic Escrow Ram" shield generator
+  suffix: tier 3
+  description: >-
+    An Ullman escrow ram field that keeps operating costs predictable and damps impacts a touch better than a Bastion,
+    yet offers a smaller damage wallet, slower face regeneration and very long overload lockouts—still no kinetic specialist.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUllmanCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#5A3D7A"
+    collisionResistanceMultiplier: 0.072
+    baseDraw: 49500
+    maxDraw: 106000
+    healPerSecond: 100
+    damageLimit: 15200
+    damageOverloadTimePunishment: 168
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#5A3D7A"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#5A3D7A"

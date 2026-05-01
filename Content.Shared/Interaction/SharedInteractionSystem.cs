@@ -31,6 +31,7 @@ using Content.Shared.Wall;
 using Content.Shared._Goobstation.DoAfter; // Goobstation
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
+using Robust.Shared.Configuration; // Forge-Change
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
@@ -52,6 +53,7 @@ namespace Content.Shared.Interaction
     public abstract partial class SharedInteractionSystem : EntitySystem
     {
         [Dependency] private readonly IGameTiming _gameTiming = default!;
+        [Dependency] private readonly IConfigurationManager _cfg = default!; // Forge-Change
         [Dependency] private readonly IMapManager _mapManager = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
         [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
@@ -89,6 +91,7 @@ namespace Content.Shared.Interaction
         public const float InteractionRangeSquared = InteractionRange * InteractionRange;
         public const float MaxRaycastRange = 100f;
         public const string RateLimitKey = "Interaction";
+        public const string InvalidRateLimitKey = "InteractionInvalid"; // Forge-Change
 
         public delegate bool Ignored(EntityUid entity);
 
@@ -133,7 +136,15 @@ namespace Content.Shared.Interaction
                     CCVars.InteractionRateLimitAnnounceAdminsDelay,
                     RateLimitAlertAdmins)
             );
-
+            // Forge-Change-start
+            _rateLimit.Register(InvalidRateLimitKey,
+                new RateLimitRegistration(CCVars.InteractionInvalidRateLimitPeriod,
+                    CCVars.InteractionInvalidRateLimitCount,
+                    InvalidRateLimitPlayerLimited,
+                    CCVars.InteractionInvalidRateLimitAnnounceAdminsDelay,
+                    InvalidRateLimitAlertAdmins)
+            );
+            // Forge-Change-end
             InitializeBlocking();
         }
 
@@ -141,7 +152,35 @@ namespace Content.Shared.Interaction
         {
             _chat.SendAdminAlert(Loc.GetString("interaction-rate-limit-admin-announcement", ("player", session.Name)));
         }
+        // Forge-Change-start
+        private void InvalidRateLimitPlayerLimited(ICommonSession player)
+        {
+            if (_cfg.GetCVar(CCVars.InteractionInvalidRateLimitDisconnect))
+                player.Channel.Disconnect("Too many invalid interaction requests.");
+        }
 
+        private void InvalidRateLimitAlertAdmins(ICommonSession player)
+        {
+            _chat.SendAdminAlert($"Player {player.Name} is spamming invalid interaction requests.");
+        }
+
+        private void HandleClientInputFailure(ICommonSession? session, string action, ClientInputValidationResult failure)
+        {
+            if (failure == ClientInputValidationResult.RateLimited)
+                return;
+
+            if (session == null)
+            {
+                Log.Info($"{action} input validation failed: {failure}");
+                return;
+            }
+
+            if (_rateLimit.CountAction(session, InvalidRateLimitKey) != RateLimitStatus.Allowed)
+                return;
+
+            Log.Info($"{action} input validation failed: {failure}. Session={session}");
+        }
+        // Forge-Change-end
         public override void Shutdown()
         {
             CommandBinds.Unregister<SharedInteractionSystem>();
@@ -241,9 +280,9 @@ namespace Content.Shared.Interaction
 
         private bool HandleTryPullObject(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
-            if (!ValidateClientInput(session, coords, uid, out var userEntity))
+            if (!ValidateClientInput(session, coords, uid, out var userEntity, out var failure)) // Forge-Change
             {
-                Log.Info($"TryPullObject input validation failed");
+                HandleClientInputFailure(session, "TryPullObject", failure); // Forge-Change
                 return true;
             }
 
@@ -270,11 +309,19 @@ namespace Content.Shared.Interaction
             var item = GetEntity(msg.ItemUid);
 
             // client sanitization
-            if (!TryComp(item, out TransformComponent? itemXform) || !ValidateClientInput(args.SenderSession, itemXform.Coordinates, item, out var user))
+            // Forge-Change-start
+            if (!TryComp(item, out TransformComponent? itemXform))
             {
-                Log.Info($"Inventory interaction validation failed.  Session={args.SenderSession}");
+                HandleClientInputFailure(args.SenderSession, "Inventory interaction", ClientInputValidationResult.InvalidTarget);
                 return;
             }
+
+            if (!ValidateClientInput(args.SenderSession, itemXform.Coordinates, item, out var user, out var failure))
+            {
+                HandleClientInputFailure(args.SenderSession, "Inventory interaction", failure);
+                return;
+            }
+            // Forge-Change-end
 
             // We won't bother to check that the target item is ACTUALLY in an inventory slot. UserInteraction() and
             // InteractionActivate() should check that the item is accessible. So.. if a user wants to lie about an
@@ -291,13 +338,14 @@ namespace Content.Shared.Interaction
 
         public bool HandleAltUseInteraction(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
+            // Forge-Change-start
             // client sanitization
-            if (!ValidateClientInput(session, coords, uid, out var user))
+            if (!ValidateClientInput(session, coords, uid, out var user, out var failure))
             {
-                Log.Info($"Alt-use input validation failed");
+                HandleClientInputFailure(session, "Alt-use", failure);
                 return true;
             }
-
+            // Forge-Change-end
             UserInteraction(user.Value, coords, uid, altInteract: true, checkAccess: ShouldCheckAccess(user.Value));
 
             return false;
@@ -306,9 +354,9 @@ namespace Content.Shared.Interaction
         public bool HandleUseInteraction(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
             // client sanitization
-            if (!ValidateClientInput(session, coords, uid, out var userEntity))
+            if (!ValidateClientInput(session, coords, uid, out var userEntity, out var failure)) // Forge-Change
             {
-                Log.Info($"Use input validation failed");
+                HandleClientInputFailure(session, "Use", failure); // Forge-Change
                 return true;
             }
 
@@ -1112,9 +1160,9 @@ namespace Content.Shared.Interaction
         #region ActivateItemInWorld
         private bool HandleActivateItemInWorld(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
-            if (!ValidateClientInput(session, coords, uid, out var user))
+            if (!ValidateClientInput(session, coords, uid, out var user, out var failure)) // Forge-Change
             {
-                Log.Info($"ActivateItemInWorld input validation failed");
+                HandleClientInputFailure(session, "ActivateItemInWorld", failure); // Forge-Change
                 return false;
             }
 
@@ -1369,23 +1417,25 @@ namespace Content.Shared.Interaction
             return InRangeUnobstructed(user, wearer) && _containerSystem.IsInSameOrParentContainer(user, wearer);
         }
 
-        protected bool ValidateClientInput(
+        private bool ValidateClientInput( // Forge-Change: protected
             ICommonSession? session,
             EntityCoordinates coords,
             EntityUid uid,
-            [NotNullWhen(true)] out EntityUid? userEntity)
+            [NotNullWhen(true)] out EntityUid? userEntity,
+            out ClientInputValidationResult failure) // Forge-Change
         {
             userEntity = null;
+            failure = ClientInputValidationResult.None; // Forge-Change
 
             if (!coords.IsValid(EntityManager))
             {
-                Log.Info($"Invalid Coordinates: client={session}, coords={coords}");
+                failure = ClientInputValidationResult.InvalidCoordinates; // Forge-Change
                 return false;
             }
 
             if (IsClientSide(uid))
             {
-                Log.Warning($"Client sent interaction with client-side entity. Session={session}, Uid={uid}");
+                failure = ClientInputValidationResult.ClientSideEntity; // Forge-Change
                 return false;
             }
 
@@ -1393,17 +1443,25 @@ namespace Content.Shared.Interaction
 
             if (userEntity == null || !userEntity.Value.Valid)
             {
-                Log.Warning($"Client sent interaction with no attached entity. Session={session}");
+                failure = ClientInputValidationResult.MissingAttachedEntity; // Forge-Change
                 return false;
             }
 
             if (!Exists(userEntity))
             {
-                Log.Warning($"Client attempted interaction with a non-existent attached entity. Session={session},  entity={userEntity}");
+                failure = ClientInputValidationResult.InvalidAttachedEntity; // Forge-Change
                 return false;
             }
 
-            return _rateLimit.CountAction(session!, RateLimitKey) == RateLimitStatus.Allowed;
+            // Forge-Change-start
+            if (_rateLimit.CountAction(session!, RateLimitKey) != RateLimitStatus.Allowed)
+            {
+                failure = ClientInputValidationResult.RateLimited;
+                return false;
+            }
+
+            return true;
+            // Forge-Change-end
         }
 
         /// <summary>
@@ -1543,4 +1601,17 @@ namespace Content.Shared.Interaction
         public bool Handled;
         public bool InRange = false;
     }
+
 }
+// Forge-Change-start
+internal enum ClientInputValidationResult : byte
+{
+    None,
+    RateLimited,
+    InvalidCoordinates,
+    ClientSideEntity,
+    MissingAttachedEntity,
+    InvalidAttachedEntity,
+    InvalidTarget,
+}
+// Forge-Change-end

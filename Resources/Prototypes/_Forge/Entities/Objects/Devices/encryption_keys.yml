@@ -1,4 +1,19 @@
 - type: entity
+  parent: [EncryptionKey, RecyclableItemDeviceTiny]
+  id: EncryptionKeyCustom
+  name: customizable encryption key
+  description: An encryption key for handheld radio frequencies. Why carry a whole radio?
+  components:
+  - type: EncryptionKey
+    channels:
+    - Handheld
+  - type: ConfigurableEncryptionKey
+  - type: Sprite
+    layers:
+    - state: crypt_orange
+    - state: common_label
+
+- type: entity
   parent: [ EncryptionKey ]
   id: EncryptionKeyHospital
   name: hospital encrypt key

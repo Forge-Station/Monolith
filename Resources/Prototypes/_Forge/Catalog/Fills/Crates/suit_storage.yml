@@ -125,3 +125,19 @@
     - id: ClothingMaskGasRenegate
   - type: AccessReader
     access: [["Renegate"]]
+
+- type: entity
+  id: SuitStorageLeaderERT
+  parent: SuitStorageBase
+  suffix: Hardsuit, NT
+  components:
+  - type: StorageFill
+    contents:
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+    - id: ClothingOuterHardsuitERTLeader
+    - id: JetpackBlueFilled
+    - id: ClothingShoesBootsMagAdv
+    - id: ClothingMaskGasERT
+  - type: AccessReader
+    access: [["Command"]]

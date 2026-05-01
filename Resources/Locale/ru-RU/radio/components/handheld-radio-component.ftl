@@ -9,7 +9,7 @@ handheld-radio-menu-title = Портативная рация
 handheld-radio-current-text-frequency = Частота передачи
 handheld-radio-button-text-mic = Мик.
 handheld-radio-button-text-speaker = Динам.
-handheld-radio-flavor-text-left = СвязНой, 1000-3000 kHz
+handheld-radio-flavor-text-left = СвязНой, 1000-30000 kHz
 
 # Nuclear-14-End
 

@@ -6,6 +6,7 @@
   id: ShieldGeneratorForgeTSFHeavy
   parent: ShieldGeneratorFSG420
   name: TSFMC SGS-440 "Citadel" shield generator
+  suffix: tier 3
   description: >-
     A TSFMC-issue heavy screen with faster regeneration and a higher overload ceiling than civilian FSG-420,
     at the cost of noticeably higher idle and peak power draw.
@@ -40,6 +41,7 @@
   id: ShieldGeneratorForgeTSFPrismatic
   parent: ShieldGeneratorFSG470P
   name: TSFMC SGS-470P "Corona Array" shield generator
+  suffix: tier 3
   description: >-
     A TSFMC prismatic array with a deeper damage buffer and quicker recovery from overload lockout;
     under sustained abuse it becomes more power-hungry than standard Lattice-class hardware.
@@ -74,6 +76,7 @@
   id: ShieldGeneratorForgeTSFCollision
   parent: ShieldGeneratorFSG600C
   name: TSFMC SGS-600C "Breakshell" shield generator
+  suffix: tier 3
   description: >-
     A TSFMC siege field that dulls hull impacts harder than stock Bastion hardware;
     regeneration is slower and overload punishment lasts longer if the screen is driven into the red.
@@ -108,6 +111,7 @@
   id: ShieldGeneratorForgeUsspHeavy
   parent: ShieldGeneratorFSG420
   name: Union SGS-420 "Forward Redoubt" shield generator
+  suffix: tier 3
   description: >-
     A Union heavy screen tuned for lower continuous power draw and smaller peak demand—easy on convoy reactors—
     with reduced regeneration and a slightly lower overload threshold than baseline FSG-420.
@@ -141,6 +145,7 @@
   id: ShieldGeneratorForgeUsspPrismatic
   parent: ShieldGeneratorFSG470P
   name: Union SGS-470P "Polar Lattice" shield generator
+  suffix: tier 3
   description: >-
     A Union prismatic lattice that sips power and rebuilds faster while depowered or in recharge mode,
     trading away top-end draw and some lattice capacity versus civilian 470P.
@@ -174,6 +179,7 @@
   id: ShieldGeneratorForgeUsspCollision
   parent: ShieldGeneratorFSG600C
   name: Union SGS-600C "Ledokol Ramfield" shield generator
+  suffix: tier 3
   description: >-
     A Union icebreaker field with a generous damage pool and gentler power curve when stressed,
     but inferior hull-impact damping compared to standard Bastion collision tuning.
@@ -209,6 +215,7 @@
   id: ShieldGeneratorForgeRenegateHeavy
   parent: ShieldGeneratorFSG420
   name: RSG-420 "Dust Citadel" shield generator
+  suffix: tier 3
   description: >-
     A Renegate citadel screen that shrugs off overload lockout quickly and regenerates aggressively,
     trading raw overload headroom and power efficiency once the shield is damaged.
@@ -242,6 +249,7 @@
   id: ShieldGeneratorForgeRenegatePrismatic
   parent: ShieldGeneratorFSG470P
   name: RSG-470P "Azimuth Veil" shield generator
+  suffix: tier 3
   description: >-
     A Renegate prismatic veil with extra peak draw and faster overload recovery for knife-fight tempos,
     sacrificing lattice depth versus standard 470P.
@@ -275,6 +283,7 @@
   id: ShieldGeneratorForgeRenegateCollision
   parent: ShieldGeneratorFSG600C
   name: RSG-600C "Galandec Spur" shield generator
+  suffix: tier 3
   description: >-
     A Renegate collision spur that shaves hull impacts harder than baseline Bastion tuning,
     demanding extra reactor headroom and offering slightly slower face regeneration.
@@ -309,6 +318,7 @@
   id: ShieldGeneratorForgeViperHeavy
   parent: ShieldGeneratorFSG420
   name: VAS-420 "Copperhead Screen" shield generator
+  suffix: tier 3
   description: >-
     A Viper heavy screen with superior regeneration and extended peak draw for prolonged slashing attacks,
     but a lower overload threshold and steeper power curve as damage stacks.
@@ -342,6 +352,7 @@
   id: ShieldGeneratorForgeViperPrismatic
   parent: ShieldGeneratorFSG470P
   name: VAS-470P "Glass Mamba Lattice" shield generator
+  suffix: tier 3
   description: >-
     A Viper prismatic lattice tuned for enormous spike demand and a deeper damage wallet,
     bleeding regeneration speed and extending overload punishment if the array is mistreated.
@@ -376,6 +387,7 @@
   id: ShieldGeneratorForgeViperCollision
   parent: ShieldGeneratorFSG600C
   name: VAS-600C "Fangsaw Collision Net" shield generator
+  suffix: tier 3
   description: >-
     A Viper collision net with best-in-class impact damping among Forge factions,
     at the cost of a smaller damage pool, slower face regen, and brutal overload timeouts.
@@ -411,6 +423,7 @@
   id: ShieldGeneratorForgeUllmanHeavy
   parent: ShieldGeneratorFSG420
   name: UIS SGD-440 "Indigo Bulwark" shield generator
+  suffix: tier 3
   description: >-
     An Ullman bulwark that trims idle draw while modestly extending the overload buffer,
     sacrificing regeneration speed and stretching post-breach lockouts to enforce conservative helms.
@@ -444,6 +457,7 @@
   id: ShieldGeneratorForgeUllmanPrismatic
   parent: ShieldGeneratorFSG470P
   name: UIS SGD-470P "Clause Lattice" shield generator
+  suffix: tier 3
   description: >-
     An Ullman prismatic lattice optimized for lean operating budgets—lower draw and peak demand—
     with slightly improved capacity but weaker passive rebound and face regeneration.
@@ -478,6 +492,7 @@
   id: ShieldGeneratorForgeUllmanCollision
   parent: ShieldGeneratorFSG600C
   name: UIS SGD-600C "Kinetic Escrow Ram" shield generator
+  suffix: tier 3
   description: >-
     An Ullman escrow ram field that keeps operating costs predictable while still damping impacts,
     though it cannot match a full Bastion kinetic brake and locks down longer after an overload event.

@@ -172,6 +172,15 @@ public abstract partial class SharedDoorSystem : EntitySystem
         else
             _activeDoors.Add(ent);
 
+        // Keep fixtures, occluder and sprite state in sync with replicated DoorComponent (e.g. after reconnect).
+        // Without this, Appearance can lag behind or mismatch, and Update can advance transitions on stale visuals.
+        var collidable = door.State == DoorState.Closed
+                         || door.State == DoorState.Closing && door.Partial
+                         || door.State == DoorState.Opening && !door.Partial;
+
+        SetCollidable(ent, collidable, door);
+        AppearanceSystem.SetData(ent, DoorVisuals.State, door.State);
+
         RaiseLocalEvent(ent, new DoorStateChangedEvent(door.State));
     }
 
@@ -759,6 +768,9 @@ public abstract partial class SharedDoorSystem : EntitySystem
     /// </summary>
     public override void Update(float frameTime)
     {
+        if (GameTiming.ApplyingState)
+            return;
+
         var time = GameTiming.CurTime;
 
         foreach (var ent in _activeDoors.ToList())

@@ -1,2 +1,4 @@
-vessel-parabellum-name = Parabellum
-vessel-parabellum-desc = The parabellum is a patrol boat, made for escorting and unsuprisingly; patrolling stations and depots from any malicious ships. It's equipped with EMP launchers, as well as a hybrid EMP Missile launcher for more tougher encounters.
+vessel-parabellum-name = «Парабеллум»
+vessel-parabellum-desc =
+    «Парабеллум» — патрульный катер, предназначенный для сопровождения и, что неудивительно, патрулирования станций и складов от враждебных кораблей.
+    Оснащён ЭМИ-пусковыми установками, а также гибридной установкой ЭМИ-ракет для более сложных столкновений.

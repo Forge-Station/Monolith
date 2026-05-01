@@ -117,14 +117,17 @@ public sealed class AirlockSystem : SharedAirlockSystem
             );
         }
 
+        // Idle open/closed must use static unlit states. OpeningSpriteState/ClosingSpriteState RSI entries are
+        // full frame sequences — using them here loops forever (looks like "disco" / opening anim), especially
+        // after reconnect when Appearance reapplies often with Forge openUnlitVisible on closed doors.
         switch (state)
         {
             case DoorState.Open:
-                args.Sprite.LayerSetState(DoorVisualLayers.BaseUnlit, comp.ClosingSpriteState);
+                args.Sprite.LayerSetState(DoorVisualLayers.BaseUnlit, comp.OpenSpriteState);
                 args.Sprite.LayerSetAnimationTime(DoorVisualLayers.BaseUnlit, 0);
                 break;
             case DoorState.Closed:
-                args.Sprite.LayerSetState(DoorVisualLayers.BaseUnlit, comp.OpeningSpriteState);
+                args.Sprite.LayerSetState(DoorVisualLayers.BaseUnlit, comp.ClosedSpriteState);
                 args.Sprite.LayerSetAnimationTime(DoorVisualLayers.BaseUnlit, 0);
                 break;
         }

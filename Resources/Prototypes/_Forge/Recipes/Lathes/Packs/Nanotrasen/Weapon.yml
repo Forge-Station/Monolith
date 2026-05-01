@@ -1,0 +1,31 @@
+- type: latheRecipePack
+  id: NanotrasenWeapon
+  recipes:
+  - WeaponRevolverInspector
+  - WeaponRevolverDeckard
+  - WeaponFlareGunSecurity
+  - WeaponPistolN1984
+  - WeaponRevolverMateba
+  - WeaponPulsePistol
+  - EnergySwordBlue
+  - EnergyShield
+  - WeaponEnergyGunLawbringer
+  - WeaponEnergyShotgun
+  - WeaponPulseCarbine
+  - WeaponRifleNtsfLtr
+  - WeaponSubMachineGunVectorNtsfHclm
+  - WeaponLRC21PPL
+  - PulsedPlasmaLaserCanister
+  - WeaponPulseRifle
+  - WeaponLauncherMPSSM
+  - WeaponLauncherMk348
+  - WeaponHeavyPulseCannon
+  - Magazine45_magnumPistolHighCapacityFMJ
+  - Magazine45_magnumPistolHighCapacityEmpty
+  - CartridgeMPSSMHEAT
+  - CartridgeMPSSMMissile
+
+- type: latheRecipePack
+  id: NanotrasenMechWeapon
+  recipes:  
+  - WeaponMechCombatPulseRifleTSF

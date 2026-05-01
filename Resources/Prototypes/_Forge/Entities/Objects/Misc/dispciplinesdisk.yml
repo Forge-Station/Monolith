@@ -134,3 +134,24 @@
   - type: StaticPrice
     price: 1000
     vendPrice: 8000
+
+- type: entity
+  id: DisciplinesDiskNanotrasen
+  parent: BaseItem
+  name: technology disk (NT)
+  description: Disk with Nanotrasen technology.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - Nanotrasen
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: nt
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 15000

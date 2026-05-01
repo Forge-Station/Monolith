@@ -12,6 +12,13 @@
     sprite: _NF/Clothing/Head/Helmets/ert_mailcarrier.rsi
   - type: Clothing
     sprite: _NF/Clothing/Head/Helmets/ert_mailcarrier.rsi
+  - type: Armor # Forge-change
+    modifiers:
+      coefficients:
+        Blunt: 0.8 # 0.9 -> 0.8 Forge-change
+        Slash: 0.8 # 0.9 -> 0.8 Forge-change
+        Piercing: 0.8 # 0.9 -> 0.8 Forge-change
+        Heat: 0.8 # 0.9 -> 0.8 Forge-change
 
 - type: entity
   parent: ClothingHeadHelmetBasic

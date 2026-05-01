@@ -53,7 +53,7 @@ namespace Content.Server.Atmos.EntitySystems
                 return false;
 
             var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
-            AddChunkTile(gridAtmosphere.SuperconductivityTiles, chunk.SuperconductivityTiles, tile);
+            AddChunkTile(gridAtmosphere, gridAtmosphere.SuperconductivityTiles, chunk.SuperconductivityTiles, tile); // Forge-Change
             return true;
         }
 
@@ -88,7 +88,7 @@ namespace Content.Server.Atmos.EntitySystems
             if (temperature < Atmospherics.MinimumTemperatureForSuperconduction)
             {
                 if (TryGetChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
-                    RemoveChunkTile(gridAtmosphere.SuperconductivityTiles, chunk.SuperconductivityTiles, tile);
+                    RemoveChunkTile(gridAtmosphere, gridAtmosphere.SuperconductivityTiles, chunk.SuperconductivityTiles, tile); // Forge-Change
                 else
                     gridAtmosphere.SuperconductivityTiles.Remove(tile);
             }

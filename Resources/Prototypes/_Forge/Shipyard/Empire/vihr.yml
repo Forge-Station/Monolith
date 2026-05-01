@@ -24,7 +24,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'EPS Вихрь{1}'
+          mapNameTemplate: 'EPS Вихрь SEW{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

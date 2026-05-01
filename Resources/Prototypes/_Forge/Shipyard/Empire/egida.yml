@@ -24,7 +24,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'EMMS Эгида{1}'
+          mapNameTemplate: 'EMMS Эгида SEW{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

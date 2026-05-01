@@ -1,0 +1,30 @@
+- type: vessel
+  id: Turms
+  parent: BaseVessel
+  name: ESP Турмс
+  description: Маневренный боевой шаттл средне-малого размера. Вооружен двумя установками типа "Гидра"
+  price: 35500
+  category: Small
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/Turms.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  engine:
+  - APU
+
+- type: gameMap
+  id: Turms
+  mapName: ESP Турмс
+  mapPath: /Maps/_Forge/Shuttles/Empire/Turms.yml
+  minPlayers: 0
+  stations:
+    Turms:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'ESP Турмс SEW{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

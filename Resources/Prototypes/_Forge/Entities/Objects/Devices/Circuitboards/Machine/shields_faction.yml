@@ -1,0 +1,136 @@
+# Faction heavy shield boards (material costs inherited from FSG-420 / 470P / 600C bases).
+
+- type: entity
+  id: MachineShieldForgeTSFHeavyCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: TSFMC Citadel shield generator board
+  description: A machine board for a TSFMC SGS-440 Citadel shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeTSFHeavy
+
+- type: entity
+  id: MachineShieldForgeTSFPrismaticCircuitboard
+  parent: MachineShieldFSG470PCircuitboard
+  name: TSFMC Corona Array shield generator board
+  description: A machine board for a TSFMC SGS-470P Corona Array shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeTSFPrismatic
+
+- type: entity
+  id: MachineShieldForgeTSFCollisionCircuitboard
+  parent: MachineShieldFSG600CCircuitboard
+  name: TSFMC Breakshell shield generator board
+  description: A machine board for a TSFMC SGS-600C Breakshell shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeTSFCollision
+
+- type: entity
+  id: MachineShieldForgeUsspHeavyCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: Union Forward Redoubt shield generator board
+  description: A machine board for a Union SGS-420 Forward Redoubt shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeUsspHeavy
+
+- type: entity
+  id: MachineShieldForgeUsspPrismaticCircuitboard
+  parent: MachineShieldFSG470PCircuitboard
+  name: Union Polar Lattice shield generator board
+  description: A machine board for a Union SGS-470P Polar Lattice shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeUsspPrismatic
+
+- type: entity
+  id: MachineShieldForgeUsspCollisionCircuitboard
+  parent: MachineShieldFSG600CCircuitboard
+  name: Union Ledokol Ramfield shield generator board
+  description: A machine board for a Union SGS-600C Ledokol Ramfield shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeUsspCollision
+
+- type: entity
+  id: MachineShieldForgeRenegateHeavyCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: Renegate Dust Citadel shield generator board
+  description: A machine board for an RSG-420 Dust Citadel shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeRenegateHeavy
+
+- type: entity
+  id: MachineShieldForgeRenegatePrismaticCircuitboard
+  parent: MachineShieldFSG470PCircuitboard
+  name: Renegate Azimuth Veil shield generator board
+  description: A machine board for an RSG-470P Azimuth Veil shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeRenegatePrismatic
+
+- type: entity
+  id: MachineShieldForgeRenegateCollisionCircuitboard
+  parent: MachineShieldFSG600CCircuitboard
+  name: Renegate Galandec Spur shield generator board
+  description: A machine board for an RSG-600C Galandec Spur shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeRenegateCollision
+
+- type: entity
+  id: MachineShieldForgeViperHeavyCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: Viper Copperhead Screen shield generator board
+  description: A machine board for a VAS-420 Copperhead Screen shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeViperHeavy
+
+- type: entity
+  id: MachineShieldForgeViperPrismaticCircuitboard
+  parent: MachineShieldFSG470PCircuitboard
+  name: Viper Glass Mamba Lattice shield generator board
+  description: A machine board for a VAS-470P Glass Mamba Lattice shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeViperPrismatic
+
+- type: entity
+  id: MachineShieldForgeViperCollisionCircuitboard
+  parent: MachineShieldFSG600CCircuitboard
+  name: Viper Fangsaw Collision Net shield generator board
+  description: A machine board for a VAS-600C Fangsaw Collision Net shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeViperCollision
+
+- type: entity
+  id: MachineShieldForgeUllmanHeavyCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: Ullman Indigo Bulwark shield generator board
+  description: A machine board for a UIS SGD-440 Indigo Bulwark shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeUllmanHeavy
+
+- type: entity
+  id: MachineShieldForgeUllmanPrismaticCircuitboard
+  parent: MachineShieldFSG470PCircuitboard
+  name: Ullman Clause Lattice shield generator board
+  description: A machine board for a UIS SGD-470P Clause Lattice shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeUllmanPrismatic
+
+- type: entity
+  id: MachineShieldForgeUllmanCollisionCircuitboard
+  parent: MachineShieldFSG600CCircuitboard
+  name: Ullman Kinetic Escrow Ram shield generator board
+  description: A machine board for a UIS SGD-600C Kinetic Escrow Ram shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeUllmanCollision

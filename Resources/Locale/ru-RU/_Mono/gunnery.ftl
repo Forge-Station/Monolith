@@ -10,7 +10,7 @@ gunnery-gun-select-ammo = {$name}: {$ammo}
 gunnery-server-examine-detail = Сервер использует [color={$valueColor}]{$usedProcessingPower}/{$processingPower}[/color] своей вычислительной мощности.
 gunnery-server-examine-slots = Сервер сейчас поддерживает [color={$valueColor}]{$usedSlots}/{$maxSlots}[/color] оружейных слотов.
 gunnery-server-tier-low = маломощный сервер управления орудиями
-gunnery-server-tier-medium = средний сервер управления орудиями
+gunnery-server-tier-medium = сервер управления орудиями средней мощности
 gunnery-server-tier-high = мощный сервер управления орудиями
 gunnery-server-tier-ultra = сверхмощный сервер управления орудиями
 gunnery-server-tier-omega = омега-сервер управления орудиями

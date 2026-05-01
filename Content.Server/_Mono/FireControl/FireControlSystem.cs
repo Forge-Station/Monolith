@@ -293,7 +293,6 @@ public sealed partial class FireControlSystem : EntitySystem
         if (gridServer.ServerComponent.Controlled.Count >= gridServer.ServerComponent.MaxWeapons)
             return false;
         // Forge-Change-end
-            return false;
 
         if (gridServer.ServerComponent.Controlled.Add(controllable))
         {

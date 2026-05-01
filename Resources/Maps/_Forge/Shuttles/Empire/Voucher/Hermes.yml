@@ -289,7 +289,7 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: BecomesStation
-      id: Hermes
+      id: Germes
     - type: RadiationGridResistance
     - type: ShipGridLock
       locked: False

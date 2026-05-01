@@ -1,7 +1,7 @@
 # Т1 voucher ship
 
 - type: vessel
-  id: Hermes
+  id: Germes
   parent: BaseVessel
   name: EES Гермес
   description: Крайне быстрый и маневренный истребитель Империи. Вооружен двумя ЭМИ-пушками и 6 малыми лазерами на каждый борт.
@@ -11,20 +11,20 @@
   category: Large
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Hermes.yml
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Germes.yml
   guidebookPage: Null
   class:
-  - Fighter
+  - Patrol
   engine:
   - AME
 
 - type: gameMap
-  id: Hermes
+  id: Germes
   mapName: Elite Scout "Гермес"
-  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Hermes.yml
+  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Germes.yml
   minPlayers: 0
   stations:
-    Hermes:
+    Germes:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup

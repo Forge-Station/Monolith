@@ -35,6 +35,21 @@
 
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG420Circuitboard
+  result: MachineShieldFSG420Circuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG470PCircuitboard
+  result: MachineShieldFSG470PCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG600CCircuitboard
+  result: MachineShieldFSG600CCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
   id: MachineShieldForgeTSFHeavyCircuitboard
   result: MachineShieldForgeTSFHeavyCircuitboard
 

@@ -1,0 +1,30 @@
+- type: vessel
+  id: OneFight
+  parent: BaseVessel
+  name: EBS Клеймор
+  description: Маневренный боевой шаттл средне-малого размера. Вооружен двумя установками типа "Гидра"
+  price: 86600
+  category: Small
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/OneFight.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: OneFight
+  mapName: EBS Клеймор
+  mapPath: /Maps/_Forge/Shuttles/Empire/OneFight.yml
+  minPlayers: 0
+  stations:
+    OneFight:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'EBS Клеймор{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

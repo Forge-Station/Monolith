@@ -1,0 +1,30 @@
+- type: vessel
+  id: kultur
+  parent: BaseVessel
+  name: EMF Культур
+  description: Тяжелый средний боевой шаттл Империи. Вооружен двумя орудиями "Сцилла" и 4 установками "Цербер"
+  price: 184600
+  category: Medium
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/kultur.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: kultur
+  mapName: 'EMF Культур'
+  mapPath: /Maps/_Forge/Shuttles/Empire/kultur.yml
+  minPlayers: 0
+  stations:
+    kultur:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'EMF Культур SEW{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

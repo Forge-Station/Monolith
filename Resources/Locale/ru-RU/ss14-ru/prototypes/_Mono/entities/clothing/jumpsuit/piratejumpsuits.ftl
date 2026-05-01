@@ -8,3 +8,4 @@ ent-PirateClothingUniformJumpsuitMilitaryTurtleneckMercenaryMedic = пиратс
 ent-PirateClothingUniformJumpsuitMilitaryTurtleneckMercenaryCaptain = пиратская военная водолазка капитана наёмников
 ent-PirateClothingUniformJumpsuitMilitaryTurtleneckBlueMercenary = пиратская синяя военная водолазка наёмника
 ent-PirateClothingUniformJumpsuitMilitaryTurtleneckBlueMercenaryMedic = пиратская синяя военная водолазка медика-наёмника
+ent-PirateClothingUniformJumpskirtBlackElegantDress = пиратская синяя военная водолазка медика-наёмника

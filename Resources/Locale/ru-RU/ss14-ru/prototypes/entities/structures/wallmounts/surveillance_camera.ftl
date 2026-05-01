@@ -29,3 +29,6 @@ ent-SurveillanceCameraGeneral = камера
     .desc = { ent-SurveillanceCameraBase.desc }
 ent-SurveillanceCameraAssembly = камера
     .desc = Камера наблюдения. Не похоже, что в ближайшее время она будет за кем-то наблюдать. Возможно.
+ent-SurveillanceCameraTSF = камера
+    .suffix = TSF
+    .desc = { ent-SurveillanceCameraBase.desc }

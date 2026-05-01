@@ -1,0 +1,30 @@
+- type: vessel
+  id: Atoll
+  parent: BaseVesselAntag
+  name: TSF-RND Атолл
+  description: Научный шаттл ТСФ
+  category: Medium
+  group: Security
+  access: Security
+  price: 77500
+  shuttlePath: /Maps/_Forge/Shuttles/TSF/Atoll.yml
+  guidebookPage: Null
+  class:
+  - Science
+  engine:
+  - AME
+
+- type: gameMap
+  id: Atoll
+  mapName: 'Atoll'
+  mapPath: /Maps/_Forge/Shuttles/TSF/Atoll.yml
+  minPlayers: 0
+  stations:
+    Atoll:
+      stationProto: StandardFrontierSecurityVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Атолл TSF{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'

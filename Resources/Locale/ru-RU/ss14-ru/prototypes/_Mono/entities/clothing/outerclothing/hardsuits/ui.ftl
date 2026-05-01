@@ -1,6 +1,6 @@
-ent-ClothingOuterHardsuitUIEnforcer = U.I. ENFORCER combat tacsuit
+ent-ClothingOuterHardsuitUIEnforcer = боевой тактический костюм U.I. ENFORCER
     .desc = Печально известный один из самых надёжных боевых тактических костюмов, которые предлагает Чёрный рынок, разработанный Ullman Industries. "HUD продаётся отдельно!"
-ent-ClothingOuterHardsuitUIEnforcerMKII = U.I. ENFORCER MKII combat tacsuit
+ent-ClothingOuterHardsuitUIEnforcerMKII = боевой тактический костюм U.I. ENFORCER Mk II
     .desc = Основан на печально известном дизайне MKI с упором на универсальность. Это топовый боевой костюм Ullman Industries. Будь то уход от федов, устранение конкурентов или служение вашим корпоративным повелителям, это чудо инженерии гарантирует, что вы справитесь.
 ent-ClothingOuterHardsuitUllmanEngineer = инженерный скафандр U.I.
     .desc = Защитный скафандр, носимый инженерными специалистами чёрного рынка. Разработан Ullman Industries.

@@ -4,8 +4,8 @@ meta:
   engineVersion: 275.2.0
   forkId: ""
   forkVersion: ""
-  time: 04/16/2026 12:50:44
-  entityCount: 1578
+  time: 04/21/2026 15:45:41
+  entityCount: 1579
 maps: []
 grids:
 - 1
@@ -106,8 +106,8 @@ entities:
       spreadQueues:
         MetalFoam: []
         Smoke: []
-        Puddle: []
         Kudzu: []
+        Puddle: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -1590,7 +1590,7 @@ entities:
       pos: -4.5,-16.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -9331.597
+      secondsUntilStateChange: -9408.063
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1680,11 +1680,6 @@ entities:
           - 41
           - 42
           - 43
-    - type: DeviceLinkSource
-      linkedPorts:
-        1544:
-        - - AmmoLoaderLoad
-          - SpaceArtilleryLoad
 - proto: APCBasic
   entities:
   - uid: 44
@@ -2367,6 +2362,11 @@ entities:
     components:
     - type: Transform
       pos: 10.5,-12.5
+      parent: 1
+  - uid: 1579
+    components:
+    - type: Transform
+      pos: 0.5,1.5
       parent: 1
 - proto: Beaker
   entities:
@@ -4181,7 +4181,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 70
+      startingCharge: 67.5
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerTabletopCrewMonitoring
@@ -4194,7 +4194,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 92.5
+      startingCharge: 90
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerTabletopGunneryConsole
@@ -4207,7 +4207,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 92.5
+      startingCharge: 90
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerTabletopShuttle
@@ -4220,7 +4220,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 92.5
+      startingCharge: 90
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerWallmountBankATM
@@ -4234,7 +4234,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 70
+      startingCharge: 67.5
     - type: ApcPowerReceiverBattery
       enabled: True
   - uid: 515
@@ -4246,7 +4246,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 70
+      startingCharge: 67.5
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerWallmountStationRecords
@@ -4259,7 +4259,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 92.5
+      startingCharge: 90
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: CrateFreezer
@@ -6972,7 +6972,7 @@ entities:
       pos: -4.5,4.5
       parent: 1
     - type: Battery
-      startingCharge: 210
+      startingCharge: 205
     - type: ApcPowerReceiver
       powerLoad: 10
     - type: ApcPowerReceiverBattery
@@ -7006,7 +7006,7 @@ entities:
       pos: -6.5,-16.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -9325.597
+      secondsUntilStateChange: -9402.063
       state: Opening
   - uid: 897
     components:
@@ -7014,7 +7014,7 @@ entities:
       pos: -5.5,-16.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -9326.63
+      secondsUntilStateChange: -9403.097
       state: Opening
   - uid: 898
     components:
@@ -7022,7 +7022,7 @@ entities:
       pos: -4.5,-16.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -9327.663
+      secondsUntilStateChange: -9404.13
       state: Opening
 - proto: KitchenReagentGrinder
   entities:
@@ -7108,7 +7108,7 @@ entities:
     - type: Transform
       pos: 6.5,-9.5
       parent: 1
-- proto: MachineFTLDrive25S
+- proto: MachineFTLDrive
   entities:
   - uid: 911
     components:
@@ -7252,6 +7252,15 @@ entities:
       parent: 1
     - type: Physics
       bodyType: Static
+- proto: Paper
+  entities:
+  - uid: 1544
+    components:
+    - type: Transform
+      pos: 0.4894889,1.3498949
+      parent: 1
+    - type: Paper
+      content: Да ешкин-кот! И тут чарон скрутили? В секторе работает ОПГ....
 - proto: PaperBin20
   entities:
   - uid: 926
@@ -10901,14 +10910,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 4.5,6.5
-      parent: 1
-- proto: WeaponTurretCharonReload
-  entities:
-  - uid: 1544
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,1.5
       parent: 1
 - proto: WeaponTurretL85Autocannon
   entities:

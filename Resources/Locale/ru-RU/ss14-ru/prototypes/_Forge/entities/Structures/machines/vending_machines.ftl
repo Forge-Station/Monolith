@@ -18,3 +18,6 @@ ent-VendingMachineCompanyViper = вендомат «Жадность»
 ent-VendingMachineCompanyUSSP = { ent-VendingMachineUSSP }
     .desc = { ent-VendingMachineUSSP.desc }
     .suffix = Централ
+ent-VendingMachineNanotrasen = вендомат НТ
+    .desc = Здесь есть (почти) всё, что может понадобится представителю НТ. Кажется, его только недавно покрасили.
+    .suffix = НТ, Централ

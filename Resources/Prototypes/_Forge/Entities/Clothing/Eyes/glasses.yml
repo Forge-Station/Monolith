@@ -68,3 +68,24 @@
     sprite: Forge/Clothing/Eyes/Goggles/nexus.rsi
   - type: Clothing
     sprite: Forge/Clothing/Eyes/Goggles/nexus.rsi
+
+- type: entity
+  parent: [ClothingEyesBase, ShowSecurityIcons]
+  id: ClothingEyesNTGlasses
+  name: NT shades
+  description: A high tech heads up display purpose built for Nanotrasen officers. Usually issued to the commanding officer of a company.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/ntrglasses.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/ntrglasses.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: ThermalVision
+    isEquipment: true
+    color: "#FFFFFFFF"
+    lightRadius: 45
+  - type: NightVision
+    flashDurationMultiplier: 2.75
+    isEquipment: true

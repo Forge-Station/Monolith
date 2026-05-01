@@ -1,0 +1,293 @@
+- type: latheRecipe
+  abstract: true
+  id: BaseBackpackERTRecipe 
+  materials:
+    Cloth: 8000
+    Durathread: 5000
+    Plasteel: 3000
+    Steel: 5000
+    Plastitanium: 2000
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitERTSecurity
+  result: ClothingUniformJumpsuitERTSecurity
+  materials:
+    Cloth: 1000
+    Durathread: 1000
+    
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitERTMedic
+  result: ClothingUniformJumpsuitERTMedic
+  materials:
+    Cloth: 1000
+    Durathread: 1000
+    
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitERTMailCarrier
+  result: ClothingUniformJumpsuitERTMailCarrier
+  materials:
+    Cloth: 1000
+    Durathread: 1000
+    
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitERTEngineer
+  result: ClothingUniformJumpsuitERTEngineer
+  materials:
+    Cloth: 1000
+    Durathread: 1000
+    
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitERTChaplain
+  result: ClothingUniformJumpsuitERTChaplain
+  materials:
+    Cloth: 1000
+    Durathread: 1000
+    
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitERTJanitor
+  result: ClothingUniformJumpsuitERTJanitor
+  materials:
+    Cloth: 1000
+    Durathread: 1000
+
+- type: latheRecipe
+  parent: NFBaseMaskArmoredRecipe
+  id: ClothingMaskGasERT
+  result: ClothingMaskGasERT
+  materials:
+    Durathread: 3000
+    Plastic: 2000
+    Steel: 2000
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingOuterWinterHoS
+  result: ClothingOuterWinterHoS
+  materials:
+    Cloth: 1000
+    Plasteel: 2000
+    Steel: 2000
+    Durathread: 1000
+    
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingOuterCoatHoSTrench
+  result: ClothingOuterCoatHoSTrench
+  materials:
+    Cloth: 2000
+    Plasteel: 2000
+    Steel: 3000
+    Durathread: 1000
+    
+- type: latheRecipe
+  parent: NFBaseHelmetRecipe
+  id: ClothingHeadHelmetJustice
+  result: ClothingHeadHelmetJustice
+  materials:
+    Cloth: 1000
+    Plasteel: 1000
+    Durathread: 500
+    Steel: 2000
+    
+- type: latheRecipe
+  parent: NFBaseHelmetRecipe
+  id: ClothingHeadHelmetERTJanitor
+  result: ClothingHeadHelmetERTJanitor
+  materials:
+    Cloth: 2000
+    Plasteel: 3000
+    Durathread: 1000
+    Steel: 5000
+
+- type: latheRecipe
+  parent: ClothingHeadHelmetERTJanitor
+  id: ClothingHeadHelmetERTEngineer
+  result: ClothingHeadHelmetERTEngineer
+    
+- type: latheRecipe
+  parent: ClothingHeadHelmetERTJanitor
+  id: ClothingHeadHelmetERTMailCarrier
+  result: ClothingHeadHelmetERTMailCarrier
+
+- type: latheRecipe
+  parent: ClothingHeadHelmetERTJanitor
+  id: ClothingHeadHelmetERTMedic
+  result: ClothingHeadHelmetERTMedic
+
+- type: latheRecipe
+  parent: ClothingHeadHelmetERTJanitor
+  id: ClothingHeadHelmetERTSecurity
+  result: ClothingHeadHelmetERTSecurity
+  
+- type: latheRecipe
+  parent: MonoHardsuitT1Recipe
+  id: ClothingOuterHardsuitSecurityRed
+  result: ClothingOuterHardsuitSecurityRed
+  materials:
+    Glass: 3000
+    Steel: 3500
+    Plastic: 1000
+    Plasteel: 4000
+    Durathread: 3000
+    Silver: 3000
+    Gold: 3000
+    Plastitanium: 1000
+    
+- type: latheRecipe
+  parent: MonoHardsuitT2Recipe
+  id: ClothingOuterHardsuitERTSecurity
+  result: ClothingOuterHardsuitERTSecurity
+  materials:
+    Glass: 3000
+    Steel: 5000
+    Plastic: 2000
+    Plasteel: 3000
+    Durathread: 3000
+    Silver: 5000
+    Gold: 5000
+    Uranium: 3000
+    Plastitanium: 2000
+    UraniumFissile: 100
+    
+- type: latheRecipe
+  parent: MonoHardsuitT2Recipe
+  id: ClothingOuterHardsuitERTMedical
+  result: ClothingOuterHardsuitERTMedical
+  materials:
+    Glass: 3000
+    Steel: 4000
+    Plastic: 2000
+    Plasteel: 3000
+    Durathread: 3000
+    Silver: 4000
+    Gold: 4000
+    Uranium: 3000
+    Plastitanium: 2000
+    UraniumFissile: 100
+    
+- type: latheRecipe
+  parent: MonoHardsuitT3Recipe
+  id: ClothingOuterHardsuitERTChaplain
+  result: ClothingOuterHardsuitERTChaplain
+  materials:
+    Glass: 3000
+    Steel: 4000
+    Plastic: 3000
+    Plasteel: 4000
+    Durathread: 3000
+    Silver: 5000
+    Gold: 5000
+    Plastitanium: 2000
+    UraniumFissile: 200
+
+- type: latheRecipe
+  parent: MonoHardsuitT2Recipe
+  id: ClothingOuterHardsuitCBURN
+  result: ClothingOuterHardsuitCBURN
+  materials:
+    Glass: 3000
+    Steel: 4000
+    Plastic: 2000
+    Plasteel: 3000
+    Durathread: 6000
+    Silver: 6000
+    Gold: 6000
+    Plastitanium: 1500
+    UraniumFissile: 100
+    
+- type: latheRecipe
+  parent: ClothingOuterHardsuitCBURN
+  id: ClothingOuterHardsuitERTEngineer
+  result: ClothingOuterHardsuitERTEngineer
+  
+- type: latheRecipe
+  parent: ClothingOuterHardsuitCBURN
+  id: ClothingOuterHardsuitERTJanitor
+  result: ClothingOuterHardsuitERTJanitor
+  
+- type: latheRecipe
+  parent: ClothingOuterHardsuitCBURN
+  id: ClothingOuterHardsuitERTMailCarrier
+  result: ClothingOuterHardsuitERTMailCarrier
+    
+- type: latheRecipe
+  parent: BaseBackpackERTRecipe 
+  id: ClothingBackpackERTSecurity
+  result: ClothingBackpackERTSecurity
+
+- type: latheRecipe
+  parent: BaseBackpackERTRecipe 
+  id: ClothingBackpackERTMedical
+  result: ClothingBackpackERTMedical
+  
+- type: latheRecipe
+  parent: BaseBackpackERTRecipe 
+  id: ClothingBackpackERTChaplain
+  result: ClothingBackpackERTChaplain
+  
+- type: latheRecipe
+  parent: BaseBackpackERTRecipe 
+  id: ClothingBackpackERTMailCarrier 
+  result: ClothingBackpackERTMailCarrier 
+  
+- type: latheRecipe
+  parent: BaseBackpackERTRecipe 
+  id: ClothingBackpackERTEngineer
+  result: ClothingBackpackERTEngineer
+  
+- type: latheRecipe
+  parent: BaseBackpackERTRecipe 
+  id: ClothingBackpackERTJanitor
+  result: ClothingBackpackERTJanitor
+  
+- type: latheRecipe
+  parent: BaseBackpackERTRecipe 
+  id: ClothingBackpackDuffelCBURN
+  result: ClothingBackpackDuffelCBURN
+  
+# TTI
+- type: latheRecipe
+  parent: MonoHardsuitT3Recipe
+  id: ClothingOuterHardsuitTrauma
+  result: ClothingOuterHardsuitTrauma
+  materials:
+    Glass: 3000
+    Steel: 4000
+    Plastic: 2000
+    Plasteel: 3500
+    Durathread: 4000
+    Silver: 4000
+    Gold: 4000
+    Uranium: 3000
+    Plastitanium: 500
+    UraniumFissile: 300
+ 
+- type: latheRecipe
+  parent: MonoHardsuitT3Recipe
+  id: ClothingOuterHardsuitTraumaLeader
+  result: ClothingOuterHardsuitTraumaLeader
+  materials:
+    Glass: 3000
+    Steel: 5000
+    Plastic: 3000
+    Plasteel: 4000
+    Durathread: 6000
+    Silver: 5000
+    Gold: 5000
+    Uranium: 5000
+    Plastitanium: 2000
+    UraniumFissile: 500
+    
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitATU
+  result: ClothingUniformJumpsuitATU
+  materials:
+    Cloth: 1000
+    Durathread: 1000 

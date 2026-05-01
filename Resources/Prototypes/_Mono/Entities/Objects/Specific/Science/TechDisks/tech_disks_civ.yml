@@ -113,7 +113,7 @@
   parent: TechDiskBase
   id: TechDiskCivShipComps
   name: civilian ship components tech disk
-  description: A disk capable of adding basic shields and FTL drives to a server's recipes.
+  description: A disk capable of adding an entry-level shuttle shield board and FTL drives to a server's recipes.
   components:
   - type: Sprite
     layers:
@@ -151,7 +151,7 @@
   parent: TechDiskBase
   id: TechDiskCivMS250
   name: civilian MS-250 shield tech disk
-  description: A disk capable of adding MS-250/MS-100 shield boards to a server's recipes.
+  description: A disk capable of adding mid-tier MS shuttle shield boards to a server's recipes.
   components:
   - type: Sprite
     layers:
@@ -210,7 +210,7 @@
   parent: TechDiskBase
   id: TechDiskShields
   name: pre-fracture shield technology tech disk
-  description: A disk capable of adding ship shield tech to a server's recipes.
+  description: A disk capable of adding the full MS shuttle shield lineup to a server's recipes. Civilian FSG heavy tiers use separate Forge disks (tier 3 common, tier 4 rare). FSG T1–T2 and faction arrays come from research.
   components:
   - type: Sprite
     layers:
@@ -226,6 +226,48 @@
     - MachineShieldMS500Circuitboard
     - MachineShieldMS250Circuitboard
     - MachineShieldMS100Circuitboard
+
+# Forge — civilian FSG tier 3 (not on CivilianServices tree; loot / trade)
+- type: entity
+  parent: TechDiskBase
+  id: TechDiskForgeFSGCivilianT3
+  name: Forge civilian FSG tier 3 tech disk
+  description: A disk that adds standard heavy Forge shield boards (FSG-420, FSG-470P, FSG-600C) to a server's imprinter recipes. More common than the tier 4 outpost disk.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base"]
+      color: "#c8b8e8"
+    - state: label
+    - state: protect
+    - state: holo
+      shader: unshaded
+  - type: TechnologyDisk
+    recipes:
+    - MachineShieldFSG420Circuitboard
+    - MachineShieldFSG470PCircuitboard
+    - MachineShieldFSG600CCircuitboard
+
+# Forge — civilian FSG tier 4 (outpost); rarer drop than TechDiskForgeFSGCivilianT3
+- type: entity
+  parent: TechDiskBase
+  id: TechDiskForgeFSG900P
+  name: Forge FSG-900P outpost tech disk
+  description: A disk that adds the FSG-900P prism crown board to a server's imprinter recipes. Scarce — for serious stations or hauls.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base"]
+      color: "#e8a8d8"
+    - state: label
+    - state: protect
+    - state: holo
+      shader: unshaded
+  - type: TechnologyDisk
+    recipes:
+    - MachineShieldFSG900PCircuitboard
 
 - type: entity
   parent: TechDiskBase

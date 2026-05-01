@@ -1,0 +1,129 @@
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG90RCircuitboard
+  result: MachineShieldFSG90RCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG100Circuitboard
+  result: MachineShieldFSG100Circuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG110PCircuitboard
+  result: MachineShieldFSG110PCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG160CCircuitboard
+  result: MachineShieldFSG160CCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG220Circuitboard
+  result: MachineShieldFSG220Circuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG250CCircuitboard
+  result: MachineShieldFSG250CCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG330RCircuitboard
+  result: MachineShieldFSG330RCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG420Circuitboard
+  result: MachineShieldFSG420Circuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG470PCircuitboard
+  result: MachineShieldFSG470PCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG600CCircuitboard
+  result: MachineShieldFSG600CCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeTSFHeavyCircuitboard
+  result: MachineShieldForgeTSFHeavyCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeTSFPrismaticCircuitboard
+  result: MachineShieldForgeTSFPrismaticCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeTSFCollisionCircuitboard
+  result: MachineShieldForgeTSFCollisionCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeUsspHeavyCircuitboard
+  result: MachineShieldForgeUsspHeavyCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeUsspPrismaticCircuitboard
+  result: MachineShieldForgeUsspPrismaticCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeUsspCollisionCircuitboard
+  result: MachineShieldForgeUsspCollisionCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeRenegateHeavyCircuitboard
+  result: MachineShieldForgeRenegateHeavyCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeRenegatePrismaticCircuitboard
+  result: MachineShieldForgeRenegatePrismaticCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeRenegateCollisionCircuitboard
+  result: MachineShieldForgeRenegateCollisionCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeViperHeavyCircuitboard
+  result: MachineShieldForgeViperHeavyCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeViperPrismaticCircuitboard
+  result: MachineShieldForgeViperPrismaticCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeViperCollisionCircuitboard
+  result: MachineShieldForgeViperCollisionCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeUllmanHeavyCircuitboard
+  result: MachineShieldForgeUllmanHeavyCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeUllmanPrismaticCircuitboard
+  result: MachineShieldForgeUllmanPrismaticCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeUllmanCollisionCircuitboard
+  result: MachineShieldForgeUllmanCollisionCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG900PCircuitboard
+  result: MachineShieldFSG900PCircuitboard

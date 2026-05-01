@@ -38,6 +38,7 @@
     DisciplinesDiskUllman: 2
     ClothingUniformJumpsuitUI: 5
     ClothingEyesUIGoogles: 5
+    ClothingNeckCloakUllmanPoncho: 5
 
 - type: vendingMachineInventory
   id: CompanyVendInventoryUSSP

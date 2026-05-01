@@ -1,0 +1,912 @@
+- type: entity
+  id: ShieldGeneratorFSG90R
+  parent: ShieldGeneratorSmall
+  name: FSG-90R "Spark" Shield Generator
+  suffix: tier 1
+  description: A rapid-cycle shield generator with a light reserve and a fast return to service after overloads.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 105
+    damageExp: 1.22
+    baseDraw: 19000
+    maxDraw: 58000
+    unpoweredBonus: 5
+    damageLimit: 4300
+    damageOverloadTimePunishment: 55
+    shieldColor: "#58C6FF"
+    collisionResistanceMultiplier: 0.6
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier1.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#58C6FF"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1450
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 280
+  - type: ApcPowerReceiver
+    powerLoad: 19000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#58C6FF"
+  - type: Machine
+    board: MachineShieldFSG90RCircuitboard
+  - type: ShipRepairable
+    repairTime: 18
+    repairCost: 120
+
+- type: entity
+  id: ShieldGeneratorFSG100
+  parent: ShieldGeneratorSmall
+  name: FSG-100 "Keel" Shield Generator
+  suffix: tier 1
+  description: A general-purpose shield generator with balanced output, stable behavior and no strong specialization.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 80
+    damageExp: 1.2
+    baseDraw: 20000
+    maxDraw: 60000
+    unpoweredBonus: 3
+    damageLimit: 5000
+    damageOverloadTimePunishment: 80
+    shieldColor: "#3399FF"
+    collisionResistanceMultiplier: 0.5
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier1.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#3399FF"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 300
+  - type: ApcPowerReceiver
+    powerLoad: 20000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#3399FF"
+  - type: Machine
+    board: MachineShieldFSG100Circuitboard
+  - type: ShipRepairable
+    repairTime: 20
+    repairCost: 125
+
+- type: entity
+  id: ShieldGeneratorFSG110P
+  parent: ShieldGeneratorSmall
+  name: FSG-110P "Halo" Shield Generator
+  suffix: tier 1
+  description: A prismatic shield generator with a thicker reserve at the cost of slower recovery after a collapse.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 65
+    damageExp: 1.24
+    baseDraw: 22000
+    maxDraw: 63000
+    unpoweredBonus: 2.5
+    damageLimit: 6200
+    damageOverloadTimePunishment: 95
+    shieldColor: "#8E7DFF"
+    collisionResistanceMultiplier: 0.55
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier1.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#8E7DFF"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1550
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 550
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 330
+  - type: ApcPowerReceiver
+    powerLoad: 22000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#8E7DFF"
+  - type: Machine
+    board: MachineShieldFSG110PCircuitboard
+  - type: ShipRepairable
+    repairTime: 22
+    repairCost: 140
+
+- type: entity
+  id: ShieldGeneratorFSG160C
+  parent: ShieldGeneratorSmall
+  name: FSG-160C "Ramart" Shield Generator
+  suffix: tier 2
+  description: A collision-hardened shield generator built to soften rams, glancing impacts and sloppy docking maneuvers.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 90
+    damageExp: 1.18
+    baseDraw: 24000
+    maxDraw: 68000
+    unpoweredBonus: 4
+    damageLimit: 6100
+    damageOverloadTimePunishment: 70
+    shieldColor: "#41D4FF"
+    collisionResistanceMultiplier: 0.22
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#41D4FF"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.675,-0.675,0.675,0.675"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 340
+  - type: ApcPowerReceiver
+    powerLoad: 24000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#41D4FF"
+  - type: Machine
+    board: MachineShieldFSG160CCircuitboard
+  - type: ShipRepairable
+    repairTime: 23
+    repairCost: 150
+
+- type: entity
+  id: ShieldGeneratorFSG220
+  parent: ShieldGeneratorSmall
+  name: FSG-220 "Vanguard" Shield Generator
+  suffix: tier 2
+  description: A medium-output shield generator intended for ships that need a dependable frontline screen without harsh tradeoffs.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 105
+    damageExp: 1.15
+    baseDraw: 30000
+    maxDraw: 78000
+    unpoweredBonus: 4
+    damageLimit: 7600
+    damageOverloadTimePunishment: 80
+    shieldColor: "#62E86F"
+    collisionResistanceMultiplier: 0.35
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#62E86F"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.675,-0.675,0.675,0.675"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1700
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 700
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 400
+  - type: ApcPowerReceiver
+    powerLoad: 30000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#62E86F"
+  - type: Machine
+    board: MachineShieldFSG220Circuitboard
+  - type: ShipRepairable
+    repairTime: 25
+    repairCost: 180
+
+- type: entity
+  id: ShieldGeneratorFSG250C
+  parent: ShieldGeneratorSmall
+  name: FSG-250C "Breakwater" Shield Generator
+  suffix: tier 2
+  description: A medium-power shield tuned for sustained collision damping and dirty close-quarters fighting.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 100
+    damageExp: 1.12
+    baseDraw: 32000
+    maxDraw: 82000
+    unpoweredBonus: 4
+    damageLimit: 8000
+    damageOverloadTimePunishment: 85
+    shieldColor: "#3CFFCC"
+    collisionResistanceMultiplier: 0.15
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#3CFFCC"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.675,-0.675,0.675,0.675"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1750
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 750
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 430
+  - type: ApcPowerReceiver
+    powerLoad: 32000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#3CFFCC"
+  - type: Machine
+    board: MachineShieldFSG250CCircuitboard
+  - type: ShipRepairable
+    repairTime: 26
+    repairCost: 190
+
+- type: entity
+  id: ShieldGeneratorFSG330R
+  parent: ShieldGeneratorSmall
+  name: FSG-330R "Quickstep" Shield Generator
+  suffix: tier 2
+  description: A high-throughput shield generator that cycles fast enough to keep pace with extended skirmishes.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 135
+    damageExp: 1.08
+    baseDraw: 36000
+    maxDraw: 90000
+    unpoweredBonus: 6
+    damageLimit: 9200
+    damageOverloadTimePunishment: 95
+    shieldColor: "#FFD35A"
+    collisionResistanceMultiplier: 0.28
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FFD35A"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.675,-0.675,0.675,0.675"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1850
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 900
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 470
+  - type: ApcPowerReceiver
+    powerLoad: 36000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FFD35A"
+  - type: Machine
+    board: MachineShieldFSG330RCircuitboard
+  - type: ShipRepairable
+    repairTime: 29
+    repairCost: 215
+
+- type: entity
+  id: ShieldGeneratorFSG420
+  parent: ShieldGeneratorSmall
+  name: FSG-420 "Redoubt" Shield Generator
+  suffix: tier 3
+  description: A heavy shield generator designed for larger hulls that expect to stand under focused fire.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 110
+    damageExp: 1.05
+    baseDraw: 42000
+    maxDraw: 98000
+    unpoweredBonus: 5
+    damageLimit: 11200
+    damageOverloadTimePunishment: 110
+    shieldColor: "#FF9346"
+    collisionResistanceMultiplier: 0.18
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF9346"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.9,-0.9,0.9,0.9"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 2000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 1100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 560
+  - type: ApcPowerReceiver
+    powerLoad: 42000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF9346"
+  - type: Machine
+    board: MachineShieldFSG420Circuitboard
+  - type: ShipRepairable
+    repairTime: 32
+    repairCost: 250
+
+- type: entity
+  id: ShieldGeneratorFSG470P
+  parent: ShieldGeneratorSmall
+  name: FSG-470P "Lattice" Shield Generator
+  suffix: tier 3
+  description: A prismatic heavy shield with a broad reserve envelope and a notably slow recovery profile.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 85
+    damageExp: 1.03
+    baseDraw: 46000
+    maxDraw: 102000
+    unpoweredBonus: 3.5
+    damageLimit: 13200
+    damageOverloadTimePunishment: 125
+    shieldColor: "#C86BFF"
+    collisionResistanceMultiplier: 0.16
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#C86BFF"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.9,-0.9,0.9,0.9"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 2100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 1200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 620
+  - type: ApcPowerReceiver
+    powerLoad: 46000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#C86BFF"
+  - type: Machine
+    board: MachineShieldFSG470PCircuitboard
+  - type: ShipRepairable
+    repairTime: 34
+    repairCost: 280
+
+- type: entity
+  id: ShieldGeneratorFSG600C
+  parent: ShieldGeneratorSmall
+  name: FSG-600C "Bastion" Shield Generator
+  suffix: tier 3
+  description: A siege-grade collision shield intended for armored hulls, station perimeters and brutal close-range engagements.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 105
+    damageExp: 1.0
+    baseDraw: 52000
+    maxDraw: 110000
+    unpoweredBonus: 4.5
+    damageLimit: 16000
+    damageOverloadTimePunishment: 140
+    shieldColor: "#FF5E5E"
+    collisionResistanceMultiplier: 0.08
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF5E5E"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.9,-0.9,0.9,0.9"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 2250
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 1300
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 760
+  - type: ApcPowerReceiver
+    powerLoad: 52000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF5E5E"
+  - type: Machine
+    board: MachineShieldFSG600CCircuitboard
+  - type: ShipRepairable
+    repairTime: 36
+    repairCost: 320
+
+- type: entity
+  id: ShieldGeneratorFSG900P
+  parent: ShieldGeneratorSmall
+  name: FSG-900P "Prism Crown" Shield Generator
+  suffix: tier 4
+  description: An outpost-class prismatic shield built around overwhelming reserve depth and very slow post-collapse recovery.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 80
+    damageExp: 0.95
+    baseDraw: 70000
+    maxDraw: 150000
+    unpoweredBonus: 2.5
+    damageLimit: 24000
+    damageOverloadTimePunishment: 170
+    shieldColor: "#FF66D9"
+    collisionResistanceMultiplier: 0.05
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier4.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF66D9"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.35,-1.35,1.35,1.35"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 2600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 1600
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 950
+  - type: ApcPowerReceiver
+    powerLoad: 70000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF66D9"
+  - type: Machine
+    board: MachineShieldFSG900PCircuitboard
+  - type: ShipRepairable
+    repairTime: 42
+    repairCost: 420

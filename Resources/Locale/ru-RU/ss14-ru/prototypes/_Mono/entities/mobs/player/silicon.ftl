@@ -18,6 +18,7 @@ ent-StationAiBrainVessel = ghost-role-information-vessel-core
     .desc = ghost-role-information-vessel-core-description
 ent-AiHeldVessel = модуль ИИ корабля
 ent-PlayerStationAiTSFMC = призрачная роль, TSFMC
+    .desc = Последнее слово в области искусственного интеллекта.
 ent-StationAiBrainTSFMC = ghost-role-information-tsfmc-core
     .desc = ghost-role-information-tsfmc-core-description
 ent-AiHeldTSFMC = модуль ИИ ВСКМП

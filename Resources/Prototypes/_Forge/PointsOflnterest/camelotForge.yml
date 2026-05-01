@@ -16,7 +16,7 @@
   maximumDistance: 12400
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
-  gridPath: /Maps/_Forge/POI/camelot.yml # Forge-change
+  gridPath: /Maps/_Forge/POI/camelotForge.yml # Forge-change
   addComponents:
   - type: IFF
     color: "#ccaa55"
@@ -24,7 +24,7 @@
 - type: gameMap
   id: USSPCamelot
   mapName: 'Станция «Камелот»'
-  mapPath: /Maps/_Forge/POI/camelot.yml # Forge-change
+  mapPath: /Maps/_Forge/POI/camelotForge.yml # Forge-change
   minPlayers: 0
   stations:
     USSPCamelot:

@@ -195,5 +195,5 @@
   - type: EyeProtection
     protectionTime: 5
   - type: StaticPrice
-    priсe: 30
-    vendPriсe: 200
+    price: 30
+    vendPrice: 200

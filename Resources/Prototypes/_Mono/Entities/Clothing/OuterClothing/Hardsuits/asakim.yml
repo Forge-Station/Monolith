@@ -4,6 +4,7 @@
   name: kasature-pattern combat exoskeleton
   description: An advanced exoskeleton harness of cutting edge, corporate-era technology. It connects itself directly to the brain of the wearer, and requires advanced brain augmentation and cybernetics to function. Incredibly rare, and practically alien in technology compared to modern tacsuits. Once equipped, the armor cannot be removed without external release.
   suffix: SelfUnremovable
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/asakim.rsi
@@ -64,6 +65,7 @@
   parent: ClothingOuterHardsuitAsakim
   id: ClothingOuterHardsuitAsakimUnremoveable
   suffix: 120 stripDelay
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: Clothing
     stripDelay: 120

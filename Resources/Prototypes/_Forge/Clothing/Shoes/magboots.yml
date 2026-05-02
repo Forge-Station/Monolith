@@ -75,6 +75,10 @@
     sprite: Forge/Clothing/Shoes/Boots/advs_magboots_promax.rsi
     stripDelay: 120
     equipDelay: 120
+    whitelist:
+      tags:
+        - AsakimBrain
+    whitelistCheckOrgans: true
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepHeavySuit

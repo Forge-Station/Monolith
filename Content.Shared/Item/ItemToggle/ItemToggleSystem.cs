@@ -1,3 +1,5 @@
+using Content.Shared.Body.Components; // Forge-Change
+using Content.Shared.Body.Systems; // Forge-Change
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item.ItemToggle.Components;
@@ -6,6 +8,7 @@ using Content.Shared.Temperature;
 using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
 using Content.Shared.Wieldable;
+using Content.Shared.Whitelist; // Forge-Change
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -23,6 +26,8 @@ public sealed class ItemToggleSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!; // Forge-Change
+    [Dependency] private readonly SharedBodySystem _body = default!; // Forge-Change
 
     private EntityQuery<ItemToggleComponent> _query;
 
@@ -156,6 +161,9 @@ public sealed class ItemToggleSystem : EntitySystem
 
         if (!comp.Predictable && _netManager.IsClient)
             return true;
+
+        if (user != null && !CheckWhitelist((uid, comp), user.Value, predicted)) // Forge-Change
+            return false;
 
         var attempt = new ItemToggleActivateAttemptEvent(user);
         RaiseLocalEvent(uid, ref attempt);
@@ -311,4 +319,38 @@ public sealed class ItemToggleSystem : EntitySystem
                 comp.PlayingStream = entity;
         }
     }
+
+#region Forge-Change-start
+    private bool CheckWhitelist(Entity<ItemToggleComponent> ent, EntityUid user, bool predicted)
+    {
+        var comp = ent.Comp;
+        if (comp.Whitelist == null)
+            return true;
+
+        if (comp.WhitelistCheckOrgans && TryComp<BodyComponent>(user, out var body))
+        {
+            var organs = _body.GetBodyOrgans(user, body);
+            foreach (var (organUid, _) in organs)
+            {
+                if (_whitelistSystem.IsWhitelistPassOrNull(comp.Whitelist, organUid))
+                    return true;
+            }
+        }
+
+        if (_whitelistSystem.IsWhitelistFail(comp.Whitelist, user))
+        {
+            if (predicted)
+                _audio.PlayPredicted(comp.SoundFailToActivate, ent, user);
+            else
+                _audio.PlayPvs(comp.SoundFailToActivate, ent);
+
+            if (user.IsValid())
+                _popup.PopupEntity(Loc.GetString("item-toggle-whitelist-fail"), user, user);
+
+            return false;
+        }
+
+        return true;
+    }
+#endregion Forge-Change-end
 }

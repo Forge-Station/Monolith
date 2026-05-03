@@ -448,14 +448,14 @@
   parent: baseBureaucracyrecipe
   result: Paper
   materials:
-    PaperSheet: 10
+    Paper: 10
 
 - type: latheRecipe
   id: PaperOffice_recipe
   parent: baseBureaucracyrecipe
   result: PaperOffice
   materials:
-    PaperSheet: 10
+    Paper: 20
 
 #                                           Bureaucracy END
 

@@ -309,7 +309,7 @@
   materials:
     Steel: 500
     Plastic: 1500
-    Diamonds: 15000
+    Diamond: 15000
 
 # TSF
 
@@ -328,7 +328,7 @@
   materials:
     Steel: 500
     Plastic: 1500
-    Diamonds: 200
+    Diamond: 200
 
 - type: latheRecipe
   id: ClothingHeadsetAltTsfmcCommander_recipe
@@ -337,7 +337,7 @@
   materials:
     Steel: 500
     Plastic: 3000
-    Diamonds: 1500
+    Diamond: 1500
 
 # TTI
 
@@ -348,7 +348,7 @@
   materials:
     Steel: 500
     Plastic: 1500
-    Diamonds: 200
+    Diamond: 200
 
 - type: latheRecipe
   id: ClothingHeadsetMdMedical_recipe
@@ -382,7 +382,7 @@
   result: EncryptionKeyRenegadeCom
   materials:
     Steel: 100
-    Diamonds: 500
+    Diamond: 500
 
 # TSF
 
@@ -399,7 +399,7 @@
   result: EncryptionKeyCommand
   materials:
     Steel: 100
-    Diamonds: 200
+    Diamond: 200
 
 # TTI
 

@@ -142,7 +142,7 @@
     deactivateSound: null
   #<Forge>
   - type: TTS # Corvax-TTS
-    voice: Rat
+    voice: Dude
   #</Forge>
 
 - type: entity

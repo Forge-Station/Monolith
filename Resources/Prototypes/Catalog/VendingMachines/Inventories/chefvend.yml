@@ -1,6 +1,7 @@
 - type: vendingMachineInventory
   id: ChefvendInventory
   startingInventory:
+    FoodBoxWaffleCone: 5 # Forge-Change-Comp
     ReagentContainerFlour: 5 # Frontier - 2<5
     ReagentContainerCornmeal: 5 # Frontier - 2<5
     ReagentContainerSugar: 5 # Frontier - 2<5

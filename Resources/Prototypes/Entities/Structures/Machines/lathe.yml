@@ -342,11 +342,14 @@
     - NFMedicalBoards # Frontier + Shitmed Change
     - NFServiceBoards # Frontier
     - MonoAdvancedShuttleComponents # Mono
+    - ForgeAdvancedShuttleComponents # Forge
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
     - S2MechBoards
     - EngineeringBoardsGoob #Goob Factorio port
+    - NanotrasenCircuitBoard # Forge-change
+    - ReactorCircuitboards # FH edit
   - type: MaterialStorage
     whitelist:
       tags:
@@ -394,6 +397,7 @@
     # Shitmed Change
     - IPCPartsStatic
     dynamicPacks:
+    - NanotrasenMechWeapon # Forge-change
     - Robotics
     - BorgModules
     - MechParts
@@ -495,6 +499,8 @@
     - StaticAmmoRecipePack
     - SecurityWeaponsStatic
     dynamicPacks:
+    - NanotrasenWeapon # Forge-change
+    - NanotrasenEquipment # Forge-change
     - SecurityEquipment
     - SecurityExplosives
     - DynamicAmmoRecipePack
@@ -608,6 +614,8 @@
     - SurgeryStatic
     - NFMedicalStatic # Frontier
     dynamicPacks:
+    - TTISuplplies # Forge-change
+    - TTIEquipment # Forge-change
     - Chemistry
     - SyringeGuns # DeltaV
     - NFMedical # Frontier
@@ -645,6 +653,7 @@
     idleState: icon
     runningState: building
     staticPacks:
+    - NanotrasenClothing # Forge-change
     - ClothingCivilian
     - ClothingCargo
     - ClothingCommand
@@ -662,6 +671,7 @@
     - NFFloorTilesCarpet # Frontier
     - NFWallets # Frontier
     dynamicPacks: # Frontier
+    - NanotrasenClothing # Forge: AllTechPrintableTest only indexes dynamicPacks
     - NFPouches # Frontier
   - type: EmagLatheRecipes
     emagStaticPacks:
@@ -889,6 +899,7 @@
   - type: Lathe
     idleState: limbgrower_idleoff
     runningState: limbgrower_idleon
+    productValueModifier: 0.05
     staticPacks:
     - MedicalSynthLimbsStatic
   - type: EmagLatheRecipes

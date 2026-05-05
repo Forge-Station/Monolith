@@ -1,0 +1,34 @@
+# T2 voucher ship 
+
+- type: vessel
+  id: Mirko
+  parent: BaseVessel
+  name: CWH Миррко
+  description: Большой военный шаттл Империи с тяжелым вооружением на борту.
+  purchasable: false
+  limit: 3
+  price: 380000
+  category: Large
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Mirko.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Bananium
+
+- type: gameMap
+  id: Mirko
+  mapName: 'CWH Миррко'
+  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Mirko.yml
+  minPlayers: 0
+  stations:
+    Mirko:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'CWH Миррко SEW{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

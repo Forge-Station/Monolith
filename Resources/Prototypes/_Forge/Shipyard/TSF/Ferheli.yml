@@ -1,0 +1,30 @@
+- type: vessel
+  id: Ferheli
+  parent: BaseVesselAntag
+  name: TSF-BS Ферхил
+  description: Средний боевой шаттл ТСФ, вооруженный пушкой типа "Гидра" и другим вспомогательным вооружением.
+  price: 243100
+  category: Medium
+  group: Security
+  access: Security
+  shuttlePath: /Maps/_Forge/Shuttles/TSF/Ferheli.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Bananium
+
+- type: gameMap
+  id: Ferheli
+  mapName: TSF-BS Ферхил
+  mapPath: /Maps/_Forge/Shuttles/TSF/Ferheli.yml
+  minPlayers: 0
+  stations:
+    Ferheli:
+      stationProto: StandardFrontierSecurityVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'TSF-BS Ферхил TSF{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'

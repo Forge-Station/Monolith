@@ -59,10 +59,13 @@ public sealed class HitscanDiffractSystem : EntitySystem
         var beamCount = hitscan.Comp.BeamCount;
         var spreadAngle = hitscan.Comp.SpreadAngle;
 
+        // Resolve the prototype to spawn once; it's identical for every beam.
+        var prototypeToSpawn = ResolveDiffractedPrototype(hitscan.Comp.DiffractedBeamPrototype);
+
         // Replace original hitscan with diffracted beams
         if (beamCount == 1)
         {
-            SpawnDiffractedBeam(hitscan, args, hitCoordinates, args.ShotDirection);
+            SpawnDiffractedBeam(prototypeToSpawn, args, hitCoordinates, args.ShotDirection);
             return;
         }
 
@@ -74,32 +77,31 @@ public sealed class HitscanDiffractSystem : EntitySystem
         {
             var angle = startAngle + (angleIncrement * i);
             var newDirection = RotateVector(args.ShotDirection, angle);
-            SpawnDiffractedBeam(hitscan, args, hitCoordinates, newDirection);
+            SpawnDiffractedBeam(prototypeToSpawn, args, hitCoordinates, newDirection);
         }
     }
 
-    private void SpawnDiffractedBeam(Entity<HitscanDiffractComponent> originalHitscan,
+    /// <summary>
+    /// Picks the prototype to spawn for diffracted beams, falling back to RedLaser if the
+    /// configured prototype itself has HitscanDiffract (would loop infinitely).
+    /// </summary>
+    private EntProtoId ResolveDiffractedPrototype(EntProtoId? configured)
+    {
+        if (configured == null)
+            return new EntProtoId("RedLaser");
+
+        var prototype = _prototypeManager.Index<EntityPrototype>(configured.Value);
+        if (prototype.Components.ContainsKey("HitscanDiffract"))
+            return new EntProtoId("RedLaser");
+
+        return configured.Value;
+    }
+
+    private void SpawnDiffractedBeam(EntProtoId prototypeToSpawn,
         HitscanTraceEvent originalArgs, EntityCoordinates fromCoordinates, Vector2 direction)
     {
-        // Which hitscan prototype to spawn?
-        EntProtoId? prototypeToSpawn = originalHitscan.Comp.DiffractedBeamPrototype;
-
-        // Safeguard against diffract beam hell (stack overflow)
-        if (prototypeToSpawn != null)
-        {
-            var prototype = _prototypeManager.Index<EntityPrototype>(prototypeToSpawn.Value);
-            if (prototype.Components.ContainsKey("HitscanDiffract"))
-            {
-                prototypeToSpawn = new EntProtoId("RedLaser");
-            }
-        }
-        else
-        {
-            prototypeToSpawn = new EntProtoId("RedLaser");
-        }
-
         // Spawn entity
-        var newHitscan = Spawn(prototypeToSpawn.Value, fromCoordinates);
+        var newHitscan = Spawn(prototypeToSpawn, fromCoordinates);
 
         // Fire
         var diffractedTraceEvent = new HitscanTraceEvent

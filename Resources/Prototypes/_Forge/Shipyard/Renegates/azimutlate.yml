@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Азимут-Лайт
   description: Линейный фрегат, лайт Версия азимута,слабее но не значит хуже . Рекомендованный состав 3-6 человек
-  price: 300000
+  price: 330000
   purchasable: false
   category: Large
   group: Renegate
@@ -11,7 +11,7 @@
   shuttlePath: /Maps/_Forge/Shuttles/Renegates/azimutlate.yml
   guidebookPage: Null
   class:
-  - Fighter  
+  - Fighter
 
 - type: gameMap
   id: azimutlate

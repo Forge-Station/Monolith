@@ -1,7 +1,9 @@
 using Content.Client.Decals.Overlays;
+using Content.Shared.CCVar;
 using Content.Shared.Decals;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Shared.Configuration;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 using static Content.Shared.Decals.DecalGridComponent;
@@ -12,6 +14,7 @@ namespace Content.Client.Decals
     {
         [Dependency] private readonly IOverlayManager _overlayManager = default!;
         [Dependency] private readonly SpriteSystem _sprites = default!;
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
 
         private DecalOverlay? _overlay;
 
@@ -23,7 +26,21 @@ namespace Content.Client.Decals
             base.Initialize();
 
             _overlay = new DecalOverlay(_sprites, EntityManager, PrototypeManager);
+            _overlay.MaxPerTileDraw = _cfg.GetCVar(CCVars.DecalsMaxPerTile);
+            _overlay.RemoveIdenticalDuplicates = _cfg.GetCVar(CCVars.DecalsClientDeduplicateIdentical);
             _overlayManager.AddOverlay(_overlay);
+
+            Subs.CVar(_cfg, CCVars.DecalsMaxPerTile, v =>
+            {
+                if (_overlay != null)
+                    _overlay.MaxPerTileDraw = v;
+            }, true);
+
+            Subs.CVar(_cfg, CCVars.DecalsClientDeduplicateIdentical, v =>
+            {
+                if (_overlay != null)
+                    _overlay.RemoveIdenticalDuplicates = v;
+            }, true);
 
             SubscribeLocalEvent<DecalGridComponent, ComponentHandleState>(OnHandleState);
             SubscribeNetworkEvent<DecalChunkUpdateEvent>(OnChunkUpdate);

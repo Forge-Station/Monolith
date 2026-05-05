@@ -1577,7 +1577,7 @@ namespace Content.Client.Lobby.UI
 
             _loadoutWindow = new LoadoutWindow(Profile, roleLoadout, roleLoadoutProto, _playerManager.LocalSession, collection)
             {
-                Title = jobProto?.ID + "-loadout",
+                Title = jobProto?.LocalizedName + " loadout", // Mono - replace the "-" with a space in "-loadout", change to LocalizedName from ID
             };
 
             // Refresh the buttons etc.
@@ -2471,6 +2471,20 @@ namespace Content.Client.Lobby.UI
             _exporting = false;
             ImportButton.Disabled = false;
             ExportButton.Disabled = false;
+        }
+
+        private void UpdateCompanyControls()
+        {
+            if (Profile is null)
+                return;
+
+            // Company selection is handled by CompanyWindow now; keep this method as a
+            // lightweight validity check for any legacy callers.
+            if (!_prototypeManager.TryIndex<CompanyPrototype>(Profile.Company, out var companyProto) ||
+                companyProto.Hidden)
+            {
+                Profile = Profile.WithCompany("None");
+            }
         }
     }
 }

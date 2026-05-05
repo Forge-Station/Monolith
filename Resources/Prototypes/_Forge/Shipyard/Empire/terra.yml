@@ -24,7 +24,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'EMF Терра{1}'
+          mapNameTemplate: 'EMF Терра SEW{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

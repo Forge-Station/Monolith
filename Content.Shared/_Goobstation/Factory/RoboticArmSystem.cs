@@ -63,14 +63,26 @@ public sealed class RoboticArmSystem : EntitySystem
         base.Update(frameTime);
 
         var now = _timing.CurTime;
-        if (_nextUpdate < now)
+        if (now < _nextUpdate)
             return;
 
-        _nextUpdate += _updateDelay;
+        _nextUpdate = now + _updateDelay;
 
         var query = EntityQueryEnumerator<RoboticArmComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            // Cheap idle filter: an arm with no held item, no buffered inputs and no
+            // linked source machine has nothing to do. Skip before any heavier checks
+            // (power/dirty fields/event raises) to keep big factories cheap.
+            if (comp.HeldItem == null
+                && comp.InputItems.Count == 0
+                && comp.InputMachine == null)
+            {
+                if (comp.NextMove != null)
+                    StopMoving((uid, comp));
+                continue;
+            }
+
             if (!_power.IsPowered(uid))
                 continue;
 
@@ -407,6 +419,8 @@ public sealed class RoboticArmSystem : EntitySystem
     private void StopMoving(Entity<RoboticArmComponent> ent)
     {
         // SetPowerDraw(ent, ent.Comp.IdlePowerDraw); - ported from Impstation, static power draw to prever seizure inducing power flashes
+        if (ent.Comp.NextMove == null)
+            return;
         ent.Comp.NextMove = null;
         DirtyField(ent, ent.Comp, nameof(RoboticArmComponent.NextMove));
     }

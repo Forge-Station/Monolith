@@ -669,6 +669,8 @@ entities:
           - 0
         chunkSize: 4
     - type: GasTileOverlay
+    - type: BecomesStation
+      id: Ferheli
     - type: RadiationGridResistance
     - type: ShipGridLock
       locked: False

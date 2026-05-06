@@ -771,6 +771,8 @@ entities:
           - 0
         chunkSize: 4
     - type: GasTileOverlay
+    - type: BecomesStation
+      id: Atoll
     - type: RadiationGridResistance
     - type: ShipGridLock
       locked: False

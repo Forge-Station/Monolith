@@ -1,0 +1,18 @@
+# AI Remote
+- type: entity
+  id: PlayerBorgRedactedAiRemote
+  parent: PlayerBorgRedacted
+  suffix: Battery, Module
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+      - AiRemoteBrain
+      borg_module:
+      - BorgModuleForerunnerWeapon
+      - BorgModuleJetpackADM
+      - BorgModuleAdvancedTool
+      - BorgModuleConstruction
+      - BorgModuleCable
+      - BorgModuleRedactedRCD
+      - BorgModuleGPS

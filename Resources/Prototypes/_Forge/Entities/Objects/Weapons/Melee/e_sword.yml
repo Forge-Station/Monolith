@@ -169,6 +169,8 @@
     whitelist:
       tags:
         - AsakimBrain
+      components:
+        - BorgChassis
     whitelistCheckOrgans: true
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:

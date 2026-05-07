@@ -1,0 +1,17 @@
+- type: entity
+  id: BorgModuleForerunnerWeapon
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture weapon cyborg module
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: mercenary
+    - state: icon-pdv
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseBladeForge
+    - WeaponRifleAsakimAutopulserADM
+  - type: BorgModuleIcon
+    icon: { sprite: _Mono/Interface/Action/actions_borg.rsi, state: mercenary-weapon-module }

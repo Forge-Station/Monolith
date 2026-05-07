@@ -1,5 +1,12 @@
 # Base entries
 guide-entry-nf14 = Руководство Фронтира
+guide-entry-shield-generators = Корабельные щитовые генераторы
+guide-entry-shield-generators-fsg = FSG — Гражданские щиты
+guide-entry-shield-generators-tsfmc = TSFMC
+guide-entry-shield-generators-ussp = Союз (USSP)
+guide-entry-shield-generators-renegates = Ренегаты
+guide-entry-shield-generators-viper = Viper Group
+guide-entry-shield-generators-ullman = Ullman Industries
 guide-entry-bank = NT Галактический банк
 guide-entry-piloting = Пилотирование
 guide-entry-hiring = Наём экипажа

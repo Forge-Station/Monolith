@@ -47,6 +47,8 @@ namespace Content.Server.Decals
         private UpdatePlayerJob _updateJob;
         private List<ICommonSession> _sessions = new();
 
+        private int _maxDecalsPerChunk = 512;
+
         private static readonly ThreadLocal<ObjectPool<HashSet<Vector2i>>> ChunkIndexPool = // Forge-Change
             new(() => new DefaultObjectPool<HashSet<Vector2i>>( // Forge-Change
                 new DefaultPooledObjectPolicy<HashSet<Vector2i>>(), 64)); // Forge-Change
@@ -73,6 +75,7 @@ namespace Content.Server.Decals
             SubscribeLocalEvent<PostGridSplitEvent>(OnGridSplit);
 
             Subs.CVar(_conf, CVars.NetPVS, OnPvsToggle, true);
+            Subs.CVar(_conf, Content.Shared.CCVar.CCVars.DecalsMaxPerChunk, v => _maxDecalsPerChunk = v, true);
         }
 
         private void OnPvsToggle(bool value)
@@ -289,6 +292,33 @@ namespace Content.Server.Decals
             _dirtyChunks[id].Add(chunkIndices);
         }
 
+        /// <summary>
+        ///     Removes oldest decals (lowest id) in the chunk until under the server decals.max_per_chunk limit,
+        ///     so a new placement can be added without exceeding the budget.
+        /// </summary>
+        private void TrimChunkDecals(EntityUid gridUid, DecalGridComponent comp, Vector2i chunkIndices)
+        {
+            var max = _maxDecalsPerChunk;
+            if (max <= 0)
+                return;
+
+            while (comp.ChunkCollection.ChunkCollection.TryGetValue(chunkIndices, out var chunk)
+                   && chunk.Decals.Count >= max)
+            {
+                uint minId = uint.MaxValue;
+                foreach (var id in chunk.Decals.Keys)
+                {
+                    if (id < minId)
+                        minId = id;
+                }
+
+                if (minId == uint.MaxValue)
+                    break;
+
+                RemoveDecalInternal(gridUid, minId, out _, comp);
+            }
+        }
+
         public bool TryAddDecal(string id, EntityCoordinates coordinates, out uint decalId, Color? color = null, Angle? rotation = null, int zIndex = 0, bool cleanable = false)
         {
             rotation ??= Angle.Zero;
@@ -314,9 +344,12 @@ namespace Content.Server.Decals
             if (!TryComp(gridId, out DecalGridComponent? comp))
                 return false;
 
-            decalId = comp.ChunkCollection.NextDecalId++;
             var chunkIndices = GetChunkIndices(decal.Coordinates);
+            TrimChunkDecals(gridId.Value, comp, chunkIndices);
+
             var chunk = comp.ChunkCollection.ChunkCollection.GetOrNew(chunkIndices);
+
+            decalId = comp.ChunkCollection.NextDecalId++;
             chunk.Decals[decalId] = decal;
             comp.DecalIndex[decalId] = chunkIndices;
             DirtyChunk(gridId.Value, chunkIndices, chunk);

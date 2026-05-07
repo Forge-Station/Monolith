@@ -1,0 +1,24 @@
+<Document>
+  # Союз (USSP) — Конвойное оборудование
+
+  Экономичные щиты для конвойных операций. Очень низкое базовое потребление энергии позволяет долго удерживать щит без нагрузки на реактор — за счёт сниженных боевых характеристик и меньшей устойчивости к тарану, чем у коллег по классу.
+
+  <Box>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUsspHeavy"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUsspPrismatic"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUsspCollision"/>
+  </Box>
+
+  [color=#5EB8AA][bold]SGS-420 «Передовой редут» (Forward Redoubt)[/bold][/color] — Тяжёлый
+  Очень экономичный конвойный щит. Низкое потребление, но заметно медленнее восстанавливается и имеет меньший порог перегрузки, чем FSG-420.
+  [color=#aaaaaa]Прочность:[/color] 10 000 HP · [color=#aaaaaa]Восстановление:[/color] 86 HP/с · [color=#aaaaaa]Питание:[/color] 35–86 кВт · [color=#aaaaaa]Перезарядка:[/color] ×5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]82%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]110 с[/color]
+
+  [color=#D9A066][bold]SGS-470P «Полярная решётка» (Polar Lattice)[/bold][/color] — Призматический
+  Дешёвый в эксплуатации призматический щит с хорошей регенерацией без питания. Меньший запас, медленнее восстанавливается под огнём.
+  [color=#aaaaaa]Прочность:[/color] 11 800 HP · [color=#aaaaaa]Восстановление:[/color] 72 HP/с · [color=#aaaaaa]Питание:[/color] 40,5–91 кВт · [color=#aaaaaa]Перезарядка:[/color] ×5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]84%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]125 с[/color]
+
+  [color=#B84C2A][bold]SGS-600C «Ледокол» (Ledokol Ramfield)[/bold][/color] — Коллизионный
+  Огромный запас прочности, быстрая регенерация, щадящая кривая урон–мощность. Защита от тарана хуже, чем у гражданского Бастиона.
+  [color=#aaaaaa]Прочность:[/color] 18 500 HP · [color=#aaaaaa]Восстановление:[/color] 128 HP/с · [color=#aaaaaa]Питание:[/color] 54,5–108 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffcc44]89%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]140 с[/color]
+
+</Document>

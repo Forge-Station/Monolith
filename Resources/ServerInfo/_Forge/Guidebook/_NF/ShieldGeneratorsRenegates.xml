@@ -1,0 +1,24 @@
+<Document>
+  # Ренегаты — Темп ближнего боя
+
+  Агрессивные щиты для ближних схваток. Очень быстро восстанавливаются после перегрузки — за счёт тонкого запаса прочности и высокого потребления при повреждениях. Предназначены для судов, которые сражаются на короткой дистанции и рассчитывают на серии быстрых атак.
+
+  <Box>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeRenegateHeavy"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeRenegatePrismatic"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeRenegateCollision"/>
+  </Box>
+
+  [color=#E87B45][bold]RSG-420 «Пыльная цитадель» (Dust Citadel)[/bold][/color] — Тяжёлый
+  Практически мгновенное восстановление после перегрузки и быстрая регенерация. Малый запас прочности — рассчитан на скоротечные столкновения.
+  [color=#aaaaaa]Прочность:[/color] 9 600 HP · [color=#aaaaaa]Восстановление:[/color] 138 HP/с · [color=#aaaaaa]Питание:[/color] 46,5–104 кВт · [color=#aaaaaa]Перезарядка:[/color] ×5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]82%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#88ff88]78 с[/color]
+
+  [color=#E85BB8][bold]RSG-470P «Азимутовая завеса» (Azimuth Veil)[/bold][/color] — Призматический
+  Огромный буфер пиковой нагрузки, быстрое снятие перегрузки. Малый запас, высокий базовый расход, крутой штраф под огнём.
+  [color=#aaaaaa]Прочность:[/color] 11 800 HP · [color=#aaaaaa]Восстановление:[/color] 100 HP/с · [color=#aaaaaa]Питание:[/color] 49–116 кВт · [color=#aaaaaa]Перезарядка:[/color] ×3.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]84%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#88ff88]100 с[/color]
+
+  [color=#9C3D2E][bold]RSG-600C «Шпора Галандека» (Galandec Spur)[/bold][/color] — Коллизионный
+  Отличная защита от тарана, быстрая регенерация. Высокое базовое потребление и длинный штраф перегрузки — плата за агрессивный профиль.
+  [color=#aaaaaa]Прочность:[/color] 15 200 HP · [color=#aaaaaa]Восстановление:[/color] 122 HP/с · [color=#aaaaaa]Питание:[/color] 60–118 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]94%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]158 с[/color]
+
+</Document>

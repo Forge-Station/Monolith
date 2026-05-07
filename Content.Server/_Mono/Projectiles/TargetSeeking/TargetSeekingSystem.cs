@@ -22,6 +22,12 @@ public sealed class TargetSeekingSystem : EntitySystem
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
+    // Reusable per-tick scratch buffer so all seekers in the same Update share a single
+    // pre-built candidate list instead of each one re-iterating + re-resolving Transforms.
+    private readonly List<TargetCandidate> _targetCandidates = new();
+
+    private readonly record struct TargetCandidate(EntityUid ActualTarget, Vector2 Position, EntityUid? GridUid);
+
     public override void Initialize()
     {
         base.Initialize();
@@ -137,6 +143,11 @@ public sealed class TargetSeekingSystem : EntitySystem
 
         var ticktime = _gameTiming.TickPeriod;
 
+        // Pre-build the candidate target list once per tick. Previously each seeker without a
+        // current target re-iterated every TargetSeekingTargetComponent entity and re-resolved
+        // Transform per candidate, giving O(missiles * targets) Transform lookups per tick.
+        var targetsBuilt = false;
+
         var query = EntityQueryEnumerator<TargetSeekingComponent, PhysicsComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var seekingComp, out var body, out var xform))
         {
@@ -198,74 +209,85 @@ public sealed class TargetSeekingSystem : EntitySystem
             else
             {
                 // Try to acquire a new target
+                if (!targetsBuilt)
+                {
+                    BuildTargetCandidates();
+                    targetsBuilt = true;
+                }
                 AcquireTarget(uid, seekingComp, xform);
             }
+        }
+
+        _targetCandidates.Clear();
+    }
+
+    /// <summary>
+    /// Populate <see cref="_targetCandidates"/> once per tick from all <see cref="TargetSeekingTargetComponent"/> entities.
+    /// </summary>
+    private void BuildTargetCandidates()
+    {
+        _targetCandidates.Clear();
+        var targetQuery = EntityQueryEnumerator<TargetSeekingTargetComponent, TransformComponent>();
+        while (targetQuery.MoveNext(out var targetUid, out _, out var targetXform))
+        {
+            var actualTarget = targetXform.GridUid ?? targetUid;
+            var pos = _transform.ToMapCoordinates(targetXform.Coordinates).Position;
+            _targetCandidates.Add(new TargetCandidate(actualTarget, pos, targetXform.GridUid));
         }
     }
 
     /// <summary>
-    /// Finds the closest valid target within range and tracking parameters.
+    /// Finds the closest valid target within range and tracking parameters using the
+    /// pre-built per-tick candidate list.
     /// </summary>
     public void AcquireTarget(EntityUid uid, TargetSeekingComponent component, TransformComponent transform)
     {
-        var closestDistance = float.MaxValue;
+        if (_targetCandidates.Count == 0)
+            return;
+
+        // Resolve seeker info once.
+        var sourcePos = _transform.ToMapCoordinates(transform.Coordinates).Position;
+        var currentRotation = _transform.GetWorldRotation(transform);
+        var halfScan = component.ScanArc * 0.5f;
+        var detectionRangeSq = component.DetectionRange * component.DetectionRange;
+
+        EntityUid? shooterGrid = null;
+        if (_projectileQuery.TryGetComponent(uid, out var projectile)
+            && TryComp(projectile.Shooter, out TransformComponent? shooterTransform))
+        {
+            shooterGrid = shooterTransform.GridUid;
+        }
+
+        var closestDistanceSq = float.MaxValue;
         EntityUid? bestTarget = null;
 
-        // Look for shuttles to target
-        var shuttleQuery = EntityQueryEnumerator<TargetSeekingTargetComponent>();
-
-        while (shuttleQuery.MoveNext(out var targetUid, out _))
+        for (var i = 0; i < _targetCandidates.Count; i++)
         {
-            var targetXform = Transform(targetUid);
+            var candidate = _targetCandidates[i];
 
-            // If this entity has a grid UID, use that as our actual target
-            // This targets the ship grid rather than just the console
-            var actualTarget = targetXform.GridUid ?? targetUid;
-
-            // Get angle to the target
-            var targetPos = _transform.ToMapCoordinates(targetXform.Coordinates).Position;
-            var sourcePos = _transform.ToMapCoordinates(transform.Coordinates).Position;
-            var angleToTarget = (targetPos - sourcePos).ToWorldAngle();
-
-            // Get current direction of the projectile
-            var currentRotation = _transform.GetWorldRotation(transform);
-
-            // Check if target is within field of view
-            var angleDifference = Angle.ShortestDistance(currentRotation, angleToTarget).Degrees;
-            if (MathF.Abs((float)angleDifference) > component.ScanArc / 2)
-            {
-                continue; // Target is outside our field of view
-            }
-
-            // Calculate distance to target
-            var distance = Vector2.Distance(sourcePos, targetPos);
-
-            // Skip if target is out of range
-            if (distance > component.DetectionRange)
+            // Squared-distance early reject.
+            var delta = candidate.Position - sourcePos;
+            var distSq = delta.LengthSquared();
+            if (distSq > detectionRangeSq)
                 continue;
 
-            // Skip if the target is our own launcher (don't target our own ship)
-            if (_projectileQuery.TryGetComponent(uid, out var projectile) &&
-                TryComp(projectile.Shooter, out TransformComponent? shooterTransform))
-            {
-                var shooterGridUid = shooterTransform.GridUid;
+            // Skip if the target is our own ship.
+            if (shooterGrid != null && candidate.GridUid == shooterGrid)
+                continue;
 
-                // If the shooter is on the same grid as this potential target, skip it
-                if (targetXform.GridUid.HasValue && shooterGridUid == targetXform.GridUid)
-                {
-                    continue;
-                }
-            }
+            // FOV check.
+            var angleToTarget = delta.ToWorldAngle();
+            var angleDifference = Angle.ShortestDistance(currentRotation, angleToTarget).Degrees;
+            if (MathF.Abs((float)angleDifference) > halfScan)
+                continue;
 
-            // If this is closer than our previous best target, update
-            if (closestDistance > distance)
+            if (closestDistanceSq > distSq)
             {
-                closestDistance = distance;
-                bestTarget = actualTarget;
+                closestDistanceSq = distSq;
+                bestTarget = candidate.ActualTarget;
             }
         }
 
-        // Set our new target
         if (bestTarget.HasValue)
             SetSeekerTarget((uid, component), bestTarget, transform);
     }

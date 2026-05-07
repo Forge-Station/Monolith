@@ -310,8 +310,9 @@ public sealed partial class ShipSteeringSystem : EntitySystem
 
         _avoidProjs.Clear();
         if (config.AvoidProjectiles)
-            _avoidProjs = _lookup.GetEntitiesInRange<ShipWeaponProjectileComponent>(
-                ctx.ShipPos, ProjectileSearchBounds, LookupFlags.Approximate | LookupFlags.Dynamic | LookupFlags.Sensors);
+            _lookup.GetEntitiesInRange(
+                ctx.ShipPos, ProjectileSearchBounds, _avoidProjs,
+                LookupFlags.Approximate | LookupFlags.Dynamic | LookupFlags.Sensors);
 
         // pool all queried ents
         _avoidPotentialEnts.Clear();

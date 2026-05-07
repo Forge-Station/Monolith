@@ -5,18 +5,28 @@
   description: An industrial assembly machine for building ship weapons from researched blueprints and loaded components.
   components:
   - type: Sprite
-    sprite: Structures/Machines/flatpacker.rsi
+    sprite: Forge/Structures/Machines/shipWeaponFab.rsi
+    offset: 1,-1
     snapCardinals: true
     layers:
     - state: base
     - state: screen
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       shader: unshaded
-    - state: panel
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
     - state: packing
       map: ["fabricating"]
       visible: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "2.25,0.25,-0.25,-2.25"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: GenericVisualizer
     visuals:
       enum.PowerDeviceVisuals.Powered:
@@ -67,6 +77,7 @@
       weapon_board: !type:ContainerSlot
       weapon_parts: !type:Container
   - type: Construction
+    graph: Machine3x3
     containers:
     - machine_parts
     - machine_board

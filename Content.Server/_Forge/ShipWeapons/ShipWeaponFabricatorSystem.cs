@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using Content.Server.Construction;
 using Content.Server.Materials;
@@ -33,7 +34,6 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedConstructionSystem _construction = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly FlatpackSystem _flatpack = default!;
     [Dependency] private readonly MachinePartSystem _machinePart = default!;
     [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
@@ -540,15 +540,12 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
 
     private bool CanOutput(EntityUid uid)
     {
-        var output = GetOutputCoordinates(uid);
-        return !_lookup.AnyEntitiesIntersecting(output, LookupFlags.Dynamic | LookupFlags.Static);
+        return true;
     }
 
     private EntityCoordinates GetOutputCoordinates(EntityUid uid)
     {
-        var xform = Transform(uid);
-        var offset = xform.LocalRotation.ToVec();
-        return xform.Coordinates.Offset(offset);
+        return Transform(uid).Coordinates.Offset(new Vector2(0, -2));
     }
 
     private bool IsPowered(EntityUid uid)

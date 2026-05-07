@@ -5,3 +5,57 @@
   description: A packed naval weapon assembly crate. Use a multitool to deploy.
   components:
   - type: Flatpack
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_2x2
+
+- type: entity
+  id: ForgeShipWeaponFlatpack1x1
+  parent: ForgeShipWeaponFlatpack
+  suffix: 1x1
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_1x1
+
+- type: entity
+  id: ForgeShipWeaponFlatpack1x2
+  parent: ForgeShipWeaponFlatpack
+  suffix: 1x2
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_1x2
+
+- type: entity
+  id: ForgeShipWeaponFlatpack2x2
+  parent: ForgeShipWeaponFlatpack
+  suffix: 2x2
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_2x2
+
+- type: entity
+  id: ForgeShipWeaponFlatpack2x3
+  parent: ForgeShipWeaponFlatpack
+  suffix: 2x3
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_2x3
+
+- type: entity
+  id: ForgeShipWeaponFlatpack3x3
+  parent: ForgeShipWeaponFlatpack
+  suffix: 3x3
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_3x3

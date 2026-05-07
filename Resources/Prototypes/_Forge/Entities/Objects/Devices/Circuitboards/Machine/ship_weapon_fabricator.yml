@@ -17,3 +17,6 @@
       Glass: 6
       CableHV: 3
       Gold: 2
+  - type: Tag
+    tags:
+    - MachineBoard3x3

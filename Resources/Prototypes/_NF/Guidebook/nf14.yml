@@ -13,6 +13,7 @@
   - CargoHauling # TODO: separate this out along with salvage and mining into some NF_Cargo section
   - Shipyard
   - WeaponsSystems # mono
+  - ShieldGenerators # forge
   - Creatures # mono
   - MonoMisc # mono
 
@@ -45,3 +46,52 @@
   name: guide-entry-cargo-hauling
   text: "/ServerInfo/_Forge/Guidebook/_NF/CargoHauling.xml" # Forge-change
   priority: 6
+
+- type: guideEntry
+  id: ShieldGenerators
+  name: guide-entry-shield-generators
+  text: "/ServerInfo/_Forge/Guidebook/_NF/ShieldGenerators.xml"
+  priority: 8
+  children:
+  - ShieldGeneratorsFSG
+  - ShieldGeneratorsTSFMC
+  - ShieldGeneratorsUSSP
+  - ShieldGeneratorsRenegates
+  - ShieldGeneratorsViper
+  - ShieldGeneratorsUllman
+
+- type: guideEntry
+  id: ShieldGeneratorsFSG
+  name: guide-entry-shield-generators-fsg
+  text: "/ServerInfo/_Forge/Guidebook/_NF/ShieldGeneratorsFSG.xml"
+  priority: 0
+
+- type: guideEntry
+  id: ShieldGeneratorsTSFMC
+  name: guide-entry-shield-generators-tsfmc
+  text: "/ServerInfo/_Forge/Guidebook/_NF/ShieldGeneratorsTSFMC.xml"
+  priority: 1
+
+- type: guideEntry
+  id: ShieldGeneratorsUSSP
+  name: guide-entry-shield-generators-ussp
+  text: "/ServerInfo/_Forge/Guidebook/_NF/ShieldGeneratorsUSSP.xml"
+  priority: 2
+
+- type: guideEntry
+  id: ShieldGeneratorsRenegates
+  name: guide-entry-shield-generators-renegates
+  text: "/ServerInfo/_Forge/Guidebook/_NF/ShieldGeneratorsRenegates.xml"
+  priority: 3
+
+- type: guideEntry
+  id: ShieldGeneratorsViper
+  name: guide-entry-shield-generators-viper
+  text: "/ServerInfo/_Forge/Guidebook/_NF/ShieldGeneratorsViper.xml"
+  priority: 4
+
+- type: guideEntry
+  id: ShieldGeneratorsUllman
+  name: guide-entry-shield-generators-ullman
+  text: "/ServerInfo/_Forge/Guidebook/_NF/ShieldGeneratorsUllman.xml"
+  priority: 5

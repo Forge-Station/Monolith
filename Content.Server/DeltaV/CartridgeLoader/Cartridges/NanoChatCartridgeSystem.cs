@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.CartridgeLoader;
@@ -11,10 +12,13 @@ using Content.Shared._DV.CartridgeLoader.Cartridges;
 using Content.Shared._DV.NanoChat;
 using Content.Shared.PDA;
 using Content.Shared.Radio.Components;
+using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.Silicons.StationAi;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Server.DeltaV.CartridgeLoader.Cartridges;
+namespace Content.Server._DV.CartridgeLoader.Cartridges;
 
 public sealed class NanoChatCartridgeSystem : EntitySystem
 {
@@ -43,6 +47,8 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
 
     private void UpdateClosed(Entity<NanoChatCartridgeComponent> ent)
     {
+         if (!GetCardEntity(ent, out var nanoChatCard))
+            return;
         if (!TryComp<CartridgeComponent>(ent, out var cartridge) ||
             cartridge.LoaderUid is not { } pda ||
             !TryComp<CartridgeLoaderComponent>(pda, out var loader) ||
@@ -73,7 +79,8 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
             if (!TryComp<PdaComponent>(cartridge.LoaderUid, out var pda))
                 continue;
 
-            var newCard = pda.ContainedId;
+            GetCardEntity(cartridge.LoaderUid.Value, out var newCardEnt);
+            var newCard = newCardEnt?.Owner;
             var currentCard = nanoChat.Card;
 
             // If the cards match, nothing to do
@@ -102,31 +109,31 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
         switch (msg.Type)
         {
             case NanoChatUiMessageType.NewChat:
-                HandleNewChat(card, msg);
+                HandleNewChat(card.Value, msg);
                 break;
             case NanoChatUiMessageType.SelectChat:
-                HandleSelectChat(card, msg);
+                HandleSelectChat(card.Value, msg);
                 break;
             case NanoChatUiMessageType.EditChat:
-                HandleEditChat(card, msg);
+                HandleEditChat(card.Value, msg);
                 break;
             case NanoChatUiMessageType.CloseChat:
-                HandleCloseChat(card);
+                HandleCloseChat(card.Value);
                 break;
             case NanoChatUiMessageType.ToggleMute:
-                HandleToggleMute(card);
+                HandleToggleMute(card.Value);
                 break;
             case NanoChatUiMessageType.ToggleMuteChat:
-                HandleToggleMuteChat(card, msg);
+                HandleToggleMuteChat(card.Value, msg);
                 break;
             case NanoChatUiMessageType.DeleteChat:
-                HandleDeleteChat(card, msg);
+                HandleDeleteChat(card.Value, msg);
                 break;
             case NanoChatUiMessageType.SendMessage:
-                HandleSendMessage(ent, card, msg);
+                HandleSendMessage(ent, card.Value, msg);
                 break;
             case NanoChatUiMessageType.ToggleListNumber:
-                HandleToggleListNumber(card);
+                HandleToggleListNumber(card.Value);
                 break;
             // Funky Station Start - Group Chat Functionality
             case NanoChatUiMessageType.CreateGroupChat:
@@ -158,9 +165,15 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
     /// <returns>True if a valid NanoChat card was found</returns>
     private bool GetCardEntity(
         EntityUid loaderUid,
-        out Entity<NanoChatCardComponent> card)
+        [NotNullWhen(true)] out Entity<NanoChatCardComponent>? card)
     {
-        card = default;
+        card = null;
+
+        if (TryComp<NanoChatCardComponent>(loaderUid, out var selfCard))
+        {
+            card = (loaderUid, selfCard);
+            return true;
+        }
 
         // Get the PDA and check if it has an ID card
         if (!TryComp<PdaComponent>(loaderUid, out var pda) ||
@@ -170,6 +183,30 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
 
         card = (pda.ContainedId.Value, idCard);
         return true;
+    }
+
+    /// <summary>
+    ///     Gets the cartridge loader associated with a card.
+    /// </summary>
+    private bool GetCartridgeLoader(
+        Entity<NanoChatCardComponent> card,
+        [NotNullWhen(true)] out Entity<CartridgeLoaderComponent>? loader)
+    {
+        loader = null;
+
+        if (TryComp<CartridgeLoaderComponent>(card, out var selfLoader))
+        {
+            loader = (card, selfLoader);
+            return true;
+        }
+
+        if (card.Comp.PdaUid is { } pdaUid && TryComp<CartridgeLoaderComponent>(pdaUid, out var pdaLoader))
+        {
+            loader = (pdaUid, pdaLoader);
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -672,8 +709,8 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
             !TryComp<CartridgeLoaderComponent>(pdaUid, out var loader) ||
             // Don't notify if the recipient has the NanoChat program open with this chat selected.
             (hasSelectedCurrentChat &&
-                _ui.IsUiOpen(pdaUid, PdaUiKey.Key) &&
-                HasComp<NanoChatCartridgeComponent>(loader.ActiveProgram)))
+                _ui.IsUiOpen(loader.Value.Owner, PdaUiKey.Key) &&
+                HasComp<NanoChatCartridgeComponent>(loader.Value.Comp.ActiveProgram)))
             return;
 
         var title = "";
@@ -686,10 +723,10 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
         else
             title = Loc.GetString("nano-chat-new-message-title", ("sender", senderName));
 
-        _cartridge.SendNotification(pdaUid,
+        _cartridge.SendNotification(loader.Value,
             title,
             Loc.GetString("nano-chat-new-message-body", ("message", SharedNanoChatSystem.Truncate(message.Content, NotificationMaxLength, " [...]"))),
-            loader);
+            loader.Value);
     }
 
     /// <summary>
@@ -734,6 +771,18 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
             if (card.Number != number)
                 continue;
 
+            if (HasComp<BorgChassisComponent>(uid))
+            {
+                if (!TryComp<BorgSwitchableTypeComponent>(uid, out var switchable) || switchable.SelectedBorgType is not { } borgType)
+                    return new NanoChatRecipient(number, MetaData(uid).EntityName, null);
+
+                return new NanoChatRecipient(number, MetaData(uid).EntityName, Loc.GetString($"borg-type-{borgType}-transponder"));
+            }
+            if (HasComp<StationAiHeldComponent>(uid))
+            {
+                return new NanoChatRecipient(number, MetaData(uid).EntityName, Loc.GetString($"station-ai-transponder"));
+            }
+
             // Try to get job title from ID card if possible
             string? jobTitle = null;
             var name = "Unknown";
@@ -772,6 +821,25 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
                     contacts.Add(new NanoChatRecipient(nanoChatNumber, fullName));
                 }
             }
+
+            var borgQuery = AllEntityQuery<NanoChatCardComponent, BorgChassisComponent>();
+            while (borgQuery.MoveNext(out var borgId, out var borgChatCard, out var _))
+            {
+                if (borgChatCard.ListNumber && borgChatCard.Number is uint nanoChatNumber && _station.GetOwningStation(borgId) == station)
+                {
+                    contacts.Add(new NanoChatRecipient(nanoChatNumber, MetaData(borgId).EntityName));
+                }
+            }
+
+            var aiQuery = AllEntityQuery<NanoChatCardComponent, StationAiHeldComponent>();
+            while (aiQuery.MoveNext(out var aiId, out var aiChatCard, out var _))
+            {
+                if (aiChatCard.ListNumber && aiChatCard.Number is uint nanoChatNumber && _station.GetOwningStation(aiId) == station)
+                {
+                    contacts.Add(new NanoChatRecipient(nanoChatNumber, MetaData(aiId).EntityName));
+                }
+            }
+
             contacts.Sort((contactA, contactB) => string.CompareOrdinal(contactA.Name, contactB.Name));
         }
         else

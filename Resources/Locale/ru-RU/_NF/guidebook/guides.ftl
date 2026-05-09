@@ -1,6 +1,7 @@
 # Base entries
 guide-entry-nf14 = Руководство Фронтира
 guide-entry-shield-generators = Корабельные щитовые генераторы
+guide-entry-shield-generators-table = Сводная таблица щитов
 guide-entry-shield-generators-fsg = FSG — Гражданские щиты
 guide-entry-shield-generators-tsfmc = TSFMC
 guide-entry-shield-generators-ussp = Союз (USSP)

@@ -1,11 +1,11 @@
-ent-WeaponPistolViperPMC = { ent-WeaponPistolViper }
-    .desc = { ent-WeaponPistolViper.desc }
+ent-WeaponPistolViperPMC = { ent-NFWeaponPistolViper }
+    .desc = { ent-NFWeaponPistolViper.desc }
 ent-WeaponSubMachineGunWt550PMC = { ent-WeaponSubMachineGunWt550 }
     .desc = { ent-WeaponSubMachineGunWt550.desc }
 ent-WeaponSubMachineGunDrozdPMC = { ent-WeaponSubMachineGunDrozd }
     .desc = { ent-WeaponSubMachineGunDrozd.desc }
-ent-WeaponSubMachineGunC20rPMC = { ent-WeaponSubMachineGunC20r }
-    .desc = { ent-WeaponSubMachineGunC20r.desc }
+ent-WeaponSubMachineGunC20rPMC = { ent-NFWeaponSubMachineGunC20r }
+    .desc = { ent-NFWeaponSubMachineGunC20r.desc }
 ent-WeaponRifleLecterPMC = { ent-WeaponRifleLecter }
     .desc = { ent-WeaponRifleLecter.desc }
 ent-WeaponShotgunKammererPMC = { ent-WeaponShotgunKammerer }

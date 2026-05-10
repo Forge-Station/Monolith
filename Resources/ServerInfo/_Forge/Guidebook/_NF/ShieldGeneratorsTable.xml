@@ -1,0 +1,288 @@
+<Document>
+  # Сводная таблица щитов
+
+  Числа совпадают с полями прототипов [bold]ShipShieldEmitter[/bold] и (где отличается) [bold]ApcPowerReceiver.powerLoad[/bold]. [italic]База[/italic] и [italic]Пик[/italic] — это [bold]baseDraw[/bold] и [bold]maxDraw[/bold] в [bold]ваттах[/bold] (как в YAML, без сокращений).
+
+  В таблицах: [bold]Рост нагрузки[/bold] — [italic]damageExp[/italic]; [bold]Бонус автон.[/bold] — [italic]unpoweredBonus[/italic] (множитель без внешнего питания); [bold]Таран[/bold] — [italic]collisionResistanceMultiplier[/italic]: [color=lightblue]чем меньше, тем сильнее щит гасит энергию удара[/color].
+
+  Разметка — виджет [bold]Table[/bold] гайдбука SS14: фиксированное число колонок, каждая ячейка — [bold]ColorBox[/bold] с [bold]Box[/bold] внутри (как в [italic]Specifications/energy.xml[/italic]).
+
+  [textlink="Назад к обзору щитов" link="ShieldGenerators"]
+
+  ---
+
+  ## Гражданские FSG
+
+  <Table Columns="10">
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="4">[bold]Модель[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="4">[bold]Тир[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="4">[bold]Лимит[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="4">[bold]Рег/с[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="4">[bold]Рост нагрузки[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="4">[bold]База Вт[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="4">[bold]Пик Вт[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="4">[bold]Бонус автон.[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="4">[bold]Перегр. с[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="4">[bold]Таран[/bold]</Box>
+    </ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-90R «Искра»</Box></ColorBox>
+    <ColorBox><Box Margin="3">1</Box></ColorBox>
+    <ColorBox><Box Margin="3">55900</Box></ColorBox>
+    <ColorBox><Box Margin="3">656</Box></ColorBox>
+    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
+    <ColorBox><Box Margin="3">19000</Box></ColorBox>
+    <ColorBox><Box Margin="3">58000</Box></ColorBox>
+    <ColorBox><Box Margin="3">5</Box></ColorBox>
+    <ColorBox><Box Margin="3">55</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.60</Box></ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-100 «Киль»</Box></ColorBox>
+    <ColorBox><Box Margin="3">1</Box></ColorBox>
+    <ColorBox><Box Margin="3">65000</Box></ColorBox>
+    <ColorBox><Box Margin="3">500</Box></ColorBox>
+    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
+    <ColorBox><Box Margin="3">20000</Box></ColorBox>
+    <ColorBox><Box Margin="3">60000</Box></ColorBox>
+    <ColorBox><Box Margin="3">3</Box></ColorBox>
+    <ColorBox><Box Margin="3">80</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.50</Box></ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-110P «Ореол»</Box></ColorBox>
+    <ColorBox><Box Margin="3">1</Box></ColorBox>
+    <ColorBox><Box Margin="3">80600</Box></ColorBox>
+    <ColorBox><Box Margin="3">405</Box></ColorBox>
+    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
+    <ColorBox><Box Margin="3">22000</Box></ColorBox>
+    <ColorBox><Box Margin="3">63000</Box></ColorBox>
+    <ColorBox><Box Margin="3">2.5</Box></ColorBox>
+    <ColorBox><Box Margin="3">95</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.55</Box></ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-160C «Рамарт»</Box></ColorBox>
+    <ColorBox><Box Margin="3">2</Box></ColorBox>
+    <ColorBox><Box Margin="3">144500</Box></ColorBox>
+    <ColorBox><Box Margin="3">643</Box></ColorBox>
+    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
+    <ColorBox><Box Margin="3">24000</Box></ColorBox>
+    <ColorBox><Box Margin="3">68000</Box></ColorBox>
+    <ColorBox><Box Margin="3">4</Box></ColorBox>
+    <ColorBox><Box Margin="3">70</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.22</Box></ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-220 «Авангард»</Box></ColorBox>
+    <ColorBox><Box Margin="3">2</Box></ColorBox>
+    <ColorBox><Box Margin="3">180000</Box></ColorBox>
+    <ColorBox><Box Margin="3">750</Box></ColorBox>
+    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
+    <ColorBox><Box Margin="3">30000</Box></ColorBox>
+    <ColorBox><Box Margin="3">75000</Box></ColorBox>
+    <ColorBox><Box Margin="3">4</Box></ColorBox>
+    <ColorBox><Box Margin="3">100</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.60</Box></ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-250C «Волнорез»</Box></ColorBox>
+    <ColorBox><Box Margin="3">2</Box></ColorBox>
+    <ColorBox><Box Margin="3">189000</Box></ColorBox>
+    <ColorBox><Box Margin="3">714</Box></ColorBox>
+    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
+    <ColorBox><Box Margin="3">32000</Box></ColorBox>
+    <ColorBox><Box Margin="3">82000</Box></ColorBox>
+    <ColorBox><Box Margin="3">4</Box></ColorBox>
+    <ColorBox><Box Margin="3">85</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.15</Box></ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-330R «Рысь»</Box></ColorBox>
+    <ColorBox><Box Margin="3">2</Box></ColorBox>
+    <ColorBox><Box Margin="3">218000</Box></ColorBox>
+    <ColorBox><Box Margin="3">964</Box></ColorBox>
+    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
+    <ColorBox><Box Margin="3">36000</Box></ColorBox>
+    <ColorBox><Box Margin="3">90000</Box></ColorBox>
+    <ColorBox><Box Margin="3">6</Box></ColorBox>
+    <ColorBox><Box Margin="3">95</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.28</Box></ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-420 «Редут»</Box></ColorBox>
+    <ColorBox><Box Margin="3">3</Box></ColorBox>
+    <ColorBox><Box Margin="3">75000</Box></ColorBox>
+    <ColorBox><Box Margin="3">950</Box></ColorBox>
+    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
+    <ColorBox><Box Margin="3">40000</Box></ColorBox>
+    <ColorBox><Box Margin="3">100000</Box></ColorBox>
+    <ColorBox><Box Margin="3">6</Box></ColorBox>
+    <ColorBox><Box Margin="3">40</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.05</Box></ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-470P «Решётка»</Box></ColorBox>
+    <ColorBox><Box Margin="3">3</Box></ColorBox>
+    <ColorBox><Box Margin="3">180000</Box></ColorBox>
+    <ColorBox><Box Margin="3">750</Box></ColorBox>
+    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
+    <ColorBox><Box Margin="3">46000</Box></ColorBox>
+    <ColorBox><Box Margin="3">102000</Box></ColorBox>
+    <ColorBox><Box Margin="3">3.5</Box></ColorBox>
+    <ColorBox><Box Margin="3">100</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.16</Box></ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-600C «Бастион»</Box></ColorBox>
+    <ColorBox><Box Margin="3">3</Box></ColorBox>
+    <ColorBox><Box Margin="3">107000</Box></ColorBox>
+    <ColorBox><Box Margin="3">905</Box></ColorBox>
+    <ColorBox><Box Margin="3">1.00</Box></ColorBox>
+    <ColorBox><Box Margin="3">52000</Box></ColorBox>
+    <ColorBox><Box Margin="3">110000</Box></ColorBox>
+    <ColorBox><Box Margin="3">4.5</Box></ColorBox>
+    <ColorBox><Box Margin="3">140</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.03</Box></ColorBox>
+
+    <ColorBox><Box Margin="3">FSG-900P «Призменная корона»</Box></ColorBox>
+    <ColorBox><Box Margin="3">4</Box></ColorBox>
+    <ColorBox><Box Margin="3">161000</Box></ColorBox>
+    <ColorBox><Box Margin="3">691</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.95</Box></ColorBox>
+    <ColorBox><Box Margin="3">70000</Box></ColorBox>
+    <ColorBox><Box Margin="3">150000</Box></ColorBox>
+    <ColorBox><Box Margin="3">2.5</Box></ColorBox>
+    <ColorBox><Box Margin="3">170</Box></ColorBox>
+    <ColorBox><Box Margin="3">0.05</Box></ColorBox>
+  </Table>
+
+  [italic]У гражданских FSG значение [bold]ApcPowerReceiver.powerLoad[/bold] совпадает с базовым draw.[/italic]
+
+  ---
+
+  ## Фракционные (тир 3)
+
+  <Table Columns="11">
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Фракция[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Серия[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Модель[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Лимит[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Рег/с[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Рост нагрузки[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]База Вт[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Пик Вт[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Бонус автон.[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Перегр. с[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Таран[/bold]</Box>
+    </ColorBox>
+
+    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">SGS-440 «Цитадель»</Box></ColorBox><ColorBox><Box Margin="2">87000</Box></ColorBox><ColorBox><Box Margin="2">1192</Box></ColorBox><ColorBox><Box Margin="2">1.02</Box></ColorBox><ColorBox><Box Margin="2">48600</Box></ColorBox><ColorBox><Box Margin="2">114000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">55</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox>
+    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">SGS-470P «Корона»</Box></ColorBox><ColorBox><Box Margin="2">210000</Box></ColorBox><ColorBox><Box Margin="2">882</Box></ColorBox><ColorBox><Box Margin="2">1.09</Box></ColorBox><ColorBox><Box Margin="2">51000</Box></ColorBox><ColorBox><Box Margin="2">104000</Box></ColorBox><ColorBox><Box Margin="2">3.5</Box></ColorBox><ColorBox><Box Margin="2">82</Box></ColorBox><ColorBox><Box Margin="2">0.16</Box></ColorBox>
+    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">SGS-600C «Шеллбрейк»</Box></ColorBox><ColorBox><Box Margin="2">107000</Box></ColorBox><ColorBox><Box Margin="2">709</Box></ColorBox><ColorBox><Box Margin="2">1.00</Box></ColorBox><ColorBox><Box Margin="2">52000</Box></ColorBox><ColorBox><Box Margin="2">102000</Box></ColorBox><ColorBox><Box Margin="2">4.5</Box></ColorBox><ColorBox><Box Margin="2">175</Box></ColorBox><ColorBox><Box Margin="2">0.023</Box></ColorBox>
+
+    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">SGS-420 «Передовой редут»</Box></ColorBox><ColorBox><Box Margin="2">67000</Box></ColorBox><ColorBox><Box Margin="2">744</Box></ColorBox><ColorBox><Box Margin="2">1.08</Box></ColorBox><ColorBox><Box Margin="2">35000</Box></ColorBox><ColorBox><Box Margin="2">86000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">40</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox>
+    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">SGS-470P «Полярная решётка»</Box></ColorBox><ColorBox><Box Margin="2">161000</Box></ColorBox><ColorBox><Box Margin="2">635</Box></ColorBox><ColorBox><Box Margin="2">1.08</Box></ColorBox><ColorBox><Box Margin="2">40500</Box></ColorBox><ColorBox><Box Margin="2">91000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">100</Box></ColorBox><ColorBox><Box Margin="2">0.16</Box></ColorBox>
+    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">SGS-600C «Ледокол»</Box></ColorBox><ColorBox><Box Margin="2">124000</Box></ColorBox><ColorBox><Box Margin="2">1108</Box></ColorBox><ColorBox><Box Margin="2">0.92</Box></ColorBox><ColorBox><Box Margin="2">54500</Box></ColorBox><ColorBox><Box Margin="2">108000</Box></ColorBox><ColorBox><Box Margin="2">4.5</Box></ColorBox><ColorBox><Box Margin="2">140</Box></ColorBox><ColorBox><Box Margin="2">0.041</Box></ColorBox>
+
+    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">RSG-420 «Пыльная цитадель»</Box></ColorBox><ColorBox><Box Margin="2">64300</Box></ColorBox><ColorBox><Box Margin="2">1192</Box></ColorBox><ColorBox><Box Margin="2">1.14</Box></ColorBox><ColorBox><Box Margin="2">46500</Box></ColorBox><ColorBox><Box Margin="2">104000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">28</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox>
+    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">RSG-470P «Азимут»</Box></ColorBox><ColorBox><Box Margin="2">161000</Box></ColorBox><ColorBox><Box Margin="2">882</Box></ColorBox><ColorBox><Box Margin="2">1.08</Box></ColorBox><ColorBox><Box Margin="2">49000</Box></ColorBox><ColorBox><Box Margin="2">116000</Box></ColorBox><ColorBox><Box Margin="2">3.5</Box></ColorBox><ColorBox><Box Margin="2">80</Box></ColorBox><ColorBox><Box Margin="2">0.16</Box></ColorBox>
+    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">RSG-600C «Галандек»</Box></ColorBox><ColorBox><Box Margin="2">102000</Box></ColorBox><ColorBox><Box Margin="2">1056</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">60000</Box></ColorBox><ColorBox><Box Margin="2">118000</Box></ColorBox><ColorBox><Box Margin="2">4.5</Box></ColorBox><ColorBox><Box Margin="2">158</Box></ColorBox><ColorBox><Box Margin="2">0.022</Box></ColorBox>
+
+    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">VAS-420 «Медноголовая»</Box></ColorBox><ColorBox><Box Margin="2">65600</Box></ColorBox><ColorBox><Box Margin="2">1157</Box></ColorBox><ColorBox><Box Margin="2">1.12</Box></ColorBox><ColorBox><Box Margin="2">45000</Box></ColorBox><ColorBox><Box Margin="2">114000</Box></ColorBox><ColorBox><Box Margin="2">6</Box></ColorBox><ColorBox><Box Margin="2">40</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox>
+    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">VAS-470P «Стеклянная мамба»</Box></ColorBox><ColorBox><Box Margin="2">194000</Box></ColorBox><ColorBox><Box Margin="2">600</Box></ColorBox><ColorBox><Box Margin="2">1.06</Box></ColorBox><ColorBox><Box Margin="2">52000</Box></ColorBox><ColorBox><Box Margin="2">118000</Box></ColorBox><ColorBox><Box Margin="2">3.5</Box></ColorBox><ColorBox><Box Margin="2">122</Box></ColorBox><ColorBox><Box Margin="2">0.16</Box></ColorBox>
+    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">VAS-600C «Пила-клык»</Box></ColorBox><ColorBox><Box Margin="2">95000</Box></ColorBox><ColorBox><Box Margin="2">779</Box></ColorBox><ColorBox><Box Margin="2">1.00</Box></ColorBox><ColorBox><Box Margin="2">54000</Box></ColorBox><ColorBox><Box Margin="2">110000</Box></ColorBox><ColorBox><Box Margin="2">4.5</Box></ColorBox><ColorBox><Box Margin="2">182</Box></ColorBox><ColorBox><Box Margin="2">0.022</Box></ColorBox>
+
+    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">SGD-440 «Индиго»</Box></ColorBox><ColorBox><Box Margin="2">83000</Box></ColorBox><ColorBox><Box Margin="2">812</Box></ColorBox><ColorBox><Box Margin="2">1.07</Box></ColorBox><ColorBox><Box Margin="2">36500</Box></ColorBox><ColorBox><Box Margin="2">94000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">56</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox>
+    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">SGD-470P «Клауза»</Box></ColorBox><ColorBox><Box Margin="2">191000</Box></ColorBox><ColorBox><Box Margin="2">662</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">42000</Box></ColorBox><ColorBox><Box Margin="2">96000</Box></ColorBox><ColorBox><Box Margin="2">2.8</Box></ColorBox><ColorBox><Box Margin="2">116</Box></ColorBox><ColorBox><Box Margin="2">0.16</Box></ColorBox>
+    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">SGD-600C «Кинетический задел»</Box></ColorBox><ColorBox><Box Margin="2">102000</Box></ColorBox><ColorBox><Box Margin="2">865</Box></ColorBox><ColorBox><Box Margin="2">1.00</Box></ColorBox><ColorBox><Box Margin="2">49500</Box></ColorBox><ColorBox><Box Margin="2">106000</Box></ColorBox><ColorBox><Box Margin="2">4.5</Box></ColorBox><ColorBox><Box Margin="2">168</Box></ColorBox><ColorBox><Box Margin="2">0.027</Box></ColorBox>
+  </Table>
+
+  [italic][bold]powerLoad[/bold] у фракций задан в прототипе и равен базовому draw.[/italic]
+
+  ---
+
+  ## Линейка Mono и статика
+
+  <Table Columns="10">
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Модель[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Лимит[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Рег/с[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Рост нагрузки[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]База Вт[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Пик Вт[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Бонус автон.[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Перегр. с[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]Таран[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#3a3a5a">
+      <Box HorizontalAlignment="Center" Margin="3">[bold]АПЦ Вт[/bold]</Box>
+    </ColorBox>
+
+    <ColorBox><Box Margin="2">База щита (абстр.)</Box></ColorBox><ColorBox><Box Margin="2">60000</Box></ColorBox><ColorBox><Box Margin="2">600</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">40000</Box></ColorBox><ColorBox><Box Margin="2">100000</Box></ColorBox><ColorBox><Box Margin="2">7</Box></ColorBox><ColorBox><Box Margin="2">40</Box></ColorBox><ColorBox><Box Margin="2">1.0</Box></ColorBox><ColorBox><Box Margin="2">60000</Box></ColorBox>
+
+    <ColorBox><Box Margin="2">MS-100 «Часовой»</Box></ColorBox><ColorBox><Box Margin="2">65000</Box></ColorBox><ColorBox><Box Margin="2">500</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">20000</Box></ColorBox><ColorBox><Box Margin="2">60000</Box></ColorBox><ColorBox><Box Margin="2">3</Box></ColorBox><ColorBox><Box Margin="2">80</Box></ColorBox><ColorBox><Box Margin="2">0.50</Box></ColorBox><ColorBox><Box Margin="2">20000</Box></ColorBox>
+
+    <ColorBox><Box Margin="2">MS-250 «Эгида»</Box></ColorBox><ColorBox><Box Margin="2">180000</Box></ColorBox><ColorBox><Box Margin="2">750</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">30000</Box></ColorBox><ColorBox><Box Margin="2">75000</Box></ColorBox><ColorBox><Box Margin="2">4</Box></ColorBox><ColorBox><Box Margin="2">100</Box></ColorBox><ColorBox><Box Margin="2">0.60</Box></ColorBox><ColorBox><Box Margin="2">40000</Box></ColorBox>
+
+    <ColorBox><Box Margin="2">MS-500 «Титан»</Box></ColorBox><ColorBox><Box Margin="2">75000</Box></ColorBox><ColorBox><Box Margin="2">950</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">40000</Box></ColorBox><ColorBox><Box Margin="2">100000</Box></ColorBox><ColorBox><Box Margin="2">6</Box></ColorBox><ColorBox><Box Margin="2">40</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox><ColorBox><Box Margin="2">60000</Box></ColorBox>
+
+    <ColorBox><Box Margin="2">LM-212 «Авангард» (линкор)</Box></ColorBox><ColorBox><Box Margin="2">85000</Box></ColorBox><ColorBox><Box Margin="2">800</Box></ColorBox><ColorBox><Box Margin="2">1.00</Box></ColorBox><ColorBox><Box Margin="2">60000</Box></ColorBox><ColorBox><Box Margin="2">100000</Box></ColorBox><ColorBox><Box Margin="2">6</Box></ColorBox><ColorBox><Box Margin="2">35</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox><ColorBox><Box Margin="2">60000</Box></ColorBox>
+
+    <ColorBox><Box Margin="2">FS-421 «Крепость» (форпост)</Box></ColorBox><ColorBox><Box Margin="2">250000</Box></ColorBox><ColorBox><Box Margin="2">1000</Box></ColorBox><ColorBox><Box Margin="2">1.00</Box></ColorBox><ColorBox><Box Margin="2">80000</Box></ColorBox><ColorBox><Box Margin="2">150000</Box></ColorBox><ColorBox><Box Margin="2">7</Box></ColorBox><ColorBox><Box Margin="2">45</Box></ColorBox><ColorBox><Box Margin="2">0.00</Box></ColorBox><ColorBox><Box Margin="2">80000</Box></ColorBox>
+  </Table>
+
+  [bold]«Крепость»:[/bold] [italic]powerModifier[/italic] 0.25 (у остальных по умолчанию 0.5). У MS-500 [bold]нагрузка АПЦ выше[/bold], чем [bold]baseDraw[/bold] — учитывайте при разводке сети.
+
+  ---
+
+  [textlink="Обзор и категории щитов" link="ShieldGenerators"] · [textlink="Шаттлостроение" link="ShuttleCraft"]
+</Document>

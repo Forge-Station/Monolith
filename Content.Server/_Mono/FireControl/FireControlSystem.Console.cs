@@ -251,6 +251,22 @@ public sealed partial class FireControlSystem : EntitySystem
         return false;
     }
 
+    // Forge-Change-Start
+    /// <summary>
+    /// Pushes refreshed UI state to every fire control console anchored to the given grid.
+    /// </summary>
+    public void RefreshConsolesOnGrid(EntityUid gridUid)
+    {
+        var query = EntityQueryEnumerator<FireControlConsoleComponent, TransformComponent>();
+        while (query.MoveNext(out var consoleUid, out var consoleComp, out var xform))
+        {
+            if (xform.GridUid != gridUid)
+                continue;
+            UpdateUi(consoleUid, consoleComp);
+        }
+    }
+    // Forge-Change-End
+
     private void UpdateUi(EntityUid uid, FireControlConsoleComponent? component = null)
     {
         if (!Resolve(uid, ref component))

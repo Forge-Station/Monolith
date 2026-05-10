@@ -1,1 +1,1 @@
-ent-RepairGhost = repair ghost
+ent-RepairGhost = ремонтная проекция

@@ -1,6 +1,7 @@
 ent-NanolaminateFoamGrenade = граната наноламинатной пены
     .desc = Улучшенная версия гранаты из металлической пены. Вместо алюминия создаёт наноусиленный сплав на большой площади, выдерживающий гораздо больше повреждений.
-ent-NanolaminateFoam = nanolaminate foam
-    .desc = { ent-NanolaminateFoam }
-ent-FoamedNanolaminateMetal = foamed nanolaminate
+ent-NanolaminateFoam = наноламинатная пена
+ent-FoamedNanolaminateMetal = вспененный наноламинат
     .desc = Для заделки пробоин в корпусе.
+ent-StickyGrenade = липкая бомба
+    .desc = Противотанковая липкая бомба, основанная на старых разработках и всё ещё эффективная даже в космосе. Обладает большой мощностью, но имеет долгую задержку перед взрывом.

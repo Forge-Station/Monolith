@@ -6,12 +6,12 @@
   description: A rapid-cycle shield generator with a light reserve and a fast return to service after overloads.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 105
-    damageExp: 1.22
+    healPerSecond: 656
+    damageExp: 1.05
     baseDraw: 19000
     maxDraw: 58000
     unpoweredBonus: 5
-    damageLimit: 4300
+    damageLimit: 55900
     damageOverloadTimePunishment: 55
     shieldColor: "#58C6FF"
     collisionResistanceMultiplier: 0.6
@@ -81,12 +81,12 @@
   description: A general-purpose shield generator with balanced output, stable behavior and no strong specialization.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 80
-    damageExp: 1.2
+    healPerSecond: 500
+    damageExp: 1.05
     baseDraw: 20000
     maxDraw: 60000
     unpoweredBonus: 3
-    damageLimit: 5000
+    damageLimit: 65000
     damageOverloadTimePunishment: 80
     shieldColor: "#3399FF"
     collisionResistanceMultiplier: 0.5
@@ -156,12 +156,12 @@
   description: A prismatic shield generator with a thicker reserve at the cost of slower recovery after a collapse.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 65
-    damageExp: 1.24
+    healPerSecond: 405
+    damageExp: 1.05
     baseDraw: 22000
     maxDraw: 63000
     unpoweredBonus: 2.5
-    damageLimit: 6200
+    damageLimit: 80600
     damageOverloadTimePunishment: 95
     shieldColor: "#8E7DFF"
     collisionResistanceMultiplier: 0.55
@@ -231,12 +231,12 @@
   description: A collision-hardened shield generator built to soften rams, glancing impacts and sloppy docking maneuvers.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 90
-    damageExp: 1.18
+    healPerSecond: 643
+    damageExp: 1.05
     baseDraw: 24000
     maxDraw: 68000
     unpoweredBonus: 4
-    damageLimit: 6100
+    damageLimit: 144500
     damageOverloadTimePunishment: 70
     shieldColor: "#41D4FF"
     collisionResistanceMultiplier: 0.22
@@ -317,15 +317,15 @@
   description: A medium-output shield generator intended for ships that need a dependable frontline screen without harsh tradeoffs.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 105
-    damageExp: 1.15
+    healPerSecond: 750
+    damageExp: 1.05
     baseDraw: 30000
-    maxDraw: 78000
+    maxDraw: 75000
     unpoweredBonus: 4
-    damageLimit: 7600
-    damageOverloadTimePunishment: 80
+    damageLimit: 180000
+    damageOverloadTimePunishment: 100
     shieldColor: "#62E86F"
-    collisionResistanceMultiplier: 0.35
+    collisionResistanceMultiplier: 0.6
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     snapCardinals: true
@@ -403,12 +403,12 @@
   description: A medium-power shield tuned for sustained collision damping and dirty close-quarters fighting.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 100
-    damageExp: 1.12
+    healPerSecond: 714
+    damageExp: 1.05
     baseDraw: 32000
     maxDraw: 82000
     unpoweredBonus: 4
-    damageLimit: 8000
+    damageLimit: 189000
     damageOverloadTimePunishment: 85
     shieldColor: "#3CFFCC"
     collisionResistanceMultiplier: 0.15
@@ -489,12 +489,12 @@
   description: A high-throughput shield generator that cycles fast enough to keep pace with extended skirmishes.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 135
-    damageExp: 1.08
+    healPerSecond: 964
+    damageExp: 1.05
     baseDraw: 36000
     maxDraw: 90000
     unpoweredBonus: 6
-    damageLimit: 9200
+    damageLimit: 218000
     damageOverloadTimePunishment: 95
     shieldColor: "#FFD35A"
     collisionResistanceMultiplier: 0.28
@@ -575,15 +575,15 @@
   description: A heavy shield generator designed for larger hulls that expect to stand under focused fire.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 110
+    healPerSecond: 950
     damageExp: 1.05
-    baseDraw: 42000
-    maxDraw: 98000
-    unpoweredBonus: 5
-    damageLimit: 11200
-    damageOverloadTimePunishment: 110
+    baseDraw: 40000
+    maxDraw: 100000
+    unpoweredBonus: 6
+    damageLimit: 75000
+    damageOverloadTimePunishment: 40
     shieldColor: "#FF9346"
-    collisionResistanceMultiplier: 0.18
+    collisionResistanceMultiplier: 0.05
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -640,7 +640,7 @@
     intensitySlope: 4
     totalIntensity: 560
   - type: ApcPowerReceiver
-    powerLoad: 42000
+    powerLoad: 40000
   - type: PointLight
     enabled: false
     castShadows: true
@@ -661,13 +661,13 @@
   description: A prismatic heavy shield with a broad reserve envelope and a notably slow recovery profile.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 85
-    damageExp: 1.03
+    healPerSecond: 750
+    damageExp: 1.05
     baseDraw: 46000
     maxDraw: 102000
     unpoweredBonus: 3.5
-    damageLimit: 13200
-    damageOverloadTimePunishment: 125
+    damageLimit: 180000
+    damageOverloadTimePunishment: 100
     shieldColor: "#C86BFF"
     collisionResistanceMultiplier: 0.16
   - type: Sprite
@@ -747,15 +747,15 @@
   description: A siege-grade collision shield intended for armored hulls, station perimeters and brutal close-range engagements.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 105
+    healPerSecond: 905
     damageExp: 1.0
     baseDraw: 52000
     maxDraw: 110000
     unpoweredBonus: 4.5
-    damageLimit: 16000
+    damageLimit: 107000
     damageOverloadTimePunishment: 140
     shieldColor: "#FF5E5E"
-    collisionResistanceMultiplier: 0.08
+    collisionResistanceMultiplier: 0.03
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -833,12 +833,12 @@
   description: An outpost-class prismatic shield built around overwhelming reserve depth and very slow post-collapse recovery.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 80
+    healPerSecond: 691
     damageExp: 0.95
     baseDraw: 70000
     maxDraw: 150000
     unpoweredBonus: 2.5
-    damageLimit: 24000
+    damageLimit: 161000
     damageOverloadTimePunishment: 170
     shieldColor: "#FF66D9"
     collisionResistanceMultiplier: 0.05

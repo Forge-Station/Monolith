@@ -24,9 +24,19 @@ public sealed partial class RadarBlipSystem : EntitySystem
     private readonly List<BlipNetData> _tempBlipsCache = new();
     private readonly List<HitscanNetData> _tempHitscansCache = new();
     private readonly List<EntityUid> _tempSourcesCache = new();
+    private readonly List<Vector2> _tempSourcePositionsCache = new(); // Forge-Change: precomputed source world positions
     private readonly List<BlipConfig> _tempPaletteCache = new();
     private readonly Dictionary<BlipConfig, ushort> _paletteIndex = new();
     private readonly Dictionary<NetUserId, TimeSpan> _lastRequestByUser = new(); // Forge-Change
+
+    // Per-request grid xform/body cache so blips parented to the same grid don't re-resolve it
+    private readonly Dictionary<EntityUid, GridFrameCache> _gridFrameCache = new();
+
+    private sealed class GridFrameCache
+    {
+        public Angle LocalRotation;
+        public PhysicsComponent? Body;
+    }
 
     public override void Initialize()
     {
@@ -63,8 +73,13 @@ public sealed partial class RadarBlipSystem : EntitySystem
         else
             _tempSourcesCache.Add(radarUid.Value);
 
-        AssembleBlipsReport((EntityUid)radarUid, _tempSourcesCache, radar);
-        AssembleHitscanReport((EntityUid)radarUid, _tempSourcesCache, radar);
+        // Precompute source world positions once instead of recomputing per blip.
+        _tempSourcePositionsCache.Clear();
+        foreach (var source in _tempSourcesCache)
+            _tempSourcePositionsCache.Add(_xform.GetWorldPosition(source));
+
+        AssembleBlipsReport((EntityUid)radarUid, _tempSourcePositionsCache, radar);
+        AssembleHitscanReport((EntityUid)radarUid, _tempSourcePositionsCache, radar);
 
         // Combine the blips and hitscan lines
         var giveEv = new GiveBlipsEvent(_tempPaletteCache, _tempBlipsCache, _tempHitscansCache);
@@ -73,8 +88,10 @@ public sealed partial class RadarBlipSystem : EntitySystem
         _tempBlipsCache.Clear();
         _tempHitscansCache.Clear();
         _tempSourcesCache.Clear();
+        _tempSourcePositionsCache.Clear();
         _tempPaletteCache.Clear();
         _paletteIndex.Clear();
+        _gridFrameCache.Clear();
     }
 
     private void OnBlipShutdown(EntityUid blipUid, RadarBlipComponent component, ComponentShutdown args)
@@ -84,7 +101,7 @@ public sealed partial class RadarBlipSystem : EntitySystem
         RaiseNetworkEvent(removalEv);
     }
 
-    private void AssembleBlipsReport(EntityUid uid, List<EntityUid> sources, RadarConsoleComponent? component = null)
+    private void AssembleBlipsReport(EntityUid uid, List<Vector2> sourcePositions, RadarConsoleComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
@@ -99,7 +116,7 @@ public sealed partial class RadarBlipSystem : EntitySystem
         {
             if (!blip.Enabled
                 || blipXform.MapID != radarMapId
-                || !NearAnySources(_xform.GetWorldPosition(blipXform), sources, blip.MaxDistance)
+                || !NearAnySources(_xform.GetWorldPosition(blipXform), sourcePositions, blip.MaxDistance)
             )
                 continue;
 
@@ -125,13 +142,13 @@ public sealed partial class RadarBlipSystem : EntitySystem
             // we're parented to either the map or a grid and this is relative velocity so account for grid movement
             if (blipGrid != null)
             {
-                var gridXform = Transform(blipGrid.Value);
-                if (TryComp<PhysicsComponent>(blipGrid.Value, out var gridBody)) // prevent log spam
-                    blipVelocity -= _physics.GetLinearVelocity(blipGrid.Value, coord.Position, gridBody);
+                var gridFrame = GetGridFrame(blipGrid.Value);
+                if (gridFrame.Body != null) // prevent log spam
+                    blipVelocity -= _physics.GetLinearVelocity(blipGrid.Value, coord.Position, gridFrame.Body);
                 // it's local-frame velocity so rotate it too
-                blipVelocity = (-gridXform.LocalRotation).RotateVec(blipVelocity);
+                blipVelocity = (-gridFrame.LocalRotation).RotateVec(blipVelocity);
                 // and also offset the rotation
-                rotation -= gridXform.LocalRotation;
+                rotation -= gridFrame.LocalRotation;
                 // and hijack our shape if we want to
                 gridCfg = blip.GridConfig;
             }
@@ -147,6 +164,18 @@ public sealed partial class RadarBlipSystem : EntitySystem
                             configIdx,
                             gridConfigIdx));
         }
+    }
+
+    private GridFrameCache GetGridFrame(EntityUid grid)
+    {
+        if (_gridFrameCache.TryGetValue(grid, out var cached))
+            return cached;
+
+        var gridXform = Transform(grid);
+        TryComp<PhysicsComponent>(grid, out var gridBody);
+        cached = new GridFrameCache { LocalRotation = gridXform.LocalRotation, Body = gridBody };
+        _gridFrameCache[grid] = cached;
+        return cached;
     }
 
     /// <summary>
@@ -172,12 +201,10 @@ public sealed partial class RadarBlipSystem : EntitySystem
     /// <summary>
     /// Assembles trajectory information for hitscan projectiles to be displayed on radar
     /// </summary>
-    private void AssembleHitscanReport(EntityUid uid, List<EntityUid> sources, RadarConsoleComponent? component = null)
+    private void AssembleHitscanReport(EntityUid uid, List<Vector2> sourcePositions, RadarConsoleComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
-
-        var radarXform = Transform(uid);
 
         var hitscanQuery = EntityQueryEnumerator<HitscanRadarComponent>();
 
@@ -186,20 +213,19 @@ public sealed partial class RadarBlipSystem : EntitySystem
             if (!hitscan.Enabled)
                 continue;
 
-            if (!NearAnySources(hitscan.StartPosition, sources, component.MaxRange) && NearAnySources(hitscan.EndPosition, sources, component.MaxRange))
+            if (!NearAnySources(hitscan.StartPosition, sourcePositions, component.MaxRange) && NearAnySources(hitscan.EndPosition, sourcePositions, component.MaxRange))
                 continue;
 
             _tempHitscansCache.Add(new(hitscan.StartPosition, hitscan.EndPosition, hitscan.LineThickness, hitscan.RadarColor));
         }
     }
 
-    private bool NearAnySources(Vector2 coord, List<EntityUid> sources, float range)
+    private static bool NearAnySources(Vector2 coord, List<Vector2> sourcePositions, float range)
     {
         var rsqr = range * range;
-        foreach (var source in sources)
+        for (var i = 0; i < sourcePositions.Count; i++)
         {
-            var pos = _xform.GetWorldPosition(source);
-            if ((pos - coord).LengthSquared() < rsqr)
+            if ((sourcePositions[i] - coord).LengthSquared() < rsqr)
                 return true;
         }
         return false;

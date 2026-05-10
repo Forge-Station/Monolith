@@ -1,4 +1,6 @@
 using Content.Server.Power.Components;
+using Content.Server._Mono.FireControl;
+using Content.Server.Shuttles.Systems;
 using Content.Shared._Crescent.ShipShields;
 using Content.Shared._Mono.SpaceArtillery;
 using Content.Shared.Physics;
@@ -28,6 +30,8 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     [Dependency] private readonly FixtureSystem _fixtureSystem = default!;
     [Dependency] private readonly PhysicsSystem _physicsSystem = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsSys = default!;
+    [Dependency] private readonly ShuttleConsoleSystem _shuttleConsole = default!;
+    [Dependency] private readonly FireControlSystem _fireControl = default!;
 
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<ShipWeaponProjectileComponent> _shipWeaponProjectileQuery;
@@ -98,6 +102,11 @@ public sealed partial class ShipShieldsSystem : EntitySystem
                 _audio.PlayGlobal(emitter.PowerDownSound, filter, true, emitter.PowerUpSound.Params);
             }
 
+            // Forge-Change-Start
+            // Push fresh shield state to any consoles on this grid so HP %/recharge timer stays current.
+            _shuttleConsole.RefreshShuttleConsoles(parent.Value);
+            _fireControl.RefreshConsolesOnGrid(parent.Value);
+            // Forge-Change-End
         }
     }
     public override void Initialize()
@@ -151,12 +160,23 @@ public sealed partial class ShipShieldsSystem : EntitySystem
 
     private void OnEmitterShutdown(EntityUid uid, ShipShieldEmitterComponent emitter, ComponentShutdown args) // Mono
     {
+        var parent = Transform(uid).GridUid; // Forge-Change
+
         if (emitter.Shielded != null)
         {
             UnshieldEntity(emitter.Shielded.Value);
             emitter.Shield = null;
             emitter.Shielded = null;
         }
+
+        // Forge-Change-Start
+        // Refresh consoles so the shield HP bar disappears when the emitter is removed from the grid.
+        if (parent != null)
+        {
+            _shuttleConsole.RefreshShuttleConsoles(parent.Value);
+            _fireControl.RefreshConsolesOnGrid(parent.Value);
+        }
+        // Forge-Change-End
     }
 
     /// <summary>

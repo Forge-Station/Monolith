@@ -151,6 +151,9 @@ public sealed partial class AtmosphereSystem
         atmos.HighPressureDelta.Clear();
         atmos.CurrentRunTiles.Clear();
         atmos.CurrentRunTileIndex = 0; // Forge-Change
+        atmos.CurrentRunChunkTiles.Clear();
+        atmos.CurrentRunChunkTileIndex = 0;
+        atmos.CurrentRunChunkIndex = 0;
         atmos.CurrentRunExcitedGroups.Clear();
         atmos.CurrentRunExcitedGroupIndex = 0; // Forge-Change
         atmos.InvalidatedCoords.Clear();
@@ -159,6 +162,7 @@ public sealed partial class AtmosphereSystem
         atmos.CurrentRunPipeNetIndex = 0; // Forge-Change
         atmos.CurrentRunAtmosDevices.Clear(); // Forge-Change
         atmos.CurrentRunAtmosDeviceIndex = 0; // Forge-Change
+        atmos.CurrentRunAtmosDevicesDirty = true;
         atmos.PossiblyDisconnectedTiles.Clear();
         atmos.Tiles.Clear();
 

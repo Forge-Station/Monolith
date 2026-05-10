@@ -1,6 +1,7 @@
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 using Content.Shared._NF.Shuttles.Events; // Frontier - InertiaDampeningMode access
+using Content.Shared._Crescent.ShipShields;
 
 namespace Content.Shared.Shuttles.BUIStates;
 
@@ -20,8 +21,6 @@ public sealed class NavInterfaceState
     public Angle? Angle;
 
     public Dictionary<NetEntity, List<DockingPortState>> Docks;
-
-    public bool RotateWithEntity = true;
 
     /// <summary>
     /// Custom display names for network port buttons.
@@ -46,8 +45,12 @@ public sealed class NavInterfaceState
     public bool HideCoords = false;
     // End Frontier fields
 
-    public bool Pannable = true; // Mono
-    public bool RelativePanning = false; // Mono
+    // Forge-Change-Start
+    /// <summary>
+    /// Current shield state of the grid the console is mounted on.
+    /// </summary>
+    public ShipShieldState ShieldState;
+    // Forge-Change-End
 
     public NavInterfaceState(
         float maxRange,
@@ -55,9 +58,7 @@ public sealed class NavInterfaceState
         Angle? angle,
         Dictionary<NetEntity, List<DockingPortState>> docks,
         InertiaDampeningMode dampeningMode, // Frontier: add dampeningMode
-        Dictionary<string, string>? networkPortNames = null,
-        bool pannable = true, // Mono
-        bool relativePan = false) // Mono
+        Dictionary<string, string>? networkPortNames = null)
     {
         MaxRange = maxRange;
         Coordinates = coordinates;
@@ -65,8 +66,6 @@ public sealed class NavInterfaceState
         Docks = docks;
         DampeningMode = dampeningMode; // Frontier
         NetworkPortNames = networkPortNames ?? new Dictionary<string, string>();
-        Pannable = pannable; // Mono
-        RelativePanning = relativePan; // Mono
     }
 }
 

@@ -61,33 +61,25 @@ namespace Content.Client.VendingMachines
         }
 
         public void Refresh()
-        {
-            var system = EntMan.System<VendingMachineSystem>();
-            _cachedInventory = system.GetAllInventory(Owner);
+                {
+                    var enabled = EntMan.TryGetComponent(Owner, out VendingMachineComponent? bendy) && !bendy.Ejecting;
+                    _requiresCash = bendy?.RequiresCash ?? false;
 
-            // Frontier: state, market modifier, balance status
-            var uiUsers = _uiSystem.GetActors(Owner, UiKey);
-            foreach (var uiUser in uiUsers)
-            {
-                if (EntMan.TryGetComponent<BankAccountComponent>(uiUser, out var bank))
-                    _balance = bank.Balance;
-            }
-            int? cashSlotValue = null;
-            if (EntMan.TryGetComponent<VendingMachineComponent>(Owner, out var vendingMachine))
-            {
-                _cashSlotBalance = vendingMachine.CashSlotBalance;
-                _requiresCash = vendingMachine.RequiresCash; // mono
-                if (vendingMachine.CashSlotName != null)
-                    cashSlotValue = _cashSlotBalance;
-            }
-            else
-            {
-                _cashSlotBalance = 0;
-            }
-            // End Frontier
+                    var system = EntMan.System<VendingMachineSystem>();
+                    _cachedInventory = system.GetAllInventory(Owner);
 
-            _menu?.Populate(_cachedInventory, _mod, _balance, cashSlotValue, _requiresCash); // Frontier: add _balance, mono: add _requiresCash
-        }
+                    // Frontier: state, market modifier, balance status
+                    if (EntMan.TryGetComponent<BankAccountComponent>(PlayerManager.LocalEntity, out var bank))
+                        _balance = bank.Balance;
+                    else
+                        _balance = 0;
+                    int? cashSlotValue = null;
+                    if (TryUpdateCashSlotBalance())
+                        cashSlotValue = _cashSlotBalance;
+                    // End Frontier
+
+                    _menu?.Populate(_cachedInventory, enabled, _mod, _balance, cashSlotValue, _requiresCash); // Frontier: add _mod, _balance, cashSlotValue
+                }
 
         private void OnItemSelected(GUIBoundKeyEventArgs args, ListData data)
         {
@@ -121,5 +113,21 @@ namespace Content.Client.VendingMachines
             _menu.OnClose -= Close;
             _menu.Dispose();
         }
+
+        // Forge-Change-Start: update cash slot balance from frontier
+        public bool TryUpdateCashSlotBalance()
+        {
+            if (EntMan.TryGetComponent<VendingMachineComponent>(Owner, out var vendingMachine))
+            {
+                _cashSlotBalance = vendingMachine.CashSlotBalance;
+                return true;
+            }
+            else
+            {
+                _cashSlotBalance = 0;
+                return false;
+            }
+        }
+        // Forge-Change-End
     }
 }

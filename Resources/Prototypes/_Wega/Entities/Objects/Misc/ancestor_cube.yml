@@ -1,0 +1,9 @@
+- type: entity
+  parent: MonkeyCubeWrapped
+  name: monkey demon cube
+  id: MonkeyDemonCubeWrapped
+  description: Unwrap this to get a demon cube.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+      - id: MonkeyDemonCube

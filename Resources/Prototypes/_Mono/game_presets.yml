@@ -10,6 +10,7 @@
   showInVote: false # For admin usage really. Not that boring, but I'd rather just let players choose their main threat instead of choosing no threat.
   rules:
   - NFAdventure
+  - MaxTimeRestart # Forge-Change
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
@@ -26,6 +27,7 @@
   showInVote: false # For admin usage really. General player opinion is that this was pretty boring.
   rules:
   - NFAdventure
+  - MaxTimeRestart # Forge-Change
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
@@ -42,6 +44,7 @@
   showInVote: false # For admin usage really. General player opinion is that this was pretty boring.
   rules:
   - NFAdventure
+  - MaxTimeRestart # Forge-Change
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
@@ -58,6 +61,7 @@
   showInVote: false # For admin usage really. General player opinion is that this was pretty boring.
   rules:
   - NFAdventure
+  - MaxTimeRestart # Forge-Change
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
@@ -74,6 +78,7 @@
   showInVote: true
   rules:
   - NFAdventure
+  - MaxTimeRestart # Forge-Change
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
@@ -93,6 +98,7 @@
   showInVote: true
   rules:
   - NFAdventure
+  - MaxTimeRestart # Forge-Change
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
@@ -110,6 +116,7 @@
   showInVote: true
   rules:
   - NFAdventure
+  - MaxTimeRestart # Forge-Change
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler

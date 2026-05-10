@@ -1,3 +1,9 @@
-ent-GeneratorCRPinch = Plasma, Rad+, 105 kW
-    .desc = |-
-ent-GeneratorCRPinchShuttle = Plasma, Rad+, 105 kW, Ship
+ent-GeneratorCRPinch = плазменный реактор
+    .desc =
+    Миниатюрный термоядерный реактор, работающий на плазме промышленного топливного класса. Обладает высокой эффективностью.
+    Оптимальная выработка энергии - 105 кВт. Минимальная и максимальная - 60 и 160 кВт соответственно.
+    Без защиты сильно радиоактивен из-за облегчённого иридитового корпуса реактора.
+    .suffix = Rad+, 105 кВт
+ent-GeneratorCRPinchShuttle = плазменный реактор
+    .desc = { ent-GeneratorCRPinch.desc }
+    .suffix = Rad+, 105 кВт, Шаттл

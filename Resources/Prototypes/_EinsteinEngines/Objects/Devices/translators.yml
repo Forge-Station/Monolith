@@ -128,6 +128,23 @@
     - TauCetiBasic
     - Draconic
 
+- type: entity # Forge Change begin
+  id: KelaelTranslator
+  parent: [ TranslatorPoweredBase ]
+  name: Kela'el translator
+  description: Translates speech between Kela'el and Tau-Ceti Basic.
+  components:
+  - type: HandheldTranslator
+    spoken:
+    - TauCetiBasic
+    - Kelael
+    understood:
+    - TauCetiBasic
+    - Kelael
+    requires:
+    - TauCetiBasic
+    - Kelael # Forge Change end
+
 - type: entity
   id: SolCommonTranslator
   parent: [ TranslatorPoweredBase ]

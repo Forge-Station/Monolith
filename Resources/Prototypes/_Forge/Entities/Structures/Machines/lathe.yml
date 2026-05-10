@@ -27,6 +27,7 @@
     - RenegateWeaponsDynamic
     - RenegateEquipmentDynamic
     - RenegateAmmoDynamic
+    - RenegateVoucherDynamic
 
 - type: entity
   id: ProtolatheRenegate

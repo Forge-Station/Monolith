@@ -4,6 +4,7 @@ shuttle-console-maximum-iff-distance = Maximum IFF Distance
 shuttle-console-maximum-speed = Maximum Shuttle Speed
 
 shuttle-console-iff-search = Search IFF
+shuttle-console-shield-label = Shields
 shuttle-console-inertia-dampener-off = Cruise
 shuttle-console-inertia-dampener-dampen = Drive
 shuttle-console-inertia-dampener-anchor = Park
@@ -25,6 +26,7 @@ shuttle-console-signature-unknown =
 
 # Network Port Buttons
 shuttle-console-network-ports = Network Ports
+shuttle-console-network-connect-tooltip = The buttons on the shuttle console send a signal when pressed, use a multitool on the console and connect it up to a device!
 
 # Device Link Buttons
 shuttle-console-device-button-1 = Port 1

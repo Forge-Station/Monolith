@@ -3,13 +3,16 @@
               xmlns:controls="https://spacestation14.io"
               xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
               xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls"
+              xmlns:shields="clr-namespace:Content.Client._Crescent.ShipShields.UI"
               xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
-                <ui:ShuttleNavControl Name="NavRadar"
-                                 MouseFilter="Stop"
-                                 VerticalAlignment="Stretch"
-                                 VerticalExpand="True"
-                                 HorizontalExpand="True"
-                                 Margin="5 4 10 5"/>
+                <!-- Mono - wrap -->
+                <controls:LayoutContainer Margin="5 4 10 5">
+                    <ui:ShuttleNavControl Name="NavRadar"
+                                     MouseFilter="Stop"
+                                     VerticalAlignment="Stretch"
+                                     VerticalExpand="True"
+                                     HorizontalExpand="True"/>
+                </controls:LayoutContainer>
                 <!-- Nav controls -->
                 <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
                     <controls:PanelContainer.PanelOverride>
@@ -80,6 +83,17 @@
                     </controls:GridContainer>
                     </controls:PanelContainer>
                     </controls:PanelContainer>
+                    <!-- Forge-Change-Start -->
+                    <controls:PanelContainer Name="ShieldPanel" Visible="False" VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                        <controls:PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                        </controls:PanelContainer.PanelOverride>
+                        <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 4 4 4">
+                            <controls:Label Text="{controls:Loc 'shuttle-console-shield-label'}"/>
+                            <shields:ShipShieldBar Name="ShieldBar" HorizontalExpand="True" MinHeight="20"/>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                    <!-- Forge-Change-End -->
                     <controls1:StripeBack
                         MinSize="48 48">
                         <controls:Label Name="NavSettingsLabel" Text="{controls:Loc 'shuttle-console-nav-settings'}"
@@ -173,11 +187,8 @@
                     <!-- Frontier - Maximum Shuttle Speed -->
                     <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MaximumShuttleSpeedBox" Margin="4 4 4 4">
                         <controls:Label Text="{controls:Loc 'shuttle-console-maximum-speed'}"/>
-                        <controls:SliderIntInput Name="MaximumShuttleSpeedValue"
+                        <controls:LineEdit Name="MaximumShuttleSpeedValue"
                                                  Access="Public"
-                                                 MinValue="0"
-                                                 MaxValue="140"
-                                                 Value="140"
                                                  HorizontalExpand="True"/>
                     </controls:BoxContainer>
                 </controls:BoxContainer>
@@ -215,36 +226,43 @@
                                                      Text="{controls:Loc 'shuttle-console-device-button-1'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
+                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
                                                      SetWidth="55"/>
                                     <controls:Button Name="DeviceButton2"
                                                      Text="{controls:Loc 'shuttle-console-device-button-2'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
+                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
                                                      SetWidth="55"/>
                                     <controls:Button Name="DeviceButton3"
                                                      Text="{controls:Loc 'shuttle-console-device-button-3'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
+                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
                                                      SetWidth="55"/>
                                     <controls:Button Name="DeviceButton4"
                                                      Text="{controls:Loc 'shuttle-console-device-button-4'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
+                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
                                                      SetWidth="55"/>
                                     <controls:Button Name="DeviceButton5"
                                                      Text="{controls:Loc 'shuttle-console-device-button-5'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
+                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
                                                      SetWidth="55"/>
                                     <controls:Button Name="DeviceButton6"
                                                      Text="{controls:Loc 'shuttle-console-device-button-6'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
+                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
                                                      SetWidth="55"/>
                                     <controls:Button Name="DeviceButton7"
                                                      Text="{controls:Loc 'shuttle-console-device-button-7'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
+                                                     ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
                                                      SetWidth="55"/>
                                     <controls:Button Name="DeviceButton8"
                                                      Text="{controls:Loc 'shuttle-console-device-button-8'}"

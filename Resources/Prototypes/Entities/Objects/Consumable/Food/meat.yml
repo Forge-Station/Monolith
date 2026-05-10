@@ -717,7 +717,7 @@
   - type: Sprite
     state: meatball
   - type: Construction # Frontier: Cookable meatball. Delicious.
-    graph: meatballNF # Frontier: Cookable meatball. Delicious.
+    graph: MeatMeatballCooked # Frontier: Cookable meatball. Delicious.
     node: start # Frontier: Cookable meatball. Delicious.
 
 - type: entity
@@ -1236,8 +1236,8 @@
       Taco: MeatBall
   # Frontier: Cookable meatball. Delicious.
   - type: Construction
-    graph: meatballNF
-    node: cooked
+    graph: MeatMeatballCooked
+    node: meatball cooked
   # End Frontier
 
 - type: entity

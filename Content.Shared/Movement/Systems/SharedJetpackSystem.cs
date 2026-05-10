@@ -1,15 +1,20 @@
 using Content.Shared.Actions;
 using Content.Shared._EE.CCVar; // EE
 using Content.Shared.Gravity;
+using Content.Shared.Inventory; // Forge-Change
+using Content.Shared.Inventory.Events;  // Forge-Change
 using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
+using Content.Shared.Weapons.Ranged.Systems; // Forge-Change
 using Robust.Shared.Configuration; // EE
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing; // Forge-Change
+using Content.Shared.Clothing; // Mono
 
 namespace Content.Shared.Movement.Systems;
 
@@ -22,6 +27,16 @@ public abstract class SharedJetpackSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly IConfigurationManager _config = default!; // EE
+    // Forge-Change-start
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedGravitySystem _gravity = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
+    private const float BaseCombatControlPenalty = 0.15f;
+    private const float BaseCombatModifierPenalty = 0.08f;
+    private const float MinCombatPenalty = 0.02f;
+    private static readonly TimeSpan CombatPenaltyDuration = TimeSpan.FromSeconds(0.65f);
+    // Forge-Change-end
 
     public override void Initialize()
     {
@@ -32,13 +47,41 @@ public abstract class SharedJetpackSystem : EntitySystem
 
         SubscribeLocalEvent<JetpackUserComponent, RefreshWeightlessModifiersEvent>(OnJetpackUserWeightlessMovement);
         SubscribeLocalEvent<JetpackUserComponent, CanWeightlessMoveEvent>(OnJetpackUserCanWeightless);
+        SubscribeLocalEvent<JetpackUserComponent, MagbootsToggledEvent>(OnJetpackUserMagbootsToggled); // Mono
         SubscribeLocalEvent<JetpackUserComponent, EntParentChangedMessage>(OnJetpackUserEntParentChanged);
+        SubscribeLocalEvent<JetpackUserComponent, DidEquipEvent>(OnJetpackUserDidEquip); // Forge-Change
+        SubscribeLocalEvent<JetpackUserComponent, DidUnequipEvent>(OnJetpackUserDidUnequip); // Forge-Change
         SubscribeLocalEvent<JetpackComponent, EntGotInsertedIntoContainerMessage>(OnJetpackMoved);
 
         SubscribeLocalEvent<GravityChangedEvent>(OnJetpackUserGravityChanged);
+        SubscribeLocalEvent<GunShotEvent>(OnGunShot);
         SubscribeLocalEvent<JetpackComponent, MapInitEvent>(OnMapInit);
     }
+    // Forge-Change-start
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
 
+        var query = EntityQueryEnumerator<JetpackUserComponent>();
+        while (query.MoveNext(out var uid, out var userComp))
+        {
+            var changed = false; // Forge-Change
+
+            if (_timing.CurTime >= userComp.CombatPenaltyEndTime &&
+                (!MathHelper.CloseTo(userComp.CombatControlPenaltyMultiplier, 1f) ||
+                 !MathHelper.CloseTo(userComp.CombatModifierPenaltyMultiplier, 1f)))
+            {
+                userComp.CombatControlPenaltyMultiplier = 1f;
+                userComp.CombatModifierPenaltyMultiplier = 1f;
+                ApplyCurrentModifiers(uid, userComp);
+                changed = true;
+            }
+
+            if (changed)
+                Dirty(uid, userComp);
+        }
+    }
+    // Forge-Change-end
     private void OnJetpackUserWeightlessMovement(Entity<JetpackUserComponent> ent, ref RefreshWeightlessModifiersEvent args)
     {
         // Yes this bulldozes the values but primarily for backwards compat atm.
@@ -112,6 +155,25 @@ public abstract class SharedJetpackSystem : EntitySystem
         args.CanMove = true;
     }
 
+    // Forge-Change-start
+    private void OnJetpackUserDidEquip(EntityUid uid, JetpackUserComponent component, DidEquipEvent args)
+    {
+        if (args.Slot != "outerClothing")
+            return;
+
+        if (UpdateSuitProfile(uid, component))
+            Dirty(uid, component);
+    }
+
+    private void OnJetpackUserDidUnequip(EntityUid uid, JetpackUserComponent component, DidUnequipEvent args)
+    {
+        if (args.Slot != "outerClothing")
+            return;
+
+        if (UpdateSuitProfile(uid, component))
+            Dirty(uid, component);
+    }
+    // Forge-Change-end
     private void OnJetpackUserEntParentChanged(EntityUid uid, JetpackUserComponent component, ref EntParentChangedMessage args)
     {
         // Frontier: note - comment from upstream, dead men tell no tales
@@ -119,7 +181,8 @@ public abstract class SharedJetpackSystem : EntitySystem
         // https://discord.com/channels/310555209753690112/310555209753690112/1270067921682694234
         if (TryComp<JetpackComponent>(component.Jetpack, out var jetpack)
             && (!CanEnableOnGrid(args.Transform.GridUid)
-            || !UserNotParented(uid, jetpack))) // EE
+                || !UserNotParented(uid, jetpack) // EE
+                || !_gravity.IsWeightless(uid))) // Mono
         {
             SetEnabled(component.Jetpack, jetpack, false, uid);
 
@@ -136,11 +199,12 @@ public abstract class SharedJetpackSystem : EntitySystem
             _physics.SetBodyStatus(user, physics, BodyStatus.InAir);
 
         userComp.Jetpack = jetpackUid;
-        userComp.WeightlessAcceleration = component.Acceleration;
-        userComp.WeightlessModifier = component.WeightlessModifier;
-        userComp.WeightlessFriction = component.Friction;
-        userComp.WeightlessFrictionNoInput = component.Friction;
-        _movementSpeedModifier.RefreshWeightlessModifiers(user);
+        // Forge-Change-start
+        userComp.CombatControlPenaltyMultiplier = 1f;
+        userComp.CombatModifierPenaltyMultiplier = 1f;
+        userComp.CombatPenaltyEndTime = TimeSpan.Zero;
+        UpdateSuitProfile(user, userComp, component);
+        // Forge-Change-end
     }
 
     private void RemoveUser(EntityUid uid, JetpackComponent component)
@@ -161,7 +225,8 @@ public abstract class SharedJetpackSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (TryComp(uid, out TransformComponent? xform) && !CanEnableOnGrid(xform.GridUid))
+        if (TryComp(uid, out TransformComponent? xform) && !CanEnableOnGrid(xform.GridUid)
+        || !_gravity.IsWeightless(args.Performer)) // Mono
         {
             _popup.PopupClient(Loc.GetString("jetpack-no-station"), uid, args.Performer);
 
@@ -187,7 +252,28 @@ public abstract class SharedJetpackSystem : EntitySystem
     {
         args.AddAction(ref component.ToggleActionEntity, component.ToggleAction);
     }
+    // Forge-Change-start
+    private void OnGunShot(ref GunShotEvent args)
+    {
+        if (!TryComp<JetpackUserComponent>(args.User, out var userComp) ||
+            !TryComp<JetpackComponent>(userComp.Jetpack, out _))
+        {
+            return;
+        }
 
+        if (!_gravity.IsWeightless(args.User))
+            return;
+
+        var controlPenalty = Math.Max(MinCombatPenalty, BaseCombatControlPenalty - userComp.SuitCombatStabilityBonus);
+        var modifierPenalty = Math.Max(MinCombatPenalty, BaseCombatModifierPenalty - (userComp.SuitCombatStabilityBonus * 0.5f));
+
+        userComp.CombatControlPenaltyMultiplier = 1f - controlPenalty;
+        userComp.CombatModifierPenaltyMultiplier = 1f - modifierPenalty;
+        userComp.CombatPenaltyEndTime = _timing.CurTime + CombatPenaltyDuration;
+        ApplyCurrentModifiers(args.User, userComp);
+        Dirty(args.User, userComp);
+    }
+    // Forge-Change-end
     private bool IsEnabled(EntityUid uid)
     {
         return HasComp<ActiveJetpackComponent>(uid);
@@ -234,9 +320,57 @@ public abstract class SharedJetpackSystem : EntitySystem
 
     protected virtual bool CanEnable(EntityUid uid, JetpackComponent component)
     {
+        return _gravity.IsWeightless(uid); // Mono
+    }
+    // Forge-Change-start
+    private bool UpdateSuitProfile(EntityUid user, JetpackUserComponent userComp, JetpackComponent? jetpackComp = null)
+    {
+        if (!Resolve(userComp.Jetpack, ref jetpackComp, false))
+            return false;
+
+        var profile = GetSuitFlightProfile(user);
+        var changed = !MathHelper.CloseTo(userComp.SuitThrustMultiplier, profile.ThrustMultiplier) ||
+                      !MathHelper.CloseTo(userComp.SuitControlMultiplier, profile.ControlMultiplier) ||
+                      !MathHelper.CloseTo(userComp.SuitFuelUsageMultiplier, profile.FuelUsageMultiplier) ||
+                      !MathHelper.CloseTo(userComp.SuitCombatStabilityBonus, profile.CombatStabilityBonus) ||
+                      !MathHelper.CloseTo(userComp.BaseWeightlessAcceleration, jetpackComp.Acceleration * profile.ThrustMultiplier) ||
+                      !MathHelper.CloseTo(userComp.BaseWeightlessFriction, jetpackComp.Friction * profile.ControlMultiplier) ||
+                      !MathHelper.CloseTo(userComp.BaseWeightlessModifier, jetpackComp.WeightlessModifier * profile.ThrustMultiplier);
+
+        if (!changed)
+            return false;
+
+        userComp.SuitThrustMultiplier = profile.ThrustMultiplier;
+        userComp.SuitControlMultiplier = profile.ControlMultiplier;
+        userComp.SuitFuelUsageMultiplier = profile.FuelUsageMultiplier;
+        userComp.SuitCombatStabilityBonus = profile.CombatStabilityBonus;
+        userComp.BaseWeightlessAcceleration = jetpackComp.Acceleration * profile.ThrustMultiplier;
+        userComp.BaseWeightlessFriction = jetpackComp.Friction * profile.ControlMultiplier;
+        userComp.BaseWeightlessModifier = jetpackComp.WeightlessModifier * profile.ThrustMultiplier;
+        ApplyCurrentModifiers(user, userComp);
         return true;
     }
 
+    private void ApplyCurrentModifiers(EntityUid user, JetpackUserComponent userComp)
+    {
+        userComp.WeightlessAcceleration = userComp.BaseWeightlessAcceleration;
+        userComp.WeightlessFriction = userComp.BaseWeightlessFriction * userComp.CombatControlPenaltyMultiplier;
+        userComp.WeightlessFrictionNoInput = userComp.WeightlessFriction;
+        userComp.WeightlessModifier = userComp.BaseWeightlessModifier * userComp.CombatModifierPenaltyMultiplier;
+        _movementSpeedModifier.RefreshWeightlessModifiers(user);
+    }
+
+    private (float ThrustMultiplier, float ControlMultiplier, float FuelUsageMultiplier, float CombatStabilityBonus) GetSuitFlightProfile(EntityUid user)
+    {
+        if (_inventory.TryGetSlotEntity(user, "outerClothing", out var outerClothing) &&
+            TryComp<SpaceFlightProfileComponent>(outerClothing, out var profile))
+        {
+            return (profile.ThrustMultiplier, profile.ControlMultiplier, profile.FuelUsageMultiplier, profile.CombatStabilityBonus);
+        }
+
+        return (1f, 1f, 1f, 0f);
+    }
+    // Forge-Change-end
     // EE: check parent
     protected virtual bool UserNotParented(EntityUid? user, JetpackComponent component)
     {
@@ -245,6 +379,17 @@ public abstract class SharedJetpackSystem : EntitySystem
             || xform.ParentUid == xform.MapUid;
     }
     // End EE
+
+    // Mono
+    private void OnJetpackUserMagbootsToggled(EntityUid uid, JetpackUserComponent component, ref MagbootsToggledEvent args)
+    {
+        if (!args.State || !IsEnabled(component.Jetpack) || _gravity.IsWeightless(uid) || !TryComp<JetpackComponent>(component.Jetpack, out var jetpack))
+            return;
+
+        _popup.PopupClient(Loc.GetString("jetpack-to-grid"), uid, uid);
+        SetEnabled(component.Jetpack, jetpack, false, uid);
+    }
+    // End Mono
 }
 
 [Serializable, NetSerializable]

@@ -1,0 +1,20 @@
+- type: latheRecipePack
+  id: NanotrasenCircuitBoard
+  recipes:
+  - RobocopCircuitBoard
+  - ArtistCircuitBoard
+  - NutimovCircuitBoard
+  - PaladinCircuitBoard
+  - NTDefaultCircuitBoard
+  - OverlordCircuitBoard
+  - CommandmentCircuitBoard
+  - LiveLetLiveCircuitBoard
+  - AsimovCircuitBoard
+  - CorporateCircuitBoard
+  - StationAiUploadCircuitboard
+  - LaserDrillFlatpack
+  - MedicalTechFabCircuitboard
+  - CloningConsoleComputerCircuitboard
+  - MedicalBiofabMachineBoard 
+  - CloningPodMachineCircuitboard  
+  - MedicalScannerMachineCircuitboard

@@ -30,6 +30,7 @@
 - type: latheRecipePack
   id: NFBioGenSeedsStatic
   recipes:
+  - NFBioGenEveryspiceSeeds # Forge-Change-Comp
   - NFBioGenAppleSeeds
   - NFBioGenAvocadoSeeds
   - NFBioGenBananaSeeds

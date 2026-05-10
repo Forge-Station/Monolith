@@ -1,0 +1,30 @@
+- type: vessel
+  id: Mushroom
+  parent: BaseVesselAntag
+  name: TSF-Light Мухомор
+  description: Малый патрульный шаттл ТСФ. Легко вооружен.
+  category: Small
+  group: Security
+  access: Security
+  price: 27300
+  shuttlePath: /Maps/_Forge/Shuttles/TSF/Mushroom.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  engine:
+  - APU
+
+- type: gameMap
+  id: Mushroom
+  mapName: 'Mushroom'
+  mapPath: /Maps/_Forge/Shuttles/TSF/Mushroom.yml
+  minPlayers: 0
+  stations:
+    Mushroom:
+      stationProto: StandardFrontierSecurityVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'TSF-Light Мухомор TSF{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'

@@ -118,6 +118,11 @@ public sealed partial class NavScreen : BoxContainer
         // Update port names if custom names are available
         UpdateNetworkPortButtonNames(scc.NetworkPortNames);
 
+        // Forge-Change-Start
+        ShieldPanel.Visible = scc.ShieldState.HasShield;
+        ShieldBar.SetState(scc.ShieldState);
+        // Forge-Change-End
+
         NfUpdateState(); // Frontier Update State
     }
 
@@ -176,14 +181,15 @@ public sealed partial class NavScreen : BoxContainer
         var (_, worldRot, worldMatrix) = _xformSystem.GetWorldPositionRotationMatrix(gridXform);
         var worldPos = Vector2.Transform(gridBody.LocalCenter, worldMatrix);
 
-        // Get the positive reduced angle.
-        var displayRot = -worldRot.Reduced();
+        // Mono - remap to [0, 360)
+        var displayRot = (-worldRot).Reduced();
+        var displayRotDegrees = displayRot.FlipPositive().Degrees;
 
         GridPosition.Text = Loc.GetString("shuttle-console-position-value",
             ("X", $"{worldPos.X:0.0}"),
             ("Y", $"{worldPos.Y:0.0}"));
         GridOrientation.Text = Loc.GetString("shuttle-console-orientation-value",
-            ("angle", $"{displayRot.Degrees:0.0}"));
+            ("angle", $"{displayRotDegrees:0.0}"));
 
         var gridVelocity = gridBody.LinearVelocity;
         gridVelocity = displayRot.RotateVec(gridVelocity);

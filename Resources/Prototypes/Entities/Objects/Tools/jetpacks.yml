@@ -47,8 +47,8 @@
         volume: 5
         temperature: 293.15
     - type: Jetpack
-      acceleration: 1.15 # Mono
-      weightlessModifier: 2.4 # Mono
+      acceleration: 1.05 # Mono
+      weightlessModifier: 2.2 # Mono
       moleUsage: 0.00085
     - type: Appearance
     - type: StaticPrice
@@ -201,6 +201,10 @@
       outputPressure: 42.6
       air:
         volume: 1 # Mono
+    - type: Jetpack
+      acceleration: 1.12
+      weightlessModifier: 2.3
+      moleUsage: 0.00105
     - type: StaticPrice
       price: 95
 
@@ -290,3 +294,7 @@
       moles:
         - 1.025689525 # oxygen
         - 1.025689525 # nitrogen
+  - type: Jetpack
+    acceleration: 1.0
+    weightlessModifier: 2.0
+    moleUsage: 0.00095

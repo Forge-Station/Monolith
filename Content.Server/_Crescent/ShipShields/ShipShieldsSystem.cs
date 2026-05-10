@@ -1,5 +1,6 @@
 using Content.Server.Power.Components;
 using Content.Server._Mono.FireControl;
+using Content.Server.Station.Systems;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._Crescent.ShipShields;
 using Content.Shared._Mono.SpaceArtillery;
@@ -14,6 +15,7 @@ using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Audio.Systems;
 using System.Numerics;
 
 
@@ -24,7 +26,6 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     private const string ShipShieldPrototype = "ShipShield";
 
     //private const float DeflectionSpread = 25f;
-    private const float EmitterUpdateRate = 1.5f;
 
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly FixtureSystem _fixtureSystem = default!;
@@ -32,6 +33,8 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     [Dependency] private readonly PvsOverrideSystem _pvsSys = default!;
     [Dependency] private readonly ShuttleConsoleSystem _shuttleConsole = default!;
     [Dependency] private readonly FireControlSystem _fireControl = default!;
+    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<ShipWeaponProjectileComponent> _shipWeaponProjectileQuery;
@@ -42,26 +45,34 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         var query = EntityQueryEnumerator<ShipShieldEmitterComponent, ApcPowerReceiverComponent>();
         while (query.MoveNext(out var uid, out var emitter, out var power))
         {
+            var interval = emitter.EmitterUpdateInterval > 0f ? emitter.EmitterUpdateInterval : 1.5f;
+
             emitter.Accumulator += frameTime;
 
-            if (emitter.Accumulator < EmitterUpdateRate)
+            if (emitter.Accumulator < interval)
                 continue;
 
-            if (CalculateLoadDamage(emitter) >= emitter.MaxDraw)
+            if (ShipShieldEmitterMath.CalculateAdditionalLoad(emitter) >= emitter.MaxDraw)
                 emitter.Recharging = true;
             if (!power.Powered)
                 emitter.Recharging = true;
 
-            emitter.Accumulator -= EmitterUpdateRate;
+            emitter.Accumulator -= interval;
             if (emitter.OverloadAccumulator > 0)
             {
-                emitter.OverloadAccumulator -= EmitterUpdateRate;
+                emitter.OverloadAccumulator -= interval;
             }
 
-            float healed = emitter.HealPerSecond * EmitterUpdateRate;
+            float healed = emitter.HealPerSecond * interval;
 
             if (emitter.Recharging)
                 healed *= emitter.UnpoweredBonus;
+
+            if (emitter.HealScalesWithPowerReceived && power.Powered)
+            {
+                var ratio = Math.Clamp(power.PowerReceived / Math.Max(power.Load, 1f), 0f, 1f);
+                healed *= ratio;
+            }
 
             emitter.Damage -= healed;
 
@@ -71,6 +82,8 @@ public sealed partial class ShipShieldsSystem : EntitySystem
                 if (power.Powered)
                     emitter.Recharging = false;
             }
+
+            emitter.Damage += emitter.PassiveShieldDamagePerSecond * interval;
 
             AdjustEmitterLoad(uid, emitter, power);
 
@@ -82,7 +95,13 @@ public sealed partial class ShipShieldsSystem : EntitySystem
             var filter = _station.GetInOwningStation(uid);
 
             if (emitter.Damage > emitter.DamageLimit)
-                emitter.OverloadAccumulator = emitter.DamageOverloadTimePunishment;
+            {
+                var scale = 1f + emitter.OverloadPunishmentScale * (emitter.Damage - emitter.DamageLimit) / Math.Max(emitter.DamageLimit, 1f);
+                var pun = emitter.DamageOverloadTimePunishment * scale;
+                if (emitter.OverloadPunishmentMax > 0f)
+                    pun = Math.Min(pun, emitter.OverloadPunishmentMax);
+                emitter.OverloadAccumulator = pun;
+            }
 
             if (!emitter.Recharging && emitter.Shield is null && emitter.OverloadAccumulator < 1)
             {
@@ -151,11 +170,10 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         // why shoot the projectile again when you can just 180 its physics, tho?
         //_gun.ShootProjectile(args.OtherEntity, deflectionVector, _physicsSystem.GetMapLinearVelocity(uid), uid, null, velocity.Length());
 
-        if (component.Source is { } source)
-        {
-            var ev = new ShieldDeflectedEvent(args.OtherEntity, projectile);
-            RaiseLocalEvent(source, ref ev);
-        }
+        if (component.Source is not { } source || !TryComp<ShipShieldEmitterComponent>(source, out var emitter))
+            return;
+
+        TryHandleShipWeaponShieldHit(uid, source, emitter, args.OtherEntity, projectile, ref args);
     }
 
     private void OnEmitterShutdown(EntityUid uid, ShipShieldEmitterComponent emitter, ComponentShutdown args) // Mono
@@ -303,9 +321,4 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         return chain;
     }
 
-    [ByRefEvent]
-    public record struct ShieldDeflectedEvent(EntityUid Deflected, ProjectileComponent Projectile)
-    {
-
-    }
 }

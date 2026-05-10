@@ -368,6 +368,31 @@
     sprite: Structures/Machines/circuit_imprinter_hypercon.rsi
   - type: Machine
     board: CircuitImprinterHyperConvectionMachineCircuitboard
+  # Inherits CircuitImprinter Lathe fields except dynamicPacks: child replaces the whole list, so duplicate parent packs + T4.
+  - type: Lathe
+    dynamicPacks:
+    - MonoEconomyLatheBoards # Mono
+    - EngineeringBoards
+    - CargoBoards
+    - MedicalBoards
+    - ServiceBoards
+    - ScienceBoards
+    - CameraBoards
+    - MechBoards
+    - ShuttleBoards
+    - NFEngineeringBoards # Frontier
+    - NFMedicalBoards # Frontier + Shitmed Change
+    - NFServiceBoards # Frontier
+    - MonoAdvancedShuttleComponents # Mono
+    - ForgeAdvancedShuttleComponents # Forge
+    - CarpCaller # Mono
+    - MechBoardsPlus
+    - AiCoreBoard
+    - S2MechBoards
+    - EngineeringBoardsGoob #Goob Factorio port
+    - NanotrasenCircuitBoard # Forge-change
+    - ReactorCircuitboards # FH edit
+    - ForgeHyperConvectionFSGTier4Boards # Forge — FSG T4 boards (disk-unlocked), hyper imprinter only
 
 - type: entity
   id: ExosuitFabricator

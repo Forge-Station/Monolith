@@ -7,18 +7,23 @@
     <GuideEntityEmbed Entity="ShieldGeneratorForgeTSFHeavy"/>
     <GuideEntityEmbed Entity="ShieldGeneratorForgeTSFPrismatic"/>
     <GuideEntityEmbed Entity="ShieldGeneratorForgeTSFCollision"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeTSFSagitta"/>
   </Box>
 
   [color=#48E8A8][bold]SGS-440 «Цитадель» (Citadel)[/bold][/color] — Тяжёлый
-  Значительно быстрее гражданского FSG-420, более высокий порог перегрузки. Требует серьёзного базового и пикового потребления энергии.
-  [color=#aaaaaa]Прочность:[/color] 87 000 HP · [color=#aaaaaa]Восстановление:[/color] 1 192 HP/с · [color=#aaaaaa]Питание:[/color] 48,6–114 кВт · [color=#aaaaaa]Перезарядка:[/color] ×5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]95%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#88ff88]55 с[/color]
+  Высокая регенерация и глубокий лимит относительно гражданского «Редута»; жрёт базу и пик сети.
+  [color=#aaaaaa]Лимит:[/color] 125 000 · [color=#aaaaaa]Рег/с:[/color] 2 050 · [color=#aaaaaa]База–пик кВт:[/color] 62–182 тыс. · [color=#aaaaaa]Автономия:[/color] ×5 · [color=#aaaaaa]Перегр.:[/color] 55 с · [color=#aaaaaa]Таран:[/color] 0.05 · [color=#aaaaaa]Рост нагр.:[/color] 1.02
 
   [color=#66CCFF][bold]SGS-470P «Корона» (Corona Array)[/bold][/color] — Призматический
-  Более ёмкий буфер и ускоренная регенерация по сравнению с FSG-470P. Сокращённый штраф перегрузки при значительно выросшем потреблении под огнём.
-  [color=#aaaaaa]Прочность:[/color] 210 000 HP · [color=#aaaaaa]Восстановление:[/color] 882 HP/с · [color=#aaaaaa]Питание:[/color] 51–104 кВт · [color=#aaaaaa]Перезарядка:[/color] ×3.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]84%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]82 с[/color]
+  Очень глубокий буфер и высокая регенерация в бою; крутая кривая под залпами и высокие крейс/пик.
+  [color=#aaaaaa]Лимит:[/color] 252 000 · [color=#aaaaaa]Рег/с:[/color] 1 380 · [color=#aaaaaa]База–пик кВт:[/color] 72,6–205 тыс. · [color=#aaaaaa]Автономия:[/color] ×3.5 · [color=#aaaaaa]Перегр.:[/color] 82 с · [color=#aaaaaa]Таран:[/color] 0.16 · [color=#aaaaaa]Рост нагр.:[/color] 1.09
 
   [color=#FF6B8A][bold]SGS-600C «Взломщик» (Breakshell)[/bold][/color] — Коллизионный
-  Осадный щит с улучшенной защитой от таранов. Регенерация значительно ниже, штраф перегрузки длиннее, чем у гражданского Бастиона.
-  [color=#aaaaaa]Прочность:[/color] 107 000 HP · [color=#aaaaaa]Восстановление:[/color] 709 HP/с · [color=#aaaaaa]Питание:[/color] 52–102 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]98%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]175 с[/color]
+  Коллизионный профиль: мягкий таран, линейная кривая нагрузки; медленное «лицо» и самый долгий перегруз в линейке ТСФМЦ.
+  [color=#aaaaaa]Лимит:[/color] 108 000 · [color=#aaaaaa]Рег/с:[/color] 705 · [color=#aaaaaa]База–пик кВт:[/color] 62–162 тыс. · [color=#aaaaaa]Автономия:[/color] ×5 · [color=#aaaaaa]Перегр.:[/color] 175 с · [color=#aaaaaa]Таран:[/color] 0.023 · [color=#aaaaaa]Рост нагр.:[/color] 1.00
+
+  [color=#00C9A7][bold]SGS-455 «Стрела» (Sagitta)[/bold][/color] — Резерв
+  Глубокий лимит и ровный реген; самая «крутая» кривая нагрузки среди ТСФМЦ — под длинным огнём быстро раздувает потребление по шине.
+  [color=#aaaaaa]Лимит:[/color] 198 000 · [color=#aaaaaa]Рег/с:[/color] 1 180 · [color=#aaaaaa]База–пик кВт:[/color] 58–178 тыс. · [color=#aaaaaa]Автономия:[/color] ×4.5 · [color=#aaaaaa]Перегр.:[/color] 98 с · [color=#aaaaaa]Таран:[/color] 0.11 · [color=#aaaaaa]Рост нагр.:[/color] 1.11
 
 </Document>

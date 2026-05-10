@@ -17502,7 +17502,7 @@ entities:
           - 1224
           - 1225
           - 1223
-- proto: ShieldGeneratorSmall
+- proto: ShieldGeneratorFSG100
   entities:
   - uid: 2004
     components:

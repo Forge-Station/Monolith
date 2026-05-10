@@ -3951,7 +3951,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -5.4239545,-0.31118023
       parent: 1
-- proto: ShieldGeneratorMedium
+- proto: ShieldGeneratorFSG220
   entities:
   - uid: 529
     components:

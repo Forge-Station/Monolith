@@ -1,7 +1,8 @@
-# Faction heavy shields: same chassis tiers as FSG-420 / 470P / 600C, tuned per doctrine (tradeoffs on ShipShieldEmitter).
-# Stats rescaled with Mono-scale civilian bases; faction tradeoffs match Forge-Station/Monolith#118 ratios vs old FSG-420/470P/600C.
+# Faction shields: tier-3 chassis (FSG-420 / 470P / 600C). Stats derived from tier baselines + doctrine tradeoffs.
+# T3 baseline: damageLimit 180000, heal 1500, baseDraw 60000, maxDraw 180000, unpoweredBonus 5, overload 120,
+# collision 0.4, powerLoad 60000, damageExp 1.05 (civilian parents differ per model).
 
-# --- TSFMC — regulation-grade sustained combat; pays in baseline power or lockout ---
+# --- TSFMC — sustained regulation fire; pays baseline draw / peak ---
 
 - type: entity
   id: ShieldGeneratorForgeTSFHeavy
@@ -16,15 +17,16 @@
     board: MachineShieldForgeTSFHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#48E8A8"
-    healPerSecond: 1192
-    damageLimit: 87000
+    healPerSecond: 2050
+    damageLimit: 125000
     damageExp: 1.02
-    baseDraw: 48600
-    maxDraw: 114000
+    baseDraw: 62000
+    maxDraw: 182000
     unpoweredBonus: 5
     damageOverloadTimePunishment: 55
+    collisionResistanceMultiplier: 0.05
   - type: ApcPowerReceiver
-    powerLoad: 48600
+    powerLoad: 62000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -55,15 +57,16 @@
     board: MachineShieldForgeTSFPrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#66CCFF"
-    healPerSecond: 882
-    damageLimit: 210000
+    healPerSecond: 1380
+    damageLimit: 252000
     damageExp: 1.09
     damageOverloadTimePunishment: 82
-    baseDraw: 51000
-    maxDraw: 104000
+    baseDraw: 72600
+    maxDraw: 205000
     unpoweredBonus: 3.5
+    collisionResistanceMultiplier: 0.16
   - type: ApcPowerReceiver
-    powerLoad: 51000
+    powerLoad: 72600
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -95,9 +98,12 @@
   - type: ShipShieldEmitter
     shieldColor: "#FF6B8A"
     collisionResistanceMultiplier: 0.023
-    healPerSecond: 709
+    healPerSecond: 705
     damageOverloadTimePunishment: 175
-    maxDraw: 102000
+    maxDraw: 162000
+    damageLimit: 108000
+    baseDraw: 62000
+    damageExp: 1.00
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -115,7 +121,7 @@
     energy: 1.5
     color: "#FF6B8A"
 
-# --- USSP — economical convoy hardware; weaker peak combat regen, softer kinetic screen on ram doctrine ---
+# --- USSP — economical convoy; softer combat regen unless collision doctrine ---
 
 - type: entity
   id: ShieldGeneratorForgeUsspHeavy
@@ -130,14 +136,16 @@
     board: MachineShieldForgeUsspHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#5EB8AA"
-    healPerSecond: 744
-    damageLimit: 67000
+    healPerSecond: 1260
+    damageLimit: 76000
     damageExp: 1.08
-    baseDraw: 35000
-    maxDraw: 86000
+    baseDraw: 40500
+    maxDraw: 119000
     unpoweredBonus: 5
+    damageOverloadTimePunishment: 120
+    collisionResistanceMultiplier: 0.05
   - type: ApcPowerReceiver
-    powerLoad: 35000
+    powerLoad: 40500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -168,14 +176,16 @@
     board: MachineShieldForgeUsspPrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#D9A066"
-    healPerSecond: 635
-    damageLimit: 161000
+    healPerSecond: 1020
+    damageLimit: 188000
     damageExp: 1.08
-    baseDraw: 40500
-    maxDraw: 91000
+    baseDraw: 52800
+    maxDraw: 152000
     unpoweredBonus: 5.0
+    damageOverloadTimePunishment: 150
+    collisionResistanceMultiplier: 0.16
   - type: ApcPowerReceiver
-    powerLoad: 40500
+    powerLoad: 52800
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -207,13 +217,15 @@
   - type: ShipShieldEmitter
     shieldColor: "#B84C2A"
     collisionResistanceMultiplier: 0.041
-    healPerSecond: 1108
-    damageLimit: 124000
+    healPerSecond: 1665
+    damageLimit: 137000
     damageExp: 0.92
-    baseDraw: 54500
-    maxDraw: 108000
+    baseDraw: 65500
+    maxDraw: 151000
+    unpoweredBonus: 5
+    damageOverloadTimePunishment: 165
   - type: ApcPowerReceiver
-    powerLoad: 54500
+    powerLoad: 65500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -231,7 +243,7 @@
     energy: 1.5
     color: "#B84C2A"
 
-# --- Renegates — brawler tempo: snaps back fast, thinner ceiling, thirsty when hurt ---
+# --- Renegates — brawler tempo; thin wallet or thirsty curve ---
 
 - type: entity
   id: ShieldGeneratorForgeRenegateHeavy
@@ -246,13 +258,14 @@
     board: MachineShieldForgeRenegateHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#E87B45"
-    healPerSecond: 1192
-    damageLimit: 64300
+    healPerSecond: 1980
+    damageLimit: 76000
     damageExp: 1.14
     baseDraw: 46500
-    maxDraw: 104000
+    maxDraw: 156000
     damageOverloadTimePunishment: 28
     unpoweredBonus: 5
+    collisionResistanceMultiplier: 0.05
   - type: ApcPowerReceiver
     powerLoad: 46500
   - type: Sprite
@@ -285,14 +298,16 @@
     board: MachineShieldForgeRenegatePrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#E85BB8"
-    healPerSecond: 882
-    damageLimit: 161000
+    healPerSecond: 1380
+    damageLimit: 234000
     damageExp: 1.08
-    baseDraw: 49000
-    maxDraw: 116000
+    baseDraw: 58800
+    maxDraw: 174000
     damageOverloadTimePunishment: 80
+    unpoweredBonus: 4
+    collisionResistanceMultiplier: 0.16
   - type: ApcPowerReceiver
-    powerLoad: 49000
+    powerLoad: 58800
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -324,14 +339,15 @@
   - type: ShipShieldEmitter
     shieldColor: "#9C3D2E"
     collisionResistanceMultiplier: 0.022
-    healPerSecond: 1056
-    damageLimit: 102000
+    healPerSecond: 1584
+    damageLimit: 108000
     damageExp: 1.05
-    baseDraw: 60000
-    maxDraw: 118000
+    baseDraw: 66000
+    maxDraw: 191000
     damageOverloadTimePunishment: 158
+    unpoweredBonus: 5
   - type: ApcPowerReceiver
-    powerLoad: 60000
+    powerLoad: 66000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -349,7 +365,7 @@
     energy: 1.5
     color: "#9C3D2E"
 
-# --- Viper Group — strike aggression: high ceiling, narrow overload margin ---
+# --- Viper Group — strike aggression; shallow overload buffer ---
 
 - type: entity
   id: ShieldGeneratorForgeViperHeavy
@@ -364,13 +380,16 @@
     board: MachineShieldForgeViperHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#FF7A4A"
-    healPerSecond: 1157
-    baseDraw: 45000
-    maxDraw: 114000
+    healPerSecond: 1730
+    baseDraw: 49500
+    maxDraw: 171000
     damageExp: 1.12
-    damageLimit: 65600
+    damageLimit: 77000
+    unpoweredBonus: 5.5
+    damageOverloadTimePunishment: 84
+    collisionResistanceMultiplier: 0.05
   - type: ApcPowerReceiver
-    powerLoad: 45000
+    powerLoad: 49500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -401,14 +420,16 @@
     board: MachineShieldForgeViperPrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#FF3344"
-    maxDraw: 118000
-    baseDraw: 52000
+    maxDraw: 172000
+    baseDraw: 57200
     damageExp: 1.06
-    damageLimit: 194000
-    healPerSecond: 600
+    damageLimit: 273000
+    healPerSecond: 900
     damageOverloadTimePunishment: 122
+    unpoweredBonus: 4
+    collisionResistanceMultiplier: 0.16
   - type: ApcPowerReceiver
-    powerLoad: 52000
+    powerLoad: 57200
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -440,12 +461,15 @@
   - type: ShipShieldEmitter
     shieldColor: "#991111"
     collisionResistanceMultiplier: 0.022
-    healPerSecond: 779
-    damageLimit: 95000
-    baseDraw: 54000
+    healPerSecond: 1170
+    damageLimit: 103000
+    baseDraw: 59400
+    maxDraw: 171000
     damageOverloadTimePunishment: 182
+    damageExp: 1.00
+    unpoweredBonus: 5
   - type: ApcPowerReceiver
-    powerLoad: 54000
+    powerLoad: 59400
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -463,7 +487,7 @@
     energy: 1.5
     color: "#991111"
 
-# --- Ullman Industries — contract efficiency: cheap cruise power, slow recovery from failure ---
+# --- Ullman Industries — lean cruise draw; slow recovery from failure ---
 
 - type: entity
   id: ShieldGeneratorForgeUllmanHeavy
@@ -478,15 +502,16 @@
     board: MachineShieldForgeUllmanHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#8B6CB8"
-    baseDraw: 36500
-    maxDraw: 94000
-    healPerSecond: 812
-    damageLimit: 83000
+    baseDraw: 40200
+    maxDraw: 146000
+    healPerSecond: 1340
+    damageLimit: 91000
     damageExp: 1.07
     damageOverloadTimePunishment: 56
     unpoweredBonus: 5
+    collisionResistanceMultiplier: 0.05
   - type: ApcPowerReceiver
-    powerLoad: 36500
+    powerLoad: 40200
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -517,15 +542,16 @@
     board: MachineShieldForgeUllmanPrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#D4B8F0"
-    baseDraw: 42000
-    maxDraw: 96000
-    damageLimit: 191000
-    healPerSecond: 662
+    baseDraw: 46200
+    maxDraw: 151000
+    damageLimit: 249000
+    healPerSecond: 1110
     damageExp: 1.05
     unpoweredBonus: 2.8
     damageOverloadTimePunishment: 116
+    collisionResistanceMultiplier: 0.16
   - type: ApcPowerReceiver
-    powerLoad: 42000
+    powerLoad: 46200
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -557,13 +583,15 @@
   - type: ShipShieldEmitter
     shieldColor: "#5A3D7A"
     collisionResistanceMultiplier: 0.027
-    baseDraw: 49500
-    maxDraw: 106000
-    healPerSecond: 865
-    damageLimit: 102000
+    baseDraw: 54500
+    maxDraw: 157000
+    healPerSecond: 1280
+    damageLimit: 112000
     damageOverloadTimePunishment: 168
+    damageExp: 1.00
+    unpoweredBonus: 5
   - type: ApcPowerReceiver
-    powerLoad: 49500
+    powerLoad: 54500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -580,3 +608,206 @@
     radius: 2
     energy: 1.5
     color: "#5A3D7A"
+
+# --- Unique doctrine (one per bloc; no duplicate stat role vs Heavy/Prism/Collision lines) ---
+
+- type: entity
+  id: ShieldGeneratorForgeTSFSagitta
+  parent: ShieldGeneratorFSG420
+  name: TSFMC SGS-455 "Sagitta" shield generator
+  suffix: tier 3
+  description: >-
+    A TSFMC reserve doctrine screen: enormous overload wallet and steady face recovery,
+    paid for with thirsty baseline draw and a vicious damage-power curve under sustained fire.
+  components:
+  - type: Machine
+    board: MachineShieldForgeTSFSagittaCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#00C9A7"
+    healPerSecond: 1180
+    damageLimit: 198000
+    damageExp: 1.11
+    baseDraw: 58000
+    maxDraw: 178000
+    unpoweredBonus: 4.5
+    damageOverloadTimePunishment: 98
+    collisionResistanceMultiplier: 0.11
+  - type: ApcPowerReceiver
+    powerLoad: 58000
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#00C9A7"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#00C9A7"
+
+- type: entity
+  id: ShieldGeneratorForgeUsspKerch
+  parent: ShieldGeneratorFSG420
+  name: Union SGS-435 "Kerch" shield generator
+  suffix: tier 3
+  description: >-
+    A Union escort lattice built for cheap cruise power and heroic off-grid rebound,
+    trading a razor-thin overload ceiling and mediocre kinetic damping for convoy economics.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUsspKerchCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#4ECDC4"
+    healPerSecond: 1000
+    damageLimit: 62000
+    damageExp: 1.09
+    baseDraw: 32000
+    maxDraw: 105000
+    unpoweredBonus: 6.2
+    damageOverloadTimePunishment: 110
+    collisionResistanceMultiplier: 0.38
+  - type: ApcPowerReceiver
+    powerLoad: 32000
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#4ECDC4"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#4ECDC4"
+
+- type: entity
+  id: ShieldGeneratorForgeRenegateSkullDebt
+  parent: ShieldGeneratorFSG420
+  name: RSG-435 "Skull Debt" shield generator
+  suffix: tier 3
+  description: >-
+    A Renegate blood-tithe field: obscene in-combat regeneration and a brutally short overload lockout,
+    anchored by a shallow wallet, thirsty peaks, and the steepest damage-power curve in its class.
+  components:
+  - type: Machine
+    board: MachineShieldForgeRenegateSkullDebtCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#CC0044"
+    healPerSecond: 1850
+    damageLimit: 92000
+    damageExp: 1.16
+    baseDraw: 52000
+    maxDraw: 172000
+    unpoweredBonus: 5.5
+    damageOverloadTimePunishment: 24
+    collisionResistanceMultiplier: 0.32
+  - type: ApcPowerReceiver
+    powerLoad: 52000
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#CC0044"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#CC0044"
+
+- type: entity
+  id: ShieldGeneratorForgeViperKite
+  parent: ShieldGeneratorFSG420
+  name: VAS-435 "Kite" shield generator
+  suffix: tier 3
+  description: >-
+    A Viper strike veil tuned for knife-range passes: savage regeneration and compact reactor footprint,
+    with a paper-thin overload buffer, middling ram damping, and a greedy ramp once the lattice is chipped.
+  components:
+  - type: Machine
+    board: MachineShieldForgeViperKiteCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#FFAA00"
+    healPerSecond: 1520
+    damageLimit: 62000
+    damageExp: 1.11
+    baseDraw: 48000
+    maxDraw: 158000
+    unpoweredBonus: 4.8
+    damageOverloadTimePunishment: 42
+    collisionResistanceMultiplier: 0.39
+  - type: ApcPowerReceiver
+    powerLoad: 48000
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FFAA00"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FFAA00"
+
+- type: entity
+  id: ShieldGeneratorForgeUllmanLockbox
+  parent: ShieldGeneratorFSG470P
+  name: UIS SGD-435 "Lockbox" shield generator
+  suffix: tier 3
+  description: >-
+    An Ullman contract shield with a deliberately clipped damage-power multiplier (powerModifier),
+    deep buffer on paper, and lean cruise draw—paid for with anemic off-grid rebound and long post-breach lockouts.
+  components:
+  - type: Machine
+    board: MachineShieldForgeUllmanLockboxCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#B8A9D9"
+    powerModifier: 0.42
+    healPerSecond: 980
+    damageLimit: 178000
+    damageExp: 1.02
+    baseDraw: 36000
+    maxDraw: 142000
+    unpoweredBonus: 2.4
+    damageOverloadTimePunishment: 138
+    collisionResistanceMultiplier: 0.13
+  - type: ApcPowerReceiver
+    powerLoad: 36000
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#B8A9D9"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#B8A9D9"

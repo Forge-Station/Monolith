@@ -15,7 +15,6 @@ public abstract partial class SharedClawsSystem
         if (!_state.IsAlive(uid))
             return;
 
-        var hands = _hands.EnumerateHands(uid).ToArray();
         if (!_hands.EnumerateHeld(uid).Any())
         {
             claws.DeclawItemHoldTimer = TimeSpan.Zero;
@@ -37,7 +36,7 @@ public abstract partial class SharedClawsSystem
         if (claws.DeclawItemHoldTimer.Seconds < declawed.MaxItemHoldingTime.Seconds)
             return;
 
-        foreach (var hand in hands)
+        foreach (var hand in _hands.EnumerateHands(uid))
         {
             DeclawDrop(uid, hand, hand.HeldEntity);
         }

@@ -31,6 +31,8 @@ using Content.Shared._Mono.FireControl;
 using Content.Shared._Mono.Shuttles; // Forge-Change - BioScan
 using Content.Shared._Mono.Ships.Components;
 using Content.Shared.Verbs;
+using Content.Shared._Crescent.ShipShields;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -563,8 +565,46 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             angle,
             docks,
             _shuttle.NfGetInertiaDampeningMode(entity), // Frontier: inertia dampening
-            portNames);
+            portNames)
+        {
+            ShieldState = GetShieldState(entity.Comp2!.GridUid), // Forge-Change
+        };
     }
+
+    // Forge-Change-Start
+    /// <summary>
+    /// Finds the first ship shield emitter on the given grid and reports its current state.
+    /// </summary>
+    private ShipShieldState GetShieldState(EntityUid? gridUid)
+    {
+        if (gridUid == null)
+            return default;
+
+        var query = AllEntityQuery<ShipShieldEmitterComponent, TransformComponent>();
+        while (query.MoveNext(out _, out var emitter, out var emitterXform))
+        {
+            if (emitterXform.GridUid != gridUid)
+                continue;
+
+            var limit = emitter.DamageLimit > 0 ? emitter.DamageLimit : 1f;
+            var percent = Math.Clamp(1f - emitter.Damage / limit, 0f, 1f);
+            var online = emitter.Shield != null;
+
+            TimeSpan? endTime = null;
+            if (!online)
+            {
+                var healRate = emitter.HealPerSecond * emitter.UnpoweredBonus;
+                var rechargeSeconds = healRate > 0f ? emitter.Damage / healRate : 0f;
+                var seconds = MathF.Max(rechargeSeconds, emitter.OverloadAccumulator);
+                endTime = _timing.CurTime + TimeSpan.FromSeconds(seconds);
+            }
+
+            return new ShipShieldState(true, online, percent, endTime);
+        }
+
+        return default;
+    }
+    // Forge-Change-End
 
     /// <summary>
     /// Global for all shuttles.

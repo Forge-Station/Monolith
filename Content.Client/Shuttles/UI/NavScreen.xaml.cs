@@ -118,6 +118,11 @@ public sealed partial class NavScreen : BoxContainer
         // Update port names if custom names are available
         UpdateNetworkPortButtonNames(scc.NetworkPortNames);
 
+        // Forge-Change-Start
+        ShieldPanel.Visible = scc.ShieldState.HasShield;
+        ShieldBar.SetState(scc.ShieldState);
+        // Forge-Change-End
+
         NfUpdateState(); // Frontier Update State
     }
 

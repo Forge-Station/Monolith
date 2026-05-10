@@ -47,3 +47,5 @@ ent-ClothingBeltSuspendersRed = красные подтяжки
     .desc = { ClothingBeltSuspenders.desc }
 ent-ClothingBeltSuspendersBlack = чёрные подтяжки
     .desc = { ent-ClothingBeltSuspenders.desc }
+ent-ClothingBeltBandolierOld = патронташ
+    .desc = Патронташ для хранения ружейных патронов.

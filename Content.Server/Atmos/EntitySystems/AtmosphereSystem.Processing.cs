@@ -201,21 +201,43 @@ namespace Content.Server.Atmos.EntitySystems
             GridAtmosphereComponent atmosphere,
             Func<AtmosChunkState, HashSet<TileAtmosphere>> selector)
         {
-            atmosphere.CurrentRunTiles.Clear();
+            atmosphere.CurrentRunChunkIndex = 0;
+            atmosphere.CurrentRunChunkTiles.Clear();
+            atmosphere.CurrentRunChunkTileIndex = 0;
+            atmosphere.CurrentRunTileIndex = 0;
+        }
 
-            for (var i = 0; i < atmosphere.CurrentRunChunks.Count; i++)
+        private bool TryGetNextRunTileFromChunks(
+            GridAtmosphereComponent atmosphere,
+            Func<AtmosChunkState, HashSet<TileAtmosphere>> selector,
+            out TileAtmosphere tile)
+        {
+            while (true)
             {
-                var chunkIndex = atmosphere.CurrentRunChunks[i];
+                if (atmosphere.CurrentRunChunkTileIndex < atmosphere.CurrentRunChunkTiles.Count)
+                {
+                    tile = atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex++];
+                    return true;
+                }
+
+                if (atmosphere.CurrentRunChunkIndex >= atmosphere.CurrentRunChunks.Count)
+                {
+                    tile = default!;
+                    return false;
+                }
+
+                var chunkIndex = atmosphere.CurrentRunChunks[atmosphere.CurrentRunChunkIndex++];
                 if (!TryGetChunkState(atmosphere, chunkIndex, out var chunk) || chunk == null)
                     continue;
 
-                foreach (var tile in selector(chunk))
+                atmosphere.CurrentRunChunkTiles.Clear();
+                foreach (var chunkTile in selector(chunk))
                 {
-                    atmosphere.CurrentRunTiles.Add(tile);
+                    atmosphere.CurrentRunChunkTiles.Add(chunkTile);
                 }
-            }
 
-            atmosphere.CurrentRunTileIndex = 0;
+                atmosphere.CurrentRunChunkTileIndex = 0;
+            }
         }
         // Forge-Change-end
         private TileAtmosphere GetOrNewTile(EntityUid owner, GridAtmosphereComponent atmosphere, Vector2i index, bool invalidateNew = true)
@@ -517,9 +539,13 @@ namespace Content.Server.Atmos.EntitySystems
             }
 
             var number = 0;
-            while (atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count) // Forge-Change
+            while (AtmosForceFullGridDebug
+                ? atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count
+                : TryGetNextRunTileFromChunks(atmosphere, chunk => chunk.ActiveTiles, out _)) // Forge-Change
             {
-                var tile = atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]; // Forge-Change
+                var tile = AtmosForceFullGridDebug
+                    ? atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]
+                    : atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex - 1]; // Forge-Change
                 EqualizePressureInZone(ent, tile, atmosphere.UpdateCounter);
                 processed++; // Forge-Change
 
@@ -556,9 +582,13 @@ namespace Content.Server.Atmos.EntitySystems
             }
 
             var number = 0;
-            while (atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count) // Forge-Change
+            while (AtmosForceFullGridDebug
+                ? atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count
+                : TryGetNextRunTileFromChunks(atmosphere, chunk => chunk.ActiveTiles, out _)) // Forge-Change
             {
-                var tile = atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]; // Forge-Change
+                var tile = AtmosForceFullGridDebug
+                    ? atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]
+                    : atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex - 1]; // Forge-Change
                 ProcessCell(ent, tile, atmosphere.UpdateCounter);
                 processed++; // Forge-Change
 
@@ -640,9 +670,13 @@ namespace Content.Server.Atmos.EntitySystems
             // Note: This is still processed even if space wind is turned off since this handles playing the sounds.
 
             var number = 0;
-            while (atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count) // Forge-Change
+            while (AtmosForceFullGridDebug
+                ? atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count
+                : TryGetNextRunTileFromChunks(atmosphere, chunk => chunk.HighPressureTiles, out _)) // Forge-Change
             {
-                var tile = atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]; // Forge-Change
+                var tile = AtmosForceFullGridDebug
+                    ? atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]
+                    : atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex - 1]; // Forge-Change
                 var (lookups, impulses) = HighPressureMovements(ent, tile, _physicsQuery, _xformQuery, _movedByPressureQuery, _metaQuery); // Forge-Change
                 if (lookups > 0) // Forge-Change
                     AtmosHighPressureLookupEntities.Inc(lookups); // Forge-Change
@@ -693,9 +727,13 @@ namespace Content.Server.Atmos.EntitySystems
             }
 
             var number = 0;
-            while (atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count) // Forge-Change
+            while (AtmosForceFullGridDebug
+                ? atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count
+                : TryGetNextRunTileFromChunks(atmosphere, chunk => chunk.HotspotTiles, out _)) // Forge-Change
             {
-                var hotspot = atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]; // Forge-Change
+                var hotspot = AtmosForceFullGridDebug
+                    ? atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]
+                    : atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex - 1]; // Forge-Change
                 ProcessHotspot(ent, hotspot);
                 processed++; // Forge-Change
 
@@ -731,9 +769,13 @@ namespace Content.Server.Atmos.EntitySystems
             }
 
             var number = 0;
-            while (atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count) // Forge-Change
+            while (AtmosForceFullGridDebug
+                ? atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count
+                : TryGetNextRunTileFromChunks(atmosphere, chunk => chunk.SuperconductivityTiles, out _)) // Forge-Change
             {
-                var superconductivity = atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]; // Forge-Change
+                var superconductivity = AtmosForceFullGridDebug
+                    ? atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]
+                    : atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex - 1]; // Forge-Change
                 Superconduct(atmosphere, superconductivity);
                 processed++; // Forge-Change
 
@@ -812,12 +854,18 @@ namespace Content.Server.Atmos.EntitySystems
             var atmosphere = ent.Comp1;
             if (!atmosphere.ProcessingPaused)
             {
-                atmosphere.CurrentRunAtmosDevices.Clear();
-                atmosphere.CurrentRunAtmosDevices.EnsureCapacity(atmosphere.AtmosDevices.Count);
-                foreach (var device in atmosphere.AtmosDevices)
+                if (atmosphere.CurrentRunAtmosDevicesDirty)
                 {
-                    atmosphere.CurrentRunAtmosDevices.Add(device); // Forge-Change
+                    atmosphere.CurrentRunAtmosDevices.Clear();
+                    atmosphere.CurrentRunAtmosDevices.EnsureCapacity(atmosphere.AtmosDevices.Count);
+                    foreach (var device in atmosphere.AtmosDevices)
+                    {
+                        atmosphere.CurrentRunAtmosDevices.Add(device); // Forge-Change
+                    }
+
+                    atmosphere.CurrentRunAtmosDevicesDirty = false;
                 }
+
                 atmosphere.CurrentRunAtmosDeviceIndex = 0; // Forge-Change
             }
 

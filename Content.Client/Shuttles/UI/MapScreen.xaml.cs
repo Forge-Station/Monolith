@@ -60,6 +60,10 @@ public sealed partial class MapScreen : BoxContainer
     private float _minMapDequeue = 0.05f;
     private float _maxMapDequeue = 0.25f;
 
+    // Forge-Change-Start
+    private string _iffSearchFilter = "";
+    // Forge-Change-End
+
     private StyleBoxFlat _ftlStyle;
 
     public event Action<MapCoordinates, Angle>? RequestFTL;
@@ -130,6 +134,10 @@ public sealed partial class MapScreen : BoxContainer
         {
             MapRadar.ShowBeacons = args.Pressed;
         };
+
+        // Forge-Change-Start
+        MapIffSearchCriteria.OnTextChanged += args => OnMapIffSearchChanged(args.Text);
+        // Forge-Change-End
     }
 
     public void UpdateState(ShuttleMapInterfaceState state)
@@ -229,6 +237,23 @@ public sealed partial class MapScreen : BoxContainer
     {
         SetTargeting(obj.Pressed ? MapTargetingMode.Autopilot : MapTargetingMode.None); // Forge-Change
     }
+
+    // Forge-Change-Start
+    private void OnMapIffSearchChanged(string text)
+    {
+        _iffSearchFilter = text.Trim();
+        ApplyMapIffFilter();
+    }
+
+    private void ApplyMapIffFilter()
+    {
+        foreach (var (control, name) in _mapObjectControls)
+        {
+            control.Visible = string.IsNullOrEmpty(_iffSearchFilter) ||
+                              name.Contains(_iffSearchFilter, StringComparison.OrdinalIgnoreCase);
+        }
+    }
+    // Forge-Change-End
 
     // Forge-Change-start - BioScan
     private void BioScanPreviewToggled(BaseButton.ButtonToggledEventArgs obj)
@@ -568,6 +593,11 @@ public sealed partial class MapScreen : BoxContainer
 
         _mapObjectControls.Add(gridContainer, mapObj.Name);
         gridContents.AddChild(gridContainer);
+
+        // Forge-Change-Start
+        gridContainer.Visible = string.IsNullOrEmpty(_iffSearchFilter) ||
+                                 mapObj.Name.Contains(_iffSearchFilter, StringComparison.OrdinalIgnoreCase);
+        // Forge-Change-End
 
         gridButton.OnPressed += args =>
         {

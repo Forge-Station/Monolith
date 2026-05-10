@@ -13,15 +13,15 @@
 
   [color=#58C6FF][bold]FSG-90R «Искра» (Spark)[/bold][/color]
   Быстрый цикл восстановления, малый запас прочности. Надёжный выбор для лёгких судов, предпочитающих быстро вернуться в бой после перегрузки.
-  [color=#aaaaaa]Прочность:[/color] 4 300 HP · [color=#aaaaaa]Восстановление:[/color] 105 HP/с · [color=#aaaaaa]Питание:[/color] 19–58 кВт · [color=#aaaaaa]Перезарядка:[/color] ×5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffaa44]40%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#88ff88]55 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 55 900 HP · [color=#aaaaaa]Восстановление:[/color] 656 HP/с · [color=#aaaaaa]Питание:[/color] 19–58 кВт · [color=#aaaaaa]Перезарядка:[/color] ×5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffaa44]40%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#88ff88]55 с[/color]
 
   [color=#3399FF][bold]FSG-100 «Килевой» (Keel)[/bold][/color]
   Сбалансированный щит общего назначения без ярко выраженных преимуществ и недостатков. Надёжная основа для большинства кораблей.
-  [color=#aaaaaa]Прочность:[/color] 5 000 HP · [color=#aaaaaa]Восстановление:[/color] 80 HP/с · [color=#aaaaaa]Питание:[/color] 20–60 кВт · [color=#aaaaaa]Перезарядка:[/color] ×3 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffaa44]50%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]80 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 65 000 HP · [color=#aaaaaa]Восстановление:[/color] 500 HP/с · [color=#aaaaaa]Питание:[/color] 20–60 кВт · [color=#aaaaaa]Перезарядка:[/color] ×3 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffaa44]50%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]80 с[/color]
 
   [color=#8E7DFF][bold]FSG-110P «Ореол» (Halo)[/bold][/color]
   Призматический щит с увеличенным запасом прочности за счёт замедленного восстановления. Подходит для судов, способных избегать затяжных боёв.
-  [color=#aaaaaa]Прочность:[/color] 6 200 HP · [color=#aaaaaa]Восстановление:[/color] 65 HP/с · [color=#aaaaaa]Питание:[/color] 22–63 кВт · [color=#aaaaaa]Перезарядка:[/color] ×2.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffaa44]45%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]95 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 80 600 HP · [color=#aaaaaa]Восстановление:[/color] 405 HP/с · [color=#aaaaaa]Питание:[/color] 22–63 кВт · [color=#aaaaaa]Перезарядка:[/color] ×2.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffaa44]45%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]95 с[/color]
 
   [bold]─── Уровень II ───[/bold]
 
@@ -34,19 +34,19 @@
 
   [color=#41D4FF][bold]FSG-160C «Рамарт» (Ramart)[/bold][/color]
   Щит с усиленной защитой от столкновений. Отлично подходит для судов, часто работающих в тесных пространствах и рискующих таранами.
-  [color=#aaaaaa]Прочность:[/color] 6 100 HP · [color=#aaaaaa]Восстановление:[/color] 90 HP/с · [color=#aaaaaa]Питание:[/color] 24–68 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]78%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#88ff88]70 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 144 500 HP · [color=#aaaaaa]Восстановление:[/color] 643 HP/с · [color=#aaaaaa]Питание:[/color] 24–68 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]78%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#88ff88]70 с[/color]
 
   [color=#62E86F][bold]FSG-220 «Авангард» (Vanguard)[/bold][/color]
   Универсальный щит для судов на передовой. Хороший баланс между прочностью и скоростью регенерации без жёстких компромиссов.
-  [color=#aaaaaa]Прочность:[/color] 7 600 HP · [color=#aaaaaa]Восстановление:[/color] 105 HP/с · [color=#aaaaaa]Питание:[/color] 30–78 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffcc44]65%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]80 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 180 000 HP · [color=#aaaaaa]Восстановление:[/color] 750 HP/с · [color=#aaaaaa]Питание:[/color] 30–75 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffaa44]40%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]100 с[/color]
 
   [color=#3CFFCC][bold]FSG-250C «Волнорез» (Breakwater)[/bold][/color]
   Щит для ближних боёв с максимальной защитой от столкновений в своём классе. Предназначен для судов, ведущих затяжные абордажные операции.
-  [color=#aaaaaa]Прочность:[/color] 8 000 HP · [color=#aaaaaa]Восстановление:[/color] 100 HP/с · [color=#aaaaaa]Питание:[/color] 32–82 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]85%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]85 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 189 000 HP · [color=#aaaaaa]Восстановление:[/color] 714 HP/с · [color=#aaaaaa]Питание:[/color] 32–82 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]85%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]85 с[/color]
 
   [color=#FFD35A][bold]FSG-330R «Быстроход» (Quickstep)[/bold][/color]
   Высокоскоростной щит с рекордной для своего уровня регенерацией. Незаменим в продолжительных перестрелках, требующих постоянного восстановления.
-  [color=#aaaaaa]Прочность:[/color] 9 200 HP · [color=#aaaaaa]Восстановление:[/color] 135 HP/с · [color=#aaaaaa]Питание:[/color] 36–90 кВт · [color=#aaaaaa]Перезарядка:[/color] ×6 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffcc44]72%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]95 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 218 000 HP · [color=#aaaaaa]Восстановление:[/color] 964 HP/с · [color=#aaaaaa]Питание:[/color] 36–90 кВт · [color=#aaaaaa]Перезарядка:[/color] ×6 · [color=#aaaaaa]Защита от тарана:[/color] [color=#ffcc44]72%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]95 с[/color]
 
   [bold]─── Уровень III ───[/bold]
 
@@ -58,15 +58,15 @@
 
   [color=#FF9346][bold]FSG-420 «Редут» (Redoubt)[/bold][/color]
   Тяжёлый щит для крупных судов, рассчитанный на сосредоточенный огонь. Надёжный и предсказуемый, с хорошей защитой от тарана.
-  [color=#aaaaaa]Прочность:[/color] 11 200 HP · [color=#aaaaaa]Восстановление:[/color] 110 HP/с · [color=#aaaaaa]Питание:[/color] 42–98 кВт · [color=#aaaaaa]Перезарядка:[/color] ×5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]82%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]110 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 75 000 HP · [color=#aaaaaa]Восстановление:[/color] 950 HP/с · [color=#aaaaaa]Питание:[/color] 40–100 кВт · [color=#aaaaaa]Перезарядка:[/color] ×6 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]95%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#88ff88]40 с[/color]
 
   [color=#C86BFF][bold]FSG-470P «Решётка» (Lattice)[/bold][/color]
   Призматический тяжёлый щит с самым большим запасом прочности в классе. Очень медленно восстанавливается — рассчитан на корабли, способные уклоняться от огня после перегрузки.
-  [color=#aaaaaa]Прочность:[/color] 13 200 HP · [color=#aaaaaa]Восстановление:[/color] 85 HP/с · [color=#aaaaaa]Питание:[/color] 46–102 кВт · [color=#aaaaaa]Перезарядка:[/color] ×3.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]84%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]125 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 180 000 HP · [color=#aaaaaa]Восстановление:[/color] 750 HP/с · [color=#aaaaaa]Питание:[/color] 46–102 кВт · [color=#aaaaaa]Перезарядка:[/color] ×3.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]84%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ffcc44]100 с[/color]
 
   [color=#FF5E5E][bold]FSG-600C «Бастион» (Bastion)[/bold][/color]
   Осадный щит для бронированных кораблей и фортификаций. Максимальная защита от столкновений в гражданском ряду, огромный запас прочности.
-  [color=#aaaaaa]Прочность:[/color] 16 000 HP · [color=#aaaaaa]Восстановление:[/color] 105 HP/с · [color=#aaaaaa]Питание:[/color] 52–110 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]92%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]140 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 107 000 HP · [color=#aaaaaa]Восстановление:[/color] 905 HP/с · [color=#aaaaaa]Питание:[/color] 52–110 кВт · [color=#aaaaaa]Перезарядка:[/color] ×4.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]97%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]140 с[/color]
 
   [bold]─── Уровень IV ───[/bold]
 
@@ -76,6 +76,6 @@
 
   [color=#FF66D9][bold]FSG-900P «Призматическая корона» (Prism Crown)[/bold][/color]
   Щит класса аванпоста. Колоссальный запас прочности, наилучшая защита от тарана в гражданском ряду, но крайне медленное восстановление и огромное энергопотребление. Предназначен для стационарных объектов и крупных боевых кораблей.
-  [color=#aaaaaa]Прочность:[/color] 24 000 HP · [color=#aaaaaa]Восстановление:[/color] 80 HP/с · [color=#aaaaaa]Питание:[/color] 70–150 кВт · [color=#aaaaaa]Перезарядка:[/color] ×2.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]95%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]170 с[/color]
+  [color=#aaaaaa]Прочность:[/color] 161 000 HP · [color=#aaaaaa]Восстановление:[/color] 691 HP/с · [color=#aaaaaa]Питание:[/color] 70–150 кВт · [color=#aaaaaa]Перезарядка:[/color] ×2.5 · [color=#aaaaaa]Защита от тарана:[/color] [color=#88ff88]95%[/color] · [color=#aaaaaa]Штраф:[/color] [color=#ff8888]170 с[/color]
 
 </Document>

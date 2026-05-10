@@ -53,12 +53,19 @@
   text: "/ServerInfo/_Forge/Guidebook/_NF/ShieldGenerators.xml"
   priority: 8
   children:
+  - ShieldGeneratorsTable
   - ShieldGeneratorsFSG
   - ShieldGeneratorsTSFMC
   - ShieldGeneratorsUSSP
   - ShieldGeneratorsRenegates
   - ShieldGeneratorsViper
   - ShieldGeneratorsUllman
+
+- type: guideEntry
+  id: ShieldGeneratorsTable
+  name: guide-entry-shield-generators-table
+  text: "/ServerInfo/_Forge/Guidebook/_NF/ShieldGeneratorsTable.xml"
+  priority: -1
 
 - type: guideEntry
   id: ShieldGeneratorsFSG

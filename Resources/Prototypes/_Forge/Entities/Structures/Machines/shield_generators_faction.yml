@@ -1,4 +1,5 @@
 # Faction heavy shields: same chassis tiers as FSG-420 / 470P / 600C, tuned per doctrine (tradeoffs on ShipShieldEmitter).
+# Stats rescaled with Mono-scale civilian bases; faction tradeoffs match Forge-Station/Monolith#118 ratios vs old FSG-420/470P/600C.
 
 # --- TSFMC — regulation-grade sustained combat; pays in baseline power or lockout ---
 
@@ -15,11 +16,15 @@
     board: MachineShieldForgeTSFHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#48E8A8"
-    healPerSecond: 138
-    damageLimit: 13000
+    healPerSecond: 1192
+    damageLimit: 87000
     damageExp: 1.02
-    baseDraw: 51000
-    maxDraw: 112000
+    baseDraw: 48600
+    maxDraw: 114000
+    unpoweredBonus: 5
+    damageOverloadTimePunishment: 55
+  - type: ApcPowerReceiver
+    powerLoad: 48600
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -50,12 +55,15 @@
     board: MachineShieldForgeTSFPrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#66CCFF"
-    healPerSecond: 100
-    damageLimit: 15400
+    healPerSecond: 882
+    damageLimit: 210000
     damageExp: 1.09
-    damageOverloadTimePunishment: 102
+    damageOverloadTimePunishment: 82
     baseDraw: 51000
     maxDraw: 104000
+    unpoweredBonus: 3.5
+  - type: ApcPowerReceiver
+    powerLoad: 51000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -86,8 +94,8 @@
     board: MachineShieldForgeTSFCollisionCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#FF6B8A"
-    collisionResistanceMultiplier: 0.062
-    healPerSecond: 82
+    collisionResistanceMultiplier: 0.023
+    healPerSecond: 709
     damageOverloadTimePunishment: 175
     maxDraw: 102000
   - type: Sprite
@@ -122,11 +130,14 @@
     board: MachineShieldForgeUsspHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#5EB8AA"
-    healPerSecond: 86
-    damageLimit: 10000
+    healPerSecond: 744
+    damageLimit: 67000
     damageExp: 1.08
     baseDraw: 35000
     maxDraw: 86000
+    unpoweredBonus: 5
+  - type: ApcPowerReceiver
+    powerLoad: 35000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -157,12 +168,14 @@
     board: MachineShieldForgeUsspPrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#D9A066"
-    healPerSecond: 72
-    damageLimit: 11800
+    healPerSecond: 635
+    damageLimit: 161000
     damageExp: 1.08
     baseDraw: 40500
     maxDraw: 91000
     unpoweredBonus: 5.0
+  - type: ApcPowerReceiver
+    powerLoad: 40500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -193,12 +206,14 @@
     board: MachineShieldForgeUsspCollisionCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#B84C2A"
-    collisionResistanceMultiplier: 0.108
-    healPerSecond: 128
-    damageLimit: 18500
+    collisionResistanceMultiplier: 0.041
+    healPerSecond: 1108
+    damageLimit: 124000
     damageExp: 0.92
     baseDraw: 54500
     maxDraw: 108000
+  - type: ApcPowerReceiver
+    powerLoad: 54500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -231,12 +246,15 @@
     board: MachineShieldForgeRenegateHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#E87B45"
-    healPerSecond: 138
-    damageLimit: 9600
+    healPerSecond: 1192
+    damageLimit: 64300
     damageExp: 1.14
     baseDraw: 46500
     maxDraw: 104000
-    damageOverloadTimePunishment: 78
+    damageOverloadTimePunishment: 28
+    unpoweredBonus: 5
+  - type: ApcPowerReceiver
+    powerLoad: 46500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -267,12 +285,14 @@
     board: MachineShieldForgeRenegatePrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#E85BB8"
-    healPerSecond: 100
-    damageLimit: 11800
+    healPerSecond: 882
+    damageLimit: 161000
     damageExp: 1.08
     baseDraw: 49000
     maxDraw: 116000
-    damageOverloadTimePunishment: 100
+    damageOverloadTimePunishment: 80
+  - type: ApcPowerReceiver
+    powerLoad: 49000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -303,13 +323,15 @@
     board: MachineShieldForgeRenegateCollisionCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#9C3D2E"
-    collisionResistanceMultiplier: 0.058
-    healPerSecond: 122
-    damageLimit: 15200
+    collisionResistanceMultiplier: 0.022
+    healPerSecond: 1056
+    damageLimit: 102000
     damageExp: 1.05
     baseDraw: 60000
     maxDraw: 118000
     damageOverloadTimePunishment: 158
+  - type: ApcPowerReceiver
+    powerLoad: 60000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -342,11 +364,13 @@
     board: MachineShieldForgeViperHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#FF7A4A"
-    healPerSecond: 134
+    healPerSecond: 1157
     baseDraw: 45000
     maxDraw: 114000
     damageExp: 1.12
-    damageLimit: 9800
+    damageLimit: 65600
+  - type: ApcPowerReceiver
+    powerLoad: 45000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -380,9 +404,11 @@
     maxDraw: 118000
     baseDraw: 52000
     damageExp: 1.06
-    damageLimit: 14200
-    healPerSecond: 68
-    damageOverloadTimePunishment: 152
+    damageLimit: 194000
+    healPerSecond: 600
+    damageOverloadTimePunishment: 122
+  - type: ApcPowerReceiver
+    powerLoad: 52000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -413,11 +439,13 @@
     board: MachineShieldForgeViperCollisionCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#991111"
-    collisionResistanceMultiplier: 0.058
-    healPerSecond: 90
-    damageLimit: 14200
+    collisionResistanceMultiplier: 0.022
+    healPerSecond: 779
+    damageLimit: 95000
     baseDraw: 54000
     damageOverloadTimePunishment: 182
+  - type: ApcPowerReceiver
+    powerLoad: 54000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -452,10 +480,13 @@
     shieldColor: "#8B6CB8"
     baseDraw: 36500
     maxDraw: 94000
-    healPerSecond: 94
-    damageLimit: 12400
+    healPerSecond: 812
+    damageLimit: 83000
     damageExp: 1.07
-    damageOverloadTimePunishment: 155
+    damageOverloadTimePunishment: 56
+    unpoweredBonus: 5
+  - type: ApcPowerReceiver
+    powerLoad: 36500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -488,11 +519,13 @@
     shieldColor: "#D4B8F0"
     baseDraw: 42000
     maxDraw: 96000
-    damageLimit: 14000
-    healPerSecond: 75
+    damageLimit: 191000
+    healPerSecond: 662
     damageExp: 1.05
     unpoweredBonus: 2.8
-    damageOverloadTimePunishment: 145
+    damageOverloadTimePunishment: 116
+  - type: ApcPowerReceiver
+    powerLoad: 42000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true
@@ -523,12 +556,14 @@
     board: MachineShieldForgeUllmanCollisionCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#5A3D7A"
-    collisionResistanceMultiplier: 0.072
+    collisionResistanceMultiplier: 0.027
     baseDraw: 49500
     maxDraw: 106000
-    healPerSecond: 100
-    damageLimit: 15200
+    healPerSecond: 865
+    damageLimit: 102000
     damageOverloadTimePunishment: 168
+  - type: ApcPowerReceiver
+    powerLoad: 49500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     snapCardinals: true

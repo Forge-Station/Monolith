@@ -1,3 +1,6 @@
-ent-PowerCellCombat = полная боевая батарея
+ent-PowerCellCombat = боевая батарея
     .desc = Перезаряжаемый стандартный батарея. Эта боевая модель оснащена частичной защитой от скачков напряжения.
-ent-PowerCellCombatPrinted = пустая боевая батарея
+    .suffix = Полная
+ent-PowerCellCombatPrinted = боевая батарея
+    .desc = { ent-PowerCellCombat.desc }
+    .suffix = Пустрая

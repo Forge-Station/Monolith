@@ -25,26 +25,6 @@
     {
       "name": "equipped-HELMET-vulpkanin",
       "directions": 4
-    },
-    {
-      "name": "icon-unshaded",
-      "directions": 4
-    },
-    {
-      "name": "unshaded",
-      "directions": 4
-    },
-    {
-      "name": "unshaded-hydrakin",
-      "directions": 4
-    },
-    {
-      "name": "unshaded-rezomi"
-      "directions": 4
-    },
-    {
-      "name": "unshaded-vulpkanin"
-      "directions": 4
     }
   ]
 }

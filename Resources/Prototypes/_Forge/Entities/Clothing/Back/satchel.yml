@@ -12,3 +12,23 @@
     - 3,0,6,3
     - 8,0,9,3
     maxItemSize: Huge
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackSatchelTrauma
+  name: trauma satchel
+  description: A tactical satchel for army related needs.
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Back/Satchels/tti.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Back/Satchels/tti.rsi
+  - type: Storage
+    grid:
+    - 0,0,1,3
+    - 3,0,6,3
+    - 8,0,9,3
+    maxItemSize: Huge
+  - type: ExplosionResistance
+    damageCoefficient: 0.25

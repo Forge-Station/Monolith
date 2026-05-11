@@ -10,3 +10,18 @@
     sprite: Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
   - type: Clothing
     sprite: Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTraumaBlue
+  suffix: TTI 
+  name: trauma armed forces jumpskirt
+  description: Standard fatigues of the Trauma Armed Forces.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/tti_skirt_blue.rsi # Forge-change
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/tti_skirt_blue.rsi # Forge-change
+  - type: SuitSensor
+    randomMode: false
+    mode: SensorVitals

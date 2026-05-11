@@ -13,25 +13,37 @@
     outerClothing: ClothingOuterHardsuitMedical
 
 - type: loadout
-  id: MdMedicOuterClothingERTMed
-  price: 50000
+  id: MdMedicOuterClothingOuterArmorBodyTraumaCommander
+  price: 0
   equipment:
-    outerClothing: ClothingOuterHardsuitERTMedical
+    outerClothing: ClothingOuterArmorBodyTraumaCommander
 
 - type: loadout
-  id: MdMedicOuterClothingTraumaT23
-  price: 50000
+  id: MdMedicOuterClothingOuterArmorBodyTrauma
+  price: 0
   equipment:
-    outerClothing: ClothingOuterHardsuitTrauma
+    outerClothing: ClothingOuterArmorBodyTrauma
+
+- type: loadout
+  id: MdMedicOuterClothingOuterRobeTraumaBomber
+  price: 0
+  equipment:
+    outerClothing: ClothingOuterRobeTraumaBomber
+
+- type: loadout
+  id: MdMedicOuterClothingOuterCoatTrauma
+  price: 0
+  equipment:
+    outerClothing: ClothingOuterCoatTrauma
 
 - type: loadoutGroup
   id: MdMedicOuterClothing
   name: loadout-group-contractor-outerclothing
   minLimit: 1
   loadouts:
-  - MdMedicOuterClothingEVA
-  - MdMedicOuterClothingERTMed
-  - MdMedicOuterClothingTraumaT23
+  - MdMedicOuterClothingOuterArmorBodyTrauma # Forge-change
+  - MdMedicOuterClothingOuterRobeTraumaBomber # Forge-change
+  - MdMedicOuterClothingOuterCoatTrauma # Forge-change
   - MdMedicOuterClothingLightHardsuit
   fallbacks:
-  - MdMedicOuterClothingEVA
+  - MdMedicOuterClothingOuterArmorBodyTrauma # Forge-change

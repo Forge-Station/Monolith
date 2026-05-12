@@ -30,6 +30,8 @@ using Content.Server.Station.Components;
 using Content.Shared._Mono.FireControl;
 using Content.Shared._Mono.Shuttles; // Forge-Change - BioScan
 using Content.Shared._Mono.Ships.Components;
+using Content.Shared.Shuttles;
+using Content.Shared.Shuttles.Events;
 using Content.Shared.Verbs;
 using Content.Shared._Crescent.ShipShields;
 using Robust.Shared.Timing;
@@ -57,6 +59,9 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
     private ISawmill _sawmill = default!;
 
+    private static readonly TimeSpan ShuttleBuiThrottleInterval = TimeSpan.FromSeconds(0.15);
+    private readonly Dictionary<EntityUid, (TimeSpan At, FTLState Ftl, ShuttleBioScanStatus Bio, int DockPorts)> _shuttleBuiLastPush = new();
+
     private EntityQuery<MetaDataComponent> _metaQuery;
     private EntityQuery<TransformComponent> _xformQuery;
 
@@ -80,6 +85,8 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         SubscribeLocalEvent<ShuttleConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt);
         Subs.BuiEvents<ShuttleConsoleComponent>(ShuttleConsoleUiKey.Key, subs =>
         {
+            subs.Event<BoundUIOpenedEvent>(OnShuttleBuiOpened);
+            subs.Event<ShuttleConsoleUiTabMessage>(OnShuttleUiTabMessage);
             subs.Event<ShuttleConsoleFTLBeaconMessage>(OnBeaconFTLMessage);
             subs.Event<ShuttleConsoleFTLPositionMessage>(OnPositionFTLMessage);
             subs.Event<ShuttleConsoleBioScanPositionMessage>(OnBioScanPositionMessage); // Forge-Change - BioScan
@@ -134,8 +141,6 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     /// </summary>
     public void RefreshShuttleConsoles(EntityUid gridUid)
     {
-        var exclusions = new List<ShuttleExclusionObject>();
-        GetExclusions(ref exclusions);
         _consoles.Clear();
         _lookup.GetChildEntities(gridUid, _consoles);
         DockingInterfaceState? dockState = null;
@@ -151,8 +156,6 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     /// </summary>
     public void RefreshShuttleConsoles()
     {
-        var exclusions = new List<ShuttleExclusionObject>();
-        GetExclusions(ref exclusions);
         var query = AllEntityQuery<ShuttleConsoleComponent>();
         DockingInterfaceState? dockState = null;
 
@@ -389,6 +392,9 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
     private void UpdateState(EntityUid consoleUid, ref DockingInterfaceState? dockState)
     {
+        if (!_ui.HasUi(consoleUid, ShuttleConsoleUiKey.Key))
+            return;
+
         EntityUid? entity = consoleUid;
 
         var getShuttleEv = new ConsoleShuttleEvent
@@ -406,10 +412,13 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         ShuttleMapInterfaceState mapState;
         dockState ??= GetDockState();
 
+        var includeMapLists = TryComp<ShuttleConsoleComponent>(consoleUid, out var shuttleCons) &&
+                              shuttleCons.BuiActiveTab == ShuttleConsoleUiTab.Map;
+
         if (shuttleGridUid != null && entity != null)
         {
             navState = GetNavState(entity.Value, dockState.Docks);
-            mapState = GetMapState(consoleUid, shuttleGridUid.Value); // Forge-Change - BioScan
+            mapState = GetMapState(consoleUid, shuttleGridUid.Value, includeMapLists); // Forge-Change - BioScan
         }
         else
         {
@@ -421,13 +430,54 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
                 new List<ShuttleExclusionObject>(),
                 default, // Forge-Change - BioScan
                 ShuttleBioScanStatus.None, // Forge-Change - BioScan
-                false); // Forge-Change - BioScan
+                false, // Forge-Change - BioScan
+                includeBeaconExclusionLists: includeMapLists);
         }
 
-        if (_ui.HasUi(consoleUid, ShuttleConsoleUiKey.Key))
+        if (!mapState.IncludeBeaconExclusionLists &&
+            _shuttleBuiLastPush.TryGetValue(consoleUid, out var prev) &&
+            prev.Ftl == mapState.FTLState &&
+            prev.Bio == mapState.BioScanStatus &&
+            prev.DockPorts == CountDockPorts(dockState) &&
+            _timing.CurTime - prev.At < ShuttleBuiThrottleInterval)
         {
-            _ui.SetUiState(consoleUid, ShuttleConsoleUiKey.Key, new ShuttleBoundUserInterfaceState(navState, mapState, dockState));
+            return;
         }
+
+        _shuttleBuiLastPush[consoleUid] = (_timing.CurTime, mapState.FTLState, mapState.BioScanStatus, CountDockPorts(dockState));
+
+        _ui.SetUiState(consoleUid, ShuttleConsoleUiKey.Key, new ShuttleBoundUserInterfaceState(navState, mapState, dockState));
+    }
+
+    private static int CountDockPorts(DockingInterfaceState? dockState)
+    {
+        if (dockState == null)
+            return 0;
+
+        var n = 0;
+        foreach (var ports in dockState.Docks.Values)
+        {
+            n += ports.Count;
+        }
+
+        return n;
+    }
+
+    private void OnShuttleBuiOpened(EntityUid uid, ShuttleConsoleComponent component, BoundUIOpenedEvent args)
+    {
+        if ((ShuttleConsoleUiKey)args.UiKey != ShuttleConsoleUiKey.Key)
+            return;
+
+        component.BuiActiveTab = ShuttleConsoleUiTab.Nav;
+        DockingInterfaceState? dockState = null;
+        UpdateState(uid, ref dockState);
+    }
+
+    private void OnShuttleUiTabMessage(EntityUid uid, ShuttleConsoleComponent component, ShuttleConsoleUiTabMessage args)
+    {
+        component.BuiActiveTab = args.Tab;
+        DockingInterfaceState? dockState = null;
+        UpdateState(uid, ref dockState);
     }
 
     public override void Update(float frameTime)
@@ -619,7 +669,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     /// <summary>
     /// Specific to a particular shuttle.
     /// </summary>
-    public ShuttleMapInterfaceState GetMapState(EntityUid consoleUid, Entity<FTLComponent?> shuttle) // Forge-Change - BioScan
+    public ShuttleMapInterfaceState GetMapState(EntityUid consoleUid, Entity<FTLComponent?> shuttle, bool includeBeaconExclusionLists) // Forge-Change - BioScan
     {
         FTLState ftlState = FTLState.Available;
         StartEndTime stateDuration = default;
@@ -633,10 +683,21 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             stateDuration = _shuttle.GetStateTime(shuttle.Comp);
         }
 
-        List<ShuttleBeaconObject>? beacons = null;
-        List<ShuttleExclusionObject>? exclusions = null;
-        GetBeacons(ref beacons);
-        GetExclusions(ref exclusions);
+        List<ShuttleBeaconObject> beacons;
+        List<ShuttleExclusionObject> exclusions;
+
+        if (includeBeaconExclusionLists)
+        {
+            EnsureFtlBeaconExclusionCache();
+            beacons = new List<ShuttleBeaconObject>(_beaconCache);
+            exclusions = new List<ShuttleExclusionObject>(_exclusionCache);
+        }
+        else
+        {
+            beacons = new List<ShuttleBeaconObject>();
+            exclusions = new List<ShuttleExclusionObject>();
+        }
+
         // Forge-Change-start - BioScan
         if (TryComp<ShuttleConsoleComponent>(consoleUid, out var console))
         {
@@ -648,11 +709,12 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         return new ShuttleMapInterfaceState(
             ftlState,
             stateDuration,
-            beacons ?? new List<ShuttleBeaconObject>(),
-            exclusions ?? new List<ShuttleExclusionObject>(),
+            beacons,
+            exclusions,
             bioScanTime,
             bioScanStatus,
-            bioScanAvailable);
+            bioScanAvailable,
+            includeBeaconExclusionLists);
         // Forge-Change-end - BioScan
     }
 

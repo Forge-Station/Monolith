@@ -212,38 +212,35 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             return;
         }
 
-        predictedProjectile.Hit = true;
-        foreach (var (netEnt, clientPos) in ev.Hit)
+        if (GetEntity(ev.HitTarget) is not { Valid: true } hit)
+            return;
+
+        if (!_lagCompensationQuery.TryComp(hit, out var otherLagComp) ||
+            !_fixturesQuery.TryComp(hit, out var otherFixtures) ||
+            !_physicsQuery.TryComp(hit, out var otherPhysics) ||
+            !_transformQuery.TryComp(hit, out var otherTransform))
         {
-            if (GetEntity(netEnt) is not { Valid: true } hit)
-                continue;
-
-            if (!_lagCompensationQuery.TryComp(hit, out var otherLagComp) ||
-                !_fixturesQuery.TryComp(hit, out var otherFixtures) ||
-                !_physicsQuery.TryComp(hit, out var otherPhysics) ||
-                !_transformQuery.TryComp(hit, out var otherTransform))
-            {
-                continue;
-            }
-
-            if (!Collides(
-                    (projectile, predictedProjectile, projectilePhysics),
-                    (hit, otherLagComp, otherFixtures, otherPhysics, otherTransform),
-                    clientPos))
-            {
-                if (_logHits)
-                    Log.Info("missed");
-
-                continue;
-            }
-
-            if (_logHits)
-                Log.Info("hit");
-
-            // Get collision coordinates for impact effects
-            var collisionCoords = _transform.GetMapCoordinates(hit);
-            _projectile.ProjectileCollide((projectile, projectileComp, projectilePhysics), hit, collisionCoords, true);
+            return;
         }
+
+        if (!Collides(
+                (projectile, predictedProjectile, projectilePhysics),
+                (hit, otherLagComp, otherFixtures, otherPhysics, otherTransform),
+                ev.HitCoordinates))
+        {
+            if (_logHits)
+                Log.Info("missed");
+
+            return;
+        }
+
+        if (_logHits)
+            Log.Info("hit");
+
+        predictedProjectile.Hit = true;
+
+        var collisionCoords = _transform.GetMapCoordinates(hit);
+        _projectile.ProjectileCollide((projectile, projectileComp, projectilePhysics), hit, collisionCoords, true);
     }
 
     public override void Update(float frameTime)

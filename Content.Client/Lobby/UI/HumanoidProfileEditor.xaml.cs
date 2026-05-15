@@ -1061,7 +1061,8 @@ namespace Content.Client.Lobby.UI
             _nationalies.Clear();
 
             _nationalies.AddRange(_prototypeManager.EnumeratePrototypes<NationalityPrototype>()
-                .Where(o => _requirements.CheckRoleRequirements(
+                .Where(o =>
+                    (!o.Hidden || Profile?.Nationality == o.ID) && _requirements.CheckRoleRequirements(
                     o.Requirements?.ToHashSet(),
                     Profile ?? HumanoidCharacterProfile.DefaultWithSpecies(),
                     out _)));
@@ -1080,7 +1081,7 @@ namespace Content.Client.Lobby.UI
             if (Profile != null && !nationalityIds.Contains(Profile.Nationality))
                 SetNationality(SharedHumanoidAppearanceSystem.DefaultNationality);
 
-            if(Profile != null)
+            if (Profile != null)
                 UpdateNationalityDescription(Profile.Nationality);
         }
 

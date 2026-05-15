@@ -199,15 +199,15 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (gunComp.ShotCounter == 0)
             return null;
 
+        if (shot == null)
+            return null;
+
         var projectiles = new List<(EntityUid Entity, ProjectileComponent Component)>();
-        if (shot != null)
+        foreach (var id in shot)
         {
-            foreach (var id in shot)
-            {
-                var entity = new EntityUid(id);
-                if (_projQuery.TryComp(entity, out var projectile))
-                    projectiles.Add((entity, projectile));
-            }
+            var entity = new EntityUid(id);
+            if (_projQuery.TryComp(entity, out var projectile))
+                projectiles.Add((entity, projectile));
         }
 
         return projectiles;

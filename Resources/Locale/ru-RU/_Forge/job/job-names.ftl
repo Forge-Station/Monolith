@@ -44,12 +44,14 @@ forge-job-name-apotek = СИВ Апотекарий
 forge-job-name-technican = СИВ Техножрец
 
 # Renegates
-forge-job-name-baron = ВКР Барон
-forge-job-name-draftsman = ВКР Чертёжник
-forge-job-name-overseer = ВКР Смотрящий
-forge-job-name-quack = ВКР Костоправ
-forge-job-name-foreman = ВКР Штейгер
-forge-job-name-flunky = ВКР Шестёрка
+forge-job-name-baron = ВКР Коммодор
+forge-job-name-draftsman = ВКР Куратор Исследований
+forge-job-name-overseer = ВКР Бригадный Командир
+forge-job-name-quack = ВКР Боевой Санитар
+forge-job-name-foreman = ВКР Специалист
+forge-job-name-flunky = ВКР Повстанец
+forge-job-name-militia = ВКР Ополченец
+forge-job-name-watchman = ВКР Дозорный
 
 JobTsfCommandingOfficer = ТСФ Командующий Офицер
 JobTsfExecutiveOfficer = ТСФ Исполнительный Офицер

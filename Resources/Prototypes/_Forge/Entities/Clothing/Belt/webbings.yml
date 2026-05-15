@@ -75,3 +75,17 @@
     - 0,0,11,1
   - type: ClothingSpeedModifier
     sprintModifier: 0.95
+
+- type: entity
+  parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]
+  id: ClothingBeltWebbingsNormalTrauma
+  name: trauma carrier
+  description: Unique and versatile chest rig, can hold security gear.
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Belt/tti_webbing.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Belt/tti_webbing.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.25

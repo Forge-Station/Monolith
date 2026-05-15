@@ -46,14 +46,14 @@ public sealed class SpawnPassportCommand : ToolshedCommand
 
         if (ExecutingEntity(ctx) is not { } ent)
         {
-            if (ctx.Session is {} session)
+            if (ctx.Session is { } session)
                 ctx.ReportError(new SessionHasNoEntityError(session));
             else
                 ctx.ReportError(new NotForServerConsoleError());
         }
         else
         {
-            if (!TryComp(ent, out ActorComponent? targetActor)|| !_mindSystem.TryGetMind(ent, out var mindId, out _) || !_jobSystem.MindTryGetJob(mindId, out var job))
+            if (!TryComp(ent, out ActorComponent? targetActor) || !_mindSystem.TryGetMind(ent, out var mindId, out _) || !_jobSystem.MindTryGetJob(mindId, out var job))
                 return;
 
             var profile = _ticker.GetPlayerProfile(targetActor.PlayerSession);

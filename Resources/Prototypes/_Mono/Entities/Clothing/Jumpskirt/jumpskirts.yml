@@ -2,13 +2,14 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpskirtTAF
+  suffix: TTI # Forge-change
   name: trauma armed forces jumpskirt
   description: Standard fatigues of the Trauma Armed Forces.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Uniforms/Jumpskirt/trauma.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/tti_skirt.rsi # Forge-change
   - type: Clothing
-    sprite: _Mono/Clothing/Uniforms/Jumpskirt/trauma.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/tti_skirt.rsi # Forge-change
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals

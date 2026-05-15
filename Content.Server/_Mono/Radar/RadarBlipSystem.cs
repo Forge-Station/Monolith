@@ -19,6 +19,7 @@ public sealed partial class RadarBlipSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!; // Forge-Change
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
 
     // Pooled collections to avoid per-request heap churn
     private readonly List<BlipNetData> _tempBlipsCache = new();
@@ -96,9 +97,17 @@ public sealed partial class RadarBlipSystem : EntitySystem
 
     private void OnBlipShutdown(EntityUid blipUid, RadarBlipComponent component, ComponentShutdown args)
     {
+        if (!TryComp<TransformComponent>(blipUid, out var blipXform))
+            return;
+
         var netBlipUid = GetNetEntity(blipUid);
         var removalEv = new BlipRemovalEvent(netBlipUid);
-        RaiseNetworkEvent(removalEv);
+        // Match blip visibility radius (MaxDistance from radar sources), not Filter.Pvs default (~50),
+        // so clients who still have this blip in their list always get removal on the same map.
+        var mapCoords = _xform.GetMapCoordinates(blipUid, blipXform);
+        RaiseNetworkEvent(
+            removalEv,
+            Filter.Empty().AddInRange(mapCoords, component.MaxDistance, _playerManager, EntityManager));
     }
 
     private void AssembleBlipsReport(EntityUid uid, List<Vector2> sourcePositions, RadarConsoleComponent? component = null)

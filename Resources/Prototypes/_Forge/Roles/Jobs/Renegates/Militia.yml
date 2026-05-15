@@ -1,0 +1,41 @@
+- type: job
+  id: Militia
+  name: forge-job-name-militia
+  description: forge-job-desc-militia
+  playTimeTracker: JobMilitia
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hours
+  startingGear: MilitiaGear
+  alwaysUseSpawner: true
+  setPreference: false
+  overrideConsoleVisibility: true
+  icon: JobIconRenegateMilitia
+  requireAdminNotify: false
+  supervisors: job-supervisors-Overseer
+  weight: 50
+  displayWeight: 10
+  assignedCompany: Renegates
+  canBeAntag: false
+  access:
+  - Renegate
+  accessGroups:
+  - GeneralRenegateAccess
+  # special:
+  # - !type:AddImplantSpecial
+  #   implants: # Неизвестно
+  # - !type:AddComponentSpecial
+  #   components:
+  #     - type: CommandStaff
+  #     - type: PreventShipyardTitleOverwrite
+
+- type: startingGear
+  id: MilitiaGear
+  # equipment:
+  #   ears:
+  #   belt:
+  #   pocket1:
+  #   pocket2:
+  # storage:
+  #   back:
+  #   - RadioHandheldNF

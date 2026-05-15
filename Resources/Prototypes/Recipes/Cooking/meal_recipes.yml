@@ -1444,6 +1444,18 @@
 
 #Other
 
+- type: microwaveMealRecipe  # Forge-Change-Comp
+  id: RecipeHotdog  
+  name: hotdog recipe  
+  result: FoodMealHotdog  
+  time: 10  
+  group: Savory  
+  solids:  
+    FoodMeatCutlet: 1
+    FoodBreadBun: 1  
+  recipeType:  
+  - Oven
+
 - type: microwaveMealRecipe
   id: RecipeCubanCarp
   name: Cuban carp recipe
@@ -1649,6 +1661,19 @@
     Egg: 6
     SodaWater: 5
   recipeType: Oven # Frontier
+
+- type: microwaveMealRecipe  # Forge-Change-Comp
+  id: RecipeWaffleCone  
+  name: waffle cone recipe  
+  result: FoodBakedWaffleCone  
+  time: 10  
+  group: Breakfast  
+  reagents:  
+    Flour: 5  
+    Milk: 3  
+    Egg: 3  
+    Sugar: 5  
+  recipeType: Oven
 
 - type: microwaveMealRecipe
   id: RecipeCookie

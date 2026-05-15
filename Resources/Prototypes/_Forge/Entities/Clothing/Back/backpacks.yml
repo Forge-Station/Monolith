@@ -10,3 +10,21 @@
     grid:
     - 0,0,6,3
     maxItemSize: Huge
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingTraumaBackpack
+  name: trauma backpack
+  description: A spacious backpack with lots of pockets, worn by military structures.
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Back/Backpacks/tti.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Back/Backpacks/tti.rsi
+  - type: Storage
+    grid:
+    - 0,0,6,3
+    maxItemSize: Huge
+  - type: ExplosionResistance
+    damageCoefficient: 0.25

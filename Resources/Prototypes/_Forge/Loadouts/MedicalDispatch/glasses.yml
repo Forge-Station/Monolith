@@ -1,0 +1,16 @@
+# All Forge
+- type: loadoutGroup
+  id: MdMedicGlasses
+  name: loadout-group-contractor-glasses
+  loadouts:
+  - MdMedicClothingEyesHudTrauma
+  subgroups:
+  - ContractorGlasses
+  fallbacks:
+  - MdMedicClothingEyesHudTrauma
+
+- type: loadout
+  id: MdMedicClothingEyesHudTrauma
+  price: 0
+  equipment:
+    eyes: ClothingEyesHudTrauma

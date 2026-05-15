@@ -1,0 +1,41 @@
+- type: job
+  id: Watchman
+  name: forge-job-name-watchman
+  description: forge-job-desc-watchman
+  playTimeTracker: JobWatchman
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hours
+  startingGear: WatchmanGear
+  alwaysUseSpawner: true
+  setPreference: false
+  overrideConsoleVisibility: true
+  icon: JobIconRenegateWatchman
+  requireAdminNotify: true
+  supervisors: job-supervisors-Baron
+  weight: 50
+  displayWeight: 10
+  assignedCompany: Renegates
+  canBeAntag: false
+  access:
+  - Renegate
+  accessGroups:
+  - GeneralRenegateAccess
+  # special:
+  # - !type:AddImplantSpecial
+  #   implants: # Неизвестно
+  # - !type:AddComponentSpecial
+  #   components:
+  #     - type: CommandStaff
+  #     - type: PreventShipyardTitleOverwrite
+
+- type: startingGear
+  id: WatchmanGear
+  # equipment:
+  #   ears:
+  #   belt:
+  #   pocket1:
+  #   pocket2:
+  # storage:
+  #   back:
+  #   - RadioHandheldNF

@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.CrewManifest;
+using Content.Server.Medical.SuitSensors;
 using Content.Server.DeviceLinking.Components;
 using Content.Server.Medical.CrewMonitoring;
 using Content.Server.Pinpointer;
@@ -9,7 +10,7 @@ using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Roles;
 using Content.Shared.SecApartment;
 using Content.Shared.Security.Components;
-using Content.Shared.Station;
+using Content.Server.Station.Systems;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
@@ -21,7 +22,7 @@ namespace Content.Server.SecApartment;
 
 public sealed partial class SecApartmentSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -446,7 +447,12 @@ public sealed partial class SecApartmentSystem : EntitySystem
                         .FirstOrDefault(s => s.Name == entry.Name && s.Job == entry.JobTitle);
 
                     status = sensor;
-                    ownerUid = sensor?.OwnerUid;
+                    if (sensor != null)
+                    {
+                        var sensorEntity = GetEntity(sensor.SuitSensorUid);
+                        if (TryComp<SuitSensorComponent>(sensorEntity, out var sensorComp) && sensorComp.User != null)
+                            ownerUid = GetNetEntity(sensorComp.User.Value);
+                    }
                 }
 
                 var memberId = GenerateMemberId(entry);
@@ -483,7 +489,10 @@ public sealed partial class SecApartmentSystem : EntitySystem
             if (!memberInfo.SensorStatus.IsAlive)
                 continue;
 
-            var ownerUid = GetEntity(memberInfo.SensorStatus.OwnerUid);
+            if (memberInfo.OwnerUid == null)
+                continue;
+
+            var ownerUid = GetEntity(memberInfo.OwnerUid.Value);
             var memberTransform = Transform(ownerUid);
             if (memberTransform.GridUid == null)
                 continue;

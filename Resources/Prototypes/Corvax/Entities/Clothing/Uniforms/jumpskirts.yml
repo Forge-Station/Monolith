@@ -22,28 +22,6 @@
       sprite: Corvax/Clothing/Uniforms/Jumpskirt/centcom_officer.rsi
 
 - type: entity
-  parent: ClothingUniformSkirtBase
-  id: ClothingUniformJumpskirtElegantMaid
-  name: elegant maid uniform
-  description: Call me master and bring me some beer.
-  components:
-    - type: Sprite
-      sprite: Corvax/Clothing/Uniforms/Jumpskirt/elegantmaid.rsi
-    - type: Clothing
-      sprite: Corvax/Clothing/Uniforms/Jumpskirt/elegantmaid.rsi
-
-- type: entity
-  parent: ClothingUniformSkirtBase
-  id: ClothingUniformJumpskirtSchool
-  name: school skirt
-  description: Stylish and comfortable school skirt.
-  components:
-  - type: Sprite
-    sprite: Corvax/Clothing/Uniforms/Jumpskirt/schoolskirt.rsi
-  - type: Clothing
-    sprite: Corvax/Clothing/Uniforms/Jumpskirt/schoolskirt.rsi
-
-- type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpskirtCapTurtleneck
   name: captain's turtleneck

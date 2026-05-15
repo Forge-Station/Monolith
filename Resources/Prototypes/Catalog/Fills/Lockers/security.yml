@@ -31,7 +31,6 @@
   parent: LockerWarden
   categories: [ HideSpawnMenu ] # Frontier
   components:
-<<<<<<< HEAD
   - type: StorageFill
     contents:
       - id: FlashlightSeclite
@@ -52,51 +51,6 @@
       - id: RemoteSignaller
         amount: 2
       - id: Binoculars
-=======
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:NestedSelector
-        tableId: FillLockerWarden
-
-- type: entityTable
-  id: FillLockerWarden
-  table: !type:AllSelector
-    children:
-    - id: FlashlightSeclite
-    - id: WeaponDisabler
-    # - id: WeaponTaser # Corvax-Wega-Edit
-    - id: ClothingBeltSecurityFilled
-    - id: Flash
-    - id: ClothingEyesGlassesSecurity
-    - id: ClothingHandsGlovesCombat
-    - id: ClothingShoesBootsJack
-    - id: ClothingOuterCoatWarden
-    - id: ClothingOuterWinterWarden
-    - id: ClothingHandsGlovesKravMaga # corvax-wega-krav-maga
-    - id: WiretappingTerminal # corvax-wega
-    - id: RubberStampWarden
-    - id: DoorRemoteArmory
-    - id: HoloprojectorSecurity
-    - id: BookSpaceLaw
-    - id: ClothingHeadHatCapWardenAlt # Corvax-SecFashion
-    - id: ClothingOuterCoatWardenAlt # Corvax-SecFashion
-    - id: ClothingBackpackWarden # Corvax-SecFashion
-    - id: ClothingBackpackElectropack
-    - id: ClothingNeckShockCollar # Corvax-Wega-Add
-    - id: RemoteSignaller
-      amount: 2
-    - id: NetworkConfigurator
-    - id: Binoculars
-    - id: SecApartmentTablet # Corvax-Wega-SecApartment
-
-- type: entityTable
-  id: FillLockerWardenHarduit
-  table: !type:AllSelector
-    children:
-    - id: ClothingOuterHardsuitWarden
-    - id: OxygenTankFilled
-    - id: ClothingMaskBreath
->>>>>>> d72243823a ( Небольшое обновление СБ (#288))
 
 - type: entity
   id: LockerSecurityFilled
@@ -104,7 +58,6 @@
   parent: LockerSecurity
   categories: [ HideSpawnMenu ] # Frontier
   components:
-<<<<<<< HEAD
   - type: StorageFill
     contents:
       - id: FlashlightSeclite
@@ -127,40 +80,6 @@
         prob: 0.6
       - id: BookSpaceLaw
         prob: 0.5
-=======
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:NestedSelector
-        tableId: FillLockerSecurity
-
-- type: entityTable
-  id: FillLockerSecurity
-  table: !type:AllSelector
-    children:
-    - id: FlashlightSeclite
-      prob: 0.8
-    - id: WeaponDisabler
-    # - id: WeaponTaser # Corvax-Wega-Edit
-    - id: ClothingUniformJumpsuitSecGrey
-      prob: 0.3
-    - id: ClothingHeadHelmetBasic
-    - id: ClothingOuterArmorBasic
-    - id: ClothingBeltSecurityFilled
-    - id: Flash
-      prob: 0.5
-    - id: ClothingEyesGlassesSecurity
-    - id: ClothingHeadsetSecurity
-    - id: ClothingHandsGlovesColorBlack
-    - id: ClothingShoesBootsJack
-    - id: WeaponMeleeNeedle
-      prob: 0.1
-    - id: HoloprojectorSecurity
-      prob: 0.6
-    - id: BookSpaceLaw
-      prob: 0.5
-    - id: ClothingOuterCoatSecurityOvercoat # Corvax-SecFashion
-      prob: 0.2
->>>>>>> d72243823a ( Небольшое обновление СБ (#288))
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -168,7 +87,6 @@
   parent: LockerBrigmedic
   categories: [ HideSpawnMenu ] # Frontier
   components:
-<<<<<<< HEAD
   - type: StorageFill
     contents:
       - id: ClothingEyesGlassesSecurity
@@ -198,62 +116,6 @@
         prob: 0.7
       - id: ClothingNeckCloakMoth #bzzz Moth-pocalypse
         prob: 0.15
-=======
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:NestedSelector
-        tableId: FillLockerBrigmedic
-
-- type: entityTable
-  id: FillLockerBrigmedic
-  table: !type:AllSelector
-    children:
-    - id: ClothingEyesGlassesSecurity
-    # - id: WeaponTaser # Corvax-Wega-Edit
-    - id: WeaponDisabler
-    - id: TrackingImplanter
-      amount: 2
-    - id: ClothingOuterHardsuitBrigmedic
-    - id: BoxSterileMask
-    - id: ClothingHeadHatBeretBrigmedic
-    - id: ClothingOuterCoatAMG
-    - id: ClothingUniformJumpsuitBrigmedic
-    - id: ClothingUniformJumpskirtBrigmedic
-    - id: ClothingUniformJumpskirtOfLife
-      prob: 0.1
-    - id: MedkitFilled
-    #Corvax Delete start
-    #- !type:GroupSelector
-    #  prob: 0.7
-    #  children:
-    #  - id: MedkitCombatFilled
-    #    weight: 1.6
-    #  - id: MedkitAdvancedFilled
-    #  - id: MedkitOxygenFilled
-    #    weight: 0.8
-    #  - id: MedkitBruteFilled
-    #    weight: 0.8
-    #  - id: MedkitToxinFilled
-    #    weight: 0.8
-    #  - id: MedkitBurnFilled
-    #    weight: 1.8
-    #Corvax Delete end
-    - id: ClothingNeckCloakMoth #bzzz Moth-pocalypse
-      prob: 0.15
-    - id: ClothingHeadHelmetSecurityMedic # Corvax-Resprite
-    - id: ClothingOuterVestSecurityMedic # Corvax-Resprite
-      prob: 0.5
-    - id: ClothingOuterCoatLabSecurityMedic # Corvax-Resprite
-      prob: 0.5
-    # Corvax-Wega-Brigmedic-start
-    - id: ClothingMaskBreathMedicalSecurity
-    - id: BoxBodyBag
-    - id: Defibrillator
-    - id: PowerCellHigh
-      amount: 2
-    - id: SurgerykitFilled
-    # Corvax-Wega-Brigmedic-end
->>>>>>> d72243823a ( Небольшое обновление СБ (#288))
 
 - type: entity
   id: LockerDetectiveFilled
@@ -261,7 +123,6 @@
   parent: LockerDetective
   categories: [ HideSpawnMenu ] # Frontier
   components:
-<<<<<<< HEAD
   - type: StorageFill
     contents:
       - id: ClothingEyesGlassesSecurity
@@ -280,36 +141,6 @@
       - id: HoloprojectorSecurity
       - id: BoxEvidenceMarkers
       - id: HandLabeler
-=======
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:NestedSelector
-        tableId: FillLockerDetective
-
-- type: entityTable
-  id: FillLockerDetective
-  table: !type:AllSelector
-    children:
-    - id: ClothingEyesGlassesNoir
-    - id: ClothingHeadHatDetGadget
-    - id: ClothingNeckTieDet
-    - id: ClothingOuterVestDetective
-    - id: ClothingOuterCoatDetectiveLoadout
-    - id: FlippoEngravedLighter
-    - id: FlashlightSeclite
-    - id: ForensicScanner
-    - id: LogProbeCartridge
-    - id: BoxForensicPad
-    - id: DrinkDetFlask
-    - id: ClothingHandsGlovesForensic
-    - id: RubberStampDetective
-    - id: BookBusido # Corvax-Books
-    - id: HoloprojectorSecurity
-    - id: BoxEvidenceMarkers
-    - id: HandLabeler
-    - id: BoxTapeRecorder # Corvax-Wega-Recorder
-    - id: WeaponDisabler # Corvax-Wega-Add
->>>>>>> d72243823a ( Небольшое обновление СБ (#288))
 
 - type: entity
   id: ClosetBombFilled
@@ -426,10 +257,3 @@
     contents:
     - id: WeaponLaserCarbine
       amount: 3
-<<<<<<< HEAD
-=======
-# Corvax-Wega-start
-    - id: PortableRecharger
-      amount: 3
-# Corvax-Wega-end
->>>>>>> d72243823a ( Небольшое обновление СБ (#288))

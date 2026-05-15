@@ -1,45 +1,17 @@
 - type: entity
   abstract: true
+  parent: ClothingUniformBase
   id: ClothingUniformDamageableBase
-  components:
-  - type: TearableClothing
-  - type: Damageable
-    damageContainer: Clothing
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 51 # 3 saber strikes
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: TearClothing
-      - !type:EmptyContainersBehaviour
-        containers:
-        - storagebase
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialCloth1:
-            min: 3
-            max: 3
 
 - type: entity
   abstract: true
   parent: ClothingUniformBase
   id: ClothingUniformToggleableBase
-  components:
-  - type: ToggleableSpriteClothing
-    defaultSuffix: "-down"
 
 - type: entity
   abstract: true
   parent: ClothingUniformSkirtBase
   id: ClothingUniformSkirtToggleableBase
-  components:
-  - type: ToggleableSpriteClothing
-    defaultSuffix: "-down"
 
 - type: entity
   abstract: true

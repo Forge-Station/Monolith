@@ -993,17 +993,6 @@
     radius: 1
     energy: 1.2
     color: "#78645c"
-<<<<<<< HEAD
-=======
-  # Corvax-Wega-Add-Start
-  - type: Voucher
-    typeVoucher: Security
-  # Corvax-Wega-Add-End
-  - type: GuideHelp
-    guides:
-    - Security
-    - Antagonists
->>>>>>> d72243823a ( Небольшое обновление СБ (#288))
 
 - type: entity
   parent: VendingMachine

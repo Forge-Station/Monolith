@@ -19,9 +19,6 @@
     sprite: _Wega/Clothing/Uniforms/Jumpsuit/surgeon.rsi
   - type: Clothing
     sprite: _Wega/Clothing/Uniforms/Jumpsuit/surgeon.rsi
-  - type: DiseaseProtection
-    protection: 0.1
-  - type: ClothingSterility
 
 - type: entity
   parent: [ ClothingUniformBase, ClothingSecurityUniformBase ]

@@ -54,17 +54,4 @@
   storage:
     back:
     - Flash
-<<<<<<< HEAD
     - Magazine45_ACPPistolFMJ
-=======
-    - MagazinePistol
-    - SecurityVoucherCard # Corvax-Wega-Voucher
-
-- type: chameleonOutfit
-  id: HeadOfSecurityChameleonOutfit
-  job: HeadOfSecurity
-  hasMindShield: true
-  equipment:
-    mask: ClothingMaskGasSecurity
-    neck: ClothingNeckCloakHos
->>>>>>> d72243823a ( Небольшое обновление СБ (#288))

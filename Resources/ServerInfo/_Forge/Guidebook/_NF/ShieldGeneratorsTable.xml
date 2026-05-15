@@ -77,6 +77,8 @@
 
   ## Гражданские FSG
 
+  Числовые колонки (кроме тира) подставляются из entity-прототипов через [italic]protodata[/italic] — те же значения `ShipShieldEmitter`, что в YAML и в симуляции.
+
   <Table Columns="10">
     <ColorBox Color="#3a3a5a">
       <Box HorizontalAlignment="Center" Margin="4">[bold]Модель[/bold]</Box>
@@ -111,208 +113,210 @@
 
     <ColorBox><Box Margin="3">FSG-90R «Искра»</Box></ColorBox>
     <ColorBox><Box Margin="3">1</Box></ColorBox>
-    <ColorBox><Box Margin="3">44000</Box></ColorBox>
-    <ColorBox><Box Margin="3">690</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.06</Box></ColorBox>
-    <ColorBox><Box Margin="3">18000</Box></ColorBox>
-    <ColorBox><Box Margin="3">54000</Box></ColorBox>
-    <ColorBox><Box Margin="3">3.5</Box></ColorBox>
-    <ColorBox><Box Margin="3">51</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.58</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG90R" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG90R" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG90R" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG90R" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG90R" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG90R" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG90R" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG90R" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-100 «Киль»</Box></ColorBox>
     <ColorBox><Box Margin="3">1</Box></ColorBox>
-    <ColorBox><Box Margin="3">50000</Box></ColorBox>
-    <ColorBox><Box Margin="3">600</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
-    <ColorBox><Box Margin="3">20000</Box></ColorBox>
-    <ColorBox><Box Margin="3">60000</Box></ColorBox>
-    <ColorBox><Box Margin="3">3</Box></ColorBox>
-    <ColorBox><Box Margin="3">60</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.50</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG100" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG100" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG100" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG100" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG100" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG100" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG100" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG100" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-110P «Ореол»</Box></ColorBox>
     <ColorBox><Box Margin="3">1</Box></ColorBox>
-    <ColorBox><Box Margin="3">67500</Box></ColorBox>
-    <ColorBox><Box Margin="3">450</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
-    <ColorBox><Box Margin="3">22000</Box></ColorBox>
-    <ColorBox><Box Margin="3">63000</Box></ColorBox>
-    <ColorBox><Box Margin="3">2.5</Box></ColorBox>
-    <ColorBox><Box Margin="3">75</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.55</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG110P" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG110P" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG110P" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG110P" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG110P" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG110P" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG110P" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG110P" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-85E «Браунаут»</Box></ColorBox>
     <ColorBox><Box Margin="3">1</Box></ColorBox>
-    <ColorBox><Box Margin="3">38000</Box></ColorBox>
-    <ColorBox><Box Margin="3">555</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.11</Box></ColorBox>
-    <ColorBox><Box Margin="3">14000</Box></ColorBox>
-    <ColorBox><Box Margin="3">48000</Box></ColorBox>
-    <ColorBox><Box Margin="3">5.5</Box></ColorBox>
-    <ColorBox><Box Margin="3">48</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.52</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG85E" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG85E" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG85E" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG85E" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG85E" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG85E" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG85E" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG85E" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-160C «Рамарт»</Box></ColorBox>
     <ColorBox><Box Margin="3">2</Box></ColorBox>
-    <ColorBox><Box Margin="3">85000</Box></ColorBox>
-    <ColorBox><Box Margin="3">720</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.06</Box></ColorBox>
-    <ColorBox><Box Margin="3">38000</Box></ColorBox>
-    <ColorBox><Box Margin="3">114000</Box></ColorBox>
-    <ColorBox><Box Margin="3">4</Box></ColorBox>
-    <ColorBox><Box Margin="3">92</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.22</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG160C" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG160C" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG160C" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG160C" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG160C" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG160C" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG160C" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG160C" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-220 «Авангард»</Box></ColorBox>
     <ColorBox><Box Margin="3">2</Box></ColorBox>
-    <ColorBox><Box Margin="3">100000</Box></ColorBox>
-    <ColorBox><Box Margin="3">800</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
-    <ColorBox><Box Margin="3">40000</Box></ColorBox>
-    <ColorBox><Box Margin="3">120000</Box></ColorBox>
-    <ColorBox><Box Margin="3">4</Box></ColorBox>
-    <ColorBox><Box Margin="3">80</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.50</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG220" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG220" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG220" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG220" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG220" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG220" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG220" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG220" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-250C «Волнорез»</Box></ColorBox>
     <ColorBox><Box Margin="3">2</Box></ColorBox>
-    <ColorBox><Box Margin="3">95000</Box></ColorBox>
-    <ColorBox><Box Margin="3">720</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
-    <ColorBox><Box Margin="3">42000</Box></ColorBox>
-    <ColorBox><Box Margin="3">110000</Box></ColorBox>
-    <ColorBox><Box Margin="3">4</Box></ColorBox>
-    <ColorBox><Box Margin="3">88</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.15</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG250C" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG250C" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG250C" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG250C" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG250C" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG250C" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG250C" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG250C" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
-    <ColorBox><Box Margin="3">FSG-330R «Рысь»</Box></ColorBox>
+    <ColorBox><Box Margin="3">FSG-330R «Быстроход»</Box></ColorBox>
     <ColorBox><Box Margin="3">2</Box></ColorBox>
-    <ColorBox><Box Margin="3">90000</Box></ColorBox>
-    <ColorBox><Box Margin="3">960</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.08</Box></ColorBox>
-    <ColorBox><Box Margin="3">44000</Box></ColorBox>
-    <ColorBox><Box Margin="3">130000</Box></ColorBox>
-    <ColorBox><Box Margin="3">5</Box></ColorBox>
-    <ColorBox><Box Margin="3">72</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.45</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG330R" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG330R" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG330R" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG330R" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG330R" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG330R" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG330R" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG330R" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-355S «Сито»</Box></ColorBox>
     <ColorBox><Box Margin="3">2</Box></ColorBox>
-    <ColorBox><Box Margin="3">72000</Box></ColorBox>
-    <ColorBox><Box Margin="3">880</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.97</Box></ColorBox>
-    <ColorBox><Box Margin="3">43000</Box></ColorBox>
-    <ColorBox><Box Margin="3">118000</Box></ColorBox>
-    <ColorBox><Box Margin="3">3.2</Box></ColorBox>
-    <ColorBox><Box Margin="3">108</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.48</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG355S" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG355S" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG355S" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG355S" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG355S" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG355S" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG355S" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG355S" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-195L «Касательная»</Box></ColorBox>
     <ColorBox><Box Margin="3">2</Box></ColorBox>
-    <ColorBox><Box Margin="3">92000</Box></ColorBox>
-    <ColorBox><Box Margin="3">780</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.03</Box></ColorBox>
-    <ColorBox><Box Margin="3">38000</Box></ColorBox>
-    <ColorBox><Box Margin="3">115000</Box></ColorBox>
-    <ColorBox><Box Margin="3">4.2</Box></ColorBox>
-    <ColorBox><Box Margin="3">78</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.46</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG195L" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG195L" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG195L" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG195L" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG195L" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG195L" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG195L" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG195L" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-275P «Переплет»</Box></ColorBox>
     <ColorBox><Box Margin="3">2</Box></ColorBox>
-    <ColorBox><Box Margin="3">98000</Box></ColorBox>
-    <ColorBox><Box Margin="3">750</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.04</Box></ColorBox>
-    <ColorBox><Box Margin="3">42000</Box></ColorBox>
-    <ColorBox><Box Margin="3">122000</Box></ColorBox>
-    <ColorBox><Box Margin="3">4</Box></ColorBox>
-    <ColorBox><Box Margin="3">82</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.40</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG275P" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG275P" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG275P" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG275P" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG275P" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG275P" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG275P" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG275P" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-305V «Шина»</Box></ColorBox>
     <ColorBox><Box Margin="3">2</Box></ColorBox>
-    <ColorBox><Box Margin="3">102000</Box></ColorBox>
-    <ColorBox><Box Margin="3">900</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
-    <ColorBox><Box Margin="3">45000</Box></ColorBox>
-    <ColorBox><Box Margin="3">128000</Box></ColorBox>
-    <ColorBox><Box Margin="3">4.8</Box></ColorBox>
-    <ColorBox><Box Margin="3">72</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.43</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG305V" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG305V" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG305V" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG305V" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG305V" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG305V" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG305V" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG305V" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-420 «Редут»</Box></ColorBox>
     <ColorBox><Box Margin="3">3</Box></ColorBox>
-    <ColorBox><Box Margin="3">108000</Box></ColorBox>
-    <ColorBox><Box Margin="3">1650</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.06</Box></ColorBox>
-    <ColorBox><Box Margin="3">54000</Box></ColorBox>
-    <ColorBox><Box Margin="3">162000</Box></ColorBox>
-    <ColorBox><Box Margin="3">5.5</Box></ColorBox>
-    <ColorBox><Box Margin="3">84</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.05</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG420" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG420" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG420" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG420" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG420" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG420" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG420" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG420" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-470P «Решётка»</Box></ColorBox>
     <ColorBox><Box Margin="3">3</Box></ColorBox>
-    <ColorBox><Box Margin="3">234000</Box></ColorBox>
-    <ColorBox><Box Margin="3">1200</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
-    <ColorBox><Box Margin="3">66000</Box></ColorBox>
-    <ColorBox><Box Margin="3">198000</Box></ColorBox>
-    <ColorBox><Box Margin="3">4</Box></ColorBox>
-    <ColorBox><Box Margin="3">150</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.16</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG470P" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG470P" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG470P" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG470P" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG470P" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG470P" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG470P" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG470P" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-600C «Бастион»</Box></ColorBox>
     <ColorBox><Box Margin="3">3</Box></ColorBox>
-    <ColorBox><Box Margin="3">108000</Box></ColorBox>
-    <ColorBox><Box Margin="3">1350</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.00</Box></ColorBox>
-    <ColorBox><Box Margin="3">62000</Box></ColorBox>
-    <ColorBox><Box Margin="3">174000</Box></ColorBox>
-    <ColorBox><Box Margin="3">5</Box></ColorBox>
-    <ColorBox><Box Margin="3">165</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.03</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG600C" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG600C" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG600C" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG600C" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG600C" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG600C" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG600C" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG600C" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-900P «Призменная корона»</Box></ColorBox>
     <ColorBox><Box Margin="3">4</Box></ColorBox>
-    <ColorBox><Box Margin="3">300000</Box></ColorBox>
-    <ColorBox><Box Margin="3">2250</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.97</Box></ColorBox>
-    <ColorBox><Box Margin="3">100000</Box></ColorBox>
-    <ColorBox><Box Margin="3">300000</Box></ColorBox>
-    <ColorBox><Box Margin="3">4</Box></ColorBox>
-    <ColorBox><Box Margin="3">260</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.08</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG900P" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG900P" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG900P" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG900P" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG900P" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG900P" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG900P" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG900P" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-870R «Излом»</Box></ColorBox>
     <ColorBox><Box Margin="3">4</Box></ColorBox>
-    <ColorBox><Box Margin="3">132000</Box></ColorBox>
-    <ColorBox><Box Margin="3">3600</Box></ColorBox>
-    <ColorBox><Box Margin="3">1.05</Box></ColorBox>
-    <ColorBox><Box Margin="3">82000</Box></ColorBox>
-    <ColorBox><Box Margin="3">246000</Box></ColorBox>
-    <ColorBox><Box Margin="3">5.8</Box></ColorBox>
-    <ColorBox><Box Margin="3">118</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.42</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG870R" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG870R" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG870R" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG870R" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG870R" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG870R" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG870R" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG870R" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
     <ColorBox><Box Margin="3">FSG-950M «Наковальня»</Box></ColorBox>
     <ColorBox><Box Margin="3">4</Box></ColorBox>
-    <ColorBox><Box Margin="3">465000</Box></ColorBox>
-    <ColorBox><Box Margin="3">1020</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.93</Box></ColorBox>
-    <ColorBox><Box Margin="3">118000</Box></ColorBox>
-    <ColorBox><Box Margin="3">354000</Box></ColorBox>
-    <ColorBox><Box Margin="3">3.8</Box></ColorBox>
-    <ColorBox><Box Margin="3">295</Box></ColorBox>
-    <ColorBox><Box Margin="3">0.055</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG950M" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG950M" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG950M" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG950M" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG950M" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG950M" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG950M" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox>
+    <ColorBox><Box Margin="3">[protodata="ShieldGeneratorFSG950M" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
   </Table>
 
-  [italic]У гражданских FSG значение [bold]ApcPowerReceiver.powerLoad[/bold] совпадает с базовым draw. Регуляторные FSG-195L / 275P / 305V — отдельное исследование после средних массивов. FSG-870R и FSG-950M в дереве РНД нет: платы попадают на сервер только с редкого технодиска (лут с дронов в ветке fracture-дисков). У «Касательной» в формуле нагрузки есть линейный член, у «Переплета» — частичное пробитие залпом, у «Шины» реген зависит от отдачи АПЦ, а длительность простоя после тяжёлого срыва может быть дольше базовой колонки. Подробности — [textlink="каталог FSG" link="ShieldGeneratorsFSG"].[/italic]
+  [italic]У большинства гражданских FSG [bold]ApcPowerReceiver.powerLoad[/bold] совпадает с [italic]baseDraw[/italic]; исключения — FSG-420 «Редут» (на АПЦ 54 кВт при базе 60 кВт) и FSG-600C «Бастион» (62 кВт при базе 61.8 кВт). Регуляторные FSG-195L / 275P / 305V — отдельное исследование после средних массивов. FSG-870R и FSG-950M в дереве РНД нет: платы попадают на сервер только с редкого технодиска (лут с дронов в ветке fracture-дисков). У «Касательной» в формуле нагрузки есть линейный член, у «Переплета» — частичное пробитие залпом, у «Шины» реген зависит от отдачи АПЦ, а длительность простоя после тяжёлого срыва может быть дольше базовой колонки. Подробности — [textlink="каталог FSG" link="ShieldGeneratorsFSG"].[/italic]
 
   ---
 
   ## Фракционные (тир 3)
+
+  Числовые колонки (лимит, реген, рост, база, пик, бонус, перегруз, таран) подставляются из entity-прототипов через [italic]protodata[/italic]. Колонки «Фракция», «Серия», «Модель» — для чтения.
 
   <Table Columns="11">
     <ColorBox Color="#3a3a5a">
@@ -349,37 +353,39 @@
       <Box HorizontalAlignment="Center" Margin="3">[bold]Таран[/bold]</Box>
     </ColorBox>
 
-    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">SGS-440 «Цитадель»</Box></ColorBox><ColorBox><Box Margin="2">125000</Box></ColorBox><ColorBox><Box Margin="2">2050</Box></ColorBox><ColorBox><Box Margin="2">1.02</Box></ColorBox><ColorBox><Box Margin="2">62000</Box></ColorBox><ColorBox><Box Margin="2">182000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">55</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox>
-    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">SGS-470P «Корона»</Box></ColorBox><ColorBox><Box Margin="2">252000</Box></ColorBox><ColorBox><Box Margin="2">1380</Box></ColorBox><ColorBox><Box Margin="2">1.09</Box></ColorBox><ColorBox><Box Margin="2">72600</Box></ColorBox><ColorBox><Box Margin="2">205000</Box></ColorBox><ColorBox><Box Margin="2">3.5</Box></ColorBox><ColorBox><Box Margin="2">82</Box></ColorBox><ColorBox><Box Margin="2">0.16</Box></ColorBox>
-    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">SGS-600C «Шеллбрейк»</Box></ColorBox><ColorBox><Box Margin="2">108000</Box></ColorBox><ColorBox><Box Margin="2">705</Box></ColorBox><ColorBox><Box Margin="2">1.00</Box></ColorBox><ColorBox><Box Margin="2">62000</Box></ColorBox><ColorBox><Box Margin="2">162000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">175</Box></ColorBox><ColorBox><Box Margin="2">0.023</Box></ColorBox>
-    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">455</Box></ColorBox><ColorBox><Box Margin="2">SGS-455 «Стрела»</Box></ColorBox><ColorBox><Box Margin="2">198000</Box></ColorBox><ColorBox><Box Margin="2">1180</Box></ColorBox><ColorBox><Box Margin="2">1.11</Box></ColorBox><ColorBox><Box Margin="2">58000</Box></ColorBox><ColorBox><Box Margin="2">178000</Box></ColorBox><ColorBox><Box Margin="2">4.5</Box></ColorBox><ColorBox><Box Margin="2">98</Box></ColorBox><ColorBox><Box Margin="2">0.11</Box></ColorBox>
+    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">SGS-440 «Цитадель»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">SGS-470P «Корона»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">SGS-600C «Шеллбрейк»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">ТСФМЦ</Box></ColorBox><ColorBox><Box Margin="2">455</Box></ColorBox><ColorBox><Box Margin="2">SGS-455 «Стрела»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
-    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">SGS-420 «Передовой редут»</Box></ColorBox><ColorBox><Box Margin="2">76000</Box></ColorBox><ColorBox><Box Margin="2">1260</Box></ColorBox><ColorBox><Box Margin="2">1.08</Box></ColorBox><ColorBox><Box Margin="2">40500</Box></ColorBox><ColorBox><Box Margin="2">119000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">120</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox>
-    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">SGS-470P «Полярная решётка»</Box></ColorBox><ColorBox><Box Margin="2">188000</Box></ColorBox><ColorBox><Box Margin="2">1020</Box></ColorBox><ColorBox><Box Margin="2">1.08</Box></ColorBox><ColorBox><Box Margin="2">52800</Box></ColorBox><ColorBox><Box Margin="2">152000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">150</Box></ColorBox><ColorBox><Box Margin="2">0.16</Box></ColorBox>
-    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">SGS-600C «Ледокол»</Box></ColorBox><ColorBox><Box Margin="2">137000</Box></ColorBox><ColorBox><Box Margin="2">1665</Box></ColorBox><ColorBox><Box Margin="2">0.92</Box></ColorBox><ColorBox><Box Margin="2">65500</Box></ColorBox><ColorBox><Box Margin="2">151000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">165</Box></ColorBox><ColorBox><Box Margin="2">0.041</Box></ColorBox>
-    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">435</Box></ColorBox><ColorBox><Box Margin="2">SGS-435 «Керчь»</Box></ColorBox><ColorBox><Box Margin="2">62000</Box></ColorBox><ColorBox><Box Margin="2">1000</Box></ColorBox><ColorBox><Box Margin="2">1.09</Box></ColorBox><ColorBox><Box Margin="2">32000</Box></ColorBox><ColorBox><Box Margin="2">105000</Box></ColorBox><ColorBox><Box Margin="2">6.2</Box></ColorBox><ColorBox><Box Margin="2">110</Box></ColorBox><ColorBox><Box Margin="2">0.38</Box></ColorBox>
+    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">SGS-420 «Передовой редут»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">SGS-470P «Полярная решётка»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">SGS-600C «Ледокол»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Союз</Box></ColorBox><ColorBox><Box Margin="2">435</Box></ColorBox><ColorBox><Box Margin="2">SGS-435 «Керчь»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
-    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">RSG-420 «Пыльная цитадель»</Box></ColorBox><ColorBox><Box Margin="2">76000</Box></ColorBox><ColorBox><Box Margin="2">1980</Box></ColorBox><ColorBox><Box Margin="2">1.14</Box></ColorBox><ColorBox><Box Margin="2">46500</Box></ColorBox><ColorBox><Box Margin="2">156000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">28</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox>
-    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">RSG-470P «Азимут»</Box></ColorBox><ColorBox><Box Margin="2">234000</Box></ColorBox><ColorBox><Box Margin="2">1380</Box></ColorBox><ColorBox><Box Margin="2">1.08</Box></ColorBox><ColorBox><Box Margin="2">58800</Box></ColorBox><ColorBox><Box Margin="2">174000</Box></ColorBox><ColorBox><Box Margin="2">4</Box></ColorBox><ColorBox><Box Margin="2">80</Box></ColorBox><ColorBox><Box Margin="2">0.16</Box></ColorBox>
-    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">RSG-600C «Галандек»</Box></ColorBox><ColorBox><Box Margin="2">108000</Box></ColorBox><ColorBox><Box Margin="2">1584</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">66000</Box></ColorBox><ColorBox><Box Margin="2">191000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">158</Box></ColorBox><ColorBox><Box Margin="2">0.022</Box></ColorBox>
-    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">435</Box></ColorBox><ColorBox><Box Margin="2">RSG-435 «Черепная сделка»</Box></ColorBox><ColorBox><Box Margin="2">92000</Box></ColorBox><ColorBox><Box Margin="2">1850</Box></ColorBox><ColorBox><Box Margin="2">1.16</Box></ColorBox><ColorBox><Box Margin="2">52000</Box></ColorBox><ColorBox><Box Margin="2">172000</Box></ColorBox><ColorBox><Box Margin="2">5.5</Box></ColorBox><ColorBox><Box Margin="2">24</Box></ColorBox><ColorBox><Box Margin="2">0.32</Box></ColorBox>
+    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">RSG-420 «Пыльная цитадель»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">RSG-470P «Азимут»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">RSG-600C «Галандек»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Ренегаты</Box></ColorBox><ColorBox><Box Margin="2">435</Box></ColorBox><ColorBox><Box Margin="2">RSG-435 «Черепная сделка»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
-    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">VAS-420 «Медноголовая»</Box></ColorBox><ColorBox><Box Margin="2">77000</Box></ColorBox><ColorBox><Box Margin="2">1730</Box></ColorBox><ColorBox><Box Margin="2">1.12</Box></ColorBox><ColorBox><Box Margin="2">49500</Box></ColorBox><ColorBox><Box Margin="2">171000</Box></ColorBox><ColorBox><Box Margin="2">5.5</Box></ColorBox><ColorBox><Box Margin="2">84</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox>
-    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">VAS-470P «Стеклянная мамба»</Box></ColorBox><ColorBox><Box Margin="2">273000</Box></ColorBox><ColorBox><Box Margin="2">900</Box></ColorBox><ColorBox><Box Margin="2">1.06</Box></ColorBox><ColorBox><Box Margin="2">57200</Box></ColorBox><ColorBox><Box Margin="2">172000</Box></ColorBox><ColorBox><Box Margin="2">4</Box></ColorBox><ColorBox><Box Margin="2">122</Box></ColorBox><ColorBox><Box Margin="2">0.16</Box></ColorBox>
-    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">VAS-600C «Пила-клык»</Box></ColorBox><ColorBox><Box Margin="2">103000</Box></ColorBox><ColorBox><Box Margin="2">1170</Box></ColorBox><ColorBox><Box Margin="2">1.00</Box></ColorBox><ColorBox><Box Margin="2">59400</Box></ColorBox><ColorBox><Box Margin="2">171000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">182</Box></ColorBox><ColorBox><Box Margin="2">0.022</Box></ColorBox>
-    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">435</Box></ColorBox><ColorBox><Box Margin="2">VAS-435 «Коршун»</Box></ColorBox><ColorBox><Box Margin="2">62000</Box></ColorBox><ColorBox><Box Margin="2">1520</Box></ColorBox><ColorBox><Box Margin="2">1.11</Box></ColorBox><ColorBox><Box Margin="2">48000</Box></ColorBox><ColorBox><Box Margin="2">158000</Box></ColorBox><ColorBox><Box Margin="2">4.8</Box></ColorBox><ColorBox><Box Margin="2">42</Box></ColorBox><ColorBox><Box Margin="2">0.39</Box></ColorBox>
+    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">VAS-420 «Медноголовая»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">VAS-470P «Стеклянная мамба»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">VAS-600C «Пила-клык»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Гадюка</Box></ColorBox><ColorBox><Box Margin="2">435</Box></ColorBox><ColorBox><Box Margin="2">VAS-435 «Коршун»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
 
-    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">SGD-440 «Индиго»</Box></ColorBox><ColorBox><Box Margin="2">91000</Box></ColorBox><ColorBox><Box Margin="2">1340</Box></ColorBox><ColorBox><Box Margin="2">1.07</Box></ColorBox><ColorBox><Box Margin="2">40200</Box></ColorBox><ColorBox><Box Margin="2">146000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">56</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox>
-    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">SGD-470P «Клауза»</Box></ColorBox><ColorBox><Box Margin="2">249000</Box></ColorBox><ColorBox><Box Margin="2">1110</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">46200</Box></ColorBox><ColorBox><Box Margin="2">151000</Box></ColorBox><ColorBox><Box Margin="2">2.8</Box></ColorBox><ColorBox><Box Margin="2">116</Box></ColorBox><ColorBox><Box Margin="2">0.16</Box></ColorBox>
-    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">SGD-600C «Кинетический задел»</Box></ColorBox><ColorBox><Box Margin="2">112000</Box></ColorBox><ColorBox><Box Margin="2">1280</Box></ColorBox><ColorBox><Box Margin="2">1.00</Box></ColorBox><ColorBox><Box Margin="2">54500</Box></ColorBox><ColorBox><Box Margin="2">157000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">168</Box></ColorBox><ColorBox><Box Margin="2">0.027</Box></ColorBox>
-    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">435</Box></ColorBox><ColorBox><Box Margin="2">SGD-435 «Сейф»</Box></ColorBox><ColorBox><Box Margin="2">178000</Box></ColorBox><ColorBox><Box Margin="2">980</Box></ColorBox><ColorBox><Box Margin="2">1.02</Box></ColorBox><ColorBox><Box Margin="2">36000</Box></ColorBox><ColorBox><Box Margin="2">142000</Box></ColorBox><ColorBox><Box Margin="2">2.4</Box></ColorBox><ColorBox><Box Margin="2">138</Box></ColorBox><ColorBox><Box Margin="2">0.13</Box></ColorBox>
+    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">420</Box></ColorBox><ColorBox><Box Margin="2">SGD-440 «Индиго»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">470P</Box></ColorBox><ColorBox><Box Margin="2">SGD-470P «Клауза»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">600C</Box></ColorBox><ColorBox><Box Margin="2">SGD-600C «Кинетический задел»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
+    <ColorBox><Box Margin="2">Уллман</Box></ColorBox><ColorBox><Box Margin="2">435</Box></ColorBox><ColorBox><Box Margin="2">SGD-435 «Сейф»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox>
   </Table>
 
-  [italic]У фракционных линеек номинал на шине узла обычно совпадает с крейсерским чертежом. У SGD-435 «Сейф» занижен множитель степенной части нагрузки ([bold]powerModifier[/bold] 0.42): изношенный контур чуть меньше карает реактор, чем у стандартных соседей по классу (у остальных фракционных в паспорте обычно 0.5).[/italic]
+  [italic]У фракционных линеек номинал на шине узла обычно совпадает с крейсерским чертежом. У SGD-435 «Сейф» занижен [bold]powerModifier[/bold] относительно типичных 0,5 — актуальное число в [textlink="каталоге Ullman" link="ShieldGeneratorsUllman"] и в прототипе.[/italic]
 
   ---
 
   ## Линейка Mono и статика
+
+  Числовые колонки — из прототипов ([italic]protodata[/italic]). Колонка [bold]АПЦ Вт[/bold] здесь совпадает с [italic]baseDraw[/italic] у перечисленных моделей (в YAML так же задан [italic]powerLoad[/italic]).
 
   <Table Columns="10">
     <ColorBox Color="#3a3a5a">
@@ -413,20 +419,20 @@
       <Box HorizontalAlignment="Center" Margin="3">[bold]АПЦ Вт[/bold]</Box>
     </ColorBox>
 
-    <ColorBox><Box Margin="2">База щита (абстр.)</Box></ColorBox><ColorBox><Box Margin="2">180000</Box></ColorBox><ColorBox><Box Margin="2">1500</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">60000</Box></ColorBox><ColorBox><Box Margin="2">180000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">120</Box></ColorBox><ColorBox><Box Margin="2">0.40</Box></ColorBox><ColorBox><Box Margin="2">60000</Box></ColorBox>
+    <ColorBox><Box Margin="2">База щита (Т3)</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorT3Reference" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorT3Reference" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorT3Reference" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorT3Reference" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorT3Reference" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorT3Reference" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorT3Reference" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorT3Reference" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorT3Reference" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
 
-    <ColorBox><Box Margin="2">MS-100 «Часовой»</Box></ColorBox><ColorBox><Box Margin="2">50000</Box></ColorBox><ColorBox><Box Margin="2">600</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">20000</Box></ColorBox><ColorBox><Box Margin="2">60000</Box></ColorBox><ColorBox><Box Margin="2">3</Box></ColorBox><ColorBox><Box Margin="2">60</Box></ColorBox><ColorBox><Box Margin="2">0.50</Box></ColorBox><ColorBox><Box Margin="2">20000</Box></ColorBox>
+    <ColorBox><Box Margin="2">MS-100 «Часовой»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorSmall" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorSmall" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorSmall" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorSmall" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorSmall" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorSmall" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorSmall" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorSmall" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorSmall" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
 
-    <ColorBox><Box Margin="2">MS-250 «Эгида»</Box></ColorBox><ColorBox><Box Margin="2">100000</Box></ColorBox><ColorBox><Box Margin="2">800</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">40000</Box></ColorBox><ColorBox><Box Margin="2">120000</Box></ColorBox><ColorBox><Box Margin="2">4</Box></ColorBox><ColorBox><Box Margin="2">80</Box></ColorBox><ColorBox><Box Margin="2">0.50</Box></ColorBox><ColorBox><Box Margin="2">40000</Box></ColorBox>
+    <ColorBox><Box Margin="2">MS-250 «Эгида»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorMedium" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorMedium" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorMedium" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorMedium" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorMedium" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorMedium" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorMedium" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorMedium" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorMedium" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
 
-    <ColorBox><Box Margin="2">MS-500 «Титан»</Box></ColorBox><ColorBox><Box Margin="2">180000</Box></ColorBox><ColorBox><Box Margin="2">1650</Box></ColorBox><ColorBox><Box Margin="2">1.05</Box></ColorBox><ColorBox><Box Margin="2">66000</Box></ColorBox><ColorBox><Box Margin="2">198000</Box></ColorBox><ColorBox><Box Margin="2">5</Box></ColorBox><ColorBox><Box Margin="2">120</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox><ColorBox><Box Margin="2">66000</Box></ColorBox>
+    <ColorBox><Box Margin="2">MS-500 «Титан»</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGenerator" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGenerator" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGenerator" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGenerator" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGenerator" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGenerator" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGenerator" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGenerator" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGenerator" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
 
-    <ColorBox><Box Margin="2">LM-212 «Авангард» (линкор)</Box></ColorBox><ColorBox><Box Margin="2">240000</Box></ColorBox><ColorBox><Box Margin="2">2100</Box></ColorBox><ColorBox><Box Margin="2">1.03</Box></ColorBox><ColorBox><Box Margin="2">80000</Box></ColorBox><ColorBox><Box Margin="2">240000</Box></ColorBox><ColorBox><Box Margin="2">5.5</Box></ColorBox><ColorBox><Box Margin="2">140</Box></ColorBox><ColorBox><Box Margin="2">0.05</Box></ColorBox><ColorBox><Box Margin="2">80000</Box></ColorBox>
+    <ColorBox><Box Margin="2">LM-212 «Авангард» (линкор)</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorTSFCapital" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorTSFCapital" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorTSFCapital" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorTSFCapital" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorTSFCapital" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorTSFCapital" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorTSFCapital" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorTSFCapital" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorTSFCapital" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
 
-    <ColorBox><Box Margin="2">FS-421 «Крепость» (форпост)</Box></ColorBox><ColorBox><Box Margin="2">300000</Box></ColorBox><ColorBox><Box Margin="2">3000</Box></ColorBox><ColorBox><Box Margin="2">1.00</Box></ColorBox><ColorBox><Box Margin="2">100000</Box></ColorBox><ColorBox><Box Margin="2">300000</Box></ColorBox><ColorBox><Box Margin="2">6</Box></ColorBox><ColorBox><Box Margin="2">200</Box></ColorBox><ColorBox><Box Margin="2">0.00</Box></ColorBox><ColorBox><Box Margin="2">100000</Box></ColorBox>
+    <ColorBox><Box Margin="2">FS-421 «Крепость» (форпост)</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorPOI" comp="ShipShieldEmitter" member="DamageLimit" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorPOI" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorPOI" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorPOI" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorPOI" comp="ShipShieldEmitter" member="MaxDraw" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorPOI" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorPOI" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorPOI" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"]</Box></ColorBox><ColorBox><Box Margin="2">[protodata="ShieldGeneratorPOI" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]</Box></ColorBox>
   </Table>
 
-  [bold]«Крепость» (статика):[/bold] в паспорте занижен [italic]powerModifier[/italic] (0.25). У серийных наследников базовой монолитовской платформы номинал шины обычно совпадает с крейсерским чертежом — сверяйте карточку, если вручную разводите магистраль.
+  [bold]«Крепость» (статика):[/bold] в паспорте занижен [italic]powerModifier[/italic] — [protodata="ShieldGeneratorPOI" comp="ShipShieldEmitter" member="PowerModifier" format="0.##"]. У серийных наследников базовой монолитовской платформы номинал шины обычно совпадает с крейсерским чертежом — сверяйте карточку, если вручную разводите магистраль.
 
   ---
 

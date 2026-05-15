@@ -11,7 +11,7 @@
     Easier to budget reactors on mid-fight draw, but still hungry at the top of its envelope.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 780
+    healPerSecond: 920
     damageExp: 1.03
     damageLinearLoadCoefficient: 0.085
     powerModifier: 0.48
@@ -19,15 +19,17 @@
     maxDraw: 115000
     unpoweredBonus: 4.2
     damageLimit: 92000
-    damageOverloadTimePunishment: 78
+    damageOverloadTimePunishment: 80
     shieldColor: "#4ECDC4"
-    collisionResistanceMultiplier: 0.46
+    collisionResistanceMultiplier: 0.5
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     snapCardinals: true
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -38,7 +40,7 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.675,-0.675,0.675,0.675"
-        density: 190
+        density: 300
         mask:
         - MachineMask
         layer:
@@ -107,15 +109,15 @@
     Under stress the weave opens more: expect hull chips unless gunners keep the field fresh.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 750
+    healPerSecond: 780
     damageExp: 1.04
     baseDraw: 42000
     maxDraw: 122000
     unpoweredBonus: 4
-    damageLimit: 98000
-    damageOverloadTimePunishment: 82
+    damageLimit: 130000
+    damageOverloadTimePunishment: 100
     shieldColor: "#B388FF"
-    collisionResistanceMultiplier: 0.40
+    collisionResistanceMultiplier: 0.5
     shieldProjectileAbsorptionFraction: 0.72
     shieldPassthroughFromStress: 0.38
     shieldPassthroughImmunityTicks: 4
@@ -123,8 +125,10 @@
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     snapCardinals: true
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -135,7 +139,7 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.675,-0.675,0.675,0.675"
-        density: 190
+        density: 300
         mask:
         - MachineMask
         layer:
@@ -211,17 +215,19 @@
     maxDraw: 128000
     unpoweredBonus: 4.8
     damageLimit: 102000
-    damageOverloadTimePunishment: 72
+    damageOverloadTimePunishment: 80
     overloadPunishmentScale: 0.28
     overloadPunishmentMax: 210
     shieldColor: "#F4D35E"
-    collisionResistanceMultiplier: 0.43
+    collisionResistanceMultiplier: 0.5
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     snapCardinals: true
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -232,7 +238,7 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.675,-0.675,0.675,0.675"
-        density: 190
+        density: 300
         mask:
         - MachineMask
         layer:

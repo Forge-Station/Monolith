@@ -1,3 +1,4 @@
+using Content.Shared.Guidebook;
 using Robust.Shared.Audio;
 
 namespace Content.Shared._Crescent.ShipShields;
@@ -25,12 +26,14 @@ public sealed partial class ShipShieldEmitterComponent : Component
     /// Higher values make damage more punishing in terms of power consumption.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float DamageExp = 1.1f;
 
     /// <summary>
     /// Modifies the total power consumed after damage exponentials are applied.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float PowerModifier = 0.5f;
 
     /// <summary>
@@ -117,36 +120,42 @@ public sealed partial class ShipShieldEmitterComponent : Component
     /// Multiplier on EMP contribution (after clamp) from deflected payloads with <c>EmpOnTrigger</c>.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float ShieldEmpDamageMultiplier = 1f;
 
     /// <summary>
     /// Multiplier on explosion-intensity contribution from deflected explosives.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float ShieldExplosionDamageMultiplier = 1f;
 
     /// <summary>
     /// Rate at which the emitter heals/reduces its damage per second when powered.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float HealPerSecond = 250f;
 
     /// <summary>
     /// Multiplier applied to healing rate when the emitter is in recharge mode.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float UnpoweredBonus = 6f;
 
     /// <summary>
     /// Maximum power consumption limit for additional emitter load in watts.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float MaxDraw = 150000f;
 
     /// <summary>
     /// Base power consumption of the emitter when undamaged, in watts.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float BaseDraw = 50000f;
 
     [DataField]
@@ -156,12 +165,14 @@ public sealed partial class ShipShieldEmitterComponent : Component
     /// Damage threshold that triggers overload protection.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float DamageLimit = 3500;
 
     /// <summary>
     /// Duration in seconds that the emitter remains in overload state after exceeding DamageLimit.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float DamageOverloadTimePunishment = 30;
 
     /// <summary>
@@ -186,5 +197,6 @@ public sealed partial class ShipShieldEmitterComponent : Component
     /// While shield is active, multiplies impact energy to both grids from grid collisions by this much.
     /// </summary>
     [DataField]
+    [GuidebookData]
     public float CollisionResistanceMultiplier = 1.0f;
 }

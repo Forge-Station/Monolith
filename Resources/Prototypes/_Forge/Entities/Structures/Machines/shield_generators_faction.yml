@@ -1,6 +1,5 @@
-# Faction shields: tier-3 chassis (FSG-420 / 470P / 600C). Stats derived from tier baselines + doctrine tradeoffs.
-# T3 baseline: damageLimit 180000, heal 1500, baseDraw 60000, maxDraw 180000, unpoweredBonus 5, overload 120,
-# collision 0.4, powerLoad 60000, damageExp 1.05 (civilian parents differ per model).
+# Faction shields: tier-3 chassis (FSG-420 / 470P / 600C). Numeric stats synced to the Talantoro shield balance TSV (faction T3 grid).
+# T3 эталон в таблице: damageLimit 180000, heal 1800, baseDraw 60000, maxDraw 180000, unpoweredBonus 5, overload 120, collision 0.4.
 
 # --- TSFMC — sustained regulation fire; pays baseline draw / peak ---
 
@@ -17,22 +16,24 @@
     board: MachineShieldForgeTSFHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#48E8A8"
-    healPerSecond: 2050
-    damageLimit: 125000
-    damageExp: 1.02
-    baseDraw: 62000
-    maxDraw: 182000
+    healPerSecond: 2178
+    damageLimit: 118800
+    damageExp: 1.06
+    baseDraw: 58310
+    maxDraw: 174960
     unpoweredBonus: 5
-    damageOverloadTimePunishment: 55
-    collisionResistanceMultiplier: 0.05
+    damageOverloadTimePunishment: 63
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 62000
+    powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -57,22 +58,24 @@
     board: MachineShieldForgeTSFPrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#66CCFF"
-    healPerSecond: 1380
-    damageLimit: 252000
-    damageExp: 1.09
-    damageOverloadTimePunishment: 82
-    baseDraw: 72600
-    maxDraw: 205000
-    unpoweredBonus: 3.5
-    collisionResistanceMultiplier: 0.16
+    healPerSecond: 1584
+    damageLimit: 257400
+    damageExp: 1.05
+    damageOverloadTimePunishment: 112
+    baseDraw: 71280
+    maxDraw: 213840
+    unpoweredBonus: 4
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 72600
+    powerLoad: 71280
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -97,19 +100,23 @@
     board: MachineShieldForgeTSFCollisionCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#FF6B8A"
-    collisionResistanceMultiplier: 0.023
-    healPerSecond: 705
-    damageOverloadTimePunishment: 175
-    maxDraw: 162000
-    damageLimit: 108000
-    baseDraw: 62000
+    collisionResistanceMultiplier: 0.4
+    healPerSecond: 1782
+    damageOverloadTimePunishment: 124
+    maxDraw: 200232
+    damageLimit: 118000
+    baseDraw: 66744
     damageExp: 1.00
+  - type: ApcPowerReceiver
+    powerLoad: 66744
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -136,22 +143,24 @@
     board: MachineShieldForgeUsspHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#5EB8AA"
-    healPerSecond: 1260
-    damageLimit: 76000
-    damageExp: 1.08
+    healPerSecond: 1683
+    damageLimit: 86400
+    damageExp: 1.06
     baseDraw: 40500
-    maxDraw: 119000
-    unpoweredBonus: 5
-    damageOverloadTimePunishment: 120
-    collisionResistanceMultiplier: 0.05
+    maxDraw: 121500
+    unpoweredBonus: 5.5
+    damageOverloadTimePunishment: 92
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
     powerLoad: 40500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -176,22 +185,24 @@
     board: MachineShieldForgeUsspPrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#D9A066"
-    healPerSecond: 1020
-    damageLimit: 188000
-    damageExp: 1.08
-    baseDraw: 52800
-    maxDraw: 152000
-    unpoweredBonus: 5.0
-    damageOverloadTimePunishment: 150
-    collisionResistanceMultiplier: 0.16
+    healPerSecond: 1224
+    damageLimit: 187200
+    damageExp: 1.05
+    baseDraw: 49500
+    maxDraw: 148500
+    unpoweredBonus: 4.4
+    damageOverloadTimePunishment: 165
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 52800
+    powerLoad: 49500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -216,22 +227,24 @@
     board: MachineShieldForgeUsspCollisionCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#B84C2A"
-    collisionResistanceMultiplier: 0.041
-    healPerSecond: 1665
-    damageLimit: 137000
-    damageExp: 0.92
-    baseDraw: 65500
-    maxDraw: 151000
-    unpoweredBonus: 5
-    damageOverloadTimePunishment: 165
+    collisionResistanceMultiplier: 0.4
+    healPerSecond: 1377
+    damageLimit: 86400
+    damageExp: 1.00
+    baseDraw: 46350
+    maxDraw: 139050
+    unpoweredBonus: 5.5
+    damageOverloadTimePunishment: 181
   - type: ApcPowerReceiver
-    powerLoad: 65500
+    powerLoad: 46350
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -258,22 +271,24 @@
     board: MachineShieldForgeRenegateHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#E87B45"
-    healPerSecond: 1980
-    damageLimit: 76000
-    damageExp: 1.14
-    baseDraw: 46500
-    maxDraw: 156000
-    damageOverloadTimePunishment: 28
+    healPerSecond: 2277
+    damageLimit: 91800
+    damageExp: 1.06
+    baseDraw: 58320
+    maxDraw: 174960
+    damageOverloadTimePunishment: 46
     unpoweredBonus: 5
-    collisionResistanceMultiplier: 0.05
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 46500
+    powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -298,22 +313,24 @@
     board: MachineShieldForgeRenegatePrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#E85BB8"
-    healPerSecond: 1380
+    healPerSecond: 1656
     damageLimit: 234000
-    damageExp: 1.08
-    baseDraw: 58800
-    maxDraw: 174000
-    damageOverloadTimePunishment: 80
+    damageExp: 1.05
+    baseDraw: 71280
+    maxDraw: 213840
+    damageOverloadTimePunishment: 82
     unpoweredBonus: 4
-    collisionResistanceMultiplier: 0.16
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 58800
+    powerLoad: 71280
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -338,22 +355,24 @@
     board: MachineShieldForgeRenegateCollisionCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#9C3D2E"
-    collisionResistanceMultiplier: 0.022
-    healPerSecond: 1584
+    collisionResistanceMultiplier: 0.4
+    healPerSecond: 1863
     damageLimit: 108000
-    damageExp: 1.05
-    baseDraw: 66000
-    maxDraw: 191000
-    damageOverloadTimePunishment: 158
+    damageExp: 1.00
+    baseDraw: 66744
+    maxDraw: 200232
+    damageOverloadTimePunishment: 91
     unpoweredBonus: 5
   - type: ApcPowerReceiver
-    powerLoad: 66000
+    powerLoad: 66744
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -380,22 +399,24 @@
     board: MachineShieldForgeViperHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#FF7A4A"
-    healPerSecond: 1730
-    baseDraw: 49500
-    maxDraw: 171000
-    damageExp: 1.12
-    damageLimit: 77000
-    unpoweredBonus: 5.5
-    damageOverloadTimePunishment: 84
-    collisionResistanceMultiplier: 0.05
+    healPerSecond: 1881
+    baseDraw: 55620
+    maxDraw: 166860
+    damageExp: 1.06
+    damageLimit: 97200
+    unpoweredBonus: 5
+    damageOverloadTimePunishment: 71
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 49500
+    powerLoad: 55620
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -420,22 +441,24 @@
     board: MachineShieldForgeViperPrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#FF3344"
-    maxDraw: 172000
-    baseDraw: 57200
-    damageExp: 1.06
-    damageLimit: 273000
-    healPerSecond: 900
-    damageOverloadTimePunishment: 122
+    maxDraw: 203940
+    baseDraw: 67980
+    damageExp: 1.05
+    damageLimit: 210600
+    healPerSecond: 1368
+    damageOverloadTimePunishment: 127
     unpoweredBonus: 4
-    collisionResistanceMultiplier: 0.16
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 57200
+    powerLoad: 67980
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -460,22 +483,24 @@
     board: MachineShieldForgeViperCollisionCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#991111"
-    collisionResistanceMultiplier: 0.022
-    healPerSecond: 1170
-    damageLimit: 103000
-    baseDraw: 59400
-    maxDraw: 171000
-    damageOverloadTimePunishment: 182
+    collisionResistanceMultiplier: 0.4
+    healPerSecond: 1539
+    damageLimit: 97200
+    baseDraw: 63654
+    maxDraw: 190962
+    damageOverloadTimePunishment: 140
     damageExp: 1.00
     unpoweredBonus: 5
   - type: ApcPowerReceiver
-    powerLoad: 59400
+    powerLoad: 63654
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -502,22 +527,25 @@
     board: MachineShieldForgeUllmanHeavyCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#8B6CB8"
-    baseDraw: 40200
-    maxDraw: 146000
-    healPerSecond: 1340
-    damageLimit: 91000
-    damageExp: 1.07
-    damageOverloadTimePunishment: 56
+    baseDraw: 40500
+    maxDraw: 132840
+    healPerSecond: 1683
+    damageLimit: 102600
+    damageExp: 1.06
+    damageOverloadTimePunishment: 91
     unpoweredBonus: 5
-    collisionResistanceMultiplier: 0.05
+    collisionResistanceMultiplier: 0.4
+    powerModifier: 0.44
   - type: ApcPowerReceiver
-    powerLoad: 40200
+    powerLoad: 40500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -542,22 +570,25 @@
     board: MachineShieldForgeUllmanPrismaticCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#D4B8F0"
-    baseDraw: 46200
-    maxDraw: 151000
-    damageLimit: 249000
-    healPerSecond: 1110
+    baseDraw: 49500
+    maxDraw: 162360
+    damageLimit: 222300
+    healPerSecond: 1224
     damageExp: 1.05
-    unpoweredBonus: 2.8
-    damageOverloadTimePunishment: 116
-    collisionResistanceMultiplier: 0.16
+    unpoweredBonus: 4
+    damageOverloadTimePunishment: 162
+    collisionResistanceMultiplier: 0.4
+    powerModifier: 0.44
   - type: ApcPowerReceiver
-    powerLoad: 46200
+    powerLoad: 49500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -582,22 +613,25 @@
     board: MachineShieldForgeUllmanCollisionCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#5A3D7A"
-    collisionResistanceMultiplier: 0.027
-    baseDraw: 54500
-    maxDraw: 157000
-    healPerSecond: 1280
-    damageLimit: 112000
-    damageOverloadTimePunishment: 168
+    collisionResistanceMultiplier: 0.4
+    baseDraw: 46350
+    maxDraw: 152023
+    healPerSecond: 1377
+    damageLimit: 102600
+    damageOverloadTimePunishment: 178
     damageExp: 1.00
     unpoweredBonus: 5
+    powerModifier: 0.44
   - type: ApcPowerReceiver
-    powerLoad: 54500
+    powerLoad: 46350
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -624,22 +658,24 @@
     board: MachineShieldForgeTSFSagittaCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#00C9A7"
-    healPerSecond: 1180
+    healPerSecond: 1386
     damageLimit: 198000
-    damageExp: 1.11
-    baseDraw: 58000
-    maxDraw: 178000
-    unpoweredBonus: 4.5
-    damageOverloadTimePunishment: 98
-    collisionResistanceMultiplier: 0.11
+    damageExp: 1.08
+    baseDraw: 58320
+    maxDraw: 174960
+    unpoweredBonus: 5
+    damageOverloadTimePunishment: 81
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 58000
+    powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -664,22 +700,24 @@
     board: MachineShieldForgeUsspKerchCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#4ECDC4"
-    healPerSecond: 1000
-    damageLimit: 62000
+    healPerSecond: 1377
+    damageLimit: 64800
     damageExp: 1.09
-    baseDraw: 32000
-    maxDraw: 105000
-    unpoweredBonus: 6.2
-    damageOverloadTimePunishment: 110
-    collisionResistanceMultiplier: 0.38
+    baseDraw: 36000
+    maxDraw: 108000
+    unpoweredBonus: 5.5
+    damageOverloadTimePunishment: 125
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 32000
+    powerLoad: 36000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -704,22 +742,24 @@
     board: MachineShieldForgeRenegateSkullDebtCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#CC0044"
-    healPerSecond: 1850
-    damageLimit: 92000
-    damageExp: 1.16
-    baseDraw: 52000
-    maxDraw: 172000
-    unpoweredBonus: 5.5
-    damageOverloadTimePunishment: 24
-    collisionResistanceMultiplier: 0.32
+    healPerSecond: 1863
+    damageLimit: 81000
+    damageExp: 1.09
+    baseDraw: 51840
+    maxDraw: 155520
+    unpoweredBonus: 5
+    damageOverloadTimePunishment: 63
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 52000
+    powerLoad: 51840
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -744,22 +784,24 @@
     board: MachineShieldForgeViperKiteCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#FFAA00"
-    healPerSecond: 1520
-    damageLimit: 62000
-    damageExp: 1.11
-    baseDraw: 48000
-    maxDraw: 158000
-    unpoweredBonus: 4.8
-    damageOverloadTimePunishment: 42
-    collisionResistanceMultiplier: 0.39
+    healPerSecond: 1539
+    damageLimit: 72900
+    damageExp: 1.09
+    baseDraw: 49440
+    maxDraw: 148320
+    unpoweredBonus: 5
+    damageOverloadTimePunishment: 97
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
-    powerLoad: 48000
+    powerLoad: 49440
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
@@ -784,23 +826,25 @@
     board: MachineShieldForgeUllmanLockboxCircuitboard
   - type: ShipShieldEmitter
     shieldColor: "#B8A9D9"
-    powerModifier: 0.42
-    healPerSecond: 980
-    damageLimit: 178000
-    damageExp: 1.02
+    powerModifier: 0.44
+    healPerSecond: 1377
+    damageLimit: 76950
+    damageExp: 1.09
     baseDraw: 36000
-    maxDraw: 142000
-    unpoweredBonus: 2.4
-    damageOverloadTimePunishment: 138
-    collisionResistanceMultiplier: 0.13
+    maxDraw: 118000
+    unpoweredBonus: 5
+    damageOverloadTimePunishment: 123
+    collisionResistanceMultiplier: 0.4
   - type: ApcPowerReceiver
     powerLoad: 36000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
-    - state: control
-    - state: control_on
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false

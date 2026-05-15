@@ -636,6 +636,10 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             if (emitterXform.GridUid != gridUid)
                 continue;
 
+            // Skip emitters that are just lying on the grid (not anchored) — they aren't functional shields.
+            if (!emitterXform.Anchored)
+                continue;
+
             var limit = emitter.DamageLimit > 0 ? emitter.DamageLimit : 1f;
             var percent = Math.Clamp(1f - emitter.Damage / limit, 0f, 1f);
             var online = emitter.Shield != null;

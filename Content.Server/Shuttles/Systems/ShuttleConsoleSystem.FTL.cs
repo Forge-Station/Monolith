@@ -17,6 +17,10 @@ public sealed partial class ShuttleConsoleSystem
 {
     [Dependency] private readonly IMapManager _mapManager = default!;
 
+    private readonly List<ShuttleBeaconObject> _beaconCache = new();
+    private readonly List<ShuttleExclusionObject> _exclusionCache = new();
+    private bool _beaconExclusionCacheDirty = true;
+
     private const float ShuttleFTLRange = 512f;
     private const float ShuttleFTLMassThreshold = 100f; // Mono: now a soft limit, ships under the limit just stop you from shorter distance
 
@@ -26,24 +30,80 @@ public sealed partial class ShuttleConsoleSystem
     private void InitializeFTL()
     {
         SubscribeLocalEvent<FTLBeaconComponent, ComponentStartup>(OnBeaconStartup);
+        SubscribeLocalEvent<FTLBeaconComponent, ComponentShutdown>(OnBeaconShutdown);
         SubscribeLocalEvent<FTLBeaconComponent, AnchorStateChangedEvent>(OnBeaconAnchorChanged);
 
         SubscribeLocalEvent<FTLExclusionComponent, ComponentStartup>(OnExclusionStartup);
+        SubscribeLocalEvent<FTLExclusionComponent, ComponentShutdown>(OnExclusionShutdown);
     }
 
     private void OnExclusionStartup(Entity<FTLExclusionComponent> ent, ref ComponentStartup args)
     {
+        InvalidateFtlBeaconExclusionCache();
+        RefreshShuttleConsoles();
+    }
+
+    private void OnExclusionShutdown(Entity<FTLExclusionComponent> ent, ref ComponentShutdown args)
+    {
+        InvalidateFtlBeaconExclusionCache();
         RefreshShuttleConsoles();
     }
 
     private void OnBeaconStartup(Entity<FTLBeaconComponent> ent, ref ComponentStartup args)
     {
+        InvalidateFtlBeaconExclusionCache();
+        RefreshShuttleConsoles();
+    }
+
+    private void OnBeaconShutdown(Entity<FTLBeaconComponent> ent, ref ComponentShutdown args)
+    {
+        InvalidateFtlBeaconExclusionCache();
         RefreshShuttleConsoles();
     }
 
     private void OnBeaconAnchorChanged(Entity<FTLBeaconComponent> ent, ref AnchorStateChangedEvent args)
     {
+        InvalidateFtlBeaconExclusionCache();
         RefreshShuttleConsoles();
+    }
+
+    private void InvalidateFtlBeaconExclusionCache()
+    {
+        _beaconExclusionCacheDirty = true;
+    }
+
+    private void EnsureFtlBeaconExclusionCache()
+    {
+        if (!_beaconExclusionCacheDirty)
+            return;
+
+        _beaconCache.Clear();
+        var beaconQuery = AllEntityQuery<FTLBeaconComponent>();
+
+        while (beaconQuery.MoveNext(out var destUid, out _))
+        {
+            var meta = _metaQuery.GetComponent(destUid);
+            var name = meta.EntityName;
+
+            if (string.IsNullOrEmpty(name))
+                name = Loc.GetString("shuttle-console-unknown");
+
+            var destXform = _xformQuery.GetComponent(destUid);
+            _beaconCache.Add(new ShuttleBeaconObject(GetNetEntity(destUid), GetNetCoordinates(destXform.Coordinates), name));
+        }
+
+        _exclusionCache.Clear();
+        var exclusionQuery = AllEntityQuery<FTLExclusionComponent, TransformComponent>();
+
+        while (exclusionQuery.MoveNext(out var comp, out var xform))
+        {
+            if (!comp.Enabled)
+                continue;
+
+            _exclusionCache.Add(new ShuttleExclusionObject(GetNetCoordinates(xform.Coordinates), comp.Range, Loc.GetString("shuttle-console-exclusion")));
+        }
+
+        _beaconExclusionCacheDirty = false;
     }
 
     private void OnBeaconFTLMessage(Entity<ShuttleConsoleComponent> ent, ref ShuttleConsoleFTLBeaconMessage args)
@@ -87,39 +147,6 @@ public sealed partial class ShuttleConsoleSystem
         ConsoleFTL(entity, targetCoordinates, angle, args.Coordinates.MapId);
     }
 
-    private void GetBeacons(ref List<ShuttleBeaconObject>? beacons)
-    {
-        var beaconQuery = AllEntityQuery<FTLBeaconComponent>();
-
-        while (beaconQuery.MoveNext(out var destUid, out _))
-        {
-            var meta = _metaQuery.GetComponent(destUid);
-            var name = meta.EntityName;
-
-            if (string.IsNullOrEmpty(name))
-                name = Loc.GetString("shuttle-console-unknown");
-
-            // Can't travel to same map (yet)
-            var destXform = _xformQuery.GetComponent(destUid);
-            beacons ??= new List<ShuttleBeaconObject>();
-            beacons.Add(new ShuttleBeaconObject(GetNetEntity(destUid), GetNetCoordinates(destXform.Coordinates), name));
-        }
-    }
-
-    private void GetExclusions(ref List<ShuttleExclusionObject>? exclusions)
-    {
-        var query = AllEntityQuery<FTLExclusionComponent, TransformComponent>();
-
-        while (query.MoveNext(out var comp, out var xform))
-        {
-            if (!comp.Enabled)
-                continue;
-
-            exclusions ??= new List<ShuttleExclusionObject>();
-            exclusions.Add(new ShuttleExclusionObject(GetNetCoordinates(xform.Coordinates), comp.Range, Loc.GetString("shuttle-console-exclusion")));
-        }
-    }
-
     /// <summary>
     /// Handles shuttle console FTLs.
     /// </summary>
@@ -153,8 +180,8 @@ public sealed partial class ShuttleConsoleSystem
 
         targetCoordinates = _shuttle.ClampCoordinatesToFTLRange(shuttleUid.Value, targetCoordinates);
 
-        List<ShuttleExclusionObject>? exclusions = null;
-        GetExclusions(ref exclusions);
+        EnsureFtlBeaconExclusionCache();
+        var exclusions = new List<ShuttleExclusionObject>(_exclusionCache);
 
         if (!_shuttle.FTLFree(shuttleUid.Value, targetCoordinates, targetAngle, exclusions))
         {

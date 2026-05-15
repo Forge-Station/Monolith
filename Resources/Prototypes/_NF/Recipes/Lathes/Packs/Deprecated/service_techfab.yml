@@ -84,7 +84,7 @@
     - FreezerElectronics
     - CleanerGrenade #Mono
   ## Kitchen
-    - FoodFrozenPopsicleTrash # Forge-Change-Compы
+    - FoodFrozenPopsicleTrash # Forge-Change-Comp
     - DrinkMug
     - DrinkMugMetal
     - DrinkGlass
@@ -124,6 +124,7 @@
     - ClothingOuterEVASuitBoxerYellow
   ## Materials
     - SheetPaper
+    - DrinkWaterCup # Forge-Change-Comp
     - NFMaterialCardboard1Processed
     - PaperFromSheetPaper
   ## Misc

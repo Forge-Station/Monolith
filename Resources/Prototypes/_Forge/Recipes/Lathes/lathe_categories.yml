@@ -1,0 +1,19 @@
+- type: latheCategory
+  id: PDAs
+  name: lathe-category-pdas
+
+- type: latheCategory
+  id: Headsets
+  name: lathe-category-headset
+
+- type: latheCategory
+  id: IDCards
+  name: lathe-category-idcards
+
+- type: latheCategory
+  id: EncryptionKeys
+  name: lathe-category-encryptionkeys
+
+- type: latheCategory
+  id: Bureaucracy
+  name: lathe-category-bureaucracy

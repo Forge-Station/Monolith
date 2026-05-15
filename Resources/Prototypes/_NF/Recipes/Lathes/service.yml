@@ -156,3 +156,11 @@
   completetime: 1
   materials:  
     Wood: 50  
+
+- type: latheRecipe  # Forge-Change-Comp
+  id: DrinkWaterCup  
+  result: DrinkWaterCup  
+  parent: BaseServiceItemsRecipe  
+  completetime: 0.5  
+  materials:  
+    Paper: 50

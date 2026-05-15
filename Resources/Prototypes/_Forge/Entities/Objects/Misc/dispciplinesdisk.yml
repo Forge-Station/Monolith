@@ -136,6 +136,27 @@
     vendPrice: 8000
 
 - type: entity
+  id: DisciplinesDiskHME
+  parent: BaseItem
+  name: technology disk (HME)
+  description: Disk with Harmony Medical Enterprises technology.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - HME
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: harmony
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 20000
+  
+- type: entity
   id: DisciplinesDiskNanotrasen
   parent: BaseItem
   name: technology disk (NT)

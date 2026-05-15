@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Client.Decals.Overlays;
 using Content.Shared.CCVar;
 using Content.Shared.Decals;
@@ -32,14 +33,18 @@ namespace Content.Client.Decals
 
             Subs.CVar(_cfg, CCVars.DecalsMaxPerTile, v =>
             {
-                if (_overlay != null)
-                    _overlay.MaxPerTileDraw = v;
+                if (_overlay == null)
+                    return;
+                _overlay.MaxPerTileDraw = v;
+                _overlay.ClearPreparedCache();
             }, true);
 
             Subs.CVar(_cfg, CCVars.DecalsClientDeduplicateIdentical, v =>
             {
-                if (_overlay != null)
-                    _overlay.RemoveIdenticalDuplicates = v;
+                if (_overlay == null)
+                    return;
+                _overlay.RemoveIdenticalDuplicates = v;
+                _overlay.ClearPreparedCache();
             }, true);
 
             SubscribeLocalEvent<DecalGridComponent, ComponentHandleState>(OnHandleState);
@@ -69,6 +74,12 @@ namespace Content.Client.Decals
                 return;
 
             _overlayManager.RemoveOverlay(_overlay);
+        }
+
+        protected override void OnDecalPrototypesReloaded(Robust.Shared.Prototypes.PrototypesReloadedEventArgs args)
+        {
+            // Sprite paths or snap-cardinals flags may have changed — clear the overlay caches.
+            _overlay?.ClearPreparedCache();
         }
 
         protected override void OnDecalRemoved(EntityUid gridId, uint decalId, DecalGridComponent component, Vector2i indices, DecalChunk chunk)
@@ -116,7 +127,10 @@ namespace Content.Client.Decals
                 RemoveChunks(gridUid, gridComp, _removedChunks);
 
             if (modifiedChunks.Count > 0)
+            {
                 UpdateChunks(gridUid, gridComp, modifiedChunks);
+                _overlay?.InvalidateGridChunks(gridUid, modifiedChunks.Keys);
+            }
         }
 
         private void OnChunkUpdate(DecalChunkUpdateEvent ev)
@@ -134,7 +148,7 @@ namespace Content.Client.Decals
                     continue;
                 }
 
-                UpdateChunks(gridId, gridComp, updatedGridChunks);
+                ApplyChunkDeltas(gridId, gridComp, updatedGridChunks);
             }
 
             // Now we'll cull old chunks out of range as the server will send them to us anyway.
@@ -153,6 +167,63 @@ namespace Content.Client.Decals
 
                 RemoveChunks(gridId, gridComp, chunks);
             }
+        }
+
+        private void ApplyChunkDeltas(EntityUid gridId, DecalGridComponent gridComp, Dictionary<Vector2i, DecalChunkDelta> updatedGridChunks)
+        {
+            var chunkCollection = gridComp.ChunkCollection.ChunkCollection;
+            var touched = new List<Vector2i>(updatedGridChunks.Count);
+
+            foreach (var (indices, delta) in updatedGridChunks)
+            {
+                if (!chunkCollection.TryGetValue(indices, out var chunk) || delta.ResetChunk)
+                {
+                    chunk = new DecalChunk();
+                    chunkCollection[indices] = chunk;
+                }
+
+                if (delta.RemovedDecals.Count > 0)
+                {
+                    foreach (var removedUid in delta.RemovedDecals)
+                    {
+                        if (!chunk.Decals.ContainsKey(removedUid))
+                            continue;
+
+                        OnDecalRemoved(gridId, removedUid, gridComp, indices, chunk);
+                        gridComp.DecalIndex.Remove(removedUid);
+                    }
+                }
+
+                foreach (var (uid, netDecal) in delta.Upserts)
+                {
+                    var decal = FromNetDecalData(indices, netDecal);
+                    chunk.Decals[uid] = decal;
+                    gridComp.DecalIndex[uid] = indices;
+                }
+
+                if (chunk.Decals.Count == 0)
+                    chunkCollection.Remove(indices);
+
+                touched.Add(indices);
+            }
+
+            if (touched.Count > 0)
+                _overlay?.InvalidateGridChunks(gridId, touched);
+        }
+
+        private Decal FromNetDecalData(Vector2i chunkIndices, NetDecalData netDecal)
+        {
+            var coords = new Vector2(
+                chunkIndices.X * ChunkSize + DequantizeDecalCoord(netDecal.RelX),
+                chunkIndices.Y * ChunkSize + DequantizeDecalCoord(netDecal.RelY));
+
+            return new Decal(
+                coords,
+                GetDecalPrototypeId(netDecal.PrototypeNetId),
+                netDecal.Color,
+                netDecal.Angle,
+                netDecal.ZIndex,
+                netDecal.Cleanable);
         }
 
         private void UpdateChunks(EntityUid gridId, DecalGridComponent gridComp, Dictionary<Vector2i, DecalChunk> updatedGridChunks)
@@ -200,6 +271,8 @@ namespace Content.Client.Decals
 
                 chunkCollection.Remove(index);
             }
+
+            _overlay?.InvalidateGridChunks(gridId, chunks);
         }
     }
 }

@@ -84,6 +84,9 @@
         },
         {
             "name": "nt_label"
+        },
+        {
+            "name": "hme_label"
         }
     ]
 }

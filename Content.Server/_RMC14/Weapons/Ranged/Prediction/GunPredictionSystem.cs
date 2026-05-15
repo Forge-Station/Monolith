@@ -11,6 +11,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -112,7 +113,6 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
         var other = args.OtherEntity;
         if (!_lagCompensationQuery.TryComp(other, out var otherLagComp) ||
-            !_fixturesQuery.TryComp(other, out var otherFixtures) ||
             !_transformQuery.TryComp(other, out var otherTransform))
         {
             return;
@@ -121,13 +121,88 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         if (!_physicsQuery.TryComp(ent, out var entPhysics))
             return;
 
-        if (!Collides(
-                (ent, ent, entPhysics),
-                (other, otherLagComp, otherFixtures, args.OtherBody, otherTransform),
-                null))
-        {
+        var resolved = GetLagCompensatedMapCoordinates(
+            ent.Comp,
+            other,
+            otherLagComp,
+            otherTransform,
+            null);
+
+        if (!ProjectileOverlapsFixtureAtLag(ent, entPhysics, resolved, args.OtherFixture))
             args.Cancelled = true;
+    }
+
+    /// <summary>
+    /// Resolves the other entity's map position using lag compensation history and optional client-reported coordinates.
+    /// </summary>
+    private MapCoordinates GetLagCompensatedMapCoordinates(
+        PredictedProjectileServerComponent predictedProjectile,
+        EntityUid other,
+        LagCompensationComponent lagComp,
+        TransformComponent otherTransform,
+        MapCoordinates? clientCoordinates)
+    {
+        MapCoordinates lowestCoordinate = default;
+        var otherCoordinates = EntityCoordinates.Invalid;
+        var ping = predictedProjectile.Shooter?.Channel.Ping ?? 0;
+        // Use 1.5 due to the trip buffer.
+        var sentTime = _timing.CurTime - TimeSpan.FromMilliseconds(ping * 1.5);
+        var pingTime = TimeSpan.FromMilliseconds(ping);
+
+        foreach (var pos in lagComp.Positions)
+        {
+            otherCoordinates = pos.Item2;
+            if (pos.Item1 >= sentTime)
+                break;
+            else if (lowestCoordinate == default && pos.Item1 >= sentTime - pingTime)
+                lowestCoordinate = _transform.ToMapCoordinates(pos.Item2);
         }
+
+        var otherMapCoordinates = otherCoordinates == default
+            ? _transform.GetMapCoordinates(other, otherTransform)
+            : _transform.ToMapCoordinates(otherCoordinates);
+
+        if (clientCoordinates != null &&
+            (clientCoordinates.Value.InRange(otherMapCoordinates, _coordinateDeviation) ||
+             clientCoordinates.Value.InRange(lowestCoordinate, _lowestCoordinateDeviation)))
+        {
+            otherMapCoordinates = clientCoordinates.Value;
+        }
+
+        return otherMapCoordinates;
+    }
+
+    /// <summary>
+    /// Cheap overlap check for a single fixture pair (used from PreventCollide hot path).
+    /// </summary>
+    private bool ProjectileOverlapsFixtureAtLag(
+        EntityUid projectileUid,
+        PhysicsComponent projectilePhysics,
+        MapCoordinates resolvedOtherMap,
+        Fixture otherFixture)
+    {
+        var projectileCoordinates = _transform.GetMapCoordinates(projectileUid);
+        var projectilePosition = projectileCoordinates.Position;
+
+        if ((otherFixture.CollisionLayer & projectilePhysics.CollisionMask) == 0)
+            return false;
+
+        var transform = new Transform(resolvedOtherMap.Position, 0);
+        var bounds = new Box2(transform.Position, transform.Position);
+
+        for (var i = 0; i < otherFixture.Shape.ChildCount; i++)
+        {
+            var boundy = otherFixture.Shape.ComputeAABB(transform, i);
+            bounds = bounds.Union(boundy);
+        }
+
+        bounds = bounds.Enlarged(_aabbEnlargement);
+        if (bounds.Contains(projectilePosition))
+            return true;
+
+        var projectileVelocity = _physics.GetLinearVelocity(projectileUid, projectilePhysics.LocalCenter, projectilePhysics);
+        projectilePosition = projectileCoordinates.Position + projectileVelocity / _timing.TickRate / 1.5f;
+        return bounds.Contains(projectilePosition);
     }
 
     private bool Collides(
@@ -138,32 +213,12 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         var projectileCoordinates = _transform.GetMapCoordinates(projectile);
         var projectilePosition = projectileCoordinates.Position;
 
-        MapCoordinates lowestCoordinate = default;
-        var otherCoordinates = EntityCoordinates.Invalid;
-        var ping = projectile.Comp1.Shooter?.Channel.Ping ?? 0;
-        // Use 1.5 due to the trip buffer.
-        var sentTime = _timing.CurTime - TimeSpan.FromMilliseconds(ping * 1.5);
-        var pingTime = TimeSpan.FromMilliseconds(ping);
-
-        foreach (var pos in other.Comp1.Positions)
-        {
-            otherCoordinates = pos.Item2;
-            if (pos.Item1 >= sentTime)
-                break;
-            else if (lowestCoordinate == default && pos.Item1 >= sentTime - pingTime)
-                lowestCoordinate = _transform.ToMapCoordinates(pos.Item2);
-        }
-
-        var otherMapCoordinates = otherCoordinates == default
-            ? _transform.GetMapCoordinates(other)
-            : _transform.ToMapCoordinates(otherCoordinates);
-
-        if (clientCoordinates != null &&
-            (clientCoordinates.Value.InRange(otherMapCoordinates, _coordinateDeviation) ||
-             clientCoordinates.Value.InRange(lowestCoordinate, _lowestCoordinateDeviation)))
-        {
-            otherMapCoordinates = clientCoordinates.Value;
-        }
+        var otherMapCoordinates = GetLagCompensatedMapCoordinates(
+            projectile.Comp1,
+            other,
+            other.Comp1,
+            other.Comp4,
+            clientCoordinates);
 
         var transform = new Transform(otherMapCoordinates.Position, 0);
         var bounds = new Box2(transform.Position, transform.Position);
@@ -212,38 +267,35 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             return;
         }
 
-        predictedProjectile.Hit = true;
-        foreach (var (netEnt, clientPos) in ev.Hit)
+        if (GetEntity(ev.HitTarget) is not { Valid: true } hit)
+            return;
+
+        if (!_lagCompensationQuery.TryComp(hit, out var otherLagComp) ||
+            !_fixturesQuery.TryComp(hit, out var otherFixtures) ||
+            !_physicsQuery.TryComp(hit, out var otherPhysics) ||
+            !_transformQuery.TryComp(hit, out var otherTransform))
         {
-            if (GetEntity(netEnt) is not { Valid: true } hit)
-                continue;
-
-            if (!_lagCompensationQuery.TryComp(hit, out var otherLagComp) ||
-                !_fixturesQuery.TryComp(hit, out var otherFixtures) ||
-                !_physicsQuery.TryComp(hit, out var otherPhysics) ||
-                !_transformQuery.TryComp(hit, out var otherTransform))
-            {
-                continue;
-            }
-
-            if (!Collides(
-                    (projectile, predictedProjectile, projectilePhysics),
-                    (hit, otherLagComp, otherFixtures, otherPhysics, otherTransform),
-                    clientPos))
-            {
-                if (_logHits)
-                    Log.Info("missed");
-
-                continue;
-            }
-
-            if (_logHits)
-                Log.Info("hit");
-
-            // Get collision coordinates for impact effects
-            var collisionCoords = _transform.GetMapCoordinates(hit);
-            _projectile.ProjectileCollide((projectile, projectileComp, projectilePhysics), hit, collisionCoords, true);
+            return;
         }
+
+        if (!Collides(
+                (projectile, predictedProjectile, projectilePhysics),
+                (hit, otherLagComp, otherFixtures, otherPhysics, otherTransform),
+                ev.HitCoordinates))
+        {
+            if (_logHits)
+                Log.Info("missed");
+
+            return;
+        }
+
+        if (_logHits)
+            Log.Info("hit");
+
+        predictedProjectile.Hit = true;
+
+        var collisionCoords = _transform.GetMapCoordinates(hit);
+        _projectile.ProjectileCollide((projectile, projectileComp, projectilePhysics), hit, collisionCoords, true);
     }
 
     public override void Update(float frameTime)

@@ -285,3 +285,19 @@
     layers:
     - state: crypt_merc
     - state: tl_label
+
+- type: entity
+  parent: [ EncryptionKey ]
+  id: EncryptionKeyHarmony
+  name: harmony encrypt key
+  description: HME-encrypt-key-desc.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Harmony
+    defaultChannel: Harmony
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_silver
+    - state: hme_label

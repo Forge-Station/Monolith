@@ -86,3 +86,6 @@ shipyard-console-station-resources = На борту обнаружены жиз
 shipyard-console-dangerous-materials = На борту обнаружены опасные материалы.
 shipyard-console-invalid-voucher-type = Этот ваучер не может быть использован на этой консоли.
 shipyard-console-fallback-prevent-sale = Обнаружены ошибки класса YML на борту. Пожалуйста, отправьте отчет об ошибке, когда это возможно.
+# Mono start
+shipyard-console-engine-NFR = NFR
+# Mono end

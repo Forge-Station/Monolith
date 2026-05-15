@@ -1,2 +1,2 @@
-ent-LockerMaterialsBasicFilled = LockerMaterialsBasicFilled
-ent-LockerMaterialsBasic10Filled = LockerMaterialsBasic10Filled
+ent-LockerMaterialsBasicFilled = шкаф материалов
+ent-LockerMaterialsBasic10Filled = шкаф материалов

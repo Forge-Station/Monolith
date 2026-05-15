@@ -16,7 +16,7 @@
     sound:
       path: /Audio/Items/welder_drop.ogg
   - type: Sprite
-    sprite: Forge/Objects/Tools/Standar/welder.rsi
+    sprite: Forge/Objects/Tools/Standart/welder.rsi
     layers:
     - state: icon
     - state: welder_flame
@@ -31,7 +31,7 @@
           False: { visible: false }
   - type: Item
     size: Small
-    sprite: Forge/Objects/Tools/Standar/welder.rsi
+    sprite: Forge/Objects/Tools/Standart/welder.rsi
   - type: ItemToggle
     predictable: false
     soundActivate:

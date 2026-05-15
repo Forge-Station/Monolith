@@ -20,7 +20,7 @@
     - PlantSampleTaker
     - Wirecutter
   - type: Sprite
-    sprite: Forge\Objects\Tools\Standart\wirecutters.rsi
+    sprite: Forge/Objects/Tools/Standart/wirecutters.rsi
     layers:
     - state: cutters
       map: [ "enum.DamageStateVisualLayers.Base" ]

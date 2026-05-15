@@ -74,13 +74,11 @@
 
 #Special Dough
 
-- type: reaction #frontier
+- type: reaction #frontier # Forge-Change-Comp
   id: CreateRiceDough
   impact: Low
   quantized: true
   conserveEnergy: false
-  requiredMixerCategories:
-  - Stir
   reactants:
     Rice:
       amount: 40

@@ -1,0 +1,1 @@
+gunnery-show-iff = Отображение IFF меток

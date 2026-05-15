@@ -241,20 +241,22 @@ namespace Content.Server.NPC.Systems
                 var hasNearbyPlayer = false;
                 var nearestDistance = float.MaxValue;
 
+                // Forge-Change-Start
                 // Check distance to all players.
                 foreach (var playerCoords in _cachedPlayerCoordinates)
                 {
-                    if (npcCoords.TryDistance(EntityManager, playerCoords, out var distance) &&
-                        distance <= minDistance)
+                    if (!npcCoords.TryDistance(EntityManager, playerCoords, out var distance))
+                        continue;
+
+                    nearestDistance = Math.Min(nearestDistance, distance);
+
+                    if (distance <= minDistance)
                     {
                         hasNearbyPlayer = true;
-                        nearestDistance = Math.Min(nearestDistance, distance);
                         break;
                     }
-
-                    if (npcCoords.TryDistance(EntityManager, playerCoords, out distance))
-                        nearestDistance = Math.Min(nearestDistance, distance);
                 }
+                // Forge-Change-End
 
                 var isAwake = IsAwake(npcUid, htn);
 

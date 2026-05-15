@@ -1,2 +1,4 @@
-vessel-sunrise-name = Sunrise
-vessel-sunrise-desc = A private investigator's ship. Comes equiped with a suite of forensic tools for investigative work. Capable of subduing smugglers and CIV ships with it's EMP launchers, and running away from anything more dangerous.
+vessel-sunrise-name = «Рассвет»
+vessel-sunrise-desc =
+    Корабль частного детектива. Оснащён набором криминалистических инструментов для проведения расследований.
+    Способен нейтрализовать контрабандистов и гражданские суда с помощью ЭМИ-пусковых установок, а от более серьёзных угроз предпочитает уходить.

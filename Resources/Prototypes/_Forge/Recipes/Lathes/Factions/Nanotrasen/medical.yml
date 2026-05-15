@@ -5,7 +5,7 @@
   completetime: 5 
   materials:
     Biomass: 100
-    Glass: 30
+    Glass: 40
     
 - type: latheRecipe
   parent: BaseToolRecipe

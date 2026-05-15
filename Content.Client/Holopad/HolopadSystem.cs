@@ -106,7 +106,7 @@ public sealed class HolopadSystem : SharedHolopadSystem
         // Remove shading from all layers (except displacement maps)
         for (int i = 0; i < hologramSprite.AllLayers.Count(); i++)
         {
-            if (hologramSprite.TryGetLayer(i, out var layer) && layer.ShaderPrototype != "DisplacedStencilDraw")
+            if (hologramSprite.TryGetLayer(i, out var layer) && layer.ShaderPrototype != "DisplacedDraw") // Forge-Change
                 hologramSprite.LayerSetShader(i, "unshaded");
         }
 

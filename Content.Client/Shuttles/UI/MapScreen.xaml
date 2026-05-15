@@ -120,6 +120,18 @@
                         StyleClasses="ButtonSquare"/>
                     </controls:BoxContainer>
                 </controls:PanelContainer>
+                <!-- Forge-Change-Start -->
+                <!-- IFF search filter -->
+                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                    <controls:PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                    </controls:PanelContainer.PanelOverride>
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MapIffSearchBox" Margin="4 4 4 4">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-iff-search'}"/>
+                        <controls:LineEdit Name="MapIffSearchCriteria" Access="Public" HorizontalExpand="True"/>
+                    </controls:BoxContainer>
+                </controls:PanelContainer>
+                <!-- Forge-Change-End -->
                 <!-- Map objects -->
                 <controls1:StripeBack MinSize="48 48">
                     <controls:Label Name="HyperspaceLabel" Text="{controls:Loc 'shuttle-console-map-objects'}"

@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server.Destructible; // Mono
 using Content.Server.NPC.Components;
+using Content.Shared.NPC; // Forge-Change
 using Content.Shared._Goobstation.Weapons.SmartGun;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Components;
@@ -79,11 +80,13 @@ public sealed partial class NPCCombatSystem
 
     private void UpdateRanged(float frameTime)
     {
-        var query = EntityQueryEnumerator<NPCRangedCombatComponent>();
+        // Forge-Change-Start
+        var query = EntityQueryEnumerator<NPCRangedCombatComponent, ActiveNPCComponent>();
 
-        while (query.MoveNext(out var uid, out var comp))
+        while (query.MoveNext(out var uid, out var comp, out _))
         {
-            var xform = Transform(uid); // Mono
+            var xform = _xformQuery.GetComponent(uid);
+        // Forge-Change-End
 
             if (!_gun.TryGetGun(uid, out var gunUid, out var gun))
             {
@@ -122,7 +125,7 @@ public sealed partial class NPCCombatSystem
                 continue;
             }
 
-            if (_combatQuery.TryGetComponent(uid, out var combatMode))
+            if (_combatQuery.TryGetComponent(uid, out var combatMode) && !combatMode.IsInCombatMode) // Forge-Change
             {
                 _combat.SetInCombatMode(uid, true, combatMode);
             }
@@ -234,7 +237,7 @@ public sealed partial class NPCCombatSystem
 
             if (gun.NextFire > _timing.CurTime)
             {
-                return;
+                continue; // Forge-Change
             }
 
             _gun.SetTarget(gun, comp.Target); // Frontier - This ensures that the bullet won't fly over the target if it's downed

@@ -71,3 +71,5 @@ ent-FoodBakedCroissantCotton = хлопковый круассан
     .desc = Маслянистое, слоистое, волокнистое лакомство.
 ent-FoodBakedMuffinChocolate = шоколадный маффин
     .desc = Вкусный и нежный шоколадный кекс.
+ent-FoodBakedGrilledCheeseSandwich = жареный сырный сэндвич
+    .desc = Хлеб с сыром, обжаренные на масле - идеально для холодного дня в космосе.

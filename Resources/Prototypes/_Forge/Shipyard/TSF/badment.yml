@@ -1,0 +1,30 @@
+- type: vessel
+  id: badment
+  parent: BaseVesselAntag
+  name: TSF-EMP Бэдмент
+  description: перехватчик ТСФ, находящийся уже некоторое время в эксплуатации , призван обездвижить цель для более удобной атаки союзников, чаще всего его можно увидеть в сопровождении фрегатов
+  price: 84500
+  category: Small
+  group: Security
+  access: Security
+  shuttlePath: /Maps/_Forge/Shuttles/TSF/badment.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: badment
+  mapName: TSF-EMP Бэдмент
+  mapPath: /Maps/_Forge/Shuttles/TSF/badment.yml
+  minPlayers: 0
+  stations:
+    badment:
+      stationProto: StandardFrontierSecurityVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'TSF-EMP Бэдмент TSF{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'

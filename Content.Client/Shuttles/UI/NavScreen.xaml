@@ -3,6 +3,7 @@
               xmlns:controls="https://spacestation14.io"
               xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
               xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls"
+              xmlns:shields="clr-namespace:Content.Client._Crescent.ShipShields.UI"
               xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
                 <!-- Mono - wrap -->
                 <controls:LayoutContainer Margin="5 4 10 5">
@@ -82,6 +83,17 @@
                     </controls:GridContainer>
                     </controls:PanelContainer>
                     </controls:PanelContainer>
+                    <!-- Forge-Change-Start -->
+                    <controls:PanelContainer Name="ShieldPanel" Visible="False" VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                        <controls:PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                        </controls:PanelContainer.PanelOverride>
+                        <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 4 4 4">
+                            <controls:Label Text="{controls:Loc 'shuttle-console-shield-label'}"/>
+                            <shields:ShipShieldBar Name="ShieldBar" HorizontalExpand="True" MinHeight="20"/>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                    <!-- Forge-Change-End -->
                     <controls1:StripeBack
                         MinSize="48 48">
                         <controls:Label Name="NavSettingsLabel" Text="{controls:Loc 'shuttle-console-nav-settings'}"

@@ -129,7 +129,7 @@ public abstract class SharedConveyorController : VirtualController
 
         while (query.MoveNext(out var uid, out var comp, out var fixtures, out var physics, out var xform))
         {
-            _job.Conveyed.Add(((uid, comp, fixtures, physics, xform), Vector2.Zero, false));
+            _job.Conveyed.Add(((uid, comp, fixtures, physics, xform), Vector2.Zero, false, true));
         }
 
         _parallel.ProcessNow(_job, _job.Conveyed.Count);
@@ -176,7 +176,9 @@ public abstract class SharedConveyorController : VirtualController
 
             PhysicsSystem.SetLinearVelocity(ent.Entity.Owner, velocity, wakeBody: false);
 
-            if (!IsConveyed((ent.Entity.Owner, ent.Entity.Comp2)))
+            // TryConvey already walked contacts and recorded whether any active conveyor was touching.
+            // Reuse that result instead of paying for another contacts pass via IsConveyed.
+            if (!ent.HasActive)
             {
                 RemComp<ConveyedComponent>(ent.Entity.Owner);
             }
@@ -198,9 +200,14 @@ public abstract class SharedConveyorController : VirtualController
     /// <returns>False if we should no longer be considered actively conveyed.</returns>
     private bool TryConvey(Entity<ConveyedComponent, FixturesComponent, PhysicsComponent, TransformComponent> entity,
         bool prediction,
-        out Vector2 direction)
+        out Vector2 direction,
+        out bool hasActiveConveyor)
     {
         direction = Vector2.Zero;
+        // Default to true: on early-return paths we don't walk contacts, so we keep
+        // the ConveyedComponent until a real check can confirm there's no active belt.
+        hasActiveConveyor = true;
+
         var fixtures = entity.Comp2;
         var physics = entity.Comp3;
         var xform = entity.Comp4;
@@ -226,6 +233,7 @@ public abstract class SharedConveyorController : VirtualController
         var contacts = PhysicsSystem.GetContacts((entity.Owner, fixtures));
         var transform = PhysicsSystem.GetPhysicsTransform(entity.Owner);
         var anyConveyors = false;
+        var anyActive = false;
 
         while (contacts.MoveNext(out var contact))
         {
@@ -242,6 +250,10 @@ public abstract class SharedConveyorController : VirtualController
                 continue;
 
             anyConveyors = true;
+            var canRun = CanRun(conveyor);
+            if (canRun)
+                anyActive = true;
+
             var otherFixture = contact.OtherFixture(entity.Owner);
             var otherTransform = PhysicsSystem.GetPhysicsTransform(other);
 
@@ -249,7 +261,7 @@ public abstract class SharedConveyorController : VirtualController
             if (!_fixtures.TestPoint(otherFixture.Item2.Shape, otherTransform, transform.Position))
                 continue;
 
-            if (conveyor.Speed > bestSpeed && CanRun(conveyor))
+            if (conveyor.Speed > bestSpeed && canRun)
             {
                 bestSpeed = conveyor.Speed;
                 bestConveyor = (other, conveyor);
@@ -258,7 +270,12 @@ public abstract class SharedConveyorController : VirtualController
 
         // If we have no touching contacts we shouldn't be using conveyed anyway so nuke it.
         if (!anyConveyors)
+        {
+            hasActiveConveyor = false;
             return true;
+        }
+
+        hasActiveConveyor = anyActive;
 
         if (bestSpeed == 0f || bestConveyor == default)
             return true;
@@ -354,7 +371,7 @@ public abstract class SharedConveyorController : VirtualController
     {
         public int BatchSize => 16;
 
-        public List<(Entity<ConveyedComponent, FixturesComponent, PhysicsComponent, TransformComponent> Entity, Vector2 Direction, bool Result)> Conveyed = new();
+        public List<(Entity<ConveyedComponent, FixturesComponent, PhysicsComponent, TransformComponent> Entity, Vector2 Direction, bool Result, bool HasActive)> Conveyed = new();
 
         public SharedConveyorController System;
 
@@ -371,33 +388,9 @@ public abstract class SharedConveyorController : VirtualController
 
             var result = System.TryConvey(
                 (convey.Entity.Owner, convey.Entity.Comp1, convey.Entity.Comp2, convey.Entity.Comp3, convey.Entity.Comp4),
-                Prediction, out var direction);
+                Prediction, out var direction, out var hasActive);
 
-            Conveyed[index] = (convey.Entity, direction, result);
+            Conveyed[index] = (convey.Entity, direction, result, hasActive);
         }
-    }
-
-    /// <summary>
-    /// Checks an entity's contacts to see if it's still being conveyed.
-    /// </summary>
-    private bool IsConveyed(Entity<FixturesComponent?> ent)
-    {
-        if (!Resolve(ent.Owner, ref ent.Comp))
-            return false;
-
-        var contacts = PhysicsSystem.GetContacts(ent.Owner);
-
-        while (contacts.MoveNext(out var contact))
-        {
-            if (!contact.IsTouching)
-                continue;
-
-            var other = contact.OtherEnt(ent.Owner);
-
-            if (_conveyorQuery.TryComp(other, out var comp) && CanRun(comp))
-                return true;
-        }
-
-        return false;
     }
 }

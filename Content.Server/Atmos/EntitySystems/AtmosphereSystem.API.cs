@@ -296,6 +296,7 @@ public partial class AtmosphereSystem
         if (!grid.Comp.AtmosDevices.Add(device))
             return false;
 
+        grid.Comp.CurrentRunAtmosDevicesDirty = true;
         device.Comp.JoinedGrid = grid;
         return true;
     }
@@ -310,6 +311,7 @@ public partial class AtmosphereSystem
         if (!grid.Comp.AtmosDevices.Remove(device))
             return false;
 
+        grid.Comp.CurrentRunAtmosDevicesDirty = true;
         device.Comp.JoinedGrid = null;
         return true;
     }

@@ -81,3 +81,15 @@
     DisciplinesDiskUssp: 2
     FactionLatheFlatpack: 2
 
+# Vend Harmony Medical Enterprises
+
+- type: vendingMachineInventory
+  id: CompanyVendInventoryHarmony
+  startingInventory:
+    TelecomServerFlatpack: 1
+    EncryptionKeyHarmony: 4
+    DisciplinesDiskHME: 2
+    ClothingUniformJumpsuitHME: 4
+    ClothingUniformJumpskirtHME: 4
+    ClothingHeadHatBeretHME: 4
+

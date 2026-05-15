@@ -10,3 +10,19 @@
     sprite: Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
   - type: Clothing
     sprite: Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
+
+# Harmony Medical Enterprises company
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtHME
+  name: HME jumpskirt
+  description: HME-jumpskirt-desc
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/hme_skirt.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/hme_skirt.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 250

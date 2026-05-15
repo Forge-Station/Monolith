@@ -623,40 +623,57 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
     // Forge-Change-Start
     /// <summary>
-    /// Finds the first ship shield emitter on the given grid and reports its current state.
+    /// One bubble per grid: <see cref="ShipShieldedComponent.Source"/> is canonical for HUD/radar.
+    /// If the field is not up yet, uses the lowest <see cref="EntityUid"/> among emitters on that grid (deterministic).
     /// </summary>
     private ShipShieldState GetShieldState(EntityUid? gridUid)
     {
         if (gridUid == null)
             return default;
 
-        var query = AllEntityQuery<ShipShieldEmitterComponent, TransformComponent>();
-        while (query.MoveNext(out _, out var emitter, out var emitterXform))
+        ShipShieldEmitterComponent? emitter = null;
+
+        if (TryComp<ShipShieldedComponent>(gridUid.Value, out var shielded)
+            && shielded.Source is { } src
+            && TryComp<ShipShieldEmitterComponent>(src, out var canonical))
         {
-            if (emitterXform.GridUid != gridUid)
-                continue;
-
-            // Skip emitters that are just lying on the grid (not anchored) — they aren't functional shields.
-            if (!emitterXform.Anchored)
-                continue;
-
-            var limit = emitter.DamageLimit > 0 ? emitter.DamageLimit : 1f;
-            var percent = Math.Clamp(1f - emitter.Damage / limit, 0f, 1f);
-            var online = emitter.Shield != null;
-
-            TimeSpan? endTime = null;
-            if (!online)
+            emitter = canonical;
+        }
+        else
+        {
+            EntityUid? best = null;
+            var query = AllEntityQuery<ShipShieldEmitterComponent, TransformComponent>();
+            while (query.MoveNext(out var uid, out _, out var emitterXform))
             {
-                var healRate = emitter.HealPerSecond * emitter.UnpoweredBonus;
-                var rechargeSeconds = healRate > 0f ? emitter.Damage / healRate : 0f;
-                var seconds = MathF.Max(rechargeSeconds, emitter.OverloadAccumulator);
-                endTime = _timing.CurTime + TimeSpan.FromSeconds(seconds);
+                if (emitterXform.GridUid != gridUid)
+                    continue;
+
+                // Skip emitters that are just lying on the grid (not anchored) — they aren't functional shields.
+                if (!emitterXform.Anchored)
+                    continue;
+
+                if (best == null || uid.CompareTo(best.Value) < 0)
+                    best = uid;
             }
 
-            return new ShipShieldState(true, online, percent, endTime);
+            if (best == null || !TryComp<ShipShieldEmitterComponent>(best.Value, out var picked))
+                return default;
+
+            emitter = picked;
         }
 
-        return default;
+        var limit = emitter.DamageLimit > 0 ? emitter.DamageLimit : 1f;
+        var percent = Math.Clamp(1f - emitter.Damage / limit, 0f, 1f);
+        var online = emitter.Shield != null;
+
+        TimeSpan? endTime = null;
+        if (!online)
+        {
+            var seconds = ShipShieldEmitterMath.EstimateSecondsUntilShieldCanRaise(emitter);
+            endTime = _timing.CurTime + TimeSpan.FromSeconds(seconds);
+        }
+
+        return new ShipShieldState(true, online, percent, endTime);
     }
     // Forge-Change-End
 

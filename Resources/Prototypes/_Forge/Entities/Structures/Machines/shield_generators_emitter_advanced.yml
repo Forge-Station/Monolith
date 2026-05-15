@@ -1,0 +1,301 @@
+# Advanced FSG emitters — use extended ShipShieldEmitter fields (linear load, passthrough, APC-scaled heal, overload scaling).
+# Unlocked by ForgeFSGShieldsCivilianEmitterTech (after medium arrays).
+
+- type: entity
+  id: ShieldGeneratorFSG195L
+  parent: ShieldGeneratorSmall
+  name: FSG-195L "Tangent" Shield Generator
+  suffix: tier 2, linear load
+  description: >-
+    A medium shield with a regulator stack that front-loads power cost into a linear wear term instead of a harsh exponential knee.
+    Easier to budget reactors on mid-fight draw, but still hungry at the top of its envelope.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 920
+    damageExp: 1.03
+    damageLinearLoadCoefficient: 0.085
+    powerModifier: 0.48
+    baseDraw: 38000
+    maxDraw: 115000
+    unpoweredBonus: 4.2
+    damageLimit: 92000
+    damageOverloadTimePunishment: 80
+    shieldColor: "#4ECDC4"
+    collisionResistanceMultiplier: 0.5
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    offset: 0,0.5
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#4ECDC4"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,1.4"
+        density: 300
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1700
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 700
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 400
+  - type: ApcPowerReceiver
+    powerLoad: 38000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#4ECDC4"
+  - type: Machine
+    board: MachineShieldFSG195LCircuitboard
+  - type: Construction
+    graph: Machine1x2
+    node: machine
+    containers:
+    - machine_board
+    - machine_parts
+  - type: ShipRepairable
+    repairTime: 25
+    repairCost: 185
+
+- type: entity
+  id: ShieldGeneratorFSG275P
+  parent: ShieldGeneratorSmall
+  name: FSG-275P "Weave" Shield Generator
+  suffix: tier 2, partial absorption
+  description: >-
+    A combat-data lattice that deliberately lets a fraction of incoming slugs bleed through while the bubble eats the rest.
+    Under stress the weave opens more: expect hull chips unless gunners keep the field fresh.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 780
+    damageExp: 1.04
+    baseDraw: 42000
+    maxDraw: 122000
+    unpoweredBonus: 4
+    damageLimit: 130000
+    damageOverloadTimePunishment: 100
+    shieldColor: "#B388FF"
+    collisionResistanceMultiplier: 0.5
+    shieldProjectileAbsorptionFraction: 0.72
+    shieldPassthroughFromStress: 0.38
+    shieldPassthroughImmunityTicks: 4
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    offset: 0,0.5
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#B388FF"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,1.4"
+        density: 300
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1700
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 700
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 410
+  - type: ApcPowerReceiver
+    powerLoad: 42000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#B388FF"
+  - type: Machine
+    board: MachineShieldFSG275PCircuitboard
+  - type: Construction
+    graph: Machine1x2
+    node: machine
+    containers:
+    - machine_board
+    - machine_parts
+  - type: ShipRepairable
+    repairTime: 26
+    repairCost: 195
+
+- type: entity
+  id: ShieldGeneratorFSG305V
+  parent: ShieldGeneratorSmall
+  name: FSG-305V "Busbar" Shield Generator
+  suffix: tier 2, APC-scaled heal
+  description: >-
+    Shipyard-grade bus regulation: recovery of the field tracks how stiff the local APC feed is.
+    Clean power means fast face repair; brownouts hurt twice — and brutal overloads stretch lockout time.
+  components:
+  - type: ShipShieldEmitter
+    healPerSecond: 900
+    healScalesWithPowerReceived: true
+    damageExp: 1.05
+    baseDraw: 45000
+    maxDraw: 128000
+    unpoweredBonus: 4.8
+    damageLimit: 102000
+    damageOverloadTimePunishment: 80
+    overloadPunishmentScale: 0.28
+    overloadPunishmentMax: 210
+    shieldColor: "#F4D35E"
+    collisionResistanceMultiplier: 0.5
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    offset: 0,0.5
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#F4D35E"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,1.4"
+        density: 300
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1700
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194
+          - 0
+          - 0
+          - 6
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 700
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 420
+  - type: ApcPowerReceiver
+    powerLoad: 45000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#F4D35E"
+  - type: Machine
+    board: MachineShieldFSG305VCircuitboard
+  - type: Construction
+    graph: Machine1x2
+    node: machine
+    containers:
+    - machine_board
+    - machine_parts
+  - type: ShipRepairable
+    repairTime: 27
+    repairCost: 205

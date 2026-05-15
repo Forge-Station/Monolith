@@ -19,6 +19,26 @@
       Plasteel: 10
 
 - type: entity
+  id: MachineShieldFSG85ECircuitboard
+  parent: BaseMachineCircuitboard
+  name: FSG-85E shield generator board
+  description: A machine board for an FSG-85E Brownout shield generator.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: ShieldGeneratorFSG85E
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 3
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Glass: 9
+      Steel: 9
+      Plasma: 24
+      Plasteel: 8
+
+- type: entity
   id: MachineShieldFSG100Circuitboard
   parent: BaseMachineCircuitboard
   name: FSG-100 shield generator board
@@ -69,6 +89,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG160C
+    frameSize: 1x2
     componentRequirements:
       AmeFuelContainer:
         amount: 4
@@ -90,6 +111,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG220
+    frameSize: 1x2
     componentRequirements:
       AmeFuelContainer:
         amount: 5
@@ -112,6 +134,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG250C
+    frameSize: 1x2
     componentRequirements:
       AmeFuelContainer:
         amount: 5
@@ -126,6 +149,30 @@
       UraniumFissile: 1
 
 - type: entity
+  id: MachineShieldFSG355SCircuitboard
+  parent: BaseMachineCircuitboard
+  name: FSG-355S shield generator board
+  description: A machine board for an FSG-355S Sieve shield generator.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: ShieldGeneratorFSG355S
+    frameSize: 1x2
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 6
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Glass: 17
+      Steel: 17
+      Plasma: 42
+      Plasteel: 28
+      Gold: 7
+      Silver: 7
+      UraniumFissile: 1
+
+- type: entity
   id: MachineShieldFSG330RCircuitboard
   parent: BaseMachineCircuitboard
   name: FSG-330R shield generator board
@@ -135,6 +182,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG330R
+    frameSize: 1x2
     componentRequirements:
       AmeFuelContainer:
         amount: 6
@@ -158,6 +206,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG420
+    frameSize: 2x2
     componentRequirements:
       AmeFuelContainer:
         amount: 6
@@ -181,6 +230,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG470P
+    frameSize: 2x2
     componentRequirements:
       AmeFuelContainer:
         amount: 7
@@ -204,6 +254,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG600C
+    frameSize: 2x2
     componentRequirements:
       AmeFuelContainer:
         amount: 8
@@ -227,6 +278,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG900P
+    frameSize: 3x3
     componentRequirements:
       AmeFuelContainer:
         amount: 10
@@ -239,3 +291,122 @@
       Gold: 18
       Silver: 18
       UraniumFissile: 3
+
+- type: entity
+  id: MachineShieldFSG870RCircuitboard
+  parent: BaseMachineCircuitboard
+  name: FSG-870R shield generator board
+  description: A machine board for an FSG-870R Riptide shield generator.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: ShieldGeneratorFSG870R
+    frameSize: 3x3
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 9
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Glass: 34
+      Steel: 34
+      Plasma: 68
+      Plasteel: 56
+      Gold: 17
+      Silver: 17
+      UraniumFissile: 2
+
+- type: entity
+  id: MachineShieldFSG950MCircuitboard
+  parent: BaseMachineCircuitboard
+  name: FSG-950M shield generator board
+  description: A machine board for an FSG-950M Anvil shield generator.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: ShieldGeneratorFSG950M
+    frameSize: 3x3
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 12
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Glass: 40
+      Steel: 40
+      Plasma: 78
+      Plasteel: 66
+      Gold: 20
+      Silver: 20
+      UraniumFissile: 4
+
+- type: entity
+  id: MachineShieldFSG195LCircuitboard
+  parent: BaseMachineCircuitboard
+  name: FSG-195L shield generator board
+  description: A machine board for an FSG-195L Tangent shield generator.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: ShieldGeneratorFSG195L
+    frameSize: 1x2
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 5
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Glass: 14
+      Steel: 14
+      Plasma: 36
+      Plasteel: 22
+      Gold: 6
+      Silver: 6
+
+- type: entity
+  id: MachineShieldFSG275PCircuitboard
+  parent: BaseMachineCircuitboard
+  name: FSG-275P shield generator board
+  description: A machine board for an FSG-275P Weave shield generator.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: ShieldGeneratorFSG275P
+    frameSize: 1x2
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 5
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Glass: 15
+      Steel: 15
+      Plasma: 38
+      Plasteel: 24
+      Gold: 7
+      Silver: 7
+      UraniumFissile: 1
+
+- type: entity
+  id: MachineShieldFSG305VCircuitboard
+  parent: BaseMachineCircuitboard
+  name: FSG-305V shield generator board
+  description: A machine board for an FSG-305V Busbar shield generator.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: ShieldGeneratorFSG305V
+    frameSize: 1x2
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 6
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Glass: 16
+      Steel: 16
+      Plasma: 40
+      Plasteel: 26
+      Gold: 7
+      Silver: 8
+      UraniumFissile: 1

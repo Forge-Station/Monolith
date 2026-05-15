@@ -89,3 +89,10 @@
   keycode: 'ж'
   frequency: 7008
   color: "#83489d"
+
+- type: radioChannel
+  id: Harmony
+  name: chat-radio-harmony
+  keycode: 'е'
+  frequency: 7009
+  color: "#FF8C00"

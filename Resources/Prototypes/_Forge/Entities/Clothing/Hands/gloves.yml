@@ -48,3 +48,16 @@
   - type: Clothing
     sprite: Forge/Clothing/Hands/Gloves/nexus_gloves.rsi
   - type: Insulated
+
+- type: entity
+  parent: [ClothingHandsGlovesCaptain, BaseC1Contraband]
+  id: ClothingHandsGlovesCombatTrauma
+  name: trauma combat gloves
+  description: trauma desk
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Hands/Gloves/tti_gloves.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Hands/Gloves/tti_gloves.rsi
+  - type: Insulated

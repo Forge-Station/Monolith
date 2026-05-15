@@ -359,9 +359,9 @@
   description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Head of Security.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hos_alt.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/hos_alt.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hos_alt.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/hos_alt.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -596,9 +596,9 @@
   description: A jumpsuit made of strong material, providing robust protection.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/security.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/security.rsi
   - type: Item
     inhandVisuals:
       left:
@@ -840,9 +840,9 @@
   description: Uniform for elite syndicate operatives performing tactical operations in deep space.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/operative.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/operative.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/operative.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/operative.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -1203,9 +1203,9 @@
   description: A sign of skill and prestige within the security department.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/senior_officer.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/senior_officer.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/senior_officer.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/senior_officer.rsi
 
 - type: entity
   parent: ClothingUniformBase

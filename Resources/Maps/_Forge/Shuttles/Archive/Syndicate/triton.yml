@@ -7920,7 +7920,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -2.4238122,-14.341039
       parent: 1
-- proto: ShieldGeneratorMedium
+- proto: ShieldGeneratorFSG220
   entities:
   - uid: 1145
     components:

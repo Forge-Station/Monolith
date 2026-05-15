@@ -3,8 +3,12 @@
   id: MdMedicJumpsuit
   name: loadout-group-contractor-jumpsuit
   loadouts:
+  - MedicalTraumaJumpsuitStandard # Forge-change
+  - MedicalTraumaJumpsuit # Forge-change
+  - MedicalTraumaJumpskirt # Forge-change
+  - MedicalTraumaJumpsuitBlue # Forge-change
+  - MedicalTraumaJumpskirtBlue # Forge-change
   - MedicalDoctorJumpsuit
-  - MedicalTraumaJumpsuit # Forge
   - MedicalDoctorJumpskirt
   - MedicalBlueScrubs
   - MedicalGreenScrubs
@@ -22,17 +26,20 @@
   - ContractorClothingUniformJumpsuitPsychologist
   - ContractorClothingUniformJumpskirtPsychologist
   fallbacks:
-  - MedicalDoctorJumpsuit
+  - MedicalTraumaJumpsuitStandard # Forge-change
 
 - type: loadoutGroup
   id: MdMedicBackpack
   name: loadout-group-contractor-backpack
   loadouts:
+  - MdMedicClothingBackpackSatchelTrauma # Forge-change 
+  - MdMedicClothingTraumaBackpack # Forge-change
+  - MdMedicClothingBackpackDuffelTrauma # Forge-change
   - MdMedicClothingModsuitParamedicPowerCell
   subgroups:
   - DocBackpack
   fallbacks:
-  - DocClothingBackpackMedical
+  - MdMedicClothingBackpackSatchelTrauma # Forge-change
 
 - type: loadoutGroup
   id: MdMedicPDA
@@ -57,5 +64,8 @@
   name: loadout-group-contractor-gloves
   minLimit: 0
   loadouts:
+  - GlovesCombatTrauma # Forge-change
   - NitrileGloves
   - LatexGloves
+  fallbacks:
+  - GlovesCombatTrauma # Forge-change

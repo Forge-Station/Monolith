@@ -16,7 +16,7 @@
     sound:
       path: /Audio/Items/welder_drop.ogg
   - type: Sprite
-    sprite: Objects/Tools/welder.rsi
+    sprite: Forge/Objects/Tools/Standart/welder.rsi
     layers:
     - state: icon
     - state: welder_flame
@@ -31,7 +31,7 @@
           False: { visible: false }
   - type: Item
     size: Small
-    sprite: Objects/Tools/welder.rsi
+    sprite: Forge/Objects/Tools/Standart/welder.rsi
   - type: ItemToggle
     predictable: false
     soundActivate:
@@ -145,9 +145,9 @@
   description: "An industrial welder with over double the fuel capacity."
   components:
   - type: Sprite
-    sprite: Objects/Tools/welder_industrial.rsi
+    sprite: Forge/Objects/Tools/Standart/welder_industrial.rsi
   - type: Item
-    sprite: Objects/Tools/welder_industrial.rsi
+    sprite: Forge/Objects/Tools/Standart/welder_industrial.rsi
   - type: SolutionContainerManager
     solutions:
       Welder:
@@ -166,9 +166,9 @@
   description: "An advanced industrial welder with a raised capacity for fuel while also being faster at welding."
   components:
   - type: Sprite
-    sprite: Objects/Tools/welder_industrialadv.rsi
+    sprite: Forge/Objects/Tools/Standart/welder_industrialadv.rsi
   - type: Item
-    sprite: Objects/Tools/welder_industrialadv.rsi
+    sprite: Forge/Objects/Tools/Standart/welder_industrialadv.rsi
   - type: SolutionContainerManager
     solutions:
       Welder:
@@ -186,9 +186,9 @@
   description: "An experimental welder producing a plasma-like flame along with a heavily upgraded fuel capacity capable of self-fuel generation while being less harmful to the eyes."
   components:
   - type: Sprite
-    sprite: Objects/Tools/welder_experimental.rsi
+    sprite: Forge/Objects/Tools/Standart/welder_experimental.rsi
   - type: Item
-    sprite: Objects/Tools/welder_experimental.rsi
+    sprite: Forge/Objects/Tools/Standart/welder_experimental.rsi
   - type: SolutionContainerManager
     solutions:
       Welder:
@@ -221,10 +221,10 @@
   description: "A miniature welder used during emergencies."
   components:
   - type: Sprite
-    sprite: Objects/Tools/welder_mini.rsi
+    sprite: Forge/Objects/Tools/Standart/welder_mini.rsi
   - type: Item
     size: Tiny
-    sprite: Objects/Tools/welder_mini.rsi
+    sprite: Forge/Objects/Tools/Standart/welder_mini.rsi
   - type: RefillableSolution
     solution: Welder
   - type: SolutionContainerManager

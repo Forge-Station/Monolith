@@ -10,6 +10,7 @@
   tier: 2
   cost: 18000
   recipeUnlocks:
+  - MachineShieldFSG85ECircuitboard
   - MachineShieldFSG90RCircuitboard
   - MachineShieldFSG100Circuitboard
   - MachineShieldFSG110PCircuitboard
@@ -29,9 +30,25 @@
   - MachineShieldFSG220Circuitboard
   - MachineShieldFSG250CCircuitboard
   - MachineShieldFSG330RCircuitboard
+  - MachineShieldFSG355SCircuitboard
   technologyPrerequisites:
   - ForgeFSGShieldsCivilianT1
   position: -5, 9
+
+- type: technology
+  id: ForgeFSGShieldsCivilianEmitterTech
+  name: research-technology-forge-fsg-shields-emitter-advanced
+  entityIcon: MachineShieldFSG275PCircuitboard
+  discipline: CivilianServices
+  tier: 3
+  cost: 36000
+  recipeUnlocks:
+  - MachineShieldFSG195LCircuitboard
+  - MachineShieldFSG275PCircuitboard
+  - MachineShieldFSG305VCircuitboard
+  technologyPrerequisites:
+  - ForgeFSGShieldsCivilianT2
+  position: -6, 11
 
 # --- Faction & company R&D: T3 (heavy / specialized arrays) ---
 
@@ -46,6 +63,7 @@
   - MachineShieldForgeTSFHeavyCircuitboard
   - MachineShieldForgeTSFPrismaticCircuitboard
   - MachineShieldForgeTSFCollisionCircuitboard
+  - MachineShieldForgeTSFSagittaCircuitboard
   technologyPrerequisites:
   - TsfAltair
   - UniversalMaterialResearchT2
@@ -62,6 +80,7 @@
   - MachineShieldForgeUsspHeavyCircuitboard
   - MachineShieldForgeUsspPrismaticCircuitboard
   - MachineShieldForgeUsspCollisionCircuitboard
+  - MachineShieldForgeUsspKerchCircuitboard
   technologyPrerequisites:
   - UsspMediumShips
   position: 17, 10
@@ -77,6 +96,7 @@
   - MachineShieldForgeRenegateHeavyCircuitboard
   - MachineShieldForgeRenegatePrismaticCircuitboard
   - MachineShieldForgeRenegateCollisionCircuitboard
+  - MachineShieldForgeRenegateSkullDebtCircuitboard
   technologyPrerequisites:
   - RogueRenegateVouchersAzimutlateT2
   - UniversalMaterialResearchT2
@@ -93,6 +113,7 @@
   - MachineShieldForgeViperHeavyCircuitboard
   - MachineShieldForgeViperPrismaticCircuitboard
   - MachineShieldForgeViperCollisionCircuitboard
+  - MachineShieldForgeViperKiteCircuitboard
   technologyPrerequisites:
   - ViperGroupHardsuitBasic
   - UniversalMaterialResearchT2
@@ -109,6 +130,7 @@
   - MachineShieldForgeUllmanHeavyCircuitboard
   - MachineShieldForgeUllmanPrismaticCircuitboard
   - MachineShieldForgeUllmanCollisionCircuitboard
+  - MachineShieldForgeUllmanLockboxCircuitboard
   technologyPrerequisites:
   - UllmanPulseAdv
   - UniversalMaterialResearchT2

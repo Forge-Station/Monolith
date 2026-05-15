@@ -3,10 +3,12 @@ using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Humanoid;
 using Content.Shared.Station;
-using Content.Shared._EE.Contractors.Components;  // Forge-Change
+using Content.Shared._EE.Contractors.Components; // Forge-Change
 using Robust.Shared.Prototypes;
 using Content.Shared.Traits.Assorted.Components;
 using Content.Shared.Preferences;
+using Content.Shared.Players.PlayTimeTracking; // Forge-Change
+using Robust.Shared.Player; // Forge-Change
 
 namespace Content.Shared.Traits.Assorted.Systems;
 
@@ -14,6 +16,7 @@ public sealed class ExtendDescriptionSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedStationSpawningSystem _stationSpawning = default!;
+    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!; // Forge-Change
 
     public override void Initialize()
     {
@@ -34,6 +37,14 @@ public sealed class ExtendDescriptionSystem : EntitySystem
         HumanoidCharacterProfile? profile = null;
         _stationSpawning.GetProfile(args.Examiner, out profile);
 
+        // Forge-Change-start
+        Dictionary<string, TimeSpan> playTime = new();
+        if (TryComp<ActorComponent>(args.Examiner, out var actor) && actor.PlayerSession != null)
+        {
+            playTime = new Dictionary<string, TimeSpan>(_playtime.GetPlayTimes(actor.PlayerSession));
+        }
+        // Forge-Change-end
+
         foreach (var desc in component.DescriptionList)
         {
             if (!args.IsInDetailsRange && desc.RequireDetailRange
@@ -46,7 +57,7 @@ public sealed class ExtendDescriptionSystem : EntitySystem
             {
                 foreach (var req in desc.Requirements)
                 {
-                    if (!req.Check(EntityManager, _proto, profile, new Dictionary<string, TimeSpan>(), out _))
+                    if (!req.Check(EntityManager, _proto, profile, playTime, out _)) // Forge-change: Dictionary >> playTime
                     {
                         meetsRequirements = false;
                         break;

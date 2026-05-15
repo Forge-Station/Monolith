@@ -27,17 +27,18 @@
 - type: vendingMachineInventory
   id: CompanyVendInventoryUllman
   startingInventory:
-    ClothingOuterHardsuitUIPilot: 1
-    ClothingOuterHardsuitUllmanEngineer: 1
-    ClothingUniformJumpsuitSalvageSpecialist: 2
-    ClothingNeckUllimanOvercoat: 3
-    ClothingNeckHeavyUllimanOvercoat: 1
+    ClothingOuterHardsuitUIPilot: 2
+    ClothingOuterHardsuitUllmanEngineer: 2
+    ClothingUniformJumpsuitSalvageSpecialist: 4294967295
+    ClothingNeckUllimanOvercoat: 4294967295
+    ClothingNeckHeavyUllimanOvercoat: 2
     WeaponPistolUllmanSmartMagnumMK5: 1
     TelecomServerFlatpack: 1
     EncryptionKeyUllmanIndustries: 2
     DisciplinesDiskUllman: 2
-    ClothingUniformJumpsuitUI: 5
-    ClothingEyesUIGoogles: 5
+    ClothingUniformJumpsuitUI: 4294967295
+    ClothingEyesUIGoogles: 4294967295
+    ClothingNeckCloakUllmanPoncho: 4
 
 - type: vendingMachineInventory
   id: CompanyVendInventoryUSSP
@@ -79,4 +80,16 @@
     WeaponDP29: 3 # Infinite
     DisciplinesDiskUssp: 2
     FactionLatheFlatpack: 2
+
+# Vend Harmony Medical Enterprises
+
+- type: vendingMachineInventory
+  id: CompanyVendInventoryHarmony
+  startingInventory:
+    TelecomServerFlatpack: 1
+    EncryptionKeyHarmony: 4
+    DisciplinesDiskHME: 2
+    ClothingUniformJumpsuitHME: 4
+    ClothingUniformJumpskirtHME: 4
+    ClothingHeadHatBeretHME: 4
 

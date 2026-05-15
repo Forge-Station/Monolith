@@ -10,3 +10,21 @@
     grid:
     - 0,0,7,4
     maxItemSize: Huge
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ClothingBackpackDuffelTrauma
+  name: trauma duffel bag
+  description: A large duffel bag for holding any army goods.
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Back/Duffels/tti.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Back/Duffels/tti.rsi
+  - type: Storage
+    grid:
+    - 0,0,7,4
+    maxItemSize: Huge
+  - type: ExplosionResistance
+    damageCoefficient: 0.25

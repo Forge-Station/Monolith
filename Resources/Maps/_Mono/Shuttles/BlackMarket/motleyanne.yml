@@ -12195,7 +12195,7 @@ entities:
     - type: Transform
       pos: -3.6472573,15.645862
       parent: 1
-- proto: ShieldGeneratorSmall
+- proto: ShieldGeneratorFSG100
   entities:
   - uid: 2292
     components:

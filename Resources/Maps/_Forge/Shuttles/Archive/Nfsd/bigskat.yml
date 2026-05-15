@@ -45863,7 +45863,7 @@ entities:
     - type: Transform
       pos: -5.5853457,-2.9181156
       parent: 1
-- proto: ShieldGeneratorMedium
+- proto: ShieldGeneratorFSG220
   entities:
   - uid: 1701
     components:

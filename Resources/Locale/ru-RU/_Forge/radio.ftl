@@ -17,3 +17,4 @@ chat-radio-mac = MAC
 chat-radio-ullman = Ullman
 chat-radio-unsa = UNSA
 chat-radio-tl = TechnicLogistic
+chat-radio-harmony = Harmony

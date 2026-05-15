@@ -4,6 +4,32 @@
 
 # Base
 
+- type: entity  # Forge-Change-Comp
+  parent: FoodMealBase  
+  id: FoodMealHotdog  
+  name: hotdog  
+  description: Hot diggity dog!  
+  components:  
+  - type: Tag  
+    tags:  
+    - Cooked  
+  - type: FlavorProfile  
+    flavors:  
+      - meaty  
+      - bread  
+  - type: Sprite  
+    sprite: Objects/Consumable/Food/meals.rsi  
+    state: hotdog  
+  - type: SolutionContainerManager  
+    solutions:  
+      food:  
+        maxVol: 18  
+        reagents:  
+        - ReagentId: Nutriment  
+          Quantity: 8  
+        - ReagentId: Flavorol  
+          Quantity: 5
+
 - type: entity
   parent: FoodInjectableBase
   id: FoodMealBase

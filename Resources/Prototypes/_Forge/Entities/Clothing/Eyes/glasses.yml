@@ -89,3 +89,20 @@
   - type: NightVision
     flashDurationMultiplier: 2.75
     isEquipment: true
+
+- type: entity
+  parent: [ ClothingEyesBase, ShowSecurityIcons ]
+  id: ClothingEyesUIGoogles
+  name: Солнцезащитные очки U.I
+  description: Стильные фиолетовые очки с возможностью просмотра профессии и компаний
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: StaticPrice
+    price: 30
+    vendPrice: 200

@@ -358,3 +358,20 @@
     sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
   - type: Clothing
     sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
+
+# Harmony Medical Enterprises company
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitHME
+  name: HME jumpsuit
+  description: HME-jumpsuit-desc
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 250
+

@@ -1,0 +1,51 @@
+- type: entity
+  name: HME-RI-01 hypospray
+  parent: BaseItem
+  description: basic-HME-hypospray-desc
+  id: HMEBasicHypo
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/harmonybasichypo.rsi
+    state: hypo
+  - type: Item
+    sprite: Forge/Objects/Specific/Medical/harmonybasichypo.rsi
+  - type: SolutionContainerManager
+    solutions:
+      hypospray:
+        maxVol: 15
+  - type: RefillableSolution
+    solution: hypospray
+  - type: ExaminableSolution
+    solution: hypospray
+  - type: Hypospray
+    onlyAffectsMobs: false
+  - type: UseDelay
+    delay: 0.60
+  - type: StaticPrice
+    price: 1500
+
+- type: entity
+  name: HME-RI-02 hypospray
+  parent: BaseItem
+  description: standart-HME-hypospray-desc
+  id: HMEStandartHypo
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/harmonystandarthypo.rsi
+    state: hypo
+  - type: Item
+    sprite: Forge/Objects/Specific/Medical/harmonystandarthypo.rsi
+  - type: SolutionContainerManager
+    solutions:
+      hypospray:
+        maxVol: 25
+  - type: RefillableSolution
+    solution: hypospray
+  - type: ExaminableSolution
+    solution: hypospray
+  - type: Hypospray
+    onlyAffectsMobs: false
+  - type: UseDelay
+    delay: 0.4
+  - type: StaticPrice
+    price: 5000

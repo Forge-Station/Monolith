@@ -138,6 +138,22 @@
     state: ren_flunky
   jobName: forge-job-name-flunky
 
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconRenegateWatchman
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: ren_watchman
+  jobName: forge-job-name-watchman
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconRenegateMilitia
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: ren_militia
+  jobName: forge-job-name-militia
+
 # region Federation
 
 - type: jobIcon

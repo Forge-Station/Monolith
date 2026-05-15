@@ -1,4 +1,12 @@
-ent-AirlockUSSP = USSP, Locked
-ent-AirlockUSSPSecure = USSP Secure, Locked
-ent-AirlockUSSPCommand = USSP Command, Locked
-ent-AirlockTsfEngineering = TSF Engineering, Locked
+ent-AirlockUSSP = шлюз
+    .desc = { ent-Airlock.desc }
+    .suffix = USSP, Закрыт
+ent-AirlockUSSPSecure = шлюз
+    .desc = { ent-Airlock.desc }
+    .suffix = USSP Secure, Закрыт
+ent-AirlockUSSPCommand = шлюз
+    .desc = { ent-Airlock.desc }
+    .suffix = Командование USSP, Закрыт
+ent-AirlockTsfEngineering = шлюз
+    .desc = { ent-Airlock.desc }
+    .suffix = Инженерный TSF, Закрыт

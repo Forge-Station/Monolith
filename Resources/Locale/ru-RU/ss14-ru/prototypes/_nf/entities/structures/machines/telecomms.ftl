@@ -10,5 +10,6 @@ ent-TelecomServerFilledSyndicate = { ent-TelecomServer }
 ent-TelecomServerFilledFreelance = { ent-TelecomServer }
     .suffix = Фриланс
     .desc = { ent-TelecomServer.desc }
-
-ent-TelecomServerFilledNfsd = TelecomServerFilledNfsd
+ent-TelecomServerFilledNfsd = { ent-TelecomServer }
+    .suffix = ТСФ
+    .desc = { ent-TelecomServer.desc }

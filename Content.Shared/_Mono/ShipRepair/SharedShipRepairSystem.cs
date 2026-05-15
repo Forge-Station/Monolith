@@ -49,6 +49,10 @@ public abstract partial class SharedShipRepairSystem : EntitySystem
         repairData.Chunks.Clear();
         repairData.EntityPalette.Clear();
 
+        // Sidecar dict for O(1) palette lookups; the persisted EntityPalette is a List
+        // because it's network-replicated by index, and we keep both in sync below.
+        var paletteIndices = new Dictionary<EntProtoId, int>();
+
         var chunkSize = repairData.ChunkSize;
 
         // tile snapshot
@@ -94,11 +98,11 @@ public abstract partial class SharedShipRepairSystem : EntitySystem
             }
             var protoId = maybeProtoId.Value;
 
-            var paletteIndex = repairData.EntityPalette.IndexOf(protoId);
-            if (paletteIndex == -1)
+            if (!paletteIndices.TryGetValue(protoId, out var paletteIndex))
             {
+                paletteIndex = repairData.EntityPalette.Count;
                 repairData.EntityPalette.Add(protoId);
-                paletteIndex = repairData.EntityPalette.Count - 1;
+                paletteIndices[protoId] = paletteIndex;
             }
 
             var localPos = childXform.LocalPosition;

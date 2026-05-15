@@ -247,12 +247,16 @@ public sealed partial class GunSystem : SharedGunSystem
 
         var projectiles = ShootRequested(GetNetEntity(gunUid), GetNetCoordinates(coordinates), target, null, (Robust.Shared.Player.ICommonSession)session);
 
+        List<int>? shotIds = null;
+        if (projectiles is { Count: > 0 })
+            shotIds = projectiles.Select(e => e.Entity.Id).ToList();
+
         EntityManager.RaisePredictiveEvent(new RequestShootEvent()
         {
             Target = target,
             Coordinates = GetNetCoordinates(coordinates),
             Gun = GetNetEntity(gunUid),
-            Shot = projectiles?.Select(e => e.Entity.Id).ToList(),
+            Shot = shotIds,
         });
     }
 

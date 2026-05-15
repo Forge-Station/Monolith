@@ -29,6 +29,11 @@ public sealed class ShuttleMapInterfaceState
     public ShuttleBioScanStatus BioScanStatus; // Forge-Change - BioScan
     public bool BioScanAvailable; // Forge-Change - BioScan
 
+    /// <summary>
+    /// When false, <see cref="Destinations"/> and <see cref="Exclusions"/> are empty and the client should keep prior lists.
+    /// </summary>
+    public readonly bool IncludeBeaconExclusionLists;
+
     public ShuttleMapInterfaceState(
         FTLState ftlState,
         StartEndTime ftlTime,
@@ -36,7 +41,8 @@ public sealed class ShuttleMapInterfaceState
         List<ShuttleExclusionObject> exclusions,
         StartEndTime bioScanTime, // Forge-Change - BioScan
         ShuttleBioScanStatus bioScanStatus, // Forge-Change - BioScan
-        bool bioScanAvailable) // Forge-Change - BioScan
+        bool bioScanAvailable, // Forge-Change - BioScan
+        bool includeBeaconExclusionLists = true)
     {
         FTLState = ftlState;
         FTLTime = ftlTime;
@@ -45,6 +51,7 @@ public sealed class ShuttleMapInterfaceState
         BioScanTime = bioScanTime; // Forge-Change - BioScan
         BioScanStatus = bioScanStatus; // Forge-Change - BioScan
         BioScanAvailable = bioScanAvailable; // Forge-Change - BioScan
+        IncludeBeaconExclusionLists = includeBeaconExclusionLists;
     }
 }
 

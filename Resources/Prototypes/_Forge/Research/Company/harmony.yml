@@ -1,0 +1,126 @@
+- type: technology
+  id: HMEIndustrialProductionMedpacks
+  name: research-technology-industrial-production-medpacks
+  entityIcon: RegenerativeMesh
+  discipline: HME
+  tier: 2
+  cost: 20000
+  recipeUnlocks:
+  - RegenerativeMesh1
+  - MedicatedSuture1
+  - Bloodpack1
+  technologyPrerequisites:
+  - IndustrialMedicine
+  position: -7, 11
+
+- type: technology
+  id: HMEAdvancedMedkits
+  name: research-technology-advanced-medkits
+  entityIcon: HMEAdvancedMedkitCombat # Заменить
+  discipline: HME
+  tier: 2
+  cost: 40000
+  recipeUnlocks:
+  - HMEAdvancedMedkitCombat
+  technologyPrerequisites:
+  - HMEIndustrialProductionMedpacks
+  position: -7, 12
+
+- type: technology
+  id: HMEAdvancedMedpacks
+  name: research-technology-advanced-medpacks
+  entityIcon: HMESynthFleshPack
+  discipline: HME
+  tier: 3
+  cost: 100000
+  recipeUnlocks:
+  - HMESynthFleshPack1
+  - HMEElasticGaugePack1
+  - HMESynthBloodpack1
+  technologyPrerequisites:
+  - HMEAdvancedMedkits
+  - SuperParts
+  position: -7, 13
+
+- type: technology
+  id: HMEAdvancedFirstAidEquipement
+  name: research-technology-advanced-firstaid-equipement
+  entityIcon: HMEAdvancedCompactDefibrillator
+  discipline: HME
+  tier: 3
+  cost: 45000
+  recipeUnlocks:
+  - HMEAdvancedCompactDefibrillator
+  technologyPrerequisites:
+  - IndustrialMedicine
+  - SuperParts
+  position: -8, 11
+
+- type: technology
+  id: HMEBasicHypo
+  name: research-technology-basic-hypo-HME
+  entityIcon: HMEBasicHypo
+  discipline: HME
+  tier: 3
+  cost: 75000
+  recipeUnlocks:
+  - HMEBasicHypo
+  technologyPrerequisites:
+  - HMEAdvancedFirstAidEquipement
+  - BluespaceChemistry
+  position: -8, 12
+
+- type: technology
+  id: HMEStandartHypo
+  name: research-technology-standart-hypo-HME
+  entityIcon: HMEStandartHypo
+  discipline: HME
+  tier: 3
+  cost: 100000
+  recipeUnlocks:
+  - HMEStandartHypo
+  technologyPrerequisites:
+  - HMEBasicHypo
+  position: -8, 13
+
+- type: technology
+  id: HMEBasicClothing
+  name: research-technology-basic-clothing
+  entityIcon: ClothingUniformJumpsuitHME
+  discipline: HME
+  tier: 2
+  cost: 25000
+  recipeUnlocks:
+  - HMEJumpsuit
+  - HMEJumpskirt
+  - HMEBeret
+  technologyPrerequisites:
+  - IndustrialMedicine
+  position: -9, 11
+
+- type: technology
+  id: HMELightModsuit
+  name: research-technology-basic-modesuit
+  entityIcon: ClothingModsuitHMELightSuit
+  discipline: HME
+  tier: 3
+  cost: 60000
+  recipeUnlocks:
+  - HMELightModsuit
+  technologyPrerequisites:
+  - HMEBasicClothing
+  - SuperParts
+  position: -9, 12
+
+- type: technology
+  id: HMEHeavyModsuit
+  name: research-technology-advanced-modesuit
+  entityIcon: ClothingModsuitHMELightSuit
+  discipline: HME
+  tier: 3
+  cost: 100000
+  recipeUnlocks:
+  - HMEHeavyModsuit
+  technologyPrerequisites:
+  - HMELightModsuit
+  position: -9, 13

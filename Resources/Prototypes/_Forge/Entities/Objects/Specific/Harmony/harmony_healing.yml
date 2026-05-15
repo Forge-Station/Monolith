@@ -1,0 +1,150 @@
+- type: entity
+  name: synthetic flesh pack
+  description: synthetic-flesh-pack-desc
+  parent: BaseHealingItem
+  id: HMESynthFleshPack
+  suffix: Full
+  components:
+  - type: Tag
+    tags:
+    - Ointment
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    state: synthfleshpack
+  - type: Item
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    heldPrefix: synthfleshpack
+    storedRotation: -90
+  - type: Healing
+    damageContainers:
+    - Biological
+    damage:
+      groups:
+        Burn: -60
+      types:
+        Radiation: -3.5
+    healingBeginSound:
+      path: "/Audio/Items/Medical/ointment_begin.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+    healingEndSound:
+      path: "/Audio/Items/Medical/ointment_end.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+  - type: Stack
+    stackType: HMESynthFleshPack
+    count: 15 
+  - type: StackPrice
+    price: 200 
+
+- type: entity
+  id: HMESynthFleshPack1
+  parent: HMESynthFleshPack
+  suffix: Single
+  components:
+  - type: Stack
+    stackType: HMESynthFleshPack
+    count: 1
+
+- type: entity
+  name: elastic gauge pack
+  description: elastic-gauge-pack-desc
+  parent: BaseHealingItem
+  id: HMEElasticGaugePack
+  suffix: Full
+  components:
+  - type: Tag
+    tags:
+    - Brutepack
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    state: elasticgauge
+  - type: Item
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    heldPrefix: elasticgauge
+    storedRotation: -90
+  - type: Healing
+    damageContainers:
+    - Biological
+    damage:
+      groups:
+        Brute: -45
+        Burn: -7.5
+    bloodlossModifier: -10
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+  - type: Stack
+    stackType: HMEElasticGaugePack
+    count: 15 
+  - type: StackPrice
+    price: 200 
+
+- type: entity
+  id: HMEElasticGaugePack1
+  parent: HMEElasticGaugePack
+  suffix: Single
+  components:
+  - type: Stack
+    stackType: HMEElasticGaugePack
+    count: 1
+
+- type: entity
+  name: synthetic blood pack
+  description: synthetic-blood-pack-desc
+  parent: BaseHealingItem
+  id: HMESynthBloodpack
+  suffix: Full
+  components:
+  - type: Tag
+    tags:
+    - Bloodpack
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    state: synthbloodpack
+  - type: Item
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    heldPrefix: elasticgauge
+    storedRotation: -90
+  - type: Healing
+    damageContainers:
+    - Biological
+    damage:
+      types:
+        Bloodloss: -3
+        Poison: -3.5
+    ModifyBloodLevel: 30
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+  - type: Stack
+    stackType: HMESynthBloodpack
+    count: 15
+  - type: StackPrice
+    price: 200 
+
+- type: entity
+  id: HMESynthBloodpack1
+  parent: HMESynthBloodpack
+  suffix: Single
+  components:
+  - type: Stack
+    stackType: HMESynthBloodpack
+    count: 1
+

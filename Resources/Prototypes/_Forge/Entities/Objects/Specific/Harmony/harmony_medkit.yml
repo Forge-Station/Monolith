@@ -1,0 +1,41 @@
+- type: entity
+  name: advanced medkit combat
+  description: advanced-medkit-combat-desc
+  parent: BaseStorageItem
+  id: HMEAdvancedMedkitCombat
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/harmonymedkit.rsi
+    state: blackkit
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,3
+    whitelist:
+      tags:
+        - Brutepack
+        - Bloodpack
+        - Ointment
+        - Bottle
+        - CentrifugeCompatible
+        - Gauze
+        - Syringe
+        - PillCanister
+        - Pill
+      components:
+        - Hypospray
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,2,1
+    sprite: Forge/Objects/Specific/Medical/harmonymedkit.rsi
+    heldPrefix: blackkit
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 250
+      Steel: 100
+  - type: ExplosionResistance
+    damageCoefficient: 0 # Until Mono repairs ExplosionResistance
+  - type: Tag
+    tags:
+    - Medkit

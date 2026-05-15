@@ -41,13 +41,12 @@ namespace Content.Server.Decals
 
         private readonly Dictionary<NetEntity, HashSet<Vector2i>> _dirtyChunks = new();
         private readonly Dictionary<ICommonSession, Dictionary<NetEntity, HashSet<Vector2i>>> _previousSentChunks = new();
+        private readonly Dictionary<ICommonSession, Dictionary<NetEntity, Dictionary<Vector2i, Dictionary<uint, NetDecalData>>>> _previousSentChunkData = new();
         private static readonly Vector2 _boundsMinExpansion = new(0.01f, 0.01f);
         private static readonly Vector2 _boundsMaxExpansion = new(1.01f, 1.01f);
 
         private UpdatePlayerJob _updateJob;
         private List<ICommonSession> _sessions = new();
-
-        private int _maxDecalsPerChunk = 512;
 
         private static readonly ThreadLocal<ObjectPool<HashSet<Vector2i>>> ChunkIndexPool = // Forge-Change
             new(() => new DefaultObjectPool<HashSet<Vector2i>>( // Forge-Change
@@ -75,7 +74,6 @@ namespace Content.Server.Decals
             SubscribeLocalEvent<PostGridSplitEvent>(OnGridSplit);
 
             Subs.CVar(_conf, CVars.NetPVS, OnPvsToggle, true);
-            Subs.CVar(_conf, Content.Shared.CCVar.CCVars.DecalsMaxPerChunk, v => _maxDecalsPerChunk = v, true);
         }
 
         private void OnPvsToggle(bool value)
@@ -210,9 +208,11 @@ namespace Content.Server.Decals
             {
                 case SessionStatus.InGame:
                     _previousSentChunks[e.Session] = new();
+                    _previousSentChunkData[e.Session] = new();
                     break;
                 case SessionStatus.Disconnected:
                     _previousSentChunks.Remove(e.Session);
+                    _previousSentChunkData.Remove(e.Session);
                     break;
             }
         }
@@ -292,33 +292,6 @@ namespace Content.Server.Decals
             _dirtyChunks[id].Add(chunkIndices);
         }
 
-        /// <summary>
-        ///     Removes oldest decals (lowest id) in the chunk until under the server decals.max_per_chunk limit,
-        ///     so a new placement can be added without exceeding the budget.
-        /// </summary>
-        private void TrimChunkDecals(EntityUid gridUid, DecalGridComponent comp, Vector2i chunkIndices)
-        {
-            var max = _maxDecalsPerChunk;
-            if (max <= 0)
-                return;
-
-            while (comp.ChunkCollection.ChunkCollection.TryGetValue(chunkIndices, out var chunk)
-                   && chunk.Decals.Count >= max)
-            {
-                uint minId = uint.MaxValue;
-                foreach (var id in chunk.Decals.Keys)
-                {
-                    if (id < minId)
-                        minId = id;
-                }
-
-                if (minId == uint.MaxValue)
-                    break;
-
-                RemoveDecalInternal(gridUid, minId, out _, comp);
-            }
-        }
-
         public bool TryAddDecal(string id, EntityCoordinates coordinates, out uint decalId, Color? color = null, Angle? rotation = null, int zIndex = 0, bool cleanable = false)
         {
             rotation ??= Angle.Zero;
@@ -345,7 +318,6 @@ namespace Content.Server.Decals
                 return false;
 
             var chunkIndices = GetChunkIndices(decal.Coordinates);
-            TrimChunkDecals(gridId.Value, comp, chunkIndices);
 
             var chunk = comp.ChunkCollection.ChunkCollection.GetOrNew(chunkIndices);
 
@@ -465,33 +437,32 @@ namespace Content.Server.Decals
         {
             base.Update(frameTime);
 
-            foreach (var ent in _dirtyChunks.Keys)
-            {
-                if (TryGetEntity(ent, out var uid) && TryComp(uid, out DecalGridComponent? decals))
-                    Dirty(uid.Value, decals);
-            }
-
             if (!PvsEnabled)
             {
+                // Legacy non-PVS path: rely on component-state replication. Mark dirty grids for the engine to sync.
+                foreach (var ent in _dirtyChunks.Keys)
+                {
+                    if (TryGetEntity(ent, out var uid) && TryComp(uid, out DecalGridComponent? decals))
+                        Dirty(uid.Value, decals);
+                }
+
                 _dirtyChunks.Clear();
                 return;
             }
 
-            if (PvsEnabled)
+            // PVS-enabled path: ship per-player chunk deltas via DecalChunkUpdateEvent.
+            _sessions.Clear();
+
+            foreach (var session in _playerManager.Sessions)
             {
-                _sessions.Clear();
+                if (session.Status != SessionStatus.InGame)
+                    continue;
 
-                foreach (var session in _playerManager.Sessions)
-                {
-                    if (session.Status != SessionStatus.InGame)
-                        continue;
-
-                    _sessions.Add(session);
-                }
-
-                if (_sessions.Count > 0)
-                    _parMan.ProcessNow(_updateJob, _sessions.Count);
+                _sessions.Add(session);
             }
+
+            if (_sessions.Count > 0)
+                _parMan.ProcessNow(_updateJob, _sessions.Count);
 
             _dirtyChunks.Clear();
         }
@@ -503,6 +474,7 @@ namespace Content.Server.Decals
             var chunksInRange = _chunking.GetChunksForSession(player, ChunkSize, indexPool, viewerPool); // Forge-Change
             var staleChunks = viewerPool.Get(); // Forge-Change
             var previouslySent = _previousSentChunks[player];
+            var previouslySentData = _previousSentChunkData[player];
             var previouslySentRemoveBuffer = new List<NetEntity>(); // Forge-Change
 
             // Get any chunks not in range anymore
@@ -543,6 +515,7 @@ namespace Content.Server.Decals
             {
                 if (!previouslySent.Remove(netGrid, out var oldIndices)) // Forge-Change
                     continue; // Forge-Change
+                previouslySentData.Remove(netGrid);
 
                 // Was the grid deleted?
                 if (TryGetEntity(netGrid, out var gridId) && HasComp<MapGridComponent>(gridId.Value)) // Forge-Change
@@ -563,13 +536,24 @@ namespace Content.Server.Decals
             {
                 var newChunks = indexPool.Get(); // Forge-Change
                 _dirtyChunks.TryGetValue(netGrid, out var dirtyChunks);
+                TryGetEntity(netGrid, out var gridUid);
+                var chunkCollection = gridUid != null ? ChunkCollection(gridUid.Value) : null;
 
                 if (!previouslySent.TryGetValue(netGrid, out var previousChunks))
-                    newChunks.UnionWith(gridChunks);
+                {
+                    foreach (var index in gridChunks)
+                    {
+                        if (chunkCollection != null && chunkCollection.ContainsKey(index))
+                            newChunks.Add(index);
+                    }
+                }
                 else
                 {
                     foreach (var index in gridChunks)
                     {
+                        if (chunkCollection != null && !chunkCollection.ContainsKey(index) && (dirtyChunks == null || !dirtyChunks.Contains(index)))
+                            continue;
+
                         if (!previousChunks.Contains(index) || dirtyChunks != null && dirtyChunks.Contains(index))
                             newChunks.Add(index);
                     }
@@ -587,7 +571,7 @@ namespace Content.Server.Decals
             }
 
             //send all gridChunks to client
-            SendChunkUpdates(player, updatedChunks, staleChunks);
+            SendChunkUpdates(player, updatedChunks, staleChunks, previouslySentData);
         }
 
         private void ReturnToPool(Dictionary<NetEntity, HashSet<Vector2i>> chunks)
@@ -607,9 +591,10 @@ namespace Content.Server.Decals
         private void SendChunkUpdates(
             ICommonSession session,
             Dictionary<NetEntity, HashSet<Vector2i>> updatedChunks,
-            Dictionary<NetEntity, HashSet<Vector2i>> staleChunks)
+            Dictionary<NetEntity, HashSet<Vector2i>> staleChunks,
+            Dictionary<NetEntity, Dictionary<Vector2i, Dictionary<uint, NetDecalData>>> previousSentData)
         {
-            var updatedDecals = new Dictionary<NetEntity, Dictionary<Vector2i, DecalChunk>>();
+            var updatedDecals = new Dictionary<NetEntity, Dictionary<Vector2i, DecalChunkDelta>>();
             foreach (var (netGrid, chunks) in updatedChunks)
             {
                 var gridId = GetEntity(netGrid);
@@ -618,25 +603,107 @@ namespace Content.Server.Decals
                 if (collection == null)
                     continue;
 
-                var gridChunks = new Dictionary<Vector2i, DecalChunk>();
+                var gridChunks = new Dictionary<Vector2i, DecalChunkDelta>();
+                if (!previousSentData.TryGetValue(netGrid, out var previousGridData))
+                {
+                    previousGridData = new Dictionary<Vector2i, Dictionary<uint, NetDecalData>>();
+                    previousSentData[netGrid] = previousGridData;
+                }
+
                 foreach (var indices in chunks)
                 {
-                    gridChunks.Add(indices,
-                        collection.TryGetValue(indices, out var chunk)
-                            ? chunk
-                            : new());
+                    if (!collection.TryGetValue(indices, out var chunk))
+                    {
+                        if (!staleChunks.TryGetValue(netGrid, out var stale))
+                        {
+                            stale = new HashSet<Vector2i>();
+                            staleChunks[netGrid] = stale;
+                        }
+
+                        stale.Add(indices);
+                        previousGridData.Remove(indices);
+                        continue;
+                    }
+
+                    var delta = BuildChunkDelta(indices, chunk, previousGridData);
+                    if (delta != null)
+                        gridChunks[indices] = delta;
                 }
-                updatedDecals[netGrid] = gridChunks;
+
+                if (gridChunks.Count > 0)
+                    updatedDecals[netGrid] = gridChunks;
             }
 
             if (updatedDecals.Count != 0 || staleChunks.Count != 0)
                 RaiseNetworkEvent(new DecalChunkUpdateEvent{Data = updatedDecals, RemovedChunks = staleChunks}, session);
+
+            foreach (var (netGrid, removed) in staleChunks)
+            {
+                if (!previousSentData.TryGetValue(netGrid, out var previousGridData))
+                    continue;
+
+                foreach (var chunk in removed)
+                {
+                    previousGridData.Remove(chunk);
+                }
+            }
 
             ReturnToPool(updatedChunks);
             ReturnToPool(staleChunks);
         }
 
         #region Jobs
+
+        private DecalChunkDelta? BuildChunkDelta(
+            Vector2i chunkIndices,
+            DecalChunk chunk,
+            Dictionary<Vector2i, Dictionary<uint, NetDecalData>> previousGridData)
+        {
+            var hasPrevious = previousGridData.TryGetValue(chunkIndices, out var previousChunkData);
+            var currentChunkData = new Dictionary<uint, NetDecalData>(chunk.Decals.Count);
+            foreach (var (id, decal) in chunk.Decals)
+            {
+                currentChunkData[id] = ToNetDecalData(chunkIndices, decal);
+            }
+
+            // Always update the snapshot to current state, even if we end up not sending a delta.
+            // That keeps the next diff honest if anything else changes the chunk later.
+            previousGridData[chunkIndices] = currentChunkData;
+
+            if (!hasPrevious && currentChunkData.Count == 0)
+                return null;
+
+            var upserts = new Dictionary<uint, NetDecalData>();
+            var removed = new List<uint>();
+            DiffDecalSnapshots(currentChunkData, hasPrevious ? previousChunkData : null, upserts, removed);
+
+            if (upserts.Count == 0 && removed.Count == 0)
+                return null;
+
+            return new DecalChunkDelta
+            {
+                Upserts = upserts,
+                RemovedDecals = removed,
+                ResetChunk = !hasPrevious
+            };
+        }
+
+        private NetDecalData ToNetDecalData(Vector2i chunkIndices, Decal decal)
+        {
+            var relX = decal.Coordinates.X - chunkIndices.X * ChunkSize;
+            var relY = decal.Coordinates.Y - chunkIndices.Y * ChunkSize;
+
+            return new NetDecalData
+            {
+                RelX = QuantizeDecalCoord(relX),
+                RelY = QuantizeDecalCoord(relY),
+                PrototypeNetId = GetDecalPrototypeNetId(decal.Id),
+                Color = decal.Color,
+                Angle = decal.Angle,
+                ZIndex = decal.ZIndex,
+                Cleanable = decal.Cleanable
+            };
+        }
 
         /// <summary>
         /// Updates per-player data for decals.

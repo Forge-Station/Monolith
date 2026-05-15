@@ -42,3 +42,29 @@
   - AzimutVoucherRenegat
   - AzimutlateVoucherRenegat
   - GalandeVoucherRenegat
+
+- type: latheRecipePack
+  id: RenegateIDStatic
+  recipes:
+  - RenegateBaronPDA_recipe
+  - RenegateOverseerPDA_recipe
+  - RenegateDraftsmanPDA_recipe
+  - RenegateQuackPDA_recipe
+  - RenegateForemanPDA_recipe
+  - RenegatePDA_recipe
+  - RenegateBaronIDCard_recipe
+  - RenegateOverseerIDCard_recipe
+  - RenegateDraftsmanIDCard_recipe
+  - RenegateQuackIDCard_recipe
+  - RenegateForemanIDCard_recipe
+  - RenegateFlunkyIDCard_recipe
+
+- type: latheRecipePack
+  id: RenegateHeadsetStatic
+  recipes:
+  - EncryptionKeyRenegade_recipe
+  - EncryptionKeyRenegadeTech_recipe
+  - EncryptionKeyRenegadeCom_recipe
+  - ClothingHeadsetRenegadedCom_recipe
+  - ClothingHeadsetRenegadeTech_recipe
+  - ClothingHeadsetRenegade_recipe

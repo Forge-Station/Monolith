@@ -120,3 +120,20 @@
     sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
   - type: Clothing
     sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
+
+# Harmony Medical Enterprises company
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretHME
+  name: HME beret
+  description: HME-beret-desc
+  suffix: HME
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/hme_beret.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/hme_beret.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 250 

@@ -1,0 +1,17 @@
+- type: stack
+  id: HMESynthFleshPack
+  name: synthetic flesh pack
+  spawn: HMESynthFleshPack
+  maxCount: 15
+
+- type: stack
+  id: HMEElasticGaugePack
+  name: elastic gauge pack
+  spawn: HMEElasticGaugePack
+  maxCount: 15
+
+- type: stack
+  id: HMESynthBloodpack
+  name: synthetic blood pack
+  spawn: HMESynthBloodpack
+  maxCount: 15

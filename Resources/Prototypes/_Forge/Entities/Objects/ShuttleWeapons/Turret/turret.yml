@@ -1,0 +1,151 @@
+- type: entity
+  id: WeaponTurretZicSt40
+  name: ST40 "Gangut" 40mm
+  parent:
+  - BallisticArtilleryMagazine
+  - BallisticArtilleryTier1HP
+  description: The 40 mm CT40 gun is probably the most modern in terms of design of all existing medium-caliber guns. Having an impressive caliber of 40 mm for its class, the design itself is quite compact. The main benefit of this gun is the so-called telescopic ammunition., and can be remotely activated or linked up to a GCS.
+  components:
+  - type: StaticPrice
+    price: 670
+  - type: Sprite
+    offset: -0.03,0
+    sprite: _Forge/WeapTurret/zic420.rsi
+    layers:
+    - state: icon
+  - type: Appearance
+  - type: FireControlRotate
+  - type: AutoShootGun
+  - type: GunSignalControl
+  - type: WirelessNetworkConnection
+    range: 700
+  - type: DeviceLinkSink
+    ports:
+    - Toggle
+  - type: Gun
+    fireRate: 7
+    recoil: 15
+    projectileSpeed: 255
+    minAngle: 3
+    maxAngle: 10
+    burstCooldown: 0.4
+    burstFireRate: 3
+    shotsPerBurst: 3
+    selectedMode: Burst
+    availableModes: Burst
+    shootThermalSignature: 2200000 # ~1200m
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/Gunshots/slammer.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: SpaceArtillery
+    powerChargeRate: 200
+    powerUsePassive: 500
+  - type: Actions
+  - type: CombatMode
+    isInCombatMode: true
+  - type: Airtight
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine40mm
+        insertSound: /Audio/Weapons/Guns/MagIn/hpistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine40mm
+        whitelistFailPopup: gun-magazine-whitelist-fail
+  - type: RadarBlip
+    radarColor: "#FF0000"
+    scale: 1.8
+    visibleFromOtherGrids: true
+    gridConfig:
+      color: "#FF0000"
+      shape: Square
+      respectZoom: true
+      rotate: true
+      bounds: "-0.7,-0.7,0.7,0.7"
+  - type: ShipGunType
+    shipType: Ballistic
+  - type: ShipGunClass
+    shipClass: Medium
+  - type: ShipRepairable
+    repairTime: 15
+    repairCost: 50
+
+- type: entity
+  id: WeaponTurretKaragil
+  name: Karagil 220mm cannon
+  parent:
+  - BallisticArtilleryUnanchorableCartridge
+  - BallisticArtilleryTier4HP
+  description: A main battery with barrels, delivering rapid, punishing salvos at extreme range. Fires 220mm auto shells with slightly reduced brute strength. Can be remotely activated or linked up to a GCS.
+  components:
+  - type: StaticPrice
+    price: 8500
+  - type: Sprite
+    sprite: _Mono/Objects/ShuttleWeapons/kargil.rsi
+    layers:
+    - state: space_artillery
+    scale: 1, 1
+  - type: Appearance
+  - type: FireControlRotate
+  - type: AmmoCounter
+  - type: WirelessNetworkConnection
+    range: 500
+  - type: GunSignalControl
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.6,-0.6,0.6,0.6"
+        density: 1500
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Gun
+    projectileSpeed: 275
+    minAngle: 0
+    maxAngle: 1
+    fireRate: 0.1
+    recoil: 25 
+    shootThermalSignature: 48000000 # ~7km after firing
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: SpaceArtillery
+    powerChargeRate: 12000
+    powerUsePassive: 1500
+    powerUseActive: 0
+  - type: Actions
+  - type: RadarBlip
+    radarColor: "#FF0000"
+    scale: 2
+    visibleFromOtherGrids: true
+    gridConfig:
+      color: "#FF0000"
+      shape: Square
+      respectZoom: true
+      rotate: true
+      bounds: "-1.5,-1.5,1.5,1.5"
+  - type: BallisticAmmoProvider
+    infiniteUnspawned: true
+    whitelist:
+      tags:
+      - 220mmCartridge
+    capacity: 24
+    proto: 220mmCartridge
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+  - type: ShipGunType
+    shipType: Ballistic
+  - type: ShipGunClass
+    shipClass: Medium
+  - type: ShipRepairable
+    repairTime: 30
+    repairCost: 100

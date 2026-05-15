@@ -300,9 +300,9 @@
   description: Special hardsuit helmet, made for the captain of the station.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/capspace.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/capspace.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/capspace.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/capspace.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -371,9 +371,9 @@
   description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the HoS.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/security-red.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/security-red.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/security-red.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/security-red.rsi
   - type: PointLight
     color: "#ffeead"
   - type: PressureProtection

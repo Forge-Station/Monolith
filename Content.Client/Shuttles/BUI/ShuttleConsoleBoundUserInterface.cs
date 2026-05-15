@@ -25,6 +25,7 @@ public sealed partial class ShuttleConsoleBoundUserInterface : BoundUserInterfac
     {
         base.Open();
         _window = this.CreateWindow<ShuttleConsoleWindow>();
+        _window.BindShuttleBui(this);
 
         _window.RequestFTL += OnFTLRequest;
         _window.RequestBeaconFTL += OnFTLBeaconRequest;

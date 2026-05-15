@@ -22,6 +22,7 @@
     - Yowie # Goobstation
     - Tajaran # Goobstation
     - Ariral # Forge-Change wega ariral
+    - Demon # Forge-Change wega Demon
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVox

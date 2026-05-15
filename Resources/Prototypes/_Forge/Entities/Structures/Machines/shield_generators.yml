@@ -7,9 +7,8 @@
 # T4 300000/3000/100000/300000/6/200/0.3/100000
 # T4 specialists (FSG-870R / FSG-950M): trade regen vs buffer; Anvil adds EMP/explosion damping and heavy fixture mass.
 # damageExp defaults 1.05 (T1–T3), prismatic crown uses lower curve where noted.
-# Construction: suffix tier 1 → 1x1 (parent ShieldGeneratorSmall); tier 2 → Machine2x2 + board frameSize 2x2;
-# tier 3–4 → Machine3x3 + board frameSize 3x3. Faction boards inherit 3x3 from FSG-420/470P/600C parents.
-# Fixtures (PhysShapeAabb bounds, density): T1 −0.45 / 190; T2 −0.675 / 300; T3 −0.9 / 450; T4 −1.35 / 700; Anvil −1.42 / 39500.
+# Construction: T1 → 1x1 (Machine); T2 → 1x2 (Machine1x2); T3 → 2x2 (Machine2x2); T4 → 3x3 (Machine3x3).
+# Fixtures (PhysShapeAabb bounds, density): T1 ±0.45 / 190; T2 −0.4..0.4 × −0.4..1.4 / 300; T3 ±0.675 / 450; T4 ±1.35 / 700; Anvil ±1.42 / 39500.
 
 - type: entity
   id: ShieldGeneratorFSG90R
@@ -294,6 +293,7 @@
     collisionResistanceMultiplier: 0.3
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    offset: 0,0.5
     snapCardinals: true
     layers:
     - state: base
@@ -309,7 +309,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.675,-0.675,0.675,0.675"
+          bounds: "-0.4,-0.4,0.4,1.4"
         density: 300
         mask:
         - MachineMask
@@ -360,7 +360,7 @@
   - type: Machine
     board: MachineShieldFSG160CCircuitboard
   - type: Construction
-    graph: Machine2x2
+    graph: Machine1x2
     node: machine
     containers:
     - machine_board
@@ -388,6 +388,7 @@
     collisionResistanceMultiplier: 0.5
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    offset: 0,0.5
     snapCardinals: true
     layers:
     - state: base
@@ -403,7 +404,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.675,-0.675,0.675,0.675"
+          bounds: "-0.4,-0.4,0.4,1.4"
         density: 300
         mask:
         - MachineMask
@@ -454,7 +455,7 @@
   - type: Machine
     board: MachineShieldFSG220Circuitboard
   - type: Construction
-    graph: Machine2x2
+    graph: Machine1x2
     node: machine
     containers:
     - machine_board
@@ -482,6 +483,7 @@
     collisionResistanceMultiplier: 0.3
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    offset: 0,0.5
     snapCardinals: true
     layers:
     - state: base
@@ -497,7 +499,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.675,-0.675,0.675,0.675"
+          bounds: "-0.4,-0.4,0.4,1.4"
         density: 300
         mask:
         - MachineMask
@@ -548,7 +550,7 @@
   - type: Machine
     board: MachineShieldFSG250CCircuitboard
   - type: Construction
-    graph: Machine2x2
+    graph: Machine1x2
     node: machine
     containers:
     - machine_board
@@ -576,6 +578,7 @@
     collisionResistanceMultiplier: 0.5
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    offset: 0,0.5
     snapCardinals: true
     layers:
     - state: base
@@ -591,7 +594,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.675,-0.675,0.675,0.675"
+          bounds: "-0.4,-0.4,0.4,1.4"
         density: 300
         mask:
         - MachineMask
@@ -642,7 +645,7 @@
   - type: Machine
     board: MachineShieldFSG330RCircuitboard
   - type: Construction
-    graph: Machine2x2
+    graph: Machine1x2
     node: machine
     containers:
     - machine_board
@@ -685,7 +688,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.9,-0.9,0.9,0.9"
+          bounds: "-0.675,-0.675,0.675,0.675"
         density: 450
         mask:
         - MachineMask
@@ -736,7 +739,7 @@
   - type: Machine
     board: MachineShieldFSG420Circuitboard
   - type: Construction
-    graph: Machine3x3
+    graph: Machine2x2
     node: machine
     containers:
     - machine_board
@@ -779,7 +782,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.9,-0.9,0.9,0.9"
+          bounds: "-0.675,-0.675,0.675,0.675"
         density: 450
         mask:
         - MachineMask
@@ -830,7 +833,7 @@
   - type: Machine
     board: MachineShieldFSG470PCircuitboard
   - type: Construction
-    graph: Machine3x3
+    graph: Machine2x2
     node: machine
     containers:
     - machine_board
@@ -873,7 +876,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.9,-0.9,0.9,0.9"
+          bounds: "-0.675,-0.675,0.675,0.675"
         density: 450
         mask:
         - MachineMask
@@ -924,7 +927,7 @@
   - type: Machine
     board: MachineShieldFSG600CCircuitboard
   - type: Construction
-    graph: Machine3x3
+    graph: Machine2x2
     node: machine
     containers:
     - machine_board
@@ -1334,6 +1337,7 @@
     collisionResistanceMultiplier: 0.5
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    offset: 0,0.5
     snapCardinals: true
     layers:
     - state: base
@@ -1349,7 +1353,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.675,-0.675,0.675,0.675"
+          bounds: "-0.4,-0.4,0.4,1.4"
         density: 300
         mask:
         - MachineMask
@@ -1400,7 +1404,7 @@
   - type: Machine
     board: MachineShieldFSG355SCircuitboard
   - type: Construction
-    graph: Machine2x2
+    graph: Machine1x2
     node: machine
     containers:
     - machine_board

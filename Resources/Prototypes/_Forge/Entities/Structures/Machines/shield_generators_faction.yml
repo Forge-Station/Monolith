@@ -1,4 +1,4 @@
-# Faction shields: tier-3 chassis (FSG-420 / 470P / 600C). Numeric stats synced to the Talantoro shield balance TSV (faction T3 grid).
+# Faction shields: tier-3 chassis (FSG-420 / 470P / 600C), 2x2 construction. Numeric stats synced to the Talantoro shield balance TSV (faction T3 grid).
 # T3 эталон в таблице: damageLimit 180000, heal 1800, baseDraw 60000, maxDraw 180000, unpoweredBonus 5, overload 120, collision 0.4.
 
 # --- TSFMC — sustained regulation fire; pays baseline draw / peak ---

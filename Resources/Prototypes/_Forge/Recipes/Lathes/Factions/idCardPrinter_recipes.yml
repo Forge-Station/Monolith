@@ -1,0 +1,515 @@
+#                                           PDA recipes START
+# Renegades
+
+- type: latheRecipe
+  id: RenegateBaronPDA_recipe
+  parent: basePDArecipe
+  result: RenegateBaronPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Diamond: 1500
+
+- type: latheRecipe
+  id: RenegateOverseerPDA_recipe
+  parent: basePDArecipe
+  result: RenegateOverseerPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Gold: 200
+
+- type: latheRecipe
+  id: RenegateDraftsmanPDA_recipe
+  parent: basePDArecipe
+  result: RenegateDraftsmanPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Gold: 200
+
+- type: latheRecipe
+  id: RenegateQuackPDA_recipe
+  parent: basePDArecipe
+  result: RenegateQuackPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Plastic: 200
+
+- type: latheRecipe
+  id: RenegateForemanPDA_recipe
+  parent: basePDArecipe
+  result: RenegateForemanPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Plastic: 200
+
+- type: latheRecipe
+  id: RenegatePDA_recipe
+  parent: basePDArecipe
+  result: RenegatePDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Plastic: 200
+
+# TSF
+
+- type: latheRecipe
+  id: TsfCommandingOfficerPDA_recipe
+  parent: basePDArecipe
+  result: TsfCommandingOfficerPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Diamond: 1500
+
+- type: latheRecipe
+  id: TsfExecutiveOfficerPDA_recipe
+  parent: basePDArecipe
+  result: TsfExecutiveOfficerPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Gold: 200
+
+- type: latheRecipe
+  id: TsfSeniorAidePDA_recipe
+  parent: basePDArecipe
+  result: TsfSeniorAidePDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Gold: 200
+
+- type: latheRecipe
+  id: TsfSeniorOfficerPDA_recipe
+  parent: basePDArecipe
+  result: TsfSeniorOfficerPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Silver: 200
+
+- type: latheRecipe
+  id: TsfRangerPDA_recipe
+  parent: basePDArecipe
+  result: TsfRangerPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Plastic: 200
+
+- type: latheRecipe
+  id: TsfRecruitPDA_recipe
+  parent: basePDArecipe
+  result: TsfRecruitPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Plastic: 200
+
+# TTI
+
+- type: latheRecipe
+  id: TTIDocPDA_recipe
+  parent: basePDArecipe
+  result: TTIDocPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Diamond: 1500
+
+- type: latheRecipe
+  id: TTIParamedPDA_recipe
+  parent: basePDArecipe
+  result: TTIParamedPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Plastic: 200
+
+- type: latheRecipe
+  id: TTIMedicPDA_recipe
+  parent: basePDArecipe
+  result: TTIMedicPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Plastic: 200
+#                                           PDA recipes END
+
+#                                           ID recipes START
+# Renegades
+
+- type: latheRecipe
+  id: RenegateBaronIDCard_recipe
+  parent: baseIDrecipe
+  result: RenegateBaronIDCard
+  materials:
+    Plasteel: 200
+    Diamond: 1000
+
+- type: latheRecipe
+  id: RenegateOverseerIDCard_recipe
+  parent: baseIDrecipe
+  result: RenegateOverseerIDCard
+  materials:
+    Plasteel: 100
+    Gold: 100
+
+- type: latheRecipe
+  id: RenegateDraftsmanIDCard_recipe
+  parent: baseIDrecipe
+  result: RenegateDraftsmanIDCard
+  materials:
+    Plasteel: 100
+    Gold: 100
+
+- type: latheRecipe
+  id: RenegateQuackIDCard_recipe
+  parent: baseIDrecipe
+  result: RenegateQuackIDCard
+  materials:
+    Plasteel: 100
+    Plastic: 100
+
+- type: latheRecipe
+  id: RenegateForemanIDCard_recipe
+  parent: baseIDrecipe
+  result: RenegateForemanIDCard
+  materials:
+    Plasteel: 100
+    Plastic: 100
+
+- type: latheRecipe
+  id: RenegateFlunkyIDCard_recipe
+  parent: baseIDrecipe
+  result: RenegateFlunkyIDCard
+  materials:
+    Plasteel: 100
+    Plastic: 100
+
+# TSF
+
+- type: latheRecipe
+  id: TsfCommandingOfficerIDCard_recipe
+  parent: baseIDrecipe
+  result: TsfCommandingOfficerIDCard
+  materials:
+    Plasteel: 200
+    Diamond: 1000
+
+- type: latheRecipe
+  id: TsfExecutiveOfficerIDCard_recipe
+  parent: baseIDrecipe
+  result: TsfExecutiveOfficerIDCard
+  materials:
+    Plasteel: 100
+    Gold: 100
+
+- type: latheRecipe
+  id: TsfSeniorOfficerIDCard_recipe
+  parent: baseIDrecipe
+  result: TsfSeniorOfficerIDCard
+  materials:
+    Plasteel: 100
+    Gold: 100
+
+- type: latheRecipe
+  id: TsfSeniorAideIDCard_recipe
+  parent: baseIDrecipe
+  result: TsfSeniorAideIDCard
+  materials:
+    Plasteel: 100
+    Silver: 100
+
+- type: latheRecipe
+  id: TsfRangerIDCard_recipe
+  parent: baseIDrecipe
+  result: TsfRangerIDCard
+  materials:
+    Plasteel: 100
+    Plastic: 100
+
+- type: latheRecipe
+  id: TsfRecruitIDCard_recipe
+  parent: baseIDrecipe
+  result: TsfRecruitIDCard
+  materials:
+    Plasteel: 100
+    Plastic: 100
+
+# TTI
+
+- type: latheRecipe
+  id: TTIDirectorIDCard_recipe
+  parent: baseIDrecipe
+  result: TTIDirectorIDCard
+  materials:
+    Plasteel: 200
+    Diamond: 1000
+
+- type: latheRecipe
+  id: TTIParamedicIDCard_recipe
+  parent: baseIDrecipe
+  result: TTIParamedicIDCard
+  materials:
+    Plasteel: 100
+    Plastic: 100
+
+- type: latheRecipe
+  id: TTIDoctorIDCard_recipe
+  parent: baseIDrecipe
+  result: TTIDoctorIDCard
+  materials:
+    Plasteel: 100
+    Plastic: 100
+#                                           ID recipes END
+
+#                                           Headsets recipes START
+# Renegates
+- type: latheRecipe
+  id: ClothingHeadsetRenegade_recipe
+  parent: baseHeadsetrecipe
+  result: ClothingHeadsetRenegade
+  materials:
+    Steel: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: ClothingHeadsetRenegadeTech_recipe
+  parent: baseHeadsetrecipe
+  result: ClothingHeadsetRenegadeTech
+  materials:
+    Steel: 500
+    Plastic: 1000
+
+- type: latheRecipe
+  id: ClothingHeadsetRenegadedCom_recipe
+  parent: baseHeadsetrecipe
+  result: ClothingHeadsetRenegadedCom
+  materials:
+    Steel: 500
+    Plastic: 1500
+    Diamond: 15000
+
+# TSF
+
+- type: latheRecipe
+  id: ClothingHeadsetTsfmc_recipe
+  parent: baseHeadsetrecipe
+  result: ClothingHeadsetTsfmc
+  materials:
+    Steel: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: ClothingHeadsetAltTsfmc_recipe
+  parent: baseHeadsetrecipe
+  result: ClothingHeadsetAltTsfmc
+  materials:
+    Steel: 500
+    Plastic: 1500
+    Diamond: 200
+
+- type: latheRecipe
+  id: ClothingHeadsetAltTsfmcCommander_recipe
+  parent: baseHeadsetrecipe
+  result: ClothingHeadsetAltTsfmcCommander
+  materials:
+    Steel: 500
+    Plastic: 3000
+    Diamond: 1500
+
+# TTI
+
+- type: latheRecipe
+  id: ClothingHeadsetDoc_recipe
+  parent: baseHeadsetrecipe
+  result: ClothingHeadsetDoc
+  materials:
+    Steel: 500
+    Plastic: 1500
+    Diamond: 200
+
+- type: latheRecipe
+  id: ClothingHeadsetMdMedical_recipe
+  parent: baseHeadsetrecipe
+  result: ClothingHeadsetMdMedical
+  materials:
+    Steel: 500
+    Plastic: 1000
+#                                           Headsets recipes END
+# Ryomzeck is so cool
+#                                           Encryption keys START
+# Renegades
+
+- type: latheRecipe
+  id: EncryptionKeyRenegade_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyRenegade
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: EncryptionKeyRenegadeTech_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyRenegadeTech
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  id: EncryptionKeyRenegadeCom_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyRenegadeCom
+  materials:
+    Steel: 100
+    Diamond: 500
+
+# TSF
+
+- type: latheRecipe
+  id: EncryptionKeyNfsd_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyNfsd
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: EncryptionKeyCommand_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyCommand
+  materials:
+    Steel: 100
+    Diamond: 200
+
+# TTI
+
+- type: latheRecipe
+  id: EncryptionKeyService_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyService
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: EncryptionKeyHospital_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyHospital
+  materials:
+    Steel: 50
+#                                           Encryption keys END
+
+#                                           Bureaucracy START
+
+- type: latheRecipe
+  id: Pen_recipe
+  parent: baseBureaucracyrecipe
+  result: Pen
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: RubberStampDenied_recipe
+  parent: baseBureaucracyrecipe
+  result: RubberStampDenied
+  materials:
+    Steel: 100
+    Plastic: 100
+
+- type: latheRecipe
+  id: RubberStampApproved_recipe
+  parent: baseBureaucracyrecipe
+  result: RubberStampApproved
+  materials:
+    Steel: 100
+    Plastic: 100
+
+- type: latheRecipe
+  id: Paper_recipe
+  parent: baseBureaucracyrecipe
+  result: Paper
+  materials:
+    Paper: 10
+
+- type: latheRecipe
+  id: PaperOffice_recipe
+  parent: baseBureaucracyrecipe
+  result: PaperOffice
+  materials:
+    Paper: 20
+
+#                                           Bureaucracy END
+
+- type: latheRecipePack
+  id: TSFIDStatic
+  recipes:
+  - TsfCommandingOfficerPDA_recipe
+  - TsfExecutiveOfficerPDA_recipe
+  - TsfSeniorAidePDA_recipe
+  - TsfSeniorOfficerPDA_recipe
+  - TsfRangerPDA_recipe
+  - TsfRecruitPDA_recipe
+  - TsfCommandingOfficerIDCard_recipe
+  - TsfExecutiveOfficerIDCard_recipe
+  - TsfSeniorOfficerIDCard_recipe
+  - TsfSeniorAideIDCard_recipe
+  - TsfRangerIDCard_recipe
+  - TsfRecruitIDCard_recipe
+
+- type: latheRecipePack
+  id: TTIIDStatic
+  recipes:
+  - TTIDocPDA_recipe
+  - TTIParamedPDA_recipe
+  - TTIMedicPDA_recipe
+  - TTIDirectorIDCard_recipe
+  - TTIParamedicIDCard_recipe
+  - TTIDoctorIDCard_recipe
+
+- type: latheRecipePack
+  id: TSFHeadsetStatic
+  recipes:
+  - ClothingHeadsetTsfmc_recipe
+  - ClothingHeadsetAltTsfmc_recipe
+  - ClothingHeadsetAltTsfmcCommander_recipe
+  - EncryptionKeyCommand_recipe
+  - EncryptionKeyNfsd_recipe
+
+- type: latheRecipePack
+  id: TTIHeadsetStatic
+  recipes:
+  - ClothingHeadsetDoc_recipe
+  - ClothingHeadsetMdMedical_recipe
+  - EncryptionKeyService_recipe
+  - EncryptionKeyHospital_recipe
+#                                           Packs for all START
+
+- type: latheRecipePack
+  id: Bureaucracytatic
+  recipes:
+  - Pen_recipe
+  - RubberStampDenied_recipe
+  - RubberStampApproved_recipe
+  - Paper_recipe
+  - PaperOffice_recipe
+
+#                                           Packs for all END

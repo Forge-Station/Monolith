@@ -120,3 +120,43 @@
     sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
   - type: Clothing
     sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatTraumaBeret
+  name: trauma beret
+  suffix: TTI
+  description: A black beret with a white star emblem. For those that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/tti_beret.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/tti_beret.rsi
+    
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatTraumaDirectorBeret
+  name: trauma director beret
+  suffix: TTI
+  description: A black beret with a white star emblem. For those that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/tti_beret_director.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/tti_beret_director.rsi
+# Harmony Medical Enterprises company
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretHME
+  name: HME beret
+  description: HME-beret-desc
+  suffix: HME
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/hme_beret.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/hme_beret.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 250 

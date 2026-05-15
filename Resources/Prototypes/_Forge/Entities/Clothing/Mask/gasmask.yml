@@ -25,3 +25,17 @@
     sprite: Forge/Clothing/Mask/nexus_mask.rsi
   - type: Clothing
     sprite: Forge/Clothing/Mask/nexus_mask.rsi
+
+- type: entity
+  parent: ClothingMaskGasSecurity
+  id: ClothingMaskSterileTrauma
+  name: trauma gas mask
+  suffix: TTI
+  description: A standard issue Trauma gas mask.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/tti_medical.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/tti_medical.rsi

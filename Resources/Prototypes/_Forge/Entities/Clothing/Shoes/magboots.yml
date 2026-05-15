@@ -46,3 +46,21 @@
   - type: StaticPrice
     price: 500
     vendPrice: 5000
+
+- type: entity
+  parent: ClothingShoesBootsMag
+  id: ClothingShoesBootsMagTrauma
+  name: trauma magboots
+  description: Trauma security magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle.
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Boots/tti_magboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/Shoes/Boots/tti_magboots.rsi
+  - type: Magboots
+    magbootsAlert: MagbootsSecurity
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9

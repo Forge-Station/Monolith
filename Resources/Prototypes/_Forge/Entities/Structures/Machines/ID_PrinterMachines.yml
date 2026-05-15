@@ -1,0 +1,63 @@
+- type: entity
+  id: RenegateIDPrinter
+  parent: FactionLathe
+  name: renegate ID printer
+  description: a printer that produces ID cards and Renegade encryption keys.
+  suffix: Ренегаты
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/uniform_printer.rsi
+    snapCardinals: false
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    staticPacks:
+    - RenegateIDStatic
+    - RenegateHeadsetStatic
+    - Bureaucracytatic
+
+
+- type: entity
+  id: TSFIDPrinter
+  parent: FactionLathe
+  name: TSF ID printer
+  description: a printer that produces ID cards and TSF encryption keys.
+  suffix: TSF
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/uniform_printer.rsi
+    snapCardinals: false
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    staticPacks:
+    - TSFIDStatic
+    - TSFHeadsetStatic
+    - Bureaucracytatic
+
+- type: entity
+  id: TTIIDPrinter
+  parent: FactionLathe
+  name: TTI ID printer
+  description: a printer that produces ID cards and TTI encryption keys.
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/uniform_printer.rsi
+    snapCardinals: false
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    staticPacks:
+    - TTIIDStatic
+    - TTIHeadsetStatic
+    - Bureaucracytatic

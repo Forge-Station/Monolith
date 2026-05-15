@@ -1,0 +1,1 @@
+ent-TurbineBladeShrapnel = лопасть турбины

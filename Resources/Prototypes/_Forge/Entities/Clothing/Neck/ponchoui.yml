@@ -1,0 +1,11 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakUllmanPoncho
+  name: Пончо U.I
+  description: Тёплое и уютное пончо производства Уллман Индузтриз что согреет даже самое холодное сердце в космосе
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Poncho/ui.rsi
+  - type: StaticPrice
+    price: 30
+    vendPrice: 200

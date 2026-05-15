@@ -96,6 +96,12 @@ namespace Content.Server.Atmos.Components
         public int CurrentRunChunkIndex;
 
         [ViewVariables]
+        public readonly List<TileAtmosphere> CurrentRunChunkTiles = new(64);
+
+        [ViewVariables]
+        public int CurrentRunChunkTileIndex;
+
+        [ViewVariables]
         public int CurrentRunTileIndex; // Forge-Change
 
         [ViewVariables]
@@ -115,6 +121,9 @@ namespace Content.Server.Atmos.Components
 
         [ViewVariables]
         public int CurrentRunAtmosDeviceIndex; // Forge-Change
+
+        [ViewVariables]
+        public bool CurrentRunAtmosDevicesDirty = true;
 
         [ViewVariables]
         public readonly HashSet<Vector2i> InvalidatedCoords = new(128); // Forge-Change

@@ -1,0 +1,44 @@
+# Author Info
+# GitHub: LeviyNosok
+# Discord: no_idea_for_name
+
+# Maintainer Info
+# GitHub: Suvorov Pavel
+# Discord: mersen
+
+- type: vessel
+  id: achilles
+  parent: BaseVessel
+  name: NSC «Ахиллес»
+  description: Основной боевой фрегат-охотник компании Nexus Star Consoritum. Имеет 4 орудия «Лонгбоу», 4 плазмометателей «Цербер» и 2 лазера «Фаланг».
+  price: 215000
+  category: Medium
+  group: Shipyard
+  access: Mercenary
+  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/achilles.yml
+  guidebookPage: Null
+  class:
+  - Frigate
+  - pursuit
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: achilles
+  mapName: 'NSC «Ахиллес»'
+  mapPath: /Maps/_Forge/Shuttles/Mercenary/achilles.yml
+  minPlayers: 0
+  stations:
+    achilles:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'NSC «Ахиллес» MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

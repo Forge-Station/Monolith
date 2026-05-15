@@ -24,6 +24,7 @@ loadout-group-contractor-wallet = кошельки
 loadout-group-contractor-pda = КПК
 loadout-group-contractor-backpack-items = предметы в рюкзаке
 loadout-group-contractor-hand-items = предметы в руке
+loadout-group-contractor-armorplates = бронеплиты
 
 # Forge-add Merc
 loadout-group-merc-utility = вооружение

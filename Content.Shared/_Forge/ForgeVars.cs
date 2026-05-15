@@ -49,7 +49,7 @@ public sealed class ForgeVars
     /// URL of the TTS server API.
     /// </summary>
     public static readonly CVarDef<bool> TTSEnabled =
-        CVarDef.Create("tts.enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+        CVarDef.Create("tts.enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 
     /// <summary>
     /// URL of the TTS server API.

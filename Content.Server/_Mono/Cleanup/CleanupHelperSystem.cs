@@ -18,6 +18,7 @@ public sealed class CleanupHelperSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private List<Entity<MapGridComponent>> _gridsFound = new();
+    private HashSet<Entity<MindContainerComponent>> _mindsFound = new();
 
     private EntityQuery<GhostComponent> _ghostQuery;
     private EntityQuery<MindComponent> _mindQuery;
@@ -35,9 +36,10 @@ public sealed class CleanupHelperSystem : EntitySystem
     /// </summary>
     public bool HasNearbyPlayers(EntityCoordinates coord, float radius)
     {
-        var minds = _lookup.GetEntitiesInRange<MindContainerComponent>(coord, radius);
+        _mindsFound.Clear();
+        _lookup.GetEntitiesInRange<MindContainerComponent>(coord, radius, _mindsFound);
 
-        foreach (var (uid, comp) in minds)
+        foreach (var (uid, comp) in _mindsFound)
         {
             if (!comp.HasMind
                 || _ghostQuery.HasComp(uid)

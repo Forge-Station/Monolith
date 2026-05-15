@@ -52,3 +52,153 @@
     coefficient: 0.7 # Mono
   - type: FireProtection
     reduction: 0.5 # Mono
+
+# Harmony Medical Enterprises
+
+- type: entity
+  parent: [ ClothingOuterBase, GeigerCounterClothing ]
+  id: ClothingModsuitChestplateHMELightSuit
+  name: HME light hardsuit "Preserver" chestplate
+  description: light-HME-modsuit-chestplate-desc 
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Appearance
+  - type: AllowSuitStorage
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Modsuits/hme_lightmod.rsi
+    layers:
+    - state: chestplate
+    - state: chestplate-sealed
+      visible: false
+      map: [ "sealed" ]
+  - type: Clothing
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
+    slots: [ outerClothing ]
+  - type: RadarConsole
+    followEntity: true
+  - type: DetectionRangeMultiplier
+    infraredMultiplier: 0.5
+    visualMultiplier: 0.75
+  - type: ActivatableUI
+    key: enum.RadarConsoleUiKey.Key
+    inHandsOnly: false # Mono
+    singleUser: true
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: SealableClothing
+    sealUpPopup: sealable-clothing-seal-up-chestplate
+    sealDownPopup: sealable-clothing-seal-down-chestplate
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING-sealed
+      outerClothing-resomi:
+      - state: equipped-OUTERCLOTHING-sealed-resomi
+      outerClothing-vox:
+      - state: equipped-OUTERCLOTHING-sealed-vox     
+  - type: ExplosionResistance
+    damageCoefficient: 0.8
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Shock: 0.8
+        Piercing: 0.8
+        Heat: 0.8
+        Caustic: 0.25
+        Radiation: 0.25
+        Poison: 0.3
+  - type: ComponentToggler
+    components:
+    - type: PressureProtection
+      highPressureMultiplier: 0.3
+      lowPressureMultiplier: 1000
+    - type: TemperatureProtection
+      coolingCoefficient: 0.1
+      heatingCoefficient: 0.4
+  - type: StaminaDamageResistance
+    coefficient: 0.7
+  - type: FireProtection
+    reduction: 0.45
+
+- type: entity
+  parent: [ ClothingOuterBase, GeigerCounterClothing ]
+  id: ClothingModsuitChestplateHMEHeavySuit
+  name: HME heavy hardsuit "Intercessor" chestplate
+  description: heavy-HME-modsuit-chestplate-desc 
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Appearance
+  - type: AllowSuitStorage
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Modsuits/hme_heavymod.rsi
+    layers:
+    - state: chestplate
+    - state: chestplate-sealed
+      visible: false
+      map: [ "sealed" ]
+  - type: Clothing
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
+    slots: [ outerClothing ]
+  - type: RadarConsole
+    followEntity: true
+  - type: DetectionRangeMultiplier
+    infraredMultiplier: 0.5
+    visualMultiplier: 0.75
+  - type: ActivatableUI
+    key: enum.RadarConsoleUiKey.Key
+    inHandsOnly: false # Mono
+    singleUser: true
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: SealableClothing
+    sealUpPopup: sealable-clothing-seal-up-chestplate
+    sealDownPopup: sealable-clothing-seal-down-chestplate
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING-sealed
+      outerClothing-resomi:
+      - state: equipped-OUTERCLOTHING-sealed-resomi
+      outerClothing-vox:
+      - state: equipped-OUTERCLOTHING-sealed-vox     
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.65
+        Shock: 0.7
+        Heat: 0.65
+        Caustic: 0.1
+        Radiation: 0.1
+        Poison: 0.2
+  - type: ComponentToggler
+    components:
+    - type: PressureProtection
+      highPressureMultiplier: 0.3
+      lowPressureMultiplier: 1000
+    - type: TemperatureProtection
+      coolingCoefficient: 0.1
+      heatingCoefficient: 0.4
+  - type: StaminaDamageResistance
+    coefficient: 0.4
+  - type: FireProtection
+    reduction: 0.1

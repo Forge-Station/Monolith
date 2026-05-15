@@ -1,7 +1,8 @@
 shuttle-console-designation = Назначение:
 shuttle-console-designation-unknown = Неизвестно
 shuttle-console-maximum-iff-distance = Максимальная дистанция
-shuttle-console-iff-search = Поиск IFF
+shuttle-console-iff-search = Поиск на карте
+shuttle-console-map-search-placeholder = Фильтр по имени или сектору; Enter — к ближайшему
 shuttle-console-shield-label = Состояние щита
 shuttle-console-inertia-dampener-off = Дрейф
 shuttle-console-inertia-dampener-dampen = Ход

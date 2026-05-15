@@ -62,6 +62,8 @@ public sealed partial class MapScreen : BoxContainer
 
     // Forge-Change-Start
     private string _iffSearchFilter = "";
+    private readonly Dictionary<MapId, Collapsible> _mapSectorCollapsibles = new();
+    private readonly Dictionary<MapId, string> _mapSectorNames = new();
     // Forge-Change-End
 
     private StyleBoxFlat _ftlStyle;
@@ -136,7 +138,9 @@ public sealed partial class MapScreen : BoxContainer
         };
 
         // Forge-Change-Start
+        MapIffSearchCriteria.PlaceHolder = Loc.GetString("shuttle-console-map-search-placeholder");
         MapIffSearchCriteria.OnTextChanged += args => OnMapIffSearchChanged(args.Text);
+        MapIffSearchCriteria.OnTextEntered += _ => GoToFirstSearchMatch();
         // Forge-Change-End
     }
 
@@ -144,8 +148,11 @@ public sealed partial class MapScreen : BoxContainer
     {
         // Only network the accumulator due to ping making the thing fonky.
         // This should work better with predicting network states as they come in.
-        _beacons = state.Destinations;
-        _exclusions = state.Exclusions;
+        if (state.IncludeBeaconExclusionLists)
+        {
+            _beacons = state.Destinations;
+            _exclusions = state.Exclusions;
+        }
         _state = state.FTLState;
         _ftlTime = state.FTLTime;
         _bioScanTime = state.BioScanTime; // Forge-Change - BioScan
@@ -245,13 +252,107 @@ public sealed partial class MapScreen : BoxContainer
         ApplyMapIffFilter();
     }
 
+    private static bool MapNameMatches(string name, string filter)
+    {
+        if (string.IsNullOrEmpty(filter))
+            return true;
+
+        if (name.Contains(filter, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        foreach (var line in name.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            if (line.Contains(filter, StringComparison.OrdinalIgnoreCase))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool RowMatchesFilter(MapId mapId, string rowName)
+    {
+        if (string.IsNullOrEmpty(_iffSearchFilter))
+            return true;
+
+        if (MapNameMatches(rowName, _iffSearchFilter))
+            return true;
+
+        if (_mapSectorNames.TryGetValue(mapId, out var sectorName) && MapNameMatches(sectorName, _iffSearchFilter))
+            return true;
+
+        return false;
+    }
+
     private void ApplyMapIffFilter()
     {
-        foreach (var (control, name) in _mapObjectControls)
+        foreach (var (mapId, gridContents) in _mapHeadings)
         {
-            control.Visible = string.IsNullOrEmpty(_iffSearchFilter) ||
-                              name.Contains(_iffSearchFilter, StringComparison.OrdinalIgnoreCase);
+            foreach (var child in gridContents.Children)
+            {
+                if (_mapObjectControls.TryGetValue(child, out var rowName))
+                    child.Visible = RowMatchesFilter(mapId, rowName);
+            }
+
+            var anyChild = false;
+            foreach (var child in gridContents.Children)
+            {
+                if (child.Visible)
+                {
+                    anyChild = true;
+                    break;
+                }
+            }
+
+            if (_mapSectorCollapsibles.TryGetValue(mapId, out var col))
+                col.Visible = string.IsNullOrEmpty(_iffSearchFilter) || anyChild;
         }
+    }
+
+    private void GoToFirstSearchMatch()
+    {
+        var filter = _iffSearchFilter;
+        if (string.IsNullOrEmpty(filter) || _shuttleEntity == null)
+            return;
+
+        var shuttlePos = _xformSystem.GetWorldPosition(_shuttleEntity.Value);
+        IMapObject? best = null;
+        MapId bestMap = default;
+        var bestDist = float.MaxValue;
+
+        foreach (var (mapId, list) in _mapObjects)
+        {
+            var sectorMatch = _mapSectorNames.TryGetValue(mapId, out var sectorName) && MapNameMatches(sectorName, filter);
+
+            foreach (var obj in list)
+            {
+                if (!MapNameMatches(obj.Name, filter) && !sectorMatch)
+                    continue;
+
+                var pos = _shuttles.GetMapCoordinates(obj).Position;
+                var d = (pos - shuttlePos).Length();
+                if (d < bestDist)
+                {
+                    bestDist = d;
+                    best = obj;
+                    bestMap = mapId;
+                }
+            }
+        }
+
+        if (best == null)
+            return;
+
+        if (_mapSectorCollapsibles.TryGetValue(bestMap, out var sectorCol))
+        {
+            HideOtherCollapsibles(sectorCol);
+            sectorCol.BodyVisible = true;
+        }
+
+        if (IsFTLBlocked())
+            return;
+
+        var coordinates = _shuttles.GetMapCoordinates(best);
+        MapRadar.SetMap(coordinates.MapId, coordinates.Position, recentering: true);
     }
     // Forge-Change-End
 
@@ -338,6 +439,8 @@ public sealed partial class MapScreen : BoxContainer
         }
         _pendingMapObjects.Clear();
 
+        ApplyMapIffFilter();
+
         _nextPing = _timing.CurTime + _pingCooldown;
         MapRebuildButton.Disabled = true;
     }
@@ -362,6 +465,8 @@ public sealed partial class MapScreen : BoxContainer
     private void ClearMapObjects()
     {
         _mapObjectControls.Clear();
+        _mapSectorCollapsibles.Clear();
+        _mapSectorNames.Clear();
         HyperspaceDestinations.DisposeAllChildren();
         _pendingMapObjects.Clear();
         _mapObjects.Clear();
@@ -435,6 +540,8 @@ public sealed partial class MapScreen : BoxContainer
                 }
             };
 
+            _mapSectorCollapsibles[mapComp.MapId] = mapButton;
+            _mapSectorNames[mapComp.MapId] = mapName;
             _mapHeadings.Add(mapComp.MapId, gridContents);
             foreach (var grid in _mapManager.GetAllGrids(mapComp.MapId))
             {
@@ -595,8 +702,7 @@ public sealed partial class MapScreen : BoxContainer
         gridContents.AddChild(gridContainer);
 
         // Forge-Change-Start
-        gridContainer.Visible = string.IsNullOrEmpty(_iffSearchFilter) ||
-                                 mapObj.Name.Contains(_iffSearchFilter, StringComparison.OrdinalIgnoreCase);
+        gridContainer.Visible = RowMatchesFilter(mapId, mapObj.Name);
         // Forge-Change-End
 
         gridButton.OnPressed += args =>

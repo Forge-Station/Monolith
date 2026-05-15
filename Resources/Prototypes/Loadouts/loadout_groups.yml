@@ -1275,7 +1275,6 @@
   loadouts:
   - BlueShoes
   - MedicalWinterBoots
-  - MedicalClothingShoesBootsMagTrauma # Forge-change
 
 - type: loadoutGroup
   id: SurvivalMedical

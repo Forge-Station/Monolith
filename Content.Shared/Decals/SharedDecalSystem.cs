@@ -15,6 +15,7 @@ namespace Content.Shared.Decals
         [Dependency] protected readonly IMapManager MapManager = default!;
 
         protected bool PvsEnabled;
+        private readonly object _decalPrototypeNetLock = new();
         private Dictionary<string, ushort>? _decalProtoToNet;
         private List<string>? _decalNetToProto;
 
@@ -41,8 +42,12 @@ namespace Content.Shared.Decals
             if (!args.WasModified<DecalPrototype>())
                 return;
 
-            _decalProtoToNet = null;
-            _decalNetToProto = null;
+            lock (_decalPrototypeNetLock)
+            {
+                _decalProtoToNet = null;
+                _decalNetToProto = null;
+            }
+
             OnDecalPrototypesReloaded(args);
         }
 
@@ -110,41 +115,53 @@ namespace Content.Shared.Decals
             if (_decalProtoToNet != null)
                 return;
 
-            _decalProtoToNet = new Dictionary<string, ushort>();
-            _decalNetToProto = new List<string>();
-            var ids = new List<string>();
-
-            foreach (var proto in PrototypeManager.EnumeratePrototypes<DecalPrototype>())
+            lock (_decalPrototypeNetLock)
             {
-                ids.Add(proto.ID);
-            }
+                if (_decalProtoToNet != null)
+                    return;
 
-            ids.Sort(StringComparer.Ordinal);
+                _decalProtoToNet = new Dictionary<string, ushort>();
+                _decalNetToProto = new List<string>();
+                var ids = new List<string>();
 
-            for (var i = 0; i < ids.Count; i++)
-            {
-                var id = ids[i];
-                _decalProtoToNet[id] = (ushort) i;
-                _decalNetToProto.Add(id);
+                foreach (var proto in PrototypeManager.EnumeratePrototypes<DecalPrototype>())
+                {
+                    ids.Add(proto.ID);
+                }
+
+                ids.Sort(StringComparer.Ordinal);
+
+                for (var i = 0; i < ids.Count; i++)
+                {
+                    var id = ids[i];
+                    _decalProtoToNet[id] = (ushort) i;
+                    _decalNetToProto.Add(id);
+                }
             }
         }
 
         protected ushort GetDecalPrototypeNetId(string prototypeId)
         {
-            EnsureDecalPrototypeNetLookup();
-            if (_decalProtoToNet!.TryGetValue(prototypeId, out var id))
-                return id;
+            lock (_decalPrototypeNetLock)
+            {
+                EnsureDecalPrototypeNetLookup();
+                if (_decalProtoToNet!.TryGetValue(prototypeId, out var id))
+                    return id;
 
-            throw new ArgumentOutOfRangeException(nameof(prototypeId), $"Unknown decal prototype id: {prototypeId}");
+                throw new ArgumentOutOfRangeException(nameof(prototypeId), $"Unknown decal prototype id: {prototypeId}");
+            }
         }
 
         protected string GetDecalPrototypeId(ushort netId)
         {
-            EnsureDecalPrototypeNetLookup();
-            if (netId < _decalNetToProto!.Count)
-                return _decalNetToProto[netId];
+            lock (_decalPrototypeNetLock)
+            {
+                EnsureDecalPrototypeNetLookup();
+                if (netId < _decalNetToProto!.Count)
+                    return _decalNetToProto[netId];
 
-            throw new ArgumentOutOfRangeException(nameof(netId), $"Unknown decal prototype net id: {netId}");
+                throw new ArgumentOutOfRangeException(nameof(netId), $"Unknown decal prototype net id: {netId}");
+            }
         }
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

@@ -1,12 +1,13 @@
 using Content.Shared.Guidebook;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates; // Forge-Change
 
 namespace Content.Shared._Crescent.ShipShields;
 
 /// <summary>
 /// Drives one ship shield field. At most one bubble exists per grid; <see cref="ShipShieldedComponent.Source"/> is the canonical emitter for radar/HUD when the bubble is up.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState] // Forge-Change: networked so HUD reads emitter directly instead of pulling via BUI refresh
 public sealed partial class ShipShieldEmitterComponent : Component
 {
     [ViewVariables]
@@ -18,7 +19,7 @@ public sealed partial class ShipShieldEmitterComponent : Component
     [DataField]
     public float Accumulator;
 
-    [DataField]
+    [DataField, AutoNetworkedField] // Forge-Change
     public float Damage = 0f;
 
     /// <summary>
@@ -158,13 +159,13 @@ public sealed partial class ShipShieldEmitterComponent : Component
     [GuidebookData]
     public float BaseDraw = 50000f;
 
-    [DataField]
+    [DataField, AutoNetworkedField] // Forge-Change
     public bool Recharging = false;
 
     /// <summary>
     /// Damage threshold that triggers overload protection.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField] // Forge-Change
     [GuidebookData]
     public float DamageLimit = 3500;
 
@@ -181,8 +182,23 @@ public sealed partial class ShipShieldEmitterComponent : Component
     [DataField]
     public Color ShieldColor = Color.White;
 
-    [ViewVariables]
+    [ViewVariables, AutoNetworkedField] // Forge-Change
     public float OverloadAccumulator = 0f;
+
+    // Forge-Change-Start: replicated state used by client HUD instead of server-side BUI pushes.
+    /// <summary>
+    /// Wall-clock end of the current recharge/overload window. Clients render the countdown locally as <c>RechargeEndTime - CurTime</c>.
+    /// Null when the emitter is not in recharge.
+    /// </summary>
+    [ViewVariables, AutoNetworkedField]
+    public TimeSpan? RechargeEndTime;
+
+    /// <summary>
+    /// True while a shield bubble is active for this emitter.
+    /// </summary>
+    [ViewVariables, AutoNetworkedField]
+    public bool Online;
+    // Forge-Change-End
 
     /// <summary>
     /// On power up, players for all on vessel, pitched down.

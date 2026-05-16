@@ -89,7 +89,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG160C
-    frameSize: 1x2
+    frameSize: 2x1
     componentRequirements:
       AmeFuelContainer:
         amount: 4
@@ -111,7 +111,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG220
-    frameSize: 1x2
+    frameSize: 2x1
     componentRequirements:
       AmeFuelContainer:
         amount: 5
@@ -134,7 +134,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG250C
-    frameSize: 1x2
+    frameSize: 2x1
     componentRequirements:
       AmeFuelContainer:
         amount: 5
@@ -158,7 +158,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG355S
-    frameSize: 1x2
+    frameSize: 2x1
     componentRequirements:
       AmeFuelContainer:
         amount: 6
@@ -182,7 +182,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG330R
-    frameSize: 1x2
+    frameSize: 2x1
     componentRequirements:
       AmeFuelContainer:
         amount: 6
@@ -350,7 +350,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG195L
-    frameSize: 1x2
+    frameSize: 2x1
     componentRequirements:
       AmeFuelContainer:
         amount: 5
@@ -373,7 +373,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG275P
-    frameSize: 1x2
+    frameSize: 2x1
     componentRequirements:
       AmeFuelContainer:
         amount: 5
@@ -397,7 +397,7 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorFSG305V
-    frameSize: 1x2
+    frameSize: 2x1
     componentRequirements:
       AmeFuelContainer:
         amount: 6

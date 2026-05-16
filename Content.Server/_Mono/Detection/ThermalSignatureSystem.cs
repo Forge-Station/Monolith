@@ -2,6 +2,7 @@ using Content.Server.Power.Components;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Mono.Detection;
 using Content.Shared._Mono.Ships;
+using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
@@ -25,10 +26,25 @@ public sealed class ThermalSignatureSystem : EntitySystem
     private static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(UpdateIntervalSeconds);
     private TimeSpan _nextUpdateTime;
 
-    private const float HeatChangeThreshold = 1.02f;
+    // Forge-Change-Start: thresholds tuned for large-fleet servers.
+    // Small heats are gated by an absolute change to suppress dirty noise on cold/idle grids.
+    private const float HeatChangeThresholdRelative = 1.10f;
+    private const float HeatChangeThresholdAbsolute = 5f;
+    private const float HeatChangeAbsoluteCutoff = 100f;
     private const float ActiveHeatThreshold = 0.01f;
+    private static readonly TimeSpan MinDirtyInterval = TimeSpan.FromSeconds(2);
 
-    private List<Entity<ThermalSignatureComponent>> _gridQueue = new();
+    // After this many consecutive zero-emission, near-zero-stored-heat ticks, prune from the active set.
+    private const byte IdleTicksToPrune = 3;
+    // Forge-Change-End
+
+    // Forge-Change-Start: pooled buffers reused each tick to avoid per-tick allocations.
+    private readonly List<Entity<ThermalSignatureComponent>> _gridQueue = new();
+    private readonly Dictionary<EntityUid, float> _gridTotals = new();
+    private readonly List<EntityUid> _activeSnapshot = new();
+    private readonly List<EntityUid> _trackedSnapshot = new();
+    // Forge-Change-End
+
     private readonly HashSet<EntityUid> _activeSources = new();
     private readonly HashSet<EntityUid> _trackedGrids = new();
 
@@ -40,6 +56,7 @@ public sealed class ThermalSignatureSystem : EntitySystem
     private EntityQuery<PowerSupplierComponent> _powerSupplierQuery;
     private EntityQuery<ThrusterComponent> _thrusterQuery;
     private EntityQuery<FTLDriveComponent> _ftlDriveQuery;
+    private EntityQuery<TransformComponent> _xformQuery; // Forge-Change
 
     public override void Initialize()
     {
@@ -58,6 +75,12 @@ public sealed class ThermalSignatureSystem : EntitySystem
         SubscribeLocalEvent<ThrusterComponent, GetThermalSignatureEvent>(OnThrusterGetSignature);
         SubscribeLocalEvent<FTLDriveComponent, GetThermalSignatureEvent>(OnFTLGetSignature);
 
+        // Forge-Change-Start: emission-cache invalidation hooks.
+        SubscribeLocalEvent<MachineThermalSignatureComponent, PowerChangedEvent>(OnMachinePowerChanged);
+        SubscribeLocalEvent<PassiveThermalSignatureComponent, ComponentStartup>(OnPassiveAdded);
+        SubscribeLocalEvent<MachineThermalSignatureComponent, ComponentStartup>(OnMachineAdded);
+        // Forge-Change-End
+
         _sigQuery = GetEntityQuery<ThermalSignatureComponent>();
         _gunQuery = GetEntityQuery<GunComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
@@ -66,6 +89,7 @@ public sealed class ThermalSignatureSystem : EntitySystem
         _powerSupplierQuery = GetEntityQuery<PowerSupplierComponent>();
         _thrusterQuery = GetEntityQuery<ThrusterComponent>();
         _ftlDriveQuery = GetEntityQuery<FTLDriveComponent>();
+        _xformQuery = GetEntityQuery<TransformComponent>(); // Forge-Change
     }
 
     private void OnGridInitialized(GridInitializeEvent args)
@@ -75,8 +99,21 @@ public sealed class ThermalSignatureSystem : EntitySystem
 
     private void OnThermalStartup(Entity<ThermalSignatureComponent> ent, ref ComponentStartup args)
     {
-        if (ShouldTrackAsActive(ent.Owner, ent.Comp))
-            _activeSources.Add(ent.Owner);
+        // Forge-Change-Start: track at startup only if a meaningful emission is plausible.
+        // - Grids: always (they aggregate stored heat from on-grid sources).
+        // - Passives: yes (constant emission needs warm-up).
+        // - Powered machines: yes; unpowered ones wait for PowerChangedEvent.
+        // - Dynamic emitters (PowerSupplier/Thruster/FTL): yes (live readings).
+        // Plain ThermalSignatureComponent entities (e.g. fired-from grids) are added lazily by event hooks.
+        var uid = ent.Owner;
+        if (_mapGridQuery.HasComp(uid)
+            || _passiveQuery.HasComp(uid)
+            || ShouldTrackAsActiveDynamic(uid)
+            || (_machineQuery.HasComp(uid) && _power.IsPowered(uid)))
+        {
+            _activeSources.Add(uid);
+        }
+        // Forge-Change-End
     }
 
     private void OnThermalShutdown(Entity<ThermalSignatureComponent> ent, ref ComponentShutdown args)
@@ -90,6 +127,7 @@ public sealed class ThermalSignatureSystem : EntitySystem
         if (_gunQuery.TryComp(ent, out var gun))
         {
             ent.Comp.StoredHeat += gun.ShootThermalSignature;
+            ent.Comp.IdleTicks = 0; // Forge-Change
             _activeSources.Add(ent.Owner);
         }
     }
@@ -118,13 +156,51 @@ public sealed class ThermalSignatureSystem : EntitySystem
 
     private void OnFTLGetSignature(Entity<FTLDriveComponent> ent, ref GetThermalSignatureEvent args)
     {
-        var xform = Transform(ent);
+        var xform = _xformQuery.GetComponent(ent); // Forge-Change
         if (!TryComp<FTLComponent>(xform.GridUid, out var ftl))
             return;
 
         if (ftl.State == FTLState.Starting || ftl.State == FTLState.Cooldown)
             args.Signature += ent.Comp.ThermalSignature;
     }
+
+    // Forge-Change-Start: emission-cache invalidation and lazy activation.
+    private void OnMachinePowerChanged(EntityUid uid, MachineThermalSignatureComponent _, ref PowerChangedEvent args)
+    {
+        if (_sigQuery.TryComp(uid, out var sig))
+        {
+            sig.EmissionDirty = true;
+            sig.IdleTicks = 0;
+            _activeSources.Add(uid);
+        }
+    }
+
+    private void OnPassiveAdded(EntityUid uid, PassiveThermalSignatureComponent _, ref ComponentStartup args)
+    {
+        if (_sigQuery.HasComp(uid))
+        {
+            // Passive sources have a constant emission and need to warm their stored heat once.
+            var sig = _sigQuery.Comp(uid);
+            sig.EmissionDirty = true;
+            sig.IdleTicks = 0;
+            _activeSources.Add(uid);
+        }
+    }
+
+    private void OnMachineAdded(EntityUid uid, MachineThermalSignatureComponent _, ref ComponentStartup args)
+    {
+        if (!_sigQuery.HasComp(uid))
+            return;
+        // Lazy: only activate if currently powered. Otherwise wait for PowerChangedEvent.
+        if (_power.IsPowered(uid))
+        {
+            var sig = _sigQuery.Comp(uid);
+            sig.EmissionDirty = true;
+            sig.IdleTicks = 0;
+            _activeSources.Add(uid);
+        }
+    }
+    // Forge-Change-End
 
     public override void Update(float frameTime)
     {
@@ -133,12 +209,13 @@ public sealed class ThermalSignatureSystem : EntitySystem
 
         _nextUpdateTime = _timing.CurTime + UpdateInterval;
 
+        // Forge-Change: reuse pooled buffers instead of allocating per tick.
         _gridQueue.Clear();
-        var gridTotals = new Dictionary<EntityUid, float>();
-        var activeSnapshot = new List<EntityUid>(_activeSources.Count);
-        activeSnapshot.AddRange(_activeSources);
+        _gridTotals.Clear();
+        _activeSnapshot.Clear();
+        _activeSnapshot.AddRange(_activeSources);
 
-        foreach (var uid in activeSnapshot)
+        foreach (var uid in _activeSnapshot)
         {
             if (!_sigQuery.TryGetComponent(uid, out var sigComp))
             {
@@ -146,10 +223,26 @@ public sealed class ThermalSignatureSystem : EntitySystem
                 continue;
             }
 
-            var ev = new GetThermalSignatureEvent();
-            RaiseLocalEvent(uid, ref ev);
+            // Forge-Change-Start: cached emission for stable sources avoids RaiseLocalEvent every tick.
+            float emission;
+            if (sigComp.EmissionDirty || HasDynamicEmitter(uid))
+            {
+                var ev = new GetThermalSignatureEvent();
+                RaiseLocalEvent(uid, ref ev);
+                emission = ev.Signature;
+                if (!HasDynamicEmitter(uid))
+                {
+                    sigComp.CachedEmission = emission;
+                    sigComp.EmissionDirty = false;
+                }
+            }
+            else
+            {
+                emission = sigComp.CachedEmission;
+            }
+            // Forge-Change-End
 
-            sigComp.StoredHeat += ev.Signature * UpdateIntervalSeconds;
+            sigComp.StoredHeat += emission * UpdateIntervalSeconds;
             sigComp.StoredHeat *= MathF.Pow(sigComp.HeatDissipation, UpdateIntervalSeconds);
 
             if (_mapGridQuery.HasComp(uid))
@@ -159,39 +252,45 @@ public sealed class ThermalSignatureSystem : EntitySystem
             }
             else
             {
-                var xform = Transform(uid);
+                var xform = _xformQuery.GetComponent(uid); // Forge-Change
                 sigComp.TotalHeat = sigComp.StoredHeat;
-                if (xform.GridUid != null && _sigQuery.TryGetComponent(xform.GridUid.Value, out var gridSig))
-                    gridTotals[xform.GridUid.Value] = gridTotals.GetValueOrDefault(xform.GridUid.Value) + sigComp.StoredHeat;
+                if (xform.GridUid != null && _sigQuery.HasComp(xform.GridUid.Value))
+                    _gridTotals[xform.GridUid.Value] = _gridTotals.GetValueOrDefault(xform.GridUid.Value) + sigComp.StoredHeat;
             }
 
-            if (!ShouldTrackAsActive(uid, sigComp) && MathF.Abs(ev.Signature) <= ActiveHeatThreshold)
-                _activeSources.Remove(uid);
+            // Forge-Change-Start: idle pruning for sources without dynamic emitters. Dynamic emitters
+            // (Thruster/PowerSupplier/FTL) aren't pruned — they have no re-add event when state flips.
+            // Passive sources also stay tracked because their constant emission would normally get them
+            // re-added by events, but they don't fire those events.
+            if (!_passiveQuery.HasComp(uid) && !ShouldTrackAsActiveDynamic(uid)
+                && MathF.Abs(emission) <= ActiveHeatThreshold && sigComp.StoredHeat <= ActiveHeatThreshold)
+            {
+                if (sigComp.IdleTicks < byte.MaxValue)
+                    sigComp.IdleTicks++;
+                if (sigComp.IdleTicks >= IdleTicksToPrune)
+                    _activeSources.Remove(uid);
+            }
+            else
+            {
+                sigComp.IdleTicks = 0;
+            }
+            // Forge-Change-End
         }
 
         foreach (var ent in _gridQueue)
         {
-            ent.Comp.TotalHeat = ent.Comp.StoredHeat + gridTotals.GetValueOrDefault(ent.Owner);
-            gridTotals.Remove(ent.Owner);
+            ent.Comp.TotalHeat = ent.Comp.StoredHeat + _gridTotals.GetValueOrDefault(ent.Owner);
+            _gridTotals.Remove(ent.Owner);
             _trackedGrids.Add(ent.Owner);
 
-            // don't sync it if it didn't change heat much since last time, we don't need to sync 500 cold asteroids every system update
-            if (ent.Comp.TotalHeat <= ent.Comp.LastUpdateHeat * HeatChangeThreshold
-                && ent.Comp.TotalHeat >= ent.Comp.LastUpdateHeat / HeatChangeThreshold)
-            {
-                if (!ShouldTrackAsActive(ent.Owner, ent.Comp))
-                    _activeSources.Remove(ent.Owner);
-                continue;
-            }
+            // Forge-Change: adaptive Dirty threshold + per-grid min interval.
+            TryDirtyGrid(ent.Owner, ent.Comp);
 
-            ent.Comp.LastUpdateHeat = ent.Comp.TotalHeat;
-            Dirty(ent);
-
-            if (!ShouldTrackAsActive(ent.Owner, ent.Comp))
+            if (!ShouldTrackGridAsActive(ent.Owner, ent.Comp))
                 _activeSources.Remove(ent.Owner);
         }
 
-        foreach (var (uid, totalHeat) in gridTotals)
+        foreach (var (uid, totalHeat) in _gridTotals)
         {
             if (!_sigQuery.TryGetComponent(uid, out var gridSig))
                 continue;
@@ -201,12 +300,12 @@ public sealed class ThermalSignatureSystem : EntitySystem
             TryDirtyGrid(uid, gridSig);
         }
 
-        var trackedSnapshot = new List<EntityUid>(_trackedGrids.Count);
-        trackedSnapshot.AddRange(_trackedGrids);
+        _trackedSnapshot.Clear();
+        _trackedSnapshot.AddRange(_trackedGrids);
 
-        foreach (var uid in trackedSnapshot)
+        foreach (var uid in _trackedSnapshot)
         {
-            if (gridTotals.ContainsKey(uid))
+            if (_gridTotals.ContainsKey(uid))
                 continue;
 
             if (!_sigQuery.TryGetComponent(uid, out var gridSig))
@@ -222,7 +321,7 @@ public sealed class ThermalSignatureSystem : EntitySystem
                 TryDirtyGrid(uid, gridSig);
             }
 
-            if (!ShouldTrackAsActive(uid, gridSig))
+            if (!ShouldTrackGridAsActive(uid, gridSig))
             {
                 _trackedGrids.Remove(uid);
                 _activeSources.Remove(uid);
@@ -232,15 +331,51 @@ public sealed class ThermalSignatureSystem : EntitySystem
 
     private void TryDirtyGrid(EntityUid uid, ThermalSignatureComponent sigComp)
     {
-        if (sigComp.TotalHeat <= sigComp.LastUpdateHeat * HeatChangeThreshold
-            && sigComp.TotalHeat >= sigComp.LastUpdateHeat / HeatChangeThreshold)
+        // Forge-Change-Start: combine adaptive threshold with a per-grid min interval to suppress flapping.
+        var diff = MathF.Abs(sigComp.TotalHeat - sigComp.LastUpdateHeat);
+
+        bool changed;
+        if (sigComp.TotalHeat < HeatChangeAbsoluteCutoff && sigComp.LastUpdateHeat < HeatChangeAbsoluteCutoff)
+        {
+            changed = diff > HeatChangeThresholdAbsolute;
+        }
+        else
+        {
+            // Relative band: |new - old| / max(old, 1) >= (rel - 1)
+            var baseHeat = MathF.Max(sigComp.LastUpdateHeat, 1f);
+            changed = diff / baseHeat >= HeatChangeThresholdRelative - 1f;
+        }
+
+        if (!changed)
+            return;
+
+        if (_timing.CurTime - sigComp.LastDirtyTime < MinDirtyInterval)
             return;
 
         sigComp.LastUpdateHeat = sigComp.TotalHeat;
+        sigComp.LastDirtyTime = _timing.CurTime;
         Dirty(uid, sigComp);
+        // Forge-Change-End
     }
 
-    private bool ShouldTrackAsActive(EntityUid uid, [NotNullWhen(true)] ThermalSignatureComponent? sigComp = null)
+    // Forge-Change-Start: split the original ShouldTrackAsActive into "is this a dynamic emitter" (used to
+    // decide whether to bypass the emission cache) and grid-level activeness (kept for grid bookkeeping).
+    private bool HasDynamicEmitter(EntityUid uid)
+    {
+        return _powerSupplierQuery.HasComp(uid)
+               || _thrusterQuery.HasComp(uid)
+               || _ftlDriveQuery.HasComp(uid)
+               || _gunQuery.HasComp(uid);
+    }
+
+    private bool ShouldTrackAsActiveDynamic(EntityUid uid)
+    {
+        return _powerSupplierQuery.HasComp(uid)
+               || _thrusterQuery.HasComp(uid)
+               || _ftlDriveQuery.HasComp(uid);
+    }
+
+    private bool ShouldTrackGridAsActive(EntityUid uid, [NotNullWhen(true)] ThermalSignatureComponent? sigComp = null)
     {
         if (sigComp != null && sigComp.StoredHeat > ActiveHeatThreshold)
             return true;
@@ -251,4 +386,5 @@ public sealed class ThermalSignatureSystem : EntitySystem
                || _thrusterQuery.HasComp(uid)
                || _ftlDriveQuery.HasComp(uid);
     }
+    // Forge-Change-End
 }

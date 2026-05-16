@@ -1217,51 +1217,132 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     private const int RadarBlipSize = 15;
     private const int RadarFontSize = 8;
 
+    // Forge-Change: grids that already had a shield outline drawn from a PVS-local bubble entity.
+    private readonly HashSet<EntityUid> _shieldDrawnGrids = new();
+
+    // Forge-Change-Start: hybrid shield radar draw — bubble fixtures when PVS has them (close range),
+    // replicated grid snapshot when the bubble is not streamed (long range).
     private void DrawShields(DrawingHandleScreen handle, TransformComponent consoleXform, Matrix3x2 matrix)
     {
+        _shieldDrawnGrids.Clear();
+
+        // Pass 1: PVS-local shield bubbles (accurate outline, works when ships are adjacent / on screen).
         var shields = EntManager.AllEntityQueryEnumerator<ShipShieldVisualsComponent, FixturesComponent, TransformComponent>();
-        while (shields.MoveNext(out var uid, out var visuals, out var fixtures, out var xform))
+        while (shields.MoveNext(out _, out var visuals, out var fixtures, out var xform))
         {
-            if (!EntManager.TryGetComponent<TransformComponent>(xform.GridUid, out var parentXform))
+            if (xform.GridUid is not { } gridUid
+                || !EntManager.TryGetComponent<TransformComponent>(gridUid, out var parentXform))
+            {
                 continue;
+            }
 
             if (xform.MapID != consoleXform.MapID)
                 continue;
 
-            // Don't draw shields when in FTL
-            if (EntManager.HasComponent<FTLComponent>(parentXform.Owner))
+            if (EntManager.HasComponent<FTLComponent>(gridUid))
                 continue;
 
-            var detectionLevel = _consoleEntity == null ? DetectionLevel.Detected : GetGridDetected(parentXform.Owner);
-            if (detectionLevel != DetectionLevel.Detected)
+            var detectionLevel = _consoleEntity == null ? DetectionLevel.Detected : GetGridDetected(gridUid);
+            if (detectionLevel == DetectionLevel.Undetected)
                 continue;
 
             var shieldFixture = fixtures.Fixtures.TryGetValue("shield", out var fixture) ? fixture : null;
-
-            if (shieldFixture == null || shieldFixture.Shape is not ChainShape)
+            if (shieldFixture?.Shape is not ChainShape chain)
                 continue;
 
-            ChainShape chain = (ChainShape) shieldFixture.Shape;
+            _shieldDrawnGrids.Add(gridUid);
+            DrawShieldChain(handle, chain, xform, parentXform, matrix, visuals.ShieldColor);
+        }
 
-            var count = chain.Count;
-            var verticies = chain.Vertices;
+        // Pass 2: grid snapshot for detected ships whose bubble is not in client PVS.
+        if (_coordinates == null)
+            return;
 
-            var center = _transform.WithEntityId(xform.Coordinates, xform.GridUid.Value).Position;
+        var mapPos = _transform.ToMapCoordinates(_coordinates.Value).Offset((_rotation ?? Angle.Zero).RotateVec(Offset));
+        var viewBounds = new Box2(mapPos.Position - MaxRadarRangeVector, mapPos.Position + MaxRadarRangeVector);
 
-            for (int i = 1; i < count; i++)
+        _grids.Clear();
+        _mapManager.FindGridsIntersecting(consoleXform.MapID, viewBounds, ref _grids, approx: true, includeMap: false);
+
+        foreach (var grid in _grids)
+        {
+            var gUid = grid.Owner;
+            if (_shieldDrawnGrids.Contains(gUid))
+                continue;
+
+            if (!EntManager.TryGetComponent<ShipShieldGridStateComponent>(gUid, out var shieldState)
+                || !shieldState.HasEmitter
+                || !shieldState.Online)
             {
-                var v1 = Vector2.Add(center, verticies[i - 1]);
-                v1 = Vector2.Transform(v1, parentXform.WorldMatrix); // transform to world matrix
-                v1 = Vector2.Transform(v1, matrix); // get back to local matrix for drawing
-                v1.Y = -v1.Y;
-                v1 = ScalePosition(v1);
-                var v2 = Vector2.Add(center, verticies[i]);
-                v2 = Vector2.Transform(v2, parentXform.WorldMatrix);
-                v2 = Vector2.Transform(v2, matrix);
-                v2.Y = -v2.Y;
-                v2 = ScalePosition(v2);
-                handle.DrawLine(v1, v2, visuals.ShieldColor);
+                continue;
             }
+
+            if (EntManager.HasComponent<FTLComponent>(gUid))
+                continue;
+
+            var detectionLevel = _consoleEntity == null ? DetectionLevel.Detected : GetGridDetected(gUid);
+            if (detectionLevel == DetectionLevel.Undetected)
+                continue;
+
+            if (!EntManager.TryGetComponent<TransformComponent>(gUid, out var parentXform))
+                continue;
+
+            var outline = ShipShieldOutline.GetVertices(grid.Comp, shieldState.Padding);
+            DrawShieldOutline(handle, outline, parentXform, matrix, shieldState.ShieldColor);
         }
     }
+
+    private void DrawShieldChain(
+        DrawingHandleScreen handle,
+        ChainShape chain,
+        TransformComponent shieldXform,
+        TransformComponent parentXform,
+        Matrix3x2 matrix,
+        Color color)
+    {
+        var count = chain.Count;
+        var vertices = chain.Vertices;
+        var center = _transform.WithEntityId(shieldXform.Coordinates, shieldXform.GridUid!.Value).Position;
+
+        for (var i = 1; i < count; i++)
+        {
+            var v1 = Vector2.Add(center, vertices[i - 1]);
+            v1 = Vector2.Transform(v1, parentXform.WorldMatrix);
+            v1 = Vector2.Transform(v1, matrix);
+            v1.Y = -v1.Y;
+            v1 = ScalePosition(v1);
+
+            var v2 = Vector2.Add(center, vertices[i]);
+            v2 = Vector2.Transform(v2, parentXform.WorldMatrix);
+            v2 = Vector2.Transform(v2, matrix);
+            v2.Y = -v2.Y;
+            v2 = ScalePosition(v2);
+
+            handle.DrawLine(v1, v2, color);
+        }
+    }
+
+    private void DrawShieldOutline(
+        DrawingHandleScreen handle,
+        Vector2[] outline,
+        TransformComponent parentXform,
+        Matrix3x2 matrix,
+        Color color)
+    {
+        for (var i = 1; i < outline.Length; i++)
+        {
+            var v1 = Vector2.Transform(outline[i - 1], parentXform.WorldMatrix);
+            v1 = Vector2.Transform(v1, matrix);
+            v1.Y = -v1.Y;
+            v1 = ScalePosition(v1);
+
+            var v2 = Vector2.Transform(outline[i], parentXform.WorldMatrix);
+            v2 = Vector2.Transform(v2, matrix);
+            v2.Y = -v2.Y;
+            v2 = ScalePosition(v2);
+
+            handle.DrawLine(v1, v2, color);
+        }
+    }
+    // Forge-Change-End
 }

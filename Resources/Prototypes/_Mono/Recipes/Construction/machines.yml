@@ -1,7 +1,8 @@
 - type: construction
-  name: machine frame (1x2)
-  description: A machine under construction. Needs more parts.
+  name: machine frame (1×2, vertical)
+  description: Deprecated — use the horizontal 2×1 frame and rotate when building. Hidden from the construction menu.
   id: MachineFrame1x2
+  hide: true
   graph: Machine1x2
   startNode: start
   targetNode: machine
@@ -13,8 +14,8 @@
     state: "icon"
 
 - type: construction
-  name: machine frame (2x1)
-  description: A machine under construction. Needs more parts.
+  name: machine frame (2×1)
+  description: A two-tile machine frame (horizontal footprint). Rotate with a wrench while building to orient vertically — used for FSG tier-II shields and other 2×1 machines. Needs more parts.
   id: MachineFrame2x1
   graph: Machine2x1
   startNode: start

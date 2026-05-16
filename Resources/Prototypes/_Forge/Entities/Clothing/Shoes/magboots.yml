@@ -48,7 +48,7 @@
     vendPrice: 5000
 
 - type: entity
-  parent: [ClothingShoesBootsMag, BaseFactionGearOtherFactionT1]
+  parent: [ClothingShoesBootsMag, ClothingShoesBootsCombat, BaseFactionGearOtherFactionT1]
   id: ClothingShoesBootsMagTrauma
   name: trauma magboots
   description: Trauma security magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle.

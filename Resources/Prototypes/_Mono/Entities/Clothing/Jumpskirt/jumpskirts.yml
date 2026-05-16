@@ -1,7 +1,7 @@
 # Trauma Armed Forces
 - type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpskirtTAF
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1
+  id: ClothingUniformJumpskirtTAF 
   suffix: TTI # Forge-change
   name: trauma armed forces jumpskirt
   description: Standard fatigues of the Trauma Armed Forces.

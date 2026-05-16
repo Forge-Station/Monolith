@@ -91,7 +91,7 @@
   - type: Machine
     board: MachineShieldFSG195LCircuitboard
   - type: Construction
-    graph: Machine1x2
+    graph: Machine2x1FSG
     node: machine
     containers:
     - machine_board
@@ -191,7 +191,7 @@
   - type: Machine
     board: MachineShieldFSG275PCircuitboard
   - type: Construction
-    graph: Machine1x2
+    graph: Machine2x1FSG
     node: machine
     containers:
     - machine_board
@@ -291,7 +291,7 @@
   - type: Machine
     board: MachineShieldFSG305VCircuitboard
   - type: Construction
-    graph: Machine1x2
+    graph: Machine2x1FSG
     node: machine
     containers:
     - machine_board

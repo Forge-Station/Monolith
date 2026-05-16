@@ -97,6 +97,12 @@ public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface
         if (state is not FireControlConsoleBoundInterfaceState castState)
             return;
 
+        // Forge-Change: feed the shield bar with the console's grid so it can resolve the local emitter.
+        EntityUid? grid = null;
+        if (EntMan.TryGetComponent<TransformComponent>(Owner, out var consoleXform))
+            grid = consoleXform.GridUid;
+        _window?.SetShuttle(grid);
+
         _window?.UpdateStatus(castState);
         if (_window?.Radar is FireControlNavControl navControl)
         {

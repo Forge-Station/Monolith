@@ -13,8 +13,10 @@
             <Button Name="CaptureStartButton" Text="{Loc 'iff-console-capture-start'}" />
             <Button Name="CaptureInterruptButton" Text="{Loc 'iff-console-capture-interrupt'}" />
         </BoxContainer>
-        <Label Name="TransferCompanyLabel" Text="{Loc 'iff-console-transfer-company-label'}" />
-        <OptionButton Name="TransferCompanyOption" MinWidth="220" />
-        <Button Name="TransferOwnershipButton" Text="{Loc 'iff-console-transfer-submit'}" />
+        <BoxContainer Name="TransferSection" Orientation="Vertical">
+            <Label Name="TransferCompanyLabel" Text="{Loc 'iff-console-transfer-company-label'}" />
+            <OptionButton Name="TransferCompanyOption" MinWidth="220" />
+            <Button Name="TransferOwnershipButton" Text="{Loc 'iff-console-transfer-submit'}" />
+        </BoxContainer>
     </BoxContainer>
 </controls:FancyWindow>

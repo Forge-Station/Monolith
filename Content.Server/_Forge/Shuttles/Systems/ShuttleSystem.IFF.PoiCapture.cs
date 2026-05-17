@@ -1,6 +1,8 @@
 using Content.Server.Shuttles.Components;
+using Content.Shared._Forge.CCVar;
 using Content.Shared._Mono.Company;
 using Content.Shared._NF.Shipyard.Components;
+using Content.Shared.Database;
 using Content.Shared.NPC.Components;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.BUIStates;
@@ -17,15 +19,20 @@ namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class ShuttleSystem
 {
-    private static readonly TimeSpan ForgePoiCaptureDuration = TimeSpan.FromMinutes(10);
     private List<ForgeIffTransferListEntry>? _forgeTransferCompaniesCache;
 
     private void InitializeForgePoiCapture()
     {
-        SubscribeLocalEvent<PoiCaptureConsoleComponent, IFFCaptureStartMessage>(OnIFFCaptureStart);
-        SubscribeLocalEvent<PoiCaptureConsoleComponent, IFFCaptureInterruptMessage>(OnIFFCaptureInterrupt);
-        SubscribeLocalEvent<PoiCaptureConsoleComponent, IFFTransferOwnershipMessage>(OnIFFTransferOwnership);
+        SubscribeLocalEvent<PoiCaptureConsoleComponent, PoiCaptureStartMessage>(OnPoiCaptureStart);
+        SubscribeLocalEvent<PoiCaptureConsoleComponent, PoiCaptureInterruptMessage>(OnPoiCaptureInterrupt);
+        SubscribeLocalEvent<PoiCaptureConsoleComponent, PoiCaptureTransferOwnershipMessage>(OnPoiCaptureTransferOwnership);
         SubscribeLocalEvent<PoiCaptureConsoleComponent, BoundUIOpenedEvent>(OnPoiCaptureConsoleOpen);
+    }
+
+    private TimeSpan GetForgePoiCaptureDuration()
+    {
+        var minutes = _cfg.GetCVar(ForgeCVars.PoiCaptureDurationMinutes);
+        return TimeSpan.FromMinutes(Math.Max(0.1f, minutes));
     }
 
     private void UpdateForgePoiCapture()
@@ -38,6 +45,7 @@ public sealed partial class ShuttleSystem
             if (!capture.CaptureInProgress || now < capture.CaptureEndTime)
                 continue;
 
+            var previousOwner = capture.CurrentOwnerCompanyId;
             capture.CaptureInProgress = false;
             capture.CurrentOwnerCompanyId = capture.AttackerCompanyId;
             capture.CurrentOwnerFactionId = capture.AttackerFactionId;
@@ -47,16 +55,21 @@ public sealed partial class ShuttleSystem
             capture.AttackerLeaderName = "None";
 
             ApplyForgeOwnership(gridUid, capture.CurrentOwnerCompanyId, capture.CurrentOwnerFactionId, capture.CaptureLeaderUserId);
-            RefreshForgeIffConsolesForGrid(gridUid);
+
+            _logger.Add(LogType.Action, LogImpact.Medium,
+                $"POI capture completed on {ToPrettyString(gridUid)}: {previousOwner} -> {capture.CurrentOwnerCompanyId}, leader {capture.LastCapturedByName}");
+
+            RefreshPoiCaptureConsolesForGrid(gridUid);
         }
     }
 
-    private void OnIFFCaptureStart(EntityUid uid, PoiCaptureConsoleComponent component, IFFCaptureStartMessage args)
+    private void OnPoiCaptureStart(EntityUid uid, PoiCaptureConsoleComponent component, PoiCaptureStartMessage args)
     {
         if (!TryGetForgeActorContext(uid, args.Actor, out var gridUid, out var actor, out var actorCompany, out var actorFaction, out var actorSession))
             return;
 
         var capture = EnsureComp<PoiCaptureComponent>(gridUid);
+        SyncForgePoiCaptureOwnerFromGrid(gridUid, capture);
         var actorCompanyId = NormalizeForgeOwner(actorCompany);
         var actorFactionId = NormalizeForgeOwner(actorFaction);
 
@@ -68,6 +81,14 @@ public sealed partial class ShuttleSystem
         }
         // Forge-Change:end validate-capture-company
 
+        // Forge-Change:start prevent-capture-own-poi
+        if (capture.CurrentOwnerCompanyId == actorCompanyId)
+        {
+            _popup.PopupEntity(Loc.GetString("iff-console-capture-already-owned"), uid, actor, PopupType.Small);
+            return;
+        }
+        // Forge-Change:end prevent-capture-own-poi
+
         if (capture.CaptureInProgress &&
             capture.AttackerCompanyId == actorCompanyId &&
             capture.AttackerFactionId == actorFactionId)
@@ -76,20 +97,26 @@ public sealed partial class ShuttleSystem
             return;
         }
 
+        var duration = GetForgePoiCaptureDuration();
+
         // Different faction/company can override an active capture.
         capture.CaptureInProgress = true;
         capture.CaptureStartTime = _gameTiming.CurTime;
-        capture.CaptureEndTime = _gameTiming.CurTime + ForgePoiCaptureDuration;
+        capture.CaptureEndTime = _gameTiming.CurTime + duration;
         capture.AttackerCompanyId = actorCompanyId;
         capture.AttackerFactionId = actorFactionId;
         capture.CaptureLeaderUserId = actorSession.UserId;
         capture.AttackerLeaderName = actorSession.Name;
 
-        RefreshForgeIffConsolesForGrid(gridUid);
-        _popup.PopupEntity(Loc.GetString("iff-console-capture-started"), uid, actor, PopupType.Medium);
+        _logger.Add(LogType.Action, LogImpact.Medium,
+            $"{ToPrettyString(actor):player} started POI capture on {ToPrettyString(gridUid)} as {actorCompanyId}/{actorFactionId} for {(int) duration.TotalMinutes} minutes");
+
+        RefreshPoiCaptureConsolesForGrid(gridUid);
+        _popup.PopupEntity(Loc.GetString("iff-console-capture-started",
+            ("minutes", (int) duration.TotalMinutes)), uid, actor, PopupType.Medium);
     }
 
-    private void OnIFFCaptureInterrupt(EntityUid uid, PoiCaptureConsoleComponent component, IFFCaptureInterruptMessage args)
+    private void OnPoiCaptureInterrupt(EntityUid uid, PoiCaptureConsoleComponent component, PoiCaptureInterruptMessage args)
     {
         if (!TryGetForgeActorContext(uid, args.Actor, out var gridUid, out var actor, out var actorCompany, out var actorFaction, out _))
             return;
@@ -108,16 +135,23 @@ public sealed partial class ShuttleSystem
             return;
         }
 
+        var attackerCompany = capture.AttackerCompanyId;
+        var attackerFaction = capture.AttackerFactionId;
+
         capture.CaptureInProgress = false;
         capture.AttackerCompanyId = "None";
         capture.AttackerFactionId = "None";
         capture.CaptureLeaderUserId = null;
         capture.AttackerLeaderName = "None";
-        RefreshForgeIffConsolesForGrid(gridUid);
+
+        _logger.Add(LogType.Action, LogImpact.Medium,
+            $"{ToPrettyString(actor):player} interrupted POI capture on {ToPrettyString(gridUid)} ({attackerCompany}/{attackerFaction}) as {actorCompanyId}/{actorFactionId}");
+
+        RefreshPoiCaptureConsolesForGrid(gridUid);
         _popup.PopupEntity(Loc.GetString("iff-console-capture-interrupted"), uid, actor, PopupType.Medium);
     }
 
-    private void OnIFFTransferOwnership(EntityUid uid, PoiCaptureConsoleComponent component, IFFTransferOwnershipMessage args)
+    private void OnPoiCaptureTransferOwnership(EntityUid uid, PoiCaptureConsoleComponent component, PoiCaptureTransferOwnershipMessage args)
     {
         if (!TryGetForgeActorContext(uid, args.Actor, out var gridUid, out var actor, out _, out _, out var actorSession))
             return;
@@ -160,10 +194,16 @@ public sealed partial class ShuttleSystem
         }
         // Forge-Change:end prevent-noop-transfer
 
+        var previousOwner = capture.CurrentOwnerCompanyId;
         capture.CurrentOwnerCompanyId = companyId;
         capture.CurrentOwnerFactionId = factionId;
+        capture.CaptureLeaderUserId = actorSession.UserId;
         ApplyForgeOwnership(gridUid, companyId, factionId, actorSession.UserId);
-        RefreshForgeIffConsolesForGrid(gridUid);
+
+        _logger.Add(LogType.Action, LogImpact.Medium,
+            $"{ToPrettyString(actor):player} transferred POI {ToPrettyString(gridUid)} ownership: {previousOwner} -> {companyId}");
+
+        RefreshPoiCaptureConsolesForGrid(gridUid);
         _popup.PopupEntity(Loc.GetString("iff-console-transfer-success"), uid, actor, PopupType.Medium);
     }
 
@@ -235,11 +275,12 @@ public sealed partial class ShuttleSystem
         SetIFFReadOnly(gridUid, false);
     }
 
-    private PoiCaptureConsoleBoundUserInterfaceState BuildForgePoiCaptureConsoleState(EntityUid? gridUid)
+    private PoiCaptureConsoleBoundUserInterfaceState BuildForgePoiCaptureConsoleState(EntityUid? gridUid, NetUserId? viewerUserId = null)
     {
+        var duration = GetForgePoiCaptureDuration();
         var state = new PoiCaptureConsoleBoundUserInterfaceState
         {
-            CaptureDurationSeconds = (int) ForgePoiCaptureDuration.TotalSeconds,
+            CaptureDurationSeconds = (int) duration.TotalSeconds,
         };
 
         if (gridUid is not { Valid: true } grid)
@@ -250,9 +291,15 @@ public sealed partial class ShuttleSystem
 
         if (!TryComp<PoiCaptureComponent>(grid, out var capture))
         {
+            GetForgeGridOwner(grid, out var ownerCompanyId, out var ownerFactionId);
+            state.CurrentOwnerCompanyId = ownerCompanyId;
+            state.CurrentOwnerFactionId = ownerFactionId;
             FillForgeCaptureTransferLists(state);
             return state;
         }
+
+        if (!capture.CaptureInProgress)
+            SyncForgePoiCaptureOwnerFromGrid(grid, capture);
 
         state.CaptureInProgress = capture.CaptureInProgress;
         state.CaptureStartTime = capture.CaptureStartTime;
@@ -262,6 +309,10 @@ public sealed partial class ShuttleSystem
         state.AttackerCompanyId = capture.AttackerCompanyId;
         state.AttackerFactionId = capture.AttackerFactionId;
         state.LastCapturedByName = capture.LastCapturedByName;
+        state.CaptureLeaderUserId = capture.CaptureLeaderUserId;
+        state.CanTransfer = viewerUserId != null
+            && capture.CaptureLeaderUserId == viewerUserId
+            && !capture.CaptureInProgress;
         FillForgeCaptureTransferLists(state);
         return state;
     }
@@ -297,10 +348,10 @@ public sealed partial class ShuttleSystem
     }
     // Forge-Change:end capture-transfer-lists
 
-    private void RefreshForgeIffConsolesForGrid(EntityUid gridUid)
+    private void RefreshPoiCaptureConsolesForGrid(EntityUid gridUid)
     {
         var query = AllEntityQuery<PoiCaptureConsoleComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var xform))
+        while (query.MoveNext(out var uid, out _, out var xform))
         {
             if (xform.GridUid != gridUid)
                 continue;
@@ -317,14 +368,41 @@ public sealed partial class ShuttleSystem
         return value.Trim();
     }
 
+    private void GetForgeGridOwner(EntityUid gridUid, out string companyId, out string factionId)
+    {
+        companyId = "None";
+        factionId = "None";
+
+        if (TryComp<CompanyComponent>(gridUid, out var companyComp))
+            companyId = NormalizeForgeOwner(companyComp.CompanyName);
+
+        if (TryComp<ShuttleFactionComponent>(gridUid, out var factionComp))
+            factionId = NormalizeForgeOwner(factionComp.Faction);
+    }
+
+    private void SyncForgePoiCaptureOwnerFromGrid(EntityUid gridUid, PoiCaptureComponent capture)
+    {
+        GetForgeGridOwner(gridUid, out var companyId, out var factionId);
+
+        if (companyId != "None")
+            capture.CurrentOwnerCompanyId = companyId;
+
+        if (factionId != "None")
+            capture.CurrentOwnerFactionId = factionId;
+    }
+
     private void OnPoiCaptureConsoleOpen(EntityUid uid, PoiCaptureConsoleComponent component, ref BoundUIOpenedEvent args)
     {
+        NetUserId? viewer = null;
+        if (TryComp(args.Actor, out ActorComponent? actor))
+            viewer = actor.PlayerSession.UserId;
+
         if (!TryComp(uid, out TransformComponent? xform) || xform.GridUid is not { Valid: true } gridUid)
         {
-            _uiSystem.SetUiState(uid, PoiCaptureConsoleUiKey.Key, BuildForgePoiCaptureConsoleState(null));
+            _uiSystem.SetUiState(uid, PoiCaptureConsoleUiKey.Key, BuildForgePoiCaptureConsoleState(null, viewer));
             return;
         }
 
-        _uiSystem.SetUiState(uid, PoiCaptureConsoleUiKey.Key, BuildForgePoiCaptureConsoleState(gridUid));
+        _uiSystem.SetUiState(uid, PoiCaptureConsoleUiKey.Key, BuildForgePoiCaptureConsoleState(gridUid, viewer));
     }
 }

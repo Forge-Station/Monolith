@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Shuttles.BUIStates;
@@ -15,6 +16,8 @@ public sealed class PoiCaptureConsoleBoundUserInterfaceState : BoundUserInterfac
     public string AttackerCompanyId = "None";
     public string AttackerFactionId = "None";
     public string LastCapturedByName = "None";
+    public NetUserId? CaptureLeaderUserId;
+    public bool CanTransfer;
     public List<ForgeIffTransferListEntry> TransferCompanies = new();
 }
 

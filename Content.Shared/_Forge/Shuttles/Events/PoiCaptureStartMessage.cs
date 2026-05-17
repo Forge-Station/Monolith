@@ -3,6 +3,6 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.Shuttles.Events;
 
 [Serializable, NetSerializable]
-public sealed class IFFCaptureStartMessage : BoundUserInterfaceMessage
+public sealed class PoiCaptureStartMessage : BoundUserInterfaceMessage
 {
 }

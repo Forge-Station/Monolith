@@ -22,11 +22,11 @@ public sealed class PoiCaptureConsoleBoundUserInterface : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindowCenteredLeft<PoiCaptureConsoleWindow>();
-        _window.CaptureStart += () => SendMessage(new IFFCaptureStartMessage());
-        _window.CaptureInterrupt += () => SendMessage(new IFFCaptureInterruptMessage());
+        _window.CaptureStart += () => SendMessage(new PoiCaptureStartMessage());
+        _window.CaptureInterrupt += () => SendMessage(new PoiCaptureInterruptMessage());
         _window.TransferOwnership += companyId =>
         {
-            SendMessage(new IFFTransferOwnershipMessage
+            SendMessage(new PoiCaptureTransferOwnershipMessage
             {
                 CompanyId = companyId,
             });

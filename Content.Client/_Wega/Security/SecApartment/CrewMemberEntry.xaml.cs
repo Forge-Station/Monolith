@@ -15,6 +15,7 @@ namespace Content.Client._Wega.Security.SecApartment;
 public sealed partial class CrewMemberEntry : PanelContainer
 {
     private readonly SpriteSystem _sprite;
+    private readonly SecApartmentStyles _styles;
 
     public CrewMemberInfo CrewMember { get; }
     public List<Squad> Squads { get; }
@@ -23,13 +24,14 @@ public sealed partial class CrewMemberEntry : PanelContainer
 
     public Action<string>? OnAssignPressed;
 
-    public CrewMemberEntry(CrewMemberInfo crewMember, List<Squad> squads, SpriteSpecifier? jobIcon, SpriteSystem sprite)
+    public CrewMemberEntry(CrewMemberInfo crewMember, List<Squad> squads, SpriteSpecifier? jobIcon, SpriteSystem sprite, SecApartmentStyles styles)
     {
         RobustXamlLoader.Load(this);
         CrewMember = crewMember;
         Squads = squads;
 
         _sprite = sprite;
+        _styles = styles;
 
         SetupUI(jobIcon);
         SetupStyles();
@@ -38,7 +40,10 @@ public sealed partial class CrewMemberEntry : PanelContainer
     private void SetupUI(SpriteSpecifier? jobIcon)
     {
         MemberNameLabel.Text = CrewMember.Name;
+        MemberNameLabel.FontOverride = _styles.GetBoldFont(11);
         JobTitleLabel.Text = CrewMember.JobTitle;
+        JobTitleLabel.FontOverride = _styles.GetRegularFont(10);
+        JobTitleLabel.MaxWidth = 240;
 
         if (jobIcon != null)
         {

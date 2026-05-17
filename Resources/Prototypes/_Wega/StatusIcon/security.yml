@@ -1,8 +1,8 @@
 - type: securityIcon
   id: SecuritySquadIcon
   abstract: true
-  priority: 4
-  locationPreference: Left
+  priority: 2
+  locationPreference: Right
   isShaded: true
 
 - type: securityIcon

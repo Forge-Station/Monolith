@@ -25,6 +25,7 @@
   - Medical
   - Chemistry
   - TsfmcEngineering
+  - TsfSecApartment
   accessGroups:
   - TsfGeneralAccess
   special:
@@ -53,3 +54,4 @@
     - Magazine45_ACPPistolFMJ
     - BaseSecurityUplinkRadioCaptain
     - RadioHandheldNF
+    - TSFSecApartmentTablet

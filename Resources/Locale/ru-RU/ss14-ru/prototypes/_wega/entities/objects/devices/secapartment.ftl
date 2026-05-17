@@ -1,8 +1,3 @@
-ent-SecApartmentTabletUnpowered = портативный планшет SecApartment
-    .desc = Утверждённое NanoTrasen устройство для организации и координации действий персонала службы безопасности на объектах корпорации.
-ent-SecApartmentTablet = { ent-SecApartmentTabletUnpowered }
-    .desc = { ent-SecApartmentTabletUnpowered.desc }
-    .suffix = Заряженный
-ent-SecApartmentTabletEmpty = { ent-SecApartmentTabletUnpowered }
-    .desc = { ent-SecApartmentTabletUnpowered.desc }
-    .suffix = Пустой
+ent-SecApartmentTabletDebug = портативный контроль персонала
+    .desc = Портативное устройство для контроля персонала, организации отрядов и координации действий.
+    .suffix = Debug

@@ -1,19 +1,36 @@
-# Empire department temporarily disabled with its jobs.
-# - type: department
-#   id: Empire
-#   name: department-Empire
-#   description: department-Empire-description
-#   color: "#ab7a52"
-#   weight: 50
-#   roles:
-#   - Praefect
-#   - Arbiter
-#   - Cardinal
-#   - Inquisitor
-#   - Consul
-#   - Praetorian
-#   - Auxilia
-#   - Neophyte
+- type: department
+  id: Empire
+  name: department-Empire
+  description: department-Empire-description
+  color: "#ab7a52"
+  weight: 50
+  roles:
+  - Praefect
+  - Arbiter
+  - Cardinal
+  - Inquisitor
+  - Consul
+  - Praetorian
+  - Auxilia
+  - Neophyte
+
+- type: department
+  id: NanoTrasen
+  name: department-NanoTrasen
+  description: department-NanoTrasen-description
+  color: "#00a8ff"
+  weight: 52
+  roles:
+  - StationRepresentative
+  - NtMedic
+  - NtMedicPilot
+  - NtMedicGunner
+  - Nt_Scientist
+  - Nt_Engineer
+  - Nt_Botanist
+  - Nt_Cook
+  - DirectorOfCare
+  - MdMedic
 
 - type: department
   id: Renegates

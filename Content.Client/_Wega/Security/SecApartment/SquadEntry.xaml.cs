@@ -35,6 +35,11 @@ public sealed partial class SquadEntry : PanelContainer
     private bool _isEditingDescription = false;
     private Dictionary<string, PanelContainer> _memberPanels = new();
 
+    public bool IsEditingName => _isEditingName;
+    public string NameDraft => SquadNameEdit.Text;
+    public bool IsEditingDescription => _isEditingDescription;
+    public string DescriptionDraft => SquadDescriptionEdit.Text;
+
     public SquadEntry(Squad squad, SecApartmentStyles styles, IPrototypeManager protoMan, SpriteSystem sprite)
     {
         RobustXamlLoader.Load(this);
@@ -229,7 +234,7 @@ public sealed partial class SquadEntry : PanelContainer
         var nameLabel = new Label
         {
             Text = member.Name,
-            FontColorOverride = member.SensorStatus?.IsAlive == false
+            FontColorOverride = member.SensorStatus?.IsAlive != true
                 ? Color.FromHex("#888888")
                 : SecApartmentStyles.TextColor,
             FontOverride = _styles.GetBoldFont(12)
@@ -237,14 +242,13 @@ public sealed partial class SquadEntry : PanelContainer
 
         nameContainer.AddChild(nameLabel);
 
-        var specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "alive");
+        var specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "dead");
         if (member.SensorStatus != null)
         {
             if (!member.SensorStatus.IsAlive)
             {
                 specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "dead");
             }
-
             else if (member.SensorStatus.DamagePercentage != null)
             {
                 var index = MathF.Round(4f * member.SensorStatus.DamagePercentage.Value);
@@ -253,6 +257,10 @@ public sealed partial class SquadEntry : PanelContainer
                     specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "critical");
                 else
                     specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "health" + index);
+            }
+            else
+            {
+                specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "alive");
             }
         }
 
@@ -377,7 +385,7 @@ public sealed partial class SquadEntry : PanelContainer
                     var nameLabel = nameContainer.Children.OfType<Label>().FirstOrDefault();
                     if (nameLabel != null)
                     {
-                        nameLabel.FontColorOverride = status?.IsAlive == false
+                        nameLabel.FontColorOverride = status?.IsAlive != true
                             ? Color.FromHex("#888888")
                             : SecApartmentStyles.TextColor;
                     }
@@ -387,7 +395,7 @@ public sealed partial class SquadEntry : PanelContainer
                     {
                         SpriteSpecifier specifier = new SpriteSpecifier.Rsi(
                             new ResPath("Interface/Alerts/human_crew_monitoring.rsi"),
-                            "alive"
+                            "dead"
                         );
 
                         if (status != null)
@@ -412,6 +420,13 @@ public sealed partial class SquadEntry : PanelContainer
                                         new ResPath("Interface/Alerts/human_crew_monitoring.rsi"),
                                         "health" + index
                                     );
+                            }
+                            else
+                            {
+                                specifier = new SpriteSpecifier.Rsi(
+                                    new ResPath("Interface/Alerts/human_crew_monitoring.rsi"),
+                                    "alive"
+                                );
                             }
                         }
 
@@ -449,6 +464,15 @@ public sealed partial class SquadEntry : PanelContainer
         }
     }
 
+    public void RestoreNameEdit(string draft)
+    {
+        _isEditingName = true;
+        UpdateEditMode();
+        SquadNameEdit.Text = draft;
+        SquadNameEdit.GrabKeyboardFocus();
+        SquadNameEdit.CursorPosition = SquadNameEdit.Text.Length;
+    }
+
     private void ToggleDescriptionEdit()
     {
         _isEditingDescription = !_isEditingDescription;
@@ -459,6 +483,15 @@ public sealed partial class SquadEntry : PanelContainer
             SquadDescriptionEdit.Text = Squad.Description ?? "";
             SquadDescriptionEdit.GrabKeyboardFocus();
         }
+    }
+
+    public void RestoreDescriptionEdit(string draft)
+    {
+        _isEditingDescription = true;
+        UpdateEditMode();
+        SquadDescriptionEdit.Text = draft;
+        SquadDescriptionEdit.GrabKeyboardFocus();
+        SquadDescriptionEdit.CursorPosition = SquadDescriptionEdit.Text.Length;
     }
 
     private void SaveName()

@@ -25,6 +25,7 @@
   - AllAccessMono #Mono
   access:
   - ChiefMedicalOfficer #Mono
+  - NtSecApartment
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ] # Mono - remove TSFMC implant
@@ -50,5 +51,6 @@
     - RubberStampDoc
     - BoxFolderMedicalDoctor
     - StationAdministrationConsoleFlatpack
+    - NTSecApartmentTablet
     - PhoneInstrumentHigh
     - WeaponCaseShortN1984Expedition # Forge

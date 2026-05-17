@@ -13,17 +13,23 @@ public enum SecApartmentUiKey : byte
 public sealed class SecApartmentUpdateState : BoundUserInterfaceState
 {
     public string StationName { get; }
+    public string Department { get; }
+    public bool Debug { get; }
     public List<CrewMemberInfo> SecurityCrew { get; }
     public List<CrewMemberInfo> UnassignedSecurity { get; }
     public List<Squad> Squads { get; }
 
     public SecApartmentUpdateState(
         string stationName,
+        string department,
+        bool debug,
         List<CrewMemberInfo> securityCrew,
         List<CrewMemberInfo> unassignedSecurity,
         List<Squad> squads)
     {
         StationName = stationName;
+        Department = department;
+        Debug = debug;
         SecurityCrew = securityCrew;
         UnassignedSecurity = unassignedSecurity;
         Squads = squads;
@@ -31,7 +37,7 @@ public sealed class SecApartmentUpdateState : BoundUserInterfaceState
 }
 
 [Serializable, NetSerializable]
-public sealed class SensorStatusUpdateState : BoundUserInterfaceState
+public sealed class SensorStatusUpdateState : BoundUserInterfaceMessage
 {
     public Dictionary<string, SuitSensorStatus?> MemberStatuses { get; }
     public Dictionary<string, (string Location, bool HasLocation)> SquadLocations { get; }
@@ -49,10 +55,12 @@ public sealed class SensorStatusUpdateState : BoundUserInterfaceState
 public sealed class CreateSquadMessage : BoundUserInterfaceMessage
 {
     public string SquadName { get; }
+    public string Department { get; }
 
-    public CreateSquadMessage(string squadName)
+    public CreateSquadMessage(string squadName, string department = "")
     {
         SquadName = squadName;
+        Department = department;
     }
 }
 
@@ -146,7 +154,7 @@ public sealed class ChangeSquadStatusMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class TimerUpdateState : BoundUserInterfaceState
+public sealed class TimerUpdateState : BoundUserInterfaceMessage
 {
     public List<TimerEntry> Timers { get; }
 
@@ -165,4 +173,9 @@ public sealed class RemoveTimerMessage : BoundUserInterfaceMessage
     {
         TimerUid = timerUid;
     }
+}
+
+[Serializable, NetSerializable]
+public sealed class RefreshSecApartmentMessage : BoundUserInterfaceMessage
+{
 }

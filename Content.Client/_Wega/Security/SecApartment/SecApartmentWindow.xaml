@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:ui="clr-namespace:Content.Client._Wega.Security.SecApartment"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    SetSize="1000 650" MouseFilter="Stop">
+    SetSize="1100 650" MouseFilter="Stop">
 
     <PanelContainer Name="Background" StyleClasses="PdaBackgroundRect" ModulateSelfOverride="#121212"/>
     <PanelContainer Name="Border" StyleClasses="PdaBorderRect" Modulate="#303030"/>
@@ -11,7 +11,7 @@
     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
 
         <BoxContainer SetHeight="40" Margin="20 10 10 5" Orientation="Horizontal" HorizontalExpand="True">
-            <TextureRect TexturePath="/Textures/Interface/Nano/ntlogo.svg.png" SetSize="32 32" Margin="0 0 10 0"/>
+            <TextureRect Name="Logo" TexturePath="/Textures/Interface/Nano/ntlogo.svg.png" SetSize="32 32" Margin="0 0 10 0"/>
             <Label Text="{Loc 'sec-apartment-ui-sec-apartment'}" StyleClasses="ConsoleHeadingBig"
                    HorizontalExpand="True"/>
             <TextureButton Name="CloseButton" StyleClasses="windowCloseButton"
@@ -44,7 +44,7 @@
 
                         <BoxContainer Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="True" Margin="10">
 
-                            <BoxContainer Orientation="Vertical" MinWidth="400" Margin="0 0 15 0">
+                            <BoxContainer Orientation="Vertical" MinWidth="430" Margin="0 0 15 0">
 
                                 <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
                                     <Label Text="{Loc 'sec-apartment-ui-no-squads-crew'}" StyleClasses="ConsoleSubHeading" FontColorOverride="#ff8888"/>
@@ -57,7 +57,7 @@
                                         <gfx:StyleBoxFlat BackgroundColor="#330000" BorderColor="#ff4444" BorderThickness="2" />
                                     </PanelContainer.PanelOverride>
 
-                                    <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+                                    <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
                                         <BoxContainer Name="UnassignedContainer"
                                                       Orientation="Vertical"
                                                       VerticalExpand="True"
@@ -81,6 +81,11 @@
                                                   HorizontalExpand="True"
                                                   StyleClasses="ConsoleLineEdit"
                                                   Margin="0 0 10 0"/>
+                                        <OptionButton Name="DebugSquadDepartmentDropdown"
+                                                      Visible="False"
+                                                      MinWidth="135"
+                                                      StyleClasses="SecApartmentOptionButton"
+                                                      Margin="0 0 10 0"/>
                                         <Button Name="CreateSquadButton" Text="{Loc 'sec-apartment-ui-squads-create'}"
                                                 MinWidth="50" StyleClasses="ButtonRed"/>
                                     </BoxContainer>

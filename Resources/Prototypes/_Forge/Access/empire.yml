@@ -18,6 +18,10 @@
   id: EmpireDiplomacy
   name: id-card-access-level-empire-diplomacy
 
+- type: accessLevel
+  id: NtSecApartment
+  name: id-card-access-level-nt-sec-apartment
+
 # yay
 - type: accessGroup
   id: GeneralEmpireAccess

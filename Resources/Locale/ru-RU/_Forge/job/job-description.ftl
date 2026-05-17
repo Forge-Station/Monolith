@@ -1,5 +1,6 @@
 # department
 department-Empire-description = Свящ. Империяяияияияияияияияияияияияия уахухахуха
+department-NanoTrasen-description = Персонал NanoTrasen в секторе.
 
 # Outpost
 forge-job-desc-outpostmedic = Лечи людей, делай вид что лечишь людей.

@@ -8,6 +8,9 @@ namespace Content.Client._Wega.Security.SecApartment;
 public sealed class SecApartmentBoundUserInterface : BoundUserInterface
 {
     private SecApartmentWindow? _window;
+    private SecApartmentUpdateState? _pendingUpdateState;
+    private SensorStatusUpdateState? _pendingSensorState;
+    private TimerUpdateState? _pendingTimerState;
 
     public SecApartmentBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey) { }
 
@@ -16,9 +19,11 @@ public sealed class SecApartmentBoundUserInterface : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindow<SecApartmentWindow>();
+        if (EntMan.TryGetComponent<SecApartmentComponent>(Owner, out var component))
+            _window.ApplyTheme(component.Department);
 
-        _window.OnCreateSquad += squadName =>
-            SendMessage(new CreateSquadMessage(squadName));
+        _window.OnCreateSquad += (squadName, department) =>
+            SendMessage(new CreateSquadMessage(squadName, department));
 
         _window.OnChangeSquadIcon += (squadId, iconId) =>
             SendMessage(new ChangeSquadIconMessage(squadId, iconId));
@@ -44,31 +49,66 @@ public sealed class SecApartmentBoundUserInterface : BoundUserInterface
         _window.OnRemoveTimer += timerUid =>
             SendMessage(new RemoveTimerMessage(timerUid));
 
+        ApplyPendingState();
+
         _window.OnClose += Close;
         _window.OpenCentered();
+        SendMessage(new RefreshSecApartmentMessage());
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
 
-        if (_window == null)
-            return;
-
         switch (state)
         {
             case SecApartmentUpdateState updateState:
-                _window.UpdateState(updateState);
-                break;
-
-            case SensorStatusUpdateState sensorState:
-                _window.UpdateSensorStatuses(sensorState);
-                break;
-
-            case TimerUpdateState timerState:
-                _window.UpdateTimerState(timerState);
+                _pendingUpdateState = updateState;
                 break;
         }
 
+        ApplyPendingState();
+    }
+
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        base.ReceiveMessage(message);
+
+        switch (message)
+        {
+            case SensorStatusUpdateState sensorState:
+                _pendingSensorState = sensorState;
+                break;
+
+            case TimerUpdateState timerState:
+                _pendingTimerState = timerState;
+                break;
+        }
+
+        ApplyPendingState();
+    }
+
+    private void ApplyPendingState()
+    {
+        if (_window == null)
+            return;
+
+        if (_pendingUpdateState != null)
+        {
+            _window.UpdateState(_pendingUpdateState);
+            _pendingUpdateState = null;
+        }
+
+        if (_pendingSensorState != null)
+        {
+            _window.UpdateSensorStatuses(_pendingSensorState);
+            _pendingSensorState = null;
+        }
+
+        if (_pendingTimerState != null)
+        {
+            _window.UpdateTimerState(_pendingTimerState);
+            _pendingTimerState = null;
+        }
     }
 }

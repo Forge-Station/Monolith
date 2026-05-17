@@ -20,7 +20,7 @@ namespace Content.Client._Wega.Security.SecApartment;
 
 [Virtual]
 [GenerateTypedNameReferences]
-public sealed partial class SecApartmentWindow : BaseWindow
+public partial class SecApartmentWindow : BaseWindow
 {
     private static readonly (string Title, string Department)[] DebugSquadDepartments =
     {

@@ -92,7 +92,7 @@
     sprite: Forge/Clothing/OuterClothing/Armor/nexus_vest.rsi
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, ClothingOuterStorageFoldableBase, BaseFactionGearOtherFactionT1]
+  parent: [ClothingOuterBaseLarge, BaseFactionGearOtherFactionT1]
   id: ClothingOuterArmorBodyTrauma
   name: trauma vest
   suffix: TTI
@@ -119,7 +119,7 @@
     sprintModifier: 0.95
     
 - type: entity
-  parent: [ClothingOuterBaseLarge, ClothingOuterStorageFoldableBase, BaseFactionGearOtherFactionT1]
+  parent: [ClothingOuterBaseLarge, BaseFactionGearOtherFactionT1]
   id: ClothingOuterArmorBodyTraumaCommander
   name: trauma commander vest
   suffix: TTI

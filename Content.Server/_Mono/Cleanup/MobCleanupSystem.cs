@@ -2,7 +2,6 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Server.NPC.HTN;
 using Content.Shared._Mono.CCVar;
 using Robust.Shared.Configuration;
-using Robust.Shared.Timing;
 
 namespace Content.Server._Mono.Cleanup;
 
@@ -11,7 +10,6 @@ namespace Content.Server._Mono.Cleanup;
 /// </summary>
 public sealed class MobCleanupSystem : BaseCleanupSystem<HTNComponent>
 {
-    [Dependency] private readonly CleanupHelperSystem _cleanup = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private float _maxDistance;
@@ -19,6 +17,7 @@ public sealed class MobCleanupSystem : BaseCleanupSystem<HTNComponent>
 
     private EntityQuery<GhostRoleComponent> _ghostQuery;
     private EntityQuery<CleanupImmuneComponent> _immuneQuery;
+    private EntityQuery<TransformComponent> _xformQuery;
 
     public override void Initialize()
     {
@@ -26,9 +25,25 @@ public sealed class MobCleanupSystem : BaseCleanupSystem<HTNComponent>
 
         _ghostQuery = GetEntityQuery<GhostRoleComponent>();
         _immuneQuery = GetEntityQuery<CleanupImmuneComponent>();
+        _xformQuery = GetEntityQuery<TransformComponent>();
 
         Subs.CVar(_cfg, MonoCVars.MobCleanupDistance, val => _maxDistance = val, true);
         Subs.CVar(_cfg, MonoCVars.CleanupMaxGridDistance, val => _maxGridDistance = val, true);
+    }
+
+    /// <summary>
+    ///     Forge-Change: cheap pre-filter to skip mobs that are clearly not cleanup
+    ///     candidates (still on a grid, immune, ghost-role) before the proximity queries run.
+    /// </summary>
+    protected override bool ShouldEnqueue(EntityUid uid)
+    {
+        if (_immuneQuery.HasComp(uid) || _ghostQuery.HasComp(uid))
+            return false;
+
+        if (!_xformQuery.TryGetComponent(uid, out var xform))
+            return false;
+
+        return xform.GridUid == null;
     }
 
     protected override bool ShouldEntityCleanup(EntityUid uid)
@@ -38,7 +53,7 @@ public sealed class MobCleanupSystem : BaseCleanupSystem<HTNComponent>
         return xform.GridUid == null
             && !_immuneQuery.HasComp(uid)
             && !_ghostQuery.HasComp(uid)
-            && !_cleanup.HasNearbyPlayers(xform.Coordinates, _maxDistance)
-            && !_cleanup.HasNearbyGrids(xform.Coordinates, _maxGridDistance);
+            && !CleanupHelper.HasNearbyPlayers(xform.Coordinates, _maxDistance)
+            && !CleanupHelper.HasNearbyGrids(xform.Coordinates, _maxGridDistance);
     }
 }

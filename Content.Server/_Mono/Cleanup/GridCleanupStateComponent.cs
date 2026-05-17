@@ -10,6 +10,12 @@ public sealed partial class GridCleanupGridComponent : Component
     public TimeSpan CleanupAccumulator = TimeSpan.FromSeconds(0);
 
     /// <summary>
+    ///     When the grid first became eligible for micro-fragment fast cleanup.
+    /// </summary>
+    [ViewVariables]
+    public TimeSpan? FastPathEligibleSince;
+
+    /// <summary>
     ///     If set, will make this grid get cleaned up faster or slower. 3x means 3 times less time to get cleaned up.
     /// </summary>
     [DataField]

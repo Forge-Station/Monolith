@@ -1,6 +1,7 @@
 - type: latheRecipePack
   id: ForgeAdvancedShuttleComponents
   recipes:
+  - MachineShieldFSG85ECircuitboard
   - MachineShieldFSG90RCircuitboard
   - MachineShieldFSG100Circuitboard
   - MachineShieldFSG110PCircuitboard
@@ -8,6 +9,10 @@
   - MachineShieldFSG220Circuitboard
   - MachineShieldFSG250CCircuitboard
   - MachineShieldFSG330RCircuitboard
+  - MachineShieldFSG355SCircuitboard
+  - MachineShieldFSG195LCircuitboard
+  - MachineShieldFSG275PCircuitboard
+  - MachineShieldFSG305VCircuitboard
   # Disk-gated civilian T3 (no CivilianServices tech); see TechDiskForgeFSGCivilianT3.
   - MachineShieldFSG420Circuitboard
   - MachineShieldFSG470PCircuitboard
@@ -15,18 +20,23 @@
   - MachineShieldForgeTSFHeavyCircuitboard
   - MachineShieldForgeTSFPrismaticCircuitboard
   - MachineShieldForgeTSFCollisionCircuitboard
+  - MachineShieldForgeTSFSagittaCircuitboard
   - MachineShieldForgeUsspHeavyCircuitboard
   - MachineShieldForgeUsspPrismaticCircuitboard
   - MachineShieldForgeUsspCollisionCircuitboard
+  - MachineShieldForgeUsspKerchCircuitboard
   - MachineShieldForgeRenegateHeavyCircuitboard
   - MachineShieldForgeRenegatePrismaticCircuitboard
   - MachineShieldForgeRenegateCollisionCircuitboard
+  - MachineShieldForgeRenegateSkullDebtCircuitboard
   - MachineShieldForgeViperHeavyCircuitboard
   - MachineShieldForgeViperPrismaticCircuitboard
   - MachineShieldForgeViperCollisionCircuitboard
+  - MachineShieldForgeViperKiteCircuitboard
   - MachineShieldForgeUllmanHeavyCircuitboard
   - MachineShieldForgeUllmanPrismaticCircuitboard
   - MachineShieldForgeUllmanCollisionCircuitboard
+  - MachineShieldForgeUllmanLockboxCircuitboard
 
 # Civilian FSG tier 4 boards — only on CircuitImprinterHyperConvection (unlocked via tech disks / server DB).
 - type: latheRecipePack

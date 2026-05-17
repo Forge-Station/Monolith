@@ -4,6 +4,7 @@ using Content.Client._Mono.Radar;
 using Content.Client.Station; // Frontier
 using Content.Shared._Crescent.ShipShields;
 using Content.Shared._Forge.LetoferolAnnihilator; // Forge-Change
+using Content.Shared._Forge.Shuttles.Components; // Forge-Change: POI capture zone
 using Content.Shared._Mono.Company;
 using Content.Shared._Mono.Detection;
 using Content.Shared._Mono.Radar;
@@ -601,7 +602,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
         // Draw shields
         DrawShields(handle, xform, worldToShuttle);
-        DrawZones(handle, worldToView, xform.MapID); // Forge-Change
+        DrawAnnihilatorZones(handle, worldToView, xform.MapID); // Forge-Change
 
         // Frontier Corvax: north line drawing
         DrawNorthLine(handle, worldRot);
@@ -651,6 +652,8 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
         _grids.Clear();
         _mapManager.FindGridsIntersecting(xform.MapID, new Box2(mapPos.Position - MaxRadarRangeVector, mapPos.Position + MaxRadarRangeVector), ref _grids, approx: true, includeMap: false);
+
+        DrawPoiCaptureZones(handle, worldToView, ourGridId, _grids, bodyQuery);
 
         // Mono edited: Frontier - collect blip location data outside foreach - more changes ahead
         _tempBlipDataList.Clear();
@@ -963,33 +966,64 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     }
 
     #region Forge-Change
-    private void DrawZones(DrawingHandleScreen handle, Matrix3x2 worldToView, MapId currentMapId)
+    private void DrawAnnihilatorZones(DrawingHandleScreen handle, Matrix3x2 worldToView, MapId currentMapId)
     {
         var zoneQuery = EntManager.EntityQueryEnumerator<AnnihilatorZoneVisualsComponent, TransformComponent>();
-        while (zoneQuery.MoveNext(out var zoneUid, out var zoneComp, out var xform))
+        while (zoneQuery.MoveNext(out _, out var zoneComp, out var xform))
         {
             if (xform.MapID != currentMapId)
                 continue;
 
-            var worldCenter = _transform.GetWorldPosition(xform);
-            var viewCenter = Vector2.Transform(worldCenter, worldToView);
-
-            var worldEdge = worldCenter + new Vector2(zoneComp.Radius, 0);
-            var viewEdge = Vector2.Transform(worldEdge, worldToView);
-            float viewRadius = (viewEdge - viewCenter).Length();
-
-            const int segments = 64;
-            var vertices = new Vector2[segments + 1];
-            for (int i = 0; i <= segments; i++)
-            {
-                float angle = i * MathF.Tau / segments;
-                vertices[i] = viewCenter + new Vector2(MathF.Cos(angle), MathF.Sin(angle)) * viewRadius;
-            }
-
-            Color zoneColor = zoneComp.ZoneColor.WithAlpha(0.3f);
-            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, vertices, zoneColor);
-            handle.DrawPrimitives(DrawPrimitiveTopology.LineStrip, vertices, zoneComp.ZoneColor);
+            DrawWorldZone(handle, worldToView, _transform.GetWorldPosition(xform), zoneComp.Radius, zoneComp.ZoneColor);
         }
+    }
+
+    /// <summary>
+    /// Draw POI capture zones from map grids in radar range. Uses the same grid list as IFF
+    /// so zones stay visible when viewing from another vessel (marker children are PVS-limited).
+    /// </summary>
+    private void DrawPoiCaptureZones(
+        DrawingHandleScreen handle,
+        Matrix3x2 worldToView,
+        EntityUid? ourGridId,
+        List<Entity<MapGridComponent>> grids,
+        EntityQuery<PhysicsComponent> bodyQuery)
+    {
+        void TryDraw(EntityUid gridUid)
+        {
+            if (!EntManager.TryGetComponent(gridUid, out PoiCaptureZoneVisualsComponent? zone) || !zone.Visible)
+                return;
+
+            if (!bodyQuery.TryGetComponent(gridUid, out var gridBody))
+                return;
+
+            var worldCenter = _transform.ToMapCoordinates(new EntityCoordinates(gridUid, gridBody.LocalCenter)).Position;
+            DrawWorldZone(handle, worldToView, worldCenter, zone.Radius, zone.ZoneColor);
+        }
+
+        if (ourGridId is { Valid: true } ownGrid)
+            TryDraw(ownGrid);
+
+        foreach (var grid in grids)
+            TryDraw(grid.Owner);
+    }
+
+    private static void DrawWorldZone(DrawingHandleScreen handle, Matrix3x2 worldToView, Vector2 worldCenter, float worldRadius, Color color)
+    {
+        var viewCenter = Vector2.Transform(worldCenter, worldToView);
+        var viewEdge = Vector2.Transform(worldCenter + new Vector2(worldRadius, 0), worldToView);
+        var viewRadius = (viewEdge - viewCenter).Length();
+
+        const int segments = 64;
+        var vertices = new Vector2[segments + 1];
+        for (var i = 0; i <= segments; i++)
+        {
+            var angle = i * MathF.Tau / segments;
+            vertices[i] = viewCenter + new Vector2(MathF.Cos(angle), MathF.Sin(angle)) * viewRadius;
+        }
+
+        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, vertices, color.WithAlpha(0.3f));
+        handle.DrawPrimitives(DrawPrimitiveTopology.LineStrip, vertices, color);
     }
     #endregion Forge-Change
 

@@ -1,5 +1,6 @@
 using Content.Server.Shuttles.Components;
 using Content.Shared._Forge.CCVar;
+using Content.Shared._Forge.Shuttles.Components;
 using Content.Shared._Mono.Company;
 using Content.Shared._NF.Shipyard.Components;
 using Content.Shared.Database;
@@ -9,6 +10,8 @@ using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Events;
 using Robust.Server.Player;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -27,12 +30,193 @@ public sealed partial class ShuttleSystem
         SubscribeLocalEvent<PoiCaptureConsoleComponent, PoiCaptureInterruptMessage>(OnPoiCaptureInterrupt);
         SubscribeLocalEvent<PoiCaptureConsoleComponent, PoiCaptureTransferOwnershipMessage>(OnPoiCaptureTransferOwnership);
         SubscribeLocalEvent<PoiCaptureConsoleComponent, BoundUIOpenedEvent>(OnPoiCaptureConsoleOpen);
+        SubscribeLocalEvent<PoiCaptureZoneVisualsComponent, MapInitEvent>(OnPoiCaptureZoneInit);
+        SubscribeLocalEvent<PoiCaptureRoundstartComponent, MapInitEvent>(OnPoiCaptureRoundstartInit);
+    }
+
+    private float GetForgePoiCaptureZoneRadiusMax()
+    {
+        return MathF.Max(1f, _cfg.GetCVar(ForgeCVars.PoiCaptureZoneRadiusMaxTiles));
+    }
+
+    private float ResolveForgePoiCaptureZoneRadius(float yamlRadius)
+    {
+        var max = GetForgePoiCaptureZoneRadiusMax();
+        if (yamlRadius <= 0f)
+            return MathF.Min(MathF.Max(1f, _cfg.GetCVar(ForgeCVars.PoiCaptureZoneRadiusTiles)), max);
+
+        return Math.Clamp(yamlRadius, 1f, max);
+    }
+
+    private void OnPoiCaptureRoundstartInit(EntityUid uid, PoiCaptureRoundstartComponent roundstart, ref MapInitEvent args)
+    {
+        if (!HasComp<MapGridComponent>(uid))
+            return;
+
+        var gridUid = uid;
+        var companyId = NormalizeForgeOwner(roundstart.OwnerCompanyId.ToString());
+        var factionId = NormalizeForgeOwner(roundstart.OwnerFactionId);
+
+        if (!_protoManager.HasIndex<CompanyPrototype>(companyId))
+        {
+            Log.Warning($"PoiCaptureRoundstart on {ToPrettyString(gridUid)}: unknown company '{companyId}'");
+            return;
+        }
+
+        var capture = EnsureComp<PoiCaptureComponent>(gridUid);
+        capture.CurrentOwnerCompanyId = companyId;
+        capture.CurrentOwnerFactionId = factionId;
+        capture.CaptureInProgress = false;
+        capture.AttackerCompanyId = "None";
+        capture.AttackerFactionId = "None";
+        capture.CaptureLeaderUserId = null;
+
+        if (TryComp<CompanyComponent>(gridUid, out var companyComp))
+            companyComp.CompanyName = roundstart.OwnerCompanyId;
+
+        if (factionId != "None" && TryComp<ShuttleFactionComponent>(gridUid, out var factionComp))
+            factionComp.Faction = factionId;
+
+        var zone = EnsureComp<PoiCaptureZoneVisualsComponent>(gridUid);
+        zone.Radius = ResolveForgePoiCaptureZoneRadius(roundstart.ZoneRadius);
+
+        if (roundstart.SyncIffColor && _protoManager.TryIndex<CompanyPrototype>(companyId, out var companyProto))
+        {
+            SetIFFColor(gridUid, companyProto.Color);
+            SetIFFReadOnly(gridUid, true);
+        }
+
+        UpdatePoiCaptureZoneFromOwner(gridUid);
+        ReplicateForgePoiGridState(gridUid, company: true, faction: factionId != "None", zone: true);
+
+        _logger.Add(LogType.Action, LogImpact.Low,
+            $"POI roundstart ownership on {ToPrettyString(gridUid)}: company {companyId}, faction {factionId}, zone radius {zone.Radius:0}");
+    }
+
+    private void OnPoiCaptureZoneInit(EntityUid uid, PoiCaptureZoneVisualsComponent comp, ref MapInitEvent args)
+    {
+        var xform = Transform(uid);
+        if (xform.GridUid is not { Valid: true } gridUid)
+            return;
+
+        var radiusOverride = comp.Radius > 0f ? comp.Radius : (float?) null;
+
+        // Zone visuals live on the map grid so every helm radar in range can draw them
+        // (child marker entities drop out of PVS when the viewer is on another grid).
+        if (uid != gridUid)
+        {
+            EnsureForgePoiCaptureZone(gridUid);
+            if (radiusOverride != null && TryComp<PoiCaptureZoneVisualsComponent>(gridUid, out var gridZone))
+                gridZone.Radius = ResolveForgePoiCaptureZoneRadius(radiusOverride.Value);
+
+            UpdatePoiCaptureZoneFromOwner(gridUid);
+            ReplicateForgePoiGridState(gridUid, zone: true);
+            QueueDel(uid);
+            return;
+        }
+
+        comp.Radius = comp.Radius <= 0f
+            ? ResolveForgePoiCaptureZoneRadius(0f)
+            : ResolveForgePoiCaptureZoneRadius(comp.Radius);
+
+        UpdatePoiCaptureZoneFromOwner(gridUid);
+        ReplicateForgePoiGridState(gridUid, zone: true);
+    }
+
+    private void EnsureForgePoiCaptureZone(EntityUid gridUid)
+    {
+        if (!HasComp<MapGridComponent>(gridUid))
+            return;
+
+        var zone = EnsureComp<PoiCaptureZoneVisualsComponent>(gridUid);
+        if (zone.Radius <= 0f)
+            zone.Radius = ResolveForgePoiCaptureZoneRadius(0f);
+
+        // Legacy: remove child marker entities from older maps.
+        var zoneQuery = AllEntityQuery<PoiCaptureZoneVisualsComponent, TransformComponent>();
+        while (zoneQuery.MoveNext(out var zoneUid, out _, out var xform))
+        {
+            if (zoneUid == gridUid || xform.GridUid != gridUid)
+                continue;
+
+            QueueDel(zoneUid);
+        }
+    }
+
+    private void UpdatePoiCaptureZoneFromOwner(EntityUid gridUid)
+    {
+        EnsureForgePoiCaptureZone(gridUid);
+
+        var companyId = "None";
+        if (TryComp<CompanyComponent>(gridUid, out var companyComp))
+            companyId = NormalizeForgeOwner(companyComp.CompanyName);
+        else if (TryComp<PoiCaptureComponent>(gridUid, out var capture))
+            companyId = capture.CurrentOwnerCompanyId;
+
+        var color = Color.Gray;
+        var hasOwner = false;
+        if (companyId != "None"
+            && _protoManager.TryIndex<CompanyPrototype>(companyId, out var ownerProto))
+        {
+            hasOwner = true;
+            color = ownerProto.Color;
+        }
+
+        if (!TryComp<PoiCaptureZoneVisualsComponent>(gridUid, out var zone))
+            return;
+
+        zone.Visible = hasOwner;
+        zone.ZoneColor = color;
+    }
+
+    /// <summary>
+    /// Replicates networked POI grid state after local mutations.
+    /// <see cref="PoiCaptureComponent"/> is server-only and never needs <see cref="Dirty"/>.
+    /// </summary>
+    private void ReplicateForgePoiGridState(
+        EntityUid gridUid,
+        bool company = false,
+        bool faction = false,
+        bool ownership = false,
+        bool zone = false)
+    {
+        if (company && TryComp<CompanyComponent>(gridUid, out var companyComp))
+            Dirty(gridUid, companyComp);
+
+        if (faction && TryComp<ShuttleFactionComponent>(gridUid, out var factionComp))
+            Dirty(gridUid, factionComp);
+
+        if (ownership && TryComp<ShipOwnershipComponent>(gridUid, out var shipOwnership))
+            Dirty(gridUid, shipOwnership);
+
+        if (zone && TryComp<PoiCaptureZoneVisualsComponent>(gridUid, out var zoneComp))
+            Dirty(gridUid, zoneComp);
     }
 
     private TimeSpan GetForgePoiCaptureDuration()
     {
         var minutes = _cfg.GetCVar(ForgeCVars.PoiCaptureDurationMinutes);
         return TimeSpan.FromMinutes(Math.Max(0.1f, minutes));
+    }
+
+    private TimeSpan GetForgePoiRecaptureCooldown()
+    {
+        var hours = _cfg.GetCVar(ForgeCVars.PoiCaptureRecaptureCooldownHours);
+        return TimeSpan.FromHours(Math.Max(0f, hours));
+    }
+
+    private bool TryGetForgePoiRecaptureAvailableTime(PoiCaptureComponent capture, out TimeSpan availableAt)
+    {
+        availableAt = TimeSpan.Zero;
+        if (capture.LastCaptureCompletedTime <= TimeSpan.Zero)
+            return false;
+
+        var cooldown = GetForgePoiRecaptureCooldown();
+        if (cooldown <= TimeSpan.Zero)
+            return false;
+
+        availableAt = capture.LastCaptureCompletedTime + cooldown;
+        return _gameTiming.CurTime < availableAt;
     }
 
     private void UpdateForgePoiCapture()
@@ -53,6 +237,7 @@ public sealed partial class ShuttleSystem
             capture.AttackerFactionId = "None";
             capture.LastCapturedByName = NormalizeForgeOwner(capture.AttackerLeaderName);
             capture.AttackerLeaderName = "None";
+            capture.LastCaptureCompletedTime = now;
 
             ApplyForgeOwnership(gridUid, capture.CurrentOwnerCompanyId, capture.CurrentOwnerFactionId, capture.CaptureLeaderUserId);
 
@@ -94,6 +279,18 @@ public sealed partial class ShuttleSystem
             capture.AttackerFactionId == actorFactionId)
         {
             _popup.PopupEntity(Loc.GetString("iff-console-capture-already-running"), uid, actor, PopupType.Small);
+            return;
+        }
+
+        if (TryGetForgePoiRecaptureAvailableTime(capture, out var recaptureAt))
+        {
+            var remaining = recaptureAt - _gameTiming.CurTime;
+            if (remaining < TimeSpan.Zero)
+                remaining = TimeSpan.Zero;
+
+            _popup.PopupEntity(Loc.GetString("iff-console-capture-recapture-cooldown",
+                ("hours", (int) remaining.TotalHours),
+                ("minutes", remaining.Minutes)), uid, actor, PopupType.Small);
             return;
         }
 
@@ -247,16 +444,20 @@ public sealed partial class ShuttleSystem
         // Forge-Change:start safe-network-component-updates
         // Avoid dynamically adding networked ownership components at runtime on arbitrary grids.
         // We only mutate existing components to reduce state replication edge-cases.
+        var replicateCompany = false;
+        var replicateFaction = false;
+        var replicateOwnership = false;
+
         if (TryComp<CompanyComponent>(gridUid, out var companyComp))
         {
             companyComp.CompanyName = companyId;
-            Dirty(gridUid, companyComp);
+            replicateCompany = true;
         }
 
         if (TryComp<ShuttleFactionComponent>(gridUid, out var factionComp))
         {
             factionComp.Faction = factionId;
-            Dirty(gridUid, factionComp);
+            replicateFaction = true;
         }
         // Forge-Change:end safe-network-component-updates
 
@@ -266,13 +467,20 @@ public sealed partial class ShuttleSystem
             ownership.IsOwnerOnline = true;
             ownership.LastStatusChangeTime = _gameTiming.CurTime;
             ownership.LastPlayerActivityTime = _gameTiming.CurTime;
-            Dirty(gridUid, ownership);
+            replicateOwnership = true;
         }
 
         if (_protoManager.TryIndex<CompanyPrototype>(companyId, out var companyProto))
             SetIFFColor(gridUid, companyProto.Color);
 
         SetIFFReadOnly(gridUid, false);
+
+        UpdatePoiCaptureZoneFromOwner(gridUid);
+        ReplicateForgePoiGridState(gridUid,
+            company: replicateCompany,
+            faction: replicateFaction,
+            ownership: replicateOwnership,
+            zone: true);
     }
 
     private PoiCaptureConsoleBoundUserInterfaceState BuildForgePoiCaptureConsoleState(EntityUid? gridUid, NetUserId? viewerUserId = null)
@@ -313,6 +521,8 @@ public sealed partial class ShuttleSystem
         state.CanTransfer = viewerUserId != null
             && capture.CaptureLeaderUserId == viewerUserId
             && !capture.CaptureInProgress;
+        if (TryGetForgePoiRecaptureAvailableTime(capture, out var recaptureAvailable))
+            state.RecaptureAvailableTime = recaptureAvailable;
         FillForgeCaptureTransferLists(state);
         return state;
     }
@@ -404,5 +614,7 @@ public sealed partial class ShuttleSystem
         }
 
         _uiSystem.SetUiState(uid, PoiCaptureConsoleUiKey.Key, BuildForgePoiCaptureConsoleState(gridUid, viewer));
+        UpdatePoiCaptureZoneFromOwner(gridUid);
+        ReplicateForgePoiGridState(gridUid, zone: true);
     }
 }

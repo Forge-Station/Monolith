@@ -76,7 +76,8 @@ public sealed partial class PoiCaptureConsoleWindow : FancyWindow,
             state.AttackerFactionId);
         CaptureByLabel.Text = Loc.GetString("iff-console-capture-by-label-value",
             ("name", string.IsNullOrWhiteSpace(state.LastCapturedByName) ? Loc.GetString("iff-console-capture-by-none") : state.LastCapturedByName));
-        CaptureStartButton.Disabled = state.CaptureInProgress;
+        var recaptureLocked = IsRecaptureLocked(state);
+        CaptureStartButton.Disabled = state.CaptureInProgress || recaptureLocked;
         CaptureInterruptButton.Disabled = !state.CaptureInProgress;
 
         var canTransfer = CanTransfer(state);
@@ -182,22 +183,41 @@ public sealed partial class PoiCaptureConsoleWindow : FancyWindow,
             $"[color=#7a7a7a]/ {factionEsc}[/color]";
     }
 
+    private bool IsRecaptureLocked(PoiCaptureConsoleBoundUserInterfaceState state)
+    {
+        return state.RecaptureAvailableTime > TimeSpan.Zero
+            && _timing.CurTime < state.RecaptureAvailableTime;
+    }
+
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
 
-        if (!_state.CaptureInProgress)
+        if (_state.CaptureInProgress)
         {
-            CaptureTimerLabel.Text = Loc.GetString("iff-console-capture-timer-idle");
+            var remaining = _state.CaptureEndTime - _timing.CurTime;
+            if (remaining < TimeSpan.Zero)
+                remaining = TimeSpan.Zero;
+
+            CaptureTimerLabel.Text = Loc.GetString("iff-console-capture-timer-running",
+                ("minutes", remaining.Minutes.ToString("00")),
+                ("seconds", remaining.Seconds.ToString("00")));
             return;
         }
 
-        var remaining = _state.CaptureEndTime - _timing.CurTime;
-        if (remaining < TimeSpan.Zero)
-            remaining = TimeSpan.Zero;
+        if (IsRecaptureLocked(_state))
+        {
+            var remaining = _state.RecaptureAvailableTime - _timing.CurTime;
+            if (remaining < TimeSpan.Zero)
+                remaining = TimeSpan.Zero;
 
-        CaptureTimerLabel.Text = Loc.GetString("iff-console-capture-timer-running",
-            ("minutes", remaining.Minutes.ToString("00")),
-            ("seconds", remaining.Seconds.ToString("00")));
+            CaptureStartButton.Disabled = true;
+            CaptureTimerLabel.Text = Loc.GetString("iff-console-capture-recapture-timer",
+                ("hours", (int) remaining.TotalHours),
+                ("minutes", remaining.Minutes.ToString("00")));
+            return;
+        }
+
+        CaptureTimerLabel.Text = Loc.GetString("iff-console-capture-timer-idle");
     }
 }

@@ -34,4 +34,10 @@ public sealed partial class PoiCaptureComponent : Component
 
     [DataField]
     public string LastCapturedByName = "None";
+
+    /// <summary>
+    ///     Game time when the last hostile capture completed. Used for recapture cooldown.
+    /// </summary>
+    [DataField]
+    public TimeSpan LastCaptureCompletedTime;
 }

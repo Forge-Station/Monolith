@@ -18,6 +18,8 @@ public sealed class PoiCaptureConsoleBoundUserInterfaceState : BoundUserInterfac
     public string LastCapturedByName = "None";
     public NetUserId? CaptureLeaderUserId;
     public bool CanTransfer;
+    /// <summary>Game time when a new capture may start; zero if not locked.</summary>
+    public TimeSpan RecaptureAvailableTime;
     public List<ForgeIffTransferListEntry> TransferCompanies = new();
 }
 

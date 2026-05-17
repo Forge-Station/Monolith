@@ -18,11 +18,20 @@
   maximumDistance: 5500 # Mono
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
+  placementTags: [ TSF ]
+  minDistanceFromTags:
+    Renegates: 5000
   gridPath: /Maps/_Forge/POI/TSFChalcyonForge.yml
   addComponents:
   - type: IFF
     color: "#047abd"
     readOnly: true
+  - type: Company
+    companyName: TSF
+  - type: PoiCaptureRoundstart
+    ownerCompanyId: TSF
+    ownerFactionId: TSF
+    zoneRadius: 2048
   - type: SolarPoweredGrid
     doNotCull: true
 

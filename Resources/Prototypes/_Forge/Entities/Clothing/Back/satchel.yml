@@ -14,7 +14,7 @@
     maxItemSize: Huge
 
 - type: entity
-  parent: ClothingBackpackSatchel
+  parent: [ClothingBackpackSatchel, BaseFactionGearOtherFactionT1]
   id: ClothingBackpackSatchelTrauma
   name: trauma satchel
   description: A tactical satchel for army related needs.

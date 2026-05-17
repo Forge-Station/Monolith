@@ -77,7 +77,7 @@
     sprintModifier: 0.95
 
 - type: entity
-  parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]
+  parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseFactionGearOtherFactionT1]
   id: ClothingBeltWebbingsNormalTrauma
   name: trauma carrier
   description: Unique and versatile chest rig, can hold security gear.

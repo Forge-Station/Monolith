@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseFactionGearOtherFactionT1]
   id: ClothingNeckCloakTrauma
   name: trauma cloak
   description: Meant to be worn alongside a frying pan.

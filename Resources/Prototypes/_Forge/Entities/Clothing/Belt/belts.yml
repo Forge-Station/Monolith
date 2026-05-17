@@ -9,6 +9,3 @@
     sprite: Forge/Clothing/Belt/tti_belt.rsi
   - type: Clothing
     sprite: Forge/Clothing/Belt/tti_belt.rsi
-  - type: Storage
-    grid:
-    - 0,0,9,1

@@ -13,7 +13,6 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using DroneConsoleComponent = Content.Server.Shuttles.DroneConsoleComponent;
 using DependencyAttribute = Robust.Shared.IoC.DependencyAttribute;
-using Robust.Shared.Map.Components;
 using Prometheus;
 
 namespace Content.Server.Physics.Controllers;
@@ -26,7 +25,21 @@ public sealed class MoverController : SharedMoverController
     [Dependency] private readonly ThrusterSystem _thruster = default!;
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
 
-    private Dictionary<EntityUid, (ShuttleComponent, List<(EntityUid, PilotComponent, InputMoverComponent, TransformComponent)>)> _shuttlePilots = new();
+    // Forge-Change-Start
+    // Reusable buffers to avoid per-tick allocations in HandleShuttleMovement.
+    private readonly List<ShuttleInput> _shuttleInputsBuffer = new();
+    private readonly List<EntityUid> _shuttlePilotRemoveBuffer = new();
+
+    // Cardinal directions are the only ones HandleShuttleMovement iterates;
+    // cached to avoid Enum.GetValues reflection + array allocation each shuttle each tick.
+    private static readonly DirectionFlag[] CardinalDirectionFlags =
+    {
+        DirectionFlag.South,
+        DirectionFlag.East,
+        DirectionFlag.North,
+        DirectionFlag.West,
+    };
+    // Forge-Change-End
 
     public override void Initialize()
     {
@@ -80,9 +93,9 @@ public sealed class MoverController : SharedMoverController
 
     private void PilotedShuttleRelayEvent<TEvent>(Entity<PilotedShuttleComponent> entity, ref TEvent args)
     {
+        var relayEv = new PilotedShuttleRelayedEvent<TEvent>(args); // Forge-Change: hoisted out of loop
         foreach (var pilot in entity.Comp.InputSources)
         {
-            var relayEv = new PilotedShuttleRelayedEvent<TEvent>(args);
             RaiseLocalEvent(pilot, ref relayEv);
         }
     }
@@ -360,9 +373,12 @@ public sealed class MoverController : SharedMoverController
         var shuttleQuery = EntityQueryEnumerator<ShuttleComponent, PilotedShuttleComponent, PhysicsComponent>();
         while (shuttleQuery.MoveNext(out var uid, out var shuttle, out var piloted, out var body))
         {
-            var inputs = new List<ShuttleInput>();
-            // query all our pilots for input
-            var toRemove = new List<EntityUid>();
+            // Forge-Change-Start: reuse buffers — clear instead of allocating per shuttle per tick.
+            _shuttleInputsBuffer.Clear();
+            _shuttlePilotRemoveBuffer.Clear();
+            var inputs = _shuttleInputsBuffer;
+            var toRemove = _shuttlePilotRemoveBuffer;
+            // Forge-Change-End
 
             var angularMul = 0f;
             var accelMul = 0f;
@@ -426,6 +442,7 @@ public sealed class MoverController : SharedMoverController
             shuttle.AccelerationMultiplier = accelMul;
 
             var shuttleNorthAngle = _xformSystem.GetWorldRotation(uid);
+            var negShuttleNorthAngle = -shuttleNorthAngle; // Forge-Change: cache negated angle, reused below
 
             var xform = Transform(uid);
 
@@ -438,7 +455,7 @@ public sealed class MoverController : SharedMoverController
                     const float appearanceThreshold = 0.1f;
 
                     // Get velocity relative to the shuttle so we know which thrusters to fire
-                    var shuttleVelocity = (-shuttleNorthAngle).RotateVec(body.LinearVelocity);
+                    var shuttleVelocity = negShuttleNorthAngle.RotateVec(body.LinearVelocity); // Forge-Change: use cached negShuttleNorthAngle
                     var force = GetDirectionThrust(-shuttleVelocity, shuttle, body, xform);
 
                     if (force.X < 0f)
@@ -525,28 +542,17 @@ public sealed class MoverController : SharedMoverController
 
                 var totalForce = GetDirectionThrust(linearInput, shuttle, body, xform);
 
-                // Won't just do cardinal directions.
-                foreach (DirectionFlag dir in Enum.GetValues(typeof(DirectionFlag)))
+                // Forge-Change-Start: replaced Enum.GetValues(typeof(DirectionFlag)) per-tick allocation with cached cardinals array
+                foreach (var dir in CardinalDirectionFlags)
                 {
-                    // Brain no worky but I just want cardinals
-                    switch (dir)
-                    {
-                        case DirectionFlag.South:
-                        case DirectionFlag.East:
-                        case DirectionFlag.North:
-                        case DirectionFlag.West:
-                            break;
-                        default:
-                            continue;
-                    }
-
                     if ((dir & dockFlag) == 0x0)
                         _thruster.DisableLinearThrustDirection(shuttle, dir);
                     else
                         _thruster.EnableLinearThrustDirection(shuttle, dir);
                 }
+                // Forge-Change-End
 
-                var localVel = (-shuttleNorthAngle).RotateVec(body.LinearVelocity);
+                var localVel = negShuttleNorthAngle.RotateVec(body.LinearVelocity); // Forge-Change: use cached negShuttleNorthAngle
                 if (setMaxVel is { } speed && localVel.LengthSquared() != 0f && totalForce.LengthSquared() != 0f)
                 {
                     // vector of max velocity we can be traveling with along current direction
@@ -596,14 +602,13 @@ public sealed class MoverController : SharedMoverController
         }
     }
 
+    // Forge-Change-Start: removed per-tick Dictionary + tuple-list allocations; iterate pilots directly and call AddPilot inline.
     private void HandleShuttlePilot(float frameTime)
     {
-        var newPilots = new Dictionary<EntityUid, (ShuttleComponent Shuttle, List<(EntityUid PilotUid, PilotComponent Pilot, InputMoverComponent Mover, TransformComponent ConsoleXform)>)>();
-
         // We just mark off their movement and the shuttle itself does its own movement
         var activePilotQuery = EntityQueryEnumerator<PilotComponent, InputMoverComponent>();
         var shuttleQuery = GetEntityQuery<ShuttleComponent>();
-        while (activePilotQuery.MoveNext(out var uid, out var pilot, out var mover))
+        while (activePilotQuery.MoveNext(out var uid, out var pilot, out _))
         {
             var consoleEnt = pilot.Console;
 
@@ -617,33 +622,15 @@ public sealed class MoverController : SharedMoverController
 
             var gridId = xform.GridUid;
             // This tries to see if the grid is a shuttle and if the console should work.
-            if (!TryComp<MapGridComponent>(gridId, out var _) ||
+            if (!MapGridQuery.HasComp(gridId) ||
                 !shuttleQuery.TryGetComponent(gridId, out var shuttleComponent) ||
                 !shuttleComponent.Enabled)
                 continue;
 
-            if (!newPilots.TryGetValue(gridId!.Value, out var pilots))
-            {
-                pilots = (shuttleComponent, new List<(EntityUid, PilotComponent, InputMoverComponent, TransformComponent)>());
-                newPilots[gridId.Value] = pilots;
-            }
-
-            pilots.Item2.Add((uid, pilot, mover, xform));
-        }
-
-        _shuttlePilots = newPilots;
-
-
-        // Collate all of the linear / angular velocites for a shuttle
-        // then do the movement input once for it.
-        foreach (var (shuttleUid, (shuttle, pilots)) in _shuttlePilots)
-        {
-            foreach (var (pilotUid, _, _, _) in pilots)
-            {
-                AddPilot(shuttleUid, pilotUid);
-            }
+            AddPilot(gridId!.Value, uid);
         }
     }
+    // Forge-Change-End
 
     /// <summary>
     /// Registers an entity as an input source for a shuttle.

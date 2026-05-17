@@ -195,7 +195,7 @@
 
 # Trauma Armed Forces
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1
   id: ClothingUniformJumpsuitATU
   name: armed trauma unit jumpsuit
   suffix: TTI # Forge

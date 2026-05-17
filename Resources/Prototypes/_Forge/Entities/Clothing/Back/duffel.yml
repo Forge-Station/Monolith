@@ -12,7 +12,7 @@
     maxItemSize: Huge
 
 - type: entity
-  parent: ClothingBackpackDuffel
+  parent: [ClothingBackpackDuffel, BaseFactionGearOtherFactionT1]
   id: ClothingBackpackDuffelTrauma
   name: trauma duffel bag
   description: A large duffel bag for holding any army goods.

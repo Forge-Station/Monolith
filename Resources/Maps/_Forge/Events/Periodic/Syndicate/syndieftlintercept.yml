@@ -3,9 +3,9 @@ meta:
   category: Grid
   engineVersion: 275.1.0
   forkId: frontier_mapping
-  forkVersion: 49b49bdbc5e50bc03bdab9f42c6ced6dddb578d3
-  time: 05/11/2026 13:02:24
-  entityCount: 995
+  forkVersion: bfb99971e45d94a68d67eb08491e514f52e45400
+  time: 05/16/2026 14:42:12
+  entityCount: 991
 maps: []
 grids:
 - 1
@@ -83,9 +83,9 @@ entities:
     - type: SpreaderGrid
       spreadQueues:
         Smoke: []
+        MetalFoam: []
         Kudzu: []
         Puddle: []
-        MetalFoam: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -2748,7 +2748,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
+      startingCharge: 80
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerTabletopAlert
@@ -2761,7 +2761,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
+      startingCharge: 80
     - type: ApcPowerReceiverBattery
       enabled: True
     missingComponents:
@@ -2777,7 +2777,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
+      startingCharge: 80
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerTabletopGunneryConsole
@@ -2791,7 +2791,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
+      startingCharge: 80
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerTabletopShuttleAntag
@@ -2804,7 +2804,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
+      startingCharge: 80
     - type: ApcPowerReceiverBattery
       enabled: True
     missingComponents:
@@ -3917,7 +3917,7 @@ entities:
       pos: 0.5,-3.5
       parent: 1
     - type: Battery
-      startingCharge: 440
+      startingCharge: 430
     - type: ApcPowerReceiver
       powerLoad: 20
     - type: ApcPowerReceiverBattery
@@ -5097,33 +5097,11 @@ entities:
     - type: Transform
       pos: 1.5,-9.5
       parent: 1
-  - uid: 70
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -13.5,4.5
-      parent: 1
   - uid: 181
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,9.5
-      parent: 1
-  - uid: 252
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -15.5,4.5
-      parent: 1
-  - uid: 444
-    components:
-    - type: Transform
-      pos: -8.5,-5.5
-      parent: 1
-  - uid: 450
-    components:
-    - type: Transform
-      pos: -6.5,-5.5
       parent: 1
   - uid: 542
     components:
@@ -6449,70 +6427,69 @@ entities:
       parent: 1
 - proto: WeaponTurretAK570
   entities:
-  - uid: 33
+  - uid: 70
+    components:
+    - type: Transform
+      pos: -9.5,-6.5
+      parent: 1
+  - uid: 171
+    components:
+    - type: Transform
+      pos: -5.5,-6.5
+      parent: 1
+  - uid: 252
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 12.5,5.5
       parent: 1
-  - uid: 171
+  - uid: 402
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -16.5,5.5
+      parent: 1
+  - uid: 444
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -12.5,5.5
+      parent: 1
+  - uid: 450
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 12.5,1.5
       parent: 1
-  - uid: 402
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -16.5,6.5
-      parent: 1
   - uid: 518
     components:
     - type: Transform
-      pos: -9.5,-7.5
+      pos: -19.5,-5.5
       parent: 1
   - uid: 606
-    components:
-    - type: Transform
-      pos: -5.5,-7.5
-      parent: 1
-  - uid: 765
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -12.5,6.5
-      parent: 1
-- proto: WeaponTurretBofors
-  entities:
-  - uid: 215
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -19.5,3.5
       parent: 1
-  - uid: 292
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -19.5,-5.5
-      parent: 1
-  - uid: 635
+- proto: WeaponTurretLongbow
+  entities:
+  - uid: 33
     components:
     - type: Transform
       pos: -7.5,-6.5
       parent: 1
-  - uid: 763
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -14.5,5.5
-      parent: 1
-  - uid: 916
+  - uid: 215
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 11.5,3.5
+      parent: 1
+  - uid: 292
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -14.5,5.5
       parent: 1
 - proto: WeaponTurretSyndicate
   entities:

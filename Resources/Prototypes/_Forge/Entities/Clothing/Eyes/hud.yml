@@ -1,8 +1,9 @@
 - type: entity
-  parent: [ClothingEyesBase, ShowMedicalIcons,]
+  parent: [ClothingEyesBase, ShowMedicalIcons, ShowSecurityIcons, BaseFactionGearOtherFactionT1]
   id: ClothingEyesHudTrauma
   name: trauma hud
   description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  suffix: TTI
   components:
   - type: Sprite
     sprite: Forge/Clothing/Eyes/Hud/tti.rsi
@@ -13,3 +14,4 @@
     damageContainers:
     - Inorganic
     - Silicon
+    - Biological

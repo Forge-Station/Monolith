@@ -360,7 +360,7 @@
     sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
     
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1]
   id: ClothingUniformJumpsuitTraumaDirector
   name: armed director trauma unit jumpsuit
   suffix: TTI
@@ -375,7 +375,7 @@
     mode: SensorVitals
     
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] 
   id: ClothingUniformJumpsuitTraumaStandart
   name: armed standart trauma unit jumpsuit
   suffix: TTI
@@ -390,7 +390,7 @@
     mode: SensorVitals
     
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] 
   id: ClothingUniformJumpsuitTraumaBlue
   name: armed blue trauma unit jumpsuit
   suffix: TTI 

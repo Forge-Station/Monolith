@@ -120,9 +120,9 @@
     sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
   - type: Clothing
     sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
-
+# Trauma Team
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, BaseFactionGearOtherFactionT1]
   id: ClothingHeadHatTraumaBeret
   name: trauma beret
   suffix: TTI
@@ -134,7 +134,7 @@
     sprite: Forge/Clothing/Head/Hats/tti_beret.rsi
     
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, BaseFactionGearOtherFactionT1]
   id: ClothingHeadHatTraumaDirectorBeret
   name: trauma director beret
   suffix: TTI

@@ -27,7 +27,7 @@
     sprite: Forge/Clothing/Mask/nexus_mask.rsi
 
 - type: entity
-  parent: ClothingMaskGasSecurity
+  parent: [ClothingMaskGasSecurity, BaseFactionGearOtherFactionT1]
   id: ClothingMaskSterileTrauma
   name: trauma gas mask
   suffix: TTI

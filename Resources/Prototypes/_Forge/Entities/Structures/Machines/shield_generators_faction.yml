@@ -28,6 +28,7 @@
     powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -70,6 +71,7 @@
     powerLoad: 71280
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -111,6 +113,7 @@
     powerLoad: 66744
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -155,6 +158,7 @@
     powerLoad: 40500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -197,6 +201,7 @@
     powerLoad: 49500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -239,6 +244,7 @@
     powerLoad: 46350
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -283,6 +289,7 @@
     powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -325,6 +332,7 @@
     powerLoad: 71280
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -367,6 +375,7 @@
     powerLoad: 66744
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -411,6 +420,7 @@
     powerLoad: 55620
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -453,6 +463,7 @@
     powerLoad: 67980
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -495,6 +506,7 @@
     powerLoad: 63654
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -540,6 +552,7 @@
     powerLoad: 40500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -583,6 +596,7 @@
     powerLoad: 49500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -626,6 +640,7 @@
     powerLoad: 46350
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -670,6 +685,7 @@
     powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -712,6 +728,7 @@
     powerLoad: 36000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -754,6 +771,7 @@
     powerLoad: 51840
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -796,6 +814,7 @@
     powerLoad: 49440
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base
@@ -839,6 +858,7 @@
     powerLoad: 36000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
     snapCardinals: false
     layers:
     - state: base

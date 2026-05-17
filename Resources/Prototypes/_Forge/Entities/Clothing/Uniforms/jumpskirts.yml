@@ -10,9 +10,9 @@
     sprite: Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
   - type: Clothing
     sprite: Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
-
+# Trauma Team
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1
   id: ClothingUniformJumpskirtTraumaBlue
   suffix: TTI 
   name: trauma armed forces jumpskirt

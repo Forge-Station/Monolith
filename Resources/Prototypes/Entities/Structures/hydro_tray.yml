@@ -101,7 +101,7 @@
     id: HydroponicsTray # Frontier
   #<Forge>
   - type: TTS # Corvax-TTS
-    voice: TrainingRobot
+    voice: Glados
   #<Forge>
 
 - type: entity

@@ -9400,7 +9400,7 @@ entities:
     - type: Transform
       pos: 3.5,19.5
       parent: 1
-- proto: ShieldGeneratorMedium
+- proto: ShieldGeneratorFSG220
   entities:
   - uid: 557
     components:

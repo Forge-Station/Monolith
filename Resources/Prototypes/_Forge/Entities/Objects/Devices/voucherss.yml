@@ -1,0 +1,59 @@
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherAzimut
+  name: Renegate Azimut LPC
+  suffix: Ренегаты
+  description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: Forge/Misc/voucher.rsi
+    layers:
+    - state: voucherenegat
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Renegate
+    companyName: Renegate
+    vessels:
+    - azimut
+  - type: StaticPrice
+    vendPrice: 530000
+
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherAzimutlate
+  name: Renegate Azimutlate LPC
+  suffix: Ренегаты
+  description: A small card that contains the data for the procurement of a Azimutlate-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: Forge/Misc/voucher.rsi
+    layers:
+    - state: voucherenegat
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Renegate
+    companyName: Renegate
+    vessels:
+    - azimutlate
+  - type: StaticPrice
+    vendPrice: 520000
+
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherGalandec
+  name: Renegate Galandec LPC
+  suffix: Ренегаты
+  description: A small card that contains the data for the procurement of a Galandec-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: Forge/Misc/voucher.rsi
+    layers:
+    - state: voucherenegat
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Renegate
+    companyName: Renegate
+    vessels:
+    - galandec
+  - type: StaticPrice
+    vendPrice: 510000

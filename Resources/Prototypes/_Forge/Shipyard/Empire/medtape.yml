@@ -1,0 +1,29 @@
+- type: vessel
+  id: medtape
+  parent: BaseVessel
+  name: EMMS Пластырь
+  description: Медицинский шаттл Империи. Слабое вооружение.
+  category: Small
+  group: Empire
+  access: Empire
+  price: 78000
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/medtape.yml
+  guidebookPage: Null
+  class:
+  - Medical
+  engine:
+  - Uranium
+- type: gameMap
+  id: medtape
+  mapName: EMMS Пластырь
+  mapPath: /Maps/_Forge/Shuttles/Empire/medtape.yml
+  minPlayers: 0
+  stations:
+    medtape:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'EMMS Пластырь SEW{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

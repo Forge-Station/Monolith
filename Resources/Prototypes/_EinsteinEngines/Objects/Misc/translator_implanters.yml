@@ -46,6 +46,14 @@
   - type: Implanter
     implant: DraconicTranslatorImplant
 
+- type: entity # Forge Change begin
+  id: KelaelTranslatorImplanter
+  parent: [ BaseTranslatorImplanter ]
+  name: kela'el translator implant
+  components:
+  - type: Implanter
+    implant: KelaelTranslatorImplant # Forge Change end
+
 - type: entity
   id: CanilunztTranslatorImplanter
   parent: [ BaseTranslatorImplanter ]

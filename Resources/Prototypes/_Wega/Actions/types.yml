@@ -1,0 +1,11 @@
+- type: entity
+  id: InstantRegeneration
+  name: action-instant-regeneration-name
+  description: action-instant-regeneration-desc
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Wega/Demon/Interface/Actions/action_demon.rsi
+      state: instant_regeneration
+    useDelay: 80
+    event: !type:DamageOnActionEvent

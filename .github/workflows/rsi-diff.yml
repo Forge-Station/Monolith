@@ -1,9 +1,7 @@
 name: Diff RSIs
 
 on:
-  pull_request_target:
-    paths:
-      - '**.rsi/**.png'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.6.0
+        uses: actions/checkout@v4.2.2
 
       - name: Get changed files
         id: files

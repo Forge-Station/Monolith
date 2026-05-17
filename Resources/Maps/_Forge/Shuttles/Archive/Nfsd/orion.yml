@@ -14462,7 +14462,7 @@ entities:
           - 1785
           - 1786
           - 1787
-- proto: ShieldGeneratorMedium
+- proto: ShieldGeneratorFSG220
   entities:
   - uid: 768
     components:

@@ -66,6 +66,9 @@
     receiveFrequencyId: DroneControl
   - type: WirelessNetworkConnection
     range: 100000 # keep same as sleep range
+  - type: ShipRepairable
+    repairTime: 12
+    repairCost: 20
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -94,6 +97,7 @@
       enum.DroneConsoleUiKey.Key:
         type: DroneConsoleBoundUserInterface
   - type: RadarConsole
+    noRotate: true
   - type: WorldLoader
     radius: 256
   - type: DeviceNetwork
@@ -102,6 +106,9 @@
   - type: WirelessNetworkConnection
     range: 100000
   - type: DeviceList
+  - type: ShipRepairable
+    repairTime: 12
+    repairCost: 20
 
 - type: entity
   parent: ComputerDroneControl

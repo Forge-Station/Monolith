@@ -1,0 +1,14 @@
+- type: entity
+  parent: ClothingBeltMedical
+  id: ClothingBeltTrauma
+  name: trauma belt
+  description: Can hold various medical equipment.
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Belt/tti_belt.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Belt/tti_belt.rsi
+  - type: Storage
+    grid:
+    - 0,0,9,1

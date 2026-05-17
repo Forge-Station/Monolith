@@ -211,13 +211,14 @@
   # TODO make these entitystorage again + placeablesurface after entity storage ECS gets merged.
   - type: Storage
     grid:
-    - 0,0,3,1
+    - 0,0,3,2
     maxItemSize: Normal
     whitelist:
       components:
       - Utensil
       tags:
       - Pizza
+      - DrinkCan
   - type: Item
     sprite: Objects/Consumable/Food/Baked/pizza.rsi
     heldPrefix: box

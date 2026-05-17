@@ -56,6 +56,7 @@
       types:
         Heat: 0.35
   - type: NightVision
+    color: "#808080"
     activateSound: null
     deactivateSound: null
   - type: TemperatureSpeed
@@ -87,6 +88,11 @@
           32:
             sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
             state: jumpsuit-female
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
+            state: outerclothing
       shoes:
         sizeMaps:
           32:
@@ -98,6 +104,11 @@
           32:
             sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
             state: jumpsuit
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
+            state: outerclothing
       shoes:
         sizeMaps:
           32:
@@ -131,6 +142,11 @@
           32:
             sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
             state: jumpsuit-female
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
+            state: outerclothing
       shoes:
         sizeMaps:
           32:
@@ -142,6 +158,11 @@
           32:
             sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
             state: jumpsuit
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
+            state: outerclothing
       shoes:
         sizeMaps:
           32:

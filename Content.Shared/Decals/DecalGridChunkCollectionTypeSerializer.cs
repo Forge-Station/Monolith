@@ -139,7 +139,8 @@ namespace Content.Shared.Decals
                 nodes.Add(lookupNode);
             }
 
-            allData.Add("version", 2.ToString(CultureInfo.InvariantCulture));
+            // v3 keeps v2 layout for map compatibility while allowing explicit future migrations.
+            allData.Add("version", 3.ToString(CultureInfo.InvariantCulture));
             allData.Add("nodes", nodes);
 
             return allData;

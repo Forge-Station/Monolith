@@ -1,0 +1,19 @@
+- type: vendingMachineInventory
+  id: VendingInventoryNT
+  startingInventory:
+    ClothingUniformJumpsuitSr: 2
+    ClothingUniformJumpskirtSr: 2
+    ClothingOuterJacketSr: 2
+    ClothingOuterArmorSrCarapace: 1
+    ClothingNeckCloakSr: 1
+    ClothingNeckMantleSr: 1
+    ClothingHeadHatSrBeret: 2
+    ClothingEyesGlassesCommand: 1
+    ClothingShoesBootsLaceup: 1
+    ClothingShoesBootsWinterHoP: 1
+    ClothingUniformJumpsuitNanotrasen: 2
+    ClothingNeckCloakNanotrasen: 1
+    TowelColorNT: 2
+    NTHandyFlag: 3
+    DisciplinesDiskNanotrasen: 2
+

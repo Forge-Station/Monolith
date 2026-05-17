@@ -10,3 +10,6 @@ ent-AirlockShuttleNfsdCapitalLocked = { ent-AirlockShuttleNfsdCapital }
 ent-AirlockGlassShuttleNfsdCapitalLocked = { ent-AirlockGlassShuttleNfsdCapital }
     .suffix = Капитал, ТСФ, Стеклянный, Стыковочный, Закрыт
     .desc = { ent-AirlockGlassShuttleNfsdCapital.desc }
+ent-HighSecTSFMCLocked = { ent-HighSecArmoryLocked }
+    .suffix = ТСФ, Закрыт
+    .desc = { ent-HighSecArmoryLocked.desc }

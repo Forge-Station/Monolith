@@ -199,15 +199,15 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (gunComp.ShotCounter == 0)
             return null;
 
+        if (shot == null)
+            return null;
+
         var projectiles = new List<(EntityUid Entity, ProjectileComponent Component)>();
-        if (shot != null)
+        foreach (var id in shot)
         {
-            foreach (var id in shot)
-            {
-                var entity = new EntityUid(id);
-                if (_projQuery.TryComp(entity, out var projectile))
-                    projectiles.Add((entity, projectile));
-            }
+            var entity = new EntityUid(id);
+            if (_projQuery.TryComp(entity, out var projectile))
+                projectiles.Add((entity, projectile));
         }
 
         return projectiles;
@@ -590,6 +590,26 @@ public abstract partial class SharedGunSystem : EntitySystem
             return ProtoManager.Index(cartComp.Prototype);
         }
         return cartridge;
+    }
+
+    // Mono
+    public DamageSpecifier GetNextDamage(Entity<GunComponent?> gun)
+    {
+        if (!TryNextShootPrototype(gun, out var shoot))
+            return new();
+
+        return GetBulletDamage(shoot);
+    }
+
+    // Mono
+    public DamageSpecifier GetBulletDamage(EntityPrototype bullet)
+    {
+        var shoot = GetBulletPrototype(bullet);
+        if (shoot.TryGetComponent<HitscanBasicDamageComponent>(out var hitscan, Factory))
+            return hitscan.Damage;
+        if (shoot.TryGetComponent<ProjectileComponent>(out var proj, Factory))
+            return proj.Damage;
+        return new();
     }
 
     // Mono - used for multiple-per-frame projectile offset

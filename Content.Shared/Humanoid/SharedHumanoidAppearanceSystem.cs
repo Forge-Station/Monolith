@@ -54,12 +54,12 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     public const string DefaultBarkVoice = "BarksGoonSpeak1";
     // Corvax-Frontier-Barks-end
     // Corvax-TTS-Start
-    public const string DefaultVoice = "Garithos";
+    public const string DefaultVoice = "Papich";
     public static readonly Dictionary<Sex, string> DefaultSexVoice = new()
     {
-        {Sex.Male, "Garithos"},
-        {Sex.Female, "Maiev"},
-        {Sex.Unsexed, "Myron"},
+        {Sex.Male, "Papich"},
+        {Sex.Female, "Charlotte"},
+        {Sex.Unsexed, "Biden"},
     };
     // Corvax-TTS-End
 

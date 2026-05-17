@@ -1,0 +1,10 @@
+- type: latheRecipePack
+  id: TTISuplplies
+  recipes:
+  - OmnizineChemistryBottle
+  - Hypospray
+  - HypoBrigmedic
+  - HypoMiniLimitedEdition
+  - CentCommHypo
+  - RegenerativeMesh
+  - MedicatedSuture

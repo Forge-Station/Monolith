@@ -3,15 +3,18 @@
   id: MdMedicNeck
   name: loadout-group-contractor-neck
   loadouts:
+  - DocClothingNeckMantleTrauma # Forge-change
   - MdMedicClothingNeckIFFWhite
   - MdMedicClothingNeckIFFCyan
   - MdMedicClothingNeckIFFGreen
   - MdMedicClothingNeckIFFBlue
+  - MdMedicClothingNeckTTIParamedicCloak #forge by g33ka
+  - MdMedicClothingNeckTTIParamedicCloakAlt #forge by g33ka
   - MdMedicClothingNeckStethoscope
   - MdMedicClothingNeckLightBlueScarf
   - MdMedicClothingNeckBlueScarf
   fallbacks:
-  - MdMedicClothingNeckIFFWhite
+  - DocClothingNeckMantleTrauma
 
 - type: loadout
   id: MdMedicClothingNeckIFFWhite
@@ -49,9 +52,31 @@
   equipment:
     neck: ClothingNeckScarfStripedBlue
 
-
 - type: loadout
   id: MdMedicClothingNeckStethoscope
   price: 0
   equipment:
     neck: ClothingNeckStethoscope
+# Forge start
+- type: loadout
+  id: DocClothingNeckCloakTrauma
+  equipment:
+    neck: ClothingNeckCloakTrauma
+    
+- type: loadout
+  id: DocClothingNeckMantleTrauma
+  equipment:
+    neck: ClothingNeckMantleTrauma
+
+- type: loadout
+  id: MdMedicClothingNeckTTIParamedicCloak
+  price: 6000
+  equipment:
+    neck: ClothingNeckCloakTTIParamedic
+
+- type: loadout
+  id: MdMedicClothingNeckTTIParamedicCloakAlt
+  price: 12000
+  equipment:
+    neck: ClothingNeckCloakTTIParamedicAlt
+# Forge end

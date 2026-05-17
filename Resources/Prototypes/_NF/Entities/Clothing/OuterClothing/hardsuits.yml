@@ -104,15 +104,15 @@
   description: A protective hardsuit worn by the mail carriers of an emergency response team.
   components:
   - type: Sprite
-    sprite: _NF/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmailcarrier.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmailcarrier.rsi # Forge-change
   - type: Clothing
-    sprite: _NF/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmailcarrier.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmailcarrier.rsi # Forge-change
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head:  ClothingHeadHelmetHardsuitERTMailCarrier
+      head:  ClothingHeadHelmetHardsuitERTSecurity # Forge-change
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
 

@@ -6,5 +6,5 @@ ent-ClothingModsuitGauntletsRogue = RX-01 modsuit gauntlets
     .desc = Нетокопроводящая сетка, герметичные швы. Удивительно легально. С гордостью произведено в Секторе Ullman Industries.
 ent-ClothingModsuitGauntletsVolta = Volta Modsuit Gauntlets
     .desc = Замасленные перчатки модульного костюма — удобно жать кнопки на RCD.
-ent-ClothingModsuitGauntletsMercenary = mercenary modsuit gauntlets
+ent-ClothingModsuitGauntletsGalloglass = перчатки модкостюма «Галлоглас»
     .desc = Накладки на костяшках светятся при герметизации костюма... без видимой причины.

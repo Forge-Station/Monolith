@@ -18,6 +18,7 @@ namespace Content.Server.Engineering.EntitySystems
         [Dependency] private readonly StackSystem _stackSystem = default!;
         [Dependency] private readonly TurfSystem _turfSystem = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly SharedMapSystem _map = default!;
 
         public override void Initialize()
         {
@@ -34,7 +35,8 @@ namespace Content.Server.Engineering.EntitySystems
                 return;
             if (!TryComp<MapGridComponent>(_transform.GetGrid(args.ClickLocation), out var grid))
                 return;
-            if (!grid.TryGetTileRef(args.ClickLocation, out var tileRef))
+            var gridUid = _transform.GetGrid(args.ClickLocation)!.Value;
+            if (!_map.TryGetTileRef(gridUid, grid, args.ClickLocation, out var tileRef))
                 return;
 
             bool IsTileClear()

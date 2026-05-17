@@ -20,6 +20,7 @@ public sealed class NationalitySystem : EntitySystem
     [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
     [Dependency] private readonly IConfigurationManager _configuration = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    private ISawmill _sawmill = default!;
 
     public override void Initialize()
     {
@@ -40,13 +41,14 @@ public sealed class NationalitySystem : EntitySystem
         if (jobId == null || !_prototype.TryIndex(jobId, out var jobPrototypeToUse))
             return;
 
-        var nationalityId = !string.IsNullOrEmpty(profile.Nationality)
-            ? profile.Nationality
-            : SharedHumanoidAppearanceSystem.DefaultNationality;
+        var nationalityId = jobPrototypeToUse.AssignedNationality?.Id
+            ?? (!string.IsNullOrEmpty(profile.Nationality)
+                ? profile.Nationality
+                : SharedHumanoidAppearanceSystem.DefaultNationality);
 
         if (!_prototype.TryIndex<NationalityPrototype>(nationalityId, out var nationalityPrototype))
         {
-            Logger.Warning($"Nationality '{nationalityId}' not found!");
+            _sawmill.Warning($"Nationality '{nationalityId}' not found!");
             return;
         }
 

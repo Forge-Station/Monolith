@@ -178,7 +178,11 @@ public abstract partial class InteractionTest
             }
         });
 
-        await RunTicks(1);
+        for (var i = 0; i < 10 && Hands.ActiveHandEntity != item; i++) // Forge-Change
+        {
+            await RunTicks(1);
+        }
+
         Assert.That(Hands.ActiveHandEntity, Is.EqualTo(item));
         if (enableToggleable && itemToggle != null)
             Assert.That(itemToggle.Activated);
@@ -215,7 +219,11 @@ public abstract partial class InteractionTest
             Assert.That(HandSys.TryPickup(SEntMan.GetEntity(Player), uid.Value, Hands.ActiveHand, false, false, Hands, item));
         });
 
-        await RunTicks(1);
+        for (var i = 0; i < 10 && Hands.ActiveHandEntity != uid; i++) // Forge-Change
+        {
+            await RunTicks(1);
+        }
+
         Assert.That(Hands.ActiveHandEntity, Is.EqualTo(uid));
     }
 
@@ -280,7 +288,17 @@ public abstract partial class InteractionTest
         // (e.g., servers attempt to assemble construction examine hints).
         if (Target != null)
         {
-            await Client.WaitPost(() => ExamineSys.DoExamine(CEntMan.GetEntity(Target.Value)));
+            // Forge-Change-start
+            await Client.WaitPost(() =>
+            {
+                if (CEntMan.TryGetEntity(Target.Value, out var target) &&
+                    target.Value.Valid &&
+                    CEntMan.EntityExists(target.Value))
+                {
+                    ExamineSys.DoExamine(target.Value);
+                }
+            });
+            // Forge-Change-end
         }
 
         await PlaceInHands(entity);

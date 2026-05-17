@@ -1,0 +1,30 @@
+- type: vessel
+  id: menok
+  parent: BaseVessel
+  name: EMRF Менок
+  description: Ракетный фрегат Империи.
+  price: 144300
+  category: Medium
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/menok.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Bananium
+
+- type: gameMap
+  id: menok
+  mapName: EMRF Менок
+  mapPath: /Maps/_Forge/Shuttles/Empire/menok.yml
+  minPlayers: 0
+  stations:
+    menok:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'EMRF Менок SEW{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

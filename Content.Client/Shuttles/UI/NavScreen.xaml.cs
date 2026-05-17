@@ -9,6 +9,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing; // Forge-Change
 
 namespace Content.Client.Shuttles.UI;
 
@@ -84,6 +85,8 @@ public sealed partial class NavScreen : BoxContainer
     {
         _shuttleEntity = shuttle;
 
+        ShieldBar.SetGrid(shuttle); // Forge-Change: feed grid UID to the shield HUD; bar resolves emitter itself.
+
         NfAddShuttleDesignation(shuttle); // Frontier - PR #1284 Add Shuttle Designation
     }
 
@@ -118,8 +121,20 @@ public sealed partial class NavScreen : BoxContainer
         // Update port names if custom names are available
         UpdateNetworkPortButtonNames(scc.NetworkPortNames);
 
+        // Forge-Change: panel visibility tracks the bar's current emitter; bar reads networked state itself.
+        ShieldPanel.Visible = ShieldBar.HasShield;
+
         NfUpdateState(); // Frontier Update State
     }
+
+    // Forge-Change-Start: keep shield panel visibility in sync with the live emitter component without
+    // waiting for the next BUI push. The check is cheap (single component lookup or short PVS-local query).
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+        ShieldPanel.Visible = ShieldBar.HasShield;
+    }
+    // Forge-Change-End
 
     /// <summary>
     /// Updates the text on the network port buttons based on the custom port names.
@@ -176,14 +191,15 @@ public sealed partial class NavScreen : BoxContainer
         var (_, worldRot, worldMatrix) = _xformSystem.GetWorldPositionRotationMatrix(gridXform);
         var worldPos = Vector2.Transform(gridBody.LocalCenter, worldMatrix);
 
-        // Get the positive reduced angle.
-        var displayRot = -worldRot.Reduced();
+        // Mono - remap to [0, 360)
+        var displayRot = (-worldRot).Reduced();
+        var displayRotDegrees = displayRot.FlipPositive().Degrees;
 
         GridPosition.Text = Loc.GetString("shuttle-console-position-value",
             ("X", $"{worldPos.X:0.0}"),
             ("Y", $"{worldPos.Y:0.0}"));
         GridOrientation.Text = Loc.GetString("shuttle-console-orientation-value",
-            ("angle", $"{displayRot.Degrees:0.0}"));
+            ("angle", $"{displayRotDegrees:0.0}"));
 
         var gridVelocity = gridBody.LinearVelocity;
         gridVelocity = displayRot.RotateVec(gridVelocity);

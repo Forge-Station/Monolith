@@ -20,6 +20,9 @@ ent-EncryptionKeyRenegade = ключ шифрования ренегатов
 
 ent-EncryptionKeyPlantManager = ключ шифрования менеджера электростанции
     .desc = Ключ шифрования, используемый для координации инженеров.
+ent-EncryptionKeyCustom = настраиваемый ключ шифрования
+    .desc = Ключ шифрования для частот портативных раций. Зачем таскать отдельную рацию, если можно настроить гарнитуру?
+
 ent-EncryptionKeyHospital = ключ шифрования травмы тим
     .desc = Ключ шифрования, используемый для координации сотрудников TTI.
 
@@ -37,4 +40,6 @@ ent-EncryptionKeyBlackhawk = ключ шифрования Blackhawk PMC
     .desc = Ключ шифрования, используемый для переговоров внутри Blackhawk PMC.
 ent-EncryptionKeyTechnicLogistic = ключ шифрования TechnicLogistic
     .desc = Ключ шифрования, используемый для переговоров внутри TechnicLogistic.
+ent-EncryptionKeyHarmony = ключ шифрования канала HME
+    .desc = Ключ шифрования дающий доступ к каналу HME. От него пахнет медициной.
 

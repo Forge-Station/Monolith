@@ -1,7 +1,7 @@
 - type: nationality
   id: Imperial
-  nameKey: nationality_name_imperial
-  descriptionKey: nationality_description_imperial
+  name: nationality_name_imperial
+  description: nationality_description_imperial
   hostile:
   - USSP
   special:
@@ -14,8 +14,8 @@
 
 - type: nationality
   id: TransSolarFederation
-  nameKey: nationality_name_solfed
-  descriptionKey: nationality_description_solfed
+  name: nationality_name_solfed
+  description: nationality_description_solfed
   special:
   - !type:AddLanguageSpecial
     languagesSpoken:
@@ -26,8 +26,8 @@
 
 - type: nationality
   id: USSP
-  nameKey: nationality_name_ussp
-  descriptionKey: nationality_description_ussp
+  name: nationality_name_ussp
+  description: nationality_description_ussp
   hostile:
   - Imperial
   special:
@@ -37,3 +37,12 @@
     languagesUnderstood:
     - ForgeSibera
   passportPrototype: USSPPassport
+
+- type: nationality
+  id: FreeColonies
+  name: nationality_name_freecolonies
+  description: nationality_description_freecolonies
+  hidden: true
+  hostile:
+  - Imperial
+  passportPrototype: FreeColoniesPassport

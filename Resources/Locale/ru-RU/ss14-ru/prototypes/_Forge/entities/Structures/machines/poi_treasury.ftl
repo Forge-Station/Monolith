@@ -79,6 +79,7 @@ ent-PoiTreasuryCargoDepot = { ent-PoiTreasuryCargo }
 
 ent-PoiTreasuryGrifty = { ent-PoiTreasuryRestStop }
     .suffix = спесо, сварка, O2, ИРП, пиво
+    .desc = { ent-PoiTreasury.desc }
 
 ent-PoiTreasuryCaseysCasino = { ent-PoiTreasuryCasino }
 

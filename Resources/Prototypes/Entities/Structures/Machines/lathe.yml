@@ -639,8 +639,6 @@
     - SurgeryStatic
     - NFMedicalStatic # Frontier
     dynamicPacks:
-    - TTISuplplies # Forge-change
-    - TTIEquipment # Forge-change
     - Chemistry
     - SyringeGuns # DeltaV
     - NFMedical # Frontier

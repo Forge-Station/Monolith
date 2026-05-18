@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "made by EmoGarbage, ammo state made by AjexRose and modified by Emo garbage, tti state made by ifi07",
+  "copyright": "made by EmoGarbage, tti state made by ifi07",
   "size": {
     "x": 32,
     "y": 32
@@ -11,31 +11,7 @@
       "name": "icon"
     },
     {
-      "name": "med"
-    },
-    {
       "name": "tti"
-    },
-    {
-      "name": "sec"
-    },
-    {
-      "name": "sci"
-    },
-    {
-      "name": "eng"
-    },
-    {
-      "name": "engi"
-    },
-    {
-      "name": "service"
-    },
-    {
-      "name": "cargo"
-    },
-    {
-      "name": "ammo"
     },
     {
       "name": "panel"

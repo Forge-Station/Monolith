@@ -55,8 +55,8 @@
 
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
-  id: LaserDrillFlatpack
-  result: LaserDrillFlatpack
+  id: LaserDrillCircuitboard
+  result: LaserDrillCircuitboard
   materials:
     Glass: 100
     Steel: 300
@@ -71,3 +71,8 @@
   parent: BaseGoldCircuitboardRecipe
   id: MedicalTechFabCircuitboard
   result: MedicalTechFabCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: TraumaTechFabCircuitboard
+  result: TraumaTechFabCircuitboard

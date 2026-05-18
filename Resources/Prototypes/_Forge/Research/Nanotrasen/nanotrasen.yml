@@ -36,14 +36,14 @@
   position: 13, -1  
   
 - type: technology
-  id: NanotrasenLaserDrillFlatpack
+  id: NanotrasenLaserDrill
   name: research-technology-nanotrasen-flatpack-drill
-  entityIcon: LaserDrillFlatpack
+  entityIcon: LaserDrill
   discipline: Nanotrasen
   tier: 1
-  cost: 50000
+  cost: 30000
   recipeUnlocks:
-  - LaserDrillFlatpack
+  - LaserDrillCircuitboard
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 14, -1  
@@ -54,7 +54,7 @@
   entityIcon: ClothingHeadHelmetJustice
   discipline: Nanotrasen
   tier: 1
-  cost: 50000
+  cost: 35000
   recipeUnlocks:
   - ClothingUniformJumpsuitSec
   - ClothingUniformJumpskirtSec
@@ -72,7 +72,7 @@
   entityIcon: ClothingHeadHatBeretHoS
   discipline: Nanotrasen
   tier: 1
-  cost: 70000
+  cost: 50000
   recipeUnlocks:
   - ClothingUniformJumpsuitHoS
   - ClothingUniformJumpskirtHoS
@@ -141,7 +141,7 @@
   entityIcon: ClothingOuterHardsuitERTChaplain
   discipline: Nanotrasen
   tier: 3
-  cost: 150000
+  cost: 120000
   recipeUnlocks:
   - ClothingOuterHardsuitERTChaplain
   - ClothingOuterHardsuitERTMedical
@@ -188,7 +188,7 @@
   entityIcon: WeaponPulsePistol
   discipline: Nanotrasen
   tier: 2
-  cost: 70000
+  cost: 50000
   recipeUnlocks:
   - WeaponPulsePistol
   - EnergySwordBlue
@@ -204,7 +204,7 @@
   entityIcon: WeaponEnergyShotgun
   discipline: Nanotrasen
   tier: 3
-  cost: 80000
+  cost: 65000
   recipeUnlocks:
   - WeaponEnergyGunLawbringer
   - WeaponEnergyShotgun
@@ -218,7 +218,7 @@
   entityIcon: WeaponPulseCarbine
   discipline: Nanotrasen
   tier: 3
-  cost: 85000
+  cost: 80000
   recipeUnlocks:
   - WeaponPulseCarbine
   - WeaponRifleNtsfLtr
@@ -235,7 +235,7 @@
   entityIcon: WeaponLRC21PPL
   discipline: Nanotrasen
   tier: 3
-  cost: 105000
+  cost: 65000
   recipeUnlocks:
   - WeaponLRC21PPL
   - PulsedPlasmaLaserCanister
@@ -253,7 +253,7 @@
   entityIcon: WeaponHeavyPulseCannon
   discipline: Nanotrasen
   tier: 4
-  cost: 150000
+  cost: 120000
   recipeUnlocks:
   - WeaponMechCombatPulseRifleTSF
   - WeaponLauncherMk348

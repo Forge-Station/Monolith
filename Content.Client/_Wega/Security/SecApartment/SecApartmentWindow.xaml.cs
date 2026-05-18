@@ -1,3 +1,4 @@
+// Forge-Change
 using System.Linq;
 using System.Numerics;
 using Content.Client._Wega.Stylesheets;
@@ -62,6 +63,7 @@ public partial class SecApartmentWindow : BaseWindow
     private Dictionary<NetEntity, TimerEntryControl> _timerControls = new();
     private readonly Dictionary<int, string> _debugDepartmentIds = new();
     private string _selectedDebugDepartment = DebugSquadDepartments[0].Department;
+    private Stylesheet? _previousStylesheet;
 
     public Action<string, string>? OnCreateSquad;
     public Action<string, string>? OnRenameSquad;
@@ -81,9 +83,11 @@ public partial class SecApartmentWindow : BaseWindow
         _sprite = _entitySystem.GetEntitySystem<SpriteSystem>();
         _gameTicker = _entitySystem.GetEntitySystem<ClientGameTicker>();
         _styles = new SecApartmentStyles(_resCache);
+        _previousStylesheet = _ui.Stylesheet;
 
         SetupAllStyles();
 
+        OnClose += RestorePreviousStylesheet;
         CloseButton.OnPressed += _ => Close();
 
         NewSquadName.OnTextChanged += OnSquadNameTextChanged;
@@ -182,7 +186,12 @@ public partial class SecApartmentWindow : BaseWindow
 
         var rules = new[] { buttonStyleRule, lineEditRule, optionRule };
         var stylesheet = CreateCombinedStylesheet(rules);
-        Stylesheet = stylesheet;
+        UserInterfaceManager.Stylesheet = stylesheet;
+    }
+
+    private void RestorePreviousStylesheet()
+    {
+        UserInterfaceManager.Stylesheet = _previousStylesheet;
     }
 
     private void SetupTabContainer()
@@ -207,7 +216,7 @@ public partial class SecApartmentWindow : BaseWindow
 
     private Stylesheet CreateCombinedStylesheet(StyleRule[] additionalRules)
     {
-        var existingStyles = _ui.Stylesheet;
+        var existingStyles = _previousStylesheet ?? _ui.Stylesheet;
         var combinedRules = new List<StyleRule>();
 
         if (existingStyles?.Rules != null)
@@ -312,7 +321,7 @@ public partial class SecApartmentWindow : BaseWindow
             Color.FromHex("#99ddff"),
             Color.FromHex("#88ccff"));
 
-        Stylesheet = CreateCombinedStylesheet(new[] { buttonStyleRule, lineEditRule, optionRule });
+        UserInterfaceManager.Stylesheet = CreateCombinedStylesheet(new[] { buttonStyleRule, lineEditRule, optionRule });
 
         var tabRule = SecApartmentStyles.CreateTabContainerRule(
             CreateBlueStyleBox("#001f44", "#44aaff", new Thickness(2, 2, 2, 0), new Thickness(10, 5, 10, 5)),
@@ -345,7 +354,7 @@ public partial class SecApartmentWindow : BaseWindow
             Color.FromHex("#ffd0a0"),
             Color.FromHex("#d8955d"));
 
-        Stylesheet = CreateCombinedStylesheet(new[] { buttonStyleRule, lineEditRule, optionRule });
+        UserInterfaceManager.Stylesheet = CreateCombinedStylesheet(new[] { buttonStyleRule, lineEditRule, optionRule });
 
         var tabRule = SecApartmentStyles.CreateTabContainerRule(
             CreateThemedStyleBox("#4d220a", "#ff9a3c", new Thickness(2, 2, 2, 0), new Thickness(10, 5, 10, 5)),
@@ -412,7 +421,7 @@ public partial class SecApartmentWindow : BaseWindow
             Color.FromHex(text),
             Color.FromHex(inactive));
 
-        Stylesheet = CreateCombinedStylesheet(new[] { buttonStyleRule, lineEditRule, optionRule });
+        UserInterfaceManager.Stylesheet = CreateCombinedStylesheet(new[] { buttonStyleRule, lineEditRule, optionRule });
 
         var tabRule = SecApartmentStyles.CreateTabContainerRule(
             CreateThemedStyleBox(tabActiveBackground, accent, new Thickness(2, 2, 2, 0), new Thickness(10, 5, 10, 5)),

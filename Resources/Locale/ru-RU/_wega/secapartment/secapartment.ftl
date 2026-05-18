@@ -1,3 +1,4 @@
+# Forge-Change
 sec-apartment-ui-sec-apartment = SecApartment
 sec-apartment-ui-station = СТАНЦИЯ
 sec-apartment-ui-mark = {$time} | {$station}

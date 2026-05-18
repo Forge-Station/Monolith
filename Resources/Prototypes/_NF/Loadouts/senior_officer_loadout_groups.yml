@@ -1,0 +1,19 @@
+# Forge-Change
+- type: loadoutGroup
+  id: SeniorOfficerPDA
+  name: loadout-group-security-id
+  hidden: true
+  loadouts:
+  - SeniorOfficerSeniorOfficerPDA
+  fallbacks:
+  - SeniorOfficerSeniorOfficerPDA
+
+- type: loadoutGroup
+  id: SeniorOfficerTrinkets
+  name: loadout-group-contractor-trinkets
+  minLimit: 0
+  maxLimit: 3
+  loadouts:
+  - SeniorOfficerNFPouchNfsd
+  subgroups:
+  - ContractorTrinkets

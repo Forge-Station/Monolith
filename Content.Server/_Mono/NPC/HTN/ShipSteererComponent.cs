@@ -192,6 +192,24 @@ public sealed partial class ShipSteererComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public float TargetRotation = 0f;
+
+    /// <summary>
+    /// Seconds between heavy broadphase queries for obstacle candidate collection.
+    /// AABBs of cached candidates are refreshed every tick regardless; only the broad scan is throttled.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float ScanInterval = 0.2f;
+
+    /// <summary>
+    /// Time since the last broad scan.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float ScanAccumulator = 0f;
+
+    /// <summary>
+    /// Cached obstacle candidate UIDs from the most recent broad scan.
+    /// </summary>
+    public List<(EntityUid Uid, bool IsGrid)> CachedScanCandidates = new();
 }
 
 public enum ShipSteeringStatus : byte

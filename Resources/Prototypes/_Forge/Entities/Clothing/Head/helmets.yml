@@ -60,7 +60,7 @@
     damageCoefficient: 0.9
         
 - type: entity
-  parent: ClothingHeadEVAHelmetBase
+  parent: [ClothingHeadEVAHelmetBase, BaseFactionGearOtherFactionT1]
   id: ClothingHeadHatArmoredTraumaShooter
   name: Trauma Team helmet
   suffix: TTI
@@ -81,7 +81,7 @@
     damageCoefficient: 0.9
 
 - type: entity
-  parent: ClothingHeadEVAHelmetBase
+  parent: [ClothingHeadEVAHelmetBase, BaseFactionGearOtherFactionT1]
   id: ClothingHeadHatArmoredTraumaCommander
   name: Trauma Team commander helmet
   suffix: TTI

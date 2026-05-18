@@ -1,11 +1,14 @@
-﻿using Content.Server._NF.CrateMachine;
+using Content.Server._Forge.Shuttles.Systems;
+using Content.Server._NF.CrateMachine;
 using Content.Server._NF.Market.Components;
 using Content.Server._NF.Market.Extensions;
+using Content.Shared._Forge.CCVar;
 using Content.Shared._NF.Market;
 using Content.Shared._NF.Market.Components;
 using Content.Shared._NF.Market.Events;
 using Content.Shared._NF.Bank.Components;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Content.Shared._NF.CrateMachine.Components;
 
@@ -14,6 +17,8 @@ namespace Content.Server._NF.Market.Systems;
 public sealed partial class MarketSystem
 {
     [Dependency] private readonly CrateMachineSystem _crateMachine = default!;
+    [Dependency] private readonly PoiTreasurySystem _poiTreasury = default!; // Forge-Change
+    [Dependency] private readonly IConfigurationManager _cfgManager = default!; // Forge-Change
 
     private void InitializeCrateMachine()
     {
@@ -81,6 +86,15 @@ public sealed partial class MarketSystem
             return;
         }
         _audio.PlayPredicted(consoleComponent.SuccessSound, consoleUid, null, AudioParams.Default.WithMaxDistance(5f));
+
+        // Forge-Change: route a fraction of the market sale to the local POI treasury.
+        var poiTaxRate = _cfgManager.GetCVar(ForgeCVars.PoiCaptureSalesTaxRate);
+        if (poiTaxRate > 0f)
+        {
+            var poiTax = (int) Math.Floor(spawnCost * poiTaxRate);
+            if (poiTax > 0)
+                _poiTreasury.TryDepositCash(consoleUid, poiTax);
+        }
 
         itemSpawner.ItemsToSpawn = consoleComponent.CartDataList;
         consoleComponent.CartDataList = [];

@@ -93,4 +93,17 @@ public sealed partial class PointOfInterestPrototype : IPrototype, IInheritingPr
     /// </summary>
     [DataField(required: true)]
     public ResPath GridPath { get; private set; } = default!;
+
+    /// <summary>
+    ///     Tags for spawn placement rules (e.g. faction id). Used with <see cref="MinDistanceFromTags"/>.
+    /// </summary>
+    [DataField]
+    public List<string> PlacementTags { get; private set; } = [];
+
+    /// <summary>
+    ///     Minimum distance in meters from already-placed POIs that have any of these tags.
+    ///     Also enforced in reverse when this POI is placed first.
+    /// </summary>
+    [DataField]
+    public Dictionary<string, float> MinDistanceFromTags { get; private set; } = new();
 }

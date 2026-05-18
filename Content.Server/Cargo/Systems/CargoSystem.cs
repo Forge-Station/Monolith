@@ -20,7 +20,10 @@ using Robust.Shared.Timing;
 using Robust.Shared.Random;
 using Content.Server._NF.SectorServices; // Frontier
 using Content.Shared.Whitelist;
+using Content.Server._Forge.Shuttles.Systems;
 using Content.Server._NF.Bank; // Frontier
+using Content.Shared._Forge.CCVar;
+using Robust.Shared.Configuration;
 
 namespace Content.Server.Cargo.Systems;
 
@@ -47,6 +50,8 @@ public sealed partial class CargoSystem : SharedCargoSystem
     [Dependency] private readonly SectorServiceSystem _sectorService = default!; // Frontier
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Frontier
     [Dependency] private readonly BankSystem _bank = default!;
+    [Dependency] private readonly PoiTreasurySystem _poiTreasury = default!;
+    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
     private EntityQuery<CargoSellBlacklistComponent> _blacklistQuery;

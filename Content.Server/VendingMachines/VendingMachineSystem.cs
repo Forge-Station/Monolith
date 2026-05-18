@@ -25,6 +25,7 @@ using Content.Shared.VendingMachines;
 using Content.Shared.Wall;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -35,7 +36,9 @@ using Content.Shared._NF.Bank.BUI; // Frontier
 using Content.Server._NF.Contraband.Systems; // Frontier
 using Content.Shared.Stacks; // Frontier
 using Content.Server.Stack;
+using Content.Server._Forge.Shuttles.Systems;
 using Content.Server._Mono.VendingMachine;
+using Content.Shared._Forge.CCVar;
 using Content.Shared._Mono.Traits.Physical;
 using Robust.Shared.Containers; // Frontier
 
@@ -56,6 +59,8 @@ namespace Content.Server.VendingMachines
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!; // Frontier
         [Dependency] private readonly SharedAudioSystem _audioSystem = default!; // Frontier
         [Dependency] private readonly BankSystem _bankSystem = default!; // Frontier
+        [Dependency] private readonly PoiTreasurySystem _poiTreasury = default!; // Forge-Change
+        [Dependency] private readonly IConfigurationManager _cfgManager = default!; // Forge-Change
         [Dependency] private readonly PopupSystem _popupSystem = default!; // Frontier
         [Dependency] private readonly IAdminLogManager _adminLogger = default!; // Frontier
         [Dependency] private readonly StackSystem _stack = default!; // Frontier
@@ -403,6 +408,15 @@ namespace Content.Server.VendingMachines
                                 continue;
                             var tax = (int)Math.Floor(totalPrice * taxCoeff);
                             _bankSystem.TrySectorDeposit(account, tax, LedgerEntryType.VendorTax);
+                        }
+
+                        // Forge-Change: route POI sales tax to the local treasury, on top of sector tax.
+                        var poiTaxRate = _cfgManager.GetCVar(ForgeCVars.PoiCaptureSalesTaxRate);
+                        if (poiTaxRate > 0f)
+                        {
+                            var poiTax = (int)Math.Floor(totalPrice * poiTaxRate);
+                            if (poiTax > 0)
+                                _poiTreasury.TryDepositCash(uid, poiTax);
                         }
                     }
 

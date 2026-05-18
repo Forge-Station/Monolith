@@ -7,9 +7,6 @@ ent-ClothingHeadCapCentcomBlack = чёрная фуражка УСФ
 ent-ClothingNeckMantleHOSshoulder = наплечная мантия ГСБ
     .desc = Нарисованный череп с париком клоуна не даёт вам покоя...
 
-ent-ClothingOuterCoatHoSGreatcoat = бронешинель ГСБ
-    .desc = Штатная шинель ГСБ с бронепластиной
-
 ent-ClothingUniformJumpsuitCentcomOfficerBlack = чёрный комбинезон УСФ
     .desc = Пахнет кофе и свежими факсами
 

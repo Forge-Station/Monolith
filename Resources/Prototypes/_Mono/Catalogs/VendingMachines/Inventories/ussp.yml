@@ -32,7 +32,7 @@
     Ointment: 4294967295 # Infinite
     Gauze: 4294967295 # Infinite
     EmergencyMedipen: 4294967295 # Infinite
-    JugOmnizine: 10 # Limited to 10
+    # JugOmnizine: 10 # Limited to 10 --- Forge Removed
     ClothingOuterHardsuitUsspL27: 4294967295 # Infinite
     ClothingOuterHardsuitUsspL10: 4294967295 # Infinite
     ClothingOuterHardsuitUsspM10: 4294967295 # Infinite

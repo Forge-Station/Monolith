@@ -180,6 +180,9 @@ namespace Content.Shared.Roles
 
         // Forge-Change-Start
         [DataField]
+        public ProtoId<NationalityPrototype>? AssignedNationality;
+
+        [DataField]
         public int Salary = 0;
 
         [DataField]

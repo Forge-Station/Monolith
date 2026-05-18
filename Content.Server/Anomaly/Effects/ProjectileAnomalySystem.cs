@@ -59,7 +59,10 @@ public sealed class ProjectileAnomalySystem : EntitySystem
         while (projectileCount > 0)
         {
             Log.Debug($"{projectileCount}");
-            var target = priority.Any()
+            if (priority.Count == 0 && inRange.Count == 0)
+                break;
+
+            var target = priority.Count > 0
                 ? _random.PickAndTake(priority)
                 : _random.Pick(inRange);
 

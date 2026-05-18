@@ -1,6 +1,7 @@
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 using Content.Shared._NF.Shuttles.Events; // Frontier - InertiaDampeningMode access
+// Forge-Change: ShieldState removed from this DTO; client HUD now reads ShipShieldEmitterComponent directly.
 
 namespace Content.Shared.Shuttles.BUIStates;
 
@@ -43,6 +44,8 @@ public sealed class NavInterfaceState
     /// </summary>
     public bool HideCoords = false;
     // End Frontier fields
+
+    // Forge-Change: ShieldState removed; client HUD reads the networked ShipShieldEmitterComponent on the grid.
 
     public NavInterfaceState(
         float maxRange,

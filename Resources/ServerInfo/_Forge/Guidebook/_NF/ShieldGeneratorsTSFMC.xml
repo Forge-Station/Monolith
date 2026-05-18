@@ -1,0 +1,31 @@
+<Document>
+  # TSFMC — Корпус морской пехоты ТСФ
+
+  Регламентные боевые щиты. Превосходят гражданские аналоги уровня III по регенерации и запасу прочности за счёт повышенного энергопотребления. Каждый вариант настроен под конкретную боевую задачу ТСФ.
+
+  Числовые строки ниже подставляются из entity-прототипов ([italic]protodata[/italic]) и совпадают с симуляцией.
+
+  <Box>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeTSFHeavy"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeTSFPrismatic"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeTSFCollision"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeTSFSagitta"/>
+  </Box>
+
+  [color=#48E8A8][bold]SGS-440 «Цитадель» (Citadel)[/bold][/color] — Тяжёлый
+  Высокая регенерация и глубокий лимит относительно гражданского «Редута»; жрёт базу и пик сети.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeTSFHeavy" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#66CCFF][bold]SGS-470P «Корона» (Corona Array)[/bold][/color] — Призматический
+  Очень глубокий буфер и высокая регенерация в бою; крутая кривая под залпами и высокие крейс/пик.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeTSFPrismatic" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#FF6B8A][bold]SGS-600C «Взломщик» (Breakshell)[/bold][/color] — Коллизионный
+  Коллизионный профиль: мягкий таран, линейная кривая нагрузки; медленное «лицо» и самый долгий перегруз в линейке ТСФМЦ.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeTSFCollision" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#00C9A7][bold]SGS-455 «Стрела» (Sagitta)[/bold][/color] — Резерв
+  Глубокий лимит и ровный реген; самая «крутая» кривая нагрузки среди ТСФМЦ — под длинным огнём быстро раздувает потребление по шине.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeTSFSagitta" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+</Document>

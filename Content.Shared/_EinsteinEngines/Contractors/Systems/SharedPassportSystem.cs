@@ -17,10 +17,11 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared.GameTicking;
+using Content.Shared.Humanoid;
 
 namespace Content.Shared._EE.Contractors.Systems;
 
-public class SharedPassportSystem : EntitySystem
+public sealed class SharedPassportSystem : EntitySystem
 {
     public const int CurrentYear = 3026;
     const string PIDChars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789";
@@ -69,43 +70,9 @@ public class SharedPassportSystem : EntitySystem
             46);
     }
 
-    // TODO: I will change this system. Tomorrow. (If you're reading this, tomorrow hasn't come yet.)
-    // Forge-change-start: i know, that shit. But, in my defense - im using _Mono/Company code as a reference.
+    // Forge-change-start
     // private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev) =>
     //     SpawnPassportForPlayer(ev.Mob, ev.Profile, ev.JobId);
-//    private readonly HashSet<string> _imperialJobs = new() // Forge-change-delete
-//    {
-//        "Praefect",
-//        "Arbiter",
-//        "Cardinal",
-//        "Inquisitor",
-//        "Consul",
-//        "Praetorian",
-//        "Auxilia",
-//        "Neophyte",
-//    };
-
-    private readonly HashSet<string> _tsfJobs = new()
-    {
-        "Sheriff",
-        "Bailiff",
-        "SeniorOfficer", // Sergeant
-        "Deputy",
-        "Brigmedic",
-        "NFDetective",
-        "PublicAffairsLiaison",
-        "Cadet",
-        "TsfEngineer",
-        "TsfBorg",
-        "TsfCommandingOfficer",
-        "TsfExecutiveOfficer",
-        "TsfSeniorOfficer",
-        "TsfSeniorAide",
-        "TsfAmbassador",
-        "TsfRanger",
-        "TsfRecruit",
-        "TsfEngineer",
-    };
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         if (!ShouldSpawnPassports)
@@ -113,20 +80,15 @@ public class SharedPassportSystem : EntitySystem
 
         var profile = ev.Profile;
 
-        if (ev.JobId != null)
+        if (ev.JobId != null && _prototypeManager.TryIndex<JobPrototype>(ev.JobId, out var job) && job.AssignedNationality != null)
         {
-//            if (_imperialJobs.Contains(ev.JobId))
-//            {
-//                profile.Nationality = "Imperial";
-//            }
-            if (_tsfJobs.Contains(ev.JobId))
-            {
-                profile.Nationality = "TransSolarFederation";
-            }
+            profile.Nationality = job.AssignedNationality;
         }
+
         SpawnPassportForPlayer(ev.Mob, profile, ev.JobId);
     }
     // Forge-change-end
+
     public void SpawnPassportForPlayer(EntityUid mob, HumanoidCharacterProfile profile, string? jobId)
     {
         if (jobId == null || !_prototypeManager.TryIndex(
@@ -152,10 +114,10 @@ public class SharedPassportSystem : EntitySystem
 
         // Try to find wallet
         if (_inventory.TryGetSlotEntity(mob, "wallet", out var wallet) &&
-            EntityManager.TryGetComponent<StorageComponent>(wallet, out var walletStorage))
+            _entityManager.TryGetComponent<StorageComponent>(wallet, out var walletStorage))
         // Try inserting the entity into the wallet
         {
-            if (EntityManager.TryGetComponent<ItemComponent>(passportEntity, out var itemComp) &&
+            if (_entityManager.TryGetComponent<ItemComponent>(passportEntity, out var itemComp) &&
                 _storage.CanInsert(wallet.Value, passportEntity, out _, walletStorage, itemComp) &&
                 _storage.Insert(wallet.Value, passportEntity, out _, playSound: false))
             {
@@ -164,11 +126,10 @@ public class SharedPassportSystem : EntitySystem
         }
 
         // Try to find back-mounted storage apparatus
-        if (_inventory.TryGetSlotEntity(mob, "back", out var item) &&
-                EntityManager.TryGetComponent<StorageComponent>(item, out var inventory))
+        if (passportStored != true && _inventory.TryGetSlotEntity(mob, "back", out var item) && _entityManager.TryGetComponent<StorageComponent>(item, out var inventory))
         // Try inserting the entity into the storage, if it can't, it leaves the loadout item on the ground
         {
-            if (!EntityManager.TryGetComponent<ItemComponent>(passportEntity, out var itemComp)
+            if (!_entityManager.TryGetComponent<ItemComponent>(passportEntity, out var itemComp)
                 || !_storage.CanInsert(item.Value, passportEntity, out _, inventory, itemComp)
                 || !_storage.Insert(item.Value, passportEntity, out _, playSound: false))
             {
@@ -231,7 +192,10 @@ public class SharedPassportSystem : EntitySystem
     }
 
     [ByRefEvent]
-    public sealed class PassportToggleEvent : HandledEntityEventArgs {}
+    public sealed class PassportToggleEvent : HandledEntityEventArgs
+    {
+
+    }
 
     [ByRefEvent]
     public sealed class PassportProfileUpdatedEvent(HumanoidCharacterProfile profile) : HandledEntityEventArgs

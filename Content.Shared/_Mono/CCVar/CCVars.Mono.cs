@@ -17,10 +17,24 @@ public sealed partial class MonoCVars
         CVarDef.Create("mono.cleanup.debug", false, CVar.SERVERONLY);
 
     /// <summary>
-    ///     Whether to log every single entity cleanup deletes.
+    ///     Whether to log each entity deleted by cleanup at debug level (very verbose).
     /// </summary>
     public static readonly CVarDef<bool> CleanupLog =
-        CVarDef.Create("mono.cleanup.log", true, CVar.SERVERONLY);
+        CVarDef.Create("mono.cleanup.log", false, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Hard cap on how many entities a cleanup system may check/delete in a single tick.
+    ///     Prevents catch-up loops after long pauses from causing micro-spikes.
+    /// </summary>
+    public static readonly CVarDef<int> CleanupMaxChecksPerTick =
+        CVarDef.Create("mono.cleanup.max_checks_per_tick", 64, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     How often, in seconds, to run the safety sweep that reconciles missing
+    ///     <c>SpaceCleanupTargetComponent</c> markers across all physics entities.
+    /// </summary>
+    public static readonly CVarDef<float> CleanupTargetSafetyScanSeconds =
+        CVarDef.Create("mono.cleanup.target_safety_scan_seconds", 900f, CVar.SERVERONLY);
 
     /// <summary>
     ///     Don't delete non-grids at most this close to a grid.
@@ -38,7 +52,7 @@ public sealed partial class MonoCVars
     ///     How far away from any players can a grid be until it gets cleaned up.
     /// </summary>
     public static readonly CVarDef<float> GridCleanupDistance =
-        CVarDef.Create("mono.cleanup.grid.distance", 628.0f, CVar.SERVERONLY);
+        CVarDef.Create("mono.cleanup.grid.distance", 450.0f, CVar.SERVERONLY);
 
     /// <summary>
     ///     How much can a grid at most be worth for it to be cleaned up.
@@ -56,7 +70,31 @@ public sealed partial class MonoCVars
     ///     Duration, in seconds, for how long a grid has to fulfill cleanup conditions to get cleaned up.
     /// </summary>
     public static readonly CVarDef<float> GridCleanupDuration =
-        CVarDef.Create("mono.grid_cleanup_duration", 60f * 30f, CVar.SERVERONLY);
+        CVarDef.Create("mono.grid_cleanup_duration", 600f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Max map tiles for the micro-fragment fast cleanup path (ignores IFF).
+    /// </summary>
+    public static readonly CVarDef<int> GridCleanupFragmentMaxTiles =
+        CVarDef.Create("mono.cleanup.grid.fragment_max_tiles", 3, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     How long, in seconds, a micro-fragment must stay eligible before fast-path deletion.
+    /// </summary>
+    public static readonly CVarDef<float> GridCleanupFragmentDuration =
+        CVarDef.Create("mono.cleanup.grid.fragment_duration", 90f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Max appraised value for a micro-fragment to use the fast cleanup path.
+    /// </summary>
+    public static readonly CVarDef<float> GridCleanupFragmentMaxValue =
+        CVarDef.Create("mono.cleanup.grid.fragment_max_value", 30000f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Player proximity radius for the micro-fragment fast cleanup path.
+    /// </summary>
+    public static readonly CVarDef<float> GridCleanupFragmentDistance =
+        CVarDef.Create("mono.cleanup.grid.fragment_distance", 64f, CVar.SERVERONLY);
 
     /// <summary>
     ///     How far away from any players does a spaced entity have to be in order to get cleaned up.

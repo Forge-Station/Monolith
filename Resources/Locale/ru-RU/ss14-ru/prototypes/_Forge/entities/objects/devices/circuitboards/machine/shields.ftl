@@ -6,6 +6,13 @@ ent-MachineShieldFSG110PCircuitboard = плата генератора щита 
     .desc = Плата машины для генератора щита FSG-110P.
 ent-MachineShieldFSG160CCircuitboard = плата генератора щита FSG-160C
     .desc = Плата машины для генератора щита FSG-160C.
+ent-MachineShieldFSG195LCircuitboard = плата генератора щита FSG-195L «Касательная»
+    .desc = Плата машины для генератора щита FSG-195L.
+ent-MachineShieldFSG275PCircuitboard = плата генератора щита FSG-275P «Переплет»
+    .desc = Плата машины для генератора щита FSG-275P.
+ent-MachineShieldFSG305VCircuitboard = плата генератора щита FSG-305V «Шина»
+    .desc = Плата машины для генератора щита FSG-305V.
+
 ent-MachineShieldFSG220Circuitboard = плата генератора щита FSG-220
     .desc = Плата машины для генератора щита FSG-220.
 ent-MachineShieldFSG250CCircuitboard = плата генератора щита FSG-250C
@@ -20,6 +27,10 @@ ent-MachineShieldFSG600CCircuitboard = плата генератора щита 
     .desc = Плата машины для генератора щита FSG-600C.
 ent-MachineShieldFSG900PCircuitboard = плата генератора щита FSG-900P
     .desc = Плата машины для генератора щита FSG-900P.
+ent-MachineShieldFSG870RCircuitboard = плата генератора щита FSG-870R «Излом»
+    .desc = Плата машины для генератора щита FSG-870R.
+ent-MachineShieldFSG950MCircuitboard = плата генератора щита FSG-950M «Наковальня»
+    .desc = Плата машины для генератора щита FSG-950M.
 
 ent-MachineShieldForgeTSFHeavyCircuitboard = плата щита TSFMC «Цитадель»
     .desc = Плата машины для генератора щита TSFMC SGS-440 «Цитадель».

@@ -230,12 +230,12 @@ public sealed partial class ShuttleSystem
             if (TryComp<ShipShieldedComponent>(args.OurEntity, out var ShipShieldedComponent) //Our ship collision resistance
                 && TryComp<ShipShieldEmitterComponent>(ShipShieldedComponent.Source, out var ShipShieldEmitterComponent)
             )
-                shieldFactor *= ShipShieldEmitterComponent.CollisionResistanceMultiplier;
+                shieldFactor *= ShipShieldEmitterMath.EffectiveCollisionResistance(ShipShieldEmitterComponent);
 
             if (TryComp<ShipShieldedComponent>(args.OtherEntity, out var OtherShipShieldedComponent) //Other ship collision resistance
                 && TryComp<ShipShieldEmitterComponent>(OtherShipShieldedComponent.Source, out var OtherShipShieldEmitterComponent)
             )
-                shieldFactor *= OtherShipShieldEmitterComponent.CollisionResistanceMultiplier;
+                shieldFactor *= ShipShieldEmitterMath.EffectiveCollisionResistance(OtherShipShieldEmitterComponent);
             toUsEnergy *= shieldFactor;
             toOtherEnergy *= shieldFactor;
             // Mono Edit end

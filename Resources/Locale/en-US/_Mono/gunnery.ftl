@@ -4,6 +4,8 @@ gunnery-window-connected = CONNECTED
 gunnery-select-all = Select All
 gunnery-unselect-all = Unselect All
 gunnery-guns = Guns
+gunnery-shield-label = Shields
+gunnery-iff-search = Search IFF
 gunnery-gun-select = {$name}
 gunnery-gun-select-ammo = {$name}: {$ammo}
 

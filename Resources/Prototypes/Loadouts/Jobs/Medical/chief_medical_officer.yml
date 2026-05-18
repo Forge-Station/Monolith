@@ -28,8 +28,24 @@
   id: ChiefMedicalOfficerTurtleneckJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtCMOTurtle
+# Forge
+- type: loadout
+  id: ChiefMedicalOfficerJumpsuitTraumaDirector
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTraumaDirector
 
 # Head
+# Forge start
+- type: loadout
+  id: ChiefMedicalHatTraumaCommander
+  equipment:
+    head: ClothingHeadHatArmoredTraumaCommander
+
+- type: loadout
+  id: ChiefMedicalTraumaDirectorBeret
+  equipment:
+    head: ClothingHeadHatTraumaDirectorBeret
+# Forge end
 - type: loadout
   id: ChiefMedicalOfficerBeret
   equipment:

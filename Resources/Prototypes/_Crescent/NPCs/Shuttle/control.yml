@@ -66,6 +66,9 @@
     receiveFrequencyId: DroneControl
   - type: WirelessNetworkConnection
     range: 100000 # keep same as sleep range
+  - type: ShipRepairable
+    repairTime: 12
+    repairCost: 20
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -103,6 +106,9 @@
   - type: WirelessNetworkConnection
     range: 100000
   - type: DeviceList
+  - type: ShipRepairable
+    repairTime: 12
+    repairCost: 20
 
 - type: entity
   parent: ComputerDroneControl

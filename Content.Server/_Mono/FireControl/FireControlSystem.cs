@@ -15,6 +15,8 @@ using System.Numerics;
 using Content.Server._Mono.SpaceArtillery;
 using Content.Server._Mono.SpaceArtillery.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Server._Forge.ShipWeapons; // Forge-Change
+using Content.Shared._Forge.ShipWeapons.Components; // Forge-Change
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Timing;
 using Content.Shared.Interaction;
@@ -32,6 +34,7 @@ public sealed partial class FireControlSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PowerReceiverSystem _power = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private readonly ShipWeaponHomeGridSystem _shipWeaponHomeGrid = default!; // Forge-Change
     /// <summary>
     /// Dictionary of entities that have visualization enabled
     /// </summary>
@@ -142,7 +145,7 @@ public sealed partial class FireControlSystem : EntitySystem
             return;
 
         var currentGrid = _xform.GetGrid(uid);
-        if (currentGrid != server.ConnectedGrid)
+        if (currentGrid != server.ConnectedGrid || !CanUseOnCurrentGrid(uid)) // Forge-Change
         {
             // Weapon is no longer on the same grid - unregister it
             Unregister(uid, component);
@@ -219,7 +222,9 @@ public sealed partial class FireControlSystem : EntitySystem
 
         while (query.MoveNext(out var controllable, out var controlComp))
         {
-            if (_xform.GetGrid(controllable) == grid && EntityManager.GetComponent<TransformComponent>(controllable).Anchored)
+            if (_xform.GetGrid(controllable) == grid && // Forge-Change
+                EntityManager.GetComponent<TransformComponent>(controllable).Anchored && // Forge-Change
+                CanUseOnCurrentGrid(controllable)) // Forge-Change
                 TryRegister(controllable, controlComp);
         }
 
@@ -262,7 +267,7 @@ public sealed partial class FireControlSystem : EntitySystem
         return true;
     }
 
-    private void Unregister(EntityUid controllable, FireControllableComponent? component = null)
+    public void Unregister(EntityUid controllable, FireControllableComponent? component = null) // Forge-Change
     {
         if (!Resolve(controllable, ref component))
             return;
@@ -283,6 +288,9 @@ public sealed partial class FireControlSystem : EntitySystem
         var gridServer = TryGetGridServer(controllable);
 
         if (gridServer.ServerUid == null || gridServer.ServerComponent == null)
+            return false;
+
+        if (!CanUseOnCurrentGrid(controllable)) // Forge-Change
             return false;
 
         var processingPowerCost = GetProcessingPowerCost(controllable, component);
@@ -356,6 +364,12 @@ public sealed partial class FireControlSystem : EntitySystem
         }
 
         return (controlGrid.ControllingServer, server);
+    }
+
+    private bool CanUseOnCurrentGrid(EntityUid uid) // Forge-Change
+    {
+        return !TryComp<ShipWeaponHomeGridComponent>(uid, out var homeGrid) ||
+               _shipWeaponHomeGrid.IsOnHomeGrid(uid, homeGrid);
     }
 
     /// <summary>
@@ -454,7 +468,7 @@ public sealed partial class FireControlSystem : EntitySystem
             if (TryComp<FireControllableComponent>(controllable, out var controlComp))
             {
                 var currentGrid = _xform.GetGrid(controllable);
-                if (currentGrid != component.ConnectedGrid)
+                if (currentGrid != component.ConnectedGrid || !CanUseOnCurrentGrid(controllable)) // Forge-Change
                 {
                     Unregister(controllable, controlComp);
                 }

@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: ForgeShipWeaponCircuitboardT1
   parent: BaseMachineCircuitboard
   abstract: true
@@ -6,7 +6,7 @@
   - type: Sprite
     state: security
   - type: ShipWeaponBoard
-    fabricationTime: 8
+    fabricationTime: 60
     requiredPartRating: 1
   - type: MachineBoard
     flatpackable: false
@@ -27,7 +27,7 @@
   - type: Sprite
     state: security
   - type: ShipWeaponBoard
-    fabricationTime: 12
+    fabricationTime: 120
     requiredPartRating: 2
   - type: MachineBoard
     flatpackable: false
@@ -50,7 +50,7 @@
   - type: Sprite
     state: security
   - type: ShipWeaponBoard
-    fabricationTime: 18
+    fabricationTime: 180
     requiredPartRating: 3
   - type: MachineBoard
     flatpackable: false
@@ -75,7 +75,7 @@
   - type: Sprite
     state: security
   - type: ShipWeaponBoard
-    fabricationTime: 25
+    fabricationTime: 300
     requiredPartRating: 4
   - type: MachineBoard
     flatpackable: false
@@ -101,8 +101,7 @@
   description: A machine printed circuit board for an L85 20mm autocannon.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretL85Autocannon
-
+    prototype: WeaponTurretL85AutocannonPortable
 - type: entity
   id: WeaponTurretM25Circuitboard
   parent: ForgeShipWeaponCircuitboardT1
@@ -110,8 +109,7 @@
   description: A machine printed circuit board for an M25 mining pulser.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretM25
-
+    prototype: WeaponTurretM25Portable
 - type: entity
   id: WeaponLaserTurretL1PhalanxCircuitboard
   parent: ForgeShipWeaponCircuitboardT1
@@ -119,8 +117,7 @@
   description: A machine printed circuit board for an L-1 Phalanx light laser emplacement.
   components:
   - type: MachineBoard
-    prototype: WeaponLaserTurretL1Phalanx
-
+    prototype: WeaponLaserTurretL1PhalanxPortable
 - type: entity
   id: WeaponTurretRAC30Circuitboard
   parent: ForgeShipWeaponCircuitboardT2
@@ -128,7 +125,7 @@
   description: A machine printed circuit board for a RAC-30 Draupnir autocannon.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretRAC30
+    prototype: WeaponTurretRAC30Portable
   - type: Tag
     tags:
     - MachineBoard2x1
@@ -140,8 +137,10 @@
   description: A machine printed circuit board for an AK570 57mm autocannon.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretAK570
-
+    prototype: WeaponTurretAK570Portable
+  - type: Tag
+    tags:
+    - MachineBoard2x1
 - type: entity
   id: WeaponTurretDravonCircuitboard
   parent: ForgeShipWeaponCircuitboardT2
@@ -149,8 +148,10 @@
   description: A machine printed circuit board for an ADBP-7 DRAVON 90mm autocannon.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretDravon
-
+    prototype: WeaponTurretDravonPortable
+  - type: Tag
+    tags:
+    - MachineBoard2x1
 - type: entity
   id: WeaponTurretType35Circuitboard
   parent: ForgeShipWeaponCircuitboardT2
@@ -158,8 +159,10 @@
   description: A machine printed circuit board for a Type-35 MARAUDER-type plasma cannon.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretType35
-
+    prototype: WeaponTurretType35Portable
+  - type: Tag
+    tags:
+    - MachineBoard2x1
 - type: entity
   id: WeaponTurretM220Circuitboard
   parent: ForgeShipWeaponCircuitboardT2
@@ -167,8 +170,10 @@
   description: A machine printed circuit board for an M220 RUBICON EMP launcher.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretM220
-
+    prototype: WeaponTurretM220Portable
+  - type: Tag
+    tags:
+    - MachineBoard2x1
 - type: entity
   id: WeaponTurretVesperaCircuitboard
   parent: ForgeShipWeaponCircuitboardT2
@@ -176,8 +181,10 @@
   description: A machine printed circuit board for an ADMP-50 VESPERA missile rack.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretVespera
-
+    prototype: WeaponTurretVesperaPortable
+  - type: Tag
+    tags:
+    - MachineBoard2x1
 - type: entity
   id: WeaponTurretVanykCircuitboard
   parent: ForgeShipWeaponCircuitboardT2
@@ -185,8 +192,10 @@
   description: A machine printed circuit board for an ASM-150 Vanyk missile pod.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretVanyk
-
+    prototype: WeaponTurretVanykPortable
+  - type: Tag
+    tags:
+    - MachineBoard2x1
 - type: entity
   id: WeaponTurretCerberusCircuitboard
   parent: ForgeShipWeaponCircuitboardT3
@@ -194,7 +203,7 @@
   description: A machine printed circuit board for a TPC Cerberus plasma scattercannon.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretCerberus
+    prototype: WeaponTurretCerberusPortable
   - type: Tag
     tags:
     - MachineBoard2x1
@@ -206,7 +215,7 @@
   description: A machine printed circuit board for a Bofors 255mm cannon.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretBofors
+    prototype: WeaponTurretBoforsPortable
   - type: Tag
     tags:
     - MachineBoard2x2
@@ -218,8 +227,10 @@
   description: A machine printed circuit board for a ship-grade ADBX-31 TARNYX EMP cannon.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretTarnyxReload
-
+    prototype: WeaponTurretTarnyxReloadPortable
+  - type: Tag
+    tags:
+    - MachineBoard2x2
 - type: entity
   id: WeaponLaserTurretPrometheusCircuitboard
   parent: ForgeShipWeaponCircuitboardT3
@@ -227,7 +238,7 @@
   description: A machine printed circuit board for a TPC Prometheus laser cannon.
   components:
   - type: MachineBoard
-    prototype: WeaponLaserTurretPrometheus
+    prototype: WeaponLaserTurretPrometheusPortable
   - type: Tag
     tags:
     - MachineBoard2x1
@@ -239,8 +250,10 @@
   description: A machine printed circuit board for a Serpent torpedo launcher.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretSerpentMissile
-
+    prototype: WeaponTurretSerpentMissilePortable
+  - type: Tag
+    tags:
+    - MachineBoard2x2
 - type: entity
   id: WeaponTurretTovekCircuitboard
   parent: ForgeShipWeaponCircuitboardT3
@@ -248,8 +261,10 @@
   description: A machine printed circuit board for an ADMX-250 TOVEK missile pod.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretTovek
-
+    prototype: WeaponTurretTovekPortable
+  - type: Tag
+    tags:
+    - MachineBoard2x2
 - type: entity
   id: WeaponTurretASM220Circuitboard
   parent: ForgeShipWeaponCircuitboardT3
@@ -257,8 +272,10 @@
   description: A machine printed circuit board for an ASM-220 Trident torpedo rack.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretASM220
-
+    prototype: WeaponTurretASM220Portable
+  - type: Tag
+    tags:
+    - MachineBoard2x2
 - type: entity
   id: WeaponTurretLightMunitionsBayCircuitboard
   parent: ForgeShipWeaponCircuitboardT3
@@ -266,8 +283,10 @@
   description: A machine printed circuit board for a GPOB-L light munitions bay.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretLightMunitionsBay
-
+    prototype: WeaponTurretLightMunitionsBayPortable
+  - type: Tag
+    tags:
+    - MachineBoard2x2
 - type: entity
   id: WeaponTurretLongbowCircuitboard
   parent: ForgeShipWeaponCircuitboardT4
@@ -275,7 +294,7 @@
   description: A machine printed circuit board for an L65 Longbow 90mm autocannon.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretLongbow
+    prototype: WeaponTurretLongbowPortable
   - type: Tag
     tags:
     - MachineBoard2x2
@@ -287,7 +306,7 @@
   description: A machine printed circuit board for a CYREXA 220mm cannon.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretCyrexa
+    prototype: WeaponTurretCyrexaPortable
   - type: Tag
     tags:
     - MachineBoard2x2
@@ -299,7 +318,7 @@
   description: A machine printed circuit board for an M381 CHARON mass driver.
   components:
   - type: MachineBoard
-    prototype: WeaponTurretCharonReload
+    prototype: WeaponTurretCharonReloadPortable
   - type: Tag
     tags:
     - MachineBoard2x2
@@ -311,7 +330,7 @@
   description: A machine printed circuit board for an L-20 Apollo mining laser cannon.
   components:
   - type: MachineBoard
-    prototype: WeaponLaserTurretApollo
+    prototype: WeaponLaserTurretApolloPortable
   - type: Tag
     tags:
     - MachineBoard2x2

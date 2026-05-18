@@ -42,7 +42,7 @@ public sealed class FlatpackSystem : SharedFlatpackSystem
             break;
         }
 
-        if (color != null)
+        if (color != null && args.Sprite.LayerMapTryGet(FlatpackVisualLayers.Overlay, out _)) // Forge-Change
             args.Sprite.LayerSetColor(FlatpackVisualLayers.Overlay, color.Value);
     }
 }

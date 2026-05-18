@@ -1,3 +1,8 @@
+ent-ShipWeaponFabricator = корабельный фабрикатор орудий
+    .desc = Промышленный станок для сборки корабельных орудий по изученным чертежам и загруженным компонентам.
+ent-ShipWeaponFabricatorCircuitboard = плата корабельного фабрикатора орудий
+    .desc = Машинная печатная плата для сборки корабельного фабрикатора орудий.
+
 ship-weapon-fabricator-ui-title = Корабельный фабрикатор орудий
 ship-weapon-fabricator-ui-board-header = Загруженная плата
 ship-weapon-fabricator-ui-target-header = Цель сборки
@@ -31,3 +36,5 @@ ship-weapon-fabricator-popup-unpowered = Корабельный фабрикат
 ship-weapon-fabricator-popup-blocked = Выходная клетка перед фабрикатором занята.
 ship-weapon-fabricator-examine-empty = Плата корабельного орудия не загружена.
 ship-weapon-fabricator-examine-board = Загруженная плата: {$board}
+ship-weapon-home-grid-examine-bound = Это корабельное орудие привязано к исходному шаттлу.
+ship-weapon-home-grid-examine-wrong-grid = Это корабельное орудие больше не находится на исходном шаттле и не подключится к серверу управления огнём.

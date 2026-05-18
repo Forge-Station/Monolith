@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using Content.Server.Audio;
 using Content.Server.Construction;
 using Content.Server.Materials;
 using Content.Server.Power.Components;
@@ -23,6 +24,7 @@ using Content.Shared.UserInterface;
 using Content.Shared.Whitelist;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
@@ -32,6 +34,11 @@ namespace Content.Server._Forge.ShipWeapons;
 
 public sealed class ShipWeaponFabricatorSystem : EntitySystem
 {
+    private static readonly ProtoId<TagPrototype> MachineBoard2x1Tag = "MachineBoard2x1";
+    private static readonly ProtoId<TagPrototype> MachineBoard2x2Tag = "MachineBoard2x2";
+    private static readonly EntProtoId Flatpack2x3Prototype = "ForgeShipWeaponFlatpack2x3";
+    private static readonly EntProtoId Flatpack3x3Prototype = "ForgeShipWeaponFlatpack3x3";
+
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedConstructionSystem _construction = default!;
     [Dependency] private readonly FlatpackSystem _flatpack = default!;
@@ -46,6 +53,8 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly AmbientSoundSystem _ambientSound = default!;
 
     public override void Initialize()
     {
@@ -85,6 +94,9 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
 
     private void OnPowerChanged(EntityUid uid, ShipWeaponFabricatorComponent component, ref PowerChangedEvent args)
     {
+        if (!args.Powered && component.Fabricating)
+            SetFabricatingState(uid, component, false);
+
         UpdateUi(uid, component);
     }
 
@@ -256,9 +268,8 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
         if (!TryComp<ShipWeaponBoardComponent>(board, out var shipWeaponBoard))
             return;
 
-        component.Fabricating = true;
         component.FabricationEndTime = _timing.CurTime + shipWeaponBoard.FabricationTime;
-        UpdatePowerLoad(uid, component);
+        SetFabricatingState(uid, component, true);
         UpdateUi(uid, component);
     }
 
@@ -498,16 +509,14 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
     {
         if (!component.HasBoard)
         {
-            component.Fabricating = false;
-            UpdatePowerLoad(uid, component);
+            SetFabricatingState(uid, component, false);
             UpdateUi(uid, component);
             return;
         }
 
         if (!CanOutput(uid))
         {
-            component.Fabricating = false;
-            UpdatePowerLoad(uid, component);
+            SetFabricatingState(uid, component, false);
             UpdateUi(uid, component);
             return;
         }
@@ -515,14 +524,13 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
         var board = component.BoardContainer.ContainedEntity!.Value;
         if (!TryComp<MachineBoardComponent>(board, out var machineBoard))
         {
-            component.Fabricating = false;
-            UpdatePowerLoad(uid, component);
+            SetFabricatingState(uid, component, false);
             UpdateUi(uid, component);
             return;
         }
 
         var output = GetOutputCoordinates(uid);
-        var flatpack = Spawn(component.OutputFlatpackPrototype, output);
+        var flatpack = Spawn(GetOutputFlatpackPrototype(board, component), output);
         _flatpack.ConfigureFlatpack(flatpack, machineBoard.Prototype, board);
 
         ConsumeRequiredMaterials(uid, component);
@@ -531,16 +539,37 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
 
         QueueDel(board);
 
-        component.Fabricating = false;
-        UpdatePowerLoad(uid, component);
+        SetFabricatingState(uid, component, false);
         _materialStorage.UpdateMaterialWhitelist(uid);
         RegenerateProgress(uid, component);
         UpdateUi(uid, component);
     }
 
+    private void SetFabricatingState(EntityUid uid, ShipWeaponFabricatorComponent component, bool fabricating)
+    {
+        if (component.Fabricating == fabricating)
+            return;
+
+        component.Fabricating = fabricating;
+        _appearance.SetData(uid, ShipWeaponFabricatorVisuals.Fabricating, fabricating);
+        _ambientSound.SetAmbience(uid, fabricating);
+        UpdatePowerLoad(uid, component);
+    }
+
     private bool CanOutput(EntityUid uid)
     {
         return true;
+    }
+
+    private EntProtoId GetOutputFlatpackPrototype(EntityUid board, ShipWeaponFabricatorComponent component)
+    {
+        if (_tag.HasTag(board, MachineBoard2x2Tag))
+            return Flatpack3x3Prototype;
+
+        if (_tag.HasTag(board, MachineBoard2x1Tag))
+            return Flatpack2x3Prototype;
+
+        return component.OutputFlatpackPrototype;
     }
 
     private EntityCoordinates GetOutputCoordinates(EntityUid uid)

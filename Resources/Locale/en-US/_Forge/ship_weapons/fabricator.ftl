@@ -1,3 +1,8 @@
+ent-ShipWeaponFabricator = naval weapon fabricator
+    .desc = An industrial assembly machine for building ship weapons from researched blueprints and loaded components.
+ent-ShipWeaponFabricatorCircuitboard = naval weapon fabricator machine board
+    .desc = A machine printed circuit board for a naval weapon fabricator.
+
 ship-weapon-fabricator-ui-title = Naval Weapon Fabricator
 ship-weapon-fabricator-ui-board-header = Loaded board
 ship-weapon-fabricator-ui-target-header = Fabrication target
@@ -32,3 +37,5 @@ ship-weapon-fabricator-popup-unpowered = The naval weapon fabricator has no powe
 ship-weapon-fabricator-popup-blocked = The output tile in front of the fabricator is blocked.
 ship-weapon-fabricator-examine-empty = No ship weapon board is loaded.
 ship-weapon-fabricator-examine-board = Loaded board: {$board}
+ship-weapon-home-grid-examine-bound = This mapped weapon is bound to its original grid.
+ship-weapon-home-grid-examine-wrong-grid = This mapped weapon is no longer on its original grid and will not connect to a gunnery server.

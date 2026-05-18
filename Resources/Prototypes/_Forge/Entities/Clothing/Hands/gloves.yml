@@ -50,7 +50,7 @@
   - type: Insulated
 
 - type: entity
-  parent: [ClothingHandsGlovesCaptain, BaseC1Contraband]
+  parent: [ClothingHandsGlovesCaptain, BaseFactionGearOtherFactionT1]
   id: ClothingHandsGlovesCombatTrauma
   name: trauma combat gloves
   description: trauma desk

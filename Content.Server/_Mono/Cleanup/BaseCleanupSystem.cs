@@ -109,7 +109,7 @@ public abstract class BaseCleanupSystem<TComp> : EntitySystem
         var coord = Transform(uid).Coordinates;
         var world = _transform.ToMapCoordinates(coord);
         if (_doLog)
-            Log.Info($"Cleanup deleting entity {ToPrettyString(uid)} at {coord} (world {world})");
+            Log.Debug($"Cleanup deleting entity {ToPrettyString(uid)} at {coord} (world {world})");
 
         _delCount += 1;
         QueueDel(uid);

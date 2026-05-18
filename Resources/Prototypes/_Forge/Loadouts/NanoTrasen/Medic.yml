@@ -6,7 +6,7 @@
   - MdMedicJumpsuit # Forge
   - MdMedicGloves
   - MdMedicBackpack
-  - ContractorOuterClothing
+  - MedicOuterClothing # Forge
   - ContractorShoes
   - ContractorFace
   - ContractorGlasses
@@ -26,3 +26,13 @@
   - ContractorTrinkets
   - ContractorBureaucracy
   - NFSpeciesSpecific
+
+- type: loadoutGroup
+  id: MedicOuterClothing
+  name: loadout-group-contractor-outerclothing
+  minLimit: 0
+  loadouts:
+  - MdMedicOuterClothingOuterRobeTraumaBomber
+  - MdMedicOuterClothingOuterCoatTrauma
+  subgroups:
+  - ContractorOuterClothing

@@ -33,7 +33,7 @@
   - type: PhysicalComposition
     materialComposition:
       Plastic: 250
-      Steel: 100
+      Steel: 61
   - type: ExplosionResistance
     damageCoefficient: 0 # Until Mono repairs ExplosionResistance
   - type: Tag

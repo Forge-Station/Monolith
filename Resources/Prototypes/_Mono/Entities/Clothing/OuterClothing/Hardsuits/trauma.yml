@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1
   id: ClothingOuterHardsuitTrauma
   name: armed trauma unit T-23 tacsuit
   suffix: TTI # Forge
@@ -43,7 +43,7 @@
     vendPrice: 10000
 
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1
   id: ClothingOuterHardsuitTraumaLeader
   name: armed trauma unit T-53 tacsuit
   suffix: TTI # Forge

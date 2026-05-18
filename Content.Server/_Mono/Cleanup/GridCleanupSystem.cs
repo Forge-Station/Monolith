@@ -4,8 +4,10 @@ using Content.Shared._Mono.CCVar;
 using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Server._Mono.Cleanup;
 
@@ -16,6 +18,7 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PricingSystem _pricing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
 
@@ -23,6 +26,11 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
     private float _maxValue;
     private int _aggressiveTiles;
     private TimeSpan _duration;
+
+    private int _fragmentMaxTiles;
+    private TimeSpan _fragmentDuration;
+    private float _fragmentMaxValue;
+    private float _fragmentDistance;
 
     private HashSet<Entity<ApcComponent>> _apcList = new();
 
@@ -46,6 +54,10 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
         Subs.CVar(_cfg, MonoCVars.GridCleanupMaxValue, val => _maxValue = val, true);
         Subs.CVar(_cfg, MonoCVars.GridCleanupDuration, val => _duration = TimeSpan.FromSeconds(val), true);
         Subs.CVar(_cfg, MonoCVars.GridCleanupAggressiveTiles, val => _aggressiveTiles = val, true);
+        Subs.CVar(_cfg, MonoCVars.GridCleanupFragmentMaxTiles, val => _fragmentMaxTiles = val, true);
+        Subs.CVar(_cfg, MonoCVars.GridCleanupFragmentDuration, val => _fragmentDuration = TimeSpan.FromSeconds(val), true);
+        Subs.CVar(_cfg, MonoCVars.GridCleanupFragmentMaxValue, val => _fragmentMaxValue = val, true);
+        Subs.CVar(_cfg, MonoCVars.GridCleanupFragmentDistance, val => _fragmentDistance = val, true);
     }
 
     /// <summary>
@@ -75,15 +87,20 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
             return false;
 
         var state = EnsureComp<GridCleanupGridComponent>(uid);
-
-        var tiles = body.FixturesMass / ShuttleSystem.TileMassMultiplier;
+        var tileCount = CountTiles(uid, grid);
 
         // Forge-Change
         // If a grid lost all of its tiles, delete it immediately so stale
         // systems/components such as IFF cannot linger on an empty grid shell.
-        if (tiles <= 0f)
+        if (tileCount == 0 || body.FixturesMass <= 0f)
             return true;
 
+        if (TryFragmentFastPath(uid, state, xform, tileCount, out var fastDelete))
+            return fastDelete;
+
+        state.FastPathEligibleSince = null;
+
+        var tiles = body.FixturesMass / ShuttleSystem.TileMassMultiplier;
         var scale = MathF.Min(tiles / _aggressiveTiles, 1f);
 
         if (!state.IgnoreIFF && TryComp<IFFComponent>(uid, out var iff) && (iff.Flags & IFFFlags.HideLabel) == 0 // delete only if IFF off
@@ -102,6 +119,59 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
         }
 
         return true;
+    }
+
+    /// <summary>
+    ///     Micro-fragments (few tiles, unpowered, cheap): ignore IFF, shorter real-time wait, tighter player radius.
+    /// </summary>
+    private bool TryFragmentFastPath(
+        EntityUid uid,
+        GridCleanupGridComponent state,
+        TransformComponent xform,
+        int tileCount,
+        out bool shouldDelete)
+    {
+        shouldDelete = false;
+
+        if (tileCount > _fragmentMaxTiles)
+        {
+            state.FastPathEligibleSince = null;
+            return false;
+        }
+
+        if (!state.IgnorePowered && HasPoweredAPC((uid, xform))
+            || !state.IgnorePrice && _pricing.AppraiseGrid(uid) > _fragmentMaxValue)
+        {
+            state.FastPathEligibleSince = null;
+            return false;
+        }
+
+        if (CleanupHelper.HasNearbyPlayers(xform.Coordinates, state.DistanceOverride ?? _fragmentDistance))
+        {
+            state.FastPathEligibleSince = null;
+            return true;
+        }
+
+        var eligibleSince = state.FastPathEligibleSince ??= _timing.CurTime;
+        if (_timing.CurTime - eligibleSince < _fragmentDuration)
+            return true;
+
+        shouldDelete = true;
+        return true;
+    }
+
+    private int CountTiles(EntityUid uid, MapGridComponent grid)
+    {
+        var count = 0;
+        var enumerator = _map.GetAllTilesEnumerator(uid, grid);
+        while (enumerator.MoveNext(out _))
+        {
+            count++;
+            if (count > _fragmentMaxTiles)
+                return count;
+        }
+
+        return count;
     }
 
     bool HasPoweredAPC(Entity<TransformComponent> grid)

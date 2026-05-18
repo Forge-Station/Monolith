@@ -997,9 +997,8 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
             if (!bodyQuery.TryGetComponent(gridUid, out var gridBody))
                 return;
 
-            Color zoneColor = zoneComp.ZoneColor.WithAlpha(0.1f);
-            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, vertices, zoneColor);
-            handle.DrawPrimitives(DrawPrimitiveTopology.LineStrip, vertices, zoneComp.ZoneColor);
+            var worldCenter = _transform.ToMapCoordinates(new EntityCoordinates(gridUid, gridBody.LocalCenter)).Position;
+            DrawWorldZone(handle, worldToView, worldCenter, zone.Radius, zone.ZoneColor);
         }
 
         if (ourGridId is { Valid: true } ownGrid)
@@ -1023,7 +1022,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
             vertices[i] = viewCenter + new Vector2(MathF.Cos(angle), MathF.Sin(angle)) * viewRadius;
         }
 
-        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, vertices, color.WithAlpha(0.3f));
+        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, vertices, color.WithAlpha(0.1f));
         handle.DrawPrimitives(DrawPrimitiveTopology.LineStrip, vertices, color);
     }
     #endregion Forge-Change

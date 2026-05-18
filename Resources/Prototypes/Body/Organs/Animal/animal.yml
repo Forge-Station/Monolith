@@ -170,6 +170,7 @@
   name: kidneys
   categories: [ HideSpawnMenu ]
   components:
+  - type: Kidney # Forge-Change
   - type: Sprite
     layers:
     - state: kidney-l

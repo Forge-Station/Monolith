@@ -986,7 +986,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                 vertices[i] = viewCenter + new Vector2(MathF.Cos(angle), MathF.Sin(angle)) * viewRadius;
             }
 
-            Color zoneColor = zoneComp.ZoneColor.WithAlpha(0.3f);
+            Color zoneColor = zoneComp.ZoneColor.WithAlpha(0.1f);
             handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, vertices, zoneColor);
             handle.DrawPrimitives(DrawPrimitiveTopology.LineStrip, vertices, zoneComp.ZoneColor);
         }

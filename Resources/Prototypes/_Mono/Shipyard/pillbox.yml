@@ -10,8 +10,12 @@
   guidebookPage: null
   class:
   - Civilian
+  - Botany
+  - Chemistry
+  - Medical
   engine:
   - Uranium
+  - APU
 
 - type: gameMap
   id: Pillbox

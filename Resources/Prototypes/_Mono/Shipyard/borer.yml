@@ -16,6 +16,7 @@
   guidebookPage: Null
   class:
   - Salvage
+  - Civilian
   engine:
   - Plasma
 

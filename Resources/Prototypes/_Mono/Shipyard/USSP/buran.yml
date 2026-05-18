@@ -13,7 +13,8 @@
   shuttlePath: /Maps/_Mono/Shuttles/USSP/buran.yml
   guidebookPage: Null
   class:
-  - Frigate
+  - Fighter
+  - Destroyer
   engine:
   - AME
 

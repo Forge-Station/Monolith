@@ -12,8 +12,9 @@
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/sentinel.yml
   guidebookPage: Null
   class:
+  - Fighter
   - Patrol
-  - Corvette
+  - Pursuit
   engine:
   - AME
 

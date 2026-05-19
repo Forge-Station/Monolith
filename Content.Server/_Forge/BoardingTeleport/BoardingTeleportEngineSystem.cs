@@ -15,8 +15,6 @@ public sealed class BoardingTeleportEngineSystem : EntitySystem
 
         SubscribeLocalEvent<BoardingTeleportEngineComponent, ComponentStartup>(OnEngineStartup);
         SubscribeLocalEvent<BoardingTeleportEngineComponent, ComponentShutdown>(OnEngineShutdown);
-        SubscribeLocalEvent<BoardingTeleportConsoleComponent, ComponentStartup>(OnConsoleStartup);
-        SubscribeLocalEvent<BoardingTeleportConsoleComponent, ComponentShutdown>(OnConsoleShutdown);
     }
 
     private void OnEngineStartup(Entity<BoardingTeleportEngineComponent> ent, ref ComponentStartup args)
@@ -29,12 +27,7 @@ public sealed class BoardingTeleportEngineSystem : EntitySystem
         UnlinkEngine(ent.Owner, ent.Comp);
     }
 
-    private void OnConsoleStartup(Entity<BoardingTeleportConsoleComponent> ent, ref ComponentStartup args)
-    {
-        TryLinkConsole(ent);
-    }
-
-    private void OnConsoleShutdown(Entity<BoardingTeleportConsoleComponent> ent, ref ComponentShutdown args)
+    public void UnlinkConsole(Entity<BoardingTeleportConsoleComponent> ent)
     {
         UnlinkConsole(ent.Owner, ent.Comp);
     }

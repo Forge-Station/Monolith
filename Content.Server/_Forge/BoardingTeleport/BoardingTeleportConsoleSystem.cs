@@ -129,6 +129,8 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
     {
 
+        _engine.UnlinkConsole(ent);
+
         foreach (var device in _deviceList.GetAllDevices(ent.Owner))
 
         {

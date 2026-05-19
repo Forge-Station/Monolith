@@ -50,6 +50,7 @@
   - type: InteractionOutline
   - type: Physics
     bodyType: Static
+    canCollide: true
   - type: Transform
     anchored: true
     noRot: true
@@ -60,10 +61,13 @@
           !type:PhysShapeAabb
           bounds: "-0.45,-0.45,0.45,0.45"
         density: 220
+        hard: true
         mask:
         - MachineMask
+        layer:
+        - MachineLayer
   - type: Sprite
-    sprite: Forge/Structures/Machines/boarding_teleport_platform.rsi
+    sprite: Forge/Structures/Machines/boarding_teleport_engine.rsi
     drawdepth: HighFloorObjects
     layers:
     - state: plinth
@@ -76,7 +80,7 @@
     maxTargetVelocity: 50
     maxTargetAngularVelocity: 15
   - type: ApcPowerReceiver
-    powerLoad: 1500
+    powerLoad: 15000
   - type: Machine
     board: BoardingTeleportEngineMachineCircuitboard
   - type: CollideOnAnchor

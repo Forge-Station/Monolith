@@ -339,6 +339,44 @@ public sealed class PullingSystem : EntitySystem
         return assist.PullingAssistSlowdownPenaltyModifier < 1f ||
                assist.PullingAssistMassPenaltyModifier < 1f;
     }
+
+    private void ApplyPullingAssistMassPenalty(EntityUid pullableUid, PullableComponent pullable, EntityUid pullerUid)
+    {
+        var scale = GetPullingAssistMassPenaltyModifier(pullerUid);
+        if (scale >= 1f || !TryComp<FixturesComponent>(pullableUid, out var fixtures))
+            return;
+
+        pullable.PullMassPenaltyScale = scale;
+
+        foreach (var (id, fixture) in fixtures.Fixtures)
+        {
+            if (fixture.Density <= 0f)
+                continue;
+
+            _physics.SetDensity(pullableUid, id, fixture, fixture.Density * scale, update: false, manager: fixtures);
+        }
+
+        _physics.ResetMassData(pullableUid, manager: fixtures);
+    }
+
+    private void RestorePullingAssistMassPenalty(EntityUid pullableUid, PullableComponent pullable)
+    {
+        var scale = pullable.PullMassPenaltyScale;
+        pullable.PullMassPenaltyScale = 1f;
+
+        if (scale >= 1f || !TryComp<FixturesComponent>(pullableUid, out var fixtures))
+            return;
+
+        foreach (var (id, fixture) in fixtures.Fixtures)
+        {
+            if (fixture.Density <= 0f)
+                continue;
+
+            _physics.SetDensity(pullableUid, id, fixture, fixture.Density / scale, update: false, manager: fixtures);
+        }
+
+        _physics.ResetMassData(pullableUid, manager: fixtures);
+    }
     // Forge-Change-End
 
     private static float ReduceSlowdownPenalty(float modifier, float penaltyMultiplier)
@@ -407,10 +445,10 @@ public sealed class PullingSystem : EntitySystem
                 pullableComp.PullJointId = null;
             }
 
+            RestorePullingAssistMassPenalty(pullableUid, pullableComp);
+
             if (TryComp<PhysicsComponent>(pullableUid, out var pullablePhysics))
-            {
                 _physics.SetFixedRotation(pullableUid, pullableComp.PrevFixedRotation, body: pullablePhysics);
-            }
         }
 
         var oldPuller = pullableComp.Puller;
@@ -609,8 +647,8 @@ public sealed class PullingSystem : EntitySystem
             // the current length is beteen MinLength and MaxLength. At those limits, the
             // joint will have infinite stiffness.
             joint.Stiffness = 0f;
-            // Forge-Change: R.I.P.L.Y reduces the pulled object's mass reaction on the puller.
-            joint.BodyBReactionModifier = GetPullingAssistMassPenaltyModifier(pullerUid);
+            // Forge-Change: R.I.P.L.Y reduces the pulled object's effective mass on the puller.
+            ApplyPullingAssistMassPenalty(pullableUid, pullableComp, pullerUid);
 
             _physics.SetFixedRotation(pullableUid, pullableComp.FixedRotationOnPull, body: pullablePhysics);
         }

@@ -1,0 +1,38 @@
+- type: techDiscipline
+  id: ForgeBoardingTeleport
+  name: research-discipline-forge-boarding-teleport
+  color: "#2a5f69"
+  icon:
+    sprite: Interface/Misc/research_disciplines.rsi
+    state: experimental
+  tierPrerequisites:
+    1: 0
+    2: 0.5
+    3: 0.5
+  uiName: BTP
+
+- type: techDiscipline
+  id: ForgeBoardingTeleportAdvanced
+  name: research-discipline-forge-boarding-teleport-advanced
+  color: "#3c6d9f"
+  icon:
+    sprite: Interface/Misc/research_disciplines.rsi
+    state: experimental
+  tierPrerequisites:
+    1: 0
+    2: 0.5
+    3: 0.5
+  uiName: BTA
+
+- type: techDiscipline
+  id: ForgeBoardingTeleportExperimental
+  name: research-discipline-forge-boarding-teleport-experimental
+  color: "#6d3c9f"
+  icon:
+    sprite: Interface/Misc/research_disciplines.rsi
+    state: experimental
+  tierPrerequisites:
+    1: 0
+    2: 0.5
+    3: 0.5
+  uiName: BTX

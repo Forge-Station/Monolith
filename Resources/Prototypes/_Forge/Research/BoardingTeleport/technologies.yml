@@ -1,0 +1,47 @@
+- type: technology
+  id: ForgeBoardingTeleportStandard
+  name: research-technology-forge-boarding-teleport-standard
+  entityIcon: ComputerBoardingTeleport
+  discipline: ForgeBoardingTeleport
+  tier: 2
+  cost: 60000
+  recipeUnlocks:
+  - BoardingTeleportConsoleCircuitboard
+  - BoardingTeleportEngineMachineCircuitboard
+  - BoardingTeleportPlatformMachineCircuitboard
+  - BoardingTeleportRemote
+  - BoardingTeleportConsoleFlatpack
+  - BoardingTeleportEngineFlatpack
+  - BoardingTeleportPlatformFlatpack
+  - BoardingTeleportRemoteFlatpack
+  position: 7, 5
+
+- type: technology
+  id: ForgeBoardingTeleportAdvancedPrep
+  name: research-technology-forge-boarding-teleport-advanced
+  entityIcon: BoardingTeleportPlatform
+  discipline: ForgeBoardingTeleportAdvanced
+  tier: 3
+  cost: 90000
+  recipeUnlocks:
+  - BoardingTeleportEngineAdvancedFlatpack
+  - BoardingTeleportPlatformAdvancedFlatpack
+  - BoardingTeleportRemoteFlatpack
+  technologyPrerequisites:
+  - ForgeBoardingTeleportStandard
+  position: 9, 8
+
+- type: technology
+  id: ForgeBoardingTeleportExperimental
+  name: research-technology-forge-boarding-teleport-experimental
+  entityIcon: DisciplinesDiskBoardingTeleportExperimental
+  discipline: ForgeBoardingTeleportExperimental
+  tier: 3
+  cost: 120000
+  recipeUnlocks:
+  - BoardingTeleportPlatformExperimentalFlatpack
+  - BoardingTeleportRemote
+  - BoardingTeleportConsoleFlatpack
+  technologyPrerequisites:
+  - ForgeBoardingTeleportStandard
+  position: 11, 8

@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "computer, generic_keyboard, tech_key, generic_panel_open: from /Textures/Structures/Machines/computers.rsi (SS14, CC-BY-SA-3.0). shuttle: original boarding-teleport UI (build_boarding_teleport_shuttle_screen.ps1).",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "computer",
+      "directions": 4
+    },
+    {
+      "name": "generic_keyboard",
+      "directions": 4
+    },
+    {
+      "name": "shuttle",
+      "directions": 4,
+      "delays": [
+        [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.42],
+        [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.42],
+        [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.42],
+        [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.42]
+      ]
+    },
+    {
+      "name": "tech_key",
+      "directions": 4
+    },
+    {
+      "name": "generic_panel_open",
+      "directions": 4
+    }
+  ]
+}

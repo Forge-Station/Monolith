@@ -1,0 +1,31 @@
+- type: entity
+  parent: Paper
+  id: PaperBoardingTeleportInstructions
+  name: bluespace boarding teleport instructions
+  description: A quick setup sheet for a bluespace boarding teleport kit.
+  components:
+  - type: Paper
+    contentSize: 3000
+    content: boarding-teleport-instructions
+
+- type: entity
+  id: DisciplinesDiskBoardingTeleportExperimental
+  parent: BaseItem
+  name: technology disk (experimental bluespace boarding)
+  description: A disk with experimental bluespace boarding teleport research data.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - ForgeBoardingTeleportExperimental
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_label
+      color: "#65b8e2"
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 20000

@@ -8,6 +8,8 @@ boarding-teleport-window-flavor-sector = [color=#9ecbff]Сканирование
 boarding-teleport-window-flavor-grid = [color=#ffd27f]Зафиксируйте высадку.[/color] Обратный канал — только с вашего пульта.
 boarding-teleport-window-clear-target = Сбросить цель
 boarding-teleport-window-platform-cooldown = Перезарядка платформы: {$seconds}с
+boarding-teleport-window-engine-stats = Двигатель: дальность {$range} | скорость цели ≤ {$speed}
+boarding-teleport-window-engine-missing = Блюспейс-двигатель: не подключён на этом гриде
 boarding-teleport-window-return-window = Канал возврата: {$seconds}с
 boarding-teleport-window-return-remaining = Ваш возврат: осталось {$seconds}с
 boarding-teleport-window-apc-risk = Недогруз APC: +{$percent}% риска

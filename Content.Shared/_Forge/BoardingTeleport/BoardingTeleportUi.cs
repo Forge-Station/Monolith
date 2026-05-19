@@ -20,6 +20,8 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
     public readonly float ApcRiskBonusPercent;
     public readonly float? PlatformCooldownSeconds;
     public readonly float ReturnWindowSeconds;
+    public readonly float? EngineRange;
+    public readonly float? EngineMaxTargetVelocity;
 
     public BoardingTeleportBoundUserInterfaceState(
         BoardingTeleportPage page,
@@ -34,7 +36,9 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
         float modeRiskPercent,
         float apcRiskBonusPercent,
         float? platformCooldownSeconds,
-        float returnWindowSeconds)
+        float returnWindowSeconds,
+        float? engineRange,
+        float? engineMaxTargetVelocity)
     {
         Page = page;
         NavState = navState;
@@ -49,6 +53,8 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
         ApcRiskBonusPercent = apcRiskBonusPercent;
         PlatformCooldownSeconds = platformCooldownSeconds;
         ReturnWindowSeconds = returnWindowSeconds;
+        EngineRange = engineRange;
+        EngineMaxTargetVelocity = engineMaxTargetVelocity;
     }
 }
 

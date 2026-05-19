@@ -443,7 +443,15 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
             cooldownSeconds = (float) (platform.NextUse - _timing.CurTime).TotalSeconds;
 
+        _engine.TryLinkConsole(ent);
 
+        float? engineRange = null;
+        float? engineMaxTargetVelocity = null;
+        if (_engine.TryGetLinkedEngine(ent.Owner, ent.Comp, out _, out var linkedEngine))
+        {
+            engineRange = linkedEngine.Range;
+            engineMaxTargetVelocity = linkedEngine.MaxTargetVelocity;
+        }
 
         var state = new BoardingTeleportBoundUserInterfaceState(
 
@@ -471,7 +479,11 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
             cooldownSeconds,
 
-            platform?.ReturnWindowSeconds ?? BoardingTeleportPlatformComponent.DefaultReturnWindowSeconds);
+            platform?.ReturnWindowSeconds ?? BoardingTeleportPlatformComponent.DefaultReturnWindowSeconds,
+
+            engineRange,
+
+            engineMaxTargetVelocity);
 
 
 

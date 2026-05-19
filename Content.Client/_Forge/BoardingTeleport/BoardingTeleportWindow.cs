@@ -291,6 +291,9 @@ public sealed class BoardingTeleportWindow : FancyWindow
             ("risk", $"{state.ModeRiskPercent:0}"));
 
         _platformStatsLabel.Text = BuildPlatformStats(state);
+        _platformStatsLabel.FontColorOverride = state.EngineRange is null
+            ? Color.FromHex("#FF8888")
+            : Color.FromHex("#A8B4C8");
         UpdateModeButtons(state.Mode);
 
         var coordinates = _entManager.GetCoordinates(state.NavState.Coordinates);
@@ -342,6 +345,17 @@ public sealed class BoardingTeleportWindow : FancyWindow
     private string BuildPlatformStats(BoardingTeleportBoundUserInterfaceState state)
     {
         var parts = new List<string>();
+
+        if (state.EngineRange is { } range && state.EngineMaxTargetVelocity is { } speedLimit)
+        {
+            parts.Add(Loc.GetString("boarding-teleport-window-engine-stats",
+                ("range", $"{range:0}"),
+                ("speed", $"{speedLimit:0}")));
+        }
+        else
+        {
+            parts.Add(Loc.GetString("boarding-teleport-window-engine-missing"));
+        }
 
         if (state.PlatformCooldownSeconds is { } cooldown and > 0.05f)
             parts.Add(Loc.GetString("boarding-teleport-window-platform-cooldown", ("seconds", $"{cooldown:0}")));

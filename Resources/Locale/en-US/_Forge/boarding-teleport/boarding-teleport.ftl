@@ -8,6 +8,8 @@ boarding-teleport-window-flavor-sector = [color=#9ecbff]Sector scan:[/color] loc
 boarding-teleport-window-flavor-grid = [color=#ffd27f]Lock your landing zone.[/color] The return channel only works from your linked platform remote.
 boarding-teleport-window-clear-target = Clear target
 boarding-teleport-window-platform-cooldown = Platform recharge: {$seconds}s
+boarding-teleport-window-engine-stats = Engine: {$range} range | target speed ≤ {$speed}
+boarding-teleport-window-engine-missing = Bluespace engine: not linked on this grid
 boarding-teleport-window-return-window = Return channel: {$seconds}s
 boarding-teleport-window-return-remaining = Your return: {$seconds}s left
 boarding-teleport-window-apc-risk = APC underload: +{$percent}% risk

@@ -1,10 +1,17 @@
 ent-LockerRenCom = шкаф командира ренегатов
+    .desc = { ent-LockerRen.desc }
 ent-LockerRenMed = медицинский шкаф ренегатов
+    .desc = { ent-LockerRen.desc }
 ent-LockerRenRnd = шкаф учёного ренегатов
+    .desc = { ent-LockerRen.desc }
 ent-LockerRenBaron = шкаф барона ренегатов
+    .desc = { ent-LockerRen.desc }
 ent-LockerRenSpec = шкаф специалиста ренегатов
+    .desc = { ent-LockerRen.desc }
 ent-RenegateLockerBaseSecure = шкаф барона ренегатов
+    .desc = { ent-LockerRen.desc }
 ent-LockerRen = шкаф ренегатов
+    .desc = Стандартное складское хранилищ
 
 ent-LockerEmpire = имперский шкаф
     .desc = { ent-LockerBaseSecure.desc }

@@ -1,0 +1,16 @@
+# All Forge
+- type: loadoutGroup
+  id: MdFace
+  name: loadout-group-contractor-face
+  loadouts:
+  - MdMedicClothingMaskSterileTrauma
+  subgroups:
+  - ContractorFace
+  fallbacks:
+  - MdMedicClothingMaskSterileTrauma
+
+- type: loadout
+  id: MdMedicClothingMaskSterileTrauma
+  price: 0
+  equipment:
+    mask: ClothingMaskSterileTrauma

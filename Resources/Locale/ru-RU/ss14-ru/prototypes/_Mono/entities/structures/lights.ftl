@@ -1,1 +1,3 @@
-ent-PoweredlightBlueAirAlarm = Blue, Off
+ent-PoweredlightBlueAirAlarm = светильник
+    .desc = Осветительный прибор. Потребляет энергию и излучает свет при установленной световой трубке.
+    .suffix = Синий, Выключеный

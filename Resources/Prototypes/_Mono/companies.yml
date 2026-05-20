@@ -100,8 +100,13 @@
   description: harmony-medical-enterprises-description
   color: "#FC7303"
   image: /Textures/_Mono/Companies/HME.png
-  icon: HarmonyMedicalEnterprises # Forge-change
-  note: harmony-medical-enterprises-note # Forge-change
+  # Forge-change: add icon, note & special's
+  icon: HarmonyMedicalEnterprises
+  note: harmony-medical-enterprises-note
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyHarmony
 
 - type: company
   id: MidnightArmsCo
@@ -136,6 +141,7 @@
       params:
         volume: -5
         variation: 0.2
+  image: /Textures/_Mono/Companies/USSP.png
 
 # Major companies
 

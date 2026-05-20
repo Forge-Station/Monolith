@@ -286,8 +286,8 @@
   - MdMedicBackpack # Forge
   - DocOuterClothing
   - DocShoes
-  - ContractorFace
-  - ContractorGlasses
+  - MdFace # Forge
+  - MdMedicGlasses # Forge
   - MdMedicBelt # Forge
   - DocEars
   - ContractorBoxSurvival

@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.0
+  engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 01/20/2026 04:26:12
+  time: 05/17/2026 14:02:30
   entityCount: 6324
 maps: []
 grids:
@@ -203,8 +203,8 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
       spreadQueues:
-        Kudzu: []
         Smoke: []
+        Kudzu: []
         MetalFoam: []
         Puddle: []
     - type: Shuttle
@@ -215,7 +215,7 @@ entities:
         path: /Audio/Effects/alert.ogg
     - type: DecalGrid
       chunkCollection:
-        version: 2
+        version: 3
         nodes:
         - node:
             color: '#FFFFFFFF'
@@ -1235,6 +1235,7 @@ entities:
       lastUpdateTime: 0
     - type: ShipGridLock
       locked: False
+    - type: ThermalSignature
 - proto: AirAlarm
   entities:
   - uid: 2
@@ -1624,7 +1625,7 @@ entities:
       pos: 2.5,-36.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -15033.143
+      secondsUntilStateChange: -15231.09
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1692,7 +1693,7 @@ entities:
       pos: 13.5,-18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10992.496
+      secondsUntilStateChange: -11190.443
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1704,7 +1705,7 @@ entities:
       pos: 12.5,-18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10992.296
+      secondsUntilStateChange: -11190.243
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1716,7 +1717,7 @@ entities:
       pos: 12.5,-15.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10991.263
+      secondsUntilStateChange: -11189.21
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1728,7 +1729,7 @@ entities:
       pos: 13.5,-15.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10991.597
+      secondsUntilStateChange: -11189.544
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1740,7 +1741,7 @@ entities:
       pos: 24.5,-18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10990.2295
+      secondsUntilStateChange: -11188.177
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1752,7 +1753,7 @@ entities:
       pos: 23.5,-18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10990.029
+      secondsUntilStateChange: -11187.977
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1764,7 +1765,7 @@ entities:
       pos: 23.5,-15.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10990.696
+      secondsUntilStateChange: -11188.644
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1776,7 +1777,7 @@ entities:
       pos: 24.5,-15.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10990.496
+      secondsUntilStateChange: -11188.443
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2418,20 +2419,6 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
-- proto: BaseComputerAiAccess
-  entities:
-  - uid: 1910
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 20.5,19.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 5
-    - type: ApcPowerReceiverBattery
-      enabled: True
 - proto: Bed
   entities:
   - uid: 162
@@ -12981,6 +12968,20 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
+- proto: ComputerIFFCapture
+  entities:
+  - uid: 1910
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 20.5,19.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 97.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
 - proto: ComputerMedicalRecords
   entities:
   - uid: 1911
@@ -14104,7 +14105,7 @@ entities:
   - uid: 2581
     components:
     - type: Transform
-      pos: -0.46387422,-18.40536
+      pos: -0.30813003,-16.27685
       parent: 1
   - uid: 3075
     components:
@@ -17978,6 +17979,13 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 15.5,-17.5
       parent: 1
+- proto: PoiTreasuryLPBravo
+  entities:
+  - uid: 2026
+    components:
+    - type: Transform
+      pos: -0.5,-18.5
+      parent: 1
 - proto: PottedPlantRandom
   entities:
   - uid: 2513
@@ -18790,12 +18798,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -4.5,-16.5
-      parent: 1
-  - uid: 2026
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,-18.5
       parent: 1
   - uid: 3006
     components:

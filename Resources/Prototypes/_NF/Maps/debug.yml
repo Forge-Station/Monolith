@@ -54,12 +54,6 @@
             # PirateFirstMate: [ -1, -1] # Forge-Change-delete
             # PDVDenasvar: [ -1, -1] #Mono # Forge-Change-delete
             # Pirate: [ -1, -1] #Forge-Change # Forge-Change-delete
-            Flunky: [ -1, -1] #Forge-Change
-            Quack: [ -1, -1] #Forge-Change
-            Foreman: [ -1, -1] #Forge-Change
-            Draftsman: [ -1, -1] #Forge-Change
-            Overseer: [ -1, -1] #Forge-Change
-            Baron: [ -1, -1] #Forge-Change
             # PDVInfiltrator: [ -1, -1] # Mono] # Forge-Change-delete
             # Prisoner: [ -1, -1] # Mono
             # USSPCommissar: [ -1, -1]
@@ -68,5 +62,22 @@
             # USSPMedic: [ -1, -1]
             # USSPRifleman: [ -1, -1]
             # TsfEngineer: [ -1, -1 ] # Not a roundstart-selectable job (`setPreference: false`)
+            # Forge-change-start
+            # Renegates
+            Flunky: [ -1, -1]
+            Quack: [ -1, -1]
+            Foreman: [ -1, -1]
+            Draftsman: [ -1, -1]
+            Overseer: [ -1, -1]
+            Baron: [ -1, -1]
+            # TSF
+            TsfCommandingOfficer: [ -1, -1]
+            TsfExecutiveOfficer: [ -1, -1]
+            TsfSeniorOfficer: [ -1, -1]
+            TsfSeniorAide: [ -1, -1]
+            TsfAmbassador: [ -1, -1]
+            TsfRanger: [ -1, -1]
+            TsfRecruit: [ -1, -1]
+            # Forge-change-end
         - type: StationDeadDrop
           maxDeadDrops: 20 # Testing

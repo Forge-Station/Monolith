@@ -379,7 +379,7 @@ public sealed class StationSystem : EntitySystem
         stationData.Grids.Remove(mapGrid);
 
         RaiseLocalEvent(station, new StationGridRemovedEvent(mapGrid), true);
-        _sawmill.Info($"Removing grid {mapGrid} from station {Name(station)} ({station})");
+        _sawmill.Debug($"Removing grid {mapGrid} from station {Name(station)} ({station})");
     }
 
     /// <summary>

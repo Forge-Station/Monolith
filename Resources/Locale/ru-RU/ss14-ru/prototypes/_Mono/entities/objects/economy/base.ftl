@@ -1,0 +1,14 @@
+ent-BaseEconomyGood = базовый экономический предмет
+    .desc = Используется, чтобы поддерживать работу старой промышленной инфраструктуры.
+ent-BaseEconomyGoodTier1 = { ent-BaseEconomyGood }
+    .desc = { ent-BaseEconomyGood.desc }
+    .suffix = Т1
+ent-BaseEconomyGoodTier2 = { ent-BaseEconomyGood }
+    .desc = { ent-BaseEconomyGood.desc }
+    .suffix = Т2
+ent-BaseEconomyGoodTier3 = { ent-BaseEconomyGood }
+    .desc = { ent-BaseEconomyGood.desc }
+    .suffix = Т3
+ent-BaseEconomyGoodTier4 = { ent-BaseEconomyGood }
+    .desc = { ent-BaseEconomyGood.desc }
+    .suffix = Т4

@@ -367,7 +367,6 @@
     - !type:NestedSelector
       tableId: PoiTreasuryLootCashTickMedium
       weight: 2
-    - id: Dice
     - id: Cigarette
     - id: CigPackMixedMedical
     - id: CigarGoldCase

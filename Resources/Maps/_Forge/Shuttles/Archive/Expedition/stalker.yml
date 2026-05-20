@@ -6702,7 +6702,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 8.577228,29.525084
       parent: 2
-- proto: ShieldGeneratorSmall
+- proto: ShieldGeneratorFSG100
   entities:
   - uid: 503
     components:

@@ -1,5 +1,6 @@
 gun-selected-mode-examine = Выбран режим огня [color={ $color }]{ $mode }[/color].
 gun-fire-rate-examine = Скорострельность [color={ $color }]{ $fireRate }[/color] в секунду.
+gun-damage-modifier-examine = Его выстрелы наносят [color={$color}]{$damage}x[/color] урона.
 gun-selector-verb = Изменить на { $mode }
 gun-selected-mode = Выбран { $mode }
 gun-disabled = Вы не можете использовать оружие!
@@ -53,4 +54,6 @@ gun-revolver-spun = Барабан вращается
 gun-speedloader-empty = Спидлоадер пуст
 gun-magazine-fired-empty = Партронов не осталось!
 
-# SelectiveFire
+# GunSpreadModifier
+examine-gun-spread-modifier-reduction = Разброс был уменьшен на [color=yellow]{$percentage}%[/color].
+examine-gun-spread-modifier-increase = Разброс был увеличен на [color=yellow]{$percentage}%[/color].

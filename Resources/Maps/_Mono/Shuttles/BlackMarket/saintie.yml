@@ -7831,7 +7831,7 @@ entities:
     - type: Transform
       pos: -0.5,-9.5
       parent: 1
-- proto: ShieldGeneratorMedium
+- proto: ShieldGeneratorFSG220
   entities:
   - uid: 26
     components:

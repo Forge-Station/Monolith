@@ -25,6 +25,7 @@
       - EncryptionKeyUllmanIndustries
       - EncryptionKeyBlackhawk
       - EncryptionKeyTechnicLogistic
+      - EncryptionKeyHarmony # Forge-change
 
 - type: entity
   parent: TelecomServer

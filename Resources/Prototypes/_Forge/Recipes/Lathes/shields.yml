@@ -1,5 +1,10 @@
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG85ECircuitboard
+  result: MachineShieldFSG85ECircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
   id: MachineShieldFSG90RCircuitboard
   result: MachineShieldFSG90RCircuitboard
 
@@ -32,6 +37,11 @@
   parent: BaseGoldCircuitboardRecipe
   id: MachineShieldFSG330RCircuitboard
   result: MachineShieldFSG330RCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG355SCircuitboard
+  result: MachineShieldFSG355SCircuitboard
 
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
@@ -125,5 +135,47 @@
 
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeTSFSagittaCircuitboard
+  result: MachineShieldForgeTSFSagittaCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeUsspKerchCircuitboard
+  result: MachineShieldForgeUsspKerchCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeRenegateSkullDebtCircuitboard
+  result: MachineShieldForgeRenegateSkullDebtCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeViperKiteCircuitboard
+  result: MachineShieldForgeViperKiteCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeUllmanLockboxCircuitboard
+  result: MachineShieldForgeUllmanLockboxCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
   id: MachineShieldFSG900PCircuitboard
   result: MachineShieldFSG900PCircuitboard
+
+# FSG-870R / FSG-950M lathe recipes: see _Mono/Recipes/Lathes/electronics.yml (Mono layer with MS shield recipes)
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG195LCircuitboard
+  result: MachineShieldFSG195LCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG275PCircuitboard
+  result: MachineShieldFSG275PCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG305VCircuitboard
+  result: MachineShieldFSG305VCircuitboard

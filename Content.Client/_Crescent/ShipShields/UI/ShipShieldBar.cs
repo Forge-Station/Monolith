@@ -11,13 +11,18 @@ namespace Content.Client._Crescent.ShipShields.UI;
 /// Horizontal HP bar for the ship shield emitter. Shows the shield charge percentage
 /// while online, and a real-time countdown to recharge while offline.
 /// </summary>
+/// <remarks>
+/// Forge-Change: reads <see cref="ShipShieldGridStateComponent"/> on the configured grid so the HUD
+/// works even when the emitter or bubble are outside the client's PVS (e.g. another room on the same ship).
+/// </remarks>
 public sealed class ShipShieldBar : Control
 {
+    [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly Font _font;
 
-    private ShipShieldState _state;
+    private EntityUid? _grid;
 
     public ShipShieldBar()
     {
@@ -26,17 +31,78 @@ public sealed class ShipShieldBar : Control
         MinSize = new Vector2(100, 18);
     }
 
-    public void SetState(ShipShieldState state)
+    /// <summary>
+    /// Sets the grid whose shield state should be displayed.
+    /// </summary>
+    public void SetGrid(EntityUid? grid)
     {
-        _state = state;
-        Visible = state.HasShield;
+        _grid = grid;
+    }
+
+    /// <summary>
+    /// True if the configured grid currently has a shield emitter to display.
+    /// </summary>
+    public bool HasShield => TryResolveGridState(out _);
+
+    private bool TryResolveGridState(out ShipShieldGridStateComponent state)
+    {
+        state = default!;
+        if (_grid is not { } grid || !_entManager.EntityExists(grid))
+            return false;
+
+        if (_entManager.TryGetComponent(grid, out ShipShieldGridStateComponent? comp) && comp is { HasEmitter: true })
+        {
+            state = comp;
+            return true;
+        }
+
+        // Forge-Change: fallback when grid snapshot is not replicated yet but the emitter is in PVS.
+        return TryResolveEmitterFallback(grid, out state);
+    }
+
+    private bool TryResolveEmitterFallback(EntityUid grid, out ShipShieldGridStateComponent state)
+    {
+        state = default!;
+
+        ShipShieldEmitterComponent? emitter = null;
+        if (_entManager.TryGetComponent(grid, out ShipShieldedComponent? shielded)
+            && shielded.Source is { } src
+            && _entManager.TryGetComponent(src, out ShipShieldEmitterComponent? canonical))
+        {
+            emitter = canonical;
+        }
+        else
+        {
+            var query = _entManager.EntityQueryEnumerator<ShipShieldEmitterComponent, TransformComponent>();
+            while (query.MoveNext(out _, out var ec, out var xform))
+            {
+                if (xform.GridUid != grid || !xform.Anchored)
+                    continue;
+                emitter = ec;
+                break;
+            }
+        }
+
+        if (emitter == null)
+            return false;
+
+        state = new ShipShieldGridStateComponent
+        {
+            HasEmitter = true,
+            Damage = emitter.Damage,
+            DamageLimit = emitter.DamageLimit,
+            Recharging = emitter.Recharging,
+            Online = emitter.Online,
+            RechargeEndTime = emitter.RechargeEndTime,
+        };
+        return true;
     }
 
     protected override void Draw(DrawingHandleScreen handle)
     {
         base.Draw(handle);
 
-        if (!_state.HasShield)
+        if (!TryResolveGridState(out var state))
             return;
 
         var background = Color.FromHex("#1a1a1a");
@@ -44,11 +110,12 @@ public sealed class ShipShieldBar : Control
 
         handle.DrawRect(new UIBox2(0, 0, PixelWidth, PixelHeight), background);
 
-        var percent = MathHelper.Clamp(_state.Percent, 0f, 1f);
+        var limit = state.DamageLimit > 0f ? state.DamageLimit : 1f;
+        var percent = MathHelper.Clamp(1f - state.Damage / limit, 0f, 1f);
 
         Color barColor;
         string label;
-        if (_state.Online)
+        if (state.Online)
         {
             barColor = LerpHpColor(percent);
             label = $"{(int) MathF.Round(percent * 100f)}%";
@@ -56,8 +123,8 @@ public sealed class ShipShieldBar : Control
         else
         {
             barColor = Color.FromHex("#a02020");
-            var remaining = _state.RechargeEndTime.HasValue
-                ? (_state.RechargeEndTime.Value - _timing.CurTime).TotalSeconds
+            var remaining = state.RechargeEndTime.HasValue
+                ? (state.RechargeEndTime.Value - _timing.CurTime).TotalSeconds
                 : 0;
             if (remaining < 0)
                 remaining = 0;

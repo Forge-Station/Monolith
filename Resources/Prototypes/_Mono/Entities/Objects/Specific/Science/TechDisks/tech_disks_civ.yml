@@ -126,7 +126,7 @@
   - type: TechnologyDisk
     recipes:
     - MachineDriveCTLA25Circuitboard
-    - MachineShieldMS100Circuitboard
+    # - MachineShieldMS100Circuitboard #Forge-Change
 
 - type: entity
   parent: TechDiskBase
@@ -268,6 +268,27 @@
   - type: TechnologyDisk
     recipes:
     - MachineShieldFSG900PCircuitboard
+
+# Forge — civilian FSG tier 4 doctrine pair (Riptide + Anvil); ultra-rare on drone fracture disks vs 900P / T3
+- type: entity
+  parent: TechDiskBase
+  id: TechDiskForgeFSGT4Specialists
+  name: Forge FSG tier 4 specialist tech disk
+  description: A disk that adds the FSG-870R Riptide and FSG-950M Anvil shield boards to a server's imprinter recipes. Vanishingly rare salvage — most crews never see one.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base"]
+      color: "#7dd3c0"
+    - state: label
+    - state: protect
+    - state: holo
+      shader: unshaded
+  - type: TechnologyDisk
+    recipes:
+    - MachineShieldFSG870RCircuitboard
+    - MachineShieldFSG950MCircuitboard
 
 - type: entity
   parent: TechDiskBase

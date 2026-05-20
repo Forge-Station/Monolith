@@ -1,8 +1,8 @@
 using System.Numerics;
 using Content.Shared._Mono.Radar;
+using Content.Shared.Projectiles;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Client._Mono.Radar;
 
@@ -21,6 +21,9 @@ public sealed partial class RadarBlipsSystem : EntitySystem
     private List<HitscanNetData> _hitscans = new();
     private List<BlipConfig> _configPalette = new();
 
+    // Forge-Change: blips removed locally on hit; ignore until server drops them from reports.
+    private readonly HashSet<NetEntity> _suppressedBlips = new();
+
     // cached results to avoid allocating on every draw/frame
     private readonly List<BlipData> _cachedBlipData = new();
 
@@ -29,21 +32,76 @@ public sealed partial class RadarBlipsSystem : EntitySystem
         base.Initialize();
         SubscribeNetworkEvent<GiveBlipsEvent>(HandleReceiveBlips);
         SubscribeNetworkEvent<BlipRemovalEvent>(RemoveBlip);
+        // Forge-Change: hide blip on local hit before server sends BlipRemovalEvent / next report.
+        SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
     }
 
     private void HandleReceiveBlips(GiveBlipsEvent ev, EntitySessionEventArgs args)
     {
         _configPalette = ev.ConfigPalette;
-        _blips = ev.Blips;
         _hitscans = ev.HitscanLines;
         _lastUpdatedTime = _timing.CurTime;
+
+        // Forge-Change-Start
+        _blips.Clear();
+        foreach (var blip in ev.Blips)
+        {
+            if (!_suppressedBlips.Contains(blip.Uid))
+                _blips.Add(blip);
+        }
+
+        PruneSuppressedBlips(ev.Blips);
+        // Forge-Change-End
     }
 
     private void RemoveBlip(BlipRemovalEvent args)
     {
-        var blipid = _blips.FirstOrDefault(x => x.Uid == args.NetBlipUid);
-        _blips.Remove(blipid);
+        SuppressBlip(args.NetBlipUid);
     }
+
+    // Forge-Change-Start
+    private void OnProjectileHit(EntityUid uid, ProjectileComponent component, ref ProjectileHitEvent args)
+    {
+        SuppressBlip(GetNetEntity(uid));
+    }
+
+    private void SuppressBlip(NetEntity netUid)
+    {
+        if (!_suppressedBlips.Add(netUid))
+            return;
+
+        RemoveBlipByNetEntity(netUid);
+    }
+
+    private void RemoveBlipByNetEntity(NetEntity netUid)
+    {
+        for (var i = _blips.Count - 1; i >= 0; i--)
+        {
+            if (_blips[i].Uid == netUid)
+            {
+                _blips.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    private void PruneSuppressedBlips(List<BlipNetData> incoming)
+    {
+        if (_suppressedBlips.Count == 0)
+            return;
+
+        _suppressedBlips.RemoveWhere(net =>
+        {
+            foreach (var blip in incoming)
+            {
+                if (blip.Uid == net)
+                    return false;
+            }
+
+            return true;
+        });
+    }
+    // Forge-Change-End
 
     public void RequestBlips(EntityUid console)
     {
@@ -72,15 +130,20 @@ public sealed partial class RadarBlipsSystem : EntitySystem
         if (_timing.CurTime.TotalSeconds - _lastUpdatedTime.TotalSeconds > BlipStaleSeconds)
             return _cachedBlipData;
 
+        var packetAge = (float) (_timing.CurTime - _lastUpdatedTime).TotalSeconds;
+
         // populate the cached list instead of allocating a new one each frame
         foreach (var blip in _blips)
         {
+            if (_suppressedBlips.Contains(blip.Uid))
+                continue;
+
             var coord = GetCoordinates(blip.Position);
 
             if (!coord.IsValid(EntityManager))
                 continue;
 
-            var predictedPos = new EntityCoordinates(coord.EntityId, coord.Position + blip.Vel * (float)(_timing.CurTime - _lastUpdatedTime).TotalSeconds);
+            var predictedPos = new EntityCoordinates(coord.EntityId, coord.Position + blip.Vel * packetAge);
 
             var predictedMap = _xform.ToMapCoordinates(predictedPos);
 

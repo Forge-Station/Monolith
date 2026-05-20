@@ -319,7 +319,7 @@
   - type: Icon
     sprite: Structures/Walls/plastitanium.rsi
   - type: IconSmooth
-    key: plastitaniumwalls # Mono
+    key: walls
     base: plastitanium
   - type: Fixtures
     fixtures:
@@ -399,7 +399,7 @@
     state: state0
   - type: IconSmooth
     mode: Diagonal
-    key: plastitaniumwalls
+    key: walls
     base: state
   - type: Icon
     sprite: Structures/Walls/plastitanium_diagonal.rsi
@@ -443,7 +443,7 @@
     graph: Girder
     node: reinforcedWall
   - type: IconSmooth
-    key: reinforcedwalls # Mono
+    key: walls
     base: reinf_over
   - type: Appearance
   - type: GenericVisualizer
@@ -494,7 +494,7 @@
     graph: Girder
     node: reinforcedWallRust
   - type: IconSmooth
-    key: reinforcedwalls # Mono
+    key: walls
     base: reinf_over
   - type: RCDDeconstructable #Frontier
     cost: 6 #Frontier
@@ -520,7 +520,7 @@
     state: state0
   - type: IconSmooth
     mode: Diagonal
-    key: reinforcedwalls # Mono
+    key: walls
     base: state
   - type: Icon
     sprite: Structures/Walls/reinforced_diagonal.rsi
@@ -643,7 +643,7 @@
     state: state0
   - type: IconSmooth
     mode: Diagonal
-    key: exteriorshuttlewalls # Mono
+    key: walls
     base: state
   - type: Icon
     sprite: Structures/Walls/shuttle_diagonal.rsi
@@ -701,7 +701,7 @@
     graph: Girder
     node: shuttleWall
   - type: IconSmooth
-    key: exteriorshuttlewalls # Mono
+    key: walls
     base: state
   - type: Appearance
   - type: GenericVisualizer
@@ -753,7 +753,7 @@
     graph: Girder
     node: shuttleInteriorWall
   - type: IconSmooth
-    key: interiorshuttlewalls # Mono
+    key: walls
     base: state
 #  - type: Reflect # Frontier
 #    reflectProb: 1 # Frontier
@@ -779,7 +779,7 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: solidwalls # Mono
+    key: walls
     base: solid
 
 - type: entity
@@ -798,7 +798,7 @@
     state: state0
   - type: IconSmooth
     mode: Diagonal
-    key: solidwalls # Mono
+    key: walls
     base: state
   - type: Icon
     sprite: Structures/Walls/solid_diagonal.rsi
@@ -845,7 +845,7 @@
     graph: Girder
     node: wallrust
   - type: IconSmooth
-    key: solidwalls # Mono
+    key: walls
     base: solid
 
 - type: entity
@@ -1047,7 +1047,7 @@
   - type: Icon
     sprite: Structures/Walls/mining.rsi
   - type: IconSmooth
-    key: miningwalls # Mono
+    key: walls
     base: mining
   - type: RandomIconSmooth
     randomStates:
@@ -1071,7 +1071,7 @@
     state: state0
   - type: IconSmooth
     mode: Diagonal
-    key: miningwalls # Mono
+    key: walls
     base: state
   - type: Icon
     sprite: Structures/Walls/mining_diagonal.rsi

@@ -1,6 +1,7 @@
 # Base entries
 guide-entry-nf14 = Frontier Guide
 guide-entry-shield-generators = Ship Shield Generators
+guide-entry-shield-generators-table = Ship shields — full stat table
 guide-entry-shield-generators-fsg = FSG — Civil Shields
 guide-entry-shield-generators-tsfmc = TSFMC
 guide-entry-shield-generators-ussp = Union (USSP)

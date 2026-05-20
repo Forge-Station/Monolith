@@ -6,6 +6,7 @@ using Robust.Client.Input;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -84,7 +85,7 @@ namespace Content.Client.NodeContainer
             var xform = _entityManager.GetComponent<TransformComponent>(_entityManager.GetEntity(node.Entity));
             if (!_entityManager.TryGetComponent<MapGridComponent>(xform.GridUid, out var grid))
                 return;
-            var gridTile = grid.TileIndicesFor(xform.Coordinates);
+            var gridTile = _entityManager.System<SharedMapSystem>().TileIndicesFor(xform.GridUid.Value, grid, xform.Coordinates);
 
             var sb = new StringBuilder();
             sb.Append($"entity: {node.Entity}\n");
@@ -133,7 +134,7 @@ namespace Content.Client.NodeContainer
                     if (float.IsNaN(coords.Position.X) || float.IsNaN(coords.Position.Y))
                         continue;
 
-                    var tile = gridDict.GetOrNew(grid.Comp.TileIndicesFor(coords));
+                    var tile = gridDict.GetOrNew(_entityManager.System<SharedMapSystem>().TileIndicesFor(grid, coords));
 
                     foreach (var (group, nodeDatum) in nodeData)
                     {

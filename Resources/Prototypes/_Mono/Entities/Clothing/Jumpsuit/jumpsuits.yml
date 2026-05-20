@@ -195,16 +195,16 @@
 
 # Trauma Armed Forces
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1
   id: ClothingUniformJumpsuitATU
   name: armed trauma unit jumpsuit
   suffix: TTI # Forge
   description: Standard fatigues of the Armed Trauma Unit.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/trauma.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_suit.rsi # Forge-change
   - type: Clothing
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/trauma.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_suit.rsi # Forge-change
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals

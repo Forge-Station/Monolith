@@ -10,3 +10,33 @@
     sprite: Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
   - type: Clothing
     sprite: Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
+# Trauma Team
+- type: entity
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1
+  id: ClothingUniformJumpskirtTraumaBlue
+  suffix: TTI 
+  name: trauma armed forces jumpskirt
+  description: Standard fatigues of the Trauma Armed Forces.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/tti_skirt_blue.rsi # Forge-change
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/tti_skirt_blue.rsi # Forge-change
+  - type: SuitSensor
+    randomMode: false
+    mode: SensorVitals
+# Harmony Medical Enterprises company
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtHME
+  name: HME jumpskirt
+  description: HME-jumpskirt-desc
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/hme_skirt.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/hme_skirt.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 250

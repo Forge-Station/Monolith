@@ -151,7 +151,7 @@
   technologyPrerequisites:
   - NanotrasenArmorT4
   - UniversalMaterialResearchT3
-  position: 13, 10
+  position: 14, 10
   
 - type: technology
   id: NanotrasenWeaponT1
@@ -166,7 +166,7 @@
   - WeaponFlareGunSecurity
   technologyPrerequisites:
   - UniversalMaterialResearchT1
-  position: 15, 9
+  position: 18, 10
 
 - type: technology
   id: NanotrasenWeaponT2
@@ -174,13 +174,13 @@
   entityIcon: WeaponRevolverMateba
   discipline: Nanotrasen
   tier: 2
-  cost: 50000
+  cost: 30000
   recipeUnlocks:
   - WeaponPistolN1984
   - WeaponRevolverMateba
   technologyPrerequisites:
   - NanotrasenWeaponT1
-  position: 16, 9
+  position: 19, 10
   
 - type: technology
   id: NanotrasenWeaponT3
@@ -196,7 +196,7 @@
   technologyPrerequisites:
   - NanotrasenWeaponT2
   - UniversalMaterialResearchT2
-  position: 17, 9
+  position: 20, 10
 
 - type: technology
   id: NanotrasenWeaponT4
@@ -210,7 +210,7 @@
   - WeaponEnergyShotgun
   technologyPrerequisites:
   - NanotrasenWeaponT3
-  position: 18, 8
+  position: 21, 9
   
 - type: technology
   id: NanotrasenWeaponT5
@@ -227,8 +227,9 @@
   - Magazine45_magnumPistolHighCapacityEmpty
   technologyPrerequisites:
   - NanotrasenWeaponT3
-  position: 18, 9
-  
+  - UniversalMaterialResearchT3
+  position: 21, 10
+
 - type: technology
   id: NanotrasenWeaponT6
   name: research-technology-nanotrasen-weapon-equipment-t6
@@ -245,7 +246,7 @@
   - CartridgeMPSSMMissile
   technologyPrerequisites:
   - NanotrasenWeaponT3
-  position: 18, 10
+  position: 21, 11
   
 - type: technology
   id: NanotrasenWeaponT7
@@ -262,8 +263,7 @@
   - NanotrasenWeaponT4
   - NanotrasenWeaponT5
   - NanotrasenWeaponT6
-  - UniversalMaterialResearchT3
-  position: 19, 9
+  position: 22, 10
 
 - type: technology
   id: TTItechGypoT1
@@ -299,10 +299,10 @@
   entityIcon: MedicatedSuture
   discipline: Nanotrasen
   tier: 1
-  cost: 50000
+  cost: 20000
   recipeUnlocks:
-  - MedicatedSuture
-  - RegenerativeMesh
+  - BrutepackAdvanced1
+  - OintmentAdvanced1
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 18, -1
@@ -313,7 +313,7 @@
   entityIcon: OmnizineChemistryBottle
   discipline: Nanotrasen
   tier: 1
-  cost: 90000
+  cost: 50000
   recipeUnlocks:
   - OmnizineChemistryBottle
   technologyPrerequisites:

@@ -51,24 +51,24 @@
     Silver: 3000
     Gold: 3000
     Plastic: 4000
-    UraniumDepleted: 300
+    UraniumDepleted: 100
     
 - type: latheRecipe
   parent: BaseToolRecipe
-  id: MedicatedSuture
-  result: MedicatedSuture
+  id: BrutepackAdvanced1
+  result: BrutepackAdvanced1
   completetime: 3
   materials:
-    Steel: 3250
-    Plastic: 3250
+    Steel: 1000
+    Plastic: 1000
     
 - type: latheRecipe
   parent: BaseToolRecipe
-  id: RegenerativeMesh
-  result: RegenerativeMesh
+  id: OintmentAdvanced1
+  result: OintmentAdvanced1
   completetime: 3
   materials:
-    Glass: 3250
-    Plastic: 3250
+    Glass: 1000
+    Plastic: 1000
     
 

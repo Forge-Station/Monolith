@@ -32,9 +32,10 @@ public sealed partial class RequirePanelSystem : EntitySystem
         if (slot == null)
             return false;
 
+        // Forge-Change: was `return false` — blocked inserting items into foreign slots (e.g. gas canister tank_slot on modsuits).
         // If slot not require wire panel - don't cancel interaction
         if (!comp.Slots.TryGetValue(slot, out var isRequireOpen))
-            return false;
+            return true;
 
         if (!TryComp<WiresPanelComponent>(uid, out var wiresPanel))
             return false;

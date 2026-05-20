@@ -1,0 +1,22 @@
+- type: entity
+  parent: Omnitool
+  id: OmnitoolModsuitGauntlet
+  name: omnitool
+  description: A drone's best friend.
+  components:
+  - type: NetworkConfigurator
+  - type: ActivatableUI
+    key: enum.NetworkConfiguratorUiKey.List
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.NetworkConfiguratorUiKey.List:
+        type: NetworkConfiguratorBoundUserInterface
+      enum.NetworkConfiguratorUiKey.Configure:
+        type: NetworkConfiguratorBoundUserInterface
+      enum.NetworkConfiguratorUiKey.Link:
+        type: NetworkConfiguratorBoundUserInterface
+  - type: Tag
+    tags:
+    - Multitool
+    - DoorElectronicsConfigurator

@@ -22,9 +22,6 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
-  - type: HumanoidAppearance
-    height: 1.2
-    width: 1.25
   - type: Loadout
     prototypes: [AsakimWarriorGear]
   - type: GhostRole

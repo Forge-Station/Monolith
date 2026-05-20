@@ -2,10 +2,10 @@ meta:
   format: 7
   category: Grid
   engineVersion: 275.1.0
-  forkId: frontier_mapping
-  forkVersion: 49b49bdbc5e50bc03bdab9f42c6ced6dddb578d3
-  time: 05/12/2026 13:05:45
-  entityCount: 1671
+  forkId: ""
+  forkVersion: ""
+  time: 05/20/2026 19:12:21
+  entityCount: 1690
 maps: []
 grids:
 - 1
@@ -113,10 +113,10 @@ entities:
     - type: ThermalSignature
     - type: SpreaderGrid
       spreadQueues:
-        Smoke: []
-        Kudzu: []
-        Puddle: []
         MetalFoam: []
+        Smoke: []
+        Puddle: []
+        Kudzu: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -125,7 +125,7 @@ entities:
         path: /Audio/Effects/alert.ogg
     - type: DecalGrid
       chunkCollection:
-        version: 3
+        version: 2
         nodes:
         - node:
             color: '#FFFFFFFF'
@@ -503,208 +503,219 @@ entities:
       data:
         tiles:
           0,0:
-            0: 61149
+            0: 17
+            1: 61132
           0,-1:
-            0: 57086
+            0: 4096
+            1: 52990
           -1,0:
-            0: 65382
+            1: 65382
           0,1:
-            0: 61390
+            2: 16
+            1: 61390
           -1,1:
-            0: 65391
+            1: 65391
           0,2:
-            0: 16390
-            1: 512
+            1: 16390
+            2: 512
           -1,2:
-            0: 16652
-            1: 2048
+            1: 16652
+            2: 2048
           0,3:
-            0: 4
-            1: 32768
+            1: 32772
           1,0:
-            0: 4556
-            2: 2048
+            1: 4556
+            3: 2048
           1,1:
-            0: 30465
-            1: 2048
+            1: 32513
           1,2:
-            0: 8456
-            2: 672
+            1: 8456
+            3: 672
           1,3:
-            2: 64
+            3: 64
           1,4:
-            0: 1638
+            1: 1638
           1,-1:
-            2: 49160
-            0: 273
+            3: 49160
+            1: 273
           2,0:
-            2: 768
-            0: 12492
+            3: 768
+            1: 12492
           2,1:
-            0: 34947
-            1: 1024
+            1: 35971
           2,2:
-            0: 3267
-            2: 49696
+            1: 3267
+            3: 49696
           2,-1:
-            2: 49156
+            3: 49156
           2,3:
-            2: 64
-            0: 2048
+            3: 64
+            1: 2048
           3,0:
-            1: 4096
-            0: 3276
+            1: 7372
           3,1:
-            0: 13104
-            1: 1024
+            1: 14128
           3,3:
-            0: 272
-            2: 8192
+            1: 272
+            3: 8192
           3,2:
-            0: 18440
+            1: 18440
           0,-2:
-            0: 49159
+            1: 49159
           -1,-2:
-            0: 12
-            1: 24576
+            1: 24588
           -1,-1:
-            0: 28671
+            1: 28671
           0,-3:
-            2: 1604
-            0: 24712
+            3: 1604
+            1: 24712
           0,-4:
-            2: 17412
-            0: 32768
+            3: 17412
+            1: 32768
           0,-5:
-            2: 17472
-            0: 34944
+            3: 17472
+            1: 34944
           1,-4:
-            0: 4224
-            2: 32768
+            1: 4224
+            3: 32768
           1,-3:
-            0: 3273
-            2: 32768
+            1: 3273
+            3: 32768
           1,-5:
-            0: 5378
+            1: 5378
           1,-2:
-            0: 19648
-            2: 32768
+            1: 19648
+            3: 32768
           2,-4:
-            0: 64
-            2: 16384
+            1: 64
+            3: 16384
           2,-3:
-            0: 3268
-            2: 16384
+            1: 3268
+            3: 16384
           2,-2:
-            0: 36032
-            2: 16384
+            1: 36032
+            3: 16384
           3,-4:
-            0: 528
+            1: 528
           3,-2:
-            0: 1638
+            1: 1638
           3,-3:
-            0: 1024
+            1: 1024
           3,-1:
-            0: 3276
+            1: 3276
           -4,-1:
-            0: 1638
+            1: 1638
           -4,0:
-            0: 1638
+            1: 1638
           -4,-3:
-            0: 1024
+            1: 1024
           -4,-2:
-            0: 3276
+            1: 3276
           -4,-4:
-            0: 2048
+            1: 2048
           -3,-4:
-            0: 80
-            2: 16384
+            1: 80
+            3: 16384
           -3,-3:
-            0: 1636
-            2: 16384
+            1: 1636
+            3: 16384
           -3,-2:
-            0: 9824
-            2: 16384
+            1: 9824
+            3: 16384
           -3,-1:
-            2: 24580
+            3: 24580
           -3,0:
-            0: 32870
-            1: 4096
-            2: 2048
+            1: 36966
+            3: 2048
           -2,-4:
-            0: 32
-            2: 8192
+            1: 32
+            3: 8192
           -2,-3:
-            0: 1634
-            2: 8192
+            1: 1634
+            3: 8192
           -2,-2:
-            0: 18016
-            2: 8192
+            1: 18016
+            3: 8192
           -2,-1:
-            2: 24578
+            3: 24578
           -2,0:
-            0: 4198
-            2: 768
+            1: 4198
+            3: 768
           -1,-4:
-            0: 12288
-            2: 17412
+            1: 12288
+            3: 17412
           -1,-3:
-            0: 49187
-            2: 3140
+            1: 49187
+            3: 3140
           -1,-5:
-            0: 13088
-            2: 17472
+            1: 13088
+            3: 17472
           -4,1:
-            1: 1024
-            0: 34944
+            1: 35968
           -4,2:
-            0: 16898
+            1: 16898
           -3,1:
-            0: 13112
-            1: 1024
+            1: 14136
           -3,3:
-            2: 848
+            3: 848
           -4,3:
-            2: 32768
+            3: 32768
           -3,2:
-            0: 1640
-            2: 26752
+            1: 1640
+            3: 26752
           -2,1:
-            0: 52225
-            1: 512
+            1: 52737
           -2,2:
-            0: 32771
-            2: 2208
+            1: 32771
+            3: 2208
           -2,3:
-            2: 64
+            3: 64
           -2,4:
-            0: 3276
+            1: 3276
           -1,3:
-            1: 8192
-            0: 4
+            1: 8196
           0,-6:
-            0: 192
+            1: 192
           1,-6:
-            0: 512
+            1: 512
           -2,-5:
-            0: 1032
+            1: 1032
           -2,-6:
-            0: 2048
+            1: 2048
           -1,-6:
-            0: 96
+            1: 96
           -2,5:
-            0: 132
+            1: 132
           -1,4:
-            0: 26624
+            1: 26624
           -1,5:
-            0: 22118
+            1: 22118
           0,4:
-            0: 49664
+            1: 49664
           0,5:
-            0: 19660
+            1: 19660
           1,5:
-            0: 4132
+            1: 4132
         uniqueMixes:
+        - volume: 2500
+          temperature: 293.15
+          moles:
+          - 0
+          - 0
+          - 0
+          - 6666.982
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
         - volume: 2500
           temperature: 293.15
           moles:
@@ -2674,21 +2685,6 @@ entities:
     - type: Transform
       pos: -0.5,2.5
       parent: 1
-  - uid: 1632
-    components:
-    - type: Transform
-      pos: 0.5,1.5
-      parent: 1
-  - uid: 1633
-    components:
-    - type: Transform
-      pos: 0.5,-0.5
-      parent: 1
-  - uid: 1634
-    components:
-    - type: Transform
-      pos: 0.5,0.5
-      parent: 1
   - uid: 1635
     components:
     - type: Transform
@@ -2863,6 +2859,113 @@ entities:
     components:
     - type: Transform
       pos: 1.5,4.5
+      parent: 1
+  - uid: 1673
+    components:
+    - type: Transform
+      pos: -1.5,-4.5
+      parent: 1
+  - uid: 1674
+    components:
+    - type: Transform
+      pos: -2.5,-4.5
+      parent: 1
+  - uid: 1675
+    components:
+    - type: Transform
+      pos: -9.5,6.5
+      parent: 1
+  - uid: 1676
+    components:
+    - type: Transform
+      pos: -8.5,6.5
+      parent: 1
+  - uid: 1677
+    components:
+    - type: Transform
+      pos: -7.5,6.5
+      parent: 1
+  - uid: 1678
+    components:
+    - type: Transform
+      pos: -6.5,6.5
+      parent: 1
+  - uid: 1679
+    components:
+    - type: Transform
+      pos: -13.5,6.5
+      parent: 1
+  - uid: 1680
+    components:
+    - type: Transform
+      pos: -14.5,6.5
+      parent: 1
+  - uid: 1681
+    components:
+    - type: Transform
+      pos: 14.5,6.5
+      parent: 1
+  - uid: 1682
+    components:
+    - type: Transform
+      pos: 15.5,6.5
+      parent: 1
+  - uid: 1683
+    components:
+    - type: Transform
+      pos: 10.5,6.5
+      parent: 1
+  - uid: 1684
+    components:
+    - type: Transform
+      pos: 9.5,6.5
+      parent: 1
+  - uid: 1685
+    components:
+    - type: Transform
+      pos: 8.5,6.5
+      parent: 1
+  - uid: 1686
+    components:
+    - type: Transform
+      pos: 7.5,6.5
+      parent: 1
+  - uid: 1687
+    components:
+    - type: Transform
+      pos: 12.5,3.5
+      parent: 1
+  - uid: 1688
+    components:
+    - type: Transform
+      pos: -11.5,3.5
+      parent: 1
+  - uid: 1689
+    components:
+    - type: Transform
+      pos: -2.5,15.5
+      parent: 1
+  - uid: 1690
+    components:
+    - type: Transform
+      pos: 3.5,15.5
+      parent: 1
+- proto: AtmosFixPlasmaMarker
+  entities:
+  - uid: 1632
+    components:
+    - type: Transform
+      pos: 0.5,-0.5
+      parent: 1
+  - uid: 1633
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 1634
+    components:
+    - type: Transform
+      pos: 0.5,0.5
       parent: 1
 - proto: BlastDoor
   entities:
@@ -3679,6 +3782,11 @@ entities:
     components:
     - type: Transform
       pos: -1.5,9.5
+      parent: 1
+  - uid: 1672
+    components:
+    - type: Transform
+      pos: 11.5,8.5
       parent: 1
 - proto: CableHV
   entities:
@@ -5235,7 +5343,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 97.5
+      startingCharge: 95
     - type: ApcPowerReceiverBattery
       enabled: True
 - proto: ComputerShuttle
@@ -5248,7 +5356,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 97.5
+      startingCharge: 95
     - type: ShuttleConsoleLock
       locked: False
     - type: Tag
@@ -5674,7 +5782,7 @@ entities:
       pos: 0.5,5.5
       parent: 1
     - type: Battery
-      startingCharge: 1950
+      startingCharge: 1900
     - type: ApcPowerReceiver
       powerLoad: 100
     - type: ApcPowerReceiverBattery

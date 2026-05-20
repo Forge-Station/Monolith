@@ -12732,12 +12732,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -2.5,4.5
       parent: 1
-  - uid: 2253
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 1.5,4.5
-      parent: 1
 - proto: ShieldGenerator
   entities:
   - uid: 2254

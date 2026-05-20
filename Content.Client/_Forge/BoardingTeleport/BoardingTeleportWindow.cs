@@ -31,6 +31,8 @@ public sealed class BoardingTeleportWindow : FancyWindow
     private readonly Button _modePreciseButton;
     private readonly Button _modeRapidButton;
     private readonly Button _clearTargetButton;
+    private readonly Button _syncVolleyButton;
+    private readonly BoxContainer _platformList;
     private readonly BoardingTeleportSectorMapControl _sectorMap;
     private readonly BoardingTeleportLandingMapControl _landingMap;
 
@@ -160,7 +162,22 @@ public sealed class BoardingTeleportWindow : FancyWindow
         _clearTargetButton.OnPressed += _ => _owner.ClearTarget();
         gridTopRow.AddChild(_clearTargetButton);
 
+        _syncVolleyButton = new Button
+        {
+            Text = Loc.GetString("boarding-teleport-window-sync-volley"),
+        };
+        _syncVolleyButton.OnPressed += _ => _owner.SyncVolley();
+        gridTopRow.AddChild(_syncVolleyButton);
+
         _gridPage.AddChild(gridTopRow);
+
+        _platformList = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            Margin = new Thickness(8, 0, 8, 4),
+        };
+        _gridPage.AddChild(_platformList);
 
         _gridPage.AddChild(new Label
         {
@@ -294,6 +311,7 @@ public sealed class BoardingTeleportWindow : FancyWindow
         _platformStatsLabel.FontColorOverride = state.EngineRange is null
             ? Color.FromHex("#FF8888")
             : Color.FromHex("#A8B4C8");
+        UpdatePlatformList(state);
         UpdateModeButtons(state.Mode);
 
         var coordinates = _entManager.GetCoordinates(state.NavState.Coordinates);
@@ -370,7 +388,54 @@ public sealed class BoardingTeleportWindow : FancyWindow
         if (state.ApcRiskBonusPercent > 0.05f)
             parts.Add(Loc.GetString("boarding-teleport-window-apc-risk", ("percent", $"{state.ApcRiskBonusPercent:0}")));
 
+        if (state.LockAgeSeconds > 0.05f)
+            parts.Add(Loc.GetString("boarding-teleport-window-lock-age", ("seconds", $"{state.LockAgeSeconds:0}")));
+
+        if (state.LockScatterPenalty > 0.05f || state.LockRiskPenalty > 0.05f)
+            parts.Add(Loc.GetString("boarding-teleport-window-lock-degrade",
+                ("scatter", $"{state.LockScatterPenalty:0.00}"),
+                ("risk", $"{state.LockRiskPenalty:0}")));
+
         return string.Join(" | ", parts);
+    }
+
+    private void UpdatePlatformList(BoardingTeleportBoundUserInterfaceState state)
+    {
+        _platformList.RemoveAllChildren();
+        if (state.Platforms.Count == 0)
+            return;
+
+        _platformList.AddChild(new Label
+        {
+            Text = Loc.GetString("boarding-teleport-window-platform-list-header"),
+            FontColorOverride = Color.FromHex("#C6CEDA"),
+        });
+
+        foreach (var entry in state.Platforms)
+        {
+            var cooldown = entry.CooldownSeconds is { } cd and > 0.05f
+                ? Loc.GetString("boarding-teleport-window-platform-entry-cooldown", ("seconds", $"{cd:0}"))
+                : Loc.GetString("boarding-teleport-window-platform-entry-ready");
+
+            var landing = entry.HasLanding
+                ? Loc.GetString("boarding-teleport-window-platform-entry-landing-yes")
+                : Loc.GetString("boarding-teleport-window-platform-entry-landing-no");
+
+            var button = new Button
+            {
+                Text = Loc.GetString("boarding-teleport-window-platform-entry",
+                    ("name", entry.Name),
+                    ("slot", entry.SlotIndex + 1),
+                    ("cooldown", cooldown),
+                    ("landing", landing)),
+                HorizontalExpand = true,
+                Modulate = entry.IsSelected ? Color.FromHex("#8DFF99") : Color.White,
+            };
+
+            var slot = entry.SlotIndex;
+            button.OnPressed += _ => _owner.SelectPlatformSlot(slot);
+            _platformList.AddChild(button);
+        }
     }
 
     private float? GetLocalReturnRemainingSeconds()

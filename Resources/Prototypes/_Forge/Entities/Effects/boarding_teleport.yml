@@ -20,6 +20,28 @@
     lifetime: 1.2
 
 - type: entity
+  id: BoardingTeleportWarmupEffectStealth
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    layers:
+    - state: warmup
+      shader: unshaded
+      color: "#4a8ab8aa"
+  - type: PointLight
+    color: "#4a8ab8"
+    radius: 3
+    energy: 0.8
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 1.2
+
+- type: entity
   id: BoardingTeleportWarmupEffectMedium
   categories: [ HideSpawnMenu ]
   components:

@@ -42,6 +42,34 @@ boarding-teleport-status-NoGrid = The console must be installed on a grid.
 boarding-teleport-status-NoEngine = No bluespace engine on this grid. Install an engine on the same shuttle.
 boarding-teleport-status-TargetShielded = Target has active ship shields; bluespace lock denied.
 boarding-teleport-status-TargetInFtl = Target is in FTL transit; cannot establish landing lock.
+boarding-teleport-status-NoEnginePower = Bluespace engine is unpowered.
+boarding-teleport-status-EngineRecharging = Bluespace engine is recharging after a jump.
+boarding-teleport-status-TargetScrambled = Target grid has an active bluespace scrambler; lock denied.
+boarding-teleport-status-TargetFriendly = Cannot teleport to your own grid or a docked friendly vessel.
+boarding-teleport-status-LockExpired = Landing lock has expired. Reconfirm the target in the console.
+
+boarding-teleport-window-sync-volley = Launch all ready platforms
+boarding-teleport-window-lock-age = Lock age: {$seconds}s
+boarding-teleport-window-lock-degrade = Lock drift: +{$scatter} scatter, +{$risk}% risk
+boarding-teleport-window-platform-list-header = Linked platforms
+boarding-teleport-window-platform-entry = Platform {$slot}: {$name} — {$cooldown} | LZ: {$landing}
+boarding-teleport-window-platform-entry-ready = ready
+boarding-teleport-window-platform-entry-cooldown = recharge {$seconds}s
+boarding-teleport-window-platform-entry-landing-yes = set
+boarding-teleport-window-platform-entry-landing-no = default
+
+boarding-teleport-console-volley-none = No platforms are ready to launch.
+boarding-teleport-console-volley-started = Synchronized volley: {$count} platform(s) charging.
+
+boarding-teleport-platform-lock-broken = Bluespace lock broken — target is no longer valid!
+
+boarding-teleport-remote-no-anchor = Return channel inactive.
+boarding-teleport-remote-return-remaining = Return channel: {$seconds}s remaining.
+boarding-teleport-remote-emergency-available = Return channel collapsed — emergency return available (high risk).
+boarding-teleport-remote-return-expired = Return channel permanently lost.
+
+alerts-boarding-teleport-return-name = Return channel
+alerts-boarding-teleport-return-desc = Time remaining to return to your boarding platform.
 
 boarding-teleport-platform-cooldown = The platform is recharging.
 boarding-teleport-platform-pending = The bluespace coil is already charging.
@@ -56,6 +84,16 @@ boarding-teleport-platform-landing-invalid = Landing zone is no longer valid.
 boarding-teleport-platform-home-invalid = Return platform is gone or unreachable. The bluespace anchor collapses.
 boarding-teleport-platform-return-expired = The return channel has collapsed.
 boarding-teleport-platform-charge-cancelled = Bluespace charge aborted.
+
+boarding-teleport-platform-return-started = Return channel opening. Jump in {$seconds} seconds.
+boarding-teleport-platform-emergency-return-started = [color=#ff8866]Emergency return![/color] Unstable jump in {$seconds} seconds.
+
+boarding-teleport-emergency-return-confirm-title = Emergency bluespace return
+boarding-teleport-emergency-return-confirm-button = Emergency return
+boarding-teleport-emergency-return-confirm-message = [color=#ffd27f]The return channel has collapsed.[/color] You can attempt a one-time emergency jump back to your platform. [bullet/] Charge time: [color=#ffae63]{$seconds} seconds[/color] [bullet/] Destabilization risk: [color=#ff6868]{$risk}%[/color] [bullet/] Landing scatter: [color=#ff6868]{$scatter} tiles[/color] [bullet/] Failure may [color=#ff6868]stun[/color] you and scramble your position. This option can only be used once. Proceed only if you are stranded.
+boarding-teleport-emergency-return-cancelled = Emergency return aborted.
+boarding-teleport-emergency-return-pending = Confirm or cancel the emergency return window first.
+boarding-teleport-emergency-return-no-session = Cannot open the emergency return window right now.
 
 boarding-teleport-port-name = Teleport
 boarding-teleport-port-description = Activates the linked teleport platform.

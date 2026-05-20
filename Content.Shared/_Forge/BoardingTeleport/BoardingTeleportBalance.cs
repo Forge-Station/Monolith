@@ -120,4 +120,24 @@ public static class BoardingTeleportBalance
 
         return (1f - ratio) * BoardingTeleportConstants.ApcUnderloadRiskFactor;
     }
+
+    public static float ApplyLockScatterPenalty(float scatterRadius, float lockScatterPenalty)
+    {
+        return scatterRadius + MathF.Max(0f, lockScatterPenalty);
+    }
+
+    public static float ApplyScramblerScatterBonus(float scatterRadius, float scramblerScatterBonus)
+    {
+        return scatterRadius + MathF.Max(0f, scramblerScatterBonus);
+    }
+
+    public static float ApplyLockRiskPenalty(float chance, float lockRiskPenalty)
+    {
+        return Math.Clamp(chance + MathF.Max(0f, lockRiskPenalty), BoardingTeleportConstants.MinDestabilizationChance, BoardingTeleportConstants.MaxDestabilizationChance);
+    }
+
+    public static float ApplyScramblerRiskBonus(float chance, float scramblerRiskBonus)
+    {
+        return Math.Clamp(chance + MathF.Max(0f, scramblerRiskBonus), BoardingTeleportConstants.MinDestabilizationChance, BoardingTeleportConstants.MaxDestabilizationChance);
+    }
 }

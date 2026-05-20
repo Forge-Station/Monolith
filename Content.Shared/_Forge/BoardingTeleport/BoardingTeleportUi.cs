@@ -22,6 +22,11 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
     public readonly float ReturnWindowSeconds;
     public readonly float? EngineRange;
     public readonly float? EngineMaxTargetVelocity;
+    public readonly float LockAgeSeconds;
+    public readonly float LockScatterPenalty;
+    public readonly float LockRiskPenalty;
+    public readonly int SelectedPlatformSlot;
+    public readonly List<BoardingTeleportPlatformUiEntry> Platforms;
 
     public BoardingTeleportBoundUserInterfaceState(
         BoardingTeleportPage page,
@@ -38,7 +43,12 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
         float? platformCooldownSeconds,
         float returnWindowSeconds,
         float? engineRange,
-        float? engineMaxTargetVelocity)
+        float? engineMaxTargetVelocity,
+        float lockAgeSeconds,
+        float lockScatterPenalty,
+        float lockRiskPenalty,
+        int selectedPlatformSlot,
+        List<BoardingTeleportPlatformUiEntry> platforms)
     {
         Page = page;
         NavState = navState;
@@ -55,6 +65,11 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
         ReturnWindowSeconds = returnWindowSeconds;
         EngineRange = engineRange;
         EngineMaxTargetVelocity = engineMaxTargetVelocity;
+        LockAgeSeconds = lockAgeSeconds;
+        LockScatterPenalty = lockScatterPenalty;
+        LockRiskPenalty = lockRiskPenalty;
+        SelectedPlatformSlot = selectedPlatformSlot;
+        Platforms = platforms;
     }
 }
 
@@ -115,6 +130,22 @@ public sealed class BoardingTeleportSelectModeMessage : BoundUserInterfaceMessag
 }
 
 [Serializable, NetSerializable]
+public sealed class BoardingTeleportSelectPlatformSlotMessage : BoundUserInterfaceMessage
+{
+    public readonly int SlotIndex;
+
+    public BoardingTeleportSelectPlatformSlotMessage(int slotIndex)
+    {
+        SlotIndex = slotIndex;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class BoardingTeleportSyncVolleyMessage : BoundUserInterfaceMessage
+{
+}
+
+[Serializable, NetSerializable]
 public enum BoardingTeleportUiKey : byte
 {
     Key,
@@ -139,8 +170,13 @@ public enum BoardingTeleportStatus : byte
     InvalidLanding,
     NoGrid,
     NoEngine,
+    NoEnginePower,
+    EngineRecharging,
     TargetShielded,
     TargetInFtl,
+    TargetScrambled,
+    TargetFriendly,
+    LockExpired,
 }
 
 [Serializable, NetSerializable]

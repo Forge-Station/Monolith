@@ -15,6 +15,7 @@
   - type: DeviceLinkSource
     ports:
     - Pressed
+  - type: BoardingTeleportRemote
   - type: StaticPrice
     price: 250
 

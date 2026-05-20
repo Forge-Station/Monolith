@@ -42,6 +42,34 @@ boarding-teleport-status-NoGrid = Консоль должна быть уста�
 boarding-teleport-status-NoEngine = На этом гриде нет блюспейс-двигателя. Установите двигатель на том же шаттле, что и консоль.
 boarding-teleport-status-TargetShielded = У цели активны корабельные щиты; блюспейс-замок невозможен.
 boarding-teleport-status-TargetInFtl = Цель в FTL-переходе; точку высадки зафиксировать нельзя.
+boarding-teleport-status-NoEnginePower = Блюспейс-двигатель не запитан.
+boarding-teleport-status-EngineRecharging = Блюспейс-двигатель перезаряжается после скачка.
+boarding-teleport-status-TargetScrambled = На целевом гриде активен блюспейс-глушитель; замок невозможен.
+boarding-teleport-status-TargetFriendly = Нельзя телепортироваться на свой грид или пристыкованное дружественное судно.
+boarding-teleport-status-LockExpired = Замок высадки устарел. Подтвердите цель в консоли заново.
+
+boarding-teleport-window-sync-volley = Отправить все готовые платформы
+boarding-teleport-window-lock-age = Возраст замка: {$seconds}с
+boarding-teleport-window-lock-degrade = Дрейф замка: +{$scatter} разброс, +{$risk}% риск
+boarding-teleport-window-platform-list-header = Связанные платформы
+boarding-teleport-window-platform-entry = Платформа {$slot}: {$name} — {$cooldown} | LZ: {$landing}
+boarding-teleport-window-platform-entry-ready = готова
+boarding-teleport-window-platform-entry-cooldown = перезарядка {$seconds}с
+boarding-teleport-window-platform-entry-landing-yes = задана
+boarding-teleport-window-platform-entry-landing-no = общая
+
+boarding-teleport-console-volley-none = Нет готовых платформ для запуска.
+boarding-teleport-console-volley-started = Синхронный залп: заряжается платформ — {$count}.
+
+boarding-teleport-platform-lock-broken = Блюспейс-замок сорван — цель больше недействительна!
+
+boarding-teleport-remote-no-anchor = Канал возврата неактивен.
+boarding-teleport-remote-return-remaining = Канал возврата: осталось {$seconds}с.
+boarding-teleport-remote-emergency-available = Канал возврата обрушился — доступен экстренный возврат (высокий риск).
+boarding-teleport-remote-return-expired = Канал возврата безвозвратно потерян.
+
+alerts-boarding-teleport-return-name = Канал возврата
+alerts-boarding-teleport-return-desc = Оставшееся время для возврата на платформу.
 
 boarding-teleport-platform-cooldown = Платформа перезаряжается.
 boarding-teleport-platform-pending = Блюспейс-катушка уже заряжается.
@@ -56,6 +84,16 @@ boarding-teleport-platform-landing-invalid = Зона высадки больш�
 boarding-teleport-platform-home-invalid = Платформа возврата недоступна. Якорь блюспейса рушится.
 boarding-teleport-platform-return-expired = Канал возврата обрушился.
 boarding-teleport-platform-charge-cancelled = Заряд блюспейса прерван.
+
+boarding-teleport-platform-return-started = Канал возврата открывается. Скачок через {$seconds} сек.
+boarding-teleport-platform-emergency-return-started = [color=#ff8866]Экстренный возврат![/color] Нестабильный скачок через {$seconds} сек.
+
+boarding-teleport-emergency-return-confirm-title = Экстренный блюспейс-возврат
+boarding-teleport-emergency-return-confirm-button = Экстренный возврат
+boarding-teleport-emergency-return-confirm-message = [color=#ffd27f]Канал возврата обрушился.[/color] Доступна одноразовая попытка экстренного скачка на вашу платформу. [bullet/] Время заряда: [color=#ffae63]{$seconds} сек[/color] [bullet/] Риск дестабилизации: [color=#ff6868]{$risk}%[/color] [bullet/] Разброс высадки: [color=#ff6868]{$scatter} клеток[/color] [bullet/] При сбое возможны [color=#ff6868]оглушение[/color] и смещение координат. Воспользоваться можно только один раз. Подтверждайте, только если вы застряли.
+boarding-teleport-emergency-return-cancelled = Экстренный возврат отменён.
+boarding-teleport-emergency-return-pending = Сначала подтвердите или отмените окно экстренного возврата.
+boarding-teleport-emergency-return-no-session = Сейчас нельзя открыть окно экстренного возврата.
 
 boarding-teleport-port-name = Телепорт
 boarding-teleport-port-description = Активирует связанную платформу телепортации.

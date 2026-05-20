@@ -1,35 +1,42 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Forge.BoardingTeleport.Components;
 
-/// <summary>
-/// Bluespace drive for a boarding teleport console. Holds acquisition range and lock tolerances.
-/// Auto-links to a console on the same grid.
-/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BoardingTeleportEngineComponent : Component
 {
-    /// <summary>
-    /// Maximum distance from the operator grid at which a target can be locked.
-    /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float Range = BoardingTeleportConstants.DefaultRange;
 
-    /// <summary>
-    /// Target linear speed above which a bluespace lock is rejected.
-    /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float MaxTargetVelocity = BoardingTeleportConstants.DefaultMaxTargetVelocity;
 
-    /// <summary>
-    /// Target angular speed above which a bluespace lock is rejected.
-    /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float MaxTargetAngularVelocity = BoardingTeleportConstants.DefaultMaxTargetAngularVelocity;
 
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float MinimumTargetMass;
 
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public float JumpCooldown = BoardingTeleportConstants.DefaultEngineJumpCooldown;
+
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public bool BlockFriendlyTargets = true;
+
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public bool ExperimentalPhaseShift;
+
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public bool ExperimentalRiskBoost;
+
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public float VelocityToleranceMultiplier = 1f;
+
     [ViewVariables, AutoNetworkedField]
     public EntityUid? LinkedConsole;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public TimeSpan NextJump = TimeSpan.Zero;
 }

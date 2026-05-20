@@ -71,4 +71,14 @@ public sealed class BoardingTeleportBoundUserInterface : BoundUserInterface
     {
         SendMessage(new BoardingTeleportSelectModeMessage(mode));
     }
+
+    public void SelectPlatformSlot(int slotIndex)
+    {
+        SendMessage(new BoardingTeleportSelectPlatformSlotMessage(slotIndex));
+    }
+
+    public void SyncVolley()
+    {
+        SendMessage(new BoardingTeleportSyncVolleyMessage());
+    }
 }

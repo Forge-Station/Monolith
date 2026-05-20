@@ -6,6 +6,8 @@ public static class BoardingTeleportConstants
     public const float DefaultMaxTargetVelocity = 50f;
     public const float DefaultMaxTargetAngularVelocity = 15f;
 
+    public const int MaxPlatformLandingSlots = 4;
+
     public const float StealthDelayMultiplier = 1.15f;
     public const float PreciseDelayMultiplier = 1.6f;
     public const float RapidDelayMultiplier = 0.65f;
@@ -29,7 +31,24 @@ public static class BoardingTeleportConstants
 
     public const float ExperimentalRiskMultiplier = 1.35f;
     public const float ExperimentalScatterMultiplier = 1.25f;
+    public const float ExperimentalVelocityToleranceMultiplier = 1.25f;
 
     public const int ScatterSampleAttempts = 16;
     public const int PhaseShiftNeighborAttempts = 8;
+
+    public const float LockDegradeIntervalSeconds = 30f;
+    public const float LockDegradeScatterBonus = 0.20f;
+    public const float LockDegradeRiskBonus = 0.03f;
+    public const float LockMaxAgeSeconds = 180f;
+
+    public const float DefaultEngineJumpCooldown = 15f;
+    public const float EmergencyReturnDelay = 3f;
+    public const float EmergencyReturnRisk = 0.40f;
+    public const float EmergencyReturnScatter = 2.5f;
+
+    public const float ScramblerDefaultScatterBonus = 1.5f;
+    public const float ScramblerDefaultRiskBonus = 0.18f;
+
+    public const float ChargeLockCheckIntervalSeconds = 0.5f;
+    public const float DetectionBlipDurationSeconds = 45f;
 }

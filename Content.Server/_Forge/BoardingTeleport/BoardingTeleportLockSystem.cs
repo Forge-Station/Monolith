@@ -1,0 +1,167 @@
+using Content.Server.DeviceNetwork.Systems;
+using Content.Server.Power.EntitySystems;
+using Content.Shared._Forge.BoardingTeleport;
+using Content.Shared._Forge.BoardingTeleport.Components;
+using Content.Shared.Power;
+using Content.Server.Shuttles.Components;
+using Robust.Shared.Map;
+using Robust.Shared.Timing;
+
+namespace Content.Server._Forge.BoardingTeleport;
+
+public sealed class BoardingTeleportLockSystem : EntitySystem
+{
+    [Dependency] private readonly DeviceListSystem _deviceList = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    public void GetLockPenalties(
+        BoardingTeleportConsoleComponent console,
+        out float scatterPenalty,
+        out float riskPenalty,
+        out bool expired)
+    {
+        var age = BoardingTeleportLockDegrade.GetLockAgeSeconds(console.LockEstablishedAt, _timing);
+        var steps = BoardingTeleportLockDegrade.GetDegradeSteps(age);
+        scatterPenalty = BoardingTeleportLockDegrade.GetScatterPenalty(steps);
+        riskPenalty = BoardingTeleportLockDegrade.GetRiskPenalty(steps);
+        expired = BoardingTeleportLockDegrade.IsLockExpired(age);
+    }
+
+    public bool TryGetScramblerEffect(EntityUid targetGrid, out BoardingTeleportScramblerEffect effect)
+    {
+        effect = default;
+        var blocks = false;
+        var scatter = 0f;
+        var risk = 0f;
+
+        var query = EntityQueryEnumerator<BoardingBluespaceScramblerComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var scrambler, out var xform))
+        {
+            if (xform.GridUid != targetGrid || !this.IsPowered(uid, EntityManager))
+                continue;
+
+            if (scrambler.BlockLocks)
+                blocks = true;
+
+            scatter = MathF.Max(scatter, scrambler.ScatterBonus);
+            risk = MathF.Max(risk, scrambler.RiskBonus);
+        }
+
+        if (!blocks && scatter <= 0f && risk <= 0f)
+            return false;
+
+        effect = new BoardingTeleportScramblerEffect
+        {
+            BlocksLock = blocks,
+            ScatterBonus = scatter,
+            RiskBonus = risk,
+        };
+        return true;
+    }
+
+    public bool IsFriendlyTarget(EntityUid scannerGrid, EntityUid targetGrid, bool blockFriendly)
+    {
+        if (!blockFriendly)
+            return false;
+
+        if (scannerGrid == targetGrid)
+            return true;
+
+        return AreGridsDocked(scannerGrid, targetGrid);
+    }
+
+    public bool IsEngineReady(
+        EntityUid engineUid,
+        BoardingTeleportEngineComponent engine,
+        out BoardingTeleportStatus status)
+    {
+        status = BoardingTeleportStatus.None;
+
+        if (!this.IsPowered(engineUid, EntityManager))
+        {
+            status = BoardingTeleportStatus.NoEnginePower;
+            return false;
+        }
+
+        if (_timing.CurTime < engine.NextJump)
+        {
+            status = BoardingTeleportStatus.EngineRecharging;
+            return false;
+        }
+
+        return true;
+    }
+
+    public EntityCoordinates? GetLandingForPlatform(BoardingTeleportConsoleComponent console, int slotIndex)
+    {
+        if (slotIndex >= 0 && slotIndex < console.PlatformLandings.Count &&
+            console.PlatformLandings[slotIndex] is { } netLanding)
+        {
+            return EntityManager.GetCoordinates(netLanding);
+        }
+
+        return slotIndex == 0 ? console.LandingCoordinates : null;
+    }
+
+    public int GetPlatformSlotIndex(EntityUid consoleUid, EntityUid platformUid)
+    {
+        var index = 0;
+        foreach (var device in _deviceList.GetAllDevices(consoleUid))
+        {
+            if (device == platformUid)
+                return index;
+
+            if (HasComp<BoardingTeleportPlatformComponent>(device))
+                index++;
+        }
+
+        return 0;
+    }
+
+    public List<EntityUid> GetOrderedPlatforms(EntityUid consoleUid)
+    {
+        var list = new List<EntityUid>();
+        foreach (var device in _deviceList.GetAllDevices(consoleUid))
+        {
+            if (HasComp<BoardingTeleportPlatformComponent>(device))
+                list.Add(device);
+        }
+
+        return list;
+    }
+
+    public void EnsurePlatformLandings(BoardingTeleportConsoleComponent console, int slotCount)
+    {
+        while (console.PlatformLandings.Count < slotCount)
+            console.PlatformLandings.Add(null);
+
+        if (console.PlatformLandings.Count > BoardingTeleportConstants.MaxPlatformLandingSlots)
+            console.PlatformLandings.RemoveRange(BoardingTeleportConstants.MaxPlatformLandingSlots, console.PlatformLandings.Count - BoardingTeleportConstants.MaxPlatformLandingSlots);
+    }
+
+    public void MarkLockEstablished(BoardingTeleportConsoleComponent console)
+    {
+        console.LockEstablishedAt = _timing.CurTime;
+    }
+
+    private bool AreGridsDocked(EntityUid gridA, EntityUid gridB)
+    {
+        var query = EntityQueryEnumerator<DockingComponent, TransformComponent>();
+        while (query.MoveNext(out var dockUid, out var dock, out var xform))
+        {
+            if (!dock.Docked || dock.DockedWith is not { } otherDockUid)
+                continue;
+
+            var grid = xform.GridUid;
+            var otherGrid = Transform(otherDockUid).GridUid;
+            if (grid == gridA && otherGrid == gridB)
+                return true;
+
+            if (grid == gridB && otherGrid == gridA)
+                return true;
+        }
+
+        return false;
+    }
+}

@@ -75,6 +75,8 @@
       availableModes:
       - SemiAuto
       soundGunshot: /Audio/Weapons/Guns/Gunshots/revolver.ogg
+    - type: BoardingTeleportExperimentalLoot
+      dropChance: 0.12
 
 - type: entity
   parent: MobSyndicateNavalCaptainA

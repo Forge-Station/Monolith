@@ -25,6 +25,8 @@
   cost: 90000
   recipeUnlocks:
   - BoardingTeleportEngineAdvancedFlatpack
+  - BoardingBluespaceScramblerMachineCircuitboard
+  - BoardingBluespaceScramblerFlatpack
   - BoardingTeleportPlatformAdvancedFlatpack
   - BoardingTeleportRemoteFlatpack
   technologyPrerequisites:
@@ -40,6 +42,8 @@
   cost: 120000
   recipeUnlocks:
   - BoardingTeleportPlatformExperimentalFlatpack
+  - BoardingTeleportEngineExperimentalFlatpack
+  - BoardingBluespaceScramblerMachineCircuitboard
   - BoardingTeleportRemote
   - BoardingTeleportConsoleFlatpack
   technologyPrerequisites:

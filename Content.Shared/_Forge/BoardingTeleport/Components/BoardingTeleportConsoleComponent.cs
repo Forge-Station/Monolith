@@ -1,14 +1,13 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Forge.BoardingTeleport.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BoardingTeleportConsoleComponent : Component
 {
-    /// <summary>
-    /// Bluespace engine on the same grid that supplies range and lock parameters.
-    /// </summary>
     [ViewVariables, AutoNetworkedField]
     public EntityUid? LinkedEngine;
 
@@ -26,4 +25,13 @@ public sealed partial class BoardingTeleportConsoleComponent : Component
 
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public BoardingTeleportInsertionMode Mode = BoardingTeleportInsertionMode.Stealth;
+
+    [ViewVariables, AutoNetworkedField]
+    public int SelectedPlatformSlot;
+
+    [ViewVariables, AutoNetworkedField]
+    public List<NetCoordinates?> PlatformLandings = new();
+
+    [ViewVariables, AutoNetworkedField]
+    public TimeSpan? LockEstablishedAt;
 }

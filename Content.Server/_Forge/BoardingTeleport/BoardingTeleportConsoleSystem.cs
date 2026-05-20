@@ -53,7 +53,7 @@ namespace Content.Server._Forge.BoardingTeleport;
 
 
 
-public sealed class BoardingTeleportConsoleSystem : EntitySystem
+public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
 {
 
@@ -78,6 +78,8 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     [Dependency] private readonly BoardingTeleportEngineSystem _engine = default!;
+
+    [Dependency] private readonly BoardingTeleportLockSystem _lock = default!;
 
 
 
@@ -108,6 +110,10 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
         SubscribeLocalEvent<BoardingTeleportConsoleComponent, BoardingTeleportClearTargetMessage>(OnClearTarget);
 
         SubscribeLocalEvent<BoardingTeleportConsoleComponent, BoardingTeleportSelectModeMessage>(OnSelectMode);
+
+        SubscribeLocalEvent<BoardingTeleportConsoleComponent, BoardingTeleportSelectPlatformSlotMessage>(OnSelectPlatformSlot);
+
+        SubscribeLocalEvent<BoardingTeleportConsoleComponent, BoardingTeleportSyncVolleyMessage>(OnSyncVolley);
 
     }
 
@@ -312,19 +318,20 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
 
         if (!TryGetLandingCoordinates(grid, args.Tile, out var coordinates))
-
         {
-
             SetStatus(ent, BoardingTeleportStatus.InvalidLanding);
-
             return;
-
         }
 
+        _lock.EnsurePlatformLandings(ent.Comp, Math.Max(1, _lock.GetOrderedPlatforms(ent.Owner).Count));
+        var slot = Math.Clamp(ent.Comp.SelectedPlatformSlot, 0, BoardingTeleportConstants.MaxPlatformLandingSlots - 1);
+        while (ent.Comp.PlatformLandings.Count <= slot)
+            ent.Comp.PlatformLandings.Add(null);
+        ent.Comp.PlatformLandings[slot] = GetNetCoordinates(coordinates);
+        if (slot == 0)
+            ent.Comp.LandingCoordinates = coordinates;
 
-
-        ent.Comp.LandingCoordinates = coordinates;
-
+        _lock.MarkLockEstablished(ent.Comp);
         ent.Comp.Status = BoardingTeleportStatus.LandingSelected;
 
         Dirty(ent);
@@ -342,7 +349,8 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
         ent.Comp.Page = BoardingTeleportPage.Sector;
 
         ent.Comp.LandingCoordinates = null;
-
+        ent.Comp.PlatformLandings.Clear();
+        ent.Comp.LockEstablishedAt = null;
         ent.Comp.Status = ent.Comp.TargetGrid == null ? BoardingTeleportStatus.None : BoardingTeleportStatus.TargetSelected;
 
         Dirty(ent);
@@ -360,6 +368,8 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
         ent.Comp.TargetGrid = null;
 
         ent.Comp.LandingCoordinates = null;
+        ent.Comp.PlatformLandings.Clear();
+        ent.Comp.LockEstablishedAt = null;
 
         ent.Comp.Page = BoardingTeleportPage.Sector;
 
@@ -455,6 +465,20 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
             engineMaxTargetVelocity = linkedEngine.MaxTargetVelocity;
         }
 
+        _lock.GetLockPenalties(ent.Comp, out var lockScatterPenalty, out var lockRiskPenalty, out _);
+        var displayScatter = GetModeScatter(ent, ent.Comp.Mode);
+        displayScatter = BoardingTeleportBalance.ApplyLockScatterPenalty(displayScatter, lockScatterPenalty);
+        if (ent.Comp.TargetGrid is { } uiTarget && _lock.TryGetScramblerEffect(uiTarget, out var uiScrambler))
+            displayScatter = BoardingTeleportBalance.ApplyScramblerScatterBonus(displayScatter, uiScrambler.ScatterBonus);
+
+        var displayRisk = BoardingTeleportBalance.ComputeDisplayedRiskPercent(ent.Comp.Mode, distanceScale, experimental);
+        displayRisk = BoardingTeleportBalance.ApplyLockRiskPenalty(displayRisk / 100f, lockRiskPenalty) * 100f;
+        if (ent.Comp.TargetGrid is { } uiTargetRisk && _lock.TryGetScramblerEffect(uiTargetRisk, out var uiScramblerRisk))
+            displayRisk = BoardingTeleportBalance.ApplyScramblerRiskBonus(displayRisk / 100f, uiScramblerRisk.RiskBonus) * 100f;
+
+        var lockAge = BoardingTeleportLockDegrade.GetLockAgeSeconds(ent.Comp.LockEstablishedAt, _timing);
+        var platforms = BuildPlatformUiEntries(ent.Owner, ent.Comp);
+
         var state = new BoardingTeleportBoundUserInterfaceState(
 
             ent.Comp.Page,
@@ -473,9 +497,9 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
             GetModeDelay(ent, ent.Comp.Mode),
 
-            GetModeScatter(ent, ent.Comp.Mode),
+            displayScatter,
 
-            BoardingTeleportBalance.ComputeDisplayedRiskPercent(ent.Comp.Mode, distanceScale, experimental),
+            displayRisk,
 
             BoardingTeleportBalance.GetApcRiskBonus(apcRatio) * 100f,
 
@@ -485,7 +509,17 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
             engineRange,
 
-            engineMaxTargetVelocity);
+            engineMaxTargetVelocity,
+
+            lockAge,
+
+            lockScatterPenalty,
+
+            lockRiskPenalty * 100f,
+
+            ent.Comp.SelectedPlatformSlot,
+
+            platforms);
 
 
 
@@ -523,14 +557,20 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
         _engine.TryLinkConsole((consoleUid, console));
 
-        if (!_engine.TryGetLinkedEngine(consoleUid, console, out _, out var engine))
-
-        {
-
-            status = BoardingTeleportStatus.NoEngine;
-
+        if (!TryValidateEngine(consoleUid, console, out status))
             return false;
 
+        _lock.GetLockPenalties(console, out _, out _, out var lockExpired);
+        if (lockExpired)
+        {
+            status = BoardingTeleportStatus.LockExpired;
+            return false;
+        }
+
+        if (!_engine.TryGetLinkedEngine(consoleUid, console, out _, out var engine))
+        {
+            status = BoardingTeleportStatus.NoEngine;
+            return false;
         }
 
 
@@ -599,11 +639,20 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
 
 
-        var scatterRadius = BoardingTeleportBalance.ComputeScatterRadius(mode, distanceScale, platform.ExperimentalScatterControl);
+        var experimentalScatter = platform.ExperimentalScatterControl;
+        if (platform.LinkedConsole is { } linkedConsole &&
+            _engine.TryGetLinkedEngine(linkedConsole, console, out _, out var linkedEngine))
+        {
+            experimentalScatter |= linkedEngine.ExperimentalPhaseShift;
+        }
 
+        ApplyLockAndScramblerToBalance(console, console.TargetGrid, out var lockScatter, out var lockRisk, out var scramScatter, out var scramRisk, out _);
 
+        var scatterRadius = BoardingTeleportBalance.ComputeScatterRadius(mode, distanceScale, experimentalScatter);
+        scatterRadius = BoardingTeleportBalance.ApplyLockScatterPenalty(scatterRadius, lockScatter);
+        scatterRadius = BoardingTeleportBalance.ApplyScramblerScatterBonus(scatterRadius, scramScatter);
 
-        if (platform.ExperimentalScatterControl && TryFindPhaseShiftLanding(center, out landing))
+        if (experimentalScatter && TryFindPhaseShiftLanding(center, out landing))
 
             return true;
 
@@ -634,85 +683,39 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
 
     public bool TryResolveHome(
-
         EntityUid platformUid,
-
         BoardingTeleportPlatformComponent platform,
-
         BoardingTeleportAnchorComponent anchor,
-
         EntityUid user,
-
         out EntityCoordinates home,
-
-        out bool homeUnreachable)
-
+        out bool homeUnreachable,
+        bool allowExpired = false)
     {
-
         home = EntityCoordinates.Invalid;
-
         homeUnreachable = false;
 
-
-
         var homePlatform = GetEntity(anchor.HomePlatform);
-
         if (!Exists(homePlatform))
-
         {
-
             homeUnreachable = true;
-
             return false;
-
         }
 
-
-
         if (homePlatform != platformUid)
-
             return false;
 
-
-
-        if (anchor.ExpiresAt is { } expires && _timing.CurTime >= expires)
-
+        if (!allowExpired && anchor.ExpiresAt is { } expires && _timing.CurTime >= expires)
             return false;
-
-
 
         home = Transform(homePlatform).Coordinates;
 
         if (!home.IsValid(EntityManager) || !Exists(home.EntityId))
-
         {
-
             homeUnreachable = true;
-
             return false;
-
         }
-
-
-
-        var userPos = _transform.GetWorldPosition(user);
-
-        var homePos = _transform.GetWorldPosition(homePlatform);
-
-        if (Vector2.Distance(userPos, homePos) > platform.MaxReturnDistance)
-
-        {
-
-            homeUnreachable = true;
-
-            return false;
-
-        }
-
-
 
         return true;
-
     }
 
 
@@ -947,6 +950,8 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
         BoardingTeleportConsoleComponent? console,
 
+        EntityUid? consoleUid,
+
         EntityUid platformUid,
 
         bool experimental = false)
@@ -973,13 +978,17 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
         if (console != null &&
 
-            _engine.TryGetLinkedEngine(console.Owner, console, out _, out var engine))
+            consoleUid is { } validConsoleUid &&
+
+            _engine.TryGetLinkedEngine(validConsoleUid, console, out _, out var engine))
 
         {
 
-            maxLinear = engine.MaxTargetVelocity;
+            maxLinear = engine.MaxTargetVelocity * engine.VelocityToleranceMultiplier;
 
-            maxAngular = engine.MaxTargetAngularVelocity;
+            maxAngular = engine.MaxTargetAngularVelocity * engine.VelocityToleranceMultiplier;
+
+            experimental |= engine.ExperimentalRiskBoost;
 
             if (console.TargetGrid is { } targetGrid &&
 
@@ -997,7 +1006,7 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
 
 
-        return BoardingTeleportBalance.ComputeDestabilizationChance(
+        var chance = BoardingTeleportBalance.ComputeDestabilizationChance(
 
             mode,
 
@@ -1014,6 +1023,15 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
             maxLinear,
 
             maxAngular);
+
+        if (console != null)
+        {
+            ApplyLockAndScramblerToBalance(console, console.TargetGrid, out _, out var lockRisk, out _, out var scramRisk, out _);
+            chance = BoardingTeleportBalance.ApplyLockRiskPenalty(chance, lockRisk);
+            chance = BoardingTeleportBalance.ApplyScramblerRiskBonus(chance, scramRisk);
+        }
+
+        return chance;
 
     }
 
@@ -1203,6 +1221,26 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
         }
 
+        if (_lock.IsFriendlyTarget(scannerGrid, targetGrid, engine.BlockFriendlyTargets))
+
+        {
+
+            status = BoardingTeleportStatus.TargetFriendly;
+
+            return false;
+
+        }
+
+        if (_lock.TryGetScramblerEffect(targetGrid, out var scrambler) && scrambler.BlocksLock)
+
+        {
+
+            status = BoardingTeleportStatus.TargetScrambled;
+
+            return false;
+
+        }
+
 
 
         if (engine.MinimumTargetMass > 0f &&
@@ -1239,9 +1277,9 @@ public sealed class BoardingTeleportConsoleSystem : EntitySystem
 
         if (TryComp<PhysicsComponent>(targetGrid, out var body) &&
 
-            (body.LinearVelocity.LengthSquared() > engine.MaxTargetVelocity * engine.MaxTargetVelocity ||
+            (body.LinearVelocity.LengthSquared() > MathF.Pow(engine.MaxTargetVelocity * engine.VelocityToleranceMultiplier, 2) ||
 
-             MathF.Abs(body.AngularVelocity) > engine.MaxTargetAngularVelocity))
+             MathF.Abs(body.AngularVelocity) > engine.MaxTargetAngularVelocity * engine.VelocityToleranceMultiplier))
 
         {
 

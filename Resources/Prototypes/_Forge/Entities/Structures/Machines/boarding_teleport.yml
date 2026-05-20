@@ -79,11 +79,24 @@
     range: 300
     maxTargetVelocity: 50
     maxTargetAngularVelocity: 15
+    jumpCooldown: 15
   - type: ApcPowerReceiver
     powerLoad: 15000
   - type: Machine
     board: BoardingTeleportEngineMachineCircuitboard
   - type: CollideOnAnchor
+
+- type: entity
+  parent: BoardingTeleportEngine
+  id: BoardingTeleportEngineExperimental
+  name: experimental bluespace teleport engine
+  description: Phase-shift tuned drive with higher risk tolerance and faster lock recovery.
+  components:
+  - type: BoardingTeleportEngine
+    experimentalPhaseShift: true
+    experimentalRiskBoost: true
+    velocityToleranceMultiplier: 1.25
+    jumpCooldown: 20
 
 - type: entity
   parent: BoardingTeleportEngine
@@ -93,6 +106,52 @@
   components:
   - type: BoardingTeleportEngine
     range: 450
+
+- type: entity
+  id: BoardingBluespaceScrambler
+  parent: [BaseStructureDisableToolUse, ConstructibleMachine, BaseMachinePowered]
+  name: bluespace scrambler
+  description: Disrupts hostile boarding teleports targeting this grid. Blocks locks while powered.
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 200
+        hard: true
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Forge/Structures/Machines/boarding_teleport_engine.rsi
+    layers:
+    - state: plinth
+    - state: ring
+      shader: unshaded
+      color: "#ff6868"
+  - type: BoardingBluespaceScrambler
+    blockLocks: true
+    scatterBonus: 1.5
+    riskBonus: 0.18
+  - type: ApcPowerReceiver
+    powerLoad: 2500
+  - type: Machine
+    board: BoardingBluespaceScramblerMachineCircuitboard
+  - type: CollideOnAnchor
+  - type: PointLight
+    radius: 1.5
+    energy: 1.2
+    color: "#ff6868"
 
 - type: entity
   id: BoardingTeleportPlatform
@@ -215,6 +274,25 @@
   components:
   - type: Flatpack
     entity: BoardingTeleportEngineAdvanced
+
+- type: entity
+  parent: BoardingTeleportEngineFlatpack
+  id: BoardingTeleportEngineExperimentalFlatpack
+  name: experimental bluespace teleport engine flatpack
+  components:
+  - type: Flatpack
+    entity: BoardingTeleportEngineExperimental
+
+- type: entity
+  parent: BaseFlatpack
+  id: BoardingBluespaceScramblerFlatpack
+  name: bluespace scrambler flatpack
+  description: A flatpack used for constructing a bluespace scrambler.
+  components:
+  - type: Flatpack
+    entity: BoardingBluespaceScrambler
+  - type: StaticPrice
+    price: 1800
 
 - type: entity
   parent: BaseFlatpack

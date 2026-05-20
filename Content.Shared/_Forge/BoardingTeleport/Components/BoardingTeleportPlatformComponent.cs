@@ -78,6 +78,27 @@ public sealed partial class BoardingTeleportPlatformComponent : Component
     [ViewVariables, AutoNetworkedField]
     public EntityUid? LinkedConsole;
 
+    [ViewVariables]
+    public EntityUid? PendingConsoleUid;
+
+    [ViewVariables]
+    public BoardingTeleportInsertionMode PendingMode;
+
+    [ViewVariables]
+    public float PendingDistanceScale;
+
+    [ViewVariables]
+    public bool PendingEmergencyReturn;
+
+    [ViewVariables]
+    public bool PendingReturning;
+
+    [ViewVariables]
+    public bool PendingDetectionBlipSpawned;
+
+    [ViewVariables]
+    public float PendingLockCheckAccumulator;
+
     /// <summary>
     /// Landing point locked in when this platform begins charging (per-boarder snapshot).
     /// </summary>

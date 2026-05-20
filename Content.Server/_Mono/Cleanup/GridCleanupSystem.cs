@@ -4,8 +4,10 @@ using Content.Shared._Mono.CCVar;
 using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Server._Mono.Cleanup;
 
@@ -14,9 +16,9 @@ namespace Content.Server._Mono.Cleanup;
 /// </summary>
 public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
 {
-    [Dependency] private readonly CleanupHelperSystem _cleanup = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PricingSystem _pricing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
 
@@ -25,10 +27,18 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
     private int _aggressiveTiles;
     private TimeSpan _duration;
 
+    private int _fragmentMaxTiles;
+    private TimeSpan _fragmentDuration;
+    private float _fragmentMaxValue;
+    private float _fragmentDistance;
+
     private HashSet<Entity<ApcComponent>> _apcList = new();
 
     private EntityQuery<BatteryComponent> _batteryQuery;
     private EntityQuery<CleanupImmuneComponent> _immuneQuery;
+    private EntityQuery<MapComponent> _mapCompQuery;
+    private EntityQuery<MapGridComponent> _gridQuery;
+    private EntityQuery<TransformComponent> _xformQuery;
 
     public override void Initialize()
     {
@@ -36,11 +46,37 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
 
         _batteryQuery = GetEntityQuery<BatteryComponent>();
         _immuneQuery = GetEntityQuery<CleanupImmuneComponent>();
+        _mapCompQuery = GetEntityQuery<MapComponent>();
+        _gridQuery = GetEntityQuery<MapGridComponent>();
+        _xformQuery = GetEntityQuery<TransformComponent>();
 
         Subs.CVar(_cfg, MonoCVars.GridCleanupDistance, val => _maxDistance = val, true);
         Subs.CVar(_cfg, MonoCVars.GridCleanupMaxValue, val => _maxValue = val, true);
         Subs.CVar(_cfg, MonoCVars.GridCleanupDuration, val => _duration = TimeSpan.FromSeconds(val), true);
         Subs.CVar(_cfg, MonoCVars.GridCleanupAggressiveTiles, val => _aggressiveTiles = val, true);
+        Subs.CVar(_cfg, MonoCVars.GridCleanupFragmentMaxTiles, val => _fragmentMaxTiles = val, true);
+        Subs.CVar(_cfg, MonoCVars.GridCleanupFragmentDuration, val => _fragmentDuration = TimeSpan.FromSeconds(val), true);
+        Subs.CVar(_cfg, MonoCVars.GridCleanupFragmentMaxValue, val => _fragmentMaxValue = val, true);
+        Subs.CVar(_cfg, MonoCVars.GridCleanupFragmentDistance, val => _fragmentDistance = val, true);
+    }
+
+    /// <summary>
+    ///     Forge-Change: cheap pre-filter so the scan does not enqueue planetmap grids,
+    ///     grids parented to a planetmap, or immune grids. Cuts the candidate queue down
+    ///     to actual abandoned-grid candidates before the expensive per-item checks run.
+    /// </summary>
+    protected override bool ShouldEnqueue(EntityUid uid)
+    {
+        if (_immuneQuery.HasComp(uid) || _mapCompQuery.HasComp(uid))
+            return false;
+
+        if (!_xformQuery.TryGetComponent(uid, out var xform))
+            return false;
+
+        if (_gridQuery.HasComp(xform.ParentUid))
+            return false;
+
+        return true;
     }
 
     protected override bool ShouldEntityCleanup(EntityUid uid)
@@ -50,25 +86,25 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
         if (!TryComp<MapGridComponent>(uid, out var grid) || !TryComp<PhysicsComponent>(uid, out var body))
             return false;
 
-        var parent = xform.ParentUid;
-
         var state = EnsureComp<GridCleanupGridComponent>(uid);
-
-        var tiles = body.FixturesMass / ShuttleSystem.TileMassMultiplier;
+        var tileCount = CountTiles(uid, grid);
 
         // Forge-Change
         // If a grid lost all of its tiles, delete it immediately so stale
         // systems/components such as IFF cannot linger on an empty grid shell.
-        if (tiles <= 0f)
+        if (tileCount == 0 || body.FixturesMass <= 0f)
             return true;
 
+        if (TryFragmentFastPath(uid, state, xform, tileCount, out var fastDelete))
+            return fastDelete;
+
+        state.FastPathEligibleSince = null;
+
+        var tiles = body.FixturesMass / ShuttleSystem.TileMassMultiplier;
         var scale = MathF.Min(tiles / _aggressiveTiles, 1f);
 
-        if (HasComp<MapComponent>(uid) // if we're a planetmap ignore
-            || HasComp<MapGridComponent>(parent) // do not delete anything on planetmaps either
-            || _immuneQuery.HasComp(uid)
-            || !state.IgnoreIFF && TryComp<IFFComponent>(uid, out var iff) && (iff.Flags & IFFFlags.HideLabel) == 0 // delete only if IFF off
-            || _cleanup.HasNearbyPlayers(xform.Coordinates, state.DistanceOverride ?? _maxDistance * scale * scale) // square it
+        if (!state.IgnoreIFF && TryComp<IFFComponent>(uid, out var iff) && (iff.Flags & IFFFlags.HideLabel) == 0 // delete only if IFF off
+            || CleanupHelper.HasNearbyPlayers(xform.Coordinates, state.DistanceOverride ?? _maxDistance * scale * scale) // square it
             || !state.IgnorePowered && HasPoweredAPC((uid, xform)) // don't delete if it has powered APCs
             || !state.IgnorePrice && _pricing.AppraiseGrid(uid) > _maxValue) // expensive to run, put last
         {
@@ -83,6 +119,59 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
         }
 
         return true;
+    }
+
+    /// <summary>
+    ///     Micro-fragments (few tiles, unpowered, cheap): ignore IFF, shorter real-time wait, tighter player radius.
+    /// </summary>
+    private bool TryFragmentFastPath(
+        EntityUid uid,
+        GridCleanupGridComponent state,
+        TransformComponent xform,
+        int tileCount,
+        out bool shouldDelete)
+    {
+        shouldDelete = false;
+
+        if (tileCount > _fragmentMaxTiles)
+        {
+            state.FastPathEligibleSince = null;
+            return false;
+        }
+
+        if (!state.IgnorePowered && HasPoweredAPC((uid, xform))
+            || !state.IgnorePrice && _pricing.AppraiseGrid(uid) > _fragmentMaxValue)
+        {
+            state.FastPathEligibleSince = null;
+            return false;
+        }
+
+        if (CleanupHelper.HasNearbyPlayers(xform.Coordinates, state.DistanceOverride ?? _fragmentDistance))
+        {
+            state.FastPathEligibleSince = null;
+            return true;
+        }
+
+        var eligibleSince = state.FastPathEligibleSince ??= _timing.CurTime;
+        if (_timing.CurTime - eligibleSince < _fragmentDuration)
+            return true;
+
+        shouldDelete = true;
+        return true;
+    }
+
+    private int CountTiles(EntityUid uid, MapGridComponent grid)
+    {
+        var count = 0;
+        var enumerator = _map.GetAllTilesEnumerator(uid, grid);
+        while (enumerator.MoveNext(out _))
+        {
+            count++;
+            if (count > _fragmentMaxTiles)
+                return count;
+        }
+
+        return count;
     }
 
     bool HasPoweredAPC(Entity<TransformComponent> grid)

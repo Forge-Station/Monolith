@@ -25,9 +25,11 @@
   - Baron
   - Draftsman
   - Overseer
+  - Watchman
   - Quack
   - Foreman
   - Flunky
+  - Militia
 
 - type: department
   id: TSF

@@ -111,7 +111,7 @@ public sealed class SpecialRespawnSystem : SharedSpecialRespawnSystem
                 if (tile.IsSpace(_tileDefinitionManager)
                     || _turf.IsTileBlocked(tile, CollisionGroup.MobMask)
                     || !_atmosphere.IsTileMixtureProbablySafe(entityGridUid, entityMapUid.Value,
-                        grid.TileIndicesFor(mapPos)))
+                        _map.TileIndicesFor(entityGridUid.Value, grid, mapPos)))
                 {
                     continue;
                 }
@@ -157,7 +157,7 @@ public sealed class SpecialRespawnSystem : SharedSpecialRespawnSystem
 
         var xform = Transform(targetGrid);
 
-        if (!grid.TryGetTileRef(xform.Coordinates, out var tileRef))
+        if (!_map.TryGetTileRef(targetGrid, grid, xform.Coordinates, out var tileRef))
             return false;
 
         var tile = tileRef.GridIndices;
@@ -173,8 +173,8 @@ public sealed class SpecialRespawnSystem : SharedSpecialRespawnSystem
             var randomY = _random.Next((int) gridBounds.Bottom, (int) gridBounds.Top);
 
             tile = new Vector2i(randomX - (int) gridPos.X, randomY - (int) gridPos.Y);
-            var mapPos = grid.GridTileToWorldPos(tile);
-            var mapTarget = grid.WorldToTile(mapPos);
+            var mapPos = _map.GridTileToWorldPos(targetGrid, grid, tile);
+            var mapTarget = _map.WorldToTile(targetGrid, grid, mapPos);
             var circle = new Circle(mapPos, 2);
 
             foreach (var newTileRef in _map.GetTilesIntersecting(targetGrid, grid, circle))
@@ -183,7 +183,7 @@ public sealed class SpecialRespawnSystem : SharedSpecialRespawnSystem
                     continue;
 
                 found = true;
-                targetCoords = grid.GridTileToLocal(tile);
+                targetCoords = _map.GridTileToLocal(targetGrid, grid, tile);
                 break;
             }
 

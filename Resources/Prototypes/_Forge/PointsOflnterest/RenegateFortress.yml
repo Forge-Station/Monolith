@@ -6,11 +6,19 @@
   maximumDistance: 9500
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
+  placementTags: [ Renegates ]
+  minDistanceFromTags:
+    TSF: 5000
   gridPath: /Maps/_Forge/POI/RenegateFortress.yml
   addComponents:
   - type: IFF
     color: "#8066a4"
     readOnly: true # mono
+  - type: Company
+    companyName: Renegates
+  - type: PoiCaptureRoundstart
+    ownerCompanyId: Renegates
+    zoneRadius: 2048
 
 - type: gameMap
   id: RenegateFortress

@@ -6739,7 +6739,7 @@ entities:
     - type: Transform
       pos: -9.5,-14.5
       parent: 1
-- proto: ShieldGeneratorMedium
+- proto: ShieldGeneratorFSG220
   entities:
   - uid: 1000
     components:

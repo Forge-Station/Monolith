@@ -1,11 +1,11 @@
 ent-BaseStructureComputerWallmount = { ent-BaseStructureComputerTabletop }
-  .desc = { ent-BaseStructureComputerTabletop.desc }
-  ent-ComputerWallmountBroken = { ent-ComputerBroken }
-  .suffix = Настенный
-  .desc = { ent-ComputerBroken.desc }
-  ent-ComputerWallmountFrame = { ent-ComputerTabletopFrame }
-  .suffix = Настенный
-  .desc = { ent-ComputerTabletopFrame.desc }
+    .suffix = Настенный
+    .desc = { ent-BaseStructureComputerTabletop.desc }
 
-ent-ComputerWallmountFrame = computer
-ent-ComputerWallmountBroken = ComputerWallmountBroken
+ent-ComputerWallmountFrame = { ent-ComputerTabletopFrame }
+    .suffix = Настенный
+    .desc = { ent-ComputerTabletopFrame.desc }
+
+ent-ComputerWallmountBroken = { ent-ComputerBroken }
+    .suffix = Настенный
+    .desc = { ent-ComputerBroken.desc }

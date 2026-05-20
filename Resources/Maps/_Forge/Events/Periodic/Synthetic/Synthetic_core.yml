@@ -5821,7 +5821,7 @@ entities:
       parent: 1
     - type: Stack
       count: 100
-- proto: ShieldGeneratorSmall
+- proto: ShieldGeneratorFSG100
   entities:
   - uid: 286
     components:

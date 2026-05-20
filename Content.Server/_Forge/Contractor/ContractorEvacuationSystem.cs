@@ -24,6 +24,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared._Forge.Contracts;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 
@@ -39,6 +40,7 @@ public sealed class ContractorEvacuationSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
@@ -252,7 +254,7 @@ public sealed class ContractorEvacuationSystem : EntitySystem
         var gridUid = _transform.GetGrid(coords.EntityId);
         if (gridUid != null && TryComp<MapGridComponent>(gridUid.Value, out var gridComp))
         {
-            var tile = gridComp.GetTileRef(coords);
+            var tile = _map.GetTileRef(gridUid.Value, gridComp, coords);
             if (tile.Tile.IsEmpty)
                 return false;
         }

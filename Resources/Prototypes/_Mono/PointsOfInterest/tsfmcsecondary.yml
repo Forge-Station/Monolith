@@ -16,12 +16,21 @@
   maximumDistance: 14000
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
+  placementTags: [ TSF ]
+  minDistanceFromTags:
+    Renegates: 5000
   gridPath: /Maps/_Mono/POI/tsfmcoutpost.yml
   addComponents:
   - type: IFF
     color: "#047abd"
     flags: [HideLabel]
     readOnly: true # mono
+  - type: Company
+    companyName: TSF
+  - type: PoiCaptureRoundstart
+    ownerCompanyId: TSF
+    ownerFactionId: TSF
+    zoneRadius: 2048
 
 - type: gameMap
   id: TSFMCOutpost

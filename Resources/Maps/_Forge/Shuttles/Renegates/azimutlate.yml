@@ -10061,7 +10061,7 @@ entities:
 
         1-Эми
 
-        2-Бронебойный 
+        2-Бронебойный
 
         3-Эми
 - proto: PlastitaniumWindow
@@ -11847,7 +11847,7 @@ entities:
           - 1229
           - 1230
           - 1231
-- proto: ShieldGeneratorSmall
+- proto: ShieldGeneratorFSG100
   entities:
   - uid: 1814
     components:

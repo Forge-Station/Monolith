@@ -7951,6 +7951,13 @@ entities:
     - type: Transform
       pos: -4.5,2.5
       parent: 2
+- proto: ForgeSpawnPointTsfAmbassador
+  entities:
+  - uid: 99999
+    components:
+    - type: Transform
+      pos: -4.5,2.5
+      parent: 2
 - proto: SpawnPointSecurityGuard
   entities:
   - uid: 1148

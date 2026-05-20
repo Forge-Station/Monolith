@@ -159,13 +159,12 @@ public sealed class TargetSeekingSystem : EntitySystem
                 seekingComp.Launched = true;
             }
 
-            // Apply acceleration in the direction the projectile is facing
-            _physics.SetLinearVelocity(uid, body.LinearVelocity + _transform.GetWorldRotation(xform).ToWorldVec() * acceleration, body: body);
-
-            var velLen = body.LinearVelocity.Length();
-            // cut off velocity above max
+            // Apply acceleration in the direction the projectile is facing, then clamp to max speed in one write.
+            var newVel = body.LinearVelocity + _transform.GetWorldRotation(xform).ToWorldVec() * acceleration;
+            var velLen = newVel.Length();
             if (velLen > seekingComp.MaxSpeed)
-                _physics.SetLinearVelocity(uid, body.LinearVelocity * (seekingComp.MaxSpeed / velLen), body: body);
+                newVel *= seekingComp.MaxSpeed / velLen;
+            _physics.SetLinearVelocity(uid, newVel, body: body);
 
             // Skip seeking behavior if disabled (e.g., after entering an enemy grid)
             if (seekingComp.SeekingDisabled)

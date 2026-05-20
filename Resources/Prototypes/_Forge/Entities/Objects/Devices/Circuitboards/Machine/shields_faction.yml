@@ -8,6 +8,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeTSFHeavy
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeTSFPrismaticCircuitboard
@@ -17,6 +18,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeTSFPrismatic
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeTSFCollisionCircuitboard
@@ -26,6 +28,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeTSFCollision
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeUsspHeavyCircuitboard
@@ -35,6 +38,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeUsspHeavy
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeUsspPrismaticCircuitboard
@@ -44,6 +48,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeUsspPrismatic
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeUsspCollisionCircuitboard
@@ -53,6 +58,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeUsspCollision
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeRenegateHeavyCircuitboard
@@ -62,6 +68,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeRenegateHeavy
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeRenegatePrismaticCircuitboard
@@ -71,6 +78,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeRenegatePrismatic
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeRenegateCollisionCircuitboard
@@ -80,6 +88,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeRenegateCollision
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeViperHeavyCircuitboard
@@ -89,6 +98,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeViperHeavy
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeViperPrismaticCircuitboard
@@ -98,6 +108,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeViperPrismatic
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeViperCollisionCircuitboard
@@ -107,6 +118,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeViperCollision
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeUllmanHeavyCircuitboard
@@ -116,6 +128,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeUllmanHeavy
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeUllmanPrismaticCircuitboard
@@ -125,6 +138,7 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeUllmanPrismatic
+    frameSize: 2x2
 
 - type: entity
   id: MachineShieldForgeUllmanCollisionCircuitboard
@@ -134,3 +148,54 @@
   components:
   - type: MachineBoard
     prototype: ShieldGeneratorForgeUllmanCollision
+    frameSize: 2x2
+
+- type: entity
+  id: MachineShieldForgeTSFSagittaCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: TSFMC Sagitta shield generator board
+  description: A machine board for a TSFMC SGS-455 Sagitta shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeTSFSagitta
+    frameSize: 2x2
+
+- type: entity
+  id: MachineShieldForgeUsspKerchCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: Union Kerch shield generator board
+  description: A machine board for a Union SGS-435 Kerch shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeUsspKerch
+    frameSize: 2x2
+
+- type: entity
+  id: MachineShieldForgeRenegateSkullDebtCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: Renegate Skull Debt shield generator board
+  description: A machine board for an RSG-435 Skull Debt shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeRenegateSkullDebt
+    frameSize: 2x2
+
+- type: entity
+  id: MachineShieldForgeViperKiteCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: Viper Kite shield generator board
+  description: A machine board for a VAS-435 Kite shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeViperKite
+    frameSize: 2x2
+
+- type: entity
+  id: MachineShieldForgeUllmanLockboxCircuitboard
+  parent: MachineShieldFSG470PCircuitboard
+  name: Ullman Lockbox shield generator board
+  description: A machine board for a UIS SGD-435 Lockbox shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeUllmanLockbox
+    frameSize: 2x2

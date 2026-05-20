@@ -12726,7 +12726,7 @@ entities:
       content: >-
         Внимание!
 
-        Шаттл крайне опасен! 
+        Шаттл крайне опасен!
 
         Вход только вооруженной группой!
 - proto: PaperBin20
@@ -16480,7 +16480,7 @@ entities:
     - type: Transform
       pos: 13.243882,0.71208644
       parent: 1
-- proto: ShieldGeneratorSmall
+- proto: ShieldGeneratorFSG100
   entities:
   - uid: 2451
     components:

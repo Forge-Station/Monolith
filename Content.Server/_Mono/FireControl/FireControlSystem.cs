@@ -6,6 +6,7 @@ using Content.Shared._Mono.FireControl;
 using Content.Shared.Power;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Map;
+using Robust.Shared.Player;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using System.Linq;
@@ -682,12 +683,15 @@ public sealed partial class FireControlSystem : EntitySystem
     }
 
     /// <summary>
-    /// Sends a visualization event to all clients
+    /// Sends a visualization event to clients whose PVS overlaps the weapon (not broadcast map-wide).
     /// </summary>
     /// <param name="entityUid">Entity to visualize</param>
     /// <param name="directions">Firing direction data</param>
     public void SendVisualizationEvent(EntityUid entityUid, Dictionary<float, bool> directions)
     {
+        if (TerminatingOrDeleted(entityUid))
+            return;
+
         var netEntity = GetNetEntity(entityUid);
 
         var ev = new FireControlVisualizationEvent(
@@ -695,7 +699,7 @@ public sealed partial class FireControlSystem : EntitySystem
             directions
         );
 
-        RaiseNetworkEvent(ev);
+        RaiseNetworkEvent(ev, Filter.Pvs(entityUid, entityManager: EntityManager));
     }
 
     /// <summary>
@@ -712,14 +716,16 @@ public sealed partial class FireControlSystem : EntitySystem
         {
             // Turn off visualization
             _visualizedEntities.Remove(entityUid);
-            RaiseNetworkEvent(new FireControlVisualizationEvent(netEntity));
+            if (!TerminatingOrDeleted(entityUid))
+                RaiseNetworkEvent(new FireControlVisualizationEvent(netEntity), Filter.Pvs(entityUid, entityManager: EntityManager));
             return false;
         }
 
         // Turn on visualization
         _visualizedEntities.Add(entityUid);
         var directions = CheckAllDirections(entityUid);
-        RaiseNetworkEvent(new FireControlVisualizationEvent(netEntity, directions));
+        if (!TerminatingOrDeleted(entityUid))
+            RaiseNetworkEvent(new FireControlVisualizationEvent(netEntity, directions), Filter.Pvs(entityUid, entityManager: EntityManager));
         return true;
     }
 }

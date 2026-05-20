@@ -25,6 +25,7 @@ public sealed class TeleportSystem : EntitySystem
     [Dependency] private readonly PullingSystem _pullingSystem = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly StackSystem _stack = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -104,7 +105,7 @@ public sealed class TeleportSystem : EntitySystem
 
             // If attempts is specified, whatever's being teleported probably does not want to be in your walls
             var valid = true;
-            foreach (var entity in grid.GetAnchoredEntities(targetCoords))
+            foreach (var entity in _map.GetAnchoredEntities(gridUid, grid, targetCoords))
             {
                 if (!_physicsQuery.TryGetComponent(entity, out var body))
                     continue;

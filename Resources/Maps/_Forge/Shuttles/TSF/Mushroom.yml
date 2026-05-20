@@ -460,8 +460,6 @@ entities:
       pos: 1.5,3.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 3
   - uid: 16
@@ -1022,8 +1020,6 @@ entities:
       pos: -1.5,2.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 3
       - 4
@@ -1034,8 +1030,6 @@ entities:
       pos: 2.5,1.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
       - 3
@@ -1046,8 +1040,6 @@ entities:
       pos: -0.5,1.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
       - 3
@@ -1058,8 +1050,6 @@ entities:
       pos: 3.5,2.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 3
   - uid: 109
@@ -1322,8 +1312,6 @@ entities:
     - type: AtmosPipeColor
       color: '#0055CCFF'
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 3
   - uid: 138
@@ -1348,8 +1336,6 @@ entities:
     - type: AtmosPipeColor
       color: '#990000FF'
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 3
     - type: AtmosPipeLayers

@@ -35,12 +35,15 @@
       settings: default
     requirements:
     - !type:OverallPlaytimeRequirement
-      time: 540000 # 150 hrs
+      time: 720000 # 200 hours
     - !type:DepartmentTimeRequirement
       department: Renegates
       time: 180000 # 50 hours
     - !type:DepartmentTimeRequirement
       department: TSF
+      time: 180000 # 50 hours
+    - !type:DepartmentTimeRequirement
+      department: Civilian
       time: 180000 # 50 hours
   - type: GhostTakeoverAvailable
   - type: RandomMetadata
@@ -73,7 +76,7 @@
   - type: AutoImplant
     implants:
     - FreedomImplant
-    - DeathAcidifierImplant
+    - BluespaceLifelineImplant
   - type: Access
     tags:
     - SyndicateAgent
@@ -110,3 +113,4 @@
     - WelderExperimental
     - ShipRepairDeviceRedacted
     - InfectionScannerAsakim
+    - WeaponRifleAsakimPistolForge

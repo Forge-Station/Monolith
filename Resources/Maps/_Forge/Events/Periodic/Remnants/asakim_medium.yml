@@ -106,7 +106,7 @@ entities:
         path: /Audio/Effects/alert.ogg
     - type: IFF
       color: '#00CCFFFF'
-      flags: HideLabel, IsPlayerShuttle
+      flags: HideLabel, AlwaysShowColor
     - type: DecalGrid
       chunkCollection:
         version: 2
@@ -2369,7 +2369,7 @@ entities:
     - type: Transform
       pos: -0.5,9.5
       parent: 1
-- proto: ThrusterLarge
+- proto: ThrusterLargeRogue
   entities:
   - uid: 361
     components:
@@ -2383,7 +2383,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -0.5,-2.5
       parent: 1
-- proto: ThrusterSecurity
+- proto: ThrusterRogue
   entities:
   - uid: 363
     components:

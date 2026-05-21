@@ -58,7 +58,7 @@
 - type: entity
   id: LaserDrill
   name: automated laser drill
-  parent: LaserDrillBase
+  parent: [LaserDrillBase, ConstructibleMachine]
   description: A large automated drill that digs up random materials when powered with 50 kW of HV. Only works on expedition planets.
   components:
   - type: PlanetMiner

@@ -32,6 +32,7 @@ public sealed class BoardingTeleportWindow : FancyWindow
     private readonly Button _modeRapidButton;
     private readonly Button _clearTargetButton;
     private readonly Button _syncVolleyButton;
+    private readonly Button _sharedLandingButton;
     private readonly BoxContainer _platformList;
     private readonly BoardingTeleportSectorMapControl _sectorMap;
     private readonly BoardingTeleportLandingMapControl _landingMap;
@@ -168,6 +169,10 @@ public sealed class BoardingTeleportWindow : FancyWindow
         };
         _syncVolleyButton.OnPressed += _ => _owner.SyncVolley();
         gridTopRow.AddChild(_syncVolleyButton);
+
+        _sharedLandingButton = new Button();
+        _sharedLandingButton.OnPressed += _ => _owner.ToggleSharedLanding();
+        gridTopRow.AddChild(_sharedLandingButton);
 
         _gridPage.AddChild(gridTopRow);
 
@@ -313,6 +318,7 @@ public sealed class BoardingTeleportWindow : FancyWindow
             : Color.FromHex("#A8B4C8");
         UpdatePlatformList(state);
         UpdateModeButtons(state.Mode);
+        UpdateSharedLandingButton(state);
 
         var coordinates = _entManager.GetCoordinates(state.NavState.Coordinates);
         var shuttle = coordinates?.EntityId;
@@ -348,7 +354,17 @@ public sealed class BoardingTeleportWindow : FancyWindow
         _landingMap.NetGrid = targetGrid;
         _landingMap.ForceNavMapUpdate();
 
-        if (state.LandingCoordinates is { } netLanding)
+        if (state.SelectedLandingCoordinates is { } selectedLanding)
+        {
+            var landing = _entManager.GetCoordinates(selectedLanding);
+            if (landing.IsValid(_entManager) &&
+                _entManager.TryGetComponent<MapGridComponent>(grid, out var mapGrid))
+            {
+                var mapSys = _entManager.System<SharedMapSystem>();
+                _landingMap.SetSelectedTile(mapSys.CoordinatesToTile(grid, mapGrid, landing));
+            }
+        }
+        else if (state.LandingCoordinates is { } netLanding)
         {
             var landing = _entManager.GetCoordinates(netLanding);
             if (landing.IsValid(_entManager) &&
@@ -358,6 +374,16 @@ public sealed class BoardingTeleportWindow : FancyWindow
                 _landingMap.SetSelectedTile(mapSys.CoordinatesToTile(grid, mapGrid, landing));
             }
         }
+    }
+
+    private void UpdateSharedLandingButton(BoardingTeleportBoundUserInterfaceState state)
+    {
+        _sharedLandingButton.Text = state.UseSharedLandingZone
+            ? Loc.GetString("boarding-teleport-window-shared-landing-on")
+            : Loc.GetString("boarding-teleport-window-shared-landing-off");
+        _sharedLandingButton.Modulate = state.UseSharedLandingZone
+            ? Color.FromHex("#8DFF99")
+            : Color.White;
     }
 
     private string BuildPlatformStats(BoardingTeleportBoundUserInterfaceState state)

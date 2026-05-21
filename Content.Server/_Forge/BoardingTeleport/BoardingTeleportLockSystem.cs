@@ -95,13 +95,16 @@ public sealed class BoardingTeleportLockSystem : EntitySystem
 
     public EntityCoordinates? GetLandingForPlatform(BoardingTeleportConsoleComponent console, int slotIndex)
     {
+        if (console.UseSharedLandingZone)
+            return console.LandingCoordinates;
+
         if (slotIndex >= 0 && slotIndex < console.PlatformLandings.Count &&
             console.PlatformLandings[slotIndex] is { } netLanding)
         {
             return EntityManager.GetCoordinates(netLanding);
         }
 
-        return slotIndex == 0 ? console.LandingCoordinates : null;
+        return console.LandingCoordinates;
     }
 
     public int GetPlatformSlotIndex(EntityUid consoleUid, EntityUid platformUid)

@@ -58,6 +58,19 @@
 
 - type: latheRecipe
   parent: BoardingTeleportEngineFlatpack
+  id: BoardingTeleportEngineTier3Flatpack
+  result: BoardingTeleportEngineTier3Flatpack
+  completetime: 10
+  materials:
+    Steel: 1700
+    Glass: 1100
+    Plastic: 650
+    Gold: 500
+    Plasma: 400
+    Silver: 300
+
+- type: latheRecipe
+  parent: BoardingTeleportEngineFlatpack
   id: BoardingTeleportEngineExperimentalFlatpack
   result: BoardingTeleportEngineExperimentalFlatpack
   completetime: 11

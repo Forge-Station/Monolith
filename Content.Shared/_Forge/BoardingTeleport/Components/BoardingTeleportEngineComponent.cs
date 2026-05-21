@@ -33,6 +33,12 @@ public sealed partial class BoardingTeleportEngineComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float VelocityToleranceMultiplier = 1f;
 
+    /// <summary>
+    /// Engine bluespace tier (1-4). Higher tiers bypass lower ship shield tiers.
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public int EngineTier;
+
     [ViewVariables, AutoNetworkedField]
     public EntityUid? LinkedConsole;
 

@@ -140,4 +140,29 @@ public static class BoardingTeleportBalance
     {
         return Math.Clamp(chance + MathF.Max(0f, scramblerRiskBonus), BoardingTeleportConstants.MinDestabilizationChance, BoardingTeleportConstants.MaxDestabilizationChance);
     }
+
+    public static bool RequiresEarlyReturnConfirm(float remainingSeconds, float totalWindowSeconds)
+    {
+        if (totalWindowSeconds <= 0.01f)
+            return false;
+
+        return remainingSeconds / totalWindowSeconds > BoardingTeleportConstants.EarlyReturnSafeRemainingFraction;
+    }
+
+    public static float ComputeEarlyReturnExplosionRisk(float remainingSeconds, float totalWindowSeconds)
+    {
+        if (totalWindowSeconds <= 0.01f)
+            return BoardingTeleportConstants.EarlyReturnMaxExplosionRisk;
+
+        var remainingFraction = Math.Clamp(remainingSeconds / totalWindowSeconds, 0f, 1f);
+        if (remainingFraction <= BoardingTeleportConstants.EarlyReturnSafeRemainingFraction)
+            return BoardingTeleportConstants.EarlyReturnMinExplosionRisk;
+
+        var earlySpan = 1f - BoardingTeleportConstants.EarlyReturnSafeRemainingFraction;
+        var earlyAmount = (remainingFraction - BoardingTeleportConstants.EarlyReturnSafeRemainingFraction) / earlySpan;
+        return MathF.Min(
+            BoardingTeleportConstants.EarlyReturnMaxExplosionRisk,
+            BoardingTeleportConstants.EarlyReturnMinExplosionRisk +
+            (BoardingTeleportConstants.EarlyReturnMaxExplosionRisk - BoardingTeleportConstants.EarlyReturnMinExplosionRisk) * earlyAmount);
+    }
 }

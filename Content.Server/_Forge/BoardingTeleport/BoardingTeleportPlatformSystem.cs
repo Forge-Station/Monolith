@@ -1,7 +1,9 @@
 using Content.Server.EUI;
 using Content.Server._Mono.Radar;
 using Content.Server.Administration.Logs;
+using Content.Server.Body.Systems;
 using Content.Server.DeviceNetwork.Systems;
+using Content.Server.Explosion.EntitySystems;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Stunnable;
 using Content.Shared._Forge.BoardingTeleport;
@@ -9,6 +11,8 @@ using Content.Shared._Forge.BoardingTeleport.Components;
 using Content.Shared._Mono.Radar;
 using Content.Shared.Database;
 using Content.Shared.DeviceLinking.Events;
+using Content.Shared.DeviceNetwork;
+using Content.Shared.Hands.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -16,6 +20,8 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Power;
+using Content.Shared.Sprite;
+using System.Numerics;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -29,7 +35,14 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
 {
     private const int WarmupPulseSteps = 6;
 
-    private readonly Dictionary<EntityUid, EntityUid> _pendingEmergencyConfirmByUser = new();
+    private sealed class PendingReturnConfirm
+    {
+        public required EntityUid Platform;
+        public required BoardingTeleportReturnConfirmKind Kind;
+        public float ExplosionRisk;
+    }
+
+    private readonly Dictionary<EntityUid, PendingReturnConfirm> _pendingReturnConfirmByUser = new();
 
     [Dependency] private readonly BoardingTeleportConsoleSystem _console = default!;
     [Dependency] private readonly BoardingTeleportLockSystem _lock = default!;
@@ -38,6 +51,8 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StunSystem _stun = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -46,6 +61,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly ActorSystem _actors = default!;
     [Dependency] private readonly EuiManager _euis = default!;
+    [Dependency] private readonly SharedScaleVisualsSystem _scaleVisuals = default!;
 
     public override void Initialize()
     {
@@ -164,7 +180,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         if (args.Port != ent.Comp.ReceiverPort || args.Trigger == null)
             return;
 
-        if (!TryGetSignalUser(args.Trigger.Value, out var user))
+        if (!TryResolveSignalUser(args, out var user))
             return;
 
         if (TryComp<BoardingTeleportAnchorComponent>(user, out var anchor))
@@ -258,7 +274,13 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         var expired = anchor.ExpiresAt is { } expires && _timing.CurTime >= expires;
         if (expired && !anchor.EmergencyReturnUsed)
         {
-            PromptEmergencyReturn(ent, user, anchor);
+            PromptReturnConfirm(ent, user, anchor, BoardingTeleportReturnConfirmKind.Emergency);
+            return;
+        }
+
+        if (!expired && TryGetEarlyReturnRisk(anchor, out var explosionRisk))
+        {
+            PromptReturnConfirm(ent, user, anchor, BoardingTeleportReturnConfirmKind.Early, explosionRisk);
             return;
         }
 
@@ -277,16 +299,32 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         BeginDelayedTeleport(ent, user, home, null, null, requirePlatform: false, returning: true, distanceScale: 1f);
     }
 
-    private void PromptEmergencyReturn(
+    private bool TryGetEarlyReturnRisk(BoardingTeleportAnchorComponent anchor, out float explosionRisk)
+    {
+        explosionRisk = 0f;
+
+        if (anchor.ExpiresAt is not { } expires || anchor.ReturnWindowSeconds <= 0.01f)
+            return false;
+
+        var remaining = (float) (expires - _timing.CurTime).TotalSeconds;
+        if (remaining <= 0f)
+            return false;
+
+        if (!BoardingTeleportBalance.RequiresEarlyReturnConfirm(remaining, anchor.ReturnWindowSeconds))
+            return false;
+
+        explosionRisk = BoardingTeleportBalance.ComputeEarlyReturnExplosionRisk(remaining, anchor.ReturnWindowSeconds);
+        return true;
+    }
+
+    private void PromptReturnConfirm(
         Entity<BoardingTeleportPlatformComponent> ent,
         EntityUid user,
-        BoardingTeleportAnchorComponent anchor)
+        BoardingTeleportAnchorComponent anchor,
+        BoardingTeleportReturnConfirmKind kind,
+        float explosionRisk = 0f)
     {
-        if (_pendingEmergencyConfirmByUser.ContainsKey(user))
-        {
-            _popup.PopupEntity(Loc.GetString("boarding-teleport-emergency-return-pending"), user, user);
-            return;
-        }
+        _pendingReturnConfirmByUser.Remove(user);
 
         if (!_actors.TryGetSession(user, out var session) || session == null)
         {
@@ -294,27 +332,58 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
             return;
         }
 
-        _pendingEmergencyConfirmByUser[user] = ent.Owner;
+        _pendingReturnConfirmByUser[user] = new PendingReturnConfirm
+        {
+            Platform = ent.Owner,
+            Kind = kind,
+            ExplosionRisk = explosionRisk,
+        };
 
-        var riskPercent = BoardingTeleportConstants.EmergencyReturnRisk * 100f;
-        var title = Loc.GetString("boarding-teleport-emergency-return-confirm-title");
-        var message = Loc.GetString("boarding-teleport-emergency-return-confirm-message",
-            ("seconds", $"{BoardingTeleportConstants.EmergencyReturnDelay:0}"),
-            ("risk", $"{riskPercent:0}"),
-            ("scatter", $"{BoardingTeleportConstants.EmergencyReturnScatter:0.#}"));
+        string title;
+        string message;
+        string confirmButton;
 
-        _euis.OpenEui(new BoardingTeleportEmergencyReturnEui(ent.Owner, user, title, message, this), session);
+        if (kind == BoardingTeleportReturnConfirmKind.Emergency)
+        {
+            var riskPercent = BoardingTeleportConstants.EmergencyReturnRisk * 100f;
+            title = Loc.GetString("boarding-teleport-emergency-return-confirm-title");
+            message = Loc.GetString("boarding-teleport-emergency-return-confirm-message",
+                ("seconds", $"{BoardingTeleportConstants.EmergencyReturnDelay:0}"),
+                ("risk", $"{riskPercent:0}"),
+                ("scatter", $"{BoardingTeleportConstants.EmergencyReturnScatter:0.#}"));
+            confirmButton = Loc.GetString("boarding-teleport-emergency-return-confirm-button");
+        }
+        else
+        {
+            var remaining = anchor.ExpiresAt is { } expires
+                ? MathF.Max(0f, (float) (expires - _timing.CurTime).TotalSeconds)
+                : 0f;
+            var riskPercent = explosionRisk * 100f;
+            title = Loc.GetString("boarding-teleport-early-return-confirm-title");
+            message = Loc.GetString("boarding-teleport-early-return-confirm-message",
+                ("remaining", $"{remaining:0}"),
+                ("risk", $"{riskPercent:0}"));
+            confirmButton = Loc.GetString("boarding-teleport-early-return-confirm-button");
+        }
+
+        _euis.OpenEui(new BoardingTeleportEmergencyReturnEui(ent.Owner, user, title, message, confirmButton, kind, this), session);
     }
 
-    public void OnEmergencyReturnEuiClosed(EntityUid user)
+    public void OnReturnConfirmEuiClosed(EntityUid user)
     {
-        if (_pendingEmergencyConfirmByUser.ContainsKey(user))
-            _pendingEmergencyConfirmByUser.Remove(user);
+        _pendingReturnConfirmByUser.Remove(user);
     }
 
-    public void CompleteEmergencyReturnResponse(EntityUid user, EntityUid platformUid, bool accepted)
+    public void CompleteReturnConfirmResponse(
+        EntityUid user,
+        EntityUid platformUid,
+        BoardingTeleportReturnConfirmKind kind,
+        bool accepted)
     {
-        _pendingEmergencyConfirmByUser.Remove(user);
+        if (!_pendingReturnConfirmByUser.TryGetValue(user, out var pending) || pending.Kind != kind)
+            return;
+
+        _pendingReturnConfirmByUser.Remove(user);
 
         if (!accepted)
         {
@@ -329,30 +398,52 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
             return;
         }
 
-        var expired = anchor.ExpiresAt is { } expires && _timing.CurTime >= expires;
-        if (!expired || anchor.EmergencyReturnUsed || anchor.HomePlatform != GetNetEntity(platformUid))
+        if (kind == BoardingTeleportReturnConfirmKind.Emergency)
         {
-            _popup.PopupEntity(Loc.GetString("boarding-teleport-platform-return-expired"), user, user);
+            var expired = anchor.ExpiresAt is { } expires && _timing.CurTime >= expires;
+            if (!expired || anchor.EmergencyReturnUsed || anchor.HomePlatform != GetNetEntity(platformUid))
+            {
+                _popup.PopupEntity(Loc.GetString("boarding-teleport-platform-return-expired"), user, user);
+                return;
+            }
+
+            anchor.EmergencyReturnUsed = true;
+            Dirty(user, anchor);
+
+            BeginDelayedTeleport(
+                (platformUid, platform),
+                user,
+                default,
+                null,
+                null,
+                requirePlatform: false,
+                returning: true,
+                emergencyReturn: true);
             return;
         }
 
-        anchor.EmergencyReturnUsed = true;
-        Dirty(user, anchor);
+        if (!_console.TryResolveHome(platformUid, platform, anchor, user, out var home, out _))
+        {
+            RemCompDeferred<BoardingTeleportAnchorComponent>(user);
+            _popup.PopupEntity(Loc.GetString("boarding-teleport-platform-home-invalid"), user, user);
+            return;
+        }
 
         BeginDelayedTeleport(
             (platformUid, platform),
             user,
-            default,
+            home,
             null,
             null,
             requirePlatform: false,
             returning: true,
-            emergencyReturn: true);
+            earlyReturn: true,
+            earlyReturnExplosionRisk: pending.ExplosionRisk);
     }
 
-    public void ClearPendingEmergencyConfirm(EntityUid user)
+    public void ClearPendingReturnConfirm(EntityUid user)
     {
-        _pendingEmergencyConfirmByUser.Remove(user);
+        _pendingReturnConfirmByUser.Remove(user);
     }
 
     private void BeginDelayedTeleport(
@@ -364,6 +455,8 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         bool requirePlatform,
         bool returning = false,
         bool emergencyReturn = false,
+        bool earlyReturn = false,
+        float earlyReturnExplosionRisk = 0f,
         BoardingTeleportInsertionMode mode = BoardingTeleportInsertionMode.Stealth,
         float distanceScale = 1f)
     {
@@ -376,6 +469,8 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         ent.Comp.PendingMode = mode;
         ent.Comp.PendingDistanceScale = distanceScale;
         ent.Comp.PendingEmergencyReturn = emergencyReturn;
+        ent.Comp.PendingEarlyReturn = earlyReturn;
+        ent.Comp.PendingEarlyReturnExplosionRisk = earlyReturnExplosionRisk;
         ent.Comp.PendingReturning = returning;
         ent.Comp.PendingLandingCoordinates = destination;
         ent.Comp.PendingDetectionBlipSpawned = false;
@@ -400,8 +495,10 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         {
             var messageKey = emergencyReturn
                 ? "boarding-teleport-platform-emergency-return-started"
-                : "boarding-teleport-platform-return-started";
-            var popupType = emergencyReturn ? PopupType.MediumCaution : PopupType.Medium;
+                : earlyReturn
+                    ? "boarding-teleport-platform-early-return-started"
+                    : "boarding-teleport-platform-return-started";
+            var popupType = emergencyReturn || earlyReturn ? PopupType.MediumCaution : PopupType.Medium;
             _popup.PopupEntity(Loc.GetString(messageKey, ("seconds", delay)), user, user, popupType);
         }
         else
@@ -410,7 +507,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         }
 
         Robust.Shared.Timing.Timer.Spawn(TimeSpan.FromSeconds(delay), () =>
-            CompletePendingTeleport(ent.Owner, chargeToken, user, destination, consoleUid, console, requirePlatform, returning, emergencyReturn, mode, distanceScale),
+            CompletePendingTeleport(ent.Owner, chargeToken, user, destination, consoleUid, console, requirePlatform, returning, emergencyReturn, earlyReturn, earlyReturnExplosionRisk, mode, distanceScale),
             cancel.Token);
 
         ent.Comp.PendingCancel = cancel;
@@ -420,7 +517,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
     {
         status = BoardingTeleportStatus.None;
 
-        if (platform.PendingEmergencyReturn || platform.PendingReturning)
+        if (platform.PendingEmergencyReturn || platform.PendingReturning || platform.PendingEarlyReturn)
             return true;
 
         if (platform.PendingConsoleUid is not { } consoleUid ||
@@ -449,6 +546,8 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         bool requirePlatform,
         bool returning,
         bool emergencyReturn,
+        bool earlyReturn,
+        float earlyReturnExplosionRisk,
         BoardingTeleportInsertionMode mode,
         float distanceScale)
     {
@@ -458,6 +557,8 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         if (platform.ChargeToken != chargeToken || platform.ActiveChargeUser != user)
             return;
 
+        var savedEarlyReturn = platform.PendingEarlyReturn;
+        var savedEarlyReturnRisk = platform.PendingEarlyReturnExplosionRisk;
         var savedLanding = platform.PendingLandingCoordinates ?? pendingLanding;
         ClearPendingChargeState(platformUid, platform);
 
@@ -538,6 +639,8 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         {
             var anchor = EnsureComp<BoardingTeleportAnchorComponent>(user);
             anchor.HomePlatform = GetNetEntity(platformUid);
+            anchor.CreatedAt = _timing.CurTime;
+            anchor.ReturnWindowSeconds = platform.ReturnWindowSeconds;
             anchor.ExpiresAt = _timing.CurTime + TimeSpan.FromSeconds(platform.ReturnWindowSeconds);
             anchor.EmergencyReturnUsed = false;
             Dirty(user, anchor);
@@ -557,13 +660,15 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         Teleport(user, destination, platform);
         StartCooldown((platformUid, platform));
 
+        var earlyReturnSwelling = returning && savedEarlyReturn && ScheduleEarlyReturnCatastrophe(user, savedEarlyReturnRisk);
+
         if (!returning && consoleUid is { } cUid && console != null)
             _console.StartEngineCooldown(cUid, console);
 
         var targetGridNet = console?.TargetGrid is { } tg ? GetNetEntity(tg) : NetEntity.Invalid;
-        var outcome = destabilized ? "destabilized" : "stable";
+        var outcome = earlyReturnSwelling ? "early-return-swelling" : destabilized ? "destabilized" : "stable";
         _adminLogger.Add(LogType.Teleport, LogImpact.Medium,
-            $"{ToPrettyString(user):player} boarding-teleport mode={mode} emergency={emergencyReturn} targetGrid={targetGridNet} distScale={distanceScale:0.00} outcome={outcome} from {source} to {destination} via {ToPrettyString(platformUid)}");
+            $"{ToPrettyString(user):player} boarding-teleport mode={mode} emergency={emergencyReturn} earlyReturn={savedEarlyReturn} targetGrid={targetGridNet} distScale={distanceScale:0.00} outcome={outcome} from {source} to {destination} via {ToPrettyString(platformUid)}");
 
         if (consoleUid is { } consoleEnt && console != null)
             _console.UpdateUi((consoleEnt, console));
@@ -576,6 +681,8 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         platform.PendingConsoleUid = null;
         platform.PendingLandingCoordinates = null;
         platform.PendingEmergencyReturn = false;
+        platform.PendingEarlyReturn = false;
+        platform.PendingEarlyReturnExplosionRisk = 0f;
         platform.PendingReturning = false;
         platform.PendingDetectionBlipSpawned = false;
         platform.PendingLockCheckAccumulator = 0f;
@@ -766,6 +873,93 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         return (platformPos - userPos).LengthSquared() <= component.ActivationRadius * component.ActivationRadius;
     }
 
+    private bool ScheduleEarlyReturnCatastrophe(EntityUid user, float explosionRisk)
+    {
+        if (explosionRisk <= 0f || !_random.Prob(explosionRisk))
+            return false;
+
+        _popup.PopupEntity(Loc.GetString("boarding-teleport-platform-early-return-swelling"), user, user, PopupType.MediumCaution);
+        _stun.TryParalyze(
+            user,
+            TimeSpan.FromSeconds(BoardingTeleportConstants.EarlyReturnCatastropheDelaySeconds),
+            true);
+
+        var steps = BoardingTeleportConstants.EarlyReturnCatastropheSwellingSteps;
+        var delay = BoardingTeleportConstants.EarlyReturnCatastropheDelaySeconds;
+        var scaleFactor = Math.Clamp(explosionRisk, 0f, 1f);
+        var targetScale = BoardingTeleportConstants.EarlyReturnCatastropheMinScale +
+                          (BoardingTeleportConstants.EarlyReturnCatastropheMaxScale -
+                           BoardingTeleportConstants.EarlyReturnCatastropheMinScale) * scaleFactor;
+        var targetVec = new Vector2(targetScale, targetScale);
+
+        for (var i = 0; i < steps; i++)
+        {
+            var stepIndex = i;
+            var t = (stepIndex + 1f) / steps;
+            Robust.Shared.Timing.Timer.Spawn(TimeSpan.FromSeconds(delay * t), () =>
+            {
+                if (!Exists(user))
+                    return;
+
+                if (TryComp<MobStateComponent>(user, out var mobState) && _mobState.IsDead(user, mobState))
+                    return;
+
+                if (stepIndex < steps - 1)
+                {
+                    var scale = Vector2.Lerp(Vector2.One, targetVec, t);
+                    _scaleVisuals.SetSpriteScale(user, scale);
+                    return;
+                }
+
+                DetonateEarlyReturnCatastrophe(user, explosionRisk);
+            });
+        }
+
+        _adminLogger.Add(LogType.Teleport, LogImpact.Medium,
+            $"{ToPrettyString(user):player} boarding-teleport early-return swelling scheduled risk={explosionRisk:0.00}");
+        return true;
+    }
+
+    private void DetonateEarlyReturnCatastrophe(EntityUid user, float explosionRisk)
+    {
+        if (!Exists(user))
+            return;
+
+        if (TryComp<MobStateComponent>(user, out var mobState) && _mobState.IsDead(user, mobState))
+            return;
+
+        if (HasComp<ScaleVisualsComponent>(user))
+            RemCompDeferred<ScaleVisualsComponent>(user);
+
+        _popup.PopupEntity(Loc.GetString("boarding-teleport-platform-early-return-catastrophe"), user, user, PopupType.LargeCaution);
+
+        var intensity = 35f + explosionRisk * 40f;
+        var maxTile = 4f + explosionRisk * 3f;
+        _explosion.QueueExplosion(user, "Default", intensity, 5f, maxTile, user: user);
+        _body.GibBody(user, gibOrgans: true);
+        _adminLogger.Add(LogType.Explosion, LogImpact.High,
+            $"{ToPrettyString(user):player} boarding-teleport early-return catastrophe risk={explosionRisk:0.00} intensity={intensity:0}");
+    }
+
+    private bool TryResolveSignalUser(SignalReceivedEvent args, out EntityUid user)
+    {
+        if (args.Data?.TryGetValue(BoardingTeleportRemoteSystem.UserPayloadKey, out var rawUser) == true &&
+            rawUser is NetEntity netUser &&
+            TryGetEntity(netUser, out var payloadUser) &&
+            payloadUser is { } resolvedUser &&
+            HasComp<MobStateComponent>(resolvedUser))
+        {
+            user = resolvedUser;
+            return true;
+        }
+
+        if (args.Trigger is { } trigger && TryGetSignalUser(trigger, out user))
+            return true;
+
+        user = default;
+        return false;
+    }
+
     private bool TryGetSignalUser(EntityUid trigger, out EntityUid user)
     {
         var current = trigger;
@@ -782,6 +976,19 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
                 break;
 
             current = parent;
+        }
+
+        var handsQuery = EntityQueryEnumerator<HandsComponent>();
+        while (handsQuery.MoveNext(out var holder, out var hands))
+        {
+            foreach (var hand in hands.Hands.Values)
+            {
+                if (hand.HeldEntity == trigger)
+                {
+                    user = holder;
+                    return true;
+                }
+            }
         }
 
         user = default;

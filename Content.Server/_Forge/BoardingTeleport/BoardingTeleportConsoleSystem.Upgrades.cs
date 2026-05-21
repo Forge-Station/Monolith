@@ -14,6 +14,22 @@ public sealed partial class BoardingTeleportConsoleSystem
         UpdateUi(ent);
     }
 
+    private void OnToggleSharedLanding(Entity<BoardingTeleportConsoleComponent> ent, ref BoardingTeleportToggleSharedLandingMessage args)
+    {
+        ent.Comp.UseSharedLandingZone = !ent.Comp.UseSharedLandingZone;
+
+        if (ent.Comp.UseSharedLandingZone && ent.Comp.LandingCoordinates is { } shared)
+        {
+            _lock.EnsurePlatformLandings(ent.Comp, Math.Max(1, _lock.GetOrderedPlatforms(ent.Owner).Count));
+            var netCoords = GetNetCoordinates(shared);
+            for (var i = 0; i < ent.Comp.PlatformLandings.Count; i++)
+                ent.Comp.PlatformLandings[i] = netCoords;
+        }
+
+        Dirty(ent);
+        UpdateUi(ent);
+    }
+
     private void OnSyncVolley(Entity<BoardingTeleportConsoleComponent> ent, ref BoardingTeleportSyncVolleyMessage args)
     {
         RaiseLocalEvent(new BoardingTeleportSyncVolleyEvent(ent.Owner));
@@ -23,7 +39,19 @@ public sealed partial class BoardingTeleportConsoleSystem
     public EntityCoordinates? GetLandingForPlatform(EntityUid consoleUid, BoardingTeleportConsoleComponent console, EntityUid platformUid)
     {
         var slot = _lock.GetPlatformSlotIndex(consoleUid, platformUid);
-        return _lock.GetLandingForPlatform(console, slot) ?? console.LandingCoordinates;
+        return _lock.GetLandingForPlatform(console, slot);
+    }
+
+    private NetCoordinates? GetSelectedLandingNet(BoardingTeleportConsoleComponent console)
+    {
+        if (console.UseSharedLandingZone)
+            return console.LandingCoordinates is { } shared ? GetNetCoordinates(shared) : null;
+
+        var slot = Math.Clamp(console.SelectedPlatformSlot, 0, BoardingTeleportConstants.MaxPlatformLandingSlots - 1);
+        if (slot >= 0 && slot < console.PlatformLandings.Count && console.PlatformLandings[slot] is { } perSlot)
+            return perSlot;
+
+        return console.LandingCoordinates is { } fallback ? GetNetCoordinates(fallback) : null;
     }
 
     public void ApplyLockAndScramblerToBalance(
@@ -61,6 +89,7 @@ public sealed partial class BoardingTeleportConsoleSystem
                 cooldown = (float) (platform.NextUse - _timing.CurTime).TotalSeconds;
 
             var landing = _lock.GetLandingForPlatform(console, slot);
+            var hasLandingResolved = landing != null || console.LandingCoordinates != null;
             var name = MetaData(platformUid).EntityName;
 
             entries.Add(new BoardingTeleportPlatformUiEntry
@@ -69,7 +98,7 @@ public sealed partial class BoardingTeleportConsoleSystem
                 Name = name,
                 CooldownSeconds = cooldown,
                 IsReady = cooldown is not > 0.05f && !platform.DeparturePending && this.IsPowered(platformUid, EntityManager),
-                HasLanding = landing != null,
+                HasLanding = hasLandingResolved,
                 SlotIndex = slot,
                 IsSelected = slot == console.SelectedPlatformSlot,
             });

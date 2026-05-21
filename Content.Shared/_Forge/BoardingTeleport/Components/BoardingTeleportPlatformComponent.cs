@@ -91,6 +91,12 @@ public sealed partial class BoardingTeleportPlatformComponent : Component
     public bool PendingEmergencyReturn;
 
     [ViewVariables]
+    public bool PendingEarlyReturn;
+
+    [ViewVariables]
+    public float PendingEarlyReturnExplosionRisk;
+
+    [ViewVariables]
     public bool PendingReturning;
 
     [ViewVariables]

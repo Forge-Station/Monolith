@@ -13,8 +13,9 @@ public sealed class BoardingTeleportEmergencyConfirmWindow : FancyWindow
 
     private bool _finished;
     private readonly RichTextLabel _messageLabel;
+    private readonly ConfirmButton _confirmButton;
 
-    public BoardingTeleportEmergencyConfirmWindow(string title, string message)
+    public BoardingTeleportEmergencyConfirmWindow(string title, string message, string confirmButtonText)
     {
         Title = title;
         MinWidth = 420;
@@ -38,13 +39,13 @@ public sealed class BoardingTeleportEmergencyConfirmWindow : FancyWindow
         };
 
         var cancelButton = new Button { Text = Loc.GetString("quick-dialog-ui-cancel") };
-        var confirmButton = new ConfirmButton
+        _confirmButton = new ConfirmButton
         {
-            Text = Loc.GetString("boarding-teleport-emergency-return-confirm-button"),
+            Text = confirmButtonText,
         };
 
         cancelButton.OnPressed += _ => Finish(cancelled: true);
-        confirmButton.OnPressed += _ => Finish(cancelled: false);
+        _confirmButton.OnPressed += _ => Finish(cancelled: false);
 
         OnClose += () =>
         {
@@ -53,17 +54,18 @@ public sealed class BoardingTeleportEmergencyConfirmWindow : FancyWindow
         };
 
         buttons.AddChild(cancelButton);
-        buttons.AddChild(confirmButton);
+        buttons.AddChild(_confirmButton);
         root.AddChild(buttons);
 
         ContentsContainer.AddChild(root);
     }
 
-    public void SetContent(string title, string message)
+    public void SetContent(string title, string message, string confirmButtonText)
     {
         _finished = false;
         Title = title;
         _messageLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(message));
+        _confirmButton.Text = confirmButtonText;
     }
 
     private void Finish(bool cancelled)

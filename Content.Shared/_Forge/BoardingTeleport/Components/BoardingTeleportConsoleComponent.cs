@@ -32,6 +32,9 @@ public sealed partial class BoardingTeleportConsoleComponent : Component
     [ViewVariables, AutoNetworkedField]
     public List<NetCoordinates?> PlatformLandings = new();
 
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public bool UseSharedLandingZone = true;
+
     [ViewVariables, AutoNetworkedField]
     public TimeSpan? LockEstablishedAt;
 }

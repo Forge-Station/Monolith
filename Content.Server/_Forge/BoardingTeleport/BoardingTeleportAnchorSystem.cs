@@ -58,7 +58,7 @@ public sealed class BoardingTeleportAnchorSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        _platform.ClearPendingEmergencyConfirm(ent.Owner);
+        _platform.ClearPendingReturnConfirm(ent.Owner);
         _alerts.ClearAlert(ent.Owner, ReturnAlert);
         RemCompDeferred<BoardingTeleportAnchorComponent>(ent);
     }

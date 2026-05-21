@@ -81,4 +81,9 @@ public sealed class BoardingTeleportBoundUserInterface : BoundUserInterface
     {
         SendMessage(new BoardingTeleportSyncVolleyMessage());
     }
+
+    public void ToggleSharedLanding()
+    {
+        SendMessage(new BoardingTeleportToggleSharedLandingMessage());
+    }
 }

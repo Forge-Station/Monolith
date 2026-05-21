@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Forge.BoardingTeleport.Components;
 
@@ -10,6 +11,13 @@ public sealed partial class BoardingTeleportAnchorComponent : Component
 
     [ViewVariables, AutoNetworkedField]
     public TimeSpan? ExpiresAt;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [ViewVariables, AutoNetworkedField]
+    public TimeSpan? CreatedAt;
+
+    [ViewVariables, AutoNetworkedField]
+    public float ReturnWindowSeconds;
 
     [ViewVariables, AutoNetworkedField]
     public bool EmergencyReturnUsed;

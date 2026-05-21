@@ -26,6 +26,8 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
     public readonly float LockScatterPenalty;
     public readonly float LockRiskPenalty;
     public readonly int SelectedPlatformSlot;
+    public readonly bool UseSharedLandingZone;
+    public readonly NetCoordinates? SelectedLandingCoordinates;
     public readonly List<BoardingTeleportPlatformUiEntry> Platforms;
 
     public BoardingTeleportBoundUserInterfaceState(
@@ -48,6 +50,8 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
         float lockScatterPenalty,
         float lockRiskPenalty,
         int selectedPlatformSlot,
+        bool useSharedLandingZone,
+        NetCoordinates? selectedLandingCoordinates,
         List<BoardingTeleportPlatformUiEntry> platforms)
     {
         Page = page;
@@ -69,6 +73,8 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
         LockScatterPenalty = lockScatterPenalty;
         LockRiskPenalty = lockRiskPenalty;
         SelectedPlatformSlot = selectedPlatformSlot;
+        UseSharedLandingZone = useSharedLandingZone;
+        SelectedLandingCoordinates = selectedLandingCoordinates;
         Platforms = platforms;
     }
 }
@@ -146,6 +152,18 @@ public sealed class BoardingTeleportSyncVolleyMessage : BoundUserInterfaceMessag
 }
 
 [Serializable, NetSerializable]
+public sealed class BoardingTeleportToggleSharedLandingMessage : BoundUserInterfaceMessage
+{
+}
+
+[Serializable, NetSerializable]
+public enum BoardingTeleportReturnConfirmKind : byte
+{
+    Emergency,
+    Early,
+}
+
+[Serializable, NetSerializable]
 public enum BoardingTeleportUiKey : byte
 {
     Key,
@@ -173,6 +191,8 @@ public enum BoardingTeleportStatus : byte
     NoEnginePower,
     EngineRecharging,
     TargetShielded,
+    TargetShieldTooStrong,
+    SourceShieldBlocksTeleport,
     TargetInFtl,
     TargetScrambled,
     TargetFriendly,

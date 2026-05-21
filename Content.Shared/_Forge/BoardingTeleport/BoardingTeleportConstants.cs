@@ -46,6 +46,19 @@ public static class BoardingTeleportConstants
     public const float EmergencyReturnRisk = 0.40f;
     public const float EmergencyReturnScatter = 2.5f;
 
+    /// <summary>
+    /// When remaining return window is above this fraction, early return requires confirmation.
+    /// </summary>
+    public const float EarlyReturnSafeRemainingFraction = 0.15f;
+
+    public const float EarlyReturnMinExplosionRisk = 0.05f;
+    public const float EarlyReturnMaxExplosionRisk = 0.90f;
+
+    public const float EarlyReturnCatastropheDelaySeconds = 5f;
+    public const int EarlyReturnCatastropheSwellingSteps = 10;
+    public const float EarlyReturnCatastropheMinScale = 1.15f;
+    public const float EarlyReturnCatastropheMaxScale = 2.05f;
+
     public const float ScramblerDefaultScatterBonus = 1.5f;
     public const float ScramblerDefaultRiskBonus = 0.18f;
 

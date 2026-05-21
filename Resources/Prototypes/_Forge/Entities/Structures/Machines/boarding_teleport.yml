@@ -1,8 +1,8 @@
 - type: entity
   parent: [BaseStructureDisableToolUse, BaseComputerAiAccess]
   id: ComputerBoardingTeleport
-  name: bluespace teleport console
-  description: Selects a hostile grid and landing tile for linked bluespace boarding platforms.
+  name: bluespace boarding console
+  description: Selects a hostile grid and landing point for linked boarding platforms.
   components:
   - type: Sprite
     sprite: Forge/Structures/Machines/boarding_teleport_computer.rsi
@@ -44,8 +44,8 @@
 - type: entity
   id: BoardingTeleportEngine
   parent: [BaseStructureDisableToolUse, ConstructibleMachine, BaseMachinePowered]
-  name: bluespace teleport engine
-  description: Powers a boarding teleport console on the same grid. Sets acquisition range and lock tolerances.
+  name: bluespace boarding engine
+  description: Powers the console on the same grid. Sets acquisition range and lock tolerances.
   components:
   - type: InteractionOutline
   - type: Physics
@@ -80,6 +80,7 @@
     maxTargetVelocity: 50
     maxTargetAngularVelocity: 15
     jumpCooldown: 15
+    engineTier: 1
   - type: ApcPowerReceiver
     powerLoad: 15000
   - type: Machine
@@ -89,7 +90,7 @@
 - type: entity
   parent: BoardingTeleportEngine
   id: BoardingTeleportEngineExperimental
-  name: experimental bluespace teleport engine
+  name: experimental bluespace boarding engine
   description: Phase-shift tuned drive with higher risk tolerance and faster lock recovery.
   components:
   - type: BoardingTeleportEngine
@@ -97,21 +98,34 @@
     experimentalRiskBoost: true
     velocityToleranceMultiplier: 1.25
     jumpCooldown: 20
+    engineTier: 4
+
+- type: entity
+  parent: BoardingTeleportEngine
+  id: BoardingTeleportEngineTier3
+  name: military bluespace boarding engine
+  description: A hardened drive that can pierce tier-1 and tier-2 ship shields while establishing a boarding lock.
+  components:
+  - type: BoardingTeleportEngine
+    range: 400
+    engineTier: 3
+    jumpCooldown: 18
 
 - type: entity
   parent: BoardingTeleportEngine
   id: BoardingTeleportEngineAdvanced
-  name: advanced bluespace teleport engine
-  description: Extended bluespace acquisition range for boarding teleports.
+  name: advanced bluespace boarding engine
+  description: Extended acquisition range and tier-2 shield penetration.
   components:
   - type: BoardingTeleportEngine
     range: 450
+    engineTier: 2
 
 - type: entity
   id: BoardingBluespaceScrambler
   parent: [BaseStructureDisableToolUse, ConstructibleMachine, BaseMachinePowered]
   name: bluespace scrambler
-  description: Disrupts hostile boarding teleports targeting this grid. Blocks locks while powered.
+  description: Disrupts hostile boarding jumps targeting this grid. Blocks locks while powered.
   components:
   - type: InteractionOutline
   - type: Physics
@@ -156,7 +170,7 @@
 - type: entity
   id: BoardingTeleportPlatform
   parent: [BaseStructureDisableToolUse, ConstructibleMachine, BaseMachinePowered]
-  name: bluespace teleport platform
+  name: bluespace boarding platform
   description: A linked platform that sends one boarder to the console-selected landing tile.
   components:
   - type: InteractionOutline
@@ -237,7 +251,7 @@
 - type: entity
   parent: BoardingTeleportPlatform
   id: BoardingTeleportPlatformAdvanced
-  name: advanced bluespace teleport platform
+  name: advanced bluespace boarding platform
   description: Faster recharge and a wider activation field for boarding teams.
   components:
   - type: BoardingTeleportPlatform
@@ -247,7 +261,7 @@
 - type: entity
   parent: BoardingTeleportPlatform
   id: BoardingTeleportPlatformExperimental
-  name: experimental bluespace teleport platform
+  name: experimental bluespace boarding platform
   description: Higher destabilization risk, but phase-shift scatter control improves landing spread.
   components:
   - type: BoardingTeleportPlatform
@@ -259,8 +273,8 @@
 - type: entity
   parent: BaseFlatpack
   id: BoardingTeleportEngineFlatpack
-  name: bluespace teleport engine flatpack
-  description: A flatpack used for constructing a bluespace teleport engine.
+  name: bluespace boarding engine flatpack
+  description: A flatpack for constructing a bluespace boarding engine.
   components:
   - type: Flatpack
     entity: BoardingTeleportEngine
@@ -270,15 +284,24 @@
 - type: entity
   parent: BoardingTeleportEngineFlatpack
   id: BoardingTeleportEngineAdvancedFlatpack
-  name: advanced bluespace teleport engine flatpack
+  name: advanced bluespace boarding engine flatpack
   components:
   - type: Flatpack
     entity: BoardingTeleportEngineAdvanced
 
 - type: entity
   parent: BoardingTeleportEngineFlatpack
+  id: BoardingTeleportEngineTier3Flatpack
+  name: military bluespace boarding engine flatpack
+  description: A tier-3 boarding engine flatpack. Company research required before fabrication.
+  components:
+  - type: Flatpack
+    entity: BoardingTeleportEngineTier3
+
+- type: entity
+  parent: BoardingTeleportEngineFlatpack
   id: BoardingTeleportEngineExperimentalFlatpack
-  name: experimental bluespace teleport engine flatpack
+  name: experimental bluespace boarding engine flatpack
   components:
   - type: Flatpack
     entity: BoardingTeleportEngineExperimental
@@ -297,8 +320,8 @@
 - type: entity
   parent: BaseFlatpack
   id: BoardingTeleportConsoleFlatpack
-  name: bluespace teleport console flatpack
-  description: A flatpack used for constructing a bluespace teleport console.
+  name: bluespace boarding console flatpack
+  description: A flatpack for constructing a boarding console.
   components:
   - type: Flatpack
     entity: ComputerBoardingTeleport
@@ -308,7 +331,7 @@
 - type: entity
   parent: BaseFlatpack
   id: BoardingTeleportPlatformFlatpack
-  name: bluespace teleport platform flatpack
+  name: bluespace boarding platform flatpack
   description: A flatpack used for constructing a bluespace teleport platform.
   components:
   - type: Flatpack
@@ -319,7 +342,7 @@
 - type: entity
   parent: BoardingTeleportPlatformFlatpack
   id: BoardingTeleportPlatformAdvancedFlatpack
-  name: advanced bluespace teleport platform flatpack
+  name: advanced bluespace boarding platform flatpack
   components:
   - type: Flatpack
     entity: BoardingTeleportPlatformAdvanced
@@ -327,7 +350,7 @@
 - type: entity
   parent: BoardingTeleportPlatformFlatpack
   id: BoardingTeleportPlatformExperimentalFlatpack
-  name: experimental bluespace teleport platform flatpack
+  name: experimental bluespace boarding platform flatpack
   components:
   - type: Flatpack
     entity: BoardingTeleportPlatformExperimental

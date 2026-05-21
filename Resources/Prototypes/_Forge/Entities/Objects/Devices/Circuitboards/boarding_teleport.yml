@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseComputerCircuitboard
   id: BoardingTeleportConsoleCircuitboard
-  name: bluespace teleport console board
-  description: A computer printed circuit board for a bluespace boarding teleport console.
+  name: bluespace boarding console board
+  description: A computer circuit board for a bluespace boarding console.
   components:
   - type: Sprite
     state: cpu_science
@@ -34,8 +34,8 @@
 - type: entity
   parent: BaseMachineCircuitboard
   id: BoardingTeleportEngineMachineCircuitboard
-  name: bluespace teleport engine board
-  description: A machine printed circuit board for a bluespace boarding teleport engine.
+  name: bluespace boarding engine board
+  description: A machine circuit board for a bluespace boarding engine.
   components:
   - type: Sprite
     state: science
@@ -52,8 +52,8 @@
 - type: entity
   parent: BaseMachineCircuitboard
   id: BoardingTeleportPlatformMachineCircuitboard
-  name: bluespace teleport platform board
-  description: A machine printed circuit board for a bluespace boarding teleport platform.
+  name: bluespace boarding platform board
+  description: A machine circuit board for a boarding platform.
   components:
   - type: Sprite
     state: science

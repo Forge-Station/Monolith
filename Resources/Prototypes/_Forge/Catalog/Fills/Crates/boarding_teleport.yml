@@ -1,8 +1,8 @@
 - type: entity
   parent: CrateScienceSecure
   id: CrateBoardingTeleportKit
-  name: bluespace boarding teleport kit
-  description: Contains packed equipment for a four-pad bluespace boarding teleport system.
+  name: bluespace boarding kit crate
+  description: Packed equipment for a four-platform bluespace boarding system.
   components:
   - type: StorageFill
     contents:

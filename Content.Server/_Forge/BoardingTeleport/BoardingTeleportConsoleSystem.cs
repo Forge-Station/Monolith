@@ -115,6 +115,8 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         SubscribeLocalEvent<BoardingTeleportConsoleComponent, BoardingTeleportSyncVolleyMessage>(OnSyncVolley);
 
+        SubscribeLocalEvent<BoardingTeleportConsoleComponent, BoardingTeleportToggleSharedLandingMessage>(OnToggleSharedLanding);
+
     }
 
 
@@ -325,11 +327,22 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         _lock.EnsurePlatformLandings(ent.Comp, Math.Max(1, _lock.GetOrderedPlatforms(ent.Owner).Count));
         var slot = Math.Clamp(ent.Comp.SelectedPlatformSlot, 0, BoardingTeleportConstants.MaxPlatformLandingSlots - 1);
-        while (ent.Comp.PlatformLandings.Count <= slot)
-            ent.Comp.PlatformLandings.Add(null);
-        ent.Comp.PlatformLandings[slot] = GetNetCoordinates(coordinates);
-        if (slot == 0)
+        var netCoords = GetNetCoordinates(coordinates);
+
+        if (ent.Comp.UseSharedLandingZone)
+        {
             ent.Comp.LandingCoordinates = coordinates;
+            for (var i = 0; i < ent.Comp.PlatformLandings.Count; i++)
+                ent.Comp.PlatformLandings[i] = netCoords;
+        }
+        else
+        {
+            while (ent.Comp.PlatformLandings.Count <= slot)
+                ent.Comp.PlatformLandings.Add(null);
+            ent.Comp.PlatformLandings[slot] = netCoords;
+            if (slot == 0)
+                ent.Comp.LandingCoordinates = coordinates;
+        }
 
         _lock.MarkLockEstablished(ent.Comp);
         ent.Comp.Status = BoardingTeleportStatus.LandingSelected;
@@ -519,6 +532,10 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             ent.Comp.SelectedPlatformSlot,
 
+            ent.Comp.UseSharedLandingZone,
+
+            GetSelectedLandingNet(ent.Comp),
+
             platforms);
 
 
@@ -553,6 +570,12 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             return false;
 
+        }
+
+        if (BoardingTeleportShieldHelper.HasActiveTeleportImmuneShield(EntityManager, scannerGrid))
+        {
+            status = BoardingTeleportStatus.SourceShieldBlocksTeleport;
+            return false;
         }
 
         _engine.TryLinkConsole((consoleUid, console));
@@ -1199,11 +1222,13 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
 
 
-        if (HasComp<ShipShieldedComponent>(targetGrid))
+        if (!BoardingTeleportShieldHelper.CanEngineBypassTargetShield(EntityManager, targetGrid, engine, out var shieldTier))
 
         {
 
-            status = BoardingTeleportStatus.TargetShielded;
+            status = BoardingTeleportShieldHelper.HasActiveTeleportImmuneShield(EntityManager, targetGrid)
+                ? BoardingTeleportStatus.TargetShielded
+                : BoardingTeleportStatus.TargetShieldTooStrong;
 
             return false;
 
@@ -1351,7 +1376,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
 
 
-        if (!grid.TryGetTileRef(tile, out _))
+        if (!_map.TryGetTileRef(gridUid, grid, tile, out _))
 
             return false;
 

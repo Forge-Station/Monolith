@@ -260,11 +260,6 @@
   id: ClothingBackpackERTJanitor
   result: ClothingBackpackERTJanitor
   
-- type: latheRecipe
-  parent: BaseBackpackERTRecipe 
-  id: ClothingBackpackDuffelCBURN
-  result: ClothingBackpackDuffelCBURN
-  
 # TTI
 - type: latheRecipe
   parent: MonoHardsuitT3Recipe

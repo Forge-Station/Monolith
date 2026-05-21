@@ -162,7 +162,7 @@
   technologyPrerequisites:
   - NanotrasenArmorT5
   - UniversalMaterialResearchT3
-  position: 14, 10
+  position: 13, 10
   
 - type: technology
   id: NanotrasenWeaponT1

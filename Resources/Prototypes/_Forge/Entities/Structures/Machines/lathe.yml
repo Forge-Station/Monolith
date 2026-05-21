@@ -85,4 +85,4 @@
     - Translators # Language
     - TranslatorImplanters # Language
   - type: Machine
-    board: MedicalTechFabCircuitboard
+    board: TraumaTechFabCircuitboard

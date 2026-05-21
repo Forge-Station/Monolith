@@ -71,8 +71,3 @@
   parent: BaseGoldCircuitboardRecipe
   id: MedicalTechFabCircuitboard
   result: MedicalTechFabCircuitboard
-
-- type: latheRecipe
-  parent: BaseGoldCircuitboardRecipe
-  id: TraumaTechFabCircuitboard
-  result: TraumaTechFabCircuitboard

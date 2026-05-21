@@ -40,6 +40,11 @@
     radius: 1.5
     energy: 1.6
     color: "#65b8e2"
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false
 
 - type: entity
   id: BoardingTeleportEngine
@@ -76,16 +81,21 @@
     - state: charging
       shader: unshaded
   - type: BoardingTeleportEngine
-    range: 300
-    maxTargetVelocity: 50
-    maxTargetAngularVelocity: 15
-    jumpCooldown: 15
+    range: 500
+    maxTargetVelocity: 45
+    maxTargetAngularVelocity: 45
+    jumpCooldown: 60
     engineTier: 1
   - type: ApcPowerReceiver
-    powerLoad: 15000
+    powerLoad: 20000
   - type: Machine
     board: BoardingTeleportEngineMachineCircuitboard
   - type: CollideOnAnchor
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
 
 - type: entity
   parent: BoardingTeleportEngine
@@ -94,11 +104,16 @@
   description: Phase-shift tuned drive with higher risk tolerance and faster lock recovery.
   components:
   - type: BoardingTeleportEngine
+    range: 1500
+    maxTargetVelocity: 75
+    maxTargetAngularVelocity: 75
     experimentalPhaseShift: true
     experimentalRiskBoost: true
     velocityToleranceMultiplier: 1.25
-    jumpCooldown: 20
+    jumpCooldown: 30
     engineTier: 4
+  - type: ApcPowerReceiver
+    powerLoad: 40000
 
 - type: entity
   parent: BoardingTeleportEngine
@@ -118,8 +133,13 @@
   description: Extended acquisition range and tier-2 shield penetration.
   components:
   - type: BoardingTeleportEngine
-    range: 450
+    range: 750
+    maxTargetVelocity: 55
+    maxTargetAngularVelocity: 55
+    jumpCooldown: 50
     engineTier: 2
+  - type: ApcPowerReceiver
+    powerLoad: 25000
 
 - type: entity
   id: BoardingBluespaceScrambler
@@ -166,6 +186,11 @@
     radius: 1.5
     energy: 1.2
     color: "#ff6868"
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
 
 - type: entity
   id: BoardingTeleportPlatform
@@ -221,9 +246,10 @@
           Idle: { visible: true, state: idle, shader: unshaded }
           Charging: { visible: true, state: charging, shader: unshaded }
   - type: BoardingTeleportPlatform
-    cooldown: 30
-    departureDelay: 10
-    returnWindowSeconds: 300
+    cooldown: 60
+    departureDelay: 30
+    returnWindowSeconds: 240
+    maxReturnDistance: 550
     warmupEffect: BoardingTeleportWarmupEffect
     teleportEffect: BoardingTeleportFlashEffect
     activationSound:
@@ -242,21 +268,30 @@
     ports:
     - BoardingTeleport
   - type: ApcPowerReceiver
-    powerLoad: 1000
+    powerLoad: 2500
   - type: Machine
     board: BoardingTeleportPlatformMachineCircuitboard
   - type: Appearance
   - type: CollideOnAnchor
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
 
 - type: entity
   parent: BoardingTeleportPlatform
   id: BoardingTeleportPlatformAdvanced
   name: advanced bluespace boarding platform
-  description: Faster recharge and a wider activation field for boarding teams.
+  description: Faster charge cycle, longer return channel, and extended return range.
   components:
   - type: BoardingTeleportPlatform
-    cooldown: 18
-    activationRadius: 1.25
+    cooldown: 50
+    departureDelay: 25
+    returnWindowSeconds: 210
+    maxReturnDistance: 800
+  - type: ApcPowerReceiver
+    powerLoad: 3500
 
 - type: entity
   parent: BoardingTeleportPlatform
@@ -267,8 +302,12 @@
   - type: BoardingTeleportPlatform
     experimentalScatterControl: true
     experimentalRisk: true
-    departureDelay: 8
-    cooldown: 35
+    cooldown: 30
+    departureDelay: 15
+    returnWindowSeconds: 180
+    maxReturnDistance: 2000
+  - type: ApcPowerReceiver
+    powerLoad: 5000
 
 - type: entity
   parent: BaseFlatpack
@@ -280,6 +319,11 @@
     entity: BoardingTeleportEngine
   - type: StaticPrice
     price: 2000
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
 
 - type: entity
   parent: BoardingTeleportEngineFlatpack
@@ -316,6 +360,11 @@
     entity: BoardingBluespaceScrambler
   - type: StaticPrice
     price: 1800
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
 
 - type: entity
   parent: BaseFlatpack
@@ -327,6 +376,11 @@
     entity: ComputerBoardingTeleport
   - type: StaticPrice
     price: 2500
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false
 
 - type: entity
   parent: BaseFlatpack
@@ -338,6 +392,11 @@
     entity: BoardingTeleportPlatform
   - type: StaticPrice
     price: 1500
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
 
 - type: entity
   parent: BoardingTeleportPlatformFlatpack

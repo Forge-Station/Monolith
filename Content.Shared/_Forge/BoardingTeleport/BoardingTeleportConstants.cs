@@ -2,9 +2,9 @@ namespace Content.Shared._Forge.BoardingTeleport;
 
 public static class BoardingTeleportConstants
 {
-    public const float DefaultRange = 300f;
-    public const float DefaultMaxTargetVelocity = 50f;
-    public const float DefaultMaxTargetAngularVelocity = 15f;
+    public const float DefaultRange = 500f;
+    public const float DefaultMaxTargetVelocity = 45f;
+    public const float DefaultMaxTargetAngularVelocity = 45f;
 
     public const int MaxPlatformLandingSlots = 4;
 
@@ -41,7 +41,7 @@ public static class BoardingTeleportConstants
     public const float LockDegradeRiskBonus = 0.03f;
     public const float LockMaxAgeSeconds = 180f;
 
-    public const float DefaultEngineJumpCooldown = 15f;
+    public const float DefaultEngineJumpCooldown = 60f;
     public const float EmergencyReturnDelay = 3f;
     public const float EmergencyReturnRisk = 0.40f;
     public const float EmergencyReturnScatter = 2.5f;

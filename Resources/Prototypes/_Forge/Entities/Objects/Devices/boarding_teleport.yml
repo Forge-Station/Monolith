@@ -19,6 +19,11 @@
     ports:
     - Pressed
   - type: BoardingTeleportRemote
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false
   - type: StaticPrice
     price: 250
 
@@ -32,3 +37,8 @@
     entity: BoardingTeleportRemote
   - type: StaticPrice
     price: 300
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false

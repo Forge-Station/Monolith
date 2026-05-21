@@ -25,6 +25,9 @@ public sealed partial class ProtectedGridComponent : Component
     [DataField]
     public bool KillHostileMobs = false;
 
+    [DataField]
+    public bool PreventTeleportation = false; // Forge-Change
+
     /// <summary>
     /// The sound made when a hostile mob is killed when entering a protected grid.
     /// </summary>

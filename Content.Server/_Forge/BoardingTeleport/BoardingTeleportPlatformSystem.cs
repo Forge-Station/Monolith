@@ -21,6 +21,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Sprite;
+using Content.Shared.Tiles;
 using System.Numerics;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -628,6 +629,14 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         if (!destination.IsValid(EntityManager))
         {
             _popup.PopupEntity(Loc.GetString("boarding-teleport-platform-landing-invalid"), user, user);
+            return;
+        }
+
+        if (!returning &&
+            TryComp<ProtectedGridComponent>(destination.EntityId, out var protectedGrid) &&
+            protectedGrid.PreventTeleportation)
+        {
+            _popup.PopupEntity(Loc.GetString("boarding-teleport-status-TargetGridProtected"), user, user);
             return;
         }
 

@@ -22,6 +22,7 @@
   - type: StationTransit
   - type: ProtectedGrid
     preventArtifactTriggers: true
+    preventTeleportation: true # Forge-Change
   - type: SolarPoweredGrid
     trackOnInit: true
     doNotCull: true

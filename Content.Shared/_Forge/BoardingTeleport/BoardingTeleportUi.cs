@@ -196,6 +196,7 @@ public enum BoardingTeleportStatus : byte
     TargetInFtl,
     TargetScrambled,
     TargetFriendly,
+    TargetGridProtected,
     LockExpired,
 }
 

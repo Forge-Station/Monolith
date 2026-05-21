@@ -35,6 +35,7 @@ using Content.Shared.Shuttles.Systems;
 
 using Content.Shared.Shuttles.UI.MapObjects;
 
+using Content.Shared.Tiles;
 using Robust.Server.GameObjects;
 
 using Robust.Shared.Map;
@@ -1220,7 +1221,11 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         }
 
-
+        if (TryComp<ProtectedGridComponent>(targetGrid, out var protectedGrid) && protectedGrid.PreventTeleportation)
+        {
+            status = BoardingTeleportStatus.TargetGridProtected;
+            return false;
+        }
 
         if (!BoardingTeleportShieldHelper.CanEngineBypassTargetShield(EntityManager, targetGrid, engine, out var shieldTier))
 
@@ -1374,7 +1379,8 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             return false;
 
-
+        if (TryComp<ProtectedGridComponent>(gridUid, out var protectedGrid) && protectedGrid.PreventTeleportation)
+            return false;
 
         if (!_map.TryGetTileRef(gridUid, grid, tile, out _))
 
@@ -1384,17 +1390,9 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         var mapUid = Transform(gridUid).MapUid;
 
-        if (_atmosphere.IsTileSpace(gridUid, mapUid, tile) ||
-
-            _atmosphere.IsTileAirBlocked(gridUid, tile, mapGridComp: grid))
-
-        {
-
+        // Any grid tile is valid (walls, windows, etc.). Only hard vacuum/space is rejected.
+        if (_atmosphere.IsTileSpace(gridUid, mapUid, tile))
             return false;
-
-        }
-
-
 
         coordinates = _map.GridTileToLocal(gridUid, grid, tile);
 

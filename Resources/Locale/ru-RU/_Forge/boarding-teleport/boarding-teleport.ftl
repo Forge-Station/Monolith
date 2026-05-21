@@ -2,7 +2,7 @@ boarding-teleport-window-title = Блюспейс-абордаж
 boarding-teleport-window-status-header = Статус захвата
 boarding-teleport-window-status-none = Цель не выбрана.
 boarding-teleport-window-sector-help = Наведите курсор на шаттл или на карте сектора и щёлкните, чтобы назначить цель.
-boarding-teleport-window-grid-help = Щёлкните по свободной клетке на карте судно — это будет точка высадки.
+boarding-teleport-window-grid-help = Щёлкните по любой клетке на карте судна — точка высадки (в том числе стена или закрытая зона).
 boarding-teleport-window-back = К карте сектора
 boarding-teleport-window-flavor-sector = [color=#9ecbff]Скан сектора:[/color] найдите цель и зафиксируйте блюспейс-захват.
 boarding-teleport-window-flavor-grid = [color=#ffd27f]Укажите точку высадки.[/color] Обратный прыжок — только с привязанного пульта на вашей платформе.
@@ -37,7 +37,7 @@ boarding-teleport-status-LandingSelected = Точка высадки задан�
 boarding-teleport-status-InvalidTarget = Это судно нельзя выбрать целью.
 boarding-teleport-status-TargetTooFar = Цель вне дальности блюспейс-захвата.
 boarding-teleport-status-TargetMoving = Цель движется слишком быстро — захват нестабилен.
-boarding-teleport-status-InvalidLanding = На эту клетку высадка невозможна.
+boarding-teleport-status-InvalidLanding = На эту клетку высадка невозможна (нет тайла или открытый космос).
 boarding-teleport-status-NoGrid = Консоль должна стоять на судне.
 boarding-teleport-status-NoEngine = На судне нет блюспейс-двигателя. Установите его на том же шаттле, что и консоль.
 boarding-teleport-status-TargetShielded = У цели активны щиты — блюспейс-захват заблокирован.
@@ -48,6 +48,7 @@ boarding-teleport-status-NoEnginePower = Блюспейс-двигатель о�
 boarding-teleport-status-EngineRecharging = Двигатель перезаряжается после скачка.
 boarding-teleport-status-TargetScrambled = На целевом судне работает блюспейс-глушитель — захват заблокирован.
 boarding-teleport-status-TargetFriendly = Нельзя абордировать своё судно или пристыкованный союзный шаттл.
+boarding-teleport-status-TargetGridProtected = Этот грид защищён — телепортация на него запрещена.
 boarding-teleport-status-LockExpired = Захват устарел. Заново подтвердите цель в консоли.
 
 boarding-teleport-window-sync-volley = Запустить все готовые платформы
@@ -117,14 +118,9 @@ boarding-teleport-port-description = Активирует связанную п�
 
 boarding-teleport-instructions = [head=2]Блюспейс-абордаж[/head]
 
-    1. На одном гриде разверните консоль, блюспейс-двигатель, четыре платформы и четыре пульта.
-    2. Двигатель сам привяжется к консоли и задаст дальность захвата и допуск по скорости цели.
-    3. Мультитулом добавьте платформы в список устройств консоли.
-    4. В режиме линковки соедините каждый пульт со своей платформой.
-    5. В консоли на карте сектора наведите курсор на вражеский шаттл и щёлкните по нему.
-    6. На следующем экране щёлкните по клетке на карте грида — это точка высадки.
-    7. Встаньте на платформу и нажмите её пульт. Уйдёт один человек; перезарядка — 30 секунд.
-    8. В течение пяти минут снова нажмите тот же пульт, чтобы вернуться. Перед каждым скачком цель проверяется заново.
+    Кратко: консоль + двигатель + платформы + пульты на одном гриде → захват цели в консоли → высадка с платформы → возврат тем же пультом, пока открыт канал.
+
+    Полное руководство и [bold]таблицы параметров по тирам[/bold] — в NT Guidebook: раздел Фронтир → [bold]Блюспейс-абордаж[/bold] ([textlink="обзор" link="BoardingTeleport"], [textlink="таблица" link="BoardingTeleportBalanceTable"]).
 
 research-discipline-forge-boarding-teleport = Блюспейс-абордаж
 research-discipline-forge-boarding-teleport-advanced = Продвинутый блюспейс-абордаж

@@ -9,7 +9,7 @@ namespace Content.Shared._Forge.BoardingTeleport.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BoardingTeleportPlatformComponent : Component
 {
-    public const float DefaultReturnWindowSeconds = 300f;
+    public const float DefaultReturnWindowSeconds = 240f;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public string ReceiverPort = "BoardingTeleport";
@@ -18,22 +18,22 @@ public sealed partial class BoardingTeleportPlatformComponent : Component
     public float ActivationRadius = 0.8f;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float Cooldown = 30f;
+    public float Cooldown = 60f;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float DepartureDelay = 10f;
+    public float DepartureDelay = 30f;
 
     /// <summary>
     /// How long after boarding the return channel stays open.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float ReturnWindowSeconds = 300f;
+    public float ReturnWindowSeconds = 240f;
 
     /// <summary>
     /// Maximum distance from the home platform at which a return jump is allowed.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float MaxReturnDistance = 400f;
+    public float MaxReturnDistance = 550f;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public bool ExperimentalScatterControl;

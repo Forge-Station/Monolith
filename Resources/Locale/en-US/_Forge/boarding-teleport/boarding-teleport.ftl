@@ -2,7 +2,7 @@ boarding-teleport-window-title = Bluespace boarding
 boarding-teleport-window-status-header = Lock status
 boarding-teleport-window-status-none = No target selected.
 boarding-teleport-window-sector-help = Hover a shuttle or grid on the sector map and click to select a target.
-boarding-teleport-window-grid-help = Click a free tile on the selected grid map to set the landing point.
+boarding-teleport-window-grid-help = Click any tile on the selected grid map for the landing point (walls and sealed areas included).
 boarding-teleport-window-back = Back to sector map
 boarding-teleport-window-flavor-sector = [color=#9ecbff]Sector scan:[/color] find a target and establish a bluespace lock.
 boarding-teleport-window-flavor-grid = [color=#ffd27f]Set your landing point.[/color] Return jumps only work from your platform's linked remote.
@@ -37,7 +37,7 @@ boarding-teleport-status-LandingSelected = Landing point set. Platforms are read
 boarding-teleport-status-InvalidTarget = This grid cannot be targeted.
 boarding-teleport-status-TargetTooFar = Target is outside bluespace acquisition range.
 boarding-teleport-status-TargetMoving = Target is moving too fast for a stable lock.
-boarding-teleport-status-InvalidLanding = You cannot land on that tile.
+boarding-teleport-status-InvalidLanding = That tile cannot be used for landing (no tile or open space).
 boarding-teleport-status-NoGrid = The console must be installed on a grid.
 boarding-teleport-status-NoEngine = No bluespace engine on this grid. Install one on the same shuttle as the console.
 boarding-teleport-status-TargetShielded = Target has active shields — bluespace lock denied.
@@ -48,6 +48,7 @@ boarding-teleport-status-NoEnginePower = Bluespace engine is unpowered.
 boarding-teleport-status-EngineRecharging = Bluespace engine is recharging after a jump.
 boarding-teleport-status-TargetScrambled = Target grid has an active bluespace scrambler — lock denied.
 boarding-teleport-status-TargetFriendly = Cannot board your own grid or a docked friendly vessel.
+boarding-teleport-status-TargetGridProtected = This grid is protected — teleportation onto it is forbidden.
 boarding-teleport-status-LockExpired = Landing lock expired. Reconfirm the target at the console.
 
 boarding-teleport-window-sync-volley = Launch all ready platforms
@@ -116,14 +117,9 @@ boarding-teleport-port-description = Activates the linked boarding platform.
 
 boarding-teleport-instructions = [head=2]Bluespace boarding[/head]
 
-    1. On one grid, deploy the console, bluespace engine, four platforms, and four remotes.
-    2. The engine auto-links to the console and sets acquisition range and speed tolerances.
-    3. Use a multitool to add the platforms to the console device list.
-    4. In link mode, pair each remote with its platform.
-    5. Open the console, hover the enemy shuttle on the sector map, and click it.
-    6. On the next screen, click a tile on that grid map — your landing point.
-    7. Stand on a platform and press its remote. One person is sent; the platform recharges for 30 seconds.
-    8. Within five minutes, press the same remote to return. The target is re-checked before each jump.
+    Quick: console + engine + platforms + remotes on one grid → lock target in the console → jump from a platform → return with the same remote while the channel is open.
+
+    Full guide and [bold]tier stat tables[/bold] — NT Guidebook: Frontier → [bold]Bluespace boarding[/bold] ([textlink="overview" link="BoardingTeleport"], [textlink="stats table" link="BoardingTeleportBalanceTable"]).
 
 research-discipline-forge-boarding-teleport = Bluespace boarding
 research-discipline-forge-boarding-teleport-advanced = Advanced bluespace boarding

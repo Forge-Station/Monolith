@@ -7,6 +7,11 @@
   - type: Paper
     contentSize: 3000
     content: boarding-teleport-instructions
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false
 
 - type: entity
   id: DisciplinesDiskBoardingTeleportTier4
@@ -28,3 +33,8 @@
   - type: StaticPrice
     price: 25000
     vendPrice: 100000
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false

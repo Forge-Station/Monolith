@@ -2,6 +2,7 @@
   id: TTISuplplies
   recipes:
   - OmnizineChemistryBottle
+  - JugOmnizine
   - Hypospray
   - HypoBrigmedic
   - HypoMiniLimitedEdition

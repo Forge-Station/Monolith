@@ -2,10 +2,10 @@
   abstract: true
   id: BaseBackpackERTRecipe 
   materials:
-    Cloth: 5000
+    Cloth: 3000
     Durathread: 2000
     Plasteel: 1000
-    Steel: 3000
+    Steel: 2000
 
 - type: latheRecipe
   parent: BaseJumpsuitRecipe
@@ -144,13 +144,12 @@
   materials:
     Glass: 3000
     Steel: 5000
-    Plastic: 2000
     Plasteel: 3000
     Durathread: 3000
     Silver: 1000
     Gold: 1000
-    Uranium: 3000
-    UraniumFissile: 100
+    Uranium: 1000
+    UraniumDepleted: 500
     
 - type: latheRecipe
   parent: MonoHardsuitT2Recipe
@@ -158,14 +157,13 @@
   result: ClothingOuterHardsuitERTMedical
   materials:
     Glass: 3000
-    Steel: 3000
-    Plastic: 2000
+    Steel: 4000
     Plasteel: 2000
     Durathread: 3000
     Silver: 1000
     Gold: 1000
-    Uranium: 3000
-    UraniumFissile: 100
+    Uranium: 2000
+    UraniumDepleted: 500
     
 - type: latheRecipe
   parent: MonoHardsuitT3Recipe
@@ -174,12 +172,11 @@
   materials:
     Glass: 3000
     Steel: 6000
-    Plastic: 2000
     Plasteel: 6000
     Durathread: 3000
-    Silver: 5000
-    Gold: 5000
-    UraniumFissile: 200
+    Silver: 3000
+    Gold: 3000
+    UraniumFissile: 100
 
 - type: latheRecipe
   parent: MonoHardsuitT2Recipe
@@ -188,12 +185,11 @@
   materials:
     Glass: 2000
     Steel: 4000
-    Plastic: 3000
     Plasteel: 1000
-    Durathread: 4000
+    Durathread: 5000
     Silver: 3000
     Gold: 3000
-    UraniumFissile: 100
+    UraniumDepleted: 500
     
 - type: latheRecipe
   parent: MonoHardsuitT2Recipe
@@ -202,40 +198,37 @@
   materials:
     Glass: 1000
     Steel: 3000
-    Plastic: 3000
-    Plasteel: 4000
+    Plasteel: 5000
     Durathread: 4000
-    Silver: 4000
-    Gold: 4000
-    UraniumFissile: 100
+    Silver: 2000
+    Gold: 2000
+    UraniumDepleted: 500
   
 - type: latheRecipe
   parent: MonoHardsuitT2Recipe
   id: ClothingOuterHardsuitERTJanitor
   result: ClothingOuterHardsuitERTJanitor
   materials:
-    Glass: 3000
-    Steel: 4000
+    Glass: 1000
+    Steel: 2000
     Plastic: 5000
     Plasteel: 1000
     Durathread: 4000
     Silver: 3000
-    Gold: 3000
-    UraniumFissile: 100
+    UraniumDepleted: 500
   
 - type: latheRecipe
   parent: MonoHardsuitT2Recipe
   id: ClothingOuterHardsuitERTMailCarrier
   result: ClothingOuterHardsuitERTMailCarrier
   materials:
-    Glass: 3000
-    Steel: 4000
+    Glass: 1000
+    Steel: 2000
     Plastic: 5000
     Plasteel: 1000
     Durathread: 4000
     Silver: 3000
-    Gold: 3000
-    UraniumFissile: 100
+    UraniumDepleted: 500
     
 - type: latheRecipe
   parent: BaseBackpackERTRecipe 
@@ -278,30 +271,28 @@
   id: ClothingOuterHardsuitTrauma
   result: ClothingOuterHardsuitTrauma
   materials:
-    Glass: 3000
-    Steel: 4000
+    Glass: 1000
+    Steel: 2000
     Plastic: 2000
-    Plasteel: 3500
-    Durathread: 4000
+    Plasteel: 2000
+    Durathread: 3000
     Silver: 2000
     Gold: 2000
-    Uranium: 1000
     UraniumFissile: 100
- 
+
 - type: latheRecipe
   parent: MonoHardsuitT3Recipe
-  id: ClothingOuterHardsuitTraumaLeader
-  result: ClothingOuterHardsuitTraumaLeader
+  id: ClothingOuterHardsuitTraumaShooter
+  result: ClothingOuterHardsuitTraumaShooter
   materials:
-    Glass: 3000
-    Steel: 5000
-    Plastic: 3000
-    Plasteel: 5000
-    Durathread: 6000
-    Silver: 5000
-    Gold: 5000
-    Uranium: 2000
-    UraniumFissile: 200
+    Glass: 1000
+    Steel: 4500
+    Plastic: 2500
+    Plasteel: 4000
+    Durathread: 5000
+    Silver: 3000
+    Gold: 3000
+    UraniumFissile: 100
     
 - type: latheRecipe
   parent: BaseJumpsuitRecipe
@@ -310,3 +301,141 @@
   materials:
     Cloth: 1000
     Durathread: 1000 
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpskirtTAF
+  result: ClothingUniformJumpskirtTAF
+  materials:
+    Cloth: 1000
+    Durathread: 1000 
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitTraumaBlue
+  result: ClothingUniformJumpsuitTraumaBlue
+  materials:
+    Cloth: 1000
+    Durathread: 1000 
+    
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpskirtTraumaBlue
+  result: ClothingUniformJumpskirtTraumaBlue
+  materials:
+    Cloth: 1000
+    Durathread: 1000 
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitTraumaStandart
+  result: ClothingUniformJumpsuitTraumaStandart
+  materials:
+    Cloth: 1000
+    Durathread: 1000 
+    
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitTraumaDirector
+  result: ClothingUniformJumpsuitTraumaDirector
+  materials:
+    Cloth: 1000
+    Durathread: 1000 
+    
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingOuterArmorBodyTrauma
+  result: ClothingOuterArmorBodyTrauma
+  materials:
+    Cloth: 2000
+    Plasteel: 3000
+    Steel: 3000
+    Durathread: 2000
+    Silver: 1000 
+    
+- type: latheRecipe
+  parent: ClothingShoesBootsMagSyndieRogue
+  id: ClothingShoesBootsMagTrauma
+  result: ClothingShoesBootsMagTrauma
+  completetime: 5
+  materials:
+    Steel: 1000
+    Silver: 1500
+
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingOuterCoatTrauma
+  result: ClothingOuterCoatTrauma
+  materials:
+    Cloth: 2000
+    Plasteel: 1000
+    Durathread: 1000
+   
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingOuterRobeTraumaBomber
+  result: ClothingOuterRobeTraumaBomber
+  materials:
+    Cloth: 1000
+    Durathread: 1000   
+
+- type: latheRecipe
+  parent: NFBaseMaskArmoredRecipe
+  id: ClothingMaskSterileTrauma
+  result: ClothingMaskSterileTrauma
+  materials:
+    Durathread: 3000
+    Plastic: 2000
+    Steel: 2000
+
+- type: latheRecipe
+  parent: NFBaseHelmetRecipe
+  id: ClothingHeadHatArmoredTrauma
+  result: ClothingHeadHatArmoredTrauma
+  materials:
+    Cloth: 2000
+    Plasteel: 1000
+    Durathread: 1000
+    Steel: 3000  
+
+- type: latheRecipe
+  parent: NFBaseHelmetRecipe
+  id: ClothingHeadHatArmoredTraumaShooter
+  result: ClothingHeadHatArmoredTraumaShooter
+  materials:
+    Cloth: 2000
+    Plasteel: 1000
+    Durathread: 1000
+    Steel: 3000  
+    
+- type: latheRecipe
+  parent: BaseNeckClothingRecipe
+  id: ClothingNeckCloakTrauma
+  result: ClothingNeckCloakTrauma
+  materials:
+    Cloth: 1000
+    Durathread: 2000
+
+- type: latheRecipe
+  parent: BaseNeckClothingRecipe
+  id: ClothingNeckMantleTrauma
+  result: ClothingNeckMantleTrauma
+  materials:
+    Cloth: 1000
+    Durathread: 2000
+    
+- type: latheRecipe
+  parent: BaseHatRecipe
+  id: ClothingHeadHatTraumaDirectorBeret
+  result: ClothingHeadHatTraumaDirectorBeret
+  materials:
+    Cloth: 1000
+    Durathread: 1000
+    
+- type: latheRecipe
+  parent: BaseHatRecipe
+  id: ClothingHeadHatTraumaBeret
+  result: ClothingHeadHatTraumaBeret
+  materials:
+    Cloth: 1000
+    Durathread: 1000

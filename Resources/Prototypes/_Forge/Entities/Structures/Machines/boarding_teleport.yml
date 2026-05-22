@@ -91,6 +91,7 @@
   - type: Machine
     board: BoardingTeleportEngineMachineCircuitboard
   - type: CollideOnAnchor
+    enable: true
   - type: GuideHelp
     guides:
     - BoardingTeleportBalanceTable
@@ -182,6 +183,7 @@
   - type: Machine
     board: BoardingBluespaceScramblerMachineCircuitboard
   - type: CollideOnAnchor
+    enable: true
   - type: PointLight
     radius: 1.5
     energy: 1.2

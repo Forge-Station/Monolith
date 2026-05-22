@@ -21,4 +21,8 @@ public sealed partial class BoardingTeleportAnchorComponent : Component
 
     [ViewVariables, AutoNetworkedField]
     public bool EmergencyReturnUsed;
+
+    /// <summary>Server-only cache so return alerts are not refreshed every tick.</summary>
+    [ViewVariables]
+    public bool? CachedReturnAlertEmergency;
 }

@@ -62,6 +62,6 @@ public static class BoardingTeleportConstants
     public const float ScramblerDefaultScatterBonus = 1.5f;
     public const float ScramblerDefaultRiskBonus = 0.18f;
 
-    public const float ChargeLockCheckIntervalSeconds = 0.5f;
+    public const float ChargeLockCheckIntervalSeconds = 1f;
     public const float DetectionBlipDurationSeconds = 45f;
 }

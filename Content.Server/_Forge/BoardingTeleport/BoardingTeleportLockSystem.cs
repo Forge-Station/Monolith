@@ -1,9 +1,9 @@
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Power.EntitySystems;
+using Content.Server.Shuttles.Systems;
 using Content.Shared._Forge.BoardingTeleport;
 using Content.Shared._Forge.BoardingTeleport.Components;
 using Content.Shared.Power;
-using Content.Server.Shuttles.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
@@ -11,7 +11,11 @@ namespace Content.Server._Forge.BoardingTeleport;
 
 public sealed class BoardingTeleportLockSystem : EntitySystem
 {
+    private readonly HashSet<Entity<BoardingBluespaceScramblerComponent>> _scramblerScratch = new();
+
     [Dependency] private readonly DeviceListSystem _deviceList = default!;
+    [Dependency] private readonly DockingSystem _docking = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -35,10 +39,11 @@ public sealed class BoardingTeleportLockSystem : EntitySystem
         var scatter = 0f;
         var risk = 0f;
 
-        var query = EntityQueryEnumerator<BoardingBluespaceScramblerComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var scrambler, out var xform))
+        _scramblerScratch.Clear();
+        _lookup.GetChildEntities(targetGrid, _scramblerScratch);
+        foreach (var (uid, scrambler) in _scramblerScratch)
         {
-            if (xform.GridUid != targetGrid || !this.IsPowered(uid, EntityManager))
+            if (!this.IsPowered(uid, EntityManager))
                 continue;
 
             if (scrambler.BlockLocks)
@@ -148,23 +153,6 @@ public sealed class BoardingTeleportLockSystem : EntitySystem
         console.LockEstablishedAt = _timing.CurTime;
     }
 
-    private bool AreGridsDocked(EntityUid gridA, EntityUid gridB)
-    {
-        var query = EntityQueryEnumerator<DockingComponent, TransformComponent>();
-        while (query.MoveNext(out var dockUid, out var dock, out var xform))
-        {
-            if (!dock.Docked || dock.DockedWith is not { } otherDockUid)
-                continue;
-
-            var grid = xform.GridUid;
-            var otherGrid = Transform(otherDockUid).GridUid;
-            if (grid == gridA && otherGrid == gridB)
-                return true;
-
-            if (grid == gridB && otherGrid == gridA)
-                return true;
-        }
-
-        return false;
-    }
+    private bool AreGridsDocked(EntityUid gridA, EntityUid gridB) =>
+        _docking.AreGridsDocked(gridA, gridB);
 }

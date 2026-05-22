@@ -22,8 +22,10 @@ using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Sprite;
 using Content.Shared.Tiles;
+using System.Linq;
 using System.Numerics;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -34,7 +36,9 @@ namespace Content.Server._Forge.BoardingTeleport;
 
 public sealed class BoardingTeleportPlatformSystem : EntitySystem
 {
-    private const int WarmupPulseSteps = 6;
+    private const int WarmupPulseSteps = 3;
+
+    private readonly HashSet<EntityUid> _chargingPlatforms = new();
 
     private sealed class PendingReturnConfirm
     {
@@ -63,6 +67,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
     [Dependency] private readonly ActorSystem _actors = default!;
     [Dependency] private readonly EuiManager _euis = default!;
     [Dependency] private readonly SharedScaleVisualsSystem _scaleVisuals = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     public override void Initialize()
     {
@@ -73,24 +78,68 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         SubscribeLocalEvent<BoardingTeleportPlatformComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<BoardingTeleportPlatformComponent, ComponentShutdown>(OnPlatformShutdown);
         SubscribeLocalEvent<BoardingTeleportSyncVolleyEvent>(OnSyncVolley);
+        SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<EntityTerminatingEvent>(OnEntityTerminating);
+    }
+
+    private void OnPlayerDetached(PlayerDetachedEvent args)
+    {
+        ClearPendingReturnConfirm(args.Entity);
+        CancelChargesForUser(args.Entity);
+    }
+
+    private void OnEntityTerminating(ref EntityTerminatingEvent args)
+    {
+        var uid = args.Entity;
+        ClearPendingReturnConfirm(uid);
+        CancelChargesForUser(uid);
+    }
+
+    private void CancelChargesForUser(EntityUid user)
+    {
+        foreach (var platformUid in _chargingPlatforms.ToArray())
+        {
+            if (!TryComp<BoardingTeleportPlatformComponent>(platformUid, out var platform) ||
+                platform.ActiveChargeUser != user)
+            {
+                continue;
+            }
+
+            CancelPendingTeleport(platformUid, platform);
+        }
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<BoardingTeleportPlatformComponent>();
-        while (query.MoveNext(out var platformUid, out var platform))
+        PruneStaleReturnConfirms();
+
+        if (_chargingPlatforms.Count == 0)
+            return;
+
+        _chargingPlatforms.RemoveWhere(uid => !Exists(uid) || !TryComp<BoardingTeleportPlatformComponent>(uid, out var p) || !p.DeparturePending);
+
+        foreach (var platformUid in _chargingPlatforms)
         {
-            if (!platform.DeparturePending)
+            if (!TryComp<BoardingTeleportPlatformComponent>(platformUid, out var platform))
                 continue;
+
+            if (platform.ActiveChargeUser is { } chargeUser &&
+                (!Exists(chargeUser) || _mobState.IsDead(chargeUser)))
+            {
+                CancelPendingTeleport(platformUid, platform);
+                continue;
+            }
+
+            platform.PendingCountdownElapsed += frameTime;
+            TickPendingCountdownAudio(platformUid, platform);
 
             platform.PendingLockCheckAccumulator += frameTime;
             if (platform.PendingLockCheckAccumulator < BoardingTeleportConstants.ChargeLockCheckIntervalSeconds)
                 continue;
 
             platform.PendingLockCheckAccumulator = 0f;
-            Dirty(platformUid, platform);
 
             if (!TryValidatePendingLock(platformUid, platform, out _))
                 CancelPendingTeleport(platformUid, platform, notify: true);
@@ -125,16 +174,12 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         if (platform.DeparturePending || _timing.CurTime < platform.NextUse || !this.IsPowered(platformUid, EntityManager))
             return false;
 
-        var platformPos = _transform.GetWorldPosition(platformUid);
+        var platformCoords = Transform(platformUid).Coordinates;
         var found = false;
 
-        var mobQuery = EntityQueryEnumerator<MobStateComponent, TransformComponent>();
-        while (mobQuery.MoveNext(out var user, out _, out var xform))
+        foreach (var user in _lookup.GetEntitiesInRange(platformCoords, platform.ActivationRadius))
         {
-            if (_mobState.IsDead(user))
-                continue;
-
-            if ((platformPos - _transform.GetWorldPosition(user)).LengthSquared() > platform.ActivationRadius * platform.ActivationRadius)
+            if (!TryComp<MobStateComponent>(user, out _) || _mobState.IsDead(user))
                 continue;
 
             if (TryComp<BoardingTeleportAnchorComponent>(user, out _))
@@ -475,7 +520,11 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         ent.Comp.PendingReturning = returning;
         ent.Comp.PendingLandingCoordinates = destination;
         ent.Comp.PendingDetectionBlipSpawned = false;
+        ent.Comp.PendingDetectionBlipGrid = null;
         ent.Comp.PendingLockCheckAccumulator = 0f;
+        ent.Comp.PendingCountdownElapsed = 0f;
+        ent.Comp.PendingCountdownLastTick = -1;
+        ent.Comp.PendingCountdownTotalSeconds = 0;
         Dirty(ent);
 
         var delay = emergencyReturn
@@ -484,13 +533,19 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         var cancel = new System.Threading.CancellationTokenSource();
 
         ent.Comp.DeparturePending = true;
+        ent.Comp.PendingCountdownTotalSeconds = Math.Max(1, (int) MathF.Ceiling(delay));
+        _chargingPlatforms.Add(ent.Owner);
         Dirty(ent);
         UpdatePlatformAppearance(ent.Owner, ent.Comp);
-        _audio.PlayPvs(ent.Comp.ActivationSound, Transform(ent.Owner).Coordinates);
-        SpawnCountdownAudioSequence(ent.Owner, ent.Comp, delay, cancel.Token, chargeToken);
+        var platformCoords = Transform(ent.Owner).Coordinates;
+        _audio.PlayPvs(ent.Comp.ActivationSound, platformCoords);
+        if (destination.IsValid(EntityManager))
+            _audio.PlayPvs(ent.Comp.ActivationSound, destination);
 
-        if (!returning && destination.IsValid(EntityManager))
-            SpawnWarmupSequence(ent.Owner, destination, ent.Comp, delay, cancel.Token, mode, consoleUid, console);
+        TickPendingCountdownAudio(ent.Owner, ent.Comp);
+
+        if (!returning && console != null)
+            TrySpawnDetectionBlip(ent.Owner, ent.Comp, console);
 
         if (returning)
         {
@@ -508,7 +563,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         }
 
         Robust.Shared.Timing.Timer.Spawn(TimeSpan.FromSeconds(delay), () =>
-            CompletePendingTeleport(ent.Owner, chargeToken, user, destination, consoleUid, console, requirePlatform, returning, emergencyReturn, earlyReturn, earlyReturnExplosionRisk, mode, distanceScale),
+            CompletePendingTeleport(ent.Owner, chargeToken, user, destination, consoleUid, requirePlatform, returning, emergencyReturn, earlyReturn, earlyReturnExplosionRisk, mode, distanceScale),
             cancel.Token);
 
         ent.Comp.PendingCancel = cancel;
@@ -543,7 +598,6 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         EntityUid user,
         EntityCoordinates pendingLanding,
         EntityUid? consoleUid,
-        BoardingTeleportConsoleComponent? console,
         bool requirePlatform,
         bool returning,
         bool emergencyReturn,
@@ -562,6 +616,8 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         var savedEarlyReturnRisk = platform.PendingEarlyReturnExplosionRisk;
         var savedLanding = platform.PendingLandingCoordinates ?? pendingLanding;
         ClearPendingChargeState(platformUid, platform);
+
+        TryComp(consoleUid, out BoardingTeleportConsoleComponent? console);
 
         if (!Exists(user) || _mobState.IsDead(user))
         {
@@ -624,6 +680,9 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("boarding-teleport-platform-landing-invalid"), user, user);
                 return;
             }
+
+            distanceScale = _console.GetDistanceScale(platformUid, destination);
+            SpawnLandingWarmupBurst(destination, platform, mode);
         }
 
         if (!destination.IsValid(EntityManager))
@@ -694,9 +753,13 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         platform.PendingEarlyReturnExplosionRisk = 0f;
         platform.PendingReturning = false;
         platform.PendingDetectionBlipSpawned = false;
+        ClearPendingDetectionBlip(platform);
         platform.PendingLockCheckAccumulator = 0f;
-        platform.PendingCancel?.Dispose();
-        platform.PendingCancel = null;
+        platform.PendingCountdownElapsed = 0f;
+        platform.PendingCountdownLastTick = -1;
+        platform.PendingCountdownTotalSeconds = 0;
+        DisposePendingCancel(platform);
+        _chargingPlatforms.Remove(platformUid);
         Dirty(platformUid, platform);
         UpdatePlatformAppearance(platformUid, platform);
     }
@@ -707,7 +770,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         if (platform == null)
             return;
 
-        platform.PendingCancel?.Cancel();
+        DisposePendingCancel(platform);
         platform.ChargeToken++;
 
         if (!platform.DeparturePending)
@@ -739,32 +802,19 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         _audio.PlayPvs(component.ArrivalSound, coordinates);
     }
 
-    private void SpawnWarmupSequence(
-        EntityUid platformUid,
+    private void SpawnLandingWarmupBurst(
         EntityCoordinates coordinates,
         BoardingTeleportPlatformComponent component,
-        float delaySeconds,
-        System.Threading.CancellationToken cancelToken,
-        BoardingTeleportInsertionMode mode,
-        EntityUid? consoleUid,
-        BoardingTeleportConsoleComponent? console)
+        BoardingTeleportInsertionMode mode)
     {
+        if (!coordinates.IsValid(EntityManager))
+            return;
+
         for (var i = 0; i < WarmupPulseSteps; i++)
         {
-            var pulse = i;
-            var delay = TimeSpan.FromSeconds(delaySeconds * pulse / WarmupPulseSteps);
-            Robust.Shared.Timing.Timer.Spawn(delay, () =>
-            {
-                if (!coordinates.EntityId.IsValid() || !Exists(coordinates.EntityId))
-                    return;
-
-                if (pulse == 0)
-                    TrySpawnDetectionBlip(platformUid, component, console);
-
-                var progress = (pulse + 1f) / WarmupPulseSteps;
-                var pulseProto = GetWarmupPrototype(mode, progress);
-                Spawn(pulseProto, coordinates);
-            }, cancelToken);
+            var progress = (i + 1f) / WarmupPulseSteps;
+            var pulseProto = GetWarmupPrototype(mode, progress);
+            Spawn(pulseProto, coordinates);
         }
     }
 
@@ -777,6 +827,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
             return;
 
         platform.PendingDetectionBlipSpawned = true;
+        platform.PendingDetectionBlipGrid = targetGrid;
         Dirty(platformUid, platform);
 
         var blip = EnsureComp<RadarBlipComponent>(targetGrid);
@@ -790,9 +841,51 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
 
         Robust.Shared.Timing.Timer.Spawn(TimeSpan.FromSeconds(BoardingTeleportConstants.DetectionBlipDurationSeconds), () =>
         {
-            if (Exists(targetGrid))
-                RemCompDeferred<RadarBlipComponent>(targetGrid);
+            if (!Exists(targetGrid))
+                return;
+
+            if (TryComp<BoardingTeleportPlatformComponent>(platformUid, out var current) &&
+                current.PendingDetectionBlipGrid == targetGrid)
+            {
+                return;
+            }
+
+            RemCompDeferred<RadarBlipComponent>(targetGrid);
         });
+    }
+
+    private void ClearPendingDetectionBlip(BoardingTeleportPlatformComponent platform)
+    {
+        if (platform.PendingDetectionBlipGrid is not { } grid)
+            return;
+
+        platform.PendingDetectionBlipGrid = null;
+
+        if (Exists(grid) && HasComp<RadarBlipComponent>(grid))
+            RemCompDeferred<RadarBlipComponent>(grid);
+    }
+
+    private static void DisposePendingCancel(BoardingTeleportPlatformComponent platform)
+    {
+        var cancel = platform.PendingCancel;
+        platform.PendingCancel = null;
+        if (cancel == null)
+            return;
+
+        cancel.Cancel();
+        cancel.Dispose();
+    }
+
+    private void PruneStaleReturnConfirms()
+    {
+        if (_pendingReturnConfirmByUser.Count == 0)
+            return;
+
+        foreach (var user in _pendingReturnConfirmByUser.Keys.ToArray())
+        {
+            if (!Exists(user))
+                _pendingReturnConfirmByUser.Remove(user);
+        }
     }
 
     private static EntProtoId GetWarmupPrototype(BoardingTeleportInsertionMode mode, float progress)
@@ -813,29 +906,32 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         };
     }
 
-    private void SpawnCountdownAudioSequence(EntityUid platformUid, BoardingTeleportPlatformComponent component, float delaySeconds, System.Threading.CancellationToken cancelToken, uint chargeToken)
+    private void TickPendingCountdownAudio(EntityUid platformUid, BoardingTeleportPlatformComponent platform)
     {
-        var totalSeconds = Math.Max(1, (int) MathF.Ceiling(delaySeconds));
-        for (var i = 0; i < totalSeconds; i++)
-        {
-            var secondsPassed = i;
-            Robust.Shared.Timing.Timer.Spawn(TimeSpan.FromSeconds(secondsPassed), () =>
-            {
-                if (!Exists(platformUid) ||
-                    !TryComp<BoardingTeleportPlatformComponent>(platformUid, out var platform) ||
-                    !platform.DeparturePending ||
-                    platform.ChargeToken != chargeToken)
-                {
-                    return;
-                }
+        if (!platform.DeparturePending || platform.PendingCountdownTotalSeconds <= 0)
+            return;
 
-                var remaining = totalSeconds - secondsPassed;
-                var sound = remaining <= platform.CountdownFinalThreshold
-                    ? platform.CountdownFinalSound
-                    : platform.CountdownSound;
-                _audio.PlayPvs(sound, Transform(platformUid).Coordinates);
-            }, cancelToken);
+        var tick = Math.Min(
+            (int) MathF.Floor(platform.PendingCountdownElapsed),
+            platform.PendingCountdownTotalSeconds - 1);
+
+        if (tick <= platform.PendingCountdownLastTick)
+            return;
+
+        for (var t = platform.PendingCountdownLastTick + 1; t <= tick; t++)
+        {
+            var remaining = platform.PendingCountdownTotalSeconds - t;
+            var sound = remaining <= platform.CountdownFinalThreshold
+                ? platform.CountdownFinalSound
+                : platform.CountdownSound;
+
+            _audio.PlayPvs(sound, Transform(platformUid).Coordinates);
+
+            if (platform.PendingLandingCoordinates is { } dest && dest.IsValid(EntityManager))
+                _audio.PlayPvs(sound, dest);
         }
+
+        platform.PendingCountdownLastTick = tick;
     }
 
     private bool TryApplyDestabilization(

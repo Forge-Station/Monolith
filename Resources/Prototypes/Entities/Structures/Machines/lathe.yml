@@ -343,6 +343,7 @@
     - NFServiceBoards # Frontier
     - MonoAdvancedShuttleComponents # Mono
     - ForgeAdvancedShuttleComponents # Forge
+    - ForgeBoardingTeleportRecipes # Forge
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
@@ -385,6 +386,7 @@
     - NFServiceBoards # Frontier
     - MonoAdvancedShuttleComponents # Mono
     - ForgeAdvancedShuttleComponents # Forge
+    - ForgeBoardingTeleportRecipes # Forge
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard

@@ -51,7 +51,7 @@ public sealed partial class BoardingTeleportPlatformComponent : Component
     public SoundSpecifier ActivationSound = new SoundPathSpecifier("/Audio/Effects/Vehicle/ambulancesiren.ogg");
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public SoundSpecifier CountdownSound = new SoundPathSpecifier("/Audio/_Mono/Effects/Alerts/master_caution.ogg");
+    public SoundSpecifier CountdownSound = new SoundPathSpecifier("/Audio/_Forge/Effects/Alerts/space_alert_1.ogg");
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier CountdownFinalSound = new SoundPathSpecifier("/Audio/_Mono/Effects/Alerts/launchwarning.ogg");
@@ -102,11 +102,24 @@ public sealed partial class BoardingTeleportPlatformComponent : Component
     [ViewVariables]
     public bool PendingDetectionBlipSpawned;
 
+    /// <summary>Grid that received a detection blip during charge; cleared when charge ends.</summary>
+    [ViewVariables]
+    public EntityUid? PendingDetectionBlipGrid;
+
     [ViewVariables]
     public float PendingLockCheckAccumulator;
 
+    [ViewVariables]
+    public float PendingCountdownElapsed;
+
+    [ViewVariables]
+    public int PendingCountdownLastTick = -1;
+
+    [ViewVariables]
+    public int PendingCountdownTotalSeconds;
+
     /// <summary>
-    /// Landing point locked in when this platform begins charging (per-boarder snapshot).
+    /// Console-selected landing center while charging; scatter is resolved at departure completion.
     /// </summary>
     [ViewVariables]
     public EntityCoordinates? PendingLandingCoordinates;

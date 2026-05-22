@@ -36,15 +36,18 @@ public sealed class BoardingTeleportAnchorSystem : EntitySystem
             if (anchor.ExpiresAt is not { } expires)
                 continue;
 
-            if (_timing.CurTime >= expires && !anchor.EmergencyReturnUsed)
-                ShowReturnAlert(uid, anchor, emergency: true);
-            else
-                ShowReturnAlert(uid, anchor, emergency: false);
+            var emergency = _timing.CurTime >= expires && !anchor.EmergencyReturnUsed;
+            if (anchor.CachedReturnAlertEmergency == emergency)
+                continue;
+
+            anchor.CachedReturnAlertEmergency = emergency;
+            ShowReturnAlert(uid, anchor, emergency);
         }
     }
 
     private void OnAnchorStartup(Entity<BoardingTeleportAnchorComponent> ent, ref ComponentStartup args)
     {
+        ent.Comp.CachedReturnAlertEmergency = false;
         ShowReturnAlert(ent.Owner, ent.Comp, emergency: false);
     }
 

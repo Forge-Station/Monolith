@@ -3,6 +3,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._Forge.BoardingTeleport;
 using Content.Shared._Forge.BoardingTeleport.Components;
+using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Power;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
@@ -114,8 +115,11 @@ public sealed class BoardingTeleportLockSystem : EntitySystem
 
     public int GetPlatformSlotIndex(EntityUid consoleUid, EntityUid platformUid)
     {
+        if (!TryComp<DeviceListComponent>(consoleUid, out var deviceList))
+            return 0;
+
         var index = 0;
-        foreach (var device in _deviceList.GetAllDevices(consoleUid))
+        foreach (var device in _deviceList.GetAllDevices(consoleUid, deviceList))
         {
             if (device == platformUid)
                 return index;
@@ -130,7 +134,10 @@ public sealed class BoardingTeleportLockSystem : EntitySystem
     public List<EntityUid> GetOrderedPlatforms(EntityUid consoleUid)
     {
         var list = new List<EntityUid>();
-        foreach (var device in _deviceList.GetAllDevices(consoleUid))
+        if (!TryComp<DeviceListComponent>(consoleUid, out var deviceList))
+            return list;
+
+        foreach (var device in _deviceList.GetAllDevices(consoleUid, deviceList))
         {
             if (HasComp<BoardingTeleportPlatformComponent>(device))
                 list.Add(device);

@@ -140,7 +140,10 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         _engine.UnlinkConsole(ent);
 
-        foreach (var device in _deviceList.GetAllDevices(ent.Owner))
+        if (!TryComp<DeviceListComponent>(ent, out var deviceList))
+            return;
+
+        foreach (var device in _deviceList.GetAllDevices(ent.Owner, deviceList))
 
         {
 
@@ -1063,7 +1066,11 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
     {
 
-        foreach (var device in _deviceList.GetAllDevices(ent.Owner))
+        if (!TryComp<DeviceListComponent>(ent, out var deviceList))
+
+            return;
+
+        foreach (var device in _deviceList.GetAllDevices(ent.Owner, deviceList))
 
         {
 
@@ -1113,7 +1120,19 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
     {
 
-        foreach (var device in _deviceList.GetAllDevices(consoleUid))
+        if (!TryComp<DeviceListComponent>(consoleUid, out var deviceList))
+
+        {
+
+            platformUid = default;
+
+            platform = null;
+
+            return false;
+
+        }
+
+        foreach (var device in _deviceList.GetAllDevices(consoleUid, deviceList))
 
         {
 

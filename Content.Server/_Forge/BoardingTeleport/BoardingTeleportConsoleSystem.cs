@@ -773,61 +773,35 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
 
     public bool TryFindScatteredLanding(EntityCoordinates center, float radius, out EntityCoordinates result)
-
     {
+        result = EntityCoordinates.Invalid;
 
-        result = center;
-
-
-
-        if (radius <= 0.01f)
-
-            return TryValidateLandingCoordinates(center, out _);
-
-
-
-        if (TryValidateLandingCoordinates(center, out _))
-
-            return true;
-
-
-
-        if (!TryComp<MapGridComponent>(center.EntityId, out _))
-
+        if (!TryComp<MapGridComponent>(center.EntityId, out var grid))
             return false;
 
+        var originTile = _map.CoordinatesToTile(center.EntityId, grid, center);
 
+        if (radius <= 0.01f)
+            return TryGetLandingCoordinates(center.EntityId, originTile, out result);
 
+        // Pick a random tile inside a disk (radius in tile/meter units — matches the UI scatter circle).
         for (var i = 0; i < BoardingTeleportConstants.ScatterSampleAttempts; i++)
-
         {
+            var angle = _random.NextFloat(0f, MathF.Tau);
+            var dist = MathF.Sqrt(_random.NextFloat()) * radius;
+            var offset = new Vector2i(
+                (int) MathF.Round(dist * MathF.Cos(angle)),
+                (int) MathF.Round(dist * MathF.Sin(angle)));
 
-            var offset = new Vector2(
+            if (offset == Vector2i.Zero && i < BoardingTeleportConstants.ScatterSampleAttempts - 1)
+                continue;
 
-                _random.NextFloat(-radius, radius),
-
-                _random.NextFloat(-radius, radius));
-
-
-
-            var candidate = center.Offset(offset);
-
-            if (TryValidateLandingCoordinates(candidate, out _))
-
-            {
-
-                result = candidate;
-
+            var tile = originTile + offset;
+            if (TryGetLandingCoordinates(center.EntityId, tile, out result))
                 return true;
-
-            }
-
         }
 
-
-
-        return false;
-
+        return TryGetLandingCoordinates(center.EntityId, originTile, out result);
     }
 
 

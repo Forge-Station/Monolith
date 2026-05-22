@@ -41,9 +41,23 @@
   name: loadout-group-contractor-outerclothing
   minLimit: 1
   loadouts:
+  - MdMedicOuterClothingOuterHardsuitTrauma # Forge-change
   - MdMedicOuterClothingOuterArmorBodyTrauma # Forge-change
   - MdMedicOuterClothingOuterRobeTraumaBomber # Forge-change
   - MdMedicOuterClothingOuterCoatTrauma # Forge-change
   - MdMedicOuterClothingLightHardsuit
   fallbacks:
   - MdMedicOuterClothingOuterArmorBodyTrauma # Forge-change
+# Forge start
+- type: loadout
+  id: MdMedicOuterClothingOuterHardsuitTrauma
+  price: 70000
+  equipment:
+    outerClothing: ClothingOuterHardsuitTrauma
+
+- type: loadout
+  id: MdMedicOuterClothingOuterHardsuitTraumaLeader
+  price: 100000
+  equipment:
+    outerClothing: ClothingOuterHardsuitTraumaLeader
+# Forge end

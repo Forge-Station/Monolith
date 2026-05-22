@@ -1,0 +1,443 @@
+- type: entity
+  name: chainsaw shield
+  parent: BaseShield
+  id: ChainsawShield
+  description: A brutal boarding shield with a chain-driven cutting edge. It can catch incoming fire, bite into targets when thrown, and snap back to its owner's free hand.
+  components:
+  - type: ItemToggle
+    predictable: false
+    onActivate: false
+    soundActivate:
+      path: /Audio/Weapons/chainsawwield.ogg
+      params:
+        volume: -5
+    soundDeactivate:
+      path: /Audio/Weapons/chainsawwield.ogg
+      params:
+        volume: -5
+  - type: ToggleActiveSoundRepeater
+    sound:
+      path: /Audio/Weapons/chainsawidle.ogg
+      params:
+        volume: -4
+    interval: 0.65
+    initialDelay: 0.35
+  - type: ItemToggleSize
+    activatedSize: Normal
+  - type: ComponentToggler
+    components:
+    - type: Sharp
+    - type: DisarmMalus
+      malus: 0.6
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Melee/chainsaw-shield.rsi
+    layers:
+    - state: shield-icon
+    - state: teeth-icon
+      map: [ "teeth" ]
+    - state: teeth-icon-power
+      visible: false
+      map: [ "teethPower" ]
+    - state: light-icon
+      visible: false
+      shader: unshaded
+      map: [ "power" ]
+  - type: Item
+    size: Normal
+    sprite: Forge/Objects/Weapons/Melee/chainsaw-shield.rsi
+  - type: ChainsawShieldVisuals
+    inactiveInhandVisuals:
+      left:
+      - state: shield-inhand-left
+      - state: teeth-inhand-left
+      right:
+      - state: shield-inhand-right
+      - state: teeth-inhand-right
+    activeInhandVisuals:
+      left:
+      - state: shield-inhand-left
+      - state: teeth-inhand-left-power
+      - state: light-inhand-left
+        shader: unshaded
+      right:
+      - state: shield-inhand-right
+      - state: teeth-inhand-right-power
+      - state: light-inhand-right
+        shader: unshaded
+  - type: UseDelay
+    delay: 0.5
+  - type: ToggleableVisuals
+    spriteLayer: power
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        teeth:
+          True: { visible: false }
+          False: { visible: true }
+        teethPower:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Reflect
+    reflectProb: 0.5
+    reflects:
+    - Energy
+  - type: MeleeWeapon
+    autoAttack: true
+    wideAnimationRotation: -135
+    attackRate: 2
+    damage:
+      types:
+        Slash: 20
+        Structural: 25
+    soundHit:
+      collection: MetalThud
+    soundNoDamage:
+      collection: MetalThud
+    soundSwing:
+      path: /Audio/Weapons/slash.ogg
+      params:
+        volume: -6
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/chainsaw.ogg
+      params:
+        variation: 0.250
+        volume: -3
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/chainsaw.ogg
+      params:
+        variation: 0.250
+        volume: -8
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/chainsawwield.ogg
+      params:
+        variation: 0.125
+        volume: -6
+    deactivatedSoundOnHit:
+      collection: MetalThud
+    deactivatedSoundOnHitNoDamage:
+      collection: MetalThud
+    deactivatedSoundOnSwing:
+      path: /Audio/Weapons/slash.ogg
+      params:
+        volume: -6
+    activatedDamage:
+      types:
+        Slash: 32
+        Structural: 55
+  - type: LandAtCursor
+  - type: EmbeddableProjectile
+    removalTime: 2.5
+  - type: ToggleableEmbedSound
+    inactiveSound:
+      path: /Audio/Weapons/bladeslice.ogg
+      params:
+        volume: -2
+    activeSound:
+      path: /Audio/Weapons/chainsaw.ogg
+      params:
+        volume: -3
+  - type: ToggleableEmbedEffect
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
+  - type: ToggleableThrowDamage
+    inactiveDamage:
+      types:
+        Blunt: 18
+        Structural: 25
+    activeDamage:
+      types:
+        Slash: 42
+        Structural: 80
+  - type: ReturnOnThrow
+    returnAction: ActionReturnChainsawShield
+    returnSound:
+      path: /Audio/Weapons/chainsawwield.ogg
+      params:
+        volume: -8
+        variation: 0.125
+  - type: Repairable
+    qualities:
+    - Welding
+    doAfterDelay: 5
+    fuelCost: 10
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 12000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 10000
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel:
+            min: 2
+            max: 2
+          SheetGlass:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PointLight
+    netsync: false
+    enabled: false
+    radius: 4
+    energy: 4
+    color: green
+  - type: ItemTogglePointLight
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.5
+      flatReductions:
+        Heat: 3
+        Piercing: 3
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  name: reinforced chainsaw shield
+  parent: BaseShield
+  id: ReinforcedChainsawShield
+  description: A reinforced boarding shield with a hardened faceplate and powered cutting edge. Built to block hits, chew through obstacles, and return after a throw.
+  components:
+  - type: ItemToggle
+    predictable: false
+    onActivate: false
+    soundActivate:
+      path: /Audio/Weapons/chainsawwield.ogg
+      params:
+        volume: -5
+    soundDeactivate:
+      path: /Audio/Weapons/chainsawwield.ogg
+      params:
+        volume: -5
+  - type: ToggleActiveSoundRepeater
+    sound:
+      path: /Audio/Weapons/chainsawidle.ogg
+      params:
+        volume: -4
+    interval: 0.65
+    initialDelay: 0.35
+  - type: ItemToggleSize
+    activatedSize: Normal
+  - type: ComponentToggler
+    components:
+    - type: Sharp
+    - type: DisarmMalus
+      malus: 0.6
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Melee/reinforced-chainsaw-shield.rsi
+    layers:
+    - state: shield-icon
+    - state: teeth-icon
+      map: [ "teeth" ]
+    - state: teeth-icon-power
+      visible: false
+      map: [ "teethPower" ]
+    - state: light-icon
+      visible: false
+      shader: unshaded
+      map: [ "power" ]
+  - type: Item
+    size: Normal
+    sprite: Forge/Objects/Weapons/Melee/reinforced-chainsaw-shield.rsi
+  - type: ChainsawShieldVisuals
+    inactiveInhandVisuals:
+      left:
+      - state: shield-inhand-left
+      - state: teeth-inhand-left
+      right:
+      - state: shield-inhand-right
+      - state: teeth-inhand-right
+    activeInhandVisuals:
+      left:
+      - state: shield-inhand-left
+      - state: teeth-inhand-left-power
+      - state: light-inhand-left
+        shader: unshaded
+      right:
+      - state: shield-inhand-right
+      - state: teeth-inhand-right-power
+      - state: light-inhand-right
+        shader: unshaded
+  - type: UseDelay
+    delay: 0.5
+  - type: ToggleableVisuals
+    spriteLayer: power
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        teeth:
+          True: { visible: false }
+          False: { visible: true }
+        teethPower:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Reflect
+    reflectProb: 0.5
+    reflects:
+    - Energy
+  - type: MeleeWeapon
+    autoAttack: true
+    wideAnimationRotation: -135
+    attackRate: 2
+    damage:
+      types:
+        Slash: 24
+        Structural: 35
+    soundHit:
+      collection: MetalThud
+    soundNoDamage:
+      collection: MetalThud
+    soundSwing:
+      path: /Audio/Weapons/slash.ogg
+      params:
+        volume: -6
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/chainsaw.ogg
+      params:
+        variation: 0.250
+        volume: -3
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/chainsaw.ogg
+      params:
+        variation: 0.250
+        volume: -8
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/chainsawwield.ogg
+      params:
+        variation: 0.125
+        volume: -6
+    deactivatedSoundOnHit:
+      collection: MetalThud
+    deactivatedSoundOnHitNoDamage:
+      collection: MetalThud
+    deactivatedSoundOnSwing:
+      path: /Audio/Weapons/slash.ogg
+      params:
+        volume: -6
+    activatedDamage:
+      types:
+        Slash: 40
+        Structural: 75
+  - type: LandAtCursor
+  - type: EmbeddableProjectile
+    removalTime: 2.5
+  - type: ToggleableEmbedSound
+    inactiveSound:
+      path: /Audio/Weapons/bladeslice.ogg
+      params:
+        volume: -2
+    activeSound:
+      path: /Audio/Weapons/chainsaw.ogg
+      params:
+        volume: -3
+  - type: ToggleableEmbedEffect
+    walkSpeedModifier: 0.45
+    sprintSpeedModifier: 0.45
+  - type: ToggleableThrowDamage
+    inactiveDamage:
+      types:
+        Blunt: 24
+        Structural: 40
+    activeDamage:
+      types:
+        Slash: 56
+        Structural: 120
+  - type: ReturnOnThrow
+    returnAction: ActionReturnReinforcedChainsawShield
+    returnSound:
+      path: /Audio/Weapons/chainsawwield.ogg
+      params:
+        volume: -8
+        variation: 0.125
+  - type: Repairable
+    qualities:
+    - Welding
+    doAfterDelay: 5
+    fuelCost: 10
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 12000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 10000
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel:
+            min: 2
+            max: 2
+          SheetGlass:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PointLight
+    netsync: false
+    enabled: false
+    radius: 4
+    energy: 4
+    color: "#2EF8FF"
+  - type: ItemTogglePointLight
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.5
+      flatReductions:
+        Heat: 3
+        Piercing: 3
+  - type: StaticPrice
+    price: 2000
+
+- type: entity
+  id: ActionReturnChainsawShield
+  name: Return chainsaw shield
+  description: Return the thrown chainsaw shield to a free hand.
+  components:
+  - type: InstantAction
+    useDelay: 1
+    itemIconStyle: BigAction
+    icon:
+      sprite: Forge/Objects/Weapons/Melee/chainsaw-shield.rsi
+      state: shield-icon
+    event: !type:ReturnOnThrowActionEvent
+
+- type: entity
+  id: ActionReturnReinforcedChainsawShield
+  name: Return reinforced chainsaw shield
+  description: Return the thrown reinforced chainsaw shield to a free hand.
+  components:
+  - type: InstantAction
+    useDelay: 1
+    itemIconStyle: BigAction
+    icon:
+      sprite: Forge/Objects/Weapons/Melee/reinforced-chainsaw-shield.rsi
+      state: shield-icon
+    event: !type:ReturnOnThrowActionEvent

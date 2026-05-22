@@ -342,12 +342,11 @@
     sound: /Audio/Weapons/star_hit.ogg
     offset: -0.15,0.0
   - type: LandAtCursor
-  - type: DamageOtherOnHit
-    ignoreResistances: true
+  - type: DamageOtherOnHit # Forge-Change ignoreResistances: true
     damage:
       types:
-        Slash: 10
-        Piercing: 20
+        Slash: 18  # Forge-Change 10
+        Piercing: 28 # Forge-Change 20
   - type: Item
     sprite: Objects/Weapons/Melee/throwing_knife.rsi
   - type: ThrowingAngle

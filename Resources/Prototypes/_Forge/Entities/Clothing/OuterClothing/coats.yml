@@ -165,7 +165,7 @@
     damageCoefficient: 0.9
 
 - type: entity
-  parent: ClothingOuterStorageFoldableBase
+  parent: [ClothingOuterStorageFoldableBase, BaseFactionGearOtherFactionT1]
   id: ClothingOuterCoatTrauma
   name: trauma coat
   description: A suit that protects against minor chemical spills.
@@ -185,7 +185,7 @@
         Caustic: 0.25
         
 - type: entity
-  parent: ClothingOuterStorageFoldableBase
+  parent: [ClothingOuterStorageFoldableBase, BaseFactionGearOtherFactionT1]
   id: ClothingOuterRobeTraumaBomber
   name: trauma bomber
   description: A suit that protects against minor chemical spills.

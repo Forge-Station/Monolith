@@ -1,0 +1,38 @@
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: ChainsawShield
+  result: ChainsawShield
+  categories:
+  - Weapons
+  materials:
+    Steel: 2400
+    Plasteel: 2400
+    Plastitanium: 800
+    Plastic: 1000
+    Glass: 1000
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: ReinforcedChainsawShield
+  result: ReinforcedChainsawShield
+  categories:
+  - Weapons
+  materials:
+    Steel: 3200
+    Plasteel: 3200
+    Plastitanium: 1200
+    Plastic: 1200
+    Glass: 1600
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: JunkCannon
+  result: JunkCannon
+  categories:
+  - Ballistic
+  - Weapons
+  materials:
+    Steel: 3600
+    Plasteel: 1800
+    Plastitanium: 1000
+    Plastic: 1200

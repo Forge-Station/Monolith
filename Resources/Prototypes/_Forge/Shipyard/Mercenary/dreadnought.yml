@@ -12,7 +12,7 @@
   name: PMSC-A Dreadnought
   description: An assault shuttle designed for combat, featuring strong frontal armor but vulnerable from the rear. Its primary armament consists of two HADES and two CYREXA weapons.
   price: 220000
-  category: Medium
+  category: Large
   group: Shipyard
   access: Mercenary
   shuttlePath: /Maps/_Forge/Shuttles/Mercenary/dreadnought.yml

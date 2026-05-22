@@ -1,0 +1,25 @@
+- type: reaction
+  id: ForgeTransmutin
+  reactants:
+    Cognizine:
+      amount: 5
+    Phalanximine:
+      amount: 5
+    UnstableMutagen:
+      amount: 5
+  products:
+    Transmutin: 5
+
+- type: reaction
+  id: ForgeTransmutinBloodSpecies
+  reactants:
+    Transmutin:
+      amount: 1
+    Blood:
+      amount: 1
+      catalyst: true
+  effects:
+  - !type:TransmutinSpeciesReaction
+    productPrefix: Transmutin
+    bloodReagent: Blood
+  products: {}

@@ -14,8 +14,10 @@
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/tarantula.yml
   guidebookPage: Null
   class:
+  - Fighter
   - Patrol
   - Pursuit
+  - Corvette
   engine:
   - AME
 

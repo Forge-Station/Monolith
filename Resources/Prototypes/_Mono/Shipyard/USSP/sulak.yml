@@ -12,6 +12,7 @@
   shuttlePath: /Maps/_Mono/Shuttles/USSP/sulak.yml
   guidebookPage: Null
   class:
+  - Fighter
   - Pursuit
   - Corvette
   engine:

@@ -49,6 +49,52 @@ public sealed partial class SubdermalImplantComponent : Component
     /// </summary>
     [DataField]
     public EntityWhitelist? Blacklist;
+
+    /// <summary>
+    /// Forge-Change: Components added to the implanted entity while this implant is installed.
+    /// Mirrors Shitmed organ/body-part onAdd behavior for YAML-driven implants.
+    /// </summary>
+    [DataField]
+    public ComponentRegistry? OnAdd;
+
+    /// <summary>
+    /// Forge-Change: Components added to the implanted entity when this implant is removed.
+    /// Components from OnAdd are removed on extraction before these are applied.
+    /// </summary>
+    [DataField]
+    public ComponentRegistry? OnRemove;
+
+    /// <summary>
+    /// Forge-Change: Multiplier for heavy carry checks while this implant is installed.
+    /// Values above 1 make the wearer count as heavier for carry contests.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float CarryAssistMassMultiplier = 1f;
+
+    /// <summary>
+    /// Forge-Change: Multiplier applied to carry pickup delay while this implant is installed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float CarryAssistPickupDelayModifier = 1f;
+
+    /// <summary>
+    /// Forge-Change: Multiplier applied only to carry slowdown penalties.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float CarryAssistSlowdownPenaltyModifier = 1f;
+
+    /// <summary>
+    /// Forge-Change: Multiplier applied only to pulling slowdown penalties.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float PullingAssistSlowdownPenaltyModifier = 1f;
+
+    /// <summary>
+    /// Forge-Change: Multiplier for pull-joint reaction applied back to the puller.
+    /// Values below 1 reduce the mass penalty from heavy pulled objects without moving them directly.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float PullingAssistMassPenaltyModifier = 1f;
     
     /// <summary>
     /// If set, this ProtoId is used when attempting to draw the implant instead.

@@ -49,6 +49,7 @@
       - TrackingImplant # Moved Down, This is the TSFMC Tracker - Mono
       - FreelanceTrackingImplant # Mono
       - UsspTrackingImplant # Mono
+      - ForgeVoiceModuleImplant # Forge-Change
       deimplantFailureDamage:
         types:
 #          Cellular: 5 # 50->5 - Mono

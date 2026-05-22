@@ -207,6 +207,40 @@
   - ContractorClothingUniformJumpskirtYellowTurtleneckDress
   - ContractorClothingUniformJumpskirtYellowOldDress
   - ContractorClothingUniformJabroni
+  - JumpskirtTurtleneckAquamarine # Forge-Change
+  - JumpskirtTurtleneckWhite # Forge-Change
+  - JumpskirtTurtleneckAzure # Forge-Change
+  - JumpskirtTurtleneckYellow # Forge-Change
+  - JumpskirtTurtleneckGreen # Forge-Change
+  - JumpskirtTurtleneckBrown # Forge-Change
+  - JumpskirtTurtleneckRed # Forge-Change
+  - JumpskirtTurtleneckOrange # Forge-Change
+  - JumpskirtTurtleneckPink # Forge-Change
+  - JumpskirtTurtleneckGrey # Forge-Change
+  - JumpskirtTurtleneckBlue # Forge-Change
+  - JumpskirtTurtleneckPurple # Forge-Change
+  - JumpskirtTurtleneckBlack # Forge-Change
+  - JumpskirtTurtleneckBlackSleeveless # Forge-Change
+  - JumpskirtTurtleneckWhiteSleeveless # Forge-Change
+  - JumpskirtTurtleneckSalat # Forge-Change
+  - JumpsuitTurtleneckAquamarine # Forge-Change
+  - JumpsuitTurtleneckWhite # Forge-Change
+  - JumpsuitTurtleneckAzure # Forge-Change
+  - JumpsuitTurtleneckYellow # Forge-Change
+  - JumpsuitTurtleneckGreen # Forge-Change
+  - JumpsuitTurtleneckBrown # Forge-Change
+  - JumpsuitTurtleneckRed # Forge-Change
+  - JumpsuitTurtleneckOrange # Forge-Change
+  - JumpsuitTurtleneckPink # Forge-Change
+  - JumpsuitTurtleneckGrey # Forge-Change
+  - JumpsuitTurtleneckBlue # Forge-Change
+  - JumpsuitTurtleneckPurple # Forge-Change
+  - JumpsuitTurtleneckBlack # Forge-Change
+  - JumpsuitTurtleneckWhiteBlackSleeveless # Forge-Change
+  - JumpsuitTurtleneckWhiteSleeveless # Forge-Change
+  - JumpsuitTurtleneckBlackSleeveless # Forge-Change
+  - JumpsuitTurtleneckSalat # Forge-Change
+  - JumpsuitTurtleneckSalatblack # Forge-Change
 
   fallbacks:
   - ContractorClothingUniformJumpsuitColorGrey

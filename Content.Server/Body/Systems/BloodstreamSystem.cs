@@ -15,6 +15,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
 using Content.Shared.HealthExaminable;
+using Content.Shared.Humanoid; // Forge-Change
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
@@ -511,6 +512,12 @@ public sealed class BloodstreamSystem : EntitySystem
         }
 
         bloodData.Add(dnaData);
+
+        // Forge-Change: Transmutin uses blood to remember the donor species.
+        if (TryComp<HumanoidAppearanceComponent>(uid, out var humanoid))
+        {
+            bloodData.Add(new SpeciesData { Species = humanoid.Species });
+        }
 
         return bloodData;
     }

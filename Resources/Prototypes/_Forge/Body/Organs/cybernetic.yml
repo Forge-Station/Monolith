@@ -1,0 +1,65 @@
+- type: entity
+  parent: OrganHumanLiver
+  id: ForgeCyberneticLiver
+  name: cybernetic liver
+  description: A reinforced liver module that slowly filters toxins from the bloodstream.
+  components:
+  - type: Sprite
+    sprite: _Mono/Mobs/Species/Protogen/organs.rsi
+    state: liver
+  - type: OrganEffect
+  - type: Organ
+    onAdd:
+    - type: ForgeBloodstreamCleaner
+      amount: 1
+      updateInterval: 1
+    - type: ForgeEmpDamage
+      damageType: Poison
+      amount: 30
+
+- type: entity
+  parent: OrganHumanKidneys
+  id: ForgeCyberneticKidneys
+  name: cybernetic kidneys
+  description: A pair of cybernetic kidneys that gradually purge radiation damage.
+  components:
+  - type: Sprite
+    sprite: _Mono/Mobs/Species/Protogen/organs.rsi
+    layers:
+    - state: kidney-l
+    - state: kidney-r
+  - type: OrganEffect
+  - type: Organ
+    onAdd:
+    - type: ForgeRadiationCleaner
+      amount: 0.5
+      updateInterval: 1
+    - type: ForgeEmpDamage
+      damageType: Poison
+      amount: 30
+
+- type: entity
+  parent: OrganHumanLungs
+  id: ForgeSpaceKangarooLungs
+  name: space kangaroo lungs
+  description: Elastic alien lungs that oxygenate muscles well enough to make movement easier.
+  components:
+  - type: OrganEffect
+  - type: Organ
+    onAdd:
+    - type: SlowedDown
+      walkSpeedModifier: 1.1
+      sprintSpeedModifier: 1.1
+
+- type: entity
+  parent: OrganHumanLiver
+  id: ForgeSpaceTickLiver
+  name: space tick liver
+  description: A suspiciously predatory liver that routes a tiny dose of toxin into barehanded hits.
+  components:
+  - type: OrganEffect
+  - type: Organ
+    onAdd:
+    - type: ForgeInjectOnUnarmedHit
+      damageType: Poison
+      amount: 2

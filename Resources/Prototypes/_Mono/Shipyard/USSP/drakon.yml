@@ -12,8 +12,9 @@
   shuttlePath: /Maps/_Mono/Shuttles/USSP/drakon.yml
   guidebookPage: Null
   class:
+  - Destroyer
+  - Patrol
   - Pursuit
-  - Corvette
   engine:
   - AME
 

@@ -12,6 +12,13 @@
   guidebookPage: Null
   class:
   - Fighter
+  - Chemistry
+  - Scrapyard
+  - Pirate
+  - Destroyer
+  engine:
+  - AME
+  - APU
 
 - type: gameMap
   id: azimutlate

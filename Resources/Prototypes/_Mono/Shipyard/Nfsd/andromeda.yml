@@ -13,6 +13,7 @@
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/andromeda.yml
   guidebookPage: Null
   class:
+  - Fighter
   - Frigate
   engine:
   - Plasma

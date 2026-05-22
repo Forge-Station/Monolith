@@ -10,7 +10,11 @@
   shuttlePath: /Maps/_Forge/Shuttles/Renegates/santia.yml
   guidebookPage: Null
   class:
-  - Fighter
+  - Salvage
+  - Pirate
+  engine:
+  - Uranium
+  - Plasma
 
 - type: gameMap
   id: santia

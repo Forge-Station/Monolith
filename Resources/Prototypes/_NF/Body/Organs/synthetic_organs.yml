@@ -44,6 +44,9 @@
   name: synthetic kidneys
   description: "Filters toxins from the bloodstream at higher rate than old 'ganic liver."
   components:
+  - type: Kidney # Forge-Change
+  - type: Organ # Forge-Change
+    slotId: kidneys # Forge-Change
   - type: Sprite
     layers:
       - state: kidney-l

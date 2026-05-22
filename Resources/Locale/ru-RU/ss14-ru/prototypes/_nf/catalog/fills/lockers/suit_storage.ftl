@@ -130,3 +130,6 @@ ent-SuitStorageEVAChaplain = { ent-SuitStorageBase }
 ent-SuitStorageLeaderERT = { ent-SuitStorageBase }
     .suffix = Скафандр, НТ
     .desc = { ent-SuitStorageBase.desc }
+ent-SuitStorageTraumaLeader = { ent-SuitStorageBase }
+    .suffix = Скафандр, TTI
+    .desc = { ent-SuitStorageBase.desc }

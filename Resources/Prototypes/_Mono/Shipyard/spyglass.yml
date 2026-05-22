@@ -5,7 +5,7 @@
   name: UI Spyglass
   description:  A Ullman Industries research ship. This baby is capable of Xenoarcheology and not a whole lot more.
   price: 47500
-  category: Small
+  category: Medium
   group: Shipyard
   shuttlePath: /Maps/_Mono/Shuttles/spyglass.yml
   guidebookPage: Null

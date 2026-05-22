@@ -117,7 +117,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: IconSmooth
-    key: airlocks
+    key: walls
     mode: NoSprite
   - type: Construction
     graph: Airlock

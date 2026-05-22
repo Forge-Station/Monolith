@@ -41,7 +41,6 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
-    key: clockworkwindows # Mono
     base: cwindow
   - type: Construction
     graph: Window
@@ -128,7 +127,7 @@
     - Diagonal
   - type: IconSmooth
     mode: Diagonal
-    key: clockworkwindows # Mono
+    key: walls # Frontier: windows<walls
     base: state
   - type: Icon
     sprite: Structures/Windows/clockwork_diagonal.rsi

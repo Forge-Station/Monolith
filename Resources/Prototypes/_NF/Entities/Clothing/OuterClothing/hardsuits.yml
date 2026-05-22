@@ -98,7 +98,7 @@
 
 #ERT Mail Carrier Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitCBURN
+  parent: [ClothingOuterHardsuitBase] # Forge-change
   id: ClothingOuterHardsuitERTMailCarrier
   name: ERT mail carrier's hardsuit
   description: A protective hardsuit worn by the mail carriers of an emergency response team.
@@ -107,12 +107,33 @@
     sprite: Forge/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmailcarrier.rsi # Forge-change
   - type: Clothing
     sprite: Forge/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmailcarrier.rsi # Forge-change
+  - type: PressureProtection # Forge start
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: Armor # Mono - Armor Value Changes
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.8
+        Heat: 0.9
+        Cold: 0.9
+        Radiation: 0.8
+        Caustic: 0.8
+  - type: ClothingSpeedModifier 
+    walkModifier: 1.0
+    sprintModifier: 1.2
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.7
+    controlMultiplier: 1.15
+    fuelUsageMultiplier: 1.6
+    combatStabilityBonus: 0.1 # Forge end
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head:  ClothingHeadHelmetHardsuitERTSecurity # Forge-change
+      head: ClothingHeadHelmetHardsuitERTMailCarrier # Forge-change
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
 

@@ -102,7 +102,8 @@ public sealed partial class BorgSystem : SharedBorgSystem
         _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
 
         // Forge-Change-start : AiRemoteControl
-        if (component.BrainContainer.ContainedEntities.Any(entity => HasComp<AiRemoteBrainComponent>(entity)))
+        if (component.BrainContainer != null &&
+            component.BrainContainer.ContainedEntities.Any(entity => HasComp<AiRemoteBrainComponent>(entity)))
         {
             EnsureComp<AiRemoteControllerComponent>(uid);
             EnsureComp<StationAiVisionComponent>(uid);

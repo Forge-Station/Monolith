@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ ClothingOuterBase ] # Mono
+  parent: ClothingModsuitChestplateBase
   id: ClothingModsuitChestplateVanguardNSC
   name: vanguard modsuit chestplate
   description: A well rounded modsuit that focuses on mobility with its Actuator Enhancement System allowing its wearer to leap across the battlefield for rapid redeployment.
@@ -56,7 +56,7 @@
 # Harmony Medical Enterprises
 
 - type: entity
-  parent: [ ClothingOuterBase, GeigerCounterClothing ]
+  parent: ClothingModsuitChestplateBase
   id: ClothingModsuitChestplateHMELightSuit
   name: HME light hardsuit "Preserver" chestplate
   description: light-HME-modsuit-chestplate-desc 
@@ -77,6 +77,7 @@
     slots: [ outerClothing ]
   - type: RadarConsole
     followEntity: true
+    noRotate: true
   - type: DetectionRangeMultiplier
     infraredMultiplier: 0.5
     visualMultiplier: 0.75
@@ -130,7 +131,7 @@
     reduction: 0.45
 
 - type: entity
-  parent: [ ClothingOuterBase, GeigerCounterClothing ]
+  parent: ClothingModsuitChestplateBase
   id: ClothingModsuitChestplateHMEHeavySuit
   name: HME heavy hardsuit "Intercessor" chestplate
   description: heavy-HME-modsuit-chestplate-desc 
@@ -151,6 +152,7 @@
     slots: [ outerClothing ]
   - type: RadarConsole
     followEntity: true
+    noRotate: true
   - type: DetectionRangeMultiplier
     infraredMultiplier: 0.5
     visualMultiplier: 0.75

@@ -51,10 +51,10 @@ public sealed partial class BoardingTeleportPlatformComponent : Component
     public SoundSpecifier ActivationSound = new SoundPathSpecifier("/Audio/Effects/Vehicle/ambulancesiren.ogg");
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public SoundSpecifier CountdownSound = new SoundPathSpecifier("/Audio/_Forge/Effects/Alerts/space_alert_1.ogg");
+    public SoundSpecifier CountdownSound = new SoundPathSpecifier("/Audio/_Mono/Effects/Alerts/master_caution.ogg");
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public SoundSpecifier CountdownFinalSound = new SoundPathSpecifier("/Audio/_Mono/Effects/Alerts/launchwarning.ogg");
+    public SoundSpecifier CountdownFinalSound = new SoundPathSpecifier("/Audio/_Forge/Effects/Alerts/space_alert_1.ogg");
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public int CountdownFinalThreshold = 3;

@@ -32,6 +32,8 @@
   recipeUnlocks:
   - BoardingTeleportEngineAdvancedFlatpack
   - BoardingTeleportPlatformAdvancedFlatpack
+  - BoardingTeleportEngineAdvancedMachineCircuitboard
+  - BoardingTeleportPlatformAdvancedMachineCircuitboard
   technologyPrerequisites:
   - ForgeBoardingTeleportTier1
   position: -2, -3
@@ -47,6 +49,8 @@
   recipeUnlocks:
   - BoardingTeleportEngineExperimentalFlatpack
   - BoardingTeleportPlatformExperimentalFlatpack
+  - BoardingTeleportEngineExperimentalMachineCircuitboard
+  - BoardingTeleportPlatformExperimentalMachineCircuitboard
   technologyPrerequisites:
   - ForgeBoardingTeleportTier2
   position: -3, -3

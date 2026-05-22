@@ -14,5 +14,9 @@
   - BoardingTeleportRemoteFlatpack
   - BoardingTeleportEngineAdvancedFlatpack
   - BoardingTeleportPlatformAdvancedFlatpack
+  - BoardingTeleportEngineAdvancedMachineCircuitboard
+  - BoardingTeleportPlatformAdvancedMachineCircuitboard
   - BoardingTeleportEngineExperimentalFlatpack
   - BoardingTeleportPlatformExperimentalFlatpack
+  - BoardingTeleportEngineExperimentalMachineCircuitboard
+  - BoardingTeleportPlatformExperimentalMachineCircuitboard

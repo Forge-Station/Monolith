@@ -115,6 +115,8 @@
     engineTier: 4
   - type: ApcPowerReceiver
     powerLoad: 40000
+  - type: Machine
+    board: BoardingTeleportEngineExperimentalMachineCircuitboard
 
 - type: entity
   parent: BoardingTeleportEngine
@@ -141,6 +143,8 @@
     engineTier: 2
   - type: ApcPowerReceiver
     powerLoad: 25000
+  - type: Machine
+    board: BoardingTeleportEngineAdvancedMachineCircuitboard
 
 - type: entity
   id: BoardingBluespaceScrambler
@@ -259,8 +263,8 @@
     countdownSound:
       path: /Audio/_Mono/Effects/Alerts/master_caution.ogg
     countdownFinalSound:
-      path: /Audio/_Mono/Effects/Alerts/launchwarning.ogg
-    countdownFinalThreshold: 3
+      path: /Audio/_Forge/Effects/Alerts/space_alert_1.ogg
+    countdownFinalThreshold: 5
     arrivalSound:
       path: /Audio/Effects/Lightning/lightningbolt.ogg
   - type: DeviceNetwork
@@ -294,6 +298,8 @@
     maxReturnDistance: 800
   - type: ApcPowerReceiver
     powerLoad: 3500
+  - type: Machine
+    board: BoardingTeleportPlatformAdvancedMachineCircuitboard
 
 - type: entity
   parent: BoardingTeleportPlatform
@@ -310,6 +316,8 @@
     maxReturnDistance: 2000
   - type: ApcPowerReceiver
     powerLoad: 5000
+  - type: Machine
+    board: BoardingTeleportPlatformExperimentalMachineCircuitboard
 
 - type: entity
   parent: BaseFlatpack

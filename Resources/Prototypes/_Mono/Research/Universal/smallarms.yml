@@ -38,6 +38,7 @@
   - AmmoBox23x75mmFlechette
   - Magazine12_gaugeFlechette
   - AmmoBox12_gaugeFlechette
+  - ForgeBlueprintAPAmmo # Forge-change
 
 #- type: technology
 #  id: UniversalSynthalloyCore
@@ -112,6 +113,7 @@
   - Magazine45_ACPPistolRIP
   - Magazine45_ACPSubMachineGunRIP
   - AmmoBox45_ACPRIP
+  - ForgeBlueprintRIPAmmo # Forge-change
 
 - type: technology
   id: DraconicMunitions
@@ -152,6 +154,7 @@
   - Magazine45_ACPSubMachineGunIncendiary
   - AmmoBox45_ACPIncendiary
   - AmmoBox23x75mmFlashbang
+  - ForgeBlueprintIncendiaryAmmo # Forge-change
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 9, -1
@@ -192,6 +195,7 @@
   - Magazine45_ACPPistolUranium
   - Magazine45_ACPSubMachineGunUranium
   - AmmoBox45_ACPUranium
+  - ForgeBlueprintUraniumAmmo # Forge-change
   technologyPrerequisites:
   - UniversalPlastitaniumCore
   position: 7, 4

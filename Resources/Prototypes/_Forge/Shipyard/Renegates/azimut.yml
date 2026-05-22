@@ -14,6 +14,14 @@
   guidebookPage: Null
   class:
   - Fighter
+  - Patrol
+  - Pursuit
+  - Medical
+  - Chemistry
+  - Pirate
+  - Destroyer
+  engine:
+  - Plasma
 
 - type: gameMap
   id: azimut

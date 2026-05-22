@@ -23,7 +23,7 @@ ent-EncryptionKeyPlantManager = ключ шифрования менеджера
 ent-EncryptionKeyCustom = настраиваемый ключ шифрования
     .desc = Ключ шифрования для частот портативных раций. Зачем таскать отдельную рацию, если можно настроить гарнитуру?
 
-ent-EncryptionKeyHospital = ключ шифрования травмы тим
+ent-EncryptionKeyHospital = ключ шифрования ТраумаТим
     .desc = Ключ шифрования, используемый для координации сотрудников TTI.
 
 ent-EncryptionKeyViperGroup = ключ шифрования Viper Group

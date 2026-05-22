@@ -1,0 +1,328 @@
+- type: reagent
+  id: Transmutin
+  name: reagent-name-transmutin
+  group: Medicine
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+
+- type: reagent
+  id: TransmutinHuman
+  name: reagent-name-transmutin-human
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Human
+
+- type: reagent
+  id: TransmutinDwarf
+  name: reagent-name-transmutin-dwarf
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms: &transmutinDwarfMetabolism
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Dwarf
+
+- type: reagent
+  id: TransmutinReptilian
+  name: reagent-name-transmutin-reptilian
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Reptilian
+
+- type: reagent
+  id: TransmutinArachnid
+  name: reagent-name-transmutin-arachnid
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Arachnid
+
+- type: reagent
+  id: TransmutinDiona
+  name: reagent-name-transmutin-diona
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Diona
+
+- type: reagent
+  id: TransmutinMoth
+  name: reagent-name-transmutin-moth
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Moth
+
+- type: reagent
+  id: TransmutinSlimePerson
+  name: reagent-name-transmutin-slime
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: SlimePerson
+
+- type: reagent
+  id: TransmutinVox
+  name: reagent-name-transmutin-vox
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Vox
+
+- type: reagent
+  id: TransmutinGoblin
+  name: reagent-name-transmutin-goblin
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Goblin
+
+- type: reagent
+  id: TransmutinIPC
+  name: reagent-name-transmutin-ipc
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: IPC
+
+- type: reagent
+  id: TransmutinOni
+  name: reagent-name-transmutin-oni
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Oni
+
+- type: reagent
+  id: TransmutinVulpkanin
+  name: reagent-name-transmutin-vulpkanin
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Vulpkanin
+
+- type: reagent
+  id: TransmutinTajaran
+  name: reagent-name-transmutin-tajaran
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Tajaran
+
+- type: reagent
+  id: TransmutinRodentia
+  name: reagent-name-transmutin-rodentia
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Rodentia
+
+- type: reagent
+  id: TransmutinChitinid
+  name: reagent-name-transmutin-chitinid
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Chitinid
+
+- type: reagent
+  id: TransmutinHarpy
+  name: reagent-name-transmutin-harpy
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Harpy
+
+- type: reagent
+  id: TransmutinHydrakin
+  name: reagent-name-transmutin-hydrakin
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Hydrakin
+
+- type: reagent
+  id: TransmutinResomi
+  name: reagent-name-transmutin-resomi
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Resomi
+
+- type: reagent
+  id: TransmutinAriral
+  name: reagent-name-transmutin-ariral
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Ariral
+
+- type: reagent
+  id: TransmutinDemon
+  name: reagent-name-transmutin-demon
+  group: Medicine
+  hideFromGuidebook: true
+  desc: reagent-desc-transmutin
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#9b6cff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:TransmutinMutateMonkey
+        species: Demon

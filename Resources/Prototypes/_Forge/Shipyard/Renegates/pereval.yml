@@ -11,6 +11,12 @@
   guidebookPage: Null
   class:
   - Fighter
+  - Patrol
+  - Scrapyard
+  - Pirate
+  - Destroyer
+  engine:
+  - AME
 
 - type: gameMap
   id: pereval

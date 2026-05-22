@@ -10,7 +10,7 @@
   name: SKR Kestrel
   description: A small jump-capable science vessel meant for long-term missions. Comes with a living suite and a decent defensive armament for its size, though it is without much maneuvering performance.
   price: 57500
-  category: Small
+  category: Medium
   group: Shipyard
   shuttlePath: /Maps/_Mono/Shuttles/kestrel.yml
   guidebookPage: null

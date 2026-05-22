@@ -37,7 +37,6 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
-    key: reinforceduraniumwindows # Mono
     base: ruwindow
   - type: Construction
     graph: Window
@@ -134,7 +133,7 @@
     - Diagonal
   - type: IconSmooth
     mode: Diagonal
-    key: reinforceduraniumwindows # Mono
+    key: walls # Frontier: windows<walls
     base: state
   - type: Icon
     sprite: Structures/Windows/reinforced_uranium_diagonal.rsi

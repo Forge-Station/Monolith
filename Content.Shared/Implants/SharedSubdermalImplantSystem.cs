@@ -42,6 +42,14 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
             _actionsSystem.AddAction(component.ImplantedEntity.Value, ref component.Action, component.ImplantAction, uid);
         }
 
+        // Forge-Change: Allow implants to grant body components directly from YAML.
+        if (component.OnAdd != null)
+            EntityManager.AddComponents(component.ImplantedEntity.Value, component.OnAdd, true);
+
+        // Forge-Change: If the implant was defining removal-state components, undo them on insertion.
+        if (component.OnRemove != null)
+            EntityManager.RemoveComponents(component.ImplantedEntity.Value, component.OnRemove);
+
         //replace micro bomb with macro bomb
         if (_container.TryGetContainer(component.ImplantedEntity.Value, ImplanterComponent.ImplantSlotId, out var implantContainer) && _tag.HasTag(uid, "MacroBomb"))
         {
@@ -72,6 +80,14 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
 
         if (component.ImplantAction != null)
             _actionsSystem.RemoveProvidedActions(component.ImplantedEntity.Value, uid);
+
+        // Forge-Change: Remove YAML-granted implant components from the former wearer.
+        if (!_net.IsClient && component.OnAdd != null)
+            EntityManager.RemoveComponents(component.ImplantedEntity.Value, component.OnAdd);
+
+        // Forge-Change: Apply optional post-extraction components, matching organ onRemove behavior.
+        if (!_net.IsClient && component.OnRemove != null)
+            EntityManager.AddComponents(component.ImplantedEntity.Value, component.OnRemove, true);
 
         if (!_container.TryGetContainer(uid, BaseStorageId, out var storageImplant))
             return;

@@ -3,15 +3,19 @@
   parent: BaseVessel
   name: Кастрюля
   description:   Среднегабаритный многоцелевой шаттл , отличающийся крупной броней . Рекомендованный состав 4-5 человек
-
   price: 179000
-  category: Medium
+  category: Large
   group: Renegate
   access: Renegate
   shuttlePath: /Maps/_Forge/Shuttles/Renegates/kastlira.yml
   guidebookPage: Null
   class:
+  - Scrapyard
+  - Chemistry
   - Fighter
+  - Pirate
+  engine:
+  - Uranium
 
 - type: gameMap
   id: kastlira

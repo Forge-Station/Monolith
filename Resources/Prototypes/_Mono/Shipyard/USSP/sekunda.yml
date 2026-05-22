@@ -12,7 +12,6 @@
   shuttlePath: /Maps/_Mono/Shuttles/USSP/sekunda.yml
   guidebookPage: Null
   class:
-  - Patrol
   - Medical
   - Chemistry
   engine:

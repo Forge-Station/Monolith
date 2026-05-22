@@ -189,7 +189,7 @@
   entityIcon: SecurityCyberneticEyes
   discipline: CivilianServices
   tier: 2
-  cost: 20000
+  cost: 40000 # Forge-Change
   recipeUnlocks:
   - JawsOfLifeLeftArm
   - JawsOfLifeRightArm
@@ -200,6 +200,15 @@
   - BasicCyberneticEyes
   - SecurityCyberneticEyes
   - MedicalCyberneticEyes
+  - ForgeVoiceModuleImplanter # Forge-Change
+  - ForgeSubdermalArmorImplant # Forge-Change
+  - ForgeReflectiveSubdermalArmorImplant # Forge-Change
+  - ForgeMilLeftHand # Forge-Change
+  - ForgeMilRightHand # Forge-Change
+  - ForgeRiplyLeftHand # Forge-Change
+  - ForgeRiplyRightHand # Forge-Change
+  - ForgeCyberneticLiver # Forge-Change
+  - ForgeCyberneticKidneys # Forge-Change
   technologyPrerequisites:
   - AdvancedTreatment
   position: -2, 12

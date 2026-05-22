@@ -4,6 +4,8 @@ gunnery-window-connected = ПОДКЛЮЧЕНО
 gunnery-select-all = Выбрать всё
 gunnery-unselect-all = Отменить выбор
 gunnery-guns = Орудия
+gunnery-shield-label = Состояние щита
+gunnery-iff-search = Поиск IFF
 gunnery-gun-select = {$name}
 gunnery-gun-select-ammo = {$name}: {$ammo}
 

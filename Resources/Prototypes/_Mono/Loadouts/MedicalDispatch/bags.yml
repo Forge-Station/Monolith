@@ -3,3 +3,22 @@
   price: 12500
   equipment:
     back: ClothingModsuitParamedicPowerCell
+# Forge start
+- type: loadout
+  id: MdMedicClothingTraumaBackpack
+  price: 0
+  equipment:
+    back: ClothingTraumaBackpack
+
+- type: loadout
+  id: MdMedicClothingBackpackDuffelTrauma
+  price: 0
+  equipment:
+    back: ClothingBackpackDuffelTrauma
+
+- type: loadout
+  id: MdMedicClothingBackpackSatchelTrauma
+  price: 0
+  equipment:
+    back: ClothingBackpackSatchelTrauma
+# Forge end

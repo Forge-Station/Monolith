@@ -1,6 +1,6 @@
-using System.Linq;
 using Content.Client.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared.Damage;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -26,14 +26,14 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private EntityQuery<IgnorePredictionHideComponent> _ignorePredictionHideQuery;
+    private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<SpriteComponent> _spriteQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _ignorePredictionHideQuery = GetEntityQuery<IgnorePredictionHideComponent>();
+        _damageableQuery = GetEntityQuery<DamageableComponent>();
         _spriteQuery = GetEntityQuery<SpriteComponent>();
 
         SubscribeLocalEvent<PhysicsUpdateBeforeSolveEvent>(OnBeforeSolve);
@@ -104,13 +104,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             return;
         }
 
-        var netEnt = GetNetEntity(args.OtherEntity);
-        var pos = _transform.GetMapCoordinates(args.OtherEntity);
-        var hit = new HashSet<(NetEntity, MapCoordinates)> { (netEnt, pos) };
-        var ev = new PredictedProjectileHitEvent(ent.Owner.Id, hit);
-        RaiseNetworkEvent(ev);
-
-        _projectile.ProjectileCollide((ent, projectile, physics), args.OtherEntity, null, true);
+        SendPredictedHitAndEffects((ent, ent.Comp), projectile, physics, args.OtherEntity);
     }
 
     private void OnServerProjectileStartup(Entity<PredictedProjectileServerComponent> ent, ref ComponentStartup args)
@@ -124,6 +118,62 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         {
             sprite.Visible = true;
         }
+    }
+
+    /// <summary>
+    /// Prefer damageable targets closest to the projectile; otherwise closest contact.
+    /// </summary>
+    private EntityUid? PickPrimaryContact(EntityUid projectile, HashSet<EntityUid> contacts)
+    {
+        if (contacts.Count == 0)
+            return null;
+
+        if (contacts.Count == 1)
+        {
+            foreach (var c in contacts)
+                return c;
+        }
+
+        var projPos = _transform.GetMapCoordinates(projectile).Position;
+        EntityUid? bestDamageable = null;
+        var bestDamageableDist = float.MaxValue;
+        EntityUid? bestAny = null;
+        var bestAnyDist = float.MaxValue;
+
+        foreach (var contact in contacts)
+        {
+            var pos = _transform.GetMapCoordinates(contact).Position;
+            var dist = (pos - projPos).LengthSquared();
+            if (dist < bestAnyDist)
+            {
+                bestAnyDist = dist;
+                bestAny = contact;
+            }
+
+            if (_damageableQuery.HasComponent(contact) && dist < bestDamageableDist)
+            {
+                bestDamageableDist = dist;
+                bestDamageable = contact;
+            }
+        }
+
+        return bestDamageable ?? bestAny;
+    }
+
+    private void SendPredictedHitAndEffects(
+        Entity<PredictedProjectileClientComponent> ent,
+        ProjectileComponent projectile,
+        PhysicsComponent physics,
+        EntityUid target)
+    {
+        if (ent.Comp.Hit)
+            return;
+
+        var netEnt = GetNetEntity(target);
+        var pos = _transform.GetMapCoordinates(target);
+        RaiseNetworkEvent(new PredictedProjectileHitEvent(ent.Owner.Id, netEnt, pos));
+        _projectile.ProjectileCollide((ent, projectile, physics), target, null, true);
+        ent.Comp.Hit = true;
     }
 
     public override void Update(float frameTime)
@@ -152,19 +202,11 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             if (contacts.Count == 0)
                 continue;
 
-            var hit = new HashSet<(NetEntity, MapCoordinates)>();
-            foreach (var contact in contacts)
-            {
-                var netEnt = GetNetEntity(contact);
-                var pos = _transform.GetMapCoordinates(contact);
-                hit.Add((netEnt, pos));
-            }
+            var primary = PickPrimaryContact(uid, contacts);
+            if (primary == null)
+                continue;
 
-            var ev = new PredictedProjectileHitEvent(uid.Id, hit);
-            RaiseNetworkEvent(ev);
-
-            // Impact effects will be handled on the server side
-            _projectile.ProjectileCollide((uid, projectile, physics), contacts.First(), null, true);
+            SendPredictedHitAndEffects((uid, predicted), projectile, physics, primary.Value);
         }
 
         var predictedQuery = EntityQueryEnumerator<PredictedProjectileHitComponent, SpriteComponent, TransformComponent>();
@@ -192,4 +234,3 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         }
     }
 }
-

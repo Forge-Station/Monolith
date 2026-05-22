@@ -31,7 +31,7 @@
       path: /Audio/_Goobstation/Items/handling/sabre_drop.ogg
   # Goobstation edit start
   - type: Sprite
-    sprite: Objects/Weapons/Melee/captain_sabre.rsi
+    sprite: Forge/Objects/Weapons/Melee/captain_sabre.rsi
   - type: MeleeWeapon
     heavyStaminaCost: 2.5 # goob edit
     attackRate: 1.5
@@ -44,7 +44,7 @@
     reflectProb: .1
     spread: 90
   - type: Item
-    sprite: Objects/Weapons/Melee/captain_sabre.rsi
+    sprite: Forge/Objects/Weapons/Melee/captain_sabre.rsi
   - type: Tag
     tags:
     - CaptainSabre

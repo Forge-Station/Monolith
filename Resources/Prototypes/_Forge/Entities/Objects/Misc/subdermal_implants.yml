@@ -1,0 +1,58 @@
+- type: entity
+  parent: BaseSubdermalImplant
+  id: ForgeVoiceModuleImplant
+  name: voice module implant
+  description: A configurable subdermal TTS voice modulator. Configure it in hand before implantation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ForgeVoiceModuleImplant
+    voiceId: male1
+  - type: UserInterface
+    interfaces:
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
+
+- type: entity
+  parent: BaseItem
+  id: ForgeSubdermalArmorImplant
+  name: subdermal armor implant
+  description: A surgical armor implant that reinforces the body against mechanical damage, but conducts heat dangerously well.
+  components:
+  - type: Sprite
+    sprite: _EinsteinEngines/Mobs/Species/IPC/organs.rsi
+    state: heart-on
+  - type: Item
+    size: Small
+  - type: ForgeSurgicalArmorImplant
+  - type: SubdermalImplant
+    onAdd:
+    - type: ForgeSubdermalArmor
+      mechanicalMultiplier: 0.9
+      mechanicalFlat: -2
+      heatMultiplier: 2
+    - type: ForgeEmpDamage
+      damageType: Blunt
+      amount: 30
+
+- type: entity
+  parent: BaseItem
+  id: ForgeReflectiveSubdermalArmorImplant
+  name: reflective subdermal armor implant
+  description: A surgical armor implant with reflective heat sinks that resist temperature extremes, but make impacts bite harder.
+  components:
+  - type: Sprite
+    sprite: _EinsteinEngines/Mobs/Species/IPC/organs.rsi
+    state: heart-on
+  - type: Item
+    size: Small
+  - type: ForgeSurgicalArmorImplant
+  - type: SubdermalImplant
+    onAdd:
+    - type: ForgeSubdermalArmor
+      mechanicalMultiplier: 1.1
+      mechanicalFlat: 2
+      heatMultiplier: 0.7
+      coldMultiplier: 0
+    - type: ForgeEmpDamage
+      damageType: Heat
+      amount: 20

@@ -4695,8 +4695,6 @@ entities:
       pos: 2.5,-17.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
   - uid: 729
@@ -6739,7 +6737,7 @@ entities:
     - type: Transform
       pos: -9.5,-14.5
       parent: 1
-- proto: ShieldGeneratorMedium
+- proto: ShieldGeneratorFSG220
   entities:
   - uid: 1000
     components:

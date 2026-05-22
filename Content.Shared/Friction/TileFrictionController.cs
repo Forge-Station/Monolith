@@ -14,6 +14,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Controllers;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Maths;
 
 namespace Content.Shared.Friction
 {
@@ -36,6 +37,10 @@ namespace Content.Shared.Friction
         private float _airDamping;
         private float _offGridDamping;
 
+        /// <summary>Per physics BeforeSolve pass; tile friction for the same cell is reused for all awake bodies.</summary>
+        private int _tileFrictionCacheSerial;
+        private readonly Dictionary<(EntityUid Grid, Vector2i Cell), (int Serial, float Friction)> _tileFrictionCache = new();
+
         public override void Initialize()
         {
             base.Initialize();
@@ -54,6 +59,17 @@ namespace Content.Shared.Friction
         public override void UpdateBeforeSolve(bool prediction, float frameTime)
         {
             base.UpdateBeforeSolve(prediction, frameTime);
+
+            unchecked
+            {
+                _tileFrictionCacheSerial++;
+            }
+
+            if (_tileFrictionCacheSerial == 0)
+                _tileFrictionCacheSerial = 1;
+
+            if (_tileFrictionCache.Count > 8192)
+                _tileFrictionCache.Clear();
 
             foreach (var ent in PhysicsSystem.AwakeBodies)
             {
@@ -139,12 +155,19 @@ namespace Content.Shared.Friction
             }
 
             var tile = _map.GetTileRef(xform.GridUid.Value, grid, xform.Coordinates);
+            var cacheKey = (xform.GridUid.Value, tile.GridIndices);
+
+            if (_tileFrictionCache.TryGetValue(cacheKey, out var cached) && cached.Serial == _tileFrictionCacheSerial)
+                return cached.Friction;
 
             // If it's a map but on an empty tile then just assume it has gravity.
             if (tile.Tile.IsEmpty &&
                 HasComp<MapComponent>(xform.GridUid) &&
                 (!TryComp<GravityComponent>(xform.GridUid, out var gravity) || gravity.Enabled))
+            {
+                _tileFrictionCache[cacheKey] = (_tileFrictionCacheSerial, tileModifier);
                 return tileModifier;
+            }
 
             // Check for anchored ents that modify friction
             var anc = _map.GetAnchoredEntitiesEnumerator(xform.GridUid.Value, grid, tile.GridIndices);
@@ -155,7 +178,9 @@ namespace Content.Shared.Friction
             }
 
             var tileDef = _tileDefinitionManager[tile.Tile.TypeId];
-            return tileDef.Friction * tileModifier;
+            var result = tileDef.Friction * tileModifier;
+            _tileFrictionCache[cacheKey] = (_tileFrictionCacheSerial, result);
+            return result;
         }
 
         public void SetModifier(EntityUid entityUid, float value, TileFrictionModifierComponent? friction = null)

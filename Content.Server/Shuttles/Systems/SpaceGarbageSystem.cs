@@ -21,6 +21,10 @@ public sealed class SpaceGarbageSystem : EntitySystem
 
     private void OnCollide(EntityUid uid, SpaceGarbageComponent component, ref StartCollideEvent args)
     {
+        // Forge-Change: honor the previously-unused CleanupExempt flag.
+        if (component.CleanupExempt)
+            return;
+
         if (args.OtherBody.BodyType != BodyType.Static)
             return;
 

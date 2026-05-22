@@ -1,0 +1,16 @@
+# Forge-Change: marker entity placed at the desired center of a POI capture
+# zone. The shuttle radar reads PoiCaptureZoneVisuals to draw a translucent
+# disc in the owning company's color. Radius 0 falls back to the
+# forge.poi_capture.zone_radius_tiles CVar at MapInit (max: forge.poi_capture.zone_radius_max_tiles, default 2048).
+# Faction bases use PoiCaptureRoundstart on the grid instead (see faction POI prototypes).
+- type: entity
+  parent: MarkerBase
+  id: PoiCaptureZoneMarker
+  name: POI capture zone marker
+  description: Editor-only marker that defines where the capture zone is centered.
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: green
+  - type: PoiCaptureZoneVisuals
+    radius: 0

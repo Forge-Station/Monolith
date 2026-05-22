@@ -101,3 +101,14 @@
   parent: BaseGoldCircuitboardRecipe
   id: CentrifugeLatheMiniCircuitboard
   result: CentrifugeLatheMiniCircuitboard
+
+# Forge FSG tier 4 specialists (boards in _Forge; recipes here with other shield boards for reliable LatheRecipe load)
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG870RCircuitboard
+  result: MachineShieldFSG870RCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG950MCircuitboard
+  result: MachineShieldFSG950MCircuitboard

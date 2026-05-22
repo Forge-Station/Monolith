@@ -89,10 +89,12 @@
 - type: latheRecipePack
   id: MedicalSynthLimbsStatic
   recipes:
+  - ForgeBioSynthTorso # Forge-Change
   - SynthLiver
   - SynthHeart
   - SynthLungs
   - SynthEyes
+  - SynthKidneys # Forge-Change
   - SynthHeadEmpty
   - SynthLeftLeg
   - SynthRightLeg

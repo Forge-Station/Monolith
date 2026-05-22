@@ -19,6 +19,9 @@ public sealed class EntityRadiusHeaterSystem : EntitySystem
     private float _updateCooldown = 1f;
     private TimeSpan _updateTimer = TimeSpan.Zero;
 
+    // Reused across heaters to avoid per-heater HashSet allocations.
+    private readonly HashSet<Entity<TemperatureComponent>> _nearbyTemp = new();
+
     public override void Update(float frameTime)
     {
         if (_updateTimer < TimeSpan.FromSeconds(_updateCooldown))
@@ -42,15 +45,16 @@ public sealed class EntityRadiusHeaterSystem : EntitySystem
             if (!this.IsPowered(uid, EntityManager))
                 continue;
 
-            var nearby = _lookup.GetEntitiesInRange<TemperatureComponent>(Transform(uid).Coordinates, comp.Radius);
             var xform = Transform(uid);
-            foreach (var ent in nearby)
+            _nearbyTemp.Clear();
+            _lookup.GetEntitiesInRange(xform.Coordinates, comp.Radius, _nearbyTemp);
+            foreach (var ent in _nearbyTemp)
             {
                 _temp.ChangeHeat(ent, CalculateThermalEnergy(ent, xform, comp));
             }
         }
 
-
+        _nearbyTemp.Clear();
         _updateTimer = TimeSpan.Zero;
     }
 

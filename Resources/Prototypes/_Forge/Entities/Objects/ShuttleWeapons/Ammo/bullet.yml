@@ -1,0 +1,40 @@
+- type: entity
+  id: 40mmBulletBase
+  name: shell
+  parent: BaseBulletTrigger
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 3.2
+  - type: PointLight
+    radius: 2.5
+    energy: 0.5
+  - type: ShipWeaponProjectile
+  - type: RadarBlip
+    scale: 2.5
+    shape: triangle
+    radarColor: "#1df1f5"
+
+- type: entity
+  id: 40mmBullet
+  parent: 40mmBulletBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+  - type: Sprite
+    sprite: _Mono/Objects/SpaceArtillery/630_armorpiercing_shell_casing.rsi
+    layers:
+    - state: base-projectile
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 20
+    intensitySlope: 2
+    maxIntensity: 4
+    maxTileBreak: 2
+  - type: PointLight
+    color: orange

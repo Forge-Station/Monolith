@@ -14,17 +14,19 @@ namespace Content.Server.Power.Nodes
             MapGridComponent? grid,
             IEntityManager entMan)
         {
-            if (!xform.Anchored || grid == null)
+            if (!xform.Anchored || grid == null || !xform.GridUid.HasValue)
                 yield break;
 
-            var gridIndex = grid.TileIndicesFor(xform.Coordinates);
+            var gridUid = xform.GridUid.Value;
+            var map = entMan.System<SharedMapSystem>();
+            var gridIndex = map.TileIndicesFor(gridUid, grid, xform.Coordinates);
 
             // While we go over adjacent nodes, we build a list of blocked directions due to
             // incoming or outgoing wire terminals.
             var terminalDirs = 0;
             List<(Direction, Node)> nodeDirs = new();
 
-            foreach (var (dir, node) in NodeHelpers.GetCardinalNeighborNodes(nodeQuery, grid, gridIndex))
+            foreach (var (dir, node) in NodeHelpers.GetCardinalNeighborNodes(nodeQuery, gridUid, grid, gridIndex, map))
             {
                 if (node is CableNode && node != this)
                 {

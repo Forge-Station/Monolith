@@ -37,7 +37,6 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
-    key: plasmawindows # Mono
     base: pwindow
   - type: Construction
     graph: Window
@@ -136,7 +135,7 @@
     - Diagonal
   - type: IconSmooth
     mode: Diagonal
-    key: plasmawindows # Mono
+    key: walls # Frontier: windows<walls
     base: state
   - type: Icon
     sprite: Structures/Windows/plasma_diagonal.rsi

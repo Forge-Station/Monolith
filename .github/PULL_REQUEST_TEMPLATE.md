@@ -1,33 +1,33 @@
 
-## About the PR
-<!-- What did you change? -->
-<!-- If this is a code change, summarize at high level how your new code works. This makes it easier to review. -->
+## О PR
+<!-- Что вы изменили? -->
+<!-- Если это изменение кода, кратко опишите на высоком уровне, как работает новое решение. Это упростит ревью. -->
 
-## Why / Balance
-<!-- Discuss how this would affect game balance or explain why it was changed. Link any relevant discussions or issues. -->
+## Зачем / Баланс
+<!-- Опишите, как это влияет на игровой баланс, или объясните причину изменения. Приложите ссылки на связанные обсуждения или задачи. -->
 
-## Media
-<!-- Attach media if the PR makes ingame changes (clothing, items, features, etc). 
-Small fixes/refactors are exempt. Media may be used in SS14 progress reports with credit. -->
+## Медиа
+<!-- Приложите медиа, если PR вносит изменения в игру (одежда, предметы, механики и т.д.).
+Небольшие фиксы/рефакторы от этого освобождены. Медиа может быть использовано в отчётах о прогрессе SS14 с указанием авторства. -->
 
-## Requirements
-<!-- Confirm the following by placing an X in the brackets [X]: -->
-- [ ] I have read relevant guidelines/documentation to this PR found on [our devwiki](https://monolith-station.github.io/mono-docs/).
-- [ ] I have added media to this PR or it does not require an ingame showcase.
-- [ ] I can confirm this PR contains either no AI-generated content, or AI-generated content that meets our guidelines.
-<!-- You should understand that not following the above may get your PR closed at maintainer’s discretion -->
-<!-- When using AI, make sure you are already proficient in creating whatever content you are attempting to generate and that you already have experience contributing to SS14. This means using AI to enhance your preexisting workflow, not vibecoding. -->
+## Требования
+<!-- Подтвердите пункты, поставив X в скобках [X]: -->
+- [ ] Я прочитал(а) релевантные гайдлайны/документацию для этого PR на [нашем devwiki](https://monolith-station.github.io/mono-docs/).
+- [ ] Я добавил(а) медиа в этот PR, либо для него не требуется демонстрация в игре.
+- [ ] Подтверждаю, что PR либо не содержит AI-сгенерированного контента, либо этот контент соответствует нашим правилам.
+<!-- Нарушение указанных выше требований может привести к закрытию PR по усмотрению мейнтейнера -->
+<!-- При использовании AI убедитесь, что вы уже умеете создавать такой контент самостоятельно и имеете опыт вклада в SS14. AI должен дополнять ваш существующий рабочий процесс, а не заменять его "вайбкодингом". -->
 
-## How to test
-<!-- Describe the way it can be tested -->
+## Как тестировать
+<!-- Опишите, как это можно протестировать -->
 
-## Breaking changes
-<!-- List any breaking changes, including namespaces, public class/method/field changes, prototype renames; and provide instructions for fixing them. -->
+## Ломающие изменения
+<!-- Перечислите все breaking changes, включая неймспейсы, изменения публичных классов/методов/полей, переименования прототипов; и дайте инструкции по исправлению. -->
 
 **Changelog**
-<!-- Add a Changelog entry to make players aware of new features or changes that could affect gameplay.
-Make sure to read the guidelines and take this Changelog template out of the comment block in order for it to show up.
-Changelog must have a :cl: symbol, so the bot recognizes the changes and adds them to the game's changelog. -->
+<!-- Добавьте запись в Changelog, чтобы игроки знали о новых фичах или изменениях, влияющих на геймплей.
+Обязательно прочитайте правила и вынесите шаблон Changelog из блока комментария, чтобы он отображался.
+В Changelog должен быть символ :cl:, чтобы бот распознал изменения и добавил их в игровой changelog. -->
 <!--
 :cl:
 - add: Added fun!

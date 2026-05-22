@@ -1,3 +1,25 @@
+- type: body
+  id: NFKangarooSpace
+  name: "space kangaroo"
+  root: torso
+  slots:
+    torso:
+      part: TorsoAnimal
+      connections:
+      - legs
+      organs:
+        lungs: ForgeSpaceKangarooLungs # Forge-Change
+        stomach: OrganAnimalStomach
+        liver: OrganAnimalLiver
+        heart: OrganAnimalHeart
+        kidneys: OrganAnimalKidneys
+    legs:
+      part: LegsAnimal
+      connections:
+      - feet
+    feet:
+      part: FeetAnimal
+
 - type: entity
   id: NFMobBearSpace
   parent: [NFMobRestrictions, NFMobSimpleHostileBase, MobBearSpace]
@@ -9,6 +31,9 @@
   parent: [NFMobRestrictions, NFMobSimpleHostileBase, MobKangarooSpace]
   suffix: "Frontier"
   categories: [ HideSpawnMenu ]
+  components:
+  - type: Body # Forge-Change
+    prototype: NFKangarooSpace # Forge-Change
 
 - type: entity
   id: NFMobSpiderSpace

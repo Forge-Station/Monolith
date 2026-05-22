@@ -1,0 +1,49 @@
+- type: latheRecipe
+  abstract: true
+  id: basePDArecipe
+  categories:
+  - PDAs
+  materialDiscountScale: 0
+  completetime: 10
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  abstract: true
+  id: baseIDrecipe
+  categories:
+  - IDCards
+  materialDiscountScale: 0
+  completetime: 8
+  materials:
+    Steel: 10
+
+- type: latheRecipe
+  abstract: true
+  id: baseHeadsetrecipe
+  categories:
+  - Headsets
+  materialDiscountScale: 0
+  completetime: 5
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  abstract: true
+  id: baseEncryptionKeyrecipe
+  categories:
+  - EncryptionKeys
+  materialDiscountScale: 0
+  completetime: 5
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  abstract: true
+  id: baseBureaucracyrecipe
+  categories:
+  - Bureaucracy
+  materialDiscountScale: 0
+  completetime: 5
+  materials:
+    Plastic: 50

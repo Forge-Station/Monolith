@@ -11,6 +11,8 @@
   guidebookPage: Null
   class:
   - Fighter
+  - Patrol
+  - Pursuit
   engine:
   - Uranium
 

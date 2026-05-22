@@ -10,7 +10,11 @@
   shuttlePath: /Maps/_Forge/Shuttles/Renegates/dodo.yml
   guidebookPage: Null
   class:
-  - Fighter
+  - Patrol
+  - Scrapyard
+  - Pirate
+  engine:
+  - Uranium
 
 - type: gameMap
   id: dodo

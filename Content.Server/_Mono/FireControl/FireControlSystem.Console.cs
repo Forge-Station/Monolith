@@ -34,8 +34,11 @@ public sealed partial class FireControlSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!; // Forge-Change
 
     private bool _completedCheck = false;
+
+    private readonly HashSet<Entity<FireControlConsoleComponent>> _consoleSet = new(); // Forge-Change: reused buffer for per-grid console lookups.
 
     private void InitializeConsole()
     {
@@ -251,12 +254,41 @@ public sealed partial class FireControlSystem : EntitySystem
         return false;
     }
 
+    // Forge-Change-Start
+    /// <summary>
+    /// Pushes refreshed UI state to every fire control console anchored to the given grid.
+    /// Uses the entity lookup to enumerate only consoles parented to the grid (O(grid children))
+    /// instead of scanning the whole world, and computes the global dock state once per call.
+    /// </summary>
+    public void RefreshConsolesOnGrid(EntityUid gridUid)
+    {
+        _consoleSet.Clear();
+        _lookup.GetChildEntities(gridUid, _consoleSet);
+        if (_consoleSet.Count == 0)
+            return;
+
+        var docks = _shuttleConsoleSystem.GetAllDocks();
+        foreach (var console in _consoleSet)
+        {
+            UpdateUi(console.Owner, console.Comp, docks);
+        }
+    }
+    // Forge-Change-End
+
     private void UpdateUi(EntityUid uid, FireControlConsoleComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
 
-        NavInterfaceState navState = _shuttleConsoleSystem.GetNavState(uid, _shuttleConsoleSystem.GetAllDocks());
+        // Forge-Change: callers that update a single console pay the dock-lookup cost themselves.
+        UpdateUi(uid, component, _shuttleConsoleSystem.GetAllDocks());
+    }
+
+    // Forge-Change-Start: overload that takes a pre-fetched docks dictionary so batch refreshes
+    // (RefreshConsolesOnGrid) compute it once instead of per console.
+    private void UpdateUi(EntityUid uid, FireControlConsoleComponent component, Dictionary<NetEntity, List<DockingPortState>> docks)
+    {
+        NavInterfaceState navState = _shuttleConsoleSystem.GetNavState(uid, docks);
 
         List<FireControllableEntry> controllables = new();
         if (component.ConnectedServer != null && TryComp<FireControlServerComponent>(component.ConnectedServer, out var server))
@@ -284,6 +316,7 @@ public sealed partial class FireControlSystem : EntitySystem
         var state = new FireControlConsoleBoundInterfaceState(component.ConnectedServer != null, array, navState);
         _ui.SetUiState(uid, FireControlConsoleUiKey.Key, state);
     }
+    // Forge-Change-End
 
     /// <summary>
     /// Gets ammo information for a weapon to determine if it has manual reload.

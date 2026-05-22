@@ -421,6 +421,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         DebugTools.AssertEqual(embeddedContainer.EmbeddedObjects.Contains(uid), false);
 
         embeddedContainer.EmbeddedObjects.Add(uid);
+        Dirty(target, embeddedContainer);  //Forge-Chage
     }
 
     public void EmbedDetach(EntityUid uid, EmbeddableProjectileComponent? component, EntityUid? user = null)
@@ -436,8 +437,15 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         if (component.EmbeddedIntoUid is not null)
         {
-            if (TryComp<EmbeddedContainerComponent>(component.EmbeddedIntoUid.Value, out var embeddedContainer))
+            var embeddedInto = component.EmbeddedIntoUid.Value;  // Forge-Change Begin
+            if (TryComp<EmbeddedContainerComponent>(embeddedInto, out var embeddedContainer))
+            {
                 embeddedContainer.EmbeddedObjects.Remove(uid);
+                if (embeddedContainer.EmbeddedObjects.Count == 0)
+                    RemCompDeferred<EmbeddedContainerComponent>(embeddedInto);
+                else
+                    Dirty(embeddedInto, embeddedContainer);
+            }  // Forge-Change End
         }
 
         var xform = Transform(uid);

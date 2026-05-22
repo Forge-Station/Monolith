@@ -213,6 +213,7 @@
   id: PlayerBorgRedacted
   parent: BorgChassisRedacted
   suffix: Battery, Module
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: ContainerFill
     containers:
@@ -226,7 +227,7 @@
       - BorgModuleAdvancedTool
       - BorgModuleConstruction
       - BorgModuleCable
-      - BorgModuleRedactedRCD
+      - BorgModuleForerunnerRCD
       - BorgModuleGPS
   - type: ItemSlots
     slots:
@@ -244,6 +245,7 @@
   id: PlayerBorgRedactedGhostRole
   parent: PlayerBorgRedacted
   suffix: Ghost
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: GhostRole
     name: ghost-role-information-redacted-borg
@@ -258,6 +260,7 @@
   id: PlayerBorgRedactedGhostRolePlaytime
   parent: PlayerBorgRedacted
   suffix: Ghost, Playtime
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: GhostRole
     name: ghost-role-information-redacted-borg
@@ -276,6 +279,7 @@
   id: PlayerStationAiRedacted
   parent: PlayerStationAiEmpty
   suffix: Ghost Role, Remnant
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: ContainerComp
     proto: AiHeldRedacted

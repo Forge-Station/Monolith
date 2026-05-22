@@ -21,3 +21,9 @@
   id: BioSynthEyes
   name: bio-synthetic eyes
   description: These eyes can be transplanted into any living organism and it will adapt to its recipient.
+
+- type: entity # Forge-Change
+  parent: OrganHumanKidneys # Forge-Change
+  id: BioSynthKidneys # Forge-Change
+  name: bio-synthetic kidneys # Forge-Change
+  description: These kidneys can be transplanted into any living organism and they will adapt to their recipient. # Forge-Change

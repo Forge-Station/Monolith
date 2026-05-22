@@ -2,12 +2,27 @@
   id: ForgeAsakimShipsTable
   table: !type:AllSelector
     children:
-      #- id: ForgeUnknownShuttleAsakimSmall
       - id: ForgeUnknownShuttleAsakimMedium
+      - id: ForgeUnknownShuttleAsakimLarge
 
 - type: entity
   parent: BaseRandomShuttleRule
   id: ForgeUnknownShuttleAsakimMedium
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-asakim-shuttle-detected
+    startAudio:
+      path: /Audio/Misc/notice2.ogg
+    weight: 2
+    maxOccurrences: 4
+  - type: GameRule
+    minPlayers: 40
+  - type: LoadMapRule
+    gridPath: /Maps/_Forge/Events/Periodic/Remnants/asakim_medium.yml
+
+- type: entity
+  parent: BaseRandomShuttleRule
+  id: ForgeUnknownShuttleAsakimLarge
   components:
   - type: StationEvent
     startAnnouncement: station-event-asakim-shuttle-detected
@@ -18,4 +33,4 @@
   - type: GameRule
     minPlayers: 40
   - type: LoadMapRule
-    gridPath: /Maps/_Forge/Events/Periodic/Remnants/asakim_medium.yml
+    gridPath: /Maps/_Forge/Events/Periodic/Remnants/asakim_large.yml

@@ -20,6 +20,6 @@ ent-ClothingShoesBootsMagNexus = боевые магнитные сапоги VS
 ent-ClothingModsuitBootsVanguardNSC = магнитные сапоги модкостюма VSS «Авангард»
     .desc = Стойкие и надёжные магнитные сапоги для мод костюма.
 ent-ClothingModsuitBootsHMELightSuit = ботинки модкостюма HME «Хранитель»
-    .desc = Практичность и удобство залог быстрого перемещения к пациенту на передовой!
+    .desc = Крайне удобные ботинки с магнитной подошвой.
 ent-ClothingModsuitBootsHMEHeavySuit = ботинки модкостюма HME «Заступник»
     .desc = Крайне удобные ботинки с магнитной подошвой.

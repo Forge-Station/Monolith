@@ -75,7 +75,7 @@
     - Diagonal
   - type: IconSmooth
     mode: Diagonal
-    key: shuttlewindows # Mono
+    key: walls # Frontier: windows<walls
     base: state
   - type: Icon
     sprite: Structures/Windows/shuttle_window_diagonal.rsi

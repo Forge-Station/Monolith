@@ -4,11 +4,13 @@ using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
+using Content.Shared.Body.Systems; // Forge-Change
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
 using Content.Shared.Interaction;
+using Content.Shared.Implants.Components; // Forge-Change
 using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -48,6 +50,7 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!; // Forge-Change
 
     public override void Initialize()
     {
@@ -232,12 +235,157 @@ public sealed class PullingSystem : EntitySystem
         {
             var (walkMod, sprintMod) =
                 _clothingMoveSpeed.GetHeldMovementSpeedModifiers(component.Pulling.Value, heldMoveSpeed);
+            // Forge-Change-Start: R.I.P.L.Y reduces slowdown while pulling heavy held-speed entities.
+            ApplyPullAssistSlowdown(uid, ref walkMod, ref sprintMod);
+            // Forge-Change-End
             args.ModifySpeed(walkMod, sprintMod);
             return;
         }
 
-        args.ModifySpeed(component.WalkSpeedModifier, component.SprintSpeedModifier);
+        // Forge-Change-Start: R.I.P.L.Y reduces the normal pulling slowdown.
+        var walkModifier = component.WalkSpeedModifier;
+        var sprintModifier = component.SprintSpeedModifier;
+        ApplyPullAssistSlowdown(uid, ref walkModifier, ref sprintModifier);
+        args.ModifySpeed(walkModifier, sprintModifier);
+        // Forge-Change-End
     }
+
+    // Forge-Change-Start: R.I.P.L.Y reduces only slowdown penalties, leaving speed bonuses unchanged.
+    private void ApplyPullAssistSlowdown(EntityUid uid, ref float walkModifier, ref float sprintModifier)
+    {
+        var penaltyMultiplier = GetPullingAssistSlowdownPenaltyModifier(uid);
+        if (penaltyMultiplier >= 1f)
+            return;
+
+        walkModifier = ReduceSlowdownPenalty(walkModifier, penaltyMultiplier);
+        sprintModifier = ReduceSlowdownPenalty(sprintModifier, penaltyMultiplier);
+    }
+
+    public float GetPullingAssistSlowdownPenaltyModifier(EntityUid uid)
+    {
+        var modifier = 1f;
+        var query = EntityQueryEnumerator<SubdermalImplantComponent>();
+        while (query.MoveNext(out _, out var implant))
+        {
+            if (implant.ImplantedEntity == uid)
+                modifier = Math.Min(modifier, implant.PullingAssistSlowdownPenaltyModifier);
+        }
+
+        // Forge-Change-Start: R.I.P.L.Y cybernetic hands only grant pull assist as an installed pair.
+        if (HasPairedPullingAssistParts(uid))
+        {
+            foreach (var (partUid, part) in _body.GetBodyChildren(uid))
+            {
+                if (!part.Enabled || !TryComp<SubdermalImplantComponent>(partUid, out var assist))
+                    continue;
+
+                modifier = Math.Min(modifier, assist.PullingAssistSlowdownPenaltyModifier);
+            }
+        }
+        // Forge-Change-End
+
+        return modifier;
+    }
+
+    public float GetPullingAssistMassPenaltyModifier(EntityUid uid)
+    {
+        var modifier = 1f;
+        var query = EntityQueryEnumerator<SubdermalImplantComponent>();
+        while (query.MoveNext(out _, out var implant))
+        {
+            if (implant.ImplantedEntity == uid)
+                modifier = Math.Min(modifier, implant.PullingAssistMassPenaltyModifier);
+        }
+
+        // Forge-Change-Start: R.I.P.L.Y cybernetic hands only grant pull assist as an installed pair.
+        if (HasPairedPullingAssistParts(uid))
+        {
+            foreach (var (partUid, part) in _body.GetBodyChildren(uid))
+            {
+                if (!part.Enabled || !TryComp<SubdermalImplantComponent>(partUid, out var assist))
+                    continue;
+
+                modifier = Math.Min(modifier, assist.PullingAssistMassPenaltyModifier);
+            }
+        }
+        // Forge-Change-End
+
+        return modifier;
+    }
+
+    // Forge-Change-Start: Paired body-part support for R.I.P.L.Y pull assist.
+    private bool HasPairedPullingAssistParts(EntityUid uid)
+    {
+        var count = 0;
+        foreach (var (partUid, part) in _body.GetBodyChildren(uid))
+        {
+            if (!part.Enabled ||
+                !TryComp<SubdermalImplantComponent>(partUid, out var assist) ||
+                !HasPullingAssist(assist))
+            {
+                continue;
+            }
+
+            count++;
+            if (count >= 2)
+                return true;
+        }
+
+        return false;
+    }
+
+    private static bool HasPullingAssist(SubdermalImplantComponent assist)
+    {
+        return assist.PullingAssistSlowdownPenaltyModifier < 1f ||
+               assist.PullingAssistMassPenaltyModifier < 1f;
+    }
+
+    private void ApplyPullingAssistMassPenalty(EntityUid pullableUid, PullableComponent pullable, EntityUid pullerUid)
+    {
+        var scale = GetPullingAssistMassPenaltyModifier(pullerUid);
+        if (scale >= 1f || !TryComp<FixturesComponent>(pullableUid, out var fixtures))
+            return;
+
+        pullable.PullMassPenaltyScale = scale;
+
+        foreach (var (id, fixture) in fixtures.Fixtures)
+        {
+            if (fixture.Density <= 0f)
+                continue;
+
+            _physics.SetDensity(pullableUid, id, fixture, fixture.Density * scale, update: false, manager: fixtures);
+        }
+
+        _physics.ResetMassData(pullableUid, manager: fixtures);
+    }
+
+    private void RestorePullingAssistMassPenalty(EntityUid pullableUid, PullableComponent pullable)
+    {
+        var scale = pullable.PullMassPenaltyScale;
+        pullable.PullMassPenaltyScale = 1f;
+
+        if (scale >= 1f || !TryComp<FixturesComponent>(pullableUid, out var fixtures))
+            return;
+
+        foreach (var (id, fixture) in fixtures.Fixtures)
+        {
+            if (fixture.Density <= 0f)
+                continue;
+
+            _physics.SetDensity(pullableUid, id, fixture, fixture.Density / scale, update: false, manager: fixtures);
+        }
+
+        _physics.ResetMassData(pullableUid, manager: fixtures);
+    }
+    // Forge-Change-End
+
+    private static float ReduceSlowdownPenalty(float modifier, float penaltyMultiplier)
+    {
+        return modifier >= 1f
+            ? modifier
+            : 1f - (1f - modifier) * penaltyMultiplier;
+    }
+    // Forge-Change-End
 
     private void OnPullableMoveInput(EntityUid uid, PullableComponent component, ref MoveInputEvent args)
     {
@@ -297,10 +445,10 @@ public sealed class PullingSystem : EntitySystem
                 pullableComp.PullJointId = null;
             }
 
+            RestorePullingAssistMassPenalty(pullableUid, pullableComp);
+
             if (TryComp<PhysicsComponent>(pullableUid, out var pullablePhysics))
-            {
                 _physics.SetFixedRotation(pullableUid, pullableComp.PrevFixedRotation, body: pullablePhysics);
-            }
         }
 
         var oldPuller = pullableComp.Puller;
@@ -499,6 +647,8 @@ public sealed class PullingSystem : EntitySystem
             // the current length is beteen MinLength and MaxLength. At those limits, the
             // joint will have infinite stiffness.
             joint.Stiffness = 0f;
+            // Forge-Change: R.I.P.L.Y reduces the pulled object's effective mass on the puller.
+            ApplyPullingAssistMassPenalty(pullableUid, pullableComp, pullerUid);
 
             _physics.SetFixedRotation(pullableUid, pullableComp.FixedRotationOnPull, body: pullablePhysics);
         }

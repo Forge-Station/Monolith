@@ -88,7 +88,7 @@
     graph: ClockworkGirder
     node: clockworkWall
   - type: IconSmooth
-    key: clockwalls # Mono
+    key: walls
     base: clock
   - type: RCDDeconstructable # Frontier
     cost: 6 # Frontier
@@ -117,7 +117,7 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: clownwalls # Mono
+    key: walls
     base: clown
   - type: Fixtures
     fixtures:
@@ -149,7 +149,7 @@
     graph: Girder
     node: meatWall
   - type: IconSmooth
-    key: meatwalls # Mono
+    key: walls
     base: meat
 
 - type: entity
@@ -165,7 +165,7 @@
   - type: Icon
     sprite: Structures/Walls/cult.rsi
   - type: IconSmooth
-    key: cultwalls # Mono
+    key: walls
     base: cult
 
 - type: entity
@@ -203,7 +203,7 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: diamondwalls # Mono
+    key: walls
     base: diamond
 
 - type: entity
@@ -237,7 +237,7 @@
         - WallLayer
         density: 4000
   - type: IconSmooth
-    key: goldwalls # Mono
+    key: walls
     base: gold
 
 - type: entity
@@ -253,7 +253,7 @@
   - type: Icon
     sprite: Structures/Walls/ice.rsi
   - type: IconSmooth
-    key: icewalls # Mono
+    key: walls
     base: ice
 
 - type: entity
@@ -276,7 +276,7 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: plasmawalls # Mono
+    key: walls
     base: plasma
   - type: RadiationBlocker
     resistance: 5
@@ -301,7 +301,7 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: plasticwalls # Mono
+    key: walls
     base: plastic
 
 - type: entity
@@ -566,7 +566,7 @@
   - type: Icon
     sprite: Structures/Walls/riveted.rsi
   - type: IconSmooth
-    key: rivetedwalls # Mono
+    key: walls
     base: riveted
   - type: StaticPrice
     price: 70 # Frontier: 150<115
@@ -592,7 +592,7 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: sandstonewalls # Mono
+    key: walls
     base: sandstone
 
 - type: entity
@@ -615,7 +615,7 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: silverwalls # Mono
+    key: walls
     base: silver
 
 #shuttle walls
@@ -931,7 +931,7 @@
         - WallLayer
         density: 6000
   - type: IconSmooth
-    key: uraniumwalls # Mono
+    key: walls
     base: uranium
   - type: RadiationBlocker
     resistance: 6
@@ -1031,7 +1031,7 @@
   - type: Icon
     sprite: Structures/Walls/necropolis.rsi
   - type: IconSmooth
-    key: necropoliswalls # Mono
+    key: walls
     base: necropolis
 
 - type: entity

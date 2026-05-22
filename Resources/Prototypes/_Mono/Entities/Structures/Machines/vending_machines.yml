@@ -36,7 +36,7 @@
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
 
 - type: entity
-  parent: [VendingMachineAstroVend, BaseStructureDisableAnchoring]
+  parent: [VendingMachineAstroVend, BaseStructureDisableAnchoring, BaseStructureDisableToolUse, BaseStructureAccessReaderImmuneToEmag] # Forge-change
   id: VendingMachineUSSP
   name: USSP Automated Requisition Vendor
   description: Sells various USSP equipment.

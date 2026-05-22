@@ -400,11 +400,13 @@
   - type: ContainerComp
     proto: AiHeld
     container: station_ai_mind_slot
+  - type: Damageable # Forge-Change
+    damageModifierSet: StrongMetallic
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 400 # Forge-Change
       behaviors:
       - !type:PlaySoundBehavior
         sound:

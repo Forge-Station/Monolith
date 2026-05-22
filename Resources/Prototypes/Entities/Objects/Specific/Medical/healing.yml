@@ -35,10 +35,10 @@
     - Biological
     damage:
       types:
-        Heat: -5 # Was 15
-        Cold: -5 # Was 15
-        Shock: -5 # Was 15 
-        Caustic: -3.5 # Was 10. Global nerf of healing packs for Forge (1/3 of Mono healing)
+        Heat: -5 # Forge-Change: 15>5
+        Cold: -5 # Forge-Change: 15>5
+        Shock: -5 # Forge-Change: 15>5
+        Caustic: -3.5 # Forge-Change: 10>3.5
     healingBeginSound:
       path: "/Audio/Items/Medical/ointment_begin.ogg"
       params:
@@ -92,10 +92,10 @@
     - Biological
     damage:
       types:
-        Heat: -10 # Was 20
-        Cold: -10 # Was 20
-        Shock: -10 # Was 20
-        Caustic: -10 # Was 20. Global nerf of healing packs for Forge (1/2 of Mono healing)
+        Heat: -10 # Forge-Change: 20>10
+        Cold: -10 # Forge-Change: 20>10
+        Shock: -10 # Forge-Change: 20>10
+        Caustic: -10 # Forge-Change: 20>10
     healingBeginSound:
       path: "/Audio/Items/Medical/ointment_begin.ogg"
       params:
@@ -138,7 +138,7 @@
     - Biological
     damage:
       groups:
-        Brute: -15 # Global nerf of healing packs for Forge (1/3 of Mono healing)
+        Brute: -15 # Forge-Change: 45>15
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
       params:
@@ -193,7 +193,7 @@
     - Biological
     damage:
       groups:
-        Brute: -30 # Was 60. Global nerf of healing packs for Forge (1/2 of Mono healing)
+        Brute: -30 # Forge-Change: 60>30
     bloodlossModifier: -10 # a suture should stop ongoing bleeding
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
@@ -238,7 +238,7 @@
     damage:
       types:
         Bloodloss: -2.5 #lowers bloodloss damage, was .5 buffed to 5 due to Limb Damage Changes (Goobstation)
-    ModifyBloodLevel: 15 # Was 30. Global nerf of healing packs for Forge (1/2 of Goobstation blood restore)
+    ModifyBloodLevel: 15 # Forge-Change: 30>15
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
       params:
@@ -328,8 +328,8 @@
     - Biological
     damage:
       types:
-        Slash: -5 # Was 15. Global nerf of healing packs for Forge (1/3 of Goobstation healing)
-        Piercing: -7.5 # # Was 20. Global nerf of healing packs for Forge (~1/3 of Goobstation healing)
+        Slash: -5 # Forge-Change: 15>5
+        Piercing: -7.5 # Forge-Change: 20>7.5
     bloodlossModifier: -10
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"

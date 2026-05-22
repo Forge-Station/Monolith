@@ -35,7 +35,6 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
-    key: uraniumwindows # Mono
     base: uwindow
   - type: Construction
     graph: Window
@@ -126,7 +125,7 @@
     - Diagonal
   - type: IconSmooth
     mode: Diagonal
-    key: uraniumwindows # Mono
+    key: walls # Frontier: windows<walls
     base: state
   - type: Icon
     sprite: Structures/Windows/uranium_window_diagonal.rsi

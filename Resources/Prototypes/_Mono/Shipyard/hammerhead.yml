@@ -16,12 +16,13 @@
   shuttlePath: /Maps/_Mono/Shuttles/hammerhead.yml
   guidebookPage: Null
   class:
+  - Fighter
   - Patrol
-  - Corvette
-  - Science
   - Salvage
-  - Medical
+  - Science
   - Chemistry
+  - Kitchen
+  - Destroyer
   engine:
   - AME
 

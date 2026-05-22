@@ -100,6 +100,16 @@ public sealed partial class BorgSystem : SharedBorgSystem
     {
         UpdateBatteryAlert((uid, component));
         _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
+
+        // Forge-Change-start : AiRemoteControl
+        if (component.BrainContainer != null &&
+            component.BrainContainer.ContainedEntities.Any(entity => HasComp<AiRemoteBrainComponent>(entity)))
+        {
+            EnsureComp<AiRemoteControllerComponent>(uid);
+            EnsureComp<StationAiVisionComponent>(uid);
+            BorgActivate(uid, component);
+        }
+        // Forge-Change-end : AiRemoteControl
     }
 
     private void OnChassisInteractUsing(EntityUid uid, BorgChassisComponent component, AfterInteractUsingEvent args)

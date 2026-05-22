@@ -1,0 +1,15 @@
+- type: entity
+  id: LockerTraumaDirector
+  suffix: Filled
+  parent: LockerChiefMedicalOfficer
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingBeltMilitaryWebbingCMOFilled
+      - id: HandheldCrewMonitor
+      - id: ClothingHeadsetDoc
+      - id: ClothingHandsGlovesCombatTrauma
+      - id: TraumaTechFabCircuitboard
+      - id: ClothingEyesHudTrauma
+      - id: Hypospray
+      - id: ClothingBackpackDuffelSurgeryFilled

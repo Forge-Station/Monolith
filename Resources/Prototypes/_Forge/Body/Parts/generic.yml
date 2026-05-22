@@ -1,0 +1,55 @@
+- type: entity
+  parent: TorsoHuman
+  id: ForgeBioSynthTorso
+  name: bio-synthetic torso
+  description: A printed human torso for cases where very little of the patient is left.
+
+- type: entity
+  parent: LeftHandCybernetic
+  id: ForgeMilLeftHand
+  name: M.I.L left hand
+  description: A cybernetic left hand with wrist micro-actuators that add force to unarmed strikes.
+  components:
+  - type: BodyPart
+    onAdd:
+    - type: ForgeUnarmedDamage
+      damageType: Blunt
+      amount: 2
+
+- type: entity
+  parent: LeftHandCybernetic
+  id: ForgeRiplyLeftHand
+  name: R.I.P.L.Y left hand
+  description: A cybernetic left hand with reinforced fingertip anchors that help drag and carry heavy bodies when paired with its matching hand.
+  components:
+  - type: SubdermalImplant
+    carryAssistMassMultiplier: 5
+    carryAssistPickupDelayModifier: 0.35
+    carryAssistSlowdownPenaltyModifier: 0.2
+    pullingAssistSlowdownPenaltyModifier: 0.1
+    pullingAssistMassPenaltyModifier: 0.1
+
+- type: entity
+  parent: RightHandCybernetic
+  id: ForgeMilRightHand
+  name: M.I.L right hand
+  description: A cybernetic right hand with wrist micro-actuators that add force to unarmed strikes.
+  components:
+  - type: BodyPart
+    onAdd:
+    - type: ForgeUnarmedDamage
+      damageType: Blunt
+      amount: 2
+
+- type: entity
+  parent: RightHandCybernetic
+  id: ForgeRiplyRightHand
+  name: R.I.P.L.Y right hand
+  description: A cybernetic right hand with reinforced fingertip anchors that help drag and carry heavy bodies when paired with its matching hand.
+  components:
+  - type: SubdermalImplant
+    carryAssistMassMultiplier: 5
+    carryAssistPickupDelayModifier: 0.35
+    carryAssistSlowdownPenaltyModifier: 0.2
+    pullingAssistSlowdownPenaltyModifier: 0.1
+    pullingAssistMassPenaltyModifier: 0.1

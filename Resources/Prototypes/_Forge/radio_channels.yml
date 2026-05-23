@@ -40,6 +40,22 @@
   frequency: 1356
   color: "#009e79"
 
+# region TSF
+
+- type: radioChannel
+  id: TsfTech
+  name: chat-radio-tsf-tech
+  keycode: 'з'
+  frequency: 1024
+  color: "#0c8ad3"
+
+- type: radioChannel
+  id: TsfCom
+  name: chat-radio-tsf-com
+  keycode: 'ю'
+  frequency: 1025
+  color: "#084d7a"
+
 # region Company
 - type: radioChannel
   id: ViperGroup

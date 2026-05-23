@@ -44,6 +44,8 @@
 #      - EncryptionKeyService #Mono end
       - EncryptionKeyCommand #Mono
       - EncryptionKeyNfsd
+      - EncryptionKeyTsfTech # Forge-Change
+      - EncryptionKeyTsfCom # Forge-Change
 #      - EncryptionKeyTraffic #Mono
 
 - type: entity

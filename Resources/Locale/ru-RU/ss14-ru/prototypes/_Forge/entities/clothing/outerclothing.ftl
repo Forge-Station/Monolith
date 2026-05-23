@@ -8,7 +8,7 @@ ent-ClothingOuterHardsuitAAMrAdv = AAM R-44 Галиус
 ent-ClothingHeadHelmetHardsuitAAMrAdv = шлем AAM R-44
     .desc = Шлем боевого скафандра компании Ardent Advanced Manufacturing.
 
-ent-ClothingOuterArmorSheriffVestWeb = бронежилет шерифа
+ent-ClothingOuterArmorSheriffVestWeb = бронежилет командующего офицера
     .desc = Высококачественный бронированный жилет из прочного синтетического материала. Несмотря на внушительную защиту, он гибкий и лёгкий.
 
 ent-ClothingOuterArmorMKVIVestWeb = бронежилет MK.VI

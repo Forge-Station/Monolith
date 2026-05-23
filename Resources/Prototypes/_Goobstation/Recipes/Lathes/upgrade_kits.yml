@@ -1,8 +1,8 @@
 - type: latheRecipe
   parent: BaseUpgradeKit
-  id: UpgradeKitAutomation
-  result: UpgradeKitAutomation
+  id: AutodocUpgradeKitBluespace
+  result: AutodocUpgradeKitBluespace
   materials:
     Glass: 500
     Steel: 200
-    Silver: 300
+    BSCrystal: 100

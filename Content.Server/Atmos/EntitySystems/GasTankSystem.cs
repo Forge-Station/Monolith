@@ -71,6 +71,9 @@ namespace Content.Server.Atmos.EntitySystems
 
         private void OnGasTankToggleInternals(Entity<GasTankComponent> ent, ref GasTankToggleInternalsMessage args)
         {
+            if (!ent.Comp.EnableInternals) // Forge-Change
+                return;
+
             ToggleInternals(ent);
         }
 
@@ -112,6 +115,9 @@ namespace Content.Server.Atmos.EntitySystems
 
         private void OnGetActions(EntityUid uid, GasTankComponent component, GetItemActionsEvent args)
         {
+            if (!component.EnableInternals) // Forge-Change
+                return;
+
             args.AddAction(ref component.ToggleActionEntity, component.ToggleAction);
         }
 
@@ -127,7 +133,7 @@ namespace Content.Server.Atmos.EntitySystems
 
         private void OnActionToggle(Entity<GasTankComponent> gasTank, ref ToggleActionEvent args)
         {
-            if (args.Handled)
+            if (args.Handled || !gasTank.Comp.EnableInternals) // Forge-Change
                 return;
 
             ToggleInternals(gasTank);
@@ -230,6 +236,10 @@ namespace Content.Server.Atmos.EntitySystems
 
         public bool CanConnectToInternals(Entity<GasTankComponent> ent)
         {
+            // Forge-Change: skip internals when EnableInternals is false (jetpack-only tank)
+            if (!ent.Comp.EnableInternals)
+                return false;
+
             TryGetInternalsComp(ent, out _, out var internalsComp, ent.Comp.User);
             return internalsComp != null && internalsComp.BreathTools.Count != 0 && !ent.Comp.IsValveOpen;
         }

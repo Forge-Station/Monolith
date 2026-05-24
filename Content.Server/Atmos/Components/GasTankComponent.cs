@@ -94,6 +94,14 @@ namespace Content.Server.Atmos.Components
         [DataField("tankFragmentScale"), ViewVariables(VVAccess.ReadWrite)]
         public float TankFragmentScale = 2 * Atmospherics.OneAtmosphere;
 
+        // Forge-Change-start: add EnableInternals for jetpack-only gas tanks (ARS Omnissia modsuit core)
+        /// <summary>
+        /// When false, the tank only supplies gas to systems like jetpacks — not breath/internals.
+        /// </summary>
+        [DataField]
+        public bool EnableInternals = true;
+        // Forge-Change-end
+
         [DataField("toggleAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
         public string ToggleAction = "ActionToggleInternals";
 

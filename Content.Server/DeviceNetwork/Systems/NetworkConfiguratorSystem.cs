@@ -14,6 +14,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
+using Content.Shared.Tools.Systems; // Forge-Change-add: MultipleToolBehaviorChangedEvent
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Server.Audio;
@@ -67,6 +68,7 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
         SubscribeLocalEvent<NetworkConfiguratorComponent, NetworkConfiguratorButtonPressedMessage>(OnConfigButtonPressed);
 
         SubscribeLocalEvent<NetworkConfiguratorComponent, BoundUserInterfaceCheckRangeEvent>(OnUiRangeCheck);
+        SubscribeLocalEvent<NetworkConfiguratorComponent, MultipleToolBehaviorChangedEvent>(OnMultipleToolBehaviorChanged); // Forge-Change-add
 
         SubscribeLocalEvent<DeviceListComponent, ComponentRemove>(OnComponentRemoved);
 
@@ -111,6 +113,18 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
         }
     }
 
+    // Forge-Change-start: close multitool UI when OmnitoolModsuitGauntlet leaves pulsing mode
+    private void OnMultipleToolBehaviorChanged(Entity<NetworkConfiguratorComponent> ent, ref MultipleToolBehaviorChangedEvent args)
+    {
+        if (CanUseNetworkConfigurator(ent))
+            return;
+
+        _uiSystem.CloseUi(ent.Owner, NetworkConfiguratorUiKey.List);
+        _uiSystem.CloseUi(ent.Owner, NetworkConfiguratorUiKey.Configure);
+        _uiSystem.CloseUi(ent.Owner, NetworkConfiguratorUiKey.Link);
+    }
+    // Forge-Change-end
+
     private void OnUiRangeCheck(Entity<NetworkConfiguratorComponent> ent, ref BoundUserInterfaceCheckRangeEvent args)
     {
         if (ent.Comp.ActiveDeviceList == null || args.Result == BoundUserInterfaceRangeResult.Fail)
@@ -146,6 +160,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 
     private void TryAddNetworkDevice(EntityUid configuratorUid, EntityUid? targetUid, EntityUid userUid, NetworkConfiguratorComponent configurator, DeviceNetworkComponent? device = null)
     {
+        if (!CanUseNetworkConfigurator(configuratorUid))
+            return;
+
         if (!targetUid.HasValue || !Resolve(targetUid.Value, ref device, false))
             return;
 
@@ -196,6 +213,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 
     private void TryLinkDevice(EntityUid uid, NetworkConfiguratorComponent configurator, EntityUid? target, EntityUid user)
     {
+        if (!CanUseNetworkConfigurator(uid))
+            return;
+
         if (!HasComp<DeviceLinkSourceComponent>(target) && !HasComp<DeviceLinkSinkComponent>(target))
             return;
 
@@ -267,6 +287,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     /// </summary>
     private void SwitchMode(EntityUid? userUid, EntityUid configuratorUid, NetworkConfiguratorComponent configurator)
     {
+        if (!CanUseNetworkConfigurator(configuratorUid))
+            return;
+
         if (Delay(configurator))
             return;
 
@@ -286,6 +309,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     /// </summary>>
     private void SetMode(EntityUid configuratorUid, NetworkConfiguratorComponent configurator, EntityUid userUid, bool linkMode)
     {
+        if (!CanUseNetworkConfigurator(configuratorUid))
+            return;
+
         configurator.LinkModeActive = linkMode;
 
         if (!linkMode)
@@ -323,6 +349,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 
     private void DoExamine(EntityUid uid, NetworkConfiguratorComponent component, ExaminedEvent args)
     {
+        if (!CanUseNetworkConfigurator(uid))
+            return;
+
         var mode = component.LinkModeActive ? "network-configurator-examine-mode-link" : "network-configurator-examine-mode-list";
         args.PushMarkup(Loc.GetString("network-configurator-examine-current-mode", ("mode", Loc.GetString(mode))));
     }
@@ -337,6 +366,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     /// </summary>
     private void OnUsed(EntityUid uid, NetworkConfiguratorComponent configurator, EntityUid? target, EntityUid user, bool canReach = true)
     {
+        if (!CanUseNetworkConfigurator(uid))
+            return;
+
         if (!canReach || !target.HasValue)
             return;
 
@@ -392,7 +424,7 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     /// </summary>
     private void OnAddInteractVerb(EntityUid uid, NetworkConfiguratorComponent configurator, GetVerbsEvent<UtilityVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || !args.Using.HasValue)
+        if (!args.CanAccess || !args.CanInteract || !args.Using.HasValue || !CanUseNetworkConfigurator(uid))
             return;
 
         var verb = new UtilityVerb
@@ -428,7 +460,8 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     private void OnAddAlternativeSaveDeviceVerb(EntityUid uid, DeviceNetworkComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || !args.Using.HasValue
-            || !TryComp<NetworkConfiguratorComponent>(args.Using.Value, out var configurator))
+            || !TryComp<NetworkConfiguratorComponent>(args.Using.Value, out var configurator)
+            || !CanUseNetworkConfigurator(args.Using.Value))
             return;
 
         if (!configurator.LinkModeActive && HasComp<DeviceListComponent>(args.Target))
@@ -455,7 +488,8 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     private void OnAddAlternativeSourceVerb(EntityUid uid, DeviceLinkSourceComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || !args.Using.HasValue
-            || !TryComp<NetworkConfiguratorComponent>(args.Using.Value, out var configurator))
+            || !TryComp<NetworkConfiguratorComponent>(args.Using.Value, out var configurator)
+            || !CanUseNetworkConfigurator(args.Using.Value))
             return;
 
         if (configurator is { LinkModeActive: true, ActiveDeviceLink: { } } && HasComp<DeviceLinkSourceComponent>(args.Target))
@@ -477,7 +511,8 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     private void OnAddAlternativeSinkVerb(EntityUid uid, DeviceLinkSinkComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || !args.Using.HasValue
-            || !TryComp<NetworkConfiguratorComponent>(args.Using.Value, out var configurator))
+            || !TryComp<NetworkConfiguratorComponent>(args.Using.Value, out var configurator)
+            || !CanUseNetworkConfigurator(args.Using.Value))
             return;
 
         if (configurator is { LinkModeActive: true, ActiveDeviceLink: { } }
@@ -497,7 +532,8 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 
     private void OnAddSwitchModeVerb(EntityUid uid, NetworkConfiguratorComponent configurator, GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || !args.Using.HasValue || !HasComp<NetworkConfiguratorComponent>(args.Target))
+        if (!args.CanAccess || !args.CanInteract || !args.Using.HasValue || !HasComp<NetworkConfiguratorComponent>(args.Target)
+            || !CanUseNetworkConfigurator(uid))
             return;
 
         AlternativeVerb verb = new()
@@ -516,6 +552,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 
     private void OpenDeviceLinkUi(EntityUid configuratorUid, EntityUid? targetUid, EntityUid userUid, NetworkConfiguratorComponent configurator)
     {
+        if (!CanUseNetworkConfigurator(configuratorUid))
+            return;
+
         if (Delay(configurator))
             return;
 
@@ -577,6 +616,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     /// </summary>
     private void OpenDeviceListUi(EntityUid configuratorUid, EntityUid? targetUid, EntityUid userUid, NetworkConfiguratorComponent configurator)
     {
+        if (!CanUseNetworkConfigurator(configuratorUid))
+            return;
+
         if (configurator.ActiveDeviceLink == targetUid)
             return;
 
@@ -671,6 +713,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     /// </summary>
     private void OnRemoveDevice(EntityUid uid, NetworkConfiguratorComponent component, NetworkConfiguratorRemoveDeviceMessage args)
     {
+        if (!CanUseNetworkConfigurator(uid))
+            return;
+
         if (component.Devices.TryGetValue(args.Address, out var removedDevice))
         {
             _adminLogger.Add(LogType.DeviceLinking, LogImpact.Low,
@@ -689,6 +734,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     /// </summary>
     private void OnClearDevice(EntityUid uid, NetworkConfiguratorComponent component, NetworkConfiguratorClearDevicesMessage args)
     {
+        if (!CanUseNetworkConfigurator(uid))
+            return;
+
         _adminLogger.Add(LogType.DeviceLinking, LogImpact.Low,
             $"{ToPrettyString(args.Actor):actor} cleared buffered devices from {ToPrettyString(uid):tool}");
 
@@ -710,6 +758,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 
     private void OnClearLinks(EntityUid uid, NetworkConfiguratorComponent configurator, NetworkConfiguratorClearLinksMessage args)
     {
+        if (!CanUseNetworkConfigurator(uid))
+            return;
+
         if (!configurator.ActiveDeviceLink.HasValue || !configurator.DeviceLinkTarget.HasValue)
             return;
 
@@ -746,6 +797,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 
     private void OnToggleLinks(EntityUid uid, NetworkConfiguratorComponent configurator, NetworkConfiguratorToggleLinkMessage args)
     {
+        if (!CanUseNetworkConfigurator(uid))
+            return;
+
         if (!configurator.ActiveDeviceLink.HasValue || !configurator.DeviceLinkTarget.HasValue)
             return;
 
@@ -784,6 +838,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     /// </summary>
     private void OnSaveLinks(EntityUid uid, NetworkConfiguratorComponent configurator, NetworkConfiguratorLinksSaveMessage args)
     {
+        if (!CanUseNetworkConfigurator(uid))
+            return;
+
         if (!configurator.ActiveDeviceLink.HasValue || !configurator.DeviceLinkTarget.HasValue)
             return;
 
@@ -831,6 +888,9 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     /// </summary>
     private void OnConfigButtonPressed(EntityUid uid, NetworkConfiguratorComponent component, NetworkConfiguratorButtonPressedMessage args)
     {
+        if (!CanUseNetworkConfigurator(uid))
+            return;
+
         if (!component.ActiveDeviceList.HasValue)
             return;
 

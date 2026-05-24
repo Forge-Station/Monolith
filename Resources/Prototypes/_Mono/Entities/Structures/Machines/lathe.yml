@@ -25,6 +25,7 @@
     staticPacks:
     - StaticAmmoRecipePack
     - NFMercenaryTechfabDeprecatedStatic
+    - NFEngineeringTechfabDeprecatedStatic # Forge-Change
     - RoundstartShipgunAmmo
     dynamicPacks:
     # rogue start
@@ -54,6 +55,7 @@
     - UniversalOrdinance
     - DynamicAmmoRecipePack
     - NFMercenaryTechfabDeprecated
+    - NFEngineeringTechfabDeprecated # Forge-Change
     # Civ military tech
     - ResearchedExplosives
     - SecurityEquipment

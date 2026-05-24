@@ -118,3 +118,41 @@
       - state: equipped-HAND-sealed
       gloves-vox:
       - state: equipped-HAND-sealed-vox
+# ARS Omnissia
+
+- type: entity
+  parent: ClothingModsuitGauntletsBase
+  id: ClothingModsuitGauntletsOmnissia
+  name: ARS Omnissia repair gauntlets
+  description: Insulated gauntlets with integrated URK, omnitool, experimental welder, and experimental nanite applicator modules.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Hands/Modsuits/omnissiamod.rsi
+    layers:
+    - state: gauntlets
+    - state: gauntlets-sealed
+      visible: false
+      map: [ "sealed" ]
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      gloves:
+      - state: equipped-HAND-sealed
+      gloves-vox:
+      - state: equipped-HAND-sealed-vox
+      gloves-resomi:
+      - state: equipped-HAND-sealed-resomi
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions: {}
+  - type: ModsuitGauntletTools
+    urkProto: ShipRepairDeviceModsuitGauntlet
+    omnitoolProto: OmnitoolModsuitGauntlet
+  - type: ActionGrant
+    actions:
+    - ActionModsuitGauntletToolsMenu
+  - type: ItemActionGrant
+    actions:
+    - ActionModsuitGauntletToolsMenu
+    activeIfWorn: true

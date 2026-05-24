@@ -280,3 +280,80 @@
         whitelist:
           components:
             - PowerCell
+
+# ARS Omnissia
+
+- type: entity
+  parent: ClothingModsuitBase
+  id: ClothingModsuitOmnissia
+  name: ARS Omnissia modsuit control unit
+  description: Advanced repair modsuit control module with expanded storage and integrated jetpack life support.
+  components:
+  - type: Appearance
+  - type: Icon
+    sprite: Forge/Clothing/Back/Modsuits/omnissiamod.rsi
+    state: control
+  - type: Sprite
+    sprite: Forge/Clothing/Back/Modsuits/omnissiamod.rsi
+    layers:
+    - state: control
+    - state: control-sealed
+      visible: false
+      shader: unshaded
+      map: [ "sealed" ]
+  - type: Storage
+    grid:
+    - 0,0,7,4
+    maxItemSize: Huge
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: Tag
+    tags:
+    - GasTank
+  - type: ActivatableUI
+    key: enum.SharedGasTankUiKey.Key
+    verbOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.ToggleClothingUiKey.Key:
+        type: ToggleableClothingBoundUserInterface
+      enum.SharedGasTankUiKey.Key:
+        type: GasTankBoundUserInterface
+  - type: GasTank
+    enableInternals: false
+    outputPressure: 21.3
+    air:
+      volume: 5
+      temperature: 293.15
+  - type: Jetpack
+    moleUsage: 0.00085
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingModsuitHelmetOmnissia
+      gloves: ClothingModsuitGauntletsOmnissia
+      outerClothing: ClothingModsuitChestplateOmnissia
+      shoes: ClothingModsuitBootsOmnissia
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK-sealed
+      back-resomi:
+      - state: equipped-BACKPACK-sealed-resomi
+
+- type: entity
+  parent: ClothingModsuitOmnissia
+  id: ClothingModsuitOmnissiaPowerCell
+  suffix: High-Capacity Battery
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+        whitelist:
+          components:
+            - PowerCell

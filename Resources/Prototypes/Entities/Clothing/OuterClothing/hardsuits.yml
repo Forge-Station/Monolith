@@ -1048,7 +1048,7 @@
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase # Forge-change
+  parent: ForgeClothingOuterHardsuitBase # Forge-change, parent ForgeClothingOuterHardsuitBase
   id: ClothingOuterHardsuitERTLeader
   name: ERT leader's hardsuit
   description: A protective hardsuit worn by the leader of an emergency response team.
@@ -1073,7 +1073,7 @@
         Caustic: 0.7
   - type: ClothingSpeedModifier 
     walkModifier: 1.0
-    sprintModifier: 0.9
+    sprintModifier: 1.0
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance 
     coefficient: 0.2
@@ -1269,7 +1269,7 @@
 
 #ERT Janitor Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase # Forge-change
+  parent: ForgeClothingOuterHardsuitBase # Forge-change, parent ForgeClothingOuterHardsuitBase
   id: ClothingOuterHardsuitERTJanitor
   name: ERT janitor's hardsuit
   description: A protective hardsuit worn by the janitors of an emergency response team.
@@ -1293,7 +1293,7 @@
         Caustic: 0
   - type: ClothingSpeedModifier 
     walkModifier: 1.0
-    sprintModifier: 1.2
+    sprintModifier: 1.25
   - type: SpaceFlightProfile
     thrustMultiplier: 0.7
     controlMultiplier: 1.15
@@ -1377,14 +1377,14 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.5 # 0.7 -> 0.5 Forge-change
-        Piercing: 0.6 
-        Heat: 0.3 # 0.1 -> 0.3 Forge-change
-        Cold: 0.3 # 0.1 -> 0.3 Forge-change
-        Shock: 0.3 # 0.1 -> 0.3 Forge-change
-        Radiation: 0.1
-        Caustic: 0 # 0.1 -> 0 Forge-change
+        Blunt: 0.5 # 0.7 -> 0.5 Forge-change
+        Slash: 0.4 # 0.7 -> 0.4 Forge-change
+        Piercing: 0.9 # 0.6 -> 0.9 Forge-change
+        Heat: 0.4 # 0.1 -> 0.4 Forge-change
+        Cold: 0.4 # 0.1 -> 0.4 Forge-change
+        Shock: 0.4 # 0.1 -> 0.4 Forge-change
+        Radiation: 0.3 # 0.1 -> 0.3 Forge-change
+        Caustic: 0.1
   - type: ClothingSpeedModifier 
     walkModifier: 1.0
     sprintModifier: 0.9 # 1.0 -> 0.9 Forge-change

@@ -627,7 +627,10 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-
+  - type: NightVision # Forge-change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+    
 #ERT Chaplain Hardsuit
 - type: entity
   parent: ClothingHeadHelmetHardsuitSyndie
@@ -641,7 +644,10 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertchaplain.rsi
   - type: PointLight
     color: "#ffffff"
-
+  - type: NightVision # Forge-change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+    
 #ERT Engineer Hardsuit
 - type: entity
   parent: ClothingHeadHelmetHardsuitSyndie
@@ -662,6 +668,9 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+  - type: NightVision # Forge-change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
 
 #ERT Medical Hardsuit
 - type: entity
@@ -676,6 +685,9 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertmedical.rsi
   - type: PointLight
     color: "#adffec"
+  - type: NightVision # Forge-change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
 
 #ERT Security Hardsuit
 - type: entity
@@ -697,6 +709,9 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+  - type: NightVision # Forge-change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
 
 #ERT Janitor Hardsuit
 - type: entity
@@ -711,6 +726,9 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertjanitor.rsi
   - type: PointLight
     color: "#cbadff"
+  - type: NightVision # Forge-change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
 
 #CBURN Hardsuit
 - type: entity
@@ -750,6 +768,9 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+  - type: NightVision # Forge-change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
 
 #Deathsquad Hardsuit
 - type: entity

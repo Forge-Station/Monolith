@@ -75,6 +75,9 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertsecurity.rsi # Forge-change
   - type: PointLight
     color: "#cbadff"
+  - type: NightVision # Forge-change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
 
 # MAXIM helmet, but with light
 - type: entity

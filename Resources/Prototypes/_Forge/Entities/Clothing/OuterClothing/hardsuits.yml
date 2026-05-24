@@ -458,7 +458,6 @@
   - type: ClothingSpeedModifier
     walkModifier: 1.1
     sprintModifier: 1.1
-  - type: HeldSpeedModifier
   - type: ToggleableClothing 
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false

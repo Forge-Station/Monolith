@@ -292,7 +292,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
+  parent: [ForgeClothingOuterHardsuitBase, ShowMedicalIcons]
   id: ClothingHeadHelmetHardsuitTraumaShooter
   name: armed trauma unit T-44 tacsuit helmet
   description: The shooter's tacsuit in the Armed Trauma Unit, outfitted with a medical and long-range radar hud as well as thermals and night vision.

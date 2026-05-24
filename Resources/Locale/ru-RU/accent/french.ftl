@@ -64,7 +64,7 @@ accent-french-words-14 = мой
 accent-french-words-replace-14 = mon
 
 accent-french-words-15 = моя
-accent-french-words-15-2 = моё
+accent-french-words-15-2 = мое
 accent-french-words-replace-15 = ma
 
 accent-french-words-16 = идиот
@@ -239,7 +239,7 @@ accent-french-words-58-2 = больница
 accent-french-words-replace-58 = hôpital
 
 accent-french-words-59 = любовь
-accent-french-words-59-2 = влюблён
+accent-french-words-59-2 = влюблен
 accent-french-words-replace-59 = amour
 
 accent-french-words-60 = сумка
@@ -341,7 +341,7 @@ accent-french-words-replace-82 = ennemis
 
 accent-french-words-83 = маршировать
 accent-french-words-83-2 = марш
-accent-french-words-83-3 = вперёд
+accent-french-words-83-3 = вперед
 accent-french-words-replace-83 = marche
 
 accent-french-words-84 = генерал
@@ -447,7 +447,7 @@ accent-french-words-112-2 = лавка
 accent-french-words-replace-112 = boutique
 
 accent-french-words-113 = собака
-accent-french-words-113-2 = пёс
+accent-french-words-113-2 = пес
 accent-french-words-113-3 = шавка
 accent-french-words-replace-113 = chien
 
@@ -497,7 +497,7 @@ accent-french-words-replace-124 = boire
 
 accent-french-words-125 = дом
 accent-french-words-125-2 = хата
-accent-french-words-125-3 = жильё
+accent-french-words-125-3 = жилье
 accent-french-words-replace-125 = maison
 
 accent-french-words-126 = закат
@@ -536,7 +536,7 @@ accent-french-words-133-2 = мгла
 accent-french-words-133-3 = дымка
 accent-french-words-replace-133 = brouillard
 
-accent-french-words-134 = звёзды
+accent-french-words-134 = звезды
 accent-french-words-134-2 = звезда
 accent-french-words-replace-134 = étoiles
 
@@ -563,7 +563,7 @@ accent-french-words-139-2 = рок
 accent-french-words-replace-139 = destin
 
 accent-french-words-140 = мечта
-accent-french-words-140-2 = грёзы
+accent-french-words-140-2 = грезы
 accent-french-words-replace-140 = rêve
 
 accent-french-words-141 = странник
@@ -589,7 +589,7 @@ accent-french-words-replace-145 = fer
 
 accent-french-words-146 = пламя
 accent-french-words-146-2 = жар
-accent-french-words-146-3 = костёр
+accent-french-words-146-3 = костер
 accent-french-words-replace-146 = flamme
 
 accent-french-words-147 = пепел

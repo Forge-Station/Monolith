@@ -64,7 +64,7 @@ accent-german-words-14 = мой
 accent-german-words-replace-14 = mein
 
 accent-german-words-15 = ее
-accent-german-words-15-2 = её
+accent-german-words-15-2 = ее
 accent-german-words-replace-15 = hier
 
 accent-german-words-16 = идиот
@@ -348,7 +348,7 @@ accent-german-words-replace-83 = feinde
 
 accent-german-words-84 = маршировать
 accent-german-words-84-2 = марш
-accent-german-words-84-3 = вперёд
+accent-german-words-84-3 = вперед
 accent-german-words-replace-84 = marsch
 
 accent-german-words-85 = генерал
@@ -454,7 +454,7 @@ accent-german-words-113-2 = лавка
 accent-german-words-replace-113 = laden
 
 accent-german-words-114 = собака
-accent-german-words-114-2 = пёс
+accent-german-words-114-2 = пес
 accent-german-words-114-3 = шавка
 accent-german-words-replace-114 = hund
 
@@ -538,7 +538,7 @@ accent-german-words-133-2 = мгла
 accent-german-words-133-3 = дымка
 accent-german-words-replace-133 = nebel
 
-accent-german-words-134 = звёзды
+accent-german-words-134 = звезды
 accent-german-words-134-2 = звезда
 accent-german-words-replace-134 = sterne
 
@@ -565,7 +565,7 @@ accent-german-words-139-2 = рок
 accent-german-words-replace-139 = schicksal
 
 accent-german-words-140 = мечта
-accent-german-words-140-2 = грёзы
+accent-german-words-140-2 = грезы
 accent-german-words-replace-140 = traum
 
 accent-german-words-141 = странник

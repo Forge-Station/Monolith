@@ -123,9 +123,6 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
         var parent = Transform(uid).ParentUid;
 
-        if (parent == args.MessageSource)
-            return;
-
         if (TryComp(parent, out ActorComponent ? actor)) {
             var canUnderstand = _language.CanUnderstand(parent, args.Language.ID);
 
@@ -143,7 +140,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
             RaiseNetworkEvent(radioNoiseEvent, actor.PlayerSession);
 
-            if (headsetTts?.VoicePrototypeId != null) {
+            if (parent != args.MessageSource && headsetTts?.VoicePrototypeId != null) {
                 _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, headsetTts.VoicePrototypeId, actor.PlayerSession, true, args.Language);
             }
 

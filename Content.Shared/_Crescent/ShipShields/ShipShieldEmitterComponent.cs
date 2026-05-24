@@ -215,4 +215,16 @@ public sealed partial class ShipShieldEmitterComponent : Component
     [DataField]
     [GuidebookData]
     public float CollisionResistanceMultiplier = 1.0f;
+
+    /// <summary>
+    /// Shield tier (1-4) for bluespace boarding bypass. When zero, inferred from damage limit.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int ShieldTier;
+
+    /// <summary>
+    /// When true, active shield blocks all boarding teleports through this grid and prevents using boarding teleports from this grid.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool BluespaceTeleportImmune;
 }

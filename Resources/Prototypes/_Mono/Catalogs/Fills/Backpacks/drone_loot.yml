@@ -186,5 +186,8 @@
       prob: 0.6
     - id: SpawnLootTechDisksT3Fracture
       prob: 0.2
+    # Tier-4 bluespace boarding teleport (0.005%)
+    - id: DisciplinesDiskBoardingTeleportTier4
+      prob: 0.0005
     sound:
       path: /Audio/Machines/windoor_open.ogg

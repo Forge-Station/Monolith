@@ -1,0 +1,136 @@
+
+#region Forerunner Cyborgs
+- type: entity
+  id: BorgChassisSelectableForerunner
+  parent: BorgChassisForerunner
+  name: Forerunner cyborg
+  description: A purpose built cyborg used by the Forerunner.
+  components:
+  - type: Sprite
+    sprite: Mobs/Silicon/chassis.rsi
+    layers:
+    - state: synd_engi
+      map: ["enum.BorgVisualLayers.Body", "movement"]
+    - state: synd_engi_e
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: synd_engi_l
+      shader: unshaded
+      map: ["light","enum.BorgVisualLayers.LightStatus"]
+      visible: false
+  - type: BorgChassis
+    maxModules: 0
+    hasMindState: synd_engi_e
+    noMindState: synd_engi_e
+  - type: InteractionPopup
+    interactSuccessString: petting-success-syndicate-cyborg
+    interactFailureString: petting-failure-station-ai
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: BorgSwitchableType
+    typeWhitelist: 
+    - ForerunnerAssault
+    - ForerunnerEngineer
+    inherentRadioChannels:
+    - Common
+    - Remnants
+    - Traffic
+  - type: RandomMetadata
+    nameSegments:
+    - MonoRemnantAdjective
+    - MonoRemnantNoun
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellAntiqueProto
+
+- type: entity
+  id: ForerunnerBorgChassisAssault
+  parent: BorgChassisSelectable
+  name: Forerunner assault cyborg
+  components:
+  - type: BorgSwitchableType
+    selectedBorgType: ForerunnerAssault
+  - type: BorgSwitchableSubtype
+    borgSubtype: ForerunnerAssault_default
+  - type: Damageable
+    damageContainer: Silicon
+    damageModifierSet: FactionBorgChassisAssault
+
+- type: entity
+  id: ForerunnerBorgChassisEngineer
+  parent: BorgChassisSelectable
+  name: Forerunner engineer cyborg
+  components:
+  - type: BorgSwitchableType
+    selectedBorgType: ForerunnerEngineer
+  - type: BorgSwitchableSubtype
+    borgSubtype: ForerunnerEngineer_default
+#endregion
+
+#region borgSubtype
+- type: borgSubtype
+  parentBorgType: ForerunnerAssault
+  id: ForerunnerAssault_default
+  spritePath: Mobs/Silicon/chassis.rsi
+  dummyPrototype: ForerunnerBorgChassisAssault
+
+- type: borgSubtype
+  parentBorgType: ForerunnerEngineer
+  id: ForerunnerEngineer_default
+  spritePath: Mobs/Silicon/chassis.rsi
+  dummyPrototype: ForerunnerBorgChassisEngineer
+#endregion
+
+#region BorgType
+- type: borgType
+  id: ForerunnerAssault
+  dummyPrototype: ForerunnerBorgChassisAssault
+  extraModuleCount: 3
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleSyndicate
+    - BorgModuleSyndicateAssault
+  defaultModules:
+    - BorgModuleForerunnerWeapon
+    - BorgModuleJetpackADM
+    - BorgModuleConstruction
+  inventoryTemplateId: borgShort
+  spriteBodyState: synd_sec
+  spriteHasMindState: synd_sec_e
+  spriteNoMindState: synd_sec_e
+  spriteToggleLightState: synd_sec_l
+  petSuccessString: petting-success-syndicate-cyborg
+  petFailureString: petting-failure-station-ai
+
+- type: borgType
+  id: ForerunnerEngineer
+  dummyPrototype: ForerunnerBorgChassisEngineer
+  extraModuleCount: 2
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleSyndicate
+    - BorgModuleEngineering
+  defaultModules:
+    - BorgModuleForerunnerWeapon
+    - BorgModuleForerunnerRCD
+    - BorgModuleAdvancedTool
+    - BorgModuleConstruction
+    - BorgModuleCable
+  addComponents:
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  inventoryTemplateId: borgShort
+  spriteBodyState: synd_engi
+  spriteHasMindState: synd_engi_e
+  spriteNoMindState: synd_engi_e
+  spriteToggleLightState: synd_engi_l
+  petSuccessString: petting-success-syndicate-cyborg
+  petFailureString: petting-failure-station-ai
+#endregion

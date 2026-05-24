@@ -3,3 +3,6 @@ ent-ClothingOuterHardsuitAsakim = экзокостюм "Касатур"
 ent-ClothingOuterHardsuitAsakimUnremoveable = { ent-ClothingOuterHardsuitAsakim }
     .desc = { ent-ClothingOuterHardsuitAsakim.desc } Эта броня полностью закреплена на воине, и ее снятие займет много времени.
     .suffix = Неснимаемый
+ent-ClothingOuterHardsuitAsakimUnremoveableForge = { ent-ClothingOuterHardsuitAsakimUnremoveable }
+    .desc = { ent-ClothingOuterHardsuitAsakimUnremoveable.desc }
+    .suffix = { ent-ClothingOuterHardsuitAsakimUnremoveable.suffix }, Forge

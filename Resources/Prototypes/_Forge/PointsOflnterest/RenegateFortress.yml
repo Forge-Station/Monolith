@@ -19,6 +19,8 @@
   - type: PoiCaptureRoundstart
     ownerCompanyId: Renegates
     zoneRadius: 2048
+  - type: ProtectedGrid # Forge-Change
+    preventTeleportation: true
 
 - type: gameMap
   id: RenegateFortress

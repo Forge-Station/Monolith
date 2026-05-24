@@ -139,9 +139,9 @@
     Gold: 500
     Uranium: 1250
     Durathread: 4500
-    Plastitanium: 4000
+    Plastitanium: 2500
     Diamond: 300
-    UraniumFissile: 200
+    UraniumFissile: 100
     Plasteel: 3000
 
 - type: latheRecipe

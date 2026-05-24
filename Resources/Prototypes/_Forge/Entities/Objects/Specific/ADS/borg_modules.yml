@@ -1,0 +1,55 @@
+#region Weapons
+- type: entity
+  id: BorgModuleForerunnerWeaponHeavy
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture advanced weapon cyborg module
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseBladeForge
+    - WeaponRifleAsakimAutopulserADM
+  - type: BorgModuleIcon
+    icon: { sprite: Forge/Interface/Action/actions_borg.rsi, state: advanced-weapon-module }
+
+- type: entity
+  id: BorgModuleForerunnerWeapon
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture standard weapon cyborg module
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseBladeForge
+    - WeaponRifleADMPistolForge
+  - type: BorgModuleIcon
+    icon: { sprite: Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
+
+#region Tools
+- type: entity
+  id: BorgModuleForerunnerRCD
+  parent: [ BaseBorgModule, BaseProviderBorgModule, BaseFactionGearOtherFactionT3 ]
+  name: pre-fracture RCD module
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: RCD
+    items:
+    - RCDRecharging
+    - ShipRepairDeviceRedacted
+  - type: BorgModuleIcon
+    icon: { sprite: Forge/Interface/Action/actions_borg.rsi, state: rcd-module }

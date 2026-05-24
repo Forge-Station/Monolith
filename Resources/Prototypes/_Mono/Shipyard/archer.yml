@@ -16,6 +16,7 @@
   shuttlePath: /Maps/_Mono/Shuttles/archer.yml
   guidebookPage: Null
   class:
+  - Corvette
   - Pursuit
   engine:
   - Uranium

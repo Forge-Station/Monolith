@@ -12,8 +12,9 @@
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/aldebaran.yml
   guidebookPage: Null
   class:
-  - Patrol
-  - Corvette
+  - Fighter
+  - Pursuit
+  - Frigate
   engine:
   - Plasma
 

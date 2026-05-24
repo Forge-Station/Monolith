@@ -5,6 +5,7 @@ using Content.Server.Resist;
 using Content.Server.Popups;
 using Content.Server.Inventory;
 using Content.Server.Nyanotrasen.Item.PseudoItem;
+using Content.Shared.Body.Systems; // Forge-Change
 using Content.Shared.Mobs;
 using Content.Shared.DoAfter;
 using Content.Shared.Buckle.Components;
@@ -26,6 +27,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Implants.Components; // Forge-Change
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nyanotrasen.Item.PseudoItem;
 using Content.Shared.Storage;
@@ -50,6 +52,7 @@ namespace Content.Server.Carrying
         [Dependency] private readonly PseudoItemSystem _pseudoItem = default!;
         [Dependency] private readonly ContestsSystem _contests = default!;
         [Dependency] private readonly TransformSystem _transform = default!;
+        [Dependency] private readonly SharedBodySystem _body = default!; // Forge-Change
 
         public const float BaseDistanceCoeff = 0.5f; // Frontier: default throwing speed reduction
         public const float MaxDistanceCoeff = 1.0f; // Frontier: default throwing speed reduction
@@ -146,8 +149,10 @@ namespace Content.Server.Carrying
 
             args.ItemUid = virtItem.BlockingEntity;
 
-            var contestCoeff = _contests.MassContest(uid, virtItem.BlockingEntity, false, 2f) // Frontier: "args.throwSpeed *="<"var contestCoeff ="
+            // Forge-Change-Start: R.I.P.L.Y carry assist affects throwing carried entities.
+            var contestCoeff = GetCarryMassContest(uid, virtItem.BlockingEntity, false, 2f)
                                 * _contests.StaminaContest(uid, virtItem.BlockingEntity);
+            // Forge-Change-End
 
             // Frontier: sanitize our range regardless of CVar values - TODO: variable throw distance ranges (via traits, etc.)
             contestCoeff = float.Min(BaseDistanceCoeff * contestCoeff, MaxDistanceCoeff);
@@ -245,24 +250,27 @@ namespace Content.Server.Carrying
         }
         private void StartCarryDoAfter(EntityUid carrier, EntityUid carried, CarriableComponent component)
         {
+            // Forge-Change-Start: R.I.P.L.Y raises the hard carry mass limit.
             if (!TryComp<PhysicsComponent>(carrier, out var carrierPhysics)
                 || !TryComp<PhysicsComponent>(carried, out var carriedPhysics)
-                || carriedPhysics.Mass > carrierPhysics.Mass * 2f)
+                || carriedPhysics.Mass > GetCarryMassLimit(carrier, carrierPhysics))
             {
                 _popupSystem.PopupEntity(Loc.GetString("carry-too-heavy"), carried, carrier, Shared.Popups.PopupType.SmallCaution);
                 return;
             }
+            // Forge-Change-End
 
             var length = component.PickupDuration // Frontier: removed outer TimeSpan.FromSeconds()
-                        * _contests.MassContest(carriedPhysics, carrierPhysics, false, 4f)
+                        // Forge-Change: R.I.P.L.Y makes the carrier count as heavier during pickup timing.
+                        * _contests.MassContest(carriedPhysics, false, 4f, GetEffectiveCarryMass(carrier, carrierPhysics))
                         * _contests.StaminaContest(carrier, carried)
                         * (_standingState.IsDown(carried) ? 0.5f : 1);
 
             // Frontier: sanitize pickup time duration regardless of CVars - no near-instant pickups.
-            var duration = TimeSpan.FromSeconds(
-                float.Clamp(length,
-                component.MinPickupDuration,
-                component.MaxPickupDuration));
+            var durationSeconds = float.Clamp(length, component.MinPickupDuration, component.MaxPickupDuration);
+            // Forge-Change: Apply R.I.P.L.Y pickup delay bonus after the max-duration clamp.
+            durationSeconds = MathF.Max(component.MinPickupDuration, durationSeconds * GetCarryPickupDelayModifier(carrier));
+            var duration = TimeSpan.FromSeconds(durationSeconds);
             // End Frontier
 
             component.CancelToken = new CancellationTokenSource();
@@ -306,14 +314,16 @@ namespace Content.Server.Carrying
 
         public bool TryCarry(EntityUid carrier, EntityUid toCarry, CarriableComponent? carriedComp = null)
         {
+            // Forge-Change-Start: R.I.P.L.Y raises the public TryCarry mass limit too.
             if (!Resolve(toCarry, ref carriedComp, false)
                 || !CanCarry(carrier, toCarry, carriedComp)
                 || HasComp<BeingCarriedComponent>(carrier)
                 || HasComp<ItemComponent>(carrier)
                 || TryComp<PhysicsComponent>(carrier, out var carrierPhysics)
                 && TryComp<PhysicsComponent>(toCarry, out var toCarryPhysics)
-                && carrierPhysics.Mass < toCarryPhysics.Mass * 2f)
+                && toCarryPhysics.Mass > GetCarryMassLimit(carrier, carrierPhysics))
                 return false;
+            // Forge-Change-End
 
             Carry(carrier, toCarry);
 
@@ -323,6 +333,10 @@ namespace Content.Server.Carrying
         public void DropCarried(EntityUid carrier, EntityUid carried)
         {
             RemComp<CarryingComponent>(carrier); // get rid of this first so we don't recursively fire that event
+            // Forge-Change-Start: Prevent stale carry slowdown after dropping carried entities.
+            if (TryComp<CarryingSlowdownComponent>(carrier, out var slowdown))
+                _slowdown.SetModifier(carrier, 1f, 1f, slowdown);
+            // Forge-Change-End
             RemComp<CarryingSlowdownComponent>(carrier);
             RemComp<BeingCarriedComponent>(carried);
             RemComp<KnockedDownComponent>(carried);
@@ -335,14 +349,164 @@ namespace Content.Server.Carrying
 
         private void ApplyCarrySlowdown(EntityUid carrier, EntityUid carried)
         {
-            var massRatio = _contests.MassContest(carrier, carried, true);
+            // Forge-Change: R.I.P.L.Y affects carrying slowdown mass contest.
+            var massRatio = GetCarryMassContest(carrier, carried, true);
             var massRatioSq = MathF.Pow(massRatio, 2);
             var modifier = 1 - 0.15f / massRatioSq;
             modifier = Math.Max(0.1f, modifier);
+            modifier = ApplyCarryAssistSlowdown(carrier, modifier); // Forge-Change
 
             var slowdownComp = EnsureComp<CarryingSlowdownComponent>(carrier);
             _slowdown.SetModifier(carrier, modifier, modifier, slowdownComp);
         }
+
+        // Forge-Change-Start: R.I.P.L.Y carry assist helpers.
+        // Preserve the original 2x hard carry limit, but raise it for R.I.P.L.Y.
+        private float GetCarryMassLimit(EntityUid carrier, PhysicsComponent carrierPhysics)
+        {
+            return carrierPhysics.Mass * Math.Max(2f, GetCarryAssistMassMultiplier(carrier));
+        }
+
+        // Cybernetic R.I.P.L.Y nails make the carrier count as heavier only for carry contests.
+        private float GetEffectiveCarryMass(EntityUid carrier, PhysicsComponent carrierPhysics)
+        {
+            return carrierPhysics.Mass * GetCarryAssistMassMultiplier(carrier);
+        }
+
+        // Mass contest variant that respects the R.I.P.L.Y effective carry mass.
+        private float GetCarryMassContest(EntityUid carrier, EntityUid carried, bool bypassClamp = false, float rangeFactor = 1f)
+        {
+            if (GetCarryAssistMassMultiplier(carrier) <= 1f)
+                return _contests.MassContest(carrier, carried, bypassClamp, rangeFactor);
+
+            if (!TryComp<PhysicsComponent>(carrier, out var carrierPhysics) ||
+                !TryComp<PhysicsComponent>(carried, out var carriedPhysics) ||
+                carriedPhysics.Mass == 0)
+            {
+                return 1f;
+            }
+
+            return GetEffectiveCarryMass(carrier, carrierPhysics) / carriedPhysics.Mass;
+        }
+
+        // Cybernetic R.I.P.L.Y nails make the pickup do-after a little easier.
+        private float GetCarryPickupDelayModifier(EntityUid carrier)
+        {
+            var modifier = 1f;
+            var query = EntityQueryEnumerator<SubdermalImplantComponent>();
+            while (query.MoveNext(out _, out var implant))
+            {
+                if (implant.ImplantedEntity == carrier)
+                    modifier = Math.Min(modifier, implant.CarryAssistPickupDelayModifier);
+            }
+
+            // Forge-Change-Start: R.I.P.L.Y cybernetic hands only grant carry assist as an installed pair.
+            if (HasPairedCarryAssistParts(carrier))
+            {
+                foreach (var (partUid, part) in _body.GetBodyChildren(carrier))
+                {
+                    if (!part.Enabled || !TryComp<SubdermalImplantComponent>(partUid, out var assist))
+                        continue;
+
+                    modifier = Math.Min(modifier, assist.CarryAssistPickupDelayModifier);
+                }
+            }
+            // Forge-Change-End
+
+            return modifier;
+        }
+
+        // Reduce only the slowdown penalty, leaving the base carrying system intact.
+        private float ApplyCarryAssistSlowdown(EntityUid carrier, float modifier)
+        {
+            var penaltyModifier = GetCarryAssistSlowdownPenaltyModifier(carrier);
+            if (penaltyModifier >= 1f)
+                return modifier;
+
+            return 1f - (1f - modifier) * penaltyModifier;
+        }
+
+        private float GetCarryAssistMassMultiplier(EntityUid carrier)
+        {
+            var multiplier = 1f;
+            var query = EntityQueryEnumerator<SubdermalImplantComponent>();
+            while (query.MoveNext(out _, out var implant))
+            {
+                if (implant.ImplantedEntity == carrier)
+                    multiplier = Math.Max(multiplier, implant.CarryAssistMassMultiplier);
+            }
+
+            // Forge-Change-Start: R.I.P.L.Y cybernetic hands only grant carry assist as an installed pair.
+            if (HasPairedCarryAssistParts(carrier))
+            {
+                foreach (var (partUid, part) in _body.GetBodyChildren(carrier))
+                {
+                    if (!part.Enabled || !TryComp<SubdermalImplantComponent>(partUid, out var assist))
+                        continue;
+
+                    multiplier = Math.Max(multiplier, assist.CarryAssistMassMultiplier);
+                }
+            }
+            // Forge-Change-End
+
+            return multiplier;
+        }
+
+        private float GetCarryAssistSlowdownPenaltyModifier(EntityUid carrier)
+        {
+            var modifier = 1f;
+            var query = EntityQueryEnumerator<SubdermalImplantComponent>();
+            while (query.MoveNext(out _, out var implant))
+            {
+                if (implant.ImplantedEntity == carrier)
+                    modifier = Math.Min(modifier, implant.CarryAssistSlowdownPenaltyModifier);
+            }
+
+            // Forge-Change-Start: R.I.P.L.Y cybernetic hands only grant carry assist as an installed pair.
+            if (HasPairedCarryAssistParts(carrier))
+            {
+                foreach (var (partUid, part) in _body.GetBodyChildren(carrier))
+                {
+                    if (!part.Enabled || !TryComp<SubdermalImplantComponent>(partUid, out var assist))
+                        continue;
+
+                    modifier = Math.Min(modifier, assist.CarryAssistSlowdownPenaltyModifier);
+                }
+            }
+            // Forge-Change-End
+
+            return modifier;
+        }
+
+        // Forge-Change-Start: Paired body-part support for R.I.P.L.Y carry assist.
+        private bool HasPairedCarryAssistParts(EntityUid carrier)
+        {
+            var count = 0;
+            foreach (var (partUid, part) in _body.GetBodyChildren(carrier))
+            {
+                if (!part.Enabled ||
+                    !TryComp<SubdermalImplantComponent>(partUid, out var assist) ||
+                    !HasCarryAssist(assist))
+                {
+                    continue;
+                }
+
+                count++;
+                if (count >= 2)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private static bool HasCarryAssist(SubdermalImplantComponent assist)
+        {
+            return assist.CarryAssistMassMultiplier > 1f ||
+                   assist.CarryAssistPickupDelayModifier < 1f ||
+                   assist.CarryAssistSlowdownPenaltyModifier < 1f;
+        }
+        // Forge-Change-End
+        // Forge-Change-End
 
         public bool CanCarry(EntityUid carrier, EntityUid carried, CarriableComponent? carriedComp = null)
         {

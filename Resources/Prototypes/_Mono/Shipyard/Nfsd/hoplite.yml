@@ -11,6 +11,7 @@
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/hoplite.yml
   guidebookPage: Null
   class:
+  - Fighter
   - Patrol
   - Pursuit
   engine:

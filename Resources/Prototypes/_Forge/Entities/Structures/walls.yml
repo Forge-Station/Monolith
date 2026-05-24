@@ -1,0 +1,49 @@
+- type: entity
+  abstract: true
+  parent: BaseWall
+  id: BaseWallTierFive
+  name: hyper super ultra giga reinforced wall
+  description: Keeps the air in and the chimera out.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 7100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+    - trigger:
+        !type:DamageTrigger
+        damage: 7000
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 75
+  - type: ArmorThickness
+    thickness: 15
+  - type: ShipRepairable
+    repairTime: 10
+    repairCost: 12
+  - type: Tag
+    tags:
+    - Wall
+    - WallT4
+  - type: RadiationBlocker
+    resistance: 5

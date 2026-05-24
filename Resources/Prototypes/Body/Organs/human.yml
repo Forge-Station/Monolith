@@ -271,6 +271,7 @@
   name: kidneys
   description: "Filters toxins from the bloodstream."
   components:
+  - type: Kidney # Forge-Change
   - type: Organ # Shitmed
     slotId: kidneys
   - type: Sprite

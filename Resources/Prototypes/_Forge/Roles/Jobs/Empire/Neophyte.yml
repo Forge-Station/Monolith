@@ -9,22 +9,9 @@
     - !type:OverallPlaytimeRequirement
       time: 21600 # 6 hours
     - !type:SpeciesRequirement
-      inverted: true
       species:
-        # - SlimePerson
-        - Arachnid
-        - Chitinid
-        - Resomi
-        - Vox
-        - Diona
-        - Goblin
-        - Hydrakin
-        - Vulpkanin
-        # - Tajaran
-        # - Reptilian
-        # - Oni
-        # - Moth
-        # - IPC
+        - Human
+        - Dwarf
   startingGear: NeophyteGear
   weight: 10
   displayWeight: 10

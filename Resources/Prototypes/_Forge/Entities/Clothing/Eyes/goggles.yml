@@ -1,3 +1,45 @@
+#region Empire
+- type: entity
+  parent: [ ClothingEyesGlassesMeson, ShowSecurityIcons ]
+  id: ClothingEyesGlassesEmpireOperator
+  name: empire operator goggles
+  description: Imperial Operator visor that allows for ID card identification, rapid equipment diagnostics, and drone control within a two-kilometer radius.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/operator.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/operator.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  - type: HandheldGPS
+  - type: VisionCorrection
+  # Drone-control
+  - type: DroneControlConsole
+    maxOrderRadius: 2000
+  - type: ActivatableUI
+    key: enum.DroneConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.DroneConsoleUiKey.Key:
+        type: DroneConsoleBoundUserInterface
+  - type: RadarConsole
+    noRotate: true
+  - type: WorldLoader
+    radius: 256
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    transmitFrequencyId: DroneControl
+  - type: WirelessNetworkConnection
+    range: 100000
+  - type: DeviceList
+    deviceLimit: 2
+
 #region Company
 - type: entity
   parent: [ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseFactionGearOtherFactionT1]

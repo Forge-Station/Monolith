@@ -84,3 +84,55 @@
   id: ClothingOuterHardsuitHV7i
   result: ClothingOuterHardsuitHV7i
   completetime: 22
+
+# region Higaris Victories
+- type: latheRecipe
+  parent: MonoHardsuitT3TsfRecipe
+  id: ClothingOuterHardsuitHVVigilance
+  result: ClothingOuterHardsuitHVVigilance
+  completetime: 22
+  materials:
+    Plastic: 1300
+    Steel: 4500
+    Plastitanium: 1500
+    Plasteel: 5500
+    Durathread: 3500
+    Silver: 500
+    Gold: 500
+    Brass: 1000
+    UraniumDepleted: 50
+    UraniumFissile: 100
+
+- type: latheRecipe
+  parent: MonoHardsuitT3TsfRecipe
+  id: ClothingOuterHardsuitHVMilitant
+  result: ClothingOuterHardsuitHVMilitant
+  completetime: 22
+  materials:
+    Plastic: 1300
+    Steel: 4500
+    Plastitanium: 1500
+    Plasteel: 5500
+    Durathread: 3500
+    Silver: 500
+    Gold: 500
+    Brass: 1000
+    UraniumDepleted: 50
+    UraniumFissile: 100
+
+- type: latheRecipe
+  parent: MonoHardsuitT3TsfRecipe
+  id: ClothingOuterHardsuitHVStealh
+  result: ClothingOuterHardsuitHVStealh
+  completetime: 22
+  materials:
+    Plastic: 1300
+    Steel: 4500
+    Plastitanium: 1500
+    Plasteel: 5500
+    Durathread: 3500
+    Silver: 500
+    Gold: 500
+    Brass: 1000
+    UraniumDepleted: 50
+    UraniumFissile: 100

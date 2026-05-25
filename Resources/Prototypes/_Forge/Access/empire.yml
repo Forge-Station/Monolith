@@ -3,6 +3,10 @@
   name: id-card-access-level-empire
 
 - type: accessLevel
+  id: EmpireSmallInq
+  name: id-card-access-level-empire-smallinq
+
+- type: accessLevel
   id: EmpireOfficer
   name: id-card-access-level-empire-officer
 
@@ -49,6 +53,7 @@
   - Mercenary
   - Captain
   - Empire
+  - EmpireSmallInq
   - EmpireOfficer
 
 - type: accessGroup
@@ -56,6 +61,7 @@
   tags:
   - Empire
   - EmpireOfficer
+  - EmpireSmallInq
   - EmpireInqusitor
   - EmpireCommander
   - EmpireDiplomacy

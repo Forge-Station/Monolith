@@ -15,33 +15,22 @@
       role: JobPraetorian
       time: 21600 # 6 hours
     - !type:SpeciesRequirement
-      inverted: true
       species:
-        - SlimePerson
-        - Arachnid
-        - Chitinid
-        - Resomi
-        - Vox
-        - Diona
-        - Goblin
-        - Hydrakin
-        - Vulpkanin
-        - Tajaran
-        - Reptilian
-        # - Oni
-        - Moth
+        - Human
+        - Dwarf
   # alternateRequirementSets:
   #   longerPlaytimeLessSec:
   #   - !type:RoleTimeRequirement
   #     role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
   #     time: 43200 # 12 hours
   startingGear: TessarianGear
+  assignedCompany: Imperial
   weight: 20
   displayWeight: 20
   canBeAntag: false
   setPreference: true
   accessGroups:
-  - SpecialEmpireAccess
+  - CommandEmpireAccess
   special:
   - !type:AddComponentSpecial
     components:

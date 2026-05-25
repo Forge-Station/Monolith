@@ -146,6 +146,121 @@
     sprite: Forge/Clothing/OuterClothing/Coats/tti_bomber.rsi
   - type: Clothing
     sprite: Forge/Clothing/OuterClothing/Coats/tti_bomber.rsi
+
+- type: entity
+  parent: [ ClothingOuterStorageFoldableBase ]
+  id: ClothingOuterCoatEmpireOperator
+  name: empire operator trench
+  description: Trench for empire drone operator
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Coats/operator.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Coats/operator.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.7
+        Piercing: 0.75
+        Heat: 0.75
+        Caustic: 0.75
+  - type: ExplosionResistance
+    damageCoefficient: 0.75
+
+- type: entity
+  parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatEmpireOperator]
+  id: ClothingOuterCoatEmpireOperatorOpened
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.75
+        Piercing: 0.8
+        Heat: 0.85
+        Caustic: 0.85
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        showEnts: false
+        occludes: true
+        ents: []
+
+- type: entity
+  parent: ClothingOuterCoatHoSTrench
+  id: ClothingOuterCoatEmpireLord
+  name: lord armored greatcoat
+  description: lord armored greatcoat
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Coats/empirelord.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Coats/empirelord.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.45
+        Piercing: 0.45
+        Heat: 0.6
+        Radiation: 0.9
+        Caustic: 0.8
+  - type: FireProtection
+    reduction: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: ClothingOuterCoatEmpirePreafect
+  name: empire preafect armored greatcoat
+  description: empire preafect armored greatcoat
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Coats/preafect.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Coats/preafect.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.45
+        Piercing: 0.45
+        Heat: 0.6
+        Radiation: 0.9
+        Caustic: 0.8
+  - type: FireProtection
+    reduction: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: ClothingOuterCoatEmpirePreafectA
+  name: empire preafect armored greatcoat
+  description: empire preafect armored greatcoat
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Coats/preafect_a.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Coats/preafect_a.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.45
+        Piercing: 0.45
+        Heat: 0.6
+        Radiation: 0.9
+        Caustic: 0.8
+  - type: FireProtection
+    reduction: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+
 # region Company
 - type: entity
   parent: ClothingOuterStorageBase
@@ -157,7 +272,7 @@
   - type: Sprite
     sprite: Forge/Clothing/OuterClothing/Coats/coat_techniclogistic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Coats/Sub-lieutenant/coat_techniclogistic.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/coat_techniclogistic.rsi
 
 #region Other
 - type: entity

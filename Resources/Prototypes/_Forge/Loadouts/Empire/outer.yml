@@ -1,0 +1,25 @@
+- type: loadout
+  id: EmpireClothingOuterCoatEmpireWindbreaker
+  equipment:
+    outerClothing: ClothingOuterCoatEmpireWindbreaker
+
+- type: loadout
+  id: EmpireClothingOuterCoatEmpireInqWindbreaker
+  equipment:
+    outerClothing: ClothingOuterCoatEmpireInqWindbreaker
+
+#region Preafect
+- type: loadout
+  id: ClothingOuterCoatEmpireLord
+  equipment:
+    outerClothing: ClothingOuterCoatEmpireLord
+
+- type: loadout
+  id: ClothingOuterCoatEmpirePreafect
+  equipment:
+    outerClothing: ClothingOuterCoatEmpirePreafect
+
+- type: loadout
+  id: ClothingOuterCoatEmpirePreafectA
+  equipment:
+    outerClothing: ClothingOuterCoatEmpirePreafectA

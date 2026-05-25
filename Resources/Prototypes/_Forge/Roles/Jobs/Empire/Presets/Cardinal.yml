@@ -1,0 +1,37 @@
+- type: job
+  id: Cardinal
+  name: forge-job-name-cardinal
+  description: forge-job-desc-cardinal
+  playTimeTracker: JobCardinal
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hrs
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: CardinalGear
+  alwaysUseSpawner: true
+  icon: JobIconEmpireCardinal
+  assignedCompany: Imperial
+  supervisors: job-supervisors-praefect
+  weight: 40
+  displayWeight: 40
+  canBeAntag: false
+  accessGroups:
+  - CommandEmpireAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
+
+- type: startingGear
+  id: CardinalGear
+  # equipment:
+  #   ears:
+  #   belt:
+  #   pocket1:
+  #   pocket2:
+  # storage:
+  #   back:
+  #   - RadioHandheldNF

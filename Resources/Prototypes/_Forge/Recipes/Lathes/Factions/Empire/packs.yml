@@ -37,17 +37,7 @@
   - ClothingOuterHardsuitHV7
   - ClothingOuterHardsuitHV7c
   - ClothingOuterHardsuitHV7i
-
-#region Ship
-- type: latheRecipePack
-  id: ShipVoucherEmpire
-  recipes:
-  # Support ship's
-  - EmpireVoucherMotleyAnne
-
-- type: latheRecipePack
-  id: ShipVoucherEmpireDrones
-  recipes:
-  # Motley Drone's
-  - EmpireVoucherMock
-  - EmpireVoucherInertia
+  # HV
+  - ClothingOuterHardsuitHVVigilance
+  - ClothingOuterHardsuitHVMilitant
+  - ClothingOuterHardsuitHVStealh

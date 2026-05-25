@@ -9,6 +9,48 @@
     sprite: Forge/Clothing/Neck/Cloaks/tti_commander.rsi
   - type: Clothing
     sprite: Forge/Clothing/Neck/Cloaks/tti_commander.rsi
+
+#region Empire
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakEmpirePreafect
+  name: lord-preafect cloak
+  description: A lord's luxurious cloak, indicating his allegiance to aristocratic circles.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakEmpirePreafectOrange
+  name: lord-preafect cloak
+  description: A lord's luxurious cloak, signifying his allegiance to the Imperial military forces.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect_o.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakEmpirePreafectViolet
+  name: lord-preafect cloak
+  description: A lord's luxurious cloak symbolizing his devotion to the church.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect_v.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakEmpirePreafectDiplomacy
+  name: lord-preafect cloak
+  description: A lord's luxurious cloak symbolizing his allegiance to the Imperial Diplomatic Corps.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect_d.rsi
+
 #region Renegate
 - type: entity
   parent: ClothingNeckBase

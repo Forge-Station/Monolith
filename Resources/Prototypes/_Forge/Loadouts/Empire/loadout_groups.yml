@@ -1,13 +1,5 @@
 # region Empire All
 - type: loadoutGroup
-  id: EmpireHead
-  name: loadout-group-contractor-head
-  minLimit: 0
-  loadouts:
-  - TsfmcHelmet
-  - TsfmcBeret
-
-- type: loadoutGroup
   id: EmpireNeck
   name: loadout-group-contractor-neck
   hidden: true # No point in showing this, it gets auto-selected.
@@ -29,11 +21,13 @@
 - type: loadoutGroup
   id: EmpireGlasses
   name: loadout-group-contractor-glasses
-  hidden: true # No point in showing this, it gets auto-selected.
+  minLimit: 1
+  maxLimit: 1
   loadouts:
-  - TsfmcHud
+  - ClothingEyesGlassesEmpireSunblue
+  - ClothingEyesGlassesEmpireSunorange
   fallbacks:
-  - TsfmcHud
+  - ClothingEyesGlassesEmpireSunblue
 
 - type: loadoutGroup
   id: EmpireBalaclava
@@ -126,6 +120,31 @@
   fallbacks:
   - ClothingUniformJumpsuitLordPreafAlt
 
+- type: loadoutGroup
+  id: EmpireCommanderOuterClothing
+  name: loadout-group-contractor-outerclothing
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ClothingOuterCoatEmpireLord
+  - ClothingOuterCoatEmpirePreafect
+  - ClothingOuterCoatEmpirePreafectA
+  fallbacks:
+  - ClothingOuterCoatEmpirePreafect
+
+- type: loadoutGroup
+  id: EmpirePreafectNeck
+  name: loadout-group-contractor-neck
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ClothingNeckCloakEmpirePreafect
+  - ClothingNeckCloakEmpirePreafectOrange
+  - ClothingNeckCloakEmpirePreafectDiplomacy
+  - ClothingNeckCloakEmpirePreafectViolet
+  fallbacks:
+  - ClothingNeckCloakEmpirePreafect
+
 # region Tessarian
 - type: loadoutGroup
   id: EmpireTessarianJumpsuit
@@ -202,3 +221,13 @@
   minLimit: 1
   loadouts:
   - EmpireIFFPurple
+
+# region Consul
+- type: loadoutGroup
+  id: EmpireConsulJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - ClothingUniformJumpsuitEmpireConsul
+  fallbacks:
+  - ClothingUniformJumpsuitEmpireConsul

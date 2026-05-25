@@ -83,8 +83,7 @@ namespace Content.Client.Lobby.UI
             ["TsfEngineer"] = "TSF",
             // Empire
             ["Praefect"] = "Imperial",
-            ["Arbiter"] = "Imperial",
-            ["Cardinal"] = "Imperial",
+            ["Tessarian"] = "Imperial",
             ["Inquisitor"] = "Imperial",
             ["Consul"] = "Imperial",
             ["Praetorian"] = "Imperial",

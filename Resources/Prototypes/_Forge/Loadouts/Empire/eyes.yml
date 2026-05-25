@@ -1,0 +1,9 @@
+- type: loadout
+  id: ClothingEyesGlassesEmpireSunblue
+  equipment:
+    eyes: ClothingEyesGlassesEmpireSunblue
+
+- type: loadout
+  id: ClothingEyesGlassesEmpireSunorange
+  equipment:
+    eyes: ClothingEyesGlassesEmpireSunorange

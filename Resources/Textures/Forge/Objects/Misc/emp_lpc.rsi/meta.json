@@ -40,6 +40,9 @@
       "name": "strip_bronze"
     },
     {
+      "name": "strip_gold"
+    },
+    {
       "name": "strip_silver"
     }
   ]

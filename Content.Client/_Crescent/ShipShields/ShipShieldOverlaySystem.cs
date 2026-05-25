@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Crescent.ShipShields;
 
-public sealed class ShipShieldOverlaySystem : EntitySystem
+public sealed partial class ShipShieldOverlaySystem : EntitySystem
 {
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -15,7 +15,7 @@ public sealed class ShipShieldOverlaySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        _overlayManager.AddOverlay(new ShipShieldOverlay(EntityManager, _prototypeManager, _resourceCache, _mapManager)); // Forge-Change
+        _overlayManager.AddOverlay(new ShipShieldOverlay(EntityManager, _prototypeManager, _resourceCache)); // Forge-Change
     }
 
     public override void Shutdown()

@@ -401,6 +401,21 @@
     Steel: 100
     Diamond: 200
 
+- type: latheRecipe
+  id: EncryptionKeyTsfTech_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyTsfTech
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  id: EncryptionKeyTsfCom_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyTsfCom
+  materials:
+    Steel: 100
+    Diamond: 500
+
 # TTI
 
 - type: latheRecipe
@@ -493,6 +508,8 @@
   - ClothingHeadsetAltTsfmcCommander_recipe
   - EncryptionKeyCommand_recipe
   - EncryptionKeyNfsd_recipe
+  - EncryptionKeyTsfTech_recipe
+  - EncryptionKeyTsfCom_recipe
 
 - type: latheRecipePack
   id: TTIHeadsetStatic

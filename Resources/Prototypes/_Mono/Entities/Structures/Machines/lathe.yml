@@ -27,6 +27,7 @@
     - NFMercenaryTechfabDeprecatedStatic
     - NFEngineeringTechfabDeprecatedStatic # Forge-Change
     - RoundstartShipgunAmmo
+    - MonoAttachmentsStatic
     dynamicPacks:
     # rogue start
     - MonoRogueWeaponsDynamicMelee
@@ -42,7 +43,6 @@
     - MonoTSFMiscDynamic
     - MonoTSFGearDynamic
     # USSP start
-    - MonoUSSPVouchersDynamic
     - MonoUSSPArmorDynamic
     - MonoUSSPMiscDynamic
     - MonoUSSPWeaponsDynamicRanged

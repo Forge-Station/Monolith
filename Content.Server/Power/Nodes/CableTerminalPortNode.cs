@@ -1,6 +1,5 @@
-using Content.Server.NodeContainer;
 using Content.Server.NodeContainer.Nodes;
-using Robust.Shared.Map;
+using Content.Shared.NodeContainer;
 using Robust.Shared.Map.Components;
 
 namespace Content.Server.Power.Nodes
@@ -8,23 +7,25 @@ namespace Content.Server.Power.Nodes
     [DataDefinition]
     public sealed partial class CableTerminalPortNode : Node
     {
-        public override IEnumerable<Node> GetReachableNodes(TransformComponent xform,
+        public override IEnumerable<Node> GetReachableNodes(
+            Entity<TransformComponent> xform,
             EntityQuery<NodeContainerComponent> nodeQuery,
             EntityQuery<TransformComponent> xformQuery,
-            MapGridComponent? grid,
+            Entity<MapGridComponent>? grid,
             IEntityManager entMan)
         {
-            if (!xform.Anchored || grid == null || !xform.GridUid.HasValue)
+            if (!xform.Comp.Anchored || grid is not { } gridEnt)
                 yield break;
 
-            var gridUid = xform.GridUid.Value;
-            var map = entMan.System<SharedMapSystem>();
-            var gridIndex = map.TileIndicesFor(gridUid, grid, xform.Coordinates);
+            var mapSystem = entMan.System<SharedMapSystem>();
+            var gridIndex = mapSystem.TileIndicesFor(gridEnt, xform.Comp.Coordinates);
 
-            var nodes = NodeHelpers.GetCardinalNeighborNodes(nodeQuery, gridUid, grid, gridIndex, map, includeSameTile: false);
-            foreach (var (_, node) in nodes)
+            var nodes = NodeHelpers.GetCardinalNeighborNodes(nodeQuery, gridEnt, gridIndex, mapSystem, includeSameTile: false);
+            foreach (var (dir, node) in nodes)
             {
-                if (node is CableTerminalNode)
+                if (node is CableTerminalNode
+                    && dir != Direction.Invalid
+                    && xformQuery.GetComponent(node.Owner).LocalRotation.GetCardinalDir().GetOpposite() == dir)
                     yield return node;
             }
         }

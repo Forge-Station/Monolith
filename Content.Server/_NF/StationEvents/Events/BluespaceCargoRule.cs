@@ -1,7 +1,8 @@
 using Content.Server.Station.Components;
+using Content.Shared.Station.Components;
 using Content.Server.StationEvents.Components;
 using Content.Shared.Physics;
-using Robust.Shared.GameObjects;
+using Content.Shared.Station.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics;
@@ -13,12 +14,12 @@ using Content.Shared._NF.CCVar;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class BluespaceCargoRule : StationEventSystem<BluespaceCargoRuleComponent>
+public sealed partial class BluespaceCargoRule : StationEventSystem<BluespaceCargoRuleComponent>
 {
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] protected readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] protected IRobustRandom _random = default!;
 
     protected override void Added(EntityUid uid, BluespaceCargoRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {
@@ -35,7 +36,7 @@ public sealed class BluespaceCargoRule : StationEventSystem<BluespaceCargoRuleCo
         if (!TryComp<StationDataComponent>(chosenStation, out var stationData))
             return;
 
-        var grid = StationSystem.GetLargestGrid(stationData);
+        var grid = StationSystem.GetLargestGrid((chosenStation!.Value, stationData));
 
         if (grid is null)
             return;
@@ -74,7 +75,7 @@ public sealed class BluespaceCargoRule : StationEventSystem<BluespaceCargoRuleCo
             // don't spawn inside of solid objects
             var physQuery = GetEntityQuery<PhysicsComponent>();
             var valid = true;
-            foreach (var ent in _map.GetAnchoredEntities(grid, gridComp, tile))
+            foreach (var ent in _map.GetAnchoredEntities((grid, gridComp), tile))
             {
                 if (!physQuery.TryGetComponent(ent, out var body))
                     continue;

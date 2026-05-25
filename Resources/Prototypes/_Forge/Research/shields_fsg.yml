@@ -65,7 +65,7 @@
   - MachineShieldForgeTSFCollisionCircuitboard
   - MachineShieldForgeTSFSagittaCircuitboard
   technologyPrerequisites:
-  - TsfAltair
+  - TsfTierThreeVouchers
   - UniversalMaterialResearchT2
   position: 11, 10
 
@@ -82,7 +82,8 @@
   - MachineShieldForgeUsspCollisionCircuitboard
   - MachineShieldForgeUsspKerchCircuitboard
   technologyPrerequisites:
-  - UsspMediumShips
+  - UsspMediumSuits
+  - UniversalMaterialResearchT2
   position: 17, 10
 
 - type: technology

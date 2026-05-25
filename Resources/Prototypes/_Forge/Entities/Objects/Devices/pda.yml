@@ -299,7 +299,7 @@
     id: TsfSeniorOfficerIDCard
 
 - type: entity
-  parent: PublicAffairsLiaisonPDA
+  parent: SrPDA
   id: TsfSeniorAidePDA
   name: senior aide PDA
   suffix: ТСФ
@@ -308,7 +308,7 @@
     id: TsfSeniorAideIDCard
 
 - type: entity
-  parent: SrPDA
+  parent: PublicAffairsLiaisonPDA
   id: TsfAmbassadorPDA
   name: federation ambassador PDA
   suffix: ТСФ

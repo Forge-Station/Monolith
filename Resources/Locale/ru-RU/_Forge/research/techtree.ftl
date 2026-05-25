@@ -38,3 +38,17 @@ forge-research-technology-nfsd-nightvision = Даже во тьме
 forge-research-technology-nfsd-thermalvision = Даже сквозь стены
 forge-research-technology-nfsd-nightthermalvision = СБ видит тебя
 forge-research-technology-nfsd-advtools = Продвинутые инструменты
+
+# Empire
+# Disciplines
+research-discipline-empire-weaponry = Вооружение
+research-discipline-empire-equipment = Экипировка
+research-discipline-empire-shipyard = Верфь
+
+# Technology
+research-technology-empire-light = Модель RI-14
+research-technology-empire-adv = Модель RI-22
+
+research-technology-empire-prototype-vigilance = Военный патрульный прототип
+research-technology-empire-prototype-militant = Военный боевой прототип
+research-technology-empire-prototype-stealh = Военный разведывательный прототип

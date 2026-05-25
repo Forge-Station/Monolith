@@ -25,6 +25,7 @@
   startingGear: PraefectGear
   alwaysUseSpawner: true
   icon: JobIconEmpirePraefect
+  assignedCompany: Imperial
   requireAdminNotify: true
   supervisors: job-supervisors-nobody
   weight: 50

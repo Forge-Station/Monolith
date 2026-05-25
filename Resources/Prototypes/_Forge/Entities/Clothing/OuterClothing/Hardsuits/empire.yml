@@ -1,16 +1,16 @@
-#region HV Prototype 2
+#region AC Prototype 2
 - type: entity
   parent: [ ClothingOuterHardsuitBase, BaseFactionGearTSFT2]
   id: ClothingOuterHardsuitHVp2
-  name: HV Prototype 2 hardsuit
+  name: AC Prototype 2 hardsuit
   description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -218,13 +218,14 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
-        Slash: 0.4
-        Piercing: 0.4
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.55
         Shock: 0.8
-        Heat: 0.5
+        Heat: 0.6
         Radiation: 0.5
-        Caustic: 0.6
+        Caustic: 0.7
+        Poison: 0.8 # Mono
   - type: StaminaDamageResistance
     coefficient: 0.2
   - type: ClothingSpeedModifier
@@ -292,7 +293,7 @@
     price: 12500
     vendPrice: 5000
 
-# region HV-7 Heavy
+# region ~HV~RI-7 Heavy
 - type: entity
   parent: [ ClothingOuterHardsuitJuggernaut, BaseFactionGearTSFT3 ]
   id: ClothingOuterHardsuitHV7
@@ -315,13 +316,14 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
+        Blunt: 0.6
         Slash: 0.25
         Piercing: 0.25
         Shock: 0.6
         Heat: 0.4
         Radiation: 0.6
         Caustic: 0.6
+        Poison: 0.8
   - type: StaminaDamageResistance
     coefficient: 0.2
   - type: ClothingSpeedModifier
@@ -386,3 +388,188 @@
       head: ClothingHeadHelmetHardsuitHV7
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+# region Higaris Victories
+- type: entity
+  parent: [ ClothingOuterHardsuitJuggernaut, BaseFactionGearTSFT3 ]
+  id: ClothingOuterHardsuitHVVigilance
+  name: HV MP 9 «Vigilance»
+  description: Higaris Victories' military prototype 9, codenamed «Vigilance».
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_vigilance.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_vigilance.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.45
+        Piercing: 0.4
+        Shock: 0.8
+        Heat: 0.6
+        Radiation: 0.8
+        Caustic: 0.8
+        Poison: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.7
+    controlMultiplier: 1.15
+    fuelUsageMultiplier: 1.6
+    combatStabilityBonus: 0.1
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHVVigilance
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 90000
+    vendPrice: 50000
+
+- type: entity
+  parent: [ ClothingOuterHardsuitJuggernaut, EnergyShieldClothing, BaseFactionGearTSFT3 ]
+  id: ClothingOuterHardsuitHVMilitant
+  name: HV MP 0-4 «Militant»
+  description: Higaris Victories' military prototype 0-4, codenamed «Militant».
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_militant.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_militant.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Shock: 0.8
+        Heat: 0.5
+        Radiation: 0.5
+        Caustic: 0.6
+        Poison: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.7
+    controlMultiplier: 1.15
+    fuelUsageMultiplier: 1.6
+    combatStabilityBonus: 0.1
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHVMilitant
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 95000
+    vendPrice: 60000
+  # Компоненты щита
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.7
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.7
+      flatReductions:
+        Heat: 5
+        Piercing: 5
+    passiveBlockFraction: 0.8
+    activeBlockFraction: 0.8
+    isClothing: true
+  - type: Damageable
+    damageContainer: Shield
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 0.10
+  - type: RechargeableBlocking
+  - type: UseDelay
+    delay: 10
+
+- type: entity
+  parent: [ ClothingOuterHardsuitJuggernaut, BaseFactionGearTSFT3 ]
+  id: ClothingOuterHardsuitHVStealh
+  name: HV MP-33R «Imperceptible»
+  description: Higaris Victories' military prototype 33R, codenamed «Imperceptible».
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_stealh.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_stealh.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.6
+        Heat: 0.7
+        Shock: 0.9
+        Radiation: 0.7
+        Caustic: 0.8
+        Poison: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.99
+    sprintModifier: 0.99
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.7
+    controlMultiplier: 1.15
+    fuelUsageMultiplier: 1.6
+    combatStabilityBonus: 0.1
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHVStealh
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 120000
+    vendPrice: 90000

@@ -2,7 +2,6 @@
 - type: roleLoadout
   id: JobNeophyte # Cadet
   groups:
-  - EmpireHead
   - EmpireNeck
   - EmpireFace
   - EmpireGlasses
@@ -31,7 +30,6 @@
 - type: roleLoadout
   id: JobAuxilia # Soldier
   groups:
-  - EmpireHead
   - EmpireNeck
   - EmpireFace
   - EmpireGlasses
@@ -60,7 +58,6 @@
 - type: roleLoadout
   id: JobPraetorian # Officer
   groups:
-  - EmpireHead
   - EmpireNeck
   - EmpireFace
   - EmpireGlasses
@@ -89,7 +86,6 @@
 - type: roleLoadout
   id: JobTessarian # Officer
   groups:
-  - EmpireHead
   - EmpireNeck
   - EmpireFace
   - EmpireGlasses
@@ -114,17 +110,16 @@
   - EmpireMag
   canCustomizeName: true
 
-# region Diplomacy
+# region Consul
 # TODO: Another loadout
 - type: roleLoadout
   id: JobConsul # Diplomacy
   groups:
-  - EmpireHead
   - EmpireNeck
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava
-  - EmpireOfficerJumpsuit
+  - EmpireConsulJumpsuit
   - EmpireOuterClothing
   - EmpireBelt
   - EmpireGloves
@@ -148,7 +143,6 @@
 - type: roleLoadout
   id: JobInquisitor # Inquisitor
   groups:
-  - EmpireHead
   - EmpireInquisitorNeck
   - EmpireFace
   - EmpireGlasses
@@ -177,13 +171,12 @@
 - type: roleLoadout
   id: JobPraefect # Lord
   groups:
-  - EmpireHead
-  - EmpireNeck
+  - EmpirePreafectNeck
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava
   - EmpireCommanderJumpsuit
-  - EmpireOuterClothing
+  - EmpireCommanderOuterClothing
   - EmpireBelt
   - EmpireGloves
   - EmpireShoes

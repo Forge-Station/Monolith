@@ -1,4 +1,39 @@
 # region Empire
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatEmpirePreafect
+  name: lord-preafect cap
+  description: A lord's luxurious cap, indicating his allegiance to aristocratic circles.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/preafect.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/preafect.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatEmpirePreafectOrange
+  name: lord-preafect cap
+  description: A lord's luxurious cap, signifying his allegiance to the Imperial military forces.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/preafect_o.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/preafect_o.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatEmpirePreafectViolet
+  name: lord-preafect hat
+  description: A lord's luxurious hat symbolizing his devotion to the church.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/preafect_v.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/preafect_v.rsi
 
 # region Renegate
 - type: entity

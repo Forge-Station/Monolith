@@ -1,0 +1,38 @@
+- type: techDiscipline
+  id: EmpireWeapon
+  name: research-discipline-empire-weaponry
+  color: "#ab7a52"
+  icon:
+    sprite: Forge/Misc/empire_research.rsi
+    state: weaponry
+  tierPrerequisites:
+    1: 0
+    2: 0.75
+    3: 0.75
+  uiName: EMP-WP
+
+- type: techDiscipline
+  id: EmpireEquipment
+  name: research-discipline-empire-equipment
+  color: "#ab7a52"
+  icon:
+    sprite: Forge/Misc/empire_research.rsi
+    state: equipment
+  tierPrerequisites:
+    1: 0
+    2: 0.5
+    3: 0.5
+  uiName: EMP-EQ
+
+- type: techDiscipline
+  id: EmpireShip
+  name: research-discipline-empire-shipyard
+  color: "#ab7a52"
+  icon:
+    sprite: Forge/Misc/empire_research.rsi
+    state: shipyard
+  tierPrerequisites:
+    1: 0
+    2: 0.6
+    3: 0.6
+  uiName: EMP-VH

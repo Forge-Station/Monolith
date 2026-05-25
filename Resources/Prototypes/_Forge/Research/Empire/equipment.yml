@@ -1,0 +1,74 @@
+
+- type: technology
+  id: EmpireBasicEquipment
+  name: research-technology-empire-light
+  entityIcon: ClothingOuterHardsuitRI14
+  discipline: EmpireEquipment
+  tier: 1
+  cost: 35000
+  recipeUnlocks:
+  - ClothingOuterHardsuitRI14
+  - ClothingOuterHardsuitRI14m
+  - ClothingOuterHardsuitRI14i
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 20, 1
+
+- type: technology
+  id: EmpireAdvancedEquipment
+  name: research-technology-empire-adv
+  entityIcon: ClothingOuterHardsuitRI22
+  discipline: EmpireEquipment
+  tier: 2
+  cost: 55000
+  recipeUnlocks:
+  - ClothingOuterHardsuitRI22
+  - ClothingOuterHardsuitRI22i
+  - ClothingOuterHardsuitRI22c
+  technologyPrerequisites:
+  - EmpireBasicEquipment
+  - UniversalMaterialResearchT2
+  position: 20, 6
+
+
+- type: technology
+  id: EmpireHardsuitVigilance
+  name: research-technology-empire-prototype-vigilance
+  entityIcon: ClothingOuterHardsuitHVVigilance
+  discipline: EmpireEquipment
+  tier: 2
+  cost: 80000
+  recipeUnlocks:
+  - ClothingOuterHardsuitHVVigilance
+  technologyPrerequisites:
+  - EmpireAdvancedEquipment
+  - UniversalMaterialResearchT3
+  position: 20, 11
+
+- type: technology
+  id: EmpireHardsuitMilitant
+  name: research-technology-empire-prototype-militant
+  entityIcon: ClothingOuterHardsuitHVMilitant
+  discipline: EmpireEquipment
+  tier: 2
+  cost: 80000
+  recipeUnlocks:
+  - ClothingOuterHardsuitHVMilitant
+  technologyPrerequisites:
+  - EmpireAdvancedEquipment
+  - UniversalMaterialResearchT3
+  position: 21, 12
+
+- type: technology
+  id: EmpireHardsuitStealh
+  name: research-technology-empire-prototype-stealh
+  entityIcon: ClothingOuterHardsuitHVStealh
+  discipline: EmpireEquipment
+  tier: 2
+  cost: 80000
+  recipeUnlocks:
+  - ClothingOuterHardsuitHVStealh
+  technologyPrerequisites:
+  - EmpireAdvancedEquipment
+  - UniversalMaterialResearchT3
+  position: 21, 12

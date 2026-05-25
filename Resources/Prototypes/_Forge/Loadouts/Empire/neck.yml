@@ -1,0 +1,42 @@
+- type: loadout
+  id: EmpireIFFOrange
+  equipment:
+    neck: ClothingNeckIFFOrange
+
+- type: loadout
+  id: EmpireIFFPurple
+  equipment:
+    neck: ClothingNeckIFFPurple
+
+#region Preafect
+- type: loadout
+  id: ClothingNeckCloakEmpirePreafect
+  # name:
+  # description:
+  previewEntity: ClothingNeckCloakEmpirePreafect
+  equipment:
+    head: ClothingHeadHatEmpirePreafect
+    neck: ClothingNeckCloakEmpirePreafect
+
+- type: loadout
+  id: ClothingNeckCloakEmpirePreafectOrange
+  # name:
+  # description:
+  previewEntity: ClothingNeckCloakEmpirePreafectOrange
+  equipment:
+    head: ClothingHeadHatEmpirePreafectOrange
+    neck: ClothingNeckCloakEmpirePreafectOrange
+
+- type: loadout
+  id: ClothingNeckCloakEmpirePreafectViolet
+  # name:
+  # description:
+  previewEntity: ClothingNeckCloakEmpirePreafectViolet
+  equipment:
+    head: ClothingHeadHatEmpirePreafectViolet
+    neck: ClothingNeckCloakEmpirePreafectViolet
+
+- type: loadout
+  id: ClothingNeckCloakEmpirePreafectDiplomacy
+  equipment:
+    neck: ClothingNeckCloakEmpirePreafectDiplomacy

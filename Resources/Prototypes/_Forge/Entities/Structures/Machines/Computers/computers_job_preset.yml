@@ -239,10 +239,8 @@
     - map: ["computerLayerBody"]
       sprite: Forge/Structures/Machines/computers.rsi
       state: computer_emp
-    # - map: ["computerLayerBody"]
-    #   state: computer
-    # - map: ["computerLayerKeyboard"]
-    #   state: generic_keyboard
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
     - map: ["computerLayerScreen"]
       sprite: Forge/Structures/Machines/job_preset_screens.rsi
       state: emp

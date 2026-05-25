@@ -21,6 +21,7 @@
   startingGear: InquisitorGear
   alwaysUseSpawner: true
   icon: JobIconEmpireInquisitor
+  assignedCompany: Imperial
   supervisors: job-supervisors-inquisitor-grand
   weight: 30
   displayWeight: 30
@@ -29,7 +30,7 @@
   access:
   - EmpireInqusitor
   accessGroups:
-  - SpecialEmpireAccess
+  - CommandEmpireAccess
   special:
   - !type:AddComponentSpecial
     components:

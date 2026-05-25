@@ -499,7 +499,7 @@
 
 - type: accent
   id: german
-  replacementChance: 0.8
+  replacementChance: 0.95
   wordReplacements:
     accent-german-words-1: accent-german-words-replace-1
     accent-german-words-1-2: accent-german-words-replace-1

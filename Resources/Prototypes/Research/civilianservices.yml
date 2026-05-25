@@ -209,6 +209,12 @@
   - ForgeRiplyRightHand # Forge-Change
   - ForgeCyberneticLiver # Forge-Change
   - ForgeCyberneticKidneys # Forge-Change
+  - ForgeBlueprintCyberneticArms # Forge-Change
+  - ForgeBlueprintCyberneticLegs # Forge-Change
+  - ForgeBlueprintCyberneticHands # Forge-Change
+  - ForgeBlueprintCyberneticEyes # Forge-Change
+  - ForgeBlueprintCyberneticOrgans # Forge-Change
+  - ForgeBlueprintSubdermalImplants # Forge-Change
   technologyPrerequisites:
   - AdvancedTreatment
   position: -2, 12

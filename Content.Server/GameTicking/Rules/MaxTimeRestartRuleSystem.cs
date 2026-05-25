@@ -9,11 +9,11 @@ using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class MaxTimeRestartRuleSystem : GameRuleSystem<MaxTimeRestartRuleComponent>
+public sealed partial class MaxTimeRestartRuleSystem : GameRuleSystem<MaxTimeRestartRuleComponent>
 {
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!; // Forge-Change
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!; // Forge-Change
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!; // Forge-Change
+    [Dependency] private RoundEndSystem _roundEnd = default!; // Forge-Change
 
     public override void Initialize()
     {

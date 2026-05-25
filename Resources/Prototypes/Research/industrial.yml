@@ -215,6 +215,8 @@
   - ShipRepairDeviceAmmo
   - NFBlueprintRCDAmmo
   # Mono edit end 
+  - ForgeBlueprintAdvancedTools # Forge-change
+  - ForgeBlueprintAdvancedShipRepairTools # Forge-change
   technologyPrerequisites:
   - SuperParts
   position: -1, 18

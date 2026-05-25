@@ -3,13 +3,13 @@ accent-french-words-1-2 = ага
 accent-french-words-replace-1 = oui
 
 accent-french-words-2 = нет
-accent-french-words-2-2 = не
+accent-french-words-2-2 = нет
 accent-french-words-2-3 = неа
 accent-french-words-2-4 = нету
 accent-french-words-replace-2 = non
 
-accent-french-words-3 = the
-accent-french-words-replace-3 = ze
+accent-french-words-3 = не.
+accent-french-words-replace-3 = non.
 
 accent-french-words-4 = дерьмо
 accent-french-words-4-2 = пиздец
@@ -438,12 +438,12 @@ accent-french-words-110-3 = капуста
 accent-french-words-110-4 = бабло
 accent-french-words-replace-110 = argent
 
-accent-french-words-111 = рынок
-accent-french-words-111-2 = базар
+accent-french-words-111 = тц
+accent-french-words-111-2 = торговый центр
 accent-french-words-replace-111 = marché
 
 accent-french-words-112 = магазин
-accent-french-words-112-2 = лавка
+accent-french-words-112-2 = карго
 accent-french-words-replace-112 = boutique
 
 accent-french-words-113 = собака

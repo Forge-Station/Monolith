@@ -44,8 +44,6 @@ public sealed partial class AtmosphereSystem
 
     private void OnGridAtmosphereInit(EntityUid uid, GridAtmosphereComponent component, ComponentInit args)
     {
-        base.Initialize();
-
         EnsureComp<GasTileOverlayComponent>(uid);
         foreach (var tile in component.Tiles.Values)
         {
@@ -103,8 +101,8 @@ public sealed partial class AtmosphereSystem
                 // That looks bad, of course. We want to avoid that! Anyway that's a bit more complicated so out of scope.
 
                 // Invalidate the tile, it's redundant but redundancy is good! Also HashSet so really, no duplicates.
-                AddInvalidatedTile(originalGridAtmos, indices);
-                AddInvalidatedTile(newGridAtmos, indices);
+                originalGridAtmos.InvalidatedCoords.Add(indices);
+                newGridAtmos.InvalidatedCoords.Add(indices);
             }
         }
     }
@@ -323,13 +321,13 @@ public sealed partial class AtmosphereSystem
 
         foreach (var indices in atmos.Tiles.Keys)
         {
-            AddInvalidatedTile(atmos, indices);
+            atmos.InvalidatedCoords.Add(indices);
         }
 
         var enumerator = _map.GetAllTilesEnumerator(uid, grid);
         while (enumerator.MoveNext(out var tile))
         {
-            AddInvalidatedTile(atmos, tile.Value.GridIndices);
+            atmos.InvalidatedCoords.Add(tile.Value.GridIndices);
         }
     }
 

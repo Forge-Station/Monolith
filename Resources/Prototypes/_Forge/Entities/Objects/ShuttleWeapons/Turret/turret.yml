@@ -139,7 +139,7 @@
       tags:
       - 220mmCartridge
     capacity: 24
-    proto: 220mmCartridge
+    proto: 220mmCartridgeAPHE
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
   - type: ShipGunType

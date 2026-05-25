@@ -98,6 +98,7 @@
   cost: 15000
   recipeUnlocks:
   - JetpackVoid
+  - ForgeBlueprintJetpackVoid # Forge-change
   technologyPrerequisites:
   - Shuttlecraft
   position: -4, 7

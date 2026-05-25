@@ -7,12 +7,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Chemistry.EntitySystems;
 
-public sealed class SolutionRegenerationSystem : EntitySystem
+public sealed partial class SolutionRegenerationSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    private static readonly TimeSpan MinRegenInterval = TimeSpan.FromSeconds(0.1); // Forge-Change
-    private static readonly TimeSpan ResolveFailureRetry = TimeSpan.FromSeconds(2); // Forge-Change
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    private static TimeSpan MinRegenInterval = TimeSpan.FromSeconds(0.1); // Forge-Change
+    private static TimeSpan ResolveFailureRetry = TimeSpan.FromSeconds(2); // Forge-Change
 
     public override void Update(float frameTime)
     {

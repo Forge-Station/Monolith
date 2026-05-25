@@ -37,7 +37,7 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server.Carrying
 {
-    public sealed class CarryingSystem : EntitySystem
+    public sealed partial class CarryingSystem : EntitySystem
     {
         [Dependency] private readonly VirtualItemSystem _virtualItemSystem = default!;
         [Dependency] private readonly CarryingSlowdownSystem _slowdown = default!;

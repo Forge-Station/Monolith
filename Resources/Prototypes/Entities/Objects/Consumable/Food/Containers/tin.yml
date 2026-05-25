@@ -67,6 +67,13 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: ToxinTrash
+          Quantity: 5
   - type: Tag
     tags:
     - Trash
@@ -74,6 +81,8 @@
     lifetime: 600
   - type: StaticPrice # Frontier
     price: 6 # Frontier
+  - type: Food
+    requiresSpecialDigestion: true
 
 # Tins
 
@@ -92,7 +101,7 @@
     - sweet
     - funny
   - type: Food
-    trash: 
+    trash:
     - FoodTinPeachesTrash
   - type: Tag
     tags:
@@ -115,7 +124,7 @@
   - type: Sprite
     sprite: Objects/Consumable/Food/Tins/maint_peaches.rsi
   - type: Food
-    trash: 
+    trash:
     - FoodTinPeachesMaintTrash
 
 # only exists for backwards compatibility with a few maps, nothing else uses it
@@ -153,7 +162,7 @@
     - salty
     - cheap
   - type: Food
-    trash: 
+    trash:
     - FoodTinBeansTrash
 
 - type: entity
@@ -183,7 +192,7 @@
     - salty
     - cheap
   - type: Food
-    trash: 
+    trash:
     - FoodTinMRETrash
   - type: Tag
     tags:

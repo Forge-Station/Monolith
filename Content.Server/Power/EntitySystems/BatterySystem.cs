@@ -1,9 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Cargo.Systems;
-using Content.Server.Emp;
-using Content.Shared.Emp; // Frontier: Upstream - #28984
+using Content.Shared.Emp;
 using Content.Server.Power.Components;
 using Content.Shared.Examine;
+using Content.Shared.Power;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Timing;
 using JetBrains.Annotations;
@@ -15,16 +17,11 @@ using Content.Server._NF.Power.Components; // Frontier
 namespace Content.Server.Power.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class BatterySystem : EntitySystem
+    public sealed partial class BatterySystem : SharedBatterySystem
     {
-        [Dependency] protected readonly IGameTiming Timing = default!;
+        [Dependency] protected IGameTiming Timing = default!;
 
-        [Dependency] private readonly SharedContainerSystem _containers = default!; // WD EDIT
-        private readonly HashSet<EntityUid> _networkBatteries = new();
-        private readonly List<EntityUid> _staleNetworkBatteries = new();
-        private bool _networkBatteryRegistryDirty = true;
-        private float _networkBatteryRegistryAccumulator;
-        private const float NetworkBatteryRegistryRebuildInterval = 10f;
+        [Dependency] private SharedContainerSystem _containers = default!; // WD EDIT
 
         // Mono
         private float _updateInterval = 1f;
@@ -38,63 +35,11 @@ namespace Content.Server.Power.EntitySystems
             SubscribeLocalEvent<PowerNetworkBatteryComponent, RejuvenateEvent>(OnNetBatteryRejuvenate);
             SubscribeLocalEvent<BatteryComponent, RejuvenateEvent>(OnBatteryRejuvenate);
             SubscribeLocalEvent<BatteryComponent, PriceCalculationEvent>(CalculateBatteryPrice);
-            SubscribeLocalEvent<BatteryComponent, EmpPulseEvent>(OnEmpPulse);
-            SubscribeLocalEvent<BatteryComponent, EmpDisabledRemoved>(OnEmpDisabledRemoved); // Frontier: Upstream - #28984
-            SubscribeLocalEvent<BatteryComponent, ComponentInit>(OnBatteryComponentInit);
-            SubscribeLocalEvent<BatteryComponent, ComponentShutdown>(OnBatteryComponentShutdown);
+            SubscribeLocalEvent<BatteryComponent, ChangeChargeEvent>(OnChangeCharge);
+            SubscribeLocalEvent<BatteryComponent, GetChargeEvent>(OnGetCharge);
 
             SubscribeLocalEvent<NetworkBatteryPreSync>(PreSync);
             SubscribeLocalEvent<NetworkBatteryPostSync>(PostSync);
-        }
-
-        private void OnBatteryComponentInit(EntityUid uid, BatteryComponent component, ComponentInit args)
-        {
-            UpdateNetworkBatteryTracking(uid);
-            _networkBatteryRegistryDirty = true;
-        }
-
-        private void OnBatteryComponentShutdown(EntityUid uid, BatteryComponent component, ComponentShutdown args)
-        {
-            _networkBatteries.Remove(uid);
-            _networkBatteryRegistryDirty = true;
-        }
-
-        private void UpdateNetworkBatteryTracking(EntityUid uid)
-        {
-            if (HasComp<PowerNetworkBatteryComponent>(uid) && HasComp<BatteryComponent>(uid))
-            {
-                _networkBatteries.Add(uid);
-                return;
-            }
-
-            _networkBatteries.Remove(uid);
-        }
-
-        private void CleanupStaleNetworkBatteries()
-        {
-            if (_staleNetworkBatteries.Count == 0)
-                return;
-
-            foreach (var uid in _staleNetworkBatteries)
-            {
-                _networkBatteries.Remove(uid);
-            }
-
-            _staleNetworkBatteries.Clear();
-        }
-
-        private void RebuildNetworkBatteryRegistry()
-        {
-            _networkBatteries.Clear();
-
-            var enumerator = AllEntityQuery<PowerNetworkBatteryComponent, BatteryComponent>();
-            while (enumerator.MoveNext(out var uid, out _, out _))
-            {
-                _networkBatteries.Add(uid);
-            }
-
-            _networkBatteryRegistryDirty = false;
-            _networkBatteryRegistryAccumulator = 0f;
         }
 
         private void OnNetBatteryRejuvenate(EntityUid uid, PowerNetworkBatteryComponent component, RejuvenateEvent args)
@@ -130,44 +75,24 @@ namespace Content.Server.Power.EntitySystems
 
         private void PreSync(NetworkBatteryPreSync ev)
         {
-            _networkBatteryRegistryAccumulator += 0.5f;
-            if (_networkBatteryRegistryDirty || _networkBatteryRegistryAccumulator >= NetworkBatteryRegistryRebuildInterval)
-            {
-                RebuildNetworkBatteryRegistry();
-            }
-
             // Ignoring entity pausing. If the entity was paused, neither component's data should have been changed.
-            foreach (var uid in _networkBatteries)
+            var enumerator = AllEntityQuery<PowerNetworkBatteryComponent, BatteryComponent>();
+            while (enumerator.MoveNext(out var netBat, out var bat))
             {
-                if (!TryComp<PowerNetworkBatteryComponent>(uid, out var netBat) || !TryComp<BatteryComponent>(uid, out var bat))
-                {
-                    _staleNetworkBatteries.Add(uid);
-                    continue;
-                }
-
                 DebugTools.Assert(bat.CurrentCharge <= bat.MaxCharge && bat.CurrentCharge >= 0);
                 netBat.NetworkBattery.Capacity = bat.MaxCharge;
                 netBat.NetworkBattery.CurrentStorage = bat.CurrentCharge;
             }
-
-            CleanupStaleNetworkBatteries();
         }
 
         private void PostSync(NetworkBatteryPostSync ev)
         {
             // Ignoring entity pausing. If the entity was paused, neither component's data should have been changed.
-            foreach (var uid in _networkBatteries)
+            var enumerator = AllEntityQuery<PowerNetworkBatteryComponent, BatteryComponent>();
+            while (enumerator.MoveNext(out var uid, out var netBat, out var bat))
             {
-                if (!TryComp<PowerNetworkBatteryComponent>(uid, out var netBat) || !TryComp<BatteryComponent>(uid, out var bat))
-                {
-                    _staleNetworkBatteries.Add(uid);
-                    continue;
-                }
-
                 SetCharge(uid, netBat.NetworkBattery.CurrentStorage, bat);
             }
-
-            CleanupStaleNetworkBatteries();
         }
 
         public override void Update(float frameTime)
@@ -202,28 +127,22 @@ namespace Content.Server.Power.EntitySystems
             args.Price += component.CurrentCharge * component.PricePerJoule;
         }
 
-        private void OnEmpPulse(EntityUid uid, BatteryComponent component, ref EmpPulseEvent args)
+        private void OnChangeCharge(Entity<BatteryComponent> entity, ref ChangeChargeEvent args)
         {
-            args.Affected = true;
-            args.Disabled = true; // Frontier: Upstream - #28984
-            UseCharge(uid, args.EnergyConsumption, component);
-            // Apply a cooldown to the entity's self recharge if needed to avoid it immediately self recharging after an EMP.
-            TrySetChargeCooldown(uid);
-        }
-
-        /// <summary>
-        /// if a disabled battery is put into a recharged, allow the recharger to start recharging again after the disable ends.
-        /// </summary>
-        private void OnEmpDisabledRemoved(EntityUid uid, BatteryComponent component, ref EmpDisabledRemoved args) // Frontier: Upstream - #28984
-        {
-            if (!TryComp<ChargingComponent>(uid, out var charging))
+            if (!TryComp<ChargingComponent>(entity, out var charging))
                 return;
 
             var ev = new ChargerUpdateStatusEvent();
             RaiseLocalEvent(charging.ChargerUid, ref ev);
         }
 
-        public float UseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
+        private void OnGetCharge(Entity<BatteryComponent> ent, ref GetChargeEvent args)
+        {
+            args.CurrentCharge += ent.Comp.CurrentCharge;
+            args.MaxCharge += ent.Comp.MaxCharge;
+        }
+
+        public override float UseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
         {
             if (value <= 0 || !Resolve(uid, ref battery) || battery.CurrentCharge == 0)
                 return 0;
@@ -240,7 +159,7 @@ namespace Content.Server.Power.EntitySystems
             return delta;
         }
 
-        public void SetMaxCharge(EntityUid uid, float value, BatteryComponent? battery = null)
+        public override void SetMaxCharge(EntityUid uid, float value, BatteryComponent? battery = null)
         {
             if (!Resolve(uid, ref battery))
                 return;
@@ -271,10 +190,27 @@ namespace Content.Server.Power.EntitySystems
             var ev = new ChargeChangedEvent(battery.CurrentCharge, battery.MaxCharge);
             RaiseLocalEvent(uid, ref ev);
         }
+
         /// <summary>
-        /// Checks if the entity has a self recharge and puts it on cooldown if applicable.
+        /// Changes the current battery charge by some value
         /// </summary>
-        public void TrySetChargeCooldown(EntityUid uid, float value = -1)
+        public override float ChangeCharge(EntityUid uid, float value, BatteryComponent? battery = null)
+        {
+            if (!Resolve(uid, ref battery))
+                return 0;
+
+            var newValue = Math.Clamp(battery.CurrentCharge + value, 0, battery.MaxCharge);
+            var delta = newValue - battery.CurrentCharge;
+            battery.CurrentCharge = newValue;
+
+            TrySetChargeCooldown(uid);
+
+            var ev = new ChargeChangedEvent(battery.CurrentCharge, battery.MaxCharge);
+            RaiseLocalEvent(uid, ref ev);
+            return delta;
+        }
+
+        public override void TrySetChargeCooldown(EntityUid uid, float value = -1)
         {
             if (!TryComp<BatterySelfRechargerComponent>(uid, out var batteryself))
                 return;
@@ -309,7 +245,7 @@ namespace Content.Server.Power.EntitySystems
         /// <summary>
         ///     If sufficient charge is available on the battery, use it. Otherwise, don't.
         /// </summary>
-        public bool TryUseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
+        public override bool TryUseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
         {
             if (!Resolve(uid, ref battery, false) || value > battery.CurrentCharge)
                 return false;

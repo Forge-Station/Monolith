@@ -11,13 +11,12 @@ namespace Content.Server._Mono.Cleanup;
 /// <summary>
 ///     System with helper methods for entity cleanup.
 /// </summary>
-public sealed class CleanupHelperSystem : EntitySystem
+public sealed partial class CleanupHelperSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private List<Entity<MapGridComponent>> _gridsFound = new();
     private HashSet<Entity<MindContainerComponent>> _mindsFound = new();

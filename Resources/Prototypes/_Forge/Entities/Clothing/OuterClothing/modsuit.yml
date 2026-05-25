@@ -204,3 +204,42 @@
     coefficient: 0.4
   - type: FireProtection
     reduction: 0.1
+# ARS Omnissia
+
+- type: entity
+  parent: ClothingModsuitChestplateBase
+  id: ClothingModsuitChestplateOmnissia
+  name: ARS Omnissia modsuit chestplate
+  description: Reinforced repair plating with full radiation shielding when sealed.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Modsuits/omnissiamod.rsi
+    layers:
+    - state: chestplate
+    - state: chestplate-sealed
+      visible: false
+      map: [ "sealed" ]
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING-sealed
+      outerClothing-vox:
+      - state: equipped-OUTERCLOTHING-sealed-vox
+      outerClothing-resomi:
+      - state: equipped-OUTERCLOTHING-sealed-resomi
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: FireProtection
+    reduction: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.75
+        Slash: 0.75
+        Piercing: 0.75
+        Heat: 0.80
+        Caustic: 0.80
+        Shock: 0.60
+        Radiation: 0.0

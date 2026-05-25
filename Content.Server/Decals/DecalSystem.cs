@@ -26,18 +26,18 @@ using ChunkIndicesEnumerator = Robust.Shared.Map.Enumerators.ChunkIndicesEnumera
 
 namespace Content.Server.Decals
 {
-    public sealed class DecalSystem : SharedDecalSystem
+    public sealed partial class DecalSystem : SharedDecalSystem
     {
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IAdminManager _adminManager = default!;
-        [Dependency] private readonly ITileDefinitionManager _tileDefMan = default!;
-        [Dependency] private readonly IParallelManager _parMan = default!;
-        [Dependency] private readonly ChunkingSystem _chunking = default!;
-        [Dependency] private readonly IConfigurationManager _conf = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IAdminManager _adminManager = default!;
+        [Dependency] private IParallelManager _parMan = default!;
+        [Dependency] private ChunkingSystem _chunking = default!;
+        [Dependency] private IConfigurationManager _conf = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private SharedMapSystem _mapSystem = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private TurfSystem _turf = default!;
 
         private readonly Dictionary<NetEntity, HashSet<Vector2i>> _dirtyChunks = new();
         private readonly Dictionary<ICommonSession, Dictionary<NetEntity, HashSet<Vector2i>>> _previousSentChunks = new();
@@ -55,6 +55,8 @@ namespace Content.Server.Decals
         private static readonly ThreadLocal<ObjectPool<Dictionary<NetEntity, HashSet<Vector2i>>>> ChunkViewerPool = // Forge-Change
             new(() => new DefaultObjectPool<Dictionary<NetEntity, HashSet<Vector2i>>>( // Forge-Change
                 new DefaultPooledObjectPolicy<Dictionary<NetEntity, HashSet<Vector2i>>>(), 64)); // Forge-Change
+
+        private EntityQuery<DecalGridComponent> _decalGridQuery; // Mono
 
         public override void Initialize()
         {
@@ -74,6 +76,8 @@ namespace Content.Server.Decals
             SubscribeLocalEvent<PostGridSplitEvent>(OnGridSplit);
 
             Subs.CVar(_conf, CVars.NetPVS, OnPvsToggle, true);
+
+            _decalGridQuery = GetEntityQuery<DecalGridComponent>(); // Mono
         }
 
         private void OnPvsToggle(bool value)
@@ -168,7 +172,7 @@ namespace Content.Server.Decals
 
             foreach (var change in args.Changes)
             {
-                if (!change.NewTile.IsSpace(_tileDefMan))
+                if (!_turf.IsSpace(change.NewTile))
                     continue;
 
                 var indices = GetChunkIndices(change.GridIndices);
@@ -311,7 +315,7 @@ namespace Content.Server.Decals
             if (!TryComp(gridId, out MapGridComponent? grid))
                 return false;
 
-            if (_mapSystem.GetTileRef(gridId.Value, grid, coordinates).IsSpace(_tileDefMan))
+            if (_turf.IsSpace(_mapSystem.GetTileRef(gridId.Value, grid, coordinates)))
                 return false;
 
             if (!TryComp(gridId, out DecalGridComponent? comp))

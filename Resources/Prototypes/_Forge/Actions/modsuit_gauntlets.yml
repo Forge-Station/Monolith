@@ -1,0 +1,9 @@
+- type: entity
+  id: ActionModsuitGauntletToolsMenu
+  name: Integrated gauntlet tools
+  description: Open the radial menu to deploy integrated repair tools.
+  components:
+  - type: InstantAction
+    clientExclusive: true
+    icon: { sprite: Forge/Clothing/Hands/Modsuits/omnissiamod.rsi, state: gauntlets }
+    event: !type:OpenModsuitGauntletToolsMenuActionEvent {}

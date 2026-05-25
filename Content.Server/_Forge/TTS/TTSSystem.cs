@@ -28,6 +28,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly TTSManager _ttsManager = default!;
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly IRobustRandom _rng = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     private readonly List<string> _sampleText =
         new()
@@ -89,10 +90,10 @@ public sealed partial class TTSSystem : EntitySystem
         if (TryComp<MindContainerComponent>(uid, out var mindCon)
             && mindCon.Mind is { } mindUid
             && TryComp<MindComponent>(mindUid, out var mind)
-            && mind.Session != null)
+            && mind.UserId is { } userId
+            && _player.TryGetSessionById(userId, out var session))
         {
-            var channel = mind.Session.Channel;
-            if (!_netCfg.GetClientCVar(channel, ForgeVars.LocalTTSEnabled))
+            if (!_netCfg.GetClientCVar(session.Channel, ForgeVars.LocalTTSEnabled))
                 return;
         }
 

@@ -3,7 +3,6 @@ using Content.Server.Atmos.Piping.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Maps;
-using Prometheus; // Forge-Change
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
@@ -14,35 +13,9 @@ namespace Content.Server.Atmos.EntitySystems
 {
     public sealed partial class AtmosphereSystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
 
         private readonly Stopwatch _simulationStopwatch = new();
-        // Forge-Change-start
-        private static readonly Histogram AtmosPhaseDurationMs = Metrics.CreateHistogram(
-            "atmos_phase_duration_ms",
-            "Execution time per atmos processing phase (milliseconds).",
-            new HistogramConfiguration
-            {
-                LabelNames = ["phase"],
-                Buckets = Histogram.ExponentialBuckets(0.05, 2, 12),
-            });
-
-        private static readonly Counter AtmosPhaseProcessedCount = Metrics.CreateCounter(
-            "atmos_phase_processed_total",
-            "Processed item count per atmos processing phase.",
-            new CounterConfiguration
-            {
-                LabelNames = ["phase"],
-            });
-
-        private static readonly Counter AtmosHighPressureLookupEntities = Metrics.CreateCounter(
-            "atmos_highpressure_lookup_entities_total",
-            "Entities returned by high-pressure tile lookups.");
-
-        private static readonly Counter AtmosHighPressureImpulses = Metrics.CreateCounter(
-            "atmos_highpressure_impulses_total",
-            "Impulses applied by high-pressure movement.");
-        // Forge-Change-end
 
         /// <summary>
         ///     Check current execution time every n instances processed.
@@ -53,193 +26,10 @@ namespace Content.Server.Atmos.EntitySystems
         ///     Check current execution time every n instances processed.
         /// </summary>
         private const int InvalidCoordinatesLagCheckIterations = 50;
-        private const int ColdChunkBackstopPerRun = 8; // Forge-Change
 
         private int _currentRunAtmosphereIndex;
         private bool _simulationPaused;
 
-        // Forge-Change-start
-        private static string PhaseMetricLabel(AtmosphereProcessingState phase)
-        {
-            return phase switch
-            {
-                AtmosphereProcessingState.Revalidate => "revalidate",
-                AtmosphereProcessingState.TileEqualize => "equalize",
-                AtmosphereProcessingState.ActiveTiles => "active",
-                AtmosphereProcessingState.ExcitedGroups => "excited",
-                AtmosphereProcessingState.HighPressureDelta => "highpressure",
-                AtmosphereProcessingState.Hotspots => "hotspot",
-                AtmosphereProcessingState.Superconductivity => "superconduction",
-                AtmosphereProcessingState.PipeNet => "pipenets",
-                AtmosphereProcessingState.AtmosDevices => "devices",
-                _ => "unknown",
-            };
-        }
-
-        private static void ObservePhaseMetrics(AtmosphereProcessingState phase, double elapsedMs, int processed)
-        {
-            var label = PhaseMetricLabel(phase);
-            AtmosPhaseDurationMs.WithLabels(label).Observe(elapsedMs);
-            if (processed > 0)
-                AtmosPhaseProcessedCount.WithLabels(label).Inc(processed);
-        }
-
-        private static void BeginRunList<T>(List<T> runList, ref int runIndex, HashSet<T> source)
-            where T : notnull
-        {
-            runList.Clear();
-            runList.EnsureCapacity(source.Count);
-            foreach (var entry in source)
-            {
-                runList.Add(entry);
-            }
-
-            runIndex = 0;
-        }
-
-        private enum ChunkRunType : byte
-        {
-            Revalidate,
-            Active,
-            HighPressure,
-            Hotspot,
-            Superconductivity,
-        }
-
-        // Forge-Change-start
-        private static bool ChunkHasWorkForType(AtmosChunkState chunkState, ChunkRunType type)
-        {
-            return type switch
-            {
-                ChunkRunType.Revalidate => chunkState.WorkFlags.HasFlag(AtmosChunkWorkFlags.Revalidate),
-                ChunkRunType.Active => chunkState.WorkFlags.HasFlag(AtmosChunkWorkFlags.Active),
-                ChunkRunType.HighPressure => chunkState.WorkFlags.HasFlag(AtmosChunkWorkFlags.HighPressure),
-                ChunkRunType.Hotspot => chunkState.WorkFlags.HasFlag(AtmosChunkWorkFlags.Hotspot),
-                ChunkRunType.Superconductivity => chunkState.WorkFlags.HasFlag(AtmosChunkWorkFlags.Superconductivity),
-                _ => false,
-            };
-        }
-
-        private bool TryDequeueDirtyChunk(GridAtmosphereComponent atmosphere, out Vector2i chunk)
-        {
-            if (atmosphere.DirtyChunkQueue.Count > 0)
-            {
-                chunk = atmosphere.DirtyChunkQueue.Dequeue();
-                atmosphere.DirtyChunkQueued.Remove(chunk);
-                return true;
-            }
-
-            chunk = default;
-            return false;
-        }
-
-        private void SeedColdChunkBackstop(GridAtmosphereComponent atmosphere, ChunkRunType type)
-        {
-            if (AtmosForceFullGridDebug || type == ChunkRunType.Revalidate || atmosphere.Chunks.Count == 0)
-                return;
-
-            var cursor = atmosphere.ColdChunkCursor;
-            if (cursor < 0 || cursor >= atmosphere.Chunks.Count)
-                cursor = 0;
-
-            var iter = 0;
-            var queued = 0;
-            foreach (var (chunkIndex, chunkState) in atmosphere.Chunks)
-            {
-                if (iter++ < cursor)
-                    continue;
-
-                if (ChunkHasWorkForType(chunkState, type))
-                {
-                    EnqueueDirtyChunk(atmosphere, chunkIndex);
-                    if (++queued >= ColdChunkBackstopPerRun)
-                        break;
-                }
-            }
-
-            atmosphere.ColdChunkCursor = (cursor + Math.Max(queued, 1)) % atmosphere.Chunks.Count;
-        }
-
-        private void BeginRunChunks(GridAtmosphereComponent atmosphere, EntityUid gridUid, ChunkRunType type)
-        {
-            atmosphere.CurrentRunChunks.Clear();
-            SeedColdChunkBackstop(atmosphere, type);
-
-            var queueCount = atmosphere.DirtyChunkQueue.Count;
-            for (var i = 0; i < queueCount; i++)
-            {
-                if (!TryDequeueDirtyChunk(atmosphere, out var chunkIndex))
-                    continue;
-
-                if (!TryGetChunkState(atmosphere, chunkIndex, out var chunkState) || chunkState == null)
-                    continue;
-
-                if (!ChunkHasWorkForType(chunkState, type))
-                {
-                    if (chunkState.WorkFlags != AtmosChunkWorkFlags.None)
-                        EnqueueDirtyChunk(atmosphere, chunkIndex);
-                    continue;
-                }
-
-                if (type != ChunkRunType.Revalidate && !ShouldProcessChunk(gridUid, atmosphere, chunkIndex, chunkState))
-                {
-                    EnqueueDirtyChunk(atmosphere, chunkIndex);
-                    continue;
-                }
-
-                atmosphere.CurrentRunChunks.Add(chunkIndex);
-
-                if (chunkState.WorkFlags != AtmosChunkWorkFlags.None)
-                    EnqueueDirtyChunk(atmosphere, chunkIndex);
-            }
-
-            atmosphere.CurrentRunChunkIndex = 0;
-        }
-        // Forge-Change-end
-
-        private void BeginRunTilesFromChunks(
-            GridAtmosphereComponent atmosphere,
-            Func<AtmosChunkState, HashSet<TileAtmosphere>> selector)
-        {
-            atmosphere.CurrentRunChunkIndex = 0;
-            atmosphere.CurrentRunChunkTiles.Clear();
-            atmosphere.CurrentRunChunkTileIndex = 0;
-            atmosphere.CurrentRunTileIndex = 0;
-        }
-
-        private bool TryGetNextRunTileFromChunks(
-            GridAtmosphereComponent atmosphere,
-            Func<AtmosChunkState, HashSet<TileAtmosphere>> selector,
-            out TileAtmosphere tile)
-        {
-            while (true)
-            {
-                if (atmosphere.CurrentRunChunkTileIndex < atmosphere.CurrentRunChunkTiles.Count)
-                {
-                    tile = atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex++];
-                    return true;
-                }
-
-                if (atmosphere.CurrentRunChunkIndex >= atmosphere.CurrentRunChunks.Count)
-                {
-                    tile = default!;
-                    return false;
-                }
-
-                var chunkIndex = atmosphere.CurrentRunChunks[atmosphere.CurrentRunChunkIndex++];
-                if (!TryGetChunkState(atmosphere, chunkIndex, out var chunk) || chunk == null)
-                    continue;
-
-                atmosphere.CurrentRunChunkTiles.Clear();
-                foreach (var chunkTile in selector(chunk))
-                {
-                    atmosphere.CurrentRunChunkTiles.Add(chunkTile);
-                }
-
-                atmosphere.CurrentRunChunkTileIndex = 0;
-            }
-        }
-        // Forge-Change-end
         private TileAtmosphere GetOrNewTile(EntityUid owner, GridAtmosphereComponent atmosphere, Vector2i index, bool invalidateNew = true)
         {
             var tile = atmosphere.Tiles.GetOrNew(index, out var existing);
@@ -247,11 +37,10 @@ namespace Content.Server.Atmos.EntitySystems
                 return tile;
 
             if (invalidateNew)
-                AddInvalidatedTile(atmosphere, index);
+                atmosphere.InvalidatedCoords.Add(index);
 
             tile.GridIndex = owner;
             tile.GridIndices = index;
-            TouchChunk(atmosphere, index);
             return tile;
         }
 
@@ -263,9 +52,8 @@ namespace Content.Server.Atmos.EntitySystems
         /// </summary>
         /// <param name="ent">The grid atmosphere in question.</param>
         /// <returns>Whether the process succeeded or got paused due to time constrains.</returns>
-        private bool ProcessRevalidate(Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent, out int processed) // Forge-Change
+        private bool ProcessRevalidate(Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent)
         {
-            processed = 0; // Forge-Change
             if (ent.Comp4.MapUid == null)
             {
                 Log.Error($"Attempted to process atmosphere on a map-less grid? Grid: {ToPrettyString(ent)}");
@@ -278,33 +66,16 @@ namespace Content.Server.Atmos.EntitySystems
 
             if (!atmosphere.ProcessingPaused)
             {
-                BeginRunChunks(atmosphere, uid, ChunkRunType.Revalidate);
                 atmosphere.CurrentRunInvalidatedTiles.Clear();
                 atmosphere.CurrentRunInvalidatedTiles.EnsureCapacity(atmosphere.InvalidatedCoords.Count);
-
-                for (var i = 0; i < atmosphere.CurrentRunChunks.Count; i++)
+                foreach (var indices in atmosphere.InvalidatedCoords)
                 {
-                    var chunkIndex = atmosphere.CurrentRunChunks[i];
-                    if (!TryGetChunkState(atmosphere, chunkIndex, out var chunk) || chunk == null)
-                        continue;
+                    var tile = GetOrNewTile(uid, atmosphere, indices, invalidateNew: false);
+                    atmosphere.CurrentRunInvalidatedTiles.Enqueue(tile);
 
-                    foreach (var indices in chunk.InvalidatedCoords)
-                    {
-                        var tile = GetOrNewTile(uid, atmosphere, indices, invalidateNew: false);
-                        atmosphere.CurrentRunInvalidatedTiles.Enqueue(tile);
-
-                        // Update tile.IsSpace and tile.MapAtmosphere, and tile.AirtightData.
-                        UpdateTileData(ent, mapAtmos, tile);
-                    }
-
-                    chunk.InvalidatedCoords.Clear();
-                    // Forge-Change-start
-                    RefreshChunkWorkFlags(chunk);
-                    if (chunk.WorkFlags != AtmosChunkWorkFlags.None)
-                        EnqueueDirtyChunk(atmosphere, chunkIndex);
-                    // Forge-Change-end
+                    // Update tile.IsSpace and tile.MapAtmosphere, and tile.AirtightData.
+                    UpdateTileData(ent, mapAtmos, tile);
                 }
-
                 atmosphere.InvalidatedCoords.Clear();
 
                 if (_simulationStopwatch.Elapsed.TotalMilliseconds >= AtmosMaxProcessTime)
@@ -318,7 +89,6 @@ namespace Content.Server.Atmos.EntitySystems
                 UpdateAdjacentTiles(ent, tile, activate: true);
                 UpdateTileAir(ent, tile, volume);
                 InvalidateVisuals(ent, tile);
-                processed++; // Forge-Change
 
                 if (number++ < InvalidCoordinatesLagCheckIterations)
                     continue;
@@ -388,20 +158,6 @@ namespace Content.Server.Atmos.EntitySystems
                 if (!connected)
                 {
                     RemoveActiveTile(atmos, tile);
-                    // Forge-Change-start
-                    if (TryGetChunkState(atmos, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
-                    {
-                        RemoveChunkTile(atmos, atmos.HotspotTiles, chunk.HotspotTiles, tile);
-                        RemoveChunkTile(atmos, atmos.HighPressureDelta, chunk.HighPressureTiles, tile);
-                        RemoveChunkTile(atmos, atmos.SuperconductivityTiles, chunk.SuperconductivityTiles, tile);
-                    }
-                    else
-                    {
-                        atmos.HotspotTiles.Remove(tile);
-                        atmos.HighPressureDelta.Remove(tile);
-                        atmos.SuperconductivityTiles.Remove(tile);
-                    }
-                    // Forge-Change-end
                     atmos.Tiles.Remove(tile.GridIndices);
                 }
             }
@@ -521,33 +277,29 @@ namespace Content.Server.Atmos.EntitySystems
                 GridFixTileVacuum(tile);
         }
 
-        private bool ProcessTileEqualize(Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent, out int processed) // Forge-Change
+        private void QueueRunTiles(
+            Queue<TileAtmosphere> queue,
+            HashSet<TileAtmosphere> tiles)
         {
-            processed = 0; // Forge-Change
+
+            queue.Clear();
+            queue.EnsureCapacity(tiles.Count);
+            foreach (var tile in tiles)
+            {
+                queue.Enqueue(tile);
+            }
+        }
+
+        private bool ProcessTileEqualize(Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent)
+        {
             var atmosphere = ent.Comp1;
             if (!atmosphere.ProcessingPaused)
-            {
-                if (AtmosForceFullGridDebug)
-                {
-                    BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.ActiveTiles);
-                }
-                else
-                {
-                    BeginRunChunks(atmosphere, ent.Owner, ChunkRunType.Active);
-                    BeginRunTilesFromChunks(atmosphere, chunk => chunk.ActiveTiles);
-                }
-            }
+                QueueRunTiles(atmosphere.CurrentRunTiles, atmosphere.ActiveTiles);
 
             var number = 0;
-            while (AtmosForceFullGridDebug
-                ? atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count
-                : TryGetNextRunTileFromChunks(atmosphere, chunk => chunk.ActiveTiles, out _)) // Forge-Change
+            while (atmosphere.CurrentRunTiles.TryDequeue(out var tile))
             {
-                var tile = AtmosForceFullGridDebug
-                    ? atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]
-                    : atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex - 1]; // Forge-Change
                 EqualizePressureInZone(ent, tile, atmosphere.UpdateCounter);
-                processed++; // Forge-Change
 
                 if (number++ < LagCheckIterations)
                     continue;
@@ -564,33 +316,16 @@ namespace Content.Server.Atmos.EntitySystems
         }
 
         private bool ProcessActiveTiles(
-            Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent, out int processed) // Forge-Change
+            Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent)
         {
-            processed = 0; // Forge-Change
             var atmosphere = ent.Comp1;
             if (!atmosphere.ProcessingPaused)
-            {
-                if (AtmosForceFullGridDebug)
-                {
-                    BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.ActiveTiles);
-                }
-                else
-                {
-                    BeginRunChunks(atmosphere, ent.Owner, ChunkRunType.Active);
-                    BeginRunTilesFromChunks(atmosphere, chunk => chunk.ActiveTiles);
-                }
-            }
+                QueueRunTiles(atmosphere.CurrentRunTiles, atmosphere.ActiveTiles);
 
             var number = 0;
-            while (AtmosForceFullGridDebug
-                ? atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count
-                : TryGetNextRunTileFromChunks(atmosphere, chunk => chunk.ActiveTiles, out _)) // Forge-Change
+            while (atmosphere.CurrentRunTiles.TryDequeue(out var tile))
             {
-                var tile = AtmosForceFullGridDebug
-                    ? atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]
-                    : atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex - 1]; // Forge-Change
                 ProcessCell(ent, tile, atmosphere.UpdateCounter);
-                processed++; // Forge-Change
 
                 if (number++ < LagCheckIterations)
                     continue;
@@ -607,9 +342,8 @@ namespace Content.Server.Atmos.EntitySystems
         }
 
         private bool ProcessExcitedGroups(
-            Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent, out int processed) // Forge-Change
+            Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent)
         {
-            processed = 0; // Forge-Change
             var gridAtmosphere = ent.Comp1;
             if (!gridAtmosphere.ProcessingPaused)
             {
@@ -617,18 +351,15 @@ namespace Content.Server.Atmos.EntitySystems
                 gridAtmosphere.CurrentRunExcitedGroups.EnsureCapacity(gridAtmosphere.ExcitedGroups.Count);
                 foreach (var group in gridAtmosphere.ExcitedGroups)
                 {
-                    gridAtmosphere.CurrentRunExcitedGroups.Add(group); // Forge-Change
+                    gridAtmosphere.CurrentRunExcitedGroups.Enqueue(group);
                 }
-                gridAtmosphere.CurrentRunExcitedGroupIndex = 0; // Forge-Change
             }
 
             var number = 0;
-            while (gridAtmosphere.CurrentRunExcitedGroupIndex < gridAtmosphere.CurrentRunExcitedGroups.Count) // Forge-Change
+            while (gridAtmosphere.CurrentRunExcitedGroups.TryDequeue(out var excitedGroup))
             {
-                var excitedGroup = gridAtmosphere.CurrentRunExcitedGroups[gridAtmosphere.CurrentRunExcitedGroupIndex++]; // Forge-Change
                 excitedGroup.BreakdownCooldown++;
                 excitedGroup.DismantleCooldown++;
-                processed++; // Forge-Change
 
                 if (excitedGroup.BreakdownCooldown > Atmospherics.ExcitedGroupBreakdownCycles)
                     ExcitedGroupSelfBreakdown(ent, excitedGroup);
@@ -650,50 +381,28 @@ namespace Content.Server.Atmos.EntitySystems
             return true;
         }
 
-        private bool ProcessHighPressureDelta(Entity<GridAtmosphereComponent> ent, out int processed) // Forge-Change
+        private bool ProcessHighPressureDelta(Entity<GridAtmosphereComponent> ent)
         {
-            processed = 0; // Forge-Change
             var atmosphere = ent.Comp;
             if (!atmosphere.ProcessingPaused)
-            {
-                if (AtmosForceFullGridDebug)
-                {
-                    BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.HighPressureDelta);
-                }
-                else
-                {
-                    BeginRunChunks(atmosphere, ent.Owner, ChunkRunType.HighPressure);
-                    BeginRunTilesFromChunks(atmosphere, chunk => chunk.HighPressureTiles);
-                }
-            }
+                QueueRunTiles(atmosphere.CurrentRunTiles, atmosphere.HighPressureDelta);
 
             // Note: This is still processed even if space wind is turned off since this handles playing the sounds.
 
             var number = 0;
-            while (AtmosForceFullGridDebug
-                ? atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count
-                : TryGetNextRunTileFromChunks(atmosphere, chunk => chunk.HighPressureTiles, out _)) // Forge-Change
-            {
-                var tile = AtmosForceFullGridDebug
-                    ? atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]
-                    : atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex - 1]; // Forge-Change
-                var (lookups, impulses) = HighPressureMovements(ent, tile, _physicsQuery, _xformQuery, _movedByPressureQuery, _metaQuery); // Forge-Change
-                if (lookups > 0) // Forge-Change
-                    AtmosHighPressureLookupEntities.Inc(lookups); // Forge-Change
-                if (impulses > 0) // Forge-Change
-                    AtmosHighPressureImpulses.Inc(impulses); // Forge-Change
+            var bodies = EntityManager.GetEntityQuery<PhysicsComponent>();
+            var xforms = EntityManager.GetEntityQuery<TransformComponent>();
+            var metas = EntityManager.GetEntityQuery<MetaDataComponent>();
+            var pressureQuery = EntityManager.GetEntityQuery<MovedByPressureComponent>();
 
+            while (atmosphere.CurrentRunTiles.TryDequeue(out var tile))
+            {
+                HighPressureMovements(ent, tile, bodies, xforms, pressureQuery, metas);
                 tile.PressureDifference = 0f;
                 tile.LastPressureDirection = tile.PressureDirection;
                 tile.PressureDirection = AtmosDirection.Invalid;
                 tile.PressureSpecificTarget = null;
-                // Forge-Change-start
-                if (TryGetChunkState(atmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
-                    RemoveChunkTile(atmosphere, atmosphere.HighPressureDelta, chunk.HighPressureTiles, tile);
-                else
-                    atmosphere.HighPressureDelta.Remove(tile);
-                // Forge-Change-end
-                processed++; // Forge-Change
+                atmosphere.HighPressureDelta.Remove(tile);
 
                 if (number++ < LagCheckIterations)
                     continue;
@@ -709,33 +418,16 @@ namespace Content.Server.Atmos.EntitySystems
         }
 
         private bool ProcessHotspots(
-            Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent, out int processed) // Forge-Change
+            Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent)
         {
-            processed = 0; // Forge-Change
             var atmosphere = ent.Comp1;
             if(!atmosphere.ProcessingPaused)
-            {
-                if (AtmosForceFullGridDebug)
-                {
-                    BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.HotspotTiles);
-                }
-                else
-                {
-                    BeginRunChunks(atmosphere, ent.Owner, ChunkRunType.Hotspot);
-                    BeginRunTilesFromChunks(atmosphere, chunk => chunk.HotspotTiles);
-                }
-            }
+                QueueRunTiles(atmosphere.CurrentRunTiles, atmosphere.HotspotTiles);
 
             var number = 0;
-            while (AtmosForceFullGridDebug
-                ? atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count
-                : TryGetNextRunTileFromChunks(atmosphere, chunk => chunk.HotspotTiles, out _)) // Forge-Change
+            while (atmosphere.CurrentRunTiles.TryDequeue(out var hotspot))
             {
-                var hotspot = AtmosForceFullGridDebug
-                    ? atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]
-                    : atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex - 1]; // Forge-Change
                 ProcessHotspot(ent, hotspot);
-                processed++; // Forge-Change
 
                 if (number++ < LagCheckIterations)
                     continue;
@@ -751,33 +443,15 @@ namespace Content.Server.Atmos.EntitySystems
             return true;
         }
 
-        private bool ProcessSuperconductivity(Entity<GridAtmosphereComponent> ent, out int processed) // Forge-Change
+        private bool ProcessSuperconductivity(GridAtmosphereComponent atmosphere)
         {
-            processed = 0; // Forge-Change
-            var atmosphere = ent.Comp;
             if(!atmosphere.ProcessingPaused)
-            {
-                if (AtmosForceFullGridDebug)
-                {
-                    BeginRunList(atmosphere.CurrentRunTiles, ref atmosphere.CurrentRunTileIndex, atmosphere.SuperconductivityTiles);
-                }
-                else
-                {
-                    BeginRunChunks(atmosphere, ent.Owner, ChunkRunType.Superconductivity);
-                    BeginRunTilesFromChunks(atmosphere, chunk => chunk.SuperconductivityTiles);
-                }
-            }
+                QueueRunTiles(atmosphere.CurrentRunTiles, atmosphere.SuperconductivityTiles);
 
             var number = 0;
-            while (AtmosForceFullGridDebug
-                ? atmosphere.CurrentRunTileIndex < atmosphere.CurrentRunTiles.Count
-                : TryGetNextRunTileFromChunks(atmosphere, chunk => chunk.SuperconductivityTiles, out _)) // Forge-Change
+            while (atmosphere.CurrentRunTiles.TryDequeue(out var superconductivity))
             {
-                var superconductivity = AtmosForceFullGridDebug
-                    ? atmosphere.CurrentRunTiles[atmosphere.CurrentRunTileIndex++]
-                    : atmosphere.CurrentRunChunkTiles[atmosphere.CurrentRunChunkTileIndex - 1]; // Forge-Change
                 Superconduct(atmosphere, superconductivity);
-                processed++; // Forge-Change
 
                 if (number++ < LagCheckIterations)
                     continue;
@@ -793,26 +467,82 @@ namespace Content.Server.Atmos.EntitySystems
             return true;
         }
 
-        private bool ProcessPipeNets(GridAtmosphereComponent atmosphere, out int processed) // Forge-Change
+        /// <summary>
+        /// Processes all entities with a <see cref="DeltaPressureComponent"/>, doing damage to them
+        /// depending on certain pressure differential conditions.
+        /// </summary>
+        /// <returns>True if we've finished processing all entities that required processing this run,
+        /// otherwise, false.</returns>
+        private bool ProcessDeltaPressure(Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent)
         {
-            processed = 0; // Forge-Change
+            var atmosphere = ent.Comp1;
+            var count = atmosphere.DeltaPressureEntities.Count;
+            if (!atmosphere.ProcessingPaused)
+            {
+                atmosphere.DeltaPressureCursor = 0;
+                atmosphere.DeltaPressureDamageResults.Clear();
+            }
+
+            var remaining = count - atmosphere.DeltaPressureCursor;
+            var batchSize = Math.Max(50, DeltaPressureParallelProcessPerIteration);
+            var toProcess = Math.Min(batchSize, remaining);
+
+            var timeCheck1 = 0;
+            while (atmosphere.DeltaPressureCursor < count)
+            {
+                var job = new DeltaPressureParallelJob(this,
+                    atmosphere,
+                    atmosphere.DeltaPressureCursor,
+                    DeltaPressureParallelBatchSize);
+                _parallel.ProcessNow(job, toProcess);
+
+                atmosphere.DeltaPressureCursor += toProcess;
+
+                if (timeCheck1++ < LagCheckIterations)
+                    continue;
+
+                timeCheck1 = 0;
+                if (_simulationStopwatch.Elapsed.TotalMilliseconds >= AtmosMaxProcessTime)
+                    return false;
+            }
+
+            var timeCheck2 = 0;
+            while (atmosphere.DeltaPressureDamageResults.TryDequeue(out var result))
+            {
+                PerformDamage(result.Ent,
+                    result.Pressure,
+                    result.DeltaPressure);
+
+                if (timeCheck2++ < LagCheckIterations)
+                    continue;
+
+                timeCheck2 = 0;
+                // Process the rest next time.
+                if (_simulationStopwatch.Elapsed.TotalMilliseconds >= AtmosMaxProcessTime)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool ProcessPipeNets(GridAtmosphereComponent atmosphere)
+        {
             if (!atmosphere.ProcessingPaused)
             {
                 atmosphere.CurrentRunPipeNet.Clear();
                 atmosphere.CurrentRunPipeNet.EnsureCapacity(atmosphere.PipeNets.Count);
                 foreach (var net in atmosphere.PipeNets)
                 {
-                    atmosphere.CurrentRunPipeNet.Add(net); // Forge-Change
+                    atmosphere.CurrentRunPipeNet.Enqueue(net);
                 }
-                atmosphere.CurrentRunPipeNetIndex = 0; // Forge-Change
             }
 
             var number = 0;
-            while (atmosphere.CurrentRunPipeNetIndex < atmosphere.CurrentRunPipeNet.Count) // Forge-Change
+            while (atmosphere.CurrentRunPipeNet.TryDequeue(out var pipenet))
             {
-                var pipenet = atmosphere.CurrentRunPipeNet[atmosphere.CurrentRunPipeNetIndex++]; // Forge-Change
                 pipenet.Update();
-                processed++; // Forge-Change
 
                 if (number++ < LagCheckIterations)
                     continue;
@@ -840,6 +570,8 @@ namespace Content.Server.Atmos.EntitySystems
                 num--;
             if (!ExcitedGroups)
                 num--;
+            if (!DeltaPressureDamage)
+                num--;
             if (!Superconduction)
                 num--;
             return num * AtmosTime;
@@ -847,37 +579,26 @@ namespace Content.Server.Atmos.EntitySystems
 
         private bool ProcessAtmosDevices(
             Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent,
-            Entity<MapAtmosphereComponent?> map,
-            out int processed) // Forge-Change
+            Entity<MapAtmosphereComponent?> map)
         {
-            processed = 0; // Forge-Change
             var atmosphere = ent.Comp1;
             if (!atmosphere.ProcessingPaused)
             {
-                if (atmosphere.CurrentRunAtmosDevicesDirty)
+                atmosphere.CurrentRunAtmosDevices.Clear();
+                atmosphere.CurrentRunAtmosDevices.EnsureCapacity(atmosphere.AtmosDevices.Count);
+                foreach (var device in atmosphere.AtmosDevices)
                 {
-                    atmosphere.CurrentRunAtmosDevices.Clear();
-                    atmosphere.CurrentRunAtmosDevices.EnsureCapacity(atmosphere.AtmosDevices.Count);
-                    foreach (var device in atmosphere.AtmosDevices)
-                    {
-                        atmosphere.CurrentRunAtmosDevices.Add(device); // Forge-Change
-                    }
-
-                    atmosphere.CurrentRunAtmosDevicesDirty = false;
+                    atmosphere.CurrentRunAtmosDevices.Enqueue(device);
                 }
-
-                atmosphere.CurrentRunAtmosDeviceIndex = 0; // Forge-Change
             }
 
             var time = _gameTiming.CurTime;
             var number = 0;
             var ev = new AtmosDeviceUpdateEvent(RealAtmosTime(), (ent, ent.Comp1, ent.Comp2), map);
-            while (atmosphere.CurrentRunAtmosDeviceIndex < atmosphere.CurrentRunAtmosDevices.Count) // Forge-Change
+            while (atmosphere.CurrentRunAtmosDevices.TryDequeue(out var device))
             {
-                var device = atmosphere.CurrentRunAtmosDevices[atmosphere.CurrentRunAtmosDeviceIndex++]; // Forge-Change
                 RaiseLocalEvent(device, ref ev);
                 device.Comp.LastProcess = time;
-                processed++; // Forge-Change
 
                 if (number++ < LagCheckIterations)
                     continue;
@@ -899,7 +620,6 @@ namespace Content.Server.Atmos.EntitySystems
 
             if (!_simulationPaused)
             {
-                RefreshInterestChunks();
                 _currentRunAtmosphereIndex = 0;
                 _currentRunAtmosphere.Clear();
 
@@ -942,11 +662,7 @@ namespace Content.Server.Atmos.EntitySystems
                 switch (atmosphere.State)
                 {
                     case AtmosphereProcessingState.Revalidate:
-                    {
-                        var phaseStart = _simulationStopwatch.Elapsed.TotalMilliseconds; // Forge-Change
-                        var success = ProcessRevalidate(ent, out var processed); // Forge-Change
-                        ObservePhaseMetrics(AtmosphereProcessingState.Revalidate, _simulationStopwatch.Elapsed.TotalMilliseconds - phaseStart, processed); // Forge-Change
-                        if (!success) // Forge-Change
+                        if (!ProcessRevalidate(ent))
                         {
                             atmosphere.ProcessingPaused = true;
                             return;
@@ -961,13 +677,8 @@ namespace Content.Server.Atmos.EntitySystems
                             ? AtmosphereProcessingState.TileEqualize
                             : AtmosphereProcessingState.ActiveTiles;
                         continue;
-                    }
                     case AtmosphereProcessingState.TileEqualize:
-                    {
-                        var phaseStart = _simulationStopwatch.Elapsed.TotalMilliseconds; // Forge-Change
-                        var success = ProcessTileEqualize(ent, out var processed); // Forge-Change
-                        ObservePhaseMetrics(AtmosphereProcessingState.TileEqualize, _simulationStopwatch.Elapsed.TotalMilliseconds - phaseStart, processed); // Forge-Change
-                        if (!success) // Forge-Change
+                        if (!ProcessTileEqualize(ent))
                         {
                             atmosphere.ProcessingPaused = true;
                             return;
@@ -976,13 +687,8 @@ namespace Content.Server.Atmos.EntitySystems
                         atmosphere.ProcessingPaused = false;
                         atmosphere.State = AtmosphereProcessingState.ActiveTiles;
                         continue;
-                    }
                     case AtmosphereProcessingState.ActiveTiles:
-                    {
-                        var phaseStart = _simulationStopwatch.Elapsed.TotalMilliseconds; // Forge-Change
-                        var success = ProcessActiveTiles(ent, out var processed); // Forge-Change
-                        ObservePhaseMetrics(AtmosphereProcessingState.ActiveTiles, _simulationStopwatch.Elapsed.TotalMilliseconds - phaseStart, processed); // Forge-Change
-                        if (!success) // Forge-Change
+                        if (!ProcessActiveTiles(ent))
                         {
                             atmosphere.ProcessingPaused = true;
                             return;
@@ -992,13 +698,8 @@ namespace Content.Server.Atmos.EntitySystems
                         // Next state depends on whether excited groups are enabled or not.
                         atmosphere.State = ExcitedGroups ? AtmosphereProcessingState.ExcitedGroups : AtmosphereProcessingState.HighPressureDelta;
                         continue;
-                    }
                     case AtmosphereProcessingState.ExcitedGroups:
-                    {
-                        var phaseStart = _simulationStopwatch.Elapsed.TotalMilliseconds; // Forge-Change
-                        var success = ProcessExcitedGroups(ent, out var processed); // Forge-Change
-                        ObservePhaseMetrics(AtmosphereProcessingState.ExcitedGroups, _simulationStopwatch.Elapsed.TotalMilliseconds - phaseStart, processed); // Forge-Change
-                        if (!success) // Forge-Change
+                        if (!ProcessExcitedGroups(ent))
                         {
                             atmosphere.ProcessingPaused = true;
                             return;
@@ -1007,13 +708,20 @@ namespace Content.Server.Atmos.EntitySystems
                         atmosphere.ProcessingPaused = false;
                         atmosphere.State = AtmosphereProcessingState.HighPressureDelta;
                         continue;
-                    }
                     case AtmosphereProcessingState.HighPressureDelta:
-                    {
-                        var phaseStart = _simulationStopwatch.Elapsed.TotalMilliseconds; // Forge-Change
-                        var success = ProcessHighPressureDelta((ent, ent), out var processed); // Forge-Change
-                        ObservePhaseMetrics(AtmosphereProcessingState.HighPressureDelta, _simulationStopwatch.Elapsed.TotalMilliseconds - phaseStart, processed); // Forge-Change
-                        if (!success) // Forge-Change
+                        if (!ProcessHighPressureDelta((ent, ent)))
+                        {
+                            atmosphere.ProcessingPaused = true;
+                            return;
+                        }
+
+                        atmosphere.ProcessingPaused = false;
+                        atmosphere.State = DeltaPressureDamage
+                            ? AtmosphereProcessingState.DeltaPressure
+                            : AtmosphereProcessingState.Hotspots;
+                        continue;
+                    case AtmosphereProcessingState.DeltaPressure:
+                        if (!ProcessDeltaPressure(ent))
                         {
                             atmosphere.ProcessingPaused = true;
                             return;
@@ -1022,13 +730,8 @@ namespace Content.Server.Atmos.EntitySystems
                         atmosphere.ProcessingPaused = false;
                         atmosphere.State = AtmosphereProcessingState.Hotspots;
                         continue;
-                    }
                     case AtmosphereProcessingState.Hotspots:
-                    {
-                        var phaseStart = _simulationStopwatch.Elapsed.TotalMilliseconds; // Forge-Change
-                        var success = ProcessHotspots(ent, out var processed); // Forge-Change
-                        ObservePhaseMetrics(AtmosphereProcessingState.Hotspots, _simulationStopwatch.Elapsed.TotalMilliseconds - phaseStart, processed); // Forge-Change
-                        if (!success) // Forge-Change
+                        if (!ProcessHotspots(ent))
                         {
                             atmosphere.ProcessingPaused = true;
                             return;
@@ -1042,13 +745,8 @@ namespace Content.Server.Atmos.EntitySystems
                             ? AtmosphereProcessingState.Superconductivity
                             : AtmosphereProcessingState.PipeNet;
                         continue;
-                    }
                     case AtmosphereProcessingState.Superconductivity:
-                    {
-                        var phaseStart = _simulationStopwatch.Elapsed.TotalMilliseconds; // Forge-Change
-                        var success = ProcessSuperconductivity((ent, ent), out var processed); // Forge-Change
-                        ObservePhaseMetrics(AtmosphereProcessingState.Superconductivity, _simulationStopwatch.Elapsed.TotalMilliseconds - phaseStart, processed); // Forge-Change
-                        if (!success) // Forge-Change
+                        if (!ProcessSuperconductivity(atmosphere))
                         {
                             atmosphere.ProcessingPaused = true;
                             return;
@@ -1057,13 +755,8 @@ namespace Content.Server.Atmos.EntitySystems
                         atmosphere.ProcessingPaused = false;
                         atmosphere.State = AtmosphereProcessingState.PipeNet;
                         continue;
-                    }
                     case AtmosphereProcessingState.PipeNet:
-                    {
-                        var phaseStart = _simulationStopwatch.Elapsed.TotalMilliseconds; // Forge-Change
-                        var success = ProcessPipeNets(atmosphere, out var processed); // Forge-Change
-                        ObservePhaseMetrics(AtmosphereProcessingState.PipeNet, _simulationStopwatch.Elapsed.TotalMilliseconds - phaseStart, processed); // Forge-Change
-                        if (!success) // Forge-Change
+                        if (!ProcessPipeNets(atmosphere))
                         {
                             atmosphere.ProcessingPaused = true;
                             return;
@@ -1072,13 +765,8 @@ namespace Content.Server.Atmos.EntitySystems
                         atmosphere.ProcessingPaused = false;
                         atmosphere.State = AtmosphereProcessingState.AtmosDevices;
                         continue;
-                    }
                     case AtmosphereProcessingState.AtmosDevices:
-                    {
-                        var phaseStart = _simulationStopwatch.Elapsed.TotalMilliseconds; // Forge-Change
-                        var success = ProcessAtmosDevices(ent, map, out var processed); // Forge-Change
-                        ObservePhaseMetrics(AtmosphereProcessingState.AtmosDevices, _simulationStopwatch.Elapsed.TotalMilliseconds - phaseStart, processed); // Forge-Change
-                        if (!success) // Forge-Change
+                        if (!ProcessAtmosDevices(ent, map))
                         {
                             atmosphere.ProcessingPaused = true;
                             return;
@@ -1089,7 +777,6 @@ namespace Content.Server.Atmos.EntitySystems
 
                         // We reached the end of this atmosphere's update tick. Break out of the switch.
                         break;
-                    }
                 }
 
                 // And increase the update counter.
@@ -1108,6 +795,7 @@ namespace Content.Server.Atmos.EntitySystems
         ActiveTiles,
         ExcitedGroups,
         HighPressureDelta,
+        DeltaPressure,
         Hotspots,
         Superconductivity,
         PipeNet,

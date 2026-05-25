@@ -16,9 +16,9 @@ namespace Content.Server._NF.Market.Systems;
 
 public sealed partial class MarketSystem
 {
-    [Dependency] private readonly CrateMachineSystem _crateMachine = default!;
-    [Dependency] private readonly PoiTreasurySystem _poiTreasury = default!; // Forge-Change
-    [Dependency] private readonly IConfigurationManager _cfgManager = default!; // Forge-Change
+    [Dependency] private CrateMachineSystem _crateMachine = default!;
+    [Dependency] private PoiTreasurySystem _poiTreasury = default!; // Forge-Change
+    [Dependency] private IConfigurationManager _cfgManager = default!; // Forge-Change
 
     private void InitializeCrateMachine()
     {

@@ -15,7 +15,7 @@ namespace Content.Client.Shuttles.UI;
 public sealed partial class ShuttleConsoleWindow : FancyWindow,
     IComputerWindow<ShuttleBoundUserInterfaceState>
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     private BoundUserInterface? _boundUi;
 

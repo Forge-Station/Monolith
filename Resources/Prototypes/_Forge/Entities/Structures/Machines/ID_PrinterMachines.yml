@@ -1,6 +1,6 @@
 - type: entity
   id: RenegateIDPrinter
-  parent: FactionLathe
+  parent: BaseLatheLube
   name: renegate ID printer
   description: a printer that produces ID cards and Renegade encryption keys.
   suffix: Ренегаты
@@ -16,6 +16,8 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: RenegateIDPrinterCircuitboard
   - type: Lathe
     idleState: icon
     runningState: icon
@@ -27,7 +29,7 @@
 
 - type: entity
   id: TSFIDPrinter
-  parent: FactionLathe
+  parent: BaseLatheLube
   name: TSF ID printer
   description: a printer that produces ID cards and TSF encryption keys.
   suffix: TSF
@@ -43,6 +45,8 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: TSFIDPrinterCircuitboard
   - type: Lathe
     idleState: icon
     runningState: icon
@@ -53,7 +57,7 @@
 
 - type: entity
   id: TTIIDPrinter
-  parent: FactionLathe
+  parent: BaseLatheLube
   name: TTI ID printer
   description: a printer that produces ID cards and TTI encryption keys.
   suffix: TTI
@@ -69,6 +73,8 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: TTIIDPrinterCircuitboard
   - type: Lathe
     idleState: icon
     runningState: icon
@@ -76,3 +82,49 @@
     - TTIIDStatic
     - TTIHeadsetStatic
     - Bureaucracytatic
+
+#   Boards
+
+- type: entity
+  id: RenegateIDPrinterCircuitboard
+  parent: BaseMachineCircuitboard
+  name: Renegate ID printer board
+  description: A machine printed circuit board for an Renegate ID printer.
+  components:
+    - type: MachineBoard
+      prototype: RenegateIDPrinter
+      requirements:
+        MatterBin: 3
+        Manipulator: 4
+      stackRequirements:
+        Glass: 5
+
+
+- type: entity
+  id: TSFIDPrinterCircuitboard
+  parent: BaseMachineCircuitboard
+  name: TSF ID printer board
+  description: A machine printed circuit board for an TSF ID printer.
+  components:
+    - type: MachineBoard
+      prototype: TSFIDPrinter
+      requirements:
+        MatterBin: 3
+        Manipulator: 4
+      stackRequirements:
+        Glass: 5
+
+
+- type: entity
+  id: TTIIDPrinterCircuitboard
+  parent: BaseMachineCircuitboard
+  name: TTI ID printer board
+  description: A machine printed circuit board for an TTI ID printer.
+  components:
+    - type: MachineBoard
+      prototype: TTIIDPrinter
+      requirements:
+        MatterBin: 3
+        Manipulator: 4
+      stackRequirements:
+        Glass: 5

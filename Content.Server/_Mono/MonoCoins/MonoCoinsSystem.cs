@@ -33,7 +33,6 @@ public sealed class MonoCoinsSystem : EntitySystem
         base.Initialize();
 
         // Subscribe to network messages
-        SubscribeNetworkEvent<RequestMonoCoinsBalanceMessage>(OnRequestMonoCoinsBalance);
 
         // Subscribe to player events
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
@@ -43,15 +42,6 @@ public sealed class MonoCoinsSystem : EntitySystem
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd);
     }
 
-    /// <summary>
-    /// Handles requests for MonoCoins balance from clients.
-    /// </summary>
-    private async void OnRequestMonoCoinsBalance(RequestMonoCoinsBalanceMessage message, EntitySessionEventArgs args)
-    {
-        var balance = await GetMonoCoinsBalanceAsync(args.SenderSession.UserId);
-        var response = new MonoCoinsBalanceResponseMessage { Balance = balance };
-        RaiseNetworkEvent(response, args.SenderSession.Channel);
-    }
 
     /// <summary>
     /// Called when a player attaches. Database will handle initialization.
@@ -71,15 +61,6 @@ public sealed class MonoCoinsSystem : EntitySystem
         // No action needed here
     }
 
-    /// <summary>
-    /// Gets the MonoCoins balance for a player from the database.
-    /// </summary>
-    /// <param name="userId">The player's UserId</param>
-    /// <returns>The player's MonoCoins balance, or 0 if not found</returns>
-    public async Task<int> GetMonoCoinsBalanceAsync(NetUserId userId)
-    {
-        return await _db.GetMonoCoinsAsync(userId);
-    }
 
     /// <summary>
     /// Sets the MonoCoins balance for a player in the database.
@@ -92,32 +73,13 @@ public sealed class MonoCoinsSystem : EntitySystem
     }
 
     /// <summary>
-    /// Adds MonoCoins to a player's balance in the database.
-    /// </summary>
-    /// <param name="userId">The player's UserId</param>
-    /// <param name="amount">The amount to add</param>
-    /// <returns>The new balance</returns>
-    public async Task<int> AddMonoCoinsAsync(NetUserId userId, int amount)
-    {
-        return await _db.AddMonoCoinsAsync(userId, amount);
-    }
-
-    /// <summary>
-    /// Tries to subtract MonoCoins from a player's balance in the database.
-    /// </summary>
-    /// <param name="userId">The player's UserId</param>
-    /// <param name="amount">The amount to subtract</param>
-    /// <returns>True if successful, false if insufficient balance</returns>
-    public async Task<bool> TrySubtractMonoCoinsAsync(NetUserId userId, int amount)
-    {
-        return await _db.TrySubtractMonoCoinsAsync(userId, amount);
-    }
-
-    /// <summary>
     /// Called when a round ends. Awards MonoCoins to players who appear in the station manifest.
     /// </summary>
     private async void OnRoundEnd(RoundEndMessageEvent args)
     {
+        // Forge-Change: MonoCoins disabled.
+        return;
+
         // Award MonoCoins to players who appear in the station manifest
         var tasks = new List<Task>();
 

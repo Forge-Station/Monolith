@@ -8108,13 +8108,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -24.749279,11.700731
       parent: 1
-- proto: BoxStingerGrenadesNfsd
-  entities:
-  - uid: 4616
-    components:
-    - type: Transform
-      pos: -37.471756,6.9240494
-      parent: 1
 - proto: BoxSyringe
   entities:
   - uid: 71

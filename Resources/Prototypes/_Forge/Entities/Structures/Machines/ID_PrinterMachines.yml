@@ -83,6 +83,33 @@
     - TTIHeadsetStatic
     - Bureaucracytatic
 
+- type: entity
+  id: EmpireIDPrinter
+  parent: BaseLatheLube
+  name: Empire ID printer
+  description: a printer that produces ID cards and Empire encryption keys.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/idprinter.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: EmpireIDPrinterCircuitboard
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    staticPacks:
+    - EmpireIDStatic
+    - EmpireHeadsetStatic
+    - Bureaucracytatic
 #   Boards
 
 - type: entity
@@ -123,6 +150,20 @@
   components:
     - type: MachineBoard
       prototype: TTIIDPrinter
+      requirements:
+        MatterBin: 3
+        Manipulator: 4
+      stackRequirements:
+        Glass: 5
+
+- type: entity
+  id: EmpireIDPrinterCircuitboard
+  parent: BaseMachineCircuitboard
+  name: Empire ID printer board
+  description: A machine printed circuit board for an empire ID printer.
+  components:
+    - type: MachineBoard
+      prototype: EmpireIDPrinter
       requirements:
         MatterBin: 3
         Manipulator: 4

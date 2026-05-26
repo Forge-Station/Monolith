@@ -1,4 +1,46 @@
 #                                           PDA recipes START
+# Empire
+
+- type: latheRecipe
+  id: EmpireCommanderPDA_recipe
+  parent: basePDArecipe
+  result: EmpireCommanderPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Diamond: 150
+
+- type: latheRecipe
+  id: EmpireInqPDA_recipe
+  parent: basePDArecipe
+  result: EmpireInqPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Gold: 200
+
+- type: latheRecipe
+  id: EmpireGoldPDA_recipe
+  parent: basePDArecipe
+  result: EmpireGoldPDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Gold: 200
+
+- type: latheRecipe
+  id: EmpirePDA_recipe
+  parent: basePDArecipe
+  result: EmpirePDA
+  materials:
+    Glass: 200
+    Steel: 500
+    Plasteel: 200
+    Plastic: 200
+
 # Renegades
 
 - type: latheRecipe
@@ -157,6 +199,40 @@
 #                                           PDA recipes END
 
 #                                           ID recipes START
+
+# Empire
+
+- type: latheRecipe
+  id: EmpireCommanderIDCard_recipe
+  parent: baseIDrecipe
+  result: EmpireCommanderIDCard
+  materials:
+    Plasteel: 200
+    Diamond: 100
+
+- type: latheRecipe
+  id: EmpireInqIDCard_recipe
+  parent: baseIDrecipe
+  result: EmpireInqIDCard
+  materials:
+    Plasteel: 100
+    Gold: 100
+
+- type: latheRecipe
+  id: EmpireGoldIDCard_recipe
+  parent: baseIDrecipe
+  result: EmpireGoldIDCard
+  materials:
+    Plasteel: 100
+    Gold: 100
+
+- type: latheRecipe
+  id: EmpireIDCard_recipe
+  parent: baseIDrecipe
+  result: EmpireIDCard
+  materials:
+    Plasteel: 100
+    Plastic: 100
 # Renegades
 
 - type: latheRecipe
@@ -285,6 +361,24 @@
 #                                           ID recipes END
 
 #                                           Headsets recipes START
+# Empire
+
+- type: latheRecipe
+  id: ClothingHeadsetEmpireCommand_recipe
+  parent: baseHeadsetrecipe
+  result: ClothingHeadsetEmpireCommand
+  materials:
+    Steel: 500
+    Plastic: 1500
+    Diamond: 150
+
+- type: latheRecipe
+  id: ClothingHeadsetEmpire_recipe
+  parent: baseHeadsetrecipe
+  result: ClothingHeadsetEmpire
+  materials:
+    Steel: 500
+    Plastic: 500
 # Renegates
 - type: latheRecipe
   id: ClothingHeadsetRenegade_recipe
@@ -360,6 +454,25 @@
 #                                           Headsets recipes END
 # Ryomzeck is so cool
 #                                           Encryption keys START
+
+# Empire
+
+- type: latheRecipe
+  id: EncryptionKeyEmpireCommand_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyEmpireCommand
+  materials:
+    Steel: 100
+    Diamond: 50
+
+- type: latheRecipe
+  id: EncryptionKeyEmpire_recipe
+  parent: baseEncryptionKeyrecipe
+  result: EncryptionKeyEmpire
+  materials:
+    Steel: 500
+
+
 # Renegades
 
 - type: latheRecipe
@@ -475,6 +588,26 @@
 #                                           Bureaucracy END
 
 #                                           Static packs START
+
+- type: latheRecipePack
+  id: EmpireIDStatic
+  recipes:
+  - EmpireCommanderPDA_recipe
+  - EmpireInqPDA_recipe
+  - EmpireGoldPDA_recipe
+  - EmpirePDA_recipe
+  - EmpireCommanderIDCard_recipe
+  - EmpireInqIDCard_recipe
+  - EmpireGoldIDCard_recipe
+  - EmpireIDCard_recipe
+
+- type: latheRecipePack
+  id: EmpireHeadsetStatic
+  recipes:
+  - ClothingHeadsetEmpireCommand_recipe
+  - ClothingHeadsetEmpire_recipe
+  - EncryptionKeyEmpireCommand_recipe
+  - EncryptionKeyEmpire_recipe
 - type: latheRecipePack
   id: TSFIDStatic
   recipes:

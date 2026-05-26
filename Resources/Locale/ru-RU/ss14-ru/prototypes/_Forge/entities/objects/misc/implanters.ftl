@@ -10,6 +10,6 @@ ent-NanotrasenTrackingImplanter = имплантер "Трекер НТ"
 ent-TTITrackingImplanter = имплантер "Трекер TTI"
     .desc = Одноразовый шприц, специально предназначенный для введения подкожных имплантов.
     .suffix = Трекер TTI
-ent-EmpireTrackingImplanter = имплантер "Трекер СИВ"
+ent-ImperialTrackingImplanter = имплантер "Трекер СИВ"
     .desc = Одноразовый шприц, специально предназначенный для введения подкожных имплантов.
     .suffix = Трекер СИВ

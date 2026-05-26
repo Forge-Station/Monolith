@@ -57,30 +57,6 @@
       damageType: Heat
       amount: 20
 
-- type: entity
-  parent: BaseSubdermalImplant
-  id: OverlordImplant
-  name: olverlord implant
-  description: This implant will shield the brain from external influences and prevent mind control devices. # DeltaV - mindshield does not enforce loyalty
-  categories: [ HideSpawnMenu ]
-  components:
-   - type: SubdermalImplant
-     permanent: false # Mono: true->false - lets mindshields be removed from people
-   - type: Tag
-     tags:
-       - Overlord
-
-- type: entity
-  parent: BaseSubdermalImplant
-  id: ImplantGuard
-  name: guard implant
-  description: This implant will shield the brain from external influences and prevent mind control devices. # DeltaV - mindshield does not enforce loyalty
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SubdermalImplant
-    permanent: false
-  - type: GuardImplant
-
 # Factions Tracking Implants
 - type: entity
   parent: BaseSubdermalImplant
@@ -90,7 +66,7 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
-    # In future will make special tracking system for Factions
+    # In future will make special tracking systme for Factions
     #- type: SuitSensor
     #  randomMode: false
     #  controlsLocked: true
@@ -114,7 +90,7 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
-    # In future will make special tracking system for Factions
+    # In future will make special tracking systme for Factions
     #- type: SuitSensor
     #  randomMode: false
     #  controlsLocked: true
@@ -129,7 +105,6 @@
       - Dead
     - type: Rattle
       radioChannel: "Nfsd"
-      language: "SolCommon"
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -139,7 +114,7 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
-    # In future will make special tracking system for Factions
+    # In future will make special tracking systme for Factions
     #- type: SuitSensor
     #  randomMode: false
     #  controlsLocked: true
@@ -163,7 +138,7 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
-    # In future will make special tracking system for Factions
+    # In future will make special tracking systme for Factions
     #- type: SuitSensor
     #  randomMode: false
     #  controlsLocked: true
@@ -181,13 +156,13 @@
 
 - type: entity
   parent: BaseSubdermalImplant
-  id: EmpireTrackingImplant
-  name: empire tracking implant
-  description: This implant has a tracking device monitor for the Empire radio channel.
+  id: ImperialTrackingImplant
+  name: imperial tracking implant
+  description: This implant has a tracking device monitor for the Imperial radio channel.
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
-    # In future will make special tracking system for Factions
+    # In future will make special tracking systme for Factions
     #- type: SuitSensor
     #  randomMode: false
     #  controlsLocked: true
@@ -195,11 +170,10 @@
     #  activationContainer: "implant"
     #- type: DeviceNetwork
     #  deviceNetId: Wireless
-    #  transmitFrequencyId: SuitEmpireSensor
+    #  transmitFrequencyId: SuitImperialSensor
     - type: TriggerOnMobstateChange
       mobState:
       - Critical
       - Dead
     - type: Rattle
       radioChannel: "Empire"
-      language: "Freespeak"

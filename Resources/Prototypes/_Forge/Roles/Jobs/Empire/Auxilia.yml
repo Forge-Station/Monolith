@@ -43,6 +43,8 @@
 #   accessGroups:
 #   - GeneralEmpireAccess
 #   special:
+#   - !type:AddImplantSpecial
+#     implants: [ ImperialTrackingImplant ]
 #   - !type:AddComponentSpecial
 #     components:
 #     - type: NpcFactionMember

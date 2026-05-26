@@ -95,7 +95,7 @@
   entityIcon: ClothingOuterHardsuitERTSecurity
   discipline: Nanotrasen
   tier: 2
-  cost: 70000
+  cost: 80000
   recipeUnlocks:
   - ClothingOuterHardsuitERTSecurity
   - ClothingOuterHardsuitCBURN
@@ -122,7 +122,7 @@
   entityIcon: ClothingBackpackERTChaplain
   discipline: Nanotrasen
   tier: 2
-  cost: 40000
+  cost: 50000
   recipeUnlocks:
   - ClothingBackpackERTSecurity
   - ClothingBackpackERTMedical
@@ -140,7 +140,7 @@
   entityIcon: ClothingOuterHardsuitERTJanitor
   discipline: Nanotrasen
   tier: 3
-  cost: 80000
+  cost: 90000
   recipeUnlocks:
   - ClothingOuterHardsuitERTMedical
   - ClothingOuterHardsuitERTJanitor
@@ -393,7 +393,7 @@
   entityIcon: MedicalTechFabCircuitboard
   discipline: Nanotrasen
   tier: 1
-  cost: 15000
+  cost: 20000
   recipeUnlocks:
   - MedicalTechFabCircuitboard
   technologyPrerequisites:

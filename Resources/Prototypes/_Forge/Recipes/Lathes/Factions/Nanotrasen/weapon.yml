@@ -101,7 +101,7 @@
   result: WeaponEnergyShotgun
   materials:
     Steel: 2000
-    Plasteel: 2000
+    Plasteel: 1000
     Gold: 2000
     Plasma: 3000
     Plastic: 2000
@@ -116,9 +116,8 @@
   materials:
     Steel: 2000
     Plasteel: 1000
-    Gold: 3000
-    Silver: 3000
-    Plasma: 3000
+    Silver: 500
+    Plasma: 1000
     Plastic: 2000
 
 - type: latheRecipe

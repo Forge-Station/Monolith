@@ -1,6 +1,6 @@
-using Content.Server.NodeContainer;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
+using Content.Shared.NodeContainer;
 using Robust.Shared.Map.Components;
 
 namespace Content.Server.Power.Nodes
@@ -30,20 +30,20 @@ namespace Content.Server.Power.Nodes
             return base.Connectable(entMan, xform);
         }
 
-        public override IEnumerable<Node> GetReachableNodes(TransformComponent xform,
+        public override IEnumerable<Node> GetReachableNodes(
+            Entity<TransformComponent> xform,
             EntityQuery<NodeContainerComponent> nodeQuery,
             EntityQuery<TransformComponent> xformQuery,
-            MapGridComponent? grid,
+            Entity<MapGridComponent>? grid,
             IEntityManager entMan)
         {
-            if (!xform.Anchored || grid == null || !xform.GridUid.HasValue)
+            if (!xform.Comp.Anchored || grid is not { } gridEnt)
                 yield break;
 
-            var gridUid = xform.GridUid.Value;
-            var map = entMan.System<SharedMapSystem>();
-            var gridIndex = map.TileIndicesFor(gridUid, grid, xform.Coordinates);
+            var mapSystem = entMan.System<SharedMapSystem>();
+            var gridIndex = mapSystem.TileIndicesFor(gridEnt, xform.Comp.Coordinates);
 
-            foreach (var node in NodeHelpers.GetNodesInTile(nodeQuery, gridUid, grid, gridIndex, map))
+            foreach (var node in NodeHelpers.GetNodesInTile(nodeQuery, gridEnt, gridIndex, mapSystem))
             {
                 if (node is CableNode)
                     yield return node;

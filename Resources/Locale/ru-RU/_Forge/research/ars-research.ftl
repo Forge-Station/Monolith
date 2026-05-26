@@ -1,0 +1,1 @@
+research-technology-ars-omnissia-modsuit = Продвинутый ремонтный костюм

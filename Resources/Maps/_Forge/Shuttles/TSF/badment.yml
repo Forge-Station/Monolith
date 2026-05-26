@@ -525,7 +525,7 @@ entities:
     - type: ShipGridLock
       locked: False
     - type: ThermalSignature
-- proto: 57mmCartridge
+- proto: 57mmCartridgeHE
   entities:
   - uid: 4
     components:

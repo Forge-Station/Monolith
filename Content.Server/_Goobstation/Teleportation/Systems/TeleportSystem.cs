@@ -16,7 +16,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Teleportation;
 
-public sealed class TeleportSystem : EntitySystem
+public sealed partial class TeleportSystem : EntitySystem
 {
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -105,7 +105,7 @@ public sealed class TeleportSystem : EntitySystem
 
             // If attempts is specified, whatever's being teleported probably does not want to be in your walls
             var valid = true;
-            foreach (var entity in _map.GetAnchoredEntities(gridUid, grid, targetCoords))
+            foreach (var entity in _map.GetAnchoredEntities((gridUid, grid), targetCoords))
             {
                 if (!_physicsQuery.TryGetComponent(entity, out var body))
                     continue;

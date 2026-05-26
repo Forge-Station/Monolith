@@ -9,17 +9,18 @@ using Robust.Shared.Player; // Forge-Change
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-using Robust.Shared.Network; // Forge-Change
+using Robust.Shared.Network;
+using Robust.Server.Player; // Forge-Change
 
 namespace Content.Server._Mono.Radar;
 
 public sealed partial class RadarBlipSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!; // Forge-Change
-    [Dependency] private readonly IGameTiming _timing = default!; // Forge-Change
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IConfigurationManager _cfg = default!; // Forge-Change
+    [Dependency] private IGameTiming _timing = default!; // Forge-Change
+    [Dependency] private IPlayerManager _playerManager = default!; // Forge-Change
 
     // Pooled collections to avoid per-request heap churn
     private readonly List<BlipNetData> _tempBlipsCache = new();

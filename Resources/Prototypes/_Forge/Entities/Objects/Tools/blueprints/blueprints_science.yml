@@ -1,0 +1,22 @@
+
+- type: entity
+  parent: NFBaseBlueprintScience
+  id: ForgeBlueprintNightVisionGoggles
+  name: night vision goggles blueprint
+  description: A blueprint with a schematic of a night vision goggles. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ClothingEyesNightVisionGoggles
+    - ClothingHelmetAttachmentNVGsBasic
+
+- type: entity
+  parent: NFBaseBlueprintScience
+  id: ForgeBlueprintThermalVisionGoggles
+  name: thermal vision goggles blueprint
+  description: A blueprint with a schematic of a thermal vision goggles. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ClothingEyesThermalVisionGoggles
+    - ClothingHelmetAttachmentInfraredBasic

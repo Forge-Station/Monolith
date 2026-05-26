@@ -3,7 +3,6 @@ using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
-using Robust.Shared.GameObjects; // Forge-Change
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -91,10 +90,8 @@ namespace Content.Server.Atmos.EntitySystems
             _activePressures.Add((uid, component));
         }
 
-        private (int lookupEntities, int impulsesApplied) HighPressureMovements(Entity<GridAtmosphereComponent> gridAtmosphere, TileAtmosphere tile, EntityQuery<PhysicsComponent> bodies, EntityQuery<TransformComponent> xforms, EntityQuery<MovedByPressureComponent> pressureQuery, EntityQuery<MetaDataComponent> metas) // Forge-Change
+        private void HighPressureMovements(Entity<GridAtmosphereComponent> gridAtmosphere, TileAtmosphere tile, EntityQuery<PhysicsComponent> bodies, EntityQuery<TransformComponent> xforms, EntityQuery<MovedByPressureComponent> pressureQuery, EntityQuery<MetaDataComponent> metas)
         {
-            var impulses = 0; // Forge-Change
-            var lookupEntities = 0; // Forge-Change
             // TODO ATMOS finish this
 
             // Don't play the space wind sound on tiles that are on fire...
@@ -118,7 +115,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             // No atmos yeets, return early.
             if (!SpaceWind)
-                return (lookupEntities, impulses); // Forge-Change
+                return;
 
             // Used by ExperiencePressureDifference to correct push/throw directions from tile-relative to physics world.
             var gridWorldRotation = _transformSystem.GetWorldRotation(gridAtmosphere);
@@ -142,15 +139,8 @@ namespace Content.Server.Atmos.EntitySystems
                     tile.PressureSpecificTarget = curTile;
             }
 
-            // Forge-Change-start
-            var throwTarget = tile.PressureSpecificTarget != null
-                ? _mapSystem.ToCenterCoordinates(tile.GridIndex, tile.PressureSpecificTarget.GridIndices)
-                : EntityCoordinates.Invalid;
-
             _entSet.Clear();
-            _lookup.GetLocalEntitiesIntersecting(tile.GridIndex, tile.GridIndices, _entSet, 0f, flags: LookupFlags.Dynamic | LookupFlags.Sundries | LookupFlags.Approximate);
-            lookupEntities = _entSet.Count;
-            // Forge-Change-end
+            _lookup.GetLocalEntitiesIntersecting(tile.GridIndex, tile.GridIndices, _entSet, 0f);
 
             foreach (var entity in _entSet)
             {
@@ -163,32 +153,27 @@ namespace Content.Server.Atmos.EntitySystems
 
                 if (_containers.IsEntityInContainer(entity, metas.GetComponent(entity))) continue;
 
+                var pressureMovements = EnsureComp<MovedByPressureComponent>(entity);
                 if (pressure.LastHighPressureMovementAirCycle < gridAtmosphere.Comp.UpdateCounter)
                 {
                     // tl;dr YEET
-                    if (ExperiencePressureDifference( // Forge-Change
-                        (entity, pressure), // Forge-Change
+                    ExperiencePressureDifference(
+                        (entity, pressureMovements),
                         gridAtmosphere.Comp.UpdateCounter,
                         tile.PressureDifference,
                         tile.PressureDirection, 0,
-                        throwTarget,
+                        tile.PressureSpecificTarget != null ? _mapSystem.ToCenterCoordinates(tile.GridIndex, tile.PressureSpecificTarget.GridIndices) : EntityCoordinates.Invalid,
                         gridWorldRotation,
                         xforms.GetComponent(entity),
-                        body)) // Forge-Change
-                    {
-                        impulses++; // Forge-Change
-                    }
+                        body);
                 }
             }
-
-            return (lookupEntities, impulses); // Forge-Change
         }
 
         // Called from AtmosphereSystem.LINDA.cs with SpaceWind CVar check handled there.
         private void ConsiderPressureDifference(GridAtmosphereComponent gridAtmosphere, TileAtmosphere tile, AtmosDirection differenceDirection, float difference)
         {
-            var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
-            AddChunkTile(gridAtmosphere, gridAtmosphere.HighPressureDelta, chunk.HighPressureTiles, tile); // Forge-Change
+            gridAtmosphere.HighPressureDelta.Add(tile);
 
             if (difference <= tile.PressureDifference)
                 return;
@@ -197,7 +182,7 @@ namespace Content.Server.Atmos.EntitySystems
             tile.PressureDirection = differenceDirection;
         }
 
-        public bool ExperiencePressureDifference( // Forge-Change
+        public void ExperiencePressureDifference(
             Entity<MovedByPressureComponent> ent,
             int cycle,
             float pressureDifference,
@@ -210,10 +195,10 @@ namespace Content.Server.Atmos.EntitySystems
         {
             var (uid, component) = ent;
             if (!Resolve(uid, ref physics, false))
-                return false; // Forge-Change
+                return;
 
             if (!Resolve(uid, ref xform))
-                return false; // Forge-Change
+                return;
 
             // TODO ATMOS stuns?
 
@@ -262,11 +247,8 @@ namespace Content.Server.Atmos.EntitySystems
                     }
 
                     component.LastHighPressureMovementAirCycle = cycle;
-                    return true; // Forge-Change
                 }
             }
-
-            return false; // Forge-Change
         }
     }
 }

@@ -1,7 +1,7 @@
 - type: entity
   parent: [ ClothingOuterStorageFoldableBase, BaseC2ContrabandUnredeemable ]
   id: ClothingOuterArmorSheriffVestWeb
-  name: sheriff vest web
+  name: commanding officer vest web
   description: A flak trenchcoat produced by Arcadia Industries, enhanced with a bulletproof alloy for some extra protection.
   components:
   - type: Sprite

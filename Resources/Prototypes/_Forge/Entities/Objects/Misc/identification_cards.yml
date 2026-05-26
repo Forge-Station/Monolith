@@ -144,6 +144,12 @@
   suffix: ТСФ
   name: TSF commanding officer ID card
   components:
+  - type: Sprite
+    layers:
+    - sprite: _NF/Objects/Misc/id_cards.rsi
+      state: nfsd
+    - sprite: Forge/Objects/Misc/id_cards.rsi
+      state: idtsfcom
   - type: PresetIdCard
     job: TsfCommandingOfficer
 
@@ -153,6 +159,12 @@
   suffix: ТСФ
   name: TSF executive officer ID card
   components:
+  - type: Sprite
+    layers:
+    - sprite: _NF/Objects/Misc/id_cards.rsi
+      state: nfsd
+    - sprite: Forge/Objects/Misc/id_cards.rsi
+      state: idtsfexec
   - type: PresetIdCard
     job: TsfExecutiveOfficer
 
@@ -162,6 +174,12 @@
   suffix: ТСФ
   name: TSF senior officer ID card
   components:
+  - type: Sprite
+    layers:
+    - sprite: _NF/Objects/Misc/id_cards.rsi
+      state: nfsd
+    - sprite: Forge/Objects/Misc/id_cards.rsi
+      state: idtsfsenior
   - type: PresetIdCard
     job: TsfSeniorOfficer
 
@@ -171,6 +189,12 @@
   suffix: ТСФ
   name: TSF senior aide ID card
   components:
+  - type: Sprite
+    layers:
+    - sprite: _NF/Objects/Misc/id_cards.rsi
+      state: nfsd
+    - sprite: _NF/Objects/Misc/id_cards.rsi
+      state: idnfsdsergeant
   - type: PresetIdCard
     job: TsfSeniorAide
 

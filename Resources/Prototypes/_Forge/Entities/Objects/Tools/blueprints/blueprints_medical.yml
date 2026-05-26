@@ -1,0 +1,71 @@
+- type: entity
+  parent: NFBaseBlueprintMedical
+  id: ForgeBlueprintCyberneticArms
+  name: cybernetic arms blueprint
+  description: A blueprint with a schematic of a cybernetic arms. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - JawsOfLifeLeftArm
+    - JawsOfLifeRightArm
+
+- type: entity
+  parent: NFBaseBlueprintMedical
+  id: ForgeBlueprintCyberneticLegs
+  name: cybernetic legs blueprint
+  description: A blueprint with a schematic of a cybernetic legs. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - SpeedLeftLeg
+    - SpeedRightLeg
+
+- type: entity
+  parent: NFBaseBlueprintMedical
+  id: ForgeBlueprintCyberneticHands
+  name: cybernatic hands blueprint
+  description: A blueprint with a schematic of a cybernatic hands. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - DexLeftHand
+    - DexRightHand
+    - ForgeMilLeftHand
+    - ForgeMilRightHand
+    - ForgeRiplyLeftHand
+    - ForgeRiplyRightHand
+
+- type: entity
+  parent: NFBaseBlueprintMedical
+  id: ForgeBlueprintCyberneticEyes
+  name: cybernetic eyes blueprint
+  description: A blueprint with a schematic of a cybernetic eyes. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - BasicCyberneticEyes
+    - SecurityCyberneticEyes
+    - MedicalCyberneticEyes
+
+- type: entity
+  parent: NFBaseBlueprintMedical
+  id: ForgeBlueprintCyberneticOrgans
+  name: cybernetic organs blueprint
+  description: A blueprint with a schematic of a cybernetic organs. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ForgeCyberneticLiver
+    - ForgeCyberneticKidneys
+
+- type: entity
+  parent: NFBaseBlueprintMedical
+  id: ForgeBlueprintSubdermalImplants
+  name: subdermal implants blueprint
+  description: A blueprint with a schematic of a subdermal implants. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ForgeVoiceModuleImplanter
+    - ForgeSubdermalArmorImplant
+    - ForgeReflectiveSubdermalArmorImplant

@@ -11,7 +11,7 @@ job-name-pilot = Пилот
 job-name-pirate = Пират
 job-name-pirate-captain = Пиратский Капитан
 job-name-pirate-first-mate = Пиратский Боцман
-job-name-sheriff = Шериф
+job-name-sheriff = Командующий офицер
 # Forge
 job-name-security-guard = Офицер Безопасности НТ
 job-name-stc = Диспетчер Аванпоста НТ

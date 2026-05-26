@@ -10,11 +10,6 @@ namespace Content.Server.Power.Pow3r
     {
         private UpdateNetworkJob _networkJob;
         private bool _disableParallel;
-        private readonly List<NodeId> _dirtyLoads = new(); // Forge-Change
-        private readonly List<NodeId> _dirtyBatteries = new(); // Forge-Change
-
-        public IReadOnlyList<NodeId> DirtyLoads => _dirtyLoads; // Forge-Change
-        public IReadOnlyList<NodeId> DirtyBatteries => _dirtyBatteries; // Forge-Change
 
         public BatteryRampPegSolver(bool disableParallel = false)
         {
@@ -39,9 +34,6 @@ namespace Content.Server.Power.Pow3r
 
         public void Tick(float frameTime, PowerState state, IParallelManager parallel)
         {
-            _dirtyLoads.Clear(); // Forge-Change
-            _dirtyBatteries.Clear(); // Forge-Change
-
             ClearLoadsAndSupplies(state);
 
             state.GroupedNets ??= GroupByNetworkDepth(state);
@@ -83,10 +75,6 @@ namespace Content.Server.Power.Pow3r
             {
                 if (load.Paused)
                     continue;
-
-                load.LastReceivingPower = load.ReceivingPower;
-
-                if (load.LastReceivingPower != 0f) _dirtyLoads.Add(load.Id);
 
                 load.ReceivingPower = 0;
             }
@@ -217,11 +205,7 @@ namespace Content.Server.Power.Pow3r
                 if (!load.Enabled || load.DesiredPower == 0 || load.Paused)
                     continue;
 
-                var newReceiving = load.DesiredPower * supplyRatio;
-                if (!MathHelper.CloseToPercent(load.LastReceivingPower, newReceiving))
-                    _dirtyLoads.Add(loadId);
-
-                load.ReceivingPower = newReceiving;
+                load.ReceivingPower = load.DesiredPower * supplyRatio;
             }
 
             // Distribute supply to batteries
@@ -328,11 +312,6 @@ namespace Content.Server.Power.Pow3r
 
                 battery.SupplyingMarked = false;
                 battery.LoadingMarked = false;
-
-                if (!MathHelper.CloseToPercent(battery.LastCurrentSupply, battery.CurrentSupply)) // Forge-Change
-                    _dirtyBatteries.Add(battery.Id);
-
-                battery.LastCurrentSupply = battery.CurrentSupply;
             }
         }
 
@@ -352,14 +331,6 @@ namespace Content.Server.Power.Pow3r
 
             ValidateNetworkGroups(state, groupedNetworks);
             return groupedNetworks;
-        }
-
-        public void Validate(PowerState state) // Forge-Change
-        {
-            if (state.GroupedNets == null) // Forge-Change
-                throw new InvalidOperationException("We don't have grouped networks cached??"); // Forge-Change
-
-            ValidateNetworkGroups(state, state.GroupedNets); // Forge-Change
         }
 
         /// <summary>

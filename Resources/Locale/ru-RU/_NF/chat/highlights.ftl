@@ -13,7 +13,7 @@ highlights-brigmedic = Коронер, Коронёр, "ТСФ"
 highlights-sergeant = Лейтенант, Лейт, "ТСФ"
 highlights-bailiff = Бейлиф, Бейл, "ТСФ"
 highlights-public-affairs-liaison = Представитель, Представитель ЮрДеп, "ПЮД", "ТСФ"
-highlights-sheriff = Шериф, Шер, "ТСФ"
+highlights-sheriff = Командующий офицер, КО, "ТСФ"
 
 highlights-prisoner = Заключенный, Зэк
 highlights-pirate = Пират

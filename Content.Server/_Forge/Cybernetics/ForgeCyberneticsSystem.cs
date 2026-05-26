@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Server.Body.Components;
-using Content.Server.Emp;
+using Content.Shared.Emp;
 using Content.Shared._Forge.Cybernetics.Components;
 using Content.Shared._Forge.TTS;
 using Content.Shared.Chat; // Forge-Change

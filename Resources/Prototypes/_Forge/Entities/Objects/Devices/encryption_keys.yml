@@ -104,6 +104,49 @@
         - state: crypt_renegade
         - state: comren_label
 
+# region TSF
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyTsfTech
+  suffix: ТСФ
+  name: technical TSF encryption key
+  description: An encryption key for the TSF technical channel.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Nfsd
+    - TsfTech
+    defaultChannel: TsfTech
+  - type: Item
+    sprite: _NF/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: _NF/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_gray
+    - state: nfsd_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyTsfCom
+  suffix: ТСФ
+  name: command TSF encryption key
+  description: An encryption key for TSF command staff. Grants general TSF, technical and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Nfsd
+    - TsfTech
+    - TsfCom
+    defaultChannel: TsfCom
+  - type: Item
+    sprite: _NF/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: _NF/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_gray
+    - state: nfsd_label
+
 - type: entity
   parent: EncryptionKey
   id: EncryptionKeyEmpire

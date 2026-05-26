@@ -9,7 +9,7 @@
     Glass: 200
     Steel: 500
     Plasteel: 200
-    Diamond: 1500
+    Diamond: 150
 
 - type: latheRecipe
   id: RenegateOverseerPDA_recipe
@@ -71,7 +71,7 @@
     Glass: 200
     Steel: 500
     Plasteel: 200
-    Diamond: 1500
+    Diamond: 150
 
 - type: latheRecipe
   id: TsfExecutiveOfficerPDA_recipe
@@ -133,7 +133,7 @@
     Glass: 200
     Steel: 500
     Plasteel: 200
-    Diamond: 1500
+    Diamond: 150
 
 - type: latheRecipe
   id: TTIParamedPDA_recipe
@@ -165,7 +165,7 @@
   result: RenegateBaronIDCard
   materials:
     Plasteel: 200
-    Diamond: 1000
+    Diamond: 100
 
 - type: latheRecipe
   id: RenegateOverseerIDCard_recipe
@@ -215,7 +215,7 @@
   result: TsfCommandingOfficerIDCard
   materials:
     Plasteel: 200
-    Diamond: 1000
+    Diamond: 100
 
 - type: latheRecipe
   id: TsfExecutiveOfficerIDCard_recipe
@@ -265,7 +265,7 @@
   result: TTIDirectorIDCard
   materials:
     Plasteel: 200
-    Diamond: 1000
+    Diamond: 100
 
 - type: latheRecipe
   id: TTIParamedicIDCard_recipe
@@ -309,7 +309,7 @@
   materials:
     Steel: 500
     Plastic: 1500
-    Diamond: 15000
+    Diamond: 150
 
 # TSF
 
@@ -337,7 +337,7 @@
   materials:
     Steel: 500
     Plastic: 3000
-    Diamond: 1500
+    Diamond: 150
 
 # TTI
 
@@ -367,7 +367,7 @@
   parent: baseEncryptionKeyrecipe
   result: EncryptionKeyRenegade
   materials:
-    Steel: 50
+    Steel: 500
 
 - type: latheRecipe
   id: EncryptionKeyRenegadeTech_recipe
@@ -382,7 +382,7 @@
   result: EncryptionKeyRenegadeCom
   materials:
     Steel: 100
-    Diamond: 500
+    Diamond: 50
 
 # TSF
 
@@ -391,7 +391,7 @@
   parent: baseEncryptionKeyrecipe
   result: EncryptionKeyNfsd
   materials:
-    Steel: 50
+    Steel: 500
 
 - type: latheRecipe
   id: EncryptionKeyCommand_recipe
@@ -474,6 +474,7 @@
 
 #                                           Bureaucracy END
 
+#                                           Static packs START
 - type: latheRecipePack
   id: TSFIDStatic
   recipes:
@@ -518,7 +519,8 @@
   - ClothingHeadsetMdMedical_recipe
   - EncryptionKeyService_recipe
   - EncryptionKeyHospital_recipe
-#                                           Packs for all START
+
+#     For all here
 
 - type: latheRecipePack
   id: Bureaucracytatic
@@ -529,4 +531,4 @@
   - Paper_recipe
   - PaperOffice_recipe
 
-#                                           Packs for all END
+#                                           Static packs END

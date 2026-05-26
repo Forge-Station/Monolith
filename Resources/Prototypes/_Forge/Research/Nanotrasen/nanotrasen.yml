@@ -95,7 +95,7 @@
   entityIcon: ClothingOuterHardsuitERTSecurity
   discipline: Nanotrasen
   tier: 2
-  cost: 60000
+  cost: 70000
   recipeUnlocks:
   - ClothingOuterHardsuitERTSecurity
   - ClothingOuterHardsuitCBURN
@@ -140,7 +140,7 @@
   entityIcon: ClothingOuterHardsuitERTJanitor
   discipline: Nanotrasen
   tier: 3
-  cost: 70000
+  cost: 80000
   recipeUnlocks:
   - ClothingOuterHardsuitERTMedical
   - ClothingOuterHardsuitERTJanitor
@@ -156,7 +156,7 @@
   entityIcon: ClothingOuterHardsuitERTChaplain
   discipline: Nanotrasen
   tier: 3
-  cost: 90000
+  cost: 150000
   recipeUnlocks:
   - ClothingOuterHardsuitERTChaplain
   technologyPrerequisites:
@@ -170,7 +170,7 @@
   entityIcon: WeaponRevolverInspector
   discipline: Nanotrasen
   tier: 1
-  cost: 15000
+  cost: 25000
   recipeUnlocks:
   - WeaponRevolverInspector
   - WeaponRevolverDeckard
@@ -185,7 +185,7 @@
   entityIcon: WeaponRevolverMateba
   discipline: Nanotrasen
   tier: 2
-  cost: 30000
+  cost: 40000
   recipeUnlocks:
   - WeaponPistolN1984
   - WeaponRevolverMateba
@@ -199,7 +199,7 @@
   entityIcon: WeaponPulsePistol
   discipline: Nanotrasen
   tier: 2
-  cost: 50000
+  cost: 65000
   recipeUnlocks:
   - WeaponPulsePistol
   - EnergySwordBlue
@@ -215,7 +215,7 @@
   entityIcon: WeaponEnergyShotgun
   discipline: Nanotrasen
   tier: 3
-  cost: 65000
+  cost: 75000
   recipeUnlocks:
   - WeaponEnergyGunLawbringer
   - WeaponEnergyShotgun
@@ -246,7 +246,7 @@
   entityIcon: WeaponLRC21PPL
   discipline: Nanotrasen
   tier: 3
-  cost: 65000
+  cost: 75000
   recipeUnlocks:
   - WeaponLRC21PPL
   - PulsedPlasmaLaserCanister
@@ -264,7 +264,7 @@
   entityIcon: WeaponHeavyPulseCannon
   discipline: Nanotrasen
   tier: 4
-  cost: 100000
+  cost: 120000
   recipeUnlocks:
   - WeaponMechCombatPulseRifleTSF
   - WeaponLauncherMk348
@@ -281,7 +281,7 @@
   entityIcon: HypoMiniLimitedEdition
   discipline: Nanotrasen
   tier: 1
-  cost: 30000
+  cost: 50000
   recipeUnlocks:
   - HypoBrigmedic
   - HypoMiniLimitedEdition
@@ -309,7 +309,7 @@
   entityIcon: MedicatedSuture
   discipline: Nanotrasen
   tier: 1
-  cost: 20000
+  cost: 50000
   recipeUnlocks:
   - BrutepackAdvanced1
   - OintmentAdvanced1
@@ -323,7 +323,7 @@
   entityIcon: OmnizineChemistryBottle
   discipline: Nanotrasen
   tier: 1
-  cost: 50000
+  cost: 70000
   recipeUnlocks:
   - OmnizineChemistryBottle
   - JugOmnizine
@@ -355,7 +355,7 @@
   entityIcon: ClothingOuterRobeTraumaBomber
   discipline: Nanotrasen
   tier: 1
-  cost: 50000
+  cost: 60000
   recipeUnlocks:
   - ClothingOuterRobeTraumaBomber
   - ClothingOuterCoatTrauma
@@ -374,7 +374,7 @@
   entityIcon: ClothingOuterHardsuitTrauma
   discipline: Nanotrasen
   tier: 1
-  cost: 70000
+  cost: 100000
   recipeUnlocks:
   - ClothingOuterHardsuitTrauma
   - ClothingOuterHardsuitTraumaShooter
@@ -406,7 +406,7 @@
   entityIcon: CloningConsoleComputerCircuitboard
   discipline: Nanotrasen
   tier: 1
-  cost: 40000
+  cost: 50000
   recipeUnlocks:
   - CloningConsoleComputerCircuitboard
   - MedicalBiofabMachineBoard 

@@ -1,8 +1,17 @@
 using Content.Client.Construction;
+using Content.Client.Gameplay;
+using Content.Client.RCD;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Hands.Components;
+using Content.Shared.Interaction;
+using Content.Shared.RCD;
+using Content.Shared.RCD.Components;
 using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Construction.Prototypes;
+using Content.Shared.RCD.Systems;
 using Robust.Client.GameObjects;
+using Robust.Client.Player;
+using Robust.Client.State;
 using Robust.Client.Graphics;
 using Robust.Client.Placement;
 using Robust.Client.Placement.Modes;
@@ -29,19 +38,23 @@ public sealed partial class AlignAtmosPipeLayers : SnapgridCenter
     [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IStateManager _stateManager = default!;
 
     private readonly SharedMapSystem _mapSystem;
     private readonly SharedTransformSystem _transformSystem;
     private readonly SharedAtmosPipeLayersSystem _pipeLayersSystem;
     private readonly SpriteSystem _spriteSystem;
+    private readonly RCDConstructionGhostSystem _rpdGhostSystem;
+    private readonly RCDSystem _rcdSystem;
 
     private const float SearchBoxSize = 2f;
     private EntityCoordinates _unalignedMouseCoords = default;
-    private const float MouseDeadzoneRadius = 0.25f;
 
-    private Color _guideColor = new Color(0, 0, 0.5785f);
+    private readonly Color _guideColor = new(0, 0, 0.5785f);
     private const float GuideRadius = 0.1f;
-    private const float GuideOffset = 0.21875f;
+
+    public override bool RangeRequired => true;
 
     public AlignAtmosPipeLayers(PlacementManager pMan) : base(pMan)
     {
@@ -51,6 +64,54 @@ public sealed partial class AlignAtmosPipeLayers : SnapgridCenter
         _transformSystem = _entityManager.System<SharedTransformSystem>();
         _pipeLayersSystem = _entityManager.System<SharedAtmosPipeLayersSystem>();
         _spriteSystem = _entityManager.System<SpriteSystem>();
+        _rpdGhostSystem = _entityManager.System<RCDConstructionGhostSystem>();
+        _rcdSystem = _entityManager.System<RCDSystem>();
+    }
+
+    public override bool IsValidPosition(EntityCoordinates position)
+    {
+        if (!RangeCheck(position))
+            return false;
+
+        var player = _playerManager.LocalSession?.AttachedEntity;
+
+        if (player == null
+            || !_entityManager.TryGetComponent<HandsComponent>(player, out var hands)
+            || hands.ActiveHand?.HeldEntity is not { } heldEntity
+            || !_entityManager.TryGetComponent<RCDComponent>(heldEntity, out var rcd)
+            || !rcd.IsRpd)
+        {
+            return true;
+        }
+
+        if (!_rcdSystem.TryGetMapGridData(position, out var mapGridData))
+            return false;
+
+        var currentState = _stateManager.CurrentState;
+
+        if (currentState is not GameplayStateBase screen)
+            return false;
+
+        var worldClick = _transformSystem.ToMapCoordinates(_unalignedMouseCoords);
+        var constructionEntity = pManager.CurrentPermission?.EntityType;
+        EntityUid? target = null;
+
+        if (rcd.CachedPrototype.Mode == RcdMode.Deconstruct)
+        {
+            var clicked = screen.GetClickedEntity(worldClick);
+            _rcdSystem.TryResolveRpdDeconstructTarget(rcd, mapGridData.Value, worldClick, clicked, out target);
+        }
+        else
+            target = screen.GetClickedEntity(worldClick);
+
+        return _rcdSystem.IsRCDOperationStillValid(
+            heldEntity,
+            rcd,
+            mapGridData.Value,
+            target,
+            player.Value,
+            popMsgs: false,
+            rpdConstructionEntity: constructionEntity);
     }
 
     /// <inheritdoc/>
@@ -61,17 +122,22 @@ public sealed partial class AlignAtmosPipeLayers : SnapgridCenter
         if (gridUid == null || Grid == null)
             return;
 
-        // Draw guide circles for each pipe layer if we are not in line/grid placing mode
-        if (pManager.PlacementType == PlacementTypes.None)
+        // Forge-Change: shared pipe-layer guide positions
+        if (pManager.PlacementType == PlacementTypes.None
+            && _entityManager.TryGetComponent<MapGridComponent>(gridUid, out var mapGrid))
         {
-            var gridRotation = _transformSystem.GetWorldRotation(gridUid.Value);
-            var worldPosition = _mapSystem.LocalToWorld(gridUid.Value, Grid, MouseCoords.Position);
-            var direction = (_eyeManager.CurrentEye.Rotation + gridRotation + Math.PI / 2).GetCardinalDir();
-            var multi = (direction == Direction.North || direction == Direction.South) ? -1f : 1f;
+            _pipeLayersSystem.GetPipeLayerGuideWorldPositions(
+                gridUid.Value,
+                mapGrid,
+                MouseCoords,
+                _eyeManager.CurrentEye.Rotation,
+                out var center,
+                out var secondary,
+                out var tertiary);
 
-            args.WorldHandle.DrawCircle(worldPosition, GuideRadius, _guideColor);
-            args.WorldHandle.DrawCircle(worldPosition + gridRotation.RotateVec(new Vector2(multi * GuideOffset, GuideOffset)), GuideRadius, _guideColor);
-            args.WorldHandle.DrawCircle(worldPosition - gridRotation.RotateVec(new Vector2(multi * GuideOffset, GuideOffset)), GuideRadius, _guideColor);
+            args.WorldHandle.DrawCircle(center.Position, GuideRadius, _guideColor);
+            args.WorldHandle.DrawCircle(secondary.Position, GuideRadius, _guideColor);
+            args.WorldHandle.DrawCircle(tertiary.Position, GuideRadius, _guideColor);
         }
 
         base.Render(args);
@@ -81,11 +147,12 @@ public sealed partial class AlignAtmosPipeLayers : SnapgridCenter
     public override void AlignPlacementMode(ScreenCoordinates mouseScreen)
     {
         _unalignedMouseCoords = ScreenToCursorGrid(mouseScreen);
-        base.AlignPlacementMode(mouseScreen);
 
-        // Exit early if we are in line/grid placing mode
         if (pManager.PlacementType != PlacementTypes.None)
+        {
+            base.AlignPlacementMode(mouseScreen);
             return;
+        }
 
         MouseCoords = _unalignedMouseCoords.AlignWithClosestGridTile(SearchBoxSize, _entityManager, _mapManager);
 
@@ -94,31 +161,37 @@ public sealed partial class AlignAtmosPipeLayers : SnapgridCenter
         if (!_entityManager.TryGetComponent<MapGridComponent>(gridId, out var mapGrid))
             return;
 
-        var gridRotation = _transformSystem.GetWorldRotation(gridId.Value);
         CurrentTile = _mapSystem.GetTileRef(gridId.Value, mapGrid, MouseCoords);
+        GridDistancing = mapGrid.TileSize;
+        SnapSize = mapGrid.TileSize;
+        Grid = mapGrid;
 
-        float tileSize = mapGrid.TileSize;
-        GridDistancing = tileSize;
-
-        MouseCoords = new EntityCoordinates(MouseCoords.EntityId, new Vector2(CurrentTile.X + tileSize / 2 + pManager.PlacementOffset.X,
-            CurrentTile.Y + tileSize / 2 + pManager.PlacementOffset.Y));
-
-        // Calculate the position of the mouse cursor with respect to the center of the tile to determine which layer to use
-        var mouseCoordsDiff = _unalignedMouseCoords.Position - MouseCoords.Position;
-        var layer = AtmosPipeLayer.Primary;
-
-        if (mouseCoordsDiff.Length() > MouseDeadzoneRadius)
+        if (pManager.PlacementOffset != Vector2i.Zero)
         {
-            // Determine the direction of the mouse is relative to the center of the tile, adjusting for the player eye and grid rotation
-            var direction = (new Angle(mouseCoordsDiff) + _eyeManager.CurrentEye.Rotation + gridRotation + Math.PI / 2).GetCardinalDir();
-            layer = (direction == Direction.North || direction == Direction.East) ? AtmosPipeLayer.Secondary : AtmosPipeLayer.Tertiary;
+            MouseCoords = new EntityCoordinates(
+                MouseCoords.EntityId,
+                MouseCoords.Position + new Vector2(pManager.PlacementOffset.X, pManager.PlacementOffset.Y));
         }
 
-        // Update the construction menu placer
-        if (pManager.Hijack != null)
-            UpdateHijackedPlacer(layer, mouseScreen);
+        var tileCenter = MouseCoords;
+        var worldPos = _transformSystem.ToMapCoordinates(_unalignedMouseCoords);
+        _pipeLayersSystem.TryGetPipeLayerAtWorldPosition(
+            gridId.Value,
+            mapGrid,
+            worldPos,
+            tileCenter,
+            _eyeManager.CurrentEye.Rotation,
+            out var layer);
 
-        // Otherwise update the debug placer
+        // Forge-Change: sync RPD layer selection when placing with an RPD
+        if (pManager.CurrentPermission?.MobUid is { } mobUid
+            && _entityManager.TryGetComponent<RCDComponent>(mobUid, out var rcd)
+            && rcd.IsRpd)
+        {
+            UpdatePlacer(layer);
+        }
+        else if (pManager.Hijack != null)
+            UpdateHijackedPlacer(layer, mouseScreen);
         else
             UpdatePlacer(layer);
     }
@@ -162,25 +235,20 @@ public sealed partial class AlignAtmosPipeLayers : SnapgridCenter
 
     private void UpdatePlacer(AtmosPipeLayer layer)
     {
-        // Try to get alternative prototypes from the entity atmos pipe layer component
         if (pManager.CurrentPermission?.EntityType == null)
             return;
 
-        if (!_protoManager.TryIndex<EntityPrototype>(pManager.CurrentPermission.EntityType, out var currentProto))
-            return;
-
-        if (!currentProto.TryGetComponent<AtmosPipeLayersComponent>(out var atmosPipeLayers, _entityManager.ComponentFactory))
-            return;
-
-        if (!_pipeLayersSystem.TryGetAlternativePrototype(atmosPipeLayers, layer, out var newProtoId))
-            return;
-
-        if (_protoManager.TryIndex<EntityPrototype>(newProtoId, out var newProto))
+        if (!_protoManager.TryIndex<EntityPrototype>(pManager.CurrentPermission.EntityType, out var currentProto)
+            || !currentProto.TryGetComponent<AtmosPipeLayersComponent>(out var atmosPipeLayers, _entityManager.ComponentFactory))
         {
-            // Update the placed prototype
+            return;
+        }
+
+        if (_pipeLayersSystem.TryGetAlternativePrototype(atmosPipeLayers, layer, out var newProtoId)
+            && _protoManager.TryIndex<EntityPrototype>(newProtoId, out var newProto))
+        {
             pManager.CurrentPermission.EntityType = newProtoId;
 
-            // Update the appearance of the ghost sprite
             if (newProto.TryGetComponent<SpriteComponent>(out var sprite, _entityManager.ComponentFactory))
             {
                 var textures = new List<IDirectionalTextureProvider>();
@@ -193,6 +261,23 @@ public sealed partial class AlignAtmosPipeLayers : SnapgridCenter
 
                 pManager.CurrentTextures = textures;
             }
+
+            return;
+        }
+
+        // Forge-Change: mixers / logistics — same prototype, different pipe layer (alt1/alt2 connector RSI)
+        if (pManager is PlacementManager manager
+            && manager.CurrentPlacementOverlayEntity is { } overlay
+            && _entityManager.TryGetComponent<AtmosPipeLayersComponent>(overlay, out var overlayLayers))
+        {
+            _pipeLayersSystem.SetPipeLayer((overlay, overlayLayers), layer);
+        }
+
+        if (pManager.CurrentPermission?.MobUid is { } mobUid
+            && _entityManager.TryGetComponent<RCDComponent>(mobUid, out var rcd)
+            && rcd.IsRpd)
+        {
+            _rpdGhostSystem.SyncPipeLayer(mobUid, rcd, pManager.CurrentPermission.EntityType, layer);
         }
     }
 

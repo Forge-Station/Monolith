@@ -19,14 +19,23 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.NodeContainer;
+// Forge-Change-Start: handheld Forge atmos monitor resolves grid from the holder
+using Content.Shared._Forge.Monitoring;
+using Content.Shared.Containers;
+using Content.Shared.Tag;
+using Robust.Shared.Containers;
+// Forge-Change-End
 
 namespace Content.Server.Atmos.Consoles;
 
 public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleSystem
 {
-    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private SharedMapSystem _sharedMapSystem = default!;
-    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private readonly SharedMapSystem _sharedMapSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!; // Forge-Change: handheld monitor grid lookup
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!; // Forge-Change: handheld monitor grid lookup
+    [Dependency] private readonly TagSystem _tagSystem = default!; // Forge-Change: handheld monitor grid lookup
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     // Private variables
     // Note: this data does not need to be saved
@@ -460,12 +469,13 @@ public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoring
 
     private void InitializeAtmosMonitoringConsole(EntityUid uid, AtmosMonitoringConsoleComponent component)
     {
-        var xform = Transform(uid);
-
-        if (xform.GridUid == null)
+        // Forge-Change-Start: use holder grid when the console is a handheld Forge monitor
+        var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(uid, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+        if (gridUid == null)
             return;
 
-        var grid = xform.GridUid.Value;
+        var grid = gridUid.Value;
+        // Forge-Change-End
 
         if (!TryComp<MapGridComponent>(grid, out var map))
             return;

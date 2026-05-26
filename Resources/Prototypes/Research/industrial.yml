@@ -211,6 +211,9 @@
   # Mono edit start
   - RCD
   - RCDAmmo
+  - RPD # Forge-Change
+  - HandheldForgeAtmosMonitoring # Forge-Change
+  - HandheldForgePowerMonitoring # Forge-Change
   - ShipRepairDevice
   - ShipRepairDeviceAmmo
   - NFBlueprintRCDAmmo

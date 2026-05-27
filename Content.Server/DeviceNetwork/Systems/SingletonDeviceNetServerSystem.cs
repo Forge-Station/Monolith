@@ -5,7 +5,7 @@ using Content.Server.Station.Systems;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Power;
 using Robust.Shared.Map;
-using System.Collections.Generic;
+using System.Collections.Generic; // Cursor
 
 namespace Content.Server.DeviceNetwork.Systems;
 
@@ -44,9 +44,9 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
     /// <returns>True if there is an active serve. False otherwise</returns>
     public bool TryGetActiveServerAddress<TComp>(MapId map, [NotNullWhen(true)] out string? address) where TComp : IComponent
     {
+        // Start of Cursor Code
         return TryGetActiveServerAddress<TComp>(map, null, out address);
     }
-
     /// <summary>
     /// Returns the address of the currently active server for the given map and receive frequency if there is one.<br/>
     /// What kind of server you're trying to get the active instance of is determined by the component type parameter TComp.<br/>
@@ -58,6 +58,7 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
     /// <returns>True if there is an active server. False otherwise</returns>
     public bool TryGetActiveServerAddress<TComp>(MapId map, uint? receiveFrequency, [NotNullWhen(true)] out string? address) where TComp : IComponent
     {
+        // End of Cursor Code
         var servers = EntityQueryEnumerator<
             SingletonDeviceNetServerComponent,
             DeviceNetworkComponent,
@@ -67,15 +68,15 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
 
         (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? last = default;
         (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? active = default; // Forge-Change
-        HashSet<(uint? receive, uint? transmit)> activeFrequencyPairs = new();
+        HashSet<(uint? receive, uint? transmit)> activeFrequencyPairs = new(); // Cursor
 
         while (servers.MoveNext(out var uid, out var server, out var device, out _, out var xform))
         {
             if (xform.MapID != map) // Forge-Change
                 continue;
 
-            if (receiveFrequency != null && device.ReceiveFrequency != receiveFrequency)
-                continue;
+            if (receiveFrequency != null && device.ReceiveFrequency != receiveFrequency) // Cursor
+                continue; // Cursor
 
             if (!server.Available)
             {
@@ -88,7 +89,8 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
             if (!server.Active) // Forge-Change
                 continue;
 
-            var frequencyPair = (device.ReceiveFrequency, device.TransmitFrequency);
+            // Start of Cursor Code
+            var frequencyPair = (device.ReceiveFrequency, device.TransmitFrequency); // Cursor
             if (!activeFrequencyPairs.Add(frequencyPair))
             {
                 DisconnectServer(uid, server, device);
@@ -97,6 +99,7 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
 
             if (!active.HasValue)
                 active = (uid, server, device);
+            // End of Cursor Code
         }
 
         if (active.HasValue) // Forge-Change
@@ -133,7 +136,7 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
 
         (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? lastAvailable = null;
         (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? active = null;
-        HashSet<(uint? receive, uint? transmit)> activeFrequencyPairs = new();
+        HashSet<(uint? receive, uint? transmit)> activeFrequencyPairs = new(); // Cursor
 
         while (servers.MoveNext(out var uid, out var server, out var device, out _))
         {
@@ -148,15 +151,15 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
             if (!server.Active)
                 continue;
 
-            var frequencyPair = (device.ReceiveFrequency, device.TransmitFrequency);
-            if (!activeFrequencyPairs.Add(frequencyPair))
+            var frequencyPair = (device.ReceiveFrequency, device.TransmitFrequency); // Cursor
+            if (!activeFrequencyPairs.Add(frequencyPair)) // Cursor
             {
                 DisconnectServer(uid, server, device);
                 continue;
             }
 
-            if (!active.HasValue)
-                active = (uid, server, device);
+            if (!active.HasValue) // Cursor
+                active = (uid, server, device); // Cursor
         }
 
         if (active.HasValue)

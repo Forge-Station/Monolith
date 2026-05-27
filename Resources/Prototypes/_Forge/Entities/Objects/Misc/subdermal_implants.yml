@@ -66,15 +66,14 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
-    # In future will make special tracking systme for Factions
-    #- type: SuitSensor
-    #  randomMode: false
-    #  controlsLocked: true
-    #  mode: SensorCords
-    #  activationContainer: "implant"
-    #- type: DeviceNetwork
-    #  deviceNetId: Wireless
-    #  transmitFrequencyId: SuitRenegadeSensor
+    - type: SuitSensor
+      randomMode: false
+      controlsLocked: true
+      mode: SensorCords
+      activationContainer: "implant"
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: SuitRenegadeSensor
     - type: TriggerOnMobstateChange
       mobState:
       - Critical
@@ -90,15 +89,14 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
-    # In future will make special tracking systme for Factions
-    #- type: SuitSensor
-    #  randomMode: false
-    #  controlsLocked: true
-    #  mode: SensorCords
-    #  activationContainer: "implant"
-    #- type: DeviceNetwork
-    #  deviceNetId: Wireless
-    #  transmitFrequencyId: SuitTSFSensor
+    - type: SuitSensor
+      randomMode: false
+      controlsLocked: true
+      mode: SensorCords
+      activationContainer: "implant"
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: SuitTSFSensor
     - type: TriggerOnMobstateChange
       mobState:
       - Critical
@@ -114,15 +112,14 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
-    # In future will make special tracking systme for Factions
-    #- type: SuitSensor
-    #  randomMode: false
-    #  controlsLocked: true
-    #  mode: SensorCords
-    #  activationContainer: "implant"
-    #- type: DeviceNetwork
-    #  deviceNetId: Wireless
-    #  transmitFrequencyId: SuitNanotrasenSensor
+    - type: SuitSensor
+      randomMode: false
+      controlsLocked: true
+      mode: SensorCords
+      activationContainer: "implant"
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: SuitNanotrasenSensor
     - type: TriggerOnMobstateChange
       mobState:
       - Critical
@@ -138,15 +135,14 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
-    # In future will make special tracking systme for Factions
-    #- type: SuitSensor
-    #  randomMode: false
-    #  controlsLocked: true
-    #  mode: SensorCords
-    #  activationContainer: "implant"
-    #- type: DeviceNetwork
-    #  deviceNetId: Wireless
-    #  transmitFrequencyId: SuitNanotrasenSensor
+    - type: SuitSensor
+      randomMode: false
+      controlsLocked: true
+      mode: SensorCords
+      activationContainer: "implant"
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: SuitNanotrasenSensor
     - type: TriggerOnMobstateChange
       mobState:
       - Critical
@@ -162,15 +158,14 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
-    # In future will make special tracking systme for Factions
-    #- type: SuitSensor
-    #  randomMode: false
-    #  controlsLocked: true
-    #  mode: SensorCords
-    #  activationContainer: "implant"
-    #- type: DeviceNetwork
-    #  deviceNetId: Wireless
-    #  transmitFrequencyId: SuitImperialSensor
+    - type: SuitSensor
+      randomMode: false
+      controlsLocked: true
+      mode: SensorCords
+      activationContainer: "implant"
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: SuitImperialSensor
     - type: TriggerOnMobstateChange
       mobState:
       - Critical

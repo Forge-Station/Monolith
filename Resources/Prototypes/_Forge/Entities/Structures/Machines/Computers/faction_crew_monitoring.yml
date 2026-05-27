@@ -1,0 +1,87 @@
+- type: entity
+  parent: ComputerCrewMonitoring
+  id: ComputerCrewRenegadeMonitoring
+  name: консоль мониторинга ВКР # crew renegade monitoring console
+  description: Используется для просмотра статусов всех датчиков имплантов состава ВКР. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's renegade implants.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: crew
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewRenegadeMonitor
+
+- type: entity
+  parent: ComputerCrewMonitoring
+  id: ComputerCrewTSFMCMonitoring
+  name: консоль мониторинга ТСФ # crew TSFMC monitoring console
+  description: Используется для просмотра статусов всех датчиков имплантов состава ТСФ. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's TSFMC implants.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: crew
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewTSFMCMonitor
+
+- type: entity
+  parent: ComputerCrewMonitoring
+  id: ComputerCrewNanotrasenMonitoring
+  name: консоль мониторинга НТ # crew NT monitoring console
+  description: Используется для просмотра статусов всех датчиков имплантов состава НТ и TTI. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's NT and TTI implants.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: crew
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewNanotrasenMonitor
+
+- type: entity
+  parent: ComputerCrewMonitoring
+  id: ComputerCrewImperialMonitoring
+  name: консоль мониторинга СИВ # crew imperial monitoring console
+  description: Используется для просмотра статусов всех датчиков имплантов состава СИВ. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's imperial implants.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: crew
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewImperialMonitor

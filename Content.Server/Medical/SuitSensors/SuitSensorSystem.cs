@@ -103,7 +103,7 @@ public sealed partial class SuitSensorSystem : EntitySystem
             {
                 // Frontier - PR 1053 QoL changes to coordinates display
                 // if (!_singletonServerSystem.TryGetActiveServerAddress<CrewMonitoringServerComponent>(sensor.StationId!.Value, out var address))
-                if (!_singletonServerSystem.TryGetActiveServerAddress<CrewMonitoringServerComponent>(xform.MapID, out var address))
+                if (!_singletonServerSystem.TryGetActiveServerAddress<CrewMonitoringServerComponent>(xform.MapID, device.TransmitFrequency, out var address))
                     continue;
 
 

@@ -5,6 +5,7 @@ using Content.Server.Station.Systems;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Power;
 using Robust.Shared.Map;
+using System.Collections.Generic;
 
 namespace Content.Server.DeviceNetwork.Systems;
 
@@ -43,6 +44,20 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
     /// <returns>True if there is an active serve. False otherwise</returns>
     public bool TryGetActiveServerAddress<TComp>(MapId map, [NotNullWhen(true)] out string? address) where TComp : IComponent
     {
+        return TryGetActiveServerAddress<TComp>(map, null, out address);
+    }
+
+    /// <summary>
+    /// Returns the address of the currently active server for the given map and receive frequency if there is one.<br/>
+    /// What kind of server you're trying to get the active instance of is determined by the component type parameter TComp.<br/>
+    /// </summary>
+    /// <param name="map">The map id to search on</param>
+    /// <param name="receiveFrequency">The receive frequency group to search in. Null means all frequencies.</param>
+    /// <param name="address">The address of the active server if it exists</param>
+    /// <typeparam name="TComp">The component type that determines what type of server you're getting the address of</typeparam>
+    /// <returns>True if there is an active server. False otherwise</returns>
+    public bool TryGetActiveServerAddress<TComp>(MapId map, uint? receiveFrequency, [NotNullWhen(true)] out string? address) where TComp : IComponent
+    {
         var servers = EntityQueryEnumerator<
             SingletonDeviceNetServerComponent,
             DeviceNetworkComponent,
@@ -52,10 +67,14 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
 
         (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? last = default;
         (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? active = default; // Forge-Change
+        HashSet<(uint? receive, uint? transmit)> activeFrequencyPairs = new();
 
         while (servers.MoveNext(out var uid, out var server, out var device, out _, out var xform))
         {
             if (xform.MapID != map) // Forge-Change
+                continue;
+
+            if (receiveFrequency != null && device.ReceiveFrequency != receiveFrequency)
                 continue;
 
             if (!server.Available)
@@ -69,8 +88,15 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
             if (!server.Active) // Forge-Change
                 continue;
 
-            if (!active.HasValue) // Forge-Change
-                active = (uid, server, device); // Forge-Change
+            var frequencyPair = (device.ReceiveFrequency, device.TransmitFrequency);
+            if (!activeFrequencyPairs.Add(frequencyPair))
+            {
+                DisconnectServer(uid, server, device);
+                continue;
+            }
+
+            if (!active.HasValue)
+                active = (uid, server, device);
         }
 
         if (active.HasValue) // Forge-Change
@@ -107,6 +133,7 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
 
         (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? lastAvailable = null;
         (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? active = null;
+        HashSet<(uint? receive, uint? transmit)> activeFrequencyPairs = new();
 
         while (servers.MoveNext(out var uid, out var server, out var device, out _))
         {
@@ -121,13 +148,15 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
             if (!server.Active)
                 continue;
 
-            if (active.HasValue)
+            var frequencyPair = (device.ReceiveFrequency, device.TransmitFrequency);
+            if (!activeFrequencyPairs.Add(frequencyPair))
             {
                 DisconnectServer(uid, server, device);
                 continue;
             }
 
-            active = (uid, server, device);
+            if (!active.HasValue)
+                active = (uid, server, device);
         }
 
         if (active.HasValue)
@@ -182,9 +211,15 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
     /// <summary>
     /// Disconnects a server from the device network and clears the currently active server
     /// </summary>
-    private void DisconnectServer(EntityUid uid, SingletonDeviceNetServerComponent? server = null, DeviceNetworkComponent? device = null)
+    private void DisconnectServer(
+        EntityUid uid,
+        SingletonDeviceNetServerComponent? server = null,
+        DeviceNetworkComponent? device = null)
     {
-        if (!Resolve(uid, ref server, ref device))
+        if (!Resolve(uid, ref server))
+            return;
+
+        if (!server.Active)
             return;
 
         server.Active = false;
@@ -192,7 +227,8 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
         var disconnectedEvent = new DeviceNetServerDisconnectedEvent();
         RaiseLocalEvent(uid, ref disconnectedEvent);
 
-        _deviceNetworkSystem.DisconnectDevice(uid, device, false);
+        if (device != null)
+            _deviceNetworkSystem.DisconnectDevice(uid, device, false);
     }
 }
 

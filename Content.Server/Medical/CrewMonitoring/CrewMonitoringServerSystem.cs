@@ -39,10 +39,17 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
             return;
         _updateDiff -= UpdateRate;
 
-        var servers = EntityQueryEnumerator<CrewMonitoringServerComponent>();
+        var servers = EntityQueryEnumerator<CrewMonitoringServerComponent, DeviceNetworkComponent, TransformComponent>();
 
-        while (servers.MoveNext(out var id, out var server))
+        while (servers.MoveNext(out var id, out var server, out var device, out var xform))
         {
+            // Ensure one active server per frequency group is selected and connected
+            // even when no suit sensor traffic exists yet (e.g. faction implants without SuitSensor).
+            _singletonServerSystem.TryGetActiveServerAddress<CrewMonitoringServerComponent>(
+                xform.MapID,
+                device.ReceiveFrequency,
+                out _);
+
             if (!_singletonServerSystem.IsActiveServer(id))
                 continue;
 

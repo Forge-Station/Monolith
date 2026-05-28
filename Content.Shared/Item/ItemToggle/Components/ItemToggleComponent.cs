@@ -1,3 +1,4 @@
+using Content.Shared.Whitelist; // Forge-Chanfe
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
@@ -84,6 +85,21 @@ public sealed partial class ItemToggleComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
     public SoundSpecifier? SoundFailToActivate;
+
+#region Forge-Change-start
+    /// <summary>
+    /// Forge: Whitelist required to toggle item. Checks the wearer for whitelist.
+    /// Also checks organs for required components/tags if WhitelistCheckOrgan is true.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? Whitelist = null;
+
+    /// <summary>
+    /// Forge: Whether we should check organs for the whitelist in addition to the target.
+    /// </summary>
+    [DataField]
+    public bool WhitelistCheckOrgans = false;
+#endregion Forge-Change-end
 }
 
 /// <summary>

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ ClothingOuterBase ] # Mono
+  parent: ClothingModsuitChestplateBase
   id: ClothingModsuitChestplateVanguardNSC
   name: vanguard modsuit chestplate
   description: A well rounded modsuit that focuses on mobility with its Actuator Enhancement System allowing its wearer to leap across the battlefield for rapid redeployment.
@@ -56,7 +56,7 @@
 # Harmony Medical Enterprises
 
 - type: entity
-  parent: [ ClothingOuterBase, GeigerCounterClothing ]
+  parent: ClothingModsuitChestplateBase
   id: ClothingModsuitChestplateHMELightSuit
   name: HME light hardsuit "Preserver" chestplate
   description: light-HME-modsuit-chestplate-desc 
@@ -77,6 +77,7 @@
     slots: [ outerClothing ]
   - type: RadarConsole
     followEntity: true
+    noRotate: true
   - type: DetectionRangeMultiplier
     infraredMultiplier: 0.5
     visualMultiplier: 0.75
@@ -130,7 +131,7 @@
     reduction: 0.45
 
 - type: entity
-  parent: [ ClothingOuterBase, GeigerCounterClothing ]
+  parent: ClothingModsuitChestplateBase
   id: ClothingModsuitChestplateHMEHeavySuit
   name: HME heavy hardsuit "Intercessor" chestplate
   description: heavy-HME-modsuit-chestplate-desc 
@@ -151,6 +152,7 @@
     slots: [ outerClothing ]
   - type: RadarConsole
     followEntity: true
+    noRotate: true
   - type: DetectionRangeMultiplier
     infraredMultiplier: 0.5
     visualMultiplier: 0.75
@@ -202,3 +204,42 @@
     coefficient: 0.4
   - type: FireProtection
     reduction: 0.1
+# ARS Omnissia
+
+- type: entity
+  parent: ClothingModsuitChestplateBase
+  id: ClothingModsuitChestplateOmnissia
+  name: ARS Omnissia modsuit chestplate
+  description: Reinforced repair plating with full radiation shielding when sealed.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Modsuits/omnissiamod.rsi
+    layers:
+    - state: chestplate
+    - state: chestplate-sealed
+      visible: false
+      map: [ "sealed" ]
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING-sealed
+      outerClothing-vox:
+      - state: equipped-OUTERCLOTHING-sealed-vox
+      outerClothing-resomi:
+      - state: equipped-OUTERCLOTHING-sealed-resomi
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: FireProtection
+    reduction: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.75
+        Slash: 0.75
+        Piercing: 0.75
+        Heat: 0.80
+        Caustic: 0.80
+        Shock: 0.60
+        Radiation: 0.0

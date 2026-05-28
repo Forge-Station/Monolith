@@ -122,6 +122,13 @@
   materials:
     Biomass: 7 # 10>7 Mono
 
+- type: latheRecipe # Forge-Change
+  id: SynthKidneys # Forge-Change
+  result: BioSynthKidneys # Forge-Change
+  completetime: 10 # Forge-Change
+  materials: # Forge-Change
+    Biomass: 7 # Forge-Change
+
 - type: latheRecipe
   id: SynthHeadEmpty
   result: BioSynthHeadEmpty

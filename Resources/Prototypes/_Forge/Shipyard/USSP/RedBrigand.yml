@@ -10,6 +10,8 @@
   shuttlePath: /Maps/_Forge/Shuttles/USSP/RedBrigand.yml
   guidebookPage: Null
   class:
+  - Fighter
+  - Patrol
   - Pursuit
   - Corvette
   engine:

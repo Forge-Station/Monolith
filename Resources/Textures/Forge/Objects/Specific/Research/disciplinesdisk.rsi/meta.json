@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "by v6st and DRON5011 for Forge",
+  "copyright": "by v6st, DRON5011 and mersen for Forge",
   "size": {
     "x": 32,
     "y": 32
@@ -38,7 +38,10 @@
       "name": "harmony"
     },
     {
-      "name": "nt"	  
+      "name": "bstp"
+    },
+    {
+      "name": "nt"
     }
   ]
 }

@@ -141,3 +141,18 @@
     - id: ClothingMaskGasERT
   - type: AccessReader
     access: [["Command"]]
+    
+- type: entity
+  id: SuitStorageTraumaLeader
+  parent: SuitStorageBase
+  suffix: Hardsuit, TTI
+  components:
+  - type: StorageFill
+    contents:
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+    - id: ClothingOuterHardsuitTraumaLeader
+    - id: ClothingShoesBootsMagTrauma
+    - id: ClothingMaskSterileTrauma
+  - type: AccessReader
+    access: [["Command"]]

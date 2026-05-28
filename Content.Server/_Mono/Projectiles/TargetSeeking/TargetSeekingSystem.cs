@@ -12,12 +12,12 @@ namespace Content.Server._Mono.Projectiles.TargetSeeking;
 /// <summary>
 ///     Handles the logic for target-seeking projectiles.
 /// </summary>
-public sealed class TargetSeekingSystem : EntitySystem
+public sealed partial class TargetSeekingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = null!;
-    [Dependency] private readonly RotateToFaceSystem _rotateToFace = null!;
-    [Dependency] private readonly PhysicsSystem _physics = null!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!; // Mono
+    [Dependency] private SharedTransformSystem _transform = null!;
+    [Dependency] private RotateToFaceSystem _rotateToFace = null!;
+    [Dependency] private PhysicsSystem _physics = null!;
+    [Dependency] private IGameTiming _gameTiming = default!; // Mono
 
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -159,13 +159,12 @@ public sealed class TargetSeekingSystem : EntitySystem
                 seekingComp.Launched = true;
             }
 
-            // Apply acceleration in the direction the projectile is facing
-            _physics.SetLinearVelocity(uid, body.LinearVelocity + _transform.GetWorldRotation(xform).ToWorldVec() * acceleration, body: body);
-
-            var velLen = body.LinearVelocity.Length();
-            // cut off velocity above max
+            // Apply acceleration in the direction the projectile is facing, then clamp to max speed in one write.
+            var newVel = body.LinearVelocity + _transform.GetWorldRotation(xform).ToWorldVec() * acceleration;
+            var velLen = newVel.Length();
             if (velLen > seekingComp.MaxSpeed)
-                _physics.SetLinearVelocity(uid, body.LinearVelocity * (seekingComp.MaxSpeed / velLen), body: body);
+                newVel *= seekingComp.MaxSpeed / velLen;
+            _physics.SetLinearVelocity(uid, newVel, body: body);
 
             // Skip seeking behavior if disabled (e.g., after entering an enemy grid)
             if (seekingComp.SeekingDisabled)

@@ -1,0 +1,109 @@
+- type: latheRecipe
+  id: ForgeVoiceModuleImplanter
+  result: ForgeVoiceModuleImplanter
+  completetime: 4
+  materials:
+    Steel: 500
+    Glass: 500
+    Plastic: 300
+    Gold: 150
+    Silver: 150
+
+- type: latheRecipe
+  id: ForgeSubdermalArmorImplant
+  result: ForgeSubdermalArmorImplant
+  completetime: 6
+  materials:
+    Steel: 1500
+    Glass: 750
+    Plastic: 750
+    Gold: 450
+    Silver: 450
+    Plasteel: 1000
+
+- type: latheRecipe
+  id: ForgeReflectiveSubdermalArmorImplant
+  result: ForgeReflectiveSubdermalArmorImplant
+  completetime: 6
+  materials:
+    Steel: 1500
+    Glass: 750
+    Plastic: 750
+    Gold: 450
+    Silver: 450
+    Plasteel: 1000
+
+- type: latheRecipe
+  id: ForgeCyberneticLiver
+  result: ForgeCyberneticLiver
+  completetime: 10
+  materials:
+    Biomass: 10
+    Steel: 1000
+    Glass: 500
+    Plastic: 500
+    Gold: 300
+    Silver: 300
+
+- type: latheRecipe
+  id: ForgeCyberneticKidneys
+  result: ForgeCyberneticKidneys
+  completetime: 10
+  materials:
+    Biomass: 10
+    Steel: 1000
+    Glass: 500
+    Plastic: 500
+    Gold: 300
+    Silver: 300
+
+- type: latheRecipe
+  id: ForgeBioSynthTorso
+  result: ForgeBioSynthTorso
+  completetime: 10
+  materials:
+    Biomass: 12
+
+- type: latheRecipe
+  id: ForgeMilLeftHand
+  result: ForgeMilLeftHand
+  completetime: 5
+  materials:
+    Steel: 500
+    Glass: 250
+    Plastic: 250
+    Gold: 150
+    Silver: 150
+
+- type: latheRecipe
+  id: ForgeRiplyLeftHand
+  result: ForgeRiplyLeftHand
+  completetime: 5
+  materials:
+    Steel: 500
+    Glass: 250
+    Plastic: 250
+    Gold: 150
+    Silver: 150
+
+- type: latheRecipe
+  id: ForgeMilRightHand
+  result: ForgeMilRightHand
+  completetime: 5
+  materials:
+    Steel: 500
+    Glass: 250
+    Plastic: 250
+    Gold: 150
+    Silver: 150
+
+- type: latheRecipe
+  id: ForgeRiplyRightHand
+  result: ForgeRiplyRightHand
+  completetime: 5
+  materials:
+    Steel: 500
+    Glass: 250
+    Plastic: 250
+    Gold: 150
+    Silver: 150

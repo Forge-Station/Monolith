@@ -52,8 +52,7 @@ namespace Content.Server.Atmos.EntitySystems
             if (tile.ThermalConductivity == 0f || !Superconduction)
                 return false;
 
-            var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
-            AddChunkTile(gridAtmosphere, gridAtmosphere.SuperconductivityTiles, chunk.SuperconductivityTiles, tile); // Forge-Change
+            gridAtmosphere.SuperconductivityTiles.Add(tile);
             return true;
         }
 
@@ -87,10 +86,7 @@ namespace Content.Server.Atmos.EntitySystems
             // Make sure it's still hot enough to continue conducting.
             if (temperature < Atmospherics.MinimumTemperatureForSuperconduction)
             {
-                if (TryGetChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
-                    RemoveChunkTile(gridAtmosphere, gridAtmosphere.SuperconductivityTiles, chunk.SuperconductivityTiles, tile); // Forge-Change
-                else
-                    gridAtmosphere.SuperconductivityTiles.Remove(tile);
+                gridAtmosphere.SuperconductivityTiles.Remove(tile);
             }
         }
 

@@ -52,6 +52,7 @@
       - id: PhoneInstrumentHigh # Mono
       - id: WeaponCaseShortBombCollar # Mono
       - id: ClothingEyesNTGlasses # Forge-change
+      - id: SecurityTechFabCircuitboard # Forge-change
 
 - type: entity
   id: LockerNfsdSheriffFilled

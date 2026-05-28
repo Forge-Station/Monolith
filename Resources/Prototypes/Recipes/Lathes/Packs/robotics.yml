@@ -35,6 +35,15 @@
   - MedicalCyberneticEyes
   - DexLeftHand
   - DexRightHand
+  - ForgeVoiceModuleImplanter # Forge-Change
+  - ForgeSubdermalArmorImplant # Forge-Change
+  - ForgeReflectiveSubdermalArmorImplant # Forge-Change
+  - ForgeMilLeftHand # Forge-Change
+  - ForgeMilRightHand # Forge-Change
+  - ForgeRiplyLeftHand # Forge-Change
+  - ForgeRiplyRightHand # Forge-Change
+  - ForgeCyberneticLiver # Forge-Change
+  - ForgeCyberneticKidneys # Forge-Change
 
 - type: latheRecipePack
   id: BorgLimbsStatic

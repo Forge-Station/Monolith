@@ -1,4 +1,4 @@
-ent-ClothingShoesBootsSheriff = сапоги шерифа
+ent-ClothingShoesBootsSheriff = сапоги командующего офицера
     .desc = Шаттл дрожит, соседи молятся, а наёмники сразу вспоминают все свои грехи.
 
 ent-ClothingShoesBootsMagBattlePromax = продвинутые боевые магнитные сапоги

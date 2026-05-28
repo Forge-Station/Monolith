@@ -3,6 +3,7 @@
   id: MobAsakimGhostrole
   name: asakim warrior
   suffix: Asakim
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: RandomHumanoidAppearance
     randomizeName: True

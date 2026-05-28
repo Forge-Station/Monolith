@@ -274,6 +274,7 @@
     - Translators
     # Forge-change
     - BSparts
+    - ForgePublicWeapons
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - DynamicAmmoRecipePack
@@ -344,6 +345,7 @@
     - MonoAdvancedShuttleComponents # Mono
     - ForgeShipWeaponsDynamic # Forge-Change
     - ForgeAdvancedShuttleComponents # Forge-Change
+    - ForgeBoardingTeleportRecipes # Forge-Change
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
@@ -386,6 +388,7 @@
     - NFServiceBoards # Frontier
     - MonoAdvancedShuttleComponents # Mono
     - ForgeAdvancedShuttleComponents # Forge
+    - ForgeBoardingTeleportRecipes # Forge
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
@@ -531,6 +534,7 @@
     - SecurityExplosives
     - DynamicAmmoRecipePack
     - SecurityWeapons
+    - ForgePublicWeapons # Forge-change
     - SecurityDisablers
     - SMCybernetics
     # Mono - Mechs
@@ -640,8 +644,6 @@
     - SurgeryStatic
     - NFMedicalStatic # Frontier
     dynamicPacks:
-    - TTISuplplies # Forge-change
-    - TTIEquipment # Forge-change
     - Chemistry
     - SyringeGuns # DeltaV
     - NFMedical # Frontier

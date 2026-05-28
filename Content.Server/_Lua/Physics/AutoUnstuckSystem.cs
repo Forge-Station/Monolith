@@ -8,8 +8,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Map.Components;
-using Content.Server.Shuttles.Components;
 using Content.Shared.Humanoid;
 
 namespace Content.Server._Lua.Physics;
@@ -25,63 +23,62 @@ public sealed class AutoUnstuckSystem : EntitySystem
         new(0f, -2f),
     };
 
+    // Stuck threshold is 15s, so polling at ~2 Hz is plenty.
+    private const float CheckInterval = 0.5f;
+    private const float StuckThreshold = 15f;
+
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     private readonly Dictionary<EntityUid, float> _stuckTime = new();
-    private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<TransformComponent> _xformQuery;
     private readonly List<EntityUid> _toClear = new();
-    private readonly List<EntityUid> _awake = new();
+    private float _checkAccum;
 
     public override void Initialize()
     {
         base.Initialize();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _xformQuery = GetEntityQuery<TransformComponent>();
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        _checkAccum += frameTime;
+        if (_checkAccum < CheckInterval)
+            return;
+
+        var elapsed = _checkAccum;
+        _checkAccum = 0f;
+
         _toClear.Clear();
-        _awake.Clear();
 
-        foreach (var ent in _physics.AwakeBodies)
+        var query = EntityQueryEnumerator<HumanoidAppearanceComponent, PhysicsComponent>();
+        while (query.MoveNext(out var uid, out _, out var body))
         {
-            _awake.Add(ent.Owner);
-        }
-
-        foreach (var uid in _awake)
-        {
-            if (!_physicsQuery.TryGetComponent(uid, out var body)) continue;
-            if (!HasComp<HumanoidAppearanceComponent>(uid)) continue; // Forge-Change
+            if (!body.Awake) continue;
             if (body.BodyType == BodyType.Static || !body.CanCollide) continue;
-            if (HasComp<MapGridComponent>(uid) || HasComp<MapComponent>(uid) || HasComp<ShuttleComponent>(uid)) continue;
             if (IsPaused(uid)) continue;
+
             var hasStaticHardContact = false;
-            var dirSum = Vector2.Zero;
             var contacts = _physics.GetContacts(uid);
             while (contacts.MoveNext(out var contact))
             {
                 if (!contact.IsTouching || !contact.Hard) continue;
-                var other = contact.OtherEnt(uid);
                 var otherBody = contact.OtherBody(uid);
                 if (otherBody.BodyType != BodyType.Static) continue;
-                var selfTx = _physics.GetPhysicsTransform(uid);
-                var otherTx = _physics.GetPhysicsTransform(other);
-                var dir = selfTx.Position - otherTx.Position;
-                if (dir != Vector2.Zero) dirSum += Vector2.Normalize(dir);
                 hasStaticHardContact = true;
+                break;
             }
             if (!hasStaticHardContact)
             {
                 _toClear.Add(uid);
                 continue;
             }
-            if (_stuckTime.TryGetValue(uid, out var t)) _stuckTime[uid] = t + frameTime;
-            else _stuckTime[uid] = frameTime;
-            if (_stuckTime[uid] < 15f) continue;
+            if (_stuckTime.TryGetValue(uid, out var t)) _stuckTime[uid] = t + elapsed;
+            else _stuckTime[uid] = elapsed;
+            if (_stuckTime[uid] < StuckThreshold) continue;
             if (_xformQuery.TryGetComponent(uid, out var xform))
             {
                 var offset = _random.Pick(StuckOffsets);
@@ -99,4 +96,3 @@ public sealed class AutoUnstuckSystem : EntitySystem
         }
     }
 }
-

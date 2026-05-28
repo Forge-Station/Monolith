@@ -12,6 +12,7 @@
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/shiv.yml
   guidebookPage: Null
   class:
+  - Patrol
   - Salvage
   - Science
   engine:

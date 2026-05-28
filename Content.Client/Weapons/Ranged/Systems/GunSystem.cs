@@ -5,6 +5,8 @@ using Content.Client.Gameplay;
 using Content.Client.Items;
 using Content.Client.Projectiles;
 using Content.Client.Weapons.Ranged.Components;
+using Content.Shared.Body.Components; // Forge-Change
+using Content.Shared.Body.Systems; // Forge-Change
 using Content.Shared.Camera;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
@@ -18,6 +20,7 @@ using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Whitelist; // Forge-Change
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -51,6 +54,8 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly Robust.Client.Physics.PhysicsSystem _physics = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!; // Forge-Change
+    [Dependency] private readonly SharedBodySystem _body = default!; // Forge-Change
 
     public static readonly EntProtoId HitscanProto = "HitscanEffect";
 
@@ -210,6 +215,9 @@ public sealed partial class GunSystem : SharedGunSystem
         {
             return;
         }
+
+        if (!CheckWhitelist((gunUid, gun), entity, Timing.IsFirstTimePredicted)) // Forge-Change
+            return;
 
         var useKey = gun.UseKey ? EngineKeyFunctions.Use : EngineKeyFunctions.UseSecondary;
 
@@ -480,4 +488,32 @@ public sealed partial class GunSystem : SharedGunSystem
         _physics.UpdateIsPredicted(uid);
         base.ShootProjectile(uid, direction, gunVelocity, gunUid, user, speed, offset);
     }
+
+#region Forge-Change
+    private bool CheckWhitelist(Entity<GunComponent> gun, EntityUid user, bool predicted)
+    {
+        var comp = gun.Comp;
+        if (comp.Whitelist == null)
+            return true;
+
+        if (comp.WhitelistCheckOrgans && TryComp<BodyComponent>(user, out var body))
+        {
+            var organs = _body.GetBodyOrgans(user, body);
+            foreach (var (organUid, _) in organs)
+            {
+                if (_whitelistSystem.IsWhitelistPassOrNull(comp.Whitelist, organUid))
+                    return true;
+            }
+        }
+
+        if (_whitelistSystem.IsWhitelistFail(comp.Whitelist, user))
+        {
+            if (predicted && user.IsValid())
+                PopupSystem.PopupEntity(Loc.GetString("gun-cannot-use"), user, user);
+            return false;
+        }
+
+        return true;
+    }
+#endregion Forge-Change-end
 }

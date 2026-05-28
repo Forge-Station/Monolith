@@ -18,22 +18,24 @@
   maximumDistance: 5500 # Mono
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
-  placementTags: [ TSF ]
-  minDistanceFromTags:
+  placementTags: [ TSF ] # Forge-Change
+  minDistanceFromTags: # Forge-Change
     Renegates: 5000
   gridPath: /Maps/_Forge/POI/TSFChalcyonForge.yml
   addComponents:
   - type: IFF
     color: "#047abd"
     readOnly: true
-  - type: Company
+  - type: Company # Forge-Change
     companyName: TSF
-  - type: PoiCaptureRoundstart
+  - type: PoiCaptureRoundstart # Forge-Change
     ownerCompanyId: TSF
     ownerFactionId: TSF
     zoneRadius: 2048
   - type: SolarPoweredGrid
     doNotCull: true
+  - type: ProtectedGrid # Forge-Change
+    preventTeleportation: true
 
 - type: gameMap
   id: TSFMCHalcyon

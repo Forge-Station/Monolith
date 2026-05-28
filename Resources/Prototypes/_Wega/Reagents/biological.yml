@@ -48,20 +48,18 @@
       volume: 6
   metabolisms:
     Medicine:
+      metabolismRate: 0.25
       effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -0.8
       - !type:HealthChange
         damage:
           types:
-            Blunt: -1
-            Slash: -1
-            Piercing: -1
-            Poison: -1
-            Heat: -1
-            Shock: -1
-            Cold: -1
-            Caustic: -1
-            Asphyxiation: -1
-            Bloodloss: -1
+            Poison: -0.3
+            Heat: -0.4
+            Cold: -0.4
+            Bloodloss: -0.7
         conditions:
         - !type:OrganType
           type: Demon
@@ -69,7 +67,7 @@
       - !type:HealthChange
         damage:
           types:
-            Poison: 1
+            Poison: 2.75
         conditions:
         - !type:OrganType
           type: Demon

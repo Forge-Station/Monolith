@@ -18,6 +18,8 @@
   addComponents:
   - type: IFF
     color: "#009dff"
+  - type: ProtectedGrid # Forge-Change
+    preventTeleportation: true
 
 - type: gameMap
   id: Sevastopol

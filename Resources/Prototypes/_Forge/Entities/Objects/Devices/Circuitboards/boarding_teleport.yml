@@ -1,0 +1,134 @@
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: BoardingTeleportConsoleCircuitboard
+  name: bluespace boarding console board
+  description: A computer circuit board for a bluespace boarding console.
+  components:
+  - type: Sprite
+    state: cpu_science
+  - type: ComputerBoard
+    prototype: ComputerBoardingTeleport
+  - type: Tag
+    tags:
+    - DroneUsable
+    - HighRiskItem
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: BoardingBluespaceScramblerMachineCircuitboard
+  name: bluespace scrambler board
+  description: A machine printed circuit board for a bluespace scrambler.
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: BoardingBluespaceScrambler
+    requirements:
+      Manipulator: 2
+      Capacitor: 4
+    stackRequirements:
+      Steel: 5
+      Glass: 5
+      Plasma: 3
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: BoardingTeleportEngineMachineCircuitboard
+  name: bluespace boarding engine board
+  description: A machine circuit board for a bluespace boarding engine.
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: BoardingTeleportEngine
+    requirements:
+      Manipulator: 3
+      Capacitor: 3
+    stackRequirements:
+      Steel: 6
+      Glass: 6
+      Plasma: 2
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: BoardingTeleportPlatformMachineCircuitboard
+  name: bluespace boarding platform board
+  description: A machine circuit board for a boarding platform.
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: BoardingTeleportPlatform
+    requirements:
+      Manipulator: 2
+      Capacitor: 2
+    stackRequirements:
+      Steel: 5
+      Glass: 5
+
+- type: entity
+  parent: BoardingTeleportEngineMachineCircuitboard
+  id: BoardingTeleportEngineAdvancedMachineCircuitboard
+  name: advanced bluespace boarding engine board
+  description: A machine circuit board for an advanced bluespace boarding engine.
+  components:
+  - type: MachineBoard
+    prototype: BoardingTeleportEngineAdvanced
+    requirements:
+      Manipulator: 4
+      Capacitor: 4
+    stackRequirements:
+      Steel: 8
+      Glass: 8
+      Plasma: 4
+      Silver: 2
+
+- type: entity
+  parent: BoardingTeleportPlatformMachineCircuitboard
+  id: BoardingTeleportPlatformAdvancedMachineCircuitboard
+  name: advanced bluespace boarding platform board
+  description: A machine circuit board for an advanced boarding platform.
+  components:
+  - type: MachineBoard
+    prototype: BoardingTeleportPlatformAdvanced
+    requirements:
+      Manipulator: 3
+      Capacitor: 3
+    stackRequirements:
+      Steel: 7
+      Glass: 7
+      Silver: 2
+
+- type: entity
+  parent: BoardingTeleportEngineMachineCircuitboard
+  id: BoardingTeleportEngineExperimentalMachineCircuitboard
+  name: experimental bluespace boarding engine board
+  description: A machine circuit board for an experimental bluespace boarding engine.
+  components:
+  - type: MachineBoard
+    prototype: BoardingTeleportEngineExperimental
+    requirements:
+      Manipulator: 5
+      Capacitor: 5
+    stackRequirements:
+      Steel: 10
+      Glass: 10
+      Plasma: 6
+      Silver: 4
+
+- type: entity
+  parent: BoardingTeleportPlatformMachineCircuitboard
+  id: BoardingTeleportPlatformExperimentalMachineCircuitboard
+  name: experimental bluespace boarding platform board
+  description: A machine circuit board for an experimental boarding platform.
+  components:
+  - type: MachineBoard
+    prototype: BoardingTeleportPlatformExperimental
+    requirements:
+      Manipulator: 4
+      Capacitor: 4
+    stackRequirements:
+      Steel: 9
+      Glass: 9
+      Plasma: 4
+      Silver: 3

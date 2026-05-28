@@ -9,6 +9,8 @@
   addComponents:
   - type: IFF
     color: "#b6692e"
+  - type: ProtectedGrid
+    preventTeleportation: true
 
 - type: gameMap
   id: AbandonedEmpireBunker

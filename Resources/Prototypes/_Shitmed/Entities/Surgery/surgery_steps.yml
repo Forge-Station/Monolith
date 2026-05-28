@@ -484,6 +484,12 @@
     sleepModifier: 1
     isConsumable: true
 
+- type: entity # Forge-Change
+  parent: SurgeryStepInsertOrgan # Forge-Change
+  id: SurgeryStepInsertKidneys # Forge-Change
+  name: Add kidneys # Forge-Change
+  categories: [ HideSpawnMenu ] # Forge-Change
+
 - type: entity
   parent: SurgeryStepInsertOrgan
   id: SurgeryStepInsertLiver

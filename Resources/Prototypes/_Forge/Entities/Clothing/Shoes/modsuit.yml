@@ -130,3 +130,29 @@
       - state: equipped-FEET-sealed
       shoes-vox:
       - state: equipped-FEET-sealed-vox
+# ARS Omnissia
+
+- type: entity
+  parent: ClothingModsuitBootsBase
+  id: ClothingModsuitBootsOmnissia
+  name: ARS Omnissia magboots
+  description: Magnetic boots without mobility penalties.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Modsuits/omnissiamod.rsi
+    layers:
+    - state: boots
+    - state: boots-sealed
+      visible: false
+      map: [ "sealed" ]
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET-sealed
+      shoes-vox:
+      - state: equipped-FEET-sealed-vox

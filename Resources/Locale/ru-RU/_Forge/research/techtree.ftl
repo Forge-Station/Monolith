@@ -38,3 +38,5 @@ forge-research-technology-nfsd-nightvision = Даже во тьме
 forge-research-technology-nfsd-thermalvision = Даже сквозь стены
 forge-research-technology-nfsd-nightthermalvision = СБ видит тебя
 forge-research-technology-nfsd-advtools = Продвинутые инструменты
+
+research-technology-forge-public-weaponry = Импровизированное вооружение

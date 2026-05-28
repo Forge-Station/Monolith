@@ -1,0 +1,23 @@
+- type: latheRecipePack
+  id: ForgeBlueprints
+  recipes:
+  # Engineering
+  - ForgeBlueprintJetpackVoid
+  - ForgeBlueprintAdvancedTools
+  - ForgeBlueprintAdvancedShipRepairTools
+  # Medical
+  - ForgeBlueprintCyberneticArms
+  - ForgeBlueprintCyberneticLegs
+  - ForgeBlueprintCyberneticHands
+  - ForgeBlueprintCyberneticEyes
+  - ForgeBlueprintCyberneticOrgans
+  - ForgeBlueprintSubdermalImplants
+  # Science
+  - ForgeBlueprintNightVisionGoggles
+  - ForgeBlueprintThermalVisionGoggles
+  # Armory
+  - ForgeBlueprintIncendiaryAmmo
+  - ForgeBlueprintUraniumAmmo
+  - ForgeBlueprintAPAmmo
+  - ForgeBlueprintRIPAmmo
+  - ForgeBlueprintExplosives

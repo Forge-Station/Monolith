@@ -22,3 +22,5 @@ ent-DisciplinesDiskHME = диск технологий HME
 ent-DisciplinesDiskNanotrasen = диск технологий НТ
     .desc = Диск для сервера РНД, содержащий в себе технологии НТ.
     .suffix = DoNotMap
+ent-DisciplinesDiskBoardingTeleportTier4 = диск технологий блюспейс-абордажа T4
+    .desc = Зашифрованные данные с бортового ящика дрона. Вставьте в сервер исследований, чтобы открыть экспериментальную дисциплину и фазовый привод T4.

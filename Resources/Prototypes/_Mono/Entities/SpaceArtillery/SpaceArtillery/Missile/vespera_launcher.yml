@@ -44,7 +44,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: VesperaMagazine
+        startingItem: MissileMagazine50mmHE
         insertSound: /Audio/Weapons/Guns/MagIn/hpistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
         priority: 2

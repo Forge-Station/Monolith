@@ -303,7 +303,6 @@
   suffix: Для маппинга
   parent:
   - BallisticArtilleryMapped
-  - BallisticArtilleryTier0HP
   # Forge-Change: no longer manually assembled through generic machine frames
   description: Uses mechanisms to launch... something. Destroys rock easily. Limited range.
   components:
@@ -369,7 +368,6 @@
   name: M25 mining pulser
   parent:
   - BallisticArtillery
-  - BallisticArtilleryTier0HP
   # Forge-Change: no longer manually assembled through generic machine frames
   description: Uses mechanisms to launch... something. Destroys rock easily. Limited range.
   components:
@@ -695,11 +693,10 @@
 - type: entity
   id: WeaponLaserTurretL1Phalanx
   name: L-1 Phalanx
-  suffix: Для маппинга
+  suffix: Для маппинга, Т1
   parent:
   - BallisticArtilleryMapped
   - BallisticArtilleryTier1HP
-  suffix: Small, T1
   description: A light laser emplacement designed by the Pantheon Collective, used to shred threats of all types.
   components:
   - type: StaticPrice
@@ -937,9 +934,8 @@
   parent:
   - BallisticArtilleryMapped
   - BallisticArtilleryTier4HP # This shit is massive lol
-  suffix: Large, T3
+  suffix: Large, Для маппинга T3
   name: L-20 Apollo Mining Laser Cannon
-  suffix: Для маппинга
   description: One of the Pantheon Collective's top weapons, the Apollo is aptly named for its beams heating surfaces to beyond the temperature of nearby stars.
   components:
   - type: StaticPrice

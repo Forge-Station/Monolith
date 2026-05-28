@@ -50,7 +50,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: Magazine57mm
+        startingItem: Magazine57mmHE
         insertSound: /Audio/Weapons/Guns/MagIn/hpistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
         priority: 2
@@ -185,7 +185,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: Magazine90mm
+        startingItem: 90mmMagazineHE
         insertSound: /Audio/Weapons/Guns/MagIn/hpistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
         priority: 2

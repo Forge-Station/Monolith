@@ -1376,7 +1376,7 @@ entities:
     - type: CloakHeat
       lastUpdateTime: 0
     - type: NavMap
-- proto: 255mmCartridge
+- proto: 255mmCartridgeAPHE
   entities:
   - uid: 900
     components:

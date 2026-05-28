@@ -50,7 +50,7 @@
         priority: 2
         whitelist:
           tags:
-          - VesperaMagazine
+          - MissileMagazine50mm
         whitelistFailPopup: gun-magazine-whitelist-fail
   - type: RadarBlip
     radarColor: "#FCBA03"

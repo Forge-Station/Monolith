@@ -6,7 +6,7 @@
   frequency: 1224
 
 - type: deviceFrequency
-  id: SuitTSFMCSensor
+  id: SuitTSFSensor
   name: device-frequency-prototype-name-suit-sensors-tsfmc
   frequency: 1236
 
@@ -27,7 +27,7 @@
   frequency: 1223
 
 - type: deviceFrequency
-  id: CrewTSFMCMonitor
+  id: CrewTSFMonitor
   name: device-frequency-prototype-name-crew-monitor-tsfmc
   frequency: 1235
 

@@ -22,9 +22,9 @@
 
 - type: entity
   parent: ComputerCrewMonitoring
-  id: ComputerCrewTSFMCMonitoring
-  name: консоль мониторинга ТСФ # crew TSFMC monitoring console
-  description: Используется для просмотра статусов всех датчиков имплантов состава ТСФ. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's TSFMC implants.
+  id: ComputerCrewTSFMonitoring
+  name: консоль мониторинга ТСФ # crew TSF monitoring console
+  description: Используется для просмотра статусов всех датчиков имплантов состава ТСФ. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's TSF implants.
   components:
   - type: Sprite
     layers:
@@ -40,7 +40,7 @@
       state: generic_panel_open
   - type: DeviceNetwork
     deviceNetId: Wireless
-    receiveFrequencyId: CrewTSFMCMonitor
+    receiveFrequencyId: CrewTSFMonitor
 
 - type: entity
   parent: ComputerCrewMonitoring

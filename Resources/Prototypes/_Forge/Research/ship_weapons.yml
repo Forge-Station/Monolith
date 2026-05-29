@@ -1,80 +1,304 @@
-# SpaceArtillery classification used by this tree:
-# T1: L85, M25, Phalanx
-# T2: RAC-30, AK570, Dravon, Type-35, M220, Vespera, Vanyk
-# T3: Cerberus, Bofors, Tarnyx, Prometheus, Serpent, Tovek, Trident, Light Munitions Bay
-# T4: Longbow, Cyrexa, M381 Charon, Apollo
-# Special: faction-only, ADS-only, drone-only, utility-only, and Tier5+ outliers stay outside this chain.
+# SpaceArtillery — per-weapon research with family prerequisites (not whole-tier gates).
+#
+# Kinetic:     L85 → RAC-30 → AK570 → Dravon → Bofors → Longbow / Cyrexa / Charon
+# Laser:       Phalanx → Type-35 → Prometheus → Cerberus
+# Missile:     Vespera → Vanyk → Serpent / Light Munitions Bay; Vespera → Tovek → Trident
+# EMP:         Phalanx → M220 → Tarnyx
+# Mining:      M25 + Prometheus → Apollo
+#
+# T4 kinetic also requires ShuttleCtlaAdvancedDriveResearch.
 
 - type: technology
-  id: ForgeShipWeaponsT1Research
-  name: forge-research-technology-shipweapons-t1
+  id: ForgeShipWeaponResearchL85
+  name: forge-research-technology-shipweapon-l85
   entityIcon: WeaponTurretL85Autocannon
   discipline: Experimental
   tier: 3
-  cost: 65000
+  cost: 22000
   recipeUnlocks:
   - WeaponTurretL85AutocannonCircuitboard
+  technologyPrerequisites:
+  - BasicShuttleArmament
+  - ShuttleAdvancedComponents
+  position: -6, 4
+
+- type: technology
+  id: ForgeShipWeaponResearchM25
+  name: forge-research-technology-shipweapon-m25
+  entityIcon: WeaponTurretM25
+  discipline: Experimental
+  tier: 3
+  cost: 22000
+  recipeUnlocks:
   - WeaponTurretM25Circuitboard
+  technologyPrerequisites:
+  - BasicShuttleArmament
+  - ShuttleAdvancedComponents
+  position: -6, 9
+
+- type: technology
+  id: ForgeShipWeaponResearchPhalanx
+  name: forge-research-technology-shipweapon-phalanx
+  entityIcon: WeaponLaserTurretL1Phalanx
+  discipline: Experimental
+  tier: 3
+  cost: 21000
+  recipeUnlocks:
   - WeaponLaserTurretL1PhalanxCircuitboard
   technologyPrerequisites:
   - BasicShuttleArmament
   - ShuttleAdvancedComponents
-  position: -2, 4
+  position: -6, 6
 
 - type: technology
-  id: ForgeShipWeaponsT2Research
-  name: forge-research-technology-shipweapons-t2
+  id: ForgeShipWeaponResearchRAC30
+  name: forge-research-technology-shipweapon-rac30
+  entityIcon: WeaponTurretRAC30
+  discipline: Experimental
+  tier: 3
+  cost: 13000
+  recipeUnlocks:
+  - WeaponTurretRAC30Circuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchL85
+  position: -7, 4
+
+- type: technology
+  id: ForgeShipWeaponResearchAK570
+  name: forge-research-technology-shipweapon-ak570
   entityIcon: WeaponTurretAK570
   discipline: Experimental
   tier: 3
-  cost: 90000
+  cost: 13000
   recipeUnlocks:
-  - WeaponTurretRAC30Circuitboard
   - WeaponTurretAK570Circuitboard
-  - WeaponTurretDravonCircuitboard
-  - WeaponTurretType35Circuitboard
-  - WeaponTurretM220Circuitboard
-  - WeaponTurretVesperaCircuitboard
-  - WeaponTurretVanykCircuitboard
   technologyPrerequisites:
-  - ForgeShipWeaponsT1Research
-#  - ShuttleGunneryHighUpgradeResearch НЕ ЗАБУДЬ МЕНЯЯЯЯЯЯЯЯЯЯЯЯЯ
-  position: -1, 4
+  - ForgeShipWeaponResearchRAC30
+  position: -8, 4
 
 - type: technology
-  id: ForgeShipWeaponsT3Research
-  name: forge-research-technology-shipweapons-t3
+  id: ForgeShipWeaponResearchDravon
+  name: forge-research-technology-shipweapon-dravon
+  entityIcon: WeaponTurretDravon
+  discipline: Experimental
+  tier: 3
+  cost: 13000
+  recipeUnlocks:
+  - WeaponTurretDravonCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchAK570
+  position: -9, 4
+
+- type: technology
+  id: ForgeShipWeaponResearchType35
+  name: forge-research-technology-shipweapon-type35
+  entityIcon: WeaponTurretType35
+  discipline: Experimental
+  tier: 3
+  cost: 13000
+  recipeUnlocks:
+  - WeaponTurretType35Circuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchPhalanx
+  position: -7, 6
+
+- type: technology
+  id: ForgeShipWeaponResearchM220
+  name: forge-research-technology-shipweapon-m220
+  entityIcon: WeaponTurretM220
+  discipline: Experimental
+  tier: 3
+  cost: 13000
+  recipeUnlocks:
+  - WeaponTurretM220Circuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchPhalanx
+  position: -7, 8
+
+- type: technology
+  id: ForgeShipWeaponResearchVespera
+  name: forge-research-technology-shipweapon-vespera
+  entityIcon: WeaponTurretVespera
+  discipline: Experimental
+  tier: 3
+  cost: 13000
+  recipeUnlocks:
+  - WeaponTurretVesperaCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchL85
+  position: -7, 9
+
+- type: technology
+  id: ForgeShipWeaponResearchVanyk
+  name: forge-research-technology-shipweapon-vanyk
+  entityIcon: WeaponTurretVanyk
+  discipline: Experimental
+  tier: 3
+  cost: 12000
+  recipeUnlocks:
+  - WeaponTurretVanykCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchVespera
+  position: -7, 10
+
+- type: technology
+  id: ForgeShipWeaponResearchCerberus
+  name: forge-research-technology-shipweapon-cerberus
+  entityIcon: WeaponTurretCerberus
+  discipline: Experimental
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretCerberusCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchType35
+  position: -8, 7
+
+- type: technology
+  id: ForgeShipWeaponResearchBofors
+  name: forge-research-technology-shipweapon-bofors
   entityIcon: WeaponTurretBofors
   discipline: Experimental
   tier: 3
-  cost: 130000
+  cost: 16500
   recipeUnlocks:
-  - WeaponTurretCerberusCircuitboard
   - WeaponTurretBoforsCircuitboard
-  - WeaponTurretTarnyxReloadCircuitboard
-  - WeaponLaserTurretPrometheusCircuitboard
-  - WeaponTurretSerpentMissileCircuitboard
-  - WeaponTurretTovekCircuitboard
-  - WeaponTurretASM220Circuitboard
-  - WeaponTurretLightMunitionsBayCircuitboard
   technologyPrerequisites:
-  - ForgeShipWeaponsT2Research
-#  - ShuttleGunneryUltraUpgradeResearch НЕ ЗАБУДЬ МЕНЯЯЯЯЯЯЯЯЯЯЯЯЯ
-  position: -1, 5
+  - ForgeShipWeaponResearchDravon
+  position: -10, 4
 
 - type: technology
-  id: ForgeShipWeaponsT4Research
-  name: forge-research-technology-shipweapons-t4
+  id: ForgeShipWeaponResearchTarnyx
+  name: forge-research-technology-shipweapon-tarnyx
+  entityIcon: WeaponTurretTarnyxReload
+  discipline: Experimental
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretTarnyxReloadCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchM220
+  position: -8, 8
+
+- type: technology
+  id: ForgeShipWeaponResearchPrometheus
+  name: forge-research-technology-shipweapon-prometheus
+  entityIcon: WeaponLaserTurretPrometheus
+  discipline: Experimental
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponLaserTurretPrometheusCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchType35
+  position: -8, 6
+
+- type: technology
+  id: ForgeShipWeaponResearchSerpent
+  name: forge-research-technology-shipweapon-serpent
+  entityIcon: WeaponTurretSerpentMissile
+  discipline: Experimental
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretSerpentMissileCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchVanyk
+  position: -8, 10
+
+- type: technology
+  id: ForgeShipWeaponResearchTovek
+  name: forge-research-technology-shipweapon-tovek
+  entityIcon: WeaponTurretTovek
+  discipline: Experimental
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretTovekCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchVespera
+  position: -8, 9
+
+- type: technology
+  id: ForgeShipWeaponResearchTrident
+  name: forge-research-technology-shipweapon-trident
+  entityIcon: WeaponTurretASM220
+  discipline: Experimental
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretASM220Circuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchTovek
+  - ForgeShipWeaponResearchSerpent
+  position: -8, 11
+
+- type: technology
+  id: ForgeShipWeaponResearchLightMunitionsBay
+  name: forge-research-technology-shipweapon-light-munitions-bay
+  entityIcon: WeaponTurretLightMunitionsBay
+  discipline: Experimental
+  tier: 3
+  cost: 16000
+  recipeUnlocks:
+  - WeaponTurretLightMunitionsBayCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchVanyk
+  position: -8, 12
+
+- type: technology
+  id: ForgeShipWeaponResearchLongbow
+  name: forge-research-technology-shipweapon-longbow
+  entityIcon: WeaponTurretLongbow
+  discipline: Experimental
+  tier: 3
+  cost: 47500
+  recipeUnlocks:
+  - WeaponTurretLongbowCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchDravon
+  - ShuttleCtlaAdvancedDriveResearch
+  position: -11, 3
+
+- type: technology
+  id: ForgeShipWeaponResearchCyrexa
+  name: forge-research-technology-shipweapon-cyrexa
   entityIcon: WeaponTurretCyrexa
   discipline: Experimental
   tier: 3
-  cost: 190000
+  cost: 47500
   recipeUnlocks:
-  - WeaponTurretLongbowCircuitboard
   - WeaponTurretCyrexaCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchBofors
+  - ShuttleCtlaAdvancedDriveResearch
+  position: -11, 4
+
+- type: technology
+  id: ForgeShipWeaponResearchCharon
+  name: forge-research-technology-shipweapon-charon
+  entityIcon: WeaponTurretCharonReload
+  discipline: Experimental
+  tier: 3
+  cost: 47500
+  recipeUnlocks:
   - WeaponTurretCharonReloadCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchBofors
+  - ShuttleCtlaAdvancedDriveResearch
+  position: -11, 5
+
+- type: technology
+  id: ForgeShipWeaponResearchApollo
+  name: forge-research-technology-shipweapon-apollo
+  entityIcon: WeaponLaserTurretApollo
+  discipline: Experimental
+  tier: 3
+  cost: 47500
+  recipeUnlocks:
   - WeaponLaserTurretApolloCircuitboard
   technologyPrerequisites:
-  - ForgeShipWeaponsT3Research
+  - ForgeShipWeaponResearchM25
+  - ForgeShipWeaponResearchPrometheus
   - ShuttleCtlaAdvancedDriveResearch
-  position: -2, 5
+  position: -9, 6

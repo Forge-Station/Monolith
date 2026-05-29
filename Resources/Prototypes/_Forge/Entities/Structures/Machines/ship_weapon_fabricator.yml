@@ -7,7 +7,6 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shipWeaponFab.rsi
     offset: 1,-1
-    snapCardinals: true
     layers:
     - state: base
     - state: screen

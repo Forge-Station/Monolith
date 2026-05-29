@@ -38,9 +38,9 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Forge/Clothing/Mask/techniclogistic.rsi
+    sprite: Forge/Clothing/Mask/mask_techniclogistic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/techniclogistic.rsi
+    sprite: Forge/Clothing/Mask/mask_techniclogistic.rsi
 
 - type: entity
   parent: [ClothingMaskGasSecurity, BaseFactionGearOtherFactionT1]

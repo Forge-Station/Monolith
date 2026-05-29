@@ -182,7 +182,7 @@
     damageCoefficient: 0.6
 
 - type: entity
-  parent: ClothingOuterStorageFoldableBase
+  parent: ClothingOuterStorageBase
   id: ClothingOuterCoatEmpirePreafect
   name: empire preafect armored greatcoat
   description: empire preafect armored greatcoat
@@ -206,7 +206,7 @@
     damageCoefficient: 0.6
 
 - type: entity
-  parent: ClothingOuterStorageFoldableBase
+  parent: ClothingOuterStorageBase
   id: ClothingOuterCoatEmpirePreafectA
   name: empire preafect armored greatcoat
   description: empire preafect armored greatcoat

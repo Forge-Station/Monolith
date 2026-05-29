@@ -10,13 +10,7 @@
   - type: Clothing
     sprite: Forge/Clothing/OuterClothing/Coats/empirewindbreaker.rsi
   - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.85
-        Heat: 0.9
-        Caustic: 0.8
+    modifiers: {}
   - type: ExplosionResistance
     damageCoefficient: 0.75
   - type: ContainerContainer
@@ -158,31 +152,7 @@
         ents: []
 
 - type: entity
-  parent: ClothingOuterCoatHoSTrench
-  id: ClothingOuterCoatEmpireLord
-  name: lord armored greatcoat
-  description: lord armored greatcoat
-  components:
-  - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Coats/empirelord.rsi
-  - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Coats/empirelord.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.6
-        Slash: 0.45
-        Piercing: 0.45
-        Heat: 0.6
-        Radiation: 0.9
-        Caustic: 0.8
-  - type: FireProtection
-    reduction: 0.8
-  - type: ExplosionResistance
-    damageCoefficient: 0.6
-
-- type: entity
-  parent: ClothingOuterStorageFoldableBase
+  parent: ClothingOuterStorageBase
   id: ClothingOuterCoatEmpirePreafect
   name: empire preafect armored greatcoat
   description: empire preafect armored greatcoat
@@ -206,7 +176,7 @@
     damageCoefficient: 0.6
 
 - type: entity
-  parent: ClothingOuterStorageFoldableBase
+  parent: ClothingOuterStorageBase
   id: ClothingOuterCoatEmpirePreafectA
   name: empire preafect armored greatcoat
   description: empire preafect armored greatcoat

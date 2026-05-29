@@ -34,7 +34,7 @@
     sprite: Forge/Clothing/Head/Hats/preafect_v.rsi
   - type: Clothing
     sprite: Forge/Clothing/Head/Hats/preafect_v.rsi
-
+    
 # region Renegate
 - type: entity
   parent: ClothingHeadBase

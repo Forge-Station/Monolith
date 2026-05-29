@@ -13,8 +13,8 @@
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - TsfmcGaiter
   - TsfmcGasmask
+  - TsfmcGaiter
   fallbacks:
   - TsfmcGaiter
 
@@ -62,13 +62,12 @@
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - EmpireClothingBeltWebbingsNormalBlack
-  - EmpireClothingBeltWebbingsBigBlack
+  - EmpireClothingBeltWebbingsNormalTan
+  - EmpireClothingBeltWebbingsBigTan
   - EmpireClothingBeltMilitaryWebbing
   - EmpireClothingBeltWebbingsBigBase
-  - EmpireClothingBeltSecurityFilled
   fallbacks:
-  - EmpireClothingBeltWebbingsNormalBlack
+  - EmpireClothingBeltWebbingsNormalTan
 
 - type: loadoutGroup
   id: EmpireGloves
@@ -106,7 +105,7 @@
   - MonoSecurityGuardSatchel
   fallbacks:
   - ClothingBackpackSatchelPDV
-
+  
 # region Praefect
 - type: loadoutGroup
   id: EmpireCommanderJumpsuit
@@ -126,24 +125,20 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - ClothingOuterCoatEmpireLord
   - ClothingOuterCoatEmpirePreafect
   - ClothingOuterCoatEmpirePreafectA
   fallbacks:
   - ClothingOuterCoatEmpirePreafect
 
 - type: loadoutGroup
-  id: EmpirePreafectNeck
+  id: EmpireNeckPreafect
   name: loadout-group-contractor-neck
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - ClothingNeckCloakEmpirePreafect
   - ClothingNeckCloakEmpirePreafectOrange
-  - ClothingNeckCloakEmpirePreafectDiplomacy
-  - ClothingNeckCloakEmpirePreafectViolet
   fallbacks:
-  - ClothingNeckCloakEmpirePreafect
+  - ClothingNeckCloakEmpirePreafectOrange
 
 # region Tessarian
 - type: loadoutGroup
@@ -206,6 +201,16 @@
   - EmpireClothingUniformJumpsuitEmpireInq
 
 - type: loadoutGroup
+  id: EmpireNeckInquisitor
+  name: loadout-group-contractor-neck
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ClothingNeckCloakEmpirePreafectViolet
+  fallbacks:
+  - ClothingNeckCloakEmpirePreafectViolet
+  
+- type: loadoutGroup
   id: EmpireInquisitorOuterClothing
   name: loadout-group-contractor-outerclothing
   minLimit: 0
@@ -231,3 +236,13 @@
   - ClothingUniformJumpsuitEmpireConsul
   fallbacks:
   - ClothingUniformJumpsuitEmpireConsul
+
+- type: loadoutGroup
+  id: EmpireNeckConsul
+  name: loadout-group-contractor-neck
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ClothingNeckCloakEmpirePreafectDiplomacy
+  fallbacks:
+  - ClothingNeckCloakEmpirePreafectDiplomacy

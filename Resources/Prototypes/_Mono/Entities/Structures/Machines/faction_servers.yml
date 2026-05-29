@@ -168,6 +168,8 @@
     - MechaEngineering
     - Ullman # Forge-change
     - ViperGroup # Forge-change
+    - EmpireEquipment # Forge-change
+    - EmpireWeapon # Forge-change
 
 - type: entity
   parent: ResearchAndDevelopmentServer

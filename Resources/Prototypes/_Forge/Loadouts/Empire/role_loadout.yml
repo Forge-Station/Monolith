@@ -115,7 +115,7 @@
 - type: roleLoadout
   id: JobConsul # Diplomacy
   groups:
-  - EmpireNeck
+  - EmpireNeckConsul
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava
@@ -143,7 +143,7 @@
 - type: roleLoadout
   id: JobInquisitor # Inquisitor
   groups:
-  - EmpireInquisitorNeck
+  - EmpireNeckInquisitor
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava
@@ -171,7 +171,7 @@
 - type: roleLoadout
   id: JobPraefect # Lord
   groups:
-  - EmpirePreafectNeck
+  - EmpireNeckPreafect
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava

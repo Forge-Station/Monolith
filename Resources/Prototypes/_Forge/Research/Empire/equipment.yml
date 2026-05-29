@@ -1,18 +1,17 @@
-
 - type: technology
   id: EmpireBasicEquipment
   name: research-technology-empire-light
   entityIcon: ClothingOuterHardsuitRI14
   discipline: EmpireEquipment
   tier: 1
-  cost: 35000
+  cost: 70000
   recipeUnlocks:
   - ClothingOuterHardsuitRI14
   - ClothingOuterHardsuitRI14m
   - ClothingOuterHardsuitRI14i
   technologyPrerequisites:
   - UniversalMaterialResearchT1
-  position: 20, 1
+  position: 10, 13
 
 - type: technology
   id: EmpireAdvancedEquipment
@@ -20,7 +19,7 @@
   entityIcon: ClothingOuterHardsuitRI22
   discipline: EmpireEquipment
   tier: 2
-  cost: 55000
+  cost: 90000
   recipeUnlocks:
   - ClothingOuterHardsuitRI22
   - ClothingOuterHardsuitRI22i
@@ -28,36 +27,22 @@
   technologyPrerequisites:
   - EmpireBasicEquipment
   - UniversalMaterialResearchT2
-  position: 20, 6
-
+  position: 10, 15
 
 - type: technology
   id: EmpireHardsuitVigilance
-  name: research-technology-empire-prototype-vigilance
-  entityIcon: ClothingOuterHardsuitHVVigilance
-  discipline: EmpireEquipment
-  tier: 2
-  cost: 80000
-  recipeUnlocks:
-  - ClothingOuterHardsuitHVVigilance
-  technologyPrerequisites:
-  - EmpireAdvancedEquipment
-  - UniversalMaterialResearchT3
-  position: 20, 11
-
-- type: technology
-  id: EmpireHardsuitMilitant
   name: research-technology-empire-prototype-militant
-  entityIcon: ClothingOuterHardsuitHVMilitant
+  entityIcon: ClothingOuterHardsuitHV7
   discipline: EmpireEquipment
   tier: 2
-  cost: 80000
+  cost: 200000
   recipeUnlocks:
+  - ClothingOuterHardsuitHV7
   - ClothingOuterHardsuitHVMilitant
   technologyPrerequisites:
   - EmpireAdvancedEquipment
   - UniversalMaterialResearchT3
-  position: 21, 12
+  position: 11, 17
 
 - type: technology
   id: EmpireHardsuitStealh
@@ -65,10 +50,10 @@
   entityIcon: ClothingOuterHardsuitHVStealh
   discipline: EmpireEquipment
   tier: 2
-  cost: 80000
+  cost: 100000
   recipeUnlocks:
   - ClothingOuterHardsuitHVStealh
   technologyPrerequisites:
   - EmpireAdvancedEquipment
   - UniversalMaterialResearchT3
-  position: 21, 12
+  position: 11, 18

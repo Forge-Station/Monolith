@@ -663,6 +663,7 @@
     - NFWallets # Frontier
     dynamicPacks: # Frontier
     - NFPouches # Frontier
+    - ClothingEmpirePack # Forge-change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ClothingCentComm

@@ -27,6 +27,9 @@
     - NFMercenaryTechfabDeprecatedStatic
     - RoundstartShipgunAmmo
     dynamicPacks:
+    # Empire start
+    - HardsuitEmpirePack
+    - WeaponEmpirePack
     # rogue start
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged

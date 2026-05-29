@@ -21,10 +21,6 @@
 - type: latheRecipePack
   id: HardsuitEmpirePack
   recipes:
-  # Ancient
-  - ForgeEmpireAncientProtytype
-  - ForgeEmpireAncientProtytypeCom
-  - ForgeEmpireAncientProtytypeInq
   # Light
   - ClothingOuterHardsuitRI14
   - ClothingOuterHardsuitRI14m
@@ -35,9 +31,28 @@
   - ClothingOuterHardsuitRI22c
   # Heavy
   - ClothingOuterHardsuitHV7
-  - ClothingOuterHardsuitHV7c
-  - ClothingOuterHardsuitHV7i
   # HV
-  - ClothingOuterHardsuitHVVigilance
   - ClothingOuterHardsuitHVMilitant
   - ClothingOuterHardsuitHVStealh
+
+- type: latheRecipePack
+  id: WeaponEmpirePack
+  recipes:
+  - WeaponSubMachineGunC20rRogue
+  - WeaponRifleM90Rogue
+  - WeaponShotgunSultanPulsar
+  - PrintableDirtyBomb
+  - WeaponRifleWSPRRogue
+  - Magazine762x39mmSubsonic
+  - AmmoBox762x39mmSubsonic
+  - WeaponSubMachineGunMla73Rogue
+  - Magazine635x40mmCaseless
+  - AmmoBox635x40mmCaseless
+  - MagazineAsmgtUniversal635x40mm
+  - AmmoBox635x40mmCaselessBig
+  - WeaponSubMachineGunWt550Rogue
+  - WeaponSubMachineGunAtreidesRogue
+  - WeaponShotgunBulldogRogue
+  - WeaponSniperHristovRogue
+  - AmmoBox145x114mm
+  - AmmoBox145x114mmBig

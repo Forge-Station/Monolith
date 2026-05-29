@@ -31,6 +31,7 @@ using Content.Server._Mono.Radar; // Monolith
 using Content.Server.Explosion.EntitySystems;
 using Content.Server._NF.Medical.SuitSensors; // Frontier modification
 using Content.Shared.DeviceNetwork.Components;
+using Content.Server.DeviceNetwork.Components; // Cursor: SingletonDeviceNetServerComponent
 
 namespace Content.Server.Medical.SuitSensors;
 
@@ -66,6 +67,7 @@ public sealed partial class SuitSensorSystem : EntitySystem
         SubscribeLocalEvent<SuitSensorComponent, EmpPulseEvent>(OnEmpPulse);
         SubscribeLocalEvent<SuitSensorComponent, EmpDisabledRemovedEvent>(OnEmpFinished);
         SubscribeLocalEvent<SuitSensorComponent, SuitSensorChangeDoAfterEvent>(OnSuitSensorDoAfter);
+        SubscribeLocalEvent<SingletonDeviceNetServerComponent, DeviceNetServerDisconnectedEvent>(OnServerDisconnected); // Cursor
     }
 
     public override void Update(float frameTime)
@@ -539,4 +541,26 @@ public sealed partial class SuitSensorSystem : EntitySystem
         };
         return status;
     }
+
+    // Start of Cursor Code
+    /// <summary>
+    /// When a singleton device network server is disconnected (e.g. because a duplicate arrived via FTL/BSS jump),
+    /// clear ConnectedServer on every suit sensor that was bound to that server's address.
+    /// The next sensor update tick will re-resolve via TryGetActiveServerAddress and bind to the surviving server.
+    /// </summary>
+    private void OnServerDisconnected(EntityUid uid, SingletonDeviceNetServerComponent _, ref DeviceNetServerDisconnectedEvent args)
+    {
+        if (!TryComp<DeviceNetworkComponent>(uid, out var serverDevice)
+            || string.IsNullOrEmpty(serverDevice.Address))
+            return;
+
+        var addr = serverDevice.Address;
+        var query = EntityQueryEnumerator<SuitSensorComponent>();
+        while (query.MoveNext(out _, out var sensor))
+        {
+            if (sensor.ConnectedServer == addr)
+                sensor.ConnectedServer = null;
+        }
+    }
+    // End of Cursor Code
 }

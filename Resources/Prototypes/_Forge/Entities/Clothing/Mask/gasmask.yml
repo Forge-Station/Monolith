@@ -29,6 +29,20 @@
     sprite: Forge/Clothing/Mask/nexus_mask.rsi
 
 - type: entity
+  parent: [ClothingMaskGas, BaseFactionGearOtherFactionT0]
+  id: ClothingMaskGasTL
+  name: gas mask TL
+  suffix: TechnicLogistic
+  description: A standard issue TechnicLogistic gas mask.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/mask_techniclogistic.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/mask_techniclogistic.rsi
+
+- type: entity
   parent: [ClothingMaskGasSecurity, BaseFactionGearOtherFactionT1]
   id: ClothingMaskSterileTrauma
   name: trauma gas mask

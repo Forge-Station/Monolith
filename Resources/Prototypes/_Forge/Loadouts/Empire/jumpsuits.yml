@@ -93,3 +93,10 @@
   price: 0
   equipment:
     jumpsuit: ClothingUniformJumpsuitLordPreafFormal
+
+# region Consul
+- type: loadout
+  id: ClothingUniformJumpsuitEmpireConsul
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEmpireConsul

@@ -1,4 +1,9 @@
 - type: loadout
-  id: ClothingHeadHatEmpirePreafect
+  id: ClothingHeadHatEmpirePreafectOrange
   equipment:
-    head: ClothingHeadHatEmpirePreafect
+    head: ClothingHeadHatEmpirePreafectOrange
+
+- type: loadout
+  id: ClothingHeadHatEmpirePreafectViolet
+  equipment:
+    head: ClothingHeadHatEmpirePreafectViolet

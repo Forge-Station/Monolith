@@ -171,6 +171,8 @@
     - HME # Forge-change
     - Nanotrasen # Forge-change
     - ForgeBoardingTeleportExperimental
+    - EmpireEquipment # Forge-change
+    - EmpireWeapon # Forge-change
 
 - type: entity
   parent: ResearchAndDevelopmentServer

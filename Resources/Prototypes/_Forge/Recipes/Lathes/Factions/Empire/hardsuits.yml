@@ -19,58 +19,57 @@
 
 #region RI-14 Light
 - type: latheRecipe
-  parent: MonoHardsuitT2Recipe
+  parent: MonoHardsuitT1Recipe
   id: ClothingOuterHardsuitRI14
   result: ClothingOuterHardsuitRI14
   completetime: 8
 
 - type: latheRecipe
-  parent: MonoHardsuitT2Recipe
+  parent: MonoHardsuitT1Recipe
   id: ClothingOuterHardsuitRI14m
   result: ClothingOuterHardsuitRI14m
   completetime: 16
 
 - type: latheRecipe
-  parent: MonoHardsuitT2Recipe
+  parent: MonoHardsuitT1Recipe
   id: ClothingOuterHardsuitRI14i
   result: ClothingOuterHardsuitRI14i
   completetime: 16
 
 #region RI-22 Medium
 - type: latheRecipe
-  parent: MonoHardsuitT3TsfRecipe
+  parent: MonoHardsuitT2Recipe
   id: ClothingOuterHardsuitRI22
   result: ClothingOuterHardsuitRI22
   completetime: 8
 
 - type: latheRecipe
-  parent: MonoHardsuitT3TsfRecipe
+  parent: MonoHardsuitT2Recipe
   id: ClothingOuterHardsuitRI22i
   result: ClothingOuterHardsuitRI22i
   completetime: 16
 
 - type: latheRecipe
-  parent: MonoHardsuitT3TsfRecipe
+  parent: MonoHardsuitT2Recipe
   id: ClothingOuterHardsuitRI22c
   result: ClothingOuterHardsuitRI22c
   completetime: 16
 
 #region HV-7 Heavy
 - type: latheRecipe
-  parent: MonoHardsuitT3TsfRecipe
+  parent: MonoHardsuitT3Recipe
   id: ClothingOuterHardsuitHV7
   result: ClothingOuterHardsuitHV7
   completetime: 22
   materials:
     Plastic: 1300
     Steel: 4500
-    Plastitanium: 1500
+    Plastitanium: 2000
     Plasteel: 5500
     Durathread: 3500
     Silver: 500
     Gold: 500
-    Brass: 1000
-    UraniumDepleted: 50
+    UraniumDepleted: 500
     UraniumFissile: 100
 
 - type: latheRecipe
@@ -86,22 +85,6 @@
   completetime: 22
 
 # region Higaris Victories
-- type: latheRecipe
-  parent: MonoHardsuitT3TsfRecipe
-  id: ClothingOuterHardsuitHVVigilance
-  result: ClothingOuterHardsuitHVVigilance
-  completetime: 22
-  materials:
-    Plastic: 1300
-    Steel: 4500
-    Plastitanium: 1500
-    Plasteel: 5500
-    Durathread: 3500
-    Silver: 500
-    Gold: 500
-    Brass: 1000
-    UraniumDepleted: 50
-    UraniumFissile: 100
 
 - type: latheRecipe
   parent: MonoHardsuitT3TsfRecipe
@@ -109,15 +92,14 @@
   result: ClothingOuterHardsuitHVMilitant
   completetime: 22
   materials:
-    Plastic: 1300
-    Steel: 4500
-    Plastitanium: 1500
-    Plasteel: 5500
-    Durathread: 3500
-    Silver: 500
-    Gold: 500
-    Brass: 1000
-    UraniumDepleted: 50
+    Plastic: 1500
+    Steel: 3000
+    Plastitanium: 1000
+    Plasteel: 3500
+    Durathread: 2000
+    Silver: 3000
+    Gold: 3000
+    UraniumDepleted: 1000
     UraniumFissile: 100
 
 - type: latheRecipe
@@ -126,13 +108,11 @@
   result: ClothingOuterHardsuitHVStealh
   completetime: 22
   materials:
-    Plastic: 1300
-    Steel: 4500
-    Plastitanium: 1500
-    Plasteel: 5500
+    Plastic: 1000
+    Steel: 3000
+    Plasteel: 1500
     Durathread: 3500
-    Silver: 500
-    Gold: 500
-    Brass: 1000
-    UraniumDepleted: 50
+    Silver: 2500
+    Gold: 2500
+    UraniumDepleted: 500
     UraniumFissile: 100

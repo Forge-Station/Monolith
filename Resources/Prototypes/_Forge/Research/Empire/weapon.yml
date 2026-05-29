@@ -1,0 +1,69 @@
+- type: technology
+  id: EmpireBasicGuns
+  name: research-technology-rogue-basic-guns
+  entityIcon: WeaponSubMachineGunC20r
+  discipline: EmpireWeapon
+  tier: 1
+  cost: 35000
+  recipeUnlocks:
+  - WeaponSubMachineGunC20rRogue
+  - WeaponRifleM90Rogue
+  - WeaponShotgunSultanPulsar
+  - PrintableDirtyBomb
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 8, 11
+  
+- type: technology
+  id: EmpireSubsonic
+  name: research-technology-rogue-subsonic
+  entityIcon: WeaponSubMachineGunMla73
+  discipline: EmpireWeapon
+  tier: 1
+  cost: 50000
+  recipeUnlocks:
+  - WeaponRifleWSPRRogue
+  - Magazine762x39mmSubsonic
+  - AmmoBox762x39mmSubsonic
+  - WeaponSubMachineGunMla73Rogue
+  - Magazine635x40mmCaseless
+  - AmmoBox635x40mmCaseless
+  - MagazineAsmgtUniversal635x40mm
+  - AmmoBox635x40mmCaselessBig
+  technologyPrerequisites:
+  - EmpireBasicGuns
+  - UniversalMaterialResearchT2
+  position: 8, 12
+
+- type: technology
+  id: EmpireAdvancedGuns
+  name: research-technology-rogue-advanced-guns
+  entityIcon: WeaponRifleM90
+  discipline: EmpireWeapon
+  tier: 2
+  cost: 60000
+  recipeUnlocks:
+  - WeaponSubMachineGunWt550Rogue
+  - WeaponSubMachineGunAtreidesRogue
+  - WeaponShotgunBulldogRogue
+  technologyPrerequisites:
+  - EmpireSubsonic
+  - UniversalMaterialResearchT2
+  position: 7, 13
+  
+- type: technology
+  id: EmpireHeavyWeapons
+  name: research-technology-rogue-heavy-weapons
+  entityIcon: WeaponSniperHristov
+  discipline: EmpireWeapon
+  tier: 1
+  cost: 70000
+  recipeUnlocks:
+  - WeaponSniperHristovRogue
+  - AmmoBox145x114mm
+  - AmmoBox145x114mmBig
+  technologyPrerequisites:
+  - EmpireAdvancedGuns
+  - UniversalMaterialResearchT3
+  position: 7, 14
+  

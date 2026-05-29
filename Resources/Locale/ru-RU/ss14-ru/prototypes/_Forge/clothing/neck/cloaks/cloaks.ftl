@@ -6,3 +6,10 @@ ent-ClothingNeckCloakRenegadePoncho = пончо ренегатов
     .desc = На удивление тёплый и приятный пончо, чувствуется рука мастера.
 ent-ClothingNeckMantleRenegade = мантия ренегатов
     .desc = Что говоришь? Не слышу. Точнее, мне плевать. Ты вообще видел эту мантию?
+
+ent-ClothingNeckCloakEmpirePreafectOrange = плащ лорда
+    .desc = Роскошный плащ лорда, обозначающий его верность имперским вооружённым силам.
+ent-ClothingNeckCloakEmpirePreafectViolet = плащ экклезиарха
+    .desc = Роскошный плащ экклезиарха, символизирующий его преданность церкви.
+ent-ClothingNeckCloakEmpirePreafectDiplomacy = плащ консула
+    .desc = Роскошный плащ консула, символизирующий его преданность дипломатическому делу.

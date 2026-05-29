@@ -21,6 +21,7 @@
     color: "#37C837"
   - type: ProtectedGrid
     preventArtifactTriggers: true
+    preventTeleportation: true # Forge-Change
   - type: SolarPoweredGrid
     trackOnInit: true
     doNotCull: true

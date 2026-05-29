@@ -15,6 +15,7 @@
   - AdvancedRadarConsoleCircuitboard
   - ComputerIFFCircuitboard
   - MachineDriveCTLA25Circuitboard
+  - LargeThrusterMachineCircuitboard
   technologyPrerequisites:
   - Shuttlecraft
   - SuperParts

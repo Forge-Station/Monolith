@@ -49,10 +49,10 @@ namespace Content.Shared.Roles
         /// <summary>
         ///     Requirements for the job.
         /// </summary>
-        [DataField, Access(typeof(SharedRoleSystem), Other = AccessPermissions.None)]
+        [DataField, Access(typeof(SharedRoleSystem))]
         public HashSet<JobRequirement>? Requirements;
 
-        [DataField, Access(typeof(SharedRoleSystem), Other = AccessPermissions.None)] // Frontier
+        [DataField, Access(typeof(SharedRoleSystem))] // Frontier
         public Dictionary<string, HashSet<JobRequirement>>? AlternateRequirementSets; // Frontier: sets of requirements - one must be matched in order to
 
         /// <summary>
@@ -179,6 +179,9 @@ namespace Content.Shared.Roles
         public List<ProtoId<GuideEntryPrototype>>? Guides;
 
         // Forge-Change-Start
+        [DataField]
+        public ProtoId<NationalityPrototype>? AssignedNationality;
+
         [DataField]
         public int Salary = 0;
 

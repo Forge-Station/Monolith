@@ -34,7 +34,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 2000 # Mono
+          damage: 5000 # Forge-Change
         behaviors:
           - !type:SpawnEntitiesBehavior
             spawn:
@@ -80,7 +80,7 @@
     repairCost: 6
 
 - type: entity
-  parent: BaseWallTierFour
+  parent: BaseWallTierFive # Forge-Change
   id: WallNanolaminate # Mono
   name: nanolaminate wall # Mono
   suffix: ADS ONLY # Mono

@@ -67,7 +67,6 @@ namespace Content.IntegrationTests.Tests
 
                 var powerComponent = entityMan.GetComponent<ApcPowerReceiverComponent>(generator);
                 powerReceiverSys.SetNeedsPower(generator, false, powerComponent); // Forge-Change
-                powerNetSys.QueueApcPowerReceiverUpdate(generator); // Forge-Change
             });
 
             await server.WaitRunTicks(25); // Mono change: increase from 5 due to power update change
@@ -87,7 +86,6 @@ namespace Content.IntegrationTests.Tests
                 // Re-enable needs power so it turns off again.
                 // Charge rate is ridiculously high so it finishes in one tick.
                 powerReceiverSys.SetNeedsPower(generator, true, powerComponent);
-                powerNetSys.QueueApcPowerReceiverUpdate(generator); // Forge-Change
             });
 
             await server.WaitRunTicks(60); // Forge-Change: increase from 60 to 60 due to power update change

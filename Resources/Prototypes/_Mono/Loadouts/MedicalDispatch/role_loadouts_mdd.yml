@@ -7,9 +7,9 @@
   - MdMedicGloves
   - MdMedicBackpack
   - MdMedicOuterClothing # Forge
-  - ContractorShoes
-  - ContractorFace
-  - ContractorGlasses
+  - DocShoes
+  - MdFace # Forge
+  - MdMedicGlasses # Forge
   - MdMedicBelt # Forge
   - MdMedicEars
   - ContractorBoxSurvival

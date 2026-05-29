@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Procedurally generated (Tools/build_boarding_teleport_engine.py): generator housing, coil overlay, unshaded idle/charging.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "plinth"
+    },
+    {
+      "name": "ring"
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "idle",
+      "delays": [
+        [
+          0.28,
+          0.28,
+          0.28,
+          0.28,
+          0.28,
+          0.28
+        ]
+      ]
+    },
+    {
+      "name": "charging",
+      "delays": [
+        [
+          0.14,
+          0.14,
+          0.14,
+          0.14,
+          0.14,
+          0.14,
+          0.14,
+          0.14,
+          0.14,
+          0.14,
+          0.14,
+          0.14
+        ]
+      ]
+    }
+  ]
+}

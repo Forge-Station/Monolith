@@ -1,0 +1,425 @@
+- type: entity
+  parent: [BaseStructureDisableToolUse, BaseComputerAiAccess]
+  id: ComputerBoardingTeleport
+  name: bluespace boarding console
+  description: Selects a hostile grid and landing point for linked boarding platforms.
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/boarding_teleport_computer.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: shuttle
+    - map: ["computerLayerKeys"]
+      state: tech_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: BoardingTeleportConsole
+  - type: DeviceList
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: RadarConsole
+  - type: ActivatableUI
+    key: enum.BoardingTeleportUiKey.Key
+    singleUser: true
+  - type: UserInterface
+    interfaces:
+      enum.BoardingTeleportUiKey.Key:
+        type: BoardingTeleportBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: ApcPowerReceiver
+    powerLoad: 750
+  - type: Computer
+    board: BoardingTeleportConsoleCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#65b8e2"
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false
+
+- type: entity
+  id: BoardingTeleportEngine
+  parent: [BaseStructureDisableToolUse, ConstructibleMachine, BaseMachinePowered]
+  name: bluespace boarding engine
+  description: Powers the console on the same grid. Sets acquisition range and lock tolerances.
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 220
+        hard: true
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Forge/Structures/Machines/boarding_teleport_engine.rsi
+    drawdepth: HighFloorObjects
+    layers:
+    - state: plinth
+    - state: ring
+      shader: unshaded
+    - state: charging
+      shader: unshaded
+  - type: BoardingTeleportEngine
+    range: 500
+    maxTargetVelocity: 45
+    maxTargetAngularVelocity: 45
+    jumpCooldown: 60
+    engineTier: 1
+  - type: ApcPowerReceiver
+    powerLoad: 20000
+  - type: Machine
+    board: BoardingTeleportEngineMachineCircuitboard
+  - type: CollideOnAnchor
+    enable: true
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
+
+- type: entity
+  parent: BoardingTeleportEngine
+  id: BoardingTeleportEngineExperimental
+  name: experimental bluespace boarding engine
+  description: Phase-shift tuned drive with higher risk tolerance and faster lock recovery.
+  components:
+  - type: BoardingTeleportEngine
+    range: 1500
+    maxTargetVelocity: 75
+    maxTargetAngularVelocity: 75
+    experimentalPhaseShift: true
+    experimentalRiskBoost: true
+    velocityToleranceMultiplier: 1.25
+    jumpCooldown: 30
+    engineTier: 4
+  - type: ApcPowerReceiver
+    powerLoad: 40000
+  - type: Machine
+    board: BoardingTeleportEngineExperimentalMachineCircuitboard
+
+- type: entity
+  parent: BoardingTeleportEngine
+  id: BoardingTeleportEngineTier3
+  name: military bluespace boarding engine
+  description: A hardened drive that can pierce tier-1 and tier-2 ship shields while establishing a boarding lock.
+  components:
+  - type: BoardingTeleportEngine
+    range: 400
+    engineTier: 3
+    jumpCooldown: 18
+
+- type: entity
+  parent: BoardingTeleportEngine
+  id: BoardingTeleportEngineAdvanced
+  name: advanced bluespace boarding engine
+  description: Extended acquisition range and tier-2 shield penetration.
+  components:
+  - type: BoardingTeleportEngine
+    range: 750
+    maxTargetVelocity: 55
+    maxTargetAngularVelocity: 55
+    jumpCooldown: 50
+    engineTier: 2
+  - type: ApcPowerReceiver
+    powerLoad: 25000
+  - type: Machine
+    board: BoardingTeleportEngineAdvancedMachineCircuitboard
+
+- type: entity
+  id: BoardingBluespaceScrambler
+  parent: [BaseStructureDisableToolUse, ConstructibleMachine, BaseMachinePowered]
+  name: bluespace scrambler
+  description: Disrupts hostile boarding jumps targeting this grid. Blocks locks while powered.
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 200
+        hard: true
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Forge/Structures/Machines/boarding_teleport_engine.rsi
+    layers:
+    - state: plinth
+    - state: ring
+      shader: unshaded
+      color: "#ff6868"
+  - type: BoardingBluespaceScrambler
+    blockLocks: true
+    scatterBonus: 1.5
+    riskBonus: 0.18
+  - type: ApcPowerReceiver
+    powerLoad: 2500
+  - type: Machine
+    board: BoardingBluespaceScramblerMachineCircuitboard
+  - type: CollideOnAnchor
+    enable: true
+  - type: PointLight
+    radius: 1.5
+    energy: 1.2
+    color: "#ff6868"
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
+
+- type: entity
+  id: BoardingTeleportPlatform
+  parent: [BaseStructureDisableToolUse, ConstructibleMachine, BaseMachinePowered]
+  name: bluespace boarding platform
+  description: A linked platform that sends one boarder to the console-selected landing tile.
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.00"
+        density: 190
+        mask:
+        - MachineMask
+  - type: Sprite
+    sprite: Forge/Structures/Machines/boarding_teleport_platform.rsi
+    drawdepth: HighFloorObjects
+    layers:
+    - state: plinth
+      map: ["platform_plinth"]
+    - state: ring
+      map: ["platform_ring"]
+      visible: false
+    - state: idle
+      map: ["platform_glow"]
+      visible: false
+      shader: unshaded
+  - type: GenericVisualizer
+    visuals:
+      enum.BoardingTeleportPlatformVisuals.State:
+        # Static square full tile when unpowered; same square when on (glow+ring on top).
+        platform_plinth:
+          Offline: { state: plinth }
+          Idle: { state: plinth }
+          Charging: { state: plinth }
+        # Circle mechanism only when powered / teleporter active.
+        platform_ring:
+          Offline: { visible: false }
+          Idle: { visible: true, state: ring }
+          Charging: { visible: true, state: ring }
+        # Idle = soft pulse; Charging = strong warmup (jump) effect, unshaded.
+        platform_glow:
+          Offline: { visible: false }
+          Idle: { visible: true, state: idle, shader: unshaded }
+          Charging: { visible: true, state: charging, shader: unshaded }
+  - type: BoardingTeleportPlatform
+    cooldown: 60
+    departureDelay: 30
+    returnWindowSeconds: 240
+    maxReturnDistance: 550
+    warmupEffect: BoardingTeleportWarmupEffect
+    teleportEffect: BoardingTeleportFlashEffect
+    activationSound:
+      path: /Audio/Effects/Vehicle/ambulancesiren.ogg
+    countdownSound:
+      path: /Audio/_Mono/Effects/Alerts/master_caution.ogg
+    countdownFinalSound:
+      path: /Audio/_Forge/Effects/Alerts/space_alert_1.ogg
+    countdownFinalThreshold: 5
+    arrivalSound:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: DeviceLinkSink
+    ports:
+    - BoardingTeleport
+  - type: ApcPowerReceiver
+    powerLoad: 2500
+  - type: Machine
+    board: BoardingTeleportPlatformMachineCircuitboard
+  - type: Appearance
+  - type: CollideOnAnchor
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
+
+- type: entity
+  parent: BoardingTeleportPlatform
+  id: BoardingTeleportPlatformAdvanced
+  name: advanced bluespace boarding platform
+  description: Faster charge cycle, longer return channel, and extended return range.
+  components:
+  - type: BoardingTeleportPlatform
+    cooldown: 50
+    departureDelay: 25
+    returnWindowSeconds: 210
+    maxReturnDistance: 800
+  - type: ApcPowerReceiver
+    powerLoad: 3500
+  - type: Machine
+    board: BoardingTeleportPlatformAdvancedMachineCircuitboard
+
+- type: entity
+  parent: BoardingTeleportPlatform
+  id: BoardingTeleportPlatformExperimental
+  name: experimental bluespace boarding platform
+  description: Higher destabilization risk, but phase-shift scatter control improves landing spread.
+  components:
+  - type: BoardingTeleportPlatform
+    experimentalScatterControl: true
+    experimentalRisk: true
+    cooldown: 30
+    departureDelay: 15
+    returnWindowSeconds: 180
+    maxReturnDistance: 2000
+  - type: ApcPowerReceiver
+    powerLoad: 5000
+  - type: Machine
+    board: BoardingTeleportPlatformExperimentalMachineCircuitboard
+
+- type: entity
+  parent: BaseFlatpack
+  id: BoardingTeleportEngineFlatpack
+  name: bluespace boarding engine flatpack
+  description: A flatpack for constructing a bluespace boarding engine.
+  components:
+  - type: Flatpack
+    entity: BoardingTeleportEngine
+  - type: StaticPrice
+    price: 2000
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
+
+- type: entity
+  parent: BoardingTeleportEngineFlatpack
+  id: BoardingTeleportEngineAdvancedFlatpack
+  name: advanced bluespace boarding engine flatpack
+  components:
+  - type: Flatpack
+    entity: BoardingTeleportEngineAdvanced
+
+- type: entity
+  parent: BoardingTeleportEngineFlatpack
+  id: BoardingTeleportEngineTier3Flatpack
+  name: military bluespace boarding engine flatpack
+  description: A tier-3 boarding engine flatpack. Company research required before fabrication.
+  components:
+  - type: Flatpack
+    entity: BoardingTeleportEngineTier3
+
+- type: entity
+  parent: BoardingTeleportEngineFlatpack
+  id: BoardingTeleportEngineExperimentalFlatpack
+  name: experimental bluespace boarding engine flatpack
+  components:
+  - type: Flatpack
+    entity: BoardingTeleportEngineExperimental
+
+- type: entity
+  parent: BaseFlatpack
+  id: BoardingBluespaceScramblerFlatpack
+  name: bluespace scrambler flatpack
+  description: A flatpack used for constructing a bluespace scrambler.
+  components:
+  - type: Flatpack
+    entity: BoardingBluespaceScrambler
+  - type: StaticPrice
+    price: 1800
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
+
+- type: entity
+  parent: BaseFlatpack
+  id: BoardingTeleportConsoleFlatpack
+  name: bluespace boarding console flatpack
+  description: A flatpack for constructing a boarding console.
+  components:
+  - type: Flatpack
+    entity: ComputerBoardingTeleport
+  - type: StaticPrice
+    price: 2500
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false
+
+- type: entity
+  parent: BaseFlatpack
+  id: BoardingTeleportPlatformFlatpack
+  name: bluespace boarding platform flatpack
+  description: A flatpack used for constructing a bluespace teleport platform.
+  components:
+  - type: Flatpack
+    entity: BoardingTeleportPlatform
+  - type: StaticPrice
+    price: 1500
+  - type: GuideHelp
+    guides:
+    - BoardingTeleportBalanceTable
+    - BoardingTeleport
+    includeChildren: false
+
+- type: entity
+  parent: BoardingTeleportPlatformFlatpack
+  id: BoardingTeleportPlatformAdvancedFlatpack
+  name: advanced bluespace boarding platform flatpack
+  components:
+  - type: Flatpack
+    entity: BoardingTeleportPlatformAdvanced
+
+- type: entity
+  parent: BoardingTeleportPlatformFlatpack
+  id: BoardingTeleportPlatformExperimentalFlatpack
+  name: experimental bluespace boarding platform flatpack
+  components:
+  - type: Flatpack
+    entity: BoardingTeleportPlatformExperimental

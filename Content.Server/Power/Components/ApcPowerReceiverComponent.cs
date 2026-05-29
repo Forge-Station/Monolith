@@ -1,7 +1,6 @@
 using Content.Server.Power.NodeGroups;
 using Content.Server.Power.Pow3r;
 using Content.Shared.Power.Components;
-using Content.Server.Power.EntitySystems;
 
 namespace Content.Server.Power.Components
 {
@@ -15,9 +14,12 @@ namespace Content.Server.Power.Components
         /// <summary>
         ///     Amount of charge this needs from an APC per second to function.
         /// </summary>
-        [ViewVariables(VVAccess.ReadWrite)]
         [DataField("powerLoad")]
-        public float Load { get => NetworkLoad.DesiredPower; set => NetworkLoad.DesiredPower = value; }
+        public override float Load
+        {
+            get => NetworkLoad.DesiredPower;
+            set => NetworkLoad.DesiredPower = value;
+        }
 
         public ApcPowerProviderComponent? Provider = null;
 
@@ -33,7 +35,6 @@ namespace Content.Server.Power.Components
                 _needsPower = value;
                 // Reset this so next tick will do a power update.
                 Recalculate = true;
-                EntitySystem.Get<PowerNetSystem>().QueueApcPowerReceiverUpdate(Owner);
             }
         }
 
@@ -47,27 +48,11 @@ namespace Content.Server.Power.Components
         public override bool PowerDisabled
         {
             get => !NetworkLoad.Enabled;
-            set
-            {
-                NetworkLoad.Enabled = !value;
-                Recalculate = true;
-                EntitySystem.Get<PowerNetSystem>().QueueApcPowerReceiverUpdate(Owner);
-            }
+            set => NetworkLoad.Enabled = !value;
         }
-
-         private bool _recalculate;
 
         // TODO Is this needed? It forces a PowerChangedEvent when NeedsPower is toggled even if it changes to the same state.
-        public bool Recalculate
-        {
-            get => _recalculate;
-            set
-            {
-                if (_recalculate == value) return;
-                _recalculate = value;
-                if (value) EntitySystem.Get<PowerNetSystem>().QueueApcPowerReceiverUpdate(Owner);
-            }
-        }
+        public bool Recalculate;
 
         [ViewVariables]
         public PowerState.Load NetworkLoad { get; } = new PowerState.Load

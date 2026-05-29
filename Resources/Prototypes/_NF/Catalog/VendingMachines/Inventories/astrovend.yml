@@ -17,6 +17,7 @@
     EncryptionKeyCargo: 3
     EncryptionKeyEngineering: 3
     EncryptionKeyScience: 3
+    EncryptionKeyCustom: 4294967295 # Infinite
 # Pilot drip
     ClothingBackpackPilot: 3
     ClothingBackpackDuffelPilot: 3
@@ -54,6 +55,7 @@
     EncryptionKeyCargo: 4294967295 # Infinite
     EncryptionKeyEngineering: 4294967295 # Infinite
     EncryptionKeyScience: 4294967295 # Infinite
+    EncryptionKeyCustom: 4294967295 # Infinite
 # Pilot drip
     ClothingBackpackPilot: 3
     ClothingBackpackDuffelPilot: 3

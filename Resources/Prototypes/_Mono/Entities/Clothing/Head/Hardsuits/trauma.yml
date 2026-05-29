@@ -1,16 +1,19 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
   id: ClothingHeadHelmetHardsuitTrauma
   name: armed trauma unit T-23 tacsuit helmet
   description: The standard combat suit of the Armed Trauma Unit, outfitted with a limited-range radar hud as well as a medical hud.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Head/Hardsuits/trauma.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit.rsi # Forge-change
   - type: Clothing
-    sprite: _Mono/Clothing/Head/Hardsuits/trauma.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit.rsi # Forge-change
   - type: PointLight
     color: "#4e88a6"
+  - type: NightVision
+    flashDurationMultiplier: 2
+    isEquipment: true
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -52,9 +55,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Head/Hardsuits/trauma_leader.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi # Forge-change
   - type: Clothing
-    sprite: _Mono/Clothing/Head/Hardsuits/trauma_leader.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi # Forge-change
   - type: PointLight
     color: "#4e88a6"
   - type: PressureProtection

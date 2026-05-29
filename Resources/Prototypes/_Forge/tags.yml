@@ -219,3 +219,6 @@
 
 - type: Tag
   id: EmpireUplink
+
+- type: Tag
+  id: 40mmCartridge

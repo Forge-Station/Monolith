@@ -1,0 +1,107 @@
+- type: entity
+  id: BoardingTeleportWarmupEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    layers:
+    - state: warmup
+      shader: unshaded
+  - type: PointLight
+    color: "#65b8e2"
+    radius: 8
+    energy: 3
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 1.2
+
+- type: entity
+  id: BoardingTeleportWarmupEffectStealth
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    layers:
+    - state: warmup
+      shader: unshaded
+      color: "#4a8ab8aa"
+  - type: PointLight
+    color: "#4a8ab8"
+    radius: 3
+    energy: 0.8
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 1.2
+
+- type: entity
+  id: BoardingTeleportWarmupEffectMedium
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    layers:
+    - state: warmup
+      shader: unshaded
+      color: "#b8e8ffff"
+  - type: PointLight
+    color: "#75c8ff"
+    radius: 10
+    energy: 5
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 1.2
+
+- type: entity
+  id: BoardingTeleportWarmupEffectHigh
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    layers:
+    - state: warmup
+      shader: unshaded
+      color: "#e0f8ffff"
+  - type: PointLight
+    color: "#9ddcff"
+    radius: 13
+    energy: 8
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 1.2
+
+- type: entity
+  id: BoardingTeleportFlashEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    layers:
+    - state: flash
+      shader: unshaded
+  - type: PointLight
+    color: "#18abf5"
+    radius: 10.5
+    energy: 15
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 1

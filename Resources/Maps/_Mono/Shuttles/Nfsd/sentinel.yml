@@ -525,7 +525,7 @@ entities:
         1,-3: 72909780091863040
         -1,-4: 17645349630642225152
         0,-4: 1658172386337357824
-- proto: 255mmCartridge
+- proto: 255mmCartridgeAPHE
   entities:
   - uid: 819
     components:
@@ -3743,7 +3743,7 @@ entities:
     - type: Transform
       pos: 4.5,-13.5
       parent: 1
-- proto: ShieldGeneratorSmall
+- proto: ShieldGeneratorFSG100
   entities:
   - uid: 516
     components:

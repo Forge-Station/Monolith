@@ -20,9 +20,9 @@ ent-LockerNfsdSergeant = шкафчик лейтенанта ТСФ
     .desc = { ent-LockerBaseSecure.desc }
 ent-LockerNfsdBailiff = шкафчик бейлифа ТСФ
     .desc = { ent-LockerBaseSecure.desc }
-ent-LockerNfsdSheriff = шкафчик шерифа ТСФ
+ent-LockerNfsdSheriff = шкафчик командующего офицера ТСФ
     .desc = { ent-LockerBaseSecure.desc }
-ent-LockerStationRepresentative = шкафчик представителя фронтира
+ent-LockerStationRepresentative = шкафчик представителя НТ
     .desc = { ent-LockerBaseSecure.desc }
 
 ent-LockerMaterials = шкаф с материалами

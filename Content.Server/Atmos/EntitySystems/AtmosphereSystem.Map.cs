@@ -101,7 +101,7 @@ public partial class AtmosphereSystem
         foreach (var tile in atmos.MapTiles)
         {
             RemoveMapAtmos(atmos, tile);
-            AddInvalidatedTile(atmos, tile.GridIndices);
+            atmos.InvalidatedCoords.Add(tile.GridIndices);
         }
         atmos.MapTiles.Clear();
     }

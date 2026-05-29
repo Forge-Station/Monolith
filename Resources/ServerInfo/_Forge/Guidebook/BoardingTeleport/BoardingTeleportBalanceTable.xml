@@ -1,0 +1,187 @@
+<Document>
+  # Блюспейс-абордаж — таблица параметров
+
+  Значения тиров — из прототипов `Resources/Prototypes/_Forge/Entities/Structures/Machines/boarding_teleport.yml`. Режимы и формулы риска — глобальные константы симуляции (одинаковы для всех установок).
+
+  [textlink="← Обзор и установка" link="BoardingTeleport"]
+
+  ---
+
+  ## Двигатели
+
+  <Table Columns="9">
+    <ColorBox><Box>Тир</Box></ColorBox>
+    <ColorBox><Box>Прототип</Box></ColorBox>
+    <ColorBox><Box>Дальность</Box></ColorBox>
+    <ColorBox><Box>Скорость цели</Box></ColorBox>
+    <ColorBox><Box>Угл. скорость</Box></ColorBox>
+    <ColorBox><Box>Перезарядка</Box></ColorBox>
+    <ColorBox><Box>Класс щитов</Box></ColorBox>
+    <ColorBox><Box>СМ, Вт</Box></ColorBox>
+    <ColorBox><Box>Особенности</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">T1</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingTeleportEngine</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">500</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">45</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">45</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">60 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">1</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">20 000</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">базовый R&D</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">T2</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingTeleportEngineAdvanced</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">750</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">55</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">55</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">50 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">2</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">25 000</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">R&D T2</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">T3</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingTeleportEngineTier3</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">400</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">45*</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">45*</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">18 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">3</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">20 000*</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">без R&D, устар. баланс</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">T4</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingTeleportEngineExperimental</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">1500</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">75</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">75</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">30 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">4</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">40 000</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">phase-shift, риск ×1.35, допуск скорости ×1.25</Box></ColorBox>
+  </Table>
+
+  *T3 наследует скорости и СМ от T1, пока не переопределены в YAML.
+
+  **Пробитие:** захват возможен, если `engineTier` &gt; класса активного щита цели.
+
+  ---
+
+  ## Платформы
+
+  Радиус постановки на платформу: **0.8** (все тиры).
+
+  <Table Columns="7">
+    <ColorBox><Box>Тир</Box></ColorBox>
+    <ColorBox><Box>Прототип</Box></ColorBox>
+    <ColorBox><Box>Задержка скачка</Box></ColorBox>
+    <ColorBox><Box>Перезарядка</Box></ColorBox>
+    <ColorBox><Box>Окно возврата</Box></ColorBox>
+    <ColorBox><Box>Макс. возврат</Box></ColorBox>
+    <ColorBox><Box>СМ, Вт</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">T1</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingTeleportPlatform</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">30 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">60 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">240 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">550</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">2500</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">T2</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingTeleportPlatformAdvanced</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">25 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">50 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">210 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">800</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">3500</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">T4</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingTeleportPlatformExperimental</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">15 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">30 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">180 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">2000</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">5000</Box></ColorBox>
+  </Table>
+
+  T4: `experimentalRisk` (риск ×1.35), `experimentalScatterControl` (разброс режима ×1.25, компенсируется phase-shift на двигателе).
+
+  ---
+
+  ## Консоль и глушитель
+
+  <Table Columns="3">
+    <ColorBox><Box>Узел</Box></ColorBox>
+    <ColorBox><Box>СМ, Вт</Box></ColorBox>
+    <ColorBox><Box>Примечание</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">ComputerBoardingTeleport</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">750</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">до 4 слотов платформ</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingBluespaceScrambler</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">2500</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">блок захвата; +1.5 разброс, +18% риск</Box></ColorBox>
+  </Table>
+
+  ---
+
+  ## Режимы высадки (консоль)
+
+  Базовая задержка = `departureDelay` платформы × множитель режима × масштаб дистанции (мин. 2.5 с). Каждые 120 м до цели +1 к масштабу (макс. ×4).
+
+  <Table Columns="4">
+    <ColorBox><Box>Режим</Box></ColorBox>
+    <ColorBox><Box>Множ. задержки</Box></ColorBox>
+    <ColorBox><Box>Разброс (радиус)</Box></ColorBox>
+    <ColorBox><Box>Базовый риск</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">Скрытный</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">×1.15</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">1.20</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">12%</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">Точный</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">×1.60</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">0.60</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">6%</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">Ускоренный</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">×0.65</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">4.50</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">30%</Box></ColorBox>
+  </Table>
+
+  Итоговый риск также растёт от скорости цели, недогруза СМ (+до 28%), старения захвата и глушителя. Предел отображения: 2%–85%.
+
+  ---
+
+  ## Возврат и катастрофы
+
+  <Table Columns="2">
+    <ColorBox><Box>Параметр</Box></ColorBox>
+    <ColorBox><Box>Значение</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">Досрочный возврат (порог «безопасно»)</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">осталось ≤15% окна</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">Риск взрыва при досрочном</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">5% – 90%</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">Задержка до взрыва</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">5 с (раздувание)</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">Экстренный возврат</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">3 с заряд, 40% риск, разброс 2.5, 1 раз</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">Старение захвата</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">каждые 30 с: +0.2 разброс, +3% риск; макс. возраст 180 с</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">Блип на радаре цели</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">45 с (скрытный/точный прогрев)</Box></ColorBox>
+  </Table>
+
+  [textlink="← Обзор" link="BoardingTeleport"]
+
+</Document>

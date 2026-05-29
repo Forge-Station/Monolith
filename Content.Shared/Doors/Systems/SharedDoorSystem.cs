@@ -28,23 +28,23 @@ namespace Content.Shared.Doors.Systems;
 
 public abstract partial class SharedDoorSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] protected readonly IGameTiming GameTiming = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] protected readonly SharedPhysicsSystem PhysicsSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
-    [Dependency] protected readonly TagSystem Tags = default!;
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] protected readonly SharedAppearanceSystem AppearanceSystem = default!;
-    [Dependency] private readonly OccluderSystem _occluder = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
-    [Dependency] private readonly PryingSystem _pryingSystem = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] protected IGameTiming GameTiming = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] protected SharedPhysicsSystem PhysicsSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private SharedStunSystem _stunSystem = default!;
+    [Dependency] protected TagSystem Tags = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] protected SharedAppearanceSystem AppearanceSystem = default!;
+    [Dependency] private OccluderSystem _occluder = default!;
+    [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
+    [Dependency] private PryingSystem _pryingSystem = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
 
 
     [ValidatePrototypeId<TagPrototype>]
@@ -171,6 +171,15 @@ public abstract partial class SharedDoorSystem : EntitySystem
             _activeDoors.Remove(ent);
         else
             _activeDoors.Add(ent);
+
+        // Keep fixtures, occluder and sprite state in sync with replicated DoorComponent (e.g. after reconnect).
+        // Without this, Appearance can lag behind or mismatch, and Update can advance transitions on stale visuals.
+        var collidable = door.State == DoorState.Closed
+                         || door.State == DoorState.Closing && door.Partial
+                         || door.State == DoorState.Opening && !door.Partial;
+
+        SetCollidable(ent, collidable, door);
+        AppearanceSystem.SetData(ent, DoorVisuals.State, door.State);
 
         RaiseLocalEvent(ent, new DoorStateChangedEvent(door.State));
     }
@@ -759,6 +768,9 @@ public abstract partial class SharedDoorSystem : EntitySystem
     /// </summary>
     public override void Update(float frameTime)
     {
+        if (GameTiming.ApplyingState)
+            return;
+
         var time = GameTiming.CurTime;
 
         foreach (var ent in _activeDoors.ToList())

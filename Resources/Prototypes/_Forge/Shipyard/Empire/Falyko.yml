@@ -1,0 +1,30 @@
+- type: vessel
+  id: Falyko
+  parent: BaseVessel
+  name: "ESP Фалько"
+  description: Фалько - средний истребитель Империи, вооруженный одним орудием "Дравон", одним орудием "Tarnyx" и двумя пулеметами "Мародер"
+  category: Small
+  group: Empire
+  access: Empire
+  price: 73970
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/Falyko.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  engine:
+  - Bananium
+
+- type: gameMap
+  id: Falyko
+  mapName: 'PSE Фалько'
+  mapPath: /Maps/_Forge/Shuttles/Empire/Falyko.yml
+  minPlayers: 0
+  stations:
+    Falyko:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'ESP Фалько SEW{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

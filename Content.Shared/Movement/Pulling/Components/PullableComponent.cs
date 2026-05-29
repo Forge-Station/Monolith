@@ -39,6 +39,13 @@ public sealed partial class PullableComponent : Component
     [AutoNetworkedField, DataField]
     public bool PrevFixedRotation;
 
+    /// <summary>
+    /// Fixture density scale applied while being pulled for R.I.P.L.Y mass assist (1 = unchanged).
+    /// </summary>
+    [Access(typeof(Systems.PullingSystem), Other = AccessPermissions.ReadExecute)]
+    [AutoNetworkedField, DataField]
+    public float PullMassPenaltyScale = 1f;
+
     [DataField]
     public ProtoId<AlertPrototype> PulledAlert = "Pulled";
 }

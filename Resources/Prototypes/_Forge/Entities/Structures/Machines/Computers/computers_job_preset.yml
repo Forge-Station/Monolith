@@ -193,9 +193,11 @@
     - Baron
     - Draftsman
     - Overseer
+    - Watchman
     - Quack
     - Foreman
     - Flunky
+    - Militia
   - type: Sprite
     sprite: Structures/Machines/computers.rsi
     layers:

@@ -16,7 +16,7 @@
   shuttlePath: /Maps/_Mono/Shuttles/valkyrie.yml
   guidebookPage: Null
   class:
-  - Pursuit
+  - Patrol
   engine:
   - AME
 

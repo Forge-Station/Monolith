@@ -131,14 +131,25 @@
     footstepSoundCollection:
       collection: FootstepHeavySuit
   - type: ClothingSlowOnDamageModifier
-    modifier: 0.35
-  - type: GasTank
-    outputPressure: 1
-    air:
-      volume: 1000
-      temperature: 1
-      moles:
-        - 100000 # oxygen
-        - 100000 # nitrogen
-  - type: Jetpack
-    moleUsage: 0.00001
+    modifier: 0.75
+  - type: StaticPrice
+    price: 500
+    vendPrice: 5000
+
+- type: entity
+  parent: [ClothingShoesBootsMag, ClothingShoesBootsCombat, BaseFactionGearOtherFactionT1]
+  id: ClothingShoesBootsMagTrauma
+  name: trauma magboots
+  description: Trauma security magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle.
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Boots/tti_magboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/Shoes/Boots/tti_magboots.rsi
+  - type: Magboots
+    magbootsAlert: MagbootsSecurity
+  - type: ClothingSpeedModifier
+    walkModifier: 1.0
+    sprintModifier: 1.0

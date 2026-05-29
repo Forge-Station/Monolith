@@ -1,0 +1,31 @@
+- type: entity
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, BaseComputerAiAccess]
+  id: ComputerIFFCapture
+  name: POI capture console
+  suffix: Capture
+  description: A dedicated console used to start and manage POI capture operations.
+  components:
+  - type: PoiCaptureConsole
+  - type: ActivatableUI
+    key: enum.PoiCaptureConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PoiCaptureConsoleUiKey.Key:
+        type: PoiCaptureConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Computer
+    board: Null
+  - type: Anchorable
+    flags: Unanchorable
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Shuttles/iff.rsi
+      state: helm
+    - map: ["computerLayerKeys"]
+      state: syndie_key

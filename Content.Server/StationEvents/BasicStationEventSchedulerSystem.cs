@@ -10,6 +10,7 @@ using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Toolshed;
+using Robust.Shared.Toolshed.TypeParsers;
 using Robust.Shared.Utility;
 
 namespace Content.Server.StationEvents
@@ -19,10 +20,10 @@ namespace Content.Server.StationEvents
     ///     game presets use.
     /// </summary>
     [UsedImplicitly]
-    public sealed class BasicStationEventSchedulerSystem : GameRuleSystem<BasicStationEventSchedulerComponent>
+    public sealed partial class BasicStationEventSchedulerSystem : GameRuleSystem<BasicStationEventSchedulerComponent>
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly EventManagerSystem _event = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private EventManagerSystem _event = default!;
 
         protected override void Started(EntityUid uid, BasicStationEventSchedulerComponent component, GameRuleComponent gameRule,
             GameRuleStartedEvent args)
@@ -95,10 +96,10 @@ namespace Content.Server.StationEvents
         ///     to even exist) so I think it's fine.
         /// </remarks>
         [CommandImplementation("simulate")]
-        public IEnumerable<(string, float)> Simulate(EntProtoId eventSchedulerId, int rounds, int playerCount, float roundEndMean, float roundEndStdDev)
+        public IEnumerable<(string, float)> Simulate([CommandArgument] EntProtoId eventSchedulerProto, [CommandArgument] int rounds, [CommandArgument] int playerCount, [CommandArgument] float roundEndMean, [CommandArgument] float roundEndStdDev)
         {
             _proto ??= IoCManager.Resolve<IPrototypeManager>();
-            var eventScheduler = _proto.Index(eventSchedulerId);
+            var eventScheduler = _proto.Index(eventSchedulerProto);
             _stationEvent ??= GetSys<EventManagerSystem>();
             _entityTable ??= GetSys<EntityTableSystem>();
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
@@ -121,7 +122,7 @@ namespace Content.Server.StationEvents
             for (var i = 0; i < rounds; i++)
             {
                 var curTime = TimeSpan.Zero;
-                var randomEndTime = _random.NextGaussian(roundEndMean, roundEndStdDev) * 60; // *60 = minutes to seconds
+                var randomEndTime = _random.NextGaussian(roundEndMean, roundEndStdDev) * 60; // Its in minutes, should probably be a better time format once we get that in toolshed like [hh:mm:ss]
                 if (randomEndTime <= 0)
                     continue;
 
@@ -130,14 +131,13 @@ namespace Content.Server.StationEvents
                     // sim an event
                     curTime += TimeSpan.FromSeconds(compMinMax.Next(_random));
 
-                    if (!_stationEvent.TryBuildLimitedEvents(basicScheduler.ScheduledGameRules, out var selectedEvents))
+                    var available = _stationEvent.AvailableEvents(false, playerCount, curTime);
+                    if (!_stationEvent.TryBuildLimitedEvents(basicScheduler.ScheduledGameRules, available, out var selectedEvents))
                     {
                         continue; // doesnt break because maybe the time is preventing events being available.
                     }
-                    var available = _stationEvent.AvailableEvents(false, playerCount, curTime);
-                    var plausibleEvents = new Dictionary<EntityPrototype, StationEventComponent>(available.Intersect(selectedEvents)); // C# makes me sad
 
-                    var ev = _stationEvent.FindEvent(plausibleEvents);
+                    var ev = _stationEvent.FindEvent(selectedEvents);
                     if (ev == null)
                         continue;
 
@@ -145,21 +145,22 @@ namespace Content.Server.StationEvents
                 }
             }
 
-            return occurrences.Select(p => (p.Key, (float) p.Value)).OrderByDescending(p => p.Item2);
+            return occurrences.Select(p => (p.Key, (float)p.Value)).OrderByDescending(p => p.Item2);
         }
 
         [CommandImplementation("lsprob")]
-        public IEnumerable<(string, float)> LsProb(EntProtoId eventSchedulerId)
+        public IEnumerable<(string, float)> LsProb([CommandArgument] EntProtoId eventSchedulerProto)
         {
             _proto ??= IoCManager.Resolve<IPrototypeManager>();
-            var eventScheduler = _proto.Index(eventSchedulerId);
+            var eventScheduler = _proto.Index(eventSchedulerProto);
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
             _stationEvent ??= GetSys<EventManagerSystem>();
 
             if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
                 yield break;
 
-            if (!_stationEvent.TryBuildLimitedEvents(basicScheduler.ScheduledGameRules, out var events))
+            var available = _stationEvent.AvailableEvents();
+            if (!_stationEvent.TryBuildLimitedEvents(basicScheduler.ScheduledGameRules, available, out var events))
                 yield break;
 
             var totalWeight = events.Sum(x => x.Value.Weight); // Well this shit definitely isnt correct now, and I see no way to make it correct.
@@ -170,21 +171,24 @@ namespace Content.Server.StationEvents
             }
         }
 
-        [CommandImplementation("lsprobtime")]
-        public IEnumerable<(string, float)> LsProbTime(EntProtoId eventSchedulerId, float time)
+        [CommandImplementation("lsprobtheoretical")]
+        public IEnumerable<(string, float)> LsProbTime([CommandArgument] EntProtoId eventSchedulerProto, [CommandArgument] int playerCount, [CommandArgument] float time)
         {
             _proto ??= IoCManager.Resolve<IPrototypeManager>();
-            var eventScheduler = _proto.Index(eventSchedulerId);
+            var eventScheduler = _proto.Index(eventSchedulerProto);
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
             _stationEvent ??= GetSys<EventManagerSystem>();
 
             if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
                 yield break;
 
-            if (!_stationEvent.TryBuildLimitedEvents(basicScheduler.ScheduledGameRules, out var untimedEvents))
+            var timemins = time * 60;
+            var theoryTime = TimeSpan.Zero + TimeSpan.FromSeconds(timemins);
+            var available = _stationEvent.AvailableEvents(false, playerCount, theoryTime);
+            if (!_stationEvent.TryBuildLimitedEvents(basicScheduler.ScheduledGameRules, available, out var untimedEvents))
                 yield break;
 
-            var events = untimedEvents.Where(pair => pair.Value.EarliestStart <= time).ToList();
+            var events = untimedEvents.Where(pair => pair.Value.EarliestStart <= timemins).ToList();
 
             var totalWeight = events.Sum(x => x.Value.Weight); // same subsetting issue as lsprob.
 
@@ -195,17 +199,18 @@ namespace Content.Server.StationEvents
         }
 
         [CommandImplementation("prob")]
-        public float Prob(EntProtoId eventSchedulerId, string eventId)
+        public float Prob([CommandArgument] EntProtoId eventSchedulerProto, [CommandArgument] string eventId)
         {
             _proto ??= IoCManager.Resolve<IPrototypeManager>();
-            var eventScheduler = _proto.Index(eventSchedulerId);
+            var eventScheduler = _proto.Index(eventSchedulerProto);
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
             _stationEvent ??= GetSys<EventManagerSystem>();
 
             if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
                 return 0f;
 
-            if (!_stationEvent.TryBuildLimitedEvents(basicScheduler.ScheduledGameRules, out var events))
+            var available = _stationEvent.AvailableEvents();
+            if (!_stationEvent.TryBuildLimitedEvents(basicScheduler.ScheduledGameRules, available, out var events))
                 return 0f;
 
             var totalWeight = events.Sum(x => x.Value.Weight); // same subsetting issue as lsprob.

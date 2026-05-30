@@ -47,9 +47,16 @@ research-discipline-empire-equipment = Экипировка
 research-discipline-empire-shipyard = Верфь
 
 # Technology
-research-technology-empire-light = Модель RI-14
-research-technology-empire-adv = Модель RI-22
+research-technology-empire-clothing = Гвардейская униформа
+research-technology-empire-light = Скафандры модели RI-14
+research-technology-empire-adv = Скафандры модели RI-22
 
 research-technology-empire-prototype-vigilance = Военный патрульный прототип
-research-technology-empire-prototype-militant = Военный боевой прототип
-research-technology-empire-prototype-stealh = Военный разведывательный прототип
+research-technology-empire-prototype-militant = Военно-боевой прототип
+research-technology-empire-prototype-stealh = Военно-разведывательный прототип
+
+research-technology-empire-basic-guns = Базовое вооружение
+research-technology-empire-subsonic = Безгильзовое вооружение
+research-technology-empire-advanced-guns = Продвинутое вооружение
+research-technology-empire-heavy-weapons = Тяжелое вооружение
+research-technology-empire-melee-weapons = Продвинутое вооружение ближнего боя

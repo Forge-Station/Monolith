@@ -1,26 +1,27 @@
 - type: technology
   id: EmpireBasicGuns
-  name: research-technology-rogue-basic-guns
+  name: research-technology-empire-basic-guns
   entityIcon: WeaponSubMachineGunC20r
   discipline: EmpireWeapon
   tier: 1
-  cost: 35000
+  cost: 55000
   recipeUnlocks:
   - WeaponSubMachineGunC20rRogue
   - WeaponRifleM90Rogue
   - WeaponShotgunSultanPulsar
   - PrintableDirtyBomb
+  - WeaponRevolverPythonRogue
   technologyPrerequisites:
   - UniversalMaterialResearchT1
-  position: 8, 11
+  position: 8, 12
   
 - type: technology
   id: EmpireSubsonic
-  name: research-technology-rogue-subsonic
+  name: research-technology-empire-subsonic
   entityIcon: WeaponSubMachineGunMla73
   discipline: EmpireWeapon
   tier: 1
-  cost: 50000
+  cost: 60000
   recipeUnlocks:
   - WeaponRifleWSPRRogue
   - Magazine762x39mmSubsonic
@@ -33,15 +34,15 @@
   technologyPrerequisites:
   - EmpireBasicGuns
   - UniversalMaterialResearchT2
-  position: 8, 12
+  position: 8, 13
 
 - type: technology
   id: EmpireAdvancedGuns
-  name: research-technology-rogue-advanced-guns
+  name: research-technology-empire-advanced-guns
   entityIcon: WeaponRifleM90
   discipline: EmpireWeapon
   tier: 2
-  cost: 60000
+  cost: 70000
   recipeUnlocks:
   - WeaponSubMachineGunWt550Rogue
   - WeaponSubMachineGunAtreidesRogue
@@ -49,15 +50,15 @@
   technologyPrerequisites:
   - EmpireSubsonic
   - UniversalMaterialResearchT2
-  position: 7, 13
+  position: 7, 14
   
 - type: technology
   id: EmpireHeavyWeapons
-  name: research-technology-rogue-heavy-weapons
+  name: research-technology-empire-heavy-weapons
   entityIcon: WeaponSniperHristov
   discipline: EmpireWeapon
   tier: 1
-  cost: 70000
+  cost: 75000
   recipeUnlocks:
   - WeaponSniperHristovRogue
   - AmmoBox145x114mm
@@ -65,5 +66,17 @@
   technologyPrerequisites:
   - EmpireAdvancedGuns
   - UniversalMaterialResearchT3
-  position: 7, 14
-  
+  position: 7, 15
+
+- type: technology
+  id: EmpireMelleeWeapons
+  name: research-technology-empire-melee-weapons
+  entityIcon: ADTWeaponMeleePrasatChainsword
+  discipline: EmpireWeapon
+  tier: 1
+  cost: 90000
+  recipeUnlocks:
+  - ADTWeaponMeleePrasatChainsword
+  technologyPrerequisites:
+  - EmpireHeavyWeapons
+  position: 6, 15

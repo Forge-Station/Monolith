@@ -1,10 +1,10 @@
 - type: technology
   id: EmpireBasicClothing
-  name: research-technology-empire-light
+  name: research-technology-empire-clothing
   entityIcon: ClothingUniformJumpsuitNeophyte
   discipline: EmpireEquipment
   tier: 1
-  cost: 50000
+  cost: 20000
   recipeUnlocks:
   - ClothingUniformJumpsuitEmpireTech
   - ClothingUniformJumpsuitEmpireSweater
@@ -20,7 +20,7 @@
   - ClothingOuterCoatEmpireInqWindbreaker
   technologyPrerequisites:
   - UniversalMaterialResearchT1
-  position: 10, 12
+  position: 10, 13
 
 - type: technology
   id: EmpireBasicEquipment
@@ -28,14 +28,14 @@
   entityIcon: ClothingOuterHardsuitRI14
   discipline: EmpireEquipment
   tier: 1
-  cost: 70000
+  cost: 40000
   recipeUnlocks:
   - ClothingOuterHardsuitRI14
   - ClothingOuterHardsuitRI14m
   - ClothingOuterHardsuitRI14i
   technologyPrerequisites:
   - EmpireBasicClothing
-  position: 10, 13
+  position: 10, 14
 
 - type: technology
   id: EmpireAdvancedEquipment
@@ -43,7 +43,7 @@
   entityIcon: ClothingOuterHardsuitRI22
   discipline: EmpireEquipment
   tier: 2
-  cost: 90000
+  cost: 80000
   recipeUnlocks:
   - ClothingOuterHardsuitRI22
   - ClothingOuterHardsuitRI22i
@@ -51,7 +51,7 @@
   technologyPrerequisites:
   - EmpireBasicEquipment
   - UniversalMaterialResearchT2
-  position: 10, 15
+  position: 10, 16
 
 - type: technology
   id: EmpireHardsuitVigilance
@@ -59,14 +59,14 @@
   entityIcon: ClothingOuterHardsuitHV7
   discipline: EmpireEquipment
   tier: 2
-  cost: 200000
+  cost: 300000
   recipeUnlocks:
   - ClothingOuterHardsuitHV7
   - ClothingOuterHardsuitHVMilitant
   technologyPrerequisites:
   - EmpireAdvancedEquipment
   - UniversalMaterialResearchT3
-  position: 11, 17
+  position: 11, 18
 
 - type: technology
   id: EmpireHardsuitStealh
@@ -74,10 +74,10 @@
   entityIcon: ClothingOuterHardsuitHVStealh
   discipline: EmpireEquipment
   tier: 2
-  cost: 100000
+  cost: 150000
   recipeUnlocks:
   - ClothingOuterHardsuitHVStealh
   technologyPrerequisites:
   - EmpireAdvancedEquipment
   - UniversalMaterialResearchT3
-  position: 11, 18
+  position: 11, 19

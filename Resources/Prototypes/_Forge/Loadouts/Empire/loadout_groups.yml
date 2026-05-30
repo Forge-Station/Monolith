@@ -243,3 +243,14 @@
   - ClothingNeckCloakEmpirePreafectDiplomacy
   fallbacks:
   - ClothingNeckCloakEmpirePreafectDiplomacy
+  
+- type: loadoutGroup
+  id: EmpireBoxSurvival
+  name: loadout-group-contractor-survival-box
+  minLimit: 1
+  loadouts:
+  - EmpireBoxSurvivalMonoOxygenExtended
+  - EmpireBoxSurvivalMonoNitrogenExtended
+  fallbacks:
+  - EmpireBoxSurvivalMonoOxygenExtended
+  - EmpireBoxSurvivalMonoNitrogenExtended

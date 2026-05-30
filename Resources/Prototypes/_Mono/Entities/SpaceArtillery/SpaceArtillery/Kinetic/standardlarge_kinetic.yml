@@ -90,6 +90,7 @@
   parent:
   - BallisticArtilleryCartridge
   - BallisticArtilleryTier4HP
+  suffix: НЕ МАППИТЬ, САНЯЯЯ!!!
   description: A main battery with dual barrels, delivering rapid, punishing salvos at extreme range. Fires 220mm auto shells with slightly reduced brute strength. Can be remotely activated or linked up to a GCS.
   components:
   - type: StaticPrice
@@ -249,6 +250,7 @@
   parent:
   - BallisticArtilleryCartridge
   - BallisticArtilleryTier3HP
+  suffix: НЕ МАППИТЬ, САНЯЯЯ!!!
   description: A single-barrel, heavy artillery cannon designed for cruisers, delivering massive impact with each long-range shot. Can be remotely activated or linked up to a GCS.
   components:
   - type: StaticPrice
@@ -325,7 +327,7 @@
   parent:
   - BallisticArtilleryMapped
   - BallisticArtilleryTier5HP
-  suffix: Capital/Station, T4
+  suffix: Capital/Station, T4, Для маппинга
   description: One of the largest chemical-based kinetic weapons in the sector. Its power is only rivaled by mass drivers such as the M381. Automatically reloads full-power 255mm shells.
   components:
   - type: StaticPrice
@@ -491,7 +493,7 @@
   parent:
   - BallisticArtilleryMagazine
   - BallisticArtilleryTier4HP
-  suffix: Large, T4
+  suffix: Large, T4, НЕ МАППИТЬ, САНЯЯЯ!!!
   description: Fires 90mm shells in a 20 round burst from an internal autoloader.
   components:
   - type: StaticPrice

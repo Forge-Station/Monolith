@@ -11,13 +11,15 @@
   - type: MachineBoard
     flatpackable: false
     requirements:
-      Capacitor: 1
+      Capacitor: 2
       Manipulator: 2
       MatterBin: 1
     stackRequirements:
-      Steel: 10
-      Glass: 6
-      CableHV: 2
+      Steel: 20
+      Glass: 12
+      Copper: 20
+      Lithium: 5
+      Plasteel: 10
 
 - type: entity
   id: ForgeShipWeaponCircuitboardT2
@@ -32,15 +34,16 @@
   - type: MachineBoard
     flatpackable: false
     requirements:
-      Capacitor: 2
-      Manipulator: 2
-      MatterBin: 1
+      Capacitor: 4
+      Manipulator: 4
+      MatterBin: 2
     stackRequirements:
-      Steel: 16
-      Glass: 8
-      CableHV: 3
-      Plasteel: 5
-      Gold: 3
+      Steel: 40
+      Glass: 20
+      Plasteel: 20
+      Gold: 15
+      Copper: 40
+      Lithium: 10
 
 - type: entity
   id: ForgeShipWeaponCircuitboardT3
@@ -55,17 +58,20 @@
   - type: MachineBoard
     flatpackable: false
     requirements:
-      Capacitor: 3
-      Manipulator: 3
-      MatterBin: 2
+      Capacitor: 6
+      Manipulator: 6
+      MatterBin: 4
     stackRequirements:
-      Steel: 24
-      Glass: 12
-      CableHV: 4
-      Plasteel: 10
-      Gold: 5
-      Plasma: 5
-      Uranium: 3
+      Steel: 40
+      Glass: 25
+      Plasteel: 25
+      Gold: 20
+      Plasma: 15
+      Uranium: 10
+      Silver: 20
+      Copper: 60
+      Lithium: 15
+      Plastitanium: 10
 
 - type: entity
   id: ForgeShipWeaponCircuitboardT4
@@ -80,19 +86,24 @@
   - type: MachineBoard
     flatpackable: false
     requirements:
-      Capacitor: 4
-      Manipulator: 4
-      MatterBin: 2
+      Capacitor: 8
+      Manipulator: 8
+      MatterBin: 6
     stackRequirements:
-      Steel: 32
-      Glass: 16
-      CableHV: 6
-      Plasteel: 20
-      Gold: 8
-      Plasma: 10
-      Uranium: 8
-      Bluespace: 3
-      Diamond: 3
+      Steel: 70
+      Glass: 40
+      Plasteel: 50
+      Gold: 40
+      Plasma: 30
+      Uranium: 15
+      Bluespace: 5
+      Diamond: 5
+      Silver: 30
+      Copper: 80
+      Lithium: 20
+      Iridite: 4
+      Plastitanium: 20
+      UraniumDepleted: 2
 
 - type: entity
   id: WeaponTurretL85AutocannonCircuitboard
@@ -171,9 +182,27 @@
   components:
   - type: MachineBoard
     prototype: WeaponTurretM220Portable
+    requirements:
+      Capacitor: 10
+      Manipulator: 4
+      MatterBin: 5
+    stackRequirements:
+      Steel: 20
+      Glass: 40
+      Plasteel: 20
+      Gold: 40
+      Plasma: 40
+      Uranium: 40
+      Bluespace: 5
+      Silver: 30
+      Copper: 60
+      Lithium: 60
+      Iridite: 4
+      UraniumDepleted: 1
   - type: Tag
     tags:
     - MachineBoard2x1
+
 - type: entity
   id: WeaponTurretVesperaCircuitboard
   parent: ForgeShipWeaponCircuitboardT2
@@ -216,6 +245,8 @@
   components:
   - type: MachineBoard
     prototype: WeaponTurretBoforsPortable
+    stackRequirements:
+      UraniumDepleted: 12
   - type: Tag
     tags:
     - MachineBoard2x2
@@ -228,6 +259,23 @@
   components:
   - type: MachineBoard
     prototype: WeaponTurretTarnyxReloadPortable
+    requirements:
+      Capacitor: 20
+      Manipulator: 4
+      MatterBin: 10
+    stackRequirements:
+      Steel: 40
+      Glass: 100
+      Plasteel: 40
+      Gold: 40
+      Plasma: 60
+      Uranium: 60
+      Bluespace: 5
+      Silver: 30
+      Copper: 120
+      Lithium: 120
+      Iridite: 6
+      UraniumDepleted: 2
   - type: Tag
     tags:
     - MachineBoard2x2

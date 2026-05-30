@@ -78,7 +78,7 @@
   parent:
   - BallisticArtilleryMagazine
   - BallisticArtilleryTier2HP
-  suffix: Medium, T2
+  suffix: Medium, T2, НЕ МАППИТЬ, САНЯЯЯ!!!
   description: A dual-barrel, heavy 57mm autocannon firing general-purpose APHE rounds, effective for sustained fire against medium targets. Can be remotely activated or linked up to a GCS.
   components:
   - type: StaticPrice
@@ -211,7 +211,7 @@
   parent:
   - BallisticArtilleryMagazine
   - BallisticArtilleryTier2HP
-  suffix: Medium, T2
+  suffix: Medium, T2, НЕ МАППИТЬ, САНЯЯЯ!!!
   description: A single-barrel autocannon made by Aetherion Dynamics. Medium artillery piece with high impact but relatively low fire rate, firing HEAT shells to damage ship armor and systems. Can be remotely activated or linked up to a GCS.
   components:
   - type: StaticPrice

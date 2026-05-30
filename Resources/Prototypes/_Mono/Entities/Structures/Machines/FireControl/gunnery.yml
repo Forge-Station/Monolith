@@ -60,6 +60,7 @@
     tier: Low # Forge-Change
   - type: FireControlServer
     processingPower: 24
+    maxWeapons: 6
   - type: Battery
     maxCharge: 125
     startingCharge: 125
@@ -84,6 +85,7 @@
     tier: Medium
   - type: FireControlServer
     processingPower: 42
+    maxWeapons: 8
   - type: Battery
     maxCharge: 250
     startingCharge: 250
@@ -108,6 +110,7 @@
     tier: High
   - type: FireControlServer
     processingPower: 60
+    maxWeapons: 12
   - type: Battery
     maxCharge: 500
     startingCharge: 500
@@ -132,6 +135,7 @@
     tier: Ultra
   - type: FireControlServer
     processingPower: 90
+    maxWeapons: 14
   - type: Battery
     maxCharge: 1000
     startingCharge: 1000
@@ -158,6 +162,7 @@
     tier: Omega
   - type: FireControlServer
     processingPower: 250 # Forge-Change: 500
+    maxWeapons: 18
   - type: PassiveThermalSignature
     signature: 8000000 # ~5.6km
   - type: ThermalSignature
@@ -185,6 +190,7 @@
     board: MachineGCSStationCircuitboard
   - type: FireControlServer
     processingPower: 3000
+    maxWeapons: 24
   # no thermal sig
   # TODO: nuke this off ships
   - type: Battery
@@ -212,6 +218,7 @@
     board: MachineGCSStationCircuitboard
   - type: FireControlServer
     processingPower: 3000
+    maxWeapons: 24
     enforceMaxConsoles: true
     maxConsoles: 2
   - type: Battery

@@ -71,6 +71,7 @@
       - Sheet
       - RawMaterial
       - Ingot
+      - Ore
   - type: ContainerContainer
     containers:
       machine_board: !type:Container

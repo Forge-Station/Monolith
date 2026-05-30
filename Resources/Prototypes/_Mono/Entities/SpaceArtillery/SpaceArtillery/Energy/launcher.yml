@@ -66,7 +66,7 @@
   parent:
   - BallisticArtillery
   - BallisticArtilleryTier2HP
-  suffix: Medium, T2
+  suffix: Medium, T2, НЕ МАППИТЬ, САНЯЯЯ!!!
   description: Launches magnetically contained balls of plasma at targets. Can be remotely activated, or linked up to a GCS.
   components:
   - type: StaticPrice
@@ -184,7 +184,7 @@
   parent:
   - BallisticArtillery
   - BallisticArtilleryTier3HP
-  suffix: Medium, T2
+  suffix: Medium, T2, НЕ МАППИТЬ, САНЯЯЯ!!!
   description: Borrowing from the design of the Marauder, the Cerberus fires very similar shots, but in a tight spread of 3 blasts
   components:
   - type: StaticPrice
@@ -242,7 +242,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
-  suffix: Medium, T2
+  suffix: Medium, T2, Для маппинга
   description: A rapidly firing energy weapon, well known for its devastating burst followed by a constant stream of plasma.
   components:
   - type: StaticPrice
@@ -369,6 +369,7 @@
   parent:
   - BallisticArtillery
   # Forge-Change: no longer manually assembled through generic machine frames
+  suffix: НЕ МАППИТЬ, САНЯЯЯ!!!
   description: Uses mechanisms to launch... something. Destroys rock easily. Limited range.
   components:
   - type: StaticPrice
@@ -490,7 +491,7 @@
   parent:
   - BallisticArtilleryUnanchorable
   - BallisticArtilleryTier2HP
-  suffix: Medium, T2
+  suffix: Medium, T2, НЕ МАППИТЬ, САНЯЯЯ!!!
   description: Launches EMP projectiles at ships, disabling systems with powerful electromagnetic pulses. Ideal for non-lethal engagements and can be remotely activated or linked to a GCS.
   components:
   - type: StaticPrice
@@ -546,7 +547,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier3HP
-  suffix: Large, T3
+  suffix: Large, T3, Для маппинга
   description: A more specialized energy weapon, the Scylla fires a massive burst of plasma projectiles down range, in a huge spew to erase large and small targets alike.
   components:
   - type: StaticPrice
@@ -616,7 +617,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier5HP
-  suffix: Station, T5
+  suffix: Station, T5, Для маппинга
   description: Aetherion Dynamics' most iconic supercapital battery. Fires enormous ionized gas projectiles that melt through the toughest ship armor. Can be remotely activated or linked to a GCS.
   components:
   - type: StaticPrice
@@ -751,6 +752,7 @@
   parent:
   - BallisticArtillery
   - BallisticArtilleryTier1HP
+  suffix: НЕ МАППИТЬ, САНЯЯЯ!!!
   description: A light laser emplacement designed by the Pantheon Collective, used to shred threats of all types.
   components:
   - type: StaticPrice
@@ -870,7 +872,7 @@
   parent:
   - BallisticArtillery
   - BallisticArtilleryTier2HP
-  suffix: Medium, T2
+  suffix: Medium, T2, НЕ МАППИТЬ, САНЯЯЯ!!!
   description: A heavier laser cannon mount, after the relative failure of the Apollo and its subsequent conversion into a mining laser, the Prometheus comes to the field as the new heavy laser cannon, perfect for melting through hostile hulls.
   components:
   - type: StaticPrice
@@ -1004,6 +1006,7 @@
   parent:
   - BallisticArtillery
   - BallisticArtilleryTier4HP # This shit is massive lol
+  suffix: НЕ МАППИТЬ, САНЯЯЯ!!!
   name: L-20 Apollo Mining Laser Cannon
   description: One of the Pantheon Collective's top weapons, the Apollo is aptly named for its beams heating surfaces to beyond the temperature of nearby stars.
   components:
@@ -1073,7 +1076,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier5HP
-  suffix: ADS ONLY
+  suffix: ADS ONLY, Для маппинга
   description: A devastating weapon, known for glassing whole fleets when used en masse
   components:
   - type: StaticPrice
@@ -1163,7 +1166,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
-  suffix: ADS ONLY
+  suffix: ADS ONLY, Для маппинга
   description: A terrifying weapon to have aimed at you, the Reaper is an ancient piece of pre-fracture tech capable of shattering the strongest of hulls within one or two blasts.
   components:
   - type: StaticPrice
@@ -1243,7 +1246,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
-  suffix: ADS ONLY
+  suffix: ADS ONLY, Для маппинга
   description: One of the most powerful EMP weapons in sector, it is a sign of doom for its targets.
   components:
   - type: StaticPrice
@@ -1324,7 +1327,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
-  suffix: ADS ONLY
+  suffix: ADS ONLY, Для маппинга
   description: A rarer, powerful cannon mounted on larger ADS units. Firing a singular particle of antimatter wrapped in energy. Annihalating sections of shuttles at a time.
   components:
   - type: StaticPrice
@@ -1397,7 +1400,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
-  suffix: ADS ONLY
+  suffix: ADS ONLY, Для маппинга
   description: A potent proton cannon from before the Fracture, known for melting holes through both inorganic and organic matter with ease.
   components:
   - type: StaticPrice
@@ -1460,7 +1463,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
-  suffix: ADS ONLY
+  suffix: ADS ONLY, Для маппинга
   description: A burst firing neutron repeater, firing high-damage but slow balls of hell. A marvel of rapture weapons technology. Specializes in tunneling through anything that can't outmanuever it.
   components:
   - type: StaticPrice
@@ -1528,7 +1531,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
-  suffix: ADS ONLY
+  suffix: ADS ONLY, Для маппинга
   description: A unique pre-fracture weapon, the Flayer fires a storm of tungsten alloy darts at near the speed of light, barraging targets to pieces.
   components:
   - type: StaticPrice

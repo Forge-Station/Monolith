@@ -5,7 +5,7 @@
   - BallisticArtilleryMappedMagazine
   - BallisticArtilleryTier2HP
   description: A relatively small flare flinging hardpoint used to fool heat seeking missiles. Also good for search and rescue.
-  suffix: T1
+  suffix: T1, Для маппинга
   components:
   - type: StaticPrice
     price: 750

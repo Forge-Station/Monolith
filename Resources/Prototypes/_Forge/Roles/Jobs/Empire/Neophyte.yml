@@ -22,6 +22,8 @@
   - GeneralEmpireAccess
   special:
   - !type:AddComponentSpecial
+  - !type:AddImplantSpecial
+    implants: [ OverlordImplant ]
     components:
     - type: NpcFactionMember
       factions:

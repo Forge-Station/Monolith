@@ -222,6 +222,8 @@
   description: Терминал для назначения должностей Империи. Славься Империя, ведь сегодня действует акция "1 + 1" в подарок к должности идут и доступы.
   components:
   - type: JobPresetIdCardConsole
+    bodyImplants:
+    - OverlordImplant
     rankPresets:
     # - Praefect # WTF?
     - Arbiter

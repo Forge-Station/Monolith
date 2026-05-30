@@ -83,7 +83,12 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingMaskGas
+      - id: ClothingOuterCoatEmpireInqWindbreaker
+      - id: BoxHandcuff
+      - id: Stunbaton
+      - id: ClothingNeckCloakEmpirePreafectViolet
+      - id: ClothingHeadHatEmpirePreafectViolet
+      - id: ADTClothingBeltPrazatSheathInq
 
 - type: entity
   parent: LockerEmpireCommander
@@ -104,6 +109,8 @@
       - id: BoxCardboardEncryptKeyEmpire
       - id: WeaponCaseShortBombCollar
       - id: DoorRemoteEmpire
+      - id: ClothingNeckCloakEmpirePreafectOrange
+      - id: ClothingHeadHatEmpirePreafectOrange
 
 - type: entity
   parent: Dresser
@@ -134,3 +141,5 @@
       - id: BoxHandcuff
       - id: BoxCardboardIDCardEmpire
       - id: BoxCardboardEncryptKeyEmpire
+      - id: ClothingNeckCloakEmpirePreafectDiplomacy
+      - id: BriefcaseBrownFilled

@@ -13,7 +13,7 @@
   - EmpireShoes
   - EmpireBackpack
   - EmpireEars
-  # - EmpireBoxSurvival
+  - BoxSurvivalMonoOxygenExtended
   - EmpirePDA
   - ContractorWallet
   - ContractorCartridge
@@ -41,7 +41,7 @@
   - EmpireShoes
   - EmpireBackpack
   - EmpireEars
-  # - EmpireBoxSurvival
+  - BoxSurvivalMonoOxygenExtended
   - EmpirePDA
   - ContractorWallet
   - ContractorCartridge
@@ -69,7 +69,7 @@
   - EmpireShoes
   - EmpireBackpack
   - EmpireEarsCommand
-  # - EmpireBoxSurvival
+  - BoxSurvivalMonoOxygenExtended
   - EmpireGoldPDA
   - ContractorWallet
   - ContractorCartridge
@@ -97,7 +97,7 @@
   - EmpireShoes
   - EmpireBackpack
   - EmpireEarsCommand
-  # - EmpireBoxSurvival
+  - BoxSurvivalMonoOxygenExtended
   - EmpireGoldPDA
   - ContractorWallet
   - ContractorCartridge
@@ -126,7 +126,7 @@
   - EmpireShoes
   - EmpireBackpack
   - EmpireEarsCommand
-  # - EmpireBoxSurvival
+  - BoxSurvivalMonoOxygenExtended
   - EmpireGoldPDA
   - ContractorWallet
   - ContractorCartridge
@@ -154,7 +154,7 @@
   - EmpireShoes
   - EmpireBackpack
   - EmpireEarsCommand
-  # - EmpireBoxSurvival
+  - BoxSurvivalMonoOxygenExtended
   - EmpireInqPDA
   - ContractorWallet
   - ContractorCartridge
@@ -182,7 +182,7 @@
   - EmpireShoes
   - EmpireBackpack
   - EmpireEarsCommand
-  # - EmpireBoxSurvival
+  - BoxSurvivalMonoOxygenExtended
   - EmpireCommanderPDA
   - ContractorWallet
   - ContractorCartridge

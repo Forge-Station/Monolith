@@ -69,6 +69,11 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitEmpireInq
 
+- type: loadout
+  id: EmpireClothingUniformJumpsuitEmpireInqAlt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEmpireInqAlt
 # region Praefect
 - type: loadout
   id: ClothingUniformJumpsuitLordPreaf

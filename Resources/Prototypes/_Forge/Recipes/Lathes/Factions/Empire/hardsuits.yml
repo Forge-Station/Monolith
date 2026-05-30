@@ -85,7 +85,7 @@
   materials:
     Plastic: 1000
     Steel: 8000
-    Plastitanium: 3000
+    Plastitanium: 2000
     Plasteel: 6500
     Durathread: 1500
     Silver: 2000
@@ -118,8 +118,8 @@
     Plastitanium: 2000
     Plasteel: 3500
     Durathread: 2000
-    Silver: 6000
-    Gold: 6000
+    Silver: 5000
+    Gold: 5000
     UraniumDepleted: 1000
     UraniumFissile: 300
 

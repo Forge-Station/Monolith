@@ -42,6 +42,17 @@
       sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor.rsi
     - type: Clothing
       sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor.rsi
+      
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitEmpireInqAlt
+  name: Imperial inquisitor uniform
+  description: Cool Imperial inquisitor uniform.
+  components:
+    - type: Sprite
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor_alt.rsi
+    - type: Clothing
+      sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor_alt.rsi
 
 - type: entity
   parent: ClothingUniformBase

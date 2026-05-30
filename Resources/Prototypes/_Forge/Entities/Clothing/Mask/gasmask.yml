@@ -12,6 +12,20 @@
     sprite: Forge/Clothing/Mask/renegate.rsi
   - type: Clothing
     sprite: Forge/Clothing/Mask/renegate.rsi
+# region Empire
+- type: entity
+  parent: ClothingMaskGasSecurity
+  id: ClothingMaskGasEmpire
+  name: empires gas mask
+  suffix: Empire
+  description: A standard issue empires gas mask.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/empire.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/empire.rsi
 
 # region Company
 - type: entity

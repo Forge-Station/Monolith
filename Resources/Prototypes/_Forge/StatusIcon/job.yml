@@ -200,7 +200,7 @@
   id: JobIconTsfAmbassador
   icon:
     sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
-    state: emp_diplomacy
+    state: tsf_diplomacy
   jobName: job-name-tsf-ambassador
 
 - type: jobIcon

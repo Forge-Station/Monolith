@@ -21,3 +21,9 @@
   price: 500
   equipment:
     belt: ClothingBeltWebbingsBigBase
+
+- type: loadout
+  id: EmpireClothingBeltAssault
+  price: 0
+  equipment:
+    belt: ClothingBeltAssault

@@ -71,3 +71,16 @@
     - type: Rattle
       radioChannel: "Empire"
       language: "Freespeak"
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: OverlordImplant
+  name: olverlord implant
+  description: This implant will shield the brain from external influences and prevent mind control devices. # DeltaV - mindshield does not enforce loyalty
+  categories: [ HideSpawnMenu ]
+  components:
+   - type: SubdermalImplant
+     permanent: false # Mono: true->false - lets mindshields be removed from people
+   - type: Tag
+     tags:
+       - Overlord

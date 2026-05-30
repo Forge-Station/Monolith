@@ -13,10 +13,10 @@
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - TsfmcGasmask
+  - EmpireClothingMask
   - TsfmcGaiter
   fallbacks:
-  - TsfmcGaiter
+  - EmpireClothingMask
 
 - type: loadoutGroup
   id: EmpireGlasses
@@ -53,8 +53,6 @@
   maxLimit: 1
   loadouts:
   - EmpireClothingOuterCoatEmpireWindbreaker
-  # fallbacks:
-  # -
 
 - type: loadoutGroup
   id: EmpireBelt
@@ -66,6 +64,7 @@
   - EmpireClothingBeltWebbingsBigTan
   - EmpireClothingBeltMilitaryWebbing
   - EmpireClothingBeltWebbingsBigBase
+  - EmpireClothingBeltAssault
   fallbacks:
   - EmpireClothingBeltWebbingsNormalTan
 
@@ -194,6 +193,7 @@
   minLimit: 1
   loadouts:
   - EmpireClothingUniformJumpsuitEmpireInq
+  - EmpireClothingUniformJumpsuitEmpireInqAlt
   fallbacks:
   - EmpireClothingUniformJumpsuitEmpireInq
 

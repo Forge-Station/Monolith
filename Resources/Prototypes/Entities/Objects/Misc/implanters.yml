@@ -50,6 +50,7 @@
       - FreelanceTrackingImplant # Mono
       - UsspTrackingImplant # Mono
       - ForgeVoiceModuleImplant # Forge-Change
+      - OverlordImplant # Forge-change
       deimplantFailureDamage:
         types:
 #          Cellular: 5 # 50->5 - Mono

@@ -284,7 +284,9 @@ public abstract partial class SharedGunSystem
 
     private void OnBallisticTakeAmmo(EntityUid uid, BallisticAmmoProviderComponent component, TakeAmmoEvent args)
     {
+        // Forge-Change-start
         PruneInvalidBallisticEntities(uid, component);
+        // Forge-Change-end
 
         for (var i = 0; i < args.Shots; i++)
         {
@@ -292,9 +294,11 @@ public abstract partial class SharedGunSystem
 
             if (component.Entities.Count > 0)
             {
+                // Forge-Change-start
                 PruneInvalidBallisticEntities(uid, component);
                 if (component.Entities.Count == 0)
                     continue;
+                // Forge-Change-end
 
                 entity = component.Entities[^1];
 
@@ -335,7 +339,9 @@ public abstract partial class SharedGunSystem
     // Mono
     private void OnBallisticCheckProto(Entity<BallisticAmmoProviderComponent> ent, ref CheckShootPrototypeEvent args)
     {
+        // Forge-Change-start
         PruneInvalidBallisticEntities(ent, ent.Comp);
+        // Forge-Change-end
 
         if (ent.Comp.Entities.Count > 0)
         {
@@ -349,6 +355,7 @@ public abstract partial class SharedGunSystem
         }
     }
 
+    // Forge-Change-start: remove deleted entities from ballistic tubes (Drake seismic launcher).
     private void PruneInvalidBallisticEntities(EntityUid uid, BallisticAmmoProviderComponent component)
     {
         var changed = false;
@@ -365,6 +372,7 @@ public abstract partial class SharedGunSystem
         if (changed)
             DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
     }
+    // Forge-Change-end
 
     private void OnBallisticAmmoCount(EntityUid uid, BallisticAmmoProviderComponent component, ref GetAmmoCountEvent args)
     {

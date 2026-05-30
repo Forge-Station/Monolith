@@ -7,7 +7,7 @@ using Content.Shared.Database;
 using Content.Shared.Body.Systems; // Forge-Change
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Inventory;
+using Content.Shared.Inventory; // Forge-Change
 using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
 using Content.Shared.Interaction;
@@ -285,7 +285,7 @@ public sealed partial class PullingSystem : EntitySystem
             }
         }
 
-        ApplyPullAssistFromWornClothing(uid, ref modifier, assist => assist.PullingAssistSlowdownPenaltyModifier);
+        ApplyPullAssistFromWornClothing(uid, ref modifier, assist => assist.PullingAssistSlowdownPenaltyModifier); // Forge-Change
         // Forge-Change-End
 
         return modifier;
@@ -313,7 +313,7 @@ public sealed partial class PullingSystem : EntitySystem
             }
         }
 
-        ApplyPullAssistFromWornClothing(uid, ref modifier, assist => assist.PullingAssistMassPenaltyModifier);
+        ApplyPullAssistFromWornClothing(uid, ref modifier, assist => assist.PullingAssistMassPenaltyModifier); // Forge-Change
         // Forge-Change-End
 
         return modifier;

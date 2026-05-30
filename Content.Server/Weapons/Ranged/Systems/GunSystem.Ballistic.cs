@@ -21,6 +21,7 @@ public sealed partial class GunSystem
     {
         EntityUid? ent = null;
 
+        // Forge-Change-start: drop stale ballistic entities before cycle (Drake seismic launcher).
         var removedInvalid = false;
         while (component.Entities.Count > 0 && !Exists(component.Entities[^1]))
         {
@@ -30,6 +31,7 @@ public sealed partial class GunSystem
 
         if (removedInvalid)
             DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
+        // Forge-Change-end
 
         // TODO: Combine with TakeAmmo
         if (component.Entities.Count > 0)

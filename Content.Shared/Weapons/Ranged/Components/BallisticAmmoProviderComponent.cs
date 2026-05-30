@@ -1,4 +1,4 @@
-using Content.Shared._Forge.Weapons;
+using Content.Shared._Forge.Weapons; // Forge-Change
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Weapons.Ranged.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), Access(typeof(SharedGunSystem), typeof(SeismicChargeBallisticSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), Access(typeof(SharedGunSystem), typeof(SeismicChargeBallisticSystem))] // Forge-Change
 public sealed partial class BallisticAmmoProviderComponent : Component
 {
     [DataField]

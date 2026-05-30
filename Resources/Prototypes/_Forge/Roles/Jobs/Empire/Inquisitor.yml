@@ -38,6 +38,8 @@
 #     - type: NpcFactionMember
 #       factions:
 #       - Empire
+#     - !type:AddImplantSpecial
+#       implants: [ ImplantGuard ]
 #
 # - type: startingGear
 #   id: InquisitorGear

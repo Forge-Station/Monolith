@@ -12,3 +12,11 @@
         type: VoiceMaskBoundUserInterface
   - type: Implanter
     implant: ForgeVoiceModuleImplant
+
+- type: entity
+  id: GuardImplanter
+  parent: BaseImplantOnlyImplanter
+  suffix: Страж
+  components:
+    - type: Implanter
+      implant: ImplantGuard

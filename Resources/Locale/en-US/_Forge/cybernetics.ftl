@@ -5,7 +5,6 @@ forge-surgical-armor-already-installed = This body already has an armor implant 
 
 reagent-effect-guidebook-transmutin-species-reaction = Converts transmutin into a donor-species transmutin when mixed with blood carrying species data.
 reagent-effect-guidebook-transmutin-mutate-monkey = Mutates monkeys into the selected humanoid species without granting intelligence.
-
 ent-ForgeVoiceModuleImplant = voice module implant
     .desc = A configurable subdermal TTS voice modulator. Configure it in hand before implantation.
 ent-ForgeSubdermalArmorImplant = subdermal armor implant

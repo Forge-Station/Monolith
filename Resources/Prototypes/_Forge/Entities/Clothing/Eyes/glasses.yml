@@ -83,31 +83,6 @@
     - Silicon
 
 - type: entity
-  parent: [ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC2ContrabandUnredeemable]
-  id: ClothingEyesNightThermalVisionNfsd
-  name: night-thermal vision goggles
-  description: Now you can see in the dark everyone!
-  components:
-  - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
-  - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
-  - type: FlashImmunity
-  - type: EyeProtection
-  - type: StaticPrice
-    price: 30
-  - type: ShowHealthBars
-  - type: NightVision
-    color: "#b2cb50"
-    flashDurationMultiplier: 2
-    isEquipment: true
-  - type: ThermalVision
-    flashDurationMultiplier: 2
-    pulseTime: 2
-    isEquipment: true
-    toggleAction: PulseThermalVision
-
-- type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons]
   id: ClothingEyesNTGlasses
   name: NT shades
@@ -127,20 +102,3 @@
   - type: NightVision
     flashDurationMultiplier: 2.75
     isEquipment: true
-
-- type: entity
-  parent: [ ClothingEyesBase, ShowSecurityIcons ]
-  id: ClothingEyesUIGoogles
-  name: Солнцезащитные очки U.I
-  description: Стильные фиолетовые очки с возможностью просмотра профессии и компаний
-  components:
-  - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
-  - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
-  - type: FlashImmunity
-  - type: EyeProtection
-    protectionTime: 5
-  - type: StaticPrice
-    price: 30
-    vendPrice: 200

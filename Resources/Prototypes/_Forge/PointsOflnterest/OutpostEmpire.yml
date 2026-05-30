@@ -5,7 +5,7 @@
   name: 'Аванпост СИВ'
   minimumDistance: 7500
   maximumDistance: 9500
-  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed]
   spawnGroup: Required
   gridPath: /Maps/_Forge/POI/OutpostEmpire.yml
   addComponents:

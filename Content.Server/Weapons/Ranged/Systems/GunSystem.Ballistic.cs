@@ -21,6 +21,16 @@ public sealed partial class GunSystem
     {
         EntityUid? ent = null;
 
+        var removedInvalid = false;
+        while (component.Entities.Count > 0 && !Exists(component.Entities[^1]))
+        {
+            component.Entities.RemoveAt(component.Entities.Count - 1);
+            removedInvalid = true;
+        }
+
+        if (removedInvalid)
+            DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
+
         // TODO: Combine with TakeAmmo
         if (component.Entities.Count > 0)
         {

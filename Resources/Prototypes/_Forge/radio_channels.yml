@@ -112,3 +112,10 @@
   keycode: 'е'
   frequency: 7009
   color: "#FF8C00"
+
+- type: radioChannel
+  id: DrakeIndustries
+  name: chat-radio-drake-industries
+  keycode: 'ё'
+  frequency: 7010
+  color: "#C97D7D"

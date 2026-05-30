@@ -1,5 +1,6 @@
 ent-ClothingBeltDrakeIndustries = разгрузка Drake Industries
     .desc = Куда менее прочная, чем кожа обычных салваж-разгрузок, зато чёрная. Цвета Drake Industries.
+    .suffix = Drake
 ent-ClothingBeltWebbingsNormalTSFMC = разгрузка TSFMC
     .desc = Тактическая разгрузка морской пехоты.
 ent-ClothingBeltWebbingsNormalTan = разгрузка на грудь (хаки)

@@ -17,3 +17,7 @@
 - type: latheCategory
   id: Bureaucracy
   name: lathe-category-bureaucracy
+
+- type: latheCategory
+  id: DrakeIndustries
+  name: lathe-category-drake-industries

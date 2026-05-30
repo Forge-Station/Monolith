@@ -19,6 +19,7 @@ public sealed partial class ModsuitGauntletToolsRadialMenu : RadialMenu
         { ModsuitGauntletToolSlot.Omnitool, new SpriteSpecifier.Rsi(new ResPath("Objects/Tools/omnitool.rsi"), "omnitool-screwing") },
         { ModsuitGauntletToolSlot.Welder, new SpriteSpecifier.Rsi(new ResPath("Forge/Objects/Tools/Standart/welder_experimental.rsi"), "icon") },
         { ModsuitGauntletToolSlot.NaniteApplicator, new SpriteSpecifier.Rsi(new ResPath("_Mono/Objects/Tools/nanite_applicator_experimental.rsi"), "icon") },
+        { ModsuitGauntletToolSlot.Auxiliary, new SpriteSpecifier.Rsi(new ResPath("Objects/Weapons/Guns/Launchers/grappling_gun.rsi"), "icon") },
     };
 
     [Dependency] private readonly IEntityManager _entManager = default!;
@@ -42,17 +43,20 @@ public sealed partial class ModsuitGauntletToolsRadialMenu : RadialMenu
 
         var comp = gauntlets.Comp;
 
-        if (!comp.UrkInHand)
-            AddToolButton(main, ModsuitGauntletToolSlot.Urk, comp.UrkProto);
+        if (comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.Urk) && !comp.UrkInHand)
+            AddToolButton(main, ModsuitGauntletToolSlot.Urk, comp.UrkProto, comp.UsePrototypeMenuIcons);
 
-        if (!comp.OmnitoolInHand)
-            AddToolButton(main, ModsuitGauntletToolSlot.Omnitool, comp.OmnitoolProto);
+        if (comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.Omnitool) && !comp.OmnitoolInHand)
+            AddToolButton(main, ModsuitGauntletToolSlot.Omnitool, comp.OmnitoolProto, comp.UsePrototypeMenuIcons);
 
-        if (!comp.WelderInHand)
-            AddToolButton(main, ModsuitGauntletToolSlot.Welder, comp.WelderProto);
+        if (comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.Welder) && !comp.WelderInHand)
+            AddToolButton(main, ModsuitGauntletToolSlot.Welder, comp.WelderProto, comp.UsePrototypeMenuIcons);
 
-        if (!comp.NaniteApplicatorInHand)
-            AddToolButton(main, ModsuitGauntletToolSlot.NaniteApplicator, comp.NaniteApplicatorProto);
+        if (comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.NaniteApplicator) && !comp.NaniteApplicatorInHand)
+            AddToolButton(main, ModsuitGauntletToolSlot.NaniteApplicator, comp.NaniteApplicatorProto, comp.UsePrototypeMenuIcons);
+
+        if (comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.Auxiliary) && !comp.AuxiliaryInHand)
+            AddToolButton(main, ModsuitGauntletToolSlot.Auxiliary, comp.AuxiliaryProto, comp.UsePrototypeMenuIcons);
 
         if (TryGetActiveSlot(comp, out var activeSlot))
             AddStowButton(main, activeSlot);
@@ -60,7 +64,7 @@ public sealed partial class ModsuitGauntletToolsRadialMenu : RadialMenu
         AddToolClickActions(main);
     }
 
-    private void AddToolButton(RadialContainer container, ModsuitGauntletToolSlot slot, EntProtoId protoId)
+    private void AddToolButton(RadialContainer container, ModsuitGauntletToolSlot slot, EntProtoId protoId, bool usePrototypeIcons)
     {
         if (!_prototypeManager.TryIndex(protoId, out var prototype))
             return;
@@ -72,10 +76,11 @@ public sealed partial class ModsuitGauntletToolsRadialMenu : RadialMenu
             Slot = slot,
         };
 
-        var icon = MenuIcons.GetValueOrDefault(slot);
-        var textureSource = icon != null
-            ? _sprites.Frame0(icon)
-            : _sprites.Frame0(prototype);
+        var textureSource = usePrototypeIcons
+            ? _sprites.Frame0(prototype)
+            : MenuIcons.TryGetValue(slot, out var menuIcon)
+                ? _sprites.Frame0(menuIcon)
+                : _sprites.Frame0(prototype);
 
         var texture = new TextureRect
         {
@@ -92,27 +97,33 @@ public sealed partial class ModsuitGauntletToolsRadialMenu : RadialMenu
 
     private static bool TryGetActiveSlot(ModsuitGauntletToolsComponent comp, out ModsuitGauntletToolSlot slot)
     {
-        if (comp.UrkInHand)
+        if (comp.UrkInHand && SharedModsuitGauntletToolsSystem.IsSlotEnabled(comp, ModsuitGauntletToolSlot.Urk))
         {
             slot = ModsuitGauntletToolSlot.Urk;
             return true;
         }
 
-        if (comp.OmnitoolInHand)
+        if (comp.OmnitoolInHand && SharedModsuitGauntletToolsSystem.IsSlotEnabled(comp, ModsuitGauntletToolSlot.Omnitool))
         {
             slot = ModsuitGauntletToolSlot.Omnitool;
             return true;
         }
 
-        if (comp.WelderInHand)
+        if (comp.WelderInHand && SharedModsuitGauntletToolsSystem.IsSlotEnabled(comp, ModsuitGauntletToolSlot.Welder))
         {
             slot = ModsuitGauntletToolSlot.Welder;
             return true;
         }
 
-        if (comp.NaniteApplicatorInHand)
+        if (comp.NaniteApplicatorInHand && SharedModsuitGauntletToolsSystem.IsSlotEnabled(comp, ModsuitGauntletToolSlot.NaniteApplicator))
         {
             slot = ModsuitGauntletToolSlot.NaniteApplicator;
+            return true;
+        }
+
+        if (comp.AuxiliaryInHand && SharedModsuitGauntletToolsSystem.IsSlotEnabled(comp, ModsuitGauntletToolSlot.Auxiliary))
+        {
+            slot = ModsuitGauntletToolSlot.Auxiliary;
             return true;
         }
 

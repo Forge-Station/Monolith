@@ -1,0 +1,9 @@
+- type: entity
+  id: ActionDrakeGauntletToolsMenu
+  name: Integrated hardsuit tools
+  description: Open the radial menu to deploy integrated mining tools.
+  components:
+  - type: InstantAction
+    clientExclusive: true
+    icon: { sprite: Objects/Weapons/Melee/pickaxe.rsi, state: pickaxe }
+    event: !type:OpenModsuitGauntletToolsMenuActionEvent {}

@@ -27,6 +27,11 @@ public sealed partial class GunSystem
 
         EntityUid? ent = null;
 
+        while (component.Entities.Count > 0 && !Exists(component.Entities[^1]))
+        {
+            component.Entities.RemoveAt(component.Entities.Count - 1);
+        }
+
         // TODO: Combine with TakeAmmo
         if (component.Entities.Count > 0)
         {

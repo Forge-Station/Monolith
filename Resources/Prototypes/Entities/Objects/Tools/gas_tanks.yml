@@ -248,3 +248,7 @@
     slots:
     - Belt
     - suitStorage
+  - type: Tag
+    tags:
+    - GasTank
+    - DrakePlasmaTank

@@ -1,0 +1,15 @@
+# Drake Industries Apollo MK2 ship mining laser.
+
+- type: latheRecipe
+  parent: DrakeIndustriesShipWeaponRecipe
+  id: WeaponTurretDrakeApolloMk2Flatpack
+  result: WeaponTurretDrakeApolloMk2Flatpack
+  completetime: 35
+  materials:
+    Steel: 12000
+    Plastitanium: 3500
+    Uranium: 2500
+    UraniumDepleted: 1500
+    Gold: 1500
+    Silver: 1500
+    Glass: 2500

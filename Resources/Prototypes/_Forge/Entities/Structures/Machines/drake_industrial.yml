@@ -1,0 +1,92 @@
+# Drake Industries industrial machines.
+
+- type: entity
+  id: DrakeMachine2x2Base
+  abstract: true
+  components:
+  - type: Sprite
+    offset: 0.5,-0.5
+  - type: Construction
+    graph: Machine2x2
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "1.25,0.25,-0.25,-1.25"
+        density: 250
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  parent: [OreProcessorIndustrial, DrakeMachine2x2Base]
+  id: DrakeOreProcessorMk2
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/drake_ore_processor_mk2.rsi
+    offset: 0.5,-0.5
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: DrakeOreProcessorMk2MachineCircuitboard
+  - type: Lathe
+    materialUseMultiplier: 0.5
+    timeMultiplier: 0.25
+    idleState: icon
+    runningState: building
+
+- type: entity
+  parent: ScrapProcessor
+  id: DrakeScrapProcessor
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/drake_scrap_processor.rsi
+  - type: Machine
+    board: DrakeScrapProcessorMachineCircuitboard
+  - type: Lathe
+    materialUseMultiplier: 0.75
+    timeMultiplier: 0.5
+
+- type: entity
+  parent: [CentrifugeLatheMini, DrakeMachine2x2Base]
+  id: DrakeUraniumCentrifuge
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/drake_uranium_centrifuge.rsi
+    offset: 0.5,-0.5
+    layers:
+    - state: icon
+      map: [ "enum.LatheVisualLayers.IsRunning" ]
+    - state: unlit
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: DrakeUraniumCentrifugeMachineCircuitboard
+  - type: Lathe
+    materialUseMultiplier: 0.75
+    timeMultiplier: 0.5
+    staticPacks:
+    - MonoCentrifugeProcessingStatic
+    dynamicPacks:
+    - MonoUraniumProcessing
+    - DrakeCentrifugeUraniumProcessing
+    - DrakeCentrifugePlastitaniumProcessing

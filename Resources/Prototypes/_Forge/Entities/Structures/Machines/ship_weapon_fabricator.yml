@@ -37,6 +37,8 @@
           True: { visible: true }
           False: { visible: false }
   - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 150000
   - type: Machine
     board: ShipWeaponFabricatorCircuitboard
   - type: ShipWeaponFabricator

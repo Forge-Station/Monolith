@@ -47,6 +47,11 @@ public sealed class MachineBoardTest
             {
                 if (!p.TryGetComponent<MachineBoardComponent>(out var mbc, compFact))
                     continue;
+
+                // Fabricator-only boards (e.g. ship weapons) output flatpacks, not constructible machines.
+                if (!mbc.Flatpackable)
+                    continue;
+
                 var mId = mbc.Prototype;
 
                 Assert.Multiple(() =>

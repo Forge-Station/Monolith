@@ -61,6 +61,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ShipWeaponFabricatorComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<ShipWeaponFabricatorComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ShipWeaponFabricatorComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ShipWeaponFabricatorComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<ShipWeaponFabricatorComponent, EntInsertedIntoContainerMessage>(OnContainerModified);
@@ -81,14 +82,16 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
     {
         component.BoardContainer = _container.EnsureContainer<ContainerSlot>(uid, ShipWeaponFabricatorComponent.BoardContainerName);
         component.PartContainer = _container.EnsureContainer<Container>(uid, ShipWeaponFabricatorComponent.PartContainerName);
+    }
+
+    private void OnMapInit(EntityUid uid, ShipWeaponFabricatorComponent component, MapInitEvent args)
+    {
         _materialStorage.UpdateMaterialWhitelist(uid);
-        UpdatePowerLoad(uid, component);
     }
 
     private void OnStartup(EntityUid uid, ShipWeaponFabricatorComponent component, ComponentStartup args)
     {
         RegenerateProgress(uid, component);
-        UpdatePowerLoad(uid, component);
         UpdateUi(uid, component);
     }
 

@@ -97,9 +97,9 @@
   name: loadout-group-contractor-backpack
   minLimit: 1
   loadouts:
-  - ClothingBackpackSatchelPDV
-  - ClothingBackpackDuffelPDV
-  - ClothingBackpackPDV
+  - EmpireBackpack
+  - EmpireDuffel
+  - EmpireBackpack
   - MonoSecurityGuardDuffel
   - MonoSecurityGuardBackpack
   - MonoSecurityGuardSatchel

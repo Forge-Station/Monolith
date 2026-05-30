@@ -47,6 +47,11 @@ public sealed class MachineBoardTest
             {
                 if (!p.TryGetComponent<MachineBoardComponent>(out var mbc, compFact))
                     continue;
+
+                // Forge ship weapon boards reference flatpack output entities, not constructible machines.
+                if (!mbc.Flatpackable)
+                    continue;
+
                 var mId = mbc.Prototype;
 
                 Assert.Multiple(() =>

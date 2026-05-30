@@ -66,7 +66,6 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
         SubscribeLocalEvent<ShipWeaponFabricatorComponent, EntInsertedIntoContainerMessage>(OnContainerModified);
         SubscribeLocalEvent<ShipWeaponFabricatorComponent, EntRemovedFromContainerMessage>(OnContainerModified);
         SubscribeLocalEvent<ShipWeaponFabricatorComponent, MaterialAmountChangedEvent>(OnMaterialAmountChanged);
-        SubscribeLocalEvent<ShipWeaponFabricatorComponent, GetMaterialWhitelistEvent>(OnGetMaterialWhitelist);
         SubscribeLocalEvent<ShipWeaponFabricatorComponent, AfterActivatableUIOpenEvent>(OnAfterUiOpen);
         SubscribeLocalEvent<ShipWeaponFabricatorComponent, ShipWeaponFabricatorStartMessage>(OnStartPressed);
         SubscribeLocalEvent<ShipWeaponFabricatorComponent, ShipWeaponFabricatorEjectMessage>(OnEjectPressed);
@@ -81,7 +80,6 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
     {
         component.BoardContainer = _container.EnsureContainer<ContainerSlot>(uid, ShipWeaponFabricatorComponent.BoardContainerName);
         component.PartContainer = _container.EnsureContainer<Container>(uid, ShipWeaponFabricatorComponent.PartContainerName);
-        _materialStorage.UpdateMaterialWhitelist(uid);
         UpdatePowerLoad(uid, component);
     }
 
@@ -114,7 +112,6 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             args.Container.ID != ShipWeaponFabricatorComponent.PartContainerName)
             return;
 
-        _materialStorage.UpdateMaterialWhitelist(uid);
         RegenerateProgress(uid, component);
         UpdateUi(uid, component);
     }
@@ -136,14 +133,6 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
     private void OnDestroyed(EntityUid uid, ShipWeaponFabricatorComponent component, ref DestructionEventArgs args)
     {
         EjectContainedEntities(uid, component);
-    }
-
-    private void OnGetMaterialWhitelist(EntityUid uid, ShipWeaponFabricatorComponent component, ref GetMaterialWhitelistEvent args)
-    {
-        foreach (var material in _prototype.EnumeratePrototypes<MaterialPrototype>())
-        {
-            args.Whitelist.Add(material);
-        }
     }
 
     private void OnExamined(EntityUid uid, ShipWeaponFabricatorComponent component, ExaminedEvent args)
@@ -348,7 +337,6 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             return false;
 
         ResetProgressAndRequirements(component, machineBoard);
-        _materialStorage.UpdateMaterialWhitelist(uid);
         RegenerateProgress(uid, component);
         return true;
     }
@@ -540,7 +528,6 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
         QueueDel(board);
 
         SetFabricatingState(uid, component, false);
-        _materialStorage.UpdateMaterialWhitelist(uid);
         RegenerateProgress(uid, component);
         UpdateUi(uid, component);
     }

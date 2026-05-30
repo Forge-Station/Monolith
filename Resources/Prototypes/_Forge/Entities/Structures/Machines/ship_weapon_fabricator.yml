@@ -4,6 +4,8 @@
   name: naval weapon fabricator
   description: An industrial assembly machine for building ship weapons from researched blueprints and loaded components.
   components:
+  - type: ApcPowerReceiver
+    powerLoad: 1500
   - type: Sprite
     sprite: Forge/Structures/Machines/shipWeaponFab.rsi
     offset: 1,-1

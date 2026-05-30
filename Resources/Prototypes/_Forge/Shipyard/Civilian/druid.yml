@@ -1,0 +1,32 @@
+- type: vessel
+  id: Druid
+  parent: BaseVessel
+  name: Друид
+  description: Ботанический шаттл с химической лабораторией.
+  price: 64000
+  category: Medium
+  group: Shipyard
+  shuttlePath: /Maps/_Forge/Shuttles/Civilian/druid.yml
+  guidebookPage: Null
+  class:
+  - Civilian
+
+- type: gameMap
+  id: Druid
+  mapName: 'Друид'
+  mapPath: /Maps/_Forge/Shuttles/Civilian/druid.yml
+  minPlayers: 0
+  stations:
+    Druid:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Друид CIV{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

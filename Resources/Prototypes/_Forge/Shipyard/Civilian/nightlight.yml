@@ -1,0 +1,34 @@
+- type: vessel
+  id: Nightlight
+  parent: BaseVessel
+  name: Ночник
+  description: Небольшой гражданский шаттл-ресторан с баром, кухней и гидропоникой
+  price: 44850
+  category: Medium
+  group: Shipyard
+  shuttlePath: /Maps/_Forge/Shuttles/Civilian/nightlight.yml
+  guidebookPage: Null
+  class:
+  - Civilian
+  engine:
+  - APU
+
+- type: gameMap
+  id: Nightlight
+  mapName: 'Ночник'
+  mapPath: /Maps/_Forge/Shuttles/Civilian/nightlight.yml
+  minPlayers: 0
+  stations:
+    Nightlight:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Ночник CIV{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

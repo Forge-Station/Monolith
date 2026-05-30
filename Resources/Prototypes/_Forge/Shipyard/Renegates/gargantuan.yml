@@ -1,0 +1,30 @@
+- type: vessel
+  id: gargantuan
+  parent: BaseVessel
+  name: Исполин
+  description: Гениальное творение инженеров ВКР. Бич Империи. Угроза сектору. Цена снижена за мануальное управление стрельбой.
+  price: 84000
+  category: Small
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/gargantuan.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  - Scrapyard
+  - Pirate
+
+- type: gameMap
+  id: gargantuan
+  mapName: 'Исполин'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/gargantuan.yml
+  minPlayers: 0
+  stations:
+    gargantuan:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Исполин MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

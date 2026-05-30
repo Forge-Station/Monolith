@@ -1,0 +1,32 @@
+- type: vessel
+  id: Pulsar
+  parent: BaseVessel
+  name: Пульсар
+  description: Гражданский научно-исследовательский шаттл, любимый многими учеными за универсальность и генератор аномалий
+  price: 51750
+  category: Medium
+  group: Shipyard
+  shuttlePath: /Maps/_Forge/Shuttles/Civilian/pulsar.yml
+  guidebookPage: Null
+  class:
+  - Civilian
+
+- type: gameMap
+  id: Pulsar
+  mapName: 'Пульсар'
+  mapPath: /Maps/_Forge/Shuttles/Civilian/pulsar.yml
+  minPlayers: 0
+  stations:
+    Pulsar:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Пульсар CIV{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

@@ -1,0 +1,33 @@
+- type: vessel
+  id: Striks
+  parent: BaseVessel
+  name: 'MBS Стрикс'
+  description: Истребитель VG с хорошим курсовым вооружением. Рассчитан на экипаж 1-2 человека
+  price: 47000
+  category: Small
+  group: Shipyard
+  access: Mercenary
+  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/Striks.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+- type: gameMap
+  id: Striks
+  mapName: 'MBS Стрикс'
+  mapPath: /Maps/_Forge/Shuttles/Mercenary/Striks.yml
+  minPlayers: 0
+  stations:
+    Striks:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'MBS Стрикс MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

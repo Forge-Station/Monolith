@@ -598,7 +598,7 @@
     coefficient: 0.5
   - type: ClothingSpeedModifier
     walkModifier: 1.0
-    walkModifier: 1.0
+    sprintModifier: 1.0
   - type: SpaceFlightProfile
     thrustMultiplier: 0.7
     controlMultiplier: 1.15

@@ -31,7 +31,7 @@
   - MachineShieldFSG330RCircuitboard
   technologyPrerequisites:
   - ForgeFSGShieldsCivilianT1
-  position: -5, 8
+  position: -5, 9
 
 # --- Faction & company R&D: T3 (heavy / specialized arrays) ---
 
@@ -64,7 +64,7 @@
   - MachineShieldForgeUsspCollisionCircuitboard
   technologyPrerequisites:
   - UsspMediumShips
-  position: 17, 9
+  position: 17, 10
 
 - type: technology
   id: ForgeFSGShieldsRenegateT3

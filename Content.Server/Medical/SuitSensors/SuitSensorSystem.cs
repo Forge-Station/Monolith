@@ -31,7 +31,7 @@ using Content.Server._Mono.Radar; // Monolith
 using Content.Server.Explosion.EntitySystems;
 using Content.Server._NF.Medical.SuitSensors; // Frontier modification
 using Content.Shared.DeviceNetwork.Components;
-using Content.Server.DeviceNetwork.Components; // Cursor: SingletonDeviceNetServerComponent
+using Content.Server.DeviceNetwork.Components; // Cursor
 
 namespace Content.Server.Medical.SuitSensors;
 

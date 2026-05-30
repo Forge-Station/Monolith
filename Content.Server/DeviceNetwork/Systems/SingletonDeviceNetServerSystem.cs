@@ -96,6 +96,8 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
             if (!server.Active) // Forge-Change
                 continue;
 
+            //if (!active.HasValue) // Forge-Change
+            //    active = (uid, server, device); // Forge-Change
             // Start of Cursor Code
             var frequencyPair = (device.ReceiveFrequency, device.TransmitFrequency); // Cursor
             if (!activeFrequencyPairs.Add(frequencyPair))
@@ -104,8 +106,8 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
                 continue;
             }
 
-            if (!active.HasValue)
-                active = (uid, server, device);
+            if (!active.HasValue) // Forge-Change
+                active = (uid, server, device); // Forge-Change
             // End of Cursor Code
         }
 
@@ -158,6 +160,7 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
             if (!server.Active)
                 continue;
 
+            // if (active.HasValue)
             var frequencyPair = (device.ReceiveFrequency, device.TransmitFrequency); // Cursor
             if (!activeFrequencyPairs.Add(frequencyPair)) // Cursor
             {
@@ -221,15 +224,15 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
     /// <summary>
     /// Disconnects a server from the device network and clears the currently active server
     /// </summary>
-    private void DisconnectServer(
-        EntityUid uid,
-        SingletonDeviceNetServerComponent? server = null,
-        DeviceNetworkComponent? device = null)
+    private void DisconnectServer(EntityUid uid, SingletonDeviceNetServerComponent? server = null, DeviceNetworkComponent? device = null)
     {
+        // if (!Resolve(uid, ref server, ref device))
+        // Start of Cursor Code
         if (!Resolve(uid, ref server))
             return;
 
         if (!server.Active)
+        // End of Cursor Code
             return;
 
         server.Active = false;
@@ -237,8 +240,9 @@ public sealed partial class SingletonDeviceNetServerSystem : EntitySystem
         var disconnectedEvent = new DeviceNetServerDisconnectedEvent();
         RaiseLocalEvent(uid, ref disconnectedEvent);
 
-        if (device != null)
-            _deviceNetworkSystem.DisconnectDevice(uid, device, false);
+        // _deviceNetworkSystem.DisconnectDevice(uid, device, false);
+        if (device != null) // Cursor
+            _deviceNetworkSystem.DisconnectDevice(uid, device, false); // Cursor
     }
 
     // Start of Cursor Code

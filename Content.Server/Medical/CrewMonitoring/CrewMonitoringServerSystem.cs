@@ -39,8 +39,10 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
             return;
         _updateDiff -= UpdateRate;
 
+        // var servers = EntityQueryEnumerator<CrewMonitoringServerComponent>();
         var servers = EntityQueryEnumerator<CrewMonitoringServerComponent, DeviceNetworkComponent, TransformComponent>(); // Cursor
 
+        //  while (servers.MoveNext(out var id, out var server))
         while (servers.MoveNext(out var id, out var server, out var device, out var xform)) // Cursor
         {
             // Start of Cursor Code

@@ -70,9 +70,9 @@
   components:
   - type: BreathMask
   - type: Sprite
-    sprite: _NF/Clothing/Head/Hardsuits/ERThelmets/ertmailcarrier.rsi
+    sprite: Clothing/Head/Hardsuits/ERThelmets/ertsecurity.rsi # Forge-change
   - type: Clothing
-    sprite: _NF/Clothing/Head/Hardsuits/ERThelmets/ertmailcarrier.rsi
+    sprite: Clothing/Head/Hardsuits/ERThelmets/ertsecurity.rsi # Forge-change
   - type: PointLight
     color: "#cbadff"
 

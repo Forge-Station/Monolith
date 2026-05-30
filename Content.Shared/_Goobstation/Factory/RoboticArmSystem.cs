@@ -17,19 +17,19 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._Goobstation.Factory;
 
-public sealed class RoboticArmSystem : EntitySystem
+public sealed partial class RoboticArmSystem : EntitySystem
 {
-    [Dependency] private readonly AutomationSystem _automation = default!;
-    [Dependency] private readonly AutomationFilterSystem _filter = default!;
-    [Dependency] private readonly CollisionWakeSystem _wake = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _device = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private AutomationSystem _automation = default!;
+    [Dependency] private AutomationFilterSystem _filter = default!;
+    [Dependency] private CollisionWakeSystem _wake = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IMapManager _map = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedDeviceLinkSystem _device = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<ThrownItemComponent> _thrownQuery;
@@ -63,14 +63,26 @@ public sealed class RoboticArmSystem : EntitySystem
         base.Update(frameTime);
 
         var now = _timing.CurTime;
-        if (_nextUpdate < now)
+        if (now < _nextUpdate)
             return;
 
-        _nextUpdate += _updateDelay;
+        _nextUpdate = now + _updateDelay;
 
         var query = EntityQueryEnumerator<RoboticArmComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            // Cheap idle filter: an arm with no held item, no buffered inputs and no
+            // linked source machine has nothing to do. Skip before any heavier checks
+            // (power/dirty fields/event raises) to keep big factories cheap.
+            if (comp.HeldItem == null
+                && comp.InputItems.Count == 0
+                && comp.InputMachine == null)
+            {
+                if (comp.NextMove != null)
+                    StopMoving((uid, comp));
+                continue;
+            }
+
             if (!_power.IsPowered(uid))
                 continue;
 
@@ -393,7 +405,7 @@ public sealed class RoboticArmSystem : EntitySystem
     private bool IsOutputBlocked(EntityUid uid)
     {
         var coords = OutputPosition(uid);
-        return coords.GetTileRef(EntityManager, _map) is {} turf &&
+        return _turf.GetTileRef(coords) is {} turf &&
             _turf.IsTileBlocked(turf, CollisionGroup.MachineMask);
     }
 
@@ -407,6 +419,8 @@ public sealed class RoboticArmSystem : EntitySystem
     private void StopMoving(Entity<RoboticArmComponent> ent)
     {
         // SetPowerDraw(ent, ent.Comp.IdlePowerDraw); - ported from Impstation, static power draw to prever seizure inducing power flashes
+        if (ent.Comp.NextMove == null)
+            return;
         ent.Comp.NextMove = null;
         DirtyField(ent, ent.Comp, nameof(RoboticArmComponent.NextMove));
     }

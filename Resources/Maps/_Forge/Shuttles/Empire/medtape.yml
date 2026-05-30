@@ -739,8 +739,6 @@ entities:
       pos: 0.5,-0.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
   - uid: 9
@@ -750,8 +748,6 @@ entities:
       pos: 1.5,-2.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
   - uid: 10
@@ -761,8 +757,6 @@ entities:
       pos: 1.5,7.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
   - uid: 11
@@ -772,8 +766,6 @@ entities:
       pos: -1.5,3.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
 - proto: APCBasic
@@ -1662,8 +1654,6 @@ entities:
       pos: 1.5,-0.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
 - proto: FirelockGlass
@@ -1675,8 +1665,6 @@ entities:
       pos: 1.5,6.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
   - uid: 158
@@ -1686,8 +1674,6 @@ entities:
       pos: -0.5,3.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
 - proto: FuelUranium

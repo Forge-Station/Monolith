@@ -9,14 +9,15 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing; // Forge-Change
 
 namespace Content.Client.Shuttles.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class NavScreen : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
     private SharedTransformSystem _xformSystem;
 
     private EntityUid? _consoleEntity; // Entity of controlling console
@@ -84,6 +85,8 @@ public sealed partial class NavScreen : BoxContainer
     {
         _shuttleEntity = shuttle;
 
+        ShieldBar.SetGrid(shuttle); // Forge-Change: feed grid UID to the shield HUD; bar resolves emitter itself.
+
         NfAddShuttleDesignation(shuttle); // Frontier - PR #1284 Add Shuttle Designation
     }
 
@@ -118,8 +121,20 @@ public sealed partial class NavScreen : BoxContainer
         // Update port names if custom names are available
         UpdateNetworkPortButtonNames(scc.NetworkPortNames);
 
+        // Forge-Change: panel visibility tracks the bar's current emitter; bar reads networked state itself.
+        ShieldPanel.Visible = ShieldBar.HasShield;
+
         NfUpdateState(); // Frontier Update State
     }
+
+    // Forge-Change-Start: keep shield panel visibility in sync with the live emitter component without
+    // waiting for the next BUI push. The check is cheap (single component lookup or short PVS-local query).
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+        ShieldPanel.Visible = ShieldBar.HasShield;
+    }
+    // Forge-Change-End
 
     /// <summary>
     /// Updates the text on the network port buttons based on the custom port names.

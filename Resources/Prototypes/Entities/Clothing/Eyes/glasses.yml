@@ -134,9 +134,9 @@
   description: A pair of black sunglasses. Doesn't block light well, more of an accessory than something useful.
   components:
   - type: Sprite
-    sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/sunglasses.rsi
   - type: Clothing
-    sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/sunglasses.rsi
   - type: Tag
     tags:
     - HamsterWearable
@@ -166,9 +166,9 @@
   description: Upgraded sunglasses that provide flash immunity and a security HUD.
   components:
   - type: Sprite
-    sprite: Clothing/Eyes/Glasses/secglasses.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/secglasses.rsi
   - type: Clothing
-    sprite: Clothing/Eyes/Glasses/secglasses.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/secglasses.rsi
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
@@ -190,9 +190,9 @@
   description: Upgraded sunglasses that provide flash immunity and show ID card status.
   components:
   - type: Sprite
-    sprite: Clothing/Eyes/Glasses/commandglasses.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/commandglasses.rsi
   - type: Clothing
-    sprite: Clothing/Eyes/Glasses/commandglasses.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/commandglasses.rsi
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5

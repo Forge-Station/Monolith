@@ -131,6 +131,7 @@
   - type: SpawnPoint
     job_id: Baron
 
+# region SolFederation
 - type: entity
   id: ForgeSpawnPointTsfCommandingOfficer
   parent: SpawnPointSheriff

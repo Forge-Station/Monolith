@@ -34,7 +34,7 @@ public sealed partial class ShipSteererComponent : Component
     /// Prevents collision avoidance from triggering ship rotation.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public bool AvoidanceNoRotate = true;
+    public bool AvoidanceNoRotate = false;
 
     /// <summary>
     /// If AlwaysFaceTarget is true or InRangeRotation is set, how much of a difference in angle (in radians) to accept.
@@ -55,16 +55,22 @@ public sealed partial class ShipSteererComponent : Component
     public float BaseEvasionTime = 4f;
 
     /// <summary>
+    /// Don't use anchor below this velocity.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float AnchorMaxVelocity = 5f;
+
+    /// <summary>
     /// How unwilling we are to use brake to adjust our velocity. Higher means less willing.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float BrakeThreshold = 0.75f;
+    public float BrakeThreshold = 0.3f;
 
     /// <summary>
     /// How much larger to consider the ship for collision evasion purposes.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float EvasionBuffer = 6f;
+    public float EvasionBuffer = 3f;
 
     /// <summary>
     /// How many evasion sectors to init on the outer ring.
@@ -186,6 +192,24 @@ public sealed partial class ShipSteererComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public float TargetRotation = 0f;
+
+    /// <summary>
+    /// Seconds between heavy broadphase queries for obstacle candidate collection.
+    /// AABBs of cached candidates are refreshed every tick regardless; only the broad scan is throttled.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float ScanInterval = 0.2f;
+
+    /// <summary>
+    /// Time since the last broad scan.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float ScanAccumulator = 0f;
+
+    /// <summary>
+    /// Cached obstacle candidate UIDs from the most recent broad scan.
+    /// </summary>
+    public List<(EntityUid Uid, bool IsGrid)> CachedScanCandidates = new();
 }
 
 public enum ShipSteeringStatus : byte

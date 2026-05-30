@@ -1,3 +1,4 @@
+using Content.Shared._Goobstation.Clothing.Components; // Forge-Change-add: SealableClothingControlComponent (modsuit jetpack visual guard)
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Movement.Components;
@@ -10,12 +11,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Movement.Systems;
 
-public sealed class JetpackSystem : SharedJetpackSystem
+public sealed partial class JetpackSystem : SharedJetpackSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
 
     public override void Initialize()
     {
@@ -31,6 +32,13 @@ public sealed class JetpackSystem : SharedJetpackSystem
 
     private void OnJetpackAppearance(EntityUid uid, JetpackComponent component, ref AppearanceChangeEvent args)
     {
+        // Forge-Change-start: skip jetpack icon visuals on modsuit control units (ARS Omnissia integrated jetpack)
+        // Was: LayerSetState(0, "icon"|"icon-on") and SetEquippedPrefix "on" for every JetpackComponent.
+        // Now: modsuit RSI uses control/control-sealed — skip override when entity is a modsuit control module.
+        if (HasComp<SealableClothingControlComponent>(uid))
+            return;
+        // Forge-Change-end
+
         Appearance.TryGetData<bool>(uid, JetpackVisuals.Enabled, out var enabled, args.Component);
 
         var state = "icon" + (enabled ? "-on" : "");

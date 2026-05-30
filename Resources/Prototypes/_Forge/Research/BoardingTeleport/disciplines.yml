@@ -1,0 +1,13 @@
+# Unlocked on the research server only while DisciplinesDiskBoardingTeleportTier4 is inserted.
+- type: techDiscipline
+  id: ForgeBoardingTeleportExperimental
+  name: research-discipline-forge-boarding-teleport-experimental
+  color: "#3d6a7a"
+  icon:
+    sprite: Interface/Misc/research_disciplines.rsi
+    state: experimental
+  tierPrerequisites:
+    1: 0
+    2: 0.5
+    3: 0.5
+  uiName: BSTP

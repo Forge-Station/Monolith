@@ -1,4 +1,18 @@
-ent-SpawnRedactedBorg = спаунер обслуживающего борга АОС
-ent-SpawnRedactedBorgPlaytime = спаунер обслуживающего борга АДС с ограничением по времени игры
-ent-SpawnChimeraGhostrole = спаунер призрачной роли химеры
+ent-SpawnRedactedBorg = спаунер обслуживающего борга
+    .desc = {ent-MarkerBase}
+    .suffix = ADS ONLY, Контроль ИИ
+ent-SpawnRedactedBorgPlaytime = спаунер боевого борга
+    .desc = {ent-MarkerBase}
+    .suffix = ADS ONLY, Гост-роль
+ent-SpawnChimeraGhostrole = спаунер химеры
+    .desc = {ent-MarkerBase}
+    .suffix = Гост-роль
 ent-SpawnAsakimWarrior = спаунер воина асаким
+    .desc = {ent-MarkerBase}
+
+ent-SpawnForerunnerBorg = спаунер обслуживающего борга
+    .desc = {ent-MarkerBase}
+    .suffix = ADS ONLY, Контроль ИИ
+ent-SpawnForerunnerBorgSelectable = спаунер боевого борга
+    .desc = {ent-MarkerBase}
+    .suffix = ADS ONLY, Гост-роль

@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: CrateBoardingTeleportKit
+  icon:
+    sprite: Forge/Structures/Machines/boarding_teleport_platform.rsi
+    state: icon
+  product: CrateBoardingTeleportKit
+  cost: 50000
+  category: cargoproduct-category-name-science
+  group: market

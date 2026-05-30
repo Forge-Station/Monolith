@@ -15,10 +15,10 @@ public sealed partial class NationalityPrototype : IPrototype
     [IdDataField, ViewVariables]
     public string ID { get; private set; } = string.Empty;
 
-    [DataField]
+    [DataField("name")]
     public string NameKey { get; private set; } = string.Empty;
 
-    [DataField]
+    [DataField("description")]
     public string DescriptionKey { get; private set; } = string.Empty;
 
     [DataField, ViewVariables]
@@ -30,11 +30,17 @@ public sealed partial class NationalityPrototype : IPrototype
     [DataField]
     public List<JobRequirement> Requirements = new();
 
+    // Forge-change-start: We use JobSpecial instead of TraitFunction
     // [DataField(serverOnly: true)]
     // public TraitFunction[] Functions { get; private set; } = Array.Empty<TraitFunction>();
 
     [DataField("special", serverOnly: true)]
     public JobSpecial[] Special { get; private set; } = Array.Empty<JobSpecial>();
+
+    // Hides nationality from the menu. Used for jokes or events.
+    [DataField]
+    public bool Hidden { get; private set; } = false;
+    // Forge-change-end
 
     [DataField]
     public ProtoId<EntityPrototype> PassportPrototype { get; private set; } = new();

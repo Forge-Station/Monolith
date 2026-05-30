@@ -1,0 +1,31 @@
+<Document>
+  # Viper Group — Ударная агрессия
+
+  Щиты для ударных операций. Высокий потолок энергии и жёсткая регенерация обеспечивают стабильную защиту в продолжительных атакующих манёврах — за счёт тонкого буфера перегрузки и сурового роста потребления под огнём.
+
+  Числовые строки ниже подставляются из entity-прототипов ([italic]protodata[/italic]) и совпадают с симуляцией.
+
+  <Box>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeViperHeavy"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeViperPrismatic"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeViperCollision"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeViperKite"/>
+  </Box>
+
+  [color=#FF7A4A][bold]VAS-420 «Медноголовый экран» (Copperhead Screen)[/bold][/color] — Тяжёлый
+  Высокая регенерация и пик сети; узкий лимит и крутая кривая под длинным огнём.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeViperHeavy" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#FF3344][bold]VAS-470P «Стеклянная мамба» (Glass Mamba Lattice)[/bold][/color] — Призматический
+  Самый глубокий лимит среди фракционных призм; реген в бою низкий, перегруз длинный.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeViperPrismatic" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#991111][bold]VAS-600C «Пилозуб» (Fangsaw Collision Net)[/bold][/color] — Коллизионный
+  Сильнейший антитаран среди фракций; узкий лимит, медленное «лицо», очень долгий перегруз.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeViperCollision" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#FFAA00][bold]VAS-435 «Коршун» (Kite)[/bold][/color] — Укол
+  Узкий лимит и очень высокая регенерация для коротких рывков; таран слабее тяжёлой линейки.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeViperKite" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+</Document>

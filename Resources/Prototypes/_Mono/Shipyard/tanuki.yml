@@ -16,7 +16,8 @@
   shuttlePath: /Maps/_Mono/Shuttles/tanuki.yml
   guidebookPage: Null
   class:
-  - Pursuit
+  - Patrol
+  - Salvage
   engine:
   - Plasma
 

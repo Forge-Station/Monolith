@@ -18,7 +18,8 @@
   addComponents:
   - type: IFF
     color: "#ccaa55"
-
+  - type: ProtectedGrid # Forge-Change
+    preventTeleportation: true
 - type: gameMap
   id: Mining
   mapName: 'Заброшенная буровая'

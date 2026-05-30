@@ -11,6 +11,10 @@
   guidebookPage: Null
   class:
   - Fighter
+  - Pursuit
+  - Pirate
+  engine:
+  - Uranium
 
 - type: gameMap
   id: skutales

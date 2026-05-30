@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.0
+  engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/30/2025 20:47:51
+  time: 05/17/2026 13:42:38
   entityCount: 11257
 maps: []
 grids:
@@ -227,7 +227,7 @@ entities:
         path: /Audio/Effects/alert.ogg
     - type: DecalGrid
       chunkCollection:
-        version: 2
+        version: 3
         nodes:
         - node:
             angle: 3.141592653589793 rad
@@ -3282,6 +3282,11 @@ entities:
             3365: -37,-13
             3429: -28,12
     - type: SpreaderGrid
+      spreadQueues:
+        Smoke: []
+        Kudzu: []
+        MetalFoam: []
+        Puddle: []
     - type: GridAtmosphere
       version: 2
       data:
@@ -4219,6 +4224,8 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: NavMap
+    - type: ThermalSignature
+    - type: ShipShieldGridState
 - proto: AirAlarm
   entities:
   - uid: 3
@@ -31423,6 +31430,20 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
+- proto: ComputerIFFCapture
+  entities:
+  - uid: 8693
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -27.5,18.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 97.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
 - proto: ComputerPalletConsoleNFNormalMarket
   entities:
   - uid: 4989
@@ -31698,18 +31719,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -33.5,9.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
-- proto: ComputerTabletopStationRecords
-  entities:
-  - uid: 5013
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -27.5,18.5
       parent: 1
     - type: ApcPowerReceiver
       powerLoad: 5
@@ -53333,6 +53342,13 @@ entities:
     - type: Transform
       pos: -35.5,17.5
       parent: 1
+- proto: PoiTreasuryCargoDepot
+  entities:
+  - uid: 5013
+    components:
+    - type: Transform
+      pos: -39.5,20.5
+      parent: 1
 - proto: PortableGeneratorPacman
   entities:
   - uid: 4977
@@ -59554,11 +59570,6 @@ entities:
     components:
     - type: Transform
       pos: -28.5,21.5
-      parent: 1
-  - uid: 8693
-    components:
-    - type: Transform
-      pos: -27.5,18.5
       parent: 1
   - uid: 8694
     components:

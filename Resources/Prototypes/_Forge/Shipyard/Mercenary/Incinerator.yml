@@ -1,0 +1,33 @@
+- type: vessel
+  id: Incinerator
+  parent: BaseVessel
+  name: 'MBS Испепелитель'
+  description: Средний шаттл для наемников. Вооружен тремя крупнокалиберными орудиями спереди и по 2 пулемета на каждом борту. Рассчитан на экипаж из 3-5 человек
+  price: 131100
+  category: Medium
+  group: Shipyard
+  access: Mercenary
+  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/Incinerator.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+- type: gameMap
+  id: Incinerator
+  mapName: 'MBS Испепелитель'
+  mapPath: /Maps/_Forge/Shuttles/Mercenary/Incinerator.yml
+  minPlayers: 0
+  stations:
+    Incinerator:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'MBS Испепелитель MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

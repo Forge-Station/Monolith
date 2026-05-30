@@ -15,7 +15,8 @@
   class:
   - Frigate
   - Pursuit
-  - Patrol
+  - Fighter
+  - Cargo
   engine:
   - Plasma
 

@@ -21,12 +21,11 @@ namespace Content.Server.Construction.Completions
 
         public void PerformAction(EntityUid uid, EntityUid? userUid, IEntityManager entityManager)
         {
-            if (!entityManager.TryGetComponent(uid, out ContainerManagerComponent? containerManager))
-                return;
+            var containerSys = entityManager.EntitySysManager.GetEntitySystem<SharedContainerSystem>();
 
-            var containerSys = entityManager.EntitySysManager.GetEntitySystem<ContainerSystem>();
-            if (!containerSys.TryGetContainer(uid, Container, out var container, containerManager))
-                return;
+            if (!entityManager.TryGetComponent(uid, out ContainerManagerComponent? containerManager) ||
+                !containerSys.TryGetContainer(uid, Container, out var container, containerManager)) return;
+
             var handSys = entityManager.EntitySysManager.GetEntitySystem<HandsSystem>();
 
             HandsComponent? hands = null;

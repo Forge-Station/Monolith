@@ -31,6 +31,8 @@ ent-SurgeryRemoveStomach = Удалить желудок
 ent-SurgeryInsertStomach = Вставить желудок
 ent-SurgeryRemoveEyes = Удалить глаза
 ent-SurgeryInsertEyes = Вставить глаза
+ent-SurgeryRemoveKidneys = Удалить почки
+ent-SurgeryInsertKidneys = Вставить почки
 
 # Этапы операций
 ent-SurgeryStepOpenIncisionScalpel = Сделать разрез скальпелем
@@ -60,8 +62,12 @@ ent-SurgeryStepInsertStomach = Установить желудок
 ent-SurgeryStepInsertLiver = Установить печень
 ent-SurgeryStepInsertEyes = Установить печень
 ent-SurgeryStepInsertHeart = Установить сердце
+ent-SurgeryStepInsertKidneys = Установить почки
 ent-SurgeryStepSealOrganWound = Запечатать рану
 ent-SurgeryStepRemoveCorticalBorer = Удалить кортикального бурильщика
+
+surgery-popup-procedure-SurgeryRemoveKidneys-step-SurgeryStepRemoveOrgan = { $user } удаляет почки из { $part } у { $target }!
+surgery-popup-step-SurgeryStepInsertKidneys = { $user } вставляет почки в { $part } у { $target }!
 
 # КПБ
 ent-PartIPC = часть тела КПБ

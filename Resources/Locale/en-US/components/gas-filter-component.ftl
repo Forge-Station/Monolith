@@ -7,6 +7,8 @@ comp-gas-filter-ui-filter-set-rate = Set
 
 comp-gas-filter-ui-filter-gas-current = Currently Filtering:
 comp-gas-filter-ui-filter-gas-select = Select gases to filter out:
+comp-gas-filter-ui-select-all = Select All
+comp-gas-filter-ui-deselect-all = Deselect All
 comp-gas-filter-ui-filter-gas-confirm = Set Gas
 comp-gas-filter-ui-filter-gas-none = None
 

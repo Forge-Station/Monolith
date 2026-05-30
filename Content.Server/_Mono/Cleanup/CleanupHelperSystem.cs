@@ -3,6 +3,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 using System.Numerics;
 
 namespace Content.Server._Mono.Cleanup;
@@ -10,17 +11,26 @@ namespace Content.Server._Mono.Cleanup;
 /// <summary>
 ///     System with helper methods for entity cleanup.
 /// </summary>
-public sealed class CleanupHelperSystem : EntitySystem
+public sealed partial class CleanupHelperSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private List<Entity<MapGridComponent>> _gridsFound = new();
+    private HashSet<Entity<MindContainerComponent>> _mindsFound = new();
 
     private EntityQuery<GhostComponent> _ghostQuery;
     private EntityQuery<MindComponent> _mindQuery;
+
+    // Forge-Change: cached snapshot of player world positions, refreshed at most once per
+    // PlayerCacheTtl. Cleanup loops can call HasNearbyPlayers thousands of times per scan;
+    // a short-lived cache eliminates the per-call spatial lookup without affecting correctness
+    // (players move slowly relative to cleanup radii ~ 628 units).
+    private readonly List<(MapId Map, Vector2 Pos)> _playerCache = new();
+    private TimeSpan _playerCacheUntil = TimeSpan.MinValue;
+    private static readonly TimeSpan PlayerCacheTtl = TimeSpan.FromSeconds(1);
 
     public override void Initialize()
     {
@@ -31,25 +41,48 @@ public sealed class CleanupHelperSystem : EntitySystem
     }
 
     /// <summary>
+    ///     Refreshes the player position cache if it has expired. Cheap when warm.
+    /// </summary>
+    private void EnsurePlayerCache()
+    {
+        if (_timing.CurTime < _playerCacheUntil)
+            return;
+
+        _playerCache.Clear();
+        var query = EntityQueryEnumerator<MindContainerComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var mind, out var xform))
+        {
+            if (!mind.HasMind || _ghostQuery.HasComp(uid))
+                continue;
+            if (_mindQuery.CompOrNull(mind.Mind!.Value)?.OwnedEntity == null)
+                continue;
+            if (xform.MapID == MapId.Nullspace)
+                continue;
+
+            _playerCache.Add((xform.MapID, _transform.GetWorldPosition(xform)));
+        }
+        _playerCacheUntil = _timing.CurTime + PlayerCacheTtl;
+    }
+
+    /// <summary>
     ///     Whether there is an entity with a player bound to it in radius. Counts dead people and brains but not ghosts.
     /// </summary>
     public bool HasNearbyPlayers(EntityCoordinates coord, float radius)
     {
-        var minds = _lookup.GetEntitiesInRange<MindContainerComponent>(coord, radius);
+        EnsurePlayerCache();
+        if (_playerCache.Count == 0)
+            return false;
 
-        foreach (var (uid, comp) in minds)
+        var mapPos = _transform.ToMapCoordinates(coord);
+        if (mapPos.MapId == MapId.Nullspace)
+            return false;
+
+        var radSq = radius * radius;
+        foreach (var (map, pos) in _playerCache)
         {
-            if (!comp.HasMind
-                || _ghostQuery.HasComp(uid)
-                || _mindQuery.CompOrNull(comp.Mind.Value)?.OwnedEntity == null
-            )
+            if (map != mapPos.MapId)
                 continue;
-
-            var entCoord = Transform(uid).Coordinates;
-
-            if (coord.TryDistance(EntityManager, entCoord, out var distance)
-                && distance <= radius
-            )
+            if (Vector2.DistanceSquared(mapPos.Position, pos) <= radSq)
                 return true;
         }
         return false;

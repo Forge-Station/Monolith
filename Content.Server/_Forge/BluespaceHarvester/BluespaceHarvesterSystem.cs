@@ -239,12 +239,6 @@ public sealed class BluespaceHarvesterSystem : EntitySystem
             var testCoords = coords.Offset(offset);
             if (testCoords == coords)
                 continue;
-            var tile = testCoords.GetTileRef(EntityManager);
-            if (tile == null)
-                continue;
-
-            if (tile.Value.Tile.IsEmpty)
-                continue;
 
             if (_lookup.GetEntitiesIntersecting(testCoords.ToMap(EntityManager, _transform), LookupFlags.Static).Any())
                 continue;

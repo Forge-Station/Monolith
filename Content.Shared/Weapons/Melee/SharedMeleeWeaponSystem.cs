@@ -921,6 +921,14 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
                 meleeWeapon.Damage = itemToggleMelee.ActivatedDamage;
             }
 
+#region Forge-Change-start: support active range for toggleable melee weapons
+            if (itemToggleMelee.ActivatedRange != null)
+            {
+                itemToggleMelee.DeactivatedRange ??= meleeWeapon.Range;
+                meleeWeapon.Range = itemToggleMelee.ActivatedRange.Value;
+            }
+#endregion Forge-Change-end
+
             meleeWeapon.HitSound = itemToggleMelee.ActivatedSoundOnHit;
 
             if (itemToggleMelee.ActivatedSoundOnHitNoDamage != null)
@@ -944,6 +952,11 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         {
             if (itemToggleMelee.DeactivatedDamage != null)
                 meleeWeapon.Damage = itemToggleMelee.DeactivatedDamage;
+
+#region Forge-Change-start: support active range for toggleable melee weapons
+            if (itemToggleMelee.DeactivatedRange != null)
+                meleeWeapon.Range = itemToggleMelee.DeactivatedRange.Value;
+#endregion Forge-Change-end
 
             meleeWeapon.HitSound = itemToggleMelee.DeactivatedSoundOnHit;
 

@@ -28,7 +28,8 @@ public sealed partial class ListeningSystem : EntitySystem
         // for now, whispering just arbitrarily reduces the listener's max range.
 
         var xformQuery = GetEntityQuery<TransformComponent>();
-        var sourceXform = xformQuery.GetComponent(source);
+        var audioSource = ResolveAudioSource(source); // Forge-Change: station AI speech should be heard from its relayed entity.
+        var sourceXform = xformQuery.GetComponent(audioSource);
         var sourcePos = _xforms.GetWorldPosition(sourceXform, xformQuery);
 
         var attemptEv = new ListenAttemptEvent(source);

@@ -150,6 +150,7 @@
   description: "Filters toxins from the bloodstream."
   categories: [ HideSpawnMenu ]
   components:
+  - type: Kidney # Forge-Change
   - type: Organ # Shitmed
     slotId: kidneys
   - type: Sprite

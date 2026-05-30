@@ -7,3 +7,6 @@ nationality_description_imperial = Гражданин империи.
 
 nationality_name_ussp = Союз Советских Социалистических Планет
 nationality_description_ussp = Гражданин СССП.
+
+nationality_name_freecolonies = Свободные Колонии
+nationality_description_freecolonies = Гражданин Свободных Колоний.

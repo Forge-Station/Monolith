@@ -124,3 +124,86 @@
   - type: EnergySword
     colorOptions:
     - "#2288ff" # can only be blue
+
+- type: entity
+  parent: BaseMeleeWeaponEnergy
+  id: WeaponPhaseBladeForge
+  name: nano-laminate phaseblade
+  description: A heavy bladed weapon with a wicked edge, commonly seen in the hands of pre-fracture warriors. Can be activated to adjust to combat needs
+  suffix: Forge
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Melee/phaseblade.rsi
+    layers:
+    - state: e_sword
+    - state: e_sword_blade
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: PointLight
+    enabled: false
+    radius: 2
+    energy: 2
+    color: "#c24fd1"
+    netsync: false
+  - type: Item
+    sprite: _Mono/Objects/Weapons/Melee/phaseblade.rsi
+    size: Huge
+  - type: Clothing
+    sprite: _Mono/Objects/Weapons/Melee/phaseblade.rsi
+    slots:
+    - Back
+    - Belt
+    - SuitStorage
+    whitelist:
+      tags:
+        - AsakimBrain
+    whitelistCheckOrgans: true
+  - type: ComponentToggler
+    components:
+    - type: Reflect
+      reflectProb: 0.3
+  - type: ItemToggleSize
+    activatedSize: Huge
+  - type: ItemToggle
+    whitelist:
+      tags:
+        - AsakimBrain
+      components:
+        - BorgChassis
+    whitelistCheckOrgans: true
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/eblade1.ogg
+      params:
+        variation: 0.250
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/eblade1.ogg
+      params:
+        variation: 0.250
+        volume: -10
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        variation: 0.125
+    activatedDamage:
+      types:
+        Slash: 25
+        Caustic: 25
+        Heat: 25
+        Structural: 200
+  - type: MeleeWeapon
+    heavyStaminaCost: 1
+    wideAnimationRotation: -135
+    attackRate: 1.25
+    damage:
+      types:
+        Slash: 45
+        Structural: 100
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+  - type: Sharp
+  - type: DisarmMalus
+    malus: 0.6
+  - type: Execution
+    doAfterDuration: 4.0

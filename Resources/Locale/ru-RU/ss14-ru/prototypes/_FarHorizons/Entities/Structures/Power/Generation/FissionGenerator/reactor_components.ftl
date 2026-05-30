@@ -1,0 +1,79 @@
+# Fuel Rods
+ent-BaseReactorFuelRod = топливный стержень
+    .desc = Топливный стержень для ядерного реактора.
+ent-CerenkiteReactorFuelRod = топливный стержень из церенкита
+    .desc = { ent-BaseReactorFuelRod.desc }
+ent-UraniumReactorFuelRod = урановый топливный стержень
+    .desc = { ent-BaseReactorFuelRod.desc }
+ent-PlutoniumReactorFuelRod = плутониевый топливный стержень
+    .desc = { ent-BaseReactorFuelRod.desc }
+ent-BananiumReactorFuelRod = бананиумовый топливный стержень
+    .desc = { ent-BaseReactorFuelRod.desc }
+ent-PlasmaReactorFuelRod = плазменный топливный стержень
+    .desc = { ent-BaseReactorFuelRod.desc }
+ent-UraniumGlassReactorFuelRod = топливный стержень из уранового стекла
+    .desc = { ent-BaseReactorFuelRod.desc }
+ent-MeatReactorFuelRod = мясной топливный стержень
+    .desc = Топливный стержень… п-подождите, он что, живой?
+
+# Control Rods
+ent-BaseReactorControlRod = управляющий стержень
+    .desc = Сборка управляющего стержня для ядерного реактора.
+ent-BohrumReactorControlRod = управляющий стержень из борума
+    .desc = { ent-BaseReactorControlRod.desc }
+ent-SteelReactorControlRod = стальной управляющий стержень
+    .desc = { ent-BaseReactorControlRod.desc }
+ent-GoldReactorControlRod = золотой управляющий стержень
+    .desc = { ent-BaseReactorControlRod.desc }
+ent-SilverReactorControlRod = серебряный управляющий стержень
+    .desc = { ent-BaseReactorControlRod.desc }
+ent-BrassReactorControlRod = латунный управляющий стержень
+    .desc = { ent-BaseReactorControlRod.desc }
+ent-PlasteelReactorControlRod = пласталевый управляющий стержень
+    .desc = { ent-BaseReactorControlRod.desc }
+ent-GlassReactorControlRod = стеклянный управляющий стержень
+    .desc = { ent-BaseReactorControlRod.desc }
+ent-PlasmaGlassReactorControlRod = управляющий стержень из плазменного стекла
+    .desc = { ent-BaseReactorControlRod.desc }
+ent-DiamondReactorControlRod = алмазный управляющий стержень
+    .desc = { ent-BaseReactorControlRod.desc }
+
+# Gas Channel Rods
+ent-BaseReactorGasChannel = стержень газового канала
+    .desc = Стержень, формирующий газовый канал в ядерном реакторе.
+ent-SteelReactorGasChannel = стальной стержень газового канала
+    .desc = { ent-BaseReactorGasChannel.desc }
+ent-GoldReactorGasChannel = золотой стержень газового канала
+    .desc = { ent-BaseReactorGasChannel.desc }
+ent-SilverReactorGasChannel = серебряный стержень газового канала
+    .desc = { ent-BaseReactorGasChannel.desc }
+ent-BrassReactorGasChannel = латунный стержень газового канала
+    .desc = { ent-BaseReactorGasChannel.desc }
+ent-PlasteelReactorGasChannel = пласталевый стержень газового канала
+    .desc = { ent-BaseReactorGasChannel.desc }
+ent-GlassReactorGasChannel = стеклянный стержень газового канала
+    .desc = { ent-BaseReactorGasChannel.desc }
+ent-PlasmaGlassReactorGasChannel = стержень газового канала из плазменного стекла
+    .desc = { ent-BaseReactorGasChannel.desc }
+ent-DiamondReactorGasChannel = алмазный стержень газового канала
+    .desc = { ent-BaseReactorGasChannel.desc }
+
+# Heat Exchanger Rods
+ent-BaseReactorHeatExchanger = стержень теплообменника
+    .desc = Стержень, формирующий теплообменник в ядерном реакторе.
+ent-SteelReactorHeatExchanger = стальной стержень теплообменника
+    .desc = { ent-BaseReactorHeatExchanger.desc }
+ent-GoldReactorHeatExchanger = золотой стержень теплообменника
+    .desc = { ent-BaseReactorHeatExchanger.desc }
+ent-SilverReactorHeatExchanger = серебряный стержень теплообменника
+    .desc = { ent-BaseReactorHeatExchanger.desc }
+ent-BrassReactorHeatExchanger = латунный стержень теплообменника
+    .desc = { ent-BaseReactorHeatExchanger.desc }
+ent-PlasteelReactorHeatExchanger = пласталевый стержень теплообменника
+    .desc = { ent-BaseReactorHeatExchanger.desc }
+ent-GlassReactorHeatExchanger = стеклянный стержень теплообменника
+    .desc = { ent-BaseReactorHeatExchanger.desc }
+ent-PlasmaGlassReactorHeatExchanger = стержень теплообменника из плазменного стекла
+    .desc = { ent-BaseReactorHeatExchanger.desc }
+ent-DiamondReactorHeatExchanger = алмазный стержень теплообменника
+    .desc = { ent-BaseReactorHeatExchanger.desc }

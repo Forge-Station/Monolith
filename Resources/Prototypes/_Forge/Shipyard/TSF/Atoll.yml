@@ -10,6 +10,7 @@
   shuttlePath: /Maps/_Forge/Shuttles/TSF/Atoll.yml
   guidebookPage: Null
   class:
+  - Salvage
   - Science
   engine:
   - AME

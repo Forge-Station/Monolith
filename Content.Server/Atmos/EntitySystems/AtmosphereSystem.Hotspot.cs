@@ -14,28 +14,16 @@ namespace Content.Server.Atmos.EntitySystems
 {
     public sealed partial class AtmosphereSystem
     {
-        [Dependency] private readonly DecalSystem _decalSystem = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private DecalSystem _decalSystem = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         private const int HotspotSoundCooldownCycles = 200;
-        private const float PuddleFireTemperatureCap = Atmospherics.T0C + 350f; // Forge-Change
 
         private int _hotspotSoundCooldown = 0;
 
         [ViewVariables(VVAccess.ReadWrite)]
         public string? HotspotSound { get; private set; } = "/Audio/Effects/fire.ogg";
-        // Forge-Change-start
-        private static float GetPuddleTemperatureClamp(int puddleFlammability)
-        {
-            if (puddleFlammability <= 0)
-                return Atmospherics.T0C;
 
-            // Keep puddle flames hot enough to sustain ignition, but avoid runaway atmospheric heating
-            // from small puddles / low reagent quantities.
-            var curve = Atmospherics.T0C + 20f * MathF.Pow(puddleFlammability, 1.2f);
-            return MathF.Min(curve, PuddleFireTemperatureCap);
-        }
-        // Forge-Change-end
         /// <summary>
         /// Run every tick on every hotspot
         /// </summary>
@@ -46,10 +34,7 @@ namespace Content.Server.Atmos.EntitySystems
             var gridAtmosphere = ent.Comp1;
             if (!tile.Hotspot.Valid)
             {
-                if (TryGetChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
-                    RemoveChunkTile(gridAtmosphere, gridAtmosphere.HotspotTiles, chunk.HotspotTiles, tile); // Forge-Change
-                else
-                    gridAtmosphere.HotspotTiles.Remove(tile);
+                gridAtmosphere.HotspotTiles.Remove(tile);
                 return;
             }
 
@@ -175,10 +160,7 @@ namespace Content.Server.Atmos.EntitySystems
                             tile.Hotspot.Volume = exposedVolume;
                     }
                 }
-                tile.Hotspot.Temperature = AddClampedTemperature(
-                    tile.Hotspot.Temperature,
-                    0.35f * puddleFlammability,
-                    GetPuddleTemperatureClamp(puddleFlammability)); // Forge-Change
+                tile.Hotspot.Temperature = AddClampedTemperature(tile.Hotspot.Temperature, 1 * puddleFlammability, (float)(Atmospherics.T0C + 20 * Math.Pow(puddleFlammability, 1.2)));
 
                 return;
             }
@@ -191,10 +173,7 @@ namespace Content.Server.Atmos.EntitySystems
 
                 var temperature = exposedTemperature;
                 if(puddleFlammability > 0)
-                    temperature = AddClampedTemperature(
-                        temperature,
-                        0.35f * puddleFlammability,
-                        GetPuddleTemperatureClamp(puddleFlammability)); // Forge-Change
+                    temperature = AddClampedTemperature(temperature, 1 * puddleFlammability, (float)(Atmospherics.T0C + 20 * Math.Pow(puddleFlammability, 1.2)));
                 tile.Hotspot = new Hotspot
                 {
                     Volume = exposedVolume * 25f,
@@ -206,8 +185,7 @@ namespace Content.Server.Atmos.EntitySystems
                 };
 
                 AddActiveTile(gridAtmosphere, tile);
-                var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
-                AddChunkTile(gridAtmosphere, gridAtmosphere.HotspotTiles, chunk.HotspotTiles, tile); // Forge-Change
+                gridAtmosphere.HotspotTiles.Add(tile);
             }
         }
 
@@ -230,7 +208,7 @@ namespace Content.Server.Atmos.EntitySystems
             else
             {
                 var affected = tile.Air.RemoveVolume(tile.Hotspot.Volume);
-                affected.Temperature = MathF.Max(tile.Hotspot.Temperature, GetPuddleTemperatureClamp(tile.PuddleSolutionFlammability)); // Forge-Change
+                affected.Temperature = MathF.Max(tile.Hotspot.Temperature, Atmospherics.T0C + 50 * tile.PuddleSolutionFlammability);
                 React(affected, tile);
                 tile.Hotspot.Temperature = affected.Temperature;
                 tile.Hotspot.Volume = affected.ReactionResults[(byte)GasReaction.Fire] * Atmospherics.FireGrowthRate;

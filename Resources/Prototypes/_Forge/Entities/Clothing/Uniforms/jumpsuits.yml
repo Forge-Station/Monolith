@@ -358,3 +358,65 @@
     sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
   - type: Clothing
     sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
+    
+- type: entity
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1]
+  id: ClothingUniformJumpsuitTraumaDirector
+  name: armed director trauma unit jumpsuit
+  suffix: TTI
+  description: Standard fatigues of the Armed Trauma Unit.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_director.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_director.rsi
+  - type: SuitSensor
+    randomMode: false
+    mode: SensorVitals
+    
+- type: entity
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] 
+  id: ClothingUniformJumpsuitTraumaStandart
+  name: armed standart trauma unit jumpsuit
+  suffix: TTI
+  description: Standard fatigues of the Armed Trauma Unit.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_standard.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_standard.rsi
+  - type: SuitSensor
+    randomMode: false
+    mode: SensorVitals
+    
+- type: entity
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] 
+  id: ClothingUniformJumpsuitTraumaBlue
+  name: armed blue trauma unit jumpsuit
+  suffix: TTI 
+  description: Standard fatigues of the Armed Trauma Unit.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_suit_blue.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_suit_blue.rsi
+  - type: SuitSensor
+    randomMode: false
+    mode: SensorVitals
+
+# Harmony Medical Enterprises company
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitHME
+  name: HME jumpsuit
+  description: HME-jumpsuit-desc
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 250
+

@@ -12,7 +12,7 @@
   class:
   - Patrol
   engine:
-  - APU
+  - Uranium
 
 - type: gameMap
   id: Mushroom

@@ -16,19 +16,19 @@ namespace Content.Shared._Mono.ShipRepair;
 
 public abstract partial class SharedShipRepairSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly ForceParentSystem _parent = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly INetManager _net = default!; // .IsServer is kind of a crime but needed to not dupe code
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private ForceParentSystem _parent = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private INetManager _net = default!; // .IsServer is kind of a crime but needed to not dupe code
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -48,6 +48,10 @@ public abstract partial class SharedShipRepairSystem : EntitySystem
         var repairData = EnsureComp<ShipRepairDataComponent>(gridUid);
         repairData.Chunks.Clear();
         repairData.EntityPalette.Clear();
+
+        // Sidecar dict for O(1) palette lookups; the persisted EntityPalette is a List
+        // because it's network-replicated by index, and we keep both in sync below.
+        var paletteIndices = new Dictionary<EntProtoId, int>();
 
         var chunkSize = repairData.ChunkSize;
 
@@ -94,11 +98,11 @@ public abstract partial class SharedShipRepairSystem : EntitySystem
             }
             var protoId = maybeProtoId.Value;
 
-            var paletteIndex = repairData.EntityPalette.IndexOf(protoId);
-            if (paletteIndex == -1)
+            if (!paletteIndices.TryGetValue(protoId, out var paletteIndex))
             {
+                paletteIndex = repairData.EntityPalette.Count;
                 repairData.EntityPalette.Add(protoId);
-                paletteIndex = repairData.EntityPalette.Count - 1;
+                paletteIndices[protoId] = paletteIndex;
             }
 
             var localPos = childXform.LocalPosition;

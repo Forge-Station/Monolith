@@ -60,9 +60,9 @@
   description: A stylish clothing option for security officers.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/beret_security.rsi
+    sprite: Forge/Clothing/Head/Hats/beret_security.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hats/beret_security.rsi
+    sprite: Forge/Clothing/Head/Hats/beret_security.rsi
   - type: Tag
     tags:
     - ClothMade

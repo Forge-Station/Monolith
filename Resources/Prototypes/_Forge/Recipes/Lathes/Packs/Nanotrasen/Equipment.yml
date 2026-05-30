@@ -20,6 +20,15 @@
   - ClothingHeadHatBeretHoS
   - ClothingHeadHatHoshat
   - ClothingUniformJumpsuitATU
+  - ClothingUniformJumpskirtTAF
+  - ClothingUniformJumpsuitTraumaBlue
+  - ClothingUniformJumpskirtTraumaBlue
+  - ClothingUniformJumpsuitTraumaStandart
+  - ClothingUniformJumpsuitTraumaDirector
+  - ClothingNeckCloakTrauma
+  - ClothingNeckMantleTrauma
+  - ClothingHeadHatTraumaDirectorBeret
+  - ClothingHeadHatTraumaBeret
   
 - type: latheRecipePack
   id: NanotrasenEquipment
@@ -42,7 +51,6 @@
   - ClothingBackpackERTMailCarrier 
   - ClothingBackpackERTEngineer
   - ClothingBackpackERTJanitor
-  - ClothingBackpackDuffelCBURN
   - ClothingOuterHardsuitERTChaplain
   - ClothingOuterHardsuitERTMedical
   - ClothingOuterHardsuitERTJanitor
@@ -52,6 +60,13 @@
   
 - type: latheRecipePack
   id: TTIEquipment
-  recipes:  
+  recipes:
   - ClothingOuterHardsuitTrauma
-  - ClothingOuterHardsuitTraumaLeader
+  - ClothingOuterHardsuitTraumaShooter
+  - ClothingOuterArmorBodyTrauma
+  - ClothingShoesBootsMagTrauma
+  - ClothingOuterCoatTrauma
+  - ClothingOuterRobeTraumaBomber
+  - ClothingMaskSterileTrauma
+  - ClothingHeadHatArmoredTrauma
+  - ClothingHeadHatArmoredTraumaShooter

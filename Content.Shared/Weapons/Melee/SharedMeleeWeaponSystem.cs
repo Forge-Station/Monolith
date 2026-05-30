@@ -32,22 +32,22 @@ using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components
 
 namespace Content.Shared.Weapons.Melee;
 
-public abstract class SharedMeleeWeaponSystem : EntitySystem
+public abstract partial class SharedMeleeWeaponSystem : EntitySystem
 {
-    [Dependency] protected readonly ISharedAdminLogManager   AdminLogger     = default!;
-    [Dependency] protected readonly ActionBlockerSystem      Blocker         = default!;
-    [Dependency] protected readonly SharedCombatModeSystem   CombatMode      = default!;
-    [Dependency] protected readonly DamageableSystem         Damageable      = default!;
-    [Dependency] protected readonly SharedInteractionSystem  Interaction     = default!;
-    [Dependency] protected readonly IMapManager              MapManager      = default!;
-    [Dependency] protected readonly SharedPopupSystem        PopupSystem     = default!;
-    [Dependency] protected readonly IGameTiming              Timing          = default!;
-    [Dependency] protected readonly SharedTransformSystem    TransformSystem = default!;
-    [Dependency] private   readonly InventorySystem         _inventory       = default!;
-    [Dependency] private   readonly MeleeSoundSystem        _meleeSound      = default!;
-    [Dependency] private   readonly SharedPhysicsSystem     _physics         = default!;
-    [Dependency] private   readonly IPrototypeManager       _protoManager    = default!;
-    [Dependency] private   readonly StaminaSystem           _stamina         = default!;
+    [Dependency] protected ISharedAdminLogManager   AdminLogger     = default!;
+    [Dependency] protected ActionBlockerSystem      Blocker         = default!;
+    [Dependency] protected SharedCombatModeSystem   CombatMode      = default!;
+    [Dependency] protected DamageableSystem         Damageable      = default!;
+    [Dependency] protected SharedInteractionSystem  Interaction     = default!;
+    [Dependency] protected IMapManager              MapManager      = default!;
+    [Dependency] protected SharedPopupSystem        PopupSystem     = default!;
+    [Dependency] protected IGameTiming              Timing          = default!;
+    [Dependency] protected SharedTransformSystem    TransformSystem = default!;
+    [Dependency] private   InventorySystem         _inventory       = default!;
+    [Dependency] private   MeleeSoundSystem        _meleeSound      = default!;
+    [Dependency] private   SharedPhysicsSystem     _physics         = default!;
+    [Dependency] private   IPrototypeManager       _protoManager    = default!;
+    [Dependency] private   StaminaSystem           _stamina         = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -921,6 +921,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 meleeWeapon.Damage = itemToggleMelee.ActivatedDamage;
             }
 
+#region Forge-Change-start: support active range for toggleable melee weapons
+            if (itemToggleMelee.ActivatedRange != null)
+            {
+                itemToggleMelee.DeactivatedRange ??= meleeWeapon.Range;
+                meleeWeapon.Range = itemToggleMelee.ActivatedRange.Value;
+            }
+#endregion Forge-Change-end
+
             meleeWeapon.HitSound = itemToggleMelee.ActivatedSoundOnHit;
 
             if (itemToggleMelee.ActivatedSoundOnHitNoDamage != null)
@@ -944,6 +952,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         {
             if (itemToggleMelee.DeactivatedDamage != null)
                 meleeWeapon.Damage = itemToggleMelee.DeactivatedDamage;
+
+#region Forge-Change-start: support active range for toggleable melee weapons
+            if (itemToggleMelee.DeactivatedRange != null)
+                meleeWeapon.Range = itemToggleMelee.DeactivatedRange.Value;
+#endregion Forge-Change-end
 
             meleeWeapon.HitSound = itemToggleMelee.DeactivatedSoundOnHit;
 

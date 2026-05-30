@@ -1,0 +1,35 @@
+# Advanced Tools
+- type: entity
+  parent: NFBaseBlueprintEngineering
+  id: ForgeBlueprintJetpackVoid
+  name: jetpack void blueprint
+  description: A blueprint with a schematic of a jetpack void. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - JetpackVoid
+
+- type: entity
+  parent: NFBaseBlueprintEngineering
+  id: ForgeBlueprintAdvancedTools
+  name: advanced tools blueprint
+  description: A blueprint with a schematic of a advanced tools. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - WelderExperimental
+    - PowerDrill
+    - JawsOfLife
+
+- type: entity
+  parent: NFBaseBlueprintEngineering
+  id: ForgeBlueprintAdvancedShipRepairTools
+  name: advanced ship repair tools blueprint
+  description: A blueprint with a schematic of a advanced ship repair tools. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ExperimentalNaniteApplicator
+    - ShipRepairDevice
+    - ShipRepairDeviceAmmo
+

@@ -1,0 +1,44 @@
+- type: entity
+  parent: BaseItem
+  id: BoardingTeleportRemote
+  name: bluespace boarding remote
+  description: A handheld trigger for a linked boarding platform.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/boarding_teleport_remote.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: Forge/Objects/Devices/boarding_teleport_remote.rsi
+  - type: Signaller
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    transmitFrequencyId: BasicDevice
+  - type: UseDelay
+  - type: DeviceLinkSource
+    ports:
+    - Pressed
+  - type: BoardingTeleportRemote
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false
+  - type: StaticPrice
+    price: 250
+
+- type: entity
+  parent: BaseFlatpack
+  id: BoardingTeleportRemoteFlatpack
+  name: bluespace boarding remote flatpack
+  description: A flatpack for assembling a boarding remote.
+  components:
+  - type: Flatpack
+    entity: BoardingTeleportRemote
+  - type: StaticPrice
+    price: 300
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false

@@ -168,7 +168,9 @@
     - MechaEngineering
     - Ullman # Forge-change
     - ViperGroup # Forge-change
+    - HME # Forge-change
     - Nanotrasen # Forge-change
+    - ForgeBoardingTeleportExperimental
 
 - type: entity
   parent: ResearchAndDevelopmentServer

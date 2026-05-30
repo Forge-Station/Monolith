@@ -5,6 +5,7 @@
             xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
             xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
             xmlns:ui="clr-namespace:Content.Client._Mono.FireControl.UI"
+            xmlns:shields="clr-namespace:Content.Client._Crescent.ShipShields.UI"
             Title="{Loc 'gunnery-window-title'}"
             SetSize="1000 800"
             MinSize="1000 800">
@@ -39,6 +40,30 @@
                 </PanelContainer.PanelOverride>
             <CheckBox Name="ShowIFFCheckbox" Access="Public" Text="{Loc 'gunnery-show-iff'}"
                       Margin="4 2 2 2" Pressed="True"/>
+            </PanelContainer>
+            <!-- Forge-Change-End -->
+
+            <!-- Forge-Change-Start -->
+            <!-- IFF search filter -->
+            <PanelContainer VerticalExpand="False" HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BorderThickness="4" BorderColor="#2e2e2e" BackgroundColor="#1c1c1c" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 2 4 4">
+                    <Label Text="{Loc 'gunnery-iff-search'}"/>
+                    <LineEdit Name="IffSearchCriteria" Access="Public" HorizontalExpand="True"/>
+                </BoxContainer>
+            </PanelContainer>
+
+            <!-- Shield status -->
+            <PanelContainer Name="ShieldPanel" Visible="False" VerticalExpand="False" HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BorderThickness="4" BorderColor="#2e2e2e" BackgroundColor="#1c1c1c" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 2 4 4">
+                    <Label Text="{Loc 'gunnery-shield-label'}"/>
+                    <shields:ShipShieldBar Name="ShieldBar" HorizontalExpand="True" MinHeight="20"/>
+                </BoxContainer>
             </PanelContainer>
             <!-- Forge-Change-End -->
 

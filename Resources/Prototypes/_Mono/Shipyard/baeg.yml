@@ -16,7 +16,6 @@
   guidebookPage: Null
   class:
   - Civilian
-  - Salvage
   engine:
   - APU
 

@@ -28,7 +28,7 @@
     tags:
     - Cigarette
   - type: Clothing
-    sprite: Corvax\Objects\Consumable\Food\pockypacks.rsi
+    sprite: Forge/Objects/Consumable/Food/pockypacks.rsi
     slots: [ mask ]
     equippedPrefix: unlit
 

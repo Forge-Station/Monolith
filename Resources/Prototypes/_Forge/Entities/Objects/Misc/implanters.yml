@@ -1,0 +1,14 @@
+- type: entity
+  id: ForgeVoiceModuleImplanter
+  name: voice module implanter
+  parent: BaseImplantOnlyImplanter
+  suffix: voice module
+  components:
+  - type: ForgeVoiceModuleImplant
+    voiceId: male1
+  - type: UserInterface
+    interfaces:
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
+  - type: Implanter
+    implant: ForgeVoiceModuleImplant

@@ -8,5 +8,5 @@ ent-WindoorSecureFrontierCommandLocked = { ent-WindoorSecure }
     .suffix = Фронтир Командный, Закрыт
     .desc = { ent-WindoorSecure.desc }
 ent-WindoorSecureHeadOfSecurityLocked = { ent-WindoorSecure }
-    .suffix = Шериф, Закрыт
+    .suffix = Командующий офицер, Закрыт
     .desc = { ent-WindoorSecure.desc }

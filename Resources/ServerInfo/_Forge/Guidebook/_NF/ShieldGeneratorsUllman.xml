@@ -1,0 +1,31 @@
+<Document>
+  # Ullman Industries — Контрактная эффективность
+
+  Корпоративные щиты для экономичных операций. Минимальное базовое потребление и широкий буфер прочности позволяют держать щит онлайн с минимальной нагрузкой на реактор — за счёт медленного восстановления и длинных штрафов после перегрузки.
+
+  Числовые строки ниже подставляются из entity-прототипов ([italic]protodata[/italic]) и совпадают с симуляцией.
+
+  <Box>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUllmanHeavy"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUllmanPrismatic"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUllmanCollision"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUllmanLockbox"/>
+  </Box>
+
+  [color=#8B6CB8][bold]UIS SGD-440 «Индиговый бастион» (Indigo Bulwark)[/bold][/color] — Тяжёлый
+  Низкий крейс при широком лимите относительно «Редута»; реген в бою средний, перегруз умеренный.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeUllmanHeavy" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#D4B8F0][bold]UIS SGD-470P «Решётка Клауса» (Clause Lattice)[/bold][/color] — Призматический
+  Низкие крейс и пик при очень глубоком лимите; реген спокойный, автономия слабее соседей.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeUllmanPrismatic" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#5A3D7A][bold]UIS SGD-600C «Кинетический эскроу» (Kinetic Escrow Ram)[/bold][/color] — Коллизионный
+  Линейная кривая и предсказуемые ватты; антитаран чуть сильнее «Бастиона», лимит скромнее многих Т3.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeUllmanCollision" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#B8A9D9][bold]UIS SGD-435 «Сейф» (Lockbox)[/bold][/color] — Бухгалтерский режим
+  Занижен [italic]powerModifier[/italic] — мягче рост доп. нагрузки от износа относительно типичных 0,5. Глубокий лимит, низкий крейс, слабая автономия и длинный перегруз.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="DamageExp" format="0.##"] · [color=#aaaaaa]Модиф. мощн.:[/color] [protodata="ShieldGeneratorForgeUllmanLockbox" comp="ShipShieldEmitter" member="PowerModifier" format="0.##"]
+
+</Document>

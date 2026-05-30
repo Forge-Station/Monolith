@@ -115,10 +115,35 @@
     jumpsuit: UniformScrubsColorPurple
 # Forge
 - type: loadout
+  id: MedicalTraumaJumpsuitStandard
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTraumaStandart
+    
+- type: loadout
   id: MedicalTraumaJumpsuit
-  price: 500
+  price: 0
   equipment:
     jumpsuit: ClothingUniformJumpsuitATU
+
+- type: loadout
+  id: MedicalTraumaJumpskirt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTAF
+
+- type: loadout
+  id: MedicalTraumaJumpsuitBlue
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTraumaBlue
+
+- type: loadout
+  id: MedicalTraumaJumpskirtBlue
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTraumaBlue
+
 # Forge end
 # Back
 - type: loadout
@@ -155,7 +180,11 @@
   id: MedicalWinterBoots
   equipment:
     shoes: ClothingShoesBootsWinterMed
-
+# Forge
+- type: loadout
+  id: MedicalClothingShoesBootsMagTrauma
+  equipment:
+    shoes: ClothingShoesBootsMagTrauma
 # ID
 - type: loadout
   id: MedicalDoctorPDA
@@ -175,7 +204,11 @@
   id: NitrileGloves
   equipment:
     gloves: ClothingHandsGlovesNitrile
-
+# Forge
+- type: loadout
+  id: GlovesCombatTrauma
+  equipment:
+    gloves: ClothingHandsGlovesCombatTrauma
 #Masks
 - type: loadout
   id: SterileMask

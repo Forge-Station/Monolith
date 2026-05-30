@@ -10,6 +10,7 @@
   recipeUnlocks:
   - ClothingEyesNightVisionGoggles
   - ClothingHelmetAttachmentNVGsBasic
+  - ForgeBlueprintNightVisionGoggles # Forge-change
   technologyPrerequisites:
   - SuperParts
   position: 1, 15
@@ -24,6 +25,7 @@
   recipeUnlocks:
   - ClothingEyesThermalVisionGoggles
   - ClothingHelmetAttachmentInfraredBasic
+  - ForgeBlueprintThermalVisionGoggles # Forge-change
   technologyPrerequisites:
   - NightVisionTech
   position: 2, 15

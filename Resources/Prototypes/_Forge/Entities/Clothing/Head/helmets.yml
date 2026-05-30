@@ -95,6 +95,7 @@
     sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
 
 - type: entity
+  parent: ClothingHeadHelmetMercenary
   id: ClothingHeadHelmetTL
   name: Forces TechnicLogistic
   suffix: TechnicLogistic

@@ -99,10 +99,7 @@
   loadouts:
   - EmpireBackpack
   - EmpireDuffel
-  - EmpireBackpack
-  - MonoSecurityGuardDuffel
-  - MonoSecurityGuardBackpack
-  - MonoSecurityGuardSatchel
+  - EmpireSatchel
   fallbacks:
   - EmpireBackpack
   

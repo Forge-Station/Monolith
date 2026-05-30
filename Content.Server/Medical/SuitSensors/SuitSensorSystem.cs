@@ -548,7 +548,7 @@ public sealed partial class SuitSensorSystem : EntitySystem
     /// clear ConnectedServer on every suit sensor that was bound to that server's address.
     /// The next sensor update tick will re-resolve via TryGetActiveServerAddress and bind to the surviving server.
     /// </summary>
-    private void OnServerDisconnected(EntityUid uid, SingletonDeviceNetServerComponent _, ref DeviceNetServerDisconnectedEvent args)
+    private void OnServerDisconnected(EntityUid uid, SingletonDeviceNetServerComponent _server, ref DeviceNetServerDisconnectedEvent args) // Cursor
     {
         if (!TryComp<DeviceNetworkComponent>(uid, out var serverDevice)
             || string.IsNullOrEmpty(serverDevice.Address))

@@ -104,7 +104,7 @@
   - MonoSecurityGuardBackpack
   - MonoSecurityGuardSatchel
   fallbacks:
-  - ClothingBackpackSatchelPDV
+  - EmpireBackpack
   
 # region Praefect
 - type: loadoutGroup

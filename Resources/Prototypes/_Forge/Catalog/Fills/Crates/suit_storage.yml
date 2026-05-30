@@ -95,22 +95,6 @@
   - type: AccessReader
     access: [["EmpireCommander"]]
 
-- type: entity
-  id: SuitStorageHV7
-  parent: SuitStorageBase
-  suffix: Filled, HV-7, DoNotMap
-  components:
-  - type: StorageFill
-    contents:
-        - id: OxygenTankFilled
-        - id: NitrogenTankFilled
-        - id: ClothingOuterHardsuitHV7
-        - id: ClothingMaskGasSecurity
-        - id: JetpackVoidFilled
-        - id: ClothingShoesBootsMagSecurity
-  - type: AccessReader
-    access: [["Empire"]]
-
 #region Renegate
 - type: entity
   id: SuitStoragebsii20

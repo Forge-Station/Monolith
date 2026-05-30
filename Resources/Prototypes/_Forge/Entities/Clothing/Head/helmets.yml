@@ -93,7 +93,6 @@
     sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
   - type: Clothing
     sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
-  parent: [BaseFactionGearOtherFactionT0, ClothingHeadHelmetBasic]
 
 - type: entity
   id: ClothingHeadHelmetTL

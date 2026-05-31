@@ -53,7 +53,9 @@
   maxLimit: 1
   loadouts:
   - EmpireClothingOuterCoatEmpireWindbreaker
-
+  - ClothingOuterArmorBPVestLight
+  - ClothingOuterArmorBPVestStabproof
+  
 - type: loadoutGroup
   id: EmpireBelt
   name: loadout-group-contractor-belt
@@ -214,6 +216,8 @@
   maxLimit: 1
   loadouts:
   - EmpireClothingOuterCoatEmpireInqWindbreaker
+  - ClothingOuterArmorBPVestLight
+  - ClothingOuterArmorBPVestStabproof
   # fallbacks:
 
 - type: loadoutGroup

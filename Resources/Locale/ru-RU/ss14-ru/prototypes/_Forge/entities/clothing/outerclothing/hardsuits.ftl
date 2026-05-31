@@ -58,7 +58,7 @@ ent-ClothingOuterHardsuitHV7c = тяжелый скафандр HV-7c
 ent-ClothingOuterHardsuitHV7i = тяжелый скафандр HV-7i
     .desc = Тяжёлый скафандр, выдаваемый отрядам имперских инквизиторов для операций в среде с низким давлением и высоким риском. 
 
-ent-ClothingOuterHardsuitHVStealh = Скафандр «Imperceptible» MP-33R
+ent-ClothingOuterHardsuitHVStealh = скафандр «Imperceptible» MP-33R
     .desc = Разведовательный скафандр, выдаваемый отрядам имперской разведкой для скрытных операций в среде с низким давлением и высоким риском.
-ent-ClothingOuterHardsuitHVMilitant = Скафандр MP 0-4 «Militant»
+ent-ClothingOuterHardsuitHVMilitant = скафандр MP 0-4 «Militant»
     .desc = Альтернативный скафандр, выдаваемый штурмовым отрядам имперских штурмовиков для смертельных операций в среде с низким давлением и высоким риском.

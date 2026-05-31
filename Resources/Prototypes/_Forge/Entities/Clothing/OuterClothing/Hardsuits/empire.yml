@@ -1,6 +1,6 @@
 #region AC Prototype 2
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseFactionGearTSFT2]
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT2]
   id: ClothingOuterHardsuitHVp2
   name: AC Prototype 2 hardsuit
   description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
@@ -94,7 +94,7 @@
 
 # region RI-14 Light
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseFactionGearTSFT2]
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT2]
   id: ClothingOuterHardsuitRI14
   name: RI-14 light hardsuit
   suffix: Empire
@@ -154,8 +154,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
+        Blunt: 0.7
+        Slash: 0.7
         Piercing: 0.65
         Heat: 0.7
         Radiation: 0.4
@@ -210,7 +210,7 @@
 
 # region RI-22 Medium
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseFactionGearTSFT2]
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT2]
   id: ClothingOuterHardsuitRI22
   name: RI-22 battle hardsuit
   suffix: Empire
@@ -331,7 +331,7 @@
 
 # region ~HV~RI-7 Heavy
 - type: entity
-  parent: [ClothingOuterHardsuitJuggernaut, BaseFactionGearTSFT3]
+  parent: [ClothingOuterHardsuitJuggernaut, BaseFactionGearOtherFactionT3]
   id: ClothingOuterHardsuitHV7
   name: HV-7 heavy battle hardsuit
   suffix: Empire
@@ -430,7 +430,7 @@
 
 # region Higaris Victories
 - type: entity
-  parent: [ClothingOuterHardsuitJuggernaut, BaseFactionGearTSFT3]
+  parent: [ClothingOuterHardsuitJuggernaut, BaseFactionGearOtherFactionT3]
   id: ClothingOuterHardsuitHVVigilance
   name: HV MP 9 «Vigilance»
   suffix: DO NOT MAP
@@ -482,7 +482,7 @@
     vendPrice: 50000
 
 - type: entity
-  parent: [ClothingOuterHardsuitJuggernaut, EnergyShieldClothing, BaseFactionGearTSFT3]
+  parent: [ClothingOuterHardsuitJuggernaut, EnergyShieldClothing, BaseFactionGearOtherFactionT3]
   id: ClothingOuterHardsuitHVMilitant
   name: HV MP 0-4 «Militant»
   suffix: Empire
@@ -566,7 +566,7 @@
     delay: 10
 
 - type: entity
-  parent: [ClothingOuterHardsuitJuggernaut, BaseFactionGearTSFT3]
+  parent: [ClothingOuterHardsuitJuggernaut, BaseFactionGearOtherFactionT3]
   id: ClothingOuterHardsuitHVStealh
   name: HV MP-33R «Imperceptible»
   suffix: Empire

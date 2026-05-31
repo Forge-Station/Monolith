@@ -63,6 +63,16 @@
             # USSPRifleman: [ -1, -1]
             # TsfEngineer: [ -1, -1 ] # Not a roundstart-selectable job (`setPreference: false`)
             # Forge-change-start
+            # Empire
+            Praefect: [ -1, -1 ]
+            Consul: [ -1, -1 ]
+            Inquisitor: [ -1, -1 ]
+            Praetorian: [ -1, -1 ]
+            Tessarian: [ -1, -1 ]
+            Auxilia: [ -1, -1 ]
+            Neophyte: [ -1, -1 ]
+            Arbiter: [ -1, -1 ]
+            Cardinal: [ -1, -1 ]
             # Renegates
             Flunky: [ -1, -1]
             Quack: [ -1, -1]

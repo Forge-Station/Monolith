@@ -54,6 +54,14 @@
     job_id: Praetorian
 
 - type: entity
+  id: ForgeSpawnPointTessarian
+  parent: ForgeSpawnPointPraefect
+  name: spawn point Tessarian
+  components:
+  - type: SpawnPoint
+    job_id: Tessarian
+
+- type: entity
   id: ForgeSpawnPointAuxilia
   parent: ForgeSpawnPointPraefect
   name: spawn point Auxilia

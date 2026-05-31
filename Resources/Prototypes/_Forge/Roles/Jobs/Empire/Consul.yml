@@ -13,6 +13,12 @@
       species:
         - Human
         - Dwarf
+    - !type:AgeRequirement
+      requiredAge: 35
+    - !type:SexRequirement
+      sex:
+      - Male
+      - Female
   # alternateRequirementSets:
   #   longerPlaytimeLessSec:
   #   - !type:RoleTimeRequirement

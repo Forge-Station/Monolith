@@ -18,6 +18,12 @@
       species:
         - Human
         - Dwarf
+    - !type:AgeRequirement
+      requiredAge: 30
+    - !type:SexRequirement
+      sex:
+      - Male
+      - Female
   # alternateRequirementSets:
   #   longerPlaytimeLessSec:
   #   - !type:RoleTimeRequirement
@@ -28,7 +34,7 @@
   weight: 20
   displayWeight: 20
   canBeAntag: false
-  setPreference: true
+  setPreference: false
   accessGroups:
   - CommandEmpireAccess
   special:

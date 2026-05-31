@@ -15,6 +15,11 @@
     - !type:SpeciesRequirement
       species:
         - Human
+    - !type:AgeRequirement
+      requiredAge: 40
+    - !type:SexRequirement
+      sex:
+      - Male
   # alternateRequirementSets:
   #   longerPlaytimeLessSec:
   #   - !type:OverallPlaytimeRequirement

@@ -20,6 +20,7 @@
   weight: 50
   displayWeight: 50
   assignedCompany: Renegates
+  assignedNationality: FreeColonies
   canBeAntag: false
   setPreference: true
   access:

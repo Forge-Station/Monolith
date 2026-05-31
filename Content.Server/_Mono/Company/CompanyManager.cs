@@ -13,14 +13,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Mono.Company;
 
-public sealed class CompanyManager
+public sealed partial class CompanyManager
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ILogManager _log = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -117,9 +117,9 @@ public sealed class CompanyManager
         return member != null && member.Value.Owner;
     }
 
-    public bool SetOwner(ProtoId<CompanyPrototype> company, ICommonSession session, bool owner)
+    public bool SetOwner(ProtoId<CompanyPrototype> company, NetUserId userId, bool owner)
     {
-        var cached = GetCompanyMember(company, session.UserId);
+        var cached = GetCompanyMember(company, userId);
 
         if (cached is not { } member)
             return false;
@@ -127,9 +127,9 @@ public sealed class CompanyManager
         if (owner == member.Owner)
             return true;
 
-        _db.SetCompanyOwner(company, session.UserId, owner);
+        _db.SetCompanyOwner(company, userId, owner);
 
-        _companies[company].RemoveWhere(w => w.PlayerUserId == session.UserId);
+        _companies[company].RemoveWhere(w => w.PlayerUserId == userId);
         member.Owner = owner; // company member is struct so we got a copy here
         _companies[company].Add(member);
         return true;
@@ -147,7 +147,7 @@ public sealed class CompanyManager
 
         await _db.RemoveCompanyMember(player, company);
 
-        if (_player.TryGetSessionById(new NetUserId(player), out var session))
+        if (_player.TryGetSessionById(player, out var session))
             SendCompanyWhitelist(session.Channel);
     }
 

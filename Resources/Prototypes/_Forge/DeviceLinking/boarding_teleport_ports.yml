@@ -1,0 +1,4 @@
+- type: sinkPort
+  id: BoardingTeleport
+  name: boarding-teleport-port-name
+  description: boarding-teleport-port-description

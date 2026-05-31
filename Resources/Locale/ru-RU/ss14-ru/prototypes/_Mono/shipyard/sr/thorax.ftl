@@ -1,2 +1,2 @@
-vessel-thorax-name = Thorax
-vessel-thorax-desc = A light mech carrier and factory, including 4 different docks for assistance.
+vessel-thorax-name = «Торакс»
+vessel-thorax-desc = Лёгкий носитель мехов и производственный корабль, оснащённый четырьмя различными доками для вспомогательных модулей.

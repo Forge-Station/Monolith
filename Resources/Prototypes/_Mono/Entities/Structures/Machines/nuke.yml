@@ -63,10 +63,11 @@
     breakOnAccessBreaker: false
     lockTime: 600 # once the genie is out of the bottle there's no letting him back in
   - type: AccessReader
-    access: [["SyndicateAgent"], ["NuclearOperative"]]
+    access: [["Remnant"]] # Forge-Change [["SyndicateAgent"], ["NuclearOperative"]] > [["Remnant"]]
     breakOnAccessBreaker: false
   - type: ScuttleDevice
     unlockedPrice: 800000 # +800k for unlocked antimatter device
+    timer: 180 # Forge-Change
   - type: Explosive
     explosionType: Default
     maxIntensity: 5000
@@ -102,9 +103,9 @@
   # calibrated to be able to blast capitals but not POI wall
   - type: Explosive
     explosionType: Default
-    maxIntensity: 800
+    maxIntensity: 350 # Forge-Change
     intensitySlope: 20
-    totalIntensity: 10000000
+    totalIntensity: 20000000 # Forge-Change
     deleteAfterExplosion: true
   - type: StaticPrice
     price: 100000

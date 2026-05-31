@@ -16,6 +16,7 @@
   guidebookPage: Null
   class:
   - Cargo
+  - Civilian
   engine:
   - Uranium
 

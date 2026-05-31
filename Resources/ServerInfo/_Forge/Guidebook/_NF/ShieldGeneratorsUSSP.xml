@@ -1,0 +1,31 @@
+<Document>
+  # Союз (USSP) — Конвойное оборудование
+
+  Экономичные щиты для конвойных операций. Очень низкое базовое потребление энергии позволяет долго удерживать щит без нагрузки на реактор — за счёт сниженных боевых характеристик и меньшей устойчивости к тарану, чем у коллег по классу.
+
+  Числовые строки ниже подставляются из entity-прототипов ([italic]protodata[/italic]) и совпадают с симуляцией.
+
+  <Box>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUsspHeavy"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUsspPrismatic"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUsspCollision"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeUsspKerch"/>
+  </Box>
+
+  [color=#5EB8AA][bold]SGS-420 «Передовой редут» (Forward Redoubt)[/bold][/color] — Тяжёлый
+  Экономичный конвойный профиль: низкий крейс, высокая регенерация в бою; узкий лимит и длинный перегруз.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeUsspHeavy" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#D9A066][bold]SGS-470P «Полярная решётка» (Polar Lattice)[/bold][/color] — Призматический
+  Дешёвый крейс и призма с крупным лимитом; реген в бою спокойнее, чем у ударных линеек.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeUsspPrismatic" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#B84C2A][bold]SGS-600C «Ледокол» (Ledokol Ramfield)[/bold][/color] — Коллизионный
+  Крупный лимит, очень быстрое восстановление «лица», пологая кривая нагрузки при износе; таран слабее «Бастиона».
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeUsspCollision" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#4ECDC4][bold]SGS-435 «Керчь» (Kerch)[/bold][/color] — Эскорт
+  Минимальный крейс и высокий [italic]unpoweredBonus[/italic] для длинных обрывов сети; узкий лимит и умеренный таран.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeUsspKerch" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+</Document>

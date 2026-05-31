@@ -14,22 +14,22 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing; // Forge-Change
+using Content.Shared.Clothing; // Mono
 
 namespace Content.Shared.Movement.Systems;
 
-public abstract class SharedJetpackSystem : EntitySystem
+public abstract partial class SharedJetpackSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-    [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!; // EE
-    // Forge-Change-start
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private IConfigurationManager _config = default!; // EE
+    [Dependency] private SharedGravitySystem _gravity = default!; // Mono
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private const float BaseCombatControlPenalty = 0.15f;
     private const float BaseCombatModifierPenalty = 0.08f;
@@ -46,6 +46,7 @@ public abstract class SharedJetpackSystem : EntitySystem
 
         SubscribeLocalEvent<JetpackUserComponent, RefreshWeightlessModifiersEvent>(OnJetpackUserWeightlessMovement);
         SubscribeLocalEvent<JetpackUserComponent, CanWeightlessMoveEvent>(OnJetpackUserCanWeightless);
+        SubscribeLocalEvent<JetpackUserComponent, MagbootsToggledEvent>(OnJetpackUserMagbootsToggled); // Mono
         SubscribeLocalEvent<JetpackUserComponent, EntParentChangedMessage>(OnJetpackUserEntParentChanged);
         SubscribeLocalEvent<JetpackUserComponent, DidEquipEvent>(OnJetpackUserDidEquip); // Forge-Change
         SubscribeLocalEvent<JetpackUserComponent, DidUnequipEvent>(OnJetpackUserDidUnequip); // Forge-Change
@@ -179,7 +180,8 @@ public abstract class SharedJetpackSystem : EntitySystem
         // https://discord.com/channels/310555209753690112/310555209753690112/1270067921682694234
         if (TryComp<JetpackComponent>(component.Jetpack, out var jetpack)
             && (!CanEnableOnGrid(args.Transform.GridUid)
-            || !UserNotParented(uid, jetpack))) // EE
+                || !UserNotParented(uid, jetpack) // EE
+                || !_gravity.IsWeightless(uid))) // Mono
         {
             SetEnabled(component.Jetpack, jetpack, false, uid);
 
@@ -222,7 +224,8 @@ public abstract class SharedJetpackSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (TryComp(uid, out TransformComponent? xform) && !CanEnableOnGrid(xform.GridUid))
+        if (TryComp(uid, out TransformComponent? xform) && !CanEnableOnGrid(xform.GridUid)
+        || !_gravity.IsWeightless(args.Performer)) // Mono
         {
             _popup.PopupClient(Loc.GetString("jetpack-no-station"), uid, args.Performer);
 
@@ -316,7 +319,7 @@ public abstract class SharedJetpackSystem : EntitySystem
 
     protected virtual bool CanEnable(EntityUid uid, JetpackComponent component)
     {
-        return true;
+        return _gravity.IsWeightless(uid); // Mono
     }
     // Forge-Change-start
     private bool UpdateSuitProfile(EntityUid user, JetpackUserComponent userComp, JetpackComponent? jetpackComp = null)
@@ -375,6 +378,17 @@ public abstract class SharedJetpackSystem : EntitySystem
             || xform.ParentUid == xform.MapUid;
     }
     // End EE
+
+    // Mono
+    private void OnJetpackUserMagbootsToggled(EntityUid uid, JetpackUserComponent component, ref MagbootsToggledEvent args)
+    {
+        if (!args.State || !IsEnabled(component.Jetpack) || _gravity.IsWeightless(uid) || !TryComp<JetpackComponent>(component.Jetpack, out var jetpack))
+            return;
+
+        _popup.PopupClient(Loc.GetString("jetpack-to-grid"), uid, uid);
+        SetEnabled(component.Jetpack, jetpack, false, uid);
+    }
+    // End Mono
 }
 
 [Serializable, NetSerializable]

@@ -87,6 +87,7 @@
   - FrontierRoundstartVariation
   - MonoAISTCShuttleSpawnerScheduler
   - MonoAISTCShuttleSpawnerSchedulerTier2
+  - ForgeAISTCShuttleSpawnerSchedulerTier3 # Forge-Change
   - MonoAsakimSTCShuttleSpawnerScheduler
   - MonoMonolithicEventsScheduler
 
@@ -126,6 +127,7 @@
   - MonoChimeraSTCShuttleSpawnerSchedulerSlow
   - MonoAISTCShuttleSpawnerSchedulerSlow
   - MonoAISTCShuttleSpawnerSchedulerTier2Slow
+  - ForgeAISTCShuttleSpawnerSchedulerTier3Slow # Forge-Change
   - MonoAsakimSTCShuttleSpawnerSchedulerSlow
   - MonoMonolithicEventsScheduler
 

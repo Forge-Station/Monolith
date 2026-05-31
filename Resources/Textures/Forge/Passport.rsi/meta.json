@@ -24,6 +24,12 @@
         },
         {
             "name": "passport_ussp_open"
+        },
+        {
+            "name": "passport_freedom_closed"
+        },
+        {
+            "name": "passport_freedom_open"
         }
     ]
 }

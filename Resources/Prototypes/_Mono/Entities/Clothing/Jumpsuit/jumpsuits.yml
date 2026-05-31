@@ -195,16 +195,16 @@
 
 # Trauma Armed Forces
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1
   id: ClothingUniformJumpsuitATU
   name: armed trauma unit jumpsuit
   suffix: TTI # Forge
   description: Standard fatigues of the Armed Trauma Unit.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/trauma.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_suit.rsi # Forge-change
   - type: Clothing
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/trauma.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_suit.rsi # Forge-change
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals
@@ -340,7 +340,7 @@
   description: A uniform bearing the colours of the vipers.
   components:
   - type: StaticPrice
-    price: 700
+    price: 0
     vendPrice: 1150
   - type: Sprite
     sprite: _Mono/Clothing/Uniforms/Jumpsuit/viper_group_uniform.rsi
@@ -357,7 +357,7 @@
   description: A turtleneck bearing the colours of the vipers.
   components:
   - type: StaticPrice
-    price: 700
+    price: 0
     vendPrice: 1150
   - type: Sprite
     sprite: _Mono/Clothing/Uniforms/Jumpsuit/viper_group_turtleneck.rsi

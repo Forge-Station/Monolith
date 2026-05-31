@@ -7,7 +7,7 @@
   cost: 20000
   technologyPrerequisites:
   - UniversalMaterialResearchT2
-  position: 8, 5
+  position: 8, 6
   recipeUnlocks:
   - Magazine762x51mmPlasteelAP
   - AmmoBox762x51mmPlasteelAP
@@ -20,6 +20,8 @@
   - Magazine45_magnumPistolPlasteelAP
   - AmmoBox45_magnumPlasteelAP
   - SpeedLoader45_magnumPlasteelAP
+  - Magazine68x52mmPlasteelAP
+  - AmmoBox68x52mmPlasteelAP
   - Magazine46x30mmPistolPlasteelAP
   - Magazine46x30mmSubMachineGunPlasteelAP
   - AmmoBox46x30mmPlasteelAP
@@ -38,6 +40,7 @@
   - AmmoBox23x75mmFlechette
   - Magazine12_gaugeFlechette
   - AmmoBox12_gaugeFlechette
+  - ForgeBlueprintAPAmmo # Forge-change
 
 #- type: technology
 #  id: UniversalSynthalloyCore
@@ -84,7 +87,7 @@
   cost: 30000
   technologyPrerequisites:
   - UniversalPlastitaniumCore
-  position: 8, 4
+  position: 8, 5
   recipeUnlocks:
   - AmmoBox23x75mmSlugRIP
   - Magazine12_gaugeSlugRIP
@@ -100,6 +103,8 @@
   - Magazine45_magnumPistolRIP
   - SpeedLoader45_magnumRIP
   - AmmoBox45_magnumRIP
+  - Magazine68x52mmRIP
+  - AmmoBox68x52mmRIP
   - Magazine46x30mmPistolRIP
   - Magazine46x30mmSubMachineGunRIP
   - AmmoBox46x30mmRIP
@@ -112,6 +117,7 @@
   - Magazine45_ACPPistolRIP
   - Magazine45_ACPSubMachineGunRIP
   - AmmoBox45_ACPRIP
+  - ForgeBlueprintRIPAmmo # Forge-change
 
 - type: technology
   id: DraconicMunitions
@@ -152,6 +158,7 @@
   - Magazine45_ACPSubMachineGunIncendiary
   - AmmoBox45_ACPIncendiary
   - AmmoBox23x75mmFlashbang
+  - ForgeBlueprintIncendiaryAmmo # Forge-change
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 9, -1
@@ -192,6 +199,7 @@
   - Magazine45_ACPPistolUranium
   - Magazine45_ACPSubMachineGunUranium
   - AmmoBox45_ACPUranium
+  - ForgeBlueprintUraniumAmmo # Forge-change
   technologyPrerequisites:
   - UniversalPlastitaniumCore
-  position: 7, 4
+  position: 7, 5

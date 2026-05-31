@@ -1,3 +1,4 @@
-ent-MilitaryPowerCellMG = EM72 Ashstorm battery cell
+ent-MilitaryPowerCellMG = батарея EM72 «Эшсторм»
     .desc = Круглая батарейная ячейка для EM72 «Эшсторм».
-ent-PulsedPlasmaLaserCanister = NT PPL magnetic storage container
+ent-PulsedPlasmaLaserCanister = магнитный контейнер NT PPL
+    .desc = Небольшой продвинутый магнитный контейнер для хранения высокоэнергетической плазмы. Питается от встроенного микрореактора с иридитовыми электромагнитами, что позволяет удерживать плазму неограниченно долго. Перезаряжается, используя электричество для синтеза плазмы из окружающего воздуха.

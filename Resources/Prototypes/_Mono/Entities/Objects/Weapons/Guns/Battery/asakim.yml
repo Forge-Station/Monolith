@@ -3,6 +3,7 @@
   parent: [BaseWeaponBattery, BaseGunWieldable]
   id: WeaponRifleAsakimAutopulser
   description: An advanced handheld plasma rifle. The design bears similarities to pre-fracture plasma weapons.
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Battery/asakimrifle.rsi
@@ -39,13 +40,13 @@
     zeroVisible: false
   - type: ProjectileBatteryAmmoProvider
     proto: HandheldAutopulserProjectile
-    fireCost: 25
+    fireCost: 50
   - type: Appearance
   - type: StaticPrice
     price: 1750
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 35
+    autoRechargeRate: 60
 
 - type: entity
   name: kunisa-pattern plasma autopulser
@@ -64,7 +65,7 @@
     sprite: _Mono/Objects/Weapons/Guns/Battery/asakimrifle.rsi
   - type: Gun
     minAngle: 0
-    maxAngle: 5
+    maxAngle: 12
     fireRate: 6
     burstFireRate: 15
     shotsPerBurst: 5
@@ -81,10 +82,10 @@
     zeroVisible: false
   - type: ProjectileBatteryAmmoProvider
     proto: HandheldAutopulserProjectile
-    fireCost: 25
+    fireCost: 50
   - type: Appearance
   - type: StaticPrice
     price: 1000
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 50
+    autoRechargeRate: 60

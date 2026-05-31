@@ -1,8 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Net;
 using System.Numerics;
 using Content.Shared.ActionBlocker;
-using Content.Shared.Bed.Sleep;
 using Content.Shared.CCVar;
 using Content.Shared.Friction;
 using Content.Shared.Gravity;
@@ -11,6 +9,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -36,24 +35,25 @@ namespace Content.Shared.Movement.Systems;
 /// </summary>
 public abstract partial class SharedMoverController : VirtualController
 {
-    [Dependency] private   readonly IConfigurationManager _configManager = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private   readonly IMapManager _mapManager = default!;
-    [Dependency] private   readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private   readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private   readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private   readonly InventorySystem _inventory = default!;
-    [Dependency] private   readonly MobStateSystem _mobState = default!;
-    [Dependency] private   readonly SharedAudioSystem _audio = default!;
-    [Dependency] private   readonly SharedContainerSystem _container = default!;
-    [Dependency] private   readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private   readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private   readonly SharedTransformSystem _transform = default!;
-    [Dependency] private   readonly TagSystem _tags = default!;
-    [Dependency] private   readonly IEntityManager _entities = default!; // Delta V-NoShoesSilentFootstepsComponent
+    [Dependency] private   IConfigurationManager _configManager = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] private   IMapManager _mapManager = default!;
+    [Dependency] private   ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private   ActionBlockerSystem _blocker = default!;
+    [Dependency] private   EntityLookupSystem _lookup = default!;
+    [Dependency] private   InventorySystem _inventory = default!;
+    [Dependency] private   MobStateSystem _mobState = default!;
+    [Dependency] private   SharedAudioSystem _audio = default!;
+    [Dependency] private   SharedContainerSystem _container = default!;
+    [Dependency] private   SharedMapSystem _mapSystem = default!;
+    [Dependency] private   SharedGravitySystem _gravity = default!;
+    [Dependency] private   SharedTransformSystem _transform = default!;
+    [Dependency] private   TagSystem _tags = default!;
+    [Dependency] private   IEntityManager _entities = default!; // Delta V-NoShoesSilentFootstepsComponent
 
     protected EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery;
     protected EntityQuery<FootstepModifierComponent> FootstepModifierQuery;
+    protected EntityQuery<FTLComponent> FTLQuery;
     protected EntityQuery<InputMoverComponent> MoverQuery;
     protected EntityQuery<MapComponent> MapQuery;
     protected EntityQuery<MapGridComponent> MapGridQuery;
@@ -62,6 +62,8 @@ public abstract partial class SharedMoverController : VirtualController
     protected EntityQuery<MovementSpeedModifierComponent> ModifierQuery;
     protected EntityQuery<NoRotateOnMoveComponent> NoRotateQuery;
     protected EntityQuery<PhysicsComponent> PhysicsQuery;
+    protected EntityQuery<PilotComponent> PilotQuery;
+    protected EntityQuery<PreventPilotComponent> PreventPilotQuery;
     protected EntityQuery<RelayInputMoverComponent> RelayQuery;
     protected EntityQuery<PullableComponent> PullableQuery;
     protected EntityQuery<TransformComponent> XformQuery;
@@ -77,6 +79,18 @@ public abstract partial class SharedMoverController : VirtualController
     /// Cache the mob movement calculation to re-use elsewhere.
     /// </summary>
     public Dictionary<EntityUid, bool> UsedMobMovement = new();
+
+    // Forge-Change-Start
+    // Per-tick cache for IsWeightless. Saves a second call from OnTileFriction
+    // for every mover that HandleMobMovement already evaluated.
+    private readonly Dictionary<EntityUid, bool> _weightlessCache = new();
+
+    // Per-tick cache for tile-definition lookups, keyed by (gridUid, tile coords).
+    // Many movers stand on the same tile; caching avoids repeated chunk + tile resolves.
+    private readonly Dictionary<(EntityUid, Vector2i), ContentTileDefinition?> _tileDefCache = new();
+    // Forge-Change-End
+
+    private readonly HashSet<EntityUid> _aroundColliderSet = [];
 
     public override void Initialize()
     {
@@ -96,8 +110,12 @@ public abstract partial class SharedMoverController : VirtualController
         FootstepModifierQuery = GetEntityQuery<FootstepModifierComponent>();
         MapGridQuery = GetEntityQuery<MapGridComponent>();
         MapQuery = GetEntityQuery<MapComponent>();
+        FTLQuery = GetEntityQuery<FTLComponent>();
+        PilotQuery = GetEntityQuery<PilotComponent>();
+        PreventPilotQuery = GetEntityQuery<PreventPilotComponent>();
 
         SubscribeLocalEvent<MovementSpeedModifierComponent, TileFrictionEvent>(OnTileFriction);
+        SubscribeLocalEvent<InputMoverComponent, ComponentStartup>(OnMoverStartup);
 
         InitializeInput();
         InitializeRelay();
@@ -106,6 +124,11 @@ public abstract partial class SharedMoverController : VirtualController
         Subs.CVar(_configManager, CCVars.AirFriction, value => _airDamping = value, true);
         Subs.CVar(_configManager, CCVars.OffgridFriction, value => _offGridDamping = value, true);
         UpdatesBefore.Add(typeof(TileFrictionController));
+    }
+
+    protected virtual void OnMoverStartup(Entity<InputMoverComponent> ent, ref ComponentStartup args)
+    {
+       _blocker.UpdateCanMove(ent, ent.Comp);
     }
 
     public override void Shutdown()
@@ -118,35 +141,38 @@ public abstract partial class SharedMoverController : VirtualController
     {
         base.UpdateAfterSolve(prediction, frameTime);
         UsedMobMovement.Clear();
+        // Forge-Change-Start: clear per-tick caches alongside UsedMobMovement
+        _weightlessCache.Clear();
+        _tileDefCache.Clear();
+        // Forge-Change-End
     }
 
-    // Upstream - #34016
-    protected void HandleRelayMovement(Entity<MovementRelayTargetComponent?, InputMoverComponent?> entity)
+    // Forge-Change-Start: per-tick caches to avoid repeated heavy lookups across HandleMobMovement / OnTileFriction / footstep paths
+    private bool GetWeightlessCached(EntityUid uid, PhysicsComponent physics, TransformComponent xform)
     {
-        if (!Resolve(entity, ref entity.Comp1, ref entity.Comp2))
-            return;
+        if (_weightlessCache.TryGetValue(uid, out var cached))
+            return cached;
 
-        var relayTarget = entity.Comp1;
-        var mover = entity.Comp2;
-
-        var canMove = true;
-
-        if (_mobState.IsIncapacitated(relayTarget.Source) ||
-            TryComp<SleepingComponent>(relayTarget.Source, out _) ||
-            !MoverQuery.TryGetComponent(relayTarget.Source, out var relayedMover))
-        {
-            canMove = false;
-        }
-        else
-        {
-            mover.RelativeEntity = relayedMover.RelativeEntity;
-            mover.RelativeRotation = relayedMover.RelativeRotation;
-            mover.TargetRelativeRotation = relayedMover.TargetRelativeRotation;
-        }
-
-        mover.CanMove = canMove;
+        var weightless = _gravity.IsWeightless(uid, physics, xform);
+        _weightlessCache[uid] = weightless;
+        return weightless;
     }
-    // End Upstream - #34016
+
+    private ContentTileDefinition? GetTileDefCached(EntityUid gridUid, MapGridComponent gridComp, EntityCoordinates coords)
+    {
+        var tileIndices = _mapSystem.LocalToTile(gridUid, gridComp, coords);
+        var key = (gridUid, tileIndices);
+        if (_tileDefCache.TryGetValue(key, out var cached))
+            return cached;
+
+        ContentTileDefinition? def = null;
+        if (_mapSystem.TryGetTileRef(gridUid, gridComp, coords, out var tile))
+            def = (ContentTileDefinition)_tileDefinitionManager[tile.Tile.TypeId];
+
+        _tileDefCache[key] = def;
+        return def;
+    }
+    // Forge-Change-End
 
     /// <summary>
     ///     Movement while considering actionblockers, weightlessness, etc.
@@ -229,7 +255,7 @@ public abstract partial class SharedMoverController : VirtualController
 
         // If the body is in air but isn't weightless then it can't move
         // TODO: MAKE ISWEIGHTLESS EVENT BASED
-        var weightless = _gravity.IsWeightless(uid, physicsComponent, xform);
+        var weightless = GetWeightlessCached(uid, physicsComponent, xform); // Forge-Change: use per-tick cache
         var inAirHelpless = false;
 
         if (physicsComponent.BodyStatus != BodyStatus.OnGround && !CanMoveInAirQuery.HasComponent(uid))
@@ -271,7 +297,7 @@ public abstract partial class SharedMoverController : VirtualController
 
             // If we're not on a grid, and not able to move in space check if we're close enough to a grid to touch.
             if (!touching && MobMoverQuery.TryComp(uid, out var mobMover))
-                touching |= IsAroundCollider(PhysicsSystem, xform, mobMover, uid, physicsComponent);
+                touching |= IsAroundCollider(_lookup, (uid, physicsComponent, mobMover, xform));
 
             // If we're touching then use the weightless values
             if (touching)
@@ -292,10 +318,11 @@ public abstract partial class SharedMoverController : VirtualController
         }
         else
         {
-            if (MapGridQuery.TryComp(xform.GridUid, out var gridComp)
-                && _mapSystem.TryGetTileRef(xform.GridUid.Value, gridComp, xform.Coordinates, out var tile)
-                && physicsComponent.BodyStatus == BodyStatus.OnGround)
-                tileDef = (ContentTileDefinition) _tileDefinitionManager[tile.Tile.TypeId];
+            // Forge-Change-Start: use per-tick cached tile def lookup (multiple movers on same tile share result)
+            if (physicsComponent.BodyStatus == BodyStatus.OnGround
+                && MapGridQuery.TryComp(xform.GridUid, out var gridComp))
+                tileDef = GetTileDefCached(xform.GridUid.Value, gridComp, xform.Coordinates);
+            // Forge-Change-End
 
             var walkSpeed = moveSpeedComponent?.CurrentWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
             var sprintSpeed = moveSpeedComponent?.CurrentSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
@@ -362,10 +389,13 @@ public abstract partial class SharedMoverController : VirtualController
                 _transform.SetLocalRotation(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform);
             }
 
-            if (!weightless && MobMoverQuery.TryGetComponent(uid, out var mobMover) &&
-                TryGetSound(weightless, uid, mover, mobMover, xform, out var sound, tileDef: tileDef))
+            if (!weightless
+                && MobMoverQuery.TryGetComponent(uid, out var mobMover)
+                && TryGetSound(weightless, uid, mover, mobMover, xform, out var sound, tileDef: tileDef)
+                && sound != null)
             {
-                var soundModifier = mover.Sprinting ? 3.5f : 1.5f;
+                var soundModifier = mover.Sprinting ? InputMoverComponent.SprintingSoundModifier
+                    : InputMoverComponent.WalkingSoundModifier;
 
                 var audioParams = sound.Params
                     .WithVolume(sound.Params.Volume + soundModifier)
@@ -423,7 +453,13 @@ public abstract partial class SharedMoverController : VirtualController
             }
 
             mover.RelativeRotation = (mover.RelativeRotation + adjustment).FlipPositive();
-            Dirty(uid, mover);
+
+            // Forge-Change-Start: throttle mid-lerp dirties (every 2nd tick) — TargetRelativeRotation is already synced when set,
+            // so clients have enough info to render. Halves networked component-state writes
+            // during multi-tick camera lerps. Endpoint snap (else-branch) always dirties.
+            if ((Timing.CurTick.Value & 1u) == 0)
+                Dirty(uid, mover);
+            // Forge-Change-End
         }
         else if (!angleDiff.Equals(Angle.Zero))
         {
@@ -482,23 +518,29 @@ public abstract partial class SharedMoverController : VirtualController
     }
 
     /// <summary>
-    ///     Used for weightlessness to determine if we are near a wall.
+    /// Used for weightlessness to determine if we are near a wall.
     /// </summary>
-    private bool IsAroundCollider(SharedPhysicsSystem broadPhaseSystem, TransformComponent transform, MobMoverComponent mover, EntityUid physicsUid, PhysicsComponent collider)
+    private bool IsAroundCollider(EntityLookupSystem lookupSystem, Entity<PhysicsComponent, MobMoverComponent, TransformComponent> entity)
     {
-        var enlargedAABB = _lookup.GetWorldAABB(physicsUid, transform).Enlarged(mover.GrabRangeVV);
+        var (uid, collider, mover, transform) = entity;
+        var enlargedAABB = _lookup.GetWorldAABB(entity.Owner, transform).Enlarged(mover.GrabRange);
 
-        foreach (var otherCollider in broadPhaseSystem.GetCollidingEntities(transform.MapID, enlargedAABB))
+        _aroundColliderSet.Clear();
+        lookupSystem.GetEntitiesIntersecting(transform.MapID, enlargedAABB, _aroundColliderSet);
+        foreach (var otherEntity in _aroundColliderSet)
         {
-            if (otherCollider == collider)
+            if (otherEntity == uid)
                 continue; // Don't try to push off of yourself!
+
+            if (!PhysicsQuery.TryComp(otherEntity, out var otherCollider))
+                continue;
 
             // Only allow pushing off of anchored things that have collision.
             if (otherCollider.BodyType != BodyType.Static ||
                 !otherCollider.CanCollide ||
-                ((collider.CollisionMask & otherCollider.CollisionLayer) == 0 &&
-                (otherCollider.CollisionMask & collider.CollisionLayer) == 0) ||
-                (TryComp(otherCollider.Owner, out PullableComponent? pullable) && pullable.BeingPulled))
+                (collider.CollisionMask & otherCollider.CollisionLayer) == 0 &&
+                (otherCollider.CollisionMask & collider.CollisionLayer) == 0 ||
+                PullableQuery.TryComp(otherEntity, out var pullable) && pullable.BeingPulled)
             {
                 continue;
             }
@@ -522,7 +564,7 @@ public abstract partial class SharedMoverController : VirtualController
     {
         sound = null;
 
-        if (!CanSound() || !_tags.HasTag(uid, "FootstepSound"))
+        if (!CanSound() || !_tags.HasTag(uid, FootstepSoundTag))
             return false;
 
         var coordinates = xform.Coordinates;
@@ -563,20 +605,24 @@ public abstract partial class SharedMoverController : VirtualController
             return sound != null;
         }
 
-        if (_inventory.TryGetSlotEntity(uid, "shoes", out var shoes) &&
-            FootstepModifierQuery.TryComp(shoes, out var modifier))
+        // Forge-Change-Start: single shoes lookup — was previously called up to 3x per footstep
+        // across this method and TryGetFootstepSound. Pass the EntityUid? through instead of bool.
+        _inventory.TryGetSlotEntity(uid, "shoes", out var shoes);
+
+        if (shoes != null && FootstepModifierQuery.TryComp(shoes, out var modifier))
         {
             sound = modifier.FootstepSoundCollection;
             return sound != null;
         }
 
-        return TryGetFootstepSound(uid, xform, shoes != null, out sound, tileDef: tileDef);
+        return TryGetFootstepSound(uid, xform, shoes, out sound, tileDef: tileDef);
+        // Forge-Change-End
     }
 
     private bool TryGetFootstepSound(
         EntityUid uid,
         TransformComponent xform,
-        bool haveShoes,
+        EntityUid? shoes, // Forge-Change: was bool haveShoes — pass through real EntityUid? to skip duplicate lookups
         [NotNullWhen(true)] out SoundSpecifier? sound,
         ContentTileDefinition? tileDef = null)
     {
@@ -593,12 +639,12 @@ public abstract partial class SharedMoverController : VirtualController
             return sound != null;
         }
 
-        var position = grid.LocalToTile(xform.Coordinates);
+        var position = _mapSystem.LocalToTile(xform.GridUid.Value, grid, xform.Coordinates);
         var soundEv = new GetFootstepSoundEvent(uid);
 
         // If the coordinates have a FootstepModifier component
         // i.e. component that emit sound on footsteps emit that sound
-        var anchored = grid.GetAnchoredEntitiesEnumerator(position);
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(xform.GridUid.Value, grid, position);
 
         while (anchored.MoveNext(out var maybeFootstep))
         {
@@ -610,8 +656,7 @@ public abstract partial class SharedMoverController : VirtualController
                 return true;
             }
 
-            if (_inventory.TryGetSlotEntity(uid, "shoes", out var shoes) &&
-                FootstepModifierQuery.TryComp(maybeFootstep, out var footstep))
+            if (shoes != null && FootstepModifierQuery.TryComp(maybeFootstep, out var footstep)) // Forge-Change: use passed shoes instead of re-querying inventory
             {
                 sound = footstep.FootstepSoundCollection;
                 return sound != null;
@@ -628,8 +673,7 @@ public abstract partial class SharedMoverController : VirtualController
         // End Frontier
 
         // Delta V
-        if (_entities.TryGetComponent(uid, out NoShoesSilentFootstepsComponent? _) &&
-            !_inventory.TryGetSlotEntity(uid, "shoes", out var _))
+        if (shoes == null && _entities.TryGetComponent(uid, out NoShoesSilentFootstepsComponent? _)) // Forge-Change: use passed shoes
         {
             return false;
         }
@@ -638,15 +682,15 @@ public abstract partial class SharedMoverController : VirtualController
         // Walking on a tile.
         // Tile def might have been passed in already from previous methods, so use that
         // if we have it
-        if (tileDef == null && grid.TryGetTileRef(position, out var tileRef))
+        if (tileDef == null && _mapSystem.TryGetTileRef(xform.GridUid.Value, grid, position, out var tileRef))
         {
-            tileDef = (ContentTileDefinition) _tileDefinitionManager[tileRef.Tile.TypeId];
+            tileDef = (ContentTileDefinition)_tileDefinitionManager[tileRef.Tile.TypeId];
         }
 
         if (tileDef == null)
             return false;
 
-        sound = haveShoes ? tileDef.FootstepSounds : tileDef.BarestepSounds;
+        sound = shoes != null ? tileDef.FootstepSounds : tileDef.BarestepSounds; // Forge-Change: use passed shoes (was bool haveShoes)
         return sound != null;
     }
 
@@ -666,11 +710,11 @@ public abstract partial class SharedMoverController : VirtualController
 
     private void OnTileFriction(Entity<MovementSpeedModifierComponent> ent, ref TileFrictionEvent args)
     {
-        if (!TryComp<PhysicsComponent>(ent, out var physicsComponent) || !XformQuery.TryComp(ent, out var xform))
+        if (!PhysicsQuery.TryComp(ent, out var physicsComponent) || !XformQuery.TryComp(ent, out var xform))
             return;
 
         // TODO: Make IsWeightless event based!!!
-        if (physicsComponent.BodyStatus != BodyStatus.OnGround || _gravity.IsWeightless(ent, physicsComponent, xform))
+        if (physicsComponent.BodyStatus != BodyStatus.OnGround || GetWeightlessCached(ent, physicsComponent, xform))
             args.Modifier *= ent.Comp.BaseWeightlessFriction;
         else
             args.Modifier *= ent.Comp.BaseFriction;

@@ -1,0 +1,84 @@
+<Document>
+  # Блюспейс-абордаж
+
+  Система высадки десанта на вражеский шаттл: консоль захватывает цель, платформа отправляет одного оператора, пульт на платформе открывает канал возврата.
+
+  Числа по тирам и режимам — в [textlink="таблице параметров" link="BoardingTeleportBalanceTable"]. Щиты цели: [textlink="сводная таблица щитов" link="ShieldGeneratorsTable"].
+
+  ## Состав комплекта
+
+  <Box>
+  <GuideEntityEmbed Entity="ComputerBoardingTeleport"/>
+  <GuideEntityEmbed Entity="BoardingTeleportEngine"/>
+  <GuideEntityEmbed Entity="BoardingTeleportPlatform"/>
+  <GuideEntityEmbed Entity="BoardingTeleportRemote"/>
+  </Box>
+
+  Опционально: блюспейс-глушитель на защищаемом гриде (см. таблицу); улучшенные / экспериментальные узлы — через R&D и диск T4.
+
+  <Box>
+  <GuideEntityEmbed Entity="BoardingTeleportEngineAdvanced"/>
+  <GuideEntityEmbed Entity="BoardingTeleportPlatformAdvanced"/>
+  <GuideEntityEmbed Entity="BoardingTeleportEngineExperimental"/>
+  <GuideEntityEmbed Entity="BoardingTeleportPlatformExperimental"/>
+  <GuideEntityEmbed Entity="BoardingBluespaceScrambler"/>
+  </Box>
+
+  ## Развёртывание
+
+  1. На одном гриде установите консоль, блюспейс-двигатель и до четырёх платформ с пультами.
+  2. Двигатель сам привяжется к консоли и задаст дальность захвата и допуск по скорости цели.
+  3. Мультитулом добавьте платформы в список устройств консоли.
+  4. В режиме линковки соедините каждый пульт со своей платформой.
+  5. В консоли на карте сектора наведите курсор на вражеский шаттл и щёлкните по нему.
+  6. На экране грида укажите клетку высадки — в том числе стену или закрытую зону (у каждой платформы может быть своя точка).
+  7. Встаньте на платформу и нажмите её пульт — уйдёт один человек; длительность заряда и перезарядка зависят от тира платформы (см. таблицу).
+  8. Пока открыт канал возврата, снова нажмите тот же пульт на домашней платформе. Перед каждым скачком цель и захват проверяются заново.
+
+  ## Консоль
+
+  - **Сектор** — скан и выбор цели; дальность ограничена двигателем.
+  - **Грид** — точка высадки; общая или отдельная на слот платформы.
+  - **Режимы** — скрытный / точный / ускоренный: меняют задержку, разброс и риск дестабилизации (таблица режимов).
+  - **Синхронный залп** — запуск всех готовых платформ с одной точкой.
+  - Захват **стареет**: каждые 30 с +разброс и +риск; после 180 с считается недействительным.
+
+  ## Щиты и глушитель
+
+  Двигатель пробивает щит, только если **класс двигателя строго выше класса щита** цели. Иммунитет `BluespaceTeleportImmune` блокирует любой абордаж.
+
+  Глушитель на целевом гриде при питании **блокирует захват** и увеличивает разброс/риск у атакующих, если прыжок всё же возможен.
+
+  Гриды с компонентом **ProtectedGrid** и флагом `preventTeleportation: true` (аутпосты, депо, ивентовые зоны) **не принимают** блюспейс-высадку.
+
+  ## Возврат
+
+  - **Обычный** — в пределах окна возврата платформы и максимальной дистанции от домашней платформы.
+  - **Досрочный** — если осталось больше 15% окна: подтверждение; риск полного распада тела 5–90% (чем раньше — тем выше); при провале — раздувание 5 с и взрыв на платформе.
+  - **Экстренный** — один раз после сгорания канала: 3 с заряд, 40% риск дестабилизации, высокий разброс.
+
+  ## Исследования
+
+  <Table Columns="3">
+    <ColorBox><Box>Технология</Box></ColorBox>
+    <ColorBox><Box>Стоимость</Box></ColorBox>
+    <ColorBox><Box>Открывает</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">T1 — базовый комплект</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">55 000</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">консоль, платы, T1 флатпаки, пульт, глушитель</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">T2 — улучшенный привод</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">90 000</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">продвинутый двигатель и платформа</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">T4 — фазовый привод</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">125 000</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">эксп. двигатель и платформа (диск T4 + T2)</Box></ColorBox>
+  </Table>
+
+  Военный двигатель T3 в R&D пока не выдаётся (только спавн / админ).
+
+  [textlink="→ Таблица всех числовых параметров" link="BoardingTeleportBalanceTable"]
+
+</Document>

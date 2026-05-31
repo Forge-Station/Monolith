@@ -16,6 +16,7 @@
   description: solarfed-company-description # Forge-change
   color: "#047ABD"
   whitelisted: true
+  companyUplinkCurrency: FederationMilitaryCredit
 
 - type: company
   id: PDV
@@ -23,6 +24,7 @@
   color: "#D2B48C"
   whitelisted: true
   hidden: true # Forge-change: hide
+  companyUplinkCurrency: Doubloon
 
 - type: company
   id: MD
@@ -98,8 +100,13 @@
   description: harmony-medical-enterprises-description
   color: "#FC7303"
   image: /Textures/_Mono/Companies/HME.png
-  icon: HarmonyMedicalEnterprises # Forge-change
-  note: harmony-medical-enterprises-note # Forge-change
+  # Forge-change: add icon, note & special's
+  icon: HarmonyMedicalEnterprises
+  note: harmony-medical-enterprises-note
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyHarmony
 
 - type: company
   id: MidnightArmsCo
@@ -134,6 +141,7 @@
       params:
         volume: -5
         variation: 0.2
+  image: /Textures/_Mono/Companies/USSP.png
 
 # Major companies
 
@@ -275,7 +283,7 @@
 
 - type: company
   id: CerberusSurplusProvisions
-  name: Cerberus Surplus Provisionaries
+  name: Cerberus Surplus Provisions
   description: cerberus-surplus-provisions
   color: "#aa1010"
   image: /Textures/_Mono/Companies/CSP.png

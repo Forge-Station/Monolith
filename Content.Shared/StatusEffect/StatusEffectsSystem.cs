@@ -8,11 +8,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.StatusEffect
 {
-    public sealed class StatusEffectsSystem : EntitySystem
+    public sealed partial class StatusEffectsSystem : EntitySystem
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private AlertsSystem _alertsSystem = default!;
         private List<EntityUid> _toRemove = new();
 
         public override void Initialize()
@@ -60,7 +60,10 @@ namespace Content.Shared.StatusEffect
         {
             // Using new(...) To avoid mispredictions due to MergeImplicitData. This will mean the server-side code is
             // slightly slower, and really this function should just be overridden by the client...
-            args.State = new StatusEffectsComponentState(new(component.ActiveEffects), new(component.AllowedEffects));
+            // Forge-Change:add null-guard — runtime-created components may not have deserialized `allowed` yet.
+            var active = component.ActiveEffects ?? new Dictionary<string, StatusEffectState>();
+            var allowed = component.AllowedEffects ?? new List<string>();
+            args.State = new StatusEffectsComponentState(new(active), new(allowed));
         }
 
         private void OnHandleState(EntityUid uid, StatusEffectsComponent component, ref ComponentHandleState args)

@@ -1,6 +1,6 @@
-humanoid-profile-editor-nationality-label = Национальность
+humanoid-profile-editor-nationality-label = Гражданство
 
-character-nationality-requirement = You must{$inverted ->
-    [true]{" "}not
+character-nationality-requirement = Вы{$inverted ->
+    [true]{" "}не
     *[other]{""}
-} have one of these nationalities: {$nationality}
+} должны иметь одно из этих гражданств: {$nationality}

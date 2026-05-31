@@ -150,6 +150,7 @@
     - NFNfsdTechfabDeprecatedStatic
     - StaticAmmoRecipePack
     - RoundstartShipgunAmmo # Mono
+    - MonoAttachmentsStatic # Mono
     dynamicPacks:
     - NFNfsdTechfabDeprecated
     - DynamicAmmoRecipePack
@@ -198,6 +199,7 @@
     - StaticAmmoRecipePack
     - MonoRestraintsStatic # Mono
     - RoundstartShipgunAmmo # Mono
+    - MonoAttachmentsStatic # Mono
     dynamicPacks:
     - NFMercenaryTechfabDeprecated
     - DynamicAmmoRecipePack
@@ -208,6 +210,7 @@
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged
     - MonoRogueMiscDynamic
+    - MonoUSSPArmorDynamic
     - MonoUSSPMiscDynamic
     - MonoUSSPWeaponsDynamicRanged
     - MonoViperGroupDynamic
@@ -267,6 +270,7 @@
     - StaticAmmoRecipePack
     - MonoRestraintsStatic
     - RoundstartShipgunAmmo # Mono
+    - MonoAttachmentsStatic # Mono
     dynamicPacks:
     - NFHackedMercenaryTechfabDeprecated
     - DynamicAmmoRecipePack
@@ -278,6 +282,7 @@
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged
     - MonoRogueMiscDynamic
+    - MonoUSSPArmorDynamic
     - MonoUSSPMiscDynamic
     - MonoViperGroupDynamic
     - MonoUSSPWeaponsDynamicRanged
@@ -365,6 +370,7 @@
     - PowerCellsStatic
     dynamicPacks:
     - NFBlueprints
+    - ForgeBlueprints # Forge-change
   - type: RequireProjectileTarget
 
 - type: entity

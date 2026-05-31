@@ -4,7 +4,7 @@
   components:
     - type: BasicStationEventScheduler
       scheduledGameRules: !type:NestedSelector
-        tableId: DamagedAIShipsTable
+        tableId: ForgeDamagedAIShipsTable # Forge-Change : New shuttles for ADS
       minimumTimeUntilFirstEvent: 10800 # Forge: 3h before first spawn
       minMaxEventTiming:
         min: 5400 # 90 minutes between events
@@ -16,7 +16,7 @@
   components:
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
-      tableId: DamagedAIShipsTableT2
+      tableId: ForgeDamagedAIShipsTableT2 # Forge-Change : New shuttles for ADS
     minimumTimeUntilFirstEvent: 10800 # Forge: 3h before first spawn
     minMaxEventTiming:
       min: 3600 # 60 minutes between events

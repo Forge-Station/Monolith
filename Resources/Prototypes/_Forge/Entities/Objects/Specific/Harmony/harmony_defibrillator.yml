@@ -1,0 +1,31 @@
+- type: entity
+  id: HMEAdvancedCompactDefibrillator
+  parent: [ BaseDefibrillator, PowerCellSlotMediumItem ]
+  name: HME advanced compact defibrillator
+  description: advanced-compact-defibrillator-desc
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/harmonydefibrillator.rsi
+    layers:
+      - state: icon
+      - state: screen
+        map: [ "enum.ToggleableVisuals.Layer" ]
+        visible: false
+        shader: unshaded
+      - state: ready
+        map: ["enum.PowerDeviceVisualLayers.Powered"]
+        shader: unshaded
+  - type: Item
+    size: Normal
+  - type: ToggleCellDraw
+  - type: PowerCellDraw
+    useRate: 100
+  - type: Defibrillator
+    zapHeal:
+      types:
+        Asphyxiation: -50
+    zapDamage: 2
+    doAfterDuration: 2
+    zapDelay: 3
+  - type: DoAfter
+  - type: UseDelay

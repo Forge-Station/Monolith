@@ -7,19 +7,23 @@ using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Shared.Implants;
 
-public abstract class SharedSubdermalImplantSystem : EntitySystem
+public abstract partial class SharedSubdermalImplantSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     public const string BaseStorageId = "storagebase";
+
+    private static readonly ProtoId<TagPrototype> MicroBombTag = "MicroBomb";
+    private static readonly ProtoId<TagPrototype> MacroBombTag = "MacroBomb";
 
     public override void Initialize()
     {
@@ -42,12 +46,20 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
             _actionsSystem.AddAction(component.ImplantedEntity.Value, ref component.Action, component.ImplantAction, uid);
         }
 
+        // Forge-Change: Allow implants to grant body components directly from YAML.
+        if (component.OnAdd != null)
+            EntityManager.AddComponents(component.ImplantedEntity.Value, component.OnAdd, true);
+
+        // Forge-Change: If the implant was defining removal-state components, undo them on insertion.
+        if (component.OnRemove != null)
+            EntityManager.RemoveComponents(component.ImplantedEntity.Value, component.OnRemove);
+
         //replace micro bomb with macro bomb
-        if (_container.TryGetContainer(component.ImplantedEntity.Value, ImplanterComponent.ImplantSlotId, out var implantContainer) && _tag.HasTag(uid, "MacroBomb"))
+        if (_container.TryGetContainer(component.ImplantedEntity.Value, ImplanterComponent.ImplantSlotId, out var implantContainer) && _tag.HasTag(uid, MacroBombTag))
         {
             foreach (var implant in implantContainer.ContainedEntities)
             {
-                if (_tag.HasTag(implant, "MicroBomb"))
+                if (_tag.HasTag(implant, MicroBombTag))
                 {
                     _container.Remove(implant, implantContainer);
                     QueueDel(implant);
@@ -72,6 +84,14 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
 
         if (component.ImplantAction != null)
             _actionsSystem.RemoveProvidedActions(component.ImplantedEntity.Value, uid);
+
+        // Forge-Change: Remove YAML-granted implant components from the former wearer.
+        if (!_net.IsClient && component.OnAdd != null)
+            EntityManager.RemoveComponents(component.ImplantedEntity.Value, component.OnAdd);
+
+        // Forge-Change: Apply optional post-extraction components, matching organ onRemove behavior.
+        if (!_net.IsClient && component.OnRemove != null)
+            EntityManager.AddComponents(component.ImplantedEntity.Value, component.OnRemove, true);
 
         if (!_container.TryGetContainer(uid, BaseStorageId, out var storageImplant))
             return;

@@ -14,7 +14,7 @@ nf-holopad-general-medical-dispatch = Госпиталь - Приёмная
 # Forge
 nf-holopad-general-medical-dispatch-doc = Госпиталь - Офис Директора TTI
 # Forge end
-nf-holopad-general-nfsd-sheriff-office = ТСФ - Офис Шерифа
+nf-holopad-general-nfsd-sheriff-office = ТСФ — офис командующего офицера
 nf-holopad-general-nfsd-reception = ТСФ - Приёмная
 nf-holopad-general-nfsd-lobby = ТСФ - Лобби
 nf-holopad-general-edison-reception = Электростанция Эдисона - Приёмная

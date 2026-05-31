@@ -14,8 +14,8 @@ namespace Content.Server.Atmos.EntitySystems
 {
     public sealed partial class AtmosphereSystem
     {
-        [Dependency] private readonly DecalSystem _decalSystem = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private DecalSystem _decalSystem = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         private const int HotspotSoundCooldownCycles = 200;
 
@@ -34,10 +34,7 @@ namespace Content.Server.Atmos.EntitySystems
             var gridAtmosphere = ent.Comp1;
             if (!tile.Hotspot.Valid)
             {
-                if (TryGetChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
-                    RemoveChunkTile(gridAtmosphere.HotspotTiles, chunk.HotspotTiles, tile);
-                else
-                    gridAtmosphere.HotspotTiles.Remove(tile);
+                gridAtmosphere.HotspotTiles.Remove(tile);
                 return;
             }
 
@@ -188,8 +185,7 @@ namespace Content.Server.Atmos.EntitySystems
                 };
 
                 AddActiveTile(gridAtmosphere, tile);
-                var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
-                AddChunkTile(gridAtmosphere.HotspotTiles, chunk.HotspotTiles, tile);
+                gridAtmosphere.HotspotTiles.Add(tile);
             }
         }
 

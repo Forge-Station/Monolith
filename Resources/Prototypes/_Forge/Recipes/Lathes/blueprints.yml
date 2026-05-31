@@ -1,0 +1,87 @@
+# Engineering
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintJetpackVoid
+  result: ForgeBlueprintJetpackVoid
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintAdvancedTools
+  result: ForgeBlueprintAdvancedTools
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintAdvancedShipRepairTools
+  result: ForgeBlueprintAdvancedShipRepairTools
+
+# Medical
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintCyberneticArms
+  result: ForgeBlueprintCyberneticArms
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintCyberneticLegs
+  result: ForgeBlueprintCyberneticLegs
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintCyberneticHands
+  result: ForgeBlueprintCyberneticHands
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintCyberneticEyes
+  result: ForgeBlueprintCyberneticEyes
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintCyberneticOrgans
+  result: ForgeBlueprintCyberneticOrgans
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintSubdermalImplants
+  result: ForgeBlueprintSubdermalImplants
+
+# Science
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintNightVisionGoggles
+  result: ForgeBlueprintNightVisionGoggles
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintThermalVisionGoggles
+  result: ForgeBlueprintThermalVisionGoggles
+
+# Armory
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintIncendiaryAmmo
+  result: ForgeBlueprintIncendiaryAmmo
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintUraniumAmmo
+  result: ForgeBlueprintUraniumAmmo
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintAPAmmo
+  result: ForgeBlueprintAPAmmo
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintRIPAmmo
+  result: ForgeBlueprintRIPAmmo
+
+- type: latheRecipe
+  parent: NFBaseBlueprintLatheRecipe
+  id: ForgeBlueprintExplosives
+  result: ForgeBlueprintExplosives

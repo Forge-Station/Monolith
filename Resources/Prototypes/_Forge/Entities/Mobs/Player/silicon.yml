@@ -1,0 +1,337 @@
+- type: entity
+  id: AiHeldForge
+  description: Components added / removed from an entity that gets inserted into an AI core.
+  categories: [ HideSpawnMenu ]
+  abstract: true
+  components:
+  - type: IntrinsicRadioReceiver
+  - type: IgnoreUIRange
+  - type: StationAiHeld
+  - type: StationAiOverlay
+  - type: ShowElectrocutionHUD
+  - type: ActionGrant
+    actions:
+    - ActionJumpToCore
+    - ActionSurvCameraLights
+    - ActionAIViewLaws
+    - ActionOpenRemoteDevicesMenu
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+      enum.SiliconLawsUiKey.Key:
+        type: SiliconLawBoundUserInterface
+      enum.RemoteDeviceUiKey.Key:
+        type: RemoteDevicesBoundUserInterface
+  - type: IntrinsicUI
+    uis:
+      enum.RadarConsoleUiKey.Key:
+        toggleAction: ActionAGhostShowRadar
+  - type: RadarConsole
+    followEntity: false
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewMonitor
+    transmitFrequencyId: ShuttleTimer
+  - type: HolographicAvatar
+    layerData:
+    - sprite: Mobs/Silicon/station_ai.rsi
+      state: default
+  - type: ShowJobIcons
+  - type: AdvancedPilot
+
+- type: entity
+  id: BaseBorgChassisForerunner
+  parent: BaseFactionBorgChassis
+  abstract: true
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+    - SiliconsExpeditionNF
+  - type: Access
+    tags:
+    - NuclearOperative
+    - SyndicateAgent
+    - Remnant
+  - type: AccessReader
+    access: [["Remnant"]]
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Common
+    - Remnants
+    - Traffic
+  - type: ActiveRadio
+    channels:
+    - Common
+    - Remnants
+    - Traffic
+  - type: CollectiveMind
+    channels:
+    - Binary
+    defaultChannel: Binary
+  - type: ShowSyndicateIcons
+  - type: MovementAlwaysTouching
+  - type: Speech
+    speechSounds: SyndieBorg
+    allowedEmotes:
+    - Laugh
+  - type: Vocal
+    sounds:
+      Unsexed: UnisexSiliconSyndicate
+  - type: ShowJobIcons
+  - type: SiliconLawProvider
+    laws: RedactedBorg
+
+- type: entity
+  id: BorgChassisForerunner
+  parent: BaseBorgChassisForerunner
+  name: remnant automated defense system tender
+  description: A tender to an automated drone ship, to keep its internal mechanisms intact.
+  components:
+  - type: Sprite
+    layers:
+    - state: synd_engi
+    - state: synd_engi_e
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: synd_engi_l
+      shader: unshaded
+      map: ["light"]
+      visible: false
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    - Azaziba
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+    - Azaziba
+  - type: BorgChassis
+    maxModules: 10
+    moduleWhitelist:
+      tags:
+      - BorgModuleGeneric
+      - BorgModuleEngineering
+      - BorgModuleSyndicate
+      - BorgModuleSyndicateAssault
+    hasMindState: synd_engi_e
+    noMindState: synd_engi_e
+  - type: Construction
+    node: derelictcyborg
+  - type: InteractionPopup
+    interactSuccessString: petting-success-derelict-cyborg
+    interactFailureString: petting-failure-derelict-cyborg
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      180: Critical
+      250: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      140: 0.7
+      160: 0.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+         damage: 350
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:EmptyContainersBehaviour
+        containers:
+        - borg_brain
+        - borg_module
+        - cell_slot
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: PlayerBorgForerunner
+  parent: BorgChassisSelectableForerunner
+  suffix: Battery, Module
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+      - PositronicBrain
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellAntiqueProto
+  - type: RandomMetadata
+    nameSegments:
+    - MonoRemnantBorgTitle
+    - MonoRemnantAdjective
+    - MonoRemnantNoun
+    - MonoRemnantModifier
+
+# GhostRoles
+- type: entity
+  id: PlayerBorgForerunnerGhostRolePlaytime
+  parent: PlayerBorgForerunner
+  suffix: Ghost, Playtime
+  components:
+  - type: GhostRole
+    name: ghost-role-information-redacted-borg
+    description: ghost-role-information-redacted-borg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 360000 # 100 hours
+    - !type:DepartmentTimeRequirement
+      department: Renegates
+      time: 90000 # 25 hours
+    - !type:DepartmentTimeRequirement
+      department: TSF
+      time: 90000 # 25 hours
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 90000 # 25 hours
+  - type: GhostTakeoverAvailable
+
+# Forerunner AI core
+- type: entity
+  id: PlayerStationAiForerunner
+  parent: PlayerStationAiEmpty
+  suffix: Ghost Role, Forerunner
+  components:
+  - type: Speech
+    speechSounds: SyndieBorg
+    allowedEmotes:
+    - Laugh
+  - type: Vocal
+    sounds:
+      Unsexed: UnisexSiliconSyndicate
+  - type: ContainerComp
+    proto: AiHeldForerunner
+    container: station_ai_mind_slot
+  - type: ContainerFill
+    containers:
+      station_ai_mind_slot:
+      - StationAiBrainForerunner
+  - type: Sprite
+    sprite: Mobs/Silicon/station_ai.rsi
+    layers:
+    - state: base
+    - state: ai
+      shader: unshaded
+  - type: Anchorable
+
+- type: entity
+  id: StationAiBrainForerunner
+  parent: StationAiBrain
+  categories: [ HideSpawnMenu, DoNotMap ]
+  components:
+  - type: Sprite
+  - type: SiliconLawProvider
+    laws: Redacted
+  - type: GhostRole
+    name: ghost-role-information-redacted-core
+    description: ghost-role-information-redacted-core-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    prototype: RemnantAICore
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    - Draconic
+    - Azaziba
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+    - Draconic
+    - Azaziba
+  - type: Access
+    groups:
+    - AllAccess
+    tags:
+    - NuclearOperative
+    - SyndicateAgent
+    - Remnant
+  - type: GhostTakeoverAvailable
+  - type: RandomMetadata
+    nameSegments:
+    - MonoRemnantCoreTitle
+    - MonoRemnantAdjective
+    - MonoRemnantNoun
+  - type: ShuttleBoostingPilot
+    angularMultiplier: 1.2
+    accelerationMultiplier: 1.2
+
+- type: entity
+  id: AiHeldForerunner
+  parent: AiHeldForge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Common
+    - Remnants
+    - Traffic
+  - type: ActiveRadio
+    channels:
+    - Common
+    - Remnants
+    - Traffic
+  - type: CollectiveMind
+    channels:
+    - Binary
+    defaultChannel: Binary
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    - Draconic
+    - Azaziba
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+    - Draconic
+    - Azaziba
+
+# AI Remote
+- type: entity
+  id: PlayerBorgForerunnerAiRemote
+  parent: BorgChassisForerunner
+  suffix: AI Remote, Battery, Module
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+      - AiRemoteBrain
+      borg_module:
+      - BorgModuleForerunnerWeapon
+      - BorgModuleJetpackADM
+      - BorgModuleAdvancedTool
+      - BorgModuleConstruction
+      - BorgModuleCable
+      - BorgModuleForerunnerRCD
+  - type: RandomMetadata
+    nameSegments:
+    - MonoRemnantCoreTitle
+    - MonoRemnantAdjective
+    - MonoRemnantNoun
+    - MonoRemnantModifier

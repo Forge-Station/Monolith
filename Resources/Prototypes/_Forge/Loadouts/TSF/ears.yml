@@ -1,0 +1,95 @@
+- type: loadout
+  id: TsfmcHeadsetTech
+  name: loadout-tsfmc-headset-tech
+  equipment:
+    ears: ClothingHeadsetTsfmcTech
+
+- type: loadoutGroup
+  id: TsfmcEarsTech
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcHeadsetTech
+  fallbacks:
+  - TsfmcHeadsetTech
+
+- type: loadout
+  id: TsfmcHeadsetSeniorTech
+  name: loadout-tsfmc-headset-senior-tech
+  equipment:
+    ears: ClothingHeadsetAltTsfmcTech
+
+- type: loadoutGroup
+  id: TsfmcEarsSeniorTech
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcHeadsetSeniorTech
+  fallbacks:
+  - TsfmcHeadsetSeniorTech
+
+- type: loadout
+  id: TsfmcHeadsetCommand
+  name: loadout-tsfmc-headset-command
+  equipment:
+    ears: ClothingHeadsetAltTsfmcCommand
+
+- type: loadoutGroup
+  id: TsfmcEarsCommand
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcHeadsetCommand
+  fallbacks:
+  - TsfmcHeadsetCommand
+
+- type: loadout
+  id: TsfmcHeadsetOfficer
+  name: loadout-tsfmc-headset-officer
+  equipment:
+    ears: ClothingHeadsetAltTsfmcOfficer
+
+- type: loadoutGroup
+  id: TsfmcEarsOfficer
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcHeadsetOfficer
+  fallbacks:
+  - TsfmcHeadsetOfficer
+
+- type: loadout
+  id: TsfmcHeadsetAmbassador
+  name: loadout-tsfmc-headset-ambassador
+  equipment:
+    ears: ClothingHeadsetAltTsfmcAmbassador
+
+- type: loadoutGroup
+  id: TsfmcEarsAmbassador
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcHeadsetAmbassador
+  fallbacks:
+  - TsfmcHeadsetAmbassador
+
+- type: loadout
+  id: TsfmcCommanderHeadsetTsf
+  name: loadout-tsfmc-commander-headset
+  equipment:
+    ears: ClothingHeadsetAltTsfmcCommanderTsf
+
+- type: loadoutGroup
+  id: TsfmcEarsCommanderTsf
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcCommanderHeadsetTsf
+  fallbacks:
+  - TsfmcCommanderHeadsetTsf

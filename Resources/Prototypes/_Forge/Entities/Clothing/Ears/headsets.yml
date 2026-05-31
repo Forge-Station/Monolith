@@ -15,3 +15,85 @@
     sprite: Clothing/Ears/Headsets/medical.rsi
   - type: Clothing
     sprite: Clothing/Ears/Headsets/medical.rsi
+
+# region TSF
+
+- type: entity
+  parent: ClothingHeadsetTsfmc
+  id: ClothingHeadsetTsfmcTech
+  suffix: ТСФ
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyNfsd
+      - EncryptionKeyTsfTech
+
+# Forge-Change: младший офицер — без обычного Command
+- type: entity
+  parent: ClothingHeadsetAltTsfmc
+  id: ClothingHeadsetAltTsfmcTech
+  suffix: ТСФ
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyNfsd
+      - EncryptionKeyTsfTech
+
+- type: entity
+  parent: ClothingHeadsetAltTsfmc
+  id: ClothingHeadsetAltTsfmcCommand
+  suffix: ТСФ
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyNfsd
+      - EncryptionKeyCommand
+      - EncryptionKeyTsfTech
+      - EncryptionKeyTsfCom
+
+# Forge-Change: без обычного Command — только Команд. ТСФ
+- type: entity
+  parent: ClothingHeadsetAltTsfmc
+  id: ClothingHeadsetAltTsfmcOfficer
+  suffix: ТСФ
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyNfsd
+      - EncryptionKeyTsfTech
+      - EncryptionKeyTsfCom
+
+# Forge-Change: без СКАТ ТСФ
+- type: entity
+  parent: ClothingHeadsetAltTsfmc
+  id: ClothingHeadsetAltTsfmcAmbassador
+  suffix: ТСФ
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyNfsd
+      - EncryptionKeyCommand
+      - EncryptionKeyTsfCom
+
+- type: entity
+  parent: ClothingHeadsetAltTsfmcCommander
+  id: ClothingHeadsetAltTsfmcCommanderTsf
+  suffix: ТСФ
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyNfsd
+      - EncryptionKeyTsfTech
+      - EncryptionKeyTsfCom

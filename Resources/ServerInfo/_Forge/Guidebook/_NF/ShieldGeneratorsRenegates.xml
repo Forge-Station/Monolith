@@ -1,0 +1,31 @@
+<Document>
+  # Ренегаты — Темп ближнего боя
+
+  Агрессивные щиты для ближних схваток. Очень быстро восстанавливаются после перегрузки — за счёт тонкого запаса прочности и высокого потребления при повреждениях. Предназначены для судов, которые сражаются на короткой дистанции и рассчитывают на серии быстрых атак.
+
+  Числовые строки ниже подставляются из entity-прототипов ([italic]protodata[/italic]) и совпадают с симуляцией.
+
+  <Box>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeRenegateHeavy"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeRenegatePrismatic"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeRenegateCollision"/>
+    <GuideEntityEmbed Entity="ShieldGeneratorForgeRenegateSkullDebt"/>
+  </Box>
+
+  [color=#E87B45][bold]RSG-420 «Пыльная цитадель» (Dust Citadel)[/bold][/color] — Тяжёлый
+  Экстремальная регенерация и короткий перегруз; узкий лимит и крутая кривая под залпами.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeRenegateHeavy" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#E85BB8][bold]RSG-470P «Азимутовая завеса» (Azimuth Veil)[/bold][/color] — Призматический
+  Очень глубокий лимит и быстрая регенерация в бою; высокие крейс и пик.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeRenegatePrismatic" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#9C3D2E][bold]RSG-600C «Шпора Галандека» (Galandec Spur)[/bold][/color] — Коллизионный
+  Сильный антитаран и высокая регенерация; длинный перегруз и высокий пик.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeRenegateCollision" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+  [color=#CC0044][bold]RSG-435 «Черепная сделка» (Skull Debt)[/bold][/color] — Кровавый темп
+  Максимальная регенерация и коротейший перегруз в классе; самая крутая кривая нагрузки в линейке ренегатов и узкий лимит.
+  [color=#aaaaaa]Лимит:[/color] [protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="DamageLimit" format="N0"] · [color=#aaaaaa]Рег/с:[/color] [protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="HealPerSecond" format="N0"] · [color=#aaaaaa]База–пик Вт:[/color] [protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="BaseDraw" format="N0"]–[protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="MaxDraw" format="N0"] · [color=#aaaaaa]Автономия:[/color] ×[protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="UnpoweredBonus" format="0.##"] · [color=#aaaaaa]Перегр.:[/color] [protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="DamageOverloadTimePunishment" format="N0"] с · [color=#aaaaaa]Таран:[/color] [protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="CollisionResistanceMultiplier" format="0.##"] · [color=#aaaaaa]Рост нагр.:[/color] [protodata="ShieldGeneratorForgeRenegateSkullDebt" comp="ShipShieldEmitter" member="DamageExp" format="0.##"]
+
+</Document>

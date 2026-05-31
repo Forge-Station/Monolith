@@ -4745,7 +4745,7 @@ entities:
     - type: Transform
       pos: -1.5,5.5
       parent: 1
-- proto: ShieldGeneratorSmall
+- proto: ShieldGeneratorFSG100
   entities:
   - uid: 609
     components:

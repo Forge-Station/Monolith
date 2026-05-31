@@ -1,4 +1,5 @@
 using Content.Server._NF.Radio; // Frontier
+using Content.Server._Forge.Radio.EntitySystems; // Forge-Change: configurable encryption key frequencies.
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server._EinsteinEngines.Language;
@@ -26,15 +27,16 @@ namespace Content.Server.Radio.EntitySystems;
 /// <summary>
 ///     This system handles intrinsic radios and the general process of converting radio messages into chat messages.
 /// </summary>
-public sealed class RadioSystem : EntitySystem
+public sealed partial class RadioSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly IReplayRecordingManager _replay = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly LanguageSystem _language = default!; // Einstein Engines - Language
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private IReplayRecordingManager _replay = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private LanguageSystem _language = default!; // Einstein Engines - Language
+    [Dependency] private ConfigurableEncryptionKeySystem _configurableKeys = default!; // Forge-Change
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
@@ -67,6 +69,9 @@ public sealed class RadioSystem : EntitySystem
     {
         if (TryComp<RadioMicrophoneComponent>(source, out var radioMicrophone))
             return radioMicrophone.Frequency;
+
+        if (_configurableKeys.TryGetFrequency(source, channel.ID, out var keyFrequency)) // Forge-Change
+            return keyFrequency;
 
         return channel.Frequency;
     }
@@ -204,7 +209,7 @@ public sealed class RadioSystem : EntitySystem
         var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
 
         if (frequency == null) // Nuclear-14
-            frequency = GetFrequency(messageSource, channel); // Nuclear-14
+            frequency = GetFrequency(radioSource, channel); // Nuclear-14
 
         while (canSend && radioQuery.MoveNext(out var receiver, out var radio, out var transform))
         {

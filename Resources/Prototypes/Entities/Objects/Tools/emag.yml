@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: BaseItem # Mono # Forge-Change-delete: BaseFactionGearPDVT1
   id: EmagUnlimited
   suffix: Unlimited
   name: cryptographic sequencer

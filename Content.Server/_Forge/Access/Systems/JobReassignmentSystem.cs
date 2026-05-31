@@ -19,6 +19,7 @@ using Content.Shared.Roles;
 using Content.Shared.StationRecords;
 using Content.Shared.StatusIcon;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.Access.Systems;
@@ -39,6 +40,7 @@ public sealed class JobReassignmentSystem : EntitySystem
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly StationRecordsSystem _record = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     public bool TryResolveJobData(ProtoId<JobPrototype> jobId, out JobReassignmentData data)
     {
@@ -182,7 +184,7 @@ public sealed class JobReassignmentSystem : EntitySystem
 
         _jobs.MindAddJob(mindId, data.Job.ID);
 
-        if (_mind.TryGetSession(mind, out var session))
+        if (mind.UserId is { } userId && _player.TryGetSessionById(userId, out var session))
             _playtime.QueueRefreshTrackers(session);
 
         var playerJob = EnsureComp<PlayerJobComponent>(target);

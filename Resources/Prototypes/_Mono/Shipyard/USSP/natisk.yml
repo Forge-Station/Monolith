@@ -12,6 +12,7 @@
   shuttlePath: /Maps/_Mono/Shuttles/USSP/natisk.yml
   guidebookPage: Null
   class:
+  - Patrol
   - Pursuit
   engine:
   - AME

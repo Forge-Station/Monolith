@@ -32,7 +32,7 @@
   name: research-technology-bluespace-energy-T3
   entityIcon: BsTransmitterT1
   discipline: Industrial
-  tier: 4
+  tier: 3
   cost: 30000
   position: -3, 3
   technologyPrerequisites:

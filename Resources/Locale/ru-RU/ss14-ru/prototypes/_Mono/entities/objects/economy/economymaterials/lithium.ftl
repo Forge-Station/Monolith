@@ -1,0 +1,12 @@
+ent-MaterialLithium = литий
+    .suffix = Полный
+    .desc = Литий — мягкий хрупкий металл, широко применяемый в электронике, особенно в щелочных батареях. Он ещё и опасно реактивен!
+ent-SheetLithium1 = { ent-MaterialLithium }
+    .suffix = 1
+    .desc = { ent-MaterialLithium.desc }
+ent-SheetLithium10 = { ent-MaterialLithium }
+    .suffix = 10
+    .desc = { ent-MaterialLithium.desc }
+ent-SheetLithium50 = { ent-MaterialLithium }
+    .suffix = 50
+    .desc = { ent-MaterialLithium.desc }

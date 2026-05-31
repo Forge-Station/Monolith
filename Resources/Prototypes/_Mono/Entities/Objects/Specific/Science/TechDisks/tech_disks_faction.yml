@@ -324,3 +324,24 @@
     - Magazine635x40mmCaseless
     - AmmoBox635x40mmCaseless
     - MagazineAsmgtUniversal635x40mm
+
+# Forge-Change: Omega Gunnery Tech Disk
+- type: entity
+  parent: TechDiskBase
+  id: TechDiskOmegaGunnery
+  name: omega gunnery systems tech disk
+  description: A disk capable of adding omega-tier gunnery server upgrades to an R&D server.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base"]
+      color: "#d4d4d4"
+    - state: label
+    - state: protect
+    - state: holo
+      shader: unshaded
+  - type: TechnologyDisk
+    recipes:
+    - GCSOmegaUpgradeCircuitboard
+# Forge-Change: end

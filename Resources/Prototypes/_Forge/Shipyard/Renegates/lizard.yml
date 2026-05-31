@@ -1,0 +1,30 @@
+- type: vessel
+  id: lizard
+  parent: BaseVessel
+  name: Ящер
+  description: Малый разведчик повстанцев. Вооружен.. Он вроде вооружен. Для выстрела активировать таймер сигнала. Удачи
+  price: 9000
+  category: Small
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/lizard.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  - Scrapyard
+  - Pirate
+
+- type: gameMap
+  id: lizard
+  mapName: 'Ящер'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/lizard.yml
+  minPlayers: 0
+  stations:
+    lizard:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Ящер MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

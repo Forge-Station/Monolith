@@ -1,0 +1,26 @@
+- type: latheRecipePack
+  id: ForgeShipWeaponsDynamic
+  recipes:
+  - ShipWeaponFabricatorCircuitboard
+  - WeaponTurretL85AutocannonCircuitboard
+  - WeaponTurretM25Circuitboard
+  - WeaponLaserTurretL1PhalanxCircuitboard
+  - WeaponTurretRAC30Circuitboard
+  - WeaponTurretAK570Circuitboard
+  - WeaponTurretDravonCircuitboard
+  - WeaponTurretType35Circuitboard
+  - WeaponTurretM220Circuitboard
+  - WeaponTurretVesperaCircuitboard
+  - WeaponTurretVanykCircuitboard
+  - WeaponTurretCerberusCircuitboard
+  - WeaponTurretBoforsCircuitboard
+  - WeaponTurretTarnyxReloadCircuitboard
+  - WeaponLaserTurretPrometheusCircuitboard
+  - WeaponTurretSerpentMissileCircuitboard
+  - WeaponTurretTovekCircuitboard
+  - WeaponTurretASM220Circuitboard
+  - WeaponTurretLightMunitionsBayCircuitboard
+  - WeaponTurretLongbowCircuitboard
+  - WeaponTurretCyrexaCircuitboard
+  - WeaponTurretCharonReloadCircuitboard
+  - WeaponLaserTurretApolloCircuitboard

@@ -2296,7 +2296,7 @@ entities:
     - type: ShipGridLock
       locked: False
     - type: ThermalSignature
-- proto: 220mmCartridge
+- proto: 220mmCartridgeAPHE
   entities:
   - uid: 2
     components:

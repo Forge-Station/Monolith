@@ -1,0 +1,27 @@
+- type: pointOfInterest
+  id: Durka
+  parent: BasePOI
+  name: 'Психиатрическая лечебница Сургут-6'
+  minimumDistance: 12500
+  maximumDistance: 13500
+  spawnGroup: Required
+  gridPath: /Maps/_Forge/POI/Durka.yml
+  addComponents:
+  - type: IFF
+    color: "#780707"
+  - type: ProtectedGrid
+    preventTeleportation: true
+
+- type: gameMap
+  id: Durka
+  mapName: 'Психиатрическая лечебница Сургут-6'
+  mapPath: /Maps/_Forge/POI/Durka.yml
+  minPlayers: 0
+  stations:
+    Durka:
+      stationProto: RecordsFrontierOutpostCargo
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Психиатрическая лечебница Сургут-6'
+        - type: StationDeadDrop
+          maxDeadDrops: 6

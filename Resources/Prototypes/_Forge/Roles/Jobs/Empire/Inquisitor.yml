@@ -38,7 +38,7 @@
       factions:
       - Empire
     - !type:AddImplantSpecial
-      implants: [ ImplantGuard ]
+      implants: [ ImplantGuard , EmpireTrackingImplant]
 
 - type: startingGear
   id: InquisitorGear

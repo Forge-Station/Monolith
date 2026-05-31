@@ -212,4 +212,7 @@
   id: NoGridGodmode
 
 - type: Tag
+  id: ForgeHandheldMonitoringConsole
+
+- type: Tag
   id: 40mmCartridge

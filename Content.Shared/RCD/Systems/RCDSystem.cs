@@ -11,6 +11,10 @@ using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Rotatable;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Atmos.EntitySystems;
+using Content.Shared.Construction.Components;
 using Content.Shared.RCD.Components;
 using Content.Shared._NF.Shipyard.Components; // Frontier
 using Content.Shared.Tag;
@@ -54,6 +58,12 @@ public partial class RCDSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private TagSystem _tags = default!;
 
+    #region Forge-Change
+
+    [Dependency] private SharedAtmosPipeLayersSystem _pipeLayers = default!;
+
+    #endregion
+
     private readonly int _instantConstructionDelay = 0;
     private readonly EntProtoId _instantConstructionFx = "EffectRCDConstruct0";
     private readonly ProtoId<RCDPrototype> _deconstructTileProto = "DeconstructTile";
@@ -61,6 +71,7 @@ public partial class RCDSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> CatwalkTag = "Catwalk";
 
     private HashSet<EntityUid> _intersectingEntities = new();
+    private readonly List<EntityUid> _rpdDeconstructCandidates = new();
 
     public override void Initialize()
     {
@@ -73,6 +84,9 @@ public partial class RCDSystem : EntitySystem
         SubscribeLocalEvent<RCDComponent, DoAfterAttemptEvent<RCDDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<RCDComponent, RCDSystemMessage>(OnRCDSystemMessage);
         SubscribeNetworkEvent<RCDConstructionGhostRotationEvent>(OnRCDconstructionGhostRotationEvent);
+        // Forge-Change
+        SubscribeNetworkEvent<RCDConstructionGhostFlipEvent>(OnRCDConstructionGhostFlipEvent);
+        SubscribeNetworkEvent<RCDConstructionGhostLayerEvent>(OnRCDConstructionGhostLayerEvent);
     }
 
     #region Event handling
@@ -82,7 +96,8 @@ public partial class RCDSystem : EntitySystem
         // On init, set the RCD to its first available recipe
         if (component.AvailablePrototypes.Any())
         {
-            component.ProtoId = component.AvailablePrototypes.First();
+            // Forge-Change: RPD starts with no recipe until the player picks one in the menu
+            component.ProtoId = component.IsRpd ? "Invalid" : component.AvailablePrototypes.First();
             UpdateCachedPrototype(uid, component);
             Dirty(uid, component);
 
@@ -104,6 +119,10 @@ public partial class RCDSystem : EntitySystem
 
         // Set the current RCD prototype to the one supplied
         component.ProtoId = args.ProtoId;
+        // Forge-Change
+        component.UseMirrorPrototype = false;
+        component.ConstructionEntity = null;
+        component.ConstructionPipeLayer = AtmosPipeLayer.Primary;
         UpdateCachedPrototype(uid, component);
         Dirty(uid, component);
     }
@@ -133,7 +152,7 @@ public partial class RCDSystem : EntitySystem
     }
     private void OnAfterInteract(EntityUid uid, RCDComponent component, AfterInteractEvent args)
     {
-        if (args.Handled || !args.CanReach)
+        if (args.Handled)
             return;
 
         var user = args.User;
@@ -149,7 +168,35 @@ public partial class RCDSystem : EntitySystem
             return;
         }
 
-        if (!IsRCDOperationStillValid(uid, component, mapGridData.Value, args.Target, args.User))
+        var isRpdDeconstruct = component.IsRpd && component.CachedPrototype.Mode == RcdMode.Deconstruct;
+
+        // Forge-Change: ignore floor/plating raycast hits; reach is checked against the tile
+        if (!isRpdDeconstruct && !args.CanReach)
+            return;
+
+        var deconstructTarget = args.Target;
+        if (isRpdDeconstruct)
+        {
+            var worldClick = _transform.ToMapCoordinates(location);
+            TryResolveRpdDeconstructTarget(component, mapGridData.Value, worldClick, args.Target, out deconstructTarget);
+        }
+
+        // Forge-Change
+        string? rpdConstructionEntity = null;
+        if (component.IsRpd && component.CachedPrototype.Mode == RcdMode.ConstructObject)
+        {
+            if (component.ConstructionEntity != null
+                && IsValidRpdConstructionEntity(component, component.ConstructionEntity))
+            {
+                rpdConstructionEntity = component.ConstructionEntity;
+            }
+            else
+            {
+                TryResolveRpdConstructionEntity(uid, component, mapGridData.Value, out rpdConstructionEntity);
+            }
+        }
+
+        if (!IsRCDOperationStillValid(uid, component, mapGridData.Value, deconstructTarget, args.User, rpdConstructionEntity: rpdConstructionEntity))
             return;
 
         if (!_net.IsServer)
@@ -168,9 +215,9 @@ public partial class RCDSystem : EntitySystem
             case RcdMode.Deconstruct:
 
                 // Deconstructing an object
-                if (args.Target != null)
+                if (deconstructTarget != null)
                 {
-                    if (TryComp<RCDDeconstructableComponent>(args.Target, out var destructible))
+                    if (TryComp<RCDDeconstructableComponent>(deconstructTarget, out var destructible))
                     {
                         cost = destructible.Cost;
                         delay = destructible.Delay;
@@ -217,9 +264,19 @@ public partial class RCDSystem : EntitySystem
         _transform.SetParent(effect, gridData.GridUid);
         _transform.SetLocalPositionNoLerp(effect, gridData.Position + new Vector2(0.5f, 0.5f));
         // </Mono>
-        var ev = new RCDDoAfterEvent(GetNetCoordinates(mapGridData.Value.Location), component.ConstructionDirection, component.ProtoId, cost, EntityManager.GetNetEntity(effect));
+        var ev = new RCDDoAfterEvent(
+            GetNetCoordinates(mapGridData.Value.Location),
+            component.ConstructionDirection,
+            component.ProtoId,
+            cost,
+            EntityManager.GetNetEntity(effect),
+            rpdConstructionEntity,
+            isRpdDeconstruct ? GetNetEntity(deconstructTarget) : null,
+            component.ConstructionPipeLayer);
 
-        var doAfterArgs = new DoAfterArgs(EntityManager, user, delay*component.DelayMultiplier, ev, uid, target: args.Target, used: uid) // Mono - add delay multiplier.
+        // Forge-Change: pipes under plating fail DoAfter reach checks when the pipe is the target entity
+        var doAfterTarget = isRpdDeconstruct ? null : deconstructTarget;
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, delay*component.DelayMultiplier, ev, uid, target: doAfterTarget, used: uid) // Mono - add delay multiplier.
         {
             BreakOnDamage = true,
             BreakOnHandChange = true,
@@ -257,7 +314,9 @@ public partial class RCDSystem : EntitySystem
             return;
         }
 
-        if (!IsRCDOperationStillValid(uid, component, mapGridData.Value, args.Event.Target, args.Event.User))
+        var deconstructTarget = GetRpdDeconstructTargetFromDoAfter(args.Event);
+
+        if (!IsRCDOperationStillValid(uid, component, mapGridData.Value, deconstructTarget, args.Event.User, rpdConstructionEntity: args.Event.ConstructionEntity))
             args.Cancel();
     }
 
@@ -276,12 +335,22 @@ public partial class RCDSystem : EntitySystem
         if (!TryGetMapGridData(location, out var mapGridData))
             return;
 
+        var deconstructTarget = GetRpdDeconstructTargetFromDoAfter(args);
+
         // Ensure the RCD operation is still valid
-        if (!IsRCDOperationStillValid(uid, component, mapGridData.Value, args.Target, args.User))
+        if (!IsRCDOperationStillValid(uid, component, mapGridData.Value, deconstructTarget, args.User, rpdConstructionEntity: args.ConstructionEntity))
             return;
 
         // Finalize the operation
-        FinalizeRCDOperation(uid, component, mapGridData.Value, args.Direction, args.Target, args.User);
+        FinalizeRCDOperation(
+            uid,
+            component,
+            mapGridData.Value,
+            args.Direction,
+            deconstructTarget,
+            args.User,
+            args.ConstructionEntity,
+            args.ConstructionPipeLayer);
 
         // Play audio and consume charges
         _audio.PlayPredicted(component.SuccessSound, uid, args.User);
@@ -308,11 +377,48 @@ public partial class RCDSystem : EntitySystem
         Dirty(uid, rcd);
     }
 
+    // Forge-Change
+    private void OnRCDConstructionGhostFlipEvent(RCDConstructionGhostFlipEvent ev, EntitySessionEventArgs session)
+    {
+        var uid = GetEntity(ev.NetEntity);
+
+        if (session.SenderSession.AttachedEntity is not { } player)
+            return;
+
+        if (!TryComp<HandsComponent>(player, out var hands) || uid != hands.ActiveHand?.HeldEntity)
+            return;
+
+        if (!TryComp<RCDComponent>(uid, out var rcd))
+            return;
+
+        rcd.UseMirrorPrototype = ev.UseMirrorPrototype;
+        Dirty(uid, rcd);
+    }
+
+    private void OnRCDConstructionGhostLayerEvent(RCDConstructionGhostLayerEvent ev, EntitySessionEventArgs session)
+    {
+        var uid = GetEntity(ev.NetEntity);
+
+        if (session.SenderSession.AttachedEntity is not { } player)
+            return;
+
+        if (!TryComp<HandsComponent>(player, out var hands) || uid != hands.ActiveHand?.HeldEntity)
+            return;
+
+        if (!TryComp<RCDComponent>(uid, out var rcd))
+            return;
+
+        rcd.PipeLayerEyeRotation = ev.EyeRotation;
+        rcd.ConstructionEntity = string.IsNullOrEmpty(ev.ConstructionEntity) ? null : ev.ConstructionEntity;
+        rcd.ConstructionPipeLayer = ev.PipeLayer;
+        Dirty(uid, rcd);
+    }
+
     #endregion
 
     #region Entity construction/deconstruction rule checks
 
-    public bool IsRCDOperationStillValid(EntityUid uid, RCDComponent component, MapGridData mapGridData, EntityUid? target, EntityUid user, bool popMsgs = true)
+    public bool IsRCDOperationStillValid(EntityUid uid, RCDComponent component, MapGridData mapGridData, EntityUid? target, EntityUid user, bool popMsgs = true, string? rpdConstructionEntity = null)
     {
         // Update cached prototype if required
         UpdateCachedPrototype(uid, component);
@@ -338,12 +444,26 @@ public partial class RCDSystem : EntitySystem
         }
 
         // Exit if the target / target location is obstructed
-        var unobstructed = (target == null)
+        var unobstructed = component.IsRpd && component.CachedPrototype.Mode == RcdMode.Deconstruct
             ? _interaction.InRangeUnobstructed(user, _mapSystem.GridTileToWorld(mapGridData.GridUid, mapGridData.Component, mapGridData.Position), popup: popMsgs)
-            : _interaction.InRangeUnobstructed(user, target.Value, popup: popMsgs);
+            : target == null
+                ? _interaction.InRangeUnobstructed(user, _mapSystem.GridTileToWorld(mapGridData.GridUid, mapGridData.Component, mapGridData.Position), popup: popMsgs)
+                : _interaction.InRangeUnobstructed(user, target.Value, popup: popMsgs);
 
         if (!unobstructed)
             return false;
+
+        // Forge-Change
+        if (component.IsRpd
+            && component.CachedPrototype.Mode == RcdMode.ConstructObject
+            && rpdConstructionEntity != null
+            && !IsValidRpdConstructionEntity(component, rpdConstructionEntity))
+        {
+            if (popMsgs)
+                _popup.PopupClient(Loc.GetString("rcd-component-cannot-build-on-occupied-tile-message"), uid, user);
+
+            return false;
+        }
 
         // Return whether the operation location is valid
         switch (component.CachedPrototype.Mode)
@@ -459,9 +579,27 @@ public partial class RCDSystem : EntitySystem
 
     private bool IsDeconstructionStillValid(EntityUid uid, RCDComponent component, MapGridData mapGridData, EntityUid? target, EntityUid user, bool popMsgs = true)
     {
+        // Forge-Change: resolve hidden pipes only when we do not already have a stored target
+        if (component.IsRpd
+            && component.CachedPrototype.Mode == RcdMode.Deconstruct
+            && !IsValidRpdDeconstructTarget(target))
+        {
+            var worldClick = _transform.ToMapCoordinates(mapGridData.Location);
+            TryResolveRpdDeconstructTarget(component, mapGridData, worldClick, null, out target);
+        }
+
         // Attempt to deconstruct a floor tile
         if (target == null)
         {
+            // Forge-Change
+            if (component.IsRpd)
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-nothing-to-deconstruct-message"), uid, user);
+
+                return false;
+            }
+
             // The tile is empty
             if (mapGridData.Tile.Tile.IsEmpty)
             {
@@ -495,8 +633,17 @@ public partial class RCDSystem : EntitySystem
         // Attempt to deconstruct an object
         else
         {
-            // The object is not in the whitelist
-            if (!TryComp<RCDDeconstructableComponent>(target, out var deconstructible) || !deconstructible.Deconstructable)
+            // Forge-Change
+            if (!TryComp<RCDDeconstructableComponent>(target, out var deconstructible)
+                || component.IsRpd && !deconstructible.RpdDeconstructable)
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-deconstruct-target-not-on-whitelist-message"), uid, user);
+
+                return false;
+            }
+
+            if (!deconstructible.Deconstructable)
             {
                 if (popMsgs)
                     _popup.PopupClient(Loc.GetString("rcd-component-deconstruct-target-not-on-whitelist-message"), uid, user);
@@ -512,7 +659,15 @@ public partial class RCDSystem : EntitySystem
 
     #region Entity construction/deconstruction
 
-    private void FinalizeRCDOperation(EntityUid uid, RCDComponent component, MapGridData mapGridData, Direction direction, EntityUid? target, EntityUid user)
+    private void FinalizeRCDOperation(
+        EntityUid uid,
+        RCDComponent component,
+        MapGridData mapGridData,
+        Direction direction,
+        EntityUid? target,
+        EntityUid user,
+        string? doAfterConstructionEntity = null,
+        AtmosPipeLayer doAfterPipeLayer = AtmosPipeLayer.Primary)
     {
         if (!_net.IsServer)
             return;
@@ -528,19 +683,47 @@ public partial class RCDSystem : EntitySystem
                 break;
 
             case RcdMode.ConstructObject:
-                var ent = Spawn(component.CachedPrototype.Prototype, _mapSystem.GridTileToLocal(mapGridData.GridUid, mapGridData.Component, mapGridData.Position));
+                // Forge-Change: ignore stale pipe-layer proto after switching recipes (e.g. pipe -> scrubber)
+                var proto = GetRpdSpawnPrototype(component, doAfterConstructionEntity);
 
-                switch (component.CachedPrototype.Rotation)
+                if (string.IsNullOrEmpty(proto))
+                    return;
+
+                var entityCoords = _mapSystem.GridTileToLocal(mapGridData.GridUid, mapGridData.Component, mapGridData.Position);
+                var ent = Spawn(proto, entityCoords);
+
+                // Forge-Change: match placement rotation (RPD unary devices lack RotatableComponent but use pipe connectors)
+                if (component.CachedPrototype.Rotation != RcdRotation.Fixed
+                    && (component.IsRpd
+                        || _protoManager.TryIndex<EntityPrototype>(proto, out var spawnProto)
+                            && spawnProto.TryGetComponent<RotatableComponent>(out _, EntityManager.ComponentFactory)))
                 {
-                    case RcdRotation.Fixed:
-                        Transform(ent).LocalRotation = Angle.Zero;
-                        break;
-                    case RcdRotation.Camera:
-                        Transform(ent).LocalRotation = Transform(uid).LocalRotation;
-                        break;
-                    case RcdRotation.User:
-                        Transform(ent).LocalRotation = direction.ToAngle();
-                        break;
+                    var gridRotation = _transform.GetWorldRotation(mapGridData.GridUid);
+                    var localRotation = component.CachedPrototype.Rotation switch
+                    {
+                        RcdRotation.Fixed => Angle.Zero,
+                        RcdRotation.Camera => _transform.GetWorldRotation(user) - gridRotation,
+                        RcdRotation.User => direction.ToAngle(),
+                        _ => Angle.Zero,
+                    };
+
+                    _transform.SetLocalRotation(ent, localRotation);
+                }
+
+                if (TryComp<AnchorableComponent>(ent, out var anchorable)
+                    && (anchorable.Flags & AnchorableFlags.Anchorable) != 0)
+                {
+                    var xform = Transform(ent);
+                    if (!xform.Anchored)
+                        _transform.AnchorEntity(ent, xform);
+                }
+
+                // Forge-Change: logistics only — pipes encode layer via alt prototypes; SetPipeLayer resets connectors to center
+                if (component.IsRpd
+                    && UsesRpdLogisticsPipeLayer(component.CachedPrototype.Prototype)
+                    && TryComp<AtmosPipeLayersComponent>(ent, out var pipeLayers))
+                {
+                    _pipeLayers.SetPipeLayer((ent, pipeLayers), doAfterPipeLayer);
                 }
 
                 _adminLogger.Add(LogType.RCD, LogImpact.High, $"{ToPrettyString(user):user} used RCD to spawn {ToPrettyString(ent)} at {mapGridData.Position} on grid {mapGridData.GridUid}");
@@ -602,9 +785,312 @@ public partial class RCDSystem : EntitySystem
 
     public void UpdateCachedPrototype(EntityUid uid, RCDComponent component)
     {
-        if (component.ProtoId.Id != component.CachedPrototype?.Prototype)
+        if (component.ProtoId.Id != component.CachedPrototype?.ID)
             component.CachedPrototype = _protoManager.Index(component.ProtoId);
+
+        SanitizeRpdConstructionEntity(uid, component);
     }
+
+    #region Forge-Change
+
+    private string? GetRpdSpawnPrototype(RCDComponent component, string? doAfterConstructionEntity)
+    {
+        if (doAfterConstructionEntity != null
+            && IsValidRpdConstructionEntity(component, doAfterConstructionEntity))
+        {
+            return doAfterConstructionEntity;
+        }
+
+        if (component.ConstructionEntity != null
+            && IsValidRpdConstructionEntity(component, component.ConstructionEntity))
+        {
+            return component.ConstructionEntity;
+        }
+
+        if (component.UseMirrorPrototype && !string.IsNullOrEmpty(component.CachedPrototype.MirrorPrototype))
+            return component.CachedPrototype.MirrorPrototype;
+
+        return component.CachedPrototype.Prototype;
+    }
+
+    private void SanitizeRpdConstructionEntity(EntityUid uid, RCDComponent component)
+    {
+        if (!component.IsRpd
+            || component.ConstructionEntity == null
+            || IsValidRpdConstructionEntity(component, component.ConstructionEntity))
+        {
+            return;
+        }
+
+        component.ConstructionEntity = null;
+
+        if (_net.IsServer)
+            Dirty(uid, component);
+    }
+
+    private bool TryResolveRpdConstructionEntity(
+        EntityUid uid,
+        RCDComponent component,
+        MapGridData mapGridData,
+        [NotNullWhen(true)] out string? constructionEntity)
+    {
+        constructionEntity = null;
+
+        if (component.CachedPrototype.Prototype == null)
+            return false;
+
+        if (!_protoManager.TryIndex<EntityPrototype>(component.CachedPrototype.Prototype, out var baseProto)
+            || !baseProto.TryGetComponent<AtmosPipeLayersComponent>(out var layers, EntityManager.ComponentFactory)
+            || layers.AlternativePrototypes.Count == 0)
+        {
+            return false;
+        }
+
+        var worldPos = _transform.ToMapCoordinates(mapGridData.Location);
+        var tileCenterCoords = _mapSystem.GridTileToLocal(mapGridData.GridUid, mapGridData.Component, mapGridData.Position);
+
+        if (!_pipeLayers.TryGetPipeLayerAtWorldPosition(
+                mapGridData.GridUid,
+                mapGridData.Component,
+                worldPos,
+                tileCenterCoords,
+                component.PipeLayerEyeRotation,
+                out var layer)
+            || !_pipeLayers.TryGetAlternativePrototype(layers, layer, out var proto))
+        {
+            return false;
+        }
+
+        constructionEntity = proto;
+        return true;
+    }
+
+    /// <summary>
+    /// Finds an RPD-deconstructable entity on the clicked tile (ignores floor plating / click raycasts).
+    /// </summary>
+    public bool TryResolveRpdDeconstructTarget(
+        RCDComponent component,
+        MapGridData mapGridData,
+        MapCoordinates worldClick,
+        EntityUid? clickedTarget,
+        out EntityUid? target)
+    {
+        target = null;
+
+        if (!component.IsRpd || component.CachedPrototype.Mode != RcdMode.Deconstruct)
+            return false;
+
+        CollectRpdDeconstructCandidates(mapGridData);
+
+        if (_rpdDeconstructCandidates.Count == 0)
+            return false;
+
+        if (clickedTarget != null
+            && IsValidRpdDeconstructTarget(clickedTarget)
+            && IsEntityOnGridTile(clickedTarget.Value, mapGridData)
+            && _rpdDeconstructCandidates.Contains(clickedTarget.Value))
+        {
+            target = clickedTarget;
+            return true;
+        }
+
+        return TryPickRpdDeconstructTarget(mapGridData, worldClick, component.PipeLayerEyeRotation, out target);
+    }
+
+    private EntityUid? GetRpdDeconstructTargetFromDoAfter(RCDDoAfterEvent args)
+    {
+        if (args.DeconstructTarget != null)
+            return GetEntity(args.DeconstructTarget);
+
+        return args.Target;
+    }
+
+    private bool IsEntityOnGridTile(EntityUid entity, MapGridData mapGridData)
+    {
+        var xform = Transform(entity);
+
+        if (xform.GridUid != mapGridData.GridUid)
+            return false;
+
+        var tile = _mapSystem.TileIndicesFor(mapGridData.GridUid, mapGridData.Component, xform.Coordinates);
+        return tile == mapGridData.Position;
+    }
+
+    private void CollectRpdDeconstructCandidates(MapGridData mapGridData)
+    {
+        _rpdDeconstructCandidates.Clear();
+
+        var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(mapGridData.GridUid, mapGridData.Component, mapGridData.Position);
+
+        while (enumerator.MoveNext(out var ent))
+        {
+            if (!ent.HasValue)
+                continue;
+
+            TryAddRpdDeconstructCandidate(ent.Value, mapGridData);
+        }
+    }
+
+    private bool TryPickRpdDeconstructTarget(
+        MapGridData mapGridData,
+        MapCoordinates worldClick,
+        Angle eyeRotation,
+        out EntityUid? target)
+    {
+        target = null;
+
+        if (_rpdDeconstructCandidates.Count == 0)
+            return false;
+
+        if (_rpdDeconstructCandidates.Count == 1)
+        {
+            target = _rpdDeconstructCandidates[0];
+            return true;
+        }
+
+        const float tieThreshold = 0.04f;
+        var clickPos = worldClick.Position;
+        var bestDist = float.MaxValue;
+        var tied = new List<EntityUid>();
+
+        foreach (var ent in _rpdDeconstructCandidates)
+        {
+            var dist = (_transform.GetWorldPosition(ent) - clickPos).LengthSquared();
+
+            if (dist + tieThreshold < bestDist)
+            {
+                bestDist = dist;
+                tied.Clear();
+                tied.Add(ent);
+            }
+            else if (MathF.Abs(dist - bestDist) <= tieThreshold)
+            {
+                tied.Add(ent);
+            }
+        }
+
+        if (tied.Count == 1)
+        {
+            target = tied[0];
+            return true;
+        }
+
+        _pipeLayers.TryGetPipeLayerAtWorldPosition(
+            mapGridData.GridUid,
+            mapGridData.Component,
+            worldClick,
+            mapGridData.Location,
+            eyeRotation,
+            out var layer);
+
+        foreach (var ent in tied)
+        {
+            if (!TryComp<AtmosPipeLayersComponent>(ent, out var layers))
+            {
+                if (layer == AtmosPipeLayer.Primary)
+                {
+                    target = ent;
+                    return true;
+                }
+
+                continue;
+            }
+
+            if (layers.CurrentPipeLayer == layer)
+            {
+                target = ent;
+                return true;
+            }
+        }
+
+        target = tied[0];
+        return true;
+    }
+
+    private void TryAddRpdDeconstructCandidate(EntityUid entity, MapGridData mapGridData)
+    {
+        if (!IsValidRpdDeconstructTarget(entity) || !IsEntityOnGridTile(entity, mapGridData))
+            return;
+
+        if (!_rpdDeconstructCandidates.Contains(entity))
+            _rpdDeconstructCandidates.Add(entity);
+    }
+
+    private bool IsValidRpdDeconstructTarget(EntityUid? entity)
+    {
+        return entity != null
+            && TryComp<RCDDeconstructableComponent>(entity, out var deconstructible)
+            && deconstructible.RpdDeconstructable
+            && deconstructible.Deconstructable;
+    }
+
+    /// <summary>
+    /// Pipe recipes with alt entity prototypes (straight/T/etc. per layer).
+    /// </summary>
+    public bool UsesRpdPipeAlternativePrototypes(string? prototypeId)
+    {
+        if (string.IsNullOrEmpty(prototypeId)
+            || !_protoManager.TryIndex<EntityPrototype>(prototypeId, out var proto))
+        {
+            return false;
+        }
+
+        return proto.TryGetComponent<AtmosPipeLayersComponent>(out var layers, EntityManager.ComponentFactory)
+            && layers.AlternativePrototypes.Count > 0;
+    }
+
+    /// <summary>
+    /// Logistics (vents, mixers, …): multi-layer connectors on one prototype.
+    /// </summary>
+    public bool UsesRpdLogisticsPipeLayer(string? prototypeId)
+    {
+        if (string.IsNullOrEmpty(prototypeId)
+            || !_protoManager.TryIndex<EntityPrototype>(prototypeId, out var proto))
+        {
+            return false;
+        }
+
+        return proto.TryGetComponent<AtmosPipeLayersComponent>(out var layers, EntityManager.ComponentFactory)
+            && layers.NumberOfPipeLayers > 1
+            && layers.AlternativePrototypes.Count == 0;
+    }
+
+    /// <summary>
+    /// Tile placement with layer guide dots (pipes or logistics).
+    /// </summary>
+    public bool UsesRpdAtmosTilePlacement(string? prototypeId)
+    {
+        return UsesRpdPipeAlternativePrototypes(prototypeId)
+            || UsesRpdLogisticsPipeLayer(prototypeId);
+    }
+
+    public bool IsValidRpdConstructionEntity(RCDComponent component, string constructionEntity)
+    {
+        if (component.CachedPrototype.Prototype == null)
+            return false;
+
+        if (constructionEntity == component.CachedPrototype.Prototype
+            || constructionEntity == component.CachedPrototype.MirrorPrototype)
+        {
+            return true;
+        }
+
+        if (!_protoManager.TryIndex<EntityPrototype>(component.CachedPrototype.Prototype, out var baseProto)
+            || !baseProto.TryGetComponent<AtmosPipeLayersComponent>(out var layers, EntityManager.ComponentFactory))
+        {
+            return false;
+        }
+
+        foreach (var alt in layers.AlternativePrototypes.Values)
+        {
+            if (alt == constructionEntity)
+                return true;
+        }
+
+        return false;
+    }
+
+    #endregion
 
     #endregion
 }
@@ -645,15 +1131,36 @@ public sealed partial class RCDDoAfterEvent : DoAfterEvent
     [DataField("fx")]
     public NetEntity? Effect { get; private set; } = null;
 
+    // Forge-Change
+    [DataField]
+    public string? ConstructionEntity { get; private set; }
+
+    [DataField]
+    public NetEntity? DeconstructTarget { get; private set; }
+
+    [DataField]
+    public AtmosPipeLayer ConstructionPipeLayer { get; private set; } = AtmosPipeLayer.Primary;
+
     private RCDDoAfterEvent() { }
 
-    public RCDDoAfterEvent(NetCoordinates location, Direction direction, ProtoId<RCDPrototype> startingProtoId, int cost, NetEntity? effect = null)
+    public RCDDoAfterEvent(
+        NetCoordinates location,
+        Direction direction,
+        ProtoId<RCDPrototype> startingProtoId,
+        int cost,
+        NetEntity? effect = null,
+        string? constructionEntity = null,
+        NetEntity? deconstructTarget = null,
+        AtmosPipeLayer constructionPipeLayer = AtmosPipeLayer.Primary)
     {
         Location = location;
         Direction = direction;
         StartingProtoId = startingProtoId;
         Cost = cost;
         Effect = effect;
+        ConstructionEntity = constructionEntity;
+        DeconstructTarget = deconstructTarget;
+        ConstructionPipeLayer = constructionPipeLayer;
     }
 
     public override DoAfterEvent Clone() => this;

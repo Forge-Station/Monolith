@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Фласка
   description: Легкий шаттл ВКР, рассчитанный на экипаж 1-3 человека
-  price: 69000
+  price: 74600
   category: Medium
   group: Renegate
   access: Renegate

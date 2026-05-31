@@ -21,6 +21,7 @@
     - Industrial
     - Arsenal
     - Experimental
+    - ShipArmory
     - CivilianServices
     - MechaEngineering
   - type: ApcPowerReceiver
@@ -81,6 +82,7 @@
     - Industrial
     - Arsenal
     - Experimental
+    - ShipArmory
     - CivilianServices
     - MechaEngineering
 
@@ -104,6 +106,7 @@
     - Industrial
     - Arsenal
     - Experimental
+    - ShipArmory
     - CivilianServices
     - MechaEngineering
 
@@ -128,6 +131,7 @@
     - Industrial
     - Arsenal
     - Experimental
+    - ShipArmory
     - CivilianServices
     - MechaEngineering
 
@@ -142,6 +146,7 @@
     - Industrial
     - Arsenal
     - Experimental
+    - ShipArmory
     - CivilianServices
     - Tsfmc
     - Pdv

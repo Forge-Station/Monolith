@@ -21,36 +21,6 @@
   - SuperParts
   position: -4, 5
 
-# Forge-Change-Start
-- type: technology
-  id: ShuttleGunneryHighUpgradeResearch
-  name: research-technology-shuttle-gunnery-high-upgrade
-  entityIcon: GunneryServerHigh
-  discipline: Experimental
-  tier: 3
-  cost: 65000
-  recipeUnlocks:
-  - GCSHighUpgradeCircuitboard
-  technologyPrerequisites:
-  - ShuttleAdvancedComponents
-  - SuperParts
-  position: -5, 8
-
-- type: technology
-  id: ShuttleGunneryUltraUpgradeResearch
-  name: research-technology-shuttle-gunnery-ultra-upgrade
-  entityIcon: GunneryServerUltra
-  discipline: Experimental
-  tier: 3
-  cost: 85000
-  recipeUnlocks:
-  - GCSUltraUpgradeCircuitboard
-  technologyPrerequisites:
-  - ShuttleGunneryHighUpgradeResearch
-  - ShuttleCtlaAdvancedDriveResearch
-  position: -5, 10
-# Forge-Change-end
-
 - type: technology
   id: ShuttleCtlaAdvancedDriveResearch
   name: research-technology-bluespace-drive-ctla-advanced

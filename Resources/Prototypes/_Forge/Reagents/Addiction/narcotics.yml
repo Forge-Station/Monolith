@@ -290,7 +290,7 @@
           sprintSpeedModifier: 0.9
           statusLifetime: 8
         - !type:Emote
-          emote: Giggle
+          emote: Laugh
           probability: 0.2
         - !type:PopupMessage
           type: Local

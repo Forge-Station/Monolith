@@ -49,6 +49,8 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     /// </summary>
     public Dictionary<string, ResearchAvailability> List = new();
 
+    public Dictionary<string, byte> Progress = new();
+
     /// <summary>
     /// Cached research points
     /// </summary>
@@ -116,9 +118,9 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     private Vector2 _initialViewPosition;
 
     /// <summary>
-    /// Tracks if first initialization has happened
+    /// Recenters the tree once data is loaded and the viewport has a real size.
     /// </summary>
-    private bool _firstInitialization = true;
+    private bool _pendingRecenter = true;
 
     /// <summary>
     /// Frontier: the distance between elements on the grid.
@@ -173,19 +175,20 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         DragContainer.OnKeyBindDown += OnKeybindDown;
         DragContainer.OnKeyBindUp += OnKeybindUp;
         RecenterButton.OnPressed += _ => Recenter();
-        ResearchesContainer.OnResized += RefreshCurrentDisciplineView;
-
-        // Empty initialization
-        UpdatePanels(List);
+        ResearchesContainer.OnResized += OnResearchViewportResized;
     }
 
     public void SetEntity(EntityUid entity)
         => Entity = entity;
 
-    public void UpdatePanels(Dictionary<string, ResearchAvailability> dict)
+    public void UpdatePanels(Dictionary<string, ResearchAvailability> dict, Dictionary<string, byte> progress)
     {
         List = dict;
+        Progress = progress;
         var supportedDisciplines = GetSupportedDisciplineIds();
+
+        if (dict.Count > 0)
+            _pendingRecenter = true;
 
         EnsureSelectedDiscipline(supportedDisciplines);
         BuildDisciplineTabs(supportedDisciplines);
@@ -209,7 +212,8 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
             if (!IsTechnologyVisibleInCurrentTab(proto))
                 continue;
 
-            var control = new FancyResearchConsoleItem(proto, _sprite, tech.Value);
+            var unlockProgress = Progress.GetValueOrDefault(tech.Key, (byte) 0);
+            var control = new FancyResearchConsoleItem(proto, _sprite, tech.Value, unlockProgress);
             DragContainer.AddChild(control);
             _visibleTechnologyItems[proto.ID] = control;
 
@@ -221,6 +225,14 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
         AddCrossDisciplinePreviewGhost();
         UpdateSelectedTechVisuals();
+
+        if (_pendingRecenter
+            && _visibleTechnologyItems.Count > 0
+            && ResearchesContainer.Size.X > 1
+            && ResearchesContainer.Size.Y > 1)
+        {
+            Recenter();
+        }
     }
 
     public void UpdateInformationPanel(int points)
@@ -379,19 +391,14 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
             return;
 
         var defaultPosition = GetDefaultDisciplinePosition(_selectedDiscipline);
-
-        // Preserve the current tech items but reset the positions
         var diff = defaultPosition - _position;
 
-        // First update the master position
         _position = defaultPosition;
+        _pendingRecenter = false;
         CacheCurrentDisciplinePosition();
 
-        // Now update all child positions by the same delta
         foreach (var child in DragContainer.Children)
-        {
             LayoutContainer.SetPosition(child, child.Position + diff);
-        }
     }
 
     public override void Close()
@@ -403,11 +410,12 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         InfoContainer.RemoveAllChildren();
         _visibleTechnologyItems.Clear();
         _crossDisciplinePreviewItem = null;
-        _firstInitialization = true;
+        _pendingRecenter = true;
         _selectedDiscipline = null;
         _disciplinePositions.Clear();
         _focusedTech = null;
         _navigationChain.Clear();
+        Progress.Clear();
     }
 
     private List<string> GetSupportedDisciplineIds()
@@ -436,8 +444,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         }
 
         _selectedDiscipline = supportedDisciplines[0];
-        _position = GetDefaultDisciplinePosition(_selectedDiscipline);
-        CacheCurrentDisciplinePosition();
+        _position = DefaultPosition;
     }
 
     private static bool IsValidDisciplineTab(string? tabId, IReadOnlyList<string> supportedDisciplines)
@@ -481,8 +488,8 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
         _selectedDiscipline = disciplineId;
         _navigationChain.Clear();
-        _position = GetDefaultDisciplinePosition(disciplineId);
-        CacheCurrentDisciplinePosition();
+        _disciplinePositions.Remove(disciplineId);
+        _pendingRecenter = true;
         RefreshTechnologyGrid();
     }
 
@@ -664,17 +671,13 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         return viewportCenter - technologyCenter;
     }
 
-    private void RefreshCurrentDisciplineView()
+    private void OnResearchViewportResized()
     {
-        if (_selectedDiscipline == null)
+        if (_selectedDiscipline == null || _visibleTechnologyItems.Count == 0)
             return;
 
-        if (_disciplinePositions.TryGetValue(_selectedDiscipline, out var cachedPosition))
-            _position = cachedPosition;
-        else
-            _position = GetDefaultDisciplinePosition(_selectedDiscipline);
-
-        RefreshTechnologyGrid();
+        _pendingRecenter = true;
+        Recenter();
     }
 
     private void RefreshCurrentInfoPanel()
@@ -722,7 +725,10 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
             ? previewAvailability
             : ResearchAvailability.Unavailable;
 
-        var previewItem = new FancyResearchConsoleItem(previewProto, _sprite, availability)
+        var previewProgress = List.TryGetValue(previewProto.ID, out _)
+            ? Progress.GetValueOrDefault(previewProto.ID, (byte) 0)
+            : (byte) 0;
+        var previewItem = new FancyResearchConsoleItem(previewProto, _sprite, availability, previewProgress)
         {
             IsGhostPreview = true,
             IsPreviewTarget = true,

@@ -1,3 +1,7 @@
+research-console-tech-progress-prereqs = { $percent }%
+research-console-tech-progress-rp = { $percent }% RP
+research-console-tech-researched = ✓
+
 research-console-return-to-tech = ← { $name }
 research-console-navigation-breadcrumb = [color=gray]Path:[/color]
  { $path }

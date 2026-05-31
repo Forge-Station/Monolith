@@ -62,13 +62,18 @@ public sealed partial class ResearchSystem
         // R&D Console Rework Start
         var allTechs = PrototypeManager.EnumeratePrototypes<TechnologyPrototype>(); // Mono
         Dictionary<string, ResearchAvailability> techList;
+        Dictionary<string, byte> progress;
         var points = 0;
 
         if (TryGetClientServer(uid, out var serverUid, out var server, clientComponent) &&
             TryComp<TechnologyDatabaseComponent>(serverUid, out var db))
         {
             var unlockedTechs = new HashSet<string>(db.UnlockedTechnologies);
-            techList = allTechs.Where(tech => tech.GetAllDisciplines().Any(d => db.SupportedDisciplines.Contains(d))).ToDictionary( // Mono - .Where() filter
+            var supported = allTechs
+                .Where(tech => tech.GetAllDisciplines().Any(d => db.SupportedDisciplines.Contains(d)))
+                .ToList();
+
+            techList = supported.ToDictionary(
                 proto => proto.ID,
                 proto =>
                 {
@@ -78,21 +83,30 @@ public sealed partial class ResearchSystem
                     var prereqsMet = proto.TechnologyPrerequisites.All(p => unlockedTechs.Contains(p));
                     var canAfford = server.Points >= proto.Cost;
 
-                    return prereqsMet ?
-                        (canAfford ? ResearchAvailability.Available : ResearchAvailability.PrereqsMet)
+                    return prereqsMet
+                        ? (canAfford ? ResearchAvailability.Available : ResearchAvailability.PrereqsMet)
                         : ResearchAvailability.Unavailable;
                 });
 
             if (clientComponent != null)
                 points = clientComponent.ConnectedToServer ? server.Points : 0;
+
+            progress = supported.ToDictionary(
+                proto => proto.ID,
+                proto => ResearchUnlockProgress.Calculate(
+                    proto,
+                    techList[proto.ID],
+                    unlockedTechs,
+                    points));
         }
         else
         {
-            techList = []; // Mono
+            techList = [];
+            progress = [];
         }
 
         _uiSystem.SetUiState(uid, ResearchConsoleUiKey.Key,
-            new ResearchConsoleBoundInterfaceState(points, techList));
+            new ResearchConsoleBoundInterfaceState(points, techList, progress));
         // R&D Console Rework End
     }
 

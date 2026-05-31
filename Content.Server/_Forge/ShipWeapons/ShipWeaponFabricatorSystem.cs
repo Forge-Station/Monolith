@@ -39,6 +39,17 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
     private static readonly EntProtoId Flatpack2x3Prototype = "ForgeShipWeaponFlatpack2x3";
     private static readonly EntProtoId Flatpack3x3Prototype = "ForgeShipWeaponFlatpack3x3";
 
+    /// <summary>
+    /// Frontier stock parts use internal <see cref="MachinePartComponent.Rating"/> values that do not match
+    /// player-facing tiers (see ru-RU machine_parts.ftl suffixes). Ship weapon boards use display tiers 1–4.
+    /// </summary>
+    private static readonly HashSet<string> BluespaceStockPartPrototypes = new(StringComparer.Ordinal)
+    {
+        "QuadraticCapacitorStockPart",
+        "FemtoManipulatorStockPart",
+        "BluespaceMatterBinStockPart",
+    };
+
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedConstructionSystem _construction = default!;
     [Dependency] private readonly FlatpackSystem _flatpack = default!;
@@ -477,7 +488,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
                 if (!component.Requirements.ContainsKey(type))
                     continue;
 
-                if (machinePart.Rating < GetRequiredPartRating(component))
+                if (!PartMeetsDisplayTierRequirement(part, machinePart, GetRequiredPartRating(component)))
                     continue;
 
                 var quantity = 1;
@@ -727,13 +738,14 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
                 quantity = stack.Count;
 
             var displayName = Name(entity);
+            var displayTier = GetPartDisplayTier(entity, machinePart);
             var compatible = !component.HasBoard ||
                              (component.Requirements.ContainsKey(machinePart.PartType) &&
-                              machinePart.Rating >= requiredRating);
+                              displayTier >= requiredRating);
             if (storedParts.TryGetValue(protoId, out var entry))
                 storedParts[protoId] = (entry.Name, entry.Count + quantity, entry.Rating, entry.Compatible);
             else
-                storedParts[protoId] = (displayName, quantity, NormalizePartTier(machinePart.Rating), compatible);
+                storedParts[protoId] = (displayName, quantity, displayTier, compatible);
         }
 
         if (storedParts.Count == 0)
@@ -771,9 +783,10 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             if (TryComp<StackComponent>(entity, out var stack))
                 quantity = stack.Count;
 
+            var displayTier = GetPartDisplayTier(entity, machinePart);
             var compatible = !component.HasBoard ||
                              (component.Requirements.ContainsKey(machinePart.PartType) &&
-                              machinePart.Rating >= requiredRating);
+                              displayTier >= requiredRating);
 
             if (storedParts.TryGetValue(protoId, out var current))
             {
@@ -790,7 +803,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
                     protoId,
                     Name(entity),
                     quantity,
-                    NormalizePartTier(machinePart.Rating),
+                    displayTier,
                     compatible);
             }
         }
@@ -850,12 +863,26 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
         return shipWeaponBoard.RequiredPartRating;
     }
 
-    private int NormalizePartTier(int rating)
+    private int GetPartDisplayTier(EntityUid entity, MachinePartComponent machinePart)
     {
-        if (rating >= 4)
+        var protoId = MetaData(entity).EntityPrototype?.ID;
+        if (protoId != null && BluespaceStockPartPrototypes.Contains(protoId))
             return 4;
 
-        return Math.Max(1, rating);
+        // rating 1 = Tier 1, rating 3 = Tier 2 (advanced), rating 4 = Tier 3 (super).
+        return machinePart.Rating switch
+        {
+            <= 1 => 1,
+            2 => 2,
+            3 => 2,
+            4 => 3,
+            _ => Math.Clamp(machinePart.Rating, 1, 4),
+        };
+    }
+
+    private bool PartMeetsDisplayTierRequirement(EntityUid entity, MachinePartComponent machinePart, int requiredDisplayTier)
+    {
+        return GetPartDisplayTier(entity, machinePart) >= requiredDisplayTier;
     }
 
     private bool ContainersReady(ShipWeaponFabricatorComponent component)
@@ -885,6 +912,9 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             {
                 var entity = component.PartContainer.ContainedEntities[i];
                 if (!TryComp<MachinePartComponent>(entity, out var machinePart) || machinePart.PartType != partType)
+                    continue;
+
+                if (!PartMeetsDisplayTierRequirement(entity, machinePart, GetRequiredPartRating(component)))
                     continue;
 
                 if (TryComp<StackComponent>(entity, out var stack))

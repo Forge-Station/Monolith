@@ -1,11 +1,12 @@
 using System.Numerics;
+using Robust.Shared.GameStates;
 
-namespace Content.Server._Forge.Gatherable;
+namespace Content.Shared._Forge.Gatherable;
 
 /// <summary>
 /// Mining hitscan that gathers rock and teleports asteroid drops (ore, artifact fragments) to the collector.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class DrakeHitscanGatheringComponent : Component
 {
     /// <summary>

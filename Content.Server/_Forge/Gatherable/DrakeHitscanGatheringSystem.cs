@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server.Gatherable;
 using Content.Server.Gatherable.Components;
+using Content.Shared._Forge.Gatherable;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;

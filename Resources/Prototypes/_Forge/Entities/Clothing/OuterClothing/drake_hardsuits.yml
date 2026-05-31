@@ -24,6 +24,11 @@
     clothingPrototypes:
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container {}
+      storagebase: !type:Container
+        ents: []
 
 - type: entity
   parent: [DrakeHardsuitOuterBase, BaseFactionGearOtherFactionT0]

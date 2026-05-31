@@ -110,6 +110,10 @@
     whitelist:
       tags:
       - Knife
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
   - type: StaticPrice
     price: 600
     vendPrice: 900

@@ -95,15 +95,14 @@
       Plasteel: 50
       Gold: 40
       Plasma: 30
-      Uranium: 15
+      Uranium: 20
       Bluespace: 5
       Diamond: 5
       Silver: 30
       Copper: 80
       Lithium: 20
-      Iridite: 4
-      Plastitanium: 20
-      UraniumDepleted: 2
+      Plastitanium: 80
+      UraniumDepleted: 5
 
 - type: entity
   id: WeaponTurretL85AutocannonCircuitboard
@@ -197,8 +196,7 @@
       Silver: 30
       Copper: 60
       Lithium: 60
-      Iridite: 4
-      UraniumDepleted: 1
+      UraniumDepleted: 3
   - type: Tag
     tags:
     - MachineBoard2x1
@@ -274,8 +272,7 @@
       Silver: 30
       Copper: 120
       Lithium: 120
-      Iridite: 6
-      UraniumDepleted: 2
+      UraniumDepleted: 6
   - type: Tag
     tags:
     - MachineBoard2x2

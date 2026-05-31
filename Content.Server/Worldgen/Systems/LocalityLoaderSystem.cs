@@ -89,8 +89,11 @@ public sealed partial class LocalityLoaderSystem : BaseWorldSystem
     {
         if (TryComp<SalvageMobRestrictionsGridComponent>(entity, out var restrictions))
         {
-            foreach (var salvUid in restrictions.MobsToKill)
+            foreach (var salvUid in restrictions.MobsToKill.ToArray()) //Forge-Change
             {
+                if (!Exists(salvUid)) //Forge-Change
+                    continue;
+
                 if (TryComp<NFSalvageMobRestrictionsComponent>(salvUid, out var salvMob) &&
                     salvMob.DespawnIfOffLinkedGrid) // Mono - fix
                 {

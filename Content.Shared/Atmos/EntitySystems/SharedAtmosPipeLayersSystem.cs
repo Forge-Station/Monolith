@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Database;
 using Content.Shared.Examine;
@@ -5,11 +6,15 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.RCD.Components;
 using Content.Shared.SubFloor;
 using Content.Shared.Tools;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 
@@ -25,6 +30,15 @@ public abstract partial class SharedAtmosPipeLayersSystem : EntitySystem
     [Dependency] private SharedToolSystem _tool = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+
+    #region Forge-Change
+
+    public const float PipeLayerMouseDeadzone = 0.25f;
+    public const float PipeLayerGuideOffset = 0.21875f;
+
+    #endregion
 
     public override void Initialize()
     {
@@ -121,6 +135,10 @@ public abstract partial class SharedAtmosPipeLayersSystem : EntitySystem
 
         if (TryComp<SubFloorHideComponent>(ent, out var subFloorHide) && subFloorHide.IsUnderCover)
         {
+            // Forge-Change: RPD placement raycasts onto covered pipes; skip layer-adjustment popup
+            if (TryComp<RCDComponent>(args.Used, out var rcd) && rcd.IsRpd)
+                return;
+
             _popup.PopupPredicted(Loc.GetString("atmos-pipe-layers-component-cannot-adjust-pipes"), ent, args.User);
             return;
         }
@@ -232,6 +250,62 @@ public abstract partial class SharedAtmosPipeLayersSystem : EntitySystem
     {
         return component.AlternativePrototypes.TryGetValue(layer, out proto);
     }
+
+    #region Forge-Change
+
+    /// <summary>
+    /// Returns world positions for the three pipe-layer guide dots on a grid tile.
+    /// </summary>
+    public void GetPipeLayerGuideWorldPositions(
+        EntityUid grid,
+        MapGridComponent mapGrid,
+        EntityCoordinates cursorOnGrid,
+        Angle eyeRot,
+        out MapCoordinates center,
+        out MapCoordinates secondary,
+        out MapCoordinates tertiary)
+    {
+        var tileIndices = _map.TileIndicesFor(grid, mapGrid, cursorOnGrid);
+        var localCenter = _map.GridTileToLocal(grid, mapGrid, tileIndices);
+
+        center = _transform.ToMapCoordinates(localCenter);
+
+        var gridRotation = _transform.GetWorldRotation(grid);
+        var direction = (eyeRot + gridRotation + Math.PI / 2).GetCardinalDir();
+        var multi = direction is Direction.North or Direction.South ? -1f : 1f;
+        var offset = gridRotation.RotateVec(new Vector2(multi * PipeLayerGuideOffset, PipeLayerGuideOffset));
+
+        secondary = center.Offset(offset);
+        tertiary = center.Offset(-offset);
+    }
+
+    /// <summary>
+    /// Resolves which pipe layer the cursor is closest to within a tile.
+    /// </summary>
+    public bool TryGetPipeLayerAtWorldPosition(
+        EntityUid grid,
+        MapGridComponent mapGrid,
+        MapCoordinates worldPos,
+        EntityCoordinates tileCenterOnGrid,
+        Angle eyeRot,
+        out AtmosPipeLayer layer)
+    {
+        GetPipeLayerGuideWorldPositions(grid, mapGrid, tileCenterOnGrid, eyeRot, out var center, out var secondary, out var tertiary);
+
+        var diff = worldPos.Position - center.Position;
+        if (diff.Length() <= PipeLayerMouseDeadzone)
+        {
+            layer = AtmosPipeLayer.Primary;
+            return true;
+        }
+
+        var secDist = (worldPos.Position - secondary.Position).LengthSquared();
+        var terDist = (worldPos.Position - tertiary.Position).LengthSquared();
+        layer = secDist < terDist ? AtmosPipeLayer.Secondary : AtmosPipeLayer.Tertiary;
+        return true;
+    }
+
+    #endregion
 
     /// <summary>
     /// Checks a player entity's hands to see if they are holding a tool with a specified quality

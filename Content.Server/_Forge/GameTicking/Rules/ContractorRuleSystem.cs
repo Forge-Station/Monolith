@@ -8,6 +8,7 @@ using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Roles;
 using Content.Shared._Forge.Contractor.Components;
+using Content.Shared._Forge.Guard.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
@@ -135,7 +136,9 @@ namespace Content.Server.GameTicking.Rules
             var humanoidQuery = EntityQueryEnumerator<HumanoidAppearanceComponent, ActorComponent>();
             while (humanoidQuery.MoveNext(out var candidate, out _, out _))
             {
-                if (HasComp<MindShieldComponent>(candidate) || HasComp<ContractorComponent>(candidate))
+                if (HasComp<MindShieldComponent>(candidate) ||
+                    HasComp<GuardComponent>(candidate) ||
+                    HasComp<ContractorComponent>(candidate))
                     continue;
 
                 // You can add any new faction here if necessary

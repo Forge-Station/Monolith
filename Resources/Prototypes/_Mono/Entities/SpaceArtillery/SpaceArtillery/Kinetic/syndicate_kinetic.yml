@@ -6,9 +6,9 @@
 - type: entity
   id: WeaponTurretAdderScattercannon
   name: Adder scattercannon
-  suffix: Small, T1
+  suffix: Small, T1, Для маппинга
   parent:
-  - BallisticArtillery
+  - BallisticArtilleryMapped
   - BallisticArtilleryTier1HP
   description: A large, twin-barrelled scatter cannon, firing bursts of canister shot to shred any incoming missiles or potential boarders. Uses a self loading mechanism similar to the anaconda handgun.
   components:
@@ -72,9 +72,9 @@
 - type: entity
   id: WeaponTurretFang
   name: Fang heavy 90mm autocannon
-  suffix: Medium, T3
+  suffix: Medium, T3, Для маппинга
   parent:
-  - BallisticArtillery
+  - BallisticArtilleryMapped
   - BallisticArtilleryTier3HP
   description: A heavy 90mm autocannon of syndicate design, created during the corporate war. Made for shattering opponent destroyers. Uses a self loading mechanism similar to the anaconda handgun.
   components:
@@ -152,8 +152,8 @@
 - type: entity
   id: WeaponTurretHydra
   name: Hydra 220mm battery
-  suffix: Large, T3
-  parent: BallisticArtilleryUnanchorable
+  suffix: Large, T3, Для маппинга
+  parent: BallisticArtilleryMapped
   description: A main cannonade of syndicate origin, the hydra is a monstrous tri-barreled battery of 220-millimeter pain, designed to shatter corpations' toughest vessels. Loads with a similar mechanism as the anaconda handgun.
   components:
   - type: StaticPrice
@@ -247,9 +247,9 @@
 - type: entity
   id: WeaponTurretLeviathan
   name: LEVIATHAN 520mm howitzer
-  suffix: Capital, T5
+  suffix: Capital, T5, Для маппинга
   parent:
-  - BallisticArtilleryUnanchorable
+  - BallisticArtilleryMapped
   - BallisticArtilleryTier5HP
   description: A heavy artillery gun of syndicate origin, the leviathan is tyrannic testiment of Syndicate ingenuity, designed to send a message. Able to crack NanoTrasen battleships, and small fighters in a single shell. Loads with a similar mechanism as the anaconda handgun.
   components:

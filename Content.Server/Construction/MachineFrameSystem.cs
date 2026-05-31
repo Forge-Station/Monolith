@@ -6,6 +6,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Popups;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Content.Shared.Construction.Prototypes;
@@ -19,6 +20,7 @@ public sealed partial class MachineFrameSystem : EntitySystem
     [Dependency] private StackSystem _stack = default!;
     [Dependency] private ConstructionSystem _construction = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -149,6 +151,10 @@ public sealed partial class MachineFrameSystem : EntitySystem
     private bool TryInsertBoard(EntityUid uid, EntityUid used, MachineFrameComponent component)
     {
         if (!TryComp<MachineBoardComponent>(used, out var machineBoard))
+            return false;
+
+        if (_whitelist.IsWhitelistFail(component.BoardWhitelist, used)
+            || _whitelist.IsBlacklistPass(component.BoardBlacklist, used))
             return false;
 
         // Mono - board and frame matching

@@ -28,17 +28,17 @@ ent-EmpireInqPDA = КПК Эклизиарха
 ent-EmpireCommanderPDA = КПК Лорда-Префекта
     .desc = { ent-BasePDA.desc }
 
-ent-RenegateBaronPDA = КПК барона
+ent-RenegateBaronPDA = КПК коммодора
     .desc = Вероятно его владелец тот ещё псих.
-ent-RenegateDraftsmanPDA = КПК чертёжника
-    .desc = Имеет настоявший запах бумаги и чернил.
-ent-RenegateOverseerPDA = КПК смотрящего
+ent-RenegateDraftsmanPDA = КПК куратора исследований
+    .desc = Имеет настоявшийся запах бумаги и чернил.
+ent-RenegateOverseerPDA = КПК бригадного командира
     .desc = Вы не хотите знать владельца.
-ent-RenegateQuackPDA = КПК костоправа
+ent-RenegateQuackPDA = КПК боевого санитара
     .desc = Благодаря свету экрана вы можете разглядеть множество мелких красных звёзд. Ой, это застывшая кровь.
-ent-RenegateForemanPDA = КПК штейгера
+ent-RenegateForemanPDA = КПК специалиста
     .desc = Потёртый, пыльный КПК. Сколько бы вы не старались, он никогда не станет таким же чистым.
-ent-RenegatePDA = КПК шестёрки
+ent-RenegatePDA = КПК повстанца
     .desc = Осматривая КПК, вы обнаружили выгравированный текст на обратной стороне. Он гласит: "Сожалею о вашем выборе.. Если он вообще был :p"
 
 ent-TTIDocPDA = КПК директора TTI

@@ -8,6 +8,12 @@ using Content.Shared.Pinpointer;
 using Content.Shared.Station.Components;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
+// Forge-Change-Start: handheld Forge power monitor resolves grid from the holder
+using Content.Shared._Forge.Monitoring;
+using Content.Shared.Containers;
+using Content.Shared.Tag;
+using Robust.Shared.Containers;
+// Forge-Change-End
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map.Components;
@@ -20,8 +26,11 @@ namespace Content.Server.Power.EntitySystems;
 [UsedImplicitly]
 internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitoringConsoleSystem
 {
-    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private SharedMapSystem _sharedMapSystem = default!;
+    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private readonly SharedMapSystem _sharedMapSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!; // Forge-Change: handheld monitor grid lookup
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!; // Forge-Change: handheld monitor grid lookup
+    [Dependency] private readonly TagSystem _tagSystem = default!; // Forge-Change: handheld monitor grid lookup
 
     // Note: this data does not need to be saved
     private Dictionary<EntityUid, Dictionary<Vector2i, PowerCableChunk>> _gridPowerCableChunks = new();
@@ -114,6 +123,11 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
             cableNetworks.FocusChunks.Clear();
             Dirty(uid, cableNetworks);
         }
+
+        RefreshPowerMonitoringConsole(uid, component);
+
+        if (TryComp<PowerMonitoringCableNetworksComponent>(uid, out cableNetworks))
+            RefreshPowerMonitoringCableNetworks(uid, cableNetworks);
     }
 
     private void OnGridSplit(ref GridSplitEvent args)
@@ -135,12 +149,10 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
         // Update power monitoring consoles that stand upon an updated grid
         var query = AllEntityQuery<PowerMonitoringConsoleComponent, PowerMonitoringCableNetworksComponent, TransformComponent>();
-        while (query.MoveNext(out var ent, out var entConsole, out var entCableNetworks, out var entXform))
+        while (query.MoveNext(out var ent, out var entConsole, out var entCableNetworks, out _))
         {
-            if (entXform.GridUid == null)
-                continue;
-
-            if (!allGrids.Contains(entXform.GridUid.Value))
+            var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(ent, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+            if (gridUid == null || !allGrids.Contains(gridUid.Value))
                 continue;
 
             RefreshPowerMonitoringConsole(ent, entConsole);
@@ -295,18 +307,25 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     private void UpdateUIState(EntityUid uid, PowerMonitoringConsoleComponent component)
     {
-        var consoleXform = Transform(uid);
-
-        if (consoleXform?.GridUid == null)
+        var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(uid, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+        if (gridUid == null)
             return;
 
-        var gridUid = consoleXform.GridUid.Value;
+        if (_tagSystem.HasTag(uid, "ForgeHandheldMonitoringConsole"))
+        {
+            RefreshPowerMonitoringConsole(uid, component);
 
-        if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
+            if (TryComp<PowerMonitoringCableNetworksComponent>(uid, out var cableNetworks))
+                RefreshPowerMonitoringCableNetworks(uid, cableNetworks);
+        }
+
+        var grid = gridUid.Value;
+
+        if (!TryComp<MapGridComponent>(grid, out var mapGrid))
             return;
 
         // The grid must have a NavMapComponent to visualize the map in the UI
-        EnsureComp<NavMapComponent>(gridUid);
+        EnsureComp<NavMapComponent>(grid);
 
         // Initializing data to be send to the client
         var totalSources = 0d;
@@ -324,7 +343,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
         var powerConsumerQuery = AllEntityQuery<PowerConsumerComponent, TransformComponent>();
         while (powerConsumerQuery.MoveNext(out var ent, out var powerConsumer, out var xform))
         {
-            if (xform.Anchored == false || xform.GridUid != gridUid)
+            if (xform.Anchored == false || xform.GridUid != grid)
                 continue;
 
             if (TryComp<PowerMonitoringDeviceComponent>(ent, out var device))
@@ -348,7 +367,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
             if (device.IsCollectionMasterOrChild && !device.IsCollectionMaster)
                 continue;
 
-            if (xform.Anchored == false || xform.GridUid != gridUid)
+            if (xform.Anchored == false || xform.GridUid != grid)
                 continue;
 
             // Get the device power stats
@@ -412,7 +431,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
                             reachableEntities.Add(node.Owner);
                     }
 
-                    UpdateFocusNetwork(uid, cableNetworks, gridUid, mapGrid, reachableEntities);
+                    UpdateFocusNetwork(uid, cableNetworks, grid, mapGrid, reachableEntities);
                 }
             }
         }
@@ -948,12 +967,13 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
         component.PowerMonitoringDeviceMetaData.Clear();
         component.Flags = 0;
 
-        var xform = Transform(uid);
-
-        if (xform.GridUid == null)
+        // Forge-Change-Start: use holder grid when the console is a handheld Forge monitor
+        var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(uid, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+        if (gridUid == null)
             return;
 
-        var grid = xform.GridUid.Value;
+        var grid = gridUid.Value;
+        // Forge-Change-End
 
         var query = AllEntityQuery<PowerMonitoringDeviceComponent, TransformComponent>();
         while (query.MoveNext(out var ent, out var entDevice, out var entXform))
@@ -989,12 +1009,13 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     private void RefreshPowerMonitoringCableNetworks(EntityUid uid, PowerMonitoringCableNetworksComponent component)
     {
-        var xform = Transform(uid);
-
-        if (xform.GridUid == null)
+        // Forge-Change-Start: use holder grid when the console is a handheld Forge monitor
+        var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(uid, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+        if (gridUid == null)
             return;
 
-        var grid = xform.GridUid.Value;
+        var grid = gridUid.Value;
+        // Forge-Change-End
 
         if (!TryComp<MapGridComponent>(grid, out var map))
             return;

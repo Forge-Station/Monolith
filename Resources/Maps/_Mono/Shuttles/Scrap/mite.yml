@@ -384,8 +384,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: SalvageMobRestrictionsGrid
-      mobsToKill: []
     - type: ShipGridLock
       locked: False
     - type: Roof

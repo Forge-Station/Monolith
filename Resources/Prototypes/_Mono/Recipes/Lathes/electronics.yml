@@ -43,6 +43,48 @@
   id: MachineGCSHighCircuitboard
   result: MachineGCSHighCircuitboard
 
+# Forge-Change-Start
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: GCSMediumUpgradeCircuitboard
+  result: GCSMediumUpgradeCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: GCSHighUpgradeCircuitboard
+  result: GCSHighUpgradeCircuitboard
+  materials:
+    Steel: 150
+    Glass: 500
+    Gold: 150
+    Plasma: 100
+
+- type: latheRecipe
+  parent: BaseBluespaceCircuitboardRecipe
+  id: GCSUltraUpgradeCircuitboard
+  result: GCSUltraUpgradeCircuitboard
+  materials:
+    Steel: 150
+    Glass: 500
+    Bluespace: 200
+    Diamond: 200
+    Plasma: 150
+    Uranium: 150
+
+- type: latheRecipe
+  parent: BaseBluespaceCircuitboardRecipe
+  id: GCSOmegaUpgradeCircuitboard
+  result: GCSOmegaUpgradeCircuitboard
+  materials:
+    Steel: 200
+    Glass: 600
+    Bluespace: 350
+    Diamond: 450
+    Plasma: 550
+    Uranium: 200
+    UraniumFissile: 300
+# Forge-Change-end
+
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
   id: AdvancedRadarConsoleCircuitboard

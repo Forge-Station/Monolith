@@ -60,3 +60,8 @@ research-technology-empire-subsonic = Безгильзовое вооружен�
 research-technology-empire-advanced-guns = Продвинутое вооружение
 research-technology-empire-heavy-weapons = Тяжелое вооружение
 research-technology-empire-melee-weapons = Продвинутое вооружение ближнего боя
+
+research-technology-empire-vouchers-t1-germes = Технология сборки "Гермес ES"
+research-technology-empire-vouchers-t2-pluto = Технология сборки "Нептун"
+research-technology-empire-vouchers-t2-mirko = Технология сборки "Миррко"
+research-technology-empire-vouchers-t3-terit = Технология сборки "Терит"

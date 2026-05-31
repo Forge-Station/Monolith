@@ -8,7 +8,7 @@
     layers:
     - state: imperial
     - state: idempsilver
-  - type: PresetIdCard
+  - type: PresetIDCard
     job: Auxilia
 
 - type: entity

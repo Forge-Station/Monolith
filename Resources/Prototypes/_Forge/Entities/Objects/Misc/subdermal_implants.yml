@@ -56,3 +56,15 @@
     - type: ForgeEmpDamage
       damageType: Heat
       amount: 20
+
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: ImplantGuard
+  name: guard implant
+  description: This implant will shield the brain from external influences and prevent mind control devices. # DeltaV - mindshield does not enforce loyalty
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    permanent: false
+  - type: GuardImplant

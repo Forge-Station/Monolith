@@ -1,0 +1,33 @@
+- type: vessel
+  id: SPunisher
+  parent: BaseVessel
+  name: 'MBS Каратель-М'
+  description: Небольшой шаттл для наемников, вооруженный двумя крупнокалиберными орудиями и двумя ракетницами. Рассчитан на экипаж 2-4 
+  price: 69000
+  category: Small
+  group: Shipyard
+  access: Mercenary
+  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/SPunisher.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+- type: gameMap
+  id: SPunisher
+  mapName: 'MBS Каратель-М'
+  mapPath: /Maps/_Forge/Shuttles/Mercenary/SPunisher.yml
+  minPlayers: 0
+  stations:
+    SPunisher:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'MBS Каратель-М MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

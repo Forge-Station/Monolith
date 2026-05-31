@@ -44,8 +44,13 @@
     - type: NpcFactionMember
       factions:
       - Empire
+<<<<<<< HEAD
+    - !type:AddImplantSpecial
+      implants: [ ImplantGuard , EmpireTrackingImplant ]
+=======
   - !type:AddImplantSpecial
     implants: [ ImplantGuard ]
+>>>>>>> 55428f9a1f8250c8e19fe2e0be60b72c91c06c86
 
 - type: startingGear
   id: ConsulGear

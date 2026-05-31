@@ -1,25 +1,29 @@
 # Empire outpost temporarily disabled.
 - type: pointOfInterest
-  id: OutpostEmpire
+  id: EmpireOutpost
   parent: [BasePOI, BaseRepairablePOI]
   name: 'Аванпост СИВ'
   minimumDistance: 7500
   maximumDistance: 9500
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed]
   spawnGroup: Required
-  gridPath: /Maps/_Forge/POI/OutpostEmpire.yml
+  placementTags: [ Empire ]
+  minDistanceFromTags:
+  Renegates: 5000
+  TSF: 5000
+  gridPath: /Maps/_Forge/POI/EmpireOutpost.yml
   addComponents:
   - type: IFF
     color: "#ab7a52"
     readOnly: true # mono
 
 - type: gameMap
-  id: OutpostEmpire
+  id: EmpireOutpost
   mapName: 'Аванпост СИВ'
-  mapPath: /Maps/_Forge/POI/OutpostEmpire.yml
+  mapPath: /Maps/_Forge/POI/EmpireOutpost.yml
   minPlayers: 0
   stations:
-    OutpostEmpire:
+    EmpireOutpost:
       stationProto: StandardFrontierOutpost
       gridComponents:
       - type: VesselInfo

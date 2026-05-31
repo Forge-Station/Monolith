@@ -32,6 +32,7 @@
     # Empire start
     - HardsuitEmpirePack
     - WeaponEmpirePack
+    - EmpireVoucherRecipePack
     # rogue start
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged

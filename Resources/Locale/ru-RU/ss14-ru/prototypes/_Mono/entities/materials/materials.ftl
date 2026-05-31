@@ -47,6 +47,37 @@ ent-SheetUraniumFissile1 = { ent-SheetUraniumFissile }
 ent-SheetUraniumDepleted = обеднённый уран
     .suffix = Полный
     .desc = Слитки прочного, плотного и невероятно тяжёлого обеднённого урана. Он больше не делится, но всё ещё полезен для задач, не связанных с военными преступлениями.
+ent-materials-lithium = { ent-SheetUraniumDepleted }
+    .suffix = 1
+    .desc = { ent-SheetUraniumDepleted.desc }
 ent-SheetUraniumDepleted1 = { ent-SheetUraniumDepleted }
     .suffix = 1
     .desc = { ent-SheetUraniumDepleted.desc }
+
+ent-MaterialLithium = литий
+    .suffix = Полный
+    .desc = Литий - мягкий, хрупкий металл, широко используемый в различных электронных устройствах, в первую очередь в щелочных аккумуляторах. Кроме того, он обладает опасной химической активностью!
+ent-SheetLithium1 = { ent-MaterialLithium }
+    .suffix = 1
+    .desc = { ent-MaterialLithium.desc }
+ent-SheetLithium10 = { ent-MaterialLithium }
+    .suffix = 10
+    .desc = { ent-MaterialLithium.desc }
+ent-SheetLithium50 = { ent-MaterialLithium }
+    .suffix = 50
+    .desc = { ent-MaterialLithium.desc }
+
+
+
+ent-MaterialCopper = медь
+    .suffix = Полный
+    .desc = Медь используется во многих электронных устройствах. Возможно, даже во всех из них. Возможно, это даже будет преуменьшением.
+ent-SheetCopper1 = { ent-MaterialCopper }
+    .suffix = 1
+    .desc = { ent-MaterialCopper.desc }
+ent-SheetCopper10 = { ent-MaterialCopper }
+    .suffix = 10
+    .desc = { ent-MaterialCopper.desc }
+ent-SheetCopper50 = { ent-MaterialCopper }
+    .suffix = 50
+    .desc = { ent-MaterialCopper.desc }

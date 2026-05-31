@@ -7909,9 +7909,16 @@ entities:
     - type: Transform
       pos: -6.5,2.5
       parent: 2
-- proto: ForgeSpawnPointTessarian
+- proto: ForgeSpawnPointCardinal
   entities:
-  - uid: 100009
+  - uid: 100003
+    components:
+    - type: Transform
+      pos: -6.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointArbiter
+  entities:
+  - uid: 100001
     components:
     - type: Transform
       pos: -6.5,2.5

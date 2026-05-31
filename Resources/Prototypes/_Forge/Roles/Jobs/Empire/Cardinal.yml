@@ -14,8 +14,7 @@
       - Male
     - !type:AgeRequirement
       requiredAge: 35
-  setPreference: false
-  overrideConsoleVisibility: true
+  setPreference: true
   startingGear: CardinalGear
   alwaysUseSpawner: true
   icon: JobIconEmpireCardinal

@@ -15,8 +15,9 @@
 
 - type: entity
   id: GuardImplanter
+  name: guard implanter
   parent: BaseImplantOnlyImplanter
-  suffix: Страж
+  suffix: guard
   components:
     - type: Implanter
       implant: ImplantGuard

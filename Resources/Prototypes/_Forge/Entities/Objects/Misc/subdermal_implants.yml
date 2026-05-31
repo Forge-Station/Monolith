@@ -65,4 +65,6 @@
   description: This implant will shield the brain from external influences and prevent mind control devices. # DeltaV - mindshield does not enforce loyalty
   categories: [ HideSpawnMenu ]
   components:
-   - type: GuardImplant
+  - type: SubdermalImplant
+    permanent: false
+  - type: GuardImplant

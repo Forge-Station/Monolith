@@ -9,7 +9,7 @@ using Content.Shared.Mindshield.Components;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Tag;
 
-namespace Content.Server.Guard;
+namespace Content.Server.Mindshield;
 
 /// <summary>
 /// System used for checking if the implanted is a Rev or Head Rev.

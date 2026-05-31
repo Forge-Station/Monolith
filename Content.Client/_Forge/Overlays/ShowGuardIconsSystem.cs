@@ -4,6 +4,7 @@ using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Prototypes;
 using Content.Shared.Inventory;
+
 namespace Content.Client.Overlays;
 
 public sealed partial class ShowGuardIconsSystem : EquipmentHudSystem<ShowGuardIconsComponent>

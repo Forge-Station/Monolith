@@ -2,7 +2,7 @@
   id: EmpireBasicClothing
   name: research-technology-empire-clothing
   entityIcon: ClothingUniformJumpsuitNeophyte
-  discipline: EmpireEquipment
+  discipline: Empire
   tier: 1
   cost: 40000
   recipeUnlocks:
@@ -26,7 +26,7 @@
   id: EmpireBasicEquipment
   name: research-technology-empire-light
   entityIcon: ClothingOuterHardsuitRI14
-  discipline: EmpireEquipment
+  discipline: Empire
   tier: 1
   cost: 60000
   recipeUnlocks:
@@ -41,7 +41,7 @@
   id: EmpireAdvancedEquipment
   name: research-technology-empire-adv
   entityIcon: ClothingOuterHardsuitRI22
-  discipline: EmpireEquipment
+  discipline: Empire
   tier: 2
   cost: 80000
   recipeUnlocks:
@@ -57,7 +57,7 @@
   id: EmpireHardsuitVigilance
   name: research-technology-empire-prototype-militant
   entityIcon: ClothingOuterHardsuitHV7
-  discipline: EmpireEquipment
+  discipline: Empire
   tier: 2
   cost: 250000
   recipeUnlocks:
@@ -72,7 +72,7 @@
   id: EmpireHardsuitStealh
   name: research-technology-empire-prototype-stealh
   entityIcon: ClothingOuterHardsuitHVStealh
-  discipline: EmpireEquipment
+  discipline: Empire
   tier: 2
   cost: 150000
   recipeUnlocks:

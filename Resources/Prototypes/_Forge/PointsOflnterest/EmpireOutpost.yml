@@ -2,7 +2,7 @@
 - type: pointOfInterest
   id: EmpireOutpost
   parent: [BasePOI, BaseRepairablePOI]
-  name: 'Аванпост СИВ'
+  name: 'Оплот СИВ «Каструм Аврелий»'
   minimumDistance: 7500
   maximumDistance: 9500
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed]
@@ -26,7 +26,7 @@
 
 - type: gameMap
   id: EmpireOutpost
-  mapName: 'Аванпост СИВ'
+  mapName: 'Оплот СИВ «Каструм Аврелий»'
   mapPath: /Maps/_Forge/POI/EmpireOutpost.yml
   minPlayers: 0
   stations:
@@ -34,10 +34,10 @@
       stationProto: StandardFrontierOutpost
       gridComponents:
       - type: VesselInfo
-        description: "Аванпост Империи"
+        description: "Укреплённый форпост Священной Империи Вермиллионов — преторианский гарнизон на кровавом рубеже сектора."
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Аванпост СИВ'
+          mapNameTemplate: 'Оплот СИВ «Каструм Аврелий»'
         - type: ExtraStationInformation
           icon:
             sprite: Forge/Structures/Decoration/banner.rsi

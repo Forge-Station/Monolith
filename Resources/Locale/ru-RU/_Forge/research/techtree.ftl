@@ -42,9 +42,7 @@ research-technology-forge-public-weaponry = Импровизированное �
 
 # Empire
 # Disciplines
-research-discipline-empire-weaponry = Вооружение
-research-discipline-empire-equipment = Экипировка
-research-discipline-empire-shipyard = Верфь
+research-discipline-empire = Империя
 
 # Technology
 research-technology-empire-clothing = Гвардейская униформа

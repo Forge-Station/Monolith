@@ -2,7 +2,7 @@
   id: EmpireVouchersGermesT1
   name: research-technology-empire-vouchers-t1-germes
   entityIcon: ShipVoucherGermes
-  discipline: EmpireShip
+  discipline: Empire
   tier: 1
   cost: 80000
   recipeUnlocks:
@@ -15,7 +15,7 @@
   id: EmpireVouchersPlutot2
   name: research-technology-empire-vouchers-t2-pluto
   entityIcon: ShipVoucherPluto
-  discipline: EmpireShip
+  discipline: Empire
   tier: 2
   cost: 125000
   recipeUnlocks:
@@ -28,7 +28,7 @@
   id: EmpireVouchersMirkot2
   name: research-technology-empire-vouchers-t2-mirko
   entityIcon: ShipVoucherMirko
-  discipline: EmpireShip
+  discipline: Empire
   tier: 2
   cost: 125000
   recipeUnlocks:
@@ -41,7 +41,7 @@
   id: EmpireVouchersTeritt3
   name: research-technology-empire-vouchers-t3-terit
   entityIcon: ShipVoucherTerit
-  discipline: EmpireShip
+  discipline: Empire
   tier: 3
   cost: 145000
   recipeUnlocks:

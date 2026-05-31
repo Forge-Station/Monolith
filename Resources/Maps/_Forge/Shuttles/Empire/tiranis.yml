@@ -4727,7 +4727,7 @@ entities:
     - type: Transform
       pos: 1.9381976,-4.4065943
       parent: 1
-- proto: ClothingOuterHardsuitEmpire14m
+- proto: ClothingOuterHardsuitRI22
   entities:
   - uid: 673
     components:

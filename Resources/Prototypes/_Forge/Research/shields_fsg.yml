@@ -136,3 +136,20 @@
   - UllmanPulseAdv
   - UniversalMaterialResearchT2
   position: -7, -6
+
+- type: technology
+  id: ForgeFSGShieldsEmpireT3
+  name: research-technology-forge-fsg-shields-tier3
+  entityIcon: MachineShieldForgeEmpireHeavyCircuitboard
+  discipline: Empire
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - MachineShieldForgeEmpireHeavyCircuitboard
+  - MachineShieldForgeEmpirePrismaticCircuitboard
+  - MachineShieldForgeEmpireCollisionCircuitboard
+  - MachineShieldForgeEmpireSignumCircuitboard
+  technologyPrerequisites:
+  - EmpireAdvancedEquipment
+  - UniversalMaterialResearchT2
+  position: 13, 17

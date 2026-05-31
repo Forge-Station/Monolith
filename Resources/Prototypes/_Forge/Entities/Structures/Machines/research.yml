@@ -47,8 +47,7 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: TechnologyDatabase
     supportedDisciplines:
-    - EmpireWeapon
-    - EmpireEquipment
+    - Empire
     - FactionUniversal
     - Industrial
     - ShipArmory
@@ -56,4 +55,3 @@
     - Experimental
     - CivilianServices
     - MechaEngineering
-    - EmpireShip

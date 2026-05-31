@@ -2,7 +2,7 @@
   id: EmpireBasicGuns
   name: research-technology-empire-basic-guns
   entityIcon: WeaponSubMachineGunC20r
-  discipline: EmpireWeapon
+  discipline: Empire
   tier: 1
   cost: 55000
   recipeUnlocks:
@@ -19,7 +19,7 @@
   id: EmpireSubsonic
   name: research-technology-empire-subsonic
   entityIcon: WeaponSubMachineGunMla73
-  discipline: EmpireWeapon
+  discipline: Empire
   tier: 1
   cost: 60000
   recipeUnlocks:
@@ -40,7 +40,7 @@
   id: EmpireAdvancedGuns
   name: research-technology-empire-advanced-guns
   entityIcon: WeaponRifleM90
-  discipline: EmpireWeapon
+  discipline: Empire
   tier: 2
   cost: 70000
   recipeUnlocks:
@@ -56,7 +56,7 @@
   id: EmpireHeavyWeapons
   name: research-technology-empire-heavy-weapons
   entityIcon: WeaponSniperHristov
-  discipline: EmpireWeapon
+  discipline: Empire
   tier: 1
   cost: 75000
   recipeUnlocks:
@@ -72,7 +72,7 @@
   id: EmpireMelleeWeapons
   name: research-technology-empire-melee-weapons
   entityIcon: ADTWeaponMeleePrasatChainsword
-  discipline: EmpireWeapon
+  discipline: Empire
   tier: 1
   cost: 90000
   recipeUnlocks:

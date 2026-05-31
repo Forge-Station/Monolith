@@ -73,6 +73,7 @@
     requirements:
       Capacitor: 2
       Manipulator: 2
+      MatterBin: 1
     stackRequirements:
       Glass: 10
       Steel: 10
@@ -90,6 +91,7 @@
     requirements:
       Capacitor: 2
       Manipulator: 2
+      MatterBin: 1
     stackRequirements:
       Glass: 10
       Steel: 10
@@ -107,6 +109,7 @@
     requirements:
       Capacitor: 2
       Manipulator: 2
+      MatterBin: 1
     stackRequirements:
       Glass: 10
       Steel: 10
@@ -124,6 +127,25 @@
     requirements:
       Capacitor: 2
       Manipulator: 2
+      MatterBin: 1
+    stackRequirements:
+      Glass: 10
+      Steel: 10
+
+- type: entity
+  id: MachineGCSOmegaCircuitboard
+  parent: BaseMachineCircuitboard
+  name: omega-high-power gunnery control server board
+  description: A machine board for a GCS.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: GunneryServerOmega
+    requirements:
+      Capacitor: 2
+      Manipulator: 2
+      MatterBin: 1
     stackRequirements:
       Glass: 10
       Steel: 10
@@ -144,6 +166,92 @@
     stackRequirements:
       Glass: 10
       Steel: 10
+
+# Forge-Change-Start
+- type: entity
+  id: GCSMediumUpgradeCircuitboard
+  parent: BaseItem
+  name: medium gunnery server upgrade board
+  description: Upgrades a low-power gunnery server once better parts are installed.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: security
+  - type: Item
+    storedRotation: -90
+  - type: StaticPrice
+    price: 250
+  - type: GunneryServerUpgradeBoard
+    sourceTier: Low
+    targetTier: Medium
+    requiredParts:
+      AdvancedCapacitorStockPart: 2
+      NanoManipulatorStockPart: 2
+      AdvancedMatterBinStockPart: 1
+
+- type: entity
+  id: GCSHighUpgradeCircuitboard
+  parent: BaseItem
+  name: high gunnery server upgrade board
+  description: Upgrades a medium gunnery server once advanced parts are installed.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: security
+  - type: Item
+    storedRotation: -90
+  - type: StaticPrice
+    price: 400
+  - type: GunneryServerUpgradeBoard
+    sourceTier: Medium
+    targetTier: High
+    requiredParts:
+      SuperCapacitorStockPart: 2
+      PicoManipulatorStockPart: 2
+      SuperMatterBinStockPart: 1
+
+- type: entity
+  id: GCSUltraUpgradeCircuitboard
+  parent: BaseItem
+  name: ultra gunnery server upgrade board
+  description: Upgrades a high gunnery server once experimental-grade parts are installed.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: security
+  - type: Item
+    storedRotation: -90
+  - type: StaticPrice
+    price: 700
+  - type: GunneryServerUpgradeBoard
+    sourceTier: High
+    targetTier: Ultra
+    requiredParts:
+      QuadraticCapacitorStockPart: 4
+      FemtoManipulatorStockPart: 4
+      BluespaceMatterBinStockPart: 2
+
+- type: entity
+  id: GCSOmegaUpgradeCircuitboard
+  parent: BaseItem
+  name: omega gunnery server upgrade board
+  description: Upgrades an ultra gunnery server into a top-end omega control server.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: security
+  - type: Item
+    storedRotation: -90
+  - type: StaticPrice
+    price: 1200
+  - type: GunneryServerUpgradeBoard
+    sourceTier: Ultra
+    targetTier: Omega
+    requiredParts:
+      QuadraticCapacitorStockPart: 8
+      FemtoManipulatorStockPart: 8
+      BluespaceMatterBinStockPart: 4
+# Forge-Change-end
 
 - type: entity
   id: MachineDriveCTLA25sCircuitboard

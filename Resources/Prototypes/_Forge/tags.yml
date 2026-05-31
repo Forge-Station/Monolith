@@ -11,6 +11,9 @@
   id: SyndicateSabre
 
 - type: Tag
+  id: ADTWeaponMeleePrasatChainsword
+
+- type: Tag
   id: MagazineAntiMateriel
 
 - type: Tag

@@ -5,7 +5,6 @@ forge-surgical-armor-already-installed = This body already has an armor implant 
 
 reagent-effect-guidebook-transmutin-species-reaction = Converts transmutin into a donor-species transmutin when mixed with blood carrying species data.
 reagent-effect-guidebook-transmutin-mutate-monkey = Mutates monkeys into the selected humanoid species without granting intelligence.
-
 ent-ForgeVoiceModuleImplant = voice module implant
     .desc = A configurable subdermal TTS voice modulator. Configure it in hand before implantation.
 ent-ForgeSubdermalArmorImplant = subdermal armor implant
@@ -20,6 +19,10 @@ ent-ForgeRiplyLeftHand = R.I.P.L.Y left hand
     .desc = A cybernetic left hand with reinforced fingertip anchors. It helps drag and carry heavy bodies only when paired with the matching hand.
 ent-ForgeRiplyRightHand = R.I.P.L.Y right hand
     .desc = A cybernetic right hand with reinforced fingertip anchors. It helps drag and carry heavy bodies only when paired with the matching hand.
+ent-ImplantGuard = guard implant
+    .desc = A technological chip that shields loyal minds of the Holy Empire's subjects.
+ent-GuardImplanter = guard implanter
+    .desc = A disposable syringe preloaded with a guard implant.
 ent-ForgeVoiceModuleImplanter = voice module implanter
     .desc = A disposable syringe preloaded with a configurable voice module implant.
 ent-ForgeCyberneticLiver = cybernetic liver

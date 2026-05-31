@@ -75,6 +75,9 @@
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Desoxyephedrine
+        toleranceGain: 0.029 # 15 = 0.435
     Medicine:
       effects:
       - !type:ResetNarcolepsy
@@ -151,6 +154,9 @@
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Ephedrine
+        toleranceGain: 0.03 # 15 = 0.45
     Medicine:
       effects:
       - !type:ResetNarcolepsy
@@ -237,6 +243,9 @@
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Stimulants
+        toleranceGain: 0.025 # 15 = 0.375
     Medicine:
       metabolismRate: 1.0
       effects:
@@ -316,6 +325,9 @@
             Shock: -0.1
             Cold: -0.1
             Radiation: -0.1
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Nicotine
+        toleranceGain: 0.098
 
 # TODO: Replace these nonstandardized effects with generic brain damage
 - type: reagent
@@ -392,6 +404,9 @@
         type: Add
         time: 5
         refresh: false
+      - !type:AddictiveEffect # Forge-change
+        addictionId: SpaceDrugs
+        toleranceGain: 0.025 # 15 = 0.375
 
 - type: reagent
   id: Bananadine
@@ -623,4 +638,3 @@
         type: Add
         time: 5
         refresh: false
- 

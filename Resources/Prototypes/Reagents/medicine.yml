@@ -321,6 +321,9 @@
           types:
             Asphyxiation: 3
             Cold: 1
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Dexalin
+        toleranceGain: 0.02 # 15 = 0.3
 
 - type: reagent
   id: DexalinPlus
@@ -356,6 +359,9 @@
           types:
             Asphyxiation: 5
             Cold: 3
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Dexalin
+        toleranceGain: 0.02 # 15 = 0.3
 
 # this ones a doozy
 - type: reagent
@@ -921,7 +927,7 @@
           min: 15
         reagent: Tricordrazine
         amount: -0.8
-        
+
 
 - type: reagent
   id: Lipozine
@@ -956,7 +962,7 @@
           Burn: -1.5
           Toxin: -1.5
           Airloss: -1.5
-          Brute: -1.5   
+          Brute: -1.5
       - !type:AdjustReagent # Mono: Overdose, penalize metabolism
         conditions:
         - !type:ReagentThreshold
@@ -1460,7 +1466,7 @@
           component: ForcedSleeping
           refresh: false
           type: Add
-        
+
 
 - type: reagent
   id : Aloxadone

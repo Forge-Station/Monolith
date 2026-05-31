@@ -16,6 +16,7 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mind.Components;
+using Content.Shared._Forge.Guard.Components;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -141,6 +142,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
 
         if (HasComp<RevolutionaryComponent>(ev.Target) ||
             HasComp<MindShieldComponent>(ev.Target) ||
+            HasComp<GuardComponent>(ev.Target) ||
             !HasComp<HumanoidAppearanceComponent>(ev.Target) &&
             !alwaysConvertible ||
             !_mobState.IsAlive(ev.Target) ||

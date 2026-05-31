@@ -35,11 +35,15 @@
 #   accessGroups:
 #   - GeneralEmpireAccess
 #   special:
+#   - !type:AddImplantSpecial
+#     implants: [ ImperialTrackingImplant ]
 #   - !type:AddComponentSpecial
 #     components:
 #     - type: NpcFactionMember
 #       factions:
 #       - Empire
+#     - !type:AddImplantSpecial
+#       implants: [ ImplantGuard ]
 #
 # - type: startingGear
 #   id: NeophyteGear

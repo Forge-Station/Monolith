@@ -11,6 +11,9 @@
   id: SyndicateSabre
 
 - type: Tag
+  id: ADTWeaponMeleePrasatChainsword
+
+- type: Tag
   id: MagazineAntiMateriel
 
 - type: Tag
@@ -207,6 +210,9 @@
 
 - type: Tag
   id: NoGridGodmode
+
+- type: Tag
+  id: ForgeHandheldMonitoringConsole
 
 - type: Tag
   id: 40mmCartridge

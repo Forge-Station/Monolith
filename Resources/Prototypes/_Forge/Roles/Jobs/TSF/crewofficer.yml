@@ -36,7 +36,7 @@
       factions:
       - TSFMC
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, TrackingImplant ]
+    implants: [ MindShieldImplant, TSFTrackingImplant ]
   - !type:AddLanguageSpecial
     languagesSpoken:
     - SolCommon

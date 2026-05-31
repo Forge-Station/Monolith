@@ -83,6 +83,7 @@
     # Mono End
     dynamicPacks:
     - NFEngineeringTechfabDeprecated
+    - AtmosTools
     - RCD # Mono
   - type: PirateBountyItem # Mono
     id: Techfab

@@ -1,0 +1,17 @@
+- type: latheRecipe
+  id: HandheldForgeAtmosMonitoring
+  result: HandheldForgeAtmosMonitoringEmpty
+  completetime: 6
+  materials:
+    Steel: 500
+    Glass: 200
+    Plastic: 100
+
+- type: latheRecipe
+  id: HandheldForgePowerMonitoring
+  result: HandheldForgePowerMonitoringEmpty
+  completetime: 6
+  materials:
+    Steel: 500
+    Glass: 200
+    Plastic: 100

@@ -247,7 +247,7 @@
     - PowerCells
     - ScienceWeapons
     - Mining
-    - AtmosTools
+    - ForgeEngineeringTools # Forge-Change: handheld monitors
     - ResearchedExplosives # Mono
     # - EngineeringWeapons # Frontier
     - Chemistry

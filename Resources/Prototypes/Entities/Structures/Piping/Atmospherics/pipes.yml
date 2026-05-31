@@ -17,9 +17,16 @@
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic
   - type: SubFloorHide
+    blockInteractions: false
   - type: CollideOnAnchor
   - type: Anchorable
   - type: Rotatable
+  # Forge-Change: RPD deconstruct whitelist (Goob-Station/Goob-Station#1203)
+  - type: RCDDeconstructable
+    cost: 1
+    delay: 2
+    fx: EffectRCDDeconstruct2
+    rpd: true
   - type: Destructible
     thresholds:
     - trigger: # for nukes

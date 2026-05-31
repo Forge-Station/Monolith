@@ -1,3 +1,19 @@
+# Drake industrial mining laser
+- type: entity
+  parent: RedMediumLaser
+  id: DrakeIndustrialLaserHitscan
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 15
+        Structural: 30
+  - type: HitscanBasicRaycast
+    maxDistance: 24
+  - type: MiningGatheringSoft
+  - type: DrakeHitscanGathering
+
 # Pistols / SMGs
 - type: entity
   parent: BasicHitscan

@@ -103,6 +103,7 @@
       Lithium: 20
       Plastitanium: 80
       UraniumDepleted: 5
+      Iridite: 3
 
 - type: entity
   id: WeaponTurretL85AutocannonCircuitboard
@@ -376,6 +377,39 @@
   components:
   - type: MachineBoard
     prototype: WeaponLaserTurretApolloPortable
+  - type: Tag
+    tags:
+    - MachineBoard2x2
+
+- type: entity
+  id: WeaponTurretDrakeApolloMk2Circuitboard
+  parent: ForgeShipWeaponCircuitboardT4
+  name: Apollo MK2 mining laser machine board
+  description: An upgraded machine printed circuit board for a Drake Industries D-20 Apollo MK2 mining laser cannon. Used with a naval weapon fabricator.
+  components:
+  - type: ShipWeaponBoard
+    fabricationTime: 360
+  - type: MachineBoard
+    prototype: WeaponTurretDrakeApolloMk2Portable
+    requirements:
+      Capacitor: 10
+      Manipulator: 10
+      MatterBin: 8
+    stackRequirements:
+      Steel: 90
+      Glass: 50
+      Plasteel: 60
+      Gold: 50
+      Plasma: 40
+      Uranium: 35
+      Bluespace: 8
+      Diamond: 8
+      Silver: 40
+      Copper: 90
+      Lithium: 25
+      Plastitanium: 120
+      UraniumDepleted: 20
+      Iridite: 5
   - type: Tag
     tags:
     - MachineBoard2x2

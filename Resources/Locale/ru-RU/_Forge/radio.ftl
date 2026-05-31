@@ -21,3 +21,4 @@ chat-radio-ullman = Ullman
 chat-radio-unsa = UNSA
 chat-radio-tl = TechnicLogistic
 chat-radio-harmony = Harmony
+chat-radio-drake-industries = Drake Industries

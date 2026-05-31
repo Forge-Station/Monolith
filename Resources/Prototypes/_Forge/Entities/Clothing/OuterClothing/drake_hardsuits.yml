@@ -1,0 +1,185 @@
+# Drake Industries hardsuits - no armor plates (not parented to ClothingArmorPlate).
+
+- type: entity
+  abstract: true
+  parent: [RecyclableItemClothHardsuit, ClothingOuterBase, GeigerCounterClothing, AllowSuitStorageClothing]
+  id: DrakeHardsuitOuterBase
+  components:
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.001
+  - type: Item
+    size: Huge
+  - type: HeldSpeedModifier
+  - type: SubdermalImplant
+    pullingAssistSlowdownPenaltyModifier: 0.5
+    pullingAssistMassPenaltyModifier: 0.5
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container {}
+      storagebase: !type:Container
+        ents: []
+
+- type: entity
+  parent: [DrakeHardsuitOuterBase, BaseFactionGearOtherFactionT0]
+  id: ClothingOuterHardsuitDrakeMk4
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk4.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk4.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.8
+        Heat: 0.7
+        Radiation: 0.8
+        Caustic: 0.8
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitDrakeMk4
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: ModsuitGauntletTools
+    enabledSlots: [ Urk, Omnitool ]
+    usePrototypeMenuIcons: true
+    urkProto: NFWeaponHoloflareGun
+    omnitoolProto: WeaponGrapplingGun
+  - type: ActionGrant
+    actions:
+    - ActionDrakeGauntletToolsMenu
+  - type: ItemActionGrant
+    actions:
+    - ActionDrakeGauntletToolsMenu
+    activeIfWorn: true
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 7500
+
+- type: entity
+  parent: [DrakeHardsuitOuterBase, BaseFactionGearOtherFactionT1]
+  id: ClothingOuterHardsuitDrakeMk8
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk8.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk8.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.75
+        Heat: 0.6
+        Radiation: 0.9
+        Caustic: 0.75
+  - type: ClothingSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.95
+  - type: SubdermalImplant
+    pullingAssistSlowdownPenaltyModifier: 0.25
+    pullingAssistMassPenaltyModifier: 0.25
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitDrakeMk8
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: ModsuitGauntletTools
+    usePrototypeMenuIcons: true
+    enabledSlots:
+    - Urk
+    - Omnitool
+    - Welder
+    - NaniteApplicator
+    - Auxiliary
+    urkProto: DrakeIndustrialHoloflareGun
+    omnitoolProto: MineralScannerUnpowered
+    welderProto: WeaponProtoKineticAcceleratorSawn
+    naniteApplicatorProto: MiningDrill
+    auxiliaryProto: WeaponGrapplingGun
+  - type: ActionGrant
+    actions:
+    - ActionDrakeGauntletToolsMenu
+  - type: ItemActionGrant
+    actions:
+    - ActionDrakeGauntletToolsMenu
+    activeIfWorn: true
+  - type: StaticPrice
+    price: 7500
+    vendPrice: 10000
+
+- type: entity
+  parent: [DrakeHardsuitOuterBase, BaseFactionGearOtherFactionT2]
+  id: ClothingOuterHardsuitDrakeMk16
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk16.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk16.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.45
+        Slash: 0.45
+        Piercing: 0.7
+        Heat: 0.45
+        Radiation: 1
+        Caustic: 0.7
+  - type: ClothingSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.95
+  - type: SubdermalImplant
+    pullingAssistSlowdownPenaltyModifier: 0.1
+    pullingAssistMassPenaltyModifier: 0.1
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitDrakeMk16
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: ModsuitGauntletTools
+    usePrototypeMenuIcons: true
+    enabledSlots:
+    - Urk
+    - Omnitool
+    - Welder
+    - NaniteApplicator
+    - Auxiliary
+    urkProto: DrakeIndustrialHoloflareGun
+    omnitoolProto: AdvancedMineralScannerUnpowered
+    welderProto: WeaponDrakeIndustrialCutter
+    naniteApplicatorProto: MiningDrillDiamond
+    auxiliaryProto: WeaponGrapplingGun
+  - type: ActionGrant
+    actions:
+    - ActionDrakeGauntletToolsMenu
+  - type: ItemActionGrant
+    actions:
+    - ActionDrakeGauntletToolsMenu
+    activeIfWorn: true
+  - type: StaticPrice
+    price: 10000
+    vendPrice: 15000

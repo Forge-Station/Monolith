@@ -1,14 +1,5 @@
 research-discipline-mechs = Инженерия Мехов
 research-discipline-faction-universal = Универсальные Фракционные Исследования
-research-discipline-tsfmc-weaponry = Арсенал TSFMC
-research-discipline-tsfmc-gear = Снаряжение TSFMC
-research-discipline-tsfmc-equipment = Оборудование TSFMC
-research-discipline-tsfmc-shipyard = Тяжелая Промышленность TSFMC
-research-discipline-rogue-weaponry = Арсенал Изгоев
-research-discipline-rogue-gear = Снаряжение Изгоев
-research-discipline-rogue-equipment = Оборудование Изгоев
-research-discipline-rogue-shipyard = Тяжелая Промышленность Изгоев
-research-discipline-ussp = USSP
-research-discipline-ussp-shipyard = Тяжелая Промышленность USSP
-research-discipline-ussp-equipment = Оборудование USSP
-research-discipline-ussp-weaponry = Арсенал USSP
+research-discipline-tsfmc = Исследования TSFMC
+research-discipline-pdv = Исследования PDV
+research-discipline-shiparmory = Корабельное вооружение

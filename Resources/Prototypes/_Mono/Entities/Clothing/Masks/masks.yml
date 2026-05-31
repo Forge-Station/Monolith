@@ -3,6 +3,7 @@
   parent: ClothingMaskGasExplorer
   id: ClothingMaskDrakeIndustries
   name: drake industries respirator
+  suffix: Drake # Forge-Change
   description: A pretty uncommon design in the sector. Following industrial rebreather models, it affixes on the jaw and covers the lower part of the wearer's face. It's filters are connected internally. It bears the colors of Drake Industries.
   components:
   - type: Sprite
@@ -16,6 +17,7 @@
   parent: [ ClothingMaskDrakeIndustries  ]
   id: ClothingMaskDrakeIndustriesWatchdog
   name: watchdog respirator
+  suffix: Drake # Forge-Change
   description: A clunky respirator following the original design from Drake Industries. This one comes wih a polarized visor to protect the eyes during hostile encounters.
   components:
   - type: Sprite

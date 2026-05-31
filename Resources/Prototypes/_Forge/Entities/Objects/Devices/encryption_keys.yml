@@ -344,3 +344,19 @@
     layers:
     - state: crypt_silver
     - state: hme_label
+
+- type: entity
+  parent: [ EncryptionKey ]
+  id: EncryptionKeyDrakeIndustries
+  name: Drake Industries encryption key
+  suffix: Drake
+  description: drake-encrypt-key-desc
+  components:
+  - type: EncryptionKey
+    channels:
+    - DrakeIndustries
+    defaultChannel: DrakeIndustries
+  - type: Sprite
+    sprite: Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_gray

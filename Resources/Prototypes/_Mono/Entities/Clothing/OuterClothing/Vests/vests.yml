@@ -4,6 +4,7 @@
   parent: ClothingOuterStorageBase
   id: ClothingOuterDrakeIndustriesTruckerPuffyVest
   name: puffy vest
+  suffix: Drake # Forge-Change
   description: A flashy looking puffy and somewhat elastic vest. It makes an insane amount of noise at the slighest movement, but at least they bothered making some pockets on the inside.
   components:
   - type: Sprite

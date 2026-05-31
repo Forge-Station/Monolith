@@ -4,12 +4,26 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Forge.Clothing;
 
 [Serializable, NetSerializable]
+[Flags]
+public enum ModsuitGauntletEnabledSlots : byte
+{
+    None = 0,
+    Urk = 1 << 0,
+    Omnitool = 1 << 1,
+    Welder = 1 << 2,
+    NaniteApplicator = 1 << 3,
+    Auxiliary = 1 << 4,
+    All = Urk | Omnitool | Welder | NaniteApplicator,
+}
+
+[Serializable, NetSerializable]
 public enum ModsuitGauntletToolSlot : byte
 {
     Urk,
     Omnitool,
     Welder,
     NaniteApplicator,
+    Auxiliary,
 }
 
 [Serializable, NetSerializable]

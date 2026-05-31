@@ -248,3 +248,7 @@
     slots:
     - Belt
     - suitStorage
+  - type: Tag # Forge-Change: Drake plasma cutter tank whitelist
+    tags:
+    - GasTank
+    - DrakePlasmaTank

@@ -25,3 +25,5 @@ gunnery-upgrade-part-installed = The machine part was successfully installed int
 gunnery-upgrade-construction-started = Gunnery server upgrade to {$tier} has started. Insert the required parts.
 gunnery-upgrade-construction-active = Gunnery server upgrade to {$tier} is in progress.
 gunnery-upgrade-construction-part = Required {$part}: {$inserted}/{$required}
+
+research-discipline-shiparmory = Ship Armory

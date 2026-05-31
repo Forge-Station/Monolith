@@ -80,9 +80,11 @@
     interfaces:
       enum.CrystallizerUiKey.Key:
         type: CrystallizerBoundUserInterface
+        # Tall sprite (offset 0.5); default 2m BUI range caused debug asserts when clicking UI at normal interact distance.
+        interactionRange: 4
   - type: ActivatableUI
     key: enum.CrystallizerUiKey.Key
-    requiresComplex: false
+    requiresComplex: true
     blockSpectators: true
   - type: PointLight
     color: "#3a807f"

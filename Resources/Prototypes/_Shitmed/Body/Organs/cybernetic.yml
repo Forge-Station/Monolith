@@ -33,6 +33,7 @@
     - type: EyeProtection
     - type: ShowJobIcons
     - type: ShowMindShieldIcons
+    - type: ShowGuardIcons # ForgeChange
     - type: ShowCriminalRecordIcons
 
 - type: entity

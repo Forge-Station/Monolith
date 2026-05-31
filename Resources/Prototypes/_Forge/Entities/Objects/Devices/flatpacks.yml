@@ -1,0 +1,75 @@
+- type: entity
+  id: ForgeShipWeaponFlatpack
+  parent: BaseNFFlatpack
+  name: ship weapon flatpack
+  description: A packed naval weapon assembly crate. Use a multitool to deploy.
+  components:
+  - type: Flatpack
+  - type: HeldSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.8
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_2x2
+
+- type: entity
+  id: ForgeShipWeaponFlatpack1x1
+  parent: ForgeShipWeaponFlatpack
+  suffix: 1x1
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_1x1
+
+- type: entity
+  id: ForgeShipWeaponFlatpack1x2
+  parent: ForgeShipWeaponFlatpack
+  suffix: 1x2
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_1x2
+
+- type: entity
+  id: ForgeShipWeaponFlatpack2x2
+  parent: ForgeShipWeaponFlatpack
+  suffix: 2x2
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_2x2
+
+- type: entity
+  id: ForgeShipWeaponFlatpack2x3
+  parent: ForgeShipWeaponFlatpack
+  suffix: 2x3
+  components:
+  - type: Item
+    size: Huge
+  - type: HeldSpeedModifier
+    walkModifier: 0.7
+    sprintModifier: 0.65
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_2x3
+
+- type: entity
+  id: ForgeShipWeaponFlatpack3x3
+  parent: ForgeShipWeaponFlatpack
+  suffix: 3x3
+  components:
+  - type: Item
+    size: Ginormous
+  - type: MultiHandedItem
+  - type: HeldSpeedModifier
+    walkModifier: 0.55
+    sprintModifier: 0.5
+  - type: Sprite
+    sprite: Forge/Objects/Devices/flatpack.rsi
+    layers:
+    - state: gun_Case_3x3

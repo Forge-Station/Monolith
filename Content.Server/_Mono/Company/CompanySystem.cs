@@ -1,3 +1,4 @@
+using Content.Shared._Forge.Company;
 using Content.Shared._Mono.Company;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
@@ -6,8 +7,7 @@ using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
-using Content.Server.Database; // Forge-Change: company whitelist
-using System.Threading.Tasks; // Forge-Change: company whitelist
+using Robust.Shared.Timing;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -60,43 +60,15 @@ public sealed partial class CompanySystem : EntitySystem
             _playerOriginalCompanies[playerId] = profileCompany;
         }
 
-        var assigned = false;
-        if (args.JobId != null)
+        if (args.JobId != null && _prototypeManager.TryIndex<JobPrototype>(args.JobId, out var job))
         {
-            var job = _prototypeManager.Index<JobPrototype>(args.JobId);
-            companyComp.CompanyName = job.AssignedCompany;
-            assigned = companyComp.CompanyName != "None";
+            companyComp.CompanyName = FactionCompanyResolver.ResolveSpawnCompany(job, profileCompany);
         }
-        if (!assigned)
+        else
         {
-            // Only consider whitelist if the player has NO specific company preference
-            bool loginFound = false;
-
-            // Only check logins if the player hasn't explicitly set a company preference
-            // or if their preference is "None"
-            if (string.IsNullOrEmpty(profileCompany))
-            {
-                foreach (var companyProto in _prototypeManager.EnumeratePrototypes<CompanyPrototype>())
-                {
-                    if (_manager.IsAllowed(args.Player, companyProto))
-                    {
-                        companyComp.CompanyName = companyProto.ID;
-                        loginFound = true;
-                        break;
-                    }
-                }
-            }
-
-            // If no login was found or login check was skipped due to player preference, use the player's preference
-            if (!loginFound)
-            {
-                // Use "None" as fallback for empty company
-                if (string.IsNullOrEmpty(profileCompany))
-                    profileCompany = "None";
-
-                // Restore the player's original company preference
-                companyComp.CompanyName = profileCompany;
-            }
+            companyComp.CompanyName = FactionCompanyResolver.IsFactionCompany(profileCompany)
+                ? "None"
+                : string.IsNullOrEmpty(profileCompany) ? "None" : profileCompany;
         }
 
         // Forge-change-start
@@ -113,17 +85,22 @@ public sealed partial class CompanySystem : EntitySystem
         Dirty(args.Mob, companyComp);
 
         // Update the player's ID card with the company information
-        UpdateIdCardCompany(args.Mob, companyComp.CompanyName);
+        var companyName = companyComp.CompanyName.ToString();
+        if (!UpdateIdCardCompany(args.Mob, companyName))
+        {
+            // Loadout gear may finish equipping after this event; retry next tick.
+            Timer.Spawn(TimeSpan.Zero, () => UpdateIdCardCompany(args.Mob, companyName));
+        }
     }
 
     /// <summary>
     /// Updates the player's ID card with their company information
     /// </summary>
-    private void UpdateIdCardCompany(EntityUid playerEntity, string companyName)
+    private bool UpdateIdCardCompany(EntityUid playerEntity, string companyName)
     {
         // Try to get the player's ID card
         if (!_inventorySystem.TryGetSlotEntity(playerEntity, "id", out var idUid))
-            return;
+            return false;
 
         var cardId = idUid.Value;
 
@@ -132,9 +109,9 @@ public sealed partial class CompanySystem : EntitySystem
             cardId = pdaComponent.ContainedId.Value;
 
         // Update the ID card with company information
-        if (TryComp<IdCardComponent>(cardId, out var idCard))
-        {
-            _idCardSystem.TryChangeCompanyName(cardId, companyName, idCard);
-        }
+        if (!TryComp<IdCardComponent>(cardId, out var idCard))
+            return false;
+
+        return _idCardSystem.TryChangeCompanyName(cardId, companyName, idCard);
     }
 }

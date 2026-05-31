@@ -6,6 +6,14 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 21600 # 6 hrs
+    - !type:SpeciesRequirement
+      species:
+      - Human
+    - !type:SexRequirement
+      sex:
+      - Male
+    - !type:AgeRequirement
+      requiredAge: 35
   setPreference: false
   overrideConsoleVisibility: true
   startingGear: CardinalGear
@@ -24,6 +32,8 @@
     - type: NpcFactionMember
       factions:
       - Empire
+  - !type:AddImplantSpecial
+    implants: [ ImplantGuard ]
 
 - type: startingGear
   id: CardinalGear

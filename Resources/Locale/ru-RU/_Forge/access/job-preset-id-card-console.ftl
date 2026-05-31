@@ -8,6 +8,7 @@ job-preset-id-card-console-window-hint-insert-target = Вставьте целе
 job-preset-id-card-console-window-hint-unauthorized = Основная ID-карта не авторизована для этой консоли.
 job-preset-id-card-console-window-hint-authorized = Основная ID-карта должна покрывать доступы текущего и целевого звания.
 job-preset-id-card-console-window-missing-access = Не хватает доступов
+job-preset-id-card-console-window-missing-demographics = Нет данных владельца карты (возраст, пол, раса)
 job-preset-id-card-console-window-invalid-preset = Некорректная предустановка
 job-preset-id-card-console-window-create-injector = Создать инжектор
 job-preset-id-card-console-injector-name = инжектор переназначения ({ $job })

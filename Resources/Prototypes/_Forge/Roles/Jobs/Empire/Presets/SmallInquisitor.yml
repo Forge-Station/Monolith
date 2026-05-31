@@ -1,7 +1,7 @@
 - type: job
   id: EmpireSmallInquisitor
   name: forge-job-name-smallinq
-  description: forge-desc-name-smallinq
+  description: forge-job-desc-smallinq
   supervisors: job-supervisors-inquisitor
   playTimeTracker: JobIconEmpireSmallInq
   icon: JobIconEmpireSmallInq

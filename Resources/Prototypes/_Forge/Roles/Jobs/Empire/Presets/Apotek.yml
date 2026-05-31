@@ -1,7 +1,7 @@
 - type: job
   id: EmpireApotek
   name: forge-job-name-apotek
-  description: forge-desc-name-apotek
+  description: forge-job-desc-apotek
   supervisors: job-supervisors-praetorian
   playTimeTracker: JobEmpireApotek
   icon: JobIconEmpireApotek

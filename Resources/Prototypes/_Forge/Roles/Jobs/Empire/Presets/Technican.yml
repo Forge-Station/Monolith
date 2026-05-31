@@ -1,7 +1,7 @@
 - type: job
   id: EmpireTechnican
   name: forge-job-name-technican
-  description: forge-desc-name-technican
+  description: forge-job-desc-technican
   supervisors: job-supervisors-praetorian
   playTimeTracker: JobEmpireTechnican
   icon: JobIconEmpireTechnican

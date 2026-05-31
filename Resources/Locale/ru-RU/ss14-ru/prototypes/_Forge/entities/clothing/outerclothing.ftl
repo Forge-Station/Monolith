@@ -23,7 +23,7 @@ ent-ClothingHeadEmpireInqWBHood = капюшон ветровки эклезиа
     .desc = Капюшон служебной ветровки в цвете карательного отряда.
 ent-ClothingOuterCoatEmpirePreafect = тренч лорда
     .desc = Служебная тренч Лорда, защищающий от угроз жизни.
-ent-ClothingOuterCoatEmpirePreafect = платье лорда
+ent-ClothingOuterCoatEmpirePreafectA = платье лорда
     .desc = Служебное платье Лорда, защищающее от угроз жизни.
 
 ent-ClothingOuterCoatTrauma = хирургический халат TTI

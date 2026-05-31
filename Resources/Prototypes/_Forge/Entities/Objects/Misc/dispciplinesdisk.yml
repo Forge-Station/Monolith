@@ -7,9 +7,6 @@
   - type: DisciplinesDisk
     disciplines:
     - Ussp
-    - UsspShipyard
-    - UsspEquipment
-    - UsspWeapons
   - type: Item
     size: Small
   - type: Sprite
@@ -30,10 +27,7 @@
   components:
   - type: DisciplinesDisk
     disciplines:
-    - TsfmcWeaponry
-    - TsfmcGear
-    - TsfmcEquipment
-    - TsfmcShipyard
+    - Tsfmc
   - type: Item
     size: Small
   - type: Sprite
@@ -54,10 +48,7 @@
   components:
   - type: DisciplinesDisk
     disciplines:
-    - RogueWeaponry
-    - RogueGear
-    - RogueEquipment
-    - RogueShipyard
+    - Pdv
   - type: Item
     size: Small
   - type: Sprite

@@ -108,12 +108,12 @@ public static class ResearchColorScheme
     private static readonly Dictionary<ResearchAvailability, TechItemColors> BaseTechItemColors = new()
     {
         [ResearchAvailability.Researched] = new TechItemColors(
-            background: Color.LimeGreen,
-            border: Color.LimeGreen,
-            hover: Color.LimeGreen,
-            selected: Color.LimeGreen,
-            connection: Color.LimeGreen,
-            infoText: Color.LimeGreen
+            background: Color.FromHex("#2ab043"),
+            border: Color.FromHex("#2ab043"),
+            hover: Color.FromHex("#2ab043"),
+            selected: Color.FromHex("#2ab043"),
+            connection: Color.FromHex("#2ab043"),
+            infoText: Color.FromHex("#2ab043")
         ),
         [ResearchAvailability.Available] = new TechItemColors(
             background: Color.FromHex("#e8fa25"),
@@ -278,12 +278,12 @@ public static class ResearchColorScheme
 
         // Reset tech item colors
         BaseTechItemColors[ResearchAvailability.Researched] = new TechItemColors(
-            background: Color.LimeGreen,
-            border: Color.LimeGreen,
-            hover: Color.LimeGreen,
-            selected: Color.LimeGreen,
-            connection: Color.LimeGreen,
-            infoText: Color.LimeGreen
+            background: Color.FromHex("#2ab043"),
+            border: Color.FromHex("#2ab043"),
+            hover: Color.FromHex("#2ab043"),
+            selected: Color.FromHex("#2ab043"),
+            connection: Color.FromHex("#2ab043"),
+            infoText: Color.FromHex("#2ab043")
         );
 
         BaseTechItemColors[ResearchAvailability.Available] = new TechItemColors(

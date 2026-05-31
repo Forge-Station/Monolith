@@ -56,7 +56,7 @@
   id: ForgeFSGShieldsTSFT3
   name: research-technology-forge-fsg-shields-tier3
   entityIcon: MachineShieldForgeTSFHeavyCircuitboard
-  discipline: TsfmcShipyard
+  discipline: Tsfmc
   tier: 3
   cost: 65000
   recipeUnlocks:
@@ -73,7 +73,7 @@
   id: ForgeFSGShieldsUsspT3
   name: research-technology-forge-fsg-shields-tier3
   entityIcon: MachineShieldForgeUsspHeavyCircuitboard
-  discipline: UsspShipyard
+  discipline: Ussp
   tier: 3
   cost: 65000
   recipeUnlocks:

@@ -13,7 +13,7 @@
   id: ForgeShipWeaponResearchL85
   name: forge-research-technology-shipweapon-l85
   entityIcon: WeaponTurretL85Autocannon
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 22000
   recipeUnlocks:
@@ -27,7 +27,7 @@
   id: ForgeShipWeaponResearchRAC30
   name: forge-research-technology-shipweapon-rac30
   entityIcon: WeaponTurretRAC30
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 13000
   recipeUnlocks:
@@ -40,7 +40,7 @@
   id: ForgeShipWeaponResearchAK570
   name: forge-research-technology-shipweapon-ak570
   entityIcon: WeaponTurretAK570
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 13000
   recipeUnlocks:
@@ -53,7 +53,7 @@
   id: ForgeShipWeaponResearchDravon
   name: forge-research-technology-shipweapon-dravon
   entityIcon: WeaponTurretDravon
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 13000
   recipeUnlocks:
@@ -66,7 +66,7 @@
   id: ForgeShipWeaponResearchBofors
   name: forge-research-technology-shipweapon-bofors
   entityIcon: WeaponTurretBofors
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 16500
   recipeUnlocks:
@@ -80,7 +80,7 @@
   id: ForgeShipWeaponResearchLongbow
   name: forge-research-technology-shipweapon-longbow
   entityIcon: WeaponTurretLongbow
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 47500
   recipeUnlocks:
@@ -94,7 +94,7 @@
   id: ForgeShipWeaponResearchCyrexa
   name: forge-research-technology-shipweapon-cyrexa
   entityIcon: WeaponTurretCyrexa
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 47500
   recipeUnlocks:
@@ -108,7 +108,7 @@
   id: ForgeShipWeaponResearchCharon
   name: forge-research-technology-shipweapon-charon
   entityIcon: WeaponTurretCharonReload
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 47500
   recipeUnlocks:
@@ -124,7 +124,7 @@
   id: ForgeShipWeaponResearchPhalanx
   name: forge-research-technology-shipweapon-phalanx
   entityIcon: WeaponLaserTurretL1Phalanx
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 21000
   recipeUnlocks:
@@ -138,7 +138,7 @@
   id: ForgeShipWeaponResearchType35
   name: forge-research-technology-shipweapon-type35
   entityIcon: WeaponTurretType35
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 13000
   recipeUnlocks:
@@ -151,7 +151,7 @@
   id: ForgeShipWeaponResearchPrometheus
   name: forge-research-technology-shipweapon-prometheus
   entityIcon: WeaponLaserTurretPrometheus
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 16500
   recipeUnlocks:
@@ -164,7 +164,7 @@
   id: ForgeShipWeaponResearchCerberus
   name: forge-research-technology-shipweapon-cerberus
   entityIcon: WeaponTurretCerberus
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 16500
   recipeUnlocks:
@@ -179,7 +179,7 @@
   id: ForgeShipWeaponResearchM220
   name: forge-research-technology-shipweapon-m220
   entityIcon: WeaponTurretM220
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 13000
   recipeUnlocks:
@@ -192,7 +192,7 @@
   id: ForgeShipWeaponResearchTarnyx
   name: forge-research-technology-shipweapon-tarnyx
   entityIcon: WeaponTurretTarnyxReload
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 16500
   recipeUnlocks:
@@ -207,7 +207,7 @@
   id: ForgeShipWeaponResearchVespera
   name: forge-research-technology-shipweapon-vespera
   entityIcon: WeaponTurretVespera
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 13000
   recipeUnlocks:
@@ -220,7 +220,7 @@
   id: ForgeShipWeaponResearchVanyk
   name: forge-research-technology-shipweapon-vanyk
   entityIcon: WeaponTurretVanyk
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 12000
   recipeUnlocks:
@@ -233,7 +233,7 @@
   id: ForgeShipWeaponResearchSerpent
   name: forge-research-technology-shipweapon-serpent
   entityIcon: WeaponTurretSerpentMissile
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 16500
   recipeUnlocks:
@@ -246,7 +246,7 @@
   id: ForgeShipWeaponResearchLightMunitionsBay
   name: forge-research-technology-shipweapon-light-munitions-bay
   entityIcon: WeaponTurretLightMunitionsBay
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 16000
   recipeUnlocks:
@@ -261,7 +261,7 @@
   id: ForgeShipWeaponResearchTovek
   name: forge-research-technology-shipweapon-tovek
   entityIcon: WeaponTurretTovek
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 16500
   recipeUnlocks:
@@ -274,7 +274,7 @@
   id: ForgeShipWeaponResearchTrident
   name: forge-research-technology-shipweapon-trident
   entityIcon: WeaponTurretASM220
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 16500
   recipeUnlocks:
@@ -290,7 +290,7 @@
   id: ForgeShipWeaponResearchM25
   name: forge-research-technology-shipweapon-m25
   entityIcon: WeaponTurretM25
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 22000
   recipeUnlocks:
@@ -304,7 +304,7 @@
   id: ForgeShipWeaponResearchApollo
   name: forge-research-technology-shipweapon-apollo
   entityIcon: WeaponLaserTurretApollo
-  discipline: Experimental
+  discipline: ShipArmory
   tier: 3
   cost: 47500
   recipeUnlocks:
@@ -314,3 +314,31 @@
   - ForgeShipWeaponResearchPrometheus
   - ShuttleCtlaAdvancedDriveResearch
   position: -14, 7
+
+- type: technology
+  id: ShuttleGunneryHighUpgradeResearch
+  name: research-technology-shuttle-gunnery-high-upgrade
+  entityIcon: GunneryServerHigh
+  discipline: ShipArmory
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - GCSHighUpgradeCircuitboard
+  technologyPrerequisites:
+  - ShuttleAdvancedComponents
+  - SuperParts
+  position: -6, 4
+
+- type: technology
+  id: ShuttleGunneryUltraUpgradeResearch
+  name: research-technology-shuttle-gunnery-ultra-upgrade
+  entityIcon: GunneryServerUltra
+  discipline: ShipArmory
+  tier: 3
+  cost: 85000
+  recipeUnlocks:
+  - GCSUltraUpgradeCircuitboard
+  technologyPrerequisites:
+  - ShuttleGunneryHighUpgradeResearch
+  - ShuttleCtlaAdvancedDriveResearch
+  position: -6, 6

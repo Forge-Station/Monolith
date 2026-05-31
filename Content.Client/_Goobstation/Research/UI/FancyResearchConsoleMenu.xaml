@@ -24,6 +24,19 @@
                 <Button Name="ServerButton" Text="{Loc 'research-console-menu-server-selection-button'}" MinHeight="40"/>
             </BoxContainer>
         </BoxContainer>
+        <ScrollContainer HorizontalExpand="True"
+                         VerticalExpand="False"
+                         Margin="10 0 10 8"
+                         MinHeight="42"
+                         HScrollEnabled="True"
+                         VScrollEnabled="False"
+                         ReturnMeasure="True">
+            <BoxContainer Name="DisciplineTabsContainer"
+                          Orientation="Horizontal"
+                          HorizontalExpand="True"
+                          VerticalAlignment="Center"
+                          SeparationOverride="4"/>
+        </ScrollContainer>
         <BoxContainer Orientation="Horizontal"
                       HorizontalExpand="True"
                       VerticalExpand="True">
@@ -47,7 +60,10 @@
                     <Button Name="RecenterButton" Text="{Loc 'research-console-menu-recenter-button'}" MinHeight="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5 -5"/>
                 </PanelContainer>
             </BoxContainer>
-            <PanelContainer SizeFlagsStretchRatio="2">
+            <PanelContainer SizeFlagsStretchRatio="2"
+                            MinWidth="320"
+                            MaxWidth="450"
+                            HorizontalExpand="False">
                 <PanelContainer.PanelOverride>
                     <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
                 </PanelContainer.PanelOverride>
@@ -55,14 +71,14 @@
                     Orientation="Vertical"
                     VerticalExpand="True"
                     HorizontalExpand="True"
-                    SizeFlagsStretchRatio="1"
                     Margin="0">
-                    <!-- Frontier: add a placeholder so the scrollable interface doesn't immediately shrink, matches InfoPanel size -->
+                    <!-- Placeholder keeps info panel width stable before a technology is selected -->
                     <Control
                         Margin="5"
-                        MinWidth="450"
+                        MinWidth="320"
+                        MaxWidth="440"
                         VerticalExpand="True"
-                        HorizontalExpand="True"/>
+                        HorizontalExpand="False"/>
                 </BoxContainer>
             </PanelContainer>
         </BoxContainer>

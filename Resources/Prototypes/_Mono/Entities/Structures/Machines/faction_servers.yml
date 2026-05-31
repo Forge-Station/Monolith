@@ -21,6 +21,7 @@
     - Industrial
     - Arsenal
     - Experimental
+    - ShipArmory
     - CivilianServices
     - MechaEngineering
   - type: ApcPowerReceiver
@@ -76,14 +77,12 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: TechnologyDatabase
     supportedDisciplines:
-    - TsfmcWeaponry
-    - TsfmcGear # GEAR IS TOOLS!!
-    - TsfmcEquipment # EQUIPMENT IS ARMOR!!
-    - TsfmcShipyard
+    - Tsfmc
     - FactionUniversal
     - Industrial
     - Arsenal
     - Experimental
+    - ShipArmory
     - CivilianServices
     - MechaEngineering
 
@@ -102,14 +101,12 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: TechnologyDatabase
     supportedDisciplines:
-    - RogueWeaponry
-    - RogueGear # GEAR IS TOOLS!!
-    - RogueEquipment # EQUIPMENT IS ARMOR!!
-    - RogueShipyard
+    - Pdv
     - FactionUniversal
     - Industrial
     - Arsenal
     - Experimental
+    - ShipArmory
     - CivilianServices
     - MechaEngineering
 
@@ -129,14 +126,12 @@
   - type: TechnologyDatabase
     supportedDisciplines:
     - Ussp
-    - UsspShipyard
-    - UsspEquipment
-    - UsspWeapons
     # - ViperGroup # Forge-change
     - FactionUniversal
     - Industrial
     - Arsenal
     - Experimental
+    - ShipArmory
     - CivilianServices
     - MechaEngineering
 
@@ -151,19 +146,11 @@
     - Industrial
     - Arsenal
     - Experimental
+    - ShipArmory
     - CivilianServices
-    - TsfmcWeaponry
-    - TsfmcGear
-    - TsfmcEquipment
-    - TsfmcShipyard
-    - RogueWeaponry
-    - RogueGear
-    - RogueEquipment
-    - RogueShipyard
+    - Tsfmc
+    - Pdv
     - Ussp
-    - UsspShipyard
-    - UsspEquipment
-    - UsspWeapons
     - FactionUniversal
     - MechaEngineering
     - Ullman # Forge-change

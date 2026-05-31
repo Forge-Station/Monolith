@@ -1,0 +1,32 @@
+- type: vessel
+  id: Flaska
+  parent: BaseVessel
+  name: Фласка
+  description: Легкий шаттл ВКР, рассчитанный на экипаж 1-3 человека
+  price: 69000
+  category: Medium
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/Flaska.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  - Scrapyard
+  - Pirate
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: Flaska
+  mapName: 'Фласка'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/Flaska.yml
+  minPlayers: 0
+  stations:
+    Flaska:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Фласка MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

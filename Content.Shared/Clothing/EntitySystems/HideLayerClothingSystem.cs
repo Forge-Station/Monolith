@@ -45,12 +45,12 @@ public sealed partial class HideLayerClothingSystem : EntitySystem
         if (!Resolve(clothing.Owner, ref clothing.Comp1, ref clothing.Comp2))
             return;
 
-        if (!Resolve(user.Owner, ref user.Comp))
+        if (!TryComp(user, out HumanoidAppearanceComponent? appearance)) //Forge-Change
             return;
 
         hideLayers &= IsEnabled(clothing!);
 
-        var hideable = user.Comp.HideLayersOnEquip;
+        var hideable = appearance.HideLayersOnEquip; //Forge-Change
         var inSlot = clothing.Comp2.InSlotFlag ?? SlotFlags.NONE;
 
         // This method should only be getting called while the clothing is equipped (though possibly currently in
@@ -70,7 +70,7 @@ public sealed partial class HideLayerClothingSystem : EntitySystem
 
             // Only update this layer if we are currently equipped to the relevant slot.
             if (validSlots.HasFlag(inSlot))
-                _humanoid.SetLayerVisibility(user!, layer, !hideLayers, inSlot, ref dirty);
+                _humanoid.SetLayerVisibility((user, appearance), layer, !hideLayers, inSlot, ref dirty); //Forge-Change
         }
 
         // Fallback for obsolete field: assume we want to hide **all** layers, as long as we are equipped to any
@@ -82,12 +82,12 @@ public sealed partial class HideLayerClothingSystem : EntitySystem
             foreach (var layer in slots)
             {
                 if (hideable.Contains(layer))
-                    _humanoid.SetLayerVisibility(user!, layer, !hideLayers, inSlot, ref dirty);
+                    _humanoid.SetLayerVisibility((user, appearance), layer, !hideLayers, inSlot, ref dirty); //Forge-Change
             }
         }
 
         if (dirty)
-            Dirty(user!);
+            Dirty(user, appearance); //Forge-Change
     }
 
     private bool IsEnabled(Entity<HideLayerClothingComponent, ClothingComponent> clothing)

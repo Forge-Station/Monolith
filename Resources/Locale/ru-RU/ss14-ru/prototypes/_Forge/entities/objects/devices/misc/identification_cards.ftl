@@ -10,24 +10,19 @@ ent-EmpireInqIDCard = ID карта
 ent-EmpireCommanderIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }
 
-ent-RenegateFlunkyIDCard = ID карта
-    .desc = { ent-IDCardStandard.desc }
-    .suffix = Шестёрка, Ренегаты
-ent-RenegateQuackIDCard = ID карта
-    .desc = { ent-IDCardStandard.desc }
-    .suffix = Костоправ, Ренегаты
-ent-RenegateForemanIDCard = ID карта
-    .desc = { ent-IDCardStandard.desc }
-    .suffix = Штейгер, Ренегаты
-ent-RenegateOverseerIDCard = ID карта
-    .desc = { ent-IDCardStandard.desc }
-    .suffix = Смотрящий, Ренегаты
-ent-RenegateDraftsmanIDCard = ID карта
-    .desc = { ent-IDCardStandard.desc }
-    .suffix = Чертёжник, Ренегаты
-ent-RenegateBaronIDCard = ID карта
-    .desc = { ent-IDCardStandard.desc }
-    .suffix = Барон, Ренегаты
+
+ent-RenegateBaronIDCard = ID карта коммодора
+    .desc = Карта самого важного в ВКР
+ent-RenegateDraftsmanIDCard = ID карта куратора исследований
+    .desc = Имеет настоявшийся запах бумаги и чернил.
+ent-RenegateOverseerIDCard = ID карта бригадного командира
+    .desc = Личная карта бригадира
+ent-RenegateQuackIDCard = ID карта боевого санитара
+    .desc = Личная карта врача повстанцев
+ent-RenegateForemanIDCard = ID карта специалиста
+    .desc = Пропахшая машинным маслом ID карта
+ent-RenegateFlunkyIDCard = ID карта повстанца
+    .desc = Дешевая карточка низшего в иерархии ВКР
 
 ent-TTIDirectorIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }

@@ -61,6 +61,20 @@ public sealed partial class ItemToggleMeleeWeaponComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
     public DamageSpecifier? DeactivatedDamage = null;
 
+#region Forge-Change-start: support active range for toggleable melee weapons
+    /// <summary>
+    ///     Melee range used while this item is activated.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
+    public float? ActivatedRange = null;
+
+    /// <summary>
+    ///     Melee range restored when this item is deactivated.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
+    public float? DeactivatedRange = null;
+#endregion Forge-Change-end
+
     /// <summary>
     ///     Does this become hidden when deactivated
     /// </summary>

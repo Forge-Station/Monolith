@@ -1214,8 +1214,6 @@ entities:
       color: '#FFC000FF'
       flags: HideLabel
     - type: NavMap
-    - type: SalvageMobRestrictionsGrid
-      mobsToKill: []
 - proto: 150mmApShell
   entities:
   - uid: 450

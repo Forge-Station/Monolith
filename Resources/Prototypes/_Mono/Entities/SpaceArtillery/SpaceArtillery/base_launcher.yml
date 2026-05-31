@@ -91,6 +91,13 @@
   - type: PirateBountyItem # not putting this on the other, because like. how do you get a cyrexa for your bounty. thats stupid.
     id: ShipWeapon
 
+- type: entity # Forge-Change-ent
+  id: BallisticArtilleryMapped
+  parent: BallisticArtillery
+  abstract: true
+  components:
+  - type: ShipWeaponHomeGrid
+
 - type: entity
   id: BallisticArtilleryBaseCartridge
   abstract: true
@@ -187,6 +194,13 @@
   abstract: true
   components:
   - type: RequiresGrid
+
+- type: entity # Forge-Change-ent
+  id: BallisticArtilleryMappedCartridge
+  parent: BallisticArtilleryCartridge
+  abstract: true
+  components:
+  - type: ShipWeaponHomeGrid
 
 - type: entity
   id: BallisticArtilleryBaseMagazine
@@ -292,6 +306,13 @@
   abstract: true
   components:
   - type: RequiresGrid
+
+- type: entity # Forge-Change-ent
+  id: BallisticArtilleryMappedMagazine
+  parent: BallisticArtilleryMagazine
+  abstract: true
+  components:
+  - type: ShipWeaponHomeGrid
 
 # Durabilities - You can vary from this, this is just the main standard. Size of the gun is often used when deciding durability. More size, more likely to get hit.
 

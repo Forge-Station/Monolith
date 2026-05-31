@@ -17,7 +17,7 @@
   - MechEquipmentDrill # Goobstation
   - WeaponProtoKineticAccelerator
   - ShuttleGunKineticCircuitboard
-  - WeaponTurretM25Circuitboard # Mono
+  # - WeaponTurretM25Circuitboard # Forge-Change-Delete
   # These are roundstart but not replenishable for salvage
   - WeaponCrusher
   - WeaponCrusherDagger
@@ -169,7 +169,7 @@
   - SmallGyroscopeMachineCircuitboard # Frontier
   technologyPrerequisites:
   - AdvancedParts
-  position: -5, 7
+  position: -3, 5
 
 - type: technology
   id: AdvancedAtmospherics
@@ -214,7 +214,7 @@
   - ShipRepairDevice
   - ShipRepairDeviceAmmo
   - NFBlueprintRCDAmmo
-  # Mono edit end 
+  # Mono edit end
   - ForgeBlueprintAdvancedTools # Forge-change
   - ForgeBlueprintAdvancedShipRepairTools # Forge-change
   technologyPrerequisites:

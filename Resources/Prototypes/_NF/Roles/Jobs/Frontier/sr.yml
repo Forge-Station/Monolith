@@ -31,7 +31,7 @@
   - AllAccessSR # Forge-Change
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ] # Mono - remove TSFMC implant
+    implants: [ MindShieldImplant, NanotrasenTrackingImplant ] # Forge-change
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff

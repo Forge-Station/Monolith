@@ -9,6 +9,7 @@ accent-german-words-2-2 = нет
 accent-german-words-2-3 = неа
 accent-german-words-2-4 = нету
 accent-german-words-replace-2 = найн
+accent-german-words-replace-2-2 = кайнэ
 
 accent-german-words-3 = не.
 accent-german-words-replace-3 = найн.
@@ -212,8 +213,8 @@ accent-german-words-51 = до свидания
 accent-german-words-51-2 = досвидания
 accent-german-words-replace-51 = ауф видэрзэйн
 
-accent-german-words-52 = пока
-accent-german-words-replace-52 = чюсс
+accent-german-words-52 = пока.
+accent-german-words-replace-52 = чюсс.
 
 accent-german-words-53 = чао
 accent-german-words-replace-53 = чау
@@ -496,7 +497,7 @@ accent-german-words-123-2 = спи
 accent-german-words-123-3 = дрыхнуть
 accent-german-words-replace-123 = шлафэн
 
-accent-german-words-124 = есть
+accent-german-words-124 = хавать
 accent-german-words-124-2 = жрать
 accent-german-words-replace-124 = эссэн
 

@@ -40,6 +40,11 @@ rcd-component-windows-and-grilles = Windows and grilles
 rcd-component-airlocks = Airlocks
 rcd-component-electrical = Electrical
 rcd-component-lighting = Lighting
+# Forge-Change: RPD radial categories (Goob-Station/Goob-Station#1203)
+rcd-component-piping = Piping
+rcd-component-pumpsvalves = Pumps and valves
+rcd-component-vents = Vents
+rcd-component-atmosphericutility = Atmospheric utility
 
 
 ### Prototype names (note: constructable items will be puralized)

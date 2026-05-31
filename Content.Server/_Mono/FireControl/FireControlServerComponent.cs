@@ -24,6 +24,9 @@ public sealed partial class FireControlServerComponent : Component
     [ViewVariables]
     public int UsedProcessingPower;
 
+    [ViewVariables, DataField] // Forge-Change: MaxWeapons
+    public int MaxWeapons = int.MaxValue;
+
     [ViewVariables, DataField]
     public int MaxConsoles = 1;
 

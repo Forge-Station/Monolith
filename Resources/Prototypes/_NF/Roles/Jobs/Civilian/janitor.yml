@@ -27,7 +27,7 @@
     holiday: GarbageDay
     prototype: WeaponRevolverInspector
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ]
+    implants: [ MindShieldImplant, NanotrasenTrackingImplant ] # Forge-change
   - !type:GiveItemOnHolidaySpecial
     holiday: FrontierBirthday
     prototype: FrontierBirthdayGift

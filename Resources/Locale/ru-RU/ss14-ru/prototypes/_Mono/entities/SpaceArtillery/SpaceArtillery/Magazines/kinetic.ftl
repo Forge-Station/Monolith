@@ -4,11 +4,11 @@ ent-203mmCartridge = 203мм снаряд
 ent-203mmCartridgeWeak = { ent-203mmCartridge }
     .desc = { ent-203mmCartridge.desc }
 
-ent-220mmCartridgeWeak = { ent-220mmCartridge }
-    .desc = { ent-220mmCartridge.desc }
+ent-220mmCartridgeWeak = { ent-220mmCartridgeAPHE }
+    .desc = { ent-220mmCartridgeAPHE.desc }
 
-ent-255mmCartridgeWeak = { ent-255mmCartridge }
-    .desc = { ent-255mmCartridge.desc }
+ent-255mmCartridgeWeak = { ent-255mmCartridgeAPHE }
+    .desc = { ent-255mmCartridgeAPHE.desc }
 
 ent-CharonetteSlugAmmo = M194 «Чароннета» 280мм снаряд
     .desc = Единый комплект, содержащий плазменный газ для ионизации в линейном ускорителе и сам снаряд.

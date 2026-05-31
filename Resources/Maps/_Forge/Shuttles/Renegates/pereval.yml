@@ -606,7 +606,7 @@ entities:
     - type: RadiationGridResistance
     - type: ShipGridLock
       locked: False
-- proto: 220mmCartridge
+- proto: 220mmCartridgeAPHE
   entities:
   - uid: 2
     components:

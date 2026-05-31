@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Исполин
   description: Гениальное творение инженеров ВКР. Бич Империи. Угроза сектору. Цена снижена за мануальное управление стрельбой.
-  price: 84000
+  price: 89250
   category: Small
   group: Renegate
   access: Renegate

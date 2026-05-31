@@ -1,4 +1,5 @@
-- type: latheRecipe
-  parent: BaseGoldCircuitboardRecipe
-  id: WeaponTurretM25Circuitboard
-  result: WeaponTurretM25Circuitboard
+# Forge-Change-Delete
+#- type: latheRecipe
+#  parent: BaseGoldCircuitboardRecipe
+#  id: WeaponTurretM25Circuitboard
+#  result: WeaponTurretM25Circuitboard

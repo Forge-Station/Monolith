@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: 'MBS Корвет'
   description: Средний шаттл наемников с оригинальной системой защиты.
-  price: 95000
+  price: 100000
   category: Medium
   group: Shipyard
   access: Mercenary

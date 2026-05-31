@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: 'MBS Испепелитель'
   description: Средний шаттл для наемников. Вооружен тремя крупнокалиберными орудиями спереди и по 2 пулемета на каждом борту. Рассчитан на экипаж из 3-5 человек
-  price: 131100
+  price: 136100
   category: Medium
   group: Shipyard
   access: Mercenary

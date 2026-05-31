@@ -7,15 +7,22 @@
   maximumDistance: 9500
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed]
   spawnGroup: Required
-  placementTags: [ Empire ]
+  placementTags: [ Imperial ]
   minDistanceFromTags:
-  Renegates: 5000
-  TSF: 5000
+    Renegates: 5000
+    TSF: 5000
   gridPath: /Maps/_Forge/POI/EmpireOutpost.yml
   addComponents:
   - type: IFF
     color: "#ab7a52"
     readOnly: true # mono
+  - type: Company
+    companyName: Imperial
+  - type: PoiCaptureRoundstart
+    ownerCompanyId: Imperial
+    zoneRadius: 2048
+  - type: ProtectedGrid
+    preventTeleportation: true
 
 - type: gameMap
   id: EmpireOutpost

@@ -223,7 +223,7 @@
   components:
   - type: JobPresetIdCardConsole
     bodyImplants:
-    - OverlordImplant
+    - ImplantGuard
     rankPresets:
     # - Praefect # WTF?
     - Arbiter

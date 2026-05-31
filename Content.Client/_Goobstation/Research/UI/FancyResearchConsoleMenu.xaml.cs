@@ -66,6 +66,21 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     private Vector2 _position = DefaultPosition;
 
     /// <summary>
+    /// Horizontal spacing between technologies on the same tree row (grid cells).
+    /// </summary>
+    private const float CompactCellStepX = 1.15f;
+
+    /// <summary>
+    /// Vertical spacing between prerequisite depth rows (grid cells).
+    /// </summary>
+    private const float CompactDepthStepY = 2f;
+
+    /// <summary>
+    /// Cached compact layout positions per discipline and technology.
+    /// </summary>
+    private readonly Dictionary<string, Dictionary<string, Vector2>> _compactLayouts = new();
+
+    /// <summary>
     /// Currently selected research discipline tab.
     /// </summary>
     private string? _selectedDiscipline;
@@ -91,9 +106,9 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     private string? _focusedTech;
 
     /// <summary>
-    /// Original tech kept visible in the info panel while navigating prerequisites.
+    /// Breadcrumb stack of technologies navigated away from (root → parent).
     /// </summary>
-    private string? _previewTargetTech;
+    private readonly List<string> _navigationChain = new();
 
     /// <summary>
     /// Captures the initial position to use with recenter button
@@ -184,11 +199,14 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         _visibleTechnologyItems.Clear();
         _crossDisciplinePreviewItem = null;
 
+        var supportedDisciplines = GetSupportedDisciplineIds();
+        RebuildCompactLayouts(supportedDisciplines);
+
         foreach (var tech in List)
         {
             var proto = _prototype.Index<TechnologyPrototype>(tech.Key);
 
-            if (_selectedDiscipline != null && proto.Discipline != _selectedDiscipline)
+            if (!IsTechnologyVisibleInCurrentTab(proto))
                 continue;
 
             var control = new FancyResearchConsoleItem(proto, _sprite, tech.Value);
@@ -196,7 +214,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
             _visibleTechnologyItems[proto.ID] = control;
 
             // Set position for all tech, relating to _position
-            var uiPosition = _position + proto.Position * GridSize;
+            var uiPosition = _position + GetTechnologyGridPosition(proto) * GridSize;
             LayoutContainer.SetPosition(control, uiPosition);
             control.SelectAction += SelectTech;
         }
@@ -309,9 +327,18 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     /// <param name="availability">Tech availability</param>
     public void SelectTech(TechnologyPrototype proto, ResearchAvailability availability)
     {
+        if (_navigationChain.Contains(proto.ID))
+        {
+            ReturnToNavigationPoint(proto.ID);
+            return;
+        }
+
         CurrentTech = proto.ID;
         _focusedTech = proto.ID;
-        _previewTargetTech = null;
+
+        if (_navigationChain.Count > 0)
+            _navigationChain.Clear();
+
         ShowTechnologyInfo(proto, availability);
         UpdateSelectedTechVisuals();
     }
@@ -322,7 +349,22 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         if (!_player.LocalEntity.HasValue)
             return;
 
-        var control = new FancyTechnologyInfoPanel(proto, _accessReader.IsAllowed(_player.LocalEntity.Value, Entity), availability, _sprite);
+        TechnologyPrototype? returnToTech = null;
+        if (TryGetImmediateNavigationParent(out var parentId)
+            && _prototype.TryIndex(parentId, out TechnologyPrototype? parentProto)
+            && parentProto.ID != proto.ID)
+        {
+            returnToTech = parentProto;
+        }
+
+        var control = new FancyTechnologyInfoPanel(
+            proto,
+            _accessReader.IsAllowed(_player.LocalEntity.Value, Entity),
+            availability,
+            _sprite,
+            returnToTech,
+            returnToTech != null ? ReturnToPreviewTarget : null,
+            BuildNavigationBreadcrumb());
         control.BuyAction += args => OnTechnologyCardPressed?.Invoke(args.ID);
         control.NavigateToTechnologyAction += NavigateToTechnology;
         InfoContainer.AddChild(control);
@@ -365,7 +407,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         _selectedDiscipline = null;
         _disciplinePositions.Clear();
         _focusedTech = null;
-        _previewTargetTech = null;
+        _navigationChain.Clear();
     }
 
     private List<string> GetSupportedDisciplineIds()
@@ -387,15 +429,22 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
             return;
         }
 
-        if (_selectedDiscipline != null && supportedDisciplines.Contains(_selectedDiscipline))
+        if (IsValidDisciplineTab(_selectedDiscipline, supportedDisciplines))
         {
-            _position = GetDisciplinePosition(_selectedDiscipline);
+            _position = GetDisciplinePosition(_selectedDiscipline!);
             return;
         }
 
         _selectedDiscipline = supportedDisciplines[0];
-        _position = GetDisciplinePosition(_selectedDiscipline);
+        _position = GetDefaultDisciplinePosition(_selectedDiscipline);
+        CacheCurrentDisciplinePosition();
     }
+
+    private static bool IsValidDisciplineTab(string? tabId, IReadOnlyList<string> supportedDisciplines)
+        => tabId != null && supportedDisciplines.Contains(tabId);
+
+    private bool IsTechnologyVisibleInCurrentTab(TechnologyPrototype proto)
+        => _selectedDiscipline != null && proto.Discipline == _selectedDiscipline;
 
     private void BuildDisciplineTabs(IReadOnlyList<string> supportedDisciplines)
     {
@@ -431,7 +480,9 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
             return;
 
         _selectedDiscipline = disciplineId;
-        _position = GetDisciplinePosition(disciplineId);
+        _navigationChain.Clear();
+        _position = GetDefaultDisciplinePosition(disciplineId);
+        CacheCurrentDisciplinePosition();
         RefreshTechnologyGrid();
     }
 
@@ -455,6 +506,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
     private Vector2 GetDefaultDisciplinePosition(string disciplineId)
     {
+        var supportedDisciplines = GetSupportedDisciplineIds();
         var technologies = List.Keys
             .Select(id => _prototype.Index<TechnologyPrototype>(id))
             .Where(proto => proto.Discipline == disciplineId)
@@ -468,7 +520,8 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
         foreach (var technology in technologies)
         {
-            var topLeft = (Vector2) technology.Position * GridSize;
+            var gridPosition = GetTechnologyGridPosition(technology);
+            var topLeft = gridPosition * GridSize;
             var bottomRight = topLeft + new Vector2(CardSize, CardSize);
             min = Vector2.Min(min, topLeft);
             max = Vector2.Max(max, bottomRight);
@@ -481,6 +534,80 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         return viewportCenter - treeCenter;
     }
 
+    private void RebuildCompactLayouts(IReadOnlyList<string> supportedDisciplines)
+    {
+        _compactLayouts.Clear();
+
+        foreach (var disciplineId in supportedDisciplines)
+            _compactLayouts[disciplineId] = BuildCompactLayout(disciplineId);
+    }
+
+    /// <summary>
+    /// Builds a tight grid from prerequisite depth instead of raw prototype coordinates.
+    /// </summary>
+    private Dictionary<string, Vector2> BuildCompactLayout(string disciplineId)
+    {
+        var technologies = List.Keys
+            .Select(id => _prototype.Index<TechnologyPrototype>(id))
+            .Where(proto => proto.Discipline == disciplineId && !proto.Hidden)
+            .ToList();
+
+        if (technologies.Count == 0)
+            return new Dictionary<string, Vector2>();
+
+        var techIds = technologies.Select(tech => tech.ID).ToHashSet();
+        var depths = technologies.ToDictionary(tech => tech.ID, _ => 0);
+
+        var changed = true;
+        while (changed)
+        {
+            changed = false;
+
+            foreach (var tech in technologies)
+            {
+                var prereqDepths = tech.TechnologyPrerequisites
+                    .Where(prereq => techIds.Contains(prereq))
+                    .Select(prereq => depths[prereq] + 1);
+
+                var newDepth = prereqDepths.Any() ? prereqDepths.Max() : 0;
+                if (newDepth <= depths[tech.ID])
+                    continue;
+
+                depths[tech.ID] = newDepth;
+                changed = true;
+            }
+        }
+
+        var layout = new Dictionary<string, Vector2>();
+
+        foreach (var depthGroup in technologies.GroupBy(tech => depths[tech.ID]).OrderBy(group => group.Key))
+        {
+            var column = 0f;
+
+            foreach (var tech in depthGroup
+                         .OrderBy(tech => tech.Position.Y)
+                         .ThenBy(tech => tech.Position.X)
+                         .ThenBy(tech => tech.ID))
+            {
+                layout[tech.ID] = new Vector2(column, depthGroup.Key * CompactDepthStepY);
+                column += CompactCellStepX;
+            }
+        }
+
+        return layout;
+    }
+
+    private Vector2 GetTechnologyGridPosition(TechnologyPrototype proto)
+    {
+        if (_compactLayouts.TryGetValue(proto.Discipline, out var disciplineLayout)
+            && disciplineLayout.TryGetValue(proto.ID, out var local))
+        {
+            return local;
+        }
+
+        return (Vector2) proto.Position;
+    }
+
     private Vector2 GetViewportSize()
     {
         var width = MathF.Max(ResearchesContainer.Size.X, 700f);
@@ -490,12 +617,26 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
     private void NavigateToTechnology(TechnologyPrototype technology)
     {
+        if (_navigationChain.Contains(technology.ID))
+        {
+            ReturnToNavigationPoint(technology.ID);
+            return;
+        }
+
         TechnologyPrototype? sourceTechnology = null;
         if (CurrentTech != null && _prototype.TryIndex(CurrentTech, out TechnologyPrototype? source))
             sourceTechnology = source;
 
+        if (sourceTechnology != null
+            && sourceTechnology.ID != technology.ID
+            && (_navigationChain.Count == 0 || _navigationChain[^1] != sourceTechnology.ID))
+        {
+            _navigationChain.Add(sourceTechnology.ID);
+        }
+
         _focusedTech = technology.ID;
-        _previewTargetTech = sourceTechnology?.ID;
+        CurrentTech = technology.ID;
+
         _selectedDiscipline = technology.Discipline;
 
         _position = sourceTechnology != null && sourceTechnology.Discipline == technology.Discipline
@@ -505,12 +646,21 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         CacheCurrentDisciplinePosition();
         BuildDisciplineTabs(GetSupportedDisciplineIds());
         RefreshTechnologyGrid();
+
+        if (!List.TryGetValue(technology.ID, out var availability))
+            return;
+
+        ShowTechnologyInfo(technology, availability);
+
+        if (availability == ResearchAvailability.Researched)
+            ReturnToPreviewTarget();
     }
 
     private Vector2 GetCenteredPositionForTechnology(TechnologyPrototype technology)
     {
         var viewportCenter = GetViewportSize() / 2f;
-        var technologyCenter = (Vector2) technology.Position * GridSize + new Vector2(CardSize / 2f, CardSize / 2f);
+        var gridPosition = GetTechnologyGridPosition(technology);
+        var technologyCenter = gridPosition * GridSize + new Vector2(CardSize / 2f, CardSize / 2f);
         return viewportCenter - technologyCenter;
     }
 
@@ -529,6 +679,19 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
     private void RefreshCurrentInfoPanel()
     {
+        if (_navigationChain.Count > 0
+            && _focusedTech != null
+            && List.TryGetValue(_focusedTech, out var focusedAvailability)
+            && _prototype.TryIndex(_focusedTech, out TechnologyPrototype? focusedProto))
+        {
+            ShowTechnologyInfo(focusedProto, focusedAvailability);
+
+            if (focusedAvailability == ResearchAvailability.Researched)
+                ReturnToPreviewTarget();
+
+            return;
+        }
+
         if (CurrentTech == null || !List.TryGetValue(CurrentTech, out var availability))
             return;
 
@@ -540,16 +703,19 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
 
     private void AddCrossDisciplinePreviewGhost()
     {
-        if (_previewTargetTech == null || _focusedTech == null)
+        if (_navigationChain.Count == 0 || _focusedTech == null)
             return;
 
-        if (_visibleTechnologyItems.ContainsKey(_previewTargetTech))
+        if (!TryGetImmediateNavigationParent(out var immediateParentId))
+            return;
+
+        if (_visibleTechnologyItems.ContainsKey(immediateParentId))
             return;
 
         if (!_visibleTechnologyItems.TryGetValue(_focusedTech, out var focusedItem))
             return;
 
-        if (!_prototype.TryIndex(_previewTargetTech, out TechnologyPrototype? previewProto))
+        if (!_prototype.TryIndex(immediateParentId, out TechnologyPrototype? previewProto))
             return;
 
         var availability = List.TryGetValue(previewProto.ID, out var previewAvailability)
@@ -560,7 +726,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         {
             IsGhostPreview = true,
             IsPreviewTarget = true,
-            OverrideAction = (_, _) => ReturnToPreviewTarget(),
+            OverrideAction = (_, _) => ReturnToNavigationPoint(immediateParentId),
         };
         DragContainer.AddChild(previewItem);
         _crossDisciplinePreviewItem = previewItem;
@@ -569,33 +735,79 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         LayoutContainer.SetPosition(previewItem, previewPosition);
     }
 
+    private bool TryGetImmediateNavigationParent(out string parentId)
+    {
+        if (_navigationChain.Count > 0)
+        {
+            parentId = _navigationChain[^1];
+            return true;
+        }
+
+        parentId = string.Empty;
+        return false;
+    }
+
+    private string? BuildNavigationBreadcrumb()
+    {
+        if (_navigationChain.Count == 0)
+            return null;
+
+        var parts = _navigationChain
+            .Select(id => Loc.GetString(_prototype.Index<TechnologyPrototype>(id).Name))
+            .ToList();
+
+        if (parts.Count > 5)
+        {
+            return string.Join("\n→ ",
+                parts.Take(2)
+                    .Concat(new[] { "…" })
+                    .Concat(parts.TakeLast(2)));
+        }
+
+        return string.Join("\n→ ", parts);
+    }
+
     private void ReturnToPreviewTarget()
     {
-        if (_previewTargetTech == null)
+        if (!TryGetImmediateNavigationParent(out var parentId))
             return;
 
-        if (!_prototype.TryIndex(_previewTargetTech, out TechnologyPrototype? previewProto))
+        ReturnToNavigationPoint(parentId);
+    }
+
+    private void ReturnToNavigationPoint(string techId)
+    {
+        var index = _navigationChain.IndexOf(techId);
+        if (index < 0)
             return;
 
-        if (!List.TryGetValue(previewProto.ID, out var availability))
+        _navigationChain.RemoveRange(index, _navigationChain.Count - index);
+
+        if (!_prototype.TryIndex(techId, out TechnologyPrototype? targetProto))
             return;
 
-        CurrentTech = previewProto.ID;
-        _focusedTech = previewProto.ID;
-        _selectedDiscipline = previewProto.Discipline;
-        _previewTargetTech = null;
-        _position = GetCenteredPositionForTechnology(previewProto);
+        if (!List.TryGetValue(targetProto.ID, out var availability))
+            return;
+
+        CurrentTech = targetProto.ID;
+        _focusedTech = targetProto.ID;
+
+        _selectedDiscipline = targetProto.Discipline;
+
+        _position = GetCenteredPositionForTechnology(targetProto);
         CacheCurrentDisciplinePosition();
         BuildDisciplineTabs(GetSupportedDisciplineIds());
         RefreshTechnologyGrid();
-        ShowTechnologyInfo(previewProto, availability);
+        ShowTechnologyInfo(targetProto, availability);
     }
 
     private Vector2 GetNavigationPosition(TechnologyPrototype source, TechnologyPrototype prerequisite)
     {
         var viewportCenter = GetViewportSize() / 2f;
-        var sourceCenter = (Vector2) source.Position * GridSize + new Vector2(CardSize / 2f, CardSize / 2f);
-        var prerequisiteCenter = (Vector2) prerequisite.Position * GridSize + new Vector2(CardSize / 2f, CardSize / 2f);
+        var sourceCenter = GetTechnologyGridPosition(source) * GridSize
+            + new Vector2(CardSize / 2f, CardSize / 2f);
+        var prerequisiteCenter = GetTechnologyGridPosition(prerequisite) * GridSize
+            + new Vector2(CardSize / 2f, CardSize / 2f);
         var navigationCenter = Vector2.Lerp(prerequisiteCenter, sourceCenter, 0.45f);
         return viewportCenter - navigationCenter;
     }
@@ -605,7 +817,17 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         foreach (var (techId, item) in _visibleTechnologyItems)
         {
             item.IsSelected = techId == _focusedTech;
-            item.IsPreviewTarget = techId == _previewTargetTech;
+            item.IsPreviewTarget = _navigationChain.Contains(techId);
+            item.OverrideAction = null;
+        }
+
+        foreach (var chainId in _navigationChain)
+        {
+            if (!_visibleTechnologyItems.TryGetValue(chainId, out var chainItem))
+                continue;
+
+            var chainTechId = chainId;
+            chainItem.OverrideAction = (_, _) => ReturnToNavigationPoint(chainTechId);
         }
     }
 

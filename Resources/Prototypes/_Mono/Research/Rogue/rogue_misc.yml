@@ -3,7 +3,7 @@
   id: RogueSaturn
   name: research-technology-rogue-saturn-voucher
   entityIcon: ShipVoucherSaturn
-  discipline: RogueShipyard
+  discipline: Pdv
   tier: 3
   cost: 100000
   recipeUnlocks:
@@ -17,7 +17,7 @@
   id: RogueGoliath
   name: research-technology-rogue-saintie-voucher
   entityIcon: ShipVoucherSaintie
-  discipline: RogueShipyard
+  discipline: Pdv
   tier: 1
   cost: 50000
   recipeUnlocks:
@@ -30,7 +30,7 @@
   id: RogueDockyard
   name: research-technology-rogue-motley-anne-voucher
   entityIcon: ShipVoucherMotleyAnne
-  discipline: RogueShipyard
+  discipline: Pdv
   tier: 1
   cost: 40500
   recipeUnlocks:
@@ -43,7 +43,7 @@
   id: RogueMotleyAnneFighters
   name: research-technology-rogue-motley-anne-fighters
   entityIcon: ShipVoucherMotleyAnne
-  discipline: RogueShipyard
+  discipline: Pdv
   tier: 1
   cost: 12500
   recipeUnlocks:
@@ -59,7 +59,7 @@
   id: RogueJaws
   name: research-technology-rogue-jaws
   entityIcon: JawsOfLife
-  discipline: RogueGear
+  discipline: Pdv
   tier: 1
   cost: 10000
   recipeUnlocks:
@@ -73,7 +73,7 @@
   id: RogueHypospray
   name: research-technology-rogue-hypospray
   entityIcon: Hypospray
-  discipline: RogueGear
+  discipline: Pdv
   tier: 2
   cost: 10000
   recipeUnlocks:
@@ -86,7 +86,7 @@
   id: RogueEmag
   name: research-technology-rogue-emag
   entityIcon: Emag
-  discipline: RogueGear
+  discipline: Pdv
   tier: 2
   cost: 25000
   recipeUnlocks:
@@ -100,7 +100,7 @@
   id: RogueThermals
   name: research-technology-rogue-thermals
   entityIcon: ClothingEyesThermalVisionGoggles
-  discipline: RogueGear
+  discipline: Pdv
   tier: 1
   cost: 15000
   recipeUnlocks:
@@ -113,7 +113,7 @@
   id: PDVBasicBorgModule
   name: research-technology-pdv-basic-module
   entityIcon: BorgModulePDVStandardWeapon
-  discipline: RogueGear
+  discipline: Pdv
   tier: 1
   cost: 10000
   recipeUnlocks:
@@ -126,7 +126,7 @@
   id: PDVAdvancedBorgModule
   name: research-technology-pdv-advanced-module
   entityIcon: BorgModulePDVAdvancedWeapon
-  discipline: RogueGear
+  discipline: Pdv
   tier: 3
   cost: 65000
   recipeUnlocks:

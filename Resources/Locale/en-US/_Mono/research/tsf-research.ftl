@@ -1,7 +1,4 @@
-research-discipline-tsfmc-weaponry = TSFMC Arsenal
-research-discipline-tsfmc-gear = TSFMC Gear
-research-discipline-tsfmc-equipment = TSFMC Equipment
-research-discipline-tsfmc-shipyard = TSFMC Heavy Industry
+research-discipline-tsfmc = TSFMC Research
 
 research-technology-tsfmc-basic-equipment = Basic TSFMC Equipment
 research-technology-tsfmc-advanced-equipment = Advanced TSFMC Equipment

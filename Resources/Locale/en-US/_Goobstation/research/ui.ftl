@@ -1,3 +1,7 @@
+research-console-return-to-tech = ← { $name }
+research-console-navigation-breadcrumb = [color=gray]Path:[/color]
+ { $path }
+
 research-console-unlocks-text = Unlocked recipes:
 research-console-required-text = Prerequisites:
 research-console-no-tech-requirements = [color=green]This technology has no prerequisites![/color]

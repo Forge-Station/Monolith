@@ -2,7 +2,7 @@
   id: UsspBasicGuns
   name: research-technology-ussp-guns-basic
   entityIcon: WeaponSubMachineGunAK220
-  discipline: UsspWeapons
+  discipline: Ussp
   tier: 1
   cost: 20000
   recipeUnlocks:
@@ -15,7 +15,7 @@
   id: UsspMediumGuns
   name: research-technology-ussp-guns-medium
   entityIcon: WeaponRifleAK502
-  discipline: UsspWeapons
+  discipline: Ussp
   tier: 2
   cost: 35000
   recipeUnlocks:
@@ -30,7 +30,7 @@
   id: UsspAk410
   name: research-technology-ussp-guns-ak410
   entityIcon: WeaponRifleAK410
-  discipline: UsspWeapons
+  discipline: Ussp
   tier: 2
   cost: 25000
   recipeUnlocks:
@@ -43,7 +43,7 @@
   id: UsspAdvancedGuns
   name: research-technology-ussp-guns-advanced
   entityIcon: WeaponDP29
-  discipline: UsspWeapons
+  discipline: Ussp
   tier: 3
   cost: 80000
   recipeUnlocks:
@@ -59,7 +59,7 @@
   id: UsspAdvancedAmmo
   name: research-technology-ussp-ammo-advanced
   entityIcon: AmmoBox45_magnumAP
-  discipline: UsspWeapons
+  discipline: Ussp
   tier: 3
   cost: 30000
   recipeUnlocks:

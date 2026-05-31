@@ -25,7 +25,14 @@ public sealed partial class FancyTechnologyInfoPanel : Control
     public Action<TechnologyPrototype>? BuyAction;
     public Action<TechnologyPrototype>? NavigateToTechnologyAction;
 
-    public FancyTechnologyInfoPanel(TechnologyPrototype proto, bool hasAccess, ResearchAvailability availability, SpriteSystem sprite)
+    public FancyTechnologyInfoPanel(
+        TechnologyPrototype proto,
+        bool hasAccess,
+        ResearchAvailability availability,
+        SpriteSystem sprite,
+        TechnologyPrototype? returnToTech = null,
+        Action? onReturn = null,
+        string? navigationBreadcrumb = null)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
@@ -92,6 +99,23 @@ public sealed partial class FancyTechnologyInfoPanel : Control
         );
 
         ResearchButton.Disabled = !hasAccess || availability != ResearchAvailability.Available;
+
+        if (!string.IsNullOrEmpty(navigationBreadcrumb))
+        {
+            NavigationBreadcrumbScroll.Visible = true;
+            var breadcrumbMsg = new FormattedMessage();
+            breadcrumbMsg.AddMarkupOrThrow(Loc.GetString(
+                "research-console-navigation-breadcrumb",
+                ("path", navigationBreadcrumb)));
+            NavigationBreadcrumbLabel.SetMessage(breadcrumbMsg);
+        }
+
+        if (returnToTech != null && onReturn != null)
+        {
+            ReturnButton.Visible = true;
+            ReturnButton.Text = Loc.GetString("research-console-return-to-tech", ("name", Loc.GetString(returnToTech.Name)));
+            ReturnButton.OnPressed += _ => onReturn();
+        }
 
         // Replace the event handling method to use a simpler approach
         ResearchButton.OnPressed += args =>

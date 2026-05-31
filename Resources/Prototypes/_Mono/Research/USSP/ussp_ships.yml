@@ -2,7 +2,7 @@
   id: UsspBasicShips
   name: research-technology-ussp-ships-basic
   entityIcon: ShipVoucherUSSPBasic
-  discipline: UsspShipyard
+  discipline: Ussp
   tier: 1
   cost: 45000
   recipeUnlocks:
@@ -15,7 +15,7 @@
   id: UsspMediumShips
   name: research-technology-ussp-ships-medium
   entityIcon: ShipVoucherUSSPIntermediate
-  discipline: UsspShipyard
+  discipline: Ussp
   tier: 2
   cost: 65000
   recipeUnlocks:
@@ -28,7 +28,7 @@
   id: UsspAdvancedShips
   name: research-technology-ussp-ships-advanced
   entityIcon: ShipVoucherUSSPAdvanced
-  discipline: UsspShipyard
+  discipline: Ussp
   tier: 3
   cost: 95000
   recipeUnlocks:
@@ -42,7 +42,7 @@
   id: UsspLedokol
   name: research-technology-ussp-ships-ledokol
   entityIcon: ShipVoucherUSSPLedokol
-  discipline: UsspShipyard
+  discipline: Ussp
   tier: 3
   cost: 100000
   recipeUnlocks:

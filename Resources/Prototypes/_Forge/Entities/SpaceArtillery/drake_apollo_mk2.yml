@@ -61,6 +61,32 @@
     increment: 90
 
 - type: entity
+  id: WeaponTurretDrakeApolloMk2Portable
+  parent: WeaponLaserTurretApolloPortable
+  name: D-20 Apollo MK2 mining laser cannon
+  suffix: Drake, НЕ МАППИТЬ
+  description: A Drake Industries rework of the Apollo mining laser. Slower, heavier beams shatter asteroid and supercompacted rock, teleporting mined ore to a point just below the turret.
+  components:
+  - type: StaticPrice
+    price: 22000
+  - type: Sprite
+    sprite: Forge/Objects/ShuttleWeapons/drake_apollo_mk2.rsi
+    layers:
+    - state: space_artillery
+  - type: Battery
+    maxCharge: 90000
+    startingCharge: 90000
+  - type: BatterySelfRecharger
+    autoRechargeRate: 90000
+  - type: Gun
+    fireRate: 4
+  - type: ShipGunClass
+    shipClass: Superheavy
+  - type: HitscanBatteryAmmoProvider
+    proto: DrakeApolloMk2Laser
+    fireCost: 150
+
+- type: entity
   parent: ShuttleGunKineticFlatpack
   id: WeaponTurretDrakeApolloMk2Flatpack
   name: Apollo MK2 mining laser flatpack

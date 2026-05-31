@@ -166,12 +166,12 @@
 - type: technology
   id: DrakeIndustriesApolloMk2
   name: research-technology-drake-industries-apollo-mk2
-  entityIcon: WeaponTurretDrakeApolloMk2
+  entityIcon: WeaponTurretDrakeApolloMk2Circuitboard
   discipline: DrakeIndustries
   tier: 3
   cost: 100000
   recipeUnlocks:
-  - WeaponTurretDrakeApolloMk2Flatpack
+  - WeaponTurretDrakeApolloMk2Circuitboard
   technologyPrerequisites:
   - DrakeIndustriesMaterialsScience
   - DrakeIndustriesIndustrialLaser

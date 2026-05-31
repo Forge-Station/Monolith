@@ -123,6 +123,11 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
             cableNetworks.FocusChunks.Clear();
             Dirty(uid, cableNetworks);
         }
+
+        RefreshPowerMonitoringConsole(uid, component);
+
+        if (TryComp<PowerMonitoringCableNetworksComponent>(uid, out cableNetworks))
+            RefreshPowerMonitoringCableNetworks(uid, cableNetworks);
     }
 
     private void OnGridSplit(ref GridSplitEvent args)
@@ -144,12 +149,10 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
         // Update power monitoring consoles that stand upon an updated grid
         var query = AllEntityQuery<PowerMonitoringConsoleComponent, PowerMonitoringCableNetworksComponent, TransformComponent>();
-        while (query.MoveNext(out var ent, out var entConsole, out var entCableNetworks, out var entXform))
+        while (query.MoveNext(out var ent, out var entConsole, out var entCableNetworks, out _))
         {
-            if (entXform.GridUid == null)
-                continue;
-
-            if (!allGrids.Contains(entXform.GridUid.Value))
+            var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(ent, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+            if (gridUid == null || !allGrids.Contains(gridUid.Value))
                 continue;
 
             RefreshPowerMonitoringConsole(ent, entConsole);
@@ -304,18 +307,25 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     private void UpdateUIState(EntityUid uid, PowerMonitoringConsoleComponent component)
     {
-        var consoleXform = Transform(uid);
-
-        if (consoleXform?.GridUid == null)
+        var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(uid, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+        if (gridUid == null)
             return;
 
-        var gridUid = consoleXform.GridUid.Value;
+        if (_tagSystem.HasTag(uid, "ForgeHandheldMonitoringConsole"))
+        {
+            RefreshPowerMonitoringConsole(uid, component);
 
-        if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
+            if (TryComp<PowerMonitoringCableNetworksComponent>(uid, out var cableNetworks))
+                RefreshPowerMonitoringCableNetworks(uid, cableNetworks);
+        }
+
+        var grid = gridUid.Value;
+
+        if (!TryComp<MapGridComponent>(grid, out var mapGrid))
             return;
 
         // The grid must have a NavMapComponent to visualize the map in the UI
-        EnsureComp<NavMapComponent>(gridUid);
+        EnsureComp<NavMapComponent>(grid);
 
         // Initializing data to be send to the client
         var totalSources = 0d;
@@ -333,7 +343,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
         var powerConsumerQuery = AllEntityQuery<PowerConsumerComponent, TransformComponent>();
         while (powerConsumerQuery.MoveNext(out var ent, out var powerConsumer, out var xform))
         {
-            if (xform.Anchored == false || xform.GridUid != gridUid)
+            if (xform.Anchored == false || xform.GridUid != grid)
                 continue;
 
             if (TryComp<PowerMonitoringDeviceComponent>(ent, out var device))
@@ -357,7 +367,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
             if (device.IsCollectionMasterOrChild && !device.IsCollectionMaster)
                 continue;
 
-            if (xform.Anchored == false || xform.GridUid != gridUid)
+            if (xform.Anchored == false || xform.GridUid != grid)
                 continue;
 
             // Get the device power stats
@@ -421,7 +431,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
                             reachableEntities.Add(node.Owner);
                     }
 
-                    UpdateFocusNetwork(uid, cableNetworks, gridUid, mapGrid, reachableEntities);
+                    UpdateFocusNetwork(uid, cableNetworks, grid, mapGrid, reachableEntities);
                 }
             }
         }

@@ -54,6 +54,7 @@ public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoring
         SubscribeLocalEvent<AtmosMonitoringConsoleComponent, ComponentInit>(OnConsoleInit);
         SubscribeLocalEvent<AtmosMonitoringConsoleComponent, AnchorStateChangedEvent>(OnConsoleAnchorChanged);
         SubscribeLocalEvent<AtmosMonitoringConsoleComponent, EntParentChangedMessage>(OnConsoleParentChanged);
+        SubscribeLocalEvent<AtmosMonitoringConsoleComponent, BoundUIOpenedEvent>(OnConsoleBoundUIOpened);
 
         // Tracked device events
         SubscribeLocalEvent<AtmosMonitoringConsoleDeviceComponent, NodeGroupsRebuilt>(OnEntityNodeGroupsRebuilt);
@@ -77,6 +78,12 @@ public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoring
     }
 
     private void OnConsoleParentChanged(EntityUid uid, AtmosMonitoringConsoleComponent component, EntParentChangedMessage args)
+    {
+        component.ForceFullUpdate = true;
+        InitializeAtmosMonitoringConsole(uid, component);
+    }
+
+    private void OnConsoleBoundUIOpened(EntityUid uid, AtmosMonitoringConsoleComponent component, BoundUIOpenedEvent args)
     {
         component.ForceFullUpdate = true;
         InitializeAtmosMonitoringConsole(uid, component);
@@ -116,12 +123,10 @@ public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoring
 
         // Update atmos monitoring consoles that stand upon an updated grid
         var query = AllEntityQuery<AtmosMonitoringConsoleComponent, TransformComponent>();
-        while (query.MoveNext(out var ent, out var entConsole, out var entXform))
+        while (query.MoveNext(out var ent, out var entConsole, out _))
         {
-            if (entXform.GridUid == null)
-                continue;
-
-            if (!allGrids.Contains(entXform.GridUid.Value))
+            var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(ent, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+            if (gridUid == null || !allGrids.Contains(gridUid.Value))
                 continue;
 
             InitializeAtmosMonitoringConsole(ent, entConsole);
@@ -143,12 +148,19 @@ public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoring
             _updateTimer -= UpdateTime;
 
             var query = AllEntityQuery<AtmosMonitoringConsoleComponent, TransformComponent>();
-            while (query.MoveNext(out var ent, out var entConsole, out var entXform))
+            while (query.MoveNext(out var ent, out var entConsole, out _))
             {
-                if (entXform?.GridUid == null)
+                if (!_userInterfaceSystem.IsUiOpen(ent, AtmosMonitoringConsoleUiKey.Key))
                     continue;
 
-                UpdateUIState(ent, entConsole, entXform);
+                var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(ent, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+                if (gridUid == null)
+                    continue;
+
+                if (_tagSystem.HasTag(ent, "ForgeHandheldMonitoringConsole"))
+                    InitializeAtmosMonitoringConsole(ent, entConsole);
+
+                UpdateUIState(ent, entConsole, gridUid.Value);
             }
         }
     }
@@ -156,13 +168,8 @@ public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoring
     public void UpdateUIState
         (EntityUid uid,
         AtmosMonitoringConsoleComponent component,
-        TransformComponent xform)
+        EntityUid gridUid)
     {
-        if (!_userInterfaceSystem.IsUiOpen(uid, AtmosMonitoringConsoleUiKey.Key))
-            return;
-
-        var gridUid = xform.GridUid!.Value;
-
         if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
             return;
 
@@ -178,7 +185,7 @@ public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoring
 
         while (query.MoveNext(out var ent, out var entSensor, out var entXform))
         {
-            if (entXform?.GridUid != xform.GridUid)
+            if (entXform?.GridUid != gridUid)
                 continue;
 
             if (!entXform.Anchored)

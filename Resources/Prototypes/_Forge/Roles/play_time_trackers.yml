@@ -29,7 +29,7 @@
   id: JobEmpireTechnican
 
 - type: playTimeTracker
-  id: JobIconEmpireSmallInq
+  id: JobEmpireSmallInquisitor
 
 - type: playTimeTracker
   id: JobEmpireApotek

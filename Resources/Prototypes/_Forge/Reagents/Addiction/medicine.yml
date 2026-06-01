@@ -1,0 +1,51 @@
+# region Dexalin
+- type: addiction
+  id: Dexalin
+  withdrawalDelay: 240
+  toleranceDecayRate: 0.00035
+  withdrawalDecayRate: 0.0005
+  stages:
+    - minTolerance: 0.5
+      effectInterval: 10
+      effects:
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-dexalin-1
+            - addiction-dexalin-2
+          visualType: Medium
+          probability: 0.05
+      withdrawalEffects:
+        - !type:HealthChange
+          damage:
+            types:
+              Asphyxiation: 2.5
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-dexalin-withdrawal-1
+            - addiction-dexalin-withdrawal-2
+          visualType: MediumCaution
+          probability: 0.2
+
+# region Omnizine
+- type: addiction
+  id: Omnizine
+  withdrawalDelay: 180
+  toleranceDecayRate: 0.0003
+  withdrawalDecayRate: 0.0006
+  stages:
+    - minTolerance: 0.9
+      effectInterval: 30
+      effects:
+      - !type:HealthChange
+          probability: 0.2
+          damage:
+            types:
+              Asphyxiation: 1.5
+      withdrawalEffects:
+      - !type:HealthChange
+          probability: 0.2
+          damage:
+            types:
+              Asphyxiation: 3

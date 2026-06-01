@@ -250,8 +250,8 @@
     - HeadSide
 
 - type: entity
-  parent: ClothingHeadHardsuitBase
-  id: [ClothingHeadHelmetHardsuitHVMilitant, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
+  id: ClothingHeadHelmetHardsuitHVMilitant
   name: HV MP 0-4 «Militant» helmet
   description: Higaris Victories' military prototype 0-4, codenamed «Militant».
   categories: [ HideSpawnMenu ]

@@ -93,7 +93,7 @@
 
 # region RI-22 Medium
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons ]
   id: ClothingHeadHelmetHardsuitRI22
   name: RI-22 helmet
   description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
@@ -124,7 +124,7 @@
     - HeadSide
 
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons ]
   id: ClothingHeadHelmetHardsuitRI22c
   name: RI-22c helmet
   description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
@@ -155,7 +155,7 @@
     - HeadSide
 
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons ]
   id: ClothingHeadHelmetHardsuitRI22i
   name: RI-22 helmet
   description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
@@ -184,15 +184,10 @@
     - Snout
     - HeadTop
     - HeadSide
-  - type: ThermalVision
-    flashDurationMultiplier: 2
-    pulseTime: 3
-    isEquipment: true
-    toggleAction: PulseThermalVision
 
 # region HV-7 Heavy
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons ]
   id: ClothingHeadHelmetHardsuitHV7
   name: HV-7 helmet
   description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
@@ -256,7 +251,7 @@
 
 - type: entity
   parent: ClothingHeadHardsuitBase
-  id: ClothingHeadHelmetHardsuitHVMilitant
+  id: [ ClothingHeadHelmetHardsuitHVMilitant, ShowMedicalIcons ]
   name: HV MP 0-4 «Militant» helmet
   description: Higaris Victories' military prototype 0-4, codenamed «Militant».
   categories: [ HideSpawnMenu ]

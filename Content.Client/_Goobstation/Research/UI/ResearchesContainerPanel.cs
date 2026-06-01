@@ -33,10 +33,14 @@ public sealed partial class ResearchesContainerPanel : LayoutContainer
             if (child is not FancyResearchConsoleItem dependentItem)
                 continue;
 
+            if (dependentItem.IsGhostPreview)
+                continue;
+
             if (dependentItem.Prototype.TechnologyPrerequisites.Count <= 0)
                 continue;
 
             var prerequisiteItems = Children.Where(x => x is FancyResearchConsoleItem second &&
+                !second.IsGhostPreview &&
                 dependentItem.Prototype.TechnologyPrerequisites.Contains(second.Prototype.ID))
                 .Cast<FancyResearchConsoleItem>().ToList();
 

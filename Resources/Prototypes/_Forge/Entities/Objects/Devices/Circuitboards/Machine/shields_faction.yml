@@ -161,6 +161,46 @@
     frameSize: 2x2
 
 - type: entity
+  id: MachineShieldForgeEmpireHeavyCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: Imperial Bastion shield generator board
+  description: A machine board for an Imperial IGS-440 Bastion shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeEmpireHeavy
+    frameSize: 2x2
+
+- type: entity
+  id: MachineShieldForgeEmpirePrismaticCircuitboard
+  parent: MachineShieldFSG470PCircuitboard
+  name: Imperial Aureole shield generator board
+  description: A machine board for an Imperial IGS-470P Aureole shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeEmpirePrismatic
+    frameSize: 2x2
+
+- type: entity
+  id: MachineShieldForgeEmpireCollisionCircuitboard
+  parent: MachineShieldFSG600CCircuitboard
+  name: Imperial Wallbreaker shield generator board
+  description: A machine board for an Imperial IGS-600C Wallbreaker shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeEmpireCollision
+    frameSize: 2x2
+
+- type: entity
+  id: MachineShieldForgeEmpireSignumCircuitboard
+  parent: MachineShieldFSG420Circuitboard
+  name: Imperial Signum shield generator board
+  description: A machine board for an Imperial IGS-455 Signum shield generator.
+  components:
+  - type: MachineBoard
+    prototype: ShieldGeneratorForgeEmpireSignum
+    frameSize: 2x2
+
+- type: entity
   id: MachineShieldForgeUsspKerchCircuitboard
   parent: MachineShieldFSG420Circuitboard
   name: Union Kerch shield generator board

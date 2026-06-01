@@ -29,6 +29,10 @@
     - RoundstartShipgunAmmo
     - MonoAttachmentsStatic
     dynamicPacks:
+    # Empire start
+    - HardsuitEmpirePack
+    - WeaponEmpirePack
+    - EmpireVoucherRecipePack
     # rogue start
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged

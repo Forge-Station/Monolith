@@ -1,0 +1,39 @@
+- type: loadout
+  id: EmpireIFFOrange
+  equipment:
+    neck: ClothingNeckIFFOrange
+
+- type: loadout
+  id: EmpireIFFPurple
+  equipment:
+    neck: ClothingNeckIFFPurple
+
+#region Preafect
+
+- type: loadout
+  id: ClothingNeckCloakEmpirePreafectOrange
+  name: Плащ Лорда
+  # description:
+  previewEntity: ClothingNeckCloakEmpirePreafectOrange
+  price: 500
+  equipment:
+    head: ClothingHeadHatEmpirePreafectOrange
+    neck: ClothingNeckCloakEmpirePreafectOrange
+
+- type: loadout
+  id: ClothingNeckCloakEmpirePreafectViolet
+  name: Плащ Экклезиарха
+  # description:
+  previewEntity: ClothingNeckCloakEmpirePreafectViolet
+  price: 500
+
+  equipment:
+    head: ClothingHeadHatEmpirePreafectViolet
+    neck: ClothingNeckCloakEmpirePreafectViolet
+
+- type: loadout
+  id: ClothingNeckCloakEmpirePreafectDiplomacy
+  previewEntity: ClothingNeckCloakEmpirePreafectDiplomacy
+  price: 500
+  equipment:
+    neck: ClothingNeckCloakEmpirePreafectDiplomacy

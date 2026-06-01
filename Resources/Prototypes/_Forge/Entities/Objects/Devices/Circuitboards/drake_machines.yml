@@ -1,0 +1,56 @@
+# Drake Industries machine circuit boards.
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: DrakeOreProcessorMk2MachineCircuitboard
+  suffix: Drake
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: DrakeOreProcessorMk2
+    frameSize: 2x2
+    requirements:
+      MatterBin: 8
+      Manipulator: 4
+    stackRequirements:
+      Steel: 5
+      Glass: 5
+      Gold: 2
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: DrakeScrapProcessorMachineCircuitboard
+  suffix: Drake
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: DrakeScrapProcessor
+    requirements:
+      MatterBin: 4
+      Manipulator: 3
+    stackRequirements:
+      Steel: 5
+      Glass: 5
+      Plasma: 2
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: DrakeUraniumCentrifugeMachineCircuitboard
+  suffix: Drake
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: DrakeUraniumCentrifuge
+    frameSize: 2x2
+    requirements:
+      MatterBin: 6
+      Manipulator: 3
+      Capacitor: 2
+    stackRequirements:
+      Steel: 5
+      Glass: 5
+      Gold: 2
+      Plasma: 3

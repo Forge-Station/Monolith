@@ -117,6 +117,8 @@
     - NFSalvageTechfabDeprecatedStatic
     dynamicPacks:
     - NFSalvageTechfabDeprecated
+    - DrakeIndustriesRecipes # Forge-Change
+    - ForgeSalvageTechfabDrakeTools # Forge-Change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - NFSalvageTechfabDeprecatedEmag

@@ -239,6 +239,7 @@
   - type: PirateBountyItem
     id: FTechLogisticGuns
 
+#region Renegate
 - type: entity
   name: NEK'o HP-12 Saigak (12 gauge)
   # Don't parent to BaseWeaponShotgun because it differs significantly
@@ -356,3 +357,54 @@
   - type: EmitSoundOnLand
     sound:
       collection: RevolversDrop
+
+#region Empire
+- type: entity
+  parent: [BaseWeaponCustomCell, BaseGunWieldable]
+  id: WeaponEnergyShotgunKiller
+  name: AE E-SG 'Killer'
+  description: An energy weapon that fires shotgun-like spreads. The magazine serves as its battery.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/e_sg.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: energy-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: energy
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/e_sg_inhands.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    fireRate: 1
+    angleIncrease: 3
+    angleDecay: 28
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,3,2
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/e_sg_inhands.rsi
+  - type: GunRequiresWield
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: gun_magazine
+        startingItem: MagazinePowerShotgun
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+          - HEVPowerCellShotgun
+  - type: BatterySlotRequiresToggle
+    itemSlot: gun_magazine

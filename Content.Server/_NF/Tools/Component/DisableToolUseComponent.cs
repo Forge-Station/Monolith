@@ -30,5 +30,9 @@ namespace Content.Server._NF.Tools.Components
         public bool Rolling;
         [DataField, ViewVariables(VVAccess.ReadWrite)]
         public bool Digging;
+
+        // Forge-change
+        [DataField, ViewVariables(VVAccess.ReadWrite)]
+        public bool AnchoringFalse;
     }
 }

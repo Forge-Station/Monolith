@@ -1,0 +1,178 @@
+# Drake Industries - branches from UniversalMaterialResearchT1 (10, 0).
+# Tools x8. Middle x9: apparel -3, machines -4..-6. Hardsuits x10.
+
+- type: technology
+  id: DrakeIndustriesApparel
+  name: research-technology-drake-industries-apparel
+  entityIcon: ClothingUniformDrakeIndustriesHauler
+  discipline: DrakeIndustries
+  tier: 1
+  cost: 5000
+  recipeUnlocks:
+  - ClothingUniformDrakeIndustriesHauler
+  - ClothingUniformDrakeIndustriesTrucker
+  - ClothingUniformDrakeIndustriesWatchdog
+  - ClothingMaskDrakeIndustries
+  - ClothingMaskDrakeIndustriesWatchdog
+  - ClothingBeltDrakeIndustries
+  - ClothingOuterDrakeIndustriesTruckerPuffyVest
+  - ClothingNeckDrakeIndustriesBadge
+  - ClothingBackpackDrakeIndustries
+  - ClothingBackpackDuffelDrakeIndustries
+  - ClothingBackpackSatchelDrakeIndustries
+  - ClothingShoesBootsMagDrakeIndustries
+  - ClothingNeckCloakDrakeIndustries
+  - ClothingNeckCloakDrakeIndustriesRipped
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 9, -3
+
+- type: technology
+  id: DrakeIndustriesMachines
+  name: research-technology-drake-industries-machines
+  entityIcon: DrakeOreProcessorMk2
+  discipline: DrakeIndustries
+  tier: 2
+  cost: 65000
+  recipeUnlocks:
+  - DrakeOreProcessorMk2MachineCircuitboard
+  - DrakeScrapProcessorMachineCircuitboard
+  technologyPrerequisites:
+  - DrakeIndustriesApparel
+  position: 9, -4
+
+- type: technology
+  id: DrakeIndustriesCentrifuge
+  name: research-technology-drake-industries-centrifuge
+  entityIcon: DrakeUraniumCentrifuge
+  discipline: DrakeIndustries
+  tier: 2
+  cost: 85000
+  recipeUnlocks:
+  - DrakeUraniumCentrifugeMachineCircuitboard
+  - DrakeCentrifugeFissileUranium3
+  technologyPrerequisites:
+  - DrakeIndustriesMachines
+  - UraniumProcessingAdvanced
+  position: 9, -5
+
+- type: technology
+  id: DrakeIndustriesMaterialsScience
+  name: research-technology-drake-industries-materials-science
+  entityIcon: SheetPlastitanium
+  discipline: DrakeIndustries
+  tier: 3
+  cost: 75000
+  recipeUnlocks:
+  - DrakeCentrifugePlastitanium
+  technologyPrerequisites:
+  - DrakeIndustriesCentrifuge
+  - UniversalMaterialResearchT2
+  position: 9, -6
+
+# Hardsuits x10: MK4 -4; MK8 -5; MK16 -7. Tools x8: grenade -4, cutter -5, laser -7. Apollo x9: -8 under plastitanium.
+
+- type: technology
+  id: DrakeIndustriesHardsuitsMk4
+  name: research-technology-drake-industries-hardsuits-mk4
+  entityIcon: ClothingOuterHardsuitDrakeMk4
+  discipline: DrakeIndustries
+  tier: 1
+  cost: 25000
+  recipeUnlocks:
+  - ClothingOuterHardsuitDrakeMk4
+  technologyPrerequisites:
+  - DrakeIndustriesApparel
+  position: 10, -4
+
+- type: technology
+  id: DrakeIndustriesHardsuitsMk8
+  name: research-technology-drake-industries-hardsuits-mk8
+  entityIcon: ClothingOuterHardsuitDrakeMk8
+  discipline: DrakeIndustries
+  tier: 2
+  cost: 55000
+  recipeUnlocks:
+  - ClothingOuterHardsuitDrakeMk8
+  technologyPrerequisites:
+  - DrakeIndustriesHardsuitsMk4
+  - DrakeIndustriesMachines
+  position: 10, -5
+
+- type: technology
+  id: DrakeIndustriesHardsuitsMk16
+  name: research-technology-drake-industries-hardsuits-mk16
+  entityIcon: ClothingOuterHardsuitDrakeMk16
+  discipline: DrakeIndustries
+  tier: 3
+  cost: 90000
+  recipeUnlocks:
+  - ClothingOuterHardsuitDrakeMk16
+  technologyPrerequisites:
+  - DrakeIndustriesHardsuitsMk8
+  - DrakeIndustriesIndustrialGear
+  - DrakeIndustriesMaterialsScience
+  position: 10, -7
+
+# Tools column (8).
+
+- type: technology
+  id: DrakeIndustriesIndustrialBasics
+  name: research-technology-drake-industries-industrial-basics
+  entityIcon: WeaponDrakeIndustrialGrenadeLauncher
+  discipline: DrakeIndustries
+  tier: 1
+  cost: 15000
+  recipeUnlocks:
+  - WeaponDrakeIndustrialGrenadeLauncher
+  - SeismicCharge
+  - DrakeIndustrialOreBag
+  - DrakeIndustrialConstructionBag
+  technologyPrerequisites:
+  - DrakeIndustriesApparel
+  position: 8, -4
+
+- type: technology
+  id: DrakeIndustriesIndustrialGear
+  name: research-technology-drake-industries-industrial-gear
+  entityIcon: WeaponDrakeIndustrialCutter
+  discipline: DrakeIndustries
+  tier: 2
+  cost: 50000
+  recipeUnlocks:
+  - WeaponDrakeIndustrialCutter
+  - PlasmaTank
+  - JetpackDrakeIndustrial
+  - ClothingShoesBootsMagDrakeIndustrial
+  technologyPrerequisites:
+  - DrakeIndustriesIndustrialBasics
+  - DrakeIndustriesMachines
+  position: 8, -5
+
+- type: technology
+  id: DrakeIndustriesIndustrialLaser
+  name: research-technology-drake-industries-industrial-laser
+  entityIcon: WeaponDrakeIndustrialLaser
+  discipline: DrakeIndustries
+  tier: 3
+  cost: 70000
+  recipeUnlocks:
+  - WeaponDrakeIndustrialLaser
+  technologyPrerequisites:
+  - DrakeIndustriesIndustrialGear
+  - DrakeIndustriesMaterialsScience
+  position: 8, -7
+
+- type: technology
+  id: DrakeIndustriesApolloMk2
+  name: research-technology-drake-industries-apollo-mk2
+  entityIcon: WeaponTurretDrakeApolloMk2Circuitboard
+  discipline: DrakeIndustries
+  tier: 3
+  cost: 100000
+  recipeUnlocks:
+  - WeaponTurretDrakeApolloMk2Circuitboard
+  technologyPrerequisites:
+  - DrakeIndustriesMaterialsScience
+  - DrakeIndustriesIndustrialLaser
+  position: 9, -8

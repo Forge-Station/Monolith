@@ -41,6 +41,7 @@
         Heat: 0.95
         Caustic: 0.95
 
+#region Renegate
 - type: entity
   name: NEK'o AR-400 (5.56x45mm)
   parent: [BaseWeaponLightMachineGun, BaseGunWieldable]
@@ -168,3 +169,64 @@
   - type: Appearance
   - type: StaticPrice # Mono
     price: 1000
+
+#region Empire
+- type: entity
+  parent: BaseWeaponCustomCell
+  id: WeaponEnergyLMGHeavion
+  name: AE E-LMG 'Heavion'
+  description: An improved energy machine gun with reinforced components for sustained fire. Uses specialized power cells.
+  components:
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,4,4
+    sprite: Forge/Objects/Weapons/Guns/LMGs/heavion_inhands.rsi
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -20
+  - type: Gun
+    minAngle: 24
+    maxAngle: 36
+    angleIncrease: 4
+    angleDecay: 16
+    fireRate: 5
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: gun_magazine
+        startingItem: MagazinePowerHeavion
+        whitelist:
+          tags:
+          - HEVPowerCellLMG
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/LMGs/heavion.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: energy-4
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: energy
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/LMGs/heavion_inhands.rsi
+    quickEquip: false
+    slots:
+    - back
+    - suitStorage
+  - type: GunRequiresWield
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.7
+    sprintModifier: 0.6
+  - type: AmmoCounter
+  - type: BatterySlotRequiresToggle
+    itemSlot: gun_magazine

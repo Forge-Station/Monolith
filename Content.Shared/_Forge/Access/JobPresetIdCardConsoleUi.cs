@@ -1,4 +1,6 @@
 using Content.Shared.Access;
+using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -38,6 +40,12 @@ public sealed class JobPresetIdCardConsoleBoundUserInterfaceState : BoundUserInt
     public readonly List<ProtoId<AccessLevelPrototype>>? TargetIdAccessList;
     public readonly List<ProtoId<AccessLevelPrototype>>? AllowedModifyAccessList;
     public readonly ProtoId<JobPrototype> TargetIdJobPrototype;
+    public readonly bool HasTargetDemographics;
+    public readonly bool IgnoreDemographicRequirements;
+    public readonly bool RequirePresetAccessOnly;
+    public readonly int TargetAge;
+    public readonly ProtoId<SpeciesPrototype> TargetSpecies;
+    public readonly Sex TargetSex;
 
     public JobPresetIdCardConsoleBoundUserInterfaceState(
         bool isPrivilegedIdPresent,
@@ -47,7 +55,13 @@ public sealed class JobPresetIdCardConsoleBoundUserInterfaceState : BoundUserInt
         List<ProtoId<AccessLevelPrototype>>? allowedModifyAccessList,
         ProtoId<JobPrototype> targetIdJobPrototype,
         string privilegedIdName,
-        string targetIdName)
+        string targetIdName,
+        bool ignoreDemographicRequirements = false,
+        bool requirePresetAccessOnly = false,
+        bool hasTargetDemographics = false,
+        int targetAge = 0,
+        ProtoId<SpeciesPrototype> targetSpecies = default,
+        Sex targetSex = Sex.Male)
     {
         IsPrivilegedIdPresent = isPrivilegedIdPresent;
         IsPrivilegedIdAuthorized = isPrivilegedIdAuthorized;
@@ -57,6 +71,12 @@ public sealed class JobPresetIdCardConsoleBoundUserInterfaceState : BoundUserInt
         TargetIdJobPrototype = targetIdJobPrototype;
         PrivilegedIdName = privilegedIdName;
         TargetIdName = targetIdName;
+        IgnoreDemographicRequirements = ignoreDemographicRequirements;
+        RequirePresetAccessOnly = requirePresetAccessOnly;
+        HasTargetDemographics = hasTargetDemographics;
+        TargetAge = targetAge;
+        TargetSpecies = targetSpecies;
+        TargetSex = targetSex;
     }
 }
 

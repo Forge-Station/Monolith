@@ -1,71 +1,48 @@
-# Empire role disabled.
-# - type: job
-#   id: Cardinal
-#   name: forge-job-name-cardinal
-#   description: forge-job-desc-cardinal
-#   playTimeTracker: JobCardinal
-#   requirements:
-#     - !type:OverallPlaytimeRequirement
-#       time: 86400 # 24 hours
-#     - !type:DepartmentTimeRequirement
-#       department: Empire
-#       time: 64800 # 18 hours
-#     - !type:RoleTimeRequirement
-#       role: JobPraetorian
-#       time: 21600 # 6 hours
-#     - !type:SpeciesRequirement
-#       inverted: true
-#       species:
-#         - SlimePerson
-#         - Arachnid
-#         - Chitinid
-#         - Resomi
-#         - Vox
-#         - Diona
-#         - Goblin
-#         - Hydrakin
-#         - Vulpkanin
-#         - Tajaran
-#         - Reptilian
-#         # - Oni
-#         - Moth
-#         - IPC
-#   # alternateRequirementSets:
-#   #   longerPlaytimeLessSec:
-#   #   - !type:OverallPlaytimeRequirement
-#   #     time: 216000 # 60 hours
-#   #   # - !type:RoleTimeRequirement
-#   #   #   role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
-#   #   #   time: 43200 # 12 hours
-#   startingGear: CardinalGear
-#   alwaysUseSpawner: true
-#   icon: JobIconEmpireCardinal
-#   supervisors: job-supervisors-praefect
-#   weight: 40
-#   displayWeight: 40
-#   canBeAntag: false
-#   salary: 11000
-#   setPreference: true
-#   accessGroups:
-#   - CommandEmpireAccess
-#   special:
-#   - !type:AddImplantSpecial
-#     implants: [ ImperialTrackingImplant ]
-#   - !type:AddComponentSpecial
-#     components:
-#     - type: NpcFactionMember
-#       factions:
-#       - Empire
-#     - !type:AddImplantSpecial
-#       implants: [ ImplantGuard ]
-#
-# - type: startingGear
-#   id: CardinalGear
-#   # equipment:
-#   #   ears:
-#   #   belt:
-#   #   pocket1:
-#   #   pocket2:
-#   # storage:
-#   #   back:
-#   #   - RadioHandheldNF
+- type: job
+  id: Cardinal
+  name: forge-job-name-cardinal
+  description: forge-job-desc-cardinal
+  playTimeTracker: JobCardinal
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hrs
+    - !type:SpeciesRequirement
+      species:
+      - Human
+    - !type:SexRequirement
+      sex:
+      - Male
+    - !type:AgeRequirement
+      requiredAge: 35
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: CardinalGear
+  alwaysUseSpawner: true
+  icon: JobIconEmpireCardinal
+  assignedCompany: Imperial
+  assignedNationality: Imperial
+  supervisors: job-supervisors-praefect
+  weight: 40
+  displayWeight: 40
+  canBeAntag: false
+  accessGroups:
+  - CommandEmpireAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
+  - !type:AddImplantSpecial
+    implants: [ ImplantGuard, EmpireTrackingImplant ]
+
+- type: startingGear
+  id: CardinalGear
+  # equipment:
+  #   ears:
+  #   belt:
+  #   pocket1:
+  #   pocket2:
+  # storage:
+  #   back:
+  #   - RadioHandheldNF

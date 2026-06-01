@@ -19,7 +19,7 @@
 - type: pirateBounty # Mono
   id: PirateBountyTacsuitHighValue
   reward: 60
-  description: pirate-bounty-description-faction-tacsuit-high 
+  description: pirate-bounty-description-faction-tacsuit-high
   entries:
   - name: pirate-bounty-item-faction-tacsuit-high
     amount: 1

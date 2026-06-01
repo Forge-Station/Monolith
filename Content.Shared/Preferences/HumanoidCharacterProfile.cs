@@ -1,4 +1,5 @@
 using Content.Shared._Forge.TTS;
+using Content.Shared._Forge.Company;
 using Content.Shared._Mono.Company;
 using Content.Shared._NF.Bank;
 using Content.Shared.CCVar;
@@ -751,6 +752,8 @@ namespace Content.Shared.Preferences
             {
                 _jobPriorities.Add(job, priority);
             }
+
+            Company = FactionCompanyResolver.SanitizeProfileCompany(this, prototypeManager);
 
             PreferenceUnavailable = prefsUnavailableMode;
 

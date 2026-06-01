@@ -14,6 +14,9 @@
   id: ADTWeaponMeleePrasatChainsword
 
 - type: Tag
+  id: ADTWeaponMeleePrasatChainswordInq
+
+- type: Tag
   id: MagazineAntiMateriel
 
 - type: Tag
@@ -216,3 +219,18 @@
 
 - type: Tag
   id: 40mmCartridge
+
+- type: Tag
+  id: HEVPowerCellShotgun
+
+- type: Tag
+  id: HEVPowerCellLMG
+
+- type: Tag
+  id: HEVPowerCellRifle
+
+- type: Tag
+  id: EmpireUplink
+
+- type: Tag
+  id: Overlord

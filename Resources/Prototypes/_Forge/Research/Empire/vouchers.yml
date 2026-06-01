@@ -1,0 +1,51 @@
+- type: technology
+  id: EmpireVouchersGermesT1
+  name: research-technology-empire-vouchers-t1-germes
+  entityIcon: ShipVoucherGermes
+  discipline: Empire
+  tier: 1
+  cost: 80000
+  recipeUnlocks:
+  - RecipeShipVoucherGermes
+  technologyPrerequisites:
+  - UniversalMaterialResearchT3
+  position: 12, 10
+
+- type: technology
+  id: EmpireVouchersPlutot2
+  name: research-technology-empire-vouchers-t2-pluto
+  entityIcon: ShipVoucherPluto
+  discipline: Empire
+  tier: 2
+  cost: 125000
+  recipeUnlocks:
+  - RecipeShipVoucherPluto
+  technologyPrerequisites:
+  - UniversalMaterialResearchT3
+  position: 15, 12
+
+- type: technology
+  id: EmpireVouchersMirkot2
+  name: research-technology-empire-vouchers-t2-mirko
+  entityIcon: ShipVoucherMirko
+  discipline: Empire
+  tier: 2
+  cost: 125000
+  recipeUnlocks:
+  - RecipeShipVoucherMirko
+  technologyPrerequisites:
+  - UniversalMaterialResearchT3
+  position: 15, 14
+
+- type: technology
+  id: EmpireVouchersTeritt3
+  name: research-technology-empire-vouchers-t3-terit
+  entityIcon: ShipVoucherTerit
+  discipline: Empire
+  tier: 3
+  cost: 145000
+  recipeUnlocks:
+  - RecipeShipVoucherTerit
+  technologyPrerequisites:
+  - UniversalMaterialResearchT3
+  position: 18, 10

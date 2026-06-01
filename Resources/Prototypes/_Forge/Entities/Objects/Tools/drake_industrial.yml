@@ -1,0 +1,119 @@
+# Drake Industries industrial tools and bags.
+
+- type: entity
+  name: Drake industrial ore bag
+  id: DrakeIndustrialOreBag
+  parent: OreBag
+  description: Enlarged Drake Industries sack for ore and artifact fragments.
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Salvage/drake_industrial_ore_bag.rsi
+    layers:
+    - state: icon
+    - state: icon-on
+      visible: false
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Clothing
+    sprite: Forge/Objects/Specific/Salvage/drake_industrial_ore_bag.rsi
+  - type: Storage
+    grid:
+    - 0,0,13,7
+  - type: StaticPrice
+    price: 800
+    vendPrice: 1200
+
+- type: entity
+  name: Drake industrial construction bag
+  id: DrakeIndustrialConstructionBag
+  parent: ConstructionBag
+  description: Enlarged Drake Industries construction bag for sheets and building materials.
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Salvage/drake_industrial_material_bag.rsi
+    layers:
+    - state: icon
+    - state: icon-on
+      visible: false
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Clothing
+    sprite: Forge/Objects/Specific/Salvage/drake_industrial_material_bag.rsi
+  - type: Storage
+    grid:
+    - 0,0,11,5
+  - type: StaticPrice
+    price: 750
+    vendPrice: 1100
+
+- type: entity
+  name: Drake industrial jetpack
+  id: JetpackDrakeIndustrial
+  parent: JetpackVoid
+  description: Drake Industries jetpack with an enlarged reservoir for extended vacuum work.
+  suffix: Drake, Empty
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Tanks/Jetpacks/drake_industrial_jetpack.rsi
+    state: icon
+  - type: Item
+    sprite: Forge/Objects/Tanks/Jetpacks/drake_industrial_jetpack.rsi
+  - type: Clothing
+    sprite: Forge/Objects/Tanks/Jetpacks/drake_industrial_jetpack.rsi
+  - type: GasTank
+    outputPressure: 42.6
+    air:
+      volume: 18
+      temperature: 293.15
+  - type: Jetpack
+    acceleration: 1.0
+    weightlessModifier: 2.0
+    moleUsage: 0.0019
+  - type: JetpackOnlyFuel
+  - type: StaticPrice
+    price: 1350
+    vendPrice: 2100
+
+- type: entity
+  id: JetpackDrakeIndustrialFilled
+  parent: JetpackDrakeIndustrial
+  suffix: Drake, Filled
+  components:
+  - type: GasTank
+    air:
+      volume: 18
+      temperature: 293.15
+      moles:
+        Oxygen: 3.7
+        Nitrogen: 3.7
+
+- type: entity
+  name: Drake industrial magboots
+  id: ClothingShoesBootsMagDrakeIndustrial
+  parent: ClothingShoesBootsMagBase
+  description: Drake Industries magboots with a side knife mount. Reduced movement penalty.
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Boots/drake_industrial_magboots.rsi
+    layers:
+    - state: icon
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Clothing
+    sprite: Forge/Clothing/Shoes/Boots/drake_industrial_magboots.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.95
+  - type: Storage
+    grid:
+    - 0,0,1,0
+    whitelist:
+      tags:
+      - Knife
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: StaticPrice
+    price: 600
+    vendPrice: 900

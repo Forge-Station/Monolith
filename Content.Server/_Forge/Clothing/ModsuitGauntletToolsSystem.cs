@@ -36,10 +36,23 @@ public sealed partial class ModsuitGauntletToolsSystem : SharedModsuitGauntletTo
 
     private void OnMapInit(Entity<ModsuitGauntletToolsComponent> ent, ref MapInitEvent args)
     {
-        EnsureGauntletTool(ent, ent.Comp.UrkProto, ref ent.Comp.UrkEntity);
-        EnsureGauntletTool(ent, ent.Comp.OmnitoolProto, ref ent.Comp.OmnitoolEntity);
-        EnsureGauntletTool(ent, ent.Comp.WelderProto, ref ent.Comp.WelderEntity);
-        EnsureGauntletTool(ent, ent.Comp.NaniteApplicatorProto, ref ent.Comp.NaniteApplicatorEntity);
+        var slots = ent.Comp.EnabledSlots;
+
+        if (slots.HasFlag(ModsuitGauntletEnabledSlots.Urk))
+            EnsureGauntletTool(ent, ent.Comp.UrkProto, ref ent.Comp.UrkEntity);
+
+        if (slots.HasFlag(ModsuitGauntletEnabledSlots.Omnitool))
+            EnsureGauntletTool(ent, ent.Comp.OmnitoolProto, ref ent.Comp.OmnitoolEntity);
+
+        if (slots.HasFlag(ModsuitGauntletEnabledSlots.Welder))
+            EnsureGauntletTool(ent, ent.Comp.WelderProto, ref ent.Comp.WelderEntity);
+
+        if (slots.HasFlag(ModsuitGauntletEnabledSlots.NaniteApplicator))
+            EnsureGauntletTool(ent, ent.Comp.NaniteApplicatorProto, ref ent.Comp.NaniteApplicatorEntity);
+
+        if (slots.HasFlag(ModsuitGauntletEnabledSlots.Auxiliary))
+            EnsureGauntletTool(ent, ent.Comp.AuxiliaryProto, ref ent.Comp.AuxiliaryEntity);
+
         Dirty(ent);
     }
 
@@ -67,5 +80,8 @@ public sealed partial class ModsuitGauntletToolsSystem : SharedModsuitGauntletTo
 
         if (ent.Comp.NaniteApplicatorEntity != null)
             QueueDel(ent.Comp.NaniteApplicatorEntity);
+
+        if (ent.Comp.AuxiliaryEntity != null)
+            QueueDel(ent.Comp.AuxiliaryEntity);
     }
 }

@@ -64,7 +64,7 @@
     sound:
       path: /Audio/Items/rped.ogg
   - type: MaterialStorage
-    storageLimit: 60000
+    storageLimit: 9000000
     canEjectStoredMaterials: true # Forge-Change: allow manual resource extraction from fabricator
     whitelist:
       tags:

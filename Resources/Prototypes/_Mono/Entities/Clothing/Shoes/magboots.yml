@@ -2,6 +2,7 @@
   parent: [ ClothingShoesBootsMagBase, BaseFactionGearOtherFactionT0 ]
   id: ClothingShoesBootsMagDrakeIndustries
   name: painted magboots
+  suffix: Drake # Forge-Change
   description: Yep, that's just repainted science boots.
   components:
   - type: Sprite

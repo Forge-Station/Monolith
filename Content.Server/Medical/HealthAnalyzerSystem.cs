@@ -3,7 +3,10 @@ using Content.Server.Medical.Components;
 using Content.Server.PowerCell;
 using Content.Server.Temperature.Components;
 using Content.Shared.Traits.Assorted;
+using Content.Shared.Chemistry.Components; // Forge-Change
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent; // Forge-Change
+using Content.Shared.FixedPoint; // Forge-Change
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
@@ -250,16 +253,27 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
 
         var bloodAmount = float.NaN;
         var bleeding = false;
+        List<ReagentQuantity>? chemicalReagents = null; // Forge-Change
         var unrevivable = false;
         var uncloneable = false; // Frontier
 
-        if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
-            _solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
-                ref bloodstream.BloodSolution, out var bloodSolution))
+        if (TryComp<BloodstreamComponent>(target, out var bloodstream))
         {
-            bloodAmount = bloodSolution.FillFraction;
-            bleeding = bloodstream.BleedAmount > 0;
+            if (_solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
+                    ref bloodstream.BloodSolution, out var bloodSolution))
+            {
+                bloodAmount = bloodSolution.FillFraction;
+                bleeding = bloodstream.BleedAmount > 0;
+            }
+
+            // Forge-Change-Start
+            if (_solutionContainerSystem.ResolveSolution(target, bloodstream.ChemicalSolutionName,
+                    ref bloodstream.ChemicalSolution, out var chemicalSolution))
+            {
+                chemicalReagents = GetChemicalReagents(chemicalSolution);
+            }
         }
+            // Forge-Change-End
 
         // Shitmed Change Start
         Dictionary<TargetBodyPart, TargetIntegrity>? body = null;
@@ -283,7 +297,26 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             uncloneable, // Frontier
             // Shitmed Change
             body,
-            part != null ? GetNetEntity(part) : null
+            part != null ? GetNetEntity(part) : null,
+            chemicalReagents // Forge-Change
         ));
     }
+
+    // Forge-Change-Start
+    public static List<ReagentQuantity>? GetChemicalReagents(Solution chemicalSolution)
+    {
+        List<ReagentQuantity>? reagents = null;
+
+        foreach (var quantity in chemicalSolution.Contents)
+        {
+            if (quantity.Quantity <= FixedPoint2.Zero)
+                continue;
+
+            reagents ??= new();
+            reagents.Add(quantity);
+        }
+
+        return reagents;
+    }
+    // Forge-Change-End
 }

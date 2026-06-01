@@ -2,8 +2,8 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    SetHeight="650"
-    SetWidth="350"
+    SetHeight="720"
+    SetWidth="370"
     Resizable="False"> <!-- Shitmed Change -->
     <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
         <PanelContainer.PanelOverride>
@@ -305,6 +305,38 @@
             </ScrollContainer>
                 </PanelContainer>
             </PanelContainer>
+
+            <!-- Forge-Change-Start -->
+            <PanelContainer Name="ChemicalsDivider"
+                            Visible="False"
+                            StyleClasses="LowDivider"/>
+
+            <PanelContainer Name="ChemicalsPanel"
+                            Visible="False"
+                            VerticalExpand="False"
+                            HorizontalExpand="True"
+                            Margin="4 4 4 4"
+                            SetHeight="200">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
+                </PanelContainer.PanelOverride>
+                <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical"
+                                  Margin="5 5">
+                        <Label Text="{Loc 'health-analyzer-window-entity-chemicals-text'}"
+                               Margin="0 0 0 4"/>
+                        <ScrollContainer ReturnMeasure="True"
+                                         VerticalExpand="True">
+                            <BoxContainer Name="ChemicalsContainer"
+                                          Orientation="Vertical"/>
+                        </ScrollContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </PanelContainer>
+            <!-- Forge-Change-End -->
 
         </BoxContainer>
         </PanelContainer>

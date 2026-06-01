@@ -3,3 +3,5 @@ reagent-desc-combat-nanites = Экспериментальные наниты с
 
 reagent-name-naloxone = налоксон
 reagent-desc-naloxone = Антагонист опиоидных рецепторов. Применяется как антидот при передозировках опиоидов, например, фентанила.
+
+reagent-physical-desc-clear = очищающее

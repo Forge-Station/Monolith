@@ -1,3 +1,4 @@
+# region Codeine
 - type: reagent
   id: Codeine
   name: reagent-name-codeine
@@ -14,23 +15,22 @@
           conditions:
             - !type:TotalDamage
               min: 5
-            - !type:ReagentThreshold
-              max: 8
           damage:
             groups:
-              Brute: -2
-              Burn: -1
+              Brute: -4
+              Burn: -2
     Narcotic:
       metabolismRate: 0.5
       effects:
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
-          type: Add
-          time: 6
+          type: Remove
+          time: 3
+          probability: 0.05
         - !type:Drunk
           slurSpeech: false
-          boozePower: 20
+          boozePower: 2
         - !type:PopupMessage
           type: Local
           visualType: Small
@@ -41,8 +41,9 @@
               min: 4
         - !type:AddictiveEffect
           addictionId: Morphine
-          toleranceGain: 0.03
+          toleranceGain: 0.006
 
+# region Morphine
 - type: reagent
   id: Morphine
   name: reagent-name-morphine
@@ -59,22 +60,18 @@
           conditions:
             - !type:TotalDamage
               min: 5
-            - !type:ReagentThreshold
-              max: 8
             - !type:AddictionCondition
               addictionId: Morphine
               min: 0.0
               max: 0.5
           damage:
             groups:
-              Brute: -4 # Painkiller btw
+              Brute: -5 # Painkiller btw
               Toxin: -0.5
         - !type:HealthChange
           conditions:
             - !type:TotalDamage
               min: 5
-            - !type:ReagentThreshold
-              max: 8
             - !type:AddictionCondition
               addictionId: Morphine
               min: 0.5
@@ -82,7 +79,7 @@
           damage:
             groups:
               Brute: -2
-              Toxin: -0.25
+              Toxin: -0.2
     Narcotic:
       metabolismRate: 0.75
       effects:
@@ -98,11 +95,12 @@
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
-          type: Add
-          time: 15
+          type: Remove
+          time: 6
+          probability: 0.07
         - !type:Drunk
           slurSpeech: true
-          boozePower: 40
+          boozePower: 4
         - !type:ChemVomit
           probability: 0.1
           conditions:
@@ -143,4 +141,4 @@
           probability: 0.4
         - !type:AddictiveEffect
           addictionId: Morphine
-          toleranceGain: 0.05
+          toleranceGain: 0.009

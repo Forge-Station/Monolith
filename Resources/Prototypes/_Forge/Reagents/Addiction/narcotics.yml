@@ -22,11 +22,15 @@
           walkSpeedModifier: 0.9
           sprintSpeedModifier: 0.9
           statusLifetime: 6
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
-          type: Add
-          time: 8
+          type: Remove
+          time: 1
           probability: 0.3
         - !type:PopupMessage
           type: Local
@@ -61,18 +65,16 @@
           walkSpeedModifier: 0.7
           sprintSpeedModifier: 0.7
           statusLifetime: 6
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 12
-          probability: 0.5
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 4
-          type: Add
-          probability: 0.02
+          time: 2
+          probability: 0.05
         - !type:PopupMessage
           type: Local
           messages:
@@ -107,18 +109,16 @@
           visualType: LargeCaution
           probability: 0.1
       withdrawalEffects:
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 20
-          probability: 0.8
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 8
-          type: Add
-          probability: 0.03
+          time: 2
+          probability: 0.01
         - !type:GenericStatusEffect
           key: TemporaryBlindness
           component: TemporaryBlindness
@@ -164,12 +164,16 @@
           walkSpeedModifier: 0.85
           sprintSpeedModifier: 0.85
           statusLifetime: 5
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 8
-          probability: 0.3
+          time: 2
+          probability: 0.03
         - !type:PopupMessage
           type: Local
           messages:
@@ -202,14 +206,8 @@
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 15
-          probability: 0.6
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 5
-          type: Add
-          probability: 0.02
+          time: 2
+          probability: 0.06
         - !type:MovespeedModifier
           walkSpeedModifier: 0.65
           sprintSpeedModifier: 0.65
@@ -259,18 +257,16 @@
           visualType: LargeCaution
           probability: 0.1
       withdrawalEffects:
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 25
-          probability: 0.9
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 10
-          type: Add
-          probability: 0.03
+          time: 4
+          probability: 0.09
         - !type:GenericStatusEffect
           key: TemporaryBlindness
           component: TemporaryBlindness
@@ -324,12 +320,16 @@
           visualType: Medium
           probability: 0.06
       withdrawalEffects:
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 10
-          probability: 0.35
+          time: 1
+          probability: 0.03
         - !type:PopupMessage
           type: Local
           messages:
@@ -362,18 +362,16 @@
           visualType: Medium
           probability: 0.06
       withdrawalEffects:
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 15
-          probability: 0.5
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 5
-          type: Add
-          probability: 0.01
+          time: 2
+          probability: 0.09
         - !type:PopupMessage
           type: Local
           messages:
@@ -409,18 +407,16 @@
           visualType: MediumCaution
           probability: 0.06
       withdrawalEffects:
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 25
-          probability: 0.85
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 8
-          type: Add
-          probability: 0.02
+          time: 2
+          probability: 0.06
         - !type:GenericStatusEffect
           key: TemporaryBlindness
           component: TemporaryBlindness
@@ -463,8 +459,8 @@
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 8
-          probability: 0.3
+          time: 2
+          probability: 0.07
         - !type:PopupMessage
           type: Local
           messages:
@@ -497,18 +493,12 @@
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 15
-          probability: 0.5
+          time: 2
+          probability: 0.05
         - !type:MovespeedModifier
           walkSpeedModifier: 0.75
           sprintSpeedModifier: 0.75
           statusLifetime: 5
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 4
-          type: Add
-          probability: 0.02
         - !type:PopupMessage
           type: Local
           messages:
@@ -543,18 +533,22 @@
           visualType: LargeCaution
           probability: 0.05
       withdrawalEffects:
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 25
-          probability: 0.85
+          time: 5
+          probability: 0.08
         - !type:GenericStatusEffect
           key: ForcedSleep
           component: ForcedSleeping
-          time: 8
+          time: 2
           type: Add
-          probability: 0.05
+          probability: 0.03
         - !type:HealthChange
           damage:
             types:
@@ -581,12 +575,6 @@
     - minTolerance: 0.25
       effectInterval: 8
       effects:
-        - !type:GenericStatusEffect
-          key: Drowsiness
-          component: Drowsiness
-          type: Add
-          time: 8
-          probability: 0.3
         - !type:PopupMessage
           type: Local
           messages:
@@ -599,12 +587,6 @@
           walkSpeedModifier: 0.9
           sprintSpeedModifier: 0.9
           statusLifetime: 8
-        - !type:GenericStatusEffect
-          key: Drowsiness
-          component: Drowsiness
-          type: Add
-          time: 10
-          probability: 0.4
         - !type:PopupMessage
           type: Local
           messages:
@@ -615,12 +597,6 @@
     - minTolerance: 0.5
       effectInterval: 6
       effects:
-        - !type:GenericStatusEffect
-          key: Drowsiness
-          component: Drowsiness
-          type: Add
-          time: 12
-          probability: 0.5
         - !type:Jitter
           probability: 0.25
         - !type:PopupMessage
@@ -635,18 +611,16 @@
           walkSpeedModifier: 0.75
           sprintSpeedModifier: 0.75
           statusLifetime: 6
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 18
-          probability: 0.65
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 5
-          type: Add
-          probability: 0.15
+          time: 6
+          probability: 0.065
         - !type:ChemVomit
           probability: 0.2
         - !type:HealthChange
@@ -666,9 +640,9 @@
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
-          type: Add
-          time: 20
-          probability: 0.7
+          type: Remove
+          time: 2
+          probability: 0.07
         - !type:Jitter
           probability: 0.5
         - !type:MovespeedModifier
@@ -683,18 +657,16 @@
           visualType: LargeCaution
           probability: 0.1
       withdrawalEffects:
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 30
-          probability: 0.9
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 8
-          type: Add
-          probability: 0.3
+          time: 6
+          probability: 0.05
         - !type:GenericStatusEffect
           key: TemporaryBlindness
           component: TemporaryBlindness
@@ -730,12 +702,6 @@
     - minTolerance: 0.2
       effectInterval: 10
       effects:
-        - !type:GenericStatusEffect
-          key: Drowsiness
-          component: Drowsiness
-          type: Add
-          time: 6
-          probability: 0.25
         - !type:PopupMessage
           type: Local
           messages:
@@ -748,11 +714,6 @@
           walkSpeedModifier: 0.92
           sprintSpeedModifier: 0.92
           statusLifetime: 10
-        - !type:GenericStatusEffect
-          key: Drowsiness
-          component: Drowsiness
-          type: Add
-          time: 8
           probability: 0.3
         - !type:PopupMessage
           type: Local
@@ -764,12 +725,6 @@
     - minTolerance: 0.5
       effectInterval: 7
       effects:
-        - !type:GenericStatusEffect
-          key: Drowsiness
-          component: Drowsiness
-          type: Add
-          time: 10
-          probability: 0.4
         - !type:Jitter
           probability: 0.2
         - !type:PopupMessage
@@ -788,14 +743,8 @@
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 15
-          probability: 0.55
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 4
-          type: Add
-          probability: 0.12
+          time: 2
+          probability: 0.055
         - !type:ChemVomit
           probability: 0.15
         - !type:HealthChange
@@ -815,9 +764,9 @@
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
-          type: Add
-          time: 18
-          probability: 0.6
+          type: Remove
+          time: 2
+          probability: 0.06
         - !type:Jitter
           probability: 0.4
         - !type:MovespeedModifier
@@ -832,18 +781,16 @@
           visualType: LargeCaution
           probability: 0.08
       withdrawalEffects:
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 25
-          probability: 0.85
-        - !type:GenericStatusEffect
-          key: ForcedSleep
-          component: ForcedSleeping
-          time: 7
-          type: Add
-          probability: 0.25
+          time: 6
+          probability: 0.08
         - !type:GenericStatusEffect
           key: TemporaryBlindness
           component: TemporaryBlindness
@@ -905,8 +852,8 @@
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 8
-          probability: 0.2
+          time: 2
+          probability: 0.01
         - !type:PopupMessage
           type: Local
           messages:
@@ -931,12 +878,16 @@
           visualType: Medium
           probability: 0.5
       withdrawalEffects:
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.05
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Add
-          time: 12
-          probability: 0.35
+          time: 3
+          probability: 0.02
         - !type:Jitter
           probability: 0.2
         - !type:GenericStatusEffect

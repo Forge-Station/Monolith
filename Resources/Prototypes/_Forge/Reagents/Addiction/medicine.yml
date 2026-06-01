@@ -19,7 +19,7 @@
         - !type:HealthChange
           damage:
             types:
-              Asphyxiation: 3.5
+              Asphyxiation: 2.5
         - !type:PopupMessage
           type: Local
           messages:
@@ -38,10 +38,14 @@
     - minTolerance: 0.9
       effectInterval: 30
       effects:
-      - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-dexalin-withdrawal-1
-            - addiction-dexalin-withdrawal-2
-          visualType: MediumCaution
+      - !type:HealthChange
           probability: 0.2
+          damage:
+            types:
+              Asphyxiation: 1.5
+      withdrawalEffects:
+      - !type:HealthChange
+          probability: 0.2
+          damage:
+            types:
+              Asphyxiation: 3

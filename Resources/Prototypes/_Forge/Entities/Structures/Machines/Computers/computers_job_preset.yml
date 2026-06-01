@@ -228,11 +228,11 @@
     - ImplantGuard
     rankPresets:
     # - Praefect # WTF?
-    - Arbiter
-    - Cardinal
+    # - Arbiter
+    # - Cardinal
     # - Inquisitor
     # - Consul
-    - Tessarian
+    # - Tessarian
     - EmpireSmallInquisitor
     - Praetorian
     - EmpireTechnican

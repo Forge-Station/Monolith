@@ -172,7 +172,8 @@ public sealed partial class AddictionSystem : EntitySystem
             if (stage.WithdrawalOnly && !data.WithdrawalActive)
                 continue;
 
-            ApplyEffects(uid, stage.Effects);
+            if (!ApplyEffects(uid, stage.Effects))
+                return;
 
             if (data.WithdrawalActive)
                 ApplyEffects(uid, stage.WithdrawalEffects);
@@ -182,17 +183,22 @@ public sealed partial class AddictionSystem : EntitySystem
             comp.Addictions.Remove(id);
     }
 
-    private void ApplyEffects(EntityUid uid, List<EntityEffect> effects)
+    private bool ApplyEffects(EntityUid uid, List<EntityEffect> effects)
     {
-        if (effects.Count == 0 || !Exists(uid))
-            return;
+        if (effects.Count == 0)
+            return true;
 
         var args = new EntityEffectBaseArgs(uid, EntityManager);
         foreach (var effect in effects)
         {
+            if (TerminatingOrDeleted(uid))
+                return false;
+
             if (effect.ShouldApply(args, _random))
                 effect.Effect(args);
         }
+
+        return !TerminatingOrDeleted(uid);
     }
 
     private static AddictionStageData? GetActiveStage(AddictionPrototype proto, AddictionData data)

@@ -88,3 +88,23 @@ addiction-nicotine-withdrawal-2 = Your hands keep reaching for something that is
 addiction-nicotine-withdrawal-3 = You're snapping at everything. You know why.
 addiction-nicotine-withdrawal-4 = Your head throbs dully.
 addiction-nicotine-withdrawal-5 = The irritation has become a constant hum.
+
+# Fentanyl
+addiction-Fentanyl-onset = A warm numbness spreads through you. Everything softens.
+addiction-Fentanyl-recovery = The weight lifts. Your body remembers how to feel again.
+
+addiction-fentanyl-hint-1 = The pain is coming back. You notice it more than you should.
+addiction-fentanyl-hint-2 = Something feels off. You keep thinking about how good it felt.
+addiction-fentanyl-hint-3 = The warmth doesn't last as long anymore.
+addiction-fentanyl-hint-4 = You need more just to feel normal.
+addiction-fentanyl-hint-5 = Your body aches in places you forgot could hurt.
+addiction-fentanyl-hint-6 = Nothing works right without it.
+
+addiction-fentanyl-withdrawal-1 = Your skin feels raw. Everything is too sharp.
+addiction-fentanyl-withdrawal-2 = Cold sweats. The warmth is completely gone.
+addiction-fentanyl-withdrawal-3 = Your muscles cramp. You can't get comfortable.
+addiction-fentanyl-withdrawal-4 = Your stomach turns. The pain is everywhere.
+addiction-fentanyl-withdrawal-5 = You can barely breathe through it.
+addiction-fentanyl-withdrawal-6 = Your body is tearing itself apart looking for relief.
+
+reagent-effect-naloxone-withdrawal = Something violently reverses in your body.

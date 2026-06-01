@@ -22,6 +22,12 @@
           walkSpeedModifier: 0.9
           sprintSpeedModifier: 0.9
           statusLifetime: 6
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 8
+          probability: 0.3
         - !type:PopupMessage
           type: Local
           messages:
@@ -56,11 +62,17 @@
           sprintSpeedModifier: 0.7
           statusLifetime: 6
         - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 12
+          probability: 0.5
+        - !type:GenericStatusEffect
           key: ForcedSleep
           component: ForcedSleeping
           time: 4
           type: Add
-          probability: 0.15
+          probability: 0.02
         - !type:PopupMessage
           type: Local
           messages:
@@ -96,11 +108,23 @@
           probability: 0.1
       withdrawalEffects:
         - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 20
+          probability: 0.8
+        - !type:GenericStatusEffect
           key: ForcedSleep
           component: ForcedSleeping
           time: 8
           type: Add
-          probability: 0.25
+          probability: 0.03
+        - !type:GenericStatusEffect
+          key: TemporaryBlindness
+          component: TemporaryBlindness
+          time: 3
+          type: Add
+          probability: 0.15
         - !type:HealthChange
           damage:
             types:
@@ -140,6 +164,12 @@
           walkSpeedModifier: 0.85
           sprintSpeedModifier: 0.85
           statusLifetime: 5
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 8
+          probability: 0.3
         - !type:PopupMessage
           type: Local
           messages:
@@ -169,17 +199,27 @@
           probability: 0.08
       withdrawalEffects:
         - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 15
+          probability: 0.6
+        - !type:GenericStatusEffect
           key: ForcedSleep
           component: ForcedSleeping
           time: 5
           type: Add
-          probability: 0.2
+          probability: 0.02
         - !type:MovespeedModifier
           walkSpeedModifier: 0.65
           sprintSpeedModifier: 0.65
           statusLifetime: 5
         - !type:ChemVomit
           probability: 0.2
+        - !type:Paralyze
+          paralyzeTime: 2
+          refresh: false
+          probability: 0.08
         - !type:PopupMessage
           type: Local
           messages:
@@ -220,13 +260,29 @@
           probability: 0.1
       withdrawalEffects:
         - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 25
+          probability: 0.9
+        - !type:GenericStatusEffect
           key: ForcedSleep
           component: ForcedSleeping
           time: 10
           type: Add
-          probability: 0.35
+          probability: 0.03
+        - !type:GenericStatusEffect
+          key: TemporaryBlindness
+          component: TemporaryBlindness
+          time: 3
+          type: Add
+          probability: 0.2
         - !type:ChemVomit
           probability: 0.4
+        - !type:Paralyze
+          paralyzeTime: 4
+          refresh: false
+          probability: 0.08
         - !type:HealthChange
           damage:
             types:
@@ -242,7 +298,7 @@
 # region SpaceDrugs
 - type: addiction
   id: SpaceDrugs
-  withdrawalDelay: 600
+  withdrawalDelay: 540
   toleranceDecayRate: 0
   withdrawalDecayRate: 0.0001
   stages:
@@ -268,6 +324,12 @@
           visualType: Medium
           probability: 0.06
       withdrawalEffects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 10
+          probability: 0.35
         - !type:PopupMessage
           type: Local
           messages:
@@ -301,11 +363,17 @@
           probability: 0.06
       withdrawalEffects:
         - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 15
+          probability: 0.5
+        - !type:GenericStatusEffect
           key: ForcedSleep
           component: ForcedSleeping
           time: 5
           type: Add
-          probability: 0.15
+          probability: 0.01
         - !type:PopupMessage
           type: Local
           messages:
@@ -342,17 +410,23 @@
           probability: 0.06
       withdrawalEffects:
         - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 25
+          probability: 0.85
+        - !type:GenericStatusEffect
           key: ForcedSleep
           component: ForcedSleeping
           time: 8
           type: Add
-          probability: 0.25
+          probability: 0.02
         - !type:GenericStatusEffect
           key: TemporaryBlindness
           component: TemporaryBlindness
           time: 3
           type: Add
-          probability: 0.1
+          probability: 0.15
         - !type:PopupMessage
           type: Local
           messages:
@@ -385,6 +459,12 @@
           visualType: Medium
           probability: 0.05
       withdrawalEffects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 8
+          probability: 0.3
         - !type:PopupMessage
           type: Local
           messages:
@@ -411,8 +491,14 @@
             - addiction-ephedrine-hint-3
             - addiction-ephedrine-hint-4
           visualType: Medium
-          probability: 0.05
+          probability: 0.1
       withdrawalEffects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 15
+          probability: 0.5
         - !type:MovespeedModifier
           walkSpeedModifier: 0.75
           sprintSpeedModifier: 0.75
@@ -422,7 +508,7 @@
           component: ForcedSleeping
           time: 4
           type: Add
-          probability: 0.15
+          probability: 0.02
         - !type:PopupMessage
           type: Local
           messages:
@@ -458,15 +544,25 @@
           probability: 0.05
       withdrawalEffects:
         - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 25
+          probability: 0.85
+        - !type:GenericStatusEffect
           key: ForcedSleep
           component: ForcedSleeping
           time: 8
           type: Add
-          probability: 0.3
+          probability: 0.05
         - !type:HealthChange
           damage:
             types:
               Asphyxiation: 1
+        - !type:Paralyze
+          paralyzeTime: 4
+          refresh: false
+          probability: 0.08
         - !type:PopupMessage
           type: Local
           messages:
@@ -475,10 +571,304 @@
           visualType: LargeCaution
           probability: 0.15
 
+# region Fentanyl
+- type: addiction
+  id: Fentanyl
+  withdrawalDelay: 480 # Fentanyl is aggressive
+  toleranceDecayRate: 0
+  withdrawalDecayRate: 0.0002
+  stages:
+    - minTolerance: 0.25
+      effectInterval: 8
+      effects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 8
+          probability: 0.3
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-fentanyl-hint-1
+            - addiction-fentanyl-hint-2
+          visualType: Medium
+          probability: 0.07
+      withdrawalEffects:
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.9
+          sprintSpeedModifier: 0.9
+          statusLifetime: 8
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 10
+          probability: 0.4
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-fentanyl-withdrawal-1
+            - addiction-fentanyl-withdrawal-2
+          visualType: MediumCaution
+          probability: 0.15
+    - minTolerance: 0.5
+      effectInterval: 6
+      effects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 12
+          probability: 0.5
+        - !type:Jitter
+          probability: 0.25
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-fentanyl-hint-3
+            - addiction-fentanyl-hint-4
+          visualType: MediumCaution
+          probability: 0.08
+      withdrawalEffects:
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.75
+          sprintSpeedModifier: 0.75
+          statusLifetime: 6
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 18
+          probability: 0.65
+        - !type:GenericStatusEffect
+          key: ForcedSleep
+          component: ForcedSleeping
+          time: 5
+          type: Add
+          probability: 0.15
+        - !type:ChemVomit
+          probability: 0.2
+        - !type:HealthChange
+          damage:
+            types:
+              Poison: 0.5
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-fentanyl-withdrawal-3
+            - addiction-fentanyl-withdrawal-4
+          visualType: MediumCaution
+          probability: 0.15
+    - minTolerance: 0.8
+      effectInterval: 4
+      effects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 20
+          probability: 0.7
+        - !type:Jitter
+          probability: 0.5
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.8
+          sprintSpeedModifier: 0.8
+          statusLifetime: 4
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-fentanyl-hint-5
+            - addiction-fentanyl-hint-6
+          visualType: LargeCaution
+          probability: 0.1
+      withdrawalEffects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 30
+          probability: 0.9
+        - !type:GenericStatusEffect
+          key: ForcedSleep
+          component: ForcedSleeping
+          time: 8
+          type: Add
+          probability: 0.3
+        - !type:GenericStatusEffect
+          key: TemporaryBlindness
+          component: TemporaryBlindness
+          time: 3
+          type: Add
+          probability: 0.15
+        - !type:ChemVomit
+          probability: 0.4
+        - !type:Paralyze
+          paralyzeTime: 4
+          refresh: false
+          probability: 0.08
+        - !type:HealthChange
+          damage:
+            types:
+              Poison: 1
+              Asphyxiation: 1.5  # respiratory depression — same as the OD mechanism
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-fentanyl-withdrawal-5
+            - addiction-fentanyl-withdrawal-6
+          visualType: LargeCaution
+          probability: 0.2
+
+# region Morphine
+- type: addiction
+  id: Morphine
+  withdrawalDelay: 540 # 9 min
+  toleranceDecayRate: 0
+  withdrawalDecayRate: 0.0003
+  stages:
+    - minTolerance: 0.2
+      effectInterval: 10
+      effects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 6
+          probability: 0.25
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-morphine-hint-1
+            - addiction-morphine-hint-2
+          visualType: Medium
+          probability: 0.06
+      withdrawalEffects:
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.92
+          sprintSpeedModifier: 0.92
+          statusLifetime: 10
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 8
+          probability: 0.3
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-morphine-withdrawal-1
+            - addiction-morphine-withdrawal-2
+          visualType: MediumCaution
+          probability: 0.12
+    - minTolerance: 0.5
+      effectInterval: 7
+      effects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 10
+          probability: 0.4
+        - !type:Jitter
+          probability: 0.2
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-morphine-hint-3
+            - addiction-morphine-hint-4
+          visualType: MediumCaution
+          probability: 0.07
+      withdrawalEffects:
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.78
+          sprintSpeedModifier: 0.78
+          statusLifetime: 7
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 15
+          probability: 0.55
+        - !type:GenericStatusEffect
+          key: ForcedSleep
+          component: ForcedSleeping
+          time: 4
+          type: Add
+          probability: 0.12
+        - !type:ChemVomit
+          probability: 0.15
+        - !type:HealthChange
+          damage:
+            types:
+              Poison: 0.3
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-morphine-withdrawal-3
+            - addiction-morphine-withdrawal-4
+          visualType: MediumCaution
+          probability: 0.12
+    - minTolerance: 0.8
+      effectInterval: 5
+      effects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 18
+          probability: 0.6
+        - !type:Jitter
+          probability: 0.4
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.82
+          sprintSpeedModifier: 0.82
+          statusLifetime: 5
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-morphine-hint-5
+            - addiction-morphine-hint-6
+          visualType: LargeCaution
+          probability: 0.08
+      withdrawalEffects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 25
+          probability: 0.85
+        - !type:GenericStatusEffect
+          key: ForcedSleep
+          component: ForcedSleeping
+          time: 7
+          type: Add
+          probability: 0.25
+        - !type:GenericStatusEffect
+          key: TemporaryBlindness
+          component: TemporaryBlindness
+          time: 2
+          type: Add
+          probability: 0.1
+        - !type:ChemVomit
+          probability: 0.3
+        - !type:HealthChange
+          damage:
+            types:
+              Poison: 0.7
+              Asphyxiation: 1.0
+        - !type:PopupMessage
+          type: Local
+          messages:
+            - addiction-morphine-withdrawal-5
+            - addiction-morphine-withdrawal-6
+          visualType: LargeCaution
+          probability: 0.18
+
 # region Nicotine
 - type: addiction
   id: Nicotine
-  withdrawalDelay: 1200
+  withdrawalDelay: 600
   toleranceDecayRate: 0.00008
   withdrawalDecayRate: 0.0001
   stages:
@@ -511,6 +901,12 @@
           visualType: Medium
           probability: 0.5
       withdrawalEffects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 8
+          probability: 0.2
         - !type:PopupMessage
           type: Local
           messages:
@@ -535,6 +931,12 @@
           visualType: Medium
           probability: 0.5
       withdrawalEffects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 12
+          probability: 0.35
         - !type:Jitter
           probability: 0.2
         - !type:GenericStatusEffect

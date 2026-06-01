@@ -1,0 +1,42 @@
+- type: reaction
+  id: Codeine
+  impact: Low
+  minTemp: 360
+  reactants:
+    Phenol:
+      amount: 1
+    Acetone:
+      amount: 1
+    Ammonia:
+      amount: 1
+    Carbon:
+      amount: 1
+  products:
+    Codeine: 4
+
+- type: reaction
+  id: Morphine
+  impact: Medium
+  minTemp: 420
+  reactants:
+    Codeine:
+      amount: 2
+    Hydroxide:
+      amount: 1
+    SodiumHydroxide:
+      amount: 0.5
+    Ethanol:
+      amount: 0.5
+  products:
+    Morphine: 4
+
+- type: reaction
+  id: MorphineDylovene
+  impact: Medium
+  reactants:
+    Morphine:
+      amount: 1
+    Dylovene:
+      amount: 1
+  products:
+    Dylovene: 1 # morphine is destroyed

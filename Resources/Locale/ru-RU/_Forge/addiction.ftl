@@ -1,5 +1,6 @@
 reagent-effect-guidebook-addictive = Вызывает привыкание
 reagent-effect-guidebook-cure-addiction = Снижает зависимость
+addiction-condition-guidebook = Иначе при зависимости.
 
 # Stimulants
 addiction-Stimulants-onset = Пульс ускоряется. Мысли становятся острее.
@@ -24,7 +25,7 @@ addiction-Desoxyephedrine-recovery = Напряжение стекает. Поч
 
 addiction-desoxy-hint-1 = Раздражение без причины не отпускает.
 addiction-desoxy-hint-2 = Желание что-нибудь сломать трудно сдержать.
-addiction-desoxy-hint-3 = Уверен — за тобой следят. Снова оглядываешься.
+addiction-desoxy-hint-3 = Уверен - за тобой следят. Снова оглядываешься.
 addiction-desoxy-hint-4 = Эта тень только что двинулась?..
 addiction-desoxy-hint-5 = Слепые пятна вспыхивают и гаснут.
 addiction-desoxy-hint-6 = Пальцы всё время соскальзывают.
@@ -88,6 +89,45 @@ addiction-nicotine-withdrawal-2 = Руки тянутся к чему-то, че
 addiction-nicotine-withdrawal-3 = Недоволен всем. Сам знаешь почему.
 addiction-nicotine-withdrawal-4 = Голова тупо ноет.
 addiction-nicotine-withdrawal-5 = Раздражение стало постоянным фоном.
+
+# Fentanyl
+addiction-Fentanyl-onset = Тёплое онемение разливается по телу. Всё становится мягче.
+addiction-Fentanyl-recovery = Тяжесть уходит. Тело вспоминает, как чувствовать.
+
+addiction-fentanyl-hint-1 = Боль возвращается. Ты замечаешь её острее, чем должен.
+addiction-fentanyl-hint-2 = Что-то не так. Мысли возвращаются к тому, как было хорошо.
+addiction-fentanyl-hint-3 = Тепло держится всё меньше.
+addiction-fentanyl-hint-4 = Нужно больше просто чтобы чувствовать себя нормально.
+addiction-fentanyl-hint-5 = Тело ноет в местах, о которых ты забыл.
+addiction-fentanyl-hint-6 = Без этого ничего не работает как надо.
+
+addiction-fentanyl-withdrawal-1 = Кожа горит. Всё слишком резко.
+addiction-fentanyl-withdrawal-2 = Холодный пот. Тепло ушло полностью.
+addiction-fentanyl-withdrawal-3 = Мышцы сводит. Невозможно найти удобное положение.
+addiction-fentanyl-withdrawal-4 = Желудок крутит. Боль везде.
+addiction-fentanyl-withdrawal-5 = Дышать сквозь это почти невозможно.
+addiction-fentanyl-withdrawal-6 = Тело разрывает себя в поисках облегчения.
+
+reagent-effect-naloxone-withdrawal = Что-то резко разворачивается внутри.
+
+# Morphine
+addiction-Morphine-onset = Тёплый, тяжёлый покой накрывает тебя.
+addiction-Morphine-recovery = Туман медленно рассеивается. Тело снова твоё.
+
+addiction-morphine-hint-1 = Боль возвращается. Замечаешь её острее, чем раньше.
+addiction-morphine-hint-2 = Без этого всё кажется слишком резким.
+addiction-morphine-hint-3 = Покой держится всё меньше.
+addiction-morphine-hint-4 = Беспокойство не отпускает. Ничего не идёт как надо.
+addiction-morphine-hint-5 = Суставы ноют. Постоянно меняешь позу.
+addiction-morphine-hint-6 = Не можешь перестать думать о том, как всё успокаивалось.
+
+addiction-morphine-withdrawal-1 = Кожа ощущается не так. Слишком чувствительно.
+addiction-morphine-withdrawal-2 = Глубокое беспокойство, от которого не избавиться.
+addiction-morphine-withdrawal-3 = Мышечные спазмы. Ноги не слушаются.
+addiction-morphine-withdrawal-4 = Одновременно холодно и потеешь.
+addiction-morphine-withdrawal-5 = Не получается вдохнуть полной грудью. Всё болит.
+addiction-morphine-withdrawal-6 = Тело борется само с собой.
+
 
 # Dexalin
 addiction-dexalin-1 = Как-то проще дышиться..

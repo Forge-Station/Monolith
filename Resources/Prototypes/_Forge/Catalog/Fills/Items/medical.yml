@@ -1,0 +1,87 @@
+- type: entity
+  id: MedkitAntiAddictFilled
+  parent: MedkitAdvanced
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: SyringeHaloperidol
+      - id: PillCanisterNaloxone
+
+- type: entity
+  name: pill canister
+  parent: PillCanister
+  id: PillCanisterNaloxone
+  suffix: Naloxone 9u, 5
+  components:
+  - type: Label
+    currentLabel: Naloxone 9u
+  - type: StorageFill
+    contents:
+    - id: PillNaloxone
+      amount: 5
+
+- type: entity
+  name: pill
+  suffix: Naloxone 9u
+  parent: Pill
+  id: PillNaloxone
+  components:
+  - type: Pill
+    pillType: 7
+  - type: Sprite
+    state: pill8
+  - type: Label
+    currentLabel: Naloxone 9u
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Naloxone
+          Quantity: 9
+
+- type: entity
+  id: SyringeHaloperidol
+  parent: PrefilledSyringe
+  suffix: Haloperidol
+  components:
+  - type: Label
+    currentLabel: reagent-name-haloperidol
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 15
+        reagents:
+          - ReagentId: Haloperidol
+            Quantity: 15
+
+- type: entity
+  id: SyringeMorphine
+  parent: PrefilledSyringe
+  suffix: Morphine
+  components:
+  - type: Label
+    currentLabel: reagent-name-morphine
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 15
+        reagents:
+          - ReagentId: Morphine
+            Quantity: 10
+
+- type: entity
+  id: SyringeCodeine
+  parent: PrefilledSyringe
+  suffix: Codeine
+  components:
+  - type: Label
+    currentLabel: reagent-name-codeine
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 15
+        reagents:
+          - ReagentId: Codeine
+            Quantity: 10

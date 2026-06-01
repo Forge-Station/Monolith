@@ -103,7 +103,7 @@
       Lithium: 20
       Plastitanium: 80
       UraniumDepleted: 5
-      Iridite: 3
+      # Iridite: 3
 
 - type: entity
   id: WeaponTurretL85AutocannonCircuitboard
@@ -396,7 +396,7 @@
       Manipulator: 10
       MatterBin: 8
     stackRequirements:
-      Steel: 90
+      Steel: 70
       Glass: 50
       Plasteel: 60
       Gold: 50
@@ -407,9 +407,9 @@
       Silver: 40
       Copper: 90
       Lithium: 25
-      Plastitanium: 120
-      UraniumDepleted: 20
-      Iridite: 5
+      Plastitanium: 80
+      UraniumDepleted: 10
+      # Iridite: 5
   - type: Tag
     tags:
     - MachineBoard2x2

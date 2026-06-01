@@ -36,8 +36,8 @@
         layer:
         - MachineLayer
   - type: Sprite
-    sprite: Structures/Storage/orebox.rsi
-    state: orebox
+    sprite: Forge/Structures/Storage/poistorage.rsi
+    state: storage
     noRot: true
   - type: Appearance
   - type: InteractionOutline

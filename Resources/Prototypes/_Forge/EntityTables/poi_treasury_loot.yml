@@ -8,9 +8,9 @@
   table: !type:GroupSelector
     children:
     - !type:EntSelector
-      id: SpaceCash1000
+      id: SpaceCash10000
       amount: !type:ConstantNumberSelector
-        value: 5
+        value: 1
     - !type:EntSelector
       id: SpaceCash10000
       amount: !type:ConstantNumberSelector
@@ -21,17 +21,17 @@
   table: !type:GroupSelector
     children:
     - !type:EntSelector
-      id: SpaceCash100
-      amount: !type:ConstantNumberSelector
-        value: 12
-    - !type:EntSelector
-      id: SpaceCash1000
-      amount: !type:ConstantNumberSelector
-        value: 5
-    - !type:EntSelector
       id: SpaceCash10000
       amount: !type:ConstantNumberSelector
         value: 2
+    - !type:EntSelector
+      id: SpaceCash10000
+      amount: !type:ConstantNumberSelector
+        value: 3
+    - !type:EntSelector
+      id: SpaceCash10000
+      amount: !type:ConstantNumberSelector
+        value: 5
       weight: 0.35
 
 - type: entityTable
@@ -39,17 +39,17 @@
   table: !type:GroupSelector
     children:
     - !type:EntSelector
-      id: SpaceCash100
+      id: SpaceCash10000
       amount: !type:ConstantNumberSelector
-        value: 8
-    - !type:EntSelector
-      id: SpaceCash1000
-      amount: !type:ConstantNumberSelector
-        value: 3
+        value: 2
     - !type:EntSelector
       id: SpaceCash10000
       amount: !type:ConstantNumberSelector
         value: 5
+    - !type:EntSelector
+      id: SpaceCash100000
+      amount: !type:ConstantNumberSelector
+        value: 1
       weight: 0.25
 
 # Legacy aliases (часовня, свалка, био)
@@ -233,61 +233,42 @@
   table: !type:GroupSelector
     children:
     - !type:EntSelector
-      id: SheetSteel1
-      amount: !type:ConstantNumberSelector
-        value: 8
-    - !type:EntSelector
-      id: SheetSteel1
-      amount: !type:ConstantNumberSelector
-        value: 5
-    - !type:EntSelector
-      id: SheetPlasteel1
-      amount: !type:ConstantNumberSelector
-        value: 5
-    - !type:EntSelector
-      id: SheetPlasteel1
+      id: SheetSteel
       amount: !type:ConstantNumberSelector
         value: 3
     - !type:EntSelector
-      id: CableMVStack1
+      id: SheetSteel
+      amount: !type:ConstantNumberSelector
+        value: 5
+    - !type:EntSelector
+      id: SheetPlasteel
       amount: !type:ConstantNumberSelector
         value: 2
     - !type:EntSelector
-      id: CableHVStack1
-      amount: !type:ConstantNumberSelector
-        value: 2
-    - !type:EntSelector
-      id: SheetGlass1
+      id: SheetGlass
       amount: !type:ConstantNumberSelector
         value: 4
-    - id: ScrapSteel
-    - !type:EntSelector
-      id: ScrapSteel
-      amount: !type:ConstantNumberSelector
-        value: 3
-    - id: MaterialCardboard1
-    - id: InflatableWallStack1
 
 - type: entityTable
   id: PoiTreasuryLootMaterialsRare
   table: !type:GroupSelector
     children:
     - !type:EntSelector
-      id: SheetPlasma1
-      amount: !type:ConstantNumberSelector
-        value: 5
-    - !type:EntSelector
-      id: SheetUranium1
+      id: SheetPlasma
       amount: !type:ConstantNumberSelector
         value: 3
-      weight: 0.06
+    - !type:EntSelector
+      id: SheetUranium
+      amount: !type:ConstantNumberSelector
+        value: 3
+      weight: 0.2
     - id: DiamondOre1
-      weight: 0.04
+      weight: 0.3
     - !type:EntSelector
-      id: IngotGold1
+      id: IngotGold
       amount: !type:ConstantNumberSelector
         value: 3
-      weight: 0.05
+      weight: 0.1
 
 # --- Profile tables -----------------------------------------------------------
 
@@ -297,18 +278,18 @@
   table: !type:GroupSelector
     children:
     - !type:EntSelector
-      id: SpaceCash100
-      amount: !type:ConstantNumberSelector
-        value: 10
-    - !type:EntSelector
-      id: SpaceCash10
-      amount: !type:ConstantNumberSelector
-        value: 20
-    - !type:EntSelector
       id: SpaceCash1000
       amount: !type:ConstantNumberSelector
-        value: 3
-      weight: 0.4
+        value: 5
+    - !type:EntSelector
+      id: SpaceCash10000
+      amount: !type:ConstantNumberSelector
+        value: 1
+    - !type:EntSelector
+      id: SpaceCash15000
+      amount: !type:ConstantNumberSelector
+        value: 1
+      weight: 0.5
 
 # Грузовое: кэш + логистика.
 - type: entityTable
@@ -332,9 +313,6 @@
     - !type:NestedSelector
       tableId: PoiTreasuryLootCashTickSmall
       weight: 1.5
-    - id: FoodTinMRE
-    - id: DrinkBeerCan
-    - id: Cigarette
     - !type:EntSelector
       id: FoodTinMRE
       amount: !type:ConstantNumberSelector
@@ -367,10 +345,6 @@
     - !type:NestedSelector
       tableId: PoiTreasuryLootCashTickMedium
       weight: 2
-    - id: Cigarette
-    - id: CigPackMixedMedical
-    - id: CigarGoldCase
-      weight: 0.3
     - id: GoldenPlunger
       weight: 0.05
 
@@ -404,7 +378,6 @@
     - !type:NestedSelector
       tableId: PoiTreasuryLootMaterialsRare
       weight: 0.08
-    - id: PowerCellMedium
     - id: PowerCellHigh
       weight: 0.25
 
@@ -413,9 +386,9 @@
   table: !type:GroupSelector
     children:
     - !type:EntSelector
-      id: SpaceCash
+      id: SpaceCash10000
       amount: !type:ConstantNumberSelector
-        value: 8
+        value: 1
     - id: Candle
     - id: Bible
     - id: Candle
@@ -429,7 +402,8 @@
       tableId: PoiTreasuryLootCashTickLarge
       weight: 2
     - id: Telecrystal1
-      weight: 0.45
+        value: 20
+      weight: 0.5
     - !type:NestedSelector
       tableId: PoiTreasuryLootWeaponsGuns
       weight: 3
@@ -457,9 +431,6 @@
     - !type:NestedSelector
       tableId: PoiTreasuryLootMaterialsRare
       weight: 0.05
-    - id: Crowbar
-    - id: Wirecutter
-    - id: Welder
     - id: PowerDrill
       weight: 0.4
 
@@ -473,42 +444,35 @@
       tableId: PoiTreasuryLootMaterialsCommon
       weight: 2
     - !type:EntSelector
-      id: SheetPlasma1
+      id: SheetPlasma
       amount: !type:ConstantNumberSelector
         value: 4
     - !type:NestedSelector
       tableId: PoiTreasuryLootMaterialsRare
       weight: 0.1
-    - id: Beaker
-    - id: AnomalyScanner
-      weight: 0.35
-    - id: GasAnalyzer
 
 - type: entityTable
   id: PoiTreasuryLootMining
   table: !type:GroupSelector
     children:
     - !type:EntSelector
-      id: SheetSteel1
-      amount: !type:ConstantNumberSelector
-        value: 8
-    - !type:EntSelector
-      id: SheetPlasteel1
-      amount: !type:ConstantNumberSelector
-        value: 5
-    - !type:EntSelector
-      id: SheetPlasma1
+      id: SheetSteel
       amount: !type:ConstantNumberSelector
         value: 3
+    - !type:EntSelector
+      id: SheetPlasteel
+      amount: !type:ConstantNumberSelector
+        value: 2
+    - !type:EntSelector
+      id: SheetPlasma
+      amount: !type:ConstantNumberSelector
+        value: 2
     - !type:NestedSelector
       tableId: PoiTreasuryLootMaterialsRare
       weight: 0.12
     - !type:NestedSelector
       tableId: PoiTreasuryLootCashTickSmall
       weight: 0.4
-    - id: Pickaxe
-    - id: OreBag
-      weight: 0.5
 
 - type: entityTable
   id: PoiTreasuryLootTech
@@ -525,22 +489,21 @@
     - id: PowerCellMedium
     - id: PowerCellHigh
       weight: 0.3
-    - id: Flash
 
 - type: entityTable
   id: PoiTreasuryLootDungeonTech
   table: !type:GroupSelector
     children:
-    - id: ResearchDisk5000
     - id: ResearchDisk10000
+    - id: ResearchDisk35000
       weight: 0.4
     - !type:NestedSelector
       tableId: PoiTreasuryLootMaterialsCommon
       weight: 2
     - !type:EntSelector
-      id: SheetPlasteel1
+      id: SheetPlasteel
       amount: !type:ConstantNumberSelector
-        value: 6
+        value: 1
     - !type:NestedSelector
       tableId: PoiTreasuryLootMaterialsRare
       weight: 0.05
@@ -560,12 +523,10 @@
     - !type:NestedSelector
       tableId: PoiTreasuryLootMedLight
       weight: 1.5
-    - id: Beaker
-    - id: Syringe
     - !type:EntSelector
-      id: Bloodpack1
+      id: Bloodpack
       amount: !type:ConstantNumberSelector
-        value: 2
+        value: 1
     - id: PillCanisterBicaridine
     - id: EpinephrineChemistryBottle
 

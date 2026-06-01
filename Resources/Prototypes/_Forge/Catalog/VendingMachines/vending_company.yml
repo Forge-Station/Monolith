@@ -81,6 +81,31 @@
     DisciplinesDiskUssp: 2
     FactionLatheFlatpack: 2
 
+# Drake Industries
+
+- type: vendingMachineInventory
+  id: CompanyVendInventoryDrake
+  startingInventory:
+    ClothingUniformDrakeIndustriesHauler: 4
+    ClothingUniformDrakeIndustriesTrucker: 4
+    ClothingUniformDrakeIndustriesWatchdog: 4
+    ClothingMaskDrakeIndustries: 4
+    ClothingMaskDrakeIndustriesWatchdog: 2
+    ClothingBeltDrakeIndustries: 4
+    ClothingOuterDrakeIndustriesTruckerPuffyVest: 4
+    ClothingNeckDrakeIndustriesBadge: 4
+    ClothingBackpackDrakeIndustries: 4
+    ClothingBackpackDuffelDrakeIndustries: 4
+    ClothingBackpackSatchelDrakeIndustries: 4
+    ClothingShoesBootsMagDrakeIndustries: 4
+    ClothingNeckCloakDrakeIndustries: 4
+    ClothingNeckCloakDrakeIndustriesRipped: 2
+    ClothingOuterHardsuitDrakeMk4: 2
+    PlasmaTankFilled: 4
+    DisciplinesDiskDrakeIndustries: 2
+    TelecomServerFlatpack: 1
+    EncryptionKeyDrakeIndustries: 2
+
 # Vend Harmony Medical Enterprises
 
 - type: vendingMachineInventory

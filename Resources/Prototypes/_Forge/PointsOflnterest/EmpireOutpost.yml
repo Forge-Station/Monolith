@@ -1,0 +1,60 @@
+# Empire outpost temporarily disabled.
+- type: pointOfInterest
+  id: EmpireOutpost
+  parent: [BasePOI, BaseRepairablePOI]
+  name: 'Оплот СИВ «Каструм Аврелий»'
+  minimumDistance: 7500
+  maximumDistance: 9500
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed]
+  spawnGroup: Required
+  placementTags: [ Imperial ]
+  minDistanceFromTags:
+    Renegates: 5000
+    TSF: 5000
+  gridPath: /Maps/_Forge/POI/EmpireOutpost.yml
+  addComponents:
+  - type: IFF
+    color: "#ab7a52"
+    readOnly: true # mono
+  - type: Company
+    companyName: Imperial
+  - type: PoiCaptureRoundstart
+    ownerCompanyId: Imperial
+    zoneRadius: 2048
+  - type: ProtectedGrid
+    preventTeleportation: true
+
+- type: gameMap
+  id: EmpireOutpost
+  mapName: 'Оплот СИВ «Каструм Аврелий»'
+  mapPath: /Maps/_Forge/POI/EmpireOutpost.yml
+  minPlayers: 0
+  stations:
+    EmpireOutpost:
+      stationProto: StandardFrontierOutpost
+      gridComponents:
+      - type: VesselInfo
+        description: "Укреплённый форпост Священной Империи Вермиллионов — преторианский гарнизон на кровавом рубеже сектора."
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Оплот СИВ «Каструм Аврелий»'
+        - type: ExtraStationInformation
+          icon:
+            sprite: Forge/Structures/Decoration/banner.rsi
+            state: banner_empire
+          stationSubtext: 'frontier-lobby-empire-subtext'
+          stationDescription: 'frontier-lobby-empire-description'
+        - type: StationJobs
+          availableJobs:
+            Praefect: [ 1, 1 ]
+            Inquisitor: [ 1, 1 ]
+            Consul: [ 1, 1 ]
+            Tessarian: [ 2, 2 ]
+            Praetorian: [ 3, 3]
+            Auxilia: [ -1, -1 ]
+            Neophyte: [ -1, -1]
+        - type: StationDeadDropReporting
+          messageSet: Pirate
+        - type: StationDeadDropHintExempt
+        - type: TradeCrateWildcardDestination
+          valueMultiplier: 1.0 # Mono

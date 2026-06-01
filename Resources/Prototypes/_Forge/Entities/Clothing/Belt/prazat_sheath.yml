@@ -36,3 +36,35 @@
       item:
       - ADTWeaponMeleePrasatChainsword
   - type: Appearance
+
+- type: entity
+  parent: ADTClothingBeltPrazatSheath
+  id: ADTClothingBeltPrazatSheathInq
+  name: hydraulic Serrator sheath
+  description: A reinforced hydraulic sheath built to lock and quick-draw the Serrator Mk. 01M saw-sword.
+  suffix: Forge
+  components:
+  - type: ItemSlots
+    slots:
+      item:
+        name: Sabre
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - CaptainSabre
+          - ADTWeaponMeleePrasatChainsword
+  - type: ItemMapper
+    mapLayers:
+      sheath-sabre:
+        whitelist:
+          tags:
+          - CaptainSabre
+          - ADTWeaponMeleePrasatChainsword
+          - ADTWeaponMeleePrasatChainswordInq
+  - type: ContainerFill
+    containers:
+      item:
+      - ADTWeaponMeleePrasatChainswordInq

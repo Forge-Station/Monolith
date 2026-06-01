@@ -7,3 +7,7 @@ ent-ClothingHeadHatNexusCap = кепка нексуса
     .desc = Для настоящих работяг.
 ent-ClothingHeadHatBeretHME = берет HME
     .desc = Стильный берет в цветах компании HME. Символ самоотверженности и целеустремлённости медиков компании!
+ent-ClothingHeadHatEmpirePreafectOrange = фуражка лорда
+    .desc = Фуражка лорда, символизирует верность военному делу империи.
+ent-ClothingHeadHatEmpirePreafectViolet = шляпа экклезиарха
+    .desc = Шляпа экклезиарха, символизирует верность церкви и вере в императора!

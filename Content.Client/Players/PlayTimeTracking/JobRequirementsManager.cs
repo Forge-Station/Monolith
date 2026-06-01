@@ -148,12 +148,16 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
     {
         reason = null;
 
-        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
+        if (requirements == null)
             return true;
 
+        var enforcePlaytime = _cfg.GetCVar(CCVars.GameRoleTimers);
         var reasons = new List<string>();
         foreach (var requirement in requirements)
         {
+            if (!enforcePlaytime && requirement.IsPlaytimeRequirement)
+                continue;
+
             if (_whitelisted && requirement.BypassedByGlobalWhitelist)
                 continue;
 

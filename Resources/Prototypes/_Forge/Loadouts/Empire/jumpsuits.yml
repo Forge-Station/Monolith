@@ -1,0 +1,107 @@
+- type: loadout
+  id: ClothingUniformJumpsuitEmpireTech
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEmpireTech
+
+- type: loadout
+  id: ClothingUniformJumpsuitEmpireSweater
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEmpireSweater
+
+# region Neophyte
+- type: loadout
+  id: ClothingUniformJumpsuitNeophyte
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNeophyte
+
+- type: loadout
+  id: ClothingUniformJumpsuitNeophyteAlt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNeophyteAlt
+
+# region Auxilia
+- type: loadout
+  id: ClothingUniformJumpsuitAuxilia
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitAuxilia
+
+- type: loadout
+  id: ClothingUniformJumpsuitAuxiliaAlt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitAuxiliaAlt
+
+# region Praetorian
+- type: loadout
+  id: ClothingUniformJumpsuitPraetorian
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPraetorian
+
+- type: loadout
+  id: ClothingUniformJumpsuitPraetorianAlt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPraetorianAlt
+
+# region Tessarian
+- type: loadout
+  id: ClothingUniformJumpsuitTessarian
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTessarian
+
+- type: loadout
+  id: ClothingUniformJumpsuitTessarianAlt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTessarianAlt
+
+# region Inquisitor
+- type: loadout
+  id: EmpireClothingUniformJumpsuitEmpireInq
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEmpireInq
+
+- type: loadout
+  id: EmpireClothingUniformJumpsuitEmpireInqAlt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEmpireInqAlt
+# region Praefect
+- type: loadout
+  id: ClothingUniformJumpsuitLordPreaf
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLordPreaf
+
+- type: loadout
+  id: ClothingUniformJumpsuitLordPreafAlt
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLordPreafAlt
+
+- type: loadout
+  id: ClothingUniformJumpsuitLordPreafInitialD
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLordPreafInitialD
+
+- type: loadout
+  id: ClothingUniformJumpsuitLordPreafFormal
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLordPreafFormal
+
+# region Consul
+- type: loadout
+  id: ClothingUniformJumpsuitEmpireConsul
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEmpireConsul

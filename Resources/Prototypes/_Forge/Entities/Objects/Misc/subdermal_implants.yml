@@ -59,6 +59,19 @@
 
 - type: entity
   parent: BaseSubdermalImplant
+  id: OverlordImplant
+  name: olverlord implant
+  description: This implant will shield the brain from external influences and prevent mind control devices. # DeltaV - mindshield does not enforce loyalty
+  categories: [ HideSpawnMenu ]
+  components:
+   - type: SubdermalImplant
+     permanent: false # Mono: true->false - lets mindshields be removed from people
+   - type: Tag
+     tags:
+       - Overlord
+
+- type: entity
+  parent: BaseSubdermalImplant
   id: ImplantGuard
   name: guard implant
   description: This implant will shield the brain from external influences and prevent mind control devices. # DeltaV - mindshield does not enforce loyalty
@@ -116,6 +129,7 @@
       - Dead
     - type: Rattle
       radioChannel: "Nfsd"
+      language: "SolCommon"
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -167,9 +181,9 @@
 
 - type: entity
   parent: BaseSubdermalImplant
-  id: ImperialTrackingImplant
-  name: imperial tracking implant
-  description: This implant has a tracking device monitor for the Imperial radio channel.
+  id: EmpireTrackingImplant
+  name: empire tracking implant
+  description: This implant has a tracking device monitor for the Empire radio channel.
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
@@ -181,10 +195,11 @@
     #  activationContainer: "implant"
     #- type: DeviceNetwork
     #  deviceNetId: Wireless
-    #  transmitFrequencyId: SuitImperialSensor
+    #  transmitFrequencyId: SuitEmpireSensor
     - type: TriggerOnMobstateChange
       mobState:
       - Critical
       - Dead
     - type: Rattle
       radioChannel: "Empire"
+      language: "Freespeak"

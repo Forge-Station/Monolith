@@ -7,6 +7,7 @@ using Content.Shared.Database;
 using Content.Shared.Body.Systems; // Forge-Change
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Inventory; // Forge-Change
 using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
 using Content.Shared.Interaction;
@@ -51,6 +52,7 @@ public sealed partial class PullingSystem : EntitySystem
     [Dependency] private HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedBodySystem _body = default!; // Forge-Change
+    [Dependency] private InventorySystem _inventory = default!; // Forge-Change
 
     public override void Initialize()
     {
@@ -282,6 +284,8 @@ public sealed partial class PullingSystem : EntitySystem
                 modifier = Math.Min(modifier, assist.PullingAssistSlowdownPenaltyModifier);
             }
         }
+
+        ApplyPullAssistFromWornClothing(uid, ref modifier, assist => assist.PullingAssistSlowdownPenaltyModifier); // Forge-Change
         // Forge-Change-End
 
         return modifier;
@@ -308,9 +312,30 @@ public sealed partial class PullingSystem : EntitySystem
                 modifier = Math.Min(modifier, assist.PullingAssistMassPenaltyModifier);
             }
         }
+
+        ApplyPullAssistFromWornClothing(uid, ref modifier, assist => assist.PullingAssistMassPenaltyModifier); // Forge-Change
         // Forge-Change-End
 
         return modifier;
+    }
+
+    // Forge-Change: Drake hardsuits and similar gear expose pull assist via worn SubdermalImplant fields.
+    private void ApplyPullAssistFromWornClothing(
+        EntityUid uid,
+        ref float modifier,
+        Func<SubdermalImplantComponent, float> select)
+    {
+        if (!TryComp<InventoryComponent>(uid, out var inventory))
+            return;
+
+        var enumerator = _inventory.GetSlotEnumerator((uid, inventory));
+        while (enumerator.NextItem(out var item))
+        {
+            if (!TryComp<SubdermalImplantComponent>(item, out var assist))
+                continue;
+
+            modifier = Math.Min(modifier, select(assist));
+        }
     }
 
     // Forge-Change-Start: Paired body-part support for R.I.P.L.Y pull assist.

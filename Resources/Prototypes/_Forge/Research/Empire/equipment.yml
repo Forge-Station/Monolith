@@ -1,0 +1,83 @@
+- type: technology
+  id: EmpireBasicClothing
+  name: research-technology-empire-clothing
+  entityIcon: ClothingUniformJumpsuitNeophyte
+  discipline: Empire
+  tier: 1
+  cost: 40000
+  recipeUnlocks:
+  - ClothingUniformJumpsuitEmpireTech
+  - ClothingUniformJumpsuitEmpireSweater
+  - ClothingUniformJumpsuitNeophyte
+  - ClothingUniformJumpsuitNeophyteAlt
+  - ClothingUniformJumpsuitAuxilia
+  - ClothingUniformJumpsuitAuxiliaAlt
+  - ClothingUniformJumpsuitPraetorian
+  - ClothingUniformJumpsuitPraetorianAlt
+  - ClothingUniformJumpsuitTessarian
+  - ClothingUniformJumpsuitTessarianAlt
+  - ClothingOuterCoatEmpireWindbreaker
+  - ClothingOuterCoatEmpireInqWindbreaker
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 10, 13
+
+- type: technology
+  id: EmpireBasicEquipment
+  name: research-technology-empire-light
+  entityIcon: ClothingOuterHardsuitRI14
+  discipline: Empire
+  tier: 1
+  cost: 60000
+  recipeUnlocks:
+  - ClothingOuterHardsuitRI14
+  - ClothingOuterHardsuitRI14m
+  - ClothingOuterHardsuitRI14i
+  technologyPrerequisites:
+  - EmpireBasicClothing
+  position: 10, 14
+
+- type: technology
+  id: EmpireAdvancedEquipment
+  name: research-technology-empire-adv
+  entityIcon: ClothingOuterHardsuitRI22
+  discipline: Empire
+  tier: 2
+  cost: 80000
+  recipeUnlocks:
+  - ClothingOuterHardsuitRI22
+  - ClothingOuterHardsuitRI22i
+  - ClothingOuterHardsuitRI22c
+  technologyPrerequisites:
+  - EmpireBasicEquipment
+  - UniversalMaterialResearchT2
+  position: 10, 16
+
+- type: technology
+  id: EmpireHardsuitVigilance
+  name: research-technology-empire-prototype-militant
+  entityIcon: ClothingOuterHardsuitHV7
+  discipline: Empire
+  tier: 2
+  cost: 250000
+  recipeUnlocks:
+  - ClothingOuterHardsuitHV7
+  - ClothingOuterHardsuitHVMilitant
+  technologyPrerequisites:
+  - EmpireAdvancedEquipment
+  - UniversalMaterialResearchT3
+  position: 11, 18
+
+- type: technology
+  id: EmpireHardsuitStealh
+  name: research-technology-empire-prototype-stealh
+  entityIcon: ClothingOuterHardsuitHVStealh
+  discipline: Empire
+  tier: 2
+  cost: 150000
+  recipeUnlocks:
+  - ClothingOuterHardsuitHVStealh
+  technologyPrerequisites:
+  - EmpireAdvancedEquipment
+  - UniversalMaterialResearchT3
+  position: 11, 19

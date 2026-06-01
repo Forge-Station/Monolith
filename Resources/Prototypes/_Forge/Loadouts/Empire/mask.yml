@@ -1,0 +1,5 @@
+- type: loadout
+  id: EmpireClothingMask
+  price: 0
+  equipment:
+    mask: ClothingMaskGasEmpire

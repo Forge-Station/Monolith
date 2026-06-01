@@ -2,11 +2,13 @@
   id: ClothingOuterHardsuitRenegatebsii20Rogue
   parent: MonoHardsuitT1Recipe
   result: ClothingOuterHardsuitRenegatebsii20
+  completetime: 10
 
 - type: latheRecipe
   id: ClothingOuterHardsuitRenegatebsii30Rogue
   parent: MonoHardsuitT1Recipe
   result: ClothingOuterHardsuitRenegatebsii30
+  completetime: 15
   materials:
     Glass: 800
     Steel: 3000
@@ -24,6 +26,7 @@
   - FactionEquipment
   parent: NFBaseArmorRecipe
   result: ClothingOuterArmorRenegates
+  completetime: 8
 
 - type: latheRecipe
   id: ClothingHeadHelmetRenegateRogue
@@ -33,6 +36,7 @@
   - FactionEquipment
   parent: NFBaseHelmetRecipe
   result: ClothingHeadHelmetRenegate
+  completetime: 6
 
 - type: latheRecipe
   id: ClothingShoesBootsMagRenegadeRogue
@@ -40,7 +44,7 @@
   - ClothesNF
   - FactionEquipment
   result: ClothingShoesBootsMagRenegade
-  completetime: 5
+  completetime: 10
   materials:
     Steel: 1000
     Silver: 750
@@ -53,13 +57,36 @@
   id: ClothingOuterHardsuitRenegatecriii200Rogue
   parent: MonoHardsuitT2Recipe
   result: ClothingOuterHardsuitRenegatecriii200
+  completetime: 18
 
 - type: latheRecipe
   id: ClothingOuterHardsuitRenegateoiii18Rogue
-  parent: MonoHardsuitT3Recipe
+  parent: MonoHardsuitT3TsfRecipe
   result: ClothingOuterHardsuitRenegateoiii18
+  completetime: 22
+  materials:
+    Plastic: 200
+    Steel: 2500
+    Plastitanium: 1500
+    Plasteel: 2500
+    Durathread: 2000
+    Silver: 300
+    Gold: 300
+    UraniumDepleted: 50
 
 - type: latheRecipe
   id: ClothingOuterHardsuitRenegateyiv3020Rogue
   parent: MonoHardsuitT3TsfRecipe
   result: ClothingOuterHardsuitRenegateyiv3020
+  completetime: 30
+  materials:
+    Plastic: 1300
+    Steel: 4500
+    Plastitanium: 1500
+    Plasteel: 5500
+    Durathread: 3500
+    Silver: 500
+    Gold: 500
+    Brass: 1000
+    UraniumDepleted: 50
+    UraniumFissile: 100

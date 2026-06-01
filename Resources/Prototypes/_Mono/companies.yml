@@ -83,6 +83,11 @@
   # Forge-change: add icon & note
   icon: Drake
   note: drake-industries-company-note
+  # Forge-Change: company spawn encryption key
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyDrakeIndustries
 
 - type: company
   id: SteelHammerManufacturing

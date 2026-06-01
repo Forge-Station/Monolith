@@ -38,5 +38,28 @@ forge-research-technology-nfsd-nightvision = Даже во тьме
 forge-research-technology-nfsd-thermalvision = Даже сквозь стены
 forge-research-technology-nfsd-nightthermalvision = СБ видит тебя
 forge-research-technology-nfsd-advtools = Продвинутые инструменты
-
 research-technology-forge-public-weaponry = Импровизированное вооружение
+
+# Empire
+# Disciplines
+research-discipline-empire = Империя
+
+# Technology
+research-technology-empire-clothing = Гвардейская униформа
+research-technology-empire-light = Скафандры модели RI-14
+research-technology-empire-adv = Скафандры модели RI-22
+
+research-technology-empire-prototype-vigilance = Военный патрульный прототип
+research-technology-empire-prototype-militant = Военно-боевой прототип
+research-technology-empire-prototype-stealh = Военно-разведывательный прототип
+
+research-technology-empire-basic-guns = Базовое вооружение
+research-technology-empire-subsonic = Безгильзовое вооружение
+research-technology-empire-advanced-guns = Продвинутое вооружение
+research-technology-empire-heavy-weapons = Тяжелое вооружение
+research-technology-empire-melee-weapons = Продвинутое вооружение ближнего боя
+
+research-technology-empire-vouchers-t1-germes = Технология сборки "Гермес ES"
+research-technology-empire-vouchers-t2-pluto = Технология сборки "Нептун"
+research-technology-empire-vouchers-t2-mirko = Технология сборки "Миррко"
+research-technology-empire-vouchers-t3-terit = Технология сборки "Терит"

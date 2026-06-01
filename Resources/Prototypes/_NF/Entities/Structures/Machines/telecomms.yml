@@ -26,6 +26,7 @@
       - EncryptionKeyBlackhawk
       - EncryptionKeyTechnicLogistic
       - EncryptionKeyHarmony # Forge-change
+      - EncryptionKeyDrakeIndustries # Forge-change
 
 - type: entity
   parent: TelecomServer

@@ -7867,6 +7867,69 @@ entities:
     - type: Transform
       pos: -4.5,4.5
       parent: 2
+- proto: ForgeSpawnPointArbiter
+  entities:
+  - uid: 100001
+    components:
+    - type: Transform
+      pos: -6.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointAuxilia
+  entities:
+  - uid: 100002
+    components:
+    - type: Transform
+      pos: -6.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointCardinal
+  entities:
+  - uid: 100003
+    components:
+    - type: Transform
+      pos: -6.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointConsul
+  entities:
+  - uid: 100004
+    components:
+    - type: Transform
+      pos: -6.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointInquisitor
+  entities:
+  - uid: 100005
+    components:
+    - type: Transform
+      pos: -6.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointNeophyte
+  entities:
+  - uid: 100006
+    components:
+    - type: Transform
+      pos: -6.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointPraefect
+  entities:
+  - uid: 100007
+    components:
+    - type: Transform
+      pos: -6.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointPraetorian
+  entities:
+  - uid: 100008
+    components:
+    - type: Transform
+      pos: -6.5,2.5
+      parent: 2
+- proto: ForgeSpawnPointTessarian
+  entities:
+  - uid: 100009
+    components:
+    - type: Transform
+      pos: -6.5,2.5
+      parent: 2
 - proto: ForgeSpawnPointRenegateFlunky
   entities:
   - uid: 1706

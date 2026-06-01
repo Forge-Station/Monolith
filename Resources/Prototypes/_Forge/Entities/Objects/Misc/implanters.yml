@@ -56,9 +56,9 @@
     implant: TTITrackingImplant
 
 - type: entity
-  id: ImperialTrackingImplanter
-  suffix: imperial tracking
+  id: EmpireTrackingImplanter
+  suffix: empire tracking
   parent: BaseImplantOnlyImplanter
   components:
   - type: Implanter
-    implant: ImperialTrackingImplant
+    implant: EmpireTrackingImplant

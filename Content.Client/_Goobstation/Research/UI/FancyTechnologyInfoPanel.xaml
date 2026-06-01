@@ -2,9 +2,10 @@
          xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
          xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls;assembly=Content.Client"
          Margin="5"
-         MinWidth="450"
+         MinWidth="320"
+         MaxWidth="440"
          VerticalExpand="True"
-         HorizontalExpand="True">
+         HorizontalExpand="False">
     <BoxContainer Orientation="Vertical"
             VerticalExpand="True"
             HorizontalExpand="True">
@@ -34,9 +35,27 @@
             </BoxContainer>
             <Label Name="TechnologyNameLabel"
                     StyleClasses="LabelKeyText"
-                    HorizontalExpand="True"/>
+                    HorizontalExpand="True"
+                    ClipText="True"/>
             <RichTextLabel Name="TechnologyCostLabel"
-                    HorizontalExpand="True"/>
+                    HorizontalExpand="True"
+                    MaxWidth="420"/>
+            <ScrollContainer Name="NavigationBreadcrumbScroll"
+                             Visible="False"
+                             MaxHeight="88"
+                             HScrollEnabled="False"
+                             VScrollEnabled="True"
+                             HorizontalExpand="True"
+                             Margin="0 4 0 0">
+                <RichTextLabel Name="NavigationBreadcrumbLabel"
+                               MaxWidth="420"/>
+            </ScrollContainer>
+            <Button Name="ReturnButton"
+                    Visible="False"
+                    HorizontalAlignment="Stretch"
+                    HorizontalExpand="True"
+                    ClipText="True"
+                    Margin="0 2 0 0"/>
             <Button Name="ResearchButton"
                     Text="{Loc 'research-console-menu-server-research-button'}"
                     HorizontalAlignment="Left"

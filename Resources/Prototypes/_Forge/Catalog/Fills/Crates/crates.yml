@@ -1,11 +1,19 @@
 - type: entity
-  id: CrateContractorSpaceKit
-  parent: CrateGenericSteel
-  name: стальной ящик
-  description: Большой контейнер для предметов.
+  id: CrateEmpireShip
+  parent: CrateEmpireSecure
   components:
   - type: StorageFill
     contents:
-      - id: ClothingDuffelContractorForgeEVA
-      - id: ComputerIFFCircuitboard
-      - id: BoxZiptie
+      - id: ShipRepairDevice
+      - id: WallmountSubstationElectronics
+      - id: MetalFoamGrenade
+
+- type: entity
+  id: CrateEmpireMaterial
+  parent: CrateEmpireStandard
+  components:
+  - type: StorageFill
+    contents:
+      - id: SheetSteel
+      - id: SheetGlass
+      - id: SheetPlastic

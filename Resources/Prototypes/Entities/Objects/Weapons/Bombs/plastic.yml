@@ -85,6 +85,9 @@
   parent: BasePlasticExplosive
   id: SeismicCharge
   components:
+  - type: Tag # Forge-Change: ballistic launcher whitelist
+    tags:
+    - SeismicCharge
   - type: Sprite
     sprite: Objects/Weapons/Bombs/seismic.rsi
     state: icon

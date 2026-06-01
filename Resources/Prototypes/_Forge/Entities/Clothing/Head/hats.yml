@@ -1,60 +1,41 @@
+# region Empire
 - type: entity
-  parent: [ ClothingHeadBase, BaseCentcommContraband ]
-  id: ClothingHeadHatSpecOper
-  name: cap special operations officer
-  description: "ohayo, arillery?"
+  parent: ClothingHeadBase
+  id: ClothingHeadHatEmpirePreafect
+  name: lord-preafect cap
+  description: A lord's luxurious cap, indicating his allegiance to aristocratic circles.
+  suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hats/dsocap.rsi
+    sprite: Forge/Clothing/Head/Hats/preafect.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hats/dsocap.rsi
-
-- type: entity
-  parent: [ ClothingHeadHatHardhatBase, BaseC2ContrabandUnredeemable ]
-  id: ClothingHeadHatHardhatNfsdEngiArmored
-  name: armored nfsd specialist hard hat
-  description: An armored hard hat. Provides the best of both worlds in both protection & utility - perfect for the engineer on the frontlines.
-  components:
-  - type: Sprite
-    sprite: Forge/Clothing/Head/Helmets/nfsd_armored.rsi
-  - type: Clothing
-    sprite: Forge/Clothing/Head/Helmets/nfsd_armored.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.8
-        Heat: 0.8
-        Cold: 0.8
-        Shock: 0.8
+    sprite: Forge/Clothing/Head/Hats/preafect.rsi
 
 - type: entity
   parent: ClothingHeadBase
-  id: ClothingHeadEmpireWBHood
-  name: empire guardian windbreaker hood
+  id: ClothingHeadHatEmpirePreafectOrange
+  name: lord-preafect cap
+  description: A lord's luxurious cap, signifying his allegiance to the Imperial military forces.
+  suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hats/empwbhood.rsi
+    sprite: Forge/Clothing/Head/Hats/preafect_o.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hats/empwbhood.rsi
-  - type: HideLayerClothing
-    slots:
-    - Hair
+    sprite: Forge/Clothing/Head/Hats/preafect_o.rsi
 
 - type: entity
   parent: ClothingHeadBase
-  id: ClothingHeadEmpireInqWBHood
-  name: empire inquisitor windbreaker hood
+  id: ClothingHeadHatEmpirePreafectViolet
+  name: lord-preafect hat
+  description: A lord's luxurious hat symbolizing his devotion to the church.
+  suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hats/empinqwbhood.rsi
+    sprite: Forge/Clothing/Head/Hats/preafect_v.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hats/empinqwbhood.rsi
-  - type: HideLayerClothing
-    slots:
-    - Hair
-
+    sprite: Forge/Clothing/Head/Hats/preafect_v.rsi
+    
+# region Renegate
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatRenegateBeret
@@ -97,6 +78,7 @@
   - type: AddAccentClothing
     accent: OwOAccent
 
+# region Company
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatNexusBeret
@@ -132,7 +114,7 @@
     sprite: Forge/Clothing/Head/Hats/tti_beret.rsi
   - type: Clothing
     sprite: Forge/Clothing/Head/Hats/tti_beret.rsi
-    
+
 - type: entity
   parent: [ClothingHeadBase, BaseFactionGearOtherFactionT1]
   id: ClothingHeadHatTraumaDirectorBeret
@@ -159,4 +141,64 @@
     sprite: Forge/Clothing/Head/Hats/hme_beret.rsi
   - type: StaticPrice
     price: 80
-    vendPrice: 250 
+    vendPrice: 250
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretTL
+  name: Sub-lieutenant beret
+  suffix: TechnicLogistic
+  description: Takes the officer rank of sub-lieutenants of the Self-Defense Forces TechnicLogistic.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/beret_techniclogistic.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/beret_techniclogistic.rsi
+
+#region Other
+- type: entity
+  parent: [ ClothingHeadBase, BaseCentcommContraband ]
+  id: ClothingHeadHatSpecOper
+  name: cap special operations officer
+  description: "ohayo, arillery?"
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/dsocap.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/dsocap.rsi
+
+- type: entity
+  parent: [ ClothingHeadHatHardhatBase, BaseC2ContrabandUnredeemable ]
+  id: ClothingHeadHatHardhatNfsdEngiArmored
+  name: armored nfsd specialist hard hat
+  description: An armored hard hat. Provides the best of both worlds in both protection & utility - perfect for the engineer on the frontlines.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Helmets/nfsd_armored.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Helmets/nfsd_armored.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.8
+        Heat: 0.8
+        Cold: 0.8
+        Shock: 0.8
+
+- type: entity
+  parent: ClothingHeadHatWizardBase
+  id: PlumberClothingHeadHatWitch
+  name: Witch Hats
+  description: A tall pointed hat, completely black, without unnecessary decorations, symbolizing the mystery and power of the witch.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/witchhat.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/witchhat.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon

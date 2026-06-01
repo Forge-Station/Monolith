@@ -30,15 +30,22 @@ job-title-msf-rep = представитель флота
 forge-job-name-engineernfsd = Специалист
 
 # Empire
+guide-entry-roles-empire = Священная Империя Вермиллионов
+guide-entry-roles-preafect = Лорд-Префект
+guide-entry-roles-inquisitor = Эклезиарх
+guide-entry-roles-consul = Консул
+
 forge-job-name-praefect = СИВ Лорд-Префект
-forge-job-name-cardinal = СИВ Астра-Кардинал
-forge-job-name-arbiter = СИВ Архи-Арбитр
-forge-job-name-praetorian = СИВ Претор
-forge-job-name-consul = СИВ Консул
 forge-job-name-inquisitor = СИВ Эклезиарх
+forge-job-name-consul = СИВ Консул
+forge-job-name-tessarian = СИВ Тессариан
+forge-job-name-praetorian = СИВ Претор
 forge-job-name-auxilia = СИВ Ауксилий
 forge-job-name-neophyte = СИВ Неофит
 
+forge-job-name-cardinal = СИВ Астра-Кардинал
+forge-job-name-arbiter = СИВ Архи-Арбитр
+forge-job-name-smallinq = СИВ Инквизитор
 forge-job-name-dekuron = СИВ Декурнон
 forge-job-name-apotek = СИВ Апотекарий
 forge-job-name-technican = СИВ Техножрец
@@ -53,6 +60,7 @@ forge-job-name-flunky = ВКР Повстанец
 forge-job-name-militia = ВКР Ополченец
 forge-job-name-watchman = ВКР Дозорный
 
+# TSF
 JobTsfCommandingOfficer = ТСФ Командующий Офицер
 JobTsfExecutiveOfficer = ТСФ Исполнительный Офицер
 JobTsfSeniorOfficer = ТСФ Старший Офицер

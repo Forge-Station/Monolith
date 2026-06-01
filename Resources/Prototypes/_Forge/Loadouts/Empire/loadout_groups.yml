@@ -55,20 +55,20 @@
   - EmpireClothingOuterCoatEmpireWindbreaker
   - ClothingOuterArmorBPVestLight
   - ClothingOuterArmorBPVestStabproof
-  
+
 - type: loadoutGroup
   id: EmpireBelt
   name: loadout-group-contractor-belt
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - EmpireClothingBeltWebbingsNormalTan
-  - EmpireClothingBeltWebbingsBigTan
-  - EmpireClothingBeltMilitaryWebbing
-  - EmpireClothingBeltWebbingsBigBase
-  - EmpireClothingBeltAssault
+  - EmpireBelt1
+  - EmpireBelt2
+  - EmpireBelt3
+  - EmpireBelt4
+  - EmpireBelt5
   fallbacks:
-  - EmpireClothingBeltWebbingsNormalTan
+  - EmpireBelt1
 
 - type: loadoutGroup
   id: EmpireGloves
@@ -101,9 +101,12 @@
   - EmpireBackpack
   - EmpireDuffel
   - EmpireSatchel
+  - MonoSecurityGuardDuffel
+  - MonoSecurityGuardBackpack
+  - MonoSecurityGuardSatchel
   fallbacks:
   - EmpireBackpack
-  
+
 # region Praefect
 - type: loadoutGroup
   id: EmpireCommanderJumpsuit
@@ -134,9 +137,10 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
+  - ClothingNeckCloakEmpirePreafect
   - ClothingNeckCloakEmpirePreafectOrange
   fallbacks:
-  - ClothingNeckCloakEmpirePreafectOrange
+  - ClothingNeckCloakEmpirePreafect
 
 # region Tessarian
 - type: loadoutGroup
@@ -208,7 +212,7 @@
   - ClothingNeckCloakEmpirePreafectViolet
   fallbacks:
   - ClothingNeckCloakEmpirePreafectViolet
-  
+
 - type: loadoutGroup
   id: EmpireInquisitorOuterClothing
   name: loadout-group-contractor-outerclothing
@@ -247,7 +251,7 @@
   - ClothingNeckCloakEmpirePreafectDiplomacy
   fallbacks:
   - ClothingNeckCloakEmpirePreafectDiplomacy
-  
+
 - type: loadoutGroup
   id: EmpireBoxSurvival
   name: loadout-group-contractor-survival-box

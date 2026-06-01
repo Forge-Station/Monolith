@@ -5,7 +5,13 @@
   playTimeTracker: JobCardinal
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 21600 # 6 hrs
+      time: 64800 # 18 hours
+    - !type:DepartmentTimeRequirement
+      department: Empire
+      time: 43200 # 12 hours
+    - !type:RoleTimeRequirement
+      role: JobPraetorian
+      time: 21600 # 6 hours
     - !type:SpeciesRequirement
       species:
       - Human
@@ -14,8 +20,7 @@
       - Male
     - !type:AgeRequirement
       requiredAge: 35
-  setPreference: false
-  overrideConsoleVisibility: true
+  setPreference: true
   startingGear: CardinalGear
   alwaysUseSpawner: true
   icon: JobIconEmpireCardinal

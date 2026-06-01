@@ -36,6 +36,7 @@
   displayWeight: 20
   canBeAntag: false
   setPreference: false
+  overrideConsoleVisibility: true
   accessGroups:
   - CommandEmpireAccess
   special:

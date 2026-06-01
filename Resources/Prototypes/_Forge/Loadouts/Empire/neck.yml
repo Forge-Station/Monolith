@@ -9,6 +9,14 @@
     neck: ClothingNeckIFFPurple
 
 #region Preafect
+- type: loadout
+  id: ClothingNeckCloakEmpirePreafect
+  name: Плащ Лорда
+  # description:
+  previewEntity: ClothingNeckCloakEmpirePreafect
+  equipment:
+    head: ClothingHeadHatEmpirePreafect
+    neck: ClothingNeckCloakEmpirePreafect
 
 - type: loadout
   id: ClothingNeckCloakEmpirePreafectOrange
@@ -26,7 +34,6 @@
   # description:
   previewEntity: ClothingNeckCloakEmpirePreafectViolet
   price: 500
-
   equipment:
     head: ClothingHeadHatEmpirePreafectViolet
     neck: ClothingNeckCloakEmpirePreafectViolet

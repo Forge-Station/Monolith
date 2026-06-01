@@ -1,0 +1,618 @@
+#region AC Prototype 2
+- type: entity
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT2]
+  id: ClothingOuterHardsuitHVp2
+  name: AC Prototype 2 hardsuit
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.65
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.5
+        Heat: 0.6
+        Radiation: 0.55
+        Caustic: 0.6
+  - type: StaminaDamageResistance
+    coefficient: 0.25
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.85
+    controlMultiplier: 1.05
+    fuelUsageMultiplier: 1.25
+    combatStabilityBonus: 0.05
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHVp2
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 17800
+    vendPrice: 8500
+
+- type: entity
+  parent: ClothingOuterHardsuitHVp2
+  id: ClothingOuterHardsuitHVp2Com
+  name: HV Prototype 35 Commander hardsuit
+  description: A hardsuit issued to Imperial guardian commander operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_commander.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_commander.rsi
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHVp2Com
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 34800
+    vendPrice: 8500
+
+- type: entity
+  parent: ClothingOuterHardsuitHVp2
+  id: ClothingOuterHardsuitHVp2Inq
+  name: HV Prototype 27 Inquisitor hardsuit
+  description: A hardsuit issued to Imperial Inquisitor operating in low-pressure and high-risk environments.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_violet.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_violet.rsi
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHVp2Inq
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 17800
+    vendPrice: 8500
+
+# region RI-14 Light
+- type: entity
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT2]
+  id: ClothingOuterHardsuitRI14
+  name: RI-14 light hardsuit
+  suffix: Empire
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.65
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.55
+        Heat: 0.65
+        Radiation: 0.65
+        Caustic: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.25
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitRI14
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 1500
+
+- type: entity
+  parent: ClothingOuterHardsuitRI14
+  id: ClothingOuterHardsuitRI14m
+  name: RI-14m light medical hardsuit
+  suffix: Empire
+  description: A hardsuit issued to Imperial guardian commander operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light_medic.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light_medic.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.75
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.65
+        Heat: 0.7
+        Radiation: 0.4
+        Caustic: 0.3
+  - type: StaminaDamageResistance
+    coefficient: 0.4
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitRI14
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 15000
+
+- type: entity
+  parent: ClothingOuterHardsuitRI14
+  id: ClothingOuterHardsuitRI14i
+  name: RI-14i light inquisitor hardsuit
+  description: A hardsuit issued to Imperial Inquisitor Squad operating in low-pressure and high-risk environments.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light_inq.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light_inq.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.6
+        Heat: 0.5
+        Radiation: 0.65
+        Caustic: 0.8
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitRI14
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 15000
+
+# region RI-22 Medium
+- type: entity
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT2]
+  id: ClothingOuterHardsuitRI22
+  name: RI-22 battle hardsuit
+  suffix: Empire
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_medium.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_medium.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.5
+        Shock: 0.8
+        Radiation: 0.5
+        Caustic: 0.7
+        Poison: 0.8 # Mono
+  - type: StaminaDamageResistance
+    coefficient: 0.4
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.7
+    controlMultiplier: 1.15
+    fuelUsageMultiplier: 1.6
+    combatStabilityBonus: 0.1
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitRI22
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 12500
+    vendPrice: 50000
+
+- type: entity
+  parent: ClothingOuterHardsuitRI22
+  id: ClothingOuterHardsuitRI22i
+  name: RI-22i inquisitor battle hardsuit
+  suffix: Empire
+  description: A hardsuit issued to Imperial Inquisitor Squad operating in low-pressure and high-risk environments.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_inquisitor.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_inquisitor.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.55
+        Heat: 0.3
+        Shock: 0.6
+        Radiation: 0.2
+        Caustic: 0.5
+        Poison: 0.8 # Mono
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitRI22i
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 10000
+    vendPrice: 50000
+
+- type: entity
+  parent: ClothingOuterHardsuitRI22
+  id: ClothingOuterHardsuitRI22c
+  name: RI-22c lord-commander battle hardsuit
+  suffix: Empire
+  description: A hardsuit issued to Imperial Inquisitor Squad operating in low-pressure and high-risk environments.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_medium_lord.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_medium_lord.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.35
+        Heat: 0.6
+        Shock: 0.8
+        Radiation: 0.4
+        Caustic: 0.5
+        Poison: 0.8 # Mono
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitRI22c
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 12500
+    vendPrice: 5000
+
+# region ~HV~RI-7 Heavy
+- type: entity
+  parent: [ClothingOuterHardsuitJuggernaut, BaseFactionGearOtherFactionT3]
+  id: ClothingOuterHardsuitHV7
+  name: HV-7 heavy battle hardsuit
+  suffix: Empire
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy.rsi
+    stripDelay: 15
+    equipDelay: 15
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.15
+        Heat: 0.3
+        Shock: 0.6
+        Radiation: 0.6
+        Caustic: 0.6
+        Poison: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.8
+  - type: ClothingSpeedModifier
+    walkModifier: 0.6
+    sprintModifier: 0.6
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.55
+    controlMultiplier: 1.25
+    fuelUsageMultiplier: 2.1
+    combatStabilityBonus: 0.14
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHV7
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 10000
+    vendPrice: 80000
+
+- type: entity
+  parent: ClothingOuterHardsuitHV7
+  id: ClothingOuterHardsuitHV7c
+  name: HV-7 heavy battle hardsuit
+  suffix: DO NOT MAP
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_lord.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_lord.rsi
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHV7
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitHV7
+  id: ClothingOuterHardsuitHV7i
+  name: HV-7 heavy battle hardsuit
+  suffix: DO NOT MAP
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_inq.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_inq.rsi
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHV7
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+# region Higaris Victories
+- type: entity
+  parent: [ClothingOuterHardsuitJuggernaut, BaseFactionGearOtherFactionT3]
+  id: ClothingOuterHardsuitHVVigilance
+  name: HV MP 9 «Vigilance»
+  suffix: DO NOT MAP
+  description: Higaris Victories' military prototype 9, codenamed «Vigilance».
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_vigilance.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_vigilance.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.45
+        Piercing: 0.4
+        Shock: 0.8
+        Heat: 0.6
+        Radiation: 0.8
+        Caustic: 0.8
+        Poison: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.7
+    controlMultiplier: 1.15
+    fuelUsageMultiplier: 1.6
+    combatStabilityBonus: 0.1
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHVVigilance
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 90000
+    vendPrice: 50000
+
+- type: entity
+  parent: [ClothingOuterHardsuitJuggernaut, EnergyShieldClothing, BaseFactionGearOtherFactionT3]
+  id: ClothingOuterHardsuitHVMilitant
+  name: HV MP 0-4 «Militant»
+  suffix: Empire
+  description: Higaris Victories' military prototype 0-4, codenamed «Militant».
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_militant.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_militant.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.5
+        Heat: 0.5
+        Shock: 0.8
+        Radiation: 0.5
+        Caustic: 0.6
+        Poison: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.8
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.75
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.7
+    controlMultiplier: 1.15
+    fuelUsageMultiplier: 1.6
+    combatStabilityBonus: 0.1
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHVMilitant
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 10000
+    vendPrice: 60000
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.6
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.6
+      flatReductions:
+        Blunt: 5
+        Slash: 5
+        Heat: 5
+        Piercing: 5
+    passiveBlockFraction: 0.8
+    activeBlockFraction: 0.8
+    isClothing: true
+  - type: Damageable
+    damageContainer: Shield
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 0.10
+  - type: RechargeableBlocking
+  - type: UseDelay
+    delay: 10
+
+- type: entity
+  parent: [ClothingOuterHardsuitJuggernaut, BaseFactionGearOtherFactionT3]
+  id: ClothingOuterHardsuitHVStealh
+  name: HV MP-33R «Imperceptible»
+  suffix: Empire
+  description: Higaris Victories' military prototype 33R, codenamed «Imperceptible».
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_stealh.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_stealh.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.6
+        Heat: 0.7
+        Shock: 0.9
+        Radiation: 0.7
+        Caustic: 0.8
+        Poison: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 1.0
+    sprintModifier: 1.0
+  - type: SpaceFlightProfile
+    thrustMultiplier: 0.7
+    controlMultiplier: 1.15
+    fuelUsageMultiplier: 1.6
+    combatStabilityBonus: 0.1
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitHVStealh
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 12000
+    vendPrice: 90000

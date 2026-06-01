@@ -1,6 +1,82 @@
 - type: entity
+  id: BaseWeaponCustomCell
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Sprite
+  - type: Item
+    size: Huge
+  - type: AmmoCounter
+  - type: Gun
+    fireRate: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: MagazineAmmoProvider
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: PowerCellSmall
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - PowerCell
+            - PowerCellSmall
+  - type: Appearance
+  - type: StaticPrice
+    price: 500
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+  - type: SurgeryTool
+    endSound:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: AlwaysHot
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 12
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud
+  - type: BatteryDrinkerSource
+    maxAmount: 180
+
+- type: entity
+  id: BaseWeaponCustomCellSmall
+  parent: BaseWeaponCustomCell
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+    shape: # Goobstation
+    - 0,0,1,0
+    - 0,1,0,1
+  - type: Tag
+    tags:
+    - Sidearm
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/taser.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: MeleeWeapon # Goobstation V
+    damage:
+      types:
+       Blunt: 8 # pistol whip
+    angle: 0
+    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
+    soundHit:
+      collection: MetalThud # Goobstation ^
+
+- type: entity
   name: ER-5 Torrent
-  parent: BaseWeaponPowerCell
+  parent: BaseWeaponCustomCell # Forge-change: BaseWeaponPowerCell to BaseWeaponCustomCell
   id: WeaponLaserCellSMG
   description: A high-tech laser SMG, compatible with specialized SMG power cells.
   components:
@@ -57,7 +133,7 @@
 
 - type: entity
   name:  ES-7 Multilens
-  parent: [ BaseWeaponPowerCell, BaseGunWieldable ]
+  parent: [ BaseWeaponCustomCell, BaseGunWieldable ] # Forge-change: BaseWeaponPowerCell to BaseWeaponCustomCell
   id: WeaponLaserCellSniper
   description: A high-tech burst laser sniper rifle, compatible with specialized sniper power cells.
   components:
@@ -123,7 +199,7 @@
 
 - type: entity
   name: EG-1 Taro
-  parent: BaseWeaponPowerCellSmall
+  parent: BaseWeaponCustomCellSmall # Forge-change: BaseWeaponPowerCellSmall to BaseWeaponCustomCellSmall
   id: WeaponLaserCellRevolver
   description: A high-tech laser revolver, compatible with specialized revolver power cells.
   components:

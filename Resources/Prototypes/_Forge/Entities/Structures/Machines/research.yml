@@ -31,3 +31,27 @@
   - type: ResearchPointSource
     pointsPerSecond: 1
     active: true
+
+- type: entity
+  id: ResearchAndDevelopmentServerEmpire
+  parent: BaseRdServerFaction
+  name: Empire R&D server
+  description: Contains the collective knowledge of the Phaethon Dynasty.
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/server.rsi
+    layers:
+    - state: server
+    - state: variant-empire
+    - state: server_o
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: TechnologyDatabase
+    supportedDisciplines:
+    - Empire
+    - FactionUniversal
+    - Industrial
+    - ShipArmory
+    - Arsenal
+    - Experimental
+    - CivilianServices
+    - MechaEngineering

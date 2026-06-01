@@ -38,6 +38,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
 using Content.Shared._EE.Contractors.Prototypes;
+using Content.Shared._Forge.Company;
 using Content.Client._Mono.Company; // Forge-change: take _EE nationality
 
 namespace Content.Client.Lobby.UI
@@ -69,46 +70,6 @@ namespace Content.Client.Lobby.UI
         private bool _imaging;
         private string? _preferredNonFactionCompany; // Forge-Change: company whitelist
 
-        // Forge-Change-start: company whitelist
-        private static readonly Dictionary<string, string> ForcedFactionCompaniesByJob = new()
-        {
-            // TSF
-            ["TsfCommandingOfficer"] = "TSF",
-            ["TsfExecutiveOfficer"] = "TSF",
-            ["TsfSeniorOfficer"] = "TSF",
-            ["TsfSeniorAide"] = "TSF",
-            ["TsfAmbassador"] = "TSF",
-            ["TsfRanger"] = "TSF",
-            ["TsfRecruit"] = "TSF",
-            ["TsfEngineer"] = "TSF",
-            // Empire
-            ["Praefect"] = "Imperial",
-            ["Arbiter"] = "Imperial",
-            ["Cardinal"] = "Imperial",
-            ["Inquisitor"] = "Imperial",
-            ["Consul"] = "Imperial",
-            ["Praetorian"] = "Imperial",
-            ["Auxilia"] = "Imperial",
-            ["Neophyte"] = "Imperial",
-            // Renegates
-            ["Baron"] = "Renegates",
-            ["Draftsman"] = "Renegates",
-            ["Overseer"] = "Renegates",
-            ["Quack"] = "Renegates",
-            ["Foreman"] = "Renegates",
-            ["Flunky"] = "Renegates",
-            // CC
-            ["StationRepresentative"] = "Colonial",
-            ["StationTrafficController"] = "Colonial",
-            ["CCServiceWorker"] = "Colonial",
-            ["SecurityGuard"] = "Colonial",
-            // MD
-            ["DirectorOfCare"] = "MD",
-            ["MdMedic"] = "MD",
-            ["NtMedic"] = "MD",
-        };
-        // Forge-Change-end: company whitelist
-
         /// <summary>
         /// If we're attempting to save.
         /// </summary>
@@ -136,7 +97,7 @@ namespace Content.Client.Lobby.UI
 
         private List<SpeciesPrototype> _species = new();
         private List<NationalityPrototype> _nationalies = new(); // Forge-change: take _EE nationality
-        private List<(string, RequirementsSelector)> _jobPriorities = new();
+        private List<(JobPrototype Job, RequirementsSelector Selector)> _jobPriorities = new();
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
 
@@ -188,6 +149,7 @@ namespace Content.Client.Lobby.UI
             _companyManager = manager; // Mono
             _resManager = resManager;
             _requirements = requirements;
+            _requirements.Updated += OnJobRequirementsUpdated;
             _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
 
             _whitelist = _entManager.System<EntityWhitelistSystem>(); // Frontier
@@ -1236,9 +1198,11 @@ namespace Content.Client.Lobby.UI
                 // Forge-Change-start: company whitelist
                 if (Profile != null)
                 {
-                    var forcedCompany = GetForcedCompanyFromProfile(Profile);
-                    if (forcedCompany == null || Profile.Company != forcedCompany)
-                        _preferredNonFactionCompany = Profile.Company;
+                    var forcedCompany = FactionCompanyResolver.GetForcedCompanyFromProfile(Profile, _prototypeManager);
+                    if (forcedCompany == null)
+                        _preferredNonFactionCompany = FactionCompanyResolver.IsFactionCompany(Profile.Company) ? "None" : Profile.Company;
+                    else if (Profile.Company != forcedCompany)
+                        _preferredNonFactionCompany = FactionCompanyResolver.IsFactionCompany(Profile.Company) ? "None" : Profile.Company;
                 }
 
                 TryApplyForcedFactionCompany(markDirty: false);
@@ -1428,7 +1392,7 @@ namespace Content.Client.Lobby.UI
                     icon.Texture = jobIcon.Icon.Frame0();
                     selector.Setup(items, job.LocalizedName, 200, job.LocalizedDescription, icon, job.Guides);
 
-                    if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
+                    if (!_requirements.IsAllowed(job, Profile, out var reason))
                     {
                         selector.LockRequirements(reason);
                     }
@@ -1440,23 +1404,32 @@ namespace Content.Client.Lobby.UI
                     selector.OnSelected += selectedPrio =>
                     {
                         var selectedJobPrio = (JobPriority) selectedPrio;
+
+                        if (selectedJobPrio != JobPriority.Never &&
+                            !_requirements.IsAllowed(job, Profile, out var blockReason))
+                        {
+                            selector.Select((int) JobPriority.Never);
+                            selector.LockRequirements(blockReason);
+                            return;
+                        }
+
                         Profile = Profile?.WithJobPriority(job.ID, selectedJobPrio);
                         // Forge-Change-start: company whitelist
                         var selectedFactionCompany = GetForcedFactionCompany(job.ID);
 
                         if (selectedJobPrio != JobPriority.Never &&
-                            ForcedFactionCompaniesByJob.TryGetValue(job.ID, out var forcedCompanyId) &&
+                            FactionCompanyResolver.JobForcesCompany(job) &&
                             Profile != null &&
-                            Profile.Company != forcedCompanyId)
+                            Profile.Company != job.AssignedCompany.ToString())
                         {
-                            Profile = Profile.WithCompany(forcedCompanyId);
+                            Profile = Profile.WithCompany(job.AssignedCompany.ToString());
                         }
                         // Forge-Change-end: company whitelist
 
-                        foreach (var (jobId, other) in _jobPriorities)
+                        foreach (var (otherJob, other) in _jobPriorities)
                         {
                             // Sync other selectors with the same job in case of multiple department jobs
-                            if (jobId == job.ID)
+                            if (otherJob.ID == job.ID)
                             {
                                 other.Select(selectedPrio);
                                 continue;
@@ -1472,7 +1445,7 @@ namespace Content.Client.Lobby.UI
                                 var otherPrio = (JobPriority)other.Selected;
                                 if (otherPrio != JobPriority.Never)
                                 {
-                                    var otherFactionCompany = GetForcedFactionCompany(jobId);
+                                    var otherFactionCompany = GetForcedFactionCompany(otherJob.ID);
                                     var incompatible = selectedFactionCompany != null
                                         ? otherFactionCompany != selectedFactionCompany
                                         : otherFactionCompany != null;
@@ -1480,7 +1453,7 @@ namespace Content.Client.Lobby.UI
                                     if (incompatible)
                                     {
                                         other.Select((int)JobPriority.Never);
-                                        Profile = Profile.WithJobPriority(jobId, JobPriority.Never);
+                                        Profile = Profile.WithJobPriority(otherJob.ID, JobPriority.Never);
                                         continue;
                                     }
                                 }
@@ -1492,7 +1465,7 @@ namespace Content.Client.Lobby.UI
 
                             // Lower any other high priorities to medium.
                             other.Select((int)JobPriority.Medium);
-                            Profile = Profile?.WithJobPriority(jobId, JobPriority.Medium);
+                            Profile = Profile?.WithJobPriority(otherJob.ID, JobPriority.Medium);
                         }
 
                         TryApplyForcedFactionCompany(markDirty: false); // Forge-Change: company whitelist
@@ -1521,7 +1494,7 @@ namespace Content.Client.Lobby.UI
                         Margin = new Thickness(3f, 3f, 0f, 0f),
                     };
                     companyWindowBtn.OnPressed += _ => OpenCompanyWindow();
-                    companyWindowBtn.Visible = !ForcedFactionCompaniesByJob.ContainsKey(job.ID);
+                    companyWindowBtn.Visible = !FactionCompanyResolver.JobForcesCompany(job);
                     // Forge-Change-end: company whitelist
 
                     var collection = IoCManager.Instance!;
@@ -1553,7 +1526,7 @@ namespace Content.Client.Lobby.UI
                         };
                     }
 
-                    _jobPriorities.Add((job.ID, selector));
+                    _jobPriorities.Add((job, selector));
                     jobContainer.AddChild(selector);
                     jobContainer.AddChild(loadoutWindowBtn);
                     jobContainer.AddChild(companyWindowBtn); // Forge-Change: company whitelist
@@ -1562,6 +1535,12 @@ namespace Content.Client.Lobby.UI
             }
 
             UpdateJobPriorities();
+            RefreshJobRequirementLocks();
+        }
+
+        private void OnJobRequirementsUpdated()
+        {
+            RefreshJobRequirementLocks();
         }
 
         private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
@@ -1787,6 +1766,8 @@ namespace Content.Client.Lobby.UI
             if (!disposing)
                 return;
 
+            _requirements.Updated -= OnJobRequirementsUpdated;
+
             _loadoutWindow?.Dispose();
             _loadoutWindow = null;
             _companyWindow?.Dispose(); // Forge-Change: company whitelist
@@ -1809,6 +1790,7 @@ namespace Content.Client.Lobby.UI
         private void SetAge(int newAge)
         {
             Profile = Profile?.WithAge(newAge);
+            RefreshJobRequirementLocks();
             ReloadPreview();
         }
 
@@ -1831,6 +1813,7 @@ namespace Content.Client.Lobby.UI
 
             UpdateGenderControls();
             Markings.SetSex(newSex);
+            RefreshJobRequirementLocks();
             ReloadPreview();
         }
 
@@ -1987,10 +1970,35 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         private void UpdateJobPriorities()
         {
-            foreach (var (jobId, prioritySelector) in _jobPriorities)
+            foreach (var (job, prioritySelector) in _jobPriorities)
             {
-                var priority = Profile?.JobPriorities.GetValueOrDefault(jobId, JobPriority.Never) ?? JobPriority.Never;
+                var priority = Profile?.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) ?? JobPriority.Never;
                 prioritySelector.Select((int) priority);
+            }
+        }
+
+        /// <summary>
+        /// Re-evaluates job locks when profile fields (species, sex, age, etc.) change.
+        /// </summary>
+        private void RefreshJobRequirementLocks()
+        {
+            foreach (var (job, selector) in _jobPriorities)
+            {
+                if (!_requirements.IsAllowed(job, Profile, out var reason))
+                {
+                    selector.LockRequirements(reason);
+
+                    if (Profile != null &&
+                        Profile.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) != JobPriority.Never)
+                    {
+                        Profile = Profile.WithJobPriority(job.ID, JobPriority.Never);
+                        selector.Select((int) JobPriority.Never);
+                    }
+                }
+                else
+                {
+                    selector.UnlockRequirements();
+                }
             }
         }
 
@@ -2000,13 +2008,15 @@ namespace Content.Client.Lobby.UI
             if (Profile == null)
                 return;
 
-            var forcedCompany = GetForcedCompanyFromProfile(Profile);
+            var forcedCompany = FactionCompanyResolver.GetForcedCompanyFromProfile(Profile, _prototypeManager);
 
             if (forcedCompany != null)
             {
                 if (Profile.Company != forcedCompany)
                 {
-                    _preferredNonFactionCompany = Profile.Company;
+                    if (!FactionCompanyResolver.IsFactionCompany(Profile.Company))
+                        _preferredNonFactionCompany = Profile.Company;
+
                     Profile = Profile.WithCompany(forcedCompany);
 
                     if (markDirty)
@@ -2016,42 +2026,27 @@ namespace Content.Client.Lobby.UI
                 return;
             }
 
-            if (string.IsNullOrEmpty(_preferredNonFactionCompany) || Profile.Company == _preferredNonFactionCompany)
+            // Highest-priority job is not faction-locked — unemployed unless the player chose a civilian company.
+            var targetCompany = FactionCompanyResolver.IsFactionCompany(_preferredNonFactionCompany)
+                ? "None"
+                : _preferredNonFactionCompany;
+
+            if (string.IsNullOrEmpty(targetCompany) || FactionCompanyResolver.IsFactionCompany(Profile.Company))
+                targetCompany = "None";
+
+            if (Profile.Company == targetCompany)
                 return;
 
-            Profile = Profile.WithCompany(_preferredNonFactionCompany);
+            Profile = Profile.WithCompany(targetCompany);
 
             if (markDirty)
                 SetDirty();
         }
 
-        private static string? GetForcedFactionCompany(string jobId)
-        {
-            return ForcedFactionCompaniesByJob.TryGetValue(jobId, out var companyId)
-                ? companyId
+        private string? GetForcedFactionCompany(string jobId) =>
+            _prototypeManager.TryIndex<JobPrototype>(jobId, out var job)
+                ? FactionCompanyResolver.GetForcedCompanyForJob(job)
                 : null;
-        }
-
-        private static string? GetForcedCompanyFromProfile(HumanoidCharacterProfile profile)
-        {
-            var bestPriority = JobPriority.Never;
-            string? forcedCompany = null;
-
-            foreach (var (jobId, priority) in profile.JobPriorities)
-            {
-                if (priority == JobPriority.Never)
-                    continue;
-
-                var companyId = GetForcedFactionCompany(jobId);
-                if (companyId == null || priority < bestPriority)
-                    continue;
-
-                bestPriority = priority;
-                forcedCompany = companyId;
-            }
-
-            return forcedCompany;
-        }
         // Forge-Change-end: company whitelist
         private void UpdateSexControls()
         {

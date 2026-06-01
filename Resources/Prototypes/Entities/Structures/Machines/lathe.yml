@@ -704,6 +704,7 @@
     dynamicPacks: # Frontier
     - NanotrasenClothing # Forge: AllTechPrintableTest only indexes dynamicPacks
     - NFPouches # Frontier
+    - ClothingEmpirePack # Forge-change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ClothingCentComm

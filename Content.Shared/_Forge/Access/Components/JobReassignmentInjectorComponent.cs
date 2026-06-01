@@ -37,4 +37,7 @@ public sealed partial class JobReassignmentInjectorComponent : Component
 
     [DataField]
     public float MovementThreshold = 0.1f;
+
+    [DataField]
+    public bool IgnoreDemographicRequirements;
 }

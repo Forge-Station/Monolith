@@ -2757,7 +2757,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -4.480755,-3.549694
       parent: 1
-- proto: ClothingOuterHardsuitEmpire14m
+- proto: ClothingOuterHardsuitRI22
   entities:
   - uid: 275
     components:

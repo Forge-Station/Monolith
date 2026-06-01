@@ -1,0 +1,59 @@
+#region Clothing
+- type: latheRecipePack
+  id: ClothingEmpirePack
+  recipes:
+  # Jumpsuit's
+  - ClothingUniformJumpsuitEmpireTech
+  - ClothingUniformJumpsuitEmpireSweater
+  - ClothingUniformJumpsuitNeophyte
+  - ClothingUniformJumpsuitNeophyteAlt
+  - ClothingUniformJumpsuitAuxilia
+  - ClothingUniformJumpsuitAuxiliaAlt
+  - ClothingUniformJumpsuitPraetorian
+  - ClothingUniformJumpsuitPraetorianAlt
+  - ClothingUniformJumpsuitTessarian
+  - ClothingUniformJumpsuitTessarianAlt
+  # Outer's
+  - ClothingOuterCoatEmpireWindbreaker
+  - ClothingOuterCoatEmpireInqWindbreaker
+
+#region Hardsuit
+- type: latheRecipePack
+  id: HardsuitEmpirePack
+  recipes:
+  # Light
+  - ClothingOuterHardsuitRI14
+  - ClothingOuterHardsuitRI14m
+  - ClothingOuterHardsuitRI14i
+  # Battle
+  - ClothingOuterHardsuitRI22
+  - ClothingOuterHardsuitRI22i
+  - ClothingOuterHardsuitRI22c
+  # Heavy
+  - ClothingOuterHardsuitHV7
+  # HV
+  - ClothingOuterHardsuitHVMilitant
+  - ClothingOuterHardsuitHVStealh
+
+- type: latheRecipePack
+  id: WeaponEmpirePack
+  recipes:
+  - WeaponSubMachineGunC20rRogue
+  - WeaponRifleM90Rogue
+  - WeaponShotgunSultanPulsar
+  - PrintableDirtyBomb
+  - WeaponRifleWSPRRogue
+  - Magazine762x39mmSubsonic
+  - AmmoBox762x39mmSubsonic
+  - WeaponSubMachineGunMla73Rogue
+  - Magazine635x40mmCaseless
+  - AmmoBox635x40mmCaseless
+  - MagazineAsmgtUniversal635x40mm
+  - AmmoBox635x40mmCaselessBig
+  - WeaponSubMachineGunWt550Rogue
+  - WeaponSubMachineGunAtreidesRogue
+  - WeaponShotgunBulldogRogue
+  - WeaponSniperHristovRogue
+  - AmmoBox145x114mm
+  - AmmoBox145x114mmBig
+  - ADTWeaponMeleePrasatChainsword

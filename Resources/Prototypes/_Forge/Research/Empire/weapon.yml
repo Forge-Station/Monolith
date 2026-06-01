@@ -1,0 +1,82 @@
+- type: technology
+  id: EmpireBasicGuns
+  name: research-technology-empire-basic-guns
+  entityIcon: WeaponSubMachineGunC20r
+  discipline: Empire
+  tier: 1
+  cost: 55000
+  recipeUnlocks:
+  - WeaponSubMachineGunC20rRogue
+  - WeaponRifleM90Rogue
+  - WeaponShotgunSultanPulsar
+  - PrintableDirtyBomb
+  - WeaponRevolverPythonRogue
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 8, 12
+  
+- type: technology
+  id: EmpireSubsonic
+  name: research-technology-empire-subsonic
+  entityIcon: WeaponSubMachineGunMla73
+  discipline: Empire
+  tier: 1
+  cost: 60000
+  recipeUnlocks:
+  - WeaponRifleWSPRRogue
+  - Magazine762x39mmSubsonic
+  - AmmoBox762x39mmSubsonic
+  - WeaponSubMachineGunMla73Rogue
+  - Magazine635x40mmCaseless
+  - AmmoBox635x40mmCaseless
+  - MagazineAsmgtUniversal635x40mm
+  - AmmoBox635x40mmCaselessBig
+  technologyPrerequisites:
+  - EmpireBasicGuns
+  - UniversalMaterialResearchT2
+  position: 8, 13
+
+- type: technology
+  id: EmpireAdvancedGuns
+  name: research-technology-empire-advanced-guns
+  entityIcon: WeaponRifleM90
+  discipline: Empire
+  tier: 2
+  cost: 70000
+  recipeUnlocks:
+  - WeaponSubMachineGunWt550Rogue
+  - WeaponSubMachineGunAtreidesRogue
+  - WeaponShotgunBulldogRogue
+  technologyPrerequisites:
+  - EmpireSubsonic
+  - UniversalMaterialResearchT2
+  position: 7, 14
+  
+- type: technology
+  id: EmpireHeavyWeapons
+  name: research-technology-empire-heavy-weapons
+  entityIcon: WeaponSniperHristov
+  discipline: Empire
+  tier: 1
+  cost: 75000
+  recipeUnlocks:
+  - WeaponSniperHristovRogue
+  - AmmoBox145x114mm
+  - AmmoBox145x114mmBig
+  technologyPrerequisites:
+  - EmpireAdvancedGuns
+  - UniversalMaterialResearchT3
+  position: 7, 15
+
+- type: technology
+  id: EmpireMelleeWeapons
+  name: research-technology-empire-melee-weapons
+  entityIcon: ADTWeaponMeleePrasatChainsword
+  discipline: Empire
+  tier: 1
+  cost: 90000
+  recipeUnlocks:
+  - ADTWeaponMeleePrasatChainsword
+  technologyPrerequisites:
+  - EmpireHeavyWeapons
+  position: 6, 15

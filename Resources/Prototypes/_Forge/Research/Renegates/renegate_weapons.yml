@@ -11,6 +11,7 @@
   - WeaponRevolverMagnusRogue
   technologyPrerequisites:
   - UniversalMaterialResearchT1
+  - RogueRenegateEquipmentT1
   position: 13, 1
 
 - type: technology
@@ -27,7 +28,7 @@
   technologyPrerequisites:
   - RogueRenegateWeaponsT1
   - UniversalMaterialResearchT2
-  position: 13, 6
+  position: 13, 3
 
 - type: technology
   id: RogueRenegateMeleeWeaponsT2
@@ -64,4 +65,4 @@
   technologyPrerequisites:
   - RogueRenegateWeaponsT2
   - UniversalMaterialResearchT3
-  position: 13, 11
+  position: 13, 4

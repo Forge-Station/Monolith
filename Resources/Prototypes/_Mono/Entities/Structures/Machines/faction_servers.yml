@@ -159,6 +159,7 @@
     - Nanotrasen # Forge-change
     - DrakeIndustries # Forge-change
     - ForgeBoardingTeleportExperimental
+    - Empire # Forge-change
 
 - type: entity
   parent: ResearchAndDevelopmentServer

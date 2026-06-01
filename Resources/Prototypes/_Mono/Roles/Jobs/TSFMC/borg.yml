@@ -8,6 +8,7 @@
     - !type:OverallPlaytimeRequirement
       time: 43200
   assignedCompany: TSF
+  assignedNationality: TransSolarFederation
   canBeAntag: false
   hideConsoleVisibility: true #Forge Change
   icon: JobIconBorg

@@ -127,7 +127,7 @@
   id: ContractorSpecialGunAnaconda
   effects:
   - !type:GroupLoadoutEffect
-    proto: MonoCivRogueDefector
+    proto: CivilNoob # Forge-change: MonoCivRogueDefector to CivilNoob
   price: 25000
   inhand:
   - WeaponCaseShortAnacondaRegistered

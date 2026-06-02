@@ -4,7 +4,7 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     SetHeight="880"
     SetWidth="370"
-    Resizable="False"> <!-- Shitmed Change -->
+    Resizable="False"> <!-- Shitmed Change, Forge-Change: Height&Width -->
     <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#525252" BackgroundColor="#3d474d"/>
@@ -285,6 +285,8 @@
 
             <PanelContainer StyleClasses="LowDivider"/>
             <!-- Shitmed Change End -->
+
+            <!-- Forge-Change-Start -->
             <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
@@ -335,6 +337,7 @@
                     </BoxContainer>
                 </PanelContainer>
             </PanelContainer>
+            <!-- Forge-Change-End -->
 
         </BoxContainer>
         </PanelContainer>

@@ -1,14 +1,15 @@
 - type: entity
   id: CrewMonitoringRenegadeServer
   parent: CrewMonitoringServer
-  name: сервер мониторинга ВКР # crew renegade monitoring server
-  description: Получает и отправляет статус всех датчиков имплантов состава ВКР # Receives and relays the status of all active renegade implant sensors.
+  suffix: Renegade
+  name: crew renegade monitoring server
+  description: Receives and relays the status of all active renegade implant sensors.
   components:
     - type: Sprite
-      sprite: Structures/Machines/server.rsi
+      sprite: Forge/Structures/Machines/server.rsi
       layers:
         - state: server
-        - state: variant-crew
+        - state: variant-crew-renegade
     - type: DeviceNetwork
       deviceNetId: Wireless
       transmitFrequencyId: CrewRenegadeMonitor
@@ -18,14 +19,15 @@
 - type: entity
   id: CrewMonitoringTSFServer
   parent: CrewMonitoringServer
-  name: сервер мониторинга ТСФ # crew TSF monitoring server
-  description: Получает и отправляет статус всех датчиков имплантов состава ТСФ # Receives and relays the status of all active TSF implant sensors.
+  suffix: TSF
+  name: crew TSF monitoring server
+  description: Receives and relays the status of all active TSF implant sensors.
   components:
     - type: Sprite
-      sprite: Structures/Machines/server.rsi
+      sprite: Forge/Structures/Machines/server.rsi
       layers:
         - state: server
-        - state: variant-crew
+        - state: variant-crew-tsf
     - type: DeviceNetwork
       deviceNetId: Wireless
       transmitFrequencyId: CrewTSFMonitor
@@ -35,14 +37,15 @@
 - type: entity
   id: CrewMonitoringNanotrasenServer
   parent: CrewMonitoringServer
-  name: сервер мониторинга НТ # crew NT monitoring server
-  description: Получает и отправляет статус всех датчиков имплантов состава НТ и TTI # Receives and relays the status of all active NT and TTI implant sensors.
+  suffix: NT
+  name: crew NT monitoring server
+  description: Receives and relays the status of all active NT and TTI implant sensors.
   components:
     - type: Sprite
-      sprite: Structures/Machines/server.rsi
+      sprite: Forge/Structures/Machines/server.rsi
       layers:
         - state: server
-        - state: variant-crew
+        - state: variant-crew-nt
     - type: DeviceNetwork
       deviceNetId: Wireless
       transmitFrequencyId: CrewNanotrasenMonitor
@@ -52,14 +55,15 @@
 - type: entity
   id: CrewMonitoringImperialServer
   parent: CrewMonitoringServer
-  name: сервер мониторинга СИВ # crew imperial monitoring server
-  description: Получает и отправляет статус всех датчиков имплантов состава СИВ # Receives and relays the status of all active imperial implant sensors.
+  suffix: Imperial
+  name: crew imperial monitoring server
+  description: Receives and relays the status of all active imperial implant sensors.
   components:
     - type: Sprite
-      sprite: Structures/Machines/server.rsi
+      sprite: Forge/Structures/Machines/server.rsi
       layers:
         - state: server
-        - state: variant-crew
+        - state: variant-crew-imperial
     - type: DeviceNetwork
       deviceNetId: Wireless
       transmitFrequencyId: CrewImperialMonitor

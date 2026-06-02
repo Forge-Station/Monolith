@@ -1,19 +1,21 @@
 - type: entity
   parent: ComputerCrewMonitoring
   id: ComputerCrewRenegadeMonitoring
-  name: консоль мониторинга ВКР # crew renegade monitoring console
-  description: Используется для просмотра статусов всех датчиков имплантов состава ВКР. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's renegade implants.
+  name: консоль мониторинга ВКР # crew renegate monitoring console
+  description: Используется для просмотра статусов всех датчиков имплантов состава ВКР. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's renegate implants.
   components:
   - type: Sprite
+    sprite: Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
-      state: computer
+      state: computer_renegate
     - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
+      state: renegate_key
     - map: ["computerLayerScreen"]
-      state: crew
+      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      state: crew-renegate
     - map: ["computerLayerKeys"]
-      state: med_key
+      state: ren_key
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: DeviceNetwork

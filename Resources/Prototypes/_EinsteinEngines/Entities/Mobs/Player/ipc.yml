@@ -127,7 +127,7 @@
   - type: EmitBuzzWhileDamaged
   - type: CanHostGuardian
   - type: WeldingHealable
-  - type: TTS
+  - type: TTS # Forge-Change
   - type: RetroMonitorView # Mono
   - type: Addiction # Forge-change
     enabled: false # idk just safe

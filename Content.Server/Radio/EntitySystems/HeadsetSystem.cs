@@ -1,11 +1,9 @@
 using Content.Server.Chat.Systems;
-using Content.Server.Emp;
 using Content.Server.Radio.Components;
 using Content.Shared._Mono.Radio;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
-using Content.Server.Speech;
 using Content.Server._EinsteinEngines.Language;
 using Content.Shared.Chat;
 using Content.Shared.Radio.EntitySystems;
@@ -13,8 +11,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Content.Shared._Forge.TTS;
 using Content.Server._Forge.TTS;
-using Content.Shared._Forge;
-
 using Robust.Shared.Configuration;
 
 namespace Content.Server.Radio.EntitySystems;
@@ -25,9 +21,11 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
     [Dependency] private RadioSystem _radio = default!;
     [Dependency] private LanguageSystem _language = default!;
 
+    // Forge-Change-Start
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly TTSSystem _tts = default!;
     [Dependency] private readonly INetConfigurationManager _cfg = default!;
+    // Forge-Change-End
     public override void Initialize()
     {
         base.Initialize();
@@ -80,12 +78,14 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
     protected override void OnGotUnequipped(EntityUid uid, HeadsetComponent component, GotUnequippedEvent args)
     {
         base.OnGotUnequipped(uid, component, args);
-        component.IsEquipped = false;
+        component.IsEquipped = false; // Forge-Change
         RemComp<WearingHeadsetComponent>(args.Equipee);
+        // Forge-Change-Start
         if (component.Enabled)
             UpdateRadioChannels(uid, component);
         else
             RemComp<ActiveRadioComponent>(uid);
+        // Forge-Change-End
     }
 
     public void SetEnabled(EntityUid uid, bool value, HeadsetComponent? component = null)
@@ -115,6 +115,7 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
 
     private void OnHeadsetReceive(EntityUid uid, HeadsetComponent component, ref RadioReceiveEvent args)
     {
+        // Forge-Change-Start
         TTSComponent ? headsetTts = null;
 
         if (TryComp(uid, out headsetTts) && TryComp(args.MessageSource, out TTSComponent ? speakerTts)) {
@@ -147,5 +148,6 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
 
             return;
         }
+        // Forge-Change-End
     }
 }

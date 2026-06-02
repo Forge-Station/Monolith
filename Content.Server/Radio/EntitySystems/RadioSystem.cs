@@ -21,10 +21,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
-using Content.Shared.Mobs;
 using Robust.Shared.Configuration;
 using Content.Shared._Forge;
-using Content.Server.Database.Migrations.Postgres;
 using Content.Server._Forge.TTS;
 using Content.Shared._Forge.TTS;
 
@@ -42,8 +40,8 @@ public sealed partial class RadioSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly LanguageSystem _language = default!; // Einstein Engines - Language
-    [Dependency] private readonly INetConfigurationManager _cfg = default!;
-    [Dependency] private readonly TTSSystem _tts = default!;
+    [Dependency] private readonly INetConfigurationManager _cfg = default!; // Forge-Change
+    [Dependency] private readonly TTSSystem _tts = default!; // Forge-Change
     [Dependency] private readonly ConfigurableEncryptionKeySystem _configurableKeys = default!; // Forge-Change
 
     // set used to prevent radio feedback loops.
@@ -98,6 +96,7 @@ public sealed partial class RadioSystem : EntitySystem
             _netMan.ServerSendMessage(new MsgChatMessage { Message = msg }, actor.PlayerSession.Channel);
             // Einstein Engines - Languages end
 
+            // Forge-Change-Start
             var isOwnAudioRelay = uid == args.MessageSource;
             var radioTtsEnabled = _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeVars.LocalRadioTTSEnabled);
 
@@ -105,6 +104,7 @@ public sealed partial class RadioSystem : EntitySystem
             {
                 _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, tts.VoicePrototypeId, actor.PlayerSession, true, args.Language);
             }
+            // Forge-Change-End
 
             // Send radio noise event to client for IPCs
             var radioNoiseEvent = new RadioNoiseEvent(GetNetEntity(uid), args.Channel.ID);

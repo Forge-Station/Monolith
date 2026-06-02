@@ -74,39 +74,40 @@ ent-PoiTreasuryFuel = { ent-PoiTreasury }
 # --- Варианты под конкретные POI (суффикс = пул наград родителя) ---
 
 ent-PoiTreasuryTradeMall = { ent-PoiTreasuryTrade }
-
+    .desc = { ent-PoiTreasuryTrade.desc }
 ent-PoiTreasuryCargoDepot = { ent-PoiTreasuryCargo }
-
+    .desc = { ent-PoiTreasuryCargo.desc }
 ent-PoiTreasuryGrifty = { ent-PoiTreasuryRestStop }
     .suffix = спесо, сварка, O2, ИРП, пиво
     .desc = { ent-PoiTreasury.desc }
 
 ent-PoiTreasuryCaseysCasino = { ent-PoiTreasuryCasino }
-
+    .desc = { ent-PoiTreasuryCasino.desc }
 ent-PoiTreasuryBahama = { ent-PoiTreasuryRestStop }
-
+    .desc = { ent-PoiTreasuryRestStop.desc }
 ent-PoiTreasuryTinnia = { ent-PoiTreasuryShelter }
-
+    .desc = { ent-PoiTreasuryShelter.desc }
 ent-PoiTreasuryThePit = { ent-PoiTreasuryCombat }
-
+    .desc = { ent-PoiTreasuryCombat.desc }
 ent-PoiTreasuryEdison = { ent-PoiTreasuryIndustrial }
-
+    .desc = { ent-PoiTreasuryIndustrial.desc }
 ent-PoiTreasuryOmnichurch = { ent-PoiTreasuryChapel }
-
+    .desc = { ent-PoiTreasuryChapel.desc }
 ent-PoiTreasuryLPBravo = { ent-PoiTreasuryHighRisk }
-
+    .desc = { ent-PoiTreasuryHighRisk.desc }
 ent-PoiTreasuryMcHobo = { ent-PoiTreasuryScrap }
-
+    .desc = { ent-PoiTreasuryScrap.desc }
 ent-PoiTreasuryAnomalousLab = { ent-PoiTreasuryScience }
-
+    .desc = { ent-PoiTreasuryScience.desc }
 ent-PoiTreasuryMiningDrill = { ent-PoiTreasuryMining }
-
+    .desc = { ent-PoiTreasuryMining.desc }
 ent-PoiTreasurySevastopol = { ent-PoiTreasuryTech }
-
+    .desc = { ent-PoiTreasuryTech.desc }
 ent-PoiTreasuryHammerOfTheUnion = { ent-PoiTreasuryDungeonTech }
-
+    .desc = { ent-PoiTreasuryDungeonTech.desc }
 ent-PoiTreasuryPolaris = { ent-PoiTreasuryBio }
-
+    .desc = { ent-PoiTreasuryBio.desc }
 ent-PoiTreasuryAutomatedTanker = { ent-PoiTreasuryFuel }
-
+    .desc = { ent-PoiTreasuryFuel.desc }
 ent-PoiTreasuryLancelot = { ent-PoiTreasuryMining }
+    .desc = { ent-PoiTreasuryMining.desc }

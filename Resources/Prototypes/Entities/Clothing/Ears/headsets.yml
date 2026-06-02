@@ -30,7 +30,8 @@
   - type: GuideHelp
     guides:
     - Radio
-
+  - type: TTS # Forge-Change
+  
 - type: entity
   parent: ClothingHeadset
   id: ClothingHeadsetGrey

@@ -1,4 +1,4 @@
 ent-WeaponRifleAK410 = NCI AK-410 (7.62x54mmR)
     .desc = Буллпап МСВ, питающийся магазинами 7.62x54ммR, разработанная для модернизации дальнобойного пехотного оружия СССП.
-ent-WeaponRifleLeeEnfield = MI Lee Enfield Mk 98 (7.62x51mm)
+ent-WeaponRifleLeeEnfield = MI Lee Энфилд Mk 98 (7.62x51mm)
     .desc = Надёжная снайперская винтовка 7.62x51мм производства Militia Ironworks под современные стандарты.

@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
+  category: Grid
   engineVersion: 277.0.0
-  forkId: frontier_mapping
-  forkVersion: a7c699b5cee261d941ce28969846b2e98ca517cb
-  time: 06/01/2026 06:52:02
-  entityCount: 9694
-maps:
-- 5885
+  forkId: ""
+  forkVersion: ""
+  time: 06/01/2026 15:28:14
+  entityCount: 9693
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   1: Space
@@ -73,7 +73,7 @@ entities:
       name: grid
     - type: Transform
       pos: -0.53125,-0.5
-      parent: 5885
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -232,8 +232,8 @@ entities:
       spreadQueues:
         Kudzu: []
         MetalFoam: []
-        Smoke: []
         Puddle: []
+        Smoke: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -6455,16 +6455,6 @@ entities:
     - type: ExplosionAirtightGrid
     - type: ShipShieldGridState
     - type: NavMap
-  - uid: 5885
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 2

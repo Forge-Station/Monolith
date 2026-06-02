@@ -71,11 +71,11 @@ public sealed partial class AddictionStageData
     [DataField]
     public float EffectInterval { get; set; } = 10f;
 
-    // EntityEffects to apply
-    [DataField]
+    // EntityEffects to apply (server-only; implementations live in Content.Server)
+    [DataField(serverOnly: true)]
     public List<EntityEffect> Effects { get; set; } = new();
 
-    [DataField]
+    [DataField(serverOnly: true)]
     public List<EntityEffect> WithdrawalEffects { get; set; } = new();
 }
 #endregion

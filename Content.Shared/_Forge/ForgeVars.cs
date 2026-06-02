@@ -76,10 +76,22 @@ public sealed class ForgeVars
         CVarDef.Create("tts.volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
+    /// Default volume setting of TTS sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSRadioVolume =
+        CVarDef.Create("tts.volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
     /// Whether the client wants local TTS playback enabled.
     /// </summary>
     public static readonly CVarDef<bool> LocalTTSEnabled =
         CVarDef.Create("tts.local_enabled", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
+
+    // <summary>
+    /// Whether the client wants local TTS playback on **Radio event** enabled.
+    /// </summary>
+    public static readonly CVarDef<bool> LocalRadioTTSEnabled =
+        CVarDef.Create("tts.local_radio_enabled", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 
     /// <summary>
     /// Count of in-memory cached tts voice lines.

@@ -15,3 +15,5 @@ ent-NFWeaponSubMachineGunDrozdLessLethal = Дрозд
 ent-NFWeaponSubMachineGunWt550 = WT550
     .desc = Отличный пистолет-пулемёт, производства NanoTrasen's Small Arms Division. Использует патроны калибра .35 авто. Запрещено к использованию гражданскими.
     .suffix = Пистолет-пулемёт
+ent-WeaponSubMachineGunC20r = CS C-20r (9x19мм)
+    .desc = Пистолет-пулемёт эпохи Корпораций, когда-то использовавшийся Ядерными Оперативниками, теперь нашёл применение среди Династии Фаэтон. Использует патроны 9x19мм.

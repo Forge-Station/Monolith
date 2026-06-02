@@ -113,6 +113,7 @@
     isActive: true
     canToggle: true
     affectRadio: true
+  - type: TTS
 
 - type: entity
   parent: ClothingHeadset

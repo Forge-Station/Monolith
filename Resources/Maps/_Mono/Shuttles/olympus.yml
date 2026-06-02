@@ -14124,7 +14124,7 @@ entities:
           - 1490
           - 1491
           - 1492
-- proto: ShieldGeneratorSmall
+- proto: ShieldGeneratorFSG100
   entities:
   - uid: 2087
     components:

@@ -10,10 +10,10 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client.Holopad;
 
-public sealed class HolopadSystem : SharedHolopadSystem
+public sealed partial class HolopadSystem : SharedHolopadSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -106,7 +106,7 @@ public sealed class HolopadSystem : SharedHolopadSystem
         // Remove shading from all layers (except displacement maps)
         for (int i = 0; i < hologramSprite.AllLayers.Count(); i++)
         {
-            if (hologramSprite.TryGetLayer(i, out var layer) && layer.ShaderPrototype != "DisplacedStencilDraw")
+            if (hologramSprite.TryGetLayer(i, out var layer) && layer.ShaderPrototype != "DisplacedDraw") // Forge-Change
                 hologramSprite.LayerSetShader(i, "unshaded");
         }
 

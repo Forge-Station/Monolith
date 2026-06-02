@@ -1,0 +1,12 @@
+- type: entity
+  id: ActionDrakeHardsuitMassScanner
+  name: Hardsuit mass scanner
+  description: Open the integrated mass scanner from your hardsuit helmet.
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    icon:
+      sprite: Objects/Tools/handheld_mass_scanner.rsi
+      state: icon
+    event: !type:OpenUiActionEvent
+      key: enum.RadarConsoleUiKey.Key

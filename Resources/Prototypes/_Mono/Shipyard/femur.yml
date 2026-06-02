@@ -17,6 +17,7 @@
   guidebookPage: Null
   class:
   - Pursuit
+  - Patrol
   engine:
   - Uranium
 

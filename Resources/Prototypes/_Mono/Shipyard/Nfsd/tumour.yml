@@ -6,13 +6,13 @@
   name: TSF-SKR Tumour
   description: A ugly potato of a carrier. Little armament to defend itself, but carries lathes to support its fighters and other ships.
   price: 68250
-  category: Medium
+  category: Small
   group: Security
   access: Security
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/tumour.yml
   guidebookPage: Null
   class:
-  - Pursuit
+  - Capital
   - Patrol
   engine:
   - Uranium

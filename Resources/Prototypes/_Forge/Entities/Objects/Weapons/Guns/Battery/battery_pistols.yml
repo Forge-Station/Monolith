@@ -297,3 +297,19 @@
   - type: PacifismAllowedGun # harmless
   - type: StaticPrice
     price: 250
+
+# Drake MK8/MK16 — NF holoflare with 5 shots (1200 charge) and faster self-recharge.
+- type: entity
+  parent: NFWeaponHoloflareGun
+  id: DrakeIndustrialHoloflareGun
+  name: Drake industrial holoflare pistol
+  suffix: Drake
+  categories: [ HideSpawnMenu ]
+  description: Upgraded Drake Industries holoflare pistol for MK8 and MK16 hardsuits. Five shots, faster cell recharge.
+  components:
+  - type: Battery
+    maxCharge: 1200
+    startingCharge: 1200
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 25

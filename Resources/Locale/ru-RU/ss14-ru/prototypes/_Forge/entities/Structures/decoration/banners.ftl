@@ -1,4 +1,14 @@
-ent-BannerRen = Знамя ренегатов
+ent-BannerRen = знамя ренегатов
     .desc = Знамя ренегатов.
-ent-BannerNSC = Знамя NSC
+ent-BannerNSC = знамя NSC
     .desc = Знамя торгового альянса Nexus Star Consortium пахнет дорогой краской.
+ent-BannerEmpire = знамя Империи
+    .desc = Знамя династии Священной Империи Вермиллиона.
+ent-BannerDaybreak = знамя Daybreak
+    .desc = Знамя корпорации Daybreak.
+ent-BannerPlayerCorpOne = знамя Hunter Therapeutics
+    .desc = Знамя корпорации Hunter Therapeutics.
+ent-BannerDrakeIndustries = знамя DI
+    .desc = Знамя с эмблемой Drake Industries. Символ мегакорпорации вплетён в высококачественную ткань, подобной которой вы вряд ли встречали где-либо в этом секторе. Вероятно, именно поэтому знамя не закреплено на древке, а буквально сплавлено с ним.
+ent-BannerScrapTech = знамя Scrap Tech
+    .desc = Знамя, изображающее символику какой-то паршивой компании. Все знамя в грязи и моторном масле.

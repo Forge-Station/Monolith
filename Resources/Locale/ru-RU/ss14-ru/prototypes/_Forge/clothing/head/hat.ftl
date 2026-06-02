@@ -5,3 +5,12 @@ ent-ClothingHeadHatNexusBeret = берет нексуса
     .desc = Самый обычный берет самой обычной корпорации.
 ent-ClothingHeadHatNexusCap = кепка нексуса
     .desc = Для настоящих работяг.
+ent-ClothingHeadHatBeretHME = берет HME
+    .desc = Стильный берет в цветах компании HME. Символ самоотверженности и целеустремлённости медиков компании!
+
+ent-ClothingHeadHatEmpirePreafect = кепка лорда
+    .desc = Кепка лорда, символизирует верность аристократическому кругу империи.
+ent-ClothingHeadHatEmpirePreafectOrange = фуражка лорда
+    .desc = Фуражка лорда, символизирует верность имперской гвардии.
+ent-ClothingHeadHatEmpirePreafectViolet = шляпа экклезиарха
+    .desc = Шляпа экклезиарха, символизирует верность церкви и вере в императора!

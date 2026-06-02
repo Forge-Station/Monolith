@@ -306,6 +306,22 @@
   components:
   - type: Pda
     id: TsfSeniorAideIDCard
+    penSlot:
+      startingItem: Pen
+      priority: -1
+      whitelist:
+        tags:
+        - Write
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-hop
+  - type: PdaBorderColor
+    borderColor: "#789876"
+    accentHColor: "#447987"
+  - type: Icon
+    state: pda-hop
 
 - type: entity
   parent: SrPDA
@@ -315,6 +331,16 @@
   components:
   - type: Pda
     id: TsfAmbassadorIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-prosecutor
+  - type: PdaBorderColor
+    borderColor: "#FFFDD0"
+    accentHColor: "#896b49"
+  - type: Icon
+    state: pda-prosecutor
 
 - type: entity
   parent: DeputyPDA

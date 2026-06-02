@@ -24,9 +24,9 @@
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable
-  - type: HitscanBatteryAmmoProvider
-    proto: SmallRedLaser
-    fireCost: 50
+  # - type: HitscanBatteryAmmoProvider # Forge-change: i don't want to see hitscan in my guns where im written projectile
+  #   proto: SmallRedLaser
+  #   fireCost: 50
   - type: PhysicalComposition
     materialComposition:
       Steel: 80

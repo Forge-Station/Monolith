@@ -1,2 +1,2 @@
-vessel-bucket-name = Bucket
-vessel-bucket-desc = The janitorial wing of the combined service ship.
+vessel-bucket-name = «Ведро»
+vessel-bucket-desc = Уборочный отсек сервисного корабля.

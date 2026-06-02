@@ -35,3 +35,11 @@
   storage:
     back:
     - EncryptionKeyScience
+
+#Forge edit
+- type: loadout
+  id: ContractorEncryptionKeyCustom
+  price: 0 # Mono
+  storage:
+    back:
+    - EncryptionKeyCustom

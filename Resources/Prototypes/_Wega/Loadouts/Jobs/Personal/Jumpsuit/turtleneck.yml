@@ -1,0 +1,169 @@
+- type: loadout
+  id: JumpskirtTurtleneckAquamarine
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckAquamarine
+
+- type: loadout
+  id: JumpskirtTurtleneckWhite
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckWhite
+
+- type: loadout
+  id: JumpskirtTurtleneckAzure
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckAzure
+
+- type: loadout
+  id: JumpskirtTurtleneckYellow
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckYellow
+
+- type: loadout
+  id: JumpskirtTurtleneckGreen
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckGreen
+
+- type: loadout
+  id: JumpskirtTurtleneckBrown
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckBrown
+
+- type: loadout
+  id: JumpskirtTurtleneckRed
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckRed
+
+- type: loadout
+  id: JumpskirtTurtleneckOrange
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckOrange
+
+- type: loadout
+  id: JumpskirtTurtleneckPink
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckPink
+
+- type: loadout
+  id: JumpskirtTurtleneckGrey
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckGrey
+
+- type: loadout
+  id: JumpskirtTurtleneckBlue
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckBlue
+
+- type: loadout
+  id: JumpskirtTurtleneckPurple
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckPurple
+
+- type: loadout
+  id: JumpskirtTurtleneckBlack
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckBlack
+
+- type: loadout
+  id: JumpskirtTurtleneckBlackSleeveless
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckBlackSleeveless
+
+- type: loadout
+  id: JumpskirtTurtleneckWhiteSleeveless
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckWhiteSleeveless
+
+- type: loadout
+  id: JumpskirtTurtleneckSalat
+  equipment:
+    jumpsuit: ADTClothingUniformJumpskirtTurtleneckSalat
+
+- type: loadout
+  id: JumpsuitTurtleneckAquamarine
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckAquamarine
+
+- type: loadout
+  id: JumpsuitTurtleneckWhite
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckWhite
+
+- type: loadout
+  id: JumpsuitTurtleneckAzure
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckAzure
+
+- type: loadout
+  id: JumpsuitTurtleneckYellow
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckYellow
+
+- type: loadout
+  id: JumpsuitTurtleneckGreen
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckGreen
+
+- type: loadout
+  id: JumpsuitTurtleneckBrown
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckBrown
+
+- type: loadout
+  id: JumpsuitTurtleneckRed
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckRed
+
+- type: loadout
+  id: JumpsuitTurtleneckOrange
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckOrange
+
+- type: loadout
+  id: JumpsuitTurtleneckPink
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckPink
+
+- type: loadout
+  id: JumpsuitTurtleneckGrey
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckGrey
+
+- type: loadout
+  id: JumpsuitTurtleneckBlue
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckBlue
+
+- type: loadout
+  id: JumpsuitTurtleneckPurple
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckPurple
+
+- type: loadout
+  id: JumpsuitTurtleneckBlack
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckBlack
+
+- type: loadout
+  id: JumpsuitTurtleneckWhiteBlackSleeveless
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckWhiteBlackSleeveless
+
+- type: loadout
+  id: JumpsuitTurtleneckWhiteSleeveless
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckWhiteSleeveless
+
+- type: loadout
+  id: JumpsuitTurtleneckBlackSleeveless
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckBlackSleeveless
+
+- type: loadout
+  id: JumpsuitTurtleneckSalat
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckSalat
+
+- type: loadout
+  id: JumpsuitTurtleneckSalatblack
+  equipment:
+    jumpsuit: ADTClothingUniformJumpsuitTurtleneckSalatblack

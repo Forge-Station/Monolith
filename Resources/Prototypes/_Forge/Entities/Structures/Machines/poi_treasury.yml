@@ -1,0 +1,359 @@
+# Forge: POI capture treasury entities.
+# Place on POI maps next to ComputerIFFCapture (same grid, 1–2 tiles away).
+# Loot pools: Resources/Prototypes/_Forge/EntityTables/poi_treasury_loot.yml
+# See placement table at the bottom of this file.
+#
+# Excluded (no dedicated treasury): Zenith, TSFMCOutpost, NorthPole, all commented-out NF POIs.
+
+# --- Base ---------------------------------------------------------------------
+
+- type: entity
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible]
+  id: PoiTreasury
+  name: POI treasury
+  description: A reinforced strongbox tied to this POI's capture console. Anyone can peek inside, but only the capture leader can withdraw.
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 10
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootCashLow
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Anchorable
+    flags: Unanchorable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.40,-0.40,0.40,0.40"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Structures/Storage/orebox.rsi
+    state: orebox
+    noRot: true
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Storage
+    grid:
+    - 0,0,19,9
+    maxItemSize: Huge
+    openOnActivate: true
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryDebug
+  suffix: Debug
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 1
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootDebug
+
+# --- Reward profiles (abstract parents for mappers / variants) ----------------
+
+# Trade / market POIs — mostly sales tax; tick adds cash only.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryTrade
+  abstract: true
+  suffix: Profile, Trade
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 15
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootTrade
+
+# Cargo depots — logistics + moderate cash.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryCargo
+  abstract: true
+  suffix: Profile, Cargo
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 12
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootCargo
+
+# Rest stops (bar, gas station) — consumables + small cash.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryRestStop
+  abstract: true
+  suffix: Profile, RestStop
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 10
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootRestStop
+
+# Shelter / clinic-lite — food + basic medical.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryShelter
+  abstract: true
+  suffix: Profile, Shelter
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 10
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootShelter
+
+# Casino — cash + fluff.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryCasino
+  abstract: true
+  suffix: Profile, Casino
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 10
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootCasino
+
+# Arena / combat POIs.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryCombat
+  abstract: true
+  suffix: Profile, Combat
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 12
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootCombat
+
+# Power / industrial.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryIndustrial
+  abstract: true
+  suffix: Profile, Industrial
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 12
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootIndustrial
+
+# Chapel / beacon — atmospheric, low economic value.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryChapel
+  abstract: true
+  suffix: Profile, Chapel
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 12
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootChapel
+
+# High-risk hostile POIs (syndicate FOB, etc.).
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryHighRisk
+  abstract: true
+  suffix: Profile, HighRisk
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 15
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootHighRisk
+
+# Scrapyard / abandoned hulks.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryScrap
+  abstract: true
+  suffix: Profile, Scrap
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 10
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootScrap
+
+# Science / anomaly lab.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryScience
+  abstract: true
+  suffix: Profile, Science
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 12
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootScience
+
+# Mining POIs.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryMining
+  abstract: true
+  suffix: Profile, Mining
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 10
+    rewardCount: 2
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootMining
+
+# Data / tech sites.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryTech
+  abstract: true
+  suffix: Profile, Tech
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 12
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootTech
+
+# Dungeon ruins with research loot.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryDungeonTech
+  abstract: true
+  suffix: Profile, DungeonTech
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 20
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootDungeonTech
+
+# Bio-research hostile sites.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryBio
+  abstract: true
+  suffix: Profile, Bio
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 15
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootBio
+
+# Fuel / tanker sites.
+- type: entity
+  parent: PoiTreasury
+  id: PoiTreasuryFuel
+  abstract: true
+  suffix: Profile, Fuel
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 12
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootFuel
+
+# --- Per-POI variants (place on maps) -----------------------------------------
+
+# _NF
+- type: entity
+  parent: PoiTreasuryTrade
+  id: PoiTreasuryTradeMall
+  suffix: TradeMall, POI
+
+- type: entity
+  parent: PoiTreasuryCargo
+  id: PoiTreasuryCargoDepot
+  suffix: CargoDepot, POI
+
+- type: entity
+  parent: PoiTreasuryRestStop
+  id: PoiTreasuryGrifty
+  suffix: Grifty, POI
+  components:
+  - type: PoiTreasury
+    rewardIntervalMinutes: 10
+    rewardTable: !type:NestedSelector
+      tableId: PoiTreasuryLootGrifty
+
+- type: entity
+  parent: PoiTreasuryCasino
+  id: PoiTreasuryCaseysCasino
+  suffix: CaseysCasino, POI
+
+- type: entity
+  parent: PoiTreasuryRestStop
+  id: PoiTreasuryBahama
+  suffix: Bahama, POI
+
+- type: entity
+  parent: PoiTreasuryShelter
+  id: PoiTreasuryTinnia
+  suffix: Tinnia, POI
+
+- type: entity
+  parent: PoiTreasuryCombat
+  id: PoiTreasuryThePit
+  suffix: ThePit, POI
+
+- type: entity
+  parent: PoiTreasuryIndustrial
+  id: PoiTreasuryEdison
+  suffix: Edison, POI
+
+- type: entity
+  parent: PoiTreasuryChapel
+  id: PoiTreasuryOmnichurch
+  suffix: Omnichurch, POI
+
+- type: entity
+  parent: PoiTreasuryHighRisk
+  id: PoiTreasuryLPBravo
+  suffix: LPBravo, POI
+
+- type: entity
+  parent: PoiTreasuryScrap
+  id: PoiTreasuryMcHobo
+  suffix: McHobo, POI
+
+# _Mono
+- type: entity
+  parent: PoiTreasuryScience
+  id: PoiTreasuryAnomalousLab
+  suffix: AnomalousLab, POI
+
+- type: entity
+  parent: PoiTreasuryMining
+  id: PoiTreasuryMiningDrill
+  suffix: DerelictDrill, POI
+
+- type: entity
+  parent: PoiTreasuryTech
+  id: PoiTreasurySevastopol
+  suffix: Sevastopol, POI
+
+- type: entity
+  parent: PoiTreasuryDungeonTech
+  id: PoiTreasuryHammerOfTheUnion
+  suffix: HammerOfTheUnion, POI
+
+- type: entity
+  parent: PoiTreasuryBio
+  id: PoiTreasuryPolaris
+  suffix: Polaris, POI
+
+- type: entity
+  parent: PoiTreasuryFuel
+  id: PoiTreasuryAutomatedTanker
+  suffix: AutomatedTanker, POI
+
+- type: entity
+  parent: PoiTreasuryMining
+  id: PoiTreasuryLancelot
+  suffix: Lancelot, POI

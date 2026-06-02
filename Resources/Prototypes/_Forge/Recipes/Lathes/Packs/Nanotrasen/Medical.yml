@@ -1,0 +1,11 @@
+- type: latheRecipePack
+  id: TTISuplplies
+  recipes:
+  - OmnizineChemistryBottle
+  - JugOmnizine
+  - Hypospray
+  - HypoBrigmedic
+  - HypoMiniLimitedEdition
+  - CentCommHypo
+  - OintmentAdvanced1
+  - BrutepackAdvanced1

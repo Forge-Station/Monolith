@@ -1,0 +1,112 @@
+# Drake Industries company apparel (unlocked by DrakeIndustriesApparel).
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingUniformDrakeIndustriesHauler
+  result: ClothingUniformDrakeIndustriesHauler
+  completetime: 5
+  materials:
+    Cloth: 500
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingUniformDrakeIndustriesTrucker
+  result: ClothingUniformDrakeIndustriesTrucker
+  completetime: 5
+  materials:
+    Cloth: 500
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingUniformDrakeIndustriesWatchdog
+  result: ClothingUniformDrakeIndustriesWatchdog
+  completetime: 5
+  materials:
+    Cloth: 500
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingMaskDrakeIndustries
+  result: ClothingMaskDrakeIndustries
+  completetime: 5
+  materials:
+    Cloth: 300
+    Plastic: 200
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingMaskDrakeIndustriesWatchdog
+  result: ClothingMaskDrakeIndustriesWatchdog
+  completetime: 5
+  materials:
+    Cloth: 300
+    Plastic: 300
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingBeltDrakeIndustries
+  result: ClothingBeltDrakeIndustries
+  completetime: 5
+  materials:
+    Cloth: 400
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingOuterDrakeIndustriesTruckerPuffyVest
+  result: ClothingOuterDrakeIndustriesTruckerPuffyVest
+  completetime: 6
+  materials:
+    Cloth: 600
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingNeckDrakeIndustriesBadge
+  result: ClothingNeckDrakeIndustriesBadge
+  completetime: 3
+  materials:
+    Plastic: 200
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingBackpackDrakeIndustries
+  result: ClothingBackpackDrakeIndustries
+  completetime: 5
+  materials:
+    Cloth: 500
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingBackpackDuffelDrakeIndustries
+  result: ClothingBackpackDuffelDrakeIndustries
+  completetime: 5
+  materials:
+    Cloth: 600
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingBackpackSatchelDrakeIndustries
+  result: ClothingBackpackSatchelDrakeIndustries
+  completetime: 5
+  materials:
+    Cloth: 500
+
+- type: latheRecipe
+  id: ClothingShoesBootsMagDrakeIndustries
+  parent: DrakeIndustriesMagBootsRecipe
+  result: ClothingShoesBootsMagDrakeIndustries
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingNeckCloakDrakeIndustries
+  result: ClothingNeckCloakDrakeIndustries
+  completetime: 6
+  materials:
+    Cloth: 800
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingNeckCloakDrakeIndustriesRipped
+  result: ClothingNeckCloakDrakeIndustriesRipped
+  completetime: 5
+  materials:
+    Cloth: 500

@@ -43,6 +43,48 @@
   id: MachineGCSHighCircuitboard
   result: MachineGCSHighCircuitboard
 
+# Forge-Change-Start
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: GCSMediumUpgradeCircuitboard
+  result: GCSMediumUpgradeCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: GCSHighUpgradeCircuitboard
+  result: GCSHighUpgradeCircuitboard
+  materials:
+    Steel: 150
+    Glass: 500
+    Gold: 150
+    Plasma: 100
+
+- type: latheRecipe
+  parent: BaseBluespaceCircuitboardRecipe
+  id: GCSUltraUpgradeCircuitboard
+  result: GCSUltraUpgradeCircuitboard
+  materials:
+    Steel: 150
+    Glass: 500
+    Bluespace: 200
+    Diamond: 200
+    Plasma: 150
+    Uranium: 150
+
+- type: latheRecipe
+  parent: BaseBluespaceCircuitboardRecipe
+  id: GCSOmegaUpgradeCircuitboard
+  result: GCSOmegaUpgradeCircuitboard
+  materials:
+    Steel: 200
+    Glass: 600
+    Bluespace: 350
+    Diamond: 450
+    Plasma: 550
+    Uranium: 200
+    UraniumFissile: 300
+# Forge-Change-end
+
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
   id: AdvancedRadarConsoleCircuitboard
@@ -83,6 +125,16 @@
   id: SmartfridgeCircuitboard
   result: SmartfridgeCircuitboard
 
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: SmartArmoryCircuitboard
+  result: SmartArmoryCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: LargeThrusterMachineCircuitboard
+  result: LargeThrusterMachineCircuitboard
+
 # Datafarm
 
 - type: latheRecipe
@@ -96,3 +148,14 @@
   parent: BaseGoldCircuitboardRecipe
   id: CentrifugeLatheMiniCircuitboard
   result: CentrifugeLatheMiniCircuitboard
+
+# Forge FSG tier 4 specialists (boards in _Forge; recipes here with other shield boards for reliable LatheRecipe load)
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG870RCircuitboard
+  result: MachineShieldFSG870RCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldFSG950MCircuitboard
+  result: MachineShieldFSG950MCircuitboard

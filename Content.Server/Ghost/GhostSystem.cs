@@ -28,9 +28,11 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Players.RateLimiting; // Forge-Change
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Tag;
+using Content.Server.Players.RateLimiting; // Forge-Change
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -45,39 +47,44 @@ using Content.Server.Preferences.Managers;
 
 namespace Content.Server.Ghost
 {
-    public sealed class GhostSystem : SharedGhostSystem
+    public sealed partial class GhostSystem : SharedGhostSystem
     {
-        [Dependency] private readonly SharedActionsSystem _actions = default!;
-        [Dependency] private readonly IAdminLogManager _adminLog = default!;
-        [Dependency] private readonly SharedEyeSystem _eye = default!;
-        [Dependency] private readonly FollowerSystem _followerSystem = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly JobSystem _jobs = default!;
-        [Dependency] private readonly EntityLookupSystem _lookup = default!;
-        [Dependency] private readonly MindSystem _minds = default!;
-        [Dependency] private readonly MobStateSystem _mobState = default!;
-        [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly TransformSystem _transformSystem = default!;
-        [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
-        [Dependency] private readonly MetaDataSystem _metaData = default!;
-        [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-        [Dependency] private readonly IChatManager _chatManager = default!;
-        [Dependency] private readonly SharedMindSystem _mind = default!;
-        [Dependency] private readonly GameTicker _gameTicker = default!;
-        [Dependency] private readonly DamageableSystem _damageable = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly TagSystem _tag = default!;
-        [Dependency] private readonly IAdminManager _admin = default!; // Frontier
-        [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
-        [Dependency] private readonly SponsorManager _sponsors = default!; // Forge-Change
-        [Dependency] private readonly GhostSpriteStateSystem _ghostState = default!;
+        [Dependency] private SharedActionsSystem _actions = default!;
+        [Dependency] private IAdminLogManager _adminLog = default!;
+        [Dependency] private SharedEyeSystem _eye = default!;
+        [Dependency] private FollowerSystem _followerSystem = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private JobSystem _jobs = default!;
+        [Dependency] private EntityLookupSystem _lookup = default!;
+        [Dependency] private MindSystem _minds = default!;
+        [Dependency] private MobStateSystem _mobState = default!;
+        [Dependency] private SharedPhysicsSystem _physics = default!;
+        [Dependency] private ISharedPlayerManager _player = default!;
+        [Dependency] private TransformSystem _transformSystem = default!;
+        [Dependency] private VisibilitySystem _visibilitySystem = default!;
+        [Dependency] private MetaDataSystem _metaData = default!;
+        [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IConfigurationManager _configurationManager = default!;
+        [Dependency] private IChatManager _chatManager = default!;
+        [Dependency] private SharedMindSystem _mind = default!;
+        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private DamageableSystem _damageable = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private TagSystem _tag = default!;
+        [Dependency] private IAdminManager _admin = default!; // Frontier
+        [Dependency] private IServerPreferencesManager _preferencesManager = default!;
+        [Dependency] private GhostSpriteStateSystem _ghostState = default!;
+        [Dependency] private SponsorManager _sponsors = default!; // Forge-Change
+        [Dependency] private PlayerRateLimitManager _rateLimit = default!; // Forge-Change
+
+        private const string InvalidGhostRequestRateLimitKey = "GhostInvalidRequests"; // Forge-Change
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
+
+        private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
 
         public override void Initialize()
         {
@@ -85,7 +92,15 @@ namespace Content.Server.Ghost
 
             _ghostQuery = GetEntityQuery<GhostComponent>();
             _physicsQuery = GetEntityQuery<PhysicsComponent>();
-
+            // Forge-Change-start
+            _rateLimit.Register(InvalidGhostRequestRateLimitKey,
+                new RateLimitRegistration(CCVars.GhostInvalidRequestRateLimitPeriod,
+                    CCVars.GhostInvalidRequestRateLimitCount,
+                    OnInvalidGhostRequestRateLimited,
+                    CCVars.GhostInvalidRequestRateLimitAnnounceAdminsDelay,
+                    OnInvalidGhostRequestAlertAdmins)
+            );
+            // Forge-Change-end
             SubscribeLocalEvent<GhostComponent, ComponentStartup>(OnGhostStartup);
             SubscribeLocalEvent<GhostComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<GhostComponent, ComponentShutdown>(OnGhostShutdown);
@@ -287,7 +302,7 @@ namespace Content.Server.Ghost
                 || !ghost.CanReturnToBody
                 || !TryComp(attached, out ActorComponent? actor))
             {
-                Log.Warning($"User {args.SenderSession.Name} sent an invalid {nameof(GhostReturnToBodyRequest)}");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} sent an invalid {nameof(GhostReturnToBodyRequest)}"); // Forge-Change
                 return;
             }
 
@@ -301,7 +316,7 @@ namespace Content.Server.Ghost
             if (args.SenderSession.AttachedEntity is not {Valid: true} entity
                 || !_ghostQuery.HasComp(entity))
             {
-                Log.Warning($"User {args.SenderSession.Name} sent a {nameof(GhostWarpsRequestEvent)} without being a ghost.");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} sent a {nameof(GhostWarpsRequestEvent)} without being a ghost."); // Forge-Change
                 return;
             }
 
@@ -328,7 +343,7 @@ namespace Content.Server.Ghost
             if (args.SenderSession.AttachedEntity is not {Valid: true} attached
                 || !_ghostQuery.HasComp(attached))
             {
-                Log.Warning($"User {args.SenderSession.Name} tried to warp to {msg.Target} without being a ghost.");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to warp to {msg.Target} without being a ghost."); // Forge-Change
                 return;
             }
 
@@ -336,7 +351,7 @@ namespace Content.Server.Ghost
 
             if (!Exists(target))
             {
-                Log.Warning($"User {args.SenderSession.Name} tried to warp to an invalid entity id: {msg.Target}");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to warp to an invalid entity id: {msg.Target}"); // Forge-Change
                 return;
             }
 
@@ -345,7 +360,7 @@ namespace Content.Server.Ghost
                 TryComp<WarpPointComponent>(target, out var warpPoint) &&
                 warpPoint.AdminOnly)
             {
-                Log.Warning($"User {args.SenderSession.Name} tried to warp to an admin-only warp point: {msg.Target}");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to warp to an admin-only warp point: {msg.Target}"); // Forge-Change
                 _adminLog.Add(LogType.Action, LogImpact.Medium, $"{EntityManager.ToPrettyString(attached):player} tried to warp to admin warp point {EntityManager.ToPrettyString(msg.Target)}");
                 return;
             }
@@ -359,7 +374,7 @@ namespace Content.Server.Ghost
             if (args.SenderSession.AttachedEntity is not {} uid
                 || !_ghostQuery.HasComp(uid))
             {
-                Log.Warning($"User {args.SenderSession.Name} tried to ghostnado without being a ghost.");
+                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to ghostnado without being a ghost."); // Forge-Change
                 return;
             }
 
@@ -401,7 +416,7 @@ namespace Content.Server.Ghost
 
         private IEnumerable<GhostWarp> GetPlayerWarps(EntityUid except)
         {
-            foreach (var player in _playerManager.Sessions)
+            foreach (var player in _player.Sessions)
             {
                 if (player.AttachedEntity is not {Valid: true} attached)
                     continue;
@@ -420,7 +435,7 @@ namespace Content.Server.Ghost
 
         private IEnumerable<GhostWarp> GetAdminGhostWarps(EntityUid except)
         {
-            foreach (var player in _playerManager.Sessions)
+            foreach (var player in _player.Sessions)
             {
                 if (player.AttachedEntity is not {Valid: true} attached)
                     continue;
@@ -443,7 +458,7 @@ namespace Content.Server.Ghost
 
         private IEnumerable<GhostWarp> GetRegularGhostWarps(EntityUid except)
         {
-            foreach (var player in _playerManager.Sessions)
+            foreach (var player in _player.Sessions)
             {
                 if (player.AttachedEntity is not {Valid: true} attached)
                     continue;
@@ -463,7 +478,26 @@ namespace Content.Server.Ghost
                 yield return new GhostWarp(GetNetEntity(attached), playerInfo, false);
             }
         }
+        // Forge-Change-start
+        private void HandleInvalidGhostRequest(EntitySessionEventArgs args, string message)
+        {
+            if (_rateLimit.CountAction(args.SenderSession, InvalidGhostRequestRateLimitKey) != RateLimitStatus.Allowed)
+                return;
 
+            Log.Warning(message);
+        }
+
+        private void OnInvalidGhostRequestRateLimited(ICommonSession session)
+        {
+            if (_configurationManager.GetCVar(CCVars.GhostInvalidRequestRateLimitDisconnect))
+                session.Channel.Disconnect("Too many invalid ghost requests.");
+        }
+
+        private void OnInvalidGhostRequestAlertAdmins(ICommonSession session)
+        {
+            _chatManager.SendAdminAlert($"Player {session.Name} is spamming invalid ghost requests.");
+        }
+        // Forge-Change-end
         #endregion
 
         private void OnEntityStorageInsertAttempt(EntityUid uid, GhostComponent comp, ref InsertIntoEntityStorageAttemptEvent args)
@@ -488,7 +522,7 @@ namespace Content.Server.Ghost
             var entityQuery = EntityQueryEnumerator<GhostComponent, VisibilityComponent>();
             while (entityQuery.MoveNext(out var uid, out var _, out var vis))
             {
-                if (!_tag.HasTag(uid, "AllowGhostShownByEvent"))
+                if (!_tag.HasTag(uid, AllowGhostShownByEventTag))
                     continue;
 
                 if (visible)
@@ -603,8 +637,8 @@ namespace Content.Server.Ghost
             // However, that should rarely happen.
             if (!string.IsNullOrWhiteSpace(mind.Comp.CharacterName))
                 _metaData.SetEntityName(ghost, mind.Comp.CharacterName);
-            else if (!string.IsNullOrWhiteSpace(mind.Comp.Session?.Name))
-                _metaData.SetEntityName(ghost, mind.Comp.Session.Name);
+            else if (mind.Comp.UserId is { } userId && _player.TryGetSessionById(userId, out var session))
+                _metaData.SetEntityName(ghost, session.Name);
 
             if (mind.Comp.TimeOfDeath.HasValue)
             {
@@ -632,7 +666,7 @@ namespace Content.Server.Ghost
         /// <param name="mindId">The mind ID of the player</param>
         public void ApplyAdminOOCColor(EntityUid ghostEntity, EntityUid mindId) // Mono
         {
-            if (!_mind.TryGetSession(mindId, out var session))
+            if (!_player.TryGetSessionByEntity(ghostEntity, out var session))
                 return;
 
             // Only apply admin OOC color if the player is actually an admin
@@ -690,9 +724,9 @@ namespace Content.Server.Ghost
 
             if (mind.PreventGhosting && !forced)
             {
-                if (mind.Session != null) // Logging is suppressed to prevent spam from ghost attempts caused by movement attempts
+                if (_player.TryGetSessionById(mind.UserId, out var session)) // Logging is suppressed to prevent spam from ghost attempts caused by movement attempts
                 {
-                    _chatManager.DispatchServerMessage(mind.Session, Loc.GetString("comp-mind-ghosting-prevented"),
+                    _chatManager.DispatchServerMessage(session, Loc.GetString("comp-mind-ghosting-prevented"),
                         true);
                 }
 

@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Collections.Concurrent; // Forge-Change
 using System.IO;
 using System.Net;
 using System.Text.Json;
@@ -51,10 +52,9 @@ namespace Content.Server.Database
         #endregion
 
         #region MonoCoins
-        Task<int> GetMonoCoinsAsync(NetUserId userId, CancellationToken cancel = default);
-        Task SetMonoCoinsAsync(NetUserId userId, int balance, CancellationToken cancel = default);
-        Task<int> AddMonoCoinsAsync(NetUserId userId, int amount, CancellationToken cancel = default);
-        Task<bool> TrySubtractMonoCoinsAsync(NetUserId userId, int amount, CancellationToken cancel = default);
+        Task<long> GetMonoCoinsAsync(NetUserId userId, CancellationToken cancel = default);
+        Task SetMonoCoinsAsync(NetUserId userId, long balance, CancellationToken cancel = default);
+        Task<long> AddMonoCoinsAsync(NetUserId userId, long amount, CancellationToken cancel = default);
         #endregion
 
         #region User Ids
@@ -413,7 +413,7 @@ namespace Content.Server.Database
         public string? Payload { get; set; }
     }
 
-    public sealed class ServerDbManager : IServerDbManager
+    public sealed partial class ServerDbManager : IServerDbManager
     {
         public static readonly Counter DbReadOpsMetric = Metrics.CreateCounter(
             "db_read_ops",
@@ -427,9 +427,9 @@ namespace Content.Server.Database
             "db_executing_ops",
             "Amount of active database operations. Note that some operations may be waiting for a database connection.");
 
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly IResourceManager _res = default!;
-        [Dependency] private readonly ILogManager _logMgr = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IResourceManager _res = default!;
+        [Dependency] private ILogManager _logMgr = default!;
 
         private ServerDbBase _db = default!;
         private LoggingProvider _msLogProvider = default!;
@@ -439,6 +439,7 @@ namespace Content.Server.Database
         // When running in integration tests, we'll use a single in-memory SQLite database connection.
         // This is that connection, close it when we shut down.
         private SqliteConnection? _sqliteInMemoryConnection;
+        private readonly ConcurrentDictionary<(Guid UserId, int Slot), SemaphoreSlim> _characterSlotWriteLocks = new(); // Forge-Change
 
         private readonly List<Action<DatabaseNotification>> _notificationHandlers = [];
 
@@ -498,13 +499,13 @@ namespace Content.Server.Database
         public Task SaveCharacterSlotAsync(NetUserId userId, ICharacterProfile? profile, int slot)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.SaveCharacterSlotAsync(userId, profile, slot));
+            return RunCharacterSlotWriteLocked(userId, slot, () => RunDbCommand(() => _db.SaveCharacterSlotAsync(userId, profile, slot))); // Forge-Change
         }
 
         public Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.DeleteSlotAndSetSelectedIndex(userId, deleteSlot, newSlot));
+            return RunCharacterSlotWriteLocked(userId, deleteSlot, () => RunDbCommand(() => _db.DeleteSlotAndSetSelectedIndex(userId, deleteSlot, newSlot))); // Forge-Change
         }
 
         public Task SaveAdminOOCColorAsync(NetUserId userId, Color color)
@@ -519,28 +520,22 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetPlayerPreferencesAsync(userId, cancel));
         }
 
-        public Task<int> GetMonoCoinsAsync(NetUserId userId, CancellationToken cancel = default)
+        public Task<long> GetMonoCoinsAsync(NetUserId userId, CancellationToken cancel = default)
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetMonoCoinsAsync(userId, cancel));
         }
 
-        public Task SetMonoCoinsAsync(NetUserId userId, int balance, CancellationToken cancel = default)
+        public Task SetMonoCoinsAsync(NetUserId userId, long balance, CancellationToken cancel = default)
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.SetMonoCoinsAsync(userId, balance, cancel));
         }
 
-        public Task<int> AddMonoCoinsAsync(NetUserId userId, int amount, CancellationToken cancel = default)
+        public Task<long> AddMonoCoinsAsync(NetUserId userId, long amount, CancellationToken cancel = default)
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.AddMonoCoinsAsync(userId, amount, cancel));
-        }
-
-        public Task<bool> TrySubtractMonoCoinsAsync(NetUserId userId, int amount, CancellationToken cancel = default)
-        {
-            DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.TrySubtractMonoCoinsAsync(userId, amount, cancel));
         }
 
         public Task AssignUserIdAsync(string name, NetUserId userId)
@@ -1213,7 +1208,21 @@ namespace Content.Server.Database
 
             await Task.Run(command);
         }
-
+        // Forge-Change-start
+        private async Task RunCharacterSlotWriteLocked(NetUserId userId, int slot, Func<Task> command)
+        {
+            var gate = _characterSlotWriteLocks.GetOrAdd((userId.UserId, slot), _ => new SemaphoreSlim(1, 1));
+            await gate.WaitAsync();
+            try
+            {
+                await command();
+            }
+            finally
+            {
+                gate.Release();
+            }
+        }
+        // Forge-Change-end
         private static T RunDbCommandCoreSync<T>(Func<T> command) where T : IAsyncResult
         {
             var task = command();

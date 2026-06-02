@@ -118,12 +118,11 @@ namespace Content.Server.Atmos.EntitySystems
         {
             if (tile.Air != null)
             {
-                if (tile.AirArchived == null) // Forge-Change
+                if (tile.AirArchived == null) // Mono Memory Improvement, reuse existing GasMixture if available.
                     tile.AirArchived = new GasMixture(tile.Air);
                 else
-                    tile.AirArchived.CopyFrom(tile.Air); // Forge-Change
+                    tile.AirArchived.CopyFrom(tile.Air);
             }
-
             tile.ArchivedCycle = fireCount;
         }
 
@@ -154,8 +153,7 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
 
             tile.Excited = true;
-            var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices));
-            AddChunkTile(gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
+            gridAtmosphere.ActiveTiles.Add(tile);
         }
 
         /// <summary>
@@ -173,10 +171,7 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
 
             tile.Excited = false;
-            if (TryGetChunkState(gridAtmosphere, GetAtmosChunk(tile.GridIndices), out var chunk) && chunk != null)
-                RemoveChunkTile(gridAtmosphere.ActiveTiles, chunk.ActiveTiles, tile);
-            else
-                gridAtmosphere.ActiveTiles.Remove(tile);
+            gridAtmosphere.ActiveTiles.Remove(tile);
 
             if (tile.ExcitedGroup == null)
                 return;

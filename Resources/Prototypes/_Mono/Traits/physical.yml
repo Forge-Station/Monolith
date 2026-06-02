@@ -415,6 +415,7 @@
   - Felinid
   - Tajaran
   - Demon # Forge Change
+  - Ariral # Forge-Change
   blacklist:
     components:
     - BorgChassis

@@ -6,6 +6,9 @@ namespace Content.Shared._Mono.FireControl;
 [RegisterComponent]
 public sealed partial class FireControlConsoleComponent : Component
 {
+    // Forge-Change-Start: renameable weapon preset slots stored on this console.
+    public const int WeaponPresetCount = 3;
+
     [ViewVariables]
     public EntityUid? ConnectedServer = null;
 
@@ -21,4 +24,11 @@ public sealed partial class FireControlConsoleComponent : Component
 
     [DataField]
     public float LogGridLookupRange = 1024f;
+
+    /// <summary>
+    /// Saved weapon selection lists bound to this console.
+    /// </summary>
+    [DataField]
+    public List<GunneryWeaponPresetData> WeaponPresets = new();
+    // Forge-Change-End
 }

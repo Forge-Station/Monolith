@@ -2,10 +2,11 @@
   name: ADS tender spawner
   id: SpawnRedactedBorg
   parent: MarkerBase
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: ConditionalSpawner
     prototypes:
-    - PlayerBorgRedactedGhostRole
+    - PlayerBorgForerunnerAiRemote # Forge-Change: PlayerBorgRedactedGhostRole > PlayerBorgForerunnerAiRemote; better use Forge ghost role
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -17,10 +18,11 @@
   name: ADS playtime-locked tender spawner
   id: SpawnRedactedBorgPlaytime
   parent: MarkerBase
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: ConditionalSpawner
     prototypes:
-    - PlayerBorgRedactedGhostRolePlaytime
+    - PlayerBorgForerunnerGhostRolePlaytime # Forge-Change: PlayerBorgRedactedGhostRolePlaytime > PlayerBorgForerunnerGhostRolePlaytime; better use Forge ghost role
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -45,6 +47,7 @@
   name: asakim warrior spawner
   id: SpawnAsakimWarrior
   parent: MarkerBase
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: ConditionalSpawner
     prototypes:

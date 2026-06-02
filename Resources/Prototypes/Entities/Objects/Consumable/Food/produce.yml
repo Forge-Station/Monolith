@@ -404,6 +404,8 @@
     cleanupExempt: true # Mono
   - type: TimedDespawn
     lifetime: 600
+  - type: Food
+    requiresSpecialDigestion: true
 
 - type: entity
   name: baked banana peel
@@ -1148,6 +1150,8 @@
       - Trash
   - type: TimedDespawn
     lifetime: 600
+  - type: Food
+    requiresSpecialDigestion: true
   - type: SolutionContainerManager
     solutions:
       food:

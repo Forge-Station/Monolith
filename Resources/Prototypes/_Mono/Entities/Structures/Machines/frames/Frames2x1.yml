@@ -91,10 +91,6 @@
       containers:
         - machine_board
         - machine_parts
-      machine_board:
-      whitelist:
-        components:
-          - MachineBoard2x1
     - type: Damageable
       damageContainer: StructuralInorganic
       damageModifierSet: Metallic
@@ -112,6 +108,10 @@
         - !type:DoActsBehavior
           acts: ["Destruction"]
     - type: MachineFrame
+      boardWhitelist: # Forge-Change
+        tags: # Forge-Change
+        - MachineBoard2x1 # Forge-Change
+      frameSize: 2x1
     - type: ContainerContainer
       containers:
         machine_board: !type:Container

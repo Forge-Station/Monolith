@@ -15,6 +15,7 @@
   shuttlePath: /Maps/_Mono/Shuttles/mclass.yml
   guidebookPage: Null
   class:
+  - Capital
   - Salvage
   engine:
   - AME

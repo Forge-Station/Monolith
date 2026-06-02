@@ -1,6 +1,7 @@
 - type: entity
   id: ClothingBeltDrakeIndustries
   name: drake industries webbing
+  suffix: Drake # Forge-Change
   parent: NFClothingBeltStorageBase
   description: Much less durable than the leather regular salvage rigs are made of, at least it comes in black. Painted with Drake Industries' colors.
   components:

@@ -1,0 +1,22 @@
+# Unlocked via ForgeBoardingTeleport* technologies; must appear on a lathe dynamic pack (AllTechPrintableTest).
+- type: latheRecipePack
+  id: ForgeBoardingTeleportRecipes
+  recipes:
+  - BoardingTeleportConsoleCircuitboard
+  - BoardingTeleportEngineMachineCircuitboard
+  - BoardingTeleportPlatformMachineCircuitboard
+  - BoardingBluespaceScramblerMachineCircuitboard
+  - BoardingBluespaceScramblerFlatpack
+  - BoardingTeleportRemote
+  - BoardingTeleportConsoleFlatpack
+  - BoardingTeleportEngineFlatpack
+  - BoardingTeleportPlatformFlatpack
+  - BoardingTeleportRemoteFlatpack
+  - BoardingTeleportEngineAdvancedFlatpack
+  - BoardingTeleportPlatformAdvancedFlatpack
+  - BoardingTeleportEngineAdvancedMachineCircuitboard
+  - BoardingTeleportPlatformAdvancedMachineCircuitboard
+  - BoardingTeleportEngineExperimentalFlatpack
+  - BoardingTeleportPlatformExperimentalFlatpack
+  - BoardingTeleportEngineExperimentalMachineCircuitboard
+  - BoardingTeleportPlatformExperimentalMachineCircuitboard

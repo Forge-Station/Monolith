@@ -1,0 +1,34 @@
+# Т3 voucher ship
+
+- type: vessel
+  id: Terit
+  parent: BaseVessel
+  name: CWH Теритт
+  description: Капитальное судно войны Империи с тяжелой броней
+  purchasable: false
+  limit: 1
+  price: 959400
+  category: Large
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Terit.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - AME
+
+- type: gameMap
+  id: Terit
+  mapName: 'CWH Теритт'
+  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Terit.yml
+  minPlayers: 0
+  stations:
+    Terit:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'CWH Теритт SEW{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

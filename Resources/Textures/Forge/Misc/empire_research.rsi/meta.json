@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "by vsxist for Forge",
+  "size": {
+    "x": 8,
+    "y": 8
+  },
+  "states": [
+    {
+      "name": "gear"
+    },
+    {
+      "name": "equipment"
+    },
+    {
+      "name": "shipyard"
+    },
+    {
+      "name": "weaponry"
+    }
+  ]
+}

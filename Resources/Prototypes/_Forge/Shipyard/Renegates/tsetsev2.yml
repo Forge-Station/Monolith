@@ -11,6 +11,10 @@
   guidebookPage: Null
   class:
   - Patrol
+  - Pursuit
+  - Pirate
+  engine:
+  - Plasma
 
 - type: gameMap
   id: tsetsev2

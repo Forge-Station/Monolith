@@ -17,7 +17,8 @@
   shuttlePath: /Maps/_Mono/Shuttles/USSP/svinya.yml
   guidebookPage: Null
   class:
-  - Pursuit
+  - Fighter
+  - Patrol
   engine:
   - Plasma
   cloakHunter: true # Do we keep this???

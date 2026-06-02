@@ -12,9 +12,8 @@
   shuttlePath: /Maps/_Mono/Shuttles/USSP/tayfun.yml
   guidebookPage: Null
   class:
-  - Pursuit
-  - Patrol
   - Corvette
+  - Patrol
   engine:
   - AME
 

@@ -192,6 +192,37 @@
                     0.45
                 ]
             ]
+        },
+        {
+        "name": "computer_emp",
+        "directions": 4
+        },
+        {
+            "name": "emp_shuttle",
+            "directions": 4,
+            "delays":
+            [
+                [
+                    0.4,
+                    0.4
+                ],
+                [
+                    0.4,
+                    0.4
+                ],
+                [
+                    0.4,
+                    0.4
+                ],
+                [
+                    0.4,
+                    0.4
+                ]
+            ]
+        },
+        {
+          "name": "emp_key",
+          "directions": 4
         }
     ]
 }

@@ -24,4 +24,16 @@ public sealed partial class JobPresetIdCardConsoleComponent : Component
 
     [DataField]
     public List<EntProtoId> BodyImplants = new();
+
+    /// <summary>
+    /// When set, job preset consoles skip age, species, and sex requirements (and do not require station-record demographics).
+    /// </summary>
+    [DataField]
+    public bool IgnoreDemographicRequirements;
+
+    /// <summary>
+    /// When set, the privileged ID only needs access tags for the target preset — not the target card's current accesses.
+    /// </summary>
+    [DataField]
+    public bool RequirePresetAccessOnly;
 }

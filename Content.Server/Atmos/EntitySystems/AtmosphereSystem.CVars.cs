@@ -1,4 +1,3 @@
-using System;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 
@@ -6,7 +5,7 @@ namespace Content.Server.Atmos.EntitySystems
 {
     public sealed partial class AtmosphereSystem
     {
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
 
         public bool SpaceWind { get; private set; }
         public float SpaceWindPressureForceDivisorThrow { get; private set; }
@@ -25,10 +24,11 @@ namespace Content.Server.Atmos.EntitySystems
         public bool ExcitedGroupsSpaceIsAllConsuming { get; private set; }
         public float AtmosMaxProcessTime { get; private set; }
         public float AtmosTickRate { get; private set; }
-        public int AtmosColdChunkRateDivider { get; private set; }
-        public bool AtmosForceFullGridDebug { get; private set; }
         public float Speedup { get; private set; }
         public float HeatScale { get; private set; }
+        public bool DeltaPressureDamage { get; private set; }
+        public int DeltaPressureParallelProcessPerIteration { get; private set; }
+        public int DeltaPressureParallelBatchSize { get; private set; }
 
         /// <summary>
         /// Time between each atmos sub-update.  If you are writing an atmos device, use AtmosDeviceUpdateEvent.dt
@@ -54,12 +54,13 @@ namespace Content.Server.Atmos.EntitySystems
             Subs.CVar(_cfg, CCVars.Superconduction, value => Superconduction = value, true);
             Subs.CVar(_cfg, CCVars.AtmosMaxProcessTime, value => AtmosMaxProcessTime = value, true);
             Subs.CVar(_cfg, CCVars.AtmosTickRate, value => AtmosTickRate = value, true);
-            Subs.CVar(_cfg, CCVars.AtmosColdChunkRateDivider, value => AtmosColdChunkRateDivider = Math.Max(1, value), true);
-            Subs.CVar(_cfg, CCVars.AtmosForceFullGridDebug, value => AtmosForceFullGridDebug = value, true);
             Subs.CVar(_cfg, CCVars.AtmosSpeedup, value => Speedup = value, true);
             Subs.CVar(_cfg, CCVars.AtmosHeatScale, value => { HeatScale = value; InitializeGases(); }, true);
             Subs.CVar(_cfg, CCVars.ExcitedGroups, value => ExcitedGroups = value, true);
             Subs.CVar(_cfg, CCVars.ExcitedGroupsSpaceIsAllConsuming, value => ExcitedGroupsSpaceIsAllConsuming = value, true);
+            Subs.CVar(_cfg, CCVars.DeltaPressureDamage, value => DeltaPressureDamage = value, true);
+            Subs.CVar(_cfg, CCVars.DeltaPressureParallelToProcessPerIteration, value => DeltaPressureParallelProcessPerIteration = value, true);
+            Subs.CVar(_cfg, CCVars.DeltaPressureParallelBatchSize, value => DeltaPressureParallelBatchSize = value, true);
         }
     }
 }

@@ -6,6 +6,7 @@ using Content.Shared._Mono.FireControl;
 using Content.Shared.Power;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Map;
+using Robust.Shared.Player;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using System.Linq;
@@ -14,6 +15,8 @@ using System.Numerics;
 using Content.Server._Mono.SpaceArtillery;
 using Content.Server._Mono.SpaceArtillery.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Server._Forge.ShipWeapons; // Forge-Change
+using Content.Shared._Forge.ShipWeapons.Components; // Forge-Change
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Timing;
 using Content.Shared.Interaction;
@@ -25,12 +28,13 @@ namespace Content.Server._Mono.FireControl;
 
 public sealed partial class FireControlSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PowerReceiverSystem _power = default!;
-    [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private GunSystem _gun = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PowerReceiverSystem _power = default!;
+    [Dependency] private RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private ShipWeaponHomeGridSystem _shipWeaponHomeGrid = default!; // Forge-Change
     /// <summary>
     /// Dictionary of entities that have visualization enabled
     /// </summary>
@@ -57,6 +61,7 @@ public sealed partial class FireControlSystem : EntitySystem
 
         InitializeConsole();
         InitializeTargetGuided();
+        InitializeUpgrades(); // Forge-Change
 
         _artilleryQuery = GetEntityQuery<SpaceArtilleryComponent>();
         _fireRotateQuery = GetEntityQuery<FireControlRotateComponent>();
@@ -93,6 +98,15 @@ public sealed partial class FireControlSystem : EntitySystem
                 ("valueColor", component.UsedProcessingPower <= component.ProcessingPower - 2 ? "green" : "yellow")
             )
         );
+        // Forge-Change-Start
+        args.PushMarkup(
+            Loc.GetString(
+                "gunnery-server-examine-slots",
+                ("registered", component.Controlled.Count),
+                ("maxActive", component.MaxWeapons)
+            )
+        );
+        // Forge-Change-End
     }
 
     private void OnControllablePowerChanged(EntityUid uid, FireControllableComponent component, PowerChangedEvent args)
@@ -130,7 +144,7 @@ public sealed partial class FireControlSystem : EntitySystem
             return;
 
         var currentGrid = _xform.GetGrid(uid);
-        if (currentGrid != server.ConnectedGrid)
+        if (currentGrid != server.ConnectedGrid || !CanUseOnCurrentGrid(uid)) // Forge-Change
         {
             // Weapon is no longer on the same grid - unregister it
             Unregister(uid, component);
@@ -207,7 +221,9 @@ public sealed partial class FireControlSystem : EntitySystem
 
         while (query.MoveNext(out var controllable, out var controlComp))
         {
-            if (_xform.GetGrid(controllable) == grid && EntityManager.GetComponent<TransformComponent>(controllable).Anchored)
+            if (_xform.GetGrid(controllable) == grid && // Forge-Change
+                EntityManager.GetComponent<TransformComponent>(controllable).Anchored && // Forge-Change
+                CanUseOnCurrentGrid(controllable)) // Forge-Change
                 TryRegister(controllable, controlComp);
         }
 
@@ -250,7 +266,7 @@ public sealed partial class FireControlSystem : EntitySystem
         return true;
     }
 
-    private void Unregister(EntityUid controllable, FireControllableComponent? component = null)
+    public void Unregister(EntityUid controllable, FireControllableComponent? component = null) // Forge-Change
     {
         if (!Resolve(controllable, ref component))
             return;
@@ -273,11 +289,15 @@ public sealed partial class FireControlSystem : EntitySystem
         if (gridServer.ServerUid == null || gridServer.ServerComponent == null)
             return false;
 
+        if (!CanUseOnCurrentGrid(controllable)) // Forge-Change
+            return false;
+
         var processingPowerCost = GetProcessingPowerCost(controllable, component);
 
         if (processingPowerCost > GetRemainingProcessingPower(gridServer.ServerUid.Value, gridServer.ServerComponent))
             return false;
 
+        // Forge-Change: registration limited by processing power only (MaxWeapons caps active firing).
         if (gridServer.ServerComponent.Controlled.Add(controllable))
         {
             gridServer.ServerComponent.UsedProcessingPower += processingPowerCost;
@@ -297,6 +317,19 @@ public sealed partial class FireControlSystem : EntitySystem
 
         return component.ProcessingPower - component.UsedProcessingPower;
     }
+
+    // Forge-Change-Start: cap simultaneous firing to server MaxWeapons.
+    /// <summary>
+    /// Caps the weapon list to the server's simultaneous firing limit.
+    /// </summary>
+    public List<NetEntity> LimitActiveWeapons(List<NetEntity> weapons, FireControlServerComponent component)
+    {
+        if (component.MaxWeapons <= 0 || weapons.Count <= component.MaxWeapons)
+            return weapons;
+
+        return weapons.Take(component.MaxWeapons).ToList();
+    }
+    // Forge-Change-End
 
     public int GetProcessingPowerCost(EntityUid controllable, FireControllableComponent? component = null)
     {
@@ -339,6 +372,12 @@ public sealed partial class FireControlSystem : EntitySystem
         }
 
         return (controlGrid.ControllingServer, server);
+    }
+
+    private bool CanUseOnCurrentGrid(EntityUid uid) // Forge-Change
+    {
+        return !TryComp<ShipWeaponHomeGridComponent>(uid, out var homeGrid) ||
+               _shipWeaponHomeGrid.IsOnHomeGrid(uid, homeGrid);
     }
 
     /// <summary>
@@ -400,6 +439,8 @@ public sealed partial class FireControlSystem : EntitySystem
         if (!Resolve(server, ref component))
             return;
 
+        weapons = LimitActiveWeapons(weapons, component);
+
         var grid = component.ConnectedGrid;
         if (grid != null && !CanFireWeapons(grid.Value))
             return;
@@ -437,7 +478,7 @@ public sealed partial class FireControlSystem : EntitySystem
             if (TryComp<FireControllableComponent>(controllable, out var controlComp))
             {
                 var currentGrid = _xform.GetGrid(controllable);
-                if (currentGrid != component.ConnectedGrid)
+                if (currentGrid != component.ConnectedGrid || !CanUseOnCurrentGrid(controllable)) // Forge-Change
                 {
                     Unregister(controllable, controlComp);
                 }
@@ -682,12 +723,15 @@ public sealed partial class FireControlSystem : EntitySystem
     }
 
     /// <summary>
-    /// Sends a visualization event to all clients
+    /// Sends a visualization event to clients whose PVS overlaps the weapon (not broadcast map-wide).
     /// </summary>
     /// <param name="entityUid">Entity to visualize</param>
     /// <param name="directions">Firing direction data</param>
     public void SendVisualizationEvent(EntityUid entityUid, Dictionary<float, bool> directions)
     {
+        if (TerminatingOrDeleted(entityUid))
+            return;
+
         var netEntity = GetNetEntity(entityUid);
 
         var ev = new FireControlVisualizationEvent(
@@ -695,7 +739,7 @@ public sealed partial class FireControlSystem : EntitySystem
             directions
         );
 
-        RaiseNetworkEvent(ev);
+        RaiseNetworkEvent(ev, Filter.Pvs(entityUid, entityManager: EntityManager));
     }
 
     /// <summary>
@@ -712,14 +756,16 @@ public sealed partial class FireControlSystem : EntitySystem
         {
             // Turn off visualization
             _visualizedEntities.Remove(entityUid);
-            RaiseNetworkEvent(new FireControlVisualizationEvent(netEntity));
+            if (!TerminatingOrDeleted(entityUid))
+                RaiseNetworkEvent(new FireControlVisualizationEvent(netEntity), Filter.Pvs(entityUid, entityManager: EntityManager));
             return false;
         }
 
         // Turn on visualization
         _visualizedEntities.Add(entityUid);
         var directions = CheckAllDirections(entityUid);
-        RaiseNetworkEvent(new FireControlVisualizationEvent(netEntity, directions));
+        if (!TerminatingOrDeleted(entityUid))
+            RaiseNetworkEvent(new FireControlVisualizationEvent(netEntity, directions), Filter.Pvs(entityUid, entityManager: EntityManager));
         return true;
     }
 }

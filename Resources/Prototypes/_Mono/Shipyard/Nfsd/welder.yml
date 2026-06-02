@@ -6,14 +6,14 @@
   name: TSF-ENG Welder
   description: A multipurpose, utilitarian but cramped vessel envisioned as an all-in-one multitool for ship repair and resource extraction. Capable of detecting cloaked vessels.
   price: 78200
-  category: Small
+  category: Medium
   group: Security
   access: Security
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/welder.yml
   guidebookPage: Null
   class:
-  - Patrol
   - Salvage
+  - Atmospherics
   engine:
   - Uranium
   company:

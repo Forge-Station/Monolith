@@ -25,6 +25,8 @@
       - EncryptionKeyUllmanIndustries
       - EncryptionKeyBlackhawk
       - EncryptionKeyTechnicLogistic
+      - EncryptionKeyHarmony # Forge-change
+      - EncryptionKeyDrakeIndustries # Forge-change
 
 - type: entity
   parent: TelecomServer
@@ -43,6 +45,8 @@
 #      - EncryptionKeyService #Mono end
       - EncryptionKeyCommand #Mono
       - EncryptionKeyNfsd
+      - EncryptionKeyTsfTech # Forge-Change
+      - EncryptionKeyTsfCom # Forge-Change
 #      - EncryptionKeyTraffic #Mono
 
 - type: entity

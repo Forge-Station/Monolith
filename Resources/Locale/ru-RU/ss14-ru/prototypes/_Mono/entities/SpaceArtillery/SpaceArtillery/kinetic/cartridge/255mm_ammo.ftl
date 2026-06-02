@@ -1,2 +1,2 @@
-ent-255mmCartridge = снаряд 255 мм
+ent-255mmCartridgeAPHE = снаряд 255 мм
     .desc = Химически разгоняемый снаряд для пушек Bofors калибра 255 мм.

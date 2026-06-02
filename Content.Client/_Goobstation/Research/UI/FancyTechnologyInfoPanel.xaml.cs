@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2025 starch
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Client.Lathe;
 using Content.Client.Research;
@@ -16,15 +20,23 @@ namespace Content.Client._Goobstation.Research.UI;
 [GenerateTypedNameReferences]
 public sealed partial class FancyTechnologyInfoPanel : Control
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ILogManager _logManager = default!; // Frontier
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ILogManager _logManager = default!; // Frontier
 
     private ISawmill _sawmill = default!; // Frontier: added debug log
     public TechnologyPrototype Prototype;
     public Action<TechnologyPrototype>? BuyAction;
+    public Action<TechnologyPrototype>? NavigateToTechnologyAction;
 
-    public FancyTechnologyInfoPanel(TechnologyPrototype proto, bool hasAccess, ResearchAvailability availability, SpriteSystem sprite)
+    public FancyTechnologyInfoPanel(
+        TechnologyPrototype proto,
+        bool hasAccess,
+        ResearchAvailability availability,
+        SpriteSystem sprite,
+        TechnologyPrototype? returnToTech = null,
+        Action? onReturn = null,
+        string? navigationBreadcrumb = null)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
@@ -80,7 +92,7 @@ public sealed partial class FancyTechnologyInfoPanel : Control
 
         Color? color = availability switch
         {
-            ResearchAvailability.Researched => Color.LimeGreen,
+            ResearchAvailability.Researched => ResearchColorScheme.GetTechItemColors(ResearchAvailability.Researched).InfoText,
             ResearchAvailability.PrereqsMet => Color.Crimson,
             ResearchAvailability.Unavailable => Color.Crimson,
             _ => null
@@ -91,6 +103,23 @@ public sealed partial class FancyTechnologyInfoPanel : Control
         );
 
         ResearchButton.Disabled = !hasAccess || availability != ResearchAvailability.Available;
+
+        if (!string.IsNullOrEmpty(navigationBreadcrumb))
+        {
+            NavigationBreadcrumbScroll.Visible = true;
+            var breadcrumbMsg = new FormattedMessage();
+            breadcrumbMsg.AddMarkupOrThrow(Loc.GetString(
+                "research-console-navigation-breadcrumb",
+                ("path", navigationBreadcrumb)));
+            NavigationBreadcrumbLabel.SetMessage(breadcrumbMsg);
+        }
+
+        if (returnToTech != null && onReturn != null)
+        {
+            ReturnButton.Visible = true;
+            ReturnButton.Text = Loc.GetString("research-console-return-to-tech", ("name", Loc.GetString(returnToTech.Name)));
+            ReturnButton.OnPressed += _ => onReturn();
+        }
 
         // Replace the event handling method to use a simpler approach
         ResearchButton.OnPressed += args =>
@@ -124,7 +153,9 @@ public sealed partial class FancyTechnologyInfoPanel : Control
         {
             var tech = _proto.Index(techId);
             var description = research.GetTechnologyDescription(tech, true, false, true);
-            RequiredTechContainer.AddChild(new MiniTechnologyCardControl(tech, _proto, sprite, description));
+            var card = new MiniTechnologyCardControl(tech, _proto, sprite, description);
+            card.OnTechnologyPressed += args => NavigateToTechnologyAction?.Invoke(args);
+            RequiredTechContainer.AddChild(card);
         }
     }
 

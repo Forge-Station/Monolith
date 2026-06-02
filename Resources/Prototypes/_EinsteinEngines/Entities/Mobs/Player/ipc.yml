@@ -128,6 +128,9 @@
   - type: CanHostGuardian
   - type: WeldingHealable
   - type: TTS
+  - type: RetroMonitorView # Mono
+  - type: Addiction # Forge-change
+    enabled: false # idk just safe
 
 - type: entity
   save: false

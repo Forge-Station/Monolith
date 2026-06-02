@@ -7,18 +7,31 @@ namespace Content.Server.Weapons.Ranged.Systems;
 public sealed partial class GunSystem
 {
     /// <summary>
-    /// Adds ammo to a ballistic ammo provider by incrementing UnspawnedCount.
+    /// Adds an ammo entity to a BallisticAmmoProvider (Mono - entire method)
     /// </summary>
-    public void AddBallisticAmmo(EntityUid uid, BallisticAmmoProviderComponent component, int amount = 1)
+    public void AddBallisticAmmo(Entity<BallisticAmmoProviderComponent?> ent, EntityUid ammoEntity)
     {
-        component.UnspawnedCount += amount;
-
-        DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.UnspawnedCount));
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+        ent.Comp.Entities.Add(ammoEntity);
+        DirtyField(ent, ent.Comp, nameof(BallisticAmmoProviderComponent.Entities));
     }
 
     protected override void Cycle(EntityUid uid, BallisticAmmoProviderComponent component, MapCoordinates coordinates)
     {
         EntityUid? ent = null;
+
+        // Forge-Change-start: drop stale ballistic entities before cycle (Drake seismic launcher).
+        var removedInvalid = false;
+        while (component.Entities.Count > 0 && !Exists(component.Entities[^1]))
+        {
+            component.Entities.RemoveAt(component.Entities.Count - 1);
+            removedInvalid = true;
+        }
+
+        if (removedInvalid)
+            DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
+        // Forge-Change-end
 
         // TODO: Combine with TakeAmmo
         if (component.Entities.Count > 0)

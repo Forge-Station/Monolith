@@ -1,1 +1,3 @@
-ent-SmallLightDim = Always Powered, Dim
+ent-SmallLightDim = маленький светильник
+    .desc = Светильник, постоянно находящийся под питанием.
+    .suffix = Всегда включён, тусклый

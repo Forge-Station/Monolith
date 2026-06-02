@@ -1,132 +1,109 @@
 <!-- Copyright Rane (elijahrane@gmail.com) 2025 -->
 <!-- All rights reserved. Relicensed under AGPL with permission -->
 
+<!-- Forge-Change-Start: three-column gunnery UI with collapsible side panels and edge-mounted toggles. -->
 <controls:FancyWindow xmlns="https://spacestation14.io"
             xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
             xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
             xmlns:ui="clr-namespace:Content.Client._Mono.FireControl.UI"
             xmlns:shields="clr-namespace:Content.Client._Crescent.ShipShields.UI"
             Title="{Loc 'gunnery-window-title'}"
-            SetSize="1000 800"
-            MinSize="1000 800">
+            SetSize="1300 800"
+            MinHeight="700">
     <BoxContainer Name="RootBox" Orientation="Horizontal">
-        <BoxContainer Orientation="Vertical" MinWidth="300" MaxWidth="300" HorizontalExpand="False" Margin="5 0 5 5">
-            <PanelContainer VerticalExpand="True" HorizontalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BorderThickness="3" BorderColor="#35434d" BackgroundColor="#696969"/>
-                </PanelContainer.PanelOverride>
-        <BoxContainer Orientation="Vertical" MinWidth="290" MaxWidth="290" HorizontalExpand="False" Margin="0 2.5 0 2.5">
-            <PanelContainer VerticalExpand="True" HorizontalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BorderThickness="3" BorderColor="#1f1f1f" BackgroundColor="#1f1f1f"/>
-                </PanelContainer.PanelOverride>
-                <BoxContainer Name="ControlsBox" Orientation="Vertical" MinWidth="285" MaxWidth="285" HorizontalExpand="False" Margin="0 0 0 0">
-            <!-- Status Section -->
-            <controls:StripeBack MinSize="48 48">
-                <Label Name="ServerStatus" Text="{Loc 'gunnery-window-disconnected'}"
-                       StyleClasses="LabelKeyText" HorizontalAlignment="Center"/>
-            </controls:StripeBack>
-            <PanelContainer VerticalExpand="False" HorizontalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BorderThickness="4" BorderColor="#2e2e2e" BackgroundColor="#1c1c1c" />
-                </PanelContainer.PanelOverride>
-            <Button Name="RefreshButton" Access="Public" Text="{Loc admin-logs-refresh}"
-                    StyleClasses="ButtonSquare" Margin="2 2 2 2"/>
-            </PanelContainer>
-            <!-- Forge-Change-Start -->
-            <PanelContainer VerticalExpand="False" HorizontalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BorderThickness="4" BorderColor="#2e2e2e" BackgroundColor="#1c1c1c" />
-                </PanelContainer.PanelOverride>
-            <CheckBox Name="ShowIFFCheckbox" Access="Public" Text="{Loc 'gunnery-show-iff'}"
-                      Margin="4 2 2 2" Pressed="True"/>
-            </PanelContainer>
-            <!-- Forge-Change-End -->
-
-            <!-- Forge-Change-Start -->
-            <!-- IFF search filter -->
-            <PanelContainer VerticalExpand="False" HorizontalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BorderThickness="4" BorderColor="#2e2e2e" BackgroundColor="#1c1c1c" />
-                </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 2 4 4">
+        <!-- Left: collapsible controls -->
+        <PanelContainer Name="ControlsPanel" MinWidth="300" MaxWidth="300" HorizontalExpand="False"
+                        VerticalExpand="True" Margin="5 5 0 5">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BorderThickness="3" BorderColor="#35434d" BackgroundColor="#1f1f1f"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Name="ControlsBox" Orientation="Vertical" Margin="4">
+                <controls:StripeBack MinSize="36 36">
+                    <Label Name="ServerStatus" Text="{Loc 'gunnery-window-disconnected'}"
+                           StyleClasses="LabelKeyText" HorizontalAlignment="Center"/>
+                </controls:StripeBack>
+                <Button Name="RefreshButton" Access="Public" Text="{Loc admin-logs-refresh}"
+                        StyleClasses="ButtonSquare" Margin="0 2"/>
+                <CheckBox Name="ShowIFFCheckbox" Access="Public" Text="{Loc 'gunnery-show-iff'}"
+                          Margin="0 2" Pressed="True"/>
+                <BoxContainer Orientation="Vertical" Margin="0 2">
                     <Label Text="{Loc 'gunnery-iff-search'}"/>
                     <LineEdit Name="IffSearchCriteria" Access="Public" HorizontalExpand="True"/>
                 </BoxContainer>
-            </PanelContainer>
-
-            <!-- Shield status -->
-            <PanelContainer Name="ShieldPanel" Visible="False" VerticalExpand="False" HorizontalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BorderThickness="4" BorderColor="#2e2e2e" BackgroundColor="#1c1c1c" />
-                </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 2 4 4">
-                    <Label Text="{Loc 'gunnery-shield-label'}"/>
-                    <shields:ShipShieldBar Name="ShieldBar" HorizontalExpand="True" MinHeight="20"/>
-                </BoxContainer>
-            </PanelContainer>
-            <!-- Forge-Change-End -->
-
-            <!-- Weapons Control Section -->
-            <controls:StripeBack MinSize="48 48" Margin="0 0 0 0">
-                <Label Name="WeaponsLabel" Text="{Loc 'gunnery-guns'}" HorizontalAlignment="Center" StyleClasses="StatusFieldTitle"/>
-            </controls:StripeBack>
-            <BoxContainer Orientation="Horizontal" Margin="0 0">
-                <Button Name="SelectAllButton" Access="Public" Text="{Loc 'gunnery-select-all'}"
-                        StyleClasses="OpenRight" HorizontalExpand="True"/>
-                <Button Name="UnselectAllButton" Access="Public" Text="{Loc 'gunnery-unselect-all'}"
-                        StyleClasses="OpenLeft" HorizontalExpand="True"/>
-            </BoxContainer>
-            <PanelContainer VerticalExpand="False" HorizontalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BorderThickness="4" BorderColor="#262626" BackgroundColor="#111111" />
-                </PanelContainer.PanelOverride>
-            <BoxContainer Orientation="Vertical" MinWidth="256" MaxWidth="256" HorizontalExpand="False" Margin="2 3 2 3">
-                <PanelContainer VerticalExpand="False" HorizontalExpand="True">
-                    <PanelContainer.PanelOverride>
-                        <gfx:StyleBoxFlat BorderThickness="4" BorderColor="#2e2e2e" BackgroundColor="#1c1c1c" />
-                    </PanelContainer.PanelOverride>
-            <Button Name="SelectBallisticButton" Access="Public" Text="Ballistics"
-                    StyleClasses="ButtonSquare" HorizontalExpand="True" Margin="4 4"/>
+                <PanelContainer Name="ShieldPanel" Visible="False" Margin="0 2">
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                        <Label Text="{Loc 'gunnery-shield-label'}"/>
+                        <shields:ShipShieldBar Name="ShieldBar" HorizontalExpand="True" MinHeight="20"/>
+                    </BoxContainer>
                 </PanelContainer>
-            <PanelContainer VerticalExpand="False" HorizontalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BorderThickness="4" BorderColor="#2e2e2e" BackgroundColor="#1c1c1c" />
-                </PanelContainer.PanelOverride>
-            <Button Name="SelectEnergyButton" Access="Public" Text="Energy"
-                    StyleClasses="ButtonSquare" HorizontalExpand="True" Margin="4 4"/>
-            </PanelContainer>
-            <PanelContainer VerticalExpand="False" HorizontalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BorderThickness="4" BorderColor="#2e2e2e" BackgroundColor="#1c1c1c" />
-                </PanelContainer.PanelOverride>
-            <Button Name="SelectMissileButton" Access="Public" Text="Missiles"
-                    StyleClasses="ButtonSquare" HorizontalExpand="True" Margin="4 4"/>
-            </PanelContainer>
+                <!-- Forge-Change: weapon preset lists -->
+                <controls:StripeBack MinSize="32 32" Margin="0 4 0 0">
+                    <Label Text="{Loc 'gunnery-presets-title'}" HorizontalAlignment="Center" StyleClasses="StatusFieldTitle"/>
+                </controls:StripeBack>
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <LineEdit Name="Preset1NameEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc gunnery-preset-name-placeholder}"/>
+                    <Button Name="Preset1LoadButton" Access="Public" Text="{Loc gunnery-preset-load}" MinWidth="72" Margin="4 0 0 0"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <LineEdit Name="Preset2NameEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc gunnery-preset-name-placeholder}"/>
+                    <Button Name="Preset2LoadButton" Access="Public" Text="{Loc gunnery-preset-load}" MinWidth="72" Margin="4 0 0 0"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <LineEdit Name="Preset3NameEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc gunnery-preset-name-placeholder}"/>
+                    <Button Name="Preset3LoadButton" Access="Public" Text="{Loc gunnery-preset-load}" MinWidth="72" Margin="4 0 0 0"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" Margin="0 2">
+                    <OptionButton Name="PresetSaveTarget" Access="Public" HorizontalExpand="True"/>
+                    <Button Name="SavePresetButton" Access="Public" Text="{Loc gunnery-preset-save}"
+                            StyleClasses="ButtonSquare" HorizontalExpand="True" Margin="0 2 0 0"/>
+                </BoxContainer>
+                <Label Name="PresetStatusLabel" Access="Public" HorizontalAlignment="Center" Margin="0 2 0 0"/>
             </BoxContainer>
-            </PanelContainer>
+        </PanelContainer>
 
-            <!-- Weapons List -->
-            <PanelContainer VerticalExpand="True" Margin="0 3 0 3">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BackgroundColor="#111111" />
-                </PanelContainer.PanelOverride>
-                <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
-                    <BoxContainer Name="ControllablesBox" Orientation="Vertical"
-                                 HorizontalExpand="True" StyleClasses="transparentItemList"/>
-                </ScrollContainer>
-            </PanelContainer>
+        <!-- Center: radar with always-visible collapse handles -->
+        <LayoutContainer Name="RadarHost" HorizontalExpand="True" VerticalExpand="True" Margin="0 5">
+            <ui:FireControlNavControl Name="NavRadar"/>
+            <Button Name="ControlsPanelToggle" Access="Public" Text="«"
+                    StyleClasses="ButtonSquare" MinSize="22 80"/>
+            <Button Name="WeaponsPanelToggle" Access="Public" Text="»"
+                    StyleClasses="ButtonSquare" MinSize="22 80"/>
+        </LayoutContainer>
+
+        <!-- Right: collapsible weapons -->
+        <PanelContainer Name="WeaponsPanel" MinWidth="300" MaxWidth="300" HorizontalExpand="False"
+                        VerticalExpand="True" Margin="0 5 5 5">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BorderThickness="3" BorderColor="#35434d" BackgroundColor="#1f1f1f"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical" Margin="4">
+                <controls:StripeBack MinSize="36 36">
+                    <Label Name="WeaponsLabel" Text="{Loc 'gunnery-guns'}" HorizontalAlignment="Center" StyleClasses="StatusFieldTitle"/>
+                </controls:StripeBack>
+                <BoxContainer Orientation="Horizontal" Margin="0 2">
+                    <Button Name="SelectAllButton" Access="Public" Text="{Loc 'gunnery-select-all'}"
+                            StyleClasses="OpenRight" HorizontalExpand="True"/>
+                    <Button Name="UnselectAllButton" Access="Public" Text="{Loc 'gunnery-unselect-all'}"
+                            StyleClasses="OpenLeft" HorizontalExpand="True"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" Margin="0 2">
+                    <Button Name="SelectBallisticButton" Access="Public" Text="{Loc gunnery-select-ballistic}"
+                            StyleClasses="ButtonSquare" HorizontalExpand="True" Margin="0 0 0 2"/>
+                    <Button Name="SelectEnergyButton" Access="Public" Text="{Loc gunnery-select-energy}"
+                            StyleClasses="ButtonSquare" HorizontalExpand="True" Margin="0 0 0 2"/>
+                    <Button Name="SelectMissileButton" Access="Public" Text="{Loc gunnery-select-missiles}"
+                            StyleClasses="ButtonSquare" HorizontalExpand="True"/>
+                </BoxContainer>
+                <PanelContainer VerticalExpand="True" Margin="0 2 0 0">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#111111"/>
+                    </PanelContainer.PanelOverride>
+                    <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
+                        <BoxContainer Name="ControllablesBox" Orientation="Vertical" HorizontalExpand="True"/>
+                    </ScrollContainer>
+                </PanelContainer>
             </BoxContainer>
-            </PanelContainer>
-        </BoxContainer>
-      </PanelContainer>
-    </BoxContainer>
-
-        <!-- Radar Display -->
-        <BoxContainer Name="RadarContainer" Orientation="Horizontal" HorizontalExpand="True" Margin="50 50 50 50">
-            <LayoutContainer>
-                <ui:FireControlNavControl Name="NavRadar" />
-            </LayoutContainer>
-        </BoxContainer>
+        </PanelContainer>
     </BoxContainer>
 </controls:FancyWindow>
+<!-- Forge-Change-End -->

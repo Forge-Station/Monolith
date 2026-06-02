@@ -10,7 +10,7 @@ gunnery-gun-select = {$name}
 gunnery-gun-select-ammo = {$name}: {$ammo}
 
 gunnery-server-examine-detail = The server is using [color={$valueColor}]{$usedProcessingPower}/{$processingPower}[/color] of its processing power.
-gunnery-server-examine-slots = The server currently supports [color={$valueColor}]{$usedSlots}/{$maxSlots}[/color] weapon slots.
+gunnery-server-examine-slots = The server has {$registered} weapons registered. Up to {$maxActive} can be fired at once.
 gunnery-server-tier-low = low-power gunnery control server
 gunnery-server-tier-medium = medium-power gunnery control server
 gunnery-server-tier-high = high-power gunnery control server
@@ -27,3 +27,22 @@ gunnery-upgrade-construction-active = Gunnery server upgrade to {$tier} is in pr
 gunnery-upgrade-construction-part = Required {$part}: {$inserted}/{$required}
 
 research-discipline-shiparmory = Ship Armory
+
+gunnery-presets-title = Weapon lists
+gunnery-preset-name-placeholder = List name
+gunnery-preset-load = Load
+gunnery-preset-save = Save list
+gunnery-preset-default-name = List {$number}
+gunnery-preset-save-target = {$name}
+gunnery-preset-saved = Saved list "{$name}" ({$count} weapons).
+gunnery-preset-applied = List "{$name}": selected {$count} weapons.
+gunnery-preset-empty = List "{$name}" has no saved weapons.
+
+gunnery-select-ballistic = Ballistic
+gunnery-select-energy = Energy
+gunnery-select-missiles = Missiles
+
+gunnery-panel-collapse-controls = Collapse control panel
+gunnery-panel-expand-controls = Expand control panel
+gunnery-panel-collapse-weapons = Collapse weapon list
+gunnery-panel-expand-weapons = Expand weapon list

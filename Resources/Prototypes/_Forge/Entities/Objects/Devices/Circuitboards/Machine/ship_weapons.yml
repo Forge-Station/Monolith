@@ -58,9 +58,9 @@
   - type: MachineBoard
     flatpackable: false
     requirements:
-      Capacitor: 6
-      Manipulator: 6
-      MatterBin: 4
+      Capacitor: 3
+      Manipulator: 3
+      MatterBin: 2
     stackRequirements:
       Steel: 40
       Glass: 25
@@ -71,7 +71,7 @@
       Silver: 20
       Copper: 60
       Lithium: 15
-      Plastitanium: 10
+      Plastitanium: 15
 
 - type: entity
   id: ForgeShipWeaponCircuitboardT4
@@ -82,13 +82,13 @@
     state: security
   - type: ShipWeaponBoard
     fabricationTime: 300
-    requiredPartRating: 4
+    requiredPartRating: 3
   - type: MachineBoard
     flatpackable: false
     requirements:
-      Capacitor: 8
-      Manipulator: 8
-      MatterBin: 6
+      Capacitor: 4
+      Manipulator: 4
+      MatterBin: 3
     stackRequirements:
       Steel: 70
       Glass: 40
@@ -101,7 +101,7 @@
       Silver: 30
       Copper: 80
       Lithium: 20
-      Plastitanium: 80
+      Plastitanium: 50
       UraniumDepleted: 5
       # Iridite: 3
 
@@ -363,8 +363,31 @@
   name: CHARON mass driver machine board
   description: A machine printed circuit board for an M381 CHARON mass driver.
   components:
+  - type: ShipWeaponBoard
+    fabricationTime: 300
+    requiredPartRating: 4
   - type: MachineBoard
     prototype: WeaponTurretCharonReloadPortable
+    flatpackable: false
+    requirements:
+      Capacitor: 4
+      Manipulator: 4
+      MatterBin: 3
+    stackRequirements:
+      Steel: 70
+      Glass: 40
+      Plasteel: 50
+      Gold: 40
+      Plasma: 30
+      Uranium: 20
+      Bluespace: 5
+      Diamond: 15
+      Silver: 30
+      Copper: 80
+      Lithium: 20
+      Plastitanium: 50
+      UraniumDepleted: 5
+      # Iridite: 3
   - type: Tag
     tags:
     - MachineBoard2x2
@@ -389,6 +412,7 @@
   components:
   - type: ShipWeaponBoard
     fabricationTime: 360
+    requiredPartRating: 3
   - type: MachineBoard
     prototype: WeaponTurretDrakeApolloMk2Portable
     requirements:

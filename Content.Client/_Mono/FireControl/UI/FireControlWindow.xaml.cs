@@ -2,6 +2,8 @@
 // All rights reserved. Relicensed under AGPL with permission
 
 using System.Linq;
+using System.Numerics;
+using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._Mono.Company;
 using Content.Shared._Mono.FireControl;
@@ -11,9 +13,9 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Client._Mono.FireControl.UI;
-
 [GenerateTypedNameReferences]
 public sealed partial class FireControlWindow : FancyWindow
 {
@@ -23,6 +25,10 @@ public sealed partial class FireControlWindow : FancyWindow
     public FireControlNavControl Radar => NavRadar;
     public Action? OnServerRefresh;
     public Action? OnWeaponSelectionChanged;
+    // Forge-Change-Start: weapon preset UI callbacks.
+    public Action<int, string>? OnPresetNameChanged;
+    public Action<int, string, List<string>>? OnPresetSaveRequested;
+    // Forge-Change-End
 
     public readonly Dictionary<NetEntity, Button> WeaponsList = new();
 
@@ -33,11 +39,42 @@ public sealed partial class FireControlWindow : FancyWindow
     private readonly Dictionary<NetEntity, ShipGunType> _weaponTypes = new();
 
     private FireControlConsoleBoundInterfaceState? _currentState;
+    // Forge-Change: max weapons that can be selected/fired at once (from server MaxWeapons).
+    private int _maxActiveWeapons = int.MaxValue;
+
+    private LineEdit[] _presetNameEdits = default!;
+    private Button[] _presetLoadButtons = default!;
+
+    // Forge-Change-Start: collapsible side panels with dynamic window width.
+    private bool _controlsPanelExpanded = true;
+    private bool _weaponsPanelExpanded = true;
+
+    private const float SidePanelBlockWidth = 305f;
+    private const float WindowChromeWidth = 42f;
+    private const float DefaultWindowHeight = 800f;
+    private const float MinimumWindowHeight = 700f;
+
+    private enum PanelSide
+    {
+        Left,
+        Right,
+    }
+    // Forge-Change-End
 
     public FireControlWindow()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+
+        _presetNameEdits = [Preset1NameEdit, Preset2NameEdit, Preset3NameEdit];
+        _presetLoadButtons = [Preset1LoadButton, Preset2LoadButton, Preset3LoadButton];
+
+        ControlsPanelToggle.OnPressed += _ => ToggleControlsPanel();
+        WeaponsPanelToggle.OnPressed += _ => ToggleWeaponsPanel();
+        InitializeRadarLayout();
+        UpdateControlsPanelState();
+        UpdateWeaponsPanelState();
+
         RefreshButton.OnPressed += _ => OnServerRefresh?.Invoke();
         ShowIFFCheckbox.OnToggled += args => NavRadar.ShowIFF = args.Pressed; // Forge-Change
         SelectAllButton.OnPressed += SelectAllWeapons;
@@ -46,7 +83,278 @@ public sealed partial class FireControlWindow : FancyWindow
         SelectEnergyButton.OnPressed += SelectEnergyWeapons;
         SelectMissileButton.OnPressed += SelectMissileWeapons;
         IffSearchCriteria.OnTextChanged += args => OnIffSearchChanged(args.Text);
+
+        InitializePresetControls();
+        ApplyWindowLayout(initial: true);
     }
+
+    // Forge-Change-Start: radar fill + edge toggle buttons that stay visible when window narrows.
+    private void InitializeRadarLayout()
+    {
+        LayoutContainer.SetAnchorPreset(NavRadar, LayoutContainer.LayoutPreset.Wide);
+        LayoutContainer.SetAnchorAndMarginPreset(ControlsPanelToggle, LayoutContainer.LayoutPreset.CenterLeft);
+        LayoutContainer.SetAnchorAndMarginPreset(WeaponsPanelToggle, LayoutContainer.LayoutPreset.CenterRight);
+
+        ControlsPanelToggle.MouseFilter = MouseFilterMode.Stop;
+        WeaponsPanelToggle.MouseFilter = MouseFilterMode.Stop;
+
+        // Draw toggles above the radar surface.
+        ControlsPanelToggle.SetPositionInParent(RadarHost.ChildCount - 1);
+        WeaponsPanelToggle.SetPositionInParent(RadarHost.ChildCount - 1);
+    }
+
+    private void ToggleControlsPanel()
+    {
+        _controlsPanelExpanded = !_controlsPanelExpanded;
+        UpdateControlsPanelState();
+        ApplyWindowLayout(resizedSide: PanelSide.Left);
+    }
+
+    private void ToggleWeaponsPanel()
+    {
+        _weaponsPanelExpanded = !_weaponsPanelExpanded;
+        UpdateWeaponsPanelState();
+        ApplyWindowLayout(resizedSide: PanelSide.Right);
+    }
+
+    private float GetRadarDisplayWidth()
+    {
+        var scaledSize = (MapGridControl.UIDisplayRadius + 4) * 2 * UIScale;
+        return MathF.Max(NavRadar.Width, scaledSize);
+    }
+
+    private float ComputeContentWidth()
+    {
+        var width = GetRadarDisplayWidth();
+
+        if (_controlsPanelExpanded)
+            width += SidePanelBlockWidth;
+
+        if (_weaponsPanelExpanded)
+            width += SidePanelBlockWidth;
+
+        return width;
+    }
+
+    private void ApplyWindowLayout(bool initial = false, PanelSide? resizedSide = null)
+    {
+        var targetWidth = ComputeContentWidth() + WindowChromeWidth;
+        MinSize = new Vector2(targetWidth, MinimumWindowHeight);
+
+        if (initial)
+        {
+            SetSize = new Vector2(targetWidth, DefaultWindowHeight);
+            return;
+        }
+
+        var widthDelta = targetWidth - Width;
+
+        if (resizedSide == PanelSide.Left && Math.Abs(widthDelta) > 0.1f)
+            LayoutContainer.SetPosition(this, Position + new Vector2(-widthDelta, 0));
+
+        SetSize = new Vector2(targetWidth, Height);
+    }
+    // Forge-Change-End
+
+    private void UpdateControlsPanelState()
+    {
+        ControlsPanel.Visible = _controlsPanelExpanded;
+        ControlsPanelToggle.Text = _controlsPanelExpanded ? "«" : "»";
+        ControlsPanelToggle.ToolTip = Loc.GetString(_controlsPanelExpanded
+            ? "gunnery-panel-collapse-controls"
+            : "gunnery-panel-expand-controls");
+    }
+
+    private void UpdateWeaponsPanelState()
+    {
+        WeaponsPanel.Visible = _weaponsPanelExpanded;
+        WeaponsPanelToggle.Text = _weaponsPanelExpanded ? "»" : "«";
+        WeaponsPanelToggle.ToolTip = Loc.GetString(_weaponsPanelExpanded
+            ? "gunnery-panel-collapse-weapons"
+            : "gunnery-panel-expand-weapons");
+    }
+
+    // Forge-Change-Start: three renameable weapon preset slots per console.
+    private void InitializePresetControls()
+    {
+        for (var i = 0; i < FireControlConsoleComponent.WeaponPresetCount; i++)
+        {
+            var index = i;
+            _presetNameEdits[i].Text = GetPresetDisplayName(i);
+            _presetNameEdits[i].OnTextEntered += _ => OnPresetNameCommitted(index);
+            _presetLoadButtons[i].OnPressed += _ => ApplyPreset(index);
+        }
+
+        SavePresetButton.OnPressed += _ => SaveActivePreset();
+        // OptionButton requires explicit SelectId on item pick.
+        PresetSaveTarget.OnItemSelected += args => PresetSaveTarget.SelectId(args.Id);
+        RebuildSaveTargetOptions();
+    }
+
+    private string GetDefaultPresetName(int index)
+    {
+        return Loc.GetString("gunnery-preset-default-name", ("number", index + 1));
+    }
+
+    private string GetPresetDisplayName(int index)
+    {
+        if (_currentState?.WeaponPresets != null
+            && index < _currentState.WeaponPresets.Length
+            && !string.IsNullOrWhiteSpace(_currentState.WeaponPresets[index].Name))
+        {
+            return _currentState.WeaponPresets[index].Name;
+        }
+
+        return GetDefaultPresetName(index);
+    }
+
+    private void SyncPresetNamesFromState()
+    {
+        var namesChanged = false;
+
+        for (var i = 0; i < FireControlConsoleComponent.WeaponPresetCount; i++)
+        {
+            if (_presetNameEdits[i].HasKeyboardFocus())
+                continue;
+
+            var displayName = GetPresetDisplayName(i);
+            if (_presetNameEdits[i].Text == displayName)
+                continue;
+
+            _presetNameEdits[i].Text = displayName;
+            namesChanged = true;
+        }
+
+        if (namesChanged)
+            RebuildSaveTargetOptions();
+    }
+
+    private void RebuildSaveTargetOptions()
+    {
+        var selected = PresetSaveTarget.SelectedId;
+        if (selected < 0)
+            selected = 0;
+
+        PresetSaveTarget.Clear();
+
+        for (var i = 0; i < FireControlConsoleComponent.WeaponPresetCount; i++)
+        {
+            var name = _presetNameEdits[i].Text.Trim();
+            if (string.IsNullOrWhiteSpace(name))
+                name = GetDefaultPresetName(i);
+
+            PresetSaveTarget.AddItem(Loc.GetString("gunnery-preset-save-target", ("name", name)), i);
+        }
+
+        if (selected >= 0 && selected < FireControlConsoleComponent.WeaponPresetCount)
+            PresetSaveTarget.SelectId(selected);
+        else
+            PresetSaveTarget.SelectId(0);
+    }
+
+    private void OnPresetNameCommitted(int index)
+    {
+        var name = _presetNameEdits[index].Text.Trim();
+        if (string.IsNullOrWhiteSpace(name))
+            name = GetDefaultPresetName(index);
+
+        _presetNameEdits[index].Text = name;
+        OnPresetNameChanged?.Invoke(index, name);
+        RebuildSaveTargetOptions();
+    }
+
+    private void SaveActivePreset()
+    {
+        var index = PresetSaveTarget.SelectedId;
+        if (index < 0 || index >= FireControlConsoleComponent.WeaponPresetCount)
+            return;
+
+        var name = _presetNameEdits[index].Text.Trim();
+        if (string.IsNullOrWhiteSpace(name))
+            name = GetDefaultPresetName(index);
+
+        _presetNameEdits[index].Text = name;
+        var weaponNames = GetSelectedWeaponNames();
+        OnPresetSaveRequested?.Invoke(index, name, weaponNames);
+
+        ShowPresetStatus(Loc.GetString("gunnery-preset-saved", ("name", name), ("count", weaponNames.Count)));
+    }
+
+    private void ApplyPreset(int index)
+    {
+        if (index < 0 || index >= FireControlConsoleComponent.WeaponPresetCount)
+            return;
+
+        var name = _presetNameEdits[index].Text.Trim();
+        if (string.IsNullOrWhiteSpace(name))
+            name = GetDefaultPresetName(index);
+
+        if (_currentState?.WeaponPresets == null
+            || index >= _currentState.WeaponPresets.Length
+            || _currentState.WeaponPresets[index].WeaponNames.Length == 0)
+        {
+            ShowPresetStatus(Loc.GetString("gunnery-preset-empty", ("name", name)), warning: true);
+            return;
+        }
+
+        var matched = MatchWeaponsByName(_currentState.WeaponPresets[index].WeaponNames);
+        PressWeaponsUpToLimit(matched);
+        OnWeaponSelectionChanged?.Invoke();
+        UpdateAllWeaponButtonTexts();
+
+        ShowPresetStatus(Loc.GetString("gunnery-preset-applied", ("name", name), ("count", matched.Count())));
+    }
+
+    private List<string> GetSelectedWeaponNames()
+    {
+        var names = new List<string>();
+
+        foreach (var (entity, button) in WeaponsList)
+        {
+            if (!button.Pressed)
+                continue;
+
+            var entry = _currentState?.FireControllables?.FirstOrDefault(c => c.NetEntity == entity);
+            if (entry.HasValue)
+                names.Add(entry.Value.Name);
+        }
+
+        return names;
+    }
+
+    private IEnumerable<NetEntity> MatchWeaponsByName(IReadOnlyList<string> weaponNames)
+    {
+        if (_currentState?.FireControllables == null)
+            yield break;
+
+        var used = new HashSet<NetEntity>();
+
+        foreach (var weaponName in weaponNames)
+        {
+            foreach (var controllable in _currentState.FireControllables)
+            {
+                if (controllable.Name != weaponName || used.Contains(controllable.NetEntity))
+                    continue;
+
+                used.Add(controllable.NetEntity);
+                yield return controllable.NetEntity;
+                break;
+            }
+        }
+    }
+
+    private void ShowPresetStatus(string message, bool warning = false)
+    {
+        PresetStatusLabel.Text = message;
+        PresetStatusLabel.FontColorOverride = warning ? Color.OrangeRed : Color.LightGreen;
+
+        Timer.Spawn(TimeSpan.FromSeconds(2.5), () =>
+        {
+            if (!PresetStatusLabel.Disposed)
+                PresetStatusLabel.Text = string.Empty;
+        });
+    }
+    // Forge-Change-End
 
     private void OnIffSearchChanged(string text)
     {
@@ -76,12 +384,46 @@ public sealed partial class FireControlWindow : FancyWindow
             };
     }
 
-    private void SelectAllWeapons(BaseButton.ButtonEventArgs args)
+    // Forge-Change-Start: client-side enforcement of MaxWeapons selection cap.
+    private int GetSelectedWeaponCount()
+    {
+        return WeaponsList.Values.Count(button => button.Pressed);
+    }
+
+    private bool TryToggleWeaponSelection(Button button)
+    {
+        if (!button.Pressed)
+            return true;
+
+        if (_maxActiveWeapons <= 0 || GetSelectedWeaponCount() <= _maxActiveWeapons)
+            return true;
+
+        button.Pressed = false;
+        return false;
+    }
+
+    private void PressWeaponsUpToLimit(IEnumerable<NetEntity> weaponEntities)
     {
         foreach (var button in WeaponsList.Values)
+            button.Pressed = false;
+
+        var selected = 0;
+        foreach (var weaponEntity in weaponEntities)
         {
+            if (_maxActiveWeapons > 0 && selected >= _maxActiveWeapons)
+                break;
+
+            if (!WeaponsList.TryGetValue(weaponEntity, out var button))
+                continue;
+
             button.Pressed = true;
+            selected++;
         }
+    }
+
+    private void SelectAllWeapons(BaseButton.ButtonEventArgs args)
+    {
+        PressWeaponsUpToLimit(WeaponsList.Keys);
 
         OnWeaponSelectionChanged?.Invoke();
 
@@ -102,23 +444,11 @@ public sealed partial class FireControlWindow : FancyWindow
 
     private void SelectBallisticWeapons(BaseButton.ButtonEventArgs args)
     {
-        // First unselect all weapons
-        foreach (var button in WeaponsList.Values)
-        {
-            button.Pressed = false;
-        }
+        var ballistic = WeaponsList.Keys
+            .Where(weaponEntity =>
+                _weaponTypes.TryGetValue(weaponEntity, out var type) && type == ShipGunType.Ballistic);
 
-        // Then select only ballistic weapons
-        foreach (var kvp in WeaponsList)
-        {
-            var weaponEntity = kvp.Key;
-            var button = kvp.Value;
-
-            if (_weaponTypes.TryGetValue(weaponEntity, out var type) && type == ShipGunType.Ballistic)
-            {
-                button.Pressed = true;
-            }
-        }
+        PressWeaponsUpToLimit(ballistic);
 
         OnWeaponSelectionChanged?.Invoke();
         UpdateAllWeaponButtonTexts();
@@ -126,23 +456,11 @@ public sealed partial class FireControlWindow : FancyWindow
 
     private void SelectEnergyWeapons(BaseButton.ButtonEventArgs args)
     {
-        // First unselect all weapons
-        foreach (var button in WeaponsList.Values)
-        {
-            button.Pressed = false;
-        }
+        var energy = WeaponsList.Keys
+            .Where(weaponEntity =>
+                _weaponTypes.TryGetValue(weaponEntity, out var type) && type == ShipGunType.Energy);
 
-        // Then select only energy weapons
-        foreach (var kvp in WeaponsList)
-        {
-            var weaponEntity = kvp.Key;
-            var button = kvp.Value;
-
-            if (_weaponTypes.TryGetValue(weaponEntity, out var type) && type == ShipGunType.Energy)
-            {
-                button.Pressed = true;
-            }
-        }
+        PressWeaponsUpToLimit(energy);
 
         OnWeaponSelectionChanged?.Invoke();
         UpdateAllWeaponButtonTexts();
@@ -150,23 +468,11 @@ public sealed partial class FireControlWindow : FancyWindow
 
     private void SelectMissileWeapons(BaseButton.ButtonEventArgs args)
     {
-        // First unselect all weapons
-        foreach (var button in WeaponsList.Values)
-        {
-            button.Pressed = false;
-        }
+        var missiles = WeaponsList.Keys
+            .Where(weaponEntity =>
+                _weaponTypes.TryGetValue(weaponEntity, out var type) && type == ShipGunType.Missile);
 
-        // Then select only missile weapons
-        foreach (var kvp in WeaponsList)
-        {
-            var weaponEntity = kvp.Key;
-            var button = kvp.Value;
-
-            if (_weaponTypes.TryGetValue(weaponEntity, out var type) && type == ShipGunType.Missile)
-            {
-                button.Pressed = true;
-            }
-        }
+        PressWeaponsUpToLimit(missiles);
 
         OnWeaponSelectionChanged?.Invoke();
         UpdateAllWeaponButtonTexts();
@@ -180,21 +486,31 @@ public sealed partial class FireControlWindow : FancyWindow
         if (button.Pressed && controllable.HasManualReload && controllable.AmmoCount.HasValue)
         {
             button.Text = Loc.GetString("gunnery-gun-select-ammo", ("name", controllable.Name), ("ammo", controllable.AmmoCount.Value));
-
-            if (controllable.AmmoCount.Value == 0)
-            {
-                button.ModulateSelfOverride = Color.Red;
-            }
-            else
-            {
-                button.ModulateSelfOverride = null;
-            }
         }
         else
         {
             button.Text = Loc.GetString("gunnery-gun-select", ("name", controllable.Name));
-            button.ModulateSelfOverride = null;
         }
+
+        UpdateWeaponButtonVisualState(button, controllable);
+    }
+
+    // Forge-Change: green/red modulate override — toggle pressed pseudo-class looks inactive otherwise.
+    /// <summary>
+    /// Toggle buttons use a dark pressed pseudo-class; override modulate so selected weapons read clearly.
+    /// </summary>
+    private static void UpdateWeaponButtonVisualState(Button button, FireControllableEntry controllable)
+    {
+        if (!button.Pressed)
+        {
+            button.ModulateSelfOverride = null;
+            return;
+        }
+
+        if (controllable.HasManualReload && controllable.AmmoCount is 0)
+            button.ModulateSelfOverride = Color.Red;
+        else
+            button.ModulateSelfOverride = StyleNano.ButtonColorGoodDefault;
     }
 
     /// <summary>
@@ -225,6 +541,7 @@ public sealed partial class FireControlWindow : FancyWindow
     public void UpdateStatus(FireControlConsoleBoundInterfaceState state)
     {
         _currentState = state;
+        _maxActiveWeapons = state.MaxActiveWeapons; // Forge-Change
         NavRadar.UpdateState(state.NavState);
 
         // Forge-Change: bar reads the networked emitter directly; only sync visibility here.
@@ -243,6 +560,8 @@ public sealed partial class FireControlWindow : FancyWindow
         }
 
         UpdateWeaponsList(state);
+        EnforceActiveWeaponLimit();
+        SyncPresetNamesFromState();
 
         UpdateAllWeaponButtonTexts();
 
@@ -313,17 +632,22 @@ public sealed partial class FireControlWindow : FancyWindow
             }
             else
             {
+                // Forge-Change: ButtonSquare only (no OpenRight) + explicit selected color.
                 var button = new Button
                 {
                     ToggleMode = true,
                     Text = controllable.Name,
-                    StyleClasses = { "ButtonSquare OpenRight" },
+                    StyleClasses = { "ButtonSquare" },
+                    TextAlign = Label.AlignMode.Left,
                     HorizontalExpand = true,
-                    Margin = new Thickness(4, 1)
+                    Margin = new Thickness(2, 1)
                 };
 
                 button.OnToggled += _ =>
                 {
+                    if (!TryToggleWeaponSelection(button))
+                        return;
+
                     OnWeaponSelectionChanged?.Invoke();
                     UpdateAllWeaponButtonTexts();
                 };
@@ -347,4 +671,20 @@ public sealed partial class FireControlWindow : FancyWindow
         SelectAllButton.Disabled = WeaponsList.Count == 0;
         UnselectAllButton.Disabled = WeaponsList.Count == 0;
     }
+
+    /// <summary>
+    /// Trims selection when the active firing limit drops below the current selection count.
+    /// </summary>
+    private void EnforceActiveWeaponLimit()
+    {
+        if (_maxActiveWeapons <= 0)
+            return;
+
+        var selected = WeaponsList.Where(kvp => kvp.Value.Pressed).Select(kvp => kvp.Key).ToList();
+        if (selected.Count <= _maxActiveWeapons)
+            return;
+
+        PressWeaponsUpToLimit(selected);
+    }
+    // Forge-Change-End
 }

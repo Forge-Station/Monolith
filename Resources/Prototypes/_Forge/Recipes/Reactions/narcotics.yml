@@ -7,8 +7,6 @@
       amount: 1
     Acetone:
       amount: 1
-    Ammonia:
-      amount: 1
     Carbon:
       amount: 1
   products:
@@ -21,12 +19,10 @@
   reactants:
     Codeine:
       amount: 2
-    Hydroxide:
-      amount: 1
     SodiumHydroxide:
-      amount: 0.5
+      amount: 1
     Ethanol:
-      amount: 0.5
+      amount: 1
   products:
     Morphine: 4
 

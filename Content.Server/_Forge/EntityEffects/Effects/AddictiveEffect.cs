@@ -1,8 +1,9 @@
 using Content.Shared.EntityEffects;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
+using Content.Server._Forge.Chemistry.Addiction;
 
-namespace Content.Server._Forge.Chemistry.Addiction;
+namespace Content.Server._Forge.EntityEffects.Effects;
 
 [UsedImplicitly]
 public sealed partial class AddictiveEffect : EntityEffect

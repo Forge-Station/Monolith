@@ -1,0 +1,27 @@
+- type: entity
+  id: CigPackFake
+  parent: CigPackBase
+  name: Dr. Ist cigpack
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/fakecig.rsi
+  - type: Item
+    sprite: Forge/Objects/Specific/Medical/fakecig.rsi
+  - type: StorageFill
+    contents:
+    - id: FakeCigarette
+      amount: 10
+
+- type: entity
+  id: FakeCigarette
+  suffix: Fake
+  parent: Cigarette
+  name: cigarette
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Tabex
+            Quantity: 10

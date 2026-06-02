@@ -21,3 +21,35 @@
         reagents:
         - ReagentId: CombatNanites
           Quantity: 5
+
+- type: entity
+  name: naloxone medipen
+  parent: [ChemicalMedipen]
+  id: NaloxoneMedipen
+  description: A single-use medipen containing chemicals that regenerate morphine addictive.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: naloxone
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: naloxone_empty
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+        reagents:
+        - ReagentId: Naloxone
+          Quantity: 10
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 30
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: StaticPrice
+    price: 2500
+  - type: Tag
+    tags: []

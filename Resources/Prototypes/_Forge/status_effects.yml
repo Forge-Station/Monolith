@@ -1,3 +1,11 @@
 - type: statusEffect
   id: ChainsawShieldSlowed
   alwaysAllowed: true
+
+- type: statusEffect
+  id: BlockedBreathing
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: TunnelVision
+  alwaysAllowed: true

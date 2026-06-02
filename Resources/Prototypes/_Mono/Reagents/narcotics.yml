@@ -23,6 +23,7 @@
             Toxin: -1
         # Forge-change-start
       - !type:HealthChange
+        hidden: true
         conditions:
           - !type:TotalDamage
             min: 5

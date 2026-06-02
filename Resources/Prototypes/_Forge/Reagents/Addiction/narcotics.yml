@@ -9,15 +9,19 @@
       effectInterval: 6
       effects:
         - !type:Jitter
-          probability: 0.4
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-stimulants-hint-1
-            - addiction-stimulants-hint-2
-          visualType: Medium
-          probability: 0.08
+          amplitude: 3
+          frequency: 3
+          time: 2
+          probability: 0.35
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.9
+          sprintSpeedModifier: 0.9
+          statusLifetime: 6
       withdrawalEffects:
+        - !type:Jitter
+          amplitude: 3
+          frequency: 3
+          time: 6
         - !type:MovespeedModifier
           walkSpeedModifier: 0.9
           sprintSpeedModifier: 0.9
@@ -42,25 +46,32 @@
       effectInterval: 5
       effects:
         - !type:Jitter
-          probability: 0.6
+          amplitude: 5
+          frequency: 4
+          time: 5
         - !type:MovespeedModifier
-          walkSpeedModifier: 0.85
-          sprintSpeedModifier: 0.85
+          walkSpeedModifier: 0.88
+          sprintSpeedModifier: 0.88
           statusLifetime: 5
         - !type:GenericStatusEffect
           key: Stutter
           component: StutteringAccent
-          time: 4
+          time: 5
           type: Add
-          probability: 0.3
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-stimulants-hint-3
-            - addiction-stimulants-hint-4
-          visualType: MediumCaution
-          probability: 0.08
       withdrawalEffects:
+        - !type:Jitter
+          amplitude: 5
+          frequency: 4
+          time: 5
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.88
+          sprintSpeedModifier: 0.88
+          statusLifetime: 5
+        - !type:GenericStatusEffect
+          key: Stutter
+          component: StutteringAccent
+          time: 5
+          type: Add
         - !type:MovespeedModifier
           walkSpeedModifier: 0.7
           sprintSpeedModifier: 0.7
@@ -82,33 +93,41 @@
             - addiction-stimulants-withdrawal-3
           visualType: MediumCaution
           probability: 0.15
+        - !type:TunnelVision
+          outer: 1.0
+          inner: 0.1
+          time: 7
+          refresh: true
     - minTolerance: 0.9
       effectInterval: 4
       effects:
         - !type:Jitter
-          probability: 0.8
+          amplitude: 7
+          frequency: 5
+          time: 4
         - !type:MovespeedModifier
-          walkSpeedModifier: 0.6
-          sprintSpeedModifier: 0.6
+          walkSpeedModifier: 0.65
+          sprintSpeedModifier: 0.65
           statusLifetime: 4
         - !type:GenericStatusEffect
           key: TemporaryBlindness
           component: TemporaryBlindness
           time: 2
           type: Add
-          probability: 0.15
+          probability: 0.01
         - !type:HealthChange
           damage:
             types:
               Poison: 1
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-stimulants-hint-5
-            - addiction-stimulants-hint-6
-          visualType: LargeCaution
-          probability: 0.1
       withdrawalEffects:
+        - !type:Jitter
+          amplitude: 7
+          frequency: 5
+          time: 4
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.65
+          sprintSpeedModifier: 0.65
+          statusLifetime: 4
         - !type:Emote
           emote: Yawn
           showInChat: true
@@ -136,6 +155,11 @@
             - addiction-stimulants-withdrawal-5
           visualType: LargeCaution
           probability: 0.2
+        - !type:TunnelVision
+          outer: 1.0
+          inner: 0.1
+          time: 7
+          refresh: true
 
 # region Desoxyephedrine
 - type: addiction
@@ -148,18 +172,19 @@
       effectInterval: 5
       effects:
         - !type:Jitter
-          probability: 0.5
+          amplitude: 4
+          frequency: 4
+          time: 2
+          probability: 0.4
         - !type:Emote
           emote: Scream
-          probability: 0.1
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-desoxy-hint-1
-            - addiction-desoxy-hint-2
-          visualType: Medium
-          probability: 0.08
+          probability: 0.06
       withdrawalEffects:
+        - !type:Jitter
+          amplitude: 4
+          frequency: 4
+          time: 2
+          probability: 0.4
         - !type:MovespeedModifier
           walkSpeedModifier: 0.85
           sprintSpeedModifier: 0.85
@@ -184,24 +209,33 @@
     - minTolerance: 0.65
       effectInterval: 4
       effects:
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.8
+          sprintSpeedModifier: 0.8
+          statusLifetime: 5
         - !type:Jitter
-          probability: 0.7
+          amplitude: 6
+          frequency: 5
+          time: 2
+          probability: 0.6
         - !type:GenericStatusEffect
           key: Stutter
           component: StutteringAccent
-          time: 5
+          time: 4
           type: Add
-          probability: 0.4
         - !type:ChemVomit
-          probability: 0.15
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-desoxy-hint-3
-            - addiction-desoxy-hint-4
-          visualType: MediumCaution
-          probability: 0.08
+          probability: 0.02
       withdrawalEffects:
+        - !type:Jitter
+          amplitude: 6
+          frequency: 5
+          time: 2
+          probability: 0.6
+        - !type:GenericStatusEffect
+          key: Stutter
+          component: StutteringAccent
+          time: 4
+          type: Add
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
@@ -228,35 +262,39 @@
     - minTolerance: 0.9
       effectInterval: 3
       effects:
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.75
+          sprintSpeedModifier: 0.75
+          statusLifetime: 5
         - !type:Jitter
-          probability: 0.9
+          amplitude: 8
+          frequency: 6
+          time: 2
+          probability: 0.8
         - !type:GenericStatusEffect
           key: Stutter
           component: StutteringAccent
-          time: 8
-          type: Add
-          probability: 0.6
-        - !type:GenericStatusEffect
-          key: TemporaryBlindness
-          component: TemporaryBlindness
           time: 3
           type: Add
-          probability: 0.2
         - !type:ChemVomit
-          probability: 0.25
+          probability: 0.02
         - !type:HealthChange
           damage:
             types:
               Asphyxiation: 2
               Poison: 1.5
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-desoxy-hint-5
-            - addiction-desoxy-hint-6
-          visualType: LargeCaution
-          probability: 0.1
+          probability: 0.06
       withdrawalEffects:
+        - !type:Jitter
+          amplitude: 8
+          frequency: 6
+          time: 2
+          probability: 0.8
+        - !type:GenericStatusEffect
+          key: Stutter
+          component: StutteringAccent
+          time: 3
+          type: Add
         - !type:Emote
           emote: Yawn
           showInChat: true
@@ -294,7 +332,7 @@
 # region SpaceDrugs
 - type: addiction
   id: SpaceDrugs
-  withdrawalDelay: 540
+  withdrawalDelay: 240
   toleranceDecayRate: 0
   withdrawalDecayRate: 0.0001
   stages:
@@ -311,14 +349,7 @@
         - !type:Emote
           emote: Laugh
           showInChat: true
-          probability: 0.15
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-spacedrugs-hint-1
-            - addiction-spacedrugs-hint-2
-          visualType: Medium
-          probability: 0.06
+          probability: 0.12
       withdrawalEffects:
         - !type:Emote
           emote: Yawn
@@ -348,19 +379,12 @@
           refresh: false
           probability: 0.6
         - !type:MovespeedModifier
-          walkSpeedModifier: 0.9
-          sprintSpeedModifier: 0.9
+          walkSpeedModifier: 0.92
+          sprintSpeedModifier: 0.92
           statusLifetime: 8
         - !type:Emote
           emote: Laugh
-          probability: 0.2
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-spacedrugs-hint-3
-            - addiction-spacedrugs-hint-4
-          visualType: Medium
-          probability: 0.06
+          probability: 0.15
       withdrawalEffects:
         - !type:Emote
           emote: Yawn
@@ -394,18 +418,11 @@
           component: TemporaryBlindness
           time: 2
           type: Add
-          probability: 0.1
+          probability: 0.07
         - !type:MovespeedModifier
-          walkSpeedModifier: 0.8
-          sprintSpeedModifier: 0.8
+          walkSpeedModifier: 0.85
+          sprintSpeedModifier: 0.85
           statusLifetime: 6
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-spacedrugs-hint-5
-            - addiction-spacedrugs-hint-6
-          visualType: MediumCaution
-          probability: 0.06
       withdrawalEffects:
         - !type:Emote
           emote: Yawn
@@ -430,6 +447,11 @@
             - addiction-spacedrugs-withdrawal-6
           visualType: LargeCaution
           probability: 0.2
+        - !type:TunnelVision
+          outer: 1.0
+          inner: 0.1
+          time: 7
+          refresh: true
 
 # region Ephedrine
 - type: addiction
@@ -442,18 +464,14 @@
       effectInterval: 5
       effects:
         - !type:Jitter
-          probability: 0.3
+          amplitude: 3
+          frequency: 3
+          time: 2
+          probability: 0.25
         - !type:MovespeedModifier
           walkSpeedModifier: 0.95
           sprintSpeedModifier: 0.95
           statusLifetime: 5
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-ephedrine-hint-1
-            - addiction-ephedrine-hint-2
-          visualType: Medium
-          probability: 0.05
       withdrawalEffects:
         - !type:GenericStatusEffect
           key: Drowsiness
@@ -468,11 +486,24 @@
             - addiction-ephedrine-withdrawal-2
           visualType: MediumCaution
           probability: 0.12
+        - !type:GenericStatusEffect
+          key: Stutter
+          component: StutteringAccent
+          time: 5
+          type: Add
     - minTolerance: 0.7
       effectInterval: 4
       effects:
+        - !type:GenericStatusEffect
+          key: Stutter
+          component: StutteringAccent
+          time: 4
+          type: Add
         - !type:Jitter
-          probability: 0.5
+          amplitude: 5
+          frequency: 4
+          time: 2
+          probability: 0.4
         - !type:MovespeedModifier
           walkSpeedModifier: 0.9
           sprintSpeedModifier: 0.9
@@ -481,14 +512,12 @@
           damage:
             types:
               Asphyxiation: 0.2
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-ephedrine-hint-3
-            - addiction-ephedrine-hint-4
-          visualType: Medium
-          probability: 0.1
       withdrawalEffects:
+        - !type:GenericStatusEffect
+          key: Stutter
+          component: StutteringAccent
+          time: 4
+          type: Add
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
@@ -506,32 +535,32 @@
             - addiction-ephedrine-withdrawal-4
           visualType: MediumCaution
           probability: 0.12
+        - !type:TunnelVision
+          outer: 1.0
+          inner: 0.1
+          time: 7
+          refresh: true
     - minTolerance: 0.9
       effectInterval: 3
       effects:
         - !type:Jitter
-          probability: 0.45
+          amplitude: 7
+          frequency: 5
+          time: 2
+          probability: 0.4
         - !type:MovespeedModifier
-          walkSpeedModifier: 0.6
-          sprintSpeedModifier: 0.6
+          walkSpeedModifier: 0.65
+          sprintSpeedModifier: 0.65
           statusLifetime: 4
         - !type:HealthChange
           damage:
             types:
-              Asphyxiation: 2.5
+              Asphyxiation: 0.6
         - !type:GenericStatusEffect
           key: Stutter
           component: StutteringAccent
-          time: 6
+          time: 3
           type: Add
-          probability: 0.3
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-ephedrine-hint-5
-            - addiction-ephedrine-hint-6
-          visualType: LargeCaution
-          probability: 0.05
       withdrawalEffects:
         - !type:Emote
           emote: Yawn
@@ -564,24 +593,27 @@
             - addiction-ephedrine-withdrawal-6
           visualType: LargeCaution
           probability: 0.15
+        - !type:GenericStatusEffect
+          key: Stutter
+          component: StutteringAccent
+          time: 3
+          type: Add
+        - !type:TunnelVision
+          outer: 1.0
+          inner: 0.1
+          time: 7
+          refresh: true
 
 # region Fentanyl
 - type: addiction
   id: Fentanyl
-  withdrawalDelay: 480 # Fentanyl is aggressive
+  withdrawalDelay: 300
   toleranceDecayRate: 0
   withdrawalDecayRate: 0.0002
   stages:
     - minTolerance: 0.25
       effectInterval: 8
-      effects:
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-fentanyl-hint-1
-            - addiction-fentanyl-hint-2
-          visualType: Medium
-          probability: 0.07
+      effects: []
       withdrawalEffects:
         - !type:MovespeedModifier
           walkSpeedModifier: 0.9
@@ -598,14 +630,14 @@
       effectInterval: 6
       effects:
         - !type:Jitter
-          probability: 0.25
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-fentanyl-hint-3
-            - addiction-fentanyl-hint-4
-          visualType: MediumCaution
-          probability: 0.08
+          amplitude: 3
+          frequency: 3
+          time: 2
+          probability: 0.2
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.88
+          sprintSpeedModifier: 0.88
+          statusLifetime: 6
       withdrawalEffects:
         - !type:MovespeedModifier
           walkSpeedModifier: 0.75
@@ -634,28 +666,35 @@
             - addiction-fentanyl-withdrawal-4
           visualType: MediumCaution
           probability: 0.15
+        - !type:GenericStatusEffect
+          key: BlockedBreathing
+          component: BlockedBreathing
+          time: 3
+          type: Add
+          probability: 0.3
+        - !type:TunnelVision
+          outer: 1.0
+          inner: 0.1
+          time: 7
+          refresh: true
     - minTolerance: 0.8
       effectInterval: 4
       effects:
+        - !type:Jitter
+          amplitude: 5
+          frequency: 4
+          time: 2
+          probability: 0.4
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.8
+          sprintSpeedModifier: 0.8
+          statusLifetime: 4
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
           type: Remove
           time: 2
           probability: 0.07
-        - !type:Jitter
-          probability: 0.5
-        - !type:MovespeedModifier
-          walkSpeedModifier: 0.8
-          sprintSpeedModifier: 0.8
-          statusLifetime: 4
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-fentanyl-hint-5
-            - addiction-fentanyl-hint-6
-          visualType: LargeCaution
-          probability: 0.1
       withdrawalEffects:
         - !type:Emote
           emote: Yawn
@@ -683,7 +722,7 @@
           damage:
             types:
               Poison: 1
-              Asphyxiation: 1.5  # respiratory depression — same as the OD mechanism
+              Asphyxiation: 1.5
         - !type:PopupMessage
           type: Local
           messages:
@@ -691,29 +730,32 @@
             - addiction-fentanyl-withdrawal-6
           visualType: LargeCaution
           probability: 0.2
+        - !type:GenericStatusEffect
+          key: BlockedBreathing
+          component: BlockedBreathing
+          time: 4
+          type: Add
+          probability: 0.7
+        - !type:TunnelVision
+          outer: 1.0
+          inner: 0.1
+          time: 7
+          refresh: true
 
 # region Morphine
 - type: addiction
   id: Morphine
-  withdrawalDelay: 540 # 9 min
+  withdrawalDelay: 300
   toleranceDecayRate: 0
   withdrawalDecayRate: 0.0003
   stages:
     - minTolerance: 0.2
       effectInterval: 10
-      effects:
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-morphine-hint-1
-            - addiction-morphine-hint-2
-          visualType: Medium
-          probability: 0.06
       withdrawalEffects:
         - !type:MovespeedModifier
-          walkSpeedModifier: 0.92
-          sprintSpeedModifier: 0.92
-          statusLifetime: 10
+          walkSpeedModifier: 0.95
+          sprintSpeedModifier: 0.95
+          statusLifetime: 11
           probability: 0.3
         - !type:PopupMessage
           type: Local
@@ -726,19 +768,17 @@
       effectInterval: 7
       effects:
         - !type:Jitter
-          probability: 0.2
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-morphine-hint-3
-            - addiction-morphine-hint-4
-          visualType: MediumCaution
-          probability: 0.07
+          amplitude: 4
+          time: 7
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.9
+          sprintSpeedModifier: 0.9
+          statusLifetime: 8
       withdrawalEffects:
         - !type:MovespeedModifier
           walkSpeedModifier: 0.78
           sprintSpeedModifier: 0.78
-          statusLifetime: 7
+          statusLifetime: 8
         - !type:GenericStatusEffect
           key: Drowsiness
           component: Drowsiness
@@ -746,7 +786,7 @@
           time: 2
           probability: 0.055
         - !type:ChemVomit
-          probability: 0.15
+          probability: 0.03
         - !type:HealthChange
           damage:
             types:
@@ -758,29 +798,32 @@
             - addiction-morphine-withdrawal-4
           visualType: MediumCaution
           probability: 0.12
+        - !type:GenericStatusEffect
+          key: BlockedBreathing
+          component: BlockedBreathing
+          time: 4
+          type: Add
+          probability: 0.9
+        - !type:TunnelVision
+          outer: 1.0
+          inner: 0.1
+          time: 7
+          refresh: true
     - minTolerance: 0.8
       effectInterval: 5
       effects:
-        - !type:GenericStatusEffect
-          key: Drowsiness
-          component: Drowsiness
-          type: Remove
-          time: 2
-          probability: 0.06
         - !type:Jitter
-          probability: 0.4
+          amplitude: 6
+          time: 7
         - !type:MovespeedModifier
           walkSpeedModifier: 0.82
           sprintSpeedModifier: 0.82
-          statusLifetime: 5
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-morphine-hint-5
-            - addiction-morphine-hint-6
-          visualType: LargeCaution
-          probability: 0.08
+          statusLifetime: 6
       withdrawalEffects:
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.7
+          sprintSpeedModifier: 0.7
+          statusLifetime: 6
         - !type:Emote
           emote: Yawn
           showInChat: true
@@ -796,9 +839,9 @@
           component: TemporaryBlindness
           time: 2
           type: Add
-          probability: 0.1
+          probability: 0.05
         - !type:ChemVomit
-          probability: 0.3
+          probability: 0.05
         - !type:HealthChange
           damage:
             types:
@@ -811,18 +854,28 @@
             - addiction-morphine-withdrawal-6
           visualType: LargeCaution
           probability: 0.18
+        - !type:GenericStatusEffect
+          key: BlockedBreathing
+          component: BlockedBreathing
+          time: 4
+          type: Add
+        - !type:TunnelVision
+          outer: 1.0
+          inner: 0.1
+          alpha: 0
+          time: 7
+          refresh: true
 
 # region Nicotine
 - type: addiction
   id: Nicotine
-  withdrawalDelay: 600
-  toleranceDecayRate: 0.00008
+  withdrawalDelay: 90
+  toleranceDecayRate: 0
   withdrawalDecayRate: 0.0001
   stages:
     - minTolerance: 0.2
-      withdrawalOnly: true
-      effectInterval: 120
-      effects:
+      effectInterval: 85
+      withdrawalEffects:
         - !type:PopupMessage
           type: Local
           messages:
@@ -832,28 +885,16 @@
           visualType: Medium
           probability: 0.5
     - minTolerance: 0.45
-      effectInterval: 60
+      effectInterval: 65
       effects:
         - !type:Emote
           emote: Cough
-          probability: 0.7
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-nicotine-hint-1
-            - addiction-nicotine-hint-2
-            - addiction-nicotine-hint-3
-            - addiction-nicotine-hint-4
-            - addiction-nicotine-hint-5
-          visualType: Medium
-          probability: 0.5
+          probability: 0.2
       withdrawalEffects:
-        - !type:GenericStatusEffect
-          key: Drowsiness
-          component: Drowsiness
-          type: Add
-          time: 2
-          probability: 0.01
+        - !type:Jitter
+          amplitude: 3
+          time: 1
+          probability: 0.09
         - !type:PopupMessage
           type: Local
           messages:
@@ -862,21 +903,11 @@
           visualType: MediumCaution
           probability: 0.4
     - minTolerance: 0.8
-      effectInterval: 30
+      effectInterval: 45
       effects:
         - !type:Emote
           emote: Cough
           probability: 0.7
-        - !type:Jitter
-          probability: 0.08
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-nicotine-hint-4
-            - addiction-nicotine-hint-5
-            - addiction-nicotine-hint-6
-          visualType: Medium
-          probability: 0.5
       withdrawalEffects:
         - !type:Emote
           emote: Yawn
@@ -889,13 +920,9 @@
           time: 3
           probability: 0.02
         - !type:Jitter
-          probability: 0.2
-        - !type:GenericStatusEffect
-          key: Stutter
-          component: StutteringAccent
-          time: 3
-          type: Add
-          probability: 0.15
+          amplitude: 3
+          time: 1
+          probability: 0.1
         - !type:PopupMessage
           type: Local
           messages:
@@ -904,3 +931,9 @@
             - addiction-nicotine-withdrawal-5
           visualType: MediumCaution
           probability: 0.4
+        - !type:GenericStatusEffect
+          key: BlockedBreathing
+          component: BlockedBreathing
+          time: 1
+          type: Add
+          probability: 0.01

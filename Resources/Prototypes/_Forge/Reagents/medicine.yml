@@ -90,9 +90,16 @@
       metabolismRate: 0.5
       effects:
         - !type:CureAddictionEffect
+          hidden: true
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Fentanyl
+              min: 0.5
+              max: 1.0
           addictionId: Fentanyl
-          amount: 0.08
+          amount: 0.008
         - !type:GenericStatusEffect
+          hidden: true
           key: Drowsiness
           component: Drowsiness
           time: 2
@@ -101,16 +108,18 @@
           conditions:
             - !type:AddictionCondition
               addictionId: Fentanyl
-              min: 0.4
+              min: 0.7
               max: 1.0
         - !type:ChemVomit
+          hidden: true
           probability: 0.5
           conditions:
             - !type:AddictionCondition
               addictionId: Fentanyl
-              min: 0.4
+              min: 0.7
               max: 1.0
         - !type:PopupMessage
+          hidden: true
           type: Local
           visualType: MediumCaution
           messages: [ "reagent-effect-naloxone-withdrawal" ]
@@ -118,21 +127,29 @@
           conditions:
             - !type:AddictionCondition
               addictionId: Fentanyl
-              min: 0.4
+              min: 0.7
               max: 1.0
         - !type:Emote
+          hidden: true
           emote: Yawn
           showInChat: true
           probability: 0.1
           conditions:
             - !type:AddictionCondition
               addictionId: Fentanyl
-              min: 0.4
+              min: 0.7
               max: 1.0
         - !type:CureAddictionEffect
+          hidden: true
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.5
+              max: 1.0
           addictionId: Morphine
-          amount: 0.06
+          amount: 0.006
         - !type:GenericStatusEffect
+          hidden: true
           key: Drowsiness
           component: Drowsiness
           time: 2
@@ -141,25 +158,28 @@
           conditions:
             - !type:AddictionCondition
               addictionId: Morphine
-              min: 0.4
+              min: 0.7
               max: 1.0
         - !type:Emote
+          hidden: true
           emote: Yawn
           showInChat: true
           probability: 0.1
           conditions:
             - !type:AddictionCondition
               addictionId: Morphine
-              min: 0.4
+              min: 0.7
               max: 1.0
         - !type:ChemVomit
+          hidden: true
           probability: 0.3
           conditions:
             - !type:AddictionCondition
               addictionId: Morphine
-              min: 0.4
+              min: 0.7
               max: 1.0
         - !type:PopupMessage
+          hidden: true
           type: Local
           visualType: MediumCaution
           messages: [ "reagent-effect-naloxone-withdrawal" ]
@@ -167,5 +187,51 @@
           conditions:
             - !type:AddictionCondition
               addictionId: Morphine
-              min: 0.4
+              min: 0.6
               max: 1.0
+        - !type:GenericStatusEffect
+          hidden: true
+          key: BlockedBreathing
+          component: BlockedBreathing
+          type: Remove
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-naloxone
+
+# region Tabex
+# nicotine antagonist
+- type: reagent
+  id: Tabex
+  name: reagent-name-tabex
+  group: Medicine
+  desc: reagent-desc-tabex
+  physicalDesc: reagent-physical-desc-clear
+  flavor: bitter
+  color: "#d3d46c"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+        - !type:CureAddictionEffect
+          hidden: true
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Nicotine
+              min: 0.5
+              max: 1.0
+          addictionId: Nicotine
+          amount: 0.0008
+        - !type:CureAddictionEffect
+          hidden: true
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Nicotine
+              min: 0.0
+              max: 0.5
+          addictionId: Nicotine
+          amount: 0.00002
+        - !type:AddictiveEffect
+          hidden: true
+          addictionId: Nicotine
+          toleranceGain: 0.000000001 # dont call waithdrawl if we smoke this
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-tabex

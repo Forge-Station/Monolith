@@ -41,5 +41,6 @@
     pocket2: MedicalAppraisalTool
   storage:
     back:
+    - CigPackFake # Forge-change
     - EncryptionKeyService # Forge-change
     - BoxFolderMedicalDoctor

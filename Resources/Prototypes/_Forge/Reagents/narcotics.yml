@@ -60,15 +60,12 @@
           conditions:
             - !type:TotalDamage
               min: 5
-            - !type:AddictionCondition
-              addictionId: Morphine
-              min: 0.0
-              max: 0.5
           damage:
             groups:
               Brute: -5 # Painkiller btw
               Toxin: -0.5
         - !type:HealthChange
+          hidden: true
           conditions:
             - !type:TotalDamage
               min: 5
@@ -78,8 +75,10 @@
               max: 1.0
           damage:
             groups:
-              Brute: -2
-              Toxin: -0.2
+              Brute: 2.5
+              Toxin: 0.2
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-tolerance
     Narcotic:
       metabolismRate: 0.75
       effects:
@@ -102,13 +101,14 @@
           slurSpeech: true
           boozePower: 4
         - !type:ChemVomit
+          hidden: true
           probability: 0.1
           conditions:
             - !type:ReagentThreshold
               min: 3
             - !type:AddictionCondition
               addictionId: Morphine
-              min: 0.5
+              min: 0.8
               max: 1.0
         - !type:ChemVomit
           probability: 0.04

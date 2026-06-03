@@ -406,76 +406,76 @@
 # endregion
 
 #region welder
-- type: entity
-  id: NFGoblinMadeWelder
-  parent: [ NFBaseGoblinMadeTools, Welder ]
-  name: burner torch
-  description: An improvised welding tool made out of a plastic bottle, an empty soda can, a spray nozzle, and a leaking battery.
-  components:
-  - type: Sprite
-    sprite: _NF/Objects/Tools/goblin_tools/welder.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-    - state: can1
-      map: ["randomWelderCan"]
-    - state: welder_flame
-      visible: false
-      shader: unshaded
-      map: ["enum.ToggleVisuals.Layer"]
-    - sprite: _NF/Objects/Tools/goblin_tools/overlay_sparks.rsi
-      state: overlay-icon
-      shader: unshaded
-  - type: GenericVisualizer
-    visuals:
-      enum.ToggleableVisuals.Enabled:
-        enum.ToggleableVisuals.Layer:
-          True: { visible: true }
-          False: { visible: false }
-  - type: Item
-    sprite: _NF/Objects/Tools/goblin_tools/welder.rsi
-    inhandVisuals:
-      left:
-      - state: inhand-left
-      - sprite: _NF/Objects/Tools/goblin_tools/overlay_sparks.rsi
-        state: overlay-inhand-left
-        shader: unshaded
-      right:
-      - state: inhand-right
-      - sprite: _NF/Objects/Tools/goblin_tools/overlay_sparks.rsi
-        state: overlay-inhand-right
-        shader: unshaded
-  - type: Clothing
-    sprite: _NF/Objects/Tools/goblin_tools/welder.rsi
-  - type: RandomSprite
-    available:
-      - randomWelderCan:
-          can1: ""
-          can2: ""
-          can3: ""
-          can4: ""
-          can5: ""
-          can6: ""
-          can7: ""
-          can8: ""
-          can9: ""
-          can10: ""
+# - type: entity
+#   id: NFGoblinMadeWelder
+#   parent: [ NFBaseGoblinMadeTools, Welder ]
+#   name: burner torch
+#   description: An improvised welding tool made out of a plastic bottle, an empty soda can, a spray nozzle, and a leaking battery.
+#   components:
+#   - type: Sprite
+#     sprite: _NF/Objects/Tools/goblin_tools/welder.rsi
+#     layers:
+#     - state: icon
+#     - state: icon-unshaded
+#       shader: unshaded
+#     - state: can1
+#       map: ["randomWelderCan"]
+#     - state: welder_flame
+#       visible: false
+#       shader: unshaded
+#       map: ["enum.ToggleableVisuals.Layer"]
+#     - sprite: _NF/Objects/Tools/goblin_tools/overlay_sparks.rsi
+#       state: overlay-icon
+#       shader: unshaded
+#   - type: GenericVisualizer
+#     visuals:
+#       enum.ToggleableVisuals.Enabled:
+#         enum.ToggleableVisuals.Layer:
+#           True: { visible: true }
+#           False: { visible: false }
+#   - type: Item
+#     sprite: _NF/Objects/Tools/goblin_tools/welder.rsi
+#     inhandVisuals:
+#       left:
+#       - state: inhand-left
+#       - sprite: _NF/Objects/Tools/goblin_tools/overlay_sparks.rsi
+#         state: overlay-inhand-left
+#         shader: unshaded
+#       right:
+#       - state: inhand-right
+#       - sprite: _NF/Objects/Tools/goblin_tools/overlay_sparks.rsi
+#         state: overlay-inhand-right
+#         shader: unshaded
+#   - type: Clothing
+#     sprite: _NF/Objects/Tools/goblin_tools/welder.rsi
+#   - type: RandomSprite
+#     available:
+#       - randomWelderCan:
+#           can1: ""
+#           can2: ""
+#           can3: ""
+#           can4: ""
+#           can5: ""
+#           can6: ""
+#           can7: ""
+#           can8: ""
+#           can9: ""
+#           can10: ""
 # endregion
 
-- type: entity
-  id: NFGoblinMadeWelderEmpty
-  parent: NFGoblinMadeWelder
-  suffix: Goblin Made, Empty
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents: []
-        maxVol: 100
-  - type: Construction
-    graph: NFGoblinMadeWelder
-    node: NFGoblinMadeWelder
+# - type: entity
+#   id: NFGoblinMadeWelderEmpty
+#   parent: NFGoblinMadeWelder
+#   suffix: Goblin Made, Empty
+#   components:
+#   - type: SolutionContainerManager
+#     solutions:
+#       Welder:
+#         reagents: []
+#         maxVol: 100
+#   - type: Construction
+#     graph: NFGoblinMadeWelder
+#     node: NFGoblinMadeWelder
 # endregion
 
 #region mini hoe

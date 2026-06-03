@@ -72,8 +72,6 @@
               Brute: 0.15
         - !type:Drunk
           boozePower: 2
-          time: 4
-          probabilty: 0.1
     # Stage 2
     - minTolerance: 0.8
       effectInterval: 8
@@ -108,5 +106,3 @@
               Brute: 0.35
         - !type:Drunk
           boozePower: 4
-          time: 4
-          probabilty: 0.2

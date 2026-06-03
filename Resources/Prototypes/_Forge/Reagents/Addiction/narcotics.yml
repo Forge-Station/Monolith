@@ -156,8 +156,6 @@
           probability: 0.2
         - !type:Drunk
           boozePower: 2
-          time: 1
-          probabilty: 0.1
 
 # region Desoxyephedrine
 - type: addiction
@@ -328,8 +326,6 @@
           probability: 0.2
         - !type:Drunk
           boozePower: 6
-          time: 2
-          probabilty: 0.5
 
 # region SpaceDrugs
 - type: addiction
@@ -534,8 +530,6 @@
           probability: 0.12
         - !type:Drunk
           boozePower: 2
-          time: 2
-          probabilty: 0.1
     - minTolerance: 0.9
       effectInterval: 3
       effects:
@@ -596,7 +590,6 @@
           type: Add
         - !type:Drunk
           boozePower: 2
-          time: 2
 
 # region Fentanyl
 - type: addiction
@@ -790,8 +783,6 @@
           probability: 0.9
         - !type:Drunk
           boozePower: 2
-          time: 3
-          probabilty: 0.1
     - minTolerance: 0.8
       effectInterval: 5
       effects:
@@ -845,8 +836,6 @@
           type: Add
         - !type:Drunk
           boozePower: 2
-          time: 3
-          probabilty: 0.1
 
 # region Nicotine
 - type: addiction

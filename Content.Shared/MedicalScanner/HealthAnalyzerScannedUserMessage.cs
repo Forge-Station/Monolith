@@ -1,4 +1,5 @@
 using Content.Shared._Shitmed.Targeting; // Shitmed Change
+using Content.Shared.Chemistry.Reagent; // Forge-Change
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.MedicalScanner;
@@ -18,8 +19,9 @@ public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
     public NetEntity? Part; // Shitmed Change
     public bool? Unrevivable;
     public bool? Uncloneable; // Frontier
+    public List<ReagentQuantity>? ChemicalReagents; // Forge-Change
 
-    public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, bool? uncloneable, Dictionary<TargetBodyPart, TargetIntegrity>? body, NetEntity? part = null) // Shitmed Change
+    public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, bool? uncloneable, Dictionary<TargetBodyPart, TargetIntegrity>? body, NetEntity? part = null, List<ReagentQuantity>? chemicalReagents = null) // Shitmed Change // Forge-Change added List&ChemicalReagents
     {
         TargetEntity = targetEntity;
         Temperature = temperature;
@@ -30,6 +32,7 @@ public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
         Part = part; // Shitmed Change
         Unrevivable = unrevivable;
         Uncloneable = uncloneable; // Frontier
+        ChemicalReagents = chemicalReagents; // Forge-Change
     }
 }
 

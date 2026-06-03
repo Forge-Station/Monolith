@@ -100,9 +100,10 @@ public sealed partial class RadioSystem : EntitySystem
             var isOwnAudioRelay = uid == args.MessageSource;
             var radioTtsEnabled = _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeVars.LocalRadioTTSEnabled);
 
-            if(!isOwnAudioRelay && radioTtsEnabled && TryComp<TTSComponent>(uid, out var tts) && !string.IsNullOrWhiteSpace(tts.VoicePrototypeId))
+            // Use the speaker's voice (MessageSource), not the listener's own — Forge-Change
+            if(!isOwnAudioRelay && radioTtsEnabled && TryComp<TTSComponent>(args.MessageSource, out var tts) && !string.IsNullOrWhiteSpace(tts.VoicePrototypeId))
             {
-                _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, tts.VoicePrototypeId, actor.PlayerSession, true, args.Language);
+                _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, tts.VoicePrototypeId, actor.PlayerSession, true, args.Language, isRadio: true);
             }
             // Forge-Change-End
 

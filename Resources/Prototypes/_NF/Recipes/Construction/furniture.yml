@@ -685,6 +685,9 @@
 
 - type: construction
   id: BannerGoblin01
+  entityWhitelist:
+    components:
+    - Goblin
   name: goblinkind banner
   description: A banner displaying the ancient goblinkind logo.
   graph: BannersGraph

@@ -14,6 +14,7 @@ using Content.Shared.Atmos;
 using Content.Shared.UserInterface;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Reagent; // Forge-Change
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Climbing.Systems;
 using Content.Shared.Containers.ItemSlots;
@@ -202,22 +203,39 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
             healthAnalyzer.ScannedEntity = entity.Comp.BodyContainer.ContainedEntity;
         }
 
+        // Forge-Change-Start
+        var bloodLevel = 0f;
+        List<ReagentQuantity>? chemicalReagents = null;
+        if (bloodstream != null)
+        {
+            if (_solutionContainerSystem.ResolveSolution(entity.Comp.BodyContainer.ContainedEntity.Value,
+                    bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution))
+            {
+                bloodLevel = bloodSolution.FillFraction;
+            }
+
+            if (_solutionContainerSystem.ResolveSolution(entity.Comp.BodyContainer.ContainedEntity.Value,
+                    bloodstream.ChemicalSolutionName, ref bloodstream.ChemicalSolution, out var chemicalSolution))
+            {
+                chemicalReagents = HealthAnalyzerSystem.GetChemicalReagents(chemicalSolution);
+            }
+        }
+        // Forge-Change-End
+
         // TODO: This should be a state my dude
         _uiSystem.ServerSendUiMessage(
             entity.Owner,
             HealthAnalyzerUiKey.Key,
             new HealthAnalyzerScannedUserMessage(GetNetEntity(entity.Comp.BodyContainer.ContainedEntity),
             temp?.CurrentTemperature ?? 0,
-            (bloodstream != null && _solutionContainerSystem.ResolveSolution(entity.Comp.BodyContainer.ContainedEntity.Value,
-                bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution))
-                ? bloodSolution.FillFraction
-                : 0,
+            bloodLevel,
             null,
             null,
             null,
             null, // Frontier
             null, // Shitmed
-            null // Shitmed
+            null, // Shitmed
+            chemicalReagents // Forge-Change
         ));
     }
 

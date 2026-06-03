@@ -1,0 +1,18 @@
+#- type: trait
+#  id: ChronicPain
+#  name: trait-chronicpain-name
+#  description: trait-chronicpain-desc
+#  category: Physical
+#  cost: -4
+#  speciesBlacklist:
+#    - IPC
+#  blacklist:
+#    components:
+#    - BorgChassis
+#  components:
+#    - type: Addiction
+#      addictions:
+#        PainSyndrome:
+#          prototypeId: ChronicPain
+#          noDelete: true
+#          tolerance: 0.85

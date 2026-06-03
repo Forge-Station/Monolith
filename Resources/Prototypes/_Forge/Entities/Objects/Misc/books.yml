@@ -1,0 +1,15 @@
+- type: entity
+  id: BookMedicalForge
+  parent: BaseGuidebook
+  name: medical directory
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#4f1446"
+    - state: icon_dna
+      color: "#6e5181"
+  - type: GuideHelp
+    guides:
+    - ForgeMedical

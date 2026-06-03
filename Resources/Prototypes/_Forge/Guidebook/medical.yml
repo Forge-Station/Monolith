@@ -1,0 +1,18 @@
+- type: guideEntry
+  id: ForgeMedical
+  name: forge-guide-entry-medical-core
+  priority: 9
+  text: "/ServerInfo/_Forge/Guidebook/Medical/Addictions/core.xml"
+  children:
+  - ForgeMedicalAddictions
+  - ForgeMedicalDisease
+
+- type: guideEntry
+  id: ForgeMedicalAddictions
+  name: forge-guide-entry-medical-addictions
+  text: "/ServerInfo/_Forge/Guidebook/Medical/Addictions/addictions.xml"
+
+- type: guideEntry
+  id: ForgeMedicalDisease
+  name: forge-guide-entry-medical-disease
+  text: "/ServerInfo/_Forge/Guidebook/Medical/Addictions/disease.xml"

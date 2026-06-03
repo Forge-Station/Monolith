@@ -2,3 +2,6 @@ ent-PaperMinersBountyManifest = напоминание о награде шах�
     .desc = Напоминание о задании
 ent-PaperMercenaryBountyManifest = напоминание о награде наёмника
     .desc = Напоминание о задании
+
+ent-BookMedicalForge = Медицинский справочник
+    .desc = Медицинский справочник, выпускаемый компанией "др. Ист".

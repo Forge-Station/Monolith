@@ -108,8 +108,6 @@ addiction-fentanyl-withdrawal-4 = Желудок крутит. Боль везд
 addiction-fentanyl-withdrawal-5 = Дышать сквозь это почти невозможно.
 addiction-fentanyl-withdrawal-6 = Тело разрывает себя в поисках облегчения.
 
-reagent-effect-naloxone-withdrawal = Что-то резко разворачивается внутри.
-
 # Morphine
 addiction-Morphine-onset = Тёплый, тяжёлый покой накрывает тебя.
 addiction-Morphine-recovery = Туман медленно рассеивается. Тело снова твоё.
@@ -135,3 +133,18 @@ addiction-dexalin-2 = Стало легче надышаться.
 
 addiction-dexalin-withdrawal-1 = Дышать стало тяжелее..
 addiction-dexalin-withdrawal-2 = Через раз не получается вдохнуть..
+
+# PainSyndrome
+addiction-pain-1 = Всё немного ноет.
+addiction-pain-2 = Что-то тянет. Привычно.
+addiction-pain-3 = Побаливает..
+addiction-pain-4 = Всё болит и ноет..
+addiction-pain-5 = Боль не отпускает..
+addiction-pain-6 = С такой болью трудно двигаться..
+
+# ChronicPain
+addiction-chronic-pain-1 = Всё постоянно болит..
+
+reagent-effect-guidebook-drop-held-items = Может выбить предмет из рук.
+
+reagent-effect-guidebook-suppress-withdrawal = Подавляет ломку

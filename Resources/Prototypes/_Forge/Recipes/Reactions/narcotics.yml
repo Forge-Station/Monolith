@@ -36,3 +36,17 @@
       amount: 1
   products:
     Dylovene: 1 # morphine is destroyed
+
+- type: reaction
+  id: Methadone
+  impact: Medium
+  minTemp: 400
+  reactants:
+    Morphine:
+      amount: 1
+    Diethylamine:
+      amount: 1
+    Carbon:
+      amount: 1
+  products:
+    Methadone: 3

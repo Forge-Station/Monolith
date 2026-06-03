@@ -13,3 +13,32 @@
       amount: 0.5
   products:
     Naloxone: 3
+
+- type: reaction
+  id: Clonidine
+  impact: Low
+  reactants:
+    Chlorine:
+      amount: 2
+    Ammonia:
+      amount: 1
+    Diethylamine:
+      amount: 1
+  products:
+    Clonidine: 3
+
+- type: reaction
+  id: Bupropion
+  impact: Low
+  minTemp: 370
+  reactants:
+    Diethylamine:
+      amount: 1
+    Chlorine:
+      amount: 1
+    Carbon:
+      amount: 1
+    Ethanol:
+      amount: 1
+  products:
+    Bupropion: 4

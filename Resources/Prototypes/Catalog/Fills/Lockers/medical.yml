@@ -130,6 +130,7 @@
       - id: ClothingEyesGlassesChemical
       - id: SheetPlasma1
         amount: 3
+      - id: MedkitAntiAddictFilled # Forge-change
 
 - type: entity
   id: LockerParamedicFilled

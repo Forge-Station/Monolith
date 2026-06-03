@@ -497,6 +497,9 @@
         probability: 0.05
       - !type:Drunk # Headaches and slurring are major symptoms of brain damage, this is close enough
         boozePower: 5
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Stimulants
+        toleranceGain: 0.015
 
 - type: reagent
   id: SpaceDrugs
@@ -529,7 +532,7 @@
         refresh: false
       - !type:AddictiveEffect # Forge-change
         addictionId: SpaceDrugs
-        toleranceGain: 0.017
+        toleranceGain: 0.008
 
 - type: reagent
   id: Bananadine
@@ -761,3 +764,6 @@
         type: Add
         time: 5
         refresh: false
+      - !type:AddictiveEffect # Forge-change
+        addictionId: SpaceDrugs
+        toleranceGain: 0.015

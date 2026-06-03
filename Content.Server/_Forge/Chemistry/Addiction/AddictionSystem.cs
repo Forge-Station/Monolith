@@ -23,6 +23,7 @@ public sealed partial class AddictionSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        SubscribeLocalEvent<AddictionComponent, ComponentInit>(OnAddictionInit);
         ValidateAndCachePrototypes();
     }
 
@@ -32,6 +33,18 @@ public sealed partial class AddictionSystem : EntitySystem
         {
             _addictions.Clear();
             ValidateAndCachePrototypes();
+        }
+    }
+
+    private void OnAddictionInit(EntityUid uid, AddictionComponent comp, ComponentInit args)
+    {
+        var now = _gameTiming.CurTime;
+        foreach (var data in comp.Addictions.Values)
+        {
+            if (data.LastDoseTime == TimeSpan.Zero)
+            {
+                data.LastDoseTime = now;
+            }
         }
     }
 
@@ -149,12 +162,19 @@ public sealed partial class AddictionSystem : EntitySystem
 
             if (data.Tolerance <= AddictionData.RemoveThreshold)
             {
-                toRemove.Add(protoId);
-                if (data.WithdrawalActive)
+                if (data.NoDelete)
                 {
-                    var locKey = $"addiction-{protoId}-recovery";
-                    if (Loc.TryGetString(locKey, out var msg))
-                        _popup.PopupEntity(msg, uid, uid, PopupType.Medium);
+                    data.Tolerance = 0f;
+                }
+                else
+                {
+                    toRemove.Add(protoId);
+                    if (data.WithdrawalActive)
+                    {
+                        var locKey = $"addiction-{protoId}-recovery";
+                        if (Loc.TryGetString(locKey, out var msg))
+                            _popup.PopupEntity(msg, uid, uid, PopupType.Medium);
+                    }
                 }
                 continue;
             }
@@ -201,12 +221,24 @@ public sealed partial class AddictionSystem : EntitySystem
         return !TerminatingOrDeleted(uid);
     }
 
+    public void SuppressWithdrawal(EntityUid mob, string addictionProtoId, int time)
+    {
+        if (!TryComp<AddictionComponent>(mob, out var comp))
+            return;
+
+        if (!comp.Addictions.TryGetValue(addictionProtoId, out var data))
+            return;
+
+        data.LastDoseTime = _gameTiming.CurTime + TimeSpan.FromSeconds(time);
+        data.WithdrawalActive = false;
+    }
+
     private static AddictionStageData? GetActiveStage(AddictionPrototype proto, AddictionData data)
     {
         AddictionStageData? result = null;
         foreach (var stage in proto.Stages)
         {
-            if (data.Tolerance > stage.MinTolerance)
+            if (data.Tolerance >= stage.MinTolerance)
                 result = stage;
             else
                 break;

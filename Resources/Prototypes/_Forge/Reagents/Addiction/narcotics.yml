@@ -93,11 +93,6 @@
             - addiction-stimulants-withdrawal-3
           visualType: MediumCaution
           probability: 0.15
-        - !type:TunnelVision
-          outer: 1.0
-          inner: 0.1
-          time: 7
-          refresh: true
     - minTolerance: 0.9
       effectInterval: 4
       effects:
@@ -155,11 +150,6 @@
             - addiction-stimulants-withdrawal-5
           visualType: LargeCaution
           probability: 0.2
-        - !type:TunnelVision
-          outer: 1.0
-          inner: 0.1
-          time: 7
-          refresh: true
 
 # region Desoxyephedrine
 - type: addiction
@@ -447,11 +437,6 @@
             - addiction-spacedrugs-withdrawal-6
           visualType: LargeCaution
           probability: 0.2
-        - !type:TunnelVision
-          outer: 1.0
-          inner: 0.1
-          time: 7
-          refresh: true
 
 # region Ephedrine
 - type: addiction
@@ -535,11 +520,6 @@
             - addiction-ephedrine-withdrawal-4
           visualType: MediumCaution
           probability: 0.12
-        - !type:TunnelVision
-          outer: 1.0
-          inner: 0.1
-          time: 7
-          refresh: true
     - minTolerance: 0.9
       effectInterval: 3
       effects:
@@ -598,11 +578,6 @@
           component: StutteringAccent
           time: 3
           type: Add
-        - !type:TunnelVision
-          outer: 1.0
-          inner: 0.1
-          time: 7
-          refresh: true
 
 # region Fentanyl
 - type: addiction
@@ -672,11 +647,6 @@
           time: 3
           type: Add
           probability: 0.3
-        - !type:TunnelVision
-          outer: 1.0
-          inner: 0.1
-          time: 7
-          refresh: true
     - minTolerance: 0.8
       effectInterval: 4
       effects:
@@ -736,11 +706,6 @@
           time: 4
           type: Add
           probability: 0.7
-        - !type:TunnelVision
-          outer: 1.0
-          inner: 0.1
-          time: 7
-          refresh: true
 
 # region Morphine
 - type: addiction
@@ -804,11 +769,6 @@
           time: 4
           type: Add
           probability: 0.9
-        - !type:TunnelVision
-          outer: 1.0
-          inner: 0.1
-          time: 7
-          refresh: true
     - minTolerance: 0.8
       effectInterval: 5
       effects:
@@ -859,12 +819,6 @@
           component: BlockedBreathing
           time: 4
           type: Add
-        - !type:TunnelVision
-          outer: 1.0
-          inner: 0.1
-          alpha: 0
-          time: 7
-          refresh: true
 
 # region Nicotine
 - type: addiction

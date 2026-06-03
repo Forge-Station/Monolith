@@ -32,6 +32,7 @@
           slurSpeech: false
           boozePower: 2
         - !type:PopupMessage
+          hidden: true
           type: Local
           visualType: Small
           messages: [ "generic-reagent-effect-nauseous" ]
@@ -39,6 +40,10 @@
           conditions:
             - !type:ReagentThreshold
               min: 4
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.5
+              max: 1.0
         - !type:AddictiveEffect
           addictionId: Morphine
           toleranceGain: 0.006
@@ -62,7 +67,7 @@
               min: 5
           damage:
             groups:
-              Brute: -5 # Painkiller btw
+              Brute: -5
               Toxin: -0.5
         - !type:HealthChange
           hidden: true
@@ -132,9 +137,14 @@
               Poison: 3
               Asphyxiation: 3.5
         - !type:PopupMessage
+          hidden: true
           conditions:
             - !type:ReagentThreshold
               min: 2
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.5
+              max: 1.0
           type: Local
           visualType: Medium
           messages: [ "generic-reagent-effect-nauseous" ]

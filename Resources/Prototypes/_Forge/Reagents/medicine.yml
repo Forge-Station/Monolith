@@ -89,6 +89,7 @@
     Medicine:
       metabolismRate: 0.5
       effects:
+        # Fentanyl
         - !type:CureAddictionEffect
           hidden: true
           conditions:
@@ -139,6 +140,39 @@
               addictionId: Fentanyl
               min: 0.7
               max: 1.0
+        - !type:Paralyze
+          hidden: true
+          paralyzeTime: 3
+          refresh: false
+          probability: 0.15
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Fentanyl
+              min: 0.9
+              max: 1.0
+        - !type:HealthChange
+          hidden: true
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Fentanyl
+              min: 0.9
+              max: 1.0
+          damage:
+            types:
+              Poison: 1.5
+              Asphyxiation: 2.0
+        - !type:PopupMessage
+          hidden: true
+          type: Local
+          visualType: LargeCaution
+          messages: [ "reagent-effect-naloxone-precipitated" ]
+          probability: 0.9
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Fentanyl
+              min: 0.9
+              max: 1.0
+        # Morphine
         - !type:CureAddictionEffect
           hidden: true
           conditions:
@@ -189,16 +223,58 @@
               addictionId: Morphine
               min: 0.6
               max: 1.0
+        - !type:Paralyze
+          hidden: true
+          paralyzeTime: 3
+          refresh: false
+          probability: 0.15
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.9
+              max: 1.0
+        - !type:HealthChange
+          hidden: true
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.9
+              max: 1.0
+          damage:
+            types:
+              Poison: 1.5
+              Asphyxiation: 2.0
+        - !type:PopupMessage
+          hidden: true
+          type: Local
+          visualType: LargeCaution
+          messages: [ "reagent-effect-naloxone-precipitated" ]
+          probability: 0.9
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.9
+              max: 1.0
+
+        # --- Shared ---
         - !type:GenericStatusEffect
           hidden: true
           key: BlockedBreathing
           component: BlockedBreathing
           type: Remove
+        - !type:SuppressEffect
+          hidden: true
+          addictionId: Morphine
+          time: 15
+        - !type:SuppressEffect
+          hidden: true
+          addictionId: Fentanyl
+          time: 15
         - !type:GenericDescEffect
           description: forge-reagent-effect-naloxone
 
 # region Tabex
-# nicotine antagonist
+# Nicotine antagonist — cessation aid
 - type: reagent
   id: Tabex
   name: reagent-name-tabex
@@ -229,9 +305,153 @@
               max: 0.5
           addictionId: Nicotine
           amount: 0.00002
-        - !type:AddictiveEffect
+        - !type:SuppressEffect
           hidden: true
           addictionId: Nicotine
-          toleranceGain: 0.000000001 # dont call waithdrawl if we smoke this
+          time: 5
         - !type:GenericDescEffect
           description: forge-reagent-effect-tabex
+
+# region Methadone
+# opioid therapy
+- type: reagent
+  id: Methadone
+  name: reagent-name-methadone
+  group: Medicine
+  desc: reagent-desc-methadone
+  physicalDesc: reagent-physical-desc-soothing
+  flavor: bitter
+  color: "#c8b89a"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.3
+      effects:
+        - !type:CureAddictionEffect
+          hidden: true
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.3
+              max: 1.0
+          addictionId: Morphine
+          amount: 0.004
+        - !type:SuppressEffect
+          hidden: true
+          addictionId: Morphine
+          time: 45
+        - !type:AddictiveEffect
+          hidden: true
+          addictionId: Morphine
+          toleranceGain: 0.0015
+        - !type:GenericStatusEffect
+          hidden: true
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 4
+          probability: 0.15
+          refresh: false
+        - !type:Drunk
+          slurSpeech: false
+          boozePower: 1
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-methadone
+
+# region Clonidine
+# Alpha-2 suppresses withdrawal symptoms
+- type: reagent
+  id: Clonidine
+  name: reagent-name-clonidine
+  group: Medicine
+  desc: reagent-desc-clonidine
+  physicalDesc: reagent-physical-desc-clear
+  flavor: bitter
+  color: "#e8e8f0"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.4
+      effects:
+        - !type:SuppressEffect
+          hidden: true
+          addictionId: Morphine
+          time: 30
+        - !type:SuppressEffect
+          hidden: true
+          addictionId: Fentanyl
+          time: 30
+        - !type:GenericStatusEffect
+          key: Jitter
+          time: 4
+          type: Remove
+        - !type:MovespeedModifier
+          walkSpeedModifier: 0.95
+          sprintSpeedModifier: 0.95
+          statusLifetime: 5
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 3
+          probability: 0.1
+          refresh: false
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-clonidine
+
+# region Bupropion
+# antidepressant: heal stimulant addiction
+- type: reagent
+  id: Bupropion
+  name: reagent-name-bupropion
+  group: Medicine
+  desc: reagent-desc-bupropion
+  physicalDesc: reagent-physical-desc-chalky
+  flavor: medicine
+  color: "#f0e6c8"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.25
+      effects:
+        - !type:CureAddictionEffect
+          hidden: true
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Stimulants
+              min: 0.3
+              max: 1.0
+          addictionId: Stimulants
+          amount: 0.006
+        - !type:CureAddictionEffect
+          hidden: true
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Ephedrine
+              min: 0.3
+              max: 1.0
+          addictionId: Ephedrine
+          amount: 0.007
+        - !type:CureAddictionEffect
+          hidden: true
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Desoxyephedrine
+              min: 0.3
+              max: 1.0
+          addictionId: Desoxyephedrine
+          amount: 0.005
+        - !type:Jitter
+          hidden: true
+          amplitude: 2
+          frequency: 2
+          time: 2
+          probability: 0.04
+        - !type:PopupMessage
+          hidden: true
+          type: Local
+          visualType: Medium
+          messages: [ "reagent-effect-bupropion-restless" ]
+          probability: 0.05
+          conditions:
+            - !type:ReagentThreshold
+              min: 8
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-bupropion

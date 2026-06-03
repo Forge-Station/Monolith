@@ -39,6 +39,9 @@ public sealed partial class AddictionData
     [DataField]
     public bool IsNew { get; set; } = true;
 
+    [DataField]
+    public bool NoDelete { get; set; } = false;
+
     // Current tolerance value (0.0–1.0)
     [DataField]
     public float Tolerance { get; set; } = 0f;

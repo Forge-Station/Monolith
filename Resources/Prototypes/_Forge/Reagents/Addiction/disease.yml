@@ -1,113 +1,11 @@
-# region PainSyndrome
-- type: addiction
-  id: PainSyndrome
-  withdrawalDelay: 120
-  toleranceDecayRate: 0.0
-  withdrawalDecayRate: 0.0
-  noDelete: true
-  stages:
-    # Stage 0: Grows when there is a lot of damage.
-    - minTolerance: 0.0
-      effectInterval: 12
-      effects:
-        - !type:AddictiveEffect
-          conditions:
-            - !type:TotalDamage
-              min: 90
-          addictionId: PainSyndrome
-          toleranceGain: 0.04
-        - !type:AddictiveEffect
-          conditions:
-            - !type:TotalDamage
-              min: 60
-            - !type:TotalDamage
-              max: 89.99
-          addictionId: PainSyndrome
-          toleranceGain: 0.01
-    # Stage 1
-    - minTolerance: 0.4
-      effectInterval: 8
-      effects:
-        - !type:AddictiveEffect
-          conditions:
-            - !type:TotalDamage
-              min: 80
-          addictionId: PainSyndrome
-          toleranceGain: 0.03
-      withdrawalEffects:
-        - !type:MovespeedModifier
-          walkSpeedModifier: 0.8
-          sprintSpeedModifier: 0.8
-          statusLifetime: 9
-        - !type:AddictiveEffect
-          conditions:
-            - !type:TotalDamage
-              min: 80
-          addictionId: PainSyndrome
-          toleranceGain: 0.03
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-pain-1
-            - addiction-pain-2
-            - addiction-pain-3
-          visualType: MediumCaution
-          probability: 0.2
-        - !type:HealthChange
-          damage:
-            types:
-              Brute: 0.15
-    # Stage 2
-    - minTolerance: 0.8
-      effectInterval: 8
-      effects:
-        - !type:AddictiveEffect
-          conditions:
-            - !type:TotalDamage
-              min: 75
-          addictionId: PainSyndrome
-          toleranceGain: 0.03
-      withdrawalEffects:
-        - !type:MovespeedModifier
-          walkSpeedModifier: 0.65
-          sprintSpeedModifier: 0.65
-          statusLifetime: 8
-        - !type:AddictiveEffect
-          conditions:
-            - !type:TotalDamage
-              min: 75
-          addictionId: PainSyndrome
-          toleranceGain: 0.03
-        - !type:AddictiveEffect
-          conditions:
-            - !type:TotalDamage
-              min: 75
-          addictionId: ChronicPain
-          toleranceGain: 0.005
-        - !type:DropItemEffect
-          probability: 1.0
-        - !type:PopupMessage
-          type: Local
-          messages:
-            - addiction-pain-4
-            - addiction-pain-5
-            - addiction-pain-6
-          visualType: MediumCaution
-          probability: 0.2
-        - !type:HealthChange
-          damage:
-            types:
-              Brute: 0.35
-
 # region ChronicPain
 - type: addiction
   id: ChronicPain
   withdrawalDelay: 120
   toleranceDecayRate: 0.0
   withdrawalDecayRate: 0.0
-  noDelete: true
   stages:
-    # Stage 0: Grows when there is a lot of damage.
+    # Stage 0
     - minTolerance: 0.0
       effectInterval: 12
       effects:
@@ -143,19 +41,22 @@
     # Stage 1
     - minTolerance: 0.4
       effectInterval: 8
+      effects:
+        - !type:AddictionMovespeedEffect
+          key: ChronicPain
+          walkSpeedModifier: 0.95
+          sprintSpeedModifier: 0.95
       withdrawalEffects:
-        - !type:MovespeedModifier
-          walkSpeedModifier: 0.88
-          sprintSpeedModifier: 0.88
-          statusLifetime: 9
+        - !type:AddictionMovespeedEffect
+          key: ChronicPain
+          walkSpeedModifier: 0.75
+          sprintSpeedModifier: 0.75
         - !type:AddictiveEffect
           conditions:
             - !type:TotalDamage
               min: 80
           addictionId: ChronicPain
           toleranceGain: 0.03
-        - !type:DropItemEffect
-          probability: 0.04
         - !type:PopupMessage
           type: Local
           messages:
@@ -169,22 +70,29 @@
           damage:
             types:
               Brute: 0.15
+        - !type:Drunk
+          boozePower: 2
+          time: 4
+          probabilty: 0.1
     # Stage 2
     - minTolerance: 0.8
       effectInterval: 8
+      effects:
+        - !type:AddictionMovespeedEffect
+          key: ChronicPain
+          walkSpeedModifier: 0.9
+          sprintSpeedModifier: 0.9
       withdrawalEffects:
-        - !type:MovespeedModifier
-          walkSpeedModifier: 0.65
-          sprintSpeedModifier: 0.65
-          statusLifetime: 8
+        - !type:AddictionMovespeedEffect
+          key: ChronicPain
+          walkSpeedModifier: 0.5
+          sprintSpeedModifier: 0.5
         - !type:AddictiveEffect
           conditions:
             - !type:TotalDamage
               min: 75
           addictionId: ChronicPain
           toleranceGain: 0.03
-        - !type:DropItemEffect
-          probability: 0.09
         - !type:PopupMessage
           type: Local
           messages:
@@ -198,3 +106,7 @@
           damage:
             types:
               Brute: 0.35
+        - !type:Drunk
+          boozePower: 4
+          time: 4
+          probabilty: 0.2

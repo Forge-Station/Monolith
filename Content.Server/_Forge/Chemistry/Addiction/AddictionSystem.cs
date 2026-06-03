@@ -6,12 +6,14 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.StatusEffect;
 
 namespace Content.Server._Forge.Chemistry.Addiction;
 
 public sealed partial class AddictionSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -151,6 +153,8 @@ public sealed partial class AddictionSystem : EntitySystem
             if (!_addictions.TryGetValue(protoId, out var proto))
                 continue;
 
+            var wasWithdrawal = data.WithdrawalActive;
+
             if ((now - data.LastDoseTime).TotalSeconds >= proto.WithdrawalDelay)
                 data.WithdrawalActive = true;
 
@@ -162,6 +166,8 @@ public sealed partial class AddictionSystem : EntitySystem
 
             if (data.Tolerance <= AddictionData.RemoveThreshold)
             {
+                ClearAddictionStatus(uid, protoId);
+
                 if (data.NoDelete)
                 {
                     data.Tolerance = 0f;
@@ -179,9 +185,23 @@ public sealed partial class AddictionSystem : EntitySystem
                 continue;
             }
 
-            var stage = GetActiveStage(proto, data);
-            if (stage == null)
+            var newStageIndex = GetActiveStageIndex(proto, data);
+
+            if (newStageIndex != data.LastStageIndex)
+            {
+                _statusEffects.TryRemoveStatusEffect(uid, protoId);
+                data.LastStageIndex = newStageIndex;
+            }
+
+            if (wasWithdrawal && !data.WithdrawalActive)
+            {
+                ClearAddictionStatus(uid, protoId);
+            }
+
+            if (newStageIndex < 0)
                 continue;
+
+            var stage = proto.Stages[newStageIndex];
 
             data.NextEffectTimer -= delta;
             if (data.NextEffectTimer > 0f)
@@ -233,13 +253,24 @@ public sealed partial class AddictionSystem : EntitySystem
         data.WithdrawalActive = false;
     }
 
+    public void ClearAddictionStatus(EntityUid uid, string addictionId)
+    {
+        _statusEffects.TryRemoveStatusEffect(uid, addictionId);
+    }
+
     private static AddictionStageData? GetActiveStage(AddictionPrototype proto, AddictionData data)
     {
-        AddictionStageData? result = null;
-        foreach (var stage in proto.Stages)
+        var idx = GetActiveStageIndex(proto, data);
+        return idx >= 0 ? proto.Stages[idx] : null;
+    }
+
+    private static int GetActiveStageIndex(AddictionPrototype proto, AddictionData data)
+    {
+        var result = -1;
+        for (var i = 0; i < proto.Stages.Count; i++)
         {
-            if (data.Tolerance >= stage.MinTolerance)
-                result = stage;
+            if (data.Tolerance >= proto.Stages[i].MinTolerance)
+                result = i;
             else
                 break;
         }

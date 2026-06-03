@@ -255,8 +255,6 @@
               addictionId: Morphine
               min: 0.9
               max: 1.0
-
-        # --- Shared ---
         - !type:GenericStatusEffect
           hidden: true
           key: BlockedBreathing
@@ -356,6 +354,12 @@
           boozePower: 1
         - !type:GenericDescEffect
           description: forge-reagent-effect-methadone
+        - !type:SuppressEffect
+          hidden: true
+          addictionId: Morphine
+          time: 10
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-wiithdrawl-pain
 
 # region Clonidine
 # Alpha-2 suppresses withdrawal symptoms

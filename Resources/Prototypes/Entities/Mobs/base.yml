@@ -52,12 +52,6 @@
   # Forge-change-start
   - type: TTS
   - type: Addiction
-  # I NOW, I NOW. But only the test, ok?
-    addictions:
-       PainSyndrome:
-          prototypeId: PainSyndrome
-          noDelete: true
-          tolerance: 0.1
   # Forge-change-end
 
 - type: entity

@@ -2,10 +2,35 @@
   id: ChainsawShieldSlowed
   alwaysAllowed: true
 
+# addiction's
 - type: statusEffect
   id: BlockedBreathing
   alwaysAllowed: true
 
 - type: statusEffect
-  id: TunnelVision
+  id: Stimulants
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: Desoxyephedrine
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: SpaceDrugs
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: Ephedrine
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: Fentanyl
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: Morphine
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: ChronicPain
   alwaysAllowed: true

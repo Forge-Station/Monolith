@@ -35,7 +35,7 @@
   toleranceDecayRate: 0.0003
   withdrawalDecayRate: 0.0006
   stages:
-    - minTolerance: 0.99
+    - minTolerance: 0.9
       effectInterval: 30
       effects:
       - !type:HealthChange

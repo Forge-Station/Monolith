@@ -1,18 +1,35 @@
-#- type: trait
-#  id: ChronicPain
-#  name: trait-chronicpain-name
-#  description: trait-chronicpain-desc
-#  category: Physical
-#  cost: -4
-#  speciesBlacklist:
-#    - IPC
-#  blacklist:
-#    components:
-#    - BorgChassis
-#  components:
-#    - type: Addiction
-#      addictions:
-#        PainSyndrome:
-#          prototypeId: ChronicPain
-#          noDelete: true
-#          tolerance: 0.85
+- type: trait
+  id: ChronicPain
+  name: trait-chronicpain-name
+  description: trait-chronicpain-desc
+  category: Physical
+  cost: -4
+  mutuallyExclusiveTraits:
+  - Morphine
+  speciesBlacklist:
+    - IPC
+  blacklist:
+    components:
+    - BorgChassis
+  components:
+  - type: AddictionTrait
+    addictionId: ChronicPain
+    initialTolerance: 0.95
+
+- type: trait
+  id: Morphine
+  name: trait-morphine-name
+  description: trait-morphine-desc
+  category: Physical
+  cost: -2
+  mutuallyExclusiveTraits:
+  - ChronicPain
+  speciesBlacklist:
+    - IPC
+  blacklist:
+    components:
+    - BorgChassis
+  components:
+  - type: AddictionTrait
+    addictionId: Morphine
+    initialTolerance: 0.75

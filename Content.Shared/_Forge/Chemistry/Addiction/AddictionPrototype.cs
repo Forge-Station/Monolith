@@ -57,6 +57,9 @@ public sealed partial class AddictionData
 
     // Addiction is removed from the dictionary once tolerance drops below this.
     public const float RemoveThreshold = 0.01f;
+
+    [DataField]
+    public int LastStageIndex { get; set; } = -1;
 }
 
 [DataDefinition]

@@ -44,8 +44,14 @@
               addictionId: Morphine
               min: 0.5
               max: 1.0
-        - !type:AddictiveEffect
+        - !type:SuppressEffect
+          hidden: true
           addictionId: Morphine
+          time: 15
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-wiithdrawl-pain
+        - !type:AddictiveEffect
+          addictionId: ChronicPain
           toleranceGain: 0.006
 
 # region Morphine
@@ -149,6 +155,12 @@
           visualType: Medium
           messages: [ "generic-reagent-effect-nauseous" ]
           probability: 0.4
+        - !type:SuppressEffect
+          hidden: true
+          addictionId: ChronicPain
+          time: 30
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-wiithdrawl-pain
         - !type:AddictiveEffect
           addictionId: Morphine
           toleranceGain: 0.009

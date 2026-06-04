@@ -131,17 +131,17 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      180: Critical
-      250: Dead
+      450: Critical
+      500: Dead
   - type: SlowOnDamage
     speedModifierThresholds:
-      140: 0.7
-      160: 0.5
+      375: 0.7
+      425: 0.5
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 375
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -150,7 +150,7 @@
             volume: 5
     - trigger:
         !type:DamageTrigger
-         damage: 350
+         damage: 525
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -315,7 +315,7 @@
 # AI Remote
 - type: entity
   id: PlayerBorgForerunnerAiRemote
-  parent: BorgChassisForerunner
+  parent: PlayerBorgForerunner
   suffix: AI Remote, Battery, Module
   components:
   - type: ContainerFill
@@ -324,11 +324,11 @@
       - AiRemoteBrain
       borg_module:
       - BorgModuleForerunnerWeapon
+      - BorgModuleForerunnerRCD
       - BorgModuleJetpackADM
       - BorgModuleAdvancedTool
       - BorgModuleConstruction
       - BorgModuleCable
-      - BorgModuleForerunnerRCD
   - type: RandomMetadata
     nameSegments:
     - MonoRemnantCoreTitle

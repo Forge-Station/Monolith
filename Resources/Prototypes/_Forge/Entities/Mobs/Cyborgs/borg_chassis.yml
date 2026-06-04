@@ -95,9 +95,9 @@
     - BorgModuleSyndicate
     - BorgModuleSyndicateAssault
   defaultModules:
-    - BorgModuleForerunnerWeapon
+    - BorgModuleForerunnerWeaponHeavy
     - BorgModuleJetpackADM
-    - BorgModuleConstruction
+    - BorgModuleTool
   inventoryTemplateId: borgShort
   spriteBodyState: synd_sec
   spriteHasMindState: synd_sec_e

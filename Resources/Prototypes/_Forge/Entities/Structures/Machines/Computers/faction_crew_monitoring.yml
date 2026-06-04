@@ -1,8 +1,9 @@
 - type: entity
-  parent: ComputerCrewMonitoring
+  parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]
   id: ComputerCrewRenegadeMonitoring
-  name: консоль мониторинга ВКР # crew renegate monitoring console
-  description: Используется для просмотра статусов всех датчиков имплантов состава ВКР. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's renegate implants.
+  name: crew renegate monitoring console
+  description: Used to monitor active health sensors built into most of the crew's renegate implants.
+  suffix: Renegate
   components:
   - type: Sprite
     sprite: Forge/Structures/Machines/computers.rsi
@@ -23,10 +24,11 @@
     receiveFrequencyId: CrewRenegadeMonitor
 
 - type: entity
-  parent: ComputerCrewMonitoring
+  parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]
   id: ComputerCrewTSFMonitoring
-  name: консоль мониторинга ТСФ # crew TSF monitoring console
-  description: Используется для просмотра статусов всех датчиков имплантов состава ТСФ. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's TSF implants.
+  name: crew TSF monitoring console
+  description: Used to monitor active health sensors built into most of the crew's TSF implants.
+  suffix: TSF
   components:
   - type: Sprite
     layers:
@@ -35,9 +37,10 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      state: crew
+      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      state: crew-tsf
     - map: ["computerLayerKeys"]
-      state: med_key
+      state: telesci_key
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: DeviceNetwork
@@ -45,10 +48,11 @@
     receiveFrequencyId: CrewTSFMonitor
 
 - type: entity
-  parent: ComputerCrewMonitoring
+  parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]
   id: ComputerCrewNanotrasenMonitoring
-  name: консоль мониторинга НТ # crew NT monitoring console
-  description: Используется для просмотра статусов всех датчиков имплантов состава НТ и TTI. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's NT and TTI implants.
+  name: crew NT monitoring console
+  description: Used to monitor active health sensors built into most of the crew's NT and TTI implants.
+  suffix: NT
   components:
   - type: Sprite
     layers:
@@ -57,7 +61,8 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      state: crew
+      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      state: crew-nt
     - map: ["computerLayerKeys"]
       state: med_key
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
@@ -67,23 +72,26 @@
     receiveFrequencyId: CrewNanotrasenMonitor
 
 - type: entity
-  parent: ComputerCrewMonitoring
-  id: ComputerCrewImperialMonitoring
-  name: консоль мониторинга СИВ # crew imperial monitoring console
-  description: Используется для просмотра статусов всех датчиков имплантов состава СИВ. Не дайте ей попасть в руки врага! # Used to monitor active health sensors built into most of the crew's imperial implants.
+  parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]
+  id: ComputerCrewEmpireMonitoring
+  name: crew impire monitoring console
+  description: Used to monitor active health sensors built into most of the crew's empire implants.
+  suffix: Empire
   components:
   - type: Sprite
+    sprite: Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
-      state: computer
+      state: computer_emp
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      state: crew
+      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      state: crew-emp
     - map: ["computerLayerKeys"]
-      state: med_key
+      state: emp_key
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: DeviceNetwork
     deviceNetId: Wireless
-    receiveFrequencyId: CrewImperialMonitor
+    receiveFrequencyId: CrewEmpireMonitor

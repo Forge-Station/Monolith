@@ -1,6 +1,6 @@
 - type: entity
   id: CrewMonitoringRenegadeServer
-  parent: CrewMonitoringServer
+  parent: [CrewMonitoringServer, BaseStructureDisableToolUse]
   suffix: Renegade
   name: crew renegade monitoring server
   description: Receives and relays the status of all active renegade implant sensors.
@@ -18,7 +18,7 @@
 
 - type: entity
   id: CrewMonitoringTSFServer
-  parent: CrewMonitoringServer
+  parent: [CrewMonitoringServer, BaseStructureDisableToolUse]
   suffix: TSF
   name: crew TSF monitoring server
   description: Receives and relays the status of all active TSF implant sensors.
@@ -36,7 +36,7 @@
 
 - type: entity
   id: CrewMonitoringNanotrasenServer
-  parent: CrewMonitoringServer
+  parent: [CrewMonitoringServer, BaseStructureDisableToolUse]
   suffix: NT
   name: crew NT monitoring server
   description: Receives and relays the status of all active NT and TTI implant sensors.
@@ -53,19 +53,19 @@
       autoConnect: false
 
 - type: entity
-  id: CrewMonitoringImperialServer
-  parent: CrewMonitoringServer
-  suffix: Imperial
-  name: crew imperial monitoring server
-  description: Receives and relays the status of all active imperial implant sensors.
+  id: CrewMonitoringEmpireServer
+  parent: [CrewMonitoringServer, BaseStructureDisableToolUse]
+  suffix: Empire
+  name: crew empire monitoring server
+  description: Receives and relays the status of all active empire implant sensors.
   components:
     - type: Sprite
       sprite: Forge/Structures/Machines/server.rsi
       layers:
         - state: server
-        - state: variant-crew-imperial
+        - state: variant-crew-empire
     - type: DeviceNetwork
       deviceNetId: Wireless
-      transmitFrequencyId: CrewImperialMonitor
-      receiveFrequencyId: SuitImperialSensor
+      transmitFrequencyId: CrewEmpireMonitor
+      receiveFrequencyId: SuitEmpireSensor
       autoConnect: false

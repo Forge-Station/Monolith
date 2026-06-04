@@ -102,7 +102,7 @@
             ]
         },
         {
-            "name": "crew",
+            "name": "crew-emp",
             "directions": 4,
             "delays": [
                 [
@@ -196,7 +196,7 @@
             ]
         },
         {
-            "name": "crew",
+            "name": "crew-tsf",
             "directions": 4,
             "delays": [
                 [
@@ -290,7 +290,7 @@
             ]
         },
         {
-            "name": "crew",
+            "name": "crew-nt",
             "directions": 4,
             "delays": [
                 [

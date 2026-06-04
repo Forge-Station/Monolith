@@ -47,7 +47,10 @@
             "name": "variant-crew-nt"
         },
         {
-            "name": "variant-crew-imperial"
+            "name": "variant-crew-empire"
+        },
+        {
+            "name": "variant-empire"
         }
     ]
 }

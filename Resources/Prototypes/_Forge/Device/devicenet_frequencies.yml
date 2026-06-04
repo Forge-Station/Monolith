@@ -16,8 +16,8 @@
   frequency: 1248
 
 - type: deviceFrequency
-  id: SuitImperialSensor
-  name: device-frequency-prototype-name-suit-sensors-imperial
+  id: SuitEmpireSensor
+  name: device-frequency-prototype-name-suit-sensors-empire
   frequency: 1280
 
 # Crew monitors listen to this for a list of suit sensor statuses
@@ -37,6 +37,6 @@
   frequency: 1247
 
 - type: deviceFrequency
-  id: CrewImperialMonitor
-  name: device-frequency-prototype-name-crew-monitor-imperial
+  id: CrewEmpireMonitor
+  name: device-frequency-prototype-name-crew-monitor-empire
   frequency: 1281

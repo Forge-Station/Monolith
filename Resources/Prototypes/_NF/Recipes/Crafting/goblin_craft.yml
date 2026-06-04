@@ -7,8 +7,8 @@
   targetNode: ClothingOuterCoatRobesGoblin
   category: construction-category-goblin
   entityWhitelist: &goblinWhitelist
-    components:
-    - Goblin
+    tags:
+    - GoblinCraft
   objectType: Item
 
 #region EVA
@@ -54,6 +54,11 @@
 # tools
 #region multitool
 - type: construction
+  name: hacker jig
+  description: A crude multitool cobbled together by a goblin. It is very slow and breaks easily.
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/multitool.rsi
+    state: icon
   id: NFGoblinMadeMultitool
   graph: NFGoblinMadeMultitool
   startNode: start
@@ -181,21 +186,6 @@
   category: construction-category-goblin
   entityWhitelist: *goblinWhitelist
   objectType: Item
-
-# furniture
-#region banner
-# - type: construction
-#   id: BannerGoblin01
-#   entityWhitelist: *goblinWhitelist
-#   graph: NFGoblinMadeBanner
-#   startNode: start
-#   targetNode: BannerGoblin01
-#   category: construction-category-goblin
-#   objectType: Structure
-#   placementMode: SnapgridCenter
-#   canBuildInImpassable: false
-#   conditions:
-#     - !type:TileNotBlocked
 
 # vehicles
 #region dumpster-car

@@ -612,40 +612,6 @@
   - node: CableApcStack10
     entity: CableApcStack10
 
-#region banner
-- type: constructionGraph
-  id: NFGoblinMadeBanner
-  start: start
-  graph:
-    - node: start
-      actions:
-        - !type:DestroyEntity {}
-      edges:
-        - to: BannerGoblin01
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 1
-            - material: Cloth
-              amount: 2
-              doAfter: 1
-    - node: BannerGoblin01
-      entity: BannerGoblin01
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: MaterialCloth1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
-
 #region dumpster-car
 - type: constructionGraph
   id: NFGoblinMadeVehicleDumpster

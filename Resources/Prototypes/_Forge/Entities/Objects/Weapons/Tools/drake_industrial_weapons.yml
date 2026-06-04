@@ -1,0 +1,234 @@
+# Drake Industries industrial weapons.
+
+# Gas-powered Drake tools - DrakePlasmaGasWeapon (plasma moles only, not other gases).
+
+- type: entity
+  abstract: true
+  id: DrakePlasmaPoweredWeaponBase
+  components:
+  - type: ItemSlots
+    slots:
+      gas_tank:
+        name: drake-plasma-tank-slot
+        whitelist:
+          tags:
+          - DrakePlasmaTank
+        insertSound:
+          path: /Audio/Weapons/click.ogg
+          params:
+            volume: -3
+  - type: ContainerContainer
+    containers:
+      gas_tank: !type:ContainerSlot
+
+- type: entity
+  id: BulletKineticDrakeIndustrial
+  parent: BulletKinetic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    scale: 1, 1
+    layers:
+    - sprite: Structures/Power/Generation/PA/particle.rsi
+      state: particle0
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Slash: 18
+        Heat: 12
+        Structural: 45
+    ignoreResistances: false
+    armorPenetration: 0.3
+    # Forge-Change: keep core penetration disabled; use LimitedPenetration hit cap instead.
+    penetrationThreshold: 0
+  - type: LimitedPenetration
+    maxHits: 5
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.1,0.2,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: GatheringProjectile
+    amount: 10
+  - type: MiningGatheringSoft
+  - type: MiningGatheringHard
+
+- type: entity
+  name: Drake industrial cutter
+  id: WeaponDrakeIndustrialCutter
+  parent: [WeaponProtoKineticAcceleratorBase, DrakePlasmaPoweredWeaponBase]
+  description: Drake Industries proto-kinetic cutter. Runs on a tank of gaseous plasma. Rated for rock, wreckage, and supercompacted asteroid walls.
+  suffix: Drake
+  components:
+  - type: DrakePlasmaGasWeapon
+    gasUsage: 0.105
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Basic/drake_industrial_cutter.rsi
+    layers:
+    - state: icon
+    - state: icon
+      visible: false
+      map: [ "empty-icon" ]
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/Basic/drake_industrial_cutter.rsi
+    size: Small
+    shape:
+    - 0,0,1,1
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Basic/drake_industrial_cutter.rsi
+    quickEquip: false
+    slots: NONE
+  - type: Gun
+    fireRate: 1.25
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    minAngle: 0
+    maxAngle: 0
+    showExamineText: false
+  - type: GunWieldBonus
+    wieldBonusExamineMessage: null
+  - type: BasicEntityAmmoProvider
+    proto: BulletKineticDrakeIndustrial
+    capacity: 1
+    count: 1
+  - type: RechargeBasicEntityAmmo
+    # Forge-Change: long interval between cutter shots.
+    rechargeCooldown: 2.5
+    showExamineText: false
+  - type: UseDelay
+    delay: 2.5
+  - type: StaticPrice
+    price: 1800
+    vendPrice: 2700
+
+- type: entity
+  name: Drake industrial grenade launcher
+  id: WeaponDrakeIndustrialGrenadeLauncher
+  parent: [BaseWeaponLauncher, BaseGunWieldable]
+  description: Drake Industries three-round launcher for standard seismic charges. Fired accurately when wielded with both hands.
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Launchers/drake_industrial_grenade_launcher.rsi
+    layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/Launchers/drake_industrial_grenade_launcher.rsi
+    size: Ginormous
+  - type: HeldSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Launchers/drake_industrial_grenade_launcher.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: AmmoCounter
+  - type: GunRequiresWield
+  - type: Gun
+    fireRate: 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+  - type: SeismicChargeBallistic
+  - type: BallisticAmmoProvider
+    proto: SeismicCharge
+    capacity: 3
+    whitelist:
+      tags:
+      - SeismicCharge
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+  - type: StaticPrice
+    price: 2500
+    vendPrice: 4000
+
+- type: entity
+  name: Drake industrial laser
+  id: WeaponDrakeIndustrialLaser
+  parent: [BaseWeaponBattery, DrakePlasmaPoweredWeaponBase]
+  description: Drake Industries mining laser with plasma tank and internal cell. Two-handed. Clears rock and relocates mined ore to the operator.
+  suffix: Drake
+  components:
+  # PlasmaTankFilled holds 4.10275810 mol - gasUsage x 60 drains tank below usable minimum.
+  - type: DrakePlasmaGasWeapon
+    gasUsage: 0.0683793017
+  - type: MultiHandedItem
+    handsNeeded: 2
+  - type: HeldSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser_wide.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-0
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser_wide.rsi
+    state: icon
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser.rsi
+    storedSprite:
+      sprite: Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser_wide.rsi
+      state: icon
+    size: Ginormous
+    shape:
+    - 0,0,4,4
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: Clothing
+    quickEquip: false
+    sprite: Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    fireRate: 5
+    minAngle: 0
+    maxAngle: 10
+    angleIncrease: 2
+    angleDecay: 4
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: DrakeIndustrialLaserHitscan
+    fireCost: 17
+  - type: Battery
+    maxCharge: 1020
+    startingCharge: 1020
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.DrakePlasmaTankVisuals.TankLoaded:
+        enum.GunVisualLayers.MagUnshaded:
+          True: { visible: true }
+          False: { visible: false }
+  - type: StaticPrice
+    price: 5250
+    vendPrice: 7800

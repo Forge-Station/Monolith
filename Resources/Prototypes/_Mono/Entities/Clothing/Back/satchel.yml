@@ -3,6 +3,7 @@
   parent: ClothingBackpackSatchel
   id: ClothingBackpackSatchelDrakeIndustries
   name: drake industries satchel
+  suffix: Drake # Forge-Change
   description: The synthetic cloth it's made off looks pretty cheap, is that buckle coming off ? It bears the colors of Drake Industries
   components:
   - type: Sprite

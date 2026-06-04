@@ -2,7 +2,7 @@
   id: TsfBasicGuns
   name: research-technology-tsfmc-guns
   entityIcon: WeaponRifleLecter
-  discipline: TsfmcWeaponry
+  discipline: Tsfmc
   tier: 1
   cost: 25000
   recipeUnlocks:
@@ -18,7 +18,7 @@
   id: TsfAdvancedWeapons
   name: research-technology-tsfmc-advanced-weapons
   entityIcon: WeaponRifleAnnie
-  discipline: TsfmcWeaponry
+  discipline: Tsfmc
   tier: 2
   cost: 30000
   recipeUnlocks:
@@ -38,7 +38,7 @@
   id: TsfSuperWeapons
   name: research-technology-tsfmc-super-weapons
   entityIcon: WeaponRifleXlr556
-  discipline: TsfmcWeaponry
+  discipline: Tsfmc
   tier: 3
   cost: 30000
   recipeUnlocks:

@@ -38,6 +38,7 @@ public sealed class TTSSystem : EntitySystem
     private const float MinimalVolume = -10f;
 
     private float _volume = 0.0f;
+    private float _radioVolume = 0.0f; // Forge-Change
     private int _fileIdx = 0;
 
     public override void Initialize()
@@ -50,6 +51,7 @@ public sealed class TTSSystem : EntitySystem
 
         _sawmill = Logger.GetSawmill("tts");
         _cfg.OnValueChanged(ForgeVars.TTSVolume, OnTtsVolumeChanged, true);
+        _cfg.OnValueChanged(ForgeVars.TTSRadioVolume, OnTtsRadioVolumeChanged, true); // Forge-Change
         SubscribeNetworkEvent<PlayTTSEvent>(OnPlayTTS);
     }
 
@@ -57,6 +59,7 @@ public sealed class TTSSystem : EntitySystem
     {
         base.Shutdown();
         _cfg.UnsubValueChanged(ForgeVars.TTSVolume, OnTtsVolumeChanged);
+        _cfg.UnsubValueChanged(ForgeVars.TTSRadioVolume, OnTtsRadioVolumeChanged); // Forge-Change
     }
 
     public void RequestPreviewTTS(string voiceId)
@@ -68,6 +71,13 @@ public sealed class TTSSystem : EntitySystem
     {
         _volume = volume;
     }
+
+    // Forge-Change-Start
+    private void OnTtsRadioVolumeChanged(float volume)
+    {
+        _radioVolume = volume;
+    }
+    // Forge-Change-End
 
     private void OnPlayTTS(PlayTTSEvent ev)
     {
@@ -83,7 +93,7 @@ public sealed class TTSSystem : EntitySystem
         audioResource.Load(IoCManager.Instance!, Prefix / filePath);
 
         var audioParams = AudioParams.Default
-            .WithVolume(AdjustVolume(ev.IsWhisper))
+            .WithVolume(AdjustVolume(ev.IsWhisper, ev.IsRadio)) // Forge-Change
             .WithMaxDistance(AdjustDistance(ev.IsWhisper));
 
         var soundSpecifier = new ResolvedPathSpecifier(Prefix / filePath);
@@ -103,9 +113,9 @@ public sealed class TTSSystem : EntitySystem
         _contentRoot.RemoveFile(filePath);
     }
 
-    private float AdjustVolume(bool isWhisper)
+    private float AdjustVolume(bool isWhisper, bool isRadio = false) // Forge-Change
     {
-        var volume = MinimalVolume + SharedAudioSystem.GainToVolume(_volume);
+        var volume = MinimalVolume + SharedAudioSystem.GainToVolume(isRadio ? _radioVolume : _volume); // Forge-Change
 
         if (isWhisper)
         {

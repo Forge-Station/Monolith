@@ -11,3 +11,17 @@
     2: 0.5
     3: 0.5
   uiName: HME
+
+# Drake Industries discipline
+- type: techDiscipline
+  id: DrakeIndustries
+  name: research-discipline-drake-industries
+  color: "#C97D7D"
+  icon:
+    sprite: Forge/Interface/Misc/company_icons.rsi
+    state: drake
+  tierPrerequisites:
+    1: 0
+    2: 0.5
+    3: 0.5
+  uiName: DI

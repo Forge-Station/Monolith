@@ -5,6 +5,7 @@ using Content.Shared.Atmos;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._Shitmed.Targeting; // Shitmed
 using Content.Shared.Alert;
+using Content.Shared.Chemistry.Reagent; // Forge-Change
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -227,8 +228,61 @@ namespace Content.Client.HealthAnalyzer.UI
             IReadOnlyDictionary<string, FixedPoint2> damagePerType = damageable.Damage.DamageDict;
 
             DrawDiagnosticGroups(damageSortedGroups, damagePerType);
+            DrawChemicalReagents(msg.ChemicalReagents); // Forge-Change
         }
         // Shitmed Change End
+
+        // Forge-Change-Start
+        private void DrawChemicalReagents(List<ReagentQuantity>? reagents)
+        {
+            ChemicalsContainer.RemoveAllChildren();
+
+            if (reagents == null || reagents.Count == 0)
+            {
+                ChemicalsPanel.Visible = false;
+                ChemicalsDivider.Visible = false;
+                return;
+            }
+
+            var entries = new List<(string Name, FixedPoint2 Quantity)>();
+
+            foreach (var reagent in reagents)
+            {
+                if (reagent.Quantity <= FixedPoint2.Zero)
+                    continue;
+
+                _prototypes.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? proto);
+                var name = proto?.LocalizedName ?? Loc.GetString("chem-master-window-unknown-reagent-text");
+                entries.Add((name, reagent.Quantity));
+            }
+
+            if (entries.Count == 0)
+            {
+                ChemicalsPanel.Visible = false;
+                ChemicalsDivider.Visible = false;
+                return;
+            }
+
+            entries.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.CurrentCulture));
+
+            ChemicalsPanel.Visible = true;
+            ChemicalsDivider.Visible = true;
+
+            foreach (var entry in entries)
+            {
+                ChemicalsContainer.AddChild(new Label
+                {
+                    Text = Loc.GetString(
+                        "health-analyzer-window-chemical-reagent-text",
+                        ("reagent", entry.Name),
+                        ("amount", entry.Quantity)),
+                    FontColorOverride = Color.FromHex("#ff9100"),
+                    Margin = new Thickness(0, 2),
+                });
+            }
+        }
+        // Forge-Change-End
+
         private static string GetStatus(MobState mobState)
         {
             return mobState switch

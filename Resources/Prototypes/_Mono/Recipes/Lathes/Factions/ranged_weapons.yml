@@ -247,9 +247,9 @@
   - Ballistic
   - Weapons
   materials:
-    Steel: 700
-    Plasteel: 1000
-    Plastic: 4500
+    Steel: 2700 # Forge-change
+    Plasteel: 2000 # Forge-change
+    Plastic: 5500 # Forge-change
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -261,8 +261,8 @@
   - Weapons
   materials:
     Steel: 1500
-    Plasteel: 2000
-    Plastic: 500
+    Plasteel: 4000 # Forge-change
+    Plastic: 1000 # Forge-change
     Silver: 200
 
 # advanced ballistics
@@ -276,9 +276,9 @@
   - Ballistic
   - Weapons
   materials:
-    Steel: 700
-    Plasteel: 750
-    Plastic: 2000
+    Steel: 1700 # Forge-change
+    Plasteel: 2750 # Forge-change
+    Plastic: 2500 # Forge-change
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -289,10 +289,10 @@
   - Ballistic
   - Weapons
   materials:
-    Steel: 700
-    Plasteel: 750
-    Plastic: 1000
-    Wood: 500
+    Steel: 2000 # Forge-change
+    Plasteel: 1750 # Forge-change
+    Plastic: 1000 # Forge-change
+    Wood: 1000 # Forge-change
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -303,10 +303,10 @@
   - Ballistic
   - Weapons
   materials:
-    Steel: 1800
-    Plasteel: 800
-    Plastic: 1200
-    Silver: 100
+    Steel: 2000 # Forge-change
+    Plasteel: 2500 # Forge-change
+    Plastic: 2500 # Forge-change
+    Silver: 1000 # Forge-change
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -317,9 +317,9 @@
   - Ballistic
   - Weapons
   materials:
-    Steel: 1200
-    Plasteel: 1500
-    Plastic: 1750
+    Steel: 4600 # Forge-change
+    Plasteel: 5500 # Forge-change
+    Plastic: 3750 # Forge-change
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -330,10 +330,10 @@
   - Ballistic
   - Weapons
   materials:
-    Steel: 2500
-    Plasteel: 1200
-    Plastic: 800
-    Silver: 200
+    Steel: 4500 # Forge-change
+    Plasteel: 6500 # Forge-change
+    Plastic: 1000 # Forge-change
+    Silver: 500 # Forge-change
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -344,10 +344,10 @@
   - Weapons
   - Antitank
   materials:
-    Steel: 2000
-    Plasteel: 500
-    Plastic: 500
-    Silver: 200
+    Steel: 4000 # Forge-change
+    Plasteel: 3000 # Forge-change
+    Plastic: 1500 # Forge-change
+    Silver: 1000 # Forge-change
     Plasma: 500
 
 # hristov

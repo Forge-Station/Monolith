@@ -160,6 +160,26 @@
 
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeEmpireHeavyCircuitboard
+  result: MachineShieldForgeEmpireHeavyCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeEmpirePrismaticCircuitboard
+  result: MachineShieldForgeEmpirePrismaticCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeEmpireCollisionCircuitboard
+  result: MachineShieldForgeEmpireCollisionCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineShieldForgeEmpireSignumCircuitboard
+  result: MachineShieldForgeEmpireSignumCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
   id: MachineShieldFSG900PCircuitboard
   result: MachineShieldFSG900PCircuitboard
 

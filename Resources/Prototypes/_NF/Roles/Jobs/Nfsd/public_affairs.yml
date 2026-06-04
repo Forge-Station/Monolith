@@ -21,6 +21,7 @@
   weight: 105
   displayWeight: 16
   assignedCompany: TSF # Forge-Change
+  assignedNationality: TransSolarFederation
   setPreference: false # mono
   hideConsoleVisibility: true #Forge Change
   accessGroups:

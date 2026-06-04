@@ -1,3 +1,51 @@
+#region Renegate
+- type: entity
+  parent: [ClothingShoesBootsMagSecurity, BaseC3Contraband]
+  id: ClothingShoesBootsMagRenegade
+  suffix: Ренегаты
+  name: renegade magboots
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Boots/magboots-renegade.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/Shoes/Boots/magboots-renegade.rsi
+  - type: Magboots
+    magbootsAlert: MagbootsRenegade
+
+- type: alert
+  id: MagbootsRenegade
+  icons:
+  - sprite: Forge/Clothing/Shoes/Boots/magboots-renegade.rsi
+    state: icon-on
+  name: alerts-magboots-name
+  description: alerts-magboots-desc
+
+#region Company
+- type: entity
+  parent: [ClothingShoesBootsMag, ClothingShoesBootsCombat]
+  id: ClothingShoesBootsMagNexus
+  name: nexus magboots
+  description: Nexus security magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle.
+  suffix: Нексус
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Boots/nexus_magboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/Shoes/Boots/nexus_magboots.rsi
+  - type: Magboots
+    magbootsAlert: MagbootsSecurity
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.75
+  - type: StaticPrice
+    price: 500
+    vendPrice: 5000
+
+#region Other
 - type: entity
   parent: ClothingShoesBootsMagSyndie
   id: ClothingShoesBootsJetBoots
@@ -25,22 +73,63 @@
   description: alerts-magboots-desc
 
 - type: entity
-  parent: [ClothingShoesBootsMag, ClothingShoesBootsCombat]
-  id: ClothingShoesBootsMagNexus
-  name: nexus magboots
-  description: Nexus security magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle.
-  suffix: Нексус
+  parent: [ClothingShoesBootsMagBase, BaseJetpack, ClothingShoesBootsCombat, BaseC3Contraband, ContrabandClothing ]
+  id: ClothingShoesBootsMagContractor
+  name: DCN™ magboots
+  description: Magnetic boots with a unique design, which appear to be based on an improved model, as they have a lighter magnetic attraction.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Boots/nexus_magboots.rsi
+    sprite: Forge/Clothing/Shoes/Boots/magboots-contractor.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Shoes/Boots/nexus_magboots.rsi
-  - type: Magboots
-    magbootsAlert: MagbootsSecurity
+    sprite: Forge/Clothing/Shoes/Boots/magboots-contractor.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 1
+    sprintModifier: 1
+  - type: GasTank
+    outputPressure: 42.6
+    air:
+      volume: 5
+      temperature: 293.15
+      moles:
+      - 1.5
+      - 1.5
+  - type: Item
+    sprite: null
+    size: Small
+    shape:
+    - 0,0,1,1
+  - type: Magboots
+    magbootsAlert: MagbootsContractor
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: SilenceIsGolden
+
+- type: alert
+  id: MagbootsContractor
+  icons:
+  - sprite: Forge/Clothing/Shoes/Boots/magboots-contractor.rsi
+    state: icon-on
+  name: alerts-magboots-name
+  description: alerts-magboots-desc
+
+- type: entity
+  parent: [ ClothingShoesBootsMagAdv, BaseFactionGearOtherFactionT2, BaseJetpack ]
+  id: ClothingShoesBootsMagAsakimForge
+  name: pre-fracture magboots
+  description: State-of-the-art magnetic boots made for combat with advanced harnesses.
+  components:
+  - type: UnremovableClothing
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Boots/advs_magboots_promax.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/Shoes/Boots/advs_magboots_promax.rsi
+    stripDelay: 120
+    equipDelay: 120
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepHeavySuit
   - type: ClothingSlowOnDamageModifier
     modifier: 0.75
   - type: StaticPrice

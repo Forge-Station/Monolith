@@ -85,11 +85,6 @@ public sealed partial class IdCardConsoleComponent : Component
         //"USSPHigh", // Mono
         //"USSPCommand", // Mono
         //"Theatre",
-        "Empire", // Forge Change
-        "EmpireOfficer", // Forge Change
-        "EmpireInqusitor", // Forge Change
-        "EmpireCommander", // Forge Change
-        "EmpireDiplomacy", // Forge Change
         "TsfDiplomacy", // Forge Change
     };
 

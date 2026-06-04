@@ -7,9 +7,6 @@
   - type: DisciplinesDisk
     disciplines:
     - Ussp
-    - UsspShipyard
-    - UsspEquipment
-    - UsspWeapons
   - type: Item
     size: Small
   - type: Sprite
@@ -30,10 +27,7 @@
   components:
   - type: DisciplinesDisk
     disciplines:
-    - TsfmcWeaponry
-    - TsfmcGear
-    - TsfmcEquipment
-    - TsfmcShipyard
+    - Tsfmc
   - type: Item
     size: Small
   - type: Sprite
@@ -54,10 +48,7 @@
   components:
   - type: DisciplinesDisk
     disciplines:
-    - RogueWeaponry
-    - RogueGear
-    - RogueEquipment
-    - RogueShipyard
+    - Pdv
   - type: Item
     size: Small
   - type: Sprite
@@ -134,6 +125,28 @@
   - type: StaticPrice
     price: 1000
     vendPrice: 8000
+
+- type: entity
+  id: DisciplinesDiskDrakeIndustries
+  parent: BaseItem
+  name: technology disk (Drake Industries)
+  suffix: Drake
+  description: Disk with Drake Industries research disciplines. Insert into an R&D server to unlock the Drake Industries technology tree.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - DrakeIndustries
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: icon
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 20000
 
 - type: entity
   id: DisciplinesDiskHME

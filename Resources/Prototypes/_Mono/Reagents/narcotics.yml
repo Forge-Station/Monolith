@@ -21,6 +21,23 @@
             Burn: -3
             Brute: -6 # its a painkiller
             Toxin: -1
+        # Forge-change-start
+      - !type:HealthChange
+        conditions:
+          - !type:TotalDamage
+            min: 5
+          - !type:ReagentThreshold
+            max: 5
+          - !type:AddictionCondition
+            addictionId: Fentanyl
+            min: 0.5
+            max: 1.0
+        damage:
+          groups:
+            Burn: 1.5
+            Brute: 3
+            Toxin: 0.5
+        # Forge-change-end
     Narcotic:
       metabolismRate: 1
       effects:
@@ -51,6 +68,17 @@
       - !type:Drunk
         slurSpeech: true
         boozePower: 75
+        # Forge-change-start
+      - !type:ChemVomit
+        probability: 0.15
+        conditions:
+          - !type:ReagentThreshold
+            min: 3
+          - !type:AddictionCondition
+            addictionId: Fentanyl
+            min: 0.5
+            max: 1.0
+        # Forge-change-end
         # OD effects
       - !type:ChemVomit
         probability: 0.05
@@ -87,6 +115,9 @@
         visualType: Medium
         messages: [ "generic-reagent-effect-nauseous" ]
         probability: 0.5
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Fentanyl
+        toleranceGain: 0.07
 
 # Monolithic
 

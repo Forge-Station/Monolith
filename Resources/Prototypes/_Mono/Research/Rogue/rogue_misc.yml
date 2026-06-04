@@ -3,7 +3,7 @@
   id: PdvTierOneVouchers
   name: research-technology-rogue-tier-one-vouchers
   entityIcon: ShipVoucherPdvT0
-  discipline: RogueShipyard
+  discipline: Pdv
   tier: 1
   cost: 40000
   recipeUnlocks:
@@ -20,7 +20,7 @@
   id: PdvTierTwoVouchers
   name: research-technology-rogue-tier-two-vouchers
   entityIcon: ShipVoucherPdvT2Random
-  discipline: RogueShipyard
+  discipline: Pdv
   tier: 1
   cost: 60000
   recipeUnlocks:
@@ -34,7 +34,7 @@
   id: PdvTierThreeVouchers
   name: research-technology-rogue-tier-three-vouchers
   entityIcon: ShipVoucherSaturn
-  discipline: RogueShipyard
+  discipline: Pdv
   tier: 3
   cost: 80000
   recipeUnlocks:
@@ -49,7 +49,7 @@
   id: RogueJaws
   name: research-technology-rogue-jaws
   entityIcon: JawsOfLife
-  discipline: RogueGear
+  discipline: Pdv
   tier: 1
   cost: 10000
   recipeUnlocks:
@@ -63,7 +63,7 @@
   id: RogueHypospray
   name: research-technology-rogue-hypospray
   entityIcon: Hypospray
-  discipline: RogueGear
+  discipline: Pdv
   tier: 2
   cost: 10000
   recipeUnlocks:
@@ -76,7 +76,7 @@
   id: RogueEmag
   name: research-technology-rogue-emag
   entityIcon: Emag
-  discipline: RogueGear
+  discipline: Pdv
   tier: 2
   cost: 25000
   recipeUnlocks:
@@ -90,7 +90,7 @@
   id: RogueThermals
   name: research-technology-rogue-thermals
   entityIcon: ClothingEyesThermalVisionGoggles
-  discipline: RogueGear
+  discipline: Pdv
   tier: 1
   cost: 15000
   recipeUnlocks:
@@ -103,7 +103,7 @@
   id: PDVBasicBorgModule
   name: research-technology-pdv-basic-module
   entityIcon: BorgModulePDVStandardWeapon
-  discipline: RogueGear
+  discipline: Pdv
   tier: 1
   cost: 10000
   recipeUnlocks:
@@ -116,7 +116,7 @@
   id: PDVAdvancedBorgModule
   name: research-technology-pdv-advanced-module
   entityIcon: BorgModulePDVAdvancedWeapon
-  discipline: RogueGear
+  discipline: Pdv
   tier: 3
   cost: 65000
   recipeUnlocks:

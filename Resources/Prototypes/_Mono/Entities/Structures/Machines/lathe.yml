@@ -29,6 +29,10 @@
     - RoundstartShipgunAmmo
     - MonoAttachmentsStatic
     dynamicPacks:
+    # Empire start
+    - HardsuitEmpirePack
+    - WeaponEmpirePack
+    - EmpireVoucherRecipePack
     # rogue start
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged
@@ -56,6 +60,7 @@
     - DynamicAmmoRecipePack
     - NFMercenaryTechfabDeprecated
     - NFEngineeringTechfabDeprecated # Forge-Change
+    - AtmosTools
     # Civ military tech
     - ResearchedExplosives
     - SecurityEquipment

@@ -23,6 +23,7 @@
         amount: 2
       - id: PillCanisterKelotane
       - id: PillCanisterDermaline
+      - id: SyringeCodeine # Forge-change
 
 - type: entity
   id: MedkitBruteFilled
@@ -35,6 +36,7 @@
       - id: Gauze
       - id: PillCanisterIron
       - id: PillCanisterCopper
+      - id: SyringeCodeine # Forge-change
 
 - type: entity
   id: MedkitToxinFilled
@@ -73,6 +75,7 @@
       - id: RadAutoInjector
       - id: PillCanisterPotassiumIodide
       - id: PillCanisterHyronalin
+      - id: SyringeMorphine # Forge-change
 
 - type: entity
   id: MedkitAdvancedFilled

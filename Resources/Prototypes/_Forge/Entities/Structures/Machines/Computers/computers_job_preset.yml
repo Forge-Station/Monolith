@@ -51,8 +51,8 @@
 - type: entity
   parent: BaseComputerJobPreset
   id: ComputerTsfRank
-  name: Консоль должностей TSF
-  description: Терминал для назначения должностей TSF и предустановленных доступов.
+  name: Консоль должностей ТСФ
+  description: Терминал для назначения должностей ТС. Назначается не только должность, но и доступы! Бюрократия, храни Федерацию.
   components:
   - type: JobPresetIdCardConsole
     bodyImplants:
@@ -155,8 +155,8 @@
 - type: entity
   parent: BaseComputerJobPreset
   id: ComputerUspRank
-  name: Консоль должностей USP
-  description: Терминал для назначения должностей USP и предустановленных доступов.
+  name: Консоль должностей СССП
+  description: Терминал для назначения должностей СССП и предустановленных доступов.
   components:
   - type: JobPresetIdCardConsole
     rankPresets:
@@ -185,8 +185,8 @@
 - type: entity
   parent: BaseComputerJobPreset
   id: ComputerRngRank
-  name: Консоль должностей RNG
-  description: Терминал для назначения должностей RNG и предустановленных доступов.
+  name: Консоль должностей ВКР
+  description: Терминал для назначения должностей ВКР и предустановленных доступов.
   components:
   - type: JobPresetIdCardConsole
     rankPresets:
@@ -217,25 +217,33 @@
 
 - type: entity
   parent: BaseComputerJobPreset
-  id: ComputerEmpRank
-  name: Консоль должностей EMP
-  description: Терминал для назначения должностей EMP и предустановленных доступов.
+  id: ComputerEmpireRank
+  name: Консоль назначений Империи
+  description: Терминал для назначения должностей Империи. Славься Империя, ведь сегодня действует акция "1 + 1" в подарок к должности идут и доступы.
   components:
   - type: JobPresetIdCardConsole
+    requirePresetAccessOnly: true
+    bodyImplants:
+    - ImplantGuard
     rankPresets:
-    - Praefect
-    - Arbiter
-    - Cardinal
-    - Inquisitor
-    - Consul
+    # - Praefect # WTF?
+    # - Arbiter
+    # - Cardinal
+    # - Inquisitor
+    # - Consul
+    # - Tessarian
+    - EmpireSmallInquisitor
     - Praetorian
+    - EmpireTechnican
+    - EmpireApotek
     - Auxilia
     - Neophyte
   - type: Sprite
     sprite: Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
-      state: computer
+      sprite: Forge/Structures/Machines/computers.rsi
+      state: computer_emp
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]

@@ -106,6 +106,11 @@ public sealed partial class FlatpackSystem : SharedFlatpackSystem
         Del(board);
     }
 
+    public void ConfigureFlatpack(EntityUid flatpack, EntProtoId packedEntityPrototype, EntityUid sourceBoard)
+    {
+        SetupFlatpack(flatpack, packedEntityPrototype, sourceBoard);
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

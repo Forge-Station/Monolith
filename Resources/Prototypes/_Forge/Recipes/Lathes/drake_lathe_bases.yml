@@ -1,0 +1,50 @@
+# Drake Industries lathe category bases for salvage techfab recipes.
+
+- type: latheRecipe
+  abstract: true
+  id: DrakeIndustriesToolRecipe
+  parent: BaseToolRecipe
+  categories:
+  - DrakeIndustries
+
+- type: latheRecipe
+  abstract: true
+  id: DrakeIndustriesApparelRecipe
+  parent: MonoHardsuitT2Recipe
+  categories:
+  - DrakeIndustries
+
+- type: latheRecipe
+  abstract: true
+  id: DrakeIndustriesMagBootsRecipe
+  parent: NFBaseMagBootsRecipe
+  categories:
+  - DrakeIndustries
+
+- type: latheRecipe
+  abstract: true
+  id: DrakeIndustriesHardsuitT1Recipe
+  parent: MonoHardsuitT1Recipe
+  categories:
+  - DrakeIndustries
+
+- type: latheRecipe
+  abstract: true
+  id: DrakeIndustriesHardsuitT2Recipe
+  parent: MonoHardsuitT2Recipe
+  categories:
+  - DrakeIndustries
+
+- type: latheRecipe
+  abstract: true
+  id: DrakeIndustriesHardsuitT3Recipe
+  parent: MonoHardsuitT3Recipe
+  categories:
+  - DrakeIndustries
+
+- type: latheRecipe
+  abstract: true
+  id: DrakeIndustriesShipWeaponRecipe
+  parent: MonoHardsuitT3Recipe
+  categories:
+  - DrakeIndustries

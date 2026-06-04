@@ -1,0 +1,29 @@
+- type: loadout
+  id: EmpireBelt1
+  price: 0
+  equipment:
+    belt: ClothingBeltWebbingsNormalBlack
+
+- type: loadout
+  id: EmpireBelt2
+  price: 500
+  equipment:
+    belt: ClothingBeltWebbingsBigBlack
+
+- type: loadout
+  id: EmpireBelt3
+  price: 0
+  equipment:
+    belt: ClothingBeltMilitaryWebbing
+
+- type: loadout
+  id: EmpireBelt4
+  price: 500
+  equipment:
+    belt: ClothingBeltWebbingsBigBase
+
+- type: loadout
+  id: EmpireBelt5
+  price: 0
+  equipment:
+    belt: ClothingBeltAssault

@@ -1,0 +1,285 @@
+#region Empire
+- type: entity
+  parent: [ ClothingEyesGlassesMeson, ShowSecurityIcons ]
+  id: ClothingEyesGlassesEmpireOperator
+  name: empire operator goggles
+  description: Imperial Operator visor that allows for ID card identification, rapid equipment diagnostics, and drone control within a two-kilometer radius.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/operator.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/operator.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  - type: HandheldGPS
+  - type: VisionCorrection
+  # Drone-control
+  - type: DroneControlConsole
+    maxOrderRadius: 2000
+  - type: ActivatableUI
+    key: enum.DroneConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.DroneConsoleUiKey.Key:
+        type: DroneConsoleBoundUserInterface
+  - type: RadarConsole
+    noRotate: true
+  - type: WorldLoader
+    radius: 256
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    transmitFrequencyId: DroneControl
+  - type: WirelessNetworkConnection
+    range: 100000
+  - type: DeviceList
+    deviceLimit: 2
+
+#region Company
+- type: entity
+  parent: [ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseFactionGearOtherFactionT1]
+  id: NFClothingEyesNightVisionGoggleTL
+  name: night vision TL
+  suffix: TechnicLogistic
+  description: There is an incomprehensible engraving on the glasses; all I can make out is the word "Nian"
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision_techniclogistic.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision_techniclogistic.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: StaticPrice
+    price: 600
+    vendPrice: 8900
+  - type: ShowHealthBars
+  - type: NightVision
+    color: "#ba8207"
+    flashDurationMultiplier: 2
+    isEquipment: true
+
+#region Other
+- type: entity
+  parent: ClothingEyesNightVisionGoggles
+  id: NFClothingEyesNightVisionGoggles
+  name: night vision goggles
+  description: An advanced heads-up display which provides id data and vision in complete darkness.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/nightvision.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/nightvision.rsi
+  - type: FlashImmunity
+  - type: StaticPrice
+    price: 30
+  - type: Tag
+    tags:
+    - NightVisionGoggles
+  - type: NightVision
+    color: "#77DD77"
+    flashDurationMultiplier: 2
+    isEquipment: true
+
+- type: entity
+  parent: ClothingEyesNightVisionGoggles
+  id: NFClothingEyesNightVisionGogglesMed
+  name: night vision goggles
+  description: An advanced heads-up display which provides id data and vision in complete darkness.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/medical_nightvision.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/medical_nightvision.rsi
+  - type: FlashImmunity
+  - type: StaticPrice
+    price: 30
+  - type: ShowHealthBars
+  - type: Construction
+    graph: NFClothingEyesNightVisionGogglesMed
+    node: NightVisionGogglesMed
+  - type: NightVision
+    color: "#42AAFF"
+    flashDurationMultiplier: 2
+    isEquipment: true
+
+- type: entity
+  parent: [ ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC3SyndicateContraband ]
+  id: NFClothingEyesNightVisionGoggleSyndicate
+  name: night vision goggles
+  description: An advanced heads-up display which provides id data and vision in complete darkness.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/security_nightvision.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/security_nightvision.rsi
+  - type: FlashImmunity
+  - type: StaticPrice
+    price: 30
+  - type: ShowHealthBars
+  - type: ShowSyndicateIcons
+  - type: NightVision
+    color: "#AB4E52"
+    flashDurationMultiplier: 2
+    isEquipment: true
+
+- type: entity
+  parent: [ ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC3PirateContraband ]
+  id: NFClothingEyesNightVisionGogglePirate
+  name: night vision goggles
+  description: An advanced heads-up display which provides id data and vision in complete darkness.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: StaticPrice
+    price: 30
+  - type: ShowHealthBars
+  - type: NightVision
+    color: "#ddba00"
+    flashDurationMultiplier: 2
+    isEquipment: true
+
+- type: entity
+  parent: [ ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC2ContrabandUnredeemable ]
+  id: NFClothingEyesNightVisionGoggleDSBF
+  name: night vision goggles
+  description: Now you can see in the dark!
+  components:
+  - type: Sprite
+    sprite: _White/Clothing/Eyes/Goggles/snightvision.rsi
+  - type: Clothing
+    sprite: _White/Clothing/Eyes/Goggles/snightvision.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: StaticPrice
+    price: 30
+  - type: ShowHealthBars
+  - type: NightVision
+    color: "#2E8B57"
+    flashDurationMultiplier: 2
+    isEquipment: true
+
+- type: entity
+  parent: ClothingEyesNightVisionGoggles
+  id: NFClothingEyesNightVisionGoggleChameleon
+  name: night vision goggles
+  description: Now you can see in the dark!
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: ShowHealthBars
+  - type: StaticPrice
+    price: 30
+  - type: ChameleonClothing
+    slot: [ eyes ]
+    default: ClothingEyesGlassesSunglasses
+  - type: UserInterface
+    interfaces:
+      enum.ChameleonUiKey.Key:
+        type: ChameleonBoundUserInterface
+  - type: NightVision
+    color: "#808080"
+    flashDurationMultiplier: 2
+    isEquipment: true
+
+- type: entity
+  parent: [ ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC3SyndicateContraband ]
+  id: NFClothingEyesNightVisionGoggleChameleonNuke
+  name: night vision goggles
+  description: Now you can see in the dark!
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: ShowHealthBars
+  - type: StaticPrice
+    price: 30
+  - type: ChameleonClothing
+    slot: [ eyes ]
+    default: ClothingEyesGlassesSunglasses
+  - type: UserInterface
+    interfaces:
+      enum.ChameleonUiKey.Key:
+        type: ChameleonBoundUserInterface
+  - type: NightVision
+    color: "#808080"
+    flashDurationMultiplier: 2
+    isEquipment: true
+
+- type: entity
+  parent: [ ClothingEyesNightVisionGoggles, ShowSecurityIcons, ShowMedicalIcons, BaseC3Contraband ]
+  id: ForgeClothingEyesNightVisionGoggleContractor
+  name: прибор ночного видения DCN™
+  description: Усовершенствованный сенсорный дисплей, который выдает идентификационные данные и обеспечивает видимость в полной темноте.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/dcn_nightvision.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/dcn_nightvision.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: StaticPrice
+    price: 30
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+    - Inorganic
+    - Silicon
+  - type: NightVision
+    color: "#aa9c00"
+    flashDurationMultiplier: 2
+    isEquipment: true
+
+- type: entity
+  parent: [ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC2ContrabandUnredeemable]
+  id: ClothingEyesNightThermalVisionNfsd
+  name: night-thermal vision goggles
+  description: Now you can see in the dark everyone!
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: StaticPrice
+    price: 30
+  - type: ShowHealthBars
+  - type: NightVision
+    color: "#b2cb50"
+    flashDurationMultiplier: 2
+    isEquipment: true
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 2
+    isEquipment: true
+    toggleAction: PulseThermalVision
+
+- type: entity
+  parent: [ ClothingEyesBase, ShowSecurityIcons ]
+  id: ClothingEyesUIGoogles
+  name: Солнцезащитные очки U.I
+  description: Стильные фиолетовые очки с возможностью просмотра профессии и компаний
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5

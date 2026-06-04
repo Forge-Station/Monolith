@@ -21,7 +21,7 @@
   - Frontier # Frontier
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ]
+    implants: [ MindShieldImplant, NanotrasenTrackingImplant ] # Forge-change
   - !type:GiveItemOnHolidaySpecial # Frontier
     holiday: FrontierBirthday # Frontier
     prototype: FrontierBirthdayGift # Frontier

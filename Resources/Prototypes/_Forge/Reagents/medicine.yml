@@ -1,3 +1,5 @@
+# region Nanomachines
+# , son
 - type: reagent
   id: CombatNanites
   name: reagent-name-combat-nanites
@@ -72,3 +74,98 @@
           - !type:MobStateCondition
             mobstate: Alive
           amount: 12
+
+# region Naloxone
+# opioid antagonist
+- type: reagent
+  id: Naloxone
+  name: reagent-name-naloxone
+  group: Medicine
+  desc: reagent-desc-naloxone
+  physicalDesc: reagent-physical-desc-clear
+  flavor: bitter
+  color: "#d4ecd4"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+        - !type:CureAddictionEffect
+          addictionId: Fentanyl
+          amount: 0.08
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          time: 2
+          type: Add
+          probability: 0.05
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Fentanyl
+              min: 0.4
+              max: 1.0
+        - !type:ChemVomit
+          probability: 0.5
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Fentanyl
+              min: 0.4
+              max: 1.0
+        - !type:PopupMessage
+          type: Local
+          visualType: MediumCaution
+          messages: [ "reagent-effect-naloxone-withdrawal" ]
+          probability: 0.8
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Fentanyl
+              min: 0.4
+              max: 1.0
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Fentanyl
+              min: 0.4
+              max: 1.0
+        - !type:CureAddictionEffect
+          addictionId: Morphine
+          amount: 0.06
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          time: 2
+          type: Add
+          probability: 0.05
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.4
+              max: 1.0
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.4
+              max: 1.0
+        - !type:ChemVomit
+          probability: 0.3
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.4
+              max: 1.0
+        - !type:PopupMessage
+          type: Local
+          visualType: MediumCaution
+          messages: [ "reagent-effect-naloxone-withdrawal" ]
+          probability: 0.6
+          conditions:
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.4
+              max: 1.0

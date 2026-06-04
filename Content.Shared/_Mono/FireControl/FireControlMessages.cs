@@ -15,14 +15,57 @@ public sealed class FireControlConsoleBoundInterfaceState : BoundUserInterfaceSt
     public bool Connected;
     public FireControllableEntry[] FireControllables;
     public NavInterfaceState NavState;
+    // Forge-Change-Start: split registration capacity (processing power) from simultaneous firing limit.
+    /// <summary>
+    /// Maximum weapons selectable for firing at once on connected server.
+    /// </summary>
+    public int MaxActiveWeapons;
+    public GunneryWeaponPresetState[] WeaponPresets;
 
-    public FireControlConsoleBoundInterfaceState(bool connected, FireControllableEntry[] fireControllables, NavInterfaceState navState)
+    public FireControlConsoleBoundInterfaceState(
+        bool connected,
+        FireControllableEntry[] fireControllables,
+        NavInterfaceState navState,
+        int maxActiveWeapons = int.MaxValue,
+        GunneryWeaponPresetState[]? weaponPresets = null)
     {
         Connected = connected;
         FireControllables = fireControllables;
         NavState = navState;
+        MaxActiveWeapons = maxActiveWeapons;
+        WeaponPresets = weaponPresets ?? Array.Empty<GunneryWeaponPresetState>();
     }
 }
+
+// Forge-Change-Start: client requests to save/rename console-bound weapon presets.
+[Serializable, NetSerializable]
+public sealed class FireControlConsoleSavePresetMessage : BoundUserInterfaceMessage
+{
+    public readonly int PresetIndex;
+    public readonly string Name;
+    public readonly List<string> WeaponNames;
+
+    public FireControlConsoleSavePresetMessage(int presetIndex, string name, List<string> weaponNames)
+    {
+        PresetIndex = presetIndex;
+        Name = name;
+        WeaponNames = weaponNames;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class FireControlConsoleSetPresetNameMessage : BoundUserInterfaceMessage
+{
+    public readonly int PresetIndex;
+    public readonly string Name;
+
+    public FireControlConsoleSetPresetNameMessage(int presetIndex, string name)
+    {
+        PresetIndex = presetIndex;
+        Name = name;
+    }
+}
+// Forge-Change-End
 
 [Serializable, NetSerializable]
 public enum FireControlConsoleUiKey : byte

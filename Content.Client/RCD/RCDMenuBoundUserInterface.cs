@@ -1,9 +1,9 @@
 using Content.Shared.RCD;
-using Content.Shared.RCD.Components;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.RCD;
@@ -11,6 +11,7 @@ namespace Content.Client.RCD;
 [UsedImplicitly]
 public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
 {
+    [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private IClyde _displayManager = default!;
     [Dependency] private IInputManager _inputManager = default!;
 
@@ -36,6 +37,9 @@ public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
 
     public void SendRCDSystemMessage(ProtoId<RCDPrototype> protoId)
     {
+        // Forge-Change: refresh placement ghost immediately for the selected recipe
+        _entManager.System<RCDConstructionGhostSystem>().NotifyRecipeSelected(protoId);
+
         // A predicted message cannot be used here as the RCD UI is closed immediately
         // after this message is sent, which will stop the server from receiving it
         SendMessage(new RCDSystemMessage(protoId));

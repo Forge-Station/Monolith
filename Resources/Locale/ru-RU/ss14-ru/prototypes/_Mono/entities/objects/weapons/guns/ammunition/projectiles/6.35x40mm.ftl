@@ -1,3 +1,3 @@
 ﻿ent-Bullet635x40mmCaseless = пуля (6.35x40мм безгильзовая)
-ent-Bullet635x40mmCaselessPractice = bullet (635x40mm Caseless practice)
-ent-Bullet635x40mmCaselessRubber = bullet (635x40mm Caseless rubber)
+ent-Bullet635x40mmCaselessPractice = пуля (6.35x40мм безгильзовая учебный)
+ent-Bullet635x40mmCaselessRubber = пуля (6.35x40мм безгильзовая резиновый)

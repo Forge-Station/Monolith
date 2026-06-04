@@ -5,7 +5,7 @@
   - BallisticArtillery
   - BallisticArtilleryTier1HP
   description: Ultralight mass driver weapon of unknown origin, designated "Shard" during initial reverse engineering attempts. Light damage, but long range and little upkeep to mount on ships.
-  suffix: Drone T1
+  suffix: Drone T1, Для маппинга
   components:
   - type: StaticPrice
     price: 10000
@@ -60,7 +60,7 @@
   name: "\"Fragment\" modified mass driver"
   parent: WeaponTurretShard
   description: Appears to be a heavily modified "Shard" mass driver. Unstable and rarely found in the wild.
-  suffix: Drone T2
+  suffix: Drone T2, Для маппинга
   components:
   - type: StaticPrice
     price: 20000
@@ -108,7 +108,7 @@
   - BallisticArtillery
   - BallisticArtilleryTier2HP
   description: Mass driver weapon of unknown origin. Reverse engineering attempts have indicated extremely high projectile velocity and high-mass projectiles with unresolved ship-pushing payload.
-  suffix: Drone T2
+  suffix: Drone T2, Для маппинга
   components:
   - type: StaticPrice
     price: 30000

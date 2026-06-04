@@ -1,0 +1,97 @@
+- type: entity
+  parent: [BaseItem, RecyclableItemDeviceSmall]
+  id: BaseHandheldForgeNetworkMonitor
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/tablet_atmos.rsi
+    layers:
+    - state: tablet
+    - state: generic
+      shader: unshaded
+  - type: Item
+    size: Normal
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - ForgeHandheldMonitoringConsole
+
+- type: entity
+  id: HandheldForgeAtmosMonitoring
+  name: handheld atmospheric network monitor
+  description: Portable readout of atmospheric pipe networks on the current vessel.
+  parent: [BaseHandheldForgeNetworkMonitor, BaseHandheldComputer]
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/tablet_atmos.rsi
+  - type: Item
+    sprite: Forge/Objects/Devices/tablet_atmos.rsi
+  - type: AtmosMonitoringConsole
+    navMapTileColor: "#1a1a1a"
+    navMapWallColor: "#404040"
+  - type: ActivatableUI
+    inHandsOnly: true
+    singleUser: true
+    key: enum.AtmosMonitoringConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.AtmosMonitoringConsoleUiKey.Key:
+        type: AtmosMonitoringConsoleBoundUserInterface
+  - type: GuideHelp
+    guides:
+    - AtmosphericNetworkMonitor
+    - DeviceMonitoringAndControl
+
+- type: entity
+  id: HandheldForgeAtmosMonitoringEmpty
+  parent: HandheldForgeAtmosMonitoring
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+
+- type: entity
+  id: HandheldForgePowerMonitoring
+  name: handheld power monitoring console
+  description: Portable readout of electrical cable networks on the current vessel.
+  parent: [BaseHandheldForgeNetworkMonitor, BaseHandheldComputer]
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Devices/tablet_energy.rsi
+  - type: Item
+    sprite: Forge/Objects/Devices/tablet_energy.rsi
+  - type: PowerMonitoringConsole
+  - type: PowerMonitoringCableNetworks
+  - type: ActivatableUI
+    inHandsOnly: true
+    singleUser: true
+    key: enum.PowerMonitoringConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PowerMonitoringConsoleUiKey.Key:
+        type: PowerMonitoringConsoleBoundUserInterface
+  - type: GuideHelp
+    guides:
+    - InspectingPower
+    - DeviceMonitoringAndControl
+
+- type: entity
+  id: HandheldForgePowerMonitoringEmpty
+  parent: HandheldForgePowerMonitoring
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default

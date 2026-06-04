@@ -27,11 +27,13 @@ ent-NfsdDeployableBarrier = развертываемый барьер ТСФ
 
 ent-FederationMilitaryCredit25 = аплинк TSFMC
     .desc = Винтажно выглядящее старое радио...
-ent-FederationMilitaryCredit1 = FederationMilitaryCredit1
+ent-FederationMilitaryCredit1 = { ent-FederationMilitaryCredit25 }
+    .desc = { ent-FederationMilitaryCredit25.desc }
 ent-BaseSecurityUplinkRadioDeputy = развёртываемый барьер TSFMC
     .desc = Развёртываемый барьер. Приложите ID-карту для блокировки/разблокировки.
 ent-FederationMilitaryCredit50 = аплинк TSFMC
     .desc = Винтажно выглядящее старое радио...
-ent-BaseSecurityUplinkRadioCaptain = BaseSecurityUplinkRadioCaptain
+ent-BaseSecurityUplinkRadioCaptain = { ent-BaseSecurityUplinkRadio }
+    .desc = { ent-BaseSecurityUplinkRadio.desc }
 ent-FederationMilitaryCredit5 = аплинк TSFMC
     .desc = Винтажно выглядящее старое радио...

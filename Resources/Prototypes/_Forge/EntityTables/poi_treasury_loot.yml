@@ -426,11 +426,11 @@
   id: PoiTreasuryLootMining
   table: !type:GroupSelector
     children:
-    - !type:EntSelector
-      id: PoiTreasuryLootMaterialsCommon
+    - !type:NestedSelector
+      tableId: PoiTreasuryLootMaterialsCommon
       weight: 1
-    - !type:EntSelector
-      id: PoiTreasuryLootMaterialsRare
+    - !type:NestedSelector
+      tableId: PoiTreasuryLootMaterialsRare
       weight: 0.5
       
 - type: entityTable

@@ -54,6 +54,7 @@
   - type: ItemToggleExamine
     on: item-toggle-examine-magnet-on
     off: item-toggle-examine-magnet-off
+  - type: GoblinPreciousTrashBag
 
 - type: entity
   name: trash bag

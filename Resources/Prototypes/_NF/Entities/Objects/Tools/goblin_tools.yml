@@ -164,7 +164,7 @@
   id: NFGoblinMadeMultitool
   parent: [ NFBaseGoblinMadeTools, Multitool ]
   name: hacking jig
-  description: "An improvised multitool pieced together from faulty circuit board, broken display, bent antennae and stuffed into a discarded wrapper for additional protection against elements."
+  description: An improvised multitool pieced together from faulty circuit board, broken display, bent antennae and stuffed into a discarded wrapper for additional protection against elements.
   components:
   - type: Sprite
     sprite: _NF/Objects/Tools/goblin_tools/multitool.rsi

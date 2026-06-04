@@ -110,3 +110,11 @@
   completetime: 5
   materials:
     Cloth: 500
+
+- type: latheRecipe
+  parent: DrakeIndustriesApparelRecipe
+  id: ClothingHeadHatBeretDrakeIndustries
+  result: ClothingHeadHatBeretDrakeIndustries
+  completetime: 5
+  materials:
+    Cloth: 300

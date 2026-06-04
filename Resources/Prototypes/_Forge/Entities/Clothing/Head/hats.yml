@@ -126,6 +126,23 @@
     sprite: Forge/Clothing/Head/Hats/tti_beret_director.rsi
   - type: Clothing
     sprite: Forge/Clothing/Head/Hats/tti_beret_director.rsi
+# Drake Industries company
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretDrakeIndustries
+  name: Drake Industries beret
+  description: drake-industries-beret-desc
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/drake_beret.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/drake_beret.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 250
+
 # Harmony Medical Enterprises company
 
 - type: entity

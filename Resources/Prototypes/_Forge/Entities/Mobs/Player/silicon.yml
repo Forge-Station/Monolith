@@ -315,7 +315,7 @@
 # AI Remote
 - type: entity
   id: PlayerBorgForerunnerAiRemote
-  parent: PlayerBorgForerunner
+  parent: BorgChassisForerunner
   suffix: AI Remote, Battery, Module
   components:
   - type: ContainerFill
@@ -323,7 +323,7 @@
       borg_brain:
       - AiRemoteBrain
       borg_module:
-      - BorgModuleForerunnerWeapon
+      - BorgModuleForerunnerWeaponHeavy
       - BorgModuleForerunnerRCD
       - BorgModuleJetpackADM
       - BorgModuleAdvancedTool
@@ -335,3 +335,36 @@
     - MonoRemnantAdjective
     - MonoRemnantNoun
     - MonoRemnantModifier
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Sprite
+    sprite: Mobs/Silicon/chassis.rsi
+    layers:
+    - state: synd_engi
+      map: ["enum.BorgVisualLayers.Body", "movement"]
+    - state: synd_engi_e
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: synd_engi_l
+      shader: unshaded
+      map: ["light","enum.BorgVisualLayers.LightStatus"]
+      visible: false
+  - type: BorgChassis
+    maxModules: 0
+    hasMindState: synd_engi_e
+    noMindState: synd_engi_e
+  - type: InteractionPopup
+    interactSuccessString: petting-success-syndicate-cyborg
+    interactFailureString: petting-failure-station-ai
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellAntiqueProto

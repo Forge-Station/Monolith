@@ -689,9 +689,10 @@
         priority: 2
 
 #region dumpster
+#Известные проблемы: не коректно отображает спрайт персонажа во время езды.
 - type: entity
   id: NFGoblinMadeVehicleDumpster
-  parent: [ BaseVehicle, NFMagnetBoxRubbish ]
+  parent: [ BaseVehicleRideable, NFMagnetBoxRubbish ]
   name: dumpster
   description: It only has one wheel!
   components:
@@ -706,15 +707,11 @@
   - type: GoblinMade
   - type: Vehicle
     renderOver: None
+    hasKey: true
     northOffset: 0, -0.15
     southOffset: 0, -0.15
     eastOffset: 0, -0.15
     westOffset: 0, -0.15
-    engineRunning: true
-    hornSound:
-      collection: CarBeeps
-      params:
-        variation: 0.125
   - type: Sprite
     sprite: _NF/Objects/Vehicles/dumpster.rsi
     layers:
@@ -735,6 +732,9 @@
     friction: 0.8
     baseWalkSpeed: 3.5
     baseSprintSpeed: 4.3
+  - type: Strap
+    buckleOffset: "0,0"
+  # maxBuckleDistance: 1 # Umbra - buckling fix
   - type: Destructible
     thresholds:
     - trigger:
@@ -752,8 +752,6 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-  - type: ItemSlots
-    slots: {} # no keys required
   - type: Construction
     graph: NFGoblinMadeVehicleDumpster
     node: NFGoblinMadeVehicleDumpster

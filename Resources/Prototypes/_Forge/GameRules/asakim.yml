@@ -1,9 +1,36 @@
+- type: entity
+  id: ForgeAsakimSTCShuttleSpawnerScheduler
+  parent: BaseGameRule
+  components:
+  - type: BasicStationEventScheduler
+    scheduledGameRules: !type:NestedSelector
+      tableId: ForgeAsakimShipsTable
+    minimumTimeUntilFirstEvent: 10800 # 3h
+    minMaxEventTiming:
+      min: 5400 # 90 minutes between events
+      max: 7200 # 120 minutes between events
+
 - type: entityTable
   id: ForgeAsakimShipsTable
   table: !type:AllSelector
     children:
+      - id: ForgeUnknownShuttleAsakimSmall
       - id: ForgeUnknownShuttleAsakimMedium
-      - id: ForgeUnknownShuttleAsakimLarge
+
+- type: entity
+  parent: BaseRandomShuttleRule
+  id: ForgeUnknownShuttleAsakimSmall
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-asakim-shuttle-detected
+    startAudio:
+      path: /Audio/Misc/notice2.ogg
+    weight: 3
+    maxOccurrences: 2
+  - type: GameRule
+    minPlayers: 20
+  - type: LoadMapRule
+    gridPath: /Maps/_Forge/Events/Periodic/Remnants/asakim_small.yml
 
 - type: entity
   parent: BaseRandomShuttleRule
@@ -12,25 +39,10 @@
   - type: StationEvent
     startAnnouncement: station-event-asakim-shuttle-detected
     startAudio:
-      path: /Audio/Misc/notice2.ogg
-    weight: 2
-    maxOccurrences: 4
+      path: /Audio/Misc/notice1.ogg
+    weight: 1.5
+    maxOccurrences: 1
   - type: GameRule
     minPlayers: 40
   - type: LoadMapRule
     gridPath: /Maps/_Forge/Events/Periodic/Remnants/asakim_medium.yml
-
-- type: entity
-  parent: BaseRandomShuttleRule
-  id: ForgeUnknownShuttleAsakimLarge
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-asakim-shuttle-detected
-    startAudio:
-      path: /Audio/Misc/notice1.ogg
-    weight: 2
-    maxOccurrences: 3
-  - type: GameRule
-    minPlayers: 40
-  - type: LoadMapRule
-    gridPath: /Maps/_Forge/Events/Periodic/Remnants/asakim_large.yml

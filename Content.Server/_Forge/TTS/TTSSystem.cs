@@ -187,12 +187,12 @@ public sealed partial class TTSSystem : EntitySystem
         return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized);
     }
 
-    public void OnlyPlayerTTS(EntityUid source, string message, string? voiceId, ICommonSession session, bool ifWhisper, LanguagePrototype language)
+    public void OnlyPlayerTTS(EntityUid source, string message, string? voiceId, ICommonSession session, bool ifWhisper, LanguagePrototype language, bool isRadio = false)
     {
-        _ = OnlyPlayerTTSAsync(source, message, voiceId, session, ifWhisper, language);
+        _ = OnlyPlayerTTSAsync(source, message, voiceId, session, ifWhisper, language, isRadio);
     }
 
-    private async Task OnlyPlayerTTSAsync(EntityUid source, string message, string? voiceId, ICommonSession session, bool ifWhisper, LanguagePrototype language)
+    private async Task OnlyPlayerTTSAsync(EntityUid source, string message, string? voiceId, ICommonSession session, bool ifWhisper, LanguagePrototype language, bool isRadio = false)
     {
         if (!_netCfg.GetClientCVar(session.Channel, ForgeVars.LocalTTSEnabled))
             return;
@@ -224,8 +224,8 @@ public sealed partial class TTSSystem : EntitySystem
             return;
 
         var ttsEvent = CanUnderstandLanguage(listener, language.ID)
-        ? new PlayTTSEvent(fullSoundData, GetNetEntity(source), ifWhisper)
-        : new PlayTTSEvent(obfSoundData, GetNetEntity(source), ifWhisper);
+        ? new PlayTTSEvent(fullSoundData, GetNetEntity(source), ifWhisper, isRadio)
+        : new PlayTTSEvent(obfSoundData, GetNetEntity(source), ifWhisper, isRadio);
 
         RaiseNetworkEvent(ttsEvent, session);
     }

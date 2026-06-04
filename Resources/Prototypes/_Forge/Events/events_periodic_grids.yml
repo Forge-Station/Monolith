@@ -23,8 +23,8 @@
       grid: !type:GridSpawnGroup
         nameLoc:
         - station-event-bluespace-name-Cave
-        minimumDistance: 5500
-        maximumDistance: 9500
+        minimumDistance: 5000
+        maximumDistance: 6000
         addComponents:
         - type: Gravity
           enabled: true
@@ -61,8 +61,8 @@
       grid: !type:GridSpawnGroup
         nameLoc:
         - station-event-bluespace-name-UnidentifiedVessel
-        minimumDistance: 5500
-        maximumDistance: 9500
+        minimumDistance: 6000
+        maximumDistance: 8000
         addComponents:
         - type: Gravity
           enabled: true
@@ -99,8 +99,8 @@
       grid: !type:GridSpawnGroup
         nameLoc:
         - station-event-bluespace-name-UnidentifiedVessel
-        minimumDistance: 5500
-        maximumDistance: 9500
+        minimumDistance: 5000
+        maximumDistance: 7000
         addComponents:
         - type: Gravity
           enabled: true
@@ -141,8 +141,8 @@
       grid: !type:GridSpawnGroup
         nameLoc:
         - station-event-bluespace-name-UnidentifiedVessel
-        minimumDistance: 5500
-        maximumDistance: 9500
+        minimumDistance: 7000
+        maximumDistance: 9000
         addComponents:
         - type: Gravity
           enabled: true
@@ -181,7 +181,7 @@
         nameLoc:
         - station-event-bluespace-name-UnidentifiedVessel
         minimumDistance: 5500
-        maximumDistance: 9500
+        maximumDistance: 7500
         addComponents:
         - type: Gravity
           enabled: true

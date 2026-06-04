@@ -5,6 +5,12 @@ ent-ClothingHeadHatNexusBeret = берет нексуса
     .desc = Самый обычный берет самой обычной корпорации.
 ent-ClothingHeadHatNexusCap = кепка нексуса
     .desc = Для настоящих работяг.
+ent-ClothingHeadHatNexusStarBeret = офицерский берет нексуса
+    .desc = Берет сотрудника нексуса.
+    .suffix = Нексус
+ent-ClothingHeadHatNexusGarrisonCap = фуражка нексуса
+    .desc = Фуражка сотрудника нексуса.
+    .suffix = Нексус
 ent-ClothingHeadHatBeretHME = берет HME
     .desc = Стильный берет в цветах компании HME. Символ самоотверженности и целеустремлённости медиков компании!
 

@@ -141,6 +141,10 @@
     priority: 1
   - type: StaticPrice
     price: 500
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 2
+    fx: EffectRCDDeconstruct2
   - type: GuideHelp
     guides:
     - VoltageNetworks

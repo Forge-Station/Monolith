@@ -60,7 +60,7 @@
     tier: Low # Forge-Change
   - type: FireControlServer
     processingPower: 24
-    maxWeapons: 6
+    maxWeapons: 12
   - type: Battery
     maxCharge: 125
     startingCharge: 125
@@ -85,7 +85,7 @@
     tier: Medium
   - type: FireControlServer
     processingPower: 42
-    maxWeapons: 8
+    maxWeapons: 16
   - type: Battery
     maxCharge: 250
     startingCharge: 250
@@ -110,7 +110,7 @@
     tier: High
   - type: FireControlServer
     processingPower: 60
-    maxWeapons: 12
+    maxWeapons: 20
   - type: Battery
     maxCharge: 500
     startingCharge: 500
@@ -135,7 +135,7 @@
     tier: Ultra
   - type: FireControlServer
     processingPower: 90
-    maxWeapons: 14
+    maxWeapons: 24
   - type: Battery
     maxCharge: 1000
     startingCharge: 1000
@@ -162,7 +162,7 @@
     tier: Omega
   - type: FireControlServer
     processingPower: 250 # Forge-Change: 500
-    maxWeapons: 18
+    maxWeapons: 28
   - type: PassiveThermalSignature
     signature: 8000000 # ~5.6km
   - type: ThermalSignature
@@ -190,7 +190,7 @@
     board: MachineGCSStationCircuitboard
   - type: FireControlServer
     processingPower: 3000
-    maxWeapons: 24
+    maxWeapons: 40
   # no thermal sig
   # TODO: nuke this off ships
   - type: Battery
@@ -218,7 +218,7 @@
     board: MachineGCSStationCircuitboard
   - type: FireControlServer
     processingPower: 3000
-    maxWeapons: 24
+    maxWeapons: 40
     enforceMaxConsoles: true
     maxConsoles: 2
   - type: Battery
@@ -263,6 +263,7 @@
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: FireControlConsole
+  - type: ShuttleConsoleLock # Forge-Change
   - type: ShipNpcTarget
     needPower: true
   - type: TargetSeekingTarget

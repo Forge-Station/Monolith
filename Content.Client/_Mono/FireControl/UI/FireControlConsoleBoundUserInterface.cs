@@ -33,6 +33,12 @@ public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface
         _window.OnPresetSaveRequested += OnPresetSaveRequested;
         // Forge-Change-End
 
+        _window.Radar.OnWeaponGridClick += weapon =>
+        {
+            if (_window.TryToggleWeaponFromRadar(weapon))
+                UpdateSelectedWeapons();
+        };
+
         _window.Radar.OnRadarClick += (coords) =>
         {
             var netCoords = EntMan.GetNetCoordinates(coords);

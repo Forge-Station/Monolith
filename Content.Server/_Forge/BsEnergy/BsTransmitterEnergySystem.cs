@@ -1,10 +1,10 @@
 ﻿using System.Linq;
+using Content.Server.Administration.Logs;
 using Content.Server.Power.Components;
-using Content.Server.Power.NodeGroups;
 using Content.Server.Stack;
 using Content.Shared._Forge.BsEnergy;
 using Content.Shared.Coordinates;
-using Content.Shared.NodeContainer;
+using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.UserInterface;
@@ -24,6 +24,7 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
     [Dependency] private readonly SharedPointLightSystem _lights = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
     private const int KvtConst = BsEnergySettings.KvtConst;
     private const int PassiveIncome = BsEnergySettings.PassiveIncome;
@@ -36,6 +37,7 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<BsTransmitterEnergyComponent, AfterActivatableUIOpenEvent>(OnUIOpen);
         SubscribeLocalEvent<BsTransmitterEnergyComponent, ComponentShutdown>(OnComponentShutdown);
+        SubscribeLocalEvent<BsTransmitterEnergyComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
         SubscribeLocalEvent<BsTransmitterEnergyComponent, ChangePowerMessage>(OnChangePower);
         SubscribeLocalEvent<BsTransmitterEnergyComponent, EnableToggleMessage>(OnEnableToggle);
         SubscribeLocalEvent<BsTransmitterEnergyComponent, WithdrawMessage>(OnWithdraw);
@@ -144,7 +146,7 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
             }
 
             bsTransmitterEnergyComponent.AvailablePower = remainingForClients;
-            if (remainingForClients > 0)
+            if (bsTransmitterEnergyComponent.EnablePassiveIncome && remainingForClients > 0)
             {
                 var passiveIncome = (float)remainingForClients / KvtConst * (PassiveIncome / 60f) * UpdateInterval;
                 bsTransmitterEnergyComponent.Money += passiveIncome;
@@ -155,6 +157,12 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
             powerConsumerComponent.DrawRate = bsTransmitterEnergyComponent.TargetPower;
             bsTransmitterEnergyComponent.LastDrawnPower = powerConsumerComponent.ReceivedPower;
         }
+    }
+
+    private void OnAnchorStateChanged(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, AnchorStateChangedEvent args)
+    {
+        if (!args.Anchored)
+            TransmitterOff(transmitterUid, bsTransmitterEnergyComponent);
     }
 
     private void OnInit(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, ComponentInit args)
@@ -170,13 +178,13 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
 
     private void OnWithdraw(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, WithdrawMessage args)
     {
-        if (args.Actor is not { Valid: true })
+        if (args.Actor is not { Valid : true } player || (int)bsTransmitterEnergyComponent.Money > 0)
             return;
 
-        if ((int)bsTransmitterEnergyComponent.Money > 0)
-            _audio.PlayPvs(_audio.ResolveSound(bsTransmitterEnergyComponent.SoundOnWithdraw), transmitterUid);
-
         var stackPrototype = _prototypeManager.Index<StackPrototype>("Credit");
+        _audio.PlayPvs(_audio.ResolveSound(bsTransmitterEnergyComponent.SoundOnWithdraw), transmitterUid);
+        _adminLogger.Add(LogType.ATMUsage, LogImpact.Low, $"{ToPrettyString(player):actor} withdrew {bsTransmitterEnergyComponent.Money} from {ToPrettyString(bsTransmitterEnergyComponent.Owner)}");
+        _popup.PopupEntity(Loc.GetString("popup-bs-energy-withdraw-successful"), transmitterUid);
         _stackSystem.Spawn((int)bsTransmitterEnergyComponent.Money, stackPrototype, transmitterUid.ToCoordinates());
         bsTransmitterEnergyComponent.Money = 0;
     }
@@ -215,24 +223,6 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
         bsTransmitterEnergyComponent.Receivers.Remove(receiverUid);
     }
 
-    /*private float GetNetworkDrawRate(EntityUid transmitterUid)
-    {
-        if (!TryComp<NodeContainerComponent>(transmitterUid, out var nodeContainerComponent) ||
-            !nodeContainerComponent.Nodes.TryGetValue("hvPower", out var node) || node.NodeGroup is not PowerNet powerNet)
-            return 0;
-
-        var chargers = powerNet.Chargers.Sum(batteryChargerComponent =>
-        {
-            if (!TryComp<PowerNetworkBatteryComponent>(batteryChargerComponent.Owner, out var powerNetworkBatteryComponent))
-                return 0;
-            return powerNetworkBatteryComponent.CurrentReceiving;
-        });
-
-        var drawRate = powerNet.Consumers.Sum(powerConsumerComponent => powerConsumerComponent.DrawRate);
-
-        return drawRate + chargers;
-    }*/
-
     private (float, float)? GetNetworkData(EntityUid transmitterUid)
     {
         if (!TryComp<PowerConsumerComponent>(transmitterUid, out var powerConsumerComponent))
@@ -269,14 +259,27 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
 
     private void OnEnableToggle(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, EnableToggleMessage args)
     {
-        bsTransmitterEnergyComponent.Enabled = args.Enabled;
-        UpdateAppearance(transmitterUid, bsTransmitterEnergyComponent.Enabled);
+        if (args.Enabled && Transform(transmitterUid).Anchored)
+        {
+            bsTransmitterEnergyComponent.Enabled = true;
+            UpdateAppearance(transmitterUid, true);
 
-        if (!args.Enabled)
-            DisconnectAllReceivers(bsTransmitterEnergyComponent);
+            if (_entityManager.TryGetComponent<PowerConsumerComponent>(transmitterUid, out var powerConsumerComponent))
+                powerConsumerComponent.DrawRate = bsTransmitterEnergyComponent.TargetPower;
+        }
+        else
+            TransmitterOff(transmitterUid, bsTransmitterEnergyComponent);
+    }
+
+    private void TransmitterOff(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent)
+    {
+        bsTransmitterEnergyComponent.Enabled = false;
+        UpdateAppearance(transmitterUid, false);
 
         if (_entityManager.TryGetComponent<PowerConsumerComponent>(transmitterUid, out var powerConsumerComponent))
-            powerConsumerComponent.DrawRate = bsTransmitterEnergyComponent.Enabled ? bsTransmitterEnergyComponent.TargetPower : 0;
+            powerConsumerComponent.DrawRate = 0;
+
+        DisconnectAllReceivers(bsTransmitterEnergyComponent);
     }
 
     private void OnChangePower(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, ChangePowerMessage args)

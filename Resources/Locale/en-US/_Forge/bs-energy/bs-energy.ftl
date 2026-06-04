@@ -12,6 +12,13 @@ ent-BsTransmitterT2 = bluespace energy transmitter T2 (BET)
 ent-BsTransmitterT3 = bluespace energy transmitter T3 (BET)
     .desc = Transmits energy via bluespace up to 10 MW.
 
+ent-BsTransmitterStationaryT1 = bluespace energy transmitter T1 (BET)
+    .desc = Transmits energy via bluespace up to 1 MW.
+ent-BsTransmitterStationaryT2 = bluespace energy transmitter T2 (BET)
+    .desc = Transmits energy via bluespace up to 5 MW.
+ent-BsTransmitterStationaryT3 = bluespace energy transmitter T3 (BET)
+    .desc = Transmits energy via bluespace up to 10 MW.
+
 ent-BsTransmitterT1Flatpack = packaged bluespace energy transmitter T1
     .desc = A flatpack containing a bluespace energy transmitter T1.
 ent-BsTransmitterT2Flatpack = packaged bluespace energy transmitter T2
@@ -48,6 +55,9 @@ ui-bs-energy-network-stats-value = { POWERWATTS($supply) } / { POWERWATTS($load)
 ui-bs-energy-unanchored = Not connected
 ui-bs-energy-step-increase = +{ POWERWATTS($watts) }
 ui-bs-energy-step-decrease = -{ POWERWATTS($watts) }
+
+popup-bs-energy-deposit-successful = Deposit Accepted
+popup-bs-energy-withdraw-successful = Transfer Approved
 
 ui-bs-receiver-title = Bluespace Energy Receiver
 ui-bs-receiver-price-label = Price:

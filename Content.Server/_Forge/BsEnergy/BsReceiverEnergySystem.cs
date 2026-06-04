@@ -1,9 +1,12 @@
-﻿using Content.Server.Power.Components;
+﻿using Content.Server.Administration.Logs;
+using Content.Server.Power.Components;
 using Content.Server.Stack;
 using Content.Shared._Forge.BsEnergy;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.Database;
 using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
@@ -22,17 +25,19 @@ public sealed class BsReceiverEnergySystem : EntitySystem
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPointLightSystem _lights = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
+    private readonly Dictionary<NetEntity, UpdateTransmitterStateData> _cachedTransmittersData = new();
     private const float UpdateInterval = BsEnergySettings.UpdateInterval;
     private float _updateTimer;
-    private bool _oldEnableState;
-
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<BsReceiverEnergyComponent, AfterActivatableUIOpenEvent>(OnUIOpen);
         SubscribeLocalEvent<BsReceiverEnergyComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<BsReceiverEnergyComponent, InteractUsingEvent>(OnDeposit);
+        SubscribeLocalEvent<BsReceiverEnergyComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
         SubscribeLocalEvent<BsReceiverEnergyComponent, WithdrawMessage>(OnWithdraw);
         SubscribeLocalEvent<BsReceiverEnergyComponent, ChoiceTransmitterMessage>(OnChoiceServer);
         SubscribeLocalEvent<BsReceiverEnergyComponent, ChangePowerMessage>(OnChangePower);
@@ -45,10 +50,10 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         var query = EntityQueryEnumerator<BsReceiverEnergyComponent>();
         while (query.MoveNext(out var receiverUid, out var receiverEnergyComponent))
         {
-            if (_oldEnableState != receiverEnergyComponent.Enabled)
+            if (receiverEnergyComponent.OldEnableState != receiverEnergyComponent.Enabled)
             {
-                _oldEnableState = receiverEnergyComponent.Enabled;
-                UpdateAppearance(receiverUid, _oldEnableState);
+                receiverEnergyComponent.OldEnableState = receiverEnergyComponent.Enabled;
+                UpdateAppearance(receiverUid, receiverEnergyComponent.Enabled);
             }
 
             UpdateUI(receiverUid, receiverEnergyComponent);
@@ -62,6 +67,12 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         _updateTimer = 0;
     }
 
+    private void OnAnchorStateChanged(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, AnchorStateChangedEvent args)
+    {
+        if (!args.Anchored)
+            ReceiverOff(receiverUid, receiverEnergyComponent);
+    }
+
     private void OnInit(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, ComponentInit args)
     {
         UpdateAppearance(receiverUid, receiverEnergyComponent.Enabled);
@@ -69,11 +80,15 @@ public sealed class BsReceiverEnergySystem : EntitySystem
 
     private void OnDeposit(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, InteractUsingEvent args)
     {
+
         if (args.Handled ||
+            args.User is not { Valid: true } player ||
             !TryComp<CashComponent>(args.Used, out _) ||
             !TryComp<StackComponent>(args.Used, out var stackComponent))
             return;
 
+        _adminLogger.Add(LogType.ATMUsage, LogImpact.Low, $"{ToPrettyString(player):actor} deposited {stackComponent.Count} into {ToPrettyString(receiverEnergyComponent.Owner)}");
+        _popup.PopupEntity(Loc.GetString("popup-bs-energy-deposit-successful"), receiverUid);
         receiverEnergyComponent.Money += stackComponent.Count;
         args.Handled = true;
 
@@ -107,11 +122,19 @@ public sealed class BsReceiverEnergySystem : EntitySystem
 
     private void OnEnableToggle(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, EnableToggleMessage args)
     {
-        receiverEnergyComponent.Enabled = args.Enabled;
-        UpdateAppearance(receiverUid, receiverEnergyComponent.Enabled);
+        if (args.Enabled && Transform(receiverUid).Anchored)
+        {
+            receiverEnergyComponent.Enabled = true;
+            UpdateAppearance(receiverUid, true);
+        }
+        else
+            ReceiverOff(receiverUid, receiverEnergyComponent);
+    }
 
-        if (args.Enabled)
-            return;
+    private void ReceiverOff(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent)
+    {
+        receiverEnergyComponent.Enabled = false;
+        UpdateAppearance(receiverUid, false);
 
         receiverEnergyComponent.ReceivedPower = 0;
 
@@ -131,32 +154,39 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         return networkStats;
     }
 
-    private void UpdateUI(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent)
+    private void UpdateTransmittersCache()
     {
-        if (!_uiSystem.IsUiOpen(receiverUid, BsEnergyUiKey.ReceiverKey))
-            return;
+        _cachedTransmittersData.Clear();
 
-        var dictData = new Dictionary<NetEntity, UpdateTransmitterStateData>();
         var query = _entityManager.AllEntityQueryEnumerator<BsTransmitterEnergyComponent, TransformComponent>();
         while (query.MoveNext(out var transmitterUid, out var bsTransmitterEnergyComponent, out var transformComponent))
         {
-            if (!bsTransmitterEnergyComponent.Enabled ||
-                !CheckConnected(receiverUid, bsTransmitterEnergyComponent) && bsTransmitterEnergyComponent.Receivers.Count >= bsTransmitterEnergyComponent.MaxConnected)
+            if (!bsTransmitterEnergyComponent.Enabled)
                 continue;
 
             TryComp<MetaDataComponent>(transformComponent.GridUid, out var gridMetaData);
 
             var transmitterStateData = new UpdateTransmitterStateData
             {
+                CurrentConnected = bsTransmitterEnergyComponent.Receivers.Count,
+                MaxConnected = bsTransmitterEnergyComponent.MaxConnected,
                 Price = bsTransmitterEnergyComponent.Price,
                 TransmitterAvailablePower = bsTransmitterEnergyComponent.AvailablePower,
                 GridTransmitterName = gridMetaData?.EntityName ?? string.Empty,
             };
 
-            dictData[GetNetEntity(transmitterUid)] = transmitterStateData;
+            _cachedTransmittersData[GetNetEntity(transmitterUid)] = transmitterStateData;
         }
+    }
 
+    private void UpdateUI(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent)
+    {
+        if (!_uiSystem.IsUiOpen(receiverUid, BsEnergyUiKey.ReceiverKey))
+            return;
+
+        UpdateTransmittersCache();
         TryComp<BsTransmitterEnergyComponent>(receiverEnergyComponent.ConnectedTransmitter, out var transmitterEnergyComponent);
+
         var state = new BsReceiverInterfaceStateMessage
         {
             StepSize = receiverEnergyComponent.StepSize,
@@ -167,7 +197,7 @@ public sealed class BsReceiverEnergySystem : EntitySystem
             Money = (int)receiverEnergyComponent.Money,
             ReceivedPower = receiverEnergyComponent.ReceivedPower,
             ConnectedTransmitter = transmitterEnergyComponent != null && CheckConnected(receiverUid, transmitterEnergyComponent) ? GetNetEntity(receiverEnergyComponent.ConnectedTransmitter) : NetEntity.Invalid,
-            TransmittersData = dictData,
+            TransmittersData = _cachedTransmittersData,
         };
 
         _uiSystem.SetUiState(receiverUid, BsEnergyUiKey.ReceiverKey, state);
@@ -219,13 +249,13 @@ public sealed class BsReceiverEnergySystem : EntitySystem
 
     private void OnWithdraw(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, WithdrawMessage args)
     {
-        if (args.Actor is not { Valid: true })
+        if (args.Actor is not { Valid : true } player || (int)receiverEnergyComponent.Money > 0)
             return;
 
-        if (receiverEnergyComponent.Money > 0)
-            _audio.PlayPvs(_audio.ResolveSound(receiverEnergyComponent.SoundOnWithdraw), receiverUid);
-
         var stackPrototype = _prototypeManager.Index<StackPrototype>("Credit");
+        _audio.PlayPvs(_audio.ResolveSound(receiverEnergyComponent.SoundOnWithdraw), receiverUid);
+        _adminLogger.Add(LogType.ATMUsage, LogImpact.Low, $"{ToPrettyString(player):actor} withdrew {receiverEnergyComponent.Money} from {ToPrettyString(receiverEnergyComponent.Owner)}");
+        _popup.PopupEntity(Loc.GetString("popup-bs-energy-withdraw-successful"), receiverUid);
         _stackSystem.Spawn((int)receiverEnergyComponent.Money, stackPrototype, receiverUid.ToCoordinates());
         receiverEnergyComponent.Money = 0;
     }

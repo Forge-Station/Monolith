@@ -7,7 +7,6 @@ namespace Content.Client._Forge.BsEnergy;
 [UsedImplicitly]
 public sealed class BsReceiverBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [ViewVariables] private BsReceiverWindow? _window;
 
     public BsReceiverBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)

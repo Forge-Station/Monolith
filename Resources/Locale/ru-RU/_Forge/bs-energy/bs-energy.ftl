@@ -12,6 +12,13 @@ ent-BsTransmitterT2 = блюспейс передатчик энергии Т2 (
 ent-BsTransmitterT3 = блюспейс передатчик энергии Т3 (БПЭ)
     .desc = Передаёт энергию по блюспейс пространству до 10 мВт.
 
+ent-BsTransmitterStationaryT1 = блюспейс передатчик энергии Т1 (БПЭ)
+    .desc = Передаёт энергию по блюспейс пространству до 1 мВт.
+ent-BsTransmitterStationaryT2 = блюспейс передатчик энергии Т2 (БПЭ)
+    .desc = Передаёт энергию по блюспейс пространству до 5 мВт.
+ent-BsTransmitterStationaryT3 = блюспейс передатчик энергии Т3 (БПЭ)
+    .desc = Передаёт энергию по блюспейс пространству до 10 мВт.
+
 ent-BsTransmitterT1Flatpack = упакованный блюспейс передатчик энергии Т1
     .desc = Упаковка содержащая блюспейс передатчик энергии Т1.
 ent-BsTransmitterT2Flatpack = упакованный блюспейс передатчик энергии Т2
@@ -50,6 +57,8 @@ ui-bs-energy-unanchored = Не закреплено
 ui-bs-energy-step-increase = +{ POWERWATTS($watts) }
 ui-bs-energy-step-decrease = -{ POWERWATTS($watts) }
 
+popup-bs-energy-deposit-successful = Депозит принят
+popup-bs-energy-withdraw-successful = Перевод одобрен
 
 ui-bs-receiver-title = Блюспейс приёмник энергии
 ui-bs-receiver-price-label = Цена:

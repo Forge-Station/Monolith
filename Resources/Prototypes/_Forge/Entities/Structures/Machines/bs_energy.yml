@@ -179,6 +179,7 @@
     maxValue: 1000000
     maxConnected: 5
     stepSize: 50000
+    enablePassiveIncome: false
   - type: Machine
     board: BsTransmitterCircuitboardT1
   - type: Sprite
@@ -212,6 +213,7 @@
     maxValue: 5000000
     maxConnected: 10
     stepSize: 100000
+    enablePassiveIncome: false
   - type: Construction
     graph: Machine2x2
   - type: Machine
@@ -262,6 +264,147 @@
     maxValue: 10000000
     maxConnected: 15
     stepSize: 1000000
+    enablePassiveIncome: false
+  - type: Construction
+    graph: Machine3x3
+  - type: Machine
+    board: BsTransmitterCircuitboardT3
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: transmitter
+      map: ["enabled"]
+    scale: 3, 3
+    offset: 1, -1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-2.45,2.45,0.45"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
+        - Opaque
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: transmitter}
+          False: {state: transmitterOff}
+  - type: PowerConsumer
+    voltage: High
+    drawRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.TransmitterKey:
+        type: BsTransmitterBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.TransmitterKey
+
+#BsTransmitter for stationary energy stations
+- type: entity
+  name: bluespace energy transmitter T1
+  suffix: for energy stations
+  description: Transmits energy via bluespace up to 1 MW.
+  id: BsTransmitterStationaryT1
+  parent: BsEnergyBase
+  components:
+  - type: BsTransmitterEnergy
+    maxValue: 1000000
+    maxConnected: 5
+    stepSize: 50000
+    enablePassiveIncome: true
+  - type: Machine
+    board: BsTransmitterCircuitboardT1
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: transmitter
+      map: ["enabled"]
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: transmitter}
+          False: {state: transmitterOff}
+  - type: PowerConsumer
+    voltage: High
+    drawRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.TransmitterKey:
+        type: BsTransmitterBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.TransmitterKey
+
+- type: entity
+  name: bluespace energy transmitter T2
+  suffix: for energy stations
+  description: Transmits energy via bluespace up to 5 MW.
+  id: BsTransmitterStationaryT2
+  parent: BsEnergyBase
+  components:
+  - type: BsTransmitterEnergy
+    maxValue: 5000000
+    maxConnected: 10
+    stepSize: 100000
+    enablePassiveIncome: true
+  - type: Construction
+    graph: Machine2x2
+  - type: Machine
+    board: BsTransmitterCircuitboardT2
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: transmitter
+      map: ["enabled"]
+    offset: 0.5, -0.5
+    scale: 2, 2
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-1.45,1.45,0.45"
+        density: 500
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
+        - Opaque
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: transmitter}
+          False: {state: transmitterOff}
+  - type: PowerConsumer
+    voltage: High
+    drawRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.TransmitterKey:
+        type: BsTransmitterBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.TransmitterKey
+
+- type: entity
+  name: bluespace energy transmitter T3
+  suffix: for energy stations
+  description: Transmits energy via bluespace up to 10 MW.
+  id: BsTransmitterStationaryT3
+  parent: BsEnergyBase
+  components:
+  - type: BsTransmitterEnergy
+    maxValue: 10000000
+    maxConnected: 15
+    stepSize: 1000000
+    enablePassiveIncome: true
   - type: Construction
     graph: Machine3x3
   - type: Machine

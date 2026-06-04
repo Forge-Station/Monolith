@@ -12,9 +12,6 @@ public sealed partial class BsTransmitterEnergyComponent : Component
     [ViewVariables]
     public float LastDrawnPower;
 
-    [ViewVariables]
-    public float PrevReceivedPower;
-
     [DataField]
     public bool Enabled;
 
@@ -32,6 +29,9 @@ public sealed partial class BsTransmitterEnergyComponent : Component
 
     [DataField]
     public float Money;
+
+    [DataField("enablePassiveIncome")]
+    public bool EnablePassiveIncome { get; private set; }
 
     [DataField("stepSize")]
     public int StepSize { get; private set; } = 50 * BsEnergySettings.KvtConst;

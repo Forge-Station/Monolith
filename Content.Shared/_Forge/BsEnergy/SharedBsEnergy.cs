@@ -19,6 +19,8 @@ public enum BsEnergyVisuals : byte
 public sealed class UpdateTransmitterStateData
 {
     public int Price;
+    public int CurrentConnected;
+    public int MaxConnected;
     public float TransmitterAvailablePower;
     public string GridTransmitterName = string.Empty;
 }

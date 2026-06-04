@@ -98,7 +98,7 @@ public sealed partial class BsReceiverWindow : FancyWindow
             MoneyTimeLabel.Text = $"0 {_minuteLocStr}";
         }
 
-        UpdateServersUi(stateMessage.TransmittersData, stateMessage.Enabled);
+        UpdateServersUi(stateMessage.TransmittersData, stateMessage.Enabled, stateMessage.ConnectedTransmitter);
         SelectTransmitterUi(stateMessage.ConnectedTransmitter);
 
         _power = stateMessage.RequestedPower;
@@ -130,12 +130,23 @@ public sealed partial class BsReceiverWindow : FancyWindow
         OnPowerRequest?.Invoke(_power);
     }
 
-    private void UpdateServersUi(Dictionary<NetEntity, UpdateTransmitterStateData> transmittersData, bool enabled)
+    private void UpdateServersUi(Dictionary<NetEntity, UpdateTransmitterStateData> transmittersData, bool enabled, NetEntity transmitterNet)
     {
         CheckingRemoveTransmitters(transmittersData);
 
         foreach (var (key, value) in transmittersData)
         {
+            if (transmitterNet != key && value.CurrentConnected >= value.MaxConnected)
+            {
+                if (_currentTransmitters.TryGetValue(key, out var elementsToRemove))
+                {
+                    elementsToRemove.Button?.Dispose();
+                    _currentTransmitters.Remove(key);
+                }
+
+                continue;
+            }
+
             if (_currentTransmitters.TryGetValue(key, out var elements))
             {
                 elements.Button?.Disabled = !enabled;

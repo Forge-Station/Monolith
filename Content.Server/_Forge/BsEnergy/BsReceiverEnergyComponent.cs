@@ -9,6 +9,9 @@ public sealed partial class BsReceiverEnergyComponent : Component
     [ViewVariables]
     public EntityUid ConnectedTransmitter;
 
+    [ViewVariables]
+    public bool OldEnableState;
+
     [DataField]
     public bool Enabled;
 

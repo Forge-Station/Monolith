@@ -102,6 +102,30 @@
     sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
   - type: Clothing
     sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatNexusStarBeret
+  name: nexus officer beret
+  suffix: Нексус
+  description: A beret issued to Nexus personnel.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/nexus_star_beret.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/nexus_star_beret.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatNexusGarrisonCap
+  name: nexus garrison cap
+  suffix: Нексус
+  description: A peaked garrison cap issued to Nexus personnel.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/nexus_garrison_cap.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/nexus_garrison_cap.rsi
 # Trauma Team
 - type: entity
   parent: [ClothingHeadBase, BaseFactionGearOtherFactionT1]

@@ -13,3 +13,9 @@ ent-ClothingUniformDrakeIndustriesTrucker = водолазка Drake Industries
 ent-ClothingUniformDrakeIndustriesWatchdog = форма офицера Drake Industries
     .suffix = Drake
     .desc = Стильная офицерская форма для тёмных пространств. Цвета Drake Industries.
+
+ent-ClothingHeadHatBeretDrakeIndustries = берет Drake Industries
+    .suffix = Drake
+    .desc = { drake-industries-beret-desc }
+
+drake-industries-beret-desc = Багровый берет с эмблемой Drake Industries. Носят грузчики, дальнобойщики и сторожа.

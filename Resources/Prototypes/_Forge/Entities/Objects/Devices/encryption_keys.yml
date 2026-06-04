@@ -360,3 +360,22 @@
     sprite: Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_gray
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyNexus
+  suffix: Нексус
+  name: nexus encryption key
+  description: nexus-encrypt-key-desc
+  components:
+  - type: EncryptionKey
+    channels:
+    - Nexus
+    defaultChannel: Nexus
+  - type: Item
+    sprite: Forge/Objects/Devices/nexus_encryption_key.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/nexus_encryption_key.rsi
+    layers:
+    - state: crypt_nexus
+    - state: nexus_label

@@ -7,6 +7,9 @@
   - type: RadarConsole
     followEntity: true
     noRotate: true
+  - type: ActivatableUI
+    key: enum.RadarConsoleUiKey.Key
+    singleUser: true
   - type: DetectionRangeMultiplier
     infraredMultiplier: 0.5
     visualMultiplier: 0.75
@@ -23,7 +26,7 @@
     activeIfWorn: true
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase]
+  parent: [DrakeHardsuitHelmetMassScannerBase, ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase]
   id: ClothingHeadHelmetHardsuitDrakeMk4
   suffix: Drake
   categories: [ HideSpawnMenu ]

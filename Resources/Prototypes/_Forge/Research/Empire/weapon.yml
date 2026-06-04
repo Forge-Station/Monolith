@@ -4,7 +4,7 @@
   entityIcon: WeaponSubMachineGunC20r
   discipline: Empire
   tier: 1
-  cost: 55000
+  cost: 45000
   recipeUnlocks:
   - WeaponSubMachineGunC20rRogue
   - WeaponRifleM90Rogue
@@ -74,9 +74,9 @@
   entityIcon: ADTWeaponMeleePrasatChainsword
   discipline: Empire
   tier: 1
-  cost: 90000
+  cost: 80000
   recipeUnlocks:
-  - ADTWeaponMeleePrasatChainsword
+  - ADTClothingBeltPrazatSheath
   technologyPrerequisites:
   - EmpireHeavyWeapons
   position: 6, 15

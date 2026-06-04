@@ -1,12 +1,11 @@
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
-  id: ADTWeaponMeleePrasatChainsword
-  result: ADTWeaponMeleePrasatChainsword
+  id: ADTClothingBeltPrazatSheath
+  result: ADTClothingBeltPrazatSheath
   categories:
   - Sidearms
   - Weapons
   materials:
     Steel: 5000
     Plasteel: 5500
-    Wood: 1000
     Uranium: 2500

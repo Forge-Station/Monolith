@@ -57,12 +57,13 @@
   result: ClothingOuterHardsuitRI22i
   completetime: 16
   materials:
-    Plastic: 2000
-    Steel: 4500
-    Plasteel: 3500
-    Durathread: 4000
-    Silver: 6000
-    Gold: 6000
+    Plastic: 3000
+    Steel: 5000
+    Plasteel: 5500
+    Durathread: 3000
+    Silver: 1500
+    Gold: 4500
+    UraniumDepleted: 100
     
 - type: latheRecipe
   parent: MonoHardsuitT2Recipe
@@ -70,12 +71,13 @@
   result: ClothingOuterHardsuitRI22c
   completetime: 16
   materials:
-    Plastic: 2000
-    Steel: 7000
-    Plasteel: 6500
-    Durathread: 6000
-    Silver: 1000
-    Gold: 1000
+    Plastic: 3000
+    Steel: 5000
+    Plasteel: 5500
+    Durathread: 3000
+    Silver: 1500
+    Gold: 4500
+    UraniumDepleted: 100
 
 #region HV-7 Heavy
 - type: latheRecipe
@@ -87,7 +89,7 @@
     Plastic: 1000
     Steel: 7000
     Plastitanium: 3000
-    Plasteel: 6500
+    Plasteel: 6000
     Durathread: 1500
     Silver: 2000
     Gold: 2000
@@ -114,11 +116,11 @@
   result: ClothingOuterHardsuitHVMilitant
   completetime: 22
   materials:
-    Plastic: 4000
+    Plastic: 6000
     Steel: 5000
     Plastitanium: 2500
     Plasteel: 3500
-    Durathread: 2000
+    Durathread: 4000
     Silver: 5000
     Gold: 5000
     UraniumDepleted: 1000
@@ -132,9 +134,9 @@
   materials:
     Plastic: 5000
     Steel: 3000
-    Plasteel: 2000
+    Plasteel: 1000
     Durathread: 3500
     Silver: 4500
     Gold: 4500
     UraniumDepleted: 500
-    UraniumFissile: 100
+    UraniumFissile: 200

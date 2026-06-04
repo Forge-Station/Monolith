@@ -116,7 +116,7 @@
       coefficients:
         Blunt: 0.6
         Slash: 0.6
-        Piercing: 0.55
+        Piercing: 0.5
         Heat: 0.65
         Radiation: 0.65
         Caustic: 0.8
@@ -135,7 +135,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
-    price: 5000
+    price: 1500
     vendPrice: 1500
 
 - type: entity
@@ -156,9 +156,9 @@
       coefficients:
         Blunt: 0.7
         Slash: 0.7
-        Piercing: 0.65
+        Piercing: 0.6
         Heat: 0.7
-        Radiation: 0.4
+        Radiation: 0.3
         Caustic: 0.3
   - type: StaminaDamageResistance
     coefficient: 0.4
@@ -174,7 +174,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
-    price: 5000
+    price: 1500
     vendPrice: 15000
 
 - type: entity
@@ -205,7 +205,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
-    price: 5000
+    price: 1500
     vendPrice: 15000
 
 # region RI-22 Medium
@@ -232,17 +232,17 @@
       coefficients:
         Blunt: 0.45
         Slash: 0.45
-        Piercing: 0.45
+        Piercing: 0.4
         Heat: 0.5
         Shock: 0.7
-        Radiation: 0.5
+        Radiation: 0.4
         Caustic: 0.7
         Poison: 0.8 # Mono
   - type: StaminaDamageResistance
-    coefficient: 0.4
+    coefficient: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.85
+    sprintModifier: 0.85
   - type: SpaceFlightProfile
     thrustMultiplier: 0.7
     controlMultiplier: 1.15
@@ -258,7 +258,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
-    price: 12500
+    price: 2000
     vendPrice: 50000
 
 - type: entity
@@ -275,13 +275,13 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.5
-        Heat: 0.35
-        Shock: 0.6
-        Radiation: 0.2
-        Caustic: 0.5
+        Blunt: 0.45
+        Slash: 0.45
+        Piercing: 0.4
+        Heat: 0.5
+        Shock: 0.7
+        Radiation: 0.4
+        Caustic: 0.7
         Poison: 0.8 # Mono
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -292,7 +292,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
-    price: 10000
+    price: 2000
     vendPrice: 50000
 
 - type: entity
@@ -309,13 +309,13 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.35
-        Heat: 0.6
-        Shock: 0.8
+        Blunt: 0.45
+        Slash: 0.45
+        Piercing: 0.4
+        Heat: 0.5
+        Shock: 0.7
         Radiation: 0.4
-        Caustic: 0.5
+        Caustic: 0.7
         Poison: 0.8 # Mono
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -326,7 +326,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
-    price: 12500
+    price: 2000
     vendPrice: 5000
 
 # region ~HV~RI-7 Heavy
@@ -358,8 +358,8 @@
         Piercing: 0.15
         Heat: 0.3
         Shock: 0.6
-        Radiation: 0.6
-        Caustic: 0.6
+        Radiation: 0.4
+        Caustic: 0.5
         Poison: 0.8
   - type: StaminaDamageResistance
     coefficient: 0.8
@@ -381,7 +381,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
-    price: 10000
+    price: 5000
     vendPrice: 80000
 
 - type: entity
@@ -513,7 +513,7 @@
   - type: StaminaDamageResistance
     coefficient: 0.8
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
+    walkModifier: 0.75
     sprintModifier: 0.75
   - type: SpaceFlightProfile
     thrustMultiplier: 0.7
@@ -530,7 +530,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
-    price: 10000
+    price: 5000
     vendPrice: 60000
   - type: Blocking
     passiveBlockModifier:
@@ -582,23 +582,23 @@
     highPressureMultiplier: 0.03
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.2
+    damageCoefficient: 0.5
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.65
         Slash: 0.65
-        Piercing: 0.6
-        Heat: 0.7
-        Shock: 0.9
-        Radiation: 0.7
+        Piercing: 0.65
+        Heat: 0.6
+        Shock: 0.6
+        Radiation: 0.6
         Caustic: 0.8
         Poison: 0.8
   - type: StaminaDamageResistance
     coefficient: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0
+    walkModifier: 0.85
+    sprintModifier: 0.85
   - type: SpaceFlightProfile
     thrustMultiplier: 0.7
     controlMultiplier: 1.15
@@ -614,5 +614,5 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
-    price: 12000
+    price: 5000
     vendPrice: 90000

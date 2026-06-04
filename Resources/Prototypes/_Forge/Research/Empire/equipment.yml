@@ -56,7 +56,7 @@
   entityIcon: ClothingOuterHardsuitHV7
   discipline: Empire
   tier: 2
-  cost: 250000
+  cost: 300000
   recipeUnlocks:
   - ClothingOuterHardsuitHV7
   - ClothingOuterHardsuitHVMilitant
@@ -71,7 +71,7 @@
   entityIcon: ClothingOuterHardsuitHVStealh
   discipline: Empire
   tier: 2
-  cost: 150000
+  cost: 250000
   recipeUnlocks:
   - ClothingOuterHardsuitHVStealh
   technologyPrerequisites:

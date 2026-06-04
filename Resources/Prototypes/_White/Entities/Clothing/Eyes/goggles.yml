@@ -39,6 +39,7 @@
   - type: ShowSyndicateIcons
   - type: ShowJobIcons
   - type: ShowMindShieldIcons
+  - type: ShowGuardIcons # ForgeChange
 
 # Thermal Vision Goggles
 
@@ -83,3 +84,4 @@
   - type: ShowSyndicateIcons
   - type: ShowJobIcons
   - type: ShowMindShieldIcons
+  - type: ShowGuardIcons # ForgeChange

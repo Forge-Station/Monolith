@@ -11,6 +11,12 @@
   id: SyndicateSabre
 
 - type: Tag
+  id: ADTWeaponMeleePrasatChainsword
+
+- type: Tag
+  id: ADTWeaponMeleePrasatChainswordInq
+
+- type: Tag
   id: MagazineAntiMateriel
 
 - type: Tag
@@ -209,4 +215,22 @@
   id: NoGridGodmode
 
 - type: Tag
+  id: ForgeHandheldMonitoringConsole
+
+- type: Tag
   id: 40mmCartridge
+
+- type: Tag
+  id: HEVPowerCellShotgun
+
+- type: Tag
+  id: HEVPowerCellLMG
+
+- type: Tag
+  id: HEVPowerCellRifle
+
+- type: Tag
+  id: EmpireUplink
+
+- type: Tag
+  id: Overlord

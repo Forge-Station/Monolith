@@ -1,0 +1,128 @@
+# Drake Industries hardsuit helmets.
+
+- type: entity
+  abstract: true
+  id: DrakeHardsuitHelmetMassScannerBase
+  components:
+  - type: RadarConsole
+    followEntity: true
+    noRotate: true
+  - type: DetectionRangeMultiplier
+    infraredMultiplier: 0.5
+    visualMultiplier: 0.75
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: ActionGrant
+    actions:
+    - ActionDrakeHardsuitMassScanner
+  - type: ItemActionGrant
+    actions:
+    - ActionDrakeHardsuitMassScanner
+    activeIfWorn: true
+
+- type: entity
+  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase]
+  id: ClothingHeadHelmetHardsuitDrakeMk4
+  suffix: Drake
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/drake_mk4_helmet.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      shader: unshaded
+      visible: false
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/drake_mk4_helmet.rsi
+  - type: PointLight
+    color: "#c97d7d"
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
+  parent: [DrakeHardsuitHelmetMassScannerBase, ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase]
+  id: ClothingHeadHelmetHardsuitDrakeMk8
+  suffix: Drake
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/drake_mk8_helmet.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      shader: unshaded
+      visible: false
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/drake_mk8_helmet.rsi
+  - type: PointLight
+    color: "#c97d7d"
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
+  parent: [DrakeHardsuitHelmetMassScannerBase, ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase]
+  id: ClothingHeadHelmetHardsuitDrakeMk16
+  suffix: Drake
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/drake_mk16_helmet.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      shader: unshaded
+      visible: false
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/drake_mk16_helmet.rsi
+  - type: PointLight
+    color: "#c97d7d"
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide

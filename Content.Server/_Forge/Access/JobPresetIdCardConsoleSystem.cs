@@ -12,10 +12,14 @@ using Content.Shared.StationRecords;
 using Content.Shared._Forge.Access;
 using Content.Shared._Forge.Access.Components;
 using Content.Shared._Forge.Access.Systems;
+using Content.Shared._Forge.Roles;
+using Content.Shared.Humanoid;
+using Content.Shared.Preferences;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server._Forge.Access;
 
@@ -29,6 +33,7 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly JobReassignmentSystem _reassignment = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly StationRecordsSystem _record = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
 
@@ -96,10 +101,13 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
                 allowedModifyAccessList,
                 string.Empty,
                 privilegedIdName,
-                string.Empty);
+                string.Empty,
+                component.IgnoreDemographicRequirements,
+                component.RequirePresetAccessOnly);
         }
         else
         {
+            var hasDemographics = TryGetTargetProfile(targetId, out var targetProfile);
             state = new JobPresetIdCardConsoleBoundUserInterfaceState(
                 component.PrivilegedIdSlot.HasItem,
                 isPrivilegedIdAuthorized,
@@ -108,7 +116,13 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
                 allowedModifyAccessList,
                 GetCardJobPrototype(targetId, targetCard),
                 privilegedIdName,
-                Name(targetId));
+                Name(targetId),
+                component.IgnoreDemographicRequirements,
+                component.RequirePresetAccessOnly,
+                hasDemographics,
+                targetProfile?.Age ?? 0,
+                targetProfile?.Species ?? default,
+                targetProfile?.Sex ?? Sex.Male);
         }
 
         _userInterface.SetUiState(uid, JobPresetIdCardConsoleUiKey.Key, state);
@@ -135,9 +149,14 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
             return;
         }
 
+        if (!TryValidateJobRequirements(targetId, jobData.Job, component.IgnoreDemographicRequirements))
+        {
+            return;
+        }
+
         var currentTags = targetAccess.Tags.ToHashSet();
         var privilegedAccess = _accessReader.FindAccessTags(privilegedId).ToHashSet();
-        if (!_reassignment.HasRequiredAuthorizedTags(targetId, jobData, privilegedAccess, out _, targetAccess))
+        if (!_reassignment.HasRequiredAuthorizedTags(targetId, jobData, privilegedAccess, out _, targetAccess, component.RequirePresetAccessOnly))
         {
             Log.Warning(
                 $"User {ToPrettyString(player)} tried to apply preset '{newJobPrototype}' without covering all required accesses on {ToPrettyString(uid)}.");
@@ -149,7 +168,7 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
             return;
         }
 
-        if (!_reassignment.TryApplyToIdCard(targetId, jobData, privilegedAccess, player, targetCard, targetAccess))
+        if (!_reassignment.TryApplyToIdCard(targetId, jobData, privilegedAccess, player, targetCard, targetAccess, component.IgnoreDemographicRequirements, component.RequirePresetAccessOnly))
             return;
 
         var changedAccess = jobData.AccessTags
@@ -181,8 +200,13 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
         if (!TryResolvePreset(component, newJobPrototype, out var jobData))
             return;
 
+        if (!TryValidateJobRequirements(targetId, jobData.Job, component.IgnoreDemographicRequirements))
+        {
+            return;
+        }
+
         var privilegedAccess = _accessReader.FindAccessTags(privilegedId).ToHashSet();
-        if (!_reassignment.HasRequiredAuthorizedTags(targetId, jobData, privilegedAccess, out var requiredAccess, targetAccess))
+        if (!_reassignment.HasRequiredAuthorizedTags(targetId, jobData, privilegedAccess, out var requiredAccess, targetAccess, component.RequirePresetAccessOnly))
         {
             Log.Warning(
                 $"User {ToPrettyString(player)} tried to create an injector for '{newJobPrototype}' without covering all required accesses on {ToPrettyString(uid)}.");
@@ -200,6 +224,7 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
         injectorComp.JobPrototype = jobData.Job.ID;
         injectorComp.AuthorizedAccess = requiredAccess.OrderBy(tag => tag).ToList();
         injectorComp.BodyImplants = component.BodyImplants.ToList();
+        injectorComp.IgnoreDemographicRequirements = component.IgnoreDemographicRequirements;
 
         _metaData.SetEntityName(injector,
             Loc.GetString("job-preset-id-card-console-injector-name", ("job", jobData.Job.LocalizedName)));
@@ -286,5 +311,59 @@ public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleS
 
         var privilegedId = component.PrivilegedIdSlot.Item;
         return privilegedId != null && _accessReader.IsAllowed(privilegedId.Value, uid, reader);
+    }
+
+    private bool TryGetTargetProfile(EntityUid targetId, [NotNullWhen(true)] out HumanoidCharacterProfile? profile)
+    {
+        profile = null;
+
+        if (TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
+            && keyStorage.Key is { } key
+            && _record.TryGetRecord<GeneralStationRecord>(key, out var record))
+        {
+            profile = JobPresetRequirementHelper.ProfileFromStationRecord(record);
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TryValidateJobRequirements(EntityUid targetId, JobPrototype job, bool ignoreDemographicRequirements = false)
+    {
+        if (ignoreDemographicRequirements)
+        {
+            return JobPresetRequirementHelper.TryCheckJobRequirements(
+                job,
+                profile: null,
+                EntityManager,
+                _prototype,
+                playTimes: new Dictionary<string, TimeSpan>(),
+                out _,
+                enforcePlaytimeRequirements: false,
+                ignoreDemographicRequirements: true);
+        }
+
+        if (!TryGetTargetProfile(targetId, out var profile))
+        {
+            Log.Warning(
+                $"Tried to assign job preset '{job.ID}' on {ToPrettyString(targetId)} without station record demographics.");
+            return false;
+        }
+
+        if (JobPresetRequirementHelper.TryCheckJobRequirements(
+                job,
+                profile,
+                EntityManager,
+                _prototype,
+                playTimes: new Dictionary<string, TimeSpan>(),
+                out _,
+                enforcePlaytimeRequirements: false))
+        {
+            return true;
+        }
+
+        Log.Warning(
+            $"Job preset '{job.ID}' blocked for {ToPrettyString(targetId)} by profile requirements.");
+        return false;
     }
 }

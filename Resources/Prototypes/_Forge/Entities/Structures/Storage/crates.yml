@@ -1,0 +1,21 @@
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateEmpireStandard
+  name: empire guard crate
+  components:
+  - type: Icon
+    sprite: Forge/Structures/Storage/Crates/empire.rsi
+  - type: Sprite
+    sprite: Forge/Structures/Storage/Crates/empire.rsi
+
+- type: entity
+  parent: CrateSecgear
+  id: CrateEmpireSecure
+  name: empire guard secure crate
+  components:
+  - type: Icon
+    sprite: Forge/Structures/Storage/Crates/empire.rsi
+  - type: Sprite
+    sprite: Forge/Structures/Storage/Crates/empire.rsi
+  - type: AccessReader
+    access: [["Empire"]]

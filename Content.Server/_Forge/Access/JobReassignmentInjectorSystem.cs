@@ -79,7 +79,7 @@ public sealed class JobReassignmentInjectorSystem : EntitySystem
             ? component.BodyImplants
             : null;
 
-        if (!_reassignment.TryApplyToEntity(target, jobId, authorizedTags, args.User, extraImplants: bodyImplants))
+        if (!_reassignment.TryApplyToEntity(target, jobId, authorizedTags, args.User, extraImplants: bodyImplants, ignoreDemographicRequirements: component.IgnoreDemographicRequirements))
         {
             _popup.PopupEntity(Loc.GetString("job-reassignment-injector-popup-fail"), target, args.User);
             QueueDel(uid);

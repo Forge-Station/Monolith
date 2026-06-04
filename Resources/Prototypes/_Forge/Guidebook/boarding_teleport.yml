@@ -1,0 +1,13 @@
+- type: guideEntry
+  id: BoardingTeleport
+  name: guide-entry-boarding-teleport
+  text: "/ServerInfo/_Forge/Guidebook/BoardingTeleport/BoardingTeleport.xml"
+  priority: 9
+  children:
+  - BoardingTeleportBalanceTable
+
+- type: guideEntry
+  id: BoardingTeleportBalanceTable
+  name: guide-entry-boarding-teleport-balance-table
+  text: "/ServerInfo/_Forge/Guidebook/BoardingTeleport/BoardingTeleportBalanceTable.xml"
+  priority: -1

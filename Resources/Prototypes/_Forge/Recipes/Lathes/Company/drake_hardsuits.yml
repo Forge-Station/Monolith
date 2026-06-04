@@ -1,0 +1,35 @@
+# Drake Industries hardsuit lathe recipes.
+
+- type: latheRecipe
+  parent: DrakeIndustriesHardsuitT1Recipe
+  id: ClothingOuterHardsuitDrakeMk4
+  result: ClothingOuterHardsuitDrakeMk4
+
+- type: latheRecipe
+  parent: DrakeIndustriesHardsuitT2Recipe
+  id: ClothingOuterHardsuitDrakeMk8
+  result: ClothingOuterHardsuitDrakeMk8
+  materials:
+    Glass: 300
+    Steel: 3500
+    Plastic: 1250
+    Plasteel: 5000
+    Durathread: 2500
+    Silver: 500
+    Gold: 500
+    UraniumFissile: 100
+
+- type: latheRecipe
+  parent: DrakeIndustriesHardsuitT3Recipe
+  id: ClothingOuterHardsuitDrakeMk16
+  result: ClothingOuterHardsuitDrakeMk16
+  materials:
+    Plastic: 1000
+    Steel: 3000
+    Plasteel: 4000
+    Durathread: 2000
+    Silver: 250
+    Gold: 250
+    Plastitanium: 1000
+    UraniumFissile: 200
+    Diamond: 200

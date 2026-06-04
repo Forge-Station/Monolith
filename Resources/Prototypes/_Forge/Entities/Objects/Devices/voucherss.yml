@@ -1,3 +1,4 @@
+#region Renegate
 - type: entity
   parent: BaseShipLPC
   id: ShipVoucherAzimut
@@ -57,3 +58,88 @@
     - galandec
   - type: StaticPrice
     vendPrice: 510000
+
+# region Empire
+
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherGermes
+  name: Empire Germes LPC
+  suffix: Империя
+  description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    layers:
+    - state: etech
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Empire
+    companyName: Empire
+    vessels:
+    - Germes
+  - type: StaticPrice
+    vendPrice: 180000
+
+
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherPluto
+  name: Empire Pluto LPC
+  suffix: Империя
+  description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    layers:
+    - state: etech
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Empire
+    companyName: Empire
+    vessels:
+    - Pluto
+  - type: StaticPrice
+    vendPrice: 380000
+
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherTerit
+  name: Empire Terit LPC
+  suffix: Империя
+  description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    layers:
+    - state: etech
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Empire
+    companyName: Empire
+    vessels:
+    - Terit
+  - type: StaticPrice
+    vendPrice: 540000
+
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherMirko
+  name: Empire Mirko LPC
+  suffix: Империя
+  description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    layers:
+    - state: etech
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Empire
+    companyName: Empire
+    vessels:
+    - Mirko
+  - type: StaticPrice
+    vendPrice: 640000
+  # region Empire
+# Forge/Objects/Misc/emp_lpc.rsi # empire lpc textures

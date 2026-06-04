@@ -7,12 +7,14 @@
   description: A experimental heavy frigate, with heavy burst frontal firepower and fast maneuveability.
   limit: 3
   price: 320000
+  purchasable: false # voucher only
   category: Large
   group: Security
   access: Armory
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/andromeda.yml
   guidebookPage: Null
   class:
+  - Fighter
   - Frigate
   engine:
   - Plasma

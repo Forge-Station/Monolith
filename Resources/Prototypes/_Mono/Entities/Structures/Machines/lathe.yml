@@ -25,8 +25,14 @@
     staticPacks:
     - StaticAmmoRecipePack
     - NFMercenaryTechfabDeprecatedStatic
+    - NFEngineeringTechfabDeprecatedStatic # Forge-Change
     - RoundstartShipgunAmmo
+    - MonoAttachmentsStatic
     dynamicPacks:
+    # Empire start
+    - HardsuitEmpirePack
+    - WeaponEmpirePack
+    - EmpireVoucherRecipePack
     # rogue start
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged
@@ -41,7 +47,6 @@
     - MonoTSFMiscDynamic
     - MonoTSFGearDynamic
     # USSP start
-    - MonoUSSPVouchersDynamic
     - MonoUSSPArmorDynamic
     - MonoUSSPMiscDynamic
     - MonoUSSPWeaponsDynamicRanged
@@ -54,6 +59,8 @@
     - UniversalOrdinance
     - DynamicAmmoRecipePack
     - NFMercenaryTechfabDeprecated
+    - NFEngineeringTechfabDeprecated # Forge-Change
+    - AtmosTools
     # Civ military tech
     - ResearchedExplosives
     - SecurityEquipment

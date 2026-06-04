@@ -56,7 +56,7 @@
   id: ForgeFSGShieldsTSFT3
   name: research-technology-forge-fsg-shields-tier3
   entityIcon: MachineShieldForgeTSFHeavyCircuitboard
-  discipline: TsfmcShipyard
+  discipline: Tsfmc
   tier: 3
   cost: 65000
   recipeUnlocks:
@@ -65,7 +65,7 @@
   - MachineShieldForgeTSFCollisionCircuitboard
   - MachineShieldForgeTSFSagittaCircuitboard
   technologyPrerequisites:
-  - TsfAltair
+  - TsfTierThreeVouchers
   - UniversalMaterialResearchT2
   position: 11, 10
 
@@ -73,7 +73,7 @@
   id: ForgeFSGShieldsUsspT3
   name: research-technology-forge-fsg-shields-tier3
   entityIcon: MachineShieldForgeUsspHeavyCircuitboard
-  discipline: UsspShipyard
+  discipline: Ussp
   tier: 3
   cost: 65000
   recipeUnlocks:
@@ -82,7 +82,8 @@
   - MachineShieldForgeUsspCollisionCircuitboard
   - MachineShieldForgeUsspKerchCircuitboard
   technologyPrerequisites:
-  - UsspMediumShips
+  - UsspMediumSuits
+  - UniversalMaterialResearchT2
   position: 17, 10
 
 - type: technology
@@ -135,3 +136,20 @@
   - UllmanPulseAdv
   - UniversalMaterialResearchT2
   position: -7, -6
+
+- type: technology
+  id: ForgeFSGShieldsEmpireT3
+  name: research-technology-forge-fsg-shields-tier3
+  entityIcon: MachineShieldForgeEmpireHeavyCircuitboard
+  discipline: Empire
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - MachineShieldForgeEmpireHeavyCircuitboard
+  - MachineShieldForgeEmpirePrismaticCircuitboard
+  - MachineShieldForgeEmpireCollisionCircuitboard
+  - MachineShieldForgeEmpireSignumCircuitboard
+  technologyPrerequisites:
+  - EmpireAdvancedEquipment
+  - UniversalMaterialResearchT2
+  position: 13, 17

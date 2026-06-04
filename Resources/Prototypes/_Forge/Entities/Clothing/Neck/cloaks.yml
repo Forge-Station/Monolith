@@ -9,3 +9,363 @@
     sprite: Forge/Clothing/Neck/Cloaks/tti_commander.rsi
   - type: Clothing
     sprite: Forge/Clothing/Neck/Cloaks/tti_commander.rsi
+# Parameds
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakTTIParamedic
+  name: Плащ Парамедика TTI
+  description: Уютный плащ для проведения спасательных операций. Точно не демаскирует вас кучей стробоскопов.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/paramed.rsi
+    layers:
+    - state: icon-off
+    - state: icon-on
+      color: "#a9b6bd"
+      shader: unshaded
+  - type: Clothing
+    sprite: Forge/Clothing/Neck/Cloaks/paramed.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK-off
+      - state: equipped-NECK-on
+        color: "#a9b6bd"
+        shader: unshaded
+  - type: StaticPrice
+    price: 200
+    vendPrice: 6000
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakTTIParamedicAlt
+  name: Плащ Парамедика TTI
+  description: Уютный плащ для проведения спасательных операций. Точно не демаскирует вас кучей стробоскопов.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/paramed-alt.rsi
+    layers:
+    - state: icon-off
+    - state: icon-on
+      color: "#a9b6bd"
+      shader: unshaded
+  - type: Clothing
+    sprite: Forge/Clothing/Neck/Cloaks/paramed-alt.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK-off
+      - state: equipped-NECK-on
+        color: "#a9b6bd"
+        shader: unshaded
+  - type: StaticPrice
+    price: 200
+    vendPrice: 19000
+    
+#region Empire
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakEmpirePreafect
+  name: lord-preafect cloak
+  description: A lord's luxurious cloak, indicating his allegiance to aristocratic circles.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakEmpirePreafectOrange
+  name: lord-preafect cloak
+  description: A lord's luxurious cloak, signifying his allegiance to the Imperial military forces.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect_o.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakEmpirePreafectViolet
+  name: lord-preafect cloak
+  description: A lord's luxurious cloak symbolizing his devotion to the church.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect_v.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakEmpirePreafectDiplomacy
+  name: lord-preafect cloak
+  description: A lord's luxurious cloak symbolizing his allegiance to the Imperial Diplomatic Corps.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect_d.rsi
+
+#region Renegate
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakRenegade
+  name: renegade cloak
+  suffix: Ренегаты
+  description: Is it legal?
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/Renegade/renegade.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakRenegadeCaptain
+  name: renegade captain cloak
+  suffix: Ренегаты
+  description: Is it legal?
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/Renegade/renegadecaptain.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckMantleRenegade
+  name: renegade's mantle
+  suffix: Ренегаты
+  description: Is it legal?
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/mantles/renegade.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Neck/mantles/renegade.rsi
+
+#region Other
+- type: entity
+  parent: ClothingNeckBase
+  id: PlumberDarkCloakVClose
+  name: тёмный плащ
+  description: Длинное, свободное одеяние цвета ночи, которое элегантно струится вокруг фигуры, добавляя образу таинственности и загадочности.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/darkcloakclose.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Neck/Cloaks/darkcloakclose.rsi
+  - type: ToggleableClothing
+    clothingPrototype: PlumberDarkHoodV
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+
+- type: entity
+  parent: ClothingNeckBase
+  id: PlumberDarkCloakVOpen
+  name: тёмный плащ
+  description: Длинное, свободное одеяние цвета ночи, которое элегантно струится вокруг фигуры, добавляя образу таинственности и загадочности.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/darkcloakopen.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Neck/Cloaks/darkcloakopen.rsi
+  - type: ToggleableClothing
+    clothingPrototype: PlumberDarkHoodV
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+
+# start modern
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakModernCloak
+  name: Плащ "Модерн"
+  description: Прочный плащ из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloak.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodModernCloak
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+  - type: PirateBountyItem
+    id: ModernNeckAll
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakModernCloakBlue
+  name: Плащ "Модерн" [Синий]
+  description: Прочный плащ из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBlue.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodModernCloakBlue
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+  - type: PirateBountyItem
+    id: ModernNeckAll
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakModernCloakPink
+  name: Плащ "Модерн" [Розовый]
+  description: Прочный плащ из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakPink.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodModernCloakPink
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+  - type: PirateBountyItem
+    id: ModernNeckAll
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakModernCloakBRed
+  name: Плащ "Модерн" [Чёрно-красный]
+  description: Прочный плащ из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBRed.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodModernCloakBRed
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+  - type: PirateBountyItem
+    id: ModernNeckAll
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakModernCloakBYellow
+  name: Плащ "Модерн" [Чёрно-жёлтый]
+  description: Прочный плащ из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBYellow.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodModernCloakBYellow
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+  - type: PirateBountyItem
+    id: ModernNeckAll
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakModernCloakBPurple
+  name: Плащ "Модерн" [Чёрно-фиолетовый]
+  description: Прочный плащ из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBPurple.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodModernCloakBPurple
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+  - type: PirateBountyItem
+    id: ModernNeckAll
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakModernCloakGrey
+  name: Плащ "Модерн" [Серый]
+  description: Прочный плащ из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakGrey.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodModernCloakGrey
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+  - type: PirateBountyItem
+    id: ModernNeckAll
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakModernCloakRed
+  name: Плащ "Модерн" [Красный]
+  description: Прочный плащ из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakRed.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodModernCloakRed
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+  - type: PirateBountyItem
+    id: ModernNeckAll
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakModernCloakDesert
+  name: Плащ "Модерн" [Красный]
+  description: Прочный плащ из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakDesert.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodModernCloakDesert
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+  - type: PirateBountyItem
+    id: ModernNeckAll
+# stop modern
+
+- type: entity
+  parent: [ClothingNeckBase, BaseC2ContrabandUnredeemable]
+  id: ClothingNeckMantleSheriffLight
+  name: sheriff's mantle
+  description: Shootouts with nukies are just another Tuesday for this Sheriff. This mantle is a symbol of commitment to the station.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/mantles/shermantle.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Neck/mantles/shermantle.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: PlumberClothingNeckCloakWhitch
+  name: The Witch's Cape
+  description: A long black cape, flowing in the wind like a shadow, envelops the wearer, giving his image a gloomy mystery.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/witchcloak.rsi

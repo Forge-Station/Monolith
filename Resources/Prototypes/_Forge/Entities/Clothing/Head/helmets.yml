@@ -1,3 +1,4 @@
+# region Renegate
 - type: entity
   parent: ClothingHeadHelmetMercenary
   id: ClothingHeadHelmetRenegate
@@ -18,6 +19,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.8
 
+# region Company
 - type: entity
   parent: ClothingHeadHelmetMercenary
   id: ClothingHeadHelmetNexus
@@ -58,7 +60,7 @@
         Heat: 0.85
   - type: ExplosionResistance
     damageCoefficient: 0.9
-        
+
 - type: entity
   parent: [ClothingHeadEVAHelmetBase, BaseFactionGearOtherFactionT1]
   id: ClothingHeadHatArmoredTraumaShooter
@@ -88,9 +90,33 @@
   description: A high-tech enclosed helmet, made in the color scheme of an active Trauma Team doctor. Provides excellent head protection and has a built-in respirator with air filtration.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi 
+    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi 
+    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
+
+- type: entity
+  parent: ClothingHeadHelmetMercenary
+  id: ClothingHeadHelmetTL
+  name: Forces TechnicLogistic
+  suffix: TechnicLogistic
+  description: TechnicLogistic Self-Defense Forces helmet.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Helmets/helmet_techniclogistic.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Helmets/helmet_techniclogistic.rsi
+
+#region Other
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadHatHardhatSEngiArmored
+  name: armored syndicate engineer hard hat
+  description: An armored hard hat. Provides the best of both worlds in both protection & utility - perfect for the engineer on the frontlines.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Helmets/armored.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Helmets/armored.rsi
   - type: Armor
     modifiers:
       coefficients:

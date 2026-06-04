@@ -21,13 +21,17 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
+using Robust.Shared.Configuration;
+using Content.Shared._Forge;
+using Content.Server._Forge.TTS;
+using Content.Shared._Forge.TTS;
 
 namespace Content.Server.Radio.EntitySystems;
 
 /// <summary>
 ///     This system handles intrinsic radios and the general process of converting radio messages into chat messages.
 /// </summary>
-public sealed class RadioSystem : EntitySystem
+public sealed partial class RadioSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
@@ -36,6 +40,8 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly LanguageSystem _language = default!; // Einstein Engines - Language
+    [Dependency] private readonly INetConfigurationManager _cfg = default!; // Forge-Change
+    [Dependency] private readonly TTSSystem _tts = default!; // Forge-Change
     [Dependency] private readonly ConfigurableEncryptionKeySystem _configurableKeys = default!; // Forge-Change
 
     // set used to prevent radio feedback loops.
@@ -90,9 +96,21 @@ public sealed class RadioSystem : EntitySystem
             _netMan.ServerSendMessage(new MsgChatMessage { Message = msg }, actor.PlayerSession.Channel);
             // Einstein Engines - Languages end
 
+            // Forge-Change-Start
+            var isOwnAudioRelay = uid == args.MessageSource;
+            var radioTtsEnabled = _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeVars.LocalRadioTTSEnabled);
+
+            // Use the speaker's voice (MessageSource), not the listener's own — Forge-Change
+            if(!isOwnAudioRelay && radioTtsEnabled && TryComp<TTSComponent>(args.MessageSource, out var tts) && !string.IsNullOrWhiteSpace(tts.VoicePrototypeId))
+            {
+                _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, tts.VoicePrototypeId, actor.PlayerSession, true, args.Language, isRadio: true);
+            }
+            // Forge-Change-End
+
             // Send radio noise event to client for IPCs
             var radioNoiseEvent = new RadioNoiseEvent(GetNetEntity(uid), args.Channel.ID);
             RaiseNetworkEvent(radioNoiseEvent, actor.PlayerSession);
+
         }
     }
 

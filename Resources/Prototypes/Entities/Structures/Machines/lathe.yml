@@ -247,7 +247,7 @@
     - PowerCells
     - ScienceWeapons
     - Mining
-    - AtmosTools
+    - ForgeEngineeringTools # Forge-Change: handheld monitors
     - ResearchedExplosives # Mono
     # - EngineeringWeapons # Frontier
     - Chemistry
@@ -274,6 +274,7 @@
     - Translators
     # Forge-change
     - BSparts
+    - ForgePublicWeapons
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - DynamicAmmoRecipePack
@@ -342,13 +343,16 @@
     - NFMedicalBoards # Frontier + Shitmed Change
     - NFServiceBoards # Frontier
     - MonoAdvancedShuttleComponents # Mono
-    - ForgeAdvancedShuttleComponents # Forge
+    - ForgeShipWeaponsDynamic # Forge-Change
+    - ForgeAdvancedShuttleComponents # Forge-Change
+    - ForgeBoardingTeleportRecipes # Forge-Change
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
     - S2MechBoards
     - EngineeringBoardsGoob #Goob Factorio port
     - NanotrasenCircuitBoard # Forge-change
+    - DrakeIndustriesCircuitBoards # Forge-change
     - ReactorCircuitboards # FH edit
   - type: MaterialStorage
     whitelist:
@@ -385,12 +389,14 @@
     - NFServiceBoards # Frontier
     - MonoAdvancedShuttleComponents # Mono
     - ForgeAdvancedShuttleComponents # Forge
+    - ForgeBoardingTeleportRecipes # Forge
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
     - S2MechBoards
     - EngineeringBoardsGoob #Goob Factorio port
     - NanotrasenCircuitBoard # Forge-change
+    - DrakeIndustriesCircuitBoards # Forge-change
     - ReactorCircuitboards # FH edit
     - ForgeHyperConvectionFSGTier4Boards # Forge — FSG T4 boards (disk-unlocked), hyper imprinter only
 
@@ -530,6 +536,7 @@
     - SecurityExplosives
     - DynamicAmmoRecipePack
     - SecurityWeapons
+    - ForgePublicWeapons # Forge-change
     - SecurityDisablers
     - SMCybernetics
     # Mono - Mechs
@@ -639,8 +646,6 @@
     - SurgeryStatic
     - NFMedicalStatic # Frontier
     dynamicPacks:
-    - TTISuplplies # Forge-change
-    - TTIEquipment # Forge-change
     - Chemistry
     - SyringeGuns # DeltaV
     - NFMedical # Frontier
@@ -699,6 +704,7 @@
     dynamicPacks: # Frontier
     - NanotrasenClothing # Forge: AllTechPrintableTest only indexes dynamicPacks
     - NFPouches # Frontier
+    - ClothingEmpirePack # Forge-change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ClothingCentComm

@@ -53,7 +53,7 @@
   - ModsuitCoreStandard
   technologyPrerequisites:
   - AdvancedParts
-  position: 1, 8
+  position: 2, 7 # Forge-Change
 
 # Tier 2
 
@@ -75,7 +75,7 @@
   - ClothingOuterHardsuitRd
   technologyPrerequisites:
   - HardsuitsSpecialized
-  position: 1, 7
+  position: 3, 7 # Forge-Change
 
 # Tier 3
 

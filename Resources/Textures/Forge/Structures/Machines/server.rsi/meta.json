@@ -26,10 +26,16 @@
             "name": "ren_server"
         },
         {
+            "name": "server"
+        },
+        {
             "name": "variant-ren"
         },
         {
             "name": "variant-nfsd"
+        },
+        {
+            "name": "variant-empire"
         }
     ]
 }

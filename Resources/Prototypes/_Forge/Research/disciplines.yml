@@ -1,0 +1,12 @@
+- type: techDiscipline
+  id: ShipArmory
+  name: research-discipline-shiparmory
+  color: "#8b3a3a"
+  icon:
+    sprite: _Mono/Interface/Misc/research_disciplines_tsf.rsi
+    state: weaponry
+  tierPrerequisites:
+    1: 0
+    2: 0.75
+    3: 0.75
+  uiName: ARM

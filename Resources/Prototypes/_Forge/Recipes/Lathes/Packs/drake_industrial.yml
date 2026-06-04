@@ -1,0 +1,19 @@
+# Drake centrifuge recipes - dynamic only, unlocked via Drake research on DrakeUraniumCentrifuge.
+
+- type: latheRecipePack
+  id: DrakeCentrifugeUraniumProcessing
+  recipes:
+  - DrakeCentrifugeFissileUranium3
+
+- type: latheRecipePack
+  id: DrakeCentrifugePlastitaniumProcessing
+  recipes:
+  - DrakeCentrifugePlastitanium
+
+# Circuit imprinter - recipes unlock via DrakeIndustriesMachines / DrakeIndustriesCentrifuge.
+- type: latheRecipePack
+  id: DrakeIndustriesCircuitBoards
+  recipes:
+  - DrakeOreProcessorMk2MachineCircuitboard
+  - DrakeScrapProcessorMachineCircuitboard
+  - DrakeUraniumCentrifugeMachineCircuitboard

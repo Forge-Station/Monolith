@@ -38,6 +38,9 @@ namespace Content.Shared.Chemistry.Reagent
         [DataField]
         public string Group { get; private set; } = "Unknown";
 
+        [DataField]
+        public bool HideFromGuidebook; // Forge-Change
+
         [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<ReagentPrototype>))]
         public string[]? Parents { get; private set; }
 
@@ -144,7 +147,7 @@ namespace Content.Shared.Chemistry.Reagent
         /// </summary>
         [DataField]
         public bool WorksOnTheDead;
-        
+
         /// <summary>
         /// How likely is this reagent to set on fire?
         /// </summary>

@@ -12,12 +12,10 @@
   shuttlePath: /Maps/_Mono/Shuttles/Capitals/flyssa.yml
   guidebookPage: Null
   class:
-  - Capital
+  - Fighter
   - Destroyer
   - Medical
   - Chemistry
-  - Pursuit
-  - Patrol
   engine:
   - AME
 

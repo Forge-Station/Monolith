@@ -5,7 +5,9 @@ role-timer-overall-too-high = You require [color=yellow]{$time}[/color] less ove
 role-timer-role-insufficient = You require [color=yellow]{$time}[/color] more playtime with [color={$departmentColor}]{$job}[/color] to unlock this.
 role-timer-role-too-high = You require[color=yellow] {$time}[/color] less playtime with [color={$departmentColor}]{$job}[/color] to select this. (Are you trying to play a trainee role?)
 role-timer-age-too-old = Your character must be under the age of [color=yellow]{$age}[/color] for you to choose this.
-role-timer-age-too-young = Your character must be over the age of [color=yellow]{$age}[/color] for you to choose this.
+role-timer-age-too-young = Your character must be at least [color=yellow]{$age}[/color] years old for you to choose this.
+role-timer-whitelisted-sex = Your character must have one of the following sexes for you to select this:
+role-timer-blacklisted-sex = Your character must not have any of the following sexes for you to select this:
 role-timer-whitelisted-species = Your character must be one of the following species for you to select this:
 role-timer-blacklisted-species = Your character must not be one of the following species for you to select this:
 role-timer-whitelisted-traits = Your character must have one of the following traits for you to select this:

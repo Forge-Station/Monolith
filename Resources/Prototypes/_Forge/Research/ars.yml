@@ -1,0 +1,13 @@
+- type: technology
+  id: ARSOmnissiaModsuit
+  name: research-technology-ars-omnissia-modsuit
+  entityIcon: ClothingModsuitOmnissia
+  discipline: Industrial
+  tier: 3
+  cost: 55000
+  recipeUnlocks:
+  - ARSOmnissiaModsuit
+  technologyPrerequisites:
+  - HardsuitsAdvanced
+  - AdvancedToolsTechnology
+  position: 4, 7

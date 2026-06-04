@@ -5,8 +5,11 @@ ent-HeavyMechMount = тяжёлое крепление меха
 ent-EWARMechMount = крепление меха РЭБ
 ent-BaseAFInterceptor = AF-28 "Бродсворд"
     .desc = Один из первых целенаправленно созданных бронированных каркасов, сделан для борьбы с лёгкими целями и другими бронированными каркасами.
-ent-AFInterceptor = AF-28 "Бродсворд"
-ent-AFInterceptorBattery = Батарея
+ent-AFInterceptor = { ent-BaseAFInterceptor }
+    .desc = { ent-BaseAFInterceptor.desc }
+ent-AFInterceptorBattery = { ent-BaseAFInterceptor }
+    .desc = { ent-BaseAFInterceptor.desc }
+    .suffix = Батарея
 ent-AFInterceptorM = AF-28-M "Халберд"
     .desc = Модификация Бродсворда, Халберд жертвует бронёй и скоростью ради более тяжёлых оружейных креплений.
 ent-AFInterceptorG = AF-28-G "Сейбер"
@@ -17,3 +20,20 @@ ent-AFFlailE = ASF-59-E "Spyglass"
     .desc = Чрезвычайно специализированный мех на базе шасси Флейл. Использует сложные радарные системы для обеспечения возможностей управления и контроля, а также продвинутое оружие РЭБ.
 ent-AFMace = ASF-59-B "Mace"
     .desc = Случайная переделка, бронепластины сняты для добавления увеличенных ускорителей. Из-за ограничений по питанию может нести только одно оружие, ограничивая универсальность. Подходит для тяжёлых креплений.
+
+ent-AFInterceptorTSF = TSF { ent-BaseAFInterceptor }
+    .desc = { ent-BaseAFInterceptor.desc }
+ent-AFInterceptorMTSF = TSF { ent-AFInterceptorM }
+    .desc = { ent-AFInterceptorM.desc }
+
+ent-AFFlailTSF = TSF { ent-AFFlail }
+    .desc = { ent-AFFlail.desc }
+ent-AFMaceTSF = TSF { ent-AFMace }
+    .desc = { ent-AFMace.desc }
+ent-AFFlailETSF = TSF { ent-AFFlailE }
+    .desc = { ent-AFFlailE.desc }
+
+ent-MechDurandTSF = { ent-MechDurand } TSF
+    .desc = { ent-MechDurand.desc }
+ent-MechGygaxTSF = { ent-MechGygax } TSF
+    .desc = { ent-MechGygax.desc }

@@ -15,6 +15,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Server.Radio.Components;
 
 namespace Content.Server._Forge.TTS;
 
@@ -28,6 +29,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly TTSManager _ttsManager = default!;
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly IRobustRandom _rng = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     private readonly List<string> _sampleText =
         new()
@@ -62,6 +64,7 @@ public sealed partial class TTSSystem : EntitySystem
         RegisterRateLimits();
     }
 
+
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _ttsManager.ResetCache();
@@ -89,10 +92,10 @@ public sealed partial class TTSSystem : EntitySystem
         if (TryComp<MindContainerComponent>(uid, out var mindCon)
             && mindCon.Mind is { } mindUid
             && TryComp<MindComponent>(mindUid, out var mind)
-            && mind.Session != null)
+            && mind.UserId is { } userId
+            && _player.TryGetSessionById(userId, out var session))
         {
-            var channel = mind.Session.Channel;
-            if (!_netCfg.GetClientCVar(channel, ForgeVars.LocalTTSEnabled))
+            if (!_netCfg.GetClientCVar(session.Channel, ForgeVars.LocalTTSEnabled))
                 return;
         }
 
@@ -182,5 +185,48 @@ public sealed partial class TTSSystem : EntitySystem
         var textSsml = ToSsmlText(textSanitized, ssmlTraits);
 
         return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized);
+    }
+
+    public void OnlyPlayerTTS(EntityUid source, string message, string? voiceId, ICommonSession session, bool ifWhisper, LanguagePrototype language, bool isRadio = false)
+    {
+        _ = OnlyPlayerTTSAsync(source, message, voiceId, session, ifWhisper, language, isRadio);
+    }
+
+    private async Task OnlyPlayerTTSAsync(EntityUid source, string message, string? voiceId, ICommonSession session, bool ifWhisper, LanguagePrototype language, bool isRadio = false)
+    {
+        if (!_netCfg.GetClientCVar(session.Channel, ForgeVars.LocalTTSEnabled))
+            return;
+
+        if (HasComp<ActiveRadioComponent>(source))
+            await Task.Delay(1000);
+
+        if (!_isEnabled || message.Length > MaxMessageChars || string.IsNullOrWhiteSpace(voiceId))
+            return;
+
+        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var  protoVoice))
+            return;
+
+        var fullSoundData = await GenerateTTS(message, protoVoice.Speaker, ifWhisper);
+
+        if (fullSoundData == null)
+            return;
+
+        var obfMessage = _language.ObfuscateSpeech(message, language);
+
+        var obfSoundData = await GenerateTTS(obfMessage, protoVoice.Speaker, ifWhisper);
+
+        if (obfSoundData == null)
+            return;
+
+        if (session.AttachedEntity is not {
+            Valid: true
+            } listener)
+            return;
+
+        var ttsEvent = CanUnderstandLanguage(listener, language.ID)
+        ? new PlayTTSEvent(fullSoundData, GetNetEntity(source), ifWhisper, isRadio)
+        : new PlayTTSEvent(obfSoundData, GetNetEntity(source), ifWhisper, isRadio);
+
+        RaiseNetworkEvent(ttsEvent, session);
     }
 }

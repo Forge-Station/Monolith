@@ -1,0 +1,70 @@
+# Drake Industries machine circuit boards and centrifuge recipes.
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: DrakeOreProcessorMk2MachineCircuitboard
+  result: DrakeOreProcessorMk2MachineCircuitboard
+  materials:
+    Steel: 1200
+    Glass: 900
+    Gold: 200
+    Silver: 200
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: DrakeScrapProcessorMachineCircuitboard
+  result: DrakeScrapProcessorMachineCircuitboard
+  materials:
+    Steel: 1000
+    Glass: 900
+    Plasma: 500
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: DrakeUraniumCentrifugeMachineCircuitboard
+  result: DrakeUraniumCentrifugeMachineCircuitboard
+  materials:
+    Steel: 1000
+    Glass: 900
+    Gold: 300
+    Plasma: 500
+    Silver: 200
+
+- type: latheRecipe
+  id: DrakeCentrifugePlastitanium
+  name: drake-centrifuge-plastitanium-name
+  description: drake-centrifuge-plastitanium-desc
+  categories:
+  - Materials
+  materialResult:
+    Plastitanium: 200
+  completetime: 20
+  materials:
+    Plasteel: 1000
+    Plasma: 500
+    UraniumDepleted: 500
+    UraniumFissile: 50
+  icon:
+    sprite: _Mono/Effects/processing.rsi
+    state: processing_3
+  materialDiscountScale: 0.5
+
+- type: latheRecipe
+  id: DrakeCentrifugeFissileUranium3
+  name: drake-centrifuge-fissile-name
+  description: drake-centrifuge-fissile-desc
+  categories:
+  - Explosive
+  materialResult:
+    UraniumDepleted: 88
+    UraniumFissile: 9
+  completetime: 20
+  materials:
+    Uranium: 1000
+    Plasma: 900
+    Gold: 900
+    Silver: 900
+  icon:
+    sprite: _Mono/Effects/processing.rsi
+    state: processing_3
+  materialDiscountScale: 0.5

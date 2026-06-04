@@ -1,0 +1,19 @@
+# Drake Industries Apollo MK2 ship mining laser — circuit board for naval weapon fabricator.
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT4
+  id: WeaponTurretDrakeApolloMk2Circuitboard
+  result: WeaponTurretDrakeApolloMk2Circuitboard
+  categories:
+  - DrakeIndustries
+  materials:
+    Steel: 250
+    Glass: 900
+    Bluespace: 350
+    Diamond: 350
+    Gold: 350
+    Plasma: 250
+    Uranium: 300
+    Plastitanium: 450
+    UraniumDepleted: 100
+    Silver: 200

@@ -78,7 +78,7 @@ public sealed class ShipyardConsoleBoundUserInterface : BoundUserInterface
 
     private void ApproveOrder(ButtonEventArgs args)
     {
-        if (args.Button.Parent?.Parent is not VesselRow row || row.Vessel == null)
+        if (args.Button.Parent?.Parent?.Parent is not VesselRow row || row.Vessel == null) // Mono - another .parent? - this is really fucking stupid
         {
             return;
         }

@@ -10,7 +10,10 @@ namespace Content.Server._NF.Salvage;
 [RegisterComponent]
 public sealed partial class SalvageMobRestrictionsGridComponent : Component
 {
+    /// <summary>
+    /// Forge-Change: Added a list of mobs to kill.
+    /// Populated at runtime by <see cref="SalvageMobRestrictionsSystem"/>; must not be map-serialized.
+    /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
-    [DataField("mobsToKill")]
     public List<EntityUid> MobsToKill = new();
 }

@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "broken"
+    },
+    {
+        "name": "deny_unshaded",
+        "delays": [
+          [
+            0.1,
+            0.1
+          ]
+        ]
+    },
+    {
+      "name": "normal_unshaded",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+        "name": "eject_unshaded",
+        "delays": [
+          [
+            0.1,
+            0.1
+          ]
+        ]
+    },
+    {
+      "name": "off"
+    },
+    {
+     "name": "panel"
+    }
+  ]
+}

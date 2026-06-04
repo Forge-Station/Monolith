@@ -14,10 +14,11 @@
   shuttlePath: /Maps/_Mono/Shuttles/USSP/Ledokol/ledokol.yml
   guidebookPage: Null
   class:
-  - Capital
-  - Frigate
-  - Medical
+  - Fighter
+  - Cargo
   - Chemistry
+  - Medical
+  - Destroyer
   engine:
   - AME
 

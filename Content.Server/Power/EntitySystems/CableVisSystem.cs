@@ -4,17 +4,16 @@ using Content.Server.Power.Components;
 using Content.Server.Power.Nodes;
 using Content.Shared.Wires;
 using JetBrains.Annotations;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map.Components;
 
 namespace Content.Server.Power.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class CableVisSystem : EntitySystem
+    public sealed partial class CableVisSystem : EntitySystem
     {
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
-        [Dependency] private readonly SharedMapSystem _map = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private NodeContainerSystem _nodeContainer = default!;
+        [Dependency] private SharedMapSystem _map = default!;
 
         public override void Initialize()
         {
@@ -32,9 +31,8 @@ namespace Content.Server.Power.EntitySystems
             if (!TryComp<MapGridComponent>(transform.GridUid, out var grid))
                 return;
 
-            var gridUid = transform.GridUid!.Value;
             var mask = WireVisDirFlags.None;
-            var tile = _map.TileIndicesFor(gridUid, grid, transform.Coordinates);
+            var tile = _map.TileIndicesFor((transform.GridUid.Value, grid), transform.Coordinates);
 
             foreach (var reachable in node.ReachableNodes)
             {
@@ -42,7 +40,7 @@ namespace Content.Server.Power.EntitySystems
                     continue;
 
                 var otherTransform = Transform(reachable.Owner);
-                var otherTile = _map.TileIndicesFor(gridUid, grid, otherTransform.Coordinates);
+                var otherTile = _map.TileIndicesFor((transform.GridUid.Value, grid), otherTransform.Coordinates);
                 var diff = otherTile - tile;
 
                 mask |= diff switch

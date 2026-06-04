@@ -15,7 +15,7 @@ spray-painter-style-locker-nfsd-copper = ТСФ (бронза)
 spray-painter-style-locker-nfsd-silver = ТСФ (серебро)
 spray-painter-style-locker-nfsd-brigmedic = ТСФ (Коронер)
 spray-painter-style-locker-nfsd-gold = ТСФ (золото)
-spray-painter-style-locker-nfsd-sheriff = ТСФ (Шериф)
+spray-painter-style-locker-nfsd-sheriff = ТСФ (командующий офицер)
 spray-painter-style-locker-station-representative = Представитель Фронтира
 spray-painter-style-locker-fsb = FSB
 

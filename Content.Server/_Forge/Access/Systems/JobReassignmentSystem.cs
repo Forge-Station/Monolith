@@ -17,8 +17,12 @@ using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
+using Content.Shared._Forge.Roles;
+using Content.Shared.Humanoid;
+using Content.Shared.Preferences;
 using Content.Shared.StatusIcon;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.Access.Systems;
@@ -39,6 +43,7 @@ public sealed class JobReassignmentSystem : EntitySystem
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly StationRecordsSystem _record = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     public bool TryResolveJobData(ProtoId<JobPrototype> jobId, out JobReassignmentData data)
     {
@@ -73,14 +78,17 @@ public sealed class JobReassignmentSystem : EntitySystem
         JobReassignmentData data,
         HashSet<ProtoId<AccessLevelPrototype>> authorizedTags,
         out HashSet<ProtoId<AccessLevelPrototype>> requiredTags,
-        AccessComponent? access = null)
+        AccessComponent? access = null,
+        bool requirePresetAccessOnly = false)
     {
         requiredTags = new HashSet<ProtoId<AccessLevelPrototype>>();
 
         if (!Resolve(targetId, ref access, false))
             return false;
 
-        requiredTags = GetRequiredAuthorizedTags(access.Tags, data.AccessTags);
+        requiredTags = requirePresetAccessOnly
+            ? data.AccessTags.ToHashSet()
+            : GetRequiredAuthorizedTags(access.Tags, data.AccessTags);
         return requiredTags.IsSubsetOf(authorizedTags);
     }
 
@@ -123,7 +131,9 @@ public sealed class JobReassignmentSystem : EntitySystem
         HashSet<ProtoId<AccessLevelPrototype>>? authorizedTags = null,
         EntityUid? actor = null,
         IdCardComponent? idCard = null,
-        AccessComponent? access = null)
+        AccessComponent? access = null,
+        bool ignoreDemographicRequirements = false,
+        bool requirePresetAccessOnly = false)
     {
         if (!Resolve(targetId, ref idCard, false)
             || !Resolve(targetId, ref access, false))
@@ -132,7 +142,10 @@ public sealed class JobReassignmentSystem : EntitySystem
         }
 
         if (authorizedTags != null
-            && !HasRequiredAuthorizedTags(targetId, data, authorizedTags, out _, access))
+            && !HasRequiredAuthorizedTags(targetId, data, authorizedTags, out _, access, requirePresetAccessOnly))
+            return false;
+
+        if (!TryValidateJobRequirements(targetId, data.Job, ignoreDemographicRequirements))
             return false;
 
         _idCard.TryChangeJobTitle(targetId, data.Job.LocalizedName, idCard, actor);
@@ -153,12 +166,13 @@ public sealed class JobReassignmentSystem : EntitySystem
         HashSet<ProtoId<AccessLevelPrototype>>? authorizedTags = null,
         EntityUid? actor = null,
         bool syncCurrentIdCard = true,
-        IEnumerable<EntProtoId>? extraImplants = null)
+        IEnumerable<EntProtoId>? extraImplants = null,
+        bool ignoreDemographicRequirements = false)
     {
         if (!TryResolveJobData(jobId, out var data))
             return false;
 
-        return TryApplyToEntity(target, data, authorizedTags, actor, syncCurrentIdCard, extraImplants);
+        return TryApplyToEntity(target, data, authorizedTags, actor, syncCurrentIdCard, extraImplants, ignoreDemographicRequirements);
     }
 
     public bool TryApplyToEntity(
@@ -167,9 +181,13 @@ public sealed class JobReassignmentSystem : EntitySystem
         HashSet<ProtoId<AccessLevelPrototype>>? authorizedTags = null,
         EntityUid? actor = null,
         bool syncCurrentIdCard = true,
-        IEnumerable<EntProtoId>? extraImplants = null)
+        IEnumerable<EntProtoId>? extraImplants = null,
+        bool ignoreDemographicRequirements = false)
     {
         if (!_mind.TryGetMind(target, out var mindId, out var mind))
+            return false;
+
+        if (!TryValidateEntityJobRequirements(target, data.Job, ignoreDemographicRequirements))
             return false;
 
         if (syncCurrentIdCard
@@ -177,12 +195,12 @@ public sealed class JobReassignmentSystem : EntitySystem
             && !HasComp<AgentIDCardComponent>(foundId.Owner))
         {
             // The body job change is the primary action. Updating the currently carried ID is best-effort.
-            TryApplyToIdCard(foundId.Owner, data, authorizedTags, actor, foundId.Comp);
+            TryApplyToIdCard(foundId.Owner, data, authorizedTags, actor, foundId.Comp, ignoreDemographicRequirements: ignoreDemographicRequirements);
         }
 
         _jobs.MindAddJob(mindId, data.Job.ID);
 
-        if (_mind.TryGetSession(mind, out var session))
+        if (mind.UserId is { } userId && _player.TryGetSessionById(userId, out var session))
             _playtime.QueueRefreshTrackers(session);
 
         var playerJob = EnsureComp<PlayerJobComponent>(target);
@@ -223,6 +241,89 @@ public sealed class JobReassignmentSystem : EntitySystem
         }
 
         return departments;
+    }
+
+    private bool TryValidateJobRequirements(EntityUid targetId, JobPrototype job, bool ignoreDemographicRequirements = false)
+    {
+        if (ignoreDemographicRequirements)
+        {
+            HumanoidCharacterProfile? profile = null;
+            if (TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
+                && keyStorage.Key is { } key
+                && _record.TryGetRecord<GeneralStationRecord>(key, out var record))
+            {
+                profile = JobPresetRequirementHelper.ProfileFromStationRecord(record);
+            }
+
+            return JobPresetRequirementHelper.TryCheckJobRequirements(
+                job,
+                profile,
+                EntityManager,
+                _prototype,
+                new Dictionary<string, TimeSpan>(),
+                out _,
+                enforcePlaytimeRequirements: false,
+                ignoreDemographicRequirements: true);
+        }
+
+        if (TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorageFull)
+            && keyStorageFull.Key is { } recordKey
+            && _record.TryGetRecord<GeneralStationRecord>(recordKey, out var recordFull))
+        {
+            var profile = JobPresetRequirementHelper.ProfileFromStationRecord(recordFull);
+            return JobPresetRequirementHelper.TryCheckJobRequirements(
+                job,
+                profile,
+                EntityManager,
+                _prototype,
+                new Dictionary<string, TimeSpan>(),
+                out _,
+                enforcePlaytimeRequirements: false);
+        }
+
+        return TryValidateEntityJobRequirements(targetId, job);
+    }
+
+    private bool TryValidateEntityJobRequirements(EntityUid target, JobPrototype job, bool ignoreDemographicRequirements = false)
+    {
+        if (ignoreDemographicRequirements)
+        {
+            HumanoidCharacterProfile? profile = null;
+            if (TryComp<HumanoidAppearanceComponent>(target, out var humanoid))
+            {
+                profile = JobPresetRequirementHelper.ProfileFromAppearance(
+                    humanoid.Species,
+                    humanoid.Age,
+                    humanoid.Sex);
+            }
+
+            return JobPresetRequirementHelper.TryCheckJobRequirements(
+                job,
+                profile,
+                EntityManager,
+                _prototype,
+                new Dictionary<string, TimeSpan>(),
+                out _,
+                enforcePlaytimeRequirements: false,
+                ignoreDemographicRequirements: true);
+        }
+
+        if (!TryComp<HumanoidAppearanceComponent>(target, out var humanoidFull))
+            return false;
+
+        var profileFull = JobPresetRequirementHelper.ProfileFromAppearance(
+            humanoidFull.Species,
+            humanoidFull.Age,
+            humanoidFull.Sex);
+
+        return JobPresetRequirementHelper.TryCheckJobRequirements(
+            job,
+            profileFull,
+            EntityManager,
+            _prototype,
+            new Dictionary<string, TimeSpan>(),
+            out _,
+            enforcePlaytimeRequirements: false);
     }
 
     private void UpdateStationRecord(EntityUid targetId, JobPrototype job)

@@ -1,6 +1,7 @@
 using Content.Server.Cargo.Systems;
 using Content.Server.Power.Components;
 using Content.Shared._Mono.CCVar;
+using Content.Shared.Power.Components;
 using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Robust.Shared.Configuration;
@@ -14,13 +15,14 @@ namespace Content.Server._Mono.Cleanup;
 /// <summary>
 /// This system cleans up small grid fragments that have less than a specified number of tiles after a delay.
 /// </summary>
-public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
+public sealed partial class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PricingSystem _pricing = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private CleanupHelperSystem _cleanup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private PricingSystem _pricing = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private float _maxDistance;
     private float _maxValue;
@@ -100,7 +102,7 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
 
         state.FastPathEligibleSince = null;
 
-        var tiles = body.FixturesMass / ShuttleSystem.TileMassMultiplier;
+        var tiles = body.FixturesMass / ShuttleSystem.TileDensityMultiplier;
         var scale = MathF.Min(tiles / _aggressiveTiles, 1f);
 
         if (!state.IgnoreIFF && TryComp<IFFComponent>(uid, out var iff) && (iff.Flags & IFFFlags.HideLabel) == 0 // delete only if IFF off

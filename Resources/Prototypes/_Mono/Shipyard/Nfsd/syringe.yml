@@ -13,6 +13,9 @@
   guidebookPage: Null
   class:
   - Patrol
+  - Pursuit
+  - Chemistry
+  - Medical
   engine:
   - Uranium
   cloakHunter: true

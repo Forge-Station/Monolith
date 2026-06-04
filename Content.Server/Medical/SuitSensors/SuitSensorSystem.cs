@@ -31,7 +31,7 @@ using Content.Server._Mono.Radar; // Monolith
 using Content.Server.Explosion.EntitySystems;
 using Content.Server._NF.Medical.SuitSensors; // Frontier modification
 using Content.Shared.DeviceNetwork.Components;
-using Content.Server.DeviceNetwork.Components; // Cursor
+using Content.Server.DeviceNetwork.Components; // Forge-Change
 
 namespace Content.Server.Medical.SuitSensors;
 
@@ -67,7 +67,7 @@ public sealed partial class SuitSensorSystem : EntitySystem
         SubscribeLocalEvent<SuitSensorComponent, EmpPulseEvent>(OnEmpPulse);
         SubscribeLocalEvent<SuitSensorComponent, EmpDisabledRemovedEvent>(OnEmpFinished);
         SubscribeLocalEvent<SuitSensorComponent, SuitSensorChangeDoAfterEvent>(OnSuitSensorDoAfter);
-        SubscribeLocalEvent<SingletonDeviceNetServerComponent, DeviceNetServerDisconnectedEvent>(OnServerDisconnected); // Cursor
+        SubscribeLocalEvent<SingletonDeviceNetServerComponent, DeviceNetServerDisconnectedEvent>(OnServerDisconnected); // Forge-Change
     }
 
     public override void Update(float frameTime)
@@ -105,7 +105,7 @@ public sealed partial class SuitSensorSystem : EntitySystem
             {
                 // Frontier - PR 1053 QoL changes to coordinates display
                 // if (!_singletonServerSystem.TryGetActiveServerAddress<CrewMonitoringServerComponent>(sensor.StationId!.Value, out var address))
-                if (!_singletonServerSystem.TryGetActiveServerAddress<CrewMonitoringServerComponent>(xform.MapID, device.TransmitFrequency, out var address)) // Cursor
+                if (!_singletonServerSystem.TryGetActiveServerAddress<CrewMonitoringServerComponent>(xform.MapID, device.TransmitFrequency, out var address)) // Forge-Change
                     continue;
 
 
@@ -542,13 +542,13 @@ public sealed partial class SuitSensorSystem : EntitySystem
         return status;
     }
 
-    // Start of Cursor Code
+    // Forge-Change-start
     /// <summary>
     /// When a singleton device network server is disconnected (e.g. because a duplicate arrived via FTL/BSS jump),
     /// clear ConnectedServer on every suit sensor that was bound to that server's address.
     /// The next sensor update tick will re-resolve via TryGetActiveServerAddress and bind to the surviving server.
     /// </summary>
-    private void OnServerDisconnected(EntityUid uid, SingletonDeviceNetServerComponent _server, ref DeviceNetServerDisconnectedEvent args) // Cursor
+    private void OnServerDisconnected(EntityUid uid, SingletonDeviceNetServerComponent _server, ref DeviceNetServerDisconnectedEvent args)
     {
         if (!TryComp<DeviceNetworkComponent>(uid, out var serverDevice)
             || string.IsNullOrEmpty(serverDevice.Address))
@@ -562,5 +562,5 @@ public sealed partial class SuitSensorSystem : EntitySystem
                 sensor.ConnectedServer = null;
         }
     }
-    // End of Cursor Code
+    // Forge-Change-end
 }

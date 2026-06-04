@@ -1,0 +1,89 @@
+# Шапка капитана Tel-Adi
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatTelAdiCap
+  name: шапка капитана Tel-Adi
+  description: Фирменная шапка капитана корпорации Tel-Adi. Символ власти и прибыли.
+  suffix: ТелАди
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/tel-adi_cap.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/tel-adi_cap.rsi
+  - type: StaticPrice
+    price: 100
+
+# Плащ капитана Tel-Adi
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakTelAdiCap
+  name: плащ капитана Tel-Adi
+  description: Фирменный плащ капитана корпорации Tel-Adi. Развевается на ветру космических просторов.
+  suffix: ТелАди
+  components:
+  - type: Sprite
+    sprite: Clothing/Neck/Cloaks/tel-adi_cap.rsi
+  - type: Clothing
+    sprite: Clothing/Neck/Cloaks/tel-adi_cap.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: Clothing/Neck/Cloaks/tel-adi_cap.rsi
+      right:
+      - state: inhand-right
+        sprite: Clothing/Neck/Cloaks/tel-adi_cap.rsi
+  - type: StaticPrice
+    price: 100
+
+# Комбинезон Tel-Adi
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitTelAdi
+  name: комбинезон Tel-Adi
+  description: Фирменный комбинезон сотрудника корпорации Tel-Adi. Удобный и практичный.
+  suffix: ТелАди
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tel-adi.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/tel-adi.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: Forge/Clothing/Uniforms/Jumpsuits/tel-adi.rsi
+      right:
+      - state: inhand-right
+        sprite: Forge/Clothing/Uniforms/Jumpsuits/tel-adi.rsi
+  - type: StaticPrice
+    price: 100
+
+# Скороходы Tel-Adi — на батарейке, +10% при активации
+- type: entity
+  parent: [ClothingShoesBase, PowerCellSlotSmallItem, BaseToggleClothing]
+  id: ClothingShoesBootsTelAdi
+  name: скороходы Tel-Adi
+  description: Высокотехнологичная обувь корпорации Tel-Adi. При активации ускоряет передвижение на 10%, расходуя заряд батареи.
+  suffix: ТелАди
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Boots/tel-adi.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Shoes/Boots/tel-adi.rsi
+  - type: ToggleClothing
+    action: ActionToggleSpeedBoots
+  - type: ClothingSpeedModifier # only applies while toggled on (ItemToggle)
+    walkModifier: 1.10
+    sprintModifier: 1.10
+  - type: Appearance
+  - type: PowerCellDraw # Forge-change: drains a power cell while active
+    drawRate: 3
+  - type: ToggleCellDraw
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellSmall
+  - type: StaticPrice
+    price: 5000

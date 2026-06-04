@@ -1,4 +1,15 @@
 - type: entity
+  id: BannerTelAdi
+  parent: BannerBase
+  name: баннер Tel-Adi
+  description: Баннер корпорации Tel-Adi. Символ прибыли и порядка.
+  suffix: ТелАди
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Decoration/banner.rsi
+    state: banner_tel-adi
+
+- type: entity
   id: BannerScrapTech
   parent: BannerBase
   name: Scrap Tech banner

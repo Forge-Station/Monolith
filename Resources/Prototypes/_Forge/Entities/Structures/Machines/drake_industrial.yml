@@ -78,6 +78,48 @@
     materialUseMultiplier: 0.75
     timeMultiplier: 0.5
 
+# Tel-Adi переработчик лома — копия Drake с новыми текстурами
+- type: entity
+  parent: ScrapProcessor
+  id: TelAdiScrapProcessor
+  name: переработчик лома Tel-Adi
+  suffix: ТелАди
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/teladi_scrap_processor.rsi
+  - type: Machine
+    board: TelAdiScrapProcessorMachineCircuitboard
+  - type: Lathe
+    materialUseMultiplier: 0.75
+    timeMultiplier: 0.5
+
+# Tel-Adi центрифуга — копия Drake с новыми текстурами
+- type: entity
+  parent: [CentrifugeLatheMini, DrakeMachine2x2Base]
+  id: TelAdiUraniumCentrifuge
+  name: центрифуга Tel-Adi
+  suffix: ТелАди
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/teladi_centrifuge.rsi
+    offset: 0.5,-0.5
+    layers:
+    - state: icon
+      map: [ "enum.LatheVisualLayers.IsRunning" ]
+  - type: Machine
+    board: TelAdiUraniumCentrifugeMachineCircuitboard
+  - type: Lathe
+    materialUseMultiplier: 0.75
+    timeMultiplier: 0.5
+    idleState: icon
+    runningState: building
+    staticPacks:
+    - MonoCentrifugeProcessingStatic
+    dynamicPacks:
+    - MonoUraniumProcessing
+    - DrakeCentrifugeUraniumProcessing
+    - DrakeCentrifugePlastitaniumProcessing
+
 - type: entity
   parent: [CentrifugeLatheMini, DrakeMachine2x2Base]
   id: DrakeUraniumCentrifuge

@@ -1,0 +1,434 @@
+# ══════════════════════════════════════════════════════════
+# Tel-Adi ARS «Аквизитор» — первое поколение
+# ══════════════════════════════════════════════════════════
+
+# Tel-Adi ARS «Аквизитор» — шлем
+- type: entity
+  parent: BaseClothingModsuitHelmet
+  id: ClothingModsuitHelmetTelAdi
+  name: шлем Tel-Adi ARS «Аквизитор»
+  description: Встроенное ночное видение и самозарядный фонарь. Tel-Adi не гасят свет там, где горят деньги.
+  suffix: ТелАди
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Head/Modsuits/tel-adi.rsi
+  - type: NightVision # Forge-change: built-in night vision (like Omnissia helmet)
+    isEquipment: true
+  # Forge-change-start: built-in self-recharging flashlight (like Omnissia helmet)
+  - type: Appearance
+  - type: ToggleableLightVisuals
+  - type: PointLight
+    enabled: false
+    radius: 10 # Forge-change: big directed flashlight beam
+    energy: 4
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    netsync: true # Forge-change: sync directly so the light actually renders
+  - type: HandheldLight
+    addPrefix: true
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: radiating
+        interpolate: Linear
+        maxDuration: 2.0
+        startValue: 3.0
+        endValue: 2.0
+        isLooped: true
+        reverseWhenFinished: true
+      - !type:PulseBehaviour
+        id: blinking
+        interpolate: Nearest
+        maxDuration: 1.0
+        startValue: 0.1
+        endValue: 2.0
+        isLooped: true
+  - type: Battery
+    maxCharge: 600
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 2
+  # Forge-change-end
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.90
+        Slash: 0.90
+        Piercing: 0.90
+        Heat: 0.90
+        Radiation: 0 # Forge-change: full (100%) radiation protection
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 20000
+
+# Tel-Adi ARS «Аквизитор» — торс
+- type: entity
+  parent: ClothingModsuitChestplateBase
+  id: ClothingModsuitChestplateTelAdi
+  name: нагрудник Tel-Adi ARS «Аквизитор»
+  description: "Усиленный корпус с сервоприводами — на десять процентов быстрее, ровно столько чтобы успеть раньше конкурента. Защита от хим-агентов встроена: корпорация заботится о своих вложениях."
+  suffix: ТелАди
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Modsuits/tel-adi.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Modsuits/tel-adi.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 1.10
+    sprintModifier: 1.10
+  - type: ExplosionResistance
+    damageCoefficient: 0.30
+  - type: FireProtection
+    reduction: 0.80
+  - type: StaminaDamageResistance
+    coefficient: 0.5
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.75
+        Slash: 0.75
+        Piercing: 0.75
+        Heat: 0.80
+        Caustic: 0.80
+        Shock: 0.60
+        Radiation: 0 # Forge-change: full (100%) radiation protection
+        Poison: 0.7 # Forge-change: blocks Chimera letoferol injection
+  - type: StaticPrice
+    price: 10000
+    vendPrice: 50000
+
+# Tel-Adi ARS «Аквизитор» — перчатки с инструментами
+- type: entity
+  parent: ClothingModsuitGauntletsBase
+  id: ClothingModsuitGauntletsTelAdi
+  name: перчатки Tel-Adi ARS «Аквизитор»
+  description: "Семь встроенных инструментов в одной перчатке. Tel-Adi считают: правильный инструмент закрывает контракт быстрее, чем оружие. Обычно."
+  suffix: ТелАди
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Hands/Modsuits/tel-adi.rsi
+    layers:
+    - state: gauntlets
+    - state: gauntlets-sealed
+      visible: false
+      map: [ "sealed" ]
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      gloves:
+      - state: equipped-HAND-sealed
+      gloves-vox:
+      - state: equipped-HAND-sealed-vox
+  - type: ModsuitGauntletTools
+    urkProto: ShipRepairDeviceModsuitGauntlet
+    omnitoolProto: OmnitoolModsuitGauntlet
+    # Forge-change-start: extra Tel-Adi tools
+    rcdProto: RCDRecharging
+    sprayNozzleProto: WeaponSprayNozzle
+    # Forge-change-end
+  - type: ActionGrant
+    actions:
+    - ActionModsuitGauntletToolsMenu
+  - type: ItemActionGrant
+    actions:
+    - ActionModsuitGauntletToolsMenu
+    activeIfWorn: true
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 20000
+
+# Tel-Adi ARS «Аквизитор» — ботинки с магнитками
+- type: entity
+  parent: ClothingModsuitBootsBase
+  id: ClothingModsuitBootsTelAdi
+  name: ботинки Tel-Adi ARS «Аквизитор»
+  description: Магнитные подошвы. В невесомости, в вакууме, в спорных секторах — Tel-Adi стоят твёрдо.
+  suffix: ТелАди
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Shoes/Modsuits/tel-adi.rsi
+  - type: Magboots
+    requiresGrid: false
+    enabledPrefix: null
+  - type: NoSlip
+  - type: ClothingSpeedModifier # Forge-change: neutralize base boots slowdown so the full suit gives exactly +10% walk (from the chestplate)
+    walkModifier: 1.0
+    sprintModifier: 1.0
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET-sealed
+      shoes-vox:
+      - state: equipped-FEET-sealed-vox
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.75
+  - type: StaticPrice
+    price: 3000
+    vendPrice: 10000
+
+# Tel-Adi ARS «Аквизитор» — основной блок (спина)
+- type: entity
+  parent: ClothingModsuitBase
+  id: ClothingModsuitTelAdi
+  name: модкостюм Tel-Adi ARS «Аквизитор»
+  description: Флагманский модкостюм Tel-Adi. Полный набор для добычи, ремонта и переговоров — всё, что нужно чтобы прийти, взять своё и уйти. Джетпак, расширенное хранилище, встроенный бак для форсунки.
+  suffix: ТелАди
+  components:
+  - type: Appearance
+  - type: Icon
+    sprite: _Mono/Clothing/Back/Modsuits/tel-adi.rsi
+    state: control
+  - type: Sprite
+    sprite: _Mono/Clothing/Back/Modsuits/tel-adi.rsi
+    layers:
+    - state: control
+    - state: control-sealed
+      visible: false
+      shader: unshaded
+      map: [ "sealed" ]
+  - type: Storage
+    grid:
+    - 0,0,1,4    # Forge-change: left = mod storage
+    - 3,0,8,4    # Forge-change: right = normal storage
+    maxItemSize: Huge
+  - type: Tag
+    tags:
+    - GasTank
+    - NozzleBackTank # Forge-change: lets the gauntlet spray nozzle draw water from the suit
+  # Forge-change-start: built-in water tank feeding the gauntlet spray nozzle
+  - type: SolutionAmmoProvider
+    solutionId: tank
+    proto: BulletWaterShot
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 1000
+  - type: RefillableSolution
+    solution: tank
+  - type: DrainableSolution
+    solution: tank
+  - type: DrawableSolution
+    solution: tank
+  - type: Injector
+    solutionName: tank
+    injectOnly: false
+    ignoreMobs: true
+    ignoreClosed: false
+    minTransferAmount: 10
+    maxTransferAmount: 100
+    transferAmount: 50
+    toggleState: 1 # start in draw mode (набирать)
+  - type: Spillable
+    solution: tank
+    spillWhenThrown: false
+  - type: ExaminableSolution
+    solution: tank
+  # Forge-change-end
+  - type: ActivatableUI
+    key: enum.SharedGasTankUiKey.Key
+    verbOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.ToggleClothingUiKey.Key:
+        type: ToggleableClothingBoundUserInterface
+      enum.SharedGasTankUiKey.Key:
+        type: GasTankBoundUserInterface
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: GasTank
+    enableInternals: false
+    outputPressure: 42.6 # Forge-change: capacity like the void jetpack
+    air:
+      volume: 5
+      temperature: 293.15
+      moles:
+        - 1.025689525 # oxygen
+        - 1.025689525 # nitrogen
+  - type: Jetpack
+    moleUsage: 0.00085
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingModsuitHelmetTelAdi
+      gloves: ClothingModsuitGauntletsTelAdi
+      outerClothing: ClothingModsuitChestplateTelAdi
+      shoes: ClothingModsuitBootsTelAdi
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK-sealed
+  - type: StaticPrice
+    price: 20000
+    vendPrice: 100000
+
+# Tel-Adi ARS «Аквизитор» с батарейкой
+- type: entity
+  parent: ClothingModsuitTelAdi
+  id: ClothingModsuitTelAdiPowerCell
+  suffix: ТелАди, Батарейка высокой ёмкости
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+        whitelist:
+          components:
+            - PowerCell
+
+# ══════════════════════════════════════════════════════════
+# Tel-Adi ARS «Дивиденд» — второе поколение
+# ══════════════════════════════════════════════════════════
+
+# Tel-Adi ARS «Дивиденд» — шлем
+- type: entity
+  parent: ClothingModsuitHelmetTelAdi
+  id: ClothingModsuitHelmetTelAdiMk2
+  name: шлем Tel-Adi ARS «Дивиденд»
+  description: Усиленная версия шлема «Аквизитора». Тот, кто носит «Дивиденд», уже доказал корпорации свою ценность — и получил соответствующее снаряжение.
+  suffix: ТелАди Дивиденд
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Head/Modsuits/tel-adi-mk2.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/Head/Modsuits/tel-adi-mk2.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.80
+        Slash: 0.60
+        Piercing: 0.80
+        Heat: 0.80
+        Radiation: 0
+
+# Tel-Adi ARS «Дивиденд» — торс
+- type: entity
+  parent: ClothingModsuitChestplateTelAdi
+  id: ClothingModsuitChestplateTelAdiMk2
+  name: нагрудник Tel-Adi ARS «Дивиденд»
+  description: Двадцать процентов к скорости. Улучшенная бронезащита по всем показателям. Разница между «Аквизитором» и «Дивидендом» — это разница между стартовым капиталом и прибылью.
+  suffix: ТелАди Дивиденд
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Modsuits/tel-adi-mk2.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Modsuits/tel-adi-mk2.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 1.20
+    sprintModifier: 1.20
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.30
+        Piercing: 0.65
+        Heat: 0.70
+        Caustic: 0.70
+        Shock: 0.50
+        Radiation: 0
+        Poison: 0.60
+
+# Tel-Adi ARS «Дивиденд» — перчатки
+- type: entity
+  parent: ClothingModsuitGauntletsTelAdi
+  id: ClothingModsuitGauntletsTelAdiMk2
+  name: перчатки Tel-Adi ARS «Дивиденд»
+  description: Тот же полный набор инструментов что в «Аквизиторе». Просто на тебе теперь лучший костюм.
+  suffix: ТелАди Дивиденд
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ModsuitGauntletTools
+    urkProto: ShipRepairDeviceRechargingModsuitGauntlet
+    omnitoolProto: OmnitoolModsuitGauntlet
+    rcdProto: RCDRecharging
+    sprayNozzleProto: WeaponSprayNozzle
+  - type: Sprite
+    sprite: _Mono/Clothing/Hands/Modsuits/tel-adi-mk2.rsi
+    layers:
+    - state: gauntlets
+    - state: gauntlets-sealed
+      visible: false
+      map: [ "sealed" ]
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      gloves:
+      - state: equipped-HAND-sealed
+      gloves-vox:
+      - state: equipped-HAND-sealed-vox
+
+# Tel-Adi ARS «Дивиденд» — ботинки
+- type: entity
+  parent: ClothingModsuitBootsTelAdi
+  id: ClothingModsuitBootsTelAdiMk2
+  name: ботинки Tel-Adi ARS «Дивиденд»
+  description: Те же магниты, тот же принцип — стоять там, где нужно. «Дивиденд» требует больше питания, но возвращает больше.
+  suffix: ТелАди Дивиденд
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Shoes/Modsuits/tel-adi-mk2.rsi
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET-sealed
+      shoes-vox:
+      - state: equipped-FEET-sealed-vox
+
+# Tel-Adi ARS «Дивиденд» — основной блок (спина)
+- type: entity
+  parent: ClothingModsuitTelAdi
+  id: ClothingModsuitTelAdiMk2
+  name: модкостюм Tel-Adi ARS «Дивиденд»
+  description: Второе поколение «Аквизитора». Дороже в производстве, требовательнее к питанию, щедрее ко всему остальному. Для тех, кто уже окупил первый костюм — и продолжает работать на опережение.
+  suffix: ТелАди Дивиденд
+  components:
+  - type: Icon
+    sprite: _Mono/Clothing/Back/Modsuits/tel-adi-mk2.rsi
+    state: control
+  - type: Sprite
+    sprite: _Mono/Clothing/Back/Modsuits/tel-adi-mk2.rsi
+    layers:
+    - state: control
+    - state: control-sealed
+      visible: false
+      shader: unshaded
+      map: [ "sealed" ]
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK-sealed
+  - type: PowerCellDraw
+    drawRate: 0.15
+    useRate: 0.5
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+        whitelist:
+          components:
+            - PowerCell
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingModsuitHelmetTelAdiMk2
+      gloves: ClothingModsuitGauntletsTelAdiMk2
+      outerClothing: ClothingModsuitChestplateTelAdiMk2
+      shoes: ClothingModsuitBootsTelAdiMk2
+  - type: StaticPrice
+    price: 30000
+    vendPrice: 150000

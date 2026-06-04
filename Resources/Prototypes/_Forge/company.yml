@@ -41,3 +41,13 @@
   description: renegate-resistance-description
   color: "#6B2D2D"
   whitelisted: true
+  
+- type: company
+  id: TelAdi
+  form: Protagonist
+  name: Tel-Adi
+  description: company-tel-adi-description
+  note: company-tel-adi-note
+  color: "#FF0000"
+  icon: TelAdi
+  whitelisted: true

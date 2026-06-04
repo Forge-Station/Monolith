@@ -1,0 +1,53 @@
+- type: entity
+  id: ComputerShipyardTelAdi
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, ComputerShipyardBase]
+  name: Tel-Adi shipyard console
+  description: A shipyard console for purchasing Tel-Adi corporation vessels.
+  suffix: ТелАди
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer_tel_adi
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: tel_adi
+    - map: ["computerLayerKeys"]
+      state: telesci_key
+  - type: ActivatableUI
+    key: enum.ShipyardConsoleUiKey.TelAdi
+  - type: UserInterface
+    interfaces:
+      enum.ShipyardConsoleUiKey.TelAdi:
+        type: ShipyardConsoleBoundUserInterface
+  - type: ShipyardConsole
+    shipyardChannel: Traffic
+
+- type: entity
+  id: ComputerShipyardTelAdiAurora
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, ComputerShipyardBase]
+  name: Tel-Adi auxiliary shipyard console
+  description: A shipyard console for purchasing vessels available on the Tel-Adi Fregate.
+  suffix: ТелАди фрегат
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer_tel_adi
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: tel_adi
+    - map: ["computerLayerKeys"]
+      state: telesci_key
+  - type: ActivatableUI
+    key: enum.ShipyardConsoleUiKey.TelAdiAurora
+  - type: UserInterface
+    interfaces:
+      enum.ShipyardConsoleUiKey.TelAdiAurora:
+        type: ShipyardConsoleBoundUserInterface
+  - type: ShipyardConsole
+    shipyardChannel: Traffic

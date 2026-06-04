@@ -41,6 +41,33 @@
   name: renegate autolathe
   suffix: Ренегаты
 
+# Промышленный переработчик руды с 10 ёмкостями материи
+# Текстуры нужно нарисовать по пути: Resources/Textures/Forge/Structures/Machines/ore_processor_industrial_heavy.rsi
+# Нужные состояния (states): icon, unlit, inserting, panel
+- type: entity
+  parent: OreProcessorIndustrial
+  id: OreProcessorIndustrialHeavy
+  name: промышленный переработчик Tel-Adi
+  description: Промышленный переработчик руды разработки корпорации Tel-Adi. Использует значительно меньше руды и работает быстрее стандартной модели.
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/ore_processor_industrial_heavy.rsi
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Machine
+    board: OreProcessorIndustrialHeavyMachineCircuitboard
+  - type: Lathe
+    materialUseMultiplier: 0.5   # как Drake Mk2
+    timeMultiplier: 0.25         # как Drake Mk2
+    staticPacks:
+    - OreSmelting
+    - RGlassSmelting
+    - AdvancedSmelting
+
 - type: entity
   id: TraumaTechFab
   parent: [BlueprintReceiverBase, BaseLatheLube]

@@ -11,3 +11,44 @@
     Silver: 500
     Gold: 500
     UraniumFissile: 50
+
+# Tel-Adi ARS modsuit — unlocked by the disk-gated ARSTelAdiModsuit technology,
+# craftable in the mercenary techfab (see ForgeTelAdiModsuitDynamic pack).
+- type: latheRecipe
+  id: ARSTelAdiModsuit
+  name: lathe-recipe-ARSTelAdiModsuit-name
+  parent: MonoHardsuitT3Recipe
+  result: ClothingModsuitTelAdi
+  materials:
+    Plastic: 10000 # 100 листов
+    Steel: 10000
+    Plasteel: 10000
+    Durathread: 10000
+    Silver: 1500 # 15 листов
+    Gold: 1500
+    UraniumFissile: 100 # 1 лист
+
+- type: latheRecipePack
+  id: ForgeTelAdiModsuitDynamic
+  recipes:
+  - ARSTelAdiModsuit
+
+# Tel-Adi ARS Mk.II — рецепт второго поколения
+- type: latheRecipe
+  id: ARSTelAdiModsuitMk2
+  name: lathe-recipe-ARSTelAdiModsuitMk2-name
+  parent: MonoHardsuitT3Recipe
+  result: ClothingModsuitTelAdiMk2
+  materials:
+    Plastic: 20000
+    Steel: 20000
+    Plasteel: 20000
+    Durathread: 20000
+    Silver: 20000
+    Gold: 20000
+    UraniumFissile: 300 # 3 листа
+
+- type: latheRecipePack
+  id: ForgeTelAdiModsuitMk2Dynamic
+  recipes:
+  - ARSTelAdiModsuitMk2

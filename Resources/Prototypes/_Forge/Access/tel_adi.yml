@@ -1,0 +1,9 @@
+# Tel-Adi
+- type: accessLevel
+  id: TelAdi
+  name: id-card-access-level-tel-adi
+
+- type: accessGroup
+  id: TelAdiAccess
+  tags:
+  - TelAdi

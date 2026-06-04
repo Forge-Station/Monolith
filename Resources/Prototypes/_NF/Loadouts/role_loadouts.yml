@@ -374,3 +374,33 @@
   - PrisonerSurvival
   - PrisonerPDA
   - NFSpeciesSpecific
+  
+  # Tel-Adi
+- type: roleLoadout
+  id: JobTelAdiWorker
+  groups:
+  - MercenaryHead
+  - ContractorNeck
+  - MercenaryJumpsuit
+  - MercenaryGloves
+  - MercenaryBackpack
+  - MercenaryOuterClothing
+  - MercenaryShoes
+  - MercenaryFace
+  - MercenaryGlasses
+  - MercenaryBelt
+  - MercenaryEars
+  - MercenaryFirearm
+  - MercenaryPistol
+  - MercenaryMag
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorUtility
+  - ContractorFun
+  - ContractorTrinkets
+  - ContractorBureaucracy
+  - NFSpeciesSpecific
+  - ContractorArmorPlates

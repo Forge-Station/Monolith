@@ -268,3 +268,20 @@
     - state: idntmed
   - type: PresetIdCard
     job: NtMedic
+    
+- type: entity
+  parent: IDCardStandard
+  id: TelAdiIDCard
+  name: Tel-Adi ID card
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: tel_adi
+  - type: IdCard
+    jobTitle: Tel-Adi
+    accessLevels:
+    - TelAdi
+    - Maintenance
+    - External
+    - Mercenary

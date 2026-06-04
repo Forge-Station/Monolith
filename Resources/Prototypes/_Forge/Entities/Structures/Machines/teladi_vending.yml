@@ -1,0 +1,55 @@
+# Инвентарь вендомата Tel-Adi
+- type: vendingMachineInventory
+  id: TelAdiVendPack
+  startingInventory:
+    ClothingHeadHatTelAdiCap: 5
+    ClothingNeckCloakTelAdiCap: 5
+    ClothingUniformJumpsuitTelAdi: 5
+    ClothingShoesBootsTelAdi: 3
+    ClothingOuterCoatTelAdi: 5
+    DisciplinesDiskTelAdi: 1
+    ClothingUniformJumpsuitTelAdiRich: 3
+
+    ClothingOuterCoatTelAdiRich: 3
+    ClothingUniformJumpsuitMoonlight: 5
+    ClothingShoesBootsMoonlight: 5
+    ClothingHandsGlovesMoonlight: 5
+    ClothingMaskGasMoonlight: 3
+
+# Настенный вендомат Tel-Adi
+- type: entity
+  parent: [VendingMachineWallmount, BaseStructureDisableToolUse, BaseStructureAccessReaderImmuneToEmag]
+  id: VendingMachineTelAdi
+  name: Tel-Adi Vending Machine
+  description: Фирменный вендомат корпорации Tel-Adi. Только для сотрудников компании.
+  components:
+  - type: VendingMachine
+    pack: TelAdiVendPack
+    requiresCash: true
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    denyState: deny-unshaded
+  - type: MarketModifier
+    mod: 1
+  - type: Sprite
+    sprite: _Mono/Structures/Machines/VendingMachines/teladi_vend.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "normal-unshaded"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    requiredCompany: TelAdi
+  - type: Unremoveable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 99999
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

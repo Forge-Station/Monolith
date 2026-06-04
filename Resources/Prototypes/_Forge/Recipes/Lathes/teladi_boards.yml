@@ -1,0 +1,8 @@
+# Дин-пак плат машин Tel-Adi для Circuit Imprinter.
+# Сами рецепты определены в Recipes/Lathes/electronics.yml; разблокируются
+# исследованиями TelAdiCentrifuge / TelAdiScrapProcessor (см. _Forge/Research/teladi.yml).
+- type: latheRecipePack
+  id: TelAdiCircuitBoards
+  recipes:
+  - TelAdiUraniumCentrifugeMachineCircuitboard
+  - TelAdiScrapProcessorMachineCircuitboard

@@ -1,5 +1,5 @@
 ent-ClothingHeadHelmetHardsuitDrakeMk4 = шлем скафандра Drake MK4
-    .desc = Герметичный шлем для скафандра Drake MK4.
+    .desc = Герметичный шлем для скафандра Drake MK4. Встроенный интерфейс переносного масс-сканера.
     .suffix = Drake
 
 ent-ClothingHeadHelmetHardsuitDrakeMk8 = шлем скафандра Drake MK8

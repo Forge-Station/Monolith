@@ -1,9 +1,24 @@
-#region base
+# Forge-Change-Start
+#region trash box
 - type: entity
-  id: NFBaseMagnetBox
+  id: TrashBox
   parent: BaseStructureDynamic
-  abstract: true
+  name: dumpster
+  description: A large storage container for holding trash. It smells like the big city.
   components:
+  - type: Sprite
+    noRot: true
+    sprite: /Textures/_NF/Structures/Storage/magnetbox.rsi
+    layers:
+    - state: rubbishbox
+    - state: rubbishbox-top
+      map: [ top ]
+      visible: true
+    - state: controller
+    - state: controller-on
+      visible: False
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      shader: unshaded
   - type: StaticPrice
     price: 625
   - type: InteractionOutline
@@ -31,9 +46,6 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Climbable
-  - type: Sprite
-    noRot: true
-    sprite: /Textures/_NF/Structures/Storage/magnetbox.rsi
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -45,12 +57,6 @@
         enum.ToggleableVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
-  - type: Storage
-    grid:
-    - 0,0,19,9 # DeltaV: Expanded to ore bag of holding storage
-    maxItemSize: Normal
-    storageOpenSound: /Audio/Effects/closetopen.ogg
-    storageCloseSound: /Audio/Effects/closetclose.ogg
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -87,28 +93,9 @@
   - type: ItemToggleExamine
     on: item-toggle-examine-magnet-on
     off: item-toggle-examine-magnet-off
-
-#region trash box
-- type: entity
-  id: NFMagnetBoxRubbish
-  parent: NFBaseMagnetBox
-  name: dumpster
-  description: A large storage container for holding trash. It smells like the big city.
-  components:
   - type: Tag
     tags:
     - GoblinVehicle
-  - type: Sprite
-    layers:
-    - state: rubbishbox
-    - state: rubbishbox-top
-      map: [ top ]
-      visible: true
-    - state: controller
-    - state: controller-on
-      visible: False
-      map: [ "enum.ToggleableVisuals.Layer" ]
-      shader: unshaded
   - type: Flammable
     fireSpread: true
     canResistFire: true
@@ -119,8 +106,13 @@
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
   - type: Storage
+    grid:
+    - 0,0,19,9 # DeltaV: Expanded to ore bag of holding storage
+    storageOpenSound: /Audio/Effects/closetopen.ogg
+    storageCloseSound: /Audio/Effects/closetclose.ogg
     whitelist:
       tags:
       - Recyclable
       - Trash
     maxItemSize: Huge # so you can pick up scrap chunks
+    # Forge-Change-End

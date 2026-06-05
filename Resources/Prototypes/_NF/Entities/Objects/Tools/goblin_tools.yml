@@ -1,3 +1,4 @@
+# Forge-Change-Start
 #region base
 - type: entity
   id: NFBaseGoblinMadeTools
@@ -718,8 +719,8 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: NFGoblinMadePowerCell
   - type: Construction
-    graph: NFGoblinMadeRemoteSignaller
-    node: NFGoblinMadeRemoteSignaller
+    graph: NFGoblinMadeLantern
+    node: NFGoblinMadeLantern
 # endregion
 
 #region power cell
@@ -759,6 +760,9 @@
   - type: MachinePart
     part: PowerCell
     rating: 1 # Ideally 0
+  - type: Construction
+    graph: NFGoblinMadePowerCell
+    node: NFGoblinMadePowerCell
 
 - type: entity
   id: NFGoblinMadePowerCellDepleted
@@ -768,7 +772,5 @@
   - type: Battery
     maxCharge: 360
     startingCharge: 0
-  - type: Construction
-    graph: NFGoblinMadePowerCellDepleted
-    node: NFGoblinMadePowerCellDepleted
 # endregion
+# Forge-Change-End

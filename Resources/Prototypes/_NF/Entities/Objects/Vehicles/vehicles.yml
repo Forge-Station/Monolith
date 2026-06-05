@@ -688,6 +688,7 @@
             - Gun
         priority: 2
 
+# Forge-Change-Start
 #region dumpster
 #Известные проблемы: не коректно отображает спрайт персонажа во время езды.
 - type: entity
@@ -755,3 +756,4 @@
   - type: Construction
     graph: NFGoblinMadeVehicleDumpster
     node: NFGoblinMadeVehicleDumpster
+# Forge-Change-End

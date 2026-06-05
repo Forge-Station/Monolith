@@ -1,3 +1,4 @@
+# Forge-Change-Start
 #region trash duffel
 - type: constructionGraph
   id: NFGoblinMadeClothingBackpackDuffelTrashBlue
@@ -517,12 +518,12 @@
 
 #region power cell
 - type: constructionGraph
-  id: NFGoblinMadePowerCellDepleted
+  id: NFGoblinMadePowerCell
   start: start
   graph:
   - node: start
     edges:
-    - to: NFGoblinMadePowerCellDepleted
+    - to: NFGoblinMadePowerCell
       steps:
       - tag: GoblinPreciousTrash
         name: construction-graph-component-goblin-precious-trash
@@ -545,8 +546,8 @@
       - material: Cable
         amount: 2
         doAfter: 0.5
-  - node: NFGoblinMadePowerCellDepleted
-    entity: NFGoblinMadePowerCellDepleted
+  - node: NFGoblinMadePowerCell
+    entity: NFGoblinMadePowerCell
 
 #region power cell
 - type: constructionGraph
@@ -610,3 +611,4 @@
         doAfter: 0.5
   - node: NFGoblinMadeVehicleDumpster
     entity: NFGoblinMadeVehicleDumpster
+# Forge-Change-End

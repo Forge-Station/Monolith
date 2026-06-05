@@ -114,7 +114,7 @@
     - DoorBumpOpener
     - AnomalyHost
     - Humanoid # Mono
-    - GoblinCraft
+    - GoblinCraft # Forge-Change
 
 - type: entity
   save: false

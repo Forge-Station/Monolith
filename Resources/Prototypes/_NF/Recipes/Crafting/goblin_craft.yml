@@ -1,3 +1,4 @@
+# Forge-Change-Start
 #region trash duffel
 - type: construction
   name: trashel
@@ -35,6 +36,7 @@
   name: trashuch
   icon:
     sprite: _NF/Objects/Storage/Pouches/trash_pouch.rsi
+    state: closed
   id: NFGoblinMadeTrashPouch
   graph: NFGoblinMadeTrashPouch
   startNode: start
@@ -80,6 +82,7 @@
   description: An improvised electrical screwdriver, not much in terms of torque, but your wrists will be less sore.
   icon:
     sprite: _NF/Objects/Tools/goblin_tools/screwdriver.rsi
+    state: screwdriver-base
   id: NFGoblinMadeScrewdriver
   graph: NFGoblinMadeScrewdriver
   startNode: start
@@ -139,6 +142,7 @@
   description: A small modification for the tried and true electrical screwdriver device. Weeds , your end is nigh.
   icon:
     sprite: _NF/Objects/Tools/goblin_tools/hoe.rsi
+    state: hoe-base
   id: NFGoblinMadeMiniHoe
   graph: NFGoblinMadeMiniHoe
   startNode: start
@@ -198,6 +202,7 @@
   description: An improvised lantern. How is it possible to put a power cell and a light bulb inside a glass bottle without breaking either of those items?
   icon:
     sprite: _NF/Objects/Tools/goblin_tools/lantern.rsi
+    state: lantern
   id: NFGoblinMadeLantern
   graph: NFGoblinMadeLantern
   startNode: start
@@ -213,10 +218,10 @@
   icon:
     sprite: _NF/Objects/Tools/goblin_tools/power_cell.rsi
     state: icon
-  id: NFGoblinMadePowerCellDepleted
-  graph: NFGoblinMadePowerCellDepleted
+  id: NFGoblinMadePowerCell
+  graph: NFGoblinMadePowerCell
   startNode: start
-  targetNode: NFGoblinMadePowerCellDepleted
+  targetNode: NFGoblinMadePowerCell
   category: construction-category-goblin
   entityWhitelist: *goblinWhitelist
   objectType: Item
@@ -255,3 +260,4 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+# Forge-Change-End

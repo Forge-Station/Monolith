@@ -124,6 +124,7 @@
   - type: Tag
     tags:
     - Trash
+    - GoblinPreciousTrash # Forge-Change
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50

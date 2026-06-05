@@ -16,6 +16,11 @@
   - type: PhysicalComposition
     materialComposition:
       RawScrap: 100
+# Forge-Change-Start
+  - type: Tag
+    tags:
+    - GoblinPreciousTrash
+# Forge-Change-End
 
 # Ore vein
 - type: ore

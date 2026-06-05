@@ -1,36 +1,3 @@
-# clothes
-#region robes
-- type: construction
-  name: goblin robes
-  description: Traditional robes of goblinkind. Very regal.
-  icon:
-    sprite: _NF/Clothing/OuterClothing/Coats/goblin_robes.rsi
-    state: icon
-  id: ClothingOuterCoatRobesGoblin
-  graph: ClothingOuterCoatRobesGoblin
-  startNode: start
-  targetNode: ClothingOuterCoatRobesGoblin
-  category: construction-category-goblin
-  entityWhitelist: &goblinWhitelist
-    tags:
-    - GoblinCraft
-  objectType: Item
-
-#region EVA
-- type: construction
-  name: goblin EVA suit
-  description: Traditional robes of goblinkind made EVA-capable. Very regal.
-  icon:
-    sprite: _NF/Clothing/OuterClothing/Suits/goblin_eva_robes.rsi
-    state: icon
-  id: ClothingOuterEVASuitGoblin
-  graph: ClothingOuterEVASuitGoblin
-  startNode: start
-  targetNode: ClothingOuterEVASuitGoblin
-  category: construction-category-goblin
-  entityWhitelist: *goblinWhitelist
-  objectType: Item
-
 #region trash duffel
 - type: construction
   name: trashel
@@ -43,7 +10,9 @@
   startNode: start
   targetNode: NFGoblinMadeClothingBackpackDuffelTrashBlue
   category: construction-category-goblin
-  entityWhitelist: *goblinWhitelist
+  entityWhitelist: &goblinWhitelist
+    tags:
+    - GoblinCraft
   objectType: Item
 
 #region trash backpack

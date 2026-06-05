@@ -95,7 +95,9 @@
   name: dumpster
   description: A large storage container for holding trash. It smells like the big city.
   components:
-  - type: GoblinVehicle
+  - type: Tag
+    tags:
+    - GoblinVehicle
   - type: Sprite
     layers:
     - state: rubbishbox

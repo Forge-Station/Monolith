@@ -587,7 +587,7 @@
           sprite: _NF/Structures/Storage/magnetbox.rsi
           state: rubbishbox
         doAfter: 1
-      - tag: NFChairFolding
+      - tag: ChairFolding
         name: construction-graph-component-nf-chair-folding
         icon:
           sprite: Structures/Furniture/folding_chair.rsi

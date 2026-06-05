@@ -118,6 +118,7 @@
     - DrinkCan
     - Recyclable
     - Trash
+    - GoblinPreciousTrash # Forge-Change
 
 - type: entity
   parent: DrinkCanBaseFull

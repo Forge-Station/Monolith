@@ -7,7 +7,7 @@ namespace Content.Shared._Mono.FireControl;
 public sealed partial class FireControlConsoleComponent : Component
 {
     // Forge-Change-Start: renameable weapon preset slots stored on this console.
-    public const int WeaponPresetCount = 3;
+    public const int WeaponPresetCount = 10;
 
     [ViewVariables]
     public EntityUid? ConnectedServer = null;

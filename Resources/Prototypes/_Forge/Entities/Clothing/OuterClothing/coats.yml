@@ -258,6 +258,18 @@
 # region Company
 - type: entity
   parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatNexusGreatcoat
+  name: nexus greatcoat
+  suffix: Нексус
+  description: A long greatcoat worn by Nexus personnel.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Coats/nexus_greatcoat.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Coats/nexus_greatcoat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
   id: ClothingOuterCoatLongCoatTL
   name: coat TL
   suffix: TechnicLogistic

@@ -244,8 +244,6 @@
   components:
   - type: MachineBoard
     prototype: WeaponTurretBoforsPortable
-    stackRequirements:
-      UraniumDepleted: 12
   - type: Tag
     tags:
     - MachineBoard2x2
@@ -259,9 +257,9 @@
   - type: MachineBoard
     prototype: WeaponTurretTarnyxReloadPortable
     requirements:
-      Capacitor: 20
+      Capacitor: 10
       Manipulator: 4
-      MatterBin: 10
+      MatterBin: 5
     stackRequirements:
       Steel: 40
       Glass: 100
@@ -426,13 +424,13 @@
       Gold: 50
       Plasma: 40
       Uranium: 35
-      Bluespace: 8
-      Diamond: 8
+      Bluespace: 5
+      Diamond: 5
       Silver: 40
       Copper: 90
       Lithium: 25
-      Plastitanium: 80
-      UraniumDepleted: 10
+      Plastitanium: 30
+      UraniumDepleted: 5
       # Iridite: 5
   - type: Tag
     tags:

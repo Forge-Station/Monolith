@@ -48,6 +48,7 @@ using Content.Shared.Forensics.Components;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Player;
 using Robust.Server.Player;
+using Content.Shared._Mono.FireControl; // Forge-Change
 using Content.Shared._Mono.Ships.Components;
 using Content.Shared._Mono.Shipyard;
 using Content.Shared.Tag;
@@ -305,7 +306,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         var deedShuttle = EnsureComp<ShuttleDeedComponent>(shuttleUid);
         AssignShuttleDeedProperties(deedShuttle, shuttleUid, name, shuttleOwner, voucherUsed, voucherUsed ? targetId.ToString() : null);
 
-        // Lock all shuttle consoles on the ship to this deed
+        // Lock all shuttle and gunnery consoles on the ship to this deed
         var shuttleConsoleQuery = EntityQueryEnumerator<ShuttleConsoleComponent, TransformComponent>();
         while (shuttleConsoleQuery.MoveNext(out var consoleUid, out _, out var transform))
         {
@@ -320,6 +321,19 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             // Log for debugging
             Log.Debug("Locked shuttle console {0} to shuttle {1} for deed holder {2}", consoleUid, shuttleUid, targetId);
         }
+        // Forge-Change-start: Lock gunnery consoles to the shuttle
+        var gunneryConsoleQuery = EntityQueryEnumerator<FireControlConsoleComponent, TransformComponent>();
+        while (gunneryConsoleQuery.MoveNext(out var consoleUid, out _, out var transform))
+        {
+            if (transform.GridUid != shuttleUid)
+                continue;
+
+            var lockComp = EnsureComp<ShuttleConsoleLockComponent>(consoleUid);
+            _shuttleConsoleLock.SetShuttleId(consoleUid, shuttleUid.ToString(), lockComp);
+
+            Log.Debug("Locked gunnery console {0} to shuttle {1} for deed holder {2}", consoleUid, shuttleUid, targetId);
+        }
+        // Forge-Change-end: Lock gunnery consoles to the shuttle
 
         // Register ship ownership for auto-deletion when owner is offline too long
         // We need to get the player's session from their entity

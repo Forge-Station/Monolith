@@ -692,11 +692,8 @@ public partial class RCDSystem : EntitySystem
                 var entityCoords = _mapSystem.GridTileToLocal(mapGridData.GridUid, mapGridData.Component, mapGridData.Position);
                 var ent = Spawn(proto, entityCoords);
 
-                // Forge-Change: match placement rotation (RPD unary devices lack RotatableComponent but use pipe connectors)
-                if (component.CachedPrototype.Rotation != RcdRotation.Fixed
-                    && (component.IsRpd
-                        || _protoManager.TryIndex<EntityPrototype>(proto, out var spawnProto)
-                            && spawnProto.TryGetComponent<RotatableComponent>(out _, EntityManager.ComponentFactory)))
+                // Forge-Change: apply user/camera rotation for all constructible RCD objects (not only RPD/RotatableComponent)
+                if (component.CachedPrototype.Rotation != RcdRotation.Fixed)
                 {
                     var gridRotation = _transform.GetWorldRotation(mapGridData.GridUid);
                     var localRotation = component.CachedPrototype.Rotation switch

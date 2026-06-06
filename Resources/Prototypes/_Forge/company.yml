@@ -51,3 +51,12 @@
   color: "#FF0000"
   icon: TelAdi
   whitelisted: true
+  # Forge-change: брендовый PDA + корп-ключ радио выдаются члену корпорации при заходе
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyTelAdi
+  - !type:SwapPdaSpecial
+    pda: TelAdiPDA
+    company: TelAdi
+    access: TelAdi

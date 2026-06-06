@@ -5,7 +5,7 @@
   description: Боевое судно группы безопасности Tel-Adi. Иногда защита инвестиций требует аргументов покрупнее.
   price: 250000
   category: Large
-  group: TelAdi
+  group: Custom
   access: TelAdi
   shuttlePath: /Maps/_Forge/Shuttles/TelAdi/credit.yml
   guidebookPage: Null

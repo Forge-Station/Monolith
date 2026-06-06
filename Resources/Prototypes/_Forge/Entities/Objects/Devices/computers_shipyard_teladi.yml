@@ -17,13 +17,17 @@
     - map: ["computerLayerKeys"]
       state: telesci_key
   - type: ActivatableUI
-    key: enum.ShipyardConsoleUiKey.TelAdi
+    key: enum.ShipyardConsoleUiKey.Custom
   - type: UserInterface
     interfaces:
-      enum.ShipyardConsoleUiKey.TelAdi:
+      enum.ShipyardConsoleUiKey.Custom:
         type: ShipyardConsoleBoundUserInterface
   - type: ShipyardConsole
     shipyardChannel: Traffic
+  - type: ShipyardListing
+    shuttles:
+    - teladi_aurora
+    - teladi_credit
 
 - type: entity
   id: ComputerShipyardTelAdiAurora
@@ -44,10 +48,14 @@
     - map: ["computerLayerKeys"]
       state: telesci_key
   - type: ActivatableUI
-    key: enum.ShipyardConsoleUiKey.TelAdiAurora
+    key: enum.ShipyardConsoleUiKey.Custom
   - type: UserInterface
     interfaces:
-      enum.ShipyardConsoleUiKey.TelAdiAurora:
+      enum.ShipyardConsoleUiKey.Custom:
         type: ShipyardConsoleBoundUserInterface
   - type: ShipyardConsole
     shipyardChannel: Traffic
+  - type: ShipyardListing
+    shuttles:
+    - teladi_credit2
+    - teladi_credit3

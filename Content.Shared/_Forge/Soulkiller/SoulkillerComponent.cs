@@ -1,4 +1,5 @@
 // Author: @lenta313. Все права не защищены / No rights reserved.
+using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -69,5 +70,5 @@ public sealed partial class SoulkillerComponent : Component
     /// КПБ = IPC.
     /// </summary>
     [DataField]
-    public string RequiredSpecies = "IPC";
+    public ProtoId<SpeciesPrototype> RequiredSpecies = "IPC";
 }

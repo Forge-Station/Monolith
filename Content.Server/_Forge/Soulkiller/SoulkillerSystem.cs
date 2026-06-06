@@ -46,9 +46,6 @@ public sealed class SoulkillerSystem : SharedSoulkillerSystem
 
     private const string SoulkillerLinkPort = "SoulkillerLink";
 
-    /// <summary>Time it takes to forcibly crack an occupied capsule open and rip the operator out.</summary>
-    private static readonly TimeSpan ExtractTime = TimeSpan.FromSeconds(30);
-
     /// <summary>Connectors currently being opened from code (disconnect / extract) — skip the delay.</summary>
     private readonly HashSet<EntityUid> _instantOpenConnectors = new();
 
@@ -136,7 +133,7 @@ public sealed class SoulkillerSystem : SharedSoulkillerSystem
         // Occupied → ripping the operator out takes time.
         args.Cancelled = true;
 
-        var doAfter = new DoAfterArgs(EntityManager, args.User, ExtractTime, new SoulkillerExtractDoAfterEvent(), ent.Owner, target: ent.Owner)
+        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.ExtractTime, new SoulkillerExtractDoAfterEvent(), ent.Owner, target: ent.Owner)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -231,7 +228,7 @@ public sealed class SoulkillerSystem : SharedSoulkillerSystem
 
         // КПБ-only: the operator must be of the required species (IPC).
         if (!TryComp<HumanoidAppearanceComponent>(user, out var humanoid)
-            || humanoid.Species.Id != core.Comp.RequiredSpecies)
+            || humanoid.Species != core.Comp.RequiredSpecies)
         {
             _popup.PopupEntity(Loc.GetString("soulkiller-connector-wrong-species"), connector, user);
             return false;
@@ -444,18 +441,20 @@ public sealed class SoulkillerSystem : SharedSoulkillerSystem
     /// </summary>
     private bool TryGetConnectedCore(EntityUid connector, out Entity<SoulkillerComponent> core)
     {
-        var query = EntityQueryEnumerator<SoulkillerComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (comp.Connector == connector && comp.InhabitingMind != null)
-            {
-                core = (uid, comp);
-                return true;
-            }
-        }
-
         core = default;
-        return false;
+
+        // Resolve the core wired to this capsule via the device-link.
+        if (!TryComp<SoulkillerConnectorComponent>(connector, out var conn)
+            || conn.LinkedSoulkiller is not { } linked
+            || !TryComp<SoulkillerComponent>(linked, out var comp))
+            return false;
+
+        // Only "connected" if a mind is actively inhabiting that core through this capsule.
+        if (comp.InhabitingMind == null || comp.Connector != connector)
+            return false;
+
+        core = (linked, comp);
+        return true;
     }
 
     /// <summary>

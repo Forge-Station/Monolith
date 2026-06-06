@@ -32,9 +32,8 @@ public enum ShipyardConsoleUiKey : byte
     Modules, // Forge-Change
     Renegate, // Forge-Change
     Empire, // Forge-Change
-    Federation, // Forge-Change
-    TelAdi, // Forge-Change
-    TelAdiAurora, // Forge-Change
+    Federation // Forge-Change
+
 }
 
 public abstract partial class SharedShipyardSystem : EntitySystem

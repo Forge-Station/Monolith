@@ -5,7 +5,7 @@
   description: Средний шаттл корпорации Tel-Adi. Просторный и функциональный — для серьёзных дел в неизведанном космосе.
   price: 60000
   category: Medium
-  group: TelAdiAurora
+  group: Custom
   access: TelAdi
   shuttlePath: /Maps/_Forge/Shuttles/TelAdi/credit3.yml
   guidebookPage: Null

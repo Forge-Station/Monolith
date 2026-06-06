@@ -13,15 +13,15 @@ namespace Content.Shared._Forge.Soulkiller;
 public sealed partial class SoulkillerConnectorComponent : Component
 {
     /// <summary>
-    /// Explicitly linked shell. If null, the system tries to find the nearest free
-    /// <see cref="SoulkillerComponent"/> within <see cref="LinkRange"/>.
+    /// The core this capsule is wired to (set via multitool device-link). Connection is only
+    /// possible through this explicit link.
     /// </summary>
     [DataField]
     public EntityUid? LinkedSoulkiller;
 
     /// <summary>
-    /// Auto-link search radius (in tiles) when <see cref="LinkedSoulkiller"/> is not set.
+    /// Time it takes to forcibly crack an occupied capsule open and rip the operator out.
     /// </summary>
     [DataField]
-    public float LinkRange = 30f;
+    public TimeSpan ExtractTime = TimeSpan.FromSeconds(30);
 }

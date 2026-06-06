@@ -6,7 +6,7 @@
   price: 400000
   limit: 1 # одна активная «billion» за раунд
   category: Large
-  group: TelAdi
+  group: Custom
   access: TelAdi
   shuttlePath: /Maps/_Forge/Shuttles/TelAdi/aurora.yml
   guidebookPage: Null

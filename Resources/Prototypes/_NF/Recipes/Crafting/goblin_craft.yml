@@ -1,7 +1,7 @@
 # Forge-Change-Start
 #region trash duffel
 - type: construction
-  id: NFGoblinMadeClothingBackpackDuffelTrashBlueRecipe
+  id: NFGoblinMadeClothingBackpackDuffelTrashBlue
   name: trashel
   description: This bad boy can fit so much trash!
   icon:

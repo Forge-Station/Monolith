@@ -50,3 +50,6 @@ ent-NFTobaccoPouch = кисет для табака
   .desc = Кисет из синтетической кожи для безопасного хранения трубочного табака.
 ent-NFPouchPunk = сумка панка
   .desc = { ent-NFPouchBase.desc }
+ent-NFGoblinMadeTrashPouch = кисет
+  .suffix = Пустой
+  .desc = Самое то чтобы хранить бычки от сигарет!

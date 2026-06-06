@@ -1,12 +1,12 @@
 # Forge-Change-Start
 #region trash duffel
 - type: construction
+  id: NFGoblinMadeClothingBackpackDuffelTrashBlueRecipe
   name: trashel
   description: This bad boy can fit so much trash!
   icon:
     sprite: _NF/Clothing/Back/Duffels/trashel_blue.rsi
     state: icon
-  id: NFGoblinMadeClothingBackpackDuffelTrashBlue
   graph: NFGoblinMadeClothingBackpackDuffelTrashBlue
   startNode: start
   targetNode: NFGoblinMadeClothingBackpackDuffelTrashBlue

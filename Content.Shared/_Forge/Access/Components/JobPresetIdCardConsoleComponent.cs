@@ -29,7 +29,7 @@ public sealed partial class JobPresetIdCardConsoleComponent : Component
     /// When set, job preset consoles skip age, species, and sex requirements (and do not require station-record demographics).
     /// </summary>
     [DataField]
-    public bool IgnoreDemographicRequirements;
+    public bool IgnoreDemographicRequirements = true;
 
     /// <summary>
     /// When set, the privileged ID only needs access tags for the target preset — not the target card's current accesses.

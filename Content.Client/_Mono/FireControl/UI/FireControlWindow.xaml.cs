@@ -42,12 +42,13 @@ public sealed partial class FireControlWindow : FancyWindow
     // Forge-Change: max weapons that can be selected/fired at once (from server MaxWeapons).
     private int _maxActiveWeapons = int.MaxValue;
 
-    private LineEdit[] _presetNameEdits = default!;
-    private Button[] _presetLoadButtons = default!;
+    private readonly string[] _presetNames = new string[FireControlConsoleComponent.WeaponPresetCount];
+    private int _selectedPresetIndex;
 
     // Forge-Change-Start: collapsible side panels with dynamic window width.
     private bool _controlsPanelExpanded = true;
     private bool _weaponsPanelExpanded = true;
+    private bool _presetsPanelExpanded = true;
 
     private const float SidePanelBlockWidth = 305f;
     private const float WindowChromeWidth = 42f;
@@ -66,14 +67,13 @@ public sealed partial class FireControlWindow : FancyWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _presetNameEdits = [Preset1NameEdit, Preset2NameEdit, Preset3NameEdit];
-        _presetLoadButtons = [Preset1LoadButton, Preset2LoadButton, Preset3LoadButton];
-
         ControlsPanelToggle.OnPressed += _ => ToggleControlsPanel();
         WeaponsPanelToggle.OnPressed += _ => ToggleWeaponsPanel();
+        PresetsPanelToggle.OnPressed += _ => TogglePresetsPanel();
         InitializeRadarLayout();
         UpdateControlsPanelState();
         UpdateWeaponsPanelState();
+        UpdatePresetsPanelState();
 
         RefreshButton.OnPressed += _ => OnServerRefresh?.Invoke();
         ShowIFFCheckbox.OnToggled += args => NavRadar.ShowIFF = args.Pressed; // Forge-Change
@@ -174,21 +174,65 @@ public sealed partial class FireControlWindow : FancyWindow
             : "gunnery-panel-expand-weapons");
     }
 
-    // Forge-Change-Start: three renameable weapon preset slots per console.
+    private void TogglePresetsPanel()
+    {
+        _presetsPanelExpanded = !_presetsPanelExpanded;
+        UpdatePresetsPanelState();
+    }
+
+    private void UpdatePresetsPanelState()
+    {
+        PresetsPanel.Visible = _presetsPanelExpanded;
+        PresetsPanelToggle.Text = _presetsPanelExpanded ? "▼" : "▶";
+        PresetsPanelToggle.ToolTip = Loc.GetString(_presetsPanelExpanded
+            ? "gunnery-panel-collapse-presets"
+            : "gunnery-panel-expand-presets");
+    }
+
+    // Forge-Change-Start: renameable weapon preset slots per console.
     private void InitializePresetControls()
     {
         for (var i = 0; i < FireControlConsoleComponent.WeaponPresetCount; i++)
-        {
-            var index = i;
-            _presetNameEdits[i].Text = GetPresetDisplayName(i);
-            _presetNameEdits[i].OnTextEntered += _ => OnPresetNameCommitted(index);
-            _presetLoadButtons[i].OnPressed += _ => ApplyPreset(index);
-        }
+            _presetNames[i] = GetDefaultPresetName(i);
 
+        PresetSelector.OnItemSelected += args =>
+        {
+            CommitPresetNameEdit(_selectedPresetIndex);
+            PresetSelector.SelectId(args.Id);
+            _selectedPresetIndex = args.Id;
+            SyncPresetNameEdit();
+        };
+
+        PresetNameEdit.OnTextEntered += _ => CommitPresetNameEdit(_selectedPresetIndex);
+        SavePresetNameButton.OnPressed += _ => CommitPresetNameEdit(_selectedPresetIndex);
+        LoadPresetButton.OnPressed += _ => ApplyPreset(_selectedPresetIndex);
         SavePresetButton.OnPressed += _ => SaveActivePreset();
-        // OptionButton requires explicit SelectId on item pick.
-        PresetSaveTarget.OnItemSelected += args => PresetSaveTarget.SelectId(args.Id);
-        RebuildSaveTargetOptions();
+
+        RebuildPresetSelectorOptions();
+        SyncPresetNameEdit();
+    }
+
+    private void CommitPresetNameEdit(int index)
+    {
+        if (index < 0 || index >= FireControlConsoleComponent.WeaponPresetCount)
+            return;
+
+        var name = PresetNameEdit.Text.Trim();
+        if (string.IsNullOrWhiteSpace(name))
+            name = GetDefaultPresetName(index);
+
+        PresetNameEdit.Text = name;
+        _presetNames[index] = name;
+        OnPresetNameChanged?.Invoke(index, name);
+        RebuildPresetSelectorOptions();
+    }
+
+    private void SyncPresetNameEdit()
+    {
+        if (PresetNameEdit.HasKeyboardFocus())
+            return;
+
+        PresetNameEdit.Text = GetPresetDisplayName(_selectedPresetIndex);
     }
 
     private string GetDefaultPresetName(int index)
@@ -198,12 +242,8 @@ public sealed partial class FireControlWindow : FancyWindow
 
     private string GetPresetDisplayName(int index)
     {
-        if (_currentState?.WeaponPresets != null
-            && index < _currentState.WeaponPresets.Length
-            && !string.IsNullOrWhiteSpace(_currentState.WeaponPresets[index].Name))
-        {
-            return _currentState.WeaponPresets[index].Name;
-        }
+        if (!string.IsNullOrWhiteSpace(_presetNames[index]))
+            return _presetNames[index];
 
         return GetDefaultPresetName(index);
     }
@@ -214,66 +254,63 @@ public sealed partial class FireControlWindow : FancyWindow
 
         for (var i = 0; i < FireControlConsoleComponent.WeaponPresetCount; i++)
         {
-            if (_presetNameEdits[i].HasKeyboardFocus())
+            var fromState = _currentState?.WeaponPresets != null
+                && i < _currentState.WeaponPresets.Length
+                && !string.IsNullOrWhiteSpace(_currentState.WeaponPresets[i].Name)
+                ? _currentState.WeaponPresets[i].Name
+                : GetDefaultPresetName(i);
+
+            if (_presetNames[i] == fromState)
                 continue;
 
-            var displayName = GetPresetDisplayName(i);
-            if (_presetNameEdits[i].Text == displayName)
-                continue;
-
-            _presetNameEdits[i].Text = displayName;
+            _presetNames[i] = fromState;
             namesChanged = true;
         }
 
         if (namesChanged)
-            RebuildSaveTargetOptions();
+            RebuildPresetSelectorOptions();
+
+        SyncPresetNameEdit();
     }
 
-    private void RebuildSaveTargetOptions()
+    private void RebuildPresetSelectorOptions()
     {
-        var selected = PresetSaveTarget.SelectedId;
+        var selected = _selectedPresetIndex;
         if (selected < 0)
             selected = 0;
 
-        PresetSaveTarget.Clear();
+        PresetSelector.Clear();
 
         for (var i = 0; i < FireControlConsoleComponent.WeaponPresetCount; i++)
         {
-            var name = _presetNameEdits[i].Text.Trim();
+            var name = _presetNames[i].Trim();
             if (string.IsNullOrWhiteSpace(name))
                 name = GetDefaultPresetName(i);
 
-            PresetSaveTarget.AddItem(Loc.GetString("gunnery-preset-save-target", ("name", name)), i);
+            PresetSelector.AddItem(Loc.GetString("gunnery-preset-save-target", ("name", name)), i);
         }
 
         if (selected >= 0 && selected < FireControlConsoleComponent.WeaponPresetCount)
-            PresetSaveTarget.SelectId(selected);
+        {
+            PresetSelector.SelectId(selected);
+            _selectedPresetIndex = selected;
+        }
         else
-            PresetSaveTarget.SelectId(0);
-    }
-
-    private void OnPresetNameCommitted(int index)
-    {
-        var name = _presetNameEdits[index].Text.Trim();
-        if (string.IsNullOrWhiteSpace(name))
-            name = GetDefaultPresetName(index);
-
-        _presetNameEdits[index].Text = name;
-        OnPresetNameChanged?.Invoke(index, name);
-        RebuildSaveTargetOptions();
+        {
+            PresetSelector.SelectId(0);
+            _selectedPresetIndex = 0;
+        }
     }
 
     private void SaveActivePreset()
     {
-        var index = PresetSaveTarget.SelectedId;
+        CommitPresetNameEdit(_selectedPresetIndex);
+
+        var index = _selectedPresetIndex;
         if (index < 0 || index >= FireControlConsoleComponent.WeaponPresetCount)
             return;
 
-        var name = _presetNameEdits[index].Text.Trim();
-        if (string.IsNullOrWhiteSpace(name))
-            name = GetDefaultPresetName(index);
-
-        _presetNameEdits[index].Text = name;
+        var name = _presetNames[index];
         var weaponNames = GetSelectedWeaponNames();
         OnPresetSaveRequested?.Invoke(index, name, weaponNames);
 
@@ -285,9 +322,7 @@ public sealed partial class FireControlWindow : FancyWindow
         if (index < 0 || index >= FireControlConsoleComponent.WeaponPresetCount)
             return;
 
-        var name = _presetNameEdits[index].Text.Trim();
-        if (string.IsNullOrWhiteSpace(name))
-            name = GetDefaultPresetName(index);
+        var name = GetPresetDisplayName(index);
 
         if (_currentState?.WeaponPresets == null
             || index >= _currentState.WeaponPresets.Length
@@ -355,6 +390,31 @@ public sealed partial class FireControlWindow : FancyWindow
         });
     }
     // Forge-Change-End
+
+    /// <summary>
+    /// Toggles weapon selection when clicked on the radar map.
+    /// </summary>
+    public bool TryToggleWeaponFromRadar(NetEntity weapon)
+    {
+        if (!WeaponsList.TryGetValue(weapon, out var button))
+            return false;
+
+        if (button.Pressed)
+        {
+            button.Pressed = false;
+        }
+        else
+        {
+            if (_maxActiveWeapons > 0 && GetSelectedWeaponCount() >= _maxActiveWeapons)
+                return false;
+
+            button.Pressed = true;
+        }
+
+        OnWeaponSelectionChanged?.Invoke();
+        UpdateAllWeaponButtonTexts();
+        return true;
+    }
 
     private void OnIffSearchChanged(string text)
     {

@@ -238,7 +238,9 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
 
     public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs)
     {
-        var player = _playerManager.GetSessionById(userId);
+        if (!_playerManager.TryGetSessionById(userId, out var player))
+            return;
+
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
         {
             // Sorry mate but your playtimes haven't loaded.

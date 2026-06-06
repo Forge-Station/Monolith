@@ -116,10 +116,14 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
     private void OnHeadsetReceive(EntityUid uid, HeadsetComponent component, ref RadioReceiveEvent args)
     {
         // Forge-Change-Start
-        TTSComponent ? headsetTts = null;
+        // Resolve the speaker's voice for THIS message. If the source has no TTSComponent
+        // (e.g. a shipyard console announcement), we must not fall back to the headset's
+        // previously cached voice, otherwise it leaks the last speaker's voice.
+        string? speakerVoiceId = null;
 
-        if (TryComp(uid, out headsetTts) && TryComp(args.MessageSource, out TTSComponent ? speakerTts)) {
-            headsetTts.VoicePrototypeId = speakerTts.VoicePrototypeId;
+        if (TryComp(uid, out TTSComponent? headsetTts) && TryComp(args.MessageSource, out TTSComponent? speakerTts)) {
+            speakerVoiceId = speakerTts.VoicePrototypeId;
+            headsetTts.VoicePrototypeId = speakerVoiceId;
             Dirty(uid, headsetTts);
         }
 
@@ -142,8 +146,8 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
 
             RaiseNetworkEvent(radioNoiseEvent, actor.PlayerSession);
 
-            if (parent != args.MessageSource && headsetTts?.VoicePrototypeId != null) {
-                _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, headsetTts.VoicePrototypeId, actor.PlayerSession, true, args.Language);
+            if (parent != args.MessageSource && !string.IsNullOrEmpty(speakerVoiceId)) {
+                _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, speakerVoiceId, actor.PlayerSession, true, args.Language, isRadio: true);
             }
 
             return;

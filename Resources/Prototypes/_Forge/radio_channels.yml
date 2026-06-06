@@ -119,3 +119,10 @@
   keycode: 'ё'
   frequency: 7010
   color: "#C97D7D"
+
+- type: radioChannel
+  id: Nexus
+  name: chat-radio-nexus
+  keycode: 'n'
+  frequency: 7011
+  color: "#1a5f9b"

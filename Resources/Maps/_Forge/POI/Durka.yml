@@ -4015,9 +4015,6 @@ entities:
     - type: BecomesStation
       id: Durka
     - type: RadiationGridResistance
-    - type: SalvageMobRestrictionsGrid
-      mobsToKill:
-      - invalid
 - proto: ActionToggleInternals
   entities:
   - uid: 3

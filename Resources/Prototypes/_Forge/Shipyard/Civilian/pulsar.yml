@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Пульсар
   description: Гражданский научно-исследовательский шаттл, любимый многими учеными за универсальность и генератор аномалий
-  price: 51750
+  price: 55750
   category: Medium
   group: Shipyard
   shuttlePath: /Maps/_Forge/Shuttles/Civilian/pulsar.yml

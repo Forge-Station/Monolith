@@ -108,6 +108,9 @@
         - !type:DoActsBehavior
           acts: ["Destruction"]
     - type: MachineFrame
+      boardWhitelist: # Forge-Change
+        tags: # Forge-Change
+        - MachineBoard3x2 # Forge-Change
       frameSize: 3x2
     - type: ContainerContainer
       containers:

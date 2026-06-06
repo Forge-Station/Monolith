@@ -1,3 +1,4 @@
+# region Renegate
 - type: entity
   parent: ClothingMaskGasSecurity
   id: ClothingMaskGasRenegate
@@ -11,7 +12,22 @@
     sprite: Forge/Clothing/Mask/renegate.rsi
   - type: Clothing
     sprite: Forge/Clothing/Mask/renegate.rsi
+# region Empire
+- type: entity
+  parent: ClothingMaskGasSecurity
+  id: ClothingMaskGasEmpire
+  name: empires gas mask
+  suffix: Empire
+  description: A standard issue empires gas mask.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/empire.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/empire.rsi
 
+# region Company
 - type: entity
   parent: ClothingMaskGasSecurity
   id: ClothingMaskGasNexus
@@ -27,6 +43,20 @@
     sprite: Forge/Clothing/Mask/nexus_mask.rsi
 
 - type: entity
+  parent: [ClothingMaskGas, BaseFactionGearOtherFactionT0]
+  id: ClothingMaskGasTL
+  name: gas mask TL
+  suffix: TechnicLogistic
+  description: A standard issue TechnicLogistic gas mask.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/mask_techniclogistic.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/mask_techniclogistic.rsi
+
+- type: entity
   parent: [ClothingMaskGasSecurity, BaseFactionGearOtherFactionT1]
   id: ClothingMaskSterileTrauma
   name: trauma gas mask
@@ -39,3 +69,82 @@
     sprite: Forge/Clothing/Mask/tti_medical.rsi
   - type: Clothing
     sprite: Forge/Clothing/Mask/tti_medical.rsi
+
+#region Other
+- type: entity
+  parent: [ClothingMaskGas, BaseC3Contraband, ContrabandClothing]
+  id: ClothingMaskGasContractor
+  name: противогаз DCN™
+  description: Плотно прилегающая тактическая маска, которую можно подключить к дыхательному баллону.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/gascontractor.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/gascontractor.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+
+- type: entity
+  parent: [ BaseC2ContrabandUnredeemable, ClothingMaskGasSecurity ]
+  id: ClothingMaskGasNfsdAlt
+  name: NFSD gas mask
+  description: A alternative issue NFSD gas mask.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/nfsd_alt.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/nfsd_alt.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+
+- type: entity
+  parent: [ BaseC2ContrabandUnredeemable, ClothingMaskGasSecurity ]
+  id: ClothingMaskGasNfsdCoroner
+  name: NFSD coroner mask
+  description: NFSD coroner gas mask
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/coroner.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/coroner.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+
+- type: entity
+  parent: [ BaseC2ContrabandUnredeemable, ClothingMaskGasSecurity ]
+  id: ClothingMaskGasNfsdAdvanced
+  name: NFSD advanced gas mask
+  description: Advanced issue NFSD gas mask.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/nfsd_up.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/nfsd_up.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.90
+        Slash: 0.90
+        Piercing: 0.90
+        Heat: 0.90

@@ -1,0 +1,23 @@
+- type: entity
+  id: ShipWeaponFabricatorCircuitboard
+  parent: BaseMachineCircuitboard
+  name: naval weapon fabricator machine board
+  description: A machine printed circuit board for a naval weapon fabricator.
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: ShipWeaponFabricator
+    frameSize: 3x3
+    requirements:
+      Capacitor: 2
+      Manipulator: 2
+      MatterBin: 1
+    stackRequirements:
+      Steel: 10
+      Glass: 6
+      CableHV: 3
+      Gold: 2
+  - type: Tag
+    tags:
+    - MachineBoard3x3

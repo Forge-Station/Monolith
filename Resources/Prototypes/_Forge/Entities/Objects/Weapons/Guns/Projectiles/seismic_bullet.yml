@@ -1,0 +1,25 @@
+# Fired from ballistic launchers (e.g. Drake industrial grenade launcher). Explodes on impact.
+- type: entity
+  id: BulletSeismicCharge
+  name: seismic charge
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Bombs/seismic.rsi
+    layers:
+    - state: primed
+  - type: ExplodeOnTrigger
+  - type: DeleteOnTrigger
+  - type: Explosive
+    explosionType: Cryo
+    totalIntensity: 120
+    intensitySlope: 2
+    maxIntensity: 30
+    canCreateVacuum: false
+  - type: Ammo
+    muzzleFlash: null
+  - type: PointLight
+    radius: 3.5
+    color: "#47f8ff"
+    energy: 0.5

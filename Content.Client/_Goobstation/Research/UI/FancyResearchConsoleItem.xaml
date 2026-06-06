@@ -3,8 +3,8 @@
                  xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                  xmlns:goob="clr-namespace:Content.Client._Goobstation.Research.UI"
                  Margin="4"
-                 HorizontalExpand="False">  <!-- Frontier: Margin="5" < Margin="4" -->
-    <BoxContainer Orientation="Vertical" SetSize="64 64"> <!-- Frontier: "80 80" < "64 64" -->
+                 HorizontalExpand="False">
+    <BoxContainer Orientation="Vertical" SetSize="64 64">
         <PanelContainer VerticalExpand="True"
                         HorizontalExpand="True"
                         Name="Panel">
@@ -16,7 +16,21 @@
                 Name="ResearchDisplay"
                 Scale="1.75 1.75"
                 SetSize="56 56">
-            </EntityPrototypeView> <!-- Frontier: "2" < "1.75", "64 64" < "56 56" -->
+            </EntityPrototypeView>
+            <PanelContainer Name="LockOverlay"
+                            HorizontalExpand="True"
+                            VerticalExpand="True"
+                            Visible="False"/>
+            <PanelContainer Name="StatusBar"
+                            VerticalAlignment="Bottom"
+                            HorizontalExpand="True"
+                            MinHeight="16"
+                            Visible="False">
+                <RichTextLabel Name="ProgressLabel"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="2 0"/>
+            </PanelContainer>
         </PanelContainer>
     </BoxContainer>
 </LayoutContainer>

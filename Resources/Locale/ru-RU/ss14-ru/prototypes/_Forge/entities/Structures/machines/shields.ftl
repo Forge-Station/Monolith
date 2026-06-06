@@ -39,6 +39,15 @@ ent-ShieldGeneratorForgeTSFPrismatic = генератор щита TSFMC SGS-470
 ent-ShieldGeneratorForgeTSFCollision = генератор щита TSFMC SGS-600C "Бронелом"
     .desc = Осадное поле TSFMC: сильнее «Бастиона» гасит удары корпуса о корпус. Взамен — заметно медленнее восстанавливает щит в бою, дольше последствия перегрузки и ниже допустимый пик по сети.
 
+ent-ShieldGeneratorForgeEmpireHeavy = генератор щита СИВ IGS-440 «Бастион»
+    .desc = { ent-ShieldGeneratorForgeTSFHeavy.desc }
+ent-ShieldGeneratorForgeEmpirePrismatic = генератор щита СИВ IGS-470P «Aureola»
+    .desc = { ent-ShieldGeneratorForgeTSFPrismatic.desc }
+ent-ShieldGeneratorForgeEmpireCollision = генератор щита СИВ IGS-600C «Стенолом»
+    .desc = { ent-ShieldGeneratorForgeTSFCollision.desc }
+ent-ShieldGeneratorForgeEmpireSignum = генератор щита СИВ IGS-455 «Signum»
+    .desc = Резервная доктрина СИВ: огромный запас до перегрузки и ровное восстановление поля. Цена — жадный базовый расход и жёсткая кривая мощности под длительным огнём.
+
 ent-ShieldGeneratorForgeUsspHeavy = генератор щита Союз SGS-420 "Передовой редут"
     .desc = Конвойный тяжёлый щит: ниже постоянное и пиковое потребление, чем у FSG-420. Взамен — заметно слабее реген, меньше запас до перегрузки и при пробитом щите резче скачок расхода.
 ent-ShieldGeneratorForgeUsspPrismatic = генератор щита Союз SGS-470P "Полярная решётка"

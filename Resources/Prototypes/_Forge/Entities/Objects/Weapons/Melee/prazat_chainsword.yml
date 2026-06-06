@@ -112,3 +112,118 @@
       - Energy
   - type: Execution
     doAfterDuration: 4
+
+- type: entity
+  name: Serrator Mk. 02M
+  parent: ADTWeaponMeleePrasatChainsword
+  id: ADTWeaponMeleePrasatChainswordInq
+  description: An experimental Serrator saw-sword with a powered cutting chain and a laser-heated edge.
+  suffix: Forge
+  components:
+  - type: Sharp
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Melee/prazat_chainsword_icon.rsi
+    layers:
+    - state: icon
+    - state: icon_chainsword
+      visible: false
+      shader: unshaded
+      map: [ "chainsword" ]
+  - type: MeleeWeapon
+    heavyStaminaCost: 1.5
+    wideAnimationRotation: -135
+    attackRate: 1.6
+    range: 1.5
+    damage:
+      types:
+        Slash: 15
+        Blunt: 5
+        Structural: 20
+    soundHit:
+      path: /Audio/Weapons/smash.ogg
+  - type: Item
+    sprite: Forge/Objects/Weapons/Melee/prazat_chainsword.rsi
+    size: Large
+  - type: DisarmMalus
+    malus: 0.7
+  - type: Tag
+    tags:
+    - ADTWeaponMeleePrasatChainswordInq
+    - CaptainSabre
+  - type: Appearance
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/Weapons/chainsawwield.ogg
+      params:
+        volume: -3
+    soundDeactivate:
+      path: /Audio/Weapons/chainsawwield.ogg
+      params:
+        volume: -5
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Weapons/chainsawidle.ogg
+      params:
+        volume: -5
+  - type: ItemToggleExamine
+    on: prazat-chainsword-examine-on
+    off: prazat-chainsword-examine-off
+  - type: UseDelay
+    delay: 1
+  - type: ItemToggleSize
+    activatedSize: Huge
+  - type: ItemToggleMeleeWeapon
+    activatedRange: 2
+    deactivatedSoundOnHit:
+      path: /Audio/Weapons/smash.ogg
+    activatedSoundOnHit:
+      path: /Audio/Weapons/chainsaw.ogg
+      params:
+        variation: 0.250
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/chainsaw.ogg
+      params:
+        variation: 0.250
+        volume: -10
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/chainsaw.ogg
+      params:
+        variation: 0.125
+        volume: -3
+    deactivatedSoundOnSwing:
+      path: /Audio/Weapons/punchmiss.ogg
+      params:
+        volume: -3
+        variation: 0.025
+    activatedDamage:
+      types:
+        Slash: 45
+        Piercing: 10
+        Structural: 50
+  - type: ToggleableVisuals
+    spriteLayer: chainsword
+    inhandVisuals:
+      left:
+      - state: inhand-left-chainsword
+        shader: unshaded
+      right:
+      - state: inhand-right-chainsword
+        shader: unshaded
+  - type: PointLight
+    enabled: false
+    radius: 2.4
+    energy: 1.8
+    color: "#ff5a36"
+    netsync: false
+  - type: ItemTogglePointLight
+  - type: ItemToggleHot
+  - type: IgnitionSource
+    temperature: 700
+  - type: ComponentToggler
+    components:
+    - type: Reflect
+      reflectProb: 0.25
+      reflects:
+      - Energy
+  - type: Execution
+    doAfterDuration: 4

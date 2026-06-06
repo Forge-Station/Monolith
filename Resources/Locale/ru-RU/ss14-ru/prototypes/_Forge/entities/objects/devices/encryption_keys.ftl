@@ -43,6 +43,13 @@ ent-EncryptionKeyTechnicLogistic = ключ шифрования TechnicLogistic
 ent-EncryptionKeyHarmony = ключ шифрования канала HME
     .desc = Ключ шифрования дающий доступ к каналу HME. От него пахнет медициной.
 
+ent-EncryptionKeyDrakeIndustries = ключ шифрования Drake Industries
+    .desc = Ключ шифрования для корпоративного канала связи Drake Industries.
+
+ent-EncryptionKeyNexus = ключ шифрования нексуса
+    .desc = Ключ шифрования для корпоративного канала нексуса.
+    .suffix = Нексус
+
 ent-EncryptionKeyTsfTech = технический ключ шифрования ТСФ
     .desc = { ent-EncryptionKeyNfsd.desc }
 ent-EncryptionKeyTsfCom = командный ключ шифрования ТСФ

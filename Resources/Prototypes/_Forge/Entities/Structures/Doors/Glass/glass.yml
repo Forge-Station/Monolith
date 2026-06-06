@@ -1,11 +1,11 @@
-# Empire
+#region Empire
 - type: entity
   parent: AirlockGlass
   id: AirlockGlassEmpirePublic
   suffix: Empire, Public
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/emp_public.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/empire.rsi
 
 - type: entity
   parent: AirlockGlass
@@ -13,7 +13,7 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/emp_public.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/empire.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsEmpire ]
@@ -24,19 +24,52 @@
   suffix: Empire, Officer
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/emp_public.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/empire.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsEmpireOfficer ]
 
-# Renegade
+- type: entity
+  parent: AirlockGlass
+  id: AirlockGlassEmpireInquisitor
+  suffix: Empire, Inquisitor
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Glass/empire_inq.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpireInqusitor ]
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockGlassEmpireCommander
+  suffix: Empire, Lord
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Glass/empire_lord.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpireCommander ]
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockGlassEmpireDiplomacy
+  suffix: Empire, Diplomacy
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Glass/empire_diplomacy.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsEmpireDiplomacy ]
+
+#region Renegade
 - type: entity
   parent: AirlockGlass
   id: AirlockGlassRenegades
   suffix: Ренегаты, Locked
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Glass/ren_glass.rsi
+    sprite: Forge/Structures/Doors/Airlocks/Glass/ren_glass.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsRenegate ]

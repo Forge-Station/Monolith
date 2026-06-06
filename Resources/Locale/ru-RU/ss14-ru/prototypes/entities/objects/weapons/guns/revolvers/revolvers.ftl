@@ -6,12 +6,26 @@ ent-NFWeaponRevolverDeckard = Декард
 ent-NFWeaponRevolverInspector = Инспектор
     .desc = Лучший друг детектива. Использует патроны калибра .45 магнум.
     .suffix = Револьвер
+ent-WeaponSubMachineGunMalandroRegistered = { ent-NFWeaponRevolverInspector }
+    .desc = { ent-NFWeaponRevolverInspector.desc }
+    .suffix = Револьвер
 ent-NFWeaponRevolverWard45 = Матеба
     .desc = Знаковое оружие элиты корпорации. Использует патроны калибра .45 магнум.
     .suffix = Револьвер
 ent-NFWeaponRevolverRitland45 = Питон
     .desc = Нелегальное оружие. Надёжный револьвер, предпочитаемый агентами Синдиката. Использует патроны калибра .45 магнум.
     .suffix = Револьвер
+ent-WeaponRevolverPython = { ent-NFWeaponRevolverRitland45 }
+    .desc = { ent-NFWeaponRevolverRitland45.desc }
+    .suffix = Револьвер
+ent-WeaponRevolverPythonGatfruit = { ent-NFWeaponRevolverRitland45 }
+    .desc = { ent-NFWeaponRevolverRitland45.desc }
+    .suffix = Револьвер, Low Value
+ent-WeaponRevolverPythonAP = { ent-NFWeaponRevolverRitland45 }
+    .desc = { ent-NFWeaponRevolverRitland45.desc }
+    .suffix = Револьвер, Бронебойные
+
+
 ent-NFWeaponRevolverPirate = Пиратский револьвер
     .desc = Нелегальное оружие. Странный дульнозарядный револьвер, который использовали пираты. Использует патроны калибра .45 магнум.
     .suffix = Револьвер

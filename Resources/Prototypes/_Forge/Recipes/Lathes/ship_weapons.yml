@@ -1,0 +1,188 @@
+- type: latheRecipe
+  abstract: true
+  parent: BaseGoldCircuitboardRecipe
+  id: ForgeShipWeaponBoardRecipeT1
+  materials:
+    Steel: 100
+    Glass: 500
+    Gold: 100
+
+- type: latheRecipe
+  abstract: true
+  parent: BaseGoldCircuitboardRecipe
+  id: ForgeShipWeaponBoardRecipeT2
+  materials:
+    Steel: 125
+    Glass: 600
+    Gold: 150
+    Silver: 100
+
+- type: latheRecipe
+  abstract: true
+  parent: BaseBluespaceCircuitboardRecipe
+  id: ForgeShipWeaponBoardRecipeT3
+  materials:
+    Steel: 150
+    Glass: 700
+    Bluespace: 200
+    Diamond: 150
+    Gold: 200
+    Plasma: 100
+    Uranium: 100
+
+- type: latheRecipe
+  abstract: true
+  parent: BaseBluespaceCircuitboardRecipe
+  id: ForgeShipWeaponBoardRecipeT4
+  materials:
+    Steel: 200
+    Glass: 900
+    Bluespace: 300
+    Diamond: 300
+    Gold: 300
+    Plasma: 200
+    Uranium: 200
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: ShipWeaponFabricatorCircuitboard
+  result: ShipWeaponFabricatorCircuitboard
+  materials:
+    Steel: 150
+    Glass: 750
+    Gold: 200
+    Silver: 100
+
+# T1
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT1
+  id: WeaponTurretL85AutocannonCircuitboard
+  result: WeaponTurretL85AutocannonCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT1
+  id: WeaponTurretM25Circuitboard
+  result: WeaponTurretM25Circuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT1
+  id: WeaponLaserTurretL1PhalanxCircuitboard
+  result: WeaponLaserTurretL1PhalanxCircuitboard
+  materials:
+    Steel: 125
+    Glass: 600
+    Gold: 150
+    Silver: 100
+
+# T2
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT2
+  id: WeaponTurretRAC30Circuitboard
+  result: WeaponTurretRAC30Circuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT2
+  id: WeaponTurretAK570Circuitboard
+  result: WeaponTurretAK570Circuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT2
+  id: WeaponTurretDravonCircuitboard
+  result: WeaponTurretDravonCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT2
+  id: WeaponTurretType35Circuitboard
+  result: WeaponTurretType35Circuitboard
+  materials:
+    Steel: 150
+    Glass: 700
+    Gold: 200
+    Silver: 150
+    Plasma: 100
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT2
+  id: WeaponTurretM220Circuitboard
+  result: WeaponTurretM220Circuitboard
+  materials:
+    Steel: 150
+    Glass: 700
+    Gold: 200
+    Silver: 150
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT2
+  id: WeaponTurretVesperaCircuitboard
+  result: WeaponTurretVesperaCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT2
+  id: WeaponTurretVanykCircuitboard
+  result: WeaponTurretVanykCircuitboard
+
+# T3
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT3
+  id: WeaponTurretCerberusCircuitboard
+  result: WeaponTurretCerberusCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT3
+  id: WeaponTurretBoforsCircuitboard
+  result: WeaponTurretBoforsCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT3
+  id: WeaponTurretTarnyxReloadCircuitboard
+  result: WeaponTurretTarnyxReloadCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT3
+  id: WeaponLaserTurretPrometheusCircuitboard
+  result: WeaponLaserTurretPrometheusCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT3
+  id: WeaponTurretSerpentMissileCircuitboard
+  result: WeaponTurretSerpentMissileCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT3
+  id: WeaponTurretTovekCircuitboard
+  result: WeaponTurretTovekCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT3
+  id: WeaponTurretASM220Circuitboard
+  result: WeaponTurretASM220Circuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT3
+  id: WeaponTurretLightMunitionsBayCircuitboard
+  result: WeaponTurretLightMunitionsBayCircuitboard
+
+# T4
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT4
+  id: WeaponTurretLongbowCircuitboard
+  result: WeaponTurretLongbowCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT4
+  id: WeaponTurretCyrexaCircuitboard
+  result: WeaponTurretCyrexaCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT4
+  id: WeaponTurretCharonReloadCircuitboard
+  result: WeaponTurretCharonReloadCircuitboard
+
+- type: latheRecipe
+  parent: ForgeShipWeaponBoardRecipeT4
+  id: WeaponLaserTurretApolloCircuitboard
+  result: WeaponLaserTurretApolloCircuitboard

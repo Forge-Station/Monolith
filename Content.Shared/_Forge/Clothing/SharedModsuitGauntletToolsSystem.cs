@@ -37,6 +37,9 @@ public abstract partial class SharedModsuitGauntletToolsSystem : EntitySystem
         EntityUid wearer,
         ModsuitGauntletToolSlot slot)
     {
+        if (!IsSlotEnabled(gauntlets.Comp, slot))
+            return;
+
         switch (slot)
         {
             case ModsuitGauntletToolSlot.Urk:
@@ -51,32 +54,54 @@ public abstract partial class SharedModsuitGauntletToolsSystem : EntitySystem
             case ModsuitGauntletToolSlot.NaniteApplicator:
                 ToggleTool(gauntlets, wearer, gauntlets.Comp.NaniteApplicatorEntity, ref gauntlets.Comp.NaniteApplicatorInHand);
                 break;
+            case ModsuitGauntletToolSlot.Auxiliary:
+                ToggleTool(gauntlets, wearer, gauntlets.Comp.AuxiliaryEntity, ref gauntlets.Comp.AuxiliaryInHand);
+                break;
         }
+    }
+
+    public static bool IsSlotEnabled(ModsuitGauntletToolsComponent comp, ModsuitGauntletToolSlot slot)
+    {
+        return slot switch
+        {
+            ModsuitGauntletToolSlot.Urk => comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.Urk),
+            ModsuitGauntletToolSlot.Omnitool => comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.Omnitool),
+            ModsuitGauntletToolSlot.Welder => comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.Welder),
+            ModsuitGauntletToolSlot.NaniteApplicator => comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.NaniteApplicator),
+            ModsuitGauntletToolSlot.Auxiliary => comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.Auxiliary),
+            _ => false,
+        };
     }
 
     protected bool TryGetActiveToolSlot(ModsuitGauntletToolsComponent comp, out ModsuitGauntletToolSlot slot)
     {
-        if (comp.UrkInHand)
+        if (comp.UrkInHand && IsSlotEnabled(comp, ModsuitGauntletToolSlot.Urk))
         {
             slot = ModsuitGauntletToolSlot.Urk;
             return true;
         }
 
-        if (comp.OmnitoolInHand)
+        if (comp.OmnitoolInHand && IsSlotEnabled(comp, ModsuitGauntletToolSlot.Omnitool))
         {
             slot = ModsuitGauntletToolSlot.Omnitool;
             return true;
         }
 
-        if (comp.WelderInHand)
+        if (comp.WelderInHand && IsSlotEnabled(comp, ModsuitGauntletToolSlot.Welder))
         {
             slot = ModsuitGauntletToolSlot.Welder;
             return true;
         }
 
-        if (comp.NaniteApplicatorInHand)
+        if (comp.NaniteApplicatorInHand && IsSlotEnabled(comp, ModsuitGauntletToolSlot.NaniteApplicator))
         {
             slot = ModsuitGauntletToolSlot.NaniteApplicator;
+            return true;
+        }
+
+        if (comp.AuxiliaryInHand && IsSlotEnabled(comp, ModsuitGauntletToolSlot.Auxiliary))
+        {
+            slot = ModsuitGauntletToolSlot.Auxiliary;
             return true;
         }
 
@@ -92,6 +117,7 @@ public abstract partial class SharedModsuitGauntletToolsSystem : EntitySystem
             ModsuitGauntletToolSlot.Omnitool => comp.OmnitoolInHand,
             ModsuitGauntletToolSlot.Welder => comp.WelderInHand,
             ModsuitGauntletToolSlot.NaniteApplicator => comp.NaniteApplicatorInHand,
+            ModsuitGauntletToolSlot.Auxiliary => comp.AuxiliaryInHand,
             _ => false,
         };
     }
@@ -143,6 +169,7 @@ public abstract partial class SharedModsuitGauntletToolsSystem : EntitySystem
         StowIfHeld(gauntlets, wearer, activeTool, comp.OmnitoolEntity, ref comp.OmnitoolInHand);
         StowIfHeld(gauntlets, wearer, activeTool, comp.WelderEntity, ref comp.WelderInHand);
         StowIfHeld(gauntlets, wearer, activeTool, comp.NaniteApplicatorEntity, ref comp.NaniteApplicatorInHand);
+        StowIfHeld(gauntlets, wearer, activeTool, comp.AuxiliaryEntity, ref comp.AuxiliaryInHand);
     }
 
     private void StowIfHeld(
@@ -267,6 +294,7 @@ public abstract partial class SharedModsuitGauntletToolsSystem : EntitySystem
             comp.OmnitoolInHand = false;
             comp.WelderInHand = false;
             comp.NaniteApplicatorInHand = false;
+            comp.AuxiliaryInHand = false;
             return;
         }
 
@@ -274,6 +302,7 @@ public abstract partial class SharedModsuitGauntletToolsSystem : EntitySystem
         comp.OmnitoolInHand = IsHeld(wearer.Value, comp.OmnitoolEntity);
         comp.WelderInHand = IsHeld(wearer.Value, comp.WelderEntity);
         comp.NaniteApplicatorInHand = IsHeld(wearer.Value, comp.NaniteApplicatorEntity);
+        comp.AuxiliaryInHand = IsHeld(wearer.Value, comp.AuxiliaryEntity);
     }
 
     private bool IsHeld(EntityUid wearer, EntityUid? tool)

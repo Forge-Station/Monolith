@@ -32,6 +32,11 @@ rcd-component-windows-and-grilles = Окна и решётки
 rcd-component-airlocks = Шлюзы
 rcd-component-electrical = Электроприборы
 rcd-component-lighting = Освещение
+# Forge-Change: категории РФУ (Goob-Station/Goob-Station#1203)
+rcd-component-piping = Трубопровод
+rcd-component-pumpsvalves = Насосы и клапаны
+rcd-component-vents = Вентиляция
+rcd-component-atmosphericutility = Атмос-оборудование
 
 ### Prototype names (note: constructable items will be puralized)
 

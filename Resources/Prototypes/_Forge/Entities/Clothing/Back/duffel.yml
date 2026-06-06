@@ -1,3 +1,32 @@
+# region Renegate
+- type: entity
+  parent: [ClothingBackpackDuffel, BaseC3Contraband, ContrabandClothing]
+  id: ClothingDuffelRenegade
+  name: duffel renegade
+  suffix: Ренегаты
+  description: A large duffel bag for storing things.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Back/Duffels/renegade.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+
+# region Company
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ClothingBackpackDuffelTL
+  name:  Back TechnicLogistic
+  suffix: TechnicLogistic
+  description: A large duffel bag for holding any army goods.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Back/Duffels/duffel_bag_techniclogistic.rsi
+  - type: Storage
+    grid:
+    - 0,0,7,4
+    maxItemSize: Huge
+
+# region Other
 - type: entity
   parent: ClothingBackpackDuffel
   id: ClothingBackpackDuffelMilitary
@@ -28,3 +57,17 @@
     maxItemSize: Huge
   - type: ExplosionResistance
     damageCoefficient: 0.25
+
+- type: entity
+  parent: [NFClothingDuffel, BaseC3Contraband, ContrabandClothing]
+  id: ClothingDuffelContractorForge
+  name: вещмешок DCN™
+  description: Большой вещмешок для хранения предтательских предметов. Выглядит стильно и оригинально.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Back/Duffels/contractor.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+  - type: Storage
+    grid:
+    - 0,0,9,5

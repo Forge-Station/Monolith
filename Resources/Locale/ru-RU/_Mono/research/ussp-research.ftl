@@ -1,4 +1,4 @@
-research-discipline-ussp-gear = СССП Оборудование
+research-discipline-ussp = Исследования USSP
 
 # T1 СССП
 research-technology-ussp-guns-basic = СССП Базовое вооружение

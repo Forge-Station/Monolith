@@ -58,6 +58,8 @@
   - type: PassiveThermalSignature # Mono
     signature: 500000 # vibe number
   - type: ThermalSignature # Mono
+  - type: DisableToolUse # Forge-change
+    anchoringFalse: true
 
 - type: entity
   id: NpcStationAiApproacher
@@ -183,6 +185,8 @@
   - type: HTN
     rootTask:
       task: AttackerShuttleSmartStaticCompound
+  - type: DisableToolUse # Forge-change
+    anchoringFalse: false
 
 - type: entity
   id: NpcStationAiAttackerBroadside

@@ -1,4 +1,5 @@
 ent-ClothingShoesBootsMagDrakeIndustries = окрашенные магнитные ботинки
+    .suffix = Drake
     .desc = Да, это просто перекрашенные научные ботинки.
 ent-ClothingShoesBootsMagVoid = вакуумные ботинки
     .desc = Магнитные ботинки, усиленные технологией блюспейс-привязки, позволяющие ходить по пустоте космоса.

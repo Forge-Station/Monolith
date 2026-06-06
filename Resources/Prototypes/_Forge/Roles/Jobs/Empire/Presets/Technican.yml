@@ -1,0 +1,40 @@
+- type: job
+  id: EmpireTechnican
+  name: forge-job-name-technican
+  description: forge-job-desc-technican
+  supervisors: job-supervisors-praetorian
+  playTimeTracker: JobEmpireTechnican
+  icon: JobIconEmpireTechnican
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hrs
+    - !type:SpeciesRequirement
+      species:
+        - Human
+        - Dwarf
+    - !type:SexRequirement
+      sex:
+      - Male
+      - Female
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: EmpireTechnicanGear
+  alwaysUseSpawner: true
+  weight: 170
+  displayWeight: 38
+  canBeAntag: false
+  assignedCompany: Imperial
+  assignedNationality: Imperial
+  accessGroups:
+  - GeneralEmpireAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
+  - !type:AddImplantSpecial
+    implants: [ ImplantGuard , EmpireTrackingImplant]
+
+- type: startingGear
+  id: EmpireTechnicanGear

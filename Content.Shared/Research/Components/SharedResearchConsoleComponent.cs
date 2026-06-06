@@ -35,10 +35,20 @@ namespace Content.Shared.Research.Components
         /// Goobstation field - all researches and their availablities
         /// </summary>
         public Dictionary<string, ResearchAvailability> Researches;
-        public ResearchConsoleBoundInterfaceState(int points, Dictionary<string, ResearchAvailability> researches)   // Goobstation R&D console rework = researches field
+
+        /// <summary>
+        /// Progress (0–100) toward unlocking each technology (prerequisites or research points).
+        /// </summary>
+        public Dictionary<string, byte> Progress;
+
+        public ResearchConsoleBoundInterfaceState(
+            int points,
+            Dictionary<string, ResearchAvailability> researches,
+            Dictionary<string, byte> progress)
         {
             Points = points;
-            Researches = researches;    // Goobstation R&D console rework
+            Researches = researches;
+            Progress = progress;
         }
     }
 }

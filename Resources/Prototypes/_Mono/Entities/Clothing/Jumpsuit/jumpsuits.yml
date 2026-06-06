@@ -215,122 +215,45 @@
   parent: ClothingUniformBase
   id: ClothingUniformDrakeIndustriesHauler
   name: hauler jumpsuit
+  suffix: Drake # Forge-Change
   description: Durable overalls with zippers here and there. It bears the colors of Drake Industries.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/di-hauler.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_hauler.rsi # Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/di-hauler.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_hauler.rsi # Forge-Change
   - type: SuitSensor
     randomMode: true
 
+# Forge-Change: Drake turtleneck RSI (was military recolor)
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformDrakeIndustriesTrucker
-  name: trucker jumpsuit
-  description: This one has pocket for your smokes. Oh wait, no, it's a false pocket. Well, at least it's fashionable. It bears the colors of Drake Industries.
-  suffix: Military
+  name: Drake Industries turtleneck
+  description: A sharp turtleneck in Drake Industries colors. The false cigarette pocket is still fashionable.
+  suffix: Drake # Forge-Change
   components:
   - type: Sprite
-    sprite: _NF/Clothing/Uniforms/Jumpsuit/military.rsi
-    layers:
-    - state: icon-base-bottom
-      color: "#496ea0"
-    - state: icon-base-top-jumpsuit
-      color: "#496ea0"
-    - state: icon-belt
-      color: "#cd6b6b"
-    - state: icon-belt-buckle
-    - state: icon-decor-shoulder-patch
-      color: "#cd6b6b"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-base-bottom
-        color: "#496ea0"
-      - state: inhand-left-base-top-jumpsuit
-        color: "#496ea0"
-      - state: inhand-left-belt
-        color: "#cd6b6b"
-      - state: inhand-left-belt-buckle
-      - state: inhand-left-decor-shoulder-patch
-        color: "#cd6b6b"
-      right:
-      - state: inhand-right-base-bottom
-        color: "#496ea0"
-      - state: inhand-right-base-top-jumpsuit
-        color: "#496ea0"
-      - state: inhand-right-belt
-        color: "#cd6b6b"
-      - state: inhand-right-belt-buckle
-      - state: inhand-right-decor-shoulder-patch
-        color: "#cd6b6b"
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_trucker.rsi # Forge-Change
   - type: Clothing
-    sprite: _NF/Clothing/Uniforms/Jumpsuit/military.rsi
-    clothingVisuals:
-      jumpsuit:
-      - state: equipped-base-bottom
-        color: "#496ea0"
-      - state: equipped-base-top-jumpsuit
-        color: "#496ea0"
-      - state: equipped-belt
-        color: "#cd6b6b"
-      - state: equipped-belt-buckle
-      - state: equipped-decor-shoulder-patch
-        color: "#cd6b6b"
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_trucker.rsi # Forge-Change
   - type: SuitSensor
     randomMode: true
 
+# Forge-Change: Drake officer uniform RSI (was military recolor)
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformDrakeIndustriesWatchdog
-  name: watchdog jumpsuit
-  description: A sleek tracksuit designed to have decent camouflage in dark spaces. It bears the colors of Drake Industries.
-  suffix: Military
+  name: Drake Industries officer jumpsuit
+  description: A sleek officer uniform designed for dark spaces. It bears the colors of Drake Industries.
+  suffix: Drake # Forge-Change
   components:
   - type: Sprite
-    sprite: _NF/Clothing/Uniforms/Jumpsuit/military.rsi
-    layers:
-    - state: icon-base-bottom
-      color: "#424242"
-    - state: icon-base-top-jumpsuit
-      color: "#424242"
-    - state: icon-decor-department
-      color: "#cd6b6b"
-    - state: icon-decor-shoulder-patch
-      color: "#cd6b6b"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-base-bottom
-        color: "#424242"
-      - state: inhand-left-base-top-jumpsuit
-        color: "#424242"
-      - state: inhand-left-decor-department
-        color: "#cd6b6b"
-      - state: inhand-left-decor-shoulder-patch
-        color: "#cd6b6b"
-      right:
-      - state: inhand-right-base-bottom
-        color: "#424242"
-      - state: inhand-right-base-top-jumpsuit
-        color: "#424242"
-      - state: inhand-right-decor-department
-        color: "#cd6b6b"
-      - state: inhand-right-decor-shoulder-patch
-        color: "#cd6b6b"
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_watchdog.rsi # Forge-Change
   - type: Clothing
-    sprite: _NF/Clothing/Uniforms/Jumpsuit/military.rsi
-    clothingVisuals:
-      jumpsuit:
-      - state: equipped-base-bottom
-        color: "#424242"
-      - state: equipped-base-top-jumpsuit
-        color: "#424242"
-      - state: equipped-decor-department
-        color: "#cd6b6b"
-      - state: equipped-decor-shoulder-patch
-        color: "#cd6b6b"
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_watchdog.rsi # Forge-Change
+  - type: SuitSensor
+    randomMode: true
 
 #Viper Group
 - type: entity

@@ -1,4 +1,11 @@
 ent-BaseMagazine556x45mm = магазин (5.56x45мм FMJ)
+ent-Magazine556x45mmFMJ = { ent-BaseMagazine556x45mm }
+ent-Magazine556x45mmEmpty = магазин (5.56x45мм)
+    .desc = " "
+    .suffix = Пустой
+ent-Magazine556x45mmHP = магазин (5.56x45мм экспансивные)
+ent-Magazine556x45mmPractice = магазин (5.56x45мм учебные)
+ent-Magazine556x45mmRubber = магазин (5.56x45мм резиновые)
 ent-Magazine556x45mmPlasteelAP = магазин (5.56x45мм бронебойные)
 ent-Magazine556x45mmRIP = магазин (5.56x45мм RIP)
 ent-Magazine556x45mmIncendiary = магазин (5.56x45мм зажигательные)

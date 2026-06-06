@@ -9,6 +9,7 @@
   placementTags: [ Renegates ]
   minDistanceFromTags:
     TSF: 5000
+    Imperial: 5000
   gridPath: /Maps/_Forge/POI/RenegateFortress.yml
   addComponents:
   - type: IFF

@@ -21,6 +21,7 @@
   placementTags: [ TSF ] # Forge-Change
   minDistanceFromTags: # Forge-Change
     Renegates: 5000
+    Imperial: 5000
   gridPath: /Maps/_Forge/POI/TSFChalcyonForge.yml
   addComponents:
   - type: IFF

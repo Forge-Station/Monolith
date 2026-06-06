@@ -1,13 +1,13 @@
-- type: listing
-  id: ContractorUplinkSpace
-  name: 'Набор космического контрактника'
-  description: 'Содержит в себе набор скафандр ВКД от DCN™ и плата консоли системы опознавания.'
-  productEntity: CrateContractorSpaceKit
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  categories:
-    - ContractorUplinkKit
+# - type: listing
+#  id: ContractorUplinkSpace
+#  name: 'Набор космического контрактника'
+#  description: 'Содержит в себе набор скафандр ВКД от DCN™ и плата консоли системы опознавания.'
+#  productEntity: CrateContractorSpaceKit
+#  conditions:
+#  - !type:ListingLimitedStockCondition
+#    stock: 1
+#  categories:
+#    - ContractorUplinkKit
 
 - type: listing
   id: ContractorUplinkBaton

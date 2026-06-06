@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Ночник
   description: Небольшой гражданский шаттл-ресторан с баром, кухней и гидропоникой
-  price: 44850
+  price: 50850
   category: Medium
   group: Shipyard
   shuttlePath: /Maps/_Forge/Shuttles/Civilian/nightlight.yml

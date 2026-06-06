@@ -3742,7 +3742,7 @@ entities:
     - type: Transform
       pos: -3.5,-1.5
       parent: 1
-- proto: Magazine57mm
+- proto: Magazine57mmHE
   entities:
   - uid: 417
     components:

@@ -975,48 +975,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 1.5,1.5
       parent: 1
-- proto: ClothingOuterHardsuitEmpire14m
+- proto: ClothingOuterHardsuitRI22
   entities:
   - uid: 183
     components:
     - type: Transform
       parent: 179
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: Понижает вашу скорость на [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        - message: >-
-            Обеспечивает следующую защиту:
-
-            - [color=yellow]Ударный[/color] урон снижается на [color=lightblue]30%[/color].
-
-            - [color=yellow]Режущий[/color] урон снижается на [color=lightblue]30%[/color].
-
-            - [color=yellow]Колющий[/color] урон снижается на [color=lightblue]45%[/color].
-
-            - [color=yellow]Высокотемпературный[/color] урон снижается на [color=lightblue]30%[/color].
-
-            - [color=yellow]Радиационный[/color] урон снижается на [color=lightblue]35%[/color].
-
-            - [color=yellow]Кислотный[/color] урон снижается на [color=lightblue]20%[/color].
-
-            - [color=aqua]Stamina[/color] damage reduced by [color=lightblue]75%[/color].
-
-            - [color=orange]Взрывной[/color] урон снижается на [color=lightblue]35%[/color].
-          priority: 0
-          component: Armor
-        title: null
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: ClothingShoesBootsMagSecurity
   entities:
   - uid: 182

@@ -21,6 +21,10 @@
   - MachineShieldForgeTSFPrismaticCircuitboard
   - MachineShieldForgeTSFCollisionCircuitboard
   - MachineShieldForgeTSFSagittaCircuitboard
+  - MachineShieldForgeEmpireHeavyCircuitboard
+  - MachineShieldForgeEmpirePrismaticCircuitboard
+  - MachineShieldForgeEmpireCollisionCircuitboard
+  - MachineShieldForgeEmpireSignumCircuitboard
   - MachineShieldForgeUsspHeavyCircuitboard
   - MachineShieldForgeUsspPrismaticCircuitboard
   - MachineShieldForgeUsspCollisionCircuitboard

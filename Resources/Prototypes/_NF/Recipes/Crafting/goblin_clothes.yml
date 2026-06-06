@@ -21,7 +21,7 @@
   graph: ClothingOuterEVASuitGoblinGraph
   startNode: start
   targetNode: ClothingOuterEVASuitGoblinNode
-  whitelist:
+  entityWhitelist:
     tags:
     - GoblinCraft
   category: construction-category-goblin

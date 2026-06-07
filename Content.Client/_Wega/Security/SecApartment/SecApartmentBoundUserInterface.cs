@@ -21,7 +21,7 @@ public sealed class SecApartmentBoundUserInterface : BoundUserInterface
 
         _window = this.CreateWindow<SecApartmentWindow>();
         if (EntMan.TryGetComponent<SecApartmentComponent>(Owner, out var component))
-            _window.ApplyTheme(component.Department);
+            _window.ApplyUiTheme(component.UiTheme);
 
         _window.OnCreateSquad += (squadName, department) =>
             SendMessage(new CreateSquadMessage(squadName, department));

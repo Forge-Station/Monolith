@@ -31,9 +31,10 @@
     department: TSF
     requireUserDepartment: true
     squadIconPrefix: TSFSquadIcon
+    uiTheme: SecApUiThemeTSF
   - type: AccessReader
     requiredCompany: TSF
-    access: [["TsfSecApartment"]]
+    access: [["Command"]]
   - type: ActivatableUIRequiresAccess
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
@@ -100,9 +101,10 @@
     department: Renegates
     requireUserDepartment: true
     squadIconPrefix: RenegateSquadIcon
+    uiTheme: SecApUiThemeRenegates
   - type: AccessReader
     requiredCompany: Renegates
-    access: [["RenegateSecApartment"]]
+    access: [["RenegateOfficer"]]
   - type: ActivatableUIRequiresAccess
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
@@ -168,8 +170,9 @@
   - type: SecApartment
     department: NanoTrasen
     squadIconPrefix: NanoTrasenSquadIcon
+    uiTheme: SecApUiThemeNanoTrasen
   - type: AccessReader
-    access: [["NtSecApartment"]]
+    access: [["HeadOfPersonnel"], ["ChiefMedicalOfficer"]]
   - type: ActivatableUIRequiresAccess
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
@@ -208,7 +211,7 @@
   id: EmpireSecApartmentTablet
   name: portable personnel monitor
   description: "A portable device for monitoring personnel, organizing squads, and coordinating actions."
-  suffix: НЕ СПАВНИТЬ
+  suffix: Powered
   components:
   - type: Sprite
     sprite: Forge/Objects/Devices/secapartments/EMP.rsi
@@ -236,6 +239,11 @@
     department: Empire
     requireUserDepartment: true
     squadIconPrefix: EmpireSquadIcon
+    uiTheme: SecApUiThemeEmpire
+  - type: AccessReader
+    requiredCompany: Imperial
+    access: [["EmpireCommander"]]
+  - type: ActivatableUIRequiresAccess
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -254,7 +262,7 @@
 - type: entity
   id: EmpireSecApartmentTabletEmpty
   parent: EmpireSecApartmentTablet
-  suffix: НЕ СПАВНИТЬ
+  suffix: Empty
   components:
   - type: Sprite
     layers:
@@ -301,6 +309,7 @@
     department: UnionOfSovietSocialistPlanets
     requireUserDepartment: true
     squadIconPrefix: USSPSquadIcon
+    uiTheme: SecApUiThemeUSSP
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
     deviceNetId: Wireless

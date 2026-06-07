@@ -1,6 +1,5 @@
 <!-- Forge-Change -->
 <PanelContainer xmlns="https://spacestation14.io"
-                xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                 HorizontalExpand="True"
                 Margin="0 0 0 10">
 
@@ -64,8 +63,9 @@
                 <BoxContainer Orientation="Horizontal"
                               VerticalAlignment="Center"
                               HorizontalExpand="False">
-                    <Label Text="{Loc 'sec-apartment-ui-squads-status'}"
-                           FontColorOverride="#ff8888"
+                    <Label Name="StatusHeaderLabel"
+                           Text="{Loc 'sec-apartment-ui-squads-status'}"
+                           StyleClasses="ConsoleSubHeading"
                            Margin="0 0 5 0" />
 
                     <OptionButton Name="StatusDropdown" StyleClasses="SecApartmentOptionButton"
@@ -113,20 +113,17 @@
                       HorizontalExpand="True"
                       VerticalAlignment="Center"
                       Margin="0 5 0 0">
-            <Label Text="{Loc 'sec-apartment-ui-squads-location'}"
-                   FontColorOverride="#ff8888"
+            <Label Name="LocationHeaderLabel"
+                   Text="{Loc 'sec-apartment-ui-squads-location'}"
+                   StyleClasses="ConsoleSubHeading"
                    Margin="0 0 5 0" />
 
             <Label Name="SquadLocationLabel"
                    HorizontalExpand="True"
-                   FontColorOverride="#ff9999" />
+                   StyleClasses="ConsoleText" />
         </BoxContainer>
 
-        <PanelContainer StyleClasses="LowDivider" HorizontalExpand="True" Margin="0 5 0 5" SetHeight="2">
-            <PanelContainer.PanelOverride>
-                <gfx:StyleBoxFlat BackgroundColor="#ff4444" />
-            </PanelContainer.PanelOverride>
-        </PanelContainer>
+        <PanelContainer Name="SectionDivider" StyleClasses="LowDivider" HorizontalExpand="True" Margin="0 5 0 5" SetHeight="2"/>
 
         <BoxContainer Orientation="Vertical">
             <Label Name="MembersHeaderLabel" HorizontalAlignment="Center"

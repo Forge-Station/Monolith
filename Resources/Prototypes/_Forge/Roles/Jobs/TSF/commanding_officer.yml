@@ -30,7 +30,6 @@
   - AllAccess
   access:
   - TsfmcEngineering
-  - TsfSecApartment
   special:
   - !type:AddComponentSpecial
     components:

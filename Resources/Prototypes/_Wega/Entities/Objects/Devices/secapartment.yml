@@ -26,6 +26,7 @@
     onUse: false
   - type: SecApartment
     debug: true
+    uiTheme: SecApUiThemeSecurity
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
     deviceNetId: Wireless

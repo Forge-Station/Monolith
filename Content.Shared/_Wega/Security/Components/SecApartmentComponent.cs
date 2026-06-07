@@ -1,6 +1,7 @@
 // Forge-Change
 using Content.Shared.Medical.SuitSensor;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SecApartment;
@@ -16,6 +17,16 @@ public sealed partial class SecApartmentComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public string Department = "Security";
+
+    // Forge-Change-start
+    /// <summary>
+    /// UI color palette for this tablet.
+    /// </summary>
+    public const string DefaultUiTheme = "SecApUiThemeSecurity";
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<SecApUiThemePrototype> UiTheme = DefaultUiTheme;
+    // Forge-Change-end
 
     /// <summary>
     /// If true, the user must have a job from <see cref="Department"/> to open the tablet.

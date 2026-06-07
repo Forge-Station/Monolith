@@ -33,10 +33,12 @@ public sealed partial class TimerEntryControl : PanelContainer
 
     private void SetupStyles()
     {
+        var theme = _styles.Theme;
+
         PanelOverride = new StyleBoxFlat
         {
-            BackgroundColor = Color.FromHex("#2a0a0a"),
-            BorderColor = Color.FromHex("#ff4444"),
+            BackgroundColor = theme.EntryBackground,
+            BorderColor = theme.EntryBorder,
             BorderThickness = new Thickness(1),
             ContentMarginBottomOverride = 6,
             ContentMarginLeftOverride = 8,
@@ -49,6 +51,15 @@ public sealed partial class TimerEntryControl : PanelContainer
         TimerLabel.FontOverride = _styles.GetBoldFont(12);
         TimeLabel.FontOverride = _styles.GetBoldFont(12);
         TotalTimeLabel.FontOverride = _styles.GetRegularFont(10);
+
+        TimerLabel.FontColorOverride = theme.Text;
+        TotalTimeHeaderLabel.FontColorOverride = theme.SubText;
+        TotalTimeLabel.FontColorOverride = theme.SubText;
+
+        Divider.PanelOverride = new StyleBoxFlat
+        {
+            BackgroundColor = theme.Divider
+        };
     }
 
     public void UpdateTimer(TimerEntry timerEntry)
@@ -73,18 +84,18 @@ public sealed partial class TimerEntryControl : PanelContainer
         {
             var overdue = -remaining;
             TimeLabel.Text = $"-{FormatTimeSpan(overdue)}";
-            TimeLabel.FontColorOverride = Color.FromHex("#ff0000");
+            TimeLabel.FontColorOverride = _styles.Theme.TimerOverdue;
         }
         else
         {
             TimeLabel.Text = FormatTimeSpan(remaining);
 
             if (remaining.TotalSeconds < 30)
-                TimeLabel.FontColorOverride = Color.FromHex("#ff3333");
+                TimeLabel.FontColorOverride = _styles.Theme.TimerCritical;
             else if (remaining.TotalSeconds < 60)
-                TimeLabel.FontColorOverride = Color.FromHex("#ff9933");
+                TimeLabel.FontColorOverride = _styles.Theme.TimerWarning;
             else
-                TimeLabel.FontColorOverride = Color.FromHex("#ff6666");
+                TimeLabel.FontColorOverride = _styles.Theme.TimerNormal;
         }
     }
 

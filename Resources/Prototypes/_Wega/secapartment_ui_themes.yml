@@ -1,0 +1,528 @@
+# Forge-Change-start
+
+# Косметика UI планшета SecApartment. Одна тема = одна фракция.
+
+# Принцип: насыщенный фракционный цвет + тёмные фоны, без кислотных #ff**** на всём UI.
+
+
+
+# Служба безопасности / отладочный планшет (тёмно-красный + акценты, без кричащей плашки)
+
+- type: secApUiTheme
+
+  id: SecApUiThemeSecurity
+
+  showLogo: true
+
+  showFooter: true
+
+  showOsStripe: true
+
+  logoTexture: /Textures/Interface/Nano/ntlogo.svg.png
+
+  windowBackground: "#101010"
+
+  windowBorder: "#3a2020"
+
+  contentBackground: "#662020"
+
+  contentBorder: "#441414"
+
+  closeButton: "#dd4848"
+
+  divider: "#993333"
+
+  listPanelBackground: "#1a0808"
+
+  listPanelBorder: "#882828"
+
+  createSquadPanelBackground: "#2a1010"
+
+  createSquadPanelBorder: "#882828"
+
+  cardBackground: "#3a1414"
+
+  cardBorder: "#aa3333"
+
+  entryBackground: "#120606"
+
+  entryBorder: "#882828"
+
+  memberAliveBackground: "#3a1010"
+
+  memberAliveBorder: "#cc5555"
+
+  memberDeadBackground: "#0a0404"
+
+  memberDeadBorder: "#662222"
+
+  memberDeadText: "#886666"
+
+  tabActive: "#ee5555"
+
+  tabInactive: "#aa6060"
+
+  heading: "#ee5555"
+
+  text: "#dd9999"
+
+  subText: "#bb7070"
+
+  placeholder: "#994444"
+
+  buttonBackground: "#551818"
+
+  buttonBorder: "#aa3333"
+
+  lineEditBackground: "#120606"
+
+  optionBackground: "#2a1010"
+
+  tabActiveBackground: "#441818"
+
+  tabInactiveBackground: "#1a0808"
+
+  panelBackground: "#0a0404"
+
+  timerOverdue: "#cc3333"
+
+  timerCritical: "#cc5533"
+
+  timerWarning: "#cc7733"
+
+  timerNormal: "#dd9999"
+
+
+
+# ТСФ — тёмно-синий (navy), без голубого/cyan
+
+- type: secApUiTheme
+
+  id: SecApUiThemeTSF
+
+  showLogo: false
+
+  showFooter: false
+
+  showOsStripe: false
+
+  windowBackground: "#060810"
+
+  windowBorder: "#1a2840"
+
+  contentBackground: "#0e1a2c"
+
+  contentBorder: "#1a3050"
+
+  closeButton: "#4a78a8"
+
+  divider: "#2a4870"
+
+  listPanelBackground: "#0a121c"
+
+  listPanelBorder: "#243858"
+
+  createSquadPanelBackground: "#101c2c"
+
+  createSquadPanelBorder: "#243858"
+
+  cardBackground: "#101c2c"
+
+  cardBorder: "#2a4870"
+
+  entryBackground: "#080e18"
+
+  entryBorder: "#243858"
+
+  memberAliveBackground: "#142438"
+
+  memberAliveBorder: "#5078a0"
+
+  memberDeadBackground: "#060810"
+
+  memberDeadBorder: "#1e3048"
+
+  memberDeadText: "#4a5870"
+
+  tabActive: "#5888b8"
+
+  tabInactive: "#506880"
+
+  heading: "#6898b8"
+
+  text: "#98a8c0"
+
+  subText: "#7088a0"
+
+  placeholder: "#485870"
+
+  buttonBackground: "#1a3050"
+
+  buttonBorder: "#4870a0"
+
+  lineEditBackground: "#080e18"
+
+  optionBackground: "#101c2c"
+
+  tabActiveBackground: "#1a3050"
+
+  tabInactiveBackground: "#0a121c"
+
+  panelBackground: "#060810"
+
+  timerOverdue: "#b05050"
+
+  timerCritical: "#b07848"
+
+  timerWarning: "#90a848"
+
+  timerNormal: "#98a8c0"
+
+
+
+# Ренегаты — оранж как на спрайте (яркий экран #E87820, тёмная рамка #8B4020)
+
+- type: secApUiTheme
+
+  id: SecApUiThemeRenegates
+
+  showLogo: false
+
+  showFooter: false
+
+  showOsStripe: false
+
+  windowBackground: "#0c0806"
+
+  windowBorder: "#6b3018"
+
+  contentBackground: "#D07020"
+
+  contentBorder: "#8B4020"
+
+  closeButton: "#E88828"
+
+  divider: "#C06018"
+
+  listPanelBackground: "#2a1006"
+
+  listPanelBorder: "#B85818"
+
+  createSquadPanelBackground: "#3a1808"
+
+  createSquadPanelBorder: "#B85818"
+
+  cardBackground: "#3a1808"
+
+  cardBorder: "#C86820"
+
+  entryBackground: "#1e0c04"
+
+  entryBorder: "#B85818"
+
+  memberAliveBackground: "#4a2810"
+
+  memberAliveBorder: "#E09040"
+
+  memberDeadBackground: "#100806"
+
+  memberDeadBorder: "#6a4018"
+
+  memberDeadText: "#8a6038"
+
+  tabActive: "#F09838"
+
+  tabInactive: "#C07838"
+
+  heading: "#F0A040"
+
+  text: "#F0C888"
+
+  subText: "#D89050"
+
+  placeholder: "#A86020"
+
+  buttonBackground: "#6a3818"
+
+  buttonBorder: "#E08030"
+
+  lineEditBackground: "#1e0c04"
+
+  optionBackground: "#3a1808"
+
+  tabActiveBackground: "#6a3818"
+
+  tabInactiveBackground: "#2a1006"
+
+  panelBackground: "#100806"
+
+  timerOverdue: "#c84830"
+
+  timerCritical: "#c87030"
+
+  timerWarning: "#e08830"
+
+  timerNormal: "#F0C888"
+
+
+
+# НаноТразен — корпоративное золото на синем сланце (не песочный)
+
+- type: secApUiTheme
+
+  id: SecApUiThemeNanoTrasen
+
+  showLogo: true
+
+  showFooter: true
+
+  showOsStripe: true
+
+  logoTexture: /Textures/Interface/Nano/ntlogo.svg.png
+
+  windowBackground: "#0c1014"
+
+  windowBorder: "#3a4868"
+
+  contentBackground: "#2a4060"
+
+  contentBorder: "#3a5070"
+
+  closeButton: "#c9a44c"
+
+  divider: "#a08040"
+
+  listPanelBackground: "#182030"
+
+  listPanelBorder: "#9a7838"
+
+  createSquadPanelBackground: "#1e2a40"
+
+  createSquadPanelBorder: "#9a7838"
+
+  cardBackground: "#1e2a40"
+
+  cardBorder: "#b08848"
+
+  entryBackground: "#141c28"
+
+  entryBorder: "#9a7838"
+
+  memberAliveBackground: "#283848"
+
+  memberAliveBorder: "#d4b878"
+
+  memberDeadBackground: "#0c1014"
+
+  memberDeadBorder: "#4a4838"
+
+  memberDeadText: "#787868"
+
+  tabActive: "#e0c050"
+
+  tabInactive: "#a89058"
+
+  heading: "#e8c878"
+
+  text: "#f0e8c8"
+
+  subText: "#c0a868"
+
+  placeholder: "#887848"
+
+  buttonBackground: "#304058"
+
+  buttonBorder: "#c9a44c"
+
+  lineEditBackground: "#141c28"
+
+  optionBackground: "#1e2a40"
+
+  tabActiveBackground: "#344868"
+
+  tabInactiveBackground: "#182030"
+
+  panelBackground: "#0c1014"
+
+  timerOverdue: "#b04040"
+
+  timerCritical: "#b07840"
+
+  timerWarning: "#c9a44c"
+
+  timerNormal: "#f0e8c8"
+
+
+
+# СИВ / Империя — античное золото
+
+- type: secApUiTheme
+
+  id: SecApUiThemeEmpire
+
+  showLogo: false
+
+  showFooter: false
+
+  showOsStripe: false
+
+  windowBackground: "#0c0a08"
+
+  windowBorder: "#4a3820"
+
+  contentBackground: "#362818"
+
+  contentBorder: "#5c4528"
+
+  closeButton: "#c9a44c"
+
+  divider: "#8a6838"
+
+  listPanelBackground: "#1e1810"
+
+  listPanelBorder: "#7a5c30"
+
+  createSquadPanelBackground: "#281e14"
+
+  createSquadPanelBorder: "#7a5c30"
+
+  cardBackground: "#281e14"
+
+  cardBorder: "#9a7438"
+
+  entryBackground: "#1a140c"
+
+  entryBorder: "#7a5c30"
+
+  memberAliveBackground: "#342818"
+
+  memberAliveBorder: "#c9a86c"
+
+  memberDeadBackground: "#100e0a"
+
+  memberDeadBorder: "#5c4828"
+
+  memberDeadText: "#8a7048"
+
+  tabActive: "#d4af5a"
+
+  tabInactive: "#a88850"
+
+  heading: "#e0c878"
+
+  text: "#f0e0b8"
+
+  subText: "#c0a868"
+
+  placeholder: "#8a7048"
+
+  buttonBackground: "#403020"
+
+  buttonBorder: "#b89848"
+
+  lineEditBackground: "#1a140c"
+
+  optionBackground: "#281e14"
+
+  tabActiveBackground: "#3d3018"
+
+  tabInactiveBackground: "#1e1810"
+
+  panelBackground: "#100e0a"
+
+  timerOverdue: "#c05050"
+
+  timerCritical: "#c89840"
+
+  timerWarning: "#c9a44c"
+
+  timerNormal: "#f0e0b8"
+
+
+
+# СССП — хаки и приглушённый кирпично-красный
+
+- type: secApUiTheme
+
+  id: SecApUiThemeUSSP
+
+  showLogo: false
+
+  showFooter: false
+
+  showOsStripe: false
+
+  windowBackground: "#0a0c08"
+
+  windowBorder: "#3a3820"
+
+  contentBackground: "#2a2818"
+
+  contentBorder: "#403828"
+
+  closeButton: "#a84848"
+
+  divider: "#6a4830"
+
+  listPanelBackground: "#1e1c12"
+
+  listPanelBorder: "#5a5030"
+
+  createSquadPanelBackground: "#282418"
+
+  createSquadPanelBorder: "#5a5030"
+
+  cardBackground: "#282418"
+
+  cardBorder: "#7a6838"
+
+  entryBackground: "#181610"
+
+  entryBorder: "#5a5030"
+
+  memberAliveBackground: "#343020"
+
+  memberAliveBorder: "#c0a868"
+
+  memberDeadBackground: "#121008"
+
+  memberDeadBorder: "#484030"
+
+  memberDeadText: "#787060"
+
+  tabActive: "#c05858"
+
+  tabInactive: "#a09058"
+
+  heading: "#c87878"
+
+  text: "#e8dcc0"
+
+  subText: "#b8a868"
+
+  placeholder: "#887848"
+
+  buttonBackground: "#3a3420"
+
+  buttonBorder: "#a85848"
+
+  lineEditBackground: "#181610"
+
+  optionBackground: "#282418"
+
+  tabActiveBackground: "#343020"
+
+  tabInactiveBackground: "#1e1c12"
+
+  panelBackground: "#121008"
+
+  timerOverdue: "#a84848"
+
+  timerCritical: "#a87048"
+
+  timerWarning: "#b8a058"
+
+  timerNormal: "#e8dcc0"
+
+# Forge-Change-end
+

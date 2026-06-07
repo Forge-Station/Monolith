@@ -83,10 +83,12 @@ public sealed partial class SquadEntry : PanelContainer
 
     private void SetupStyles()
     {
+        var theme = _styles.Theme;
+
         PanelOverride = new StyleBoxFlat
         {
-            BackgroundColor = Color.FromHex("#4a1a1a"),
-            BorderColor = SecApartmentStyles.TabActiveColor,
+            BackgroundColor = theme.CardBackground,
+            BorderColor = theme.CardBorder,
             BorderThickness = new Thickness(2),
             ContentMarginBottomOverride = 8,
             ContentMarginLeftOverride = 10,
@@ -103,9 +105,17 @@ public sealed partial class SquadEntry : PanelContainer
         SquadNameEdit.AddStyleClass(SecApartmentStyles.StyleClassConsoleLineEdit);
         SquadDescriptionEdit.AddStyleClass(SecApartmentStyles.StyleClassConsoleLineEdit);
 
-        SquadNameLabel.FontColorOverride = SecApartmentStyles.HeadingColor;
-        MembersCountLabel.FontColorOverride = SecApartmentStyles.TextColor;
-        MembersHeaderLabel.FontColorOverride = SecApartmentStyles.SubHeadingColor;
+        SquadNameLabel.FontColorOverride = theme.Heading;
+        MembersCountLabel.FontColorOverride = theme.Text;
+        MembersHeaderLabel.FontColorOverride = theme.SubText;
+        StatusHeaderLabel.FontColorOverride = theme.SubText;
+        LocationHeaderLabel.FontColorOverride = theme.SubText;
+        SquadLocationLabel.FontColorOverride = theme.Text;
+
+        SectionDivider.PanelOverride = new StyleBoxFlat
+        {
+            BackgroundColor = theme.Divider
+        };
     }
 
     private void UpdateUI()
@@ -117,7 +127,7 @@ public sealed partial class SquadEntry : PanelContainer
         SquadDescriptionEdit.Text = Squad.Description;
 
         SquadLocationLabel.Text = Loc.GetString("sec-apartment-unknown");
-        SquadLocationLabel.FontColorOverride = SecApartmentStyles.TabInactiveColor;
+        SquadLocationLabel.FontColorOverride = _styles.Theme.TabInactive;
 
         IconDropdown.SelectId((int)Squad.IconId);
         StatusDropdown.SelectId((int)Squad.Status);
@@ -166,7 +176,7 @@ public sealed partial class SquadEntry : PanelContainer
             var emptyLabel = new Label
             {
                 Text = Loc.GetString("sec-apartment-squad-no-members"),
-                FontColorOverride = SecApartmentStyles.TabInactiveColor,
+                FontColorOverride = _styles.Theme.TabInactive,
                 HorizontalAlignment = HAlignment.Center,
                 Margin = new Thickness(0, 5)
             };
@@ -183,19 +193,10 @@ public sealed partial class SquadEntry : PanelContainer
 
     private PanelContainer CreateMemberEntry(CrewMemberInfo member)
     {
-        Color backgroundColor;
-        Color borderColor;
-
-        if (member.SensorStatus == null || !member.SensorStatus.IsAlive)
-        {
-            backgroundColor = Color.FromHex("#1a0a0a");
-            borderColor = Color.FromHex("#990000");
-        }
-        else
-        {
-            backgroundColor = Color.FromHex("#3a0f0f");
-            borderColor = Color.FromHex("#ff6666");
-        }
+        var theme = _styles.Theme;
+        var isAlive = member.SensorStatus?.IsAlive == true;
+        var backgroundColor = isAlive ? theme.MemberAliveBackground : theme.MemberDeadBackground;
+        var borderColor = isAlive ? theme.MemberAliveBorder : theme.MemberDeadBorder;
 
         var panel = new PanelContainer
         {
@@ -236,8 +237,8 @@ public sealed partial class SquadEntry : PanelContainer
         {
             Text = member.Name,
             FontColorOverride = member.SensorStatus?.IsAlive != true
-                ? Color.FromHex("#888888")
-                : SecApartmentStyles.TextColor,
+                ? theme.MemberDeadText
+                : theme.Text,
             FontOverride = _styles.GetBoldFont(12)
         };
 
@@ -288,7 +289,7 @@ public sealed partial class SquadEntry : PanelContainer
         var jobLabel = new Label
         {
             Text = member.JobTitle,
-            FontColorOverride = SecApartmentStyles.SubTextColor,
+            FontColorOverride = _styles.Theme.SubText,
             FontOverride = _styles.GetRegularFont(10),
             Margin = new Thickness(0, 0, 5, 0)
         };
@@ -355,19 +356,10 @@ public sealed partial class SquadEntry : PanelContainer
 
     private void UpdateMemberSensorStatus(PanelContainer panel, SuitSensorStatus? status)
     {
-        Color backgroundColor;
-        Color borderColor;
-
-        if (status == null || !status.IsAlive)
-        {
-            backgroundColor = Color.FromHex("#1a0a0a");
-            borderColor = Color.FromHex("#990000");
-        }
-        else
-        {
-            backgroundColor = Color.FromHex("#3a0f0f");
-            borderColor = Color.FromHex("#ff6666");
-        }
+        var theme = _styles.Theme;
+        var isAlive = status?.IsAlive == true;
+        var backgroundColor = isAlive ? theme.MemberAliveBackground : theme.MemberDeadBackground;
+        var borderColor = isAlive ? theme.MemberAliveBorder : theme.MemberDeadBorder;
 
         if (panel.PanelOverride is StyleBoxFlat styleBox)
         {
@@ -387,8 +379,8 @@ public sealed partial class SquadEntry : PanelContainer
                     if (nameLabel != null)
                     {
                         nameLabel.FontColorOverride = status?.IsAlive != true
-                            ? Color.FromHex("#888888")
-                            : SecApartmentStyles.TextColor;
+                            ? theme.MemberDeadText
+                            : theme.Text;
                     }
 
                     var statusIcon = nameContainer.Children.OfType<AnimatedTextureRect>().FirstOrDefault();
@@ -443,12 +435,12 @@ public sealed partial class SquadEntry : PanelContainer
         if (locationInfo.HasLocation && !string.IsNullOrWhiteSpace(locationInfo.Location))
         {
             SquadLocationLabel.Text = locationInfo.Location;
-            SquadLocationLabel.FontColorOverride = SecApartmentStyles.TextColor;
+            SquadLocationLabel.FontColorOverride = _styles.Theme.Text;
         }
         else
         {
             SquadLocationLabel.Text = Loc.GetString("sec-apartment-unknown");
-            SquadLocationLabel.FontColorOverride = SecApartmentStyles.TabInactiveColor;
+            SquadLocationLabel.FontColorOverride = _styles.Theme.TabInactive;
         }
     }
 

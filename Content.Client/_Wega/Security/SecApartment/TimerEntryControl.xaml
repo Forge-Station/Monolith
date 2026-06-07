@@ -1,6 +1,5 @@
 <!-- Forge-Change -->
 <PanelContainer xmlns="https://spacestation14.io"
-                xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                 HorizontalExpand="True"
                 Margin="0 0 0 5">
 
@@ -14,13 +13,11 @@
 
             <Label Name="TimerLabel"
                    HorizontalExpand="True"
-                   FontColorOverride="#ff9999"
                    Margin="0 0 10 0" />
 
             <Label Name="TimeLabel"
                    MinWidth="80"
-                   HorizontalAlignment="Right"
-                   FontColorOverride="#ff6666" />
+                   HorizontalAlignment="Right" />
 
             <Button Name="RemoveButton"
                     Text="{Loc 'sec-apartment-ui-timers-remove'}"
@@ -34,21 +31,18 @@
                       HorizontalExpand="True"
                       VerticalAlignment="Center">
 
-            <Label Text="{Loc 'sec-apartment-ui-timers-total-time'}"
-                   FontColorOverride="#ff8888"
+            <Label Name="TotalTimeHeaderLabel"
+                   Text="{Loc 'sec-apartment-ui-timers-total-time'}"
+                   StyleClasses="ConsoleSubHeading"
                    Margin="0 0 5 0" />
 
             <Label Name="TotalTimeLabel"
                    HorizontalExpand="True"
-                   FontColorOverride="#ffaaaa" />
+                   StyleClasses="ConsoleText" />
 
         </BoxContainer>
 
-        <PanelContainer StyleClasses="LowDivider" HorizontalExpand="True" Margin="0 2 0 2" SetHeight="1">
-            <PanelContainer.PanelOverride>
-                <gfx:StyleBoxFlat BackgroundColor="#ff4444" />
-            </PanelContainer.PanelOverride>
-        </PanelContainer>
+        <PanelContainer Name="Divider" StyleClasses="LowDivider" HorizontalExpand="True" Margin="0 2 0 2" SetHeight="1"/>
 
     </BoxContainer>
 

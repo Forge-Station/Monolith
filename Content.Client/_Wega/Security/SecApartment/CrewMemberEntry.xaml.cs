@@ -73,10 +73,12 @@ public sealed partial class CrewMemberEntry : PanelContainer
 
     private void SetupStyles()
     {
+        var theme = _styles.Theme;
+
         PanelOverride = new StyleBoxFlat
         {
-            BackgroundColor = Color.FromHex("#441111"),
-            BorderColor = SecApartmentStyles.TabActiveColor,
+            BackgroundColor = theme.EntryBackground,
+            BorderColor = theme.EntryBorder,
             BorderThickness = new Thickness(1),
             ContentMarginBottomOverride = 4,
             ContentMarginLeftOverride = 8,

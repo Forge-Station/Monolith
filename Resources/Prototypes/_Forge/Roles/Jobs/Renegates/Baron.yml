@@ -28,7 +28,6 @@
   setPreference: true
   access:
   - RenegateOfficer
-  - RenegateSecApartment
   accessGroups:
   - CommandRenegateAccess
   special:

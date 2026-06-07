@@ -23,11 +23,8 @@
   canBeAntag: false
   accessGroups:
   - AllAccessMono #Mono
-  # Forge-Change-Start
   access:
   - ChiefMedicalOfficer #Mono
-  - NtSecApartment
-  # Forge-Change-End
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TTITrackingImplant ] # Forge-change

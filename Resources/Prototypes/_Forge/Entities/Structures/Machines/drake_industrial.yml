@@ -106,6 +106,8 @@
     - MonoUraniumProcessing
     - DrakeCentrifugeUraniumProcessing
     - DrakeCentrifugePlastitaniumProcessing
+    - MonoIriditeProcessing
+    - DrakeCentrifugeIriditeProcessing
   - type: Fixtures
     fixtures:
       fix1:

@@ -34,11 +34,15 @@ gunnery-panel-collapse-controls = Свернуть панель управлен
 gunnery-panel-expand-controls = Развернуть панель управления
 gunnery-panel-collapse-weapons = Свернуть список орудий
 gunnery-panel-expand-weapons = Развернуть список орудий
+gunnery-panel-collapse-presets = Свернуть списки орудий
+gunnery-panel-expand-presets = Развернуть списки орудий
 
 gunnery-presets-title = Списки орудий
 gunnery-preset-name-placeholder = Название списка
 gunnery-preset-load = Выбрать
 gunnery-preset-save = Сохранить список
+gunnery-preset-save-name = Сохранить название
+gunnery-preset-apply = Применить список
 gunnery-preset-default-name = Список {$number}
 gunnery-preset-save-target = {$name}
 gunnery-preset-saved = Список «{$name}» сохранён ({$count}).

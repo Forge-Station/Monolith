@@ -30,6 +30,8 @@ using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
 using Content.Client._Mono.Company; // Mono
 // using Content.Client._Mono.MonoCoins; // Forge-Change: MonoCoins disabled
+using Content.Client.Corvax.ExportSprites; // Corvax-Wiki
+
 
 namespace Content.Client.IoC
 {
@@ -39,6 +41,8 @@ namespace Content.Client.IoC
         {
             var collection = IoCManager.Instance!;
 
+            collection.Register<EntityScreenshotRenderService>(); // Corvax-Wiki
+            collection.Register<EntityScreenshotGenerator>(); // Corvax-Wiki
             collection.Register<IParallaxManager, ParallaxManager>();
             collection.Register<GeneratedParallaxCache>();
             collection.Register<IChatManager, ChatManager>();

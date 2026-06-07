@@ -4,8 +4,11 @@
   id: DrakeMachine2x2Base
   abstract: true
   components:
+  - type: Transform
+    noRot: true
   - type: Sprite
     offset: 0.5,-0.5
+    snapCardinals: false
   - type: Construction
     graph: Machine2x2
     node: machine
@@ -32,6 +35,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/drake_ore_processor_mk2.rsi
     offset: 0.5,-0.5
+    snapCardinals: false
     layers:
     - state: icon
       map: ["enum.LatheVisualLayers.IsRunning"]
@@ -49,6 +53,17 @@
     timeMultiplier: 0.25
     idleState: icon
     runningState: building
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "1.25,0.25,-0.25,-1.25"
+        density: 250
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
 
 - type: entity
   parent: ScrapProcessor
@@ -71,6 +86,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/drake_uranium_centrifuge.rsi
     offset: 0.5,-0.5
+    snapCardinals: false
     layers:
     - state: icon
       map: [ "enum.LatheVisualLayers.IsRunning" ]
@@ -90,3 +106,14 @@
     - MonoUraniumProcessing
     - DrakeCentrifugeUraniumProcessing
     - DrakeCentrifugePlastitaniumProcessing
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "1.25,0.25,-0.25,-1.25"
+        density: 250
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer

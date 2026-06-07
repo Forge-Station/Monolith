@@ -28,7 +28,7 @@
                 <BoxContainer Orientation="Vertical">
 
                     <BoxContainer Orientation="Horizontal" Margin="10 5 10 0">
-                        <Label Text="{Loc 'sec-apartment-ui-station'}" StyleClasses="ConsoleSubHeading"/>
+                        <Label Name="FactionLabel" StyleClasses="ConsoleSubHeading"/>
                         <Label Name="StationLabel" StyleClasses="ConsoleHeading"
                                HorizontalExpand="True" HorizontalAlignment="Right"/>
                     </BoxContainer>

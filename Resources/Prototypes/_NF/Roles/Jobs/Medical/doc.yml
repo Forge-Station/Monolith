@@ -25,6 +25,7 @@
   - AllAccessMono #Mono
   access:
   - ChiefMedicalOfficer #Mono
+  - NtSecApartment
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TTITrackingImplant ] # Forge-change

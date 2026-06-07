@@ -49,12 +49,6 @@ public sealed partial class SecApartmentSystem : EntitySystem
         "Adventurer"
     };
 
-    private static readonly HashSet<string> NanoTrasenVisibleCompanies = new()
-    {
-        "Colonial",
-        "MD"
-    };
-
     private static readonly HashSet<string> DebugSquadDepartments = new()
     {
         "TSF",
@@ -156,23 +150,17 @@ public sealed partial class SecApartmentSystem : EntitySystem
         return _departmentJobs.TryGetValue(departmentId, out var jobs) && jobs.Contains(jobId);
     }
 
-    private bool IsJobVisibleForDepartment(string departmentId, string jobId)
+    private bool IsJobVisibleForTablet(SecApartmentComponent comp, string jobId)
     {
-        if (IsJobInDepartment(departmentId, jobId))
-            return true;
-
-        return departmentId == "NanoTrasen" &&
-               _prototype.TryIndex<JobPrototype>(jobId, out var job) &&
-               NanoTrasenVisibleCompanies.Contains(job.AssignedCompany.ToString());
+        return _prototype.TryIndex<JobPrototype>(jobId, out var job) && IsJobVisibleForTablet(comp, job);
     }
 
-    private bool IsJobVisibleForDepartment(string departmentId, JobPrototype job)
+    private bool IsJobVisibleForTablet(SecApartmentComponent comp, JobPrototype job)
     {
-        if (IsJobInDepartment(departmentId, job.ID))
-            return true;
+        if (comp.VisibleCompanies.Count > 0)
+            return comp.VisibleCompanies.Contains(job.AssignedCompany);
 
-        return departmentId == "NanoTrasen" &&
-               NanoTrasenVisibleCompanies.Contains(job.AssignedCompany.ToString());
+        return IsJobInDepartment(comp.Department, job.ID);
     }
 
     private static bool IsDebugAssignableOffStationJob(string jobId)
@@ -204,7 +192,6 @@ public sealed partial class SecApartmentSystem : EntitySystem
         return department switch
         {
             "TSF" => "TSFSquadIcon",
-            "NanoTrasen" => "NanoTrasenSquadIcon",
             "Empire" => "EmpireSquadIcon",
             "UnionOfSovietSocialistPlanets" => "USSPSquadIcon",
             "Renegates" => "RenegateSquadIcon",
@@ -244,8 +231,6 @@ public sealed partial class SecApartmentSystem : EntitySystem
 
         if (!_ui.IsUiOpen(uid, SecApartmentUiKey.Key))
             return;
-
-        UpdateUi(uid, comp);
 
         var statusUpdate = new SensorStatusUpdateState(statusDict, squadLocations);
         _ui.ServerSendUiMessage(uid, SecApartmentUiKey.Key, statusUpdate);
@@ -435,7 +420,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
         if (!UserHasTabletInActiveHand(user, tablet))
             return false;
 
-        if (comp.RequireUserDepartment && !UserHasDepartment(user, comp.Department))
+        if (comp.RequireUserDepartment && !UserCanAccessTablet(user, comp))
             return false;
 
         return _access.IsAllowed(user, tablet);
@@ -448,12 +433,12 @@ public sealed partial class SecApartmentSystem : EntitySystem
                activeItem == tablet;
     }
 
-    private bool UserHasDepartment(EntityUid user, string department)
+    private bool UserCanAccessTablet(EntityUid user, SecApartmentComponent comp)
     {
         if (!TryComp<MindContainerComponent>(user, out var mind) || !mind.HasMind)
             return false;
 
-        return _jobs.MindTryGetJob(mind.Mind, out var job) && IsJobVisibleForDepartment(department, job);
+        return _jobs.MindTryGetJob(mind.Mind, out var job) && IsJobVisibleForTablet(comp, job);
     }
 
     private void OnUIOpened(Entity<SecApartmentComponent> ent, ref BoundUIOpenedEvent args)
@@ -773,7 +758,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
         if (mob == null)
             return;
 
-        if (!comp.Debug && (!_jobs.MindTryGetJob(mind.Mind, out var job) || !IsJobVisibleForDepartment(comp.Department, job)))
+        if (!comp.Debug && (!_jobs.MindTryGetJob(mind.Mind, out var job) || !IsJobVisibleForTablet(comp, job)))
             return;
 
         var userNet = GetNetEntity(mob.Value);
@@ -814,7 +799,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
         {
             foreach (var entry in manifest.Entries)
             {
-                if (!comp.Debug && !IsJobVisibleForDepartment(comp.Department, entry.JobPrototype))
+                if (!comp.Debug && !IsJobVisibleForTablet(comp, entry.JobPrototype))
                     continue;
 
                 var member = CreateCrewMemberInfo(tablet, entry);
@@ -830,7 +815,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
             seenMemberIds,
             seenOwners,
             seenMinds,
-            comp.Debug ? null : comp.Department,
+            comp.Debug ? null : comp,
             comp.Debug);
 
         return result;
@@ -843,7 +828,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
         HashSet<string> seenMemberIds,
         HashSet<NetEntity> seenOwners,
         HashSet<NetEntity> seenMinds,
-        string? department,
+        SecApartmentComponent? tabletComp,
         bool debug)
     {
         var query = EntityQueryEnumerator<MindContainerComponent>();
@@ -856,8 +841,8 @@ public sealed partial class SecApartmentSystem : EntitySystem
             if (mob == null)
                 continue;
 
-            if (department != null &&
-                (!_jobs.MindTryGetJob(mindContainer.Mind, out var job) || !IsJobVisibleForDepartment(department, job)))
+            if (tabletComp != null &&
+                (!_jobs.MindTryGetJob(mindContainer.Mind, out var job) || !IsJobVisibleForTablet(tabletComp, job)))
                 continue;
 
             if (!IsPlayerOnStation(mob.Value, station))

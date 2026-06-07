@@ -43,6 +43,7 @@
   setPreference: true
   access:
   - EmpireCommander
+  - EmpireSecApartment
   accessGroups:
   - CommandEmpireAccess
   special:

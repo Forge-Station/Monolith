@@ -34,7 +34,7 @@
     uiTheme: SecApUiThemeTSF
   - type: AccessReader
     requiredCompany: TSF
-    access: [["Command"]]
+    access: [["TsfSecApartment"]]
   - type: ActivatableUIRequiresAccess
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
@@ -104,7 +104,7 @@
     uiTheme: SecApUiThemeRenegates
   - type: AccessReader
     requiredCompany: Renegates
-    access: [["RenegateOfficer"]]
+    access: [["RenegateSecApartment"]]
   - type: ActivatableUIRequiresAccess
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
@@ -168,11 +168,14 @@
   - type: ToggleCellDraw
   - type: ActivatableUIRequiresPowerCell
   - type: SecApartment
-    department: NanoTrasen
+    department: Frontier
+    visibleCompanies:
+    - Colonial
+    - MD
     squadIconPrefix: NanoTrasenSquadIcon
     uiTheme: SecApUiThemeNanoTrasen
   - type: AccessReader
-    access: [["HeadOfPersonnel"], ["ChiefMedicalOfficer"]]
+    access: [["NtSecApartment"]]
   - type: ActivatableUIRequiresAccess
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
@@ -242,7 +245,7 @@
     uiTheme: SecApUiThemeEmpire
   - type: AccessReader
     requiredCompany: Imperial
-    access: [["EmpireCommander"]]
+    access: [["EmpireSecApartment"]]
   - type: ActivatableUIRequiresAccess
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
@@ -307,7 +310,7 @@
   - type: ActivatableUIRequiresPowerCell
   - type: SecApartment
     department: UnionOfSovietSocialistPlanets
-    requireUserDepartment: true
+    requireUserDepartment: false
     squadIconPrefix: USSPSquadIcon
     uiTheme: SecApUiThemeUSSP
   - type: CrewMonitoringConsole

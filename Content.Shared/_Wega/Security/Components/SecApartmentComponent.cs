@@ -1,4 +1,5 @@
 // Forge-Change
+using Content.Shared._Mono.Company;
 using Content.Shared.Medical.SuitSensor;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -13,10 +14,17 @@ public sealed partial class SecApartmentComponent : Component
     public EntityUid? Station;
 
     /// <summary>
-    /// Department whose crew can be assigned to squads by this tablet.
+    /// Department tag for squads created by this tablet.
+    /// When <see cref="VisibleCompanies"/> is empty, also filters assignable crew by department roles.
     /// </summary>
     [DataField, AutoNetworkedField]
     public string Department = "Security";
+
+    /// <summary>
+    /// When set, only crew whose job belongs to one of these companies can be assigned to squads.
+    /// </summary>
+    [DataField]
+    public List<ProtoId<CompanyPrototype>> VisibleCompanies = new();
 
     // Forge-Change-start
     /// <summary>

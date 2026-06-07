@@ -1,7 +1,6 @@
 # Forge-Change
 sec-apartment-ui-sec-apartment = SecApartment
-sec-apartment-ui-station = СТАНЦИЯ
-sec-apartment-ui-mark = {$time} | {$station}
+sec-apartment-ui-mark = {$time}
 sec-apartment-ui-no-squads-crew = Неназначенный персонал
 sec-apartment-ui-unassigned-alive = Неназначенные
 sec-apartment-ui-unassigned-dead = Мёртвые

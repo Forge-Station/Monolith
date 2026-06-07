@@ -1,8 +1,8 @@
 # departament's
 department-Empire = Священная Империя Вермиллионов
-department-NanoTrasen = NanoTrasen
 department-Renegates = Восставшие колонии Ренегатов
 department-TSF = Транс-Солнечная Федерация
+department-UnionOfSovietSocialistPlanets = Союз Советских Социалистических Планет
 
 # Outpost
 forge-job-name-outpostmedic = Врач АФ

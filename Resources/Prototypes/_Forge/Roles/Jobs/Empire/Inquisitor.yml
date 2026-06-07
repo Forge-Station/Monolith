@@ -36,6 +36,7 @@
   access:
   - EmpireInqusitor
   - EmpireSmallInq
+  - EmpireSecApartment
   accessGroups:
   - CommandEmpireAccess
   special:
@@ -49,11 +50,6 @@
 
 - type: startingGear
   id: InquisitorGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF
+  storage:
+    back:
+    - EmpireSecApartmentTablet

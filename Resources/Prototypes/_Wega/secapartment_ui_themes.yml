@@ -6,7 +6,7 @@
 
 
 
-# Служба безопасности / отладочный планшет (тёмно-красный + акценты, без кричащей плашки)
+# Служба безопасности / отладочный планшет (тёмно-красный, без розового и неона)
 
 - type: secApUiTheme
 
@@ -20,81 +20,81 @@
 
   logoTexture: /Textures/Interface/Nano/ntlogo.svg.png
 
-  windowBackground: "#101010"
+  windowBackground: "#0a0606"
 
-  windowBorder: "#3a2020"
+  windowBorder: "#381010"
 
-  contentBackground: "#662020"
+  contentBackground: "#401010"
 
-  contentBorder: "#441414"
+  contentBorder: "#2c0a0a"
 
-  closeButton: "#dd4848"
+  closeButton: "#b03030"
 
-  divider: "#993333"
+  divider: "#681818"
 
-  listPanelBackground: "#1a0808"
+  listPanelBackground: "#120505"
 
-  listPanelBorder: "#882828"
+  listPanelBorder: "#581414"
 
-  createSquadPanelBackground: "#2a1010"
+  createSquadPanelBackground: "#1a0606"
 
-  createSquadPanelBorder: "#882828"
+  createSquadPanelBorder: "#581414"
 
-  cardBackground: "#3a1414"
+  cardBackground: "#220808"
 
-  cardBorder: "#aa3333"
+  cardBorder: "#701818"
 
-  entryBackground: "#120606"
+  entryBackground: "#0c0303"
 
-  entryBorder: "#882828"
+  entryBorder: "#581414"
 
-  memberAliveBackground: "#3a1010"
+  memberAliveBackground: "#260808"
 
-  memberAliveBorder: "#cc5555"
+  memberAliveBorder: "#983030"
 
-  memberDeadBackground: "#0a0404"
+  memberDeadBackground: "#080303"
 
-  memberDeadBorder: "#662222"
+  memberDeadBorder: "#341010"
 
-  memberDeadText: "#886666"
+  memberDeadText: "#583838"
 
-  tabActive: "#ee5555"
+  tabActive: "#b83838"
 
-  tabInactive: "#aa6060"
+  tabInactive: "#684040"
 
-  heading: "#ee5555"
+  heading: "#c04040"
 
-  text: "#dd9999"
+  text: "#a05858"
 
-  subText: "#bb7070"
+  subText: "#884040"
 
-  placeholder: "#994444"
+  placeholder: "#582020"
 
-  buttonBackground: "#551818"
+  buttonBackground: "#341010"
 
-  buttonBorder: "#aa3333"
+  buttonBorder: "#701818"
 
-  lineEditBackground: "#120606"
+  lineEditBackground: "#0c0303"
 
-  optionBackground: "#2a1010"
+  optionBackground: "#1a0606"
 
-  tabActiveBackground: "#441818"
+  tabActiveBackground: "#341010"
 
-  tabInactiveBackground: "#1a0808"
+  tabInactiveBackground: "#120505"
 
-  panelBackground: "#0a0404"
+  panelBackground: "#080303"
 
-  timerOverdue: "#cc3333"
+  timerOverdue: "#a02828"
 
-  timerCritical: "#cc5533"
+  timerCritical: "#a83030"
 
-  timerWarning: "#cc7733"
+  timerWarning: "#a83838"
 
-  timerNormal: "#dd9999"
+  timerNormal: "#a05858"
 
 
 
-# ТСФ — тёмно-синий (navy), без голубого/cyan
+# ТСФ — тёмный navy, синий акцент без неона и серого
 
 - type: secApUiTheme
 
@@ -106,81 +106,81 @@
 
   showOsStripe: false
 
-  windowBackground: "#060810"
+  windowBackground: "#060818"
 
-  windowBorder: "#1a2840"
+  windowBorder: "#142858"
 
-  contentBackground: "#0e1a2c"
+  contentBackground: "#0c1438"
 
-  contentBorder: "#1a3050"
+  contentBorder: "#101c48"
 
-  closeButton: "#4a78a8"
+  closeButton: "#3060a0"
 
-  divider: "#2a4870"
+  divider: "#1e3468"
 
-  listPanelBackground: "#0a121c"
+  listPanelBackground: "#080c28"
 
-  listPanelBorder: "#243858"
+  listPanelBorder: "#182858"
 
-  createSquadPanelBackground: "#101c2c"
+  createSquadPanelBackground: "#0a1030"
 
-  createSquadPanelBorder: "#243858"
+  createSquadPanelBorder: "#182858"
 
-  cardBackground: "#101c2c"
+  cardBackground: "#0c1438"
 
-  cardBorder: "#2a4870"
+  cardBorder: "#203060"
 
-  entryBackground: "#080e18"
+  entryBackground: "#060818"
 
-  entryBorder: "#243858"
+  entryBorder: "#182858"
 
-  memberAliveBackground: "#142438"
+  memberAliveBackground: "#0e1838"
 
-  memberAliveBorder: "#5078a0"
+  memberAliveBorder: "#3868a0"
 
-  memberDeadBackground: "#060810"
+  memberDeadBackground: "#060818"
 
-  memberDeadBorder: "#1e3048"
+  memberDeadBorder: "#142048"
 
-  memberDeadText: "#4a5870"
+  memberDeadText: "#304868"
 
-  tabActive: "#5888b8"
+  tabActive: "#4078b0"
 
-  tabInactive: "#506880"
+  tabInactive: "#304870"
 
-  heading: "#6898b8"
+  heading: "#4878a8"
 
-  text: "#98a8c0"
+  text: "#6888a8"
 
-  subText: "#7088a0"
+  subText: "#486888"
 
-  placeholder: "#485870"
+  placeholder: "#304060"
 
-  buttonBackground: "#1a3050"
+  buttonBackground: "#101c48"
 
-  buttonBorder: "#4870a0"
+  buttonBorder: "#284878"
 
-  lineEditBackground: "#080e18"
+  lineEditBackground: "#060818"
 
-  optionBackground: "#101c2c"
+  optionBackground: "#0a1030"
 
-  tabActiveBackground: "#1a3050"
+  tabActiveBackground: "#101c48"
 
-  tabInactiveBackground: "#0a121c"
+  tabInactiveBackground: "#080c28"
 
-  panelBackground: "#060810"
+  panelBackground: "#060818"
 
-  timerOverdue: "#b05050"
+  timerOverdue: "#a04848"
 
-  timerCritical: "#b07848"
+  timerCritical: "#a05848"
 
-  timerWarning: "#90a848"
+  timerWarning: "#a06848"
 
-  timerNormal: "#98a8c0"
+  timerNormal: "#6888a8"
 
 
 
-# Ренегаты — оранж как на спрайте (яркий экран #E87820, тёмная рамка #8B4020)
+# Ренегаты — тёмный ржавый фон, оранжевый акцент как на рамке спрайта (#8B4020)
 
 - type: secApUiTheme
 
@@ -194,79 +194,79 @@
 
   windowBackground: "#0c0806"
 
-  windowBorder: "#6b3018"
+  windowBorder: "#5a2810"
 
-  contentBackground: "#D07020"
+  contentBackground: "#2a1408"
 
-  contentBorder: "#8B4020"
+  contentBorder: "#6b3018"
 
-  closeButton: "#E88828"
+  closeButton: "#c07028"
 
-  divider: "#C06018"
+  divider: "#8b4020"
 
-  listPanelBackground: "#2a1006"
+  listPanelBackground: "#1e0c04"
 
-  listPanelBorder: "#B85818"
+  listPanelBorder: "#7a3818"
 
-  createSquadPanelBackground: "#3a1808"
+  createSquadPanelBackground: "#2a1006"
 
-  createSquadPanelBorder: "#B85818"
+  createSquadPanelBorder: "#7a3818"
 
-  cardBackground: "#3a1808"
+  cardBackground: "#2a1006"
 
-  cardBorder: "#C86820"
+  cardBorder: "#8b4020"
 
-  entryBackground: "#1e0c04"
+  entryBackground: "#140804"
 
-  entryBorder: "#B85818"
+  entryBorder: "#6a3018"
 
-  memberAliveBackground: "#4a2810"
+  memberAliveBackground: "#3a1c08"
 
-  memberAliveBorder: "#E09040"
+  memberAliveBorder: "#b86828"
 
-  memberDeadBackground: "#100806"
+  memberDeadBackground: "#0c0604"
 
-  memberDeadBorder: "#6a4018"
+  memberDeadBorder: "#4a2810"
 
-  memberDeadText: "#8a6038"
+  memberDeadText: "#7a5838"
 
-  tabActive: "#F09838"
+  tabActive: "#d08030"
 
-  tabInactive: "#C07838"
+  tabInactive: "#9a6838"
 
-  heading: "#F0A040"
+  heading: "#d08838"
 
-  text: "#F0C888"
+  text: "#c8a878"
 
-  subText: "#D89050"
+  subText: "#a07848"
 
-  placeholder: "#A86020"
+  placeholder: "#7a5020"
 
-  buttonBackground: "#6a3818"
+  buttonBackground: "#4a2810"
 
-  buttonBorder: "#E08030"
+  buttonBorder: "#a06028"
 
-  lineEditBackground: "#1e0c04"
+  lineEditBackground: "#140804"
 
-  optionBackground: "#3a1808"
+  optionBackground: "#2a1006"
 
-  tabActiveBackground: "#6a3818"
+  tabActiveBackground: "#4a2810"
 
-  tabInactiveBackground: "#2a1006"
+  tabInactiveBackground: "#1e0c04"
 
-  panelBackground: "#100806"
+  panelBackground: "#0c0806"
 
-  timerOverdue: "#c84830"
+  timerOverdue: "#a84830"
 
-  timerCritical: "#c87030"
+  timerCritical: "#a86830"
 
-  timerWarning: "#e08830"
+  timerWarning: "#b07830"
 
-  timerNormal: "#F0C888"
+  timerNormal: "#c8a878"
 
 
 
-# НаноТразен — корпоративное золото на синем сланце (не песочный)
+# НаноТразен — насыщенный тёмно-синий (глубже ТСФ), лого/футер NT
 
 - type: secApUiTheme
 
@@ -280,77 +280,77 @@
 
   logoTexture: /Textures/Interface/Nano/ntlogo.svg.png
 
-  windowBackground: "#0c1014"
+  windowBackground: "#05081c"
 
-  windowBorder: "#3a4868"
+  windowBorder: "#183070"
 
-  contentBackground: "#2a4060"
+  contentBackground: "#0a1c48"
 
-  contentBorder: "#3a5070"
+  contentBorder: "#0e2258"
 
-  closeButton: "#c9a44c"
+  closeButton: "#3870b8"
 
-  divider: "#a08040"
+  divider: "#1a3880"
 
-  listPanelBackground: "#182030"
+  listPanelBackground: "#060c30"
 
-  listPanelBorder: "#9a7838"
+  listPanelBorder: "#1a3270"
 
-  createSquadPanelBackground: "#1e2a40"
+  createSquadPanelBackground: "#081438"
 
-  createSquadPanelBorder: "#9a7838"
+  createSquadPanelBorder: "#1a3270"
 
-  cardBackground: "#1e2a40"
+  cardBackground: "#0a1c48"
 
-  cardBorder: "#b08848"
+  cardBorder: "#204080"
 
-  entryBackground: "#141c28"
+  entryBackground: "#05081c"
 
-  entryBorder: "#9a7838"
+  entryBorder: "#1a3270"
 
-  memberAliveBackground: "#283848"
+  memberAliveBackground: "#0c2050"
 
-  memberAliveBorder: "#d4b878"
+  memberAliveBorder: "#4080c0"
 
-  memberDeadBackground: "#0c1014"
+  memberDeadBackground: "#05081c"
 
-  memberDeadBorder: "#4a4838"
+  memberDeadBorder: "#142050"
 
-  memberDeadText: "#787868"
+  memberDeadText: "#305080"
 
-  tabActive: "#e0c050"
+  tabActive: "#4888c0"
 
-  tabInactive: "#a89058"
+  tabInactive: "#345890"
 
-  heading: "#e8c878"
+  heading: "#5090c8"
 
-  text: "#f0e8c8"
+  text: "#6098d0"
 
-  subText: "#c0a868"
+  subText: "#4878a8"
 
-  placeholder: "#887848"
+  placeholder: "#304878"
 
-  buttonBackground: "#304058"
+  buttonBackground: "#0e2258"
 
-  buttonBorder: "#c9a44c"
+  buttonBorder: "#3068a8"
 
-  lineEditBackground: "#141c28"
+  lineEditBackground: "#05081c"
 
-  optionBackground: "#1e2a40"
+  optionBackground: "#081438"
 
-  tabActiveBackground: "#344868"
+  tabActiveBackground: "#0e2258"
 
-  tabInactiveBackground: "#182030"
+  tabInactiveBackground: "#060c30"
 
-  panelBackground: "#0c1014"
+  panelBackground: "#05081c"
 
-  timerOverdue: "#b04040"
+  timerOverdue: "#a04848"
 
-  timerCritical: "#b07840"
+  timerCritical: "#a05848"
 
-  timerWarning: "#c9a44c"
+  timerWarning: "#a06848"
 
-  timerNormal: "#f0e8c8"
+  timerNormal: "#6098d0"
 
 
 
@@ -440,7 +440,7 @@
 
 
 
-# СССП — хаки и приглушённый кирпично-красный
+# СССП — тёмный бордо, приглушённое золото (корпус USSP.rsi, без кислотного пергамента)
 
 - type: secApUiTheme
 
@@ -452,77 +452,77 @@
 
   showOsStripe: false
 
-  windowBackground: "#0a0c08"
+  windowBackground: "#120606"
 
-  windowBorder: "#3a3820"
+  windowBorder: "#6a4820"
 
-  contentBackground: "#2a2818"
+  contentBackground: "#1e0a0a"
 
-  contentBorder: "#403828"
+  contentBorder: "#3a1414"
 
-  closeButton: "#a84848"
+  closeButton: "#903838"
 
-  divider: "#6a4830"
+  divider: "#5a3818"
 
-  listPanelBackground: "#1e1c12"
+  listPanelBackground: "#180808"
 
-  listPanelBorder: "#5a5030"
+  listPanelBorder: "#5a3818"
 
-  createSquadPanelBackground: "#282418"
+  createSquadPanelBackground: "#201010"
 
-  createSquadPanelBorder: "#5a5030"
+  createSquadPanelBorder: "#5a3818"
 
-  cardBackground: "#282418"
+  cardBackground: "#201010"
 
-  cardBorder: "#7a6838"
+  cardBorder: "#6a4820"
 
-  entryBackground: "#181610"
+  entryBackground: "#140606"
 
-  entryBorder: "#5a5030"
+  entryBorder: "#5a3818"
 
-  memberAliveBackground: "#343020"
+  memberAliveBackground: "#281010"
 
-  memberAliveBorder: "#c0a868"
+  memberAliveBorder: "#8a6830"
 
-  memberDeadBackground: "#121008"
+  memberDeadBackground: "#0c0404"
 
-  memberDeadBorder: "#484030"
+  memberDeadBorder: "#3a2010"
 
-  memberDeadText: "#787060"
+  memberDeadText: "#685040"
 
-  tabActive: "#c05858"
+  tabActive: "#b08840"
 
-  tabInactive: "#a09058"
+  tabInactive: "#806038"
 
-  heading: "#c87878"
+  heading: "#c8a868"
 
-  text: "#e8dcc0"
+  text: "#b8a080"
 
-  subText: "#b8a868"
+  subText: "#987850"
 
-  placeholder: "#887848"
+  placeholder: "#684830"
 
-  buttonBackground: "#3a3420"
+  buttonBackground: "#281010"
 
-  buttonBorder: "#a85848"
+  buttonBorder: "#6a4820"
 
-  lineEditBackground: "#181610"
+  lineEditBackground: "#140606"
 
-  optionBackground: "#282418"
+  optionBackground: "#201010"
 
-  tabActiveBackground: "#343020"
+  tabActiveBackground: "#301414"
 
-  tabInactiveBackground: "#1e1c12"
+  tabInactiveBackground: "#180808"
 
-  panelBackground: "#121008"
+  panelBackground: "#120606"
 
-  timerOverdue: "#a84848"
+  timerOverdue: "#903030"
 
-  timerCritical: "#a87048"
+  timerCritical: "#a04830"
 
-  timerWarning: "#b8a058"
+  timerWarning: "#a07840"
 
-  timerNormal: "#e8dcc0"
+  timerNormal: "#b8a080"
 
 # Forge-Change-end
 

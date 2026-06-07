@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Client._Wega.Stylesheets;
 using Content.Client.GameTicking.Managers;
 using Content.Client.Resources;
+using Content.Shared.Roles;
 using Content.Shared.SecApartment;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
@@ -43,17 +44,17 @@ public partial class SecApartmentWindow : BaseWindow
     private readonly SpriteSystem _sprite;
 
     private readonly SecApartmentStyles _styles;
-    private string _station = Loc.GetString("sec-apartment-unknown");
+    private string _factionLabel = Loc.GetString("sec-apartment-unknown");
     private ProtoId<SecApUiThemePrototype>? _activeUiTheme;
     private bool _showAliveUnassigned = true;
     private bool _showDeadUnassigned = true;
     private readonly Dictionary<string, bool> _showDebugSquadCategories = new()
     {
-        ["TSF"] = true,
-        ["NanoTrasen"] = true,
-        ["CIV"] = true,
-        ["USSP"] = true,
-        ["Renegates"] = true
+        ["TSF"] = false,
+        ["NanoTrasen"] = false,
+        ["CIV"] = false,
+        ["USSP"] = false,
+        ["Renegates"] = false
     };
     private List<CrewMemberInfo> _lastUnassignedCrew = new();
     private List<Squad> _lastSquads = new();
@@ -137,7 +138,7 @@ public partial class SecApartmentWindow : BaseWindow
         base.FrameUpdate(args);
 
         var stationTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
-        StationLabel.Text = Loc.GetString("sec-apartment-ui-mark", ("time", stationTime.ToString("hh\\:mm\\:ss")), ("station", _station));
+        StationLabel.Text = Loc.GetString("sec-apartment-ui-mark", ("time", stationTime.ToString("hh\\:mm\\:ss")));
     }
 
     private void SetupAllStyles()
@@ -151,6 +152,7 @@ public partial class SecApartmentWindow : BaseWindow
     {
         var theme = _styles.Theme;
 
+        FactionLabel.FontColorOverride = theme.SubText;
         StationLabel.FontColorOverride = theme.Heading;
         StationLabel.FontOverride = _styles.GetBoldFont(16);
 
@@ -248,9 +250,18 @@ public partial class SecApartmentWindow : BaseWindow
         CreateSquadButton.Disabled = string.IsNullOrWhiteSpace(NewSquadName.Text);
     }
 
+    private string GetFactionLabel(string departmentId)
+    {
+        if (_prototypeManager.TryIndex<DepartmentPrototype>(departmentId, out var department))
+            return Loc.GetString(department.Name);
+
+        return Loc.GetString("sec-apartment-unknown");
+    }
+
     public void UpdateState(SecApartmentUpdateState state)
     {
-        _station = state.StationName?.ToUpperInvariant() ?? Loc.GetString("sec-apartment-unknown");
+        _factionLabel = GetFactionLabel(state.Department);
+        FactionLabel.Text = _factionLabel;
         DebugSquadDepartmentDropdown.Visible = state.Debug;
 
         UpdateUnassignedList(state.UnassignedSecurity, state.Squads);
@@ -316,6 +327,10 @@ public partial class SecApartmentWindow : BaseWindow
             BorderColor = border,
             BorderThickness = new Thickness(borderThickness)
         };
+
+        // AngleRect stylesheet modulates panels to #292929 — washes out light palettes.
+        if (_styles.Theme.ID == "SecApUiThemeUSSP")
+            panel.ModulateSelfOverride = Color.White;
     }
 
     private void ApplyThemeToLabels(Control parent)
@@ -324,7 +339,7 @@ public partial class SecApartmentWindow : BaseWindow
 
         foreach (var child in parent.Children)
         {
-            if (child is Label label && label != StationLabel && label != UnassignedCountLabel
+            if (child is Label label && label != FactionLabel && label != StationLabel && label != UnassignedCountLabel
                 && label != SquadsCountLabel && label != TimersCountLabel && label != Footer)
             {
                 if (label.StyleClasses.Contains("ConsoleSubHeading") || label.StyleClasses.Contains("LabelSubText")
@@ -332,7 +347,8 @@ public partial class SecApartmentWindow : BaseWindow
                 {
                     label.FontColorOverride = theme.SubText;
                 }
-                else if (label.StyleClasses.Contains("ConsoleHeading"))
+                else if (label.StyleClasses.Contains("ConsoleHeading")
+                         || label.StyleClasses.Contains("ConsoleHeadingBig"))
                 {
                     label.FontColorOverride = theme.Heading;
                 }
@@ -477,7 +493,7 @@ public partial class SecApartmentWindow : BaseWindow
 
     private void AddSquadCategory(string key, string title, List<Squad> squads, bool debug)
     {
-        var expanded = _showDebugSquadCategories.GetValueOrDefault(key, true);
+        var expanded = _showDebugSquadCategories.GetValueOrDefault(key, false);
         var categoryContainer = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,

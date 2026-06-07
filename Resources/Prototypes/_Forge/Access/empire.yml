@@ -30,6 +30,10 @@
   id: NtSecApartment
   name: id-card-access-level-nt-sec-apartment
 
+- type: accessLevel
+  id: EmpireSecApartment
+  name: id-card-access-level-empire-sec-apartment
+
 # yay
 - type: accessGroup
   id: GeneralEmpireAccess

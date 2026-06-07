@@ -43,7 +43,8 @@
       Plasteel: 20
       Gold: 15
       Copper: 40
-      Lithium: 10
+      Lithium: 5
+      Iridite: 1
 
 - type: entity
   id: ForgeShipWeaponCircuitboardT3
@@ -70,8 +71,9 @@
       Uranium: 10
       Silver: 20
       Copper: 60
-      Lithium: 15
+      Lithium: 10
       Plastitanium: 15
+      Iridite: 3
 
 - type: entity
   id: ForgeShipWeaponCircuitboardT4
@@ -97,13 +99,11 @@
       Plasma: 30
       Uranium: 20
       Bluespace: 5
-      Diamond: 5
       Silver: 30
       Copper: 80
-      Lithium: 20
-      Plastitanium: 50
-      UraniumDepleted: 5
-      # Iridite: 3
+      Lithium: 10
+      Plastitanium: 40
+      Iridite: 5
 
 - type: entity
   id: WeaponTurretL85AutocannonCircuitboard
@@ -196,8 +196,8 @@
       Bluespace: 5
       Silver: 30
       Copper: 60
-      Lithium: 60
-      UraniumDepleted: 3
+      Lithium: 30
+      Iridite: 3
   - type: Tag
     tags:
     - MachineBoard2x1
@@ -270,8 +270,8 @@
       Bluespace: 5
       Silver: 30
       Copper: 120
-      Lithium: 120
-      UraniumDepleted: 6
+      Lithium: 60
+      Iridite: 6
   - type: Tag
     tags:
     - MachineBoard2x2
@@ -379,13 +379,11 @@
       Plasma: 30
       Uranium: 20
       Bluespace: 5
-      Diamond: 15
       Silver: 30
       Copper: 80
-      Lithium: 20
+      Lithium: 15
       Plastitanium: 50
-      UraniumDepleted: 5
-      # Iridite: 3
+      Iridite: 10
   - type: Tag
     tags:
     - MachineBoard2x2
@@ -424,14 +422,11 @@
       Gold: 50
       Plasma: 40
       Uranium: 35
-      Bluespace: 5
-      Diamond: 5
       Silver: 40
-      Copper: 90
-      Lithium: 25
+      Copper: 40
+      Lithium: 15
       Plastitanium: 30
-      UraniumDepleted: 5
-      # Iridite: 5
+      Iridite: 5
   - type: Tag
     tags:
     - MachineBoard2x2

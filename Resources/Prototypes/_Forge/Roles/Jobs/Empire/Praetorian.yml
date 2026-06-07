@@ -50,3 +50,6 @@
 
 - type: startingGear
   id: PraetorianGear
+  storage:
+    back:
+    - PinpointerUniversal

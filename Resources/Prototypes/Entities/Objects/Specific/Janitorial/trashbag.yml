@@ -22,8 +22,10 @@
       tags:
         - Cartridge
         - Trash
+  # Forge-Change-Start
       components: # Frontier: added GoblinMade
         - GoblinMade # Frontier: added GoblinMade
+  # Forge-Change-End
   - type: UseDelay
     delay: 0.5
   - type: Tag

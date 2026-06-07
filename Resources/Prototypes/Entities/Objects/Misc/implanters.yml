@@ -86,7 +86,7 @@
           type: DeimplantBoundUserInterface
     - type: StaticPrice # Frontier
       price: 35 # Frontier
-  # Forge-Change-Start 
+  # Forge-Change-Start
     - type: Tag
       tags:
         - GoblinPreciousTrash
@@ -132,7 +132,7 @@
     - type: Implanter
       currentMode: Inject
       implantOnly: true
-# Forge-Change-Start 
+# Forge-Change-Start
     - type: Tag
       tags:
         - GoblinPreciousTrash
@@ -166,9 +166,11 @@
           implantOnly:
             True: {state: broken}
             False: {state: implanter1}
+    # Forge-Change-Start
     - type: Tag
       tags:
-        - GoblinPreciousTrash # Forge-Change
+        - GoblinPreciousTrash
+    # Forge-Change-End
 
 #Fun implanters
 

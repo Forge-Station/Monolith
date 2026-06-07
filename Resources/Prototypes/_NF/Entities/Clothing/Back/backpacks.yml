@@ -52,6 +52,7 @@
   - type: Sprite
     sprite: _NF/Clothing/Back/Backpacks/nfsd_cream.rsi
 
+# Forge-Change-Start
 - type: entity
   parent: [ RecyclableItemPlasticSmall, NFClothingBackpack ]
   id: NFGoblinMadeClothingBackpackTrashBlue
@@ -69,12 +70,7 @@
       collection: trashBagRustle
     storageInsertSound:
       collection: trashBagRustle
-    whitelist:
-      tags:
-        - Cartridge
-        - Trash
-      components:
-        - GoblinMade
   - type: Construction
     graph: NFGoblinMadeClothingBackpackTrashBlue
     node: NFGoblinMadeClothingBackpackTrashBlue
+# Forge-Change-End

@@ -14,7 +14,7 @@ namespace Content.Server.Atmos.EntitySystems
 {
     public sealed partial class AtmosphereSystem
     {
-        [Dependency] private readonly FirelockSystem _firelockSystem = default!;
+        [Dependency] private FirelockSystem _firelockSystem = default!;
 
         private readonly TileAtmosphereComparer _monstermosComparer = new();
 
@@ -38,16 +38,6 @@ namespace Content.Server.Atmos.EntitySystems
 
             var startingMoles = tile.Air.TotalMoles;
             var runAtmos = false;
-            var budgetCheckCounter = 0; // Forge-Change
-
-            bool ShouldYieldBudget() // Forge-Change
-            {
-                if (budgetCheckCounter++ < LagCheckIterations) // Forge-Change
-                    return false; // Forge-Change
-
-                budgetCheckCounter = 0; // Forge-Change
-                return _simulationStopwatch.Elapsed.TotalMilliseconds >= AtmosMaxProcessTime; // Forge-Change
-            }
 
             // We need to figure if this is necessary
             for (var i = 0; i < Atmospherics.Directions; i++)
@@ -107,9 +97,6 @@ namespace Content.Server.Atmos.EntitySystems
                         return;
                     }
                 }
-
-                if (ShouldYieldBudget()) // Forge-Change
-                    return; // Forge-Change
             }
 
             if (tileCount > Atmospherics.MonstermosTileLimit)
@@ -190,9 +177,6 @@ namespace Content.Server.Atmos.EntitySystems
                         otherTile.MonstermosInfo.MoleDelta -= molesToMove;
                         otherTile.AdjacentTiles[j]!.MonstermosInfo.MoleDelta += molesToMove;
                     }
-
-                    if (ShouldYieldBudget()) // Forge-Change
-                        return; // Forge-Change
                 }
 
                 giverTilesLength = 0;
@@ -267,9 +251,6 @@ namespace Content.Server.Atmos.EntitySystems
                                 }
                             }
                         }
-
-                        if (ShouldYieldBudget()) // Forge-Change
-                            return; // Forge-Change
                     }
 
                     // Putting this loop here helps make it O(n^2) over O(n^3)
@@ -284,9 +265,6 @@ namespace Content.Server.Atmos.EntitySystems
                             otherTile.MonstermosInfo.CurrentTransferAmount = 0;
                         }
                     }
-
-                    if (ShouldYieldBudget()) // Forge-Change
-                        return; // Forge-Change
                 }
             }
             else
@@ -340,9 +318,6 @@ namespace Content.Server.Atmos.EntitySystems
                                 }
                             }
                         }
-
-                        if (ShouldYieldBudget()) // Forge-Change
-                            return; // Forge-Change
                     }
 
                     for (var i = queueLength - 1; i >= 0; i--)
@@ -357,9 +332,6 @@ namespace Content.Server.Atmos.EntitySystems
                             .MonstermosInfo.CurrentTransferAmount += otherTile.MonstermosInfo.CurrentTransferAmount;
                         otherTile.MonstermosInfo.CurrentTransferAmount = 0;
                     }
-
-                    if (ShouldYieldBudget()) // Forge-Change
-                        return; // Forge-Change
                 }
             }
 
@@ -515,8 +487,7 @@ namespace Content.Server.Atmos.EntitySystems
                 var otherTile = _depressurizeProgressionOrder[i];
                 if (otherTile?.Air == null) { continue;}
                 if (otherTile.MonstermosInfo.CurrentTransferDirection == AtmosDirection.Invalid) continue;
-                var chunk = GetOrCreateChunkState(gridAtmosphere, GetAtmosChunk(otherTile.GridIndices));
-                AddChunkTile(gridAtmosphere, gridAtmosphere.HighPressureDelta, chunk.HighPressureTiles, otherTile); // Forge-Change
+                gridAtmosphere.HighPressureDelta.Add(otherTile);
                 AddActiveTile(gridAtmosphere, otherTile);
                 var otherTile2 = otherTile.AdjacentTiles[otherTile.MonstermosInfo.CurrentTransferDirection.ToIndex()];
                 if (otherTile2?.Air == null)
@@ -579,7 +550,7 @@ namespace Content.Server.Atmos.EntitySystems
                 }
 
                 InvalidateVisuals(ent, otherTile);
-                HandleDecompressionFloorRip(mapGrid, otherTile, otherTile.MonstermosInfo.CurrentTransferAmount);
+                HandleDecompressionFloorRip((owner, mapGrid), otherTile, otherTile.MonstermosInfo.CurrentTransferAmount);
             }
 
             if (GridImpulse && tileCount > 0)
@@ -711,7 +682,7 @@ namespace Content.Server.Atmos.EntitySystems
             adj.MonstermosInfo[idx.ToOppositeDir()] -= amount;
         }
 
-        private void HandleDecompressionFloorRip(MapGridComponent mapGrid, TileAtmosphere tile, float sum)
+        private void HandleDecompressionFloorRip(Entity<MapGridComponent> mapGrid, TileAtmosphere tile, float sum)
         {
             if (!MonstermosRipTiles)
                 return;

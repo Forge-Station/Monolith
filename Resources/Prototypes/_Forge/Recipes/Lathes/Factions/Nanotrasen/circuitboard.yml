@@ -55,10 +55,10 @@
 
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
-  id: LaserDrillFlatpack
-  result: LaserDrillFlatpack
+  id: LaserDrillCircuitboard
+  result: LaserDrillCircuitboard
   materials:
-    Glass: 100
+    Glass: 2000
     Steel: 300
     Gold: 15
    

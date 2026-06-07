@@ -553,6 +553,46 @@
     inverse: true
     reattaching: true
 
+- type: entity # Forge-Change
+  parent: SurgeryBase # Forge-Change
+  id: SurgeryRemoveKidneys # Forge-Change
+  name: Remove Kidneys # Forge-Change
+  categories: [ HideSpawnMenu ] # Forge-Change
+  components: # Forge-Change
+  - type: Surgery # Forge-Change
+    requirement: SurgeryOpenRibcage # Forge-Change
+    steps: # Forge-Change
+    - SurgeryStepSawBones # Forge-Change
+    - SurgeryStepClampInternalBleeders # Forge-Change
+    - SurgeryStepRemoveOrgan # Forge-Change
+  - type: SurgeryPartCondition # Forge-Change
+    part: Torso # Forge-Change
+  - type: SurgeryOrganCondition # Forge-Change
+    organ: # Forge-Change
+    - type: Kidney # Forge-Change
+
+- type: entity # Forge-Change
+  parent: SurgeryBase # Forge-Change
+  id: SurgeryInsertKidneys # Forge-Change
+  name: Insert Kidneys # Forge-Change
+  categories: [ HideSpawnMenu ] # Forge-Change
+  components: # Forge-Change
+  - type: Surgery # Forge-Change
+    requirement: SurgeryOpenRibcage # Forge-Change
+    steps: # Forge-Change
+    - SurgeryStepSawBones # Forge-Change
+    - SurgeryStepInsertKidneys # Forge-Change
+    - SurgeryStepSealOrganWound # Forge-Change
+  - type: SurgeryOrganSlotCondition # Forge-Change
+    organSlot: kidneys # Forge-Change
+  - type: SurgeryPartCondition # Forge-Change
+    part: Torso # Forge-Change
+  - type: SurgeryOrganCondition # Forge-Change
+    organ: # Forge-Change
+    - type: Kidney # Forge-Change
+    inverse: true # Forge-Change
+    reattaching: true # Forge-Change
+
 - type: entity
   parent: SurgeryBase
   id: SurgeryRemoveEyes

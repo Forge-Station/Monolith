@@ -1,14 +1,6 @@
 # Base entries
 guide-entry-nf14 = Frontier Guide
-guide-entry-shield-generators = Ship Shield Generators
-guide-entry-shield-generators-table = Ship shields — full stat table
-guide-entry-shield-generators-fsg = FSG — Civil Shields
-guide-entry-shield-generators-tsfmc = TSFMC
-guide-entry-shield-generators-ussp = Union (USSP)
-guide-entry-shield-generators-renegates = Renegates
-guide-entry-shield-generators-viper = Viper Group
-guide-entry-shield-generators-ullman = Ullman Industries
-guide-entry-bank = TSF Central Bank
+guide-entry-bank = Colossus Central Bank
 guide-entry-piloting = Piloting
 guide-entry-startinggear = Starting Equipment
 guide-entry-hiring = Hiring Crew

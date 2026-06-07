@@ -30,7 +30,7 @@
   # Forge-Change-End
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ] # Mono - remove TSFMC implant
+    implants: [ MindShieldImplant, TTITrackingImplant ] # Forge-change
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff

@@ -25,6 +25,7 @@
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   assignedCompany: TSF # Forge-Change
+  assignedNationality: TransSolarFederation
   accessGroups:
   - AllAccessMono #Mono Start
   access:
@@ -63,6 +64,5 @@
     - Multitool
     - DoorRemoteNfsd
     - BaseSecurityUplinkRadioSheriff
-    - ShipVoucherTsfmcColonel
     - PhoneInstrumentHigh
     - RubberStampTSFColonel #Mono. Look, it had comments on the Bailiff/Captain file.

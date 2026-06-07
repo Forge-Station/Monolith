@@ -83,6 +83,7 @@
     # Mono End
     dynamicPacks:
     - NFEngineeringTechfabDeprecated
+    - AtmosTools
     - RCD # Mono
   - type: PirateBountyItem # Mono
     id: Techfab
@@ -116,6 +117,8 @@
     - NFSalvageTechfabDeprecatedStatic
     dynamicPacks:
     - NFSalvageTechfabDeprecated
+    - DrakeIndustriesRecipes # Forge-Change
+    - ForgeSalvageTechfabDrakeTools # Forge-Change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - NFSalvageTechfabDeprecatedEmag
@@ -150,6 +153,7 @@
     - NFNfsdTechfabDeprecatedStatic
     - StaticAmmoRecipePack
     - RoundstartShipgunAmmo # Mono
+    - MonoAttachmentsStatic # Mono
     dynamicPacks:
     - NFNfsdTechfabDeprecated
     - DynamicAmmoRecipePack
@@ -198,6 +202,7 @@
     - StaticAmmoRecipePack
     - MonoRestraintsStatic # Mono
     - RoundstartShipgunAmmo # Mono
+    - MonoAttachmentsStatic # Mono
     dynamicPacks:
     - NFMercenaryTechfabDeprecated
     - DynamicAmmoRecipePack
@@ -208,7 +213,6 @@
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged
     - MonoRogueMiscDynamic
-    - MonoUSSPVouchersDynamic
     - MonoUSSPArmorDynamic
     - MonoUSSPMiscDynamic
     - MonoUSSPWeaponsDynamicRanged
@@ -269,6 +273,7 @@
     - StaticAmmoRecipePack
     - MonoRestraintsStatic
     - RoundstartShipgunAmmo # Mono
+    - MonoAttachmentsStatic # Mono
     dynamicPacks:
     - NFHackedMercenaryTechfabDeprecated
     - DynamicAmmoRecipePack
@@ -280,7 +285,6 @@
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged
     - MonoRogueMiscDynamic
-    - MonoUSSPVouchersDynamic
     - MonoUSSPArmorDynamic
     - MonoUSSPMiscDynamic
     - MonoViperGroupDynamic
@@ -369,6 +373,7 @@
     - PowerCellsStatic
     dynamicPacks:
     - NFBlueprints
+    - ForgeBlueprints # Forge-change
   - type: RequireProjectileTarget
 
 - type: entity

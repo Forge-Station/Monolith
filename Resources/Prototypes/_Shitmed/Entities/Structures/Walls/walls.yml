@@ -22,7 +22,7 @@
     state: state0
   - type: IconSmooth
     mode: Diagonal
-    key: nanolaminatewalls # Mono
+    key: walls
     base: state
   - type: Icon
     sprite: _Shitmed/Structures/Walls/abductor_diagonal.rsi
@@ -34,7 +34,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 2000 # Mono
+          damage: 5000 # Forge-Change
         behaviors:
           - !type:SpawnEntitiesBehavior
             spawn:
@@ -80,7 +80,7 @@
     repairCost: 6
 
 - type: entity
-  parent: BaseWallTierFour
+  parent: BaseWallTierFive # Forge-Change
   id: WallNanolaminate # Mono
   name: nanolaminate wall # Mono
   suffix: ADS ONLY # Mono
@@ -99,7 +99,7 @@
     graph: Girder
     node: shuttleWall
   - type: IconSmooth
-    key: nanolaminatewalls # Mono
+    key: walls
     base: state
   - type: Fixtures
     fixtures:

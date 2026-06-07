@@ -9,6 +9,9 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC;
+using Content.Shared.NPC.Systems;
+using Prometheus;
+using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -22,13 +25,16 @@ namespace Content.Server.NPC.Systems
     /// </summary>
     public sealed partial class NPCSystem : EntitySystem
     {
-        [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-        [Dependency] private readonly HTNSystem _htn = default!;
-        [Dependency] private readonly MobStateSystem _mobState = default!;
-        [Dependency] private readonly NPCSteeringSystem _steering = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
+        private static readonly Gauge ActiveGauge = Metrics.CreateGauge(
+            "npc_active_count",
+            "Amount of NPCs that are actively processing");
+
+        [Dependency] private IConfigurationManager _configurationManager = default!;
+        [Dependency] private HTNSystem _htn = default!;
+        [Dependency] private MobStateSystem _mobState = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IGameTiming _timing = default!;
+
 
         /// <summary>
         /// Whether any NPCs are allowed to run at all.
@@ -196,10 +202,9 @@ namespace Content.Server.NPC.Systems
             }
 
             // Add your system here.
-            var stats = _htn.UpdateNPC(ref _count, _maxUpdates, frameTime);
-            LastFrameHtnUpdates = stats.Processed;
-            LastFrameHtnCadenceSkips = stats.SkippedByCadence;
-            MaxFrameHtnUpdates = Math.Max(MaxFrameHtnUpdates, LastFrameHtnUpdates);
+            _htn.UpdateNPC(ref _count, _maxUpdates, frameTime);
+
+            ActiveGauge.Set(Count<ActiveNPCComponent>());
         }
 
         private void CheckPlayerDistancesAndPauseNPCs()

@@ -4,8 +4,19 @@
   parent: BioGenFoodRecipe
   completetime: 5 
   materials:
-    Biomass: 100
-    Glass: 40
+    Biomass: 20
+    Plasma: 1000
+    Glass: 500
+
+- type: latheRecipe
+  id: JugOmnizine
+  result: JugOmnizine
+  parent: BioGenFoodRecipe
+  completetime: 8
+  materials:
+    Biomass: 180
+    Plasma: 3000
+    Glass: 1000
     
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -17,7 +28,7 @@
     Silver: 2500
     Gold: 2500
     Plastic: 3000
-    UraniumDepleted: 100
+    UraniumDepleted: 500
     
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -51,24 +62,24 @@
     Silver: 3000
     Gold: 3000
     Plastic: 4000
-    UraniumDepleted: 300
+    UraniumFissile: 100
     
 - type: latheRecipe
   parent: BaseToolRecipe
-  id: MedicatedSuture
-  result: MedicatedSuture
+  id: BrutepackAdvanced1
+  result: BrutepackAdvanced1
   completetime: 3
   materials:
-    Steel: 3250
-    Plastic: 3250
+    Steel: 1000
+    Plastic: 1000
     
 - type: latheRecipe
   parent: BaseToolRecipe
-  id: RegenerativeMesh
-  result: RegenerativeMesh
+  id: OintmentAdvanced1
+  result: OintmentAdvanced1
   completetime: 3
   materials:
-    Glass: 3250
-    Plastic: 3250
+    Glass: 1000
+    Plastic: 1000
     
 

@@ -1,26 +1,31 @@
 using Content.Server.Chat.Systems;
-using Content.Server.Emp;
 using Content.Server.Radio.Components;
 using Content.Shared._Mono.Radio;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
-using Content.Server.Speech;
 using Content.Server._EinsteinEngines.Language;
 using Content.Shared.Chat;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Shared._Forge.TTS;
+using Content.Server._Forge.TTS;
+using Robust.Shared.Configuration;
 
 namespace Content.Server.Radio.EntitySystems;
 
-public sealed class HeadsetSystem : SharedHeadsetSystem
+public sealed partial class HeadsetSystem : SharedHeadsetSystem
 {
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private LanguageSystem _language = default!;
 
-
+    // Forge-Change-Start
+    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly TTSSystem _tts = default!;
+    [Dependency] private readonly INetConfigurationManager _cfg = default!;
+    // Forge-Change-End
     public override void Initialize()
     {
         base.Initialize();
@@ -28,8 +33,6 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         SubscribeLocalEvent<HeadsetComponent, EncryptionChannelsChangedEvent>(OnKeysChanged);
 
         SubscribeLocalEvent<WearingHeadsetComponent, EntitySpokeEvent>(OnSpeak);
-
-        SubscribeLocalEvent<HeadsetComponent, EmpPulseEvent>(OnEmpPulse);
     }
 
     private void OnKeysChanged(EntityUid uid, HeadsetComponent component, EncryptionChannelsChangedEvent args)
@@ -66,9 +69,8 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     protected override void OnGotEquipped(EntityUid uid, HeadsetComponent component, GotEquippedEvent args)
     {
         base.OnGotEquipped(uid, component, args);
-        if (component.IsEquipped && component.Enabled)
-        {
-            EnsureComp<WearingHeadsetComponent>(args.Equipee).Headset = uid;
+        if (component.IsEquipped && component.Enabled) {
+            EnsureComp < WearingHeadsetComponent > (args.Equipee).Headset = uid;
             UpdateRadioChannels(uid, component);
         }
     }
@@ -76,9 +78,14 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     protected override void OnGotUnequipped(EntityUid uid, HeadsetComponent component, GotUnequippedEvent args)
     {
         base.OnGotUnequipped(uid, component, args);
-        component.IsEquipped = false;
-        RemComp<ActiveRadioComponent>(uid);
+        component.IsEquipped = false; // Forge-Change
         RemComp<WearingHeadsetComponent>(args.Equipee);
+        // Forge-Change-Start
+        if (component.Enabled)
+            UpdateRadioChannels(uid, component);
+        else
+            RemComp<ActiveRadioComponent>(uid);
+        // Forge-Change-End
     }
 
     public void SetEnabled(EntityUid uid, bool value, HeadsetComponent? component = null)
@@ -88,6 +95,9 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
         if (component.Enabled == value)
             return;
+
+        component.Enabled = value;
+        Dirty(uid, component);
 
         if (!value)
         {
@@ -105,35 +115,43 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
     private void OnHeadsetReceive(EntityUid uid, HeadsetComponent component, ref RadioReceiveEvent args)
     {
-        if (TryComp(Transform(uid).ParentUid, out ActorComponent? actor))
-        {
-            // Einstein Engines - Language begin
-            var canUnderstand = _language.CanUnderstand(Transform(uid).ParentUid, args.Language.ID);
-            var msg = new MsgChatMessage
-            {
+        // Forge-Change-Start
+        // Resolve the speaker's voice for THIS message. If the source has no TTSComponent
+        // (e.g. a shipyard console announcement), we must not fall back to the headset's
+        // previously cached voice, otherwise it leaks the last speaker's voice.
+        string? speakerVoiceId = null;
+
+        if (TryComp(uid, out TTSComponent? headsetTts) && TryComp(args.MessageSource, out TTSComponent? speakerTts)) {
+            speakerVoiceId = speakerTts.VoicePrototypeId;
+            headsetTts.VoicePrototypeId = speakerVoiceId;
+            Dirty(uid, headsetTts);
+        }
+
+        var parent = Transform(uid).ParentUid;
+
+        if (TryComp(parent, out ActorComponent ? actor)) {
+            var canUnderstand = _language.CanUnderstand(parent, args.Language.ID);
+
+            var msg = new MsgChatMessage {
                 Message = canUnderstand ? args.OriginalChatMsg : args.LanguageObfuscatedChatMsg
             };
+
             _netMan.ServerSendMessage(msg, actor.PlayerSession.Channel);
 
-            // Einstein Engines - Language end
+            var heardEv = new RadioMessageHeardEvent(uid, msg, args.Channel);
 
-            // Mono - Borers begin
-            var ev = new RadioMessageHeardEvent(uid, msg, args.Channel);
-            RaiseLocalEvent(Transform(uid).ParentUid, ref ev);
-            // Mono - Borers end
+            RaiseLocalEvent(parent, ref heardEv);
 
-            // Send radio noise event to client
             var radioNoiseEvent = new RadioNoiseEvent(GetNetEntity(uid), args.Channel.ID);
-            RaiseNetworkEvent(radioNoiseEvent, actor.PlayerSession);
-        }
-    }
 
-    private void OnEmpPulse(EntityUid uid, HeadsetComponent component, ref EmpPulseEvent args)
-    {
-        if (component.Enabled)
-        {
-            args.Affected = true;
-            args.Disabled = true;
+            RaiseNetworkEvent(radioNoiseEvent, actor.PlayerSession);
+
+            if (parent != args.MessageSource && !string.IsNullOrEmpty(speakerVoiceId)) {
+                _tts.OnlyPlayerTTS(uid, args.OriginalChatMsg.Message, speakerVoiceId, actor.PlayerSession, true, args.Language, isRadio: true);
+            }
+
+            return;
         }
+        // Forge-Change-End
     }
 }

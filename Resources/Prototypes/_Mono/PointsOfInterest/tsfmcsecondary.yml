@@ -31,6 +31,8 @@
     ownerCompanyId: TSF
     ownerFactionId: TSF
     zoneRadius: 2048
+  - type: ProtectedGrid # Forge-Change
+    preventTeleportation: true
 
 - type: gameMap
   id: TSFMCOutpost

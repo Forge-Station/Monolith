@@ -3,6 +3,7 @@
   parent: NFClothingDuffel
   id: ClothingBackpackDuffelDrakeIndustries
   name: drake industries duffel
+  suffix: Drake # Forge-Change
   description: One heavy sack. Some effort was put in to make it lighter to no avail. It bears the colors of Drake Industries.
   components:
   - type: Sprite

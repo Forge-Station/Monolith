@@ -31,9 +31,9 @@
   - RenegateSecApartment
   accessGroups:
   - CommandRenegateAccess
-  # special:
-  # - !type:AddImplantSpecial
-  #   implants: # Неизвестно
+  special:
+  - !type:AddImplantSpecial
+    implants: [ RenegadeTrackingImplant ]
   # - !type:AddComponentSpecial
   #   components:
   #     - type: CommandStaff

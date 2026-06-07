@@ -26,6 +26,8 @@ public sealed partial class RoleTimeRequirement : JobRequirement
 
     public override bool BypassedByGlobalWhitelist => true;
 
+    public override bool IsPlaytimeRequirement => true;
+
     public override bool Check(IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,

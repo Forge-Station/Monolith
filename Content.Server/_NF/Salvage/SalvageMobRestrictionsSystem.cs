@@ -11,12 +11,12 @@ using Robust.Shared.Player;
 
 namespace Content.Server._NF.Salvage;
 
-public sealed class SalvageMobRestrictionsSystem : EntitySystem
+public sealed partial class SalvageMobRestrictionsSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {
@@ -24,6 +24,7 @@ public sealed class SalvageMobRestrictionsSystem : EntitySystem
 
         SubscribeLocalEvent<NFSalvageMobRestrictionsComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<NFSalvageMobRestrictionsComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<SalvageMobRestrictionsGridComponent, ComponentInit>(OnGridInit); //Forge-Change
         SubscribeLocalEvent<SalvageMobRestrictionsGridComponent, ComponentRemove>(OnRemoveGrid);
         SubscribeLocalEvent<NFSalvageMobRestrictionsComponent, MobStateChangedEvent>(OnMobState);
         SubscribeLocalEvent<NFSalvageMobRestrictionsComponent, EntParentChangedMessage>(OnParentChanged);
@@ -49,18 +50,24 @@ public sealed class SalvageMobRestrictionsSystem : EntitySystem
 
     private void OnRemove(EntityUid uid, NFSalvageMobRestrictionsComponent component, ComponentRemove args)
     {
+        if (!Exists(component.LinkedGridEntity)) //Forge-Change
+            return;
+
         if (TryComp(component.LinkedGridEntity, out SalvageMobRestrictionsGridComponent? rg))
-        {
             rg.MobsToKill.Remove(uid);
-        }
+    }
+
+    private void OnGridInit(EntityUid uid, SalvageMobRestrictionsGridComponent component, ComponentInit args) //Forge-Change
+    {
+        component.MobsToKill.RemoveAll(mob => !Exists(mob));
     }
 
     private void OnRemoveGrid(EntityUid uid, SalvageMobRestrictionsGridComponent component, ComponentRemove args)
     {
-        foreach (EntityUid target in component.MobsToKill)
+        foreach (var target in component.MobsToKill.ToArray()) //Forge-Change
         {
             // Don't destroy yourself, don't destroy things being destroyed.
-            if (uid == target || MetaData(target).EntityLifeStage >= EntityLifeStage.Terminating)
+            if (uid == target || !Exists(target) || Terminating(target)) //Forge-Change
                 continue;
 
             // Mono - fix

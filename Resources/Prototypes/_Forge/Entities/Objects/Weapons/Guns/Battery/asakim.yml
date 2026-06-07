@@ -1,0 +1,136 @@
+- type: entity
+  name: kunisa-pattern plasma autopulser
+  parent: [BaseWeaponBattery, BaseGunWieldable]
+  id: WeaponRifleAsakimAutopulserForge
+  description: An advanced handheld plasma rifle. The design bears similarities to pre-fracture plasma weapons.
+  suffix: Forge
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Battery/asakimrifle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
+      state: all
+  - type: Clothing
+    sprite: _Mono/Objects/Weapons/Guns/Battery/asakimrifle.rsi
+    whitelist:
+      tags:
+        - AsakimBrain
+    whitelistCheckOrgans: true
+  - type: GunWieldBonus
+    minAngle: -18
+    maxAngle: -14
+  - type: Item
+    size: Huge
+  - type: Gun
+    minAngle: 18
+    maxAngle: 26
+    fireRate: 6
+    burstFireRate: 15
+    shotsPerBurst: 5
+    burstCooldown: 1
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ship_svalinn.ogg
+    whitelist:
+      tags:
+        - AsakimBrain
+    whitelistCheckOrgans: true
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: ProjectileBatteryAmmoProvider
+    proto: HandheldAutopulserProjectile
+    fireCost: 25
+  - type: Appearance
+  - type: StaticPrice
+    price: 1750
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 35
+
+- type: entity
+  name: kunisa-pattern plasma pistol
+  parent: BaseWeaponBattery
+  id: WeaponRifleADMPistolForge
+  description: An advanced handheld plasma pistol. The design bears similarities to pre-fracture plasma weapons.
+  suffix: Forge
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Battery/asakimpistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
+      state: all
+  - type: Item
+    size: Normal
+  - type: Gun
+    minAngle: 3
+    maxAngle: 15
+    angleIncrease: 1.2
+    angleDecay: 3.8
+    fireRate: 3
+    selectedMode: SemiAuto
+    availableModes:
+    - FullAuto
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ship_svalinn.ogg
+    whitelistCheckOrgans: true
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: ProjectileBatteryAmmoProvider
+    proto: HandheldAutopulserProjectile
+    fireCost: 25
+  - type: Appearance
+  - type: StaticPrice
+    price: 1450
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 35
+
+- type: entity
+  name: kunisa-pattern plasma pistol
+  parent: WeaponRifleADMPistolForge
+  id: WeaponRifleAsakimPistolForge
+  description: An advanced handheld plasma pistol. The design bears similarities to pre-fracture plasma weapons.
+  suffix: Forge
+  components:
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Battery/asakimpistol.rsi
+    whitelist:
+      tags:
+        - AsakimBrain
+    whitelistCheckOrgans: true
+  - type: Gun
+    minAngle: 3
+    maxAngle: 15
+    angleIncrease: 1.2
+    angleDecay: 3.8
+    fireRate: 3
+    selectedMode: SemiAuto
+    availableModes:
+    - FullAuto
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ship_svalinn.ogg
+    whitelist:
+      tags:
+        - AsakimBrain
+    whitelistCheckOrgans: true

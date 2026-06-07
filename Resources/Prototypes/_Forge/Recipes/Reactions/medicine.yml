@@ -1,0 +1,17 @@
+- type: reaction
+  id: Naloxone
+  impact: Low
+  minTemp: 390
+  reactants:
+    Codeine:
+      amount: 1
+    Hydroxide:
+      amount: 1
+    Oxygen:
+      amount: 1
+    Ammonia:
+      amount: 0.5
+    Carbon:
+      amount: 0.5
+  products:
+    Naloxone: 3

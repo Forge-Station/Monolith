@@ -7,6 +7,7 @@
   # Forge-Change
   - type: ShowSquadIcons
   - type: ShowMindShieldIcons
+  - type: ShowGuardIcons # ForgeChange
   - type: ShowCriminalRecordIcons
 
 - type: entity

@@ -88,3 +88,7 @@ ent-WeaponPulseRifle = импульсная винтовка NT
     .desc = Оружие, ранее использовавшееся подразделениями специальных операций NT, теперь часто встречается в руках TSF.
 ent-WeaponLaserCarbinePractice = учебный лазерный карабин
     .desc = Эта модифицированная лазерная винтовка стреляет почти безвредными лучами мощностью около 40 ватт, предназначенными для тренировочной стрельбы.
+ent-WeaponPistolCHIMP = { ent-ForgeWeaponPistolCHIMP }
+    .desc = { ent-ForgeWeaponPistolCHIMP.desc }
+ent-WeaponPistolCHIMPUpgraded = { ent-ForgeWeaponPistolCHIMPUpgraded }
+    .desc = { ent-ForgeWeaponPistolCHIMPUpgraded.desc }

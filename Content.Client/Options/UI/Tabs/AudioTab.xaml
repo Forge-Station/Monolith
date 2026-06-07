@@ -20,6 +20,7 @@
                 <!-- Corvax-Frontier-Barks-end -->
                 <!-- Corvax-TTS-Start -->
                 <ui:OptionSlider Name="SliderVolumeTts" Title="{Loc 'ui-options-tts-volume'}" />
+                <ui:OptionSlider Name="SliderVolumeRadioTts" Title="{Loc 'ui-options-radio-tts-volume'}" />
                 <!-- Corvax-TTS-End -->
                 <ui:OptionSlider Name="SliderVolumeCombatMusic" Title="{Loc 'ui-options-combat-music-volume'}" />
                 <ui:OptionSlider Name="SliderWindUpCombatMusic" Title="{Loc 'ui-options-combat-music-windup'}" />

@@ -1,0 +1,12 @@
+- type: techDiscipline
+  id: Empire
+  name: research-discipline-empire
+  color: "#ab7a52"
+  icon:
+    sprite: Forge/Misc/empire_research.rsi
+    state: weaponry
+  tierPrerequisites:
+    1: 0
+    2: 0.6
+    3: 0.75
+  uiName: EMP

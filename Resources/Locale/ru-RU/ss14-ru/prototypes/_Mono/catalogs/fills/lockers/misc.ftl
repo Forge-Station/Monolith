@@ -1,2 +1,3 @@
-ent-ClosetMaintenanceFilledRandomMono = Filled, Random, Mono
-
+ent-ClosetMaintenanceFilledRandomMono = { ent-ClosetMaintenanceFilledRandom }
+    .desc = { ent-ClosetMaintenanceFilledRandom.desc }
+    .suffix = Заполненый, Случайный, Mono

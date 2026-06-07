@@ -1,0 +1,15 @@
+- type: entity
+  id: LockableButtonEmpire
+  suffix: Empire
+  parent: LockableButton
+  components:
+  - type: AccessReader
+    access: [["Empire"]]
+
+- type: entity
+  id: LockableButtonEmpireOfficer
+  suffix: Empire, Officer
+  parent: LockableButton
+  components:
+  - type: AccessReader
+    access: [["EmpireOfficer"]]

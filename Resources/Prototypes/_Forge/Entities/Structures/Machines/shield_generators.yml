@@ -952,7 +952,7 @@
     baseDraw: 100000
     maxDraw: 300000
     unpoweredBonus: 4
-    damageLimit: 300000
+    damageLimit: 390000
     damageOverloadTimePunishment: 240
     shieldColor: "#FF66D9"
     collisionResistanceMultiplier: 0.3
@@ -1147,6 +1147,8 @@
     maxDraw: 354000
     unpoweredBonus: 3.8
     damageLimit: 465000
+    shieldTier: 4
+    bluespaceTeleportImmune: true
     damageOverloadTimePunishment: 200
     shieldColor: "#A8A29E"
     collisionResistanceMultiplier: 0.3

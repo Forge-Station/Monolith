@@ -1,6 +1,5 @@
-using Content.Server.NodeContainer;
 using Content.Server.NodeContainer.Nodes;
-using Robust.Shared.Map;
+using Content.Shared.NodeContainer;
 using Robust.Shared.Map.Components;
 
 namespace Content.Server.Power.Nodes
@@ -8,25 +7,25 @@ namespace Content.Server.Power.Nodes
     [DataDefinition]
     public sealed partial class CableNode : Node
     {
-        public override IEnumerable<Node> GetReachableNodes(TransformComponent xform,
+        public override IEnumerable<Node> GetReachableNodes(
+            Entity<TransformComponent> xform,
             EntityQuery<NodeContainerComponent> nodeQuery,
             EntityQuery<TransformComponent> xformQuery,
-            MapGridComponent? grid,
+            Entity<MapGridComponent>? grid,
             IEntityManager entMan)
         {
-            if (!xform.Anchored || grid == null || !xform.GridUid.HasValue)
+            if (!xform.Comp.Anchored || grid is not { } gridEnt)
                 yield break;
 
-            var gridUid = xform.GridUid.Value;
-            var map = entMan.System<SharedMapSystem>();
-            var gridIndex = map.TileIndicesFor(gridUid, grid, xform.Coordinates);
+            var mapSystem = entMan.System<SharedMapSystem>();
+            var gridIndex = mapSystem.TileIndicesFor(gridEnt, xform.Comp.Coordinates);
 
             // While we go over adjacent nodes, we build a list of blocked directions due to
             // incoming or outgoing wire terminals.
             var terminalDirs = 0;
             List<(Direction, Node)> nodeDirs = new();
 
-            foreach (var (dir, node) in NodeHelpers.GetCardinalNeighborNodes(nodeQuery, gridUid, grid, gridIndex, map))
+            foreach (var (dir, node) in NodeHelpers.GetCardinalNeighborNodes(nodeQuery, gridEnt, gridIndex, mapSystem))
             {
                 if (node is CableNode && node != this)
                 {

@@ -321,6 +321,9 @@
           types:
             Asphyxiation: 3
             Cold: 1
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Dexalin
+        toleranceGain: 0.002 # 15 = 0.03
 
 - type: reagent
   id: DexalinPlus
@@ -356,6 +359,9 @@
           types:
             Asphyxiation: 5
             Cold: 3
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Dexalin
+        toleranceGain: 0.002 # 15 = 0.03
 
 # this ones a doozy
 - type: reagent
@@ -921,7 +927,7 @@
           min: 15
         reagent: Tricordrazine
         amount: -0.8
-        
+
 
 - type: reagent
   id: Lipozine
@@ -951,18 +957,38 @@
     Medicine:
       effects:
       - !type:EvenHealthChange
-        conditions:
         damage:
           Burn: -1.5
           Toxin: -1.5
           Airloss: -1.5
-          Brute: -1.5   
+          Brute: -1.5
+      # Forge-change-start
+        conditions:
+          - !type:AddictionCondition
+            addictionId: Omnizine
+            min: 0.0
+            max: 0.5
+      - !type:EvenHealthChange
+        conditions:
+          - !type:AddictionCondition
+            addictionId: Omnizine
+            min: 0.5
+            max: 1.0
+        damage:
+          Burn: -0.75
+          Toxin: -0.75
+          Airloss: -0.75
+          Brute: -0.75
+      # Forge-change-end
       - !type:AdjustReagent # Mono: Overdose, penalize metabolism
         conditions:
         - !type:ReagentThreshold
           min: 60
         reagent: Omnizine
         amount: -1.0
+      - !type:AddictiveEffect # Forge-change
+        addictionId: Omnizine
+        toleranceGain: 0.008 # slow, it's a medicine not a narcotic
 
 - type: reagent
   id: Ultravasculine
@@ -1460,7 +1486,7 @@
           component: ForcedSleeping
           refresh: false
           type: Add
-        
+
 
 - type: reagent
   id : Aloxadone
@@ -1651,3 +1677,36 @@
       - !type:AdjustReagent
         reagent: MindbreakerToxin
         amount: -3.0
+      # Forge-change-start
+      - !type:CureAddictionEffect
+        addictionId: Stimulants
+        amount: 0.02
+      - !type:CureAddictionEffect
+        addictionId: Ephedrine
+        amount: 0.025
+      - !type:CureAddictionEffect
+        addictionId: Desoxyephedrine
+        amount: 0.02
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        component: DrowsinessDamageModifier
+        type: Add
+        time: 10
+        probability: 0.3
+        conditions:
+          - !type:AddictionCondition
+            addictionId: Stimulants
+            min: 0.5
+            max: 1.0
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        component: DrowsinessDamageModifier
+        type: Add
+        time: 10
+        probability: 0.3
+        conditions:
+          - !type:AddictionCondition
+            addictionId: Desoxyephedrine
+            min: 0.5
+            max: 1.0
+      # Forge-change-end

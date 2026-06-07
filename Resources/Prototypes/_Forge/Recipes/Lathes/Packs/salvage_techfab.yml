@@ -1,0 +1,7 @@
+# Unlocked via Drake Industries research on the utility techfab (SalvageTechfabNF).
+
+- type: latheRecipePack
+  id: ForgeSalvageTechfabDrakeTools
+  recipes:
+  - SeismicCharge
+  - PlasmaTank

@@ -25,8 +25,8 @@
   uiName: UNV
 
 - type: techDiscipline
-  id: TsfmcWeaponry
-  name: research-discipline-tsfmc-weaponry
+  id: Tsfmc
+  name: research-discipline-tsfmc
   color: "#f10945"
   icon:
     sprite: _Mono/Interface/Misc/research_disciplines_tsf.rsi
@@ -35,50 +35,11 @@
     1: 0
     2: 0.75
     3: 0.75
-  uiName: TSF-WP
+  uiName: TSF
 
 - type: techDiscipline
-  id: TsfmcGear
-  name: research-discipline-tsfmc-gear
-  color: "#f0ad00"
-  icon:
-    sprite: _Mono/Interface/Misc/research_disciplines_tsf.rsi
-    state: gear
-  tierPrerequisites:
-    1: 0
-    2: 0.5
-    3: 0.5
-  uiName: TSF-GR
-
-- type: techDiscipline
-  id: TsfmcEquipment
-  name: research-discipline-tsfmc-equipment
-  color: "#00c3ed"
-  icon:
-    sprite: _Mono/Interface/Misc/research_disciplines_tsf.rsi
-    state: equipment
-  tierPrerequisites:
-    1: 0
-    2: 0.5
-    3: 0.5
-  uiName: TSF-EQ
-
-- type: techDiscipline
-  id: TsfmcShipyard
-  name: research-discipline-tsfmc-shipyard
-  color: "#00ea5d"
-  icon:
-    sprite: _Mono/Interface/Misc/research_disciplines_tsf.rsi
-    state: shipyard
-  tierPrerequisites:
-    1: 0
-    2: 0.5
-    3: 0.5
-  uiName: TSF-HI
-
-- type: techDiscipline
-  id: RogueWeaponry
-  name: research-discipline-rogue-weaponry
+  id: Pdv
+  name: research-discipline-pdv
   color: "#914273"
   icon:
     sprite: _Mono/Interface/Misc/research_disciplines_rogue.rsi
@@ -87,46 +48,7 @@
     1: 0
     2: 0.75
     3: 0.75
-  uiName: PDV-WP
-
-- type: techDiscipline
-  id: RogueGear
-  name: research-discipline-rogue-gear
-  color: "#e8e8e8"
-  icon:
-    sprite: _Mono/Interface/Misc/research_disciplines_rogue.rsi
-    state: gear
-  tierPrerequisites:
-    1: 0
-    2: 0.5
-    3: 0.5
-  uiName: PDV-GR
-
-- type: techDiscipline
-  id: RogueEquipment
-  name: research-discipline-rogue-equipment
-  color: "#8d4390"
-  icon:
-    sprite: _Mono/Interface/Misc/research_disciplines_rogue.rsi
-    state: equipment
-  tierPrerequisites:
-    1: 0
-    2: 0.5
-    3: 0.5
-  uiName: PDV-EQ
-
-- type: techDiscipline
-  id: RogueShipyard
-  name: research-discipline-rogue-shipyard
-  color: "#7a7a7a"
-  icon:
-    sprite: _Mono/Interface/Misc/research_disciplines_rogue.rsi
-    state: shipyard
-  tierPrerequisites:
-    1: 0
-    2: 0.5
-    3: 0.
-  uiName: PDV-HI
+  uiName: PDV
 
 - type: techDiscipline
   id: Ussp
@@ -137,48 +59,9 @@
     state: gear
   tierPrerequisites:
     1: 0
-    2: 0.50
-    3: 0.50
-  uiName: USSP
-
-- type: techDiscipline
-  id: UsspShipyard
-  name: research-discipline-ussp-shipyard
-  color: "#4c9e9a"
-  icon:
-    sprite: _Mono/Interface/Misc/research_disciplines_ussp.rsi
-    state: shipyard
-  tierPrerequisites:
-    1: 0
-    2: 0.50
-    3: 0.50
-  uiName: USSP-HI
-
-- type: techDiscipline
-  id: UsspEquipment
-  name: research-discipline-ussp-equipment
-  color: "#966c53"
-  icon:
-    sprite: _Mono/Interface/Misc/research_disciplines_ussp.rsi
-    state: equipment
-  tierPrerequisites:
-    1: 0
-    2: 0.50
-    3: 0.50
-  uiName: USSP-EQ
-
-- type: techDiscipline
-  id: UsspWeapons
-  name: research-discipline-ussp-weaponry
-  color: "#52c08d"
-  icon:
-    sprite: _Mono/Interface/Misc/research_disciplines_ussp.rsi
-    state: weaponry
-  tierPrerequisites:
-    1: 0
     2: 0.75
     3: 0.75
-  uiName: USSP-WP
+  uiName: USSP
 
 - type: techDiscipline
   id: ViperGroup

@@ -20,6 +20,8 @@
   addComponents:
   - type: IFF
     color: "#ccaa55"
+  - type: ProtectedGrid
+    preventTeleportation: true
 
 - type: gameMap
   id: USSPCamelot

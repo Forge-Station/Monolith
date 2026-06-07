@@ -1,9 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using Content.Shared.CCVar;
-using System.Text.RegularExpressions;
 using Robust.Shared.Configuration;
-
 namespace Content.Server.Chat.Managers;
 
 /// <summary>
@@ -132,8 +130,8 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         // Corvax-Localization-End
     };
 
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private bool _doSanitize;
 

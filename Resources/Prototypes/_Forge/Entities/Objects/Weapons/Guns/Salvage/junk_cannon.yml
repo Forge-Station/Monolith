@@ -1,0 +1,78 @@
+- type: entity
+  name: junk cannon
+  parent: BaseItem
+  id: JunkCannon
+  description: Legendary engineering at work - turning scrap into ammunition. Loud, ugly, and deadly.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Salvage/junkjet.rsi
+    layers:
+    - state: base
+      visible: true
+      map: [ "enum.JunkCannonVisualLayers.Empty" ]
+    - state: icon
+      visible: false
+      map: [ "enum.JunkCannonVisualLayers.Loaded" ]
+  - type: Item
+    size: Huge
+    sprite: Forge/Objects/Weapons/Guns/Salvage/junkjet.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.AmmoVisuals.HasAmmo:
+        enum.JunkCannonVisualLayers.Empty:
+          True: { visible: false }
+          False: { visible: true }
+        enum.JunkCannonVisualLayers.Loaded:
+          True: { visible: true }
+          False: { visible: false }
+  - type: GunRequiresWield
+  - type: Wieldable
+  - type: AmmoCounter
+  - type: StaticPrice
+    price: 500
+  - type: Execution
+  - type: MeleeWeapon
+    attackRate: 1.3333
+    damage:
+      types:
+        Blunt: 8.5
+    bluntStaminaDamageFactor: 1.25
+    canWideSwing: false
+    animation: WeaponArcThrust
+    wideAnimationRotation: 180
+    soundHit:
+      collection: MetalThud
+  - type: AltFireMelee
+    attackType: Light
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Blunt: 2.5
+  - type: Appearance
+  - type: ThrowingAmmoProvider
+    containerId: throwing_ammo
+    capacity: 12
+    damageMultiplier: 1.2
+    minimumThrowFlyTime: 0.15
+    slotTemplate:
+      insertOnInteract: false
+      swap: false
+      insertSound:
+        path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
+      ejectSound:
+        path: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+    whitelist:
+      components:
+      - DamageOtherOnHit
+      - ToggleableThrowDamage
+  - type: ItemSlots
+  - type: Gun
+    fireRate: 2
+    projectileSpeed: 45
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg

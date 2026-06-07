@@ -52,6 +52,7 @@
     - SpawnDroneCrown
     - SpawnDroneGust
     - SpawnDronePiercer
+    - SpawnDroneParalysis  # Forge
 
 - type: entity
   id: MonoDroneSpawnerT2Middle
@@ -87,6 +88,8 @@
       weight: 10
     - id: SpawnDronePiercer
       weight: 10
+    - id: SpawnDroneParalysis  # Forge
+      weight: 10
 
 - type: entityTable
   id: DroneTableT22
@@ -104,6 +107,8 @@
   table: !type:GroupSelector
     children:
     - id: SpawnDroneMauler
+      weight: 10
+    - id: SpawnDroneQuake
       weight: 10
 
 - type: entityTable
@@ -233,6 +238,26 @@
     nameGrid: false
 
 #region T2-1
+
+- type: entity                        # Forge
+  id: SpawnDroneParalysis
+  parent: SpawnDroneBase
+  components:
+  - type: GridSpawner
+    path: /Maps/_Forge/Shuttles/Drones/Paralysis.yml
+    addComponents:
+    - type: RandomMetadata
+      nameSeparator: ""
+      nameSegments:
+      - "PARALYSIS"
+      - " 0x"
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - DroneHex
+    nameGrid: false
 
 - type: entity
   id: SpawnDroneGust
@@ -398,3 +423,22 @@
       - DroneHex
     nameGrid: false
 
+- type: entity
+  id: SpawnDroneQuake
+  parent: SpawnDroneBase
+  components:
+  - type: GridSpawner
+    path: /Maps/_Mono/Shuttles/World/quake.yml
+    addComponents:
+    - type: RandomMetadata
+      nameSeparator: ""
+      nameSegments:
+      - "QUAKE"
+      - " 0x"
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - DroneHex
+    nameGrid: false

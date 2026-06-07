@@ -6,6 +6,10 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: Rotatable
   - type: StationAiWhitelist
   - type: InteractionOutline
   - type: Sprite
@@ -117,7 +121,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: IconSmooth
-    key: airlocks
+    key: walls
     mode: NoSprite
   - type: Construction
     graph: Airlock

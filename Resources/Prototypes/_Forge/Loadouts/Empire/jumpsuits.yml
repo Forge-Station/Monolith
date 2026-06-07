@@ -36,18 +36,18 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitAuxiliaAlt
 
-# region Praetorian
+# region Praetor
 - type: loadout
-  id: ClothingUniformJumpsuitPraetorian
+  id: ClothingUniformJumpsuitPraetor
   price: 0
   equipment:
-    jumpsuit: ClothingUniformJumpsuitPraetorian
+    jumpsuit: ClothingUniformJumpsuitPraetor
 
 - type: loadout
-  id: ClothingUniformJumpsuitPraetorianAlt
+  id: ClothingUniformJumpsuitPraetorAlt
   price: 0
   equipment:
-    jumpsuit: ClothingUniformJumpsuitPraetorianAlt
+    jumpsuit: ClothingUniformJumpsuitPraetorAlt
 
 # region Tessarian
 - type: loadout

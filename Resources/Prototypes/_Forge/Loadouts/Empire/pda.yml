@@ -53,3 +53,27 @@
   - EmpireCommanderPDA
   fallbacks:
   - EmpireCommanderPDA
+
+- type: loadout
+  id: EmpirePraetorianPDA
+  equipment:
+    id: EmpirePraetorianPDA
+
+- type: loadout
+  id: EmpirePraetorianOfficerPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PraetorianOfficerUnlock
+  equipment:
+    id: EmpirePraetorianOfficerPDA
+
+- type: loadoutGroup
+  id: EmpirePraetorianPDA
+  name: loadout-group-contractor-id
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - EmpirePraetorianPDA
+  - EmpirePraetorianOfficerPDA
+  fallbacks:
+  - EmpirePraetorianPDA

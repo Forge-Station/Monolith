@@ -1,0 +1,15 @@
+- type: job
+  id: PraetorianOfficer
+  name: forge-job-name-praetorian-officer
+  description: forge-job-desc-praetorian
+  playTimeTracker: JobPraetorianOfficer
+  icon: JobIconPraetorianOfficer
+  setPreference: false
+  canBeAntag: false
+  assignedCompany: Imperial
+  assignedNationality: Imperial
+  access:
+  - EmpireInqusitor
+  - EmpireSmallInq
+  accessGroups:
+  - CommandEmpireAccess

@@ -38,6 +38,15 @@
     job_id: Inquisitor
 
 - type: entity
+  id: ForgeSpawnPointPraetorian
+  parent: ForgeSpawnPointPraefect
+  name: spawn point Praetorian
+  suffix: Empire, Praetorian
+  components:
+  - type: SpawnPoint
+    job_id: Praetorian
+
+- type: entity
   id: ForgeSpawnPointConsul
   parent: ForgeSpawnPointPraefect
   name: spawn point Consul
@@ -46,12 +55,12 @@
     job_id: Consul
 
 - type: entity
-  id: ForgeSpawnPointPraetorian
+  id: ForgeSpawnPointPraetor
   parent: ForgeSpawnPointPraefect
-  name: spawn point Praetorian
+  name: spawn point Praetor
   components:
   - type: SpawnPoint
-    job_id: Praetorian
+    job_id: Praetor
 
 - type: entity
   id: ForgeSpawnPointTessarian

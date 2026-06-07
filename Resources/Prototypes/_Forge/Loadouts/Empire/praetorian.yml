@@ -1,0 +1,143 @@
+# region Praetorian loadouts
+
+- type: loadoutEffectGroup
+  id: PraetorianOfficerUnlock
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPraetorianGuard
+      time: 180000 # 50 hours
+
+- type: loadout
+  id: ClothingNeckMantleEmpireLoadout
+  price: 0
+  equipment:
+    neck: ClothingNeckMantleEmpire
+
+- type: loadout
+  id: ClothingNeckMantleEmpireOfficerLoadout
+  price: 0
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PraetorianOfficerUnlock
+  equipment:
+    neck: ClothingNeckMantleEmpireOfficer
+
+- type: loadout
+  id: ClothingOuterHardsuitEmpirePraetorianLoadout
+  price: 0
+  equipment:
+    outerClothing: ClothingOuterHardsuitEmpirePraetorian
+
+- type: loadout
+  id: ClothingOuterHardsuitEmpirePraetorianOfficerLoadout
+  price: 0
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PraetorianOfficerUnlock
+  equipment:
+    outerClothing: ClothingOuterHardsuitEmpirePraetorianOfficer
+
+- type: loadout
+  id: EmpireEnergySpearLoadout
+  price: 0
+  storage:
+    back:
+    - EmpireEnergySpear
+
+- type: loadout
+  id: EmpireEnergySpearOfficerLoadout
+  price: 0
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PraetorianOfficerUnlock
+  storage:
+    back:
+    - EmpireEnergySpearOfficer
+
+- type: loadout
+  id: EmpirePraetorianIDCardLoadout
+  equipment:
+    id: EmpirePraetorianIDCard
+
+- type: loadout
+  id: EmpirePraetorianClothingMask
+  price: 0
+  equipment:
+    mask: ClothingMaskGasEmpirePraetorian
+
+- type: loadout
+  id: EmpirePraetorianOfficerClothingMask
+  price: 0
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PraetorianOfficerUnlock
+  equipment:
+    mask: ClothingMaskGasEmpirePraetorianOfficer
+
+# region Praetorian groups
+
+- type: loadoutGroup
+  id: EmpirePraetorianFace
+  name: loadout-group-contractor-face
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - EmpirePraetorianClothingMask
+  - EmpirePraetorianOfficerClothingMask
+  fallbacks:
+  - EmpirePraetorianClothingMask
+
+- type: loadoutGroup
+  id: EmpireNeckPraetorian
+  name: loadout-group-contractor-neck
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ClothingNeckMantleEmpireLoadout
+  - ClothingNeckMantleEmpireOfficerLoadout
+  fallbacks:
+  - ClothingNeckMantleEmpireLoadout
+
+- type: loadoutGroup
+  id: EmpirePraetorianJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - ClothingUniformJumpsuitPraetorAlt
+  - ClothingUniformJumpsuitPraetor
+  fallbacks:
+  - ClothingUniformJumpsuitPraetorAlt
+
+- type: loadoutGroup
+  id: EmpirePraetorianOuterClothing
+  name: loadout-group-contractor-outerclothing
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ClothingOuterHardsuitEmpirePraetorianLoadout
+  - ClothingOuterHardsuitEmpirePraetorianOfficerLoadout
+  fallbacks:
+  - ClothingOuterHardsuitEmpirePraetorianLoadout
+
+- type: loadoutGroup
+  id: EmpirePraetorianWeapon
+  name: loadout-group-weapon
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - EmpireEnergySpearLoadout
+  - EmpireEnergySpearOfficerLoadout
+  fallbacks:
+  - EmpireEnergySpearLoadout
+
+- type: loadoutGroup
+  id: EmpirePraetorianID
+  name: loadout-group-contractor-id
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - EmpirePraetorianIDCardLoadout
+  fallbacks:
+  - EmpirePraetorianIDCardLoadout

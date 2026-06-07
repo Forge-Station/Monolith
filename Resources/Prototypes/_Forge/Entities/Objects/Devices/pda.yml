@@ -110,6 +110,84 @@
   - type: PdaBorderColor
     borderColor: "#ab7a52"
 
+- type: entity
+  parent: BaseEmpirePDA
+  id: EmpirePraetorianPDA
+  name: praetorian PDA
+  suffix: Empire, Praetorian
+  components:
+  - type: Pda
+    id: EmpirePraetorianIDCard
+  - type: Sprite
+    sprite: Forge/Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: pda-empire-praetorian
+    - sprite: _Mono/Objects/Devices/pda.rsi
+      state: light_overlay
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: unshaded
+      visible: false
+    - sprite: _Mono/Objects/Devices/pda.rsi
+      state: id_overlay
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: unshaded
+      visible: false
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-empire-praetorian
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#ab7a52"
+  - type: Icon
+    sprite: Forge/Objects/Devices/pda.rsi
+    state: pda-empire-praetorian
+
+- type: entity
+  parent: BaseEmpirePDA
+  id: EmpirePraetorianOfficerPDA
+  name: praetorian officer PDA
+  suffix: Empire, Praetorian, Officer
+  components:
+  - type: Pda
+    id: EmpirePraetorianOfficerIDCard
+  - type: Sprite
+    sprite: Forge/Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: pda-empire-praetorian-officer
+    - sprite: _Mono/Objects/Devices/pda.rsi
+      state: light_overlay
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: unshaded
+      visible: false
+    - sprite: _Mono/Objects/Devices/pda.rsi
+      state: id_overlay
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: unshaded
+      visible: false
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-empire-praetorian-officer
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: PdaBorderColor
+    borderColor: "#ab7a52"
+  - type: Icon
+    sprite: Forge/Objects/Devices/pda.rsi
+    state: pda-empire-praetorian-officer
+
 #region Renegates
 - type: entity
   parent: BasePDA

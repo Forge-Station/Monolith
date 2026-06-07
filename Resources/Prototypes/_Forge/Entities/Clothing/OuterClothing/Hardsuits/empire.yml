@@ -329,6 +329,50 @@
     price: 12500
     vendPrice: 5000
 
+# region RI-22 Praetorian
+- type: entity
+  parent: ClothingOuterHardsuitRI22
+  id: ClothingOuterHardsuitEmpirePraetorian
+  name: RI-22p battle hardsuit
+  suffix: Empire, Praetorian
+  description: A RI-22p-pattern hardsuit issued to Imperial Praetorian guards. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_praetorian.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_praetorian.rsi
+    equippedState: equipped-OUTHERCLOTH
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitEmpirePraetorian
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+# region RI-22 Praetorian Officer
+- type: entity
+  parent: ClothingOuterHardsuitRI22
+  id: ClothingOuterHardsuitEmpirePraetorianOfficer
+  name: RI-22pc battle hardsuit
+  suffix: Empire, Praetorian, Officer
+  description: A RI-22pc-pattern hardsuit issued to Imperial Praetorian officers. Specialized in bullet protection.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_praetorian_officer.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_praetorian_officer.rsi
+    equippedState: equipped-OUTHERCLOTH
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitEmpirePraetorianOfficer
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
 # region ~HV~RI-7 Heavy
 - type: entity
   parent: [ClothingOuterHardsuitJuggernaut, BaseFactionGearOtherFactionT3]

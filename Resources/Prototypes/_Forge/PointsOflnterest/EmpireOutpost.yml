@@ -51,8 +51,9 @@
             Consul: [ 1, 1 ]
             Arbiter: [ 1, 1 ]
             Cardinal: [ 1, 1 ]
+            Praetorian: [ 2, 2 ]
             # Tessarian: [ 2, 2 ]
-            Praetorian: [ 3, 3]
+            Praetor: [ 3, 3 ]
             Auxilia: [ -1, -1 ]
             Neophyte: [ -1, -1]
         - type: StationDeadDropReporting

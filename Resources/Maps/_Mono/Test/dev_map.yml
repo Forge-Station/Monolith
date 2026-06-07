@@ -7888,6 +7888,13 @@ entities:
     - type: Transform
       pos: -6.5,2.5
       parent: 2
+- proto: ForgeSpawnPointPraetorian #Forge-Change
+  entities:
+  - uid: 100009
+    components:
+    - type: Transform
+      pos: -5.5,2.5
+      parent: 2
 - proto: ForgeSpawnPointNeophyte
   entities:
   - uid: 100006
@@ -7902,7 +7909,7 @@ entities:
     - type: Transform
       pos: -6.5,2.5
       parent: 2
-- proto: ForgeSpawnPointPraetorian
+- proto: ForgeSpawnPointPraetor #Forge-Change
   entities:
   - uid: 100008
     components:

@@ -27,6 +27,12 @@ ent-EmpireInqPDA = КПК Эклизиарха
     .desc = { ent-BasePDA.desc }
 ent-EmpireCommanderPDA = КПК Лорда-Префекта
     .desc = { ent-BasePDA.desc }
+ent-EmpirePraetorianPDA = КПК имперца
+    .desc = { ent-BasePDA.desc }
+    .suffix = СИВ, Преторианец
+ent-EmpirePraetorianOfficerPDA = КПК имперца
+    .desc = { ent-BasePDA.desc }
+    .suffix = СИВ, Преторианец, Офицер
 
 ent-RenegateBaronPDA = КПК коммодора
     .desc = Вероятно его владелец тот ещё псих.

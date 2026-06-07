@@ -1,40 +1,44 @@
 - type: job
-  id: Praetorian # Officer
+  id: Praetorian
   name: forge-job-name-praetorian
   description: forge-job-desc-praetorian
-  supervisors: job-supervisors-tessarian
-  playTimeTracker: JobPraetorian
-  icon: JobIconEmpirePraetorian
+  playTimeTracker: JobPraetorianGuard
+  supervisors: job-supervisors-praefect
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 64800 # 18 hours
+      time: 129600 # 36 hours
     - !type:DepartmentTimeRequirement
       department: Empire
-      time: 43200 # 12 hours
+      time: 108000 # 30 hours
+    - !type:RoleTimeRequirement
+      role: JobArbiter
+      time: 21600 # 6 hours
+    - !type:RoleTimeRequirement
+      role: JobCardinal
+      time: 21600 # 6 hours
     - !type:SpeciesRequirement
       species:
         - Human
-        - Dwarf
     - !type:AgeRequirement
-      requiredAge: 28
+      requiredAge: 40
     - !type:SexRequirement
       sex:
       - Male
-      - Female
-  # alternateRequirementSets:
-  #   longerPlaytimeLessSec:
-  #   - !type:RoleTimeRequirement
-  #     role: # Позже добавить альтернативные тебования времени за аналогичную роль у ТСФ
-  #     time: 43200 # 12 hours
+  whitelisted: true
   startingGear: PraetorianGear
+  alwaysUseSpawner: true
+  icon: JobIconPraetorian
   assignedCompany: Imperial
   assignedNationality: Imperial
-  weight: 20
-  displayWeight: 20
+  weight: 25
+  displayWeight: 25
   canBeAntag: false
   setPreference: true
+  access:
+  - EmpireInqusitor
+  - EmpireSmallInq
   accessGroups:
-  - SpecialEmpireAccess
+  - CommandEmpireAccess
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,15 +46,7 @@
       factions:
       - Empire
   - !type:AddImplantSpecial
-    implants: [ ImplantGuard , EmpireTrackingImplant]
+    implants: [ ImplantGuard , EmpireTrackingImplant ]
 
 - type: startingGear
   id: PraetorianGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF

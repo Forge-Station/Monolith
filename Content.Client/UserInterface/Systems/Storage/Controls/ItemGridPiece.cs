@@ -1,5 +1,7 @@
 using System.Numerics;
+using Content.Client._Forge.Item;
 using Content.Client.Items.Systems;
+using Content.Shared._Forge.Item;
 using Content.Shared.Item;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
@@ -165,24 +167,44 @@ public sealed class ItemGridPiece : Control, IEntityControl
         // typically you'd divide by two, but since the textures are half a tile, this is done implicitly
         var iconPosition = new Vector2((boundingGrid.Width + 1) * size.X + itemComponent.StoredOffset.X * 2,
             (boundingGrid.Height + 1) * size.Y + itemComponent.StoredOffset.Y * 2);
+
         var iconRotation = Location.Rotation + Angle.FromDegrees(itemComponent.StoredRotation);
 
         if (itemComponent.StoredSprite is { } storageSprite)
         {
-            var scale = 2 * UIScale;
-            var offset = (((Box2) boundingGrid).Size - Vector2.One) * size;
-            var sprite = _entityManager.System<SpriteSystem>().Frame0(storageSprite);
+            // Forge-Change-Start: optional scaled storage draw for ForgeScaledStorageItemComponent only.
+            if (_entityManager.TryGetComponent(Entity, out ForgeScaledStorageItemComponent? forgeStorage)
+                && ForgeScaledStorageDraw.TryDraw(
+                    _entityManager,
+                    itemComponent,
+                    forgeStorage,
+                    handle,
+                    boundingGrid,
+                    size,
+                    PixelPosition,
+                    Parent?.GlobalPixelPosition,
+                    GlobalPixelPosition,
+                    UIScale))
+            {
+            }
+            else
+            // Forge-Change-End
+            {
+                var scale = 2 * UIScale;
+                var offset = (((Box2) boundingGrid).Size - Vector2.One) * size;
+                var sprite = _entityManager.System<SpriteSystem>().Frame0(storageSprite);
 
-            var spriteBox = new Box2Rotated(new Box2(0f, sprite.Height * scale, sprite.Width * scale, 0f), -iconRotation, Vector2.Zero);
-            var root = spriteBox.CalcBoundingBox().BottomLeft;
-            var pos = PixelPosition * 2
-                      + (Parent?.GlobalPixelPosition ?? Vector2.Zero)
-                      + offset;
+                var spriteBox = new Box2Rotated(new Box2(0f, sprite.Height * scale, sprite.Width * scale, 0f), -iconRotation, Vector2.Zero);
+                var root = spriteBox.CalcBoundingBox().BottomLeft;
+                var pos = PixelPosition * 2
+                          + (Parent?.GlobalPixelPosition ?? Vector2.Zero)
+                          + offset;
 
-            handle.SetTransform(pos, iconRotation);
-            var box = new UIBox2(root, root + sprite.Size * scale);
-            handle.DrawTextureRect(sprite, box);
-            handle.SetTransform(GlobalPixelPosition, Angle.Zero);
+                handle.SetTransform(pos, iconRotation);
+                var box = new UIBox2(root, root + sprite.Size * scale);
+                handle.DrawTextureRect(sprite, box);
+                handle.SetTransform(GlobalPixelPosition, Angle.Zero);
+            }
         }
         else
         {

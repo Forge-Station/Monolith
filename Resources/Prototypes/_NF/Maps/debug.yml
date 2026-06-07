@@ -67,10 +67,11 @@
             Praefect: [ -1, -1 ]
             Consul: [ -1, -1 ]
             Inquisitor: [ -1, -1 ]
+            Praetorian: [ -1, -1 ] #Forge-Change
             Arbiter: [ -1, -1 ]
             Cardinal: [ -1, -1 ]
             # Tessarian: [ -1, -1 ]
-            Praetorian: [ -1, -1 ]
+            Praetor: [ -1, -1 ] #Forge-Change
             Auxilia: [ -1, -1 ]
             Neophyte: [ -1, -1 ]
             # Renegates

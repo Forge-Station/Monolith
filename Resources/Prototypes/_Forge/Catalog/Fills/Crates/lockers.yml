@@ -66,8 +66,8 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingUniformJumpsuitPraetorian
-      - id: ClothingUniformJumpsuitPraetorianAlt
+      - id: ClothingUniformJumpsuitPraetor
+      - id: ClothingUniformJumpsuitPraetorAlt
       - id: ClothingOuterCoatEmpireWindbreaker
       - id: ClothingShoesBootsJackFilled
       - id: ClothingBeltWebbingsBigBlack

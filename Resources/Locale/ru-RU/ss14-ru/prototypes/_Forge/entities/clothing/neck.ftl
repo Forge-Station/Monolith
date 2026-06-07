@@ -7,6 +7,11 @@ ent-ClothingNeckCloakTrauma = плащ командира TTI
 ent-ClothingNeckMantleTrauma = мантия специалиста травматологии
     .desc = Мантия средней длины, что покрывает плечи опытного врача Trauma Team. Окрашена в бирюзовые оттенки, а материал из стерильных компонентов и тканей. Вы точно можете доверять этому санитару!
 
+ent-ClothingNeckMantleEmpire = имперская мантия
+    .desc = Длинная мантия Священной Империи с застёжкой на плечах. Когда носитель берёт что-то в руки, расходится по сторонам и не мешает держать оружие. Носят преторианцы.
+ent-ClothingNeckMantleEmpireOfficer = офицерская имперская мантия
+    .desc = { ent-ClothingNeckMantleEmpire.desc }
+
 ent-ClothingNeckScarfBlackNiko = длинный чёрный кошачий шарф
     .desc = Я не кот!
 ent-ClothingNeckScarfBlueNiko = длинный синий кошачий шарф

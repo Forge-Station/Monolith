@@ -153,16 +153,16 @@
   fallbacks:
   - ClothingUniformJumpsuitTessarianAlt
 
-# region Praetorian
+# region Praetor
 - type: loadoutGroup
-  id: EmpirePraetorianJumpsuit
+  id: EmpirePraetorJumpsuit
   name: loadout-group-contractor-jumpsuit
   minLimit: 1
   loadouts:
-  - ClothingUniformJumpsuitPraetorianAlt
-  - ClothingUniformJumpsuitPraetorian
+  - ClothingUniformJumpsuitPraetorAlt
+  - ClothingUniformJumpsuitPraetor
   fallbacks:
-  - ClothingUniformJumpsuitPraetorianAlt
+  - ClothingUniformJumpsuitPraetorAlt
   subgroups:
   - EmpireJumpsuit
 

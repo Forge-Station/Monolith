@@ -1,0 +1,23 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckMantleEmpire
+  name: empire mantle
+  suffix: Empire, Praetorian
+  description: A long imperial mantle that opens when the wearer takes items in hand.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/mantles/empire/Regular_Mantle.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Neck/mantles/empire/Regular_Mantle.rsi
+  - type: HandsOpenMantleClothing
+
+- type: entity
+  parent: ClothingNeckMantleEmpire
+  id: ClothingNeckMantleEmpireOfficer
+  name: imperial officer mantle
+  suffix: Empire, Praetorian, Officer
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/mantles/empire/Officer_Mantle.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Neck/mantles/empire/Officer_Mantle.rsi

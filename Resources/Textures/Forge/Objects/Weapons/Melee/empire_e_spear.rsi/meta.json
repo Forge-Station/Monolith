@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by ifi07 (discord)",
+  "size": {
+    "x": 48,
+    "y": 32
+  },
+    "states": [
+        {
+            "name": "icon-off"
+        },
+        {
+            "name": "icon-on-regular",
+            "delays": [
+                [
+                    0.1,
+                    0.1
+                ]
+            ]
+        }
+    ]
+}

@@ -11,6 +11,12 @@
   id: JobInquisitor
 
 - type: playTimeTracker
+  id: JobPraetorianGuard
+
+- type: playTimeTracker
+  id: JobPraetorianOfficer
+
+- type: playTimeTracker
   id: JobConsul
 
 - type: playTimeTracker

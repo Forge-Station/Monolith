@@ -17,11 +17,11 @@
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconEmpirePraetorian
+  id: JobIconEmpirePraetor
   icon:
     sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_pretor
-  jobName: forge-job-name-praetorian
+  jobName: forge-job-name-praetor
 
 - type: jobIcon
   parent: JobIcon
@@ -46,6 +46,22 @@
     sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_inq
   jobName: forge-job-name-inquisitor
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconPraetorian
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_praetorian
+  jobName: forge-job-name-praetorian
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconPraetorianOfficer
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: emp_praetorian_officer
+  jobName: forge-job-name-praetorian-officer
 
 - type: jobIcon
   parent: JobIcon

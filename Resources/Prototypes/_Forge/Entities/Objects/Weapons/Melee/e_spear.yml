@@ -1,0 +1,160 @@
+- type: entity
+  name: empire energy spear
+  parent: BaseMeleeWeaponEnergy
+  id: EmpireEnergySpear
+  suffix: Empire, Praetorian
+  description: An imperial energy spear with a single plasma blade.
+  components:
+  - type: ItemToggle
+    onUse: false # wielding events control it instead
+    onActivate: false # prevents the weapon from being able to be turned on when it is on the ground
+    soundActivate:
+      path: /Audio/Weapons/ebladeon.ogg
+      params:
+        volume: 3
+    soundDeactivate:
+      path: /Audio/Weapons/ebladeoff.ogg
+      params:
+        volume: 3
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        volume: 3
+        variation: 0.250
+    activatedDamage:
+      types:
+        Slash: 20
+        Heat: 30
+        Structural: 100
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Weapons/ebladehum.ogg
+      params:
+        volume: 3
+  - type: ComponentToggler
+    components:
+    - type: Sharp
+    - type: DisarmMalus
+      malus: 0.7
+    - type: Execution
+      doAfterDuration: 4.0
+  - type: Wieldable
+    wieldSound: null # esword light sound instead
+  - type: MeleeRequiresWield
+  - type: MeleeWeapon
+    heavyStaminaCost: 0 # goob edit
+    wideAnimationRotation: -90
+    attackRate: 1.04
+    range: 2
+    angle: 0
+    animation: WeaponArcThrust
+    wideAnimation: WeaponArcSlash
+    damage:
+      types:
+        Blunt: 4.5
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: EnergySword
+    activatedColor: "#FFFFFF"
+    colorOptions: []
+    blockHacking: true
+  - type: ItemTogglePointLight
+    toggleableVisualsColorModulatesLights: false
+  - type: PointLight
+    enabled: false
+    radius: 2
+    energy: 2
+    color: "#ffe17a"
+    netsync: false
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Melee/empire_e_spear.rsi
+    layers:
+    - state: icon-off
+    - state: icon-on-regular
+      color: "#FFFFFF"
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: ToggleableVisuals
+    spriteLayer: blade
+    inhandVisuals:
+      left:
+      - state: inhand-left-blade
+        shader: unshaded
+      right:
+      - state: inhand-right-blade
+        shader: unshaded
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Melee/empire_e_spear_inhands.rsi
+    slots:
+    - back
+    - suitStorage
+  - type: ItemToggleSize
+    activatedSize: Normal
+    deactivatedSize: Normal
+    activatedShape:
+    - 0,0,1,5 # 2 wide, 6 tall; too large for pockets
+    deactivatedShape:
+    - 0,0,1,5
+  - type: Item
+    size: Normal # above Small so it cannot go in pockets
+    shape:
+    - 0,0,1,5
+    storedSprite:
+      sprite: Forge/Objects/Weapons/Melee/empire_e_spear.rsi
+      state: icon-off
+    storedRotation: 0
+    storedOffset: 3, -9
+    sprite: Forge/Objects/Weapons/Melee/empire_e_spear_inhands.rsi
+  - type: ForgeScaledStorageItem
+    scale: 2.3, 1.5
+    offsetWide: 2, 7
+  - type: Reflect
+    reflectProb: 0.25
+    spread: 75
+    reflects:
+    - Energy
+    - NonEnergy
+  - type: PirateBountyItem # Mono
+    id: TSFEnergyWeapon
+
+- type: entity
+  parent: EmpireEnergySpear
+  id: EmpireEnergySpearOfficer
+  suffix: Empire, Praetorian, Officer
+  description: An officer-variant imperial energy spear with a blue plasma blade.
+  components:
+  - type: EnergySword
+    activatedColor: "#FFFFFF"
+    colorOptions: []
+    blockHacking: true
+  - type: PointLight
+    color: "#66ccff"
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Melee/empire_e_spear_officer.rsi
+    layers:
+    - state: icon-off
+    - state: icon-on-officer
+      color: "#FFFFFF"
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: ToggleableVisuals
+    spriteLayer: blade
+    inhandVisuals:
+      left:
+      - state: inhand-left-blade
+        shader: unshaded
+      right:
+      - state: inhand-right-blade
+        shader: unshaded
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Melee/empire_e_spear_officer_inhands.rsi
+  - type: Item
+    sprite: Forge/Objects/Weapons/Melee/empire_e_spear_officer_inhands.rsi
+    storedSprite:
+      sprite: Forge/Objects/Weapons/Melee/empire_e_spear_officer.rsi
+      state: icon-off
+    storedRotation: 0
+    storedOffset: 0, 2

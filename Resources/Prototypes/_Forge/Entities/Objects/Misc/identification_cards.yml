@@ -22,7 +22,7 @@
     - state: imperial
     - state: idempgold
   - type: PresetIdCard
-    job: Praetorian
+    job: Praetor
 
 - type: entity
   parent: IDCardStandard
@@ -49,6 +49,36 @@
     - state: idemplord
   - type: PresetIdCard
     job: Praefect
+
+- type: entity
+  parent: IDCardStandard
+  id: EmpirePraetorianIDCard
+  name: empire praetorian ID card
+  suffix: Empire, Praetorian
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: imperial
+    - state: idemppraetorian
+  - type: PresetIdCard
+    job: Praetorian
+
+- type: entity
+  parent: IDCardStandard
+  id: EmpirePraetorianOfficerIDCard
+  name: empire praetorian officer ID card
+  suffix: Empire, Praetorian, Officer
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: praetorian
+    - state: idemppraetorianofficer
+  - type: PresetIdCard
+    job: Praetorian
+  - type: ForgeIdCardJobIconOverride
+    jobIcon: JobIconPraetorianOfficer
 
 #region Renegates
 

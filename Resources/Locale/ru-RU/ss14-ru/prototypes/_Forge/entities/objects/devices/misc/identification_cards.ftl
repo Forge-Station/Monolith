@@ -9,6 +9,12 @@ ent-EmpireInqIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }
 ent-EmpireCommanderIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }
+ent-EmpirePraetorianIDCard = ID карта
+    .desc = { ent-IDCardStandard.desc }
+    .suffix = СИВ, Преторианец
+ent-EmpirePraetorianOfficerIDCard = ID карта
+    .desc = { ent-IDCardStandard.desc }
+    .suffix = СИВ, Преторианец
 
 
 ent-RenegateBaronIDCard = ID карта коммодора

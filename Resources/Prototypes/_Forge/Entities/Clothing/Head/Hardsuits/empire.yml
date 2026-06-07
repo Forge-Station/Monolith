@@ -185,6 +185,83 @@
     - HeadTop
     - HeadSide
 
+# region RI-22 Praetorian
+- type: entity
+  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
+  id: ClothingHeadHelmetHardsuitEmpirePraetorian
+  name: RI-22 praetorian helmet
+  suffix: Empire, Praetorian
+  description: Helmet for the RI-22 praetorian hardsuit.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/empire_praetorian.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/empire_praetorian.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        sprite: Forge/Clothing/Head/Hardsuits/empire_praetorian.rsi
+        offset: "0, -0.03125"
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# region RI-22 Praetorian Officer
+- type: entity
+  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
+  id: ClothingHeadHelmetHardsuitEmpirePraetorianOfficer
+  name: RI-22 praetorian officer helmet
+  suffix: Empire, Praetorian, Officer
+  description: Helmet for the RI-22 praetorian officer hardsuit.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hardsuits/empire_praetorian_officer_item.rsi
+    state: icon-off
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/empire_praetorian_officer.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        sprite: Forge/Clothing/Head/Hardsuits/empire_praetorian_officer.rsi
+        offset: "0, 0.125"
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: NightVision
+    flashDurationMultiplier: 3.5
+    isEquipment: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
 # region HV-7 Heavy
 - type: entity
   parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]

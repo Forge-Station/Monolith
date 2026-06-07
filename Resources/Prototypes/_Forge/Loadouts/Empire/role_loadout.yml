@@ -54,15 +54,15 @@
   - EmpireMag
   canCustomizeName: true
 
-# region Praetorian
+# region Praetor
 - type: roleLoadout
-  id: JobPraetorian # Officer
+  id: JobPraetor # Officer
   groups:
   - EmpireNeck
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava
-  - EmpirePraetorianJumpsuit
+  - EmpirePraetorJumpsuit
   - EmpireOuterClothing
   - EmpireBelt
   - EmpireGloves
@@ -221,4 +221,29 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  canCustomizeName: true
+
+# region Praetorian
+- type: roleLoadout
+  id: JobPraetorian
+  groups:
+  - EmpireNeckPraetorian
+  - EmpirePraetorianFace
+  - EmpireGlasses
+  - EmpireBalaclava
+  - EmpirePraetorianJumpsuit
+  - EmpirePraetorianOuterClothing
+  - EmpireBelt
+  - EmpireGloves
+  - EmpireShoes
+  - EmpireBackpack
+  - EmpireEarsCommand
+  - EmpireBoxSurvival
+  - EmpirePraetorianPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorEncryptionKey
+  - ContractorFun
+  - ContractorTrinkets
+  - EmpirePraetorianWeapon
   canCustomizeName: true

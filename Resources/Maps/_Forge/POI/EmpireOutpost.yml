@@ -64618,6 +64618,18 @@ entities:
       parent: 1
     - type: DeltaPressure
       gridUid: 1
+- proto: ForgeSpawnPointPraetorian
+  entities:
+  - uid: 9695
+    components:
+    - type: Transform
+      pos: 13.5,-30.5
+      parent: 1
+  - uid: 9696
+    components:
+    - type: Transform
+      pos: 14.5,-29.5
+      parent: 1
 - proto: Wrench
   entities:
   - uid: 9686

@@ -100,9 +100,9 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitPraetorian
-  name: praetorian uniform
-  description: Empire praetorian uniform.
+  id: ClothingUniformJumpsuitPraetor
+  name: praetor uniform
+  description: Empire praetor uniform.
   components:
     - type: Sprite
       sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_pre.rsi
@@ -111,9 +111,9 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitPraetorianAlt
-  name: praetorian uniform
-  description: Empire praetorian uniform.
+  id: ClothingUniformJumpsuitPraetorAlt
+  name: praetor uniform
+  description: Empire praetor uniform.
   components:
     - type: Sprite
       sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_pre_alt.rsi

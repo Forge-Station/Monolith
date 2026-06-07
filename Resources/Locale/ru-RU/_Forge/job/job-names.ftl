@@ -37,9 +37,11 @@ guide-entry-roles-consul = Консул
 
 forge-job-name-praefect = СИВ Лорд-Префект
 forge-job-name-inquisitor = СИВ Эклезиарх
+forge-job-name-praetorian = СИВ Преторианец
+forge-job-name-praetorian-officer = СИВ Преторианец (офицерский ID)
 forge-job-name-consul = СИВ Консул
 forge-job-name-tessarian = СИВ Тессариан
-forge-job-name-praetorian = СИВ Претор
+forge-job-name-praetor = СИВ Претор
 forge-job-name-auxilia = СИВ Ауксилий
 forge-job-name-neophyte = СИВ Неофит
 

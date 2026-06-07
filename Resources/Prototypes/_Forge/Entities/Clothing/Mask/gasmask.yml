@@ -27,6 +27,54 @@
   - type: Clothing
     sprite: Forge/Clothing/Mask/empire.rsi
 
+# region Praetorian
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: ClothingMaskGasEmpirePraetorian
+  name: empire praetorian gas mask
+  suffix: Empire, Praetorian
+  description: A praetorian guard gas mask.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/Pretorian_Mask_Regular.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/Pretorian_Mask_Regular.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - FacialHair
+    - Snout
+    hideOnToggle: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: FlashImmunity
+  - type: EyeProtection
+
+- type: entity
+  parent: ClothingMaskGasEmpirePraetorian
+  id: ClothingMaskGasEmpirePraetorianOfficer
+  name: empire praetorian officer gas mask
+  suffix: Empire, Praetorian, Officer
+  description: An officer-variant praetorian gas mask.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/Pretorian_Mask_Officer.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/Pretorian_Mask_Officer.rsi
+
 # region Company
 - type: entity
   parent: ClothingMaskGasSecurity

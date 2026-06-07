@@ -39,8 +39,8 @@
 
 - type: latheRecipe
   parent: BaseJumpsuitRecipe
-  id: ClothingUniformJumpsuitPraetorian
-  result: ClothingUniformJumpsuitPraetorian
+  id: ClothingUniformJumpsuitPraetor
+  result: ClothingUniformJumpsuitPraetor
   materials:
     Cloth: 300
     Durathread: 100
@@ -49,8 +49,8 @@
 
 - type: latheRecipe
   parent: BaseJumpsuitRecipe
-  id: ClothingUniformJumpsuitPraetorianAlt
-  result: ClothingUniformJumpsuitPraetorianAlt
+  id: ClothingUniformJumpsuitPraetorAlt
+  result: ClothingUniformJumpsuitPraetorAlt
   materials:
     Cloth: 300
     Durathread: 100

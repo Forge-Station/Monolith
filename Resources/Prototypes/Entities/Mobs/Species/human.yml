@@ -25,6 +25,7 @@
     hideLayersOnEquip:
     - Hair
     - Snout
+    - FacialHair #Forge-Change: praetorian gas mask hides beard
   - type: Inventory
     femaleDisplacements:
       jumpsuit:

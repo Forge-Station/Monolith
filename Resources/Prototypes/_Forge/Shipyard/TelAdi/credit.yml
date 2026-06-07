@@ -6,7 +6,6 @@
   price: 250000
   category: Large
   group: Custom
-  access: TelAdi
   shuttlePath: /Maps/_Forge/Shuttles/TelAdi/credit.yml
   guidebookPage: Null
   class:

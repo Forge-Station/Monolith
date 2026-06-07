@@ -24,9 +24,7 @@
   - type: Access
     groups:
     - AllAccess
-    tags:
-    - TelAdi
-  # Душегуб — сотрудник Tel-Adi: открывает фирменные двери и консоли с company-гейтом.
+  # Душегуб — сотрудник Tel-Adi: Company-гейт консолей проходит по CompanyComponent, общий доступ — AllAccess.
   - type: Company
     companyName: TelAdi
   - type: Eye

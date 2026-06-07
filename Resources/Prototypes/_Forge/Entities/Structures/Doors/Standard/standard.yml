@@ -102,6 +102,8 @@
   components:
   - type: Sprite
     sprite: Forge/Structures/Doors/Airlocks/Standard/tel_adi.rsi
+  - type: AccessReader
+    requiredCompany: TelAdi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsTelAdi ]

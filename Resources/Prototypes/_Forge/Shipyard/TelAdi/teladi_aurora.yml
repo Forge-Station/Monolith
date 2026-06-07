@@ -7,7 +7,6 @@
   limit: 1 # одна активная «billion» за раунд
   category: Large
   group: Custom
-  access: TelAdi
   shuttlePath: /Maps/_Forge/Shuttles/TelAdi/aurora.yml
   guidebookPage: Null
   class:

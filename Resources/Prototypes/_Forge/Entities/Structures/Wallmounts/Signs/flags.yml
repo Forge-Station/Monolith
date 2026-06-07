@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseFlag
   id: TelAdiFlag
-  name: флаг Tel-Adi
-  description: Фирменный флаг корпорации Tel-Adi.
+  name: Tel-Adi flag
+  description: The Tel-Adi corporation's branded flag.
   suffix: ТелАди
   components:
   - type: Sprite

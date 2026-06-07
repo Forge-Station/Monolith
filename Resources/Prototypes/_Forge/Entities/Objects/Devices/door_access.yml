@@ -72,4 +72,4 @@
   suffix: Tel-Adi, Locked
   components:
   - type: AccessReader
-    access: [["TelAdi"]]
+    requiredCompany: TelAdi

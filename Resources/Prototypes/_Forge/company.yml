@@ -59,4 +59,3 @@
   - !type:SwapPdaSpecial
     pda: TelAdiPDA
     company: TelAdi
-    access: TelAdi

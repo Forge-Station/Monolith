@@ -281,7 +281,6 @@
   - type: IdCard
     jobTitle: Tel-Adi
     accessLevels:
-    - TelAdi
     - Maintenance
     - External
     - Mercenary

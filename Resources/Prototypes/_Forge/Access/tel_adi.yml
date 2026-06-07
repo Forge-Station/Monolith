@@ -1,4 +1,0 @@
-# Tel-Adi — access level for area doors (CompanyAccessReader only gates machine UIs, not doors)
-- type: accessLevel
-  id: TelAdi
-  name: id-card-access-level-tel-adi

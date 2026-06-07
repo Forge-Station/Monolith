@@ -1,8 +1,8 @@
 - type: entity
   id: BannerTelAdi
   parent: BannerBase
-  name: баннер Tel-Adi
-  description: Баннер корпорации Tel-Adi. Символ прибыли и порядка.
+  name: Tel-Adi banner
+  description: Banner of the Tel-Adi corporation. A symbol of profit and order.
   suffix: ТелАди
   components:
   - type: Sprite

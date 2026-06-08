@@ -353,6 +353,6 @@
   suffix: AutomatedTanker, POI
 
 - type: entity
-  parent: PoiTreasuryLootCombat
+  parent: PoiTreasuryCombat
   id: PoiTreasuryLancelot
   suffix: Lancelot, POI

@@ -553,9 +553,13 @@
       id: OmnizineChemistryBottle
       amount: !type:ConstantNumberSelector
         value: 1
-    - id: BruteAutoInjector
+    - !type:EntSelector
+      id: BruteAutoInjector
+      amount: !type:ConstantNumberSelector
         value: 2
-    - id: BurnAutoInjector
+    - !type:EntSelector
+      id: BurnAutoInjector
+      amount: !type:ConstantNumberSelector
         value: 2
 
 - type: entityTable

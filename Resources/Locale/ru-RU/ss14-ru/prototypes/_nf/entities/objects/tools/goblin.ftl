@@ -1,5 +1,5 @@
 # Tools
-ent-NFGoblinMadeMultitool = взламывалка
+ent-NFGoblinMadeMultitool = открывалка
   .desc = Импровизированный мультитул, спаянный из сгоревшей платы, дисплея и антенны, обернутый в фольгированную пачку от чипсов для уменьшения помех и влагозащиты.
 
 ent-NFGoblinMadeWirecutter = щипчики

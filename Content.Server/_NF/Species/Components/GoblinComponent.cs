@@ -6,6 +6,7 @@ public sealed partial class GoblinComponent : Component
 
 }
 
+/// Forge-Change-Start
 [RegisterComponent]
 public sealed partial class GoblinMadeComponent : Component { }
 
@@ -20,4 +21,4 @@ public sealed partial class GoblinPreciousTrashComponent : Component { }
 
 [RegisterComponent]
 public sealed partial class GoblinPreciousTrashBagComponent : Component { }
-
+/// Forge-Change-End

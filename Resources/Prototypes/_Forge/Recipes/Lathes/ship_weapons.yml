@@ -24,8 +24,6 @@
   materials:
     Steel: 150
     Glass: 700
-    Bluespace: 200
-    Diamond: 150
     Gold: 200
     Plasma: 100
     Uranium: 100
@@ -37,8 +35,6 @@
   materials:
     Steel: 200
     Glass: 900
-    Bluespace: 300
-    Diamond: 300
     Gold: 300
     Plasma: 200
     Uranium: 200

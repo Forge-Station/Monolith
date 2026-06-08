@@ -202,7 +202,7 @@
     - id: EnergySword
       weight: 0.01
 
-# Инженерные материалы: частые стаки, редкие — мизерный шанс.
+# Инженерные материалы
 - type: entityTable
   id: PoiTreasuryLootMaterialsCommon
   table: !type:GroupSelector
@@ -248,6 +248,66 @@
       id: MaterialDiamond1
       amount: !type:ConstantNumberSelector
         value: 5
+        
+# Перерабатываемый хлам
+- type: entityTable
+  id: PoiTreasuryLootMaterialsScrap
+  table: !type:GroupSelector
+    children:
+    - !type:EntSelector
+      id: ScrapGlass
+    - !type:EntSelector
+      id: ScrapFaxMachine
+    - !type:EntSelector
+      id: ScrapMedkit
+    - !type:EntSelector
+      id: ScrapFireExtinguisher
+    - !type:EntSelector
+      id: ScrapPAIGold
+    - !type:EntSelector
+      id: ScrapOre
+      
+# Руда 
+- type: entityTable
+  id: PoiTreasuryLootMaterialsOre
+  table: !type:GroupSelector
+    children:
+    - !type:EntSelector
+      id: DiamondOre1
+      amount: !type:ConstantNumberSelector
+        value: 1
+    - !type:EntSelector
+      id: LithiumOre1
+      amount: !type:ConstantNumberSelector
+        value: 1
+    - !type:EntSelector
+      id: BananiumOre5
+      amount: !type:ConstantNumberSelector
+        value: 5
+    - !type:EntSelector
+      id: SteelOre5
+      amount: !type:ConstantNumberSelector
+        value: 6
+    - !type:EntSelector
+      id: PlasmaOre5
+      amount: !type:ConstantNumberSelector
+        value: 5
+    - !type:EntSelector
+      id: SpaceQuartz5
+      amount: !type:ConstantNumberSelector
+        value: 6
+    - !type:EntSelector
+      id: UraniumOre5
+      amount: !type:ConstantNumberSelector
+        value: 5
+    - !type:EntSelector
+      id: SilverOre5
+      amount: !type:ConstantNumberSelector
+        value: 5
+    - !type:EntSelector
+      id: GoldOre5
+      amount: !type:ConstantNumberSelector
+        value: 5
 
 # Research loot 
 - type: entityTable
@@ -266,7 +326,7 @@
       id: ResearchDisk65000
       amount: !type:ConstantNumberSelector
         value: 2
-      weight: 0.1
+      weight: 0.5
 
 - type: entityTable
   id: PoiTreasuryLootResearchTechDisks
@@ -347,14 +407,14 @@
   table: !type:GroupSelector
     children:
     - !type:NestedSelector
-      tableId: PoiTreasuryLootCashTickMedium
-      weight: 1.5
-    - !type:NestedSelector
-      tableId: PoiTreasuryLootMaterialsCommon
+      tableId: PoiTreasuryLootTrade
       weight: 2
     - !type:NestedSelector
-      tableId: PoiTreasuryLootMaterialsRare
+      tableId: PoiTreasuryLootMaterialsCommon
       weight: 1
+    - !type:NestedSelector
+      tableId: PoiTreasuryLootMaterialsRare
+      weight: 0.5
 
 - type: entityTable
   id: PoiTreasuryLootRestStop
@@ -380,7 +440,7 @@
       weight: 3
     - !type:NestedSelector
       tableId: PoiTreasuryLootMedLight
-      weight: 1.2
+      weight: 1.5
     - id: FoodTinBeans
     - !type:EntSelector
       id: FoodTinBeans
@@ -445,10 +505,8 @@
   id: PoiTreasuryLootChapel
   table: !type:GroupSelector
     children:
-    - !type:EntSelector
-      id: SpaceCash10000
-      amount: !type:ConstantNumberSelector
-        value: 3
+    - !type:NestedSelector
+      tableId: PoiTreasuryLootCashTickSmall
     - id: Bible
     - id: Candle
       weight: 0.5
@@ -480,11 +538,12 @@
     children:
     - !type:NestedSelector
       tableId: PoiTreasuryLootCashTickSmall
+      weight: 0.3
+    - !type:NestedSelector
+      tableId: PoiTreasuryLootMaterialsScrap
+      weight: 2
     - !type:NestedSelector
       tableId: PoiTreasuryLootMaterialsCommon
-      weight: 1
-    - !type:NestedSelector
-      tableId: PoiTreasuryLootMaterialsRare
       weight: 0.05
 
 - type: entityTable
@@ -505,11 +564,7 @@
   table: !type:GroupSelector
     children:
     - !type:NestedSelector
-      tableId: PoiTreasuryLootMaterialsCommon
-      weight: 1
-    - !type:NestedSelector
-      tableId: PoiTreasuryLootMaterialsRare
-      weight: 0.5
+      tableId: PoiTreasuryLootMaterialsOre
       
 - type: entityTable
   id: PoiTreasuryLootTech
@@ -520,7 +575,7 @@
       weight: 0.5
     - !type:NestedSelector
       tableId: PoiTreasuryLootResearchTech
-      weight: 1
+      weight: 2
     - !type:NestedSelector
       tableId: PoiTreasuryLootResearchTechDisks
       weight: 2.5
@@ -573,10 +628,7 @@
       tableId: PoiTreasuryLootCashTickSmall
     - !type:NestedSelector
       tableId: PoiTreasuryLootMaterialsCommon
-      weight: 2.5
-    - !type:NestedSelector
-      tableId: PoiTreasuryLootMaterialsRare
-      weight: 0.05
+      weight: 1.5
 
 - type: entityTable
   id: PoiTreasuryLootGrifty

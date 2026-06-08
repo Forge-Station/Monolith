@@ -306,26 +306,19 @@
     children:
     - !type:EntSelector
       id: WeaponTurretAK570Circuitboard
-      amount: !type:ConstantNumberSelector
     - !type:EntSelector
       id: WeaponTurretLongbowCircuitboard
-      amount: !type:ConstantNumberSelector
     - !type:EntSelector
       id: MachineDriveCTLA50Circuitboard
-      amount: !type:ConstantNumberSelector
     - !type:EntSelector
       id: WeaponTurretM220Circuitboard
-      amount: !type:ConstantNumberSelector
     - !type:EntSelector
       id: WeaponLaserTurretPrometheusCircuitboard
-      amount: !type:ConstantNumberSelector
     - !type:EntSelector
       id: WeaponTurretCyrexaCircuitboard
-      amount: !type:ConstantNumberSelector
       weight: 0.1
     - !type:EntSelector
       id: GCSUltraUpgradeCircuitboard
-      amount: !type:ConstantNumberSelector
       weight: 0.08
 
 # --- Profile tables -----------------------------------------------------------
@@ -538,11 +531,9 @@
     children:
     - !type:NestedSelector
       tableId: PoiTreasuryLootResearchTechDisks
-        value: 2
       weight: 2
-    - !type:EntSelector
-      id: PoiTreasuryLootResearchTechCircuitboard
-      amount: !type:ConstantNumberSelector
+    - !type:NestedSelector
+      tableId: PoiTreasuryLootResearchTechDisks
       weight: 1
     - !type:NestedSelector
       tableId: PoiTreasuryLootMaterialsRare

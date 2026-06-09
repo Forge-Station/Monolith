@@ -32,7 +32,7 @@
       settings: default
     requirements:
     - !type:OverallPlaytimeRequirement
-      time: 360000 # 100 hours
+      time: 540000 # 150 hours
     - !type:DepartmentTimeRequirement
       department: Renegates
       time: 90000 # 25 hours

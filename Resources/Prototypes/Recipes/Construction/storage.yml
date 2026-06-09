@@ -242,7 +242,7 @@
   description: A small wall mounted cabinet designed to hold a defibrillator.
   icon:
     sprite: Structures/Wallmounts/defib_cabinet.rsi
-    state: frame
+    state: closed
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true

@@ -1,0 +1,59 @@
+# Forge: universal iridite metallurgy - 3-stage centrifuge chain (batch of 5 sheets per cycle).
+
+- type: latheRecipe
+  id: CentrifugeIridiumMatrix
+  name: recipe-iridium-matrix-name
+  description: recipe-iridium-matrix-description
+  categories:
+  - Materials
+  materialResult:
+    IridiumMatrix: 500
+  completetime: 45
+  materials:
+    Diamond: 750
+    UraniumFissile: 250
+    Bluespace: 500
+    Plasma: 3000
+  icon:
+    sprite: _Mono/Effects/processing.rsi
+    state: processing_2
+  materialDiscountScale: 0.5
+
+- type: latheRecipe
+  id: CentrifugeCryoBinder
+  name: recipe-cryo-binder-name
+  description: recipe-cryo-binder-description
+  categories:
+  - Materials
+  materialResult:
+    CryoBinder: 500
+  completetime: 30
+  materials:
+    Plastitanium: 1000
+    Lithium: 500
+    Silver: 1000
+    Pyrogel: 500
+  icon:
+    sprite: _Mono/Effects/processing.rsi
+    state: processing
+  materialDiscountScale: 0.5
+
+- type: latheRecipe
+  id: CentrifugeIridite
+  name: recipe-iridite-smelting-name
+  description: recipe-iridite-smelting-description
+  categories:
+  - Materials
+  materialResult:
+    Iridite: 500
+  completetime: 90
+  materials:
+    IridiumMatrix: 250
+    CryoBinder: 250
+    Steel: 4000
+    Gold: 1000
+    Copper: 2000
+  icon:
+    sprite: _Mono/Effects/processing.rsi
+    state: processing_3
+  materialDiscountScale: 0.3

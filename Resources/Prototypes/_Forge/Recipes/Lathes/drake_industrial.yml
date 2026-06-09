@@ -68,3 +68,63 @@
     sprite: _Mono/Effects/processing.rsi
     state: processing_3
   materialDiscountScale: 0.5
+
+# Drake iridite metallurgy - lighter variants for Drake centrifuge.
+
+- type: latheRecipe
+  id: DrakeCentrifugeIridiumMatrix
+  name: drake-centrifuge-iridium-matrix-name
+  description: drake-centrifuge-iridium-matrix-desc
+  categories:
+  - Materials
+  materialResult:
+    IridiumMatrix: 500
+  completetime: 30
+  materials:
+    Diamond: 500
+    UraniumFissile: 350
+    Bluespace: 375
+    Plasma: 2000
+  icon:
+    sprite: _Mono/Effects/processing.rsi
+    state: processing_2
+  materialDiscountScale: 0.6
+
+- type: latheRecipe
+  id: DrakeCentrifugeCryoBinder
+  name: drake-centrifuge-cryo-binder-name
+  description: drake-centrifuge-cryo-binder-desc
+  categories:
+  - Materials
+  materialResult:
+    CryoBinder: 500
+  completetime: 20
+  materials:
+    Plastitanium: 750
+    Lithium: 500
+    Silver: 750
+    Pyrogel: 350
+  icon:
+    sprite: _Mono/Effects/processing.rsi
+    state: processing
+  materialDiscountScale: 0.6
+
+- type: latheRecipe
+  id: DrakeCentrifugeIridite
+  name: drake-centrifuge-iridite-name
+  description: drake-centrifuge-iridite-desc
+  categories:
+  - Materials
+  materialResult:
+    Iridite: 500
+  completetime: 60
+  materials:
+    IridiumMatrix: 250
+    CryoBinder: 250
+    Steel: 3000
+    Gold: 750
+    Copper: 1500
+  icon:
+    sprite: _Mono/Effects/processing.rsi
+    state: processing_3
+  materialDiscountScale: 0.5

@@ -177,3 +177,19 @@
   - DrakeIndustriesMaterialsScience
   - DrakeIndustriesIndustrialLaser
   position: 9, -8
+
+- type: technology
+  id: DrakeIndustriesIriditeMetallurgy
+  name: research-technology-drake-industries-iridite-metallurgy
+  entityIcon: SheetIridite1
+  discipline: DrakeIndustries
+  tier: 3
+  cost: 60000
+  recipeUnlocks:
+  - DrakeCentrifugeIridiumMatrix
+  - DrakeCentrifugeCryoBinder
+  - DrakeCentrifugeIridite
+  technologyPrerequisites:
+  - DrakeIndustriesMaterialsScience
+  - IriditeMetallurgy
+  position: 10, -8

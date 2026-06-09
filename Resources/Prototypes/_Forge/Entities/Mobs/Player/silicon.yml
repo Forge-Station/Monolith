@@ -208,13 +208,14 @@
     - !type:DepartmentTimeRequirement
       department: Civilian
       time: 90000 # 25 hours
+    prototype: ForerunnerBorg
   - type: GhostTakeoverAvailable
 
 # Forerunner AI core
 - type: entity
   id: PlayerStationAiForerunner
   parent: PlayerStationAiEmpty
-  suffix: Ghost Role, Forerunner
+  suffix: Ghost Role, Forerunner, T1 only
   components:
   - type: Speech
     speechSounds: SyndieBorg
@@ -239,6 +240,16 @@
   - type: Anchorable
 
 - type: entity
+  id: PlayerStationAiForerunnerWhitelist
+  parent: PlayerStationAiForerunner
+  suffix: Ghost Role, Forerunner, Whitelist, T2+
+  components:
+  - type: ContainerFill
+    containers:
+      station_ai_mind_slot:
+      - StationAiBrainForerunnerWhitelist
+
+- type: entity
   id: StationAiBrainForerunner
   parent: StationAiBrain
   categories: [ HideSpawnMenu, DoNotMap ]
@@ -252,7 +263,7 @@
     rules: ghost-role-information-silicon-rules
     raffle:
       settings: default
-    prototype: RemnantAICore
+    prototype: ForerunnerAICore
   - type: LanguageKnowledge
     speaks:
     - TauCetiBasic
@@ -280,6 +291,19 @@
   - type: ShuttleBoostingPilot
     angularMultiplier: 1.2
     accelerationMultiplier: 1.2
+
+- type: entity
+  id: StationAiBrainForerunnerWhitelist
+  parent: StationAiBrainForerunner
+  categories: [ HideSpawnMenu, DoNotMap ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-redacted-core
+    description: ghost-role-information-redacted-core-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    prototype: ForerunnerAICoreWhitelist
 
 - type: entity
   id: AiHeldForerunner

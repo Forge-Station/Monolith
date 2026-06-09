@@ -32,16 +32,19 @@
       settings: default
     requirements:
     - !type:OverallPlaytimeRequirement
-      time: 540000 # 150 hours
+      time: 360000 # 100 hours
     - !type:DepartmentTimeRequirement
       department: Renegates
-      time: 180000 # 50 hours
+      time: 90000 # 25 hours
     - !type:DepartmentTimeRequirement
       department: TSF
-      time: 180000 # 50 hours
+      time: 90000 # 25 hours
+    - !type:DepartmentTimeRequirement
+      department: Empire
+      time: 90000 # 25 hours
     - !type:DepartmentTimeRequirement
       department: Civilian
-      time: 90000 # 25 hours
+      time: 180000 # 50 hours
   - type: GhostTakeoverAvailable
   - type: RandomMetadata
     nameSegments:

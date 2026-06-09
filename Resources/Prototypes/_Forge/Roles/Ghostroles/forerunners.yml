@@ -1,0 +1,21 @@
+- type: ghostRole
+  id: ForerunnerBorg
+  name: ghost-role-information-redacted-borg
+  description: ghost-role-information-redacted-borg-description
+  rules: ghost-role-information-silicon-rules
+  entityPrototype: PlayerBorgForerunnerGhostRolePlaytime
+
+- type: ghostRole
+  id: ForerunnerAICore
+  name: ghost-role-information-redacted-core
+  description: ghost-role-information-redacted-core-description
+  rules: ghost-role-information-silicon-rules
+  entityPrototype: PlayerStationAiForerunner
+
+- type: ghostRole
+  id: ForerunnerAICoreWhitelist
+  name: ghost-role-information-redacted-core
+  description: ghost-role-information-redacted-core-description
+  rules: ghost-role-information-silicon-rules
+  entityPrototype: PlayerStationAiForerunnerWhitelist
+  whitelisted: true

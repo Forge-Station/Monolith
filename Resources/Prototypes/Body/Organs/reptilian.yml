@@ -3,6 +3,8 @@
   parent: OrganAnimalStomach
   categories: [ HideSpawnMenu ]
   components:
+  - type: OrganPhysiology # Forge-change
+    organ: Stomach
   - type: Stomach
 #    specialDigestible: # WWDP-Remove
 #      tags:

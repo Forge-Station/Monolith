@@ -75,6 +75,23 @@
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
+      # Forge-change-start
+      - !type:ToleranceEffect
+        hidden: true
+        reagent: Desoxyephedrine
+        amount: 0.04
+        target: Brain
+      - !type:DiseaseEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Brain
+            reagent: Desoxyephedrine
+            min: 0.3
+            max: 1.0
+        disease: StimulantAddiction
+        severity: 1.4
+      # Forge-change-end
     Medicine:
       effects:
       - !type:ResetNarcolepsy
@@ -151,6 +168,23 @@
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
+      # Forge-change-start
+      - !type:ToleranceEffect
+        hidden: true
+        reagent: Ephedrine
+        amount: 0.025
+        target: Brain
+      - !type:DiseaseEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Brain
+            reagent: Ephedrine
+            min: 0.6
+            max: 1.0
+        disease: StimulantAddiction
+        severity: 1.2
+      # Forge-change-end
     Medicine:
       effects:
       - !type:ResetNarcolepsy
@@ -237,6 +271,23 @@
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
+      # Forge-change-start
+      - !type:ToleranceEffect
+        hidden: true
+        reagent: Stimulants
+        amount: 0.01
+        target: Brain
+      - !type:DiseaseEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Brain
+            reagent: Stimulants
+            min: 0.4
+            max: 1.0
+        disease: StimulantAddiction
+        severity: 1.55
+      # Forge-change-end
     Medicine:
       metabolismRate: 1.0
       effects:
@@ -316,6 +367,23 @@
             Shock: -0.1
             Cold: -0.1
             Radiation: -0.1
+      # Forge-change-start
+      - !type:ToleranceEffect
+        hidden: true
+        reagent: Nicotine
+        amount: 0.009
+        target: Body
+      - !type:DiseaseEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Body
+            reagent: Nicotine
+            min: 0.4
+            max: 1.0
+        disease: NicotineAddiction
+        severity: 1.4
+      # Forge-change-end
 
 # TODO: Replace these nonstandardized effects with generic brain damage
 - type: reagent
@@ -392,6 +460,23 @@
         type: Add
         time: 5
         refresh: false
+      # Forge-change-start
+      - !type:ToleranceEffect
+        hidden: true
+        reagent: SpaceDrugs
+        amount: 0.02
+        target: Brain
+      - !type:DiseaseEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Brain
+            reagent: SpaceDrugs
+            min: 0.3
+            max: 1.0
+        disease: SedativeAddiction
+        severity: 1.2
+      # Forge-change-end
 
 - type: reagent
   id: Bananadine
@@ -623,4 +708,20 @@
         type: Add
         time: 5
         refresh: false
- 
+      # Forge-change-start
+      - !type:ToleranceEffect
+        hidden: true
+        reagent: Happiness
+        amount: 0.1
+        target: Brain
+      - !type:DiseaseEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Brain
+            reagent: Happiness
+            min: 0.3
+            max: 1.0
+        disease: SedativeAddiction
+        severity: 1.4
+      # Forge-change-end

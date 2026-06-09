@@ -90,3 +90,29 @@
         - !type:OrganType
           type: Demon
           shouldHave: false
+      # Forge-change-start
+      - !type:ToleranceEffect
+        hidden: true
+        reagent: DemonBlood
+        amount: 0.02
+        target: Heart
+      - !type:HealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          reagent: DemonBlood
+          source: Heart
+          min: 0.6
+          max: 1.0
+        - !type:OrganType
+          type: Demon
+          shouldHave: false
+        damage:
+          types:
+            Poison: 0.2
+            Heat: 0.2
+            Cold: 0.2
+            Bloodloss: 0.3
+      - !type:GenericDescEffect
+        description: forge-reagent-effect-tolerance
+      # Forge-change-end

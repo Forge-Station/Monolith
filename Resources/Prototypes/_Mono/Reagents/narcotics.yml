@@ -87,6 +87,40 @@
         visualType: Medium
         messages: [ "generic-reagent-effect-nauseous" ]
         probability: 0.5
+      # Forge-change-start
+      - !type:ToleranceEffect
+        hidden: true
+        reagent: Fentanyl
+        amount: 0.03
+        target: Brain
+      - !type:DiseaseEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Brain
+            reagent: Fentanyl
+            min: 0.3
+            max: 1.0
+        disease: OpioidAddiction
+        severityPerUnit: 1.9
+      - !type:HealthChange
+        hidden: true
+        conditions:
+        - !type:TotalDamage
+          min: 5
+        - !type:ReagentThreshold
+          max: 5
+        - !type:ToleranceCondition
+          source: Brain
+          reagent: Fentanyl
+          min: 0.6
+          max: 1.0
+        damage:
+          groups:
+            Burn: 1.5
+            Brute: 3
+            Toxin: 0.5
+      # Forge-change-end
 
 # Monolithic
 

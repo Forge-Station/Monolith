@@ -921,7 +921,6 @@
           min: 15
         reagent: Tricordrazine
         amount: -0.8
-        
 
 - type: reagent
   id: Lipozine
@@ -956,13 +955,35 @@
           Burn: -1.5
           Toxin: -1.5
           Airloss: -1.5
-          Brute: -1.5   
+          Brute: -1.5
       - !type:AdjustReagent # Mono: Overdose, penalize metabolism
         conditions:
         - !type:ReagentThreshold
           min: 60
         reagent: Omnizine
         amount: -1.0
+      # Forge-change-start
+      - !type:ToleranceEffect
+        hidden: true
+        reagent: Omnizine
+        amount: 0.002
+        target: Heart
+      - !type:HealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Heart
+          reagent: Omnizine
+          min: 0.6
+          max: 1.0
+        damage:
+          Burn: 0.75
+          Toxin: 0.75
+          Airloss: 0.75
+          Brute: 0.75
+      - !type:GenericDescEffect
+        description: forge-reagent-effect-tolerance
+      # Forge-change-end
 
 - type: reagent
   id: Ultravasculine
@@ -1460,7 +1481,6 @@
           component: ForcedSleeping
           refresh: false
           type: Add
-        
 
 - type: reagent
   id : Aloxadone
@@ -1651,3 +1671,24 @@
       - !type:AdjustReagent
         reagent: MindbreakerToxin
         amount: -3.0
+        # Forge-change-start
+      - !type:ToleranceEffect
+        hidden: true
+        reagent: Haloperidol
+        amount: 0.005
+        target: Liver
+      - !type:DiseaseEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Liver
+            reagent: Haloperidol
+            min: 0.6
+            max: 1.0
+        disease: SedativeAddiction
+        severity: 0.95
+      - !type:SuppressEffect
+        hidden: true
+        disease: StimulantAddiction
+        duration: 55
+        # Forge-change-end

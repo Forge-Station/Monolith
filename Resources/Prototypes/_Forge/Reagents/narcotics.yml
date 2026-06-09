@@ -1,0 +1,201 @@
+# region Codeine
+- type: reagent
+  id: Codeine
+  name: reagent-name-codeine
+  group: Narcotics
+  desc: reagent-desc-codeine
+  physicalDesc: reagent-physical-desc-soothing
+  flavor: bitter
+  color: "#d4c5a9"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+        - !type:HealthChange
+          conditions:
+            - !type:TotalDamage
+              min: 5
+          damage:
+            groups:
+              Brute: -4
+              Burn: -2
+        - !type:SuppressEffect
+          hidden: true
+          disease: AcutePain
+          duration: 30
+        - !type:SuppressEffect
+          hidden: true
+          disease: ChronicPain
+          duration: 30
+    Narcotic:
+      metabolismRate: 0.5
+      effects:
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Remove
+          time: 3
+          probability: 0.05
+        - !type:Drunk
+          slurSpeech: false
+          boozePower: 2
+        - !type:PopupMessage
+          hidden: true
+          type: Local
+          visualType: Small
+          messages: [ "generic-reagent-effect-nauseous" ]
+          probability: 0.2
+          conditions:
+            - !type:ReagentThreshold
+              min: 4
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Codeine
+              min: 0.5
+              max: 1.0
+        # Addiction
+        - !type:ToleranceEffect
+          hidden: true
+          reagent: Codeine
+          amount: 0.05
+          target: Brain
+        - !type:DiseaseEffect
+          hidden: true
+          conditions:
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Codeine
+              min: 0.2
+              max: 1.0
+          disease: OpioidAddiction
+          severity: 2.4
+
+# region Morphine
+- type: reagent
+  id: Morphine
+  name: reagent-name-morphine
+  group: Narcotics
+  desc: reagent-desc-morphine
+  physicalDesc: reagent-physical-desc-soothing
+  flavor: bitter
+  color: "#c8d8e0"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.75
+      effects:
+        - !type:HealthChange
+          conditions:
+            - !type:TotalDamage
+              min: 5
+          damage:
+            groups:
+              Brute: -5
+              Toxin: -0.5
+        - !type:HealthChange
+          hidden: true
+          conditions:
+            - !type:TotalDamage
+              min: 5
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.5
+              max: 1.0
+          damage:
+            groups:
+              Brute: 2.5
+              Toxin: 0.2
+        - !type:SuppressEffect
+          disease: PainSyndrome
+          duration: 30
+        - !type:SuppressEffect
+          disease: ChronicPain
+          duration: 30
+    Narcotic:
+      metabolismRate: 0.75
+      effects:
+        - !type:MovespeedModifier
+          walkSpeedModifier: 1.01
+          sprintSpeedModifier: 1.01
+        - !type:GenericStatusEffect
+          key: Stutter
+          component: StutteringAccent
+          probability: 0.5
+        - !type:Jitter
+          probability: 0.4
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Remove
+          time: 6
+          probability: 0.07
+        - !type:Drunk
+          slurSpeech: true
+          boozePower: 4
+        - !type:ChemVomit
+          hidden: true
+          probability: 0.1
+          conditions:
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.2
+              max: 1.0
+            - !type:ReagentThreshold
+              min: 3
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.8
+              max: 1.0
+        - !type:ChemVomit
+          probability: 0.04
+          conditions:
+            - !type:ReagentThreshold
+              min: 8
+        - !type:HealthChange
+          conditions:
+            - !type:ReagentThreshold
+              min: 10
+          damage:
+            types:
+              Poison: 1.2
+              Asphyxiation: 2
+        - !type:HealthChange
+          conditions:
+            - !type:ReagentThreshold
+              min: 18
+          damage:
+            types:
+              Poison: 3
+              Asphyxiation: 3.5
+        - !type:PopupMessage
+          hidden: true
+          conditions:
+            - !type:ReagentThreshold
+              min: 2
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.45
+              max: 1.0
+          type: Local
+          visualType: Medium
+          messages: [ "generic-reagent-effect-nauseous" ]
+          probability: 0.4
+        # Addiction
+        - !type:ToleranceEffect
+          hidden: true
+          reagent: Morphine
+          amount: 0.02
+          target: Brain
+        - !type:DiseaseEffect
+          hidden: true
+          conditions:
+            - !type:ToleranceCondition
+              reagent: Morphine
+              source: Brain
+              min: 0.3
+              max: 1.0
+          disease: OpioidAddiction
+          severity: 2.0

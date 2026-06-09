@@ -32,7 +32,7 @@ public sealed partial class DiseasePrototype : IPrototype
     [DataField]
     public List<DiseaseStage> Stages { get; set; } = new();
 
-    [DataField]
+    [DataField(serverOnly: true)]
     public List<DiseaseTrigger> Triggers { get; set; } = new();
 }
 
@@ -42,7 +42,7 @@ public sealed partial class DiseaseStage
     [DataField]
     public float MinSeverity { get; set; } = 0f;
 
-    [DataField]
+    [DataField(serverOnly: true)]
     public List<DiseaseSymptom> Symptoms { get; set; } = new();
 }
 

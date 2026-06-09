@@ -102,7 +102,7 @@
             min: 0.3
             max: 1.0
         disease: OpioidAddiction
-        severityPerUnit: 1.9
+        severity: 1.9
       - !type:HealthChange
         hidden: true
         conditions:

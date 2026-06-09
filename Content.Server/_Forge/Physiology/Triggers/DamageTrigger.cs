@@ -1,9 +1,9 @@
-using Robust.Shared.Serialization.Manager.Attributes;
+using JetBrains.Annotations;
 using Content.Shared._Forge.Physiology.Disease.Triggers;
 
 namespace Content.Server._Forge.Physiology.Disease.Triggers;
 
-[DataDefinition]
+[UsedImplicitly]
 public sealed partial class DamageTrigger : DiseaseTrigger
 {
     [DataField]

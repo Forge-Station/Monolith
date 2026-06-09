@@ -1,12 +1,12 @@
-using Content.Shared._Forge.Physiology.Disease;
+using JetBrains.Annotations;
 using Content.Shared.Movement.Systems;
 using Content.Shared.StatusEffect;
-using Robust.Shared.Serialization.Manager.Attributes;
+using Content.Shared._Forge.Physiology.Disease;
 using Content.Shared._Forge.Physiology.Disease.Symptoms;
 
 namespace Content.Server._Forge.Physiology.Disease.Symptoms;
 
-[DataDefinition]
+[UsedImplicitly]
 public sealed partial class MovespeedSymptom : DiseaseSymptom
 {
     [DataField]

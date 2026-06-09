@@ -1,12 +1,12 @@
-using Content.Shared._Forge.Physiology.Disease;
-using Content.Shared.EntityEffects;
+using JetBrains.Annotations;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization.Manager.Attributes;
+using Content.Shared.EntityEffects;
+using Content.Shared._Forge.Physiology.Disease;
 using Content.Shared._Forge.Physiology.Disease.Symptoms;
 
 namespace Content.Server._Forge.Physiology.Disease.Symptoms;
 
-[DataDefinition]
+[UsedImplicitly]
 public sealed partial class EntityEffectList : DiseaseSymptom
 {
     [DataField]

@@ -10,6 +10,13 @@
   recipes:
   - DrakeCentrifugePlastitanium
 
+- type: latheRecipePack
+  id: DrakeCentrifugeIriditeProcessing
+  recipes:
+  - DrakeCentrifugeIridiumMatrix
+  - DrakeCentrifugeCryoBinder
+  - DrakeCentrifugeIridite
+
 # Circuit imprinter - recipes unlock via DrakeIndustriesMachines / DrakeIndustriesCentrifuge.
 - type: latheRecipePack
   id: DrakeIndustriesCircuitBoards

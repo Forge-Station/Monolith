@@ -91,7 +91,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
 
     private void OnInit(EntityUid uid, ShipWeaponFabricatorComponent component, ComponentInit args)
     {
-        component.BoardContainer = _container.EnsureContainer<ContainerSlot>(uid, ShipWeaponFabricatorComponent.BoardContainerName);
+        component.BoardContainer = _container.EnsureContainer<Container>(uid, ShipWeaponFabricatorComponent.BoardContainerName);
         component.PartContainer = _container.EnsureContainer<Container>(uid, ShipWeaponFabricatorComponent.PartContainerName);
     }
 
@@ -171,18 +171,27 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             return;
         }
 
-        var board = component.BoardContainer.ContainedEntity!.Value;
+        var board = GetActiveBoard(component)!.Value;
+        if (component.BoardContainer.Count > 1)
+        {
+            args.PushMarkup(Loc.GetString("ship-weapon-fabricator-examine-board-queued",
+                ("board", Name(board)),
+                ("queued", component.BoardContainer.Count - 1)));
+            return;
+        }
+
         args.PushMarkup(Loc.GetString("ship-weapon-fabricator-examine-board", ("board", Name(board))));
     }
 
     private void OnInteractUsing(EntityUid uid, ShipWeaponFabricatorComponent component, InteractUsingEvent args)
     {
-        if (args.Handled || component.Fabricating)
+        if (args.Handled)
             return;
 
-        if (TryComp<MachinePartComponent>(args.Used, out _))
+        if (TryComp<MachineBoardComponent>(args.Used, out _) &&
+            TryComp<ShipWeaponBoardComponent>(args.Used, out _))
         {
-            if (TryInsertPart(args.Used, component))
+            if (TryInsertBoard(uid, args.Used, component, args.User))
             {
                 args.Handled = true;
                 UpdateUi(uid, component);
@@ -191,9 +200,12 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             return;
         }
 
-        if (!component.HasBoard)
+        if (component.Fabricating)
+            return;
+
+        if (TryComp<MachinePartComponent>(args.Used, out _))
         {
-            if (TryInsertBoard(uid, args.Used, component))
+            if (TryInsertPart(args.Used, component))
             {
                 args.Handled = true;
                 UpdateUi(uid, component);
@@ -260,36 +272,15 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
 
     private void OnStartPressed(EntityUid uid, ShipWeaponFabricatorComponent component, ShipWeaponFabricatorStartMessage args)
     {
-        if (component.Fabricating)
+        if (!TryStartFabrication(uid, component, args.Actor))
             return;
 
-        if (!component.HasBoard || !IsComplete(component))
-            return;
-
-        if (!IsPowered(uid))
-        {
-            _popup.PopupEntity(Loc.GetString("ship-weapon-fabricator-popup-unpowered"), uid, args.Actor);
-            return;
-        }
-
-        if (!CanOutput(uid))
-        {
-            _popup.PopupEntity(Loc.GetString("ship-weapon-fabricator-popup-blocked"), uid, args.Actor);
-            return;
-        }
-
-        var board = component.BoardContainer.ContainedEntity!.Value;
-        if (!TryComp<ShipWeaponBoardComponent>(board, out var shipWeaponBoard))
-            return;
-
-        component.FabricationEndTime = _timing.CurTime + shipWeaponBoard.FabricationTime;
-        SetFabricatingState(uid, component, true);
         UpdateUi(uid, component);
     }
 
     private void OnEjectPressed(EntityUid uid, ShipWeaponFabricatorComponent component, ShipWeaponFabricatorEjectMessage args)
     {
-        if (component.Fabricating || component.BoardContainer.ContainedEntity is not { } board)
+        if (component.Fabricating || GetActiveBoard(component) is not { } board)
             return;
 
         _hands.PickupOrDrop(args.Actor, board, checkActionBlocker: false, dropNear: true);
@@ -345,7 +336,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
         }
     }
 
-    private bool TryInsertBoard(EntityUid uid, EntityUid used, ShipWeaponFabricatorComponent component)
+    private bool TryInsertBoard(EntityUid uid, EntityUid used, ShipWeaponFabricatorComponent component, EntityUid? user = null)
     {
         if (!TryComp<MachineBoardComponent>(used, out var machineBoard) ||
             !TryComp<ShipWeaponBoardComponent>(used, out _))
@@ -355,14 +346,26 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             _whitelist.IsBlacklistPass(component.BoardBlacklist, used))
             return false;
 
+        if (component.BoardContainer.Count >= component.MaxBoardQueue)
+        {
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("ship-weapon-fabricator-popup-queue-full"), uid, user.Value);
+
+            return false;
+        }
+
         if (!_container.TryRemoveFromContainer(used, false, out var wasInContainer) && wasInContainer)
             return false;
 
         if (!_container.Insert(used, component.BoardContainer))
             return false;
 
-        ResetProgressAndRequirements(component, machineBoard);
-        _materialStorage.UpdateMaterialWhitelist(uid);
+        if (component.BoardContainer.Count == 1)
+        {
+            ResetProgressAndRequirements(component, machineBoard);
+            _materialStorage.UpdateMaterialWhitelist(uid);
+        }
+
         RegenerateProgress(uid, component);
         return true;
     }
@@ -466,7 +469,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             return;
         }
 
-        var board = component.BoardContainer.ContainedEntity!.Value;
+        var board = GetActiveBoard(component)!.Value;
         if (!TryComp<MachineBoardComponent>(board, out var machineBoard))
             return;
 
@@ -535,7 +538,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             return;
         }
 
-        var board = component.BoardContainer.ContainedEntity!.Value;
+        var board = GetActiveBoard(component)!.Value;
         if (!TryComp<MachineBoardComponent>(board, out var machineBoard))
         {
             SetFabricatingState(uid, component, false);
@@ -553,10 +556,74 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
 
         QueueDel(board);
 
-        SetFabricatingState(uid, component, false);
         _materialStorage.UpdateMaterialWhitelist(uid);
         RegenerateProgress(uid, component);
+
+        if (TryContinueQueue(uid, component))
+        {
+            UpdateUi(uid, component);
+            return;
+        }
+
+        SetFabricatingState(uid, component, false);
         UpdateUi(uid, component);
+    }
+
+    private bool TryStartFabrication(EntityUid uid, ShipWeaponFabricatorComponent component, EntityUid? user)
+    {
+        if (component.Fabricating)
+            return false;
+
+        if (!component.HasBoard || !IsComplete(component))
+            return false;
+
+        if (!IsPowered(uid))
+        {
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("ship-weapon-fabricator-popup-unpowered"), uid, user.Value);
+
+            return false;
+        }
+
+        if (!CanOutput(uid))
+        {
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("ship-weapon-fabricator-popup-blocked"), uid, user.Value);
+
+            return false;
+        }
+
+        var board = GetActiveBoard(component)!.Value;
+        if (!TryComp<ShipWeaponBoardComponent>(board, out var shipWeaponBoard))
+            return false;
+
+        component.FabricationEndTime = _timing.CurTime + shipWeaponBoard.FabricationTime;
+        SetFabricatingState(uid, component, true);
+        return true;
+    }
+
+    private bool TryContinueQueue(EntityUid uid, ShipWeaponFabricatorComponent component)
+    {
+        if (!component.HasBoard || !IsComplete(component))
+            return false;
+
+        if (!IsPowered(uid) || !CanOutput(uid))
+            return false;
+
+        var board = GetActiveBoard(component)!.Value;
+        if (!TryComp<ShipWeaponBoardComponent>(board, out var shipWeaponBoard))
+            return false;
+
+        component.FabricationEndTime = _timing.CurTime + shipWeaponBoard.FabricationTime;
+        return true;
+    }
+
+    private EntityUid? GetActiveBoard(ShipWeaponFabricatorComponent component)
+    {
+        if (component.BoardContainer.Count == 0)
+            return null;
+
+        return component.BoardContainer.ContainedEntities[0];
     }
 
     private void SetFabricatingState(EntityUid uid, ShipWeaponFabricatorComponent component, bool fabricating)
@@ -615,7 +682,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
         string? targetName = null;
         string? targetPrototypeId = null;
 
-        if (component.BoardContainer?.ContainedEntity is { } board &&
+        if (GetActiveBoard(component) is { } board &&
             TryComp<MachineBoardComponent>(board, out var machineBoard))
         {
             boardName = Name(board);
@@ -634,7 +701,9 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             targetPrototypeId,
             component.HasBoard && IsComplete(component) && !component.Fabricating && IsPowered(uid) && CanOutput(uid),
             component.HasBoard && !component.Fabricating,
-            component.Fabricating);
+            component.Fabricating,
+            component.BoardContainer.Count,
+            BuildQueueText(component));
 
         _ui.SetUiState(uid, ShipWeaponFabricatorUiKey.Key, state);
     }
@@ -645,7 +714,15 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             return Loc.GetString("ship-weapon-fabricator-ui-status-no-board");
 
         if (component.Fabricating)
+        {
+            if (component.BoardContainer.Count > 1)
+            {
+                return Loc.GetString("ship-weapon-fabricator-ui-status-fabricating-queued",
+                    ("queued", component.BoardContainer.Count - 1));
+            }
+
             return Loc.GetString("ship-weapon-fabricator-ui-status-fabricating");
+        }
 
         if (!IsPowered(uid))
             return Loc.GetString("ship-weapon-fabricator-ui-status-unpowered");
@@ -659,6 +736,21 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
         }
 
         return Loc.GetString("ship-weapon-fabricator-ui-status-awaiting-parts");
+    }
+
+    private string? BuildQueueText(ShipWeaponFabricatorComponent component)
+    {
+        if (component.BoardContainer.Count <= 1)
+            return null;
+
+        var queuedNames = component.BoardContainer.ContainedEntities
+            .Skip(1)
+            .Select(entity => Name(entity))
+            .ToArray();
+
+        return Loc.GetString("ship-weapon-fabricator-ui-queue-line",
+            ("queued", queuedNames.Length),
+            ("names", string.Join(", ", queuedNames)));
     }
 
     private string BuildRequirementsText(ShipWeaponFabricatorComponent component)
@@ -830,7 +922,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
             }
         }
 
-        foreach (var (materialId, volume) in storage.Storage)
+        foreach (var (materialId, volume) in _materialStorage.GetStoredMaterials((uid, storage)))
         {
             if (!_prototype.TryIndex<MaterialPrototype>(materialId, out var material))
                 continue;
@@ -856,7 +948,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
 
     private int GetRequiredPartRating(ShipWeaponFabricatorComponent component)
     {
-        if (component.BoardContainer?.ContainedEntity is not { } board ||
+        if (GetActiveBoard(component) is not { } board ||
             !TryComp<ShipWeaponBoardComponent>(board, out var shipWeaponBoard))
             return 1;
 
@@ -897,8 +989,7 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
 
         var coordinates = Transform(uid).Coordinates;
 
-        if (component.BoardContainer.ContainedEntity is { } board)
-            _container.Remove(board, component.BoardContainer, force: true, destination: coordinates);
+        _container.EmptyContainer(component.BoardContainer, true, coordinates);
 
         _container.EmptyContainer(component.PartContainer, true, coordinates);
     }

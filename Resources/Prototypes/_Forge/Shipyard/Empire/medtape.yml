@@ -6,7 +6,7 @@
   category: Small
   group: Empire
   access: Empire
-  price: 78000
+  price: 84000 #PR:238 price UP
   shuttlePath: /Maps/_Forge/Shuttles/Empire/medtape.yml
   guidebookPage: Null
   class:

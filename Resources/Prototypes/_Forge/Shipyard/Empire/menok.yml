@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: EMRF Менок
   description: Ракетный фрегат Империи.
-  price: 144300
+  price: 155400 #PR:238 price UP
   category: Medium
   group: Empire
   access: Empire

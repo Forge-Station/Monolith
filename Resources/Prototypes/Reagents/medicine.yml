@@ -964,7 +964,7 @@
         amount: -1.0
       # Forge-change-start
       - !type:ToleranceEffect
-        hidden: true
+        # hidden: true
         reagent: Omnizine
         amount: 0.002
         target: Heart
@@ -982,7 +982,7 @@
           Airloss: 0.75
           Brute: 0.75
       - !type:GenericDescEffect
-        description: forge-reagent-effect-tolerance
+        description: forge-reagent-tolerance-badhealth
       # Forge-change-end
 
 - type: reagent
@@ -1673,7 +1673,7 @@
         amount: -3.0
         # Forge-change-start
       - !type:ToleranceEffect
-        hidden: true
+        # hidden: true
         reagent: Haloperidol
         amount: 0.005
         target: Liver
@@ -1691,4 +1691,6 @@
         hidden: true
         disease: StimulantAddiction
         duration: 55
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-addiction
         # Forge-change-end

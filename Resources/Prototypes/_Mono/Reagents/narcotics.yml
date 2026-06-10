@@ -89,7 +89,7 @@
         probability: 0.5
       # Forge-change-start
       - !type:ToleranceEffect
-        hidden: true
+        # hidden: true
         reagent: Fentanyl
         amount: 0.03
         target: Brain
@@ -120,6 +120,10 @@
             Burn: 1.5
             Brute: 3
             Toxin: 0.5
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-addiction
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
       # Forge-change-end
 
 # Monolithic

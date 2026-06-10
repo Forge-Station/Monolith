@@ -5,7 +5,7 @@
   organ: Brain
   interval: 5
   severityDecay: 0.03
-  flareDelay: 240
+  flareDelay: 300
   stages:
     - minSeverity: 0
     # region Stage 1
@@ -29,7 +29,7 @@
                 - disease-stimulant-flare-mild-1
                 - disease-stimulant-flare-mild-2
               visualType: SmallCaution
-              probability: 0.35
+              probability: 0.03
     # region Stage 2
     - minSeverity: 45
       symptoms:
@@ -56,7 +56,7 @@
                 - disease-stimulant-flare-moderate-2
                 - disease-stimulant-flare-moderate-3
               visualType: MediumCaution
-              probability: 0.25
+              probability: 0.05
         - !type:EntityEffectList # name: half-permanent staff
           flareOnly: true
           effects:
@@ -72,7 +72,6 @@
           walkModifier: 0.65
           sprintModifier: 0.65
           key: StimulantAddiction
-          time: 7.0
         - !type:EntityEffectList # name: random
           flareOnly: true
           effects:
@@ -87,7 +86,7 @@
                 - disease-stimulant-flare-severe-2
                 - disease-stimulant-flare-severe-3
               visualType: LargeCaution
-              probability: 0.3
+              probability: 0.1
             - !type:Emote
               emote: Scream
               showInChat: false
@@ -97,16 +96,32 @@
           chance: 0.12
           effects:
             - !type:GenericStatusEffect
+              key: Stutter
+              component: StutteringAccent
+              time: 13
+              type: Add
+            - !type:GenericStatusEffect
               key: Drowsiness
               component: Drowsiness
               type: Add
-              time: 3
+              time: 8
             - !type:TunnelVision
               intensity: 1.4
               pulse: 2.5
               darkness: 0.95
               color: "#251827"
-              time: 3
+              time: 12
+        - !type:EntityEffectList # name: OMG IM PARALYZED
+          flareOnly: true
+          chance: 0.08
+          effects:
+            - !type:GenericStatusEffect
+              key: TemporaryBlindness
+              component: TemporaryBlindness
+              time: 6
+              type: Add
+            - !type:Paralyze
+              paralyzeTime: 6
 
 # region // OpioidAddiction
 - type: disease
@@ -115,7 +130,7 @@
   organ: Brain
   interval: 6
   severityDecay: 0.025
-  flareDelay: 220
+  flareDelay: 340
   stages:
     - minSeverity: 0
     # region Stage 1
@@ -211,17 +226,6 @@
               refresh: false
             - !type:ChemVomit
               probability: 0.1
-        - !type:EntityEffectList # name: OMG IM PARALYZED
-          flareOnly: true
-          chance: 0.08
-          effects:
-            - !type:GenericStatusEffect
-              key: TemporaryBlindness
-              component: TemporaryBlindness
-              time: 6
-              type: Add
-            - !type:Paralyze
-              paralyzeTime: 6
         - !type:EntityEffectList # name: I CANT BREATH WTF
           flareOnly: true
           chance: 0.2
@@ -245,7 +249,7 @@
   organ: Brain
   interval: 8.0
   severityDecay: 0.02
-  flareDelay: 180
+  flareDelay: 360
   stages:
     - minSeverity: 0
     # region Stage 1
@@ -378,7 +382,7 @@
   organ: Body
   interval: 10
   severityDecay: 0.001
-  flareDelay: 160
+  flareDelay: 240
   stages:
     - minSeverity: 0
     # region Stage 1

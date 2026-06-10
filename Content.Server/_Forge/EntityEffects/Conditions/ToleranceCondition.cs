@@ -23,7 +23,7 @@ public sealed partial class ToleranceCondition : EntityEffectCondition
     public ToleranceReadMethod Method = ToleranceReadMethod.Average;
 
     public override string GuidebookExplanation(IPrototypeManager prototype)
-        => Loc.GetString("addiction-condition-guidebook");
+        => Loc.GetString("reagent-condition-tolerance-guidebook");
 
     public override bool Condition(EntityEffectBaseArgs args)
     {

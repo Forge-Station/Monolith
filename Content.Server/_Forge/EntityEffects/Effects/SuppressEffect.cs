@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Server._Forge.Physiology.Disease;
+using Content.Shared._Forge.Physiology.Disease;
 
 namespace Content.Server._Forge.EntityEffects.Effects;
 
@@ -15,7 +16,12 @@ public sealed partial class SuppressEffect : EntityEffect
     public float Duration = 60f;
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("reagent-effect-guidebook-suppress-withdrawal");
+    {
+        if (!prototype.TryIndex<DiseasePrototype>(Disease, out var disease))
+            return null;
+
+        return Loc.GetString("reagent-effect-guidebook-suppress-withdrawal", ("disease", Loc.GetString(disease.Name)));
+    }
 
     public override void Effect(EntityEffectBaseArgs args)
     {

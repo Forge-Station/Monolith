@@ -92,7 +92,7 @@
           shouldHave: false
       # Forge-change-start
       - !type:ToleranceEffect
-        hidden: true
+        # hidden: true
         reagent: DemonBlood
         amount: 0.02
         target: Heart
@@ -114,5 +114,5 @@
             Cold: 0.2
             Bloodloss: 0.3
       - !type:GenericDescEffect
-        description: forge-reagent-effect-tolerance
+        description: forge-reagent-tolerance-badhealth
       # Forge-change-end

@@ -20,11 +20,11 @@
               Brute: -4
               Burn: -2
         - !type:SuppressEffect
-          hidden: true
+          # hidden: true
           disease: AcutePain
           duration: 30
         - !type:SuppressEffect
-          hidden: true
+          # hidden: true
           disease: ChronicPain
           duration: 30
     Narcotic:
@@ -55,7 +55,7 @@
               max: 1.0
         # Addiction
         - !type:ToleranceEffect
-          hidden: true
+          # hidden: true
           reagent: Codeine
           amount: 0.05
           target: Brain
@@ -69,6 +69,8 @@
               max: 1.0
           disease: OpioidAddiction
           severity: 2.4
+        - !type:GenericDescEffect
+          description: forge-reagent-tolerance-addiction
 
 # region Morphine
 - type: reagent
@@ -107,10 +109,12 @@
               Toxin: 0.2
         - !type:SuppressEffect
           disease: PainSyndrome
-          duration: 30
+          duration: 60
         - !type:SuppressEffect
           disease: ChronicPain
-          duration: 30
+          duration: 60
+        - !type:GenericDescEffect
+          description: forge-reagent-tolerance-badhealth
     Narcotic:
       metabolismRate: 0.75
       effects:
@@ -185,7 +189,7 @@
           probability: 0.4
         # Addiction
         - !type:ToleranceEffect
-          hidden: true
+          # hidden: true
           reagent: Morphine
           amount: 0.02
           target: Brain
@@ -199,3 +203,5 @@
               max: 1.0
           disease: OpioidAddiction
           severity: 2.0
+        - !type:GenericDescEffect
+          description: forge-reagent-tolerance-addiction

@@ -1,5 +1,3 @@
-using Robust.Shared.GameObjects;
-using Robust.Shared.IoC;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -26,6 +24,7 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
 
     private ISawmill _sawmill = default!;
     private readonly HashSet<EntityUid> _activeEntities = new();
+    private readonly List<EntityUid> _toAddEntities = new();
     private readonly List<EntityUid> _toRemoveEntities = new();
     private readonly List<string> _toRemoveDiseases = new();
 
@@ -103,6 +102,10 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
 
         foreach (var uid in _toRemoveEntities)
             _activeEntities.Remove(uid);
+        foreach (var uid in _toAddEntities)
+            _activeEntities.Add(uid);
+
+        _toAddEntities.Clear();
     }
 
     private void ProcessDiseases(EntityUid uid, IPhysiologyHolder holder)
@@ -263,7 +266,7 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
             LastStage = -1,
         };
 
-        _activeEntities.Add(target);
+        _toAddEntities.Add(target);
     }
 
     // Removes a disease from all targets resolved by the prototype's Organ flag.

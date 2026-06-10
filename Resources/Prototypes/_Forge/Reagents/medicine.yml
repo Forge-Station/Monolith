@@ -322,6 +322,14 @@
           refresh: false
         - !type:Drunk
           boozePower: 2
+        - !type:SuppressEffect
+          hidden: true
+          disease: PainSyndrome
+          duration: 25
+        - !type:SuppressEffect
+          hidden: true
+          disease: ChronicPain
+          duration: 20
         - !type:GenericDescEffect
           description: forge-reagent-effect-methadone
         - !type:GenericDescEffect
@@ -342,7 +350,7 @@
       metabolismRate: 0.5
       effects:
         - !type:SuppressEffect
-          hidden: true
+          # hidden: true
           disease: NicotineAddiction
           duration: 60
         - !type:GenericDescEffect
@@ -386,7 +394,7 @@
           description: forge-reagent-effect-clonidine
         # Addiction
         - !type:ToleranceEffect
-          hidden: true
+          # hidden: true
           reagent: Clonidine
           amount: 0.01
         - !type:DiseaseEffect
@@ -399,3 +407,5 @@
               max: 1.0
           disease: SedativeAddiction
           severity: 1.1
+        - !type:GenericDescEffect
+          description: forge-reagent-tolerance-addiction

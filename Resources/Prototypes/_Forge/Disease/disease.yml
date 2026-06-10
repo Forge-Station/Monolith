@@ -5,7 +5,7 @@
   organ: Body
   interval: 6
   severityDecay: 0.5
-  flareDelay: 30
+  flareDelay: 120
   triggers:
     - !type:DamageTrigger
       damageThreshold: 11
@@ -120,7 +120,7 @@
   permanent: true
   interval: 8.0
   severityDecay: 0.0
-  flareDelay: 60
+  flareDelay: 180
   stages:
     - minSeverity: 0
     # region Stage 1

@@ -15,6 +15,38 @@
             - material: PlastitaniumGlass
               amount: 2
               doAfter: 2
+        - to: plastitaniumWindowUran
+          steps:
+            - material: PlastitaniumGlass
+              amount: 2
+              doAfter: 2
+            - material: Uranium
+              amount: 2
+              doAfter: 2
+        - to: plastitaniumWindowUranDiagonal
+          steps:
+            - material: PlastitaniumGlass
+              amount: 2
+              doAfter: 2
+            - material: Uranium
+              amount: 2
+              doAfter: 2
+        - to: plastitaniumWindowPlasma
+          steps:
+            - material: PlastitaniumGlass
+              amount: 2
+              doAfter: 2
+            - material: Plasma
+              amount: 2
+              doAfter: 2
+        - to: plastitaniumWindowPlasmaDiagonal
+          steps:
+            - material: PlastitaniumGlass
+              amount: 2
+              doAfter: 2
+            - material: Plasma
+              amount: 2
+              doAfter: 2
         # Forge-Change-End
 
     - node: plastitaniumWindow
@@ -66,6 +98,58 @@
           completed:
             - !type:SpawnPrototype
               prototype: SheetPlastitaniumGlass1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionSteps
+    - node: plastitaniumWindowUran
+      entity: PlastitaniumWindowUran
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlastitaniumGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetUranium1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionSteps # Forge-Change
+    - node: plastitaniumWindowUranDiagonal
+      entity: PlastitaniumWindowUranDiagonal
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlastitaniumGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetUranium1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionSteps # Forge-Change
+    - node: plastitaniumWindowPlasma
+      entity: PlastitaniumWindowPlasma
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlastitaniumGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasma1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionSteps # Forge-Change
+    - node: plastitaniumWindowPlasmaDiagonal
+      entity: PlastitaniumWindowPlasmaDiagonal
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlastitaniumGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasma1
               amount: 2
             - !type:DeleteEntity {}
           steps: *deconstructionSteps # Forge-Change

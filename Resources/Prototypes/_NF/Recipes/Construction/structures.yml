@@ -103,4 +103,78 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+
+- type: construction
+  name: plastitanium uranium window
+  id: PlastitaniumWindowUran
+  graph: Plastitanium
+  startNode: start
+  targetNode: plastitaniumWindowUran
+  category: construction-category-structures
+  description: Don't smudge up the glass down there.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Forge/Structures/Windows/plastitanium_uran_window.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: plastitanium uranium diagonal window
+  id: PlastitaniumWindowUranDiagonal
+  graph: Plastitanium
+  startNode: start
+  targetNode: plastitaniumWindowUranDiagonal
+  category: construction-category-structures
+  description: Don't smudge up the glass down there.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Forge/Structures/Windows/plastitanium_uran_window_diagonal.rsi
+    state: state0
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: plastitanium plasma window
+  id: PlastitaniumWindowPlasma
+  graph: Plastitanium
+  startNode: start
+  targetNode: plastitaniumWindowPlasma
+  category: construction-category-structures
+  description: Don't smudge up the glass down there.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Forge/Structures/Windows/plastitanium_plasma_window.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: plastitanium plasma diagonal window
+  id: PlastitaniumWindowPlasmaDiagonal
+  graph: Plastitanium
+  startNode: start
+  targetNode: plastitaniumWindowPlasmaDiagonal
+  category: construction-category-structures
+  description: Don't smudge up the glass down there.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Forge/Structures/Windows/plastitanium_plasma_window_diagonal.rsi
+    state: state0
+  objectType: Structure
+  placementMode: SnapgridCenter
 # Forge-Change-End

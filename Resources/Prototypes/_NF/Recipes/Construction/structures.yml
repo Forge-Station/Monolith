@@ -103,41 +103,4 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
-
-- type: construction
-  name: plastitanium diagonal window
-  id: PlastitaniumWindowDiagonal
-  graph: Plastitanium
-  startNode: start
-  targetNode: plastitaniumWindowDiagonal
-  category: construction-category-structures
-  description: Don't smudge up the glass down there.
-  canBuildInImpassable: true
-  conditions:
-    - !type:EmptyOrWindowValidInTile
-    - !type:NoWindowsInTile
-  icon:
-    sprite: Structures/Windows/plastitanium_window_diagonal.rsi
-    state: state0
-  objectType: Structure
-  placementMode: SnapgridCenter
-
-- type: construction
-  name: plastitanium window
-  id: PlastitaniumWindow
-  graph: Plastitanium
-  startNode: start
-  targetNode: plastitaniumWindow
-  category: construction-category-structures
-  description: Don't smudge up the glass down there.
-  canBuildInImpassable: true
-  conditions:
-    - !type:EmptyOrWindowValidInTile
-    - !type:NoWindowsInTile
-  icon:
-    sprite: Structures/Windows/plastitanium_window.rsi
-    state: full
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canRotate: false
 # Forge-Change-End

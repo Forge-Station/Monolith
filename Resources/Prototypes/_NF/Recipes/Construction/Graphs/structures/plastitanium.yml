@@ -9,11 +9,13 @@
             - material: PlastitaniumGlass # Forge-Change
               amount: 2
               doAfter: 2
+        # Forge-Change-Start
         - to: plastitaniumWindowDiagonal
           steps:
-            - material: PlastitaniumGlass # Forge-Change
+            - material: PlastitaniumGlass
               amount: 2
               doAfter: 2
+        # Forge-Change-End
 
     - node: plastitaniumWindow
       entity: PlastitaniumWindow

@@ -6,7 +6,12 @@
       edges:
         - to: plastitaniumWindow
           steps:
-            - material: UraniumGlass
+            - material: PlastitaniumGlass # Forge-Change
+              amount: 2
+              doAfter: 2
+        - to: plastitaniumWindowDiagonal
+          steps:
+            - material: PlastitaniumGlass # Forge-Change
               amount: 2
               doAfter: 2
 
@@ -16,10 +21,10 @@
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: SheetRGlass1
+              prototype: SheetPlastitaniumGlass1 # Forge-Change
               amount: 2
             - !type:DeleteEntity {}
-          steps:
+          steps: &deconstructionSteps # Forge-Change
             - tool: Welding
               doAfter: 5
             - tool: Screwing
@@ -50,3 +55,16 @@
               doAfter: 1
             - tool: Cutting
               doAfter: 1
+
+    # Forge-Change-Start
+    - node: plastitaniumWindowDiagonal
+      entity: PlastitaniumWindowDiagonal
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlastitaniumGlass1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionSteps # Forge-Change
+    # Forge-Change-End

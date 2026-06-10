@@ -231,6 +231,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  canRotate: false
 
 - type: construction
   id: DefibrillatorCabinet

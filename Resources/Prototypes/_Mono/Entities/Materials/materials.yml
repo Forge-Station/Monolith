@@ -225,6 +225,9 @@
   - type: Tag
     tags:
     - Sheet
+  - type: FloorTile
+    outputs:
+    - FloorPlastitaniumGlass
   - type: Item
     sprite: _Mono/Objects/Materials/plastitaniumglass.rsi
     heldPrefix: plastitaniumglass

@@ -424,6 +424,9 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+  - type: NightVision # Forge-Change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
   - type: Armor
     modifiers:
       coefficients:
@@ -449,6 +452,9 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+  - type: NightVision # Forge-Change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
   - type: Armor
     modifiers:
       coefficients:
@@ -474,6 +480,9 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+  - type: NightVision # Forge-Change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
   - type: TemperatureProtection
     heatingCoefficient: 0.005
     coolingCoefficient: 0.005
@@ -504,6 +513,9 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+  - type: NightVision # Forge-Change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
   - type: Armor
     modifiers:
       coefficients:
@@ -526,6 +538,9 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
+  - type: NightVision # Forge-Change
+    flashDurationMultiplier: 3.5
+    isEquipment: true
   - type: Armor
     modifiers:
       coefficients:

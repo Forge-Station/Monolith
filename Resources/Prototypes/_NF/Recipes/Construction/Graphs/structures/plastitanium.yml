@@ -113,7 +113,7 @@
               prototype: SheetUranium1
               amount: 2
             - !type:DeleteEntity {}
-          steps: *deconstructionSteps # Forge-Change
+          steps: *deconstructionSteps
     - node: plastitaniumWindowUranDiagonal
       entity: PlastitaniumWindowUranDiagonal
       edges:
@@ -126,7 +126,7 @@
               prototype: SheetUranium1
               amount: 2
             - !type:DeleteEntity {}
-          steps: *deconstructionSteps # Forge-Change
+          steps: *deconstructionSteps
     - node: plastitaniumWindowPlasma
       entity: PlastitaniumWindowPlasma
       edges:
@@ -139,7 +139,7 @@
               prototype: SheetPlasma1
               amount: 2
             - !type:DeleteEntity {}
-          steps: *deconstructionSteps # Forge-Change
+          steps: *deconstructionSteps
     - node: plastitaniumWindowPlasmaDiagonal
       entity: PlastitaniumWindowPlasmaDiagonal
       edges:
@@ -152,5 +152,5 @@
               prototype: SheetPlasma1
               amount: 2
             - !type:DeleteEntity {}
-          steps: *deconstructionSteps # Forge-Change
+          steps: *deconstructionSteps
     # Forge-Change-End

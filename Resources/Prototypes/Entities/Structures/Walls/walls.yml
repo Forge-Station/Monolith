@@ -10,7 +10,7 @@
     - Wall
   components:
   - type: Anchorable
-    flags: 
+    flags:
     - Anchorable
   - type: Rotatable
   - type: RangedDamageSound
@@ -1058,6 +1058,11 @@
     - mining
     - miningB
   - type: Appearance
+  # Forge-Change-Start
+  - type: Construction
+    graph: Girder
+    node: wallMining
+  # Forge-Change-End
 
 - type: entity
   parent: WallShuttleDiagonal
@@ -1082,6 +1087,11 @@
     state: state0
   - type: RCDDeconstructable # Frontier
     deconstructable: false # Frontier
+  # Forge-Change-Start
+  - type: Construction
+    graph: Girder
+    node: wallMiningDiagonal
+  # Forge-Change-End
 
 
 # Vault Walls

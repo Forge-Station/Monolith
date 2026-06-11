@@ -1,7 +1,8 @@
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
-using Content.Server._Forge.Physiology.Tolerance;
-using Content.Shared._Forge.Physiology.Disease;
+using Content.Shared._Forge.Body.Components;
+using Content.Shared._Forge.Body.Syndromes;
+using Content.Server._Forge.Body.Syndromes;
 
 namespace Content.Server._Forge.EntityEffects.Effects;
 
@@ -23,6 +24,6 @@ public sealed partial class RemoveToleranceEffect : EntityEffect
 
     public override void Effect(EntityEffectBaseArgs args)
     {
-        args.EntityManager.System<PhysiologyToleranceSystem>().RemoveTolerance(args.TargetEntity, Reagent, Amount, Target);
+        args.EntityManager.System<ToleranceSystem>().RemoveTolerance(args.TargetEntity, Reagent, Amount, Target);
     }
 }

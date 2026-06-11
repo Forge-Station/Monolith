@@ -1,7 +1,8 @@
 using Robust.Shared.Prototypes;
 using Content.Shared.EntityEffects;
-using Content.Server._Forge.Physiology.Tolerance;
-using Content.Shared._Forge.Physiology.Disease;
+using Content.Shared._Forge.Body.Components;
+using Content.Shared._Forge.Body.Syndromes;
+using Content.Server._Forge.Body.Syndromes;
 
 namespace Content.Server._Forge.EntityEffects.Conditions;
 
@@ -27,7 +28,7 @@ public sealed partial class ToleranceCondition : EntityEffectCondition
 
     public override bool Condition(EntityEffectBaseArgs args)
     {
-        var toleranceSys = args.EntityManager.System<PhysiologyToleranceSystem>();
+        var toleranceSys = args.EntityManager.System<ToleranceSystem>();
         var uid = args.TargetEntity;
 
         var tolerance = Method switch

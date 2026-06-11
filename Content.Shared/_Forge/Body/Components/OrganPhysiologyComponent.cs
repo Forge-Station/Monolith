@@ -1,9 +1,8 @@
-using Content.Shared._Forge.Physiology.Disease;
-using Content.Shared._Forge.Physiology.Tolerance;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Serialization.Manager.Attributes;
+using Content.Shared._Forge.Body.Syndromes;
 
-namespace Content.Shared._Forge.Physiology;
+namespace Content.Shared._Forge.Body.Components;
 
 /// <summary>
 /// Stores the disease and tolerance of a <see cref="Organ"/>
@@ -16,7 +15,7 @@ public sealed partial class OrganPhysiologyComponent : Component, IPhysiologyHol
     public Organ Organ { get; set; } = Organ.None;
 
     [DataField]
-    public Dictionary<string, DiseaseData> Diseases { get; set; } = new();
+    public Dictionary<string, SyndromeData> Syndromes { get; set; } = new();
 
     [DataField]
     public Dictionary<string, ToleranceData> Tolerances { get; set; } = new();

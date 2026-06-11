@@ -1,18 +1,17 @@
 using JetBrains.Annotations;
 using Robust.Shared.Random;
 using Content.Shared.EntityEffects;
-using Content.Shared._Forge.Physiology.Disease;
-using Content.Shared._Forge.Physiology.Disease.Symptoms;
+using Content.Shared._Forge.Body.Syndromes;
 
-namespace Content.Server._Forge.Physiology.Disease.Symptoms;
+namespace Content.Server._Forge.Body.Syndromes.Symptoms;
 
 [UsedImplicitly]
-public sealed partial class EntityEffectList : DiseaseSymptom
+public sealed partial class EntityEffectList : SyndromeSymptom
 {
     [DataField]
     public List<EntityEffect> Effects { get; set; } = new();
 
-    public override void Apply(EntityUid organUid, EntityUid bodyUid, DiseaseData disease, IEntityManager entMan)
+    public override void Apply(EntityUid organUid, EntityUid bodyUid, SyndromeData syndrome, IEntityManager entMan)
     {
         if (Effects.Count == 0)
             return;

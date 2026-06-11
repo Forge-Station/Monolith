@@ -1,15 +1,16 @@
 using Content.Shared.Body.Systems;
-using Content.Shared._Forge.Physiology;
-using Content.Shared._Forge.Physiology.Disease;
+using Content.Shared._Shitmed.Body.Organ;
+using Content.Shared._Forge.Body.Components;
+using Content.Shared._Forge.Body.Syndromes;
 
-namespace Content.Server._Forge.Physiology;
+namespace Content.Server._Forge.Body.Syndromes;
 
 /// <summary>
 /// Resolves disease/tolerance targets by <see cref="Organ"/> flag.
 /// <see cref="Organ.Body"/> -> <see cref="BodyPhysiologyComponent"/> on the doll.<br/>
 /// Any other flag -> matching <see cref="OrganPhysiologyComponent"/> inside the organ.
 /// </summary>
-public static class PhysiologyOrganResolver
+public static class OrganResolver
 {
     public static List<EntityUid> Resolve(EntityUid bodyUid, Organ target, SharedBodySystem body, IEntityManager entities)
     {

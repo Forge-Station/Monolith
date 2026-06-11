@@ -3,13 +3,13 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._Forge.Traits;
 
 [RegisterComponent]
-public sealed partial class StartDiseaseComponent : Component
+public sealed partial class StartSyndromeComponent : Component
 {
     /// <summary>
-    /// Disease granted on spawn.
+    /// Syndrome granted on spawn.
     /// </summary>
     [DataField(required: true)]
-    public string Disease = string.Empty;
+    public string Syndrome = string.Empty;
 
     /// <summary>
     /// Initial disease severity.

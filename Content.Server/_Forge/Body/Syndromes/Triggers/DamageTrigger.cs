@@ -1,10 +1,10 @@
 using JetBrains.Annotations;
-using Content.Shared._Forge.Physiology.Disease.Triggers;
+using Content.Shared._Forge.Body.Syndromes;
 
-namespace Content.Server._Forge.Physiology.Disease.Triggers;
+namespace Content.Server._Forge.Body.Syndromes.Triggers;
 
 [UsedImplicitly]
-public sealed partial class DamageTrigger : DiseaseTrigger
+public sealed partial class DamageTrigger : SyndromeTrigger
 {
     [DataField]
     public float DamageThreshold { get; set; } = 50f;

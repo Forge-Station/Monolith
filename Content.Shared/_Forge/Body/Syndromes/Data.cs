@@ -3,10 +3,11 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
-namespace Content.Shared._Forge.Physiology.Disease;
+namespace Content.Shared._Forge.Body.Syndromes;
 
+#region Syndromes
 [DataDefinition]
-public sealed partial class DiseaseData
+public sealed partial class SyndromeData
 {
     [DataField]
     public string PrototypeId { get; set; } = string.Empty;
@@ -35,3 +36,19 @@ public sealed partial class DiseaseData
     [DataField(serverOnly: true)]
     public HashSet<string> ActiveStatus { get; set; } = new();
 }
+#endregion
+
+#region Tolerance
+[DataDefinition]
+public sealed partial class ToleranceData
+{
+    [DataField]
+    public float Value { get; set; } = 0f;
+
+    [DataField]
+    public TimeSpan LastChanged { get; set; } = TimeSpan.Zero;
+
+    [DataField]
+    public float DecayRate { get; set; } = 0.001f;
+}
+#endregion

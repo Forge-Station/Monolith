@@ -1,16 +1,16 @@
 using JetBrains.Annotations;
 using Robust.Shared.Random;
-using Content.Shared._Forge.Physiology;
-using Content.Shared._Forge.Physiology.Disease;
-using Content.Shared._Forge.Physiology.Disease.Symptoms;
+using Content.Shared._Forge.Body.Components;
+using Content.Server._Forge.Body.Syndromes;
+using Content.Shared._Forge.Body.Syndromes;
 
-namespace Content.Server._Forge.Physiology.Disease.Symptoms;
+namespace Content.Server._Forge.Body.Syndromes.Symptoms;
 
 [UsedImplicitly]
-public sealed partial class SpreadSymptom : DiseaseSymptom
+public sealed partial class SpreadSymptom : SyndromeSymptom
 {
     [DataField]
-    public string DiseaseId { get; set; } = string.Empty;
+    public string SyndromeId { get; set; } = string.Empty;
 
     [DataField]
     public float Range { get; set; } = 1.5f;
@@ -18,9 +18,9 @@ public sealed partial class SpreadSymptom : DiseaseSymptom
     [DataField]
     public float Severity { get; set; } = 5f;
 
-    public override void Apply(EntityUid organUid, EntityUid bodyUid, DiseaseData disease, IEntityManager entMan)
+    public override void Apply(EntityUid organUid, EntityUid bodyUid, SyndromeData syndrome, IEntityManager entMan)
     {
-        var targetId = string.IsNullOrEmpty(DiseaseId) ? disease.PrototypeId : DiseaseId;
+        var targetId = string.IsNullOrEmpty(SyndromeId) ? syndrome.PrototypeId : SyndromeId;
         var coords = entMan.System<SharedTransformSystem>().GetMapCoordinates(bodyUid);
         var nearby = new HashSet<Entity<BodyPhysiologyComponent>>();
 
@@ -32,7 +32,7 @@ public sealed partial class SpreadSymptom : DiseaseSymptom
             if (!IoCManager.Resolve<IRobustRandom>().Prob(Chance))
                 continue;
 
-            entMan.System<PhysiologyDiseaseSystem>().AddDisease(target.Owner, targetId, Severity);
+            entMan.System<SyndromeSystem>().AddSyndrome(target.Owner, targetId, Severity);
         }
     }
 }

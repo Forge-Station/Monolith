@@ -191,7 +191,7 @@
           reagent: Bicaridine
           min: 0.5
           max: 1.0
-        disease: PainSyndrome
+        syndrome: PainSyndrome
         duration: 10
       - !type:GenericDescEffect
         description: forge-reagent-effect-wiithdrawl-smallpain
@@ -1773,7 +1773,7 @@
         reagent: Haloperidol
         amount: 0.005
         target: Liver
-      - !type:DiseaseEffect
+      - !type:SyndromeEffect
         hidden: true
         conditions:
           - !type:ToleranceCondition
@@ -1781,11 +1781,11 @@
             reagent: Haloperidol
             min: 0.6
             max: 1.0
-        disease: SedativeAddiction
+        syndrome: SedativeAddiction
         severity: 0.95
       - !type:SuppressEffect
         hidden: true
-        disease: StimulantAddiction
+        syndrome: StimulantAddiction
         duration: 55
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction

@@ -2,18 +2,18 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Damage;
-using Content.Shared._Forge.Physiology;
-using Content.Shared._Forge.Physiology.Disease;
-using Content.Server._Forge.Physiology.Disease.Triggers;
+using Content.Shared._Forge.Body.Components;
+using Content.Shared._Forge.Body.Syndromes;
+using Content.Server._Forge.Body.Syndromes.Triggers;
 
-namespace Content.Server._Forge.Physiology.Disease;
+namespace Content.Server._Forge.Body.Syndromes;
 
-public sealed partial class PhysiologyTriggerSystem : EntitySystem
+public sealed partial class SyndromeTriggerSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private PhysiologyDiseaseSystem _disease = default!;
+    [Dependency] private SyndromeSystem _disease = default!;
     private readonly Dictionary<(EntityUid, string, int), TimeSpan> _cooldowns = new();
     private readonly Dictionary<string, List<(int index, DamageTrigger trigger)>> _triggerCache = new();
 
@@ -38,7 +38,7 @@ public sealed partial class PhysiologyTriggerSystem : EntitySystem
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
-        if (args.WasModified<DiseasePrototype>())
+        if (args.WasModified<SyndromePrototype>())
             RebuildCache();
     }
 
@@ -72,7 +72,7 @@ public sealed partial class PhysiologyTriggerSystem : EntitySystem
     {
         _triggerCache.Clear();
 
-        foreach (var proto in _prototypes.EnumeratePrototypes<DiseasePrototype>())
+        foreach (var proto in _prototypes.EnumeratePrototypes<SyndromePrototype>())
         {
             if (proto.Triggers.Count == 0)
                 continue;
@@ -122,7 +122,7 @@ public sealed partial class PhysiologyTriggerSystem : EntitySystem
                 if (trigger.Chance < 1f && !_random.Prob(trigger.Chance))
                     continue;
 
-                _disease.AddDisease(uid, protoId, trigger.Severity);
+                _disease.AddSyndrome(uid, protoId, trigger.Severity);
                 _cooldowns[cooldownKey] = now + TimeSpan.FromSeconds(trigger.Cooldown);
             }
         }

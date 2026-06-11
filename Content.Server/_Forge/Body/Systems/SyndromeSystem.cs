@@ -6,33 +6,31 @@ using Content.Shared.Body.Organ;
 using Content.Shared.Body.Systems;
 using Content.Shared.StatusEffect;
 using Content.Shared._Shitmed.Body.Organ;
-using Content.Shared._Forge.Physiology.Disease.Symptoms;
-using Content.Server._Forge.Physiology.Disease.Symptoms;
-using Content.Shared._Forge.Physiology;
-using Content.Shared._Forge.Physiology.Disease;
+using Content.Shared._Forge.Body.Components;
+using Content.Shared._Forge.Body.Syndromes;
 
-namespace Content.Server._Forge.Physiology.Disease;
+namespace Content.Server._Forge.Body.Syndromes;
 
-public sealed partial class PhysiologyDiseaseSystem : EntitySystem
+public sealed partial class SyndromeSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private PhysiologyTriggerSystem _triggers = default!;
+    [Dependency] private SyndromeTriggerSystem _triggers = default!;
     [Dependency] private SharedBodySystem _body = default!;
 
     private ISawmill _sawmill = default!;
     private readonly HashSet<EntityUid> _activeEntities = new();
     private readonly List<EntityUid> _toAddEntities = new();
     private readonly List<EntityUid> _toRemoveEntities = new();
-    private readonly List<string> _toRemoveDiseases = new();
+    private readonly List<string> _toRemoveSyndromes = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _sawmill = Logger.GetSawmill("forge.physiology.disease");
+        _sawmill = Logger.GetSawmill("forge.physiology.syndrome");
 
         SubscribeLocalEvent<BodyPhysiologyComponent, ComponentShutdown>(OnBodyShutdown);
         SubscribeLocalEvent<OrganPhysiologyComponent, ComponentShutdown>(OnOrganShutdown);
@@ -52,7 +50,7 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
-        if (args.WasModified<DiseasePrototype>())
+        if (args.WasModified<SyndromePrototype>())
             _triggers.RebuildCache();
     }
 
@@ -60,21 +58,21 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
     {
         if (args.Enabled)
         {
-            // Organ inserted: unfreeze diseases and schedule next tick for each
-            foreach (var (protoId, disease) in comp.Diseases)
+            // Organ inserted: unfreeze syndromes and schedule next tick for each
+            foreach (var (protoId, syndrome) in comp.Syndromes)
             {
-                disease.Frozen = false;
-                disease.NextUpdate = _timing.CurTime + GetInterval(protoId);
+                syndrome.Frozen = false;
+                syndrome.NextUpdate = _timing.CurTime + GetInterval(protoId);
             }
 
-            if (comp.Diseases.Count > 0)
+            if (comp.Syndromes.Count > 0)
                 _activeEntities.Add(uid);
         }
         else
         {
-            // Organ removed: freeze all diseases and stop processing this entity
-            foreach (var disease in comp.Diseases.Values)
-                disease.Frozen = true;
+            // Organ removed: freeze all syndromes and stop processing this entity
+            foreach (var syndrome in comp.Syndromes.Values)
+                syndrome.Frozen = true;
 
             _activeEntities.Remove(uid);
         }
@@ -94,9 +92,9 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
                 continue;
             }
 
-            ProcessDiseases(uid, holder);
+            ProcessSyndromes(uid, holder);
 
-            if (holder.Diseases.Count == 0)
+            if (holder.Syndromes.Count == 0)
                 _toRemoveEntities.Add(uid);
         }
 
@@ -108,81 +106,81 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
         _toAddEntities.Clear();
     }
 
-    private void ProcessDiseases(EntityUid uid, IPhysiologyHolder holder)
+    private void ProcessSyndromes(EntityUid uid, IPhysiologyHolder holder)
     {
         var now = _timing.CurTime;
-        _toRemoveDiseases.Clear();
+        _toRemoveSyndromes.Clear();
 
-        foreach (var (protoId, disease) in holder.Diseases)
+        foreach (var (protoId, syndrome) in holder.Syndromes)
         {
-            if (now < disease.NextUpdate)
+            if (now < syndrome.NextUpdate)
                 continue;
 
-            if (!_prototypes.TryIndex<DiseasePrototype>(protoId, out var proto))
+            if (!_prototypes.TryIndex<SyndromePrototype>(protoId, out var proto))
             {
-                _toRemoveDiseases.Add(protoId);
+                _toRemoveSyndromes.Add(protoId);
                 continue;
             }
 
-            disease.Severity -= proto.SeverityDecay;
-            if (disease.Severity <= 0f)
+            syndrome.Severity -= proto.SeverityDecay;
+            if (syndrome.Severity <= 0f)
             {
                 if (proto.Permanent)
                 {
-                    disease.Severity = 0f;
+                    syndrome.Severity = 0f;
                 }
                 else
                 {
-                    ClearDiseaseStatuses(uid, disease);
-                    _toRemoveDiseases.Add(protoId);
+                    ClearSyndromeStatuses(uid, syndrome);
+                    _toRemoveSyndromes.Add(protoId);
                 }
                 continue;
             }
 
-            UpdateStage(disease, proto);
+            UpdateStage(syndrome, proto);
 
             // Stage changed: clear old status effects so new ones are applied cleanly
-            if (disease.Stage != disease.LastStage)
+            if (syndrome.Stage != syndrome.LastStage)
             {
-                ClearDiseaseStatuses(uid, disease);
-                disease.LastStage = disease.Stage;
+                ClearSyndromeStatuses(uid, syndrome);
+                syndrome.LastStage = syndrome.Stage;
             }
 
-            ApplySymptoms(uid, disease, proto);
-            disease.NextUpdate = now + GetInterval(protoId);
+            ApplySymptoms(uid, syndrome, proto);
+            syndrome.NextUpdate = now + GetInterval(protoId);
         }
 
-        foreach (var id in _toRemoveDiseases)
-            holder.Diseases.Remove(id);
+        foreach (var id in _toRemoveSyndromes)
+            holder.Syndromes.Remove(id);
     }
 
 
     private TimeSpan GetInterval(string protoId)
     {
-        var interval = _prototypes.TryIndex<DiseasePrototype>(protoId, out var proto) ? proto.Interval : 5f;
+        var interval = _prototypes.TryIndex<SyndromePrototype>(protoId, out var proto) ? proto.Interval : 5f;
         return TimeSpan.FromSeconds(interval);
     }
 
-    private void UpdateStage(DiseaseData disease, DiseasePrototype proto)
+    private void UpdateStage(SyndromeData syndrome, SyndromePrototype proto)
     {
         if (proto.Stages.Count == 0)
             return;
         var stage = 0;
         for (var i = 0; i < proto.Stages.Count; i++)
         {
-            if (disease.Severity >= proto.Stages[i].MinSeverity)
+            if (syndrome.Severity >= proto.Stages[i].MinSeverity)
                 stage = i;
         }
-        disease.Stage = stage;
+        syndrome.Stage = stage;
     }
 
-    private void ApplySymptoms(EntityUid holderUid, DiseaseData disease, DiseasePrototype proto)
+    private void ApplySymptoms(EntityUid holderUid, SyndromeData syndrome, SyndromePrototype proto)
     {
-        if (disease.Stage >= proto.Stages.Count)
+        if (syndrome.Stage >= proto.Stages.Count)
             return;
 
-        var stage = proto.Stages[disease.Stage];
-        var isFlaring = IsFlaring(disease, proto);
+        var stage = proto.Stages[syndrome.Stage];
+        var isFlaring = IsFlaring(syndrome, proto);
         var bodyUid = holderUid;
 
         if (TryComp<OrganComponent>(holderUid, out var organ) && organ.Body is { Valid: true } ownerBody)
@@ -190,48 +188,48 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
 
         foreach (var symptomInterface in stage.Symptoms)
         {
-            if (symptomInterface is not DiseaseSymptom symptom)
+            if (symptomInterface is not SyndromeSymptom symptom)
                 continue;
             if (symptom.FlareOnly && !isFlaring)
                 continue;
             if (symptom.Chance < 1f && !_random.Prob(symptom.Chance))
                 continue;
 
-            symptom.Apply(holderUid, bodyUid, disease, EntityManager);
+            symptom.Apply(holderUid, bodyUid, syndrome, EntityManager);
         }
     }
 
-    private void ClearDiseaseStatuses(EntityUid uid, DiseaseData disease)
+    private void ClearSyndromeStatuses(EntityUid uid, SyndromeData syndrome)
     {
-        foreach (var key in disease.ActiveStatus)
+        foreach (var key in syndrome.ActiveStatus)
             _statusEffects.TryRemoveStatusEffect(uid, key);
 
-        disease.ActiveStatus.Clear();
+        syndrome.ActiveStatus.Clear();
     }
 
-    public bool IsFlaring(DiseaseData disease, DiseasePrototype proto)
+    public bool IsFlaring(SyndromeData syndrome, SyndromePrototype proto)
     {
         if (proto.FlareDelay <= 0)
             return false;
-        if (_timing.CurTime < disease.FlareSupressed)
+        if (_timing.CurTime < syndrome.FlareSupressed)
             return false;
 
-        return (_timing.CurTime - disease.LastProgression).TotalSeconds >= proto.FlareDelay;
+        return (_timing.CurTime - syndrome.LastProgression).TotalSeconds >= proto.FlareDelay;
     }
 
     /// <summary>
-    /// Adds a disease to all valid targets resolved by the prototype's Organ flag.
+    /// Adds a syndrome to all valid targets resolved by the prototype's Organ flag.
     /// </summary>
-    public void AddDisease(EntityUid uid, string protoId, float severity = 10f, IPhysiologyHolder? hint = null, bool refreshFlare = true)
+    public void AddSyndrome(EntityUid uid, string protoId, float severity = 10f, IPhysiologyHolder? hint = null, bool refreshFlare = true)
     {
-        if (!_prototypes.TryIndex<DiseasePrototype>(protoId, out var proto))
+        if (!_prototypes.TryIndex<SyndromePrototype>(protoId, out var proto))
         {
-            _sawmill.Error($"Disease prototype not found: {protoId}");
+            _sawmill.Error($"Syndrome prototype not found: {protoId}");
             return;
         }
 
-        var targets = PhysiologyOrganResolver.Resolve(uid, proto.Organ, _body, EntityManager);
-        _sawmill.Debug($"Disease {protoId} targets={targets.Count} organ={proto.Organ}");
+        var targets = OrganResolver.Resolve(uid, proto.Organ, _body, EntityManager);
+        _sawmill.Debug($"Syndrome {protoId} targets={targets.Count} organ={proto.Organ}");
 
         foreach (var target in targets)
         {
@@ -241,15 +239,15 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
             if (holder == null && !TryGetHolder(target, out holder))
                 continue;
 
-            AddDiseaseToHolder(target, protoId, severity, refreshFlare, holder);
+            AddSyndromeToHolder(target, protoId, severity, refreshFlare, holder);
         }
     }
 
-    private void AddDiseaseToHolder(EntityUid target, string protoId, float severity, bool refreshFlare, IPhysiologyHolder holder)
+    private void AddSyndromeToHolder(EntityUid target, string protoId, float severity, bool refreshFlare, IPhysiologyHolder holder)
     {
-        _sawmill.Debug($"Add disease {protoId} to {ToPrettyString(target)}");
+        _sawmill.Debug($"Add syndrome {protoId} to {ToPrettyString(target)}");
 
-        if (holder.Diseases.TryGetValue(protoId, out var existing))
+        if (holder.Syndromes.TryGetValue(protoId, out var existing))
         {
             existing.Severity = Math.Clamp(existing.Severity + severity, 0f, 100f);
             if (refreshFlare)
@@ -257,7 +255,7 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
             return;
         }
 
-        holder.Diseases[protoId] = new DiseaseData
+        holder.Syndromes[protoId] = new SyndromeData
         {
             PrototypeId = protoId,
             Severity = Math.Clamp(severity, 0f, 100f),
@@ -269,22 +267,22 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
         _toAddEntities.Add(target);
     }
 
-    // Removes a disease from all targets resolved by the prototype's Organ flag.
-    public void RemoveDisease(EntityUid uid, string protoId)
+    // Removes a syndrome from all targets resolved by the prototype's Organ flag.
+    public void RemoveSyndrome(EntityUid uid, string protoId)
     {
-        if (!_prototypes.TryIndex<DiseasePrototype>(protoId, out var proto))
+        if (!_prototypes.TryIndex<SyndromePrototype>(protoId, out var proto))
             return;
 
-        var targets = PhysiologyOrganResolver.Resolve(uid, proto.Organ, _body, EntityManager);
+        var targets = OrganResolver.Resolve(uid, proto.Organ, _body, EntityManager);
 
         foreach (var target in targets)
         {
             if (!TryGetHolder(target, out var holder))
                 continue;
-            if (holder.Diseases.TryGetValue(protoId, out var disease))
-                ClearDiseaseStatuses(target, disease);
+            if (holder.Syndromes.TryGetValue(protoId, out var syndrome))
+                ClearSyndromeStatuses(target, syndrome);
 
-            holder.Diseases.Remove(protoId);
+            holder.Syndromes.Remove(protoId);
         }
     }
 
@@ -292,41 +290,41 @@ public sealed partial class PhysiologyDiseaseSystem : EntitySystem
     {
         if (!TryGetHolder(uid, out var holder))
             return;
-        if (!holder.Diseases.TryGetValue(protoId, out var disease))
+        if (!holder.Syndromes.TryGetValue(protoId, out var syndrome))
             return;
 
-        disease.FlareSupressed = _timing.CurTime + TimeSpan.FromSeconds(duration);
+        syndrome.FlareSupressed = _timing.CurTime + TimeSpan.FromSeconds(duration);
     }
 
     public void ModifySeverity(EntityUid uid, string protoId, float delta)
     {
-        if (!_prototypes.TryIndex<DiseasePrototype>(protoId, out var proto))
+        if (!_prototypes.TryIndex<SyndromePrototype>(protoId, out var proto))
             return;
 
-        var targets = PhysiologyOrganResolver.Resolve(uid, proto.Organ, _body, EntityManager);
+        var targets = OrganResolver.Resolve(uid, proto.Organ, _body, EntityManager);
 
         foreach (var target in targets)
         {
             if (!TryGetHolder(target, out var holder))
                 continue;
-            if (!holder.Diseases.TryGetValue(protoId, out var disease))
+            if (!holder.Syndromes.TryGetValue(protoId, out var syndrome))
                 continue;
-            disease.Severity = Math.Clamp(disease.Severity + delta, 0f, 100f);
+            syndrome.Severity = Math.Clamp(syndrome.Severity + delta, 0f, 100f);
         }
     }
 
-    public bool HasDisease(EntityUid uid, string protoId)
+    public bool HasSyndrome(EntityUid uid, string protoId)
     {
-        if (!_prototypes.TryIndex<DiseasePrototype>(protoId, out var proto))
+        if (!_prototypes.TryIndex<SyndromePrototype>(protoId, out var proto))
             return false;
 
-        var targets = PhysiologyOrganResolver.Resolve(uid, proto.Organ, _body, EntityManager);
+        var targets = OrganResolver.Resolve(uid, proto.Organ, _body, EntityManager);
 
         foreach (var target in targets)
         {
             if (!TryGetHolder(target, out var holder))
                 continue;
-            if (holder.Diseases.ContainsKey(protoId))
+            if (holder.Syndromes.ContainsKey(protoId))
                 return true;
         }
 

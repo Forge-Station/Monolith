@@ -93,7 +93,7 @@
         reagent: Fentanyl
         amount: 0.03
         target: Brain
-      - !type:DiseaseEffect
+      - !type:SyndromeEffect
         hidden: true
         conditions:
           - !type:ToleranceCondition
@@ -101,7 +101,7 @@
             reagent: Fentanyl
             min: 0.3
             max: 1.0
-        disease: OpioidAddiction
+        syndrome: OpioidAddiction
         severity: 1.9
       - !type:HealthChange
         hidden: true

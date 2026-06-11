@@ -88,7 +88,7 @@
       metabolismRate: 0.5
       effects:
         # Fentanyl
-        - !type:RemoveDiseaseEffect
+        - !type:RemoveSyndromeEffect
           hidden: true
           conditions:
             - !type:ToleranceCondition
@@ -96,7 +96,7 @@
               reagent: Fentanyl
               min: 0.6
               max: 1.0
-          disease: OpioidAddiction
+          syndrome: OpioidAddiction
           severity: 0.001
         - !type:GenericStatusEffect
           hidden: true
@@ -179,7 +179,7 @@
               min: 0.9
               max: 1.0
         # Morphine
-        - !type:RemoveDiseaseEffect
+        - !type:RemoveSyndromeEffect
           hidden: true
           conditions:
             - !type:ToleranceCondition
@@ -187,7 +187,7 @@
               reagent: Morphine
               min: 0.6
               max: 1.0
-          disease: OpioidAddiction
+          syndrome: OpioidAddiction
           severity: 0.001
         - !type:GenericStatusEffect
           hidden: true
@@ -274,7 +274,7 @@
           type: Remove
         - !type:SuppressEffect
           hidden: true
-          disease: OpioidAddiction
+          syndrome: OpioidAddiction
           duration: 25
         - !type:GenericDescEffect
           description: forge-reagent-effect-naloxone
@@ -293,7 +293,7 @@
     Medicine:
       metabolismRate: 0.3
       effects:
-        - !type:RemoveDiseaseEffect
+        - !type:RemoveSyndromeEffect
           hidden: true
           conditions:
             - !type:ToleranceCondition
@@ -301,11 +301,11 @@
               source: Brain
               min: 0.6
               max: 1.0
-          disease: OpioidAddiction
+          syndrome: OpioidAddiction
           severity: 0.005
         - !type:SuppressEffect
           hidden: true
-          disease: OpioidAddiction
+          syndrome: OpioidAddiction
           duration: 45
         - !type:ToleranceEffect
           hidden: true
@@ -324,11 +324,11 @@
           boozePower: 2
         - !type:SuppressEffect
           hidden: true
-          disease: PainSyndrome
+          syndrome: PainSyndrome
           duration: 25
         - !type:SuppressEffect
           hidden: true
-          disease: ChronicPain
+          syndrome: ChronicPain
           duration: 20
         - !type:GenericDescEffect
           description: forge-reagent-effect-methadone
@@ -351,7 +351,7 @@
       effects:
         - !type:SuppressEffect
           # hidden: true
-          disease: NicotineAddiction
+          syndrome: NicotineAddiction
           duration: 60
         - !type:GenericDescEffect
           description: forge-reagent-effect-tabex
@@ -388,7 +388,7 @@
           refresh: false
         - !type:SuppressEffect
           hidden: true
-          disease: StimulantAddiction
+          syndrome: StimulantAddiction
           duration: 40
         - !type:GenericDescEffect
           description: forge-reagent-effect-clonidine
@@ -397,7 +397,7 @@
           # hidden: true
           reagent: Clonidine
           amount: 0.01
-        - !type:DiseaseEffect
+        - !type:SyndromeEffect
           hidden: true
           conditions:
             - !type:ToleranceCondition
@@ -405,7 +405,7 @@
               source: Brain
               min: 0.3
               max: 1.0
-          disease: SedativeAddiction
+          syndrome: SedativeAddiction
           severity: 1.1
         - !type:GenericDescEffect
           description: forge-reagent-tolerance-addiction

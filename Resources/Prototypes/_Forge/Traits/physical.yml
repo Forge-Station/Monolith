@@ -10,6 +10,6 @@
     components:
     - BorgChassis
   components:
-    - type: StartDisease
-      disease: ChronicPain
+    - type: StartSyndrome
+      syndrome: ChronicPain
       severity: 75

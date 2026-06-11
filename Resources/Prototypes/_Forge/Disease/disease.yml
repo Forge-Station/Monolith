@@ -1,7 +1,7 @@
 # region // Pain Syndrome
-- type: disease
+- type: syndrome
   id: PainSyndrome
-  name: disease-pain-syndrome
+  name: syndrome-pain-syndrome
   organ: Body
   interval: 6
   severityDecay: 0.5
@@ -28,8 +28,8 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-pain-syndrome-mild-1
-                - disease-pain-syndrome-mild-2
+                - syndrome-pain-syndrome-mild-1
+                - syndrome-pain-syndrome-mild-2
               visualType: SmallCaution
               probability: 0.1
     # region Stage 2
@@ -50,9 +50,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-pain-syndrome-moderate-1
-                - disease-pain-syndrome-moderate-2
-                - disease-pain-syndrome-moderate-3
+                - syndrome-pain-syndrome-moderate-1
+                - syndrome-pain-syndrome-moderate-2
+                - syndrome-pain-syndrome-moderate-3
               visualType: MediumCaution
               probability: 0.25
     # region Stage 3
@@ -73,9 +73,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-pain-syndrome-severe-1
-                - disease-pain-syndrome-severe-2
-                - disease-pain-syndrome-severe-3
+                - syndrome-pain-syndrome-severe-1
+                - syndrome-pain-syndrome-severe-2
+                - syndrome-pain-syndrome-severe-3
               visualType: LargeCaution
               probability: 0.3
         - !type:EntityEffectList # name: pain, sweetie pain
@@ -109,13 +109,13 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-pain-syndrome-ooooouch-1
+                - syndrome-pain-syndrome-ooooouch-1
               visualType: LargeCaution
 
 # region // Chronic Pain
-- type: disease
+- type: syndrome
   id: ChronicPain
-  name: disease-chronic-pain
+  name: syndrome-chronic-pain
   organ: Body
   permanent: true
   interval: 8.0
@@ -137,8 +137,8 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-chronic-pain-mild-1
-                - disease-chronic-pain-mild-2
+                - syndrome-chronic-pain-mild-1
+                - syndrome-chronic-pain-mild-2
               visualType: SmallCaution
               probability: 0.25
             - !type:Emote
@@ -165,9 +165,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-chronic-pain-moderate-1
-                - disease-chronic-pain-moderate-2
-                - disease-chronic-pain-moderate-3
+                - syndrome-chronic-pain-moderate-1
+                - syndrome-chronic-pain-moderate-2
+                - syndrome-chronic-pain-moderate-3
               visualType: MediumCaution
               probability: 0.3
             - !type:Emote
@@ -196,9 +196,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-chronic-pain-severe-1
-                - disease-chronic-pain-severe-2
-                - disease-chronic-pain-severe-3
+                - syndrome-chronic-pain-severe-1
+                - syndrome-chronic-pain-severe-2
+                - syndrome-chronic-pain-severe-3
               visualType: LargeCaution
               probability: 0.35
             - !type:Emote
@@ -245,5 +245,5 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-pain-syndrome-ooooouch-1
+                - syndrome-pain-syndrome-ooooouch-1
               visualType: LargeCaution

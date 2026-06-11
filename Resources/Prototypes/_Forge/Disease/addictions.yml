@@ -1,7 +1,7 @@
 # region // StimulantAddiction
-- type: disease
+- type: syndrome
   id: StimulantAddiction
-  name: disease-stimulant-addiction
+  name: syndrome-stimulant-addiction
   organ: Brain
   interval: 5
   severityDecay: 0.03
@@ -26,8 +26,8 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-stimulant-flare-mild-1
-                - disease-stimulant-flare-mild-2
+                - syndrome-stimulant-flare-mild-1
+                - syndrome-stimulant-flare-mild-2
               visualType: SmallCaution
               probability: 0.03
     # region Stage 2
@@ -52,9 +52,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-stimulant-flare-moderate-1
-                - disease-stimulant-flare-moderate-2
-                - disease-stimulant-flare-moderate-3
+                - syndrome-stimulant-flare-moderate-1
+                - syndrome-stimulant-flare-moderate-2
+                - syndrome-stimulant-flare-moderate-3
               visualType: MediumCaution
               probability: 0.05
         - !type:EntityEffectList # name: half-permanent staff
@@ -82,9 +82,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-stimulant-flare-severe-1
-                - disease-stimulant-flare-severe-2
-                - disease-stimulant-flare-severe-3
+                - syndrome-stimulant-flare-severe-1
+                - syndrome-stimulant-flare-severe-2
+                - syndrome-stimulant-flare-severe-3
               visualType: LargeCaution
               probability: 0.1
             - !type:Emote
@@ -124,9 +124,9 @@
               paralyzeTime: 6
 
 # region // OpioidAddiction
-- type: disease
+- type: syndrome
   id: OpioidAddiction
-  name: disease-opioid-addiction
+  name: syndrome-opioid-addiction
   organ: Brain
   interval: 6
   severityDecay: 0.025
@@ -147,8 +147,8 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-opioid-flare-mild-1
-                - disease-opioid-flare-mild-2
+                - syndrome-opioid-flare-mild-1
+                - syndrome-opioid-flare-mild-2
               visualType: SmallCaution
               probability: 0.3
     # region Stage 2
@@ -169,9 +169,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-opioid-flare-moderate-1
-                - disease-opioid-flare-moderate-2
-                - disease-opioid-flare-moderate-3
+                - syndrome-opioid-flare-moderate-1
+                - syndrome-opioid-flare-moderate-2
+                - syndrome-opioid-flare-moderate-3
               visualType: MediumCaution
               probability: 0.25
             - !type:ChemVomit
@@ -213,9 +213,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-opioid-flare-severe-1
-                - disease-opioid-flare-severe-2
-                - disease-opioid-flare-severe-3
+                - syndrome-opioid-flare-severe-1
+                - syndrome-opioid-flare-severe-2
+                - syndrome-opioid-flare-severe-3
               visualType: LargeCaution
               probability: 0.3
             - !type:GenericStatusEffect
@@ -243,9 +243,9 @@
               time: 12
 
 # region // SedativeAddiction
-- type: disease
+- type: syndrome
   id: SedativeAddiction
-  name: disease-sedative-addiction
+  name: syndrome-sedative-addiction
   organ: Brain
   interval: 8.0
   severityDecay: 0.02
@@ -267,8 +267,8 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-sedative-flare-mild-1
-                - disease-sedative-flare-mild-2
+                - syndrome-sedative-flare-mild-1
+                - syndrome-sedative-flare-mild-2
               visualType: SmallCaution
               probability: 0.3
     # region Stage 2
@@ -302,9 +302,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-sedative-flare-moderate-1
-                - disease-sedative-flare-moderate-2
-                - disease-sedative-flare-moderate-3
+                - syndrome-sedative-flare-moderate-1
+                - syndrome-sedative-flare-moderate-2
+                - syndrome-sedative-flare-moderate-3
               visualType: MediumCaution
               probability: 0.25
     # region Stage 3
@@ -325,9 +325,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-sedative-flare-severe-1
-                - disease-sedative-flare-severe-2
-                - disease-sedative-flare-severe-3
+                - syndrome-sedative-flare-severe-1
+                - syndrome-sedative-flare-severe-2
+                - syndrome-sedative-flare-severe-3
               visualType: LargeCaution
               probability: 0.3
             - !type:GenericStatusEffect
@@ -376,9 +376,9 @@
               time: 16
 
 # region // NicotineAddiction
-- type: disease
+- type: syndrome
   id: NicotineAddiction
-  name: disease-nicotine-addiction
+  name: syndrome-nicotine-addiction
   organ: Body
   interval: 10
   severityDecay: 0.001
@@ -394,9 +394,9 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-nicotine-hint-1
-                - disease-nicotine-hint-2
-                - disease-nicotine-hint-3
+                - syndrome-nicotine-hint-1
+                - syndrome-nicotine-hint-2
+                - syndrome-nicotine-hint-3
               visualType: Medium
               probability: 0.5
     # region Stage 2
@@ -421,8 +421,8 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-nicotine-flare-moderate-1
-                - disease-nicotine-flare-moderate-2
+                - syndrome-nicotine-flare-moderate-1
+                - syndrome-nicotine-flare-moderate-2
               visualType: MediumCaution
               probability: 0.45
     # region Stage 3
@@ -453,13 +453,13 @@
             - !type:PopupMessage
               type: Local
               messages:
-                - disease-nicotine-flare-severe-1
-                - disease-nicotine-flare-severe-2
+                - syndrome-nicotine-flare-severe-1
+                - syndrome-nicotine-flare-severe-2
               visualType: MediumCaution
               probability: 0.45
             - !type:PopupMessage # How about a smoke break, Colonel? This is highly stressful work...
               type: Local
               messages:
-                - disease-nicotine-flare-special-1
+                - syndrome-nicotine-flare-special-1
               visualType: SmallCaution
               probability: 0.08

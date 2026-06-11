@@ -81,7 +81,7 @@
         reagent: Desoxyephedrine
         amount: 0.04
         target: Brain
-      - !type:DiseaseEffect
+      - !type:SyndromeEffect
         hidden: true
         conditions:
           - !type:ToleranceCondition
@@ -89,7 +89,7 @@
             reagent: Desoxyephedrine
             min: 0.3
             max: 1.0
-        disease: StimulantAddiction
+        syndrome: StimulantAddiction
         severity: 1.4
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
@@ -176,7 +176,7 @@
         reagent: Ephedrine
         amount: 0.025
         target: Brain
-      - !type:DiseaseEffect
+      - !type:SyndromeEffect
         hidden: true
         conditions:
           - !type:ToleranceCondition
@@ -184,7 +184,7 @@
             reagent: Ephedrine
             min: 0.6
             max: 1.0
-        disease: StimulantAddiction
+        syndrome: StimulantAddiction
         severity: 1.2
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
@@ -281,7 +281,7 @@
         reagent: Stimulants
         amount: 0.01
         target: Brain
-      - !type:DiseaseEffect
+      - !type:SyndromeEffect
         hidden: true
         conditions:
           - !type:ToleranceCondition
@@ -289,7 +289,7 @@
             reagent: Stimulants
             min: 0.4
             max: 1.0
-        disease: StimulantAddiction
+        syndrome: StimulantAddiction
         severity: 1.55
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
@@ -379,7 +379,7 @@
         reagent: Nicotine
         amount: 0.009
         target: Body
-      - !type:DiseaseEffect
+      - !type:SyndromeEffect
         hidden: true
         conditions:
           - !type:ToleranceCondition
@@ -387,7 +387,7 @@
             reagent: Nicotine
             min: 0.4
             max: 1.0
-        disease: NicotineAddiction
+        syndrome: NicotineAddiction
         severity: 1.4
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
@@ -474,7 +474,7 @@
         reagent: SpaceDrugs
         amount: 0.02
         target: Brain
-      - !type:DiseaseEffect
+      - !type:SyndromeEffect
         hidden: true
         conditions:
           - !type:ToleranceCondition
@@ -482,7 +482,7 @@
             reagent: SpaceDrugs
             min: 0.3
             max: 1.0
-        disease: SedativeAddiction
+        syndrome: SedativeAddiction
         severity: 1.2
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
@@ -724,7 +724,7 @@
         reagent: Happiness
         amount: 0.1
         target: Brain
-      - !type:DiseaseEffect
+      - !type:SyndromeEffect
         hidden: true
         conditions:
           - !type:ToleranceCondition
@@ -732,7 +732,7 @@
             reagent: Happiness
             min: 0.3
             max: 1.0
-        disease: SedativeAddiction
+        syndrome: SedativeAddiction
         severity: 1.4
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction

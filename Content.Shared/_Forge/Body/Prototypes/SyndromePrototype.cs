@@ -1,12 +1,10 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
-using Content.Shared._Forge.Physiology.Disease.Symptoms;
-using Content.Shared._Forge.Physiology.Disease.Triggers;
 
-namespace Content.Shared._Forge.Physiology.Disease;
+namespace Content.Shared._Forge.Body.Syndromes;
 
 [Prototype]
-public sealed partial class DiseasePrototype : IPrototype
+public sealed partial class SyndromePrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; set; } = string.Empty;
@@ -30,20 +28,20 @@ public sealed partial class DiseasePrototype : IPrototype
     public float FlareDelay { get; set; } = 0f;
 
     [DataField]
-    public List<DiseaseStage> Stages { get; set; } = new();
+    public List<SyndromeStage> Stages { get; set; } = new();
 
     [DataField(serverOnly: true)]
-    public List<DiseaseTrigger> Triggers { get; set; } = new();
+    public List<SyndromeTrigger> Triggers { get; set; } = new();
 }
 
 [DataDefinition]
-public sealed partial class DiseaseStage
+public sealed partial class SyndromeStage
 {
     [DataField]
     public float MinSeverity { get; set; } = 0f;
 
     [DataField(serverOnly: true)]
-    public List<DiseaseSymptom> Symptoms { get; set; } = new();
+    public List<SyndromeSymptom> Symptoms { get; set; } = new();
 }
 
 [Flags]

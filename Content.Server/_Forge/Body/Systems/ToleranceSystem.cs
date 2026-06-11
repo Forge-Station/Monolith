@@ -1,19 +1,18 @@
 using Robust.Shared.Timing;
 using Content.Shared.Body.Systems;
-using Content.Shared._Forge.Physiology;
-using Content.Shared._Forge.Physiology.Disease;
-using Content.Shared._Forge.Physiology.Tolerance;
+using Content.Shared._Forge.Body.Components;
+using Content.Shared._Forge.Body.Syndromes;
 
-namespace Content.Server._Forge.Physiology.Tolerance;
+namespace Content.Server._Forge.Body.Syndromes;
 
-public sealed partial class PhysiologyToleranceSystem : EntitySystem
+public sealed partial class ToleranceSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedBodySystem _body = default!;
 
     public void AddTolerance(EntityUid uid, string reagentId, float amount, Organ target = Organ.Body)
     {
-        var targets = PhysiologyOrganResolver.Resolve(uid, target, _body, EntityManager);
+        var targets = OrganResolver.Resolve(uid, target, _body, EntityManager);
 
         if (targets.Count == 0)
             return;
@@ -31,7 +30,7 @@ public sealed partial class PhysiologyToleranceSystem : EntitySystem
 
     public void RemoveTolerance(EntityUid uid, string reagentId, float amount, Organ target = Organ.Body)
     {
-        var targets = PhysiologyOrganResolver.Resolve(uid, target, _body, EntityManager);
+        var targets = OrganResolver.Resolve(uid, target, _body, EntityManager);
 
         foreach (var t in targets)
         {
@@ -54,7 +53,7 @@ public sealed partial class PhysiologyToleranceSystem : EntitySystem
     // Get average tolerance.. Method name makes sense..
     public float GetAverageTolerance(EntityUid uid, string reagentId, Organ target = Organ.Body)
     {
-        var targets = PhysiologyOrganResolver.Resolve(uid, target, _body, EntityManager);
+        var targets = OrganResolver.Resolve(uid, target, _body, EntityManager);
         var total = 0f;
         var counted = 0;
 
@@ -77,7 +76,7 @@ public sealed partial class PhysiologyToleranceSystem : EntitySystem
     // Get highest tolerance from all targets
     public float GetMaxTolerance(EntityUid uid, string reagentId, Organ target = Organ.Body)
     {
-        var targets = PhysiologyOrganResolver.Resolve(uid, target, _body, EntityManager);
+        var targets = OrganResolver.Resolve(uid, target, _body, EntityManager);
         var max = 0f;
 
         foreach (var t in targets)
@@ -96,7 +95,7 @@ public sealed partial class PhysiologyToleranceSystem : EntitySystem
     // Sum of tolerance from all targets, capped at 1
     public float GetTotalTolerance(EntityUid uid, string reagentId, Organ target = Organ.Body)
     {
-        var targets = PhysiologyOrganResolver.Resolve(uid, target, _body, EntityManager);
+        var targets = OrganResolver.Resolve(uid, target, _body, EntityManager);
         var total = 0f;
 
         foreach (var t in targets)

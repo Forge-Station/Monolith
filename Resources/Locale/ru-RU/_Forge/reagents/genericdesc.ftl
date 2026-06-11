@@ -6,6 +6,7 @@ forge-reagent-effect-haloperidol = Применяется в качестве л
 forge-reagent-effect-tolerance = Высокая толерантность к препарату снижает его эффективность
 forge-reagent-effect-methadone = Заместительная терапия при зависимости от опиума
 
+forge-reagent-effect-wiithdrawl-smallpain = Облегчает симптомы болевого синдрома
 forge-reagent-effect-wiithdrawl-pain = Облегчает симптомы болевого синдрома или хронической боли
 forge-reagent-effect-tabex = Применяется в качестве лечения зависимости от никотина
 

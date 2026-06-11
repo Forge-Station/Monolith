@@ -182,6 +182,37 @@
         - !type:ReagentThreshold
           min: 16 #Mono 15 >> 16
       - !type:Drunk
+      # Forge-change-start
+      - !type:SuppressEffect
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Body
+          reagent: Bicaridine
+          min: 0.5
+          max: 1.0
+        disease: PainSyndrome
+        duration: 10
+      - !type:GenericDescEffect
+        description: forge-reagent-effect-wiithdrawl-smallpain
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Bicaridine
+        amount: 0.001
+        target: Body
+      - !type:EvenHealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Body
+          reagent: Bicaridine
+          min: 0.7
+          max: 1.0
+        damage:
+          Brute: 0.5
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
+      # Forge-change-end
 
 - type: reagent
   id: Cryoxadone
@@ -321,6 +352,27 @@
           types:
             Asphyxiation: 3
             Cold: 1
+      # Forge-change-start
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Dexalin
+        amount: 0.002
+        target: Lung
+      - !type:HealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Lung
+          reagent: Dexalin
+          min: 0.7
+          max: 1.0
+        damage:
+          types:
+            Asphyxiation: 0.5
+            Bloodloss: 0.25
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
+      # Forge-change-end
 
 - type: reagent
   id: DexalinPlus
@@ -356,6 +408,27 @@
           types:
             Asphyxiation: 5
             Cold: 3
+      # Forge-change-start
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Dexalin
+        amount: 0.001
+        target: Lung
+      - !type:HealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Lung
+          reagent: Dexalin
+          min: 0.8
+          max: 1.0
+        damage:
+          types:
+            Asphyxiation: 1.75
+            Bloodloss: 1.5
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
+      # Forge-change-end
 
 # this ones a doozy
 - type: reagent
@@ -921,6 +994,29 @@
           min: 15
         reagent: Tricordrazine
         amount: -0.8
+      # Forge-change-start
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Tricordrazine
+        amount: 0.001
+        target: Heart
+      - !type:EvenHealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Heart
+          reagent: Tricordrazine
+          min: 0.7
+          max: 1.0
+        - !type:TotalDamage
+          max: 50
+        damage:
+          Brute: 0.3
+          Burn: 0.3
+          Toxin: 0.1
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
+      # Forge-change-end
 
 - type: reagent
   id: Lipozine

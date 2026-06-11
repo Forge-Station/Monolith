@@ -102,6 +102,9 @@
       sprite: Structures/Windows/cracks_diagonal.rsi
   - type: RadiationBlocker
     resistance: 4
+  - type: Construction
+    graph: Window
+    node: shuttleWindowUranDiagonal
 
 - type: entity
   id: ShuttleWindowPlasma
@@ -157,6 +160,9 @@
     price: 70 # Frontier: 150<70
   - type: RadiationBlocker
     resistance: 3
+  - type: Construction
+    graph: Window
+    node: shuttleWindowPlasma
 
 - type: entity
   parent: ShuttleWindowPlasma
@@ -204,3 +210,6 @@
       sprite: Structures/Windows/cracks_diagonal.rsi
   - type: RadiationBlocker
     resistance: 3
+  - type: Construction
+    graph: Window
+    node: shuttleWindowPlasmaDiagonal

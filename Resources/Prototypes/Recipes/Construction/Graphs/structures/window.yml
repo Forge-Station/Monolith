@@ -68,6 +68,27 @@
             - material: ReinforcedUraniumGlass
               amount: 2
               doAfter: 4
+        - to: shuttleWindowUranDiagonal
+          steps:
+            - material: Plasteel
+              amount: 2
+            - material: ReinforcedUraniumGlass
+              amount: 2
+              doAfter: 4
+        - to: shuttleWindowPlasma
+          steps:
+            - material: Plasteel
+              amount: 2
+            - material: ReinforcedPlasmaGlass
+              amount: 2
+              doAfter: 4
+        - to: shuttleWindowPlasmaDiagonal
+          steps:
+            - material: Plasteel
+              amount: 2
+            - material: ReinforcedPlasmaGlass
+              amount: 2
+              doAfter: 4
         # Forge-Change-End
         - to: clockworkWindow
           steps:
@@ -290,6 +311,45 @@
           completed:
             - !type:SpawnPrototype
               prototype: SheetRUGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionWindow
+    - node: shuttleWindowUranDiagonal
+      entity: ShuttleWindowUranDiagonal
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRUGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionWindow
+    - node: shuttleWindowPlasma
+      entity: ShuttleWindowPlasma
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRPGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionWindow
+    - node: shuttleWindowPlasmaDiagonal
+      entity: ShuttleWindowPlasmaDiagonal
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRPGlass1
               amount: 2
             - !type:SpawnPrototype
               prototype: SheetPlasteel1

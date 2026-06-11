@@ -237,12 +237,12 @@ public sealed partial class FireControlSystem
     {
         return tier switch
         {
-            GunneryServerTier.Low => new GunneryServerTierProfile(24, 6, 125f, 250f, 5f, 300f, 100000f, 10f, 25),
-            GunneryServerTier.Medium => new GunneryServerTierProfile(42, 8, 250f, 500f, 10f, 600f, 250000f, 13f, 40),
-            GunneryServerTier.High => new GunneryServerTierProfile(60, 12, 500f, 1000f, 20f, 1200f, 1000000f, 20f, 70),
-            GunneryServerTier.Ultra => new GunneryServerTierProfile(90, 14, 1000f, 2000f, 50f, 2400f, 4000000f, 25f, 100),
-            GunneryServerTier.Omega => new GunneryServerTierProfile(500, 18, 2000f, 4000f, 100f, 4800f, 8000000f, 40f, 150),
-            _ => new GunneryServerTierProfile(24, 6, 125f, 250f, 5f, 300f, 100000f, 10f, 25),
+            GunneryServerTier.Low => new GunneryServerTierProfile(24, 12, 125f, 250f, 5f, 300f, 100000f, 10f, 25),
+            GunneryServerTier.Medium => new GunneryServerTierProfile(42, 16, 250f, 500f, 10f, 600f, 250000f, 13f, 40),
+            GunneryServerTier.High => new GunneryServerTierProfile(60, 20, 500f, 1000f, 20f, 1200f, 1000000f, 20f, 70),
+            GunneryServerTier.Ultra => new GunneryServerTierProfile(90, 24, 1000f, 2000f, 50f, 2400f, 4000000f, 25f, 100),
+            GunneryServerTier.Omega => new GunneryServerTierProfile(500, 28, 2000f, 4000f, 100f, 4800f, 8000000f, 40f, 150),
+            _ => new GunneryServerTierProfile(24, 12, 125f, 250f, 5f, 300f, 100000f, 10f, 25),
         };
     }
 

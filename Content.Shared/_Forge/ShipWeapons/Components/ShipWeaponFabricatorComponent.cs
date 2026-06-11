@@ -16,7 +16,7 @@ public sealed partial class ShipWeaponFabricatorComponent : Component
     public const string PartContainerName = "weapon_parts";
 
     [ViewVariables]
-    public bool HasBoard => BoardContainer?.ContainedEntity != null;
+    public bool HasBoard => BoardContainer?.Count > 0;
 
     [ViewVariables]
     public bool Fabricating;
@@ -63,8 +63,11 @@ public sealed partial class ShipWeaponFabricatorComponent : Component
     [DataField]
     public EntProtoId OutputFlatpackPrototype = "ForgeShipWeaponFlatpack";
 
+    [DataField]
+    public int MaxBoardQueue = 8;
+
     [ViewVariables]
-    public ContainerSlot BoardContainer = default!;
+    public Container BoardContainer = default!;
 
     [ViewVariables]
     public Container PartContainer = default!;

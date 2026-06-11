@@ -1,6 +1,6 @@
 - type: entity
   id: SuitStorageWallmount
-  parent: 
+  parent:
   - BaseStructureWallmount
   - BaseWallCloset
   - SuitStorageBase
@@ -31,3 +31,10 @@
       path: /Audio/Machines/windoor_open.ogg
     denySound:
       path: /Audio/Machines/airlock_deny.ogg
+  # Forge-Change-Start
+  - type: Construction
+    graph: SuitStorage
+    node: suitStorageWallmount
+    containers:
+    - entity_storage
+  # Forge-Change-End

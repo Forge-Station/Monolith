@@ -88,3 +88,6 @@ construction-recipe-defibrillator-cabinet-desc = { ent-DefibrillatorCabinet.desc
 #SuitStorageBase
 construction-recipe-suit-storage = { ent-SuitStorageBase }
 construction-recipe-suit-storage-desc = { ent-SuitStorageBase.desc }
+
+construction-recipe-suit-storage-wallmount = { ent-SuitStorageWallmount }
+construction-recipe-suit-storage-desc = { ent-SuitStorageWallmount.desc }

@@ -6,7 +6,8 @@
   category: Small
   group: Empire
   access: Empire
-  price: 1
+  limit: 3
+  price: 270000
   shuttlePath: /Maps/_Forge/Shuttles/Empire/Pluto.yml
   guidebookPage: Null
   class:

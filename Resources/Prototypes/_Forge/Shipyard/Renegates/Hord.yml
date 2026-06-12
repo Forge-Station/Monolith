@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Хорд
   description: Среднегабаритный боевой шаттл Ренегатов
-  price: 1
+  price: 92000
   category: Medium
   group: Renegate
   access: Renegate

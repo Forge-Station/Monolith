@@ -80,11 +80,10 @@
     - Chimera
     - ChimeraFloor
     - Meat
-  # Forge-Change
+  # Forge-Change-Start
   - type: NpcFactionMember
     factions:
     - Chimera
-  # Forge-Change
   - type: Reactive
     groups:
       Flammable: [Touch]
@@ -101,4 +100,4 @@
           types:
             Caustic: 20
             Cellular: 5
-    # end Forge-Change
+  # Forge-Change-End

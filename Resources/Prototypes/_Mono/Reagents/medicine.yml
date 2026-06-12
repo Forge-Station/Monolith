@@ -93,10 +93,10 @@
   flavor: medicine
   color: "#437ca8"
   worksOnTheDead: true
-  # Forge-Change
+  # Forge-Change-Start
   tileReactions:
   - !type:CleanTileReaction { }
-  # end Forge-Change
+  # Forge-Change-End
   metabolisms:
     Medicine:
       metabolismRate: 0.25

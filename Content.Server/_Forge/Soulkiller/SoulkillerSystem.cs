@@ -86,17 +86,28 @@ public sealed class SoulkillerSystem : SharedSoulkillerSystem
     private void OnPodClosed(Entity<SoulkillerConnectorComponent> ent, ref StorageAfterCloseEvent args)
     {
         var connected = false;
+        var hasHumanoid = false;
 
         if (TryComp<EntityStorageComponent>(ent, out var storage))
         {
             foreach (var occupant in storage.Contents.ContainedEntities)
             {
+                hasHumanoid |= HasComp<HumanoidAppearanceComponent>(occupant);
+
                 if (TryConnect(ent, occupant))
                 {
                     connected = true;
                     break;
                 }
             }
+        }
+
+        // A person the capsule can't connect (non-КПБ, no linked core, core occupied) is spat
+        // back out immediately instead of being sealed behind the extraction delay.
+        if (!connected && hasHumanoid)
+        {
+            OpenCapsule(ent.Owner);
+            return;
         }
 
         SetConnectorVisual(ent, connected ? SoulkillerConnectorState.Active : SoulkillerConnectorState.Closed);

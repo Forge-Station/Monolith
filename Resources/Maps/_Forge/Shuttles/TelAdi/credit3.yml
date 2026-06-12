@@ -4,7 +4,7 @@ meta:
   engineVersion: 275.1.0
   forkId: ""
   forkVersion: ""
-  time: 06/04/2026 18:24:40
+  time: 06/11/2026 23:11:49
   entityCount: 245
 maps: []
 grids:
@@ -59,10 +59,10 @@ entities:
     - type: ThermalSignature
     - type: SpreaderGrid
       spreadQueues:
-        Puddle: []
         MetalFoam: []
-        Smoke: []
         Kudzu: []
+        Smoke: []
+        Puddle: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: ImplicitRoof
@@ -228,12 +228,11 @@ entities:
     - type: Transform
       pos: 2.5,-10.5
       parent: 1
-- proto: AirlockTelAdiSecure
+- proto: AirlockTelAdi
   entities:
   - uid: 63
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 0.5,-2.5
       parent: 1
 - proto: APCBasic
@@ -772,7 +771,7 @@ entities:
       pos: -1.5,-1.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -1988.2559
+      secondsUntilStateChange: -2134.5378
       state: Opening
   - uid: 129
     components:
@@ -781,7 +780,7 @@ entities:
       pos: 3.5,-2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -1994.9893
+      secondsUntilStateChange: -2141.2712
       state: Opening
 - proto: DisposalPipe
   entities:
@@ -1168,45 +1167,46 @@ entities:
   - uid: 228
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: -0.5,-3.5
       parent: 1
     - type: Storage
       storedItems:
-        234:
-          position: 2,0
-          _rotation: South
         233:
-          position: 1,0
-          _rotation: South
-        229:
           position: 0,0
           _rotation: South
+        234:
+          position: 1,0
+          _rotation: South
         235:
+          position: 2,0
+          _rotation: South
+        236:
           position: 3,0
+          _rotation: South
+        229:
+          position: 4,0
           _rotation: South
         230:
           position: 5,0
           _rotation: South
         231:
-          position: 4,3
-          _rotation: South
-        232:
-          position: 5,3
-          _rotation: South
-        236:
-          position: 4,0
-          _rotation: South
-        237:
           position: 0,3
           _rotation: South
-        238:
+        232:
           position: 1,3
           _rotation: South
-        239:
+        240:
           position: 2,3
           _rotation: South
-        240:
+        238:
           position: 3,3
+          _rotation: South
+        239:
+          position: 4,3
+          _rotation: South
+        237:
+          position: 5,3
           _rotation: South
     - type: ContainerContainer
       containers:
@@ -1214,18 +1214,18 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 232
-          - 231
-          - 229
           - 233
           - 234
           - 235
           - 236
-          - 237
+          - 229
+          - 230
+          - 231
+          - 232
+          - 240
           - 238
           - 239
-          - 230
-          - 240
+          - 237
 - proto: ShuttersNormal
   entities:
   - uid: 2

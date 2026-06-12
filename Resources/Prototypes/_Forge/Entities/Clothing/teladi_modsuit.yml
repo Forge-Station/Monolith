@@ -92,8 +92,8 @@
       coefficients:
         Blunt: 0.75
         Slash: 0.75
-        Piercing: 0.75
-        Heat: 0.80
+        Piercing: 0.65
+        Heat: 0.70
         Caustic: 0.80
         Shock: 0.60
         Radiation: 0 # Forge-change: full (100%) radiation protection
@@ -126,12 +126,21 @@
       gloves-vox:
       - state: equipped-HAND-sealed-vox
   - type: ModsuitGauntletTools
+    usePrototypeMenuIcons: true
+    enabledSlots:
+    - Urk
+    - Omnitool
+    - Welder
+    - NaniteApplicator
+    - Auxiliary
+    - Rcd
     urkProto: ShipRepairDeviceModsuitGauntlet
     omnitoolProto: OmnitoolModsuitGauntlet
-    # Forge-change-start: extra Tel-Adi tools
+    welderProto: WelderExperimental
+    naniteApplicatorProto: NaniteApplicatorExperimental
+    # Forge-change: пятый слот — форсунка, шестой — самозарядный RCD
+    auxiliaryProto: WeaponSprayNozzle
     rcdProto: RCDRecharging
-    sprayNozzleProto: WeaponSprayNozzle
-    # Forge-change-end
   - type: ActionGrant
     actions:
     - ActionModsuitGauntletToolsMenu
@@ -303,14 +312,7 @@
     sprite: _Mono/Clothing/Head/Modsuits/tel-adi-mk2.rsi
   - type: Clothing
     sprite: _Mono/Clothing/Head/Modsuits/tel-adi-mk2.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.80
-        Slash: 0.60
-        Piercing: 0.80
-        Heat: 0.80
-        Radiation: 0
+  # Броня наследуется от шлема «Аквизитора»: 10% от всего, радиация — 100%.
 
 # Tel-Adi ARS «Дивиденд» — торс
 - type: entity
@@ -332,9 +334,9 @@
     modifiers:
       coefficients:
         Blunt: 0.65
-        Slash: 0.30
-        Piercing: 0.65
-        Heat: 0.70
+        Slash: 0.50
+        Piercing: 0.55
+        Heat: 0.60
         Caustic: 0.70
         Shock: 0.50
         Radiation: 0
@@ -350,10 +352,21 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ModsuitGauntletTools
+    usePrototypeMenuIcons: true
+    enabledSlots:
+    - Urk
+    - Omnitool
+    - Welder
+    - NaniteApplicator
+    - Auxiliary
+    - Rcd
     urkProto: ShipRepairDeviceRechargingModsuitGauntlet
     omnitoolProto: OmnitoolModsuitGauntlet
+    welderProto: WelderExperimental
+    naniteApplicatorProto: NaniteApplicatorExperimental
+    # Forge-change: пятый слот — форсунка, шестой — самозарядный RCD
+    auxiliaryProto: WeaponSprayNozzle
     rcdProto: RCDRecharging
-    sprayNozzleProto: WeaponSprayNozzle
   - type: Sprite
     sprite: _Mono/Clothing/Hands/Modsuits/tel-adi-mk2.rsi
     layers:

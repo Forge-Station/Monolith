@@ -4,7 +4,7 @@ meta:
   engineVersion: 275.1.0
   forkId: ""
   forkVersion: ""
-  time: 06/04/2026 18:12:26
+  time: 06/11/2026 23:09:39
   entityCount: 146
 maps: []
 grids:
@@ -64,10 +64,10 @@ entities:
     - type: ThermalSignature
     - type: SpreaderGrid
       spreadQueues:
-        Puddle: []
         MetalFoam: []
-        Smoke: []
         Kudzu: []
+        Smoke: []
+        Puddle: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: ImplicitRoof
@@ -747,22 +747,23 @@ entities:
   - uid: 74
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: -4.5,2.5
       parent: 1
     - type: Storage
       storedItems:
         75:
-          position: 1,0
-          _rotation: South
-        95:
-          position: 3,3
-          _rotation: South
-        99:
-          position: 0,3
+          position: 0,0
           _rotation: South
         109:
-          position: 3,0
+          position: 1,3
           _rotation: South
+        95:
+          position: 4,0
+          _rotation: South
+        99:
+          position: 4,6
+          _rotation: East
     - type: ContainerContainer
       containers:
         storagebase: !type:Container
@@ -770,9 +771,9 @@ entities:
           occludes: True
           ents:
           - 75
+          - 109
           - 95
           - 99
-          - 109
 - proto: ShuttersNormal
   entities:
   - uid: 12

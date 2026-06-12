@@ -3,6 +3,7 @@
   parent: BaseVessel
   name: 'Tel-Adi billion'
   description: Флагман Tel-Adi. Торговля, добыча, переговоры — всё под одной крышей. Прибыль — не цель, прибыль — вера.
+  purchasable: false # только по ваучеру ShipVoucherTelAdiBillion
   price: 400000
   limit: 1 # одна активная «billion» за раунд
   category: Large

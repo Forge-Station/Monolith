@@ -60,7 +60,7 @@
   entityIcon: ClothingModsuitTelAdi
   discipline: TelAdi
   tier: 1
-  cost: 100000
+  cost: 50000
   recipeUnlocks:
   - ARSTelAdiModsuit
   technologyPrerequisites:
@@ -73,7 +73,7 @@
   entityIcon: ClothingModsuitTelAdiMk2
   discipline: TelAdi
   tier: 2
-  cost: 200000
+  cost: 100000
   recipeUnlocks:
   - ARSTelAdiModsuitMk2
   technologyPrerequisites:
@@ -114,3 +114,17 @@
   recipeUnlocks:
   - TelAdiEmergencyLimbImplant
   position: 4, 1
+
+# Ваучер флагмана «Биллион» — единственный способ купить корабль на верфи Tel-Adi.
+- type: technology
+  id: TelAdiBillionVoucher
+  name: research-technology-teladi-billion-voucher
+  entityIcon: ShipVoucherTelAdiBillion
+  discipline: TelAdi
+  tier: 1
+  cost: 50000
+  recipeUnlocks:
+  - RecipeShipVoucherTelAdiBillion
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 11, 3

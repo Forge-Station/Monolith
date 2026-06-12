@@ -24,8 +24,6 @@
         type: ShipyardConsoleBoundUserInterface
   - type: ShipyardConsole
     shipyardChannel: Traffic
-  - type: CompanyAccessReader
-    requiredCompany: TelAdi
   - type: ShipyardListing
     shuttles:
     - teladi_aurora
@@ -57,8 +55,6 @@
         type: ShipyardConsoleBoundUserInterface
   - type: ShipyardConsole
     shipyardChannel: Traffic
-  - type: CompanyAccessReader
-    requiredCompany: TelAdi
   - type: ShipyardListing
     shuttles:
     - teladi_credit2

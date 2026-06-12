@@ -4,7 +4,7 @@ meta:
   engineVersion: 275.1.0
   forkId: ""
   forkVersion: ""
-  time: 06/02/2026 23:17:54
+  time: 06/07/2026 14:03:32
   entityCount: 475
 maps: []
 grids:
@@ -84,10 +84,10 @@ entities:
     - type: ThermalSignature
     - type: SpreaderGrid
       spreadQueues:
-        Smoke: []
-        Puddle: []
         Kudzu: []
+        Puddle: []
         MetalFoam: []
+        Smoke: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: ImplicitRoof
@@ -401,49 +401,33 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -7.5,-2.5
       parent: 1
-- proto: AirlockTelAdiSecure
+- proto: AirlockTelAdi
   entities:
   - uid: 151
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 1.5,-7.5
       parent: 1
   - uid: 161
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,-7.5
+      pos: 0.5,-3.5
       parent: 1
-    - type: Door
-      secondsUntilStateChange: -953.04034
-      state: Opening
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
   - uid: 163
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.5,-5.5
+      pos: -2.5,-5.5
       parent: 1
   - uid: 164
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -2.5,-5.5
+      pos: -0.5,-7.5
       parent: 1
   - uid: 381
     components:
     - type: Transform
-      pos: 0.5,-3.5
+      pos: 3.5,-5.5
       parent: 1
-    - type: Door
-      secondsUntilStateChange: -3053.5037
-      state: Opening
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
 - proto: AmmoLoaderSmall
   entities:
   - uid: 465
@@ -2163,23 +2147,6 @@ entities:
     - type: Transform
       pos: -0.5,-10.5
       parent: 1
-    - type: DeviceLinkSource
-      linkedPorts:
-        161:
-        - - Pressed
-          - AutoClose
-        151:
-        - - Pressed
-          - DoorBolt
-        164:
-        - - Pressed
-          - DoorBolt
-        163:
-        - - Pressed
-          - DoorBolt
-        381:
-        - - Pressed
-          - DoorBolt
 - proto: SignAtmos
   entities:
   - uid: 365

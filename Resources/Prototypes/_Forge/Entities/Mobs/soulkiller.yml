@@ -36,10 +36,13 @@
   - type: Alerts
   - type: Speech
     speechVerb: Robotic
+  # Теги зеркалят StationAiBrain: без CanPilot консоль шаттла не пускает (TryPilot).
   - type: Tag
     tags:
     - HideContextMenu
     - StationAi
+    - NoConsoleSound
+    - CanPilot
 
 # Компоненты, навешиваемые на мозг при вставке в ядро Душегуба.
 # Копия AiHeld, но с фирменными иконками экшенов Tel-Adi и без законов.

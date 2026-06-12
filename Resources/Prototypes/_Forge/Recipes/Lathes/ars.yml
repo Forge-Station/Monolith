@@ -20,12 +20,12 @@
   parent: MonoHardsuitT3Recipe
   result: ClothingModsuitTelAdi
   materials:
-    Plastic: 10000 # 100 листов
-    Steel: 10000
-    Plasteel: 10000
-    Durathread: 10000
-    Silver: 1500 # 15 листов
-    Gold: 1500
+    Plastic: 5000 # 50 листов
+    Steel: 5000
+    Plasteel: 5000
+    Durathread: 5000
+    Silver: 750 # 7.5 листов
+    Gold: 750
     UraniumFissile: 100 # 1 лист
 
 - type: latheRecipePack
@@ -40,13 +40,13 @@
   parent: MonoHardsuitT3Recipe
   result: ClothingModsuitTelAdiMk2
   materials:
-    Plastic: 20000
-    Steel: 20000
-    Plasteel: 20000
-    Durathread: 20000
-    Silver: 20000
-    Gold: 20000
-    UraniumFissile: 300 # 3 листа
+    Plastic: 10000
+    Steel: 10000
+    Plasteel: 10000
+    Durathread: 10000
+    Silver: 10000
+    Gold: 10000
+    UraniumFissile: 100 # 1 лист, как у «Аквизитора»
 
 - type: latheRecipePack
   id: ForgeTelAdiModsuitMk2Dynamic

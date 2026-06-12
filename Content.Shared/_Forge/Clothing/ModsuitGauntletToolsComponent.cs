@@ -54,6 +54,16 @@ public sealed partial class ModsuitGauntletToolsComponent : Component
     [DataField, AutoNetworkedField]
     public bool AuxiliaryInHand;
 
+    // Forge-change: optional sixth slot (RCD)
+    [DataField, AutoNetworkedField]
+    public EntProtoId RcdProto = "RCDRecharging";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? RcdEntity;
+
+    [DataField, AutoNetworkedField]
+    public bool RcdInHand;
+
     /// <summary>
     /// Which integrated tool slots are available. Omnissia gauntlets use the default (all four).
     /// </summary>

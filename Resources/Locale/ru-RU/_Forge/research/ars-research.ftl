@@ -7,3 +7,4 @@ research-technology-teladi-centrifuge = Центрифуга Tel-Adi
 research-technology-teladi-scrap-processor = Переработчик лома Tel-Adi
 research-technology-teladi-clothing = Униформа Tel-Adi
 research-technology-teladi-emergency-limb = Аварийный имплант-конечность Tel-Adi
+research-technology-teladi-billion-voucher = Ваучер флагмана «Биллион»

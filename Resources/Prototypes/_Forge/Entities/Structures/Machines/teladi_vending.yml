@@ -42,6 +42,10 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  # Арка 175° у родителя требует «смотреть» из стены наружу — повешенный игроком
+  # вендомат часто повёрнут иначе и становится недосягаемым. 360° как у постеров.
+  - type: WallMount
+    arc: 360
   - type: AccessReader
     requiredCompany: TelAdi
   - type: Unremoveable

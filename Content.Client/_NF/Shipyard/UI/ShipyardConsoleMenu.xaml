@@ -124,6 +124,19 @@
         </GridContainer>
             </PanelContainer>
         </PanelContainer>
+        <!-- Forge-Change-Start: Hangar -->
+        <BoxContainer Orientation="Vertical" Name="HangarContainer" Margin="0 4 0 4">
+            <Label Name="HangarHeaderLabel" Text="{Loc 'shipyard-hangar-header'}" StyleClasses="LabelKeyText"/>
+            <OptionButton Name="HangarVesselSelect"
+                          Prefix="{Loc 'shipyard-hangar-select-label'}"
+                          HorizontalExpand="True"
+                          Margin="0 2 0 2"/>
+            <BoxContainer Orientation="Horizontal">
+                <Button Name="StoreHangarButton" Text="{Loc 'shipyard-hangar-store'}"/>
+                <Button Name="RetrieveHangarButton" Text="{Loc 'shipyard-hangar-retrieve'}" Disabled="True"/>
+            </BoxContainer>
+        </BoxContainer>
+        <!-- Forge-Change-End -->
         <BoxContainer Orientation="Horizontal" Margin="0 2 0 2" Name="RenameContainer" Visible="False">
             <LineEdit Name="RenameLineEdit"
                       PlaceHolder="{Loc 'shipyard-console-rename-placeholder'}"

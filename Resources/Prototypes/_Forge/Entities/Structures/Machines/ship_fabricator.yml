@@ -1,0 +1,68 @@
+- type: entity
+  id: ShipFabricator
+  parent: [BaseMachinePowered, ConstructibleMachine]
+  name: ship fabricator
+  description: Assembles shuttle hulls from decrypted schematics and bulk materials.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/protolathe.rsi
+    layers:
+    - state: icon
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 190
+        mask: [MachineMask]
+        layer: [MachineLayer]
+  - type: ApcPowerReceiver
+    powerLoad: 12000
+  - type: Machine
+    board: ShipFabricatorCircuitboard
+  - type: ShipFabricator
+    blueprintWhitelist:
+      components:
+      - VesselBlueprint
+    targetIdSlot:
+      name: id-card-console-target-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - IdCard
+  - type: ActivatableUI
+    key: enum.ShipFabricatorUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ShipFabricatorUiKey.Key:
+        type: ShipFabricatorBoundUserInterface
+  - type: MaterialStorage
+    storageLimit: 5000000
+    whitelist:
+      tags: [Sheet, RawMaterial, Ingot, Ore]
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      ship_blueprint: !type:Container
+      ShipFabricator-targetId: !type:ContainerSlot
+
+- type: entity
+  id: ShipFabricatorCircuitboard
+  parent: BaseMachineCircuitboard
+  name: ship fabricator machine board
+  components:
+  - type: MachineBoard
+    prototype: ShipFabricator
+    stackRequirements:
+      Manipulator: 4
+      Capacitor: 2
+    tagRequirements:
+      GlassBeaker:
+        amount: 2
+        defaultPrototype: Beaker

@@ -77,7 +77,6 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         _configManager.OnValueChanged(NFCCVars.ShipyardSellRate, SetShipyardSellRate, true);
         _sawmill = Logger.GetSawmill("shipyard");
 
-        SubscribeLocalEvent<ShipyardConsoleComponent, ComponentStartup>(OnShipyardStartup);
         SubscribeLocalEvent<ShipyardConsoleComponent, BoundUIOpenedEvent>(OnConsoleUIOpened);
         SubscribeLocalEvent<ShipyardConsoleComponent, ShipyardConsoleSellMessage>(OnSellMessage);
         SubscribeLocalEvent<ShipyardConsoleComponent, ShipyardConsolePurchaseMessage>(OnPurchaseMessage);
@@ -87,19 +86,14 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         SubscribeLocalEvent<ShipyardConsoleComponent, EntRemovedFromContainerMessage>(OnItemSlotChanged);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<StationDeedSpawnerComponent, MapInitEvent>(OnInitDeedSpawner);
+
+        InitializeHangar(); // Forge-Change
     }
     public override void Shutdown()
     {
         _configManager.UnsubValueChanged(NFCCVars.Shipyard, SetShipyardEnabled);
         _configManager.UnsubValueChanged(NFCCVars.ShipyardSellRate, SetShipyardSellRate);
     }
-    private void OnShipyardStartup(EntityUid uid, ShipyardConsoleComponent component, ComponentStartup args)
-    {
-        if (!_enabled)
-            return;
-        InitializeConsole();
-    }
-
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
         CleanupShipyard();
@@ -342,6 +336,9 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         _map.SetPaused(ShipyardMap.Value, false);
     }
+
+    // Forge-Change
+    public void CleanGridForHangar(EntityUid grid, EntityUid destination) => CleanGrid(grid, destination);
 
     // <summary>
     // Tries to rename a shuttle deed and update the respective components.

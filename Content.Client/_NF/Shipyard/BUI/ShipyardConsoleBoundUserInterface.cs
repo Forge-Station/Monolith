@@ -1,5 +1,7 @@
 using Content.Client._NF.Shipyard.UI;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared._Forge.Shipyard.Events;
+using Content.Shared._NF.Shipyard;
 using Content.Shared._NF.Shipyard.BUI;
 using Content.Shared._NF.Shipyard.Events;
 using static Robust.Client.UserInterface.Controls.BaseButton;
@@ -102,4 +104,16 @@ public sealed class ShipyardConsoleBoundUserInterface : BoundUserInterface
     {
         SendMessage(new ShipyardConsoleRenameMessage(newName));
     }
+
+    // Forge-Change-Start
+    public void SendStoreHangar()
+    {
+        SendMessage(new ShipyardConsoleStoreHangarMessage((ShipyardConsoleUiKey) UiKey));
+    }
+
+    public void SendRetrieveHangar(Guid vesselGuid)
+    {
+        SendMessage(new ShipyardConsoleRetrieveHangarMessage(vesselGuid, (ShipyardConsoleUiKey) UiKey));
+    }
+    // Forge-Change-End
 }

@@ -622,6 +622,48 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("connection_log", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.HangarVessel", b =>
+                {
+                    b.Property<Guid>("VesselGuid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("vessel_guid");
+
+                    b.Property<string>("CustomName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("custom_name");
+
+                    b.Property<DateTime>("LastStored")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("last_stored");
+
+                    b.Property<Guid>("OwnerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("owner_user_id");
+
+                    b.Property<string>("SavePath")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("save_path");
+
+                    b.Property<int>("State")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("state");
+
+                    b.Property<string>("VesselProtoId")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("vessel_proto_id");
+
+                    b.HasKey("VesselGuid")
+                        .HasName("PK_hangar_vessels");
+
+                    b.HasIndex("OwnerUserId");
+
+                    b.ToTable("hangar_vessels", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
                 {
                     b.Property<int>("Id")

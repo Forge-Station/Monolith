@@ -1,0 +1,58 @@
+- type: entity
+  parent: BaseItem
+  id: ForgeBaseVesselSchematic
+  abstract: true
+  name: vessel schematic
+  description: Encrypted shuttle hull schematic for a ship fabricator.
+  components:
+  - type: Sprite
+    sprite: _NF/Objects/Tools/blueprints.rsi
+    layers:
+    - state: icon-base
+      color: "#fff87c"
+    - state: icon-text
+  - type: Item
+    size: Normal
+    sprite: _NF/Objects/Tools/blueprints.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left-base
+        color: "#fff87c"
+      - state: inhand-left-text
+      right:
+      - state: inhand-right-base
+        color: "#fff87c"
+      - state: inhand-right-text
+  - type: Tag
+    tags:
+    - Document
+    - VesselBlueprint
+  - type: StaticPrice
+    price: 5000
+
+- type: entity
+  parent: ForgeBaseVesselSchematic
+  id: BlueprintVesselPulsar
+  name: pulsar shuttle schematic
+  description: Encrypted hull schematic for the Pulsar civilian research shuttle.
+  components:
+  - type: VesselBlueprint
+    vessel: Pulsar
+
+- type: entity
+  parent: ForgeBaseVesselSchematic
+  id: BlueprintVesselNightlight
+  name: nightlight shuttle schematic
+  description: Hull schematic for the Nightlight shuttle.
+  components:
+  - type: VesselBlueprint
+    vessel: nightlight
+
+- type: entity
+  parent: ForgeBaseVesselSchematic
+  id: BlueprintVesselDruid
+  name: druid shuttle schematic
+  description: Hull schematic for the Druid shuttle.
+  components:
+  - type: VesselBlueprint
+    vessel: druid

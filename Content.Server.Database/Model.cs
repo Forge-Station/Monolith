@@ -47,6 +47,7 @@ namespace Content.Server.Database
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
         public DbSet<CompanyMember> CompanyMembers { get; set; } = null!;
+        public DbSet<HangarVessel> HangarVessels { get; set; } = null!; // Forge-Change
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -380,6 +381,10 @@ namespace Content.Server.Database
                 .HasForeignKey(w => w.PlayerUserId)
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Forge-Change
+            modelBuilder.Entity<HangarVessel>()
+                .HasIndex(v => v.OwnerUserId);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -1364,4 +1369,27 @@ namespace Content.Server.Database
         public string CompanyId { get; set; } = default!;
     }
     // Mono-End
+
+    // Forge-Change-Start
+    public class HangarVessel
+    {
+        [Key]
+        public Guid VesselGuid { get; set; }
+
+        [Required]
+        public Guid OwnerUserId { get; set; }
+
+        [Required]
+        public string VesselProtoId { get; set; } = string.Empty;
+
+        [Required]
+        public string SavePath { get; set; } = string.Empty;
+
+        public string CustomName { get; set; } = string.Empty;
+
+        public int State { get; set; }
+
+        public DateTime LastStored { get; set; }
+    }
+    // Forge-Change-End
 }

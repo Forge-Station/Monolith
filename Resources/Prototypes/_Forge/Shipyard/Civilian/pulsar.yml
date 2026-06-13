@@ -10,6 +10,12 @@
   guidebookPage: Null
   class:
   - Civilian
+  fabricationTime: 900 # Forge-Change
+  fabricationMaterials: # Forge-Change
+    Steel: 22000
+    Plasteel: 14000
+    Glass: 8000
+    Plasma: 5000
 
 - type: gameMap
   id: Pulsar

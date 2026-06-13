@@ -11,6 +11,9 @@
 - type: vessel
   id: Framework
   parent: BaseVessel
+  creditPurchaseOnly: true # Forge-Change
+  tags: # Forge-Change
+  - StarterVessel
   name: UNJ Framework
   description: The cheapest hunk of junk this side of the Rogue. Not meant to last, but has the potential to be anything.
   price: 10000

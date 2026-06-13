@@ -1,6 +1,9 @@
 - type: vessel
   id: lizard
   parent: BaseVessel
+  creditPurchaseOnly: true # Forge-Change
+  tags: # Forge-Change
+  - StarterVessel
   name: Ящер
   description: Малый разведчик повстанцев. Вооружен.. Он вроде вооружен. Для выстрела активировать таймер сигнала. Удачи
   price: 9000

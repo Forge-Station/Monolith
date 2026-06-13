@@ -1,3 +1,4 @@
+using Content.Shared._Forge.Shipyard;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._NF.Shipyard.BUI;
@@ -17,6 +18,16 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
     public readonly bool FreeListings;
     public readonly float SellRate;
 
+    // Forge-Change-Start
+    public readonly bool HangarEnabled;
+    public readonly List<HangarVesselEntry> HangarVessels;
+    public readonly bool CanStoreInHangar;
+    public readonly bool CanRetrieveFromHangar;
+    public readonly Guid? HangarRetrieveVesselId;
+    public readonly int HangarSlotsUsed;
+    public readonly int HangarSlotsMax;
+    // Forge-Change-End
+
     public ShipyardConsoleInterfaceState(
         int balance,
         bool accessGranted,
@@ -27,7 +38,14 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
         (List<string> available, List<string> unavailable) shipyardPrototypes,
         string shipyardName,
         bool freeListings,
-        float sellRate)
+        float sellRate,
+        bool hangarEnabled = false,
+        List<HangarVesselEntry>? hangarVessels = null,
+        bool canStoreInHangar = false,
+        bool canRetrieveFromHangar = false,
+        Guid? hangarRetrieveVesselId = null,
+        int hangarSlotsUsed = 0,
+        int hangarSlotsMax = 3)
     {
         Balance = balance;
         AccessGranted = accessGranted;
@@ -39,5 +57,12 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
         ShipyardName = shipyardName;
         FreeListings = freeListings;
         SellRate = sellRate;
+        HangarEnabled = hangarEnabled;
+        HangarVessels = hangarVessels ?? new List<HangarVesselEntry>();
+        CanStoreInHangar = canStoreInHangar;
+        CanRetrieveFromHangar = canRetrieveFromHangar;
+        HangarRetrieveVesselId = hangarRetrieveVesselId;
+        HangarSlotsUsed = hangarSlotsUsed;
+        HangarSlotsMax = hangarSlotsMax;
     }
 }

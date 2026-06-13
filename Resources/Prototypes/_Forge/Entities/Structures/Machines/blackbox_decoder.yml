@@ -1,0 +1,50 @@
+- type: entity
+  id: BlackboxDecoder
+  parent: [BaseMachinePowered, ConstructibleMachine]
+  name: blackbox schematic decoder
+  description: Decrypts drone blackbox data into shuttle hull schematics.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/techfab.rsi
+    layers:
+    - state: icon
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 120
+        mask: [MachineMask]
+        layer: [MachineLayer]
+  - type: ApcPowerReceiver
+    powerLoad: 3000
+  - type: Machine
+    board: BlackboxDecoderCircuitboard
+  - type: BlackboxDecoder
+    decodeTime: 45
+    t1Outputs:
+    - BlueprintVesselNightlight
+    - BlueprintVesselPulsar
+    t2Outputs:
+    - BlueprintVesselDruid
+    - BlueprintVesselPulsar
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,3,3
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      machine_board: !type:Container
+      machine_parts: !type:Container
+
+- type: entity
+  id: BlackboxDecoderCircuitboard
+  parent: BaseMachineCircuitboard
+  name: blackbox decoder machine board
+  components:
+  - type: MachineBoard
+    prototype: BlackboxDecoder
+    stackRequirements:
+      Manipulator: 2
+      Capacitor: 2

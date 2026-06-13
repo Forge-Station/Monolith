@@ -83,11 +83,6 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
     private static readonly ProtoId<TagPrototype> CrewedShuttleTag = "CrewedShuttle";
     private static readonly Regex DeedRegex = new(@"\s*\([^()]*\)");
 
-    public void InitializeConsole()
-    {
-
-    }
-
     private void OnPurchaseMessage(EntityUid shipyardConsoleUid, ShipyardConsoleComponent component, ShipyardConsolePurchaseMessage args)
     {
         if (args.Actor is not { Valid: true } player)
@@ -109,12 +104,15 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             return;
         }
 
-        if (HasComp<ShuttleDeedComponent>(targetId))
+        if (TryComp<ShuttleDeedComponent>(targetId, out var existingDeed) && existingDeed.ShuttleUid is { Valid: true })
         {
             ConsolePopup(player, Loc.GetString("shipyard-console-already-deeded"));
             PlayDenySound(player, shipyardConsoleUid, component);
             return;
         }
+
+        if (HasComp<ShuttleDeedComponent>(targetId))
+            RemComp<ShuttleDeedComponent>(targetId);
 
         if (TryComp<AccessReaderComponent>(shipyardConsoleUid, out var accessReaderComponent) && !_access.IsAllowed(player, shipyardConsoleUid, accessReaderComponent))
         {
@@ -447,7 +445,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         var purchaseEv = new ShipyardShuttlePurchaseEvent(shuttleUid, player); // Mono: half of this shit could be an event.
         RaiseLocalEvent(purchaseEv);
-        RefreshState(shipyardConsoleUid, bank.Balance, true, name, sellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, voucherUsed);
+        _ = RefreshHangarState(shipyardConsoleUid, component, player, targetId, (ShipyardConsoleUiKey) args.UiKey, voucherUsed);
     }
 
     private void TryParseShuttleName(ShuttleDeedComponent deed, string name)
@@ -552,6 +550,11 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             return;
         }
 
+        // Forge-Change-Start
+        if (deed.PersistedVesselId is { } soldHangarGuid)
+            _ = DeleteHangarRecordOnSell(soldHangarGuid);
+        // Forge-Change-End
+
         RemComp<ShuttleDeedComponent>(targetId);
 
         if (!voucherUsed)
@@ -593,7 +596,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             refreshId = null;
         }
 
-        RefreshState(uid, bank.Balance, true, null, 0, refreshId, (ShipyardConsoleUiKey)args.UiKey, voucherUsed);
+        _ = RefreshHangarState(uid, component, player, refreshId ?? player, (ShipyardConsoleUiKey) args.UiKey);
     }
 
     /// <summary>
@@ -632,13 +635,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         var targetId = component.TargetIdSlot.ContainerSlot?.ContainedEntity;
 
         if (TryComp<ShuttleDeedComponent>(targetId, out var deed))
-        {
-            if (Deleted(deed!.ShuttleUid))
-            {
-                RemComp<ShuttleDeedComponent>(targetId!.Value);
-                return;
-            }
-        }
+            CleanupStaleShuttleDeed(targetId!.Value, deed);
 
         var voucherUsed = HasComp<ShipyardVoucherComponent>(targetId);
 
@@ -659,7 +656,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             // For now we'll just let them see the cooldown message when they try to use it
         }
 
-        RefreshState(uid, bank.Balance, true, fullName, sellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, voucherUsed);
+        _ = RefreshHangarState(uid, component, player, targetId ?? player, (ShipyardConsoleUiKey) args.UiKey, voucherUsed); // Forge-Change
     }
 
     private void ConsolePopup(EntityUid uid, string text)
@@ -732,33 +729,11 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             var targetId = component.TargetIdSlot.ContainerSlot?.ContainedEntity;
 
             if (TryComp<ShuttleDeedComponent>(targetId, out var deed))
-            {
-                if (Deleted(deed!.ShuttleUid))
-                {
-                    RemComp<ShuttleDeedComponent>(targetId!.Value);
-                    continue;
-                }
-            }
+                CleanupStaleShuttleDeed(targetId!.Value, deed);
 
             var voucherUsed = HasComp<ShipyardVoucherComponent>(targetId);
 
-            int sellValue = 0;
-            if (deed?.ShuttleUid != null)
-            {
-                sellValue = (int)_pricing.AppraiseGrid(deed.ShuttleUid.Value, LacksPreserveOnSaleComp);
-                sellValue = CalculateShipResaleValue((uid, component), sellValue);
-            }
-
-            var fullName = deed != null ? GetFullName(deed) : null;
-            RefreshState(uid,
-                bank.Balance,
-                true,
-                fullName,
-                sellValue,
-                targetId,
-                (ShipyardConsoleUiKey)uiComp.Key,
-                voucherUsed);
-
+            _ = RefreshHangarState(uid, component, player, targetId ?? player, (ShipyardConsoleUiKey) uiComp.Key, voucherUsed);
         }
     }
 
@@ -920,6 +895,11 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
                 key != null && key != ShipyardConsoleUiKey.Custom &&
                 vessel.Group == key)
             {
+                // Forge-Change-Start: credit purchase only for starter vessels
+                if (!vessel.CreditPurchaseOnly && voucherAllowed.Count == 0)
+                    continue;
+            // Forge-Change-End
+
                 // if not purchasable, only allow it if voucher says so
                 if (vessel.Purchasable && hasAccess || voucherAllowed.Contains(vessel.ID))
                     available.Add(vessel.ID);
@@ -929,23 +909,6 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         }
 
         return (available, unavailable);
-    }
-
-    private void RefreshState(EntityUid uid, int balance, bool access, string? shipDeed, int shipSellValue, EntityUid? targetId, ShipyardConsoleUiKey uiKey, bool freeListings)
-    {
-        var newState = new ShipyardConsoleInterfaceState(
-            balance,
-            access,
-            shipDeed,
-            shipSellValue,
-            targetId.HasValue,
-            ((byte)uiKey),
-            GetAvailableShuttles(uid, uiKey, targetId: targetId),
-            uiKey.ToString(),
-            freeListings,
-            CalculateSellRate(uid));
-
-        _ui.SetUiState(uid, uiKey, newState);
     }
 
     #region Deed Assignment
@@ -1076,6 +1039,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         // Rename the ship using the existing method
         if (TryRenameShuttle(targetId, deed, newName, deed.ShuttleNameSuffix))
         {
+            SyncHangarCustomNameFromDeed(deed);
             ConsolePopup(player, $"Ship renamed to '{GetFullName(deed)}'");
             PlayConfirmSound(player, uid, component);
 
@@ -1086,7 +1050,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
             // Update the UI with the new ship name, preserving the original sell value
             var fullName = GetFullName(deed);
-            RefreshState(uid, balance, true, fullName, originalSellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, false);
+            _ = RefreshHangarState(uid, component, player, targetId, (ShipyardConsoleUiKey) args.UiKey);
 
             _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low,
                 $"{ToPrettyString(player):actor} renamed ship from '{oldName}' to '{GetFullName(deed)}' via {ToPrettyString(uid)}");
@@ -1164,7 +1128,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             balance = bank.Balance;
 
         // Update the UI
-        RefreshState(uid, balance, true, null, 0, targetId, (ShipyardConsoleUiKey)args.UiKey, false);
+        _ = RefreshHangarState(uid, component, player, targetId, (ShipyardConsoleUiKey) args.UiKey);
 
         _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low,
             $"{ToPrettyString(player):actor} unassigned deed for ship '{shipName}' from {ToPrettyString(targetId)} via {ToPrettyString(uid)}");

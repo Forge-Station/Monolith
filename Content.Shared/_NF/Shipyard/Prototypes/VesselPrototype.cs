@@ -1,4 +1,5 @@
 using Content.Shared.Guidebook;
+using Content.Shared.Materials;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
@@ -134,6 +135,26 @@ public sealed partial class VesselPrototype : IPrototype, IInheritingPrototype
     /// </summary>
     [DataField]
     public List<string> Company = new();
+
+    // Forge-Change-Start
+    /// <summary>
+    /// When true, the vessel can only be bought with credits at the shipyard (starter ships).
+    /// </summary>
+    [DataField]
+    public bool CreditPurchaseOnly;
+
+    /// <summary>
+    /// Materials required to fabricate this vessel at a ship fabricator.
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<MaterialPrototype>, int>? FabricationMaterials;
+
+    /// <summary>
+    /// Time required to fabricate this vessel.
+    /// </summary>
+    [DataField]
+    public TimeSpan FabricationTime = TimeSpan.FromMinutes(10);
+    // Forge-Change-End
 }
 
 public enum VesselSize : byte

@@ -60,6 +60,9 @@
     # Tech disk
     - id: SpawnLootTechDisksT1
       prob: 0.5
+    # Forge-Change: vessel blueprints
+    - id: BlueprintVesselNightlight
+      prob: 0.08
     sound:
       path: /Audio/Machines/windoor_open.ogg
 
@@ -112,6 +115,9 @@
     # Tech disk
     - id: SpawnLootTechDisksT2Mech
       prob: 0.5
+  # Forge-Change: vessel blueprints
+    - id: BlueprintVesselPulsar
+      prob: 0.1
     sound:
       path: /Audio/Machines/windoor_open.ogg
 
@@ -174,5 +180,8 @@
     # Tier-4 bluespace boarding teleport (0.005%)
     - id: DisciplinesDiskBoardingTeleportTier4
       prob: 0.0005
+    # Forge-Change: vessel blueprints
+    - id: BlueprintVesselDruid
+      prob: 0.12
     sound:
       path: /Audio/Machines/windoor_open.ogg

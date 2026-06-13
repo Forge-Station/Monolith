@@ -36550,6 +36550,36 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
+- proto: ShipFabricator
+  entities:
+  - uid: 990001
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -19.5,51.5
+      parent: 2
+    - type: ApcPowerReceiver
+      powerLoad: 12000
+- proto: ComputerShipBroker
+  entities:
+  - uid: 990002
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -19.5,53.5
+      parent: 2
+    - type: ApcPowerReceiver
+      powerLoad: 5
+- proto: BlackboxDecoder
+  entities:
+  - uid: 990003
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -20.5,52.5
+      parent: 2
+    - type: ApcPowerReceiver
+      powerLoad: 500
 - proto: ComputerShipyard
   entities:
   - uid: 3744

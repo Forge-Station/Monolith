@@ -2,3 +2,8 @@
   id: ShipyardDomra
   name: guide-entry-shipyard-domra
   text: "/ServerInfo/_Forge/Guidebook/Shipyard/Domra.xml"
+
+- type: guideEntry
+  id: ShipyardHangar
+  name: guide-entry-shipyard-hangar
+  text: "/ServerInfo/_Forge/Guidebook/ShipyardHangar.xml"

@@ -480,6 +480,74 @@ namespace Content.Server.Database
 
         #endregion
 
+        #region Hangar // Forge-Change
+
+        public async Task<List<HangarVessel>> GetHangarVesselsAsync(NetUserId userId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.HangarVessels
+                .Where(v => v.OwnerUserId == userId.UserId)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<HangarVessel?> GetHangarVesselAsync(Guid vesselGuid, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.HangarVessels
+                .SingleOrDefaultAsync(v => v.VesselGuid == vesselGuid, cancel);
+        }
+
+        public async Task UpsertHangarVesselAsync(HangarVessel vessel, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            var existing = await db.DbContext.HangarVessels
+                .SingleOrDefaultAsync(v => v.VesselGuid == vessel.VesselGuid, cancel);
+
+            if (existing == null)
+            {
+                db.DbContext.HangarVessels.Add(vessel);
+            }
+            else
+            {
+                existing.OwnerUserId = vessel.OwnerUserId;
+                existing.VesselProtoId = vessel.VesselProtoId;
+                existing.SavePath = vessel.SavePath;
+                existing.CustomName = vessel.CustomName;
+                existing.State = vessel.State;
+                existing.LastStored = vessel.LastStored;
+            }
+
+            await db.DbContext.SaveChangesAsync(cancel);
+        }
+
+        public async Task DeleteHangarVesselAsync(Guid vesselGuid, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            var existing = await db.DbContext.HangarVessels
+                .SingleOrDefaultAsync(v => v.VesselGuid == vesselGuid, cancel);
+
+            if (existing == null)
+                return;
+
+            db.DbContext.HangarVessels.Remove(existing);
+            await db.DbContext.SaveChangesAsync(cancel);
+        }
+
+        public async Task TransferHangarVesselAsync(Guid vesselGuid, NetUserId newOwner, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            var existing = await db.DbContext.HangarVessels
+                .SingleOrDefaultAsync(v => v.VesselGuid == vesselGuid, cancel);
+
+            if (existing == null)
+                return;
+
+            existing.OwnerUserId = newOwner.UserId;
+            await db.DbContext.SaveChangesAsync(cancel);
+        }
+
+        #endregion
+
         #region Bans
         /*
          * BAN STUFF

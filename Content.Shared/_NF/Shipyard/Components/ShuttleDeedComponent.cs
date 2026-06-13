@@ -1,3 +1,4 @@
+using Content.Shared._Forge.Shipyard;
 using Content.Shared._NF.ShuttleRecords;
 using Robust.Shared.GameStates;
 using Content.Shared.Shuttles.Systems;
@@ -40,4 +41,12 @@ public sealed partial class ShuttleDeedComponent : Component
     /// </summary>
     [DataField]
     public EntityUid? DeedHolder;
+
+    // Forge-Change-Start
+    [DataField]
+    public Guid? PersistedVesselId;
+
+    [DataField]
+    public HangarVesselState HangarState = HangarVesselState.Deployed;
+    // Forge-Change-End
 }

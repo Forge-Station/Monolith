@@ -1,6 +1,8 @@
 using System.Linq;
 using Content.Client.UserInterface.Controls;
 using Content.Client._NF.Shipyard.BUI;
+using Content.Shared._Forge.Shipyard;
+using Content.Shared._Forge.Shipyard.Events;
 using Content.Shared._NF.Bank;
 using Content.Shared._NF.Shipyard.BUI;
 using Content.Shared._NF.Shipyard.Prototypes;
@@ -36,6 +38,9 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
     private List<string> _lastUnavailableProtos = new();
     private bool _freeListings = false;
     private bool _validId = false;
+    private Guid? _selectedHangarVessel; // Forge-Change
+    private readonly List<Guid> _hangarVesselGuids = new(); // Forge-Change
+    private bool _canRetrieveFromHangar; // Forge-Change
 
     public ShipyardConsoleMenu(ShipyardConsoleBoundUserInterface owner)
     {
@@ -51,6 +56,23 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
         UnassignDeedButton.OnPressed += (args) => { OnUnassignDeed?.Invoke(args); };
         RenameButton.OnPressed += OnRenameButtonPressed;
         ShipWikiButton.OnPressed += OnShipWikiButtonPressed; //Forge-Change: wiki redirect button
+        StoreHangarButton.OnPressed += _ => _menu.SendStoreHangar(); // Forge-Change
+        RetrieveHangarButton.OnPressed += _ =>
+        {
+            if (_selectedHangarVessel != null)
+                _menu.SendRetrieveHangar(_selectedHangarVessel.Value);
+        };
+        HangarVesselSelect.OnItemSelected += OnHangarVesselSelected;
+        HangarContainer.Visible = false; // Forge-Change
+    }
+
+    private void OnHangarVesselSelected(OptionButton.ItemSelectedEventArgs args)
+    {
+        if (args.Id < 0 || args.Id >= _hangarVesselGuids.Count)
+            return;
+
+        _selectedHangarVessel = _hangarVesselGuids[args.Id];
+        RetrieveHangarButton.Disabled = !_canRetrieveFromHangar;
     }
 
 
@@ -349,5 +371,47 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
         _freeListings = state.FreeListings;
         _validId = state.IsTargetIdPresent;
         PopulateProducts(_lastAvailableProtos, _lastUnavailableProtos, _freeListings, _validId);
+
+        // Forge-Change-Start
+        HangarContainer.Visible = state.HangarEnabled;
+        HangarHeaderLabel.Text = Loc.GetString(
+            "shipyard-hangar-header-slots",
+            ("used", state.HangarSlotsUsed),
+            ("max", state.HangarSlotsMax));
+        StoreHangarButton.Disabled = !state.CanStoreInHangar;
+        _canRetrieveFromHangar = state.CanRetrieveFromHangar;
+
+        var inHangar = state.HangarVessels.Where(e => e.State == HangarVesselState.InHangar).ToList();
+        HangarVesselSelect.Clear();
+        _hangarVesselGuids.Clear();
+
+        for (var i = 0; i < inHangar.Count; i++)
+        {
+            var entry = inHangar[i];
+            _hangarVesselGuids.Add(entry.VesselGuid);
+            HangarVesselSelect.AddItem($"{entry.CustomName} ({entry.VesselProtoId})", i);
+        }
+
+        HangarVesselSelect.Visible = inHangar.Count > 0;
+        HangarVesselSelect.Disabled = inHangar.Count == 0;
+
+        if (inHangar.Count == 0)
+        {
+            _selectedHangarVessel = null;
+        }
+        else if (_selectedHangarVessel == null || inHangar.All(e => e.VesselGuid != _selectedHangarVessel))
+        {
+            _selectedHangarVessel = inHangar[0].VesselGuid;
+            HangarVesselSelect.Select(0);
+        }
+        else
+        {
+            var index = _hangarVesselGuids.IndexOf(_selectedHangarVessel.Value);
+            if (index >= 0)
+                HangarVesselSelect.Select(index);
+        }
+
+        RetrieveHangarButton.Disabled = !_canRetrieveFromHangar || _selectedHangarVessel == null;
+        // Forge-Change-End
     }
 }

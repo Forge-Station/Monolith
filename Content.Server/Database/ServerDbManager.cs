@@ -57,6 +57,14 @@ namespace Content.Server.Database
         Task<long> AddMonoCoinsAsync(NetUserId userId, long amount, CancellationToken cancel = default);
         #endregion
 
+        #region Hangar // Forge-Change
+        Task<List<HangarVessel>> GetHangarVesselsAsync(NetUserId userId, CancellationToken cancel = default);
+        Task<HangarVessel?> GetHangarVesselAsync(Guid vesselGuid, CancellationToken cancel = default);
+        Task UpsertHangarVesselAsync(HangarVessel vessel, CancellationToken cancel = default);
+        Task DeleteHangarVesselAsync(Guid vesselGuid, CancellationToken cancel = default);
+        Task TransferHangarVesselAsync(Guid vesselGuid, NetUserId newOwner, CancellationToken cancel = default);
+        #endregion
+
         #region User Ids
         // Username assignment (for guest accounts, so they persist GUID)
         Task AssignUserIdAsync(string name, NetUserId userId);
@@ -537,6 +545,38 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.AddMonoCoinsAsync(userId, amount, cancel));
         }
+
+        // Forge-Change-Start
+        public Task<List<HangarVessel>> GetHangarVesselsAsync(NetUserId userId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetHangarVesselsAsync(userId, cancel));
+        }
+
+        public Task<HangarVessel?> GetHangarVesselAsync(Guid vesselGuid, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetHangarVesselAsync(vesselGuid, cancel));
+        }
+
+        public Task UpsertHangarVesselAsync(HangarVessel vessel, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpsertHangarVesselAsync(vessel, cancel));
+        }
+
+        public Task DeleteHangarVesselAsync(Guid vesselGuid, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteHangarVesselAsync(vesselGuid, cancel));
+        }
+
+        public Task TransferHangarVesselAsync(Guid vesselGuid, NetUserId newOwner, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.TransferHangarVesselAsync(vesselGuid, newOwner, cancel));
+        }
+        // Forge-Change-End
 
         public Task AssignUserIdAsync(string name, NetUserId userId)
         {

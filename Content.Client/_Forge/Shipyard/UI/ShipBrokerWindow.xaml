@@ -1,0 +1,12 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'ship-broker-ui-title'}"
+                      MinSize="400 240">
+    <BoxContainer Orientation="Vertical" Margin="10">
+        <Label Name="VesselLabel"/>
+        <Label Name="AppraisalLabel"/>
+        <LineEdit Name="PriceEdit" PlaceHolder="{Loc 'ship-broker-ui-price'}"/>
+        <Button Name="SetPriceButton" Text="{Loc 'ship-broker-ui-set-price'}"/>
+        <Button Name="ConfirmButton" Text="{Loc 'ship-broker-ui-confirm'}"/>
+    </BoxContainer>
+</controls:FancyWindow>

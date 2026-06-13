@@ -55,4 +55,19 @@ public sealed partial class ForgeCVars
     /// </summary>
     public static readonly CVarDef<bool> AddictionSystemEnabled =
         CVarDef.Create("forge.addiction.enabled", true, CVar.SERVER);
+
+    public static readonly CVarDef<bool> HangarEnabled =
+        CVarDef.Create("shuttle.hangar_enabled", true, CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> HangarStoreFee =
+        CVarDef.Create("shuttle.hangar_store_fee", 0, CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> HangarRoundEndWarning =
+        CVarDef.Create("shuttle.hangar_round_end_warning", true, CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> HangarMaxSlots =
+        CVarDef.Create("shuttle.hangar_max_slots", 3, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> BrokerFeeRate =
+        CVarDef.Create("shuttle.broker_fee_rate", 0.08f, CVar.SERVERONLY);
 }

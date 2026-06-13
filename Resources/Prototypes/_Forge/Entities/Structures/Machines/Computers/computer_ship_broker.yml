@@ -1,0 +1,23 @@
+- type: entity
+  id: ComputerShipBroker
+  parent: BaseComputer
+  name: ship broker console
+  description: Facilitates private shuttle sales between captains for credits.
+  components:
+  - type: Sprite
+    sprite: _NF/Structures/Machines/computers.rsi
+    layers:
+    - state: computer
+    - state: generic
+  - type: ShipBrokerConsole
+  - type: ActivatableUI
+    key: enum.ShipBrokerUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ShipBrokerUiKey.Key:
+        type: ShipBrokerBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      ship-broker-seller: !type:ContainerSlot
+      ship-broker-buyer: !type:ContainerSlot

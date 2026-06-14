@@ -280,16 +280,7 @@
       seedId: bloodTomato
     - type: Sprite
       sprite: Objects/Specific/Hydroponics/blood_tomato.rsi
-
-- type: entity
-  parent: SeedBase
-  name: packet of killer tomato seeds
-  id: KillerTomatoSeeds
-  components:
-    - type: Seed
-      seedId: killerTomato
-    - type: Sprite
-      sprite: Objects/Specific/Hydroponics/tomatokiller.rsi
+# Forge-Change: removed KillerTomatoSeeds packet (killerTomato mutation/seed removed)
 
 - type: entity
   parent: SeedBase

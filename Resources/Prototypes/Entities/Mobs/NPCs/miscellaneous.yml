@@ -215,8 +215,7 @@
     grindableSolutionName: bloodstream
   - type: PotencyVisuals
   - type: Appearance
-  - type: Produce
-    seedId: killerTomato
+  # Forge-Change: removed Produce/seedId killerTomato (killerTomato seed prototype removed)
   - type: PassiveDamage # Slight passive damage. 35 hp \ 5 min \ 60 sec = 0.08
     allowedStates:
     - Alive

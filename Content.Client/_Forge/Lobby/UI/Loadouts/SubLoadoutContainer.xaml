@@ -1,0 +1,8 @@
+<PanelContainer Name="SubContainer"
+              xmlns="https://spacestation14.io"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BoxContainer Name="SubGridContainer"
+                  Orientation="Vertical"
+                  HorizontalExpand="true"
+                  Margin="20 0 0 0"/>
+</PanelContainer>

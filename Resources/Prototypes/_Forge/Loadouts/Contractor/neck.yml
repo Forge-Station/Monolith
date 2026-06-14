@@ -1,0 +1,83 @@
+- type: loadout
+  id: ContractorClothingNeckScarfNikoBlue
+  name: loadout-forge-niko-scarf-blue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 0
+  previewEntity: ClothingNeckScarfBlueNiko
+  equipment:
+    neck: ClothingNeckScarfBlueNiko
+  groupBy: nikoScarf
+
+- type: loadout
+  id: ContractorClothingNeckScarfNikoBlack
+  name: loadout-forge-niko-scarf-black
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 0
+  previewEntity: ClothingNeckScarfBlackNiko
+  equipment:
+    neck: ClothingNeckScarfBlackNiko
+  groupBy: nikoScarf
+
+- type: loadout
+  id: ContractorClothingNeckScarfNikoGray
+  name: loadout-forge-niko-scarf-gray
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 0
+  previewEntity: ClothingNeckScarfGrayNiko
+  equipment:
+    neck: ClothingNeckScarfGrayNiko
+  groupBy: nikoScarf
+
+- type: loadout
+  id: ContractorClothingNeckScarfNikoGreen
+  name: loadout-forge-niko-scarf-green
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 0
+  previewEntity: ClothingNeckScarfGreenNiko
+  equipment:
+    neck: ClothingNeckScarfGreenNiko
+  groupBy: nikoScarf
+
+- type: loadout
+  id: ContractorClothingNeckScarfNikoPurple
+  name: loadout-forge-niko-scarf-purple
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 0
+  previewEntity: ClothingNeckScarfPurpleNiko
+  equipment:
+    neck: ClothingNeckScarfPurpleNiko
+  groupBy: nikoScarf
+
+- type: loadout
+  id: ContractorClothingNeckScarfNikoRed
+  name: loadout-forge-niko-scarf-red
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 0
+  previewEntity: ClothingNeckScarfRedNiko
+  equipment:
+    neck: ClothingNeckScarfRedNiko
+  groupBy: nikoScarf
+
+- type: loadout
+  id: ContractorClothingNeckScarfNikoYellow
+  name: loadout-forge-niko-scarf-yellow
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 0
+  previewEntity: ClothingNeckScarfYellowNiko
+  equipment:
+    neck: ClothingNeckScarfYellowNiko
+  groupBy: nikoScarf

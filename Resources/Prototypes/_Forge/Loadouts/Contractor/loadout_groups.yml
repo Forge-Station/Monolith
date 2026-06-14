@@ -1,0 +1,12 @@
+- type: loadoutGroup
+  id: ForgeContractorNikoScarfs
+  name: loadout-group-contractor-neck
+  minLimit: 0
+  loadouts:
+  - ContractorClothingNeckScarfNikoBlue
+  - ContractorClothingNeckScarfNikoBlack
+  - ContractorClothingNeckScarfNikoGray
+  - ContractorClothingNeckScarfNikoGreen
+  - ContractorClothingNeckScarfNikoPurple
+  - ContractorClothingNeckScarfNikoRed
+  - ContractorClothingNeckScarfNikoYellow

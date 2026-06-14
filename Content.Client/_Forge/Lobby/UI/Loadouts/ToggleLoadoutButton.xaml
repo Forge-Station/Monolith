@@ -1,0 +1,9 @@
+<Button Name="ToggleButton"
+        xmlns="https://spacestation14.io"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        VerticalExpand="False"
+        HorizontalExpand="False"
+        SetSize="32 32"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Center"
+        Margin="0 0 2 0"/>

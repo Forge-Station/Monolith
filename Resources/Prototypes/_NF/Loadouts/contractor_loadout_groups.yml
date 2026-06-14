@@ -735,6 +735,8 @@
   - ContractorClothingNeckMantleBH # Mono
   - ContractorClothingNeckCloakSanabi # Mono
   - ContractorClothingNeckUIOvercoat # Mono
+  subgroups: #Forge-Change
+  - ForgeContractorNikoScarfs #Forge-Change
 
 - type: loadoutGroup
   id: ContractorPDA

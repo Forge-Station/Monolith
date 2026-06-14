@@ -84,6 +84,7 @@
   - PilotClothingNeckScarfPilot
   subgroups:
   - ContractorNeck
+  - ForgeContractorNikoScarfs #Forge-Change
 
 - type: loadoutGroup
   id: PilotPDA

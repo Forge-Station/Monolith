@@ -373,7 +373,7 @@
   name: trait-platelet-factories-name
   description: trait-platelet-factories-desc
   category: Physical
-  cost: 3
+  cost: 6
   mutuallyExclusiveTraits:
   - Hemophilia
   speciesBlacklist:

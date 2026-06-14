@@ -2,6 +2,8 @@ using JetBrains.Annotations;
 using Robust.Shared.Random;
 using Content.Shared.EntityEffects;
 using Content.Shared._Forge.Body.Syndromes;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs;
 
 namespace Content.Server._Forge.Body.Syndromes.Symptoms;
 
@@ -13,6 +15,8 @@ public sealed partial class EntityEffectList : SyndromeSymptom
 
     public override void Apply(EntityUid organUid, EntityUid bodyUid, SyndromeData syndrome, IEntityManager entMan)
     {
+        if (entMan.TryGetComponent<MobStateComponent>(bodyUid, out var state) && state.CurrentState == MobState.Dead)
+            return;
         if (Effects.Count == 0)
             return;
 

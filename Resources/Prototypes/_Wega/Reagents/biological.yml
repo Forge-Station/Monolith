@@ -94,7 +94,7 @@
       - !type:ToleranceEffect
         # hidden: true
         reagent: DemonBlood
-        amount: 0.02
+        amount: 0.004
         target: Heart
       - !type:HealthChange
         hidden: true
@@ -102,7 +102,7 @@
         - !type:ToleranceCondition
           reagent: DemonBlood
           source: Heart
-          min: 0.6
+          min: 0.8
           max: 1.0
         - !type:OrganType
           type: Demon

@@ -5,7 +5,7 @@
   organ: Brain
   interval: 5
   severityDecay: 0.03
-  flareDelay: 300
+  flareDelay: 420
   stages:
     - minSeverity: 0
     # region Stage 1
@@ -130,7 +130,7 @@
   organ: Brain
   interval: 6
   severityDecay: 0.025
-  flareDelay: 340
+  flareDelay: 460
   stages:
     - minSeverity: 0
     # region Stage 1
@@ -249,7 +249,7 @@
   organ: Brain
   interval: 8.0
   severityDecay: 0.02
-  flareDelay: 360
+  flareDelay: 460
   stages:
     - minSeverity: 0
     # region Stage 1
@@ -382,7 +382,7 @@
   organ: Body
   interval: 10
   severityDecay: 0.001
-  flareDelay: 240
+  flareDelay: 300
   stages:
     - minSeverity: 0
     # region Stage 1

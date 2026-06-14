@@ -1,24 +1,15 @@
-# Drake Industries machine circuit boards.
+# Tel-Adi machine circuit boards.
 
 - type: entity
+  id: OreProcessorIndustrialHeavyMachineCircuitboard
   parent: BaseMachineCircuitboard
-  id: DrakeMachineBoard2x2Base
-  abstract: true
-  components:
-  - type: Tag
-    tags:
-    - MachineBoard2x2
-
-- type: entity
-  parent: DrakeMachineBoard2x2Base
-  id: DrakeOreProcessorMk2MachineCircuitboard
-  suffix: Drake
+  name: heavy industrial ore processor machine board
+  description: A machine printed circuit board for a heavy industrial ore processor.
   components:
   - type: Sprite
     state: supply
   - type: MachineBoard
-    prototype: DrakeOreProcessorMk2
-    frameSize: 2x2
+    prototype: OreProcessorIndustrialHeavy
     requirements:
       MatterBin: 8
       Manipulator: 4
@@ -29,13 +20,14 @@
 
 - type: entity
   parent: BaseMachineCircuitboard
-  id: DrakeScrapProcessorMachineCircuitboard
-  suffix: Drake
+  id: TelAdiScrapProcessorMachineCircuitboard
+  name: Tel-Adi scrap processor machine board
+  suffix: ТелАди
   components:
   - type: Sprite
     state: supply
   - type: MachineBoard
-    prototype: DrakeScrapProcessor
+    prototype: TelAdiScrapProcessor
     requirements:
       MatterBin: 4
       Manipulator: 3
@@ -45,14 +37,15 @@
       Plasma: 2
 
 - type: entity
-  parent: DrakeMachineBoard2x2Base
-  id: DrakeUraniumCentrifugeMachineCircuitboard
-  suffix: Drake
+  parent: BaseMachineCircuitboard
+  id: TelAdiUraniumCentrifugeMachineCircuitboard
+  name: Tel-Adi centrifuge machine board
+  suffix: ТелАди
   components:
   - type: Sprite
     state: science
   - type: MachineBoard
-    prototype: DrakeUraniumCentrifuge
+    prototype: TelAdiUraniumCentrifuge
     frameSize: 2x2
     requirements:
       MatterBin: 6
@@ -62,4 +55,3 @@
       Steel: 5
       Glass: 5
       Gold: 2
-      Plasma: 3

@@ -1,22 +1,4 @@
 - type: entity
-  id: OreProcessorIndustrialHeavyMachineCircuitboard
-  parent: BaseMachineCircuitboard
-  name: heavy industrial ore processor machine board
-  description: A machine printed circuit board for a heavy industrial ore processor.
-  components:
-  - type: Sprite
-    state: supply
-  - type: MachineBoard
-    prototype: OreProcessorIndustrialHeavy
-    requirements:
-      MatterBin: 8
-      Manipulator: 4
-    stackRequirements:
-      Steel: 5
-      Glass: 5
-      Gold: 2
-
-- type: entity
   id: TraumaTechFabCircuitboard
   parent: BaseMachineCircuitboard
   name: trauma techfab machine board

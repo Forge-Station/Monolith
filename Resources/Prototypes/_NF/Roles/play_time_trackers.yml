@@ -48,6 +48,3 @@
 
 - type: playTimeTracker
   id: JobDirectorOfCare
-  
-- type: playTimeTracker
-  id: JobTelAdiWorker

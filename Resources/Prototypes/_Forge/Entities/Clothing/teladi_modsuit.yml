@@ -12,7 +12,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Head/Modsuits/tel-adi.rsi
+    sprite: Forge/Clothing/Head/Modsuits/tel-adi.rsi
   - type: NightVision # Forge-change: built-in night vision (like Omnissia helmet)
     isEquipment: true
   # Forge-change-start: built-in self-recharging flashlight (like Omnissia helmet)
@@ -75,9 +75,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/OuterClothing/Modsuits/tel-adi.rsi
+    sprite: Forge/Clothing/OuterClothing/Modsuits/tel-adi.rsi
   - type: Clothing
-    sprite: _Mono/Clothing/OuterClothing/Modsuits/tel-adi.rsi
+    sprite: Forge/Clothing/OuterClothing/Modsuits/tel-adi.rsi
   - type: ClothingSpeedModifier
     walkModifier: 1.10
     sprintModifier: 1.10
@@ -112,7 +112,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Hands/Modsuits/tel-adi.rsi
+    sprite: Forge/Clothing/Hands/Modsuits/tel-adi.rsi
     layers:
     - state: gauntlets
     - state: gauntlets-sealed
@@ -162,7 +162,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Shoes/Modsuits/tel-adi.rsi
+    sprite: Forge/Clothing/Shoes/Modsuits/tel-adi.rsi
   - type: Magboots
     requiresGrid: false
     enabledPrefix: null
@@ -193,10 +193,10 @@
   components:
   - type: Appearance
   - type: Icon
-    sprite: _Mono/Clothing/Back/Modsuits/tel-adi.rsi
+    sprite: Forge/Clothing/Back/Modsuits/tel-adi.rsi
     state: control
   - type: Sprite
-    sprite: _Mono/Clothing/Back/Modsuits/tel-adi.rsi
+    sprite: Forge/Clothing/Back/Modsuits/tel-adi.rsi
     layers:
     - state: control
     - state: control-sealed
@@ -309,9 +309,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Head/Modsuits/tel-adi-mk2.rsi
+    sprite: Forge/Clothing/Head/Modsuits/tel-adi-mk2.rsi
   - type: Clothing
-    sprite: _Mono/Clothing/Head/Modsuits/tel-adi-mk2.rsi
+    sprite: Forge/Clothing/Head/Modsuits/tel-adi-mk2.rsi
   # Броня наследуется от шлема «Аквизитора»: 10% от всего, радиация — 100%.
 
 # Tel-Adi ARS «Дивиденд» — торс
@@ -324,9 +324,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/OuterClothing/Modsuits/tel-adi-mk2.rsi
+    sprite: Forge/Clothing/OuterClothing/Modsuits/tel-adi-mk2.rsi
   - type: Clothing
-    sprite: _Mono/Clothing/OuterClothing/Modsuits/tel-adi-mk2.rsi
+    sprite: Forge/Clothing/OuterClothing/Modsuits/tel-adi-mk2.rsi
   - type: ClothingSpeedModifier
     walkModifier: 1.20
     sprintModifier: 1.20
@@ -368,7 +368,7 @@
     auxiliaryProto: WeaponSprayNozzle
     rcdProto: RCDRecharging
   - type: Sprite
-    sprite: _Mono/Clothing/Hands/Modsuits/tel-adi-mk2.rsi
+    sprite: Forge/Clothing/Hands/Modsuits/tel-adi-mk2.rsi
     layers:
     - state: gauntlets
     - state: gauntlets-sealed
@@ -392,7 +392,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Shoes/Modsuits/tel-adi-mk2.rsi
+    sprite: Forge/Clothing/Shoes/Modsuits/tel-adi-mk2.rsi
   - type: SealableClothingVisuals
     spriteLayer: sealed
     clothingVisuals:
@@ -410,10 +410,10 @@
   suffix: ТелАди Дивиденд
   components:
   - type: Icon
-    sprite: _Mono/Clothing/Back/Modsuits/tel-adi-mk2.rsi
+    sprite: Forge/Clothing/Back/Modsuits/tel-adi-mk2.rsi
     state: control
   - type: Sprite
-    sprite: _Mono/Clothing/Back/Modsuits/tel-adi-mk2.rsi
+    sprite: Forge/Clothing/Back/Modsuits/tel-adi-mk2.rsi
     layers:
     - state: control
     - state: control-sealed

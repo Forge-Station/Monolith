@@ -7,9 +7,9 @@
   suffix: ТелАди
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/tel-adi_cap.rsi
+    sprite: Forge/Clothing/Head/Hats/tel-adi_cap.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hats/tel-adi_cap.rsi
+    sprite: Forge/Clothing/Head/Hats/tel-adi_cap.rsi
   - type: StaticPrice
     price: 100
 
@@ -22,17 +22,17 @@
   suffix: ТелАди
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Cloaks/tel-adi_cap.rsi
+    sprite: Forge/Clothing/Neck/Cloaks/tel-adi_cap.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Cloaks/tel-adi_cap.rsi
+    sprite: Forge/Clothing/Neck/Cloaks/tel-adi_cap.rsi
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        sprite: Clothing/Neck/Cloaks/tel-adi_cap.rsi
+        sprite: Forge/Clothing/Neck/Cloaks/tel-adi_cap.rsi
       right:
       - state: inhand-right
-        sprite: Clothing/Neck/Cloaks/tel-adi_cap.rsi
+        sprite: Forge/Clothing/Neck/Cloaks/tel-adi_cap.rsi
   - type: StaticPrice
     price: 100
 

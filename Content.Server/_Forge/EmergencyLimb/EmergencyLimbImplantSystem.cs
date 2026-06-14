@@ -99,7 +99,7 @@ public sealed class EmergencyLimbImplantSystem : EntitySystem
 
         var selected = CompOrNull<TargetingComponent>(user)?.Target ?? TargetBodyPart.Torso;
 
-        if (!TryMap(selected, out var proto, out var type, out var sym, out var slot))
+        if (!TryMap(selected, ent.Comp.LeftArm, ent.Comp.RightArm, ent.Comp.LeftLeg, ent.Comp.RightLeg, out var proto, out var type, out var sym, out var slot))
         {
             _popup.PopupEntity(Loc.GetString("emergency-limb-select-limb"), ent, user);
             return false;
@@ -130,6 +130,10 @@ public sealed class EmergencyLimbImplantSystem : EntitySystem
         var regrower = EnsureComp<EmergencyLimbRegrowerComponent>(body);
 
         regrower.Damage = implant.Damage;
+        regrower.LeftArm = implant.LeftArm;
+        regrower.RightArm = implant.RightArm;
+        regrower.LeftLeg = implant.LeftLeg;
+        regrower.RightLeg = implant.RightLeg;
         regrower.Charges = regrower.MaxCharges;
         _actions.AddAction(body, ref regrower.ActionEntity, regrower.Action);
         return true;
@@ -150,7 +154,7 @@ public sealed class EmergencyLimbImplantSystem : EntitySystem
 
         var selected = CompOrNull<TargetingComponent>(ent)?.Target ?? TargetBodyPart.Torso;
 
-        if (!TryMap(selected, out var proto, out var type, out var sym, out var slot))
+        if (!TryMap(selected, ent.Comp.LeftArm, ent.Comp.RightArm, ent.Comp.LeftLeg, ent.Comp.RightLeg, out var proto, out var type, out var sym, out var slot))
         {
             _popup.PopupEntity(Loc.GetString("emergency-limb-select-limb"), ent, ent);
             return;
@@ -205,6 +209,10 @@ public sealed class EmergencyLimbImplantSystem : EntitySystem
 
     private bool TryMap(
         TargetBodyPart selected,
+        EntProtoId leftArm,
+        EntProtoId rightArm,
+        EntProtoId leftLeg,
+        EntProtoId rightLeg,
         out EntProtoId proto,
         out BodyPartType type,
         out BodyPartSymmetry sym,
@@ -214,19 +222,19 @@ public sealed class EmergencyLimbImplantSystem : EntitySystem
         {
             case TargetBodyPart.LeftArm:
             case TargetBodyPart.LeftHand:
-                proto = "EmergencyLeftArm"; type = BodyPartType.Arm; sym = BodyPartSymmetry.Left; slot = "left arm";
+                proto = leftArm; type = BodyPartType.Arm; sym = BodyPartSymmetry.Left; slot = "left arm";
                 return true;
             case TargetBodyPart.RightArm:
             case TargetBodyPart.RightHand:
-                proto = "EmergencyRightArm"; type = BodyPartType.Arm; sym = BodyPartSymmetry.Right; slot = "right arm";
+                proto = rightArm; type = BodyPartType.Arm; sym = BodyPartSymmetry.Right; slot = "right arm";
                 return true;
             case TargetBodyPart.LeftLeg:
             case TargetBodyPart.LeftFoot:
-                proto = "EmergencyLeftLeg"; type = BodyPartType.Leg; sym = BodyPartSymmetry.Left; slot = "left leg";
+                proto = leftLeg; type = BodyPartType.Leg; sym = BodyPartSymmetry.Left; slot = "left leg";
                 return true;
             case TargetBodyPart.RightLeg:
             case TargetBodyPart.RightFoot:
-                proto = "EmergencyRightLeg"; type = BodyPartType.Leg; sym = BodyPartSymmetry.Right; slot = "right leg";
+                proto = rightLeg; type = BodyPartType.Leg; sym = BodyPartSymmetry.Right; slot = "right leg";
                 return true;
             default:
                 proto = default;

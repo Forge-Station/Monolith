@@ -45,7 +45,11 @@
             "name": "shm"
         },
         {
-            "name": "tel_adi"
+            "name": "tel_adi",
+            "delays":
+            [
+                [0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
+            ]
         },
         {
             "name": "tl"

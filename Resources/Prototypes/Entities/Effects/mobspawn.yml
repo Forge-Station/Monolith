@@ -102,7 +102,6 @@
     - id: FoodOnionRed
     - id: FoodWatermelon
     - id: FoodCherry
-    - id: MobTomatoKiller
     - id: MobLuminousEntity
     - id: MobLuminousObject
     - id: FoodGatfruit # 0.007% spawn chance. 1 / 141

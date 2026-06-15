@@ -24,6 +24,7 @@
   - ContractorTrinkets
   - RenegateFirearm
   - RenegateMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Quack
@@ -52,6 +53,7 @@
   - ContractorTrinkets
   - RenegateFirearm
   - RenegateMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Foreman
@@ -80,6 +82,7 @@
   - ContractorTrinkets
   - RenegateFirearm
   - RenegateMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Overseer
@@ -108,6 +111,7 @@
   - ContractorTrinkets
   - RenegateFirearm
   - RenegateMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Draftsman
@@ -136,6 +140,7 @@
   - ContractorTrinkets
   - RenegateFirearm
   - RenegateMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Baron
@@ -164,4 +169,5 @@
   - ContractorTrinkets
   - RenegateFirearm
   - RenegateMag
+  - FactionArmorPlates
   canCustomizeName: true

@@ -1,0 +1,122 @@
+# Midnight Arms Co. special shotgun projectiles
+
+- type: entity
+  id: Pellet12_gaugeMacFlechette
+  name: pellet (12 gauge MAC flechette)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: buckshot
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 8
+        Structural: 45
+    armorPenetration: 0.65
+  - type: Tracer
+    color: "#c4c4c4"
+    length: 3
+
+- type: entity
+  id: Pellet12_gaugeMacFlechetteSpread
+  parent: Pellet12_gaugeMacFlechette
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: Pellet12_gaugeMacFlechette
+    count: 6
+    spread: 10
+
+- type: entity
+  id: Pellet12_gaugeMacTripleMixed
+  name: pellet (12 gauge MAC triple shot)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: buckshot
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 5
+    armorPenetration: -0.15
+
+- type: entity
+  id: Pellet12_gaugeMacTripleSpread
+  parent: Pellet12_gaugeMacTripleMixed
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: Pellet12_gaugeMacTripleMixed
+    count: 11
+    spread: 28
+
+- type: entity
+  id: Pellet12_gaugeMacExplosive
+  name: pellet (12 gauge MAC explosive)
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: slug
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
+        Structural: 30
+    armorPenetration: 0.4
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4
+    intensitySlope: 1.5
+    totalIntensity: 12
+    tileBreakScale: 0.5
+
+- type: entity
+  id: Pellet12_gaugeMacExplosiveSpread
+  parent: Pellet12_gaugeMacExplosive
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: Pellet12_gaugeMacExplosive
+    count: 2
+    spread: 0
+
+- type: entity
+  id: Pellet23x75mmMacExplosive
+  name: pellet (4 gauge MAC explosive)
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: slug
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 25
+        Structural: 120
+        Blunt: 40
+    armorPenetration: 0.3
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 12
+    intensitySlope: 2.5
+    totalIntensity: 45
+    tileBreakScale: 2
+
+- type: entity
+  id: Pellet23x75mmMacExplosiveSpread
+  parent: Pellet23x75mmMacExplosive
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: Pellet23x75mmMacExplosive
+    count: 2
+    spread: 0

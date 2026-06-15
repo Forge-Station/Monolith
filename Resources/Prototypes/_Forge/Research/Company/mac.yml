@@ -1,0 +1,131 @@
+# Midnight Arms Co. technology tree — weapons split by class.
+
+- type: technology
+  id: MACBasicPistols
+  name: research-technology-mac-basic-pistols
+  entityIcon: WeaponPistolMacMn13
+  discipline: MidnightArmsCo
+  tier: 1
+  cost: 10000
+  recipeUnlocks:
+  - WeaponPistolMacMn13
+  - WeaponPistolMacMn12
+  - WeaponRevolverMacMn4
+  - WeaponSwordMacKb6Midnight
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 12, 1
+
+- type: technology
+  id: MACLightSidearms
+  name: research-technology-mac-light-sidearms
+  entityIcon: WeaponSubMachineGunMacMna6
+  discipline: MidnightArmsCo
+  tier: 1
+  cost: 20000
+  recipeUnlocks:
+  - WeaponSubMachineGunMacMna6
+  - WeaponRevolverMacMn15
+  - WeaponEnergyPistolMacZo
+  technologyPrerequisites:
+  - MACBasicPistols
+  position: 11, 2
+
+- type: technology
+  id: MACRifles
+  name: research-technology-mac-rifles
+  entityIcon: WeaponRifleMacRav12
+  discipline: MidnightArmsCo
+  tier: 2
+  cost: 45000
+  recipeUnlocks:
+  - WeaponRifleMacRav12
+  - WeaponLightMachineGunMacRav21
+  technologyPrerequisites:
+  - MACLightSidearms
+  - UniversalMaterialResearchT2
+  position: 12, 3
+
+- type: technology
+  id: MACShotguns
+  name: research-technology-mac-shotguns
+  entityIcon: WeaponShotgunMacAro9
+  discipline: MidnightArmsCo
+  tier: 2
+  cost: 40000
+  recipeUnlocks:
+  - WeaponShotgunMacAro9
+  - WeaponShotgunMacAro15
+  technologyPrerequisites:
+  - MACLightSidearms
+  position: 13, 3
+
+- type: technology
+  id: MACShotgunAmmoEarly
+  name: research-technology-mac-shotgun-ammo-early
+  entityIcon: AmmoBox12_gaugeMacFlechette
+  discipline: MidnightArmsCo
+  tier: 2
+  cost: 25000
+  recipeUnlocks:
+  - AmmoBox12_gaugeMacFlechette
+  technologyPrerequisites:
+  - MACShotguns
+  position: 13, 4
+
+- type: technology
+  id: MACPrecisionHeavy
+  name: research-technology-mac-precision-heavy
+  entityIcon: WeaponSniperMacRav32
+  discipline: MidnightArmsCo
+  tier: 3
+  cost: 75000
+  recipeUnlocks:
+  - WeaponSniperMacRav32
+  - WeaponMinigunMacRpv2
+  technologyPrerequisites:
+  - MACRifles
+  - UniversalMaterialResearchT3
+  position: 12, 5
+
+- type: technology
+  id: MACShotgunAmmoMid
+  name: research-technology-mac-shotgun-ammo-mid
+  entityIcon: AmmoBox12_gaugeMacTriple
+  discipline: MidnightArmsCo
+  tier: 2
+  cost: 35000
+  recipeUnlocks:
+  - AmmoBox12_gaugeMacTriple
+  technologyPrerequisites:
+  - MACShotgunAmmoEarly
+  position: 14, 4
+
+- type: technology
+  id: MACLaunchers
+  name: research-technology-mac-launchers
+  entityIcon: WeaponLauncherMacRpv41
+  discipline: MidnightArmsCo
+  tier: 3
+  cost: 90000
+  recipeUnlocks:
+  - WeaponLauncherMacRpv41
+  - CartridgeMacCastRocket
+  technologyPrerequisites:
+  - MACPrecisionHeavy
+  position: 11, 5
+
+- type: technology
+  id: MACShotgunAmmoLate
+  name: research-technology-mac-shotgun-ammo-late
+  entityIcon: AmmoBox12_gaugeMacExplosive
+  discipline: MidnightArmsCo
+  tier: 3
+  cost: 60000
+  recipeUnlocks:
+  - AmmoBox12_gaugeMacExplosive
+  - AmmoBox23x75mmMacExplosive
+  technologyPrerequisites:
+  - MACShotgunAmmoMid
+  - SuperParts
+  position: 14, 5

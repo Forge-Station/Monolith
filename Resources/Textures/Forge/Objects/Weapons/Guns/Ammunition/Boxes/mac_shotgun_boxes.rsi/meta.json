@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by ifi07 (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    { "name": "big" },
+    { "name": "thr" },
+    { "name": "exp" },
+    { "name": "mag-slugBIG-1" },
+    { "name": "mag-slugBIG-2" },
+    { "name": "mag-slugBIG-3" },
+    { "name": "mag-slugBIG-4" },
+    { "name": "mag-slugTHR-1" },
+    { "name": "mag-slugTHR-2" },
+    { "name": "mag-slugTHR-3" },
+    { "name": "mag-slugTHR-4" },
+    { "name": "mag-slugEXP-1" },
+    { "name": "mag-slugEXP-2" },
+    { "name": "mag-slugEXP-3" },
+    { "name": "mag-slugEXP-4" }
+  ]
+}

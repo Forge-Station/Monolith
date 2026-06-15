@@ -52,6 +52,7 @@
     - MonoUSSPWeaponsDynamicRanged
     # Viper Group start
     - MonoViperGroupDynamic
+    - MidnightArmsCoRecipes # Forge-Change: MAC company weapons
     # Universal shit (stuff like shipgun ammo)
     - UniversalRailgunAmmo
     - UniversalMissileAmmo

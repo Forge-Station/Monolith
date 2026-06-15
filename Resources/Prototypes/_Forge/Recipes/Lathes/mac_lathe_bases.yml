@@ -1,0 +1,29 @@
+# Midnight Arms Co. lathe category bases.
+
+- type: latheRecipe
+  abstract: true
+  id: MidnightArmsCoWeaponRecipe
+  parent: MonoHardsuitT2Recipe
+  categories:
+  - MidnightArmsCo
+
+- type: latheRecipe
+  abstract: true
+  id: MidnightArmsCoAmmoRecipe
+  parent: BaseAmmoFMJIntermediateAmmoBoxRecipe
+  categories:
+  - MidnightArmsCo
+
+- type: latheRecipe
+  abstract: true
+  id: MidnightArmsCoAmmoPlasteelRecipe
+  parent: BaseAmmoPlasteelAPIntermediateAmmoBoxRecipe
+  categories:
+  - MidnightArmsCo
+
+- type: latheRecipe
+  abstract: true
+  id: MidnightArmsCoAmmoExplosiveRecipe
+  parent: BaseAmmoIncendiaryIntermediateAmmoBoxRecipe
+  categories:
+  - MidnightArmsCo

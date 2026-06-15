@@ -119,3 +119,13 @@
     ClothingUniformJumpskirtHME: 4
     ClothingHeadHatBeretHME: 4
 
+# Midnight Arms Co.
+
+- type: vendingMachineInventory
+  id: CompanyVendInventoryMAC
+  startingInventory:
+    TelecomServerFlatpack: 1
+    EncryptionKeyMidnightArmsCo: 4
+    DisciplinesDiskMAC: 2
+    FactionLatheFlatpack: 1
+

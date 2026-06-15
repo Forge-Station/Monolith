@@ -21,3 +21,7 @@
 - type: latheCategory
   id: DrakeIndustries
   name: lathe-category-drake-industries
+
+- type: latheCategory
+  id: MidnightArmsCo
+  name: lathe-category-midnight-arms-co

@@ -1,0 +1,518 @@
+# Midnight Arms Co. personal weapons
+
+#region Pistols
+
+- type: entity
+  name: МН-13 "Шуруповёрт"
+  id: WeaponPistolMacMn13
+  parent: WeaponPistolViper
+  description: Тактический пистолет, разработанный МАС. Поставляется в калибре 9×19 мм, с встроенным ЛЦУ и увеличенной ёмкостью магазина. Получил своё название из-за крайне быстрого вращения пули после выхода из ствола, что гарантирует точность.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Pistols/mac_mn13_screwdriver.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - map: ["barrelAttachment"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Pistols/mac_mn13_screwdriver.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine9x19mmPistolFMJ
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine9x19mmPistolFMJ
+          - Magazine9x19mmPistolHighCapacityFMJ
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge9x19mmFMJ
+        priority: 1
+        whitelist:
+          tags:
+          - Cartridge9x19mmFMJ
+      attachment_barrel:
+        insertSound: /Audio/Items/screwdriver.ogg
+        ejectSound: /Audio/Items/screwdriver.ogg
+        priority: 0
+        whitelist:
+          tags:
+          - MonoSuppressorMulticalRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      attachment_barrel: !type:ContainerSlot
+  - type: ESAttachableGun
+    slots:
+    - name: es-gun-attachments-slot-name-barrel
+      containerId: attachment_barrel
+      whitelist:
+        tags:
+        - MonoSuppressorMulticalPistol
+  - type: ESItemMapper
+    mappings:
+      barrelAttachment:
+      - containerId: attachment_barrel
+        state: suppressed
+        whitelist:
+          tags:
+          - MonoSuppressor
+  - type: UnpoweredFlashlight
+  - type: PointLight
+    enabled: false
+    radius: 4
+    softness: 4
+    autoRot: true
+  - type: LaserPointer
+    targetedColor: "#FF2E2E"
+    defaultColor: "#FF2E2E"
+
+- type: entity
+  name: МН-12 "Тыква"
+  id: WeaponPistolMacMn12
+  parent: WeaponPistolMk58
+  description: Тяжёлый пистолет производства МАС в калибре .45 ACP. МН-12 — устаревшая, однако любимая наёмниками модель тяжёлых пистолетов. ЛЦУ и брутальный вид заставляют МАС держать его в продаже уже порядка трёх десятков лет!
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Pistols/mac_mn12_pumpkin.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - map: ["barrelAttachment"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Pistols/mac_mn12_pumpkin.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine45_ACPPistolFMJ
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine45_ACPPistolFMJ
+          - Magazine45_ACPPistolHighCapacityFMJ
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge45_ACPFMJ
+        priority: 1
+        whitelist:
+          tags:
+          - Cartridge45_ACPFMJ
+      attachment_barrel:
+        insertSound: /Audio/Items/screwdriver.ogg
+        ejectSound: /Audio/Items/screwdriver.ogg
+        priority: 0
+        whitelist:
+          tags:
+          - MonoSuppressorMulticalRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      attachment_barrel: !type:ContainerSlot
+  - type: ESAttachableGun
+    slots:
+    - name: es-gun-attachments-slot-name-barrel
+      containerId: attachment_barrel
+      whitelist:
+        tags:
+        - MonoSuppressorMulticalPistol
+  - type: ESItemMapper
+    mappings:
+      barrelAttachment:
+      - containerId: attachment_barrel
+        state: suppressed
+        whitelist:
+          tags:
+          - MonoSuppressor
+  - type: UnpoweredFlashlight
+  - type: PointLight
+    enabled: false
+    radius: 4
+    softness: 4
+    autoRot: true
+  - type: LaserPointer
+    targetedColor: "#FF2E2E"
+    defaultColor: "#FF2E2E"
+
+#region Revolvers
+
+- type: entity
+  name: МН-4 "Дыня"
+  id: WeaponRevolverMacMn4
+  parent: WeaponRevolverPython
+  description: Одна из первых моделей в линейке производства МАС! Этот не сильно технологичный, однако простой в использовании, надёжный и угрожающий револьвер калибра .45 Magnum всё ещё находит отклик в сердцах капитанов наёмников, офицеров частной охраны и всех... других потребителей товаров МАС.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Revolvers/mac_mn4_melon.rsi
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Revolvers/mac_mn4_melon.rsi
+
+- type: entity
+  name: МН-15 "Мошка"
+  id: WeaponRevolverMacMn15
+  parent: WeaponEnergyRevolver
+  description: Энергетический револьвер производства МАС. Питается от встроенной батареи в рукоятке и способен выпускать как парализующие, так и летальные энергозаряды. Цилиндр не крутится при стрельбе.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Revolvers/mac_mn15_moska.rsi
+    layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+    - state: icon
+      shader: unshaded
+      map: [ "Firemode" ]
+      visible: false
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Revolvers/mac_mn15_moska.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.EnergyGunFireModeVisuals.State:
+        Firemode:
+          Disabler: { state: icon, visible: false }
+          Lethal: { state: icon, visible: false }
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+
+#region SMG
+
+- type: entity
+  name: МН-А-6 "Бритва"
+  id: WeaponSubMachineGunMacMna6
+  parent: WeaponSubMachineGunWt550
+  description: Пистолет-пулемёт производства МАС в калибре 4,6×30 мм. Быстрый, компактный и приятно строчит при стрельбе. Основной целевой аудиторией для данного оружия являются разведчики и любители ближнего боя, не желающие терять приятное «тррррр» под ухом.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/SMGs/mac_mna6_razor.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - map: ["gripAttachment"]
+    - map: ["barrelAttachment"]
+    - map: ["opticAttachment"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/SMGs/mac_mna6_razor.rsi
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/SMGs/mac_mna6_razor_inhands_64x.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+
+#region Rifles
+
+- type: entity
+  name: РАВ-12 "Дзынь"
+  id: WeaponRifleMacRav12
+  parent: WeaponRifleLecter
+  description: Тяжёлая автоматическая винтовка МАС в калибре 6,8×52 мм безгильзовый; также принимает магазины 5,56×45 мм. Основным её преимуществом и продающей точкой является высокая модульность, качество и надёжность. Самая яркая и узнаваемая модель производства МАС.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Rifles/mac_rav12_ding.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - map: ["gripAttachment"]
+    - map: ["barrelAttachment"]
+    - map: ["opticAttachment"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Rifles/mac_rav12_ding.rsi
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/Rifles/mac_rav12_ding_inhands_64x.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+
+#region LMG
+
+- type: entity
+  name: РАВ-21 "Трунь"
+  id: WeaponLightMachineGunMacRav21
+  parent: [BaseWeaponLightMachineGun, BaseGunWieldable]
+  description: Лёгкий пулемёт производства МАС в калибре 7,62×39 мм. Представлен конструкцией типа булл-пап, что обеспечивает удовлетворительную отдачу, а радиаторы на стволе отводят тепло, позволяя стрелять долго и быстро.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/LMGs/mac_rav21_trun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/LMGs/mac_rav21_trun.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/LMGs/mac_rav21_trun_inhands_64x.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+
+#region Sniper
+
+- type: entity
+  name: РАВ-32 "Оракул"
+  id: WeaponSniperMacRav32
+  parent: [WeaponRifleAK410, BaseGunWieldable]
+  description: Тяжёлая снайперская винтовка МАС в калибре 7,62×54 ммR. Одна из новейших и технологичных поставок на рынок от МАС. Винтовка оснащена ЛЦУ с режимом видимого и инфракрасного луча, а также высокоточным компьютеризированным прицелом с автоматической системой учёта погоды, направления ветра и баллистики.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Snipers/mac_rav32_oracle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Snipers/mac_rav32_oracle.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/Snipers/mac_rav32_oracle_inhands_64x.rsi
+    size: Huge
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine762x54mmRFMJ
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine762x54mmRFMJ
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge762x54mmRFMJ
+        priority: 1
+        whitelist:
+          tags:
+          - Cartridge762x54mmRFMJ
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: ESAttachableGun
+    slots: []
+  - type: ESItemMapper
+    mappings: {}
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: UnpoweredFlashlight
+  - type: PointLight
+    enabled: false
+    radius: 5
+    softness: 3
+    autoRot: true
+  - type: LaserPointer
+    targetedColor: "#FF2E2E"
+    defaultColor: "#FF2E2E"
+
+#region Shotguns
+
+- type: entity
+  name: АРО-9 "Груз"
+  id: WeaponShotgunMacAro9
+  parent: WeaponShotgunBulldog
+  description: Тяжёлый автоматический дробовик МАС 12-го калибра. Является одним из самых простых продуктов МАС — простой магазинный автоматический дробовик. Качество исполнения при этом ни капли не уступает любому другому оружию.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/mac_aro9_cargo.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/mac_aro9_cargo_inhands_64x.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/mac_aro9_cargo_inhands_64x.rsi
+    size: Large
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_Forge/Weapons/Guns/Gunshots/shotgun_auto.ogg
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+
+- type: entity
+  name: АРО-15 "Перекрёсток"
+  id: WeaponShotgunMacAro15
+  parent: WeaponShotgunEnforcer
+  description: Тяжёлый полуавтоматический дробовик производства МАС 12-го калибра. Экспериментальная модель компании, призванная испытать технологию умных дробовиков. В результате чрезмерной сложности и малой эффективности системы умного огня это оружие почти исчезло из продаж.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/mac_aro15_crossroads.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/mac_aro15_crossroads_inhands_64x.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/mac_aro15_crossroads_inhands_64x.rsi
+    size: Large
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - ShellShotgun12_gaugeBuckshot
+      - ShellShotgun12_gaugeLight
+      - ShellShotgunMac
+      - Cartridge
+  - type: SmartGun
+    requiresWield: true
+  - type: LaserPointer
+    targetedColor: "#FF2E2E"
+    defaultColor: "#FF2E2E"
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
+      state: all
+
+#region Heavy
+
+- type: entity
+  name: РПВ-2 "Махина"
+  id: WeaponMinigunMacRpv2
+  parent: WeaponMinigun
+  description: Многоствольный пулемёт производства МАС в калибре .10. Он огромен. Он тяжёл. Он ужасающен. 8 стволов, электропривод для вращения и ленточный магазин. Сам факт, что вы держите его в руках — невероятная победа конструкторов МАС. Не может быть сложен куда-либо в связи с невероятным весом.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/HMGs/mac_rpv2_machina.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/HMGs/mac_rpv2_machina_inhands_64x.rsi
+    size: Ginormous
+  - type: BallisticAmmoProvider
+    capacity: 500
+  - type: GunRequiresWield
+  - type: ClothingSpeedModifier
+    walkModifier: 0.6
+    sprintModifier: 0.5
+
+- type: entity
+  name: РПВ-41 "Каст"
+  id: WeaponLauncherMacRpv41
+  parent: [WeaponLauncherRocket, BaseGunWieldable]
+  description: Реактивный гранатомёт производства МАС. Тяжёлый, опасный в обращении и чертовски эффектный ракетомёт под одноразовые реактивные снаряды. Позволяет дать бой как технике и укреплениям, так и обычной бронепехоте. Исключительно для доверенных покупателей. В связи с перебоями в поставках на Фронтире вместо стандартных РПГ-снарядов этот ракетомёт был адаптирован под корабельные лёгкие торпеды.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Launchers/mac_rpv41_cast.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Launchers/mac_rpv41_cast_inhands_64x.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/Launchers/mac_rpv41_cast_inhands_64x.rsi
+    size: Huge
+    storedRotation: -90
+  - type: BallisticAmmoProvider
+    proto: CartridgeMacCastRocket
+    capacity: 1
+    cycleable: false
+    whitelist:
+      tags:
+      - CartridgeMacCastRocket
+  - type: Gun
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
+  - type: GunRequiresWield
+  - type: WieldDelay
+    baseDelay: 1.5
+    modifiedDelay: 1.5
+    preventFiring: true
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.7
+    sprintModifier: 0.6
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+
+#region Energy
+
+- type: entity
+  name: Z-O
+  id: WeaponEnergyPistolMacZo
+  parent: WeaponLaserPistolNF
+  description: Экспериментальный образец технологий МАС — лазерный пистолет Z-O. Питается от энергоячейки и стреляет сфокусированными лазерными импульсами. Он был одобрен в производство со скрипом, так как создание его влекло за собой высокорисковые инвестиции в сборочную линию лазерного оружия, однако он здесь! Элегантная форма и фирменный ЛЦУ знаменуют пришествие далеко НЕ слабого взаимодействия.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Battery/mac_zo_laser_pistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-5
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Battery/mac_zo_laser_pistol.rsi
+  - type: Item
+    size: Small
+    sprite: Forge/Objects/Weapons/Guns/Battery/mac_zo_laser_pistol.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: true
+  - type: UnpoweredFlashlight
+  - type: PointLight
+    enabled: false
+    radius: 4
+    softness: 4
+    autoRot: true
+  - type: LaserPointer
+    targetedColor: "#FF2E2E"
+    defaultColor: "#FF2E2E"

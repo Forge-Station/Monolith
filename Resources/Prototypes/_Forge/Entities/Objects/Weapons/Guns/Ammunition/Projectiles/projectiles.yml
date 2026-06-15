@@ -176,6 +176,24 @@
 
 - type: entity
   parent: BulletRocket
+  id: BulletMacCastRocket
+  name: light torpedo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/SpaceArtillery/mini_rocket.rsi
+    layers:
+    - state: mini-rocket
+    scale: 1, 1.5
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 30
+    intensitySlope: 5
+    totalIntensity: 120
+    maxTileBreak: 1
+
+- type: entity
+  parent: BulletRocket
   id: ForgeBulletRocket
   categories: [ HideSpawnMenu ]
 

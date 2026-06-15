@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by ifi07 (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    { "name": "multy_pistol" },
+    { "name": "multy_rifle" },
+    { "name": "multy_45" },
+    { "name": "multy_50" },
+    { "name": "rocket_pistol" },
+    { "name": "rocket_rifle" },
+    { "name": "rocket_45" },
+    { "name": "rocket_50" }
+  ]
+}

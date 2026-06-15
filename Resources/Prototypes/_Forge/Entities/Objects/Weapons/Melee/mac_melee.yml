@@ -1,0 +1,26 @@
+- type: entity
+  name: КБ-6 «Полночь»
+  id: WeaponSwordMacKb6Midnight
+  parent: BaseSword
+  description: Тактический клинок производства МАС. Лёгкий, сбалансированный и достаточно дёшев в изготовлении, чтобы его не жалко оставить в теле противника — или в стене шлюза. Название отсылает к полуночной славе компании.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Melee/mac_sword.rsi
+  - type: MeleeWeapon
+    attackRate: 1.45
+    angle: 0
+    range: 1.35
+    damage:
+      types:
+        Slash: 18
+    armorPenetration: 0.35
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Normal
+  - type: DisarmMalus
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - back
+    - suitStorage

@@ -1,0 +1,22 @@
+- type: latheRecipePack
+  id: MidnightArmsCoRecipes
+  recipes:
+  - WeaponSwordMacKb6Midnight
+  - WeaponPistolMacMn13
+  - WeaponPistolMacMn12
+  - WeaponRevolverMacMn4
+  - WeaponRevolverMacMn15
+  - WeaponSubMachineGunMacMna6
+  - WeaponEnergyPistolMacZo
+  - WeaponRifleMacRav12
+  - WeaponLightMachineGunMacRav21
+  - WeaponShotgunMacAro9
+  - WeaponShotgunMacAro15
+  - WeaponSniperMacRav32
+  - WeaponMinigunMacRpv2
+  - WeaponLauncherMacRpv41
+  - CartridgeMacCastRocket
+  - AmmoBox12_gaugeMacFlechette
+  - AmmoBox12_gaugeMacTriple
+  - AmmoBox12_gaugeMacExplosive
+  - AmmoBox23x75mmMacExplosive

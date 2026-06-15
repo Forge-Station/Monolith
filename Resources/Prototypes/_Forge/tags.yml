@@ -212,6 +212,12 @@
   id: ShellShotgunLight
 
 - type: Tag
+  id: ShellShotgunMac
+
+- type: Tag
+  id: CartridgeMacCastRocket
+
+- type: Tag
   id: NoGridGodmode
 
 - type: Tag

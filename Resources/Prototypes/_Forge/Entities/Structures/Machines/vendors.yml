@@ -183,6 +183,36 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
     requiredCompany: DrakeIndustries
+
+- type: entity
+  parent: [VendingMachineWallmount, BaseStructureDisableToolUse, BaseStructureAccessReaderImmuneToEmag]
+  id: VendingMachineCompanyMAC
+  name: MAC vendor
+  suffix: MAC
+  description: vendor-mac-desc
+  components:
+  - type: VendingMachine
+    pack: CompanyVendInventoryMAC
+    requiresCash: true
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: MarketModifier
+    mod: 8
+  - type: Sprite
+    sprite: Forge/Structures/Machines/VendingMachines/mac_vendor.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    requiredCompany: MidnightArmsCo
     
 - type: entity
   parent: [VendingMachineAstroVend, BaseStructureDisableToolUse, BaseStructureAccessReaderImmuneToEmag]

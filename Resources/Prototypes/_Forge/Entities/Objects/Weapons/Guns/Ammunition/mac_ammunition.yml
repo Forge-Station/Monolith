@@ -1,0 +1,191 @@
+# Midnight Arms Co. special ammunition
+
+#region 12 gauge shells
+
+- type: entity
+  id: ShellShotgun12_gaugeMacFlechette
+  name: shotgun shell (12 gauge MAC flechette)
+  parent: BaseShellShotgun12_gauge
+  description: Простой, однако эффективный вид патрона — флешетты это как дробь, но вместо простых металлических шаров дроби — прочные пласталевые иглы. Меньший разброс и большее бронепробитие компенсируют меньший урон по тканям.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Cartridges/mac_shotgun_shells.rsi
+    layers:
+    - state: big
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: Pellet12_gaugeMacFlechetteSpread
+  - type: SpentAmmoVisuals
+    state: big
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun12_gaugeBuckshot
+    - ShellShotgunMac
+
+- type: entity
+  id: ShellShotgun12_gaugeMacTriple
+  name: shotgun shell (12 gauge MAC triple)
+  parent: BaseShellShotgun12_gauge
+  description: Не сильно замысловатая идея патрона — смесь 00-картечи, обычной дроби и пули. Позволяет закрыть стеной пуль целые помещения, однако конструктивные особенности мешают патронам разгоняться и наносить большой урон.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Cartridges/mac_shotgun_shells.rsi
+    layers:
+    - state: three
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: Pellet12_gaugeMacTripleSpread
+  - type: SpentAmmoVisuals
+    state: three
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun12_gaugeBuckshot
+    - ShellShotgunMac
+
+- type: entity
+  id: ShellShotgun12_gaugeMacExplosive
+  name: shotgun shell (12 gauge MAC explosive)
+  parent: BaseShellShotgun12_gauge
+  description: Удивительная технология позволила засунуть в простой пулевой патрон для дробовика немного взрывчатки, которая даже не взрывается в стволе. При попадании детонирует, пробивая укрытия и броню.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Cartridges/mac_shotgun_shells.rsi
+    layers:
+    - state: boom
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: Pellet12_gaugeMacExplosive
+  - type: SpentAmmoVisuals
+    state: boom
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun12_gaugeBuckshot
+    - ShellShotgunMac
+
+#region 4 gauge shells
+
+- type: entity
+  id: ShellShotgun23x75mmMacExplosive
+  name: shotgun shell (4 gauge MAC explosive)
+  parent: BaseShellShotgun23x75mm
+  description: Ужасающий патрон ужасающего калибра. Вопреки всем божественным законам, вы видите, по сути своей, ручной артиллерийский боеприпас, позволяющий при удачных попаданиях разрушать целые доты при попадании в слабое место. Для людей он тоже... не сильно полезен. Как и для вашей точности.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Cartridges/mac_shotgun_shells.rsi
+    layers:
+    - state: boom
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: Pellet23x75mmMacExplosive
+  - type: SpentAmmoVisuals
+    state: boom
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun23x75mmBuckshot
+    - ShellShotgunMac
+
+#region boxes
+
+- type: entity
+  id: AmmoBox12_gaugeMacFlechette
+  name: shotgun shell box (12 gauge MAC flechette)
+  parent: AmmoProvider12_gaugeShotgunShell
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgun12_gaugeMacFlechette
+    capacity: 16
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Boxes/mac_shotgun_boxes.rsi
+    layers:
+    - state: big
+    - state: mag-slugBIG-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag-slugBIG
+    steps: 4
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: AmmoBox12_gaugeMacTriple
+  name: shotgun shell box (12 gauge MAC triple)
+  parent: AmmoProvider12_gaugeShotgunShell
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgun12_gaugeMacTriple
+    capacity: 16
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Boxes/mac_shotgun_boxes.rsi
+    layers:
+    - state: thr
+    - state: mag-slugTHR-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag-slugTHR
+    steps: 4
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: AmmoBox12_gaugeMacExplosive
+  name: shotgun shell box (12 gauge MAC explosive)
+  parent: AmmoProvider12_gaugeShotgunShell
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgun12_gaugeMacExplosive
+    capacity: 8
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Boxes/mac_shotgun_boxes.rsi
+    layers:
+    - state: exp
+    - state: mag-slugEXP-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag-slugEXP
+    steps: 4
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: AmmoBox23x75mmMacExplosive
+  name: shotgun shell box (4 gauge MAC explosive)
+  parent: AmmoProvider23x75mmShotgunShell
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgun23x75mmMacExplosive
+    capacity: 4
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Boxes/mac_shotgun_boxes.rsi
+    layers:
+    - state: exp
+    - state: mag-slugEXP-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag-slugEXP
+    steps: 4
+    zeroVisible: false
+  - type: Appearance
+
+#region rocket
+
+- type: entity
+  id: CartridgeMacCastRocket
+  name: light torpedo (MAC Cast adapter)
+  parent: BaseItem
+  description: Корабельная лёгкая торпеда, адаптированная для РПВ-41 «Каст».
+  components:
+  - type: Tag
+    tags:
+    - CartridgeMacCastRocket
+  - type: Item
+    size: Small
+  - type: CartridgeAmmo
+    proto: BulletMacCastRocket
+    deleteOnSpawn: true
+  - type: Sprite
+    sprite: _Mono/Objects/SpaceArtillery/mini_rocket.rsi
+    state: mini-rocket

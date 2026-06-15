@@ -25,3 +25,17 @@
     2: 0.5
     3: 0.5
   uiName: DI
+
+# Midnight Arms Co. discipline
+- type: techDiscipline
+  id: MidnightArmsCo
+  name: research-discipline-midnight-arms-co
+  color: "#FF2E2E"
+  icon:
+    sprite: Forge/Interface/Misc/company_icons.rsi
+    state: mac
+  tierPrerequisites:
+    1: 0
+    2: 0.5
+    3: 0.5
+  uiName: MAC

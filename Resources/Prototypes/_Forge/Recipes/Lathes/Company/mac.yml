@@ -1,0 +1,162 @@
+# Midnight Arms Co. weapon and ammo recipes.
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponSwordMacKb6Midnight
+  result: WeaponSwordMacKb6Midnight
+  materials:
+    Steel: 400
+    Plasteel: 150
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponPistolMacMn13
+  result: WeaponPistolMacMn13
+  materials:
+    Steel: 500
+    Plastic: 200
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponPistolMacMn12
+  result: WeaponPistolMacMn12
+  materials:
+    Steel: 750
+    Plastic: 150
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponRevolverMacMn4
+  result: WeaponRevolverMacMn4
+  materials:
+    Steel: 600
+    Plastic: 100
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponRevolverMacMn15
+  result: WeaponRevolverMacMn15
+  materials:
+    Steel: 400
+    Plastic: 300
+    Silver: 100
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponSubMachineGunMacMna6
+  result: WeaponSubMachineGunMacMna6
+  materials:
+    Steel: 900
+    Plastic: 250
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponEnergyPistolMacZo
+  result: WeaponEnergyPistolMacZo
+  materials:
+    Steel: 500
+    Glass: 200
+    Silver: 200
+    Plasma: 300
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponRifleMacRav12
+  result: WeaponRifleMacRav12
+  materials:
+    Steel: 1500
+    Plastic: 300
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponLightMachineGunMacRav21
+  result: WeaponLightMachineGunMacRav21
+  materials:
+    Steel: 2000
+    Plastic: 400
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponShotgunMacAro9
+  result: WeaponShotgunMacAro9
+  materials:
+    Steel: 1200
+    Plastic: 200
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponShotgunMacAro15
+  result: WeaponShotgunMacAro15
+  materials:
+    Steel: 1400
+    Plastic: 300
+    Silver: 150
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponSniperMacRav32
+  result: WeaponSniperMacRav32
+  materials:
+    Steel: 1800
+    Glass: 300
+    Silver: 200
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponMinigunMacRpv2
+  result: WeaponMinigunMacRpv2
+  materials:
+    Steel: 3500
+    Plasteel: 500
+    Plastic: 400
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: WeaponLauncherMacRpv41
+  result: WeaponLauncherMacRpv41
+  materials:
+    Steel: 2500
+    Plasteel: 400
+
+- type: latheRecipe
+  parent: MidnightArmsCoWeaponRecipe
+  id: CartridgeMacCastRocket
+  result: CartridgeMacCastRocket
+  materials:
+    Steel: 800
+    Plasteel: 300
+    Plasma: 200
+
+- type: latheRecipe
+  parent: MidnightArmsCoAmmoPlasteelRecipe
+  id: AmmoBox12_gaugeMacFlechette
+  result: AmmoBox12_gaugeMacFlechette
+  materials:
+    Steel: 200
+    Plasteel: 150
+
+- type: latheRecipe
+  parent: MidnightArmsCoAmmoRecipe
+  id: AmmoBox12_gaugeMacTriple
+  result: AmmoBox12_gaugeMacTriple
+  materials:
+    Steel: 250
+    Plastic: 100
+
+- type: latheRecipe
+  parent: MidnightArmsCoAmmoExplosiveRecipe
+  id: AmmoBox12_gaugeMacExplosive
+  result: AmmoBox12_gaugeMacExplosive
+  materials:
+    Steel: 300
+    Plasteel: 150
+    Plasma: 200
+
+- type: latheRecipe
+  parent: MidnightArmsCoAmmoExplosiveRecipe
+  id: AmmoBox23x75mmMacExplosive
+  result: AmmoBox23x75mmMacExplosive
+  materials:
+    Steel: 500
+    Plasteel: 300
+    Plasma: 400

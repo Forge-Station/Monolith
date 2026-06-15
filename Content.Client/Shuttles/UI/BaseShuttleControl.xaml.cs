@@ -327,7 +327,7 @@ public partial class BaseShuttleControl : MapGridControl
         handle.DrawString(Font, labelPosition, label, 0.9f, color.WithAlpha(0.7f));
     }
 
-    private static void DrawArrowLine(
+    protected static void DrawArrowLine(
         DrawingHandleScreen handle,
         Vector2 start,
         Vector2 end,

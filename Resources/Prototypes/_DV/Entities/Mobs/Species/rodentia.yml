@@ -16,6 +16,13 @@
   - type: Icon
     sprite: _DV/Mobs/Species/Rodentia/parts.rsi
     state: full
+  - type: NightVision
+    activateSound: null
+    deactivateSound: null
+  - type: Puller
+    needsHands: false
+    walkSpeedModifier: 0.9
+    sprintSpeedModifier: 0.9
   - type: Body
     prototype: Rodentia
   - type: Speech

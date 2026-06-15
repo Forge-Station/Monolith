@@ -48,6 +48,9 @@ seeds-bluetomato-name = blue tomato
 seeds-bluetomato-display-name = blue tomato plant
 seeds-bloodtomato-name = blood tomato
 seeds-bloodtomato-display-name = blood tomato plant
+# Forge-Change: hidden, killerTomato seed/mutation disabled (kept for upstream merges)
+# seeds-killertomato-name = tomato killer
+# seeds-killertomato-display-name = tomato killer plant
 seeds-eggplant-name = eggplant
 seeds-eggplant-display-name = eggplants
 seeds-apple-name = apple

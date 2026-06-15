@@ -76,6 +76,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     protected EntityQuery<PhysicsComponent> _physQuery; // Mono
     protected EntityQuery<ProjectileComponent> _projQuery; // Mono
+    protected EntityQuery<BuckleComponent> _buckleQuery; // Mono
     private EntityQuery<AutoShootGunComponent> _autoShootGunQuery; // Mono
 
     private const float InteractNextFire = 0.3f;
@@ -118,6 +119,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         _physQuery = GetEntityQuery<PhysicsComponent>(); // Mono
         _projQuery = GetEntityQuery<ProjectileComponent>(); // Mono
+        _buckleQuery = GetEntityQuery<BuckleComponent>(); // Mono
         _autoShootGunQuery = GetEntityQuery<AutoShootGunComponent>();
     }
 
@@ -727,6 +729,12 @@ public abstract partial class SharedGunSystem : EntitySystem
             impulseCoord = TransformSystem.WithEntityId(impulseCoord, selfXform.ParentUid);
 
         var toEnt = impulseCoord.EntityId;
+
+        // Mono - if the shooter is buckled (e.g. riding a vehicle), apply the recoil to whatever
+        // they're buckled to instead, so the kick doesn't shove them out of their seat.
+        if (_buckleQuery.TryComp(toEnt, out var buckle) && buckle.BuckledTo is { } buckledTo)
+            toEnt = buckledTo;
+
         if (!_physQuery.TryComp(toEnt, out var toBody))
             return;
 

@@ -303,11 +303,12 @@
       dermal:
         id: DermalArmorTrait
         coefficients:
-          Shock: 1.25
+          Shock: 1.4
         flatReductions:
-          Blunt: 3.5
-          Slash: 3.5
-          Piercing: 3.5
+          Blunt: 5
+          Slash: 5
+          Piercing: 5
+          Heat: -2.5
 
 - type: trait
   id: HardenedLymphocytes
@@ -386,7 +387,7 @@
     damagePerInterval:
       groups:
         Brute: -1.5
-        Burn: -2
+        Burn: -1
     critMultiplier: .25
 
 - type: trait

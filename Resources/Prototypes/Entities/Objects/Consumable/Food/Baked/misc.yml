@@ -881,3 +881,6 @@
           Quantity: 2
         - ReagentId: Vitamin
           Quantity: 3
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
+

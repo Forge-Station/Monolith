@@ -270,6 +270,8 @@
           Quantity: 9
         - ReagentId: Flavorol
           Quantity: 10
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Sprite
     state: bigbite
   - type: Tag
@@ -361,6 +363,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -516,6 +520,8 @@
           Quantity: 3
         - ReagentId: Vitamin
           Quantity: 6
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -530,6 +536,7 @@
     flavors:
       - bun
       - duck
+      - cheesy # Forge-change
   - type: Sprite
     state: chicken
   - type: SolutionContainerManager
@@ -545,6 +552,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -585,8 +594,22 @@
     flavors:
       - bun
       - fishy
+      - cheesy # Forge-change
   - type: Sprite
     state: fish
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 7
+        - ReagentId: Vitamin
+          Quantity: 3
+        - ReagentId: Lactozit
+          Quantity: 1   
+  # Forge-change-end
   - type: Tag
     tags:
     - Meat
@@ -942,6 +965,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 20
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Sprite
     state: superbite
   - type: Tag

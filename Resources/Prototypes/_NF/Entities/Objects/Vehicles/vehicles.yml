@@ -92,6 +92,20 @@
   name: hoverbike
   description: A turbine with bike handles. Very safe.
   components:
+  - type: Storage
+    grid:
+    - 0,0,5,3
+    maxItemSize: Huge
+    blacklist:
+      components:
+      - HumanoidAppearance
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: MovementAlwaysTouching
   - type: CanMoveInAir
   - type: AmbientSound

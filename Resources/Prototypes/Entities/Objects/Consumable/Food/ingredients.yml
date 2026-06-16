@@ -775,6 +775,8 @@
           Quantity: 3
         - ReagentId: Vitamin
           Quantity: 0.6
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1.5       # Forge-change
 
 - type: entity
   name: chèvre disk
@@ -797,6 +799,8 @@
           Quantity: 1
         - ReagentId: Vitamin
           Quantity: 0.2
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.5       # Forge-change
   - type: Tag
     tags:
     - Slice

@@ -280,8 +280,6 @@
           Quantity: 2
         - ReagentId: Flavorol
           Quantity: 5
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 1         # Forge-change
   - type: Tag
     tags:
     - Fruit
@@ -607,16 +605,16 @@
       state: queso
     # Forge-change-start
     - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 36
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 15
-        - ReagentId: Flavorol
-          Quantity: 10
-        - ReagentId: Lactozit
-          Quantity: 1
+      solutions:
+        food:
+          maxVol: 36
+          reagents:
+          - ReagentId: Nutriment
+            Quantity: 15
+          - ReagentId: Flavorol
+            Quantity: 10
+          - ReagentId: Lactozit
+            Quantity: 1
     # Forge-change-end
 # Its queso! Everyone loves queso... Right?.
 

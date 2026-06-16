@@ -7,16 +7,15 @@
   flavor: salty
   color: "#cfd1d0"
   metabolisms:
-    metabolismRate: 0.25
     Food:
+      metabolismRate: 0.25
       effects:
       - !type:SatiateThirst
         factor: -0.1
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -1.5
-            Burn: -2
+          Brute: -1.5
+          Burn: -1.5
         conditions:
         - !type:OrganType
           type: Rodentia

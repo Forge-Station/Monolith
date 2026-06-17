@@ -2,6 +2,15 @@
 
 - type: entity
   parent: BaseMachineCircuitboard
+  id: DrakeMachineBoard2x2Base
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - MachineBoard2x2
+
+- type: entity
+  parent: DrakeMachineBoard2x2Base
   id: DrakeOreProcessorMk2MachineCircuitboard
   suffix: Drake
   components:
@@ -36,7 +45,7 @@
       Plasma: 2
 
 - type: entity
-  parent: BaseMachineCircuitboard
+  parent: DrakeMachineBoard2x2Base
   id: DrakeUraniumCentrifugeMachineCircuitboard
   suffix: Drake
   components:

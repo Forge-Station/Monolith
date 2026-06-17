@@ -89,6 +89,8 @@ public sealed class ShipWeaponFabricatorState : BoundUserInterfaceState
     public readonly bool CanStart;
     public readonly bool CanEject;
     public readonly bool IsFabricating;
+    public readonly int QueuedBoardCount;
+    public readonly string? QueueText;
 
     public ShipWeaponFabricatorState(
         string? boardName,
@@ -101,7 +103,9 @@ public sealed class ShipWeaponFabricatorState : BoundUserInterfaceState
         string? targetPrototypeId,
         bool canStart,
         bool canEject,
-        bool isFabricating)
+        bool isFabricating,
+        int queuedBoardCount,
+        string? queueText)
     {
         BoardName = boardName;
         TargetName = targetName;
@@ -114,5 +118,7 @@ public sealed class ShipWeaponFabricatorState : BoundUserInterfaceState
         CanStart = canStart;
         CanEject = canEject;
         IsFabricating = isFabricating;
+        QueuedBoardCount = queuedBoardCount;
+        QueueText = queueText;
     }
 }

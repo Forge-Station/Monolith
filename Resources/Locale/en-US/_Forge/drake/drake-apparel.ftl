@@ -9,3 +9,8 @@ ent-ClothingUniformDrakeIndustriesTrucker = Drake Industries turtleneck
 
 ent-ClothingUniformDrakeIndustriesWatchdog = Drake Industries officer jumpsuit
     .desc = A sleek officer uniform designed for dark spaces. It bears the colors of Drake Industries.
+
+ent-ClothingHeadHatBeretDrakeIndustries = Drake Industries beret
+    .desc = { drake-industries-beret-desc }
+
+drake-industries-beret-desc = A crimson beret bearing the Drake Industries emblem. Worn by haulers, truckers, and watchdogs alike.

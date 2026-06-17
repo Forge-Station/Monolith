@@ -37,27 +37,25 @@
                     </BoxContainer>
                 </PanelContainer>
                 <!-- Forge-Change: weapon preset lists -->
-                <controls:StripeBack MinSize="32 32" Margin="0 4 0 0">
-                    <Label Text="{Loc 'gunnery-presets-title'}" HorizontalAlignment="Center" StyleClasses="StatusFieldTitle"/>
-                </controls:StripeBack>
-                <BoxContainer Orientation="Horizontal" Margin="0 2">
-                    <LineEdit Name="Preset1NameEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc gunnery-preset-name-placeholder}"/>
-                    <Button Name="Preset1LoadButton" Access="Public" Text="{Loc gunnery-preset-load}" MinWidth="72" Margin="4 0 0 0"/>
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 2">
-                    <LineEdit Name="Preset2NameEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc gunnery-preset-name-placeholder}"/>
-                    <Button Name="Preset2LoadButton" Access="Public" Text="{Loc gunnery-preset-load}" MinWidth="72" Margin="4 0 0 0"/>
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 2">
-                    <LineEdit Name="Preset3NameEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc gunnery-preset-name-placeholder}"/>
-                    <Button Name="Preset3LoadButton" Access="Public" Text="{Loc gunnery-preset-load}" MinWidth="72" Margin="4 0 0 0"/>
-                </BoxContainer>
-                <BoxContainer Orientation="Vertical" Margin="0 2">
-                    <OptionButton Name="PresetSaveTarget" Access="Public" HorizontalExpand="True"/>
+                <Button Name="PresetsPanelToggle" Access="Public" Text="▼"
+                        StyleClasses="ButtonSquare" HorizontalExpand="True" Margin="0 4 0 0"/>
+                <BoxContainer Name="PresetsPanel" Orientation="Vertical">
+                    <controls:StripeBack MinSize="32 32" Margin="0 2 0 0">
+                        <Label Text="{Loc 'gunnery-presets-title'}" HorizontalAlignment="Center" StyleClasses="StatusFieldTitle"/>
+                    </controls:StripeBack>
+                    <OptionButton Name="PresetSelector" Access="Public" HorizontalExpand="True" Margin="0 2"/>
+                    <LineEdit Name="PresetNameEdit" Access="Public" HorizontalExpand="True"
+                              PlaceHolder="{Loc gunnery-preset-name-placeholder}" Margin="0 2"/>
+                    <BoxContainer Orientation="Vertical" Margin="0 2">
+                        <Button Name="SavePresetNameButton" Access="Public" Text="{Loc gunnery-preset-save-name}"
+                                StyleClasses="ButtonSquare" HorizontalExpand="True" Margin="0 0 0 2"/>
+                        <Button Name="LoadPresetButton" Access="Public" Text="{Loc gunnery-preset-apply}"
+                                StyleClasses="ButtonSquare" HorizontalExpand="True"/>
+                    </BoxContainer>
                     <Button Name="SavePresetButton" Access="Public" Text="{Loc gunnery-preset-save}"
-                            StyleClasses="ButtonSquare" HorizontalExpand="True" Margin="0 2 0 0"/>
+                            StyleClasses="ButtonSquare" HorizontalExpand="True" Margin="0 2"/>
+                    <Label Name="PresetStatusLabel" Access="Public" HorizontalAlignment="Center" Margin="0 2 0 0"/>
                 </BoxContainer>
-                <Label Name="PresetStatusLabel" Access="Public" HorizontalAlignment="Center" Margin="0 2 0 0"/>
             </BoxContainer>
         </PanelContainer>
 

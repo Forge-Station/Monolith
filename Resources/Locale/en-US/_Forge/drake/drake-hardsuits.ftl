@@ -1,7 +1,7 @@
 # Drake Industries hardsuits.
 
 ent-ClothingOuterHardsuitDrakeMk4 = Drake MK4 industrial hardsuit
-    .desc = Drake Industries entry-level industrial EVA rig. Gauntlets deploy a holoflare pistol and grappling gun. Not rated for armor plate inserts.
+    .desc = Drake Industries entry-level industrial EVA rig. Mass-scanner helmet. Gauntlets deploy a holoflare pistol and grappling gun. Not rated for armor plate inserts.
     .suffix = Drake
 
 ent-ClothingOuterHardsuitDrakeMk8 = Drake MK8 industrial hardsuit
@@ -13,7 +13,7 @@ ent-ClothingOuterHardsuitDrakeMk16 = Drake MK16 industrial hardsuit
     .suffix = Drake
 
 ent-ClothingHeadHelmetHardsuitDrakeMk4 = Drake MK4 hardsuit helmet
-    .desc = Sealed helmet for the Drake MK4 hardsuit.
+    .desc = Sealed helmet for the Drake MK4 hardsuit. Integrates a portable mass scanner interface.
     .suffix = Drake
 
 ent-ClothingHeadHelmetHardsuitDrakeMk8 = Drake MK8 hardsuit helmet

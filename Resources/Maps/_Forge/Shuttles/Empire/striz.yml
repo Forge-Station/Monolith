@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.0
+  engineVersion: 277.0.0
   forkId: frontier_mapping
-  forkVersion: ebc5096ff710c78dbe8a1af7e9f80a807911e0e5
-  time: 03/18/2026 18:33:44
+  forkVersion: b8f0151814002da223023103808f268657f7948a
+  time: 06/05/2026 14:27:24
   entityCount: 416
 maps: []
 grids:
@@ -79,10 +79,10 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
       spreadQueues:
-        Smoke: []
         MetalFoam: []
         Puddle: []
         Kudzu: []
+        Smoke: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -91,7 +91,7 @@ entities:
         path: /Audio/Effects/alert.ogg
     - type: DecalGrid
       chunkCollection:
-        version: 2
+        version: 3
         nodes:
         - node:
             color: '#FFFFFFFF'
@@ -409,7 +409,8 @@ entities:
             2: 7
             0: 63312
           -1,-2:
-            0: 58948
+            3: 512
+            0: 58436
             2: 17
           -1,-1:
             0: 18158
@@ -433,60 +434,19 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - volume: 2500
           immutable: True
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+          moles: {}
         - volume: 2500
           temperature: 293.15
+          moles: {}
+        - volume: 2500
+          temperature: 293.14996
           moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 20.078888
+            Nitrogen: 75.53487
         chunkSize: 4
     - type: GasTileOverlay
     - type: BecomesStation
@@ -494,6 +454,9 @@ entities:
     - type: RadiationGridResistance
     - type: ShipGridLock
       locked: False
+    - type: ThermalSignature
+    - type: ImplicitRoof
+    - type: ExplosionAirtightGrid
 - proto: AirAlarm
   entities:
   - uid: 2
@@ -585,13 +548,13 @@ entities:
     - type: Transform
       pos: 4.5,-6.5
       parent: 1
-- proto: AirlockShuttleSyndicate
+- proto: AirlockShuttleEmpire
   entities:
   - uid: 13
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 6.5,-4.5
+      pos: 6.5,-2.5
       parent: 1
   - uid: 14
     components:
@@ -603,7 +566,7 @@ entities:
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 6.5,-2.5
+      pos: 6.5,-4.5
       parent: 1
 - proto: AirSensor
   entities:
@@ -2200,15 +2163,21 @@ entities:
   - uid: 268
     components:
     - type: Transform
+      anchored: True
       pos: 5.5,-10.5
       parent: 1
+    - type: Physics
+      bodyType: Static
 - proto: OxygenCanister
   entities:
   - uid: 269
     components:
     - type: Transform
+      anchored: True
       pos: 5.5,-9.5
       parent: 1
+    - type: Physics
+      bodyType: Static
 - proto: PlushieHuman
   entities:
   - uid: 270
@@ -2363,6 +2332,14 @@ entities:
     - type: Transform
       pos: -2.5,-5.5
       parent: 1
+    - type: EntityStorage
+      air:
+        volume: 200
+        immutable: False
+        temperature: 293.14923
+        moles:
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
 - proto: TableReinforced
   entities:
   - uid: 293
@@ -3044,11 +3021,15 @@ entities:
     - type: Transform
       pos: 0.5,-6.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 406
     components:
     - type: Transform
       pos: 2.5,-6.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: WindowReinforcedDirectional
   entities:
   - uid: 407
@@ -3057,56 +3038,76 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 2.5,0.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 408
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,0.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 409
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 5.5,-5.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 410
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 5.5,-1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 411
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -2.5,-1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 412
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -2.5,-5.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 413
     components:
     - type: Transform
       pos: -1.5,-10.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 414
     components:
     - type: Transform
       pos: 4.5,-10.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 415
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,-5.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 416
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 2.5,-5.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 ...

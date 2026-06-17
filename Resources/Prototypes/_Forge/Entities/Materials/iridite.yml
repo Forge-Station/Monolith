@@ -1,0 +1,122 @@
+# Forge: iridite metallurgy intermediates.
+
+- type: material
+  id: IridiumMatrix
+  stackEntity: SheetIridiumMatrix1
+  name: materials-iridium-matrix
+  unit: materials-unit-sheet
+  icon: { sprite: /Textures/_Mono/Objects/Materials/fissiles.rsi, state: uranium }
+  color: "#6a8a5c"
+  price: 4
+  properties:
+    electrical: 8
+    thermal: 6
+    hard: 6
+    density: 5
+    chemical: 7
+    radioactive: 3
+    n_radioactive: 2
+
+- type: entity
+  parent: MaterialBase
+  id: MaterialIridiumMatrix
+  name: iridium matrix
+  description: A stabilized isotopic lattice produced from diamond, fissile uranium, bluespace and plasma. An intermediate for iridite metallurgy.
+  suffix: Full
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Materials/fissiles.rsi
+    state: uranium_3
+    layers:
+    - state: uranium_3
+      map: ["base"]
+  - type: Tag
+    tags:
+    - Sheet
+  - type: Item
+    sprite: _Mono/Objects/Materials/fissiles.rsi
+    heldPrefix: uranium
+  - type: Stack
+    stackType: IridiumMatrix
+    count: 10
+    baseLayer: base
+    layerStates:
+    - uranium
+    - uranium_2
+    - uranium_3
+  - type: Material
+  - type: Appearance
+  - type: PhysicalComposition
+    materialComposition:
+      IridiumMatrix: 100
+
+- type: entity
+  parent: MaterialIridiumMatrix
+  id: SheetIridiumMatrix1
+  suffix: 1
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MaterialIridiumMatrix
+  id: SheetIridiumMatrix10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10
+
+- type: material
+  id: CryoBinder
+  stackEntity: SheetCryoBinder1
+  name: materials-cryo-binder
+  unit: materials-unit-sheet
+  icon: { sprite: _Mono/Objects/Materials/pyrogel.rsi, state: icon }
+  color: "#7ec8e3"
+  price: 3
+  properties:
+    electrical: 4
+    thermal: 9
+    hard: 2
+    density: 1
+    chemical: 8
+
+- type: entity
+  parent: MaterialBase
+  id: MaterialCryoBinder
+  name: cryo binder
+  description: A cryogenic binding agent made from plastitanium, lithium, silver and pyrogel. Stabilizes iridite during high-energy smelting.
+  suffix: Full
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Materials/pyrogel.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - Sheet
+  - type: Item
+    sprite: _Mono/Objects/Materials/pyrogel.rsi
+    heldPrefix: icon
+  - type: Stack
+    stackType: CryoBinder
+    count: 10
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CryoBinder: 100
+
+- type: entity
+  parent: MaterialCryoBinder
+  id: SheetCryoBinder1
+  suffix: 1
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MaterialCryoBinder
+  id: SheetCryoBinder10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10

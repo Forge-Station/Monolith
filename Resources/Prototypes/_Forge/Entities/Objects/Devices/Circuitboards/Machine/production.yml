@@ -27,5 +27,11 @@
     - type: MachineBoard
       prototype: LaserDrill
       requirements: 
-        MatterBin: 2 
-        Manipulator: 2 
+        MatterBin: 3 
+        Manipulator: 5 
+      stackRequirements:
+        Glass: 30
+        Steel: 15
+        Gold: 10
+        Diamond: 2
+        Iridite: 5

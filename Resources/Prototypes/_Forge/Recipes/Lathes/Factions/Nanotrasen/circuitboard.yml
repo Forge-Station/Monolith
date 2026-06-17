@@ -58,10 +58,9 @@
   id: LaserDrillCircuitboard
   result: LaserDrillCircuitboard
   materials:
-    Glass: 3000
-    Steel: 2000
-    Gold: 1000
-    Diamond: 200
+    Glass: 2000
+    Steel: 300
+    Gold: 15
 
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe

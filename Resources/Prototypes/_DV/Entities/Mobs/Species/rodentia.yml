@@ -22,8 +22,6 @@
     deactivateSound: null
   - type: Puller
     needsHands: false
-    walkSpeedModifier: 0.9
-    sprintSpeedModifier: 0.9
   # Forge-change-end
   - type: Body
     prototype: Rodentia

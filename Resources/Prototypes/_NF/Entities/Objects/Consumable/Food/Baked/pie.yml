@@ -53,7 +53,8 @@
     - state: pearandcheese-slice
     - state: alpha-slice-filling
       color: "#bf6000"
-  # Forge-change-start- type: SolutionContainerManager
+  # Forge-change-start
+  - type: SolutionContainerManager
     solutions:
       food:
         maxVol: 8

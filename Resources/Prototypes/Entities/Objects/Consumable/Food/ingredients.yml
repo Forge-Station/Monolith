@@ -710,6 +710,7 @@
       - cheesy
   - type: Sprite
     state: cheesewheel
+  # Forge-change-start
   - type: SolutionContainerManager
     solutions:
       food:
@@ -717,8 +718,9 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 15
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 3         # Forge-change
+        - ReagentId: Lactozit
+          Quantity: 3
+  # Forge-change-end
   - type: SliceableFood
     count: 4
     slice: FoodCheeseSlice

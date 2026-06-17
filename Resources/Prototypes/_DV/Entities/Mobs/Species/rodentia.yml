@@ -16,6 +16,7 @@
   - type: Icon
     sprite: _DV/Mobs/Species/Rodentia/parts.rsi
     state: full
+  # Forge-change-start
   - type: NightVision
     activateSound: null
     deactivateSound: null
@@ -23,6 +24,7 @@
     needsHands: false
     walkSpeedModifier: 0.9
     sprintSpeedModifier: 0.9
+  # Forge-change-end
   - type: Body
     prototype: Rodentia
   - type: Speech

@@ -349,7 +349,7 @@
         - ReagentId: THC
           Quantity: 30
         - ReagentId: Flavorol # Frontier
-          Quantity: 15        # Frontier
+          Quantity: 15 # Frontier
         - ReagentId: Lactozit # Forge-change
           Quantity: 1         # Forge-change
 
@@ -374,7 +374,7 @@
         maxVol: 10
         reagents:
         - ReagentId: Nutriment
-          Quantity: 1.5 # Frontier: 3.5>1.5
+          Quantity: 1 # Frontier: 3.5<1
         - ReagentId: THC
           Quantity: 5
         - ReagentId: Flavorol # Frontier

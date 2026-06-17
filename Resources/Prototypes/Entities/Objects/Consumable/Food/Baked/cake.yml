@@ -238,8 +238,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 20
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 3         # Forge-change
+        - ReagentId: Lactozit
+          Quantity: 3
   # Forge-change-end
   - type: SliceableFood
     slice: FoodCakeCheeseSlice
@@ -264,8 +264,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 4
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 0.75      # Forge-change
+        - ReagentId: Lactozit
+          Quantity: 0.75
   # Forge-change-end
 # Tastes like sweetness, cream cheese.
 

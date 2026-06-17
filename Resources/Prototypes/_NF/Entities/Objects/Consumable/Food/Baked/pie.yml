@@ -26,8 +26,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 11
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 1.5       # Forge-change
+        - ReagentId: Lactozit
+          Quantity: 1.5
   # Forge-change-end
   - type: SliceableFood
     slice: FoodTartPearCheeseSlice
@@ -64,8 +64,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 2
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 0.375     # Forge-change
+        - ReagentId: Lactozit
+          Quantity: 0.375
   # Forge-change-end
   - type: Tag
     tags:

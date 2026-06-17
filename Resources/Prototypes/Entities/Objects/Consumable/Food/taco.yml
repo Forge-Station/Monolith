@@ -50,7 +50,6 @@
     transferAmount: 3
   - type: Sprite
     sprite: Objects/Consumable/Food/taco.rsi
-  # Forge-change-start
   - type: SolutionContainerManager
     solutions:
       food:
@@ -60,9 +59,8 @@
           Quantity: 6
         - ReagentId: Vitamin
           Quantity: 4
-        - ReagentId: Lactozit 
-          Quantity: 1 
-  # Forge-change-end 
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Item
     sprite: Objects/Consumable/Food/taco.rsi
     storedRotation: -90
@@ -76,7 +74,7 @@
   id: FoodTacoBeef
   description: A very basic and run of the mill beef taco, now with cheese!
   components:
-  - type: Food       
+  - type: Food
   - type: Sprite
     state: beeftaco
 

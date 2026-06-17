@@ -98,7 +98,7 @@
 
 #ERT Mail Carrier Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase] # Forge-change
+  parent: ForgeClothingOuterHardsuitBase # Forge-change
   id: ClothingOuterHardsuitERTMailCarrier
   name: ERT mail carrier's hardsuit
   description: A protective hardsuit worn by the mail carriers of an emergency response team.

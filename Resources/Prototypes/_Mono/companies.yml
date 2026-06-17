@@ -206,6 +206,7 @@
   color: "#52326A"
   image: /Textures/_Mono/Companies/ullman_industries.png
   # Forge-change: add icon & special's
+  whitelisted: true
   icon: UllmanIndustries
   special:
   - !type:GiveItemSpecial

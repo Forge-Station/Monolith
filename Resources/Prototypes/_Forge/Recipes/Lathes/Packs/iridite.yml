@@ -1,0 +1,6 @@
+- type: latheRecipePack
+  id: MonoIriditeProcessing
+  recipes:
+  - CentrifugeIridiumMatrix
+  - CentrifugeCryoBinder
+  - CentrifugeIridite

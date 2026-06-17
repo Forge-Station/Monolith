@@ -537,6 +537,9 @@
           - !type:OrganType
             type: Vox
             shouldHave: false
+          - !type:OrganType   # Forge-Change
+            type: Rodentia    # Forge-Change
+            shouldHave: false # Forge-Change
         type: Local
         visualType: MediumCaution
         messages: [ "generic-reagent-effect-sick" ]
@@ -556,6 +559,9 @@
           - !type:OrganType
             type: Vox
             shouldHave: false
+          - !type:OrganType    # Forge-Change
+            type: Rodentia     # Forge-Change
+            shouldHave: false  # Forge-Change
       - !type:HealthChange
         conditions:
         - !type:OrganType
@@ -570,6 +576,9 @@
         - !type:OrganType
           type: Vox
           shouldHave: false
+        - !type:OrganType   # Forge-Change
+          type: Rodentia    # Forge-Change
+          shouldHave: false # Forge-Change
         damage:
           types:
             Poison: 1
@@ -591,6 +600,12 @@
           type: Goblin # Frontier: Goblin
         reagent: Protein # Frontier: Goblin
         amount: 0.5 # Frontier: Goblin
+      - !type:AdjustReagent # Forge-Change
+        conditions:         # Forge-Change
+        - !type:OrganType   # Forge-Change
+          type: Rodentia    # Forge-Change
+        reagent: Protein    # Forge-Change
+        amount: 0.5         # Forge-Change
 
 
 - type: reagent

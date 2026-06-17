@@ -23,6 +23,7 @@
   - NfsdSpeciesSpecific
   - TsfmcFirearm
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -50,6 +51,7 @@
   - NfsdSpeciesSpecific
   - TsfmcFirearm
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -77,6 +79,7 @@
   - NfsdSpeciesSpecific
   - TsfmcFirearm
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -104,6 +107,7 @@
   - NfsdSpeciesSpecific
   - TsfmcFirearm
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -131,6 +135,7 @@
   - NfsdSpeciesSpecific
   - TsfmcFirearmColonel
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -158,6 +163,7 @@
   - NfsdSpeciesSpecific
   - TsfmcFirearm
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -184,6 +190,7 @@
   - ContractorTrinkets
   - ContractorBureaucracy
   - NfsdSpeciesSpecific
+  - FactionArmorPlates
   canCustomizeName: true
 
 # Forge-Change: без берета — только шлем

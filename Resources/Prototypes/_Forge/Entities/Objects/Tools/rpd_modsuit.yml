@@ -1,0 +1,4 @@
+- type: entity
+  parent: RPD
+  id: RPDModsuitGauntlet
+  categories: [ HideSpawnMenu ]

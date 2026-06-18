@@ -627,6 +627,8 @@
           Quantity: 2
         - ReagentId: Vitamin
           Quantity: 0.5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.75      # Forge-change
 
 - type: entity
   name: cotton chèvre chaud
@@ -659,6 +661,8 @@
           Quantity: 1
         - ReagentId: Vitamin
           Quantity: 0.5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.75      # Forge-change
   - type: MothFood # Frontier
 
 - type: entity
@@ -881,3 +885,6 @@
           Quantity: 2
         - ReagentId: Vitamin
           Quantity: 3
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
+

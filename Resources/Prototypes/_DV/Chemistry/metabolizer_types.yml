@@ -1,0 +1,5 @@
+# Forge-change-start
+- type: metabolizerType
+  id: Rodentia
+  name: metabolizer-type-rodentia
+# Forge-change-end

@@ -187,7 +187,15 @@ public sealed partial class FireControlSystem : EntitySystem
         EnsureWeaponPresets(component);
         var preset = component.WeaponPresets[args.PresetIndex];
         preset.Name = args.Name.Trim();
-        preset.WeaponNames = args.WeaponNames.ToList();
+        preset.WeaponNames.Clear();
+        preset.Weapons = args.Weapons.Select(w => new GunneryWeaponPresetWeaponData
+        {
+            Name = w.Name,
+            WeaponEntity = w.WeaponEntity,
+            HasWeaponEntity = w.HasWeaponEntity,
+            GridPosition = w.GridPosition,
+            HasGridPosition = w.HasGridPosition,
+        }).ToList();
         UpdateUi(uid, component);
     }
 
@@ -223,10 +231,30 @@ public sealed partial class FireControlSystem : EntitySystem
         for (var i = 0; i < FireControlConsoleComponent.WeaponPresetCount; i++)
         {
             var preset = component.WeaponPresets[i];
-            presets[i] = new GunneryWeaponPresetState(preset.Name, preset.WeaponNames.ToArray());
+            presets[i] = new GunneryWeaponPresetState(preset.Name, BuildPresetWeaponState(preset));
         }
 
         return presets;
+    }
+
+    private static GunneryWeaponPresetWeaponState[] BuildPresetWeaponState(GunneryWeaponPresetData preset)
+    {
+        if (preset.Weapons.Count > 0)
+        {
+            return preset.Weapons.Select(w => new GunneryWeaponPresetWeaponState(
+                w.Name,
+                w.WeaponEntity,
+                w.HasWeaponEntity,
+                w.GridPosition,
+                w.HasGridPosition)).ToArray();
+        }
+
+        return preset.WeaponNames.Select(name => new GunneryWeaponPresetWeaponState(
+            name,
+            NetEntity.Invalid,
+            hasWeaponEntity: false,
+            Vector2.Zero,
+            hasGridPosition: false)).ToArray();
     }
     // Forge-Change-End
 

@@ -10,8 +10,8 @@
     - trayScanner
     - AccessConfiguratorUniversal
     - Multitool
-    #- PowerDrill
-    #- JawsOfLife
+    - PowerDrill
+    - JawsOfLife
     #- WelderIndustrialAdvanced
     # Mono
     - WeaponForceGunAdmin
@@ -22,7 +22,7 @@
     - EmagUnlimited
     - DemagUnlimited
     - BluespaceBeaker
-    - Omnitool
+#    - Omnitool            Forge-removed
     - SyringeBluespace
 
 - type: startingGear

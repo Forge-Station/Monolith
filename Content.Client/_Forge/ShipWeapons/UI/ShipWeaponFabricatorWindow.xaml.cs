@@ -41,7 +41,9 @@ public sealed partial class ShipWeaponFabricatorWindow : FancyWindow
             null,
             false,
             false,
-            false));
+            false,
+            0,
+            null));
     }
 
     public void UpdateState(ShipWeaponFabricatorState state)
@@ -53,7 +55,11 @@ public sealed partial class ShipWeaponFabricatorWindow : FancyWindow
             MinSize = SetSize = hasBoard ? ExpandedSize : CompactSize;
         }
 
-        BoardNameLabel.SetMessage(state.BoardName ?? Loc.GetString("ship-weapon-fabricator-ui-none"));
+        var boardText = state.BoardName ?? Loc.GetString("ship-weapon-fabricator-ui-none");
+        if (state.QueueText != null)
+            boardText = $"{boardText}\n{state.QueueText}";
+
+        BoardNameLabel.SetMessage(boardText);
         TargetNameLabel.SetMessage(state.TargetName ?? " ");
         TargetInfoLabel.SetMessage(state.TargetName ?? Loc.GetString("ship-weapon-fabricator-ui-none"));
         RequirementsLabel.SetMessage(state.RequirementsText);

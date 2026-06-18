@@ -454,6 +454,20 @@
         conditions:
           - !type:OrganType
             type: Animal
+      # Forge-Change-start
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Rodentia
+        damage:
+          types:
+            Poison: 0.4
+      - !type:ChemVomit
+        probability: 0.04
+        conditions:
+          - !type:OrganType
+            type: Rodentia
+      # Forge-Change-end
 
 - type: reagent
   id: Amatoxin
@@ -537,6 +551,9 @@
           - !type:OrganType
             type: Vox
             shouldHave: false
+          - !type:OrganType   # Forge-Change
+            type: Rodentia    # Forge-Change
+            shouldHave: false # Forge-Change
         type: Local
         visualType: MediumCaution
         messages: [ "generic-reagent-effect-sick" ]
@@ -556,6 +573,9 @@
           - !type:OrganType
             type: Vox
             shouldHave: false
+          - !type:OrganType    # Forge-Change
+            type: Rodentia     # Forge-Change
+            shouldHave: false  # Forge-Change
       - !type:HealthChange
         conditions:
         - !type:OrganType
@@ -570,6 +590,9 @@
         - !type:OrganType
           type: Vox
           shouldHave: false
+        - !type:OrganType   # Forge-Change
+          type: Rodentia    # Forge-Change
+          shouldHave: false # Forge-Change
         damage:
           types:
             Poison: 1
@@ -591,6 +614,12 @@
           type: Goblin # Frontier: Goblin
         reagent: Protein # Frontier: Goblin
         amount: 0.5 # Frontier: Goblin
+      - !type:AdjustReagent # Forge-Change
+        conditions:         # Forge-Change
+        - !type:OrganType   # Forge-Change
+          type: Rodentia    # Forge-Change
+        reagent: Protein    # Forge-Change
+        amount: 0.5         # Forge-Change
 
 
 - type: reagent
@@ -614,6 +643,17 @@
         damage:
           types:
             Poison: 0.06
+      # Forge-Change-start
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 1
+        - !type:OrganType
+          type: Rodentia
+        damage:
+          types:
+            Poison: 0.06
+      # Forge-Change-end
 
 - type: reagent
   id: Pax

@@ -183,6 +183,10 @@ public sealed partial class AdminSystem : EntitySystem
         if (ev.Player.Status == SessionStatus.Disconnected)
             return;
 
+        // Player data may already be gone while entities are being flushed during round restart.
+        if (!_playerManager.TryGetPlayerData(ev.Player.UserId, out _))
+            return;
+
         UpdatePlayerList(ev.Player);
     }
 

@@ -114,7 +114,6 @@ boarding-teleport-platform-early-return-swelling = Your body distorts and swells
 boarding-teleport-platform-early-return-catastrophe = Bluespace shear on the platform! Your body fails to reintegrate!
 
 boarding-teleport-window-shared-landing-on = Shared landing point: on
-boarding-teleport-window-shared-landing-off = Per-platform landing
 
 boarding-teleport-window-shared-landing-off = Per-platform landing point
 

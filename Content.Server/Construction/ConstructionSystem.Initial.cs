@@ -2,8 +2,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.Construction.Components;
+using Content.Shared._Forge.Clothing; // Forge-Change
+using Content.Shared._Goobstation.Clothing.Components; // Forge-Change
+using Content.Shared.Clothing.Components; // Forge-Change
 using Content.Shared._Goobstation.Construction;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Clothing;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Construction.Steps;
@@ -34,6 +39,7 @@ namespace Content.Server.Construction
         [Dependency] private EntityLookupSystem _lookupSystem = default!;
         [Dependency] private SharedTransformSystem _transformSystem = default!;
         [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+        [Dependency] private SharedModsuitGauntletToolsSystem _modsuitGauntletTools = default!; // Forge-Change
 
         // --- WARNING! LEGACY CODE AHEAD! ---
         // This entire file contains the legacy code for initial construction.
@@ -53,6 +59,37 @@ namespace Content.Server.Construction
         // replaces wizcode magic constants
         public const float ConstructGrabRange = 2f;
 
+        // Forge-Change-start: exclude integrated suit/hardsuit tools from crafting ingredient scan
+        private bool IsCraftingIngredient(EntityUid entity)
+        {
+            if (HasComp<ModsuitGauntletToolComponent>(entity))
+                return false;
+
+            if (HasComp<ModsuitGauntletToolsComponent>(entity))
+                return false;
+
+            if (HasComp<SealableClothingControlComponent>(entity))
+                return false;
+
+            if (HasComp<SealableClothingComponent>(entity)
+                && TryComp<ClothingComponent>(entity, out var clothing)
+                && clothing.InSlot != null)
+            {
+                return false;
+            }
+
+            if (TryComp<AttachedClothingComponent>(entity, out var attached)
+                && TryComp<ClothingComponent>(attached.AttachedUid, out var controlClothing)
+                && controlClothing.InSlot != null
+                && HasComp<SealableClothingControlComponent>(attached.AttachedUid))
+            {
+                return false;
+            }
+
+            return true;
+        }
+        // Forge-Change-end
+
         // LEGACY CODE. See warning at the top of the file!
         private IEnumerable<EntityUid> EnumerateNearby(EntityUid user)
         {
@@ -62,16 +99,23 @@ namespace Content.Server.Construction
                 {
                     foreach (var storedEntity in storage.Container.ContainedEntities!)
                     {
-                        yield return storedEntity;
+                        if (IsCraftingIngredient(storedEntity))
+                            yield return storedEntity;
                     }
                 }
 
-                yield return item;
+                if (IsCraftingIngredient(item))
+                    yield return item;
             }
             // <Goobstation> - lets slimepeople and constructors use their storageAdd commentMore actions
             if (TryComp<StorageComponent>(user, out var userStorage))
+            {
                 foreach (var userItem in userStorage.Container.ContainedEntities!)
-                    yield return userItem;
+                {
+                    if (IsCraftingIngredient(userItem))
+                        yield return userItem;
+                }
+            }
             // </Goobstation>
 
             if (_inventorySystem.TryGetContainerSlotEnumerator(user, out var containerSlotEnumerator))
@@ -85,11 +129,13 @@ namespace Content.Server.Construction
                     {
                         foreach (var storedEntity in storage.Container.ContainedEntities)
                         {
-                            yield return storedEntity;
+                            if (IsCraftingIngredient(storedEntity))
+                                yield return storedEntity;
                         }
                     }
 
-                    yield return containerSlot.ContainedEntity.Value;
+                    if (IsCraftingIngredient(containerSlot.ContainedEntity.Value))
+                        yield return containerSlot.ContainedEntity.Value;
                 }
             }
 
@@ -100,7 +146,7 @@ namespace Content.Server.Construction
             {
                 if (near == user)
                     continue;
-                if (_interactionSystem.InRangeUnobstructed(pos, near, ConstructGrabRange) && _container.IsInSameOrParentContainer(user, near))
+                if (_interactionSystem.InRangeUnobstructed(pos, near, ConstructGrabRange) && _container.IsInSameOrParentContainer(user, near) && IsCraftingIngredient(near))
                     yield return near;
             }
         }
@@ -115,6 +161,9 @@ namespace Content.Server.Construction
             EntityCoordinates coords,
             Angle angle = default)
         {
+            // Forge-Change: stow integrated suit tools before ingredient scan
+            _modsuitGauntletTools.StowAllDeployedTools(user);
+
             // We need a place to hold our construction items!
             var container = _container.EnsureContainer<Container>(user, materialContainer, out var existed);
 
@@ -546,17 +595,21 @@ namespace Content.Server.Construction
                 {
                     var valid = false;
 
-                    if (entWith is not { Valid: true } holding) // Goobstation - don't check for constructor machine
-                        return false;
-                    // No support for conditions here!
-
+                    // Forge-Change-start: allow structure placement when material is in any hand/nearby, not only active hand
                     foreach (var step in edge.Steps)
                     {
                         switch (step)
                         {
                             case EntityInsertConstructionGraphStep entityInsert:
-                                if (entityInsert.EntityValid(holding, EntityManager, _factory))
-                                    valid = true;
+                                foreach (var candidate in EnumerateNearby(user))
+                                {
+                                    if (entityInsert.EntityValid(candidate, EntityManager, _factory))
+                                    {
+                                        valid = true;
+                                        break;
+                                    }
+                                }
+
                                 break;
                             case ToolConstructionGraphStep _:
                                 throw new InvalidDataException("Invalid first step for item recipe!");
@@ -565,6 +618,7 @@ namespace Content.Server.Construction
                         if (valid)
                             break;
                     }
+                    // Forge-Change-end
 
                     if (!valid)
                         return false;

@@ -48,16 +48,22 @@ public sealed partial class BoardingTeleportPlatformComponent : Component
     public EntProtoId TeleportEffect = "BoardingTeleportFlashEffect";
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public SoundSpecifier ActivationSound = new SoundPathSpecifier("/Audio/Effects/Vehicle/ambulancesiren.ogg");
+    public SoundSpecifier ActivationSound = new SoundPathSpecifier("/Audio/_Forge/Effects/Alerts/space_alert_1.ogg");
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public SoundSpecifier CountdownSound = new SoundPathSpecifier("/Audio/_Mono/Effects/Alerts/master_caution.ogg");
+    public SoundSpecifier CountdownSound = new SoundPathSpecifier("/Audio/_Forge/Effects/Alerts/space_alert_1.ogg");
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier CountdownFinalSound = new SoundPathSpecifier("/Audio/_Forge/Effects/Alerts/space_alert_1.ogg");
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public int CountdownFinalThreshold = 3;
+    public int CountdownFinalThreshold = 5;
+
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public float CountdownFinalVolume = BoardingTeleportConstants.CountdownFinalVolume;
+
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public float CountdownFinalMaxDistance = BoardingTeleportConstants.CountdownFinalMaxDistance;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier ArrivalSound = new SoundPathSpecifier("/Audio/Effects/Lightning/lightningbolt.ogg");

@@ -20,3 +20,14 @@
     tags:
     - Multitool
     - DoorElectronicsConfigurator
+  - type: UseDelay
+    delay: 0
+  - type: Tool
+    speedModifier: 1.5
+  - type: Prying
+    enabled: false
+    speedModifier: 1.5
+    pryPowered: true
+    useSound: /Audio/Items/jaws_pry.ogg
+  - type: ToolTileCompatible
+    delay: 0.5

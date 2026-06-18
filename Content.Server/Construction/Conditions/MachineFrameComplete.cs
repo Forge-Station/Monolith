@@ -51,6 +51,14 @@ namespace Content.Server.Construction.Conditions
 
             args.PushMarkup(Loc.GetString("construction-condition-machine-frame-requirement-label"));
 
+            if (machineFrame.Requirements.Count > 0)
+            {
+                var machinePartSys = entityManager.System<MachinePartSystem>();
+                args.PushMarkup(Loc.GetString("construction-condition-machine-frame-min-stock-part-tier",
+                    ("tierName", machinePartSys.GetStockPartTierName(machineFrame.MinimumStockPartRating)),
+                    ("rating", machineFrame.MinimumStockPartRating)));
+            }
+
             foreach (var (material, required) in machineFrame.MaterialRequirements)
             {
                 var amount = required - machineFrame.MaterialProgress[material];

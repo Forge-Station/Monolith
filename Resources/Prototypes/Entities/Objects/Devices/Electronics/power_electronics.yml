@@ -3,7 +3,7 @@
   id: APCElectronics
   parent: BaseElectronics
   name: APC electronics
-  description: Circuit used in APC construction. Can be put into a machine frame to alternatively make a large APC.
+  description: Circuit used in APC construction. In a machine frame, builds a 300 kW LAPC shield bus substation.
   components:
     - type: ApcElectronics
     - type: Sprite
@@ -16,15 +16,96 @@
         Silicon: 20
     - type: StaticPrice
       price: 34
-    - type: MachineBoard # Mono - LAPC
+    - type: MachineBoard # Mono - LAPC Large 300 kW
       prototype: LargeAPC
+      requirements:
+        Capacitor: 8
+      stackRequirements:
+        Cable: 8
+        CableHV: 8
+        PlasmaGlass: 20
+        MetalRod: 10
+
+- type: entity
+  id: LargeAPCLightElectronics
+  parent: BaseElectronics
+  name: light LAPC electronics
+  description: Circuit for a 100 kW compact LAPC substation.
+  components:
+    - type: ApcElectronics
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: charger_APC
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 40
+      chemicalComposition:
+        Silicon: 16
+    - type: StaticPrice
+      price: 28
+    - type: MachineBoard
+      prototype: LargeAPCLight
+      requirements:
+        Capacitor: 4
+      stackRequirements:
+        Cable: 4
+        CableHV: 4
+        PlasmaGlass: 10
+        MetalRod: 6
+
+- type: entity
+  id: LargeAPCMediumElectronics
+  parent: BaseElectronics
+  name: medium LAPC electronics
+  description: Circuit for a 180 kW LAPC substation.
+  components:
+    - type: ApcElectronics
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: charger_APC
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 45
+      chemicalComposition:
+        Silicon: 18
+    - type: StaticPrice
+      price: 32
+    - type: MachineBoard
+      prototype: LargeAPCMedium
       requirements:
         Capacitor: 6
       stackRequirements:
-        Cable: 5
-        CableHV: 5
+        Cable: 6
+        CableHV: 6
         PlasmaGlass: 15
         MetalRod: 8
+
+- type: entity
+  id: LargeAPCCapitalElectronics
+  parent: BaseElectronics
+  name: capital LAPC electronics
+  description: Circuit for a 500 kW capital LAPC substation.
+  components:
+    - type: ApcElectronics
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: charger_APC
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 60
+      chemicalComposition:
+        Silicon: 24
+    - type: StaticPrice
+      price: 48
+    - type: MachineBoard
+      prototype: LargeAPCCapital
+      requirements:
+        Capacitor: 10
+      stackRequirements:
+        Cable: 10
+        CableHV: 10
+        PlasmaGlass: 25
+        MetalRod: 12
 
 # Wallmount Substation
 - type: entity

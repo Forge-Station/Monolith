@@ -1882,8 +1882,6 @@ entities:
       pos: 13.5,-16.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 1919
       - 1977
@@ -7762,8 +7760,6 @@ entities:
       pos: 11.5,-19.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 1973
       - 1920
@@ -7775,8 +7771,6 @@ entities:
       pos: 11.5,-14.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 1919
       - 1977

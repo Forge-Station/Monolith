@@ -17845,8 +17845,6 @@ entities:
       pos: 1.5,28.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
     - type: SurveillanceCamera
       setupAvailableNetworks:
       - SurveillanceCameraEngineering

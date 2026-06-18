@@ -50,6 +50,11 @@ public sealed partial class AudioTab : Control
         // Corvax-TTS-End
 
         Control.AddOptionPercentSlider(
+            ForgeVars.BoardingTeleportVolume,
+            SliderVolumeBoardingTeleport,
+            scale: ContentAudioSystem.BoardingTeleportMultiplier);
+
+        Control.AddOptionPercentSlider(
             CVars.MidiVolume,
             SliderVolumeMidi,
             scale: ContentAudioSystem.MidiVolumeMultiplier);

@@ -1,34 +1,34 @@
 # Т3-T2 voucher ship idk
 
 - type: vessel
-  id: Pluto
+  id: Fortress
   parent: BaseVessel
-  name: CWH Нептун
-  description: В космосе нет морей, но морской царь все еще опасен
+  name: CWH Крепость
+  description: Огромный капитальный шаттл Империи.
   purchasable: false
-  limit: 1
+  limit: 2
   price: 318000
   category: Large
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Pluto.yml
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Fortress.yml
   guidebookPage: Null
   class:
   - Fighter
   engine:
-  - Bananium
+  - AME
 
 - type: gameMap
-  id: Pluto
-  mapName: 'CWH Нептун'
-  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Pluto.yml
+  id: Fortress
+  mapName: 'CWH Крепость'
+  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Fortress.yml
   minPlayers: 0
   stations:
-    Pluto:
+    Fortress:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'CWH Нептун SEW{1}'
+          mapNameTemplate: 'CWH Крепость SEW{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

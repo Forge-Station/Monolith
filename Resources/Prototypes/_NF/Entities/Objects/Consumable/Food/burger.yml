@@ -157,6 +157,8 @@
           Quantity: 6
         - ReagentId: Flavorol
           Quantity: 3
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: MothFood
 
 - type: entity

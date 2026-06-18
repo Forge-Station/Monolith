@@ -29,6 +29,12 @@ public sealed class ForgeVars
     public static readonly CVarDef<float> BarksVolume =
         CVarDef.Create("voice.barks_volume", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    /// <summary>
+    /// Client volume slider for boarding teleport countdown and arrival sounds.
+    /// </summary>
+    public static readonly CVarDef<float> BoardingTeleportVolume =
+        CVarDef.Create("forge.boarding_teleport_volume", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<string> DiscordApiUrl =
         CVarDef.Create("jerry.discord_api_url", "", CVar.CONFIDENTIAL | CVar.SERVERONLY);
 

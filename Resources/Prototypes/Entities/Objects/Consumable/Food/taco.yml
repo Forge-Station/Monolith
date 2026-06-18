@@ -59,6 +59,8 @@
           Quantity: 6
         - ReagentId: Vitamin
           Quantity: 4
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Item
     sprite: Objects/Consumable/Food/taco.rsi
     storedRotation: -90
@@ -127,6 +129,8 @@
           Quantity: 6
         - ReagentId: Vitamin
           Quantity: 4
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
 
 - type: entity
   name: beef taco supreme
@@ -146,6 +150,8 @@
           Quantity: 14
         - ReagentId: Vitamin
           Quantity: 6
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
 
 - type: entity
   name: chicken taco supreme
@@ -165,6 +171,8 @@
           Quantity: 14
         - ReagentId: Vitamin
           Quantity: 6
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
 
 - type: entity
   name: soft taco

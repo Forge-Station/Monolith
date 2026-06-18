@@ -1,5 +1,3 @@
-#Author: Hverabrao on Github and Discord.
-
 - type: vessel
   id: Buran
   parent: BaseVesselAntag
@@ -10,18 +8,18 @@
   category: Large
   group: Ussp
   access: Mercenary
-  shuttlePath: /Maps/_Mono/Shuttles/USSP/buran.yml
+  shuttlePath: /Maps/_Forge/Shuttles/USSP/BuranAME.yml
   guidebookPage: ShipyardNFROperation
   class:
   - Fighter
   - Destroyer
   engine:
-  - NFR
+  - AME
 
 - type: gameMap
   id: Buran
   mapName: 'Buran'
-  mapPath: /Maps/_Mono/Shuttles/USSP/buran.yml
+  mapPath: /Maps/_Forge/Shuttles/USSP/BuranAME.yml
   minPlayers: 0
   stations:
     Buran:
@@ -39,4 +37,3 @@
           availableJobs:
             Mercenary: [ 0, 0 ]
             Pilot: [ 0, 0 ]
-

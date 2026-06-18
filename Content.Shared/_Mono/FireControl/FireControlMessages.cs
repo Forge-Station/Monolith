@@ -43,13 +43,13 @@ public sealed class FireControlConsoleSavePresetMessage : BoundUserInterfaceMess
 {
     public readonly int PresetIndex;
     public readonly string Name;
-    public readonly List<string> WeaponNames;
+    public readonly List<GunneryWeaponPresetWeaponState> Weapons;
 
-    public FireControlConsoleSavePresetMessage(int presetIndex, string name, List<string> weaponNames)
+    public FireControlConsoleSavePresetMessage(int presetIndex, string name, List<GunneryWeaponPresetWeaponState> weapons)
     {
         PresetIndex = presetIndex;
         Name = name;
-        WeaponNames = weaponNames;
+        Weapons = weapons;
     }
 }
 

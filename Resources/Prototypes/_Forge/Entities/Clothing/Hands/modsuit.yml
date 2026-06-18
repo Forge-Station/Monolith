@@ -147,8 +147,18 @@
     damageProtection:
       flatReductions: {}
   - type: ModsuitGauntletTools
+    usePrototypeMenuIcons: true
+    enabledSlots:
+    - Urk
+    - Omnitool
+    - Welder
+    - NaniteApplicator
+    - Auxiliary
+    - Piping
     urkProto: ShipRepairDeviceModsuitGauntlet
     omnitoolProto: OmnitoolModsuitGauntlet
+    auxiliaryProto: RCDModsuitGauntlet
+    pipingProto: RPDModsuitGauntlet
   - type: ActionGrant
     actions:
     - ActionModsuitGauntletToolsMenu

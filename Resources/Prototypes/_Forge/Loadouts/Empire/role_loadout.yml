@@ -24,6 +24,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Soldier
@@ -52,6 +53,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Praetorian
@@ -80,6 +82,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Cardinal
@@ -108,6 +111,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Arbiter
@@ -136,6 +140,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Consul
@@ -165,6 +170,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Inquisitor
@@ -193,6 +199,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Praefect
@@ -221,4 +228,5 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true

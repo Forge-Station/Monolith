@@ -84,7 +84,7 @@
     range: 500
     maxTargetVelocity: 45
     maxTargetAngularVelocity: 45
-    jumpCooldown: 60
+    jumpCooldown: 25
     engineTier: 1
   - type: ApcPowerReceiver
     powerLoad: 20000
@@ -111,7 +111,7 @@
     experimentalPhaseShift: true
     experimentalRiskBoost: true
     velocityToleranceMultiplier: 1.25
-    jumpCooldown: 30
+    jumpCooldown: 15
     engineTier: 4
   - type: ApcPowerReceiver
     powerLoad: 40000
@@ -127,7 +127,7 @@
   - type: BoardingTeleportEngine
     range: 400
     engineTier: 3
-    jumpCooldown: 18
+    jumpCooldown: 12
 
 - type: entity
   parent: BoardingTeleportEngine
@@ -139,7 +139,7 @@
     range: 750
     maxTargetVelocity: 55
     maxTargetAngularVelocity: 55
-    jumpCooldown: 50
+    jumpCooldown: 20
     engineTier: 2
   - type: ApcPowerReceiver
     powerLoad: 25000
@@ -252,19 +252,17 @@
           Idle: { visible: true, state: idle, shader: unshaded }
           Charging: { visible: true, state: charging, shader: unshaded }
   - type: BoardingTeleportPlatform
-    cooldown: 60
-    departureDelay: 30
+    cooldown: 30
+    departureDelay: 15
     returnWindowSeconds: 240
     maxReturnDistance: 550
     warmupEffect: BoardingTeleportWarmupEffect
     teleportEffect: BoardingTeleportFlashEffect
-    activationSound:
-      path: /Audio/Effects/Vehicle/ambulancesiren.ogg
-    countdownSound:
-      path: /Audio/_Mono/Effects/Alerts/master_caution.ogg
     countdownFinalSound:
       path: /Audio/_Forge/Effects/Alerts/space_alert_1.ogg
     countdownFinalThreshold: 5
+    countdownFinalVolume: -12
+    countdownFinalMaxDistance: 12
     arrivalSound:
       path: /Audio/Effects/Lightning/lightningbolt.ogg
   - type: DeviceNetwork
@@ -292,8 +290,8 @@
   description: Faster charge cycle, longer return channel, and extended return range.
   components:
   - type: BoardingTeleportPlatform
-    cooldown: 50
-    departureDelay: 25
+    cooldown: 25
+    departureDelay: 12
     returnWindowSeconds: 210
     maxReturnDistance: 800
   - type: ApcPowerReceiver
@@ -310,8 +308,8 @@
   - type: BoardingTeleportPlatform
     experimentalScatterControl: true
     experimentalRisk: true
-    cooldown: 30
-    departureDelay: 15
+    cooldown: 20
+    departureDelay: 10
     returnWindowSeconds: 180
     maxReturnDistance: 2000
   - type: ApcPowerReceiver

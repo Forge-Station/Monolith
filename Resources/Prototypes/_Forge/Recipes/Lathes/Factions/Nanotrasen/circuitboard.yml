@@ -61,7 +61,7 @@
     Glass: 2000
     Steel: 300
     Gold: 15
-   
+
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
   id: MedicalBiofabMachineBoard 

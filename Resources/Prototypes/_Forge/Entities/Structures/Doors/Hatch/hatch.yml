@@ -58,6 +58,8 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsRemnant ]
+  - type: WiresPanelSecurity
+    securityLevel: superMaxSecurity
   - type: Destructible
     thresholds:
     - trigger:

@@ -15,13 +15,13 @@
     minimumTimeUntilFirstEvent: 1800 # 30 minutes # Mono: from 45 to 30
     minMaxEventTiming:
       min: 1800 # 30 minutes between events #Mono: from 45 to 30
-      max: 3000 # 50 minutes between events #Mono: from 75 to 50
+      max: 2700 # 45 minutes between events #Mono: from 75 to 50 // Forge: from 50 to 45
 
 - type: entityTable
   id: MajorBluespaceEventsTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
-    - id: BluespaceCacheError
+#    - id: BluespaceCacheError Forge-Change 
     - id: ForgeBluespacePeriodicDinoCaves # Forge-Change
 #    - id: BluespaceVaultError
 #    - id: BluespaceVaultSmallError
@@ -30,7 +30,7 @@
     - id: ForgeBluespacePeriodicCult # Forge-Change
     - id: ForgeBluespacePeriodicMercenaryShuttle # Forge-Change
     - id: ForgeBluespacePeriodicSyntheticCore # Forge-Change
-#    - id: BluespacePreFractureFTLInterception # Forge-Change  
+#    - id: BluespacePreFractureFTLInterception # Forge-Change
 
 - type: entity
   id: BluespaceDungeonEventScheduler

@@ -15,7 +15,7 @@
       organs:
         heart: OrganAnimalHeart
         lungs: OrganHumanLungs
-        stomach: OrganAnimalStomach
+        stomach: OrganRodentiaStomach # Forge-change
         liver: OrganAnimalLiver
         kidneys: OrganHumanKidneys
       connections:

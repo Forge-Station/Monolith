@@ -24,6 +24,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 15
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: SliceableFood
     count: 8
   - type: Item
@@ -58,7 +60,9 @@
         - ReagentId: Vitamin
           Quantity: 0.8
         - ReagentId: Flavorol
-          Quantity: 3
+          Quantity: 2         # Forge-change 3>2
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.125     # Forge-change
   - type: Item
     size: Tiny
   - type: Tag
@@ -203,13 +207,15 @@
         maxVol: 40
         reagents:
         - ReagentId: Nutriment
-          Quantity: 25
+          Quantity: 19        # Forge-change 25>19
         - ReagentId: JuiceCarrot
           Quantity: 5
         - ReagentId: Vitamin
           Quantity: 5
         - ReagentId: Flavorol
-          Quantity: 15
+          Quantity: 10        # Forge-change 15>10
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
 
 - type: entity
   name: slice of vegetable pizza
@@ -242,6 +248,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 3
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.125     # Forge-change
 
 # Tastes like crust, tomato, cheese, carrot.
 
@@ -272,6 +280,8 @@
           Quantity: 9
         - ReagentId: Flavorol
           Quantity: 15
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -296,13 +306,15 @@
         maxVol: 10
         reagents:
         - ReagentId: Nutriment
-          Quantity: 4.5
+          Quantity: 4         # Forge-change 4.5>4
         - ReagentId: Vitamin
           Quantity: 1
         - ReagentId: Omnizine
           Quantity: 1.5
         - ReagentId: Flavorol
           Quantity: 3
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.125     # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -338,6 +350,8 @@
           Quantity: 30
         - ReagentId: Flavorol # Frontier
           Quantity: 15 # Frontier
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
 
 - type: entity
   name: slice of dank pizza
@@ -365,6 +379,8 @@
           Quantity: 5
         - ReagentId: Flavorol # Frontier
           Quantity: 3 # Frontier
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.125     # Forge-change
 # Tastes like crust, tomato, cheese, meat, satisfaction.
 
 - type: entity
@@ -482,7 +498,7 @@
         maxVol: 85
         reagents:
         - ReagentId: Nutriment
-          Quantity: 30
+          Quantity: 24        # Forge-change 30>24
         - ReagentId: Vitamin
           Quantity: 5
         - ReagentId: Iron
@@ -491,6 +507,8 @@
           Quantity: 30
         - ReagentId: Flavorol
           Quantity: 15
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -518,7 +536,7 @@
         maxVol: 15
         reagents:
         - ReagentId: Nutriment
-          Quantity: 5
+          Quantity: 3         # Forge-change 5>3
         - ReagentId: Vitamin
           Quantity: 0.8
         - ReagentId: Iron
@@ -526,7 +544,9 @@
         - ReagentId: Omnizine
           Quantity: 5
         - ReagentId: Flavorol
-          Quantity: 4
+          Quantity: 3         # Forge-change 4>3
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.25      # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -596,11 +616,13 @@
         maxVol: 40
         reagents:
         - ReagentId: Nutriment
-          Quantity: 20
+          Quantity: 19        # Forge-change 20>19       
         - ReagentId: Radium
           Quantity: 4
         - ReagentId: Uranium
           Quantity: 16
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   # - type: RadiationSource # Frontier
   #   intensity: 0.1 # Frontier
   #   slope: 3 # Frontier
@@ -634,11 +656,13 @@
         maxVol: 5
         reagents:
         - ReagentId: Nutriment
-          Quantity: 2.5
+          Quantity: 2.375     # Forge-change 2.5>2.375
         - ReagentId: Radium
           Quantity: 0.5
         - ReagentId: Uranium
           Quantity: 2
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.125     # Forge-change
   # - type: RadiationSource # Frontier
   #   intensity: 0.1 # Frontier
   #   slope: 3 # Frontier

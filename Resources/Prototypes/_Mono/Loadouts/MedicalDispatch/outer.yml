@@ -55,9 +55,9 @@
   equipment:
     outerClothing: ClothingOuterHardsuitTrauma
 
-- type: loadout
-  id: MdMedicOuterClothingOuterHardsuitTraumaLeader
-  price: 100000
-  equipment:
-    outerClothing: ClothingOuterHardsuitTraumaLeader
+#- type: loadout
+#  id: MdMedicOuterClothingOuterHardsuitTraumaLeader
+#  price: 100000
+#  equipment:
+#    outerClothing: ClothingOuterHardsuitTraumaLeader
 # Forge end

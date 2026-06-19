@@ -66,19 +66,19 @@
 
 - type: latheRecipe
   parent: BaseVoucherRecipe
-  id: RecipeShipVoucherPluto
-  result: ShipVoucherPluto
+  id: RecipeShipVoucherFortress
+  result: ShipVoucherFortress
   completetime: 10
   materials:
-    Steel: 50000
-    Plasteel: 47000
-    Plastic: 32000
-    Glass: 15000
-    Plasma: 1100
-    UraniumFissile: 700
-    UraniumDepleted: 3000
-    Silver: 13000
-    Gold: 12500
+    Steel: 80000
+    Plasteel: 77000
+    Plastic: 52000
+    Glass: 55000
+    Plasma: 3100
+    UraniumFissile: 1100
+    UraniumDepleted: 5000
+    Silver: 33000
+    Gold: 22500
 
 - type: latheRecipe
   parent: BaseVoucherRecipe
@@ -117,5 +117,5 @@
   recipes:
   - RecipeShipVoucherTerit
   - RecipeShipVoucherMirko
-  - RecipeShipVoucherPluto
+  - RecipeShipVoucherFortress
   - RecipeShipVoucherGermes

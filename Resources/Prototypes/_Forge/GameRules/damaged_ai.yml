@@ -1,3 +1,54 @@
+#region Tier 1
+- type: entity
+  id: ForgeAISTCShuttleSpawnerScheduler
+  parent: BaseGameRule
+  components:
+    - type: BasicStationEventScheduler
+      scheduledGameRules: !type:NestedSelector
+        tableId: ForgeDamagedAIShipsTable
+      minimumTimeUntilFirstEvent: 9000 # 2.5h before first spawn
+      minMaxEventTiming:
+        min: 1800 # 30 minutes between events
+        max: 3600 # 60 minutes between events
+
+- type: entity
+  id: ForgeAISTCShuttleSpawnerSchedulerSlow
+  parent: BaseGameRule
+  components:
+  - type: BasicStationEventScheduler
+    scheduledGameRules: !type:NestedSelector
+      tableId: ForgeDamagedAIShipsTable
+    minimumTimeUntilFirstEvent: 9000 # 2.5h
+    minMaxEventTiming:
+      min: 3600 # 60 minutes between events
+      max: 5400 # 90 minutes between events
+
+#region Tier 2
+- type: entity
+  id: ForgeAISTCShuttleSpawnerSchedulerTier2
+  parent: BaseGameRule
+  components:
+  - type: BasicStationEventScheduler
+    scheduledGameRules: !type:NestedSelector
+      tableId: ForgeDamagedAIShipsTableT2 
+    minimumTimeUntilFirstEvent: 10800 # 3h
+    minMaxEventTiming:
+      min: 3600 # 60 minutes between events
+      max: 5400 # 90 minutes between events
+
+- type: entity
+  id: ForgeAISTCShuttleSpawnerSchedulerTier2Slow
+  parent: BaseGameRule
+  components:
+  - type: BasicStationEventScheduler
+    scheduledGameRules: !type:NestedSelector
+      tableId: ForgeDamagedAIShipsTableT2
+    minimumTimeUntilFirstEvent: 10800 # 3h
+    minMaxEventTiming:
+        min: 5400 # 90 minutes between events
+        max: 7200 # 120 minutes between events
+
+#region Tier 3
 - type: entity
   id: ForgeAISTCShuttleSpawnerSchedulerTier3
   parent: BaseGameRule
@@ -8,7 +59,7 @@
     minimumTimeUntilFirstEvent: 14400 # 4h before first spawn
     minMaxEventTiming:
       min: 3600 # 60 minutes between events
-      max: 3600 # 60 minutes between events
+      max: 5400 # 90 minutes between events
 
 - type: entity
   id: ForgeAISTCShuttleSpawnerSchedulerTier3Slow
@@ -19,9 +70,10 @@
       tableId: ForgeDamagedAIShipsTableT3
     minimumTimeUntilFirstEvent: 14400 # 4h before first spawn
     minMaxEventTiming: # 2 shuttles
-      min: 5400 # 90 minutes between events
-      max: 5400 # 90 minutes between events
+      min: 8100 # 135 minutes between events
+      max: 10800 # 180 minutes between events
 
+#region Table
 - type: entityTable
   id: ForgeDamagedAIShipsTable
   table: !type:AllSelector
@@ -43,7 +95,7 @@
     - id: ForgeUnknownShuttleVanguard
     - id: ForgeUnknownShuttleEcho
 
-# Tier-1s
+#region Tier 1
 - type: entity
   parent: BaseRandomShuttleRule
   id: ForgeUnknownShuttleNebula
@@ -51,9 +103,9 @@
   - type: StationEvent
     startAnnouncement: station-event-ai-shuttle-detected
     startAudio:
-      path: /Audio/Misc/notice1.ogg
-    weight: 2
-    maxOccurrences: 4
+      path: /Audio/Misc/notice2.ogg
+    weight: 3
+    maxOccurrences: 6
   - type: GameRule
     minPlayers: 32
   - type: LoadMapRule
@@ -66,15 +118,15 @@
   - type: StationEvent
     startAnnouncement: station-event-ai-shuttle-detected
     startAudio:
-      path: /Audio/Misc/notice1.ogg
-    weight: 3
+      path: /Audio/Misc/notice2.ogg
+    weight: 2
     maxOccurrences: 6
   - type: GameRule
     minPlayers: 32
   - type: LoadMapRule
     gridPath: /Maps/_Forge/Events/Periodic/Remnants/flail.yml
 
-# Tier-2
+#region Tier 2
 - type: entity
   parent: BaseRandomShuttleRule
   id: ForgeUnknownShuttleZenithE
@@ -83,7 +135,7 @@
     startAnnouncement: station-event-ai-shuttle-detected
     startAudio:
       path: /Audio/Misc/notice1.ogg
-    weight: 1.5
+    weight: 2
     maxOccurrences: 3
   - type: GameRule
     minPlayers: 32
@@ -98,14 +150,14 @@
     startAnnouncement: station-event-ai-razor-detected
     startAudio:
       path: /Audio/Misc/delta_alt.ogg
-    weight: 2
+    weight: 1.5
     maxOccurrences: 3
   - type: GameRule
     minPlayers: 15
   - type: LoadMapRule
     gridPath: /Maps/_Forge/Events/Periodic/Remnants/razor.yml
 
-# Tier-3
+#region Tier 3
 - type: entity
   parent: BaseRandomShuttleRule
   id: ForgeUnknownShuttleVanguard
@@ -115,7 +167,7 @@
     startAudio:
       path: /Audio/Misc/redalert.ogg
     weight: 2
-    maxOccurrences: 2
+    maxOccurrences: 1
   - type: GameRule
     minPlayers: 50
   - type: LoadMapRule
@@ -129,7 +181,7 @@
     startAnnouncement: station-event-ai-shuttle-detected
     startAudio:
       path: /Audio/Misc/redalert.ogg
-    weight: 2
+    weight: 1.5
     maxOccurrences: 2
   - type: GameRule
     minPlayers: 50

@@ -707,12 +707,7 @@
     maximumEntitiesSpawned: 1
   - type: GoblinMade
   - type: Vehicle
-    renderOver: None
     hasKey: true
-    northOffset: 0, -0.15
-    southOffset: 0, -0.15
-    eastOffset: 0, -0.15
-    westOffset: 0, -0.15
   - type: Sprite
     sprite: _NF/Objects/Vehicles/dumpster.rsi
     layers:

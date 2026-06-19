@@ -92,3 +92,5 @@ ent-WeaponPistolCHIMP = { ent-ForgeWeaponPistolCHIMP }
     .desc = { ent-ForgeWeaponPistolCHIMP.desc }
 ent-WeaponPistolCHIMPUpgraded = { ent-ForgeWeaponPistolCHIMPUpgraded }
     .desc = { ent-ForgeWeaponPistolCHIMPUpgraded.desc }
+ent-WeaponEnergyShotgun = { ent-ForgeWeaponEnergyShotgun }
+    .desc = { ent-ForgeWeaponEnergyShotgun.desc }

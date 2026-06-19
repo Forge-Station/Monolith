@@ -4,7 +4,7 @@
   id: Welder
   parent: BaseVesselAntag
   name: TSF-ENG Welder
-  description: A multipurpose, utilitarian but cramped vessel envisioned as an all-in-one multitool for ship repair and resource extraction. Capable of detecting cloaked vessels.
+  description: Многоцелевое утилитарное, но тесное судно, задуманное как универсальный инструмент для ремонта кораблей и добычи ресурсов. Способно обнаруживать замаскированные корабли. # Forge-Change
   price: 78200
   category: Medium
   group: Security
@@ -29,7 +29,7 @@
       stationProto: StandardFrontierSecurityVessel
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Welder TSF{1}'
+        mapNameTemplate: 'Сварщик TSF{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

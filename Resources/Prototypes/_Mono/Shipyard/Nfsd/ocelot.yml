@@ -4,7 +4,7 @@
   id: Ocelot
   parent: BaseVesselAntag
   name: TSF-SKR Ocelot
-  description: A highly manouverable corvette designed to work in tandem with the jaguar, with the ability to reveal cloaked ships. Armed with 2x cerberus plasma scattercannons, 2x Plasma autopulsers and 2x 20mm PD cannons
+  description: Высокоманёвренный корвет, созданный для работы в связке с «Ягуаром», способный обнаруживать замаскированные корабли. Вооружён двумя плазменными картечницами TPC «Цербер», двумя плазменными автопульсерами и двумя 20-мм орудиями точечной обороны. # Forge-Change
   price: 68500
   category: Small
   group: Security
@@ -29,7 +29,7 @@
       stationProto: StandardFrontierSecurityVessel
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Ocelot TSF{1}'
+        mapNameTemplate: 'Оцелот TSF{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

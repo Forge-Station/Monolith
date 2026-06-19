@@ -37,4 +37,16 @@ public sealed partial class BoardingTeleportConsoleComponent : Component
 
     [ViewVariables, AutoNetworkedField]
     public TimeSpan? LockEstablishedAt;
+
+    /// <summary>
+    /// Accumulated outbound-charge time excluded from lock aging.
+    /// </summary>
+    [ViewVariables]
+    public float LockFrozenSeconds;
+
+    [ViewVariables]
+    public TimeSpan? LockPauseStartedAt;
+
+    [ViewVariables]
+    public int LockPauseChargeCount;
 }

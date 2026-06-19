@@ -28,6 +28,7 @@
   - type: Item
     size: Huge
   - type: Gun
+    projectileSpeed: 50
     minAngle: 18
     maxAngle: 26
     fireRate: 6
@@ -60,7 +61,7 @@
 
 - type: entity
   name: kunisa-pattern plasma pistol
-  parent: BaseWeaponBattery
+  parent: BaseWeaponBatterySmall
   id: WeaponRifleADMPistolForge
   description: An advanced handheld plasma pistol. The design bears similarities to pre-fracture plasma weapons.
   suffix: Forge
@@ -76,8 +77,6 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
       state: all
-  - type: Item
-    size: Normal
   - type: Gun
     minAngle: 3
     maxAngle: 15

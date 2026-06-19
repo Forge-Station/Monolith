@@ -2,6 +2,7 @@ construction-condition-machine-container-empty = Remove the parts from the frame
 
 # MachineFrameComplete
 construction-condition-machine-frame-requirement-label = Requires:
+construction-condition-machine-frame-min-stock-part-tier = Minimum stock part tier: [color=cyan]{$tierName}[/color] (rating {$rating})
 construction-condition-machine-frame-insert-circuit-board-message = Insert [color=cyan]any machine circuit board[/color].
 construction-condition-machine-frame-required-element-entry = [color=yellow]{$amount}x[/color] [color=green]{$elementName}[/color]
 construction-step-condition-machine-frame-board = You will need to insert a machine board.

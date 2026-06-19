@@ -74,6 +74,17 @@
       - funny
   - type: Sprite
     state: cheesiehonkers
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Lactozit
+          Quantity: 0.5
+  # Forge-change-end   
   - type: Item
   - type: Food
     trash:

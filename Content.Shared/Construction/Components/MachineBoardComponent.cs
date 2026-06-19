@@ -51,6 +51,19 @@ public sealed partial class MachineBoardComponent : Component
     /// Mono - sets the framesize this board can go into
     [DataField]
     public string? FrameSize = null;
+    /// Forge-Change-start: stock part rating
+    /// <summary>
+    /// Minimum <see cref="MachinePartComponent.Rating"/> for stock parts (capacitors, manipulators, matter bins).
+    /// </summary>
+    [DataField]
+    public int MinimumStockPartRating = 1;
+
+    /// <summary>
+    /// When set, stock parts above this rating are rejected (used to lock shields to a specific part tier).
+    /// </summary>
+    [DataField]
+    public int? MaximumStockPartRating;
+    /// Forge-Change-end: stock part rating
 }
 
 [DataDefinition, Serializable]

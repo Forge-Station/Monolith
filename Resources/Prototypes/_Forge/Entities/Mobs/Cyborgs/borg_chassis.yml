@@ -95,9 +95,50 @@
     - BorgModuleSyndicate
     - BorgModuleSyndicateAssault
   defaultModules:
-    - BorgModuleForerunnerWeapon
+    - BorgModuleForerunnerWeaponHeavy
     - BorgModuleJetpackADM
-    - BorgModuleConstruction
+    - BorgModuleTool
+  addComponents:
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      550: Critical
+      600: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      475: 0.8
+      550: 0.6
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 475
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+         damage: 650
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:EmptyContainersBehaviour
+        containers:
+        - borg_brain
+        - borg_module
+        - cell_slot
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   inventoryTemplateId: borgShort
   spriteBodyState: synd_sec
   spriteHasMindState: synd_sec_e

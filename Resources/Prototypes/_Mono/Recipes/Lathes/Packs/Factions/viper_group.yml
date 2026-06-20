@@ -4,7 +4,9 @@
   - ClothingNeckViperGroupMantle
   - ClothingUniformJumpsuitViperGroupUniform
   - ClothingUniformJumpsuitViperGroupTurtleneck
+  - ClothingUniformJumpsuitViperGroupTankTop # Forge-change
   - ClothingOuterHardsuitViperGroupInitiate
   - ClothingOuterHardsuitViperGroupStandard
   - ClothingOuterHardsuitViperGroupMedic
   - ClothingOuterHardsuitViperGroupJuggernaut
+  - ClothingShoesBootsMagViperGroup # Forge-change

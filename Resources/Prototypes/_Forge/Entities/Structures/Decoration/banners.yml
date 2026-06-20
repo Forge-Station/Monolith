@@ -71,3 +71,13 @@
   - type: Sprite
     sprite: Forge/Structures/Decoration/banner.rsi
     state: banner_ivi
+
+- type: entity
+  id: BannerViperGroup
+  parent: BannerBase
+  name: Banner Viper Group
+  description: Viper Group banner.
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Decoration/banner.rsi
+    state: banner_viper

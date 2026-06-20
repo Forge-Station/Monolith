@@ -70,6 +70,19 @@
   - type: Clothing
     sprite: Forge/Clothing/Mask/tti_medical.rsi
 
+- type: entity
+  parent: ClothingMaskGasSecurity
+  id: ClothingMaskGasViperGroup
+  name: viper group gas mask
+  description: A standard issue Viper Group gas mask.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: Forge/Clothing/Mask/viper_group.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Mask/viper_group.rsi
+
 #region Other
 - type: entity
   parent: [ClothingMaskGas, BaseC3Contraband, ContrabandClothing]

@@ -6,3 +6,5 @@ ent-ClothingUniformJumpsuitNexusTurtleneck = водолазка нексуса
     .desc = Это должно быть самое удобное что вы когда либо носили.
 ent-ClothingUniformJumpsuitHME = комбинезон HME
     .desc = Удобный комбинезон в фирменных цветах компании HME. Обычно их можно увидеть на полевых медиках компании.
+ent-ClothingUniformJumpsuitViperGroupTankTop = безрукавка Viper Group
+    .desc = Безрукавка в цветах Viper Group. Это то, что нужно для тяжелого физического труда.

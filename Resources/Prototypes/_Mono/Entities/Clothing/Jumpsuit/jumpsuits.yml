@@ -266,9 +266,9 @@
     price: 0
     vendPrice: 1150
   - type: Sprite
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/viper_group_uniform.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_uniform.rsi # Forge-change
   - type: Clothing
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/viper_group_uniform.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_uniform.rsi # Forge-change
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals
@@ -283,9 +283,9 @@
     price: 0
     vendPrice: 1150
   - type: Sprite
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/viper_group_turtleneck.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_turtleneck.rsi # Forge-change
   - type: Clothing
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/viper_group_turtleneck.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_turtleneck.rsi # Forge-change
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals

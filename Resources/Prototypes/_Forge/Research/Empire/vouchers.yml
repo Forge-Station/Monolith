@@ -12,14 +12,14 @@
   position: 12, 10
 
 - type: technology
-  id: EmpireVouchersPlutot2
-  name: research-technology-empire-vouchers-t2-pluto
-  entityIcon: ShipVoucherPluto
+  id: EmpireVouchersFortresst3
+  name: research-technology-empire-vouchers-t3-fortress
+  entityIcon: ShipVoucherFortress
   discipline: Empire
-  tier: 2
+  tier: 3
   cost: 125000
   recipeUnlocks:
-  - RecipeShipVoucherPluto
+  - RecipeShipVoucherFortress
   technologyPrerequisites:
   - UniversalMaterialResearchT3
   position: 15, 12

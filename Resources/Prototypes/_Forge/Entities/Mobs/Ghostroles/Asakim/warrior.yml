@@ -32,13 +32,16 @@
       settings: default
     requirements:
     - !type:OverallPlaytimeRequirement
-      time: 720000 # 200 hours
+      time: 540000 # 150 hours
     - !type:DepartmentTimeRequirement
       department: Renegates
-      time: 180000 # 50 hours
+      time: 90000 # 25 hours
     - !type:DepartmentTimeRequirement
       department: TSF
-      time: 180000 # 50 hours
+      time: 90000 # 25 hours
+    - !type:DepartmentTimeRequirement
+      department: Empire
+      time: 90000 # 25 hours
     - !type:DepartmentTimeRequirement
       department: Civilian
       time: 180000 # 50 hours
@@ -58,7 +61,7 @@
   - type: SlowOnDamage
     speedModifierThresholds:
       100: 0.9
-      125: 0.5
+      135: 0.6
   - type: Stamina
     critThreshold: 250
   - type: SurgerySpeedModifier
@@ -109,5 +112,6 @@
     - JawsOfLife
     - WelderExperimental
     - ShipRepairDeviceRedacted
-    - InfectionScannerAsakim
     - WeaponRifleAsakimPistolForge
+    - InfectionScannerAsakim
+    - PillCanisterMesotaxinide

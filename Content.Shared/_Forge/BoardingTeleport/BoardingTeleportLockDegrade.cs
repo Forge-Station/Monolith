@@ -5,12 +5,21 @@ namespace Content.Shared._Forge.BoardingTeleport;
 
 public static class BoardingTeleportLockDegrade
 {
-    public static float GetLockAgeSeconds(TimeSpan? lockEstablishedAt, IGameTiming timing)
+    public static float GetLockAgeSeconds(
+        TimeSpan? lockEstablishedAt,
+        IGameTiming timing,
+        float lockFrozenSeconds = 0f,
+        TimeSpan? lockPauseStartedAt = null)
     {
         if (lockEstablishedAt is not { } established)
             return 0f;
 
-        return MathF.Max(0f, (float) (timing.CurTime - established).TotalSeconds);
+        var age = (float) (timing.CurTime - established).TotalSeconds - lockFrozenSeconds;
+
+        if (lockPauseStartedAt is { } pauseStart)
+            age -= (float) (timing.CurTime - pauseStart).TotalSeconds;
+
+        return MathF.Max(0f, age);
     }
 
     public static int GetDegradeSteps(float lockAgeSeconds)

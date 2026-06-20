@@ -188,6 +188,8 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 10
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Sprite
     state: pizza
 
@@ -211,6 +213,8 @@
           Quantity: 15
         - ReagentId: Omnizine
           Quantity: 2
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
 
 - type: entity
   name: honk-pocket

@@ -1,0 +1,79 @@
+- type: entity
+  name: NEX-SR-91 Dlan (15.4x114mm)
+  parent: [ForgeBaseWeaponFrameRifleSniper, BaseGunWieldable]
+  id: WeaponSniperRifleNexusDlan
+  suffix: Нексус
+  description: Heavy 15.4x114mm anti-materiel rifle. Takes up a lot of space in storage.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Snipers/nexus_bal_snipe.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Snipers/nexus_bal_sniper_inhand_x96.rsi
+  - type: Item
+    size: Huge
+    sprite: Forge/Objects/Weapons/Guns/Snipers/nexus_bal_sniper_inhand_x96.rsi
+    shape:
+    - 0,0,7,2
+  - type: HeldSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.225
+    sprintModifier: 0.225
+  - type: GunRequiresWield
+  - type: Gun
+    examineCaliber: gun-examine-caliber-60
+    fireRate: 0.5
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_Harmony/Weapons/Guns/Gunshots/hristov_fire_alt.ogg
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 7
+    pvsIncrease: 0.7
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/sniper_mouse.rsi
+      state: all
+  - type: ChamberMagazineAmmoProvider
+    autoCycle: false
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine154x114mmFMJ
+        insertSound: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine154x114mm
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge154x114mmFMJ
+        priority: 1
+        whitelist:
+          tags:
+          - Cartridge154x114mm
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance

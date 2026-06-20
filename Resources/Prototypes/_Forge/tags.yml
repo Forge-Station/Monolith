@@ -234,3 +234,15 @@
 
 - type: Tag
   id: Overlord
+
+- type: Tag
+  id: Cartridge154x114mm
+
+- type: Tag
+  id: Magazine154x114mm
+
+- type: Tag
+  id: Cartridge5x23mm
+
+- type: Tag
+  id: Magazine5x23mm

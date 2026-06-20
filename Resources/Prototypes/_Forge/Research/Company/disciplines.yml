@@ -25,3 +25,17 @@
     2: 0.5
     3: 0.5
   uiName: DI
+
+# Nexus Star Consortium discipline
+- type: techDiscipline
+  id: NSC
+  name: research-discipline-NSC
+  color: "#0f3b62"
+  icon:
+    sprite: Forge/Interface/Misc/company_icons.rsi
+    state: nexus
+  tierPrerequisites:
+    1: 0
+    2: 0.5
+    3: 0.5
+  uiName: NSC

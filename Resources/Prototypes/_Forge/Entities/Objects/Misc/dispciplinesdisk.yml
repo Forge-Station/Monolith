@@ -168,6 +168,28 @@
   - type: StaticPrice
     price: 1000
     vendPrice: 20000
+
+- type: entity
+  id: DisciplinesDiskNSC
+  parent: BaseItem
+  name: technology disk (NSC)
+  suffix: Нексус
+  description: Disk with Nexus Star Consortium technology.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - NSC
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: nsc
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 20000
   
 - type: entity
   id: DisciplinesDiskNanotrasen

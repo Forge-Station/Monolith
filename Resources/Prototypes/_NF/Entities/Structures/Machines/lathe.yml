@@ -224,6 +224,7 @@
     - UniversalOrdinance
     - SecurityEquipment
     - SmartGun #Smart SMG
+    - NSCRecipes # Forge-Change
     # Mono end
   - type: EmagLatheRecipes
     emagStaticPacks:

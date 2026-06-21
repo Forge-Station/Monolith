@@ -1,7 +1,3 @@
-ent-DisciplinesDiskNSC = диск технологий NSC
-    .desc = Диск для сервера РНД с технологиями Nexus Star Consortium.
-    .suffix = Нексус
-
 ent-ClothingOuterHardsuitNexusWorker = NSC-HRD-W1
     .desc = Скафандр рабочих верфей BingCo. Защиты чуть больше чем никакой, однако относительно продвинутые сервоприводы позволяют бегать быстро и почти не замедлять движение рабочих.
 ent-ClothingHeadHelmetHardsuitNexusWorker = NSC-HRD-W1-H

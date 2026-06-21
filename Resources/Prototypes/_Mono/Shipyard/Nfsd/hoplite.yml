@@ -3,7 +3,7 @@
   id: Hoplite
   parent: BaseVesselAntag
   name: TSF-PIN Hoplite
-  description: A patrol craft meant to intercept smugglers and light enemy craft with powerful engines and EMPs. It is equipped with 2 RUBICON, two plasma pulsers and two MARAUDER plasma cannons
+  description: Патрульный корабль, предназначенный для перехвата контрабандистов и лёгких вражеских судов с помощью мощных двигателей и ЭМИ-вооружения. Оснащён двумя установками M220 «Рубикон», двумя плазменными импульсными орудиями и двумя плазменными пушками «Мародёр». # Forge-Change
   price: 78500
   category: Small
   group: Security
@@ -27,7 +27,7 @@
       stationProto: StandardFrontierSecurityVessel
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Hoplite TSF{1}'
+        mapNameTemplate: 'Гоплит TSF{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

@@ -3,7 +3,7 @@
   id: Altair
   parent: BaseVesselAntag
   name: TSF-PIN Altair
-  description: A heavily-armed frigate with 4 cyrexa, laser cannons and its main armament, a CHARON mass driver. Made as a heavy frontline brawler and to serve as a fleet anchor for smaller forces.
+  description: Тяжеловооружённый фрегат с 4 CYREXA, лазерными пушками и своим основным вооружением - масс-драйвером «Чарон». Создан как тяжёлый фронтовой корабль прорыва и для выполнения роли опорного корабля флота для меньших сил. # Forge-Change
   limit: 2
   price: 425000
   purchasable: false # voucher only
@@ -33,7 +33,7 @@
         description: "Is all this really worth it? A sense of regret washes over you, then dissapears."
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Altair TSFN{1}'
+        mapNameTemplate: 'Альтаир TSFN{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

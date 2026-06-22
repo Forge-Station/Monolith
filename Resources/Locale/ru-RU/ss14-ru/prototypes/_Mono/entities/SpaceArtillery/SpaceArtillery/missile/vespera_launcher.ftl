@@ -1,2 +1,4 @@
 ent-WeaponTurretVespera = ракетная установка ADMP-27 «Веспера» 50 мм
     .desc = Скорострельная ракетная установка производства Aetherion Dynamics. Засыпает цели управляемыми боеголовками, перегружая ПВО. Боезапас ограничен, но эффективность очень высокая. Может активироваться дистанционно или подключаться к GCS.
+ent-WeaponTurretVesperaPortable = { ent-WeaponTurretVespera }
+    .desc =  { ent-WeaponTurretVespera.desc }

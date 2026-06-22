@@ -28,6 +28,8 @@ ent-ComputerCommsADS = консоль связи ADS
 ent-ComputerIFFCapture = консоль захвата POI
     .desc = Специализированная консоль для запуска и управления захватом точек интереса.
 
+ent-ComputerIdEmpire = имперская консоль ID карт
+    .desc = { ent-ComputerId.desc }
 ent-ComputerCrewRenegadeMonitoring = консоль мониторинга ренегатов
     .desc = Используется для просмотра статусов всех датчиков имплантов состава ВКР. Не дайте ей попасть в руки врага!
     .suffix = Ренегаты

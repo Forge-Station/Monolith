@@ -8,7 +8,7 @@
     - type: Sprite
       sprite: Forge/Structures/Machines/server.rsi
       layers:
-        - state: server
+        - state: server-crew
         - state: variant-crew-renegade
     - type: DeviceNetwork
       deviceNetId: Wireless
@@ -26,7 +26,7 @@
     - type: Sprite
       sprite: Forge/Structures/Machines/server.rsi
       layers:
-        - state: server
+        - state: server-crew
         - state: variant-crew-tsf
     - type: DeviceNetwork
       deviceNetId: Wireless
@@ -44,7 +44,7 @@
     - type: Sprite
       sprite: Forge/Structures/Machines/server.rsi
       layers:
-        - state: server
+        - state: server-crew
         - state: variant-crew-nt
     - type: DeviceNetwork
       deviceNetId: Wireless
@@ -62,7 +62,7 @@
     - type: Sprite
       sprite: Forge/Structures/Machines/server.rsi
       layers:
-        - state: server
+        - state: server-crew
         - state: variant-crew-empire
     - type: DeviceNetwork
       deviceNetId: Wireless

@@ -29,6 +29,9 @@
             "name": "server"
         },
         {
+            "name": "server-crew"
+        },
+        {
             "name": "variant-ren"
         },
         {

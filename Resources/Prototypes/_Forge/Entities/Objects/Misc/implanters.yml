@@ -13,6 +13,15 @@
   - type: Implanter
     implant: ForgeVoiceModuleImplant
 
+- type: entity
+  id: GuardImplanter
+  name: guard implanter
+  parent: BaseImplantOnlyImplanter
+  suffix: guard
+  components:
+    - type: Implanter
+      implant: ImplantGuard
+
 # Implanters factions tracking
 - type: entity
   id: RenegadeTrackingImplanter
@@ -47,9 +56,9 @@
     implant: TTITrackingImplant
 
 - type: entity
-  id: ImperialTrackingImplanter
-  suffix: imperial tracking
+  id: EmpireTrackingImplanter
+  suffix: empire tracking
   parent: BaseImplantOnlyImplanter
   components:
   - type: Implanter
-    implant: ImperialTrackingImplant
+    implant: EmpireTrackingImplant

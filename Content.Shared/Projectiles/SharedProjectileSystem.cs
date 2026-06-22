@@ -601,7 +601,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     // Mono
     private void OnTileFriction(Entity<ProjectileComponent> ent, ref TileFrictionEvent args)
     {
-        args.Modifier = ent.Comp.LinearDampening;
+        if(ent.Comp.ProjectileSpent)
+            args.Modifier = ent.Comp.LinearDampening;
     }
 
     public void SetShooter(EntityUid id, ProjectileComponent component, EntityUid shooterId)

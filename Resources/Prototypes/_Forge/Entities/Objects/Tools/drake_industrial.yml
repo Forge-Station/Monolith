@@ -90,7 +90,7 @@
 - type: entity
   name: Drake industrial magboots
   id: ClothingShoesBootsMagDrakeIndustrial
-  parent: ClothingShoesBootsMagBase
+  parent: [ClothingShoesBootsMagBase, ClothingShoesBootsCombat] # Forge-Change
   description: Drake Industries magboots with a side knife mount. Reduced movement penalty.
   suffix: Drake
   components:
@@ -104,16 +104,13 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.95
     sprintModifier: 0.95
-  - type: Storage
-    grid:
-    - 0,0,1,0
-    whitelist:
-      tags:
-      - Knife
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: []
+  - type: ItemSlots # Forge-Change
+    slots:
+     item:
+      whitelist:
+        tags:
+        - Knife
+        - Sidearm
   - type: StaticPrice
     price: 600
     vendPrice: 900

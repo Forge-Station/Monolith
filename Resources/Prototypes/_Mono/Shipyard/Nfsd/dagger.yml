@@ -4,7 +4,7 @@
   id: Dagger
   parent: BaseVesselAntag
   name: TSF-SKR Dagger
-  description: Straight from the shipyards of Sol, this ship is equipped with a mass driver as its main armament for long-range fire support.
+  description: Прямо с верфей Сола, этот корабль оснащён масс-драйвером в качестве основного вооружения для оказания огневой поддержки на больших дистанциях. # Forge-Change
   price: 120000
   purchasable: false # voucher only
   category: Medium
@@ -28,7 +28,7 @@
       stationProto: StandardFrontierSecurityVessel
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Dagger TSF{1}'
+        mapNameTemplate: 'Даггер TSF{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

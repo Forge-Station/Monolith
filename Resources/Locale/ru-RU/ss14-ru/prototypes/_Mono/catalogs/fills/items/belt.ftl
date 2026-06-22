@@ -1,2 +1,0 @@
-ent-ClothingBeltSheathFilledNavy = Filled, NavySabre
-

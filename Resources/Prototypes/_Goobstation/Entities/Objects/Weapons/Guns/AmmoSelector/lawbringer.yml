@@ -1,7 +1,7 @@
 # Lawbringer Projectiles
 - type: selectableAmmo
   id: BulletEnergyGunPulse
-  desc: Throws back enemies a fair distance, along with disorenting them.
+  desc: lawbringer-selectable-ammo-pulse # Forge-Change
   icon:
     sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
     state: pulse
@@ -11,7 +11,7 @@
 
 - type: selectableAmmo
   id: BulletEnergyGunDetain
-  desc: Causes large amounts of stamina damage, and disorients the enemy.
+  desc: lawbringer-selectable-ammo-detain # Forge-Change
   icon:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     state: omnilaser
@@ -21,7 +21,7 @@
 
 - type: selectableAmmo
   id: BulletEnergyGunExecute
-  desc: A highly damaging bolt. Great for putting things down.
+  desc: lawbringer-selectable-ammo-execute # Forge-Change
   icon:
     sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
     state: execute
@@ -31,7 +31,7 @@
 
 - type: selectableAmmo
   id: BulletEnergyGunHotshot
-  desc: A firey bolt, capable of lighting foes on fire.
+  desc: lawbringer-selectable-ammo-hotshot # Forge-Change
   icon:
     sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
     state: hotshot
@@ -41,7 +41,7 @@
 
 - type: selectableAmmo
   id: BulletEnergyGunSleepshot
-  desc: A lightly-damaging bolt, capable of removing stimulants from a targets system, and inducing drowsiness.
+  desc: lawbringer-selectable-ammo-sleepshot # Forge-Change
   icon:
     sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
     state: sleepshot
@@ -51,7 +51,7 @@
 
 - type: selectableAmmo
   id: BulletEnergyGunBigshot
-  desc: While dealing less damage to living creatures, this bolt is especially effective at tearing apart structures.
+  desc: lawbringer-selectable-ammo-bigshot # Forge-Change
   icon:
     sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
     state: bigshot
@@ -63,7 +63,7 @@
 
 - type: selectableAmmo
   id: BulletEnergyGunExploShot
-  desc: An explosive bolt, effective againt multiple targets.
+  desc: lawbringer-selectable-ammo-exploshot # Forge-Change
   icon:
     sprite: Objects/Weapons/Grenades/grenade.rsi
     state: icon

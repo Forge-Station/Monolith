@@ -1,0 +1,634 @@
+- type: securityIcon
+  id: TSFSquadIcon
+  abstract: true
+  priority: 2
+  locationPreference: Right
+  isShaded: true
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconAlpha
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: alpha }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconBeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: beta }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconGamma
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: gamma }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconDelta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: delta }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconEpsilon
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: epsilon }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconZeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: zeta }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconHeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: heta }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconTheta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: theta }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconIota
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: iota }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconKappa
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: kappa }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconLambda
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: lambda }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconMu
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: mu }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconNu
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: nu }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconXi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: xi }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconOmicron
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: omicron }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconPi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: pi }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconRo
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: ro }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconSigma
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: sigma }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconTau
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: tau }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconUpsilon
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: upsilon }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconFi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: fi }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconHi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: hi }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconPsi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: psi }
+
+- type: securityIcon
+  parent: TSFSquadIcon
+  id: TSFSquadIconOmega
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/TSF.rsi, state: omega }
+
+- type: securityIcon
+  id: RenegateSquadIcon
+  abstract: true
+  priority: 2
+  locationPreference: Right
+  isShaded: true
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconAlpha
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: alpha }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconBeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: beta }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconGamma
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: gamma }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconDelta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: delta }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconEpsilon
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: epsilon }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconZeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: zeta }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconHeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: heta }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconTheta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: theta }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconIota
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: iota }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconKappa
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: kappa }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconLambda
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: lambda }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconMu
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: mu }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconNu
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: nu }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconXi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: xi }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconOmicron
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: omicron }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconPi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: pi }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconRo
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: ro }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconSigma
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: sigma }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconTau
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: tau }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconUpsilon
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: upsilon }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconFi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: fi }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconHi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: hi }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconPsi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: psi }
+
+- type: securityIcon
+  parent: RenegateSquadIcon
+  id: RenegateSquadIconOmega
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/REN.rsi, state: omega }
+
+- type: securityIcon
+  id: NanoTrasenSquadIcon
+  abstract: true
+  priority: 2
+  locationPreference: Right
+  isShaded: true
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconAlpha
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: alpha }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconBeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: beta }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconGamma
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: gamma }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconDelta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: delta }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconEpsilon
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: epsilon }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconZeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: zeta }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconHeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: heta }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconTheta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: theta }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconIota
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: iota }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconKappa
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: kappa }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconLambda
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: lambda }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconMu
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: mu }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconNu
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: nu }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconXi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: xi }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconOmicron
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: omicron }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconPi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: pi }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconRo
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: ro }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconSigma
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: sigma }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconTau
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: tau }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconUpsilon
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: upsilon }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconFi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: fi }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconHi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: hi }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconPsi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: psi }
+
+- type: securityIcon
+  parent: NanoTrasenSquadIcon
+  id: NanoTrasenSquadIconOmega
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/NT.rsi, state: omega }
+
+- type: securityIcon
+  id: EmpireSquadIcon
+  abstract: true
+  priority: 2
+  locationPreference: Right
+  isShaded: true
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconAlpha
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: alpha }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconBeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: beta }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconGamma
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: gamma }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconDelta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: delta }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconEpsilon
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: epsilon }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconZeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: zeta }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconHeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: heta }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconTheta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: theta }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconIota
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: iota }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconKappa
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: kappa }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconLambda
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: lambda }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconMu
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: mu }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconNu
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: nu }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconXi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: xi }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconOmicron
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: omicron }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconPi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: pi }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconRo
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: ro }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconSigma
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: sigma }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconTau
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: tau }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconUpsilon
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: upsilon }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconFi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: fi }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconHi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: hi }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconPsi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: psi }
+
+- type: securityIcon
+  parent: EmpireSquadIcon
+  id: EmpireSquadIconOmega
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/EMP.rsi, state: omega }
+
+- type: securityIcon
+  id: USSPSquadIcon
+  abstract: true
+  priority: 2
+  locationPreference: Right
+  isShaded: true
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconAlpha
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: alpha }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconBeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: beta }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconGamma
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: gamma }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconDelta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: delta }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconEpsilon
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: epsilon }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconZeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: zeta }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconHeta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: heta }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconTheta
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: theta }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconIota
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: iota }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconKappa
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: kappa }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconLambda
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: lambda }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconMu
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: mu }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconNu
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: nu }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconXi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: xi }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconOmicron
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: omicron }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconPi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: pi }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconRo
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: ro }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconSigma
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: sigma }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconTau
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: tau }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconUpsilon
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: upsilon }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconFi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: fi }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconHi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: hi }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconPsi
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: psi }
+
+- type: securityIcon
+  parent: USSPSquadIcon
+  id: USSPSquadIconOmega
+  icon: { sprite: /Textures/Forge/Interface/Misc/squad_icons/USSP.rsi, state: omega }

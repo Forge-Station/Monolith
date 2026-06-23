@@ -318,7 +318,12 @@
     components:
     - type: Stealth
       minVisibility: 0.01
-      lastVisibility: 0.01
+      maxVisibility: 1
+      damageVisibilityModifier: 1
+      attackVisibilityModifier: 1
+    - type: StealthOnMove
+      passiveVisibilityRate: -0.2
+      movementVisibilityRate: 0
   - type: UseDelay
     delay: 2
   - type: PowerCellDraw

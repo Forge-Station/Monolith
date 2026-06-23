@@ -69,10 +69,10 @@ trait-steadfast-name = Steadfast
 trait-steadfast-desc = When others would buckle from the weight of your injuries, you still march forward unrelentingly. For most species, this reduces your movement slow: 25% at 60 damage becomes 17% at 70 damage, and 45% at 80 damage becomes 30% at 90 damage.
 
 trait-dermal-armor-name = Dermal Armor
-trait-dermal-armor-desc = Your skin has been replaced with a flexible, yet sturdy, hard-polymer shell wrapped in a layer of synthetic flesh. Provides 3.5 flat reduction to Blunt, Slash, and Piercing damage, but you take 25% more Shock damage.
+trait-dermal-armor-desc = Your skin has been replaced with a flexible, yet sturdy, hard-polymer shell wrapped in a layer of synthetic flesh. Provides 5 flat reduction to Blunt, Slash, and Piercing damage, but you take 40% more Shock damage and an extra 2.5 Heat damage.
 
 trait-ironman-name = Ironman
-trait-ironman-desc = You live strictly on hard cash. You can't withdraw from your bank account, but you start the shift with a Baeg Voucher to make your way.
+trait-ironman-desc = You live strictly on hard cash. You can't withdraw from your bank account, but you start the shift with a flatpacked hoverbike in a box to make your way.
 
 trait-temperature-tolerance-name = Temperature Tolerance
 trait-temperature-tolerance-desc = You have a notable tolerance for lower temperatures. You can stand for extended periods in conditions just below freezing, like a walk-in fridge or the sunlit slopes of Glacier.

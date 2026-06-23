@@ -102,6 +102,12 @@
   icon: { sprite: _NF/Objects/Economy/cash.rsi, state: cash } # Frontier: use Frontier sprite set
   spawn: SpaceCash
 
+- type: stack
+  id: BankCredit
+  name: credits
+  icon: { sprite: _NF/Objects/Economy/cash.rsi, state: cash }
+  spawn: SpaceCash
+
 - type: entity
   parent: SpaceCash
   id: SpaceCash10

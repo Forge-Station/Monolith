@@ -67,15 +67,15 @@
       coefficients:
         Blunt: 0.67
         Slash: 0.34
-        Piercing: 0.67
-        Heat: 0.4
+        Piercing: 0.6 # 0.67 -> 0.6 Forge-Change
+        Heat: 0.34 # 0.4 -> 0.34 Forge-Change
         Radiation: 0.25
         Caustic: 0.1
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.67
   - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
+    walkModifier: 0.9 # 0.95 -> 0.9 Forge-Change
+    sprintModifier: 0.9 # 0.95 -> 0.9 Forge-Change
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -115,14 +115,14 @@
         Blunt: 0.6
         Slash: 0.34
         Piercing: 0.34
-        Heat: 0.6
+        Heat: 0.5 # 0.6 -> 0.5 Forge-Change
         Radiation: 0.5
         Caustic: 0.25
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.34
   - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
+    walkModifier: 0.8 # 0.75 -> 0.8 Forge-Change
+    sprintModifier: 0.8 # 0.75 -> 0.8 Forge-Change
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -162,14 +162,14 @@
         Blunt: 0.8
         Slash: 0.88
         Piercing: 0.67
-        Heat: 0.84
+        Heat: 0.67 # 0.84 -> 0.67 Forge-Change
         Radiation: 0.5
         Caustic: 0.5
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.67
   - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
+    walkModifier: 1.0 # 0.95 -> 1.0 Forge-change
+    sprintModifier: 1.0  # 0.95 -> 1.0 Forge-change
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -181,7 +181,7 @@
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
     price: 1000
-    vendPrice: 2500
+    vendPrice: 30000 # Forge-Change
   - type: Tag  # Mono
     tags:
     - RogueHardsuit

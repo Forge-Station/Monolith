@@ -4,11 +4,14 @@
   entityIcon: ClothingNeckViperGroupMantle
   discipline: ViperGroup
   tier: 1
-  cost: 5000
+  cost: 10000 # Forge-change
   recipeUnlocks:
-  - ClothingNeckViperGroupMantle
+#  - ClothingNeckViperGroupMantle Forge-change
   - ClothingUniformJumpsuitViperGroupUniform
   - ClothingUniformJumpsuitViperGroupTurtleneck
+  - ClothingUniformJumpsuitViperGroupTankTop # Forge-change
+  - ClothingOuterHardsuitViperGroupInitiate # Forge-change
+  - ClothingShoesBootsMagViperGroup # Forge-change
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 14, 1
@@ -19,14 +22,14 @@
   entityIcon: ClothingOuterHardsuitViperGroupStandard
   discipline: ViperGroup
   tier: 2
-  cost: 40000
+  cost: 25000 # Forge-change
   recipeUnlocks:
-  - ClothingOuterHardsuitViperGroupInitiate
+#  - ClothingOuterHardsuitViperGroupInitiate Forge-change
   - ClothingOuterHardsuitViperGroupStandard
   - ClothingOuterHardsuitViperGroupMedic
   technologyPrerequisites:
   - ViperGroupApparel
-  - UniversalMaterialResearchT2
+#  - UniversalMaterialResearchT2
   position: 14, 7
 
 - type: technology
@@ -35,9 +38,10 @@
   entityIcon: ClothingOuterHardsuitViperGroupJuggernaut
   discipline: ViperGroup
   tier: 3
-  cost: 20000
+  cost: 40000 # Forge-change
   recipeUnlocks:
   - ClothingOuterHardsuitViperGroupJuggernaut
   technologyPrerequisites:
   - ViperGroupHardsuitBasic
+  - UniversalMaterialResearchT3 # Forge-change
   position: 14, 8

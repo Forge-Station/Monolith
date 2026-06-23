@@ -1,5 +1,11 @@
-ent-APCElectronics = микросхема ЛКП
-    .desc = Микросхема, используемая в создании ЛКП.
+ent-APCElectronics = плата большого ЛКП
+    .desc = Печатная плата для сборки ЛКП на 300 кВт. Вставляется в машинный каркас.
+ent-LargeAPCLightElectronics = плата лёгкого ЛКП
+    .desc = Печатная плата для сборки ЛКП на 100 кВт.
+ent-LargeAPCMediumElectronics = плата среднего ЛКП
+    .desc = Печатная плата для сборки ЛКП на 180 кВт.
+ent-LargeAPCCapitalElectronics = плата капитального ЛКП
+    .desc = Печатная плата для сборки ЛКП на 500 кВт.
 ent-WallmountSubstationElectronics = микросхема настенной подстанции
     .desc = Микросхема, используемая в создании настенной подстанции.
 ent-WallmountGeneratorElectronics = микросхема настенного генератора

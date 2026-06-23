@@ -399,9 +399,14 @@
 
 # Power
 - type: latheRecipe
-  parent: BaseCheapCircuitboardRecipe
+  parent: BaseGoldCircuitboardRecipe
   id: APCElectronics
   result: APCElectronics
+  materials:
+    Steel: 150
+    Glass: 600
+    Gold: 150
+    Plasma: 250
 
 - type: latheRecipe
   parent: BaseCircuitboardRecipe

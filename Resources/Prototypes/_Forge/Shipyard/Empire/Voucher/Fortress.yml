@@ -1,0 +1,34 @@
+# Т3-T2 voucher ship idk
+
+- type: vessel
+  id: Fortress
+  parent: BaseVessel
+  name: CWH Крепость
+  description: Огромный капитальный шаттл Империи.
+  purchasable: false
+  limit: 2
+  price: 318000
+  category: Large
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Fortress.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - AME
+
+- type: gameMap
+  id: Fortress
+  mapName: 'CWH Крепость'
+  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Fortress.yml
+  minPlayers: 0
+  stations:
+    Fortress:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'CWH Крепость SEW{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

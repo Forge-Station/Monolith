@@ -159,3 +159,29 @@
   parent: BaseGoldCircuitboardRecipe
   id: MachineShieldFSG950MCircuitboard
   result: MachineShieldFSG950MCircuitboard
+
+# LAPC substation boards — circuit imprinter / protolathe (MonoAdvancedShuttleComponents pack)
+- type: latheRecipe
+  parent: BaseCheapCircuitboardRecipe
+  id: LargeAPCLightElectronics
+  result: LargeAPCLightElectronics
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: LargeAPCMediumElectronics
+  result: LargeAPCMediumElectronics
+  materials:
+    Steel: 150
+    Glass: 500
+    Silver: 100
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: LargeAPCCapitalElectronics
+  result: LargeAPCCapitalElectronics
+  materials:
+    Steel: 200
+    Glass: 700
+    Gold: 250
+    Plasma: 400
+    Silver: 150

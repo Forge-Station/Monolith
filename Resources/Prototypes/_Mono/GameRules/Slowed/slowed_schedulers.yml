@@ -41,7 +41,7 @@
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: ChimeraShipsTable
-    minimumTimeUntilFirstEvent: 10800 # Forge: 3h before first spawn
+    minimumTimeUntilFirstEvent: 9000 # Forge: 2.5h before first spawn
     minMaxEventTiming:
       min: 5400 # 90 minutes between events
       max: 5400 # 90 minutes between events

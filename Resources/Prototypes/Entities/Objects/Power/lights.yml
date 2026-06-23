@@ -207,6 +207,11 @@
   - type: LightBulb
     startingState: Broken
     bulb: Bulb
+# Forge-Change-Start
+  - type: Tag
+    tags:
+    - GoblinPreciousTrash
+# Forge-Change-End
 
 - type: entity
   parent: BaseLightbulb
@@ -260,6 +265,9 @@
   components:
   - type: LightBulb
     startingState: Broken
+  - type: Tag
+    tags:
+    - GoblinPreciousTrash # Forge-Change
 
 - type: entity
   parent: BaseLightTube

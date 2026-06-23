@@ -274,6 +274,7 @@
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/xlr556_inhands_32x.rsi
   - type: Item
+    size: Large
     sprite: _Mono/Objects/Weapons/Guns/Rifles/xlr556_inhands_32x.rsi
   - type: ItemSlots
     slots:

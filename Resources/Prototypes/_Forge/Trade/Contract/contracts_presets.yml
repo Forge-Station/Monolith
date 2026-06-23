@@ -1,0 +1,199 @@
+- type: storeContractsPreset
+  id: ForgeExpeditionContractsPreset
+  contractOffers:
+    maxVisible: 15
+    groups:
+    - pool: ForgeExpeditionFoodOrders
+      minVisible: 1
+      maxVisible: 2
+      fillWeight: 3
+    - pool: ForgeExpeditionDrinkOrders
+      minVisible: 1
+      maxVisible: 2
+      fillWeight: 3
+    - pool: ForgeExpeditionDeliveryOrders
+      minVisible: 3
+      maxVisible: 3
+      fillWeight: 2
+    - pool: ForgeExpeditionFieldOrders
+      minVisible: 2
+      maxVisible: 3
+      fillWeight: 2
+    - pool: ForgeExpeditionDroneHuntOrders
+      minVisible: 1
+      maxVisible: 2
+      fillWeight: 2
+    - pool: ForgeExpeditionArtifactStudyOrders
+      minVisible: 3
+      maxVisible: 3
+      fillWeight: 1
+  skipCost: 30000
+  skipCurrency: BankCredit
+
+- type: ncContractOfferPool
+  id: ForgeExpeditionFoodOrders
+  name: "Кухня"
+  order: 15
+  color: "#88C96A"
+  entries:
+  - type: Supply
+    id: ForgeFoodEasyCheeseburgers
+    weight: 4
+  - type: Supply
+    id: ForgeFoodEasyTomatoSoup
+    weight: 4
+  - type: Supply
+    id: ForgeFoodEasyTomatoPasta
+    weight: 4
+  - type: Supply
+    id: ForgeFoodEasyHanamiDango
+    weight: 4
+  - type: Supply
+    id: ForgeFoodMediumPizzaMargherita
+    weight: 2
+  - type: Supply
+    id: ForgeFoodMediumMeatballNoodles
+    weight: 2
+  - type: Supply
+    id: ForgeFoodMediumOnigiri
+    weight: 2
+  - type: Supply
+    id: ForgeFoodHardCubanCarp
+    weight: 1
+  - type: Supply
+    id: ForgeFoodHardSpicyRamen
+    weight: 1
+  - type: Supply
+    id: ForgeFoodHardUraniumPizza
+    weight: 1
+
+- type: ncContractOfferPool
+  id: ForgeExpeditionDrinkOrders
+  name: "Бар"
+  order: 16
+  color: "#D08A5B"
+  entries:
+  - type: Supply
+    id: ForgeDrinkEasyMartini
+    weight: 4
+  - type: Supply
+    id: ForgeDrinkEasyMargarita
+    weight: 4
+  - type: Supply
+    id: ForgeDrinkEasyScrewdriver
+    weight: 4
+  - type: Supply
+    id: ForgeDrinkEasyTequilaSunrise
+    weight: 4
+  - type: Supply
+    id: ForgeDrinkMediumBloodyMary
+    weight: 2
+  - type: Supply
+    id: ForgeDrinkMediumBahamaMama
+    weight: 2
+  - type: Supply
+    id: ForgeDrinkMediumBeepskySmash
+    weight: 2
+  - type: Supply
+    id: ForgeDrinkHardLongIsland
+    weight: 1
+  - type: Supply
+    id: ForgeDrinkHardGargleBlaster
+    weight: 1
+  - type: Supply
+    id: ForgeDrinkHardB52
+    weight: 1
+
+- type: ncContractOfferPool
+  id: ForgeExpeditionDeliveryOrders
+  name: "Доставка"
+  order: 18
+  color: "#6FA8DC"
+  entries:
+  - type: Retrieval
+    id: ForgeRetrievalEasyLostCrate
+    weight: 1
+  - type: Retrieval
+    id: ForgeRetrievalMediumMedicalCrate
+    weight: 1
+  - type: Retrieval
+    id: ForgeRetrievalHardSecureCrate
+    weight: 1
+
+- type: ncContractOfferPool
+  id: ForgeExpeditionFieldOrders
+  name: "Полевая работа"
+  order: 20
+  color: "#C9A45A"
+  entries:
+  - type: Hunt
+    id: ForgeHuntEasyCarpSwarm
+    weight: 1
+  - type: Hunt
+    id: ForgeHuntEasyArgocyteScouts
+    weight: 4
+  - type: Hunt
+    id: ForgeHuntEasyDinosaurNest
+    weight: 4
+  - type: Hunt
+    id: ForgeHuntEasyRogueScrap
+    weight: 4
+  - type: Hunt
+    id: ForgeHuntEasyFleshGrowths
+    weight: 4
+  - type: Hunt
+    id: ForgeHuntMediumArgocyteBrood
+    weight: 2
+  - type: Hunt
+    id: ForgeHuntMediumRoguePatrol
+    weight: 2
+  - type: Hunt
+    id: ForgeHuntMediumDinosaurPack
+    weight: 2
+  - type: Hunt
+    id: ForgeHuntMediumSyndicatePatrol
+    weight: 2
+  - type: Hunt
+    id: ForgeHuntHardFleshHorror
+    weight: 1
+  - type: Hunt
+    id: ForgeHuntHardArgocyteLeviathan
+    weight: 1
+  - type: Hunt
+    id: ForgeHuntHardRogueAiCore
+    weight: 1
+  - type: Hunt
+    id: ForgeHuntHardSyndicateCommander
+    weight: 1
+
+- type: ncContractOfferPool
+  id: ForgeExpeditionArtifactStudyOrders
+  name: "Изучение артефактов"
+  order: 25
+  color: "#9C6ADE"
+  entries:
+  - type: ArtifactStudy
+    id: ForgeArtifactStudyEasy
+    weight: 1
+  - type: ArtifactStudy
+    id: ForgeArtifactStudyMedium
+    weight: 1
+  - type: ArtifactStudy
+    id: ForgeArtifactStudyHard
+    weight: 1
+
+- type: ncContractOfferPool
+  id: ForgeExpeditionDroneHuntOrders
+  name: "Перехват"
+  order: 22
+  color: "#C66868"
+  entries:
+  - type: DroneHunt
+    id: ForgeDroneHuntLight
+    weight: 4
+  - type: DroneHunt
+    id: ForgeDroneHuntMedium
+    weight: 2
+  - type: DroneHunt
+    id: ForgeDroneHuntHeavy
+    weight: 1

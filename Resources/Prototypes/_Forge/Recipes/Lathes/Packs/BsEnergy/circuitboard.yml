@@ -1,0 +1,9 @@
+﻿- type: latheRecipePack
+  id: BsEnergyCircuitsPack
+  recipes:
+  - BsReceiverCircuitboardT1
+  - BsReceiverCircuitboardT2
+  - BsReceiverCircuitboardT3
+  - BsTransmitterCircuitboardT1
+  - BsTransmitterCircuitboardT2
+  - BsTransmitterCircuitboardT3

@@ -63,6 +63,7 @@
   - type: Tag
     tags:
     - Trash
+    - GoblinPreciousTrash # Forge-Change
   - type: StaticPrice # Frontier
     price: 4 # Frontier
 
@@ -85,6 +86,7 @@
   - type: Tag
     tags:
     - Trash
+    - GoblinPreciousTrash # Forge-Change
   - type: TimedDespawn
     lifetime: 600
   - type: Food

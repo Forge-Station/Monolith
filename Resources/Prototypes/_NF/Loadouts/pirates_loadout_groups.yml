@@ -30,7 +30,6 @@
   - ContractorClothingMaskGas
   subgroups: # mono
   - MercenaryFace
-  - PilotFace
 
 - type: loadoutGroup
   id: PirateShoes
@@ -41,7 +40,6 @@
   subgroups: # mono
   - MercenaryShoes
   - ContractorShoes
-  - PilotShoes
 
 - type: loadoutGroup
   id: PirateHead
@@ -55,7 +53,6 @@
   subgroups: # mono
   - MercenaryHead
   - ContractorHead
-  - PilotHead
 
 - type: loadoutGroup
   id: PirateTrinkets
@@ -79,7 +76,6 @@
   subgroups: # mono
   - MercenaryHead
   - ContractorHead
-  - PilotHead
 
 - type: loadoutGroup
   id: PirateCaptainOuterClothing
@@ -91,7 +87,6 @@
   subgroups: # mono
   - ContractorOuterClothing
   - MercenaryOuterClothing
-  - PilotOuterClothing
 
 - type: loadoutGroup
   id: GrandVizierPDA
@@ -133,7 +128,6 @@
   subgroups: # mono
   - MercenaryHead
   - ContractorHead
-  - PilotHead
 
 - type: loadoutGroup
   id: PirateFirstMateOuterClothing
@@ -144,7 +138,6 @@
   subgroups: # mono
   - MercenaryOuterClothing
   - ContractorOuterClothing
-  - PilotOuterClothing
 
 - type: loadoutGroup
   id: AsvaranPDA

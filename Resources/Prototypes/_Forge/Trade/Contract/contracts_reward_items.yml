@@ -1,0 +1,10 @@
+- type: entity
+  parent: ResearchDisk
+  id: ResearchDisk100000
+  name: research point disk (100000)
+  description: A disk for the R&D server containing 100000 points.
+  components:
+  - type: ResearchDisk
+    points: 100000
+  - type: StaticPrice
+    price: 20000

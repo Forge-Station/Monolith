@@ -1,3 +1,18 @@
+# Forge-Change
+- type: loadoutGroup
+  id: PilotHead
+  name: loadout-group-contractor-head
+  minLimit: 0
+  loadouts:
+  - PilotClothingHeadHatPilot
+
+- type: loadoutGroup
+  id: PilotNeck
+  name: loadout-group-contractor-neck
+  minLimit: 0
+  loadouts:
+  - PilotClothingNeckScarfPilot
+
 - type: loadoutGroup
   id: PilotJumpsuit
   name: loadout-group-contractor-jumpsuit
@@ -7,11 +22,15 @@
   - PilotClothingUniformDrakeIndustriesTrucker
   - PilotClothingUniformJumpsuitMilitaryContractor
   - PilotClothingUniformJumpsuitMilitaryContractorTac
-  subgroups:
-  - ContractorJumpsuit
   fallbacks:
   - PilotClothingUniformJumpsuitPilot
-  - ContractorClothingUniformJumpskirtColorGrey # Sorry harpies, no pilot skirt for you.
+
+- type: loadoutGroup
+  id: PilotGloves
+  name: loadout-group-contractor-gloves
+  minLimit: 0
+  loadouts:
+  - PilotClothingHandsGlovesPilot
 
 - type: loadoutGroup
   id: PilotBackpack
@@ -21,8 +40,6 @@
   - PilotClothingBackpackDuffelPilot
   - PilotClothingBackpackSatchelPilot
   - PilotClothingBackpackMessengerPilot
-  subgroups:
-  - ContractorBackpack
   fallbacks:
   - PilotClothingBackpackPilot
 
@@ -31,31 +48,31 @@
   name: loadout-group-contractor-outerclothing
   minLimit: 0
   loadouts:
+  - PilotClothingOuterHardsuitPilot
   - PilotClothingOuterCoatBomber
   - PilotClothingOuterDrakeIndustriesTruckerPuffyVest
-  - PilotClothingOuterHardsuitPilot
-  
-  subgroups:
-  - ContractorOuterClothing
 
 - type: loadoutGroup
   id: PilotShoes
   name: loadout-group-contractor-shoes
   loadouts:
   - PilotClothingShoesBootsPilot
-  subgroups:
-  - ContractorShoes
   fallbacks:
   - PilotClothingShoesBootsPilot
 
 - type: loadoutGroup
-  id: PilotHead
-  name: loadout-group-contractor-head
+  id: PilotFace
+  name: loadout-group-contractor-face
   minLimit: 0
   loadouts:
-  - PilotClothingHeadHatPilot
-  subgroups:
-  - ContractorHead
+  - PilotClothingMaskPilot
+
+- type: loadoutGroup
+  id: PilotGlasses
+  name: loadout-group-contractor-glasses
+  minLimit: 0
+  loadouts:
+  - PilotClothingEyesGlassesPilot
 
 - type: loadoutGroup
   id: PilotEars
@@ -64,52 +81,14 @@
   maxLimit: 1
   loadouts:
   - PilotClothingHeadsetAltPilotCommon
-  subgroups:
-  - ContractorEars
-
-- type: loadoutGroup
-  id: PilotGloves
-  name: loadout-group-contractor-gloves
-  minLimit: 0
-  loadouts:
-  - PilotClothingHandsGlovesPilot
-  subgroups:
-  - ContractorGloves
-
-- type: loadoutGroup
-  id: PilotNeck
-  name: loadout-group-contractor-neck
-  minLimit: 0
-  loadouts:
-  - PilotClothingNeckScarfPilot
-  subgroups:
-  - ContractorNeck
+  fallbacks:
+  - PilotClothingHeadsetAltPilotCommon
 
 - type: loadoutGroup
   id: PilotPDA
   name: loadout-group-contractor-id
+  hidden: true
   loadouts:
   - PilotPilotPDA
-  subgroups:
-  - ContractorPDA
   fallbacks:
   - PilotPilotPDA
-
-- type: loadoutGroup
-  id: PilotGlasses
-  name: loadout-group-contractor-glasses
-  minLimit: 0
-  loadouts:
-  - PilotClothingEyesGlassesPilot
-  subgroups:
-  - ContractorGlasses
-
-- type: loadoutGroup
-  id: PilotFace
-  name: loadout-group-contractor-face
-  loadouts:
-  - PilotClothingMaskPilot
-  subgroups:
-  - ContractorFace
-  fallbacks:
-  - PilotClothingMaskPilot

@@ -1,0 +1,39 @@
+- type: job
+  id: SpnUnionDiplomat
+  name: forge-job-name-spn-union-diplomat
+  description: forge-job-desc-spn-union-diplomat
+  playTimeTracker: JobSpnUnionDiplomat
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 43200
+  whitelisted: true
+  startingGear: SpnUnionDiplomatGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  setPreference: true
+  icon: JobIconSpnUnionDiplomat
+  supervisors: job-supervisors-spn-council
+  canBeAntag: false
+  weight: 160
+  displayWeight: 55
+  assignedCompany: SPN
+  assignedNationality: USSP
+  special:
+  - !type:AddImplantSpecial
+    implants: [ SpnMindShieldImplant, UsspTrackingImplant ]
+  - !type:AddComponentSpecial
+    components:
+    - type: MailDisabled
+    - type: SpecialSectorStationRecord
+      recordGeneration: FalseRecord
+    - type: NpcFactionMember
+      factions:
+      - USSP
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - NovaCygniBasic
+    languagesUnderstood:
+    - NovaCygniBasic
+  accessGroups:
+  - GeneralAccess
+  - USSPHigh

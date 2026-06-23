@@ -23,3 +23,5 @@ chat-radio-tl = TechnicLogistic
 chat-radio-harmony = Harmony
 chat-radio-drake-industries = Drake Industries
 chat-radio-nexus = Nexus
+chat-radio-spn = ТАККОММ СПН
+chat-radio-spn-command = СТРАТКОММ СПН

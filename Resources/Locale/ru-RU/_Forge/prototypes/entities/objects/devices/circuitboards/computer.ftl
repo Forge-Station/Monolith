@@ -8,5 +8,5 @@ ent-TsfRankComputerCircuitboard = плата консоли должностей
     .desc = Печатная плата компьютера для консоли должностей ТСФ.
 ent-TtiRankComputerCircuitboard = плата консоли должностей TTI
     .desc = Печатная плата компьютера для консоли должностей TTI.
-ent-UspRankComputerCircuitboard = плата консоли должностей USSP
+ent-UspRankComputerCircuitboard = плата консоли должностей СПН
     .desc = Печатная плата компьютера для консоли должностей USSP.

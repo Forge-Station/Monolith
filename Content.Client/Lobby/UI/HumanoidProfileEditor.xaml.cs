@@ -1555,6 +1555,9 @@ namespace Content.Client.Lobby.UI
             JobOverride = jobProto;
             var session = _playerManager.LocalSession;
 
+            // Forge-Change: role loadouts can gain new groups after a profile was saved.
+            roleLoadout.EnsureValid(Profile, session, collection);
+
             _loadoutWindow = new LoadoutWindow(Profile, roleLoadout, roleLoadoutProto, _playerManager.LocalSession, collection)
             {
                 Title = jobProto?.LocalizedName + " loadout", // Mono - replace the "-" with a space in "-loadout", change to LocalizedName from ID

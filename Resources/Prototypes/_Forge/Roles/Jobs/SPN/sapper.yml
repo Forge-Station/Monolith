@@ -1,0 +1,35 @@
+- type: job
+  id: SpnSapper
+  name: forge-job-name-spn-sapper
+  description: forge-job-desc-spn-sapper
+  playTimeTracker: JobSpnSapper
+  startingGear: SpnSapperGear
+  alwaysUseSpawner: true
+  setPreference: false
+  overrideConsoleVisibility: true
+  icon: JobIconSpnSapper
+  supervisors: job-supervisors-spn-fleet-officer
+  canBeAntag: false
+  weight: 85
+  displayWeight: 38
+  assignedCompany: SPN
+  assignedNationality: USSP
+  special:
+  - !type:AddImplantSpecial
+    implants: [ SpnMindShieldImplant, UsspTrackingImplant ]
+  - !type:AddComponentSpecial
+    components:
+    - type: MailDisabled
+    - type: SpecialSectorStationRecord
+      recordGeneration: FalseRecord
+    - type: NpcFactionMember
+      factions:
+      - USSP
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - NovaCygniBasic
+    languagesUnderstood:
+    - NovaCygniBasic
+  accessGroups:
+  - GeneralAccess
+  - USSPLow

@@ -17,6 +17,7 @@ public static class FactionCompanyResolver
         "Renegates",
         "Colonial",
         "MD",
+        "SPN",
     };
 
     public static bool IsFactionCompany(string? companyId) =>

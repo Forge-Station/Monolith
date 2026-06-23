@@ -12,7 +12,8 @@ using Robust.Shared.Containers;
 namespace Content.Server._Forge.Guard;
 
 /// <summary>
-/// Adds or removes the guard overlay component when the empire guard implant is inserted or removed.
+/// Adds or removes the guard overlay component when a guard implant is inserted or removed.
+/// Faction-specific guard icons are configured in implant YAML via SubdermalImplant.onAdd.
 /// </summary>
 public sealed class GuardSystem : EntitySystem
 {

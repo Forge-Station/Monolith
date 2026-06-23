@@ -55,3 +55,7 @@ ent-EncryptionKeyTsfTech = технический ключ шифрования 
 ent-EncryptionKeyTsfCom = командный ключ шифрования ТСФ
     .desc = { ent-EncryptionKeyNfsd.desc }
 
+ent-EncryptionKeySpn = ключ шифрования СПН
+    .desc = Ключ шифрования тактического канала Союза Прогрессивных Народов.
+ent-EncryptionKeySpnCommand = командный ключ шифрования СПН
+    .desc = Ключ шифрования командного состава СПН. Открывает тактический и командный каналы.

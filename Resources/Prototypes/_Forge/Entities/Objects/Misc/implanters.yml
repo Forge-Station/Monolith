@@ -21,6 +21,14 @@
   components:
     - type: Implanter
       implant: ImplantGuard
+
+- type: entity
+  id: SpnMindShieldImplanter
+  parent: BaseImplantOnlyImplanter
+  suffix: SPN mindshield
+  components:
+  - type: Implanter
+    implant: SpnMindShieldImplant
       
 # Factions tracking implanters
 - type: entity

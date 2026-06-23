@@ -300,3 +300,69 @@
     sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: nt_medgunner
   jobName: job-name-nt-medic-gunner
+
+# region SPN
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSpnCouncilMember
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: spn_soviet
+  jobName: forge-job-name-spn-council-member
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSpnUnionDiplomat
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: spn_diplom
+  jobName: forge-job-name-spn-union-diplomat
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSpnFleetOfficer
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: spn_officer
+  jobName: forge-job-name-spn-fleet-officer
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSpnSquadLeader
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: spn_com
+  jobName: forge-job-name-spn-squad-leader
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSpnCorpsman
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: spn_med
+  jobName: forge-job-name-spn-corpsman
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSpnSapper
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: spn_saper
+  jobName: forge-job-name-spn-sapper
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSpnRifleman
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: spn_walk
+  jobName: forge-job-name-spn-rifleman
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSpnTrainee
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: spn_curs
+  jobName: forge-job-name-spn-trainee

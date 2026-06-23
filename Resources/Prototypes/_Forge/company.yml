@@ -41,3 +41,20 @@
   description: renegate-resistance-description
   color: "#6B2D2D"
   whitelisted: true
+
+# Forge-Change: SPN faction company (not USSP / СССП(К) contractor).
+- type: company
+  id: SPN
+  form: Antagonist
+  name: Союз Прогрессивных Народов
+  color: "#B01340"
+  whitelisted: true
+  hidden: true
+  special:
+  - !type:PlaySpawnSoundSpecial
+    sound:
+      path: /Audio/Ambience/Antag/headrev_start.ogg
+      params:
+        volume: -5
+        variation: 0.2
+  image: /Textures/_Mono/Companies/USSP.png

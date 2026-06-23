@@ -57,3 +57,33 @@
       - id: MonoMRE # Mono - replace PSB and water bottle w/ MRE
       - id: CrowbarPocket
       - id: HandHeldMassScanner
+
+- type: entity
+  parent: BoxBaseSurvivalMono
+  id: SpnBoxSurvivalMonoOxygenExtended
+  suffix: Oxygen, SPN
+  components:
+  - type: StorageFill
+    contents:
+      - id: DoubleEmergencyOxygenTankFilled
+      - id: SpaceMedipen
+      - id: EmergencyMedipen
+      - id: ClothingMaskGasSecurity
+      - id: MonoMRE
+      - id: CrowbarPocket
+      - id: HandHeldMassScanner
+
+- type: entity
+  parent: BoxBaseSurvivalMono
+  id: SpnBoxSurvivalMonoNitrogenExtended
+  suffix: Nitrogen, SPN
+  components:
+  - type: StorageFill
+    contents:
+      - id: DoubleEmergencyNitrogenTankFilled
+      - id: SpaceMedipen
+      - id: EmergencyMedipen
+      - id: ClothingMaskGasSecurity
+      - id: MonoMRE
+      - id: CrowbarPocket
+      - id: HandHeldMassScanner

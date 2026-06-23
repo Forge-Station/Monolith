@@ -116,3 +116,27 @@
 
 - type: playTimeTracker
   id: JobNtCook
+
+- type: playTimeTracker
+  id: JobSpnCouncilMember
+
+- type: playTimeTracker
+  id: JobSpnUnionDiplomat
+
+- type: playTimeTracker
+  id: JobSpnFleetOfficer
+
+- type: playTimeTracker
+  id: JobSpnSquadLeader
+
+- type: playTimeTracker
+  id: JobSpnCorpsman
+
+- type: playTimeTracker
+  id: JobSpnSapper
+
+- type: playTimeTracker
+  id: JobSpnRifleman
+
+- type: playTimeTracker
+  id: JobSpnTrainee

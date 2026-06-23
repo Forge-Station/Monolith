@@ -155,16 +155,19 @@
 - type: entity
   parent: BaseComputerJobPreset
   id: ComputerUspRank
-  name: Консоль должностей СССП
-  description: Терминал для назначения должностей СССП и предустановленных доступов.
+  name: Консоль должностей СПН
+  description: Терминал для назначения должностей Союза Прогрессивных Народов и предустановленных доступов.
   components:
   - type: JobPresetIdCardConsole
+    bodyImplants:
+    - SpnMindShieldImplant
     rankPresets:
-    - USSPCommissar
-    - USSPSergeant
-    - USSPMedic
-    - USSPCorporal
-    - USSPRifleman
+    - SpnFleetOfficer
+    - SpnSquadLeader
+    - SpnCorpsman
+    - SpnSapper
+    - SpnRifleman
+    - SpnTrainee
   - type: Sprite
     sprite: Structures/Machines/computers.rsi
     layers:

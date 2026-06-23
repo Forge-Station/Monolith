@@ -88,6 +88,14 @@
             TsfAmbassador: [ -1, -1]
             TsfRanger: [ -1, -1]
             TsfRecruit: [ -1, -1]
+            SpnCouncilMember: [ -1, -1 ]
+            SpnUnionDiplomat: [ -1, -1 ]
+            SpnFleetOfficer: [ -1, -1 ]
+            SpnSquadLeader: [ -1, -1 ]
+            SpnCorpsman: [ -1, -1 ]
+            SpnSapper: [ -1, -1 ]
+            SpnRifleman: [ -1, -1 ]
+            SpnTrainee: [ -1, -1 ]
             # Forge-change-end
         - type: StationDeadDrop
           maxDeadDrops: 20 # Testing

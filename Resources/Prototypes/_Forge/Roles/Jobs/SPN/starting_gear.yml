@@ -1,0 +1,47 @@
+- type: startingGear
+  parent: USSPCommissarGear
+  id: SpnCouncilMemberGear
+  equipment:
+    ears: ClothingHeadsetSpnCommand
+
+- type: startingGear
+  parent: USSPSergeantGear
+  id: SpnFleetOfficerGear
+  equipment:
+    ears: ClothingHeadsetSpnCommand
+
+- type: startingGear
+  parent: USSPSergeantGear
+  id: SpnUnionDiplomatGear
+  equipment:
+    ears: ClothingHeadsetSpn
+
+- type: startingGear
+  parent: USSPCorporalGear
+  id: SpnSquadLeaderGear
+  equipment:
+    ears: ClothingHeadsetSpn
+
+- type: startingGear
+  parent: USSPMedicGear
+  id: SpnCorpsmanGear
+  equipment:
+    ears: ClothingHeadsetSpn
+
+- type: startingGear
+  parent: USSPCorporalGear
+  id: SpnSapperGear
+  equipment:
+    ears: ClothingHeadsetSpn
+
+- type: startingGear
+  parent: USSPRiflemanGear
+  id: SpnRiflemanGear
+  equipment:
+    ears: ClothingHeadsetSpn
+
+- type: startingGear
+  parent: USSPRiflemanGear
+  id: SpnTraineeGear
+  equipment:
+    ears: ClothingHeadsetSpn

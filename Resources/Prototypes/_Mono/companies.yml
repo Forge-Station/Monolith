@@ -128,24 +128,13 @@
 
 - type: company
   id: USSP
-  form: Antagonist
-  name: СССП(К) # Forge-change: locale and small rename: К = Кораблей
+  form: Protagonist
+  name: СССП(К) # Forge-Change: contractor company, not SPN faction
   color: "#B01340"
-  whitelisted: false # Mercs are now USSP-pilled.
+  whitelisted: true
+  hidden: true
   description: ussp-description
-  # Forge-change: add icon, note & special's
   note: ussp-company-note
-  icon: USSP
-  special:
-  - !type:GiveItemSpecial
-    prototype:
-    - EncryptionKeyUssp
-  - !type:PlaySpawnSoundSpecial
-    sound:
-      path: /Audio/Ambience/Antag/headrev_start.ogg
-      params:
-        volume: -5
-        variation: 0.2
   image: /Textures/_Mono/Companies/USSP.png
 
 # Major companies

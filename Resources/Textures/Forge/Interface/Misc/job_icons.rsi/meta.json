@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Create by autsaider_m, StRep Eifall, overlord by v6st, emp_ icons by v6st, ren_, tsf_, nt_, doc, paramed by sodakent (discord) for Forge",
+    "copyright": "Create by autsaider_m, StRep Eifall, overlord by v6st, emp_ icons by v6st, ren_, tsf_, nt_, doc, paramed by sodakent (discord) for Forge, spn_ icons and spn_mindshield by ifi07 (discord) for Forge",
 
     "size": {
         "x": 8,
@@ -149,6 +149,37 @@
         },
         {
             "name": "nt_medgunner"
+        },
+        {
+            "name": "spn_com"
+        },
+        {
+            "name": "spn_officer"
+        },
+        {
+            "name": "spn_diplom"
+        },
+        {
+            "name": "spn_med"
+        },
+        {
+            "name": "spn_saper"
+        },
+        {
+            "name": "spn_walk"
+        },
+        {
+            "name": "spn_curs"
+        },
+        {
+            "name": "spn_soviet"
+        },
+        {
+            "name": "spn_mindshield",
+            "delays":
+            [
+                [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]
+            ]
         }
     ]
 }

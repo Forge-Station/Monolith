@@ -1,0 +1,35 @@
+- type: job
+  id: SpnSquadLeader
+  name: forge-job-name-spn-squad-leader
+  description: forge-job-desc-spn-squad-leader
+  playTimeTracker: JobSpnSquadLeader
+  startingGear: SpnSquadLeaderGear
+  alwaysUseSpawner: true
+  setPreference: false
+  overrideConsoleVisibility: true
+  icon: JobIconSpnSquadLeader
+  supervisors: job-supervisors-spn-fleet-officer
+  canBeAntag: false
+  weight: 110
+  displayWeight: 45
+  assignedCompany: SPN
+  assignedNationality: USSP
+  special:
+  - !type:AddImplantSpecial
+    implants: [ SpnMindShieldImplant, UsspTrackingImplant ]
+  - !type:AddComponentSpecial
+    components:
+    - type: MailDisabled
+    - type: SpecialSectorStationRecord
+      recordGeneration: FalseRecord
+    - type: NpcFactionMember
+      factions:
+      - USSP
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - NovaCygniBasic
+    languagesUnderstood:
+    - NovaCygniBasic
+  accessGroups:
+  - GeneralAccess
+  - USSPLow

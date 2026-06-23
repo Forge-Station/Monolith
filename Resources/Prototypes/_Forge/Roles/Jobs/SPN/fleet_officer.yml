@@ -1,0 +1,40 @@
+- type: job
+  id: SpnFleetOfficer
+  name: forge-job-name-spn-fleet-officer
+  description: forge-job-desc-spn-fleet-officer
+  playTimeTracker: JobSpnFleetOfficer
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 48000
+  - !type:DepartmentTimeRequirement
+    department: SPN
+    time: 43200
+  startingGear: SpnFleetOfficerGear
+  alwaysUseSpawner: true
+  setPreference: true
+  icon: JobIconSpnFleetOfficer
+  supervisors: job-supervisors-spn-council
+  canBeAntag: false
+  weight: 130
+  displayWeight: 50
+  assignedCompany: SPN
+  assignedNationality: USSP
+  special:
+  - !type:AddImplantSpecial
+    implants: [ SpnMindShieldImplant, UsspTrackingImplant ]
+  - !type:AddComponentSpecial
+    components:
+    - type: MailDisabled
+    - type: SpecialSectorStationRecord
+      recordGeneration: FalseRecord
+    - type: NpcFactionMember
+      factions:
+      - USSP
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - NovaCygniBasic
+    languagesUnderstood:
+    - NovaCygniBasic
+  accessGroups:
+  - GeneralAccess
+  - USSPHigh

@@ -1,0 +1,20 @@
+- type: loadoutGroup
+  id: USSPJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - USSPClothingJumpsuit
+  fallbacks:
+  - USSPClothingJumpsuit
+
+- type: loadoutGroup
+  id: SpnBoxSurvival
+  name: loadout-group-contractor-survival-box
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - SpnBoxSurvivalNFOxygenExtended
+  - SpnBoxSurvivalNFNitrogenExtended
+  fallbacks:
+  - SpnBoxSurvivalNFOxygenExtended
+  - SpnBoxSurvivalNFNitrogenExtended

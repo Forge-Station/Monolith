@@ -1,0 +1,40 @@
+- type: job
+  id: SpnRifleman
+  name: forge-job-name-spn-rifleman
+  description: forge-job-desc-spn-rifleman
+  playTimeTracker: JobSpnRifleman
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 72000
+  - !type:RoleTimeRequirement
+    role: JobSpnTrainee
+    time: 18000
+  startingGear: SpnRiflemanGear
+  alwaysUseSpawner: true
+  setPreference: true
+  icon: JobIconSpnRifleman
+  supervisors: job-supervisors-spn-fleet-officer
+  canBeAntag: false
+  weight: 70
+  displayWeight: 30
+  assignedCompany: SPN
+  assignedNationality: USSP
+  special:
+  - !type:AddImplantSpecial
+    implants: [ SpnMindShieldImplant, UsspTrackingImplant ]
+  - !type:AddComponentSpecial
+    components:
+    - type: MailDisabled
+    - type: SpecialSectorStationRecord
+      recordGeneration: FalseRecord
+    - type: NpcFactionMember
+      factions:
+      - USSP
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - NovaCygniBasic
+    languagesUnderstood:
+    - NovaCygniBasic
+  accessGroups:
+  - GeneralAccess
+  - USSPLow

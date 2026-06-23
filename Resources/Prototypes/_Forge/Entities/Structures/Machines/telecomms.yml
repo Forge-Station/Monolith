@@ -23,3 +23,16 @@
       key_slots:
       - EncryptionKeyEmpire
       - EncryptionKeyEmpireCommand
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerSpn
+  name: SPN telecom server
+  suffix: СПН
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeySpn
+      - EncryptionKeySpnCommand

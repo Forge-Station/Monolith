@@ -1,0 +1,9 @@
+- type: securityIcon
+  id: SpnMindShieldIcon
+  priority: 2
+  locationPreference: Right
+  layer: Mod
+  isShaded: true
+  icon:
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
+    state: spn_mindshield

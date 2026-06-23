@@ -81,6 +81,18 @@
     permanent: false
   - type: GuardImplant
 
+- type: entity
+  parent: ImplantGuard
+  id: SpnMindShieldImplant
+  suffix: СПН
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    permanent: false
+    onAdd:
+    - type: Guard
+      guardStatusIcon: SpnMindShieldIcon
+
 # Factions Tracking Implants
 - type: entity
   parent: BaseSubdermalImplant

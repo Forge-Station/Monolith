@@ -54,3 +54,23 @@
   - TsfSl
   - TsfCrew
   - TsfCrewOfficer
+
+- type: department
+  id: SPN
+  name: department-SPN
+  description: department-SPN-description
+  color: "#B01340"
+  weight: 45
+  roles:
+  - SpnCouncilMember
+  - SpnUnionDiplomat
+  - SpnFleetOfficer
+  - SpnSquadLeader
+  - SpnCorpsman
+  - SpnSapper
+  - SpnRifleman
+  - SpnTrainee
+
+- type: department
+  id: UnionOfSovietSocialistPlanets
+  roles: []

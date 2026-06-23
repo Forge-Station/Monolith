@@ -379,3 +379,42 @@
     layers:
     - state: crypt_nexus
     - state: nexus_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeySpn
+  suffix: СПН
+  name: SPN encryption key
+  description: An encryption key for SPN tactical communications.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Spn
+    defaultChannel: Spn
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_rusted
+    - state: ussp_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeySpnCommand
+  suffix: СПН
+  name: SPN command encryption key
+  description: An encryption key for SPN command staff. Grants tactical and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Spn
+    - SpnCommand
+    defaultChannel: SpnCommand
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_red_alt
+    - state: ussp_label

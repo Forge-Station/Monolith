@@ -1,0 +1,41 @@
+- type: job
+  id: SpnCouncilMember
+  name: forge-job-name-spn-council-member
+  description: forge-job-desc-spn-council-member
+  playTimeTracker: JobSpnCouncilMember
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 129600
+  - !type:RoleTimeRequirement
+    role: JobSpnFleetOfficer
+    time: 64800
+  startingGear: SpnCouncilMemberGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  setPreference: true
+  icon: JobIconSpnCouncilMember
+  supervisors: job-supervisors-spn-council
+  canBeAntag: false
+  weight: 180
+  displayWeight: 60
+  assignedCompany: SPN
+  assignedNationality: USSP
+  special:
+  - !type:AddImplantSpecial
+    implants: [ SpnMindShieldImplant, UsspTrackingImplant ]
+  - !type:AddComponentSpecial
+    components:
+    - type: MailDisabled
+    - type: SpecialSectorStationRecord
+      recordGeneration: FalseRecord
+    - type: NpcFactionMember
+      factions:
+      - USSP
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - NovaCygniBasic
+    languagesUnderstood:
+    - NovaCygniBasic
+  accessGroups:
+  - GeneralAccess
+  - USSPAA

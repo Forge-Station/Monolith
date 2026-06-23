@@ -1,0 +1,19 @@
+- type: job
+  id: USSPCommissar
+  setPreference: false
+
+- type: job
+  id: USSPSergeant
+  setPreference: false
+
+- type: job
+  id: USSPCorporal
+  setPreference: false
+
+- type: job
+  id: USSPMedic
+  setPreference: false
+
+- type: job
+  id: USSPRifleman
+  setPreference: false

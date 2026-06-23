@@ -201,3 +201,81 @@
   components:
   - type: SpawnPoint
     job_id: TsfRecruit
+
+- type: entity
+  id: ForgeSpawnPointSpnTrainee
+  parent: SpawnPointJobBase
+  name: spawn point Spn Trainee
+  suffix: СПН
+  components:
+  - type: SpawnPoint
+    job_id: SpnTrainee
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+
+- type: entity
+  id: ForgeSpawnPointSpnRifleman
+  parent: ForgeSpawnPointSpnTrainee
+  name: spawn point Spn Rifleman
+  suffix: СПН
+  components:
+  - type: SpawnPoint
+    job_id: SpnRifleman
+
+- type: entity
+  id: ForgeSpawnPointSpnFleetOfficer
+  parent: ForgeSpawnPointSpnTrainee
+  name: spawn point Spn Fleet Officer
+  suffix: СПН
+  components:
+  - type: SpawnPoint
+    job_id: SpnFleetOfficer
+
+- type: entity
+  id: ForgeSpawnPointSpnCouncilMember
+  parent: ForgeSpawnPointSpnTrainee
+  name: spawn point Spn Council Member
+  suffix: СПН
+  components:
+  - type: SpawnPoint
+    job_id: SpnCouncilMember
+
+- type: entity
+  id: ForgeSpawnPointSpnUnionDiplomat
+  parent: ForgeSpawnPointSpnTrainee
+  name: spawn point Spn Union Diplomat
+  suffix: СПН
+  components:
+  - type: SpawnPoint
+    job_id: SpnUnionDiplomat
+
+- type: entity
+  id: ForgeSpawnPointSpnSquadLeader
+  parent: ForgeSpawnPointSpnTrainee
+  name: spawn point Spn Squad Leader
+  suffix: СПН
+  components:
+  - type: SpawnPoint
+    job_id: SpnSquadLeader
+
+- type: entity
+  id: ForgeSpawnPointSpnCorpsman
+  parent: ForgeSpawnPointSpnTrainee
+  name: spawn point Spn Corpsman
+  suffix: СПН
+  components:
+  - type: SpawnPoint
+    job_id: SpnCorpsman
+
+- type: entity
+  id: ForgeSpawnPointSpnSapper
+  parent: ForgeSpawnPointSpnTrainee
+  name: spawn point Spn Sapper
+  suffix: СПН
+  components:
+  - type: SpawnPoint
+    job_id: SpnSapper

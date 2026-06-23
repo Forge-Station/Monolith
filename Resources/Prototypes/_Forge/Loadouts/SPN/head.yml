@@ -1,0 +1,7 @@
+- type: loadoutGroup
+  id: SpnHeadTrainee
+  name: loadout-group-contractor-head
+  minLimit: 0
+  loadouts:
+  - USSPHelmet
+  - ContractorClothingHeadHatUshanka

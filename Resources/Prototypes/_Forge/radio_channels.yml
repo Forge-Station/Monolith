@@ -126,3 +126,19 @@
   keycode: 'n'
   frequency: 7011
   color: "#1a5f9b"
+
+- type: radioChannel
+  id: Spn
+  name: chat-radio-spn
+  keycode: 's'
+  frequency: 1726
+  color: "#b2224b"
+  longRange: true
+
+- type: radioChannel
+  id: SpnCommand
+  name: chat-radio-spn-command
+  keycode: 'q'
+  frequency: 1727
+  color: "#ff0026"
+  longRange: true

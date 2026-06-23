@@ -1,0 +1,37 @@
+- type: loadout
+  id: SpnHeadset
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
+  equipment:
+    ears: ClothingHeadsetSpn
+
+- type: loadout
+  id: SpnHeadsetCommand
+  effects:
+  - !type:SpeciesBlacklistLoadoutEffect
+    blacklist:
+    - IPC
+  equipment:
+    ears: ClothingHeadsetSpnCommand
+
+- type: loadoutGroup
+  id: SpnEars
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - SpnHeadset
+  fallbacks:
+  - SpnHeadset
+
+- type: loadoutGroup
+  id: SpnEarsCommand
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - SpnHeadsetCommand
+  fallbacks:
+  - SpnHeadsetCommand

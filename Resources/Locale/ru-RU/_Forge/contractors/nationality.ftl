@@ -5,8 +5,8 @@ nationality_description_solfed = Гражданин ТСФ.
 nationality_name_imperial = Священная Империя Вермиллионов
 nationality_description_imperial = Гражданин империи.
 
-nationality_name_ussp = Союз Советских Социалистических Планет
-nationality_description_ussp = Гражданин СССП.
+nationality_name_ussp = Союз Прогрессивных Народов
+nationality_description_ussp = Гражданин СПН.
 
 nationality_name_freecolonies = Свободные Колонии
 nationality_description_freecolonies = Гражданин Свободных Колоний.

@@ -1,0 +1,35 @@
+- type: job
+  id: SpnCorpsman
+  name: forge-job-name-spn-corpsman
+  description: forge-job-desc-spn-corpsman
+  playTimeTracker: JobSpnCorpsman
+  startingGear: SpnCorpsmanGear
+  alwaysUseSpawner: true
+  setPreference: false
+  overrideConsoleVisibility: true
+  icon: JobIconSpnCorpsman
+  supervisors: job-supervisors-spn-fleet-officer
+  canBeAntag: false
+  weight: 95
+  displayWeight: 40
+  assignedCompany: SPN
+  assignedNationality: USSP
+  special:
+  - !type:AddImplantSpecial
+    implants: [ SpnMindShieldImplant, UsspTrackingImplant ]
+  - !type:AddComponentSpecial
+    components:
+    - type: MailDisabled
+    - type: SpecialSectorStationRecord
+      recordGeneration: FalseRecord
+    - type: NpcFactionMember
+      factions:
+      - USSP
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - NovaCygniBasic
+    languagesUnderstood:
+    - NovaCygniBasic
+  accessGroups:
+  - GeneralAccess
+  - USSPLow

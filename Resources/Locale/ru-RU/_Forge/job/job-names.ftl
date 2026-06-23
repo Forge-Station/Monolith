@@ -2,6 +2,7 @@
 department-Empire = Священная Империя Вермиллионов
 department-Renegates = Восставшие колонии Ренегатов
 department-TSF = Транс-Солнечная Федерация
+department-SPN = Союз Прогрессивных Народов
 
 # Outpost
 forge-job-name-outpostmedic = Врач АФ
@@ -84,12 +85,11 @@ job-name-tsf-crewofficer = ТСФ Офицер «Халкиона»
 job-name-nt-medic-pilot = Пилот TTI
 job-name-nt-medic-gunner = Стрелок TTI
 
-job-name-USSPCommissarF = СССП Комиссар
-job-name-USSPAdjutant = СССП Адъютант
-job-name-USSPCommandant = СССП Коммандант
-job-name-USSPAgitator = СССП Агитатор
-job-name-USSPSL = СССП Командир Звена
-job-name-USSPMedicF = СССП Санитар
-job-name-USSPSapper = СССП Сапёр
-job-name-USSPRiflemanF = СССП Красноармеец
-job-name-USSPTrainee = СССП Курсант
+forge-job-name-spn-council-member = СПН Член Совета
+forge-job-name-spn-union-diplomat = СПН Дипломат Союза
+forge-job-name-spn-fleet-officer = СПН Офицер Флота
+forge-job-name-spn-squad-leader = СПН Командир Звена
+forge-job-name-spn-corpsman = СПН Санитар
+forge-job-name-spn-sapper = СПН Сапёр
+forge-job-name-spn-rifleman = СПН Пехотинец
+forge-job-name-spn-trainee = СПН Курсант

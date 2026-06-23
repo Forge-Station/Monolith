@@ -337,7 +337,7 @@
   cost: -5 # This shit was FREE for factions practically
   components:
   - type: Ironman
-  traitGear: ShipVoucherFrontierIronMan
+  traitGear: HoverbikeFlatpack
 
 - type: trait
   id: TemperatureTolerance

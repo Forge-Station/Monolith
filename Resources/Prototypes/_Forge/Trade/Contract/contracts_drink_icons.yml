@@ -1,0 +1,109 @@
+- type: entity
+  parent: BaseItem
+  id: ForgeContractDrinkIconMartini
+  name: martini contract icon
+  description: Hidden icon used by Forge drink contracts.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/martiniglass.rsi
+    state: icon
+
+- type: entity
+  parent: BaseItem
+  id: ForgeContractDrinkIconMargarita
+  name: margarita contract icon
+  description: Hidden icon used by Forge drink contracts.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/margaritaglass.rsi
+    state: icon
+
+- type: entity
+  parent: BaseItem
+  id: ForgeContractDrinkIconScrewdriver
+  name: screwdriver contract icon
+  description: Hidden icon used by Forge drink contracts.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/screwdriverglass.rsi
+    state: icon
+
+- type: entity
+  parent: BaseItem
+  id: ForgeContractDrinkIconTequilaSunrise
+  name: tequila sunrise contract icon
+  description: Hidden icon used by Forge drink contracts.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/tequillasunriseglass.rsi
+    state: icon
+
+- type: entity
+  parent: BaseItem
+  id: ForgeContractDrinkIconBloodyMary
+  name: bloody mary contract icon
+  description: Hidden icon used by Forge drink contracts.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/bloodymaryglass.rsi
+    state: icon
+
+- type: entity
+  parent: BaseItem
+  id: ForgeContractDrinkIconBahamaMama
+  name: bahama mama contract icon
+  description: Hidden icon used by Forge drink contracts.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/bahama_mama.rsi
+    state: icon
+
+- type: entity
+  parent: BaseItem
+  id: ForgeContractDrinkIconBeepskySmash
+  name: beepsky smash contract icon
+  description: Hidden icon used by Forge drink contracts.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/beepskysmashglass.rsi
+    state: icon
+
+- type: entity
+  parent: BaseItem
+  id: ForgeContractDrinkIconLongIsland
+  name: long island contract icon
+  description: Hidden icon used by Forge drink contracts.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/longislandicedteaglass.rsi
+    state: icon
+
+- type: entity
+  parent: BaseItem
+  id: ForgeContractDrinkIconGargleBlaster
+  name: gargle blaster contract icon
+  description: Hidden icon used by Forge drink contracts.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/gargleblasterglass.rsi
+    state: icon
+
+- type: entity
+  parent: BaseItem
+  id: ForgeContractDrinkIconB52
+  name: B-52 contract icon
+  description: Hidden icon used by Forge drink contracts.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/b52glass.rsi
+    state: icon

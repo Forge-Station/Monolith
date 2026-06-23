@@ -1,0 +1,50 @@
+- type: ncRetrievalContract
+  id: ForgeRetrievalEasyLostCrate
+  name: "Потерянная пломба"
+  description: "Найдите меченый ящик примерно в 14000 метрах от станции и верните его в торговый автомат."
+  icon: ForgeTradeCargoExpeditionCrate
+  cargo:
+  - prototype: ForgeTradeCargoExpeditionCrate
+    count: 1
+  route: ForgeTradeRouteCargoToTraderEasy
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 40000
+  - type: Pool
+    pool: ForgeExpeditionRewardBasic
+    count: { min: 2, max: 4 }
+
+- type: ncRetrievalContract
+  id: ForgeRetrievalMediumMedicalCrate
+  name: "Медицинский груз за бортом"
+  description: "Найдите меченый медицинский ящик примерно в 20000 метрах от станции и верните его в торговый автомат."
+  icon: ForgeTradeCargoMedicalCrate
+  cargo:
+  - prototype: ForgeTradeCargoMedicalCrate
+    count: 1
+  route: ForgeTradeRouteCargoToTraderMedium
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 85000
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 3, max: 5 }
+
+- type: ncRetrievalContract
+  id: ForgeRetrievalHardSecureCrate
+  name: "Запертый груз"
+  description: "Найдите защищённый контрактный ящик примерно в 30000 метрах от станции и верните его в торговый автомат."
+  icon: ForgeTradeCargoSecureCrate
+  cargo:
+  - prototype: ForgeTradeCargoSecureCrate
+    count: 1
+  route: ForgeTradeRouteCargoToTraderHard
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 140000
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: { min: 4, max: 6 }

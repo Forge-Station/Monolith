@@ -1,0 +1,16 @@
+using Content.Shared.StatusIcon;
+// Forge-Change
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared.Security.Components;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class SquadMemberComponent : Component
+{
+    /// <summary>
+    ///     The icon that should be displayed based on the squad icon of the entity.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public ProtoId<SecurityIconPrototype> StatusIcon = "SecuritySquadIconAlpha";
+}

@@ -10,8 +10,11 @@
       department: Empire
       time: 108000 # 30 hours
     - !type:RoleTimeRequirement
-      role: JobTessarian
-      time: 43200 # 12 hours
+      role: JobArbiter
+      time: 21600 # 6 hours
+    - !type:RoleTimeRequirement
+      role: JobCardinal
+      time: 21600 # 6 hours
     - !type:SpeciesRequirement
       species:
         - Human
@@ -40,6 +43,7 @@
   setPreference: true
   access:
   - EmpireCommander
+  - EmpireSecApartment
   accessGroups:
   - CommandEmpireAccess
   special:
@@ -53,11 +57,6 @@
 
 - type: startingGear
   id: PraefectGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF
+  storage:
+    back:
+    - EmpireSecApartmentTablet

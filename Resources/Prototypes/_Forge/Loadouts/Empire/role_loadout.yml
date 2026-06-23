@@ -24,6 +24,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Soldier
@@ -52,6 +53,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Praetorian
@@ -80,11 +82,12 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
-# region Tessarian
+# region Cardinal
 - type: roleLoadout
-  id: JobTessarian # Officer
+  id: JobCardinal # Officer
   groups:
   - EmpireNeck
   - EmpireFace
@@ -108,6 +111,36 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
+  canCustomizeName: true
+
+# region Arbiter
+- type: roleLoadout
+  id: JobArbiter # Officer
+  groups:
+  - EmpireNeck
+  - EmpireFace
+  - EmpireGlasses
+  - EmpireBalaclava
+  - EmpireTessarianJumpsuit
+  - EmpireOuterClothing
+  - EmpireBelt
+  - EmpireGloves
+  - EmpireShoes
+  - EmpireBackpack
+  - EmpireEarsCommand
+  - EmpireBoxSurvival
+  - EmpireGoldPDA
+  - ContractorWallet
+  - ContractorCartridge
+##  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+  - ContractorEncryptionKey
+  - ContractorFun
+  - ContractorTrinkets
+  # - EmpireSpeciesSpecific
+  - EmpireFirearm
+  - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Consul
@@ -137,6 +170,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Inquisitor
@@ -165,6 +199,7 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 # region Praefect
@@ -193,4 +228,5 @@
   # - EmpireSpeciesSpecific
   - EmpireFirearm
   - EmpireMag
+  - FactionArmorPlates
   canCustomizeName: true

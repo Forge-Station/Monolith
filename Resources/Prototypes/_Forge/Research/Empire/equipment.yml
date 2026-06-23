@@ -32,7 +32,6 @@
   recipeUnlocks:
   - ClothingOuterHardsuitRI14
   - ClothingOuterHardsuitRI14m
-  - ClothingOuterHardsuitRI14i
   technologyPrerequisites:
   - EmpireBasicClothing
   position: 10, 14
@@ -46,8 +45,6 @@
   cost: 80000
   recipeUnlocks:
   - ClothingOuterHardsuitRI22
-  - ClothingOuterHardsuitRI22i
-  - ClothingOuterHardsuitRI22c
   technologyPrerequisites:
   - EmpireBasicEquipment
   - UniversalMaterialResearchT2

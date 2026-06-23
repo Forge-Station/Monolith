@@ -1,2 +1,2 @@
-ent-VendingMachineRestockBarista = BaristaVend Restock
+ent-VendingMachineRestockBarista = ящик пополнения BaristaVend
     .desc = Ящик с чайными пакетиками, стаканами и расходниками для бариста. Загрузите в автомат BaristaVend для пополнения. На этикетке: «ТОЛЬКО ДЛЯ АВТОРИЗОВАННЫХ БАРИСТА. ВСКРЫТИЕ ИСПОРТИТ ВКУС».

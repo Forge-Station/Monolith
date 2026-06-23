@@ -1,6 +1,5 @@
-forge-research-technology-shipweapon-l85 = L85 Autocannon
-forge-research-technology-shipweapon-m25 = M25 Mining Pulser
-forge-research-technology-shipweapon-phalanx = L-1 Phalanx
+forge-research-technology-shipweapon-entry = Entry Ship Weapons
+forge-research-technology-shipweapon-midline = Midline Ship Weapons
 forge-research-technology-shipweapon-rac30 = RAC-30 Autocannon
 forge-research-technology-shipweapon-ak570 = AK570 Autocannon
 forge-research-technology-shipweapon-dravon = DRAVON Autocannon

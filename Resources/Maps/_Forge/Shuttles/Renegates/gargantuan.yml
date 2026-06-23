@@ -3,9 +3,9 @@ meta:
   category: Grid
   engineVersion: 277.0.0
   forkId: frontier_mapping
-  forkVersion: f6b02be954228c3384ac4d271e9daf3e7cccb7ad
-  time: 05/30/2026 09:44:39
-  entityCount: 67
+  forkVersion: b8f0151814002da223023103808f268657f7948a
+  time: 06/03/2026 13:29:07
+  entityCount: 68
 maps: []
 grids:
 - 1
@@ -63,9 +63,9 @@ entities:
     - type: ThermalSignature
     - type: SpreaderGrid
       spreadQueues:
-        MetalFoam: []
         Puddle: []
         Smoke: []
+        MetalFoam: []
         Kudzu: []
     - type: Shuttle
       dampingModifier: 0.25
@@ -223,6 +223,13 @@ entities:
     - type: Transform
       pos: 0.5,2.5
       parent: 1
+- proto: ButtonFrameCautionSecurity
+  entities:
+  - uid: 67
+    components:
+    - type: Transform
+      pos: -0.25,0.5
+      parent: 1
 - proto: CableApcExtension
   entities:
   - uid: 17
@@ -314,17 +321,14 @@ entities:
     - type: Transform
       pos: 0.5,2.5
       parent: 1
-- proto: ChairWood
+- proto: ChairPilotSeat
   entities:
-  - uid: 34
+  - uid: 57
     components:
     - type: Transform
-      anchored: True
       rot: 3.141592653589793 rad
       pos: -0.5,-0.5
       parent: 1
-    - type: Physics
-      bodyType: Static
 - proto: CharonSlugAmmo
   entities:
   - uid: 36
@@ -355,19 +359,77 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClosetMaintenance
+- proto: ClothingBeltUtilityEngineering
+  entities:
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 0.34399188,-1.5323038
+      parent: 1
+- proto: ClothingEyesGlassesMeson
+  entities:
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 0.62538433,-1.2406372
+      parent: 1
+- proto: ComputerShuttle
+  entities:
+  - uid: 59
+    components:
+    - type: Transform
+      pos: -0.5,0.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 0
+- proto: ComputerTabletopGunneryConsole
+  entities:
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 0
+- proto: GeneratorWallmountAPU
+  entities:
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+    - type: PowerSupplier
+      supplyRate: 25000
+- proto: GunneryServerLow
+  entities:
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+    - type: Battery
+      startingCharge: 0
+    - type: ApcPowerReceiver
+      powerLoad: 5
+- proto: LargeAPC
+  entities:
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 0.5,-1.5
+      parent: 1
+- proto: LockerRen
   entities:
   - uid: 35
     components:
-    - type: MetaData
-      desc: Это хранилище боеприпасов для чарона.
-      name: технический шкаф
     - type: Transform
       anchored: True
       pos: -1.5,0.5
       parent: 1
-    - type: Weldable
-      isWelded: True
     - type: Physics
       bodyType: Static
     - type: ContainerContainer
@@ -384,71 +446,23 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-- proto: ClothingBeltUtilityEngineering
-  entities:
-  - uid: 40
-    components:
-    - type: Transform
-      pos: 0.34399188,-1.5323038
-      parent: 1
-- proto: ClothingEyesGlassesMeson
-  entities:
-  - uid: 41
-    components:
-    - type: Transform
-      pos: 0.62538433,-1.2406372
-      parent: 1
-- proto: ComputerTabletopShuttle
-  entities:
-  - uid: 42
-    components:
-    - type: Transform
-      pos: -0.5,0.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
-- proto: GeneratorWallmountAPU
-  entities:
-  - uid: 43
-    components:
-    - type: Transform
-      pos: 0.5,1.5
-      parent: 1
-    - type: PowerSupplier
-      supplyRate: 25000
-- proto: LargeAPC
-  entities:
-  - uid: 45
-    components:
-    - type: Transform
-      pos: 0.5,-1.5
-      parent: 1
-- proto: MiniStationAnchorOff
-  entities:
-  - uid: 44
-    components:
-    - type: Transform
-      pos: 0.5,0.5
-      parent: 1
 - proto: NFHolopadShip
   entities:
-  - uid: 47
+  - uid: 45
     components:
     - type: Transform
       pos: 0.5,-0.5
       parent: 1
 - proto: Poweredlight
   entities:
-  - uid: 48
+  - uid: 46
     components:
     - type: Transform
       pos: 0.5,0.5
       parent: 1
 - proto: PoweredlightExterior
   entities:
-  - uid: 49
+  - uid: 47
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -456,37 +470,37 @@ entities:
       parent: 1
 - proto: RadarEdgeMarkerStraight
   entities:
-  - uid: 50
+  - uid: 48
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,-1.5
       parent: 1
-  - uid: 51
+  - uid: 49
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,1.5
       parent: 1
-  - uid: 52
+  - uid: 50
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,-0.5
       parent: 1
-  - uid: 53
+  - uid: 51
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,-2.5
       parent: 1
-  - uid: 54
+  - uid: 52
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,0.5
       parent: 1
-  - uid: 55
+  - uid: 53
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -494,24 +508,24 @@ entities:
       parent: 1
 - proto: Railing
   entities:
-  - uid: 56
+  - uid: 54
     components:
     - type: Transform
       pos: -0.5,-1.5
       parent: 1
-  - uid: 57
+  - uid: 55
     components:
     - type: Transform
       pos: 0.5,-1.5
       parent: 1
-  - uid: 58
+  - uid: 56
     components:
     - type: Transform
       pos: -0.5,1.5
       parent: 1
 - proto: SignalButton
   entities:
-  - uid: 59
+  - uid: 68
     components:
     - type: Transform
       pos: -0.25,0.5
@@ -523,61 +537,53 @@ entities:
           - DoorBolt
 - proto: SmallGyroscope
   entities:
-  - uid: 60
+  - uid: 58
     components:
     - type: Transform
       pos: -0.5,-1.5
       parent: 1
-- proto: TableWood
-  entities:
-  - uid: 46
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,0.5
-      parent: 1
 - proto: ThrusterSecurity
   entities:
-  - uid: 61
+  - uid: 60
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -0.5,-3.5
       parent: 1
-  - uid: 62
+  - uid: 61
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,-2.5
       parent: 1
-  - uid: 63
+  - uid: 62
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -0.5,-2.5
       parent: 1
-  - uid: 64
+  - uid: 63
     components:
     - type: Transform
       pos: 0.5,2.5
       parent: 1
 - proto: WallReinforced
   entities:
-  - uid: 65
+  - uid: 64
     components:
     - type: Transform
       pos: 0.5,1.5
       parent: 1
 - proto: WarpPoint
   entities:
-  - uid: 66
+  - uid: 65
     components:
     - type: Transform
       pos: -0.5,-0.5
       parent: 1
 - proto: WeaponTurretCharonReload
   entities:
-  - uid: 67
+  - uid: 66
     components:
     - type: Transform
       rot: 3.141592653589793 rad

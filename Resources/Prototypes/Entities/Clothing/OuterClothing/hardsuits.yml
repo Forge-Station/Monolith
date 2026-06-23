@@ -691,8 +691,8 @@
         Radiation: 0.5
         Caustic: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.8 # 0.9->0.8 Forge-change
+    sprintModifier: 0.8 # 0.9->0.8 Forge-change
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -726,13 +726,13 @@
       coefficients:
         Blunt: 0.55
         Slash: 0.55
-        Piercing: 0.5
-        Heat: 0.5
+        Piercing: 0.55 # 0.5->0.55 Forge-change
+        Heat: 0.55 # 0.5->0.55 Forge-change
         Radiation: 0.35
         Caustic: 0.2
   - type: ClothingSpeedModifier # Mono
-    walkModifier: 0.93
-    sprintModifier: 0.93
+    walkModifier: 0.9 # 0.93->0.9 Forge-change
+    sprintModifier: 0.9 # 0.93->0.9 Forge-change
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -1117,7 +1117,7 @@
         Caustic: 0.2
   - type: ClothingSpeedModifier 
     walkModifier: 0.9
-    sprintModifier: 0.6
+    sprintModifier: 0.5 # Forge-change 0.6 -> 0.5
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance 
     coefficient: 0.5 
@@ -1203,7 +1203,7 @@
         Caustic: 0.2
   - type: ClothingSpeedModifier 
     walkModifier: 1.0
-    sprintModifier: 0.95
+    sprintModifier: 0.9 # Forge-change 0.95 -> 0.9
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance 
     coefficient: 0.5 
@@ -1246,7 +1246,7 @@
         Caustic: 0.8
   - type: ClothingSpeedModifier 
     walkModifier: 1.0
-    sprintModifier: 0.9
+    sprintModifier: 0.8 # Forge-change 0.9 -> 0.8
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance 
     coefficient: 0.5 
@@ -1269,7 +1269,7 @@
 
 #ERT Janitor Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase # Forge-change
+  parent: ForgeClothingOuterHardsuitBase # Forge-change
   id: ClothingOuterHardsuitERTJanitor
   name: ERT janitor's hardsuit
   description: A protective hardsuit worn by the janitors of an emergency response team.
@@ -1292,8 +1292,8 @@
         Radiation: 0.5
         Caustic: 0
   - type: ClothingSpeedModifier 
-    walkModifier: 1.0
-    sprintModifier: 1.2
+    walkModifier: 1.2  # Forge-change
+    sprintModifier: 1.2  # Forge-change
   - type: SpaceFlightProfile
     thrustMultiplier: 0.7
     controlMultiplier: 1.15

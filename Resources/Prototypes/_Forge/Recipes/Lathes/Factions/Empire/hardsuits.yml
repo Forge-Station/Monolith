@@ -46,9 +46,10 @@
     Plastic: 3000
     Steel: 5000
     Plasteel: 5500
-    Durathread: 2000
+    Durathread: 3000
     Silver: 1500
     Gold: 4500
+    UraniumDepleted: 100
     
 - type: latheRecipe
   parent: MonoHardsuitT2Recipe
@@ -84,8 +85,8 @@
   completetime: 22
   materials:
     Plastic: 1000
-    Steel: 8000
-    Plastitanium: 2000
+    Steel: 7000
+    Plastitanium: 3000
     Plasteel: 6500
     Durathread: 1500
     Silver: 2000
@@ -115,7 +116,7 @@
   materials:
     Plastic: 4000
     Steel: 5000
-    Plastitanium: 2000
+    Plastitanium: 2500
     Plasteel: 3500
     Durathread: 2000
     Silver: 5000

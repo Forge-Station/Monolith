@@ -1,0 +1,59 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: ForgeTradeContractProofDiskBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: nt
+  - type: StaticPrice
+    price: 0
+
+- type: entity
+  parent: ForgeTradeContractProofDiskBase
+  id: ForgeTradeContractProofDeliveryReceipt
+  name: "экспедиционная накладная"
+  description: "Подтверждение, что контрактный груз доставлен и принят на месте."
+
+- type: entity
+  parent: ForgeTradeContractProofDiskBase
+  id: ForgeTradeContractProofCarpTrophy
+  name: "метка космического карпа"
+  description: "Контрактная метка, снятая с последней подтвержденной цели."
+
+- type: entity
+  parent: ForgeTradeContractProofDiskBase
+  id: ForgeTradeContractProofHuntTrophy
+  name: "контрактная трофейная метка"
+  description: "Подтверждение зачистки опасной цели на экспедиционном обломке."
+
+- type: entity
+  parent: BaseItem
+  id: ForgeTradeContractProofDroneCore
+  name: "контрактное ядро дрона"
+  description: "Повреждённое AI-ядро контрактного дрон-шаттла. Торговый автомат принимает его как доказательство перехвата."
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: _Mono/Mobs/Core/drone.rsi
+    layers:
+    - state: base
+    - state: red_t2
+      shader: unshaded
+  - type: StaticPrice
+    price: 0
+
+- type: ncRetrievalProofPreset
+  id: ForgeTradeDeliveryReceiptProof
+  prototype: ForgeTradeContractProofDeliveryReceipt
+  ownership: Bearer
+  reissue: Never
+  consumeOnRewardClaim: true

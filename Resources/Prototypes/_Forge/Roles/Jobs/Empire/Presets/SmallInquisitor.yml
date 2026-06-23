@@ -3,7 +3,7 @@
   name: forge-job-name-smallinq
   description: forge-job-desc-smallinq
   supervisors: job-supervisors-inquisitor
-  playTimeTracker: JobIconEmpireSmallInq
+  playTimeTracker: JobEmpireSmallInquisitor
   icon: JobIconEmpireSmallInq
   requirements:
     - !type:OverallPlaytimeRequirement

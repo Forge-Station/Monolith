@@ -24,8 +24,14 @@ public sealed partial class FireControlServerComponent : Component
     [ViewVariables]
     public int UsedProcessingPower;
 
-    [ViewVariables, DataField] // Forge-Change: MaxWeapons
+    // Forge-Change-Start: MaxWeapons limits active selection/firing, not registration count.
+    [ViewVariables, DataField]
+    /// <summary>
+    /// Maximum weapons that can be selected for firing at once in gunnery consoles.
+    /// Registration on the server is limited by <see cref="ProcessingPower"/> only.
+    /// </summary>
     public int MaxWeapons = int.MaxValue;
+    // Forge-Change-End
 
     [ViewVariables, DataField]
     public int MaxConsoles = 1;

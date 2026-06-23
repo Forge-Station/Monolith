@@ -6,7 +6,7 @@
   category: Small
   group: Empire
   access: Empire
-  price: 78000
+  price: 80000 # PR:206, fix Shipyard test
   shuttlePath: /Maps/_Forge/Shuttles/Empire/medtape.yml
   guidebookPage: Null
   class:

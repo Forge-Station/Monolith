@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: EES Вектор
   description: Вектор - средний инженерный шаттл для починки тех, кто был выведен из строя. Для боя не предназначен, но может продержаться какое-то время.
-  price: 162000
+  price: 195000 # PR:206, fix Shipyard test
   category: Medium
   group: Empire
   access: Empire

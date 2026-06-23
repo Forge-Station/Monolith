@@ -1,6 +1,105 @@
+# Stock-part tiers (MachinePartComponent.Rating): 1 basic | 3 advanced | 4 super | 6 bluespace
+
+- type: entity
+  id: ForgeShieldCircuitboardT1
+  parent: BaseMachineCircuitboard
+  abstract: true
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    requirements:
+      Capacitor: 2
+      Manipulator: 2
+      MatterBin: 1
+    minimumStockPartRating: 1
+
+- type: entity
+  id: ForgeShieldCircuitboardT2
+  parent: BaseMachineCircuitboard
+  abstract: true
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    requirements:
+      Capacitor: 4
+      Manipulator: 2
+      MatterBin: 1
+    minimumStockPartRating: 3
+
+- type: entity
+  id: ForgeShieldCircuitboardT3
+  parent: BaseMachineCircuitboard
+  abstract: true
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    requirements:
+      Capacitor: 4
+      Manipulator: 4
+      MatterBin: 2
+    minimumStockPartRating: 4
+
+- type: entity
+  id: ForgeShieldBoard2x1T3
+  parent: ForgeShieldCircuitboardT3
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - MachineBoard2x1
+
+- type: entity
+  id: ForgeShieldCircuitboardT4
+  parent: BaseMachineCircuitboard
+  abstract: true
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    requirements:
+      Capacitor: 4
+      Manipulator: 4
+      MatterBin: 3
+    minimumStockPartRating: 6
+
+- type: entity
+  id: ForgeShieldBoard2x2T4
+  parent: ForgeShieldCircuitboardT4
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - MachineBoard2x2
+
+- type: entity
+  id: ForgeShieldCircuitboardT5
+  parent: BaseMachineCircuitboard
+  abstract: true
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    requirements:
+      Capacitor: 8
+      Manipulator: 4
+      MatterBin: 4
+    minimumStockPartRating: 6
+
+- type: entity
+  id: ForgeShieldBoard3x3T5
+  parent: ForgeShieldCircuitboardT5
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - MachineBoard3x3
+
 - type: entity
   id: MachineShieldFSG90RCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldCircuitboardT1
   name: FSG-90R shield generator board
   description: A machine board for an FSG-90R shield generator.
   components:
@@ -20,7 +119,7 @@
 
 - type: entity
   id: MachineShieldFSG85ECircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldCircuitboardT1
   name: FSG-85E shield generator board
   description: A machine board for an FSG-85E Brownout shield generator.
   components:
@@ -40,7 +139,7 @@
 
 - type: entity
   id: MachineShieldFSG100Circuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldCircuitboardT1
   name: FSG-100 shield generator board
   description: A machine board for an FSG-100 shield generator.
   components:
@@ -60,7 +159,7 @@
 
 - type: entity
   id: MachineShieldFSG110PCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldCircuitboardT2
   name: FSG-110P shield generator board
   description: A machine board for an FSG-110P shield generator.
   components:
@@ -81,7 +180,7 @@
 
 - type: entity
   id: MachineShieldFSG160CCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x1T3
   name: FSG-160C shield generator board
   description: A machine board for an FSG-160C shield generator.
   components:
@@ -103,7 +202,7 @@
 
 - type: entity
   id: MachineShieldFSG220Circuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x1T3
   name: FSG-220 shield generator board
   description: A machine board for an FSG-220 shield generator.
   components:
@@ -126,7 +225,7 @@
 
 - type: entity
   id: MachineShieldFSG250CCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x1T3
   name: FSG-250C shield generator board
   description: A machine board for an FSG-250C shield generator.
   components:
@@ -150,7 +249,7 @@
 
 - type: entity
   id: MachineShieldFSG355SCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x1T3
   name: FSG-355S shield generator board
   description: A machine board for an FSG-355S Sieve shield generator.
   components:
@@ -174,7 +273,7 @@
 
 - type: entity
   id: MachineShieldFSG330RCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x1T3
   name: FSG-330R shield generator board
   description: A machine board for an FSG-330R shield generator.
   components:
@@ -198,7 +297,7 @@
 
 - type: entity
   id: MachineShieldFSG420Circuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x2T4
   name: FSG-420 shield generator board
   description: A machine board for an FSG-420 shield generator.
   components:
@@ -222,7 +321,7 @@
 
 - type: entity
   id: MachineShieldFSG470PCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x2T4
   name: FSG-470P shield generator board
   description: A machine board for an FSG-470P shield generator.
   components:
@@ -246,7 +345,7 @@
 
 - type: entity
   id: MachineShieldFSG600CCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x2T4
   name: FSG-600C shield generator board
   description: A machine board for an FSG-600C shield generator.
   components:
@@ -270,7 +369,7 @@
 
 - type: entity
   id: MachineShieldFSG900PCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard3x3T5
   name: FSG-900P shield generator board
   description: A machine board for an FSG-900P shield generator.
   components:
@@ -294,7 +393,7 @@
 
 - type: entity
   id: MachineShieldFSG870RCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard3x3T5
   name: FSG-870R shield generator board
   description: A machine board for an FSG-870R Riptide shield generator.
   components:
@@ -318,7 +417,7 @@
 
 - type: entity
   id: MachineShieldFSG950MCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard3x3T5
   name: FSG-950M shield generator board
   description: A machine board for an FSG-950M Anvil shield generator.
   components:
@@ -342,7 +441,7 @@
 
 - type: entity
   id: MachineShieldFSG195LCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x1T3
   name: FSG-195L shield generator board
   description: A machine board for an FSG-195L Tangent shield generator.
   components:
@@ -365,7 +464,7 @@
 
 - type: entity
   id: MachineShieldFSG275PCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x1T3
   name: FSG-275P shield generator board
   description: A machine board for an FSG-275P Weave shield generator.
   components:
@@ -389,7 +488,7 @@
 
 - type: entity
   id: MachineShieldFSG305VCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldBoard2x1T3
   name: FSG-305V shield generator board
   description: A machine board for an FSG-305V Busbar shield generator.
   components:

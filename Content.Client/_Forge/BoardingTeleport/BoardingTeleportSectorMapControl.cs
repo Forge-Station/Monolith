@@ -25,14 +25,17 @@ public sealed class BoardingTeleportSectorMapControl : BoxContainer
     private readonly SharedTransformSystem _xform;
 
     private readonly ShuttleMapControl _map;
+    private readonly LineEdit _searchBox;
     private readonly BoxContainer _objects;
     private readonly Button _selectButton;
     private readonly Label _selectedLabel;
     private readonly Dictionary<MapId, List<IMapObject>> _mapObjects = new();
+    private readonly List<GridMapObject> _listedObjects = new();
 
     private EntityUid? _console;
     private EntityUid? _shuttle;
     private GridMapObject? _selectedGrid;
+    private string _searchFilter = string.Empty;
 
     public event Action<MapCoordinates>? TargetCoordinatesSelected;
     public event Action<NetEntity>? TargetGridSelected;
@@ -91,6 +94,19 @@ public sealed class BoardingTeleportSectorMapControl : BoxContainer
         };
         side.AddChild(scanButton);
 
+        _searchBox = new LineEdit
+        {
+            PlaceHolder = Loc.GetString("boarding-teleport-sector-search-placeholder"),
+            HorizontalExpand = true,
+            Margin = new Thickness(0, 0, 0, 4),
+        };
+        _searchBox.OnTextChanged += args =>
+        {
+            _searchFilter = args.Text.Trim();
+            ApplySearchFilter();
+        };
+        side.AddChild(_searchBox);
+
         _selectButton = new Button
         {
             Text = Loc.GetString("boarding-teleport-sector-select"),
@@ -142,24 +158,31 @@ public sealed class BoardingTeleportSectorMapControl : BoxContainer
     {
         _shuttle = shuttle;
         _map.SetShuttle(shuttle);
+    }
 
-        if (_shuttle != null)
-        {
-            var mapPos = _xform.GetMapCoordinates(_shuttle.Value);
-            _map.SetMap(mapPos.MapId, mapPos.Position);
-        }
+    public void RecenterOnShuttle()
+    {
+        if (_shuttle == null)
+            return;
+
+        var mapPos = _xform.GetMapCoordinates(_shuttle.Value);
+        _map.SetMap(mapPos.MapId, mapPos.Position, recentering: true);
     }
 
     public void RebuildMapObjects()
     {
-        _objects.RemoveAllChildren();
+        _listedObjects.Clear();
         _mapObjects.Clear();
         _selectedGrid = null;
         _selectButton.Disabled = true;
         _selectedLabel.Text = Loc.GetString("boarding-teleport-sector-selected-none");
 
         if (_shuttle == null)
+        {
+            _objects.RemoveAllChildren();
+            _map.SetMapObjects(_mapObjects);
             return;
+        }
 
         var mapQuery = _entManager.AllEntityQueryEnumerator<MapComponent>();
         while (mapQuery.MoveNext(out _, out var map))
@@ -167,6 +190,9 @@ public sealed class BoardingTeleportSectorMapControl : BoxContainer
             foreach (var grid in _mapManager.GetAllGrids(map.MapId))
             {
                 var gridUid = grid.Owner;
+                if (gridUid == _shuttle)
+                    continue;
+
                 if (!_entManager.TryGetComponent<TransformComponent>(gridUid, out var xform))
                     continue;
 
@@ -199,11 +225,47 @@ public sealed class BoardingTeleportSectorMapControl : BoxContainer
                 _mapObjects.GetOrNew(xform.MapID).Add(mapObject);
 
                 if (!mapObject.HideButton)
-                    AddObjectButton(mapObject);
+                    _listedObjects.Add(mapObject);
             }
         }
 
+        RecenterOnShuttle();
         _map.SetMapObjects(_mapObjects);
+        ApplySearchFilter();
+    }
+
+    private void ApplySearchFilter()
+    {
+        _objects.RemoveAllChildren();
+
+        var filter = _searchFilter;
+        var shown = 0;
+
+        foreach (var mapObject in _listedObjects)
+        {
+            if (!MatchesSearch(mapObject.Name, filter))
+                continue;
+
+            AddObjectButton(mapObject);
+            shown++;
+        }
+
+        if (shown == 0 && _listedObjects.Count > 0)
+        {
+            _objects.AddChild(new Label
+            {
+                Text = Loc.GetString("boarding-teleport-sector-search-empty"),
+                FontColorOverride = Color.FromHex("#A8B4C8"),
+            });
+        }
+    }
+
+    private static bool MatchesSearch(string name, string filter)
+    {
+        if (string.IsNullOrWhiteSpace(filter))
+            return true;
+
+        return name.Contains(filter, StringComparison.OrdinalIgnoreCase);
     }
 
     private void PlayScanSound()

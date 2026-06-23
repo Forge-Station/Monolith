@@ -102,12 +102,11 @@ public sealed partial class FireControlSystem : EntitySystem
         args.PushMarkup(
             Loc.GetString(
                 "gunnery-server-examine-slots",
-                ("usedSlots", component.Controlled.Count),
-                ("maxSlots", component.MaxWeapons),
-                ("valueColor", component.Controlled.Count < component.MaxWeapons ? "green" : "yellow")
+                ("registered", component.Controlled.Count),
+                ("maxActive", component.MaxWeapons)
             )
         );
-        // Forge-Change-end
+        // Forge-Change-End
     }
 
     private void OnControllablePowerChanged(EntityUid uid, FireControllableComponent component, PowerChangedEvent args)
@@ -298,11 +297,7 @@ public sealed partial class FireControlSystem : EntitySystem
         if (processingPowerCost > GetRemainingProcessingPower(gridServer.ServerUid.Value, gridServer.ServerComponent))
             return false;
 
-        // Forge-Change-Start
-        if (gridServer.ServerComponent.Controlled.Count >= gridServer.ServerComponent.MaxWeapons)
-            return false;
-        // Forge-Change-end
-
+        // Forge-Change: registration limited by processing power only (MaxWeapons caps active firing).
         if (gridServer.ServerComponent.Controlled.Add(controllable))
         {
             gridServer.ServerComponent.UsedProcessingPower += processingPowerCost;
@@ -322,6 +317,19 @@ public sealed partial class FireControlSystem : EntitySystem
 
         return component.ProcessingPower - component.UsedProcessingPower;
     }
+
+    // Forge-Change-Start: cap simultaneous firing to server MaxWeapons.
+    /// <summary>
+    /// Caps the weapon list to the server's simultaneous firing limit.
+    /// </summary>
+    public List<NetEntity> LimitActiveWeapons(List<NetEntity> weapons, FireControlServerComponent component)
+    {
+        if (component.MaxWeapons <= 0 || weapons.Count <= component.MaxWeapons)
+            return weapons;
+
+        return weapons.Take(component.MaxWeapons).ToList();
+    }
+    // Forge-Change-End
 
     public int GetProcessingPowerCost(EntityUid controllable, FireControllableComponent? component = null)
     {
@@ -430,6 +438,8 @@ public sealed partial class FireControlSystem : EntitySystem
     {
         if (!Resolve(server, ref component))
             return;
+
+        weapons = LimitActiveWeapons(weapons, component);
 
         var grid = component.ConnectedGrid;
         if (grid != null && !CanFireWeapons(grid.Value))

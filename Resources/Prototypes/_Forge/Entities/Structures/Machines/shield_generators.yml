@@ -952,7 +952,7 @@
     baseDraw: 100000
     maxDraw: 300000
     unpoweredBonus: 4
-    damageLimit: 300000
+    damageLimit: 390000
     damageOverloadTimePunishment: 240
     shieldColor: "#FF66D9"
     collisionResistanceMultiplier: 0.3

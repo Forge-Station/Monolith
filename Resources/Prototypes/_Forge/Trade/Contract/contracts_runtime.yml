@@ -1,0 +1,181 @@
+- type: entity
+  id: ForgeTradeContractDropoffSign
+  name: "экспедиционная веха приемки"
+  description: "Временная точка приемки контрактного груза."
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: Objects/Decoration/mines.rsi
+    state: sign_right
+  - type: PointLight
+    enabled: true
+    radius: 2
+    energy: 0.8
+    color: "#6FA8DC"
+
+- type: entity
+  parent: CrateGenericSteel
+  id: ForgeTradeCargoExpeditionCrate
+  name: "меченый экспедиционный ящик"
+  description: "Пломбированный ящик экспедиционной службы. Для контракта важен сам груз, а не содержимое."
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CrateMedical
+  id: ForgeTradeCargoMedicalCrate
+  name: "меченый медицинский ящик"
+  description: "Медицинский ящик с контрактной пломбой."
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CrateSecure
+  id: ForgeTradeCargoSecureCrate
+  name: "меченый защищённый ящик"
+  description: "Защищённый ящик с контрактной пломбой. Важна доставка самого ящика."
+  categories: [ HideSpawnMenu ]
+
+- type: ncRetrievalSourcePreset
+  id: ForgeTradeContractCargoSource
+  spawnCargo: true
+  point:
+    type: MarkerGroup
+    id: ForgeTradeContractCargoSource
+  fallbackToStore: true
+
+- type: ncRetrievalSourcePreset
+  id: ForgeTradeCargoSourceEasy
+  spawnCargo: true
+  point:
+    type: Store
+  spaceSpawn:
+    enabled: true
+    minDistance: 14000
+    maxDistance: 14000
+    safetyRadius: 16
+    placementAttempts: 24
+
+- type: ncRetrievalSourcePreset
+  id: ForgeTradeCargoSourceMedium
+  spawnCargo: true
+  point:
+    type: Store
+  spaceSpawn:
+    enabled: true
+    minDistance: 20000
+    maxDistance: 20000
+    safetyRadius: 16
+    placementAttempts: 24
+
+- type: ncRetrievalSourcePreset
+  id: ForgeTradeCargoSourceHard
+  spawnCargo: true
+  point:
+    type: Store
+  spaceSpawn:
+    enabled: true
+    minDistance: 30000
+    maxDistance: 30000
+    safetyRadius: 16
+    placementAttempts: 24
+
+- type: ncRetrievalDestinationPreset
+  id: ForgeTradeDestinationStoreUi
+  target:
+    type: StoreUi
+
+- type: ncRetrievalDestinationPreset
+  id: ForgeTradeContractDropoffDestination
+  target:
+    type: MarkerGroup
+    id: ForgeTradeContractDropoff
+  radius: 2.0
+
+- type: ncRetrievalGuidancePreset
+  id: ForgeTradeGuidanceCargoToTrader
+  sourceHint: "точка выдачи груза или сам автомат"
+  destinationHint: "верните груз в торговый автомат"
+  pinpointer:
+    enabled: true
+    target: CargoThenDestinationThenStore
+    prototype: PinpointerUniversal
+    maxActive: 7
+
+- type: ncRetrievalGuidancePreset
+  id: ForgeTradeGuidanceCargoToDropoff
+  sourceHint: "точка выдачи груза или сам автомат"
+  destinationHint: "синяя точка приемки"
+  pinpointer:
+    enabled: true
+    target: CargoThenDestinationThenStore
+    prototype: PinpointerUniversal
+    maxActive: 7
+
+- type: ncRetrievalGuidancePreset
+  id: ForgeTradeGuidanceSpaceCargoToTrader
+  sourceHint: "контрактный груз в открытом космосе"
+  destinationHint: "верните груз в торговый автомат"
+  pinpointer:
+    enabled: true
+    target: CargoThenDestinationThenStore
+    prototype: PinpointerUniversal
+    maxActive: 7
+
+- type: ncRetrievalRoutePreset
+  id: ForgeTradeRouteCargoToTrader
+  source: ForgeTradeContractCargoSource
+  destination: ForgeTradeDestinationStoreUi
+  claim:
+    mode: StoreCargo
+  guidance: ForgeTradeGuidanceCargoToTrader
+  delivery:
+    consumeCargo: true
+    lockDeliveredCargo: false
+
+- type: ncRetrievalRoutePreset
+  id: ForgeTradeRouteCargoToTraderEasy
+  source: ForgeTradeCargoSourceEasy
+  destination: ForgeTradeDestinationStoreUi
+  claim:
+    mode: StoreCargo
+  guidance: ForgeTradeGuidanceSpaceCargoToTrader
+  delivery:
+    consumeCargo: true
+    lockDeliveredCargo: false
+
+- type: ncRetrievalRoutePreset
+  id: ForgeTradeRouteCargoToTraderMedium
+  source: ForgeTradeCargoSourceMedium
+  destination: ForgeTradeDestinationStoreUi
+  claim:
+    mode: StoreCargo
+  guidance: ForgeTradeGuidanceSpaceCargoToTrader
+  delivery:
+    consumeCargo: true
+    lockDeliveredCargo: false
+
+- type: ncRetrievalRoutePreset
+  id: ForgeTradeRouteCargoToTraderHard
+  source: ForgeTradeCargoSourceHard
+  destination: ForgeTradeDestinationStoreUi
+  claim:
+    mode: StoreCargo
+  guidance: ForgeTradeGuidanceSpaceCargoToTrader
+  delivery:
+    consumeCargo: true
+    lockDeliveredCargo: false
+
+- type: ncRetrievalRoutePreset
+  id: ForgeTradeRouteCargoToDropoffProof
+  source: ForgeTradeContractCargoSource
+  destination: ForgeTradeContractDropoffDestination
+  claim:
+    mode: DestinationProof
+    proof: ForgeTradeDeliveryReceiptProof
+  guidance: ForgeTradeGuidanceCargoToDropoff
+  delivery:
+    consumeCargo: true
+    lockDeliveredCargo: false

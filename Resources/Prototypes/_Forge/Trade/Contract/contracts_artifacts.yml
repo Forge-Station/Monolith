@@ -1,0 +1,80 @@
+- type: ncArtifactStudyContract
+  id: ForgeArtifactStudyEasy
+  name: "Слабый резонанс"
+  description: "Отделу ксеноархеологии нужен первичный разбор безопасного артефакта. Раскройте все его узлы и принесите объект к терминалу."
+  icon: ForgeContractStudyArtifactEasy
+  artifact: ForgeContractStudyArtifactEasy
+  spawn:
+    point:
+      type: Store
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 35000
+  - type: Item
+    prototype: ResearchDisk35000
+    count: 1
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsBasicFull
+    count: { min: 5, max: 8 }
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsValuableFull
+    count: { min: 2, max: 4 }
+  - type: Pool
+    pool: ForgeExpeditionRewardBasic
+    count: { min: 1, max: 3 }
+
+- type: ncArtifactStudyContract
+  id: ForgeArtifactStudyMedium
+  name: "Нестабильная матрица"
+  description: "Учёные просят раскрыть активный артефакт с нестабильным откликом. Завершите изучение узлов и верните объект к терминалу."
+  icon: ForgeContractStudyArtifactMedium
+  artifact: ForgeContractStudyArtifactMedium
+  spawn:
+    point:
+      type: Store
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 65000
+  - type: Item
+    prototype: ResearchDisk65000
+    count: 1
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsBasicFull
+    count: { min: 6, max: 10 }
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsValuableFull
+    count: { min: 4, max: 7 }
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 1, max: 3 }
+
+- type: ncArtifactStudyContract
+  id: ForgeArtifactStudyHard
+  name: "Глубокий резонанс"
+  description: "Редкий артефакт даёт сильный отклик и требует полного раскрытия структуры. Изучите все узлы и доставьте объект к терминалу."
+  icon: ForgeContractStudyArtifactHard
+  artifact: ForgeContractStudyArtifactHard
+  spawn:
+    point:
+      type: Store
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 100000
+  - type: Item
+    prototype: ResearchDisk100000
+    count: 1
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsBasicFull
+    count: { min: 8, max: 12 }
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsValuableFull
+    count: { min: 6, max: 10 }
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: { min: 1, max: 3 }
+  - type: Pool
+    pool: ForgeExpeditionRewardEliteTechDisks
+    count: { min: 1, max: 3 }

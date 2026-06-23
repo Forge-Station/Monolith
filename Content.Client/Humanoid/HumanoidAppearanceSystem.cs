@@ -13,6 +13,8 @@ namespace Content.Client.Humanoid;
 
 public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 {
+
+    private const string AnimatedMarkingSuffix = "Animated"; // Forge-Change
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private MarkingManager _markingManager = default!;
 
@@ -240,7 +242,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         {
             foreach (var marking in markingList)
             {
-                RemoveMarking(marking, sprite);
+                ClearMarking(marking, sprite); // Forge-Change
             }
         }
 
@@ -250,10 +252,31 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         {
             foreach (var marking in markingList)
             {
-                RemoveMarking(marking, sprite);
+                ClearMarking(marking, sprite); // Forge-Change
             }
         }
     }
+
+    // Forge-Change-start: remove stale static/animated counterpart layers when refreshing markings.
+    private void ClearMarking(Marking marking, SpriteComponent spriteComp)
+    {
+        RemoveMarking(marking, spriteComp);
+        RemoveAnimatedCounterpart(marking, spriteComp);
+    }
+
+    private void RemoveAnimatedCounterpart(Marking marking, SpriteComponent spriteComp)
+    {
+        var markingId = marking.MarkingId;
+        var counterpartId = markingId.EndsWith(AnimatedMarkingSuffix, StringComparison.Ordinal)
+            ? markingId[..^AnimatedMarkingSuffix.Length]
+            : $"{markingId}{AnimatedMarkingSuffix}";
+
+        if (!_prototypeManager.TryIndex<MarkingPrototype>(counterpartId, out var counterpart))
+            return;
+
+        RemoveMarking(counterpart, spriteComp);
+    }
+    // Forge-Change-end
 
     private void RemoveMarking(Marking marking, SpriteComponent spriteComp)
     {
@@ -262,6 +285,12 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             return;
         }
 
+        RemoveMarking(prototype, spriteComp); // Forge-Change
+    }
+
+    // Forge-Change-start: allow removing layers from a prototype without a live marking instance.
+    private void RemoveMarking(MarkingPrototype prototype, SpriteComponent spriteComp)
+    {
         foreach (var sprite in prototype.Sprites)
         {
             if (sprite is not SpriteSpecifier.Rsi rsi)
@@ -269,7 +298,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
                 continue;
             }
 
-            var layerId = $"{marking.MarkingId}-{rsi.RsiState}";
+            var layerId = $"{prototype.ID}-{rsi.RsiState}";
             if (!spriteComp.LayerMapTryGet(layerId, out var index))
             {
                 continue;
@@ -279,6 +308,8 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             spriteComp.RemoveLayer(index);
         }
     }
+    // Forge-Change-end
+
     private void ApplyMarking(MarkingPrototype markingPrototype,
         IReadOnlyList<Color>? colors,
         bool visible,

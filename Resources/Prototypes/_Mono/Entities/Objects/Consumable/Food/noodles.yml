@@ -19,7 +19,9 @@
         maxVol: 35
         reagents:
         - ReagentId: Nutriment
-          Quantity: 15
+          Quantity: 13         # Forge-change 15>13
         - ReagentId: Flavorol
           Quantity: 20
+        - ReagentId: Lactozit  # Forge-change
+          Quantity: 2          # Forge-change
 # Tastes like pasta.

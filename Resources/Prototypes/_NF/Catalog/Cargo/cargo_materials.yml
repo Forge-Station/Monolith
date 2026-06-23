@@ -59,7 +59,7 @@
     sprite: /Textures/_NF/Structures/Storage/magnetbox.rsi
     state: rubbishbox
   product: TrashBox
-  cost: 500
+  cost: 800
   category: cargoproduct-category-name-materials
   group: market
 # Forge-Change-End

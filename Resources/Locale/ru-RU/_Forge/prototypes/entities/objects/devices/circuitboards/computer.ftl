@@ -1,0 +1,12 @@
+ent-NtRankComputerCircuitboard = плата консоли должностей NT
+    .desc = Печатная плата компьютера для консоли должностей NT.
+ent-EmpRankComputerCircuitboard = плата консоли назначений Империи
+    .desc = Печатная плата компьютера для консоли назначений Империи.
+ent-RngRankComputerCircuitboard = плата консоли должностей ВКР
+    .desc = Печатная плата компьютера для консоли должностей ВКR.
+ent-TsfRankComputerCircuitboard = плата консоли должностей ТСФ
+    .desc = Печатная плата компьютера для консоли должностей ТСФ.
+ent-TtiRankComputerCircuitboard = плата консоли должностей TTI
+    .desc = Печатная плата компьютера для консоли должностей TTI.
+ent-UspRankComputerCircuitboard = плата консоли должностей USSP
+    .desc = Печатная плата компьютера для консоли должностей USSP.

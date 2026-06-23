@@ -40,3 +40,5 @@ ent-ShipVoucherTsfT1Random = случайный ваучер ТСФ
 ent-ShipVoucherTsfT2Random = случайный ваучер ТСФ
     .desc = { ent-ShipVoucherTsfT0.desc }
     .suffix = Т2
+ent-ShipVoucherBalor = ваучер «Балор»
+    .desc = Небольшая карта, содержащая данные для получения любого дрона из резервов верфи «Балор».

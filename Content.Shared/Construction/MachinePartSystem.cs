@@ -11,11 +11,11 @@ namespace Content.Shared.Construction
     /// <summary>
     /// Deals with machine parts and machine boards.
     /// </summary>
-    public sealed class MachinePartSystem : EntitySystem
+    public sealed partial class MachinePartSystem : EntitySystem
     {
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
-        [Dependency] private readonly SharedLatheSystem _lathe = default!;
-        [Dependency] private readonly SharedConstructionSystem _construction = default!;
+        [Dependency] private IPrototypeManager _prototype = default!;
+        [Dependency] private SharedLatheSystem _lathe = default!;
+        [Dependency] private SharedConstructionSystem _construction = default!;
 
         public override void Initialize()
         {
@@ -59,6 +59,13 @@ namespace Content.Shared.Construction
                 }
 
                 // Frontier: restore upgradeable parts
+                if (component.Requirements.Count > 0)
+                {
+                    args.PushMarkup(Loc.GetString("machine-board-component-min-stock-part-tier",
+                        ("tierName", GetStockPartTierName(component.MinimumStockPartRating)),
+                        ("rating", component.MinimumStockPartRating)));
+                }
+
                 foreach (var (part, amount) in component.Requirements)
                 {
                     var partProto = _prototype.Index(part);
@@ -86,6 +93,17 @@ namespace Content.Shared.Construction
             }
         }
         // End Frontier
+
+        public string GetStockPartTierName(int minimumRating)
+        {
+            return Loc.GetString(minimumRating switch
+            {
+                >= 6 => "machine-part-stock-tier-bluespace",
+                >= 4 => "machine-part-stock-tier-super",
+                >= 3 => "machine-part-stock-tier-advanced",
+                _ => "machine-part-stock-tier-basic",
+            });
+        }
 
         public Dictionary<string, int> GetMachineBoardMaterialCost(Entity<MachineBoardComponent> entity, int coefficient = 1)
         {

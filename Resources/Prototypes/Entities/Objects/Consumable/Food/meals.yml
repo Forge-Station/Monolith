@@ -4,6 +4,32 @@
 
 # Base
 
+- type: entity  # Forge-Change-Comp
+  parent: FoodMealBase  
+  id: FoodMealHotdog  
+  name: hotdog  
+  description: Hot diggity dog!  
+  components:  
+  - type: Tag  
+    tags:  
+    - Cooked  
+  - type: FlavorProfile  
+    flavors:  
+      - meaty  
+      - bread  
+  - type: Sprite  
+    sprite: Objects/Consumable/Food/meals.rsi  
+    state: hotdog  
+  - type: SolutionContainerManager  
+    solutions:  
+      food:  
+        maxVol: 18  
+        reagents:  
+        - ReagentId: Nutriment  
+          Quantity: 8  
+        - ReagentId: Flavorol  
+          Quantity: 5
+
 - type: entity
   parent: FoodInjectableBase
   id: FoodMealBase
@@ -24,6 +50,7 @@
           Quantity: 15
         - ReagentId: Flavorol
           Quantity: 10
+
 # Meals
 
 - type: entity
@@ -36,6 +63,19 @@
     flavors:
       - cheesy
       - potatoes
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 36
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Flavorol
+          Quantity: 10
+        - ReagentId: Lactozit
+          Quantity: 1
+  # Forge-change-end
   - type: Sprite
     state: loadedbakedpotato
 # Tastes like potato.
@@ -65,6 +105,19 @@
       - potatoes
       - salty
       - cheesy
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 36
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Flavorol
+          Quantity: 10
+        - ReagentId: Lactozit
+          Quantity: 1
+  # Forge-change-end
   - type: Sprite
     state: fries-cheesy
 # Tastes like fries, cheese.
@@ -148,6 +201,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
 # Tastes like nachos, cheese.
 
 - type: entity
@@ -255,6 +310,7 @@
       - fishy
       - batter
       - spicy
+      - cheesy # Forge-change
   - type: Sprite
     state: cubancarp
   - type: SolutionContainerManager
@@ -268,6 +324,8 @@
           Quantity: 3
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Tag
     tags:
     - CubanCarp
@@ -363,7 +421,7 @@
   description: BBQ ribs, slathered in a healthy coating of BBQ sauce. The least vegan thing to ever exist.
   components:
   - type: Food
-    trash: 
+    trash:
     - FoodKebabSkewer
   - type: FlavorProfile
     flavors:
@@ -439,6 +497,8 @@
           Quantity: 9
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -543,6 +603,19 @@
         - cheesy
     - type: Sprite
       state: queso
+    # Forge-change-start
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          maxVol: 36
+          reagents:
+          - ReagentId: Nutriment
+            Quantity: 15
+          - ReagentId: Flavorol
+            Quantity: 10
+          - ReagentId: Lactozit
+            Quantity: 1
+    # Forge-change-end
 # Its queso! Everyone loves queso... Right?.
 
 - type: entity
@@ -635,7 +708,7 @@
   description: Buttery.
   components:
   - type: Food
-    trash: 
+    trash:
     - FoodPlate
   - type: FlavorProfile
     flavors:

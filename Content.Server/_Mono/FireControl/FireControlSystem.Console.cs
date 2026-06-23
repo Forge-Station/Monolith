@@ -26,16 +26,19 @@ namespace Content.Server._Mono.FireControl;
 
 public sealed partial class FireControlSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly ShuttleConsoleSystem _shuttleConsoleSystem = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly CrewedShuttleSystem _crewedShuttle = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private ShuttleConsoleSystem _shuttleConsoleSystem = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private CrewedShuttleSystem _crewedShuttle = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!; // Forge-Change
 
     private bool _completedCheck = false;
+
+    private readonly HashSet<Entity<FireControlConsoleComponent>> _consoleSet = new(); // Forge-Change: reused buffer for per-grid console lookups.
 
     private void InitializeConsole()
     {
@@ -45,6 +48,10 @@ public sealed partial class FireControlSystem : EntitySystem
         SubscribeLocalEvent<FireControlConsoleComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<FireControlConsoleComponent, FireControlConsoleRefreshServerMessage>(OnRefreshServer);
         SubscribeLocalEvent<FireControlConsoleComponent, FireControlConsoleFireMessage>(OnFire);
+        // Forge-Change-Start: weapon preset save/rename handlers.
+        SubscribeLocalEvent<FireControlConsoleComponent, FireControlConsoleSavePresetMessage>(OnSavePreset);
+        SubscribeLocalEvent<FireControlConsoleComponent, FireControlConsoleSetPresetNameMessage>(OnSetPresetName);
+        // Forge-Change-End
         SubscribeLocalEvent<FireControlConsoleComponent, BoundUIOpenedEvent>(OnUIOpened);
         SubscribeLocalEvent<FireControlConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt);
     }
@@ -137,9 +144,12 @@ public sealed partial class FireControlSystem : EntitySystem
         if (grid == null)
             return;
 
-        // Fire the actual weapons
-        FireWeapons((EntityUid)component.ConnectedServer, args.Selected, args.Coordinates, server);
-        if ((component.NextLog == null || component.NextLog < _timing.CurTime) && args.Selected.Any())
+        // Forge-Change: enforce server MaxWeapons when firing from console.
+        var selected = server.MaxWeapons > 0 && args.Selected.Count > server.MaxWeapons
+            ? args.Selected.Take(server.MaxWeapons).ToList()
+            : args.Selected;
+        FireWeapons((EntityUid)component.ConnectedServer, selected, args.Coordinates, server);
+        if ((component.NextLog == null || component.NextLog < _timing.CurTime) && selected.Any())
         {
             var firePos = _transform.ToMapCoordinates(GetCoordinates(args.Coordinates)).Position;
             var ourPos = _transform.GetWorldPosition(grid.Value);
@@ -164,9 +174,89 @@ public sealed partial class FireControlSystem : EntitySystem
         UpdateUi(uid, component);
 
         // Raise an event to track the cursor position even when not firing
-        var fireEvent = new FireControlConsoleFireEvent(args.Coordinates, args.Selected);
+        var fireEvent = new FireControlConsoleFireEvent(args.Coordinates, selected);
         RaiseLocalEvent(uid, fireEvent);
     }
+
+    // Forge-Change-Start: persist weapon presets on the console entity (map save via DataField).
+    private void OnSavePreset(EntityUid uid, FireControlConsoleComponent component, FireControlConsoleSavePresetMessage args)
+    {
+        if (!IsValidPresetIndex(args.PresetIndex))
+            return;
+
+        EnsureWeaponPresets(component);
+        var preset = component.WeaponPresets[args.PresetIndex];
+        preset.Name = args.Name.Trim();
+        preset.WeaponNames.Clear();
+        preset.Weapons = args.Weapons.Select(w => new GunneryWeaponPresetWeaponData
+        {
+            Name = w.Name,
+            WeaponEntity = w.WeaponEntity,
+            HasWeaponEntity = w.HasWeaponEntity,
+            GridPosition = w.GridPosition,
+            HasGridPosition = w.HasGridPosition,
+        }).ToList();
+        UpdateUi(uid, component);
+    }
+
+    private void OnSetPresetName(EntityUid uid, FireControlConsoleComponent component, FireControlConsoleSetPresetNameMessage args)
+    {
+        if (!IsValidPresetIndex(args.PresetIndex))
+            return;
+
+        EnsureWeaponPresets(component);
+        component.WeaponPresets[args.PresetIndex].Name = args.Name.Trim();
+        UpdateUi(uid, component);
+    }
+
+    private static bool IsValidPresetIndex(int index)
+    {
+        return index is >= 0 and < FireControlConsoleComponent.WeaponPresetCount;
+    }
+
+    private static void EnsureWeaponPresets(FireControlConsoleComponent component)
+    {
+        while (component.WeaponPresets.Count < FireControlConsoleComponent.WeaponPresetCount)
+            component.WeaponPresets.Add(new GunneryWeaponPresetData());
+
+        while (component.WeaponPresets.Count > FireControlConsoleComponent.WeaponPresetCount)
+            component.WeaponPresets.RemoveAt(component.WeaponPresets.Count - 1);
+    }
+
+    private static GunneryWeaponPresetState[] BuildPresetState(FireControlConsoleComponent component)
+    {
+        EnsureWeaponPresets(component);
+        var presets = new GunneryWeaponPresetState[FireControlConsoleComponent.WeaponPresetCount];
+
+        for (var i = 0; i < FireControlConsoleComponent.WeaponPresetCount; i++)
+        {
+            var preset = component.WeaponPresets[i];
+            presets[i] = new GunneryWeaponPresetState(preset.Name, BuildPresetWeaponState(preset));
+        }
+
+        return presets;
+    }
+
+    private static GunneryWeaponPresetWeaponState[] BuildPresetWeaponState(GunneryWeaponPresetData preset)
+    {
+        if (preset.Weapons.Count > 0)
+        {
+            return preset.Weapons.Select(w => new GunneryWeaponPresetWeaponState(
+                w.Name,
+                w.WeaponEntity,
+                w.HasWeaponEntity,
+                w.GridPosition,
+                w.HasGridPosition)).ToArray();
+        }
+
+        return preset.WeaponNames.Select(name => new GunneryWeaponPresetWeaponState(
+            name,
+            NetEntity.Invalid,
+            hasWeaponEntity: false,
+            Vector2.Zero,
+            hasGridPosition: false)).ToArray();
+    }
+    // Forge-Change-End
 
     public void OnUIOpened(EntityUid uid, FireControlConsoleComponent component, BoundUIOpenedEvent args)
     {
@@ -251,12 +341,41 @@ public sealed partial class FireControlSystem : EntitySystem
         return false;
     }
 
+    // Forge-Change-Start
+    /// <summary>
+    /// Pushes refreshed UI state to every fire control console anchored to the given grid.
+    /// Uses the entity lookup to enumerate only consoles parented to the grid (O(grid children))
+    /// instead of scanning the whole world, and computes the global dock state once per call.
+    /// </summary>
+    public void RefreshConsolesOnGrid(EntityUid gridUid)
+    {
+        _consoleSet.Clear();
+        _lookup.GetChildEntities(gridUid, _consoleSet);
+        if (_consoleSet.Count == 0)
+            return;
+
+        var docks = _shuttleConsoleSystem.GetAllDocks();
+        foreach (var console in _consoleSet)
+        {
+            UpdateUi(console.Owner, console.Comp, docks);
+        }
+    }
+    // Forge-Change-End
+
     private void UpdateUi(EntityUid uid, FireControlConsoleComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
 
-        NavInterfaceState navState = _shuttleConsoleSystem.GetNavState(uid, _shuttleConsoleSystem.GetAllDocks());
+        // Forge-Change: callers that update a single console pay the dock-lookup cost themselves.
+        UpdateUi(uid, component, _shuttleConsoleSystem.GetAllDocks());
+    }
+
+    // Forge-Change-Start: overload that takes a pre-fetched docks dictionary so batch refreshes
+    // (RefreshConsolesOnGrid) compute it once instead of per console.
+    private void UpdateUi(EntityUid uid, FireControlConsoleComponent component, Dictionary<NetEntity, List<DockingPortState>> docks)
+    {
+        NavInterfaceState navState = _shuttleConsoleSystem.GetNavState(uid, docks);
 
         List<FireControllableEntry> controllables = new();
         if (component.ConnectedServer != null && TryComp<FireControlServerComponent>(component.ConnectedServer, out var server))
@@ -281,9 +400,20 @@ public sealed partial class FireControlSystem : EntitySystem
 
         var array = controllables.ToArray();
 
-        var state = new FireControlConsoleBoundInterfaceState(component.ConnectedServer != null, array, navState);
+        // Forge-Change: expose active firing cap and preset state to gunnery UI.
+        var maxActiveWeapons = int.MaxValue;
+        if (component.ConnectedServer != null && TryComp<FireControlServerComponent>(component.ConnectedServer, out var serverForLimit))
+            maxActiveWeapons = serverForLimit.MaxWeapons;
+
+        var state = new FireControlConsoleBoundInterfaceState(
+            component.ConnectedServer != null,
+            array,
+            navState,
+            maxActiveWeapons,
+            BuildPresetState(component));
         _ui.SetUiState(uid, FireControlConsoleUiKey.Key, state);
     }
+    // Forge-Change-End
 
     /// <summary>
     /// Gets ammo information for a weapon to determine if it has manual reload.

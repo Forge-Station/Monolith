@@ -18,7 +18,24 @@
 
 - type: loadoutEffectGroup
   id: MonoCivRogueDefector
-  effects: [] # Forge-Change-delete: was DepartmentTimeRequirement department Antag
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: Empire # Forge-change: Antag change to Empire PTT
+      time: 180000 # 50 hrs
+
+# Forge-change-start
+# Add SMALL civ time gate
+- type: loadoutEffectGroup
+  id: CivilNoob
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 36000 # 10 hrs
+# Forge-change-end
 
 - type: loadoutEffectGroup
   id: MonoCivVet

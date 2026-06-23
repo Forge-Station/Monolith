@@ -1,0 +1,15 @@
+- type: technology
+  id: IriditeMetallurgy
+  name: research-technology-iridite-metallurgy
+  entityIcon: SheetIridite1
+  discipline: FactionUniversal
+  tier: 3
+  cost: 90000
+  recipeUnlocks:
+  - CentrifugeIridiumMatrix
+  - CentrifugeCryoBinder
+  - CentrifugeIridite
+  technologyPrerequisites:
+  - UniversalMaterialResearchT3
+  - UraniumProcessingAdvanced
+  position: 11, 11

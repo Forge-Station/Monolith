@@ -22,9 +22,6 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
-  - type: HumanoidAppearance
-    height: 1.2
-    width: 1.2
   - type: Loadout
     prototypes: [AsakimWarriorGear]
   - type: GhostRole
@@ -35,7 +32,19 @@
       settings: default
     requirements:
     - !type:OverallPlaytimeRequirement
-      time: 180000
+      time: 540000 # 150 hours
+    - !type:DepartmentTimeRequirement
+      department: Renegates
+      time: 90000 # 25 hours
+    - !type:DepartmentTimeRequirement
+      department: TSF
+      time: 90000 # 25 hours
+    - !type:DepartmentTimeRequirement
+      department: Empire
+      time: 90000 # 25 hours
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 180000 # 50 hours
   - type: GhostTakeoverAvailable
   - type: RandomMetadata
     nameSegments:
@@ -52,7 +61,7 @@
   - type: SlowOnDamage
     speedModifierThresholds:
       100: 0.9
-      125: 0.5
+      135: 0.6
   - type: Stamina
     critThreshold: 250
   - type: SurgerySpeedModifier
@@ -67,6 +76,7 @@
   - type: AutoImplant
     implants:
     - FreedomImplant
+    - BluespaceLifelineImplant
   - type: Access
     tags:
     - SyndicateAgent
@@ -81,7 +91,6 @@
     - Azaziba
     - RobotTalk
     - DroneTalk
-    - Sign
 
 - type: startingGear
   id: AsakimWarriorGear
@@ -93,8 +102,8 @@
     shoes: ClothingShoesBootsMagAsakimForge
     pocket1: SyringeCaseNaniteFilled
     pocket2: DoubleEmergencyOxygenTankFilled
-    belt: WeaponPhaseBlade
-    suitstorage: WeaponRifleAsakimAutopulser
+    belt: WeaponPhaseBladeForge
+    suitstorage: WeaponRifleAsakimAutopulserForge
   storage:
     back:
     - DoubleEmergencyOxygenTankFilled
@@ -103,4 +112,6 @@
     - JawsOfLife
     - WelderExperimental
     - ShipRepairDeviceRedacted
+    - WeaponRifleAsakimPistolForge
     - InfectionScannerAsakim
+    - PillCanisterMesotaxinide

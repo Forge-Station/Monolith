@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Whitelist; // Forge-Chanfe
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -340,6 +341,21 @@ public sealed partial class GunComponent : Component
     /// </summary>
     [DataField]
     public float ExecutionModifier = 9.0f;
+
+#region Forge-Change-start
+    /// <summary>
+    /// Forge: Whitelist required to gun. Checks the wearer for whitelist.
+    /// Also checks organs for required components/tags if WhitelistCheckOrgan is true.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? Whitelist = null;
+
+    /// <summary>
+    /// Forge: Whether we should check organs for the whitelist in addition to the target.
+    /// </summary>
+    [DataField]
+    public bool WhitelistCheckOrgans = false;
+#endregion Forge-Change-end
 }
 
 [Flags]

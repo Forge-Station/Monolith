@@ -1,3 +1,5 @@
+using Content.Shared.Atmos.Components;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -26,6 +28,44 @@ public sealed class RCDConstructionGhostRotationEvent : EntityEventArgs
         Direction = direction;
     }
 }
+
+#region Forge-Change
+
+[Serializable, NetSerializable]
+public sealed class RCDConstructionGhostFlipEvent : EntityEventArgs
+{
+    public readonly NetEntity NetEntity;
+    public readonly bool UseMirrorPrototype;
+
+    public RCDConstructionGhostFlipEvent(NetEntity netEntity, bool useMirrorPrototype)
+    {
+        NetEntity = netEntity;
+        UseMirrorPrototype = useMirrorPrototype;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class RCDConstructionGhostLayerEvent : EntityEventArgs
+{
+    public readonly NetEntity NetEntity;
+    public readonly Angle EyeRotation;
+    public readonly string? ConstructionEntity;
+    public readonly AtmosPipeLayer PipeLayer;
+
+    public RCDConstructionGhostLayerEvent(
+        NetEntity netEntity,
+        Angle eyeRotation,
+        string? constructionEntity,
+        AtmosPipeLayer pipeLayer = AtmosPipeLayer.Primary)
+    {
+        NetEntity = netEntity;
+        EyeRotation = eyeRotation;
+        ConstructionEntity = constructionEntity;
+        PipeLayer = pipeLayer;
+    }
+}
+
+#endregion
 
 [Serializable, NetSerializable]
 public enum RcdUiKey : byte

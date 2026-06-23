@@ -1,0 +1,40 @@
+- type: job
+  id: EmpireSmallInquisitor
+  name: forge-job-name-smallinq
+  description: forge-job-desc-smallinq
+  supervisors: job-supervisors-inquisitor
+  playTimeTracker: JobEmpireSmallInquisitor
+  icon: JobIconEmpireSmallInq
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 21600 # 6 hrs
+    - !type:SpeciesRequirement
+      species:
+        - Human
+    - !type:SexRequirement
+      sex:
+      - Male
+  setPreference: false
+  overrideConsoleVisibility: true
+  startingGear: EmpireSmallInquisitorGear
+  alwaysUseSpawner: true
+  weight: 170
+  displayWeight: 38
+  canBeAntag: false
+  assignedCompany: Imperial
+  assignedNationality: Imperial
+  access:
+  - EmpireSmallInq
+  accessGroups:
+  - SpecialEmpireAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Empire
+  - !type:AddImplantSpecial
+    implants: [ ImplantGuard , EmpireTrackingImplant]
+
+- type: startingGear
+  id: EmpireSmallInquisitorGear

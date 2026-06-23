@@ -17,6 +17,7 @@
   weight: 130
   displayWeight: 39
   assignedCompany: TSF
+  assignedNationality: TransSolarFederation
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   accessGroups:
@@ -28,7 +29,7 @@
       factions:
       - TSFMC
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, TrackingImplant ]
+    implants: [ MindShieldImplant, TSFTrackingImplant ]
   - !type:AddLanguageSpecial
     languagesSpoken:
     - SolCommon

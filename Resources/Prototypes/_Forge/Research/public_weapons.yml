@@ -1,0 +1,14 @@
+- type: technology
+  id: ForgePublicWeaponry
+  name: research-technology-forge-public-weaponry
+  entityIcon: ChainsawShield
+  discipline: Arsenal
+  tier: 2
+  cost: 50000
+  recipeUnlocks:
+  - ChainsawShield
+  - ReinforcedChainsawShield
+  - JunkCannon
+  technologyPrerequisites:
+  - AdvancedRiotControl
+  position: 4, 4

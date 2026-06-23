@@ -4,6 +4,8 @@
   name: loadout-group-contractor-head
   minLimit: 0
   loadouts:
+  - MdMedicClothingHeadHatArmoredTrauma
+  - MdMedicClothingHeadHatTraumaBeret
   - ContractorClothingHeadHatParamedicsoft
   - ContractorClothingHeadNurseHat
   - ContractorClothingHeadHatBeretMedic
@@ -19,3 +21,15 @@
   price: 0
   equipment:
     head: ClothingHeadHatBeretBrigmedic
+
+- type: loadout
+  id: MdMedicClothingHeadHatArmoredTrauma
+  price: 0
+  equipment:
+    head: ClothingHeadHatArmoredTrauma
+
+- type: loadout
+  id: MdMedicClothingHeadHatTraumaBeret
+  price: 0
+  equipment:
+    head: ClothingHeadHatTraumaBeret

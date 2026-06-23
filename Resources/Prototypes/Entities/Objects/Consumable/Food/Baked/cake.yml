@@ -226,6 +226,21 @@
   components:
   - type: Sprite
     state: cheese
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+        - ReagentId: Vitamin
+          Quantity: 5
+        - ReagentId: Flavorol
+          Quantity: 20
+        - ReagentId: Lactozit
+          Quantity: 3
+  # Forge-change-end
   - type: SliceableFood
     slice: FoodCakeCheeseSlice
 
@@ -237,6 +252,21 @@
   components:
   - type: Sprite
     state: cheese-slice
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+        - ReagentId: Flavorol
+          Quantity: 4
+        - ReagentId: Lactozit
+          Quantity: 0.75
+  # Forge-change-end
 # Tastes like sweetness, cream cheese.
 
 - type: entity

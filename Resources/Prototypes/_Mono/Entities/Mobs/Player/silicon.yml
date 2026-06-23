@@ -75,6 +75,7 @@
       state: default
   - type: ShowJobIcons
   - type: AdvancedPilot # can use both gunnery and shuttle console even on capitals
+  - type: RetroMonitorView
 
 - type: entity
   id: BaseBorgChassisRedacted
@@ -125,7 +126,7 @@
   id: BorgChassisRedacted
   parent: BaseBorgChassisRedacted
   name: remnant automated defense system tender
-  description: A tender to a automated drone ship, to keep internal mechanisms intact.
+  description: A tender to an automated drone ship, to keep its internal mechanisms intact.
   components:
   - type: Sprite
     layers:
@@ -213,6 +214,7 @@
   id: PlayerBorgRedacted
   parent: BorgChassisRedacted
   suffix: Battery, Module
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: ContainerFill
     containers:
@@ -226,7 +228,7 @@
       - BorgModuleAdvancedTool
       - BorgModuleConstruction
       - BorgModuleCable
-      - BorgModuleRedactedRCD
+      - BorgModuleForerunnerRCD
       - BorgModuleGPS
   - type: ItemSlots
     slots:
@@ -244,6 +246,7 @@
   id: PlayerBorgRedactedGhostRole
   parent: PlayerBorgRedacted
   suffix: Ghost
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: GhostRole
     name: ghost-role-information-redacted-borg
@@ -258,6 +261,7 @@
   id: PlayerBorgRedactedGhostRolePlaytime
   parent: PlayerBorgRedacted
   suffix: Ghost, Playtime
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: GhostRole
     name: ghost-role-information-redacted-borg
@@ -276,6 +280,7 @@
   id: PlayerStationAiRedacted
   parent: PlayerStationAiEmpty
   suffix: Ghost Role, Remnant
+  categories: [ HideSpawnMenu ] # Forge-Change
   components:
   - type: ContainerComp
     proto: AiHeldRedacted
@@ -331,8 +336,8 @@
     - MonoRemnantAdjective
     - MonoRemnantNoun
   - type: ShuttleBoostingPilot
-    angularMultiplier: 1.5
-    accelerationMultiplier: 1.5
+    angularMultiplier: 1.2
+    accelerationMultiplier: 1.2
 
 - type: entity
   id: AiHeldRedacted
@@ -479,7 +484,7 @@
     - !type:OverallPlaytimeRequirement
       time: 180000 # 50 hrs
     - !type:RoleTimeRequirement
-      role: JobWarden
+      role: JobTsfSeniorAide # Forge-change
       time: 54000 # 15 hours
   - type: GhostTakeoverAvailable
   - type: RandomMetadata

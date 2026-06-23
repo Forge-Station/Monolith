@@ -1,4 +1,29 @@
+- type: body
+  id: NFTick
+  name: "space tick"
+  root: torso
+  slots:
+    torso:
+      part: TorsoAnimal
+      connections:
+      - legs
+      organs:
+        lungs: OrganAnimalLungs
+        stomach: OrganAnimalStomach
+        liver: ForgeSpaceTickLiver # Forge-Change
+        heart: OrganAnimalHeart
+        kidneys: OrganAnimalKidneys
+    legs:
+      part: LegsAnimal
+      connections:
+      - feet
+    feet:
+      part: FeetAnimal
+
 - type: entity
   id: NFMobTick
   parent: [NFMobRestrictions, NFMobSimpleHostileBase, MobTick]
   suffix: Frontier
+  components:
+  - type: Body # Forge-Change
+    prototype: NFTick # Forge-Change

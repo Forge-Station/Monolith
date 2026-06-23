@@ -17,15 +17,16 @@
   weight: 50
   displayWeight: 20
   assignedCompany: Renegates
+  assignedNationality: FreeColonies
   canBeAntag: false
   setPreference: true
   access:
   - Renegate
   accessGroups:
   - GeneralRenegateAccess
-  # special:
-  # - !type:AddImplantSpecial
-  #   implants: # Неизвестно
+  special:
+  - !type:AddImplantSpecial
+    implants: [ RenegadeTrackingImplant ]
   # - !type:AddComponentSpecial
   #   components:
   #     - type: CommandStaff

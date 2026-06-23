@@ -1,0 +1,56 @@
+# Bluespace boarding teleports — Experimental discipline, near mag-boot cluster.
+# Entry gate: SuperParts (суперкомпоненты). T4 flatpacks only via DisciplinesDiskBoardingTeleportTier4.
+- type: technology
+  id: ForgeBoardingTeleportTier1
+  name: research-technology-forge-boarding-teleport-tier1
+  entityIcon: BoardingTeleportEngine
+  discipline: Experimental
+  tier: 3
+  cost: 55000
+  recipeUnlocks:
+  - BoardingTeleportConsoleCircuitboard
+  - BoardingTeleportEngineMachineCircuitboard
+  - BoardingTeleportPlatformMachineCircuitboard
+  - BoardingBluespaceScramblerMachineCircuitboard
+  - BoardingBluespaceScramblerFlatpack
+  - BoardingTeleportRemote
+  - BoardingTeleportConsoleFlatpack
+  - BoardingTeleportEngineFlatpack
+  - BoardingTeleportPlatformFlatpack
+  - BoardingTeleportRemoteFlatpack
+  technologyPrerequisites:
+  - SuperParts
+  position: -1, -3
+
+- type: technology
+  id: ForgeBoardingTeleportTier2
+  name: research-technology-forge-boarding-teleport-tier2
+  entityIcon: BoardingTeleportEngineAdvanced
+  discipline: Experimental
+  tier: 3
+  cost: 90000
+  recipeUnlocks:
+  - BoardingTeleportEngineAdvancedFlatpack
+  - BoardingTeleportPlatformAdvancedFlatpack
+  - BoardingTeleportEngineAdvancedMachineCircuitboard
+  - BoardingTeleportPlatformAdvancedMachineCircuitboard
+  technologyPrerequisites:
+  - ForgeBoardingTeleportTier1
+  position: -2, -3
+
+# Tier 4 — requires the tier-4 disk in the research server and tier-2 bluespace boarding on Experimental.
+- type: technology
+  id: ForgeBoardingTeleportTier4
+  name: research-technology-forge-boarding-teleport-tier4
+  entityIcon: BoardingTeleportEngineExperimental
+  discipline: ForgeBoardingTeleportExperimental
+  tier: 1
+  cost: 125000
+  recipeUnlocks:
+  - BoardingTeleportEngineExperimentalFlatpack
+  - BoardingTeleportPlatformExperimentalFlatpack
+  - BoardingTeleportEngineExperimentalMachineCircuitboard
+  - BoardingTeleportPlatformExperimentalMachineCircuitboard
+  technologyPrerequisites:
+  - ForgeBoardingTeleportTier2
+  position: -3, -3

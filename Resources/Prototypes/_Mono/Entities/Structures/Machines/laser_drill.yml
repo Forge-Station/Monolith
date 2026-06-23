@@ -58,12 +58,26 @@
 - type: entity
   id: LaserDrill
   name: automated laser drill
-  parent: LaserDrillBase
+  parent: [LaserDrillBase, ConstructibleMachine]
   description: A large automated drill that digs up random materials when powered with 50 kW of HV. Only works on expedition planets.
   components:
   - type: PlanetMiner
     requireExpedition: true
     requireGround: false # works just fine on lattice
+
+# Forge start
+- type: entity
+  id: ForgeLaserDrill
+  name: automated laser drill
+  parent: [LaserDrillBase, ConstructibleMachine]
+  description: A large automated drill that digs up random materials when powered with 50 kW of HV. Only works on expedition planets.
+  components:
+  - type: PlanetMiner
+    requireExpedition: true
+    requireGround: false # works just fine on lattice
+  - type: Machine 
+    board: LaserDrillCircuitboard
+# Forge end
 
 - type: entity
   id: StationLaserDrill
@@ -100,6 +114,8 @@
     - SpaceQuartz15
     - UraniumOre15
     - Coal15
+    - LithiumOre15
+    - CopperOre15
     chance: 0.95
     offset: 0.0
     rarePrototypes:
@@ -151,6 +167,22 @@
 - type: entity
   parent: UraniumOre
   id: UraniumOre15
+  suffix: Fifteen
+  components:
+  - type: Stack
+    count: 15
+
+- type: entity
+  parent: LithiumOre
+  id: LithiumOre15
+  suffix: Fifteen
+  components:
+  - type: Stack
+    count: 15
+
+- type: entity
+  parent: CopperOre
+  id: CopperOre15
   suffix: Fifteen
   components:
   - type: Stack

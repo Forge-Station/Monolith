@@ -2,7 +2,7 @@
   id: TsfmcBasicEquipment
   name: research-technology-tsfmc-basic-equipment
   entityIcon: ClothingOuterHardsuitM82c
-  discipline: TsfmcEquipment
+  discipline: Tsfmc
   tier: 1
   cost: 20000
   recipeUnlocks:
@@ -16,7 +16,7 @@
   id: TsfmcAdvancedEquipment
   name: research-technology-tsfmc-advanced-equipment
   entityIcon: ClothingOuterHardsuitM86
-  discipline: TsfmcEquipment
+  discipline: Tsfmc
   tier: 2
   cost: 35000
   recipeUnlocks:
@@ -25,13 +25,13 @@
   technologyPrerequisites:
   - TsfmcBasicEquipment
   - UniversalMaterialResearchT2
-  position: 12, 6
+  position: 12, 7
 
 - type: technology
   id: TsfmcExperimentalEquipment
   name: research-technology-tsfmc-experimental-equipment
   entityIcon: ClothingOuterHardsuitNfsdExperimental
-  discipline: TsfmcEquipment
+  discipline: Tsfmc
   tier: 3
   cost: 85000
   recipeUnlocks:
@@ -39,4 +39,4 @@
   technologyPrerequisites:
   - TsfmcAdvancedEquipment
   - UniversalMaterialResearchT3
-  position: 12, 11
+  position: 12, 12

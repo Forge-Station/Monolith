@@ -286,7 +286,12 @@ ent-WeaponCaseShortPollockExpedition = { ent-WeaponCaseShort }
 
 ent-WeaponCaseLongSVSExpedition = { ent-WeaponCaseLong }
     .desc = { ent-WeaponCaseLong.desc }
+ent-WeaponCaseShortBombCollar = { ent-WeaponCaseShortExplosives }
+    .desc = { ent-WeaponCaseShortExplosives.desc }
 
-ent-WeaponCaseShortAmmoBoxUraniumShotgun = WeaponCaseShortAmmoBoxUraniumShotgun
-ent-WeaponCaseShortAmmoAmmoBox12_gaugeBuckshotgun = WeaponCaseShortAmmoAmmoBox12_gaugeBuckshotgun
-ent-WeaponCaseShortAntiqueLaserExpedition = WeaponCaseShortAntiqueLaserExpedition
+ent-WeaponCaseShortAmmoBoxUraniumShotgun = { ent-WeaponCaseShortAmmo }
+    .desc = { ent-WeaponCaseShortAmmo.desc }
+ent-WeaponCaseShortAmmoAmmoBox12_gaugeBuckshotgun = { ent-WeaponCaseShort }
+    .desc = { ent-WeaponCaseShort.desc }
+ent-WeaponCaseShortAntiqueLaserExpedition = { ent-WeaponCaseShortAmmo }
+    .desc = { ent-WeaponCaseShortAmmo.desc }

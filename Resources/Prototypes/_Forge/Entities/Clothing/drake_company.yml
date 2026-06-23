@@ -1,0 +1,21 @@
+# Drake Industries apparel missing from initial company rollout (cloaks).
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakDrakeIndustries
+  name: Drake Industries cloak
+  suffix: Drake
+  description: A heavy company cloak in Drake Industries colors.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/drake_cloak.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakDrakeIndustriesRipped
+  name: Drake Industries ripped cloak
+  suffix: Drake
+  description: A worn Drake Industries cloak, still good enough for the frontier.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Cloaks/drake_cloak_ripped.rsi

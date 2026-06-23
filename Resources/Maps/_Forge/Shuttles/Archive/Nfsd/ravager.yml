@@ -9555,7 +9555,7 @@ entities:
     - type: Transform
       pos: -4.535144,6.4824123
       parent: 3
-- proto: ShieldGeneratorMedium
+- proto: ShieldGeneratorFSG220
   entities:
   - uid: 557
     components:

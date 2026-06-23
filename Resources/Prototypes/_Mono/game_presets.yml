@@ -85,10 +85,16 @@
   - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
-  - MonoAISTCShuttleSpawnerScheduler
-  - MonoAISTCShuttleSpawnerSchedulerTier2
-  - MonoAsakimSTCShuttleSpawnerScheduler
   - MonoMonolithicEventsScheduler
+  # Forge-Change-start
+  # - MonoAISTCShuttleSpawnerScheduler
+  # - MonoAISTCShuttleSpawnerSchedulerTier2
+  # - MonoAsakimSTCShuttleSpawnerScheduler
+  - ForgeAISTCShuttleSpawnerScheduler
+  - ForgeAISTCShuttleSpawnerSchedulerTier2
+  - ForgeAISTCShuttleSpawnerSchedulerTier3
+  - ForgeAsakimSTCShuttleSpawnerScheduler
+  # Forge-Change-end
 
 
 - type: gamePreset
@@ -126,6 +132,7 @@
   - MonoChimeraSTCShuttleSpawnerSchedulerSlow
   - MonoAISTCShuttleSpawnerSchedulerSlow
   - MonoAISTCShuttleSpawnerSchedulerTier2Slow
+  - ForgeAISTCShuttleSpawnerSchedulerTier3Slow # Forge-Change
   - MonoAsakimSTCShuttleSpawnerSchedulerSlow
   - MonoMonolithicEventsScheduler
 

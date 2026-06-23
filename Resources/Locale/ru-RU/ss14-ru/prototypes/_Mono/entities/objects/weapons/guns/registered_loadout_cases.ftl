@@ -27,3 +27,5 @@ ent-WeaponCaseLongVulcanRegistered = кейс Vulcan
     .desc = Ящик для хранения крупнокалиберного оружия и аксессуаров к нему.
 ent-WeaponCaseLongMR3CRegistered = кейс MR-3C
     .desc = Ящик для хранения крупнокалиберного оружия и аксессуаров к нему.
+ent-WeaponCaseMalandroRegistered = кейс RS-2 Malandro
+    .desc = Ящик для хранения крупнокалиберного оружия и аксессуаров к нему.

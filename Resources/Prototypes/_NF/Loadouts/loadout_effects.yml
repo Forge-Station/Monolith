@@ -32,6 +32,7 @@
     - Yowie # Goob
     - Tajaran # Goob
     - Hydrakin # Mono
+    - Ariral # Forge-Change wega ariral
 
 - type: loadoutEffectGroup
   id: ShoesCapableNF
@@ -59,6 +60,7 @@
     - Diona # Mono
     - Demon # Wega
     - Hydrakin # Mono
+    - Ariral # Forge-Change wega ariral
 
 - type: loadoutEffectGroup
   id: NFNotDocOrStc

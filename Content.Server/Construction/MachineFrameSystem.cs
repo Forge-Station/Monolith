@@ -6,19 +6,21 @@ using Content.Shared.Interaction;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Popups;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Content.Shared.Construction.Prototypes;
 
 namespace Content.Server.Construction;
 
-public sealed class MachineFrameSystem : EntitySystem
+public sealed partial class MachineFrameSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly ConstructionSystem _construction = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private ConstructionSystem _construction = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -54,7 +56,7 @@ public sealed class MachineFrameSystem : EntitySystem
 
         if (!component.HasBoard)
         {
-            if (TryInsertBoard(uid, args.Used, component))
+            if (TryInsertBoard(uid, args.Used, component, args.User))
                 args.Handled = true;
             return;
         }
@@ -67,7 +69,7 @@ public sealed class MachineFrameSystem : EntitySystem
         // Handle parts
         if (TryComp<MachinePartComponent>(args.Used, out var machinePart))
         {
-            if (TryInsertPart(uid, args.Used, component, machinePart))
+            if (TryInsertPart(uid, args.Used, component, machinePart, args.User)) // Forge-Change: stock part rating
                 args.Handled = true;
             return;
         }
@@ -146,11 +148,33 @@ public sealed class MachineFrameSystem : EntitySystem
     }
 
     /// <returns>Whether or not the function had any effect. Does not indicate success.</returns>
-    private bool TryInsertBoard(EntityUid uid, EntityUid used, MachineFrameComponent component)
+    private bool TryInsertBoard(EntityUid uid, EntityUid used, MachineFrameComponent component, EntityUid? user = null)
     {
         if (!TryComp<MachineBoardComponent>(used, out var machineBoard))
             return false;
 
+        if (_whitelist.IsWhitelistFail(component.BoardWhitelist, used)
+            || _whitelist.IsBlacklistPass(component.BoardBlacklist, used))
+        {
+            if (user != null)
+                _popupSystem.PopupClient(Loc.GetString("machine-frame-board-wrong-size"), uid, user.Value);
+
+            return true;
+        }
+
+        // Mono - board and frame matching
+        if (machineBoard.FrameSize != null && machineBoard.FrameSize != component.FrameSize)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("machine-frame-board-wrong-size"), uid);
+            return true;
+        }
+
+        if (machineBoard.FrameSize == null && component.FrameSize != null)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("machine-frame-board-wrong-size"), uid);
+            return true;
+        }
+        // End Mono
         if (!_container.TryRemoveFromContainer(used, false, out var wasInContainer) && wasInContainer) // Goobstation
             return false;
 
@@ -168,11 +192,24 @@ public sealed class MachineFrameSystem : EntitySystem
 
     // Frontier: restore upgradeable parts
     /// <returns>Whether or not the function had any effect. Does not indicate success.</returns>
-    private bool TryInsertPart(EntityUid uid, EntityUid used, MachineFrameComponent component, MachinePartComponent machinePart)
+    private bool TryInsertPart(EntityUid uid, EntityUid used, MachineFrameComponent component, MachinePartComponent machinePart, EntityUid? user = null) // Forge-Change: stock part rating
     {
         if (!component.Requirements.ContainsKey(machinePart.PartType))
             return false;
+        /// Forge-Change-start: stock part rating
+        if (!PartMeetsStockPartRating(machinePart, component))
+        {
+            if (user != null)
+            {
+                _popupSystem.PopupClient(
+                    Loc.GetString("machine-frame-part-rating-mismatch", ("rating", component.MinimumStockPartRating)),
+                    uid,
+                    user.Value);
+            }
 
+            return true;
+        }
+        /// Forge-Change-end: stock part rating
         if (component.Progress[machinePart.PartType] >= component.Requirements[machinePart.PartType])
             return false;
 
@@ -305,7 +342,10 @@ public sealed class MachineFrameSystem : EntitySystem
         component.MaterialRequirements = new Dictionary<ProtoId<StackPrototype>, int>(machineBoard.StackRequirements);
         component.ComponentRequirements = new Dictionary<string, GenericPartInfo>(machineBoard.ComponentRequirements);
         component.TagRequirements = new Dictionary<ProtoId<TagPrototype>, GenericPartInfo>(machineBoard.TagRequirements);
-
+        /// Forge-Change-start: stock part rating
+        component.MinimumStockPartRating = machineBoard.MinimumStockPartRating;
+        component.MaximumStockPartRating = machineBoard.MaximumStockPartRating;
+        /// Forge-Change-end: stock part rating
         component.Progress.Clear(); // Frontier: upgradeable machine parts
         component.MaterialProgress.Clear();
         component.ComponentProgress.Clear();
@@ -347,7 +387,10 @@ public sealed class MachineFrameSystem : EntitySystem
             component.MaterialProgress.Clear();
             component.ComponentProgress.Clear();
             component.TagProgress.Clear();
-
+            /// Forge-Change-start: stock part rating
+            component.MinimumStockPartRating = 1;
+            component.MaximumStockPartRating = null;
+            /// Forge-Change-end: stock part rating
             return;
         }
 
@@ -367,6 +410,9 @@ public sealed class MachineFrameSystem : EntitySystem
             {
                 var type = machinePart.PartType;
                 if (!component.Requirements.ContainsKey(type))
+                    continue;
+
+                if (!PartMeetsStockPartRating(machinePart, component)) // Forge-Change: stock part rating
                     continue;
 
                 int quantity = 1;
@@ -423,6 +469,18 @@ public sealed class MachineFrameSystem : EntitySystem
             }
         }
     }
+    /// Forge-Change-start: stock part rating
+    private static bool PartMeetsStockPartRating(MachinePartComponent machinePart, MachineFrameComponent component)
+    {
+        if (machinePart.Rating < component.MinimumStockPartRating)
+            return false;
+
+        if (component.MaximumStockPartRating is int maxRating && machinePart.Rating > maxRating)
+            return false;
+
+        return true;
+    }
+    /// Forge-Change-end: stock part rating
     private void OnMachineFrameExamined(EntityUid uid, MachineFrameComponent component, ExaminedEvent args)
     {
         if (!args.IsInDetailsRange || !component.HasBoard)

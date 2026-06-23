@@ -45,6 +45,8 @@
   abstract: true
   components:
   - type: Gibbable
+  - type: StaticPrice
+    price: 4500
 
 - type: entity
   id: OrganHumanBrain
@@ -269,6 +271,7 @@
   name: kidneys
   description: "Filters toxins from the bloodstream."
   components:
+  - type: Kidney # Forge-Change
   - type: Organ # Shitmed
     slotId: kidneys
   - type: Sprite

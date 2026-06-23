@@ -42,13 +42,13 @@ public sealed class FancyResearchConsoleBoundUserInterface : BoundUserInterface
     {
         base.OnProtoReload(args);
 
-        if (!args.WasModified<TechnologyPrototype>())
+        if (!args.WasModified<TechnologyPrototype>() && !args.WasModified<TechDisciplinePrototype>())
             return;
 
         if (State is not ResearchConsoleBoundInterfaceState rState)
             return;
 
-        _consoleMenu?.UpdatePanels(rState.Researches);
+        _consoleMenu?.UpdatePanels(rState.Researches, rState.Progress);
         _consoleMenu?.UpdateInformationPanel(rState.Points);
     }
 
@@ -63,9 +63,12 @@ public sealed class FancyResearchConsoleBoundUserInterface : BoundUserInterface
         // Thats for avoiding refresh spam when only points are updated
         if (_consoleMenu == null)
             return;
-        if (!_consoleMenu.List.SequenceEqual(castState.Researches))
-            _consoleMenu.UpdatePanels(castState.Researches);
-        if (_consoleMenu.Points != castState.Points)
-            _consoleMenu.UpdateInformationPanel(castState.Points);
+        if (!_consoleMenu.List.SequenceEqual(castState.Researches)
+            || !_consoleMenu.Progress.SequenceEqual(castState.Progress))
+        {
+            _consoleMenu.UpdatePanels(castState.Researches, castState.Progress);
+        }
+
+        _consoleMenu.UpdateInformationPanel(castState.Points);
     }
 }

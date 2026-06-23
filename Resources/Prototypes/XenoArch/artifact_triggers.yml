@@ -113,7 +113,7 @@
     groups:
       Acidic: [ Touch ]
     reactions:
-    - reagents: [ Blood, CopperBlood, InsectBlood, Slime, AmmoniaBlood, ZombieBlood ]
+    - reagents: [ Blood, CopperBlood, InsectBlood, Slime, AmmoniaBlood, ZombieBlood, DemonBlood ] # Forge-Change: arcana blood should activate artifacts
       methods: [ Touch ]
       effects:
       - !type:ActivateArtifact

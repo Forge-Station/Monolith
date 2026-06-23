@@ -29,6 +29,12 @@ public sealed class ForgeVars
     public static readonly CVarDef<float> BarksVolume =
         CVarDef.Create("voice.barks_volume", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    /// <summary>
+    /// Client volume slider for boarding teleport countdown and arrival sounds.
+    /// </summary>
+    public static readonly CVarDef<float> BoardingTeleportVolume =
+        CVarDef.Create("forge.boarding_teleport_volume", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<string> DiscordApiUrl =
         CVarDef.Create("jerry.discord_api_url", "", CVar.CONFIDENTIAL | CVar.SERVERONLY);
 
@@ -49,7 +55,7 @@ public sealed class ForgeVars
     /// URL of the TTS server API.
     /// </summary>
     public static readonly CVarDef<bool> TTSEnabled =
-        CVarDef.Create("tts.enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+        CVarDef.Create("tts.enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 
     /// <summary>
     /// URL of the TTS server API.
@@ -76,10 +82,22 @@ public sealed class ForgeVars
         CVarDef.Create("tts.volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
+    /// Default volume setting of radio TTS sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSRadioVolume =
+        CVarDef.Create("tts.radio_volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
     /// Whether the client wants local TTS playback enabled.
     /// </summary>
     public static readonly CVarDef<bool> LocalTTSEnabled =
         CVarDef.Create("tts.local_enabled", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
+
+    /// <summary>
+    /// Whether the client wants local TTS playback on **Radio event** enabled.
+    /// </summary>
+    public static readonly CVarDef<bool> LocalRadioTTSEnabled =
+        CVarDef.Create("tts.local_radio_enabled", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 
     /// <summary>
     /// Count of in-memory cached tts voice lines.
@@ -124,4 +142,16 @@ public sealed class ForgeVars
     /// </summary>
     public static readonly CVarDef<float> AutoUnstuckNudge =
         CVarDef.Create("forge.physics.auto_unstuck_nudge", 2f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Minutes before kicking a latejoin player that has not clocked in.
+    /// </summary>
+    public static readonly CVarDef<float> AutoKickPendingClockInMinutes =
+        CVarDef.Create("autokick.pending_clockin_minutes", 15f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Minutes before kicking a guest without a job role for AFK.
+    /// </summary>
+    public static readonly CVarDef<float> AutoKickGuestAfkMinutes =
+        CVarDef.Create("autokick.guest_afk_minutes", 25f, CVar.SERVERONLY);
 }

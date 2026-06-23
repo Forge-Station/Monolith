@@ -1,0 +1,83 @@
+# Drake Industries tools and weapons lathe recipes.
+
+- type: latheRecipe
+  parent: DrakeIndustriesToolRecipe
+  id: WeaponDrakeIndustrialGrenadeLauncher
+  result: WeaponDrakeIndustrialGrenadeLauncher
+  completetime: 12
+  materials:
+    Steel: 2500
+    Plastic: 1000
+    Silver: 500
+    Gold: 300
+
+- type: latheRecipe
+  parent: DrakeIndustriesToolRecipe
+  id: WeaponDrakeIndustrialCutter
+  result: WeaponDrakeIndustrialCutter
+  completetime: 10
+  materials:
+    Steel: 2000
+    Plastic: 800
+    Silver: 400
+    Gold: 200
+    Uranium: 200
+    UraniumFissile: 150
+
+- type: latheRecipe
+  parent: DrakeIndustriesToolRecipe
+  id: DrakeIndustrialOreBag
+  result: DrakeIndustrialOreBag
+  completetime: 6
+  materials:
+    Cloth: 800
+    Durathread: 400
+    Plastic: 500
+
+- type: latheRecipe
+  parent: DrakeIndustriesToolRecipe
+  id: DrakeIndustrialConstructionBag
+  result: DrakeIndustrialConstructionBag
+  completetime: 6
+  materials:
+    Cloth: 800
+    Durathread: 400
+    Plastic: 500
+    Steel: 300
+
+- type: latheRecipe
+  parent: DrakeIndustriesToolRecipe
+  id: JetpackDrakeIndustrial
+  result: JetpackDrakeIndustrial
+  completetime: 8
+  materials:
+    Steel: 1500
+    Plastic: 1000
+    Glass: 500
+    Silver: 300
+    UraniumFissile: 100
+
+- type: latheRecipe
+  parent: DrakeIndustriesMagBootsRecipe
+  id: ClothingShoesBootsMagDrakeIndustrial
+  result: ClothingShoesBootsMagDrakeIndustrial
+  materials:
+    Steel: 1000
+    Plastic: 500
+    Silver: 800
+    Gold: 400
+
+- type: latheRecipe
+  parent: DrakeIndustriesToolRecipe
+  id: WeaponDrakeIndustrialLaser
+  result: WeaponDrakeIndustrialLaser
+  completetime: 15
+  materials:
+    Steel: 2500
+    Glass: 1000
+    Plastic: 800
+    Uranium: 500
+    UraniumFissile: 100
+    Plastitanium: 400
+    Gold: 500
+    Silver: 500

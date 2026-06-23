@@ -1,7 +1,7 @@
 - type: roleLoadout
   id: JobTsfRecruit
   groups:
-  - TsfmcHead
+  - TsfmcHeadGrunt
   - TsfmcNeck
   - TsfmcJumpsuit
   - TsfmcGloves
@@ -23,12 +23,13 @@
   - NfsdSpeciesSpecific
   - TsfmcFirearm
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
   id: JobTsfRanger
   groups:
-  - TsfmcHead
+  - TsfmcHeadGrunt
   - TsfmcNeck
   - TsfmcJumpsuit
   - TsfmcGloves
@@ -39,7 +40,7 @@
   - TsfmcBalaclava
   - TsfmcGlasses
   - TsfmcBelt
-  - TsfmcEars
+  - TsfmcEarsTech
   - NfsdBoxSurvival
   - TsfRangerPDA
   - ContractorWallet
@@ -50,13 +51,14 @@
   - NfsdSpeciesSpecific
   - TsfmcFirearm
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
   id: JobTsfSeniorOfficer
   groups:
   - TsfmcHead
-  - TsfmcNeck
+  - TsfmcNeckCaptainOfficer
   - TsfmcJumpsuit
   - TsfmcGloves
   - TsfmcBackpack
@@ -66,7 +68,7 @@
   - TsfmcBalaclava
   - TsfmcGlasses
   - TsfmcBelt
-  - TsfmcEarsSenior
+  - TsfmcEarsOfficer
   - NfsdBoxSurvival
   - TsfSeniorOfficerPDA
   - ContractorWallet
@@ -77,13 +79,14 @@
   - NfsdSpeciesSpecific
   - TsfmcFirearm
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
   id: JobTsfExecutiveOfficer
   groups:
   - TsfmcHead
-  - TsfmcNeckCaptain
+  - TsfmcNeckCaptainOfficer
   - TsfmcJumpsuit
   - TsfmcGloves
   - TsfmcBackpack
@@ -93,7 +96,7 @@
   - TsfmcBalaclava
   - TsfmcGlasses
   - TsfmcBelt
-  - TsfmcEarsSenior
+  - TsfmcEarsOfficer
   - NfsdBoxSurvival
   - TsfExecutiveOfficerPDA
   - ContractorWallet
@@ -104,13 +107,14 @@
   - NfsdSpeciesSpecific
   - TsfmcFirearm
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
   id: JobTsfCommandingOfficer
   groups:
   - TsfmcHead
-  - TsfmcNeckCommander
+  - TsfmcNeckCommanderOfficer
   - TsfmcJumpsuit
   - TsfmcGloves
   - TsfmcBackpack
@@ -120,23 +124,25 @@
   - TsfmcBalaclava
   - TsfmcGlasses
   - TsfmcBelt
-  - TsfmcEarsCommander
+  - TsfmcEarsCommanderTsf
   - NfsdBoxSurvival
   - TsfCommandingOfficerPDA
   - ContractorWallet
   - ContractorCartridge
+  - ContractorEncryptionKey
   - ContractorFun
   - SeniorOfficerTrinkets
   - NfsdSpeciesSpecific
   - TsfmcFirearmColonel
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
   id: JobTsfSeniorAide
   groups:
   - TsfmcHead
-  - TsfmcNeckCaptain
+  - TsfmcNeckOfficer
   - TsfmcJumpsuit
   - TsfmcGloves
   - TsfmcBackpack
@@ -146,7 +152,7 @@
   - TsfmcBalaclava
   - TsfmcGlasses
   - TsfmcBelt
-  - TsfmcEarsSenior
+  - TsfmcEarsSeniorTech
   - NfsdBoxSurvival
   - TsfSeniorAidePDA
   - ContractorWallet
@@ -154,17 +160,17 @@
   - ContractorEncryptionKey
   - ContractorFun
   - ContractorTrinkets
-  - ContractorBureaucracy
   - NfsdSpeciesSpecific
   - TsfmcFirearm
   - TsfmcMag
+  - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
   id: JobTsfAmbassador
   groups:
   - TsfmcHead
-  - TsfmcNeckCaptain
+  - TsfmcNeckOfficer
   - TsfmcJumpsuit
   - TsfmcGloves
   - TsfmcBackpack
@@ -174,7 +180,7 @@
   - TsfmcBalaclava
   - TsfmcGlasses
   - TsfmcBelt
-  - TsfmcEarsSenior
+  - TsfmcEarsAmbassador
   - NfsdBoxSurvival
   - TsfAmbassadorPDA
   - ContractorWallet
@@ -184,4 +190,13 @@
   - ContractorTrinkets
   - ContractorBureaucracy
   - NfsdSpeciesSpecific
+  - FactionArmorPlates
   canCustomizeName: true
+
+# Forge-Change: без берета — только шлем
+- type: loadoutGroup
+  id: TsfmcHeadGrunt
+  name: loadout-group-contractor-head
+  minLimit: 0
+  loadouts:
+  - TsfmcHelmet

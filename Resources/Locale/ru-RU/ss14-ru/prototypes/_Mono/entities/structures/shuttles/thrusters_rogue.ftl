@@ -1,3 +1,9 @@
-ent-ThrusterRogue = Rogue
-ent-DebugThrusterRogue = DEBUG, Rogue
-ent-ThrusterLargeRogue = Rogue
+ent-ThrusterRogue = ракетный двигатель
+    .desc = { ent-Thruster }
+    .suffix = Rogue
+ent-DebugThrusterRogue = ракетный двигатель
+    .desc = { ent-Thruster }
+    .suffix = DEBUG, Rogue
+ent-ThrusterLargeRogue = большой ракетный двигатель
+    .desc = { ent-Thruster }
+    .suffix = Rogue

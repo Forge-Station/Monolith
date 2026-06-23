@@ -1,3 +1,5 @@
+# Mono shield fixture density (1x1 bounds −0.45): MS-100 / Sentinel 190; MS-250 / Aegis 300; MS-500 / Titan 450;
+# LM-212 capital 550; FS-421 POI 700.
 # Base
 - type: entity
   id: ShieldGeneratorBase
@@ -80,16 +82,18 @@
   - type: ApcPowerReceiver
     powerLoad: 60000
   - type: Appearance
+  - type: WiresPanel
+  - type: WiresVisuals
   - type: ShipShieldEmitter
-    damageLimit: 8000
-    damageOverloadTimePunishment: 40
-    healPerSecond: 120 # Base is 250
-    damageExp: 1.15 # Base is 1.1
-    baseDraw: 40000 # Base is 50000
-    maxDraw: 100000 # Base is 150000
-    unpoweredBonus: 7 # Base is 6
+    damageLimit: 180000 # Forge-Change
+    damageOverloadTimePunishment: 120 # Forge-Change
+    healPerSecond: 1500 # Forge-Change
+    damageExp: 1.05 # Forge-Change
+    baseDraw: 60000 # Forge-Change
+    maxDraw: 180000 # Forge-Change
+    unpoweredBonus: 5 # Forge-Change
     shieldColor: "#FF3333"
-    collisionResistanceMultiplier: 1.0
+    collisionResistanceMultiplier: 0.4
     powerUpSound: !type:SoundPathSpecifier
         path: "/Audio/Effects/teleport_arrival.ogg"
         params:
@@ -113,21 +117,32 @@
   - type: PirateBountyItem
     id: ShipShield
 
+# T3 platform stats for guidebook protodata (abstract parents are not indexed).
+- type: entity
+  id: ShieldGeneratorT3Reference
+  parent: ShieldGeneratorBase
+  name: T3 Shield Platform (reference)
+  description: Internal reference prototype for guidebook protodata. Not obtainable in round.
+  suffix: Guidebook Reference
+  categories: [ HideSpawnMenu ]
+
 # POI
 - type: entity
   id: ShieldGeneratorPOI
   parent: ShieldGeneratorBase
   name: FS-421 "Fortress" Outpost Shield Generator
+  description: The Fortress. The latest and greatest in static, large-scale shielding.
   suffix: POI ONLY
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 2000
-    damageExp: 0.5
-    baseDraw: 80000
-    maxDraw: 150000
-    unpoweredBonus: 8
-    damageLimit: 10000
-    damageOverloadTimePunishment: 30
+    damageLimit: 300000 # Forge-Change
+    healPerSecond: 3000 # Forge-Change
+    damageExp: 1
+    baseDraw: 100000 # Forge-Change
+    maxDraw: 300000 # Forge-Change
+    unpoweredBonus: 6 # Forge-Change
+    powerModifier: 0.25
+    damageOverloadTimePunishment: 200
     shieldColor: "#FF9933"
     collisionResistanceMultiplier: 0.0
   - type: Sprite
@@ -140,6 +155,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#FF9933"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 700
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -175,7 +201,7 @@
     intensitySlope: 4
     totalIntensity: 1000
   - type: ApcPowerReceiver
-    powerLoad: 80000
+    powerLoad: 100000 # Forge-Change
   - type: PointLight
     enabled: false
     castShadows: true
@@ -192,16 +218,17 @@
   id: ShieldGeneratorTSFCapital
   parent: ShieldGeneratorBase
   name: LM-212 "Vanguard" Capital Shield Generator
+  description: A heavy capital shield. Good durability, quick recharge and anti-collison built in one.
   suffix: TSF CAPITAL ONLY
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 150
-    damageExp: 0.5
-    baseDraw: 60000
-    maxDraw: 100000
-    unpoweredBonus: 8
-    damageLimit: 8000
-    damageOverloadTimePunishment: 35
+    damageLimit: 240000 # Forge-Change
+    healPerSecond: 2100 # Forge-Change
+    damageExp: 1.03 # Forge-Change
+    baseDraw: 80000 # Forge-Change
+    maxDraw: 240000 # Forge-Change
+    unpoweredBonus: 5.5 # Forge-Change
+    damageOverloadTimePunishment: 140 # Forge-Change
     shieldColor: "#FF0A70"
     collisionResistanceMultiplier: 0.05
   - type: Sprite
@@ -214,6 +241,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#FF0A70"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 550
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -249,7 +287,7 @@
     intensitySlope: 4
     totalIntensity: 1000
   - type: ApcPowerReceiver
-    powerLoad: 60000
+    powerLoad: 80000 # Forge-Change
   - type: PointLight
     enabled: false
     castShadows: true
@@ -265,18 +303,32 @@
   id: ShieldGenerator
   parent: ShieldGeneratorBase
   name: MS-500 "Titan" Shield Generator
+  description: The Titan. Advanced shielding, with a quick recharge time, and excels against colisions.
   suffix: ADS ONLY
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 450
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: ShipShieldEmitter
-    damageLimit: 8000
-    damageOverloadTimePunishment: 40
-    healPerSecond: 120 # Base is 250
-    damageExp: 1.15 # Base is 1.1
-    baseDraw: 40000 # Base is 50000
-    maxDraw: 100000 # Base is 150000
-    unpoweredBonus: 7 # Base is 6
+    damageLimit: 145000 # Forge-Change
+    damageOverloadTimePunishment: 120 # Forge-Change
+    healPerSecond: 1850 # Forge-Change
+    damageExp: 1.05 # Forge-Change
+    baseDraw: 100000 # Forge-Change
+    maxDraw: 200000 # Forge-Change
+    unpoweredBonus: 5 # Forge-Change
     shieldColor: "#FF3333"
-    collisionResistanceMultiplier: 0.05
+    collisionResistanceMultiplier: 0.5
+  - type: ApcPowerReceiver
+    powerLoad: 60000 # Forge-Change
   - type: ShipRepairable
     repairTime: 30
     repairCost: 300
@@ -290,18 +342,19 @@
   id: ShieldGeneratorMedium
   parent: ShieldGeneratorBase
   name: MS-250 "Aegis" Shield Generator
+  description: The Aegis. Advanced shielding, with a long recharge time, with very high durability.
   suffix: ADS/TSF ONLY, SCI VOUCHER SHIPS ONLY
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 100 # Base is 250
-    damageExp: 1.15 # Base is 1.1
-    baseDraw: 30000 # Base is 50000
-    maxDraw: 75000 # Base is 150000
-    unpoweredBonus: 4 # Base is 6
-    damageLimit: 40000
-    damageOverloadTimePunishment: 100
+    damageLimit: 125000 # Forge-Change
+    healPerSecond: 1250 # Forge-Change
+    damageExp: 1.05 # Forge-Change
+    baseDraw: 40000 # Forge-Change
+    maxDraw: 120000 # Forge-Change
+    unpoweredBonus: 4 # Forge-Change
+    damageOverloadTimePunishment: 80 # Forge-Change
     shieldColor: "#9933FF"
-    collisionResistanceMultiplier: 0.6
+    collisionResistanceMultiplier: 0.5 # Forge-Change
   - type: Sprite
     sprite: _Mono/Structures/ShuttleComponents/shield.rsi
     snapCardinals: true
@@ -312,6 +365,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#9933FF"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 300
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -377,15 +441,16 @@
   id: ShieldGeneratorSmall
   parent: ShieldGeneratorBase
   name: MS-100 "Sentinel" Shield Generator
+  description: The Sentinel. A good, reliable shield.
   components:
   - type: ShipShieldEmitter
-    healPerSecond: 80 # Mono
-    damageExp: 1.2 # Mono
+    damageLimit: 62500 # Forge-Change
+    healPerSecond: 625 # Forge-Change
+    damageExp: 1.05 # Forge-Change
     baseDraw: 20000
     maxDraw: 60000
     unpoweredBonus: 3 # Mono
-    damageLimit: 5000 # Mono
-    damageOverloadTimePunishment: 80
+    damageOverloadTimePunishment: 60 # Forge-Change
     shieldColor: "#3399FF"
     collisionResistanceMultiplier: 0.5
   - type: Sprite
@@ -398,6 +463,17 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
       visible: false
       color: "#3399FF"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:

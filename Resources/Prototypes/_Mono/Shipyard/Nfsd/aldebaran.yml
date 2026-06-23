@@ -4,16 +4,18 @@
   id: Aldebaran
   parent: BaseVesselAntag
   name: TSF-PIN Aldebaran
-  description: A frontal up-puncher corvette equipped with two cyrexas for long range engagements and torpedoes for heavier targets and close range.
+  description: Фронтовой корвета-ударник, оснащённая двумя CYREXA для ведения боя на дальних дистанциях и торпедами для более тяжёлых целей и ближнего боя. # Forge-Change
   price: 160200
+  purchasable: false # voucher only
   category: Medium
   group: Security
   access: Security
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/aldebaran.yml
   guidebookPage: Null
   class:
-  - Patrol
-  - Corvette
+  - Fighter
+  - Pursuit
+  - Frigate
   engine:
   - Plasma
 
@@ -27,7 +29,7 @@
       stationProto: StandardFrontierSecurityVessel
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Aldebaran TSF{1}'
+        mapNameTemplate: 'Альдебарен TSF{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

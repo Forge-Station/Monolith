@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Made by sodakent (discord).",
+  "size": {
+    "x": 48,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "energy-0"
+    },
+    {
+      "name": "energy-1"
+    },
+    {
+      "name": "energy-2"
+    },
+    {
+      "name": "energy-3"
+    },
+    {
+      "name": "energy-4"
+    },
+    {
+      "name": "energy-unshaded-0"
+    },
+    {
+      "name": "energy-unshaded-1"
+    },
+    {
+      "name": "energy-unshaded-2"
+    },
+    {
+      "name": "energy-unshaded-3"
+    },
+    {
+      "name": "energy-unshaded-4"
+    },
+    {
+      "name": "magazine"
+    }
+  ]
+}

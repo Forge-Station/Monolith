@@ -3,6 +3,9 @@ shuttle-pilot-end = Пилотирование прекращено
 shuttle-console-in-ftl = Уже в БСС
 shuttle-console-mass = Слишком большой для БСС
 shuttle-console-prevent = Вы не можете пилотировать этот корабль
+shuttle-console-in-expedition = БСС недоступен во время экспедиций
+shuttle-console-no-powered-ftl-drive = Не обнаружен БСС двигатель
+shuttle-console-ftl-drive-unpowered = БСС-двигатель обнаружен, но не активен
 
 # NAV
 
@@ -41,6 +44,10 @@ shuttle-console-map-objects = Объекты в секторе
 shuttle-console-docked = Пристыкованные объекты
 shuttle-console-view = Выбрать
 shuttle-console-undock = Отстыковать
+shuttle-console-undock-all = Отстыковать всё
+shuttle-console-ftl-lock = Синхронизация БСС
+shuttle-console-ftl-lock-enabled = Выкл
+shuttle-console-ftl-lock-disabled = Вкл
 shuttle-console-dock = Пристыковать
 shuttle-console-docks-label = Стыковочные порты
 shuttle-console-undock-fail = Не удалось отстыковаться

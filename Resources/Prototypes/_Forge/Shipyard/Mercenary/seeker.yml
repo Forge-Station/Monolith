@@ -1,7 +1,7 @@
 - type: vessel
   id: seeker
   parent: BaseVessel
-  name: 'Искатель'
+  name: 'RBS Искатель'
   description: Тяжеловооруженный шаттл наемников для исследований в экстремальных боевых условиях
   price: 165000
   category: Medium
@@ -14,7 +14,7 @@
 
 - type: gameMap
   id: seeker
-  mapName: 'Искатель'
+  mapName: 'RBS Искатель'
   mapPath: /Maps/_Forge/Shuttles/Mercenary/seeker.yml
   minPlayers: 0
   stations:
@@ -22,7 +22,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Искатель MIL{1}'
+          mapNameTemplate: 'RBS Искатель MIL{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

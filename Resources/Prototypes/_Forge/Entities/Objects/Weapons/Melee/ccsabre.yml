@@ -1,5 +1,5 @@
 - type: entity
-  name: sheriff sabre
+  name: commanding officer sabre
   parent: [ BaseSword, BaseC2ContrabandUnredeemable ]
   id: SheriffSabre
   description: A ceremonial weapon belonging to the captain of the station.

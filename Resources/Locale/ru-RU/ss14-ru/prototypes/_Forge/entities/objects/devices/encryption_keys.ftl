@@ -20,7 +20,10 @@ ent-EncryptionKeyRenegade = ключ шифрования ренегатов
 
 ent-EncryptionKeyPlantManager = ключ шифрования менеджера электростанции
     .desc = Ключ шифрования, используемый для координации инженеров.
-ent-EncryptionKeyHospital = ключ шифрования травмы тим
+ent-EncryptionKeyCustom = настраиваемый ключ шифрования
+    .desc = Ключ шифрования для частот портативных раций. Зачем таскать отдельную рацию, если можно настроить гарнитуру?
+
+ent-EncryptionKeyHospital = ключ шифрования ТраумаТим
     .desc = Ключ шифрования, используемый для координации сотрудников TTI.
 
 ent-EncryptionKeyViperGroup = ключ шифрования Viper Group
@@ -37,4 +40,18 @@ ent-EncryptionKeyBlackhawk = ключ шифрования Blackhawk PMC
     .desc = Ключ шифрования, используемый для переговоров внутри Blackhawk PMC.
 ent-EncryptionKeyTechnicLogistic = ключ шифрования TechnicLogistic
     .desc = Ключ шифрования, используемый для переговоров внутри TechnicLogistic.
+ent-EncryptionKeyHarmony = ключ шифрования канала HME
+    .desc = Ключ шифрования дающий доступ к каналу HME. От него пахнет медициной.
+
+ent-EncryptionKeyDrakeIndustries = ключ шифрования Drake Industries
+    .desc = Ключ шифрования для корпоративного канала связи Drake Industries.
+
+ent-EncryptionKeyNexus = ключ шифрования нексуса
+    .desc = Ключ шифрования для корпоративного канала нексуса.
+    .suffix = Нексус
+
+ent-EncryptionKeyTsfTech = технический ключ шифрования ТСФ
+    .desc = { ent-EncryptionKeyNfsd.desc }
+ent-EncryptionKeyTsfCom = командный ключ шифрования ТСФ
+    .desc = { ent-EncryptionKeyNfsd.desc }
 

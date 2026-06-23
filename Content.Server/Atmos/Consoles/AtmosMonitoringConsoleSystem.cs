@@ -18,13 +18,23 @@ using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.NodeContainer;
+// Forge-Change-Start: handheld Forge atmos monitor resolves grid from the holder
+using Content.Shared._Forge.Monitoring;
+using Content.Shared.Containers;
+using Content.Shared.Tag;
+using Robust.Shared.Containers;
+// Forge-Change-End
 
 namespace Content.Server.Atmos.Consoles;
 
-public sealed class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleSystem
+public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleSystem
 {
     [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
     [Dependency] private readonly SharedMapSystem _sharedMapSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!; // Forge-Change: handheld monitor grid lookup
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!; // Forge-Change: handheld monitor grid lookup
+    [Dependency] private readonly TagSystem _tagSystem = default!; // Forge-Change: handheld monitor grid lookup
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     // Private variables
@@ -44,6 +54,7 @@ public sealed class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleS
         SubscribeLocalEvent<AtmosMonitoringConsoleComponent, ComponentInit>(OnConsoleInit);
         SubscribeLocalEvent<AtmosMonitoringConsoleComponent, AnchorStateChangedEvent>(OnConsoleAnchorChanged);
         SubscribeLocalEvent<AtmosMonitoringConsoleComponent, EntParentChangedMessage>(OnConsoleParentChanged);
+        SubscribeLocalEvent<AtmosMonitoringConsoleComponent, BoundUIOpenedEvent>(OnConsoleBoundUIOpened);
 
         // Tracked device events
         SubscribeLocalEvent<AtmosMonitoringConsoleDeviceComponent, NodeGroupsRebuilt>(OnEntityNodeGroupsRebuilt);
@@ -67,6 +78,12 @@ public sealed class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleS
     }
 
     private void OnConsoleParentChanged(EntityUid uid, AtmosMonitoringConsoleComponent component, EntParentChangedMessage args)
+    {
+        component.ForceFullUpdate = true;
+        InitializeAtmosMonitoringConsole(uid, component);
+    }
+
+    private void OnConsoleBoundUIOpened(EntityUid uid, AtmosMonitoringConsoleComponent component, BoundUIOpenedEvent args)
     {
         component.ForceFullUpdate = true;
         InitializeAtmosMonitoringConsole(uid, component);
@@ -106,12 +123,10 @@ public sealed class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleS
 
         // Update atmos monitoring consoles that stand upon an updated grid
         var query = AllEntityQuery<AtmosMonitoringConsoleComponent, TransformComponent>();
-        while (query.MoveNext(out var ent, out var entConsole, out var entXform))
+        while (query.MoveNext(out var ent, out var entConsole, out _))
         {
-            if (entXform.GridUid == null)
-                continue;
-
-            if (!allGrids.Contains(entXform.GridUid.Value))
+            var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(ent, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+            if (gridUid == null || !allGrids.Contains(gridUid.Value))
                 continue;
 
             InitializeAtmosMonitoringConsole(ent, entConsole);
@@ -133,12 +148,19 @@ public sealed class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleS
             _updateTimer -= UpdateTime;
 
             var query = AllEntityQuery<AtmosMonitoringConsoleComponent, TransformComponent>();
-            while (query.MoveNext(out var ent, out var entConsole, out var entXform))
+            while (query.MoveNext(out var ent, out var entConsole, out _))
             {
-                if (entXform?.GridUid == null)
+                if (!_userInterfaceSystem.IsUiOpen(ent, AtmosMonitoringConsoleUiKey.Key))
                     continue;
 
-                UpdateUIState(ent, entConsole, entXform);
+                var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(ent, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+                if (gridUid == null)
+                    continue;
+
+                if (_tagSystem.HasTag(ent, "ForgeHandheldMonitoringConsole"))
+                    InitializeAtmosMonitoringConsole(ent, entConsole);
+
+                UpdateUIState(ent, entConsole, gridUid.Value);
             }
         }
     }
@@ -146,13 +168,8 @@ public sealed class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleS
     public void UpdateUIState
         (EntityUid uid,
         AtmosMonitoringConsoleComponent component,
-        TransformComponent xform)
+        EntityUid gridUid)
     {
-        if (!_userInterfaceSystem.IsUiOpen(uid, AtmosMonitoringConsoleUiKey.Key))
-            return;
-
-        var gridUid = xform.GridUid!.Value;
-
         if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
             return;
 
@@ -168,7 +185,7 @@ public sealed class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleS
 
         while (query.MoveNext(out var ent, out var entSensor, out var entXform))
         {
-            if (entXform?.GridUid != xform.GridUid)
+            if (entXform?.GridUid != gridUid)
                 continue;
 
             if (!entXform.Anchored)
@@ -459,12 +476,13 @@ public sealed class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleS
 
     private void InitializeAtmosMonitoringConsole(EntityUid uid, AtmosMonitoringConsoleComponent component)
     {
-        var xform = Transform(uid);
-
-        if (xform.GridUid == null)
+        // Forge-Change-Start: use holder grid when the console is a handheld Forge monitor
+        var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(uid, EntityManager, _transformSystem, _containerSystem, _tagSystem);
+        if (gridUid == null)
             return;
 
-        var grid = xform.GridUid.Value;
+        var grid = gridUid.Value;
+        // Forge-Change-End
 
         if (!TryComp<MapGridComponent>(grid, out var map))
             return;

@@ -1,4 +1,9 @@
-ent-NFMobSpiderSpace = NFMobSpiderSpace
-ent-NFMobCobraSpace = NFMobCobraSpace
-ent-NFMobBearSpace = NFMobBearSpace
-ent-NFMobKangarooSpace = NFMobKangarooSpace
+ent-NFMobSpiderSpace = космический паук
+    .desc = Светится так сильно, что выглядит опасно.
+ent-NFMobCobraSpace = космическая кобра
+    .desc = Длинные клыки и светящийся капюшон, а манящий вид так и зовёт подойти ближе.
+ent-NFMobBearSpace = космический медведь
+    .desc = Выглядит дружелюбно. Почему бы не обнять его?
+ent-NFMobKangarooSpace = космический кенгуру
+    .desc = Выглядит дружелюбно. Почему бы тебе не обнять его?
+

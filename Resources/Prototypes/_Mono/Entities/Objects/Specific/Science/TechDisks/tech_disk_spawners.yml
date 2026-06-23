@@ -202,5 +202,17 @@
     - id: TechDiskSpeedBoots
     - id: TechDiskBluespaceBags
     - id: TechDiskShields
+    # Forge FSG: tier 3 civilian heavy lineup ~3× as likely as tier 900P alone
+    - !type:GroupSelector
+      weight: 3
+      children:
+      - id: TechDiskForgeFSGCivilianT3
+    - !type:GroupSelector
+      weight: 1
+      children:
+      - id: TechDiskForgeFSG900P
+    # FSG-870R / FSG-950M: same loot path as other fracture disks, weight ~1/1500 of a common line (see GroupSelector totals)
+    - id: TechDiskForgeFSGT4Specialists
+      weight: 0.006
     - id: TechDiskFtl
     - id: TechDiskTranslationPreFracture

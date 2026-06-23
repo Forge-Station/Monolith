@@ -1,0 +1,39 @@
+#Author: Corrupt(!)
+
+- type: vessel
+  id: Jaguar
+  parent: BaseVesselAntag
+  name: TSF-SKR Jaguar
+  description: Истребитель поддержки, предназначенный для содействия другим кораблям в бою. Вооружён ЭМИ-пушкой ADBX-31 «TARNYX» для выведения кораблей из строя и четырьмя установками L-1 «Фаланга», разрывающими всё, что подойдёт слишком близко. # Forge-Change
+  price: 58500
+  category: Small
+  group: Security
+  access: Security
+  shuttlePath: /Maps/_Mono/Shuttles/Nfsd/jaguar.yml
+  guidebookPage: Null
+  class:
+  - Patrol
+  engine:
+  - Uranium
+  company:
+  - TSF
+
+- type: gameMap
+  id: Jaguar
+  mapName: 'Jaguar'
+  mapPath: /Maps/_Mono/Shuttles/Nfsd/jaguar.yml
+  minPlayers: 0
+  stations:
+    Jaguar:
+      stationProto: StandardFrontierSecurityVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Ягуар TSF{1}' # Forge-Change
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Deputy: [ 0, 0 ]
+          TsfBorg: [ 0, 0 ]
+

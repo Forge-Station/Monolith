@@ -8,12 +8,6 @@
   - NFMobRestrictions
   id: MobExplorerBase
   components:
-  # Forge-Change-Start
-  - type: Body
-    prototype: Human
-    requiredLegs: 2
-  - type: ComplexInteraction
-  # Forge-Change-End
   - type: NpcFactionMember
     factions:
     - ExplorersExpeditionNF

@@ -23,8 +23,8 @@
         Radiation: 0.6
         Caustic: 0.8
   - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
+    walkModifier: 0.9 # 0.95-> 0.9 Forge-change 
+    sprintModifier: 0.9 # 0.95-> 0.9 Forge-change 
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -53,20 +53,20 @@
   - type: Armor
     modifiers:
       coefficients: # Mono - all of these values are changed
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.45 # Mono
-        Heat: 0.55
+        Blunt: 0.6 # 0.5-> 0.6 Forge-change 
+        Slash: 0.6 # 0.5-> 0.6 Forge-change 
+        Piercing: 0.5 # Mono, 0.45-> 0.5 Forge-change 
+        Heat: 0.6 # 0.45-> 0.6 Forge-change 
         Radiation: 0.5 # Added Radiation Resist
         Caustic: 0.65
   - type: ExplosionResistance
-    damageCoefficient: 0.35
+    damageCoefficient: 0.5 # 0.35-> 0.5 Forge-change 
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ClothingSpeedModifier # Mono - Armor Value Changes
-    walkModifier: 0.825
-    sprintModifier: 0.825
+    walkModifier: 0.85 # 0.825-> 0.85 Forge-change
+    sprintModifier: 0.85 # 0.825-> 0.85 Forge-change
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing

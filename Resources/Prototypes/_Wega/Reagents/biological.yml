@@ -48,28 +48,32 @@
       volume: 6
   metabolisms:
     Medicine:
+      metabolismRate: 0.25
       effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -0.8
       - !type:HealthChange
         damage:
           types:
-            Blunt: -1
-            Slash: -1
-            Piercing: -1
-            Poison: -1
-            Heat: -1
-            Shock: -1
-            Cold: -1
-            Caustic: -1
-            Asphyxiation: -1
-            Bloodloss: -1
+            Poison: -0.3
+            Heat: -0.4
+            Cold: -0.4
+            Bloodloss: -0.7
         conditions:
         - !type:OrganType
           type: Demon
           shouldHave: false
+        # Forge-change-start
+        - !type:AddictionCondition
+          addictionId: Omnizine
+          min: 0.0
+          max: 0.5
+        # Forge-change-end
       - !type:HealthChange
         damage:
           types:
-            Poison: 1
+            Poison: 2.75
         conditions:
         - !type:OrganType
           type: Demon
@@ -92,3 +96,20 @@
         - !type:OrganType
           type: Demon
           shouldHave: false
+      # Forge-change-start
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Demon
+          shouldHave: false
+        - !type:AddictionCondition
+          addictionId: Omnizine
+          min: 0.5
+          max: 1.0
+        damage:
+          types:
+            Poison: -0.1
+            Heat: -0.2
+            Cold: -0.2
+            Bloodloss: -0.3
+      # Forge-change-end

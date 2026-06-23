@@ -1,0 +1,32 @@
+- type: pointOfInterest
+  id: ForgeVulcan
+  parent: [BasePOI, BaseRepairablePOI]
+  name: 'Оружейная кузница Dryaken «Вулкан»'
+  minimumDistance: 10800
+  maximumDistance: 11800
+  spawnGroup: Required
+  gridPath: /Maps/_Forge/POI/ForgeVulcan.yml
+  addComponents:
+  - type: IFF
+    color: "#c45c1a"
+  - type: SolarPoweredGrid
+    doNotCull: true
+  - type: ProtectedGrid
+    preventTeleportation: true
+
+- type: gameMap
+  id: ForgeVulcan
+  mapName: 'Оружейная кузница Forge «Вулкан»'
+  mapPath: /Maps/_Forge/POI/ForgeVulcan.yml
+  minPlayers: 0
+  stations:
+    ForgeVulcan:
+      stationProto: RecordsFrontierOutpostCargo
+      gridComponents:
+        - type: VesselInfo
+          description: "Заброшенная орбитальная оружейная с производством корабельного вооружения."
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Оружейная кузница Forge «Вулкан»'
+        - type: StationDeadDrop
+          maxDeadDrops: 8

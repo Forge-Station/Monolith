@@ -4,15 +4,17 @@
   id: Andromeda
   parent: BaseVesselAntag
   name: TSF-CRSW Andromeda
-  description: A experimental heavy frigate, with heavy burst frontal firepower and fast maneuveability.
+  description: Экспериментальный тяжёлый фрегат, обладающий мощной фронтальной огневой мощью залпового действия и высокой манёвренностью. # Forge-Change
   limit: 3
   price: 320000
+  purchasable: false # voucher only
   category: Large
   group: Security
   access: Armory
   shuttlePath: /Maps/_Mono/Shuttles/Nfsd/andromeda.yml
   guidebookPage: Null
   class:
+  - Fighter
   - Frigate
   engine:
   - Plasma
@@ -30,7 +32,7 @@
         description: "Enough guns to blot out the stars."
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Andromeda TSF{1}'
+        mapNameTemplate: 'Андромеда TSF{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

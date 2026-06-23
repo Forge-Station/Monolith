@@ -1,0 +1,9 @@
+# Utility techfab recipes (SalvageTechfabNF) — standard categories, not DrakeIndustries.
+
+- type: latheRecipe
+  id: PlasmaTank
+  result: PlasmaTank
+  completetime: 4
+  materials:
+    Steel: 300
+    Plastic: 200

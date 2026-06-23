@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by sodakent (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "assault_alt",
+      "delays": [[ 0.05, 0.05 ]]
+    },
+    {
+      "name": "assault",
+      "delays": [[ 0.05, 0.05 ]]
+    },
+    {
+      "name": "gauss",
+      "delays": [[ 0.05, 0.05 ]]
+    },
+    {
+      "name": "shotgun",
+      "delays": [[ 0.05, 0.05 ]]
+    }
+  ]
+}

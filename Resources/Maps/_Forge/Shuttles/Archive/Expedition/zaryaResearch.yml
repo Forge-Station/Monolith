@@ -9118,7 +9118,7 @@ entities:
     - type: Transform
       pos: 8.608406,-12.37806
       parent: 2
-- proto: ShieldGeneratorSmall
+- proto: ShieldGeneratorFSG1000
   entities:
   - uid: 1
     components:

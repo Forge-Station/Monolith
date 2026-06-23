@@ -20,7 +20,9 @@ using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Prototypes;
+using Content.Shared.Roles;
 using Robust.Server.ServerStatus;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
@@ -51,22 +53,21 @@ public sealed partial class ServerApi : IPostInjectInit
         CCVars.PanicBunkerCustomReason.Name,
     ];
 
-    [Dependency] private readonly IStatusHost _statusHost = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!; // Frontier: ISharedAdminManager<IAdminManager>
-    [Dependency] private readonly IGameMapManager _gameMapManager = default!;
-    [Dependency] private readonly IServerNetManager _netManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ITaskManager _taskManager = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly IPlayerLocator _locator = default!;
-    [Dependency] private readonly IConsoleHost _shell = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly IBanManager _bans = default!;
+    [Dependency] private IStatusHost _statusHost = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!; // Frontier: ISharedAdminManager<IAdminManager>
+    [Dependency] private IGameMapManager _gameMapManager = default!;
+    [Dependency] private IServerNetManager _netManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ITaskManager _taskManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private IBanManager _bans = default!;
 
     private string _token = string.Empty;
     private ISawmill _sawmill = default!;
@@ -79,6 +80,8 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterHandler(HttpMethod.Get, "/admin/info", InfoHandler); //frontier - not sure why this action needs an actor
         RegisterHandler(HttpMethod.Get, "/admin/game_rules", GetGameRules);
         RegisterHandler(HttpMethod.Get, "/admin/presets", GetPresets);
+        RegisterHandler(HttpMethod.Get, "/admin/playtime_trackers", GetPlayTimeTrackers); // Forge-Change
+        RegisterHandler(HttpMethod.Get, "/admin/jobs", GetJobs); // Forge-Change
 
         // Post
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/round/start", ActionRoundStart);
@@ -86,6 +89,7 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/round/restartnow", ActionRoundRestartNow);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/kick", ActionKick);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/ban", ActionBan); // Forge-Change
+        RegisterActorHandler(HttpMethod.Post, "/admin/actions/role_ban", ActionRoleBan); // Forge-Change
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/pardon", ActionPardon); // Forge-Change
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/add_time", ActionAddTime); // Forge-Change
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/add_game_rule", ActionAddGameRule);
@@ -402,6 +406,63 @@ public sealed partial class ServerApi : IPostInjectInit
             await RespondOk(context);
 
             _sawmill.Info($"Banned player {data.Username} ({data.UserId}) for {reason} by {FormatLogActor(actor)} to {body.Minutes}");
+        });
+    }
+
+    private async Task ActionRoleBan(IStatusHandlerContext context, Actor actor)
+    {
+        var body = await ReadJson<RoleBanActionBody>(context);
+        if (body == null)
+            return;
+
+        await RunOnMainThread(async () =>
+        {
+            var data = await _locator.LookupIdByNameOrIdAsync($"{body.TargetUsername}");
+            if (data == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Player not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var admin = await _locator.LookupIdByNameOrIdAsync($"{actor.Guid}");
+            if (admin == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Admin not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var adminData = await _db.GetAdminDataForAsync(admin.UserId);
+            if (adminData == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Is not admin", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            if (!_prototypeManager.HasIndex<JobPrototype>(body.Role))
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Role not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var targetHWid = data.LastHWId;
+            var targetId = data.UserId;
+            var targetUsername = data.Username;
+            var reason = body.Reason ?? "No reason supplied";
+            reason += " (role banned by admin)";
+
+            _bans.CreateRoleBan(targetId, targetUsername, admin.UserId, null, targetHWid, body.Role, (uint)body.Minutes, (NoteSeverity)body.Severity, body.Reason ?? "No reason", DateTimeOffset.UtcNow);
+
+            await RespondOk(context);
+
+            _sawmill.Info($"Role banned player {data.Username} ({data.UserId}) from {body.Role} for {reason} by {FormatLogActor(actor)} to {body.Minutes}");
         });
     }
 
@@ -754,6 +815,88 @@ public sealed partial class ServerApi : IPostInjectInit
         await context.RespondJsonAsync(info);
     }
 
+    // Forge-Change-Start
+    /// <summary>
+    ///     Returns all play-time trackers with a human-readable display name composed of the localized
+    ///     names of every <see cref="JobPrototype"/> that references the tracker. Used by the Discord
+    ///     bot's playtime-grant flow so the role list doesn't have to be hand-mirrored in two places.
+    /// </summary>
+    private async Task GetPlayTimeTrackers(IStatusHandlerContext context)
+    {
+        var trackers = await RunOnMainThread(() =>
+        {
+            var jobsByTracker = new Dictionary<string, List<JobPrototype>>();
+            foreach (var job in _prototypeManager.EnumeratePrototypes<JobPrototype>())
+            {
+                if (string.IsNullOrEmpty(job.PlayTimeTracker))
+                    continue;
+                if (!jobsByTracker.TryGetValue(job.PlayTimeTracker, out var list))
+                {
+                    list = new List<JobPrototype>();
+                    jobsByTracker[job.PlayTimeTracker] = list;
+                }
+                list.Add(job);
+            }
+
+            var result = new List<PlayTimeTrackerResponse.Tracker>();
+            foreach (var trackerProto in _prototypeManager.EnumeratePrototypes<PlayTimeTrackerPrototype>())
+            {
+                if (trackerProto.ID == PlayTimeTrackingShared.TrackerAdmin)
+                    continue;
+
+                string name;
+                if (trackerProto.ID == PlayTimeTrackingShared.TrackerOverall)
+                {
+                    name = "Общее игровое время";
+                }
+                else if (jobsByTracker.TryGetValue(trackerProto.ID, out var jobs) && jobs.Count > 0)
+                {
+                    name = string.Join(" / ", jobs
+                        .Select(j => j.LocalizedName)
+                        .Where(n => !string.IsNullOrWhiteSpace(n))
+                        .Distinct());
+                    if (string.IsNullOrWhiteSpace(name))
+                        name = trackerProto.ID;
+                }
+                else
+                {
+                    name = trackerProto.ID;
+                }
+
+                result.Add(new PlayTimeTrackerResponse.Tracker { Id = trackerProto.ID, Name = name });
+            }
+
+            return result.OrderBy(t => t.Name, StringComparer.CurrentCultureIgnoreCase).ToList();
+        });
+
+        await context.RespondJsonAsync(new PlayTimeTrackerResponse { Trackers = trackers });
+    }
+
+    /// <summary>
+    ///     Returns every <see cref="JobPrototype"/> with its localized display name. Used by the Discord
+    ///     bot's punishment-request flow: role bans key off job prototype IDs, not play-time tracker IDs,
+    ///     so the bot needs the real job list rather than the tracker list.
+    /// </summary>
+    private async Task GetJobs(IStatusHandlerContext context)
+    {
+        var jobs = await RunOnMainThread(() =>
+        {
+            var result = new List<JobResponse.Job>();
+            foreach (var job in _prototypeManager.EnumeratePrototypes<JobPrototype>())
+            {
+                var name = job.LocalizedName;
+                if (string.IsNullOrWhiteSpace(name))
+                    name = job.ID;
+                result.Add(new JobResponse.Job { Id = job.ID, Name = name });
+            }
+
+            return result.OrderBy(j => j.Name, StringComparer.CurrentCultureIgnoreCase).ToList();
+        });
+
+        await context.RespondJsonAsync(new JobResponse { Jobs = jobs });
+    }
+    // Forge-Change-End
+
     #endregion
 
     private async Task<bool> CheckAccess(IStatusHandlerContext context)
@@ -857,6 +1000,15 @@ public sealed partial class ServerApi : IPostInjectInit
         public int Minutes { get; init; }
         public int Severity { get; init; }
         public string? TargetUsername { get; init; }
+        public string? Reason { get; init; }
+    }
+
+    private sealed class RoleBanActionBody
+    {
+        public int Minutes { get; init; }
+        public int Severity { get; init; }
+        public string? TargetUsername { get; init; }
+        public required string Role { get; init; }
         public string? Reason { get; init; }
     }
 
@@ -979,6 +1131,30 @@ public sealed partial class ServerApi : IPostInjectInit
     {
         public required List<string> GameRules { get; init; }
     }
+
+    // Forge-Change-Start
+    private sealed class PlayTimeTrackerResponse
+    {
+        public required List<Tracker> Trackers { get; init; }
+
+        public sealed class Tracker
+        {
+            public required string Id { get; init; }
+            public required string Name { get; init; }
+        }
+    }
+
+    private sealed class JobResponse
+    {
+        public required List<Job> Jobs { get; init; }
+
+        public sealed class Job
+        {
+            public required string Id { get; init; }
+            public required string Name { get; init; }
+        }
+    }
+    // Forge-Change-End
 
     #endregion
 }

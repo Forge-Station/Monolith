@@ -313,7 +313,8 @@
   - type: Sprite
     layers:
     - map: ["computerLayerBody"]
-      state: computer
+      sprite: Forge/Structures/Machines/computers.rsi
+      state: computer_emp
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
@@ -447,3 +448,31 @@
     radius: 1.5
     energy: 1.6
     color: "#21b0a4"
+
+- type: entity
+  parent: ComputerId
+  id: ComputerIdEmpire
+  name: empire ID computer
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: Forge/Structures/Machines/computers.rsi
+      state: computer_emp
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: id
+    - map: ["computerLayerKeys"]
+      state: id_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: IdCardConsole
+    accessLevels:
+    - Empire
+    - EmpireOfficer
+    - EmpireSmallInq
+    - EmpireInqusitor
+    - EmpireCommander
+    - EmpireDiplomacy

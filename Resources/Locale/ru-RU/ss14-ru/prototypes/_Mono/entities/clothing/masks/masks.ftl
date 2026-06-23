@@ -1,7 +1,9 @@
 ent-ClothingMaskDrakeIndustries = респиратор Drake Industries
     .desc = Довольно нечастый в секторе дизайн. Промышленный респиратор крепится на челюсть и закрывает нижнюю часть лица. Фильтры подключены изнутри. Цвета Drake Industries.
+    .suffix = Drake
 ent-ClothingMaskDrakeIndustriesWatchdog = респиратор «Сторож»
     .desc = Громоздкий респиратор по оригинальной схеме Drake Industries. С поляризованным визором для защиты глаз в бою.
+    .suffix = Drake
 ent-ClothingMaskCOG = маска культа (устаревшая)
     .desc = Металлическая маска с повреждённым правым глазом. Рабочий светится синим.
 ent-ClothingMaskSOM40 = противогаз S.O.M. 40

@@ -5,6 +5,11 @@
     head: ClothingHeadHelmetMercenaryBlack
 
 - type: loadout
+  id: TsfmcUtilityCap
+  equipment:
+    head: ClothingHeadHatUtilityTsfmc
+
+- type: loadout
   id: TsfmcBeret
   name: loadout-tsfmc-beret
   equipment:
@@ -21,3 +26,8 @@
   name: loadout-tsfmc-beret-medic
   equipment:
     head: ClothingHeadHatBeretBrigmedic
+
+- type: loadout
+  id: TsfmcBeretCommon
+  equipment:
+    head: ClothingHeadHatBeretCommon

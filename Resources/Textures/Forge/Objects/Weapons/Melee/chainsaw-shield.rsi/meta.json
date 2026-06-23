@@ -1,0 +1,85 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made with love by Melissandra",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "shield-icon"
+      },
+      {
+        "name": "teeth-icon"
+      },
+      {
+        "name": "light-icon",
+        "delays": [ 
+            [ 1, 1, 1, 1 ]
+        ]
+      },
+      {
+        "name": "teeth-icon-power",
+        "delays": [ 
+            [ 0.1, 0.1 ]
+        ]
+      },
+      {
+        "name": "shield-inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "shield-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "teeth-inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "teeth-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "teeth-inhand-left-power",
+        "directions": 4,
+        "delays": [ 
+            [ 0.1, 0.1 ],
+            [ 0.1, 0.1 ],
+            [ 0.1, 0.1 ],
+            [ 0.1, 0.1 ]
+        ]
+      },
+      {
+        "name": "teeth-inhand-right-power",
+        "directions": 4,
+        "delays": [ 
+            [ 0.1, 0.1 ],
+            [ 0.1, 0.1 ],
+            [ 0.1, 0.1 ],
+            [ 0.1, 0.1 ]
+        ]
+      },
+      {
+        "name": "light-inhand-left",
+        "directions": 4,
+        "delays": [ 
+            [ 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1 ]
+        ]
+      },
+      {
+        "name": "light-inhand-right",
+        "directions": 4,
+        "delays": [ 
+            [ 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1 ]
+        ]
+      }
+    ]
+}

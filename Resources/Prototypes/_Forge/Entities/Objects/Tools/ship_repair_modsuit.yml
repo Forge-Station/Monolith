@@ -1,0 +1,8 @@
+# URK spawned from Omnissia gauntlets — slightly larger in-hand/world sprite than stock SRD.
+- type: entity
+  parent: ShipRepairDevice
+  id: ShipRepairDeviceModsuitGauntlet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    scale: 1.0, 1.0

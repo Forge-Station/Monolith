@@ -1,0 +1,40 @@
+# Author Info
+# GitHub: Primusirius
+# Discord: Primusirius
+
+# Shuttle Notes:
+#
+- type: vessel
+  id: Keln
+  parent: BaseVessel
+  name: G3 «Кельн»
+  description: Тяжёлобронированный шаттл для проведения спасательных операций в условиях боя. Вооружён масс-дравером "Чарон", 6-ю автопушками типа "Дравон" и двумя ракетными установками "Ванык" 150мм.
+  price: 167000 #Sell price 144k + 15%
+  category: Medium
+  group: Medical
+  shuttlePath: /Maps/_Forge/Shuttles/Medical/keln.yml
+  guidebookPage: null
+  class:
+  - Medical
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: Keln
+  mapName: 'G3 «Кельн»'
+  mapPath: /Maps/_Forge/Shuttles/Medical/keln.yml
+  minPlayers: 0
+  stations:
+    Keln:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Кельн MED{1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Contractor: [ 0, 0 ]
+          MdMedic: [ 0, 0 ]
+          Pilot: [ 0, 0 ]
+          Mercenary: [ 0, 0 ]

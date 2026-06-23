@@ -83,6 +83,11 @@
   # Forge-change: add icon & note
   icon: Drake
   note: drake-industries-company-note
+  # Forge-Change: company spawn encryption key
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyDrakeIndustries
 
 - type: company
   id: SteelHammerManufacturing
@@ -100,8 +105,13 @@
   description: harmony-medical-enterprises-description
   color: "#FC7303"
   image: /Textures/_Mono/Companies/HME.png
-  icon: HarmonyMedicalEnterprises # Forge-change
-  note: harmony-medical-enterprises-note # Forge-change
+  # Forge-change: add icon, note & special's
+  icon: HarmonyMedicalEnterprises
+  note: harmony-medical-enterprises-note
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyHarmony
 
 - type: company
   id: MidnightArmsCo
@@ -136,6 +146,7 @@
       params:
         volume: -5
         variation: 0.2
+  image: /Textures/_Mono/Companies/USSP.png
 
 # Major companies
 
@@ -195,6 +206,7 @@
   color: "#52326A"
   image: /Textures/_Mono/Companies/ullman_industries.png
   # Forge-change: add icon & special's
+  whitelisted: true
   icon: UllmanIndustries
   special:
   - !type:GiveItemSpecial
@@ -277,7 +289,7 @@
 
 - type: company
   id: CerberusSurplusProvisions
-  name: Cerberus Surplus Provisionaries
+  name: Cerberus Surplus Provisions
   description: cerberus-surplus-provisions
   color: "#aa1010"
   image: /Textures/_Mono/Companies/CSP.png

@@ -1,20 +1,22 @@
 ent-AirlockEmpirePublic = { ent-Airlock }
+    .suffix = Forge, Империя, Без доступа
     .desc = { ent-Airlock.desc }
 ent-AirlockEmpire = { ent-Airlock }
-    .suffix = Forge, СИВ
+    .suffix = Forge, Империя
     .desc = { ent-Airlock.desc }
 ent-AirlockEmpireOfficer = { ent-Airlock }
-    .suffix = Forge, СИВ, Офицер
+    .suffix = Forge, Империя, Офицер
     .desc = { ent-Airlock.desc }
 ent-AirlockEmpireInquisitor = { ent-Airlock }
-    .suffix = Forge, СИВ, Эклезиарх
+    .suffix = Forge, Империя, Эклезиарх
     .desc = { ent-Airlock.desc }
 ent-AirlockEmpireCommander = { ent-Airlock }
-    .suffix = Forge, СИВ, Лорд
+    .suffix = Forge, Империя, Лорд
     .desc = { ent-Airlock.desc }
 ent-AirlockEmpireDiplomacy = { ent-Airlock }
-    .suffix = Forge, СИВ, Консул
+    .suffix = Forge, Империя, Консул
     .desc = { ent-Airlock.desc }
+
 ent-AirlockRenegade = { ent-Airlock }
     .desc = { ent-Airlock.desc }
 ent-AirlockRenegadeCom = { ent-Airlock }

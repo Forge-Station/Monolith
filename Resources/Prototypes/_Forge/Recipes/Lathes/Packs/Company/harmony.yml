@@ -1,0 +1,18 @@
+- type: latheRecipePack
+  id: HMERecipes
+  recipes:
+  - RegenerativeMesh1
+  - MedicatedSuture1
+  - Bloodpack1
+  - HMEAdvancedMedkitCombat
+  - HMESynthFleshPack1
+  - HMEElasticGaugePack1
+  - HMESynthBloodpack1
+  - HMEAdvancedCompactDefibrillator
+  - HMEBasicHypo
+  - HMEStandartHypo
+  - HMELightModsuit
+  - HMEHeavyModsuit
+  - HMEJumpsuit
+  - HMEJumpskirt
+  - HMEBeret

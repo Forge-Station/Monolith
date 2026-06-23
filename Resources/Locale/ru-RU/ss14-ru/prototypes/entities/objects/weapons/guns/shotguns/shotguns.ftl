@@ -46,3 +46,8 @@ ent-NFWeaponShotgunImprovisedLoaded = самодельный дробовик
 ent-NFWeaponShotgunHandmadeEmpty = самодельный пистолет
     .desc = Выглядит ненадежно, но законно.
     .suffix = Дробовик
+ent-WeaponShotgunEnforcerRubber = { ent-WeaponShotgunEnforcer }
+    .desc = { ent-WeaponShotgunEnforcer.desc }
+
+ent-WeaponShotgunBulldog = PA M-12 Бульдог (12-й калибр)
+    .desc = Автоматический магазинный дробовик для ближнего боя. Лягается как мул на стероидах. Использует патроны 12-го калибра.

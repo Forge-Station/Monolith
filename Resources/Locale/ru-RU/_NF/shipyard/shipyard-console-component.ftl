@@ -1,8 +1,8 @@
 ## UI
-
 shipyard-console-invalid-vessel = Не удалось приобрести шаттл:
 shipyard-console-menu-title = Меню Верфи
 shipyard-console-menu-listing-free = Бесплатно
+shipyard-console-menu-listing-voucher = Ваучер
 shipyard-console-menu-listing-amount = ${ $amount }
 shipyard-console-docking = Шаттл { $vessel } капитана { $owner } в пути, расчётное время прибытия 10 секунд.
 shipyard-console-leaving = Шаттл { $vessel } капитана { $owner } продан { $player }.
@@ -23,6 +23,7 @@ shipyard-console-sale-unknown-reason = Шаттл не может быть пр�
 shipyard-console-deed-label = Зарегистрированный шаттл:
 shipyard-console-appraisal-label = Оценочная стоимость шаттла:{ " " }
 shipyard-console-no-voucher-redemptions = Все ваучеры использованы.
+
 shipyard-console-shipwiki-button = Документация шаттлов
 
 shipyard-console-engine-All = Все
@@ -45,6 +46,10 @@ shipyard-console-class-Detective = Конвоирный
 shipyard-console-class-Fighter = Штурмовой
 shipyard-console-class-Patrol = Патрульный
 shipyard-console-class-Pursuit = Перехватчик
+shipyard-console-class-Corvette = Корвет
+shipyard-console-class-Frigate = Фрегат
+shipyard-console-class-Destroyer = Эсминец
+shipyard-console-class-Cruiser = Крейсер
 
 shipyard-console-class-Syndicate = Синдикат
 shipyard-console-class-Pirate = Пиратский
@@ -86,3 +91,7 @@ shipyard-console-station-resources = На борту обнаружены жиз
 shipyard-console-dangerous-materials = На борту обнаружены опасные материалы.
 shipyard-console-invalid-voucher-type = Этот ваучер не может быть использован на этой консоли.
 shipyard-console-fallback-prevent-sale = Обнаружены ошибки класса YML на борту. Пожалуйста, отправьте отчет об ошибке, когда это возможно.
+
+# Mono start
+shipyard-console-engine-NFR = NFR
+# Mono end

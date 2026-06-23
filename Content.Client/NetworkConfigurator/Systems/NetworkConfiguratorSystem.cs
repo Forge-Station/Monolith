@@ -16,12 +16,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.NetworkConfigurator.Systems;
 
-public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
+public sealed partial class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private IInputManager _inputManager = default!;
 
     [ValidatePrototypeId<EntityPrototype>]
     private const string Action = "ActionClearNetworkLinkOverlays";
@@ -37,7 +37,7 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     private Control OnCollectItemStatus(Entity<NetworkConfiguratorComponent> entity)
     {
         _inputManager.TryGetKeyBinding((ContentKeyFunctions.AltUseItemInHand), out var binding);
-        return new StatusControl(entity, binding?.GetKeyString() ?? "");
+        return new StatusControl(entity.Owner, entity.Comp, binding?.GetKeyString() ?? "", this);
     }
 
     public bool ConfiguredListIsTracked(EntityUid uid, NetworkConfiguratorComponent? component = null)
@@ -103,16 +103,24 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 
     private sealed class StatusControl : Control
     {
+        private readonly EntityUid _uid;
         private readonly RichTextLabel _label;
         private readonly NetworkConfiguratorComponent _configurator;
         private readonly string _keyBindingName;
+        private readonly NetworkConfiguratorSystem _system;
 
         private bool? _linkModeActive = null;
 
-        public StatusControl(NetworkConfiguratorComponent configurator, string keyBindingName)
+        public StatusControl(
+            EntityUid uid,
+            NetworkConfiguratorComponent configurator,
+            string keyBindingName,
+            NetworkConfiguratorSystem system)
         {
+            _uid = uid;
             _configurator = configurator;
             _keyBindingName = keyBindingName;
+            _system = system;
             _label = new RichTextLabel { StyleClasses = { StyleNano.StyleClassItemStatus } };
             AddChild(_label);
         }
@@ -120,6 +128,16 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
         protected override void FrameUpdate(FrameEventArgs args)
         {
             base.FrameUpdate(args);
+
+            // Forge-Change-start: hide link/list mode HUD unless omnitool is in pulsing mode
+            if (!_system.CanUseNetworkConfigurator(_uid))
+            {
+                Visible = false;
+                return;
+            }
+
+            Visible = true;
+            // Forge-Change-end
 
             if (_linkModeActive != null && _linkModeActive == _configurator.LinkModeActive)
                 return;
@@ -137,15 +155,14 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
     }
 }
 
-public sealed class ClearAllNetworkLinkOverlays : IConsoleCommand
+public sealed partial class ClearAllNetworkLinkOverlays : LocalizedEntityCommands
 {
-    [Dependency] private readonly IEntityManager _e = default!;
+    [Dependency] private NetworkConfiguratorSystem _network = default!;
 
-    public string Command => "clearnetworklinkoverlays";
-    public string Description => "Clear all network link overlays.";
-    public string Help => Command;
-    public void Execute(IConsoleShell shell, string argStr, string[] args)
+    public override string Command => "clearnetworklinkoverlays";
+
+    public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        _e.System<NetworkConfiguratorSystem>().ClearAllOverlays();
+        _network.ClearAllOverlays();
     }
 }

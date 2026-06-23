@@ -6,3 +6,6 @@ ent-FComputerShuttleAntagCircuitboard = консоль управления ша
 ent-DoorElectronicsSergeant = { ent-DoorElectronics }
     .desc = { ent-DoorElectronics.desc }
     .suffix = Лейтенант, ТСФ
+
+ent-TraumaTechFabCircuitboard = техфаб TTI (машинная плата)
+    .desc = Плата, необходимая для создания техфаба TTI.

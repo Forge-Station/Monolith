@@ -1,6 +1,6 @@
 - type: technology
   id: ShuttleAdvancedComponents
-  name: research-technology-shuttle-advanced-components 
+  name: research-technology-shuttle-advanced-components
   entityIcon: ComputerAdvancedRadar
   discipline: CivilianServices
   tier: 3
@@ -10,16 +10,15 @@
 #  - MachineShieldMS225Circuitboard
   - GunneryControlComputerCircuitboard
   - MachineGCSLowCircuitboard
-  - MachineGCSMediumCircuitboard
-  - MachineGCSHighCircuitboard
+  - GCSMediumUpgradeCircuitboard # Forge-Change
   - AdvancedRadarConsoleCircuitboard
   - ComputerIFFCircuitboard
   - MachineDriveCTLA25Circuitboard
+  - LargeThrusterMachineCircuitboard
   technologyPrerequisites:
   - Shuttlecraft
   - SuperParts
-  position: -6, 7
-
+  position: -4, 5
 
 - type: technology
   id: ShuttleCtlaAdvancedDriveResearch
@@ -34,4 +33,4 @@
   technologyPrerequisites:
   - ShuttleAdvancedComponents
   - PortableFission
-  position: -6, 9
+  position: -5, 5

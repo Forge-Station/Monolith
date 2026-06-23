@@ -18,6 +18,7 @@
         layer:
         - MachineLayer
   - type: Lathe
+    productValueModifier: 0.1 # Forge-change
   - type: MaterialStorage
     whitelist: # Frontier
       tags: # Frontier
@@ -247,7 +248,7 @@
     - PowerCells
     - ScienceWeapons
     - Mining
-    - AtmosTools
+    - ForgeEngineeringTools # Forge-Change: handheld monitors
     - ResearchedExplosives # Mono
     # - EngineeringWeapons # Frontier
     - Chemistry
@@ -274,6 +275,7 @@
     - Translators
     # Forge-change
     - BSparts
+    - ForgePublicWeapons
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - DynamicAmmoRecipePack
@@ -342,11 +344,17 @@
     - NFMedicalBoards # Frontier + Shitmed Change
     - NFServiceBoards # Frontier
     - MonoAdvancedShuttleComponents # Mono
+    - ForgeShipWeaponsDynamic # Forge-Change
+    - ForgeAdvancedShuttleComponents # Forge-Change
+    - ForgeBoardingTeleportRecipes # Forge-Change
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
     - S2MechBoards
     - EngineeringBoardsGoob #Goob Factorio port
+    - NanotrasenCircuitBoard # Forge-change
+    - DrakeIndustriesCircuitBoards # Forge-change
+    - ReactorCircuitboards # FH edit
   - type: MaterialStorage
     whitelist:
       tags:
@@ -365,6 +373,33 @@
     sprite: Structures/Machines/circuit_imprinter_hypercon.rsi
   - type: Machine
     board: CircuitImprinterHyperConvectionMachineCircuitboard
+  # Inherits CircuitImprinter Lathe fields except dynamicPacks: child replaces the whole list, so duplicate parent packs + T4.
+  - type: Lathe
+    dynamicPacks:
+    - MonoEconomyLatheBoards # Mono
+    - EngineeringBoards
+    - CargoBoards
+    - MedicalBoards
+    - ServiceBoards
+    - ScienceBoards
+    - CameraBoards
+    - MechBoards
+    - ShuttleBoards
+    - NFEngineeringBoards # Frontier
+    - NFMedicalBoards # Frontier + Shitmed Change
+    - NFServiceBoards # Frontier
+    - MonoAdvancedShuttleComponents # Mono
+    - ForgeAdvancedShuttleComponents # Forge
+    - ForgeBoardingTeleportRecipes # Forge
+    - CarpCaller # Mono
+    - MechBoardsPlus
+    - AiCoreBoard
+    - S2MechBoards
+    - EngineeringBoardsGoob #Goob Factorio port
+    - NanotrasenCircuitBoard # Forge-change
+    - DrakeIndustriesCircuitBoards # Forge-change
+    - ReactorCircuitboards # FH edit
+    - ForgeHyperConvectionFSGTier4Boards # Forge — FSG T4 boards (disk-unlocked), hyper imprinter only
 
 - type: entity
   id: ExosuitFabricator
@@ -394,6 +429,7 @@
     # Shitmed Change
     - IPCPartsStatic
     dynamicPacks:
+    - NanotrasenMechWeapon # Forge-change
     - Robotics
     - BorgModules
     - MechParts
@@ -495,10 +531,13 @@
     - StaticAmmoRecipePack
     - SecurityWeaponsStatic
     dynamicPacks:
+    - NanotrasenWeapon # Forge-change
+    - NanotrasenEquipment # Forge-change
     - SecurityEquipment
     - SecurityExplosives
     - DynamicAmmoRecipePack
     - SecurityWeapons
+    - ForgePublicWeapons # Forge-change
     - SecurityDisablers
     - SMCybernetics
     # Mono - Mechs
@@ -611,6 +650,7 @@
     - Chemistry
     - SyringeGuns # DeltaV
     - NFMedical # Frontier
+    - HMERecipes # Forge-change
     # Shitmed Change
     - SMSurgery
     - SMCybernetics
@@ -645,6 +685,7 @@
     idleState: icon
     runningState: building
     staticPacks:
+    - NanotrasenClothing # Forge-change
     - ClothingCivilian
     - ClothingCargo
     - ClothingCommand
@@ -662,7 +703,9 @@
     - NFFloorTilesCarpet # Frontier
     - NFWallets # Frontier
     dynamicPacks: # Frontier
+    - NanotrasenClothing # Forge: AllTechPrintableTest only indexes dynamicPacks
     - NFPouches # Frontier
+    - ClothingEmpirePack # Forge-change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ClothingCentComm
@@ -889,6 +932,7 @@
   - type: Lathe
     idleState: limbgrower_idleoff
     runningState: limbgrower_idleon
+    productValueModifier: 0.05
     staticPacks:
     - MedicalSynthLimbsStatic
   - type: EmagLatheRecipes

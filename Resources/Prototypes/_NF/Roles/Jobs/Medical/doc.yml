@@ -25,6 +25,7 @@
   - AllAccessMono #Mono
   access:
   - ChiefMedicalOfficer #Mono
+  - NtSecApartment
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TTITrackingImplant ] # Forge-change
@@ -50,5 +51,7 @@
     - RubberStampDoc
     - BoxFolderMedicalDoctor
     - StationAdministrationConsoleFlatpack
+    # Forge-Change
+    - NTSecApartmentTablet
     - PhoneInstrumentHigh
     - WeaponCaseShortN1984Expedition # Forge

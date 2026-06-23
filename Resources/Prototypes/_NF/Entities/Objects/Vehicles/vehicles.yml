@@ -687,3 +687,68 @@
           components:
             - Gun
         priority: 2
+
+# Forge-Change-Start
+#region dumpster
+#Известные проблемы: не коректно отображает спрайт персонажа во время езды.
+- type: entity
+  id: NFGoblinMadeVehicleDumpster
+  parent: [ BaseVehicleRideable, TrashBox ]
+  name: dumpster
+  description: It only has one wheel!
+  components:
+  # - type: Timer
+  - type: TimedSpawner
+    prototypes:
+    - SpawnGoblinMadeToolMalfunction
+    chance: 0.05
+    intervalSeconds: 1200 # 20 min
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+  - type: GoblinMade
+  - type: Vehicle
+    hasKey: true
+  - type: Sprite
+    sprite: _NF/Objects/Vehicles/dumpster.rsi
+    layers:
+    - state: dumpster
+      map: ["enum.VehicleVisualLayers.AutoAnimate"]
+    - sprite: _NF/Structures/Storage/magnetbox.rsi
+      state: controller
+    - sprite: _NF/Structures/Storage/magnetbox.rsi
+      state: controller-on
+      visible: False
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      shader: unshaded
+    - sprite: _NF/Objects/Tools/goblin_tools/overlay_sparks.rsi
+      state: overlay-icon
+      shader: unshaded
+  - type: MovementSpeedModifier
+    acceleration: 1
+    friction: 0.8
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 4.3
+  - type: Strap
+    buckleOffset: "0,0"
+  # maxBuckleDistance: 1 # Umbra - buckling fix
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 240
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Construction
+    graph: NFGoblinMadeVehicleDumpster
+    node: NFGoblinMadeVehicleDumpster
+# Forge-Change-End

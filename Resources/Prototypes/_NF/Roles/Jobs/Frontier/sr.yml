@@ -27,6 +27,8 @@
   weight: 170
   displayWeight: 60 # Forge
   canBeAntag: false
+  access:
+  - NtSecApartment
   accessGroups:
   - AllAccessSR # Forge-Change
   special:
@@ -51,6 +53,8 @@
     - Flash
     - RubberStampSr
     - DoorRemoteCommand
+    # Forge-Change
+    - NTSecApartmentTablet
 #    - EncryptionKeyCentCom # Forge-Change-Remove
     - EncryptionKeyStationMasterSR #Mono start
     - EncryptionKeyDiplomacy

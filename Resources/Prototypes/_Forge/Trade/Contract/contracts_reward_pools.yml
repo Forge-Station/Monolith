@@ -1,0 +1,411 @@
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardBasic
+  entries:
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsBasicFull
+    count: { min: 3, max: 6 }
+    weight: 6
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsValuableFull
+    count: { min: 3, max: 6 }
+    weight: 1
+  - type: Pool
+    pool: ForgeExpeditionRewardBasicWeapons
+    count: 1
+    weight: 3
+  - type: Item
+    prototype: SpawnDungeonLootToolsSalvage
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: SpawnDungeonLootArmorMercenary
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: SpawnDungeonLootHardsuitsSalvage
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: CrateNanotrasenLootFilledT1
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: SpawnDungeonLootPartsEngi
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: ResearchDisk10000
+    count: 1
+    weight: 1
+  - type: Currency
+    currency: BankCredit
+    count: { min: 2500, max: 5000 }
+    weight: 2
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardAdvanced
+  entries:
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsBasicFull
+    count: { min: 3, max: 6 }
+    weight: 2
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsValuableFull
+    count: { min: 3, max: 6 }
+    weight: 5
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvancedWeapons
+    count: 1
+    weight: 4
+  - type: Item
+    prototype: SpawnDungeonLootArmorMercenary
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: SpawnDungeonLootHardsuitsSalvage
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: SpawnDungeonLootHardsuitsMercenary
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: CrateNanotrasenLootFilledT2
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: SpawnDungeonLootPartsEngi
+    count: { min: 1, max: 2 }
+    weight: 3
+  - type: Item
+    prototype: SpawnDungeonLootFlatpacksEngi
+    count: 1
+    weight: 2
+  - type: Pool
+    pool: ForgeExpeditionRewardShipWeaponsAdvanced
+    count: 1
+    weight: 1
+  - type: Pool
+    pool: ForgeExpeditionRewardServiceFlatpacks
+    count: 1
+    weight: 1
+  - type: Pool
+    pool: ForgeExpeditionRewardMedicalChemFlatpacks
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: ResearchDisk35000
+    count: 1
+    weight: 2
+  - type: Currency
+    currency: BankCredit
+    count: { min: 7500, max: 15000 }
+    weight: 2
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardElite
+  entries:
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsBasicFull
+    count: { min: 3, max: 6 }
+    weight: 1
+  - type: Item
+    prototype: SpawnDungeonLootMaterialsValuableFull
+    count: { min: 3, max: 6 }
+    weight: 5
+  - type: Pool
+    pool: ForgeExpeditionRewardEliteWeapons
+    count: 1
+    weight: 4
+  - type: Item
+    prototype: SpawnDungeonLootArmorMercenary
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: SpawnDungeonLootHardsuitsMercenary
+    count: { min: 1, max: 2 }
+    weight: 3
+  - type: Item
+    prototype: SpawnDungeonLootHardsuitsSalvage
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: SpawnDungeonLootShieldsMercenary
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: CrateNanotrasenLootFilledT3
+    count: 1
+    weight: 3
+  - type: Item
+    prototype: SpawnDungeonLootPartsEngi
+    count: { min: 2, max: 3 }
+    weight: 3
+  - type: Item
+    prototype: SpawnDungeonLootFlatpacksEngi
+    count: 1
+    weight: 2
+  - type: Pool
+    pool: ForgeExpeditionRewardShipWeaponsElite
+    count: 1
+    weight: 2
+  - type: Pool
+    pool: ForgeExpeditionRewardMedicalChemFlatpacks
+    count: 1
+    weight: 1
+  - type: Pool
+    pool: ForgeExpeditionRewardEliteTechDisks
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: ResearchDisk65000
+    count: 1
+    weight: 2
+  - type: Currency
+    currency: BankCredit
+    count: { min: 15000, max: 30000 }
+    weight: 2
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardBasicWeapons
+  entries:
+  - type: Item
+    prototype: SpawnDungeonLootGunT1
+    count: 1
+    weight: 4
+  - type: Item
+    prototype: SpawnDungeonLootMeleeT1
+    count: 1
+    weight: 3
+  - type: Item
+    prototype: SpawnDungeonLootExplosivesT1
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardAdvancedWeapons
+  entries:
+  - type: Item
+    prototype: SpawnDungeonLootGunT2
+    count: 1
+    weight: 4
+  - type: Item
+    prototype: SpawnDungeonLootMeleeT2
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: SpawnDungeonLootExplosivesT2
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: SpawnDungeonLootGunT3
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardEliteWeapons
+  entries:
+  - type: Item
+    prototype: SpawnDungeonLootGunT3
+    count: 1
+    weight: 3
+  - type: Item
+    prototype: SpawnDungeonLootGunT4
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: SpawnDungeonLootMeleeT3
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: SpawnDungeonLootMeleeT4
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: SpawnDungeonLootExplosivesT3
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: SpawnDungeonLootExplosivesT4
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardShipWeaponsAdvanced
+  entries:
+  - type: Item
+    prototype: M25Flatpack
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: WeaponTurretShardFlatpack
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: WeaponTurretPinholeFlatpack
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: L58Flatpack
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardShipWeaponsElite
+  entries:
+  - type: Item
+    prototype: AK570Flatpack
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: Type35Flatpack
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: M381Flatpack
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardServiceFlatpacks
+  entries:
+  - type: Item
+    prototype: SpawnDungeonLootFlatpacksService
+    count: 1
+    weight: 4
+  - type: Item
+    prototype: SpawnDungeonLootFlatpacksEngi
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardMedicalChemFlatpacks
+  entries:
+  - type: Item
+    prototype: SpawnDungeonLootFlatpacksMed
+    count: 1
+    weight: 3
+  - type: Item
+    prototype: SpawnDungeonLootChems
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: SpawnDungeonLootKitsFirstAid
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardEliteTechDisks
+  entries:
+  - type: Item
+    prototype: TechDiskBluespaceBags
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: TechDiskFtl
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: TechDiskTierBS4
+    count: 1
+    weight: 2
+  - type: Item
+    prototype: TechDiskShields
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: TechDiskForgeFSG900P
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: TechDiskForgeFSGT4Specialists
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: TechDiskOmegaGunnery
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardFoodBasic
+  entries:
+  - type: Pool
+    pool: ForgeExpeditionRewardBasic
+    count: 1
+    weight: 8
+  - type: Item
+    prototype: FoodMeatDragon
+    count: 1
+    weight: 1
+  - type: Item
+    prototype: DragonEgg
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardFoodAdvanced
+  entries:
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: 1
+    weight: 8
+  - type: Item
+    prototype: FoodMeatDragon
+    count: { min: 1, max: 2 }
+    weight: 1
+  - type: Item
+    prototype: DragonEgg
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardFoodElite
+  entries:
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: 1
+    weight: 8
+  - type: Item
+    prototype: FoodMeatDragon
+    count: { min: 2, max: 3 }
+    weight: 1
+  - type: Item
+    prototype: DragonEgg
+    count: { min: 1, max: 2 }
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardBarBasic
+  entries:
+  - type: Pool
+    pool: ForgeExpeditionRewardBasic
+    count: 1
+    weight: 8
+  - type: Item
+    prototype: JugOmnizine
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardBarAdvanced
+  entries:
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: 1
+    weight: 8
+  - type: Item
+    prototype: JugOmnizine
+    count: 1
+    weight: 1
+
+- type: ncSupplyRewardPool
+  id: ForgeExpeditionRewardBarElite
+  entries:
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: 1
+    weight: 8
+  - type: Item
+    prototype: JugOmnizine
+    count: 1
+    weight: 1

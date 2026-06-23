@@ -22,11 +22,16 @@
       tags:
         - Cartridge
         - Trash
+  # Forge-Change-Start
+      components: # Frontier: added GoblinMade
+        - GoblinMade # Frontier: added GoblinMade
+  # Forge-Change-End
   - type: UseDelay
     delay: 0.5
   - type: Tag
     tags:
     - TrashBag
+    - GoblinPreciousTrashBag # Forge-Change
   - type: Appearance
   - type: StorageFillVisualizer
     maxFillLevels: 4

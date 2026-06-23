@@ -1,0 +1,22 @@
+- type: reagent
+  id: Lactozit
+  name: reagent-name-lactozit
+  group: Foods
+  desc: reagent-desc-lactozit
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: sweet
+  color: "#fff4d6"
+  metabolisms:
+    Food:
+      metabolismRate: 0.25
+      effects:
+      - !type:SatiateThirst
+        factor: -0.1
+      - !type:EvenHealthChange
+        damage:
+          Brute: -1.5
+          Burn: -1.5
+        conditions:
+        - !type:OrganType
+          type: Rodentia
+          shouldHave: true

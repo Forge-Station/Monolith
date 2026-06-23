@@ -113,3 +113,18 @@
             Cold: -0.2
             Bloodloss: -0.3
       # Forge-change-end
+      
+- type: reagent
+  parent: Blood
+  id: SkrellBlood
+  name: reagent-name-skrell-blood
+  group: Biological
+  desc: reagent-desc-skrell-blood
+  flavor: salty
+  color: "#4bb6cf"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-translucent
+  footstepSound:
+    collection: FootstepBlood
+    params:
+      volume: 6

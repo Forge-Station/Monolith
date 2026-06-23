@@ -8,3 +8,5 @@ ent-ClothingBackpackDuffelNfsdBrown = вещмешок ТСФ
     .desc = { ent-ClothingBackpackDuffelSecurity.desc }
 ent-ClothingBackpackDuffelNfsdCream = { ent-ClothingBackpackDuffelNfsdBrown }
     .desc = { ent-ClothingBackpackDuffelNfsdBrown.desc }
+ent-NFGoblinMadeClothingBackpackDuffelTrashBlue = авосище
+    .desc = Хапай-драпай!

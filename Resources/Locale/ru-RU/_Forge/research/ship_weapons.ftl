@@ -1,6 +1,5 @@
-forge-research-technology-shipweapon-l85 = Автопушка L85
-forge-research-technology-shipweapon-m25 = Импульсор M25
-forge-research-technology-shipweapon-phalanx = Лазер L-1 «Фаланга»
+forge-research-technology-shipweapon-entry = Базовые корабельные орудия
+forge-research-technology-shipweapon-midline = Средние корабельные орудия
 forge-research-technology-shipweapon-rac30 = Автопушка RAC-30
 forge-research-technology-shipweapon-ak570 = Автопушка AK570
 forge-research-technology-shipweapon-dravon = Автопушка DRAVON

@@ -6,7 +6,7 @@
   - type: Sprite
     state: security
   - type: ShipWeaponBoard
-    fabricationTime: 60
+    fabricationTime: 30 # Forge-Change
     requiredPartRating: 1
   - type: MachineBoard
     flatpackable: false
@@ -17,8 +17,6 @@
     stackRequirements:
       Steel: 20
       Glass: 12
-      Copper: 20
-      Lithium: 5
       Plasteel: 10
 
 - type: entity
@@ -29,7 +27,7 @@
   - type: Sprite
     state: security
   - type: ShipWeaponBoard
-    fabricationTime: 120
+    fabricationTime: 60 # Forge-Change
     requiredPartRating: 2
   - type: MachineBoard
     flatpackable: false
@@ -44,7 +42,6 @@
       Gold: 15
       Copper: 40
       Lithium: 5
-      Iridite: 1
 
 - type: entity
   id: ForgeShipWeaponCircuitboardT3
@@ -54,7 +51,7 @@
   - type: Sprite
     state: security
   - type: ShipWeaponBoard
-    fabricationTime: 180
+    fabricationTime: 90 # Forge-Change
     requiredPartRating: 3
   - type: MachineBoard
     flatpackable: false
@@ -197,7 +194,6 @@
       Silver: 30
       Copper: 60
       Lithium: 30
-      Iridite: 3
   - type: Tag
     tags:
     - MachineBoard2x1

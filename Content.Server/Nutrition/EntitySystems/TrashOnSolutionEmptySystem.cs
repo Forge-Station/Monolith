@@ -12,7 +12,10 @@ namespace Content.Server.Nutrition.EntitySystems
         [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private TagSystem _tagSystem = default!;
 
-        private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
+        /// <summary>
+        ///  Передел на массив чтобы все расходники использующие эту систему могли быть использованы гоблинами в качестве компонентов для крафта как газировка, медипены и т.п.
+        /// </summary>
+        private static readonly ProtoId<TagPrototype>[] TrashTags = { "Trash", "GoblinPreciousTrash" }; /// Forge-Change
 
         public override void Initialize()
         {
@@ -44,11 +47,11 @@ namespace Content.Server.Nutrition.EntitySystems
         {
             if (solution.Volume <= 0)
             {
-                _tagSystem.AddTag(entity.Owner, TrashTag);
+                _tagSystem.AddTags(entity.Owner, TrashTags); /// Forge-Change
                 return;
             }
 
-            _tagSystem.RemoveTag(entity.Owner, TrashTag);
+            _tagSystem.RemoveTags(entity.Owner, TrashTags); /// Forge-Change
         }
     }
 }

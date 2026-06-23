@@ -81,6 +81,20 @@ public sealed partial class StealthComponent : Component
     public float MaxVisibility = 1.5f;
 
     /// <summary>
+    ///     How much visibility increases when this entity takes damage.
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public float DamageVisibilityModifier = 0.9f;
+
+    /// <summary>
+    ///     How much visibility increases when this entity attacks.
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public float AttackVisibilityModifier = 0.6f;
+
+    /// <summary>
     ///     Localization string for how you'd like to describe this effect.
     /// </summary>
     [DataField("examinedDesc")]

@@ -114,7 +114,7 @@
   description: alerts-magboots-desc
 
 - type: entity
-  parent: [ ClothingShoesBootsMagAdv, BaseFactionGearOtherFactionT2, JetpackChrono ]
+  parent: [ ClothingShoesBootsMagAdv, BaseFactionGearOtherFactionT2, JetpackChrono]
   id: ClothingShoesBootsMagAsakimForge
   name: pre-fracture magboots
   description: State-of-the-art magnetic boots made for combat with advanced harnesses.

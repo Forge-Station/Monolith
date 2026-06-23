@@ -30,7 +30,7 @@
   cost: 5000
   category: cargoproduct-category-name-materials
   group: market
-  
+
 - type: cargoProduct
   id: MaterialWaterTankHighCapacity
   abstract: true
@@ -51,3 +51,15 @@
   cost: 1000
   category: cargoproduct-category-name-materials
   group: market
+
+# Forge-Change-Start
+- type: cargoProduct
+  id: CargoTrashBox
+  icon:
+    sprite: /Textures/_NF/Structures/Storage/magnetbox.rsi
+    state: rubbishbox
+  product: TrashBox
+  cost: 800
+  category: cargoproduct-category-name-materials
+  group: market
+# Forge-Change-End

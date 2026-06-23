@@ -1,0 +1,31 @@
+- type: entity
+  parent: MobCarp
+  id: ForgeContractCarp
+  name: контрактный карп
+  description: Помеченная контрактная цель. ЦК не считает ее случайной враждебной фауной, но торговый автомат все равно принимает трофей.
+  suffix: Forge, Contract
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: Tag
+    tags:
+    - Carp
+    - DoorBumpOpener
+
+- type: entity
+  parent: MobCarpRainbow
+  id: ForgeContractCarpGilded
+  name: меченый контрактный карп
+  description: Переливающийся карп с маячком на плавнике. Его метка подходит для охотничьего заказа.
+  suffix: Forge, Contract
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: Tag
+    tags:
+    - Carp
+    - DoorBumpOpener

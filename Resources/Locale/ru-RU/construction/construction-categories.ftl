@@ -11,5 +11,6 @@ construction-category-utilities = Утилиты
 construction-category-misc = Разное
 construction-category-clothing = Одежда
 construction-category-favorites = Избранное
+construction-category-goblin = Текналоджа
 construction-add-favorite-button = Добавить в избранное
 construction-remove-from-favorite-button = Удалить из избранного

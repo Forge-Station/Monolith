@@ -355,6 +355,7 @@
     - NanotrasenCircuitBoard # Forge-change
     - DrakeIndustriesCircuitBoards # Forge-change
     - ReactorCircuitboards # FH edit
+    - BsEnergyCircuitsPack # Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:

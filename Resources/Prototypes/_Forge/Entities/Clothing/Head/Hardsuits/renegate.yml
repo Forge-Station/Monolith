@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ ClothingHeadHardsuitBase, ShowSecurityIcons ]
   id: ClothingHeadHelmetHardsuitRenegatebsii20
   name: BSII-20 "Requiem" helmet
   description: The interchangeable helmet system for the majority of BSII-20 hardsuits.
@@ -30,7 +30,7 @@
     - HeadSide
 
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ ClothingHeadHardsuitBase, ShowSecurityIcons ]
   id: ClothingHeadHelmetHardsuitRenegatebsii30
   name: BSII-30 "Locksmith" helmet
   description: The interchangeable helmet system for the majority of BSII-20 hardsuits.
@@ -61,7 +61,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons ]
+  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons ]
   id: ClothingHeadHelmetHardsuitRenegatecriii200
   name: CRIII-200 "Bug" helmet
   description: The interchangeable helmet system for the majority of CRIII-200 hardsuits.
@@ -97,7 +97,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons ]
+  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons ]
   id: ClothingHeadHelmetHardsuitRenegateoiii18
   name: OIII-18 "Omega" helmet
   description: The interchangeable helmet system for the majority of OIII-18 hardsuits.
@@ -133,7 +133,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons ]
+  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons ]
   id: ClothingHeadHelmetHardsuitRenegateyiv3020
   name: YIV3020 "Svyatogor" helmet
   description: The interchangeable helmet system for the majority of YIV3020 hardsuits.

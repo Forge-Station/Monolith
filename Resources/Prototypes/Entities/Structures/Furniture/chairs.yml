@@ -346,6 +346,11 @@
     - state: folding_folded
       map: ["foldedLayer"]
       visible: false
+# Forge-Change-Start
+  - type: Tag
+    tags:
+    - ChairFolding
+# Forge-Change-End
   - type: Item
     size: Huge
   - type: Appearance

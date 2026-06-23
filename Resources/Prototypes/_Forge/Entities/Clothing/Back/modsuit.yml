@@ -306,22 +306,14 @@
     - 0,0,7,4
     maxItemSize: Huge
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
-  - type: Tag
-    tags:
-    - GasTank
-  - type: ActivatableUI
-    key: enum.SharedGasTankUiKey.Key
-    verbOnly: true
+    walkModifier: 0.8
+    sprintModifier: 0.8
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
       enum.ToggleClothingUiKey.Key:
         type: ToggleableClothingBoundUserInterface
-      enum.SharedGasTankUiKey.Key:
-        type: GasTankBoundUserInterface
   - type: GasTank
     outputPressure: 21.3
     air:
@@ -329,6 +321,7 @@
       temperature: 293.15
   - type: Jetpack
     moleUsage: 0.00085
+  - type: JetpackOnlyFuel
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingModsuitHelmetOmnissia

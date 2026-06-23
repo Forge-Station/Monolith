@@ -1,0 +1,19 @@
+- type: storeCategoryStructured
+  id: ForgeExpeditionBuyWeapons
+  name: "Оружейные ящики"
+  entries:
+  - proto: ForgeExpeditionLightWeaponCasesList
+    match: Matcher
+    price: 15000
+  - proto: ForgeExpeditionMediumWeaponCasesList
+    match: Matcher
+    price: 30000
+  - proto: ForgeExpeditionRareWeaponCasesList
+    match: Matcher
+    price: 100000
+
+- type: storePresetStructured
+  id: ForgeExpeditionBuy
+  currency: BankCredit
+  categories:
+  - ForgeExpeditionBuyWeapons

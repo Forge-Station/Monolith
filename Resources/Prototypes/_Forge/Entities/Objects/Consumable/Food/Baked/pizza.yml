@@ -30,6 +30,8 @@
           Quantity: 15
         - ReagentId: Flavorol
           Quantity: 15
+        - ReagentId: Lactozit
+          Quantity: 1         
   - type: Tag
     tags:
     - Meat
@@ -65,6 +67,8 @@
           Quantity: 1.875
         - ReagentId: Flavorol
           Quantity: 1.875
+        - ReagentId: Lactozit
+          Quantity: 0.25
   - type: Tag
     tags:
     - Meat

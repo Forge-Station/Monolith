@@ -6,7 +6,7 @@
   id: Tarantula
   parent: BaseVesselAntag
   name: TSF-SVE Tarantula
-  description: A durable ship built for sustained close-range engagements, equipped with 4 Cerberus plasma scattercannons and 2 Marauders to melt ships away.
+  description: Прочный корабль, созданный для затяжных ближних боёв. Оснащён четырьмя плазменными картечницами TPC «Цербер» и двумя орудиями «Мародёр», способными буквально расплавлять вражеские корабли. # Forge-Change
   price: 140850
   purchasable: false # voucher only
   category: Medium
@@ -32,7 +32,7 @@
       stationProto: StandardFrontierSecurityVessel
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Tarantula TSF{1}'
+        mapNameTemplate: 'Тарантул TSF{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

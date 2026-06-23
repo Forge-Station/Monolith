@@ -1,0 +1,104 @@
+- type: entity
+  id: OrganSkrellBrain
+  parent: OrganHumanBrain
+  name: brain
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Mobs/Species/Skrell/organ.rsi
+    state: brain
+
+- type: entity
+  id: OrganSkrellEyes
+  parent: OrganHumanEyes
+  name: eyes
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Mobs/Species/Skrell/organ.rsi
+    layers:
+    - state: eyes
+
+- type: entity
+  id: OrganSkrellLungs
+  parent: OrganHumanLungs
+  name: lungs
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Mobs/Species/Skrell/organ.rsi
+    layers:
+    - state: lungs
+  - type: Metabolizer
+    removeEmpty: true
+    solutionOnBody: false
+    solution: "Lung"
+    metabolizerTypes: [ Human, Skrell ]
+    groups:
+    - id: Gas
+      rateModifier: 100.0
+
+- type: entity
+  id: OrganSkrellHeart
+  parent: OrganHumanHeart
+  name: heart
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Mobs/Species/Skrell/organ.rsi
+    state: heart-on
+  - type: Metabolizer
+    maxReagents: 2
+    metabolizerTypes: [ Human, Skrell ]
+    groups:
+    - id: Medicine
+    - id: Cryogenic
+    - id: Poison
+    - id: Narcotic
+
+- type: entity
+  id: OrganSkrellStomach
+  parent: OrganHumanStomach
+  name: stomach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Mobs/Species/Skrell/organ.rsi
+    state: intestine
+  - type: Metabolizer
+    maxReagents: 3
+    metabolizerTypes: [ Human, Skrell ]
+    groups:
+    - id: Food
+    - id: Drink
+
+- type: entity
+  id: OrganSkrellLiver
+  parent: OrganHumanLiver
+  name: liver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Mobs/Species/Skrell/organ.rsi
+    state: liver
+  - type: Metabolizer
+    maxReagents: 1
+    metabolizerTypes: [ Human, Skrell ]
+    groups:
+    - id: Alcohol
+      rateModifier: 0.1
+
+- type: entity
+  id: OrganSkrellKidneys
+  parent: OrganHumanKidneys
+  name: kidneys
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Mobs/Species/Skrell/organ.rsi
+    layers:
+    - state: kidney
+  - type: Metabolizer
+    maxReagents: 5
+    metabolizerTypes: [ Human, Skrell ]
+    removeEmpty: true

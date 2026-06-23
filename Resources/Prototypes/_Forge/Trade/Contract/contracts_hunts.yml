@@ -1,0 +1,774 @@
+- type: ncHuntContract
+  id: ForgeHuntEasyCarpSwarm
+  name: "Зубы в темноте"
+  description: "Стая карпов кружит вокруг свежих обломков и уже сорвала два рейса. Зачистите место и принесите трофейную метку."
+  icon: ForgeContractCarp
+  targets:
+  - group: ForgeHuntGroupCarps
+    count: 8
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofCarpTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 70000
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 3, max: 5 }
+
+- type: ncHuntContract
+  id: ForgeHuntEasyArgocyteScouts
+  name: "Малый выводок аргоцитов"
+  description: "В свежих руинах замечен малый выводок аргоцитов. Найдите точку по маяку и зачистите гнездо до расползания."
+  icon: MobArgocyteSlurvaExpeditions
+  targets:
+  - group: ForgeHuntGroupArgocyteEasy
+    count: 9
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 70000
+  - type: Pool
+    pool: ForgeExpeditionRewardBasic
+    count: { min: 3, max: 5 }
+
+- type: ncHuntContract
+  id: ForgeHuntEasyDinosaurNest
+  name: "Мелкая стая"
+  description: "Стая мелких хищников обжила заброшенные руины и мешает маршрутам экспедиции. Зачистите точку и принесите трофейную метку."
+  icon: MobDinosaurRaptorExpeditions
+  targets:
+  - group: ForgeHuntGroupDinosaurEasy
+    count: 9
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 70000
+  - type: Pool
+    pool: ForgeExpeditionRewardBasic
+    count: { min: 3, max: 5 }
+
+- type: ncHuntContract
+  id: ForgeHuntEasyRogueScrap
+  name: "Ломовые боты"
+  description: "В старом техническом отсеке проснулись самодельные силиконы из лома. Разберите их до того, как они расползутся по сектору."
+  icon: MobRogueSiliconScrapAsteroid
+  targets:
+  - group: ForgeHuntGroupRogueScrap
+    count: 10
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 70000
+  - type: Pool
+    pool: ForgeExpeditionRewardBasic
+    count: { min: 3, max: 5 }
+
+- type: ncHuntContract
+  id: ForgeHuntEasyFleshGrowths
+  name: "Плотяные наросты"
+  description: "В дрейфующих руинах пошла плотяная мутация. Сожгите малые формы и верните подтверждение зачистки."
+  icon: MobFleshJaredExpeditions
+  targets:
+  - group: ForgeHuntGroupFleshEasy
+    count: 8
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 70000
+  - type: Pool
+    pool: ForgeExpeditionRewardBasic
+    count: { min: 3, max: 5 }
+
+- type: ncHuntContract
+  id: ForgeHuntMediumArgocyteBrood
+  name: "Гнездо аргоцитов"
+  description: "Гнездо аргоцитов заняло дрейфующий комплекс. Зачистите выводок, пока он не вышел к торговым маршрутам."
+  icon: MobArgocyteMolderExpeditions
+  targets:
+  - group: ForgeHuntGroupArgocyteMedium
+    count: 12
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 130000
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 4, max: 6 }
+
+- type: ncHuntContract
+  id: ForgeHuntMediumRoguePatrol
+  name: "Патруль силиконов"
+  description: "Автономный патруль удерживает старый технический объект. Зачистите патруль и принесите метку."
+  icon: MobRogueSiliconHunter
+  targets:
+  - group: ForgeHuntGroupRogueAdvanced
+    count: 11
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 130000
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 4, max: 6 }
+
+- type: ncHuntContract
+  id: ForgeHuntMediumDinosaurPack
+  name: "Большая стая"
+  description: "Крупные особи закрепились среди обломков и охотятся на всё, что подходит близко. Уберите стаю и верните метку."
+  icon: MobDinosaurKentroExpeditions
+  targets:
+  - group: ForgeHuntGroupDinosaurMedium
+    count: 11
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 130000
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 4, max: 6 }
+
+- type: ncHuntContract
+  id: ForgeHuntMediumSyndicatePatrol
+  name: "Красный патруль"
+  description: "Патруль Синдиката закрепился на дрейфующем объекте и ведёт разведку маршрутов. Разбейте группу и верните метку."
+  icon: MobSyndicateNavalOperatorA
+  targets:
+  - group: ForgeHuntGroupSyndicatePatrol
+    count: 10
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 130000
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 4, max: 6 }
+
+- type: ncHuntContract
+  id: ForgeHuntHardFleshHorror
+  name: "Плотяной ужас"
+  description: "В заражённом комплексе сформировалось опасное ядро плоти. Уничтожьте охранные формы и главную цель."
+  icon: MobHorrorExpeditions
+  targets:
+  - group: ForgeHuntGroupFleshHard
+    count: 12
+  - prototype: MobHorrorExpeditions
+    count: 1
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 200000
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: { min: 5, max: 7 }
+
+- type: ncHuntContract
+  id: ForgeHuntHardArgocyteLeviathan
+  name: "Левиафан аргоцитов"
+  description: "Стая крупных аргоцитов прикрывает левиафана в глубине дрейфующего гнезда. Зачистите всех отмеченных целей."
+  icon: MobArgocyteLeviathingExpeditions
+  targets:
+  - group: ForgeHuntGroupArgocyteHard
+    count: 13
+  - prototype: MobArgocyteLeviathingExpeditions
+    count: 1
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 200000
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: { min: 5, max: 7 }
+
+- type: ncHuntContract
+  id: ForgeHuntHardRogueAiCore
+  name: "Ядро сбойного ИИ"
+  description: "Сбойный ИИ собрал охрану из боевых силиконов в заброшенном техническом секторе. Разберите патруль и тяжёлую единицу."
+  icon: MobRogueSiliconTesla
+  targets:
+  - group: ForgeHuntGroupRogueAdvanced
+    count: 12
+  - prototype: MobRogueSiliconTesla
+    count: 1
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 200000
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: { min: 5, max: 7 }
+
+- type: ncHuntContract
+  id: ForgeHuntHardSyndicateCommander
+  name: "Офицер Синдиката"
+  description: "Синдикатский офицер держит объект под охраной штурмовой группы. Уничтожьте охрану, командира и принесите метку."
+  icon: MobSyndicateNavalCommanderA
+  targets:
+  - group: ForgeHuntGroupSyndicateAssault
+    count: 12
+  - prototype: MobSyndicateNavalCommanderA
+    count: 1
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeons:
+    - prototype: ForgeHuntDungeonMineshaft
+      weight: 1
+    - prototype: ForgeHuntDungeonHaunted
+      weight: 1
+    - prototype: ForgeHuntDungeonSalvageOutpost
+      weight: 1
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 1
+    - prototype: ForgeHuntDungeonMedSci
+      weight: 1
+    - prototype: ForgeHuntDungeonSnowyLabs
+      weight: 1
+    - prototype: ForgeHuntDungeonFactoryDorms
+      weight: 1
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 1
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 1
+    - prototype: ForgeHuntDungeonVirologyLab
+      weight: 1
+    - prototype: ForgeHuntDungeonWreck
+      weight: 1
+    - prototype: ForgeHuntVGRoidScrap
+      weight: 1
+    - prototype: ForgeHuntVGRoidCave
+      weight: 1
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 1
+    - prototype: ForgeHuntVGRoidChromite
+      weight: 1
+    - prototype: ForgeHuntVGRoidSnow
+      weight: 1
+    - prototype: ForgeHuntDungeonSuperCompacted
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 200000
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: { min: 5, max: 7 }

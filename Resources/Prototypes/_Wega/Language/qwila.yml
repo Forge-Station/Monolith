@@ -1,0 +1,27 @@
+# Spoken by Skrell.
+- type: language
+  id: Qwila
+  isVisibleLanguage: true
+  speech:
+    color: "#50b8c7dd"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 2
+    maxSyllables: 4
+    replacement:
+    - qwa
+    - qwi
+    - qel
+    - qaal
+    - luma
+    - nal
+    - nara
+    - ool
+    - uul
+    - seel
+    - thal
+    - vel
+    - iira
+    - mora
+    - eesh
+    - loq

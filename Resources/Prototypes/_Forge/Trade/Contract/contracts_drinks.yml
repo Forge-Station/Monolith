@@ -1,0 +1,189 @@
+- type: ncSupplyContract
+  id: ForgeDrinkEasyMartini
+  name: "Офицерский приём"
+  description: "Смешайте полные бокалы классического мартини для офицерского приёма. Половину напитков вернут для команды, но повторно сдать их нельзя."
+  icon: ForgeContractDrinkIconMartini
+  returnFraction: 0.5
+  targets:
+  - reagent: Martini
+    solution: any
+    reagentAmount: 20
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 10000
+  - type: Pool
+    pool: ForgeExpeditionRewardBarBasic
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeDrinkEasyMargarita
+  name: "Маргарита для снабжения"
+  description: "Подготовьте партию маргариты для смены снабжения. Половину напитков вернут для команды, но повторно сдать их нельзя."
+  icon: ForgeContractDrinkIconMargarita
+  returnFraction: 0.5
+  targets:
+  - reagent: Margarita
+    solution: any
+    reagentAmount: 20
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 10000
+  - type: Pool
+    pool: ForgeExpeditionRewardBarBasic
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeDrinkEasyScrewdriver
+  name: "Отвёртка для ремонтников"
+  description: "Смешайте бокалы коктейля «отвёртка» для ремонтной бригады. Половину напитков вернут для команды, но повторно сдать их нельзя."
+  icon: ForgeContractDrinkIconScrewdriver
+  returnFraction: 0.5
+  targets:
+  - reagent: ScrewdriverCocktail
+    solution: any
+    reagentAmount: 20
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 10000
+  - type: Pool
+    pool: ForgeExpeditionRewardBarBasic
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeDrinkEasyTequilaSunrise
+  name: "Закат в доках"
+  description: "Сделайте яркую партию текилы санрайз для вечернего заказа. Половину напитков вернут для команды, но повторно сдать их нельзя."
+  icon: ForgeContractDrinkIconTequilaSunrise
+  returnFraction: 0.5
+  targets:
+  - reagent: TequilaSunrise
+    solution: any
+    reagentAmount: 20
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 10000
+  - type: Pool
+    pool: ForgeExpeditionRewardBarBasic
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeDrinkMediumBloodyMary
+  name: "Медленный вечер"
+  description: "Смешайте крепкие бокалы кровавой Мэри для медленного вечера в доках. Половину напитков вернут для команды, но повторно сдать их нельзя."
+  icon: ForgeContractDrinkIconBloodyMary
+  returnFraction: 0.5
+  targets:
+  - reagent: BloodyMary
+    solution: any
+    reagentAmount: 20
+    count: 3
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 30000
+  - type: Pool
+    pool: ForgeExpeditionRewardBarAdvanced
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeDrinkMediumBahamaMama
+  name: "Тропический заказ"
+  description: "Подготовьте тропическую партию бахама мама с полным набором ингредиентов. Половину напитков вернут для команды, но повторно сдать их нельзя."
+  icon: ForgeContractDrinkIconBahamaMama
+  returnFraction: 0.5
+  targets:
+  - reagent: BahamaMama
+    solution: any
+    reagentAmount: 20
+    count: 3
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 30000
+  - type: Pool
+    pool: ForgeExpeditionRewardBarAdvanced
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeDrinkMediumBeepskySmash
+  name: "После рейда"
+  description: "Смешайте Бипски смэш для службы безопасности после рейда. Половину напитков вернут для команды, но повторно сдать их нельзя."
+  icon: ForgeContractDrinkIconBeepskySmash
+  returnFraction: 0.5
+  targets:
+  - reagent: BeepskySmash
+    solution: any
+    reagentAmount: 20
+    count: 3
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 30000
+  - type: Pool
+    pool: ForgeExpeditionRewardBarAdvanced
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeDrinkHardLongIsland
+  name: "Долгий остров"
+  description: "Соберите тяжёлую партию лонг-айленда: сначала куба либре, затем остальные крепкие ингредиенты. Половину напитков вернут для команды, но повторно сдать их нельзя."
+  icon: ForgeContractDrinkIconLongIsland
+  returnFraction: 0.5
+  targets:
+  - reagent: LongIslandIcedTea
+    solution: any
+    reagentAmount: 20
+    count: 2
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 45000
+  - type: Pool
+    pool: ForgeExpeditionRewardBarElite
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeDrinkHardGargleBlaster
+  name: "Пангалактический удар"
+  description: "Смешайте пангалактический грызлодёр из пяти крепких компонентов. Половину напитков вернут для команды, но повторно сдать их нельзя."
+  icon: ForgeContractDrinkIconGargleBlaster
+  returnFraction: 0.5
+  targets:
+  - reagent: GargleBlaster
+    solution: any
+    reagentAmount: 20
+    count: 2
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 45000
+  - type: Pool
+    pool: ForgeExpeditionRewardBarElite
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeDrinkHardB52
+  name: "Слой за слоем"
+  description: "Сделайте B-52 через промежуточные сливочные и кофейные смеси. Половину напитков вернут для команды, но повторно сдать их нельзя."
+  icon: ForgeContractDrinkIconB52
+  returnFraction: 0.5
+  targets:
+  - reagent: B52
+    solution: any
+    reagentAmount: 20
+    count: 2
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 45000
+  - type: Pool
+    pool: ForgeExpeditionRewardBarElite
+    count: { min: 1, max: 3 }

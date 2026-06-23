@@ -1,0 +1,39 @@
+- type: ncHuntDungeonExteriorTilePreset
+  id: ForgeHuntDungeonExteriorTilesAsteroid
+  entries:
+  - prototype: FloorAsteroidSand
+    weight: 12
+  - prototype: FloorAsteroidIronsand
+    weight: 3
+  - prototype: FloorAsteroidSandRed
+    weight: 2
+  - prototype: FloorAsteroidTile
+    weight: 1
+
+- type: ncHuntDungeonExteriorRockPreset
+  id: ForgeHuntDungeonExteriorRocksAsteroid
+  entries:
+  - prototype: WallRock
+    weight: 46
+  - prototype: WallRockCoal
+    weight: 10
+  - prototype: WallRockTin
+    weight: 10
+  - prototype: WallRockQuartz
+    weight: 8
+  - prototype: WallRockCopper
+    weight: 6
+  - prototype: WallRockLithium
+    weight: 5
+  - prototype: WallRockSilver
+    weight: 4
+  - prototype: WallRockPlasma
+    weight: 3
+  - prototype: WallRockGold
+    weight: 3
+  - prototype: WallRockUranium
+    weight: 2
+  - prototype: WallRockSalt
+    weight: 2
+  - prototype: WallRockDiamond
+    weight: 1

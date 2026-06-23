@@ -1,0 +1,263 @@
+# Forge-Change-Start
+#region trash duffel
+- type: construction
+  id: NFGoblinMadeClothingBackpackDuffelTrashBlue
+  name: trashel
+  description: This bad boy can fit so much trash!
+  icon:
+    sprite: _NF/Clothing/Back/Duffels/trashel_blue.rsi
+    state: icon
+  graph: NFGoblinMadeClothingBackpackDuffelTrashBlue
+  startNode: start
+  targetNode: NFGoblinMadeClothingBackpackDuffelTrashBlue
+  category: construction-category-goblin
+  entityWhitelist: &goblinWhitelist
+    tags:
+    - GoblinCraft
+  objectType: Item
+
+#region trash backpack
+- type: construction
+  name: trashpack
+  description: This bad boy can fit so much trash!
+  icon:
+    sprite: _NF/Clothing/Back/Backpacks/trashpack_blue.rsi
+    state: icon
+  id: NFGoblinMadeClothingBackpackTrashBlue
+  graph: NFGoblinMadeClothingBackpackTrashBlue
+  startNode: start
+  targetNode: NFGoblinMadeClothingBackpackTrashBlue
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region trash pouch
+- type: construction
+  name: trashuch
+  icon:
+    sprite: _NF/Objects/Storage/Pouches/trash_pouch.rsi
+    state: closed
+  id: NFGoblinMadeTrashPouch
+  graph: NFGoblinMadeTrashPouch
+  startNode: start
+  targetNode: NFGoblinMadeTrashPouch
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+# tools
+#region multitool
+- type: construction
+  name: hacking jig
+  description: An improvised multitool pieced together from faulty circuit board, broken display, bent antennae and stuffed into a discarded wrapper for additional protection against elements.
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/multitool.rsi
+    state: icon
+  id: NFGoblinMadeMultitool
+  graph: NFGoblinMadeMultitool
+  startNode: start
+  targetNode: NFGoblinMadeMultitool
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region wirecutter
+- type: construction
+  name: wiresnipper
+  description: A wire cutter made out of glass shards, metal bits, cloth, and some wires. What's up with all the sparking, though?
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/wirecutters.rsi
+    state: icon
+  id: NFGoblinMadeWirecutter
+  graph: NFGoblinMadeWirecutter
+  startNode: start
+  targetNode: NFGoblinMadeWirecutter
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region screwdriver
+- type: construction
+  name: electro-driver
+  description: An improvised electrical screwdriver, not much in terms of torque, but your wrists will be less sore.
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/screwdriver.rsi
+    state: screwdriver-base
+  id: NFGoblinMadeScrewdriver
+  graph: NFGoblinMadeScrewdriver
+  startNode: start
+  targetNode: NFGoblinMadeScrewdriver
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region crowbar
+- type: construction
+  name: electro-jilt
+  description: The next step in crowbar evolution - jack. Enhanced with an improvised electrical winch.
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/crowbar.rsi
+    state: icon
+  id: NFGoblinMadeCrowbar
+  graph: NFGoblinMadeCrowbar
+  startNode: start
+  targetNode: NFGoblinMadeCrowbar
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region wrench
+- type: construction
+  name: electro-spanner
+  description: An improvised electrical wrench, not much in terms of torque, but your wrists will be less sore.
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/wrench.rsi
+    state: icon
+  id: NFGoblinMadeWrench
+  graph: NFGoblinMadeWrench
+  startNode: start
+  targetNode: NFGoblinMadeWrench
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region welder
+- type: construction
+  name: burner torch
+  description: An improvised welding tool made out of a plastic bottle, an empty soda can, a spray nozzle, and a leaking battery.
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/welder.rsi
+    state: icon
+  id: NFGoblinMadeWelder
+  graph: NFGoblinMadeWelder
+  startNode: start
+  targetNode: NFGoblinMadeWelder
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region mini hoe
+- type: construction
+  name: electro-scratcher
+  description: A small modification for the tried and true electrical screwdriver device. Weeds , your end is nigh.
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/hoe.rsi
+    state: hoe-base
+  id: NFGoblinMadeMiniHoe
+  graph: NFGoblinMadeMiniHoe
+  startNode: start
+  targetNode: NFGoblinMadeMiniHoe
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region minig drill
+- type: construction
+  name: pneumatic hammer
+  description: The pickaxe is dead; hail the new king of manual mining - the improvised pneumatic hammer.
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/handdrill.rsi
+    state: icon
+  id: NFGoblinMadeMiningDrill
+  graph: NFGoblinMadeMiningDrill
+  startNode: start
+  targetNode: NFGoblinMadeMiningDrill
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region tray scanner
+- type: construction
+  name: stash ogler
+  description: With this tool you no longer have to memorise where you've hid you stash.
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/tray.rsi
+    state: icon
+  id: NFGoblinMadeTrayScanner
+  graph: NFGoblinMadeTrayScanner
+  startNode: start
+  targetNode: NFGoblinMadeTrayScanner
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region signaller
+- type: construction
+  name: remote winker
+  description: An improvised remote signaller capable of sending signals to objects within a small radius of about 10 meters.
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/signaller.rsi
+    state: icon
+  id: NFGoblinMadeRemoteSignaller
+  graph: NFGoblinMadeRemoteSignaller
+  startNode: start
+  targetNode: NFGoblinMadeRemoteSignaller
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region lantern
+- type: construction
+  name: glimmer
+  description: An improvised lantern. How is it possible to put a power cell and a light bulb inside a glass bottle without breaking either of those items?
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/lantern.rsi
+    state: lantern
+  id: NFGoblinMadeLantern
+  graph: NFGoblinMadeLantern
+  startNode: start
+  targetNode: NFGoblinMadeLantern
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region power cell
+- type: construction
+  name: power cell
+  description: An improvised power cell. How long will you be able to resist the temptation to drink the electrolyte?
+  icon:
+    sprite: _NF/Objects/Tools/goblin_tools/power_cell.rsi
+    state: icon
+  id: NFGoblinMadePowerCell
+  graph: NFGoblinMadePowerCell
+  startNode: start
+  targetNode: NFGoblinMadePowerCell
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+#region lv cable
+- type: construction
+  name: LV cable coil
+  description: Low-Voltage stack of wires for connecting APCs to machines and other purposes.
+  icon:
+    sprite: Objects/Tools/cable-coils.rsi
+    state: coillv-10
+  id: CableApcStack10
+  graph: CableApcStack10
+  startNode: start
+  targetNode: CableApcStack10
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+# vehicles
+#region dumpster-car
+- type: construction
+  name: dumpster
+  description: It only has one wheel!
+  icon:
+    sprite: _NF/Objects/Vehicles/dumpster.rsi
+    state: dumpster
+  id: NFGoblinMadeVehicleDumpster
+  entityWhitelist: *goblinWhitelist
+  graph: NFGoblinMadeVehicleDumpster
+  startNode: start
+  targetNode: NFGoblinMadeVehicleDumpster
+  category: construction-category-goblin
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+# Forge-Change-End

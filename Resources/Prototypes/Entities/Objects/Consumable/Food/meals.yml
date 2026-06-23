@@ -63,6 +63,19 @@
     flavors:
       - cheesy
       - potatoes
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 36
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Flavorol
+          Quantity: 10
+        - ReagentId: Lactozit
+          Quantity: 1
+  # Forge-change-end
   - type: Sprite
     state: loadedbakedpotato
 # Tastes like potato.
@@ -92,6 +105,19 @@
       - potatoes
       - salty
       - cheesy
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 36
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Flavorol
+          Quantity: 10
+        - ReagentId: Lactozit
+          Quantity: 1
+  # Forge-change-end
   - type: Sprite
     state: fries-cheesy
 # Tastes like fries, cheese.
@@ -175,6 +201,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
 # Tastes like nachos, cheese.
 
 - type: entity
@@ -282,6 +310,7 @@
       - fishy
       - batter
       - spicy
+      - cheesy # Forge-change
   - type: Sprite
     state: cubancarp
   - type: SolutionContainerManager
@@ -295,6 +324,8 @@
           Quantity: 3
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Tag
     tags:
     - CubanCarp
@@ -466,6 +497,8 @@
           Quantity: 9
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -570,6 +603,19 @@
         - cheesy
     - type: Sprite
       state: queso
+    # Forge-change-start
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          maxVol: 36
+          reagents:
+          - ReagentId: Nutriment
+            Quantity: 15
+          - ReagentId: Flavorol
+            Quantity: 10
+          - ReagentId: Lactozit
+            Quantity: 1
+    # Forge-change-end
 # Its queso! Everyone loves queso... Right?.
 
 - type: entity

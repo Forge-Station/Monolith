@@ -21,7 +21,7 @@
     proto: PulsedPlasma
     fireCost: 3000
   - type: StaticPrice
-    price: 2200 # Forge-change PR:238: price up 1000 -> 2200
+    price: 2200
   - type: Tag
     tags:
     - PPLCell

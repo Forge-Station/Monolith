@@ -4,7 +4,7 @@
   description: ghost-role-information-redacted-borg-description
   rules: ghost-role-information-silicon-rules
   entityPrototype: PlayerBorgRedacted
-  whitelisted: true
+  # whitelisted: true # Forge-Change : remove from whitelist panel
 
 - type: ghostRole
   id: RemnantAICore
@@ -12,4 +12,4 @@
   description: ghost-role-information-redacted-core-description
   rules: ghost-role-information-silicon-rules
   entityPrototype: StationAiBrainRedacted
-  whitelisted: true
+  # whitelisted: true # Forge-Change : remove from whitelist panel

@@ -2,3 +2,8 @@
   id: Demon
   name: species-name-demon
   text: "/ServerInfo/_Wega/Guidebook/Mobs/Demon.xml"
+
+- type: guideEntry
+  id: Skrell
+  name: species-name-skrell
+  text: "/ServerInfo/_Wega/Guidebook/Mobs/Skrell.xml"

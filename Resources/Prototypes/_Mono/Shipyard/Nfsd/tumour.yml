@@ -4,7 +4,7 @@
   id: Tumour
   parent: BaseVesselAntag
   name: TSF-SKR Tumour
-  description: A ugly potato of a carrier. Little armament to defend itself, but carries lathes to support its fighters and other ships.
+  description: Уродливый картофелеобразный авианосец. Практически не имеет собственного вооружения для самообороны, но оснащён фабрикаторами для снабжения и обслуживания своих истребителей и других кораблей. # Forge-Change
   price: 68250
   category: Small
   group: Security
@@ -27,7 +27,7 @@
       stationProto: StandardFrontierSecurityVessel
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Tumour TSF{1}'
+        mapNameTemplate: 'Опухоль TSF{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

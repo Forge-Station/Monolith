@@ -687,10 +687,15 @@
   id: BannerGoblin01
   name: goblinkind banner
   description: A banner displaying the ancient goblinkind logo.
+  # Forge-Change-Start
+  entityWhitelist:
+    tags:
+    - GoblinCraft
+  # Forge-Change-End
   graph: BannersGraph
   startNode: start
   targetNode: BannerGoblin01
-  category: construction-category-furniture
+  category: construction-category-goblin # Forge-Change
   icon:
     sprite: _NF/Structures/Decoration/banner.rsi
     state: banner_goblin

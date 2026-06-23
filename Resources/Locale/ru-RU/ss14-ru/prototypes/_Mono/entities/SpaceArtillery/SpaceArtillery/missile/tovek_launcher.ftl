@@ -1,2 +1,4 @@
 ent-WeaponTurretTovek = ракетный контейнер ADMX-23 «Товек» 250 мм
     .desc = Ракетный контейнер калибра 250 мм производства Aetherion Dynamics. Запускает тяжёлые боеголовки для поражения вражеских кораблей на большой дистанции. Может активироваться дистанционно или подключаться к GCS.
+ent-WeaponTurretTovekPortable = { ent-WeaponTurretTovek }
+    .desc =  { ent-WeaponTurretTovek.desc }

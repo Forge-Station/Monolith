@@ -257,6 +257,11 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+# Forge-Change-Start
+  - type: Tag
+    tags:
+    - GoblinPreciousTrash
+# Forge-Change-End
   - type: Destructible
     thresholds:
     - trigger:

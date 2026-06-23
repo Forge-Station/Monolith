@@ -53,3 +53,7 @@ ent-CigaretteWeldingFuel = Плазменный соус
     .desc = { ent-SoakedCigarette.desc }
 ent-CigaretteTHC = Хиппи-романтический роман
     .desc = { ent-SoakedCigarette.desc }
+ent-CigaretteBanana2 = { ent-CigaretteBanana }
+    .desc = { ent-CigaretteBanana.desc }
+ent-CigarettePhlogiston = Драконьи свидания
+    .desc = { ent-SoakedCigarette.desc }

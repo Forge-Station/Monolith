@@ -4,7 +4,7 @@
   id: Sentinel
   parent: BaseVesselAntag
   name: TSF-SKR Sentinel
-  description: An armored and shielded corvette with 2 front facing Bofors cannons, 4 MARAUDER plasma cannons, and 2 rear L85 20mms for PD.
+  description: Бронированный и оснащённый щитами корвет с двумя направленными вперёд пушками Bofors, четырьмя плазменными орудиями «Мародёр» и двумя кормовыми 20-мм пушками L85 для точечной обороны. # Forge-Change
   price: 210200 # Appraises around 100k, but marked up since appraisegrid is too stupid to realize the true value of my creations (plastitanium walls probably has their value set really low)
   purchasable: false # voucher only
   category: Medium
@@ -29,7 +29,7 @@
       stationProto: StandardFrontierSecurityVessel
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Sentinel TSF{1}'
+        mapNameTemplate: 'Сентинел TSF{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

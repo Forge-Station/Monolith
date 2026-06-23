@@ -26,11 +26,51 @@ public sealed class BoardingTeleportLockSystem : EntitySystem
         out float riskPenalty,
         out bool expired)
     {
-        var age = BoardingTeleportLockDegrade.GetLockAgeSeconds(console.LockEstablishedAt, _timing);
+        var age = GetEffectiveLockAge(console);
         var steps = BoardingTeleportLockDegrade.GetDegradeSteps(age);
         scatterPenalty = BoardingTeleportLockDegrade.GetScatterPenalty(steps);
         riskPenalty = BoardingTeleportLockDegrade.GetRiskPenalty(steps);
         expired = BoardingTeleportLockDegrade.IsLockExpired(age);
+    }
+
+    public float GetEffectiveLockAge(BoardingTeleportConsoleComponent console) =>
+        BoardingTeleportLockDegrade.GetLockAgeSeconds(
+            console.LockEstablishedAt,
+            _timing,
+            console.LockFrozenSeconds,
+            console.LockPauseStartedAt);
+
+    public void ResetLockTiming(BoardingTeleportConsoleComponent console)
+    {
+        console.LockFrozenSeconds = 0f;
+        console.LockPauseStartedAt = null;
+        console.LockPauseChargeCount = 0;
+    }
+
+    public void BeginOutboundChargePause(BoardingTeleportConsoleComponent console)
+    {
+        if (console.LockEstablishedAt == null)
+            return;
+
+        console.LockPauseChargeCount++;
+        if (console.LockPauseChargeCount == 1)
+            console.LockPauseStartedAt = _timing.CurTime;
+    }
+
+    public void EndOutboundChargePause(BoardingTeleportConsoleComponent console)
+    {
+        if (console.LockPauseChargeCount <= 0)
+            return;
+
+        console.LockPauseChargeCount--;
+        if (console.LockPauseChargeCount > 0)
+            return;
+
+        if (console.LockPauseStartedAt is { } pauseStart)
+        {
+            console.LockFrozenSeconds += (float) (_timing.CurTime - pauseStart).TotalSeconds;
+            console.LockPauseStartedAt = null;
+        }
     }
 
     public bool TryGetScramblerEffect(EntityUid targetGrid, out BoardingTeleportScramblerEffect effect)
@@ -158,6 +198,7 @@ public sealed class BoardingTeleportLockSystem : EntitySystem
     public void MarkLockEstablished(BoardingTeleportConsoleComponent console)
     {
         console.LockEstablishedAt = _timing.CurTime;
+        ResetLockTiming(console);
     }
 
     private bool AreGridsDocked(EntityUid gridA, EntityUid gridB) =>

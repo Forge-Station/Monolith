@@ -1,0 +1,85 @@
+﻿#BsReceiverFlatpack
+- type: entity
+  parent: BaseNFFlatpack
+  id: BsReceiverT1Flatpack
+  name: packaged bluespace energy receiver T1
+  description: Packaging containing a bluespace energy receiver T1.
+  components:
+  - type: Flatpack
+    entity: BsReceiverT1
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    layers:
+    - state: command_airlock
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: BsReceiverT2Flatpack
+  name: packaged bluespace energy receiver T2
+  description: Packaging containing a bluespace energy receiver T2.
+  components:
+  - type: Flatpack
+    entity: BsReceiverT2
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    layers:
+    - state: command_airlock
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: BsReceiverT3Flatpack
+  name: packaged bluespace energy receiver T3
+  description: Packaging containing a bluespace energy receiver T3.
+  components:
+  - type: Flatpack
+    entity: BsReceiverT3
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    layers:
+    - state: command_airlock
+
+#BsTransmitterFlatpack
+- type: entity
+  parent: BaseNFFlatpack
+  id: BsTransmitterT1Flatpack
+  name: packaged bluespace energy transmitter T1
+  description: Packaging containing a bluespace energy transmitter T1.
+  components:
+  - type: Flatpack
+    entity: BsTransmitterT1
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    layers:
+    - state: command_airlock
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: BsTransmitterT2Flatpack
+  name: packaged bluespace energy transmitter T2
+  description: Packaging containing a bluespace energy transmitter T2.
+  components:
+  - type: Flatpack
+    entity: BsTransmitterT2
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    layers:
+    - state: command_airlock
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: BsTransmitterT3Flatpack
+  name: packaged bluespace energy transmitter T3
+  description: Packaging containing a bluespace energy transmitter T3.
+  components:
+  - type: Flatpack
+    entity: BsTransmitterT3
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    layers:
+    - state: command_airlock

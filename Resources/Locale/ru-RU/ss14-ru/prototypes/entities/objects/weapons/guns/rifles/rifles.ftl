@@ -14,6 +14,8 @@ ent-NFWeaponRifleAssaultLecterLessLethal = Лектер
     .suffix = Автомат, Травматический
 ent-NFWeaponRifleFoam = Астро-Ас Сила Пенопласта
     .desc = Первоклассная пенопластовая винтовка высочайшего качества. Её пластик прочен на ощупь, а механизмы надёжены.
+ent-WeaponRifleFoam = { ent-NFWeaponRifleFoam }
+    .desc = { ent-NFWeaponRifleFoam.desc }
 
 ent-NFWeaponRifleAssaultJackdaw = Галка
     .desc = Начало конца возвещает песня галки.

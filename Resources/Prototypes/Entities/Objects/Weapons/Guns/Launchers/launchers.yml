@@ -52,6 +52,7 @@
     whitelist:
       tags:
         - Grenade
+        - LessLethalGrenade # Forge-Change
     capacity: 3
     proto: 40mmGrenadeFragmentation
     soundInsert:

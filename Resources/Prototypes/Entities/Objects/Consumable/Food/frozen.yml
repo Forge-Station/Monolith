@@ -277,6 +277,7 @@
   - type: Tag
     tags:
     - Trash
+    - GoblinPreciousTrash # Forge-Change
   - type: TimedDespawn
     lifetime: 600
   - type: Food
@@ -308,6 +309,7 @@
   - type: Tag
     tags:
     - Trash
+    - GoblinPreciousTrash # Forge-Change
   - type: TimedDespawn
     lifetime: 600
   - type: Food

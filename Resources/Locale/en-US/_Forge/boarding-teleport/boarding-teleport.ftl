@@ -27,6 +27,8 @@ boarding-teleport-sector-settings = Settings
 boarding-teleport-sector-scan = Scan sector
 boarding-teleport-sector-select = Select boarding target
 boarding-teleport-sector-objects = Objects in sector
+boarding-teleport-sector-search-placeholder = Search by name…
+boarding-teleport-sector-search-empty = No matches found.
 boarding-teleport-sector-selected-none = Target: none
 boarding-teleport-sector-selected-grid = Target: {$name}
 boarding-teleport-sector-tip = Scan the sector first, then pick your target from the list.
@@ -37,7 +39,9 @@ boarding-teleport-status-LandingSelected = Landing point set. Platforms are read
 boarding-teleport-status-InvalidTarget = This grid cannot be targeted.
 boarding-teleport-status-TargetTooFar = Target is outside bluespace acquisition range.
 boarding-teleport-status-TargetMoving = Target is moving too fast for a stable lock.
-boarding-teleport-status-InvalidLanding = That tile cannot be used for landing (no tile or open space).
+boarding-teleport-status-InvalidLanding = That tile cannot be used for landing (no tile).
+boarding-teleport-platform-charge-started = Platform charge started.
+boarding-teleport-platform-countdown = Jump in {$seconds}s
 boarding-teleport-status-NoGrid = The console must be installed on a grid.
 boarding-teleport-status-NoEngine = No bluespace engine on this grid. Install one on the same shuttle as the console.
 boarding-teleport-status-TargetShielded = Target has active shields — bluespace lock denied.
@@ -110,7 +114,10 @@ boarding-teleport-platform-early-return-swelling = Your body distorts and swells
 boarding-teleport-platform-early-return-catastrophe = Bluespace shear on the platform! Your body fails to reintegrate!
 
 boarding-teleport-window-shared-landing-on = Shared landing point: on
-boarding-teleport-window-shared-landing-off = Per-platform landing
+
+boarding-teleport-window-shared-landing-off = Per-platform landing point
+
+ui-options-boarding-teleport-volume = Bluespace boarding volume:
 
 boarding-teleport-port-name = Teleport
 boarding-teleport-port-description = Activates the linked boarding platform.

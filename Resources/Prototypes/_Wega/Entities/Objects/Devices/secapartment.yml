@@ -1,0 +1,37 @@
+# Forge-Change
+- type: entity
+  parent: BaseItem
+  id: SecApartmentTabletDebug
+  name: portable personnel monitor
+  description: "A portable device for monitoring personnel, organizing squads, and coordinating actions."
+  suffix: Debug
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Devices/secapartment.rsi
+    layers:
+    - state: base
+    - state: powered
+      shader: unshaded
+      visible: true
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: ActivatableUI
+    key: enum.SecApartmentUiKey.Key
+    inHandsOnly: true
+    requireActiveHand: true
+  - type: UserInterface
+    interfaces:
+      enum.SecApartmentUiKey.Key:
+        type: SecApartmentBoundUserInterface
+  - type: ItemToggle
+    onUse: false
+  - type: SecApartment
+    debug: true
+    uiTheme: SecApUiThemeSecurity
+  - type: CrewMonitoringConsole
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewMonitor
+  - type: WirelessNetworkConnection
+    range: 500
+  - type: StationLimitedNetwork
+  - type: Appearance

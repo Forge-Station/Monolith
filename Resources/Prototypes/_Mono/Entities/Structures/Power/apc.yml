@@ -1,3 +1,4 @@
+# Wall APC (standard room bus)
 - type: entity
   parent: BaseAPC
   id: APCBasicTSF
@@ -11,11 +12,14 @@
   - type: AccessReader
     access: [["TsfmcEngineering"]]
 
+# LAPC line — HV→APC bulk substations for shuttles. maxSupply tiers:
+# Light 100 kW · Medium 180 kW · Large 300 kW (one heavy shield bus) · Capital 500 kW
 - type: entity
-  id: LargeAPC
+  id: LargeAPCBase
   name: LAPC substation
   parent: BaseStructure
-  description: A centralized, reinforced substation terminal for the vessel's electrical systems. Tranforms current from HV to LV in bulk. Useful for shield generators and the like.
+  abstract: true
+  description: A centralized, reinforced substation terminal for the vessel's electrical systems. Transforms HV to the ship APC bus in bulk. Sized for shield generators and heavy combat loads.
   components:
   - type: StationAiWhitelist
   - type: AmbientOnPowered
@@ -30,7 +34,6 @@
   - type: InteractionOutline
   - type: Anchorable
   - type: Sprite
-    #drawdepth: WallMountedItems
     sprite: _Mono/Structures/Power/Distributors/largeapc.rsi
     offset: 0,0.2
     layers:
@@ -49,7 +52,7 @@
       shader: unshaded
       map: [ "enum.ApcVisualLayers.PanelLock" ]
       visible: false
-    - state: lock1-locked #when these are implemented get actual sprites.
+    - state: lock1-locked
       shader: unshaded
       map: [ "enum.ApcVisualLayers.Equipment" ]
       visible: false
@@ -63,9 +66,6 @@
       visible: false
   - type: Appearance
   - type: ApcVisuals
-  - type: Battery
-    maxCharge: 150000
-    startingCharge: 50000
   - type: ExaminableBattery
   - type: NodeContainer
     examinable: true
@@ -97,13 +97,6 @@
   - type: ActivatableUI
     inHandsOnly: false
     key: enum.ApcUiKey.Key
-  - type: Machine
-    board: APCElectronics
-  - type: PowerNetworkBattery
-    maxSupply: 60000
-    maxChargeRate: 20000
-    supplyRampTolerance: 15000
-    supplyRampRate: 2000
   - type: WiresPanel
   - type: WiresVisuals
   - type: Damageable
@@ -113,8 +106,8 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 1200 # Tanky
-      behaviors: #excess damage, don't spawn entities.
+        damage: 1200
+      behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:PlaySoundBehavior
@@ -144,8 +137,6 @@
     lowVoltageNode: output
   - type: LightningTarget
     priority: 1
-  - type: StaticPrice
-    price: 2000
   - type: GuideHelp
     guides:
     - VoltageNetworks
@@ -179,3 +170,108 @@
     containers:
       machine_board: !type:Container
       machine_parts: !type:Container
+
+- type: entity
+  id: LargeAPCLight
+  parent: LargeAPCBase
+  name: LAPC substation
+  suffix: Light, 100 kW
+  description: A compact LAPC for small shuttles, auxiliaries and tier-1 shield buses.
+  components:
+  - type: Machine
+    board: LargeAPCLightElectronics
+  - type: Battery
+    maxCharge: 250000
+    startingCharge: 80000
+  - type: PowerNetworkBattery
+    maxSupply: 100000
+    maxChargeRate: 35000
+    supplyRampTolerance: 25000
+    supplyRampRate: 5000
+  - type: StaticPrice
+    price: 1200
+
+- type: entity
+  id: LargeAPCMedium
+  parent: LargeAPCBase
+  name: LAPC substation
+  suffix: Medium, 180 kW
+  description: A mid-size LAPC sized for tier-2 shields and mixed weapon grids.
+  components:
+  - type: Machine
+    board: LargeAPCMediumElectronics
+  - type: Battery
+    maxCharge: 450000
+    startingCharge: 120000
+  - type: PowerNetworkBattery
+    maxSupply: 180000
+    maxChargeRate: 60000
+    supplyRampTolerance: 45000
+    supplyRampRate: 8000
+  - type: StaticPrice
+    price: 1600
+
+- type: entity
+  id: LargeAPC
+  parent: LargeAPCBase
+  name: LAPC substation
+  suffix: Large, 300 kW
+  description: A heavy LAPC rated to feed one tier-3 or tier-4 shield generator at full combat draw on a dedicated bus.
+  components:
+  - type: Machine
+    board: APCElectronics
+  - type: Battery
+    maxCharge: 750000
+    startingCharge: 200000
+  - type: PowerNetworkBattery
+    maxSupply: 300000
+    maxChargeRate: 100000
+    supplyRampTolerance: 100000
+    supplyRampRate: 40000
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: LargeAPCCapital
+  parent: LargeAPCBase
+  name: LAPC substation
+  suffix: Capital, 500 kW
+  description: A capital-grade LAPC for siege shields, dual heavy loads or a shield bus with substantial headroom.
+  components:
+  - type: Machine
+    board: LargeAPCCapitalElectronics
+  - type: Battery
+    maxCharge: 1250000
+    startingCharge: 350000
+  - type: PowerNetworkBattery
+    maxSupply: 500000
+    maxChargeRate: 150000
+    supplyRampTolerance: 150000
+    supplyRampRate: 60000
+  - type: StaticPrice
+    price: 4000
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 1100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak

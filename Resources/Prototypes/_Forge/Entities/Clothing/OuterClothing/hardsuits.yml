@@ -378,7 +378,7 @@
 
 # Trauma
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1]
+  parent: [ForgeClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1]
   id: ClothingOuterHardsuitTraumaShooter
   name: armed trauma unit T-45 tacsuit
   suffix: TTI 

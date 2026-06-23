@@ -55,7 +55,7 @@
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: SheetPlastitaniumGlass1 # Forge-Change
+              prototype: ShardGlass # Forge-Change
               amount: 2
             - !type:DeleteEntity {}
           steps: &deconstructionSteps # Forge-Change
@@ -97,7 +97,7 @@
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: SheetPlastitaniumGlass1
+              prototype: ShardGlass
               amount: 2
             - !type:DeleteEntity {}
           steps: *deconstructionSteps
@@ -107,10 +107,10 @@
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: SheetPlastitaniumGlass1
+              prototype: ShardGlass
               amount: 2
             - !type:SpawnPrototype
-              prototype: SheetUranium1
+              prototype: ShardGlassUranium
               amount: 2
             - !type:DeleteEntity {}
           steps: *deconstructionSteps
@@ -120,10 +120,10 @@
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: SheetPlastitaniumGlass1
+              prototype: ShardGlass
               amount: 2
             - !type:SpawnPrototype
-              prototype: SheetUranium1
+              prototype: ShardGlassUranium
               amount: 2
             - !type:DeleteEntity {}
           steps: *deconstructionSteps
@@ -133,10 +133,10 @@
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: SheetPlastitaniumGlass1
+              prototype: ShardGlass
               amount: 2
             - !type:SpawnPrototype
-              prototype: SheetPlasma1
+              prototype: ShardGlassPlasma
               amount: 2
             - !type:DeleteEntity {}
           steps: *deconstructionSteps
@@ -146,10 +146,10 @@
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: SheetPlastitaniumGlass1
+              prototype: ShardGlass
               amount: 2
             - !type:SpawnPrototype
-              prototype: SheetPlasma1
+              prototype: ShardGlassPlasma
               amount: 2
             - !type:DeleteEntity {}
           steps: *deconstructionSteps

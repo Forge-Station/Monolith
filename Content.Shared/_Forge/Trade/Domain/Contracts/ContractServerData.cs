@@ -14,6 +14,8 @@ public sealed class ContractServerData
 
     public bool Repeatable { get; set; } = true;
     public bool Taken { get; set; }
+    public int ActiveTimeLimitSeconds { get; set; }
+    public TimeSpan? ActiveExpiresAt { get; set; }
     public ContractObjectiveType ObjectiveType { get; set; } = ContractObjectiveType.Delivery;
     public ContractRuntimeContextData Runtime { get; set; } = new();
     public ContractObjectiveConfigData Config { get; set; } = new();

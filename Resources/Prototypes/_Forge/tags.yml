@@ -234,3 +234,10 @@
 
 - type: Tag
   id: Overlord
+
+# Ullman Industries
+- type: Tag
+  id: ForgeMagazineUllman127x85mm
+
+- type: Tag
+  id: ForgeCartridgeUllman127x85mm

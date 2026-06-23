@@ -1,0 +1,20 @@
+- type: latheRecipePack
+  id: UllmanForgeRecipes
+  recipes:
+  - UllmanClothingMagboots
+  - UllmanClothingMaskGas
+  - UllmanClothingEyesGooglesUI
+  - UllmanUniformJumpsuitUI
+  - UllmanNeckPonchoUI
+  - UllmanNeckOvercoatUI
+  - UllmanNeckHeavyOvercoatUI
+  - UllmanNeckMantleUI
+  - UllmanUniformShirtUI
+  - UllmanHeadHatCapUI
+  - UllmanHeadHatBeretUI
+  - UllmanHardsuitMedical
+  - UllmanModsuit
+  - UllmanSniperRifle
+  - UllmanMagazine127x85mm
+  - UllmanMagazine127x85mmEmpty
+  - UllmanAmmunitionBox127x85mm

@@ -1,8 +1,15 @@
 - type: ncDroneHuntContract
   id: ForgeDroneHuntLight
   name: "Лёгкий перехват дрона"
-  description: "В ближнем секторе замечен малый автономный дрон-шаттл. Найдите цель, заберите контрактное ядро-доказательство и верните его торговцу."
+  description: "В ближнем секторе замечен малый автономный боевой дрон. Найдите цель, заберите контрактное ядро-доказательство и верните его торговцу."
   icon: NpcDroneAiMPulsar
+  activeTimeLimitSeconds: 1800
+  gridNames:
+  - "дрон-перехватчик «Искра»"
+  - "беспилотник «Пульсар-3»"
+  - "автономный разведчик «Ланцет»"
+  - "патрульный дрон «Стриж»"
+  - "малый боевой дрон «Вектор»"
   targetGroup: ForgeDroneHuntGroupCores
   completion:
     proof: ForgeTradeContractProofDroneCore
@@ -16,8 +23,16 @@
     grids:
     - path: /Maps/_Mono/Shuttles/World/mpulsar.yml
       weight: 1
+      gridNames:
+      - "дрон-перехватчик «М-пульсар»"
+      - "малый боевой дрон «Пульсар-3»"
+      - "патрульный дрон «Искра»"
     - path: /Maps/_Mono/Shuttles/World/lance.yml
       weight: 1
+      gridNames:
+      - "автономный разведчик «Ланцет»"
+      - "малый ударный дрон «Ланс»"
+      - "дрон-перехватчик «Стриж»"
   reward:
   - type: Currency
     currency: BankCredit
@@ -29,8 +44,15 @@
 - type: ncDroneHuntContract
   id: ForgeDroneHuntMedium
   name: "Средний перехват дрона"
-  description: "Автономный T2 дрон-шаттл мешает маршрутам экспедиций. Найдите его по пеленгу, заберите контрактное ядро и верните доказательство торговцу."
+  description: "Автономный T2 боевой дрон мешает маршрутам экспедиций. Найдите его по пеленгу, заберите контрактное ядро и верните доказательство торговцу."
   icon: NpcDroneAiMedusa
+  activeTimeLimitSeconds: 1800
+  gridNames:
+  - "ударный дрон «Медуза»"
+  - "беспилотный корабль «Сборщик»"
+  - "автономный перехватчик «Гарпун»"
+  - "патрульная платформа «Омега»"
+  - "боевой дрон «Каскад»"
   targetGroup: ForgeDroneHuntGroupCores
   completion:
     proof: ForgeTradeContractProofDroneCore
@@ -44,8 +66,16 @@
     grids:
     - path: /Maps/_Mono/Shuttles/World/medusa.yml
       weight: 1
+      gridNames:
+      - "ударный дрон «Медуза»"
+      - "патрульная платформа «Медуза-2»"
+      - "боевой дрон «Горгона»"
     - path: /Maps/_Mono/Shuttles/World/assembly.yml
       weight: 1
+      gridNames:
+      - "беспилотный корабль «Сборщик»"
+      - "автономный перехватчик «Ассемблер»"
+      - "боевой дрон «Каскад»"
   reward:
   - type: Currency
     currency: BankCredit
@@ -57,8 +87,15 @@
 - type: ncDroneHuntContract
   id: ForgeDroneHuntHeavy
   name: "Тяжёлый перехват дрона"
-  description: "В дальнем секторе обнаружен тяжёлый T2 дрон-шаттл. Перехватите его на безопасном удалении, заберите контрактное ядро-доказательство и доставьте его торговцу."
+  description: "В дальнем секторе обнаружен тяжёлый T2 боевой дрон. Перехватите его на безопасном удалении, заберите контрактное ядро-доказательство и доставьте его торговцу."
   icon: NpcDroneAiQuake
+  activeTimeLimitSeconds: 1800
+  gridNames:
+  - "тяжёлый дрон «Кувалда»"
+  - "осадная платформа «Квейк»"
+  - "беспилотный крейсер «Молот»"
+  - "автономный разрушитель «Маулер»"
+  - "дрон-носитель «Гром»"
   targetGroup: ForgeDroneHuntGroupCores
   completion:
     proof: ForgeTradeContractProofDroneCore
@@ -72,8 +109,16 @@
     grids:
     - path: /Maps/_Mono/Shuttles/World/mauler.yml
       weight: 1
+      gridNames:
+      - "автономный разрушитель «Маулер»"
+      - "осадный дрон «Кувалда»"
+      - "беспилотный крейсер «Молот»"
     - path: /Maps/_Mono/Shuttles/World/quake.yml
       weight: 1
+      gridNames:
+      - "осадная платформа «Квейк»"
+      - "тяжёлый боевой дрон «Гром»"
+      - "дрон-носитель «Разлом»"
   reward:
   - type: Currency
     currency: BankCredit

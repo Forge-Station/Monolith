@@ -1,0 +1,72 @@
+- type: entity
+  name: Zenith (12.7x85mm)
+  parent: [BaseWeaponRifle, BaseGunWieldable]
+  id: WeaponSniperUllman
+  description: A portable anti-material rifle. Fires high velocity 12.7mm shells. Uses 12.7x85mm ammo.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Snipers/ui_heavy_bal_sniper_icon.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Snipers/ui_heavy_bal_sniper_x64_inhand.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Item
+    sprite: Forge/Objects/Weapons/Guns/Snipers/ui_heavy_bal_sniper_x64_inhand.rsi
+    size: Huge
+  - type: GunRequiresWield
+  - type: Gun
+    fireRate: 0.6
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_Harmony/Weapons/Guns/Gunshots/hristov_fire_alt.ogg
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: ForgeMagazineUllman127x85mm
+        insertSound: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - ForgeMagazineUllman127x85mm
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: ForgeCartridgeUllman127x85mm
+        priority: 1
+        whitelist:
+          tags:
+            - ForgeCartridgeUllman127x85mm
+  - type: ChamberMagazineAmmoProvider
+    autoCycle: false
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.55
+    sprintModifier: 0.55
+  - type: CursorOffsetRequiresWield
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: AmmoCounter
+  - type: Appearance
+  - type: EyeCursorOffset
+    maxOffset: 4.5
+    pvsIncrease: 0.7
+  - type: StaticPrice
+    price: 2500

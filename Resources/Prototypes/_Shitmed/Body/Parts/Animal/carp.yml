@@ -20,6 +20,8 @@
     state: tail
   - type: BodyPart
     partType: Tail
+    onAdd: # Forge-Change
+    - type: MovementAlwaysTouching # Forge-Change
   - type: MovementBodyPart
     walkSpeed: 2.5
     sprintSpeed: 3.5

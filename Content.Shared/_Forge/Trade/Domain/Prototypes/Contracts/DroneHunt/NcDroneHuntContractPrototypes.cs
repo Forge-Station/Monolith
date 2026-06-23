@@ -11,6 +11,9 @@ public sealed partial class NcDroneHuntGridEntry
 
     [DataField("weight")]
     public int Weight { get; set; } = 1;
+
+    [DataField("gridNames")]
+    public List<string> GridNames { get; set; } = new();
 }
 
 [DataDefinition]
@@ -56,6 +59,15 @@ public sealed partial class NcDroneHuntContractPrototype : IPrototype
 
     [DataField("icon")]
     public string Icon { get; private set; } = string.Empty;
+
+    [DataField("activeTimeLimitSeconds")]
+    public int ActiveTimeLimitSeconds { get; private set; } = 30 * 60;
+
+    [DataField("gridName")]
+    public string GridName { get; private set; } = string.Empty;
+
+    [DataField("gridNames")]
+    public List<string> GridNames { get; private set; } = new();
 
     [DataField("targetGroup", required: true)]
     public string TargetGroup { get; private set; } = string.Empty;

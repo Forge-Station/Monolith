@@ -283,6 +283,7 @@ public sealed partial class NcContractSystem : EntitySystem
             Stage = runtime.Stage,
             StageGoal = runtime.StageGoal,
             AcceptTimeoutRemainingSeconds = runtime.AcceptTimeoutRemainingSeconds,
+            ActiveTimeRemainingSeconds = runtime.ActiveTimeRemainingSeconds,
             GhostRoleSurvivalRemainingSeconds = runtime.GhostRoleSurvivalRemainingSeconds,
             GhostRolePendingAcceptance = runtime.GhostRolePendingAcceptance,
             Failed = runtime.Failed,
@@ -300,6 +301,7 @@ public sealed partial class NcContractSystem : EntitySystem
         target.Stage = source.Stage;
         target.StageGoal = source.StageGoal;
         target.AcceptTimeoutRemainingSeconds = source.AcceptTimeoutRemainingSeconds;
+        target.ActiveTimeRemainingSeconds = source.ActiveTimeRemainingSeconds;
         target.GhostRoleSurvivalRemainingSeconds = source.GhostRoleSurvivalRemainingSeconds;
         target.GhostRolePendingAcceptance = source.GhostRolePendingAcceptance;
         target.Failed = source.Failed;

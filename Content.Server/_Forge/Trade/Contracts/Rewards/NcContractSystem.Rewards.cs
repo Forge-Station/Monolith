@@ -40,6 +40,9 @@ public sealed partial class NcContractSystem : EntitySystem
             if (count <= 0)
                 continue;
 
+            if (bp.Type == StoreRewardType.None)
+                continue;
+
             if (bp.Type == StoreRewardType.Pool)
             {
                 var rolled = RollPool(store, contractProtoId, bp, count, depth + 1);
@@ -168,10 +171,17 @@ public sealed partial class NcContractSystem : EntitySystem
 
             if (def.Type != StoreRewardType.Item &&
                 def.Type != StoreRewardType.Currency &&
-                def.Type != StoreRewardType.Pool)
+                def.Type != StoreRewardType.Pool &&
+                def.Type != StoreRewardType.None)
             {
                 Sawmill.Warning(
                     $"[Contracts] Reward pool '{poolLabel}' entry #{i} has unsupported reward type {def.Type}.");
+                continue;
+            }
+
+            if (def.Type == StoreRewardType.None)
+            {
+                validOptions.Add(def);
                 continue;
             }
 

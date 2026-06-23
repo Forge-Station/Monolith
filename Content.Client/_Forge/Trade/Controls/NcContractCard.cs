@@ -310,6 +310,8 @@ public sealed partial class NcContractCard : PanelContainer
         if (string.IsNullOrWhiteSpace(statusText))
             statusText = BuildRouteStatusText(_data);
 
+        statusText = BuildActiveDeadlineStatusText(_data, statusText);
+
         if (string.IsNullOrWhiteSpace(statusText))
         {
             StatusLabel.Visible = false;

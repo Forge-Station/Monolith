@@ -127,38 +127,17 @@
   color: "#C9A45A"
   entries:
   - type: Hunt
-    id: ForgeHuntEasyCarpSwarm
+    id: ForgeHuntMediumMercenaryRaiders
+    weight: 3
+  - type: Hunt
+    id: ForgeHuntHardMercenaryCaptain
     weight: 1
-  - type: Hunt
-    id: ForgeHuntEasyArgocyteScouts
-    weight: 4
-  - type: Hunt
-    id: ForgeHuntEasyDinosaurNest
-    weight: 4
-  - type: Hunt
-    id: ForgeHuntEasyRogueScrap
-    weight: 4
-  - type: Hunt
-    id: ForgeHuntEasyFleshGrowths
-    weight: 4
-  - type: Hunt
-    id: ForgeHuntMediumArgocyteBrood
-    weight: 2
   - type: Hunt
     id: ForgeHuntMediumRoguePatrol
-    weight: 2
-  - type: Hunt
-    id: ForgeHuntMediumDinosaurPack
-    weight: 2
+    weight: 3
   - type: Hunt
     id: ForgeHuntMediumSyndicatePatrol
-    weight: 2
-  - type: Hunt
-    id: ForgeHuntHardFleshHorror
-    weight: 1
-  - type: Hunt
-    id: ForgeHuntHardArgocyteLeviathan
-    weight: 1
+    weight: 3
   - type: Hunt
     id: ForgeHuntHardRogueAiCore
     weight: 1

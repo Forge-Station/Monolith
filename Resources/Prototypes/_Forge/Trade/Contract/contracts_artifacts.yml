@@ -15,6 +15,9 @@
     prototype: ResearchDisk35000
     count: 1
   - type: Item
+    prototype: ResearchDisk10000
+    count: { min: 1, max: 2 }
+  - type: Item
     prototype: SpawnDungeonLootMaterialsBasicFull
     count: { min: 5, max: 8 }
   - type: Item
@@ -23,6 +26,9 @@
   - type: Pool
     pool: ForgeExpeditionRewardBasic
     count: { min: 1, max: 3 }
+  - type: Pool
+    pool: ForgeArtifactStudyResearchGeneratorChance
+    count: 1
 
 - type: ncArtifactStudyContract
   id: ForgeArtifactStudyMedium
@@ -41,6 +47,9 @@
     prototype: ResearchDisk65000
     count: 1
   - type: Item
+    prototype: ResearchDisk35000
+    count: { min: 1, max: 2 }
+  - type: Item
     prototype: SpawnDungeonLootMaterialsBasicFull
     count: { min: 6, max: 10 }
   - type: Item
@@ -49,6 +58,9 @@
   - type: Pool
     pool: ForgeExpeditionRewardAdvanced
     count: { min: 1, max: 3 }
+  - type: Pool
+    pool: ForgeArtifactStudyResearchGeneratorChance
+    count: 1
 
 - type: ncArtifactStudyContract
   id: ForgeArtifactStudyHard
@@ -67,6 +79,9 @@
     prototype: ResearchDisk100000
     count: 1
   - type: Item
+    prototype: ResearchDisk65000
+    count: { min: 1, max: 2 }
+  - type: Item
     prototype: SpawnDungeonLootMaterialsBasicFull
     count: { min: 8, max: 12 }
   - type: Item
@@ -78,3 +93,6 @@
   - type: Pool
     pool: ForgeExpeditionRewardEliteTechDisks
     count: { min: 1, max: 3 }
+  - type: Pool
+    pool: ForgeArtifactStudyResearchGeneratorChance
+    count: 1

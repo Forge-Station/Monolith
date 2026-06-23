@@ -535,9 +535,8 @@
   - type: Tag
     tags:
     - Trash
-    - GoblinPreciousTrash # Forge-Change
-  - type: TimedDespawn
-    lifetime: 600
+  # - type: TimedDespawn Forge-Change-Del
+  #   lifetime: 600 Forge-Change-Del
   - type: PhysicalComposition
     materialComposition:
       Steel: 100

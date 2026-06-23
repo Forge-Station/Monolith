@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: EMF Культур
   description: Тяжелый средний боевой шаттл Империи. Вооружен двумя орудиями "Сцилла" и 4 установками "Цербер"
-  price: 185000
+  price: 199599 #PR:238 price UP
   category: Medium
   group: Empire
   access: Empire

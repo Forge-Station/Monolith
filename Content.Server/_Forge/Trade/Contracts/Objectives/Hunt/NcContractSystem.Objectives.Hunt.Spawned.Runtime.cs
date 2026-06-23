@@ -264,9 +264,13 @@ public sealed partial class NcContractSystem : EntitySystem
                 continue;
             }
 
+            ConfigureHuntSiteRadarContact(debris, contract);
             CollectHuntDebrisSpawnCoordinates(debris, grid, spawnCoordinates);
             if (spawnCoordinates.Count > 0)
+            {
+                ActivateContractNpcsOnGrid(debris);
                 return true;
+            }
 
             Sawmill.Warning(
                 $"[Contracts] Hunt runtime init failed for '{contractId}': debris '{debrisPrototype}' has no valid spawn tiles.");
@@ -589,6 +593,8 @@ public sealed partial class NcContractSystem : EntitySystem
             return;
         }
 
+        ActivateContractNpcsOnGrid(placedGrid.Owner);
+
         if (state.PinpointerEntities.Count > 0 &&
             TryResolveSpawnedHuntPinpointerTarget(key.Store, contract, state, out var pinpointerTarget))
         {
@@ -729,7 +735,7 @@ public sealed partial class NcContractSystem : EntitySystem
             state.HuntDebrisEntity = generatedGrid.Owner;
             state.HuntDungeonGenerationMap = null;
             placedGrid = generatedGrid;
-            ConfigureHuntDungeonRadarContact(generatedGrid.Owner);
+            ConfigureHuntSiteRadarContact(generatedGrid.Owner, contract);
 
             if (TryComp(generationMap, out TransformComponent? generationMapXform))
                 _map.DeleteMap(generationMapXform.MapID);
@@ -740,11 +746,13 @@ public sealed partial class NcContractSystem : EntitySystem
         return false;
     }
 
-    private void ConfigureHuntDungeonRadarContact(EntityUid grid)
+    private void ConfigureHuntSiteRadarContact(EntityUid grid, ContractServerData contract)
     {
-        _contractMeta.SetEntityName(grid, "Контрактный обломок");
-        _shuttle.SetIFFColor(grid, Color.FromHex("#d67e27"));
-        _shuttle.RemoveIFFFlag(grid, IFFFlags.Hide | IFFFlags.HideLabel | IFFFlags.HideLabelAlways);
+        TryConfigureContractRadarContact(
+            grid,
+            contract,
+            "опасный объект",
+            Color.FromHex("#d67e27"));
     }
 
     private static bool IsSelfContainedHuntDungeonPrototype(string prototypeId)
@@ -1021,8 +1029,8 @@ public sealed partial class NcContractSystem : EntitySystem
         if (availableTiles <= guaranteedCount)
             return guaranteedCount;
 
-        var minRatio = Math.Clamp(0.50f + padding * 0.015f, 0.50f, 0.62f);
-        var maxRatio = Math.Clamp(0.72f + padding * 0.015f, minRatio, 0.88f);
+        var minRatio = Math.Clamp(0.28f + padding * 0.010f, 0.30f, 0.42f);
+        var maxRatio = Math.Clamp(0.46f + padding * 0.015f, minRatio, 0.64f);
         var ratio = _random.NextFloat(minRatio, maxRatio);
         return Math.Clamp((int) MathF.Round(availableTiles * ratio), guaranteedCount, availableTiles);
     }

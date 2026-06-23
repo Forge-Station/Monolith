@@ -31,8 +31,10 @@ internal static class NcContractTuning
 
     public const float GuardSpawnRingScaleStep = 0.65f;
     public const float GuardSpawnJitterScale = 0.2f;
+    public const float ContractNpcPlayerWakeRange = 96f;
     public static readonly TimeSpan TrackedDeliveryDropoffCheckInterval = TimeSpan.FromSeconds(0.5);
     public static readonly TimeSpan GhostRoleTimeoutCheckInterval = TimeSpan.FromSeconds(1);
+    public static readonly TimeSpan ActiveContractDeadlineCheckInterval = TimeSpan.FromSeconds(1);
 
     public static readonly Vector2[] HuntGuardSpawnOffsets =
     {

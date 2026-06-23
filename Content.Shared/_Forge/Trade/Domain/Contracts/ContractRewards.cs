@@ -10,6 +10,7 @@ public enum StoreRewardType : byte
     Item = 0,
     Currency = 1,
     Pool = 2,
+    None = 3,
 
     /// <summary>Sentinel used by strict contract validation when a YAML entry omits type.</summary>
     Unspecified = byte.MaxValue

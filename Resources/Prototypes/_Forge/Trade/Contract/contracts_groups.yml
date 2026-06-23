@@ -83,6 +83,18 @@
   - MobFleshGolemAltExpeditions
 
 - type: ncHuntGroup
+  id: ForgeHuntGroupMercenaryVeterans
+  name: "отряд наёмников"
+  description: "Опытные наёмники с тяжёлым вооружением и полевой поддержкой."
+  icon: MobMercenarySpecialistAssault
+  prototypes:
+  - MobMercenaryBreacherMachete
+  - MobMercenarySoldierRevolver
+  - MobMercenaryBreacherShotgun
+  - MobMercenarySpecialistMedic
+  - MobMercenarySpecialistAssault
+
+- type: ncHuntGroup
   id: ForgeHuntGroupRogueScrap
   name: "ломовые силиконы"
   description: "Сломанные автономные боты, собранные из обломков оборудования."
@@ -105,8 +117,8 @@
 
 - type: ncHuntGroup
   id: ForgeDroneHuntGroupCores
-  name: "AI-ядро дрон-шаттла"
-  description: "Любое контрактное ядро вражеского дрон-шаттла, пригодное как доказательство перехвата."
+  name: "AI-ядро боевого дрона"
+  description: "Любое контрактное ядро вражеского беспилотника, пригодное как доказательство перехвата."
   icon: NpcStationAiRammer
   prototypes:
   - NpcStationAiRammer

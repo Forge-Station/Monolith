@@ -182,6 +182,37 @@
         - !type:ReagentThreshold
           min: 16 #Mono 15 >> 16
       - !type:Drunk
+      # Forge-change-start
+      - !type:SuppressEffect
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Body
+          reagent: Bicaridine
+          min: 0.0
+          max: 0.7
+        syndrome: PainSyndrome
+        duration: 10
+      - !type:GenericDescEffect
+        description: forge-reagent-effect-wiithdrawl-smallpain
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Bicaridine
+        amount: 0.001
+        target: Body
+      - !type:EvenHealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Body
+          reagent: Bicaridine
+          min: 0.6
+          max: 1.0
+        damage:
+          Brute: 0.5
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
+      # Forge-change-end
 
 - type: reagent
   id: Cryoxadone
@@ -321,9 +352,27 @@
           types:
             Asphyxiation: 3
             Cold: 1
-      - !type:AddictiveEffect # Forge-change
-        addictionId: Dexalin
-        toleranceGain: 0.002 # 15 = 0.03
+      # Forge-change-start
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Dexalin
+        amount: 0.002
+        target: Lung
+      - !type:HealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Lung
+          reagent: Dexalin
+          min: 0.7
+          max: 1.0
+        damage:
+          types:
+            Asphyxiation: 0.5
+            Bloodloss: 0.25
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
+      # Forge-change-end
 
 - type: reagent
   id: DexalinPlus
@@ -359,9 +408,27 @@
           types:
             Asphyxiation: 5
             Cold: 3
-      - !type:AddictiveEffect # Forge-change
-        addictionId: Dexalin
-        toleranceGain: 0.002 # 15 = 0.03
+      # Forge-change-start
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Dexalin
+        amount: 0.001
+        target: Lung
+      - !type:HealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Lung
+          reagent: Dexalin
+          min: 0.8
+          max: 1.0
+        damage:
+          types:
+            Asphyxiation: 1.75
+            Bloodloss: 1.5
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
+      # Forge-change-end
 
 # this ones a doozy
 - type: reagent
@@ -927,7 +994,29 @@
           min: 15
         reagent: Tricordrazine
         amount: -0.8
-
+      # Forge-change-start
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Tricordrazine
+        amount: 0.001
+        target: Heart
+      - !type:EvenHealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Heart
+          reagent: Tricordrazine
+          min: 0.7
+          max: 1.0
+        - !type:TotalDamage
+          max: 50
+        damage:
+          Brute: 0.3
+          Burn: 0.3
+          Toxin: 0.1
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
+      # Forge-change-end
 
 - type: reagent
   id: Lipozine
@@ -957,38 +1046,40 @@
     Medicine:
       effects:
       - !type:EvenHealthChange
+        conditions:
         damage:
           Burn: -1.5
           Toxin: -1.5
           Airloss: -1.5
           Brute: -1.5
-      # Forge-change-start
-        conditions:
-          - !type:AddictionCondition
-            addictionId: Omnizine
-            min: 0.0
-            max: 0.5
-      - !type:EvenHealthChange
-        conditions:
-          - !type:AddictionCondition
-            addictionId: Omnizine
-            min: 0.5
-            max: 1.0
-        damage:
-          Burn: -0.75
-          Toxin: -0.75
-          Airloss: -0.75
-          Brute: -0.75
-      # Forge-change-end
       - !type:AdjustReagent # Mono: Overdose, penalize metabolism
         conditions:
         - !type:ReagentThreshold
           min: 60
         reagent: Omnizine
         amount: -1.0
-      - !type:AddictiveEffect # Forge-change
-        addictionId: Omnizine
-        toleranceGain: 0.008 # slow, it's a medicine not a narcotic
+      # Forge-change-start
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Omnizine
+        amount: 0.002
+        target: Heart
+      - !type:HealthChange
+        hidden: true
+        conditions:
+        - !type:ToleranceCondition
+          source: Heart
+          reagent: Omnizine
+          min: 0.8
+          max: 1.0
+        damage:
+          Burn: 0.75
+          Toxin: 0.75
+          Airloss: 0.75
+          Brute: 0.75
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
+      # Forge-change-end
 
 - type: reagent
   id: Ultravasculine
@@ -1487,7 +1578,6 @@
           refresh: false
           type: Add
 
-
 - type: reagent
   id : Aloxadone
   name: reagent-name-aloxadone
@@ -1677,36 +1767,26 @@
       - !type:AdjustReagent
         reagent: MindbreakerToxin
         amount: -3.0
-      # Forge-change-start
-      - !type:CureAddictionEffect
-        addictionId: Stimulants
-        amount: 0.02
-      - !type:CureAddictionEffect
-        addictionId: Ephedrine
-        amount: 0.025
-      - !type:CureAddictionEffect
-        addictionId: Desoxyephedrine
-        amount: 0.02
-      - !type:GenericStatusEffect
-        key: Drowsiness
-        component: DrowsinessDamageModifier
-        type: Add
-        time: 10
-        probability: 0.3
+        # Forge-change-start
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Haloperidol
+        amount: 0.005
+        target: Liver
+      - !type:SyndromeEffect
+        hidden: true
         conditions:
-          - !type:AddictionCondition
-            addictionId: Stimulants
-            min: 0.5
+          - !type:ToleranceCondition
+            source: Liver
+            reagent: Haloperidol
+            min: 0.7
             max: 1.0
-      - !type:GenericStatusEffect
-        key: Drowsiness
-        component: DrowsinessDamageModifier
-        type: Add
-        time: 10
-        probability: 0.3
-        conditions:
-          - !type:AddictionCondition
-            addictionId: Desoxyephedrine
-            min: 0.5
-            max: 1.0
-      # Forge-change-end
+        syndrome: SedativeAddiction
+        severity: 0.95
+      - !type:SuppressEffect
+        hidden: true
+        syndrome: StimulantAddiction
+        duration: 55
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-addiction
+        # Forge-change-end

@@ -5,8 +5,6 @@
   reactants:
     Codeine:
       amount: 1
-    Hydroxide:
-      amount: 1
     Oxygen:
       amount: 1
     Ammonia:
@@ -15,3 +13,16 @@
       amount: 0.5
   products:
     Naloxone: 3
+
+- type: reaction
+  id: Clonidine
+  impact: Low
+  reactants:
+    Chlorine:
+      amount: 2
+    Ammonia:
+      amount: 1
+    Diethylamine:
+      amount: 1
+  products:
+    Clonidine: 3

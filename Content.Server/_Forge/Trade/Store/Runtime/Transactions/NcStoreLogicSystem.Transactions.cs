@@ -14,15 +14,15 @@ public sealed partial class NcStoreLogicSystem
                 user,
                 count,
                 out var listing,
-                out var effectiveProtoId,
-                out _,
                 out var plan))
             return false;
 
-        var rewards = _transactionCoordinator.BuildSingleReward(
-            StoreRewardType.Item,
-            effectiveProtoId,
-            plan.TotalUnits);
+        if (!TryBuildBuyRewards(listing, plan.TotalUnits, out var rewards, out var rewardReason))
+        {
+            Sawmill.Warning($"[NcStore] TryBuy failed for listing '{listing.Id}': {rewardReason}");
+            return false;
+        }
+
         if (!TryExecuteRewardListWithPreCommit(
                 user,
                 rewards,
@@ -55,14 +55,10 @@ public sealed partial class NcStoreLogicSystem
         EntityUid user,
         int count,
         out NcStoreListingDef listing,
-        out string effectiveProtoId,
-        out EntityPrototype proto,
         out BuyExecutionPlan plan
     )
     {
         listing = default!;
-        effectiveProtoId = string.Empty;
-        proto = default!;
         plan = default;
 
         if (store == null || store.Listings.Count == 0 || count <= 0)
@@ -73,15 +69,10 @@ public sealed partial class NcStoreLogicSystem
                 out var foundListing))
             return false;
 
-        // Phase M2: for Matcher listings, ProductEntity is an NcMatcherPrototype id. Resolve
-        // it to a random concrete prototype from matcher.Items. For Exact listings, use the
-        // ProductEntity directly as the prototype ID.
-        if (!TryResolveBuyEffectiveProto(foundListing, out effectiveProtoId, out var foundProto) ||
-            foundProto == null)
+        if (!TryValidateBuyProductSource(foundListing))
             return false;
 
         listing = foundListing;
-        proto = foundProto;
 
         _inventory.InvalidateInventoryCache(user);
         var snapshot = _inventory.BuildInventorySnapshot(user);
@@ -102,15 +93,8 @@ public sealed partial class NcStoreLogicSystem
     ///     - Matcher: matcher prototype doesn't exist, matcher has no items, or the randomly
     ///     picked item prototype doesn't exist.
     /// </summary>
-    private bool TryResolveBuyEffectiveProto(
-        NcStoreListingDef listing,
-        out string effectiveProtoId,
-        out EntityPrototype? proto
-    )
+    private bool TryValidateBuyProductSource(NcStoreListingDef listing)
     {
-        effectiveProtoId = string.Empty;
-        proto = null;
-
         if (listing.MatchMode == PrototypeMatchMode.Matcher)
         {
             if (!_protos.TryIndex<NcMatcherPrototype>(listing.ProductEntity, out var matcher))
@@ -127,19 +111,79 @@ public sealed partial class NcStoreLogicSystem
                 return false;
             }
 
-            effectiveProtoId = _random.Pick(matcher.Items);
+            return true;
         }
-        else
-            effectiveProtoId = listing.ProductEntity;
 
-        if (!_protos.TryIndex(effectiveProtoId, out proto))
+        if (!_protos.HasIndex<EntityPrototype>(listing.ProductEntity))
         {
             Sawmill.Warning(
-                $"[NcStore] Buy prepare failed: resolved prototype '{effectiveProtoId}' not found (listing '{listing.Id}').");
+                $"[NcStore] Buy prepare failed: exact product prototype '{listing.ProductEntity}' not found (listing '{listing.Id}').");
             return false;
         }
 
         return true;
+    }
+
+    private bool TryBuildBuyRewards(
+        NcStoreListingDef listing,
+        int totalUnits,
+        out List<ContractRewardData> rewards,
+        out string reason
+    )
+    {
+        rewards = new List<ContractRewardData>();
+        reason = string.Empty;
+
+        if (totalUnits <= 0)
+        {
+            reason = $"invalid total unit count {totalUnits}";
+            return false;
+        }
+
+        if (listing.MatchMode != PrototypeMatchMode.Matcher)
+        {
+            rewards = _transactionCoordinator.BuildSingleReward(
+                StoreRewardType.Item,
+                listing.ProductEntity,
+                totalUnits);
+            return true;
+        }
+
+        rewards.EnsureCapacity(totalUnits);
+        for (var i = 0; i < totalUnits; i++)
+        {
+            if (!TryPickBuyMatcherPrototype(listing, out var protoId, out reason))
+                return false;
+
+            rewards.Add(new ContractRewardData(StoreRewardType.Item, protoId, 1));
+        }
+
+        return true;
+    }
+
+    private bool TryPickBuyMatcherPrototype(NcStoreListingDef listing, out string protoId, out string reason)
+    {
+        protoId = string.Empty;
+        reason = string.Empty;
+
+        if (!_protos.TryIndex<NcMatcherPrototype>(listing.ProductEntity, out var matcher))
+        {
+            reason = $"matcher '{listing.ProductEntity}' not found for listing '{listing.Id}'";
+            return false;
+        }
+
+        if (matcher.Items is not { Count: > 0 })
+        {
+            reason = $"matcher '{listing.ProductEntity}' has no items to pick from";
+            return false;
+        }
+
+        protoId = _random.Pick(matcher.Items);
+        if (_protos.HasIndex<EntityPrototype>(protoId))
+            return true;
+
+        reason = $"matcher '{listing.ProductEntity}' picked missing item prototype '{protoId}'";
+        return false;
     }
 
     private static bool TryBuildBuyPlan(

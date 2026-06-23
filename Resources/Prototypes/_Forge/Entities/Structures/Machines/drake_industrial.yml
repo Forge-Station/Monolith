@@ -74,9 +74,15 @@
     sprite: Forge/Structures/Machines/drake_scrap_processor.rsi
   - type: Machine
     board: DrakeScrapProcessorMachineCircuitboard
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Ore
   - type: Lathe
     materialUseMultiplier: 0.75
     timeMultiplier: 0.5
+    staticPacks:
+    - NFScrapStatic
 
 - type: entity
   parent: [CentrifugeLatheMini, DrakeMachine2x2Base]

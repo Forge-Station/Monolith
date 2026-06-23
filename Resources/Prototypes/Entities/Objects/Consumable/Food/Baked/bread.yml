@@ -266,6 +266,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
 # Tastes like bread, cheese.
 
 - type: entity
@@ -294,6 +296,8 @@
           Quantity: 1.2
         - ReagentId: Flavorol
           Quantity: 1.5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.5       # Forge-change
 
 - type: entity
   name: meat bread
@@ -305,6 +309,7 @@
     flavors:
       - meaty
       - bread
+      - cheesy # Forge-change
   - type: Food
   - type: Sprite
     layers:
@@ -322,6 +327,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 10
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -338,6 +345,7 @@
     flavors:
       - meaty
       - bread
+      - cheesy # Forge-change
   - type: Food
   - type: Sprite
     layers:
@@ -353,6 +361,8 @@
           Quantity: 1.2
         - ReagentId: Flavorol
           Quantity: 2
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.5       # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -523,6 +533,7 @@
     flavors:
       - cobwebs
       - bread
+      - cheesy # Forge-change
   - type: Food
   - type: Sprite
     layers:
@@ -542,6 +553,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 10
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -558,6 +571,7 @@
     flavors:
       - cobwebs
       - bread
+      - cheesy # Forge-change
   - type: Food
   - type: Sprite
     layers:
@@ -575,6 +589,8 @@
           Quantity: .5
         - ReagentId: Flavorol
           Quantity: 2
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.5       # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -646,6 +662,7 @@
     flavors:
       - acid
       - bread
+      - cheesy # Forge-change
   - type: Food
   - type: Sprite
     layers:
@@ -658,11 +675,13 @@
         maxVol: 45
         reagents:
         - ReagentId: Nutriment
-          Quantity: 30
+          Quantity: 28        # Forge-change 30>28
         - ReagentId: Vitamin
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 10
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -679,6 +698,7 @@
     flavors:
       - acid
       - bread
+      - cheesy # Forge-change
   - type: Food
   - type: Sprite
     layers:
@@ -689,11 +709,13 @@
         maxVol: 10
         reagents:
         - ReagentId: Nutriment
-          Quantity: 6
+          Quantity: 5.9       # Forge-change 6>5.9
         - ReagentId: Vitamin
           Quantity: 1.2
         - ReagentId: Flavorol
           Quantity: 2.4
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 0.5       # Forge-change
   - type: Tag
     tags:
     - Meat

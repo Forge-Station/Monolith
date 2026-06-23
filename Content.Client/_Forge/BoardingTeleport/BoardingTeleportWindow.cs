@@ -37,6 +37,8 @@ public sealed class BoardingTeleportWindow : FancyWindow
     private readonly BoardingTeleportSectorMapControl _sectorMap;
     private readonly BoardingTeleportLandingMapControl _landingMap;
 
+    private BoardingTeleportPage? _lastPage;
+
     public BoardingTeleportWindow(BoardingTeleportBoundUserInterface owner)
     {
         IoCManager.InjectDependencies(this);
@@ -320,9 +322,11 @@ public sealed class BoardingTeleportWindow : FancyWindow
         UpdateModeButtons(state.Mode);
         UpdateSharedLandingButton(state);
 
-        var coordinates = _entManager.GetCoordinates(state.NavState.Coordinates);
-        var shuttle = coordinates?.EntityId;
-        _sectorMap.SetShuttle(shuttle);
+        EntityUid? scannerGrid = null;
+        if (_entManager.TryGetComponent<TransformComponent>(_owner.Owner, out var consoleXform))
+            scannerGrid = consoleXform.GridUid;
+
+        _sectorMap.SetShuttle(scannerGrid);
         _sectorMap.SetConsole(_owner.Owner);
         _sectorMap.SetSelectedTargetName(state.TargetGrid is { } netTarget ? GetTargetName(netTarget) : null);
 
@@ -334,9 +338,18 @@ public sealed class BoardingTeleportWindow : FancyWindow
             _gridPage.Visible = false;
             _clearTargetButton.Visible = state.TargetGrid != null;
             _flavorLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("boarding-teleport-window-flavor-sector")));
-            _sectorMap.RebuildMapObjects();
+
+            if (_lastPage != BoardingTeleportPage.Sector)
+            {
+                _sectorMap.RecenterOnShuttle();
+                _sectorMap.RebuildMapObjects();
+            }
+
+            _lastPage = state.Page;
             return;
         }
+
+        _lastPage = state.Page;
 
         _sectorPage.Visible = false;
         _gridPage.Visible = true;

@@ -358,10 +358,12 @@
   name: head of security's turtleneck
   description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Head of Security.
   components:
+  # Forge-Change-Start
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/hos_alt.rsi
+    sprite: Clothing/Uniforms/Jumpsuit/hos_alt.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/hos_alt.rsi
+    sprite: Clothing/Uniforms/Jumpsuit/hos_alt.rsi
+  # Forge-Change-End
 
 - type: entity
   parent: ClothingUniformBase
@@ -595,10 +597,12 @@
   name: security jumpsuit
   description: A jumpsuit made of strong material, providing robust protection.
   components:
+  # Forge-Change-Start
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/security.rsi
+    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/security.rsi
+    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+  # Forge-Change-End
   - type: Item
     inhandVisuals:
       left:
@@ -839,10 +843,12 @@
   name: operative jumpsuit
   description: Uniform for elite syndicate operatives performing tactical operations in deep space.
   components:
+  # Forge-Change-Start
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/operative.rsi
+    sprite: Clothing/Uniforms/Jumpsuit/operative.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/operative.rsi
+    sprite: Clothing/Uniforms/Jumpsuit/operative.rsi
+  # Forge-Change-End
 
 - type: entity
   parent: ClothingUniformBase
@@ -1202,10 +1208,12 @@
   name: senior officer jumpsuit
   description: A sign of skill and prestige within the security department.
   components:
+  # Forge-Change-Start
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/senior_officer.rsi
+    sprite: Clothing/Uniforms/Jumpsuit/senior_officer.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/senior_officer.rsi
+    sprite: Clothing/Uniforms/Jumpsuit/senior_officer.rsi
+  # Forge-Change-End
 
 - type: entity
   parent: ClothingUniformBase

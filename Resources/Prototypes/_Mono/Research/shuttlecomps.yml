@@ -14,8 +14,11 @@
   - AdvancedRadarConsoleCircuitboard
   - ComputerIFFCircuitboard
   - MachineDriveCTLA25Circuitboard
-  - ShipWeaponFabricatorCircuitboard # Forge-Change
   - LargeThrusterMachineCircuitboard
+  - LargeAPCLightElectronics
+  - LargeAPCMediumElectronics
+  - APCElectronics
+  - LargeAPCCapitalElectronics
   technologyPrerequisites:
   - Shuttlecraft
   - SuperParts

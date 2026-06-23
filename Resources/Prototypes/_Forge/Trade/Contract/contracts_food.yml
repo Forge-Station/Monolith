@@ -1,0 +1,169 @@
+- type: ncSupplyContract
+  id: ForgeFoodEasyCheeseburgers
+  name: "Сырные бургеры для вахты"
+  description: "Приготовьте партию сырных бургеров для вахтовой смены. Половину блюд вернут как обед для команды, но повторно сдать их нельзя."
+  icon: FoodBurgerCheese
+  returnFraction: 0.5
+  targets:
+  - prototype: FoodBurgerCheese
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 10000
+  - type: Pool
+    pool: ForgeExpeditionRewardFoodBasic
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeFoodEasyTomatoSoup
+  name: "Томатный суп ночной смены"
+  description: "Сварите томатный суп для ночной смены дока. Половину блюд вернут как обед для команды, но повторно сдать их нельзя."
+  icon: FoodSoupTomato
+  returnFraction: 0.5
+  targets:
+  - prototype: FoodSoupTomato
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 10000
+  - type: Pool
+    pool: ForgeExpeditionRewardFoodBasic
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeFoodEasyTomatoPasta
+  name: "Паста для грузчиков"
+  description: "Приготовьте миски пасты с томатным соусом для грузчиков. Половину блюд вернут как обед для команды, но повторно сдать их нельзя."
+  icon: FoodNoodles
+  returnFraction: 0.5
+  targets:
+  - prototype: FoodNoodles
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 10000
+  - type: Pool
+    pool: ForgeExpeditionRewardFoodBasic
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeFoodEasyHanamiDango
+  name: "Сладкая смена"
+  description: "Соберите сладкую партию ханами-данго для сменного чаепития. Половину блюд вернут как обед для команды, но повторно сдать их нельзя."
+  icon: HanamiDango
+  returnFraction: 0.5
+  targets:
+  - prototype: HanamiDango
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 10000
+  - type: Pool
+    pool: ForgeExpeditionRewardFoodBasic
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeFoodMediumPizzaMargherita
+  name: "Пицца в переговорную"
+  description: "Испеките две целые пиццы маргарита для переговорной. Половину блюд вернут как обед для команды, но повторно сдать их нельзя."
+  icon: FoodPizzaMargherita
+  returnFraction: 0.5
+  targets:
+  - prototype: FoodPizzaMargherita
+    count: 2
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 30000
+  - type: Pool
+    pool: ForgeExpeditionRewardFoodAdvanced
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeFoodMediumMeatballNoodles
+  name: "Сытный заказ ремонтников"
+  description: "Приготовьте сытную пасту с фрикадельками для ремонтной бригады. Половину блюд вернут как обед для команды, но повторно сдать их нельзя."
+  icon: FoodNoodlesMeatball
+  returnFraction: 0.5
+  targets:
+  - prototype: FoodNoodlesMeatball
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 30000
+  - type: Pool
+    pool: ForgeExpeditionRewardFoodAdvanced
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeFoodMediumOnigiri
+  name: "Онигири для патруля"
+  description: "Сделайте аккуратную партию онигири для патрульной смены. Половину блюд вернут как обед для команды, но повторно сдать их нельзя."
+  icon: Onigiri
+  returnFraction: 0.5
+  targets:
+  - prototype: Onigiri
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 30000
+  - type: Pool
+    pool: ForgeExpeditionRewardFoodAdvanced
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeFoodHardCubanCarp
+  name: "Закрытый ужин штаба"
+  description: "Приготовьте кубинского карпа для закрытого ужина экспедиционного штаба. Половину блюд вернут как обед для команды, но повторно сдать их нельзя."
+  icon: FoodMealCubancarp
+  returnFraction: 0.5
+  targets:
+  - prototype: FoodMealCubancarp
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 45000
+  - type: Pool
+    pool: ForgeExpeditionRewardFoodElite
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeFoodHardSpicyRamen
+  name: "Рамен после вылазки"
+  description: "Сварите острый рамен для экипажа после тяжёлой экспедиции. Половину блюд вернут как обед для команды, но повторно сдать их нельзя."
+  icon: SpicyPorkRamenNoodles
+  returnFraction: 0.5
+  targets:
+  - prototype: SpicyPorkRamenNoodles
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 45000
+  - type: Pool
+    pool: ForgeExpeditionRewardFoodElite
+    count: { min: 1, max: 3 }
+
+- type: ncSupplyContract
+  id: ForgeFoodHardUraniumPizza
+  name: "Заказ со странным вкусом"
+  description: "Испеките урановую пиццу для заказчика с крайне специфичным вкусом. Половину блюд вернут как обед для команды, но повторно сдать их нельзя."
+  icon: FoodPizzaUranium
+  returnFraction: 0.5
+  targets:
+  - prototype: FoodPizzaUranium
+    count: 4
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 45000
+  - type: Pool
+    pool: ForgeExpeditionRewardFoodElite
+    count: { min: 1, max: 3 }

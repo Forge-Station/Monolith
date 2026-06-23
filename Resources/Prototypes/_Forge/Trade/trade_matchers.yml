@@ -1,0 +1,160 @@
+- type: ncMatcher
+  id: ForgeExpeditionWeaponsList
+  name: "случайное оружие [Экспедиция]"
+  description: "Случайное экспедиционное оружие или инструмент для добычи."
+  sprite:
+    sprite: Objects/Weapons/Melee/crusher.rsi
+    state: icon
+  items:
+  - WeaponProtoKineticAccelerator
+  - WeaponGrapplingGun
+  - WeaponCrusherDagger
+  - WeaponCrusher
+  - WeaponCrusherGlaive
+
+- type: ncMatcher
+  id: ForgeExpeditionLightWeaponCasesList
+  name: "случайный лёгкий оружейный ящик [Экспедиция]"
+  description: "Случайный слабый оружейный ящик экспедиционного уровня."
+  sprite:
+    sprite: _NF/Objects/Storage/Cases/guncaseshort.rsi
+    state: icon
+  items:
+  - WeaponCaseShortMk58Expedition
+  - WeaponCaseShortN1984Expedition
+  - WeaponCaseShortViper
+  - WeaponCaseShortUniversalExpedition
+  - WeaponCaseShortPollockExpedition
+  - WeaponCaseShortAntiqueLaserExpedition
+  - WeaponCaseShortArgentiExpedition
+  - WeaponCaseShortDeckardExpedition
+  - WeaponCaseShortFitzExpedition
+  - WeaponCaseShortFaithExpedition
+  - WeaponCaseShortLuckyExpedition
+  - WeaponCaseShortRevolverPirate
+  - WeaponCaseShortHandmadeExpedition
+  - WeaponCaseLongShotgunDoubleBarreledExpedition
+  - WeaponCaseShortSawnExpedition
+  - WeaponCaseShortLaserGunExpedition
+  - WeaponCaseShortSvalinnExpedition
+  - WeaponCaseShortAnaconda
+  - WeaponCaseShortEg4
+
+- type: ncMatcher
+  id: ForgeExpeditionMediumWeaponCasesList
+  name: "случайный средний оружейный ящик [Экспедиция]"
+  description: "Случайный средний оружейный ящик экспедиционного уровня."
+  sprite:
+    sprite: _NF/Objects/Storage/Cases/guncaselong.rsi
+    state: icon
+  items:
+  - WeaponCaseShortCobra
+  - WeaponCaseShortPython
+  - WeaponCaseShortMateba
+  - WeaponCaseLongKammererExpedition
+  - WeaponCaseLongEnforcerExpedition
+  - WeaponCaseLongBulldog
+  - WeaponCaseLongWT550Expedition
+  - WeaponCaseLongAtreidesExpedition
+  - WeaponCaseLongDrozdExpedition
+  - WeaponCaseLongC20r
+  - WeaponCaseLongTypewriterExpedition
+  - WeaponCaseLongGestioExpedition
+  - WeaponCaseLongWeaponRifleNovaliteC1Expedition
+  - WeaponCaseLongLecterExpedition
+  - WeaponCaseLongAk
+  - WeaponCaseLongSVSExpedition
+  - WeaponCaseLongJackdaw
+  - WeaponCaseLongLaserCarbineExpedition
+  - WeaponCaseShortAdvancedLaserExpedition
+  - WeaponCaseLongMosinExpedition
+  - WeaponCaseLongRepeaterExpedition
+  - WeaponCaseLongMusketExpedition
+  - WeaponCaseMr8c
+  - WeaponCaseAbielle
+  - WeaponCaseMla34
+  - WeaponCaseBigLeady
+  - WeaponCaseLongAK220
+
+- type: ncMatcher
+  id: ForgeExpeditionRareWeaponCasesList
+  name: "случайный редкий оружейный ящик [Экспедиция]"
+  description: "Случайный редкий оружейный ящик экспедиционного уровня."
+  sprite:
+    sprite: _NF/Objects/Storage/Cases/guncaselong.rsi
+    state: icon
+  items:
+  - WeaponCaseLongM90Expedition
+  - WeaponCaseLongVulcanExpedition
+  - WeaponCaseLongEnergyGunExpedition
+  - WeaponCaseLongLaserCannonExpedition
+  - WeaponCaseLongXrayCannonExpedition
+  - WeaponCaseLongHristovExpedition
+  - WeaponCaseLongSniperCeremonialExpedition
+  - WeaponCaseLongLauncherRocketExpedition
+  - WeaponCaseLongLauncherChinaLake
+  - WeaponCaseLongLightMachineGunL6
+  - WeaponCaseShortEnergyShieldExpedition
+  - WeaponCaseShortEnergySwordExpedition
+  - WeaponCaseShortEnergyDaggerExpedition
+  - WeaponCaseShortEnergyCutlassExpedition
+  - WeaponCaseShortEnergySwordDoubleExpedition
+  - WeaponCaseShortFireBomb
+  - WeaponCaseShortPipeBomb
+  - WeaponCaseShortSeismicCharge
+  - WeaponCaseShortExGrenade
+  - WeaponCaseShortC4
+  - WeaponCaseShortBombCollar
+  - WeaponCaseHeavyAsmgtExpeditions
+  - WeaponCaseHeavyCdet
+  - WeaponCaseHeavySlat
+  - WeaponCaseHeavyAsmgt
+  - WeaponCaseMla73
+  - WeaponCaseWspr
+  - WeaponCaseAnnie
+  - WeaponCaseMla79
+  - WeaponCaseDP29
+
+- type: ncMatcher
+  id: ForgeExpeditionScrapSpawnerList
+  name: "случайный спавнер лома [Экспедиция]"
+  description: "Случайный спавнер экспедиционного лома."
+  sprite:
+    sprite: Objects/Materials/Scrap/generic.rsi
+    state: metal-1
+  items:
+  - SalvageSpawnerScrapCommon
+  - SalvageSpawnerScrapValuable
+
+- type: ncMatcher
+  id: ForgeExpeditionTreasureSpawnerList
+  name: "случайный спавнер ценностей [Экспедиция]"
+  description: "Случайный спавнер экспедиционных сокровищ и ценных находок."
+  sprite:
+    sprite: Objects/Materials/materials.rsi
+    state: diamond
+  items:
+  - SalvageSpawnerTreasure
+  - SalvageSpawnerTreasureValuable
+
+- type: ncMatcher
+  id: ForgeExpeditionEquipmentSpawnerList
+  name: "случайный спавнер снаряжения [Экспедиция]"
+  description: "Случайный спавнер экспедиционного снаряжения."
+  sprite:
+    sprite: Objects/Devices/communication.rsi
+    state: walkietalkie
+  items:
+  - SalvageSpawnerEquipment
+  - SalvageSpawnerEquipmentValuable
+
+- type: ncMatcher
+  id: ForgeExpeditionSupportSpawnerList
+  name: "случайный спавнер снабжения [Экспедиция]"
+  description: "Случайный служебный спавнер экспедиции."
+  sprite:
+    sprite: Structures/Storage/Crates/generic.rsi
+    state: icon
+  items:
+  - SalvageMaterialCrateSpawner
+  - SalvageMobSpawner

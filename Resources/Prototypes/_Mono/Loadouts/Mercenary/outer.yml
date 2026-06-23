@@ -68,6 +68,6 @@
 
 - type: loadout
   id: MercenaryClothingOuterHardsuitMercenaryWarlord
-  price: 50000
+  price: 30000 # 50000->30000 Forge-change
   equipment:
     outerClothing: ClothingOuterHardsuitMercenaryWarlord

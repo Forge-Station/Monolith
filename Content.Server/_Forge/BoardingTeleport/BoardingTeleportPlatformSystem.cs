@@ -24,7 +24,9 @@ using Content.Shared.Sprite;
 using Content.Shared.Tiles;
 using System.Linq;
 using System.Numerics;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -133,7 +135,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
             }
 
             platform.PendingCountdownElapsed += frameTime;
-            TickPendingCountdownAudio(platformUid, platform);
+            TickPendingCountdownFeedback(platformUid, platform, platform.ActiveChargeUser);
 
             platform.PendingLockCheckAccumulator += frameTime;
             if (platform.PendingLockCheckAccumulator < BoardingTeleportConstants.ChargeLockCheckIntervalSeconds)
@@ -537,12 +539,8 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         _chargingPlatforms.Add(ent.Owner);
         Dirty(ent);
         UpdatePlatformAppearance(ent.Owner, ent.Comp);
-        var platformCoords = Transform(ent.Owner).Coordinates;
-        _audio.PlayPvs(ent.Comp.ActivationSound, platformCoords);
-        if (destination.IsValid(EntityManager))
-            _audio.PlayPvs(ent.Comp.ActivationSound, destination);
 
-        TickPendingCountdownAudio(ent.Owner, ent.Comp);
+        TickPendingCountdownFeedback(ent.Owner, ent.Comp, user);
 
         if (!returning && console != null)
             TrySpawnDetectionBlip(ent.Owner, ent.Comp, console);
@@ -559,7 +557,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         }
         else
         {
-            _popup.PopupEntity(Loc.GetString("boarding-teleport-platform-departure-delay", ("seconds", delay)), ent.Owner, user);
+            _popup.PopupEntity(Loc.GetString("boarding-teleport-platform-charge-started"), ent.Owner, user, PopupType.Small);
         }
 
         Robust.Shared.Timing.Timer.Spawn(TimeSpan.FromSeconds(delay), () =>
@@ -567,6 +565,9 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
             cancel.Token);
 
         ent.Comp.PendingCancel = cancel;
+
+        if (!returning && console != null)
+            _lock.BeginOutboundChargePause(console);
     }
 
     private bool TryValidatePendingLock(EntityUid platformUid, BoardingTeleportPlatformComponent platform, out BoardingTeleportStatus status)
@@ -691,14 +692,6 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
             return;
         }
 
-        if (!returning &&
-            TryComp<ProtectedGridComponent>(destination.EntityId, out var protectedGrid) &&
-            protectedGrid.PreventTeleportation)
-        {
-            _popup.PopupEntity(Loc.GetString("boarding-teleport-status-TargetGridProtected"), user, user);
-            return;
-        }
-
         if (returning)
         {
             RemCompDeferred<BoardingTeleportAnchorComponent>(user);
@@ -730,9 +723,6 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
 
         var earlyReturnSwelling = returning && savedEarlyReturn && ScheduleEarlyReturnCatastrophe(user, savedEarlyReturnRisk);
 
-        if (!returning && consoleUid is { } cUid && console != null)
-            _console.StartEngineCooldown(cUid, console);
-
         var targetGridNet = console?.TargetGrid is { } tg ? GetNetEntity(tg) : NetEntity.Invalid;
         var outcome = earlyReturnSwelling ? "early-return-swelling" : destabilized ? "destabilized" : "stable";
         _adminLogger.Add(LogType.Teleport, LogImpact.Medium,
@@ -744,6 +734,9 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
 
     private void ClearPendingChargeState(EntityUid platformUid, BoardingTeleportPlatformComponent platform)
     {
+        var wasOutboundCharge = platform.DeparturePending && !platform.PendingReturning;
+        var pauseConsoleUid = wasOutboundCharge ? platform.PendingConsoleUid : null;
+
         platform.DeparturePending = false;
         platform.ActiveChargeUser = null;
         platform.PendingConsoleUid = null;
@@ -762,6 +755,13 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         _chargingPlatforms.Remove(platformUid);
         Dirty(platformUid, platform);
         UpdatePlatformAppearance(platformUid, platform);
+
+        if (wasOutboundCharge &&
+            pauseConsoleUid is { } validPauseConsoleUid &&
+            TryComp<BoardingTeleportConsoleComponent>(validPauseConsoleUid, out var pauseConsole))
+        {
+            _lock.EndOutboundChargePause(pauseConsole);
+        }
     }
 
     private void CancelPendingTeleport(EntityUid platformUid, BoardingTeleportPlatformComponent? platform = null, bool notify = false)
@@ -795,11 +795,11 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
 
         var source = Transform(user).Coordinates;
         SpawnTeleportEffect(source, component);
-        _audio.PlayPvs(component.ArrivalSound, source);
+        PlayBoardingTeleportPvs(component.ArrivalSound, source);
 
         _transform.SetCoordinates(user, coordinates);
         SpawnTeleportEffect(coordinates, component);
-        _audio.PlayPvs(component.ArrivalSound, coordinates);
+        PlayBoardingTeleportPvs(component.ArrivalSound, coordinates);
     }
 
     private void SpawnLandingWarmupBurst(
@@ -906,7 +906,10 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
         };
     }
 
-    private void TickPendingCountdownAudio(EntityUid platformUid, BoardingTeleportPlatformComponent platform)
+    private void TickPendingCountdownFeedback(
+        EntityUid platformUid,
+        BoardingTeleportPlatformComponent platform,
+        EntityUid? user)
     {
         if (!platform.DeparturePending || platform.PendingCountdownTotalSeconds <= 0)
             return;
@@ -920,18 +923,53 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
 
         for (var t = platform.PendingCountdownLastTick + 1; t <= tick; t++)
         {
-            var remaining = platform.PendingCountdownTotalSeconds - t;
-            var sound = remaining <= platform.CountdownFinalThreshold
-                ? platform.CountdownFinalSound
-                : platform.CountdownSound;
+            var remaining = Math.Max(1, platform.PendingCountdownTotalSeconds - t);
 
-            _audio.PlayPvs(sound, Transform(platformUid).Coordinates);
+            if (user is { } chargeUser && Exists(chargeUser))
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("boarding-teleport-platform-countdown", ("seconds", remaining)),
+                    chargeUser,
+                    chargeUser,
+                    PopupType.Small);
+            }
 
-            if (platform.PendingLandingCoordinates is { } dest && dest.IsValid(EntityManager))
-                _audio.PlayPvs(sound, dest);
+            if (remaining <= platform.CountdownFinalThreshold)
+                PlayFinalCountdownSound(platformUid, platform);
         }
 
         platform.PendingCountdownLastTick = tick;
+    }
+
+    private void PlayFinalCountdownSound(EntityUid platformUid, BoardingTeleportPlatformComponent platform)
+    {
+        var audioParams = AudioParams.Default
+            .WithVolume(platform.CountdownFinalVolume)
+            .WithMaxDistance(platform.CountdownFinalMaxDistance);
+
+        var coords = Transform(platformUid).Coordinates;
+        PlayBoardingTeleportPvs(platform.CountdownFinalSound, coords, audioParams);
+
+        if (platform.PendingLandingCoordinates is { } dest && dest.IsValid(EntityManager))
+            PlayBoardingTeleportPvs(platform.CountdownFinalSound, dest, audioParams);
+    }
+
+    private void PlayBoardingTeleportPvs(SoundSpecifier sound, EntityCoordinates coordinates, AudioParams? audioParams = null)
+    {
+        if (!coordinates.IsValid(EntityManager))
+            return;
+
+        // space_alert_1 and other alert assets may be stereo; PVS positional audio requires mono.
+        var played = _audio.PlayGlobal(
+            sound,
+            Filter.Pvs(coordinates, entityMan: EntityManager),
+            recordReplay: false,
+            audioParams);
+
+        if (played == null)
+            return;
+
+        EnsureComp<BoardingTeleportAudioComponent>(played.Value.Entity);
     }
 
     private bool TryApplyDestabilization(

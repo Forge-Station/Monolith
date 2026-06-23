@@ -14,6 +14,21 @@
     layers:
     - state: tin
     - state: pearandcheese
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 31
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 11
+        - ReagentId: Vitamin
+          Quantity: 5
+        - ReagentId: Flavorol
+          Quantity: 11
+        - ReagentId: Lactozit
+          Quantity: 1.5
+  # Forge-change-end
   - type: SliceableFood
     slice: FoodTartPearCheeseSlice
   - type: Tag
@@ -38,6 +53,21 @@
     - state: pearandcheese-slice
     - state: alpha-slice-filling
       color: "#bf6000"
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2.5
+        - ReagentId: Vitamin
+          Quantity: 1
+        - ReagentId: Flavorol
+          Quantity: 2
+        - ReagentId: Lactozit
+          Quantity: 0.375
+  # Forge-change-end
   - type: Tag
     tags:
     - Fruit

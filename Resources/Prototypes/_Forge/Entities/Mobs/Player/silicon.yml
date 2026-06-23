@@ -131,17 +131,17 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      180: Critical
-      250: Dead
+      450: Critical
+      500: Dead
   - type: SlowOnDamage
     speedModifierThresholds:
-      140: 0.7
-      160: 0.5
+      375: 0.7
+      425: 0.5
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 375
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -150,7 +150,7 @@
             volume: 5
     - trigger:
         !type:DamageTrigger
-         damage: 350
+         damage: 525
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -208,13 +208,14 @@
     - !type:DepartmentTimeRequirement
       department: Civilian
       time: 90000 # 25 hours
+    prototype: ForerunnerBorg
   - type: GhostTakeoverAvailable
 
 # Forerunner AI core
 - type: entity
   id: PlayerStationAiForerunner
   parent: PlayerStationAiEmpty
-  suffix: Ghost Role, Forerunner
+  suffix: Ghost Role, Forerunner, T1 only
   components:
   - type: Speech
     speechSounds: SyndieBorg
@@ -239,6 +240,16 @@
   - type: Anchorable
 
 - type: entity
+  id: PlayerStationAiForerunnerWhitelist
+  parent: PlayerStationAiForerunner
+  suffix: Ghost Role, Forerunner, Whitelist, T2+
+  components:
+  - type: ContainerFill
+    containers:
+      station_ai_mind_slot:
+      - StationAiBrainForerunnerWhitelist
+
+- type: entity
   id: StationAiBrainForerunner
   parent: StationAiBrain
   categories: [ HideSpawnMenu, DoNotMap ]
@@ -252,7 +263,7 @@
     rules: ghost-role-information-silicon-rules
     raffle:
       settings: default
-    prototype: RemnantAICore
+    prototype: ForerunnerAICore
   - type: LanguageKnowledge
     speaks:
     - TauCetiBasic
@@ -280,6 +291,19 @@
   - type: ShuttleBoostingPilot
     angularMultiplier: 1.2
     accelerationMultiplier: 1.2
+
+- type: entity
+  id: StationAiBrainForerunnerWhitelist
+  parent: StationAiBrainForerunner
+  categories: [ HideSpawnMenu, DoNotMap ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-redacted-core
+    description: ghost-role-information-redacted-core-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    prototype: ForerunnerAICoreWhitelist
 
 - type: entity
   id: AiHeldForerunner
@@ -323,15 +347,48 @@
       borg_brain:
       - AiRemoteBrain
       borg_module:
-      - BorgModuleForerunnerWeapon
+      - BorgModuleForerunnerWeaponHeavy
+      - BorgModuleForerunnerRCD
       - BorgModuleJetpackADM
       - BorgModuleAdvancedTool
       - BorgModuleConstruction
       - BorgModuleCable
-      - BorgModuleForerunnerRCD
   - type: RandomMetadata
     nameSegments:
     - MonoRemnantCoreTitle
     - MonoRemnantAdjective
     - MonoRemnantNoun
     - MonoRemnantModifier
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Sprite
+    sprite: Mobs/Silicon/chassis.rsi
+    layers:
+    - state: synd_engi
+      map: ["enum.BorgVisualLayers.Body", "movement"]
+    - state: synd_engi_e
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: synd_engi_l
+      shader: unshaded
+      map: ["light","enum.BorgVisualLayers.LightStatus"]
+      visible: false
+  - type: BorgChassis
+    maxModules: 0
+    hasMindState: synd_engi_e
+    noMindState: synd_engi_e
+  - type: InteractionPopup
+    interactSuccessString: petting-success-syndicate-cyborg
+    interactFailureString: petting-failure-station-ai
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellAntiqueProto

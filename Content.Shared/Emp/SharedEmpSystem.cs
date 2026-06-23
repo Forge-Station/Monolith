@@ -51,12 +51,9 @@ public abstract partial class SharedEmpSystem : EntitySystem
         if (_net.IsServer)
         /// Forge-Change-Start
         {
-            var blast = Spawn(EmpPulseEffectPrototype, mapCoordinates);
-            if (EnsureComp<EmpBlastComponent>(blast, out var blastComp))
-            {
-                blastComp.VisualRange = range;
-                Dirty(blast, blastComp);
-            }
+            var blast = EntityManager.CreateEntityUninitialized(EmpPulseEffectPrototype, mapCoordinates, null);
+            AddComp(blast, new EmpBlastRangeComponent { Range = range });
+            EntityManager.InitializeAndStartEntity(blast);
         }
         /// Forge-Change-End
 
@@ -84,12 +81,9 @@ public abstract partial class SharedEmpSystem : EntitySystem
         if (_net.IsServer)
         /// Forge-Change-Start
         {
-            var blast = Spawn(EmpPulseEffectPrototype, coordinates);
-            if (EnsureComp<EmpBlastComponent>(blast, out var blastComp))
-            {
-                blastComp.VisualRange = range;
-                Dirty(blast, blastComp);
-            }
+            var blast = EntityManager.CreateEntityUninitialized(EmpPulseEffectPrototype, coordinates, null);
+            AddComp(blast, new EmpBlastRangeComponent { Range = range });
+            EntityManager.InitializeAndStartEntity(blast);
         }
         /// Forge-Change-End
 

@@ -1,0 +1,83 @@
+﻿<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      SetSize="530 550"
+                      MinSize="530 550"
+                      Title="{Loc 'ui-bs-receiver-title'}">
+
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="4">
+        <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="0 4 0 4">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BorderThickness="7" BorderColor="#252525" BackgroundColor="#3d474d"/>
+            </PanelContainer.PanelOverride>
+            <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="False" Margin="5">
+                        <Label Text="{Loc 'ui-bs-receiver-settings-label'}" HorizontalAlignment="Center" Margin="0 0 30 0" HorizontalExpand="True" />
+                        <Button Name="EnableButton" Text="{Loc 'ui-bs-receiver-enable-button'}" ToggleMode="True" HorizontalExpand="True" HorizontalAlignment="Right" />
+                    </BoxContainer>
+
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="False" Margin="0 0 0 4">
+                        <BoxContainer Orientation="Vertical" HorizontalExpand="False" Margin="30 0 30 0">
+                            <SpriteView Name="SpriteViewControl" MaxHeight="160" MaxWidth="160" Scale="5 5"></SpriteView>
+                        </BoxContainer>
+
+                        <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="0 0 4 0">
+                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                <Label Text="{Loc ui-bs-receiver-received-power-label}" HorizontalAlignment="Left"/>
+                                <Label Name="ReceivedPowerLabel" HorizontalExpand="True" HorizontalAlignment="Right"/>
+                            </BoxContainer>
+
+                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                <Label Text="{Loc 'ui-bs-receiver-draw-rate-label'}" HorizontalAlignment="Left"/>
+                                <Label Name="NetworkStatsLabel" HorizontalExpand="True" HorizontalAlignment="Right"/>
+                            </BoxContainer>
+
+                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                    <Label Text="{Loc ui-bs-receiver-requested-power-label}" HorizontalExpand="True" HorizontalAlignment="Left"/>
+                                    <Label Name="RequestedPowerLabel" HorizontalExpand="True" HorizontalAlignment="Right"/>
+                                </BoxContainer>
+
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 2 0 0">
+                                    <Button Name="RequestedPowerDecreaseButton" HorizontalAlignment="Left"/>
+                                    <Button Name="RequestedPowerIncreaseButton" Margin="4 0 0 0" HorizontalAlignment="Left"/>
+                                </BoxContainer>
+                            </BoxContainer>
+
+                            <BoxContainer Orientation="Vertical">
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                    <Label Text="{Loc ui-bs-receiver-money-time-label}" HorizontalAlignment="Left"/>
+                                    <Label Name="MoneyTimeLabel" HorizontalExpand="True" HorizontalAlignment="Right"/>
+                                </BoxContainer>
+                            </BoxContainer>
+                            <BoxContainer Orientation="Vertical">
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                    <Label Text="{Loc ui-bs-receiver-money-lost-label}" HorizontalAlignment="Left"/>
+                                    <Label Name="MoneyLostLabel" HorizontalExpand="True" HorizontalAlignment="Right"/>
+                                </BoxContainer>
+                            </BoxContainer>
+
+                            <BoxContainer Orientation="Vertical">
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                    <Label Text="{Loc ui-bs-receiver-money-label}" HorizontalAlignment="Left"/>
+                                    <Label Name="MoneyLabel" HorizontalExpand="True" HorizontalAlignment="Right"/>
+                                </BoxContainer>
+                                <Button Name="WithdrawButton" Text="{Loc ui-bs-receiver-withdraw-button}" HorizontalAlignment="Left"/>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+
+                    <Label Text="{Loc ui-bs-receiver-transmitters-label}" Margin="5 10 5 0" />
+                    <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False" Margin="5 0 5 0">
+                        <BoxContainer Name="BoxInScroll" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                        </BoxContainer>
+                    </ScrollContainer>
+                </BoxContainer>
+            </PanelContainer>
+        </PanelContainer>
+    </BoxContainer>
+</controls:FancyWindow>

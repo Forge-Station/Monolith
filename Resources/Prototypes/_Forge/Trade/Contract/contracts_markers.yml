@@ -1,0 +1,90 @@
+- type: entity
+  id: MarkerForgeTradeContractBase
+  abstract: true
+  parent: MarkerBase
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+
+- type: entity
+  id: MarkerForgeTradeContractSpawnBase
+  abstract: true
+  parent: MarkerForgeTradeContractBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+
+- type: entity
+  id: MarkerForgeTradeContractDestinationBase
+  abstract: true
+  parent: MarkerForgeTradeContractBase
+  components:
+  - type: Sprite
+    layers:
+    - state: blue
+
+- type: entity
+  id: MarkerForgeTradeContractDangerBase
+  abstract: true
+  parent: MarkerForgeTradeContractBase
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+
+- type: entity
+  id: MarkerForgeTradeContractCargoSource
+  parent: MarkerForgeTradeContractSpawnBase
+  name: "контракт: груз"
+  description: "Точка появления груза для Trade-контрактов."
+  suffix: Forge, Trade, Contracts, Mapper
+  components:
+  - type: NcContractSpawnPoint
+    id: ForgeTradeContractCargoSource
+    groups:
+    - ForgeTradeContractCargoSource
+    - ForgeTradeContractCargo
+    - ForgeTradeContractObjectiveSpawn
+
+- type: entity
+  id: MarkerForgeTradeContractDropoff
+  parent: MarkerForgeTradeContractDestinationBase
+  name: "контракт: приемка"
+  description: "Точка доставки груза для proof-маршрута."
+  suffix: Forge, Trade, Contracts, Mapper
+  components:
+  - type: NcContractSpawnPoint
+    id: ForgeTradeContractDropoff
+    groups:
+    - ForgeTradeContractDropoff
+
+- type: entity
+  id: MarkerForgeTradeContractHuntSpawn
+  parent: MarkerForgeTradeContractDangerBase
+  name: "контракт: охота"
+  description: "Точка появления целей охотничьего Trade-контракта."
+  suffix: Forge, Trade, Contracts, Mapper
+  components:
+  - type: NcContractSpawnPoint
+    id: ForgeTradeContractHuntSpawn
+    groups:
+    - ForgeTradeContractHuntSpawn
+    - ForgeTradeContractHunt
+    - ForgeTradeContractObjectiveSpawn
+
+- type: entity
+  id: MarkerForgeTradeContractGhostSpawn
+  parent: MarkerForgeTradeContractDangerBase
+  name: "контракт: ghost-role"
+  description: "Точка появления цели ghost-role Trade-контракта."
+  suffix: Forge, Trade, Contracts, Mapper
+  components:
+  - type: NcContractSpawnPoint
+    id: ForgeTradeContractGhostSpawn
+    groups:
+    - ForgeTradeContractGhostSpawn
+    - ForgeTradeContractGhostRole
+    - ForgeTradeContractObjectiveSpawn

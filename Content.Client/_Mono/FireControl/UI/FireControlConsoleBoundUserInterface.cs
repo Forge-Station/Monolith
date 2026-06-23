@@ -73,9 +73,9 @@ public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface
         SendMessage(new FireControlConsoleSetPresetNameMessage(presetIndex, name));
     }
 
-    private void OnPresetSaveRequested(int presetIndex, string name, List<string> weaponNames)
+    private void OnPresetSaveRequested(int presetIndex, string name, List<GunneryWeaponPresetWeaponState> weapons)
     {
-        SendMessage(new FireControlConsoleSavePresetMessage(presetIndex, name, weaponNames));
+        SendMessage(new FireControlConsoleSavePresetMessage(presetIndex, name, weapons));
     }
     // Forge-Change-End
 

@@ -25,6 +25,7 @@
   setPreference: true
   access:
   - RenegateOfficer
+  - RenegateSecApartment
   accessGroups:
   - CommandRenegateAccess
   special:
@@ -40,3 +41,6 @@
   equipment:
     pocket1: WeaponRevolverMagnus
     pocket2: EnergyCutlass
+  storage:
+    back:
+    - RenegateSecApartmentTablet

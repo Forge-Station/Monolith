@@ -23,10 +23,10 @@
   id: MdMedicOuterClothingBeltWebbingTrauma
   price: 0
   equipment:
-    outerClothing: ClothingBeltWebbingsNormalTrauma
+    belt: ClothingBeltWebbingsNormalTrauma
 
 - type: loadout
   id: MdMedicOuterClothingBeltTrauma
   price: 0
   equipment:
-    outerClothing: ClothingBeltTrauma
+    belt: ClothingBeltTrauma

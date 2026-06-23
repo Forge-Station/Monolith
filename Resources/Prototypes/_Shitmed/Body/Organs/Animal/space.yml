@@ -72,15 +72,11 @@
     onAdd:
     - type: Stealth
       enabledOnDeath: false
-      minVisibility: 0.2
-      maxVisibility: 0.9
+      minVisibility: 0.3
+      maxVisibility: 1
     - type: StealthOnMove
-      passiveVisibilityRate: -0.25
-      movementVisibilityRate: 0.28
-    - type: PointLight # Mono
-      radius: 1.2
-      energy: 5
-      color: "#4faffb"
+      passiveVisibilityRate: -0.28
+      movementVisibilityRate: 0.33
   - type: Sprite
     sprite: _Shitmed/Mobs/Species/Space/Cobra/organs.rsi
     state: heart-on

@@ -172,6 +172,7 @@
     flavors:
       - bun
       - bacon
+      - cheesy # Forge-change
   - type: Sprite
     state: bacon
   - type: SolutionContainerManager
@@ -185,6 +186,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 10
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -270,6 +273,8 @@
           Quantity: 9
         - ReagentId: Flavorol
           Quantity: 10
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Sprite
     state: bigbite
   - type: Tag
@@ -361,6 +366,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -384,6 +391,7 @@
     flavors:
       - bun
       - chicken
+      - cheesy # Forge-change
   - type: Sprite
     state: chicken
   - type: SolutionContainerManager
@@ -401,6 +409,8 @@
           Quantity: 3
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -516,6 +526,8 @@
           Quantity: 3
         - ReagentId: Vitamin
           Quantity: 6
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -530,6 +542,7 @@
     flavors:
       - bun
       - duck
+      - cheesy # Forge-change
   - type: Sprite
     state: chicken
   - type: SolutionContainerManager
@@ -545,6 +558,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -585,8 +600,22 @@
     flavors:
       - bun
       - fishy
+      - cheesy # Forge-change
   - type: Sprite
     state: fish
+  # Forge-change-start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 7
+        - ReagentId: Vitamin
+          Quantity: 3
+        - ReagentId: Lactozit
+          Quantity: 1   
+  # Forge-change-end
   - type: Tag
     tags:
     - Meat
@@ -693,6 +722,7 @@
     flavors:
       - muffin
       - egg
+      - cheesy # Forge-change
   - type: Sprite
     state: mcguffin
   - type: SolutionContainerManager
@@ -708,6 +738,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
   - type: Tag
     tags:
     - Meat
@@ -872,6 +904,7 @@
     flavors:
       - bun
       - soy
+      - cheesy # Forge-change
   - type: Sprite
     state: soylent
   - type: SolutionContainerManager
@@ -880,13 +913,15 @@
         maxVol: 20
         reagents:
         - ReagentId: Nutriment
-          Quantity: 4
+          Quantity: 3         # Forge-change 4>3
         - ReagentId: Protein
           Quantity: 6
         - ReagentId: Vitamin
           Quantity: 4
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
 # Tastes like bun, redditors.
 
 - type: entity
@@ -942,6 +977,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 20
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 2         # Forge-change
   - type: Sprite
     state: superbite
   - type: Tag

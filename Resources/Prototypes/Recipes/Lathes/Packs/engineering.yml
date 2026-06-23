@@ -39,6 +39,8 @@
   - MailingUnitElectronics
   - SignalTimerElectronics
   - APCElectronics
+  - LargeAPCLightElectronics
+  - LargeAPCMediumElectronics
   - SMESMachineCircuitboard
   - SubstationMachineCircuitboard
   - WallmountSubstationElectronics

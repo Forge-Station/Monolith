@@ -25,6 +25,7 @@
   - type: Tag
     tags:
     - Recyclable
+    - GoblinPreciousTrash # Forge-Change
 
 - type: entity
   parent: BaseStructure

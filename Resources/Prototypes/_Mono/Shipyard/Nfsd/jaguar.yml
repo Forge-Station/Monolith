@@ -4,7 +4,7 @@
   id: Jaguar
   parent: BaseVesselAntag
   name: TSF-SKR Jaguar
-  description: A support fighter to assist other ships in combat, armed with TARYNX EMP cannon for disabling ships and 4 L-1 phalanxes to shred anything that gets too close.
+  description: Истребитель поддержки, предназначенный для содействия другим кораблям в бою. Вооружён ЭМИ-пушкой ADBX-31 «TARNYX» для выведения кораблей из строя и четырьмя установками L-1 «Фаланга», разрывающими всё, что подойдёт слишком близко. # Forge-Change
   price: 58500
   category: Small
   group: Security
@@ -28,7 +28,7 @@
       stationProto: StandardFrontierSecurityVessel
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'Jaguar TSF{1}'
+        mapNameTemplate: 'Ягуар TSF{1}' # Forge-Change
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'

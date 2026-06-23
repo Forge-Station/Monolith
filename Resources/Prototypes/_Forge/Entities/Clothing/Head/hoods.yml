@@ -1,0 +1,199 @@
+#region Empire
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadEmpireWBHood
+  name: empire guardian windbreaker hood
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/empwbhood.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/empwbhood.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadEmpireInqWBHood
+  name: empire inquisitor windbreaker hood
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/empinqwbhood.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/empinqwbhood.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+#region Other
+- type: entity
+  parent: ClothingHeadBase
+  id: PlumberDarkHoodV
+  name: капюшон от тёмного плаща
+  description: Глубокий и мягкий, словно тень, обрамляет лицо, создавая ощущение уютной тайны. Он идеально дополняет плащ, придавая владельцу вид таинственного странника.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/darkhood.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/darkhood.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+# start modern
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodModernCloak
+  name: Капюшон "Модерн"
+  description: Прочный капюшон из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhood.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhood.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodModernCloakBlue
+  name: Капюшон "Модерн" [Синий]
+  description: Прочный капюшон из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodBlue.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodBlue.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodModernCloakPink
+  name: Капюшон "Модерн" [Розовый]
+  description: Прочный капюшон из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodPink.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodPink.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodModernCloakBRed
+  name: Капюшон "Модерн" [Чёрно-красный]
+  description: Прочный капюшон из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodBRed.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodBRed.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodModernCloakBYellow
+  name: Капюшон "Модерн" [Чёрно-жёлтый]
+  description: Прочный капюшон из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodBYellow.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodBYellow.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodModernCloakBPurple
+  name: Капюшон "Модерн" [Чёрно-фиолетовый]
+  description: Прочный капюшон из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodBPurple.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodBPurple.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodModernCloakGrey
+  name: Капюшон "Модерн" [Серый]
+  description: Прочный капюшон из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodGrey.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodGrey.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodModernCloakRed
+  name: Капюшон "Модерн" [Красный]
+  description: Прочный капюшон из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodRed.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodRed.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodModernCloakDesert
+  name: Капюшон "Модерн" [Красный]
+  description: Прочный капюшон из современных материалов.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodDesert.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ModernHood/modernhoodDesert.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+# end modern

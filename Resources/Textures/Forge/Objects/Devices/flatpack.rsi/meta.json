@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Gun case flatpack sprites for Forge ship weapon fabricator",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "gun_Case_1x1"
+    },
+    {
+      "name": "gun_Case_1x2"
+    },
+    {
+      "name": "gun_Case_2x2"
+    },
+    {
+      "name": "gun_Case_2x3"
+    },
+    {
+      "name": "gun_Case_3x3"
+    }
+  ]
+}

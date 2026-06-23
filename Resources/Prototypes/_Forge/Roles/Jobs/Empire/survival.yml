@@ -1,0 +1,19 @@
+- type: loadout
+  id: EmpireBoxSurvivalMonoOxygenExtended
+  name: extended-oxygen survival box
+  hideEffects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherNF
+  storage:
+    back:
+    - EmpireBoxSurvivalMonoOxygenExtended
+
+- type: loadout
+  id: EmpireBoxSurvivalMonoNitrogenExtended
+  name: extended-nitrogen survival box
+  hideEffects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherNF
+  storage:
+    back:
+    - EmpireBoxSurvivalMonoNitrogenExtended

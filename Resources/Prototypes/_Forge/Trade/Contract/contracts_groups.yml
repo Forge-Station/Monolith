@@ -1,0 +1,165 @@
+- type: ncHuntGroup
+  id: ForgeHuntGroupCarps
+  name: "контрактные карпы"
+  description: "Помеченные карпы, за которых торговый автомат принимает трофейную метку."
+  icon: ForgeContractCarp
+  prototypes:
+  - ForgeContractCarp
+  - ForgeContractCarpGilded
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupArgocyteEasy
+  name: "малые аргоциты"
+  description: "Небольшие аргоциты, расплодившиеся на свежем обломке."
+  icon: MobArgocyteSlurvaExpeditions
+  prototypes:
+  - MobArgocyteSlurvaExpeditions
+  - MobArgocyteSkitterExpeditions
+  - MobArgocyteSwiperExpeditions
+  - MobArgocyteBarrierExpeditions
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupArgocyteMedium
+  name: "стая аргоцитов"
+  description: "Подросшие аргоциты, способные быстро разобрать плохо подготовленную группу."
+  icon: MobArgocyteMolderExpeditions
+  prototypes:
+  - MobArgocyteMolderExpeditions
+  - MobArgocytePouncerExpeditions
+  - MobArgocyteGliderExpeditions
+  - MobArgocyteHarvesterExpeditions
+  - MobArgocyteCrawlerExpeditions
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupArgocyteHard
+  name: "крупные аргоциты"
+  description: "Крупные особи, удерживающие обломок как гнездо."
+  icon: MobArgocyteEnforcerExpeditions
+  prototypes:
+  - MobArgocyteEnforcerExpeditions
+  - MobArgocyteHarvesterExpeditions
+  - MobArgocyteCrawlerExpeditions
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupDinosaurEasy
+  name: "мелкие динозавры"
+  description: "Небольшая агрессивная стая на дрейфующем астероидном куске."
+  icon: MobDinosaurCompyExpeditions
+  prototypes:
+  - MobDinosaurCompyExpeditions
+  - MobDinosaurDiloExpeditions
+  - MobDinosaurRaptorExpeditions
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupDinosaurMedium
+  name: "средние динозавры"
+  description: "Крупнее обычной фауны, но без тяжёлых альфа-особей."
+  icon: MobDinosaurKentroExpeditions
+  prototypes:
+  - MobDinosaurKentroExpeditions
+  - MobDinosaurParaExpeditions
+  - MobDinosaurTrikeExpeditions
+  - MobDinosaurAnkiExpeditions
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupFleshEasy
+  name: "малые плотяные наросты"
+  description: "Подвижные заражённые сгустки плоти на заброшенном обломке."
+  icon: MobFleshJaredExpeditions
+  prototypes:
+  - MobFleshJaredExpeditions
+  - MobFleshJaredOldExpeditions
+  - MobFleshGolemExpeditions
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupFleshHard
+  name: "опасная плоть"
+  description: "Тяжёлые плотяные формы, пережившие предыдущую экспедицию."
+  icon: MobFleshClampExpeditions
+  prototypes:
+  - MobFleshClampExpeditions
+  - MobFleshClampOldExpeditions
+  - MobFleshLoverExpeditions
+  - MobFleshGolemAltExpeditions
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupRogueScrap
+  name: "ломовые силиконы"
+  description: "Сломанные автономные боты, собранные из обломков оборудования."
+  icon: MobRogueSiliconScrapAsteroid
+  prototypes:
+  - MobRogueSiliconScrapAsteroid
+  - MobRogueSiliconScrapThreadsAsteroid
+  - MobRogueSiliconScrapThrustersAsteroid
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupRogueAdvanced
+  name: "боевые силиконы"
+  description: "Продвинутые автономные единицы с боевыми модулями."
+  icon: MobRogueSiliconServo
+  prototypes:
+  - MobRogueSiliconServo
+  - MobRogueSiliconHerder
+  - MobRogueSiliconHunter
+  - MobRogueSiliconCatcher
+
+- type: ncHuntGroup
+  id: ForgeDroneHuntGroupCores
+  name: "AI-ядро дрон-шаттла"
+  description: "Любое контрактное ядро вражеского дрон-шаттла, пригодное как доказательство перехвата."
+  icon: NpcStationAiRammer
+  prototypes:
+  - NpcStationAiRammer
+  - NpcStationAiApproacher
+  - NpcStationAiApproacherDodger
+  - NpcStationAiRammerSmart
+  - NpcStationAiRammerSmartDodging
+  - NpcStationAiRammerStraight
+  - NpcStationAiAttacker
+  - NpcStationAiShooter
+  - NpcStationAiAttackerSmart
+  - NpcStationAiAttackerStaticSmart
+  - NpcStationAiAttackerBroadside
+  - NpcDroneAiMedusa
+  - NpcDroneAiAssembly
+  - NpcDroneAiMPulsar
+  - NpcDroneAiLance
+  - NpcDroneAiQuake
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupSyndicatePatrol
+  name: "синдикатский патруль"
+  description: "Вооружённые агенты Синдиката, удерживающие дрейфующий объект."
+  icon: MobSyndicateNavalOperatorA
+  prototypes:
+  - MobSyndicateNavalDeckhandA
+  - MobSyndicateNavalDeckhandB
+  - MobSyndicateNavalEngineerA
+  - MobSyndicateNavalEngineerB
+  - MobSyndicateNavalMedicA
+  - MobSyndicateNavalMedicB
+  - MobSyndicateNavalOperatorA
+  - MobSyndicateNavalOperatorB
+  - MobSyndicateNavalSaboteurA
+  - MobSyndicateNavalSaboteurB
+
+- type: ncHuntGroup
+  id: ForgeHuntGroupSyndicateAssault
+  name: "синдикатская штурмовая группа"
+  description: "Тяжёлый отряд Синдиката с офицерами, штурмовиками и специалистами."
+  icon: MobSyndicateNavalCaptainA
+  prototypes:
+  - MobSyndicateNavalOperatorA
+  - MobSyndicateNavalOperatorB
+  - MobSyndicateNavalOperatorC
+  - MobSyndicateNavalOperatorD
+  - MobSyndicateNavalSecondOfficerA
+  - MobSyndicateNavalSecondOfficerB
+  - MobSyndicateNavalCaptainA
+  - MobSyndicateNavalCaptainB
+  - MobSyndicateNavalGrenadierA
+  - MobSyndicateNavalGrenadierB
+  - MobSyndicateNavalSaboteurA
+  - MobSyndicateNavalSaboteurB
+  - MobSyndicateNavalChemwarriorA
+  - MobSyndicateNavalChemwarriorB

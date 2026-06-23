@@ -1,0 +1,13 @@
+- type: stack
+  id: IridiumMatrix
+  name: iridium matrix
+  icon: { sprite: /Textures/_Mono/Objects/Materials/fissiles.rsi, state: uranium }
+  spawn: SheetIridiumMatrix1
+  maxCount: 50
+
+- type: stack
+  id: CryoBinder
+  name: cryo binder
+  icon: { sprite: _Mono/Objects/Materials/pyrogel.rsi, state: icon }
+  spawn: SheetCryoBinder1
+  maxCount: 50

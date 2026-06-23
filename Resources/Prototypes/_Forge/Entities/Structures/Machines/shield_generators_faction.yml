@@ -703,6 +703,179 @@
     energy: 1.5
     color: "#00C9A7"
 
+# --- Imperial (SIV) — TSFMC doctrine clone; golden field tint ---
+
+- type: entity
+  id: ShieldGeneratorForgeEmpireHeavy
+  parent: ShieldGeneratorFSG420
+  name: Imperial IGS-440 "Bastion" shield generator
+  suffix: tier 3
+  description: >-
+    An Imperial heavy screen with markedly faster regeneration, a much higher overload ceiling and a gentler
+    damage-power curve than civilian FSG-420—at the cost of heavy baseline and peak reactor draw.
+  components:
+  - type: Machine
+    board: MachineShieldForgeEmpireHeavyCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#E8C848"
+    healPerSecond: 2178
+    damageLimit: 118800
+    damageExp: 1.06
+    baseDraw: 58310
+    maxDraw: 174960
+    unpoweredBonus: 5
+    damageOverloadTimePunishment: 63
+    collisionResistanceMultiplier: 0.4
+  - type: ApcPowerReceiver
+    powerLoad: 58320
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
+    snapCardinals: false
+    layers:
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#E8C848"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#E8C848"
+
+- type: entity
+  id: ShieldGeneratorForgeEmpirePrismatic
+  parent: ShieldGeneratorFSG470P
+  name: Imperial IGS-470P "Aureole" shield generator
+  suffix: tier 3
+  description: >-
+    An Imperial prismatic array with a much deeper buffer, faster in-combat regeneration and a sharply shorter overload lockout;
+    sustained fire makes it far thirstier than civilian Lattice, with a steeper damage-power curve.
+  components:
+  - type: Machine
+    board: MachineShieldForgeEmpirePrismaticCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#FFE566"
+    healPerSecond: 1584
+    damageLimit: 257400
+    damageExp: 1.05
+    damageOverloadTimePunishment: 112
+    baseDraw: 71280
+    maxDraw: 213840
+    unpoweredBonus: 4
+    collisionResistanceMultiplier: 0.4
+  - type: ApcPowerReceiver
+    powerLoad: 71280
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
+    snapCardinals: false
+    layers:
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FFE566"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FFE566"
+
+- type: entity
+  id: ShieldGeneratorForgeEmpireCollision
+  parent: ShieldGeneratorFSG600C
+  name: Imperial IGS-600C "Wallbreaker" shield generator
+  suffix: tier 3
+  description: >-
+    An Imperial siege field that damps hull impacts substantially better than a stock Bastion;
+    shield face regeneration is much slower and overload lockout runs far longer if the field is abused.
+  components:
+  - type: Machine
+    board: MachineShieldForgeEmpireCollisionCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#E8A832"
+    collisionResistanceMultiplier: 0.4
+    healPerSecond: 1782
+    damageOverloadTimePunishment: 124
+    maxDraw: 200232
+    damageLimit: 118000
+    baseDraw: 66744
+    damageExp: 1.00
+  - type: ApcPowerReceiver
+    powerLoad: 66744
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
+    snapCardinals: false
+    layers:
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#E8A832"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#E8A832"
+
+- type: entity
+  id: ShieldGeneratorForgeEmpireSignum
+  parent: ShieldGeneratorFSG420
+  name: Imperial IGS-455 "Signum" shield generator
+  suffix: tier 3
+  description: >-
+    An Imperial reserve doctrine screen: enormous overload wallet and steady face recovery,
+    paid for with thirsty baseline draw and a vicious damage-power curve under sustained fire.
+  components:
+  - type: Machine
+    board: MachineShieldForgeEmpireSignumCircuitboard
+  - type: ShipShieldEmitter
+    shieldColor: "#D4B840"
+    healPerSecond: 1386
+    damageLimit: 198000
+    damageExp: 1.08
+    baseDraw: 58320
+    maxDraw: 174960
+    unpoweredBonus: 5
+    damageOverloadTimePunishment: 81
+    collisionResistanceMultiplier: 0.4
+  - type: ApcPowerReceiver
+    powerLoad: 58320
+  - type: Sprite
+    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    offset: 0.5,-0.5
+    snapCardinals: false
+    layers:
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: light
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#D4B840"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#D4B840"
+
 - type: entity
   id: ShieldGeneratorForgeUsspKerch
   parent: ShieldGeneratorFSG420

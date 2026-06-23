@@ -424,6 +424,11 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
     private void EmbedAttach(EntityUid uid, EntityUid target, EntityUid? user, EmbeddableProjectileComponent component)
     {
+        // Forge-Change-start: prediction can embed twice (Drake hardsuit grappling hook).
+        if (component.EmbeddedIntoUid != null)
+            return;
+        // Forge-Change-end
+
         TryComp<PhysicsComponent>(uid, out var physics);
         _physics.SetLinearVelocity(uid, Vector2.Zero, body: physics);
         _physics.SetBodyType(uid, BodyType.Static, body: physics);
@@ -446,11 +451,13 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         EnsureComp<EmbeddedContainerComponent>(target, out var embeddedContainer);
 
-        //Assert that this entity not embed
-        DebugTools.AssertEqual(embeddedContainer.EmbeddedObjects.Contains(uid), false);
+        // Forge-Change-start
+        if (embeddedContainer.EmbeddedObjects.Contains(uid))
+            return;
+        // Forge-Change-end
 
         embeddedContainer.EmbeddedObjects.Add(uid);
-        Dirty(target, embeddedContainer);  //Forge-Chage
+        Dirty(target, embeddedContainer);
     }
 
     public void EmbedDetach(EntityUid uid, EmbeddableProjectileComponent? component, EntityUid? user = null)

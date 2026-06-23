@@ -2,7 +2,7 @@
   id: RogueEsword
   name: research-technology-rogue-energy-weapon
   entityIcon: EnergySword
-  discipline: RogueWeaponry
+  discipline: Pdv
   tier: 3
   cost: 25000
   recipeUnlocks:
@@ -17,7 +17,7 @@
   id: HFSwordTech
   name: research-technology-rogue-hf-sword
   entityIcon: WeaponVT7
-  discipline: RogueWeaponry
+  discipline: Pdv
   tier: 3
   cost: 45000
   recipeUnlocks:
@@ -30,7 +30,7 @@
   id: RogueBasicGuns
   name: research-technology-rogue-basic-guns
   entityIcon: WeaponSubMachineGunC20r
-  discipline: RogueWeaponry
+  discipline: Pdv
   tier: 1
   cost: 15000
   recipeUnlocks:
@@ -47,7 +47,7 @@
   id: RogueAdvancedGuns
   name: research-technology-rogue-advanced-guns
   entityIcon: WeaponRifleM90
-  discipline: RogueWeaponry
+  discipline: Pdv
   tier: 2
   cost: 55000
   recipeUnlocks:
@@ -64,7 +64,7 @@
   id: RogueHeavyWeapons
   name: research-technology-rogue-heavy-weapons
   entityIcon: WeaponSniperHristov
-  discipline: RogueWeaponry
+  discipline: Pdv
   tier: 3
   cost: 55000
   recipeUnlocks:
@@ -83,7 +83,7 @@
   id: RogueSubsonic
   name: research-technology-rogue-subsonic
   entityIcon: WeaponSubMachineGunMla73
-  discipline: RogueWeaponry
+  discipline: Pdv
   tier: 2
   cost: 35000
   recipeUnlocks:

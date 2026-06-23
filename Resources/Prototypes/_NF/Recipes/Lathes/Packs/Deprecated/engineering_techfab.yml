@@ -51,7 +51,6 @@
     - LightReplacer
     - WelderIndustrial
     - WelderIndustrialAdvanced
-    - HolofanProjector
     - FireExtinguisher
     - GasDepositLocator
     - RPED # Mono
@@ -134,6 +133,7 @@
     - MiningDrillDiamond
     - RCD # Mono start
     - RCDAmmo
+    - RPD # Forge-Change
     - ShipRepairDevice
     - ShipRepairDeviceAmmo #Mono end
     - SignallerAdvanced

@@ -83,6 +83,11 @@
   # Forge-change: add icon & note
   icon: Drake
   note: drake-industries-company-note
+  # Forge-Change: company spawn encryption key
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyDrakeIndustries
 
 - type: company
   id: SteelHammerManufacturing
@@ -201,6 +206,7 @@
   color: "#52326A"
   image: /Textures/_Mono/Companies/ullman_industries.png
   # Forge-change: add icon & special's
+  whitelisted: true
   icon: UllmanIndustries
   special:
   - !type:GiveItemSpecial

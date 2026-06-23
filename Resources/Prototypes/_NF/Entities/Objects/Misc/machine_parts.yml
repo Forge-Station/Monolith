@@ -94,7 +94,7 @@
     - type: Stack
       stackType: SuperMatterBin
 
-# Rating 4
+# Rating 6
 
 - type: entity
   id: QuadraticCapacitorStockPart
@@ -107,7 +107,7 @@
       state: quadratic_capacitor
     - type: MachinePart
       part: Capacitor
-      rating: 6 # Mono: 4->6
+      rating: 6 # Mono: 4->6 Forge-Change 6->4
     - type: Stack
       stackType: BluespaceCapacitor
 

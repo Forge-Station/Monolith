@@ -8,3 +8,18 @@
     sprite: Forge/Clothing/Neck/Scarfs/badges/engynfsd.rsi
   - type: Clothing
     sprite: Forge/Clothing/Neck/Scarfs/badges/engynfsd.rsi
+
+# region Company
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckLawyerTL
+  name: lawyer badge
+  suffix: TechnicLogistic
+  description: A badge to show that the owner is a 'legitimate' lawyer who passed the NT bar exam required to practice law.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/Misc/lawyerbadge_techniclogistic.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Neck/Misc/lawyerbadge_techniclogistic.rsi
+  - type: TypingIndicatorClothing
+    proto: lawyer

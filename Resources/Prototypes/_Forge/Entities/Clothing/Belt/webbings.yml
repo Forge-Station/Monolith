@@ -1,3 +1,4 @@
+# region Renegate
 - type: entity
   parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]
   id: ClothingBeltWebbingsNormalRenegate
@@ -37,6 +38,7 @@
   - type: ClothingSpeedModifier
     sprintModifier: 0.95
 
+# region Company
 - type: entity
   parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]
   id: ClothingBeltWebbingsNormalNexus
@@ -89,3 +91,32 @@
     sprite: Forge/Clothing/Belt/tti_webbing.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.25
+
+- type: entity
+  parent: NFClothingBeltStorageBase
+  id: ClothingBeltTL
+  name: РПС TechnicLogistic
+  suffix: TechnicLogistic
+  description: Unloading of self-defense forces fighters TechnicLogistic.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Belt/belt_techniclogistic.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Belt/belt_techniclogistic.rsi
+
+#region Other
+- type: entity
+  parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]
+  id: ClothingBeltContractorWebbing
+  name: разгрузка DCN™
+  description: Ременно-плечевая система тактических ремней, которую носят настоящая элита тёмного интернета.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Belt/contractor_webbing.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Belt/contractor_webbing.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+  - type: Storage
+    grid:
+    - 0,0,10,1

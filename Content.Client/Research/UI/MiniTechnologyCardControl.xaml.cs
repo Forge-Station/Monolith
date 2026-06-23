@@ -14,10 +14,12 @@ public sealed partial class MiniTechnologyCardControl : Control
 {
     /// The technology that this control represents
     public readonly TechnologyPrototype Technology;
+    public Action<TechnologyPrototype>? OnTechnologyPressed;
 
     public MiniTechnologyCardControl(TechnologyPrototype technology, IPrototypeManager prototypeManager, SpriteSystem spriteSys, FormattedMessage description)
     {
         RobustXamlLoader.Load(this);
+        Technology = technology;
 
         var discipline = prototypeManager.Index(technology.Discipline);
         Background.ModulateSelfOverride = discipline.Color;
@@ -53,6 +55,6 @@ public sealed partial class MiniTechnologyCardControl : Control
         var tooltip = new Tooltip();
         tooltip.SetMessage(description);
         Main.TooltipSupplier = _ => tooltip;
-        Technology = technology;
+        Main.OnPressed += _ => OnTechnologyPressed?.Invoke(Technology);
     }
 }

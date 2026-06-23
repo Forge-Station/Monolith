@@ -27,11 +27,13 @@
   weight: 170
   displayWeight: 60 # Forge
   canBeAntag: false
+  access:
+  - NtSecApartment
   accessGroups:
   - AllAccessSR # Forge-Change
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ] # Mono - remove TSFMC implant
+    implants: [ MindShieldImplant, NanotrasenTrackingImplant ] # Forge-change
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
@@ -51,6 +53,8 @@
     - Flash
     - RubberStampSr
     - DoorRemoteCommand
+    # Forge-Change
+    - NTSecApartmentTablet
 #    - EncryptionKeyCentCom # Forge-Change-Remove
     - EncryptionKeyStationMasterSR #Mono start
     - EncryptionKeyDiplomacy

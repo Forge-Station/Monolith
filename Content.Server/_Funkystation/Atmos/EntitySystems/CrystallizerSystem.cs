@@ -1,5 +1,5 @@
 using Content.Shared._Funkystation.Atmos.Components;
-using Content.Server._Funkystation.Atmos.Components;
+using Content.Shared._Funkystation.Atmos.Components;
 using Content.Server.Power.Components;
 using Content.Shared.Atmos.Piping.Unary.Components;
 using Robust.Server.GameObjects;

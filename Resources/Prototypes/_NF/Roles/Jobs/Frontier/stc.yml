@@ -26,7 +26,7 @@
   - StationTrafficController
   special:
   - !type:AddImplantSpecial # Forge
-    implants: [ MindShieldImplant ] # Forge
+    implants: [ MindShieldImplant, NanotrasenTrackingImplant ] # Forge-change
   - !type:GiveItemOnHolidaySpecial
     holiday: FrontierBirthday
     prototype: FrontierBirthdayGift

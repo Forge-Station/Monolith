@@ -29,6 +29,12 @@ public sealed class ForgeVars
     public static readonly CVarDef<float> BarksVolume =
         CVarDef.Create("voice.barks_volume", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    /// <summary>
+    /// Client volume slider for boarding teleport countdown and arrival sounds.
+    /// </summary>
+    public static readonly CVarDef<float> BoardingTeleportVolume =
+        CVarDef.Create("forge.boarding_teleport_volume", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<string> DiscordApiUrl =
         CVarDef.Create("jerry.discord_api_url", "", CVar.CONFIDENTIAL | CVar.SERVERONLY);
 
@@ -76,10 +82,22 @@ public sealed class ForgeVars
         CVarDef.Create("tts.volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
+    /// Default volume setting of radio TTS sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSRadioVolume =
+        CVarDef.Create("tts.radio_volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
     /// Whether the client wants local TTS playback enabled.
     /// </summary>
     public static readonly CVarDef<bool> LocalTTSEnabled =
         CVarDef.Create("tts.local_enabled", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
+
+    /// <summary>
+    /// Whether the client wants local TTS playback on **Radio event** enabled.
+    /// </summary>
+    public static readonly CVarDef<bool> LocalRadioTTSEnabled =
+        CVarDef.Create("tts.local_radio_enabled", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 
     /// <summary>
     /// Count of in-memory cached tts voice lines.

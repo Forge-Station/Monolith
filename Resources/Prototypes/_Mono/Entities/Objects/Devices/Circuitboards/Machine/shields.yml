@@ -1,6 +1,6 @@
 - type: entity
   id: MachineShieldMS100Circuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldCircuitboardT1
   name: MS-100 shield generator board
   description: A machine board for a shield generator.
   components:
@@ -20,7 +20,7 @@
 
 - type: entity
   id: MachineShieldMS250Circuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldCircuitboardT2
   name: MS-250 shield generator board
   description: A machine board for a shield generator.
   components:
@@ -43,7 +43,7 @@
 
 - type: entity
   id: MachineShieldMS500Circuitboard
-  parent: BaseMachineCircuitboard
+  parent: ForgeShieldCircuitboardT4
   name: MS-500 shield generator board
   description: A machine board for a shield generator.
   components:

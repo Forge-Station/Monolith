@@ -1,0 +1,298 @@
+# Kinetic:     Entry → RAC-30 → AK570 → Dravon → Bofors → Longbow / Cyrexa / Charon
+# Laser:       Entry → Type-35 → Prometheus → Cerberus
+# Missile:     Midline → Vanyk → Serpent / Light Munitions Bay; Midline → Tovek → Trident
+# EMP:         Midline → Tarnyx
+# Mining:      Entry + Prometheus → Apollo
+#
+# Entry (L85, Phalanx, M25) and midline (RAC-30, Vespera, M220) are bundled research nodes.
+# Naval weapon fabricator unlocks with the midline bundle (Forge-Change).
+
+# T4 kinetic capitals: Longbow and Charon no longer require advanced bluespace drive research.
+# --- Entry bundle: L85 + Phalanx + M25 ---
+
+- type: technology
+  id: ForgeShipWeaponResearchEntry
+  name: forge-research-technology-shipweapon-entry
+  entityIcon: WeaponTurretL85Autocannon
+  discipline: ShipArmory
+  tier: 3
+  cost: 25000
+  recipeUnlocks:
+  - WeaponTurretL85AutocannonCircuitboard
+  - WeaponLaserTurretL1PhalanxCircuitboard
+  - WeaponTurretM25Circuitboard
+  technologyPrerequisites:
+  - BasicShuttleArmament
+  - ShuttleAdvancedComponents
+  position: -11, 4
+
+# --- Midline bundle: RAC-30 + Vespera + M220 + weapon fabricator ---
+
+- type: technology
+  id: ForgeShipWeaponResearchMidline
+  name: forge-research-technology-shipweapon-midline
+  entityIcon: WeaponTurretRAC30
+  discipline: ShipArmory
+  tier: 3
+  cost: 20000
+  recipeUnlocks:
+  - WeaponTurretRAC30Circuitboard
+  - WeaponTurretVesperaCircuitboard
+  - WeaponTurretM220Circuitboard
+  - ShipWeaponFabricatorCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchEntry
+  position: -11, 5
+
+# --- Column -8: kinetic ---
+
+- type: technology
+  id: ForgeShipWeaponResearchAK570
+  name: forge-research-technology-shipweapon-ak570
+  entityIcon: WeaponTurretAK570
+  discipline: ShipArmory
+  tier: 3
+  cost: 13000
+  recipeUnlocks:
+  - WeaponTurretAK570Circuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchMidline
+  position: -9, 6
+
+- type: technology
+  id: ForgeShipWeaponResearchDravon
+  name: forge-research-technology-shipweapon-dravon
+  entityIcon: WeaponTurretDravon
+  discipline: ShipArmory
+  tier: 3
+  cost: 13000
+  recipeUnlocks:
+  - WeaponTurretDravonCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchAK570
+  position: -7, 6
+
+- type: technology
+  id: ForgeShipWeaponResearchBofors
+  name: forge-research-technology-shipweapon-bofors
+  entityIcon: WeaponTurretBofors
+  discipline: ShipArmory
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretBoforsCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchDravon
+  - ForgeShipWeaponResearchAK570
+  position: -8, 7
+
+- type: technology
+  id: ForgeShipWeaponResearchLongbow
+  name: forge-research-technology-shipweapon-longbow
+  entityIcon: WeaponTurretLongbow
+  discipline: ShipArmory
+  tier: 3
+  cost: 47500
+  recipeUnlocks:
+  - WeaponTurretLongbowCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchDravon
+  position: -8, 8
+
+- type: technology
+  id: ForgeShipWeaponResearchCyrexa
+  name: forge-research-technology-shipweapon-cyrexa
+  entityIcon: WeaponTurretCyrexa
+  discipline: ShipArmory
+  tier: 3
+  cost: 47500
+  recipeUnlocks:
+  - WeaponTurretCyrexaCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchBofors
+  - ShuttleCtlaAdvancedDriveResearch
+  position: -9, 8
+
+- type: technology
+  id: ForgeShipWeaponResearchCharon
+  name: forge-research-technology-shipweapon-charon
+  entityIcon: WeaponTurretCharonReload
+  discipline: ShipArmory
+  tier: 3
+  cost: 47500
+  recipeUnlocks:
+  - WeaponTurretCharonReloadCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchBofors
+  position: -7, 8
+
+# --- Column -14: laser ---
+
+- type: technology
+  id: ForgeShipWeaponResearchType35
+  name: forge-research-technology-shipweapon-type35
+  entityIcon: WeaponTurretType35
+  discipline: ShipArmory
+  tier: 3
+  cost: 13000
+  recipeUnlocks:
+  - WeaponTurretType35Circuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchEntry
+  position: -13, 5
+
+- type: technology
+  id: ForgeShipWeaponResearchPrometheus
+  name: forge-research-technology-shipweapon-prometheus
+  entityIcon: WeaponLaserTurretPrometheus
+  discipline: ShipArmory
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponLaserTurretPrometheusCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchType35
+  position: -13, 6
+
+- type: technology
+  id: ForgeShipWeaponResearchCerberus
+  name: forge-research-technology-shipweapon-cerberus
+  entityIcon: WeaponTurretCerberus
+  discipline: ShipArmory
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretCerberusCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchPrometheus
+  position: -13, 7
+
+# --- Column -12: EMP ---
+
+- type: technology
+  id: ForgeShipWeaponResearchTarnyx
+  name: forge-research-technology-shipweapon-tarnyx
+  entityIcon: WeaponTurretTarnyxReload
+  discipline: ShipArmory
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretTarnyxReloadCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchMidline
+  position: -12, 6
+
+# --- Column -10: missile (Vanyk branch) ---
+
+- type: technology
+  id: ForgeShipWeaponResearchVanyk
+  name: forge-research-technology-shipweapon-vanyk
+  entityIcon: WeaponTurretVanyk
+  discipline: ShipArmory
+  tier: 3
+  cost: 12000
+  recipeUnlocks:
+  - WeaponTurretVanykCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchMidline
+  position: -10, 6
+
+- type: technology
+  id: ForgeShipWeaponResearchSerpent
+  name: forge-research-technology-shipweapon-serpent
+  entityIcon: WeaponTurretSerpentMissile
+  discipline: ShipArmory
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretSerpentMissileCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchVanyk
+  position: -10, 7
+
+- type: technology
+  id: ForgeShipWeaponResearchLightMunitionsBay
+  name: forge-research-technology-shipweapon-light-munitions-bay
+  entityIcon: WeaponTurretLightMunitionsBay
+  discipline: ShipArmory
+  tier: 3
+  cost: 16000
+  recipeUnlocks:
+  - WeaponTurretLightMunitionsBayCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchVanyk
+  position: -10, 8
+
+# --- Column -16: missile (Tovek → Trident) ---
+
+- type: technology
+  id: ForgeShipWeaponResearchTovek
+  name: forge-research-technology-shipweapon-tovek
+  entityIcon: WeaponTurretTovek
+  discipline: ShipArmory
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretTovekCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchMidline
+  position: -11, 6
+
+- type: technology
+  id: ForgeShipWeaponResearchTrident
+  name: forge-research-technology-shipweapon-trident
+  entityIcon: WeaponTurretASM220
+  discipline: ShipArmory
+  tier: 3
+  cost: 16500
+  recipeUnlocks:
+  - WeaponTurretASM220Circuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchTovek
+  - ForgeShipWeaponResearchSerpent
+  position: -11, 8
+
+# --- Column -18: mining ---
+
+- type: technology
+  id: ForgeShipWeaponResearchApollo
+  name: forge-research-technology-shipweapon-apollo
+  entityIcon: WeaponLaserTurretApollo
+  discipline: ShipArmory
+  tier: 3
+  cost: 47500
+  recipeUnlocks:
+  - WeaponLaserTurretApolloCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchEntry
+  - ForgeShipWeaponResearchPrometheus
+  - ShuttleCtlaAdvancedDriveResearch
+  position: -14, 7
+
+- type: technology
+  id: ShuttleGunneryHighUpgradeResearch
+  name: research-technology-shuttle-gunnery-high-upgrade
+  entityIcon: GunneryServerHigh
+  discipline: ShipArmory
+  tier: 3
+  cost: 65000
+  recipeUnlocks:
+  - GCSHighUpgradeCircuitboard
+  technologyPrerequisites:
+  - ShuttleAdvancedComponents
+  - SuperParts
+  position: -6, 4
+
+- type: technology
+  id: ShuttleGunneryUltraUpgradeResearch
+  name: research-technology-shuttle-gunnery-ultra-upgrade
+  entityIcon: GunneryServerUltra
+  discipline: ShipArmory
+  tier: 3
+  cost: 85000
+  recipeUnlocks:
+  - GCSUltraUpgradeCircuitboard
+  technologyPrerequisites:
+  - ShuttleGunneryHighUpgradeResearch
+  - ShuttleCtlaAdvancedDriveResearch
+  position: -6, 6

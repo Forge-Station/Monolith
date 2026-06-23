@@ -1,0 +1,31 @@
+- type: entity
+  parent: AccessConfigurator
+  id: AccessConfiguratorEmpire
+  name: empire access configurator
+  suffix: Empire
+  description: A modified access configurator.
+  components:
+  - type: Sprite
+    sprite: _NF/Objects/Tools/antag_access_configurator.rsi
+  - type: Clothing
+    sprite: _NF/Objects/Tools/antag_access_configurator.rsi
+  - type: AccessOverrider
+    accessLevels:
+    - Empire
+    - EmpireOfficer
+    - EmpireSmallInq
+    - EmpireInqusitor
+    - EmpireCommander
+    - EmpireDiplomacy
+    privilegedIdSlot:
+      name: id-card-console-privileged-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+    denialSound:
+      path: /Audio/Machines/custom_deny.ogg
+    doAfter: 0.5

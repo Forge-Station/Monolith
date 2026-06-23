@@ -284,12 +284,22 @@ public abstract partial class SharedGunSystem
 
     private void OnBallisticTakeAmmo(EntityUid uid, BallisticAmmoProviderComponent component, TakeAmmoEvent args)
     {
+        // Forge-Change-start
+        PruneInvalidBallisticEntities(uid, component);
+        // Forge-Change-end
+
         for (var i = 0; i < args.Shots; i++)
         {
             EntityUid entity;
 
             if (component.Entities.Count > 0)
             {
+                // Forge-Change-start
+                PruneInvalidBallisticEntities(uid, component);
+                if (component.Entities.Count == 0)
+                    continue;
+                // Forge-Change-end
+
                 entity = component.Entities[^1];
 
                 args.Ammo.Add((entity, EnsureShootable(entity)));
@@ -329,6 +339,10 @@ public abstract partial class SharedGunSystem
     // Mono
     private void OnBallisticCheckProto(Entity<BallisticAmmoProviderComponent> ent, ref CheckShootPrototypeEvent args)
     {
+        // Forge-Change-start
+        PruneInvalidBallisticEntities(ent, ent.Comp);
+        // Forge-Change-end
+
         if (ent.Comp.Entities.Count > 0)
         {
             var ammo = ent.Comp.Entities[^1];
@@ -340,6 +354,25 @@ public abstract partial class SharedGunSystem
             args.ShootPrototype = proto;
         }
     }
+
+    // Forge-Change-start: remove deleted entities from ballistic tubes (Drake seismic launcher).
+    private void PruneInvalidBallisticEntities(EntityUid uid, BallisticAmmoProviderComponent component)
+    {
+        var changed = false;
+
+        for (var i = component.Entities.Count - 1; i >= 0; i--)
+        {
+            if (Exists(component.Entities[i]))
+                continue;
+
+            component.Entities.RemoveAt(i);
+            changed = true;
+        }
+
+        if (changed)
+            DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
+    }
+    // Forge-Change-end
 
     private void OnBallisticAmmoCount(EntityUid uid, BallisticAmmoProviderComponent component, ref GetAmmoCountEvent args)
     {

@@ -19,6 +19,7 @@
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   assignedCompany: TSF # Forge-Change
+  assignedNationality: TransSolarFederation
   access:
   - Armory
   - Sergeant

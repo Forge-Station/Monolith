@@ -247,6 +247,8 @@
           Quantity: 6
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
 
 - type: entity
   name: kimchi salad
@@ -1199,6 +1201,7 @@
   - type: FlavorProfile
     flavors:
       - onion
+      - cheesy # Forge-change
   - type: Sprite
     layers:
     - state: bowl
@@ -1216,6 +1219,8 @@
             Quantity: 5
           - ReagentId: Flavorol
             Quantity: 5
+          - ReagentId: Lactozit # Forge-change
+            Quantity: 1         # Forge-change
 
 - type: entity
   name: bisque
@@ -1387,10 +1392,12 @@
         - ReagentId: Butter
           Quantity: 5
         - ReagentId: Nutriment
-          Quantity: 10
+          Quantity: 9         # Forge-change 10>9
         - ReagentId: Vitamin
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 10
-
+        - ReagentId: Lactozit # Forge-change
+          Quantity: 1         # Forge-change
+ 
 

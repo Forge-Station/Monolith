@@ -64,6 +64,12 @@
         - !type:OrganType
           type: Demon
           shouldHave: false
+        # Forge-change-start
+        - !type:AddictionCondition
+          addictionId: Omnizine
+          min: 0.0
+          max: 0.5
+        # Forge-change-end
       - !type:HealthChange
         damage:
           types:
@@ -90,3 +96,20 @@
         - !type:OrganType
           type: Demon
           shouldHave: false
+      # Forge-change-start
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Demon
+          shouldHave: false
+        - !type:AddictionCondition
+          addictionId: Omnizine
+          min: 0.5
+          max: 1.0
+        damage:
+          types:
+            Poison: -0.1
+            Heat: -0.2
+            Cold: -0.2
+            Bloodloss: -0.3
+      # Forge-change-end

@@ -1,19 +1,23 @@
-# Empire department temporarily disabled with its jobs.
-# - type: department
-#   id: Empire
-#   name: department-Empire
-#   description: department-Empire-description
-#   color: "#ab7a52"
-#   weight: 50
-#   roles:
-#   - Praefect
-#   - Arbiter
-#   - Cardinal
-#   - Inquisitor
-#   - Consul
-#   - Praetorian
-#   - Auxilia
-#   - Neophyte
+- type: department
+  id: Empire
+  name: department-Empire
+  description: department-Empire-description
+  color: "#ab7a52"
+  weight: 50
+  roles:
+  - Praefect # Imperial Guardian Commander
+  - Inquisitor # Just senior inquisitor guy
+  - Consul # Imperial Diplomatic Corps.
+  - Tessarian # Senior Officer
+  - Arbiter # Senior Officer: Sheriff
+  - Cardinal # Senior Officer: idk what he do
+  - Praetorian # Sub Officer
+  - EmpireSmallInquisitor # Sub Officer: Inquisitor squad
+  # - EmpireOperator # Sub Officer: Drone Operator
+  - Auxilia # Soldier
+  - EmpireApotek # Soldier: Medical
+  - EmpireTechnican # Soldier: Technican
+  - Neophyte # Cadet/Recruit
 
 - type: department
   id: Renegates

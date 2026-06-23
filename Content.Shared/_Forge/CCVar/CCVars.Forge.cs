@@ -49,4 +49,10 @@ public sealed partial class ForgeCVars
     /// </summary>
     public static readonly CVarDef<float> PoiCaptureSalesTaxRate =
         CVarDef.Create("forge.poi_capture.sales_tax_rate", 0.1f, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Global enable/disable of addiction system
+    /// </summary>
+    public static readonly CVarDef<bool> AddictionSystemEnabled =
+        CVarDef.Create("forge.addiction.enabled", true, CVar.SERVER);
 }

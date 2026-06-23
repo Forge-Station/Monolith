@@ -19,7 +19,8 @@ public static class JobRequirements
         IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,
-        bool bypassPlaytimeForGlobalWhitelist = false)
+        bool bypassPlaytimeForGlobalWhitelist = false,
+        bool enforcePlaytimeRequirements = true)
     {
         var sys = entManager.System<SharedRoleSystem>();
         var requirements = sys.GetJobRequirement(job);
@@ -32,6 +33,9 @@ public static class JobRequirements
         bool success = true;
         foreach (var requirement in requirements)
         {
+            if (!enforcePlaytimeRequirements && requirement.IsPlaytimeRequirement)
+                continue;
+
             if (bypassPlaytimeForGlobalWhitelist && requirement.BypassedByGlobalWhitelist)
                 continue;
 
@@ -50,6 +54,9 @@ public static class JobRequirements
             success = true;
             foreach (var requirement in requirementSet)
             {
+                if (!enforcePlaytimeRequirements && requirement.IsPlaytimeRequirement)
+                    continue;
+
                 if (bypassPlaytimeForGlobalWhitelist && requirement.BypassedByGlobalWhitelist)
                     continue;
 
@@ -88,6 +95,12 @@ public abstract partial class JobRequirement
     /// When true, globally whitelisted players skip this requirement (intended for playtime-only gates).
     /// </summary>
     public virtual bool BypassedByGlobalWhitelist => false;
+
+    /// <summary>
+    /// Playtime trackers that can be disabled via <see cref="CCVars.GameRoleTimers"/>.
+    /// Species, age, sex, and similar profile gates are always enforced.
+    /// </summary>
+    public virtual bool IsPlaytimeRequirement => false;
 
     public abstract bool Check(
         IEntityManager entManager,

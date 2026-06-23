@@ -4,7 +4,10 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ShowJobIcons
+  # Forge-Change
+  - type: ShowSquadIcons
   - type: ShowMindShieldIcons
+  - type: ShowGuardIcons # ForgeChange
   - type: ShowCriminalRecordIcons
 
 - type: entity

@@ -1,11 +1,19 @@
 ent-MagazineAsmgtUniversalEmpty = ящик патронов АСПТ
-    .desc = Универсальный ящик для патронов, совместимый с АСПТ и способный принимать патроны калибра .20, .25, .30 и .35.
+    .desc = Универсальный ящик боеприпасов, совместимый с ASMGT и способный принимать патроны 5.56x45мм, 6.35x40мм, 7.62x39мм и 9x19мм.
     .suffix = пустой
 ent-MagazineAsmgtUniversalPistol = ящик патронов АСПТ
     .suffix = .35 пистолетные
     .desc = { ent-MagazineAsmgtUniversalEmpty.desc }
 
-ent-MagazineAsmgtUniversal556x45mm = ASMGT-compatible ammo box (7.62x39mm)
-ent-MagazineAsmgtUniversal762x39mm = ASMGT-compatible ammo box (9x19mm)
-ent-MagazineAsmgtUniversal9x19mm = ASMGT-compatible ammo box (9x19mm)
-ent-MagazineAsmgtUniversal635x40mm = ASMGT-compatible ammo box (5.56x45mm)
+ent-MagazineAsmgtUniversal556x45mm = ящик патронов АСПТ (5.56x45мм)
+    .desc = { ent-MagazineAsmgtUniversalEmpty.desc }
+    .suffix = Loaded
+ent-MagazineAsmgtUniversal762x39mm = ящик патронов АСПТ (7.62x39мм)
+    .desc = { ent-MagazineAsmgtUniversalEmpty.desc }
+    .suffix = Loaded
+ent-MagazineAsmgtUniversal9x19mm = ящик патронов АСПТ (9x19мм)
+    .desc = { ent-MagazineAsmgtUniversalEmpty.desc }
+    .suffix = Loaded
+ent-MagazineAsmgtUniversal635x40mm = ящик патронов АСПТ (6.35x40мм)
+    .desc = { ent-MagazineAsmgtUniversalEmpty.desc }
+    .suffix = Loaded

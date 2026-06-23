@@ -5,6 +5,8 @@
   parent: [BaseMob, MobDamageable, MobCombat, MobAtmosExposed, MobFlammable]
   abstract: true
   components:
+  - type: Addiction # Forge-change
+    enabled: false
   - type: ContentEye
   - type: CameraRecoil
   - type: Reactive

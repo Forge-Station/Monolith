@@ -28,11 +28,12 @@
   setPreference: true
   access:
   - RenegateOfficer
+  - RenegateSecApartment
   accessGroups:
   - CommandRenegateAccess
-  # special:
-  # - !type:AddImplantSpecial
-  #   implants: # Неизвестно
+  special:
+  - !type:AddImplantSpecial
+    implants: [ RenegadeTrackingImplant ]
   # - !type:AddComponentSpecial
   #   components:
   #     - type: CommandStaff
@@ -43,3 +44,6 @@
   equipment:
     pocket1: WeaponRevolverMagnus
     pocket2: EnergyCutlass
+  storage:
+    back:
+    - RenegateSecApartmentTablet

@@ -2,7 +2,7 @@
   id: TsfForensics
   name: research-technology-tsfmc-forensics
   entityIcon: ForensicScanner
-  discipline: TsfmcGear
+  discipline: Tsfmc
   tier: 1
   cost: 5000
   recipeUnlocks:
@@ -19,7 +19,7 @@
   id: TsfmcMopp
   name: research-technology-tsfmc-mopp-equipment
   entityIcon: ClothingUniformTsfmcMopp
-  discipline: TsfmcEquipment
+  discipline: Tsfmc
   tier: 2
   cost: 15000
   recipeUnlocks:
@@ -33,7 +33,7 @@
   id: TsfEshield
   name: research-technology-tsfmc-eshield
   entityIcon: EnergyShield
-  discipline: TsfmcWeaponry
+  discipline: Tsfmc
   tier: 2
   cost: 30000
   recipeUnlocks:
@@ -46,7 +46,7 @@
   id: TsfTierOneVouchers
   name: research-technology-tsfmc-tier-one-vouchers
   entityIcon: ShipVoucherTsfT0
-  discipline: TsfmcShipyard
+  discipline: Tsfmc
   tier: 1
   cost: 40000
   recipeUnlocks:
@@ -60,7 +60,7 @@
   id: TsfTierTwoVouchers
   name: research-technology-tsfmc-tier-two-vouchers
   entityIcon: ShipVoucherAndromeda
-  discipline: TsfmcShipyard
+  discipline: Tsfmc
   tier: 2
   cost: 60000
   recipeUnlocks:
@@ -74,7 +74,7 @@
   id: TsfTierThreeVouchers
   name: research-technology-tsfmc-tier-three-vouchers
   entityIcon: ShipVoucherFlyssa
-  discipline: TsfmcShipyard
+  discipline: Tsfmc
   tier: 3
   cost: 80000
   recipeUnlocks:
@@ -89,7 +89,7 @@
   id: TsfMeds
   name: research-technology-tsfmc-advanced-meds
   entityIcon: MedkitCombatFilled
-  discipline: TsfmcGear
+  discipline: Tsfmc
   tier: 2
   cost: 20000
   recipeUnlocks:
@@ -103,7 +103,7 @@
   id: TsfNanofoam
   name: research-technology-tsfmc-nanofoam
   entityIcon: NanolaminateFoamGrenade
-  discipline: TsfmcGear
+  discipline: Tsfmc
   tier: 2
   cost: 15000
   recipeUnlocks:
@@ -116,7 +116,7 @@
   id: TsfPortableRecharger
   name: research-technology-tsfmc-portable-recharger
   entityIcon: PortableRecharger
-  discipline: TsfmcGear
+  discipline: Tsfmc
   tier: 1
   cost: 15000
   recipeUnlocks:
@@ -129,7 +129,7 @@
   id: TSFBasicBorgModule
   name: research-technology-tsfmc-basic-module
   entityIcon: BorgModuleTSFStandardWeapon
-  discipline: TsfmcGear
+  discipline: Tsfmc
   tier: 1
   cost: 10000
   recipeUnlocks:
@@ -142,7 +142,7 @@
   id: TSFAdvancedBorgModule
   name: research-technology-tsfmc-advanced-module
   entityIcon: BorgModuleTSFAdvancedWeapon
-  discipline: TsfmcGear
+  discipline: Tsfmc
   tier: 3
   cost: 65000
   recipeUnlocks:

@@ -18,6 +18,7 @@
         layer:
         - MachineLayer
   - type: Lathe
+    productValueModifier: 0.1 # Forge-change
   - type: MaterialStorage
     whitelist: # Frontier
       tags: # Frontier
@@ -247,7 +248,7 @@
     - PowerCells
     - ScienceWeapons
     - Mining
-    - AtmosTools
+    - ForgeEngineeringTools # Forge-Change: handheld monitors
     - ResearchedExplosives # Mono
     # - EngineeringWeapons # Frontier
     - Chemistry
@@ -343,14 +344,16 @@
     - NFMedicalBoards # Frontier + Shitmed Change
     - NFServiceBoards # Frontier
     - MonoAdvancedShuttleComponents # Mono
-    - ForgeAdvancedShuttleComponents # Forge
-    - ForgeBoardingTeleportRecipes # Forge
+    - ForgeShipWeaponsDynamic # Forge-Change
+    - ForgeAdvancedShuttleComponents # Forge-Change
+    - ForgeBoardingTeleportRecipes # Forge-Change
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
     - S2MechBoards
     - EngineeringBoardsGoob #Goob Factorio port
     - NanotrasenCircuitBoard # Forge-change
+    - DrakeIndustriesCircuitBoards # Forge-change
     - ReactorCircuitboards # FH edit
     - BsEnergyCircuitsPack # Forge-Change
   - type: MaterialStorage
@@ -395,6 +398,7 @@
     - S2MechBoards
     - EngineeringBoardsGoob #Goob Factorio port
     - NanotrasenCircuitBoard # Forge-change
+    - DrakeIndustriesCircuitBoards # Forge-change
     - ReactorCircuitboards # FH edit
     - ForgeHyperConvectionFSGTier4Boards # Forge — FSG T4 boards (disk-unlocked), hyper imprinter only
 
@@ -702,6 +706,7 @@
     dynamicPacks: # Frontier
     - NanotrasenClothing # Forge: AllTechPrintableTest only indexes dynamicPacks
     - NFPouches # Frontier
+    - ClothingEmpirePack # Forge-change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ClothingCentComm

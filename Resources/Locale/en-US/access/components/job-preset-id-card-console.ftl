@@ -8,6 +8,7 @@ job-preset-id-card-console-window-hint-insert-target = Insert a target ID card.
 job-preset-id-card-console-window-hint-unauthorized = The privileged ID card is not authorized for this console.
 job-preset-id-card-console-window-hint-authorized = The privileged ID card must cover the access set of the current and target rank.
 job-preset-id-card-console-window-missing-access = Missing access
+job-preset-id-card-console-window-missing-demographics = Target ID has no owner demographics (age, sex, species)
 job-preset-id-card-console-window-invalid-preset = Invalid preset
 job-preset-id-card-console-window-create-injector = Create injector
 job-preset-id-card-console-window-create-injector-action = Create

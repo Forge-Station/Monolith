@@ -1,0 +1,67 @@
+- type: entity
+  id: ForgeExpeditionTradeMachine
+  abstract: true
+  name: торговый автомат экспедиций
+  description: Терминал обмена экспедиционной добычи, снаряжения и контрактов.
+  suffix: Forge, Trade
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: UserInterface
+    interfaces:
+      enum.NcStoreUiKey.Key:
+        type: NcStoreStructuredBoundUi
+  - type: ActivatableUI
+    key: enum.NcStoreUiKey.Key
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        density: 300
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Forge/Structures/Machines/terminal_bounty.rsi
+    snapCardinals: true
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "normal-unshaded"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+  - type: PointLight
+    radius: 2.5
+    energy: 1.0
+    color: "#6FA8DC"
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+
+- type: entity
+  id: ForgeExpeditionTradeTerminal
+  parent: ForgeExpeditionTradeMachine
+  name: торговый автомат экспедиций
+  description: Покупает и продает экспедиционное снаряжение, принимает бартер и выдает экспедиционные контракты.
+  suffix: Forge, Trade, Expedition
+  components:
+  - type: NcStore
+    profile: ForgeExpeditionTradeProfile
+
+- type: ncStoreProfile
+  id: ForgeExpeditionTradeProfile
+  buy:
+  - ForgeExpeditionBuy
+  barter:
+  - ForgeExpeditionBarterPreset
+  contracts: ForgeExpeditionContractsPreset
+  theme: ForgeTradeUiThemeExpedition

@@ -1,4 +1,5 @@
 using Content.Shared.Actions;
+using Content.Shared._Forge.Movement.Components; // Forge-Change
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Examine;
@@ -43,6 +44,11 @@ public abstract partial class SharedGasTankSystem : EntitySystem
 
     private void OnGasTankToggleInternals(Entity<GasTankComponent> ent, ref GasTankToggleInternalsMessage args)
     {
+        // Forge-Change-start
+        if (HasComp<JetpackOnlyFuelComponent>(ent))
+            return;
+        // Forge-Change-end
+
         ToggleInternals(ent, args.Actor);
     }
 
@@ -61,11 +67,21 @@ public abstract partial class SharedGasTankSystem : EntitySystem
 
     private void BeforeUiOpen(Entity<GasTankComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
+        // Forge-Change-start
+        if (HasComp<JetpackOnlyFuelComponent>(ent))
+            return;
+        // Forge-Change-end
+
         UpdateUserInterface(ent);
     }
 
     private void OnGetActions(EntityUid uid, GasTankComponent component, GetItemActionsEvent args)
     {
+        // Forge-Change-start
+        if (HasComp<JetpackOnlyFuelComponent>(uid))
+            return;
+        // Forge-Change-end
+
         args.AddAction(ref component.ToggleActionEntity, component.ToggleAction);
         Dirty(uid, component);
     }
@@ -88,12 +104,25 @@ public abstract partial class SharedGasTankSystem : EntitySystem
         if (args.Handled)
             return;
 
+        // Forge-Change-start
+        if (HasComp<JetpackOnlyFuelComponent>(gasTank))
+        {
+            args.Handled = true;
+            return;
+        }
+        // Forge-Change-end
+
         ToggleInternals(gasTank, user: args.Performer);
         args.Handled = true;
     }
 
     private void OnGetAlternativeVerb(EntityUid uid, GasTankComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
+        // Forge-Change-start
+        if (HasComp<JetpackOnlyFuelComponent>(uid))
+            return;
+        // Forge-Change-end
+
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
             return;
 
@@ -112,6 +141,11 @@ public abstract partial class SharedGasTankSystem : EntitySystem
 
     public bool CanConnectToInternals(Entity<GasTankComponent> ent)
     {
+        // Forge-Change-start
+        if (HasComp<JetpackOnlyFuelComponent>(ent))
+            return false;
+        // Forge-Change-end
+
         TryGetInternalsComp(ent, out _, out var internalsComp, ent.Comp.User);
         return internalsComp != null && internalsComp.BreathTools.Count != 0 && !ent.Comp.IsValveOpen;
     }

@@ -3,13 +3,15 @@
   name: loadout-group-weapon
   minLimit: 1
   loadouts:
+  - WeaponEnergyRifleUnion
+  - WeaponEnergyShotgunKiller
   - FactionEnergyGunLoadout
   - FactionC20RLoadout
-  - FactionWt550Loadout
-  - FactionAk220Loadout
+  # - FactionWt550Loadout
+  # - FactionAk220Loadout
   - FactionBanditLoadout
   fallbacks:
-  - FactionEnergyGunLoadout
+  - WeaponEnergyRifleUnion
 
 - type: loadoutGroup
   id: EmpireMag
@@ -18,8 +20,22 @@
   loadouts:
   - FactionRechargerLoadout #Energy
   - Faction9x19SMGAmmoLoadout #C20r
-  - Faction46x30mmTopAmmo #WT550
-  - Faction762x39mmAmmoLoadout #AKM
+  # - Faction46x30mmTopAmmo #WT550
+  # - Faction762x39mmAmmoLoadout #AKM
   - Faction8x65mmAmmoLoadout #Bandit
   fallbacks:
   - FactionRechargerLoadout #Energy
+
+- type: loadout
+  id: WeaponEnergyRifleUnion
+  price: 0
+  storage:
+    back:
+    - WeaponEnergyRifleUnion
+
+- type: loadout
+  id: WeaponEnergyShotgunKiller
+  price: 0
+  storage:
+    back:
+    - WeaponEnergyShotgunKiller

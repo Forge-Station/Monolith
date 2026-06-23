@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: ESS Падальщик
   description: Легкий одноместный шаттл Империи, вооруженный ЭМИ-пушками и тремя лазерными орудиями.
-  price: 45200
+  price: 55000 # PR:206, fix Shipyard test
   category: Small
   group: Empire
   access: Empire

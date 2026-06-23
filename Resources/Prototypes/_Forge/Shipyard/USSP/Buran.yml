@@ -1,0 +1,39 @@
+- type: vessel
+  id: Buran
+  parent: BaseVesselAntag
+  name: VEF Buran
+  description: USSP capital-sized frigate with tremendous broadside firepower and thick armor. Glory to commissariat.
+  price: 320000
+  limit: 5 # Forge-change: ehehehe
+  category: Large
+  group: Ussp
+  access: Mercenary
+  shuttlePath: /Maps/_Forge/Shuttles/USSP/BuranAME.yml
+  guidebookPage: ShipyardNFROperation
+  class:
+  - Fighter
+  - Destroyer
+  engine:
+  - AME
+
+- type: gameMap
+  id: Buran
+  mapName: 'Buran'
+  mapPath: /Maps/_Forge/Shuttles/USSP/BuranAME.yml
+  minPlayers: 0
+  stations:
+    Buran:
+      stationProto: StandardFrontierVessel
+      gridComponents:
+      - type: VesselInfo
+        description: "Outdated, yet still reliable."
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Buran MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Mercenary: [ 0, 0 ]
+            Pilot: [ 0, 0 ]

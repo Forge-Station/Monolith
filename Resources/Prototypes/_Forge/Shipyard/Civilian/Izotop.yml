@@ -1,0 +1,33 @@
+- type: vessel
+  id: Izotop
+  parent: BaseVessel
+  name: Изотоп-1
+  description: Большой исследовательский шаттл с ядерным реактором, без автоматики. Только 1 шаттл на сектор.
+  price: 240000
+  limit: 1
+  category: Large
+  group: Shipyard
+  shuttlePath: /Maps/_Forge/Shuttles/Civilian/Izotop.yml
+  guidebookPage: Null
+  class:
+  - Civilian
+
+- type: gameMap
+  id: Izotop
+  mapName: 'Изотоп-1'
+  mapPath: /Maps/_Forge/Shuttles/Civilian/Izotop.yml
+  minPlayers: 0
+  stations:
+    Izotop:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Изотоп-1 CIV{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

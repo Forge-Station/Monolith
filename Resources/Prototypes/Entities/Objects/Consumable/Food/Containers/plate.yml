@@ -50,6 +50,7 @@
   - type: Tag
     tags:
     - Trash
+    - GoblinPreciousTrash # Forge-Change
   - type: PhysicalComposition
     materialComposition:
       Glass: 60
@@ -81,6 +82,7 @@
   - type: Tag
     tags:
     - Trash
+    - GoblinPreciousTrash # Forge-Change
   - type: TimedDespawn
     lifetime: 600
   - type: Food
@@ -196,6 +198,7 @@
   - type: Tag
     tags:
     - Trash
+    - GoblinPreciousTrash # Forge-Change
   - type: PhysicalComposition
     materialComposition:
       Steel: 15 # Frontier 60<15

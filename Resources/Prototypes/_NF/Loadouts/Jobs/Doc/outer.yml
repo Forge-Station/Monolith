@@ -4,7 +4,6 @@
   name: loadout-group-contractor-outerclothing
   minLimit: 1
   loadouts:
-  - MdMedicOuterClothingOuterHardsuitTraumaLeader
   - MdMedicOuterClothingOuterArmorBodyTraumaCommander
   - MdMedicOuterClothingOuterRobeTraumaBomber
   - MdMedicOuterClothingOuterCoatTrauma

@@ -133,6 +133,7 @@
     - WetFloorSign
     - DeskBell
     - BrbSign
+    - TrashBoxFlatpack # Forge-Change
 
 - type: latheRecipePack
   id: NFServiceTechfabDeprecated

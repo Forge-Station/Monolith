@@ -1,0 +1,83 @@
+- type: ncDroneHuntContract
+  id: ForgeDroneHuntLight
+  name: "Лёгкий перехват дрона"
+  description: "В ближнем секторе замечен малый автономный дрон-шаттл. Найдите цель, заберите контрактное ядро-доказательство и верните его торговцу."
+  icon: NpcDroneAiMPulsar
+  targetGroup: ForgeDroneHuntGroupCores
+  completion:
+    proof: ForgeTradeContractProofDroneCore
+  spawn:
+    point:
+      type: Store
+    minDistance: 15000
+    maxDistance: 15000
+    safetyRadius: 512
+    placementAttempts: 16
+    grids:
+    - path: /Maps/_Mono/Shuttles/World/mpulsar.yml
+      weight: 1
+    - path: /Maps/_Mono/Shuttles/World/lance.yml
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 100000
+  - type: Pool
+    pool: ForgeExpeditionRewardBasic
+    count: { min: 3, max: 5 }
+
+- type: ncDroneHuntContract
+  id: ForgeDroneHuntMedium
+  name: "Средний перехват дрона"
+  description: "Автономный T2 дрон-шаттл мешает маршрутам экспедиций. Найдите его по пеленгу, заберите контрактное ядро и верните доказательство торговцу."
+  icon: NpcDroneAiMedusa
+  targetGroup: ForgeDroneHuntGroupCores
+  completion:
+    proof: ForgeTradeContractProofDroneCore
+  spawn:
+    point:
+      type: Store
+    minDistance: 20000
+    maxDistance: 20000
+    safetyRadius: 768
+    placementAttempts: 16
+    grids:
+    - path: /Maps/_Mono/Shuttles/World/medusa.yml
+      weight: 1
+    - path: /Maps/_Mono/Shuttles/World/assembly.yml
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 175000
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 4, max: 6 }
+
+- type: ncDroneHuntContract
+  id: ForgeDroneHuntHeavy
+  name: "Тяжёлый перехват дрона"
+  description: "В дальнем секторе обнаружен тяжёлый T2 дрон-шаттл. Перехватите его на безопасном удалении, заберите контрактное ядро-доказательство и доставьте его торговцу."
+  icon: NpcDroneAiQuake
+  targetGroup: ForgeDroneHuntGroupCores
+  completion:
+    proof: ForgeTradeContractProofDroneCore
+  spawn:
+    point:
+      type: Store
+    minDistance: 20000
+    maxDistance: 20000
+    safetyRadius: 1024
+    placementAttempts: 20
+    grids:
+    - path: /Maps/_Mono/Shuttles/World/mauler.yml
+      weight: 1
+    - path: /Maps/_Mono/Shuttles/World/quake.yml
+      weight: 1
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 275000
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: { min: 5, max: 8 }

@@ -57,5 +57,13 @@ namespace Content.Server.Construction.Components
         // Mono - sets the framesize of boards it accepts.
         [DataField]
         public string? FrameSize = null;
+
+        /// Forge-Change-start: stock part rating
+        [ViewVariables]
+        public int MinimumStockPartRating = 1;
+
+        [ViewVariables]
+        public int? MaximumStockPartRating;
+        /// Forge-Change-end: stock part rating
     }
 }

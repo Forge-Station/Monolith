@@ -1,5 +1,26 @@
 ent-BaseMagazine762x39mm = магазин (7.62x39мм FMJ)
+ent-Magazine762x39mmFMJ = { ent-BaseMagazine762x39mm }
+ent-Magazine762x39mmEmpty = магазин (7.62x39мм)
+    .desc = " "
+    .suffix = Пустой
 ent-Magazine762x39mmPlasteelAP = магазин (7.62x39мм бронебойные)
+ent-Magazine762x39mmRubber = магазин (7.62x39мм резиновые)
+ent-Magazine762x39mmHP = магазин (7.62x39мм экспансивные)
 ent-Magazine762x39mmRIP = магазин (7.62x39мм RIP)
+ent-Magazine762x39mmSubsonic = магазин (7.62x39мм дозвуковые)
+ent-Magazine762x39mmPractice = магазин (7.62x39мм учебные)
 ent-Magazine762x39mmIncendiary = магазин (7.62x39мм зажигательные)
 ent-Magazine762x39mmUranium = магазин (7.62x39мм урановые)
+ent-MagazineDP29 = магазин DP-29 (7.62x39мм)
+ent-Magazine762x39mmBox = боксовый магазин для L6 SAW (7.62х39мм FMJ)
+ent-Magazine762x39mmPkBox = ящик с боеприпасами ПК (7.62х39мм FMJ)
+ent-Magazine762x39mmMaxim = дисковый магазин (7.62x39мм FMJ)
+
+ent-Magazine762x39mmLowCapacityFMJ = короткий магазин (7.62х39мм FMJ)
+ent-Magazine762x39mmLowCapacityEmpty = короткий магазин (7.62х39мм)
+    .desc = " "
+    .suffix = Пустой
+ent-Magazine762x39mmLowCapacityIncendiary = короткий магазин (7.62х39мм зажигательные)
+ent-Magazine762x39mmLowCapacityPractice = короткий магазин (7.62х39мм учебные)
+ent-Magazine762x39mmLowCapacityRubber = короткий магазин (7.62х39мм резиновые)
+ent-Magazine762x39mmLowCapacityUranium = короткий магазин (7.62х39мм урановые)

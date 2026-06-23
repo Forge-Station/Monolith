@@ -113,10 +113,11 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
 
     private IEnumerable<string> GetTimedRoles(ICommonSession session)
     {
-        var contentData = _playerManager.GetPlayerData(session.UserId).ContentData();
+        if (!_playerManager.TryGetPlayerData(session.UserId, out var playerData))
+            return Enumerable.Empty<string>();
 
         // Forge change Start
-        if (contentData?.Mind is { } mind)
+        if (playerData.ContentData()?.Mind is { } mind)
             return GetTimedRoles(mind);
 
         return Enumerable.Empty<string>();
@@ -238,7 +239,9 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
 
     public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs)
     {
-        var player = _playerManager.GetSessionById(userId);
+        if (!_playerManager.TryGetSessionById(userId, out var player))
+            return;
+
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
         {
             // Sorry mate but your playtimes haven't loaded.

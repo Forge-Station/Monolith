@@ -245,85 +245,28 @@ public sealed class JobReassignmentSystem : EntitySystem
 
     private bool TryValidateJobRequirements(EntityUid targetId, JobPrototype job, bool ignoreDemographicRequirements = false)
     {
-        if (ignoreDemographicRequirements)
-        {
-            HumanoidCharacterProfile? profile = null;
-            if (TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
-                && keyStorage.Key is { } key
-                && _record.TryGetRecord<GeneralStationRecord>(key, out var record))
-            {
-                profile = JobPresetRequirementHelper.ProfileFromStationRecord(record);
-            }
-
-            return JobPresetRequirementHelper.TryCheckJobRequirements(
-                job,
-                profile,
-                EntityManager,
-                _prototype,
-                new Dictionary<string, TimeSpan>(),
-                out _,
-                enforcePlaytimeRequirements: false,
-                ignoreDemographicRequirements: true);
-        }
-
-        if (TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorageFull)
-            && keyStorageFull.Key is { } recordKey
-            && _record.TryGetRecord<GeneralStationRecord>(recordKey, out var recordFull))
-        {
-            var profile = JobPresetRequirementHelper.ProfileFromStationRecord(recordFull);
-            return JobPresetRequirementHelper.TryCheckJobRequirements(
-                job,
-                profile,
-                EntityManager,
-                _prototype,
-                new Dictionary<string, TimeSpan>(),
-                out _,
-                enforcePlaytimeRequirements: false);
-        }
-
-        return TryValidateEntityJobRequirements(targetId, job);
-    }
-
-    private bool TryValidateEntityJobRequirements(EntityUid target, JobPrototype job, bool ignoreDemographicRequirements = false)
-    {
-        if (ignoreDemographicRequirements)
-        {
-            HumanoidCharacterProfile? profile = null;
-            if (TryComp<HumanoidAppearanceComponent>(target, out var humanoid))
-            {
-                profile = JobPresetRequirementHelper.ProfileFromAppearance(
-                    humanoid.Species,
-                    humanoid.Age,
-                    humanoid.Sex);
-            }
-
-            return JobPresetRequirementHelper.TryCheckJobRequirements(
-                job,
-                profile,
-                EntityManager,
-                _prototype,
-                new Dictionary<string, TimeSpan>(),
-                out _,
-                enforcePlaytimeRequirements: false,
-                ignoreDemographicRequirements: true);
-        }
-
-        if (!TryComp<HumanoidAppearanceComponent>(target, out var humanoidFull))
-            return false;
-
-        var profileFull = JobPresetRequirementHelper.ProfileFromAppearance(
-            humanoidFull.Species,
-            humanoidFull.Age,
-            humanoidFull.Sex);
-
         return JobPresetRequirementHelper.TryCheckJobRequirements(
             job,
-            profileFull,
+            profile: null,
             EntityManager,
             _prototype,
             new Dictionary<string, TimeSpan>(),
             out _,
-            enforcePlaytimeRequirements: false);
+            enforcePlaytimeRequirements: false,
+            ignoreDemographicRequirements: true);
+    }
+
+    private bool TryValidateEntityJobRequirements(EntityUid target, JobPrototype job, bool ignoreDemographicRequirements = false)
+    {
+        return JobPresetRequirementHelper.TryCheckJobRequirements(
+            job,
+            profile: null,
+            EntityManager,
+            _prototype,
+            new Dictionary<string, TimeSpan>(),
+            out _,
+            enforcePlaytimeRequirements: false,
+            ignoreDemographicRequirements: true);
     }
 
     private void UpdateStationRecord(EntityUid targetId, JobPrototype job)

@@ -29,6 +29,10 @@
   color: "#0f3b62"
   icon: Nexus
   whitelisted: true
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyNexus
 
 - type: company
   id: Renegates

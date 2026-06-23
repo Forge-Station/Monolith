@@ -1,0 +1,528 @@
+# Forge-Change-start
+
+# Косметика UI планшета SecApartment. Одна тема = одна фракция.
+
+# Принцип: насыщенный фракционный цвет + тёмные фоны, без кислотных #ff**** на всём UI.
+
+
+
+# Служба безопасности / отладочный планшет (тёмно-красный, без розового и неона)
+
+- type: secApUiTheme
+
+  id: SecApUiThemeSecurity
+
+  showLogo: true
+
+  showFooter: true
+
+  showOsStripe: true
+
+  logoTexture: /Textures/Interface/Nano/ntlogo.svg.png
+
+  windowBackground: "#0a0606"
+
+  windowBorder: "#381010"
+
+  contentBackground: "#401010"
+
+  contentBorder: "#2c0a0a"
+
+  closeButton: "#b03030"
+
+  divider: "#681818"
+
+  listPanelBackground: "#120505"
+
+  listPanelBorder: "#581414"
+
+  createSquadPanelBackground: "#1a0606"
+
+  createSquadPanelBorder: "#581414"
+
+  cardBackground: "#220808"
+
+  cardBorder: "#701818"
+
+  entryBackground: "#0c0303"
+
+  entryBorder: "#581414"
+
+  memberAliveBackground: "#260808"
+
+  memberAliveBorder: "#983030"
+
+  memberDeadBackground: "#080303"
+
+  memberDeadBorder: "#341010"
+
+  memberDeadText: "#583838"
+
+  tabActive: "#b83838"
+
+  tabInactive: "#684040"
+
+  heading: "#c04040"
+
+  text: "#a05858"
+
+  subText: "#884040"
+
+  placeholder: "#582020"
+
+  buttonBackground: "#341010"
+
+  buttonBorder: "#701818"
+
+  lineEditBackground: "#0c0303"
+
+  optionBackground: "#1a0606"
+
+  tabActiveBackground: "#341010"
+
+  tabInactiveBackground: "#120505"
+
+  panelBackground: "#080303"
+
+  timerOverdue: "#a02828"
+
+  timerCritical: "#a83030"
+
+  timerWarning: "#a83838"
+
+  timerNormal: "#a05858"
+
+
+
+# ТСФ — тёмный navy, синий акцент без неона и серого
+
+- type: secApUiTheme
+
+  id: SecApUiThemeTSF
+
+  showLogo: false
+
+  showFooter: false
+
+  showOsStripe: false
+
+  windowBackground: "#060818"
+
+  windowBorder: "#142858"
+
+  contentBackground: "#0c1438"
+
+  contentBorder: "#101c48"
+
+  closeButton: "#3060a0"
+
+  divider: "#1e3468"
+
+  listPanelBackground: "#080c28"
+
+  listPanelBorder: "#182858"
+
+  createSquadPanelBackground: "#0a1030"
+
+  createSquadPanelBorder: "#182858"
+
+  cardBackground: "#0c1438"
+
+  cardBorder: "#203060"
+
+  entryBackground: "#060818"
+
+  entryBorder: "#182858"
+
+  memberAliveBackground: "#0e1838"
+
+  memberAliveBorder: "#3868a0"
+
+  memberDeadBackground: "#060818"
+
+  memberDeadBorder: "#142048"
+
+  memberDeadText: "#304868"
+
+  tabActive: "#4078b0"
+
+  tabInactive: "#304870"
+
+  heading: "#4878a8"
+
+  text: "#6888a8"
+
+  subText: "#486888"
+
+  placeholder: "#304060"
+
+  buttonBackground: "#101c48"
+
+  buttonBorder: "#284878"
+
+  lineEditBackground: "#060818"
+
+  optionBackground: "#0a1030"
+
+  tabActiveBackground: "#101c48"
+
+  tabInactiveBackground: "#080c28"
+
+  panelBackground: "#060818"
+
+  timerOverdue: "#a04848"
+
+  timerCritical: "#a05848"
+
+  timerWarning: "#a06848"
+
+  timerNormal: "#6888a8"
+
+
+
+# Ренегаты — тёмный ржавый фон, оранжевый акцент как на рамке спрайта (#8B4020)
+
+- type: secApUiTheme
+
+  id: SecApUiThemeRenegates
+
+  showLogo: false
+
+  showFooter: false
+
+  showOsStripe: false
+
+  windowBackground: "#0c0806"
+
+  windowBorder: "#5a2810"
+
+  contentBackground: "#2a1408"
+
+  contentBorder: "#6b3018"
+
+  closeButton: "#c07028"
+
+  divider: "#8b4020"
+
+  listPanelBackground: "#1e0c04"
+
+  listPanelBorder: "#7a3818"
+
+  createSquadPanelBackground: "#2a1006"
+
+  createSquadPanelBorder: "#7a3818"
+
+  cardBackground: "#2a1006"
+
+  cardBorder: "#8b4020"
+
+  entryBackground: "#140804"
+
+  entryBorder: "#6a3018"
+
+  memberAliveBackground: "#3a1c08"
+
+  memberAliveBorder: "#b86828"
+
+  memberDeadBackground: "#0c0604"
+
+  memberDeadBorder: "#4a2810"
+
+  memberDeadText: "#7a5838"
+
+  tabActive: "#d08030"
+
+  tabInactive: "#9a6838"
+
+  heading: "#d08838"
+
+  text: "#c8a878"
+
+  subText: "#a07848"
+
+  placeholder: "#7a5020"
+
+  buttonBackground: "#4a2810"
+
+  buttonBorder: "#a06028"
+
+  lineEditBackground: "#140804"
+
+  optionBackground: "#2a1006"
+
+  tabActiveBackground: "#4a2810"
+
+  tabInactiveBackground: "#1e0c04"
+
+  panelBackground: "#0c0806"
+
+  timerOverdue: "#a84830"
+
+  timerCritical: "#a86830"
+
+  timerWarning: "#b07830"
+
+  timerNormal: "#c8a878"
+
+
+
+# НаноТразен — насыщенный тёмно-синий (глубже ТСФ), лого/футер NT
+
+- type: secApUiTheme
+
+  id: SecApUiThemeNanoTrasen
+
+  showLogo: true
+
+  showFooter: true
+
+  showOsStripe: true
+
+  logoTexture: /Textures/Interface/Nano/ntlogo.svg.png
+
+  windowBackground: "#05081c"
+
+  windowBorder: "#183070"
+
+  contentBackground: "#0a1c48"
+
+  contentBorder: "#0e2258"
+
+  closeButton: "#3870b8"
+
+  divider: "#1a3880"
+
+  listPanelBackground: "#060c30"
+
+  listPanelBorder: "#1a3270"
+
+  createSquadPanelBackground: "#081438"
+
+  createSquadPanelBorder: "#1a3270"
+
+  cardBackground: "#0a1c48"
+
+  cardBorder: "#204080"
+
+  entryBackground: "#05081c"
+
+  entryBorder: "#1a3270"
+
+  memberAliveBackground: "#0c2050"
+
+  memberAliveBorder: "#4080c0"
+
+  memberDeadBackground: "#05081c"
+
+  memberDeadBorder: "#142050"
+
+  memberDeadText: "#305080"
+
+  tabActive: "#4888c0"
+
+  tabInactive: "#345890"
+
+  heading: "#5090c8"
+
+  text: "#6098d0"
+
+  subText: "#4878a8"
+
+  placeholder: "#304878"
+
+  buttonBackground: "#0e2258"
+
+  buttonBorder: "#3068a8"
+
+  lineEditBackground: "#05081c"
+
+  optionBackground: "#081438"
+
+  tabActiveBackground: "#0e2258"
+
+  tabInactiveBackground: "#060c30"
+
+  panelBackground: "#05081c"
+
+  timerOverdue: "#a04848"
+
+  timerCritical: "#a05848"
+
+  timerWarning: "#a06848"
+
+  timerNormal: "#6098d0"
+
+
+
+# СИВ / Империя — античное золото
+
+- type: secApUiTheme
+
+  id: SecApUiThemeEmpire
+
+  showLogo: false
+
+  showFooter: false
+
+  showOsStripe: false
+
+  windowBackground: "#0c0a08"
+
+  windowBorder: "#4a3820"
+
+  contentBackground: "#362818"
+
+  contentBorder: "#5c4528"
+
+  closeButton: "#c9a44c"
+
+  divider: "#8a6838"
+
+  listPanelBackground: "#1e1810"
+
+  listPanelBorder: "#7a5c30"
+
+  createSquadPanelBackground: "#281e14"
+
+  createSquadPanelBorder: "#7a5c30"
+
+  cardBackground: "#281e14"
+
+  cardBorder: "#9a7438"
+
+  entryBackground: "#1a140c"
+
+  entryBorder: "#7a5c30"
+
+  memberAliveBackground: "#342818"
+
+  memberAliveBorder: "#c9a86c"
+
+  memberDeadBackground: "#100e0a"
+
+  memberDeadBorder: "#5c4828"
+
+  memberDeadText: "#8a7048"
+
+  tabActive: "#d4af5a"
+
+  tabInactive: "#a88850"
+
+  heading: "#e0c878"
+
+  text: "#f0e0b8"
+
+  subText: "#c0a868"
+
+  placeholder: "#8a7048"
+
+  buttonBackground: "#403020"
+
+  buttonBorder: "#b89848"
+
+  lineEditBackground: "#1a140c"
+
+  optionBackground: "#281e14"
+
+  tabActiveBackground: "#3d3018"
+
+  tabInactiveBackground: "#1e1810"
+
+  panelBackground: "#100e0a"
+
+  timerOverdue: "#c05050"
+
+  timerCritical: "#c89840"
+
+  timerWarning: "#c9a44c"
+
+  timerNormal: "#f0e0b8"
+
+
+
+# СССП — тёмный бордо, приглушённое золото (корпус USSP.rsi, без кислотного пергамента)
+
+- type: secApUiTheme
+
+  id: SecApUiThemeUSSP
+
+  showLogo: false
+
+  showFooter: false
+
+  showOsStripe: false
+
+  windowBackground: "#120606"
+
+  windowBorder: "#6a4820"
+
+  contentBackground: "#1e0a0a"
+
+  contentBorder: "#3a1414"
+
+  closeButton: "#903838"
+
+  divider: "#5a3818"
+
+  listPanelBackground: "#180808"
+
+  listPanelBorder: "#5a3818"
+
+  createSquadPanelBackground: "#201010"
+
+  createSquadPanelBorder: "#5a3818"
+
+  cardBackground: "#201010"
+
+  cardBorder: "#6a4820"
+
+  entryBackground: "#140606"
+
+  entryBorder: "#5a3818"
+
+  memberAliveBackground: "#281010"
+
+  memberAliveBorder: "#8a6830"
+
+  memberDeadBackground: "#0c0404"
+
+  memberDeadBorder: "#3a2010"
+
+  memberDeadText: "#685040"
+
+  tabActive: "#b08840"
+
+  tabInactive: "#806038"
+
+  heading: "#c8a868"
+
+  text: "#b8a080"
+
+  subText: "#987850"
+
+  placeholder: "#684830"
+
+  buttonBackground: "#281010"
+
+  buttonBorder: "#6a4820"
+
+  lineEditBackground: "#140606"
+
+  optionBackground: "#201010"
+
+  tabActiveBackground: "#301414"
+
+  tabInactiveBackground: "#180808"
+
+  panelBackground: "#120606"
+
+  timerOverdue: "#903030"
+
+  timerCritical: "#a04830"
+
+  timerWarning: "#a07840"
+
+  timerNormal: "#b8a080"
+
+# Forge-Change-end
+

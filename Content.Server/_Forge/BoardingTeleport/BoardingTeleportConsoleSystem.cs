@@ -368,6 +368,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
         ent.Comp.LandingCoordinates = null;
         ent.Comp.PlatformLandings.Clear();
         ent.Comp.LockEstablishedAt = null;
+        _lock.ResetLockTiming(ent.Comp);
         ent.Comp.Status = ent.Comp.TargetGrid == null ? BoardingTeleportStatus.None : BoardingTeleportStatus.TargetSelected;
 
         Dirty(ent);
@@ -387,6 +388,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
         ent.Comp.LandingCoordinates = null;
         ent.Comp.PlatformLandings.Clear();
         ent.Comp.LockEstablishedAt = null;
+        _lock.ResetLockTiming(ent.Comp);
 
         ent.Comp.Page = BoardingTeleportPage.Sector;
 
@@ -493,7 +495,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
         if (ent.Comp.TargetGrid is { } uiTargetRisk && _lock.TryGetScramblerEffect(uiTargetRisk, out var uiScramblerRisk))
             displayRisk = BoardingTeleportBalance.ApplyScramblerRiskBonus(displayRisk / 100f, uiScramblerRisk.RiskBonus) * 100f;
 
-        var lockAge = BoardingTeleportLockDegrade.GetLockAgeSeconds(ent.Comp.LockEstablishedAt, _timing);
+        var lockAge = _lock.GetEffectiveLockAge(ent.Comp);
         var platforms = BuildPlatformUiEntries(ent.Owner, ent.Comp);
 
         var state = new BoardingTeleportBoundUserInterfaceState(
@@ -1214,31 +1216,23 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         }
 
-        if (TryComp<ProtectedGridComponent>(targetGrid, out var protectedGrid) && protectedGrid.PreventTeleportation)
+        if (IsGridInActiveFtl(targetGrid))
+
         {
-            status = BoardingTeleportStatus.TargetGridProtected;
+
+            status = BoardingTeleportStatus.TargetInFtl;
+
             return false;
+
         }
 
-        if (!BoardingTeleportShieldHelper.CanEngineBypassTargetShield(EntityManager, targetGrid, engine, out var shieldTier))
+        if (!BoardingTeleportShieldHelper.CanEngineBypassTargetShield(EntityManager, targetGrid, engine, out _))
 
         {
 
             status = BoardingTeleportShieldHelper.HasActiveTeleportImmuneShield(EntityManager, targetGrid)
                 ? BoardingTeleportStatus.TargetShielded
                 : BoardingTeleportStatus.TargetShieldTooStrong;
-
-            return false;
-
-        }
-
-
-
-        if (IsGridInActiveFtl(targetGrid))
-
-        {
-
-            status = BoardingTeleportStatus.TargetInFtl;
 
             return false;
 
@@ -1342,9 +1336,16 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
     {
 
+        var previousTarget = ent.Comp.TargetGrid;
+
         ent.Comp.TargetGrid = targetGrid;
 
         ent.Comp.LandingCoordinates = null;
+        ent.Comp.LockEstablishedAt = null;
+        _lock.ResetLockTiming(ent.Comp);
+
+        if (previousTarget != null && previousTarget != targetGrid)
+            StartEngineCooldown(ent.Owner, ent.Comp);
 
         ent.Comp.Page = BoardingTeleportPage.Grid;
 
@@ -1372,20 +1373,11 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             return false;
 
-        if (TryComp<ProtectedGridComponent>(gridUid, out var protectedGrid) && protectedGrid.PreventTeleportation)
-            return false;
-
         if (!_map.TryGetTileRef(gridUid, grid, tile, out _))
 
             return false;
 
 
-
-        var mapUid = Transform(gridUid).MapUid;
-
-        // Any grid tile is valid (walls, windows, etc.). Only hard vacuum/space is rejected.
-        if (_atmosphere.IsTileSpace(gridUid, mapUid, tile))
-            return false;
 
         coordinates = _map.GridTileToLocal(gridUid, grid, tile);
 

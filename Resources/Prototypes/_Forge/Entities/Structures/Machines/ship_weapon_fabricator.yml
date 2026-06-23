@@ -45,6 +45,7 @@
     boardWhitelist:
       components:
       - ShipWeaponBoard
+    maxBoardQueue: 8
     powerLoadIdle: 1500
     powerLoadActive: 12000
     outputFlatpackPrototype: ForgeShipWeaponFlatpack
@@ -72,11 +73,12 @@
       - RawMaterial
       - Ingot
       - Ore
+  - type: OreSiloClient
   - type: ContainerContainer
     containers:
       machine_board: !type:Container
       machine_parts: !type:Container
-      weapon_board: !type:ContainerSlot
+      weapon_board: !type:Container
       weapon_parts: !type:Container
   - type: Construction
     graph: Machine3x3

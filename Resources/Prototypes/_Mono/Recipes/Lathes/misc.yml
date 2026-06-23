@@ -57,3 +57,17 @@
   materials:
     Steel: 1500
     Plastic: 1000
+
+# Forge-Change-Start
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: TrashBoxFlatpack
+  result: TrashBoxFlatpack
+  categories:
+  - Tools
+  completetime: 5
+  materials:
+    Steel: 600
+    Glass: 50
+    Plastic: 200
+# Forge-Change-End

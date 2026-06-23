@@ -20,6 +20,7 @@ public sealed partial class ModsuitGauntletToolsRadialMenu : RadialMenu
         { ModsuitGauntletToolSlot.Welder, new SpriteSpecifier.Rsi(new ResPath("Forge/Objects/Tools/Standart/welder_experimental.rsi"), "icon") },
         { ModsuitGauntletToolSlot.NaniteApplicator, new SpriteSpecifier.Rsi(new ResPath("_Mono/Objects/Tools/nanite_applicator_experimental.rsi"), "icon") },
         { ModsuitGauntletToolSlot.Auxiliary, new SpriteSpecifier.Rsi(new ResPath("Objects/Weapons/Guns/Launchers/grappling_gun.rsi"), "icon") },
+        { ModsuitGauntletToolSlot.Piping, new SpriteSpecifier.Rsi(new ResPath("Forge/Objects/Tools/rpd.rsi"), "icon") },
     };
 
     [Dependency] private readonly IEntityManager _entManager = default!;
@@ -57,6 +58,9 @@ public sealed partial class ModsuitGauntletToolsRadialMenu : RadialMenu
 
         if (comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.Auxiliary) && !comp.AuxiliaryInHand)
             AddToolButton(main, ModsuitGauntletToolSlot.Auxiliary, comp.AuxiliaryProto, comp.UsePrototypeMenuIcons);
+
+        if (comp.EnabledSlots.HasFlag(ModsuitGauntletEnabledSlots.Piping) && !comp.PipingInHand)
+            AddToolButton(main, ModsuitGauntletToolSlot.Piping, comp.PipingProto, comp.UsePrototypeMenuIcons);
 
         if (TryGetActiveSlot(comp, out var activeSlot))
             AddStowButton(main, activeSlot);
@@ -124,6 +128,12 @@ public sealed partial class ModsuitGauntletToolsRadialMenu : RadialMenu
         if (comp.AuxiliaryInHand && SharedModsuitGauntletToolsSystem.IsSlotEnabled(comp, ModsuitGauntletToolSlot.Auxiliary))
         {
             slot = ModsuitGauntletToolSlot.Auxiliary;
+            return true;
+        }
+
+        if (comp.PipingInHand && SharedModsuitGauntletToolsSystem.IsSlotEnabled(comp, ModsuitGauntletToolSlot.Piping))
+        {
+            slot = ModsuitGauntletToolSlot.Piping;
             return true;
         }
 

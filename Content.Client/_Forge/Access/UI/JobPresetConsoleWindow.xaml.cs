@@ -1,7 +1,5 @@
 using System.Linq;
 using Content.Shared.Access;
-using Content.Shared.Humanoid;
-using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
 using Content.Shared._Forge.Access;
@@ -149,29 +147,15 @@ public sealed partial class JobPresetConsoleWindow : DefaultWindow
         HashSet<ProtoId<AccessLevelPrototype>> currentTags,
         HashSet<ProtoId<AccessLevelPrototype>> allowedTags)
     {
-        if (!state.HasTargetDemographics && !state.IgnoreDemographicRequirements)
-        {
-            return Loc.GetString("job-preset-id-card-console-window-missing-demographics");
-        }
-
-        HumanoidCharacterProfile? profile = null;
-        if (state.HasTargetDemographics)
-        {
-            profile = JobPresetRequirementHelper.ProfileFromAppearance(
-                state.TargetSpecies,
-                state.TargetAge,
-                state.TargetSex);
-        }
-
         if (!JobPresetRequirementHelper.TryCheckJobRequirements(
                 job,
-                profile,
+                profile: null,
                 _entManager,
                 _prototypeManager,
                 EmptyPlaytimes,
                 out var requirementReason,
                 enforcePlaytimeRequirements: false,
-                ignoreDemographicRequirements: state.IgnoreDemographicRequirements))
+                ignoreDemographicRequirements: true))
         {
             return JobPresetRequirementHelper.FormatReason(requirementReason);
         }

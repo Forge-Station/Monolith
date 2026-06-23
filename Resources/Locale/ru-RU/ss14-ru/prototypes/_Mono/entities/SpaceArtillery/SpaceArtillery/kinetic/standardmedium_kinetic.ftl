@@ -1,4 +1,8 @@
 ent-WeaponTurretAK570 = автопушка AK570 57 мм
     .desc = Двуствольная тяжёлая 57-мм автопушка, стреляющая универсальными осколочно-фугасными снарядами. Эффективна для продолжительного огня по целям среднего класса. Может активироваться дистанционно или подключаться к GCS.
+ent-WeaponTurretAK570Portable = { ent-WeaponTurretAK570 }
+    .desc =  { ent-WeaponTurretAK570.desc }
 ent-WeaponTurretDravon = автопушка ADBP-7 «Дравон» 90 мм
     .desc = Одноствольная автопушка производства Aetherion Dynamics. Среднекалиберное орудие с высокой скорострельностью и относительно низкой отдачей, стреляет кумулятивными снарядами по броне и системам корабля. Может активироваться дистанционно или подключаться к GCS.
+ent-WeaponTurretDravonPortable = { ent-WeaponTurretDravon }
+    .desc =  { ent-WeaponTurretDravon.desc }

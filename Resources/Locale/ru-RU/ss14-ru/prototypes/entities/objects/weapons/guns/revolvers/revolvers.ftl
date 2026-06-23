@@ -12,6 +12,17 @@ ent-NFWeaponRevolverWard45 = Матеба
 ent-NFWeaponRevolverRitland45 = Питон
     .desc = Нелегальное оружие. Надёжный револьвер, предпочитаемый агентами Синдиката. Использует патроны калибра .45 магнум.
     .suffix = Револьвер
+ent-WeaponRevolverPython = { ent-NFWeaponRevolverRitland45 }
+    .desc = { ent-NFWeaponRevolverRitland45.desc }
+    .suffix = Револьвер
+ent-WeaponRevolverPythonGatfruit = { ent-NFWeaponRevolverRitland45 }
+    .desc = { ent-NFWeaponRevolverRitland45.desc }
+    .suffix = Револьвер, Low Value
+ent-WeaponRevolverPythonAP = { ent-NFWeaponRevolverRitland45 }
+    .desc = { ent-NFWeaponRevolverRitland45.desc }
+    .suffix = Револьвер, Бронебойные
+
+
 ent-NFWeaponRevolverPirate = Пиратский револьвер
     .desc = Нелегальное оружие. Странный дульнозарядный револьвер, который использовали пираты. Использует патроны калибра .45 магнум.
     .suffix = Револьвер
@@ -28,3 +39,6 @@ ent-NFWeaponRevolverFitz = Фитз
 ent-NFWeaponRevolverLucky = Счастливчик
     .desc = Удача всегда побеждает мастерство, проныра.
     .suffix = Револьвер
+ent-WeaponRevolverMatebaAP = NT { ent-NFWeaponRevolverWard45 }
+    .desc = { ent-NFWeaponRevolverWard45.desc }
+    .suffix = .45 магнум, бронебойные

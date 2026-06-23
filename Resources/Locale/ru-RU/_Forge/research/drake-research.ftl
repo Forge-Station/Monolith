@@ -11,6 +11,7 @@ research-technology-drake-industries-industrial-basics = промышленны�
 research-technology-drake-industries-industrial-gear = промышленное снаряжение Drake
 research-technology-drake-industries-industrial-laser = промышленный лазер Drake
 research-technology-drake-industries-apollo-mk2 = корабельный лазер Apollo MK2 Drake
+research-technology-drake-industries-iridite-metallurgy = металлургия иридита Drake
 
 drake-centrifuge-plastitanium-name = синтез пластитания Drake
 drake-centrifuge-plastitanium-desc = Производит листы пластитания из пластали, плазмы и обеднённого урана в центрифуге Drake.

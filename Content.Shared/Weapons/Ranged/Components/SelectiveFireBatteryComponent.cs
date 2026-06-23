@@ -15,6 +15,9 @@ public sealed partial class SelectiveFireBatteryComponent : Component
     public List<SelectiveFireBatteryMode> Modes = new();
 }
 
+/// <summary>
+/// Forge-Change: per-mode battery projectile settings keyed by <see cref="SelectiveFire"/>.
+/// </summary>
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class SelectiveFireBatteryMode
 {

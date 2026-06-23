@@ -41,7 +41,7 @@
   - UllmanHardsuitPilot
   - UllmanHardsuitEngineer
   technologyPrerequisites:
-  - UniversalMaterialResearchT1
+  - UllmanUniforms # Forge-change
   position: 16, 1
 
 
@@ -55,8 +55,10 @@
   recipeUnlocks:
   - UllmanHardsuitEnforcer
   - UllmanHardsuitEnforcerMKII
+  - UllmanHardsuitMedical # Forge-change
   technologyPrerequisites:
   - UniversalMaterialResearchT2
+  - UllmanHardsuitBasic # Forge-change
   position: 16, 7
 
 

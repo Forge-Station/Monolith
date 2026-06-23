@@ -1,6 +1,7 @@
 - type: vendingMachineInventory
   id: CigaretteMachineInventory
   startingInventory:
+    CigPackFake: 2 # Forge-change
     CigPackGreen: 2
     CigPackRed: 2
     CigPackBlue: 2

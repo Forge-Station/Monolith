@@ -4,3 +4,5 @@ ent-ClothingEyesGlassesEmpireSunblue = солнцезащитные очки
 ent-ClothingEyesGlassesEmpireSunorange = солнцезащитные очки
     .desc = Модернизированные солнцезащитные очки с функцией защиты от вспышек и визором. Эти - оранжевого цвета.
     .suffix = Империя
+ent-ClothingEyesGlassesViperGroup = баллистические очки Viper Group
+    .desc = Очки, созданные для длительных боёв в любых условиях, защищают от ярких вспышек.

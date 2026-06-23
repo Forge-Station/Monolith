@@ -1,6 +1,9 @@
+using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Mobs;
 using Content.Shared.Stealth.Components;
+using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Components; // Goobstation
 using Robust.Shared.GameStates;
 using Robust.Shared.Timing;
@@ -23,6 +26,9 @@ public abstract partial class SharedStealthSystem : EntitySystem
         SubscribeLocalEvent<StealthComponent, ExamineAttemptEvent>(OnExamineAttempt);
         SubscribeLocalEvent<StealthComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<StealthComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<StealthComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<StealthComponent, MeleeAttackEvent>(OnMeleeAttack);
+        SubscribeLocalEvent<StealthComponent, ShotAttemptedEvent>(OnShotAttempted);
     }
 
     private void OnExamineAttempt(EntityUid uid, StealthComponent component, ExamineAttemptEvent args)
@@ -142,6 +148,30 @@ public abstract partial class SharedStealthSystem : EntitySystem
 
         if (args.Stealth.LastVisibility > limit)
             args.FlatModifier += args.SecondsSinceUpdate * component.PassiveVisibilityRate;
+    }
+
+    private void OnDamageChanged(EntityUid uid, StealthComponent component, DamageChangedEvent args)
+    {
+        if (!component.Enabled || !args.DamageIncreased)
+            return;
+
+        ModifyVisibility(uid, component.DamageVisibilityModifier, component);
+    }
+
+    private void OnMeleeAttack(EntityUid uid, StealthComponent component, ref MeleeAttackEvent args)
+    {
+        if (!component.Enabled)
+            return;
+
+        ModifyVisibility(uid, component.AttackVisibilityModifier, component);
+    }
+
+    private void OnShotAttempted(EntityUid uid, StealthComponent component, ref ShotAttemptedEvent args)
+    {
+        if (!component.Enabled)
+            return;
+
+        ModifyVisibility(uid, component.AttackVisibilityModifier, component);
     }
 
     /// <summary>

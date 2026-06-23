@@ -15,6 +15,10 @@
   - ComputerIFFCircuitboard
   - MachineDriveCTLA25Circuitboard
   - LargeThrusterMachineCircuitboard
+  - LargeAPCLightElectronics
+  - LargeAPCMediumElectronics
+  - APCElectronics
+  - LargeAPCCapitalElectronics
   technologyPrerequisites:
   - Shuttlecraft
   - SuperParts

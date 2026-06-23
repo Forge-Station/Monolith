@@ -129,6 +129,21 @@
   languagesUnderstood:
     - NovuNederic
 
+# Forge-Change-start
+- type: trait
+  id: Qwila
+  name: trait-language-qwila-name
+  description: trait-language-qwila-desc
+  category: LanguageTraits
+  cost: 1
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+    - Qwila
+  languagesUnderstood:
+    - Qwila
+# Forge-Change-end
+
 # Commented out since it's species-specific.
 # - type: trait
 #   id: Azaziba

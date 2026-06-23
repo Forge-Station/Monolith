@@ -66,6 +66,7 @@
   - type: Tag
     tags:
     - DrinkCan
+    - GoblinPreciousTrash # Forge-Change
   - type: DnaSubstanceTrace
   - type: StaticPrice # Frontier
     price: 5.5 # Frontier
@@ -117,6 +118,7 @@
     - DrinkCan
     - Recyclable
     - Trash
+    - GoblinPreciousTrash # Forge-Change
 
 - type: entity
   parent: DrinkCanBaseFull

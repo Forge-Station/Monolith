@@ -13,6 +13,9 @@ reagent-desc-sap = Sticky, sweet tree blood.
 reagent-name-hemocyanin-blood = blue blood
 reagent-desc-hemocyanin-blood = Contains copper as opposed to iron which gives it a distinct blue color.
 
+reagent-name-skrell-blood = glossy blue blood
+reagent-desc-skrell-blood = A watery fluid with no scent and a strangely familiar taste.
+
 reagent-name-ammonia-blood = anaerobic blood
 reagent-desc-ammonia-blood = Nothing else in the entire galaxy smells quite so appalling.
 

@@ -2,6 +2,10 @@
   id: TsfDiplomacy
   name: id-card-access-level-tsf-diplomacy
 
+- type: accessLevel
+  id: TsfSecApartment
+  name: id-card-access-level-tsf-sec-apartment
+
 - type: accessGroup
   id: TsfCadetAccess
   tags:

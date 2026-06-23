@@ -5,3 +5,7 @@
 - type: metabolizerType
   id: Demon
   name: metabolizer-type-demon
+
+- type: metabolizerType
+  id: Skrell
+  name: metabolizer-type-skrell

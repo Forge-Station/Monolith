@@ -21,3 +21,5 @@ ent-ClothingModsuitBootsHMELightSuit = ботинки модкостюма HME �
     .desc = Крайне удобные ботинки с магнитной подошвой.
 ent-ClothingModsuitBootsHMEHeavySuit = ботинки модкостюма HME «Заступник»
     .desc = Крайне удобные ботинки с магнитной подошвой.
+ent-ClothingShoesBootsMagViperGroup = магнитные ботинки Viper Group
+    .desc = Боевые магнитные ботинки со встроенным джетпаком, принадлежащие Viper Group.

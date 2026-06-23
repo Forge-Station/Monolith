@@ -25,8 +25,10 @@
   result: ClothingOuterHardsuitViperGroupInitiate
   materials:
     Steel: 2000
+    Glass: 1000 # Forge-Change
     Plasteel: 2500
-    Cloth: 1500
+    Cloth: 2500 # 1500 -> 2500 Forge-Change
+    Plastic: 1500 # Forge-Change
 
 - type: latheRecipe
   parent: MonoHardsuitT2Recipe
@@ -34,6 +36,7 @@
   result: ClothingOuterHardsuitViperGroupStandard
   materials:
     Steel: 3000
+    Glass: 1500 # Forge-Change
     Plasteel: 5000
     Cloth: 1500
 
@@ -43,16 +46,39 @@
   result: ClothingOuterHardsuitViperGroupMedic
   materials:
     Steel: 2500
+    Glass: 2500 # Forge-Change
     Plasteel: 4000
     Cloth: 2000
-    Silver: 500
+    Silver: 2000 # 500 -> 2000 Forge-Change
 
 - type: latheRecipe
-  parent: MonoHardsuitT2Recipe
+  parent: MonoHardsuitT3Recipe # Forge-Change
   id: ClothingOuterHardsuitViperGroupJuggernaut
   result: ClothingOuterHardsuitViperGroupJuggernaut
   materials:
     Steel: 3000
+    Glass: 2000 # Forge-Change
     Plasteel: 6000
-    Durathread: 1000
-    Silver: 2000
+    Durathread: 3000 # 1000 -> 3000 Forge-Change
+    Silver: 4000 # 2000 -> 4000 Forge-Change
+    
+# Forge start
+- type: latheRecipe
+  parent: MonoHardsuitT2Recipe
+  id: ClothingUniformJumpsuitViperGroupTankTop
+  result: ClothingUniformJumpsuitViperGroupTankTop
+  materials:
+    Cloth: 500
+
+- type: latheRecipe
+  id: ClothingShoesBootsMagViperGroup
+  categories:
+  - ClothesNF
+  result: ClothingShoesBootsMagViperGroup
+  completetime: 10
+  materials:
+    Steel: 2000
+    Plasteel: 1500
+    Plastic: 1500
+    Gold: 1000
+    Silver: 1000

@@ -104,6 +104,41 @@
   - type: Clothing
     sprite: Forge/Clothing/Belt/belt_techniclogistic.rsi
 
+- type: entity
+  parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]
+  id: ClothingBeltWebbingsNormalViperGroup
+  name: viper group chest rig
+  description: A set of tactical webbing worn by viper groups.
+  components:
+  - type: StaticPrice
+    vendPrice: 2000
+  - type: Sprite
+    sprite: Forge/Clothing/Belt/viper_group_webbing.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Belt/viper_group_webbing.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+
+- type: entity
+  parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]
+  id: ClothingBeltWebbingsBigViperGroup
+  name: viper group chest rig
+  description: A set of tactical webbing worn by viper groups.
+  components:
+  - type: StaticPrice
+    vendPrice: 2500
+  - type: Sprite
+    sprite: Forge/Clothing/Belt/viper_group_webbingbig.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Belt/viper_group_webbingbig.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: Storage
+    grid:
+    - 0,0,11,1
+  - type: ClothingSpeedModifier
+    sprintModifier: 0.95
+
 #region Other
 - type: entity
   parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]

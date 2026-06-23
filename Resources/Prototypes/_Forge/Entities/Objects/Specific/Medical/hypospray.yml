@@ -21,3 +21,97 @@
         reagents:
         - ReagentId: CombatNanites
           Quantity: 5
+
+- type: entity
+  name: naloxone medipen
+  parent: [ChemicalMedipen]
+  id: NaloxoneMedipen
+  description: A single-use medipen containing chemicals that regenerate morphine addictive.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: naloxone
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: naloxone_empty
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 9
+        reagents:
+        - ReagentId: Naloxone
+          Quantity: 9
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 30
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: StaticPrice
+    price: 2500
+  - type: Tag
+    tags: []
+
+- type: entity
+  name: methadone medipen
+  parent: [ChemicalMedipen]
+  id: MethadoneMedipen
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: methadone
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: methadone_empty
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 9
+        reagents:
+        - ReagentId: Methadone
+          Quantity: 9
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 30
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: StaticPrice
+    price: 3500
+  - type: Tag
+    tags: []
+
+- type: entity
+  name: morphine medipen
+  parent: [ChemicalMedipen]
+  id: MorphineMedipen
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: morphine
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: morphine_empty
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 9
+        reagents:
+        - ReagentId: Morphine
+          Quantity: 9
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 30
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: StaticPrice
+    price: 3500
+  - type: Tag
+    tags: []

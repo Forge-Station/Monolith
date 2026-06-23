@@ -86,3 +86,10 @@
         Quantity: 10
       - ReagentId: Blood
         Quantity: 20
+  # Forge-Change-Start
+  - type: BodyPart
+    children:
+      tail:
+        id: tail
+        type: Tail
+  # Forge-Change-End

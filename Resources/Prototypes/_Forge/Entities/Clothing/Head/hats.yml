@@ -196,6 +196,35 @@
   - type: Clothing
     sprite: Forge/Clothing/Head/Hats/beret_techniclogistic.rsi
 
+# region U.I.
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatCapUI
+  name: cap U.I.
+  description: Common black baseball cap with a purple skull.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ui_cap.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ui_cap.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 120
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretUI
+  name: beret U.I.
+  description: Dark beret with the logo of Ullman Industries. Why do smugglers stand out?
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Head/Hats/ui_beret.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hats/ui_beret.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 120
+
 #region Other
 - type: entity
   parent: [ ClothingHeadBase, BaseCentcommContraband ]

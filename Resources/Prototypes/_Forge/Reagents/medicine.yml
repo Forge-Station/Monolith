@@ -1,5 +1,3 @@
-# region Nanomachines
-# , son
 - type: reagent
   id: CombatNanites
   name: reagent-name-combat-nanites
@@ -89,83 +87,325 @@
     Medicine:
       metabolismRate: 0.5
       effects:
-        - !type:CureAddictionEffect
-          addictionId: Fentanyl
-          amount: 0.08
+        # Fentanyl
+        - !type:RemoveSyndromeEffect
+          hidden: true
+          conditions:
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Fentanyl
+              min: 0.6
+              max: 1.0
+          syndrome: OpioidAddiction
+          severity: 0.001
         - !type:GenericStatusEffect
+          hidden: true
           key: Drowsiness
           component: Drowsiness
           time: 2
           type: Add
           probability: 0.05
           conditions:
-            - !type:AddictionCondition
-              addictionId: Fentanyl
-              min: 0.4
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Fentanyl
+              min: 0.7
               max: 1.0
         - !type:ChemVomit
+          hidden: true
           probability: 0.5
           conditions:
-            - !type:AddictionCondition
-              addictionId: Fentanyl
-              min: 0.4
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Fentanyl
+              min: 0.7
               max: 1.0
         - !type:PopupMessage
+          hidden: true
           type: Local
           visualType: MediumCaution
           messages: [ "reagent-effect-naloxone-withdrawal" ]
           probability: 0.8
           conditions:
-            - !type:AddictionCondition
-              addictionId: Fentanyl
-              min: 0.4
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Fentanyl
+              min: 0.7
               max: 1.0
         - !type:Emote
+          hidden: true
           emote: Yawn
           showInChat: true
           probability: 0.1
           conditions:
-            - !type:AddictionCondition
-              addictionId: Fentanyl
-              min: 0.4
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Fentanyl
+              min: 0.7
               max: 1.0
-        - !type:CureAddictionEffect
-          addictionId: Morphine
-          amount: 0.06
+        - !type:Paralyze
+          hidden: true
+          paralyzeTime: 3
+          refresh: false
+          probability: 0.15
+          conditions:
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Fentanyl
+              min: 0.9
+              max: 1.0
+        - !type:HealthChange
+          hidden: true
+          conditions:
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Fentanyl
+              min: 0.9
+              max: 1.0
+          damage:
+            types:
+              Poison: 1.5
+              Asphyxiation: 2.0
+        - !type:PopupMessage
+          hidden: true
+          type: Local
+          visualType: LargeCaution
+          messages: [ "reagent-effect-naloxone-precipitated" ]
+          probability: 0.9
+          conditions:
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Fentanyl
+              min: 0.9
+              max: 1.0
+        # Morphine
+        - !type:RemoveSyndromeEffect
+          hidden: true
+          conditions:
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.6
+              max: 1.0
+          syndrome: OpioidAddiction
+          severity: 0.001
         - !type:GenericStatusEffect
+          hidden: true
           key: Drowsiness
           component: Drowsiness
           time: 2
           type: Add
           probability: 0.05
           conditions:
-            - !type:AddictionCondition
-              addictionId: Morphine
-              min: 0.4
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.7
               max: 1.0
         - !type:Emote
+          hidden: true
           emote: Yawn
           showInChat: true
           probability: 0.1
           conditions:
-            - !type:AddictionCondition
-              addictionId: Morphine
-              min: 0.4
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.7
               max: 1.0
         - !type:ChemVomit
+          hidden: true
           probability: 0.3
           conditions:
-            - !type:AddictionCondition
-              addictionId: Morphine
-              min: 0.4
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.7
               max: 1.0
         - !type:PopupMessage
+          hidden: true
           type: Local
           visualType: MediumCaution
           messages: [ "reagent-effect-naloxone-withdrawal" ]
           probability: 0.6
           conditions:
-            - !type:AddictionCondition
-              addictionId: Morphine
-              min: 0.4
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.6
               max: 1.0
+        - !type:Paralyze
+          hidden: true
+          paralyzeTime: 3
+          refresh: false
+          probability: 0.15
+          conditions:
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.9
+              max: 1.0
+        - !type:HealthChange
+          hidden: true
+          conditions:
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.9
+              max: 1.0
+          damage:
+            types:
+              Poison: 1.5
+        - !type:PopupMessage
+          hidden: true
+          type: Local
+          visualType: LargeCaution
+          messages: [ "reagent-effect-naloxone-precipitated" ]
+          probability: 0.9
+          conditions:
+            - !type:ToleranceCondition
+              source: Brain
+              reagent: Morphine
+              min: 0.9
+              max: 1.0
+        - !type:GenericStatusEffect
+          hidden: true
+          key: BlockedBreathing
+          type: Remove
+        - !type:SuppressEffect
+          hidden: true
+          syndrome: OpioidAddiction
+          duration: 25
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-naloxone
+
+# region Methadone
+# opioid therapy
+- type: reagent
+  id: Methadone
+  name: reagent-name-methadone
+  group: Medicine
+  desc: reagent-desc-methadone
+  physicalDesc: reagent-physical-desc-soothing
+  flavor: bitter
+  color: "#c8b89a"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.3
+      effects:
+        - !type:RemoveSyndromeEffect
+          hidden: true
+          conditions:
+            - !type:ToleranceCondition
+              reagent: Morphine
+              source: Brain
+              min: 0.6
+              max: 1.0
+          syndrome: OpioidAddiction
+          severity: 0.005
+        - !type:SuppressEffect
+          hidden: true
+          syndrome: OpioidAddiction
+          duration: 45
+        - !type:ToleranceEffect
+          hidden: true
+          reagent: Morphine
+          amount: 0.02
+          target: Brain
+        - !type:GenericStatusEffect
+          hidden: true
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 4
+          probability: 0.15
+          refresh: false
+        - !type:Drunk
+          boozePower: 2
+        - !type:SuppressEffect
+          hidden: true
+          syndrome: PainSyndrome
+          duration: 25
+        - !type:SuppressEffect
+          hidden: true
+          syndrome: ChronicPain
+          duration: 20
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-methadone
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-wiithdrawl-pain
+
+# region Tabex
+# Nicotine antagonist
+- type: reagent
+  id: Tabex
+  name: reagent-name-tabex
+  group: Medicine
+  desc: reagent-desc-tabex
+  physicalDesc: reagent-physical-desc-clear
+  flavor: bitter
+  color: "#d3d46c"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+        - !type:SuppressEffect
+          # hidden: true
+          syndrome: NicotineAddiction
+          duration: 60
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-tabex
+
+# region Clonidine
+# Alpha-2 suppresses withdrawal symptoms
+- type: reagent
+  id: Clonidine
+  name: reagent-name-clonidine
+  group: Medicine
+  desc: reagent-desc-clonidine
+  physicalDesc: reagent-physical-desc-clear
+  flavor: bitter
+  color: "#e8e8f0"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.4
+      effects:
+        - !type:MovespeedModifier
+          hidden: true
+          walkSpeedModifier: 0.95
+          sprintSpeedModifier: 0.95
+          statusLifetime: 5
+        - !type:GenericStatusEffect
+          key: Jitter
+          time: 4
+          type: Remove
+        - !type:GenericStatusEffect
+          key: Drowsiness
+          component: Drowsiness
+          type: Add
+          time: 3
+          probability: 0.1
+          refresh: false
+        - !type:SuppressEffect
+          hidden: true
+          syndrome: StimulantAddiction
+          duration: 40
+        - !type:GenericDescEffect
+          description: forge-reagent-effect-clonidine
+        # Addiction
+        - !type:ToleranceEffect
+          # hidden: true
+          reagent: Clonidine
+          amount: 0.01
+        - !type:SyndromeEffect
+          hidden: true
+          conditions:
+            - !type:ToleranceCondition
+              reagent: Clonidine
+              source: Brain
+              min: 0.3
+              max: 1.0
+          syndrome: SedativeAddiction
+          severity: 1.1
+        - !type:GenericDescEffect
+          description: forge-reagent-tolerance-addiction

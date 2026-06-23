@@ -1,0 +1,92 @@
+﻿<controls:FancyWindow xmlns="https://spacestation14.io"
+            xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+            xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      SetSize="525 423"
+                      MinSize="525 423"
+                      Title="{Loc 'ui-bs-transmitter-title'}">
+
+
+    <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" SeparationOverride="8" Margin="4">
+        <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="0 4 0 4">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BorderThickness="7" BorderColor="#252525" BackgroundColor="#3d474d"/>
+            </PanelContainer.PanelOverride>
+            <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" SeparationOverride="8" Margin="8">
+                    <PanelContainer HorizontalExpand="True" VerticalExpand="True" >
+                        <BoxContainer Orientation="Vertical" Margin="20 0 0 0">
+                            <BoxContainer Orientation="Horizontal">
+                                <Label Text="{Loc 'ui-bs-transmitter-info-label'}" HorizontalExpand="True" VerticalAlignment="Center" Margin="30 0 0 0" />
+                                <Button Name="EnableButton" Text="{Loc 'ui-bs-receiver-enable-button'}" ToggleMode="True" HorizontalAlignment="Right" />
+                            </BoxContainer>
+
+                            <BoxContainer Orientation="Horizontal">
+                                <SpriteView Name="SpriteViewControl" MaxHeight="160" MaxWidth="160" Scale="5 5"></SpriteView>
+                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                    <BoxContainer Orientation="Horizontal" Margin="30 0 0 0">
+                                        <Label Text="{Loc 'ui-bs-transmitter-current-supply-label'}" HorizontalExpand="True" />
+                                        <Label Name="CurrentSupplyLabel" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Horizontal" Margin="30 0 0 0">
+                                        <Label Text="{Loc 'ui-bs-transmitter-power-consumer-label'}" HorizontalExpand="True" />
+                                        <Label Name="PowerConsumerLabel" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Horizontal" Margin="30 0 0 0">
+                                        <Label Text="{Loc 'ui-bs-transmitter-draw-rate-label'}" HorizontalExpand="True" />
+                                        <Label Name="NetworkStatsLabel" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Horizontal" Margin="30 0 0 0">
+                                        <Label Text="{Loc 'ui-bs-transmitter-connected-devices-label'}" HorizontalExpand="True" />
+                                        <Label Name="ConnectedDevicesLabel" Text="0" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Horizontal" Margin="30 0 0 0">
+                                        <Label Text="{Loc 'ui-bs-transmitter-expected-income-label'}" HorizontalExpand="True" />
+                                        <Label Name="ExpectedIncomeLabel" />
+                                    </BoxContainer>
+                                </BoxContainer>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </PanelContainer>
+
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+                        <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                            <BoxContainer Orientation="Vertical">
+                                <Label Text="{Loc 'ui-bs-transmitter-bank-label'}" HorizontalAlignment="Left" />
+                                <BoxContainer Orientation="Vertical" Margin="20 20 20 12" VerticalExpand="True">
+                                    <Label Name="TotalMoneyLabel" Text="{Loc 'ui-bs-transmitter-money-label'}" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalExpand="True"/>
+                                    <Button Name="WithdrawButton" Text="{Loc 'ui-bs-transmitter-withdraw-button'}" HorizontalExpand="True" VerticalAlignment="Bottom" VerticalExpand="True" />
+                                </BoxContainer>
+                            </BoxContainer>
+                        </PanelContainer>
+
+                        <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                            <BoxContainer Orientation="Vertical">
+                                <Label Text="{Loc 'ui-bs-transmitter-settings-label'}" HorizontalAlignment="Left" />
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                    <Label Text="{Loc 'ui-bs-transmitter-target-power-label'}" HorizontalAlignment="Center" />
+                                    <Label Name="TargetPowerLabel" HorizontalAlignment="Right" HorizontalExpand="True" />
+                                </BoxContainer>
+
+                                <BoxContainer Orientation="Horizontal">
+                                    <Button Name="RequestedPowerDecreaseButton" HorizontalExpand="True" />
+                                    <Button Name="RequestedPowerIncreaseButton" HorizontalExpand="True" />
+                                </BoxContainer>
+
+                                <Label Text="{Loc 'ui-bs-transmitter-price-label'}" HorizontalAlignment="Left" Margin="10 0 0 0" />
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                    <Label Text="$" />
+                                    <SpinBox Name="PriceSpinBox" HorizontalExpand="True" />
+                                    <Label Text="{Loc 'ui-bs-transmitter-minute-label'}" />
+                                </BoxContainer>
+                                <Label Text="{Loc 'ui-bs-transmitter-warning-label'}" FontColorOverride="#900020" HorizontalAlignment="Center" StyleClasses="WindowFooterText"/>
+                            </BoxContainer>
+                        </PanelContainer>
+                    </BoxContainer>
+                </BoxContainer>
+            </PanelContainer>
+        </PanelContainer>
+    </BoxContainer>
+</controls:FancyWindow>

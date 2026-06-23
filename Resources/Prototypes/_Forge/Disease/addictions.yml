@@ -1,0 +1,465 @@
+# region // StimulantAddiction
+- type: syndrome
+  id: StimulantAddiction
+  name: syndrome-stimulant-addiction
+  organ: Brain
+  interval: 5
+  severityDecay: 0.03
+  flareDelay: 420
+  stages:
+    - minSeverity: 0
+    # region Stage 1
+    - minSeverity: 20
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.92
+          sprintModifier: 0.92
+          key: StimulantAddiction
+          time: 7
+        - !type:EntityEffectList # name: random
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 2.0
+              frequency: 2.5
+              time: 3
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-stimulant-flare-mild-1
+                - syndrome-stimulant-flare-mild-2
+              visualType: SmallCaution
+              probability: 0.03
+    # region Stage 2
+    - minSeverity: 45
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.80
+          sprintModifier: 0.80
+          key: StimulantAddiction
+          time: 7
+        - !type:EntityEffectList # name: random
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 4.0
+              frequency: 3.5
+              time: 3
+            - !type:Emote
+              emote: Yawn
+              showInChat: true
+              probability: 0.2
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-stimulant-flare-moderate-1
+                - syndrome-stimulant-flare-moderate-2
+                - syndrome-stimulant-flare-moderate-3
+              visualType: MediumCaution
+              probability: 0.05
+        - !type:EntityEffectList # name: half-permanent staff
+          flareOnly: true
+          effects:
+            - !type:GenericStatusEffect
+              key: Stutter
+              component: StutteringAccent
+              time: 8
+              type: Add
+    # region Stage 3
+    - minSeverity: 70
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.65
+          sprintModifier: 0.65
+          key: StimulantAddiction
+        - !type:EntityEffectList # name: random
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 7.0
+              frequency: 5.0
+              time: 6
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-stimulant-flare-severe-1
+                - syndrome-stimulant-flare-severe-2
+                - syndrome-stimulant-flare-severe-3
+              visualType: LargeCaution
+              probability: 0.1
+            - !type:Emote
+              emote: Scream
+              showInChat: false
+              probability: 0.05
+        - !type:EntityEffectList # name: sleepy
+          flareOnly: true
+          chance: 0.12
+          effects:
+            - !type:GenericStatusEffect
+              key: Stutter
+              component: StutteringAccent
+              time: 13
+              type: Add
+            - !type:GenericStatusEffect
+              key: Drowsiness
+              component: Drowsiness
+              type: Add
+              time: 8
+            - !type:TunnelVision
+              intensity: 1.4
+              pulse: 2.5
+              darkness: 0.95
+              color: "#251827"
+              time: 12
+        - !type:EntityEffectList # name: OMG IM PARALYZED
+          flareOnly: true
+          chance: 0.08
+          effects:
+            - !type:GenericStatusEffect
+              key: TemporaryBlindness
+              component: TemporaryBlindness
+              time: 6
+              type: Add
+            - !type:Paralyze
+              paralyzeTime: 6
+
+# region // OpioidAddiction
+- type: syndrome
+  id: OpioidAddiction
+  name: syndrome-opioid-addiction
+  organ: Brain
+  interval: 6
+  severityDecay: 0.025
+  flareDelay: 460
+  stages:
+    - minSeverity: 0
+    # region Stage 1
+    - minSeverity: 20
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.90
+          sprintModifier: 0.90
+          key: OpioidAddiction
+          time: 8.0
+        - !type:EntityEffectList # name: random staff
+          flareOnly: true
+          effects:
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-opioid-flare-mild-1
+                - syndrome-opioid-flare-mild-2
+              visualType: SmallCaution
+              probability: 0.3
+    # region Stage 2
+    - minSeverity: 45
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.75
+          sprintModifier: 0.75
+          key: OpioidAddiction
+          time: 8.0
+        - !type:EntityEffectList # name: random staff
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 2.5
+              frequency: 2.0
+              time: 6
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-opioid-flare-moderate-1
+                - syndrome-opioid-flare-moderate-2
+                - syndrome-opioid-flare-moderate-3
+              visualType: MediumCaution
+              probability: 0.25
+            - !type:ChemVomit
+              probability: 0.18
+            - !type:Emote
+              emote: Yawn
+              showInChat: true
+              probability: 0.2
+        - !type:EntityEffectList # name: I CANT BREATH WTF
+          flareOnly: true
+          chance: 0.05
+          effects:
+            - !type:GenericStatusEffect
+              key: BlockedBreathing
+              component: BlockedBreathing
+              time: 4
+              type: Add
+            - !type:TunnelVision
+              intensity: 1.2
+              pulse: 1.1
+              darkness: 0.8
+              color: "#020113"
+              time: 4
+    # region Stage 3
+    - minSeverity: 75
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.60
+          sprintModifier: 0.60
+          key: OpioidAddiction
+          time: 8.0
+        - !type:EntityEffectList # name: random bullshit go
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 5.0
+              frequency: 4.0
+              time: 8
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-opioid-flare-severe-1
+                - syndrome-opioid-flare-severe-2
+                - syndrome-opioid-flare-severe-3
+              visualType: LargeCaution
+              probability: 0.3
+            - !type:GenericStatusEffect
+              key: Stutter
+              component: StutteringAccent
+              time: 8
+              type: Add
+              refresh: false
+            - !type:ChemVomit
+              probability: 0.1
+        - !type:EntityEffectList # name: I CANT BREATH WTF
+          flareOnly: true
+          chance: 0.2
+          effects:
+            - !type:GenericStatusEffect
+              key: BlockedBreathing
+              component: BlockedBreathing
+              time: 12
+              type: Add
+            - !type:TunnelVision
+              intensity: 1.5
+              pulse: 1.4
+              darkness: 0.95
+              color: "#020113"
+              time: 12
+
+# region // SedativeAddiction
+- type: syndrome
+  id: SedativeAddiction
+  name: syndrome-sedative-addiction
+  organ: Brain
+  interval: 8.0
+  severityDecay: 0.02
+  flareDelay: 460
+  stages:
+    - minSeverity: 0
+    # region Stage 1
+    - minSeverity: 20
+      symptoms:
+        - !type:EntityEffectList # name: random
+          flareOnly: true
+          effects:
+            - !type:GenericStatusEffect
+              key: Drowsiness
+              component: Drowsiness
+              type: Add
+              time: 2
+              probability: 0.25
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-sedative-flare-mild-1
+                - syndrome-sedative-flare-mild-2
+              visualType: SmallCaution
+              probability: 0.3
+    # region Stage 2
+    - minSeverity: 45
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.88
+          sprintModifier: 0.88
+          key: SedativeAddiction
+          time: 10.0
+        - !type:EntityEffectList # name: random
+          flareOnly: true
+          effects:
+            - !type:GenericStatusEffect
+              key: Drowsiness
+              component: Drowsiness
+              type: Add
+              time: 3
+              probability: 0.35
+            - !type:GenericStatusEffect
+              key: SeeingRainbows
+              component: SeeingRainbows
+              type: Add
+              time: 12
+              refresh: false
+              probability: 0.25
+            - !type:Emote
+              emote: Yawn
+              showInChat: true
+              probability: 0.2
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-sedative-flare-moderate-1
+                - syndrome-sedative-flare-moderate-2
+                - syndrome-sedative-flare-moderate-3
+              visualType: MediumCaution
+              probability: 0.25
+    # region Stage 3
+    - minSeverity: 75
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.72
+          sprintModifier: 0.72
+          key: SedativeAddiction
+          time: 10.0
+        - !type:EntityEffectList # name: random
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 4.0
+              frequency: 3.5
+              time: 5
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-sedative-flare-severe-1
+                - syndrome-sedative-flare-severe-2
+                - syndrome-sedative-flare-severe-3
+              visualType: LargeCaution
+              probability: 0.3
+            - !type:GenericStatusEffect
+              key: ForcedSleep
+              component: ForcedSleeping
+              time: 2
+              type: Add
+              probability: 0.06
+            - !type:Emote
+              emote: Yawn
+              showInChat: true
+              probability: 0.3
+            - !type:GenericStatusEffect
+              key: Drowsiness
+              component: Drowsiness
+              type: Add
+              time: 5
+              probability: 0.5
+            - !type:GenericStatusEffect
+              key: SeeingRainbows
+              component: SeeingRainbows
+              type: Add
+              time: 20
+              refresh: false
+              probability: 0.45
+            - !type:GenericStatusEffect
+              key: TemporaryBlindness
+              component: TemporaryBlindness
+              time: 3
+              type: Add
+              probability: 0.2
+        - !type:EntityEffectList # name: o lol
+          flareOnly: true
+          chance: 0.1
+          effects:
+            - !type:GenericStatusEffect
+              key: Drowsiness
+              component: Drowsiness
+              type: Add
+              time: 16
+            - !type:TunnelVision
+              intensity: 1.4
+              pulse: 0.3
+              darkness: 0.6
+              color: "#3d5c68"
+              time: 16
+
+# region // NicotineAddiction
+- type: syndrome
+  id: NicotineAddiction
+  name: syndrome-nicotine-addiction
+  organ: Body
+  interval: 10
+  severityDecay: 0.001
+  flareDelay: 300
+  stages:
+    - minSeverity: 0
+    # region Stage 1
+    - minSeverity: 20
+      symptoms:
+        - !type:EntityEffectList # name: maybe little smoke?
+          flareOnly: true
+          effects:
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-nicotine-hint-1
+                - syndrome-nicotine-hint-2
+                - syndrome-nicotine-hint-3
+              visualType: Medium
+              probability: 0.5
+    # region Stage 2
+    - minSeverity: 50
+      symptoms:
+        - !type:EntityEffectList # name: *Cough*... Ah, the sweet taste of bad decisions.
+          effects:
+            - !type:Emote
+              emote: Cough
+              probability: 0.2
+        - !type:EntityEffectList # name: maybe smoke?
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 1.5
+              frequency: 1.5
+              time: 3
+              probability: 0.03
+            - !type:Emote
+              emote: Cough
+              probability: 0.4
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-nicotine-flare-moderate-1
+                - syndrome-nicotine-flare-moderate-2
+              visualType: MediumCaution
+              probability: 0.45
+    # region Stage 3
+    - minSeverity: 80
+      symptoms:
+        - !type:EntityEffectList # name: *Cough*... Ah, the sweet taste of bad decisions.
+          effects:
+            - !type:Emote
+              emote: Cough
+              probability: 0.3
+            - !type:Emote
+              emote: Sneeze
+              probability: 0.1
+        - !type:EntityEffectList # name: ahh, cigaretts..
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 2.0
+              frequency: 2.0
+              time: 4
+              probability: 0.04
+            - !type:Emote
+              emote: Cough
+              probability: 0.4
+            - !type:Emote
+              emote: Sneeze
+              probability: 0.2
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-nicotine-flare-severe-1
+                - syndrome-nicotine-flare-severe-2
+              visualType: MediumCaution
+              probability: 0.45
+            - !type:PopupMessage # How about a smoke break, Colonel? This is highly stressful work...
+              type: Local
+              messages:
+                - syndrome-nicotine-flare-special-1
+              visualType: SmallCaution
+              probability: 0.08

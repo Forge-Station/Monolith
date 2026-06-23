@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "banner_scraptech by MrIzo, banner_tl by autsaider_m, banner_nexus by no_idea_for_name, banner_renegate & banner_empire by Weilpatient",
+  "copyright": "banner_scraptech by MrIzo, banner_tl by autsaider_m, banner_nexus by no_idea_for_name, banner_renegate & banner_empire by Weilpatient, banner_viper by rukilator ",
   "size": {
     "x": 32,
     "y": 32
@@ -27,6 +27,9 @@
     },
     {
       "name": "banner_ivi"
+    },
+    {
+      "name": "banner_viper"
     }
   ]
 }

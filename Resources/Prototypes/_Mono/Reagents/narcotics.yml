@@ -21,23 +21,6 @@
             Burn: -3
             Brute: -6 # its a painkiller
             Toxin: -1
-        # Forge-change-start
-      - !type:HealthChange
-        conditions:
-          - !type:TotalDamage
-            min: 5
-          - !type:ReagentThreshold
-            max: 5
-          - !type:AddictionCondition
-            addictionId: Fentanyl
-            min: 0.5
-            max: 1.0
-        damage:
-          groups:
-            Burn: 1.5
-            Brute: 3
-            Toxin: 0.5
-        # Forge-change-end
     Narcotic:
       metabolismRate: 1
       effects:
@@ -68,17 +51,6 @@
       - !type:Drunk
         slurSpeech: true
         boozePower: 75
-        # Forge-change-start
-      - !type:ChemVomit
-        probability: 0.15
-        conditions:
-          - !type:ReagentThreshold
-            min: 3
-          - !type:AddictionCondition
-            addictionId: Fentanyl
-            min: 0.5
-            max: 1.0
-        # Forge-change-end
         # OD effects
       - !type:ChemVomit
         probability: 0.05
@@ -115,9 +87,44 @@
         visualType: Medium
         messages: [ "generic-reagent-effect-nauseous" ]
         probability: 0.5
-      - !type:AddictiveEffect # Forge-change
-        addictionId: Fentanyl
-        toleranceGain: 0.07
+      # Forge-change-start
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: Fentanyl
+        amount: 0.03
+        target: Brain
+      - !type:SyndromeEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Brain
+            reagent: Fentanyl
+            min: 0.3
+            max: 1.0
+        syndrome: OpioidAddiction
+        severity: 1.9
+      - !type:HealthChange
+        hidden: true
+        conditions:
+        - !type:TotalDamage
+          min: 5
+        - !type:ReagentThreshold
+          max: 5
+        - !type:ToleranceCondition
+          source: Brain
+          reagent: Fentanyl
+          min: 0.6
+          max: 1.0
+        damage:
+          groups:
+            Burn: 1.5
+            Brute: 3
+            Toxin: 0.5
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-addiction
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
+      # Forge-change-end
 
 # Monolithic
 

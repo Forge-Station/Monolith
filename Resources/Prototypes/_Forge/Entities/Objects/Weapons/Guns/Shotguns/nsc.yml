@@ -3,7 +3,7 @@
   parent: [BaseWeaponBattery, BaseGunWieldable]
   id: WeaponEnergyShotgunNexusUdarnik
   suffix: Нексус
-  description: UzkCo plasma shotgun with a tight spread. Must be wielded.
+  description: UcasCo plasma shotgun with a tight spread. Must be wielded.
   components:
   - type: Sprite
     sprite: Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun.rsi

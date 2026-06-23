@@ -3,7 +3,7 @@
   parent: BaseMeleeWeaponEnergy
   id: WeaponEnergySwordNexusProtos
   suffix: Нексус
-  description: A new UzkCo market release — a rigid plasma blade held in a force field. Briefly dropping the rear field lets you leap forward and finish a target.
+  description: A new UcasCo market release — a rigid plasma blade held in a force field. Briefly dropping the rear field lets you leap forward and finish a target.
   components:
   - type: Sprite
     sprite: Forge/Objects/Weapons/Melee/nexus_energie_sword.rsi

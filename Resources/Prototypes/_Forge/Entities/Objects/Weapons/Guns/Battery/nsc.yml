@@ -3,7 +3,7 @@
   parent: ForgeBaseWeaponFrameEnergyPistolNanotrasen
   id: WeaponEnergyPistolNexusProjector
   suffix: Нексус
-  description: UzkCo plasma pistol with semi-auto, burst, and full-auto modes. Self-recharging battery.
+  description: UcasCo plasma pistol with semi-auto, burst, and full-auto modes. Self-recharging battery.
   components:
   - type: Sprite
     sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_pistol.rsi
@@ -47,7 +47,7 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 17
-  - type: ForgeSelectiveFireBattery
+  - type: SelectiveFireBattery
     modes:
     - mode: SemiAuto
       proto: BulletNexusPlasmaProjector
@@ -73,7 +73,7 @@
   parent: ForgeBaseWeaponFrameEnergyPistolNanotrasen
   id: WeaponEnergyPistolNexusDoznavatel
   suffix: Нексус
-  description: UzkCo pistol with plasma bolts and a charged EMP shot. EMP mode uses most of the battery per shot.
+  description: UcasCo pistol with plasma bolts and a charged EMP shot. EMP mode uses most of the battery per shot.
   components:
   - type: Sprite
     sprite: Forge/Objects/Weapons/Guns/Battery/nexus_emp_pistol.rsi
@@ -115,7 +115,7 @@
   parent: [ForgeBaseWeaponFrameEnergyRifleAssaultNanotrasen, BaseGunWieldable]
   id: WeaponEnergyRifleNexusKiy
   suffix: Нексус
-  description: UzkCo plasma rifle. Semi-auto fires one heavy bolt; full auto fires two lighter bolts per shot.
+  description: UcasCo plasma rifle. Semi-auto fires one heavy bolt; full auto fires two lighter bolts per shot.
   components:
   - type: Sprite
     sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle.rsi
@@ -144,7 +144,7 @@
   - type: ProjectileBatteryAmmoProvider
     proto: BulletNexusPlasmaKiySemi
     fireCost: 70
-  - type: ForgeSelectiveFireBattery
+  - type: SelectiveFireBattery
     modes:
     - mode: SemiAuto
       proto: BulletNexusPlasmaKiySemi

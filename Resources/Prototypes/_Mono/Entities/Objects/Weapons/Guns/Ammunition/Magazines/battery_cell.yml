@@ -21,7 +21,7 @@
     proto: PulsedPlasma
     fireCost: 3000
   - type: StaticPrice
-    price: 1000
+    price: 2200
   - type: Tag
     tags:
     - PPLCell
@@ -31,7 +31,7 @@
       Gold: 40
       Glass: 160
       Plasma: 200
-      Iridite: 50
+      # Iridite: 50 # Forge-change PR:238: why PulsedPlasmaLaserCanister dont have a iridite, but PhysicalComposition have?
       Uranium: 150
     chemicalComposition:
       Zinc: 20

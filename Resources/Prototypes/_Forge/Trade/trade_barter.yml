@@ -1,0 +1,37 @@
+- type: ncBarterListing
+  id: ForgeBarterSteelToBasicWeaponCase
+  name: "Сталь за лёгкий оружейный ящик"
+  description: "Обмен 60 листов стали на случайный слабый оружейный ящик."
+  icon: WeaponCaseShortMk58Expedition
+  cost:
+  - currency: Steel
+    count: 60
+  receivePools:
+  - pool: ForgeExpeditionRewardBasicWeapons
+    rolls: 1
+    chance: 1
+
+- type: ncBarterListing
+  id: ForgeBarterUraniumToAdvancedWeaponCase
+  name: "Уран за средний оружейный ящик"
+  description: "Обмен 60 листов урана на случайный средний оружейный ящик."
+  icon: WeaponCaseShortCobra
+  cost:
+  - currency: Uranium
+    count: 60
+  receivePools:
+  - pool: ForgeExpeditionRewardAdvancedWeapons
+    rolls: 1
+    chance: 1
+
+- type: ncBarterCategory
+  id: ForgeExpeditionBarterCategory
+  name: "Бартер экспедиций"
+  listings:
+  - ForgeBarterSteelToBasicWeaponCase
+  - ForgeBarterUraniumToAdvancedWeaponCase
+
+- type: ncBarterPreset
+  id: ForgeExpeditionBarterPreset
+  categories:
+  - ForgeExpeditionBarterCategory

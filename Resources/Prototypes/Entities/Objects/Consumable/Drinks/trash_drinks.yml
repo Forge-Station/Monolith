@@ -73,6 +73,7 @@
     tags:
     - Trash
     - DrinkBottle # Mono Edit for Molotovs
+    - GoblinPreciousTrash # Forge-Change
   - type: PhysicalComposition
     materialComposition:
       Glass: 100
@@ -140,6 +141,7 @@
   - type: Tag
     tags:
     - Trash
+    - GoblinPreciousTrash # Forge-Change
   - type: PhysicalComposition
     materialComposition:
       Cardboard: 20

@@ -866,6 +866,7 @@
   components:
   - type: VendingMachine
     pack: EngiVendInventory
+    requiresCash: true # Forge-change
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -894,6 +895,7 @@
   components:
   - type: VendingMachine
     pack: NanoMedPlusInventory
+    requiresCash: true # Forge-change
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -1330,6 +1332,7 @@
   components:
   - type: VendingMachine
     pack: YouToolInventory
+    requiresCash: true # Forge-change
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -1423,6 +1426,7 @@
   components:
   - type: VendingMachine
     pack: NFSalvageEquipmentInventory # Frontier SalvageEquipmentInventory<NFSalvageEquipmentInventory
+    requiresCash: true # Forge-change
     offState: off
     brokenState: broken
     normalState: normal-unshaded

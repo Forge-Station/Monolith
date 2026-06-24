@@ -1,0 +1,107 @@
+using Robust.Shared.Serialization;
+
+
+namespace Content.Shared._Forge.Trade;
+
+
+[Serializable, NetSerializable,]
+public sealed class StoreBuyListingBoundUiMessage : BoundUserInterfaceMessage
+{
+    public StoreBuyListingBoundUiMessage(string id, int count)
+    {
+        Id = id;
+        Count = count;
+    }
+
+    public string Id { get; }
+    public int Count { get; }
+}
+
+[Serializable, NetSerializable,]
+public sealed class StoreSellListingBoundUiMessage : BoundUserInterfaceMessage
+{
+    public StoreSellListingBoundUiMessage(string id, int count, bool fromCrate = false)
+    {
+        Id = id;
+        Count = count;
+        FromCrate = fromCrate;
+    }
+
+    public string Id { get; }
+    public int Count { get; }
+    public bool FromCrate { get; }
+}
+
+[Serializable, NetSerializable,]
+public sealed class StoreMassSellPulledCrateBoundUiMessage : BoundUserInterfaceMessage { }
+
+[Serializable, NetSerializable,]
+public sealed class StoreBarterListingBoundUiMessage : BoundUserInterfaceMessage
+{
+    public StoreBarterListingBoundUiMessage(string id, int count)
+    {
+        Id = id;
+        Count = count;
+    }
+
+    public string Id { get; }
+    public int Count { get; }
+}
+
+[Serializable, NetSerializable,]
+public sealed class ClaimContractBoundMessage : BoundUserInterfaceMessage
+{
+    public ClaimContractBoundMessage(string contractId)
+    {
+        ContractId = contractId;
+    }
+
+    public string ContractId { get; }
+}
+
+[Serializable, NetSerializable,]
+public sealed class TakeContractBoundMessage : BoundUserInterfaceMessage
+{
+    public TakeContractBoundMessage(string contractId)
+    {
+        ContractId = contractId;
+    }
+
+    public string ContractId { get; }
+}
+
+[Serializable, NetSerializable,]
+public sealed class RequestContractPinpointerBoundMessage : BoundUserInterfaceMessage
+{
+    public RequestContractPinpointerBoundMessage(string contractId)
+    {
+        ContractId = contractId;
+    }
+
+    public string ContractId { get; }
+}
+
+[Serializable, NetSerializable,]
+public sealed class RequestUiRefreshMessage : BoundUserInterfaceMessage { }
+
+[Serializable, NetSerializable,]
+public sealed class SkipContractBoundMessage : BoundUserInterfaceMessage
+{
+    public SkipContractBoundMessage(string contractId)
+    {
+        ContractId = contractId;
+    }
+
+    public string ContractId { get; }
+}
+
+[Serializable, NetSerializable,]
+public sealed class StoreSetVisibleListingsBoundUiMessage : BoundUserInterfaceMessage
+{
+    public StoreSetVisibleListingsBoundUiMessage(string[] ids)
+    {
+        Ids = ids;
+    }
+
+    public string[] Ids { get; }
+}

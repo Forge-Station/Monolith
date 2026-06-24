@@ -145,8 +145,6 @@
     guides:
     - Asakim
     # WWDP-Edit-End
-  - type: Addiction # Forge-change
-    enabled: false
 
 - type: entity
   save: false

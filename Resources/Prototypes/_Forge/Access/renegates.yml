@@ -6,6 +6,10 @@
   id: RenegateOfficer
   name: id-card-access-level-renegate-officer
 
+- type: accessLevel
+  id: RenegateSecApartment
+  name: id-card-access-level-renegate-sec-apartment
+
 - type: accessGroup
   id: GeneralRenegateAccess
   tags:

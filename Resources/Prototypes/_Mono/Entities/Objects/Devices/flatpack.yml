@@ -340,3 +340,20 @@
   - type: StaticPrice
     price: 1000
     vendPrice: 8000
+
+# Forge-Change-Start
+- type: entity
+  parent: BaseNFFlatpack
+  id: TrashBoxFlatpack
+  name: Trash box flatpack
+  description: A flatpack used for constructing a trash box.
+  components:
+  - type: Flatpack
+    entity: TrashBox
+  - type: StaticPrice
+    price: 500
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+      Glass: 30
+# Forge-Change-End

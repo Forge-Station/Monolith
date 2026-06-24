@@ -876,6 +876,10 @@
     - EmpireDiplomacy
     - Renegate
     - RenegateOfficer
+    - NtSecApartment
+    - TsfSecApartment
+    - EmpireSecApartment
+    - RenegateSecApartment
     # Forge-change end
   - type: Tag #  Ignore Chameleon tags
     tags:

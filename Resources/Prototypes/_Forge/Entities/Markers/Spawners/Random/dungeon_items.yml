@@ -1,0 +1,6 @@
+- type: entity
+  id: SpawnDungeonLootCanister
+  parent: SalvageCanisterSpawner
+  name: random canister
+  suffix: "Dungeon"
+  categories: [ HideSpawnMenu ]

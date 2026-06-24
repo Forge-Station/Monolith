@@ -49,7 +49,7 @@
     damageOverlay:
       sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
-    price: 70 # Frontier: 150<70
+    price: 115 # Frontier: 150<70 # Forge-Change
   - type: RadiationBlocker
     resistance: 4
   - type: Construction
@@ -157,7 +157,7 @@
     damageOverlay:
       sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
-    price: 70 # Frontier: 150<70
+    price: 115 # Frontier: 150<70
   - type: RadiationBlocker
     resistance: 3
   - type: Construction

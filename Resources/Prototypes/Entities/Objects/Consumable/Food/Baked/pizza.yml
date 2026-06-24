@@ -666,8 +666,6 @@
           Quantity: 4
         - ReagentId: Uranium
           Quantity: 16
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 1         # Forge-change
   # - type: RadiationSource # Frontier
   #   intensity: 0.1 # Frontier
   #   slope: 3 # Frontier
@@ -706,8 +704,6 @@
           Quantity: 0.5
         - ReagentId: Uranium
           Quantity: 2
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 0.125     # Forge-change
   # - type: RadiationSource # Frontier
   #   intensity: 0.1 # Frontier
   #   slope: 3 # Frontier

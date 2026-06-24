@@ -35,6 +35,8 @@ public sealed partial class NcContractSystem : EntitySystem
         var config = new ContractObjectiveConfigData
         {
             GivePinpointer = true,
+            GridName = proto.GridName,
+            GridNames = CloneStringList(proto.GridNames),
             ProofPrototype = proto.Completion.Proof,
             DroneHuntEnabled = true,
             DroneHuntGrids = CloneDroneHuntGridEntries(proto.Spawn.Grids),
@@ -56,6 +58,7 @@ public sealed partial class NcContractSystem : EntitySystem
             Description = proto.Description,
             Repeatable = proto.Repeatable,
             Taken = false,
+            ActiveTimeLimitSeconds = proto.ActiveTimeLimitSeconds,
             ObjectiveType = ContractObjectiveType.Hunt,
             ExecutionKind = ContractExecutionKind.DroneHuntObjective,
             Runtime = runtime,
@@ -96,6 +99,7 @@ public sealed partial class NcContractSystem : EntitySystem
             {
                 Path = entry.Path,
                 Weight = entry.Weight,
+                GridNames = CloneStringList(entry.GridNames),
             });
         }
 
@@ -192,9 +196,10 @@ public sealed partial class NcContractSystem : EntitySystem
         var attempts = Math.Max(1, contract.Config.DroneHuntPlacementAttempts);
         for (var attempt = 0; attempt < attempts; attempt++)
         {
-            if (!TryPickDroneHuntGrid(key.ContractId, contract.Config.DroneHuntGrids, out var gridPath))
+            if (!TryPickDroneHuntGrid(key.ContractId, contract.Config.DroneHuntGrids, out var gridEntry))
                 return false;
 
+            var gridPath = gridEntry.Path;
             if (!TryResolveDroneHuntSpawnCoordinates(key.Store, key.ContractId, contract.Config, out var spawnMapCoords))
                 continue;
 
@@ -232,7 +237,7 @@ public sealed partial class NcContractSystem : EntitySystem
                 continue;
             }
 
-            PrepareDroneHuntGrid(grid);
+            PrepareDroneHuntGrid(grid, contract, gridEntry);
             state.DroneHuntGridEntities.Add(grid);
             spawnCoords = _xform.ToCoordinates(spawnMapCoords);
 
@@ -251,10 +256,10 @@ public sealed partial class NcContractSystem : EntitySystem
     private bool TryPickDroneHuntGrid(
         string contractId,
         IReadOnlyList<NcDroneHuntGridEntry> grids,
-        out ResPath path
+        out NcDroneHuntGridEntry entry
     )
     {
-        path = default;
+        entry = default!;
 
         if (grids.Count == 0)
         {
@@ -262,8 +267,7 @@ public sealed partial class NcContractSystem : EntitySystem
             return false;
         }
 
-        var picked = PickWeighted(_random, grids, static entry => entry.Weight);
-        path = picked.Path;
+        entry = PickWeighted(_random, grids, static entry => entry.Weight);
         return true;
     }
 
@@ -329,11 +333,15 @@ public sealed partial class NcContractSystem : EntitySystem
         return true;
     }
 
-    private void PrepareDroneHuntGrid(EntityUid grid)
+    private void PrepareDroneHuntGrid(EntityUid grid, ContractServerData contract, NcDroneHuntGridEntry gridEntry)
     {
-        _shuttle.SetIFFColor(grid, Color.FromHex("#9a2020"));
-        _shuttle.AddIFFFlag(grid, IFFFlags.AlwaysShowColor);
-        _shuttle.RemoveIFFFlag(grid, IFFFlags.Hide | IFFFlags.HideLabel | IFFFlags.HideLabelAlways);
+        TryConfigureContractRadarContact(
+            grid,
+            contract,
+            "боевой дрон",
+            Color.FromHex("#9a2020"),
+            alwaysShowColor: true,
+            localNames: gridEntry.GridNames);
     }
 
     private bool TryRegisterDroneHuntCores(

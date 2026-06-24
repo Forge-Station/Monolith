@@ -31,7 +31,7 @@
       Gold: 40
       Glass: 160
       Plasma: 200
-      Iridite: 25
+      # Iridite: 50 # Forge-change PR:238: why PulsedPlasmaLaserCanister dont have a iridite, but PhysicalComposition have?
       Uranium: 150
     chemicalComposition:
       Zinc: 20

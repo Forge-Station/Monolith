@@ -69,6 +69,7 @@ public sealed partial class NcContractSystem : EntitySystem
         try
         {
             var guard = Spawn(guardPrototype, guardCoords);
+            ActivateContractNpc(guard);
             state.GuardEntities.Add(guard);
             _objectiveRuntime.ByGuard[guard] = key;
             return true;

@@ -2,12 +2,6 @@
   id: ForgeHuntDungeonExteriorTilesAsteroid
   entries:
   - prototype: FloorAsteroidSand
-    weight: 12
-  - prototype: FloorAsteroidIronsand
-    weight: 3
-  - prototype: FloorAsteroidSandRed
-    weight: 2
-  - prototype: FloorAsteroidTile
     weight: 1
 
 - type: ncHuntDungeonExteriorRockPreset
@@ -36,4 +30,94 @@
   - prototype: WallRockSalt
     weight: 2
   - prototype: WallRockDiamond
+    weight: 1
+
+- type: ncHuntDungeonExteriorTilePreset
+  id: ForgeHuntDungeonExteriorTilesBasalt
+  entries:
+  - prototype: FloorBasalt
+    weight: 1
+
+- type: ncHuntDungeonExteriorRockPreset
+  id: ForgeHuntDungeonExteriorRocksBasalt
+  entries:
+  - prototype: WallRockBasalt
+    weight: 46
+  - prototype: WallRockBasaltCoal
+    weight: 10
+  - prototype: WallRockBasaltTin
+    weight: 10
+  - prototype: WallRockBasaltQuartz
+    weight: 8
+  - prototype: WallRockBasaltSalt
+    weight: 6
+  - prototype: WallRockBasaltSilver
+    weight: 4
+  - prototype: WallRockBasaltGold
+    weight: 3
+  - prototype: WallRockBasaltPlasma
+    weight: 3
+  - prototype: WallRockBasaltUranium
+    weight: 2
+  - prototype: WallRockBasaltDiamond
+    weight: 1
+
+- type: ncHuntDungeonExteriorTilePreset
+  id: ForgeHuntDungeonExteriorTilesScrap
+  entries:
+  - prototype: Plating
+    weight: 1
+
+- type: ncHuntDungeonExteriorRockPreset
+  id: ForgeHuntDungeonExteriorRocksScrap
+  entries:
+  - prototype: WallRockScrapPile
+    weight: 48
+  - prototype: WallRockScrapPileIron
+    weight: 12
+  - prototype: WallRockScrapPileCoal
+    weight: 10
+  - prototype: WallRockScrapPileQuartz
+    weight: 8
+  - prototype: WallRockScrapPileSalt
+    weight: 6
+  - prototype: WallRockScrapPileSilver
+    weight: 4
+  - prototype: WallRockScrapPileGold
+    weight: 3
+  - prototype: WallRockScrapPilePlasma
+    weight: 3
+  - prototype: WallRockScrapPileUranium
+    weight: 2
+  - prototype: WallRockScrapPileDiamond
+    weight: 1
+
+- type: ncHuntDungeonExteriorTilePreset
+  id: ForgeHuntDungeonExteriorTilesChromite
+  entries:
+  - prototype: FloorChromite
+    weight: 1
+
+- type: ncHuntDungeonExteriorRockPreset
+  id: ForgeHuntDungeonExteriorRocksChromite
+  entries:
+  - prototype: WallRockChromite
+    weight: 46
+  - prototype: WallRockChromiteCoal
+    weight: 10
+  - prototype: WallRockChromiteTin
+    weight: 10
+  - prototype: WallRockChromiteQuartz
+    weight: 8
+  - prototype: WallRockChromiteSalt
+    weight: 6
+  - prototype: WallRockChromiteSilver
+    weight: 4
+  - prototype: WallRockChromiteGold
+    weight: 3
+  - prototype: WallRockChromitePlasma
+    weight: 3
+  - prototype: WallRockChromiteUranium
+    weight: 2
+  - prototype: WallRockChromiteDiamond
     weight: 1

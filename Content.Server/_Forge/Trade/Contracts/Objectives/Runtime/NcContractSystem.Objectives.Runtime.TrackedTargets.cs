@@ -218,6 +218,7 @@ public sealed partial class NcContractSystem : EntitySystem
         try
         {
             target = Spawn(targetProtoId, spawnCoords);
+            ActivateContractNpc(target);
             return true;
         }
         catch (Exception e)

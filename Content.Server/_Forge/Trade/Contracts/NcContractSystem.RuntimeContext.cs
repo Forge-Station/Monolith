@@ -11,6 +11,7 @@ public sealed partial class NcContractSystem : EntitySystem
             : NcContractTuning.DefaultObjectiveStageGoal;
         runtime.Stage = Math.Clamp(runtime.Stage, 0, runtime.StageGoal);
         runtime.AcceptTimeoutRemainingSeconds = Math.Max(0, runtime.AcceptTimeoutRemainingSeconds);
+        runtime.ActiveTimeRemainingSeconds = Math.Max(0, runtime.ActiveTimeRemainingSeconds);
         runtime.GhostRoleSurvivalRemainingSeconds = Math.Max(0, runtime.GhostRoleSurvivalRemainingSeconds);
     }
 
@@ -24,6 +25,8 @@ public sealed partial class NcContractSystem : EntitySystem
             NcGhostRoleSurvivalData.DefaultDurationSeconds);
         config.PinpointerPrototype = ResolvePinpointerPrototypeId(config.PinpointerPrototype);
         config.GuardCount = Math.Max(0, config.GuardCount);
+        config.GridName = config.GridName.Trim();
+        RemoveBlankStrings(config.GridNames);
         NormalizeHuntDebrisConfig(config.HuntDebris);
         NormalizeHuntDungeonConfig(config.HuntDungeons);
         NormalizeHuntDungeonExteriorTileConfig(config.HuntDungeonExteriorTiles);
@@ -140,7 +143,10 @@ public sealed partial class NcContractSystem : EntitySystem
                 entry.Weight <= 0)
             {
                 config.DroneHuntGrids.RemoveAt(i);
+                continue;
             }
+
+            RemoveBlankStrings(entry.GridNames);
         }
 
         RemoveBlankStrings(config.DroneHuntCorePrototypes);

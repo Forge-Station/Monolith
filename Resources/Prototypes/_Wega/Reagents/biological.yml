@@ -64,12 +64,6 @@
         - !type:OrganType
           type: Demon
           shouldHave: false
-        # Forge-change-start
-        - !type:AddictionCondition
-          addictionId: Omnizine
-          min: 0.0
-          max: 0.5
-        # Forge-change-end
       - !type:HealthChange
         damage:
           types:
@@ -97,21 +91,30 @@
           type: Demon
           shouldHave: false
       # Forge-change-start
+      - !type:ToleranceEffect
+        # hidden: true
+        reagent: DemonBlood
+        amount: 0.004
+        target: Heart
       - !type:HealthChange
+        hidden: true
         conditions:
+        - !type:ToleranceCondition
+          reagent: DemonBlood
+          source: Heart
+          min: 0.8
+          max: 1.0
         - !type:OrganType
           type: Demon
           shouldHave: false
-        - !type:AddictionCondition
-          addictionId: Omnizine
-          min: 0.5
-          max: 1.0
         damage:
           types:
-            Poison: -0.1
-            Heat: -0.2
-            Cold: -0.2
-            Bloodloss: -0.3
+            Poison: 0.2
+            Heat: 0.2
+            Cold: 0.2
+            Bloodloss: 0.3
+      - !type:GenericDescEffect
+        description: forge-reagent-tolerance-badhealth
       # Forge-change-end
       
 - type: reagent

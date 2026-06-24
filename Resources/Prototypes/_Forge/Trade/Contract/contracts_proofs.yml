@@ -37,7 +37,7 @@
   parent: BaseItem
   id: ForgeTradeContractProofDroneCore
   name: "контрактное ядро дрона"
-  description: "Повреждённое AI-ядро контрактного дрон-шаттла. Торговый автомат принимает его как доказательство перехвата."
+  description: "Повреждённое AI-ядро контрактного боевого дрона. Торговый автомат принимает его как доказательство перехвата."
   categories: [ HideSpawnMenu ]
   components:
   - type: Item

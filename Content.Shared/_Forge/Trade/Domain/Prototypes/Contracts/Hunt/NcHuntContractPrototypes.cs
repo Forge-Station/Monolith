@@ -174,6 +174,15 @@ public sealed partial class NcHuntContractPrototype : IPrototype
     [DataField("icon")]
     public string Icon { get; private set; } = string.Empty;
 
+    [DataField("activeTimeLimitSeconds")]
+    public int ActiveTimeLimitSeconds { get; private set; } = 30 * 60;
+
+    [DataField("gridName")]
+    public string GridName { get; private set; } = string.Empty;
+
+    [DataField("gridNames")]
+    public List<string> GridNames { get; private set; } = new();
+
     [DataField("targets", required: true)]
     public List<NcHuntTargetData> Targets { get; private set; } = new();
 

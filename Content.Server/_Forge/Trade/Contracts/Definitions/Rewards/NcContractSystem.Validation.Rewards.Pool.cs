@@ -145,6 +145,16 @@ public sealed partial class NcContractSystem
 
                 return TryValidateRewardPoolPrototype(ownerId, entry.Pool, nestedPool, visited);
 
+            case StoreRewardType.None:
+                if (string.IsNullOrWhiteSpace(entry.Prototype) &&
+                    string.IsNullOrWhiteSpace(entry.Currency) &&
+                    string.IsNullOrWhiteSpace(entry.Pool))
+                    return true;
+
+                Sawmill.Warning(
+                    $"[Contracts] Supply reward pool '{poolId}' used by '{ownerId}' entry #{index} is None but has reward target fields.");
+                return false;
+
             case StoreRewardType.Unspecified:
                 Sawmill.Warning(
                     $"[Contracts] Supply reward pool '{poolId}' used by '{ownerId}' entry #{index} does not define 'type'.");

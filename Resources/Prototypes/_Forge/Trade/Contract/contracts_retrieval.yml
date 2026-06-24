@@ -3,6 +3,7 @@
   name: "Потерянная пломба"
   description: "Найдите меченый ящик примерно в 14000 метрах от станции и верните его в торговый автомат."
   icon: ForgeTradeCargoExpeditionCrate
+  activeTimeLimitSeconds: 2400
   cargo:
   - prototype: ForgeTradeCargoExpeditionCrate
     count: 1
@@ -20,6 +21,7 @@
   name: "Медицинский груз за бортом"
   description: "Найдите меченый медицинский ящик примерно в 20000 метрах от станции и верните его в торговый автомат."
   icon: ForgeTradeCargoMedicalCrate
+  activeTimeLimitSeconds: 2400
   cargo:
   - prototype: ForgeTradeCargoMedicalCrate
     count: 1
@@ -37,6 +39,7 @@
   name: "Запертый груз"
   description: "Найдите защищённый контрактный ящик примерно в 30000 метрах от станции и верните его в торговый автомат."
   icon: ForgeTradeCargoSecureCrate
+  activeTimeLimitSeconds: 2400
   cargo:
   - prototype: ForgeTradeCargoSecureCrate
     count: 1

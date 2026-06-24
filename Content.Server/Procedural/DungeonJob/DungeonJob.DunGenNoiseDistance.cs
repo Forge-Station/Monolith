@@ -35,9 +35,11 @@ public sealed partial class DungeonJob
             layer.Noise.SetSeed(seed);
         }
 
+        var size = PickNoiseDistanceDunGenSize(dungen, random);
+
         // First we have to find a seed tile, then floodfill from there until we get to noise
         // at which point we floodfill the entire noise.
-        var area = Box2i.FromDimensions(-dungen.Size / 2, dungen.Size);
+        var area = Box2i.FromDimensions(-size / 2, size);
         var roomTiles = new HashSet<Vector2i>();
         var width = (float) area.Width;
         var height = (float) area.Height;
@@ -95,6 +97,24 @@ public sealed partial class DungeonJob
 
         await SuspendDungeon();
         return dungeon;
+    }
+
+    private static Vector2i PickNoiseDistanceDunGenSize(NoiseDistanceDunGen dungen, Random random)
+    {
+        var min = dungen.MinSize ?? dungen.Size;
+        var max = dungen.MaxSize ?? min;
+
+        min = new Vector2i(Math.Max(1, min.X), Math.Max(1, min.Y));
+        max = new Vector2i(Math.Max(min.X, max.X), Math.Max(min.Y, max.Y));
+
+        var size = new Vector2i(
+            random.Next(min.X, max.X + 1),
+            random.Next(min.Y, max.Y + 1));
+
+        if (dungen.RandomizeSizeOrientation && size.X != size.Y && random.Next(2) == 1)
+            size = new Vector2i(size.Y, size.X);
+
+        return size;
     }
 
     private float GetDistance(float dx, float dy, IDunGenDistance distance)

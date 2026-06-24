@@ -111,6 +111,7 @@ public sealed partial class StoreStructuredSystem
             return a.Stage == b.Stage &&
                    a.StageGoal == b.StageGoal &&
                    a.AcceptTimeoutRemainingSeconds == b.AcceptTimeoutRemainingSeconds &&
+                   a.ActiveTimeRemainingSeconds == b.ActiveTimeRemainingSeconds &&
                    a.GhostRoleSurvivalRemainingSeconds == b.GhostRoleSurvivalRemainingSeconds &&
                    a.GhostRolePendingAcceptance == b.GhostRolePendingAcceptance &&
                    a.Failed == b.Failed &&

@@ -2,7 +2,7 @@
   id: ForgeExpeditionTradeMachine
   abstract: true
   name: торговый автомат экспедиций
-  description: Терминал обмена экспедиционной добычи, снаряжения и контрактов.
+  description: Терминал экспедиционных контрактов.
   suffix: Forge, Trade
   placement:
     mode: SnapgridCenter
@@ -51,7 +51,7 @@
   id: ForgeExpeditionTradeTerminal
   parent: ForgeExpeditionTradeMachine
   name: торговый автомат экспедиций
-  description: Покупает и продает экспедиционное снаряжение, принимает бартер и выдает экспедиционные контракты.
+  description: Выдает экспедиционные контракты.
   suffix: Forge, Trade, Expedition
   components:
   - type: NcStore
@@ -59,9 +59,5 @@
 
 - type: ncStoreProfile
   id: ForgeExpeditionTradeProfile
-  buy:
-  - ForgeExpeditionBuy
-  barter:
-  - ForgeExpeditionBarterPreset
   contracts: ForgeExpeditionContractsPreset
   theme: ForgeTradeUiThemeExpedition

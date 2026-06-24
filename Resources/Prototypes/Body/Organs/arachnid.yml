@@ -31,6 +31,8 @@
   name: stomach
   description: "Gross. This is hard to stomach."
   components:
+  - type: OrganPhysiology # Forge-change
+    organ: Stomach
   - type: Sprite
     sprite: Mobs/Species/Arachnid/organs.rsi
     state: stomach
@@ -55,6 +57,8 @@
   name: lungs
   description: "Filters oxygen from an atmosphere... just more greedily."
   components:
+  - type: OrganPhysiology # Forge-change
+    organ: Lung
   - type: Sprite
     layers:
     - state: lung-l
@@ -92,6 +96,8 @@
   name: heart
   description: "A disgustingly persistent little biological pump made for spiders."
   components:
+  - type: OrganPhysiology # Forge-change
+    organ: Heart
   - type: Sprite
     state: heart-on
   - type: Item
@@ -122,6 +128,8 @@
   description: "Pairing suggestion: chianti and fava beans."
   categories: [ HideSpawnMenu ]
   components:
+  - type: OrganPhysiology # Forge-change
+    organ: Liver
   - type: Item
     size: Small
     heldPrefix: liver
@@ -150,6 +158,8 @@
   description: "Filters toxins from the bloodstream."
   categories: [ HideSpawnMenu ]
   components:
+  - type: OrganPhysiology # Forge-change
+    organ: Kidney
   - type: Kidney # Forge-Change
   - type: Organ # Shitmed
     slotId: kidneys
@@ -172,6 +182,8 @@
   name: eyes
   description: "Two was already too many."
   components:
+  - type: OrganPhysiology # Forge-change
+    organ: Eyes
   - type: Sprite
     layers:
     - state: eyeball-l

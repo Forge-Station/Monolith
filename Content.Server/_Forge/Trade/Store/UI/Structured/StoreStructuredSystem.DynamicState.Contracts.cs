@@ -114,6 +114,7 @@ public sealed partial class StoreStructuredSystem : EntitySystem
         AddHash(ref hash, runtime.Stage);
         AddHash(ref hash, runtime.StageGoal);
         AddHash(ref hash, runtime.AcceptTimeoutRemainingSeconds);
+        AddHash(ref hash, runtime.ActiveTimeRemainingSeconds);
         AddHash(ref hash, runtime.GhostRoleSurvivalRemainingSeconds);
         AddHash(ref hash, runtime.GhostRolePendingAcceptance);
         AddHash(ref hash, runtime.Failed);

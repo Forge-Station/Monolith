@@ -21,6 +21,8 @@ public sealed class ContractObjectiveConfigData
     public int GhostRoleTakeDelaySeconds;
 
     public bool GivePinpointer = true;
+    public string GridName { get; set; } = string.Empty;
+    public List<string> GridNames { get; set; } = new();
     public int GuardCount;
     public NcHuntCompletionMode HuntCompletionMode = NcHuntCompletionMode.ConfirmedKill;
 

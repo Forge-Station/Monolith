@@ -1,0 +1,51 @@
+- type: technology
+  id: UllmanModsuitAdvanced
+  name: research-technology-ullman-modsuit-advanced
+  entityIcon: ClothingModsuitRogue
+  discipline: Ullman
+  tier: 3
+  cost: 80000
+  recipeUnlocks:
+  - UllmanModsuit
+  technologyPrerequisites:
+  - UllmanHardsuitHiEnd
+  position: 16, 9
+
+- type: technology
+  id: UllmanUniforms
+  name: research-technology-ullman-uniforms
+  entityIcon: ClothingUniformJumpsuitUI
+  discipline: Ullman
+  tier: 1
+  cost: 10000
+  recipeUnlocks:
+  - UllmanClothingMagboots
+  - UllmanClothingMaskGas
+  - UllmanClothingEyesGooglesUI
+  - UllmanUniformJumpsuitUI
+  - UllmanNeckPonchoUI
+  - UllmanNeckOvercoatUI
+  - UllmanNeckHeavyOvercoatUI
+  - UllmanNeckMantleUI
+  - UllmanUniformShirtUI
+  - UllmanHeadHatCapUI
+  - UllmanHeadHatBeretUI
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 16, 0
+
+- type: technology
+  id: UllmanAdvancedBalistics
+  name: research-technology-ullman-advanced-balistics
+  entityIcon: WeaponSniperUllman
+  discipline: Ullman
+  tier: 3
+  cost: 75000
+  recipeUnlocks:
+  - UllmanSniperRifle
+  - UllmanMagazine127x85mm
+  - UllmanMagazine127x85mmEmpty
+  - UllmanAmmunitionBox127x85mm
+  technologyPrerequisites:
+  - UllmanWeaponHiEnd
+  position: 16, 1

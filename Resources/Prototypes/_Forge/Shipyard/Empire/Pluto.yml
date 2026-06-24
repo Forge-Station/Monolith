@@ -7,7 +7,7 @@
   group: Empire
   access: Empire
   limit: 3
-  price: 270000
+  price: 273000
   shuttlePath: /Maps/_Forge/Shuttles/Empire/Pluto.yml
   guidebookPage: Null
   class:

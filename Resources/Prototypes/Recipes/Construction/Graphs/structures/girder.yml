@@ -326,6 +326,7 @@
               amount: 2
               doAfter: 1
         # Forge-Change-Start
+        # НИЧЕГО НЕ МЕНЯТЬ - Граф перегружен, при добавление новых нодов старайтесь не повторять первые шаги любого из текущих, иначе крафт наложится на другой крафт заменив его собой и не начинать их с кусачек!
         - to: wallMining
           completed:
             - !type:SnapToGrid
@@ -333,6 +334,9 @@
           conditions:
             - !type:EntityAnchored { }
           steps:
+            - material: Plastic
+              amount: 1
+              doAfter: 1
             - tool: Cutting
               doAfter: 1
             - material: Plasteel

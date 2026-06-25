@@ -48,6 +48,9 @@
     color: "#eb772a"
     radius: 6 # Forge-Change
     energy: 4 # Forge-Change
+  - type: NightVision
+    flashDurationMultiplier: 2
+    isEquipment: true
   - type: ThermalVision
     flashDurationMultiplier: 2
     pulseTime: 4

@@ -63,6 +63,7 @@
     - type: Tag
       tags:
       - Trash
+      - GoblinPreciousTrash # Forge-Change
 
 - type: entity
   name: red glowstick

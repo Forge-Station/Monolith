@@ -45,3 +45,39 @@
     Celoxradine: 15
     DexalinPlus: 15
   recipeType: MedicalAssembler
+
+- type: microwaveMealRecipe
+  id: RecipeNaloxoneMedipen
+  name: naloxone medipen
+  result: NaloxoneMedipen
+  time: 5
+  group: Medicinal
+  solids:
+    BlankMediPen: 1
+  reagents:
+    Naloxone: 9
+  recipeType: MedicalAssembler
+
+- type: microwaveMealRecipe
+  id: RecipeMethadoneMedipen
+  name: methadon medipen
+  result: MethadoneMedipen
+  time: 5
+  group: Medicinal
+  solids:
+    BlankMediPen: 1
+  reagents:
+    Methadone: 9
+  recipeType: MedicalAssembler
+
+- type: microwaveMealRecipe
+  id: RecipeMorphineMedipen
+  name: methadon medipen
+  result: MorphineMedipen
+  time: 5
+  group: Medicinal
+  solids:
+    BlankMediPen: 1
+  reagents:
+    Morphine: 9
+  recipeType: MedicalAssembler

@@ -115,3 +115,15 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
+
+- type: entity
+  parent: [ClothingEyesBase, ShowSecurityIcons]
+  id: ClothingEyesGlassesViperGroup
+  name: viper ballistic goggles
+  description: Standard ballistic goggles mostly used by Viper Groups.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Eyes/Goggles/vipergroup.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Eyes/Goggles/vipergroup.rsi
+  - type: FlashImmunity

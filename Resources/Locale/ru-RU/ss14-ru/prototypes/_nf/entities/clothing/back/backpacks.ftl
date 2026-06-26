@@ -10,3 +10,5 @@ ent-ClothingBackpackNfsdBrown = рюкзак ТСФ
     .desc = { ent-ClothingBackpackSecurity.desc }
 ent-ClothingBackpackNfsdCream = { ent-ClothingBackpackNfsdBrown }
     .desc = { ent-ClothingBackpackNfsdBrown.desc }
+ent-NFGoblinMadeClothingBackpackTrashBlue = авоська
+    .desc = { ent-NFGoblinMadeClothingBackpackDuffelTrashBlue.desc }

@@ -3,6 +3,7 @@ department-Empire = Священная Империя Вермиллионов
 department-Renegates = Восставшие колонии Ренегатов
 department-TSF = Транс-Солнечная Федерация
 department-SPN = Союз Прогрессивных Народов
+department-UnionOfSovietSocialistPlanets = Союз Советских Социалистических Планет
 
 # Outpost
 forge-job-name-outpostmedic = Врач АФ

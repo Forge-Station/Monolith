@@ -41293,28 +41293,29 @@ entities:
     - type: Transform
       pos: -3.3831449,-0.61700773
       parent: 1668
-- proto: KillerTomatoSeeds
-  entities:
-  - uid: 1015
-    components:
-    - type: Transform
-      pos: 8.239295,-23.358154
-      parent: 1668
-  - uid: 1016
-    components:
-    - type: Transform
-      pos: 8.239295,-23.295654
-      parent: 1668
-  - uid: 1017
-    components:
-    - type: Transform
-      pos: 8.239295,-23.420654
-      parent: 1668
-  - uid: 1018
-    components:
-    - type: Transform
-      pos: 8.239295,-23.483154
-      parent: 1668
+# Forge-Change: hidden, KillerTomatoSeeds prototype disabled (kept for upstream merges)
+# - proto: KillerTomatoSeeds
+#   entities:
+#   - uid: 1015
+#     components:
+#     - type: Transform
+#       pos: 8.239295,-23.358154
+#       parent: 1668
+#   - uid: 1016
+#     components:
+#     - type: Transform
+#       pos: 8.239295,-23.295654
+#       parent: 1668
+#   - uid: 1017
+#     components:
+#     - type: Transform
+#       pos: 8.239295,-23.420654
+#       parent: 1668
+#   - uid: 1018
+#     components:
+#     - type: Transform
+#       pos: 8.239295,-23.483154
+#       parent: 1668
 - proto: KitchenElectricGrill
   entities:
   - uid: 1174

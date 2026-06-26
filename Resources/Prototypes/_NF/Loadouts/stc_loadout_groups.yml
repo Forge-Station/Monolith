@@ -25,7 +25,6 @@
   loadouts: []
   subgroups:
   - MercenaryEars
-  - PilotEars
   - ContractorEars
   fallbacks:
   - ContractorClothingHeadsetGreyCommon

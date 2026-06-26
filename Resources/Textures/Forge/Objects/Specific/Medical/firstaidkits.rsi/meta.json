@@ -17,6 +17,17 @@
     {
       "name": "blackkit-inhand-left",
       "directions": 4
+    },
+    {
+      "name": "antiaddict"
+    },
+    {
+      "name": "antiaddict-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "antiaddict-inhand-left",
+      "directions": 4
     }
   ]
 }

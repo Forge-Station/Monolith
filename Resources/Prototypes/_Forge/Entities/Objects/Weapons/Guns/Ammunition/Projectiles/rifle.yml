@@ -1,3 +1,20 @@
+# for ullman sniper rifle
+- type: entity
+  id: ForgeBulletUllman127x85mm
+  name: bullet (127x85mm)
+  parent: ForgeBaseBulletAntiMateriel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+        Structural: 300
+    armorPenetration: 1
+    penetrationThreshold: 250
+    penetrationDamageTypeRequirement:
+    - Structural
+# end
 
 - type: entity
   id: ForgeBulletRifle60

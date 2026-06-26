@@ -122,8 +122,9 @@ ent-PapercaneSeeds = пакет семян (бумажный тростник)
     .desc = { ent-SeedBase.desc }
 ent-MeatwheatSeeds = пакет семян (мясница)
     .desc = Если вы когда-нибудь хотели довести вегетарианца до безумия, то вот как это сделать.
-ent-KillerTomatoSeeds = пакет семян (томат-убийца)
-    .desc = { ent-SeedBase.desc }
+# Forge-Change: скрыто, пакет семян KillerTomatoSeeds отключён (оставлено для апстрим-мерджей)
+# ent-KillerTomatoSeeds = пакет семян (томат-убийца)
+#     .desc = { ent-SeedBase.desc }
 ent-HolymelonSeeds = пакет семян (святой арбуз)
     .desc = { ent-SeedBase.desc }
 ent-GoldenAppleSeeds = пакет семян (золотое яблоко)

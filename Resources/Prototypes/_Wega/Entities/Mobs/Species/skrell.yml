@@ -1,0 +1,96 @@
+- type: entity
+  parent: BaseMobSpeciesOrganic
+  id: BaseMobSkrell
+  name: Urist McSkrell
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: Skrell
+    hideLayersOnEquip:
+    - Hair
+  - type: Carriable
+  - type: Hunger
+  - type: Puller
+    needsHands: false
+  - type: Thirst
+    baseDecayRate: 0.15
+  - type: Body
+    prototype: Skrell
+    requiredLegs: 2
+  - type: Icon
+    sprite: _Wega/Mobs/Species/Skrell/parts.rsi
+    state: full
+  - type: SolutionScanner
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Skrell
+  - type: Bloodstream
+    bloodReagent: SkrellBlood
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+      Acidic: [ Touch, Ingestion ]
+    reactions:
+    - reagents: [ Water, SpaceCleaner ]
+      methods: [ Touch ]
+      effects:
+      - !type:WashCreamPieReaction
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: -1
+            Blunt: -1
+            Poison: -0.75
+    - reagents: [ Holywater ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: -0.25
+            Blunt: -0.25
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatSkrell
+      amount: 5
+  - type: LanguageKnowledge
+    speaks:
+    - Qwila
+    - TauCetiBasic
+    understands:
+    - Qwila
+    - TauCetiBasic
+  - type: Inventory
+    templateId: skrell
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
+- type: entity
+  parent: MobHumanDummy
+  id: MobSkrellDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: Skrell
+    hideLayersOnEquip:
+    - Hair
+  - type: Body
+    prototype: Skrell
+    requiredLegs: 2
+  - type: Inventory
+    templateId: skrell
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female

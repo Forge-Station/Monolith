@@ -169,3 +169,20 @@
 
 - type: Tag
   id: NFHotdog
+
+# Forge-Change-Start
+- type: Tag
+  id: GoblinPreciousTrash
+
+- type: Tag
+  id: GoblinPreciousTrashBag
+
+- type: Tag
+  id: GoblinMade
+
+- type: Tag
+  id: GoblinCraft
+
+- type: Tag
+  id: GoblinVehicle
+# Forge-Change-End

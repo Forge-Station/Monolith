@@ -1,0 +1,249 @@
+# region // Pain Syndrome
+- type: syndrome
+  id: PainSyndrome
+  name: syndrome-pain-syndrome
+  organ: Body
+  interval: 6
+  severityDecay: 0.5
+  flareDelay: 120
+  triggers:
+    - !type:DamageTrigger
+      damageThreshold: 11
+      severity: 3
+      chance: 0.3
+      cooldown: 5
+  stages:
+    - minSeverity: 0
+    # region Stage 1
+    - minSeverity: 15
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.90
+          sprintModifier: 0.90
+          key: PainSyndrome
+          time: 8
+        - !type:EntityEffectList
+          flareOnly: true
+          effects:
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-pain-syndrome-mild-1
+                - syndrome-pain-syndrome-mild-2
+              visualType: SmallCaution
+              probability: 0.1
+    # region Stage 2
+    - minSeverity: 40
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.75
+          sprintModifier: 0.75
+          key: PainSyndrome
+          time: 8.0
+        - !type:EntityEffectList # name: rando-o-o-o-o-o-o-o-o-o-0-om
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 4.0
+              frequency: 3.0
+              time: 5
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-pain-syndrome-moderate-1
+                - syndrome-pain-syndrome-moderate-2
+                - syndrome-pain-syndrome-moderate-3
+              visualType: MediumCaution
+              probability: 0.25
+    # region Stage 3
+    - minSeverity: 70
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.55
+          sprintModifier: 0.55
+          key: PainSyndrome
+          time: 8.0
+        - !type:EntityEffectList # name: okay, I lied last time. Not exactly random.
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 8.0
+              frequency: 5.0
+              time: 6
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-pain-syndrome-severe-1
+                - syndrome-pain-syndrome-severe-2
+                - syndrome-pain-syndrome-severe-3
+              visualType: LargeCaution
+              probability: 0.3
+        - !type:EntityEffectList # name: pain, sweetie pain
+          chance: 0.1
+          flareOnly: true
+          effects:
+            - !type:GenericStatusEffect
+              key: Stutter
+              component: StutteringAccent
+              time: 8
+              type: Add
+            - !type:TunnelVision
+              intensity: 1.2
+              pulse: 1.4
+              darkness: 0.65
+              color: "#5f221d"
+              time: 8
+        - !type:EntityEffectList # name: WHY TF AM I DROPING ITEMS??
+          flareOnly: true
+          chance: 0.08
+          effects:
+            - !type:GenericStatusEffect
+              key: TemporaryBlindness
+              component: TemporaryBlindness
+              time: 2
+              type: Add
+            - !type:Emote
+              emote: Scream
+              showInChat: false
+            - !type:ItemsDropEffect
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-pain-syndrome-ooooouch-1
+              visualType: LargeCaution
+
+# region // Chronic Pain
+- type: syndrome
+  id: ChronicPain
+  name: syndrome-chronic-pain
+  organ: Body
+  permanent: true
+  interval: 8.0
+  severityDecay: 0.0
+  flareDelay: 180
+  stages:
+    - minSeverity: 0
+    # region Stage 1
+    - minSeverity: 25
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.93
+          sprintModifier: 0.93
+          key: PainSyndrome
+          time: 10
+        - !type:EntityEffectList # name: randomize
+          flareOnly: true
+          effects:
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-chronic-pain-mild-1
+                - syndrome-chronic-pain-mild-2
+              visualType: SmallCaution
+              probability: 0.25
+            - !type:Emote
+              emote: Scream
+              showInChat: true
+              probability: 0.07
+    # region Stage 2
+    - minSeverity: 55
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.82
+          sprintModifier: 0.82
+          key: PainSyndrome
+          time: 10
+        - !type:EntityEffectList # name: randomize
+          flareOnly: true
+          effects:
+            - !type:ItemsDropEffect
+              probability: 0.06
+            - !type:Jitter
+              amplitude: 3.0
+              frequency: 2.5
+              time: 6
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-chronic-pain-moderate-1
+                - syndrome-chronic-pain-moderate-2
+                - syndrome-chronic-pain-moderate-3
+              visualType: MediumCaution
+              probability: 0.3
+            - !type:Emote
+              emote: Scream
+              showInChat: true
+              probability: 0.1
+            - !type:HealthChange
+              damage:
+                types:
+                  Brute: 0.15
+    # region Stage 3
+    - minSeverity: 80
+      symptoms:
+        - !type:MovespeedSymptom
+          walkModifier: 0.65
+          sprintModifier: 0.65
+          key: PainSyndrome
+          time: 10.0
+        - !type:EntityEffectList
+          flareOnly: true
+          effects:
+            - !type:Jitter
+              amplitude: 6.0
+              frequency: 4.0
+              time: 8
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-chronic-pain-severe-1
+                - syndrome-chronic-pain-severe-2
+                - syndrome-chronic-pain-severe-3
+              visualType: LargeCaution
+              probability: 0.35
+            - !type:Emote
+              emote: Scream
+              showInChat: false
+              probability: 0.06
+            - !type:GenericStatusEffect
+              key: Stutter
+              component: StutteringAccent
+              time: 10
+              type: Add
+            - !type:HealthChange
+              damage:
+                types:
+                  Brute: 0.35
+        - !type:EntityEffectList
+          chance: 0.15
+          flareOnly: true
+          effects:
+            - !type:GenericStatusEffect
+              key: Stutter
+              component: StutteringAccent
+              time: 9
+              type: Add
+            - !type:TunnelVision
+              intensity: 1.4
+              pulse: 1.6
+              darkness: 0.65
+              color: "#5f221d"
+              time: 9
+        - !type:EntityEffectList
+          flareOnly: true
+          chance: 0.09
+          effects:
+            - !type:GenericStatusEffect
+              key: TemporaryBlindness
+              component: TemporaryBlindness
+              time: 3
+              type: Add
+            - !type:Emote
+              emote: Scream
+              showInChat: false
+            - !type:ItemsDropEffect
+            - !type:PopupMessage
+              type: Local
+              messages:
+                - syndrome-pain-syndrome-ooooouch-1
+              visualType: LargeCaution

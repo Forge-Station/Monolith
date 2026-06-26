@@ -30,6 +30,8 @@
   weight: 40
   displayWeight: 40
   canBeAntag: false
+  access:
+  - EmpireSecApartment
   accessGroups:
   - CommandEmpireAccess
   special:
@@ -43,11 +45,6 @@
 
 - type: startingGear
   id: ArbiterGear
-  # equipment:
-  #   ears:
-  #   belt:
-  #   pocket1:
-  #   pocket2:
-  # storage:
-  #   back:
-  #   - RadioHandheldNF
+  storage:
+    back:
+    - EmpireSecApartmentTablet

@@ -1,0 +1,1449 @@
+- type: dungeonRoomPack
+  id: ForgeHuntRoom17x5
+  size: 17,5
+  rooms:
+  - 0,0,17,5
+
+- type: dungeonRoomPack
+  id: ForgeHuntRoom13x3
+  size: 13,3
+  rooms:
+  - 0,0,13,3
+
+- type: dungeonRoomPack
+  id: ForgeHuntRoom11x5
+  size: 11,5
+  rooms:
+  - 0,0,11,5
+
+- type: dungeonRoomPack
+  id: ForgeHuntRoom11x3
+  size: 11,3
+  rooms:
+  - 0,0,11,3
+
+- type: dungeonRoomPack
+  id: ForgeHuntRoom7x7
+  size: 7,7
+  rooms:
+  - 0,0,7,7
+
+- type: dungeonRoomPack
+  id: ForgeHuntRoom7x5
+  size: 7,5
+  rooms:
+  - 0,0,7,5
+
+- type: dungeonRoomPack
+  id: ForgeHuntRoom7x3
+  size: 7,3
+  rooms:
+  - 0,0,7,3
+
+- type: dungeonRoomPack
+  id: ForgeHuntRoom5x5
+  size: 5,5
+  rooms:
+  - 0,0,5,5
+
+- type: dungeonRoomPack
+  id: ForgeHuntRoom3x7
+  size: 3,7
+  rooms:
+  - 0,0,3,7
+
+- type: dungeonRoomPack
+  id: ForgeHuntRoom3x5
+  size: 3,5
+  rooms:
+  - 0,0,3,5
+
+- type: dungeonPreset
+  id: ForgeHuntDungeonLayout
+  roomPacks:
+  - -18,9,-1,26
+  - 2,9,19,26
+  - -18,29,-1,46
+  - 2,29,19,46
+  - -37,15,-20,20
+  - 22,15,39,20
+  - -37,34,-20,39
+  - 22,34,39,39
+  - -12,49,-1,54
+  - 2,49,13,54
+  - -12,0,-1,5
+  - 2,0,13,5
+  - -37,26,-30,33
+  - 30,26,37,33
+
+- type: dungeonPreset
+  id: ForgeHuntDungeonLayoutWide
+  roomPacks:
+  - -39,10,-22,27
+  - -19,10,-2,27
+  - 3,10,20,27
+  - 23,10,40,27
+  - -39,31,-22,36
+  - -19,31,-2,36
+  - 3,31,14,36
+  - 17,31,28,36
+  - 31,31,38,38
+  - -39,0,-26,3
+  - -23,0,-10,3
+  - -7,0,0,3
+  - 3,0,10,3
+  - 13,0,20,3
+  - 23,0,30,3
+  - 33,0,40,3
+
+- type: dungeonPreset
+  id: ForgeHuntDungeonLayoutTall
+  roomPacks:
+  - -8,0,9,17
+  - -8,20,9,37
+  - -8,42,9,59
+  - -8,62,9,79
+  - 13,0,18,17
+  - -18,0,-13,17
+  - 13,20,18,31
+  - -18,20,-13,31
+  - 13,42,20,49
+  - -20,42,-13,49
+  - 13,62,18,69
+  - -18,62,-13,69
+  - 22,31,29,38
+  - -29,31,-22,38
+
+- type: dungeonPreset
+  id: ForgeHuntDungeonLayoutBroken
+  roomPacks:
+  - -30,6,-13,11
+  - -8,9,3,14
+  - 9,3,16,10
+  - -24,16,-11,19
+  - -4,19,3,24
+  - 11,15,14,22
+  - -34,15,-29,20
+  - 18,12,29,15
+  - -15,0,-8,3
+  - 5,24,8,29
+  - -27,24,-16,29
+  - 17,24,24,27
+
+- type: dungeonPreset
+  id: ForgeHuntDungeonCompactLayout
+  roomPacks:
+  - -18,0,-1,5
+  - 3,0,14,5
+  - 17,0,24,7
+  - -18,10,-5,13
+  - -2,10,9,13
+  - 12,10,19,15
+  - -18,18,-11,25
+  - -8,18,3,23
+  - 6,18,13,23
+  - 16,18,21,23
+  - -18,28,-11,31
+  - -8,28,5,31
+  - 8,27,13,32
+  - 16,25,19,32
+  - -18,35,-13,40
+  - -10,35,-7,40
+  - -4,35,7,38
+  - 10,35,17,38
+
+- type: dungeonPreset
+  id: ForgeHuntDungeonCompactLayoutBroken
+  roomPacks:
+  - -24,0,-7,5
+  - -4,2,7,7
+  - 11,0,18,7
+  - -20,10,-7,13
+  - -3,12,8,15
+  - 12,10,19,15
+  - -24,18,-17,21
+  - -13,18,-8,23
+  - -4,17,3,22
+  - 8,18,11,23
+  - 15,17,18,24
+  - -20,28,-9,33
+  - -5,27,2,34
+  - 6,29,19,32
+
+- type: dungeonPreset
+  id: ForgeHuntDungeonVGRoidLayout
+  roomPacks:
+  - -17,11,-6,16
+  - -3,11,8,16
+  - 11,11,22,16
+  - -17,22,-6,27
+  - -3,22,8,27
+  - 11,22,22,27
+  - -17,33,-12,38
+  - -6,33,-1,38
+  - 5,33,10,38
+  - 16,33,21,38
+  - -17,0,-12,5
+  - -6,0,-1,5
+  - 5,0,10,5
+  - 16,0,21,5
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonBase
+  layers:
+  - !type:PrefabDunGen
+    presets:
+    - ForgeHuntDungeonLayout
+    - ForgeHuntDungeonLayoutWide
+    - ForgeHuntDungeonLayoutTall
+    - ForgeHuntDungeonLayoutBroken
+
+  - !type:CorridorDunGen
+    width: 3
+
+  - !type:DungeonEntranceDunGen
+    count: 1
+
+  - !type:RoomEntranceDunGen
+
+  - !type:BoundaryWallDunGen
+
+  - !type:JunctionDunGen
+    width: 1
+
+  - !type:JunctionDunGen
+
+  - !type:EntityTableDunGen
+    minCount: 25
+    maxCount: 40
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+
+  - !type:EntityTableDunGen
+    minCount: 30
+    maxCount: 40
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 25
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 25
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 20
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 20
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonCompactBase
+  layers:
+  - !type:PrefabDunGen
+    presets:
+    - ForgeHuntDungeonCompactLayout
+    - ForgeHuntDungeonCompactLayoutBroken
+
+  - !type:CorridorDunGen
+    width: 3
+
+  - !type:DungeonEntranceDunGen
+    count: 1
+
+  - !type:RoomEntranceDunGen
+
+  - !type:BoundaryWallDunGen
+
+  - !type:JunctionDunGen
+    width: 1
+
+  - !type:JunctionDunGen
+
+  - !type:EntityTableDunGen
+    minCount: 25
+    maxCount: 40
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+
+  - !type:EntityTableDunGen
+    minCount: 30
+    maxCount: 40
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 25
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 25
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 20
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 20
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonVGRoidBase
+  layers:
+  - !type:PrefabDunGen
+    presets:
+    - ForgeHuntDungeonVGRoidLayout
+
+  - !type:CorridorDunGen
+    width: 3
+
+  - !type:DungeonEntranceDunGen
+    count: 1
+
+  - !type:RoomEntranceDunGen
+
+  - !type:BoundaryWallDunGen
+
+  - !type:JunctionDunGen
+    width: 1
+
+  - !type:JunctionDunGen
+
+  - !type:EntityTableDunGen
+    minCount: 25
+    maxCount: 40
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+
+  - !type:EntityTableDunGen
+    minCount: 30
+    maxCount: 40
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 25
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 25
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 20
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+
+  - !type:EntityTableDunGen
+    minCount: 15
+    maxCount: 20
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonMineshaft
+  data:
+    entities:
+      Walls: WallRock
+      CornerWalls: WallRock
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorCaveDrought
+    whitelists:
+      Rooms:
+        tags:
+        - NFMineshaft
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonHaunted
+  data:
+    entities:
+      Walls: WallRock
+      CornerWalls: WallRock
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorCaveDrought
+    whitelists:
+      Rooms:
+        tags:
+        - NFHaunted
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonSalvageOutpost
+  data:
+    entities:
+      Walls: WallMining
+      CornerWalls: WallMining
+    spawnGroups:
+      Entrance: NFMiningAirlock
+      Junction: NFMiningAirlock
+    tiles:
+      FallbackTile: FloorDark
+    whitelists:
+      Rooms:
+        tags:
+        - NFSalvageOutpost
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonCaveFactory
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorSteel
+    whitelists:
+      Rooms:
+        tags:
+        - NFCaveFactory
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonCaveFactoryCompact
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorSteel
+    whitelists:
+      Rooms:
+        tags:
+        - NFCaveFactory
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonCompactBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonMedSci
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorWhite
+    whitelists:
+      Rooms:
+        tags:
+        - NFSalvageExperiment
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonSnowyLabs
+  data:
+    entities:
+      Walls: WallSilver
+      CornerWalls: WallSilver
+    spawnGroups:
+      Entrance: NFSnowyLabsEntrance
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorSteel
+    whitelists:
+      Rooms:
+        tags:
+        - NFSnowyLabs
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonFactoryDorms
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorDark
+    whitelists:
+      Rooms:
+        tags:
+        - NFCaveFactory
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonExperiment
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorSteel
+    whitelists:
+      Rooms:
+        tags:
+        - NFSalvageExperiment
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonExperimentCompact
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorSteel
+    whitelists:
+      Rooms:
+        tags:
+        - NFSalvageExperiment
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonCompactBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonLavaMercenary
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFMercenaryAirlock
+      Junction: NFMercenaryAirlock
+    tiles:
+      FallbackTile: FloorDark
+    whitelists:
+      Rooms:
+        tags:
+        - NFLavaMercenary
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonLavaMercenaryCompact
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFMercenaryAirlock
+      Junction: NFMercenaryAirlock
+    tiles:
+      FallbackTile: FloorDark
+    whitelists:
+      Rooms:
+        tags:
+        - NFLavaMercenary
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonCompactBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonLavaBrig
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFLavaBrigEntrance
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorDark
+    whitelists:
+      Rooms:
+        tags:
+        - NFLavaBrig
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonLavaBrigCompact
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFLavaBrigEntrance
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorDark
+    whitelists:
+      Rooms:
+        tags:
+        - NFLavaBrig
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonCompactBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonVirologyLab
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFVirologyAirlock
+      Junction: NFVirologyAirlock
+    tiles:
+      FallbackTile: FloorSteel
+    whitelists:
+      Rooms:
+        tags:
+        - NFVirologyLab
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonWreck
+  data:
+    entities:
+      Walls: WallSolid
+      CornerWalls: WallReinforced
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorSteel
+    whitelists:
+      Rooms:
+        tags:
+        - NFWreck
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonCompactBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonVGRoidInterior
+  data:
+    entities:
+      Walls: WallRock
+      CornerWalls: WallRock
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorAsteroidSand
+    whitelists:
+      Rooms:
+        tags:
+        - NFVGRoidInterior
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonVGRoidBase
+
+# Contract-scale VGRoids.  The bluespace event VGRoids are 272x272; these keep
+# the organic mass/exterior/room behavior while staying smaller for contracts.
+- type: dungeonConfig
+  id: ForgeHuntVGRoidScrap
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidBlobScrap
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorScrap
+  - !type:PrototypeDunGen
+    proto: NFVGRoidSmallPathsScrap
+  - !type:BiomeDunGen
+    biomeTemplate: NFVGRoidScrapyard
+    tileMask:
+    - Plating
+  - !type:OreDunGen
+    tileMask:
+    - Plating
+    entity: WarpPointDungeon
+    count: 1
+    minGroupSize: 1
+    maxGroupSize: 1
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidScrapFactory
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidBlobScrap
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorScrapFactory
+  - !type:PrototypeDunGen
+    proto: NFVGRoidSmallPathsScrap
+  - !type:BiomeDunGen
+    biomeTemplate: NFVGRoidScrapyard
+    tileMask:
+    - Plating
+  - !type:OreDunGen
+    tileMask:
+    - Plating
+    entity: WarpPointDungeon
+    count: 1
+    minGroupSize: 1
+    maxGroupSize: 1
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidCave
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidBlobCave
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorCave
+  - !type:PrototypeDunGen
+    proto: NFVGRoidSmallPathsCave
+  - !type:BiomeDunGen
+    biomeTemplate: NFVGRoidCaves
+    tileMask:
+    - FloorCaveDrought
+  - !type:OreDunGen
+    tileMask:
+    - FloorCaveDrought
+    entity: WarpPointDungeon
+    count: 1
+    minGroupSize: 1
+    maxGroupSize: 1
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidBasalt
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidBlobBasalt
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorBasalt
+  - !type:PrototypeDunGen
+    proto: NFVGRoidSmallPathsBasalt
+  - !type:BiomeDunGen
+    biomeTemplate: NFVGRoidLava
+    tileMask:
+    - FloorBasalt
+  - !type:OreDunGen
+    tileMask:
+    - FloorBasalt
+    entity: WarpPointDungeon
+    count: 1
+    minGroupSize: 1
+    maxGroupSize: 1
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidBasaltBrig
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidBlobBasalt
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorBasaltBrig
+  - !type:PrototypeDunGen
+    proto: NFVGRoidSmallPathsBasalt
+  - !type:BiomeDunGen
+    biomeTemplate: NFVGRoidLava
+    tileMask:
+    - FloorBasalt
+  - !type:OreDunGen
+    tileMask:
+    - FloorBasalt
+    entity: WarpPointDungeon
+    count: 1
+    minGroupSize: 1
+    maxGroupSize: 1
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidChromite
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidBlobChromite
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorChromite
+  - !type:PrototypeDunGen
+    proto: NFVGRoidSmallPathsChromite
+  - !type:BiomeDunGen
+    biomeTemplate: NFVGRoidShadow
+    tileMask:
+    - FloorChromite
+  - !type:OreDunGen
+    tileMask:
+    - FloorChromite
+    entity: WarpPointDungeon
+    count: 1
+    minGroupSize: 1
+    maxGroupSize: 1
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidChromiteExperiment
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidBlobChromite
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorChromiteExperiment
+  - !type:PrototypeDunGen
+    proto: NFVGRoidSmallPathsChromite
+  - !type:BiomeDunGen
+    biomeTemplate: NFVGRoidShadow
+    tileMask:
+    - FloorChromite
+  - !type:OreDunGen
+    tileMask:
+    - FloorChromite
+    entity: WarpPointDungeon
+    count: 1
+    minGroupSize: 1
+    maxGroupSize: 1
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidSnow
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidBlobSnow
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorSnow
+  - !type:PrototypeDunGen
+    proto: NFVGRoidSmallPathsSnow
+  - !type:BiomeDunGen
+    biomeTemplate: NFVGRoidSnow
+    tileMask:
+    - FloorSnow
+  - !type:OreDunGen
+    tileMask:
+    - FloorSnow
+    entity: WarpPointDungeon
+    count: 1
+    minGroupSize: 1
+    maxGroupSize: 1
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorScrap
+  reserveTiles: true
+  data:
+    tiles:
+      FallbackTile: FloorTechMaint3
+      WidenTile: Plating
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorDungeonsScrap
+  - !type:SplineDungeonConnectorDunGen
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorScrapFactory
+  reserveTiles: true
+  data:
+    tiles:
+      FallbackTile: FloorTechMaint3
+      WidenTile: Plating
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorDungeonsScrapFactory
+  - !type:SplineDungeonConnectorDunGen
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorCave
+  reserveTiles: true
+  data:
+    tiles:
+      FallbackTile: PlatingAsteroid
+      WidenTile: FloorCaveDrought
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorDungeonsCave
+  - !type:SplineDungeonConnectorDunGen
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorBasalt
+  reserveTiles: true
+  data:
+    tiles:
+      FallbackTile: FloorGrayConcreteMono
+      WidenTile: FloorBasalt
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorDungeonsBasalt
+  - !type:SplineDungeonConnectorDunGen
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorBasaltBrig
+  reserveTiles: true
+  data:
+    tiles:
+      FallbackTile: FloorGrayConcreteMono
+      WidenTile: FloorBasalt
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorDungeonsBasaltBrig
+  - !type:SplineDungeonConnectorDunGen
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorChromite
+  reserveTiles: true
+  data:
+    tiles:
+      FallbackTile: FloorDarkHerringbone
+      WidenTile: FloorChromite
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorDungeonsChromite
+  - !type:SplineDungeonConnectorDunGen
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorChromiteExperiment
+  reserveTiles: true
+  data:
+    tiles:
+      FallbackTile: FloorDarkHerringbone
+      WidenTile: FloorChromite
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorDungeonsChromiteExperiment
+  - !type:SplineDungeonConnectorDunGen
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorSnow
+  reserveTiles: true
+  data:
+    tiles:
+      FallbackTile: FloorSnowDug
+      WidenTile: FloorSnow
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntVGRoidExteriorDungeonsSnow
+  - !type:SplineDungeonConnectorDunGen
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorDungeonsScrap
+  reserveTiles: true
+  minCount: 1
+  maxCount: 1
+  layers:
+  - !type:ExteriorDunGen
+    proto: NFSalvageOutpost
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorDungeonsScrapFactory
+  reserveTiles: true
+  minCount: 1
+  maxCount: 1
+  layers:
+  - !type:ExteriorDunGen
+    proto: NFCaveFactory
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorDungeonsCave
+  reserveTiles: true
+  minCount: 1
+  maxCount: 1
+  layers:
+  - !type:ExteriorDunGen
+    proto: NFSalvageOutpost
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorDungeonsBasalt
+  reserveTiles: true
+  minCount: 1
+  maxCount: 1
+  layers:
+  - !type:ExteriorDunGen
+    proto: NFLavaMercenary
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorDungeonsBasaltBrig
+  reserveTiles: true
+  minCount: 1
+  maxCount: 1
+  layers:
+  - !type:ExteriorDunGen
+    proto: NFLavaBrig
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorDungeonsChromite
+  reserveTiles: true
+  minCount: 1
+  maxCount: 1
+  layers:
+  - !type:ExteriorDunGen
+    proto: NFVirologyLab
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorDungeonsChromiteExperiment
+  reserveTiles: true
+  minCount: 1
+  maxCount: 1
+  layers:
+  - !type:ExteriorDunGen
+    proto: NFExperiment
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidExteriorDungeonsSnow
+  reserveTiles: true
+  minCount: 1
+  maxCount: 1
+  layers:
+  - !type:ExteriorDunGen
+    proto: NFSnowyLabs
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 8
+    maxCount: 14
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 4
+    maxCount: 8
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 3
+    maxCount: 5
+    table: !type:NestedSelector
+      tableId: SalvageEquipmentSpawnerValuable
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidBlobScrap
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 96, 96
+    minSize: 88, 56
+    maxSize: 132, 84
+    randomizeSizeOrientation: true
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+      blendWeight: 0.80
+    layers:
+    - tile: Plating
+      threshold: 0.50
+      noise:
+        frequency: 0.020
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 2
+        gain: 0.5
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidBlobCave
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 96, 96
+    minSize: 88, 56
+    maxSize: 132, 84
+    randomizeSizeOrientation: true
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+      blendWeight: 0.80
+    layers:
+    - tile: FloorCaveDrought
+      threshold: 0.50
+      noise:
+        frequency: 0.020
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 2
+        gain: 0.5
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidBlobBasalt
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 96, 96
+    minSize: 88, 56
+    maxSize: 132, 84
+    randomizeSizeOrientation: true
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+      blendWeight: 0.80
+    layers:
+    - tile: FloorBasalt
+      threshold: 0.50
+      noise:
+        frequency: 0.020
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 2
+        gain: 0.5
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidBlobChromite
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 96, 96
+    minSize: 88, 56
+    maxSize: 132, 84
+    randomizeSizeOrientation: true
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+      blendWeight: 0.80
+    layers:
+    - tile: FloorChromite
+      threshold: 0.50
+      noise:
+        frequency: 0.020
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 2
+        gain: 0.5
+
+- type: dungeonConfig
+  id: ForgeHuntVGRoidBlobSnow
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 96, 96
+    minSize: 88, 56
+    maxSize: 132, 84
+    randomizeSizeOrientation: true
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+      blendWeight: 0.80
+    layers:
+    - tile: FloorSnow
+      threshold: 0.50
+      noise:
+        frequency: 0.020
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 2
+        gain: 0.5
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonSuperCompacted
+  data:
+    entities:
+      Walls: WallRock
+      CornerWalls: WallRock
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorAsteroidSand
+    whitelists:
+      Rooms:
+        tags:
+        - NFSuperCompactedAsteroid
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonCompactBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonSuperCompactedBasalt
+  data:
+    entities:
+      Walls: WallRockBasalt
+      CornerWalls: WallRockBasalt
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorBasalt
+    whitelists:
+      Rooms:
+        tags:
+        - NFSuperCompactedBasalt
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonCompactBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonSuperCompactedChromite
+  data:
+    entities:
+      Walls: WallRockChromite
+      CornerWalls: WallRockChromite
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorChromite
+    whitelists:
+      Rooms:
+        tags:
+        - NFSuperCompactedChromite
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonCompactBase
+
+- type: dungeonConfig
+  id: ForgeHuntDungeonSuperCompactedAsteroid
+  data:
+    entities:
+      Walls: WallRock
+      CornerWalls: WallRock
+    spawnGroups:
+      Entrance: NFBaseAirlock
+      Junction: NFBaseAirlock
+    tiles:
+      FallbackTile: FloorAsteroidSand
+    whitelists:
+      Rooms:
+        tags:
+        - NFSuperCompactedAsteroid
+  layers:
+  - !type:PrototypeDunGen
+    proto: ForgeHuntDungeonCompactBase

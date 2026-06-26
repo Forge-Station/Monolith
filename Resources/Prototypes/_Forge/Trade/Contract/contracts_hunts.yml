@@ -1,0 +1,245 @@
+- type: ncHuntContract
+  id: ForgeHuntMediumMercenaryRaiders
+  name: "Отряд наёмников"
+  description: "Вооружённый отряд наёмников занял дрейфующий объект и готовит засаду на экспедиционные маршруты. Зачистите объект и принесите трофейную метку."
+  icon: MobMercenarySpecialistAssault
+  activeTimeLimitSeconds: 1800
+  gridNames:
+  - "опорник «Гранит»"
+  - "полевой форт «Клык»"
+  - "наёмный блокпост «Север»"
+  - "военный причал «Рубикон»"
+  - "укрепление «Рейнджер»"
+  targets:
+  - group: ForgeHuntGroupMercenaryVeterans
+    count: 16
+  - prototype: MobMercenaryCaptain
+    count: 1
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeonExteriorTilePreset: ForgeHuntDungeonExteriorTilesBasalt
+    dungeonExteriorRockPreset: ForgeHuntDungeonExteriorRocksBasalt
+    dungeons:
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 5
+    - prototype: ForgeHuntDungeonLavaMercenaryCompact
+      weight: 3
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 2
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 160000
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 4, max: 6 }
+
+- type: ncHuntContract
+  id: ForgeHuntHardMercenaryCaptain
+  name: "Капитан наёмников"
+  description: "Капитан наёмников держит укреплённую позицию с тяжёлой охраной. Придётся вырезать весь гарнизон, прежде чем объект снова станет безопасным."
+  icon: MobMercenaryCaptain
+  activeTimeLimitSeconds: 1800
+  gridNames:
+  - "цитадель «Пепельный клинок»"
+  - "наёмный бастион «Стальной договор»"
+  - "укрепрайон «Чёрный залог»"
+  - "аварийный форт «Корсар»"
+  - "командный узел «Каскад»"
+  targets:
+  - group: ForgeHuntGroupMercenaryVeterans
+    count: 22
+  - prototype: MobMercenaryCaptain
+    count: 2
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeonExteriorTilePreset: ForgeHuntDungeonExteriorTilesBasalt
+    dungeonExteriorRockPreset: ForgeHuntDungeonExteriorRocksBasalt
+    dungeons:
+    - prototype: ForgeHuntDungeonLavaMercenary
+      weight: 5
+    - prototype: ForgeHuntDungeonLavaMercenaryCompact
+      weight: 3
+    - prototype: ForgeHuntVGRoidBasalt
+      weight: 2
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 240000
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: { min: 5, max: 8 }
+
+- type: ncHuntContract
+  id: ForgeHuntMediumRoguePatrol
+  name: "Охрана сбойного ИИ"
+  description: "Сбойный ИИ развернул боевых силиконов вокруг старого технического сектора. Разберите патруль и тяжёлую единицу."
+  icon: MobRogueSiliconHunter
+  activeTimeLimitSeconds: 1800
+  gridNames:
+  - "узел ИИ «Сигма-9»"
+  - "автономный комплекс «Оракул»"
+  - "серверный блок «Ноль»"
+  - "машинный отсек «Реле»"
+  - "запретный сектор «Логос»"
+  targets:
+  - group: ForgeHuntGroupRogueAdvanced
+    count: 18
+  - prototype: MobRogueSiliconTesla
+    count: 1
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeonExteriorTilePreset: ForgeHuntDungeonExteriorTilesScrap
+    dungeonExteriorRockPreset: ForgeHuntDungeonExteriorRocksScrap
+    dungeons:
+    - prototype: ForgeHuntDungeonCaveFactory
+      weight: 5
+    - prototype: ForgeHuntDungeonCaveFactoryCompact
+      weight: 3
+    - prototype: ForgeHuntVGRoidScrapFactory
+      weight: 2
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 170000
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 4, max: 6 }
+
+- type: ncHuntContract
+  id: ForgeHuntHardRogueAiCore
+  name: "Ядро восставшего ИИ"
+  description: "Восставший ИИ собрал тяжёлую охрану в заброшенном техническом комплексе. Уничтожьте боевые единицы, стража и основную машину."
+  icon: MobRogueSiliconBoss
+  activeTimeLimitSeconds: 1800
+  gridNames:
+  - "ядро ИИ «Чёрный протокол»"
+  - "комплекс «Холодный разум»"
+  - "сектор «Нулевая воля»"
+  - "узел контроля «Мнемосина»"
+  - "станция машин «Абсолют»"
+  targets:
+  - group: ForgeHuntGroupRogueAdvanced
+    count: 22
+  - prototype: MobRogueSiliconTesla
+    count: 2
+  - prototype: MobRogueSiliconGuardian
+    count: 1
+  - prototype: MobRogueSiliconBoss
+    count: 1
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeonExteriorTilePreset: ForgeHuntDungeonExteriorTilesChromite
+    dungeonExteriorRockPreset: ForgeHuntDungeonExteriorRocksChromite
+    dungeons:
+    - prototype: ForgeHuntDungeonExperiment
+      weight: 5
+    - prototype: ForgeHuntDungeonExperimentCompact
+      weight: 3
+    - prototype: ForgeHuntVGRoidChromiteExperiment
+      weight: 2
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 260000
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: { min: 5, max: 8 }
+
+- type: ncHuntContract
+  id: ForgeHuntMediumSyndicatePatrol
+  name: "Красный патруль"
+  description: "Патруль Синдиката укрепился на дрейфующем объекте и ведёт разведку маршрутов. Разбейте группу, офицера и верните метку."
+  icon: MobSyndicateNavalOperatorA
+  activeTimeLimitSeconds: 1800
+  gridNames:
+  - "рейдерский пост «Красный нож»"
+  - "сторожевой узел «Кобра»"
+  - "пункт Синдиката «Багровый маяк»"
+  - "абордажная база «Шип»"
+  - "красный причал «Горн»"
+  targets:
+  - group: ForgeHuntGroupSyndicatePatrol
+    count: 18
+  - prototype: MobSyndicateNavalCaptainA
+    count: 1
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeonExteriorTilePreset: ForgeHuntDungeonExteriorTilesBasalt
+    dungeonExteriorRockPreset: ForgeHuntDungeonExteriorRocksBasalt
+    dungeons:
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 5
+    - prototype: ForgeHuntDungeonLavaBrigCompact
+      weight: 3
+    - prototype: ForgeHuntVGRoidBasaltBrig
+      weight: 2
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 170000
+  - type: Pool
+    pool: ForgeExpeditionRewardAdvanced
+    count: { min: 4, max: 6 }
+
+- type: ncHuntContract
+  id: ForgeHuntHardSyndicateCommander
+  name: "Командование Синдиката"
+  description: "Синдикатское командование удерживает объект под охраной штурмовой группы. Уничтожьте охрану, командиров и принесите метку."
+  icon: MobSyndicateNavalCommanderA
+  activeTimeLimitSeconds: 1800
+  gridNames:
+  - "командный пост «Красная корона»"
+  - "штурмовая база «Кровавый сигнал»"
+  - "рейдерский форт «Чёрное солнце»"
+  - "узел Синдиката «Гильотина»"
+  - "оперативный сектор «Шакал»"
+  targets:
+  - group: ForgeHuntGroupSyndicateAssault
+    count: 22
+  - prototype: MobSyndicateNavalCommanderA
+    count: 1
+  - prototype: MobSyndicateNavalCommanderB
+    count: 1
+  completion:
+    mode: TrophyTurnIn
+    trophy: ForgeTradeContractProofHuntTrophy
+  spawn:
+    point:
+      type: Store
+    dungeonExteriorTilePreset: ForgeHuntDungeonExteriorTilesBasalt
+    dungeonExteriorRockPreset: ForgeHuntDungeonExteriorRocksBasalt
+    dungeons:
+    - prototype: ForgeHuntDungeonLavaBrig
+      weight: 5
+    - prototype: ForgeHuntDungeonLavaBrigCompact
+      weight: 3
+    - prototype: ForgeHuntVGRoidBasaltBrig
+      weight: 2
+  reward:
+  - type: Currency
+    currency: BankCredit
+    count: 270000
+  - type: Pool
+    pool: ForgeExpeditionRewardElite
+    count: { min: 5, max: 8 }

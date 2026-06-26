@@ -151,3 +151,59 @@
     - state: decal-calibre-20
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+# ullman sniper rifle
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseAmmoBoxUllman127x85mm
+  name: ammunition box (12.7x85mm)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - ForgeCartridgeUllman127x85mm
+    proto: ForgeCartridgeUllman127x85mm
+    capacity: 20
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Ammunition/Boxes/12.7x99mm.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: false
+  - type: Appearance
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_drop.ogg
+
+- type: entity
+  id: AmmunitionBoxUllman127x85mm
+  parent: BaseAmmoBoxUllman127x85mm
+  name: ammunition box (12.7x85mm)
+  components:
+  - type: BallisticAmmoProvider
+    proto: ForgeCartridgeUllman127x85mm
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Ammunition/Boxes/12.7x99mm.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

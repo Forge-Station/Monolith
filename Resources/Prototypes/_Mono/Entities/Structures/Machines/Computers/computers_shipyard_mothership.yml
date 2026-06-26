@@ -69,9 +69,14 @@
   components:
   - type: ShipyardListing
     shuttles:
-    - Molotok
-    - Kopye
-    - Kupol
+#    - Molotok
+#    - Kopye
+#    - Kupol
+     - LedokolUp
+     - LedokolUpTaran
+     - LedokolLeft
+     - LedokolRight
+     - LedokolDown
 
 - type: entity
   id: WindreignCarrierComputer

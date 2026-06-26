@@ -1,0 +1,32 @@
+- type: vessel
+  id: Himel
+  parent: BaseVessel
+  name: Химель
+  description: Уютный шаттл-бар. Ждет клиентов.
+  price: 69000
+  category: Medium
+  group: Shipyard
+  shuttlePath: /Maps/_Forge/Shuttles/Civilian/Himel.yml
+  guidebookPage: Null
+  class:
+  - Civilian
+
+- type: gameMap
+  id: Himel
+  mapName: 'Химель'
+  mapPath: /Maps/_Forge/Shuttles/Civilian/Himel.yml
+  minPlayers: 0
+  stations:
+    Himel:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Химель CIV{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

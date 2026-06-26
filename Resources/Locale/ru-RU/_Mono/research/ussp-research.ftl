@@ -16,6 +16,6 @@ research-technology-ussp-explosives-medium = СССП Боевая взрывч�
 # T3 СССП
 research-technology-ussp-guns-advanced = СССП Продвинутое вооружение
 research-technology-ussp-ships-advanced = СССП Шаттлы Т-3
-research-technology-ussp-ships-ledokol = СССП Ледокол
+research-technology-ussp-ships-ledokol = СССП Ледокол V2
 research-technology-ussp-suits-advanced = СССП Продвинутое снаряжение
 research-technology-ussp-ammo-advanced = СССП Продвинутые боеприпасы

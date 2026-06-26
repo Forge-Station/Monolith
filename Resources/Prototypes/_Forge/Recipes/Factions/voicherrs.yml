@@ -119,3 +119,43 @@
   - RecipeShipVoucherMirko
   - RecipeShipVoucherFortress
   - RecipeShipVoucherGermes
+
+# USSP
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: RecipeShipVoucherLedokolDroneCrown
+  result: ShipVoucherLedokolDroneCrown
+  completetime: 10
+  materials:
+    Steel: 75000
+    Plasteel: 37000
+    Plastic: 21000
+    Glass: 17000
+    Plasma: 1200
+    UraniumFissile: 600
+    UraniumDepleted: 1200
+    Silver: 14000
+    Gold: 10500
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: RecipeShipVoucherLedokolModules
+  result: ShipVoucherLedokolModules
+  completetime: 10
+  materials:
+    Steel: 21000
+    Plasteel: 15000
+    Plastic: 7000
+    Glass: 5000
+    Plasma: 900
+    UraniumFissile: 10
+    UraniumDepleted: 20
+    Silver: 140
+    Gold: 100
+
+- type: latheRecipePack
+  id: LedokolVoucherRecipePack
+  recipes:
+  - RecipeShipVoucherLedokolDroneCrown
+  - RecipeShipVoucherLedokolModules

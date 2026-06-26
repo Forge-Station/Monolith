@@ -1,0 +1,35 @@
+- type: vessel
+  id: LedokolUpTaran
+  parent: BaseVesselAntag
+  name: Таранный модуль "Ледокол Mark-II"
+  description: Таранный модуль "Ледокол Mark-II". Оснащен таранным щитом. Выключайте его, если хотите вести прицельную стрельбу
+  purchasable: false
+  price: 80000
+  category: Medium
+  group: Ussp
+  access: Mercenary
+  shuttlePath: /Maps/_Forge/Shuttles/USSP/Ledokol/LedokolUpTaran.yml
+  guidebookPage: ShipyardNFROperation
+  class:
+  - Fighter
+  - Destroyer
+
+- type: gameMap
+  id: LedokolUpTaran
+  mapName: 'LedokolUpTaran'
+  mapPath: /Maps/_Forge/Shuttles/USSP/Ledokol/LedokolUpTaran.yml
+  minPlayers: 0
+  stations:
+    LedokolUpTaran:
+      stationProto: StandardFrontierVessel
+      gridComponents:
+      - type: VesselInfo
+        description: "Outdated, yet still reliable."
+      components:
+        - type: IFF
+          flags: [HideLabel]
+        - type: StationNameSetup
+          mapNameTemplate: 'Таранный модуль "Ледокол Mark-II" MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

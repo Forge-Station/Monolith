@@ -1,0 +1,35 @@
+- type: vessel
+  id: LedokolLeft
+  parent: BaseVesselAntag
+  name: Левый модуль "Ледокол Mark-II"
+  description: Левый боковой модуль "Ледокол Mark-II". Оснащен системой наведения пушек "Модуль-Шаттл"
+  purchasable: false
+  price: 80000
+  category: Medium
+  group: Ussp
+  access: Mercenary
+  shuttlePath: /Maps/_Forge/Shuttles/USSP/Ledokol/LedokolLeft.yml
+  guidebookPage: ShipyardNFROperation
+  class:
+  - Fighter
+  - Destroyer
+
+- type: gameMap
+  id: LedokolLeft
+  mapName: 'LedokolLeft'
+  mapPath: /Maps/_Forge/Shuttles/USSP/Ledokol/LedokolLeft.yml
+  minPlayers: 0
+  stations:
+    LedokolLeft:
+      stationProto: StandardFrontierVessel
+      gridComponents:
+      - type: VesselInfo
+        description: "Outdated, yet still reliable."
+      components:
+        - type: IFF
+          flags: [HideLabel]
+        - type: StationNameSetup
+          mapNameTemplate: 'Левый модуль "Ледокол Mark-II" MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

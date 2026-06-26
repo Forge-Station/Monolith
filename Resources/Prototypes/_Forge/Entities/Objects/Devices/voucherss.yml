@@ -143,3 +143,58 @@
     vendPrice: 640000
   # region Empire
 # Forge/Objects/Misc/emp_lpc.rsi # empire lpc textures
+  # region USSP
+
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherLedokolDroneCrown
+  name: Ваучер на "Ледокол Mark-II"
+  suffix: USSP
+  description: Небольшая карта, позволяющая приобрести шаттл "Ледокол Mark-II"
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon
+    - state: screen
+      color: "#ff0000"
+    - state: screen6
+      color: "#ff0004"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: USSP
+#    companyName: USSP
+    vessels:
+    - LedokolDroneCrown
+  - type: StaticPrice
+    vendPrice: 640000
+
+- type: entity
+  parent: BaseShipLPC
+  id: ShipVoucherLedokolModules
+  name: Ваучер на модули "Ледокол Mark-II"
+  suffix: USSP
+  description: Небольшая карта, позволяющая приобрести модули для "Ледокол Mark-II"
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon
+    - state: screen
+      color: "#ff0000"
+    - state: screen6
+      color: "#ff0004"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Custom
+#    companyName: USSP
+    vessels:
+    - LedokolUp
+    - LedokolUpTaran
+    - LedokolLeft
+    - LedokolRight
+    - LedokolDown
+  - type: StaticPrice
+    vendPrice: 100000

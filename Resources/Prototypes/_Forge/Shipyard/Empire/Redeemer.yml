@@ -1,0 +1,29 @@
+- type: vessel
+  id: Redeemer
+  parent: BaseVessel
+  name: EMF Искупитель
+  description: Тяжелый перехватчик Империи с серьезным вооружением
+  category: Medium
+  group: Empire
+  access: Empire
+  price: 114200
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/Redeemer.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+
+- type: gameMap
+  id: Redeemer
+  mapName: 'EMF Искупитель'
+  mapPath: /Maps/_Forge/Shuttles/Empire/Redeemer.yml
+  minPlayers: 0
+  stations:
+    Redeemer:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'EMF Искупитель SEW{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

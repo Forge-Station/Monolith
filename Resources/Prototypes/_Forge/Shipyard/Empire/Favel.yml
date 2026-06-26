@@ -1,0 +1,29 @@
+- type: vessel
+  id: Favel
+  parent: BaseVessel
+  name: EMF Фавел
+  description: Шаттл для посла Империи
+  category: Medium
+  group: Empire
+  access: Empire
+  price: 65000
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/Favel.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+
+
+- type: gameMap
+  id: Favel
+  mapName: 'EMF Фавел'
+  mapPath: /Maps/_Forge/Shuttles/Empire/Favel.yml
+  minPlayers: 0
+  stations:
+    Favel:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'EMF Фавел SEW{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

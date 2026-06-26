@@ -1,0 +1,13 @@
+- type: technology
+  id: UsspLedokolVoucher
+  name: research-technology-ussp-ships-ledokol
+  entityIcon: ShipVoucherLedokolDroneCrown
+  discipline: Ussp
+  tier: 1
+  cost: 80000
+  technologyPrerequisites:
+  - UniversalMaterialResearchT3
+  recipeUnlocks:
+  - RecipeShipVoucherLedokolDroneCrown
+  - RecipeShipVoucherLedokolModules
+  position: 20, 3

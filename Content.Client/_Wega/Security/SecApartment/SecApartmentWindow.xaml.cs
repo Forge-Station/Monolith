@@ -31,7 +31,7 @@ public partial class SecApartmentWindow : BaseWindow
         ("ТСФ", "TSF"),
         ("НаноТразен", "NanoTrasen"),
         ("СИВ", "Empire"),
-        ("СССП", "UnionOfSovietSocialistPlanets"),
+        ("СПН", "SPN"),
         ("Ренегаты", "Renegates")
     };
 
@@ -53,7 +53,7 @@ public partial class SecApartmentWindow : BaseWindow
         ["TSF"] = false,
         ["NanoTrasen"] = false,
         ["CIV"] = false,
-        ["USSP"] = false,
+        ["SPN"] = false,
         ["Renegates"] = false
     };
     private List<CrewMemberInfo> _lastUnassignedCrew = new();
@@ -329,7 +329,7 @@ public partial class SecApartmentWindow : BaseWindow
         };
 
         // AngleRect stylesheet modulates panels to #292929 — washes out light palettes.
-        if (_styles.Theme.ID == "SecApUiThemeUSSP")
+        if (_styles.Theme.ID == "SecApUiThemeSPN")
             panel.ModulateSelfOverride = Color.White;
     }
 
@@ -482,7 +482,7 @@ public partial class SecApartmentWindow : BaseWindow
             AddSquadCategory("TSF", "ТСФ", squads.Where(squad => squad.Department == "TSF").ToList(), debug);
             AddSquadCategory("NanoTrasen", "НаноТразен", squads.Where(IsNanoTrasenSquad).ToList(), debug);
             AddSquadCategory("CIV", "СИВ", squads.Where(IsCivilianSquad).ToList(), debug);
-            AddSquadCategory("USSP", "СССП", squads.Where(IsUsspSquad).ToList(), debug);
+            AddSquadCategory("SPN", "СПН", squads.Where(IsSpnSquad).ToList(), debug);
             AddSquadCategory("Renegates", "Ренегаты", squads.Where(squad => squad.Department == "Renegates").ToList(), debug);
             return;
         }
@@ -575,9 +575,9 @@ public partial class SecApartmentWindow : BaseWindow
         return squad.Department is "CIV" or "Empire";
     }
 
-    private static bool IsUsspSquad(Squad squad)
+    private static bool IsSpnSquad(Squad squad)
     {
-        return squad.Department is "USSP" or "СССП" or "UnionOfSovietSocialistPlanets";
+        return squad.Department is "SPN" or "СПН";
     }
 
     private void UpdateTimersList(List<TimerEntry> timers)

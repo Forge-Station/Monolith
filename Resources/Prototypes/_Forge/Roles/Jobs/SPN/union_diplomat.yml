@@ -28,7 +28,7 @@
       recordGeneration: FalseRecord
     - type: NpcFactionMember
       factions:
-      - USSP
+      - Spn
   - !type:AddLanguageSpecial
     languagesSpoken:
     - NovaCygniBasic

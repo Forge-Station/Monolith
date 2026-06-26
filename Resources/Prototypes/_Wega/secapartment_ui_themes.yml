@@ -440,11 +440,11 @@
 
 
 
-# СССП — тёмный бордо, приглушённое золото (корпус USSP.rsi, без кислотного пергамента)
+# СПН — тёмный бордо, приглушённое золото (корпус USSP.rsi, без кислотного пергамента)
 
 - type: secApUiTheme
 
-  id: SecApUiThemeUSSP
+  id: SecApUiThemeSPN
 
   showLogo: false
 

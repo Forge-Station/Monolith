@@ -19,3 +19,27 @@
   - MD
   - ContrabandDetection
   defaultHostile: true
+
+# SPN — NPC faction relations (see USSP / USSPTurret pattern)
+
+- type: npcFaction
+  id: Spn
+  neutral:
+  - CC
+  - NanoTrasen
+  - SimpleNeutral
+  - Mouse
+  defaultHostile: true
+
+- type: npcFaction
+  id: SpnTurret
+  friendly:
+  - Spn
+  neutral:
+  - NanoTrasen
+  - Cat
+  - PetsNT
+  - SimpleNeutral
+  - MD
+  - Mouse
+  defaultHostile: true

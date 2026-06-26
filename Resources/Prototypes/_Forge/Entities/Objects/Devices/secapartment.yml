@@ -281,10 +281,10 @@
 
 - type: entity
   parent: [ BaseItem, PowerCellSlotHighItem ]
-  id: USSPSecApartmentTablet
+  id: SpnSecApartmentTablet
   name: portable personnel monitor
   description: "A portable device for monitoring personnel, organizing squads, and coordinating actions."
-  suffix: НЕ СПАВНИТЬ
+  suffix: Powered
   components:
   - type: Sprite
     sprite: Forge/Objects/Devices/secapartments/USSP.rsi
@@ -309,10 +309,14 @@
   - type: ToggleCellDraw
   - type: ActivatableUIRequiresPowerCell
   - type: SecApartment
-    department: UnionOfSovietSocialistPlanets
-    requireUserDepartment: false
+    department: SPN
+    requireUserDepartment: true
     squadIconPrefix: USSPSquadIcon
-    uiTheme: SecApUiThemeUSSP
+    uiTheme: SecApUiThemeSPN
+  - type: AccessReader
+    requiredCompany: SPN
+    access: [["SpnSecApartment"]]
+  - type: ActivatableUIRequiresAccess
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -329,9 +333,9 @@
           False: { visible: false }
 
 - type: entity
-  id: USSPSecApartmentTabletEmpty
-  parent: USSPSecApartmentTablet
-  suffix: НЕ СПАВНИТЬ
+  id: SpnSecApartmentTabletEmpty
+  parent: SpnSecApartmentTablet
+  suffix: Empty
   components:
   - type: Sprite
     layers:

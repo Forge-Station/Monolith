@@ -11,6 +11,7 @@
                        "name":  "icon"
                    },
                    {
+		       "directions": 4,
                        "name":  "equipped-HELMET"
                    }
                ]

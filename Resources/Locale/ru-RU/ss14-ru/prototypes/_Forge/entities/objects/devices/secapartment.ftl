@@ -26,9 +26,9 @@ ent-EmpireSecApartmentTabletEmpty = { ent-EmpireSecApartmentTablet }
     .desc = { ent-EmpireSecApartmentTablet.desc }
     .suffix = НЕ СПАВНИТЬ
 
-ent-USSPSecApartmentTablet = портативный контроль персонала
-    .desc = Портативное устройство для контроля персонала, организации отрядов и координации действий.
-    .suffix = НЕ СПАВНИТЬ
-ent-USSPSecApartmentTabletEmpty = { ent-USSPSecApartmentTablet }
-    .desc = { ent-USSPSecApartmentTablet.desc }
-    .suffix = НЕ СПАВНИТЬ
+ent-SpnSecApartmentTablet = портативный контроль персонала СПН
+    .desc = Портативное устройство Союза Прогрессивных Народов для контроля персонала, организации отрядов и координации действий.
+    .suffix = Заряженный
+ent-SpnSecApartmentTabletEmpty = { ent-SpnSecApartmentTablet }
+    .desc = { ent-SpnSecApartmentTablet.desc }
+    .suffix = Пустой

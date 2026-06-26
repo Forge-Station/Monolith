@@ -3,6 +3,12 @@
   id: SpnCouncilMemberGear
   equipment:
     ears: ClothingHeadsetSpnCommand
+    pocket1: WeaponRevolverMateba
+    pocket2: SpeedLoader45_magnumFMJ
+  storage:
+    back:
+    - RadioHandheldNF
+    - SpnSecApartmentTablet
 
 - type: startingGear
   parent: USSPSergeantGear

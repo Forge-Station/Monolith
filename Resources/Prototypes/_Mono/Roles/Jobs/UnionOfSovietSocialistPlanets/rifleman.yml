@@ -8,6 +8,7 @@
     time: 32400 # 9 hrs
   startingGear: USSPRiflemanGear
   alwaysUseSpawner: true
+  setPreference: false # Forge-Change: replaced by SPN roles
   hideConsoleVisibility: true
   icon: "JobIconSecurityCadet" # TODO - new USSP icons
   supervisors: job-supervisors-ussp-sergeant

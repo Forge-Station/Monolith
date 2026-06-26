@@ -54,7 +54,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
         "TSF",
         "NanoTrasen",
         "Empire",
-        "UnionOfSovietSocialistPlanets",
+        "SPN",
         "Renegates"
     };
 
@@ -193,7 +193,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
         {
             "TSF" => "TSFSquadIcon",
             "Empire" => "EmpireSquadIcon",
-            "UnionOfSovietSocialistPlanets" => "USSPSquadIcon",
+            "SPN" => "USSPSquadIcon",
             "Renegates" => "RenegateSquadIcon",
             _ => fallback
         };

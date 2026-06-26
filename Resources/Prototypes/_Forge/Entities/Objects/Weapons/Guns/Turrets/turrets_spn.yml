@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretSpn
+  name: ballistic turret
+  suffix: SPN
+  description: A sentry programmed to fire on anyone not registered as SPN personnel.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - SpnTurret

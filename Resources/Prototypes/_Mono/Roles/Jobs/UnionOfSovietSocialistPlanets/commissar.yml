@@ -17,6 +17,7 @@
     time: 144000 # 40 hrs
   startingGear: USSPCommissarGear
   alwaysUseSpawner: true
+  setPreference: false # Forge-Change: replaced by SPN roles
   hideConsoleVisibility: true
   icon: "JobIconHeadOfSecurity" # TODO - new USSP icons
   supervisors: job-supervisors-ussp-highcomm

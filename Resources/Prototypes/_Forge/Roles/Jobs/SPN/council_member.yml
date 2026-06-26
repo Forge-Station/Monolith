@@ -4,6 +4,9 @@
   description: forge-job-desc-spn-council-member
   playTimeTracker: JobSpnCouncilMember
   requirements:
+  - !type:DepartmentTimeRequirement
+    department: SPN
+    time: 108000 # 30 hours
   - !type:OverallPlaytimeRequirement
     time: 129600
   - !type:RoleTimeRequirement
@@ -30,12 +33,14 @@
       recordGeneration: FalseRecord
     - type: NpcFactionMember
       factions:
-      - USSP
+      - Spn
   - !type:AddLanguageSpecial
     languagesSpoken:
     - NovaCygniBasic
     languagesUnderstood:
     - NovaCygniBasic
+  access:
+  - SpnSecApartment
   accessGroups:
   - GeneralAccess
   - USSPAA

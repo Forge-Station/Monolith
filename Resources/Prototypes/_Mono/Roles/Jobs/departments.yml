@@ -15,11 +15,6 @@
   description: department-UnionOfSovietSocialistPlanets-description
   color: "#b2224b"
   weight: 117 # Master Chief!
-  roles:
-  - USSPCommissar
-  - USSPSergeant
-  - USSPCorporal
-  - USSPMedic
-  - USSPRifleman
+  roles: [] # Forge-Change: replaced by SPN department
   primary: false
   editorHidden: true

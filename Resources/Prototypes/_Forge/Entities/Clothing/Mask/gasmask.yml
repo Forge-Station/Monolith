@@ -42,6 +42,21 @@
   - type: Clothing
     sprite: Forge/Clothing/Mask/nexus_mask.rsi
 
+#region SPN
+- type: entity
+  parent: ClothingMaskGasSecurity
+  id: ClothingMaskGasSpn
+  name: SPN gas mask
+  suffix: СПН
+  description: A standard issue SPN gas mask.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/spp_commando_coif.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/spp_commando_coif.rsi
+
 - type: entity
   parent: [ClothingMaskGas, BaseFactionGearOtherFactionT0]
   id: ClothingMaskGasTL

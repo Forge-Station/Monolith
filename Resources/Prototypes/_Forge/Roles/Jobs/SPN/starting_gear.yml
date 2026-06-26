@@ -11,10 +11,14 @@
     ears: ClothingHeadsetSpnCommand
 
 - type: startingGear
-  parent: USSPSergeantGear
   id: SpnUnionDiplomatGear
   equipment:
-    ears: ClothingHeadsetSpn
+    ears: ClothingHeadsetSpnCommand
+    pocket1: WeaponRevolverFitz
+    pocket2: SpeedLoader45_magnumFMJ
+  storage:
+    back:
+    - RadioHandheldNF
 
 - type: startingGear
   parent: USSPCorporalGear

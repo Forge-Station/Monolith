@@ -1,0 +1,14 @@
+ent-ClothingOuterCoatSpnOfficer = куртка UL4 офицера СПН
+    .desc = Лёгкая куртка командного состава СПН.
+ent-ClothingOuterCoatSpnSenior = куртка UL4 старшего офицера СПН
+    .desc = Куртка старшего офицерского состава СПН.
+ent-ClothingOuterCoatSpnMp = камуфляжная куртка UL4 СПН
+    .desc = Лёгкая камуфляжная куртка для низкоугроженных постов.
+ent-ClothingOuterCoatSpnPap = куртка PaP СПН
+    .desc = Верхняя одежда дипломатического корпуса СПН.
+ent-ClothingOuterCoatSpnKomWhite = куртка UL5-W СПН
+    .desc = Белая бронированная куртка командования.
+ent-ClothingOuterArmorSpnArmy = броня 6B80 СПН
+    .desc = Устаревший бронежилет тыловых подразделений.
+ent-ClothingOuterArmorSpnSofPlated = усиленный жилет CCC5-L СПН
+    .desc = Вариант CCC5-L с дополнительными пластинами.

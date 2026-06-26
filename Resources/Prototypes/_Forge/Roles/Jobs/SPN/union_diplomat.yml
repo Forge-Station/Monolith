@@ -12,7 +12,7 @@
   hideConsoleVisibility: true
   setPreference: true
   icon: JobIconSpnUnionDiplomat
-  supervisors: job-supervisors-spn-council
+  supervisors: job-supervisors-nobody
   canBeAntag: false
   weight: 160
   displayWeight: 55
@@ -20,7 +20,7 @@
   assignedNationality: USSP
   special:
   - !type:AddImplantSpecial
-    implants: [ SpnMindShieldImplant, UsspTrackingImplant ]
+    implants: [ SpnMindShieldImplant, SpnTrackingImplant ]
   - !type:AddComponentSpecial
     components:
     - type: MailDisabled

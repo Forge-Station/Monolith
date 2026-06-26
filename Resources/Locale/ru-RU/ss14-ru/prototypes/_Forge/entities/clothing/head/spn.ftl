@@ -1,0 +1,10 @@
+ent-ClothingHeadHatSpnCap = кепка курсанта СПН
+    .desc = Полевая кепка UL2 для курсантов Союза Прогрессивных Народов.
+ent-ClothingHeadHatSpnBeret = берет пехотинца СПН
+    .desc = Берет UL3 стандартной пехоты СПН.
+ent-ClothingHeadHatSpnPeaked = фуражка UL3 СПН
+    .desc = Офицерская фуражка UL3 для командного состава СПН.
+ent-ClothingHeadHatSpnPeakedDiplomat = фуражка UL3 PaP СПН
+    .desc = Фуражка UL3 дипломатического корпуса СПН.
+ent-ClothingHeadHatSpnKomWhite = фуражка UL5 СПН
+    .desc = Белая фуражка UL5 C-1 для членов совета СПН.

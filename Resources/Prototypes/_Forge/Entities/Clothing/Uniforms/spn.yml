@@ -1,0 +1,60 @@
+- type: entity
+  abstract: true
+  parent: ClothingUniformBase
+  id: ClothingUniformSpnBase
+  components:
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
+  - type: SuitSensor
+    randomMode: false
+    mode: SensorOff
+
+- type: entity
+  parent: ClothingUniformSpnBase
+  id: ClothingUniformSpnArmy
+  name: SPN army uniform
+  suffix: СПН
+  description: Standard field uniform of SPN infantry.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army.rsi
+
+- type: entity
+  parent: ClothingUniformSpnBase
+  id: ClothingUniformSpnOfficer
+  name: SPN officer uniform
+  suffix: СПН
+  description: Dress uniform issued to SPN command staff.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officer.rsi
+
+- type: entity
+  parent: ClothingUniformSpnBase
+  id: ClothingUniformSpnCouncilFormal
+  name: SPN council formal uniform
+  suffix: СПН
+  description: White formal dress uniform worn by SPN council members.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/formal_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/formal_white.rsi
+
+- type: entity
+  parent: ClothingUniformSpnBase
+  id: ClothingUniformSpnPap
+  name: SPN diplomatic work uniform
+  suffix: СПН
+  description: Everyday working uniform of the SPN diplomatic corps.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/pap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/pap.rsi

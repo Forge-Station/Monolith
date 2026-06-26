@@ -1,0 +1,46 @@
+# Forge-Change: SPN belts (RMC-14 textures, simple SS14 parents).
+
+- type: entity
+  parent: ClothingBeltWebbingsBigBase
+  id: ClothingBeltSpnBrown
+  name: SPN tactical belt
+  suffix: СПН
+  description: A tactical belt formerly standard for the SPN Army.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/spp_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/spp_brown.rsi
+  - type: Storage
+    grid:
+    - 0,0,1,2
+    - 3,0,4,2
+    - 6,0,7,2
+    - 9,0,10,2
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
+
+- type: entity
+  parent: ClothingBeltSheath
+  id: ClothingBeltSpnCoSabreSheath
+  name: SPP CO sabre sheath
+  suffix: СПН
+  description: An ornate sheath designed to hold a commanding officer's blade.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/co_sabre_sheath.rsi
+    state: half
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/co_sabre_sheath.rsi
+  - type: ItemMapper
+    mapLayers:
+      full:
+        whitelist:
+          tags:
+          - CaptainSabre
+  - type: ContainerFill
+    containers:
+      item:
+      - SpnCeremonialSabre

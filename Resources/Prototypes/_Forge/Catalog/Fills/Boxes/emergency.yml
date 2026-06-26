@@ -68,7 +68,7 @@
       - id: DoubleEmergencyOxygenTankFilled
       - id: SpaceMedipen
       - id: EmergencyMedipen
-      - id: ClothingMaskGasSecurity
+      - id: ClothingMaskGasSpn
       - id: MonoMRE
       - id: CrowbarPocket
       - id: HandHeldMassScanner
@@ -83,7 +83,7 @@
       - id: DoubleEmergencyNitrogenTankFilled
       - id: SpaceMedipen
       - id: EmergencyMedipen
-      - id: ClothingMaskGasSecurity
+      - id: ClothingMaskGasSpn
       - id: MonoMRE
       - id: CrowbarPocket
       - id: HandHeldMassScanner

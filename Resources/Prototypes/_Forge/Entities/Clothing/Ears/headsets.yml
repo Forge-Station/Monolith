@@ -216,7 +216,7 @@
       - EncryptionKeyTsfCom
 
 - type: entity
-  parent: ClothingHeadsetAlt
+  parent: ClothingHeadset
   id: ClothingHeadsetSpn
   name: SPN headset
   suffix: СПН
@@ -224,7 +224,7 @@
   - type: Sprite
     sprite: Clothing/Ears/Headsets/security.rsi
   - type: Clothing
-    sprite: Clothing/Ears/Headsets/security.rsi
+    sprite: _RMC14/Objects/Clothing/Ears/Headsets/SPP/spp.rsi
   - type: ContainerFill
     containers:
       key_slots:
@@ -232,15 +232,17 @@
       - EncryptionKeySpn
 
 - type: entity
-  parent: ClothingHeadsetAlt
+  parent: ClothingHeadset
   id: ClothingHeadsetSpnCommand
   name: SPN command headset
   suffix: СПН
   components:
   - type: Sprite
     sprite: Clothing/Ears/Headsets/security.rsi
+    state: icon_alt
   - type: Clothing
     sprite: Clothing/Ears/Headsets/security.rsi
+    equippedPrefix: alt
   - type: ContainerFill
     containers:
       key_slots:

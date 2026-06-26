@@ -1,7 +1,24 @@
-- type: loadoutGroup
-  id: SpnHeadTrainee
-  name: loadout-group-contractor-head
-  minLimit: 0
-  loadouts:
-  - USSPHelmet
-  - ContractorClothingHeadHatUshanka
+- type: loadout
+  id: SpnClothingHeadCap
+  equipment:
+    head: ClothingHeadHatSpnCap
+
+- type: loadout
+  id: SpnClothingHeadBeret
+  equipment:
+    head: ClothingHeadHatSpnBeret
+
+- type: loadout
+  id: SpnClothingHeadPeaked
+  equipment:
+    head: ClothingHeadHatSpnPeaked
+
+- type: loadout
+  id: SpnClothingHeadPeakedDiplomat
+  equipment:
+    head: ClothingHeadHatSpnPeakedDiplomat
+
+- type: loadout
+  id: SpnClothingHeadKomWhite
+  equipment:
+    head: ClothingHeadHatSpnKomWhite

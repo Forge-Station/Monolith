@@ -1,0 +1,66 @@
+# Forge-Change: SPN headwear (RMC-14 textures, simple SS14 parents).
+
+- type: entity
+  abstract: true
+  parent: ClothingHeadBase
+  id: ClothingHeadSpnHatBase
+  components:
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
+
+- type: entity
+  parent: ClothingHeadSpnHatBase
+  id: ClothingHeadHatSpnCap
+  name: SPP UL2 cap
+  suffix: СПН
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/cap.rsi
+
+- type: entity
+  parent: ClothingHeadSpnHatBase
+  id: ClothingHeadHatSpnBeret
+  name: SPP UL3 beret
+  suffix: СПН
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/beret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/beret.rsi
+
+- type: entity
+  parent: ClothingHeadSpnHatBase
+  id: ClothingHeadHatSpnPeaked
+  name: SPP UL3 peaked cap
+  suffix: СПН
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/peaked.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/peaked.rsi
+
+- type: entity
+  parent: ClothingHeadSpnHatBase
+  id: ClothingHeadHatSpnPeakedDiplomat
+  name: SPP UL3 PaP peaked cap
+  suffix: СПН
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/peaked_diplomat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/peaked_diplomat.rsi
+
+- type: entity
+  parent: ClothingHeadSpnHatBase
+  id: ClothingHeadHatSpnKomWhite
+  name: SPP UL5 C-1 peaked cap
+  suffix: СПН
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/kommisar_cap_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/kommisar_cap_white.rsi

@@ -1,0 +1,24 @@
+- type: loadout
+  id: SpnClothingOuterKomWhite
+  equipment:
+    outerClothing: ClothingOuterCoatSpnKomWhite
+
+- type: loadout
+  id: SpnClothingOuterSofPlated
+  equipment:
+    outerClothing: ClothingOuterArmorSpnSofPlated
+
+- type: loadout
+  id: SpnClothingOuterSenior
+  equipment:
+    outerClothing: ClothingOuterCoatSpnSenior
+
+- type: loadout
+  id: SpnClothingOuterPap
+  equipment:
+    outerClothing: ClothingOuterCoatSpnPap
+
+- type: loadout
+  id: SpnClothingOuterArmy
+  equipment:
+    outerClothing: ClothingOuterArmorSpnArmy

@@ -1,14 +1,15 @@
 - type: roleLoadout
   id: JobSpnCouncilMember
   groups:
-  - USSPJumpsuit
+  - SpnHeadCouncil
+  - SpnJumpsuitCouncil
   - TsfmcGloves
   - USSPBackpackSergeant
-  - USSPOuterClothingOfficer
-  - TsfmcShoes
-  - TsfmcFace
+  - SpnOuterClothingCouncil
+  - SpnShoes
   - TsfmcBalaclava
-  - USSPBelt
+  - SpnEyes
+  - SpnBeltCouncil
   - SpnBoxSurvival
   - USSPCommissarPDA
   - ContractorWallet
@@ -17,7 +18,6 @@
   - ContractorFun
   - ContractorTrinkets
   - NfsdSpeciesSpecific
-  - USSPHeadCommissar
   - UsspFirearm
   - UsspMag
   - FactionArmorPlates
@@ -26,13 +26,15 @@
 - type: roleLoadout
   id: JobSpnUnionDiplomat
   groups:
-  - USSPJumpsuit
+  - SpnHeadDiplomat
+  - SpnJumpsuitPap
   - TsfmcGloves
-  - USSPBackpack
-  - TsfmcShoes
-  - TsfmcFace
+  - SpnBackpackDiplomat
+  - SpnOuterClothingDiplomat
+  - SpnShoes
   - TsfmcBalaclava
-  - USSPBelt
+  - SpnEyes
+  - SpnBelt
   - SpnBoxSurvival
   - USSPSergeantPDA
   - ContractorWallet
@@ -41,23 +43,21 @@
   - ContractorFun
   - ContractorTrinkets
   - NfsdSpeciesSpecific
-  - USSPOuterClothingOfficer
-  - USSPHeadOfficer
-  - UsspFirearm
-  - UsspMag
   - FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
   id: JobSpnFleetOfficer
   groups:
-  - USSPJumpsuit
+  - SpnHeadFleetOfficer
+  - SpnJumpsuitOfficer
   - TsfmcGloves
   - USSPBackpack
-  - TsfmcShoes
-  - TsfmcFace
+  - SpnOuterClothingFleetOfficer
+  - SpnShoes
   - TsfmcBalaclava
-  - USSPBelt
+  - SpnEyes
+  - SpnBelt
   - SpnBoxSurvival
   - USSPSergeantPDA
   - ContractorWallet
@@ -66,8 +66,6 @@
   - ContractorFun
   - ContractorTrinkets
   - NfsdSpeciesSpecific
-  - USSPOuterClothingOfficer
-  - USSPHeadOfficer
   - UsspFirearm
   - UsspMag
   - FactionArmorPlates
@@ -81,10 +79,10 @@
   - TsfmcGloves
   - USSPBackpack
   - USSPOuterClothing
-  - TsfmcShoes
-  - TsfmcFace
+  - SpnShoes
   - TsfmcBalaclava
-  - USSPBelt
+  - SpnEyes
+  - SpnBelt
   - SpnBoxSurvival
   - USSPCorporalPDA
   - ContractorWallet
@@ -106,9 +104,10 @@
   - TsfmcBrigmedicGloves
   - USSPBackpack
   - USSPOuterClothing
-  - TsfmcShoes
-  - TsfmcFace
+  - SpnShoes
   - TsfmcBalaclava
+  - SpnEyes
+  - SpnBelt
   - SpnBoxSurvival
   - USSPMedicPDA
   - ContractorWallet
@@ -117,8 +116,6 @@
   - ContractorFun
   - ContractorTrinkets
   - NfsdSpeciesSpecific
-  - USSPMedhud
-  - USSPBeltMedic
   - UsspFirearm
   - UsspMag
   - FactionArmorPlates
@@ -132,10 +129,10 @@
   - TsfmcGloves
   - USSPBackpack
   - USSPOuterClothing
-  - TsfmcShoes
-  - TsfmcFace
+  - SpnShoes
   - TsfmcBalaclava
-  - USSPBelt
+  - SpnEyes
+  - SpnBelt
   - SpnBoxSurvival
   - USSPCorporalPDA
   - ContractorWallet
@@ -152,15 +149,15 @@
 - type: roleLoadout
   id: JobSpnRifleman
   groups:
-  - USSPHead
-  - USSPJumpsuit
+  - SpnHeadRifleman
+  - SpnJumpsuitArmy
   - TsfmcGloves
   - USSPBackpack
-  - TsfmcOuterClothing
-  - TsfmcShoes
-  - TsfmcFace
+  - SpnOuterClothingArmy
+  - SpnShoes
   - TsfmcBalaclava
-  - USSPBelt
+  - SpnEyes
+  - SpnBelt
   - SpnBoxSurvival
   - USSPRiflemanPDA
   - ContractorWallet
@@ -178,14 +175,14 @@
   id: JobSpnTrainee
   groups:
   - SpnHeadTrainee
-  - USSPJumpsuit
+  - SpnJumpsuitArmy
   - TsfmcGloves
   - USSPBackpack
-  - TsfmcOuterClothing
-  - TsfmcShoes
-  - TsfmcFace
+  - SpnOuterClothingArmy
+  - SpnShoes
   - TsfmcBalaclava
-  - USSPBelt
+  - SpnEyes
+  - SpnBelt
   - SpnBoxSurvival
   - USSPRiflemanPDA
   - ContractorWallet

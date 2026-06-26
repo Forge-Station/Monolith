@@ -22,7 +22,7 @@
   assignedNationality: USSP
   special:
   - !type:AddImplantSpecial
-    implants: [ SpnMindShieldImplant, UsspTrackingImplant ]
+    implants: [ SpnMindShieldImplant, SpnTrackingImplant ]
   - !type:AddComponentSpecial
     components:
     - type: MailDisabled

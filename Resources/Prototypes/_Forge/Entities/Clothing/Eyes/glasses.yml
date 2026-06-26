@@ -102,3 +102,16 @@
   - type: NightVision
     flashDurationMultiplier: 2.75
     isEquipment: true
+
+#region SPN
+- type: entity
+  parent: ClothingEyesGlassesSecurity
+  id: ClothingEyesGlassesSpn
+  name: SPN security visor
+  suffix: СПН
+  description: Upgraded sunglasses that provide flash immunity and a security HUD.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi

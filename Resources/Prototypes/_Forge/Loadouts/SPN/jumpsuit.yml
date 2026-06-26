@@ -1,0 +1,19 @@
+- type: loadout
+  id: SpnClothingJumpsuitArmy
+  equipment:
+    jumpsuit: ClothingUniformSpnArmy
+
+- type: loadout
+  id: SpnClothingJumpsuitOfficer
+  equipment:
+    jumpsuit: ClothingUniformSpnOfficer
+
+- type: loadout
+  id: SpnClothingJumpsuitCouncil
+  equipment:
+    jumpsuit: ClothingUniformSpnCouncilFormal
+
+- type: loadout
+  id: SpnClothingJumpsuitPap
+  equipment:
+    jumpsuit: ClothingUniformSpnPap

@@ -1,0 +1,11 @@
+- type: loadout
+  id: SpnClothingShoesBootsBlack
+  name: loadout-spn-boots-black
+  equipment:
+    shoes: ClothingShoesBootsSpnBlackFilled
+
+- type: loadout
+  id: SpnClothingShoesBootsJungle
+  name: loadout-spn-boots-jungle
+  equipment:
+    shoes: ClothingShoesBootsSpnJungleFilled

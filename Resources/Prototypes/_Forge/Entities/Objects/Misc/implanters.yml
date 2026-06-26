@@ -70,3 +70,11 @@
   components:
   - type: Implanter
     implant: EmpireTrackingImplant
+
+- type: entity
+  id: SpnTrackingImplanter
+  suffix: SPN tracking
+  parent: BaseImplantOnlyImplanter
+  components:
+  - type: Implanter
+    implant: SpnTrackingImplant

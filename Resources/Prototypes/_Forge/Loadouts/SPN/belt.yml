@@ -1,0 +1,9 @@
+- type: loadout
+  id: SpnClothingBeltBrown
+  equipment:
+    belt: ClothingBeltSpnBrown
+
+- type: loadout
+  id: SpnClothingBeltCoSabreSheath
+  equipment:
+    belt: ClothingBeltSpnCoSabreSheath

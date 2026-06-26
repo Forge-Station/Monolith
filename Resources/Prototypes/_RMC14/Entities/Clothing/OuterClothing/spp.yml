@@ -1,0 +1,105 @@
+# Forge-Change: SPN outer clothing (RMC-14 textures, simple SS14 parents).
+
+- type: entity
+  abstract: true
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterSpnCoatBase
+  components:
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
+
+- type: entity
+  abstract: true
+  parent: ClothingOuterArmorBasic
+  id: ClothingOuterSpnArmorBase
+  components:
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
+
+- type: entity
+  parent: ClothingOuterSpnCoatBase
+  id: ClothingOuterCoatSpnOfficer
+  name: SPP UL4 officer jacket
+  suffix: СПН
+  description: A lightweight jacket issued to officers of the SPP military.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/officer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/officer.rsi
+
+- type: entity
+  parent: ClothingOuterSpnCoatBase
+  id: ClothingOuterCoatSpnSenior
+  name: SPP UL4 senior officer jacket
+  suffix: СПН
+  description: A lightweight jacket issued to senior officers of the SPP military.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/senior.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/senior.rsi
+
+- type: entity
+  parent: ClothingOuterSpnCoatBase
+  id: ClothingOuterCoatSpnMp
+  name: SPP UL4 camouflaged jacket
+  suffix: СПН
+  description: A lightweight camouflaged jacket issued to SPP troops in low-threat postings.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/mp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/mp.rsi
+
+- type: entity
+  parent: ClothingOuterSpnCoatBase
+  id: ClothingOuterCoatSpnPap
+  name: SPP PaP jacket
+  suffix: СПН
+  description: Outer jacket of the SPP diplomatic corps.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pap.rsi
+
+- type: entity
+  parent: ClothingOuterSpnCoatBase
+  id: ClothingOuterCoatSpnKomWhite
+  name: SPP UL5-W
+  suffix: СПН
+  description: A somewhat armored jacket primarily utilised by naval or marine infantry COs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarwhitecoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarwhitecoat.rsi
+
+- type: entity
+  parent: ClothingOuterSpnArmorBase
+  id: ClothingOuterArmorSpnArmy
+  name: SPP 6B80 personal body armor
+  suffix: СПН
+  description: An older SPP personal armor system still used by rear-echelon army units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/army.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/army.rsi
+
+- type: entity
+  parent: ClothingOuterSpnArmorBase
+  id: ClothingOuterArmorSpnSofPlated
+  name: SPP CCC5-L plated tactical vest
+  suffix: СПН
+  description: A plated variant of the CCC5-L tactical vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_plated.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_plated.rsi

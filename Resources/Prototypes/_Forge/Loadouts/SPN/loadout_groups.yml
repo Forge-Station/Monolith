@@ -1,11 +1,171 @@
 - type: loadoutGroup
-  id: USSPJumpsuit
+  id: SpnShoes
+  name: loadout-group-contractor-shoes
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - SpnClothingShoesBootsBlack
+  - SpnClothingShoesBootsJungle
+  fallbacks:
+  - SpnClothingShoesBootsBlack
+
+- type: loadoutGroup
+  id: SpnEyes
+  name: loadout-group-contractor-glasses
+  minLimit: 1
+  loadouts:
+  - SpnClothingEyesGlasses
+  fallbacks:
+  - SpnClothingEyesGlasses
+
+- type: loadoutGroup
+  id: SpnHeadTrainee
+  name: loadout-group-contractor-head
+  minLimit: 1
+  loadouts:
+  - SpnClothingHeadCap
+  fallbacks:
+  - SpnClothingHeadCap
+
+- type: loadoutGroup
+  id: SpnHeadRifleman
+  name: loadout-group-contractor-head
+  minLimit: 1
+  loadouts:
+  - SpnClothingHeadBeret
+  fallbacks:
+  - SpnClothingHeadBeret
+
+- type: loadoutGroup
+  id: SpnHeadFleetOfficer
+  name: loadout-group-contractor-head
+  minLimit: 1
+  loadouts:
+  - SpnClothingHeadPeaked
+  fallbacks:
+  - SpnClothingHeadPeaked
+
+- type: loadoutGroup
+  id: SpnHeadDiplomat
+  name: loadout-group-contractor-head
+  minLimit: 1
+  loadouts:
+  - SpnClothingHeadPeakedDiplomat
+  fallbacks:
+  - SpnClothingHeadPeakedDiplomat
+
+- type: loadoutGroup
+  id: SpnHeadCouncil
+  name: loadout-group-contractor-head
+  minLimit: 1
+  loadouts:
+  - SpnClothingHeadKomWhite
+  fallbacks:
+  - SpnClothingHeadKomWhite
+
+- type: loadoutGroup
+  id: SpnJumpsuitArmy
   name: loadout-group-contractor-jumpsuit
   minLimit: 1
   loadouts:
-  - USSPClothingJumpsuit
+  - SpnClothingJumpsuitArmy
   fallbacks:
-  - USSPClothingJumpsuit
+  - SpnClothingJumpsuitArmy
+
+- type: loadoutGroup
+  id: SpnJumpsuitOfficer
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - SpnClothingJumpsuitOfficer
+  fallbacks:
+  - SpnClothingJumpsuitOfficer
+
+- type: loadoutGroup
+  id: SpnJumpsuitCouncil
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - SpnClothingJumpsuitCouncil
+  fallbacks:
+  - SpnClothingJumpsuitCouncil
+
+- type: loadoutGroup
+  id: SpnJumpsuitPap
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 1
+  loadouts:
+  - SpnClothingJumpsuitPap
+  fallbacks:
+  - SpnClothingJumpsuitPap
+
+- type: loadoutGroup
+  id: SpnBelt
+  name: loadout-group-contractor-belt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - SpnClothingBeltBrown
+  fallbacks:
+  - SpnClothingBeltBrown
+
+- type: loadoutGroup
+  id: SpnBeltCouncil
+  name: loadout-group-contractor-belt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - SpnClothingBeltCoSabreSheath
+  fallbacks:
+  - SpnClothingBeltCoSabreSheath
+
+- type: loadoutGroup
+  id: SpnBackpackDiplomat
+  name: loadout-group-contractor-backpack
+  minLimit: 1
+  loadouts:
+  - SpnClothingBackpackSatchelLeather
+  fallbacks:
+  - SpnClothingBackpackSatchelLeather
+
+- type: loadoutGroup
+  id: SpnOuterClothingCouncil
+  name: loadout-group-contractor-outerclothing
+  minLimit: 1
+  loadouts:
+  - SpnClothingOuterKomWhite
+  - SpnClothingOuterSofPlated
+  fallbacks:
+  - SpnClothingOuterKomWhite
+
+- type: loadoutGroup
+  id: SpnOuterClothingFleetOfficer
+  name: loadout-group-contractor-outerclothing
+  minLimit: 1
+  loadouts:
+  - SpnClothingOuterSenior
+  - SpnClothingOuterArmy
+  fallbacks:
+  - SpnClothingOuterSenior
+
+- type: loadoutGroup
+  id: SpnOuterClothingDiplomat
+  name: loadout-group-contractor-outerclothing
+  minLimit: 1
+  loadouts:
+  - SpnClothingOuterPap
+  - SpnClothingOuterArmy
+  fallbacks:
+  - SpnClothingOuterPap
+
+- type: loadoutGroup
+  id: SpnOuterClothingArmy
+  name: loadout-group-contractor-outerclothing
+  minLimit: 1
+  loadouts:
+  - SpnClothingOuterArmy
+  fallbacks:
+  - SpnClothingOuterArmy
 
 - type: loadoutGroup
   id: SpnBoxSurvival

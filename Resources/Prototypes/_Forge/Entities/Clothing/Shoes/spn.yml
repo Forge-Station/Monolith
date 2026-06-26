@@ -1,0 +1,37 @@
+- type: entity
+  parent: ClothingShoesMilitaryBase
+  id: ClothingShoesBootsSpnBlack
+  name: SPN black boots
+  suffix: СПН
+  description: Standard-issue black combat boots of the Union of Progressive Peoples.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
+
+- type: entity
+  parent: ClothingShoesMilitaryBase
+  id: ClothingShoesBootsSpnJungle
+  name: SPN jungle boots
+  suffix: СПН
+  description: Jungle-pattern combat boots issued to SPN field units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jungle.rsi
+
+- type: entity
+  id: ClothingShoesBootsSpnBlackFilled
+  suffix: Filled, Combat Knife
+  parent:
+  - ClothingShoesBootsSpnBlack
+  - ClothingShoesBootsSecFilled
+
+- type: entity
+  id: ClothingShoesBootsSpnJungleFilled
+  suffix: Filled, Combat Knife
+  parent:
+  - ClothingShoesBootsSpnJungle
+  - ClothingShoesBootsSecFilled

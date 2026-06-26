@@ -633,7 +633,24 @@
     inverse: true
     reattaching: true
 
-
+# Forge-Change-Start
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryAttachTail
+  name: Attach Tail
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepInsertFeature
+    - SurgeryStepSealWounds
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryPartRemovedCondition
+    part: Tail
+    connection: tail
+# Forge-Change-End
 
 # Fluff/Joke Surgeries
 

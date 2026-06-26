@@ -1,0 +1,74 @@
+- type: entity
+  parent: BaseXenoArtifact
+  id: ForgeContractStudyArtifactEasy
+  name: simple contract artifact
+  description: A controlled artifact prepared for simple Forge study contracts.
+  suffix: Forge, Study Contract, Easy
+  components:
+  - type: Artifact
+  - type: CargoSellBlacklist
+  - type: RandomArtifactSprite
+    maxSprite: 36
+  - type: RandomSprite
+    available:
+    - enum.ArtifactsVisualLayers.Effect:
+        ano01_on: Rainbow
+  - type: Appearance
+  - type: ForgeArtifactStudyPreset
+    nodeCountMin: 3
+    nodeCountMax: 4
+    excludedEffects:
+    - EffectBoom
+    - EffectSingulo
+    - EffectTesla
+    - EffectPhasing
+
+- type: entity
+  parent: BaseXenoArtifact
+  id: ForgeContractStudyArtifactMedium
+  name: standard contract artifact
+  description: A controlled artifact prepared for standard Forge study contracts.
+  suffix: Forge, Study Contract, Medium
+  components:
+  - type: Artifact
+  - type: CargoSellBlacklist
+  - type: RandomArtifactSprite
+    maxSprite: 36
+  - type: RandomSprite
+    available:
+    - enum.ArtifactsVisualLayers.Effect:
+        ano01_on: Rainbow
+  - type: Appearance
+  - type: ForgeArtifactStudyPreset
+    nodeCountMin: 5
+    nodeCountMax: 7
+    excludedEffects:
+    - EffectBoom
+    - EffectSingulo
+    - EffectTesla
+    - EffectPhasing
+
+- type: entity
+  parent: BaseXenoArtifact
+  id: ForgeContractStudyArtifactHard
+  name: complex contract artifact
+  description: A controlled artifact prepared for complex Forge study contracts.
+  suffix: Forge, Study Contract, Hard
+  components:
+  - type: Artifact
+  - type: CargoSellBlacklist
+  - type: RandomArtifactSprite
+    maxSprite: 36
+  - type: RandomSprite
+    available:
+    - enum.ArtifactsVisualLayers.Effect:
+        ano01_on: Rainbow
+  - type: Appearance
+  - type: ForgeArtifactStudyPreset
+    nodeCountMin: 11
+    nodeCountMax: 13
+    excludedEffects:
+    - EffectBoom
+    - EffectSingulo
+    - EffectTesla
+    - EffectPhasing

@@ -25,8 +25,25 @@ public sealed partial class RandomHumanoidAppearanceSystem : EntitySystem
         }
 
         var profile = HumanoidCharacterProfile.RandomWithSpecies(humanoid.Species);
+        if (component.Sex is { } sex) /// Forge-Change Begin
+        {
+            profile = profile.WithSex(sex);
+
+            if (SharedHumanoidAppearanceSystem.DefaultSexVoice.TryGetValue(sex, out var voice))
+                profile = profile.WithVoice(voice);
+        }
+
+        if (component.Gender is { } gender)
+            profile = profile.WithGender(gender);
+
+        if (component.Age is { } age)
+            profile = profile.WithAge(Math.Max(0, age));
+
+        if (component.SkinColor is { } skinColor)
+            profile = profile.WithCharacterAppearance(profile.Appearance.WithSkinColor(skinColor)); /// Forge-Change End
+
         //If we have a specified hair style, change it to this
-        if(component.Hair != null)
+        if (component.Hair != null)
             profile = profile.WithCharacterAppearance(profile.Appearance.WithHairStyleName(component.Hair));
 
         _humanoid.LoadProfile(uid, profile, humanoid);

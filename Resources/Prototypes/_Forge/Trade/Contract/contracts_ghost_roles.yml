@@ -1,0 +1,105 @@
+- type: entity
+  parent: BaseObjective
+  id: NcContractGhostRoleSurvivalObjective
+  name: "Выжить"
+  description: "Продержитесь до конца таймера."
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Objective
+    difficulty: 0
+    issuer: objective-issuer-forge-contract-role
+    unique: false
+    icon:
+      sprite: Mobs/Ghosts/ghost_human.rsi
+      state: icon
+  - type: NcContractGhostRoleSurvivalObjective
+
+- type: entity
+  parent: MobHuman
+  id: ForgeTradeGhostLostSalvager
+  name: потерявшийся утилизатор
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+  - type: Loadout
+    prototypes: [SalvageSpecialistGear]
+
+- type: entity
+  parent: MobReptilian
+  id: ForgeTradeGhostYavassaBiila
+  name: Явасса-Биила
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+    sex: Female
+    gender: Female
+    age: 22
+    skinColor: "#FFFFFF"
+  - type: Loadout
+    prototypes: [ForgeGhostYavassaBiilaGear]
+
+- type: startingGear
+  id: ForgeGhostYavassaBiilaGear
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtElegantMaid
+    shoes: ClothingShoesColorBlack
+    gloves: ClothingHandsTacticalMaidGloves
+    head: ClothingHeadHatTacticalMaidHeadband
+  inhand:
+  - ChainsawShield
+  - ReinforcedChainsawShield
+
+- type: ncGhostRolePerk
+  id: ForgeGhostRolePerkExpeditionRunner
+  name: "Экспедиционная выучка"
+  description: "Цель быстрее уходит от преследования и лучше обращается с экспедиционным инструментом."
+  sprintSpeedMultiplier: 1.15
+  meleeDamageMultiplier: 1.10
+  projectileDamageMultiplier: 1.10
+  weaponPrototypes:
+  - WeaponProtoKineticAccelerator
+  - WeaponCrusher
+  - WeaponCrusherDagger
+  - WeaponCrusherGlaive
+
+- type: ncGhostRolePreset
+  id: ForgeGhostRoleLostSalvager
+  entityPrototype: ForgeTradeGhostLostSalvager
+  name: "Потерявшийся утилизатор"
+  description: "Вас ищут по контракту. Охотники получат награду, если доставят вас обратно."
+  rules: "Вы можете договариваться, скрываться или пытаться выжить. Ваша цель — не быть сданным торговому автомату до конца таймера."
+  character:
+    name: "Потерявшийся утилизатор"
+    age: 31
+  perks:
+  - ForgeGhostRolePerkExpeditionRunner
+
+- type: ncGhostRolePerk
+  id: ForgeGhostRolePerkChainsawShieldBearer
+  name: "Парные щиты-пилы"
+  description: "Цель умеет драться щитами-пилами и лучше держит входящий урон."
+  sprintSpeedMultiplier: 1.08
+  meleeDamageMultiplier: 1.15
+  incomingDamageMultiplier: 0.9
+  weaponPrototypes:
+  - ChainsawShield
+  - ReinforcedChainsawShield
+  armorItemPrototypes:
+  - ChainsawShield
+  - ReinforcedChainsawShield
+  armorIncomingDamageMultiplier: 0.9
+
+- type: ncGhostRolePreset
+  id: ForgeGhostRoleYavassaBiila
+  entityPrototype: ForgeTradeGhostYavassaBiila
+  name: "Явасса-Биила"
+  description: "Явасса-Биила - молодая унатх, скандально известная горячими похождениями, дорогими долгами и умением превращать любую погоню в спектакль. Заказчик требует ее живой: мертвая цель не стоит ни кредита."
+  rules: "Вас ищут по контракту и принимают только живой. Торгуйтесь, флиртуйте, водите охотников кругами или отбивайтесь щитами-пилами, но помните: если вас доставят живой и в наручниках, заказ будет закрыт."
+  character:
+    name: "Явасса-Биила"
+    sex: Female
+    gender: Female
+    age: 22
+    skinColor: "#FFFFFF"
+  perks:
+  - ForgeGhostRolePerkChainsawShieldBearer

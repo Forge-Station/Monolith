@@ -1,0 +1,31 @@
+﻿# BsReceiver circuit board recept
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: BsReceiverCircuitboardT1
+  result: BsReceiverCircuitboardT1
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: BsReceiverCircuitboardT2
+  result: BsReceiverCircuitboardT2
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: BsReceiverCircuitboardT3
+  result: BsReceiverCircuitboardT3
+
+# BsTransmitter circuit board recept
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: BsTransmitterCircuitboardT1
+  result: BsTransmitterCircuitboardT1
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: BsTransmitterCircuitboardT2
+  result: BsTransmitterCircuitboardT2
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: BsTransmitterCircuitboardT3
+  result: BsTransmitterCircuitboardT3

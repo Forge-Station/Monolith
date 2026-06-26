@@ -16,3 +16,7 @@ ent-ClothingBeltWebbingsNormalNexus = РПС VSS
     .desc = Ременно-плечевая система тактических ремней.
 ent-ClothingBeltWebbingsBigNexus = большая РПС VSS
     .desc = Ременно-плечевая система тактических ремней, пользуется популярностью среди наёмников Vanguard Security Systems.
+ent-ClothingBeltWebbingsNormalViperGroup = РПС Viper Group
+    .desc = Ременно-плечевая система тактических ремней.
+ent-ClothingBeltWebbingsBigViperGroup = большая РПС Viper Group
+    .desc = Ременно-плечевая система тактических ремней в более крупном размере. 

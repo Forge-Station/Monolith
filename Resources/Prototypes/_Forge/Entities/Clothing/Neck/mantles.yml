@@ -9,3 +9,17 @@
     sprite: Forge/Clothing/Neck/mantles/tti.rsi
   - type: Clothing
     sprite: Forge/Clothing/Neck/mantles/tti.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckMantleUI
+  name: mantle U.I.
+  description: Mantle that covers the right side of the body, possibly under a hood or other equipment. # Мантия что скрывает правую часть тела, возможно под ней кобура или другое оборудование.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Neck/mantles/ui_mantle.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Neck/mantles/ui_mantle.rsi
+  - type: StaticPrice
+    price: 50
+    vendPrice: 100

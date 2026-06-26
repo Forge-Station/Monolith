@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: Паук
   description:  Маскировочный шаттл для диверсий и рейдов. Рекомендованная команда 2-5 человек
-  price: 78000
+  price: 83000 # PR:238 shipyard check fix, price up
   category: Medium
   group: Renegate
   access: Renegate

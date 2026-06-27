@@ -20,6 +20,7 @@
   - MercenaryDisablerSMGLoadout
   - MercenaryLaserCarbineLoadout
   - MercenaryEnergyGunLoadout
+  - MeleeType3 # Forge-Change
 
 - type: loadoutGroup
   id: MercenaryPistol

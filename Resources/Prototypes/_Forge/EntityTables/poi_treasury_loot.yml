@@ -75,15 +75,15 @@
   table: !type:GroupSelector
     children:
     - !type:EntSelector
-    - id: MedkitAdvancedFilled
+      id: MedkitAdvancedFilled
       amount: !type:ConstantNumberSelector
         value: 2
     - !type:EntSelector
-    - id: MedkitCombatFilled
+      id: MedkitCombatFilled
       amount: !type:ConstantNumberSelector
         value: 2
     - !type:EntSelector
-    - id: StimkitFilled
+      id: StimkitFilled
       weight: 0.5
 
 # Отдельные T2 расходники (реже полного набора).
@@ -325,33 +325,46 @@
   id: PoiTreasuryLootResearchTechDisks
   table: !type:GroupSelector
     children:
+- type: entityTable
+  id: PoiTreasuryLootResearchTechDisks
+  table: !type:GroupSelector
+    children:
     - !type:EntSelector
       id: TechDiskTSFLecter
       amount: !type:ConstantNumberSelector
+        value: 1
     - !type:EntSelector
       id: TechDiskCivCTLA50
       amount: !type:ConstantNumberSelector
+        value: 1
     - !type:EntSelector
       id: TechDiskEnergyWeapons
       amount: !type:ConstantNumberSelector
+        value: 1
     - !type:EntSelector
       id: TechDiskRogueTools
       amount: !type:ConstantNumberSelector
+        value: 1
     - !type:EntSelector
       id: TechDiskTSFAnnie
       amount: !type:ConstantNumberSelector
+        value: 1
     - !type:EntSelector
       id: TechDiskUniversalShipAmmo
       amount: !type:ConstantNumberSelector
+        value: 1
     - !type:EntSelector
       id: TechDiskM90
       amount: !type:ConstantNumberSelector
+        value: 1
     - !type:EntSelector
       id: TechDiskUniversalShipAmmoAdvanced
       amount: !type:ConstantNumberSelector
+        value: 1
     - !type:EntSelector
       id: TechDiskTSFICWS
       amount: !type:ConstantNumberSelector
+        value: 1
 
 - type: entityTable
   id: PoiTreasuryLootResearchTechCircuitboard

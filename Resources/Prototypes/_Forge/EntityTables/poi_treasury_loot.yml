@@ -439,12 +439,12 @@
       amount: !type:ConstantNumberSelector
         value: 2
       weight: 0.5
-
+      
 - type: entityTable
   id: PoiTreasuryLootCasino
   table: !type:GroupSelector
     children:
-    - !type:EntSelector
+    - !type:NestedSelector
       tableId: PoiTreasuryLootCashTickMedium
       weight: 1
     - !type:EntSelector

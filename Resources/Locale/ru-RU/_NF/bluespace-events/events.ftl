@@ -15,7 +15,7 @@ station-event-bluespace-ship-warning-announcement = Запущены удалё�
 station-event-bluespace-ship-end-announcement = В соответствии с протоколами блюспейс-передвижений NanoTrasen, неизвестный шаттл был уничтожен. Слава NT!
 
 station-event-bluespace-syndicate-ftl-interception-start-announcement = Внимание всему доступному персоналу NanoTrasen! Командование флота NanoTrasen сорвало блюспейс-прыжок шаттла враждебной организации. Согласно данным сканеров дальнего космоса, шаттл либо уже вошел в пространство вашего сектора, либо вот-вот войдёт. Код: Перехватить, Уничтожить, Истребить, Сжечь. Ожидается вооружённое сопротивление, применение смертельной силы против вражеских агентов разрешено. Напоминаем: любые потери персонала, связанного с NanoTrasen, не будут компенсированы. Не допускайте капитанов, аффилированных с NT, без допуска безопасности, от получения доступа к вражескому кораблю и его содержимому.
-station-event-bluespace-syndicate-ftl-interception-warning-announcement = Запущены удалённые FTL процедуры, осталось пять минут до рассеивания шаттла Синдиката.
+station-event-bluespace-syndicate-ftl-interception-warning-announcement = Запущены удалённые FTL процедуры, осталось пять минут до рассеивания шаттла Горлекса.
 station-event-bluespace-syndicate-ftl-interception-end-announcement = В соответствии с протоколами блюспейс-передвижений NanoTrasen, неизвестный шаттл был уничтожен. Слава NT!
 
 station-event-bluespace-wizardfederation-scout-start-announcement = Внимание всему доступному персоналу NanoTrasen! Командование флота NanoTrasen обнаружило блюспейс-аномалию в вашем секторе с сигнатурой, указывающей на скорое прибытие шаттла Федерации Волшебников. Код: Перехватить, Задержать, Заключить. Арестуйте нарушителей и подготовьте их к передаче подразделению ТСФ NanoTrasen для проведения допроса.
@@ -42,4 +42,4 @@ station-event-bluespace-name-BrokenMcDelivery = МакДоставка
 station-event-bluespace-name-Cave = Астероидная пещера
 station-event-bluespace-name-UnidentifiedVessel = Неопознанный объект
 station-event-bluespace-name-SecureNTVault = Безопасное хранилище NT
-station-event-bluespace-name-SyndicateWeaponsCache = Хранилище оружия синдиката
+station-event-bluespace-name-SyndicateWeaponsCache = Хранилище оружия горлекса

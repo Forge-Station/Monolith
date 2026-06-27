@@ -9,8 +9,8 @@ job-description-service-worker = Получи работу, стань убор�
 
 # Syndicate
 forge-job-desc-syndicommander = Глава штурмовой группы "Жнецы"
-forge-job-desc-medsyn = Специально подготовленный синдикатом медик для работы в зонах боевых действий
-forge-job-desc-engineersyn = Технический специалист синдиката
+forge-job-desc-medsyn = Специально подготовленный горлексом медик для работы в зонах боевых действий
+forge-job-desc-engineersyn = Технический специалист горлекса
 forge-job-desc-smuggler = Торгуй контрабандой. Не попадайся (Опционально).
 forge-job-desc-smugglerbodyguard = Защищай того, кто торгует контрабандой. Не умирай (Опционально).
 forge-job-desc-stormtrooper = Штурмовик подчиняющийся командиру.

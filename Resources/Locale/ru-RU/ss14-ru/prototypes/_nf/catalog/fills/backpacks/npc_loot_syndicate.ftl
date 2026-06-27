@@ -1,7 +1,7 @@
-ent-SyndieDuffelGiftBox = набор оперативника синдиката
+ent-SyndieDuffelGiftBox = набор оперативника горлекса
     .desc = Лутбоксы? Тут?
     .suffix = Лут НПС
-ent-SyndieMessengerGiftBox = набор оперативника синдиката
+ent-SyndieMessengerGiftBox = набор оперативника горлекса
     .desc = Лутбоксы? Тут?
     .suffix = Лут НПС
 ent-ClothingBackpackSyndicateCaptainLootA = { ent-SyndieMessengerGiftBox }

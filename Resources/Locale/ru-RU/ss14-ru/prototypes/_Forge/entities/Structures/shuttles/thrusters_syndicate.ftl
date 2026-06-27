@@ -1,1 +1,1 @@
-ent-DebugGyroscopeSyndicate = гироскоп синдиката (отладка)
+ent-DebugGyroscopeSyndicate = гироскоп горлекса (отладка)

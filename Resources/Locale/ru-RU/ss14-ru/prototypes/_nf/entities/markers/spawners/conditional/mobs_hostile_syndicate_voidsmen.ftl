@@ -1,20 +1,20 @@
-ent-SpawnMobSyndicateNavalDeckhandVoid = спавнер рядового синдиката
+ent-SpawnMobSyndicateNavalDeckhandVoid = спавнер рядового горлекса
     .suffix = AI, Вражеский, Пустотник
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobSyndicateNavalEngineerVoid = спавнер инженера синдиката
+ent-SpawnMobSyndicateNavalEngineerVoid = спавнер инженера горлекса
     .suffix = AI, Вражеский, Пустотник
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobSyndicateNavalMedicVoid = спавнер медика синдиката
+ent-SpawnMobSyndicateNavalMedicVoid = спавнер медика горлекса
     .suffix = AI, Вражеский, Пустотник
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobSyndicateNavalOperatorVoid = спавнер оперативника синдиката
+ent-SpawnMobSyndicateNavalOperatorVoid = спавнер оперативника горлекса
     .suffix = AI, Вражеский, Пустотник
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobSyndicateNavalSecondOfficerVoid = спавнер офицера синдиката
+ent-SpawnMobSyndicateNavalSecondOfficerVoid = спавнер офицера горлекса
     .suffix = AI, Вражеский, Пустотник
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobSyndicateNavalCaptainVoid = спавнер капитана синдиката
+ent-SpawnMobSyndicateNavalCaptainVoid = спавнер капитана горлекса
     .suffix = AI, Вражеский, Пустотник
     .desc = { ent-MarkerBase.desc }
 
-ent-SpawnMobCleanBotSyndie = спавнер уборщика синдиката
+ent-SpawnMobCleanBotSyndie = спавнер уборщика горлекса

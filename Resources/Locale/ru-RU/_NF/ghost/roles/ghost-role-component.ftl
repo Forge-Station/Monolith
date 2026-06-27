@@ -40,8 +40,8 @@ ghost-role-information-explorer-captain-dungeon-description = Вы добрал�
 ghost-role-information-punk-boss-dungeon-name = Лидер панк-банды
 ghost-role-information-punk-boss-dungeon-description = Защищайте этот комплекс и свою добычу вместе с другими панками!
 
-ghost-role-information-syndie-boss-dungeon-name = Командир Синдиката
-ghost-role-information-syndie-boss-dungeon-description = Вы - Командир отряда Синдиката. Защищайте это место от незваных гостей из NT. Покажите, кто тут БОСС.
+ghost-role-information-syndie-boss-dungeon-name = Командир Горлекса
+ghost-role-information-syndie-boss-dungeon-description = Вы - Командир отряда Горлекса. Защищайте это место от незваных гостей из NT. Покажите, кто тут БОСС.
 
 ghost-role-information-dungeon-boss-rules = Вы — [color=red][bold]командный антагонист[/bold][/color] для всех монстров этой экспедиции.
                                         Сражайтесь с игроками в комплексе, защищая свой комплекс.
@@ -54,8 +54,8 @@ ghost-role-information-dungeon-boss-rules = Вы — [color=red][bold]коман
 
 nf-ghost-role-information-derelict-cyborg-description = Вы — борг, который много лет провёл на месте крушения, подвергаясь воздействию бесчисленных ионных бурь.
 ghost-role-information-sigmis-name = Сигмис
-ghost-role-information-sigmis-description = Ни с места! Работает Синдикат! Разыскивается во всех уголках сектора за массовый геноцид мышей.
-ghost-role-information-sigmis-rules = Ты, созданный Синдикатом кот. Подчиняющийся непосредственно кадету синдиката и его начальству.
+ghost-role-information-sigmis-description = Ни с места! Работает Горлекс! Разыскивается во всех уголках сектора за массовый геноцид мышей.
+ghost-role-information-sigmis-rules = Ты, созданный Горлексом кот. Подчиняющийся непосредственно кадету горлекса и его начальству.
 
 ghost-role-information-cult-cat-name = Кот культа крови
 ghost-role-information-cult-cat-description = Основал Кровавый культ от скуки.

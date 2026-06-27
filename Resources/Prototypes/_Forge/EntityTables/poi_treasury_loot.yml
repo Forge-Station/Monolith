@@ -325,10 +325,6 @@
   id: PoiTreasuryLootResearchTechDisks
   table: !type:GroupSelector
     children:
-- type: entityTable
-  id: PoiTreasuryLootResearchTechDisks
-  table: !type:GroupSelector
-    children:
     - !type:EntSelector
       id: TechDiskTSFLecter
       amount: !type:ConstantNumberSelector

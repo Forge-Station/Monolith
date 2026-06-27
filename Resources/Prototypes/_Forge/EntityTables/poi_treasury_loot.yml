@@ -74,22 +74,29 @@
   id: PoiTreasuryLootMedTier2
   table: !type:GroupSelector
     children:
+    - !type:EntSelector
     - id: MedkitAdvancedFilled
+      amount: !type:ConstantNumberSelector
+        value: 2
+    - !type:EntSelector
     - id: MedkitCombatFilled
+      amount: !type:ConstantNumberSelector
+        value: 2
+    - !type:EntSelector
     - id: StimkitFilled
-      weight: 0.2
+      weight: 0.5
 
 # Отдельные T2 расходники (реже полного набора).
 - type: entityTable
   id: PoiTreasuryLootMedLight
   table: !type:GroupSelector
     children:
-    - id: Brutepack
+    - id: BrutepackAdvanced1
       amount: !type:ConstantNumberSelector
-        value: 10
-    - id: Ointment
+        value: 60
+    - id: OintmentAdvanced1
       amount: !type:ConstantNumberSelector
-        value: 10
+        value: 60
 
 # Оружие + магазины (комплект за один тик).
 - type: entityTable
@@ -192,7 +199,7 @@
     - id: PlasteelArmingSword
     - id: Cutlass  
     - id: EnergySword
-      weight: 0.01
+      weight: 0.1
 
 # Инженерные материалы
 - type: entityTable
@@ -253,8 +260,10 @@
     - !type:EntSelector
       id: ScrapPAIGold
     - !type:EntSelector
-      id: ScrapOre
-      
+      id: ScrapOre1
+      amount: !type:ConstantNumberSelector
+        value: 50
+
 # Руда 
 - type: entityTable
   id: PoiTreasuryLootMaterialsOre
@@ -473,8 +482,8 @@
       weight: 2
     - id: SheetPlastitanium1   
       amount: !type:ConstantNumberSelector
-      weight: 0.5
         value: 15
+      weight: 0.5
 
 - type: entityTable
   id: PoiTreasuryLootChapel
@@ -496,7 +505,7 @@
     - !type:EntSelector
       id: Telecrystal1
       amount: !type:ConstantNumberSelector
-        value: 30
+        value: 40
       weight: 1
     - !type:NestedSelector
       tableId: PoiTreasuryLootMedTier2

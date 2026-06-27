@@ -1,3 +1,27 @@
 - type: statusEffect
   id: ChainsawShieldSlowed
   alwaysAllowed: true
+
+- type: statusEffect
+  id: TunnelVision
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: BlockedBreathing
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: PainSyndrome
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: OpioidAddiction
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: StimulantAddiction
+  alwaysAllowed: true
+
+- type: statusEffect
+  id: SedativeAddiction
+  alwaysAllowed: true

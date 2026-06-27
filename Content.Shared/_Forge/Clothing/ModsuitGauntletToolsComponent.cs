@@ -24,6 +24,12 @@ public sealed partial class ModsuitGauntletToolsComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId AuxiliaryProto = "WeaponGrapplingGun";
 
+    /// <summary>
+    /// Optional sixth integrated tool (e.g. Omnissia — RPD).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId PipingProto = "RPD";
+
     [DataField, AutoNetworkedField]
     public EntityUid? UrkEntity;
 
@@ -38,6 +44,9 @@ public sealed partial class ModsuitGauntletToolsComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? AuxiliaryEntity;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? PipingEntity;
 
     [DataField, AutoNetworkedField]
     public bool UrkInHand;
@@ -63,6 +72,8 @@ public sealed partial class ModsuitGauntletToolsComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool RcdInHand;
+    [DataField, AutoNetworkedField]
+    public bool PipingInHand;
 
     /// <summary>
     /// Which integrated tool slots are available. Omnissia gauntlets use the default (all four).

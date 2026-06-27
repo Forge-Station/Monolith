@@ -428,6 +428,11 @@
 - type: Tag
   id: CubanCarp
 
+# Forge-Change-Start
+- type: Tag
+  id: ChairFolding
+# Forge-Change-End
+
 - type: Tag
   id: DeathAcidifier
 

@@ -5,3 +5,7 @@ ent-NFWeaponLightMachineGunL6 = L6 SAW
     .suffix = Пулемёт
 ent-NFWeaponLightMachineGunL6C = L6C ROW
     .desc = Нелегальное оружие используемое агентами синдиката. L6 SAW для киборгов. На ходу создаёт патроны калибра .30 винтовочный из встроенного самозарядного фабрикатора боеприпасов.
+ent-WeaponLightMachineGunL6 = { ent-NFWeaponLightMachineGunL6 }
+    .desc = { ent-NFWeaponLightMachineGunL6.desc }
+ent-WeaponLightMachineGunL6C = { ent-NFWeaponLightMachineGunL6C }
+    .desc = { ent-NFWeaponLightMachineGunL6C.desc }

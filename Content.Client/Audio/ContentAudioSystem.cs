@@ -31,6 +31,7 @@ public sealed partial class ContentAudioSystem : SharedContentAudioSystem
     public const float InterfaceMultiplier = 2f;
     public const float CombatMultiplier = 3f; //Mono
     public const float BarksMultiplier = 3f; // Corvax-Frontier-Barks
+    public const float BoardingTeleportMultiplier = 3f;
     public const float TtsMultiplier = 3f; // Corvax-TTS
     public const float TtsRadioMultiplier = 3f; // Corvax-TTS
 

@@ -1,8 +1,14 @@
 ent-WeaponTurretCyrexa = пушка CYREXA 220 мм
     .desc = Главная двуствольная батарея, выдающая быстрые и разрушительные залпы на экстремальной дальности. Стреляет 220-мм автоматическими снарядами со слегка сниженной разовой мощностью. Может активироваться дистанционно или подключаться к GCS.
+ent-WeaponTurretCyrexaPortable = { ent-WeaponTurretCyrexa }
+    .desc =  { ent-WeaponTurretCyrexa.desc }
 ent-WeaponTurretBofors = пушка Bofors 255 мм
     .desc = Одноствольная тяжёлая корабельная пушка крейсерского класса, наносящая огромный урон каждым дальнобойным выстрелом. Может активироваться дистанционно или подключаться к GCS.
+ent-WeaponTurretBoforsPortable = { ent-WeaponTurretBofors }
+    .desc =  { ent-WeaponTurretBofors.desc }
 ent-WeaponTurretHades = пушка HADES 255 мм
     .desc = Одно из крупнейших химических кинетических орудий в секторе. По мощности сопоставима только с масс-драйверами уровня M381. Автоматически перезаряжается полномощными 255-мм снарядами.
 ent-WeaponTurretLongbow = автопушка L65 «Лонгбоу» 90 мм
     .desc = Ведёт огонь 90-мм снарядами сериями до 20 выстрелов из внутреннего автозарядника.
+ent-WeaponTurretLongbowPortable = { ent-WeaponTurretLongbow }
+    .desc =  { ent-WeaponTurretLongbow.desc }

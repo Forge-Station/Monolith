@@ -1,0 +1,147 @@
+# Ullman Industries Clothing
+- type: latheRecipe
+  id: UllmanModsuit
+  result: ClothingModsuitRoguePowerCell
+  completetime: 20
+  materialDiscountScale: 0
+  materials:
+    Plastic: 1500
+    Steel: 5000
+    Glass: 1250
+    Silver: 1500
+    Gold: 1500
+    UraniumDepleted: 750
+    Durathread: 2000
+    Diamond: 200
+    UraniumFissile: 100
+    Plasteel: 2000
+
+- type: latheRecipe
+  id: UllmanHardsuitMedical
+  result: ClothingOuterHardsuitUllmanMedical
+  completetime: 20
+  materialDiscountScale: 0
+  materials:
+    Plastic: 3000
+    Steel: 5000
+    Glass: 1750
+    Silver: 500
+    Gold: 500
+    Durathread: 3000
+    Diamond: 100
+    UraniumFissile: 50
+    Plasteel: 1000
+
+- type: latheRecipe
+  id: UllmanClothingMagboots
+  result: ClothingShoesBootsMagUllman
+  completetime: 10
+  materials:
+    Steel: 750
+    Silver: 1000
+    Gold: 1000
+    Plasteel: 250
+
+- type: latheRecipe
+  id: UllmanClothingMaskGas
+  result: ClothingMaskGasUllman
+  completetime: 4
+  materials:
+    Steel: 200
+    Plastic: 200
+    Durathread: 300
+  
+- type: latheRecipe
+  id: UllmanClothingEyesGooglesUI
+  result: ClothingEyesUIGoogles
+  completetime: 6
+  materials:
+    Steel: 500
+    Glass: 150
+    Plastic: 50
+    Silver: 50
+    Gold: 50
+
+# Ullman Industries Uniform
+- type: latheRecipe
+  id: BaseUllmanUniform
+  abstract: true
+  completetime: 5
+  materials:
+    Cloth: 250
+    Durathread: 250
+
+- type: latheRecipe
+  id: UllmanUniformJumpsuitUI
+  parent: BaseUllmanUniform
+  result: ClothingUniformJumpsuitUI
+
+- type: latheRecipe
+  id: UllmanNeckPonchoUI
+  parent: BaseUllmanUniform
+  result: ClothingNeckCloakUllmanPoncho
+
+- type: latheRecipe
+  id: UllmanNeckOvercoatUI
+  parent: BaseUllmanUniform
+  result: ClothingNeckUllimanOvercoat
+
+- type: latheRecipe
+  id: UllmanNeckHeavyOvercoatUI
+  parent: BaseUllmanUniform
+  result: ClothingNeckHeavyUllimanOvercoat
+
+- type: latheRecipe
+  id: UllmanNeckMantleUI
+  parent: BaseUllmanUniform
+  result: ClothingNeckMantleUI
+
+- type: latheRecipe
+  id: UllmanUniformShirtUI
+  parent: BaseUllmanUniform
+  result: ClothingUniformShirtUI
+
+- type: latheRecipe
+  id: UllmanHeadHatCapUI
+  parent: BaseUllmanUniform
+  result: ClothingHeadHatCapUI
+
+- type: latheRecipe
+  id: UllmanHeadHatBeretUI
+  parent: BaseUllmanUniform
+  result: ClothingHeadHatBeretUI
+
+# Ullman Industries Weapons
+- type: latheRecipe
+  id: UllmanSniperRifle
+  result: WeaponSniperUllman
+  completetime: 10
+  materials:
+    Steel: 3000
+    Glass: 1500
+    Plasteel: 4000
+    Plastitanium: 3000
+    Diamond: 100
+
+- type: latheRecipe
+  id: UllmanMagazine127x85mm
+  result: ForgeMagazineUllman127x85mm
+  completetime: 4
+  materials:
+    Steel: 1000
+    Plasteel: 500
+
+- type: latheRecipe
+  id: UllmanMagazine127x85mmEmpty
+  result: ForgeMagazineUllman127x85mmEmpty
+  completetime: 4
+  materials:
+    Steel: 750
+
+- type: latheRecipe
+  id: UllmanAmmunitionBox127x85mm
+  result: AmmunitionBoxUllman127x85mm
+  completetime: 8
+  materials:
+    Steel: 250
+    Plasteel: 2000

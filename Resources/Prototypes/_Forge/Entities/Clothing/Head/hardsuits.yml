@@ -99,8 +99,8 @@
 - type: entity
   parent: [ClothingHeadHardsuitBase, BaseC3SyndicateContraband]
   id: ClothingHeadHelmetHardsuitSyndieSST
-  name: шлем кроваво-чёрного скафандра
-  description: Тяжелобронированный шлем, предназначенный для элитных операций. Собственность Ударного подразделения Синдиката.
+  name: ╤И╨╗╨╡╨╝ ╨║╤А╨╛╨▓╨░╨▓╨╛-╤З╤С╤А╨╜╨╛╨│╨╛ ╤Б╨║╨░╤Д╨░╨╜╨┤╤А╨░
+  description: ╨в╤П╨╢╨╡╨╗╨╛╨▒╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╤И╨╗╨╡╨╝, ╨┐╤А╨╡╨┤╨╜╨░╨╖╨╜╨░╤З╨╡╨╜╨╜╤Л╨╣ ╨┤╨╗╤П ╤Н╨╗╨╕╤В╨╜╤Л╤Е ╨╛╨┐╨╡╤А╨░╤Ж╨╕╨╣. ╨б╨╛╨▒╤Б╤В╨▓╨╡╨╜╨╜╨╛╤Б╤В╤М ╨г╨┤╨░╤А╨╜╨╛╨│╨╛ ╨┐╨╛╨┤╤А╨░╨╖╨┤╨╡╨╗╨╡╨╜╨╕╤П ╨б╨╕╨╜╨┤╨╕╨║╨░╤В╨░.
   components:
   - type: Sprite
     sprite: Forge/Clothing/Head/Hardsuits/syndicate_strike_team.rsi
@@ -130,8 +130,8 @@
 - type: entity
   parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseC3Contraband, ContrabandClothing]
   id: ClothingHeadHelmetHardsuitContractor
-  name: шлем жёлто-чёрного скафандра DCN™
-  description: Тяжелобронированный шлем, предназначенный для элитных операций.
+  name: ╤И╨╗╨╡╨╝ ╨╢╤С╨╗╤В╨╛-╤З╤С╤А╨╜╨╛╨│╨╛ ╤Б╨║╨░╤Д╨░╨╜╨┤╤А╨░ DCNтДв
+  description: ╨в╤П╨╢╨╡╨╗╨╛╨▒╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╤И╨╗╨╡╨╝, ╨┐╤А╨╡╨┤╨╜╨░╨╖╨╜╨░╤З╨╡╨╜╨╜╤Л╨╣ ╨┤╨╗╤П ╤Н╨╗╨╕╤В╨╜╤Л╤Е ╨╛╨┐╨╡╤А╨░╤Ж╨╕╨╣.
   components:
   - type: Sprite
     sprite: Forge/Clothing/Head/Hardsuits/contractor.rsi
@@ -155,8 +155,8 @@
 - type: entity
   parent: [ClothingHeadHardsuitBase, BaseToggleClothing, PowerCellSlotSmallItem, BaseC3Contraband]
   id: ClothingHeadHealmetContractorStealh
-  name: шлем экзокостюма DCN™
-  description: Прекрасно сидит на вашей голове фиксируя её положение
+  name: ╤И╨╗╨╡╨╝ ╤Н╨║╨╖╨╛╨║╨╛╤Б╤В╤О╨╝╨░ DCNтДв
+  description: ╨Я╤А╨╡╨║╤А╨░╤Б╨╜╨╛ ╤Б╨╕╨┤╨╕╤В ╨╜╨░ ╨▓╨░╤И╨╡╨╣ ╨│╨╛╨╗╨╛╨▓╨╡ ╤Д╨╕╨║╤Б╨╕╤А╤Г╤П ╨╡╤С ╨┐╨╛╨╗╨╛╨╢╨╡╨╜╨╕╨╡
   components:
   - type: BreathMask
   - type: Sprite
@@ -196,8 +196,8 @@
 - type: entity
   parent: [ClothingHeadEVAHelmetBase, BaseC3Contraband, ContrabandClothing]
   id: ClothingHeadHelmetHardsuitContractorEVA
-  name: шлем скафандра ВКД DCN™
-  description: Шлем, предназначенный для элитных операций тёмного интернета.
+  name: ╤И╨╗╨╡╨╝ ╤Б╨║╨░╤Д╨░╨╜╨┤╤А╨░ ╨Т╨Ъ╨Ф DCNтДв
+  description: ╨и╨╗╨╡╨╝, ╨┐╤А╨╡╨┤╨╜╨░╨╖╨╜╨░╤З╨╡╨╜╨╜╤Л╨╣ ╨┤╨╗╤П ╤Н╨╗╨╕╤В╨╜╤Л╤Е ╨╛╨┐╨╡╤А╨░╤Ж╨╕╨╣ ╤В╤С╨╝╨╜╨╛╨│╨╛ ╨╕╨╜╤В╨╡╤А╨╜╨╡╤В╨░.
   components:
   - type: Item
     size: Small

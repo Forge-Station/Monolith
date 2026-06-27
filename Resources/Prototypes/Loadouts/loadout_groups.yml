@@ -1272,10 +1272,10 @@
 - type: loadoutGroup
   id: ParamedicShoes
   name: loadout-group-paramedic-shoes
+  # Forge-Change: Removed unavailable trauma magboots from this shared loadout group.
   loadouts:
   - BlueShoes
   - MedicalWinterBoots
-  - MedicalClothingShoesBootsMagTrauma # Forge-change
 
 - type: loadoutGroup
   id: SurvivalMedical

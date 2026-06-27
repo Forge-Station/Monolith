@@ -228,6 +228,7 @@
     - SecurityEquipment
     - SmartGun #Smart SMG
     # Mono end
+    - UllmanForgeRecipes # Forge-change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - NFMercenaryTechfabDeprecatedEmag

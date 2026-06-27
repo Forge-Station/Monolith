@@ -632,3 +632,19 @@
     sprite: Forge/Clothing/Uniforms/Jumpsuits/sr.rsi
   - type: Clothing
     sprite: Forge/Clothing/Uniforms/Jumpsuits/sr.rsi
+
+# Viper company group
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitViperGroupTankTop
+  name: Viper tank top
+  description: VG-jumpsuit-desc
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_tanktop.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_tanktop.rsi
+  - type: StaticPrice
+    price: 0
+    vendPrice: 1150

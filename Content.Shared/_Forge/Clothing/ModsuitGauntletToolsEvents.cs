@@ -14,6 +14,7 @@ public enum ModsuitGauntletEnabledSlots : byte
     NaniteApplicator = 1 << 3,
     Auxiliary = 1 << 4,
     Rcd = 1 << 5,
+    Piping = 1 << 6,
     All = Urk | Omnitool | Welder | NaniteApplicator,
 }
 
@@ -26,6 +27,7 @@ public enum ModsuitGauntletToolSlot : byte
     NaniteApplicator,
     Auxiliary,
     Rcd,
+    Piping,
 }
 
 [Serializable, NetSerializable]

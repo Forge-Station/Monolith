@@ -1,0 +1,49 @@
+- type: entity
+  id: BaseMagazineUllman127x85mm
+  name: "magazine (12.7x85mm)"
+  parent: [ BaseItem ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - ForgeMagazineUllman127x85mm
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - ForgeCartridgeUllman127x85mm
+    proto: ForgeCartridgeUllman127x85mm
+    capacity: 5
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/sniper_rifle_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: ForgeMagazineUllman127x85mmEmpty
+  name: "magazine (12.7x85mm empty)"
+  parent: BaseMagazineUllman127x85mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  id: ForgeMagazineUllman127x85mm
+  name: "magazine (12.7x85mm)"
+  parent: BaseMagazineUllman127x85mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: ForgeCartridgeUllman127x85mm

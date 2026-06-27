@@ -247,6 +247,11 @@
     state: coillv-10
   - type: Stack
     count: 10
+# Forge-Change-Start
+  - type: Construction
+    graph: CableApcStack10
+    node: CableApcStack10
+# Forge-Change-End
 
 - type: entity
   parent: CableApcStack10

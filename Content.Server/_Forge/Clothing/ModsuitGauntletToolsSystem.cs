@@ -55,6 +55,8 @@ public sealed partial class ModsuitGauntletToolsSystem : SharedModsuitGauntletTo
 
         if (slots.HasFlag(ModsuitGauntletEnabledSlots.Rcd))
             EnsureGauntletTool(ent, ent.Comp.RcdProto, ref ent.Comp.RcdEntity);
+        if (slots.HasFlag(ModsuitGauntletEnabledSlots.Piping))
+            EnsureGauntletTool(ent, ent.Comp.PipingProto, ref ent.Comp.PipingEntity);
 
         Dirty(ent);
     }
@@ -89,5 +91,7 @@ public sealed partial class ModsuitGauntletToolsSystem : SharedModsuitGauntletTo
 
         if (ent.Comp.RcdEntity != null)
             QueueDel(ent.Comp.RcdEntity);
+        if (ent.Comp.PipingEntity != null)
+            QueueDel(ent.Comp.PipingEntity);
     }
 }

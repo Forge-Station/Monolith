@@ -17,12 +17,17 @@
 - type: vendingMachineInventory
   id: CompanyVendInventoryViper
   startingInventory:
-    ClothingUniformJumpsuitViperGroupUniform: 3
-    ClothingUniformJumpsuitViperGroupTurtleneck: 3
-    ClothingNeckViperGroupMantle: 2
-    TelecomServerFlatpack: 1
-    EncryptionKeyViperGroup: 2
+    ClothingUniformJumpsuitViperGroupUniform: 4294967295
+    ClothingUniformJumpsuitViperGroupTurtleneck: 4294967295
+    ClothingUniformJumpsuitViperGroupTankTop: 4294967295
+    ClothingOuterHardsuitViperGroupInitiate: 2
+    ClothingBeltWebbingsNormalViperGroup: 6
+    ClothingBeltWebbingsBigViperGroup: 6
+    ClothingMaskGasViperGroup: 6
+    ClothingEyesGlassesViperGroup: 6
     DisciplinesDiskVG: 2
+    EncryptionKeyViperGroup: 3
+    TelecomServerFlatpack: 1
 
 - type: vendingMachineInventory
   id: CompanyVendInventoryUllman

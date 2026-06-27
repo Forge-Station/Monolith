@@ -24,6 +24,7 @@ chat-language-Chittin-name = Chittin
 chat-language-Xeeplian-name = Xeeplian
 chat-language-Hydraspeak-name = Hy'drav'tha
 chat-language-Kelael-name = Kela'el
+chat-language-Qwila-name = Qwila
 
 # Ported from Floofstation:
 chat-language-NewKinPidgin-name = Ka'rakk

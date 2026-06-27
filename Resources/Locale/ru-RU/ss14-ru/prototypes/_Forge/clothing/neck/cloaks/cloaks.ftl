@@ -15,3 +15,6 @@ ent-ClothingNeckCloakEmpirePreafectViolet = плащ экклезиарха
     .desc = Роскошный плащ экклезиарха, символизирующий его преданность церкви.
 ent-ClothingNeckCloakEmpirePreafectDiplomacy = плащ консула
     .desc = Роскошный плащ консула, символизирующий его преданность дипломатическому делу.
+
+ent-ClothingNeckMantleUI = мантия U.I.
+    .desc = Удобная мантия что скрывает правую часть тела, возможно под ней кобура.

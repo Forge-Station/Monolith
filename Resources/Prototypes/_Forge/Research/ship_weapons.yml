@@ -1,40 +1,50 @@
-
-# Kinetic:     L85 → RAC-30 → AK570 → Dravon → Bofors → Longbow / Cyrexa / Charon
-# Laser:       Phalanx → Type-35 → Prometheus → Cerberus
-# Missile:     Vespera → Vanyk → Serpent / Light Munitions Bay; Vespera → Tovek → Trident
-# EMP:         Phalanx → M220 → Tarnyx
-# Mining:      M25 + Prometheus → Apollo
+# Kinetic:     Entry → RAC-30 → AK570 → Dravon → Bofors → Longbow / Cyrexa / Charon
+# Laser:       Entry → Type-35 → Prometheus → Cerberus
+# Missile:     Midline → Vanyk → Serpent / Light Munitions Bay; Midline → Tovek → Trident
+# EMP:         Midline → Tarnyx
+# Mining:      Entry + Prometheus → Apollo
 #
-# T4 kinetic capitals also require ShuttleCtlaAdvancedDriveResearch.
+# Entry (L85, Phalanx, M25) and midline (RAC-30, Vespera, M220) are bundled research nodes.
+# Naval weapon fabricator unlocks with the midline bundle (Forge-Change).
 
-# --- Column -8: kinetic ---
+# T4 kinetic capitals: Longbow and Charon no longer require advanced bluespace drive research.
+# --- Entry bundle: L85 + Phalanx + M25 ---
 
 - type: technology
-  id: ForgeShipWeaponResearchL85
-  name: forge-research-technology-shipweapon-l85
+  id: ForgeShipWeaponResearchEntry
+  name: forge-research-technology-shipweapon-entry
   entityIcon: WeaponTurretL85Autocannon
   discipline: ShipArmory
   tier: 3
-  cost: 22000
+  cost: 25000
   recipeUnlocks:
   - WeaponTurretL85AutocannonCircuitboard
+  - WeaponLaserTurretL1PhalanxCircuitboard
+  - WeaponTurretM25Circuitboard
   technologyPrerequisites:
   - BasicShuttleArmament
   - ShuttleAdvancedComponents
-  position: -8, 4
+  position: -11, 4
+
+# --- Midline bundle: RAC-30 + Vespera + M220 + weapon fabricator ---
 
 - type: technology
-  id: ForgeShipWeaponResearchRAC30
-  name: forge-research-technology-shipweapon-rac30
+  id: ForgeShipWeaponResearchMidline
+  name: forge-research-technology-shipweapon-midline
   entityIcon: WeaponTurretRAC30
   discipline: ShipArmory
   tier: 3
-  cost: 13000
+  cost: 20000
   recipeUnlocks:
   - WeaponTurretRAC30Circuitboard
+  - WeaponTurretVesperaCircuitboard
+  - WeaponTurretM220Circuitboard
+  - ShipWeaponFabricatorCircuitboard
   technologyPrerequisites:
-  - ForgeShipWeaponResearchL85
-  position: -8, 5
+  - ForgeShipWeaponResearchEntry
+  position: -11, 5
+
+# --- Column -8: kinetic ---
 
 - type: technology
   id: ForgeShipWeaponResearchAK570
@@ -46,7 +56,7 @@
   recipeUnlocks:
   - WeaponTurretAK570Circuitboard
   technologyPrerequisites:
-  - ForgeShipWeaponResearchRAC30
+  - ForgeShipWeaponResearchMidline
   position: -9, 6
 
 - type: technology
@@ -87,7 +97,6 @@
   - WeaponTurretLongbowCircuitboard
   technologyPrerequisites:
   - ForgeShipWeaponResearchDravon
-  - ShuttleCtlaAdvancedDriveResearch
   position: -8, 8
 
 - type: technology
@@ -115,24 +124,9 @@
   - WeaponTurretCharonReloadCircuitboard
   technologyPrerequisites:
   - ForgeShipWeaponResearchBofors
-  - ShuttleCtlaAdvancedDriveResearch
   position: -7, 8
 
 # --- Column -14: laser ---
-
-- type: technology
-  id: ForgeShipWeaponResearchPhalanx
-  name: forge-research-technology-shipweapon-phalanx
-  entityIcon: WeaponLaserTurretL1Phalanx
-  discipline: ShipArmory
-  tier: 3
-  cost: 21000
-  recipeUnlocks:
-  - WeaponLaserTurretL1PhalanxCircuitboard
-  technologyPrerequisites:
-  - BasicShuttleArmament
-  - ShuttleAdvancedComponents
-  position: -13, 4
 
 - type: technology
   id: ForgeShipWeaponResearchType35
@@ -144,7 +138,7 @@
   recipeUnlocks:
   - WeaponTurretType35Circuitboard
   technologyPrerequisites:
-  - ForgeShipWeaponResearchPhalanx
+  - ForgeShipWeaponResearchEntry
   position: -13, 5
 
 - type: technology
@@ -173,20 +167,7 @@
   - ForgeShipWeaponResearchPrometheus
   position: -13, 7
 
-# --- Column -12: EMP (entry via Phalanx) ---
-
-- type: technology
-  id: ForgeShipWeaponResearchM220
-  name: forge-research-technology-shipweapon-m220
-  entityIcon: WeaponTurretM220
-  discipline: ShipArmory
-  tier: 3
-  cost: 13000
-  recipeUnlocks:
-  - WeaponTurretM220Circuitboard
-  technologyPrerequisites:
-  - ForgeShipWeaponResearchPhalanx
-  position: -12, 5
+# --- Column -12: EMP ---
 
 - type: technology
   id: ForgeShipWeaponResearchTarnyx
@@ -198,23 +179,10 @@
   recipeUnlocks:
   - WeaponTurretTarnyxReloadCircuitboard
   technologyPrerequisites:
-  - ForgeShipWeaponResearchM220
+  - ForgeShipWeaponResearchMidline
   position: -12, 6
 
-# --- Column -10: missile (Vespera → Vanyk branch) ---
-
-- type: technology
-  id: ForgeShipWeaponResearchVespera
-  name: forge-research-technology-shipweapon-vespera
-  entityIcon: WeaponTurretVespera
-  discipline: ShipArmory
-  tier: 3
-  cost: 13000
-  recipeUnlocks:
-  - WeaponTurretVesperaCircuitboard
-  technologyPrerequisites:
-  - ForgeShipWeaponResearchL85
-  position: -10, 5
+# --- Column -10: missile (Vanyk branch) ---
 
 - type: technology
   id: ForgeShipWeaponResearchVanyk
@@ -226,7 +194,7 @@
   recipeUnlocks:
   - WeaponTurretVanykCircuitboard
   technologyPrerequisites:
-  - ForgeShipWeaponResearchVespera
+  - ForgeShipWeaponResearchMidline
   position: -10, 6
 
 - type: technology
@@ -267,7 +235,7 @@
   recipeUnlocks:
   - WeaponTurretTovekCircuitboard
   technologyPrerequisites:
-  - ForgeShipWeaponResearchVespera
+  - ForgeShipWeaponResearchMidline
   position: -11, 6
 
 - type: technology
@@ -287,20 +255,6 @@
 # --- Column -18: mining ---
 
 - type: technology
-  id: ForgeShipWeaponResearchM25
-  name: forge-research-technology-shipweapon-m25
-  entityIcon: WeaponTurretM25
-  discipline: ShipArmory
-  tier: 3
-  cost: 22000
-  recipeUnlocks:
-  - WeaponTurretM25Circuitboard
-  technologyPrerequisites:
-  - BasicShuttleArmament
-  - ShuttleAdvancedComponents
-  position: -14, 4
-
-- type: technology
   id: ForgeShipWeaponResearchApollo
   name: forge-research-technology-shipweapon-apollo
   entityIcon: WeaponLaserTurretApollo
@@ -310,7 +264,7 @@
   recipeUnlocks:
   - WeaponLaserTurretApolloCircuitboard
   technologyPrerequisites:
-  - ForgeShipWeaponResearchM25
+  - ForgeShipWeaponResearchEntry
   - ForgeShipWeaponResearchPrometheus
   - ShuttleCtlaAdvancedDriveResearch
   position: -14, 7

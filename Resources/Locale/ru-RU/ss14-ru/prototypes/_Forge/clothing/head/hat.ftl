@@ -20,3 +20,8 @@ ent-ClothingHeadHatEmpirePreafectOrange = фуражка лорда
     .desc = Фуражка лорда, символизирует верность имперской гвардии.
 ent-ClothingHeadHatEmpirePreafectViolet = шляпа экклезиарха
     .desc = Шляпа экклезиарха, символизирует верность церкви и вере в императора!
+
+ent-ClothingHeadHatCapUI = кепка U.I.
+    .desc = Обычная чёрная бейсболка с фиолетовым черепом.
+ent-ClothingHeadHatBeretUI = берет U.I.
+    .desc = Тёмный берет с лого Ullman Industries. Стоп почему контрабандисты себя выделяют?

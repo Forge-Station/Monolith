@@ -109,6 +109,7 @@
     - MonoCentrifugeProcessingStatic
     dynamicPacks:
     - MonoUraniumProcessing
+    - MonoIriditeProcessing # Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:

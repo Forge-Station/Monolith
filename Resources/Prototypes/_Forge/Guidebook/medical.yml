@@ -1,0 +1,17 @@
+- type: guideEntry
+  id: ForgeMedical
+  name: forge-guide-entry-medical
+  text: "/ServerInfo/_Forge/Guidebook/ForgeMedical/Core.xml"
+  children:
+  - ForgeMedicalTolerance
+  - ForgeMedicalDisease
+
+- type: guideEntry
+  id: ForgeMedicalTolerance
+  name: forge-guide-entry-medical-tolerance
+  text: "/ServerInfo/_Forge/Guidebook/ForgeMedical/Tolerance.xml"
+
+- type: guideEntry
+  id: ForgeMedicalDisease
+  name: forge-guide-entry-medical-disease
+  text: "/ServerInfo/_Forge/Guidebook/ForgeMedical/Disease.xml"

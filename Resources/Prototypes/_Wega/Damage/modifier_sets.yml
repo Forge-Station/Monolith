@@ -17,3 +17,9 @@
     Cold: 0.9
     Heat: 0.85
     Poison: 0.85
+
+- type: damageModifierSet
+  id: Skrell
+  coefficients:
+    Heat: 1.5
+    Poison: 0.75

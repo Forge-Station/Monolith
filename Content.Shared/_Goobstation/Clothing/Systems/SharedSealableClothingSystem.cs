@@ -86,7 +86,19 @@ public abstract partial class SharedSealableClothingSystem : EntitySystem
 
     private void OnControlUnequip(Entity<SealableClothingControlComponent> control, ref ClothingGotUnequippedEvent args)
     {
-        control.Comp.WearerEntity = null;
+        var comp = control.Comp;
+        comp.WearerEntity = null;
+
+        // Forge-Change-start: dropped control units must not stay sealed
+        if (comp.IsCurrentlySealed || comp.IsInProcess)
+        {
+            comp.IsCurrentlySealed = false;
+            comp.IsInProcess = false;
+            comp.ProcessQueue.Clear();
+            _appearanceSystem.SetData(control, SealableClothingVisuals.Sealed, false);
+        }
+        // Forge-Change-end
+
         Dirty(control);
     }
 

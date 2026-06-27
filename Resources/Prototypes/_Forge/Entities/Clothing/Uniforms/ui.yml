@@ -1,13 +1,27 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitUI
-  name: Комбинезон U.I
-  description: Удобная водолазка Ульман индузтриз. Обычно идёт с боевым скафандром, но вам хватит и этого.
+  name: jumpsuit U.I.
+  description: Comfortable jumpsuit of U.I. Corporation. Usually goes with a combat suit, but you'll be fine with this.
   components:
   - type: Sprite
     sprite: Forge/Clothing/Uniforms/Jumpsuits/ui.rsi
   - type: Clothing
     sprite: Forge/Clothing/Uniforms/Jumpsuits/ui.rsi
+  - type: StaticPrice
+    price: 30
+    vendPrice: 200
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformShirtUI
+  name: shirt U.I.
+  description: A comfortable, breathable shirt with a Ullman Industries logo, paired with tactical pants. It usually comes with a smart pistol, but this is all you need.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/ui_shirt.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/Uniforms/Jumpsuits/ui_shirt.rsi
   - type: StaticPrice
     price: 30
     vendPrice: 200

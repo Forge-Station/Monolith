@@ -136,6 +136,7 @@ public sealed partial class BoardingTeleportConsoleSystem
         if (engine.JumpCooldown <= 0f)
             return;
 
+        // Applied when switching targets, not after each boarding jump.
         engine.NextJump = _timing.CurTime + TimeSpan.FromSeconds(engine.JumpCooldown);
         Dirty(engineUid, engine);
     }

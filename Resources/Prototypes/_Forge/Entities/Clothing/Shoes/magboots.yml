@@ -45,6 +45,35 @@
     price: 500
     vendPrice: 5000
 
+- type: entity
+  parent: [ClothingShoesBootsMagBase, ClothingShoesBootsCombat, BaseJetpack]
+  id: ClothingShoesBootsMagViperGroup
+  name: viper group magboots
+  description: Reverse-engineered magnetic boots that have a heavy magnetic pull and integrated thrusters. It can hold 0.75 L of gas.
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Boots/magboots_viper_group.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/Shoes/Boots/magboots_viper_group.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: GasTank
+    outputPressure: 42.6
+    air:
+      # 2 minutes of thrust
+      volume: 0.75
+      temperature: 293.15
+      moles:
+        Oxygen: 0.153853429 # oxygen
+        Nitrogen: 0.153853429 # nitrogen
+  - type: Item
+    sprite: null
+    size: Normal
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.75
+
 #region Other
 - type: entity
   parent: ClothingShoesBootsMagSyndie
@@ -114,7 +143,7 @@
   description: alerts-magboots-desc
 
 - type: entity
-  parent: [ ClothingShoesBootsMagAdv, BaseFactionGearOtherFactionT2, BaseJetpack ]
+  parent: [ ClothingShoesBootsMagAdv, BaseFactionGearOtherFactionT2, JetpackChrono]
   id: ClothingShoesBootsMagAsakimForge
   name: pre-fracture magboots
   description: State-of-the-art magnetic boots made for combat with advanced harnesses.
@@ -148,6 +177,24 @@
     state: icon
   - type: Clothing
     sprite: Forge/Clothing/Shoes/Boots/tti_magboots.rsi
+  - type: Magboots
+    magbootsAlert: MagbootsSecurity
+  - type: ClothingSpeedModifier
+    walkModifier: 1.0
+    sprintModifier: 1.0
+
+- type: entity
+  parent: [ClothingShoesBootsMag, ClothingShoesBootsCombat, BaseFactionGearOtherFactionT1]
+  id: ClothingShoesBootsMagUllman
+  name: ullman magboots
+  description: Ullman security magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle.
+  suffix: UI
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/Shoes/Boots/ui_magboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/Shoes/Boots/ui_magboots.rsi
   - type: Magboots
     magbootsAlert: MagbootsSecurity
   - type: ClothingSpeedModifier

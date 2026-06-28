@@ -1,4 +1,4 @@
 ent-SyndicateIDCardComa = Сигмис
-ent-SyndicateIDCardStormtrooper = удостоверение горлекса
+ent-SyndicateIDCardStormtrooper = удостоверение Горлекса
 ent-SyndicateIDCardSigmis = Сигмис
-ent-SyndicateIDCardSmuggler = удостоверение горлекса
+ent-SyndicateIDCardSmuggler = удостоверение Горлекса

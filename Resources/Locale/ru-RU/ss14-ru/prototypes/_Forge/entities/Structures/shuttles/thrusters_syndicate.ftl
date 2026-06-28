@@ -1,1 +1,1 @@
-ent-DebugGyroscopeSyndicate = гироскоп горлекса (отладка)
+ent-DebugGyroscopeSyndicate = гироскоп Горлекса (отладка)

@@ -1,7 +1,7 @@
-ent-CrateSyndicateSurplusBundle = ящик припасов горлекса
+ent-CrateSyndicateSurplusBundle = ящик припасов Горлекса
     .desc = Содержит случайное снаряжение Горлекса, общей стоимостью в 50 телекристаллов. Оно может быть как бесполезным хламом, так и реально крутым.
 ent-CrateCybersunJuggernautBundle = набор джаггернаута Gorlex
     .desc = Содержит всё, кроме большой пушки для резни.
     .suffix = Заполненный
-ent-CrateSyndicateSuperSurplusBundle = ящик суперприпасов горлекса
+ent-CrateSyndicateSuperSurplusBundle = ящик суперприпасов Горлекса
     .desc = Содержит случайное снаряжение Горлекса, общей стоимостью в 125 телекристаллов.

@@ -1,2 +1,2 @@
 ent-BluespaceMercenary = блюспейс наёмники
-ent-BluespaceSyndicate = блюспейс горлекс
+ent-BluespaceSyndicate = блюспейс Горлекс

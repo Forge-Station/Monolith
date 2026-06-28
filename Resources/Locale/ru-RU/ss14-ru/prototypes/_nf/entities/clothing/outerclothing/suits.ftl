@@ -1,2 +1,2 @@
-ent-ClothingOuterSuitBombSyndie = сапёрный костюм горлекса
+ent-ClothingOuterSuitBombSyndie = сапёрный костюм Горлекса
     .desc = { ent-ClothingOuterSuitBomb.desc }

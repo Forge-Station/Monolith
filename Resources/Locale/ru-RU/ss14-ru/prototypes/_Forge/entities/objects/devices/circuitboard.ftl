@@ -1,7 +1,7 @@
-ent-FSyndicateProtolatheCircuitboard = горлекслат (машинная плата)
-    .desc = Плата, необходимая для создания красного горлекслата.
-ent-FComputerShuttleAntagCircuitboard = консоль управления шаттлом горлекса (машинная плата)
-    .desc = Плата, необходимая для создания консоли управления шаттлом горлекса.
+ent-FSyndicateProtolatheCircuitboard = Горлекслат (машинная плата)
+    .desc = Плата, необходимая для создания красного Горлекслата.
+ent-FComputerShuttleAntagCircuitboard = консоль управления шаттлом Горлекса (машинная плата)
+    .desc = Плата, необходимая для создания консоли управления шаттлом Горлекса.
 
 ent-DoorElectronicsSergeant = { ent-DoorElectronics }
     .desc = { ent-DoorElectronics.desc }

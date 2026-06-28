@@ -1,7 +1,7 @@
 ent-SyndicateTechFabCircuitboard = ТехФаб Горлекса (машинная плата)
-    .desc = Плата для создания техфаба горлекса.
+    .desc = Плата для создания техфаба Горлекса.
 ent-GyroscopeSyndicateMachineCircuitboard = гироскоп Горлекса (машинная плата)
-    .desc = Плата для создания техфаба горлекса.
+    .desc = Плата для создания техфаба Горлекса.
 ent-ThrusterSyndicateMachineCircuitboard = двигатель Горлекса (машинная плата)
     .desc = Плата для созд
 ent-TechFabInterdyneMachineCircuitboard = техфаб Interdyne (машинная плата)

@@ -42,4 +42,4 @@ station-event-bluespace-name-BrokenMcDelivery = МакДоставка
 station-event-bluespace-name-Cave = Астероидная пещера
 station-event-bluespace-name-UnidentifiedVessel = Неопознанный объект
 station-event-bluespace-name-SecureNTVault = Безопасное хранилище NT
-station-event-bluespace-name-SyndicateWeaponsCache = Хранилище оружия горлекса
+station-event-bluespace-name-SyndicateWeaponsCache = Хранилище оружия Горлекса

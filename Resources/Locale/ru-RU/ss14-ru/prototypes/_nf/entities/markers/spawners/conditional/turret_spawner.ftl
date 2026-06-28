@@ -1,7 +1,7 @@
-ent-SpawnMobWeaponTurretLaserSyndicateNF = спавнер лазерной турели горлекса
+ent-SpawnMobWeaponTurretLaserSyndicateNF = спавнер лазерной турели Горлекса
     .suffix = Синдикат, Фронтир
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobWeaponTurretSyndicate = спавнер баллистической турели горлекса
+ent-SpawnMobWeaponTurretSyndicate = спавнер баллистической турели Горлекса
     .suffix = Синдикат, Фронтир
     .desc = { ent-MarkerBase.desc }
 ent-SpawnMobWeaponTurretLaserNanoTrasenDeployed = спавнер САЛТ

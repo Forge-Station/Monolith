@@ -1,0 +1,52 @@
+- type: pointOfInterest
+  id: EmpireSecondary
+  parent: [BasePOI, BaseRepairablePOI]
+  name: 'Каторга СИВ'
+  minimumDistance: 11000
+  maximumDistance: 14000
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed]
+  spawnGroup: Required
+  placementTags: [ Imperial ]
+  minDistanceFromTags:
+    Renegates: 5000
+    TSF: 5000
+  gridPath: /Maps/_Forge/POI/Mizerikordia.yml
+  addComponents:
+  - type: IFF
+    color: "#ab7a52"
+    flags: [HideLabel]
+    readOnly: true # mono
+  - type: Company
+    companyName: Imperial
+  - type: PoiCaptureRoundstart
+    ownerCompanyId: Imperial
+    zoneRadius: 2048
+  - type: ProtectedGrid
+    preventTeleportation: true
+
+- type: gameMap
+  id: EmpireSecondary
+  mapName: 'Каторга СИВ'
+  mapPath: /Maps/_Forge/POI/Mizerikordia.yml
+  minPlayers: 0
+  stations:
+    EmpireSecondary:
+      stationProto: StandardFrontierOutpost
+      gridComponents:
+      - type: VesselInfo
+        description: "Каторга Священной Империи Вермиллионов — куда сгоняют всех неверных и провинившихся."
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Каторга СИВ'
+        - type: ExtraStationInformation
+          icon:
+            sprite: Forge/Structures/Decoration/banner.rsi
+            state: banner_empire
+          stationSubtext: 'frontier-lobby-empire-secondary-subtext'
+          stationDescription: 'frontier-lobby-empire-secondary-description'
+        - type: StationJobs
+          availableJobs:
+            Praetorian: [ 0, 1 ]
+            Auxilia: [ -1, -1 ]
+            Neophyte: [ -1, -1]
+        - type: StationDeadDropHintExempt

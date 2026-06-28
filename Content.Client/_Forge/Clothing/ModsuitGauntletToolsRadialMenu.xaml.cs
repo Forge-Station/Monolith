@@ -136,6 +136,8 @@ public sealed partial class ModsuitGauntletToolsRadialMenu : RadialMenu
         if (comp.RcdInHand && SharedModsuitGauntletToolsSystem.IsSlotEnabled(comp, ModsuitGauntletToolSlot.Rcd))
         {
             slot = ModsuitGauntletToolSlot.Rcd;
+         return true;
+        }   
         if (comp.PipingInHand && SharedModsuitGauntletToolsSystem.IsSlotEnabled(comp, ModsuitGauntletToolSlot.Piping))
         {
             slot = ModsuitGauntletToolSlot.Piping;

@@ -60,30 +60,17 @@
     price: 100
 
 # Скороходы Tel-Adi — на батарейке, +10% при активации
+# Скороходы Tel-Adi — просто ботинки
 - type: entity
-  parent: [ClothingShoesBase, PowerCellSlotSmallItem, BaseToggleClothing]
+  parent: ClothingShoesBase
   id: ClothingShoesBootsTelAdi
-  name: скороходы Tel-Adi
-  description: Высокотехнологичная обувь корпорации Tel-Adi. При активации ускоряет передвижение на 10%, расходуя заряд батареи.
+  name: ботинки Tel-Adi
+  description: Фирменная обувь корпорации Tel-Adi. Удобная и практичная.
   suffix: ТелАди
   components:
   - type: Sprite
     sprite: Forge/Clothing/Shoes/Boots/tel-adi.rsi
   - type: Clothing
     sprite: Forge/Clothing/Shoes/Boots/tel-adi.rsi
-  - type: ToggleClothing
-    action: ActionToggleSpeedBoots
-  - type: ClothingSpeedModifier # only applies while toggled on (ItemToggle)
-    walkModifier: 1.10
-    sprintModifier: 1.10
-  - type: Appearance
-  - type: PowerCellDraw # Forge-change: drains a power cell while active
-    drawRate: 3
-  - type: ToggleCellDraw
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellSmall
   - type: StaticPrice
-    price: 5000
+    price: 500

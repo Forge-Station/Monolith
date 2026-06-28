@@ -4,8 +4,8 @@ meta:
   engineVersion: 275.1.0
   forkId: ""
   forkVersion: ""
-  time: 06/18/2026 14:38:49
-  entityCount: 12605
+  time: 06/30/2026 21:53:28
+  entityCount: 12600
 maps:
 - 786
 grids:
@@ -357,9 +357,9 @@ entities:
     - type: SpreaderGrid
       spreadQueues:
         MetalFoam: []
+        Smoke: []
         Puddle: []
         Kudzu: []
-        Smoke: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -14195,7 +14195,7 @@ entities:
       pos: 24.5,29.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -4177.062
+      secondsUntilStateChange: -4971.7627
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -14272,6 +14272,10 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 35.5,29.5
       parent: 2
+    - type: DoorBolt
+      boltsDown: True
+    - type: DeviceLinkSink
+      invokeCounter: 1
 - proto: AirSensor
   entities:
   - uid: 247
@@ -19248,11 +19252,6 @@ entities:
       parent: 2
 - proto: ButtonFrameCautionSecurity
   entities:
-  - uid: 88
-    components:
-    - type: Transform
-      pos: 37.5,29.5
-      parent: 2
   - uid: 529
     components:
     - type: Transform
@@ -38340,7 +38339,7 @@ entities:
       pos: -12.5,59.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -77423.336
+      secondsUntilStateChange: -78218.04
       state: Opening
   - uid: 3923
     components:
@@ -45409,7 +45408,7 @@ entities:
       pos: -27.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -162743.7
+      secondsUntilStateChange: -163538.4
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -45818,7 +45817,7 @@ entities:
       pos: -43.5,70.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -30829.498
+      secondsUntilStateChange: -31624.197
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -47407,7 +47406,7 @@ entities:
       pos: 33.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -70476.7
+      secondsUntilStateChange: -71271.41
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -47448,7 +47447,7 @@ entities:
       pos: 24.5,23.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -117122.36
+      secondsUntilStateChange: -117917.06
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -65072,7 +65071,7 @@ entities:
       pos: -35.5,31.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -78060.97
+      secondsUntilStateChange: -78855.67
       state: Opening
   - uid: 11915
     components:
@@ -65080,7 +65079,7 @@ entities:
       pos: -34.5,31.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -78063.87
+      secondsUntilStateChange: -78858.57
       state: Opening
   - uid: 11916
     components:
@@ -65093,7 +65092,7 @@ entities:
       pos: -43.5,39.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -78043.234
+      secondsUntilStateChange: -78837.94
       state: Opening
   - uid: 11919
     components:
@@ -65101,7 +65100,7 @@ entities:
       pos: -42.5,12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -78034.836
+      secondsUntilStateChange: -78829.54
       state: Opening
   - uid: 11920
     components:
@@ -65114,7 +65113,7 @@ entities:
       pos: -31.5,23.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -58839.2
+      secondsUntilStateChange: -59633.9
       state: Opening
 - proto: InflatableWall
   entities:
@@ -69992,11 +69991,6 @@ entities:
     - type: Transform
       pos: 28.5,53.5
       parent: 2
-  - uid: 11943
-    components:
-    - type: Transform
-      pos: 38.5,34.5
-      parent: 2
   - uid: 11944
     components:
     - type: Transform
@@ -73713,6 +73707,30 @@ entities:
       parent: 2
 - proto: ShuttersWindow
   entities:
+  - uid: 4129
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 36.5,29.5
+      parent: 2
+  - uid: 4137
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,26.5
+      parent: 2
+  - uid: 4222
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,28.5
+      parent: 2
+  - uid: 7438
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,27.5
+      parent: 2
   - uid: 8139
     components:
     - type: Transform
@@ -73817,37 +73835,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 34.5,42.5
       parent: 2
-- proto: ShuttersWindowOpen
-  entities:
-  - uid: 4222
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,27.5
-      parent: 2
-  - uid: 8125
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,28.5
-      parent: 2
-  - uid: 8483
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,26.5
-      parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        8127:
-        - - DoorStatus
-          - Toggle
-  - uid: 8485
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 36.5,29.5
-      parent: 2
 - proto: SignAi
   entities:
   - uid: 9432
@@ -73883,7 +73870,7 @@ entities:
         2460:
         - - Pressed
           - Toggle
-  - uid: 4129
+  - uid: 4133
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -73891,18 +73878,18 @@ entities:
       parent: 2
     - type: DeviceLinkSource
       linkedPorts:
+        4129:
+        - - Pressed
+          - Toggle
+        4222:
+        - - Pressed
+          - Toggle
+        7438:
+        - - Pressed
+          - Toggle
         4137:
         - - Pressed
-          - DoorBolt
-        4221:
-        - - Pressed
-          - DoorBolt
-        4108:
-        - - Pressed
-          - DoorBolt
-        4133:
-        - - Pressed
-          - DoorBolt
+          - Toggle
   - uid: 4717
     components:
     - type: MetaData
@@ -74051,25 +74038,6 @@ entities:
         - - Pressed
           - Toggle
         7498:
-        - - Pressed
-          - Toggle
-  - uid: 9766
-    components:
-    - type: Transform
-      pos: 37.5,29.5
-      parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        8485:
-        - - Pressed
-          - Toggle
-        8125:
-        - - Pressed
-          - Toggle
-        4222:
-        - - Pressed
-          - Toggle
-        8483:
         - - Pressed
           - Toggle
   - uid: 11373
@@ -77742,6 +77710,28 @@ entities:
       parent: 2
 - proto: TwoWayLever
   entities:
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 38.5,28.5
+      parent: 2
+    - type: DeviceLinkSource
+      linkedPorts:
+        5217:
+        - - Left
+          - DoorBolt
+        4109:
+        - - Left
+          - DoorBolt
+        4102:
+        - - Left
+          - DoorBolt
+        4108:
+        - - Left
+          - DoorBolt
+        4221:
+        - - Left
+          - DoorBolt
   - uid: 8600
     components:
     - type: Transform
@@ -90379,51 +90369,51 @@ entities:
   - uid: 4102
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 34.5,26.5
+      rot: -1.5707963267948966 rad
+      pos: 34.5,27.5
       parent: 2
+    - type: DoorBolt
+      boltsDown: True
     - type: DeltaPressure
       gridUid: 2
+    - type: DeviceLinkSink
+      invokeCounter: 1
   - uid: 4108
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 34.5,27.5
-      parent: 2
-    - type: DeltaPressure
-      gridUid: 2
-  - uid: 4109
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 34.5,27.5
-      parent: 2
-    - type: DeltaPressure
-      gridUid: 2
-  - uid: 4133
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 34.5,26.5
       parent: 2
+    - type: DoorBolt
+      boltsDown: True
     - type: DeltaPressure
       gridUid: 2
-  - uid: 4137
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 36.5,29.5
-      parent: 2
-    - type: DeltaPressure
-      gridUid: 2
-  - uid: 4221
+    - type: DeviceLinkSink
+      invokeCounter: 1
+  - uid: 4109
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 34.5,28.5
       parent: 2
+    - type: DoorBolt
+      boltsDown: True
     - type: DeltaPressure
       gridUid: 2
+    - type: DeviceLinkSink
+      invokeCounter: 1
+  - uid: 4221
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 36.5,29.5
+      parent: 2
+    - type: DoorBolt
+      boltsDown: True
+    - type: DeltaPressure
+      gridUid: 2
+    - type: DeviceLinkSink
+      invokeCounter: 1
   - uid: 4815
     components:
     - type: Transform
@@ -90452,14 +90442,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -27.5,70.5
-      parent: 2
-    - type: DeltaPressure
-      gridUid: 2
-  - uid: 7438
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 34.5,28.5
       parent: 2
     - type: DeltaPressure
       gridUid: 2

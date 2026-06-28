@@ -4,10 +4,9 @@
   "copyright": "Created by SuperJoelD00D for Monolith Station (Tel-Adi Soulkiller core).",
   "size": { "x": 32, "y": 32 },
   "states": [
-    { "name": "base" },
     {
       "name": "ai",
-      "delays": [ [5.0, 0.15, 0.15, 0.15, 0.15, 0.15] ]
+      "delays": [ [0.15, 0.15, 0.15, 0.15] ]
     },
     {
       "name": "ai_empty",

@@ -59,6 +59,7 @@ public abstract partial class SharedModsuitGauntletToolsSystem : EntitySystem
                 break;
             case ModsuitGauntletToolSlot.Rcd:
                 ToggleTool(gauntlets, wearer, gauntlets.Comp.RcdEntity, ref gauntlets.Comp.RcdInHand);
+                break;
             case ModsuitGauntletToolSlot.Piping:
                 ToggleTool(gauntlets, wearer, gauntlets.Comp.PipingEntity, ref gauntlets.Comp.PipingInHand);
                 break;
@@ -115,6 +116,8 @@ public abstract partial class SharedModsuitGauntletToolsSystem : EntitySystem
         if (comp.RcdInHand && IsSlotEnabled(comp, ModsuitGauntletToolSlot.Rcd))
         {
             slot = ModsuitGauntletToolSlot.Rcd;
+            return true;
+        }
         if (comp.PipingInHand && IsSlotEnabled(comp, ModsuitGauntletToolSlot.Piping))
         {
             slot = ModsuitGauntletToolSlot.Piping;

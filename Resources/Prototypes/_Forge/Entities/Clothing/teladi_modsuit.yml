@@ -60,7 +60,7 @@
         Slash: 0.90
         Piercing: 0.90
         Heat: 0.90
-        Radiation: 0 # Forge-change: full (100%) radiation protection
+        Radiation: 0.90
   - type: StaticPrice
     price: 5000
     vendPrice: 20000
@@ -79,8 +79,8 @@
   - type: Clothing
     sprite: Forge/Clothing/OuterClothing/Modsuits/tel-adi.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 1.10
-    sprintModifier: 1.10
+    walkModifier: 1.00
+    sprintModifier: 1.00
   - type: ExplosionResistance
     damageCoefficient: 0.30
   - type: FireProtection
@@ -312,7 +312,7 @@
     sprite: Forge/Clothing/Head/Modsuits/tel-adi-mk2.rsi
   - type: Clothing
     sprite: Forge/Clothing/Head/Modsuits/tel-adi-mk2.rsi
-  # Броня наследуется от шлема «Аквизитора»: 10% от всего, радиация — 100%.
+  
 
 # Tel-Adi ARS «Дивиденд» — торс
 - type: entity
@@ -328,8 +328,8 @@
   - type: Clothing
     sprite: Forge/Clothing/OuterClothing/Modsuits/tel-adi-mk2.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 1.20
-    sprintModifier: 1.20
+    walkModifier: 0.90
+    sprintModifier: 0.90
   - type: Armor
     modifiers:
       coefficients:

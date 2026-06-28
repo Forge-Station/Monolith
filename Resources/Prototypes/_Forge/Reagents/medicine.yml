@@ -275,7 +275,7 @@
         - !type:SuppressEffect
           hidden: true
           syndrome: OpioidAddiction
-          duration: 25
+          duration: 220
         - !type:GenericDescEffect
           description: forge-reagent-effect-naloxone
 
@@ -323,13 +323,13 @@
         - !type:Drunk
           boozePower: 2
         - !type:SuppressEffect
-          hidden: true
+          # hidden: true
           syndrome: PainSyndrome
-          duration: 25
+          duration: 540
         - !type:SuppressEffect
-          hidden: true
+          # hidden: true
           syndrome: ChronicPain
-          duration: 20
+          duration: 480
         - !type:GenericDescEffect
           description: forge-reagent-effect-methadone
         - !type:GenericDescEffect
@@ -352,7 +352,7 @@
         - !type:SuppressEffect
           # hidden: true
           syndrome: NicotineAddiction
-          duration: 60
+          duration: 220
         - !type:GenericDescEffect
           description: forge-reagent-effect-tabex
 
@@ -387,9 +387,9 @@
           probability: 0.1
           refresh: false
         - !type:SuppressEffect
-          hidden: true
+          # hidden: true
           syndrome: StimulantAddiction
-          duration: 40
+          duration: 380
         - !type:GenericDescEffect
           description: forge-reagent-effect-clonidine
         # Addiction

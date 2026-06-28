@@ -21,6 +21,13 @@
             Burn: -3
             Brute: -6 # its a painkiller
             Toxin: -1
+      # Forge-change: yea, painkiller
+      - !type:SuppressEffect
+        syndrome: PainSyndrome
+        duration: 600
+      - !type:SuppressEffect
+        syndrome: ChronicPain
+        duration: 540
     Narcotic:
       metabolismRate: 1
       effects:

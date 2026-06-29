@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 06/29/2026 16:34:26
-  entityCount: 3784
+  time: 06/29/2026 16:38:08
+  entityCount: 3785
 maps: []
 grids:
 - 1
@@ -10696,7 +10696,7 @@ entities:
       pos: -1.5,-2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -19216.057
+      secondsUntilStateChange: -19436.777
       state: Opening
   - uid: 1411
     components:
@@ -10704,7 +10704,7 @@ entities:
       pos: -1.5,-3.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -19215.723
+      secondsUntilStateChange: -19436.443
       state: Opening
   - uid: 1412
     components:
@@ -16519,10 +16519,10 @@ entities:
       parent: 1
 - proto: LockerChemistryFilled
   entities:
-  - uid: 2222
+  - uid: 3785
     components:
     - type: Transform
-      pos: -1.5,41.5
+      pos: -0.5,41.5
       parent: 1
 - proto: LockerEngineerFilled
   entities:
@@ -22543,6 +22543,13 @@ entities:
     components:
     - type: Transform
       pos: 7.5,8.5
+      parent: 1
+- proto: VendingMachineChemicals
+  entities:
+  - uid: 2222
+    components:
+    - type: Transform
+      pos: -1.5,41.5
       parent: 1
 - proto: VendingMachineCigs
   entities:

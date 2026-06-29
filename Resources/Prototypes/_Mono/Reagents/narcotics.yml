@@ -109,7 +109,7 @@
             min: 0.3
             max: 1.0
         syndrome: OpioidAddiction
-        severity: 1.9
+        severity: 0.7
       - !type:HealthChange
         hidden: true
         conditions:

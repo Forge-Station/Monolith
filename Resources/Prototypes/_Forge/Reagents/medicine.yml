@@ -72,6 +72,13 @@
           - !type:MobStateCondition
             mobstate: Alive
           amount: 12
+        # Suppress Pain
+        - !type:SuppressEffect
+          syndrome: PainSyndrome
+          duration: 300
+        - !type:SuppressEffect
+          syndrome: ChronicPain
+          duration: 260
 
 # region Naloxone
 # opioid antagonist
@@ -353,6 +360,9 @@
           # hidden: true
           syndrome: NicotineAddiction
           duration: 220
+        - !type:RemoveSyndromeEffect
+          syndrome: NicotineAddiction
+          severity: 0.001
         - !type:GenericDescEffect
           description: forge-reagent-effect-tabex
 

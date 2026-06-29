@@ -4,14 +4,14 @@
   name: syndrome-pain-syndrome
   organ: Body
   interval: 12
-  severityDecay: 0.5
+  severityDecay: 3
   flareDelay: 320
   triggers:
     - !type:DamageTrigger
-      damageThreshold: 11
-      severity: 3
+      damageThreshold: 10
+      severity: 4
       chance: 0.3
-      cooldown: 5
+      cooldown: 3
   stages:
     - minSeverity: 0
     # region Stage 1
@@ -79,6 +79,10 @@
                 - syndrome-pain-syndrome-severe-3
               visualType: LargeCaution
               probability: 0.3
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 0.25
+              probability: 0.3
         - !type:EntityEffectList # name: pain, sweetie pain
           chance: 0.1
           flareOnly: true
@@ -94,6 +98,9 @@
               darkness: 0.65
               color: "#5f221d"
               time: 8
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 0.25
         - !type:EntityEffectList # name: WHY TF AM I DROPING ITEMS??
           flareOnly: true
           chance: 0.08
@@ -112,6 +119,9 @@
               messages:
                 - syndrome-pain-syndrome-ooooouch-1
               visualType: LargeCaution
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 0.5
 
 # region // Chronic Pain
 - type: syndrome
@@ -147,6 +157,9 @@
               emote: Scream
               showInChat: true
               probability: 0.07
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 0.75
     # region Stage 2
     - minSeverity: 55
       symptoms:
@@ -179,7 +192,10 @@
               damage:
                 types:
                   Brute: 0.15
-        - !type:EntityEffectList # name: randomize
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 1.5
+        - !type:EntityEffectList # name: not randomize
           chance: 0.08
           flareOnly: true
           effects:
@@ -227,6 +243,9 @@
               damage:
                 types:
                   Brute: 0.35
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 2
         - !type:EntityEffectList
           chance: 0.15
           flareOnly: true

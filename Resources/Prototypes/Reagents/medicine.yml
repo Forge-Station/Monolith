@@ -1786,7 +1786,7 @@
             min: 0.7
             max: 1.0
         syndrome: SedativeAddiction
-        severity: 0.95
+        severity: 0.25
       - !type:SuppressEffect
         hidden: true
         syndrome: StimulantAddiction

@@ -27,7 +27,6 @@ public abstract partial class SharedImplanterSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     [Dependency] private readonly EntityQuery<SubdermalImplantComponent> _implantCompQuery = default!;
 
@@ -337,7 +336,7 @@ public abstract partial class SharedImplanterSystem : EntitySystem
         if (!Resolve(uid, ref component, false))
             return;
 
-        if (implant != null && _proto.TryIndex(implant, out EntityPrototype? proto))
+        if (implant != null && ProtoMan.TryIndex(implant, out EntityPrototype? proto))
             component.DeimplantChosen = proto;
 
         Dirty(uid, component);

@@ -23,7 +23,6 @@ namespace Content.Shared.Access.Systems;
 
 public sealed partial class AccessReaderSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private EmagSystem _emag = default!;
@@ -406,7 +405,7 @@ public sealed partial class AccessReaderSystem : EntitySystem
     private bool FindAccessTagsItem(EntityUid uid, out HashSet<ProtoId<AccessLevelPrototype>> tags)
     {
         tags = new();
-        var ev = new GetAccessTagsEvent(tags, _prototype);
+        var ev = new GetAccessTagsEvent(tags, ProtoMan);
         RaiseLocalEvent(uid, ref ev);
 
         return tags.Count != 0;

@@ -17,7 +17,6 @@ namespace Content.Shared.Nutrition.EntitySystems;
 public sealed partial class ThirstSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
@@ -124,15 +123,15 @@ public sealed partial class ThirstSystem : EntitySystem
         switch (component.CurrentThirstThreshold)
         {
             case ThirstThreshold.OverHydrated:
-                _prototype.TryIndex(ThirstIconOverhydratedId, out prototype);
+                ProtoMan.TryIndex(ThirstIconOverhydratedId, out prototype);
                 break;
 
             case ThirstThreshold.Thirsty:
-                _prototype.TryIndex(ThirstIconThirstyId, out prototype);
+                ProtoMan.TryIndex(ThirstIconThirstyId, out prototype);
                 break;
 
             case ThirstThreshold.Parched:
-                _prototype.TryIndex(ThirstIconParchedId, out prototype);
+                ProtoMan.TryIndex(ThirstIconParchedId, out prototype);
                 break;
 
             default:

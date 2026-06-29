@@ -90,11 +90,11 @@ public abstract partial class SharedGunSystem
         switch (comp)
         {
             case ProjectileBatteryAmmoProviderComponent proj:
-                ProtoManager.TryIndex(proj.Prototype, out var proto);
+                ProtoMan.TryIndex(proj.Prototype, out var proto);
                 args.ShootPrototype = proto;
                 break;
             case HitscanBatteryAmmoProviderComponent hitscan:
-                ProtoManager.TryIndex(hitscan.HitscanEntityProto, out var hitProto);
+                ProtoMan.TryIndex(hitscan.HitscanEntityProto, out var hitProto);
                 args.ShootPrototype = hitProto;
                 break;
             default:
@@ -208,7 +208,7 @@ public abstract partial class SharedGunSystem
             return;
 
         var mode = GetSelectiveFireBatteryMode(comp, gun.SelectedMode);
-        if (mode == null || !ProtoManager.TryIndex(mode.Proto, out var proto))
+        if (mode == null || !ProtoMan.TryIndex(mode.Proto, out var proto))
             return;
 
         args.ShootPrototype = proto;

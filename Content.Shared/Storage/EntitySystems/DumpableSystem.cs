@@ -14,7 +14,6 @@ namespace Content.Shared.Storage.EntitySystems;
 
 public sealed partial class DumpableSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
@@ -108,7 +107,7 @@ public sealed partial class DumpableSystem : EntitySystem
         foreach (var entity in storage.Container.ContainedEntities)
         {
             if (!_itemQuery.TryGetComponent(entity, out var itemComp) ||
-                !_prototypeManager.TryIndex(itemComp.Size, out var itemSize))
+                !ProtoMan.TryIndex(itemComp.Size, out var itemSize))
             {
                 continue;
             }

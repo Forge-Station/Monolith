@@ -23,7 +23,6 @@ namespace Content.Client.SprayPainter;
 public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
 
     public List<SprayPainterDecalEntry> Decals = [];
     public Dictionary<string, List<string>> PaintableGroupsByCategory = new();
@@ -65,12 +64,12 @@ public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
     {
         PaintableGroupsByCategory.Clear();
         PaintableStylesByGroup.Clear();
-        foreach (var category in _protoMan.EnumeratePrototypes<PaintableGroupCategoryPrototype>().OrderBy(x => x.ID))
+        foreach (var category in ProtoMan.EnumeratePrototypes<PaintableGroupCategoryPrototype>().OrderBy(x => x.ID))
         {
             var groupList = new List<string>();
             foreach (var groupId in category.Groups)
             {
-                if (!_protoMan.Resolve(groupId, out var group))
+                if (!ProtoMan.Resolve(groupId, out var group))
                     continue;
 
                 groupList.Add(groupId);
@@ -82,7 +81,7 @@ public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
         }
 
         Decals.Clear();
-        foreach (var decalPrototype in _protoMan.EnumeratePrototypes<DecalPrototype>().OrderBy(x => x.ID))
+        foreach (var decalPrototype in ProtoMan.EnumeratePrototypes<DecalPrototype>().OrderBy(x => x.ID))
         {
             if (!decalPrototype.Tags.Contains("station")
                 && !decalPrototype.Tags.Contains("markings")

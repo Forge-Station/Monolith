@@ -20,7 +20,6 @@ namespace Content.Shared.Station;
 
 public abstract partial class SharedStationSpawningSystem : EntitySystem
 {
-    [Dependency] protected IPrototypeManager PrototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] protected InventorySystem InventorySystem = default!;
     [Dependency] private SharedHandsSystem _handsSystem = default!;
@@ -48,7 +47,7 @@ public abstract partial class SharedStationSpawningSystem : EntitySystem
             List<ProtoId<LoadoutPrototype>> equippedItems = new(); //Frontier - track purchased items (list: few items)
             foreach (var items in group.Value)
             {
-                if (!PrototypeManager.TryIndex(items.Prototype, out var loadoutProto))
+                if (!ProtoMan.TryIndex(items.Prototype, out var loadoutProto))
                 {
                     Log.Error($"Unable to find loadout prototype for {items.Prototype}");
                     continue;
@@ -59,7 +58,7 @@ public abstract partial class SharedStationSpawningSystem : EntitySystem
             }
 
             // If a character cannot afford their current job loadout, ensure they have fallback items for mandatory categories.
-            if (PrototypeManager.TryIndex(group.Key, out var groupPrototype) &&
+            if (ProtoMan.TryIndex(group.Key, out var groupPrototype) &&
                 equippedItems.Count < groupPrototype.MinLimit)
             {
                 foreach (var fallback in groupPrototype.Fallbacks)
@@ -70,7 +69,7 @@ public abstract partial class SharedStationSpawningSystem : EntitySystem
                         continue;
                     }
 
-                    if (!PrototypeManager.TryIndex(fallback, out var loadoutProto))
+                    if (!ProtoMan.TryIndex(fallback, out var loadoutProto))
                     {
                         Log.Error($"Unable to find loadout prototype for fallback {fallback}");
                         continue;
@@ -101,7 +100,7 @@ public abstract partial class SharedStationSpawningSystem : EntitySystem
             name = loadout.EntityName;
         }
 
-        if (string.IsNullOrEmpty(name) && PrototypeManager.TryIndex(roleProto.NameDataset, out var nameData))
+        if (string.IsNullOrEmpty(name) && ProtoMan.TryIndex(roleProto.NameDataset, out var nameData))
         {
             name = Loc.GetString(_random.Pick(nameData.Values));
         }
@@ -134,7 +133,7 @@ public abstract partial class SharedStationSpawningSystem : EntitySystem
     /// </summary>
     public void EquipStartingGear(EntityUid entity, ProtoId<StartingGearPrototype>? startingGear, bool raiseEvent = true)
     {
-        PrototypeManager.TryIndex(startingGear, out var gearProto);
+        ProtoMan.TryIndex(startingGear, out var gearProto);
         EquipStartingGear(entity, gearProto, raiseEvent);
     }
 

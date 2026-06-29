@@ -11,7 +11,6 @@ namespace Content.Server.Atmos.EntitySystems
 {
     public sealed partial class AtmosphereSystem
     {
-        [Dependency] private readonly IPrototypeManager _protoMan = default!;
 
         private GasReactionPrototype[] _gasReactions = [];
 
@@ -24,7 +23,7 @@ namespace Content.Server.Atmos.EntitySystems
         {
             base.InitializeGases();
 
-            _gasReactions = _protoMan.EnumeratePrototypes<GasReactionPrototype>().ToArray();
+            _gasReactions = ProtoMan.EnumeratePrototypes<GasReactionPrototype>().ToArray();
             Array.Sort(_gasReactions, (a, b) => b.Priority.CompareTo(a.Priority));
         }
 

@@ -24,7 +24,6 @@ namespace Content.Shared.Damage
 {
     public sealed partial class DamageableSystem : EntitySystem
     {
-        [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private SharedAppearanceSystem _appearance = default!;
         [Dependency] private INetManager _netMan = default!;
         [Dependency] private SharedBodySystem _body = default!; // Shitmed Change
@@ -98,7 +97,7 @@ namespace Content.Shared.Damage
         private void DamageableInit(EntityUid uid, DamageableComponent component, ComponentInit _)
         {
             if (component.DamageContainerID != null &&
-                _prototypeManager.TryIndex<DamageContainerPrototype>(component.DamageContainerID,
+                ProtoMan.TryIndex<DamageContainerPrototype>(component.DamageContainerID,
                 out var damageContainerPrototype))
             {
                 // Initialize damage dictionary, using the types and groups from the damage
@@ -110,7 +109,7 @@ namespace Content.Shared.Damage
 
                 foreach (var groupId in damageContainerPrototype.SupportedGroups)
                 {
-                    var group = _prototypeManager.Index<DamageGroupPrototype>(groupId);
+                    var group = ProtoMan.Index<DamageGroupPrototype>(groupId);
                     foreach (var type in group.DamageTypes)
                     {
                         component.Damage.DamageDict.TryAdd(type, FixedPoint2.Zero);
@@ -120,13 +119,13 @@ namespace Content.Shared.Damage
             else
             {
                 // No DamageContainerPrototype was given. So we will allow the container to support all damage types
-                foreach (var type in _prototypeManager.EnumeratePrototypes<DamageTypePrototype>())
+                foreach (var type in ProtoMan.EnumeratePrototypes<DamageTypePrototype>())
                 {
                     component.Damage.DamageDict.TryAdd(type.ID, FixedPoint2.Zero);
                 }
             }
 
-            component.Damage.GetDamagePerGroup(_prototypeManager, component.DamagePerGroup);
+            component.Damage.GetDamagePerGroup(ProtoMan, component.DamagePerGroup);
             component.TotalDamage = component.Damage.GetTotal();
         }
 
@@ -153,7 +152,7 @@ namespace Content.Shared.Damage
         public void DamageChanged(EntityUid uid, DamageableComponent component, DamageSpecifier? damageDelta = null,
             bool interruptsDoAfters = true, EntityUid? origin = null, bool? canSever = null, float armorPenetration = 0f) // Shitmed Change
         {
-            component.Damage.GetDamagePerGroup(_prototypeManager, component.DamagePerGroup);
+            component.Damage.GetDamagePerGroup(ProtoMan, component.DamagePerGroup);
             component.TotalDamage = component.Damage.GetTotal();
             Dirty(uid, component);
 
@@ -224,7 +223,7 @@ namespace Content.Shared.Damage
             if (!ignoreResistances)
             {
                 if (damageable.DamageModifierSetId != null &&
-                    _prototypeManager.Resolve(damageable.DamageModifierSetId, out var modifierSet))
+                    ProtoMan.Resolve(damageable.DamageModifierSetId, out var modifierSet))
                 {
                     // TODO: We need to add a check to see if the given armor covers the targeted part (if any) to modify or not.
                     damage = DamageSpecifier.ApplyModifierSet(damage,
@@ -446,7 +445,7 @@ namespace Content.Shared.Damage
 
             foreach (var (damageGroupId, _) in damagePerGroup)  //go through each group
             {
-                var group = _prototypeManager.Index<DamageGroupPrototype>(damageGroupId);  //get group
+                var group = ProtoMan.Index<DamageGroupPrototype>(damageGroupId);  //get group
                 foreach (var type in group.DamageTypes) //go through each type inside that group
                 {
                     if (!damage.DamageDict.TryGetValue(type, out var damageValue) || damageValue == 0) //get value and make sure it isn't 0

@@ -16,7 +16,6 @@ namespace Content.Shared.Tag;
 /// </summary>
 public sealed partial class TagSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
 
     [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
 
@@ -708,6 +707,6 @@ public sealed partial class TagSystem : EntitySystem
 
     private void AssertValidTag(string id)
     {
-        DebugTools.Assert(_proto.HasIndex<TagPrototype>(id), $"Unknown tag: {id}");
+        DebugTools.Assert(ProtoMan.HasIndex<TagPrototype>(id), $"Unknown tag: {id}");
     }
 }

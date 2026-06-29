@@ -19,7 +19,6 @@ namespace Content.Shared.Tools.Systems;
 
 public abstract partial class SharedToolSystem : EntitySystem
 {
-    [Dependency] private   IPrototypeManager _protoMan = default!;
     [Dependency] protected ISharedAdminLogManager AdminLogger = default!;
     [Dependency] private   ITileDefinitionManager _tileDefManager = default!;
     [Dependency] private   SharedAudioSystem _audioSystem = default!;
@@ -82,7 +81,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         // Loop through tool qualities and add localized names to the list
         foreach (var toolQuality in ent.Comp.Qualities)
         {
-            if (_protoMan.TryIndex(toolQuality, out var protoToolQuality))
+            if (ProtoMan.TryIndex(toolQuality, out var protoToolQuality))
             {
                 toolQualities.Add(Loc.GetString(protoToolQuality.Name));
             }

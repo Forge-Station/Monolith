@@ -21,7 +21,6 @@ public abstract partial class SharedRoleSystem : EntitySystem
 {
     [Dependency] private   IConfigurationManager _cfg = default!;
     [Dependency] private   IEntityManager _entityManager = default!;
-    [Dependency] private   IPrototypeManager _prototypes = default!;
     [Dependency] private   ISharedAdminLogManager _adminLogger = default!;
     [Dependency] protected ISharedPlayerManager Player = default!;
     [Dependency] private   SharedAudioSystem _audio = default!;
@@ -53,7 +52,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
             return;
         }
 
-        if (!_prototypes.TryIndex(value, out _requirementOverride ))
+        if (!ProtoMan.TryIndex(value, out _requirementOverride ))
             Log.Error($"Unknown JobRequirementOverridePrototype: {value}");
     }
 
@@ -151,7 +150,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
             return;
         }
 
-        if (!_prototypes.TryIndex(protoId, out var protoEnt))
+        if (!ProtoMan.TryIndex(protoId, out var protoEnt))
         {
             Log.Error($"Failed to add role {protoId} to {ToPrettyString(mindId)} : Role prototype does not exist");
             return;
@@ -258,7 +257,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
             return;
         }
 
-        if (!_prototypes.HasIndex(roleTypeId))
+        if (!ProtoMan.HasIndex(roleTypeId))
         {
             Log.Error($"Failed to change Role Type of {_minds.MindOwnerLoggingString(comp)} to {roleTypeId}, {subtype}. Invalid role");
             return;
@@ -513,7 +512,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
             if (comp.JobPrototype is not null && comp.AntagPrototype is null)
             {
                 prototype = comp.JobPrototype;
-                if (_prototypes.TryIndex(comp.JobPrototype, out var job))
+                if (ProtoMan.TryIndex(comp.JobPrototype, out var job))
                 {
                     playTimeTracker = job.PlayTimeTracker;
                     name = job.Name;
@@ -527,7 +526,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
             else if (comp.AntagPrototype is not null && comp.JobPrototype is null)
             {
                 prototype = comp.AntagPrototype;
-                if (_prototypes.TryIndex(comp.AntagPrototype, out var antag))
+                if (ProtoMan.TryIndex(comp.AntagPrototype, out var antag))
                 {
                     name = antag.Name;
                     valid = true;
@@ -626,7 +625,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
         if (_requirementOverride != null && _requirementOverride.Jobs.TryGetValue(job, out var req))
             return req;
 
-        return _prototypes.Index(job).Requirements;
+        return ProtoMan.Index(job).Requirements;
     }
 
     // TODO ROLES Change to readonly.
@@ -635,7 +634,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
         if (_requirementOverride != null && _requirementOverride.Antags.TryGetValue(antag, out var req))
             return req;
 
-        return _prototypes.Index(antag).Requirements;
+        return ProtoMan.Index(antag).Requirements;
     }
 
     // TODO ROLES Change to readonly.

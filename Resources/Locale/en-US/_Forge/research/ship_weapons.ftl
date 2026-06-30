@@ -14,6 +14,7 @@ forge-research-technology-shipweapon-prometheus = Prometheus Laser Cannon
 forge-research-technology-shipweapon-serpent = Serpent Torpedo Launcher
 forge-research-technology-shipweapon-tovek = TOVEK Missile Pod
 forge-research-technology-shipweapon-trident = Trident Torpedo Rack
+forge-research-technology-shipweapon-heavy-torpedo = Gungnir Heavy Torpedo Launcher
 forge-research-technology-shipweapon-light-munitions-bay = Light Munitions Bay
 forge-research-technology-shipweapon-longbow = Longbow Autocannon
 forge-research-technology-shipweapon-cyrexa = CYREXA Cannon

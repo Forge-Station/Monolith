@@ -1,0 +1,191 @@
+- type: entity
+  id: WeaponTurretForgeHeavyTorpedo
+  name: FHT-300 "Gungnir" heavy torpedo launcher
+  suffix: For mapping
+  parent:
+  - BallisticArtilleryMapped
+  - BallisticArtilleryTier4HP
+  description: A heavy Forge torpedo launcher that can fire from the hull without direct target line of sight. The muzzle still needs open vacuum; firing into your own plating is a bold plan, but why?
+  components:
+  - type: StaticPrice
+    price: 18000
+  - type: Sprite
+    sprite: _Mono/Objects/ShuttleWeapons/asm220.rsi
+    layers:
+    - state: space_artillery
+  - type: Appearance
+  - type: ForgeTorpedoLauncher
+  - type: AmmoCounter
+  - type: Battery
+    maxCharge: 90000
+    startingCharge: 90000
+  - type: ExaminableBattery
+  - type: WirelessNetworkConnection
+    range: 500
+  - type: Gun
+    fireRate: 0.08
+    recoil: 20
+    minAngle: 0
+    maxAngle: 0
+    shootThermalSignature: 48000000
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+  - type: SpaceArtillery
+    powerChargeRate: 600
+    powerUsePassive: 1800
+    powerUseActive: 0
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 250
+  - type: Actions
+  - type: ProjectileBatteryAmmoProvider
+    proto: ShipTorpedoForgeHeavy
+    fireCost: 30000
+  - type: RadarBlip
+    radarColor: "#ff9d00"
+    scale: 2.5
+    visibleFromOtherGrids: true
+    gridConfig:
+      color: "#ff9d00"
+      shape: Square
+      respectZoom: true
+      rotate: true
+      bounds: "-1.5,-1.5,1.5,1.5"
+  - type: ShipGunType
+    shipType: Missile
+  - type: ShipGunClass
+    shipClass: Superheavy
+  - type: ShipRepairable
+    repairTime: 45
+    repairCost: 160
+
+- type: entity
+  id: WeaponTurretForgeHeavyTorpedoPortable
+  name: FHT-300 "Gungnir" heavy torpedo launcher
+  suffix: DO NOT MAP
+  parent:
+  - BallisticArtillery
+  - BallisticArtilleryTier4HP
+  description: A heavy Forge torpedo launcher that can fire from the hull without direct target line of sight. The muzzle still needs open vacuum; firing into your own plating is a bold plan, but why?
+  components:
+  - type: StaticPrice
+    price: 18000
+  - type: Sprite
+    sprite: _Mono/Objects/ShuttleWeapons/asm220.rsi
+    layers:
+    - state: space_artillery
+  - type: Appearance
+  - type: ForgeTorpedoLauncher
+  - type: AmmoCounter
+  - type: Battery
+    maxCharge: 90000
+    startingCharge: 90000
+  - type: ExaminableBattery
+  - type: WirelessNetworkConnection
+    range: 500
+  - type: Gun
+    fireRate: 0.08
+    recoil: 20
+    minAngle: 0
+    maxAngle: 0
+    shootThermalSignature: 48000000
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+  - type: SpaceArtillery
+    powerChargeRate: 600
+    powerUsePassive: 1800
+    powerUseActive: 0
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 250
+  - type: Actions
+  - type: ProjectileBatteryAmmoProvider
+    proto: ShipTorpedoForgeHeavy
+    fireCost: 30000
+  - type: RadarBlip
+    radarColor: "#ff9d00"
+    scale: 2.5
+    visibleFromOtherGrids: true
+    gridConfig:
+      color: "#ff9d00"
+      shape: Square
+      respectZoom: true
+      rotate: true
+      bounds: "-1.5,-1.5,1.5,1.5"
+  - type: ShipGunType
+    shipType: Missile
+  - type: ShipGunClass
+    shipClass: Superheavy
+  - type: ShipRepairable
+    repairTime: 45
+    repairCost: 160
+
+- type: entity
+  id: ShipTorpedoForgeHeavy
+  name: FHT-300 heavy torpedo
+  parent: BaseTorpedo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Structural: 4500
+        Blunt: 900
+        Heat: 450
+  - type: Sprite
+    sprite: _Mono/Objects/SpaceArtillery/mini_rocket.rsi
+    layers:
+    - state: mini-rocket
+      scale: 1, 2
+  - type: Ammo
+    muzzleFlash: null
+  - type: ShipWeaponProjectile
+  - type: RadarBlip
+    radarColor: "#ff9d00"
+    scale: 4
+    shape: triangle
+  - type: TimedDespawn
+    lifetime: 22
+  - type: PointLight
+    radius: 5
+    color: orange
+    energy: 2
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 2500
+    intensitySlope: 35
+    maxIntensity: 220
+  - type: GatheringProjectile
+  - type: MiningGatheringSoft
+  - type: MiningGatheringHard
+  - type: TargetSeeking
+    acceleration: 45
+    detectionRange: 850
+    scanArc: 55
+    launchSpeed: 35
+    maxSpeed: 90
+    trackDelay: 2
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Meteor
+    damageTypes:
+      types:
+        Blunt: 1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:ExplodeBehavior
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak

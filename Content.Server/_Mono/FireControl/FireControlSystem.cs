@@ -35,6 +35,7 @@ public sealed partial class FireControlSystem : EntitySystem
     [Dependency] private PowerReceiverSystem _power = default!;
     [Dependency] private RotateToFaceSystem _rotateToFace = default!;
     [Dependency] private ShipWeaponHomeGridSystem _shipWeaponHomeGrid = default!; // Forge-Change
+    [Dependency] private ForgeTorpedoLauncherSystem _forgeTorpedoLauncher = default!; // Forge-Change
     /// <summary>
     /// Dictionary of entities that have visualization enabled
     /// </summary>
@@ -43,6 +44,7 @@ public sealed partial class FireControlSystem : EntitySystem
     private EntityQuery<SpaceArtilleryComponent> _artilleryQuery;
     private EntityQuery<FireControlRotateComponent> _fireRotateQuery;
     private EntityQuery<GunComponent> _gunQuery;
+    private EntityQuery<ForgeTorpedoLauncherComponent> _forgeTorpedoLauncherQuery; // Forge-Change
 
     public override void Initialize()
     {
@@ -66,6 +68,7 @@ public sealed partial class FireControlSystem : EntitySystem
         _artilleryQuery = GetEntityQuery<SpaceArtilleryComponent>();
         _fireRotateQuery = GetEntityQuery<FireControlRotateComponent>();
         _gunQuery = GetEntityQuery<GunComponent>();
+        _forgeTorpedoLauncherQuery = GetEntityQuery<ForgeTorpedoLauncherComponent>(); // Forge-Change
     }
 
     private void OnPowerChanged(EntityUid uid, FireControlServerComponent component, PowerChangedEvent args)
@@ -528,23 +531,46 @@ public sealed partial class FireControlSystem : EntitySystem
         var weaponPos = weaponCoords.Position;
         var targetCoords = coords.ToMap(EntityManager, _xform);
         var targetPos = targetCoords.Position;
+        var fireCoords = coords;
 
         // Calculate direction
         var direction = targetPos - weaponPos;
-        var distance = direction.Length();
-        if (distance <= float.Epsilon)
-            return false; // Can't fire at the same position
 
-        direction = Vector2.Normalize(direction);
+        // Forge-Change-Start: torpedo launchers are static tubes. The cursor picks a
+        // target grid, but the launch vector comes from the tube's own orientation.
+        if (_forgeTorpedoLauncherQuery.TryComp(weapon, out var torpedoLauncher))
+        {
+            direction = _forgeTorpedoLauncher.GetLaunchDirection(weaponXform);
 
-        // Check for obstacles in the firing direction
-        if (!CanFireInDirection(weapon, weaponPos, direction, targetPos, weaponXform.MapID))
-            return false;
+            if (!_forgeTorpedoLauncher.TryPrepareLaunch(
+                    weapon,
+                    coords,
+                    direction,
+                    torpedoLauncher,
+                    weaponXform,
+                    out fireCoords))
+            {
+                return false;
+            }
+        }
+        // Forge-Change-End
+        else
+        {
+            var distance = direction.Length();
+            if (distance <= float.Epsilon)
+                return false; // Can't fire at the same position
+
+            direction = Vector2.Normalize(direction);
+
+            // Check for obstacles in the firing direction
+            if (!CanFireInDirection(weapon, weaponPos, direction, targetPos, weaponXform.MapID))
+                return false;
+        }
 
         // Set the cooldown for next firing
         comp.NextFire = _timing.CurTime + TimeSpan.FromSeconds(comp.FireCooldown);
 
-        if (_fireRotateQuery.HasComp(weapon))
+        if (!_forgeTorpedoLauncherQuery.HasComp(weapon) && _fireRotateQuery.HasComp(weapon)) // Forge-Change: torpedo shafts stay static.
         {
             var goalAngle = Angle.FromWorldVec(direction);
             _rotateToFace.TryRotateTo(weapon, goalAngle, 0f, Angle.FromDegrees(1), float.MaxValue, weaponXform);
@@ -553,7 +579,7 @@ public sealed partial class FireControlSystem : EntitySystem
         // Try to get a gun component and fire the weapon
         if (_gunQuery.TryComp(weapon, out var gun))
         {
-            _gun.AttemptShots(user, weapon, gun, coords, TimeSpan.FromSeconds(0.2));
+            _gun.AttemptShots(user, weapon, gun, fireCoords, TimeSpan.FromSeconds(0.2));
             return true;
         }
 

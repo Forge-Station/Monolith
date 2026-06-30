@@ -16,6 +16,7 @@
   - Maintenance
   - External
   - Renegate
+  - Mercenary # Forge-Change
   - Captain
 
 - type: accessGroup
@@ -25,4 +26,5 @@
   - External
   - Renegate
   - RenegateOfficer
+  - Mercenary # Forge-Change
   - Captain

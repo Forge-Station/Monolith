@@ -32,15 +32,15 @@
   dangerous: false
   minimumRequirements:
 # Forge start
-  - 300   # oxygen
+  - 150   # oxygen
   - 20    # nitrogen
   - 10    # carbon dioxide
   - 0     # plasma
-  - 20    # tritium
+  - 10    # tritium
   - 0     # vapor
   - 0     # ammonia
-  - 20    # n2o
-  - 10    # frezon
+  - 10    # n2o
+  - 5     # frezon
   - 0     # bz
   - 0     # healium
   - 0     # nitrium

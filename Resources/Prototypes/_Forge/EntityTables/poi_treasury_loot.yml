@@ -10,11 +10,11 @@
     - !type:EntSelector
       id: SpaceCash
       amount: !type:ConstantNumberSelector
-        value: 15000
+        value: 30000
     - !type:EntSelector
       id: SpaceCash
       amount: !type:ConstantNumberSelector
-        value: 25000
+        value: 40000
 
 - type: entityTable
   id: PoiTreasuryLootCashTickMedium
@@ -23,15 +23,11 @@
     - !type:EntSelector
       id: SpaceCash
       amount: !type:ConstantNumberSelector
-        value: 20000
-    - !type:EntSelector
-      id: SpaceCash
-      amount: !type:ConstantNumberSelector
-        value: 30000
-    - !type:EntSelector
-      id: SpaceCash
-      amount: !type:ConstantNumberSelector
         value: 50000
+    - !type:EntSelector
+      id: SpaceCash
+      amount: !type:ConstantNumberSelector
+        value: 60000
 
 - type: entityTable
   id: PoiTreasuryLootCashTickLarge
@@ -40,11 +36,11 @@
     - !type:EntSelector
       id: SpaceCash
       amount: !type:ConstantNumberSelector
-        value: 30000
+        value: 60000
     - !type:EntSelector
       id: SpaceCash
       amount: !type:ConstantNumberSelector
-        value: 50000
+        value: 80000
     - !type:EntSelector
       id: SpaceCash
       amount: !type:ConstantNumberSelector
@@ -195,9 +191,13 @@
   id: PoiTreasuryLootWeaponsMelee
   table: !type:GroupSelector
     children:
+    - !type:EntSelector
     - id: CombatKnife
+    - !type:EntSelector
     - id: PlasteelArmingSword
+    - !type:EntSelector
     - id: Cutlass  
+    - !type:EntSelector
     - id: EnergySword
       weight: 0.1
 
@@ -314,11 +314,11 @@
     - !type:EntSelector
       id: ResearchDisk10000
       amount: !type:ConstantNumberSelector
-        value: 5
+        value: 8
     - !type:EntSelector
       id: ResearchDisk65000
       amount: !type:ConstantNumberSelector
-        value: 2
+        value: 4
       weight: 0.5
 
 - type: entityTable
@@ -392,15 +392,15 @@
     - !type:EntSelector
       id: SpaceCash
       amount: !type:ConstantNumberSelector
-        value: 10000
-    - !type:EntSelector
-      id: SpaceCash
-      amount: !type:ConstantNumberSelector
-        value: 15000
-    - !type:EntSelector
-      id: SpaceCash
-      amount: !type:ConstantNumberSelector
         value: 20000
+    - !type:EntSelector
+      id: SpaceCash
+      amount: !type:ConstantNumberSelector
+        value: 30000
+    - !type:EntSelector
+      id: SpaceCash
+      amount: !type:ConstantNumberSelector
+        value: 40000
 
 # Грузовое: кэш + логистика.
 - type: entityTable
@@ -472,8 +472,6 @@
   table: !type:GroupSelector
     children:
     - !type:NestedSelector
-      tableId: PoiTreasuryLootCashTickMedium
-    - !type:NestedSelector
       tableId: PoiTreasuryLootWeaponsGuns
       weight: 2.5
     - !type:NestedSelector
@@ -499,7 +497,7 @@
   table: !type:GroupSelector
     children:
     - !type:NestedSelector
-      tableId: PoiTreasuryLootCashTickSmall
+      tableId: PoiTreasuryLootCashTickMedium
     - id: Bible
     - id: Candle
       weight: 0.5

@@ -10,11 +10,14 @@
   - type: StaticPrice
     price: 18000
   - type: Sprite
-    sprite: _Mono/Objects/ShuttleWeapons/asm220.rsi
+    sprite: _Forge/Objects/ShuttleWeapons/gungnir.rsi
     layers:
     - state: space_artillery
+      scale: 0.5, 0.5
   - type: Appearance
   - type: ForgeTorpedoLauncher
+    tileProbeDistance: 1.5
+    clearanceRayDistance: 1.75
   - type: AmmoCounter
   - type: Battery
     maxCharge: 90000
@@ -36,6 +39,17 @@
     powerChargeRate: 600
     powerUsePassive: 1800
     powerUseActive: 0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1,-0.5,1,0.5"
+        density: 800
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 250
@@ -52,7 +66,7 @@
       shape: Square
       respectZoom: true
       rotate: true
-      bounds: "-1.5,-1.5,1.5,1.5"
+      bounds: "-1,-0.5,1,0.5"
   - type: ShipGunType
     shipType: Missile
   - type: ShipGunClass
@@ -73,11 +87,14 @@
   - type: StaticPrice
     price: 18000
   - type: Sprite
-    sprite: _Mono/Objects/ShuttleWeapons/asm220.rsi
+    sprite: _Forge/Objects/ShuttleWeapons/gungnir.rsi
     layers:
     - state: space_artillery
+      scale: 0.5, 0.5
   - type: Appearance
   - type: ForgeTorpedoLauncher
+    tileProbeDistance: 1.5
+    clearanceRayDistance: 1.75
   - type: AmmoCounter
   - type: Battery
     maxCharge: 90000
@@ -99,6 +116,17 @@
     powerChargeRate: 600
     powerUsePassive: 1800
     powerUseActive: 0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1,-0.5,1,0.5"
+        density: 800
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 250
@@ -115,7 +143,7 @@
       shape: Square
       respectZoom: true
       rotate: true
-      bounds: "-1.5,-1.5,1.5,1.5"
+      bounds: "-1,-0.5,1,0.5"
   - type: ShipGunType
     shipType: Missile
   - type: ShipGunClass
@@ -130,6 +158,18 @@
   parent: BaseTorpedo
   categories: [ HideSpawnMenu ]
   components:
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.3
+        density: 1500
+        layer:
+        - WallLayer
+        mask:
+        - MachineMask
+        - BulletImpassable
   - type: Projectile
     damage:
       types:

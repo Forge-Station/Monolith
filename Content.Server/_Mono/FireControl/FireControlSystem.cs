@@ -538,7 +538,8 @@ public sealed partial class FireControlSystem : EntitySystem
 
         // Forge-Change-Start: torpedo launchers are static tubes. The cursor picks a
         // target grid, but the launch vector comes from the tube's own orientation.
-        if (_forgeTorpedoLauncherQuery.TryComp(weapon, out var torpedoLauncher))
+        var isTorpedoLauncher = _forgeTorpedoLauncherQuery.TryComp(weapon, out var torpedoLauncher);
+        if (isTorpedoLauncher)
         {
             direction = _forgeTorpedoLauncher.GetLaunchDirection(weaponXform);
 
@@ -570,20 +571,27 @@ public sealed partial class FireControlSystem : EntitySystem
         // Set the cooldown for next firing
         comp.NextFire = _timing.CurTime + TimeSpan.FromSeconds(comp.FireCooldown);
 
-        if (!_forgeTorpedoLauncherQuery.HasComp(weapon) && _fireRotateQuery.HasComp(weapon)) // Forge-Change: torpedo shafts stay static.
+        if (!isTorpedoLauncher && _fireRotateQuery.HasComp(weapon)) // Forge-Change: torpedo shafts stay static.
         {
             var goalAngle = Angle.FromWorldVec(direction);
             _rotateToFace.TryRotateTo(weapon, goalAngle, 0f, Angle.FromDegrees(1), float.MaxValue, weaponXform);
         }
 
         // Try to get a gun component and fire the weapon
-        if (_gunQuery.TryComp(weapon, out var gun))
+        if (!_gunQuery.TryComp(weapon, out var gun))
         {
-            _gun.AttemptShots(user, weapon, gun, fireCoords, TimeSpan.FromSeconds(0.2));
-            return true;
+            if (isTorpedoLauncher)
+                _forgeTorpedoLauncher.CancelPreparedLaunch(weapon);
+
+            return false;
         }
 
-        return false;
+        if (isTorpedoLauncher)
+            _forgeTorpedoLauncher.QueueLaunch(weapon, user, fireCoords, torpedoLauncher!);
+        else
+            _gun.AttemptShots(user, weapon, gun, fireCoords, TimeSpan.FromSeconds(0.2));
+
+        return true;
     }
 
     /// <summary>

@@ -36,6 +36,19 @@ public sealed partial class ForgeTorpedoLauncherComponent : Component
     public float LaunchAimDistance = 32f;
 
     /// <summary>
+    /// Minimum random delay before the prepared torpedo launch is actually fired.
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public float LaunchDelayMin = 0f;
+
+    /// <summary>
+    /// Maximum random delay before the prepared torpedo launch is actually fired.
+    /// This desynchronizes grouped tubes so the payloads do not all elbow each other at once.
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public float LaunchDelayMax = 0.1f;
+
+    /// <summary>
     /// How far from the gunnery cursor the launcher may look for a grid to lock.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]

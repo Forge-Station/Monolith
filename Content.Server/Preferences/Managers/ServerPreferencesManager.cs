@@ -3,8 +3,10 @@ using System.Linq;
 using System.Collections.Concurrent; // Forge-Change
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._Forge.Sponsor; // Forge-Change
 using Content.Server.Database;
 using Content.Server.Players.RateLimiting; // Forge-Change
+using Content.Shared._Forge.Sponsor; // Forge-Change
 using Content.Shared.CCVar;
 using Content.Shared.Chat; // Forge-Change
 using Content.Shared.Preferences;
@@ -35,6 +37,7 @@ namespace Content.Server.Preferences.Managers
         [Dependency] private IEntityManager _entityManager = default!;
         [Dependency] private PlayerRateLimitManager _rateLimit = default!; // Forge-Change
         [Dependency] private ISharedChatManager _chat = default!; // Forge-Change
+        [Dependency] private SponsorManager _sponsors = default!; // Forge-Change
 
         // Cache player prefs on the server so we don't need as much async hell related to them.
         private readonly Dictionary<NetUserId, PlayerPrefData> _cachedPlayerPrefs =
@@ -52,6 +55,7 @@ namespace Content.Server.Preferences.Managers
             _netManager.RegisterNetMessage<MsgSelectCharacter>(HandleSelectCharacterMessage);
             _netManager.RegisterNetMessage<MsgUpdateCharacter>(HandleUpdateCharacterMessage);
             _netManager.RegisterNetMessage<MsgDeleteCharacter>(HandleDeleteCharacterMessage);
+            _netManager.RegisterNetMessage<MsgUpdateSponsorPreferences>(HandleUpdateSponsorPreferencesMessage); // Forge-Change
             _sawmill = _log.GetSawmill("prefs");
             // Forge-Change-start
             _rateLimit.Register(ProfileUpdateRateLimitKey,
@@ -88,7 +92,8 @@ namespace Content.Server.Preferences.Managers
                 return;
             }
 
-            prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, index, curPrefs.AdminOOCColor);
+            prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, index, curPrefs.AdminOOCColor,
+                curPrefs.SponsorOOCColor, curPrefs.SponsorLOOCColor, curPrefs.SponsorGhostSkin); // Forge-Change
 
             if (ShouldStorePrefs(message.MsgChannel.AuthType))
             {
@@ -156,7 +161,8 @@ namespace Content.Server.Preferences.Managers
                     [slot] = profile
                 };
 
-                prefsData.Prefs = new PlayerPreferences(profiles, slot, curPrefs.AdminOOCColor);
+                prefsData.Prefs = new PlayerPreferences(profiles, slot, curPrefs.AdminOOCColor,
+                    curPrefs.SponsorOOCColor, curPrefs.SponsorLOOCColor, curPrefs.SponsorGhostSkin); // Forge-Change
 
                 if (ShouldStorePrefs(session.Channel.AuthType))
                     await _db.SaveCharacterSlotAsync(userId, profile, slot);
@@ -203,7 +209,8 @@ namespace Content.Server.Preferences.Managers
                 var arr = new Dictionary<int, ICharacterProfile>(curPrefs.Characters);
                 arr.Remove(slot);
 
-                prefsData.Prefs = new PlayerPreferences(arr, nextSlot ?? curPrefs.SelectedCharacterIndex, curPrefs.AdminOOCColor);
+                prefsData.Prefs = new PlayerPreferences(arr, nextSlot ?? curPrefs.SelectedCharacterIndex, curPrefs.AdminOOCColor,
+                    curPrefs.SponsorOOCColor, curPrefs.SponsorLOOCColor, curPrefs.SponsorGhostSkin); // Forge-Change
 
                 if (ShouldStorePrefs(message.MsgChannel.AuthType))
                 {
@@ -219,6 +226,52 @@ namespace Content.Server.Preferences.Managers
             });
             // Forge-Change-end
         }
+
+        // Forge-Change-Start: handle sponsor cosmetic preference updates from the lobby.
+        private async void HandleUpdateSponsorPreferencesMessage(MsgUpdateSponsorPreferences message)
+        {
+            var userId = message.MsgChannel.UserId;
+
+            if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
+            {
+                _sawmill.Warning($"User {userId} tried to modify sponsor preferences before they loaded.");
+                return;
+            }
+
+            // Only sponsors are allowed to set cosmetic preferences at all.
+            if (!_sponsors.TryGetSponsor(userId, out var level))
+                return;
+
+            var curPrefs = prefsData.Prefs!;
+
+            // Validate the requested ghost skin against the sponsor's level; keep the old one if not allowed.
+            var ghostSkin = message.GhostSkin ?? string.Empty;
+            if (!SponsorData.IsGhostSkinAllowed(level, ghostSkin))
+                ghostSkin = curPrefs.SponsorGhostSkin;
+
+            prefsData.Prefs = new PlayerPreferences(
+                curPrefs.Characters,
+                curPrefs.SelectedCharacterIndex,
+                curPrefs.AdminOOCColor,
+                message.OOCColor,
+                message.LOOCColor,
+                ghostSkin);
+
+            if (ShouldStorePrefs(message.MsgChannel.AuthType))
+                await _db.SaveSponsorPreferencesAsync(userId, message.OOCColor, message.LOOCColor, ghostSkin);
+
+            // Echo the authoritative state back so the client UI matches what the server accepted.
+            var response = new MsgPreferencesAndSettings
+            {
+                Preferences = prefsData.Prefs,
+                Settings = new GameSettings
+                {
+                    MaxCharacterSlots = MaxCharacterSlots
+                }
+            };
+            _netManager.ServerSendMessage(response, message.MsgChannel);
+        }
+        // Forge-Change-End
 
         // Should only be called via UserDbDataManager.
         public async Task LoadData(ICommonSession session, CancellationToken cancel)
@@ -398,7 +451,8 @@ namespace Content.Server.Preferences.Managers
             return new PlayerPreferences(prefs.Characters.Select(p =>
             {
                 return new KeyValuePair<int, ICharacterProfile>(p.Key, p.Value.Validated(session, collection));
-            }), prefs.SelectedCharacterIndex, prefs.AdminOOCColor);
+            }), prefs.SelectedCharacterIndex, prefs.AdminOOCColor,
+                prefs.SponsorOOCColor, prefs.SponsorLOOCColor, prefs.SponsorGhostSkin); // Forge-Change
         }
 
         public IEnumerable<KeyValuePair<NetUserId, ICharacterProfile>> GetSelectedProfilesForPlayers(

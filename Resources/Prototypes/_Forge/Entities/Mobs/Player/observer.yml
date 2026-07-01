@@ -1,0 +1,100 @@
+- type: entity
+  parent:
+  - Incorporeal
+  - BaseMob
+  id: SponsorMobObserverBase
+  name: observer
+  description: Boo!
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ContentEye
+    maxZoom: 1.44,1.44
+  - type: Eye
+    drawFov: false
+  - type: Input
+    context: "ghost"
+  - type: Examiner
+    skipChecks: true
+  - type: Ghost
+  - type: GhostHearing
+  - type: ShowElectrocutionHUD
+  - type: IntrinsicRadioReceiver
+  - type: ActiveRadio
+    receiveAllChannels: true
+    globalReceive: true
+  - type: Tag
+    tags:
+    - BypassInteractionRangeChecks
+  - type: LanguageSpeaker # Einstein Engines - Languages
+  - type: UniversalLanguageSpeaker # Einstein Engines - Languages
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: IntrinsicUI
+    uis:
+      enum.RadarConsoleUiKey.Key:
+        toggleAction: ActionObserverShowRadar
+  - type: RadarConsole
+    followEntity: true
+    hideCoords: true
+    noRotate: true # Mono
+  - type: ComplexInteraction # Needed to interact with innate radar console
+  - type: ShipyardSellCondition # Teleport to shipyard console on sale
+    preserveOnSale: true
+  # End Frontier
+  - type: SurgeryTarget
+  - type: Sanitized # Mono
+  - type: CollectiveMind
+    hearAll: true
+    seeAllNames: true
+
+- type: entity
+  parent: SponsorMobObserverBase
+  id: SponsorGhostSeraphim
+  name: Серафим
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Mobs/Player/Ghost/seraphim.rsi
+    state: animated
+
+- type: entity
+  parent: SponsorMobObserverBase
+  id: SponsorGhostMauler
+  name: Смэрть от Маулера
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Mobs/Player/Ghost/mauler.rsi
+    state: animated
+
+- type: entity
+  parent: SponsorMobObserverBase
+  id: SponsorGhostGuardian
+  name: Проклятый страж падшей империи
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Mobs/Player/Ghost/guardian.rsi
+    state: animated
+
+- type: entity
+  parent: SponsorMobObserverBase
+  id: SponsorGhostGatchi
+  name: Гачи Мучи
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Mobs/Player/Ghost/gachimuchi.rsi
+    state: animated
+
+- type: entity
+  parent: SponsorMobObserverBase
+  id: SponsorGhostRobast
+  name: Призрак истинного Робаста
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Mobs/Player/Ghost/robast.rsi
+    state: animated

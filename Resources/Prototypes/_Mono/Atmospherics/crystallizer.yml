@@ -56,8 +56,8 @@
     SheetPlastitanium10: 1
   dangerous: true
   minimumRequirements:
-  - 35     # oxygen
-  - 3     # nitrogen
+  - 60     # oxygen // Forge-change
+  - 5     # nitrogen // Forge-change
   - 8     # carbon dioxide
   - 9     # plasma
   - 3     # tritium

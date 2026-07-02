@@ -31,19 +31,20 @@
     SheetIridite1: 1
   dangerous: false
   minimumRequirements:
-  - 7     # oxygen
-  - 3     # nitrogen
-  - 3     # carbon dioxide
+# Forge start
+  - 150   # oxygen
+  - 20    # nitrogen
+  - 10    # carbon dioxide
   - 0     # plasma
-  - 2     # tritium
+  - 10    # tritium
   - 0     # vapor
   - 0     # ammonia
-  - 1     # n2o
-  - 2     # frezon
+  - 10    # n2o
+  - 5     # frezon
   - 0     # bz
   - 0     # healium
   - 0     # nitrium
-
+# Forge end
 
 - type: crystallizerRecipe
   id: Plastitanium
@@ -55,8 +56,8 @@
     SheetPlastitanium10: 1
   dangerous: true
   minimumRequirements:
-  - 35     # oxygen
-  - 3     # nitrogen
+  - 60     # oxygen // Forge-change
+  - 5     # nitrogen // Forge-change
   - 8     # carbon dioxide
   - 9     # plasma
   - 3     # tritium

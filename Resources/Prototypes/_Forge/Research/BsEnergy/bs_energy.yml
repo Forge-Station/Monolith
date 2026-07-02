@@ -5,7 +5,7 @@
   discipline: Industrial
   tier: 2
   cost: 20000
-  position: -1, 3
+  position: 0, 0
   technologyPrerequisites:
   - PowerGeneration
   - SuperParts
@@ -20,7 +20,7 @@
   discipline: Industrial
   tier: 3
   cost: 25000
-  position: -2, 3
+  position: 0, 0
   technologyPrerequisites:
   - BsEnergyTechT1
   recipeUnlocks:
@@ -34,7 +34,7 @@
   discipline: Industrial
   tier: 3
   cost: 30000
-  position: -3, 3
+  position: 0, 0
   technologyPrerequisites:
   - BsEnergyTechT2
   recipeUnlocks:

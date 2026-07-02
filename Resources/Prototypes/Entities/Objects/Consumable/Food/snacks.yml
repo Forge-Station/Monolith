@@ -84,7 +84,7 @@
           Quantity: 10
         - ReagentId: Lactozit
           Quantity: 0.5
-  # Forge-change-end   
+  # Forge-change-end
   - type: Item
   - type: Food
     trash:
@@ -535,6 +535,7 @@
   - type: Tag
     tags:
     - Trash
+    - GoblinPreciousTrash # Forge-Change
   # - type: TimedDespawn Forge-Change-Del
   #   lifetime: 600 Forge-Change-Del
   - type: PhysicalComposition

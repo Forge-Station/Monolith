@@ -782,6 +782,21 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("selected_character_slot");
 
+                    b.Property<string>("SponsorGhostSkin")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("sponsor_ghost_skin");
+
+                    b.Property<string>("SponsorLOOCColor")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("sponsor_looc_color");
+
+                    b.Property<string>("SponsorOOCColor")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("sponsor_ooc_color");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT")
                         .HasColumnName("user_id");

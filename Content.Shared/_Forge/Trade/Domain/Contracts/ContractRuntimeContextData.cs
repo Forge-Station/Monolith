@@ -8,6 +8,7 @@ namespace Content.Shared._Forge.Trade;
 public sealed class ContractRuntimeContextData
 {
     public int AcceptTimeoutRemainingSeconds;
+    public int ActiveTimeRemainingSeconds;
     public bool Failed;
 
     public string FailureReason = string.Empty;

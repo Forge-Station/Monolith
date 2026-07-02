@@ -133,7 +133,8 @@ public sealed partial class NcContractSystem : EntitySystem
 
             if (contract.IsGhostRoleObjective ||
                 contract.IsTrackedDeliveryObjective ||
-                contract.AllowsStoreWorldTurnIn)
+                contract.AllowsStoreWorldTurnIn ||
+                contract.ActiveExpiresAt != null)
                 return true;
         }
 

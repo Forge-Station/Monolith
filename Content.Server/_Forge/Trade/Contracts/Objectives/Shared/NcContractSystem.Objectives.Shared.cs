@@ -109,11 +109,13 @@ public sealed partial class NcContractSystem : EntitySystem
         var runtime = contract.Runtime;
         runtime.GhostRolePendingAcceptance = false;
         runtime.AcceptTimeoutRemainingSeconds = 0;
+        runtime.ActiveTimeRemainingSeconds = 0;
         runtime.GhostRoleSurvivalRemainingSeconds = 0;
         runtime.Failed = false;
         runtime.Outcome = ContractObjectiveOutcome.None;
         runtime.FailureReason = string.Empty;
         runtime.StatusHint = string.Empty;
+        contract.ActiveExpiresAt = null;
     }
 
     private static void ResetObjectiveState(ContractServerData contract)
@@ -147,6 +149,8 @@ public sealed partial class NcContractSystem : EntitySystem
     private static void MarkObjectiveComplete(ContractServerData contract)
     {
         contract.Runtime.Outcome = ContractObjectiveOutcome.Success;
+        contract.Runtime.ActiveTimeRemainingSeconds = 0;
+        contract.ActiveExpiresAt = null;
         SetObjectiveStage(contract, contract.Runtime.StageGoal);
     }
 
@@ -163,7 +167,9 @@ public sealed partial class NcContractSystem : EntitySystem
         runtime.StatusHint = failureReason;
         runtime.GhostRolePendingAcceptance = false;
         runtime.AcceptTimeoutRemainingSeconds = 0;
+        runtime.ActiveTimeRemainingSeconds = 0;
         runtime.GhostRoleSurvivalRemainingSeconds = 0;
+        contract.ActiveExpiresAt = null;
         SyncContractFlowStatus(contract);
     }
 }

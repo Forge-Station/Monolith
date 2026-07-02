@@ -24,6 +24,12 @@
 - Уникальные песнопения.
 - Врождённое знание Гоблинского жаргона.
 - Способны создавать устройства разной сложности из хлама.
+<Box>
+  <GuideEntityEmbed Entity="NFGoblinMadeMultitool" Caption=""/>
+  <GuideEntityEmbed Entity="NFGoblinMadeCrowbar" Caption=""/>
+  <GuideEntityEmbed Entity="NFGoblinMadeMiningDrill" Caption=""/>
+  <GuideEntityEmbed Entity="NFGoblinMadeRemoteSignaller" Caption=""/>
+</Box>
 
 ## Недостатки
 

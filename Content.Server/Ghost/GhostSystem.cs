@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server._Forge.Sponsor; // Forge-Change
+using Content.Shared._Forge.Sponsor; // Forge-Change
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers; // Frontier
 using Content.Server.Cargo.Systems; // Frontier
@@ -599,10 +600,17 @@ namespace Content.Server.Ghost
             var user = mind.Comp.UserId;
             try
             {
-                if (user != null && _sponsors.TryGetSponsor(user.Value, out var level)
-                                 && _sponsors.TryGetSponsorGhost(level, out var sponsorGhost))
+                if (user != null && _sponsors.TryGetSponsor(user.Value, out var level))
                 {
-                    ghost = Spawn(sponsorGhost, spawnPosition.Value);
+                    // Forge-Change: prefer the sponsor's explicitly chosen ghost skin (validated against their level),
+                    // then fall back to the default skin tied to their level, then to the normal observer.
+                    var chosenSkin = _preferencesManager.GetPreferencesOrNull(user.Value)?.SponsorGhostSkin;
+                    if (!string.IsNullOrEmpty(chosenSkin) && SponsorData.IsGhostSkinAllowed(level, chosenSkin))
+                        ghost = Spawn(chosenSkin, spawnPosition.Value);
+                    else if (_sponsors.TryGetSponsorGhost(level, out var sponsorGhost))
+                        ghost = Spawn(sponsorGhost, spawnPosition.Value);
+                    else
+                        ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
                 }
                 else
                 {
@@ -673,11 +681,22 @@ namespace Content.Server.Ghost
             if (!_admin.IsAdmin(session))
                 return;
 
+            // Never tint custom ghost skins (e.g. sponsor skins) — keep their original sprite colors.
+            // Only the default observer prototypes may be recolored.
+            if (TryComp<MetaDataComponent>(ghostEntity, out var meta)
+                && meta.EntityPrototype != null
+                && meta.EntityPrototype.ID != GameTicker.ObserverPrototypeName
+                && meta.EntityPrototype.ID != GameTicker.AdminObserverPrototypeName)
+                return;
+
             if (!_preferencesManager.TryGetCachedPreferences(session.UserId, out var prefs))
                 return;
 
-            // Only apply the color if it's not transparent (the default)
-            if (prefs.AdminOOCColor == Color.Transparent)
+            // Only tint the ghost sprite when the admin explicitly chose a color.
+            // Transparent is the "unset" sentinel; Red is the legacy DB default that every admin
+            // who never ran setadminooc still has, which would otherwise turn every admin ghost red.
+            // Both are treated as "no custom color" so the original sprite color is preserved.
+            if (prefs.AdminOOCColor == Color.Transparent || prefs.AdminOOCColor == Color.Red)
                 return;
 
             // Make the color slightly transparent for ghosts

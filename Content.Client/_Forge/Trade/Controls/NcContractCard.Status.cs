@@ -324,6 +324,26 @@ public sealed partial class NcContractCard
                 ("time", FormatCountdown(data.Runtime.GhostRoleSurvivalRemainingSeconds)))
             : string.Empty;
 
+    private static string BuildActiveDeadlineStatusText(ContractClientData data, string statusText)
+    {
+        if (!data.Taken ||
+            data.Runtime.ActiveTimeRemainingSeconds <= 0 ||
+            data.FlowStatus is not (
+                ContractFlowStatus.InProgress or
+                ContractFlowStatus.AwaitingActivation))
+        {
+            return statusText;
+        }
+
+        var deadline = Loc.GetString(
+            "nc-store-contract-active-deadline-line",
+            ("time", FormatCountdown(data.Runtime.ActiveTimeRemainingSeconds)));
+
+        return string.IsNullOrWhiteSpace(statusText)
+            ? deadline
+            : $"{deadline} {statusText}";
+    }
+
     private static string BuildGhostRoleActionHintText(ContractClientData data)
     {
         if (IsGhostRoleAwaitingAcceptance(data))

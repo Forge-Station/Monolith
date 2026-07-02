@@ -27,6 +27,8 @@ public sealed partial class NcContractSystem : EntitySystem
         var config = new ContractObjectiveConfigData
         {
             GivePinpointer = true,
+            GridName = proto.GridName,
+            GridNames = CloneStringList(proto.GridNames),
             ProofPrototype = proto.Completion.Mode == NcHuntCompletionMode.TrophyTurnIn
                 ? proto.Completion.Trophy
                 : string.Empty,
@@ -55,6 +57,7 @@ public sealed partial class NcContractSystem : EntitySystem
             Description = proto.Description,
             Repeatable = proto.Repeatable,
             Taken = false,
+            ActiveTimeLimitSeconds = proto.ActiveTimeLimitSeconds,
             ObjectiveType = ContractObjectiveType.Hunt,
             ExecutionKind = ContractExecutionKind.HuntObjective,
             Runtime = runtime,
@@ -88,6 +91,19 @@ public sealed partial class NcContractSystem : EntitySystem
                     Prototype = entry.Prototype,
                     Weight = entry.Weight,
                 });
+        }
+
+        return result;
+    }
+
+    private static List<string> CloneStringList(IReadOnlyList<string> source)
+    {
+        var result = new List<string>(source.Count);
+        for (var i = 0; i < source.Count; i++)
+        {
+            var value = source[i];
+            if (!string.IsNullOrWhiteSpace(value))
+                result.Add(value);
         }
 
         return result;

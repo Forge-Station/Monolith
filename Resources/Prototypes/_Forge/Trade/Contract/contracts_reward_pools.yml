@@ -126,6 +126,10 @@
     count: { min: 1, max: 2 }
     weight: 3
   - type: Item
+    prototype: ClothingOuterHardsuitERTLeader
+    count: 1
+    weight: 1
+  - type: Item
     prototype: SpawnDungeonLootHardsuitsSalvage
     count: 1
     weight: 1
@@ -165,6 +169,18 @@
     currency: BankCredit
     count: { min: 15000, max: 30000 }
     weight: 2
+
+- type: ncSupplyRewardPool
+  id: ForgeArtifactStudyResearchGeneratorChance
+  entries:
+  - type: None
+    count: 1
+    weight: 19
+  - type: Item
+    prototype: DatafarmResearch
+    count: 1
+    weight: 1
+    max: 1
 
 - type: ncSupplyRewardPool
   id: ForgeExpeditionRewardBasicWeapons

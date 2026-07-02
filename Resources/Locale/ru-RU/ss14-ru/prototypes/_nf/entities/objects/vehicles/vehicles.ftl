@@ -32,3 +32,5 @@ ent-NFVehicleJanicart = уборочная машина
 ent-NFVehicleJanicartKey = { ent-NFVehicleJanicart }
     .suffix = С ключом
     .desc = { ent-NFVehicleJanicart.desc }
+ent-NFGoblinMadeVehicleDumpster = мусоровоз
+    .desc = Весь мусор всегда ввожу собой!

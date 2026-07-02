@@ -1,0 +1,118 @@
+# Forge-Change-Start
+#region trash box
+- type: entity
+  id: TrashBox
+  parent: BaseStructureDynamic
+  name: dumpster
+  description: A large storage container for holding trash. It smells like the big city.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: /Textures/_NF/Structures/Storage/magnetbox.rsi
+    layers:
+    - state: rubbishbox
+    - state: rubbishbox-top
+      map: [ top ]
+      visible: true
+    - state: controller
+    - state: controller-on
+      visible: False
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      shader: unshaded
+  - type: StaticPrice
+    price: 625
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 3
+            max: 5
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Climbable
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        top:
+          True: { visible: false }
+          False: { visible: true }
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: Dumpable
+  - type: MagnetPickup
+    range: 1.5 # Ore bag has a range of 1.0
+    magnetEnabled: false
+    magnetCanBeEnabled: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        density: 20
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer
+  - type: ItemToggle
+    soundActivate: &soundActivate
+      collection: sparks
+      params:
+        variation: 0.25
+    soundDeactivate: *soundActivate
+    onUse: false
+    onAltUse: true
+    onActivate: false
+  - type: ItemToggleExamine
+    on: item-toggle-examine-magnet-on
+    off: item-toggle-examine-magnet-off
+  - type: Tag
+    tags:
+    - GoblinVehicle
+  - type: Flammable
+    fireSpread: true
+    canResistFire: true
+    damage: #per second, scales with number of fire 'stacks'
+      types:
+        Heat: 1.5
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Generic_mob_burning
+  - type: Storage
+    grid:
+    - 0,0,19,9 # DeltaV: Expanded to ore bag of holding storage
+    storageOpenSound: /Audio/Effects/closetopen.ogg
+    storageCloseSound: /Audio/Effects/closetclose.ogg
+    whitelist:
+      tags:
+      - Recyclable
+      - Trash
+    maxItemSize: Huge # so you can pick up scrap chunks
+    # Forge-Change-End

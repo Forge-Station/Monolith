@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._Forge.Sponsor; // Forge-Change
 using Content.Shared._Mono.Company;
 using Content.Shared.CCVar;
 using Content.Shared.Preferences;
@@ -35,6 +36,7 @@ namespace Content.Client.Lobby
             _netManager.RegisterNetMessage<MsgUpdateCharacter>();
             _netManager.RegisterNetMessage<MsgSelectCharacter>();
             _netManager.RegisterNetMessage<MsgDeleteCharacter>();
+            _netManager.RegisterNetMessage<MsgUpdateSponsorPreferences>(); // Forge-Change
 
             _baseClient.RunLevelChanged += BaseClientOnRunLevelChanged;
         }
@@ -55,7 +57,8 @@ namespace Content.Client.Lobby
 
         public void SelectCharacter(int slot)
         {
-            Preferences = new PlayerPreferences(Preferences.Characters, slot, Preferences.AdminOOCColor);
+            Preferences = new PlayerPreferences(Preferences.Characters, slot, Preferences.AdminOOCColor,
+                Preferences.SponsorOOCColor, Preferences.SponsorLOOCColor, Preferences.SponsorGhostSkin); // Forge-Change
             var msg = new MsgSelectCharacter
             {
                 SelectedCharacterIndex = slot
@@ -87,7 +90,8 @@ namespace Content.Client.Lobby
 
             profile.EnsureValid(_playerManager.LocalSession!, collection);
             var characters = new Dictionary<int, ICharacterProfile>(Preferences.Characters) {[slot] = profile};
-            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor);
+            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor,
+                Preferences.SponsorOOCColor, Preferences.SponsorLOOCColor, Preferences.SponsorGhostSkin); // Forge-Change
             var msg = new MsgUpdateCharacter
             {
                 Profile = profile,
@@ -120,7 +124,8 @@ namespace Content.Client.Lobby
 
             var l = lowest.Value;
             characters.Add(l, profile);
-            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor);
+            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor,
+                Preferences.SponsorOOCColor, Preferences.SponsorLOOCColor, Preferences.SponsorGhostSkin); // Forge-Change
 
             UpdateCharacter(profile, l);
         }
@@ -133,10 +138,32 @@ namespace Content.Client.Lobby
         public void DeleteCharacter(int slot)
         {
             var characters = Preferences.Characters.Where(p => p.Key != slot);
-            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor);
+            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor,
+                Preferences.SponsorOOCColor, Preferences.SponsorLOOCColor, Preferences.SponsorGhostSkin); // Forge-Change
             var msg = new MsgDeleteCharacter
             {
                 Slot = slot
+            };
+            _netManager.ClientSendMessage(msg);
+        }
+
+        // Forge-Change: optimistically update local sponsor cosmetics and ask the server to persist them.
+        // The server validates sponsorship/level and echoes authoritative prefs back via MsgPreferencesAndSettings.
+        public void UpdateSponsorPreferences(Color oocColor, Color loocColor, string ghostSkin)
+        {
+            Preferences = new PlayerPreferences(
+                Preferences.Characters,
+                Preferences.SelectedCharacterIndex,
+                Preferences.AdminOOCColor,
+                oocColor,
+                loocColor,
+                ghostSkin ?? string.Empty);
+
+            var msg = new MsgUpdateSponsorPreferences
+            {
+                OOCColor = oocColor,
+                LOOCColor = loocColor,
+                GhostSkin = ghostSkin ?? string.Empty
             };
             _netManager.ClientSendMessage(msg);
         }
@@ -171,7 +198,8 @@ namespace Content.Client.Lobby
 
                 if (needsUpdate)
                 {
-                    Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor);
+                    Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor,
+                Preferences.SponsorOOCColor, Preferences.SponsorLOOCColor, Preferences.SponsorGhostSkin); // Forge-Change
 
                     // Update the selected character on the server if needed
                     var selectedIndex = Preferences.SelectedCharacterIndex;

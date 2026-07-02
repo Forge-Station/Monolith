@@ -32,6 +32,8 @@
   name: brain
   description: "The central hub of a diona's pseudo-neurological activity, its root-like tendrils search for its former body."
   components:
+  - type: OrganPhysiology # Forge-change
+    organ: Brain
   - type: MindContainer
     showExamineInfo: true
   - type: Speech

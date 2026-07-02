@@ -3,7 +3,7 @@
   parent: BaseVessel
   name: EUS КостеЛом
   description: КостеЛом - шаттл для настоящих утилизаторов, достаточно защищеный, но для атаки не предназначен. Может постоять за себя.
-  price: 126000
+  price: 135000 #PR:238 price UP
   category: Small
   group: Empire
   access: Empire

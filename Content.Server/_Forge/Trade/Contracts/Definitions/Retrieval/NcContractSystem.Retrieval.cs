@@ -22,6 +22,7 @@ public sealed partial class NcContractSystem : EntitySystem
             Description = proto.Description,
             Repeatable = proto.Repeatable,
             Taken = false,
+            ActiveTimeLimitSeconds = proto.ActiveTimeLimitSeconds,
             ObjectiveType = ContractObjectiveType.Delivery,
             ExecutionKind = ResolveRetrievalExecutionKind(config),
             Runtime = new ContractRuntimeContextData(),

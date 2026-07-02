@@ -25,6 +25,9 @@ public sealed partial class NcRetrievalContractPrototype : IPrototype
     [DataField("icon")]
     public string Icon { get; private set; } = string.Empty;
 
+    [DataField("activeTimeLimitSeconds")]
+    public int ActiveTimeLimitSeconds { get; private set; } = 40 * 60;
+
     /// <summary>Retrieval cargo spawned by the route source. This replaces Retrieval Stage 1/2 'targets'.</summary>
     [DataField("cargo", required: true)]
     public List<NcSupplyTargetEntry> Cargo { get; private set; } = new();

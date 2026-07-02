@@ -1,0 +1,133 @@
+﻿#BsTransmitter Board
+- type: entity
+  id: BsTransmitterCircuitboardT1
+  parent: BaseMachineCircuitboard
+  name: bluespace transmitter board T1
+  description: bluespace transmitter board T1
+  components:
+  - type: MachineBoard
+    prototype: BsTransmitterT1
+    frameSize: 1x1
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 3
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Steel: 20
+      Glass: 20
+      Gold: 20
+      Silver: 20
+      UraniumFissile: 2
+      Diamond: 1
+      Bluespace: 1
+
+- type: entity
+  id: BsTransmitterCircuitboardT2
+  parent: BaseMachineCircuitboard
+  name: bluespace transmitter board T2
+  description: bluespace transmitter board T2
+  components:
+  - type: MachineBoard
+    prototype: BsTransmitterT2
+    frameSize: 2x2
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 3
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Steel: 40
+      Glass: 40
+      Gold: 40
+      Silver: 40
+      UraniumFissile: 3
+      Diamond: 2
+      Bluespace: 2
+
+- type: entity
+  id: BsTransmitterCircuitboardT3
+  parent: BaseMachineCircuitboard
+  name: bluespace transmitter board T3
+  description: bluespace transmitter board T3
+  components:
+  - type: MachineBoard
+    prototype: BsTransmitterT3
+    frameSize: 3x3
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 3
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Steel: 80
+      Glass: 80
+      Gold: 80
+      Silver: 80
+      UraniumFissile: 4
+      Diamond: 3
+      Bluespace: 3
+
+#BsReceiver Board
+- type: entity
+  id: BsReceiverCircuitboardT1
+  parent: BaseMachineCircuitboard
+  name: bluespace receiver board T1
+  description: bluespace receiver board T1
+  components:
+  - type: MachineBoard
+    prototype: BsReceiverT1
+    frameSize: 1x1
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 3
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Steel: 20
+      Glass: 20
+      Gold: 20
+      Silver: 20
+      UraniumFissile: 2
+      Diamond: 1
+      Bluespace: 1
+
+- type: entity
+  id: BsReceiverCircuitboardT2
+  parent: BaseMachineCircuitboard
+  name: bluespace receiver board T2
+  description: bluespace receiver board T2
+  components:
+  - type: MachineBoard
+    prototype: BsReceiverT2
+    frameSize: 2x2
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 3
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Steel: 40
+      Glass: 40
+      Gold: 40
+      Silver: 40
+      UraniumFissile: 3
+      Diamond: 2
+      Bluespace: 2
+
+- type: entity
+  id: BsReceiverCircuitboardT3
+  parent: BaseMachineCircuitboard
+  name: bluespace receiver board T3
+  description: bluespace receiver board T3
+  components:
+  - type: MachineBoard
+    prototype: BsReceiverT3
+    frameSize: 3x3
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 3
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Steel: 80
+      Glass: 80
+      Gold: 80
+      Silver: 80
+      UraniumFissile: 4
+      Diamond: 3
+      Bluespace: 3

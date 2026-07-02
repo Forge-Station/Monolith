@@ -160,6 +160,7 @@ public sealed partial class StoreStructuredSystem
             Stage = runtime.Stage,
             StageGoal = runtime.StageGoal,
             AcceptTimeoutRemainingSeconds = runtime.AcceptTimeoutRemainingSeconds,
+            ActiveTimeRemainingSeconds = runtime.ActiveTimeRemainingSeconds,
             GhostRoleSurvivalRemainingSeconds = runtime.GhostRoleSurvivalRemainingSeconds,
             GhostRolePendingAcceptance = runtime.GhostRolePendingAcceptance,
             Failed = runtime.Failed,

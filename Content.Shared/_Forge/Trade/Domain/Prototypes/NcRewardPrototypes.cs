@@ -33,6 +33,7 @@ public sealed partial class NcSupplyRewardEntry
 /// <summary>
 ///     Strict Trade reward pool shared by Trade contracts and Barter receivePools.
 ///     Use count + weight only; entries target prototype/currency/pool by reward type.
+///     None entries are allowed in pools to represent an explicit no-drop outcome.
 ///     Old id/amount/prob/chance/options aliases are intentionally not represented.
 ///     The audit rejects them so reward YAML stays on the strict type + id + count shape.
 /// </summary>

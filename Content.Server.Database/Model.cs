@@ -402,6 +402,10 @@ namespace Content.Server.Database
         public int SelectedCharacterSlot { get; set; }
         public string AdminOOCColor { get; set; } = null!;
         public long MonoCoins { get; set; } = 0;
+        // Forge-Change: sponsor cosmetics. Empty string means "not set, use defaults".
+        public string SponsorOOCColor { get; set; } = "";
+        public string SponsorLOOCColor { get; set; } = "";
+        public string SponsorGhostSkin { get; set; } = "";
         public List<Profile> Profiles { get; } = new();
     }
 

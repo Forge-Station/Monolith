@@ -442,7 +442,6 @@
     - !type:NestedSelector
       tableId: PoiTreasuryLootMedLight
       weight: 1.5
-    - id: FoodTinBeans
     - !type:EntSelector
       id: FoodTinBeans
       amount: !type:ConstantNumberSelector
@@ -487,6 +486,7 @@
     - !type:NestedSelector
       tableId: PoiTreasuryLootMaterialsCommon
       weight: 2
+    - !type:EntSelector      
     - id: SheetPlastitanium1   
       amount: !type:ConstantNumberSelector
         value: 15

@@ -1,3 +1,4 @@
+using System.Linq;
 
 namespace Content.Shared._Forge.Sponsor;
 
@@ -45,12 +46,12 @@ public sealed class SponsorData
         { SponsorLevel.Level6, "Демиург Форжа" }
     };
 
-    public static readonly Dictionary<SponsorLevel, string> SponsorGhost = new()
+    // Each level can unlock several ghost skins; list as many entity prototype ids as needed.
+    public static readonly Dictionary<SponsorLevel, List<string>> SponsorGhost = new()
     {
-        { SponsorLevel.Level3, "MobObserver" },
-        { SponsorLevel.Level4, "MobObserver" },
-        { SponsorLevel.Level5, "MobObserver" },
-        { SponsorLevel.Level6, "MobObserver" }
+        { SponsorLevel.Level1, new() { "SponsorGhostRobast" } },
+        { SponsorLevel.Level3, new() { "SponsorGhostMauler", "SponsorGhostGuardian" } },
+        { SponsorLevel.Level4, new() { "SponsorGhostSeraphim", "SponsorGhostGatchi" } },
     };
 
     public static SponsorLevel ParseRoles(List<string> roles)
@@ -64,6 +65,50 @@ public sealed class SponsorData
         }
 
         return highestRole;
+    }
+
+    /// <summary>
+    ///     Returns the ghost skins (entity prototype id + minimum required level) a sponsor of the
+    ///     given level can choose from, taken from <see cref="SponsorGhost"/>. Duplicate entity ids
+    ///     are collapsed to their lowest required level.
+    /// </summary>
+    public static IReadOnlyList<(string EntityId, SponsorLevel RequiredLevel)> GetAvailableGhostSkins(SponsorLevel level)
+    {
+        var lowestByEntity = new Dictionary<string, SponsorLevel>();
+        foreach (var (requiredLevel, entityIds) in SponsorGhost)
+        {
+            if (level < requiredLevel)
+                continue;
+
+            foreach (var entityId in entityIds)
+            {
+                if (!lowestByEntity.TryGetValue(entityId, out var existing) || requiredLevel < existing)
+                    lowestByEntity[entityId] = requiredLevel;
+            }
+        }
+
+        return lowestByEntity
+            .Select(kv => (kv.Key, kv.Value))
+            .OrderBy(x => (byte) x.Value)
+            .ToList();
+    }
+
+    /// <summary>
+    ///     Whether a sponsor of <paramref name="playerLevel"/> is allowed to use the given ghost skin.
+    ///     An empty skin id is always allowed (default observer).
+    /// </summary>
+    public static bool IsGhostSkinAllowed(SponsorLevel playerLevel, string? skinId)
+    {
+        if (string.IsNullOrEmpty(skinId))
+            return true;
+
+        foreach (var (requiredLevel, entityIds) in SponsorGhost)
+        {
+            if (entityIds.Contains(skinId) && playerLevel >= requiredLevel)
+                return true;
+        }
+
+        return false;
     }
 }
 

@@ -1,0 +1,71 @@
+- type: entity
+  id: CrewMonitoringRenegadeServer
+  parent: [CrewMonitoringServer, BaseStructureDisableToolUse]
+  suffix: Renegade
+  name: crew renegade monitoring server
+  description: Receives and relays the status of all active renegade implant sensors.
+  components:
+    - type: Sprite
+      sprite: Forge/Structures/Machines/server.rsi
+      layers:
+        - state: server-crew
+        - state: variant-crew-renegade
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: CrewRenegadeMonitor
+      receiveFrequencyId: SuitRenegadeSensor
+      autoConnect: false
+
+- type: entity
+  id: CrewMonitoringTSFServer
+  parent: [CrewMonitoringServer, BaseStructureDisableToolUse]
+  suffix: TSF
+  name: crew TSF monitoring server
+  description: Receives and relays the status of all active TSF implant sensors.
+  components:
+    - type: Sprite
+      sprite: Forge/Structures/Machines/server.rsi
+      layers:
+        - state: server-crew
+        - state: variant-crew-tsf
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: CrewTSFMonitor
+      receiveFrequencyId: SuitTSFSensor
+      autoConnect: false
+
+- type: entity
+  id: CrewMonitoringNanotrasenServer
+  parent: [CrewMonitoringServer, BaseStructureDisableToolUse]
+  suffix: NT
+  name: crew NT monitoring server
+  description: Receives and relays the status of all active NT and TTI implant sensors.
+  components:
+    - type: Sprite
+      sprite: Forge/Structures/Machines/server.rsi
+      layers:
+        - state: server-crew
+        - state: variant-crew-nt
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: CrewNanotrasenMonitor
+      receiveFrequencyId: SuitNanotrasenSensor
+      autoConnect: false
+
+- type: entity
+  id: CrewMonitoringEmpireServer
+  parent: [CrewMonitoringServer, BaseStructureDisableToolUse]
+  suffix: Empire
+  name: crew empire monitoring server
+  description: Receives and relays the status of all active empire implant sensors.
+  components:
+    - type: Sprite
+      sprite: Forge/Structures/Machines/server.rsi
+      layers:
+        - state: server-crew
+        - state: variant-crew-empire
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: CrewEmpireMonitor
+      receiveFrequencyId: SuitEmpireSensor
+      autoConnect: false

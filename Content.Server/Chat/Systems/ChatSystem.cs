@@ -6,6 +6,8 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.Discord.DiscordLink;
+using Content.Server._Forge.Sponsor; // Forge-Change
+using Content.Server.Preferences.Managers; // Forge-Change
 using Content.Server.GameTicking;
 using Content.Server._EinsteinEngines.Language; // Einstein Engines - Language
 using Content.Server.Speech; // Einstein Engines - Language
@@ -69,6 +71,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private ExamineSystemShared _examineSystem = default!;
     [Dependency] private DiscordChatLink _discordLink = default!;
+    [Dependency] private SponsorManager _sponsors = default!; // Forge-Change
+    [Dependency] private IServerPreferencesManager _preferencesManager = default!; // Forge-Change
     [Dependency] private LanguageSystem _language = default!; // Einstein Engines - Language
     [Dependency] private CollectiveMindUpdateSystem _collectiveMind = default!; // Goobstation - Starlight collective mind port
 
@@ -837,6 +841,18 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedMessage = Loc.GetString("chat-manager-entity-looc-wrap-message",
             ("entityName", name),
             ("message", FormattedMessage.EscapeText(message)));
+
+        // Forge-Change: color the LOOC name with the sponsor's chosen custom color, if any.
+        if (!_adminManager.IsAdmin(player)
+            && _sponsors.TryGetSponsor(player.UserId, out _)
+            && _preferencesManager.GetPreferencesOrNull(player.UserId) is { } loocPrefs
+            && loocPrefs.SponsorLOOCColor != Color.Transparent)
+        {
+            wrappedMessage = Loc.GetString("chat-manager-entity-looc-patron-wrap-message",
+                ("patronColor", loocPrefs.SponsorLOOCColor.ToHex()),
+                ("entityName", name),
+                ("message", FormattedMessage.EscapeText(message)));
+        }
 
         SendInVoiceRange(ChatChannel.LOOC, name, message, wrappedMessage,
             obfuscated: string.Empty,

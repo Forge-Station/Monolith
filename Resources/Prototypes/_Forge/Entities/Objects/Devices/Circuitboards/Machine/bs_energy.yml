@@ -7,7 +7,6 @@
   components:
   - type: MachineBoard
     prototype: BsTransmitterT1
-    frameSize: 1x1
     componentRequirements:
       AmeFuelContainer:
         amount: 3
@@ -42,6 +41,9 @@
       UraniumFissile: 3
       Diamond: 2
       Bluespace: 2
+  - type: Tag
+    tags:
+    - MachineBoard2x2
 
 - type: entity
   id: BsTransmitterCircuitboardT3
@@ -64,6 +66,9 @@
       UraniumFissile: 4
       Diamond: 3
       Bluespace: 3
+  - type: Tag
+    tags:
+    - MachineBoard3x3
 
 #BsReceiver Board
 - type: entity
@@ -74,7 +79,6 @@
   components:
   - type: MachineBoard
     prototype: BsReceiverT1
-    frameSize: 1x1
     componentRequirements:
       AmeFuelContainer:
         amount: 3
@@ -109,6 +113,9 @@
       UraniumFissile: 3
       Diamond: 2
       Bluespace: 2
+  - type: Tag
+    tags:
+    - MachineBoard2x2
 
 - type: entity
   id: BsReceiverCircuitboardT3
@@ -131,3 +138,6 @@
       UraniumFissile: 4
       Diamond: 3
       Bluespace: 3
+  - type: Tag
+    tags:
+    - MachineBoard3x3

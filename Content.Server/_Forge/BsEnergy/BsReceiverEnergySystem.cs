@@ -249,7 +249,7 @@ public sealed class BsReceiverEnergySystem : EntitySystem
 
     private void OnWithdraw(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, WithdrawMessage args)
     {
-        if (args.Actor is not { Valid : true } player || (int)receiverEnergyComponent.Money > 0)
+        if (args.Actor is not { Valid : true } player || (int)receiverEnergyComponent.Money <= 0)
             return;
 
         var stackPrototype = _prototypeManager.Index<StackPrototype>("Credit");

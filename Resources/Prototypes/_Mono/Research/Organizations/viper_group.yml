@@ -6,7 +6,7 @@
   tier: 1
   cost: 10000 # Forge-change
   recipeUnlocks:
-#  - ClothingNeckViperGroupMantle Forge-change
+  - ClothingNeckViperGroupMantle
   - ClothingUniformJumpsuitViperGroupUniform
   - ClothingUniformJumpsuitViperGroupTurtleneck
   - ClothingUniformJumpsuitViperGroupTankTop # Forge-change

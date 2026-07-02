@@ -308,10 +308,18 @@ internal sealed partial class ChatManager : IChatManager
         }
         // Forge-Change-Start
         if (_sponsors.TryGetSponsor(player.UserId, out SponsorLevel level)
-            && _sponsors.TryGetSponsorColor(level, out var sponsorColor)
             && !_adminManager.HasAdminFlag(player, AdminFlags.Admin))
         {
-            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", sponsorColor), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+            // Prefer the sponsor's chosen custom OOC color; fall back to the color tied to their level.
+            string? sponsorOocColor = null;
+            var sponsorPrefs = _preferencesManager.GetPreferencesOrNull(player.UserId);
+            if (sponsorPrefs != null && sponsorPrefs.SponsorOOCColor != Color.Transparent)
+                sponsorOocColor = sponsorPrefs.SponsorOOCColor.ToHex();
+            else if (_sponsors.TryGetSponsorColor(level, out var sponsorColor))
+                sponsorOocColor = sponsorColor;
+
+            if (sponsorOocColor != null)
+                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", sponsorOocColor), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
         }
         // Forge-Change-End
         if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) && player.Channel.UserData.PatronTier is { } patron && PatronOocColors.TryGetValue(patron, out var patronColor))

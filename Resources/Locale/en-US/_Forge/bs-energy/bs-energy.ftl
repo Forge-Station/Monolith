@@ -68,7 +68,7 @@ ui-bs-receiver-requested-power-label = Requested:
 ui-bs-receiver-money-time-label = Time Left:
 ui-bs-receiver-money-lost-label = Expenses:
 ui-bs-receiver-money-label = Balance:
-ui-bs-receiver-withdraw-button = Withdraw
+ui-bs-receiver-withdraw-button = Withdraw Funds
 ui-bs-receiver-transmitters-label = Available Energy Sellers
 ui-bs-receiver-draw-rate-label = Grid Load:
 

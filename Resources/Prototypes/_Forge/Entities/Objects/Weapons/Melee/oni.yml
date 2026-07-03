@@ -16,7 +16,7 @@
     range: 2.5
     damage:
       types:
-        Slash: 75
+        Slash: 45
         Structural: 30
         Bloodloss: 50
     soundHit:
@@ -109,8 +109,8 @@
     range: 1.5
     damage:
       types:
-        Piercing: 50
-        Slash: 50
+        Piercing: 30
+        Slash: 30
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: StaminaDamageOnHit
@@ -152,8 +152,8 @@
     range: 1.5
     damage:
       types:
-        Slash: 50
-        Structural: 30
+        Slash: 30
+        Structural: 50
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Reflect

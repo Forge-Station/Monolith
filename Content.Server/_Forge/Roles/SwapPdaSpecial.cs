@@ -71,13 +71,8 @@ public sealed partial class SwapPdaSpecial : JobSpecial
         if (entMan.TryGetComponent<AccessComponent>(cardId, out var oldAccess))
             tags = new HashSet<ProtoId<AccessLevelPrototype>>(oldAccess.Tags);
 
-        // Out with the old.
-        inv.TryUnequip(mob, "id", force: true);
-        entMan.QueueDeleteEntity(cardId);
-        if (oldPda != null)
-            entMan.QueueDeleteEntity(oldPda.Value);
-
-        // In with the branded one.
+        // In with the branded one first, so the mob is never left without an ID card if something
+        // goes wrong (e.g. a tickrate hiccup) between spawning and equipping.
         var coords = entMan.GetComponent<TransformComponent>(mob).Coordinates;
         var newPda = entMan.SpawnEntity(Pda, coords);
 
@@ -102,6 +97,12 @@ public sealed partial class SwapPdaSpecial : JobSpecial
                 entMan.Dirty(newCard, newAccess);
             }
         }
+
+        // Only now remove the old one, and equip the new one right away in its place.
+        inv.TryUnequip(mob, "id", force: true);
+        entMan.QueueDeleteEntity(cardId);
+        if (oldPda != null)
+            entMan.QueueDeleteEntity(oldPda.Value);
 
         inv.TryEquip(mob, newPda, "id", force: true);
     }

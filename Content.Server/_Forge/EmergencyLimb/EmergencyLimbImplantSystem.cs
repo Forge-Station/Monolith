@@ -122,19 +122,22 @@ public sealed class EmergencyLimbImplantSystem : EntitySystem
     // --- Implanted: surgery stores charges, the action regrows ---
 
     /// <summary>
-    /// Called by the implant surgery to install the regrow system into the torso: loads it to full
-    /// charges and grants the regrow action.
+    /// Called by the implant surgery to install the regrow system into the torso: grants a single-use
+    /// regrow action. Returns false (and does nothing) if the torso already has one installed, so a
+    /// second implant surgery can't be used to stack the action.
     /// </summary>
     public bool AddCharge(EntityUid body, EmergencyLimbImplantComponent implant)
     {
-        var regrower = EnsureComp<EmergencyLimbRegrowerComponent>(body);
+        if (HasComp<EmergencyLimbRegrowerComponent>(body))
+            return false;
+
+        var regrower = AddComp<EmergencyLimbRegrowerComponent>(body);
 
         regrower.Damage = implant.Damage;
         regrower.LeftArm = implant.LeftArm;
         regrower.RightArm = implant.RightArm;
         regrower.LeftLeg = implant.LeftLeg;
         regrower.RightLeg = implant.RightLeg;
-        regrower.Charges = regrower.MaxCharges;
         _actions.AddAction(body, ref regrower.ActionEntity, regrower.Action);
         return true;
     }
@@ -145,12 +148,6 @@ public sealed class EmergencyLimbImplantSystem : EntitySystem
             return;
 
         args.Handled = true;
-
-        if (ent.Comp.Charges <= 0)
-        {
-            _popup.PopupEntity(Loc.GetString("emergency-limb-no-charges"), ent, ent);
-            return;
-        }
 
         var selected = CompOrNull<TargetingComponent>(ent)?.Target ?? TargetBodyPart.Torso;
 
@@ -168,16 +165,11 @@ public sealed class EmergencyLimbImplantSystem : EntitySystem
 
         _popup.PopupEntity(Loc.GetString("emergency-limb-installed"), ent, ent);
 
-        ent.Comp.Charges--;
+        // Single-use: remove the action and the regrower itself, so the torso can be re-implanted.
+        if (ent.Comp.ActionEntity != null)
+            _actions.RemoveAction(ent.Owner, ent.Comp.ActionEntity);
 
-        // Depleted → remove the action and the regrower itself, so the torso can be re-implanted.
-        if (ent.Comp.Charges <= 0)
-        {
-            if (ent.Comp.ActionEntity != null)
-                _actions.RemoveAction(ent.Owner, ent.Comp.ActionEntity);
-
-            RemComp<EmergencyLimbRegrowerComponent>(ent.Owner);
-        }
+        RemComp<EmergencyLimbRegrowerComponent>(ent.Owner);
     }
 
     // --- Shared limb-growing logic ---

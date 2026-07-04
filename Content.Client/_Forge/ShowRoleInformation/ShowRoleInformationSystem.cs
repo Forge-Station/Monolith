@@ -6,21 +6,29 @@ namespace Content.Client._Forge.ShowRoleInformation;
 public sealed class RoleDescriptionSystem : EntitySystem
 {
     private ShowRoleInformationWindow? _currentWindow;
+    private readonly HashSet<string> _skipWindows = [];
 
     public override void Initialize()
     {
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeNetworkEvent<ShowRoleInformationEvent>(OnOpenRoleInfoFromServer);
+        SubscribeLocalEvent<ShowRoleInformationAddSkipWindowLocalEvent>(OnAddSkipWindow);
+        SubscribeNetworkEvent<ShowRoleInformationFromServerEvent>(OnOpenRoleInfoFromServer);
     }
 
-    private void OnOpenRoleInfoFromServer(ShowRoleInformationEvent msg, EntitySessionEventArgs args)
+    private void OnAddSkipWindow(ShowRoleInformationAddSkipWindowLocalEvent msg)
+    {
+        _skipWindows.Add(msg.KeyWindow);
+    }
+
+    private void OnOpenRoleInfoFromServer(ShowRoleInformationFromServerEvent msg, EntitySessionEventArgs args)
     {
         OpenWindow(msg.RoleName, msg.Description, msg.Duration);
     }
 
     private void OnPlayerAttached(PlayerAttachedEvent args)
     {
-        if (!TryComp<ShowRoleInformationComponent>(args.Entity, out var showRoleInformationComponent))
+        if (!TryComp<ShowRoleInformationComponent>(args.Entity, out var showRoleInformationComponent) ||
+            _skipWindows.Contains(string.Concat(showRoleInformationComponent.RoleName, showRoleInformationComponent.Description)))
             return;
 
         OpenWindow(showRoleInformationComponent.RoleName, showRoleInformationComponent.Description, showRoleInformationComponent.Duration);

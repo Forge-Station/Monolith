@@ -4,9 +4,6 @@ show-role-information-additional = [color=#aaaaaa][italic]Если вы не з�
 show-role-information-close-button-wait = Кнопка закрытия станет активна через { $time } сек.
 show-role-information-close-button = Готов!
 
-test_name = Тестовое имя
-test_description = Тестовое описание
-
 show-role-information-chimera-name = Химера
 show-role-information-chimera-description =
     Ваши единственные союзники - [color=#ebba34][bold]другие химеры[/bold][/color].

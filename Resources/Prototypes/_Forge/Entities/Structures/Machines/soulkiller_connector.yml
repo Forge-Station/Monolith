@@ -37,6 +37,7 @@
     containers:
       entity_storage: !type:Container
   - type: Physics
+    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:

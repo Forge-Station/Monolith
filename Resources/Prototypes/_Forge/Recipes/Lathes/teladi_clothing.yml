@@ -88,7 +88,7 @@
   materials:
     Cloth: 200
     Plastic: 200
-    Steel: 100
+    Steel: 200
 
 # ── Пак одежды (в dynamicPacks принтера униформы) ──
 - type: latheRecipePack

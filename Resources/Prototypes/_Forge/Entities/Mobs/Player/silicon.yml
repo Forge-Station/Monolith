@@ -314,6 +314,10 @@
   parent: AiHeldForge
   categories: [ HideSpawnMenu ]
   components:
+  - type: ShowRoleInformation
+    roleName: show-role-information-ai-forerunner-name
+    description: show-role-information-ai-forerunner-description
+    duration: 15
   - type: IntrinsicRadioTransmitter
     channels:
     - Common

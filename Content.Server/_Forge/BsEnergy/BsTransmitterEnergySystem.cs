@@ -178,7 +178,7 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
 
     private void OnWithdraw(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, WithdrawMessage args)
     {
-        if (args.Actor is not { Valid : true } player || (int)bsTransmitterEnergyComponent.Money > 0)
+        if (args.Actor is not { Valid : true } player || (int)bsTransmitterEnergyComponent.Money <= 0)
             return;
 
         var stackPrototype = _prototypeManager.Index<StackPrototype>("Credit");

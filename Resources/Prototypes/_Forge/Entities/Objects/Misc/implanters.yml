@@ -12,7 +12,7 @@
         type: VoiceMaskBoundUserInterface
   - type: Implanter
     implant: ForgeVoiceModuleImplant
-    
+
 - type: entity
   id: GuardImplanter
   name: guard implanter
@@ -21,8 +21,8 @@
   components:
     - type: Implanter
       implant: ImplantGuard
-      
-# Factions tracking implanters
+
+# Implanters factions tracking
 - type: entity
   id: RenegadeTrackingImplanter
   suffix: renegade tracking

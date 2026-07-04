@@ -33,7 +33,7 @@
   - type: Physics
     bodyType: Static
   - type: Transform
-    norot: true
+    noRot: true
     anchored: true
   - type: Destructible
     thresholds:

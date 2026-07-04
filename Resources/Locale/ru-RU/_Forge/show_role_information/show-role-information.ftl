@@ -3,6 +3,14 @@ show-role-information-job-name = [bold]Добро пожаловать на ро
 show-role-information-additional = [color=#aaaaaa][italic]Если вы не знаете, что делать, обратитесь за помощью нажав F1 > Помощь менторов, чтобы связаться с менторами, которые всегда готовы помочь.[/italic][/color]
 show-role-information-close-button-wait = Кнопка закрытия станет активна через { $time } сек.
 show-role-information-close-button = Готов!
+show-role-information-dont-show-window = Я ознакомился с правилами, больше не показывать.
+
+show-role-information-command-description = Принудительно открывает окно с информацией о роли на клиенте.
+show-role-information-command-help = Использование: openroleinformation <ник_или_uid> <продолжительность>?
+show-role-information-command-err-player-not-found = Не удалось найти игрока '{ $player }' или у него нет тела.
+show-role-information-command-err-duration = Неверный формат продолжительности: '{ $time }'.
+show-role-information-command-err-no-component = У игрока { $player } отсутствует компонент информации о роли.
+show-role-information-command-success = Окно отправлено для { $player }. Таймер: { $duration } сек.
 
 show-role-information-chimera-name = Химера
 show-role-information-chimera-description =

@@ -14,15 +14,15 @@ public sealed partial class ShowRoleInformationCommand : IConsoleCommand
     [Dependency] private IPlayerManager _playerManager = default!;
 
     public string Command => "openroleinformation";
-    public string Description => "Принудительно открывает окно с информацией о роли на клиенте.";
-    public string Help => "Использование: openroleinformation <ник_или_uid> <продолжительность>?";
+    public string Description => Loc.GetString("show-role-information-command-description");
+    public string Help => Loc.GetString("show-role-information-command-help");
     private float _duration;
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length is < 1 or > 2)
         {
-            shell.WriteError("Использование: openroleinformation <ник/uid> <продолжительность>?");
+            shell.WriteError(Loc.GetString("show-role-information-command-help"));
             return;
         }
 
@@ -35,28 +35,27 @@ public sealed partial class ShowRoleInformationCommand : IConsoleCommand
 
         if (targetSession?.AttachedEntity == null)
         {
-            shell.WriteError($"Не удалось найти игрока '{args[0]}' или у него нет тела.");
+            shell.WriteError(Loc.GetString("show-role-information-command-err-player-not-found", ("player", args[0])));
             return;
-        }
-
-        if (args.Length > 1)
-        {
-            if (float.TryParse(args[1], out var duration) || duration > 0)
-                _duration = duration;
-            else
-                shell.WriteError($"Неверный формат продолжительности: '{args[1]}'.");
         }
 
         if (!_entManager.TryGetComponent<ShowRoleInformationComponent>(targetSession.AttachedEntity.Value, out var showRoleInformationComponent))
         {
-            shell.WriteError($"У {targetSession.Name} отсутствует ShowRoleInformationComponent");
+            shell.WriteError(Loc.GetString("show-role-information-command-err-no-component", ("player", targetSession.Name)));
             return;
         }
 
-        if (args.Length == 1)
-            _duration = showRoleInformationComponent.Duration;
+        _duration = showRoleInformationComponent.Duration;
 
-        var evt = new ShowRoleInformationEvent
+        if (args.Length == 2)
+        {
+            if (float.TryParse(args[1], out var duration) && duration >= 0)
+                _duration = duration;
+            else
+                shell.WriteError(Loc.GetString("show-role-information-command-err-duration", ("time", args[1])));
+        }
+
+        var evt = new ShowRoleInformationFromServerEvent
         {
             RoleName = showRoleInformationComponent.RoleName,
             Description = showRoleInformationComponent.Description,
@@ -64,6 +63,6 @@ public sealed partial class ShowRoleInformationCommand : IConsoleCommand
         };
 
         _entManager.EntityNetManager.SendSystemNetworkMessage(evt, targetSession.Channel);
-        shell.WriteLine($"Окно отправлено для {targetSession.Name}. Таймер: {_duration} сек.");
+        shell.WriteLine(Loc.GetString("show-role-information-command-success", ("player", targetSession.Name), ("duration", (int)_duration)));
     }
 }

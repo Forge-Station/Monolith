@@ -9,6 +9,7 @@ guide-entry-sector-topology = Sector Topology
 guide-entry-cargo-hauling = Cargo Hauling
 guide-entry-shipyard = Shipyard
 guide-entry-frontier-rules = Server Rules
+guide-entry-role = Roles
 
 # Engineering entries
 guide-entry-gas-mining = Gas Mining

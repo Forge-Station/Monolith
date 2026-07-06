@@ -18,6 +18,7 @@
   - BoardingTeleport # forge
   - Creatures # mono
   - MonoMisc # mono
+  - Pirating # Forge-Change
 
 - type: guideEntry
   id: Bank
@@ -149,4 +150,10 @@
   name: forge-job-name-flunky
   text: "/ServerInfo/_Forge/Guidebook/_NF/RenegateFlunky.xml"
   priority: 1
+
+- type: guideEntry
+  id: Pirating
+  name: forge-job-name-pirating
+  text: "/ServerInfo/_Forge/Guidebook/_NF/Pirating.xml"
+  priority: 6
 # Forge-Change-End

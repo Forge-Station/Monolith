@@ -1,0 +1,30 @@
+- type: vessel
+  id: RemapTehus
+  parent: BaseVessel
+  name: RST texus
+  description: оно есть
+  price: 86600
+  category: Small
+  group: Empire
+  access: Empire
+  shuttlePath: /Maps/_Forge/Shuttles/Empire/remapTehus.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: RemapTehus
+  mapName: RST texus
+  mapPath: /Maps/_Forge/Shuttles/Empire/remapTehus.yml
+  minPlayers: 0
+  stations:
+    RemapTehus:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'RST texus{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

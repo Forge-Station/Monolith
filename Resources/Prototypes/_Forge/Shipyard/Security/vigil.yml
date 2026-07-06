@@ -1,0 +1,42 @@
+# Author Info
+# GitHub: https://github.com/theg33ka
+# Discord: _n1neth
+# License: CC-BY-NC-ND-4.0
+# CorvaxForge
+
+# Maintainer Info
+# GitHub: https://github.com/mersen-tyn
+# Discord: mersen
+
+# Shuttle Notes:
+
+- type: vessel
+  id: Vigil
+  parent: BaseVessel
+  name: G3 «Вигил»
+  description: The vigil is a patrol boat, made for escorting and unsuprisingly; patrolling stations and depots from any malicious ships. It's equipped with EMP launchers, as well as a hybrid EMP Missile launcher for more tougher encounters.
+  price: 92000
+  category: Medium
+  group: Sr
+  access: Brig
+  mapchecker_group_override: Security
+  shuttlePath: /Maps/_Forge/Shuttles/Security/vigil.yml
+  guidebookPage: Null
+  class:
+  - Civilian
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: Vigil
+  mapName: 'G3 «Вигил»'
+  mapPath: /Maps/_Forge/Shuttles/Security/vigil.yml
+  minPlayers: 0
+  stations:
+    Vigil:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Вигил SEC{1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'

@@ -26,3 +26,6 @@ ent-VendingMachineCompanyHME = автомат снабжения HME
 ent-VendingMachineNanotrasen = вендомат NT
     .desc = Здесь есть (почти) всё, что может понадобится представителю НТ. Кажется, его только недавно покрасили.
     .suffix = NT, Централ
+ent-VendingMachineCompanyCL = вендомат Chun Logistics
+    .desc = Продаёт различные вещи компании Chun Logistics.
+    .suffix = Chun Logistics

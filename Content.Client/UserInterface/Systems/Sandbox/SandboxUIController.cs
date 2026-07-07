@@ -4,6 +4,7 @@ using Content.Client.Gameplay;
 using Content.Client.Markers;
 using Content.Client.Sandbox;
 using Content.Client.SubFloor;
+using Content.Client._Mono.WallPaint.UI;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.DecalPlacer;
 using Content.Client.UserInterface.Systems.Sandbox.Windows;
@@ -46,6 +47,7 @@ public sealed partial class SandboxUIController : UIController, IOnStateChanged<
     private EntitySpawningUIController EntitySpawningController => UIManager.GetUIController<EntitySpawningUIController>();
     private TileSpawningUIController TileSpawningController => UIManager.GetUIController<TileSpawningUIController>();
     private DecalPlacerUIController DecalPlacerController => UIManager.GetUIController<DecalPlacerUIController>();
+    private WallPaintUIController WallPaintController => UIManager.GetUIController<WallPaintUIController>();
 
     private MenuButton? SandboxButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.SandboxButton;
 
@@ -143,6 +145,7 @@ public sealed partial class SandboxUIController : UIController, IOnStateChanged<
         _window.SpawnTilesButton.OnPressed += _ => TileSpawningController.ToggleWindow();
         _window.SpawnEntitiesButton.OnPressed += _ => EntitySpawningController.ToggleWindow();
         _window.SpawnDecalsButton.OnPressed += _ => DecalPlacerController.ToggleWindow();
+        _window.PaintWallsButton.OnPressed += _ => WallPaintController.ToggleWindow();
         _window.GiveFullAccessButton.OnPressed += _ => _sandbox.GiveAdminAccess();
         _window.GiveAghostButton.OnPressed += _ => _sandbox.GiveAGhost();
         _window.ToggleLightButton.OnToggled += _ => _sandbox.ToggleLight();
@@ -197,6 +200,7 @@ public sealed partial class SandboxUIController : UIController, IOnStateChanged<
         _window?.Close();
         EntitySpawningController.CloseWindow();
         TileSpawningController.CloseWindow();
+        WallPaintController.CloseWindow();
     }
 
     private bool Copy(ICommonSession? session, EntityCoordinates coords, EntityUid uid)

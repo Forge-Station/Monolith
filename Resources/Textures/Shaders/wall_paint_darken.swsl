@@ -1,0 +1,17 @@
+light_mode unshaded;
+
+uniform highp vec4 paintColor;
+uniform bool protectTransparency;
+uniform highp float opaqueAlphaThreshold;
+
+void fragment() {
+    highp vec4 base = zTexture(UV);
+    highp float paintAmount = paintColor.a;
+
+    if (protectTransparency && base.a < opaqueAlphaThreshold) {
+        paintAmount = 0.0;
+    }
+
+    highp vec3 darkened = min(base.rgb, paintColor.rgb);
+    COLOR = vec4(mix(base.rgb, darkened, paintAmount), base.a);
+}

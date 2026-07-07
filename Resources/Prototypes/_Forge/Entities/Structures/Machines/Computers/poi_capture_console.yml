@@ -29,3 +29,6 @@
       state: helm
     - map: ["computerLayerKeys"]
       state: syndie_key
+  - type: GuideHelp
+    guides:
+    - Capture

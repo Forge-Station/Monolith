@@ -9,6 +9,7 @@
   canBeAntag: true
   icon: "JobIconMercenary"
   supervisors: job-supervisors-hire
+  guides: [ ExplorersMercenary ]
   weight: 3 # Prioritize station & department jobs
   displayWeight: 20 # Second from the bottom
   setPreference: true

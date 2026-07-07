@@ -2,6 +2,7 @@
   id: Foreman
   name: forge-job-name-foreman
   description: forge-job-desc-foreman
+  guides: [ Renegates ]
   playTimeTracker: JobForeman
   requirements:
     - !type:OverallPlaytimeRequirement

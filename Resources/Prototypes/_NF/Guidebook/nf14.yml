@@ -19,6 +19,7 @@
   - Creatures # mono
   - MonoMisc # mono
   - Pirating # Forge-Change
+  - Capture # Forge-Change
 
 - type: guideEntry
   id: Bank
@@ -156,4 +157,10 @@
   name: forge-job-name-pirating
   text: "/ServerInfo/_Forge/Guidebook/_NF/Pirating.xml"
   priority: 6
+
+- type: guideEntry
+  id: Capture
+  name: forge-job-name-capture
+  text: "/ServerInfo/_Forge/Guidebook/_NF/Capture.xml"
+  priority: 7
 # Forge-Change-End

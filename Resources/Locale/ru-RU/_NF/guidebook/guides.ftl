@@ -16,6 +16,7 @@ guide-entry-shipyard = Верфи
 guide-entry-frontier-rules = Правила сервера
 guide-entry-role = Роли
 forge-job-name-pirating = Пиратство
+forge-job-name-capture = Захват точек
 
 # Expedition faction entries
 guide-entry-expedition-aberrant-flesh = Аномальная плоть

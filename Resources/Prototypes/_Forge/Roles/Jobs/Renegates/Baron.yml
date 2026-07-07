@@ -2,6 +2,7 @@
   id: Baron
   name: forge-job-name-baron
   description: forge-job-desc-baron
+  guides: [ Renegates ]
   playTimeTracker: JobBaron
   requirements:
     - !type:OverallPlaytimeRequirement

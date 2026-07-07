@@ -2,6 +2,7 @@
   id: Overseer
   name: forge-job-name-overseer
   description: forge-job-desc-overseer
+  guides: [ Renegates ]
   playTimeTracker: JobOverseer
   requirements:
     - !type:OverallPlaytimeRequirement

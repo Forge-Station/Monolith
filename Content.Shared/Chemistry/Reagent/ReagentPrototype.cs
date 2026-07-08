@@ -147,7 +147,7 @@ namespace Content.Shared.Chemistry.Reagent
         /// </summary>
         [DataField]
         public bool WorksOnTheDead;
-        
+
         /// <summary>
         /// How likely is this reagent to set on fire?
         /// </summary>

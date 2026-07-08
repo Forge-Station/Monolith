@@ -4,8 +4,6 @@
   categories: [ HideSpawnMenu ]
   name: moth stomach
   components:
-  - type: OrganPhysiology # Forge-change
-    organ: Stomach
   - type: Stomach
     specialDigestible:
       components:

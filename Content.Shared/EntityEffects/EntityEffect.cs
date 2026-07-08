@@ -38,12 +38,6 @@ public abstract partial class EntityEffect
     [DataField("probability")]
     public float Probability = 1.0f;
 
-    // Forge-change-start
-    // Hidden that effect in guidebook if true
-    [DataField]
-    public bool Hidden = false;
-    // Forge-change-end
-
     public virtual LogImpact LogImpact { get; private set; } = LogImpact.Low;
 
     /// <summary>
@@ -59,9 +53,6 @@ public abstract partial class EntityEffect
     /// <returns></returns>
     public string? GuidebookEffectDescription(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        if (Hidden) // Forge-change: hide from guidebook if hidden
-            return null;
-
         var effect = ReagentEffectGuidebookText(prototype, entSys);
         if (effect is null)
             return null;

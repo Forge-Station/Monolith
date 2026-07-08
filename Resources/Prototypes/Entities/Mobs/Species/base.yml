@@ -233,7 +233,6 @@
   # Mono
   - type: ShipNpcTarget
     needGrid: NoGrid
-  - type: BodyPhysiology # Forge-change
 
 - type: entity
   save: false

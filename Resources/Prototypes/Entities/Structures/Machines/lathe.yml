@@ -910,22 +910,19 @@
   name: medical biofabricator
   description: Produces organs and other organic matter that can be surgically grafted onto patients with biomass.
   components:
-  # Forge-change-start
   - type: Sprite
-    sprite: Forge/Structures/Machines/organprinter.rsi
+    sprite: _Shitmed/Structures/Machines/limbgrower.rsi
     snapCardinals: true
     layers:
-    - state: base
-    - state: screen
-      shader: unshaded
-      map: ["enum.PowerDeviceVisualLayers.Powered"]
-    - state: running
+    - state: limbgrower_idleoff
       map: ["enum.LatheVisualLayers.IsRunning"]
-    - state: inserting
-      map: ["enum.MaterialStorageVisualLayers.Inserting"]
-    - state: panel
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
-  # Forge-change-end
+  #    - state: limbgrower_idleoff
+  #      shader: unshaded
+  #      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  #    - state: inserting
+  #      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+  #    - state: panel
+  #      map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: Machine
     board: MedicalBiofabMachineBoard
   - type: MaterialStorage
@@ -934,9 +931,8 @@
       - Sheet
       - RawMaterial
   - type: Lathe
-    idleState: base # Forge-change
-    runningState: running # Forge-change
-    unlitRunningState: screen_running # Forge-change
+    idleState: limbgrower_idleoff
+    runningState: limbgrower_idleon
     productValueModifier: 0.05
     staticPacks:
     - MedicalSynthLimbsStatic

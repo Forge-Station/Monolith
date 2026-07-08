@@ -3,18 +3,10 @@
   parent: MedkitAdvanced
   suffix: Filled
   components:
-  - type: Sprite
-    sprite: Forge/Objects/Specific/Medical/firstaidkits.rsi
-    state: antiaddict
-  - type: Item
-    sprite: Forge/Objects/Specific/Medical/firstaidkits.rsi
-    heldPrefix: antiaddict
   - type: StorageFill
     contents:
       - id: SyringeHaloperidol
       - id: PillCanisterNaloxone
-      - id: PillCanisterClonidine
-      - id: CigPackFake
 
 - type: entity
   name: pill canister
@@ -23,7 +15,7 @@
   suffix: Naloxone 9u, 5
   components:
   - type: Label
-    currentLabel: reagent-name-naloxone
+    currentLabel: Naloxone 9u
   - type: StorageFill
     contents:
     - id: PillNaloxone
@@ -36,50 +28,17 @@
   id: PillNaloxone
   components:
   - type: Pill
-    pillType: 15
+    pillType: 7
   - type: Sprite
-    state: pill15
+    state: pill8
   - type: Label
-    currentLabel: reagent-name-naloxone
+    currentLabel: Naloxone 9u
   - type: SolutionContainerManager
     solutions:
       food:
         maxVol: 20
         reagents:
         - ReagentId: Naloxone
-          Quantity: 9
-
-- type: entity
-  name: pill canister
-  parent: PillCanister
-  id: PillCanisterClonidine
-  suffix: Clonidine 9u, 5
-  components:
-  - type: Label
-    currentLabel: reagent-name-clonidine
-  - type: StorageFill
-    contents:
-    - id: PillClonidine
-      amount: 5
-
-- type: entity
-  name: pill
-  suffix: Clonidine 9u
-  parent: Pill
-  id: PillClonidine
-  components:
-  - type: Pill
-    pillType: 16
-  - type: Sprite
-    state: pill16
-  - type: Label
-    currentLabel: reagent-name-clonidine
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
-        - ReagentId: Clonidine
           Quantity: 9
 
 - type: entity

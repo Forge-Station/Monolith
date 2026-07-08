@@ -11,8 +11,6 @@
   parent: OrganAnimalStomach
   suffix: "rat"
   components:
-  - type: OrganPhysiology # Forge-change
-    organ: Stomach
   - type: SolutionContainerManager
     solutions:
       stomach:

@@ -11,8 +11,6 @@
   - type: Organ
     slotId: core
   - type: Brain
-  - type: OrganPhysiology # Forge-change
-    organ: Brain
   - type: Metabolizer
     maxReagents: 6
     metabolizerTypes: [ Slime ]
@@ -50,8 +48,6 @@
   name: slime gas sacs
   description: "Collects nitrogen, which slime cells use for maintenance."
   components:
-  - type: OrganPhysiology # Forge-change
-    organ: Lung
   - type: Sprite
     sprite: Mobs/Species/Slime/organs.rsi
     layers:

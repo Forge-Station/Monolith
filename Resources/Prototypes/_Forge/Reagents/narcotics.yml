@@ -17,16 +17,8 @@
               min: 5
           damage:
             groups:
-              Brute: -2
+              Brute: -4
               Burn: -2
-        - !type:SuppressEffect
-          # hidden: true
-          syndrome: AcutePain
-          duration: 30
-        - !type:SuppressEffect
-          # hidden: true
-          syndrome: ChronicPain
-          duration: 30
     Narcotic:
       metabolismRate: 0.5
       effects:
@@ -40,7 +32,6 @@
           slurSpeech: false
           boozePower: 2
         - !type:PopupMessage
-          hidden: true
           type: Local
           visualType: Small
           messages: [ "generic-reagent-effect-nauseous" ]
@@ -48,29 +39,9 @@
           conditions:
             - !type:ReagentThreshold
               min: 4
-            - !type:ToleranceCondition
-              source: Brain
-              reagent: Codeine
-              min: 0.5
-              max: 1.0
-        # Addiction
-        - !type:ToleranceEffect
-          # hidden: true
-          reagent: Codeine
-          amount: 0.05
-          target: Brain
-        - !type:SyndromeEffect
-          hidden: true
-          conditions:
-            - !type:ToleranceCondition
-              source: Brain
-              reagent: Codeine
-              min: 0.2
-              max: 1.0
-          syndrome: OpioidAddiction
-          severity: 2.1
-        - !type:GenericDescEffect
-          description: forge-reagent-tolerance-addiction
+        - !type:AddictiveEffect
+          addictionId: Morphine
+          toleranceGain: 0.006
 
 # region Morphine
 - type: reagent
@@ -89,33 +60,26 @@
           conditions:
             - !type:TotalDamage
               min: 5
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.0
+              max: 0.5
           damage:
             groups:
-              Brute: -4
-              Burn: -3
+              Brute: -5 # Painkiller btw
               Toxin: -0.5
         - !type:HealthChange
-          hidden: true
           conditions:
             - !type:TotalDamage
               min: 5
-            - !type:ToleranceCondition
-              source: Brain
-              reagent: Morphine
+            - !type:AddictionCondition
+              addictionId: Morphine
               min: 0.5
               max: 1.0
           damage:
             groups:
-              Brute: 2.5
-              Toxin: 0.2
-        - !type:SuppressEffect
-          syndrome: PainSyndrome
-          duration: 60
-        - !type:SuppressEffect
-          syndrome: ChronicPain
-          duration: 60
-        - !type:GenericDescEffect
-          description: forge-reagent-tolerance-badhealth
+              Brute: -2
+              Toxin: -0.2
     Narcotic:
       metabolismRate: 0.75
       effects:
@@ -138,20 +102,13 @@
           slurSpeech: true
           boozePower: 4
         - !type:ChemVomit
-          hidden: true
           probability: 0.1
           conditions:
-            - !type:ToleranceCondition
-              source: Brain
-              reagent: Morphine
-              min: 0.2
-              max: 1.0
             - !type:ReagentThreshold
               min: 3
-            - !type:ToleranceCondition
-              source: Brain
-              reagent: Morphine
-              min: 0.8
+            - !type:AddictionCondition
+              addictionId: Morphine
+              min: 0.5
               max: 1.0
         - !type:ChemVomit
           probability: 0.04
@@ -175,34 +132,13 @@
               Poison: 3
               Asphyxiation: 3.5
         - !type:PopupMessage
-          hidden: true
           conditions:
             - !type:ReagentThreshold
               min: 2
-            - !type:ToleranceCondition
-              source: Brain
-              reagent: Morphine
-              min: 0.45
-              max: 1.0
           type: Local
           visualType: Medium
           messages: [ "generic-reagent-effect-nauseous" ]
           probability: 0.4
-        # Addiction
-        - !type:ToleranceEffect
-          # hidden: true
-          reagent: Morphine
-          amount: 0.02
-          target: Brain
-        - !type:SyndromeEffect
-          hidden: true
-          conditions:
-            - !type:ToleranceCondition
-              reagent: Morphine
-              source: Brain
-              min: 0.3
-              max: 1.0
-          syndrome: OpioidAddiction
-          severity: 1.8
-        - !type:GenericDescEffect
-          description: forge-reagent-tolerance-addiction
+        - !type:AddictiveEffect
+          addictionId: Morphine
+          toleranceGain: 0.009

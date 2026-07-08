@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization.Manager.Attributes;
 
-namespace Content.Shared._Mono.WallPaint;
+namespace Content.Shared._Forge.WallPaint;
 
 [RegisterComponent]
 public sealed partial class PaintableWallComponent : Component

@@ -1,4 +1,0 @@
-- type: shader
-  id: WallPaintDarken
-  kind: source
-  path: "/Textures/Shaders/wall_paint_darken.swsl"

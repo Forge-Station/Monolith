@@ -4,7 +4,7 @@ using Content.Client.Gameplay;
 using Content.Client.Markers;
 using Content.Client.Sandbox;
 using Content.Client.SubFloor;
-using Content.Client._Mono.WallPaint.UI;
+using Content.Client._Forge.WallPaint.UI;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.DecalPlacer;
 using Content.Client.UserInterface.Systems.Sandbox.Windows;

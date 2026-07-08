@@ -2,7 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Client.Clickable;
 using Content.Client.Decals;
-using Content.Shared._Mono.WallPaint;
+using Content.Shared._Forge.WallPaint;
 using Robust.Client.ComponentTrees;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -13,7 +13,7 @@ using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 
-namespace Content.Client._Mono.WallPaint;
+namespace Content.Client._Forge.WallPaint;
 
 public sealed partial class WallPaintPlacementSystem : EntitySystem
 {

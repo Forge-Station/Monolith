@@ -757,6 +757,7 @@
     fx: EffectRCDDeconstruct8
   - type: Sprite
     sprite: Structures/Walls/shuttleinterior.rsi
+  - type: PaintableWall
   - type: Icon
     sprite: Structures/Walls/shuttleinterior.rsi
   - type: Construction

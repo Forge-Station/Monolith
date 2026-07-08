@@ -4,7 +4,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.Controllers;
 
-namespace Content.Client._Mono.WallPaint.UI;
+namespace Content.Client._Forge.WallPaint.UI;
 
 public sealed partial class WallPaintUIController : UIController, IOnStateExited<GameplayState>, IOnSystemChanged<SandboxSystem>
 {

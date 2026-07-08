@@ -2,7 +2,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Maths;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Mono.WallPaint;
+namespace Content.Shared._Forge.WallPaint;
 
 [Serializable, NetSerializable]
 public sealed class WallPaintRequestEvent : EntityEventArgs

@@ -1,10 +1,10 @@
-using Content.Shared._Mono.WallPaint;
+using Content.Shared._Forge.WallPaint;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._Mono.WallPaint;
+namespace Content.Client._Forge.WallPaint;
 
 public sealed partial class WallPaintVisualsSystem : EntitySystem
 {
@@ -56,7 +56,7 @@ public sealed partial class WallPaintVisualsSystem : EntitySystem
         }
 
         shader.SetParameter("paintColor", paint.Color);
-        shader.SetParameter("protectTransparency", TryComp(uid, out PaintableWallComponent? paintable) && paintable.ProtectTransparent);
+        shader.SetParameter("protectTransparency", paint.ProtectTransparent);
         shader.SetParameter("opaqueAlphaThreshold", OpaqueAlphaThreshold);
 
         sprite.PostShader = shader;

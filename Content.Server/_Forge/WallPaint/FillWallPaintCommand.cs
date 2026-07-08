@@ -6,7 +6,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
 using Robust.Shared.Toolshed;
 
-namespace Content.Server._Mono.WallPaint;
+namespace Content.Server._Forge.WallPaint;
 
 [AdminCommand(AdminFlags.Mapping)]
 public sealed partial class FillWallPaintCommand : IConsoleCommand
@@ -16,13 +16,13 @@ public sealed partial class FillWallPaintCommand : IConsoleCommand
 
     public string Command => "fpaint";
     public string Description => "Paints every paintable wall/window on a grid.";
-    public string Help => $"{Command} <grid id> #<color>";
+    public string Help => $"{Command} <grid/entity id> #<color>";
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
     {
         return args.Length switch
         {
-            1 => CompletionResult.FromHintOptions(CompletionHelper.Components<MapGridComponent>(args[0], _entManager), "<grid id>"),
+            1 => CompletionResult.FromHintOptions(CompletionHelper.Components<MapGridComponent>(args[0], _entManager), "<grid/entity id>"),
             2 => CompletionResult.FromHint("#RRGGBB or #RRGGBBAA"),
             _ => CompletionResult.Empty,
         };
@@ -36,17 +36,14 @@ public sealed partial class FillWallPaintCommand : IConsoleCommand
             return;
         }
 
-        if (!NetEntity.TryParse(args[0], out var gridNetId) ||
-            !_entManager.TryGetEntity(gridNetId, out var gridUid) ||
-            !_entManager.TryGetComponent(gridUid.Value, out TransformComponent? transform) ||
-            !_entManager.HasComponent<MapGridComponent>(gridUid.Value))
+        if (!TryGetGrid(args[0], out var gridUid, out var gridTransform, out var error))
         {
-            shell.WriteError($"Failed to parse grid id '{args[0]}'. Expected an entity id like n123.");
+            shell.WriteError(error);
             return;
         }
 
         var mapSystem = _systemManager.GetEntitySystem<SharedMapSystem>();
-        if (!mapSystem.IsPaused(transform.MapID))
+        if (!mapSystem.IsPaused(gridTransform.MapID))
         {
             shell.WriteError("Wall paint is only available on paused mapping maps.");
             return;
@@ -68,8 +65,47 @@ public sealed partial class FillWallPaintCommand : IConsoleCommand
         }
 
         var wallPaint = _systemManager.GetEntitySystem<WallPaintSystem>();
-        var count = wallPaint.PaintGrid(gridUid.Value, color, remove);
+        var count = wallPaint.PaintGrid(gridUid, color, remove);
         var action = remove ? "Cleared paint from" : $"Painted with {color.ToHex()}";
         shell.WriteLine($"{action} {count} walls/windows.");
+    }
+
+    private bool TryGetGrid(
+        string rawId,
+        out EntityUid gridUid,
+        out TransformComponent gridTransform,
+        out string error)
+    {
+        gridUid = default;
+        gridTransform = default!;
+
+        if (!NetEntity.TryParse(rawId, out var netId) ||
+            !_entManager.TryGetEntity(netId, out var uid) ||
+            !_entManager.TryGetComponent(uid.Value, out TransformComponent? transform))
+        {
+            error = $"Failed to parse entity id '{rawId}'. Expected an entity id like n123 or 123.";
+            return false;
+        }
+
+        if (_entManager.HasComponent<MapGridComponent>(uid.Value))
+        {
+            gridUid = uid.Value;
+            gridTransform = transform;
+            error = string.Empty;
+            return true;
+        }
+
+        if (transform.GridUid is { } parentGrid &&
+            _entManager.HasComponent<MapGridComponent>(parentGrid) &&
+            _entManager.TryGetComponent(parentGrid, out TransformComponent? parentGridTransform))
+        {
+            gridUid = parentGrid;
+            gridTransform = parentGridTransform;
+            error = string.Empty;
+            return true;
+        }
+
+        error = $"Entity '{rawId}' is not a grid and is not located on a grid.";
+        return false;
     }
 }

@@ -9,8 +9,7 @@
   blacklist:
     components:
     - BorgChassis
-  traitGear: PillCanisterCodeine
   components:
     - type: StartSyndrome
       syndrome: ChronicPain
-      severity: 90
+      severity: 75

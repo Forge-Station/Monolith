@@ -3,16 +3,15 @@
   id: StimulantAddiction
   name: syndrome-stimulant-addiction
   organ: Brain
-  interval: 16
+  interval: 5
   severityDecay: 0.03
-  flareDelay: 640
+  flareDelay: 420
   stages:
     - minSeverity: 0
     # region Stage 1
     - minSeverity: 20
       symptoms:
         - !type:MovespeedSymptom
-          flareOnly: true
           walkModifier: 0.92
           sprintModifier: 0.92
           key: StimulantAddiction
@@ -38,7 +37,7 @@
           walkModifier: 0.80
           sprintModifier: 0.80
           key: StimulantAddiction
-          time: 9
+          time: 7
         - !type:EntityEffectList # name: random
           flareOnly: true
           effects:
@@ -73,7 +72,6 @@
           walkModifier: 0.65
           sprintModifier: 0.65
           key: StimulantAddiction
-          time: 16
         - !type:EntityEffectList # name: random
           flareOnly: true
           effects:
@@ -130,20 +128,19 @@
   id: OpioidAddiction
   name: syndrome-opioid-addiction
   organ: Brain
-  interval: 14
+  interval: 6
   severityDecay: 0.025
-  flareDelay: 660
+  flareDelay: 460
   stages:
     - minSeverity: 0
     # region Stage 1
     - minSeverity: 20
       symptoms:
         - !type:MovespeedSymptom
-          flareOnly: true
           walkModifier: 0.90
           sprintModifier: 0.90
           key: OpioidAddiction
-          time: 13
+          time: 8.0
         - !type:EntityEffectList # name: random staff
           flareOnly: true
           effects:
@@ -161,7 +158,7 @@
           walkModifier: 0.75
           sprintModifier: 0.75
           key: OpioidAddiction
-          time: 10
+          time: 8.0
         - !type:EntityEffectList # name: random staff
           flareOnly: true
           effects:
@@ -205,7 +202,7 @@
           walkModifier: 0.60
           sprintModifier: 0.60
           key: OpioidAddiction
-          time: 14
+          time: 8.0
         - !type:EntityEffectList # name: random bullshit go
           flareOnly: true
           effects:
@@ -250,9 +247,9 @@
   id: SedativeAddiction
   name: syndrome-sedative-addiction
   organ: Brain
-  interval: 16
+  interval: 8.0
   severityDecay: 0.02
-  flareDelay: 860
+  flareDelay: 460
   stages:
     - minSeverity: 0
     # region Stage 1
@@ -383,9 +380,9 @@
   id: NicotineAddiction
   name: syndrome-nicotine-addiction
   organ: Body
-  interval: 20
+  interval: 10
   severityDecay: 0.001
-  flareDelay: 360
+  flareDelay: 300
   stages:
     - minSeverity: 0
     # region Stage 1
@@ -409,7 +406,7 @@
           effects:
             - !type:Emote
               emote: Cough
-              probability: 0.02
+              probability: 0.2
         - !type:EntityEffectList # name: maybe smoke?
           flareOnly: true
           effects:
@@ -435,10 +432,10 @@
           effects:
             - !type:Emote
               emote: Cough
-              probability: 0.03
+              probability: 0.3
             - !type:Emote
               emote: Sneeze
-              probability: 0.01
+              probability: 0.1
         - !type:EntityEffectList # name: ahh, cigaretts..
           flareOnly: true
           effects:
@@ -449,10 +446,10 @@
               probability: 0.04
             - !type:Emote
               emote: Cough
-              probability: 0.2
+              probability: 0.4
             - !type:Emote
               emote: Sneeze
-              probability: 0.05
+              probability: 0.2
             - !type:PopupMessage
               type: Local
               messages:

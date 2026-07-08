@@ -21,12 +21,12 @@
               Burn: -2
         - !type:SuppressEffect
           # hidden: true
-          syndrome: PainSyndrome
-          duration: 140
+          syndrome: AcutePain
+          duration: 30
         - !type:SuppressEffect
           # hidden: true
           syndrome: ChronicPain
-          duration: 120
+          duration: 30
     Narcotic:
       metabolismRate: 0.5
       effects:
@@ -68,7 +68,7 @@
               min: 0.2
               max: 1.0
           syndrome: OpioidAddiction
-          severity: 0.6
+          severity: 2.1
         - !type:GenericDescEffect
           description: forge-reagent-tolerance-addiction
 
@@ -110,10 +110,10 @@
               Toxin: 0.2
         - !type:SuppressEffect
           syndrome: PainSyndrome
-          duration: 480
+          duration: 60
         - !type:SuppressEffect
           syndrome: ChronicPain
-          duration: 420
+          duration: 60
         - !type:GenericDescEffect
           description: forge-reagent-tolerance-badhealth
     Narcotic:
@@ -203,6 +203,6 @@
               min: 0.3
               max: 1.0
           syndrome: OpioidAddiction
-          severity: 0.3
+          severity: 1.8
         - !type:GenericDescEffect
           description: forge-reagent-tolerance-addiction

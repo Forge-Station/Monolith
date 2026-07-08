@@ -72,13 +72,6 @@
           - !type:MobStateCondition
             mobstate: Alive
           amount: 12
-        # Suppress Pain
-        - !type:SuppressEffect
-          syndrome: PainSyndrome
-          duration: 300
-        - !type:SuppressEffect
-          syndrome: ChronicPain
-          duration: 260
 
 # region Naloxone
 # opioid antagonist
@@ -282,7 +275,7 @@
         - !type:SuppressEffect
           hidden: true
           syndrome: OpioidAddiction
-          duration: 220
+          duration: 25
         - !type:GenericDescEffect
           description: forge-reagent-effect-naloxone
 
@@ -330,13 +323,13 @@
         - !type:Drunk
           boozePower: 2
         - !type:SuppressEffect
-          # hidden: true
+          hidden: true
           syndrome: PainSyndrome
-          duration: 540
+          duration: 25
         - !type:SuppressEffect
-          # hidden: true
+          hidden: true
           syndrome: ChronicPain
-          duration: 480
+          duration: 20
         - !type:GenericDescEffect
           description: forge-reagent-effect-methadone
         - !type:GenericDescEffect
@@ -359,10 +352,7 @@
         - !type:SuppressEffect
           # hidden: true
           syndrome: NicotineAddiction
-          duration: 220
-        - !type:RemoveSyndromeEffect
-          syndrome: NicotineAddiction
-          severity: 0.001
+          duration: 60
         - !type:GenericDescEffect
           description: forge-reagent-effect-tabex
 
@@ -397,9 +387,9 @@
           probability: 0.1
           refresh: false
         - !type:SuppressEffect
-          # hidden: true
+          hidden: true
           syndrome: StimulantAddiction
-          duration: 380
+          duration: 40
         - !type:GenericDescEffect
           description: forge-reagent-effect-clonidine
         # Addiction

@@ -422,7 +422,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
     }
 
-    private void EmbedAttach(EntityUid uid, EntityUid target, EntityUid? user, EmbeddableProjectileComponent component)
+    public void EmbedAttach(EntityUid uid, EntityUid target, EntityUid? user, EmbeddableProjectileComponent component)
     {
         // Forge-Change-start: prediction can embed twice (Drake hardsuit grappling hook).
         if (component.EmbeddedIntoUid != null)

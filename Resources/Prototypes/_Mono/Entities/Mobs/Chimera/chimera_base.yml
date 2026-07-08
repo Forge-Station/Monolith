@@ -166,8 +166,6 @@
     guides:
     - Letoferol
   - type: MovementAlwaysTouching
-  - type: Addiction # Forge-change
-    enabled: false
 
 - type: entity
   parent:

@@ -10,15 +10,15 @@
 
 # Shuttle Notes:
 - type: vessel
-  id: Mite
+  id: Avir
   parent: BaseVessel
-  name: G3 «Майт»
+  name: G3 «Авир»
   description: Среднегабаритный боевой шаттл Ренегатов.
-  price: 1
+  price: 138000
   category: Medium
   group: Renegate
   access: Renegate
-  shuttlePath: /Maps/_Forge/Shuttles/Renegates/mite.yml
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/avir.yml
   guidebookPage: Null
   class:
   - Pirate
@@ -26,12 +26,12 @@
   - Plasma
 
 - type: gameMap
-  id: Mite
+  id: Avir
   mapName: 'G3 «Майт»'
-  mapPath: /Maps/_Forge/Shuttles/Renegates/mite.yml
+  mapPath: /Maps/_Forge/Shuttles/Renegates/avir.yml
   minPlayers: 0
   stations:
-    Mite:
+    Avir:
       stationProto: StandardFrontierVessel
       components:
       - type: StationNameSetup

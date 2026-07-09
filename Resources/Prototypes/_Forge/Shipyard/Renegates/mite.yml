@@ -1,0 +1,40 @@
+# Author Info
+# GitHub: https://github.com/theg33ka
+# Discord: _n1neth
+# License: CC-BY-NC-ND-4.0
+# CorvaxForge
+
+# Maintainer Info
+# GitHub: https://github.com/mersen-tyn
+# Discord: mersen
+
+# Shuttle Notes:
+- type: vessel
+  id: Mite
+  parent: BaseVessel
+  name: G3 «Майт»
+  description: Среднегабаритный боевой шаттл Ренегатов.
+  price: 1
+  category: Medium
+  group: Renegate
+  access: Renegate
+  shuttlePath: /Maps/_Forge/Shuttles/Renegates/mite.yml
+  guidebookPage: Null
+  class:
+  - Pirate
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: Mite
+  mapName: 'G3 «Майт»'
+  mapPath: /Maps/_Forge/Shuttles/Renegates/mite.yml
+  minPlayers: 0
+  stations:
+    Mite:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Майт MIL{1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'

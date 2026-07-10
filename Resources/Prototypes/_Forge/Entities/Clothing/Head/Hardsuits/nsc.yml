@@ -68,8 +68,14 @@
   - type: EyeProtection
     protectionTime: 15
   - type: NightVision
-    flashDurationMultiplier: 2.75
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 4
+    viewCircleSpacing: 260
+    phosphorColor: "#41D7D9"
+    lightingColor: "#FFFFFF32"
   - type: ThermalVision
     flashDurationMultiplier: 2
     pulseTime: 3

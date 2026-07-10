@@ -129,3 +129,16 @@
   category: construction-category-materials
   icon: { sprite: Objects/Materials/Sheets/glass.rsi, state: ruglass }
   objectType: Item
+
+# Forge-Change-Start
+- type: construction
+  name: plastitanium glass
+  description: Merged plastitanium and glass in one, used for specialized applications requiring both strength and visibility.
+  id: SheetPlastitaniumGlass1
+  graph: Glass
+  startNode: start
+  targetNode: SheetPlastitaniumGlass1
+  category: construction-category-materials
+  icon: { sprite: _Mono/Objects/Materials/plastitaniumglass.rsi, state: plastitaniumglass }
+  objectType: Item
+# Forge-Change-End

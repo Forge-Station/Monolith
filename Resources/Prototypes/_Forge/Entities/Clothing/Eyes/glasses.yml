@@ -100,8 +100,15 @@
     color: "#FFFFFFFF"
     lightRadius: 45
   - type: NightVision
-    flashDurationMultiplier: 2.75
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#00FF00"
+    lightingColor: "#FFFFFF32"
+
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons]

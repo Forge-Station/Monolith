@@ -7,7 +7,7 @@
   category: Medium
   group: Security
   access: Security
-  shuttlePath: /Maps/_Forge/Shuttles/TSF/Ferheli.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/TSF/Ferheli.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -18,7 +18,7 @@
 - type: gameMap
   id: Ferheli
   mapName: TSF-BS Ферхил
-  mapPath: /Maps/_Forge/Shuttles/TSF/Ferheli.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/TSF/Ferheli.yml
   minPlayers: 0
   stations:
     Ferheli:

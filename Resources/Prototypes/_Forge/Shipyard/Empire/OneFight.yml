@@ -7,7 +7,7 @@
   category: Small
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/OneFight.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/OneFight.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -17,7 +17,7 @@
 - type: gameMap
   id: OneFight
   mapName: EBS Клеймор
-  mapPath: /Maps/_Forge/Shuttles/Empire/OneFight.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/OneFight.yml
   minPlayers: 0
   stations:
     OneFight:

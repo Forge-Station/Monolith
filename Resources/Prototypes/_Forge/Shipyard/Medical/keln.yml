@@ -12,7 +12,7 @@
   price: 167000 #Sell price 144k + 15%
   category: Medium
   group: Medical
-  shuttlePath: /Maps/_Forge/Shuttles/Medical/keln.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Medical/keln.yml
   guidebookPage: null
   class:
   - Medical
@@ -22,7 +22,7 @@
 - type: gameMap
   id: Keln
   mapName: 'G3 «Кельн»'
-  mapPath: /Maps/_Forge/Shuttles/Medical/keln.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Medical/keln.yml
   minPlayers: 0
   stations:
     Keln:

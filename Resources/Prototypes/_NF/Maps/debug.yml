@@ -56,11 +56,6 @@
             # Pirate: [ -1, -1] #Forge-Change # Forge-Change-delete
             # PDVInfiltrator: [ -1, -1] # Mono] # Forge-Change-delete
             # Prisoner: [ -1, -1] # Mono
-            # USSPCommissar: [ -1, -1]
-            # USSPSergeant: [ -1, -1]
-            # USSPCorporal: [ -1, -1]
-            # USSPMedic: [ -1, -1]
-            # USSPRifleman: [ -1, -1]
             # TsfEngineer: [ -1, -1 ] # Not a roundstart-selectable job (`setPreference: false`)
             # Forge-change-start
             # Empire
@@ -89,5 +84,13 @@
             TsfRanger: [ -1, -1]
             TsfRecruit: [ -1, -1]
             # Forge-change-end
+            # USSP / Viper Group jobs are spawner-only (`setPreference: false`)
+            # USSPCommissar: [ -1, -1]
+            # USSPSergeant: [ -1, -1]
+            # USSPRifleman: [ -1, -1]
+            # TsfEngineer: [ -1, -1 ] # Not a roundstart-selectable job (`setPreference: false`)
+            # VGInfanteer: [ -1, -1 ]
+            # VGLieutenant: [ -1, -1 ]
+            # VGCommander: [ -1, -1 ]
         - type: StationDeadDrop
           maxDeadDrops: 20 # Testing

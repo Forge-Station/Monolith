@@ -52,3 +52,35 @@
 #        - type: StationDeadDropHintExempt
 #        - type: TradeCrateWildcardDestination
 #          valueMultiplier: 1.0 # Mono
+
+# Hyperwar variant (disabled — PDVDenasvar spawn/job removed)
+#- type: pointOfInterest
+#  id: HeliosFortressHyperwar
+#  parent: [BasePOI, BaseRepairablePOI]
+#  name: 'Крепость ПДВ «Гелиос» (Hyperwar)'
+#  minimumDistance: 7500
+#  maximumDistance: 9500
+#  spawnGamePreset: [ MonoRogueTSFHyperwar ]
+#  spawnGroup: Required
+#  gridPath: /Maps/_Mono/POI/pdvhelios_hw.yml
+#  addComponents:
+#  - type: IFF
+#    color: "#DE9E59"
+#    readOnly: true
+#
+#- type: gameMap
+#  id: HeliosFortressHyperwar
+#  mapName: 'Крепость ПДВ «Гелиос» (Hyperwar)'
+#  mapPath: /Maps/_Mono/POI/pdvhelios_hw.yml
+#  minPlayers: 0
+#  stations:
+#    HeliosFortressHyperwar:
+#      stationProto: RecordsFrontierOutpostCargo
+#      gridComponents:
+#      - type: VesselInfo
+#        description: "Hyperwar variant of the PDV Helios fortress."
+#      components:
+#        - type: StationNameSetup
+#          mapNameTemplate: 'Крепость ПДВ «Гелиос»'
+#        - type: StationJobs
+#          availableJobs: {}

@@ -7,7 +7,7 @@
   category: Small
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/ciclone.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/ciclone.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -17,7 +17,7 @@
 - type: gameMap
   id: ciclone
   mapName: 'ESF Циклон'
-  mapPath: /Maps/_Forge/Shuttles/Empire/ciclone.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/ciclone.yml
   minPlayers: 0
   stations:
     ciclone:

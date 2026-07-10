@@ -132,6 +132,11 @@
 
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
+  id: ShipDrillMachineCircuitboard
+  result: ShipDrillMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
   id: LargeThrusterMachineCircuitboard
   result: LargeThrusterMachineCircuitboard
 
@@ -185,3 +190,26 @@
     Gold: 250
     Plasma: 400
     Silver: 150
+# Forge-Change-end
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: OreMagnetMachineCircuitboard
+  result: OreMagnetMachineCircuitboard
+
+# faction-specific RWR shuttle consoles - can be made by anyone because it doesnt do shit gameplay wise
+
+- type: latheRecipe
+  parent: ShuttleConsoleCircuitboard
+  id: ShuttleConsoleCircuitboardTSFN
+  result: ShuttleConsoleCircuitboardTSFN
+
+- type: latheRecipe
+  parent: ShuttleConsoleCircuitboard
+  id: ShuttleConsoleCircuitboardKPV63RWR
+  result: ShuttleConsoleCircuitboardKPV63RWR
+
+- type: latheRecipe
+  parent: ShuttleConsoleCircuitboard
+  id: ShuttleConsoleCircuitboardANALR67RWR
+  result: ShuttleConsoleCircuitboardANALR67RWR

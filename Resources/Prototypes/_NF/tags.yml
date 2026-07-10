@@ -197,4 +197,7 @@
 
 - type: Tag
   id: PortableGeneratorClunkerCircuitboard
+
+- type: Tag
+  id: MachineBoard
 # Forge-Change-End

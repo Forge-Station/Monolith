@@ -28,5 +28,4 @@ construction-graph-component-portable-generator-clunker-circuitboard = плат�
 construction-graph-component-air-canister = канистру с кислородом
 construction-graph-component-goblin-thruster-circuitboard = плату "Тырчик"
 construction-graph-component-barrel = бочку
-construction-graph-component-fire-extinguisher = огнетушитель
 construction-graph-component-welder = сварочный аппарат

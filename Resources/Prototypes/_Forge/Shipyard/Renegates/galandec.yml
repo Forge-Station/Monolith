@@ -10,7 +10,7 @@
   category: Large
   group: Renegate
   access: Renegate
-  shuttlePath: /Maps/_Forge/Shuttles/Renegates/galandec.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/galandec.yml
   guidebookPage: Null
   class:
   - Fighter  
@@ -20,7 +20,7 @@
 - type: gameMap
   id: galandec
   mapName: 'Голландец'
-  mapPath: /Maps/_Forge/Shuttles/Renegates/galandec.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Renegates/galandec.yml
   minPlayers: 0
   stations:
     galandec:

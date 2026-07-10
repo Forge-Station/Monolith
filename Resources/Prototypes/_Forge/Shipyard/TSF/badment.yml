@@ -7,7 +7,7 @@
   category: Small
   group: Security
   access: Security
-  shuttlePath: /Maps/_Forge/Shuttles/TSF/badment.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/TSF/badment.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -19,7 +19,7 @@
 - type: gameMap
   id: badment
   mapName: TSF-EMP Бэдмент
-  mapPath: /Maps/_Forge/Shuttles/TSF/badment.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/TSF/badment.yml
   minPlayers: 0
   stations:
     badment:

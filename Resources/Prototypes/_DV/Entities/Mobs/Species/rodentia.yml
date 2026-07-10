@@ -18,8 +18,6 @@
     state: full
   # Forge-change-start
   - type: NightVision
-    activateSound: null
-    deactivateSound: null
   - type: Puller
     needsHands: false
   # Forge-change-end

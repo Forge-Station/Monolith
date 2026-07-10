@@ -7,7 +7,7 @@
   category: Medium
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/vector.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/vector.yml
   guidebookPage: Null
   class:
   - Engineering
@@ -17,7 +17,7 @@
 - type: gameMap
   id: vector
   mapName: 'EES Вектор'
-  mapPath: /Maps/_Forge/Shuttles/Empire/vector.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/vector.yml
   minPlayers: 0
   stations:
     vector:

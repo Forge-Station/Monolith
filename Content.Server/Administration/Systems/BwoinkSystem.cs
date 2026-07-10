@@ -700,13 +700,7 @@ namespace Content.Server.Administration.Systems
             var escapedText = FormattedMessage.EscapeText(message.Text);
 
             string bwoinkText;
-            string adminPrefix = "";
-
-            //Getting an administrator position
-            if (_config.GetCVar(CCVars.AhelpAdminPrefix) && senderAdmin is not null && senderAdmin.Title is not null)
-            {
-                adminPrefix = $"[bold]\\[{senderAdmin.Title}\\][/bold] ";
-            }
+            var adminPrefix = GetAhelpAdminPrefix(senderAdmin);
 
             if (senderAdmin is not null &&
                 senderAdmin.Flags ==
@@ -761,12 +755,7 @@ namespace Content.Server.Administration.Systems
                 }
             }
 
-            string adminPrefixWebhook = "";
-
-            if (_config.GetCVar(CCVars.AhelpAdminPrefixWebhook) && senderAdmin is not null && senderAdmin.Title is not null)
-            {
-                adminPrefixWebhook = $"[bold]\\[{senderAdmin.Title}\\][/bold] ";
-            }
+            var adminPrefixWebhook = GetAhelpAdminPrefix(senderAdmin, webhook: true);
 
             // Notify player
             if (_playerManager.TryGetSessionById(message.UserId, out var session) && !message.AdminOnly)
@@ -880,6 +869,21 @@ namespace Content.Server.Administration.Systems
                 .Where(p => _adminManager.GetAdminData(p)?.HasFlag(AdminFlags.Adminhelp) ?? false)
                 .Select(p => p.Channel)
                 .ToList();
+        }
+
+        private string GetAhelpAdminPrefix(AdminData? senderAdmin, bool webhook = false)
+        {
+            var cvar = webhook ? CCVars.AhelpAdminPrefixWebhook : CCVars.AhelpAdminPrefix;
+            if (!_config.GetCVar(cvar) || senderAdmin is null)
+                return "";
+
+            var rank = senderAdmin.Title;
+            if (string.IsNullOrEmpty(rank))
+                rank = senderAdmin.ShortTitle;
+            if (string.IsNullOrEmpty(rank))
+                rank = Loc.GetString("chat-manager-admin-channel-name");
+
+            return $"[bold]\\[{rank}\\][/bold] ";
         }
 
         private DiscordRelayedData GenerateAHelpMessage(AHelpMessageParams parameters)

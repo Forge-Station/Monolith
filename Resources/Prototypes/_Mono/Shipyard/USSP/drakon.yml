@@ -9,7 +9,7 @@
   category: Medium
   group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Mono/Shuttles/USSP/drakon.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/drakon.yml
   guidebookPage: Null
   class:
   - Destroyer
@@ -21,18 +21,18 @@
 - type: gameMap
   id: Drakon
   mapName: 'Drakon'
-  mapPath: /Maps/_Mono/Shuttles/USSP/drakon.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/USSP/drakon.yml
   minPlayers: 0
   stations:
     Drakon:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Drakon MIL{1}'
+          mapNameTemplate: 'Drakon USSP{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-            Mercenary: [ 0, 0 ]
-            Pilot: [ 0, 0 ]
+           USSPSergeant: [ 0, 0 ]
+           USSPRifleman: [ 0, 0 ]

@@ -94,13 +94,14 @@
     containers:
       key_slots:
       - EncryptionKeyCommon
-      # - EncryptionKeyUssp # Forge-change
+      #- EncryptionKeyUssp
+      #- EncryptionKeyFreeport
 
 - type: entity
   parent: ClothingHeadsetAlt
   id: ClothingHeadsetUSSP
   name: USSP headset
-  description: The standard-issue headset of the USSP Defensive Navy for decades. This headset will accept standard encryption keys and comes prefitted with a key for USSP Tactical Communications.
+  description: The standard-issue headset of the USSP Armed Forces for decades. This headset will accept standard encryption keys and comes prefitted with a key for USSP Tactical Communications.
   components:
   - type: Sprite
     sprite: Clothing/Ears/Headsets/security.rsi
@@ -110,7 +111,8 @@
     containers:
       key_slots:
       - EncryptionKeyCommon
-      # - EncryptionKeyUssp # Forge-change
+      #- EncryptionKeyUssp
+      #- EncryptionKeyFreeport
 
 #PDV
 - type: entity
@@ -144,3 +146,31 @@
       - EncryptionKeyStationMasterSR
       - EncryptionKeyDiplomacy
       - EncryptionKeyHospital
+
+#Viper Group
+
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: ClothingHeadsetViper
+  name: Viper Group headset
+  description: The standard-issue headset of Viper Group mercenaries, This headset will accept standard encryption keys and comes prefitted with a key for Tactical Communications.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Ears/Headsets/viper.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/Ears/Headsets/viper.rsi
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyViper
+      - EncryptionKeyFreeport
+
+- type: entity
+  parent: ClothingHeadsetViper
+  id: ClothingHeadsetViperAlt
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Ears/Headsets/viperalt.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/Ears/Headsets/viperalt.rsi

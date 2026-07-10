@@ -1036,6 +1036,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+    filterMobs: true
 
 - type: construction
   name: chain link fence corner
@@ -1053,6 +1054,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+    filterMobs: true
 
 - type: construction
   name: chain link fence end-piece
@@ -1070,6 +1072,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+    filterMobs: true
 
 - type: construction
   name: chain link fence gate
@@ -1087,6 +1090,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+    filterMobs: true
 
 #Wooden fence high
 - type: construction

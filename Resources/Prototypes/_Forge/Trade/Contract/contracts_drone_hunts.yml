@@ -21,13 +21,13 @@
     safetyRadius: 512
     placementAttempts: 16
     grids:
-    - path: /Maps/_Mono/Shuttles/World/mpulsar.yml
+    - path: /SharedMaps/_Mono/Shuttles/World/mpulsar.yml
       weight: 1
       gridNames:
       - "дрон-перехватчик «М-пульсар»"
       - "малый боевой дрон «Пульсар-3»"
       - "патрульный дрон «Искра»"
-    - path: /Maps/_Mono/Shuttles/World/lance.yml
+    - path: /SharedMaps/_Mono/Shuttles/World/lance.yml
       weight: 1
       gridNames:
       - "автономный разведчик «Ланцет»"
@@ -64,13 +64,13 @@
     safetyRadius: 768
     placementAttempts: 16
     grids:
-    - path: /Maps/_Mono/Shuttles/World/medusa.yml
+    - path: /SharedMaps/_Mono/Shuttles/World/medusa.yml
       weight: 1
       gridNames:
       - "ударный дрон «Медуза»"
       - "патрульная платформа «Медуза-2»"
       - "боевой дрон «Горгона»"
-    - path: /Maps/_Mono/Shuttles/World/assembly.yml
+    - path: /SharedMaps/_Mono/Shuttles/World/assembly.yml
       weight: 1
       gridNames:
       - "беспилотный корабль «Сборщик»"
@@ -107,13 +107,13 @@
     safetyRadius: 1024
     placementAttempts: 20
     grids:
-    - path: /Maps/_Mono/Shuttles/World/mauler.yml
+    - path: /SharedMaps/_Mono/Shuttles/World/mauler.yml
       weight: 1
       gridNames:
       - "автономный разрушитель «Маулер»"
       - "осадный дрон «Кувалда»"
       - "беспилотный крейсер «Молот»"
-    - path: /Maps/_Mono/Shuttles/World/quake.yml
+    - path: /SharedMaps/_Mono/Shuttles/World/quake.yml
       weight: 1
       gridNames:
       - "осадная платформа «Квейк»"

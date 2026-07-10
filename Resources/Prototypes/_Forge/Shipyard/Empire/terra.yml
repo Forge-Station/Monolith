@@ -7,7 +7,7 @@
   category: Small
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/terra.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/terra.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -17,7 +17,7 @@
 - type: gameMap
   id: terra
   mapName: 'EMF Терра'
-  mapPath: /Maps/_Forge/Shuttles/Empire/terra.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/terra.yml
   minPlayers: 0
   stations:
     terra:

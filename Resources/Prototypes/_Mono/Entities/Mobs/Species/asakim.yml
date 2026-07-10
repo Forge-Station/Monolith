@@ -5,6 +5,12 @@
   id: BaseMobAsakim
   abstract: true
   components:
+  # Forge-Change-Start
+  - type: ShowRoleInformation
+    roleName: show-role-information-asakim-name
+    description: show-role-information-asakim-description
+    duration: 15
+  #Forge-Change-End
   - type: HumanoidAppearance
     species: Asakim
     hideLayersOnEquip:

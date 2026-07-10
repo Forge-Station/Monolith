@@ -49,6 +49,11 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak
+  # Forge-Change-Start
+  - type: Construction
+    graph: FilingCabinet
+    node: defibrillatorcabinet
+  # Forge-Change-End
 
 - type: entity
   parent: DefibrillatorCabinet

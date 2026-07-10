@@ -54,6 +54,11 @@
                 collection: MetalGlassBreak
                 params:
                   volume: -4
+    # Forge-Change-Start
+    - type: Construction
+      graph: FilingCabinet
+      node: extinguishercabinet
+    # Forge-Change-End
 
 - type: entity
   parent: ExtinguisherCabinet

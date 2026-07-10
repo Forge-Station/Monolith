@@ -215,3 +215,36 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+
+# Forge-Change-Start
+- type: construction
+  id: ExtinguisherCabinet
+  name: extinguisher cabinet
+  graph: FilingCabinet
+  startNode: start
+  targetNode: extinguishercabinet
+  category: construction-category-storage
+  description: A small wall mounted cabinet designed to hold a fire extinguisher.
+  icon:
+    sprite: Structures/Wallmounts/extinguisher_cabinet.rsi
+    state: closed
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  canRotate: false
+
+- type: construction
+  id: DefibrillatorCabinet
+  name: defibrillator cabinet
+  graph: FilingCabinet
+  startNode: start
+  targetNode: defibrillatorcabinet
+  category: construction-category-storage
+  description: A small wall mounted cabinet designed to hold a defibrillator.
+  icon:
+    sprite: Structures/Wallmounts/defib_cabinet.rsi
+    state: closed
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  # Forge-Change-End

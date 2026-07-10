@@ -11,8 +11,8 @@ forge-job-name-outpostservice = Работник АФ
 job-name-service-worker = Корпоративный Рабочий НТ
 # Syndicate
 forge-job-name-syndicommander = Командир
-forge-job-name-medsyn = Санитар Синдиката
-forge-job-name-engineersyn = Техник Синдиката
+forge-job-name-medsyn = Санитар Горлекса
+forge-job-name-engineersyn = Техник Горлекса
 forge-job-name-smuggler = Контрабандист
 forge-job-name-smugglerbodyguard = Телохранитель
 forge-job-name-stormtrooper = Штурмовик

@@ -225,3 +225,8 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: RGlass
+  # Forge-Change-Start
+  - type: Construction
+    graph: Plastitanium
+    node: plastitaniumWindowDiagonal
+  # Forge-Change-End

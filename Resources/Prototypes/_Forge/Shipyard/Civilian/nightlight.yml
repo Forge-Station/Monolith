@@ -6,7 +6,7 @@
   price: 50850
   category: Medium
   group: Shipyard
-  shuttlePath: /Maps/_Forge/Shuttles/Civilian/nightlight.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Civilian/nightlight.yml
   guidebookPage: Null
   class:
   - Civilian
@@ -16,7 +16,7 @@
 - type: gameMap
   id: Nightlight
   mapName: 'Ночник'
-  mapPath: /Maps/_Forge/Shuttles/Civilian/nightlight.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Civilian/nightlight.yml
   minPlayers: 0
   stations:
     Nightlight:

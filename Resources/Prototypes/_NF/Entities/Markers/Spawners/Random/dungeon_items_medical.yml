@@ -86,6 +86,7 @@
     - MedkitAdvanced
     - MedkitCombatFilled
     - MedkitCombat
+    - MedkitAntiAddictFilled # Forge-change
     rareChance: 0.01
 
 - type: entity
@@ -413,10 +414,13 @@
     - SyringeStimulants
     - SyringeSigynate
     - SyringeSaline
+    - SyringeCodeine # Forge-change
+    - SyringeHaloperidol # Forge-change
     chance: 1
     offset: 0.0
     rarePrototypes:
     - SyringeBluespace
+    - SyringeMorphine # Forge-change
     rareChance: 0.05
 
 - type: entity

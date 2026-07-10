@@ -14,7 +14,7 @@
   category: Small
   group: Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Mono/Shuttles/sellsword.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/sellsword.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -24,7 +24,7 @@
 - type: gameMap
   id: Sellsword
   mapName: 'UW Sellsword'
-  mapPath: /Maps/_Mono/Shuttles/sellsword.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/sellsword.yml
   minPlayers: 0
   stations:
     Sellsword:

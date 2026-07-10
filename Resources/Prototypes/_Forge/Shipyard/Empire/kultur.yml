@@ -7,7 +7,7 @@
   category: Medium
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/kultur.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/kultur.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -17,7 +17,7 @@
 - type: gameMap
   id: kultur
   mapName: 'EMF Культур'
-  mapPath: /Maps/_Forge/Shuttles/Empire/kultur.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/kultur.yml
   minPlayers: 0
   stations:
     kultur:

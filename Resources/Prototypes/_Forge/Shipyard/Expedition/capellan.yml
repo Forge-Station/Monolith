@@ -18,12 +18,12 @@
   price: 269100 #sell 207k + 30%
   category: Large
   group: Expedition
-  shuttlePath: /Maps/_Forge/Shuttles/Expedition/capellan.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Expedition/capellan.yml
 
 - type: gameMap
   id: Capellan
   mapName: 'G3 «Капеллан»'
-  mapPath: /Maps/_Forge/Shuttles/Expedition/capellan.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Expedition/capellan.yml
   minPlayers: 0
   stations:
     Capellan:

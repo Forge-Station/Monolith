@@ -1,3 +1,3 @@
-ent-WeaponTurretSyndicateAntiMateriel = турель Синдиката (антиматериел)
-ent-WeaponTurretSyndicateMagnumAP = турель Синдиката (Magnum, бронебой)
-ent-WeaponTurretSyndicateShotgun = турель Синдиката (дробовик)
+ent-WeaponTurretSyndicateAntiMateriel = турель Горлекса (антиматериел)
+ent-WeaponTurretSyndicateMagnumAP = турель Горлекса (Magnum, бронебой)
+ent-WeaponTurretSyndicateShotgun = турель Горлекса (дробовик)

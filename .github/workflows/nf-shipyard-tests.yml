@@ -4,8 +4,10 @@ on:
   pull_request:
     branches: [ "main" ]
     paths:
-      - "Resources/Maps/_Mono/Shuttles/**/*.yml" # Ship grids, Mono - set to mono files
+      - "Resources/SharedMaps/_Mono/Shuttles/**/*.yml" # Ship grids, Mono - set to mono files
+      - "Resources/SharedMaps/_Forge/Shuttles/**/*.yml" # Ship grids, Forge - set to forge files
       - "Resources/Prototypes/_Mono/Shipyard/**/*.yml" # Shipyard prototypes, Mono - set to mono files
+      - "Resources/Prototypes/_Forge/Shipyard/**/*.yml" # Shipyard prototypes, Forge - set to forge files
       - "Content.IntegrationTests/Tests/_NF/ShipyardTests.cs" # Shipyard tests
       - "Resources/Prototypes/Entities/**/*.yml" # Mono Change, run when an entity may have changed price
 

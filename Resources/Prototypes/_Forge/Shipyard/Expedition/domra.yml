@@ -8,7 +8,7 @@
   price: 227500 #sell price 175,422$ * 1.3
   category: Large
   group: Expedition
-  shuttlePath: /Maps/_Forge/Shuttles/Expedition/domra.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Expedition/domra.yml
   guidebookPage: ShipyardDomra
   class:
   - Expedition
@@ -18,7 +18,7 @@
 - type: gameMap
   id: Domra
   mapName: G3 «Домра»
-  mapPath: /Maps/_Forge/Shuttles/Expedition/domra.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Expedition/domra.yml
   minPlayers: 0
   stations:
     Domra:

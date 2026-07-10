@@ -7,7 +7,7 @@
   category: Small
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/Turms.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/Turms.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -17,7 +17,7 @@
 - type: gameMap
   id: Turms
   mapName: ESP Турмс
-  mapPath: /Maps/_Forge/Shuttles/Empire/Turms.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/Turms.yml
   minPlayers: 0
   stations:
     Turms:

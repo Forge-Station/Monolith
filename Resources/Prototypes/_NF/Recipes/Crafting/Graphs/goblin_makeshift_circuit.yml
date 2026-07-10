@@ -35,7 +35,7 @@
             doAfter: 0.2
 
     - node: incompleteCircuitboard
-      entity: ScrapCircuitboard
+      entity: GoblinScrapCircuitboard
       edges:
         - to: clunkerScrapCircuit
           steps:

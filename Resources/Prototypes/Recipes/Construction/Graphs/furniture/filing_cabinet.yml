@@ -21,6 +21,18 @@
             - material: Steel
               amount: 3
               doAfter: 3
+        # Forge-Change-Start
+        - to: extinguishercabinet
+          steps:
+            - material: Steel
+              amount: 3
+              doAfter: 3
+        - to: defibrillatorcabinet
+          steps:
+            - material: Steel
+              amount: 3
+              doAfter: 3
+        # Forge-Change-End
 
     - node: filingCabinet
       entity: filingCabinet
@@ -55,3 +67,29 @@
           steps:
             - tool: Screwing
               doAfter: 4
+    # Forge-Change-Start
+    - node: extinguishercabinet
+      entity: ExtinguisherCabinet
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 3
+            - !type:EmptyAllContainers
+          steps:
+            - tool: Screwing
+              doAfter: 4
+    - node: defibrillatorcabinet
+      entity: DefibrillatorCabinet
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 3
+            - !type:EmptyAllContainers
+          steps:
+            - tool: Screwing
+              doAfter: 4
+    # Forge-Change-End

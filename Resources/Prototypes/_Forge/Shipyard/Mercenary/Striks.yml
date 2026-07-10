@@ -7,7 +7,7 @@
   category: Small
   group: Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/Striks.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Mercenary/Striks.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -15,7 +15,7 @@
 - type: gameMap
   id: Striks
   mapName: 'MBS Стрикс'
-  mapPath: /Maps/_Forge/Shuttles/Mercenary/Striks.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Mercenary/Striks.yml
   minPlayers: 0
   stations:
     Striks:

@@ -11,7 +11,7 @@
   category: Large
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Mirko.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/Voucher/Mirko.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -21,7 +21,7 @@
 - type: gameMap
   id: Mirko
   mapName: 'CWH Миррко'
-  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Mirko.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/Voucher/Mirko.yml
   minPlayers: 0
   stations:
     Mirko:

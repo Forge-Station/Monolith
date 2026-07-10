@@ -6,7 +6,7 @@
   price: 96000
   category: Medium
   group: Expedition
-  shuttlePath: /Maps/_Forge/Shuttles/Expedition/sprinter.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Expedition/sprinter.yml
   guidebookPage: null
   class:
   - Expedition
@@ -16,7 +16,7 @@
 - type: gameMap
   id: sprinter
   mapName: 'Спринтер'
-  mapPath: /Maps/_Forge/Shuttles/Expedition/sprinter.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Expedition/sprinter.yml
   minPlayers: 0
   stations:
     sprinter:

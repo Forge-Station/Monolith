@@ -83,6 +83,39 @@
           Quantity: 9
 
 - type: entity
+  name: pill canister
+  parent: PillCanister
+  id: PillCanisterCodeine
+  suffix: Codeine 9u, 5
+  components:
+  - type: Label
+    currentLabel: reagent-name-codeine
+  - type: StorageFill
+    contents:
+    - id: PillCodeine
+      amount: 5
+
+- type: entity
+  name: pill
+  suffix: Codeine 9u
+  parent: Pill
+  id: PillCodeine
+  components:
+  - type: Pill
+    pillType: 11
+  - type: Sprite
+    state: pill11
+  - type: Label
+    currentLabel: reagent-name-codeine
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Codeine
+          Quantity: 9
+
+- type: entity
   id: SyringeHaloperidol
   parent: PrefilledSyringe
   suffix: Haloperidol

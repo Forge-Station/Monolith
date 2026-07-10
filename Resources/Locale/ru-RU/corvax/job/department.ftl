@@ -1,4 +1,4 @@
-department-Syndicate = Синдикат
-job-name-stormtrooper = Штурмовик Синдиката
-job-name-commander = Командир Синдиката
+department-Syndicate = Горлекс
+job-name-stormtrooper = Штурмовик Горлекса
+job-name-commander = Командир Горлекса
 department-medical = Госпиталь

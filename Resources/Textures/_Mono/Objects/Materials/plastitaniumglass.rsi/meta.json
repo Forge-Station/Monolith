@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from SS13 Shiptest.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "plastitaniumglass-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "plastitaniumglass-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "plastitaniumglass"
+    },
+    {
+      "name": "plastitaniumglass_2"
+    },
+    {
+      "name": "plastitaniumglass_3"
+    }
+  ]
+}

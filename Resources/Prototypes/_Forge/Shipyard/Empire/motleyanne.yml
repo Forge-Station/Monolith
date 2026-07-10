@@ -12,7 +12,7 @@
   category: Medium
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Mono/Shuttles/BlackMarket/motleyanne.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/BlackMarket/motleyanne.yml
   guidebookPage: Null # ShipyardMotleyAnne
   class:
   - Pursuit
@@ -23,7 +23,7 @@
 - type: gameMap
   id: HEVMotleyAnne
   mapName: 'Мотли Анни'
-  mapPath: /Maps/_Mono/Shuttles/BlackMarket/motleyanne.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/BlackMarket/motleyanne.yml
   minPlayers: 0
   stations:
     HEVMotleyAnne:
@@ -49,7 +49,7 @@
   category: Small
   group: Custom
   mapchecker_group_override: Shipyard  # Treat this as a Shipyard vessel for mapchecker purposes
-  shuttlePath: /Maps/_Mono/Shuttles/Carrier/inertia.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/Carrier/inertia.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -60,7 +60,7 @@
 - type: gameMap
   id: HEVInertia
   mapName: 'QJ-490'
-  mapPath: /Maps/_Mono/Shuttles/Carrier/inertia.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/Carrier/inertia.yml
   minPlayers: 0
   stations:
     HEVInertia:
@@ -85,7 +85,7 @@
   category: Small
   group: Custom
   mapchecker_group_override: Shipyard  # Treat this as a Shipyard vessel for mapchecker purposes
-  shuttlePath: /Maps/_Mono/Shuttles/Carrier/mock.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/Carrier/mock.yml
   guidebookPage: Null
   class:
   - Pursuit
@@ -96,7 +96,7 @@
 - type: gameMap
   id: HEVMock
   mapName: 'Mock'
-  mapPath: /Maps/_Mono/Shuttles/Carrier/mock.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/Carrier/mock.yml
   minPlayers: 0
   stations:
     HEVMock:

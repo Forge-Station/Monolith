@@ -16,14 +16,14 @@ public sealed partial class FillWallPaintCommand : IConsoleCommand
 
     public string Command => "fpaint";
     public string Description => "Paints every paintable wall/window on a grid.";
-    public string Help => $"{Command} <grid/entity id> #<color>";
+    public string Help => $"{Command} <grid/entity NetEntity> <#RRGGBB|#RRGGBBAA|clear> - paint all paintable walls/windows on a paused grid, or clear paint.";
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
     {
         return args.Length switch
         {
-            1 => CompletionResult.FromHintOptions(CompletionHelper.Components<MapGridComponent>(args[0], _entManager), "<grid/entity id>"),
-            2 => CompletionResult.FromHint("#RRGGBB or #RRGGBBAA"),
+            1 => CompletionResult.FromHintOptions(CompletionHelper.NetEntities(args[0], _entManager), "<grid/entity NetEntity>"),
+            2 => CompletionResult.FromHint("#RRGGBB, #RRGGBBAA, or clear"),
             _ => CompletionResult.Empty,
         };
     }

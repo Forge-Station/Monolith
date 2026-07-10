@@ -63,6 +63,7 @@ public sealed partial class SandboxUIController : UIController, IOnStateChanged<
             {
                 if (!_admin.CanAdminPlace())
                     return;
+                WallPaintController.CloseWindow(); // Forge-Change
                 EntitySpawningController.ToggleWindow();
             }));
         _input.SetInputCommand(ContentKeyFunctions.OpenSandboxWindow,
@@ -72,6 +73,7 @@ public sealed partial class SandboxUIController : UIController, IOnStateChanged<
             {
                 if (!_admin.CanAdminPlace())
                     return;
+                WallPaintController.CloseWindow(); // Forge-Change
                 TileSpawningController.ToggleWindow();
             }));
         _input.SetInputCommand(ContentKeyFunctions.OpenDecalSpawnWindow,
@@ -79,6 +81,7 @@ public sealed partial class SandboxUIController : UIController, IOnStateChanged<
             {
                 if (!_admin.CanAdminPlace())
                     return;
+                WallPaintController.CloseWindow(); // Forge-Change
                 DecalPlacerController.ToggleWindow();
             }));
 
@@ -142,10 +145,28 @@ public sealed partial class SandboxUIController : UIController, IOnStateChanged<
                 _console.ExecuteCommand($"rmcomp {pnent.Id} StationAiOverlay");
         };
         _window.RespawnButton.OnPressed += _ => _sandbox.Respawn();
-        _window.SpawnTilesButton.OnPressed += _ => TileSpawningController.ToggleWindow();
-        _window.SpawnEntitiesButton.OnPressed += _ => EntitySpawningController.ToggleWindow();
-        _window.SpawnDecalsButton.OnPressed += _ => DecalPlacerController.ToggleWindow();
-        _window.PaintWallsButton.OnPressed += _ => WallPaintController.ToggleWindow();
+        _window.SpawnTilesButton.OnPressed += _ => // Forge-Change
+        {
+            WallPaintController.CloseWindow();
+            TileSpawningController.ToggleWindow();
+        };
+        _window.SpawnEntitiesButton.OnPressed += _ => // Forge-Change
+        {
+            WallPaintController.CloseWindow();
+            EntitySpawningController.ToggleWindow();
+        };
+        _window.SpawnDecalsButton.OnPressed += _ => // Forge-Change
+        {
+            WallPaintController.CloseWindow();
+            DecalPlacerController.ToggleWindow();
+        };
+        _window.PaintWallsButton.OnPressed += _ => // Forge-Change
+        {
+            EntitySpawningController.CloseWindow();
+            TileSpawningController.CloseWindow();
+            DecalPlacerController.CloseWindow();
+            WallPaintController.ToggleWindow();
+        };
         _window.GiveFullAccessButton.OnPressed += _ => _sandbox.GiveAdminAccess();
         _window.GiveAghostButton.OnPressed += _ => _sandbox.GiveAGhost();
         _window.ToggleLightButton.OnToggled += _ => _sandbox.ToggleLight();

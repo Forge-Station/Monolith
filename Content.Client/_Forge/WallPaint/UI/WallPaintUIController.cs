@@ -8,6 +8,7 @@ namespace Content.Client._Forge.WallPaint.UI;
 
 public sealed partial class WallPaintUIController : UIController, IOnStateExited<GameplayState>, IOnSystemChanged<SandboxSystem>
 {
+    [Dependency] private readonly IEntitySystemManager _systems = default!;
     [UISystemDependency] private readonly SandboxSystem _sandbox = default!;
 
     private WallPaintWindow? _window;
@@ -24,6 +25,8 @@ public sealed partial class WallPaintUIController : UIController, IOnStateExited
 
     public void OnStateExited(GameplayState state)
     {
+        DeactivatePaint();
+
         if (_window == null)
             return;
 
@@ -39,6 +42,7 @@ public sealed partial class WallPaintUIController : UIController, IOnStateExited
     public void OnSystemUnloaded(SandboxSystem system)
     {
         _sandbox.SandboxDisabled -= CloseWindow;
+        DeactivatePaint();
     }
 
     private void EnsureWindow()
@@ -46,6 +50,7 @@ public sealed partial class WallPaintUIController : UIController, IOnStateExited
         if (_window is { Disposed: false })
             return;
 
+        DeactivatePaint();
         _window = UIManager.CreateWindow<WallPaintWindow>();
         LayoutContainer.SetAnchorPreset(_window, LayoutContainer.LayoutPreset.CenterLeft);
     }
@@ -56,5 +61,11 @@ public sealed partial class WallPaintUIController : UIController, IOnStateExited
             return;
 
         _window.Close();
+    }
+
+    private void DeactivatePaint()
+    {
+        if (_systems.TryGetEntitySystem<WallPaintPlacementSystem>(out var wallPaint))
+            wallPaint.Deactivate();
     }
 }

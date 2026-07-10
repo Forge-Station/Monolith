@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Numerics;
 using Content.Client.Clickable;
 using Content.Client.Decals;
@@ -8,9 +7,11 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Placement;
+using Robust.Shared.Enums;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
+using Robust.Shared.Maths;
 using Robust.Shared.Player;
 
 namespace Content.Client._Forge.WallPaint;
@@ -26,6 +27,11 @@ public sealed partial class WallPaintPlacementSystem : EntitySystem
 
     private readonly ClickableEntityComparer _comparer = new();
 
+    private SpriteTreeSystem _spriteTree = default!;
+    private ClickableSystem _clickables = default!;
+    private EntityQuery<ClickableComponent> _clickQuery;
+    private PlacementSnapshot? _previousPlacement;
+    private bool _previousDecalsActive;
     private Color _color = Color.FromHex("#8B0000CC");
     private bool _active;
     private bool _erase;
@@ -40,10 +46,15 @@ public sealed partial class WallPaintPlacementSystem : EntitySystem
         CommandBinds.Builder
             .Bind(EngineKeyFunctions.EditorPlaceObject, new PointerInputCmdHandler(HandlePaint, outsidePrediction: true))
             .Register<WallPaintPlacementSystem>();
+
+        _spriteTree = EntityManager.System<SpriteTreeSystem>();
+        _clickables = EntityManager.System<ClickableSystem>();
+        _clickQuery = GetEntityQuery<ClickableComponent>();
     }
 
     public override void Shutdown()
     {
+        Deactivate();
         CommandBinds.Unregister<WallPaintPlacementSystem>();
         base.Shutdown();
     }
@@ -57,14 +68,20 @@ public sealed partial class WallPaintPlacementSystem : EntitySystem
 
         if (_active)
         {
+            CaptureSandboxState();
             _placement.Clear();
             _decals.SetActive(false);
             _input.Contexts.SetActiveContext("editor");
         }
         else
         {
-            _inputSystem.SetEntityContextActive();
+            RestoreSandboxState();
         }
+    }
+
+    public void Deactivate()
+    {
+        SetActive(false);
     }
 
     public void SetColor(Color color)
@@ -95,40 +112,52 @@ public sealed partial class WallPaintPlacementSystem : EntitySystem
         if (uid.IsValid() && HasComp<PaintableWallComponent>(uid))
             return uid;
 
-        foreach (var entity in GetClickableEntities(_transform.ToMapCoordinates(coords)))
-        {
-            if (HasComp<PaintableWallComponent>(entity))
-                return entity;
-        }
-
-        return null;
+        return GetClickablePaintTarget(_transform.ToMapCoordinates(coords));
     }
 
-    private IEnumerable<EntityUid> GetClickableEntities(MapCoordinates coordinates)
+    private EntityUid? GetClickablePaintTarget(MapCoordinates coordinates)
     {
         if (_eye.CurrentEye == null)
-            return Array.Empty<EntityUid>();
+            return null;
 
-        var spriteTree = EntityManager.System<SpriteTreeSystem>();
-        var entities = spriteTree.QueryAabb(coordinates.MapId, Box2.CenteredAround(coordinates.Position, new Vector2(1, 1)));
-        var found = new List<(EntityUid Uid, int DrawDepth, uint RenderOrder, float Bottom)>(entities.Count);
-        var clickQuery = GetEntityQuery<ClickableComponent>();
-        var clickables = EntityManager.System<ClickableSystem>();
+        var entities = _spriteTree.QueryAabb(coordinates.MapId, Box2.CenteredAround(coordinates.Position, new Vector2(1, 1)));
+        (EntityUid Uid, int DrawDepth, uint RenderOrder, float Bottom)? best = null;
 
         foreach (var entity in entities)
         {
-            if (clickQuery.TryGetComponent(entity.Uid, out var component) &&
-                clickables.CheckClick((entity.Uid, component, entity.Component, entity.Transform), coordinates.Position, _eye.CurrentEye, out var drawDepth, out var renderOrder, out var bottom))
+            if (!_clickQuery.TryGetComponent(entity.Uid, out var component) ||
+                !HasComp<PaintableWallComponent>(entity.Uid) ||
+                !_clickables.CheckClick((entity.Uid, component, entity.Component, entity.Transform), coordinates.Position, _eye.CurrentEye, out var drawDepth, out var renderOrder, out var bottom))
             {
-                found.Add((entity.Uid, drawDepth, renderOrder, bottom));
+                continue;
             }
+
+            var candidate = (entity.Uid, drawDepth, renderOrder, bottom);
+            if (best == null || _comparer.Compare(candidate, best.Value) < 0)
+                best = candidate;
         }
 
-        if (found.Count == 0)
-            return Array.Empty<EntityUid>();
+        return best?.Uid;
+    }
 
-        found.Sort(_comparer);
-        return found.Select(entity => entity.Uid);
+    private void CaptureSandboxState()
+    {
+        _previousPlacement = PlacementSnapshot.From(_placement);
+        _previousDecalsActive = _decals.IsActive;
+    }
+
+    private void RestoreSandboxState()
+    {
+        var restoredPlacement = _previousPlacement?.Restore(_placement) == true;
+        _previousPlacement = null;
+
+        if (_previousDecalsActive)
+            _decals.SetActive(true);
+
+        if (!restoredPlacement && !_previousDecalsActive)
+            _inputSystem.SetEntityContextActive();
+
+        _previousDecalsActive = false;
     }
 
     private sealed class ClickableEntityComparer : IComparer<(EntityUid Uid, int DrawDepth, uint RenderOrder, float Bottom)>
@@ -150,6 +179,78 @@ public sealed partial class WallPaintPlacementSystem : EntitySystem
                 return cmp;
 
             return y.Uid.CompareTo(x.Uid);
+        }
+    }
+
+    private sealed class PlacementSnapshot
+    {
+        private readonly PlacementInformation? _permission;
+        private readonly PlacementHijack? _hijack;
+        private readonly bool _eraser;
+        private readonly bool _replacement;
+        private readonly Direction _direction;
+        private readonly bool _mirrored;
+
+        private PlacementSnapshot(
+            PlacementInformation? permission,
+            PlacementHijack? hijack,
+            bool eraser,
+            bool replacement,
+            Direction direction,
+            bool mirrored)
+        {
+            _permission = permission;
+            _hijack = hijack;
+            _eraser = eraser;
+            _replacement = replacement;
+            _direction = direction;
+            _mirrored = mirrored;
+        }
+
+        public static PlacementSnapshot? From(IPlacementManager placement)
+        {
+            if (!placement.IsActive && !placement.Eraser)
+                return null;
+
+            return new PlacementSnapshot(
+                Clone(placement.CurrentPermission),
+                placement is PlacementManager manager ? manager.Hijack : null,
+                placement.Eraser,
+                placement.Replacement,
+                placement.Direction,
+                placement.Mirrored);
+        }
+
+        public bool Restore(IPlacementManager placement)
+        {
+            if (_permission != null)
+                placement.BeginPlacing(_permission, _hijack);
+
+            if (placement.Eraser != _eraser)
+                placement.ToggleEraser();
+
+            placement.Replacement = _replacement;
+            placement.Direction = _direction;
+            placement.Mirrored = _mirrored;
+            return _permission != null || _eraser;
+        }
+
+        private static PlacementInformation? Clone(PlacementInformation? source)
+        {
+            if (source == null)
+                return null;
+
+            return new PlacementInformation
+            {
+                MobUid = source.MobUid,
+                EntityType = source.EntityType,
+                TileType = source.TileType,
+                PlacementOption = source.PlacementOption,
+                Range = source.Range,
+                IsTile = source.IsTile,
+                Uses = source.Uses,
+                UseEditorContext = source.UseEditorContext,
+            };
         }
     }
 }

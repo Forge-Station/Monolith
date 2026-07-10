@@ -4,7 +4,6 @@ using Content.Shared.Administration;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.WallPaint;
 
@@ -12,48 +11,6 @@ public sealed partial class WallPaintSystem : EntitySystem
 {
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
-
-    private static readonly HashSet<string> PaintablePrototypeIds = new()
-    {
-        "WallShuttle",
-        "WallShuttleInterior",
-        "WallShuttleDiagonal",
-        "ShuttleWindow",
-        "ShuttleWindowDiagonal",
-        "WallReinforced",
-        "WallReinforcedDiagonal",
-        "ReinforcedWindow",
-        "ReinforcedWindowDiagonal",
-        "WindowReinforcedDirectional",
-        "WallPlastitanium",
-        "WallPlastitaniumIndestructible",
-        "WallPlastitaniumDiagonal",
-        "WallPlastitaniumDiagonalIndestructible",
-        "PlastitaniumWindowBase",
-        "PlastitaniumWindowSquareBase",
-        "PlastitaniumWindow",
-        "PlastitaniumWindowIndestructible",
-        "PlastitaniumWindowDiagonalBase",
-        "PlastitaniumWindowDiagonal",
-        "PlastitaniumWindowDiagonalIndestructible",
-    };
-
-    private static readonly HashSet<string> ProtectTransparentPrototypeIds = new()
-    {
-        "ShuttleWindow",
-        "ShuttleWindowDiagonal",
-        "ReinforcedWindow",
-        "ReinforcedWindowDiagonal",
-        "WindowReinforcedDirectional",
-        "PlastitaniumWindowBase",
-        "PlastitaniumWindowSquareBase",
-        "PlastitaniumWindow",
-        "PlastitaniumWindowIndestructible",
-        "PlastitaniumWindowDiagonalBase",
-        "PlastitaniumWindowDiagonal",
-        "PlastitaniumWindowDiagonalIndestructible",
-    };
 
     public override void Initialize()
     {
@@ -78,13 +35,10 @@ public sealed partial class WallPaintSystem : EntitySystem
     public int PaintGrid(EntityUid gridUid, Color color, bool remove)
     {
         var count = 0;
-        var query = EntityQueryEnumerator<TransformComponent>();
+        var enumerator = Transform(gridUid).ChildEnumerator;
 
-        while (query.MoveNext(out var uid, out var transform))
+        while (enumerator.MoveNext(out var uid))
         {
-            if (transform.GridUid != gridUid)
-                continue;
-
             if (TrySetPaint(uid, color, remove))
                 count++;
         }
@@ -128,21 +82,7 @@ public sealed partial class WallPaintSystem : EntitySystem
         }
 
         protectTransparent = false;
-
-        if (!TryPrototype(uid, out var prototype) || prototype == null)
-            return false;
-
-        var isPaintable = false;
-        foreach (var (id, _) in _prototype.EnumerateAllParents<EntityPrototype>(prototype.ID, includeSelf: true))
-        {
-            isPaintable |= PaintablePrototypeIds.Contains(id);
-            protectTransparent |= ProtectTransparentPrototypeIds.Contains(id);
-
-            if (isPaintable && protectTransparent)
-                return true;
-        }
-
-        return isPaintable;
+        return false;
     }
 
     private void OnPaintRequest(WallPaintRequestEvent ev, EntitySessionEventArgs args)

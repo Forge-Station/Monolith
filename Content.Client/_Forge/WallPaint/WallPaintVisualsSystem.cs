@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._Forge.WallPaint;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -13,7 +14,7 @@ public sealed partial class WallPaintVisualsSystem : EntitySystem
     private const string ShaderPrototypeId = "WallPaintDarken";
     private const float OpaqueAlphaThreshold = 0.95f;
 
-    private readonly Dictionary<EntityUid, ShaderInstance> _shaderInstances = new();
+    private readonly Dictionary<EntityUid, PaintShaderState> _shaderStates = new();
 
     public override void Initialize()
     {
@@ -21,6 +22,16 @@ public sealed partial class WallPaintVisualsSystem : EntitySystem
         SubscribeLocalEvent<WallPaintComponent, AfterAutoHandleStateEvent>(OnPaintHandleState);
         SubscribeLocalEvent<WallPaintComponent, ComponentShutdown>(OnPaintShutdown);
         SubscribeLocalEvent<PaintableWallComponent, ComponentStartup>(OnPaintableStartup);
+    }
+
+    public override void Shutdown()
+    {
+        foreach (var uid in _shaderStates.Keys.ToArray())
+        {
+            ClearShader(uid);
+        }
+
+        base.Shutdown();
     }
 
     private void OnPaintStartup(EntityUid uid, WallPaintComponent component, ComponentStartup args)
@@ -49,35 +60,59 @@ public sealed partial class WallPaintVisualsSystem : EntitySystem
         if (!Resolve(uid, ref sprite, false))
             return;
 
-        if (!_shaderInstances.TryGetValue(uid, out var shader))
+        if (!_shaderStates.TryGetValue(uid, out var state))
         {
-            shader = _prototype.Index<ShaderPrototype>(ShaderPrototypeId).InstanceUnique();
-            _shaderInstances[uid] = shader;
+            state = new PaintShaderState(
+                _prototype.Index<ShaderPrototype>(ShaderPrototypeId).InstanceUnique(),
+                sprite.PostShader,
+                sprite.GetScreenTexture,
+                sprite.RaiseShaderEvent);
+            _shaderStates[uid] = state;
         }
 
-        shader.SetParameter("paintColor", paint.Color);
-        shader.SetParameter("protectTransparency", paint.ProtectTransparent);
-        shader.SetParameter("opaqueAlphaThreshold", OpaqueAlphaThreshold);
+        state.Shader.SetParameter("paintColor", paint.Color);
+        state.Shader.SetParameter("protectTransparency", paint.ProtectTransparent);
+        state.Shader.SetParameter("opaqueAlphaThreshold", OpaqueAlphaThreshold);
 
-        sprite.PostShader = shader;
+        sprite.PostShader = state.Shader;
         sprite.GetScreenTexture = false;
         sprite.RaiseShaderEvent = false;
     }
 
     private void ClearShader(EntityUid uid)
     {
-        if (!_shaderInstances.Remove(uid, out var shader))
+        if (!_shaderStates.Remove(uid, out var state))
             return;
 
         if (!TerminatingOrDeleted(uid) &&
             TryComp(uid, out SpriteComponent? sprite) &&
-            sprite.PostShader == shader)
+            sprite.PostShader == state.Shader)
         {
-            sprite.PostShader = null;
-            sprite.GetScreenTexture = false;
-            sprite.RaiseShaderEvent = false;
+            sprite.PostShader = state.PreviousShader;
+            sprite.GetScreenTexture = state.PreviousGetScreenTexture;
+            sprite.RaiseShaderEvent = state.PreviousRaiseShaderEvent;
         }
 
-        shader.Dispose();
+        state.Shader.Dispose();
+    }
+
+    private sealed class PaintShaderState
+    {
+        public readonly ShaderInstance Shader;
+        public readonly ShaderInstance? PreviousShader;
+        public readonly bool PreviousGetScreenTexture;
+        public readonly bool PreviousRaiseShaderEvent;
+
+        public PaintShaderState(
+            ShaderInstance shader,
+            ShaderInstance? previousShader,
+            bool previousGetScreenTexture,
+            bool previousRaiseShaderEvent)
+        {
+            Shader = shader;
+            PreviousShader = previousShader;
+            PreviousGetScreenTexture = previousGetScreenTexture;
+            PreviousRaiseShaderEvent = previousRaiseShaderEvent;
+        }
     }
 }

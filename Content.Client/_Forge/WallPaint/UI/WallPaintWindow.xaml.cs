@@ -37,6 +37,12 @@ public sealed partial class WallPaintWindow : DefaultWindow
     public override void Close()
     {
         base.Close();
-        _wallPaint.SetActive(false);
+        _wallPaint.Deactivate();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        _wallPaint.Deactivate();
+        base.Dispose(disposing);
     }
 }

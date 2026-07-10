@@ -17,7 +17,7 @@
         collection: GlassSmack
   - type: WallMount
     arc: 360 # interact despite grilles
-  - type: PaintableWall
+  - type: PaintableWall # Forge-Change
     protectTransparent: true
   - type: Tag
     tags:

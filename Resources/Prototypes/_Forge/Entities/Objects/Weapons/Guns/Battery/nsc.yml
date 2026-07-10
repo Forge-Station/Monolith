@@ -1,0 +1,162 @@
+- type: entity
+  name: SLP-HG-18 Projector
+  parent: ForgeBaseWeaponFrameEnergyPistolNanotrasen
+  id: WeaponEnergyPistolNexusProjector
+  suffix: Нексус
+  description: UcasCo plasma pistol with semi-auto, burst, and full-auto modes. Self-recharging battery.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_pistol.rsi
+    layers:
+    - state: icon
+      visible: false
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_pistol.rsi
+  - type: Item
+    size: Small
+    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_pistol.rsi
+    shape:
+    - 0,0,1,1
+    inhandVisuals:
+      left:
+      - state: inhand-left-3
+      right:
+      - state: inhand-right-3
+  - type: Gun
+    examineCaliber: gun-examine-energybolt-low
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    burstFireRate: 4
+    burstCooldown: 0.35
+    shotsPerBurst: 3
+    fireRate: 3
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletNexusPlasmaProjector
+    fireCost: 60
+  - type: Battery
+    maxCharge: 1560
+    startingCharge: 1560
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 17
+  - type: SelectiveFireBattery
+    modes:
+    - mode: SemiAuto
+      proto: BulletNexusPlasmaProjector
+      fireCost: 60
+      fireRate: 1.5
+      minAngle: 2
+      maxAngle: 2
+    - mode: Burst
+      proto: BulletNexusPlasmaProjector
+      fireCost: 60
+      fireRate: 3
+      minAngle: 8
+      maxAngle: 8
+    - mode: FullAuto
+      proto: BulletNexusPlasmaProjector
+      fireCost: 60
+      fireRate: 6
+      minAngle: 16
+      maxAngle: 16
+
+- type: entity
+  name: SLP-HG-24 Doznavatel
+  parent: ForgeBaseWeaponFrameEnergyPistolNanotrasen
+  id: WeaponEnergyPistolNexusDoznavatel
+  suffix: Нексус
+  description: UcasCo pistol with plasma bolts and a charged EMP shot. EMP mode uses most of the battery per shot.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_emp_pistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-3
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_emp_pistol.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: true
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,1
+  - type: Gun
+    examineCaliber: gun-examine-energybolt-low
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletNexusPlasmaDoznavatel
+    fireCost: 60
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: BulletNexusPlasmaDoznavatel
+      fireCost: 60
+    - proto: BulletNexusPlasmaEmp
+      fireCost: 600
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: BatterySelfRecharger
+    autoRecharge: false
+
+- type: entity
+  name: SLP-AR-4 Kiy
+  parent: [ForgeBaseWeaponFrameEnergyRifleAssaultNanotrasen, BaseGunWieldable]
+  id: WeaponEnergyRifleNexusKiy
+  suffix: Нексус
+  description: UcasCo plasma rifle. Semi-auto fires one heavy bolt; full auto fires two lighter bolts per shot.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle_inhand_x64.rsi
+  - type: Item
+    size: Large
+    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle_inhand_x64.rsi
+    shape:
+    - 0,0,4,1
+  - type: Gun
+    examineCaliber: gun-examine-energybolt-medium
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    fireRate: 3.5
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletNexusPlasmaKiySemi
+    fireCost: 70
+  - type: SelectiveFireBattery
+    modes:
+    - mode: SemiAuto
+      proto: BulletNexusPlasmaKiySemi
+      fireCost: 70
+      minAngle: 2
+      maxAngle: 2
+    - mode: FullAuto
+      proto: BulletNexusPlasmaKiyTwin
+      fireCost: 70
+  - type: Battery
+    maxCharge: 2800
+    startingCharge: 2800
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 5

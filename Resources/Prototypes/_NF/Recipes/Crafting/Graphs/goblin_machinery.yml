@@ -1,0 +1,73 @@
+# Forge-Change-Start
+# Makeshift Circuit Forge
+- type: constructionGraph
+  id: goblin_machinery
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: clunkerGenerator
+          steps:
+          - tag: Barrel
+            name: construction-graph-component-barrel
+            icon:
+              sprite: _NF/Objects/Storage/Barrels/grey.rsi
+              state: icon
+            doAfter: 0.5
+          - tag: PortableGeneratorClunkerCircuitboard
+            name: construction-graph-component-portable-generator-clunker-circuitboard
+            icon:
+              sprite: Objects/Misc/module.rsi
+              state: makeshift
+            doAfter: 0.2
+          - tag: GoblinPreciousTrash
+            name: construction-graph-component-goblin-precious-trash
+            icon:
+              sprite: Objects/Consumable/Food/snacks.rsi
+              state: boritos-trash
+            doAfter: 0.2
+          - tag: GoblinPreciousTrash
+            name: construction-graph-component-goblin-precious-trash
+            icon:
+              sprite: Objects/Consumable/Food/snacks.rsi
+              state: chips-trash
+            doAfter: 0.2
+        - to: goblinThruster
+          steps:
+          - tag: AirCanister
+            name: construction-graph-component-air-canister
+            icon:
+              sprite: _NF/Structures/Storage/canister.rsi
+              state: air
+            doAfter: 0.5
+          - tag: GoblinThrusterCircuitboard
+            name: construction-graph-component-goblin-thruster-circuitboard
+            icon:
+              sprite: Objects/Misc/module.rsi
+              state: makeshift
+            doAfter: 0.2
+          - tag: Welder
+            name: construction-graph-component-welder
+            icon:
+              sprite: Objects/Tools/welder.rsi
+              state: icon
+            doAfter: 0.2
+          - tag: FireExtinguisher
+            name: construction-graph-component-fire-extinguisher
+            icon:
+              sprite: _NF/Objects/Misc/fire_extinguisher.rsi
+              state: fire_extinguisher_closed
+            doAfter: 0.2
+          - tag: GoblinPreciousTrash
+            name: construction-graph-component-goblin-precious-trash
+            icon:
+              sprite: Objects/Consumable/Food/snacks.rsi
+              state: chips-trash
+            doAfter: 0.2
+
+    - node: clunkerGenerator
+      entity: PortableGeneratorClunker
+
+    - node: goblinThruster
+      entity: GoblinThruster
+# Forge-Change-End

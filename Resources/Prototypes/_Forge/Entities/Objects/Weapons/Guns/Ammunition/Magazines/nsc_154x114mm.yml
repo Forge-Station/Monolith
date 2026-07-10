@@ -1,0 +1,68 @@
+- type: entity
+  id: BaseMagazine154x114mm
+  name: magazine (15.4x114mm)
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - Magazine154x114mm
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,1
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge154x114mm
+    proto: Cartridge154x114mmFMJ
+    capacity: 5
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/nexus_154x114mm_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazine154x114mm
+  id: Magazine154x114mmFMJ
+  name: magazine (15.4x114mm FMJ)
+
+- type: entity
+  parent: BaseMagazine154x114mm
+  id: Magazine154x114mmHE
+  name: magazine (15.4x114mm HE)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge154x114mmHE
+  - type: Sprite
+    layers:
+    - state: HE
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseMagazine154x114mm
+  id: Magazine154x114mmAP
+  name: magazine (15.4x114mm AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge154x114mmAP
+  - type: Sprite
+    layers:
+    - state: piercing
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

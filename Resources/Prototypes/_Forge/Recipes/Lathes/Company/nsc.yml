@@ -1,0 +1,447 @@
+- type: latheRecipe
+  abstract: true
+  id: NSCBureaucracyRecipe
+  parent: baseBureaucracyrecipe
+  categories:
+  - NSC
+  - Bureaucracy
+
+- type: latheRecipe
+  abstract: true
+  id: NSCRecipe
+  parent: BaseToolRecipe
+  categories:
+  - NSC
+
+- type: latheRecipe
+  abstract: true
+  id: NSCApparelRecipe
+  parent: BaseToolRecipe
+  categories:
+  - NSC
+
+- type: latheRecipe
+  abstract: true
+  id: NSCArmorRecipe
+  parent: NFBaseArmorRecipe
+  categories:
+  - NSC
+
+- type: latheRecipe
+  abstract: true
+  id: NSCHelmetRecipe
+  parent: NFBaseHelmetRecipe
+  categories:
+  - NSC
+
+- type: latheRecipe
+  abstract: true
+  id: NSCMaskRecipe
+  parent: NFBaseMaskArmoredRecipe
+  categories:
+  - NSC
+
+- type: latheRecipe
+  abstract: true
+  id: NSCMagBootsRecipe
+  parent: NFBaseMagBootsRecipe
+  categories:
+  - NSC
+
+- type: latheRecipe
+  abstract: true
+  id: NSCHardsuitT1Recipe
+  parent: MonoHardsuitT1Recipe
+  categories:
+  - NSC
+  completetime: 10
+  materials:
+    Glass: 200
+    Steel: 3000
+    Plastic: 1000
+    Plasteel: 4000
+    Durathread: 1500
+    Silver: 500
+    Gold: 500
+
+- type: latheRecipe
+  abstract: true
+  id: NSCHardsuitT2Recipe
+  parent: MonoHardsuitT2Recipe
+  categories:
+  - NSC
+  completetime: 18
+  materials:
+    Glass: 300
+    Steel: 3500
+    Plastic: 1250
+    Plasteel: 5000
+    Durathread: 2500
+    Silver: 500
+    Gold: 500
+
+- type: latheRecipe
+  abstract: true
+  id: NSCHardsuitT3Recipe
+  parent: MonoHardsuitT3TsfRecipe
+  categories:
+  - NSC
+  completetime: 22
+  materials:
+    Plastic: 200
+    Steel: 3600
+    Plastitanium: 2250
+    Plasteel: 3600
+    Durathread: 2700
+    Silver: 450
+    Gold: 450
+    UraniumDepleted: 100
+
+- type: latheRecipe
+  parent: NSCHardsuitT1Recipe
+  id: ClothingOuterHardsuitNexusWorker
+  result: ClothingOuterHardsuitNexusWorker
+
+- type: latheRecipe
+  parent: NSCHardsuitT1Recipe
+  id: ClothingOuterHardsuitNexusMilT1
+  result: ClothingOuterHardsuitNexusMilT1
+
+- type: latheRecipe
+  parent: NSCHardsuitT2Recipe
+  id: ClothingOuterHardsuitNexusMilT2
+  result: ClothingOuterHardsuitNexusMilT2
+
+- type: latheRecipe
+  parent: NSCHardsuitT3Recipe
+  id: ClothingOuterHardsuitNexusMilT3
+  result: ClothingOuterHardsuitNexusMilT3
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: WeaponSubMachineGunNexusShebet
+  result: WeaponSubMachineGunNexusShebet
+  completetime: 12
+  materials:
+    Steel: 1500
+    Plastic: 500
+    Plasteel: 800
+    Silver: 200
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: Magazine5x23mmNexus
+  result: Magazine5x23mmNexus
+  completetime: 6
+  materials:
+    Steel: 300
+    Plastic: 200
+    Plasteel: 200
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: AmmoBox5x23mmNexus
+  result: AmmoBox5x23mmNexus
+  completetime: 6
+  materials:
+    Steel: 1200
+    Plastic: 800
+    Plasteel: 800
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: WeaponSniperRifleNexusDlan
+  result: WeaponSniperRifleNexusDlan
+  completetime: 18
+  materials:
+    Steel: 3000
+    Plasteel: 1500
+    Plastitanium: 500
+    Plastic: 400
+    Silver: 400
+    Gold: 200
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: Magazine154x114mmFMJ
+  result: Magazine154x114mmFMJ
+  completetime: 8
+  materials:
+    Steel: 500
+    Plasteel: 400
+    Silver: 150
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: Magazine154x114mmHE
+  result: Magazine154x114mmHE
+  completetime: 8
+  materials:
+    Steel: 500
+    Silver: 250
+    Plasma: 350
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: Magazine154x114mmAP
+  result: Magazine154x114mmAP
+  completetime: 8
+  materials:
+    Steel: 600
+    Plastitanium: 200
+    Silver: 150
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: AmmoBox154x114mmFMJ
+  result: AmmoBox154x114mmFMJ
+  completetime: 6
+  materials:
+    Steel: 2000
+    Plasteel: 1600
+    Silver: 600
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: AmmoBox154x114mmHE
+  result: AmmoBox154x114mmHE
+  completetime: 6
+  materials:
+    Steel: 2000
+    Silver: 1000
+    Plasma: 1400
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: AmmoBox154x114mmAP
+  result: AmmoBox154x114mmAP
+  completetime: 6
+  materials:
+    Steel: 2400
+    Plastitanium: 800
+    Silver: 600
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: WeaponEnergyPistolNexusProjector
+  result: WeaponEnergyPistolNexusProjector
+  completetime: 10
+  materials:
+    Steel: 800
+    Plastic: 400
+    Plasma: 300
+    Silver: 250
+    UraniumDepleted: 50
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: WeaponEnergyPistolNexusDoznavatel
+  result: WeaponEnergyPistolNexusDoznavatel
+  completetime: 12
+  materials:
+    Steel: 900
+    Plastic: 500
+    Plasma: 400
+    Silver: 300
+    UraniumDepleted: 50
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: WeaponEnergySwordNexusProtos
+  result: WeaponEnergySwordNexusProtos
+  completetime: 12
+  materials:
+    Steel: 1200
+    Plasteel: 3000
+    Plastic: 400
+    Plasma: 3000
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: WeaponEnergyRifleNexusKiy
+  result: WeaponEnergyRifleNexusKiy
+  completetime: 14
+  materials:
+    Steel: 1500
+    Plastitanium: 500
+    Plasma: 500
+    Silver: 400
+    UraniumDepleted: 100
+
+- type: latheRecipe
+  parent: NSCRecipe
+  id: WeaponEnergyShotgunNexusUdarnik
+  result: WeaponEnergyShotgunNexusUdarnik
+  completetime: 14
+  materials:
+    Steel: 1600
+    Plastitanium: 600
+    Plasma: 550
+    Silver: 350
+    UraniumDepleted: 100
+
+# NSC personnel apparel (unlocked by NSCBasicApparel).
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingUniformJumpsuitNexusTurtleneck
+  result: ClothingUniformJumpsuitNexusTurtleneck
+  completetime: 5
+  materials:
+    Cloth: 500
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingUniformJumpsuitNexusWorker
+  result: ClothingUniformJumpsuitNexusWorker
+  completetime: 5
+  materials:
+    Cloth: 500
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingUniformJumpsuitNexusSecurity
+  result: ClothingUniformJumpsuitNexusSecurity
+  completetime: 5
+  materials:
+    Cloth: 500
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingOuterCoatNexusGreatcoat
+  result: ClothingOuterCoatNexusGreatcoat
+  completetime: 6
+  materials:
+    Cloth: 800
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingHeadHatNexusBeret
+  result: ClothingHeadHatNexusBeret
+  completetime: 5
+  materials:
+    Cloth: 300
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingHeadHatNexusCap
+  result: ClothingHeadHatNexusCap
+  completetime: 5
+  materials:
+    Cloth: 300
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingHeadHatNexusStarBeret
+  result: ClothingHeadHatNexusStarBeret
+  completetime: 5
+  materials:
+    Cloth: 300
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingHeadHatNexusGarrisonCap
+  result: ClothingHeadHatNexusGarrisonCap
+  completetime: 5
+  materials:
+    Cloth: 300
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingEyesGlassesNexus
+  result: ClothingEyesGlassesNexus
+  completetime: 5
+  materials:
+    Steel: 200
+    Plastic: 300
+    Glass: 500
+
+- type: latheRecipe
+  parent: NSCMaskRecipe
+  id: ClothingMaskGasNexus
+  result: ClothingMaskGasNexus
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingBeltWebbingsNormalNexus
+  result: ClothingBeltWebbingsNormalNexus
+  completetime: 5
+  materials:
+    Cloth: 400
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingBeltWebbingsBigNexus
+  result: ClothingBeltWebbingsBigNexus
+  completetime: 6
+  materials:
+    Cloth: 600
+
+- type: latheRecipe
+  parent: NSCArmorRecipe
+  id: ClothingOuterVestWebNexus
+  result: ClothingOuterVestWebNexus
+
+- type: latheRecipe
+  parent: NSCHelmetRecipe
+  id: ClothingHeadHelmetNexus
+  result: ClothingHeadHelmetNexus
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingHelmetAttachmentNVGsNexus
+  result: ClothingHelmetAttachmentNVGsNexus
+  completetime: 2
+  materials:
+    Steel: 200
+    Glass: 100
+    Silver: 100
+    Gold: 100
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingHandsGlovesCombatNexus
+  result: ClothingHandsGlovesCombatNexus
+  completetime: 5
+  materials:
+    Cloth: 300
+
+- type: latheRecipe
+  parent: NSCMagBootsRecipe
+  id: ClothingShoesBootsMagNexus
+  result: ClothingShoesBootsMagNexus
+
+- type: latheRecipe
+  parent: NSCBureaucracyRecipe
+  id: BriefcaseNexus
+  result: BriefcaseNexus
+  completetime: 8
+  materials:
+    Steel: 200
+    Plastic: 150
+    Cloth: 500
+
+- type: latheRecipe
+  parent: NSCBureaucracyRecipe
+  id: PenNexus
+  result: PenNexus
+  materials:
+    Steel: 50
+    Diamond: 100
+
+- type: latheRecipe
+  parent: NSCBureaucracyRecipe
+  id: BoxFolderClipboardNexus
+  result: BoxFolderClipboardNexus
+  completetime: 6
+  materials:
+    Steel: 75
+    Plastic: 100
+
+- type: latheRecipe
+  parent: NSCBureaucracyRecipe
+  id: RubberStampNexus
+  result: RubberStampNexus
+  materials:
+    Steel: 100
+    Plastic: 100

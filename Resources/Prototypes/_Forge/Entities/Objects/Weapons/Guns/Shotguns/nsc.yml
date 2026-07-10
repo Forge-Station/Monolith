@@ -1,0 +1,43 @@
+- type: entity
+  name: SLP-SG-4 Udarnik
+  parent: [BaseWeaponBattery, BaseGunWieldable]
+  id: WeaponEnergyShotgunNexusUdarnik
+  suffix: Нексус
+  description: UcasCo plasma shotgun with a tight spread. Must be wielded.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: Appearance
+  - type: Clothing
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun_inhand_x64.rsi
+  - type: Item
+    size: Large
+    sprite: Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun_inhand_x64.rsi
+    shape:
+    - 0,0,4,1
+  - type: GunRequiresWield
+  - type: Gun
+    examineCaliber: gun-examine-energybolt-medium
+    projectileSpeed: 40
+    fireRate: 2
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletNexusPlasmaSpreadNarrow
+    fireCost: 200
+  - type: Battery
+    maxCharge: 1800
+    startingCharge: 1800
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 6

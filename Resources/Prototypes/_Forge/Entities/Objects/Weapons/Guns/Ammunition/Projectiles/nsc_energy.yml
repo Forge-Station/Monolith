@@ -1,0 +1,128 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  id: BulletNexusPlasma
+  name: nexus plasma bolt
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Projectiles/nexus_energie_projectile.rsi
+    layers:
+    - state: heavy
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Heat: 13.5
+    armorPenetration: 0.1
+  - type: Tracer
+    color: "#4fc3ff"
+    length: 2
+
+- type: entity
+  name: nexus doznavatel plasma bolt
+  id: BulletNexusPlasmaDoznavatel
+  categories: [ HideSpawnMenu ]
+  parent: BulletNexusPlasma
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 20
+
+- type: entity
+  name: nexus projector plasma bolt
+  id: BulletNexusPlasmaProjector
+  categories: [ HideSpawnMenu ]
+  parent: BulletNexusPlasma
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 22
+
+- type: entity
+  name: paired nexus plasma bolts
+  id: BulletNexusPlasmaTwin
+  categories: [ HideSpawnMenu ]
+  parent: BulletNexusPlasma
+  components:
+  - type: ProjectileSpread
+    proto: BulletNexusPlasma
+    count: 2
+    spread: 5
+
+- type: entity
+  name: kiy semi nexus plasma bolt
+  id: BulletNexusPlasmaKiySemi
+  categories: [ HideSpawnMenu ]
+  parent: BulletNexusPlasma
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 22
+
+- type: entity
+  name: kiy auto nexus plasma bolt
+  id: BulletNexusPlasmaKiyAuto
+  categories: [ HideSpawnMenu ]
+  parent: BulletNexusPlasma
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 12
+
+- type: entity
+  name: kiy paired nexus plasma bolts
+  id: BulletNexusPlasmaKiyTwin
+  categories: [ HideSpawnMenu ]
+  parent: BulletNexusPlasmaKiyAuto
+  components:
+  - type: ProjectileSpread
+    proto: BulletNexusPlasmaKiyAuto
+    count: 2
+    spread: 10
+
+- type: entity
+  name: nexus plasma barrage
+  id: BulletNexusPlasmaSpread
+  categories: [ HideSpawnMenu ]
+  parent: BulletNexusPlasma
+  components:
+  - type: ProjectileSpread
+    proto: BulletNexusPlasma
+    count: 5
+    spread: 30
+
+- type: entity
+  name: narrow nexus plasma barrage
+  id: BulletNexusPlasmaSpreadNarrow
+  categories: [ HideSpawnMenu ]
+  parent: BulletNexusPlasma
+  components:
+  - type: ProjectileSpread
+    proto: BulletNexusPlasma
+    count: 4
+    spread: 10
+
+- type: entity
+  parent: [BaseBulletTrigger, BulletNexusPlasma]
+  id: BulletNexusPlasmaEmp
+  name: nexus charged EMP bolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Projectiles/nexus_energie_projectile.rsi
+    layers:
+    - state: plasma
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Shock: 5
+        Blunt: 8
+  - type: EmpOnTrigger
+    range: 5
+    energyConsumption: 2700000
+    disableDuration: 5

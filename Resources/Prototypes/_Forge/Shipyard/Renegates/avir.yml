@@ -14,7 +14,7 @@
   parent: BaseVessel
   name: G3 «Авир»
   description: Среднегабаритный боевой шаттл Ренегатов.
-  price: 138000
+  price: 174000
   category: Medium
   group: Renegate
   access: Renegate

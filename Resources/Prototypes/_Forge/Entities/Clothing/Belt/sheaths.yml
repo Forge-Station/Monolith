@@ -1,0 +1,79 @@
+﻿- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase]
+  id: OdatiSheath
+  name: Ножы одати
+  description: Ножны предназначенные для одати
+  components:
+  - type: Sprite
+    sprite: _Forge/OniMeleeWeapons/Odati/odatiSheathItem.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Forge/OniMeleeWeapons/Odati/odatiSheath.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        name: Sabre
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - Odati
+  - type: ItemMapper
+    mapLayers:
+      sheath-sabre:
+        whitelist:
+          tags:
+          - Odati
+  - type: Appearance
+
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase]
+  id: Type3Sheath
+  name: Ножны тип 3
+  description: Ножны предназначенные для меча тип 3
+  components:
+  - type: Sprite
+    sprite: _Forge/OniMeleeWeapons/Type3/type3Sheath.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Forge/OniMeleeWeapons/Type3/type3Sheath.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        name: Sabre
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - Type3
+  - type: ItemMapper
+    mapLayers:
+      sheath-sabre:
+        whitelist:
+          tags:
+          - Type3
+  - type: Appearance
+
+- type: entity
+  id: Type3SheathFilled
+  parent: Type3Sheath
+  suffix: Заполненные
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - Type3
+
+- type: entity
+  id: OdatiSheathFilled
+  parent: OdatiSheath
+  suffix: Заполненные
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - Odati

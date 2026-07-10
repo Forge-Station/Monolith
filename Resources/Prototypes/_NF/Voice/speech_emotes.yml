@@ -56,3 +56,24 @@
     - belchs
     - burps
     - belches
+# Forge-Change-Start
+
+- type: emote
+  id: Surprise
+  name: chat-emote-name-goblin-surprise
+  category: Vocal
+  available: false
+  icon: Interface/Emotes/scream.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-goblin-surprise"]
+  chatTriggers:
+    - surprise
+    - surprises
+    - surprised
+    - surprising
+# Forge-Change-End

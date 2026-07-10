@@ -1,0 +1,116 @@
+- type: entity
+  parent: PortableGeneratorJrPacman
+  name: generator-goblin-name
+  description: generator-goblin-desc
+  id: PortableGeneratorClunker
+  suffix: Welding Fuel, Alcohol, 5 kW
+  components:
+    - type: Sprite
+      sprite: Forge/Structures/Power/generation.rsi
+      layers:
+        - state: clunker
+          map: [ "enum.GeneratorVisualLayers.Body" ]
+        - state: clunker_sparkle
+          map: [ "enum.GeneratorVisualLayers.Unlit" ]
+          shader: unshaded
+          visible: false
+    - type: GenericVisualizer
+      visuals:
+        enum.GeneratorVisuals.Running:
+          enum.GeneratorVisualLayers.Body:
+            True: { state: clunker_on_lit }
+            False: { state: clunker }
+          enum.GeneratorVisualLayers.Unlit:
+            True: { visible: true }
+            False: { visible: false }
+    - type: GoblinMade
+    - type: Machine
+      board: PortableGeneratorClunkerCircuitboard
+    - type: FuelGenerator
+      targetPower: 6000 # Frontier - 2000<6000
+      minTargetPower: 1000
+      optimalPower: 6000 # Frontier - 2000<6000
+      maxTargetPower: 20000 # Mono
+      # 30~ minutes at full tank.
+      optimalBurnRate: 0.11111111
+      # Shallow curve
+      fuelEfficiencyConstant: 0.3
+    # All kind flammable Alcohol and welding fuel can be fueled.
+    - type: ChemicalFuelGeneratorAdapter
+      solution: tank
+      reagents:
+        Absinthe: 0.5
+        Acetone: 0.5
+        Ale: 0.5
+        AlliesCocktail: 0.5
+        Amasec: 0.5
+        Andalusia: 0.5
+        Antifreeze: 0.5
+        ArnoldPalmer: 0.5
+        AtomicBomb: 1
+        B52: 0.5
+        Barefoot: 0.5
+        BeepskySmash: 0.5
+        Booger: 0.5
+        BraveBull: 0.5
+        BudgetInsulsDrink: 0.5
+        CogChamp: 0.5
+        Cognac: 0.5
+        Cosmopolitan: 0.5
+        CubaLibre: 0.5
+        DeadRum: 0.5
+        DemonsBlood: 0.5
+        DevilsKiss: 0.5
+        DriestMartini: 0.5
+        ErikaSurprise: 0.5
+        Ethanol: 0.5
+        GargleBlaster: 0.5
+        Gildlager: 0.5
+        Gin: 0.5
+        GinFizz: 0.5
+        Grog: 0.5
+        Manhattan: 0.5
+        ManhattanProject: 0.5
+        ManlyDorf: 0.5
+        Margarita: 0.5
+        Martini: 0.5
+        Mead: 0.5
+        Mojito: 0.5
+        Moonshine: 0.5
+        Painkiller: 0.5
+        Patron: 0.5
+        PinaColada: 0.5
+        PoisonWine: 0.5
+        RedMead: 0.5
+        Rubberneck: 0.5
+        Rum: 0.5
+        Sake: 0.5
+        Sbiten: 0.5
+        ScrewdriverCocktail: 0.5
+        Silencer: 0.5
+        Singulo: 0.5
+        SnowWhite: 0.5
+        SuiDream: 0.5
+        SyndicateBomb: 1
+        Tequila: 0.5
+        TequilaSunrise: 0.5
+        TheMartinez: 0.5
+        ThreeMileIsland: 0.5
+        ToxinsSpecial: 0.5
+        Vermouth: 0.5
+        Vodka: 0.5
+        VodkaMartini: 0.5
+        WatermelonWakeup: 0.5
+        WeldingFuel: 1
+        Whiskey: 0.5
+        Wine: 0.2
+        XenoBasher: 0.5
+        ZombieCocktail: 0.5
+    - type: SolutionContainerManager
+      solutions:
+        tank:
+          maxVol: 1000
+    - type: Construction
+      graph: goblin_machinery
+      node: clunkerGenerator
+

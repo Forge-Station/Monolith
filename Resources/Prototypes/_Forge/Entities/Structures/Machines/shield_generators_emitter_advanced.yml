@@ -3,7 +3,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG195L
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-195L "Tangent" Shield Generator
   suffix: tier 2, linear load
   description: >-
@@ -25,7 +25,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel
@@ -102,7 +102,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG275P
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-275P "Weave" Shield Generator
   suffix: tier 2, partial absorption
   description: >-
@@ -125,7 +125,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel
@@ -202,7 +202,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG305V
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-305V "Busbar" Shield Generator
   suffix: tier 2, APC-scaled heal
   description: >-
@@ -225,7 +225,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel

@@ -172,3 +172,68 @@
         amount: 4
       - !type:EmptyAllContainers
       - !type:DeleteEntity
+
+# Forge-Change-Start
+- type: constructionGraph
+  id: SuitStorage
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: done
+      steps:
+      - material: Steel
+        amount: 4
+      - material: Cable
+        amount: 2
+        doAfter: 5
+    - to: suitStorageWallmount
+      steps:
+      - material: Steel
+        amount: 4
+      - material: Cable
+        amount: 2
+        doAfter: 5
+  - node: done
+    entity: SuitStorageBase
+    edges:
+    - to: start
+      steps:
+      - tool: Screwing
+        doAfter: 5
+      conditions:
+      - !type:StorageWelded
+        welded: false
+      - !type:Locked
+        locked: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 4
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+        amount: 2
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity
+  - node: suitStorageWallmount
+    entity: SuitStorageWallmount
+    edges:
+    - to: start
+      steps:
+      - tool: Screwing
+        doAfter: 5
+      conditions:
+      - !type:StorageWelded
+        welded: false
+      - !type:Locked
+        locked: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 4
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+        amount: 2
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity
+# Forge-Change-End

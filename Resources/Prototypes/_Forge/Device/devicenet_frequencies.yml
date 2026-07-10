@@ -1,0 +1,42 @@
+# Need to be carefull. Maybe high slow down server by this channels...
+# Only listen to this frequency if you are a crew monitor server. Otherwise you will just slow down the server by constantly receiving periodic broadcasts from every player-entity.
+- type: deviceFrequency
+  id: SuitRenegadeSensor
+  name: device-frequency-prototype-name-suit-sensors-renegade
+  frequency: 1224
+
+- type: deviceFrequency
+  id: SuitTSFSensor
+  name: device-frequency-prototype-name-suit-sensors-tsfmc
+  frequency: 1236
+
+- type: deviceFrequency
+  id: SuitNanotrasenSensor
+  name: device-frequency-prototype-name-suit-sensors-nt
+  frequency: 1248
+
+- type: deviceFrequency
+  id: SuitEmpireSensor
+  name: device-frequency-prototype-name-suit-sensors-empire
+  frequency: 1280
+
+# Crew monitors listen to this for a list of suit sensor statuses
+- type: deviceFrequency
+  id: CrewRenegadeMonitor
+  name: device-frequency-prototype-name-crew-monitor-renegade
+  frequency: 1223
+
+- type: deviceFrequency
+  id: CrewTSFMonitor
+  name: device-frequency-prototype-name-crew-monitor-tsfmc
+  frequency: 1235
+
+- type: deviceFrequency
+  id: CrewNanotrasenMonitor
+  name: device-frequency-prototype-name-crew-monitor-nt
+  frequency: 1247
+
+- type: deviceFrequency
+  id: CrewEmpireMonitor
+  name: device-frequency-prototype-name-crew-monitor-empire
+  frequency: 1281

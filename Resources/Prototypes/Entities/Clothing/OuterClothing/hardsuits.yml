@@ -671,11 +671,11 @@
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndicate.rsi # Forge-change
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndicate.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -718,9 +718,9 @@
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
   - type: Armor # Mono
     modifiers:
       coefficients:
@@ -754,9 +754,9 @@
   description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # Forge-change
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -801,9 +801,9 @@
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # Forge-change
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -846,9 +846,9 @@
   description: A suit originally made by the cutting edge R&D department at cybersun to be hyper resilient, now recycled and used by the Phaethon Dynasty. Hefty and durable, but not fully insulated.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/cybersun.rsi  # Forge-change
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/cybersun.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000

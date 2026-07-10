@@ -56,9 +56,7 @@
       types:
         Heat: 0.35
   - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
+    phosphorColor: "#808080"
   - type: TemperatureSpeed
     thresholds:
       280: 0.9

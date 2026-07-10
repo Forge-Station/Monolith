@@ -7,7 +7,7 @@
   category: Medium
   group: Ussp
   access: Mercenary
-  shuttlePath: /Maps/_Forge/Shuttles/USSP/RedBrigand.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/USSP/RedBrigand.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -20,7 +20,7 @@
 - type: gameMap
   id: RedBrigand
   mapName: 'Диверсант'
-  mapPath: /Maps/_Forge/Shuttles/USSP/RedBrigand.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/USSP/RedBrigand.yml
   minPlayers: 0
   stations:
     RedBrigand:

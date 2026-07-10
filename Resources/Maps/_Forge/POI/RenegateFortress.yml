@@ -2,10 +2,10 @@ meta:
   format: 7
   category: Grid
   engineVersion: 277.0.0
-  forkId: frontier_mapping
-  forkVersion: 6c0f4aa2e43e0512a2de709cb4968d2ba2f896b0
-  time: 05/23/2026 11:05:45
-  entityCount: 7012
+  forkId: ""
+  forkVersion: ""
+  time: 06/24/2026 12:08:16
+  entityCount: 7018
 maps: []
 grids:
 - 1
@@ -3893,79 +3893,21 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.213781
-          - 79.80423
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.213781
+            Nitrogen: 79.80423
         - volume: 2500
           temperature: 293.14996
           moles:
-          - 20.078888
-          - 75.53487
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 20.078888
+            Nitrogen: 75.53487
         - volume: 2500
           temperature: 293.15
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+          moles: {}
         chunkSize: 4
     - type: RadiationGridResistance
     - type: OccluderTree
@@ -3978,16 +3920,20 @@ entities:
       id: RenegateFortress
     - type: SpreaderGrid
       spreadQueues:
-        Smoke: []
-        Kudzu: []
         Puddle: []
+        Kudzu: []
         MetalFoam: []
+        Smoke: []
     - type: GridPathfinding
     - type: ThermalSignature
     - type: CloakHeat
       lastUpdateTime: 0
     - type: NavMap
     - type: ShipShieldGridState
+    - type: ImplicitRoof
+    - type: ExplosionAirtightGrid
+    - type: ShipGridLock
+      locked: False
 - proto: AirAlarm
   entities:
   - uid: 2
@@ -4200,7 +4146,7 @@ entities:
       pos: 20.5,-0.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -33045.312
+      secondsUntilStateChange: -33432.207
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -4233,7 +4179,7 @@ entities:
       pos: 15.5,-14.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -16633.352
+      secondsUntilStateChange: -17020.244
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -4718,7 +4664,7 @@ entities:
       pos: 5.5,-15.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -35644.01
+      secondsUntilStateChange: -36030.906
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -18506,6 +18452,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 8.807671,18.544817
       parent: 1
+  - uid: 7019
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 28.27091,-4.405908
+      parent: 1
 - proto: ChairWood
   entities:
   - uid: 2759
@@ -19285,9 +19237,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 75
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerBankATMRenegade
   entities:
   - uid: 2902
@@ -19298,9 +19248,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 77.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2903
     components:
     - type: Transform
@@ -19310,9 +19258,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 65
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerCommsRenegate
   entities:
   - uid: 2904
@@ -19324,9 +19270,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 80
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerCrewMonitoring
   entities:
   - uid: 2905
@@ -19338,9 +19282,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 77.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2906
     components:
     - type: Transform
@@ -19349,9 +19291,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 67.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2907
     components:
     - type: Transform
@@ -19361,9 +19301,28 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 67.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
+- proto: ComputerCrewRenegadeMonitoring
+  entities:
+  - uid: 4797
+    components:
+    - type: Transform
+      pos: 18.5,-1.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 0
+  - uid: 7018
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 27.5,-4.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 0
 - proto: ComputerRadar
   entities:
   - uid: 2909
@@ -19375,9 +19334,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 77.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2910
     components:
     - type: Transform
@@ -19387,9 +19344,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 67.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2911
     components:
     - type: Transform
@@ -19398,9 +19353,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 67.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerResearchAndDevelopment
   entities:
   - uid: 2912
@@ -19411,9 +19364,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 75
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2913
     components:
     - type: Transform
@@ -19422,9 +19373,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 80
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerRngRank
   entities:
   - uid: 2914
@@ -19435,9 +19384,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 80
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerShipyardRenegate
   entities:
   - uid: 2915
@@ -19448,9 +19395,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 77.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2916
     components:
     - type: Transform
@@ -19459,9 +19404,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 77.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2917
     components:
     - type: Transform
@@ -19471,9 +19414,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 65
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2918
     components:
     - type: Transform
@@ -19483,9 +19424,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 65
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerTabletopAdvancedRadar
   entities:
   - uid: 2919
@@ -19497,9 +19436,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 80
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerTabletopGunneryConsole
   entities:
   - uid: 2920
@@ -19511,9 +19448,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 80
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerTabletopIFFPOI
   entities:
   - uid: 2921
@@ -19524,9 +19459,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 80
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerTabletopStationRecords
   entities:
   - uid: 2922
@@ -19537,9 +19470,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 80
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerTabletopSurveillanceCameraMonitor
   entities:
   - uid: 2923
@@ -19551,9 +19482,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerTechnologyDiskTerminal
   entities:
   - uid: 2924
@@ -19564,9 +19493,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 75
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: ComputerWallmountRadar
   entities:
   - uid: 2925
@@ -19578,9 +19505,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2926
     components:
     - type: Transform
@@ -19590,9 +19515,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2927
     components:
     - type: Transform
@@ -19602,9 +19525,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 2928
     components:
     - type: Transform
@@ -19613,9 +19534,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: CrateArtifactContainer
   entities:
   - uid: 2929
@@ -19653,22 +19572,8 @@ entities:
         immutable: False
         temperature: 293.14923
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
 - proto: CrateMaterialRandom
   entities:
   - uid: 2934
@@ -19711,6 +19616,13 @@ entities:
     components:
     - type: Transform
       pos: -0.5,-12.5
+      parent: 1
+- proto: CrewMonitoringRenegadeServer
+  entities:
+  - uid: 7017
+    components:
+    - type: Transform
+      pos: 8.5,12.5
       parent: 1
 - proto: CrystalBlue
   entities:
@@ -19764,7 +19676,7 @@ entities:
       pos: 25.5,-0.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -19285.164
+      secondsUntilStateChange: -19672.057
       state: Opening
 - proto: DarkCatwalkMono
   entities:
@@ -21125,7 +21037,6 @@ entities:
     - type: GasMixer
       inletTwoConcentration: 0.79
       inletOneConcentration: 0.21
-      enabled: True
     - type: AtmosPipeColor
       color: '#00AACCFF'
 - proto: GasPassiveVent
@@ -25934,11 +25845,9 @@ entities:
       pos: 10.5,12.5
       parent: 1
     - type: Battery
-      startingCharge: 2350
+      startingCharge: 0
     - type: ApcPowerReceiver
       powerLoad: 50
-    - type: ApcPowerReceiverBattery
-      enabled: True
 - proto: GunSafe
   entities:
   - uid: 191
@@ -25952,22 +25861,8 @@ entities:
         immutable: False
         temperature: 293.14923
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -25992,22 +25887,8 @@ entities:
         immutable: False
         temperature: 293.14923
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -26032,22 +25913,8 @@ entities:
         immutable: False
         temperature: 293.14923
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -26076,22 +25943,8 @@ entities:
         immutable: False
         temperature: 293.14923
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: Pullable
       prevFixedRotation: True
   - uid: 3744
@@ -26105,22 +25958,8 @@ entities:
         immutable: False
         temperature: 293.14923
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: Pullable
       prevFixedRotation: True
   - uid: 3745
@@ -26333,22 +26172,8 @@ entities:
         immutable: False
         temperature: 293.14923
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -26699,84 +26524,112 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 17.5,-16.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3805
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 18.5,-12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3806
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 17.5,-12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3807
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 10.5,-5.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3808
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 9.5,-5.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3809
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 8.5,-5.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3810
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 12.5,-0.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3811
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 12.5,-1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3812
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 15.5,-2.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3813
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 15.5,-1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3814
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 17.5,1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3815
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 21.5,-0.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3816
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 18.5,-0.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 3817
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 19.5,-16.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: NFAshtray
   entities:
   - uid: 3818
@@ -29407,11 +29260,6 @@ entities:
     - type: Transform
       pos: 20.5,-1.5
       parent: 1
-  - uid: 4261
-    components:
-    - type: Transform
-      pos: 18.5,-1.5
-      parent: 1
   - uid: 4262
     components:
     - type: Transform
@@ -31620,9 +31468,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
   - uid: 4540
     components:
     - type: Transform
@@ -31632,9 +31478,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 5
     - type: Battery
-      startingCharge: 82.5
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      startingCharge: 0
 - proto: SpawnDungeonLootLathe
   entities:
   - uid: 4541
@@ -31969,22 +31813,8 @@ entities:
         immutable: False
         temperature: 293.14923
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -32007,22 +31837,8 @@ entities:
         immutable: False
         temperature: 293.14923
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -32542,80 +32358,139 @@ entities:
     - type: Transform
       pos: 27.5,-18.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4659
     components:
     - type: Transform
       pos: 22.5,-18.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4660
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 9.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4661
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 9.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4662
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 10.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4663
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 11.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4664
     components:
     - type: Transform
       pos: 11.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4665
     components:
     - type: Transform
       pos: 10.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4666
     components:
     - type: Transform
       pos: 9.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4667
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 11.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4668
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 10.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4669
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 10.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4670
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 9.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 4671
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
+  - uid: 5248
+    components:
+    - type: Transform
+      pos: 8.5,12.5
+      parent: 1
+    - type: DeltaPressure
+      gridUid: 1
+  - uid: 7014
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,12.5
+      parent: 1
+    - type: DeltaPressure
+      gridUid: 1
+  - uid: 7015
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,12.5
+      parent: 1
+    - type: DeltaPressure
+      gridUid: 1
+  - uid: 7016
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,12.5
+      parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: VendingMachineBoozePOI
   entities:
   - uid: 4672
@@ -33345,12 +33220,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 5.5,11.5
-      parent: 1
-  - uid: 4797
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 7.5,11.5
       parent: 1
   - uid: 4798
     components:
@@ -35926,12 +35795,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 4.5,16.5
       parent: 1
-  - uid: 5248
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 7.5,13.5
-      parent: 1
   - uid: 5249
     components:
     - type: Transform
@@ -36287,6 +36150,26 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -11.5,22.5
       parent: 1
+- proto: WallPlastitaniumDebug
+  entities:
+  - uid: 5323
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,12.5
+      parent: 1
+  - uid: 5487
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,11.5
+      parent: 1
+  - uid: 7013
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,13.5
+      parent: 1
 - proto: WallPlastitaniumDiagonal
   entities:
   - uid: 5313
@@ -36346,11 +36229,6 @@ entities:
     components:
     - type: Transform
       pos: 8.5,13.5
-      parent: 1
-  - uid: 5323
-    components:
-    - type: Transform
-      pos: 8.5,12.5
       parent: 1
   - uid: 5324
     components:
@@ -37184,11 +37062,6 @@ entities:
     components:
     - type: Transform
       pos: 5.5,12.5
-      parent: 1
-  - uid: 5487
-    components:
-    - type: Transform
-      pos: 7.5,12.5
       parent: 1
   - uid: 5488
     components:
@@ -44951,21 +44824,29 @@ entities:
     - type: Transform
       pos: 26.5,-18.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 6982
     components:
     - type: Transform
       pos: 25.5,-18.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 6983
     components:
     - type: Transform
       pos: 24.5,-18.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 6984
     components:
     - type: Transform
       pos: 23.5,-18.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: WindowFrostedDirectional
   entities:
   - uid: 6985
@@ -44973,18 +44854,24 @@ entities:
     - type: Transform
       pos: 19.5,-0.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 6986
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,-9.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 6987
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 7.5,-9.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: WoodenSupport
   entities:
   - uid: 6988

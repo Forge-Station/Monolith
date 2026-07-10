@@ -7,7 +7,7 @@
   category: Small
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/vihr.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/vihr.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -17,7 +17,7 @@
 - type: gameMap
   id: vihr
   mapName: 'EPS Вихрь'
-  mapPath: /Maps/_Forge/Shuttles/Empire/vihr.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/vihr.yml
   minPlayers: 0
   stations:
     vihr:

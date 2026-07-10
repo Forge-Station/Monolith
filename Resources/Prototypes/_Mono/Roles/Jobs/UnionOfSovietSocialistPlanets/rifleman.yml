@@ -3,22 +3,23 @@
   name: job-name-ussp-rifleman
   description: job-description-ussp-rifleman
   playTimeTracker: JobUSSPRifleman
+  setPreference: false
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 32400 # 9 hrs
   startingGear: USSPRiflemanGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true
-  icon: "JobIconSecurityCadet" # TODO - new USSP icons
+  icon: "JobIconUSSPRifleman"
   supervisors: job-supervisors-ussp-sergeant
+  assignedCompany: USSP
   canBeAntag: false
  # guides: [ BasicLore, UnitedSovietSocialistPlanets ] # Forge-Change-delete
   weight: 10
   displayWeight: 10
-  assignedCompany: USSP # Forge-Change: added assigned company
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, UsspTrackingImplant ]
+    implants: [ UsspTrackingImplant ]
   - !type:AddComponentSpecial
     components:
     - type: MailDisabled
@@ -27,6 +28,8 @@
     - type: NpcFactionMember
       factions:
       - USSP
+    - type: ChatRank
+      rank: ussp-rifleman
   - !type:AddLanguageSpecial
     languagesSpoken:
     - NovaCygniBasic
@@ -44,3 +47,4 @@
   storage:
     back:
     - RadioHandheldNF
+    - BookUSSPLaw

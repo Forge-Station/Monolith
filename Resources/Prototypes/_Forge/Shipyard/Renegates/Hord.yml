@@ -3,11 +3,11 @@
   parent: BaseVessel
   name: Хорд
   description: Среднегабаритный боевой шаттл Ренегатов
-  price: 92000
+  price: 94000
   category: Medium
   group: Renegate
   access: Renegate
-  shuttlePath: /Maps/_Forge/Shuttles/Renegates/Hord.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/Hord.yml
   guidebookPage: Null
   class:
   - Salvage
@@ -19,7 +19,7 @@
 - type: gameMap
   id: Hord
   mapName: 'Хорд'
-  mapPath: /Maps/_Forge/Shuttles/Renegates/Hord.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Renegates/Hord.yml
   minPlayers: 0
   stations:
     Hord:

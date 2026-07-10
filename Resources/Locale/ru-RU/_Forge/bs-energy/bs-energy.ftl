@@ -69,7 +69,7 @@ ui-bs-receiver-requested-power-label = Запрошено:
 ui-bs-receiver-money-time-label = Осталось:
 ui-bs-receiver-money-lost-label = Расход:
 ui-bs-receiver-money-label = Баланс:
-ui-bs-receiver-withdraw-button = Вывести
+ui-bs-receiver-withdraw-button = Вывести средства
 ui-bs-receiver-transmitters-label = Доступные продавцы энергии
 ui-bs-receiver-draw-rate-label = Нагрузка сети:
 

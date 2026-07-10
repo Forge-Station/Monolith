@@ -20,7 +20,7 @@
   group: Sr
   access: Brig
   mapchecker_group_override: Security
-  shuttlePath: /Maps/_Forge/Shuttles/Security/vigil.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Security/vigil.yml
   guidebookPage: Null
   class:
   - Civilian
@@ -30,7 +30,7 @@
 - type: gameMap
   id: Vigil
   mapName: 'G3 «Вигил»'
-  mapPath: /Maps/_Forge/Shuttles/Security/vigil.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Security/vigil.yml
   minPlayers: 0
   stations:
     Vigil:

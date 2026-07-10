@@ -110,7 +110,9 @@ namespace Content.IntegrationTests.Tests
         // private static readonly string[] GameMaps = GameDataScrounger.PrototypesOfKind<GameMapPrototype>().Where(x => x != PoolManager.TestMap).ToArray();
         private static readonly string[] GameMaps = FrontierConstants.GameMapPrototypes;
         private static readonly ResPath[] AllMapFiles = GameDataScrounger.FilesInDirectoryInVfs("/Maps/_Mono", "*.yml");
-        private static readonly ResPath[] ShuttleMapFiles = GameDataScrounger.FilesInDirectoryInVfs("/Maps/_Mono/Shuttles", "*.yml");
+        private static readonly ResPath[] ShuttleMapFiles = GameDataScrounger.FilesInDirectoryInVfs("/SharedMaps/_Mono/Shuttles", "*.yml")
+            .Concat(GameDataScrounger.FilesInDirectoryInVfs("/SharedMaps/_Forge/Shuttles", "*.yml"))
+            .ToArray();
 
         private static readonly ProtoId<EntityCategoryPrototype> DoNotMapCategory = "DoNotMap";
 
@@ -502,7 +504,8 @@ namespace Content.IntegrationTests.Tests
                     x.ID == PoolManager.TestMap || // Frontier: check test map
                     x.MapPath.ToString().StartsWith("/Maps/_Forge/Outpost") || // Forge: station/outpost game maps (e.g. Frontier)
                     (x.MapPath.ToString().StartsWith("/Maps/_Mono") && // Mono: check Mono maps only
-                    !x.MapPath.ToString().StartsWith("/Maps/_Mono/Shuttles") && // Mono: skip shuttles (not loaded as maps)
+                    !x.MapPath.ToString().StartsWith("/SharedMaps/_Mono/Shuttles") && // Mono: skip shuttles (not loaded as maps)
+                    !x.MapPath.ToString().StartsWith("/SharedMaps/_Forge/Shuttles") && // Forge: skip shuttles (not loaded as maps)
                     !x.MapPath.ToString().StartsWith("/Maps/_Mono/Deprecated") && // Mono: skip deprecated (not loaded as maps)
                     !x.MapPath.ToString().StartsWith("/Maps/_Mono/ShuttleEvent") && // Mono: skip shuttleevents (not loaded as maps)
                     !x.MapPath.ToString().StartsWith("/Maps/_Mono/POI")) // Mono: skip POIs (not loaded as maps)

@@ -7,7 +7,7 @@
   category: Medium
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/tiranis.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/tiranis.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -17,7 +17,7 @@
 - type: gameMap
   id: tiranis
   mapName: 'EPF Тиранис'
-  mapPath: /Maps/_Forge/Shuttles/Empire/tiranis.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/tiranis.yml
   minPlayers: 0
   stations:
     tiranis:

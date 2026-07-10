@@ -3,21 +3,22 @@
   id: PainSyndrome
   name: syndrome-pain-syndrome
   organ: Body
-  interval: 6
-  severityDecay: 0.5
-  flareDelay: 120
+  interval: 12
+  severityDecay: 3
+  flareDelay: 320
   triggers:
     - !type:DamageTrigger
-      damageThreshold: 11
-      severity: 3
+      damageThreshold: 10
+      severity: 4
       chance: 0.3
-      cooldown: 5
+      cooldown: 3
   stages:
     - minSeverity: 0
     # region Stage 1
     - minSeverity: 15
       symptoms:
         - !type:MovespeedSymptom
+          flareOnly: true
           walkModifier: 0.90
           sprintModifier: 0.90
           key: PainSyndrome
@@ -39,7 +40,7 @@
           walkModifier: 0.75
           sprintModifier: 0.75
           key: PainSyndrome
-          time: 8.0
+          time: 10
         - !type:EntityEffectList # name: rando-o-o-o-o-o-o-o-o-o-0-om
           flareOnly: true
           effects:
@@ -78,6 +79,10 @@
                 - syndrome-pain-syndrome-severe-3
               visualType: LargeCaution
               probability: 0.3
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 0.25
+              probability: 0.3
         - !type:EntityEffectList # name: pain, sweetie pain
           chance: 0.1
           flareOnly: true
@@ -93,6 +98,9 @@
               darkness: 0.65
               color: "#5f221d"
               time: 8
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 0.25
         - !type:EntityEffectList # name: WHY TF AM I DROPING ITEMS??
           flareOnly: true
           chance: 0.08
@@ -111,6 +119,9 @@
               messages:
                 - syndrome-pain-syndrome-ooooouch-1
               visualType: LargeCaution
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 0.5
 
 # region // Chronic Pain
 - type: syndrome
@@ -118,15 +129,16 @@
   name: syndrome-chronic-pain
   organ: Body
   permanent: true
-  interval: 8.0
+  interval: 16
   severityDecay: 0.0
-  flareDelay: 180
+  flareDelay: 600
   stages:
     - minSeverity: 0
     # region Stage 1
     - minSeverity: 25
       symptoms:
         - !type:MovespeedSymptom
+          flareOnly: true
           walkModifier: 0.93
           sprintModifier: 0.93
           key: PainSyndrome
@@ -145,19 +157,21 @@
               emote: Scream
               showInChat: true
               probability: 0.07
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 0.75
     # region Stage 2
     - minSeverity: 55
       symptoms:
         - !type:MovespeedSymptom
+          flareOnly: true
           walkModifier: 0.82
           sprintModifier: 0.82
           key: PainSyndrome
-          time: 10
+          time: 8
         - !type:EntityEffectList # name: randomize
           flareOnly: true
           effects:
-            - !type:ItemsDropEffect
-              probability: 0.06
             - !type:Jitter
               amplitude: 3.0
               frequency: 2.5
@@ -178,6 +192,21 @@
               damage:
                 types:
                   Brute: 0.15
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 1.5
+        - !type:EntityEffectList # name: not randomize
+          chance: 0.08
+          flareOnly: true
+          effects:
+            - !type:ItemsDropEffect
+              probability: 0.3
+            - !type:TunnelVision
+              intensity: 1.2
+              pulse: 1.4
+              darkness: 0.65
+              color: "#5f221d"
+              time: 2
     # region Stage 3
     - minSeverity: 80
       symptoms:
@@ -185,7 +214,7 @@
           walkModifier: 0.65
           sprintModifier: 0.65
           key: PainSyndrome
-          time: 10.0
+          time: 14
         - !type:EntityEffectList
           flareOnly: true
           effects:
@@ -214,6 +243,9 @@
               damage:
                 types:
                   Brute: 0.35
+            - !type:SyndromeEffect
+              syndrome: ChronicPain
+              severity: 2
         - !type:EntityEffectList
           chance: 0.15
           flareOnly: true

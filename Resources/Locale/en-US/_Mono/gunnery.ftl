@@ -50,3 +50,4 @@ gunnery-panel-collapse-weapons = Collapse weapon list
 gunnery-panel-expand-weapons = Expand weapon list
 gunnery-panel-collapse-presets = Collapse weapon lists
 gunnery-panel-expand-presets = Expand weapon lists
+gunnery-server-examine-pacifist-grid = [color=crimson]The grid it's anchored to can't use ship weapons![/color]

@@ -15,8 +15,15 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#00FF00"
+    lightingColor: "#FFFFFF32"
+
   - type: RadarConsole
     followEntity: true
     noRotate: true

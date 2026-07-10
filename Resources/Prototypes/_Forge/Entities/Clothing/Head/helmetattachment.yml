@@ -13,8 +13,15 @@
       helmetattachment:
       - state: equipped-HELMETATTACHMENT
   - type: NightVision
-    flashDurationMultiplier: 3
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#00FF00"
+    lightingColor: "#FFFFFF32"
+
   - type: IdentityBlocker
     coverage: EYES
   - type: StaticPrice

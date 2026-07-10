@@ -1,0 +1,97 @@
+- type: entity
+  parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]
+  id: ComputerCrewRenegadeMonitoring
+  name: crew renegate monitoring console
+  description: Used to monitor active health sensors built into most of the crew's renegate implants.
+  suffix: Renegate
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer_renegate
+    - map: ["computerLayerKeyboard"]
+      state: renegate_key
+    - map: ["computerLayerScreen"]
+      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      state: crew-renegate
+    - map: ["computerLayerKeys"]
+      state: ren_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewRenegadeMonitor
+
+- type: entity
+  parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]
+  id: ComputerCrewTSFMonitoring
+  name: crew TSF monitoring console
+  description: Used to monitor active health sensors built into most of the crew's TSF implants.
+  suffix: TSF
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      state: crew-tsf
+    - map: ["computerLayerKeys"]
+      state: telesci_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewTSFMonitor
+
+- type: entity
+  parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]
+  id: ComputerCrewNanotrasenMonitoring
+  name: crew NT monitoring console
+  description: Used to monitor active health sensors built into most of the crew's NT and TTI implants.
+  suffix: NT
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      state: crew-nt
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewNanotrasenMonitor
+
+- type: entity
+  parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]
+  id: ComputerCrewEmpireMonitoring
+  name: crew impire monitoring console
+  description: Used to monitor active health sensors built into most of the crew's empire implants.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer_emp
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      state: crew-emp
+    - map: ["computerLayerKeys"]
+      state: emp_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewEmpireMonitor

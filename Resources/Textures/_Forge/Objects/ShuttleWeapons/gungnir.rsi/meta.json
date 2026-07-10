@@ -1,10 +1,10 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Provided by Erik for Forge FHT-300 Gungnir heavy torpedo launcher.",
+  "copyright": "theg33ka for Forge-station",
   "size": {
-    "x": 64,
-    "y": 172
+    "x": 32,
+    "y": 86
   },
   "states": [
     {

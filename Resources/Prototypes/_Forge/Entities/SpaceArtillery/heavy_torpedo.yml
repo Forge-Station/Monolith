@@ -1,12 +1,11 @@
 - type: entity
   id: WeaponTurretForgeHeavyTorpedo
-  name: FHT-300 "Gungnir" heavy torpedo launcher
+  name: FHT-300 "Gungnir" тяжелая пусковая установка
   suffix: For mapping
   parent:
   - BallisticArtilleryMapped
   - BallisticArtilleryTier4HP
-  description: A heavy Forge torpedo launcher that can fire from the hull without direct target line of sight. The muzzle still needs open vacuum; firing into your own plating is a bold plan, but why?
-  components:
+  description: Тяжёлая пусковая установка для таких-же тяжёлых ракет. Может вести огонь без прямой видимости цели.
   - type: StaticPrice
     price: 18000
   - type: Sprite
@@ -76,12 +75,12 @@
 
 - type: entity
   id: WeaponTurretForgeHeavyTorpedoPortable
-  name: FHT-300 "Gungnir" heavy torpedo launcher
+  name: FHT-300 "Гунгир" тяжёлая пусковая установка
   suffix: DO NOT MAP
   parent:
   - BallisticArtillery
   - BallisticArtilleryTier4HP
-  description: A heavy Forge torpedo launcher that can fire from the hull without direct target line of sight. The muzzle still needs open vacuum; firing into your own plating is a bold plan, but why?
+  description: Тяжёлая пусковая установка для таких-же тяжёлых ракет. Может вести огонь без прямой видимости цели.
   components:
   - type: StaticPrice
     price: 18000

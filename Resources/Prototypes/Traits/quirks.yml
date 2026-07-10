@@ -31,5 +31,5 @@
   category: Disabilities
   components:
     - type: LactozitIntolerance
-      timeBetweenIncidents: 3, 12
+      timeBetweenIncidents: 30, 40
 # Forge-Change-End

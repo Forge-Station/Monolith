@@ -3,31 +3,29 @@
   name: job-name-ussp-commissar
   description: job-description-ussp-commissar
   playTimeTracker: JobUSSPCommissar
+  setPreference: false
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: UnionOfSovietSocialistPlanets
-    time: 72000 # 20 hours
-  - !type:RoleTimeRequirement
-    role: JobUSSPSergeant
-    time: 10800 # 3 hrs
-  - !type:RoleTimeRequirement
-    role: JobUSSPMedic
-    time: 10800 # 3 hrs
+  # - !type:DepartmentTimeRequirement # Disabled until newgens get hours in
+  #   department: UnionOfSovietSocialistPlanets
+  #   time: 72000 # 20 hours
+  # - !type:RoleTimeRequirement
+  #   role: JobUSSPSergeant
+  #   time: 10800 # 3 hrs
   - !type:OverallPlaytimeRequirement
     time: 144000 # 40 hrs
   startingGear: USSPCommissarGear
   alwaysUseSpawner: true
   hideConsoleVisibility: true
-  icon: "JobIconHeadOfSecurity" # TODO - new USSP icons
+  icon: "JobIconUSSPCommissar"
   supervisors: job-supervisors-ussp-highcomm
+  assignedCompany: USSP
   canBeAntag: false
  # guides: [ BasicLore, UnitedSovietSocialistPlanets ] # Forge-Change-delete
   weight: 40
   displayWeight: 40
-  assignedCompany: USSP # Forge-Change: added assigned company
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, UsspTrackingImplant ]
+    implants: [ UsspTrackingImplant ]
   - !type:AddComponentSpecial
     components:
     - type: MailDisabled
@@ -36,6 +34,8 @@
     - type: NpcFactionMember
       factions:
       - USSP
+    - type: ChatRank
+      rank: ussp-commissar
   - !type:AddLanguageSpecial
     languagesSpoken:
     - NovaCygniBasic
@@ -53,3 +53,6 @@
   storage:
     back:
     - RadioHandheldNF
+    - RubberStampUSSPTaccomm
+    - BookUSSPLaw
+    - BookTheCommonCauseFirstEdition

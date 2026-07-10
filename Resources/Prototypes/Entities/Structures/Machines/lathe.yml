@@ -266,6 +266,7 @@
     - CarpEquipment # Mono
     - UpgradeKits # Mono
     - UpgradeKits_Goob # Mono
+    - RCD # Mono!
     - SMSurgery # Shitmed Change
     # WD EDIT START
     - VisionGoggles
@@ -276,6 +277,7 @@
     # Forge-change
     - BSparts
     - ForgePublicWeapons
+
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - DynamicAmmoRecipePack
@@ -551,9 +553,6 @@
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged
     - MonoRogueMiscDynamic
-    - MonoUSSPMiscDynamic
-    - MonoViperGroupDynamic
-    - MonoUSSPWeaponsDynamicRanged
     - UniversalShellAmmo
     - ResearchedExplosives
     - UniversalRailgunAmmo

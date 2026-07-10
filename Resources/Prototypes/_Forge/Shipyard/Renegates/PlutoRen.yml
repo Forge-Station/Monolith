@@ -4,11 +4,11 @@
   name: Не-Царь
   description: Захваченный "Плутон" Империи. Теперь это наш морской царь!
   limit: 3
-  price: 258000
+  price: 265000
   category: Medium
   group: Renegate
   access: Renegate
-  shuttlePath: /Maps/_Forge/Shuttles/Renegates/PlutoRen.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/PlutoRen.yml
   guidebookPage: Null
   class:
   - Salvage
@@ -20,7 +20,7 @@
 - type: gameMap
   id: PlutoRen
   mapName: 'Не-Царь'
-  mapPath: /Maps/_Forge/Shuttles/Renegates/PlutoRen.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Renegates/PlutoRen.yml
   minPlayers: 0
   stations:
     PlutoRen:

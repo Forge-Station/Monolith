@@ -12,7 +12,7 @@
   price: 185079 #Sell price 155k + 15%
   category: Small
   group: Medical
-  shuttlePath: /Maps/_Forge/Shuttles/Medical/nodens.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Medical/nodens.yml
   guidebookPage: null
   class:
   - Medical
@@ -22,7 +22,7 @@
 - type: gameMap
   id: Nodens
   mapName: 'G3 «Ноденс»'
-  mapPath: /Maps/_Forge/Shuttles/Medical/nodens.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Medical/nodens.yml
   minPlayers: 0
   stations:
     Nodens:

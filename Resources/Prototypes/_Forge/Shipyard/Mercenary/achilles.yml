@@ -15,7 +15,7 @@
   category: Medium
   group: Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/achilles.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Mercenary/achilles.yml
   guidebookPage: Null
   class:
   - Frigate
@@ -26,7 +26,7 @@
 - type: gameMap
   id: achilles
   mapName: 'NSC «Ахиллес»'
-  mapPath: /Maps/_Forge/Shuttles/Mercenary/achilles.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Mercenary/achilles.yml
   minPlayers: 0
   stations:
     achilles:

@@ -362,7 +362,15 @@
         Heat: 0.90
         Radiation: 0.5
   - type: NightVision
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#00FF00"
+    lightingColor: "#FFFFFF32"
+
   - type: ShowHealthBars
     damageContainers:
     - Inorganic

@@ -53,7 +53,43 @@
             - material: ReinforcedGlass
               amount: 2
               doAfter: 4
-        
+        # Forge-Change-Start
+        - to: shuttleWindowDiagonal
+          steps:
+            - material: Plasteel
+              amount: 2
+            - material: ReinforcedGlass
+              amount: 2
+              doAfter: 4
+        - to: shuttleWindowUran
+          steps:
+            - material: Plasteel
+              amount: 2
+            - material: ReinforcedUraniumGlass
+              amount: 2
+              doAfter: 4
+        - to: shuttleWindowUranDiagonal
+          steps:
+            - material: Plasteel
+              amount: 2
+            - material: ReinforcedUraniumGlass
+              amount: 2
+              doAfter: 4
+        - to: shuttleWindowPlasma
+          steps:
+            - material: Plasteel
+              amount: 2
+            - material: ReinforcedPlasmaGlass
+              amount: 2
+              doAfter: 4
+        - to: shuttleWindowPlasmaDiagonal
+          steps:
+            - material: Plasteel
+              amount: 2
+            - material: ReinforcedPlasmaGlass
+              amount: 2
+              doAfter: 4
+        # Forge-Change-End
         - to: clockworkWindow
           steps:
             - material: ClockworkGlass
@@ -223,7 +259,7 @@
               doAfter: 2
             - tool: Anchoring
               doAfter: 3
-    
+
     - node: shuttleWindow
       entity: ShuttleWindow
       edges:
@@ -236,8 +272,7 @@
               prototype: SheetPlasteel1
               amount: 2
             - !type:DeleteEntity {}
-          steps:
-          #To-Do: Add deconstruct visuals
+          steps: &deconstructionWindow # Forge-Change
             - tool: Welding
               doAfter: 6
             - tool: Screwing
@@ -254,3 +289,71 @@
               doAfter: 4
             - tool: Anchoring
               doAfter: 1
+
+    # Forge-Change-Start
+    - node: shuttleWindowDiagonal
+      entity: ShuttleWindowDiagonal
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionWindow
+    - node: shuttleWindowUran
+      entity: ShuttleWindowUran
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRUGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionWindow
+    - node: shuttleWindowUranDiagonal
+      entity: ShuttleWindowUranDiagonal
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRUGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionWindow
+    - node: shuttleWindowPlasma
+      entity: ShuttleWindowPlasma
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRPGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionWindow
+    - node: shuttleWindowPlasmaDiagonal
+      entity: ShuttleWindowPlasmaDiagonal
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRPGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps: *deconstructionWindow
+    # Forge-Change-End

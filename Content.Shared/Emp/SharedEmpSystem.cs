@@ -6,6 +6,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Timing;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Content.Shared._NF.Emp.Components;
 
 namespace Content.Shared.Emp;
 
@@ -48,7 +49,13 @@ public abstract partial class SharedEmpSystem : EntitySystem
         }
         // TODO: replace with PredictedSpawn once it works with animated sprites
         if (_net.IsServer)
-            Spawn(EmpPulseEffectPrototype, mapCoordinates);
+        /// Forge-Change-Start
+        {
+            var blast = EntityManager.CreateEntityUninitialized(EmpPulseEffectPrototype, mapCoordinates, null);
+            AddComp(blast, new EmpBlastRangeComponent { Range = range });
+            EntityManager.InitializeAndStartEntity(blast);
+        }
+        /// Forge-Change-End
 
         var coordinates = _transform.ToCoordinates(mapCoordinates);
         _audio.PlayPredicted(EmpSound, coordinates, user);
@@ -72,7 +79,13 @@ public abstract partial class SharedEmpSystem : EntitySystem
         }
         // TODO: replace with PredictedSpawn once it works with animated sprites
         if (_net.IsServer)
-            Spawn(EmpPulseEffectPrototype, coordinates);
+        /// Forge-Change-Start
+        {
+            var blast = EntityManager.CreateEntityUninitialized(EmpPulseEffectPrototype, coordinates, null);
+            AddComp(blast, new EmpBlastRangeComponent { Range = range });
+            EntityManager.InitializeAndStartEntity(blast);
+        }
+        /// Forge-Change-End
 
         _audio.PlayPredicted(EmpSound, coordinates, user);
     }

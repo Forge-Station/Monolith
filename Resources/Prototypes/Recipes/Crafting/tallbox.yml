@@ -57,3 +57,33 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+
+# Forge-Change-Start
+- type: construction
+  id: SuitStorage
+  name: suit storage unit
+  graph: SuitStorage
+  startNode: start
+  targetNode: done
+  category: construction-category-storage
+  description: A fancy hi-tech storage unit made for storing space suits.
+  icon: { sprite: Structures/Storage/suit_storage.rsi, state: base }
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: SuitStorageWallmount
+  name: suit wallstorage unit
+  graph: SuitStorage
+  startNode: start
+  targetNode: suitStorageWallmount
+  category: construction-category-storage
+  description: A fancy hi-tech storage unit made for storing space suits.
+  icon: { sprite: _NF/Structures/Storage/suit_storage_wall.rsi, state: generic }
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: true
+  conditions:
+    - !type:WallmountCondition
+  # Forge-Change-End

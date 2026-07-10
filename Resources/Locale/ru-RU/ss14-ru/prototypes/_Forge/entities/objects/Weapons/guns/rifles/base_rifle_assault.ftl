@@ -8,5 +8,5 @@ ent-ForgeBaseWeaponFrameRifleAssault = штурмовая винтовка
 ent-ForgeBaseWeaponRifleAssaultChamber30LowCapacity = штурмовая винтовка .30 (уменьшенный магазин)
 ent-ForgeBaseWeaponRifleAssaultChamber30Rubber = штурмовая винтовка .30 (резина)
 ent-ForgeBaseWeaponRifleAssaultChamber30LowCapacityRubber = штурмовая винтовка .30 (уменьшенный магазин, резина)
-ent-ForgeBaseWeaponFrameRifleAssaultCybersun = штурмовая винтовка Cybersun
+ent-ForgeBaseWeaponFrameRifleAssaultCybersun = штурмовая винтовка Gorlex
 ent-ForgeBaseWeaponRifleAssaultChamber = базовая штурмовая винтовка (патронник)

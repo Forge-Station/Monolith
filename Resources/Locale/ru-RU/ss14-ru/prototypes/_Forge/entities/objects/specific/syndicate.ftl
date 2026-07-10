@@ -12,7 +12,7 @@ ent-BoxContractorBundle = коробка
 
 ent-TechFabInterdyne = Техфаб Interdyne
     .desc = Торговая точка «Interdyne Pharmaceutics». Обменивает спессо на импланты, стимуляторы и лекарства. Всё официально, если не спрашивать документы. «Ваше здоровье — наш доход»
-ent-VendingMachineMedicalSyndicate = СиндиМед
+ent-VendingMachineMedicalSyndicate = ГорлексМед
     .desc = Медицинский терминал от «Interdyne Pharmaceutics». Снабжает проверенными боевыми препаратами и “лечебными средствами с расширенным эффектом”. «Мы вылечим даже то, что сами придумали»
-ent-VendingMachineChemicalsSyndicate = СиндиСоки
+ent-VendingMachineChemicalsSyndicate = ГорлексСоки
     .desc = Химический склад «Interdyne». Содержит широкий ассортимент реактивов, в том числе запрещённых. Для настоящих фармацевтов, а не подопытных. «Производи. Улучшай. Не спрашивай»

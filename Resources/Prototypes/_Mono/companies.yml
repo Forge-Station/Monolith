@@ -140,6 +140,9 @@
   - !type:GiveItemSpecial
     prototype:
     - EncryptionKeyUssp
+  - !type:AddAccessSpecial
+    tags:
+    - USSP
   - !type:PlaySpawnSoundSpecial
     sound:
       path: /Audio/Ambience/Antag/headrev_start.ogg
@@ -321,6 +324,9 @@
   - !type:GiveItemSpecial
     prototype:
     - EncryptionKeyViperGroup
+  - !type:AddAccessSpecial
+    tags:
+    - Viper
   - !type:PlaySpawnSoundSpecial
     sound:
       path: /Audio/_Forge/Ambience/Antag/cut_reaper_spawn.ogg

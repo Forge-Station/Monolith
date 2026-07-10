@@ -15,6 +15,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing; // Forge-Change
 using Content.Shared.Clothing; // Mono
+using JetBrains.Annotations; // Mono
 
 namespace Content.Shared.Movement.Systems;
 
@@ -280,16 +281,18 @@ public abstract partial class SharedJetpackSystem : EntitySystem
 
     public void SetEnabled(EntityUid uid, JetpackComponent component, bool enabled, EntityUid? user = null)
     {
-        if (IsEnabled(uid) == enabled ||
-            enabled && !CanEnable(uid, component))
-            return;
-
         if (user == null)
         {
             if (!Container.TryGetContainingContainer((uid, null, null), out var container))
                 return;
             user = container.Owner;
         }
+
+        bool canEnable = CanEnable(uid, user.Value, component);
+
+        if (IsEnabled(uid) == enabled ||
+            enabled && !canEnable) // Mono: i'm pretty sure that user is true here
+            return;
 
         // EE: check if user has a parent (e.g. vehicle, duffelbag, bed)
         if (enabled && !UserNotParented(user, component))
@@ -317,9 +320,9 @@ public abstract partial class SharedJetpackSystem : EntitySystem
         return HasComp<JetpackUserComponent>(uid);
     }
 
-    protected virtual bool CanEnable(EntityUid uid, JetpackComponent component)
+    protected virtual bool CanEnable(EntityUid uid, EntityUid user, JetpackComponent component)
     {
-        return _gravity.IsWeightless(uid); // Mono
+        return _gravity.IsWeightless(user); // Mono
     }
     // Forge-Change-start
     private bool UpdateSuitProfile(EntityUid user, JetpackUserComponent userComp, JetpackComponent? jetpackComp = null)

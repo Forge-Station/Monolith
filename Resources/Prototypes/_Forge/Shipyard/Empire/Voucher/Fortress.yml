@@ -7,11 +7,11 @@
   description: Огромный капитальный шаттл Империи.
   purchasable: false
   limit: 2
-  price: 318000
+  price: 363000
   category: Large
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Fortress.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/Voucher/Fortress.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -21,7 +21,7 @@
 - type: gameMap
   id: Fortress
   mapName: 'CWH Крепость'
-  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Fortress.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/Voucher/Fortress.yml
   minPlayers: 0
   stations:
     Fortress:

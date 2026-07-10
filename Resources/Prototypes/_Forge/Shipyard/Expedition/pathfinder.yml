@@ -6,7 +6,7 @@
   price: 47000
   category: Small
   group: Expedition
-  shuttlePath: /Maps/_Forge/Shuttles/Expedition/pathfinder.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Expedition/pathfinder.yml
   guidebookPage: null
   class:
   - Expedition
@@ -16,7 +16,7 @@
 - type: gameMap
   id: pathfinder
   mapName: 'Следопыт'
-  mapPath: /Maps/_Forge/Shuttles/Expedition/pathfinder.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Expedition/pathfinder.yml
   minPlayers: 0
   stations:
     pathfinder:

@@ -42,9 +42,8 @@
   - type: Fixtures
     fixtures:
       fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-1,0.5,1"
+        shape: !type:PhysShapeAabb
+          bounds: "-0.5,-1.5,0.5,1.5"
         density: 800
         mask:
         - MachineMask
@@ -119,8 +118,7 @@
   - type: Fixtures
     fixtures:
       fix1:
-        shape:
-          !type:PhysShapeAabb
+        shape: !type:PhysShapeAabb
           bounds: "-0.5,-1,0.5,1"
         density: 800
         mask:
@@ -161,8 +159,7 @@
   - type: Fixtures
     fixtures:
       projectile:
-        shape:
-          !type:PhysShapeCircle
+        shape: !type:PhysShapeCircle
           radius: 0.3
         density: 1500
         layer:
@@ -219,13 +216,12 @@
         Blunt: 1
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 1200
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-      - !type:ExplodeBehavior
+      - !type:ExplodeBehavior ""
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak

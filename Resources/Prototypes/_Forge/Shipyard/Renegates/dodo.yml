@@ -7,7 +7,7 @@
   category: Medium
   group: Renegate
   access: Renegate
-  shuttlePath: /Maps/_Forge/Shuttles/Renegates/dodo.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/dodo.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -19,7 +19,7 @@
 - type: gameMap
   id: dodo
   mapName: 'Давай-Делай'
-  mapPath: /Maps/_Forge/Shuttles/Renegates/dodo.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Renegates/dodo.yml
   minPlayers: 0
   stations:
     dodo:

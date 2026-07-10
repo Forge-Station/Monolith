@@ -18,12 +18,12 @@
   price: 337000 #286k sell price / 337000 = 85 / 100
   category: Large
   group: Expedition
-  shuttlePath: /Maps/_Forge/Shuttles/Expedition/ugra.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Expedition/ugra.yml
 
 - type: gameMap
   id: Ugra
   mapName: 'G3 «Югра»'
-  mapPath: /Maps/_Forge/Shuttles/Expedition/ugra.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Expedition/ugra.yml
   minPlayers: 0
   stations:
     Ugra:

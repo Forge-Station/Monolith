@@ -46,3 +46,7 @@
   license: "CC-BY-NC-4.0"
   copyright: "Original file made by Fenodyrie (https://freesound.org/people/Fenodyrie/), edited (pitch adjusted, cropped, converted to mono, exported as ogg) by erhardsteinhauer (discord/github)"
   source: https://freesound.org/people/Fenodyrie/sounds/565928/
+- files: ["goblin-scream-5.ogg, goblin-scream-6.ogg, goblin-sigh-01.ogg, goblin-sigh-02.ogg, goblin-sigh-03.ogg, goblin-cough-01.ogg, goblin-cough-02.ogg, goblin-cough-03.ogg, goblin-yawn-01.ogg, goblin-yawn-02.ogg, goblin-yawn-03.ogg, goblin-oh-ohh.ogg, goblin-snor-01.ogg, goblin-snor-02.ogg, goblin-snor-03.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original file made by Gordod3 (https://freesound.org/people/Gordod3/) (discord/github)"
+  source: https://freesound.org/people/Gordod3/packs/45967/

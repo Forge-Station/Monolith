@@ -160,6 +160,7 @@
     - DrakeIndustries # Forge-change
     - NSC # Forge-change
     - ForgeBoardingTeleportExperimental
+    - TelAdi # Forge-change
     - Empire # Forge-change
 
 - type: entity

@@ -379,6 +379,15 @@
 
 # Melee
 
+# Forge-Change-Start
+- type: loadout
+  id: MeleeType3
+  price: 50000
+  storage:
+    back:
+    - Type3SheathFilled
+#Forge-Change-End
+
 - type: loadout # Machete
   id: MercenaryMacheteLoadout
   price: 0

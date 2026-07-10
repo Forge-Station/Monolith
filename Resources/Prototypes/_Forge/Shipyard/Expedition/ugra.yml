@@ -1,0 +1,40 @@
+# Author Info
+# GitHub: https://github.com/theg33ka
+# Discord: _n1neth
+# License: CC-BY-NC-ND-4.0
+# CorvaxForge
+
+# Maintainer Info
+# GitHub: https://github.com/mersen-tyn
+# Discord: mersen
+
+# Shuttle Notes:
+
+- type: vessel
+  id: Ugra
+  parent: BaseVessel
+  name: G3 «Югра»
+  description: Крупногабаритный шаттл универсального назначения, снаряжённый для длительных экспедиций в глубокий космос. Внутри него есть всё необходимое для комфортного пребывания экипажа, включая жилые модули, лаборатории и складские помещения. Вооружён 4-мя крупногабаритными батареями CYREXA и вспомогательынм вооружением, включая ЭМИ установки.
+  price: 337000 #286k sell price / 337000 = 85 / 100
+  category: Large
+  group: Expedition
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Expedition/ugra.yml
+
+- type: gameMap
+  id: Ugra
+  mapName: 'G3 «Югра»'
+  mapPath: /SharedMaps/_Forge/Shuttles/Expedition/ugra.yml
+  minPlayers: 0
+  stations:
+    Ugra:
+      stationProto: StandardFrontierExpeditionVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: Югра EXP{1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Contractor: [ 0, 0 ]
+          Pilot: [ 0, 0 ]
+          Mercenary: [ 0, 0 ]

@@ -1,4 +1,4 @@
-ent-ClothingHeadHatHardhatSEngiArmored = бронированная каска инженера синдиката
+ent-ClothingHeadHatHardhatSEngiArmored = бронированная каска инженера Горлекса
     .desc = Бронированная каска. Сочетает защиту и функциональность — идеальна для инженера на передовой.
 
 ent-ClothingHeadHelmetRenegate = ренегатский шлем

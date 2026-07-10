@@ -1,5 +1,5 @@
 ent-ForgeBaseWeaponFrameEnergyRifleAssaultNanotrasen = энергетическая винтовка Nanotrasen
 ent-ForgeBaseWeaponEnergyRifleAssaultFireModes = режимы огня энергетической винтовки
-ent-ForgeBaseWeaponFrameEnergyRifleAssaultCybersun = энергетическая винтовка Cybersun
+ent-ForgeBaseWeaponFrameEnergyRifleAssaultCybersun = энергетическая винтовка Gorlex
 ent-ForgeBaseWeaponFrameEnergyRifleAssault = энергетическая штурмовая винтовка
 ent-ForgeBaseWeaponEnergyRifleAssaultHitScanPulse = импульсный луч

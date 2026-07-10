@@ -15,7 +15,7 @@
   parent: BaseVessel
   name: G3 «Капеллан»
   description: Крупногабаритный универсальный шаттл. Оборудован РНД отсеком, мед. отсеком, утилизационным оборудованием, майнинг-лазером и консолью экспедиций. Рекомендованный размер команды 3-6 человек.
-  price: 269100 #sell 207k + 30%
+  price: 215500 #sell 183k / 215500 = 85% / 100%
   category: Large
   group: Expedition
   shuttlePath: /SharedMaps/_Forge/Shuttles/Expedition/capellan.yml

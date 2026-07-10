@@ -1,5 +1,5 @@
 - type: entity
-  name: пицца Синдиката
+  name: пицца Горлекса
   parent: FoodPizzaBase
   id: FoodPizzaSyndi
   description: Выглядит очень сырно и зловеще.
@@ -38,7 +38,7 @@
     - Pizza
 
 - type: entity
-  name: кусочек пиццы Синдиката
+  name: кусочек пиццы Горлекса
   parent: FoodPizzaSliceBase
   id: FoodPizzaSyndiSlice
   description: Выглядит очень сырно и зловеще, но поменьше.

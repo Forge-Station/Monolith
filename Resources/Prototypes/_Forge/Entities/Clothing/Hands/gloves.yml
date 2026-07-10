@@ -79,7 +79,7 @@
 - type: entity
   parent: [ ClothingHandsGlovesSyntheticBase, BaseC3SyndicateContraband ]
   id: ClothingHandsGlovesCombatSyndicate
-  name: боевые перчатки синдиката
+  name: боевые перчатки Горлекса
   description: Пара перчаток, изготовленных из лучших армированных материалов. Защищает от воздействия электричества, а также частично кислоты и огня. Покажите этим НТшным свиньям на пальцах, кто здесь главный!
   components:
   - type: Sprite

@@ -185,4 +185,16 @@
 
 - type: Tag
   id: GoblinVehicle
+
+- type: Tag
+  id: GoblinThrusterCircuitboard
+
+- type: Tag
+  id: AirCanister
+
+- type: Tag
+  id: Barrel
+
+- type: Tag
+  id: PortableGeneratorClunkerCircuitboard
 # Forge-Change-End

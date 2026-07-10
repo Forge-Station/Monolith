@@ -147,7 +147,7 @@
 # region Tel-Adi
 
 - type: entity
-  parent: BaseShipLPC
+  parent: BaseShipLPCOneUse
   id: ShipVoucherTelAdiBillion
   name: Tel-Adi Billion LPC
   suffix: ТелАди

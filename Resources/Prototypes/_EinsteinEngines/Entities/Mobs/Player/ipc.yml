@@ -31,8 +31,7 @@
         type: StrippableBoundUserInterface
       enum.SurgeryUIKey.Key: # Shitmed
         type: SurgeryBui
-      # Forge-change: меню настройки частоты настраиваемого ключа во встроенном радио
-      enum.ConfigurableEncryptionKeyUiKey.Key:
+      enum.ConfigurableEncryptionKeyUiKey.Key: # Forge-Change: configurable encryption key frequency menu.
         type: ConfigurableEncryptionKeyBoundUserInterface
   - type: PowerCellSlot
     cellSlotId: cell_slot

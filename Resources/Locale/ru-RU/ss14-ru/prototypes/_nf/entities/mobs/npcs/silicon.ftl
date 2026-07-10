@@ -1,4 +1,4 @@
 ent-MobHoverTaxiBot = ховертаксибот
     .desc = Прокатить?
-ent-MobCleanBotSyndie = СиндиЧистобот
+ent-MobCleanBotSyndie = ГорлексЧистобот
     .desc = Постепенное развитие автоматизации теперь грозит космическим уборщикам ножом.

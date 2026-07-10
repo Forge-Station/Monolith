@@ -12,6 +12,7 @@
   - WeaponGrapplingGun # Frontier
   - MineralScannerEmpty
   - OreProcessorIndustrialMachineCircuitboard
+  - OreMagnetMachineCircuitboard
   - ClothingMaskWeldingGas
   - ClothingShoesBootsJump
   - MechEquipmentDrill # Goobstation
@@ -161,6 +162,9 @@
   cost: 10000
   recipeUnlocks:
   - ShuttleConsoleCircuitboard
+  - ShuttleConsoleCircuitboardTSFN # Mono
+  - ShuttleConsoleCircuitboardKPV63RWR # Mono
+  - ShuttleConsoleCircuitboardANALR67RWR # Mono
   - ThrusterMachineCircuitboard
   - GyroscopeMachineCircuitboard
   - MiniGravityGeneratorCircuitboard
@@ -199,6 +203,7 @@
   - WelderExperimental
   - PowerDrill
   - JawsOfLife
+  - TrayGoggles # Delta-V
   - UtilityBeltChiefEngineer
   - BorgModuleAdvancedTool
   - ExperimentalNaniteApplicator # Monolith
@@ -210,6 +215,7 @@
   #- NFBlueprintWelderExperimental # Frontier
   # Mono edit start
   - RCD
+  - RPD
   - RCDAmmo
   - RPD # Forge-Change
   - HandheldForgeAtmosMonitoring # Forge-Change
@@ -234,6 +240,7 @@
   recipeUnlocks:
   - OreBagOfHolding
   - MiningDrillDiamond
+  - ShipDrillMachineCircuitboard
   - AdvancedMineralScannerEmpty
   - NFBlueprintOreBagOfHolding # Frontier
   - NFBlueprintMiningDrillDiamond # Frontier

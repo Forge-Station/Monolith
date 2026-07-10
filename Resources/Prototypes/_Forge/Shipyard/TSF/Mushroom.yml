@@ -7,7 +7,7 @@
   group: Security
   access: Security
   price: 27300
-  shuttlePath: /Maps/_Forge/Shuttles/TSF/Mushroom.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/TSF/Mushroom.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -17,7 +17,7 @@
 - type: gameMap
   id: Mushroom
   mapName: 'Mushroom'
-  mapPath: /Maps/_Forge/Shuttles/TSF/Mushroom.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/TSF/Mushroom.yml
   minPlayers: 0
   stations:
     Mushroom:

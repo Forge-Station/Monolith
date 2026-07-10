@@ -7,7 +7,7 @@
   category: Medium
   group: Renegate
   access: Renegate
-  shuttlePath: /Maps/_Forge/Shuttles/Renegates/santia.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/santia.yml
   guidebookPage: Null
   class:
   - Salvage
@@ -19,7 +19,7 @@
 - type: gameMap
   id: santia
   mapName: 'Шанти'
-  mapPath: /Maps/_Forge/Shuttles/Renegates/santia.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Renegates/santia.yml
   minPlayers: 0
   stations:
     santia:

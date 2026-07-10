@@ -25,7 +25,7 @@ guide-entry-expedition-explorers = Исследователи
 guide-entry-expedition-mercenaries = Наёмники
 guide-entry-expedition-gangers = Панки
 guide-entry-expedition-silicons = Мятежные ИИ
-guide-entry-expedition-syndicate-naval-forces = Синдикат
+guide-entry-expedition-syndicate-naval-forces = Горлекс
 guide-entry-expedition-xenos = Ксеносы
 
 # Shipyard entries
@@ -121,8 +121,8 @@ guide-entry-nfantag = Антаганисты фронтира
 guide-entry-Shturm = Штурмовик
 guide-entry-SParamed = Штурмовой Парамедик
 guide-entry-Commander = Командир "Жнецов"
-guide-entry-Cadet = Кадет Синдиката
-guide-entry-Smugler = Контрабандист Синдиката
+guide-entry-Cadet = Кадет Горлекса
+guide-entry-Smugler = Контрабандист Горлекса
 guide-entry-startinggear = Стартовое снаряжение
 guide-entry-interviews = Интервью
 guide-entry-sector-topology = Топология сектора

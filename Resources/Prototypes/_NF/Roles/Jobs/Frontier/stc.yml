@@ -27,6 +27,10 @@
   special:
   - !type:AddImplantSpecial # Forge
     implants: [ MindShieldImplant, NanotrasenTrackingImplant ] # Forge-change
+  - !type:AddComponentSpecial
+    components:
+    - type: ChatRank
+      rank: cc-stc
   - !type:GiveItemOnHolidaySpecial
     holiday: FrontierBirthday
     prototype: FrontierBirthdayGift

@@ -1,10 +1,10 @@
-ent-ThrusterBigSyndiMachineCircuitboard = большой ракетный двигатель синдиката (машинная плата)
+ent-ThrusterBigSyndiMachineCircuitboard = большой ракетный двигатель Горлекса (машинная плата)
 ent-ThrusterBigNfsdMachineCircuitboard = большой ракетный двигатель ТСФ (машинная плата)
 ent-ThrusterBigMercMachineCircuitboard = большой ракетный двигатель наёмников (машинная плата)
 ent-ThrusterMediumMachineCircuitboard = средний ракетный двигатель (машинная плата)
-ent-ThrusterMLongSyndiMachineCircuitboard = длинный ракетный двигатель синдиката (машинная плата)
+ent-ThrusterMLongSyndiMachineCircuitboard = длинный ракетный двигатель Горлекса (машинная плата)
 ent-ThrusterMediumMercMachineCircuitboard = средний ракетный двигатель наёмников (машинная плата)
-ent-ThrusterMediumSyndiMachineCircuitboard = средний ракетный двигатель синдиката (машинная плата)
+ent-ThrusterMediumSyndiMachineCircuitboard = средний ракетный двигатель Горлекса (машинная плата)
 ent-ThrusterBigMachineCircuitboard = большой ракетный двигатель (машинная плата)
 ent-ThrusterBigCentComMachineCircuitboard = большой ракетный двигатель УСФ (машинная плата)
     .desc = A machine board for a syndicate

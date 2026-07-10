@@ -36,6 +36,9 @@ jobs:
     - name: Package client
       run: dotnet run --project Content.Packaging client --no-wipe-release
 
+    - name: Show runner egress IP
+      run: curl -s https://api.ipify.org; echo
+
     - name: Publish version
       run: Tools/publish_multi_request_mapping.py
       env:

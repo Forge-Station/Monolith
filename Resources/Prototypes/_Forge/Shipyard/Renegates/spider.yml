@@ -7,7 +7,7 @@
   category: Medium
   group: Renegate
   access: Renegate
-  shuttlePath: /Maps/_Forge/Shuttles/Renegates/spider.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/spider.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -19,7 +19,7 @@
 - type: gameMap
   id: spider
   mapName: 'Паук'
-  mapPath: /Maps/_Forge/Shuttles/Renegates/spider.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Renegates/spider.yml
   minPlayers: 0
   stations:
     spider:

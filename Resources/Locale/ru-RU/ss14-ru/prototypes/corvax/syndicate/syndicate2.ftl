@@ -1,6 +1,6 @@
 ent-NFPouchFirstAidMEdickMedipen = сумка первой помощи
 
-ent-ToolboxKadet = набор снаряжения Синдиката
+ent-ToolboxKadet = набор снаряжения Горлекса
   .desc = Что же взять на этот раз?
 ent-ToolboxMedic = { ent-ToolboxKadet }
   .desc = { ent-ToolboxKadet.desc }

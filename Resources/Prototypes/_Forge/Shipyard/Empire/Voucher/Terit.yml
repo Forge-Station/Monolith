@@ -11,7 +11,7 @@
   category: Large
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Terit.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/Voucher/Terit.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -21,7 +21,7 @@
 - type: gameMap
   id: Terit
   mapName: 'CWH Теритт'
-  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Terit.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/Voucher/Terit.yml
   minPlayers: 0
   stations:
     Terit:

@@ -7,7 +7,7 @@
   group: Empire
   access: Empire
   price: 84000 #PR:238 price UP
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/medtape.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/medtape.yml
   guidebookPage: Null
   class:
   - Medical
@@ -16,7 +16,7 @@
 - type: gameMap
   id: medtape
   mapName: EMMS Пластырь
-  mapPath: /Maps/_Forge/Shuttles/Empire/medtape.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/medtape.yml
   minPlayers: 0
   stations:
     medtape:

@@ -121,6 +121,11 @@
     materialComposition:
       Glass: 1500 # 15 sheets
       Steel: 500 # 5 sheets
+  # Forge-Change-Start
+  - type: Tag
+    tags:
+    - MachineBoard
+  # Forge-Change-End
 
 - type: entity
   parent: BaseScrap

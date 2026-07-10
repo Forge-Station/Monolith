@@ -62,7 +62,7 @@ ent-FakeMindShieldImplanter = { ent-BaseImplantOnlyImplanterSyndi }
 # Corvax anti-meta localization end
 
 ent-RadioImplanter = { ent-BaseImplantOnlyImplanterSyndi }
-    .suffix = радио Синдикат
+    .suffix = радио Горлекс
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
 
 # Forge-Frontier

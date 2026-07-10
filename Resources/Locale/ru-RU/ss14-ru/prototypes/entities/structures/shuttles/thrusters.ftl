@@ -17,4 +17,4 @@ ent-DebugGyroscope = { ent-Gyroscope }
     .suffix = DEBUG
     .desc = { ent-Gyroscope.desc }
 ent-GyroscopeSyndicate = гироскоп 
-    .desc = Модифицированная Синдикатом версия гироскопа. Улучшения позволили удешивить модификацию.
+    .desc = Модифицированная Горлексом версия гироскопа. Улучшения позволили удешивить модификацию.

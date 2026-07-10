@@ -1,0 +1,62 @@
+﻿- type: entity
+  parent: [BaseItemCabinet, BaseStructure]
+  id: kanaboBox
+  name: ящик для канабо
+  description: Специальный ящик для канабо.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _Forge/OniMeleeWeapons/Kanabo/kanaboBox.rsi
+    snapCardinals: true
+    layers:
+    - map: ["enum.OpenableVisuals.Layer"]
+      state: closed
+    - map: ["enum.ItemCabinetVisuals.Layer"]
+      state: item
+      visible: false
+  - type: ItemSlots
+    slots:
+      ItemCabinet:
+        ejectOnInteract: true
+        whitelist:
+          tags:
+          - Kanabo
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+          params:
+            volume: -4
+  - type: GenericVisualizer
+    visuals:
+      enum.ItemCabinetVisuals.ContainsItem:
+        enum.ItemCabinetVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: open }
+          False: { state: closed }
+        enum.ItemCabinetVisuals.Layer:
+          True: { color: "#FFFFFF" }
+          False: { color: "#00000000" }

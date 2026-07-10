@@ -1,0 +1,67 @@
+# Forge-Change-Start
+# Makeshift Circuit Forge
+- type: constructionGraph
+  id: goblin_makeshift_circuit
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: incompleteCircuitboard
+          steps:
+          - tag: MachineBoard
+            name: construction-graph-component-machine-board
+            icon:
+              sprite: Objects/Materials/Scrap/generic.rsi
+              state: glass-4
+              map: [ "base" ]
+            doAfter: 0.5
+          - tag: GoblinPreciousTrash
+            name: construction-graph-component-goblin-precious-trash
+            icon:
+              sprite: Objects/Consumable/Food/snacks.rsi
+              state: cheesiehonkers-trash
+            doAfter: 0.2
+          - tag: GoblinPreciousTrash
+            name: construction-graph-component-goblin-precious-trash
+            icon:
+              sprite: Objects/Consumable/Food/snacks.rsi
+              state: boritos-trash
+            doAfter: 0.2
+          - tag: GoblinPreciousTrash
+            name: construction-graph-component-goblin-precious-trash
+            icon:
+              sprite: Objects/Consumable/Food/snacks.rsi
+              state: chips-trash
+            doAfter: 0.2
+
+    - node: incompleteCircuitboard
+      entity: GoblinScrapCircuitboard
+      edges:
+        - to: clunkerScrapCircuit
+          steps:
+            - tool: Welding
+              doAfter: 4
+        - to: goblinThrusterCircuitboard
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Welding
+              doAfter: 4
+        - to: goblinComputerShuttleCircuitboard
+          steps:
+            - tool: Prying
+              doAfter: 1
+            - tool: Screwing
+              doAfter: 1
+            - tool: Welding
+              doAfter: 4
+
+    - node: clunkerScrapCircuit
+      entity: PortableGeneratorClunkerCircuitboard
+
+    - node: goblinThrusterCircuitboard
+      entity: GoblinThrusterCircuitboard
+
+    - node: goblinComputerShuttleCircuitboard
+      entity: GoblinComputerShuttleCircuitboard
+# Forge-Change-End

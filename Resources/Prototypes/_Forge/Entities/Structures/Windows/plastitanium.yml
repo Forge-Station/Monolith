@@ -1,6 +1,6 @@
 - type: entity
   id: PlastitaniumWindowUran
-  name: plastitanium window
+  name: plastitanium uranium window
   parent: PlastitaniumWindowSquareBase
   components:
   - type: Sprite
@@ -50,10 +50,13 @@
     price: 100 # Frontier
   - type: RadiationBlocker
     resistance: 5
+  - type: Construction
+    graph: Plastitanium
+    node: plastitaniumWindowUran
 
 - type: entity
   id: PlastitaniumWindowUranDiagonal
-  name: plastitanium window
+  name: plastitanium uranium diagonal window
   parent: PlastitaniumWindowDiagonalBase
   suffix: diagonal
   components:
@@ -103,10 +106,13 @@
     damageModifierSet: RGlass
   - type: RadiationBlocker
     resistance: 5
+  - type: Construction
+    graph: Plastitanium
+    node: plastitaniumWindowUranDiagonal
 
 - type: entity
   id: PlastitaniumWindowPlasma
-  name: plastitanium window
+  name: plastitanium plasma window
   parent: PlastitaniumWindowSquareBase
   components:
   - type: Sprite
@@ -156,10 +162,13 @@
     price: 100 # Frontier
   - type: RadiationBlocker
     resistance: 4
+  - type: Construction
+    graph: Plastitanium
+    node: plastitaniumWindowPlasma
 
 - type: entity
   id: PlastitaniumWindowPlasmaDiagonal
-  name: plastitanium window
+  name: plastitanium plasma diagonal window
   parent: PlastitaniumWindowDiagonalBase
   suffix: diagonal
   components:
@@ -209,3 +218,6 @@
     damageModifierSet: RGlass
   - type: RadiationBlocker
     resistance: 4
+  - type: Construction
+    graph: Plastitanium
+    node: plastitaniumWindowPlasmaDiagonal

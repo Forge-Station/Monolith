@@ -17,3 +17,16 @@ ent-TelecomServerEmpire = { ent-TelecomServer }
 ent-ForgeHolopadLocal = голопад
     .desc = Напольное устройство для проецирования голографических изображений, обеспечивающее связь в пределах корабля или станции.
     .suffix = One Grid
+
+ent-CrewMonitoringRenegadeServer = сервер мониторинга ренегатов
+    .suffix = Ренегаты
+    .desc = Получает и перенаправляет статус всех датчиков имплантов состава ренегатов
+ent-CrewMonitoringTSFServer = сервер мониторинга ТСФ
+    .suffix = ТСФ
+    .desc = Получает и перенаправляет статус всех датчиков имплантов состава ТСФ
+ent-CrewMonitoringNanotrasenServer = сервер мониторинга NT
+    .suffix = NT
+    .desc = Получает и перенаправляет статус всех датчиков имплантов состава NT и TTI
+ent-CrewMonitoringEmpireServer = сервер мониторинга империи
+    .suffix = Империя
+    .desc = Получает и перенаправляет статус всех датчиков имплантов состава Империи

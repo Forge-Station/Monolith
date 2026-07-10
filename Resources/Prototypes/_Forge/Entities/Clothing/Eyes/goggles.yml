@@ -59,9 +59,14 @@
     vendPrice: 8900
   - type: ShowHealthBars
   - type: NightVision
-    color: "#ba8207"
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#ba8207"
+    lightingColor: "#FFFFFF32"
 
 #region Other
 - type: entity
@@ -81,9 +86,15 @@
     tags:
     - NightVisionGoggles
   - type: NightVision
-    color: "#77DD77"
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#77DD77"
+    lightingColor: "#FFFFFF32"
+
 
 - type: entity
   parent: ClothingEyesNightVisionGoggles
@@ -103,9 +114,15 @@
     graph: NFClothingEyesNightVisionGogglesMed
     node: NightVisionGogglesMed
   - type: NightVision
-    color: "#42AAFF"
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#42AAFF"
+    lightingColor: "#FFFFFF32"
+
 
 - type: entity
   parent: [ ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC3SyndicateContraband ]
@@ -123,9 +140,15 @@
   - type: ShowHealthBars
   - type: ShowSyndicateIcons
   - type: NightVision
-    color: "#AB4E52"
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#AB4E52"
+    lightingColor: "#FFFFFF32"
+
 
 - type: entity
   parent: [ ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC3PirateContraband ]
@@ -143,9 +166,15 @@
     price: 30
   - type: ShowHealthBars
   - type: NightVision
-    color: "#ddba00"
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#ddba00"
+    lightingColor: "#FFFFFF32"
+
 
 - type: entity
   parent: [ ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC2ContrabandUnredeemable ]
@@ -163,9 +192,15 @@
     price: 30
   - type: ShowHealthBars
   - type: NightVision
-    color: "#2E8B57"
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#2E8B57"
+    lightingColor: "#FFFFFF32"
+
 
 - type: entity
   parent: ClothingEyesNightVisionGoggles
@@ -190,9 +225,15 @@
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
   - type: NightVision
-    color: "#808080"
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#808080"
+    lightingColor: "#FFFFFF32"
+
 
 - type: entity
   parent: [ ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC3SyndicateContraband ]
@@ -217,9 +258,15 @@
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
   - type: NightVision
-    color: "#808080"
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#808080"
+    lightingColor: "#FFFFFF32"
+
 
 - type: entity
   parent: [ ClothingEyesNightVisionGoggles, ShowSecurityIcons, ShowMedicalIcons, BaseC3Contraband ]
@@ -241,9 +288,15 @@
     - Inorganic
     - Silicon
   - type: NightVision
-    color: "#aa9c00"
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#aa9c00"
+    lightingColor: "#FFFFFF32"
+
 
 - type: entity
   parent: [ClothingEyesNightVisionGoggles, ShowSecurityIcons, BaseC2ContrabandUnredeemable]
@@ -261,9 +314,15 @@
     price: 30
   - type: ShowHealthBars
   - type: NightVision
-    color: "#b2cb50"
-    flashDurationMultiplier: 2
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#b2cb50"
+    lightingColor: "#FFFFFF32"
+
   - type: ThermalVision
     flashDurationMultiplier: 2
     pulseTime: 2

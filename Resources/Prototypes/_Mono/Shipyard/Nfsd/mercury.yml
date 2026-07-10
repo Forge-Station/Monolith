@@ -5,12 +5,12 @@
   parent: BaseVesselAntag
   name: TSF-SKR Mercury
   description: Корвет с четырьмя направленными вперёд ракетными установками Vespera и лёгкими средствами ПКО. # Forge-Change
-  price: 150600 # Appraises at 125499. 20% tax.
+  price: 228621 # Appraises at 190518. 20% tax.
   purchasable: false # voucher only
   category: Medium
   group: Security
   access: Security
-  shuttlePath: /Maps/_Mono/Shuttles/Nfsd/mercury.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/Nfsd/mercury.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -21,7 +21,7 @@
 - type: gameMap
   id: Mercury
   mapName: 'Mercury'
-  mapPath: /Maps/_Mono/Shuttles/Nfsd/mercury.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/Nfsd/mercury.yml
   minPlayers: 0
   stations:
     Mercury:

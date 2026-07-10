@@ -1,0 +1,7 @@
+# Attempted to keep the files in alphabetical order so its easier to audit.
+# Finding individual authors is an unfeasible task. If you can reference the author please do so.
+
+- files: [ "PlastitaniumGlassTile" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Made by Gordod3"
+  source: "https://github.com/Forge-Station/Monolith/tree/main/Resources/Textures/_Forge/Tiles"

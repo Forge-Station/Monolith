@@ -533,47 +533,41 @@ public sealed partial class FireControlSystem : EntitySystem
         var weaponPos = weaponCoords.Position;
         var targetCoords = coords.ToMap(EntityManager, _xform);
         var targetPos = targetCoords.Position;
-        var fireCoords = coords;
 
         // Calculate direction
         var direction = targetPos - weaponPos;
 
-        // Forge-Change-Start: torpedo launchers are static tubes. The cursor picks a
-        // target grid, but the launch vector comes from the tube's own orientation.
+        // Forge-Change-Start: static torpedo tubes use the cursor only to pick a target grid.
         var isTorpedoLauncher = _forgeTorpedoLauncherQuery.TryComp(weapon, out var torpedoLauncher);
         if (isTorpedoLauncher)
         {
             direction = _forgeTorpedoLauncher.GetLaunchDirection(weaponXform);
 
-            if (!_forgeTorpedoLauncher.TryPrepareLaunch(
+            return _forgeTorpedoLauncher.TryQueueLaunch(
                     weapon,
+                    user,
                     coords,
                     direction,
                     torpedoLauncher,
                     weaponXform,
-                    out fireCoords))
-            {
-                return false;
-            }
+                    noServer);
         }
         // Forge-Change-End
-        else
-        {
-            var distance = direction.Length();
-            if (distance <= float.Epsilon)
-                return false; // Can't fire at the same position
 
-            direction = Vector2.Normalize(direction);
+        var distance = direction.Length();
+        if (distance <= float.Epsilon)
+            return false; // Can't fire at the same position
 
-            // Check for obstacles in the firing direction
-            if (!CanFireInDirection(weapon, weaponPos, direction, targetPos, weaponXform.MapID))
-                return false;
-        }
+        direction = Vector2.Normalize(direction);
+
+        // Check for obstacles in the firing direction
+        if (!CanFireInDirection(weapon, weaponPos, direction, targetPos, weaponXform.MapID))
+            return false;
 
         // Set the cooldown for next firing
         comp.NextFire = _timing.CurTime + TimeSpan.FromSeconds(comp.FireCooldown);
 
-        if (!isTorpedoLauncher && _fireRotateQuery.HasComp(weapon)) // Forge-Change: torpedo shafts stay static.
+        if (_fireRotateQuery.HasComp(weapon))
         {
             var goalAngle = Angle.FromWorldVec(direction);
             _rotateToFace.TryRotateTo(weapon, goalAngle, 0f, Angle.FromDegrees(1), float.MaxValue, weaponXform);
@@ -581,17 +575,9 @@ public sealed partial class FireControlSystem : EntitySystem
 
         // Try to get a gun component and fire the weapon
         if (!_gunQuery.TryComp(weapon, out var gun))
-        {
-            if (isTorpedoLauncher)
-                _forgeTorpedoLauncher.CancelPreparedLaunch(weapon);
-
             return false;
-        }
 
-        if (isTorpedoLauncher)
-            _forgeTorpedoLauncher.QueueLaunch(weapon, user, fireCoords, torpedoLauncher!);
-        else
-            _gun.AttemptShots(user, weapon, gun, fireCoords, TimeSpan.FromSeconds(0.2));
+        _gun.AttemptShots(user, weapon, gun, coords, TimeSpan.FromSeconds(0.2));
 
         return true;
     }

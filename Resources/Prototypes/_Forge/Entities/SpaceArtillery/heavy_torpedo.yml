@@ -1,18 +1,16 @@
 - type: entity
-  id: WeaponTurretForgeHeavyTorpedo
-  name: FHT-300 "Gungnir" тяжелая пусковая установка
-  suffix: For mapping
-  parent:
-  - BallisticArtilleryMapped
-  - BallisticArtilleryTier4HP
-  description: Тяжёлая пусковая установка для таких-же тяжёлых ракет. Может вести огонь без прямой видимости цели.
+  id: WeaponTurretForgeHeavyTorpedoBase
+  parent: BallisticArtilleryTier4HP
+  abstract: true
+  name: FHT-300 Gungnir heavy torpedo launcher
+  description: A heavy torpedo launcher for heavy guided torpedoes. It can fire without direct line of sight, but needs a clear muzzle lane.
+  components:
   - type: StaticPrice
     price: 18000
   - type: Sprite
     sprite: _Forge/Objects/ShuttleWeapons/gungnir.rsi
     layers:
     - state: space_artillery
-      scale: 0.5, 0.5
   - type: Appearance
   - type: ForgeTorpedoLauncher
     tileProbeDistance: 1.5
@@ -64,7 +62,7 @@
       shape: Square
       respectZoom: true
       rotate: true
-      bounds: "-0.5,-1,0.5,1"
+      bounds: "-0.5,-1.5,0.5,1.5"
   - type: ShipGunType
     shipType: Missile
   - type: ShipGunClass
@@ -74,80 +72,14 @@
     repairCost: 160
 
 - type: entity
+  id: WeaponTurretForgeHeavyTorpedo
+  parent: [WeaponTurretForgeHeavyTorpedoBase, BallisticArtilleryMapped]
+  suffix: For mapping
+
+- type: entity
   id: WeaponTurretForgeHeavyTorpedoPortable
-  name: FHT-300 "Гунгир" тяжёлая пусковая установка
+  parent: [WeaponTurretForgeHeavyTorpedoBase, BallisticArtillery]
   suffix: DO NOT MAP
-  parent:
-  - BallisticArtillery
-  - BallisticArtilleryTier4HP
-  description: Тяжёлая пусковая установка для таких-же тяжёлых ракет. Может вести огонь без прямой видимости цели.
-  components:
-  - type: StaticPrice
-    price: 18000
-  - type: Sprite
-    sprite: _Forge/Objects/ShuttleWeapons/gungnir.rsi
-    layers:
-    - state: space_artillery
-      scale: 0.5, 0.5
-  - type: Appearance
-  - type: ForgeTorpedoLauncher
-    tileProbeDistance: 1.5
-    clearanceRayDistance: 1.75
-  - type: AmmoCounter
-  - type: Battery
-    maxCharge: 90000
-    startingCharge: 90000
-  - type: ExaminableBattery
-  - type: WirelessNetworkConnection
-    range: 500
-  - type: Gun
-    fireRate: 0.08
-    recoil: 20
-    minAngle: 0
-    maxAngle: 0
-    shootThermalSignature: 48000000
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
-    soundEmpty:
-      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
-  - type: SpaceArtillery
-    powerChargeRate: 600
-    powerUsePassive: 1800
-    powerUseActive: 0
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape: !type:PhysShapeAabb
-          bounds: "-0.5,-1,0.5,1"
-        density: 800
-        mask:
-        - MachineMask
-        layer:
-        - MachineLayer
-  - type: BatterySelfRecharger
-    autoRecharge: true
-    autoRechargeRate: 250
-  - type: Actions
-  - type: ProjectileBatteryAmmoProvider
-    proto: ShipTorpedoForgeHeavy
-    fireCost: 30000
-  - type: RadarBlip
-    radarColor: "#ff9d00"
-    scale: 2.5
-    visibleFromOtherGrids: true
-    gridConfig:
-      color: "#ff9d00"
-      shape: Square
-      respectZoom: true
-      rotate: true
-      bounds: "-0.5,-1,0.5,1"
-  - type: ShipGunType
-    shipType: Missile
-  - type: ShipGunClass
-    shipClass: Superheavy
-  - type: ShipRepairable
-    repairTime: 45
-    repairCost: 160
 
 - type: entity
   id: ShipTorpedoForgeHeavy

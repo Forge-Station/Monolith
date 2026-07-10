@@ -1,5 +1,7 @@
 using System.Numerics;
+using Content.Server._Mono.FireControl;
 using Content.Server._Mono.Projectiles.TargetSeeking;
+using Content.Server.Power.EntitySystems;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Maps;
@@ -16,9 +18,12 @@ namespace Content.Server._Forge.ShipWeapons;
 
 public sealed class ForgeTorpedoLauncherSystem : EntitySystem
 {
+    private static readonly TimeSpan ShotResultTimeout = TimeSpan.FromSeconds(0.5);
+
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly GunSystem _gun = default!;
+    [Dependency] private readonly PowerReceiverSystem _power = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -26,9 +31,9 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
     [Dependency] private readonly TargetSeekingSystem _targetSeeking = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
 
-    private List<Entity<MapGridComponent>> _targetGridScratch = new();
-    private readonly Dictionary<EntityUid, EntityUid> _pendingTargets = new();
-    private readonly List<PendingLaunch> _pendingLaunches = new();
+    private readonly List<Entity<MapGridComponent>> _targetGridScratch = new();
+    private readonly Dictionary<EntityUid, PendingLaunch> _pendingLaunches = new();
+    private readonly List<EntityUid> _pendingLaunchScratch = new();
 
     public override void Initialize()
     {
@@ -36,6 +41,7 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
 
         SubscribeLocalEvent<ForgeTorpedoLauncherComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<ForgeTorpedoLauncherComponent, AmmoShotEvent>(OnAmmoShot);
+        SubscribeLocalEvent<ForgeTorpedoLauncherComponent, OnEmptyGunShotEvent>(OnEmptyShot);
         SubscribeLocalEvent<ForgeTorpedoLauncherComponent, ComponentShutdown>(OnShutdown);
     }
 
@@ -49,91 +55,85 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
 
     private void OnShutdown(EntityUid uid, ForgeTorpedoLauncherComponent component, ComponentShutdown args)
     {
-        _pendingTargets.Remove(uid);
-        RemoveQueuedLaunches(uid);
+        CancelPreparedLaunch(uid);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        for (var i = _pendingLaunches.Count - 1; i >= 0; i--)
+        _pendingLaunchScratch.Clear();
+        _pendingLaunchScratch.AddRange(_pendingLaunches.Keys);
+
+        foreach (var weapon in _pendingLaunchScratch)
         {
-            var pending = _pendingLaunches[i];
-            if (pending.FireTime > _timing.CurTime)
+            if (!_pendingLaunches.TryGetValue(weapon, out var pending))
                 continue;
 
-            _pendingLaunches.RemoveAt(i);
-
-            if (TerminatingOrDeleted(pending.Weapon) ||
-                TerminatingOrDeleted(pending.User) ||
-                !TryComp<GunComponent>(pending.Weapon, out var gun))
+            if (pending.Fired)
             {
-                _pendingTargets.Remove(pending.Weapon);
+                if (pending.ExpireTime <= _timing.CurTime)
+                    _pendingLaunches.Remove(weapon);
+
                 continue;
             }
 
+            if (pending.FireTime > _timing.CurTime)
+                continue;
+
+            if (!TryGetLaunchState(pending, out var component, out var xform, out var gun) ||
+                TerminatingOrDeleted(pending.TargetGrid) ||
+                !CanFireNow(pending.Weapon, gun, pending.NoServer) ||
+                !CanLaunch(pending.Weapon, GetLaunchDirection(xform), component, xform))
+            {
+                _pendingLaunches.Remove(weapon);
+                continue;
+            }
+
+            _pendingLaunches[weapon] = pending with
+            {
+                Fired = true,
+                ExpireTime = _timing.CurTime + ShotResultTimeout,
+            };
+
             _gun.AttemptShots(pending.User, pending.Weapon, gun, pending.FireCoordinates, TimeSpan.FromSeconds(0.2));
         }
+
+        _pendingLaunchScratch.Clear();
     }
 
     private void OnAmmoShot(EntityUid uid, ForgeTorpedoLauncherComponent component, AmmoShotEvent args)
     {
-        if (args.FiredProjectiles.Count == 0)
+        if (!_pendingLaunches.Remove(uid, out var pending) ||
+            !pending.Fired ||
+            args.FiredProjectiles.Count == 0 ||
+            TerminatingOrDeleted(pending.TargetGrid))
         {
             return;
         }
-
-        if (!_pendingTargets.Remove(uid, out var targetGrid))
-        {
-            if (!TryComp<GunComponent>(uid, out var gun) ||
-                gun.ShootCoordinates is not { } aimCoordinates ||
-                !TryFindTargetGrid(uid, aimCoordinates, component, Transform(uid), out targetGrid))
-            {
-                return;
-            }
-        }
-
-        if (!Exists(targetGrid))
-            return;
 
         foreach (var projectile in args.FiredProjectiles)
         {
             if (!TryComp<TargetSeekingComponent>(projectile, out var seeking))
                 continue;
 
-            _targetSeeking.SetSeekerTarget((projectile, seeking), targetGrid, Transform(projectile));
+            _targetSeeking.SetSeekerTarget((projectile, seeking), pending.TargetGrid, Transform(projectile));
         }
     }
 
-    public void QueueLaunch(
-        EntityUid uid,
-        EntityUid user,
-        EntityCoordinates fireCoordinates,
-        ForgeTorpedoLauncherComponent component)
+    private void OnEmptyShot(EntityUid uid, ForgeTorpedoLauncherComponent component, ref OnEmptyGunShotEvent args)
     {
-        RemoveQueuedLaunches(uid);
+        CancelPreparedLaunch(uid);
+    }
 
-        var minDelay = MathF.Max(0f, component.LaunchDelayMin);
-        var maxDelay = MathF.Max(0f, component.LaunchDelayMax);
-        if (maxDelay < minDelay)
-            (minDelay, maxDelay) = (maxDelay, minDelay);
-
-        var delay = maxDelay > minDelay
-            ? _random.NextFloat(minDelay, maxDelay)
-            : minDelay;
-
-        _pendingLaunches.Add(new PendingLaunch(
-            uid,
-            user,
-            fireCoordinates,
-            _timing.CurTime + TimeSpan.FromSeconds(delay)));
+    public bool HasPendingLaunch(EntityUid uid)
+    {
+        return _pendingLaunches.ContainsKey(uid);
     }
 
     public void CancelPreparedLaunch(EntityUid uid)
     {
-        _pendingTargets.Remove(uid);
-        RemoveQueuedLaunches(uid);
+        _pendingLaunches.Remove(uid);
     }
 
     public Vector2 GetLaunchDirection(TransformComponent xform)
@@ -141,19 +141,38 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
         return _transform.GetWorldRotation(xform).ToWorldVec();
     }
 
-    public bool TryPrepareLaunch(
+    public bool TryQueueLaunch(
         EntityUid uid,
+        EntityUid user,
         EntityCoordinates aimCoordinates,
         Vector2 launchDirection,
-        ForgeTorpedoLauncherComponent? component,
-        TransformComponent? xform,
-        out EntityCoordinates launchCoordinates)
+        ForgeTorpedoLauncherComponent component,
+        TransformComponent xform,
+        bool noServer)
     {
-        launchCoordinates = default;
-        _pendingTargets.Remove(uid);
-
-        if (!Resolve(uid, ref component, ref xform))
+        if (_pendingLaunches.ContainsKey(uid) ||
+            !TryComp<GunComponent>(uid, out var gun) ||
+            !CanFireNow(uid, gun, noServer) ||
+            !TryBuildPendingLaunch(uid, user, aimCoordinates, launchDirection, component, xform, noServer, out var pending))
+        {
             return false;
+        }
+
+        _pendingLaunches[uid] = pending;
+        return true;
+    }
+
+    private bool TryBuildPendingLaunch(
+        EntityUid uid,
+        EntityUid user,
+        EntityCoordinates aimCoordinates,
+        Vector2 launchDirection,
+        ForgeTorpedoLauncherComponent component,
+        TransformComponent xform,
+        bool noServer,
+        out PendingLaunch pending)
+    {
+        pending = default;
 
         if (launchDirection.LengthSquared() <= 0.0001f)
             return false;
@@ -171,8 +190,23 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
             launcherCoords.Position + launchDirection * component.LaunchAimDistance,
             launcherCoords.MapId);
 
-        launchCoordinates = _transform.ToCoordinates((uid, xform), launchMapCoordinates);
-        _pendingTargets[uid] = targetGrid;
+        var minDelay = MathF.Max(0f, component.LaunchDelayMin);
+        var maxDelay = MathF.Max(0f, component.LaunchDelayMax);
+        if (maxDelay < minDelay)
+            (minDelay, maxDelay) = (maxDelay, minDelay);
+
+        var delay = maxDelay > minDelay
+            ? _random.NextFloat(minDelay, maxDelay)
+            : minDelay;
+
+        pending = new PendingLaunch(
+            uid,
+            user,
+            _transform.ToCoordinates((uid, xform), launchMapCoordinates),
+            targetGrid,
+            _timing.CurTime + TimeSpan.FromSeconds(delay),
+            noServer);
+
         return true;
     }
 
@@ -194,7 +228,7 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
         worldDirection = Vector2.Normalize(worldDirection);
 
         return HasSpaceAhead(gridUid, grid, xform, worldDirection, component) &&
-               HasClearMuzzleRay(uid, gridUid, xform, worldDirection, component);
+               HasClearMuzzleRay(uid, xform, worldDirection, component);
     }
 
     public bool TryFindTargetGrid(
@@ -254,6 +288,33 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
         return targetGrid != default;
     }
 
+    private bool TryGetLaunchState(
+        PendingLaunch pending,
+        out ForgeTorpedoLauncherComponent component,
+        out TransformComponent xform,
+        out GunComponent gun)
+    {
+        component = default!;
+        xform = default!;
+        gun = default!;
+
+        return !TerminatingOrDeleted(pending.Weapon) &&
+               !TerminatingOrDeleted(pending.User) &&
+               TryComp(pending.Weapon, out component) &&
+               TryComp(pending.Weapon, out xform) &&
+               TryComp(pending.Weapon, out gun);
+    }
+
+    private bool CanFireNow(EntityUid weapon, GunComponent gun, bool noServer)
+    {
+        if (!_power.IsPowered(weapon) || !_gun.CanShoot(gun))
+            return false;
+
+        return noServer ||
+               TryComp<FireControllableComponent>(weapon, out var fireControllable) &&
+               fireControllable.ControllingServer != null;
+    }
+
     private bool HasSpaceAhead(
         EntityUid gridUid,
         MapGridComponent grid,
@@ -274,7 +335,6 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
 
     private bool HasClearMuzzleRay(
         EntityUid uid,
-        EntityUid gridUid,
         TransformComponent launcherXform,
         Vector2 worldDirection,
         ForgeTorpedoLauncherComponent component)
@@ -289,7 +349,7 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
                      launcherXform.MapID,
                      ray,
                      uid,
-                     IgnoreNonMuzzleBlockers,
+                     (entity, source) => entity == source,
                      component.ClearanceRayDistance,
                      returnOnFirstHit: true))
         {
@@ -297,17 +357,6 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
         }
 
         return true;
-
-        bool IgnoreNonMuzzleBlockers(EntityUid entity, EntityUid source)
-        {
-            if (entity == source)
-                return true;
-
-            if (!TryComp<TransformComponent>(entity, out var otherXform))
-                return false;
-
-            return otherXform.GridUid != gridUid;
-        }
     }
 
     private bool HasEnoughTiles(EntityUid gridUid, MapGridComponent grid, int minimumTiles)
@@ -335,18 +384,13 @@ public sealed class ForgeTorpedoLauncherSystem : EntitySystem
         return dx * dx + dy * dy;
     }
 
-    private void RemoveQueuedLaunches(EntityUid uid)
-    {
-        for (var i = _pendingLaunches.Count - 1; i >= 0; i--)
-        {
-            if (_pendingLaunches[i].Weapon == uid)
-                _pendingLaunches.RemoveAt(i);
-        }
-    }
-
     private readonly record struct PendingLaunch(
         EntityUid Weapon,
         EntityUid User,
         EntityCoordinates FireCoordinates,
-        TimeSpan FireTime);
+        EntityUid TargetGrid,
+        TimeSpan FireTime,
+        bool NoServer,
+        bool Fired = false,
+        TimeSpan ExpireTime = default);
 }

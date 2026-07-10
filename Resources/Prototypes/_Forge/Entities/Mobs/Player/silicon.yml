@@ -45,10 +45,6 @@
   parent: BaseFactionBorgChassis
   abstract: true
   components:
-  - type: ShowRoleInformation
-    roleName: show-role-information-borg-forerunner-name
-    description: show-role-information-borg-forerunner-description
-    duration: 15
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -314,10 +310,6 @@
   parent: AiHeldForge
   categories: [ HideSpawnMenu ]
   components:
-  - type: ShowRoleInformation
-    roleName: show-role-information-ai-forerunner-name
-    description: show-role-information-ai-forerunner-description
-    duration: 15
   - type: IntrinsicRadioTransmitter
     channels:
     - Common

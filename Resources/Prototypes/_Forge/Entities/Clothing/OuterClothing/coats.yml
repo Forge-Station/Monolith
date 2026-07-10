@@ -308,8 +308,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatSyndicateOfficer
-  name: тренч офицера Синдиката
-  description: Стильный и защищённый тренч настоящего офицера Синдиката. Покажите этим корпоратам кто тут главный!
+  name: тренч офицера Горлекса
+  description: Стильный и защищённый тренч настоящего офицера Горлекса. Покажите этим корпоратам кто тут главный!
   components:
   - type: Sprite
     sprite: Forge/Clothing/OuterClothing/Coats/syndicate.rsi

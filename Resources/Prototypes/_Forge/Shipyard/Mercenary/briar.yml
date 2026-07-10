@@ -9,7 +9,7 @@
   parent: BaseVessel
   name: G3 «Бриар»
   description: Крупный боевой шаттл. Вооружён 7 автопушками "Лонгбоу" и обладает неплохой подвижностью для своих размеров.
-  price: 258000 #sell 210
+  price: 278000 #sell 210
   category: Large
   group: Shipyard
   access: Mercenary

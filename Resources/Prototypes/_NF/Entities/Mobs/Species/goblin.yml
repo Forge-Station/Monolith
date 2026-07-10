@@ -39,6 +39,8 @@
     - GoblinMutter
     - GoblinThroatSinging
     - Hiss
+    - Surprise # Forge-Change
+    - Belch    # Forge-Change
   - type: DamageOnHighSpeedImpact
     damage:
       types:

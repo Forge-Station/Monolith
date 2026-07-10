@@ -1,0 +1,23 @@
+- type: entity
+  id: GoblinThruster
+  parent: Thruster
+  name: thruster-goblin-name
+  description: thruster-goblin-desc
+  components:
+    - type: Sprite
+      sprite: Forge/Structures/Shuttles/thruster.rsi
+      layers:
+      - state: base_goblin
+        map: ["enum.ThrusterVisualLayers.Base"]
+      - state: base_goblin_light_unshaded
+        map: ["enum.ThrusterVisualLayers.ThrustOn"]
+        shader: unshaded
+        visible: false
+      - state: base_goblin_flame_unshade
+        map: ["enum.ThrusterVisualLayers.ThrustingUnshaded"]
+        shader: unshaded
+        visible: false
+        offset: 0, 0.5
+    - type: Construction
+      graph: goblin_machinery
+      node: goblinThruster

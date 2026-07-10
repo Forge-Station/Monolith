@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Minertasks and Minerrecieve, Nansen shipyard by MrIzo; all other belong to Corvax Frontier",
+  "copyright": "Minertasks and Minerrecieve, Nansen shipyard by MrIzo; Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/bd6873fd4dd6a61d7e46f1d75cd4d90f64c40894 and modified by Swept and after modified by Gordod; all other belong to Corvax Frontier",
   "size": {
     "x": 32,
     "y": 32
@@ -223,6 +223,41 @@
         {
           "name": "emp_key",
           "directions": 4
+        },
+        {
+          "name": "comptuter_goblin",
+          "directions": 4
+        },
+        {
+          "name": "computer_goblin_broken",
+          "directions": 4
+        },
+        {
+            "name": "generic_goblin_panel_open",
+            "directions": 4
+        },
+        {
+          "name": "goblin_deathscreen",
+          "directions": 4,
+          "delays": [
+            [
+              1,
+              2,
+              1,
+              0.5,
+              0.5,
+              3
+            ],
+            [
+              1.8
+            ],
+            [
+              1.8
+            ],
+            [
+              1.8
+            ]
+          ]
         }
     ]
 }

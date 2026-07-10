@@ -17,7 +17,7 @@ comms-console-announcement-unknown-sender = Неизвестный
 # Comms console variant titles
 comms-console-announcement-title-station = Консоль связи
 comms-console-announcement-title-centcom = Управление Секторальным Флотом
-comms-console-announcement-title-nukie = Ядерные оперативники Синдиката
+comms-console-announcement-title-nukie = Ядерные оперативники Горлекса
 comms-console-menu-announcement-button-tooltip = Отправить ваше сообщение как общесекторное радиооповещение.
 comms-console-menu-broadcast-button-tooltip = Транслировать сообщение на настенные экраны по всему сектору. Примечание: вмещают только 10 символов!
 # Frontier: station<sector

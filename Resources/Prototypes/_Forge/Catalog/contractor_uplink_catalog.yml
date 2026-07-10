@@ -1018,7 +1018,7 @@
 
 - type: listing
   id: ContractorUplinkNukieSnacks
-  name: Коробка закусок Синдиката
+  name: Коробка закусок Горлекса
   description: Подозрительный обед с потенциально взрывоопасным сюрпризом.
   productEntity: HappyHonkNukieSnacks
   cost:

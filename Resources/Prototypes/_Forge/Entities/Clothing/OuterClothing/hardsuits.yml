@@ -158,7 +158,7 @@
   parent: [ ClothingOuterHardsuitBase, BaseC3SyndicateContraband, ContrabandClothing ]
   id: ClothingOuterHardsuitSyndieSST
   name: кроваво-чёрный скафандр
-  description: Тяжелобронированный скафандр со встроенным экзоскелетом, предназначенный для элитных операций. Собственность Ударного подразделения Синдиката.
+  description: Тяжелобронированный скафандр со встроенным экзоскелетом, предназначенный для элитных операций. Собственность Ударного подразделения Горлекса.
   components:
   - type: Sprite
     sprite: Forge/Clothing/OuterClothing/Hardsuits/syndicate_strike_team.rsi

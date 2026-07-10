@@ -102,7 +102,7 @@
 
 - type: entity
   id: BoxFoodSyndiPizzaSyndi
-  name: коробка пиццы Синдиката
+  name: коробка пиццы Горлекса
   parent: FoodBoxPizzaSyndi
   components:
   - type: StorageFill

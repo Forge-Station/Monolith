@@ -4,7 +4,7 @@
     "x": 32,
     "y": 32
   },
-  "copyright": "Taken from https://github.com/Autsaider-IM",
+  "copyright": "Taken from https://github.com/Autsaider-IM , base_goblin, base_goblin_light_unshaded, base_goblin_flame_unshade are from Gordod3 for Corvax Forge",
   "license": "CC-BY-SA-3.0",
   "states": [
     {
@@ -25,6 +25,14 @@
     },
     {
       "name": "base_small",
+      "directions": 4
+    },
+    {
+      "name": "base_goblin",
+      "directions": 4
+    },
+    {
+      "name": "base_goblin_light_unshaded",
       "directions": 4
     },
     {
@@ -122,6 +130,36 @@
         ],
         [
           0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "base_goblin_flame_unshade",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
           0.1,
           0.1,
           0.1,

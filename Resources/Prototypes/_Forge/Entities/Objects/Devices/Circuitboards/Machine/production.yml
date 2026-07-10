@@ -91,7 +91,28 @@
       - GoblinThrusterCircuitboard
 
 - type: entity
-  name: Scrap Clunker Circuitboard
+  id: GoblinComputerShuttleCircuitboard
+  parent: BaseComputerCircuitboard
+  name: goblin-computer-shuttle-circuitboard
+  description: goblin-computer-shuttle-circuitboard-desc
+  components:
+    - type: Sprite
+      state: makeshift
+    - type: ComputerBoard
+      prototype: ComputerShuttleGoblin
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 200
+      chemicalComposition:
+        Silicon: 20
+    - type: StaticPrice
+      price: 40
+    - type: Construction
+      graph: goblin_makeshift_circuit
+      node: goblinComputerShuttleCircuitboard
+
+- type: entity
+  name: Scrap Circuitboard
   parent: BaseItem
   id: ScrapCircuitboard
   description: A huge lump of various circuits, strangely fused together. You could likely extract some materials out of this.

@@ -26,3 +26,6 @@ ent-ComputerShuttleMedicalHospitalLocal = Консоль трафика Госп
 ent-ComputerShuttleMedicalHospitalRemote = Консоль трафика Госпиталя
     .desc = Отслеживает движение вокруг Госпиталя.
     .suffix = Удалённая
+
+ent-ComputerShuttleGoblin = консоль управления шаттлом "Путеводитель"
+    .desc = Новая видеоигра с иммерсивным управлением вашего шаттла у вас дома! Протараньте как можно больше точек на экране, чтобы выиграть приз.

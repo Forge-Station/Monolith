@@ -324,4 +324,18 @@
   category: construction-category-goblin
   entityWhitelist: *goblinWhitelist
   objectType: Item
+
+- type: construction
+  name: goblin-computer-shuttle-circuitboard-name
+  description: goblin-computer-shuttle-circuitboard-desc
+  id: goblinComputerShuttleCircuitboard
+  icon:
+    sprite: Objects/Misc/module.rsi
+    state: makeshift
+  graph: goblin_makeshift_circuit
+  startNode: start
+  targetNode: goblinComputerShuttleCircuitboard
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
 # Forge-Change-End

@@ -14,3 +14,5 @@ construction-recipe-generator-goblin-circuitboard = { ent-PortableGeneratorClunk
 construction-recipe-generator-goblin-circuitboard-desc = { ent-PortableGeneratorClunkerCircuitboard.desc }
 construction-recipe-goblin-thruster-circuitboard = { ent-GoblinThrusterCircuitboard }
 construction-recipe-goblin-thruster-circuitboard-desc = { ent-GoblinThrusterCircuitboard.desc }
+construction-recipe-goblin-computer-shuttle-circuitboard = { ent-GoblinComputerShuttleCircuitboard }
+construction-recipe-goblin-computer-shuttle-circuitboard-desc = { ent-GoblinComputerShuttleCircuitboard.desc }

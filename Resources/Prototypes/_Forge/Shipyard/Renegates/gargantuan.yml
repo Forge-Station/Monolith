@@ -7,7 +7,7 @@
   category: Small
   group: Renegate
   access: Renegate
-  shuttlePath: /Maps/_Forge/Shuttles/Renegates/gargantuan.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/gargantuan.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -17,7 +17,7 @@
 - type: gameMap
   id: gargantuan
   mapName: 'Исполин'
-  mapPath: /Maps/_Forge/Shuttles/Renegates/gargantuan.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Renegates/gargantuan.yml
   minPlayers: 0
   stations:
     gargantuan:

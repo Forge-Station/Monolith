@@ -7,7 +7,7 @@
   category: Small
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/kostelom.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/kostelom.yml
   guidebookPage: Null
   class:
   - Salvage
@@ -17,7 +17,7 @@
 - type: gameMap
   id: kostelom
   mapName: 'EUS КостеЛом'
-  mapPath: /Maps/_Forge/Shuttles/Empire/kostelom.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/kostelom.yml
   minPlayers: 0
   stations:
     kostelom:

@@ -52,6 +52,9 @@
     price: 100
   - type: RadiationBlocker
     resistance: 4
+  - type: Construction
+    graph: mining_window
+    node: miningWindowUran
 
 - type: entity
   parent: ShuttleWindowUran
@@ -99,6 +102,9 @@
       sprite: Structures/Windows/cracks_diagonal.rsi
   - type: RadiationBlocker
     resistance: 4
+  - type: Construction
+    graph: mining_window
+    node: miningWindowUranDiagonal
 
 - type: entity
   id: MiningWindowPlasma
@@ -154,6 +160,9 @@
     price: 100
   - type: RadiationBlocker
     resistance: 3
+  - type: Construction
+    graph: mining_window
+    node: miningWindowPlasma
 
 - type: entity
   parent: ShuttleWindowPlasma
@@ -201,3 +210,6 @@
       sprite: Structures/Windows/cracks_diagonal.rsi
   - type: RadiationBlocker
     resistance: 3
+  - type: Construction
+    graph: mining_window
+    node: miningWindowPlasmaDiagonal

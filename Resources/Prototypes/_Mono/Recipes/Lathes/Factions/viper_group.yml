@@ -82,3 +82,8 @@
     Plastic: 1500
     Gold: 1000
     Silver: 1000
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: VGTechfabMachineCircuitboard
+  result: VGTechfabMachineCircuitboard

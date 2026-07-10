@@ -322,3 +322,10 @@
     repairTo: SuitStorageBase
     repairTime: 2
     repairCost: 3
+  # Forge-Change-Start
+  - type: Construction
+    graph: SuitStorage
+    node: done
+    containers:
+    - entity_storage
+  # Forge-Change-End

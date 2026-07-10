@@ -8,7 +8,7 @@
   category: Small
   group: Security
   access: Security
-  shuttlePath: /Maps/_Mono/Shuttles/Nfsd/hoplite.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/Nfsd/hoplite.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -20,7 +20,7 @@
 - type: gameMap
   id: Hoplite
   mapName: 'Hoplite'
-  mapPath: /Maps/_Mono/Shuttles/Nfsd/hoplite.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/Nfsd/hoplite.yml
   minPlayers: 0
   stations:
     Hoplite:

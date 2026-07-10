@@ -7,7 +7,7 @@
   category: Small
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/egida.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/egida.yml
   guidebookPage: Null
   class:
   - Medical
@@ -17,7 +17,7 @@
 - type: gameMap
   id: egida
   mapName: 'EMMS Эгида'
-  mapPath: /Maps/_Forge/Shuttles/Empire/egida.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/egida.yml
   minPlayers: 0
   stations:
     egida:

@@ -101,6 +101,17 @@
               amount: 1
             - material: Uranium
               amount: 1
+        # Forge-Change-Start
+        - to: SheetPlastitaniumGlass1
+          completed:
+            - !type:SetStackCount
+              amount: 1
+          steps:
+            - material: Glass
+              amount: 1
+            - material: Plastitanium
+              amount: 1
+        # Forge-Change-End
 
     - node: SheetGlass
       entity: SheetGlass
@@ -125,7 +136,7 @@
 
     - node: SheetRUGlass
       entity: SheetRUGlass
-      
+
     - node: SheetClockworkGlass
       entity: SheetClockworkGlass
 
@@ -134,3 +145,8 @@
 
     - node: SheetRUGlass1
       entity: SheetRUGlass
+
+    # Forge-Change-Start
+    - node: SheetPlastitaniumGlass1
+      entity: SheetPlastitaniumGlass
+    # Forge-Change-End

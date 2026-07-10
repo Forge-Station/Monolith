@@ -7,7 +7,7 @@
   category: Medium
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/menok.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/menok.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -17,7 +17,7 @@
 - type: gameMap
   id: menok
   mapName: EMRF Менок
-  mapPath: /Maps/_Forge/Shuttles/Empire/menok.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/menok.yml
   minPlayers: 0
   stations:
     menok:

@@ -9,7 +9,7 @@
   category: Medium
   group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Mono/Shuttles/USSP/tayfun.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/tayfun.yml
   guidebookPage: Null
   class:
   - Corvette
@@ -20,18 +20,18 @@
 - type: gameMap
   id: Tayfun
   mapName: 'Tayfun'
-  mapPath: /Maps/_Mono/Shuttles/USSP/tayfun.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/USSP/tayfun.yml
   minPlayers: 0
   stations:
     Tayfun:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Tayfun MIL{1}'
+          mapNameTemplate: 'Tayfun USSP{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-            Mercenary: [ 0, 0 ]
-            Pilot: [ 0, 0 ]
+           USSPSergeant: [ 0, 0 ]
+           USSPRifleman: [ 0, 0 ]

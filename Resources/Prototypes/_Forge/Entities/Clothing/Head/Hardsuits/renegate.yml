@@ -13,8 +13,15 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#00FF00"
+    lightingColor: "#FFFFFF32"
+
   - type: Armor
     modifiers:
       coefficients:
@@ -44,8 +51,15 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#00FF00"
+    lightingColor: "#FFFFFF32"
+
   - type: Armor
     modifiers:
       coefficients:
@@ -75,8 +89,15 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#00FF00"
+    lightingColor: "#FFFFFF32"
+
   - type: ThermalVision
     flashDurationMultiplier: 2
     pulseTime: 3
@@ -111,8 +132,15 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#00FF00"
+    lightingColor: "#FFFFFF32"
+
   - type: ThermalVision
     flashDurationMultiplier: 2
     pulseTime: 3
@@ -147,8 +175,15 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#00FF00"
+    lightingColor: "#FFFFFF32"
+
   - type: ThermalVision
     flashDurationMultiplier: 2
     pulseTime: 3

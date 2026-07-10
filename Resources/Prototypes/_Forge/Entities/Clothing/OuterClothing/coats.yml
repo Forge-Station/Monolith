@@ -129,6 +129,21 @@
         Heat: 0.8
         Caustic: 0.25
 
+# Пальто Tel-Adi
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatTelAdi
+  name: пальто Tel-Adi
+  description: Фирменное пальто корпорации Tel-Adi. Стильное и представительное — для тех, кто ценит прибыль и внешний вид.
+  suffix: ТелАди
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Coats/tel_Adi.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Coats/tel_Adi.rsi
+  - type: StaticPrice
+    price: 250
+
 - type: entity
   parent: [ClothingOuterStorageFoldableBase, BaseFactionGearOtherFactionT1]
   id: ClothingOuterRobeTraumaBomber
@@ -308,8 +323,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatSyndicateOfficer
-  name: тренч офицера Синдиката
-  description: Стильный и защищённый тренч настоящего офицера Синдиката. Покажите этим корпоратам кто тут главный!
+  name: тренч офицера Горлекса
+  description: Стильный и защищённый тренч настоящего офицера Горлекса. Покажите этим корпоратам кто тут главный!
   components:
   - type: Sprite
     sprite: Forge/Clothing/OuterClothing/Coats/syndicate.rsi

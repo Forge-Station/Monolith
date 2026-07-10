@@ -11,8 +11,18 @@
 # Fixtures (PhysShapeAabb bounds, density): T1 ±0.45 / 190; T2 −0.4..0.4 × −0.4..1.4 (vertical 1×2 local) / 300; T3 1.25,0.25,-0.25,-1.25 / 450; T4 2.25,0.25,-0.25,-2.25 / 700; Anvil 2.32,0.32,-0.32,-2.32 / 39500.
 
 - type: entity
-  id: ShieldGeneratorFSG90R
+  id: ShieldGeneratorFSG
   parent: ShieldGeneratorSmall
+  abstract: true
+  components:
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    snapCardinals: false
+
+- type: entity
+  id: ShieldGeneratorFSG90R
+  parent: ShieldGeneratorFSG
   name: FSG-90R "Spark" Shield Generator
   suffix: tier 1
   description: A rapid-cycle shield generator with a light reserve and a fast return to service after overloads.
@@ -100,7 +110,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG100
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-100 "Keel" Shield Generator
   suffix: tier 1
   description: A general-purpose shield generator with balanced output, stable behavior and no strong specialization.
@@ -188,7 +198,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG110P
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-110P "Halo" Shield Generator
   suffix: tier 1
   description: A prismatic shield generator with a thicker reserve at the cost of slower recovery after a collapse.
@@ -276,7 +286,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG160C
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-160C "Ramart" Shield Generator
   suffix: tier 2
   description: A collision-hardened shield generator built to soften rams, glancing impacts and sloppy docking maneuvers.
@@ -294,7 +304,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel
@@ -371,7 +381,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG220
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-220 "Vanguard" Shield Generator
   suffix: tier 2
   description: A medium-output shield generator intended for ships that need a dependable frontline screen without harsh tradeoffs.
@@ -389,7 +399,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel
@@ -466,7 +476,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG250C
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-250C "Breakwater" Shield Generator
   suffix: tier 2
   description: A medium-power shield tuned for sustained collision damping and dirty close-quarters fighting.
@@ -484,7 +494,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel
@@ -561,7 +571,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG330R
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-330R "Quickstep" Shield Generator
   suffix: tier 2
   description: A high-throughput shield generator that cycles fast enough to keep pace with extended skirmishes.
@@ -579,7 +589,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel
@@ -656,7 +666,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG420
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-420 "Redoubt" Shield Generator
   suffix: tier 3
   description: A heavy shield generator designed for larger hulls that expect to stand under focused fire.
@@ -751,7 +761,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG470P
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-470P "Lattice" Shield Generator
   suffix: tier 3
   description: A prismatic heavy shield with a broad reserve envelope and a notably slow recovery profile.
@@ -846,7 +856,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG600C
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-600C "Bastion" Shield Generator
   suffix: tier 3
   description: A siege-grade collision shield intended for armored hulls, station perimeters and brutal close-range engagements.
@@ -941,7 +951,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG900P
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-900P "Prism Crown" Shield Generator
   suffix: tier 4
   description: An outpost-class prismatic shield built around overwhelming reserve depth and very slow post-collapse recovery.
@@ -959,7 +969,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier4.rsi
     offset: 1,-1
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel
@@ -1036,7 +1046,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG870R
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-870R "Riptide" Shield Generator
   suffix: tier 4
   description: >-
@@ -1056,7 +1066,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier4.rsi
     offset: 1,-1
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel
@@ -1133,7 +1143,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG950M
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-950M "Anvil" Shield Generator
   suffix: tier 4
   description: >-
@@ -1157,7 +1167,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier4.rsi
     offset: 1,-1
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel
@@ -1236,7 +1246,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG85E
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-85E "Brownout" Shield Generator
   suffix: tier 1
   description: >-
@@ -1326,7 +1336,7 @@
 
 - type: entity
   id: ShieldGeneratorFSG355S
-  parent: ShieldGeneratorSmall
+  parent: ShieldGeneratorFSG
   name: FSG-355S "Sieve" Shield Generator
   suffix: tier 2
   description: >-
@@ -1346,7 +1356,7 @@
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: base
     - state: panel

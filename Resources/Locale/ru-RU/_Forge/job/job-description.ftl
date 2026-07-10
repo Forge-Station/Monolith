@@ -9,8 +9,8 @@ job-description-service-worker = Получи работу, стань убор�
 
 # Syndicate
 forge-job-desc-syndicommander = Глава штурмовой группы "Жнецы"
-forge-job-desc-medsyn = Специально подготовленный синдикатом медик для работы в зонах боевых действий
-forge-job-desc-engineersyn = Технический специалист синдиката
+forge-job-desc-medsyn = Специально подготовленный Горлексом медик для работы в зонах боевых действий
+forge-job-desc-engineersyn = Технический специалист Горлекса
 forge-job-desc-smuggler = Торгуй контрабандой. Не попадайся (Опционально).
 forge-job-desc-smugglerbodyguard = Защищай того, кто торгует контрабандой. Не умирай (Опционально).
 forge-job-desc-stormtrooper = Штурмовик подчиняющийся командиру.
@@ -66,3 +66,7 @@ job-description-tsf-Medic = Спасайте жизни своих товари�
 job-description-tsf-sl = Командуйте приставленным в ваш отряд людьми и приведите их к победе.
 job-description-tsf-Crew = Обслуживайте Халкион, следите за питанием, изучайте РнД, производите снаряжение.
 job-description-tsf-crewofficer = Руководите экипажем Халкиона и будьте главным стрелком-наводчиком аванпоста.
+
+# Tel-Adi
+department-TelAdi-description = Сотрудник компании Tel-Adi.
+forge-job-desc-tel-adi-worker = Работник компании Tel-Adi. Выполняй контракты и блюди интересы компании.

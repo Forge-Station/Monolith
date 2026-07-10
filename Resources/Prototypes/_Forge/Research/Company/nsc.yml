@@ -1,0 +1,190 @@
+# Nexus Star Consortium — compact layout: sort Y=-2 energy (left), Y=0 center/hardsuits, Y=2 VSS+kinetic (right).
+
+- type: technology
+  id: NSCBasicApparel
+  name: research-technology-nsc-basic-apparel
+  entityIcon: ClothingUniformJumpsuitNexusTurtleneck
+  discipline: NSC
+  tier: 1
+  cost: 5000
+  recipeUnlocks:
+  - ClothingUniformJumpsuitNexusTurtleneck
+  - ClothingUniformJumpsuitNexusWorker
+  - ClothingOuterCoatNexusGreatcoat
+  - ClothingHeadHatNexusBeret
+  - ClothingHeadHatNexusCap
+  - ClothingHeadHatNexusStarBeret
+  - ClothingHeadHatNexusGarrisonCap
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 0, 0
+
+- type: technology
+  id: NSCBureaucracy
+  name: research-technology-nsc-bureaucracy
+  entityIcon: BriefcaseNexus
+  discipline: NSC
+  tier: 1
+  cost: 10000
+  recipeUnlocks:
+  - BriefcaseNexus
+  - PenNexus
+  - BoxFolderClipboardNexus
+  - RubberStampNexus
+  technologyPrerequisites:
+  - NSCBasicApparel
+  position: 1, 0
+
+- type: technology
+  id: NSCEnergyBasic
+  name: research-technology-nsc-energy-basic
+  entityIcon: WeaponEnergyPistolNexusProjector
+  discipline: NSC
+  tier: 2
+  cost: 55000
+  recipeUnlocks:
+  - WeaponEnergyPistolNexusProjector
+  - WeaponEnergyPistolNexusDoznavatel
+  technologyPrerequisites:
+  - NSCBasicApparel
+  - UniversalMaterialResearchT2
+  position: 0, -2
+
+- type: technology
+  id: NSCEnergySword
+  name: research-technology-nsc-energy-sword
+  entityIcon: WeaponEnergySwordNexusProtosTechIcon
+  discipline: NSC
+  tier: 2
+  cost: 45000
+  recipeUnlocks:
+  - WeaponEnergySwordNexusProtos
+  technologyPrerequisites:
+  - NSCEnergyBasic
+  position: 1, -2
+
+- type: technology
+  id: NSCEnergyAdvanced
+  name: research-technology-nsc-energy-advanced
+  entityIcon: WeaponEnergyRifleNexusKiy
+  discipline: NSC
+  tier: 3
+  cost: 85000
+  recipeUnlocks:
+  - WeaponEnergyRifleNexusKiy
+  - WeaponEnergyShotgunNexusUdarnik
+  technologyPrerequisites:
+  - NSCEnergyBasic
+  - UniversalMaterialResearchT3
+  position: 0, -2
+
+- type: technology
+  id: NSCWorkerHardsuit
+  name: research-technology-nsc-worker-hardsuit
+  entityIcon: ClothingOuterHardsuitNexusWorker
+  discipline: NSC
+  tier: 1
+  cost: 25000
+  recipeUnlocks:
+  - ClothingOuterHardsuitNexusWorker
+  technologyPrerequisites:
+  - NSCBasicApparel
+  position: 0, 0
+
+- type: technology
+  id: NSCMilHardsuitT1
+  name: research-technology-nsc-mil-hardsuit-t1
+  entityIcon: ClothingOuterHardsuitNexusMilT1
+  discipline: NSC
+  tier: 2
+  cost: 45000
+  recipeUnlocks:
+  - ClothingOuterHardsuitNexusMilT1
+  technologyPrerequisites:
+  - NSCWorkerHardsuit
+  position: 0, 0
+
+- type: technology
+  id: NSCMilHardsuitT2
+  name: research-technology-nsc-mil-hardsuit-t2
+  entityIcon: ClothingOuterHardsuitNexusMilT2
+  discipline: NSC
+  tier: 2
+  cost: 65000
+  recipeUnlocks:
+  - ClothingOuterHardsuitNexusMilT2
+  technologyPrerequisites:
+  - NSCMilHardsuitT1
+  - UniversalMaterialResearchT2
+  position: 0, 0
+
+- type: technology
+  id: NSCMilHardsuitT3
+  name: research-technology-nsc-mil-hardsuit-t3
+  entityIcon: ClothingOuterHardsuitNexusMilT3
+  discipline: NSC
+  tier: 3
+  cost: 90000
+  recipeUnlocks:
+  - ClothingOuterHardsuitNexusMilT3
+  technologyPrerequisites:
+  - NSCMilHardsuitT2
+  - UniversalMaterialResearchT3
+  position: 0, 0
+
+- type: technology
+  id: NSCVSSEquipment
+  name: research-technology-nsc-vss-equipment
+  entityIcon: ClothingOuterVestWebNexus
+  discipline: NSC
+  tier: 1
+  cost: 15000
+  recipeUnlocks:
+  - ClothingUniformJumpsuitNexusSecurity
+  - ClothingEyesGlassesNexus
+  - ClothingMaskGasNexus
+  - ClothingBeltWebbingsNormalNexus
+  - ClothingBeltWebbingsBigNexus
+  - ClothingOuterVestWebNexus
+  - ClothingHeadHelmetNexus
+  - ClothingHelmetAttachmentNVGsNexus
+  - ClothingHandsGlovesCombatNexus
+  - ClothingShoesBootsMagNexus
+  technologyPrerequisites:
+  - NSCBasicApparel
+  position: 0, 2
+
+- type: technology
+  id: NSCBallisticSMG
+  name: research-technology-nsc-ballistic-smg
+  entityIcon: WeaponSubMachineGunNexusShebet
+  discipline: NSC
+  tier: 1
+  cost: 35000
+  recipeUnlocks:
+  - WeaponSubMachineGunNexusShebet
+  - Magazine5x23mmNexus
+  - AmmoBox5x23mmNexus
+  technologyPrerequisites:
+  - NSCVSSEquipment
+  position: 0, 2
+
+- type: technology
+  id: NSCBallisticSniper
+  name: research-technology-nsc-ballistic-sniper
+  entityIcon: WeaponSniperRifleNexusDlan
+  discipline: NSC
+  tier: 3
+  cost: 100000
+  recipeUnlocks:
+  - WeaponSniperRifleNexusDlan
+  - Magazine154x114mmFMJ
+  - Magazine154x114mmHE
+  - Magazine154x114mmAP
+  - AmmoBox154x114mmFMJ
+  - AmmoBox154x114mmHE
+  - AmmoBox154x114mmAP
+  technologyPrerequisites:
+  - NSCBallisticSMG
+  - UniversalMaterialResearchT3
+  position: 0, 2

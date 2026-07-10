@@ -1,0 +1,71 @@
+- type: entity
+  name: SLP-SRD-1 Protos
+  parent: BaseMeleeWeaponEnergy
+  id: WeaponEnergySwordNexusProtos
+  suffix: Нексус
+  description: A new UcasCo market release — a rigid plasma blade held in a force field. Briefly dropping the rear field lets you leap forward and finish a target.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Melee/nexus_energie_sword.rsi
+    layers:
+    - state: icon-off
+    - state: icon-on
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: Item
+    sprite: Forge/Objects/Weapons/Melee/nexus_energie_sword.rsi
+    size: Small
+    inhandVisuals:
+      left:
+      - state: inhand-left-off
+      right:
+      - state: inhand-right-off
+  - type: EnergySword
+    colorOptions:
+    - "#4fc3ff"
+  - type: PointLight
+    enabled: false
+    radius: 2
+    energy: 2
+    color: "#4fc3ff"
+    netsync: false
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1.56
+    damage:
+      types:
+        Blunt: 4.5
+  - type: ToggleableVisuals
+    spriteLayer: blade
+    inhandVisuals:
+      left:
+      - state: inhand-left-on
+        shader: unshaded
+      right:
+      - state: inhand-right-on
+        shader: unshaded
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Slash: 15
+        Heat: 25
+        Structural: 100
+  - type: JumpAbility
+    jumpDistance: 2.5
+    jumpSound: /Audio/Effects/Footsteps/suitstep2.ogg
+  - type: ActionGrant
+    actions:
+    - ActionGravityJump
+  - type: ItemActionGrant
+    actions:
+    - ActionGravityJump
+
+- type: entity
+  id: WeaponEnergySwordNexusProtosTechIcon
+  parent: BaseItem
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Melee/nexus_energie_sword.rsi
+    state: icon-research

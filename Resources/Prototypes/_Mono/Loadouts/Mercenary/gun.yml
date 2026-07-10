@@ -12,6 +12,7 @@
   - MercenaryKnallstockLoadout
   - MercenaryKeyboardLoadout
   - MercenaryPrometheusLoadout
+  - MercenaryIrohLoadout
   - MercenaryLeeEnfieldLoadout
   - MercenaryVulcanCLoadout
   - MercenaryMosinLoadout
@@ -20,6 +21,7 @@
   - MercenaryDisablerSMGLoadout
   - MercenaryLaserCarbineLoadout
   - MercenaryEnergyGunLoadout
+  - MeleeType3 # Forge-Change
 
 - type: loadoutGroup
   id: MercenaryPistol

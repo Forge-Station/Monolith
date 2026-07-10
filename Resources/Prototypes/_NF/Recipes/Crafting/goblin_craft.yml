@@ -260,4 +260,82 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  name: thruster-goblin-name
+  description: thruster-goblin-desc
+  icon:
+    sprite: Forge/Structures/Shuttles/thruster.rsi
+    state: base_goblin
+  id: goblinThruster
+  entityWhitelist: *goblinWhitelist
+  graph: goblin_machinery
+  startNode: start
+  targetNode: goblinThruster
+  category: construction-category-goblin
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: generator-goblin-name
+  description: generator-goblin-desc
+  icon:
+    sprite: Forge/Structures/Power/generation.rsi
+    state: clunker
+  id: goblinClunker
+  entityWhitelist: *goblinWhitelist
+  graph: goblin_machinery
+  startNode: start
+  targetNode: clunkerGenerator
+  category: construction-category-goblin
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: generator-goblin-name
+  description: generator-goblin-desc
+  id: generatorGoblinCircuitboard
+  icon:
+    sprite: Objects/Misc/module.rsi
+    state: makeshift
+  graph: goblin_makeshift_circuit
+  startNode: start
+  targetNode: clunkerScrapCircuit
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+- type: construction
+  name: goblin-thruster-circuitboard-name
+  description: goblin-thruster-circuitboard-desc
+  id: goblinThrusterCircuitboard
+  icon:
+    sprite: Objects/Misc/module.rsi
+    state: makeshift
+  graph: goblin_makeshift_circuit
+  startNode: start
+  targetNode: goblinThrusterCircuitboard
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+- type: construction
+  name: goblin-computer-shuttle-circuitboard-name
+  description: goblin-computer-shuttle-circuitboard-desc
+  id: goblinComputerShuttleCircuitboard
+  icon:
+    sprite: Objects/Misc/module.rsi
+    state: makeshift
+  graph: goblin_makeshift_circuit
+  startNode: start
+  targetNode: goblinComputerShuttleCircuitboard
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
 # Forge-Change-End

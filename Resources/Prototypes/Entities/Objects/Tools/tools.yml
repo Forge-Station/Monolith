@@ -598,6 +598,18 @@
       changeSound:
         path: /Audio/Items/change_drill.ogg
 
+# Forge-Change: RPD entity moved to _Forge/Entities/Objects/Tools/rpd.yml
+
+- type: entity # Goob
+  id: RPDRecharging
+  parent: RPD
+  name: experimental RPD
+  description: A bluespace-enhanced rapid piping device that passively generates its own compressed matter.
+  suffix: AutoRecharge
+  components:
+  - type: AutoRecharge
+    rechargeDuration: 10
+
 #Other
 - type: entity
   name: shovel

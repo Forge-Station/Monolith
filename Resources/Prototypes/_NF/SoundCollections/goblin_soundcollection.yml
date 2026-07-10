@@ -2,10 +2,8 @@
   id: GoblinScreams
   files:
   - /Audio/_NF/Voice/Goblin/goblin-scream-01.ogg
-  - /Audio/_NF/Voice/Goblin/goblin-scream-02.ogg
-  - /Audio/_NF/Voice/Goblin/goblin-scream-03.ogg
-  - /Audio/_NF/Voice/Goblin/goblin-scream-04.ogg
-
+  - /Audio/_NF/Voice/Goblin/goblin-scream-06.ogg # Forge-Change
+  - /Audio/_NF/Voice/Goblin/goblin-scream-05.ogg # Forge-Change
 - type: soundCollection
   id: GoblinCackle
   files:
@@ -60,3 +58,41 @@
   - /Audio/_NF/Voice/Goblin/goblin-deathgasp-02.ogg
   - /Audio/_NF/Voice/Goblin/goblin-deathgasp-03.ogg
   - /Audio/_NF/Voice/Goblin/goblin-deathgasp-04.ogg
+# Forge-Change-Start
+
+- type: soundCollection
+  id: GoblinSigh
+  files:
+  - /Audio/_NF/Voice/Goblin/goblin-sigh-01.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-sigh-02.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-sigh-03.ogg
+
+- type: soundCollection
+  id: GoblinSurprise
+  files:
+  - /Audio/_NF/Voice/Goblin/goblin-scream-02.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-scream-03.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-scream-04.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-oh-ohh.ogg
+
+- type: soundCollection
+  id: GoblinCoughs
+  files:
+  - /Audio/_NF/Voice/Goblin/goblin-cough-01.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-cough-02.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-cough-03.ogg
+
+- type: soundCollection
+  id: GoblinYawn
+  files:
+  - /Audio/_NF/Voice/Goblin/goblin-yawn-01.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-yawn-02.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-yawn-03.ogg
+
+- type: soundCollection
+  id: GoblinSnore
+  files:
+  - /Audio/_NF/Voice/Goblin/goblin-snor-01.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-snor-02.ogg
+  - /Audio/_NF/Voice/Goblin/goblin-snor-03.ogg
+# Forge-Change-End

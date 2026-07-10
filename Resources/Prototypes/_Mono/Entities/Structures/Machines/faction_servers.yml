@@ -158,7 +158,9 @@
     - HME # Forge-change
     - Nanotrasen # Forge-change
     - DrakeIndustries # Forge-change
+    - NSC # Forge-change
     - ForgeBoardingTeleportExperimental
+    - TelAdi # Forge-change
     - Empire # Forge-change
 
 - type: entity

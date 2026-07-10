@@ -14,7 +14,7 @@
   category: Small
   group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Mono/Shuttles/USSP/svinya.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/svinya.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -26,18 +26,18 @@
 - type: gameMap
   id: Svinya
   mapName: 'Svinya'
-  mapPath: /Maps/_Mono/Shuttles/USSP/svinya.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/USSP/svinya.yml
   minPlayers: 0
   stations:
     Svinya:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Svinya MIL{1}'
+          mapNameTemplate: 'Svinya USSP{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-            Mercenary: [ 0, 0 ]
-            Pilot: [ 0, 0 ]
+           USSPSergeant: [ 0, 0 ]
+           USSPRifleman: [ 0, 0 ]

@@ -162,8 +162,6 @@
     rankPresets:
     - USSPCommissar
     - USSPSergeant
-    - USSPMedic
-    - USSPCorporal
     - USSPRifleman
   - type: Sprite
     sprite: Structures/Machines/computers.rsi

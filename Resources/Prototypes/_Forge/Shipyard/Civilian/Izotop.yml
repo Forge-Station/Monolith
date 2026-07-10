@@ -7,7 +7,7 @@
   limit: 1
   category: Large
   group: Shipyard
-  shuttlePath: /Maps/_Forge/Shuttles/Civilian/Izotop.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Civilian/Izotop.yml
   guidebookPage: Null
   class:
   - Civilian
@@ -15,7 +15,7 @@
 - type: gameMap
   id: Izotop
   mapName: 'Изотоп-1'
-  mapPath: /Maps/_Forge/Shuttles/Civilian/Izotop.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Civilian/Izotop.yml
   minPlayers: 0
   stations:
     Izotop:

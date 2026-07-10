@@ -7,7 +7,7 @@
   group: Security
   access: Security
   price: 77500
-  shuttlePath: /Maps/_Forge/Shuttles/TSF/Atoll.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/TSF/Atoll.yml
   guidebookPage: Null
   class:
   - Salvage
@@ -18,7 +18,7 @@
 - type: gameMap
   id: Atoll
   mapName: 'Atoll'
-  mapPath: /Maps/_Forge/Shuttles/TSF/Atoll.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/TSF/Atoll.yml
   minPlayers: 0
   stations:
     Atoll:

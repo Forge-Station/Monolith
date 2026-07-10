@@ -1751,3 +1751,131 @@
     state: closed
   conditions:
     - !type:TileNotBlocked
+# Forge-Change-Start
+- type: construction
+  name: mining wall
+  id: WallMining
+  graph: Girder
+  startNode: start
+  targetNode: wallMining
+  category: construction-category-structures
+  description: Keeps the air in and the greytide out.
+  icon:
+    sprite: Structures/Walls/mining.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: mining diagonal wall
+  id: WallMiningDiagonal
+  graph: Girder
+  startNode: start
+  targetNode: wallMiningDiagonal
+  category: construction-category-structures
+  description: Keeps the air in and the greytide out.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    drawdepth: Walls
+    sprite: Structures/Walls/mining_diagonal.rsi
+    state: state0
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: shuttle uranium window
+  id: ShuttleWindowUran
+  graph: Window
+  startNode: start
+  targetNode: shuttleWindowUran
+  category: construction-category-structures
+  description: Extra sturdy to resist the pressure of FTL or sustain damage from munitions.
+  icon:
+    sprite: Forge/Structures/Windows/shuttle_uran_window.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: shuttle diagonal uranium window
+  id: ShuttleWindowUranDiagonal
+  graph: Window
+  startNode: start
+  targetNode: shuttleWindowUranDiagonal
+  category: construction-category-structures
+  description: Extra sturdy to resist the pressure of FTL or sustain damage from munitions.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Forge/Structures/Windows/shuttle_uran_window_diagonal.rsi
+    state: state0
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: shuttle plasma window
+  id: ShuttleWindowPlasma
+  graph: Window
+  startNode: start
+  targetNode: shuttleWindowPlasma
+  category: construction-category-structures
+  description: Extra sturdy to resist the pressure of FTL or sustain damage from munitions.
+  icon:
+    sprite: Forge/Structures/Windows/shuttle_plasma_window.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: shuttle diagonal plasma window
+  id: ShuttleWindowPlasmaDiagonal
+  graph: Window
+  startNode: start
+  targetNode: shuttleWindowPlasmaDiagonal
+  category: construction-category-structures
+  description: Keeps the air in and the greytide out.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Forge/Structures/Windows/shuttle_plasma_window_diagonal.rsi
+    state: state0
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: shuttle diagonal window
+  id: ShuttleWindowDiagonal
+  graph: Window
+  startNode: start
+  targetNode: shuttleWindowDiagonal
+  category: construction-category-structures
+  description: Keeps the air in and the greytide out.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Structures/Windows/shuttle_window_diagonal.rsi
+    state: state0
+  objectType: Structure
+  placementMode: SnapgridCenter
+# Forge-Change-End

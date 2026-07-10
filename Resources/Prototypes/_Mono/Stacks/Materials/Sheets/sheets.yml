@@ -19,6 +19,15 @@
   spawn: SheetPlastitanium1
   maxCount: 100
 
+# Forge-Change-Start
+- type: stack
+  id: PlastitaniumGlass
+  name: plastitanium glass
+  icon: { sprite: /Textures/_Mono/Objects/Materials/plastitaniumglass.rsi, state: plastitaniumglass }
+  spawn: SheetPlastitaniumGlass1
+  maxCount: 100
+# Forge-Change-End
+
 - type: stack
   id: UraniumFissile
   name: fissile uranium

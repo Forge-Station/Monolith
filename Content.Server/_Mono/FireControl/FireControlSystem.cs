@@ -107,6 +107,8 @@ public sealed partial class FireControlSystem : EntitySystem
             )
         );
         // Forge-Change-End
+        if (HasComp<SpaceArtilleryDisabledGridComponent>(component.ConnectedGrid))
+            args.PushMarkup(Loc.GetString("gunnery-server-examine-pacifist-grid"));
     }
 
     private void OnControllablePowerChanged(EntityUid uid, FireControllableComponent component, PowerChangedEvent args)

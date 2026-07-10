@@ -13,8 +13,15 @@
     color: "#eb772a"
     radius: 6 # Forge-Change
     energy: 4 # Forge-Change
-  - type: NightVision
-    isEquipment: true
+  - type: NightVision # Gen 4 dualtube
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 260
+    phosphorColor: "#41D7D9"
+    lightingColor: "#FFFFFF32"
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -86,9 +93,15 @@
     color: "#eb772a"
     radius: 6 # Forge-Change
     energy: 4 # Forge-Change
-  - type: NightVision
-    flashDurationMultiplier: 2
-    isEquipment: true
+  - type: NightVision # Gen 4 dualtube
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 2
+    viewCircleSpacing: 260
+    phosphorColor: "#41D7D9"
+    lightingColor: "#FFFFFF32"
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000

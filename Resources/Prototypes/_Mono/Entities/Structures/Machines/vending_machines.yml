@@ -61,6 +61,7 @@
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
   - type: AccessReader
     requiredCompany: USSP # Forge-change
+    access: [["USSP"], ["USSPHigh"]]
 
 - type: entity
   parent: [BaseStructureDisableToolUse, VendingMachineSyndieContraband]

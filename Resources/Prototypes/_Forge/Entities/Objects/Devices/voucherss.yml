@@ -1,6 +1,6 @@
 #region Renegate
 - type: entity
-  parent: BaseShipLPC
+  parent: BaseShipLPCOneUse
   id: ShipVoucherAzimut
   name: Renegate Azimut LPC
   suffix: Ренегаты
@@ -20,7 +20,7 @@
     vendPrice: 530000
 
 - type: entity
-  parent: BaseShipLPC
+  parent: BaseShipLPCOneUse
   id: ShipVoucherAzimutlate
   name: Renegate Azimutlate LPC
   suffix: Ренегаты
@@ -40,7 +40,7 @@
     vendPrice: 520000
 
 - type: entity
-  parent: BaseShipLPC
+  parent: BaseShipLPCOneUse
   id: ShipVoucherGalandec
   name: Renegate Galandec LPC
   suffix: Ренегаты
@@ -62,7 +62,7 @@
 # region Empire
 
 - type: entity
-  parent: BaseShipLPC
+  parent: BaseShipLPCOneUse
   id: ShipVoucherGermes
   name: Empire Germes LPC
   suffix: Империя
@@ -83,7 +83,7 @@
 
 
 - type: entity
-  parent: BaseShipLPC
+  parent: BaseShipLPCOneUse
   id: ShipVoucherFortress
   name: Empire Fortress LPC
   suffix: Империя
@@ -103,7 +103,7 @@
     vendPrice: 380000
 
 - type: entity
-  parent: BaseShipLPC
+  parent: BaseShipLPCOneUse
   id: ShipVoucherTerit
   name: Empire Terit LPC
   suffix: Империя
@@ -123,7 +123,7 @@
     vendPrice: 540000
 
 - type: entity
-  parent: BaseShipLPC
+  parent: BaseShipLPCOneUse
   id: ShipVoucherMirko
   name: Empire Mirko LPC
   suffix: Империя

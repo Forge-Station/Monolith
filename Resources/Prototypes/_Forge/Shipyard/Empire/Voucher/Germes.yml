@@ -11,7 +11,7 @@
   category: Large
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/Voucher/Germes.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/Voucher/Germes.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -21,7 +21,7 @@
 - type: gameMap
   id: Germes
   mapName: Elite Scout "Гермес"
-  mapPath: /Maps/_Forge/Shuttles/Empire/Voucher/Germes.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/Voucher/Germes.yml
   minPlayers: 0
   stations:
     Germes:

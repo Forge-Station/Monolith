@@ -32,7 +32,7 @@ public sealed partial class WallPaintPlacementSystem : EntitySystem
     private EntityQuery<ClickableComponent> _clickQuery;
     private PlacementSnapshot? _previousPlacement;
     private bool _previousDecalsActive;
-    private Color _color = Color.FromHex("#8B0000CC");
+    private Color _color = WallPaintColor.Clamp(Color.FromHex("#8B0000CC"));
     private bool _active;
     private bool _erase;
 
@@ -86,7 +86,7 @@ public sealed partial class WallPaintPlacementSystem : EntitySystem
 
     public void SetColor(Color color)
     {
-        _color = color;
+        _color = WallPaintColor.Clamp(color);
     }
 
     public void SetErase(bool erase)

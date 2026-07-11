@@ -26,7 +26,7 @@ public sealed partial class WallPaintSystem : EntitySystem
             return RemComp<WallPaintComponent>(uid);
 
         var paint = EnsureComp<WallPaintComponent>(uid);
-        paint.Color = color;
+        paint.Color = WallPaintColor.Clamp(color);
         paint.ProtectTransparent = protectTransparent;
         Dirty(uid, paint);
         return true;

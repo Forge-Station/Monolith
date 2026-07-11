@@ -1,4 +1,5 @@
 using Content.Server.Administration;
+using Content.Shared._Forge.WallPaint;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
@@ -62,6 +63,7 @@ public sealed partial class FillWallPaintCommand : IConsoleCommand
             }
 
             color = parsed.Value;
+            color = WallPaintColor.Clamp(color);
         }
 
         var wallPaint = _systemManager.GetEntitySystem<WallPaintSystem>();

@@ -1,5 +1,3 @@
-light_mode unshaded;
-
 uniform highp vec4 paintColor;
 uniform bool protectTransparency;
 uniform highp float opaqueAlphaThreshold;

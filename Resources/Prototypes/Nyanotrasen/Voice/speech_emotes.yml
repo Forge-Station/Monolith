@@ -2,8 +2,8 @@
 - type: emote
   id: Hiss
   category: Vocal
-  name: Hiss
-  icon: Interface/Actions/scream.png
+  name: chat-emote-name-hiss       # Forge-Change
+  icon: Interface/Emotes/vocal.png # Forge-Change
   available: false
   whitelist:
     components:
@@ -11,7 +11,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [hisses.]
+  chatMessages: ["chat-emote-msg-hiss"] # Forge-Change
   chatTriggers:
     - hiss
     - hisses

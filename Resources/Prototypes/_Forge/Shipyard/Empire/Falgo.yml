@@ -7,7 +7,7 @@
   group: Empire
   access: Empire
   price: 57000
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/Falgo.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/Falgo.yml
   guidebookPage: Null
   class:
   - Medical
@@ -17,7 +17,7 @@
 - type: gameMap
   id: Falgo
   mapName: 'PSE Falgo'
-  mapPath: /Maps/_Forge/Shuttles/Empire/Falgo.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/Falgo.yml
   minPlayers: 0
   stations:
     Falgo:

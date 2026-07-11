@@ -8,14 +8,14 @@
       state: medical
     - type: MachineBoard
       prototype: TraumaTechFab
-      requirements: 
-        MatterBin: 2 
-        Manipulator: 2 
+      requirements:
+        MatterBin: 2
+        Manipulator: 2
       tagRequirements:
         GlassBeaker:
           amount: 2
           defaultPrototype: Beaker
-          
+
 - type: entity
   id: LaserDrillCircuitboard
   parent: BaseMachineCircuitboard
@@ -26,12 +26,104 @@
       state: engineering
     - type: MachineBoard
       prototype: ForgeLaserDrill
-      requirements: 
-        MatterBin: 3 
-        Manipulator: 5 
+      requirements:
+        MatterBin: 3
+        Manipulator: 5
       stackRequirements:
         Glass: 30
         Steel: 15
         Gold: 10
         Diamond: 2
         Iridite: 5
+
+- type: entity
+  id: PortableGeneratorClunkerCircuitboard
+  parent: BaseMachineCircuitboard
+  name: Clunker portable generator machine board
+  components:
+    - type: Sprite
+      state: makeshift
+    - type: MachineBoard
+      prototype: PortableGeneratorClunker
+      requirements: # Frontier
+        Capacitor: 1 # Frontier stackRequirements<requirements
+      stackRequirements:
+        Cable: 10
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 200
+      chemicalComposition:
+        Silicon: 20
+    - type: StaticPrice
+      price: 40
+    - type: Construction
+      graph: goblin_makeshift_circuit
+      node: clunkerScrapCircuit
+    - type: Tag
+      tags:
+      - PortableGeneratorClunkerCircuitboard
+
+- type: entity
+  id: GoblinThrusterCircuitboard
+  parent: BaseMachineCircuitboard
+  name: Goblin thruster machine board
+  components:
+    - type: Sprite
+      state: makeshift
+    - type: MachineBoard
+      prototype: GoblinThruster
+      requirements:
+        Capacitor: 1
+      stackRequirements:
+        Steel: 10
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 200
+      chemicalComposition:
+        Silicon: 20
+    - type: StaticPrice
+      price: 40
+    - type: Construction
+      graph: goblin_makeshift_circuit
+      node: goblinThrusterCircuitboard
+    - type: Tag
+      tags:
+      - GoblinThrusterCircuitboard
+
+- type: entity
+  id: GoblinComputerShuttleCircuitboard
+  parent: BaseComputerCircuitboard
+  name: goblin-computer-shuttle-circuitboard
+  description: goblin-computer-shuttle-circuitboard-desc
+  components:
+    - type: Sprite
+      state: makeshift
+    - type: ComputerBoard
+      prototype: ComputerShuttleGoblin
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 200
+      chemicalComposition:
+        Silicon: 20
+    - type: StaticPrice
+      price: 40
+    - type: Construction
+      graph: goblin_makeshift_circuit
+      node: goblinComputerShuttleCircuitboard
+
+- type: entity
+  parent: BaseItem
+  name: goblin-scrap-circuitboard
+  description: goblin-scrap-circuitboard-desc
+  id: GoblinScrapCircuitboard
+  components:
+  - type: Sprite
+    sprite: Objects/Materials/Scrap/generic.rsi
+    layers:
+    - state: glass-4
+      map: [ "base" ]
+  - type: Item
+    size: Normal
+  - type: Construction
+    graph: goblin_makeshift_circuit
+    node: incompleteCircuitboard

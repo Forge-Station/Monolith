@@ -51,7 +51,7 @@ shipyard-console-class-Frigate = Фрегат
 shipyard-console-class-Destroyer = Эсминец
 shipyard-console-class-Cruiser = Крейсер
 
-shipyard-console-class-Syndicate = Синдикат
+shipyard-console-class-Syndicate = Горлекс
 shipyard-console-class-Pirate = Пиратский
 
 shipyard-console-class-All = Все

@@ -41,10 +41,10 @@
       - SyndicateSabre
 
 - type: entity
-  name: сабля офицера Синдиката
+  name: сабля офицера Горлекса
   parent: [BaseSword,BaseC3SyndicateContraband]
   id: SyndicateSabre
-  description: Пластитановая сабля настоящего офицера Синдиката. Острие сабли настолько острое, что способно прорезать даже самую прочную защиту.
+  description: Пластитановая сабля настоящего офицера Горлекса. Острие сабли настолько острое, что способно прорезать даже самую прочную защиту.
   components:
   - type: Sprite
     sprite: Forge/Objects/Weapons/Melee/syndicate_sabre.rsi

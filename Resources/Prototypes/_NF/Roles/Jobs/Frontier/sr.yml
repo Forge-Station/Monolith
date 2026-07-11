@@ -32,6 +32,10 @@
   accessGroups:
   - AllAccessSR # Forge-Change
   special:
+  - !type:AddComponentSpecial
+    components:
+    - type: ChatRank
+      rank: cc-overseer
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, NanotrasenTrackingImplant ] # Forge-change
   - !type:AddComponentSpecial

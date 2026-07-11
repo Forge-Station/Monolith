@@ -1,0 +1,63 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseAmmoBox154x114mm
+  name: ammunition box (15.4x114mm)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge154x114mm
+    proto: Cartridge154x114mmFMJ
+    capacity: 20
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Boxes/nexus_154x114mm_box.rsi
+    layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  parent: BaseAmmoBox154x114mm
+  id: AmmoBox154x114mmFMJ
+  name: ammunition box (15.4x114mm FMJ)
+
+- type: entity
+  parent: BaseAmmoBox154x114mm
+  id: AmmoBox154x114mmHE
+  name: ammunition box (15.4x114mm HE)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge154x114mmHE
+  - type: Sprite
+    layers:
+    - state: icon_HE
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseAmmoBox154x114mm
+  id: AmmoBox154x114mmAP
+  name: ammunition box (15.4x114mm AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge154x114mmAP
+  - type: Sprite
+    layers:
+    - state: icon_AP
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

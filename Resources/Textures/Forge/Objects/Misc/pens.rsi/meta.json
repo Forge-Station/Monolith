@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "pen_pal created by GhostPrince for use on Frontier Server, pen_pal-inhand-* by Whatstone (Discord); recolor by v6st for Forge",
+    "copyright": "pen_pal created by GhostPrince for use on Frontier Server, pen_pal-inhand-* by Whatstone (Discord); recolor by v6st for Forge; pen_nexus by nelpis. (discord)",
     "size": {
       "x": 32,
       "y": 32
@@ -16,6 +16,17 @@
       },
       {
         "name": "pen_pal-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "pen_nexus"
+      },
+      {
+        "name": "pen_nexus-inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "pen_nexus-inhand-right",
         "directions": 4
       }
     ]

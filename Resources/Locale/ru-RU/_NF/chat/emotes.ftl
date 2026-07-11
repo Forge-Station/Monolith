@@ -4,6 +4,7 @@ chat-emote-name-belch = Рыгать
 # Goblins
 chat-emote-name-goblin-muttering = Бормотание
 chat-emote-name-goblin-throat-singing = Пение
+chat-emote-name-goblin-surprise = Удивится
 
 # Felinid
 chat-emote-name-hiss = Шипеть
@@ -34,6 +35,7 @@ chat-emote-msg-belch = рыгает
 # Goblin
 chat-emote-msg-goblin-muttering = бормочет
 chat-emote-msg-goblin-throat-singing = поёт
+chat-emote-msg-goblin-surprise = шокирован!
 
 # Felinid
 chat-emote-msg-felinid-hiss = шипит
@@ -56,3 +58,6 @@ chat-emote-msg-vulpkanin-snarls = рычит
 chat-emote-msg-vulpkanin-whines = скулит
 chat-emote-msg-vulpkanin-howls = воет
 chat-emote-msg-vulpkanin-awoo = воет
+
+chat-emote-name-hiss = Шипеть
+chat-emote-msg-hiss = шипит

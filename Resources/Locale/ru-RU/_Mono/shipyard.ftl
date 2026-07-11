@@ -10,3 +10,9 @@ shipyard-console-deed-unassigned = Шаттл был успешно отвяза
 shipyard-console-unassign-cooldown = Подождите {$minutes} минут, прежде чем отвязать шаттл.
 shipyard-console-rename-label = Переименовать
 shipyard-console-name-empty = Название не может быть пустым
+
+shipyard-console-preview = Просмотр
+shipyard-preview-ui-title = Просмотр шаттла
+shipyard-preview-data-label = Данные о шаттле:
+shipyard-preview-tile-count = Количество тайлов: {$count}
+shipyard-preview-exit = Выйти из просмотра

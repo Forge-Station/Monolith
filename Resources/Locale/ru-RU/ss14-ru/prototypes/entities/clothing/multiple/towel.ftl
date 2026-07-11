@@ -44,5 +44,5 @@ ent-TowelColorNT = полотенце марки Nanotrasen
     .desc = { ent-BaseTowel.desc }
 ent-TowelColorCentcom = полотенце УСФ
     .desc = { ent-BaseTowel.desc }
-ent-TowelColorSyndicate = полотенце Синдиката
+ent-TowelColorSyndicate = полотенце Горлекса
     .desc = { ent-BaseTowel.desc }

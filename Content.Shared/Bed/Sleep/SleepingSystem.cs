@@ -21,6 +21,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Verbs;
+using Content.Shared.Speech.Components; /// Forge-Change
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -30,6 +31,7 @@ namespace Content.Shared.Bed.Sleep;
 
 public sealed partial class SleepingSystem : EntitySystem
 {
+    private const string SnoreEmoteId = "Snore"; /// Forge-Change
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private BlindableSystem _blindableSystem = default!;
@@ -69,9 +71,27 @@ public sealed partial class SleepingSystem : EntitySystem
         SubscribeLocalEvent<ForcedSleepingComponent, EmoteAttemptEvent>(OnForcedSleepEmoteAttempt); // Forge-Change: added forced sleep emote attempt event
         SubscribeLocalEvent<SleepingComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
         SubscribeLocalEvent<SleepingComponent, EmoteAttemptEvent>(OnEmoteAttempt);
+        SubscribeLocalEvent<SnoringComponent, ComponentStartup>(OnSnoringStartup); /// Forge-Change
 
         SubscribeLocalEvent<SleepingComponent, BeforeForceSayEvent>(OnChangeForceSay, after: new[] { typeof(PainNumbnessSystem) }); // Forge-Change: added forced sleep before force say event
     }
+    /// Forge-Change-Start
+    private void OnSnoringStartup(Entity<SnoringComponent> ent, ref ComponentStartup args)
+    {
+        TryCacheSnoreFromEmoteSounds(ent);
+    }
+
+    private void TryCacheSnoreFromEmoteSounds(Entity<SnoringComponent> ent)
+    {
+        if (!TryComp<VocalComponent>(ent, out var vocal) || vocal.EmoteSounds == null)
+            return;
+
+        if (!vocal.EmoteSounds.Sounds.TryGetValue(SnoreEmoteId, out var snoreSound))
+            return;
+
+        ent.Comp.Snore = snoreSound;
+    }
+/// Forge-Change-End
 
     private void OnUnbuckleAttempt(Entity<SleepingComponent> ent, ref UnbuckleAttemptEvent args)
     {
@@ -114,10 +134,15 @@ public sealed partial class SleepingSystem : EntitySystem
             if (TryComp<SleepEmitSoundComponent>(ent, out var sleepSound))
             {
                 var emitSound = EnsureComp<SpamEmitSoundComponent>(ent);
-                if (HasComp<SnoringComponent>(ent))
+                /// Forge-Change-Start
+                if (TryComp<SnoringComponent>(ent, out var snoring))
                 {
-                    emitSound.Sound = sleepSound.Snore;
+                    if (snoring.Snore == null)
+                        TryCacheSnoreFromEmoteSounds((ent.Owner, snoring));
+
+                    emitSound.Sound = snoring.Snore ?? sleepSound.Snore;
                 }
+                /// Forge-Change-End
                 emitSound.MinInterval = sleepSound.Interval;
                 emitSound.MaxInterval = sleepSound.MaxInterval;
                 emitSound.PopUp = sleepSound.PopUp;

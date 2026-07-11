@@ -1,0 +1,64 @@
+- type: entity
+  parent: BriefcaseBrown
+  id: BriefcaseNexus
+  name: Nexus briefcase
+  suffix: Нексус
+  description: A corporate briefcase in Nexus Star Consortium livery. Useful for hauling paperwork across the sector.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/briefcases/nexus_briefcase.rsi
+    state: icon
+  - type: Item
+    sprite: Forge/Objects/Misc/briefcases/nexus_briefcase.rsi
+
+- type: entity
+  parent: PenCentcom
+  id: PenNexus
+  name: Nexus pen
+  suffix: Нексус
+  description: NSC liaison pen with a diamond tip. Writes over stamped documents, doubles as a screwdriver, and stabs about as well as CentComm's legal department intended.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/pens.rsi
+    state: pen_nexus
+  - type: Item
+    sprite: Forge/Objects/Misc/pens.rsi
+    heldPrefix: pen_nexus
+
+- type: entity
+  parent: BoxFolderClipboard
+  id: BoxFolderClipboardNexus
+  name: Nexus clipboard
+  suffix: Нексус
+  description: Standard NSC clipboard for forms, manifests, and field reports.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/clipboards/nexus_clipboard.rsi
+    layers:
+    - state: clipboard
+    - state: clipboard_paper
+      map: ["clipboard_paper"]
+      visible: false
+    - state: clipboard_pen
+      map: ["clipboard_pen"]
+      visible: false
+    - state: clipboard_over
+  - type: Item
+    sprite: Forge/Objects/Misc/clipboards/nexus_clipboard.rsi
+  - type: Clothing
+    sprite: Forge/Objects/Misc/clipboards/nexus_clipboard.rsi
+
+- type: entity
+  parent: RubberStampBase
+  id: RubberStampNexus
+  name: Nexus rubber stamp
+  suffix: Нексус
+  description: Official rubber stamp of the Nexus Star Consortium.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-nexus
+    stampedColor: "#0f3b62"
+    stampState: paper_stamp-nexus
+  - type: Sprite
+    sprite: Forge/Objects/Misc/stamps/nexus_stamp.rsi
+    state: stamp-nexus

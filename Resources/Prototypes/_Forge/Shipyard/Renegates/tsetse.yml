@@ -7,7 +7,7 @@
   category: Small
   group: Renegate
   access: Renegate
-  shuttlePath: /Maps/_Forge/Shuttles/Renegates/tsetse.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/tsetse.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -19,7 +19,7 @@
 - type: gameMap
   id: tsetse
   mapName: 'Це-Це'
-  mapPath: /Maps/_Forge/Shuttles/Renegates/tsetse.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Renegates/tsetse.yml
   minPlayers: 0
   stations:
     tsetse:

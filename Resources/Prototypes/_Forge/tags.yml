@@ -235,6 +235,19 @@
 - type: Tag
   id: Overlord
 
+# NSC ammunition
+- type: Tag
+  id: Cartridge154x114mm
+
+- type: Tag
+  id: Magazine154x114mm
+
+- type: Tag
+  id: Cartridge5x23mm
+
+- type: Tag
+  id: Magazine5x23mm
+
 # Ullman Industries
 - type: Tag
   id: ForgeMagazineUllman127x85mm

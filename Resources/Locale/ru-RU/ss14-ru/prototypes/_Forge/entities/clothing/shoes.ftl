@@ -16,7 +16,7 @@ ent-ClothingShoesBootsMagNFSDPromax = продвинутые магнитные 
 ent-ClothingShoesBootsMagParamed = магнитные сапоги парамедика
     .desc = Медицинские магнитные сапоги, имеющие более лёгкое магнитное сцепление.
 
-ent-ClothingShoesBootsMagSyndieElite = элитные магнитные сапоги синдиката
+ent-ClothingShoesBootsMagSyndieElite = элитные магнитные сапоги Горлекса
     .desc = Магнитные ботинки с обратной конструкцией, которые, по-видимому, основаны на усовершенствованной модели, поскольку обладают более легким магнитным притяжением. Собственность Мародёров Горлекса.
 
 ent-ClothingShoesBootsMagContractor = магнитные сапоги DCN™

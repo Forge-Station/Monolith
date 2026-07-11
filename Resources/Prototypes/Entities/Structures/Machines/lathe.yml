@@ -266,6 +266,7 @@
     - CarpEquipment # Mono
     - UpgradeKits # Mono
     - UpgradeKits_Goob # Mono
+    - RCD # Mono!
     - SMSurgery # Shitmed Change
     # WD EDIT START
     - VisionGoggles
@@ -276,6 +277,7 @@
     # Forge-change
     - BSparts
     - ForgePublicWeapons
+
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - DynamicAmmoRecipePack
@@ -354,6 +356,7 @@
     - EngineeringBoardsGoob #Goob Factorio port
     - NanotrasenCircuitBoard # Forge-change
     - DrakeIndustriesCircuitBoards # Forge-change
+    - TelAdiCircuitBoards # Forge-change: Tel-Adi machine boards (centrifuge, scrap processor)
     - ReactorCircuitboards # FH edit
     - BsEnergyCircuitsPack # Forge-Change
   - type: MaterialStorage
@@ -399,6 +402,7 @@
     - EngineeringBoardsGoob #Goob Factorio port
     - NanotrasenCircuitBoard # Forge-change
     - DrakeIndustriesCircuitBoards # Forge-change
+    - TelAdiCircuitBoards # Forge-change: Tel-Adi machine boards (centrifuge, scrap processor)
     - ReactorCircuitboards # FH edit
     - ForgeHyperConvectionFSGTier4Boards # Forge — FSG T4 boards (disk-unlocked), hyper imprinter only
 
@@ -431,6 +435,7 @@
     - IPCPartsStatic
     dynamicPacks:
     - NanotrasenMechWeapon # Forge-change
+    - TelAdiCyberneticsDynamic # Forge-change: Tel-Adi emergency limb implant (research-gated)
     - Robotics
     - BorgModules
     - MechParts
@@ -551,9 +556,6 @@
     - MonoRogueWeaponsDynamicMelee
     - MonoRogueWeaponsDynamicRanged
     - MonoRogueMiscDynamic
-    - MonoUSSPMiscDynamic
-    - MonoViperGroupDynamic
-    - MonoUSSPWeaponsDynamicRanged
     - UniversalShellAmmo
     - ResearchedExplosives
     - UniversalRailgunAmmo
@@ -707,6 +709,7 @@
     - NanotrasenClothing # Forge: AllTechPrintableTest only indexes dynamicPacks
     - NFPouches # Frontier
     - ClothingEmpirePack # Forge-change
+    - TelAdiClothingDynamic # Forge-change: Tel-Adi clothing (research-gated, see teladi_clothing.yml)
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ClothingCentComm

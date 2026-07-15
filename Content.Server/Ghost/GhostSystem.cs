@@ -31,6 +31,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Players.RateLimiting; // Forge-Change
 using Content.Shared.Popups;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared.Storage.Components;
 using Content.Shared.Tag;
 using Content.Server.Players.RateLimiting; // Forge-Change
@@ -776,6 +777,11 @@ namespace Content.Server.Ghost
             //   we're succumbing - the mob is killed. Therefore, character is dead. Ghosting OK.
             //   (If the mob survives, that's a bug. Ghosting is kept regardless.)
             var canReturn = canReturnGlobal && _mind.IsCharacterDeadPhysically(mind);
+
+            // Forge - change: an AI brain has no MobState and is otherwise treated as dead.
+            // Ghosting from an occupied core must remove its mind so the takeover role can reopen.
+            if (playerEntity != null && HasComp<StationAiHeldComponent>(playerEntity.Value))
+                canReturn = false;
 
             if (_configurationManager.GetCVar(CCVars.GhostKillCrit) &&
                 canReturnGlobal &&

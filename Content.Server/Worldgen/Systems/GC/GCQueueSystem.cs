@@ -7,6 +7,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Server._Mono.GridClaimer;
 
 namespace Content.Server.Worldgen.Systems.GC;
 
@@ -18,6 +19,7 @@ public sealed partial class GCQueueSystem : EntitySystem
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private GridClaimerSystem _gridClaimer = default!;
 
     [ViewVariables] private TimeSpan _maximumProcessTime = TimeSpan.Zero;
 
@@ -62,6 +64,9 @@ public sealed partial class GCQueueSystem : EntitySystem
                 var e = queue.Dequeue();
                 if (!Deleted(e))
                 {
+                    if (_gridClaimer.IsSavedClaimedGrid(e))
+                        continue;
+
                     var ev = new TryCancelGC();
                     RaiseLocalEvent(e, ref ev);
 
@@ -78,6 +83,9 @@ public sealed partial class GCQueueSystem : EntitySystem
     /// <param name="e">Entity to GC.</param>
     public void TryGCEntity(EntityUid e)
     {
+        if (_gridClaimer.IsSavedClaimedGrid(e))
+            return;
+
         if (!TryComp<GCAbleObjectComponent>(e, out var comp))
         {
             QueueDel(e); // not our problem :)

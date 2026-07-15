@@ -8,6 +8,8 @@ public sealed partial class GridClaimerSystem : EntitySystem
 {
     [Dependency] private PopupSystem _popup = default!;
 
+    private readonly HashSet<EntityUid> _savedClaimedGrids = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -74,6 +76,8 @@ public sealed partial class GridClaimerSystem : EntitySystem
         with.Comp.ClaimingGrid = gridUid;
         var claimable = EnsureComp<ClaimableGridComponent>(gridUid);
 
+        _savedClaimedGrids.Add(gridUid);
+
         if (popup)
             _popup.PopupEntity(Loc.GetString(claimable.Claimed ? "grid-claimer-claim-already" : "grid-claimer-claim"), with);
 
@@ -103,5 +107,10 @@ public sealed partial class GridClaimerSystem : EntitySystem
     public bool IsClaimable(EntityUid? gridUid)
     {
         return HasComp<ClaimableGridComponent>(gridUid);
+    }
+
+    public bool IsSavedClaimedGrid(EntityUid? gridUid)
+    {
+        return gridUid.HasValue && _savedClaimedGrids.Contains(gridUid.Value);
     }
 }

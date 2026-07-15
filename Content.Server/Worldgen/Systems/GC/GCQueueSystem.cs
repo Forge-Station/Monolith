@@ -1,13 +1,13 @@
 using System.Linq;
 using Content.Server.Worldgen.Components.GC;
 using Content.Server.Worldgen.Prototypes;
+using Content.Server._Mono.GridClaimer;
 using Content.Shared.CCVar;
 using JetBrains.Annotations;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Server._Mono.GridClaimer;
 
 namespace Content.Server.Worldgen.Systems.GC;
 
@@ -19,7 +19,6 @@ public sealed partial class GCQueueSystem : EntitySystem
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private GridClaimerSystem _gridClaimer = default!;
 
     [ViewVariables] private TimeSpan _maximumProcessTime = TimeSpan.Zero;
 
@@ -64,7 +63,8 @@ public sealed partial class GCQueueSystem : EntitySystem
                 var e = queue.Dequeue();
                 if (!Deleted(e))
                 {
-                    if (_gridClaimer.IsSavedClaimedGrid(e))
+                    // don't delete it if claimed
+                    if (TryComp<ClaimableGridComponent>(e, out var claimable) && claimable.Claimed)
                         continue;
 
                     var ev = new TryCancelGC();
@@ -83,7 +83,8 @@ public sealed partial class GCQueueSystem : EntitySystem
     /// <param name="e">Entity to GC.</param>
     public void TryGCEntity(EntityUid e)
     {
-        if (_gridClaimer.IsSavedClaimedGrid(e))
+        // don't delete it if claimed
+        if (TryComp<ClaimableGridComponent>(e, out var claimable) && claimable.Claimed)
             return;
 
         if (!TryComp<GCAbleObjectComponent>(e, out var comp))

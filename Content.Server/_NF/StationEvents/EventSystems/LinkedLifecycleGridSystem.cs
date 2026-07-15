@@ -11,7 +11,6 @@ using Content.Shared.Vehicle.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
-using Content.Server._Mono.GridClaimer;
 
 namespace Content.Server.StationEvents.Events;
 
@@ -19,7 +18,6 @@ public sealed partial class LinkedLifecycleGridSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private GridClaimerSystem _gridClaimer = default!;
 
     public override void Initialize()
     {
@@ -65,12 +63,7 @@ public sealed partial class LinkedLifecycleGridSystem : EntitySystem
 
         // Destroy child entities
         foreach (var entity in component.LinkedEntities)
-        {
-            if (_gridClaimer.IsSavedClaimedGrid(entity))
-                continue;
-
             UnparentPlayersFromGrid(entity, true);
-        }
     }
 
     // Try to get parent of entity where appropriate.
@@ -186,9 +179,6 @@ public sealed partial class LinkedLifecycleGridSystem : EntitySystem
     {
         if (!ignoreLifeStage && TerminatingOrDeleted(grid))
             return;
-
-        if (deleteGrid && _gridClaimer.IsSavedClaimedGrid(grid))
-            deleteGrid = false;
 
         var reparentEntities = GetEntitiesToReparent(grid);
 

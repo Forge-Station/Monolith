@@ -8,14 +8,12 @@ using Content.Shared.Radio;
 using Content.Shared.Salvage.Magnet;
 using Robust.Shared.Exceptions;
 using Robust.Shared.Map;
-using Content.Server._Mono.GridClaimer;
 
 namespace Content.Server.Salvage;
 
 public sealed partial class SalvageSystem
 {
     [Dependency] private IRuntimeLog _runtimeLog = default!;
-    [Dependency] private GridClaimerSystem _gridClaimer = default!;
 
     [ValidatePrototypeId<RadioChannelPrototype>]
     private const string MagnetChannel = "Supply";
@@ -134,15 +132,12 @@ public sealed partial class SalvageSystem
     {
         if (data.Comp.ActiveEntities != null)
         {
-            bool IsClaimedActiveGrid(EntityUid grid)
-                => _gridClaimer.IsSavedClaimedGrid(grid);
-
             // Handle mobrestrictions getting deleted
             var query = AllEntityQuery<SalvageMobRestrictionsComponent>();
 
             while (query.MoveNext(out var salvUid, out var salvMob))
             {
-                if (data.Comp.ActiveEntities.Contains(salvMob.LinkedEntity) && !IsClaimedActiveGrid(salvMob.LinkedEntity))
+                if (data.Comp.ActiveEntities.Contains(salvMob.LinkedEntity))
                 {
                     QueueDel(salvUid);
                 }
@@ -168,9 +163,6 @@ public sealed partial class SalvageSystem
             // Go and cleanup the active ents.
             foreach (var ent in data.Comp.ActiveEntities)
             {
-                if (IsClaimedActiveGrid(ent))
-                    continue;
-
                 Del(ent);
             }
 

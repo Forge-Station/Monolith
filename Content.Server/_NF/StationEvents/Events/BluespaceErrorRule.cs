@@ -43,7 +43,6 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
     [Dependency] private BankSystem _bank = default!;
     [Dependency] private SharedSalvageSystem _salvage = default!;
     [Dependency] private AutoExtendRuleSystem _autoExtend = default!;
-    [Dependency] private GridClaimerSystem _gridClaimer = default!;
 
     public override void Initialize()
     {
@@ -214,42 +213,23 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
         if (component.GridsUid == null)
             return;
 
-        var mapsToPreserve = new HashSet<MapId>();
-
-        // Also preserve maps that contain claimed grids even if those grids are no longer in the original spawn list
-        // (e.g. after splitting / relinking).
-        var claimedGridQuery = AllEntityQuery<ClaimableGridComponent>();
-        while (claimedGridQuery.MoveNext(out var claimedGridUid, out var claimable))
-        {
-            if (!_gridClaimer.IsSavedClaimedGrid(claimedGridUid))
-                continue;
-
-            if (!TryComp(claimedGridUid, out TransformComponent? claimedGridXform))
-                continue;
-
-            mapsToPreserve.Add(claimedGridXform.MapID);
-        }
-
         foreach (var componentGridUid in component.GridsUid)
         {
-            if (!TryComp<TransformComponent>(componentGridUid, out var gridTransform))
+            if (!EntityManager.TryGetComponent<TransformComponent>(componentGridUid, out var gridTransform))
             {
                 Log.Error("bluespace error objective was missing transform component");
-                continue;
+                return;
             }
 
             if (gridTransform.GridUid is not EntityUid gridUid)
             {
                 Log.Error("bluespace error has no associated grid?");
-                continue;
+                return;
             }
 
             // don't delete it if claimed
-            if (_gridClaimer.IsSavedClaimedGrid(componentGridUid))
-            {
-                mapsToPreserve.Add(gridTransform.MapID);
-                continue;
-            }
+            if (TryComp<ClaimableGridComponent>(componentGridUid, out var claimable) && claimable.Claimed)
+                return;
 
             if (component.DeleteGridsOnEnd)
             {
@@ -300,9 +280,6 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
 
         foreach (MapId mapId in component.MapsUid)
         {
-            if (mapsToPreserve.Contains(mapId))
-                continue;
-
             if (_map.MapExists(mapId))
                 _map.DeleteMap(mapId);
         }

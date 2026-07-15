@@ -11,7 +11,6 @@ public abstract partial class BaseCleanupSystem<TComp> : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly GridClaimerSystem _gridClaimer = default!;
     [Dependency] protected readonly CleanupHelperSystem CleanupHelper = default!;
 
     protected TimeSpan _cleanupInterval = TimeSpan.FromSeconds(300);
@@ -108,9 +107,9 @@ public abstract partial class BaseCleanupSystem<TComp> : EntitySystem
 
     protected void CleanupEnt(EntityUid uid)
     {
-        if (_gridClaimer.IsSavedClaimedGrid(uid))
+        // don't delete it if claimed
+        if (TryComp<ClaimableGridComponent>(uid, out var claimable) && claimable.Claimed)
             return;
-
         var coord = Transform(uid).Coordinates;
         var world = _transform.ToMapCoordinates(coord);
         if (_doLog)

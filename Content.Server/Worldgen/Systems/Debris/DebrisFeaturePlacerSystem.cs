@@ -11,7 +11,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server._NF.Worldgen.Components.Debris; // Frontier
-using Content.Server._Mono.GridClaimer;
 
 namespace Content.Server.Worldgen.Systems.Debris;
 
@@ -21,7 +20,6 @@ namespace Content.Server.Worldgen.Systems.Debris;
 public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
 {
     [Dependency] private GCQueueSystem _gc = default!;
-    [Dependency] private GridClaimerSystem _gridClaimer = default!;
     [Dependency] private NoiseIndexSystem _noiseIndex = default!;
     [Dependency] private PoissonDiskSampler _sampler = default!;
     [Dependency] private TransformSystem _xformSys = default!;
@@ -52,10 +50,6 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
     private void OnTryCancelGC(EntityUid uid, OwnedDebrisComponent component, ref TryCancelGC args)
     {
         args.Cancelled |= HasComp<LoadedChunkComponent>(component.OwningController);
-
-        // Claimed grids must survive chunk unload / GC cycles.
-        if (_gridClaimer.IsSavedClaimedGrid(uid))
-            args.Cancelled = true;
     }
 
     /// <summary>
@@ -115,12 +109,7 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
         foreach (var (_, debris) in component.OwnedDebris) // Mono Re-add
         {
             if (debris is not null)
-            {
-                if (_gridClaimer.IsSavedClaimedGrid(debris.Value))
-                    continue;
-
                 _gc.TryGCEntity(debris.Value); // gonb.
-            }
         }
 
         component.DoSpawns = true;

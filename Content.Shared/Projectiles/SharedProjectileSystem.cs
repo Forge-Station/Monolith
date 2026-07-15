@@ -506,8 +506,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     {
  	    // Dormant projectile entities (e.g. ammo bolts in inventory) should not use active projectile
         // collision filtering because it interferes with normal item interactions.
-        if (!component.ProjectileSpent && component.Shooter == null && component.Weapon == null)
-            return;
+        if (!component.ProjectileSpent && component.Shooter == null && component.Weapon == null)    /// Forge-Change
+            return;                                                                                 /// Forge-Change
         // Goobstation - Crawling fix
         if (TryComp<RequireProjectileTargetComponent>(args.OtherEntity, out var requireTarget) && requireTarget.IgnoreThrow && requireTarget.Active)
             return;

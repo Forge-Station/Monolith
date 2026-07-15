@@ -2,6 +2,7 @@ using Content.Shared._Forge.Silicons.StationAi;
 using Robust.Client.GameObjects;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Maths;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
 using System.Linq;
@@ -56,5 +57,6 @@ public sealed class StationAiScreenSystem : EntitySystem
             return;
 
         _sprites.LayerSetRsi((ent.Owner, sprite), layer, resource.RSI, state);
+        _sprites.LayerSetColor((ent.Owner, sprite), layer, ent.Comp.Occupied ? ent.Comp.Color : Color.White);
     }
 }

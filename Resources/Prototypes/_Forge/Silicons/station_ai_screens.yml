@@ -5,25 +5,242 @@
   state: ai
 
 - type: stationAiScreen
-  id: StationAiScreenBanned
-  name: station-ai-screen-banned
-  sprite: Mobs/Silicon/output.rsi
-  state: ai-banned-unshaded
-
-- type: stationAiScreen
   id: StationAiScreenFace
   name: station-ai-screen-face
   sprite: Mobs/Silicon/output.rsi
   state: floating_face-unshaded
 
 - type: stationAiScreen
-  id: StationAiScreenHorror
-  name: station-ai-screen-horror
-  sprite: Mobs/Silicon/output.rsi
-  state: horror-unshaded
+  id: StationAiScreenIpcStatic
+  name: marking-ScreenStatic
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_static
 
 - type: stationAiScreen
-  id: StationAiScreenXeno
-  name: station-ai-screen-xeno
-  sprite: Mobs/Silicon/output.rsi
-  state: xeno_queen-unshaded
+  id: StationAiScreenIpcBlue
+  name: marking-ScreenBlue
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_blue
+
+- type: stationAiScreen
+  id: StationAiScreenIpcBreakout
+  name: marking-ScreenBreakout
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_breakout
+
+- type: stationAiScreen
+  id: StationAiScreenIpcEight
+  name: marking-ScreenEight
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_eight
+
+- type: stationAiScreen
+  id: StationAiScreenIpcGoggles
+  name: marking-ScreenGoggles
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_goggles
+
+- type: stationAiScreen
+  id: StationAiScreenIpcExclaim
+  name: marking-ScreenExclaim
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_exclaim
+
+- type: stationAiScreen
+  id: StationAiScreenIpcHeart
+  name: marking-ScreenHeart
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_heart
+
+- type: stationAiScreen
+  id: StationAiScreenIpcMonoeye
+  name: marking-ScreenMonoeye
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_monoeye
+
+- type: stationAiScreen
+  id: StationAiScreenIpcNature
+  name: marking-ScreenNature
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_nature
+
+- type: stationAiScreen
+  id: StationAiScreenIpcOrange
+  name: marking-ScreenOrange
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_orange
+
+- type: stationAiScreen
+  id: StationAiScreenIpcPink
+  name: marking-ScreenPink
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_pink
+
+- type: stationAiScreen
+  id: StationAiScreenIpcQuestion
+  name: marking-ScreenQuestion
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_question
+
+- type: stationAiScreen
+  id: StationAiScreenIpcShower
+  name: marking-ScreenShower
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_shower
+
+- type: stationAiScreen
+  id: StationAiScreenIpcYellow
+  name: marking-ScreenYellow
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_yellow
+
+- type: stationAiScreen
+  id: StationAiScreenIpcScroll
+  name: marking-ScreenScroll
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_scroll
+
+- type: stationAiScreen
+  id: StationAiScreenIpcConsole
+  name: marking-ScreenConsole
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_console
+
+- type: stationAiScreen
+  id: StationAiScreenIpcRgb
+  name: marking-ScreenRgb
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_rgb
+
+- type: stationAiScreen
+  id: StationAiScreenIpcGlider
+  name: marking-ScreenGlider
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_glider
+
+- type: stationAiScreen
+  id: StationAiScreenIpcRainbowhoriz
+  name: marking-ScreenRainbowhoriz
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_rainbowhoriz
+
+- type: stationAiScreen
+  id: StationAiScreenIpcBsod
+  name: marking-ScreenBsod
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_bsod
+
+- type: stationAiScreen
+  id: StationAiScreenIpcRedtext
+  name: marking-ScreenRedtext
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_redtext
+
+- type: stationAiScreen
+  id: StationAiScreenIpcSinewave
+  name: marking-ScreenSinewave
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_sinewave
+
+- type: stationAiScreen
+  id: StationAiScreenIpcSquarewave
+  name: marking-ScreenSquarewave
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_squarewave
+
+- type: stationAiScreen
+  id: StationAiScreenIpcEcgwave
+  name: marking-ScreenEcgwave
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_ecgwave
+
+- type: stationAiScreen
+  id: StationAiScreenIpcEyes
+  name: marking-ScreenEyes
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_eyes
+
+- type: stationAiScreen
+  id: StationAiScreenIpcEyestall
+  name: marking-ScreenEyestall
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_eyestall
+
+- type: stationAiScreen
+  id: StationAiScreenIpcEyesangry
+  name: marking-ScreenEyesangry
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_eyesangry
+
+- type: stationAiScreen
+  id: StationAiScreenIpcLoading
+  name: marking-ScreenLoading
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_loading
+
+- type: stationAiScreen
+  id: StationAiScreenIpcWindowsxp
+  name: marking-ScreenWindowsxp
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_windowsxp
+
+- type: stationAiScreen
+  id: StationAiScreenIpcTetris
+  name: marking-ScreenTetris
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_tetris
+
+- type: stationAiScreen
+  id: StationAiScreenIpcTv
+  name: marking-ScreenTv
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_tv
+
+- type: stationAiScreen
+  id: StationAiScreenIpcTextdrop
+  name: marking-ScreenTextdrop
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_textdrop
+
+- type: stationAiScreen
+  id: StationAiScreenIpcStars
+  name: marking-ScreenStars
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_stars
+
+- type: stationAiScreen
+  id: StationAiScreenIpcRainbowdiag
+  name: marking-ScreenRainbowdiag
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_rainbowdiag
+
+- type: stationAiScreen
+  id: StationAiScreenIpcBlank
+  name: marking-ScreenBlank
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_blank
+
+- type: stationAiScreen
+  id: StationAiScreenIpcSmile
+  name: marking-ScreenSmile
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_smile
+
+- type: stationAiScreen
+  id: StationAiScreenIpcFrown
+  name: marking-ScreenFrown
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_frown
+
+- type: stationAiScreen
+  id: StationAiScreenIpcRing
+  name: marking-ScreenRing
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_ring
+
+- type: stationAiScreen
+  id: StationAiScreenIpcL
+  name: marking-ScreenL
+  sprite: _Forge/Mobs/Silicon/station_ai_ipc_screens.rsi
+  state: ipc_screen_l
+

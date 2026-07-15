@@ -11,7 +11,7 @@ public sealed class StationAiCustomizationBoundUserInterface(EntityUid owner, En
     {
         base.Open();
         _window = this.CreateWindow<StationAiCustomizationWindow>();
-        _window.OnApply += (name, screen) => SendMessage(new StationAiCustomizationApplyMessage(name, screen));
+        _window.OnApply += (name, screen, color) => SendMessage(new StationAiCustomizationApplyMessage(name, screen, color));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

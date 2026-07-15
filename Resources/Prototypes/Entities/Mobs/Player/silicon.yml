@@ -434,10 +434,12 @@
     snapCardinals: true
     sprite: Mobs/Silicon/station_ai.rsi
     layers:
-    - state: base
+    # Forge - change: keep an opaque screen behind custom transparent animations.
+    - state: ai_empty
     - state: ai_empty
       map: ["unshaded"]
       shader: unshaded
+    - state: base
   - type: Appearance
   - type: InteractionPopup
     interactSuccessString: petting-success-station-ai
@@ -476,9 +478,12 @@
   - type: Sprite
     sprite: Mobs/Silicon/station_ai.rsi
     layers:
-    - state: base
+    # Forge - change: screen background, customizable image, then the physical frame.
+    - state: ai_empty
     - state: ai
+      map: ["unshaded"]
       shader: unshaded
+    - state: base
 
 # The actual brain inside the core
 - type: entity

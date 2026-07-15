@@ -1,6 +1,8 @@
 using System.Text.RegularExpressions;
 using System.Linq;
 using Content.Server.Administration.Logs;
+using Content.Server.Ghost.Roles;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.Preferences.Managers;
 using Content.Server.RandomMetadata;
@@ -18,6 +20,7 @@ using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Enums;
+using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -38,6 +41,7 @@ public sealed class StationAiPersonalitySystem : EntitySystem
     [Dependency] private readonly IServerPreferencesManager _preferences = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly GhostRoleSystem _ghostRoles = default!;
     [Dependency] private readonly RandomMetadataSystem _randomMetadata = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStationAiSystem _stationAi = default!;
@@ -88,9 +92,10 @@ public sealed class StationAiPersonalitySystem : EntitySystem
         ent.Comp.Occupant = args.Mind.Comp.UserId;
         ent.Comp.NextCustomization = TimeSpan.Zero;
         ent.Comp.Screen = "StationAiScreenDefault";
+        ent.Comp.Color = Color.White;
 
         var name = GetNewPersonalityName(ent.Owner, args.Mind.Comp.UserId);
-        ApplyIdentity(ent.Owner, name, ent.Comp.Screen, args.Mind);
+        ApplyIdentity(ent.Owner, name, ent.Comp.Screen, ent.Comp.Color, args.Mind);
 
         if (HasComp<StationAiHeldComponent>(ent.Owner))
         {
@@ -105,14 +110,26 @@ public sealed class StationAiPersonalitySystem : EntitySystem
         ent.Comp.Occupant = null;
         ent.Comp.NextCustomization = TimeSpan.Zero;
         ent.Comp.Screen = "StationAiScreenDefault";
+        ent.Comp.Color = Color.White;
+
+        ReopenGhostRole(ent.Owner);
 
         var name = GetFallbackName(ent.Owner);
         _metadata.SetEntityName(ent.Owner, name);
         if (_stationAi.TryGetCore(ent.Owner, out var core))
         {
             _metadata.SetEntityName(core.Owner, Prototype(core.Owner)?.Name ?? Loc.GetString("station-ai-core-default-name"));
-            SetCoreScreen(core.Owner, ent.Comp.Screen, true);
+            SetCoreScreen(core.Owner, ent.Comp.Screen, ent.Comp.Color, true);
         }
+    }
+
+    private void ReopenGhostRole(EntityUid brain)
+    {
+        if (!TryComp(brain, out GhostRoleComponent? role))
+            return;
+
+        EnsureComp<GhostTakeoverAvailableComponent>(brain);
+        _ghostRoles.ReregisterGhostRole((brain, role));
     }
 
     private void OnPlayerAttached(Entity<StationAiPersonalityComponent> ent, ref PlayerAttachedEvent args)
@@ -174,14 +191,21 @@ public sealed class StationAiPersonalitySystem : EntitySystem
             return;
         }
 
-        if (Name(ent.Owner) == name && personality.Screen == args.Screen)
+        if (!TryNormalizeColor(args.Color, out var color))
+        {
+            _popup.PopupEntity(Loc.GetString("station-ai-customization-invalid-color"), ent.Owner, args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (Name(ent.Owner) == name && personality.Screen == args.Screen && personality.Color == color)
             return;
 
         personality.Screen = args.Screen;
+        personality.Color = color;
         personality.NextCustomization = _timing.CurTime + CustomizationCooldown;
-        ApplyIdentity(ent.Owner, name, personality.Screen);
+        ApplyIdentity(ent.Owner, name, personality.Screen, personality.Color);
         _adminLog.Add(LogType.Action, LogImpact.High,
-            $"{ToPrettyString(args.Actor):player} customized station AI {ToPrettyString(ent.Owner):entity} as '{name}' with screen '{args.Screen}'.");
+            $"{ToPrettyString(args.Actor):player} customized station AI {ToPrettyString(ent.Owner):entity} as '{name}' with screen '{args.Screen}' and color '{color}'.");
         _popup.PopupEntity(Loc.GetString("station-ai-customization-applied"), ent.Owner, args.Actor);
         UpdateUi(ent.Owner, personality);
     }
@@ -194,19 +218,21 @@ public sealed class StationAiPersonalitySystem : EntitySystem
         var screen = TryComp(args.Entity, out StationAiPersonalityComponent? personality)
             ? personality.Screen
             : (ProtoId<StationAiScreenPrototype>) "StationAiScreenDefault";
-        SetCoreScreen(ent.Owner, screen, true);
+        var color = personality?.Color ?? Color.White;
+        SetCoreScreen(ent.Owner, screen, color, true);
     }
 
     private void OnCoreRemove(Entity<StationAiScreenComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         if (args.Container.ID == StationAiCoreComponent.Container)
-            SetCoreScreen(ent.Owner, "StationAiScreenDefault", false);
+            SetCoreScreen(ent.Owner, "StationAiScreenDefault", Color.White, false);
     }
 
     private void ApplyIdentity(
         EntityUid brain,
         string name,
         ProtoId<StationAiScreenPrototype> screen,
+        Color color,
         Entity<MindComponent>? mind = null)
     {
         _metadata.SetEntityName(brain, name);
@@ -226,16 +252,21 @@ public sealed class StationAiPersonalitySystem : EntitySystem
         if (_stationAi.TryGetCore(brain, out var core))
         {
             _metadata.SetEntityName(core.Owner, name);
-            SetCoreScreen(core.Owner, screen, true);
+            SetCoreScreen(core.Owner, screen, color, true);
         }
     }
 
-    private void SetCoreScreen(EntityUid core, ProtoId<StationAiScreenPrototype> screen, bool occupied)
+    private void SetCoreScreen(
+        EntityUid core,
+        ProtoId<StationAiScreenPrototype> screen,
+        Color color,
+        bool occupied)
     {
         if (!TryComp(core, out StationAiScreenComponent? component))
             return;
 
         component.Screen = screen;
+        component.Color = color;
         component.Occupied = occupied;
         Dirty(core, component);
     }
@@ -253,7 +284,7 @@ public sealed class StationAiPersonalitySystem : EntitySystem
         var remaining = Math.Max(0, (int) Math.Ceiling((personality.NextCustomization - _timing.CurTime).TotalSeconds));
         _ui.SetUiState(brain,
             StationAiCustomizationUiKey.Key,
-            new StationAiCustomizationState(Name(brain), personality.Screen, remaining));
+            new StationAiCustomizationState(Name(brain), personality.Screen, personality.Color, remaining));
     }
 
     private string GetNewPersonalityName(EntityUid brain, NetUserId? userId)
@@ -286,6 +317,25 @@ public sealed class StationAiPersonalitySystem : EntitySystem
             name = NameCaseRegex.Replace(name, match => match.Groups["word"].Value.ToUpper());
 
         return name.Length > 0 && name.Length <= HumanoidCharacterProfile.MaxNameLength;
+    }
+
+    private static bool TryNormalizeColor(Color input, out Color color)
+    {
+        color = Color.White;
+        if (!float.IsFinite(input.R) ||
+            !float.IsFinite(input.G) ||
+            !float.IsFinite(input.B) ||
+            !float.IsFinite(input.A))
+        {
+            return false;
+        }
+
+        color = new Color(
+            Math.Clamp(input.R, 0f, 1f),
+            Math.Clamp(input.G, 0f, 1f),
+            Math.Clamp(input.B, 0f, 1f),
+            1f);
+        return true;
     }
 
     private void ReleaseDisconnectedAi(EntityUid brain)

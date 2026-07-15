@@ -1,5 +1,6 @@
 using Content.Shared.Actions;
 using Robust.Shared.GameStates;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -33,6 +34,9 @@ public sealed partial class StationAiScreenComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Occupied;
+
+    [DataField, AutoNetworkedField]
+    public Color Color = Color.White;
 }
 
 [Serializable, NetSerializable]
@@ -45,20 +49,24 @@ public enum StationAiCustomizationUiKey : byte
 public sealed class StationAiCustomizationState(
     string name,
     ProtoId<StationAiScreenPrototype> screen,
+    Color color,
     int cooldownSeconds) : BoundUserInterfaceState
 {
     public readonly string Name = name;
     public readonly ProtoId<StationAiScreenPrototype> Screen = screen;
+    public readonly Color Color = color;
     public readonly int CooldownSeconds = cooldownSeconds;
 }
 
 [Serializable, NetSerializable]
 public sealed class StationAiCustomizationApplyMessage(
     string name,
-    ProtoId<StationAiScreenPrototype> screen) : BoundUserInterfaceMessage
+    ProtoId<StationAiScreenPrototype> screen,
+    Color color) : BoundUserInterfaceMessage
 {
     public readonly string Name = name;
     public readonly ProtoId<StationAiScreenPrototype> Screen = screen;
+    public readonly Color Color = color;
 }
 
 public sealed partial class OpenStationAiCustomizationEvent : InstantActionEvent;

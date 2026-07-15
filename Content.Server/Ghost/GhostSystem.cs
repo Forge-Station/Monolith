@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server._Forge.Sponsor; // Forge-Change
+using Content.Server._Forge.Silicons.StationAi; // Forge - change
 using Content.Shared._Forge.Sponsor; // Forge-Change
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers; // Frontier
@@ -31,7 +32,6 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Players.RateLimiting; // Forge-Change
 using Content.Shared.Popups;
-using Content.Shared.Silicons.StationAi;
 using Content.Shared.Storage.Components;
 using Content.Shared.Tag;
 using Content.Server.Players.RateLimiting; // Forge-Change
@@ -780,7 +780,7 @@ namespace Content.Server.Ghost
 
             // Forge - change: an AI brain has no MobState and is otherwise treated as dead.
             // Ghosting from an occupied core must remove its mind so the takeover role can reopen.
-            if (playerEntity != null && HasComp<StationAiHeldComponent>(playerEntity.Value))
+            if (playerEntity != null && HasComp<StationAiPersonalityComponent>(playerEntity.Value))
                 canReturn = false;
 
             if (_configurationManager.GetCVar(CCVars.GhostKillCrit) &&

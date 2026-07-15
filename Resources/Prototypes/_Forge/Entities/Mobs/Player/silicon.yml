@@ -234,12 +234,6 @@
     containers:
       station_ai_mind_slot:
       - StationAiBrainForerunner
-  - type: Sprite
-    sprite: Mobs/Silicon/station_ai.rsi
-    layers:
-    - state: base
-    - state: ai
-      shader: unshaded
   - type: Anchorable
 
 - type: entity
@@ -266,6 +260,7 @@
     rules: ghost-role-information-silicon-rules
     raffle:
       settings: default
+    reregister: true
     prototype: ForerunnerAICore
   - type: LanguageKnowledge
     speaks:
@@ -306,6 +301,7 @@
     rules: ghost-role-information-silicon-rules
     raffle:
       settings: default
+    reregister: true
     prototype: ForerunnerAICoreWhitelist
 
 - type: entity

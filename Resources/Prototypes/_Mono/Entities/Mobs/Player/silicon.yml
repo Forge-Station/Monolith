@@ -36,48 +36,9 @@
 
 - type: entity
   id: AiHeldMono
-  description: Components added / removed from an entity that gets inserted into an AI core.
-  categories: [ HideSpawnMenu ]
+  parent: AiHeldForge
   abstract: true
   components:
-  - type: IntrinsicRadioReceiver
-  - type: IgnoreUIRange
-  - type: StationAiHeld
-  - type: StationAiOverlay
-  - type: ShowElectrocutionHUD
-  - type: ActionGrant
-    actions:
-    - ActionJumpToCore
-    - ActionSurvCameraLights
-    - ActionAIViewLaws
-    - ActionOpenRemoteDevicesMenu # Corvax-Next-AiRemoteControl
-    - ActionCustomizeStationAi # Forge - change
-  - type: UserInterface
-    interfaces:
-      enum.RadarConsoleUiKey.Key:
-        type: RadarConsoleBoundUserInterface
-      enum.SiliconLawsUiKey.Key:
-        type: SiliconLawBoundUserInterface
-      enum.RemoteDeviceUiKey.Key: # Corvax-Next-AiRemoteControl
-        type: RemoteDevicesBoundUserInterface
-      enum.StationAiCustomizationUiKey.Key: # Forge - change
-        type: StationAiCustomizationBoundUserInterface
-  - type: IntrinsicUI
-    uis:
-      enum.RadarConsoleUiKey.Key:
-        toggleAction: ActionAGhostShowRadar
-  - type: RadarConsole
-    followEntity: false
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor
-    transmitFrequencyId: ShuttleTimer
-  - type: HolographicAvatar
-    layerData:
-    - sprite: Mobs/Silicon/station_ai.rsi
-      state: default
-  - type: ShowJobIcons
-  - type: AdvancedPilot # can use both gunnery and shuttle console even on capitals
   - type: RetroMonitorView
 
 - type: entity
@@ -292,12 +253,6 @@
     containers:
       station_ai_mind_slot:
       - StationAiBrainRedacted
-  - type: Sprite
-    sprite: Mobs/Silicon/station_ai.rsi
-    layers:
-    - state: base
-    - state: ai
-      shader: unshaded
   - type: Anchorable
 
 - type: entity
@@ -314,6 +269,7 @@
     rules: ghost-role-information-silicon-rules
     raffle:
       settings: default
+    reregister: true
     prototype: RemnantAICore
   - type: LanguageKnowledge
     speaks:
@@ -387,12 +343,6 @@
     containers:
       station_ai_mind_slot:
       - StationAiBrainVessel
-  - type: Sprite
-    sprite: Mobs/Silicon/station_ai.rsi
-    layers:
-    - state: base
-    - state: ai
-      shader: unshaded
   - type: Anchorable
   - type: Construction
     graph: AiVessel
@@ -412,6 +362,7 @@
     rules: ghost-role-information-silicon-rules
     raffle:
       settings: default
+    reregister: true
     prototype: VesselAICore
     requirements:
     - !type:OverallPlaytimeRequirement
@@ -460,12 +411,6 @@
     containers:
       station_ai_mind_slot:
       - StationAiBrainTSFMC
-  - type: Sprite
-    sprite: Mobs/Silicon/station_ai.rsi
-    layers:
-    - state: base
-    - state: ai
-      shader: unshaded
   - type: Anchorable
 
 - type: entity
@@ -482,6 +427,7 @@
     rules: ghost-role-information-silicon-rules
     raffle:
       settings: default
+    reregister: true
     prototype: TSFMCAICore
     requirements:
     - !type:OverallPlaytimeRequirement
@@ -546,12 +492,6 @@
     containers:
       station_ai_mind_slot:
       - StationAiBrainPDV
-  - type: Sprite
-    sprite: Mobs/Silicon/station_ai.rsi
-    layers:
-    - state: base
-    - state: ai
-      shader: unshaded
   - type: Anchorable
 
 - type: entity
@@ -568,6 +508,7 @@
     rules: ghost-role-information-silicon-rules
     raffle:
       settings: default
+    reregister: true
     prototype: PDVAICore
     requirements:
     - !type:OverallPlaytimeRequirement

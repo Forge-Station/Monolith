@@ -377,7 +377,6 @@
     - MVCable
     - HVCable
     - CableTerminal
-    - SurveillanceCamera # Forge - change
     - Deconstruct
     # mono start
     - WallReinforced

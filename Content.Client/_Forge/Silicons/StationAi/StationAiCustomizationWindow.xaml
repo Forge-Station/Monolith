@@ -6,7 +6,9 @@
     <BoxContainer Orientation="Vertical" Margin="12" HorizontalExpand="True">
         <Label Text="{Loc 'station-ai-customization-name-label'}" />
         <LineEdit Name="NameEdit" HorizontalExpand="True" Margin="0 4 0 10" />
+        <Label Name="ValidationLabel" FontColorOverride="Red" Visible="False" Margin="0 0 0 8" />
         <Label Text="{Loc 'station-ai-customization-screen-label'}" />
+        <AnimatedTextureRect Name="SelectedPreview" MinSize="0 128" HorizontalExpand="True" Margin="0 4 0 8" />
         <ScrollContainer VerticalExpand="True" HorizontalExpand="True" MinSize="0 300" Margin="0 4 0 10">
             <GridContainer Name="ScreenGrid" Columns="5" HorizontalExpand="True" />
         </ScrollContainer>

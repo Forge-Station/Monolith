@@ -21,5 +21,21 @@ public sealed partial class StationAiPersonalityComponent : Component
     public NetUserId? Occupant;
 
     [ViewVariables]
+    public EntityUid? OwnerMind;
+
+    [ViewVariables]
+    public string? PersonalityName;
+
+    [ViewVariables]
     public TimeSpan NextCustomization;
 }
+
+[RegisterComponent]
+public sealed partial class StationAiCoreIdentityComponent : Component
+{
+    [ViewVariables]
+    public string? OriginalName;
+}
+
+[ByRefEvent]
+public readonly record struct StationAiAvailabilityChangedEvent(bool Remove = false);

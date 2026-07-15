@@ -31,6 +31,7 @@
   - type: SlimPoweredLight
     enabled: false
   - type: StationAiVision
+  - type: StationAiCameraRelay # Forge-Change
   - type: Clickable
   - type: InteractionOutline
   - type: Construction
@@ -79,7 +80,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 600 # Forge - change: camera durability rework
+          damage: 600 # Forge-Change
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]

@@ -30,13 +30,33 @@ public sealed partial class StationAiScreenPrototype : IPrototype
 public sealed partial class StationAiScreenComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public ProtoId<StationAiScreenPrototype> DefaultScreen = "StationAiScreenDefault";
+
+    [DataField, AutoNetworkedField]
     public ProtoId<StationAiScreenPrototype> Screen = "StationAiScreenDefault";
+
+    [DataField, AutoNetworkedField]
+    public ResPath EmptySprite = new("Mobs/Silicon/station_ai.rsi");
+
+    [DataField, AutoNetworkedField]
+    public string EmptyState = "ai_empty";
+
+    [DataField, AutoNetworkedField]
+    public StationAiScreenLayer ScreenLayer = StationAiScreenLayer.Screen;
 
     [DataField, AutoNetworkedField]
     public bool Occupied;
 
     [DataField, AutoNetworkedField]
     public Color Color = Color.White;
+}
+
+[Serializable, NetSerializable]
+public enum StationAiScreenLayer : byte
+{
+    Background,
+    Screen,
+    Frame,
 }
 
 [Serializable, NetSerializable]

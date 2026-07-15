@@ -4,8 +4,6 @@ using Robust.Client.ResourceManagement;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Maths;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
-using Robust.Shared.Utility;
-using System.Linq;
 
 namespace Content.Client._Forge.Silicons.StationAi;
 
@@ -14,8 +12,6 @@ public sealed class StationAiScreenSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IResourceCache _resources = default!;
     [Dependency] private readonly SpriteSystem _sprites = default!;
-
-    private static readonly ResPath DefaultRsi = new("Mobs/Silicon/station_ai.rsi");
 
     public override void Initialize()
     {
@@ -39,15 +35,14 @@ public sealed class StationAiScreenSystem : EntitySystem
         if (!TryComp(ent.Owner, out SpriteComponent? sprite))
             return;
 
-        var layer = sprite.LayerMapTryGet("unshaded", out var mapped)
-            ? mapped
-            : sprite.AllLayers.Count() > 1 ? 1 : -1;
-        if (layer < 0)
+        if (!sprite.LayerMapTryGet(ent.Comp.ScreenLayer, out var layer))
             return;
 
-        var path = DefaultRsi;
-        var state = "ai_empty";
-        if (ent.Comp.Occupied && _prototypes.TryIndex(ent.Comp.Screen, out var prototype))
+        var path = ent.Comp.EmptySprite;
+        var state = ent.Comp.EmptyState;
+        if (ent.Comp.Occupied &&
+            (_prototypes.TryIndex(ent.Comp.Screen, out var prototype) ||
+             _prototypes.TryIndex(ent.Comp.DefaultScreen, out prototype)))
         {
             path = prototype.Sprite;
             state = prototype.State;

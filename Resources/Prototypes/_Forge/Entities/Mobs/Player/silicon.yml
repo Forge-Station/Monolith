@@ -15,6 +15,7 @@
     - ActionSurvCameraLights
     - ActionAIViewLaws
     - ActionOpenRemoteDevicesMenu
+    - ActionCustomizeStationAi
   - type: UserInterface
     interfaces:
       enum.RadarConsoleUiKey.Key:
@@ -23,6 +24,8 @@
         type: SiliconLawBoundUserInterface
       enum.RemoteDeviceUiKey.Key:
         type: RemoteDevicesBoundUserInterface
+      enum.StationAiCustomizationUiKey.Key:
+        type: StationAiCustomizationBoundUserInterface
   - type: IntrinsicUI
     uis:
       enum.RadarConsoleUiKey.Key:

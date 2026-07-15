@@ -1,0 +1,29 @@
+- type: stationAiScreen
+  id: StationAiScreenDefault
+  name: station-ai-screen-default
+  sprite: Mobs/Silicon/station_ai.rsi
+  state: ai
+
+- type: stationAiScreen
+  id: StationAiScreenBanned
+  name: station-ai-screen-banned
+  sprite: Mobs/Silicon/output.rsi
+  state: ai-banned-unshaded
+
+- type: stationAiScreen
+  id: StationAiScreenFace
+  name: station-ai-screen-face
+  sprite: Mobs/Silicon/output.rsi
+  state: floating_face-unshaded
+
+- type: stationAiScreen
+  id: StationAiScreenHorror
+  name: station-ai-screen-horror
+  sprite: Mobs/Silicon/output.rsi
+  state: horror-unshaded
+
+- type: stationAiScreen
+  id: StationAiScreenXeno
+  name: station-ai-screen-xeno
+  sprite: Mobs/Silicon/output.rsi
+  state: xeno_queen-unshaded

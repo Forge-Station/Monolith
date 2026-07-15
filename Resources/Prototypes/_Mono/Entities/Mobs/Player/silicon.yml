@@ -51,6 +51,7 @@
     - ActionSurvCameraLights
     - ActionAIViewLaws
     - ActionOpenRemoteDevicesMenu # Corvax-Next-AiRemoteControl
+    - ActionCustomizeStationAi # Forge - change
   - type: UserInterface
     interfaces:
       enum.RadarConsoleUiKey.Key:
@@ -59,6 +60,8 @@
         type: SiliconLawBoundUserInterface
       enum.RemoteDeviceUiKey.Key: # Corvax-Next-AiRemoteControl
         type: RemoteDevicesBoundUserInterface
+      enum.StationAiCustomizationUiKey.Key: # Forge - change
+        type: StationAiCustomizationBoundUserInterface
   - type: IntrinsicUI
     uis:
       enum.RadarConsoleUiKey.Key:

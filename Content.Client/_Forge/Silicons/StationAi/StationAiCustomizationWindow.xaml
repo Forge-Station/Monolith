@@ -1,0 +1,14 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'station-ai-customization-title'}"
+                      MinSize="420 220"
+                      SetSize="460 260">
+    <BoxContainer Orientation="Vertical" Margin="12" HorizontalExpand="True">
+        <Label Text="{Loc 'station-ai-customization-name-label'}" />
+        <LineEdit Name="NameEdit" HorizontalExpand="True" Margin="0 4 0 10" />
+        <Label Text="{Loc 'station-ai-customization-screen-label'}" />
+        <OptionButton Name="ScreenOptions" HorizontalExpand="True" Margin="0 4 0 10" />
+        <Label Name="CooldownLabel" HorizontalAlignment="Center" Margin="0 2 0 8" />
+        <Button Name="ApplyButton" Text="{Loc 'station-ai-customization-apply'}" HorizontalExpand="True" />
+    </BoxContainer>
+</controls:FancyWindow>

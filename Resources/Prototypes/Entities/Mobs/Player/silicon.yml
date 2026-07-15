@@ -39,6 +39,7 @@
     - ActionSurvCameraLights
     - ActionAIViewLaws
     - ActionOpenRemoteDevicesMenu # Corvax-Next-AiRemoteControl
+    - ActionCustomizeStationAi # Forge - change
   - type: UserInterface
     interfaces:
       enum.RadarConsoleUiKey.Key:
@@ -53,6 +54,8 @@
         type: CommunicationsConsoleBoundUserInterface
       enum.RemoteDeviceUiKey.Key: # Corvax-Next-AiRemoteControl
         type: RemoteDevicesBoundUserInterface
+      enum.StationAiCustomizationUiKey.Key: # Forge - change
+        type: StationAiCustomizationBoundUserInterface
   - type: IntrinsicUI
     uis:
       enum.RadarConsoleUiKey.Key:
@@ -424,6 +427,7 @@
     powerLoad: 1000
     needsPower: false # Mono
   - type: StationAiCore
+  - type: StationAiScreen # Forge - change
   - type: StationAiVision
   - type: InteractionOutline
   - type: Sprite
@@ -441,12 +445,7 @@
     messagePerceivedByOthers: petting-success-station-ai-others # Otherwise AI cannot tell its being pet as It's just a brain inside of the core, not the core itself.
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
-  - type: GenericVisualizer
-    visuals:
-      enum.StationAiVisualState.Key:
-        unshaded:
-          Empty: { state: ai_empty }
-          Occupied: { state: ai }
+  # Forge - change: StationAiScreenSystem owns this layer so custom RSI states cannot be overwritten.
   - type: Telephone
     compatibleRanges:
     - Grid
@@ -526,6 +525,12 @@
   - type: StartingMindRole
     mindRole: "MindRoleSiliconBrain"
     silent: true
+  - type: StationAiPersonality # Forge - change
+  - type: GhostRole # Forge - change: the same brain becomes available again after ghosting or long SSD
+    name: ghost-role-information-station-ai-name
+    description: ghost-role-information-station-ai-description
+    rules: ghost-role-information-silicon-rules
+  - type: GhostTakeoverAvailable
 
 # Hologram projection that the AI's eye tracks.
 - type: entity

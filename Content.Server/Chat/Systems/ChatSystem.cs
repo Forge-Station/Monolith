@@ -588,10 +588,17 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedObfuscated = WrapPublicMessage(source, name, obfuscated, language: language);
         // Einstein Engines - Language end
 
-        SendInVoiceRange(ChatChannel.Local, name, message, wrappedMessage, obfuscated, wrappedObfuscated, source, range, languageOverride: language); // Einstein Engines - Language
+        // Forge - change: allow Forge systems to move only the local transmission point while preserving the speaker identity.
+        var speechSource = source;
+        var speechSourceEvent = new ResolveLocalSpeechSourceEvent(source, speechSource);
+        RaiseLocalEvent(source, ref speechSourceEvent);
+        if (Exists(speechSourceEvent.SpeechSource))
+            speechSource = speechSourceEvent.SpeechSource;
 
-        var ev = new EntitySpokeEvent(source, message, null, false, language); // Einstein Engines - Language
-        RaiseLocalEvent(source, ev, true);
+        SendInVoiceRange(ChatChannel.Local, name, message, wrappedMessage, obfuscated, wrappedObfuscated, speechSource, range, languageOverride: language); // Einstein Engines - Language
+
+        var ev = new EntitySpokeEvent(speechSource, message, null, false, language); // Einstein Engines - Language
+        RaiseLocalEvent(speechSource, ev, true);
 
         // To avoid logging any messages sent by entities that are not players, like vendors, cloning, etc.
         // Also doesn't log if hideLog is true.
@@ -1224,6 +1231,13 @@ public sealed partial class ChatSystem : SharedChatSystem
 public record ExpandICChatRecipientsEvent(EntityUid Source, float VoiceRange, Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> Recipients)
 {
 }
+
+/// <summary>
+/// Allows a speaker to use another entity as the origin of ordinary local speech.
+/// The original speaker still supplies the name, language, speech transforms and admin log entry.
+/// </summary>
+[ByRefEvent]
+public record struct ResolveLocalSpeechSourceEvent(EntityUid Speaker, EntityUid SpeechSource);
 
 /// <summary>
 ///     Raised broadcast in order to transform speech.transmit

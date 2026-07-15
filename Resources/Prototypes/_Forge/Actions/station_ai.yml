@@ -1,0 +1,14 @@
+- type: entity
+  id: ActionCustomizeStationAi
+  name: station-ai-customization-action-name
+  description: station-ai-customization-action-description
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    checkConsciousness: false
+    priority: -2
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/actions_ai.rsi
+      state: ai_core
+    event: !type:OpenStationAiCustomizationEvent

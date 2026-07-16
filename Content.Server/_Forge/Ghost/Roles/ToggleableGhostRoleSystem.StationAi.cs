@@ -1,4 +1,4 @@
-using Content.Shared._Forge.Silicons.StationAi;
+using Content.Server._Forge.Silicons.StationAi;
 
 namespace Content.Server.Ghost.Roles;
 

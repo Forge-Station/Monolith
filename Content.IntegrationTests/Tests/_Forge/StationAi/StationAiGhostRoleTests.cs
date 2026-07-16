@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Players;
+using Content.Shared.CCVar;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Players;
@@ -33,6 +34,7 @@ public sealed class StationAiGhostRoleTests
         var ghostRoleSystem = entityManager.System<GhostRoleSystem>();
         var session = playerManager.Sessions.Single();
         var originalMind = session.ContentData()!.Mind!.Value;
+        server.CfgMan.SetCVar(CCVars.GhostQuickLottery, true);
 
         EntityUid originalMob = default;
         await server.WaitPost(() =>
@@ -51,9 +53,9 @@ public sealed class StationAiGhostRoleTests
         {
             brain = entityManager.SpawnEntity("StationAiBrain", map.GridCoords);
             var role = entityManager.GetComponent<GhostRoleComponent>(brain);
-            ghostRoleSystem.Takeover(session, role.Identifier);
+            ghostRoleSystem.Request(session, role.Identifier);
         });
-        await pair.RunTicksSync(10);
+        await pair.RunTicksSync(60);
 
         var brainRole = entityManager.GetComponent<GhostRoleComponent>(brain);
         Assert.Multiple(() =>
@@ -72,6 +74,15 @@ public sealed class StationAiGhostRoleTests
             Assert.That(brainRole.Taken, Is.False);
             Assert.That(ghostRoleSystem.GhostRoles.Select(role => role.Owner), Does.Contain(brain));
         });
+
+        await server.WaitPost(() =>
+        {
+            ghostRoleSystem.Request(session, brainRole.Identifier);
+            Assert.DoesNotThrow(() => ghostRoleSystem.GetGhostRolesInfo(session));
+            ghostRoleSystem.LeaveRaffle(session, brainRole.Identifier);
+        });
+        await pair.RunTicksSync(2);
+        server.CfgMan.SetCVar(CCVars.GhostQuickLottery, false);
 
         await pair.CleanReturnAsync();
     }

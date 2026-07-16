@@ -188,6 +188,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
 
         UpdateGhostRoleCount();
         UpdateRaffles(frameTime);
+        ProcessPendingReregistrations(); // Forge-Change
     }
 
     /// <summary>
@@ -263,8 +264,12 @@ public sealed partial class GhostRoleSystem : EntitySystem
                             $"{ghostRole.RaffleConfig?.Decider} finding a winner");
             }
 
-            // raffle over
-            RemoveRaffleAndUpdateEui(entityUid, raffle);
+            // Forge-Change: taking the role can unregister and remove this raffle during PickWinner.
+            if (_ghostRoleRaffles.TryGetValue(raffle.Identifier, out var activeRaffle) &&
+                activeRaffle.Owner == entityUid)
+            {
+                RemoveRaffleAndUpdateEui(entityUid, raffle);
+            }
         }
     }
 
@@ -592,9 +597,8 @@ public sealed partial class GhostRoleSystem : EntitySystem
             }
 
             var rafflePlayerCount = (uint?) raffle?.CurrentMembers.Count ?? 0;
-            var raffleEndTime = raffle is not null
-                ? _timing.CurTime.Add(raffle.Countdown)
-                : TimeSpan.MinValue;
+            // Forge-Change: a component waiting for initialization uses TimeSpan.MaxValue as a sentinel.
+            var raffleEndTime = GetRaffleEndTime(raffle);
 
             roles.Add(new GhostRoleInfo
             {
@@ -652,8 +656,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
         if (!ghostRole.ReregisterOnGhost || component.LifeStage > ComponentLifeStage.Running)
             return;
 
-        ghostRole.Taken = false;
-        RegisterGhostRole((uid, ghostRole));
+        ReregisterGhostRole((uid, ghostRole)); // Forge-Change
     }
 
     public void Reset(RoundRestartCleanupEvent ev)
@@ -666,6 +669,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
         _openUis.Clear();
         _ghostRoles.Clear();
         _ghostRoleRaffles.Clear();
+        ClearPendingReregistrations(); // Forge-Change
         _nextRoleIdentifier = 0;
     }
 

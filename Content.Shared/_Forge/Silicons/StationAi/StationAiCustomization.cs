@@ -49,6 +49,9 @@ public sealed partial class StationAiScreenComponent : Component
 
     [DataField, AutoNetworkedField]
     public Color Color = Color.White;
+
+    [DataField("force-name-prefix", readOnly: true)]
+    public string ForceNamePrefix = string.Empty;
 }
 
 [Serializable, NetSerializable]
@@ -68,11 +71,13 @@ public enum StationAiCustomizationUiKey : byte
 [Serializable, NetSerializable]
 public sealed class StationAiCustomizationState(
     string name,
+    string forceNamePrefix,
     ProtoId<StationAiScreenPrototype> screen,
     Color color,
     int cooldownSeconds) : BoundUserInterfaceState
 {
     public readonly string Name = name;
+    public readonly string ForceNamePrefix = forceNamePrefix;
     public readonly ProtoId<StationAiScreenPrototype> Screen = screen;
     public readonly Color Color = color;
     public readonly int CooldownSeconds = cooldownSeconds;

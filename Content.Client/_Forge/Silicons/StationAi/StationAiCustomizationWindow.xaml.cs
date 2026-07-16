@@ -28,6 +28,7 @@ public sealed partial class StationAiCustomizationWindow : FancyWindow
     private readonly Dictionary<ProtoId<StationAiScreenPrototype>, Button> _screens = new();
     private readonly ButtonGroup _screenGroup = new(false);
     private ProtoId<StationAiScreenPrototype> _selectedScreen = "StationAiScreenDefault";
+    private string _forceNamePrefix = string.Empty;
     private TimeSpan _cooldownEnd;
     private bool _screensInitialized;
 
@@ -112,6 +113,9 @@ public sealed partial class StationAiCustomizationWindow : FancyWindow
     public void UpdateState(StationAiCustomizationState state)
     {
         EnsureScreens();
+        _forceNamePrefix = state.ForceNamePrefix;
+        NamePrefixLabel.Text = _forceNamePrefix;
+        NamePrefixLabel.Visible = _forceNamePrefix.Length > 0;
         NameEdit.Text = state.Name;
         ColorSelector.Color = state.Color;
         SelectScreen(_screens.ContainsKey(state.Screen) ? state.Screen : (ProtoId<StationAiScreenPrototype>) "StationAiScreenDefault");
@@ -142,20 +146,24 @@ public sealed partial class StationAiCustomizationWindow : FancyWindow
 
     private bool IsNameValid(string text)
     {
-        return StationAiCustomizationValidator.TryNormalizeName(
+        return StationAiCustomizationValidator.TryNormalizeNamePart(
             text,
+            _forceNamePrefix,
             _configuration.GetCVar(CCVars.RestrictedNames),
             _configuration.GetCVar(CCVars.ICNameCase),
+            out _,
             out _);
     }
 
     private bool TryGetNormalizedName(out string name)
     {
-        return StationAiCustomizationValidator.TryNormalizeName(
+        return StationAiCustomizationValidator.TryNormalizeNamePart(
             NameEdit.Text,
+            _forceNamePrefix,
             _configuration.GetCVar(CCVars.RestrictedNames),
             _configuration.GetCVar(CCVars.ICNameCase),
-            out name);
+            out name,
+            out _);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

@@ -227,6 +227,8 @@
   - type: Vocal
     sounds:
       Unsexed: UnisexSiliconSyndicate
+  - type: StationAiScreen
+    force-name-prefix: ADC
   - type: ContainerComp
     proto: AiHeldForerunner
     container: station_ai_mind_slot

@@ -33,6 +33,42 @@ public static class StationAiCustomizationValidator
         return name.Length is > 0 and <= MaxNameLength;
     }
 
+    public static bool TryNormalizeNamePart(
+        string input,
+        string forceNamePrefix,
+        bool restrictedNames,
+        bool icNameCase,
+        out string namePart,
+        out string fullName)
+    {
+        fullName = string.Empty;
+        if (!TryNormalizeName(input, restrictedNames, icNameCase, out namePart))
+            return false;
+
+        fullName = CombineName(forceNamePrefix, namePart);
+        return fullName.Length <= MaxNameLength;
+    }
+
+    public static string CombineName(string forceNamePrefix, string namePart)
+    {
+        var prefix = forceNamePrefix.Trim();
+        var name = namePart.Trim();
+        return prefix.Length == 0 ? name : $"{prefix} {name}";
+    }
+
+    public static string GetEditableNamePart(string fullName, string forceNamePrefix)
+    {
+        var name = fullName.Trim();
+        var prefix = forceNamePrefix.Trim();
+        if (prefix.Length == 0)
+            return name;
+
+        var requiredPrefix = $"{prefix} ";
+        return name.StartsWith(requiredPrefix, StringComparison.Ordinal)
+            ? name[requiredPrefix.Length..]
+            : name;
+    }
+
     public static bool TryNormalizeColor(Color input, out Color color)
     {
         color = Color.White;

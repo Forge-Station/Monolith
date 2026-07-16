@@ -102,6 +102,22 @@ public sealed class StationAiPrototypeTests
             });
             entityManager.DeleteEntity(camera);
 
+            var standardCore = entityManager.SpawnEntity("PlayerStationAiEmpty", coordinates);
+            var forerunnerCore = entityManager.SpawnEntity("PlayerStationAiForerunner", coordinates);
+            var forerunnerWhitelistCore = entityManager.SpawnEntity("PlayerStationAiForerunnerWhitelist", coordinates);
+            Assert.Multiple(() =>
+            {
+                Assert.That(entityManager.GetComponent<StationAiScreenComponent>(standardCore).ForceNamePrefix,
+                    Is.Empty);
+                Assert.That(entityManager.GetComponent<StationAiScreenComponent>(forerunnerCore).ForceNamePrefix,
+                    Is.EqualTo("ADC"));
+                Assert.That(entityManager.GetComponent<StationAiScreenComponent>(forerunnerWhitelistCore).ForceNamePrefix,
+                    Is.EqualTo("ADC"));
+            });
+            entityManager.DeleteEntity(standardCore);
+            entityManager.DeleteEntity(forerunnerCore);
+            entityManager.DeleteEntity(forerunnerWhitelistCore);
+
             var screens = prototypeManager.EnumeratePrototypes<StationAiScreenPrototype>().ToArray();
             Assert.Multiple(() =>
             {

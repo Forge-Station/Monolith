@@ -45,8 +45,11 @@ public sealed class StationAiCameraSystem : EntitySystem
 
         var eyeCoordinates = _transform.GetMapCoordinates(eye);
         var eyePosition = eyeCoordinates.Position;
-        EntityUid? closest = null;
-        var closestDistance = float.MaxValue;
+        var coreCoordinates = _transform.GetMapCoordinates(core.Owner);
+        var closest = core.Owner;
+        var closestDistance = coreCoordinates.MapId == eyeCoordinates.MapId
+            ? (coreCoordinates.Position - eyePosition).LengthSquared()
+            : float.MaxValue;
 
         foreach (var camera in _lookup.GetEntitiesInRange<StationAiCameraRelayComponent>(
                      eyeCoordinates,
@@ -63,8 +66,7 @@ public sealed class StationAiCameraSystem : EntitySystem
             closest = camera.Owner;
         }
 
-        if (closest != null)
-            args.Origin = closest.Value;
+        args.Origin = closest;
     }
 
     private void OnExpandRecipients(ExpandICChatRecipientsEvent ev)

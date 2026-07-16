@@ -36,6 +36,7 @@ public sealed class StationAiPersonalitySystem : EntitySystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly GhostRoleSystem _ghostRoles = default!;
     [Dependency] private readonly RandomMetadataSystem _randomMetadata = default!;
+    [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStationAiSystem _stationAi = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
@@ -200,10 +201,13 @@ public sealed class StationAiPersonalitySystem : EntitySystem
             return;
         }
 
-        if (!StationAiCustomizationValidator.TryNormalizeName(
+        var forceNamePrefix = GetForceNamePrefix(ent.Owner);
+        if (!StationAiCustomizationValidator.TryNormalizeNamePart(
                 args.Name,
+                forceNamePrefix,
                 _configuration.GetCVar(CCVars.RestrictedNames),
                 _configuration.GetCVar(CCVars.ICNameCase),
+                out _,
                 out var name))
         {
             _popup.PopupEntity(Loc.GetString("station-ai-customization-invalid-name"), ent.Owner, args.Actor, PopupType.MediumCaution);
@@ -350,10 +354,14 @@ public sealed class StationAiPersonalitySystem : EntitySystem
     private void UpdateUi(EntityUid brain, StationAiPersonalityComponent personality)
     {
         var remaining = Math.Max(0, (int) Math.Ceiling((personality.NextCustomization - _timing.CurTime).TotalSeconds));
+        var forceNamePrefix = GetForceNamePrefix(brain);
+        var fullName = personality.PersonalityName ?? Name(brain);
+        var editableName = StationAiCustomizationValidator.GetEditableNamePart(fullName, forceNamePrefix);
         _ui.SetUiState(brain,
             StationAiCustomizationUiKey.Key,
             new StationAiCustomizationState(
-                personality.PersonalityName ?? Name(brain),
+                editableName,
+                forceNamePrefix,
                 personality.Screen,
                 personality.Color,
                 remaining));
@@ -365,6 +373,18 @@ public sealed class StationAiPersonalitySystem : EntitySystem
             return _randomMetadata.GetRandomFromSegments(random.NameSegments, random.NameSeparator);
 
         return Loc.GetString("station-ai-default-name");
+    }
+
+    private string GetForceNamePrefix(EntityUid brain)
+    {
+        if (!_containers.TryGetContainingContainer(brain, out var container) ||
+            container.ID != StationAiCoreComponent.Container ||
+            !TryComp(container.Owner, out StationAiScreenComponent? screen))
+        {
+            return string.Empty;
+        }
+
+        return screen.ForceNamePrefix.Trim();
     }
 
     private ProtoId<StationAiScreenPrototype> GetDefaultScreen(EntityUid brain)

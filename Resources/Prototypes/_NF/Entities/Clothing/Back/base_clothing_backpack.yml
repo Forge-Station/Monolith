@@ -3,6 +3,7 @@
   abstract: true
   id: NFBackpackHiddenStash
   components:
+  # Forge-Change-Start
   - type: Sprite
     layers:
     - state: icon
@@ -15,6 +16,7 @@
           False: { drawdepth: Items, visible: true }
   - type: Visibility
     layer: 1
+  # Forge-Change-End
   - type: Appearance
   - type: SubFloorHide
   - type: Anchorable

@@ -1,3 +1,4 @@
+/// Forge-Change-Start
 using Content.Shared._NF.Storage;
 using Robust.Client.GameObjects;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
@@ -36,3 +37,4 @@ public sealed class AnchorableStorageVisualSystem : EntitySystem
         _sprite.SetVisible((ent.Owner, sprite), !anchored);
     }
 }
+/// Forge-Change-End

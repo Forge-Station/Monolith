@@ -346,16 +346,25 @@ public sealed partial class GhostRoleSystem : EntitySystem
     // probably fine to be init because it's never added during entity initialization, but much later
     private void OnRaffleInit(Entity<GhostRoleRaffleComponent> ent, ref ComponentInit args)
     {
+        TryInitializeRaffle(ent); // Forge-Change
+    }
+
+    // Forge-Change: a raffle component can be re-added before its init event after a previous raffle is removed.
+    private bool TryInitializeRaffle(Entity<GhostRoleRaffleComponent> ent)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return false;
+
         if (!TryComp(ent, out GhostRoleComponent? ghostRole))
         {
             // can't have a raffle for a ghost role that doesn't exist
             RemComp<GhostRoleRaffleComponent>(ent);
-            return;
+            return false;
         }
 
         var config = ghostRole.RaffleConfig;
         if (config is null)
-            return; // should, realistically, never be reached but you never know
+            return false; // should, realistically, never be reached but you never know
 
         var settings = config.SettingsOverride
                        ?? _prototype.Index<GhostRoleRaffleSettingsPrototype>(config.Settings).Settings;
@@ -365,7 +374,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
             Log.Error($"Ghost role on {ent} has invalid raffle settings (max duration shorter than initial)");
             ghostRole.RaffleConfig = null; // make it a non-raffle role so stuff isn't entirely broken
             RemComp<GhostRoleRaffleComponent>(ent);
-            return;
+            return false;
         }
 
         var raffle = ent.Comp;
@@ -376,6 +385,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
         // we copy these settings into the component because they would be cumbersome to access otherwise
         raffle.JoinExtendsDurationBy = TimeSpan.FromSeconds(settings.JoinExtendsDurationBy);
         raffle.MaxDuration = TimeSpan.FromSeconds(settings.MaxDuration);
+        return true;
     }
 
     private void OnRaffleShutdown(Entity<GhostRoleRaffleComponent> ent, ref ComponentShutdown args)
@@ -410,6 +420,13 @@ public sealed partial class GhostRoleSystem : EntitySystem
         var raffle = _ghostRoleRaffles.TryGetValue(identifier, out var raffleEnt)
             ? raffleEnt.Comp
             : EnsureComp<GhostRoleRaffleComponent>(roleEnt.Owner);
+
+        // Forge-Change: do not expose or run a raffle with the uninitialized TimeSpan.MaxValue sentinel.
+        if (raffle.Countdown == TimeSpan.MaxValue &&
+            !TryInitializeRaffle((roleEnt.Owner, raffle)))
+        {
+            return;
+        }
 
         _ghostRoleRaffles.TryAdd(identifier, (roleEnt.Owner, raffle));
 

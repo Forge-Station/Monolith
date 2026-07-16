@@ -1,7 +1,7 @@
 - type: entity
   id: ActionCustomizeStationAi
-  name: station-ai-customization-action-name
-  description: station-ai-customization-action-description
+  name: Personalization
+  description: Open the AI core personalization settings.
   components:
   - type: InstantAction
     checkCanInteract: false

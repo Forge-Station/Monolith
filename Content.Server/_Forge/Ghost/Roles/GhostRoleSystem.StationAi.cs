@@ -54,6 +54,9 @@ public sealed partial class GhostRoleSystem
         if (raffle is null)
             return TimeSpan.MinValue;
 
+        if (raffle.Countdown == TimeSpan.MaxValue)
+            return _timing.CurTime;
+
         var currentTicks = _timing.CurTime.Ticks;
         var countdownTicks = raffle.Countdown.Ticks;
         if (countdownTicks > 0 && currentTicks > long.MaxValue - countdownTicks)

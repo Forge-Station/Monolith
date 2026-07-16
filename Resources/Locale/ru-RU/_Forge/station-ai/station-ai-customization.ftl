@@ -1,5 +1,7 @@
 station-ai-customization-action-name = Персонализация
 station-ai-customization-action-description = Открыть настройку персонализации ядра.
+ent-ActionCustomizeStationAi = Персонализация
+    .desc = Открыть настройку персонализации ядра.
 station-ai-customization-title = Личность ИИ
 station-ai-customization-name-label = Имя
 station-ai-customization-screen-label = Экран ядра

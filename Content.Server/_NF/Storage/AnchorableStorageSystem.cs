@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server.Popups;
+using Content.Shared._NF.Storage;
 using Content.Shared.Construction.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Nyanotrasen.Item.PseudoItem;
@@ -21,26 +22,37 @@ public sealed partial class AnchorableStorageSystem : EntitySystem
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private TransformSystem _xform = default!;
     [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
+        base.Initialize();
+
+        SubscribeLocalEvent<AnchorableStorageComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<AnchorableStorageComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
         SubscribeLocalEvent<AnchorableStorageComponent, AnchorAttemptEvent>(OnAnchorAttempt);
         SubscribeLocalEvent<AnchorableStorageComponent, ContainerIsInsertingAttemptEvent>(OnInsertAttempt);
     }
 
+    private void OnComponentStartup(Entity<AnchorableStorageComponent> ent, ref ComponentStartup args)
+    {
+        SetAnchoredVisuals(ent.Owner, Transform(ent.Owner).Anchored);
+    }
+
     private void OnAnchorStateChanged(Entity<AnchorableStorageComponent> ent, ref AnchorStateChangedEvent args)
     {
-        if (!args.Anchored)
-            return;
-
-        if (CheckOverlap((ent, ent.Comp, Transform(ent))))
+        if (args.Anchored && CheckOverlap((ent, ent.Comp, Transform(ent))))
         {
             _popup.PopupEntity(Loc.GetString("anchored-storage-already-present"), ent);
             _xform.Unanchor(ent, Transform(ent));
             return;
         }
+
+        SetAnchoredVisuals(ent.Owner, args.Anchored);
+
+        if (!args.Anchored)
+            return;
 
         // Eject any sapient creatures inside the storage.
         // Does not recurse down into bags in bags - player characters are the largest concern, and they'll only fit in duffelbags.
@@ -54,6 +66,11 @@ public sealed partial class AnchorableStorageSystem : EntitySystem
 
         foreach (var removeUid in entsToRemove)
             _container.RemoveEntity(ent.Owner, removeUid);
+    }
+
+    private void SetAnchoredVisuals(EntityUid uid, bool anchored)
+    {
+        _appearance.SetData(uid, AnchorableStorageVisuals.Anchored, anchored);
     }
 
     private void OnAnchorAttempt(Entity<AnchorableStorageComponent> ent, ref AnchorAttemptEvent args)

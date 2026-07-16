@@ -1,5 +1,5 @@
-station-ai-customization-action-name = Customize AI personality
-station-ai-customization-action-description = Change your name and core screen appearance.
+station-ai-customization-action-name = Personalization
+station-ai-customization-action-description = Open the AI core personalization settings.
 station-ai-customization-title = AI personality
 station-ai-customization-name-label = Name
 station-ai-customization-screen-label = Core screen

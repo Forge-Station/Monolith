@@ -1,5 +1,5 @@
-station-ai-customization-action-name = Настроить личность ИИ
-station-ai-customization-action-description = Изменить имя и изображение на экране ядра.
+station-ai-customization-action-name = Персонализация
+station-ai-customization-action-description = Открыть настройку персонализации ядра.
 station-ai-customization-title = Личность ИИ
 station-ai-customization-name-label = Имя
 station-ai-customization-screen-label = Экран ядра

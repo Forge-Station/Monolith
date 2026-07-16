@@ -1,4 +1,6 @@
 using Content.Server.Administration.Logs;
+using Content.Server.Ghost.Roles;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.RandomMetadata;
 using Content.Shared._Forge.CCVar;
@@ -32,6 +34,7 @@ public sealed class StationAiPersonalitySystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly GhostRoleSystem _ghostRoles = default!;
     [Dependency] private readonly RandomMetadataSystem _randomMetadata = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStationAiSystem _stationAi = default!;
@@ -83,34 +86,44 @@ public sealed class StationAiPersonalitySystem : EntitySystem
         }
     }
 
-    private void OnMindAdded(Entity<StationAiPersonalityComponent> ent, ref MindAddedMessage args)
+    private void OnMindAdded(EntityUid uid, StationAiPersonalityComponent component, MindAddedMessage args)
     {
-        _ssdReleases.Remove(ent.Owner);
-        var newOwner = ent.Comp.OwnerMind != args.Mind.Owner;
-        ent.Comp.OwnerMind = args.Mind.Owner;
-        ent.Comp.Occupant = args.Mind.Comp.UserId;
+        _ssdReleases.Remove(uid);
+        var newOwner = component.OwnerMind != args.Mind.Owner;
+        component.OwnerMind = args.Mind.Owner;
+        component.Occupant = args.Mind.Comp.UserId;
 
-        if (newOwner || ent.Comp.PersonalityName == null)
+        if (newOwner || component.PersonalityName == null)
         {
-            ent.Comp.PersonalityName = GetNewPersonalityName(ent.Owner);
-            ent.Comp.Screen = GetDefaultScreen(ent.Owner);
-            ent.Comp.Color = Color.White;
-            ent.Comp.NextCustomization = TimeSpan.Zero;
+            component.PersonalityName = GetNewPersonalityName(uid);
+            component.Screen = GetDefaultScreen(uid);
+            component.Color = Color.White;
+            component.NextCustomization = TimeSpan.Zero;
         }
 
-        ApplyIdentity(ent.Owner, ent.Comp, args.Mind);
-        RaiseAvailabilityChanged(ent.Owner);
+        ApplyIdentity(uid, component, args.Mind);
+        RaiseAvailabilityChanged(uid);
     }
 
-    private void OnMindRemoved(Entity<StationAiPersonalityComponent> ent, ref MindRemovedMessage args)
+    private void OnMindRemoved(EntityUid uid, StationAiPersonalityComponent component, MindRemovedMessage args)
     {
-        if (_ssdReleases.TryGetValue(ent.Owner, out var release) && release.Mind == args.Mind.Owner)
-            _ssdReleases.Remove(ent.Owner);
+        if (_ssdReleases.TryGetValue(uid, out var release) && release.Mind == args.Mind.Owner)
+            _ssdReleases.Remove(uid);
 
-        ent.Comp.Occupant = null;
-        if (_stationAi.TryGetCore(ent.Owner, out var core))
+        component.Occupant = null;
+        ReopenGhostRole(uid);
+        if (_stationAi.TryGetCore(uid, out var core))
             SetCoreEmpty(core.Owner);
-        RaiseAvailabilityChanged(ent.Owner, true);
+        RaiseAvailabilityChanged(uid, true);
+    }
+
+    private void ReopenGhostRole(EntityUid brain)
+    {
+        if (!TryComp(brain, out GhostRoleComponent? role) || !role.ReregisterOnGhost)
+            return;
+
+        EnsureComp<GhostTakeoverAvailableComponent>(brain);
+        _ghostRoles.ReregisterGhostRole((brain, role));
     }
 
     private void OnPlayerAttached(Entity<StationAiPersonalityComponent> ent, ref PlayerAttachedEvent args)
@@ -379,7 +392,10 @@ public sealed class StationAiPersonalitySystem : EntitySystem
         }
 
         _mind.TransferTo(mind.Owner, null, mind: mind.Comp);
-        return !TryGetOwnedMind(brain, out var currentMind) || currentMind.Owner != release.Mind;
+        var released = !TryGetOwnedMind(brain, out var currentMind) || currentMind.Owner != release.Mind;
+        if (released)
+            ReopenGhostRole(brain);
+        return released;
     }
 
     private readonly record struct SsdRelease(EntityUid Mind, NetUserId User, TimeSpan Deadline);

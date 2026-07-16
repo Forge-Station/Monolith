@@ -9,7 +9,6 @@ using Content.Shared.StationAi;
 using Content.Shared.SurveillanceCamera.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
-using Robust.Shared.Enums;
 using Robust.Shared.Player;
 
 namespace Content.Server._Forge.Silicons.StationAi;
@@ -163,9 +162,6 @@ public sealed class StationAiCameraSystem : EntitySystem
             !TryComp(mindUid, out MindComponent? mind) ||
             mind.OwnedEntity != brain ||
             mind.UserId == null ||
-            !TryComp(brain, out ActorComponent? actor) ||
-            actor.PlayerSession.UserId != mind.UserId ||
-            actor.PlayerSession.Status is SessionStatus.Disconnected or SessionStatus.Zombie ||
             !_stationAi.TryGetCore(brain, out var core) ||
             !_stationAi.TryGetHeld(core, out var held) ||
             held != brain ||

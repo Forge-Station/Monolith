@@ -236,8 +236,7 @@ public sealed class StationAiPersonalitySystem : EntitySystem
 
     private void OnCoreStartup(Entity<StationAiScreenComponent> ent, ref ComponentStartup args)
     {
-        var identity = EnsureComp<StationAiCoreIdentityComponent>(ent.Owner);
-        identity.OriginalName ??= Name(ent.Owner);
+        ent.Comp.OriginalName ??= Name(ent.Owner);
         RefreshCore(ent.Owner);
     }
 
@@ -318,9 +317,8 @@ public sealed class StationAiPersonalitySystem : EntitySystem
         if (!TryComp(core, out StationAiScreenComponent? component))
             return;
 
-        var identity = EnsureComp<StationAiCoreIdentityComponent>(core);
-        identity.OriginalName ??= Name(core);
-        _metadata.SetEntityName(core, identity.OriginalName);
+        component.OriginalName ??= Name(core);
+        _metadata.SetEntityName(core, component.OriginalName);
         component.Screen = component.DefaultScreen;
         component.Color = Color.White;
         component.Occupied = false;

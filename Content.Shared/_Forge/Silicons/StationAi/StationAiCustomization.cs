@@ -52,6 +52,9 @@ public sealed partial class StationAiScreenComponent : Component
 
     [DataField("force-name-prefix", readOnly: true)]
     public string ForceNamePrefix = string.Empty;
+
+    [ViewVariables]
+    public string? OriginalName;
 }
 
 [Serializable, NetSerializable]

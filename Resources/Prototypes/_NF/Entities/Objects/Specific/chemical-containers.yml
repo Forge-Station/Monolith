@@ -295,7 +295,7 @@
   - type: Appearance
   - type: StaticPrice
     price: 0
-    vendPrice: 15000 # mono, 6250 -> 2500 Forge-change
+    vendPrice: 12500 # 6250 -> 12500 Forge-change
   - type: Stack
     stackType: FuelBananium
     count: 25 # mono

@@ -1,114 +1,82 @@
-using System.Numerics;
-using Robust.Shared.Audio;
+using Content.Shared.Damage;
+using Content.Shared.Whitelist;
+using JetBrains.Annotations;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Vehicle.Components;
 
 /// <summary>
-/// This is particularly for vehicles that use
-/// buckle. Stuff like clown cars may need a different
-/// component at some point.
-/// All vehicles should have Physics, Strap, and SharedPlayerInputMover components.
+/// Vehicles are objects that have the behavior of moving when a player "operates" them.
+/// The details of when the vehicle can operate and who the operator is are not defined here.
+/// This simply contains the baseline behavior of the vehicle itself.
 /// </summary>
-[AutoGenerateComponentState]
-[RegisterComponent, NetworkedComponent]
-[Access(typeof(SharedVehicleSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+[Access(typeof(VehicleSystem))]
 public sealed partial class VehicleComponent : Component
 {
     /// <summary>
-    /// The entity currently riding the vehicle.
+    /// The driver of this vehicle.
     /// </summary>
-    [ViewVariables]
-    [AutoNetworkedField]
-    public EntityUid? Rider;
-
-    [ViewVariables]
-    [AutoNetworkedField]
-    public EntityUid? LastRider;
+    [DataField, AutoNetworkedField]
+    public EntityUid? Operator;
 
     /// <summary>
-    /// The base offset for the vehicle (when facing east)
+    /// Simple whitelist for determining who can operate this vehicle.
     /// </summary>
-    [ViewVariables]
-    public Vector2 BaseBuckleOffset = Vector2.Zero;
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? OperatorWhitelist;
 
     /// <summary>
-    /// The sound that the horn makes
+    /// If true, damage to the vehicle will be transferred to the operator.
+    /// This damage is modified by <see cref="TransferDamageModifier"/>
     /// </summary>
-    [DataField("hornSound")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public SoundSpecifier? HornSound = new SoundPathSpecifier("/Audio/Effects/Vehicle/carhorn.ogg")
-    {
-        Params = AudioParams.Default.WithVolume(-3f)
-    };
-
-    [ViewVariables]
-    public EntityUid? HonkPlayingStream;
-
-    /// Use ambient sound component for the idle sound.
-
-    [DataField("hornAction", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
-    public string? HornAction = "ActionVehicleHorn";
+    [DataField, AutoNetworkedField]
+    public bool TransferDamage = true;
 
     /// <summary>
-    /// The action for the horn (if any)
+    /// A damage modifier set that adjusts the damage passed from the vehicle to the operator.
     /// </summary>
-    [DataField("hornActionEntity")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public EntityUid? HornActionEntity;
+    [DataField, AutoNetworkedField]
+    public DamageModifierSet? TransferDamageModifier;
 
     /// <summary>
-    /// Whether the vehicle has a key currently inside it or not.
+    /// Whether the operator requires hands to operate this vehicle.
     /// </summary>
-    [DataField("hasKey")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool HasKey;
-
-    /// <summary>
-    /// Determines from which side the vehicle will be displayed on top of the player.
-    /// </summary>
-
-    [DataField("southOver")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool SouthOver;
-
-    [DataField("northOver")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool NorthOver;
-
-    [DataField("westOver")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool WestOver;
-
-    [DataField("eastOver")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool EastOver;
-
-    /// <summary>
-    /// What the y buckle offset should be in north / south
-    /// </summary>
-    [DataField("northOverride")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float NorthOverride;
-
-    /// <summary>
-    /// What the y buckle offset should be in north / south
-    /// </summary>
-    [DataField("southOverride")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float SouthOverride;
-
-    [DataField("autoAnimate")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool AutoAnimate = true;
-
-    [DataField("useHand")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool UseHand = true;
-
-    [DataField("hideRider")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool HideRider;
+    [DataField, AutoNetworkedField]
+    public bool RequiresHands = true;
 }
+
+[Serializable, NetSerializable]
+public enum VehicleVisuals : byte
+{
+    HasOperator,    // The vehicle has a valid operator
+    CanRun          // The vehicle can be moved by the operator (turned on :flushed:)
+}
+
+/// <summary>
+/// Event raised on operator when they begin to operate a vehicle
+/// Values are configured before this event is raised.
+/// </summary>
+[ByRefEvent, UsedImplicitly]
+public readonly record struct OnVehicleEnteredEvent(Entity<VehicleComponent> Vehicle, EntityUid Operator);
+
+/// <summary>
+/// Event raised on operator when they stop operating a vehicle.
+/// Values are configured after this event is raised.
+/// </summary>
+[ByRefEvent, UsedImplicitly]
+public readonly record struct OnVehicleExitedEvent(Entity<VehicleComponent> Vehicle, EntityUid Operator);
+
+/// <summary>
+/// Event raised on the vehicle after an operator is set.
+/// New operator can be null.
+/// </summary>
+[ByRefEvent, UsedImplicitly]
+public readonly record struct VehicleOperatorSetEvent(EntityUid? NewOperator, EntityUid? OldOperator);
+
+/// <summary>
+/// Event raised on a vehicle to check if it can run/move around.
+/// </summary>
+[ByRefEvent, UsedImplicitly]
+public readonly record struct VehicleCanRunEvent(Entity<VehicleComponent> Vehicle, bool CanRun = true);

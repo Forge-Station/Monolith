@@ -764,6 +764,9 @@
   id: InvalidForGlobalSpawnSpell
 
 - type: Tag
+  id: JanicartKeys # Uses for GenericKeyedVehicle of Janicart
+
+- type: Tag
   id: InvalidForSurvivorAntag
 
 - type: Tag

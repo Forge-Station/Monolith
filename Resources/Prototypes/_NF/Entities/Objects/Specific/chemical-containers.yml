@@ -225,6 +225,9 @@
   - type: Stack
     stackType: FuelPlasma
     count: 25 # mono
+  - type: StaticPrice # Forge-change
+    price: 0 # Forge-change
+    vendPrice: 3100 # Forge-change
 
 - type: entity
   parent: FuelPlasma
@@ -259,6 +262,9 @@
   - type: Stack
     stackType: FuelUranium
     count: 25 # mono
+  - type: StaticPrice # Forge-change
+    price: 0 # Forge-change
+    vendPrice: 5250 # Forge-change
 
 - type: entity
   parent: FuelUranium
@@ -289,7 +295,7 @@
   - type: Appearance
   - type: StaticPrice
     price: 0
-    vendPrice: 6250 # mono
+    vendPrice: 15000 # mono, 6250 -> 2500 Forge-change
   - type: Stack
     stackType: FuelBananium
     count: 25 # mono

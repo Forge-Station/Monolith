@@ -156,7 +156,6 @@
     count: 15 #Was 10, Buffed due to limb damage changes (Goobstation)
   - type: StackPrice
     price: 15 # Mono - 5->15
-  - type: StaticPrice # Forge-change  
     vendPrice: 6000 # Forge-change
 
 - type: entity

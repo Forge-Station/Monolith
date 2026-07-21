@@ -1,3 +1,4 @@
+/// Forge-Change-Start
 using System.Numerics;
 using Content.Shared.CombatMode;
 using Content.Shared.Gravity;
@@ -496,3 +497,5 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
         }
     }
 }
+/// Forge-Change-End
+///

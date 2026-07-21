@@ -71,13 +71,6 @@ public sealed partial class MechComponent : Component
     public readonly string BatterySlotId = "mech-battery-slot";
 
     /// <summary>
-    /// A multiplier used to calculate how much of the damage done to a mech
-    /// is transfered to the pilot
-    /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float MechToPilotDamageMultiplier;
-
-    /// <summary>
     /// Monolith: The damage dealt by EMPs.
     /// </summary>
     [DataField]
@@ -122,9 +115,6 @@ public sealed partial class MechComponent : Component
     /// </summary>
     [DataField]
     public EntityWhitelist? EquipmentWhitelist;
-
-    [DataField]
-    public EntityWhitelist? PilotWhitelist;
 
     /// <summary>
     /// A container for storing the equipment entities.

@@ -2,7 +2,6 @@ using System.Numerics;
 using Content.Server.StationEvents.Components;
 using Content.Shared._NF.Bank.Components;
 using Content.Shared.Humanoid;
-using Content.Shared.Mech.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
@@ -77,12 +76,12 @@ public sealed partial class LinkedLifecycleGridSystem : EntitySystem
                 return (rider.Vehicle.Value, vehicleXform);
             }
         }
-        if (TryComp<MechPilotComponent>(uid, out var mechPilot))
+        if (TryComp<VehicleOperatorComponent>(uid, out var vehicleOperator) && vehicleOperator.Vehicle is { } mech)
         {
-            var mechXform = Transform(mechPilot.Mech);
+            var mechXform = Transform(mech);
             if (mechXform.MapUid != null)
             {
-                return (mechPilot.Mech, mechXform);
+                return (mech, mechXform);
             }
         }
         return (uid, xform);

@@ -13,7 +13,7 @@ using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
 using Content.Shared._Mono.FireControl;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
-using Content.Shared.Mech.Components;
+using Content.Shared.Vehicle.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Ranged;
@@ -208,8 +208,8 @@ public sealed partial class GunSystem : SharedGunSystem
 
         var entity = entityNull.Value;
 
-        if (TryComp<MechPilotComponent>(entity, out var mechPilot)) // Goobstation
-            entity = mechPilot.Mech;
+        if (TryComp<VehicleOperatorComponent>(entity, out var vehicleOperator) && vehicleOperator.Vehicle is { } mech) // Goobstation
+            entity = mech;
 
         if (!TryGetGun(entity, out var gunUid, out var gun))
         {

@@ -13,7 +13,7 @@ using Content.Shared.Gravity;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Item;
-using Content.Shared.Mech.Components; // Delta-V: Felinids in duffelbags can't shoot.
+using Content.Shared.Vehicle.Components; // Mech operators fire from the mech entity.
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Tag;
@@ -163,8 +163,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (user == null || !_combatMode.IsInCombatMode(user))
             return;
 
-        if (TryComp<MechPilotComponent>(user.Value, out var mechPilot))
-            user = mechPilot.Mech;
+        if (TryComp<VehicleOperatorComponent>(user.Value, out var vehicleOperator) && vehicleOperator.Vehicle is { } mech)
+            user = mech;
 
         if (!TryGetGun(user.Value, out var ent, out var gun) ||
             HasComp<ItemComponent>(user))
@@ -235,8 +235,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (user == null)
             return;
 
-        if (TryComp<MechPilotComponent>(user.Value, out var mechPilot))
-            user = mechPilot.Mech;
+        if (TryComp<VehicleOperatorComponent>(user.Value, out var vehicleOperator) && vehicleOperator.Vehicle is { } mech)
+            user = mech;
 
         if (!TryGetGun(user.Value, out var ent, out var gun))
             return;

@@ -47,5 +47,6 @@ public sealed class MechSystem : SharedMechSystem
         // Restore prototype-declared disassembly graph after successful repair.
         var cc = EnsureComp<ConstructionComponent>(ent.Owner);
         _construction.ChangeGraph(ent.Owner, null, MechDisassembleGraph, "start", performActions: false, cc);
+
     }
 }

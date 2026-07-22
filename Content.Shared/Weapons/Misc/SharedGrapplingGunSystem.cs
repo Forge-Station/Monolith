@@ -341,28 +341,7 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
             else if (ropeLength >= distance.MaxLength - grappling.RopeMargin)
             {
                 // Checks if the entity is "tied" to the grid it is on via extra-gravity technology (e.g. magboots). If so, for the purposes of reeling it counts as if you're weighing the same as the grid.
-                bool attachedToGrid;
-
-                if (_transform.GetGrid(joint.BodyAUid) == _transform.GetGrid(joint.BodyBUid))
-                {
-                    attachedToGrid = false;
-                }
-                else
-                {
-                    if (jointComp.Relay != null)
-                    {
-                        _physics.WakeBody(jointComp.Relay.Value);
-                        attachedToGrid = Transform(jointComp.Relay.Value).Anchored ||
-                                         !_gravity.IsWeightless(jointComp.Relay.Value) &&
-                                         !_gravity.IsWeightlessStatusFromGrid(jointComp.Relay.Value);
-                    }
-                    else
-                    {
-                        attachedToGrid = Transform(joint.BodyAUid).Anchored ||
-                                         !_gravity.IsWeightless(joint.BodyAUid) &&
-                                         !_gravity.IsWeightlessStatusFromGrid(joint.BodyAUid);
-                    }
-                }
+                bool attachedToGrid = ToGridAttached(jointComp, joint);
 
                 var targetDirection = (bodyAWorldPos - bodyBWorldPos).Normalized();
 
@@ -418,7 +397,7 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
                     massFactorA += 0.5f;
                     _physics.ApplyLinearImpulse(grapplerUidA, targetDirection * massFactorA * grappling.ReelForce * frameTime * -1, grapplerOffsetA, body: grapplerBodyA);
                 }
-                else if (ropeLength >= 150f && _transform.GetGrid(joint.BodyAUid) != _transform.GetGrid(joint.BodyBUid))
+                else if (ropeLength >= 150f && _transform.GetGrid(joint.BodyAUid) != _transform.GetGrid(joint.BodyBUid) && StandingOnGrid(joint.BodyBUid))
                 {
                     _physics.ApplyLinearImpulse(grapplerUidA, targetDirection * massFactorA * grappling.ReelForce * frameTime * -1, grapplerOffsetA, body: grapplerBodyA);
                 }
@@ -428,11 +407,16 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
                     massFactorB *= grapplerBodyB.Mass / BaseWeightMass;
                 Log.Info($"grappling Mass: A={grapplerBodyA.Mass}, B={grapplerBodyB.Mass}");
                 Log.Info($"grappling Grid GrappleUID: A={ToPrettyString(grapplerUidA)}, B={ToPrettyString(grapplerUidB)}");
-                Log.Info($"grappling Grid GrappleUID: A={ToPrettyString(_transform.GetGrid(joint.BodyAUid))}, B={ToPrettyString(_transform.GetGrid(joint.BodyBUid))}");
+                Log.Info($"grappling Grid _transform.GetGrid: A={ToPrettyString(_transform.GetGrid(joint.BodyAUid))}, B={ToPrettyString(_transform.GetGrid(joint.BodyBUid))}");
                 Log.Info($"grappling MassFactor: A={massFactorA}, B={massFactorB}");
+                Log.Info($"grappling Transform: A={Transform(joint.BodyAUid).GridUid}, A-alt={Transform(joint.BodyAUid).ParentUid}");
                 // Prevent applying impulses if rope is ended to prevent cliping to the walls
-                if(ropeLength >= 5f)
+                if(ropeLength >= 5f && !HasComp<MapGridComponent>(grapplerUidB))
                     _physics.ApplyLinearImpulse(grapplerUidB, targetDirection * massFactorB * grappling.ReelForce * frameTime, grapplerOffsetB, body: grapplerBodyB);
+                else if (ropeLength >= 150f && _transform.GetGrid(joint.BodyAUid) != _transform.GetGrid(joint.BodyBUid) && StandingOnGrid(joint.BodyBUid))
+                {
+                    _physics.ApplyLinearImpulse(grapplerUidB, targetDirection * massFactorB * grappling.ReelForce * frameTime, grapplerOffsetB, body: grapplerBodyB);
+                }
             }
 
             Dirty(uid, jointComp);
@@ -471,7 +455,7 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
             if (!jointComp.GetJoints.TryGetValue(GrapplingJoint, out var joint))
                 continue;
 
-            if (Transform(entity).Anchored && _transform.GetGrid(entity.Owner) != null)
+            if (Transform(entity).Anchored && _transform.GetGrid(entity.Owner) != null && ToGridAttached(jointComp, joint) && StandingOnGrid(joint.BodyBUid))
             {
                 joint.LocalAnchorA = _transform.GetRelativePosition(Transform(hook), _transform.GetGrid(entity.Owner)!.Value);
                 _joints.SetRelay(hook, _transform.GetGrid(entity.Owner));
@@ -483,6 +467,50 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
                 _joints.SetRelay(hook, entity.Owner, jointComp);
             }
         }
+    }
+
+    /// <summary>
+    /// Checks if the entity is "tied" to the grid it is on via extra-gravity technology (e.g. magboots). If so, for the purposes of reeling it counts as if you're weighing the same as the grid.
+    /// </summary>
+    private bool ToGridAttached(JointComponent jointComp, Joint joint)
+    {
+        bool attachedToGrid;
+
+        if (_transform.GetGrid(joint.BodyAUid) == _transform.GetGrid(joint.BodyBUid))
+        {
+            attachedToGrid = false;
+        }
+        else
+        {
+            if (jointComp.Relay != null)
+            {
+                _physics.WakeBody(jointComp.Relay.Value);
+                attachedToGrid = Transform(jointComp.Relay.Value).Anchored ||
+                                    !_gravity.IsWeightless(jointComp.Relay.Value) &&
+                                    !_gravity.IsWeightlessStatusFromGrid(jointComp.Relay.Value);
+            }
+            else
+            {
+                attachedToGrid = Transform(joint.BodyAUid).Anchored ||
+                                    !_gravity.IsWeightless(joint.BodyAUid) &&
+                                    !_gravity.IsWeightlessStatusFromGrid(joint.BodyAUid);
+            }
+        }
+        return attachedToGrid;
+    }
+
+    private bool StandingOnGrid(EntityUid? entityUid)
+    {
+        if (entityUid != null &&
+            TryComp<GunComponent>(entityUid, out var gunComp) &&
+            gunComp.Holder != null &&
+            TryComp<TransformComponent>(gunComp.Holder, out var userTransform))
+            if (userTransform.GridUid == userTransform.ParentUid &&
+                TryComp<GravityAffectedComponent>(gunComp.Holder, out var gravityComp) &&
+                !(gravityComp.GridWeightlessStatus && gravityComp.Weightless))
+                return true;
+
+        return false;
     }
 
 

@@ -56,7 +56,7 @@ public sealed partial class ShuttleSystem
     private float _sweepRadius;
 
     private const float _sparkChance = 0.2f;
-    // shuttle mass to consider the neutral point for inertia scaling: 100 tiles at standard weight /// Forge-Change
+    // shuttle mass to consider the neutral point for inertia scaling: 100 tiles at standard weight
     private const float _baseShuttleMass = 100f * TileDensityMultiplier;                            /// Forge-Change
     // exists primarily for optimisation so not a cvar
     private const float _minImpulseVelocity = 0.07f;

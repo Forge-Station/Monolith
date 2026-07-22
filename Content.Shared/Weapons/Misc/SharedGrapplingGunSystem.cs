@@ -405,11 +405,6 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
                 var massFactorB = massFactor;
                 if (grapplerBodyB.Mass < BaseWeightMass) // To prevent small things go zoomies
                     massFactorB *= grapplerBodyB.Mass / BaseWeightMass;
-                Log.Info($"grappling Mass: A={grapplerBodyA.Mass}, B={grapplerBodyB.Mass}");
-                Log.Info($"grappling Grid GrappleUID: A={ToPrettyString(grapplerUidA)}, B={ToPrettyString(grapplerUidB)}");
-                Log.Info($"grappling Grid _transform.GetGrid: A={ToPrettyString(_transform.GetGrid(joint.BodyAUid))}, B={ToPrettyString(_transform.GetGrid(joint.BodyBUid))}");
-                Log.Info($"grappling MassFactor: A={massFactorA}, B={massFactorB}");
-                Log.Info($"grappling Transform: A={Transform(joint.BodyAUid).GridUid}, A-alt={Transform(joint.BodyAUid).ParentUid}");
                 // Prevent applying impulses if rope is ended to prevent cliping to the walls
                 if(ropeLength >= 5f && !HasComp<MapGridComponent>(grapplerUidB))
                     _physics.ApplyLinearImpulse(grapplerUidB, targetDirection * massFactorB * grappling.ReelForce * frameTime, grapplerOffsetB, body: grapplerBodyB);
@@ -447,6 +442,9 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
     /// </summary>
     private void RefreshJointRelay(Entity<GrapplingProjectileEmbedComponent> entity)
     {
+        if (!_netManager.IsServer)
+            return;
+
         foreach (var hook in entity.Comp.GrapplingProjectiles)
         {
             if (!HasComp<GrapplingProjectileComponent>(hook) || !TryComp<JointComponent>(hook, out var jointComp))
@@ -455,10 +453,13 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
             if (!jointComp.GetJoints.TryGetValue(GrapplingJoint, out var joint))
                 continue;
 
-            if (Transform(entity).Anchored && _transform.GetGrid(entity.Owner) != null && ToGridAttached(jointComp, joint) && StandingOnGrid(joint.BodyBUid))
+            var targetGrid = _transform.GetGrid(entity.Owner);
+            var canRelayToGrid = targetGrid != null && !IsDockedGrid(targetGrid.Value);
+
+            if (Transform(entity).Anchored && canRelayToGrid && ToGridAttached(jointComp, joint) && StandingOnGrid(joint.BodyBUid))
             {
-                joint.LocalAnchorA = _transform.GetRelativePosition(Transform(hook), _transform.GetGrid(entity.Owner)!.Value);
-                _joints.SetRelay(hook, _transform.GetGrid(entity.Owner));
+                joint.LocalAnchorA = _transform.GetRelativePosition(Transform(hook), targetGrid!.Value);
+                _joints.SetRelay(hook, targetGrid);
 
             }
             else
@@ -467,6 +468,20 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
                 _joints.SetRelay(hook, entity.Owner, jointComp);
             }
         }
+    }
+
+    private bool IsDockedGrid(EntityUid gridUid)
+    {
+        if (!TryComp<JointComponent>(gridUid, out var jointComp))
+            return false;
+
+        foreach (var joint in jointComp.GetJoints.Values)
+        {
+            if (joint.ID.StartsWith("docking", StringComparison.Ordinal))
+                return true;
+        }
+
+        return false;
     }
 
     /// <summary>

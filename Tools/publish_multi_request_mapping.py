@@ -76,9 +76,8 @@ def get_files_to_publish() -> Iterable[str]:
 
 def get_engine_version() -> str:
     proc = subprocess.run(
-        ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+        ["git", "config", "-f", ".gitmodules", "submodule.RobustToolbox.branch"],
         stdout=subprocess.PIPE,
-        cwd="RobustToolbox",
         check=True,
         encoding="UTF-8"
     )

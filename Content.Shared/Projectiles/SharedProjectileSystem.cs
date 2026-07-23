@@ -472,6 +472,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             projectile.Shooter = null;
             projectile.Weapon = null;
             projectile.ProjectileSpent = false;
+            projectile.RaycastResetVelocity = null; /// Forge-Change
 
             Dirty(uid, projectile);
         }

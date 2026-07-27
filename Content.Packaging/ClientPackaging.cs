@@ -10,6 +10,7 @@ namespace Content.Packaging;
 
 public static class ClientPackaging
 {
+    private static readonly bool UseSecrets = File.Exists(Path.Combine("MonolithSecrets", "MonolithSecrets.sln")); // Forge-Secrets
     /// <summary>
     /// Be advised this can be called from server packaging during a HybridACZ build.
     /// </summary>
@@ -34,6 +35,26 @@ public static class ClientPackaging
                     "/m"
                 }
             });
+            // Forge-Secrets-Start
+            if (UseSecrets)
+            {
+                await ProcessHelpers.RunCheck(new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    ArgumentList =
+                    {
+                        "build",
+                        Path.Combine("MonolithSecrets","Secrets.Client", "Secrets.Client.csproj"),
+                        "-c", "Release",
+                        "--nologo",
+                        "/v:m",
+                        "/t:Rebuild",
+                        "/p:FullRelease=true",
+                        "/m"
+                    }
+                });
+            }
+            // Forge-Secrets-End
         }
 
         logger.Info("Packaging client...");
@@ -82,4 +103,24 @@ public static class ClientPackaging
 
         inputPass.InjectFinished();
     }
+
+    // Forge-Secrets-Start
+    public static IReadOnlySet<string> ContentClientIgnoredResources { get; } = new HashSet<string>
+    {
+        "MonolithSecretsServer"
+    };
+
+    private static async Task WriteClientResources(
+        string contentDir,
+        AssetPass pass,
+        IReadOnlySet<string> additionalIgnoredResources,
+        CancellationToken cancel = default)
+    {
+        var ignoreSet = RobustClientPackaging.ClientIgnoredResources
+            .Union(RobustSharedPackaging.SharedIgnoredResources)
+            .Union(ContentClientIgnoredResources).Union(additionalIgnoredResources).ToHashSet();
+
+        await RobustSharedPackaging.DoResourceCopy(Path.Combine(contentDir, "Resources"), pass, ignoreSet, cancel: cancel);
+    }
+    // Forge-Secrets-End
 }

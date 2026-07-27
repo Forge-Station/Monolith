@@ -695,4 +695,6 @@
     node: crategenericbs
     containers:
     - entity_storage
+  - type: StaticPrice
+    price: 7530
 # Forge-Change end

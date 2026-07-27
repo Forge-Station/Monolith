@@ -32,11 +32,10 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._ES.Sparks;
 using Robust.Shared.Audio;
 
 // Mono
-using System.Numerics;
-
 namespace Content.Shared.RCD.Systems;
 
 [Virtual]
@@ -58,6 +57,7 @@ public partial class RCDSystem : EntitySystem
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private TagSystem _tags = default!;
+    [Dependency] private ESSparksSystem _esSparks = default!; // ES
 
     #region Forge-Change
 
@@ -123,10 +123,12 @@ public partial class RCDSystem : EntitySystem
 
         // Set the current RCD prototype to the one supplied
         component.ProtoId = args.ProtoId;
-        // Forge-Change
+        // Forge-Change-start
         component.UseMirrorPrototype = false;
         component.ConstructionEntity = null;
         component.ConstructionPipeLayer = AtmosPipeLayer.Primary;
+        //Forge-Change-end
+        _esSparks.DoSparks(uid, 1, user: args.Actor); // ES
         UpdateCachedPrototype(uid, component);
         Dirty(uid, component);
     }

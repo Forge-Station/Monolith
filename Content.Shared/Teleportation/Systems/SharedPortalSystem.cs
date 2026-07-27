@@ -4,6 +4,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared._Moffstation.Teleportation.Components;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Weapons.Misc;
 using Content.Shared.Verbs;
@@ -34,6 +35,7 @@ public abstract partial class SharedPortalSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedGrapplingGunSystem _grappling = default!;
     [Dependency] private SharedJointSystem _joints = default!;
+    [Dependency] private EntityQuery<PortalBlacklistComponent> _portalBlacklistQuery; // Moffstation - Portal Blacklist
 
     private const string PortalFixture = "portalFixture";
     private const string ProjectileFixture = "projectile";
@@ -96,7 +98,12 @@ public abstract partial class SharedPortalSystem : EntitySystem
         if (Transform(subject).Anchored)
             return;
 
-        // break pulls before portal enter so we dont break shit
+        // Moffstation - Begin
+        if (_portalBlacklistQuery.HasComp(subject))
+            return;
+        // Moffstation - End
+
+        // break pulls before portal enter so we don't break shit
         if (TryComp<PullableComponent>(subject, out var pullable) && pullable.BeingPulled)
         {
             _pulling.TryStopPull(subject, pullable);
@@ -223,12 +230,15 @@ public abstract partial class SharedPortalSystem : EntitySystem
         _audio.PlayPredicted(arrivalSound, subject, subject);
     }
 
-    private void TeleportRandomly(EntityUid portal, EntityUid subject, PortalComponent? component = null)
+    /// <summary>
+    /// Finds a random coordinate within the portal's radius and teleports the subject there.
+    /// Attempts to not put the subject inside a static entity (e.g. wall).
+    /// </summary>
+    /// <param name="ent"> The portal being collided with. </param>
+    /// <param name="subject"> The entity getting teleported. </param>
+    private void TeleportRandomly(Entity<PortalComponent> ent, EntityUid subject)
     {
-        if (!Resolve(portal, ref component))
-            return;
-
-        var xform = Transform(portal);
+        var xform = Transform(ent);
         var coords = xform.Coordinates;
         var newCoords = coords.Offset(_random.NextVector2(component.MaxRandomRadius));
         for (var i = 0; i < MaxRandomTeleportAttempts; i++)

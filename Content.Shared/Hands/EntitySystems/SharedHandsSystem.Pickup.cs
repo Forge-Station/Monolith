@@ -277,7 +277,9 @@ public abstract partial class SharedHandsSystem : EntitySystem
             Log.Error($"Failed to insert {ToPrettyString(entity)} into users hand container when picking up. User: {ToPrettyString(uid)}. Hand: {hand.Name}.");
             return;
         }
-        RaiseLocalEvent(entity, new PickedUpEvent(uid, entity), false); // Frontier
+
+        // Stellar - we need more data in the contact interaction
+        _interactionSystem.DoContactInteraction(uid, entity, null, true); //Possibly fires twice if manually picked up via interacting with the object
 
         if (log)
         {

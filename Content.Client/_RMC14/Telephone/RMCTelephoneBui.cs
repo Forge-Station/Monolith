@@ -7,8 +7,6 @@ namespace Content.Client._RMC14.Telephone;
 
 public sealed class RMCTelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    private static readonly List<string> TabOrder = new() { "MP Dept.", "Almayer", "Command", "Offices", "ARES", "Dropship", "Marine" };
-
     private TelephoneWindow? _window;
 
     protected override void Open()
@@ -99,15 +97,6 @@ public sealed class RMCTelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInte
                     category.AddChild(phoneButton);
                     break;
                 }
-            }
-        }
-
-        foreach (var categoryName in TabOrder)
-        {
-            if (tabs.Remove(categoryName, out var category))
-            {
-                _window.Tabs.AddChild(category);
-                TabContainer.SetTabTitle(category, categoryName);
             }
         }
 

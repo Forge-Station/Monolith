@@ -89,12 +89,3 @@
   components:
   - type: AccessReader
     access: [["Remnant"]]
-
-#region Tel-Adi
-- type: entity
-  parent: DoorElectronics
-  id: DoorElectronicsTelAdi
-  suffix: Tel-Adi, Locked
-  components:
-  - type: AccessReader
-    requiredCompany: TelAdi

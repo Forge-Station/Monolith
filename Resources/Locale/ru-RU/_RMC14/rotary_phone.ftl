@@ -1,3 +1,17 @@
+ent-RMCRotaryPhone = дисковый телефон
+    .desc = Диск немного тугой.
+ent-RMCRotaryPhoneAdmin = { ent-RMCRotaryPhone }
+    .desc = { ent-RMCRotaryPhone.desc }
+    .suffix = Админ
+
+ent-RMCRotaryPhoneWallmount = настенный телефон
+    .desc = Это настенный телефон. Мелким шрифтом написано: «Для регистрации ваших данных в мэйнфрейме вставьте ключ-карту в слот ниже». К сожалению, слот заклинило. Однако вы всё ещё можете пользоваться телефоном.
+ent-RMCRotaryPhoneWallmountAdmin = { ent-RMCRotaryPhoneWallmount }
+    .desc = { ent-RMCRotaryPhoneWallmount.desc }
+    .suffix = Админ
+
+ent-RMCTelephone = телефон
+
 phone-dnd-button = Не беспокоить
 phone-dnd-tooltip-enabled = Режим "Не беспокоить" включён. Нажмите, чтобы отключить.
 phone-dnd-tooltip-disabled = Режим "Не беспокоить" выключен. Нажмите, чтобы включить.

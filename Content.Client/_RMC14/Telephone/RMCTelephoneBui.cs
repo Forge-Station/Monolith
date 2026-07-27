@@ -2,7 +2,6 @@ using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Telephone;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client._RMC14.Telephone;
 
@@ -42,7 +41,7 @@ public sealed class RMCTelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInte
         {
             if (!tabs.TryGetValue(phone.Category, out var tab))
             {
-                tab = new BoxContainer { Orientation = LayoutOrientation.Vertical };
+                tab = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
                 tabs[phone.Category] = tab;
 
                 var scroll = new ScrollContainer
@@ -52,7 +51,7 @@ public sealed class RMCTelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInte
                     VerticalExpand = true,
                 };
 
-                var category = new BoxContainer { Orientation = LayoutOrientation.Vertical };
+                var category = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
                 scroll.AddChild(category);
 
                 var searchBar = new LineEdit();

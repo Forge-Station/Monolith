@@ -20,6 +20,7 @@
   - HandheldStationMap
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
+  - SprayPainterAmmo  # Forge-Change
 
 - type: latheRecipePack
   id: AtmosStatic

@@ -14,6 +14,19 @@ jobs:
       with:
         submodules: 'recursive'
 
+# Forge-Secrets start
+    - name: Setup secrets
+      env:
+        SECRETS_TOKEN: ${{ secrets.SECRETS_TOKEN }}
+      if: ${{ env.SECRETS_TOKEN != '' }}
+      run: |
+        git clone https://x-access-token:${SECRETS_TOKEN}@github.com/Forge-Station/MonolithSecrets.git MonolithSecrets
+        cp -R MonolithSecrets/Resources/Prototypes Resources/Prototypes/_Forge/MonolithSecrets
+        cp -R MonolithSecrets/Resources/Locale Resources/Locale/ru-RU/monolith-secrets
+        cp -R MonolithSecrets/Resources/Textures Resources/Textures/_Forge/MonolithSecrets
+        cp -R MonolithSecrets/Resources/Audio Resources/Audio/_Forge/MonolithSecrets
+# Forge-Secrets end
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4.1.0
       with:

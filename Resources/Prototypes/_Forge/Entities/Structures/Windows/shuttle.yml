@@ -1,6 +1,6 @@
 - type: entity
   id: ShuttleWindowUran
-  name: shuttle window
+  name: shuttle uranium window
   parent: Window # Frontier: WindowRCDResistant<Window
   components:
   - type: Sprite
@@ -49,9 +49,12 @@
     damageOverlay:
       sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
-    price: 70 # Frontier: 150<70
+    price: 115 # Frontier: 150<70 # Forge-Change
   - type: RadiationBlocker
     resistance: 4
+  - type: Construction
+    graph: Window
+    node: shuttleWindowUran
 
 - type: entity
   parent: ShuttleWindowUran
@@ -99,6 +102,9 @@
       sprite: Structures/Windows/cracks_diagonal.rsi
   - type: RadiationBlocker
     resistance: 4
+  - type: Construction
+    graph: Window
+    node: shuttleWindowUranDiagonal
 
 - type: entity
   id: ShuttleWindowPlasma
@@ -151,9 +157,12 @@
     damageOverlay:
       sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
-    price: 70 # Frontier: 150<70
+    price: 115 # Frontier: 150<70
   - type: RadiationBlocker
     resistance: 3
+  - type: Construction
+    graph: Window
+    node: shuttleWindowPlasma
 
 - type: entity
   parent: ShuttleWindowPlasma
@@ -201,3 +210,6 @@
       sprite: Structures/Windows/cracks_diagonal.rsi
   - type: RadiationBlocker
     resistance: 3
+  - type: Construction
+    graph: Window
+    node: shuttleWindowPlasmaDiagonal

@@ -10,7 +10,7 @@
   category: Large
   group: Renegate
   access: Renegate
-  shuttlePath: /Maps/_Forge/Shuttles/Renegates/azimut.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/azimut.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -26,7 +26,7 @@
 - type: gameMap
   id: azimut
   mapName: 'Азимут'
-  mapPath: /Maps/_Forge/Shuttles/Renegates/azimut.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Renegates/azimut.yml
   minPlayers: 0
   stations:
     azimut:

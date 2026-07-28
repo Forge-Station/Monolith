@@ -1,0 +1,54 @@
+- type: entity
+  parent: BaseCartridge
+  id: Cartridge154x114mmFMJ
+  name: cartridge (15.4x114mm FMJ)
+  suffix: Нексус
+  description: Full metal jacket anti-materiel round for the NEX-SR-91 Dlan.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - Cartridge154x114mm
+  - type: CartridgeAmmo
+    proto: Bullet154x114mmFMJ
+  - type: Sprite
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Casings/nexus_154x114mm_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+
+- type: entity
+  parent: Cartridge154x114mmFMJ
+  id: Cartridge154x114mmHE
+  name: cartridge (15.4x114mm HE)
+  suffix: Нексус
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet154x114mmHE
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip-he
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#ff6622"
+
+- type: entity
+  parent: Cartridge154x114mmFMJ
+  id: Cartridge154x114mmAP
+  name: cartridge (15.4x114mm AP)
+  suffix: Нексус
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet154x114mmAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip-ap
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#2b2b2b"

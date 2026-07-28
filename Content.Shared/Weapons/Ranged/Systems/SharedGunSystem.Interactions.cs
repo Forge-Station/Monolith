@@ -88,6 +88,7 @@ public abstract partial class SharedGunSystem
         Audio.PlayPredicted(component.SoundMode, uid, user);
         Popup(Loc.GetString("gun-selected-mode", ("mode", GetLocSelector(fire))), uid, user);
         Dirty(uid, component);
+        RefreshModifiers((uid, component), user); // Forge-Change: update spread and other modifiers per fire mode
     }
 
     /// <summary>

@@ -7,7 +7,7 @@
   category: Medium
   group: Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/Incinerator.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Mercenary/Incinerator.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -15,7 +15,7 @@
 - type: gameMap
   id: Incinerator
   mapName: 'MBS Испепелитель'
-  mapPath: /Maps/_Forge/Shuttles/Mercenary/Incinerator.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Mercenary/Incinerator.yml
   minPlayers: 0
   stations:
     Incinerator:

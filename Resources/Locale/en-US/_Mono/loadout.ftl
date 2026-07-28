@@ -77,3 +77,4 @@ loadout-tsfmc-headset-senior = TSF senior over-ear headset
 loadout-tsfmc-iff-orange = IFF strap (orange)
 loadout-tsfmc-iff-white = IFF strap (white)
 loadout-tsfmc-ammo-68x52 = 6.8x52mm ammo box
+loadout-group-chatrank = chat rank

@@ -3,6 +3,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Maths; // Forge-Change
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -27,6 +28,8 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, CheckShootPrototypeEvent>(OnBatteryCheckProto); // Mono
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, GetAmmoCountEvent>(OnBatteryAmmoCount);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ExaminedEvent>(OnBatteryExamine);
+
+        InitializeSelectiveFireBattery(); // Forge-Change
     }
 
     private void OnBatteryHandleState(EntityUid uid, BatteryAmmoProviderComponent component, ref ComponentHandleState args)
@@ -146,4 +149,109 @@ public abstract partial class SharedGunSystem
         public float FireCost;
         public string? Prototype;
     }
+
+    // Forge-Change-start: per-mode battery settings for guns using selective fire.
+    protected virtual void InitializeSelectiveFireBattery()
+    {
+        SubscribeLocalEvent<SelectiveFireBatteryComponent, MapInitEvent>(OnSelectiveFireBatteryMapInit);
+        SubscribeLocalEvent<SelectiveFireBatteryComponent, AttemptShootEvent>(OnSelectiveFireBatteryAttemptShoot);
+        SubscribeLocalEvent<SelectiveFireBatteryComponent, GunRefreshModifiersEvent>(OnSelectiveFireBatteryRefreshModifiers);
+        SubscribeLocalEvent<SelectiveFireBatteryComponent, CheckShootPrototypeEvent>(OnSelectiveFireBatteryCheckProto);
+    }
+
+    private void OnSelectiveFireBatteryMapInit(EntityUid uid, SelectiveFireBatteryComponent comp, MapInitEvent args)
+    {
+        SyncSelectiveFireBatteryAmmoProvider(uid, comp);
+    }
+
+    private void OnSelectiveFireBatteryAttemptShoot(EntityUid uid, SelectiveFireBatteryComponent comp, ref AttemptShootEvent args)
+    {
+        SyncSelectiveFireBatteryAmmoProvider(uid, comp);
+        RefreshModifiers(uid, args.User);
+    }
+
+    private void OnSelectiveFireBatteryRefreshModifiers(EntityUid uid, SelectiveFireBatteryComponent comp, ref GunRefreshModifiersEvent args)
+    {
+        SyncSelectiveFireBatteryAmmoProvider(uid, comp);
+
+        if (!TryComp<GunComponent>(uid, out var gun))
+            return;
+
+        var mode = GetSelectiveFireBatteryMode(comp, gun.SelectedMode);
+        if (mode == null)
+            return;
+
+        var spreadChanged = false;
+
+        if (mode.MinAngle != null)
+        {
+            args.MinAngle = mode.MinAngle.Value;
+            spreadChanged = true;
+        }
+
+        if (mode.MaxAngle != null)
+        {
+            args.MaxAngle = mode.MaxAngle.Value;
+            spreadChanged = true;
+        }
+
+        if (mode.FireRate != null)
+            args.FireRate = mode.FireRate.Value;
+
+        if (spreadChanged)
+            gun.CurrentAngle = Angle.Zero;
+    }
+
+    private void OnSelectiveFireBatteryCheckProto(EntityUid uid, SelectiveFireBatteryComponent comp, ref CheckShootPrototypeEvent args)
+    {
+        if (!TryComp<GunComponent>(uid, out var gun))
+            return;
+
+        var mode = GetSelectiveFireBatteryMode(comp, gun.SelectedMode);
+        if (mode == null || !ProtoManager.TryIndex(mode.Proto, out var proto))
+            return;
+
+        args.ShootPrototype = proto;
+    }
+
+    private void SyncSelectiveFireBatteryAmmoProvider(EntityUid uid, SelectiveFireBatteryComponent comp)
+    {
+        if (!TryComp<GunComponent>(uid, out var gun))
+            return;
+
+        if (!TryComp<ProjectileBatteryAmmoProviderComponent>(uid, out var ammo))
+            return;
+
+        var mode = GetSelectiveFireBatteryMode(comp, gun.SelectedMode);
+        if (mode == null)
+            return;
+
+        if (ammo.Prototype == mode.Proto && MathHelper.CloseTo(ammo.FireCost, mode.FireCost))
+            return;
+
+        var oldFireCost = ammo.FireCost;
+        ammo.Prototype = mode.Proto;
+        ammo.FireCost = mode.FireCost;
+
+        if (!MathHelper.CloseTo(oldFireCost, 0) && !MathHelper.CloseTo(oldFireCost, mode.FireCost))
+        {
+            var fireCostDiff = mode.FireCost / oldFireCost;
+            ammo.Shots = (int) Math.Round(ammo.Shots / fireCostDiff);
+            ammo.Capacity = (int) Math.Round(ammo.Capacity / fireCostDiff);
+        }
+
+        Dirty(uid, ammo);
+    }
+
+    private static SelectiveFireBatteryMode? GetSelectiveFireBatteryMode(SelectiveFireBatteryComponent comp, SelectiveFire mode)
+    {
+        foreach (var entry in comp.Modes)
+        {
+            if (entry.Mode == mode)
+                return entry;
+        }
+
+        return comp.Modes.Count > 0 ? comp.Modes[0] : null;
+    }
+    // Forge-Change-end
 }

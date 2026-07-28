@@ -7,6 +7,8 @@ gun-examine-caliber-50 = Дробовые патроны калибра .50
 gun-examine-caliber-60 = Патроны калибра .60
 
 gun-examine-energybolt-high = Энергетический заряд 1400 Дж
+gun-examine-energybolt-medium = Энергетический заряд 1000 Дж
+gun-examine-energybolt-low = Энергетический заряд 750 Дж
 gun-examine-hitscan-low = Энергетический луч 750 Дж
 gun-examine-energybolt-low-disabler-pistol = Энерго-оглушающий заряд 750 Дж
 gun-examine-energybolt-disabler-pistol = Оглушающий заряд 750 Дж

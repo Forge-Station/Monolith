@@ -10,7 +10,7 @@
     - Wall
   components:
   - type: Anchorable
-    flags: 
+    flags:
     - Anchorable
   - type: Rotatable
   - type: RangedDamageSound
@@ -684,7 +684,7 @@
     delay: 8 #Frontier
     fx: EffectRCDDeconstruct8 #Frontier
   - type: StaticPrice
-    price: 95 # This shit is decorative anyways
+    price: 115 # This shit is decorative anyways # Forge-Change
 
 - type: entity
   parent: BaseWallTierTwo # Mono
@@ -1058,6 +1058,13 @@
     - mining
     - miningB
   - type: Appearance
+  # Forge-Change-Start
+  - type: Construction
+    graph: Girder
+    node: wallMining
+  - type: StaticPrice
+    price: 115
+  # Forge-Change-End
 
 - type: entity
   parent: WallShuttleDiagonal
@@ -1082,6 +1089,11 @@
     state: state0
   - type: RCDDeconstructable # Frontier
     deconstructable: false # Frontier
+  # Forge-Change-Start
+  - type: Construction
+    graph: Girder
+    node: wallMiningDiagonal
+  # Forge-Change-End
 
 
 # Vault Walls

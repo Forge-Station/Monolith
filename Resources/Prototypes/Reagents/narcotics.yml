@@ -90,7 +90,7 @@
             min: 0.3
             max: 1.0
         syndrome: StimulantAddiction
-        severity: 1.4
+        severity: 0.25
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
       # Forge-change-end
@@ -100,6 +100,10 @@
         conditions:
         - !type:ReagentThreshold
           min: 20
+      - !type:SuppressEffect # Forge-change
+        # hidden: true
+        syndrome: SedativeAddiction
+        duration: 280
 
 - type: reagent
   id: Ephedrine
@@ -185,7 +189,7 @@
             min: 0.6
             max: 1.0
         syndrome: StimulantAddiction
-        severity: 1.2
+        severity: 0.3
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
       # Forge-change-end
@@ -195,6 +199,10 @@
         conditions:
         - !type:ReagentThreshold
           min: 30
+      - !type:SuppressEffect # Forge-change
+        # hidden: true
+        syndrome: SedativeAddiction
+        duration: 280
 
 - type: reagent
   id: Stimulants
@@ -290,7 +298,7 @@
             min: 0.4
             max: 1.0
         syndrome: StimulantAddiction
-        severity: 1.55
+        severity: 0.3
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
       # Forge-change-end
@@ -310,6 +318,11 @@
             groups:
               Burn: -1
               Brute: -1
+        # Forge-change
+        - !type:SuppressEffect
+          # hidden: true
+          syndrome: SedativeAddiction
+          duration: 340
 
 - type: reagent
   id: THC
@@ -375,11 +388,39 @@
             Radiation: -0.1
       # Forge-change-start
       - !type:ToleranceEffect
-        # hidden: true
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Body
+            reagent: Nicotine
+            min: 0.0
+            max: 0.1
         reagent: Nicotine
-        amount: 0.009
+        amount: 0.01
         target: Body
-      - !type:SyndromeEffect
+      - !type:ToleranceEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Body
+            reagent: Nicotine
+            min: 0.1
+            max: 0.25
+        reagent: Nicotine
+        amount: 0.008
+        target: Body
+      - !type:ToleranceEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Body
+            reagent: Nicotine
+            min: 0.25
+            max: 0.4
+        reagent: Nicotine
+        amount: 0.006
+        target: Body
+      - !type:ToleranceEffect
         hidden: true
         conditions:
           - !type:ToleranceCondition
@@ -387,8 +428,19 @@
             reagent: Nicotine
             min: 0.4
             max: 1.0
+        reagent: Nicotine
+        amount: 0.0035
+        target: Body
+      - !type:SyndromeEffect
+        hidden: true
+        conditions:
+          - !type:ToleranceCondition
+            source: Body
+            reagent: Nicotine
+            min: 0.3
+            max: 1.0
         syndrome: NicotineAddiction
-        severity: 1.4
+        severity: 0.2
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
       # Forge-change-end
@@ -472,7 +524,7 @@
       - !type:ToleranceEffect
         # hidden: true
         reagent: SpaceDrugs
-        amount: 0.02
+        amount: 0.007
         target: Brain
       - !type:SyndromeEffect
         hidden: true
@@ -480,10 +532,10 @@
           - !type:ToleranceCondition
             source: Brain
             reagent: SpaceDrugs
-            min: 0.3
+            min: 0.6
             max: 1.0
         syndrome: SedativeAddiction
-        severity: 1.2
+        severity: 0.4
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
       # Forge-change-end
@@ -722,7 +774,7 @@
       - !type:ToleranceEffect
         # hidden: true
         reagent: Happiness
-        amount: 0.1
+        amount: 0.004
         target: Brain
       - !type:SyndromeEffect
         hidden: true
@@ -733,7 +785,7 @@
             min: 0.3
             max: 1.0
         syndrome: SedativeAddiction
-        severity: 1.4
+        severity: 0.2
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
       # Forge-change-end

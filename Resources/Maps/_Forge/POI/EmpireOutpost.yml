@@ -2,10 +2,10 @@ meta:
   format: 7
   category: Grid
   engineVersion: 277.0.0
-  forkId: frontier_mapping
-  forkVersion: a3317ed1451a811309aa4214eb2ac980a8380907
-  time: 06/10/2026 13:26:57
-  entityCount: 8369
+  forkId: ""
+  forkVersion: ""
+  time: 06/24/2026 12:08:45
+  entityCount: 8368
 maps: []
 grids:
 - 1
@@ -66,10 +66,10 @@ entities:
     components:
     - type: MetaData
       name: Empire Outpost
-    - type: ForceAnchor
     - type: Transform
       pos: -45,-40
       parent: invalid
+    - type: ForceAnchor
     - type: MapGrid
       chunks:
         0,1:
@@ -5090,8 +5090,8 @@ entities:
     - type: SpreaderGrid
       spreadQueues:
         Puddle: []
-        MetalFoam: []
         Kudzu: []
+        MetalFoam: []
         Smoke: []
     - type: GravityShake
       shakeTimes: 10
@@ -25213,13 +25213,23 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
-- proto: ComputerCrewMonitoring
+- proto: ComputerCrewEmpireMonitoring
   entities:
-  - uid: 4472
+  - uid: 2998
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 46.5,70.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 0
+  - uid: 6165
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 78.5,46.5
       parent: 1
     - type: ApcPowerReceiver
       powerLoad: 5
@@ -25499,16 +25509,6 @@ entities:
       startingCharge: 0
 - proto: ComputerTabletopCrewMonitoring
   entities:
-  - uid: 2998
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 78.5,46.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
   - uid: 3518
     components:
     - type: Transform
@@ -26155,9 +26155,9 @@ entities:
       rot: 3.141592653589793 rad
       pos: 70.5,40.5
       parent: 1
-- proto: CrewMonitoringServer
+- proto: CrewMonitoringEmpireServer
   entities:
-  - uid: 6165
+  - uid: 4472
     components:
     - type: Transform
       pos: 42.5,35.5
@@ -47519,11 +47519,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 73.5,40.5
-      parent: 1
-  - uid: 2997
-    components:
-    - type: Transform
-      pos: 78.5,46.5
       parent: 1
   - uid: 3244
     components:

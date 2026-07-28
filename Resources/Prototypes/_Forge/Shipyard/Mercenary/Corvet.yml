@@ -7,7 +7,7 @@
   category: Medium
   group: Shipyard
   access: Mercenary
-  shuttlePath: /Maps/_Forge/Shuttles/Mercenary/Corvet.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Mercenary/Corvet.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -15,7 +15,7 @@
 - type: gameMap
   id: Corvet
   mapName: 'MBS Корвет'
-  mapPath: /Maps/_Forge/Shuttles/Mercenary/Corvet.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Mercenary/Corvet.yml
   minPlayers: 0
   stations:
     Corvet:

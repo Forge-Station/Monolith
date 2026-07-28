@@ -128,7 +128,7 @@ public partial class RCDSystem : EntitySystem
         component.ConstructionEntity = null;
         component.ConstructionPipeLayer = AtmosPipeLayer.Primary;
         //Forge-Change-end
-        _esSparks.DoSparks(uid, 1, user: args.Actor); // ES
+        //_esSparks.DoSparks(uid, 1, user: args.Actor); // ES - Starlight, we don't need sparks on RCD construct selection
         UpdateCachedPrototype(uid, component);
         Dirty(uid, component);
     }
@@ -270,6 +270,7 @@ public partial class RCDSystem : EntitySystem
         _transform.SetParent(effect, gridData.GridUid);
         _transform.SetLocalPositionNoLerp(effect, gridData.Position + new Vector2(0.5f, 0.5f));
         // </Mono>
+        _adminLogger.Add(LogType.RCD, LogImpact.Low, $"{ToPrettyString(user):user} spawned {ToPrettyString(effect):effect} with {ToPrettyString(uid):rcd/rpd/rpld} at {location}"); // Starlight, effect logging
         var ev = new RCDDoAfterEvent(
             GetNetCoordinates(mapGridData.Value.Location),
             component.ConstructionDirection,
@@ -685,7 +686,7 @@ public partial class RCDSystem : EntitySystem
         {
             case RcdMode.ConstructTile:
                 _mapSystem.SetTile(mapGridData.GridUid, mapGridData.Component, mapGridData.Position, new Tile(_tileDefMan[component.CachedPrototype.Prototype].TileId));
-                _adminLogger.Add(LogType.RCD, LogImpact.High, $"{ToPrettyString(user):user} used RCD to set grid: {mapGridData.GridUid} {mapGridData.Position} to {component.CachedPrototype.Prototype}");
+                _adminLogger.Add(LogType.RCD, LogImpact.High, $"{ToPrettyString(user):user} used {ToPrettyString(uid):rcd} to set grid: {mapGridData.GridUid} {mapGridData.Position} to {component.CachedPrototype.Prototype}"); // Starlight, RCD uid
                 break;
 
             case RcdMode.ConstructObject:
@@ -744,7 +745,7 @@ public partial class RCDSystem : EntitySystem
                 else
                 {
                     // Deconstruct object
-                    _adminLogger.Add(LogType.RCD, LogImpact.High, $"{ToPrettyString(user):user} used RCD to delete {ToPrettyString(target):target}");
+                    _adminLogger.Add(LogType.RCD, LogImpact.High, $"{ToPrettyString(user):user} used {ToPrettyString(uid):rcd} to delete {ToPrettyString(target):target}"); // Starlight, RCD uid
                     QueueDel(target);
                 }
 

@@ -102,7 +102,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     /// <returns></returns>
     public bool ShouldRaycastProjectile(float speed)
     {
-        if (_adaptiveRaycasting && speed > _minRaycastVelocity * (_physicsTickrate / BasePhysicsTickrate))
+        if (_adaptiveRaycasting && speed > _minRaycastVelocity * ((float) _physicsTickrate / BasePhysicsTickrate)) // Forge-Change
             return true;
         else if (speed > _minRaycastVelocity)
             return true;
@@ -472,6 +472,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             projectile.Shooter = null;
             projectile.Weapon = null;
             projectile.ProjectileSpent = false;
+            projectile.RaycastResetVelocity = null; /// Forge-Change
 
             Dirty(uid, projectile);
         }
@@ -504,6 +505,10 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
     private void PreventCollision(EntityUid uid, ProjectileComponent component, ref PreventCollideEvent args)
     {
+        // Ignore spent projectiles and ammo entities that should only collide while actively shot.
+        if (component.ProjectileSpent || (component.Weapon == null && component.OnlyCollideWhenShot))
+            return;
+                                                                                 /// Forge-Change
         // Goobstation - Crawling fix
         if (TryComp<RequireProjectileTargetComponent>(args.OtherEntity, out var requireTarget) && requireTarget.IgnoreThrow && requireTarget.Active)
             return;

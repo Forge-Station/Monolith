@@ -238,7 +238,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
     #region Interactions
     protected void OnActivate(EntityUid uid, DoorComponent door, ActivateInWorldEvent args)
     {
-        args.InteractionParticle &= door.ShowInteractionParticle; // Starlight, don't show SECRET doors
+        args.InteractionParticle &= door.ShowInteractionParticles; // Starlight, don't show SECRET doors
 
         if (args.Handled || !args.Complex || !door.ClickOpen)
             return;

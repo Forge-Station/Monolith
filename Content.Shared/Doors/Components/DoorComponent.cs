@@ -239,7 +239,7 @@ public sealed partial class DoorComponent : Component
     /// Whether activating this door displays an interaction particle.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public bool ShowInteractionParticles = true;
+    public bool ShowInteractionParticle = true;
     #endregion
 
     #endregion Graphics

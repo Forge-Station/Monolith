@@ -457,8 +457,6 @@
     layers:
     - state: microstimpen
       map: ["enum.SolutionContainerLayers.Fill"]
-  - type: Injector # Starlight start
-    showInteractionParticles: false # Starlight end
   - type: SolutionContainerManager
     solutions:
       pen:

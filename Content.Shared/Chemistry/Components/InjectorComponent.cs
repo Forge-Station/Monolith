@@ -54,14 +54,6 @@ public sealed partial class InjectorComponent : Component
     [DataField]
     public bool IgnoreClosed = true;
 
-    #region Starlight
-    /// <summary>
-    /// Whether using this injector displays interaction particles.
-    /// </summary>
-    [DataField]
-    public bool ShowInteractionParticles = true;
-    #endregion
-
     /// <summary>
     ///     The minimum amount of solution that can be transferred at once from this solution.
     /// </summary>

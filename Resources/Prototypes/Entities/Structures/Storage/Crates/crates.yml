@@ -641,6 +641,8 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Paintable                               # Forge-Change
     group: null # not shaped like other lockers   # Forge-Change
+  - type: RatKingRummageable # Forge-Change
+
 
 - type: entity
   parent: CrateBaseSecure

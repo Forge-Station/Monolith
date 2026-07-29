@@ -84,26 +84,39 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsRenegateOfficer ] 
-      
-# Tel-Adi (открытая, доступ наёмника)
-- type: entity
-  parent: Airlock
-  id: AirlockTelAdi
-  suffix: Tel-Adi
-  components:
-  - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/tel_adi.rsi
 
-# Tel-Adi (закрытая, только TelAdi карта)
+#region Provost
 - type: entity
   parent: Airlock
-  id: AirlockTelAdiSecure
-  suffix: Tel-Adi, Secure
+  id: AirlockProvost
+  suffix: Provost
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/tel_adi.rsi
-  - type: AccessReader
-    requiredCompany: TelAdi
+    sprite: Forge/Structures/Doors/Airlocks/Standard/provost.rsi
+
+- type: entity
+  parent: AirlockProvost
+  id: AirlockProvostLocked
+  suffix: Provost, Locked
+  components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsTelAdi ]
+      board: [ DoorElectronicsProvost ]
+
+- type: entity
+  parent: AirlockProvost
+  id: AirlockProvostOfficerLocked
+  suffix: Provost, Officer, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsProvostOfficer ]
+
+- type: entity
+  parent: AirlockProvost
+  id: AirlockProvostInspectorLocked
+  suffix: Provost, Inspector, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsProvostInspector ]

@@ -19,7 +19,7 @@
     speedModifier: 0.5
 
 - type: entity
-  id: ScrewdriveracticalTool
+  id: ScrewdriverTacticalTool
   parent: Screwdriver
   name: Встроенная отвертка
   description: Встроенный в перчатки отвертка. Немного хуже обычной отвертки.
@@ -47,3 +47,10 @@
   components:
   - type: Tool
     speedModifier: 0.5
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 50
+        maxVol: 50

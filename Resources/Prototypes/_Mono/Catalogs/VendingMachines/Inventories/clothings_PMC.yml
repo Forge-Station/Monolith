@@ -107,6 +107,7 @@
     ClothingHandsGlovesTacticalCombatOlive: 4294967295 # Infinite
     ClothingHandsGlovesTacticalCombatCoyoteBrown: 4294967295 # Infinite
     ClothingHandsGlovesTacticalCombatWhite: 4294967295 # Infinite
+    ClothingHandsGlovesTacticalCombatEngineer: 4294967295 # Infinite #Forge-Change
     # region Helmets
     ClothingHeadBPHelmetLight: 4294967295 # Infinite
     ClothingHeadHelmetMercenary: 4294967295 # Infinite

@@ -147,7 +147,7 @@
     - Piping
     urkProto: CrowbarPocketTacticalTool
     omnitoolProto: WrenchTacticalTool
-    welderProto: ScrewdriveracticalTool
+    welderProto: ScrewdriverTacticalTool
     naniteApplicatorProto: WirecutterTacticalTool
     auxiliaryProto: WelderTacticalTool
     pipingProto: Multitool
@@ -159,5 +159,5 @@
     - ActionModsuitGauntletToolsMenu
     activeIfWorn: true
   - type: StaticPrice
-    price: 8500
-    vendPrice: 10000
+    price: 10000
+    vendPrice: 15000

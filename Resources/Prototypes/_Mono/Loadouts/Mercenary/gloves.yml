@@ -27,3 +27,11 @@
   id: MercenaryClothingHandsGlovesTacticalCombatWhite
   equipment:
     gloves: ClothingHandsGlovesTacticalCombatWhite
+
+#Forge-Change-Start
+- type: loadout
+  id: MercenaryClothingHandsGlovesTacticalCombatEngineer
+  price: 15000
+  equipment:
+    gloves: ClothingHandsGlovesTacticalCombatEngineer
+#Forge-Change-End

@@ -81,6 +81,7 @@
   - MercenaryClothingHandsGlovesTacticalCombatOlive
   - MercenaryClothingHandsGlovesTacticalCombatCoyoteBrown
   - MercenaryClothingHandsGlovesTacticalCombatWhite
+  - MercenaryClothingHandsGlovesTacticalCombatEngineer #Forge-Change
 
 - type: loadoutGroup
   id: MonoMercenaryBackpack # ONLY TO BE USED AS A SUBGROUP FOR _NF MERCENARY GROUPS

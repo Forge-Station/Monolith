@@ -15,3 +15,25 @@
     Steel: 500
     Glass: 200
     Plastic: 100
+
+- type: latheRecipe
+  id: ClothingHandsGlovesTacticalCombatEngineerAdvanced
+  result: ClothingHandsGlovesTacticalCombatEngineerAdvanced
+  completetime: 6
+  materials:
+    Steel: 3000
+    Glass: 3000
+    Plasma: 2000
+    Gold: 1200
+    Silver: 1000
+    Bluespace: 200
+
+- type: latheRecipe
+  id: ClothingHandsGlovesTacticalCombatEngineer
+  result: ClothingHandsGlovesTacticalCombatEngineer
+  completetime: 6
+  materials:
+    Steel: 1500
+    Glass: 1000
+    Gold: 500
+    Silver: 500

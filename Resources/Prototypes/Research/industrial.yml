@@ -226,6 +226,7 @@
   # Mono edit end
   - ForgeBlueprintAdvancedTools # Forge-change
   - ForgeBlueprintAdvancedShipRepairTools # Forge-change
+  - ClothingHandsGlovesTacticalCombatEngineerAdvanced #Forge-Change
   technologyPrerequisites:
   - SuperParts
   position: -1, 18

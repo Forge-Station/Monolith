@@ -17,6 +17,7 @@
     - HandLabeler
     - Signaller
     - ClothingMaskWeldingGas
+    - ClothingHandsGlovesTacticalCombatEngineer #Forge-Change
   ## Basic storage
     - ToolboxArtisticNF
     - ToolboxElectricalNF
@@ -138,6 +139,7 @@
     - RCD # Mono start
     - RCDAmmo
     - RPD # Forge-Change
+    - ClothingHandsGlovesTacticalCombatEngineerAdvanced #Forge-Change
     - ShipRepairDevice
     - ShipRepairDeviceAmmo #Mono end
     - SignallerAdvanced

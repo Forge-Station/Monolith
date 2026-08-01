@@ -117,25 +117,25 @@
   parent: ClothingHandsGlovesCombat
   id: ClothingHandsGlovesTacticalCombatEngineer
   name: Тактические инженерные перчатки
-  description: Эти тактические перчатки защищены от огня и электричества и снабжены базовым набором инструментов.
+  description: Тактические перчатки с защитой от огня и ударов. Содержат встроенный базовый набор инструментов. Однако из-за несовершенства технологий инструменты имеют крайне низкое качество.
   components:
   - type: Sprite
     sprite: _Mono/Clothing/Hands/Gloves/tactical_combat_any.rsi
-    color: "#9c9200"
+    color: "#d1c300"
   - type: Clothing
     sprite: _Mono/Clothing/Hands/Gloves/tactical_combat_any.rsi
     clothingVisuals:
       gloves:
       - state: equipped-HAND
-        color: "#9c9200"
+        color: "#d1c300"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#9c9200"
+        color: "#d1c300"
       right:
       - state: inhand-right
-        color: "#9c9200"
+        color: "#d1c300"
   - type: ModsuitGauntletTools
     usePrototypeMenuIcons: true
     enabledSlots:
@@ -161,3 +161,47 @@
   - type: StaticPrice
     price: 10000
     vendPrice: 15000
+
+- type: entity
+  parent: ClothingHandsGlovesCombat
+  id: ClothingHandsGlovesTacticalCombatEngineerAdvanced
+  name: Продвинутые тактические инженерные перчатки
+  description: Улучшенная версия инженерных тактических перчаток. Благодаря технологиям блюспейса теперь снабжены продвинутым набором инструментов.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Hands/Gloves/tactical_combat_any.rsi
+    color: "#ffb30f"
+  - type: Clothing
+    sprite: _Mono/Clothing/Hands/Gloves/tactical_combat_any.rsi
+    clothingVisuals:
+      gloves:
+      - state: equipped-HAND
+        color: "#ffb30f"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ffb30f"
+      right:
+      - state: inhand-right
+        color: "#ffb30f"
+  - type: ModsuitGauntletTools
+    usePrototypeMenuIcons: true
+    enabledSlots:
+    - Urk
+    - Omnitool
+    - Welder
+    - NaniteApplicator
+    - Auxiliary
+    urkProto: JawsOfLifeTacticalTool
+    omnitoolProto: PowerDrillTacticalTool
+    welderProto: WelderExperimentalTacticalTool
+    naniteApplicatorProto: NaniteApplicatorExperimentalTacticalTool
+    auxiliaryProto: Multitool
+  - type: ActionGrant
+    actions:
+    - ActionModsuitGauntletToolsMenu
+  - type: ItemActionGrant
+    actions:
+    - ActionModsuitGauntletToolsMenu
+    activeIfWorn: true

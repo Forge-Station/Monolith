@@ -6,7 +6,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 0.2
+    speedModifier: 0.2 #1 original
 
 - type: entity
   id: WrenchTacticalTool
@@ -16,7 +16,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 0.2
+    speedModifier: 0.2 #1 original
 
 - type: entity
   id: ScrewdriverTacticalTool
@@ -26,7 +26,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 0.2
+    speedModifier: 0.2 #1 original
 
 - type: entity
   id: WirecutterTacticalTool
@@ -36,7 +36,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 0.2
+    speedModifier: 0.2 #1 original
 
 - type: entity
   id: WelderTacticalTool
@@ -46,7 +46,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 0.2
+    speedModifier: 0.2 #1 original
   - type: SolutionContainerManager
     solutions:
       Welder:
@@ -54,3 +54,44 @@
         - ReagentId: WeldingFuel
           Quantity: 25
         maxVol: 25
+
+#advanced
+- type: entity
+  id: JawsOfLifeTacticalTool
+  parent: JawsOfLife
+  name: Встроенные челюсти жизни
+  description: Встроенные в перчатки челюсти жизни. Практически неотличимы от ориганала.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Tool
+    speedModifier: 1.4 #1.5 original
+
+- type: entity
+  id: PowerDrillTacticalTool
+  parent: PowerDrill
+  name: Встроенная электродрель
+  description: Встроенная в перчатки электродрель. Практически неотличима от ориганала.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Tool
+    speedModifier: 1.4 #1.5 original
+
+- type: entity
+  id: WelderExperimentalTacticalTool
+  parent: WelderExperimental
+  name: Встроенная эксперментальная сварка
+  description: Встроенная в перчатки эксперементальная сварка. Практически неотличима от ориганала.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Tool
+    speedModifier: 1.2 #1.3 original
+
+- type: entity
+  id: NaniteApplicatorExperimentalTacticalTool
+  parent: NaniteApplicatorExperimental
+  name: Встроенный эксперементальный нанитный репликатор.
+  description: Встроенный в перчатки эксперементальный нанитный репликатор. Практически неотличим от ориганала.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Tool
+    speedModifier: 0.9 #1 original

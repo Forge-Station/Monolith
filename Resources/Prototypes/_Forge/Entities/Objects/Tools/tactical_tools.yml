@@ -2,55 +2,55 @@
   id: CrowbarPocketTacticalTool
   parent: CrowbarPocket
   name: Встроенный лом
-  description: Встроенный в перчатки лом. Немного хуже обычного лома.
+  description: Встроенный в перчатки лом. Намного хуже обычного лома.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 0.5
+    speedModifier: 0.2
 
 - type: entity
   id: WrenchTacticalTool
   parent: Wrench
   name: Встроенный гаечный ключ
-  description: Встроенный в перчатки гаечный ключ. Немного хуже обычного гаечного ключа.
+  description: Встроенный в перчатки гаечный ключ. Намного хуже обычного гаечного ключа.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 0.5
+    speedModifier: 0.2
 
 - type: entity
   id: ScrewdriverTacticalTool
   parent: Screwdriver
   name: Встроенная отвертка
-  description: Встроенный в перчатки отвертка. Немного хуже обычной отвертки.
+  description: Встроенный в перчатки отвертка. Намного хуже обычной отвертки.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 0.5
+    speedModifier: 0.2
 
 - type: entity
   id: WirecutterTacticalTool
   parent: Wirecutter
   name: Встроенные кусачки
-  description: Встроенный в перчатки кусачки. Немного хуже обычных кусачек.
+  description: Встроенный в перчатки кусачки. Намного хуже обычных кусачек.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 0.5
+    speedModifier: 0.2
 
 - type: entity
   id: WelderTacticalTool
   parent: Welder
   name: Встроенная сварка
-  description: Встроенный в перчатки сварка. Немного хуже обычной сварки.
+  description: Встроенный в перчатки сварка. Намного хуже обычной сварки.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 0.5
+    speedModifier: 0.2
   - type: SolutionContainerManager
     solutions:
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 50
-        maxVol: 50
+          Quantity: 25
+        maxVol: 25

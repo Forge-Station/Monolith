@@ -112,3 +112,52 @@
   - type: Clothing
     sprite: Forge/Clothing/Hands/Gloves/tti_gloves.rsi
   - type: Insulated
+
+- type: entity
+  parent: ClothingHandsGlovesCombat
+  id: ClothingHandsGlovesTacticalCombatEngineer
+  name: Тактические инженерные перчатки
+  description: Эти тактические перчатки защищены от огня и электричества и снабжены базовым набором инструментов.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Hands/Gloves/tactical_combat_any.rsi
+    color: "#9c9200"
+  - type: Clothing
+    sprite: _Mono/Clothing/Hands/Gloves/tactical_combat_any.rsi
+    clothingVisuals:
+      gloves:
+      - state: equipped-HAND
+        color: "#9c9200"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#9c9200"
+      right:
+      - state: inhand-right
+        color: "#9c9200"
+  - type: ModsuitGauntletTools
+    usePrototypeMenuIcons: true
+    enabledSlots:
+    - Urk
+    - Omnitool
+    - Welder
+    - NaniteApplicator
+    - Auxiliary
+    - Piping
+    urkProto: CrowbarPocketTacticalTool
+    omnitoolProto: WrenchTacticalTool
+    welderProto: ScrewdriveracticalTool
+    naniteApplicatorProto: WirecutterTacticalTool
+    auxiliaryProto: WelderTacticalTool
+    pipingProto: Multitool
+  - type: ActionGrant
+    actions:
+    - ActionModsuitGauntletToolsMenu
+  - type: ItemActionGrant
+    actions:
+    - ActionModsuitGauntletToolsMenu
+    activeIfWorn: true
+  - type: StaticPrice
+    price: 8500
+    vendPrice: 10000

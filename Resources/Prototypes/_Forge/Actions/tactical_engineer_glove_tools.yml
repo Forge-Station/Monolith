@@ -1,0 +1,9 @@
+- type: entity
+  id: ActionTacticalEngineerGloveToolsMenu
+  name: Встроенные в перчатку инструменты
+  description: Открывает радиальное меню для выдачи инструментов
+  components:
+  - type: InstantAction
+    clientExclusive: true
+    icon: { sprite: _NF/Objects/Tools/wrench.rsi, state: icon }
+    event: !type:OpenModsuitGauntletToolsMenuActionEvent {}

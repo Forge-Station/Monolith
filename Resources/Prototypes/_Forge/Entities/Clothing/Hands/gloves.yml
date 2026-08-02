@@ -116,8 +116,8 @@
 - type: entity
   parent: ClothingHandsGlovesCombat
   id: ClothingHandsGlovesTacticalCombatEngineer
-  name: Тактические инженерные перчатки
-  description: Тактические перчатки с защитой от огня и ударов. Содержат встроенный базовый набор инструментов. Однако из-за несовершенства технологий инструменты имеют крайне низкое качество.
+  name: Tactical engineering gloves
+  description: These tactical gloves are fireproof and shock resistant. They feature a built-in basic tool kit; however, due to technological limitations, the tools are of extremely poor quality.
   components:
   - type: Sprite
     sprite: _Mono/Clothing/Hands/Gloves/tactical_combat_any.rsi
@@ -165,8 +165,8 @@
 - type: entity
   parent: ClothingHandsGlovesCombat
   id: ClothingHandsGlovesTacticalCombatEngineerAdvanced
-  name: Продвинутые тактические инженерные перчатки
-  description: Улучшенная версия инженерных тактических перчаток. Благодаря технологиям блюспейса теперь снабжены продвинутым набором инструментов.
+  name: Advanced tactical engineering gloves
+  description: An improved version of the engineering tactical gloves. Thanks to Bluespace technology, they are now equipped with an advanced toolset.
   components:
   - type: Sprite
     sprite: _Mono/Clothing/Hands/Gloves/tactical_combat_any.rsi
@@ -200,8 +200,8 @@
     auxiliaryProto: Multitool
   - type: ActionGrant
     actions:
-    - ActionTacticalEngineerGloveToolsMenu
+    - ActionTacticalEngineerGloveAdvancedToolsMenu
   - type: ItemActionGrant
     actions:
-    - ActionTacticalEngineerGloveToolsMenu
+    - ActionTacticalEngineerGloveAdvancedToolsMenu
     activeIfWorn: true

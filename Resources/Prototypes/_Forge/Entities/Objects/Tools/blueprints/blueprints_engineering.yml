@@ -20,7 +20,7 @@
     - WelderExperimental
     - PowerDrill
     - JawsOfLife
-    - ClothingHandsGlovesTacticalCombatEngineerAdvanced #Forge-Change
+    #- ClothingHandsGlovesTacticalCombatEngineerAdvanced #Forge-Change
 
 - type: entity
   parent: NFBaseBlueprintEngineering

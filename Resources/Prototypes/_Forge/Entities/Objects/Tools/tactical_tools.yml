@@ -1,8 +1,8 @@
 - type: entity
   id: CrowbarPocketTacticalTool
   parent: CrowbarPocket
-  name: Встроенный лом
-  description: Встроенный в перчатки лом. Намного хуже обычного лома.
+  name: integrated crowbar
+  description: A crowbar integrated into the gloves. Much worse than a standard crowbar.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
@@ -11,8 +11,8 @@
 - type: entity
   id: WrenchTacticalTool
   parent: Wrench
-  name: Встроенный гаечный ключ
-  description: Встроенный в перчатки гаечный ключ. Намного хуже обычного гаечного ключа.
+  name: Integrated wrench
+  description: A wrench integrated into the gloves. Much worse than a standard wrench.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
@@ -21,8 +21,8 @@
 - type: entity
   id: ScrewdriverTacticalTool
   parent: Screwdriver
-  name: Встроенная отвертка
-  description: Встроенный в перчатки отвертка. Намного хуже обычной отвертки.
+  name: Integrated screwdriver
+  description: A screwdriver integrated into the gloves. Much worse than a standard screwdriver.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
@@ -31,8 +31,8 @@
 - type: entity
   id: WirecutterTacticalTool
   parent: Wirecutter
-  name: Встроенные кусачки
-  description: Встроенный в перчатки кусачки. Намного хуже обычных кусачек.
+  name: Integrated wirecutter
+  description: A wirecutterr integrated into the gloves. Much worse than a standard wirecutter.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
@@ -41,8 +41,8 @@
 - type: entity
   id: WelderTacticalTool
   parent: Welder
-  name: Встроенная сварка
-  description: Встроенный в перчатки сварка. Намного хуже обычной сварки.
+  name: Integrated welder
+  description: A welder integrated into the gloves. Much worse than a standard welder.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
@@ -59,38 +59,38 @@
 - type: entity
   id: JawsOfLifeTacticalTool
   parent: JawsOfLife
-  name: Встроенные челюсти жизни
-  description: Встроенные в перчатки челюсти жизни. Практически неотличимы от ориганала.
+  name: Integrated Jaws Of Life
+  description: A Jaws of Life integrated into the gloves. Virtually indistinguishable from the original.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 1.4 #1.5 original
+    speedModifier: 1.3 #1.5 original
 
 - type: entity
   id: PowerDrillTacticalTool
   parent: PowerDrill
-  name: Встроенная электродрель
-  description: Встроенная в перчатки электродрель. Практически неотличима от ориганала.
+  name: Integrated powerdrill
+  description:  A powerdrill integrated into the gloves. Virtually indistinguishable from the original.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 1.4 #1.5 original
+    speedModifier: 1.3 #1.5 original
 
 - type: entity
   id: WelderExperimentalTacticalTool
   parent: WelderExperimental
-  name: Встроенная эксперментальная сварка
-  description: Встроенная в перчатки эксперементальная сварка. Практически неотличима от ориганала.
+  name: Integrated experimental welder
+  description: A experimental welder integrated into the gloves. Virtually indistinguishable from the original.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool
-    speedModifier: 1.2 #1.3 original
+    speedModifier: 1.1 #1.3 original
 
 - type: entity
   id: NaniteApplicatorExperimentalTacticalTool
   parent: NaniteApplicatorExperimental
-  name: Встроенный эксперементальный нанитный репликатор.
-  description: Встроенный в перчатки эксперементальный нанитный репликатор. Практически неотличим от ориганала.
+  name: Integrated experimental nanite applicator
+  description: A experimental nanite applicator integrated into the gloves. Virtually indistinguishable from the original.
   categories: [ HideSpawnMenu ]
   components:
   - type: Tool

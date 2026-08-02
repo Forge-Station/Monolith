@@ -1,9 +1,19 @@
 - type: entity
   id: ActionTacticalEngineerGloveToolsMenu
-  name: Встроенные в перчатку инструменты
-  description: Открывает радиальное меню для выдачи инструментов
+  name: Integrated gloves tools
+  description: Open the radial menu to deploy integrated tools.
   components:
   - type: InstantAction
     clientExclusive: true
     icon: { sprite: _NF/Objects/Tools/wrench.rsi, state: icon }
+    event: !type:OpenModsuitGauntletToolsMenuActionEvent {}
+
+- type: entity
+  id: ActionTacticalEngineerGloveAdvancedToolsMenu
+  name: Integrated gloves tools
+  description: Open the radial menu to deploy integrated tools.
+  components:
+  - type: InstantAction
+    clientExclusive: true
+    icon: { sprite: Forge/Objects/Tools/Standart/jaws_of_life.rsi, state: jaws_pry }
     event: !type:OpenModsuitGauntletToolsMenuActionEvent {}

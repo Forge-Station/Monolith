@@ -49,6 +49,7 @@
   - type: CompanyAccessReader
     requiredCompanies:
     - MD
+    popupMessage: company-md-access-denied
   - type: Tag
     tags:
     - FactionStaticUplinkTTI

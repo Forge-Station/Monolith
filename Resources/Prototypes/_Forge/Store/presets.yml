@@ -21,3 +21,21 @@
     - Telecrystal
     balance:
       Telecrystal: 0
+
+- type: entity
+  id: StorePresetTTIUplink
+  abstract: true
+  components:
+  - type: Store
+    name: store-preset-name-tti-uplink
+    categories:
+    - UplinkTTIUtility
+    - UplinkTTIHardsuits
+    - UplinkTTIWeapons
+    - UplinkTTIAmmo
+    - UplinkTTIBundles
+    - UplinkTTIBlueprints
+    currencyWhitelist:
+    - TTIMedicalCredit
+    balance:
+      TTIMedicalCredit: 0

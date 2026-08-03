@@ -69,3 +69,14 @@
     - ForgeVoiceModuleImplanter
     - ForgeSubdermalArmorImplant
     - ForgeReflectiveSubdermalArmorImplant
+
+- type: entity
+  parent: NFBaseBlueprintMedical
+  id: BlueprintTechMed
+  name: tech med blueprint
+  description: A blueprint with a schematic of a subdermal implants. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - BrutepackAdvanced1
+    - OintmentAdvanced1

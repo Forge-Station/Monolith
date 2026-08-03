@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Народное достояние",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "coin"
+    },
+    {
+      "name": "coin_2"
+    },
+    {
+      "name": "coin_3"
+    },
+    {
+      "name": "coin_4"
+    },
+    {
+      "name": "coin_5"
+    },
+    {
+      "name": "coin-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "coin-inhand-right",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+- type: entity
+  parent: NFBaseBlueprintService
+  id: BlueprintTTIClothing
+  name: tti clothing blueprint
+  description: A blueprint with a schematic of an advanced mop. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ClothingUniformJumpsuitATU
+    - ClothingUniformJumpskirtTAF
+    - ClothingUniformJumpsuitTraumaBlue
+    - ClothingUniformJumpskirtTraumaBlue
+    - ClothingUniformJumpsuitTraumaStandart
+    - ClothingUniformJumpsuitTraumaDirector
+
+- type: entity
+  parent: NFBaseBlueprintService
+  id: BlueprintTTIOuterClothing
+  name: tti outer clothing blueprint
+  description: A blueprint with a schematic of an advanced mop. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ClothingOuterRobeTraumaBomber
+    - ClothingOuterCoatTrauma
+    - ClothingMaskSterileTrauma
+    - ClothingNeckCloakTrauma
+    - ClothingNeckMantleTrauma
+    - ClothingHeadHatTraumaDirectorBeret
+    - ClothingHeadHatTraumaBeret

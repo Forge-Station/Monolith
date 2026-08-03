@@ -1,11 +1,11 @@
 - type: guideEntry
   id: BasicLore
   name: Лор # Forge-change
-  text: "/ServerInfo/_Forge/Guidebook/Lore/BasicLoreForge.xml" # Forge-change
+  text: "/ServerInfo/_Forge/Guidebook/Lore/BasicLoreForge.xml" # Forge-change-start
   children:
   - TransSolarFederationForge
   - TheSacredEmpireofVermillionForge
-  - RenegadesForge
+  - RenegadesForge #Forge-change-end
 
 - type: guideEntry
   id: TransSolarFederationForge

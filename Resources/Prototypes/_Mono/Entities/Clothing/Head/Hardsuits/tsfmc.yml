@@ -53,9 +53,6 @@
   - type: NightVision # Gen 3 quadtube-wide
     relayOverlay: true
     goggleEffect: true
-    viewCircleRadius: 450
-    viewCircleCount: 4
-    viewCircleSpacing: 280
     action: ActionToggleNightVision
     viewCircleRadius: 800 #Forge-Change 350 to 800 // это радиус обзора (максимальный радиус для ТСФ)
     viewCircleCount: 4

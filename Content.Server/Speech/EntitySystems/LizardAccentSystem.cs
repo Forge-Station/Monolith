@@ -1,6 +1,7 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using Content.Server.Speech.Components;
-
+using Content.Shared.Speech.EntitySystems;
+using Robust.Shared.Random;
 namespace Content.Server.Speech.EntitySystems;
 
 public sealed class LizardAccentSystem : EntitySystem
@@ -10,7 +11,42 @@ public sealed class LizardAccentSystem : EntitySystem
     private static readonly Regex RegexInternalX = new(@"(\w)x");
     private static readonly Regex RegexLowerEndX = new(@"\bx([\-|r|R]|\b)");
     private static readonly Regex RegexUpperEndX = new(@"\bX([\-|r|R]|\b)");
-
+    /*
+    // Corvax-Localization-Start
+    private static readonly Regex _regexLowerC = new Regex("с+");
+    private static readonly Regex _regexUpperC = new Regex("С+");
+    private static readonly Regex _regexLowerZ = new Regex("з+");
+    private static readonly Regex _regexUpperZ = new Regex("З+");
+    private static readonly Regex _regexLowerSh = new Regex("ш+");
+    private static readonly Regex _regexUpperSh = new Regex("Ш+");
+    private static readonly Regex _regexLowerCh = new Regex("ч+");
+    private static readonly Regex _regexUpperCh = new Regex("Ч+");
+    private static readonly List<string> _replacementsSs = new List<string> { "сс", "ссс" };
+    private static readonly List<string> _replacementsSsUpper = new List<string> { "СС", "ССС" };
+    private static readonly List<string> _replacementsSh = new List<string> { "шш", "шшш" };
+    private static readonly List<string> _replacementsShUpper = new List<string> { "ШШ", "ШШШ" };
+    private static readonly List<string> _replacementsCh = new List<string> { "щщ", "щщщ" };
+    private static readonly List<string> _replacementsChUpper = new List<string> { "ЩЩ", "ЩЩЩ" };
+    // Corvax-Localization-End
+    */
+    //Forge-Localization-Start
+    private static readonly Regex RegexLowerC = new Regex("с+");
+    private static readonly Regex RegexUpperC = new Regex("С+");
+    private static readonly Regex RegexLowerZ = new Regex("з+");
+    private static readonly Regex RegexUpperZ = new Regex("З+");
+    private static readonly Regex RegexLowerSh = new Regex("ш+");
+    private static readonly Regex RegexUpperSh = new Regex("Ш+");
+    private static readonly Regex RegexLowerCh = new Regex("ч+");
+    private static readonly Regex RegexUpperCh = new Regex("Ч+");
+    /*
+    private static readonly List<string> ReplacementsSs = new List<string> { "сс", "ссс" };
+    private static readonly List<string> ReplacementsSsUpper = new List<string> { "СС", "ССС" };
+    private static readonly List<string> ReplacementsSh = new List<string> { "шш", "шшш" };
+    private static readonly List<string> ReplacementsShUpper = new List<string> { "ШШ", "ШШШ" };
+    private static readonly List<string> ReplacementsCh = new List<string> { "щщ", "щщщ" };
+    private static readonly List<string> ReplacementsChUpper = new List<string> { "ЩЩ", "ЩЩЩ" };
+    */
+    //Forge-Localiztion-End
     public override void Initialize()
     {
         base.Initialize();
@@ -31,7 +67,28 @@ public sealed class LizardAccentSystem : EntitySystem
         message = RegexLowerEndX.Replace(message, "ecks$1");
         // eckS
         message = RegexUpperEndX.Replace(message, "ECKS$1");
-
+        /*
+        // Corvax-Localization-Start
+        message = _regexLowerC.Replace(message, _random.Pick(_replacementsSs));
+        message = _regexUpperC.Replace(message, _random.Pick(_replacementsSsUpper));
+        message = _regexLowerZ.Replace(message, _random.Pick(_replacementsSs));       // для "з+" используются те же замены, что и для "с+"
+        message = _regexUpperZ.Replace(message, _random.Pick(_replacementsSsUpper)); // для "З+" используются те же замены, что и для "С+"
+        message = _regexLowerSh.Replace(message, _random.Pick(_replacementsSh));
+        message = _regexUpperSh.Replace(message, _random.Pick(_replacementsShUpper));
+        message = _regexLowerCh.Replace(message, _random.Pick(_replacementsCh));
+        message = _regexUpperCh.Replace(message, _random.Pick(_replacementsChUpper));
+        // Corvax-Localization-End
+        */
+        //Forge-Localization-Start
+        message = RegexLowerC.Replace(message, "ссс");
+        message = RegexUpperC.Replace(message, "ССС");
+        message = RegexLowerZ.Replace(message, "ссс");       // для "з+" используются те же замены, что и для "с+"
+        message = RegexUpperZ.Replace(message, "ССС"); // для "З+" используются те же замены, что и для "С+"
+        message = RegexLowerSh.Replace(message, "шшш");
+        message = RegexUpperSh.Replace(message, "ШШШ");
+        message = RegexLowerCh.Replace(message, "щщщ");
+        message = RegexUpperCh.Replace(message, "ЩЩЩ");
+        //Forge-Localization-End
         args.Message = message;
     }
 }

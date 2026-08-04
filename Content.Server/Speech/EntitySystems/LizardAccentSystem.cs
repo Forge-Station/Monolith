@@ -18,6 +18,8 @@ public sealed class LizardAccentSystem : EntitySystem
     private static readonly Regex RegexUpperSh = new Regex("Ш+");
     private static readonly Regex RegexLowerCh = new Regex("ч+");
     private static readonly Regex RegexUpperCh = new Regex("Ч+");
+    private static readonly Regex RegexLowerSch = new Regex("щ+");
+    private static readonly Regex RegexUpperCh = new Regex("Щ+");
     //Forge-Localiztion-End
     public override void Initialize()
     {
@@ -48,6 +50,8 @@ public sealed class LizardAccentSystem : EntitySystem
         message = RegexUpperSh.Replace(message, "ШШШ");
         message = RegexLowerCh.Replace(message, "ччч");
         message = RegexUpperCh.Replace(message, "ЧЧЧ");
+        message = RegexLowerSch.Replace(message, "щщщ");
+        message = RegexUpperSch.Replace(message, "ЩЩЩ");
         //Forge-Localization-End
         args.Message = message;
     }

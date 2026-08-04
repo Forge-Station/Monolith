@@ -22,6 +22,7 @@
     - hissed
     - hissing.
     - hissed.
+    - шипит #Forge-Change
 
 - type: emote
   id: Meow
@@ -35,7 +36,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [meows.]
+  chatMessages: ["chat-emote-msg-meow"]
   chatTriggers:
     - meow
     - meows
@@ -64,6 +65,11 @@
     - mraows.
     - mraows!
     - mraows~
+    - мяу #Forge-Change
+    - мяу! #Forge-Change
+    - мяукает #Forge-Change
+    - мяукает! #Forge-Change
+    - ня #Forge-Change
 
 - type: emote
   id: Mew
@@ -96,12 +102,14 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [growls.]
+  chatMessages: ["chat-emote-msg-growl"] #Forge-Change
   chatTriggers:
     - growl
     - growls
     - growling
     - growled
+    - громко рычит #Forge-Change
+    - скалиться #Forge-Change
 
 - type: emote
   id: Purr
@@ -115,9 +123,10 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [purrs.]
+  chatMessages: ["chat-emote-msg-purr"] #Forge-Change
   chatTriggers:
     - purr
     - purrs
     - purring
     - purred
+    - мурчит #Forge-Change

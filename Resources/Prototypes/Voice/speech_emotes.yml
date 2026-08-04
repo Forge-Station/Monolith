@@ -25,10 +25,10 @@
     - yells
     - yelled
     - yelling
-    - кричит
-    - кричит!
-    - орет
-    - орёт
+    - кричит #Forge-Change
+    - кричит! #Forge-Change
+    - орет #Forge-Change
+    - орёт #Forge-Change
 
 - type: emote
   id: Laugh
@@ -75,7 +75,7 @@
     - honks
     - honked
     - honking
-    - хокает #Forge-Change
+    - хонкает #Forge-Change
 
 - type: emote
   id: Sigh
@@ -256,7 +256,7 @@
     - claps her hands together
     - claps his hands together
     - claps its hands together
-    - хлопоет один раз #Forge-Change
+    - хлопает один раз #Forge-Change
 
 - type: emote
   id: Snap

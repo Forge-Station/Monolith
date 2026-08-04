@@ -46,8 +46,8 @@ public sealed class LizardAccentSystem : EntitySystem
         message = RegexUpperZ.Replace(message, "ССС"); // для "З+" используются те же замены, что и для "С+"
         message = RegexLowerSh.Replace(message, "шшш");
         message = RegexUpperSh.Replace(message, "ШШШ");
-        message = RegexLowerCh.Replace(message, "щщщ");
-        message = RegexUpperCh.Replace(message, "ЩЩЩ");
+        message = RegexLowerCh.Replace(message, "ччч");
+        message = RegexUpperCh.Replace(message, "ЧЧЧ");
         //Forge-Localization-End
         args.Message = message;
     }

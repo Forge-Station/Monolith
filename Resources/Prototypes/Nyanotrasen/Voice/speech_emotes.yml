@@ -36,7 +36,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: ["chat-emote-msg-meow"]
+  chatMessages: ["chat-emote-msg-meow"] #Forge-Change
   chatTriggers:
     - meow
     - meows
@@ -83,12 +83,13 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: [mews.]
+  chatMessages: ["chat-emote-msg-mew"] #Forge-Change
   chatTriggers:
     - mew
     - mews
     - mewing
     - mewed
+    - миукает #Forge-Change
 
 - type: emote
   id: Growl

@@ -19,7 +19,7 @@ public sealed class LizardAccentSystem : EntitySystem
     private static readonly Regex RegexLowerCh = new Regex("ч+");
     private static readonly Regex RegexUpperCh = new Regex("Ч+");
     private static readonly Regex RegexLowerSch = new Regex("щ+");
-    private static readonly Regex RegexUpperCh = new Regex("Щ+");
+    private static readonly Regex RegexUpperSch = new Regex("Щ+");
     //Forge-Localiztion-End
     public override void Initialize()
     {

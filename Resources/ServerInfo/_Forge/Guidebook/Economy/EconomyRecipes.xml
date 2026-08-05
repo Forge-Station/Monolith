@@ -1,28 +1,28 @@
 <Document>
 
-  # Economy Recipes
+  # Рецепты Экономики
 
-  These combinations of materials, when in their respective machines, can create important resources.
+  Эти комбинации материалов при использовании в соответствующих механизмах позволяют создавать важные ресурсы.
 
-  Reminder: Chemicals can be present in any container inserted into the machine in addition to other resources.
+  Напоминание: помимо прочих ресурсов, химические вещества могут содержаться в любой емкости, устанавливаемой в машину.
 
-  Many common materials can also contain chemicals. These can be extracted via a reagent grinder.
+  Многие распространенные материалы также могут содержать химические вещества. Их можно извлечь с помощью измельчителя реагентов.
 
-  [color=yellow]"Unfinished" components universally say what components they need to start construction![/color]
+  [color=yellow]«Незавершенные» ресурсы всегда указывают, какие именно компоненты требуются для начала производства![/color]
 
-  # Industrial Planner
+  # Промышленный планировщик
 
-  An industrial planner can be built at any autolathe or bought at cargo pads. It has a display of the chains for all hand-crafting, such as heavy armor plates.
+  Устройство для планирования производства (industrial planner) можно изготовить на любом автоматическом токарном станке или приобрести на грузовых площадках. Оно отображает цепочки изготовления для всех предметов, создаваемых вручную, — например, тяжелых бронепластин.
 
   <Box>
     <GuideEntityEmbed Entity="EconomyPlanner" Caption="industrial planner"/>
   </Box>
 
-  # Arc Furnace
+  # Дуговая печь
 
   <GuideMicrowaveGroupEmbed Group="ArcFurnace"/>
 
-  # Precision Assembler
+  # Прецизионный сборщик
 
   <GuideMicrowaveGroupEmbed Group="PrecisionAssembler"/>
 

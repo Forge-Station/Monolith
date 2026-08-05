@@ -45,6 +45,7 @@
       tags:
         - AsakimBrain
     whitelistCheckOrgans: true
+    Sabotageable: false # Forge-Change
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -133,3 +134,4 @@
       tags:
         - AsakimBrain
     whitelistCheckOrgans: true
+    Sabotageable: false # Forge-Change

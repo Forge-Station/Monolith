@@ -50,6 +50,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 1500
@@ -132,6 +133,7 @@
       collection: 120mmAutocannonAK820
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
   - type: Actions
   - type: RadarBlip
@@ -219,6 +221,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 1500
@@ -296,6 +299,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 2000
@@ -374,6 +378,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 2000
@@ -459,6 +464,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 12000
@@ -537,6 +543,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -615,6 +622,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/120mm_mortar.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 1500
@@ -698,6 +706,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/120mm_mortar.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 1500

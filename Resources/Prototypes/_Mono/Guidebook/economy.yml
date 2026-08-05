@@ -1,6 +1,6 @@
 - type: guideEntry
   id: Economy
-  name: Economy
+  name: Экономика #Forge-change
   text: "/ServerInfo/_Forge/Guidebook/Economy/Economy.xml"
   priority: 1
   children:
@@ -9,13 +9,13 @@
 
 - type: guideEntry
   id: Introduction
-  name: Introduction
+  name: Введение #Forge-change
   text: "/ServerInfo/_Forge/Guidebook/Economy/Basics.xml"
   priority: 2
 
 - type: guideEntry
   id: EconomyRecipes
-  name: Economy Recipes
+  name: Рецепты экономики #Forge-change
   text: "/ServerInfo/_Forge/Guidebook/Economy/EconomyRecipes.xml"
   priority: 2
   children:
@@ -25,14 +25,14 @@
 
 - type: guideEntry
   id: ArcFurnace
-  name: Arc Furnace Recipes
+  name: Рецепты для дуговой печи #Forge-change
   text: "/ServerInfo/_Forge/Guidebook/Economy/ArcFurnace.xml"
   priority: 3
   filterEnabled: True
 
 - type: guideEntry
   id: PrecisionAssembler
-  name: Precision Assembler Recipes
+  name: Рецепты для прецизионного сборщика #Forge-change
   text: "/ServerInfo/_Forge/Guidebook/Economy/PrecisionAssembler.xml"
   priority: 3
   filterEnabled: True

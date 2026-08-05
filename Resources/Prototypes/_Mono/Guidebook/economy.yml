@@ -1,7 +1,7 @@
 - type: guideEntry
   id: Economy
   name: Economy
-  text: "/ServerInfo/_Mono/Guidebook/Economy/Economy.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Economy/Economy.xml"
   priority: 1
   children:
   - EconomyRecipes
@@ -10,13 +10,13 @@
 - type: guideEntry
   id: Introduction
   name: Introduction
-  text: "/ServerInfo/_Mono/Guidebook/Economy/Basics.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Economy/Basics.xml"
   priority: 2
 
 - type: guideEntry
   id: EconomyRecipes
   name: Economy Recipes
-  text: "/ServerInfo/_Mono/Guidebook/Economy/EconomyRecipes.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Economy/EconomyRecipes.xml"
   priority: 2
   children:
   - ArcFurnace
@@ -26,14 +26,14 @@
 - type: guideEntry
   id: ArcFurnace
   name: Arc Furnace Recipes
-  text: "/ServerInfo/_Mono/Guidebook/Economy/ArcFurnace.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Economy/ArcFurnace.xml"
   priority: 3
   filterEnabled: True
 
 - type: guideEntry
   id: PrecisionAssembler
   name: Precision Assembler Recipes
-  text: "/ServerInfo/_Mono/Guidebook/Economy/PrecisionAssembler.xml"
+  text: "/ServerInfo/_Forge/Guidebook/Economy/PrecisionAssembler.xml"
   priority: 3
   filterEnabled: True
 

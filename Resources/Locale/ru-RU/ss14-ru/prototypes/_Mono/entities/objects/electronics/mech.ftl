@@ -1,9 +1,9 @@
 ﻿ent-BroadswordCentralElectronics = центральный модуль управления для меха Broadsword
     .desc = Электрический центр управления для меха Broadsword.
 ent-BroadswordPeripheralsElectronics = модуль управления периферией для меха Broadsword
-    .desc = Система управления электрическими перефирийными устройствами для меха Broadsword.
+    .desc = Система управления электрическими периферийными устройствами для меха Broadsword.
 ent-BroadswordTargetingElectronics = модуль управления орудиями для меха Broadsword
-    .desc = Электронный модуль управления управления орудиями для меха Broadsword.
+    .desc = Электронный модуль управления орудиями для меха Broadsword.
 ent-FlailCentralElectronics = центральный модуль управления для меха Flail
     .desc = Электрический центр управления для меха Flail.
 ent-FlailPeripheralsElectronics = модуль управления периферией для меха Flail

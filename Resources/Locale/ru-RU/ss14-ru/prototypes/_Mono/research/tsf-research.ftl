@@ -3,8 +3,8 @@ research-discipline-tsfmc = Исследования ТСФ
 
 research-technology-tsfmc-basic-equipment = Базовое снаряжение ТСФ
 research-technology-tsfmc-advanced-equipment = Продвинутое снаряжение ТСФ
-research-technology-tsfmc-experimental-equipment = Эксперементальное снаряжение ТСФ
-research-technology-tsfmc-mopp-equipment =  Средства химической защиты
+research-technology-tsfmc-experimental-equipment = Экспериментальное снаряжение ТСФ
+research-technology-tsfmc-mopp-equipment = Средства химической защиты
 
 # T1 TSFMC
 research-technology-tsfmc-guns = Стандартное вооружение
@@ -25,7 +25,7 @@ research-technology-tsfmc-tier-two-vouchers = Продвинутые вауче�
 # T3 TSFMC
 research-technology-tsfmc-tier-three-vouchers = Премиальные ваучеры шаттлов ТСФ
 research-technology-tsfmc-super-weapons = Премиальное вооружение ТСФ
-research-technology-tsfmc-synthalloy = Эксперементальная наука материалов
+research-technology-tsfmc-synthalloy = Экспериментальная наука материалов
 research-technology-tsfmc-advanced-module = Продвинутое создание киборгов ТСФ
 research-technology-tsfmc-sandevistan = Реверс-инжиниринг Сандэвистана
 research-technology-tsfmc-shunt = Нелегальная кибернетика ТСФ

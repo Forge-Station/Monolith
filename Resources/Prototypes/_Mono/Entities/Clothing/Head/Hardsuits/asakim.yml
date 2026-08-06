@@ -26,7 +26,7 @@
     pulseTime: 1
     isEquipment: true
     toggleAction: PulseThermalVision
-  - type: NightVision # Gen 4 wide-quadtube // Добавлено так как в родителе ПНВ гражданского типа
+  - type: NightVision # Gen 4 wide-quadtube // Добавлено так как в родителе ПНВ гражданского типа (не работает!!!)
     relayOverlay: false
     goggleEffect: true
     viewCircleRadius: 1000 #Forge-changed 400 to 1000

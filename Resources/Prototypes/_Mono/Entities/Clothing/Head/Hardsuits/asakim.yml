@@ -26,6 +26,16 @@
     pulseTime: 1
     isEquipment: true
     toggleAction: PulseThermalVision
+  - type: NightVision # Gen 4 wide-quadtube // Добавлено так как в родителе ПНВ гражданского типа
+    relayOverlay: false
+    goggleEffect: true
+    viewCircleRadius: 1000 #Forge-changed 400 to 1000
+    viewCircleCount: 3 #Forge-changed 2 to 3
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+    amplification: 1.0 #Forge-Change 32 to 1.0 // параметр Усиление влияет на то как сильно слепят источники света
   - type: RadarConsole
     followEntity: true
     noRotate: true

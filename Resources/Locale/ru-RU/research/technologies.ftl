@@ -77,3 +77,4 @@ research-technology-thermal-weaponry = Температурное вооруже
 research-technology-bluespace-time-manipulation = Блюспейс манипулирование временем
 research-technology-syringe-gun = Шприцемёт
 research-technology-clowning-utilities = Клоунские принадлежности
+research-technology-ore-silo = Менеджмент материалов

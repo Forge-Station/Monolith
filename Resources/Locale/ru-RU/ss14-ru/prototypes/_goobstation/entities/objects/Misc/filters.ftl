@@ -1,0 +1,12 @@
+ent-BaseAutomationFilter = фильтр
+  .desc = Фильтр, который может быть установлен в станки.
+ent-AutomationFilterLabel = {ent-BaseAutomationFilter} этикеток
+  .desc = {ent-BaseAutomationFilter.desc} Этот сканирует этикетки на предметах.
+ent-AutomationFilterName = {ent-BaseAutomationFilter} предметов
+  .desc = {ent-BaseAutomationFilter.desc} Он использует продвинутое зрение с ИИ для распознования предметов.
+ent-AutomationFilterStack = {ent-BaseAutomationFilter} стопок
+  .desc = {ent-BaseAutomationFilter.desc} Он взвешивает предметы для того чтобы сравнить их с размеромстопки
+ent-AutomationFilterPressure = {ent-BaseAutomationFilter} давления
+  .desc = {ent-BaseAutomationFilter.desc} Он имеет барометр для измерения давления гахов.
+ent-AutomationFilterCombined = комбинированный {ent-BaseAutomationFilter}
+  .desc = {ent-BaseAutomationFilter.desc} Он использует логический элеиент для сравнения 2 установленных предметных фильтров

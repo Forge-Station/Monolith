@@ -9,11 +9,14 @@
     hideLayersOnEquip:
     - Hair
   - type: Carriable
-  - type: Hunger
   - type: Puller
     needsHands: false
-  - type: Thirst
-    baseDecayRate: 0.15
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: NormalSatiationHunger
+      Thirst:
+        prototype: SkrellThirst
   - type: Body
     prototype: Skrell
     requiredLegs: 2

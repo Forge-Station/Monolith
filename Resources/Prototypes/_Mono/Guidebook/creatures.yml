@@ -33,7 +33,7 @@
   text: "/ServerInfo/_Forge/Guidebook/_Mono/Creatures/Asakim.xml" # Forge-change
   priority: 1
 
-- type: guideEntry
-  id: Xenoborgs
-  name: guide-entry-xenoborgs
-  text: "/ServerInfo/_Forge/Guidebook/_Mono/Creatures/Xenoborgs.xml" # Forge-change
+#- type: guideEntry #Forge-change delete
+#  id: Xenoborgs
+#  name: guide-entry-xenoborgs
+#  text: "/ServerInfo/_Forge/Guidebook/_Mono/Creatures/Xenoborgs.xml" # Forge-change delete

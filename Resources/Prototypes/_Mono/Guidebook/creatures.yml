@@ -39,7 +39,7 @@
 
 - type: guideEntry
   id: ADS
-  name: АДС
+  name: АСО(ADS)
   text: "/ServerInfo/_Forge/Guidebook/_Mono/Creatures/ADS.xml" # Forge-change
   priority: 2
 

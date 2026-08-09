@@ -48,19 +48,42 @@
   </ColorBox>
 
   <Box>
-  [bold]Импланты переводчики (РАЗДЕЛ НА УТОЧНЕНИИ):[/bold]
+  [bold]Импланты переводчики:[/bold]
   </Box>
   <ColorBox Color="#1c1c1d" OutlineColor="#1c1c1d" OutlineThickness="1" Margin="0 0 0 0">
     <Box>
-      <GuideEntityEmbed Entity="AzazibaTranslatorImplanter"/>
-      <GuideEntityEmbed Entity="BubblishTranslatorImplanter"/>
-      <GuideEntityEmbed Entity="RootSpeakTranslatorImplanter"/>
+      <GuideEntityEmbed Entity="BasicGalaticCommonTranslatorImplanter"/>
+      <GuideEntityEmbed Entity="AdvancedGalaticCommonTranslatorImplanter"/>
     </Box>
   </ColorBox>
   <ColorBox Color="#1c1c1d" OutlineColor="#1c1c1d" OutlineThickness="1" Margin="0 0 0 0">
     <Box>
+      <GuideEntityEmbed Entity="BubblishTranslatorImplanter"/>
+      <GuideEntityEmbed Entity="ValyrianStandardTranslatorImplanter"/>
+    </Box>
+  </ColorBox>
+  <ColorBox Color="#1c1c1d" OutlineColor="#1c1c1d" OutlineThickness="1" Margin="0 0 0 0">
+    <Box>
+      <GuideEntityEmbed Entity="NewKinPidginTranslatorImplanter"/>
+      <GuideEntityEmbed Entity="CanilunztTranslatorImplanter"/>
+    </Box>
+  </ColorBox>
+    <ColorBox Color="#1c1c1d" OutlineColor="#1c1c1d" OutlineThickness="1" Margin="0 0 0 0">
+    <Box>
+      <GuideEntityEmbed Entity="RootSpeakTranslatorImplanter"/>
+      <GuideEntityEmbed Entity="MofficTranslatorImplanter"/>
+    </Box>
+  </ColorBox>
+  <ColorBox Color="#1c1c1d" OutlineColor="#1c1c1d" OutlineThickness="1" Margin="0 0 0 0">
+    <Box>
+      <GuideEntityEmbed Entity="NekomimeticTranslatorImplanter"/>
       <GuideEntityEmbed Entity="ChittinTranslatorImplanter"/>
+    </Box>
+  </ColorBox>
+  <ColorBox Color="#1c1c1d" OutlineColor="#1c1c1d" OutlineThickness="1" Margin="0 0 0 0">
+    <Box>
       <GuideEntityEmbed Entity="DraconicTranslatorImplanter"/>
+      <GuideEntityEmbed Entity="NovaCygniTranslatorImplanter"/>
     </Box>
   </ColorBox>
 

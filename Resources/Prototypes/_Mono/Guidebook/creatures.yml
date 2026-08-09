@@ -29,7 +29,7 @@
   children:
   - Asakim
   - ADS
-  - Forbidden Technologies
+  - Forbidden-Technologies
 
 - type: guideEntry
   id: Asakim
@@ -44,7 +44,7 @@
   priority: 2
 
 - type: guideEntry
-  id: Forbidden Technologies
+  id: Forbidden-Technologies
   name: Запретные технологии
   text: "/ServerInfo/_Forge/Guidebook/_Mono/Creatures/ForbiddenTechnologies.xml" # Forge-change
   priority: 3 # Forge-change end

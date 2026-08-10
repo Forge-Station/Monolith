@@ -34,18 +34,18 @@
         </Box>
         - [textlink="5. Отыгрыш антагонистов и пиратство" link="CorvaxFrontierRule5"]
         <Box Margin="5" Orientation="Vertical" HorizontalAlignment="Left">
-          - [textlink="5.1 Пиратство" link="CorvaxFrontierRule5_1"]
+          - [textlink="5.1 Пиратство" link="CorvaxFrontierRule5_1"] # Новое правило
         </Box>
         - [textlink="6. Мародёрство" link="CorvaxFrontierRule6"]
         - [textlink="7. Безопасная зона" link="CorvaxFrontierRule7"]
         <Box Margin="5" Orientation="Vertical" HorizontalAlignment="Left">
         - [textlink="7.1 Правило баз фракций" link="CorvaxFrontierRule7_1"]
-        - [textlink="7.2 Захват точек интереса" link="CorvaxFrontierRule7_2"]
+        - [textlink="7.2 Захват точек интереса" link="CorvaxFrontierRule7_2"] # Новое правило
         </Box>
         - [textlink="8. Правила фракций" link="CorvaxFrontierRule8"]
         <Box Margin="5" Orientation="Vertical" HorizontalAlignment="Left">
         - [textlink="8.1 Отыгрыш фракций" link="CorvaxFrontierRule8_1"]
-        - [textlink="8.2 Правила войны" link="CorvaxFrontierRule8_2"]
+        - [textlink="8.2 Правила войны" link="CorvaxFrontierRule8_2"] # Новое правило
         </Box>
         - [textlink="9. ERP" link="CorvaxFrontierRule9"]
         - [textlink="10. Нечестная игра" link="CorvaxFrontierRule10"]

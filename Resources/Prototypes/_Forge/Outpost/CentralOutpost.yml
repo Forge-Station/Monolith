@@ -1,6 +1,6 @@
 - type: gameMap
   id: Frontier
-  mapName: 'Центральный Аванпост'
+  mapName: 'Система "Икар"'
   mapPath: /Maps/_Forge/Outpost/CentralOutpost.yml # Forge
   minPlayers: 0
   maxPlayers: 100
@@ -16,7 +16,7 @@
         description: "Центр этого мира. Тут, наверное, безопасно."
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Центральный Аванпост'
+          mapNameTemplate: 'Центральный аванпост'
 #          nameGenerator:
 #            !type:NanotrasenNameGenerator
 #            prefixCreator: '14'

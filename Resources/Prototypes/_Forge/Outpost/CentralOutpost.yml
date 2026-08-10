@@ -16,7 +16,7 @@
         description: "Центр этого мира. Тут, наверное, безопасно."
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Центральный аванпост'
+          mapNameTemplate: 'Центральный Аванпост'
 #          nameGenerator:
 #            !type:NanotrasenNameGenerator
 #            prefixCreator: '14'

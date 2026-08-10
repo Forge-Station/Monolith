@@ -32,7 +32,7 @@
           - [textlink="4.1 КООП и мета-информация" link="CorvaxFrontierRule4_1"]
           - [textlink="4.2 Выход из роли" link="CorvaxFrontierRule4_2"]
         </Box>
-        - [textlink="5. Отыгрыш антагонистов и пиратство" link="CorvaxFrontierRule5"]
+        - [textlink="5. Отыгрыш антагонистов" link="CorvaxFrontierRule5"]
         <Box Margin="5" Orientation="Vertical" HorizontalAlignment="Left">
           - [textlink="5.1 Пиратство" link="CorvaxFrontierRule5_1"] # Новое правило
         </Box>

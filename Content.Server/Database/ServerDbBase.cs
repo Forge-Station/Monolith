@@ -10,6 +10,7 @@ using Content.Server._Mono.Company;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Shared._Mono.Company;
+using Content.Shared._Forge.Company;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Ghost.Roles;
@@ -1996,21 +1997,24 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         // Mono
         #region Company
 
-        public async Task<bool> AddCompanyMember(Guid player, ProtoId<CompanyPrototype> company)
+        public async Task<bool> AddCompanyMember(Guid player, ProtoId<CompanyPrototype> company, int characterSlot, string characterName)
         {
             await using var db = await GetDb();
-            var exists = await db.DbContext.CompanyMembers
-                .Where(w => w.PlayerUserId == player)
-                .Where(w => w.CompanyId == company.Id)
-                .AnyAsync();
 
-            if (exists)
+            // One company per character.
+            var slotTaken = await db.DbContext.CompanyMembers
+                .Where(w => w.PlayerUserId == player)
+                .Where(w => w.CharacterSlot == characterSlot)
+                .AnyAsync();
+            if (slotTaken)
                 return false;
 
             var member = new CompanyMember
             {
                 PlayerUserId = player,
                 CompanyId = company,
+                CharacterSlot = characterSlot,
+                CharacterName = characterName,
             };
             db.DbContext.CompanyMembers.Add(member);
             await db.DbContext.SaveChangesAsync();
@@ -2023,7 +2027,32 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return await db.DbContext.CompanyMembers
                 .Where(w => w.PlayerUserId == player)
                 .Select(w => w.CompanyId)
+                .Distinct()
                 .ToListAsync(cancel);
+        }
+
+        public async Task<CompanyMemberRecord?> GetCompanyMemberForCharacter(Guid player, int characterSlot, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            var member = await db.DbContext.CompanyMembers
+                .Where(w => w.PlayerUserId == player)
+                .Where(w => w.CharacterSlot == characterSlot)
+                .Include(c => c.Player)
+                .FirstOrDefaultAsync(cancel);
+
+            if (member == null)
+                return null;
+
+            return new CompanyMemberRecord
+            {
+                Company = member.CompanyId,
+                Owner = member.Owner,
+                PlayerUserId = member.PlayerUserId,
+                CharacterSlot = member.CharacterSlot,
+                CharacterName = member.CharacterName,
+                LastSeenUserName = member.Player.LastSeenUserName,
+                RoleId = member.RoleId,
+            };
         }
 
         public async Task<IEnumerable<CompanyMemberRecord>> GetCompanyMembers(ProtoId<CompanyPrototype> company, CancellationToken cancel)
@@ -2039,7 +2068,10 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 Company = company,
                 Owner = m.Owner,
                 PlayerUserId = m.PlayerUserId,
+                CharacterSlot = m.CharacterSlot,
+                CharacterName = m.CharacterName,
                 LastSeenUserName = m.Player.LastSeenUserName,
+                RoleId = m.RoleId,
             });
         }
 
@@ -2055,7 +2087,10 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 Company = m.CompanyId,
                 Owner = m.Owner,
                 PlayerUserId = m.PlayerUserId,
+                CharacterSlot = m.CharacterSlot,
+                CharacterName = m.CharacterName,
                 LastSeenUserName = m.Player.LastSeenUserName,
+                RoleId = m.RoleId,
             });
         }
 
@@ -2066,7 +2101,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .Where(w => w.CompanyId == company.Id)
                 .Where(w => w.PlayerUserId == player)
                 .Include(c => c.Player)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancel);
 
             if (member == null)
                 return null;
@@ -2077,32 +2112,377 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 LastSeenUserName = member.Player.LastSeenUserName,
                 Owner = member.Owner,
                 PlayerUserId = member.PlayerUserId,
+                CharacterSlot = member.CharacterSlot,
+                CharacterName = member.CharacterName,
+                RoleId = member.RoleId,
             };
         }
 
-        public async Task SetCompanyOwner(ProtoId<CompanyPrototype> company, Guid player, bool owner)
+        public async Task SetCompanyOwner(ProtoId<CompanyPrototype> company, Guid player, int characterSlot, bool owner)
+        {
+            await using var db = await GetDb();
+
+            if (owner)
+            {
+                // Only one leader character per company; clear other owners first.
+                await db.DbContext.CompanyMembers
+                    .Where(w => w.CompanyId == company.Id && w.Owner)
+                    .ExecuteUpdateAsync(setters => setters.SetProperty(m => m.Owner, false));
+            }
+
+            await db.DbContext.CompanyMembers
+                .Where(w => w.CompanyId == company.Id)
+                .Where(w => w.PlayerUserId == player)
+                .Where(w => w.CharacterSlot == characterSlot)
+                .ExecuteUpdateAsync(setters => setters.SetProperty(m => m.Owner, owner));
+        }
+
+        public async Task SetCompanyMemberRole(ProtoId<CompanyPrototype> company, Guid player, int characterSlot, Guid? roleId)
         {
             await using var db = await GetDb();
             await db.DbContext.CompanyMembers
                 .Where(w => w.CompanyId == company.Id)
                 .Where(w => w.PlayerUserId == player)
-                .ExecuteUpdateAsync(setters => setters.SetProperty(m => m.Owner, owner));
+                .Where(w => w.CharacterSlot == characterSlot)
+                .ExecuteUpdateAsync(setters => setters.SetProperty(m => m.RoleId, roleId));
         }
 
-        public async Task<bool> RemoveCompanyMember(Guid player, ProtoId<CompanyPrototype> company)
+        public async Task<bool> RemoveCompanyMember(Guid player, ProtoId<CompanyPrototype> company, int? characterSlot = null)
         {
             await using var db = await GetDb();
-            var entry = await db.DbContext.CompanyMembers
+            var query = db.DbContext.CompanyMembers
                 .Where(w => w.PlayerUserId == player)
-                .Where(w => w.CompanyId == company.Id)
-                .SingleOrDefaultAsync();
+                .Where(w => w.CompanyId == company.Id);
 
-            if (entry == null)
+            if (characterSlot != null)
+                query = query.Where(w => w.CharacterSlot == characterSlot);
+
+            var entries = await query.ToListAsync();
+            if (entries.Count == 0)
                 return false;
 
-            db.DbContext.CompanyMembers.Remove(entry);
+            db.DbContext.CompanyMembers.RemoveRange(entries);
             await db.DbContext.SaveChangesAsync();
             return true;
+        }
+
+        // Forge: company organization
+        public async Task<List<CompanyRole>> GetCompanyRoles(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyRoles
+                .Where(r => r.CompanyId == companyId)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<CompanyRole?> GetCompanyRole(Guid roleId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyRoles.FirstOrDefaultAsync(r => r.Id == roleId, cancel);
+        }
+
+        public async Task<CompanyRole> UpsertCompanyRole(CompanyRole role)
+        {
+            await using var db = await GetDb();
+            var existing = await db.DbContext.CompanyRoles.FirstOrDefaultAsync(r => r.Id == role.Id);
+            if (existing == null)
+            {
+                db.DbContext.CompanyRoles.Add(role);
+            }
+            else
+            {
+                existing.Name = role.Name;
+                existing.Permissions = role.Permissions;
+                existing.AccessTier = role.AccessTier;
+                existing.IsDefault = role.IsDefault;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+            return role;
+        }
+
+        public async Task<bool> DeleteCompanyRole(Guid roleId)
+        {
+            await using var db = await GetDb();
+            var role = await db.DbContext.CompanyRoles.FirstOrDefaultAsync(r => r.Id == roleId);
+            if (role == null)
+                return false;
+
+            // Clear role from members
+            await db.DbContext.CompanyMembers
+                .Where(m => m.RoleId == roleId)
+                .ExecuteUpdateAsync(s => s.SetProperty(m => m.RoleId, (Guid?)null));
+
+            db.DbContext.CompanyRoles.Remove(role);
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task EnsureDefaultCompanyRole(string companyId)
+        {
+            await using var db = await GetDb();
+            var hasDefault = await db.DbContext.CompanyRoles
+                .AnyAsync(r => r.CompanyId == companyId && r.IsDefault);
+            if (hasDefault)
+                return;
+
+            db.DbContext.CompanyRoles.Add(new CompanyRole
+            {
+                Id = Guid.NewGuid(),
+                CompanyId = companyId,
+                Name = "Member",
+                Permissions = (long)Content.Shared._Forge.Company.CompanyPermission.MemberDefault,
+                AccessTier = (int)Content.Shared._Forge.Company.CompanyAccessTier.Low,
+                IsDefault = true,
+            });
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> GetCompanyBankBalance(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            var account = await db.DbContext.CompanyBankAccounts
+                .FirstOrDefaultAsync(a => a.CompanyId == companyId, cancel);
+            return account?.Balance ?? 0;
+        }
+
+        public async Task<Dictionary<string, int>> GetAllCompanyBankBalances(CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyBankAccounts
+                .ToDictionaryAsync(a => a.CompanyId, a => a.Balance, cancel);
+        }
+
+        public async Task SetCompanyBankBalance(string companyId, int balance)
+        {
+            await using var db = await GetDb();
+            var account = await db.DbContext.CompanyBankAccounts
+                .FirstOrDefaultAsync(a => a.CompanyId == companyId);
+            if (account == null)
+            {
+                db.DbContext.CompanyBankAccounts.Add(new CompanyBankAccount
+                {
+                    CompanyId = companyId,
+                    Balance = balance,
+                });
+            }
+            else
+            {
+                account.Balance = balance;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task EnsureCompanyBankAccount(string companyId)
+        {
+            await using var db = await GetDb();
+            if (await db.DbContext.CompanyBankAccounts.AnyAsync(a => a.CompanyId == companyId))
+                return;
+
+            db.DbContext.CompanyBankAccounts.Add(new CompanyBankAccount
+            {
+                CompanyId = companyId,
+                Balance = 0,
+            });
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<CompanyRelation>> GetCompanyRelations(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyRelations
+                .Where(r => r.CompanyAId == companyId || r.CompanyBId == companyId)
+                .ToListAsync(cancel);
+        }
+
+        public async Task SetCompanyRelation(string companyA, string companyB, int relationType)
+        {
+            // Canonicalize pair order
+            if (string.CompareOrdinal(companyA, companyB) > 0)
+                (companyA, companyB) = (companyB, companyA);
+
+            await using var db = await GetDb();
+            var existing = await db.DbContext.CompanyRelations
+                .FirstOrDefaultAsync(r => r.CompanyAId == companyA && r.CompanyBId == companyB);
+            if (existing == null)
+            {
+                db.DbContext.CompanyRelations.Add(new CompanyRelation
+                {
+                    CompanyAId = companyA,
+                    CompanyBId = companyB,
+                    RelationType = relationType,
+                });
+            }
+            else
+            {
+                existing.RelationType = relationType;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task ClearCompanyRelation(string companyA, string companyB)
+        {
+            if (string.CompareOrdinal(companyA, companyB) > 0)
+                (companyA, companyB) = (companyB, companyA);
+
+            await using var db = await GetDb();
+            var existing = await db.DbContext.CompanyRelations
+                .FirstOrDefaultAsync(r => r.CompanyAId == companyA && r.CompanyBId == companyB);
+            if (existing == null)
+                return;
+
+            db.DbContext.CompanyRelations.Remove(existing);
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<CompanyInvitation> AddCompanyInvitation(CompanyInvitation invite)
+        {
+            await using var db = await GetDb();
+            db.DbContext.CompanyInvitations.Add(invite);
+            await db.DbContext.SaveChangesAsync();
+            return invite;
+        }
+
+        public async Task<List<CompanyInvitation>> GetPendingInvitationsForPlayer(Guid player, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations
+                .Include(i => i.FromPlayer)
+                .Include(i => i.TargetPlayer)
+                .Where(i => i.TargetUserId == player && i.Status == 0)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<List<CompanyInvitation>> GetPendingInvitationsForCompany(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations
+                .Include(i => i.FromPlayer)
+                .Include(i => i.TargetPlayer)
+                .Where(i => i.CompanyId == companyId && i.Status == 0)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<CompanyInvitation?> GetCompanyInvitation(Guid inviteId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations
+                .Include(i => i.FromPlayer)
+                .Include(i => i.TargetPlayer)
+                .FirstOrDefaultAsync(i => i.Id == inviteId, cancel);
+        }
+
+        public async Task SetCompanyInvitationStatus(Guid inviteId, int status)
+        {
+            await using var db = await GetDb();
+            await db.DbContext.CompanyInvitations
+                .Where(i => i.Id == inviteId)
+                .ExecuteUpdateAsync(s => s.SetProperty(i => i.Status, status));
+        }
+
+        public async Task<bool> DeleteCompanyInvitation(Guid inviteId)
+        {
+            await using var db = await GetDb();
+            var removed = await db.DbContext.CompanyInvitations
+                .Where(i => i.Id == inviteId)
+                .ExecuteDeleteAsync();
+            return removed > 0;
+        }
+
+        /// <summary>
+        /// Removes non-pending invitation rows left from older builds.
+        /// </summary>
+        public async Task<int> PurgeResolvedCompanyInvitations(CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations
+                .Where(i => i.Status != 0)
+                .ExecuteDeleteAsync(cancel);
+        }
+
+        public async Task<bool> HasPendingCompanyInvitation(string companyId, Guid targetUserId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations.AnyAsync(
+                i => i.CompanyId == companyId && i.TargetUserId == targetUserId && i.Status == 0,
+                cancel);
+        }
+
+        public async Task<int> CountPendingInvitationsForCompany(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations.CountAsync(
+                i => i.CompanyId == companyId && i.Status == 0,
+                cancel);
+        }
+
+        public async Task AddCompanyLog(CompanyLog log, int keep = CompanyOrgLimits.MaxLogsPerCompany)
+        {
+            if (log.Message.Length > CompanyOrgLimits.MaxLogMessageLength)
+                log.Message = log.Message[..CompanyOrgLimits.MaxLogMessageLength];
+
+            await using var db = await GetDb();
+            db.DbContext.CompanyLogs.Add(log);
+            await db.DbContext.SaveChangesAsync();
+
+            if (keep <= 0)
+                return;
+
+            var excessIds = await db.DbContext.CompanyLogs
+                .Where(l => l.CompanyId == log.CompanyId)
+                .OrderByDescending(l => l.Timestamp)
+                .ThenByDescending(l => l.Id)
+                .Skip(keep)
+                .Select(l => l.Id)
+                .ToListAsync();
+
+            if (excessIds.Count == 0)
+                return;
+
+            await db.DbContext.CompanyLogs
+                .Where(l => excessIds.Contains(l.Id))
+                .ExecuteDeleteAsync();
+        }
+
+        public async Task<List<CompanyLog>> GetCompanyLogs(string companyId, int limit = 100, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyLogs
+                .Where(l => l.CompanyId == companyId)
+                .OrderByDescending(l => l.Timestamp)
+                .Take(limit)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<string> GetCompanyBulletin(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            var bulletin = await db.DbContext.CompanyBulletins
+                .FirstOrDefaultAsync(b => b.CompanyId == companyId, cancel);
+            return bulletin?.Text ?? string.Empty;
+        }
+
+        public async Task SetCompanyBulletin(string companyId, string text)
+        {
+            await using var db = await GetDb();
+            var bulletin = await db.DbContext.CompanyBulletins
+                .FirstOrDefaultAsync(b => b.CompanyId == companyId);
+            if (bulletin == null)
+            {
+                db.DbContext.CompanyBulletins.Add(new CompanyBulletin
+                {
+                    CompanyId = companyId,
+                    Text = text,
+                });
+            }
+            else
+            {
+                bulletin.Text = text;
+            }
+
+            await db.DbContext.SaveChangesAsync();
         }
 
         #endregion

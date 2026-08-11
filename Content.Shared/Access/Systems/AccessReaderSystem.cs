@@ -118,36 +118,40 @@ public sealed partial class AccessReaderSystem : EntitySystem
         if (!reader.Enabled)
             return true;
 
-        // Forge-change-start
-        if (!string.IsNullOrEmpty(reader.RequiredCompany))
+        // Forge-change-start: company gate uses the main reader (door electronics board when present).
+        if (GetMainAccessReader(target, out var mainReaderEnt))
         {
-            string? idCompanyName = null;
-
-            if (FindAccessItemsInventory(user, out var items))
+            var companyReader = mainReaderEnt.Value.Comp;
+            if (!string.IsNullOrEmpty(companyReader.RequiredCompany))
             {
-                foreach (var item in items)
-                {
-                    // ID Card
-                    if (TryComp<IdCardComponent>(item, out var id))
-                    {
-                        idCompanyName = id.CompanyName;
-                        break;
-                    }
+                string? idCompanyName = null;
 
-                    // PDA
-                    if (TryComp<PdaComponent>(item, out var pda)
-                        && pda.ContainedId != null
-                        && TryComp(pda.ContainedId, out id))
+                if (FindAccessItemsInventory(user, out var items))
+                {
+                    foreach (var item in items)
                     {
-                        idCompanyName = id.CompanyName;
-                        break;
+                        if (TryComp<IdCardComponent>(item, out var id))
+                        {
+                            idCompanyName = id.CompanyName;
+                            break;
+                        }
+
+                        if (TryComp<PdaComponent>(item, out var pda)
+                            && pda.ContainedId != null
+                            && TryComp(pda.ContainedId, out id))
+                        {
+                            idCompanyName = id.CompanyName;
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (idCompanyName != reader.RequiredCompany)
-            {
-                return false;
+                // Also accept matching CompanyComponent on the mob (e.g. after invite sync).
+                if (idCompanyName == null && TryComp<CompanyComponent>(user, out var userCompany))
+                    idCompanyName = userCompany.CompanyName;
+
+                if (idCompanyName != companyReader.RequiredCompany)
+                    return false;
             }
         }
         // Forge-change-end

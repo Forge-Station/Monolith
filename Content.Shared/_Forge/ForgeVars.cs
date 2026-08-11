@@ -35,6 +35,12 @@ public sealed class ForgeVars
     public static readonly CVarDef<float> BoardingTeleportVolume =
         CVarDef.Create("forge.boarding_teleport_volume", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    /// <summary>
+    /// Selected company PDA UI palette prototype id. Colored palettes require sponsor.
+    /// </summary>
+    public static readonly CVarDef<string> CompanyUiPalette =
+        CVarDef.Create("forge.company_ui_palette", "CompanyUiGrey", CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<string> DiscordApiUrl =
         CVarDef.Create("jerry.discord_api_url", "", CVar.CONFIDENTIAL | CVar.SERVERONLY);
 

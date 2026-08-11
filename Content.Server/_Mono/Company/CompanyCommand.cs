@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Shared._Mono.Company;
 using Content.Shared.Administration;
+using Robust.Server.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
@@ -54,7 +55,19 @@ public sealed partial class CompanyCommand : ToolshedCommand
             return;
         }
 
-        _company.AddMember(lookup.UserId, company);
+        var ok = await _company.AddMemberForPlayer(lookup.UserId, company);
+        if (!ok)
+        {
+            ctx.WriteLine(Loc.GetString("cmd-company-memberadd-already-whitelisted",
+                ("player", username),
+                ("companyId", company.Id),
+                ("companyName", companyPrototype.Name)));
+            return;
+        }
+
+        if (IoCManager.Resolve<IPlayerManager>().TryGetSessionById(lookup.UserId, out var session))
+            EntitySystem.Get<CompanySystem>().TryApplyMembershipToSession(session);
+
         ctx.WriteLine(Loc.GetString("cmd-company-memberadd-added",
             ("player", username),
             ("companyId", company.Id),

@@ -14,6 +14,7 @@ public sealed class JobWhitelistsEuiState : EuiStateBase
     public HashSet<ProtoId<JobPrototype>> Whitelists;
     public HashSet<ProtoId<GhostRolePrototype>> GhostRoleWhitelists;
     public HashSet<ProtoId<CompanyPrototype>> CompanyWhitelists; // Forge-Change: company whitelist
+    public HashSet<ProtoId<CompanyPrototype>> CompanyOwners; // Forge-Change: company owners
     public bool GlobalWhitelist;
 
     public JobWhitelistsEuiState(
@@ -21,12 +22,14 @@ public sealed class JobWhitelistsEuiState : EuiStateBase
         HashSet<ProtoId<JobPrototype>> whitelists,
         HashSet<ProtoId<GhostRolePrototype>> ghostRoleWhitelists,
         HashSet<ProtoId<CompanyPrototype>> companyWhitelists, // Forge-Change: company whitelist
+        HashSet<ProtoId<CompanyPrototype>> companyOwners, // Forge-Change: company owners
         bool globalWhitelist)
     {
         PlayerName = playerName;
         Whitelists = whitelists;
         GhostRoleWhitelists = ghostRoleWhitelists;
         CompanyWhitelists = companyWhitelists; // Forge-Change: company whitelist
+        CompanyOwners = companyOwners; // Forge-Change: company owners
         GlobalWhitelist = globalWhitelist;
     }
 }
@@ -91,6 +94,22 @@ public sealed class SetCompanyWhitelistedMessage : EuiMessageBase
     {
         CompanyId = companyId;
         Whitelisting = whitelisting;
+    }
+}
+
+/// <summary>
+/// Forge: set or clear company owner (leader) for a player.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class SetCompanyOwnerMessage : EuiMessageBase
+{
+    public string CompanyId;
+    public bool Owner;
+
+    public SetCompanyOwnerMessage(string companyId, bool owner)
+    {
+        CompanyId = companyId;
+        Owner = owner;
     }
 }
 /// Forge-Change-end: company whitelist

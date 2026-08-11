@@ -1,0 +1,874 @@
+﻿# Auto-generated company access tiers (Low / Medium / High)
+# IDs: {CompanyId}TierLow|Medium|High
+
+- type: accessLevel
+  id: TSFTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: TSFTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: TSFTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: TSFTierLow
+  tags:
+  - TSFTierLow
+
+- type: accessGroup
+  id: TSFTierMedium
+  tags:
+  - TSFTierLow
+  - TSFTierMedium
+
+- type: accessGroup
+  id: TSFTierHigh
+  tags:
+  - TSFTierLow
+  - TSFTierMedium
+  - TSFTierHigh
+
+- type: accessLevel
+  id: PDVTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: PDVTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: PDVTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: PDVTierLow
+  tags:
+  - PDVTierLow
+
+- type: accessGroup
+  id: PDVTierMedium
+  tags:
+  - PDVTierLow
+  - PDVTierMedium
+
+- type: accessGroup
+  id: PDVTierHigh
+  tags:
+  - PDVTierLow
+  - PDVTierMedium
+  - PDVTierHigh
+
+- type: accessLevel
+  id: MDTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: MDTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: MDTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: MDTierLow
+  tags:
+  - MDTierLow
+
+- type: accessGroup
+  id: MDTierMedium
+  tags:
+  - MDTierLow
+  - MDTierMedium
+
+- type: accessGroup
+  id: MDTierHigh
+  tags:
+  - MDTierLow
+  - MDTierMedium
+  - MDTierHigh
+
+- type: accessLevel
+  id: ColonialTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: ColonialTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: ColonialTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: ColonialTierLow
+  tags:
+  - ColonialTierLow
+
+- type: accessGroup
+  id: ColonialTierMedium
+  tags:
+  - ColonialTierLow
+  - ColonialTierMedium
+
+- type: accessGroup
+  id: ColonialTierHigh
+  tags:
+  - ColonialTierLow
+  - ColonialTierMedium
+  - ColonialTierHigh
+
+- type: accessLevel
+  id: TSFHighCommTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: TSFHighCommTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: TSFHighCommTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: TSFHighCommTierLow
+  tags:
+  - TSFHighCommTierLow
+
+- type: accessGroup
+  id: TSFHighCommTierMedium
+  tags:
+  - TSFHighCommTierLow
+  - TSFHighCommTierMedium
+
+- type: accessGroup
+  id: TSFHighCommTierHigh
+  tags:
+  - TSFHighCommTierLow
+  - TSFHighCommTierMedium
+  - TSFHighCommTierHigh
+
+- type: accessLevel
+  id: DrakeIndustriesTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: DrakeIndustriesTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: DrakeIndustriesTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: DrakeIndustriesTierLow
+  tags:
+  - DrakeIndustriesTierLow
+
+- type: accessGroup
+  id: DrakeIndustriesTierMedium
+  tags:
+  - DrakeIndustriesTierLow
+  - DrakeIndustriesTierMedium
+
+- type: accessGroup
+  id: DrakeIndustriesTierHigh
+  tags:
+  - DrakeIndustriesTierLow
+  - DrakeIndustriesTierMedium
+  - DrakeIndustriesTierHigh
+
+- type: accessLevel
+  id: SteelHammerManufacturingTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: SteelHammerManufacturingTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: SteelHammerManufacturingTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: SteelHammerManufacturingTierLow
+  tags:
+  - SteelHammerManufacturingTierLow
+
+- type: accessGroup
+  id: SteelHammerManufacturingTierMedium
+  tags:
+  - SteelHammerManufacturingTierLow
+  - SteelHammerManufacturingTierMedium
+
+- type: accessGroup
+  id: SteelHammerManufacturingTierHigh
+  tags:
+  - SteelHammerManufacturingTierLow
+  - SteelHammerManufacturingTierMedium
+  - SteelHammerManufacturingTierHigh
+
+- type: accessLevel
+  id: HarmonyMedicalEnterprisesTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: HarmonyMedicalEnterprisesTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: HarmonyMedicalEnterprisesTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: HarmonyMedicalEnterprisesTierLow
+  tags:
+  - HarmonyMedicalEnterprisesTierLow
+
+- type: accessGroup
+  id: HarmonyMedicalEnterprisesTierMedium
+  tags:
+  - HarmonyMedicalEnterprisesTierLow
+  - HarmonyMedicalEnterprisesTierMedium
+
+- type: accessGroup
+  id: HarmonyMedicalEnterprisesTierHigh
+  tags:
+  - HarmonyMedicalEnterprisesTierLow
+  - HarmonyMedicalEnterprisesTierMedium
+  - HarmonyMedicalEnterprisesTierHigh
+
+- type: accessLevel
+  id: MidnightArmsCoTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: MidnightArmsCoTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: MidnightArmsCoTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: MidnightArmsCoTierLow
+  tags:
+  - MidnightArmsCoTierLow
+
+- type: accessGroup
+  id: MidnightArmsCoTierMedium
+  tags:
+  - MidnightArmsCoTierLow
+  - MidnightArmsCoTierMedium
+
+- type: accessGroup
+  id: MidnightArmsCoTierHigh
+  tags:
+  - MidnightArmsCoTierLow
+  - MidnightArmsCoTierMedium
+  - MidnightArmsCoTierHigh
+
+- type: accessLevel
+  id: USSPTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: USSPTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: USSPTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: USSPTierLow
+  tags:
+  - USSPTierLow
+
+- type: accessGroup
+  id: USSPTierMedium
+  tags:
+  - USSPTierLow
+  - USSPTierMedium
+
+- type: accessGroup
+  id: USSPTierHigh
+  tags:
+  - USSPTierLow
+  - USSPTierMedium
+  - USSPTierHigh
+
+- type: accessLevel
+  id: MMCTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: MMCTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: MMCTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: MMCTierLow
+  tags:
+  - MMCTierLow
+
+- type: accessGroup
+  id: MMCTierMedium
+  tags:
+  - MMCTierLow
+  - MMCTierMedium
+
+- type: accessGroup
+  id: MMCTierHigh
+  tags:
+  - MMCTierLow
+  - MMCTierMedium
+  - MMCTierHigh
+
+- type: accessLevel
+  id: DarkMatterEnterprisesTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: DarkMatterEnterprisesTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: DarkMatterEnterprisesTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: DarkMatterEnterprisesTierLow
+  tags:
+  - DarkMatterEnterprisesTierLow
+
+- type: accessGroup
+  id: DarkMatterEnterprisesTierMedium
+  tags:
+  - DarkMatterEnterprisesTierLow
+  - DarkMatterEnterprisesTierMedium
+
+- type: accessGroup
+  id: DarkMatterEnterprisesTierHigh
+  tags:
+  - DarkMatterEnterprisesTierLow
+  - DarkMatterEnterprisesTierMedium
+  - DarkMatterEnterprisesTierHigh
+
+- type: accessLevel
+  id: AetherionDynamicsTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: AetherionDynamicsTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: AetherionDynamicsTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: AetherionDynamicsTierLow
+  tags:
+  - AetherionDynamicsTierLow
+
+- type: accessGroup
+  id: AetherionDynamicsTierMedium
+  tags:
+  - AetherionDynamicsTierLow
+  - AetherionDynamicsTierMedium
+
+- type: accessGroup
+  id: AetherionDynamicsTierHigh
+  tags:
+  - AetherionDynamicsTierLow
+  - AetherionDynamicsTierMedium
+  - AetherionDynamicsTierHigh
+
+- type: accessLevel
+  id: HorizonEnergyTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: HorizonEnergyTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: HorizonEnergyTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: HorizonEnergyTierLow
+  tags:
+  - HorizonEnergyTierLow
+
+- type: accessGroup
+  id: HorizonEnergyTierMedium
+  tags:
+  - HorizonEnergyTierLow
+  - HorizonEnergyTierMedium
+
+- type: accessGroup
+  id: HorizonEnergyTierHigh
+  tags:
+  - HorizonEnergyTierLow
+  - HorizonEnergyTierMedium
+  - HorizonEnergyTierHigh
+
+- type: accessLevel
+  id: UniversalStatesOfAmericaTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: UniversalStatesOfAmericaTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: UniversalStatesOfAmericaTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: UniversalStatesOfAmericaTierLow
+  tags:
+  - UniversalStatesOfAmericaTierLow
+
+- type: accessGroup
+  id: UniversalStatesOfAmericaTierMedium
+  tags:
+  - UniversalStatesOfAmericaTierLow
+  - UniversalStatesOfAmericaTierMedium
+
+- type: accessGroup
+  id: UniversalStatesOfAmericaTierHigh
+  tags:
+  - UniversalStatesOfAmericaTierLow
+  - UniversalStatesOfAmericaTierMedium
+  - UniversalStatesOfAmericaTierHigh
+
+- type: accessLevel
+  id: CivilDefenseMilitaTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: CivilDefenseMilitaTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: CivilDefenseMilitaTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: CivilDefenseMilitaTierLow
+  tags:
+  - CivilDefenseMilitaTierLow
+
+- type: accessGroup
+  id: CivilDefenseMilitaTierMedium
+  tags:
+  - CivilDefenseMilitaTierLow
+  - CivilDefenseMilitaTierMedium
+
+- type: accessGroup
+  id: CivilDefenseMilitaTierHigh
+  tags:
+  - CivilDefenseMilitaTierLow
+  - CivilDefenseMilitaTierMedium
+  - CivilDefenseMilitaTierHigh
+
+- type: accessLevel
+  id: UllmanIndustriesTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: UllmanIndustriesTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: UllmanIndustriesTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: UllmanIndustriesTierLow
+  tags:
+  - UllmanIndustriesTierLow
+
+- type: accessGroup
+  id: UllmanIndustriesTierMedium
+  tags:
+  - UllmanIndustriesTierLow
+  - UllmanIndustriesTierMedium
+
+- type: accessGroup
+  id: UllmanIndustriesTierHigh
+  tags:
+  - UllmanIndustriesTierLow
+  - UllmanIndustriesTierMedium
+  - UllmanIndustriesTierHigh
+
+- type: accessLevel
+  id: NosskeEienResearchandDevelopmentTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: NosskeEienResearchandDevelopmentTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: NosskeEienResearchandDevelopmentTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: NosskeEienResearchandDevelopmentTierLow
+  tags:
+  - NosskeEienResearchandDevelopmentTierLow
+
+- type: accessGroup
+  id: NosskeEienResearchandDevelopmentTierMedium
+  tags:
+  - NosskeEienResearchandDevelopmentTierLow
+  - NosskeEienResearchandDevelopmentTierMedium
+
+- type: accessGroup
+  id: NosskeEienResearchandDevelopmentTierHigh
+  tags:
+  - NosskeEienResearchandDevelopmentTierLow
+  - NosskeEienResearchandDevelopmentTierMedium
+  - NosskeEienResearchandDevelopmentTierHigh
+
+- type: accessLevel
+  id: blackhawkpmcTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: blackhawkpmcTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: blackhawkpmcTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: blackhawkpmcTierLow
+  tags:
+  - blackhawkpmcTierLow
+
+- type: accessGroup
+  id: blackhawkpmcTierMedium
+  tags:
+  - blackhawkpmcTierLow
+  - blackhawkpmcTierMedium
+
+- type: accessGroup
+  id: blackhawkpmcTierHigh
+  tags:
+  - blackhawkpmcTierLow
+  - blackhawkpmcTierMedium
+  - blackhawkpmcTierHigh
+
+- type: accessLevel
+  id: TheHiveTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: TheHiveTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: TheHiveTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: TheHiveTierLow
+  tags:
+  - TheHiveTierLow
+
+- type: accessGroup
+  id: TheHiveTierMedium
+  tags:
+  - TheHiveTierLow
+  - TheHiveTierMedium
+
+- type: accessGroup
+  id: TheHiveTierHigh
+  tags:
+  - TheHiveTierLow
+  - TheHiveTierMedium
+  - TheHiveTierHigh
+
+- type: accessLevel
+  id: paycheckbratvaTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: paycheckbratvaTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: paycheckbratvaTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: paycheckbratvaTierLow
+  tags:
+  - paycheckbratvaTierLow
+
+- type: accessGroup
+  id: paycheckbratvaTierMedium
+  tags:
+  - paycheckbratvaTierLow
+  - paycheckbratvaTierMedium
+
+- type: accessGroup
+  id: paycheckbratvaTierHigh
+  tags:
+  - paycheckbratvaTierLow
+  - paycheckbratvaTierMedium
+  - paycheckbratvaTierHigh
+
+- type: accessLevel
+  id: CerberusSurplusProvisionsTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: CerberusSurplusProvisionsTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: CerberusSurplusProvisionsTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: CerberusSurplusProvisionsTierLow
+  tags:
+  - CerberusSurplusProvisionsTierLow
+
+- type: accessGroup
+  id: CerberusSurplusProvisionsTierMedium
+  tags:
+  - CerberusSurplusProvisionsTierLow
+  - CerberusSurplusProvisionsTierMedium
+
+- type: accessGroup
+  id: CerberusSurplusProvisionsTierHigh
+  tags:
+  - CerberusSurplusProvisionsTierLow
+  - CerberusSurplusProvisionsTierMedium
+  - CerberusSurplusProvisionsTierHigh
+
+- type: accessLevel
+  id: TheViperGroupTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: TheViperGroupTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: TheViperGroupTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: TheViperGroupTierLow
+  tags:
+  - TheViperGroupTierLow
+
+- type: accessGroup
+  id: TheViperGroupTierMedium
+  tags:
+  - TheViperGroupTierLow
+  - TheViperGroupTierMedium
+
+- type: accessGroup
+  id: TheViperGroupTierHigh
+  tags:
+  - TheViperGroupTierLow
+  - TheViperGroupTierMedium
+  - TheViperGroupTierHigh
+
+- type: accessLevel
+  id: RedSailCorsairsTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: RedSailCorsairsTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: RedSailCorsairsTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: RedSailCorsairsTierLow
+  tags:
+  - RedSailCorsairsTierLow
+
+- type: accessGroup
+  id: RedSailCorsairsTierMedium
+  tags:
+  - RedSailCorsairsTierLow
+  - RedSailCorsairsTierMedium
+
+- type: accessGroup
+  id: RedSailCorsairsTierHigh
+  tags:
+  - RedSailCorsairsTierLow
+  - RedSailCorsairsTierMedium
+  - RedSailCorsairsTierHigh
+
+- type: accessLevel
+  id: PLXCORTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: PLXCORTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: PLXCORTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: PLXCORTierLow
+  tags:
+  - PLXCORTierLow
+
+- type: accessGroup
+  id: PLXCORTierMedium
+  tags:
+  - PLXCORTierLow
+  - PLXCORTierMedium
+
+- type: accessGroup
+  id: PLXCORTierHigh
+  tags:
+  - PLXCORTierLow
+  - PLXCORTierMedium
+  - PLXCORTierHigh
+
+- type: accessLevel
+  id: ImperialTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: ImperialTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: ImperialTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: ImperialTierLow
+  tags:
+  - ImperialTierLow
+
+- type: accessGroup
+  id: ImperialTierMedium
+  tags:
+  - ImperialTierLow
+  - ImperialTierMedium
+
+- type: accessGroup
+  id: ImperialTierHigh
+  tags:
+  - ImperialTierLow
+  - ImperialTierMedium
+  - ImperialTierHigh
+
+- type: accessLevel
+  id: TechnicLogisticTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: TechnicLogisticTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: TechnicLogisticTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: TechnicLogisticTierLow
+  tags:
+  - TechnicLogisticTierLow
+
+- type: accessGroup
+  id: TechnicLogisticTierMedium
+  tags:
+  - TechnicLogisticTierLow
+  - TechnicLogisticTierMedium
+
+- type: accessGroup
+  id: TechnicLogisticTierHigh
+  tags:
+  - TechnicLogisticTierLow
+  - TechnicLogisticTierMedium
+  - TechnicLogisticTierHigh
+
+- type: accessLevel
+  id: NexusTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: NexusTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: NexusTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: NexusTierLow
+  tags:
+  - NexusTierLow
+
+- type: accessGroup
+  id: NexusTierMedium
+  tags:
+  - NexusTierLow
+  - NexusTierMedium
+
+- type: accessGroup
+  id: NexusTierHigh
+  tags:
+  - NexusTierLow
+  - NexusTierMedium
+  - NexusTierHigh
+
+- type: accessLevel
+  id: RenegatesTierLow
+  name: id-card-access-level-company-tier-low
+
+- type: accessLevel
+  id: RenegatesTierMedium
+  name: id-card-access-level-company-tier-medium
+
+- type: accessLevel
+  id: RenegatesTierHigh
+  name: id-card-access-level-company-tier-high
+
+- type: accessGroup
+  id: RenegatesTierLow
+  tags:
+  - RenegatesTierLow
+
+- type: accessGroup
+  id: RenegatesTierMedium
+  tags:
+  - RenegatesTierLow
+  - RenegatesTierMedium
+
+- type: accessGroup
+  id: RenegatesTierHigh
+  tags:
+  - RenegatesTierLow
+  - RenegatesTierMedium
+  - RenegatesTierHigh
+
+

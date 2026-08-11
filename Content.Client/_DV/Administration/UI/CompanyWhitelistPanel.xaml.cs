@@ -4,20 +4,22 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 
-// Forge-Change-full: company whitelist
+// Forge-Change-full: company whitelist + owners
 namespace Content.Client._DV.Administration.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class CompanyWhitelistPanel : PanelContainer
 {
     public Action<string, bool>? OnSetCompany;
+    public Action<string, bool>? OnSetOwner;
 
     public CompanyWhitelistPanel(
         List<string> companies,
         string title,
         Color color,
         IPrototypeManager proto,
-        HashSet<string> whitelists)
+        HashSet<string> whitelists,
+        HashSet<string> owners)
     {
         RobustXamlLoader.Load(this);
 
@@ -28,26 +30,46 @@ public sealed partial class CompanyWhitelistPanel : PanelContainer
                 continue;
 
             var thisCompany = id;
-            var button = new CheckBox
+            var row = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
+
+            var memberBox = new CheckBox
             {
                 Text = company.Name,
                 Pressed = whitelists.Contains(id),
+                MinWidth = 180,
             };
-            button.OnPressed += _ => OnButtonPressed(thisCompany, button);
-            CompaniesContainer.AddChild(button);
+            memberBox.OnPressed += _ => OnSetCompany?.Invoke(thisCompany, memberBox.Pressed);
 
-            allWhitelisted &= button.Pressed;
+            var ownerBox = new CheckBox
+            {
+                Text = Loc.GetString("company-admin-owner"),
+                Pressed = owners.Contains(id),
+                Disabled = !memberBox.Pressed,
+                ToolTip = Loc.GetString("company-admin-owner-tooltip"),
+            };
+            ownerBox.OnPressed += _ => OnSetOwner?.Invoke(thisCompany, ownerBox.Pressed);
+
+            memberBox.OnPressed += _ =>
+            {
+                ownerBox.Disabled = !memberBox.Pressed;
+                if (!memberBox.Pressed && ownerBox.Pressed)
+                {
+                    ownerBox.Pressed = false;
+                    OnSetOwner?.Invoke(thisCompany, false);
+                }
+            };
+
+            row.AddChild(memberBox);
+            row.AddChild(ownerBox);
+            CompaniesContainer.AddChild(row);
+
+            allWhitelisted &= memberBox.Pressed;
         }
 
         CompaniesSet.Text = title;
         CompaniesSet.Modulate = color;
         CompaniesSet.Pressed = allWhitelisted;
         CompaniesSet.OnPressed += _ => OnSetPressed(companies, whitelists);
-    }
-
-    private void OnButtonPressed(string companyId, CheckBox button)
-    {
-        OnSetCompany?.Invoke(companyId, button.Pressed);
     }
 
     private void OnSetPressed(List<string> companies, HashSet<string> whitelists)

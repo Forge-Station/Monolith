@@ -1,0 +1,61 @@
+<cartridges:CompanyManagementUiFragment
+    xmlns:cartridges="clr-namespace:Content.Client._Forge.Company"
+    xmlns="https://spacestation14.io"
+    Margin="0"
+    VerticalExpand="True"
+    HorizontalExpand="True"
+    Orientation="Vertical">
+
+    <PanelContainer Name="ContentBorder" StyleClasses="PdaBackground" HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer Name="ContentBackground" StyleClasses="PdaContentBackground" Margin="2" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" Margin="6 4" HorizontalExpand="True" VerticalExpand="True">
+
+                <BoxContainer Orientation="Horizontal" Margin="2 0 2 2" SeparationOverride="6">
+                    <Label Name="HeaderLabel" StyleClasses="LabelHeading" HorizontalExpand="True"/>
+                    <Button Name="PalettePreviewToggle" Text="" MinWidth="70"/>
+                    <OptionButton Name="PaletteOption" MinWidth="110" ToolTip=""/>
+                </BoxContainer>
+
+                <Label Name="StatusLabel" Margin="2 0 2 2"/>
+
+                <!-- Full palette mockup: how the UI looks with the selected colors -->
+                <PanelContainer Name="PaletteMockupOuter" Visible="False" Margin="0 0 0 6" HorizontalExpand="True">
+                    <BoxContainer Orientation="Vertical" Margin="6" SeparationOverride="4">
+                        <Label Name="PaletteMockupCaption"/>
+                        <PanelContainer Name="PaletteMockupFrame" HorizontalExpand="True">
+                            <BoxContainer Orientation="Vertical" Margin="6" SeparationOverride="4">
+                                <BoxContainer Orientation="Horizontal">
+                                    <Label Name="PaletteMockupTitle" HorizontalExpand="True"/>
+                                    <Label Name="PaletteMockupMeta"/>
+                                </BoxContainer>
+                                <PanelContainer Name="PaletteMockupDivider" SetHeight="2" HorizontalExpand="True"/>
+                                <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                                    <PanelContainer Name="PaletteMockupTabActive" MinWidth="70">
+                                        <Label Name="PaletteMockupTabActiveLabel" Margin="6 3"/>
+                                    </PanelContainer>
+                                    <PanelContainer Name="PaletteMockupTabIdle" MinWidth="70">
+                                        <Label Name="PaletteMockupTabIdleLabel" Margin="6 3"/>
+                                    </PanelContainer>
+                                </BoxContainer>
+                                <PanelContainer Name="PaletteMockupCard" HorizontalExpand="True">
+                                    <BoxContainer Orientation="Vertical" Margin="6" SeparationOverride="2">
+                                        <Label Name="PaletteMockupCardHeading"/>
+                                        <Label Name="PaletteMockupCardText"/>
+                                        <PanelContainer Name="PaletteMockupButton" HorizontalAlignment="Left" Margin="0 4 0 0">
+                                            <Label Name="PaletteMockupButtonLabel" Margin="8 3"/>
+                                        </PanelContainer>
+                                    </BoxContainer>
+                                </PanelContainer>
+                            </BoxContainer>
+                        </PanelContainer>
+                    </BoxContainer>
+                </PanelContainer>
+
+                <PanelContainer Name="MainDivider" HorizontalExpand="True" SetHeight="2" Margin="0 2 0 4"/>
+
+                <TabContainer Name="Tabs" VerticalExpand="True" HorizontalExpand="True" Access="Public"/>
+
+            </BoxContainer>
+        </PanelContainer>
+    </PanelContainer>
+</cartridges:CompanyManagementUiFragment>

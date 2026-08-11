@@ -215,6 +215,7 @@ public sealed partial class SponsorWindow : FancyWindow
             var perks = new StringBuilder();
             perks.AppendLine(Loc.GetString("sponsor-window-perk-ooc"));
             perks.AppendLine(Loc.GetString("sponsor-window-perk-looc"));
+            perks.AppendLine(Loc.GetString("sponsor-window-perk-company-ui"));
             if (hasGhostSkin)
                 perks.AppendLine(Loc.GetString("sponsor-window-perk-ghost-skin"));
 

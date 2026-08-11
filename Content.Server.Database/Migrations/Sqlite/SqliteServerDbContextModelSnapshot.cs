@@ -550,13 +550,133 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("blacklist", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CompanyBankAccount", b =>
+                {
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("company_id");
+
+                    b.Property<int>("Balance")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("balance");
+
+                    b.HasKey("CompanyId")
+                        .HasName("PK_company_bank_accounts");
+
+                    b.ToTable("company_bank_accounts", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyBulletin", b =>
+                {
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("company_id");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("text");
+
+                    b.HasKey("CompanyId")
+                        .HasName("PK_company_bulletins");
+
+                    b.ToTable("company_bulletins", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyInvitation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("company_invitations_id");
+
+                    b.Property<string>("CompanyId")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("company_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid>("FromUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("from_user_id");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("status");
+
+                    b.Property<Guid>("TargetUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("target_user_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_company_invitations");
+
+                    b.HasIndex("FromUserId");
+
+                    b.HasIndex("TargetUserId");
+
+                    b.HasIndex("CompanyId", "TargetUserId", "Status");
+
+                    b.ToTable("company_invitations", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyLog", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("company_logs_id");
+
+                    b.Property<Guid?>("ActorUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("actor_user_id");
+
+                    b.Property<string>("CompanyId")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("company_id");
+
+                    b.Property<int>("LogType")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("log_type");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("message");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("timestamp");
+
+                    b.HasKey("Id")
+                        .HasName("PK_company_logs");
+
+                    b.HasIndex("CompanyId", "Timestamp");
+
+                    b.ToTable("company_logs", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.CompanyMember", b =>
                 {
                     b.Property<Guid>("PlayerUserId")
                         .HasColumnType("TEXT")
                         .HasColumnName("player_user_id");
 
+                    b.Property<int>("CharacterSlot")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("character_slot");
+
+                    b.Property<string>("CharacterName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("character_name");
+
                     b.Property<string>("CompanyId")
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("company_id");
 
@@ -564,10 +684,72 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("owner");
 
-                    b.HasKey("PlayerUserId", "CompanyId")
+                    b.Property<Guid?>("RoleId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("role_id");
+
+                    b.HasKey("PlayerUserId", "CharacterSlot")
                         .HasName("PK_company_members");
 
                     b.ToTable("company_members", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyRelation", b =>
+                {
+                    b.Property<string>("CompanyAId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("company_a_id");
+
+                    b.Property<string>("CompanyBId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("company_b_id");
+
+                    b.Property<int>("RelationType")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("relation_type");
+
+                    b.HasKey("CompanyAId", "CompanyBId")
+                        .HasName("PK_company_relations");
+
+                    b.ToTable("company_relations", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("company_roles_id");
+
+                    b.Property<int>("AccessTier")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("access_tier");
+
+                    b.Property<string>("CompanyId")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("company_id");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("is_default");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("name");
+
+                    b.Property<long>("Permissions")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("permissions");
+
+                    b.HasKey("Id")
+                        .HasName("PK_company_roles");
+
+                    b.HasIndex("CompanyId", "Name")
+                        .IsUnique();
+
+                    b.ToTable("company_roles", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.ConnectionLog", b =>
@@ -1652,6 +1834,29 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasConstraintName("FK_antag_profile_profile_id");
 
                     b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyInvitation", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "FromPlayer")
+                        .WithMany()
+                        .HasForeignKey("FromUserId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_company_invitations_player_from_player_id");
+
+                    b.HasOne("Content.Server.Database.Player", "TargetPlayer")
+                        .WithMany()
+                        .HasForeignKey("TargetUserId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_company_invitations_player_target_player_id");
+
+                    b.Navigation("FromPlayer");
+
+                    b.Navigation("TargetPlayer");
                 });
 
             modelBuilder.Entity("Content.Server.Database.CompanyMember", b =>

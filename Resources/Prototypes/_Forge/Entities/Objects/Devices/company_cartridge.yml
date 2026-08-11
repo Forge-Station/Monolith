@@ -1,0 +1,17 @@
+- type: entity
+  parent: NFBasePDACartridge
+  id: CompanyManagementCartridge
+  name: company management cartridge
+  description: Manage your company roster, bank, relations, and invitations.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/cartridge.rsi
+    state: cart-y
+  - type: UIFragment
+    ui: !type:CompanyManagementUi
+  - type: Cartridge
+    programName: company-management-program-name
+    icon:
+      sprite: Interface/Misc/program_icons.rsi
+      state: crew_manifest
+  - type: CompanyManagementCartridge

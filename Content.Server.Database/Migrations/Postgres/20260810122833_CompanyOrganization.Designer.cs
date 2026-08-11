@@ -5,6 +5,7 @@ using System.Text.Json;
 using Content.Server.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using NpgsqlTypes;
@@ -14,9 +15,11 @@ using NpgsqlTypes;
 namespace Content.Server.Database.Migrations.Postgres
 {
     [DbContext(typeof(PostgresServerDbContext))]
-    partial class PostgresServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260810122833_CompanyOrganization")]
+    partial class CompanyOrganization
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -699,17 +702,7 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("uuid")
                         .HasColumnName("player_user_id");
 
-                    b.Property<int>("CharacterSlot")
-                        .HasColumnType("integer")
-                        .HasColumnName("character_slot");
-
-                    b.Property<string>("CharacterName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("character_name");
-
                     b.Property<string>("CompanyId")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("company_id");
 
@@ -721,7 +714,7 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("uuid")
                         .HasColumnName("role_id");
 
-                    b.HasKey("PlayerUserId", "CharacterSlot")
+                    b.HasKey("PlayerUserId", "CompanyId")
                         .HasName("PK_company_members");
 
                     b.ToTable("company_members", (string)null);

@@ -1,21 +1,16 @@
-# Heavy airlock paint groups (migrated from AirlockGroup)
-- type: paintableGroup
-  id: AirlockHeavyStandard
-  time: 3
-  cost: 3
-  defaultStyle: basic
-  styles:
-    basic: AirlockHeavy
-    command: AirlockHeavyCommand
-    engineering: AirlockHeavyEngineering
-    glass: AirlockHeavyGlass
-    grey: AirlockHeavyGrey
-    security: AirlockHeavySecurity
+- type: AirlockGroup
+  id: HeavyStandard
+  iconPriority: 30
+  stylePaths:
+    basic:       _Mono/Structures/Doors/HeavyAirlocks/Standard/standard.rsi
+    command:     _Mono/Structures/Doors/HeavyAirlocks/Standard/command.rsi
+    engineering: _Mono/Structures/Doors/HeavyAirlocks/Standard/engineering.rsi
+    glass:       _Mono/Structures/Doors/HeavyAirlocks/Glass/standard.rsi
+    security:    _Mono/Structures/Doors/HeavyAirlocks/Standard/security.rsi
+    mieyo:       _Mono/Structures/Doors/HeavyAirlocks/Standard/mieyo.rsi
 
-- type: paintableGroup
-  id: AirlockHeavyGlass
-  time: 3
-  cost: 3
-  defaultStyle: basic
-  styles:
-    basic: AirlockHeavyGlass
+- type: AirlockGroup
+  id: HeavyGlass
+  iconPriority: 20
+  stylePaths:
+    basic:       _Mono/Structures/Doors/HeavyAirlocks/Glass/standard.rsi

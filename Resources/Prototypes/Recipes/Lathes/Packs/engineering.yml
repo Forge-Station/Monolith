@@ -21,6 +21,7 @@
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
   - SprayPainterAmmo  # Forge-Change
+  - EconomyPlanner # Mono
 
 - type: latheRecipePack
   id: AtmosStatic

@@ -563,3 +563,11 @@ SellOnlyMothershipComputer: null # Mono
 GunneryServer: GunneryServerMedium # Mono
 
 # Frontier: put Frontier-related migrations in nf_migration.yml. Thank you.
+# 11.08.2026 Forge-Change
+AirlockExternalShuttleUSSPLocked: AirlockShuttle
+AirlockExternalGlassShuttleUSSPLocked: AirlockGlassShuttle
+AirlockExternalUSSPLocked: AirlockExternalLocked
+AirlockExternalGlassUSSPLocked: AirlockExternalGlassLocked
+AirlockHatchUSSP: AirlockHatch
+AirlockUSSP: AirlockMercenaryLocked
+AirlockUSSPGlass: AirlockMercenaryGlassLocked

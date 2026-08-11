@@ -2,7 +2,6 @@
   id: Quack
   name: forge-job-name-quack
   description: forge-job-desc-quack
-  guides: [ Renegates ]
   playTimeTracker: JobQuack
   requirements:
     - !type:OverallPlaytimeRequirement

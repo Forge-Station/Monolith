@@ -2,7 +2,6 @@
   id: Militia
   name: forge-job-name-militia
   description: forge-job-desc-militia
-  guides: [ Renegates ]
   playTimeTracker: JobMilitia
   requirements:
     - !type:OverallPlaytimeRequirement

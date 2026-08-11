@@ -4,7 +4,6 @@
   text: "/ServerInfo/_Forge/Guidebook/_NF/NewFrontier14.xml" # Forge-change
   priority: -1
   children: # note: children may be in other files. When adding to this, update the priority of anything after.
-  - Role # Forge-change
   - Bank
   - Hiring
   - Piloting
@@ -107,50 +106,6 @@
   text: "/ServerInfo/_Forge/Guidebook/_NF/ShieldGeneratorsUllman.xml"
   priority: 5
 # Forge-Change-Start
-
-- type: guideEntry
-  id: Role
-  name: guide-entry-role
-  text: "/ServerInfo/_Forge/Guidebook/_NF/Role.xml"
-  priority: -2
-  children:
-    - Explorers
-    - Renegates
-
-- type: guideEntry
-  id: Explorers
-  name: guide-entry-expedition-explorers
-  text: "/ServerInfo/_Forge/Guidebook/_NF/Explorers.xml"
-  priority: 1
-  children:
-    - ExplorersContractor
-    - ExplorersMercenary
-
-- type: guideEntry
-  id: ExplorersContractor
-  name: job-name-contractor
-  text: "/ServerInfo/_Forge/Guidebook/_NF/Contractor.xml"
-  priority: 1
-
-- type: guideEntry
-  id: ExplorersMercenary
-  name: job-name-mercenary
-  text: "/ServerInfo/_Forge/Guidebook/_NF/Mercenary.xml"
-  priority: 2
-
-- type: guideEntry
-  id: Renegates
-  name: department-Renegates
-  text: "/ServerInfo/_Forge/Guidebook/_NF/Renegates.xml"
-  priority: 2
-  children:
-    - RenegateFlunky
-
-- type: guideEntry
-  id: RenegateFlunky
-  name: forge-job-name-flunky
-  text: "/ServerInfo/_Forge/Guidebook/_NF/RenegateFlunky.xml"
-  priority: 1
 
 - type: guideEntry
   id: Pirating

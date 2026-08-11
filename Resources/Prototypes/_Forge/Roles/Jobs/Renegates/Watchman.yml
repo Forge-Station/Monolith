@@ -2,7 +2,6 @@
   id: Watchman
   name: forge-job-name-watchman
   description: forge-job-desc-watchman
-  guides: [ Renegates ]
   playTimeTracker: JobWatchman
   requirements:
     - !type:OverallPlaytimeRequirement

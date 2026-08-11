@@ -14,7 +14,6 @@ guide-entry-hiring = Наём экипажа
 guide-entry-expeditions = Экспедиции
 guide-entry-shipyard = Верфи
 guide-entry-frontier-rules = Правила сервера
-guide-entry-role = Роли
 forge-job-name-pirating = Пиратство
 forge-job-name-capture = Захват точек
 

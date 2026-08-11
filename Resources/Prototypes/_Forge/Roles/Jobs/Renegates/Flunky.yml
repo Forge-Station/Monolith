@@ -2,7 +2,6 @@
   id: Flunky
   name: forge-job-name-flunky
   description: forge-job-desc-flunky
-  guides: [ Renegates ]
   playTimeTracker: JobFlunky
   requirements:
     - !type:OverallPlaytimeRequirement

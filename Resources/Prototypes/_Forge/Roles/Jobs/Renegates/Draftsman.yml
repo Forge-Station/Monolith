@@ -2,7 +2,6 @@
   id: Draftsman
   name: forge-job-name-draftsman
   description: forge-job-desc-draftsman
-  guides: [ Renegates ]
   playTimeTracker: JobDraftsman
   requirements:
     - !type:OverallPlaytimeRequirement

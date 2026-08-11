@@ -67,6 +67,17 @@
     - SecurityEquipment
     - SmartGun
     - NSCRecipes # Forge-Change
+    #Forge-Change-Start
+    - RenegateWeaponsDynamic
+    - RenegateEquipmentDynamic
+    - RenegateAmmoDynamic
+    - RenegateVoucherDynamic
+    - MonoUSSPArmorDynamic
+    - MonoUSSPMiscDynamic
+    - MonoUSSPWeaponsDynamicRanged
+    - MonoUSSPVouchersDynamic
+    #Forge-Change-End
+
   - type: MaterialStorage
     whitelist:
       tags:

@@ -6,7 +6,10 @@ using Content.Shared.Charges.Systems;
 using Content.Server.Charges.Systems;
 using Content.Server.Decals;
 using Content.Server.Destructible;
+using Content.Server.EntityEffects.Effects;
 using Content.Server.Popups;
+using Content.Shared.Chemistry;
+using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Atmos.Piping.Unary.Components;
 using Content.Shared.Charges.Components;
 using Content.Shared.Coordinates.Helpers;
@@ -19,6 +22,7 @@ using Content.Shared.SprayPainter.Components;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
@@ -46,6 +50,29 @@ public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
         SubscribeLocalEvent<SprayPainterComponent, AfterInteractEvent>(OnFloorAfterInteract);
         SubscribeLocalEvent<AtmosPipeColorComponent, InteractUsingEvent>(OnPipeInteract);
         SubscribeLocalEvent<GasCanisterComponent, EntityPaintedEvent>(OnCanisterPainted);
+        SubscribeLocalEvent<PaintableComponent, EntityPaintedEvent>(OnEntityPainted);
+    }
+
+    private void OnEntityPainted(Entity<PaintableComponent> ent, ref EntityPaintedEvent args)
+    {
+        var reactive = EnsureComp<ReactiveComponent>(ent.Owner);
+        reactive.Reactions ??= [];
+
+        foreach (var reaction in reactive.Reactions)
+        {
+            if (!reaction.Methods.Contains(ReactionMethod.Touch) || reaction.Reagents == null)
+                continue;
+
+            if (reaction.Reagents.Contains("Water") && reaction.Reagents.Contains("SpaceCleaner"))
+                return;
+        }
+
+        reactive.Reactions.Add(new ReactiveReagentEffectEntry
+        {
+            Methods = new HashSet<ReactionMethod> { ReactionMethod.Touch },
+            Reagents = new HashSet<string> { "Water", "SpaceCleaner" },
+            Effects = [new WashReaction()]
+        });
     }
 
     /// <summary>

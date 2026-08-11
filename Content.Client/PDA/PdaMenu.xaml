@@ -43,9 +43,20 @@
             <ContainerButton Name="StationTimeButton">
                 <RichTextLabel Name="StationTimeLabel" Access="Public"/>
             </ContainerButton>
+            <!-- Begin DeltaV changes -->
+            <ContainerButton Name="CurrentDateButton">
+                <RichTextLabel Name="CurrentDateLabel" Access="Public"/>
+            </ContainerButton>
+            <!-- End DeltaV changes -->
             <ContainerButton Name="StationAlertLevelInstructionsButton">
                 <RichTextLabel Name="StationAlertLevelInstructions" Access="Public"/>
             </ContainerButton>
+            <!-- Mono -->
+            <!-- Forge-Change нам это пока не надо
+            <ContainerButton Name="WarLevelButton">
+                <RichTextLabel Name="WarLevelLabel" Access="Public"/>
+            </ContainerButton>
+            -->
             <!-- Frontier -->
             <ContainerButton Name="BalanceButton">
                 <RichTextLabel Name="BalanceLabel" Access="Public"/>

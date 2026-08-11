@@ -47,12 +47,14 @@
     - MonoTSFVouchersDynamic
     - MonoTSFMiscDynamic
     - MonoTSFGearDynamic
+    #Forge-Change-Start Моно закоментили все что в этом блоке, мы это раскоментили
     # USSP start
-    # - MonoUSSPArmorDynamic
-    # - MonoUSSPMiscDynamic
-    # - MonoUSSPWeaponsDynamicRanged
+    - MonoUSSPArmorDynamic
+    - MonoUSSPMiscDynamic
+    - MonoUSSPWeaponsDynamicRanged
     # Viper Group start
-    # - MonoViperGroupDynamic
+    - MonoViperGroupDynamic
+    #Forge-Change-End
     # Universal shit (stuff like shipgun ammo)
     - UniversalRailgunAmmo
     - UniversalMissileAmmo
@@ -68,14 +70,11 @@
     - SmartGun
     - NSCRecipes # Forge-Change
     #Forge-Change-Start
+    #Ренегаты
     - RenegateWeaponsDynamic
     - RenegateEquipmentDynamic
     - RenegateAmmoDynamic
     - RenegateVoucherDynamic
-    - MonoUSSPArmorDynamic
-    - MonoUSSPMiscDynamic
-    - MonoUSSPWeaponsDynamicRanged
-    - MonoUSSPVouchersDynamic
     #Forge-Change-End
 
   - type: MaterialStorage

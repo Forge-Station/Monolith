@@ -1,6 +1,6 @@
 dungeon-boss-grid-warning = Возвращайтесь в комплекс.
 
-salvage-faction-syndicate = Синдикат
+salvage-faction-syndicate = Горлекс
 salvage-faction-cultists = Культисты
 salvage-faction-flesh = Плоть
 salvage-faction-argocytes = Аргоциты
@@ -13,7 +13,7 @@ salvage-faction-carps = Карпы
 salvage-faction-xenos = Ксеносы
 nf-salvage-faction-xenos = Ксено
 nf-salvage-faction-carps = Карпы
-nf-salvage-faction-syndicate = Синдикат
+nf-salvage-faction-syndicate = Горлекс
 nf-salvage-faction-cultists = Культисты
 nf-salvage-faction-flesh = Плоть
 nf-salvage-faction-argocytes = Аргоциты

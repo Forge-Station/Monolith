@@ -94,6 +94,8 @@
   - type: Projectile
     deleteOnCollide: false
     onlyCollideWhenShot: true
+    inFlightLinearDampening: 0.55
+    flightLifetime: 20
     damage:
       types:
         Piercing: 35
@@ -458,7 +460,7 @@
   - type: StaminaDamageOnCollide
     damage: 20
   - type: EmpOnTrigger
-    range: 0.5
+    range: 1 # Forge-Change
     energyConsumption: 2700000
     disableDuration: 10
   - type: PointLight

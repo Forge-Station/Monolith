@@ -5,11 +5,11 @@
   parent: BaseVesselAntag
   name: TSF-ENG Welder
   description: Многоцелевое утилитарное, но тесное судно, задуманное как универсальный инструмент для ремонта кораблей и добычи ресурсов. Способно обнаруживать замаскированные корабли. # Forge-Change
-  price: 78200
-  category: Medium
+  price: 101725
+  category: Small
   group: Security
   access: Security
-  shuttlePath: /Maps/_Mono/Shuttles/Nfsd/welder.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/Nfsd/welder.yml
   guidebookPage: Null
   class:
   - Salvage
@@ -22,7 +22,7 @@
 - type: gameMap
   id: Welder
   mapName: 'Welder'
-  mapPath: /Maps/_Mono/Shuttles/Nfsd/welder.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/Nfsd/welder.yml
   minPlayers: 0
   stations:
     Welder:

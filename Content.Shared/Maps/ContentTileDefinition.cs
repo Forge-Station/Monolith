@@ -1,6 +1,7 @@
 using Content.Shared.Atmos;
 using Content.Shared.Light.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Shuttles.Systems;
 using Content.Shared.Tools;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
@@ -122,7 +123,7 @@ namespace Content.Shared.Maps
         /// Effective mass of this tile for grid impacts.
         /// </summary>
         [DataField]
-        public float Mass = 1000f;
+        public float Mass = 1000f; /// Forge-Change
 
         // <Mono>
         /// <summary>
@@ -154,5 +155,18 @@ namespace Content.Shared.Maps
         {
             TileId = id;
         }
+
+        /// <summary>
+        /// CrystallEdge: used for lightning calculation through zlevels
+        /// </summary>
+        [DataField]
+        public bool Transparent = false;
+
+        /// <summary>
+        /// CrystallEdge: RSI path for icon-smooth border sprites.
+        /// Contains states tile_0..tile_6 and full.
+        /// </summary>
+        [DataField]
+        public ResPath? IconSmoothSprite { get; private set; }
     }
 }

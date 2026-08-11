@@ -9,10 +9,10 @@
   parent: BaseVessel
   name: TSF-SKR Iapetus
   description: A basic artifact research ship, with minimal armament.
-  price: 36900
-  category: Medium
+  price: 62548
+  category: Small
   group: Shipyard
-  shuttlePath: /Maps/_Mono/Shuttles/iapetus.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/iapetus.yml
   guidebookPage: null
   class:
   - Science
@@ -22,7 +22,7 @@
 - type: gameMap
   id: Iapetus
   mapName: 'TSF-SKR Iapetus'
-  mapPath: /Maps/_Mono/Shuttles/iapetus.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/iapetus.yml
   minPlayers: 0
   stations:
     Iapetus:

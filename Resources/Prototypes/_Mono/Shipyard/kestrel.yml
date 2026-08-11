@@ -9,10 +9,10 @@
   parent: BaseVessel
   name: SKR Kestrel
   description: A small jump-capable science vessel meant for long-term missions. Comes with a living suite and a decent defensive armament for its size, though it is without much maneuvering performance.
-  price: 57500
-  category: Medium
+  price: 78811
+  category: Small
   group: Shipyard
-  shuttlePath: /Maps/_Mono/Shuttles/kestrel.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/kestrel.yml
   guidebookPage: null
   class:
   - Science
@@ -22,7 +22,7 @@
 - type: gameMap
   id: Kestrel
   mapName: 'SKR Kestrel'
-  mapPath: /Maps/_Mono/Shuttles/kestrel.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/kestrel.yml
   minPlayers: 0
   stations:
     Kestrel:

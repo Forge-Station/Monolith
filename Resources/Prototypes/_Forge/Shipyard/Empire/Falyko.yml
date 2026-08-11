@@ -7,7 +7,7 @@
   group: Empire
   access: Empire
   price: 73970
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/Falyko.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/Falyko.yml
   guidebookPage: Null
   class:
   - Patrol
@@ -17,7 +17,7 @@
 - type: gameMap
   id: Falyko
   mapName: 'PSE Фалько'
-  mapPath: /Maps/_Forge/Shuttles/Empire/Falyko.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/Falyko.yml
   minPlayers: 0
   stations:
     Falyko:

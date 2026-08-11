@@ -50,6 +50,11 @@
       sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
     price: 100
+  # Forge-Change-Start
+  - type: Construction
+    graph: mining_window
+    node: miningWindow
+  # Forge-Change-End
 
 - type: entity
   parent: ShuttleWindow
@@ -95,3 +100,8 @@
   - type: DamageVisuals
     damageOverlay:
       sprite: Structures/Windows/cracks_diagonal.rsi
+  # Forge-Change-Start
+  - type: Construction
+    graph: mining_window
+    node: miningWindowDiagonal
+  # Forge-Change-End

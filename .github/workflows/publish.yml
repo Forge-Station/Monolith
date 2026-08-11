@@ -1,6 +1,7 @@
 name: Publish
 concurrency:
   group: publish
+  cancel-in-progress: true
 
 
 on:
@@ -13,6 +14,19 @@ jobs:
     - uses: actions/checkout@v3.6.0
       with:
         submodules: 'recursive'
+
+# Forge-Secrets start
+    - name: Setup secrets
+      env:
+        SECRETS_TOKEN: ${{ secrets.SECRETS_TOKEN }}
+      if: ${{ env.SECRETS_TOKEN != '' }}
+      run: |
+        git clone https://x-access-token:${SECRETS_TOKEN}@github.com/Forge-Station/MonolithSecrets.git MonolithSecrets
+        cp -R MonolithSecrets/Resources/Prototypes Resources/Prototypes/_Forge/MonolithSecrets
+        cp -R MonolithSecrets/Resources/Locale Resources/Locale/ru-RU/monolith-secrets
+        cp -R MonolithSecrets/Resources/Textures Resources/Textures/_Forge/MonolithSecrets
+        cp -R MonolithSecrets/Resources/Audio Resources/Audio/_Forge/MonolithSecrets
+# Forge-Secrets end
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4.1.0
@@ -36,6 +50,9 @@ jobs:
     - name: Package client
       run: dotnet run --project Content.Packaging client --no-wipe-release
 
+    - name: Route CDN publish through direct IP
+      run: echo "${{ secrets.CDN_DIRECT_IP }} cdn.corvaxforge.ru" | sudo tee -a /etc/hosts > /dev/null
+
     - name: Publish version
       run: Tools/publish_multi_request.py
       env:
@@ -43,12 +60,14 @@ jobs:
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
 
     # - name: Publish changelog (Discord)
+    #   continue-on-error: true
     #   run: Tools/actions_changelogs_since_last_run.py
     #   env:
     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #     DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
 
     #- name: Publish changelog (RSS)
+    #  continue-on-error: true
     #  run: Tools/actions_changelog_rss.py
     #  env:
     #    CHANGELOG_RSS_KEY: ${{ secrets.CHANGELOG_RSS_KEY }}

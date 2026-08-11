@@ -14,10 +14,12 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events; // Mono
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -36,13 +38,15 @@ using Content.Shared.Tag;
 using Robust.Shared.Configuration;
 using Content.Shared._Mono.CCVar;
 using Robust.Shared;
+using Robust.Shared.Spawners;
+using Content.Shared.BarricadeBlock; // BF14
+using Robust.Shared.Random; // BF14
 
 namespace Content.Shared.Projectiles;
 
 public abstract partial class SharedProjectileSystem : EntitySystem
 {
     public const string ProjectileFixture = "projectile";
-
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedColorFlashEffectSystem _color = default!;
@@ -58,6 +62,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IConfigurationManager _cfg = default!; // Mono
+    [Dependency] private IRobustRandom _random = default!; // BF14
 
     // Cache of projectiles waiting for collision checks
     private readonly ConcurrentQueue<(EntityUid Uid, ProjectileComponent Component, EntityUid Target)> _pendingCollisionChecks = new();
@@ -78,6 +83,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<ProjectileComponent, PreventCollideEvent>(PreventCollision);
+        SubscribeLocalEvent<ProjectileComponent, EntGotInsertedIntoContainerMessage>(OnProjectileInserted);
+        SubscribeLocalEvent<ProjectileComponent, PullStartedMessage>(OnProjectilePullStarted);
         SubscribeLocalEvent<EmbeddableProjectileComponent, PreventCollideEvent>(EmbeddablePreventCollision); // Goobstation - Crawl Fix
         SubscribeLocalEvent<EmbeddableProjectileComponent, ProjectileHitEvent>(OnEmbedProjectileHit);
         SubscribeLocalEvent<EmbeddableProjectileComponent, ThrowDoHitEvent>(OnEmbedThrowDoHit);
@@ -85,10 +92,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         SubscribeLocalEvent<EmbeddableProjectileComponent, RemoveEmbeddedProjectileEvent>(OnEmbedRemove);
 
         SubscribeLocalEvent<EmbeddedContainerComponent, EntityTerminatingEvent>(OnEmbeddableTermination);
-        // Subscribe to initialize the origin grid on ProjectileGridPhaseComponent
-        SubscribeLocalEvent<ProjectileGridPhaseComponent, ComponentStartup>(OnProjectileGridPhaseStartup);
-        // Subscribe to ensure MetaDataComponent on projectile entities for networking
-        SubscribeLocalEvent<ProjectileComponent, ComponentStartup>(OnProjectileMetaStartup);
 
         // Mono
         SubscribeLocalEvent<ProjectileComponent, TileFrictionEvent>(OnTileFriction);
@@ -100,34 +103,13 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     }
 
     /// <summary>
-    /// Initialize the origin grid for phasing projectiles.
-    /// </summary>
-    private void OnProjectileGridPhaseStartup(EntityUid uid, ProjectileGridPhaseComponent component, ComponentStartup args)
-    {
-        var xform = Transform(uid);
-        component.SourceGrid = xform.GridUid;
-    }
-
-    /// <summary>
-    /// Ensures that a MetaDataComponent exists on projectiles for network serialization.
-    /// </summary>
-    private void OnProjectileMetaStartup(EntityUid uid, ProjectileComponent component, ComponentStartup args)
-    {
-        // Check if the entity still exists before trying to add a component
-        if (!EntityManager.EntityExists(uid))
-            return;
-
-        EnsureComp<MetaDataComponent>(uid);
-    }
-
-    /// <summary>
     /// Mono: Handles whether a projectile is raycasted based off projectile speed.
     /// </summary>
     /// <param name="speed"></param>
     /// <returns></returns>
     public bool ShouldRaycastProjectile(float speed)
     {
-        if (_adaptiveRaycasting && speed > _minRaycastVelocity * (_physicsTickrate / BasePhysicsTickrate))
+        if (_adaptiveRaycasting && speed > _minRaycastVelocity * ((float) _physicsTickrate / BasePhysicsTickrate)) // Forge-Change
             return true;
         else if (speed > _minRaycastVelocity)
             return true;
@@ -135,11 +117,69 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         return false;
     }
 
+    /// <summary>
+    /// Returns whether the entity should currently behave like an active projectile.
+    /// Dormant ammo items keep their projectile component so they can be shot later,
+    /// but should otherwise behave like ordinary items in hands, pockets, and containers.
+    /// </summary>
+    protected static bool IsActiveProjectile(in ProjectileComponent component)
+    {
+        return !component.ProjectileSpent &&
+               !(component.OnlyCollideWhenShot && component.Weapon == null);
+    }
+
+    /// <summary>
+    /// Returns reusable ammo to dormant item behavior after pickup/pull.
+    /// Shot projectiles stay InAir with Weapon set, which otherwise lets them
+    /// levitate when pulled and keep projectile embedding after a throw.
+    /// </summary>
+    public void DeactivateShotProjectile(EntityUid uid, ProjectileComponent? component = null)
+    {
+        if (!Resolve(uid, ref component, false) || !component.OnlyCollideWhenShot)
+            return;
+
+        // Weapon is what IsActiveProjectile checks; clear networked shot identity only when needed.
+        if (component.Weapon != null || component.Shooter != null)
+        {
+            component.Weapon = null;
+            component.Shooter = null;
+            Dirty(uid, component);
+        }
+
+        // Server-local raycast hack; not networked, so no Dirty.
+        component.RaycastResetVelocity = null;
+
+        // Cancel flight despawn once the ammo is recovered / landed.
+        RemComp<TimedDespawnComponent>(uid);
+
+        // Physics is what stops levitation; BodyStatus/velocity replicate via physics, not Dirty.
+        if (!TryComp(uid, out PhysicsComponent? physics))
+            return;
+
+        if (physics.BodyStatus == BodyStatus.InAir)
+            _physics.SetBodyStatus(uid, physics, BodyStatus.OnGround);
+
+        _physics.SetLinearVelocity(uid, Vector2.Zero, body: physics);
+        _physics.SetAngularVelocity(uid, 0f, body: physics);
+    }
+
+    private void OnProjectileInserted(EntityUid uid, ProjectileComponent component, EntGotInsertedIntoContainerMessage args)
+    {
+        DeactivateShotProjectile(uid, component);
+    }
+
+    private void OnProjectilePullStarted(EntityUid uid, ProjectileComponent component, PullStartedMessage args)
+    {
+        if (args.PulledUid != uid)
+            return;
+
+        DeactivateShotProjectile(uid, component);
+    }
+
     private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
     {
         // This is so entities that shouldn't get a collision are ignored.
-        if (args.OurFixtureId != ProjectileFixture || !args.OtherFixture.Hard
-            || component.ProjectileSpent || component is { Weapon: null, OnlyCollideWhenShot: true })
+        if (args.OurFixtureId != ProjectileFixture || !args.OtherFixture.Hard || !IsActiveProjectile(component))
             return;
 
         ProjectileCollide((uid, component, args.OurBody), args.OtherEntity);
@@ -402,6 +442,85 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         _hands.TryPickupAnyHand(args.User, embeddable);
     }
 
+    //ported from civ14
+    private void PreventCollision(EntityUid uid, ProjectileComponent component, ref PreventCollideEvent args)
+    {
+        if (component.IgnoreShooter && (args.OtherEntity == component.Shooter || args.OtherEntity == component.Weapon))
+        {
+            args.Cancelled = true;
+        }
+        //check for BarricadeBlock component (percentage of chance to hit/pass over)
+        if (TryComp(args.OtherEntity, out BarricadeBlockComponent? BarricadeBlock))
+        {
+            var alwaysPassThrough = false;
+            //_sawmill.Info("Checking BarricadeBlock...");
+            if (component.Shooter is { } shooterUid && Exists(shooterUid))
+            {
+                // Condition 1: Directions are the same (using cardinal directions).
+                // Or, if bidirectional, directions can be opposite.
+                var shooterWorldRotation = _transform.GetWorldRotation(shooterUid);
+                var BarricadeBlockWorldRotation = _transform.GetWorldRotation(args.OtherEntity);
+
+                var shooterDir = shooterWorldRotation.GetCardinalDir();
+                var BarricadeBlockDir = BarricadeBlockWorldRotation.GetCardinalDir();
+
+                bool directionallyAllowed = false;
+                if (shooterDir == BarricadeBlockDir)
+                {
+                    directionallyAllowed = true;
+                    //_sawmill.Debug("Shooter and BarricadeBlock facing same cardinal direction.");
+                }
+                else if (BarricadeBlock.Bidirectional)
+                {
+                    var oppositeBarricadeBlockDir = (Direction)(((int)BarricadeBlockDir + 4) % 8);
+                    if (shooterDir == oppositeBarricadeBlockDir)
+                    {
+                        directionallyAllowed = true;
+                        //_sawmill.Debug("Shooter and BarricadeBlock facing opposite cardinal directions (bidirectional pass).");
+                    }
+                }
+                else if (BarricadeBlock.Omnidirectional)
+                {
+                    directionallyAllowed = true;
+                    //_sawmill.Debug("Has the omnidirectional field");
+                }
+
+                if (directionallyAllowed)
+                {
+                    // Condition 2: Firer is within 1 tile of the BarricadeBlock.
+                    var shooterCoords = Transform(shooterUid).Coordinates;
+                    var BarricadeBlockCoords = Transform(args.OtherEntity).Coordinates;
+                    var BypassDistance = BarricadeBlock.PassThroughDistance;
+
+                    if (shooterCoords.TryDistance(EntityManager, BarricadeBlockCoords, out var distance) &&
+                        distance <= BypassDistance)
+                    {
+                        alwaysPassThrough = true;
+                    }
+                }
+            }
+
+            if (alwaysPassThrough)
+            {
+                args.Cancelled = true;
+            }
+            else
+            {
+                //_sawmill.Debug("BarricadeBlock direction/distance check failed or shooter not valid.");
+                // Standard BarricadeBlock blocking logic if the special conditions are not met.
+                var rando = _random.NextFloat(0.0f, 100.0f);
+                if (rando >= BarricadeBlock.Blocking)
+                {
+                    args.Cancelled = true;
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+    }
+
     private void OnEmbedThrowDoHit(Entity<EmbeddableProjectileComponent> embeddable, ref ThrowDoHitEvent args)
     {
         if (!embeddable.Comp.EmbedOnThrow)
@@ -445,6 +564,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         _audio.PlayPredicted(component.Sound, uid, null);
         component.EmbeddedIntoUid = target;
+        // Embedded ammo should not despawn while stuck in a target, exception tesla-bolts.
+        if (TryComp<ProjectileComponent>(uid, out var projectile) && projectile.FlightLifetime > 0f)
+            RemComp<TimedDespawnComponent>(uid);
         var ev = new EmbedEvent(user, target);
         RaiseLocalEvent(uid, ref ev);
         Dirty(uid, component);
@@ -497,6 +619,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             projectile.Shooter = null;
             projectile.Weapon = null;
             projectile.ProjectileSpent = false;
+            projectile.RaycastResetVelocity = null; /// Forge-Change
 
             Dirty(uid, projectile);
         }
@@ -527,70 +650,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
     }
 
-    private void PreventCollision(EntityUid uid, ProjectileComponent component, ref PreventCollideEvent args)
-    {
-        // Goobstation - Crawling fix
-        if (TryComp<RequireProjectileTargetComponent>(args.OtherEntity, out var requireTarget) && requireTarget.IgnoreThrow && requireTarget.Active)
-            return;
-
-        if (component.IgnoreShooter && (args.OtherEntity == component.Shooter || args.OtherEntity == component.Weapon))
-        {
-            args.Cancelled = true;
-            return;
-        }
-
-        // Get transforms once for subsequent checks to avoid repeated calls
-        var projectileXform = Transform(uid);
-        var targetXform = Transform(args.OtherEntity);
-
-        // Check for ProjectileGridPhaseComponent and origin-grid phasing
-        if (TryComp<ProjectileGridPhaseComponent>(uid, out var phaseComp))
-        {
-            if (phaseComp.SourceGrid.HasValue &&
-                targetXform.GridUid.HasValue &&
-                phaseComp.SourceGrid == targetXform.GridUid)
-            {
-                args.Cancelled = true;
-                return; // Projectile phases through entities on its origin grid.
-            }
-        }
-
-        // Add collision check to queue for batch processing if we have enough
-        if (_pendingCollisionChecks.Count >= MinProjectilesForParallel / 2)
-        {
-            _pendingCollisionChecks.Enqueue((uid, component, args.OtherEntity));
-
-            // Assume collision for now - if shield check passes, we'll handle it in the batch process
-            return;
-        }
-
-        // For low volume, process immediately
-        // Check if any shield system wants to prevent collision
-        var ev = new ProjectileCollisionAttemptEvent(uid, args.OtherEntity);
-        RaiseLocalEvent(ref ev);
-
-        if (ev.Cancelled)
-        {
-            args.Cancelled = true;
-            return;
-        }
-
-        // Check if target and projectile are on different maps/z-levels
-        if (projectileXform.MapID != targetXform.MapID)
-        {
-            args.Cancelled = true;
-            return;
-        }
-
-        // Define the tag constant
-        const string GunCanAimShooterTag = "GunCanAimShooter";
-
-        if ((component.Shooter == args.OtherEntity || component.Weapon == args.OtherEntity) &&
-            component.Weapon != null && _tag.HasTag(component.Weapon.Value, GunCanAimShooterTag) &&
-            TryComp(uid, out TargetedProjectileComponent? targeted) && targeted.Target == args.OtherEntity)
-            return;
-    }
-
     // Goobstation - Crawling fix
     private void EmbeddablePreventCollision(EntityUid uid, EmbeddableProjectileComponent component, ref PreventCollideEvent args)
     {
@@ -601,7 +660,10 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     // Mono
     private void OnTileFriction(Entity<ProjectileComponent> ent, ref TileFrictionEvent args)
     {
-        args.Modifier = ent.Comp.LinearDampening;
+        /// Forge-Change-Start
+        if(ent.Comp.ProjectileSpent)
+            args.Modifier = ent.Comp.LinearDampening;
+        /// Forge-Change-End
     }
 
     public void SetShooter(EntityUid id, ProjectileComponent component, EntityUid shooterId)

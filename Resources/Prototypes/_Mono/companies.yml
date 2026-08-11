@@ -140,6 +140,9 @@
   - !type:GiveItemSpecial
     prototype:
     - EncryptionKeyUssp
+  - !type:AddAccessSpecial
+    tags:
+    - USSP
   - !type:PlaySpawnSoundSpecial
     sound:
       path: /Audio/Ambience/Antag/headrev_start.ogg
@@ -147,6 +150,12 @@
         volume: -5
         variation: 0.2
   image: /Textures/_Mono/Companies/USSP.png
+
+- type: company
+  id: MMC
+  name: Mieyo Manufacturing Concern
+  color: "#EEEEEE"
+  hidden: true
 
 # Major companies
 
@@ -321,6 +330,9 @@
   - !type:GiveItemSpecial
     prototype:
     - EncryptionKeyViperGroup
+  - !type:AddAccessSpecial
+    tags:
+    - Viper
   - !type:PlaySpawnSoundSpecial
     sound:
       path: /Audio/_Forge/Ambience/Antag/cut_reaper_spawn.ogg
@@ -359,3 +371,11 @@
   # - burrrkeye
   # - enkidienne
   # - chugaa
+
+- type: company
+  id: PLXCOR
+  name: PLXCOR
+  description: plxcor-description
+  color: "#B500B5"
+  image: /Textures/_Mono/Companies/PLXCOR.png
+  whitelisted: true

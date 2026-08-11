@@ -1,0 +1,15 @@
+﻿using Content.Shared.Humanoid.Prototypes;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared._Forge.Weapons;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class SpeciesMeleeDamageComponent : Component
+{
+    [DataField("exemptSpecies")]
+    public HashSet<ProtoId<SpeciesPrototype>> ExemptSpecies = [];
+
+    [DataField("damageMultiplier")]
+    public float DamageMultiplier = 0.5f;
+}

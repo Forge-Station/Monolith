@@ -39,6 +39,7 @@
     - ActionSurvCameraLights
     - ActionAIViewLaws
     - ActionOpenRemoteDevicesMenu # Corvax-Next-AiRemoteControl
+    - ActionCustomizeStationAi # Forge-Change
   - type: UserInterface
     interfaces:
       enum.RadarConsoleUiKey.Key:
@@ -53,6 +54,8 @@
         type: CommunicationsConsoleBoundUserInterface
       enum.RemoteDeviceUiKey.Key: # Corvax-Next-AiRemoteControl
         type: RemoteDevicesBoundUserInterface
+      enum.StationAiCustomizationUiKey.Key: # Forge-Change
+        type: StationAiCustomizationBoundUserInterface
   - type: IntrinsicUI
     uis:
       enum.RadarConsoleUiKey.Key:
@@ -347,6 +350,25 @@
   - type: SiliconLawProvider
     laws: EntertainerLawset
 
+# Xenoborg Circuitboards
+- type: entity
+  id: XenoborgCircuitBoard
+  parent: BaseElectronics
+  name: law board (Xenoborg)
+  description: An electronics board containing the Xenoborg lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: XenoborgLawset
+
+- type: entity
+  id: MothershipCircuitBoard
+  parent: BaseElectronics
+  name: law board (Mothership Core)
+  description: An electronics board containing the Mothership Core lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: MothershipCoreLawset
+
 # Items
 - type: entity
   id: Intellicard
@@ -424,16 +446,20 @@
     powerLoad: 1000
     needsPower: false # Mono
   - type: StationAiCore
+  - type: StationAiScreen # Forge-Change
   - type: StationAiVision
   - type: InteractionOutline
   - type: Sprite
     snapCardinals: true
     sprite: Mobs/Silicon/station_ai.rsi
     layers:
-    - state: base
     - state: ai_empty
-      map: ["unshaded"]
+      map: ["enum.StationAiScreenLayer.Background"]
+    - state: ai_empty
+      map: ["enum.StationAiScreenLayer.Screen"]
       shader: unshaded
+    - state: base
+      map: ["enum.StationAiScreenLayer.Frame"]
   - type: Appearance
   - type: InteractionPopup
     interactSuccessString: petting-success-station-ai
@@ -441,6 +467,107 @@
     messagePerceivedByOthers: petting-success-station-ai-others # Otherwise AI cannot tell its being pet as It's just a brain inside of the core, not the core itself.
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: Telephone
+    compatibleRanges:
+    - Grid
+    - Map
+    - Unlimited
+    listeningRange: 0
+    speakerVolume: Speak
+    unlistedNumber: true
+    requiresPower: false
+  - type: Holopad
+  - type: StationAiWhitelist
+  - type: UserInterface
+    interfaces:
+        enum.HolopadUiKey.AiRequestWindow:
+          type: HolopadBoundUserInterface
+        enum.HolopadUiKey.AiActionWindow:
+          type: HolopadBoundUserInterface   
+
+# Xenoborg
+- type: entity
+  id: PlayerStationXenoborgAiEmpty
+  name: AI Core
+  description: The latest in Artificial Intelligences.
+  parent:
+  - BaseStructure
+  suffix: Empty
+  components:
+  - type: ItemSlots
+  - type: StationAiHolder
+    slot:
+      name: station-ai-mind-slot
+      locked: false
+      disableEject: true
+      whitelist:
+        tags:
+        - StationAi
+        - CanPilot # Mono
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: Rotatable
+  #- type: WarpPoint # Mono - comment out
+  #  blacklist:
+  #    tags:
+  #    - GhostOnlyWarp
+  - type: ContainerContainer
+    containers:
+      station_ai_mind_slot: !type:ContainerSlot
+        showEnts: true
+        occludes: true
+      machine_board: !type:Container
+        showEnts: false
+        occludes: true
+      machine_parts: !type:Container
+        showEnts: false
+        occludes: true
+  - type: ContainerComp
+    proto: AiHeldXenoborg
+    container: station_ai_mind_slot
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 0 # oxygen
+          - 0 # nitrogen
+          - 0 # carbon dioxide
+          - 4 # plasma
+          - 4 # tritium
+          temperature: 1690.15
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 100
+    intensitySlope: 2
+    totalIntensity: 200
+  - type: ApcPowerReceiver
+    powerLoad: 1000
+    needsPower: false # Mono
+  - type: StationAiCore
+  - type: StationAiVision
+  - type: InteractionOutline
+  - type: Sprite
+    snapCardinals: true
+    sprite: Mobs/Silicon/mothership_core.rsi
+    layers:
+    - state: base
+    - state: ai_empty
+      map: ["unshaded"]
+      shader: unshaded
+  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.StationAiVisualState.Key:
@@ -474,13 +601,6 @@
   - type: ContainerSpawnPoint
     containerId: station_ai_mind_slot
     job: StationAi
-  - type: Sprite
-    sprite: Mobs/Silicon/station_ai.rsi
-    layers:
-    - state: base
-    - state: ai
-      shader: unshaded
-
 # The actual brain inside the core
 - type: entity
   id: StationAiBrain
@@ -508,6 +628,7 @@
   - type: Access
     groups:
     - AllAccess
+    - Silicon
   - type: Eye
     drawFov: false
   - type: ContentEye
@@ -526,6 +647,19 @@
   - type: StartingMindRole
     mindRole: "MindRoleSiliconBrain"
     silent: true
+  - type: StationAiPersonality # Forge-Change
+  - type: GhostRole # Forge-Change
+    name: ghost-role-information-station-ai-name
+    description: ghost-role-information-station-ai-description
+    rules: ghost-role-information-silicon-rules
+    reregister: true
+    raffle:
+      settings: default
+    prototype: StationAICore
+    requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 10800
+  - type: GhostTakeoverAvailable
 
 # Hologram projection that the AI's eye tracks.
 - type: entity

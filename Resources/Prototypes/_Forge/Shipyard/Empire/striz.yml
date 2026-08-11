@@ -7,7 +7,7 @@
   category: Small
   group: Empire
   access: Empire
-  shuttlePath: /Maps/_Forge/Shuttles/Empire/striz.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/striz.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -17,7 +17,7 @@
 - type: gameMap
   id: striz
   mapName: 'EFS Стриж'
-  mapPath: /Maps/_Forge/Shuttles/Empire/striz.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Empire/striz.yml
   minPlayers: 0
   stations:
     striz:

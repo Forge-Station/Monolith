@@ -9,10 +9,10 @@
   parent: BaseVessel
   name: DIS Brute
   description: What is essentially a heavy-class cargo freighter is being advertised by the DIS marketing department as a new wonder of cargo transportation. With quadruple the layer of walls to protect your precious cargo while drunk driving.
-  price: 77850
+  price: 84142
   category: Medium
   group: Shipyard
-  shuttlePath: /Maps/_Mono/Shuttles/brute.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/brute.yml
   guidebookPage: null
   class:
   - Cargo
@@ -22,7 +22,7 @@
 - type: gameMap
   id: Brute
   mapName: 'DIS Brute'
-  mapPath: /Maps/_Mono/Shuttles/brute.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/brute.yml
   minPlayers: 0
   stations:
     Brute:

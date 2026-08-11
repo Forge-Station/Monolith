@@ -9,10 +9,10 @@
   parent: BaseVessel
   name: DIS Pluto MK. II
   description: A light-weight cargo runner manufactured by DIS. The replacement of the venerable Pluto. Performing better than it's predecessor in every way. Larger cargo bay, tougher hull, faster top speed and sleeker design.
-  price: 32900
+  price: 45224
   category: Small
   group: Shipyard
-  shuttlePath: /Maps/_Mono/Shuttles/plutomkii.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/plutomkii.yml
   guidebookPage: Null
   class:
   - Cargo
@@ -22,7 +22,7 @@
 - type: gameMap
   id: Plutomkii
   mapName: 'DIS Pluto MK. II'
-  mapPath: /Maps/_Mono/Shuttles/plutomkii.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/plutomkii.yml
   minPlayers: 0
   stations:
     Plutomkii:

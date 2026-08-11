@@ -141,7 +141,7 @@
 - type: ncHuntGroup
   id: ForgeHuntGroupSyndicatePatrol
   name: "синдикатский патруль"
-  description: "Вооружённые агенты Синдиката, удерживающие дрейфующий объект."
+  description: "Вооружённые агенты Горлекса, удерживающие дрейфующий объект."
   icon: MobSyndicateNavalOperatorA
   prototypes:
   - MobSyndicateNavalDeckhandA
@@ -158,7 +158,7 @@
 - type: ncHuntGroup
   id: ForgeHuntGroupSyndicateAssault
   name: "синдикатская штурмовая группа"
-  description: "Тяжёлый отряд Синдиката с офицерами, штурмовиками и специалистами."
+  description: "Тяжёлый отряд Горлекса с офицерами, штурмовиками и специалистами."
   icon: MobSyndicateNavalCaptainA
   prototypes:
   - MobSyndicateNavalOperatorA

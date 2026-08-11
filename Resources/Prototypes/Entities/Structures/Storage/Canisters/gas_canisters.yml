@@ -209,6 +209,12 @@
       - !type:DumpCanisterBehavior
   - type: PirateBountyItem # Mono
     id: LifeSupportCan
+  # Forge-Change-Start
+  - type: Tag
+    tags:
+    - AirCanister
+    - Structure
+  # Forge-Change-End
 
 - type: entity
   parent: GasCanister
@@ -250,6 +256,12 @@
       - !type:DumpCanisterBehavior
   - type: PirateBountyItem # Mono
     id: LifeSupportCan
+  # Forge-Change-Start
+  - type: Tag
+    tags:
+    - AirCanister
+    - Structure
+  # Forge-Change-End
 
 - type: entity
   id: LiquidOxygenCanister
@@ -291,6 +303,12 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:DumpCanisterBehavior
+  # Forge-Change-Start
+  - type: Tag
+    tags:
+    - AirCanister
+    - Structure
+  # Forge-Change-End
 
 - type: entity
   parent: GasCanister
@@ -844,4 +862,4 @@
   components:
   - type: Sprite
     state: frezon-1
- 
+

@@ -1,6 +1,5 @@
 using System.Numerics;
 using Content.Shared.Interaction;
-using Content.Server.Shuttles.Components;
 using Content.Shared.Projectiles;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics.Components;
@@ -343,7 +342,7 @@ public sealed partial class TargetSeekingSystem : EntitySystem
         return CalculateAdvancedTracking(relPos, relVel, accel);
     }
 
-    public Angle CalculateAdvancedTracking(Vector2 relPos, Vector2 relVel, float accel)
+    public float CalculateAdvancedTrackingTime(Vector2 relPos, Vector2 relVel, float accel)
     {
         const int guidanceIterations = 3;
 
@@ -355,9 +354,7 @@ public sealed partial class TargetSeekingSystem : EntitySystem
         for (var i = 0; i < guidanceIterations; i++)
             itime = GuessInterceptTime(itime, -projX, -vel, projY, accel);
 
-        var targetRot = (relPos + relVel * itime).ToWorldAngle();
-
-        return targetRot;
+        return itime;
 
         // the explanation for how this works would take more space than the enclosing method so it's not included here
         float GuessInterceptTime(float prev, float x0, float vel, float y0, float accel)
@@ -367,6 +364,14 @@ public sealed partial class TargetSeekingSystem : EntitySystem
             var dd = vel * x / d;
             return (dd + MathF.Sqrt(dd * dd + 2f * accel * (d - dd * prev))) / (accel);
         }
+    }
+
+    public Angle CalculateAdvancedTracking(Vector2 relPos, Vector2 relVel, float accel)
+    {
+        var itime = CalculateAdvancedTrackingTime(relPos, relVel, accel);
+        var targetRot = (relPos + relVel * itime).ToWorldAngle();
+
+        return targetRot;
     }
 
     /// <summary>

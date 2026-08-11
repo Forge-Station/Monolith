@@ -1,12 +1,10 @@
-ent-ClothingHeadHatHardhatSEngiArmored = бронированная каска инженера синдиката
+ent-ClothingHeadHatHardhatSEngiArmored = бронированная каска инженера Горлекса
     .desc = Бронированная каска. Сочетает защиту и функциональность — идеальна для инженера на передовой.
 
 ent-ClothingHeadHelmetRenegate = ренегатский шлем
     .desc = Стильный. Видимость ужасная.
 ent-ClothingHeadHelmetNexus = боевой шлем VSS
     .desc = Сделан из особо прочных материалов. В наличии крепление для прибора ночного виденья.
-ent-ClothingModsuitHelmetVanguardNSC = шлем модкостюма VSS «Авангард»
-    .desc = Подвижный и удобный шлем для мод костюма.
 ent-ClothingModsuitHelmetHMELightSuit = шлем модкостюма HME «Хранитель»
     .desc = Простой дизайн и максимум пользы для парамедика. В шлем встроены меддиагностический визор и экран мониторинга экипажа.
 ent-ClothingModsuitHelmetHMEHeavySuit = шлем модкостюма HME «Заступник»

@@ -17,6 +17,8 @@
         collection: GlassSmack
   - type: WallMount
     arc: 360 # interact despite grilles
+  - type: PaintableWall # Forge-Change
+    protectTransparent: true
   - type: Tag
     tags:
       - ForceFixRotations
@@ -57,9 +59,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: Structures/Windows/plastitanium_window.rsi
+    sprite: Forge/Structures/Windows/plastitanium_window.rsi # Forge-Change : Resprite
   - type: Icon
-    sprite: Structures/Windows/plastitanium_window.rsi
+    sprite: Forge/Structures/Windows/plastitanium_window.rsi # Forge-Change : Resprite
     state: full
   - type: IconSmooth
     key: walls # Frontier: windows<walls
@@ -141,13 +143,13 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: Structures/Windows/plastitanium_window_diagonal.rsi
+    sprite: Forge/Structures/Windows/plastitanium_window_diagonal.rsi # Forge-Change : Resprite
     state: state0
   - type: Tag
     tags:
     - Diagonal
   - type: Icon
-    sprite: Structures/Windows/plastitanium_window_diagonal.rsi
+    sprite: Forge/Structures/Windows/plastitanium_window_diagonal.rsi # Forge-Change : Resprite
     state: state0
   - type: IconSmooth
     mode: Diagonal
@@ -225,3 +227,8 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: RGlass
+  # Forge-Change-Start
+  - type: Construction
+    graph: Plastitanium
+    node: plastitaniumWindowDiagonal
+  # Forge-Change-End

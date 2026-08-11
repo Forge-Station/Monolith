@@ -76,7 +76,7 @@ public static class ServerPackaging
         "zh-Hans",
         "zh-Hant"
     };
-
+    private static readonly bool UseSecrets = File.Exists(Path.Combine("MonolithSecrets", "MonolithSecrets.sln")); // Forge-Secrets
     public static async Task PackageServer(bool skipBuild, bool hybridAcz, IPackageLogger logger, string configuration, List<string>? platforms = null)
     {
         if (platforms == null)
@@ -125,7 +125,28 @@ public static class ServerPackaging
                     "/m"
                 }
             });
-
+            // Forge-Secrets-Start
+            if (UseSecrets)
+            {
+                logger.Info($"Secrets was found. Building secret project for {platform}...");
+                await ProcessHelpers.RunCheck(new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    ArgumentList =
+                    {
+                        "build",
+                        Path.Combine("MonolithSecrets","Secrets.Server", "Secrets.Server.csproj"),
+                        "-c", "Release",
+                        "--nologo",
+                        "/v:m",
+                        $"/p:TargetOs={platform.TargetOs}",
+                        "/t:Rebuild",
+                        "/p:FullRelease=true",
+                        "/m"
+                    }
+                });
+            }
+            // Forge-Secrets-End
             await PublishClientServer(platform.Rid, platform.TargetOs, configuration);
         }
 
@@ -229,7 +250,15 @@ public static class ServerPackaging
         var depsContentExclusive = depsContent.Except(depsRobust).ToHashSet();
 
         // Remove .dll suffix and apply filtering.
-        var names = depsContentExclusive.Select(p => p[..^4]).Where(p => !ServerNotExtraAssemblies.Any(p.StartsWith));
+        var names = depsContentExclusive.Select(p => p[..^4]).Where(p => !ServerNotExtraAssemblies.Any(p.StartsWith)).ToList();
+
+        // Corvax-Secrets-Start
+        if (UseSecrets)
+        {
+            names.Add("Secrets.Shared");
+            names.Add("Secrets.Server");
+        }
+        // Corvax-Secrets-End
 
         return names;
 

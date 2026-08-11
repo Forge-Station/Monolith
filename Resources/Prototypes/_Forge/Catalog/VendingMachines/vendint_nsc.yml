@@ -3,7 +3,6 @@
   startingInventory:
     ClothingHeadHelmetNexus: 5
     ClothingBalaclavaSkiMaskBlack: 5
-    ClothingHelmetAttachmentNVGsNexus: 2
     ClothingHeadHatNexusBeret: 5
     ClothingHeadHatNexusCap: 5
     ClothingHeadHatNexusStarBeret: 5
@@ -18,7 +17,6 @@
     ClothingUniformJumpsuitNexusWorker: 5
     ClothingUniformJumpsuitNexusSecurity: 5
     ClothingHandsGlovesCombatNexus: 5
-    ClothingShoesBootsMagNexus: 3
-    ClothingModsuitVanguardNexusPowerCell: 3
     EncryptionKeyNexus: 2
     TelecomServerFlatpack: 1
+    DisciplinesDiskNSC: 2

@@ -11,6 +11,10 @@
         Manipulator: 1 # Frontier stackRequirements<requirements
       stackRequirements:
         Glass: 1
+      tagRequirements: # Mono
+        GlassBeaker:
+          amount: 2
+          defaultPrototype: Beaker
 
 - type: entity
   parent: BaseMachineCircuitboard
@@ -142,7 +146,7 @@
     requirements: # Frontier
       MatterBin: 1 # Frontier stackRequirements<requirements
       Manipulator: 1 # Frontier stackRequirements<requirements
-    tagRequirements:
+    tagRequirements: # Mono
       GlassBeaker:
         amount: 2
         defaultPrototype: Beaker
@@ -1158,8 +1162,6 @@
     requirements: # Frontier
       Manipulator: 2 # Frontier stackRequirements<requirements
       MatterBin: 1 # Frontier stackRequirements<requirements
-    stackRequirements:
-      Steel: 1
 
 - type: entity
   id: EmitterCircuitboard
@@ -1428,3 +1430,18 @@
       Steel: 5
       Glass: 5
 # Assmos Change End
+
+# Xenoborg
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: SurveillanceCameraWirelessRouterXenoborgCircuitboard
+  name: xenoborg camera wireless router
+  description: A machine printed circuit board for a xenoborg camera wireless router.
+  components:
+  - type: Sprite
+    state: generic
+  - type: MachineBoard
+    prototype: SurveillanceCameraWirelessRouterXenoborg
+    stackRequirements:
+      Cable: 2
+      Glass: 1

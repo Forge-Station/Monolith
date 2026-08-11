@@ -67,7 +67,7 @@
     AmmoBox762x54mmRBigFMJ: 6 # 762x54mmR
     AmmoBox9x19mmFMJ: 6 # 9x19mm
     AmmoBox9x19mmBigFMJ: 6 # 9x19mm
-    AmmoBox45_magnumFMJ: 6 # .45 magnum
+    AmmoBox357_magnumFMJ: 6 # .357 magnum
     WeaponSniperMosin: 3 # Infinite
     WeaponRifleSVS: 3 # Infinite
     CombatKnife: 6 # Infinite
@@ -123,22 +123,4 @@
     ClothingUniformJumpsuitHME: 4
     ClothingUniformJumpskirtHME: 4
     ClothingHeadHatBeretHME: 4
-
-# Vend Tel-Adi
-
-- type: vendingMachineInventory
-  id: CompanyVendInventoryTelAdi
-  startingInventory:
-    ClothingHeadHatTelAdiCap: 5
-    ClothingNeckCloakTelAdiCap: 5
-    ClothingUniformJumpsuitTelAdi: 5
-    ClothingShoesBootsTelAdi: 3
-    ClothingOuterCoatTelAdi: 5
-    DisciplinesDiskTelAdi: 2
-    ClothingUniformJumpsuitTelAdiRich: 3
-    ClothingOuterCoatTelAdiRich: 3
-    ClothingUniformJumpsuitMoonlight: 5
-    ClothingShoesBootsMoonlight: 5
-    ClothingHandsGlovesMoonlight: 5
-    ClothingMaskGasMoonlight: 3
 

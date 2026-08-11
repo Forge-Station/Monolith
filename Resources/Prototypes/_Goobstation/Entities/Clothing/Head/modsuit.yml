@@ -32,8 +32,8 @@
       - state: equipped-HEAD
       head-vox:
       - state: equipped-HEAD-vox
-      head-vulpkanin:
-      - state: equipped-HEAD-vulpkanin
+      # head-vulpkanin: # Forge-change
+      # - state: equipped-HEAD-vulpkanin # Forge-change
   - type: SealableClothingVisuals
     spriteLayer: sealed
     clothingVisuals:
@@ -41,8 +41,8 @@
       - state: equipped-HEAD-sealed
       head-vox:
       - state: equipped-HEAD-sealed-vox
-      head-vulpkanin:
-      - state: equipped-HEAD-sealed-vulpkanin
+      # head-vulpkanin: # Forge-change
+      # - state: equipped-HEAD-sealed-vulpkanin # Forge-change
   - type: ComponentToggler
     components:
     - type: BreathMask
@@ -102,8 +102,6 @@
     clothingVisuals:
       head:
       - state: equipped-HEAD-sealed
-      head-resomi:
-      - state: equipped-HEAD-sealed-resomi
       head-vox:
       - state: equipped-HEAD-sealed-vox
   - type: Armor
@@ -158,8 +156,6 @@
     clothingVisuals:
       head:
       - state: equipped-HEAD
-      head-resomi:
-      - state: equipped-HEAD-resomi
       head-vox:
       - state: equipped-HEAD-vox
   - type: Sprite
@@ -169,8 +165,6 @@
     clothingVisuals:
       head:
       - state: equipped-HEAD-sealed
-      head-resomi:
-      - state: equipped-HEAD-sealed-resomi
       head-vox:
       - state: equipped-HEAD-sealed-vox
   - type: Armor
@@ -225,8 +219,6 @@
     clothingVisuals:
       head:
       - state: equipped-HEAD
-      head-resomi:
-      - state: equipped-HEAD-resomi
       head-vox:
       - state: equipped-HEAD-vox
   - type: Sprite
@@ -236,8 +228,6 @@
     clothingVisuals:
       head:
       - state: equipped-HEAD-sealed
-      head-resomi:
-      - state: equipped-HEAD-sealed-resomi
       head-vox:
       - state: equipped-HEAD-sealed-vox
   - type: Armor
@@ -394,8 +384,6 @@
     clothingVisuals:
       head:
       - state: equipped-HEAD
-      head-resomi:
-      - state: equipped-HEAD-resomi
       head-vox:
       - state: equipped-HEAD-vox
   - type: SealableClothingVisuals
@@ -403,8 +391,6 @@
     clothingVisuals:
       head:
       - state: equipped-HEAD-sealed
-      head-resomi:
-      - state: equipped-HEAD-sealed-resomi
       head-vox:
       - state: equipped-HEAD-sealed-vox
   - type: Armor
@@ -509,8 +495,6 @@
     clothingVisuals:
       head:
       - state: equipped-HEAD
-      head-resomi:
-      - state: equipped-HEAD-resomi
       head-vox:
       - state: equipped-HEAD-vox
   - type: Sprite
@@ -520,8 +504,6 @@
     clothingVisuals:
       head:
       - state: equipped-HEAD-sealed
-      head-resomi:
-      - state: equipped-HEAD-sealed-resomi
       head-vox:
       - state: equipped-HEAD-sealed-vox
       head-vulpkanin:

@@ -18,6 +18,7 @@ public sealed partial class DoorSystem : SharedDoorSystem
     {
         base.Initialize();
         SubscribeLocalEvent<DoorComponent, AppearanceChangeEvent>(OnAppearanceChange);
+        SubscribeLocalEvent<DoorComponent, AnimationCompletedEvent>(OnAnimationCompleted); /// Forge-Chane
     }
 
     protected override void OnComponentInit(Entity<DoorComponent> ent, ref ComponentInit args)
@@ -78,6 +79,35 @@ public sealed partial class DoorSystem : SharedDoorSystem
         };
     }
 
+    /// Forge-Chane-Start
+    private void OnAnimationCompleted(Entity<DoorComponent> ent, ref AnimationCompletedEvent args)
+    {
+        if (args.Key != DoorComponent.OpenKey && args.Key != DoorComponent.CloseKey)
+            return;
+
+        if (!TryComp(ent, out SpriteComponent? sprite))
+            return;
+
+        switch (ent.Comp.State)
+        {
+            case DoorState.Open:
+                foreach (var (layer, layerState) in ent.Comp.OpenSpriteStates)
+                {
+                    _sprite.LayerSetRsiState((ent.Owner, sprite), layer, layerState);
+                }
+
+                break;
+            case DoorState.Closed:
+                foreach (var (layer, layerState) in ent.Comp.ClosedSpriteStates)
+                {
+                    _sprite.LayerSetRsiState((ent.Owner, sprite), layer, layerState);
+                }
+
+                break;
+        }
+    }
+    /// Forge-Chane-End
+
     private void OnAppearanceChange(Entity<DoorComponent> entity, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
@@ -131,7 +161,7 @@ public sealed partial class DoorSystem : SharedDoorSystem
                 if (_animationSystem.HasRunningAnimation(entity, DoorComponent.OpenKey))
                 {
                     _animationSystem.Stop(entity, null, DoorComponent.OpenKey);
-                    _animationSystem.Play(entity, (Animation)entity.Comp.OpeningAnimation, DoorComponent.CloseKey);
+                    _animationSystem.Play(entity, (Animation)entity.Comp.ClosingAnimation, DoorComponent.CloseKey);
                 }
             /// Forge-Chane-End
                 foreach (var (layer, layerState) in entity.Comp.ClosedSpriteStates)
@@ -190,22 +220,14 @@ public sealed partial class DoorSystem : SharedDoorSystem
 /// Forge-Chane-Start
     private void UpdateSpriteLayers(Entity<SpriteComponent> sprite, string targetProto)
     {
-        if (!_prototypeManager.HasIndex(targetProto))
+        if (!_prototypeManager.TryIndex(targetProto, out EntityPrototype? target))
             return;
 
-        // Spawn the target prototype client-side so we can copy its sprite base RSI.
-        var tempUid = Spawn(targetProto);
-
-        if (!TryComp<SpriteComponent>(tempUid, out var targetSprite))
-        {
-            QueueDel(tempUid);
+        if (!target.TryGetComponent(out SpriteComponent? targetSprite, Factory))
             return;
-        }
 
         if (targetSprite.BaseRSI != null)
             _sprite.SetBaseRsi(sprite.AsNullable(), targetSprite.BaseRSI);
-
-        QueueDel(tempUid);
     }
 }
 /// Forge-Chane-End

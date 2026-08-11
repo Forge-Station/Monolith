@@ -8,8 +8,8 @@ namespace Content.Client.Storage.Visualizers;
 
 public sealed partial class EntityStorageVisualizerSystem : VisualizerSystem<EntityStorageVisualsComponent>
 {
-
     [Dependency] private IPrototypeManager _prototypeManager = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -43,17 +43,14 @@ public sealed partial class EntityStorageVisualizerSystem : VisualizerSystem<Ent
         /// Forge-Change-Start
         if (AppearanceSystem.TryGetData<string>(uid, PaintableVisuals.Prototype, out var prototype, args.Component))
         {
-            if (_prototypeManager.HasIndex(prototype))
+            if (_prototypeManager.TryIndex(prototype, out EntityPrototype? proto))
             {
-                // Spawn the paint target prototype client-side so we can copy its visuals.
-                var tempUid = Spawn(prototype);
-
-                if (TryComp<SpriteComponent>(tempUid, out var sprite) && sprite.BaseRSI != null)
+                if (proto.TryGetComponent(out SpriteComponent? sprite, Factory) && sprite.BaseRSI != null)
                 {
                     SpriteSystem.SetBaseRsi((uid, args.Sprite), sprite.BaseRSI);
                 }
 
-                if (TryComp<EntityStorageVisualsComponent>(tempUid, out var visuals))
+                if (proto.TryGetComponent(out EntityStorageVisualsComponent? visuals, Factory))
                 {
                     comp.StateBaseOpen = visuals.StateBaseOpen;
                     comp.StateBaseClosed = visuals.StateBaseClosed;
@@ -61,8 +58,6 @@ public sealed partial class EntityStorageVisualizerSystem : VisualizerSystem<Ent
                     comp.StateDoorClosed = visuals.StateDoorClosed;
                     forceRedrawBase = true;
                 }
-
-                QueueDel(tempUid);
             }
         }
         /// Forge-Change-End

@@ -27,5 +27,5 @@
     - board
   # - type: StaticPrice # Frontier - TODO: material value rework
   #   price: 165 # Frontier
-- type: Paintable # Forge-Change
-  group: null     # Forge-Change
+  - type: Paintable # Forge-Change
+    group: null     # Forge-Change

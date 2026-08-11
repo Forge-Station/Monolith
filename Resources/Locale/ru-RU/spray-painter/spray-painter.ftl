@@ -5,9 +5,13 @@ spray-painter-ammo-after-interact-refilled = Вы заправляете кра�
 
 spray-painter-interact-no-charges = Недостаточно краски.
 spray-painter-interact-nothing-to-remove = Здесь нечего удалять!
+spray-painter-interact-no-color-pick = Не удалось найти цвет для пипетки!
+spray-painter-interact-color-picked = Взят цвет с '{$id}'.
 
 spray-painter-on-examined-painted-message = Похоже, это недавно покрасили.
 spray-painter-style-not-available = Невозможно применить выбранный стиль к этому объекту.
+spray-painter-wash-paint-dried = Краска уже высохла и её нельзя смыть.
+spray-painter-wash-paint-success = Вы смываете свежую краску.
 
 spray-painter-verb-toggle-decals = Переключить режим покраски декалей
 
@@ -15,6 +19,10 @@ spray-painter-item-status-label = Декали: {$mode}
 spray-painter-item-status-add = [color=green]Добавление[/color]
 spray-painter-item-status-remove = [color=red]Удаление[/color]
 spray-painter-item-status-off = [color=gray]Выкл[/color]
+spray-painter-item-status-color-picker = [color=yellow]Пипетка[/color]
+
+spray-painter-color-picker-tooltip = Пипетка: клик по полу берёт цвет с декали (вместо покраски)
+spray-painter-color-palette-tooltip = Палитра цветов
 
 # UI
 spray-painter-window-title = Краскопульт
@@ -51,6 +59,8 @@ spray-painter-tab-category-decals = Декали
 # Groups (subtabs)
 spray-painter-tab-group-airlockstandard = Стандартные
 spray-painter-tab-group-airlockglass = Стеклянные
+spray-painter-tab-group-airlockheavystandard = Тяжёлые
+spray-painter-tab-group-airlockheavyglass = Тяжёлые стеклянные
 
 spray-painter-tab-group-cratesteel = Стальные
 spray-painter-tab-group-crateplastic = Пластиковые
@@ -90,6 +100,15 @@ spray-painter-style-airlockglass-salvage = Утилизаторский
 spray-painter-style-airlockglass-science = Научный
 spray-painter-style-airlockglass-security = Служба безопасности
 spray-painter-style-airlockglass-virology = Вирусология
+
+spray-painter-style-airlockheavystandard-basic = Базовый
+spray-painter-style-airlockheavystandard-command = Командование
+spray-painter-style-airlockheavystandard-engineering = Инженерный
+spray-painter-style-airlockheavystandard-glass = Стеклянный
+spray-painter-style-airlockheavystandard-grey = Серый
+spray-painter-style-airlockheavystandard-security = Служба безопасности
+
+spray-painter-style-airlockheavyglass-basic = Базовый
 
 # Lockers
 spray-painter-style-locker-atmospherics = Атмосферный

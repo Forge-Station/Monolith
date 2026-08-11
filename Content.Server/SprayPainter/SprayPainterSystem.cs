@@ -212,8 +212,13 @@ public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
 
     private void PickColor(Entity<SprayPainterComponent> ent, ref AfterInteractEvent args)
     {
+        if (!args.CanReach)
+            return;
+
         if (!args.ClickLocation.IsValid(EntityManager) || _transform.GetGrid(args.ClickLocation) is not { } grid)
             return;
+
+        args.Handled = true;
 
         var clickPos = args.ClickLocation.Position;
         var decals = _decals.GetDecalsInRange(grid, clickPos, validDelegate: IsDecalValid);

@@ -35,9 +35,8 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalSlam
-    # - type: PaintableAirlock  # Forge-Change-Del
-     # group: HeavyStandard  # Forge-Change-Del
-     # department: Civilian  # Forge-Change-Del
+  - type: Paintable
+    group: AirlockHeavyStandard
   - type: StaticPrice
     price: 500
   - type: Tag
@@ -85,9 +84,8 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalSlam
-    # - type: PaintableAirlock  # Forge-Change-Del
-     # group: HeavyGlass  # Forge-Change-Del
-     # department: Civilian  # Forge-Change-Del
+  - type: Paintable
+    group: AirlockHeavyGlass
   - type: StaticPrice
     price: 500
   - type: Tag
@@ -108,8 +106,6 @@
   components:
   - type: Sprite
     sprite: _Mono/Structures/Doors/HeavyAirlocks/Standard/engineering.rsi
-  # - type: PaintableAirlock  # Forge-Change-Del
-    # department: Engineering  # Forge-Change-Del
 
 - type: entity
   parent: AirlockHeavy

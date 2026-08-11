@@ -147,6 +147,13 @@ public sealed partial class SprayPainterDecals : Control
         _selectedDecal = name;
         OnDecalSelected?.Invoke(_selectedDecal);
 
+        // Selecting a decal implies the user wants to paint, not sample colours.
+        if (ColorPicker.Pressed)
+        {
+            ColorPicker.Pressed = false;
+            OnColorPickerToggled?.Invoke(false);
+        }
+
         if (_sprite is null)
             return;
 

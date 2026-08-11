@@ -3,6 +3,8 @@
   groups:
   - AirlockStandard
   - AirlockGlass
+  - AirlockHeavyStandard
+  - AirlockHeavyGlass
 
 - type: paintableGroupCategory
   id: Canisters

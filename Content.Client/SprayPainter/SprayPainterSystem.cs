@@ -53,7 +53,9 @@ public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
-        if (!args.WasModified<PaintableGroupCategoryPrototype>() || !args.WasModified<PaintableGroupPrototype>() || !args.WasModified<DecalPrototype>())
+        if (!args.WasModified<PaintableGroupCategoryPrototype>()
+            && !args.WasModified<PaintableGroupPrototype>()
+            && !args.WasModified<DecalPrototype>())
             return;
 
         CachePrototypes();
@@ -95,7 +97,8 @@ public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
     {
         private readonly RichTextLabel _label;
         private readonly Entity<SprayPainterComponent> _entity;
-        private DecalPaintMode? _lastPaintingDecals = null;
+        private DecalPaintMode? _lastPaintingDecals;
+        private bool? _lastColorPicker;
 
         public StatusControl(Entity<SprayPainterComponent> ent)
         {
@@ -108,17 +111,21 @@ public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
         {
             base.FrameUpdate(args);
 
-            if (_entity.Comp.DecalMode == _lastPaintingDecals)
+            if (_entity.Comp.DecalMode == _lastPaintingDecals
+                && _entity.Comp.ColorPickerEnabled == _lastColorPicker)
                 return;
 
             _lastPaintingDecals = _entity.Comp.DecalMode;
+            _lastColorPicker = _entity.Comp.ColorPickerEnabled;
 
-            string modeLocString = _entity.Comp.DecalMode switch
-            {
-                DecalPaintMode.Add => "spray-painter-item-status-add",
-                DecalPaintMode.Remove => "spray-painter-item-status-remove",
-                _ => "spray-painter-item-status-off"
-            };
+            string modeLocString = _entity.Comp.ColorPickerEnabled
+                ? "spray-painter-item-status-color-picker"
+                : _entity.Comp.DecalMode switch
+                {
+                    DecalPaintMode.Add => "spray-painter-item-status-add",
+                    DecalPaintMode.Remove => "spray-painter-item-status-remove",
+                    _ => "spray-painter-item-status-off"
+                };
 
             _label.SetMarkupPermissive(Robust.Shared.Localization.Loc.GetString("spray-painter-item-status-label",
                 ("mode", Robust.Shared.Localization.Loc.GetString(modeLocString))));

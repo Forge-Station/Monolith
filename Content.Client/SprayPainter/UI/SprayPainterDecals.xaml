@@ -16,8 +16,8 @@
         <BoxContainer Orientation="Vertical">
             <ColorSelectorSliders Name="ColorSelector" IsAlphaVisible="True">
                 <BoxContainer HorizontalAlignment="Right" VerticalAlignment="Top" SetHeight="29">
-                    <Button Name="ColorPalette" Text="Palette" />
-                    <Button Name="ColorPicker" ToggleMode="True">
+                    <Button Name="ColorPalette" Text="{Loc 'palette-color-picker-window-title'}" ToolTip="{Loc 'spray-painter-color-palette-tooltip'}" />
+                    <Button Name="ColorPicker" ToggleMode="True" ToolTip="{Loc 'spray-painter-color-picker-tooltip'}">
                         <TextureRect TexturePath="/Textures/Interface/eyedropper.svg.png" Stretch="KeepAspectCentered" SetSize="16 16" />
                     </Button>
                 </BoxContainer>

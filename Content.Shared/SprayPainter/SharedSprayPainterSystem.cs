@@ -2,18 +2,22 @@
 using Content.Shared.Administration.Logs;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.SprayPainter.Components;
 using Content.Shared.SprayPainter.Prototypes;
 using Content.Shared.Verbs;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Shared.SprayPainter;
@@ -24,6 +28,15 @@ namespace Content.Shared.SprayPainter;
 /// </summary>
 public abstract partial class SharedSprayPainterSystem : EntitySystem
 {
+    private static readonly ProtoId<ReagentPrototype>[] WashReagents =
+    [
+        "Water",
+        "SpaceCleaner",
+    ];
+
+    private static readonly FixedPoint2 WashCost = 5;
+    private static readonly SoundSpecifier WashSound = new SoundPathSpecifier("/Audio/Effects/Fluids/watersplash.ogg");
+
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] protected ISharedAdminLogManager AdminLogger = default!;
     [Dependency] protected SharedAppearanceSystem Appearance = default!;
@@ -32,6 +45,7 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
     [Dependency] protected SharedDoAfterSystem DoAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutions = default!;
 
     public override void Initialize()
     {
@@ -42,6 +56,7 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
         SubscribeLocalEvent<SprayPainterComponent, SprayPainterDoAfterEvent>(OnPainterDoAfter);
         SubscribeLocalEvent<SprayPainterComponent, GetVerbsEvent<AlternativeVerb>>(OnPainterGetAltVerbs);
         SubscribeLocalEvent<PaintableComponent, InteractUsingEvent>(OnPaintableInteract);
+        SubscribeLocalEvent<PaintedComponent, InteractUsingEvent>(OnPaintedInteract);
         SubscribeLocalEvent<PaintedComponent, ExaminedEvent>(OnPainedExamined);
 
         Subs.BuiEvents<SprayPainterComponent>(SprayPainterUiKey.Key,
@@ -83,7 +98,6 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
 
         ent.Comp.PickedColor = paletteKey;
         Dirty(ent);
-        UpdateUi(ent);
     }
 
     #region Interaction
@@ -172,6 +186,13 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
 
         // Make the machine beep.
         Audio.PlayPredicted(ent.Comp.SoundSwitchDecalMode, ent, user, ent.Comp.SoundSwitchDecalMode.Params.WithPitchScale(pitch));
+
+        // Decal painting mode and the eyedropper fight over floor clicks — turn the picker off.
+        if (ent.Comp.ColorPickerEnabled)
+        {
+            ent.Comp.ColorPickerEnabled = false;
+            Dirty(ent);
+        }
     }
 
     /// <summary>
@@ -245,6 +266,58 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
         args.PushText(Loc.GetString("spray-painter-on-examined-painted-message"));
     }
 
+    /// <summary>
+    /// Allows washing fresh paint with water or space cleaner before it dries.
+    /// </summary>
+    private void OnPaintedInteract(Entity<PaintedComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!_solutions.TryGetDrainableSolution(args.Used, out var soln, out var solution))
+            return;
+
+        string? washReagent = null;
+        foreach (var reagent in WashReagents)
+        {
+            if (solution.GetTotalPrototypeQuantity(reagent) >= WashCost)
+            {
+                washReagent = reagent;
+                break;
+            }
+        }
+
+        if (washReagent == null)
+            return;
+
+        // Valid wash attempt — claim the interaction so spray bottles don't also fire.
+        args.Handled = true;
+
+        if (_timing.CurTime > ent.Comp.DryTime)
+        {
+            _popup.PopupClient(Loc.GetString("spray-painter-wash-paint-dried"), ent, args.User);
+            return;
+        }
+
+        if (!_solutions.RemoveReagent(soln.Value, washReagent, WashCost))
+            return;
+
+        // Force visualizers to re-apply the entity's own prototype so the painted RSI is undone.
+        // Leaving Prototype set to the entity itself is intentional: RemoveData alone would leave the
+        // already-swapped sprite untouched.
+        if (Prototype(ent)?.ID is { } protoId)
+            Appearance.SetData(ent, PaintableVisuals.Prototype, protoId);
+
+        RemCompDeferred<PaintedComponent>(ent);
+
+        Audio.PlayPredicted(WashSound, ent, args.User);
+        _popup.PopupClient(Loc.GetString("spray-painter-wash-paint-success"), ent, args.User);
+
+        AdminLogger.Add(LogType.Action,
+            LogImpact.Low,
+            $"{ToPrettyString(args.User):user} washed paint off {ToPrettyString(ent):target}");
+    }
+
     #endregion Interaction
 
     #region UI
@@ -259,7 +332,6 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
 
         ent.Comp.StylesByGroup[args.Group] = args.Style;
         Dirty(ent);
-        UpdateUi(ent);
     }
 
     /// <summary>
@@ -286,7 +358,6 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
     {
         ent.Comp.SelectedDecal = args.DecalPrototype;
         Dirty(ent);
-        UpdateUi(ent);
     }
 
     /// <summary>
@@ -296,7 +367,6 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
     {
         ent.Comp.SelectedDecalAngle = args.Angle;
         Dirty(ent);
-        UpdateUi(ent);
     }
 
     /// <summary>
@@ -306,7 +376,6 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
     {
         ent.Comp.SnapDecals = args.Snap;
         Dirty(ent);
-        UpdateUi(ent);
     }
 
     /// <summary>
@@ -316,7 +385,6 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
     {
         ent.Comp.ColorPickerEnabled = args.Toggle;
         Dirty(ent);
-        UpdateUi(ent);
     }
 
     /// <summary>
@@ -326,7 +394,6 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
     {
         ent.Comp.SelectedDecalColor = args.Color;
         Dirty(ent);
-        UpdateUi(ent);
     }
 
     protected virtual void UpdateUi(Entity<SprayPainterComponent> ent)

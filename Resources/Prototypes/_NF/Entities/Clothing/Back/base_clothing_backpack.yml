@@ -19,7 +19,7 @@
   # Forge-Change-End
   - type: Appearance
   - type: SubFloorHide
-  - type: Anchorable
+  #- type: Anchorable #Forge-Change
   - type: CollideOnAnchor
     enable: false
   - type: Transform

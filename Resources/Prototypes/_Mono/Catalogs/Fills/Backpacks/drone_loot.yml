@@ -137,11 +137,11 @@
       amount: 3 # Forge-change
  #     maxAmount: 6 # Forge-change
     # Parts
-#    - id: SuperCapacitorStockPart
+#    - id: SuperCapacitorStockPart   Forge-Change
 #      amount: 3 
-#    - id: SuperMatterBinStockPart
+#    - id: SuperMatterBinStockPart   Forge-Change
 #      amount: 3 
-#    - id: PicoManipulatorStockPart
+#    - id: PicoManipulatorStockPart   Forge-Change
 #      amount: 3 
     # rare t4 parts
     - id: QuadraticCapacitorStockPart

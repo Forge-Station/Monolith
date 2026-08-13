@@ -117,3 +117,116 @@
   #  reflectProb: 1
   #- type: RustRequiresPathStage
   #  pathStage: 10 # Ascension
+
+# Forge-change start (I'm too lazy to do this in our files)
+- type: entity
+  parent: BaseWall
+  id: WallNanolaminateIndestructible
+  name: nanolaminate wall
+  suffix: ADS ONLY, Indestructible
+  description: A dense wall made of a strange material, the texture is smooth yet rough.
+  components:
+  - type: StaticPrice
+    price: 250
+  - type: RadiationBlocker
+    resistance: 5
+  - type: Sprite
+    sprite: _Shitmed/Structures/Walls/abductor.rsi
+  - type: Icon
+    sprite: _Shitmed/Structures/Walls/abductor.rsi
+    state: full
+  - type: Construction
+    graph: Girder
+    node: shuttleWall
+  - type: IconSmooth
+    key: walls
+    base: state
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 15000
+  - type: Appearance
+  - type: ArmorThickness
+    thickness: 15
+  - type: ShipRepairable
+    repairTime: 10
+    repairCost: 12
+  - type: Tag
+    tags:
+    - Wall
+    - WallT4
+
+- type: entity
+  id: WallNanolaminateDiagonalIndestructible
+  name: nanolaminate wall
+  suffix: ADS ONLY, Diagonal, Indestructible
+  description: A dense wall made of a strange material, the texture is smooth yet rough.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Tag
+    tags:
+    - Wall
+    - Diagonal
+  - type: Sprite
+    drawdepth: Walls
+    sprite: _Shitmed/Structures/Walls/abductor_diagonal.rsi
+    state: state0
+  - type: IconSmooth
+    mode: Diagonal
+    key: walls
+    base: state
+  - type: Icon
+    sprite: _Shitmed/Structures/Walls/abductor_diagonal.rsi
+    state: state0
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Physics
+    bodyType: Static
+  #- type: Reflect
+  #  reflectProb: 1
+  - type: Pullable
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+    airBlockedDirection:
+    - South
+    - East
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PolygonShape
+            vertices:
+            - "-0.5,-0.5"
+            - "0.5,0.5"
+            - "0.5,-0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - DiagonalWallLayer # Mono WallLayer->DiagonalWallLayer
+        density: 7500
+  - type: Construction
+    graph: Girder
+    node: diagonalshuttleWall
+  #- type: RustRequiresPathStage
+  #  pathStage: 10 # Ascension
+  - type: ArmorThickness
+    thickness: 10
+  # Mono
+  - type: ShipRepairable
+    repairTime: 3
+    repairCost: 6
+# Forge-change end

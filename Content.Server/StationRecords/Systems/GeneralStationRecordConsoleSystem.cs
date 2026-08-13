@@ -11,6 +11,20 @@ using Content.Server._NF.Station.Components; // Frontier
 using Content.Server.Administration.Logs; // Frontier
 using Content.Shared.Database; // Frontier
 using Content.Shared._NF.StationRecords; // Frontier
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Content.Server.Database;
+using Content.Server.Preferences.Managers;
+using Content.Server.Popups;
+using Content.Server._Forge.Persistence;
+using Content.Server._NF.ShuttleRecords;
+using Content.Server.Shuttles.Components;
+using Content.Shared._Forge;
+using Content.Shared._Forge.Persistence;
+using Content.Shared._Mono.Ships.Components;
+using Content.Shared._NF.Shipyard.Components;
+using Robust.Server.Player;
+using Robust.Shared.Configuration;
 
 namespace Content.Server.StationRecords.Systems;
 
@@ -23,6 +37,13 @@ public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
     [Dependency] private AccessReaderSystem _access = default!; // Frontier
     [Dependency] private IPrototypeManager _proto = default!; // Frontier
     [Dependency] private IAdminLogManager _adminLog = default!; // Frontier
+    [Dependency] private IServerDbManager _database = default!;
+    [Dependency] private IServerPreferencesManager _preferences = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private GridPersistenceService _gridPersistence = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private ShuttleRecordsSystem _shuttleRecords = default!;
 
     public override void Initialize()
     {
@@ -38,6 +59,9 @@ public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
             subs.Event<DeleteStationRecord>(OnRecordDelete);
             subs.Event<AdjustStationJobMsg>(OnAdjustJob); // Frontier
             subs.Event<SetStationAdvertisementMsg>(OnAdvertisementChanged); // Frontier
+            subs.Event<RefreshShuttleCrewMessage>(OnCrewRefresh);
+            subs.Event<AddShuttleCrewMemberMessage>(OnCrewAdd);
+            subs.Event<RemoveShuttleCrewMemberMessage>(OnCrewRemove);
         });
     }
 
@@ -128,6 +152,242 @@ public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
             _stationJobsSystem.UpdateJobsAvailable(); // Nasty - ideally this sends out partial information - one ship changed its advertisement.
         }
     }
+
+    private void OnCrewRefresh(
+        Entity<GeneralStationRecordConsoleComponent> ent,
+        ref RefreshShuttleCrewMessage msg)
+    {
+        if (msg.Actor is { Valid: true } actor)
+            RefreshCrewView(ent, actor);
+    }
+
+    private void OnCrewAdd(
+        Entity<GeneralStationRecordConsoleComponent> ent,
+        ref AddShuttleCrewMemberMessage msg)
+    {
+        if (msg.Actor is { Valid: true } actor)
+            AddCrewMember(ent, actor, msg.PlayerUserId, msg.CharacterSlot);
+    }
+
+    private void OnCrewRemove(
+        Entity<GeneralStationRecordConsoleComponent> ent,
+        ref RemoveShuttleCrewMemberMessage msg)
+    {
+        if (msg.Actor is { Valid: true } actor)
+            RemoveCrewMember(ent, actor, msg.PlayerUserId, msg.CharacterSlot);
+    }
+
+    private async void RefreshCrewView(
+        Entity<GeneralStationRecordConsoleComponent> ent,
+        EntityUid actor)
+    {
+        if (!TryGetConsoleShuttle(ent.Owner, out var shuttle))
+        {
+            ent.Comp.ShuttleCrew = null;
+            ent.Comp.ShuttleCrewCandidates = null;
+            ent.Comp.CanManageShuttleCrew = false;
+            UpdateUserInterface(ent);
+            return;
+        }
+
+        var ownership = await TryEnsureOwnedVessel(actor, shuttle);
+        var crew = ownership.VesselId is { } vesselId
+            ? await _database.GetHangarVesselCrew(vesselId)
+            : [];
+
+        ent.Comp.ShuttleCrew = crew;
+        ent.Comp.ShuttleCrewCandidates = ownership.Success
+            ? GetCrewCandidates(actor, crew)
+            : [];
+        ent.Comp.CanManageShuttleCrew = ownership.Success;
+        UpdateUserInterface(ent);
+    }
+
+    private async void AddCrewMember(
+        Entity<GeneralStationRecordConsoleComponent> ent,
+        EntityUid actor,
+        Guid playerUserId,
+        int characterSlot)
+    {
+        if (!TryGetConsoleShuttle(ent.Owner, out var shuttle))
+            return;
+
+        var ownership = await TryEnsureOwnedVessel(actor, shuttle);
+        if (!ownership.Success ||
+            !TryGetOnlineCharacter(playerUserId, characterSlot, out var characterName))
+        {
+            _popup.PopupEntity(Loc.GetString("station-records-shuttle-crew-owner-only"), actor);
+            return;
+        }
+
+        var member = new HangarVesselCrewRecord(
+            ownership.VesselId!.Value,
+            playerUserId,
+            characterSlot,
+            characterName);
+        if (!await _database.AddHangarVesselCrew(member))
+        {
+            _popup.PopupEntity(Loc.GetString("station-records-shuttle-crew-update-failed"), actor);
+            return;
+        }
+
+        await RefreshRuntimeCrew(shuttle, ownership.VesselId.Value);
+        _popup.PopupEntity(
+            Loc.GetString("station-records-shuttle-crew-added", ("name", characterName)),
+            actor);
+        RefreshCrewView(ent, actor);
+    }
+
+    private async void RemoveCrewMember(
+        Entity<GeneralStationRecordConsoleComponent> ent,
+        EntityUid actor,
+        Guid playerUserId,
+        int characterSlot)
+    {
+        if (!TryGetConsoleShuttle(ent.Owner, out var shuttle))
+            return;
+
+        var ownership = await TryEnsureOwnedVessel(actor, shuttle);
+        if (!ownership.Success)
+        {
+            _popup.PopupEntity(Loc.GetString("station-records-shuttle-crew-owner-only"), actor);
+            return;
+        }
+
+        await _database.RemoveHangarVesselCrew(
+            ownership.VesselId!.Value,
+            playerUserId,
+            characterSlot);
+        await RefreshRuntimeCrew(shuttle, ownership.VesselId.Value);
+        RefreshCrewView(ent, actor);
+    }
+
+    private bool TryGetConsoleShuttle(EntityUid console, out EntityUid shuttle)
+    {
+        shuttle = default;
+        if (Transform(console).GridUid is not { Valid: true } grid)
+            return false;
+
+        shuttle = grid;
+        return true;
+    }
+
+    private async Task<(bool Success, Guid? VesselId)> TryEnsureOwnedVessel(
+        EntityUid actor,
+        EntityUid shuttle)
+    {
+        if (!_players.TryGetSessionByEntity(actor, out var session))
+            return (false, null);
+
+        var preferences = _preferences.GetPreferencesOrNull(session.UserId);
+        if (preferences == null || preferences.SelectedCharacterIndex < 0)
+            return (false, null);
+
+        if (TryComp<ShuttleDeedComponent>(shuttle, out var existingDeed) &&
+            existingDeed.PersistedVesselId is { } persistedId)
+        {
+            var persisted = await _database.GetHangarVessel(persistedId);
+            if (persisted != null)
+            {
+                return (
+                    persisted.PlayerUserId == session.UserId.UserId &&
+                    persisted.CharacterSlot == preferences.SelectedCharacterIndex,
+                    persistedId);
+            }
+        }
+
+        if (!TryComp<ShipOwnershipComponent>(shuttle, out var ownership) ||
+            ownership.OwnerUserId != session.UserId)
+        {
+            return (false, null);
+        }
+
+        var deed = EnsureComp<ShuttleDeedComponent>(shuttle);
+        var vesselId = deed.PersistedVesselId ?? Guid.NewGuid();
+        _shuttleRecords.SetPersistentVessel(
+            (shuttle, deed),
+            vesselId,
+            HangarVesselState.Deployed);
+        _shuttleRecords.AttachPersistedId(shuttle, vesselId);
+
+        var prototype = TryComp<VesselComponent>(shuttle, out var vessel)
+            ? vessel.VesselId.Id
+            : null;
+        var name = string.Join(" ", new[] { deed.ShuttleName, deed.ShuttleNameSuffix }
+            .Where(part => !string.IsNullOrWhiteSpace(part)));
+        var record = new HangarVesselRecord(
+            vesselId,
+            session.UserId.UserId,
+            preferences.SelectedCharacterIndex,
+            prototype,
+            name,
+            _gridPersistence.GetHangarSavePath(vesselId).ToString(),
+            HangarVesselState.Deployed,
+            DateTime.UtcNow);
+
+        var maxSlots = Math.Max(0, _configuration.GetCVar(ForgeVars.HangarMaxSlots));
+        return (await _database.UpsertHangarVessel(record, maxSlots), vesselId);
+    }
+
+    private List<StationRecordsCrewCandidate> GetCrewCandidates(
+        EntityUid owner,
+        IReadOnlyCollection<HangarVesselCrewRecord> crew)
+    {
+        var result = new List<StationRecordsCrewCandidate>();
+        foreach (var session in _players.Sessions)
+        {
+            if (session.AttachedEntity is not { Valid: true } attached ||
+                attached == owner)
+            {
+                continue;
+            }
+
+            var preferences = _preferences.GetPreferencesOrNull(session.UserId);
+            if (preferences == null || preferences.SelectedCharacterIndex < 0 ||
+                crew.Any(member =>
+                    member.PlayerUserId == session.UserId.UserId &&
+                    member.CharacterSlot == preferences.SelectedCharacterIndex))
+            {
+                continue;
+            }
+
+            result.Add(new StationRecordsCrewCandidate(
+                session.UserId.UserId,
+                preferences.SelectedCharacterIndex,
+                Name(attached)));
+        }
+
+        return result.OrderBy(candidate => candidate.CharacterName).ToList();
+    }
+
+    private bool TryGetOnlineCharacter(
+        Guid playerUserId,
+        int characterSlot,
+        out string characterName)
+    {
+        foreach (var session in _players.Sessions)
+        {
+            var preferences = _preferences.GetPreferencesOrNull(session.UserId);
+            if (session.UserId.UserId != playerUserId ||
+                preferences?.SelectedCharacterIndex != characterSlot ||
+                session.AttachedEntity is not { Valid: true } attached)
+            {
+                continue;
+            }
+
+            characterName = Name(attached);
+            return true;
+        }
+
+        characterName = string.Empty;
+        return false;
+    }
+
+    private async Task RefreshRuntimeCrew(EntityUid shuttle, Guid vesselId)
+    {
+        var crew = await _database.GetHangarVesselCrew(vesselId);
+        EntityManager.System<PersistentShipCrewSystem>().SetCrew(shuttle, crew);
+    }
     // End Frontier: job counts, advertisements
 
     private void UpdateUserInterface(Entity<GeneralStationRecordConsoleComponent> ent)
@@ -147,7 +407,9 @@ public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
 
         if (!TryComp<StationRecordsComponent>(owningStation, out var stationRecords))
         {
-            _ui.SetUiState(uid, GeneralStationRecordConsoleKey.Key, new GeneralStationRecordConsoleState(null, null, null, jobList, console.Filter, ent.Comp.CanDeleteEntries, advertisement)); // Frontier: add as many args as we can
+            _ui.SetUiState(uid, GeneralStationRecordConsoleKey.Key, new GeneralStationRecordConsoleState(
+                null, null, null, jobList, console.Filter, ent.Comp.CanDeleteEntries, advertisement,
+                console.ShuttleCrew, console.ShuttleCrewCandidates, console.CanManageShuttleCrew));
             return;
         }
 
@@ -156,7 +418,9 @@ public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
         switch (listing.Count)
         {
             case 0:
-                var consoleState = new GeneralStationRecordConsoleState(null, null, null, jobList, console.Filter, ent.Comp.CanDeleteEntries, advertisement); // Frontier: add as many args as we can
+                var consoleState = new GeneralStationRecordConsoleState(
+                    null, null, null, jobList, console.Filter, ent.Comp.CanDeleteEntries, advertisement,
+                    console.ShuttleCrew, console.ShuttleCrewCandidates, console.CanManageShuttleCrew);
                 _ui.SetUiState(uid, GeneralStationRecordConsoleKey.Key, consoleState);
                 return;
             default:
@@ -167,14 +431,18 @@ public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
 
         if (console.ActiveKey is not { } id)
         {
-            _ui.SetUiState(uid, GeneralStationRecordConsoleKey.Key, new GeneralStationRecordConsoleState(null, null, listing, jobList, console.Filter, ent.Comp.CanDeleteEntries, advertisement)); // Frontier: add as many args as we can
+            _ui.SetUiState(uid, GeneralStationRecordConsoleKey.Key, new GeneralStationRecordConsoleState(
+                null, null, listing, jobList, console.Filter, ent.Comp.CanDeleteEntries, advertisement,
+                console.ShuttleCrew, console.ShuttleCrewCandidates, console.CanManageShuttleCrew));
             return;
         }
 
         var key = new StationRecordKey(id, owningStation.Value);
         _stationRecords.TryGetRecord<GeneralStationRecord>(key, out var record, stationRecords);
 
-        GeneralStationRecordConsoleState newState = new(id, record, listing, jobList, console.Filter, ent.Comp.CanDeleteEntries, advertisement);
+        GeneralStationRecordConsoleState newState = new(
+            id, record, listing, jobList, console.Filter, ent.Comp.CanDeleteEntries, advertisement,
+            console.ShuttleCrew, console.ShuttleCrewCandidates, console.CanManageShuttleCrew);
         _ui.SetUiState(uid, GeneralStationRecordConsoleKey.Key, newState);
     }
 }

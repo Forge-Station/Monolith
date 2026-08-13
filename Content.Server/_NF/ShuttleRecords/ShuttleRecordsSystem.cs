@@ -10,6 +10,7 @@ using Content.Shared.Access.Systems;
 using Content.Shared._NF.Shipyard.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Server._NF.ShuttleRecords;
 
@@ -56,6 +57,52 @@ public sealed partial class ShuttleRecordsSystem : SharedShuttleRecordsSystem
             return;
 
         component.ShuttleRecords[record.EntityUid] = record;
+        RefreshStateForAll();
+    }
+
+    public void AttachPersistedId(EntityUid shuttle, Guid vesselId)
+    {
+        if (!TryGetShuttleRecordsDataComponent(out var component))
+            return;
+
+        var netEntity = GetNetEntity(shuttle);
+        if (!component.ShuttleRecords.TryGetValue(netEntity, out var record))
+            return;
+
+        record.PersistedVesselId = vesselId;
+        RefreshStateForAll();
+    }
+
+    public void RelinkPersistedRecord(
+        Guid vesselId,
+        EntityUid shuttle,
+        string shuttleName,
+        string ownerName)
+    {
+        if (!TryGetShuttleRecordsDataComponent(out var component))
+            return;
+
+        var pair = component.ShuttleRecords
+            .FirstOrDefault(entry => entry.Value.PersistedVesselId == vesselId);
+        var netEntity = GetNetEntity(shuttle);
+        if (pair.Value == null)
+        {
+            component.ShuttleRecords[netEntity] = new ShuttleRecord(
+                shuttleName,
+                string.Empty,
+                ownerName,
+                netEntity,
+                false,
+                0,
+                persistedVesselId: vesselId);
+        }
+        else
+        {
+            component.ShuttleRecords.Remove(pair.Key);
+            pair.Value.EntityUid = netEntity;
+            component.ShuttleRecords[netEntity] = pair.Value;
+        }
+
         RefreshStateForAll();
     }
 

@@ -11,6 +11,7 @@ using Content.Server.Roles;
 using Content.Server.Station.Systems;
 using Content.Server._NF.Bank;
 using Content.Server._NF.GameRule;
+using Content.Server._Forge.Persistence;
 using Content.Server.Nutrition; // Forge-Change
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -26,6 +27,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
@@ -223,7 +225,6 @@ namespace Content.Server.GameTicking
             for (var i = 0; i < maps.Count; i++)
             {
                 LoadGameMap(maps[i], out var mapId);
-                DebugTools.Assert(!_map.IsInitialized(mapId));
 
                 if (i == 0)
                     DefaultMap = mapId;
@@ -505,7 +506,17 @@ namespace Content.Server.GameTicking
             }
 
             // MapInitialize *before* spawning players, our codebase is too shit to do it afterwards...
-            _map.InitializeMap(DefaultMap);
+            // Persisted maps were saved mid-round and load already initialized.
+            if (!_map.IsInitialized(DefaultMap))
+                _map.InitializeMap(DefaultMap);
+
+            // Forge-Change: initialize additional BSS sector maps (including paused ones).
+            var extraMaps = EntityManager.AllEntityQueryEnumerator<Content.Shared._Forge.Bss.BssSectorMapComponent, MapComponent>();
+            while (extraMaps.MoveNext(out _, out _, out var map))
+            {
+                if (map.MapId != DefaultMap && !_map.IsInitialized(map.MapId))
+                    _map.InitializeMap(map.MapId);
+            }
 
             SpawnPlayers(readyPlayers, readyPlayerProfiles, force);
 
@@ -1201,11 +1212,15 @@ namespace Content.Server.GameTicking
         /// </summary>
         private void ResettingCleanup()
         {
+            RaiseLocalEvent(new BeforeRoundRestartWarningEvent());
+
             // Move everybody currently in the server to lobby.
             foreach (var player in _playerManager.Sessions)
             {
                 PlayerJoinLobby(player);
             }
+
+            RaiseLocalEvent(new BeforeRoundRestartPersistenceEvent());
 
             // Round restart cleanup event, so entity systems can reset.
             var ev = new RoundRestartCleanupEvent();

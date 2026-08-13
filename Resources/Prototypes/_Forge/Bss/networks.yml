@@ -1,0 +1,93 @@
+# Mesh BSS network matching the faction / POI schematic.
+# Inner triangle: NT, СИВ, ТСФ. Outer: ВКР + three POI clusters + two wilds.
+- type: bssNetwork
+  id: ForgeBssNetwork
+  sectors:
+  - id: central
+    name: Сектор НТ
+    position: 0, 40
+    mapKey: central
+    primary: true
+    color: "#3d8bfd"
+    parallax: BssParallaxNt
+  - id: siv
+    name: Сектор СИВ
+    position: -90, -70
+    mapKey: siv
+    color: "#c4a06a"
+    parallax: BssParallaxSiv
+  - id: tsf
+    name: Сектор ТСФ
+    position: 90, -70
+    mapKey: tsf
+    color: "#2eb8d6"
+    parallax: BssParallaxTsf
+  - id: vkr
+    name: Сектор ВКР
+    position: 0, 280
+    mapKey: vkr
+    color: "#9b6fd4"
+    parallax: BssParallaxVkr
+  - id: poiWest
+    name: Западные ПОИ
+    position: -260, 80
+    mapKey: poiWest
+    color: "#4fd18b"
+    parallax: BssParallaxPoi
+  - id: poiEast
+    name: Восточные ПОИ
+    position: 260, 80
+    mapKey: poiEast
+    color: "#6ee0a8"
+    parallax: BssParallaxPoiEast
+  - id: poiSouth
+    name: Южные ПОИ
+    position: 0, -260
+    mapKey: poiSouth
+    color: "#3cbc7a"
+    parallax: BssParallaxPoiSouth
+  - id: wildWest
+    name: Западная пустошь
+    position: -220, -220
+    mapKey: wildWest
+    color: "#7a8494"
+    parallax: BssParallaxWild
+  - id: wildEast
+    name: Восточная пустошь
+    position: 220, -220
+    mapKey: wildEast
+    color: "#8b93a3"
+    parallax: BssParallaxWildEast
+  links:
+  - from: { sector: vkr, gate: vkr-poiWest }
+    to: { sector: poiWest, gate: poiWest-vkr }
+  - from: { sector: vkr, gate: vkr-poiEast }
+    to: { sector: poiEast, gate: poiEast-vkr }
+  - from: { sector: vkr, gate: vkr-central }
+    to: { sector: central, gate: central-vkr }
+  - from: { sector: central, gate: central-poiWest }
+    to: { sector: poiWest, gate: poiWest-central }
+  - from: { sector: central, gate: central-poiEast }
+    to: { sector: poiEast, gate: poiEast-central }
+  - from: { sector: central, gate: central-siv }
+    to: { sector: siv, gate: siv-central }
+  - from: { sector: central, gate: central-tsf }
+    to: { sector: tsf, gate: tsf-central }
+  - from: { sector: siv, gate: siv-tsf }
+    to: { sector: tsf, gate: tsf-siv }
+  - from: { sector: siv, gate: siv-poiWest }
+    to: { sector: poiWest, gate: poiWest-siv }
+  - from: { sector: siv, gate: siv-poiSouth }
+    to: { sector: poiSouth, gate: poiSouth-siv }
+  - from: { sector: tsf, gate: tsf-poiEast }
+    to: { sector: poiEast, gate: poiEast-tsf }
+  - from: { sector: tsf, gate: tsf-poiSouth }
+    to: { sector: poiSouth, gate: poiSouth-tsf }
+  - from: { sector: poiWest, gate: poiWest-wildWest }
+    to: { sector: wildWest, gate: wildWest-poiWest }
+  - from: { sector: poiEast, gate: poiEast-wildEast }
+    to: { sector: wildEast, gate: wildEast-poiEast }
+  - from: { sector: poiSouth, gate: poiSouth-wildWest }
+    to: { sector: wildWest, gate: wildWest-poiSouth }
+  - from: { sector: poiSouth, gate: poiSouth-wildEast }
+    to: { sector: wildEast, gate: wildEast-poiSouth }

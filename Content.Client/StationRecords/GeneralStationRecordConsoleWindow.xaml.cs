@@ -6,6 +6,8 @@ using Robust.Shared.Prototypes; // Frontier
 using Content.Shared.Roles; // Frontier
 using Robust.Shared.Utility; // Frontier
 using Content.Client._NF.StationRecords; // Frontier
+using Content.Shared._Forge.Persistence;
+using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client.StationRecords;
 
@@ -22,8 +24,11 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
     public event Action<ProtoId<JobPrototype>>? OnJobAdd; // Frontier
     public event Action<ProtoId<JobPrototype>>? OnJobSubtract; // Frontier
     public event Action<string>? OnAdvertisementChanged; // Frontier
+    public event Action<StationRecordsCrewCandidate>? OnShuttleCrewAdd;
+    public event Action<HangarVesselCrewRecord>? OnShuttleCrewRemove;
     private string? _lastAdvertisement; // Frontier
     private bool _advertisementEdited; // Frontier
+    private List<StationRecordsCrewCandidate> _shuttleCrewCandidates = [];
     public const int MaxAdvertisementLength = 500; // Frontier
 
     private bool _isPopulating;
@@ -106,6 +111,14 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
             AdUnsavedChanges.Visible = false;
             AdSubmitButton.Disabled = true;
         };
+        ShuttleCrewAdd.OnPressed += _ =>
+        {
+            var selected = ShuttleCrewCandidate.SelectedId;
+            if (selected < 0 || selected >= _shuttleCrewCandidates.Count)
+                return;
+
+            OnShuttleCrewAdd?.Invoke(_shuttleCrewCandidates[selected]);
+        };
         // End Frontier: station/ship advertisements
     }
 
@@ -142,6 +155,7 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
             if (!_advertisementEdited && !AdTextBox.HasKeyboardFocus())
                 AdTextBox.TextRope = new Rope.Leaf(state.Advertisement);
         }
+        PopulateShuttleCrew(state);
         // End Frontier: station/ship advertisements
 
         if (state.RecordListing == null)
@@ -173,6 +187,48 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
         {
             RecordContainer.RemoveAllChildren();
         }
+    }
+
+    private void PopulateShuttleCrew(GeneralStationRecordConsoleState state)
+    {
+        ShuttleCrewContainer.Visible = state.CanManageShuttleCrew;
+        if (!state.CanManageShuttleCrew)
+            return;
+
+        var crew = state.ShuttleCrew ?? [];
+        _shuttleCrewCandidates = state.ShuttleCrewCandidates ?? [];
+        ShuttleCrewList.RemoveAllChildren();
+        foreach (var member in crew)
+        {
+            var row = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                HorizontalExpand = true,
+            };
+            row.AddChild(new Label
+            {
+                Text = member.CharacterName,
+                HorizontalExpand = true,
+            });
+            var remove = new Button
+            {
+                Text = Loc.GetString("station-records-shuttle-crew-remove"),
+            };
+            remove.OnPressed += _ => OnShuttleCrewRemove?.Invoke(member);
+            row.AddChild(remove);
+            ShuttleCrewList.AddChild(row);
+        }
+
+        ShuttleCrewEmpty.Visible = crew.Count == 0;
+        ShuttleCrewCandidate.Clear();
+        for (var i = 0; i < _shuttleCrewCandidates.Count; i++)
+            ShuttleCrewCandidate.AddItem(_shuttleCrewCandidates[i].CharacterName, i);
+
+        if (_shuttleCrewCandidates.Count > 0)
+            ShuttleCrewCandidate.SelectId(0);
+
+        ShuttleCrewCandidate.Disabled = _shuttleCrewCandidates.Count == 0;
+        ShuttleCrewAdd.Disabled = _shuttleCrewCandidates.Count == 0;
     }
     private void PopulateRecordListing(Dictionary<uint, string> listing, uint? selected)
     {

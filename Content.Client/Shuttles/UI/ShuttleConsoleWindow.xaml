@@ -44,6 +44,12 @@
                     VerticalExpand="True"
                     Text="DOCK"
                     StyleClasses="ButtonSquare"/>
+            <Button Name="SystemModeButton"
+                    ToggleMode="True"
+                    HorizontalExpand="True"
+                    VerticalExpand="True"
+                    Text="SYSTEM"
+                    StyleClasses="ButtonSquare"/>
         </BoxContainer>
         </PanelContainer>
         <!-- Contents box -->
@@ -54,6 +60,7 @@
             <ui:NavScreen Name="NavContainer" Visible="False"/>
             <ui:MapScreen Name="MapContainer" Visible="False"/>
             <ui:DockingScreen Name="DockContainer" Visible="False"/>
+            <ui:BssSystemScreen Name="SystemContainer" Visible="False"/>
         </BoxContainer>
         </BoxContainer>
             </PanelContainer>

@@ -75,6 +75,12 @@ public sealed partial class WorldgenConfigSystem : EntitySystem
 
         var target = _map.GetMapEntityId(_gameTicker.DefaultMap);
         Log.Debug($"Trying to configure {_gameTicker.DefaultMap}, aka {ToPrettyString(target)} aka {target}");
+
+        // A persisted map already has WorldController/BiomeSelection. Adding them
+        // again crashes; drop the saved copies and install a fresh worldgen index.
+        RemComp<WorldControllerComponent>(target);
+        RemComp<BiomeSelectionComponent>(target);
+
         var cfg = _proto.Index<WorldgenConfigPrototype>(_worldgenConfig);
 
         cfg.Apply(target, _ser, EntityManager); // Apply the config to the map.

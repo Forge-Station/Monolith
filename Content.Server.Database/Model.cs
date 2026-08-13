@@ -53,6 +53,8 @@ namespace Content.Server.Database
         public DbSet<CompanyInvitation> CompanyInvitations { get; set; } = null!;
         public DbSet<CompanyLog> CompanyLogs { get; set; } = null!;
         public DbSet<CompanyBulletin> CompanyBulletins { get; set; } = null!;
+        public DbSet<HangarVessel> HangarVessels { get; set; } = null!;
+        public DbSet<HangarVesselCrew> HangarVesselCrew { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -387,6 +389,32 @@ namespace Content.Server.Database
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<HangarVessel>()
+                .HasOne(w => w.Player)
+                .WithMany(p => p.HangarVessels)
+                .HasForeignKey(w => w.PlayerUserId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<HangarVessel>()
+                .HasIndex(w => new { w.PlayerUserId, w.CharacterSlot });
+
+            modelBuilder.Entity<HangarVesselCrew>()
+                .HasKey(member => new { member.VesselId, member.PlayerUserId, member.CharacterSlot });
+
+            modelBuilder.Entity<HangarVesselCrew>()
+                .HasOne(member => member.Vessel)
+                .WithMany(vessel => vessel.Crew)
+                .HasForeignKey(member => member.VesselId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<HangarVesselCrew>()
+                .HasOne(member => member.Player)
+                .WithMany(player => player.HangarCrewMemberships)
+                .HasForeignKey(member => member.PlayerUserId)
+                .HasPrincipalKey(player => player.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             // Forge: company organization
             modelBuilder.Entity<CompanyRole>()
                 .HasIndex(r => new { r.CompanyId, r.Name })
@@ -653,6 +681,8 @@ namespace Content.Server.Database
         public List<ServerRoleBan> AdminServerRoleBansLastEdited { get; set; } = null!;
         public List<RoleWhitelist> JobWhitelists { get; set; } = null!;
         public List<CompanyMember> CompanyMembers { get; set; } = null!; // Mono
+        public List<HangarVessel> HangarVessels { get; set; } = null!; // Forge
+        public List<HangarVesselCrew> HangarCrewMemberships { get; set; } = null!; // Forge
     }
 
     [Table("whitelist")]
@@ -1418,6 +1448,47 @@ namespace Content.Server.Database
         public Guid? RoleId { get; set; }
     }
     // Mono-End
+
+    /// <summary>
+    /// Character ownership metadata for a file-backed hangar shuttle.
+    /// The serialized grid itself is deliberately not stored in the database.
+    /// </summary>
+    public class HangarVessel
+    {
+        [Key]
+        public Guid VesselId { get; set; }
+
+        [Required, ForeignKey("Player")]
+        public Guid PlayerUserId { get; set; }
+        public Player Player { get; set; } = default!;
+
+        public int CharacterSlot { get; set; }
+        public string? VesselPrototypeId { get; set; }
+
+        [Required]
+        public string CustomName { get; set; } = string.Empty;
+
+        [Required]
+        public string SavePath { get; set; } = string.Empty;
+
+        public int State { get; set; }
+        public DateTime LastStored { get; set; }
+        public List<HangarVesselCrew> Crew { get; set; } = null!;
+    }
+
+    public class HangarVesselCrew
+    {
+        public Guid VesselId { get; set; }
+        public HangarVessel Vessel { get; set; } = default!;
+
+        public Guid PlayerUserId { get; set; }
+        public Player Player { get; set; } = default!;
+
+        public int CharacterSlot { get; set; }
+
+        [Required]
+        public string CharacterName { get; set; } = string.Empty;
+    }
 
     // Forge-Start: company organization
     public class CompanyRole

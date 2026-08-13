@@ -40,6 +40,7 @@ public sealed partial class GridGodModeSystem : EntitySystem
         }
 
         // Find all entities on the grid and apply GodMode to them if they're not organic
+        component.ProtectedEntities.Clear();
         var allEntitiesOnGrid = _lookup.GetEntitiesIntersecting(uid).ToHashSet();
 
         foreach (var entity in allEntitiesOnGrid)

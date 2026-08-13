@@ -1,0 +1,37 @@
+- type: entity
+  id: BssWarpGateCore
+  name: BSS warp gate
+  description: A linear bluespace corridor endpoint.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    noRot: true
+    sprite: Structures/Specific/Anomalies/Cores/bluespace_core.rsi
+    layers:
+    - state: core
+    - state: pulse
+    scale: 2, 2
+  - type: PointLight
+    radius: 10
+    energy: 4
+    color: "#35c8ff"
+  - type: WarpPoint
+    location: BSS Gate
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Clickable
+  - type: InteractionOutline

@@ -178,6 +178,15 @@ namespace Content.Server.Shuttles.Systems
             // This little gem is for docking deserialization
             if (component.DockedWith != null)
             {
+                if (!Exists(component.DockedWith.Value) ||
+                    !HasComp<DockingComponent>(component.DockedWith.Value))
+                {
+                    component.DockedWith = null;
+                    component.DockJoint = null;
+                    component.DockJointId = null;
+                    return;
+                }
+
                 // They're still initialising so we'll just wait for both to be ready.
                 if (MetaData(component.DockedWith.Value).EntityLifeStage < EntityLifeStage.Initialized)
                     return;
@@ -358,6 +367,14 @@ namespace Content.Server.Shuttles.Systems
 
             // Check if either shuttle is in FTL before undocking
             var otherDockUid = dock.Comp.DockedWith.Value;
+            if (!Exists(otherDockUid) || !HasComp<TransformComponent>(otherDockUid))
+            {
+                dock.Comp.DockedWith = null;
+                dock.Comp.DockJoint = null;
+                dock.Comp.DockJointId = null;
+                return;
+            }
+
             var shuttleUid = Transform(dock).GridUid;
             var otherShuttleUid = Transform(otherDockUid).GridUid;
 

@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Client._Mono.Radar;
 using Content.Client.Station; // Frontier
 using Content.Shared._Crescent.ShipShields;
+using Content.Shared._Forge.Bss;
 using Content.Shared._Forge.LetoferolAnnihilator; // Forge-Change
 using Content.Shared._Forge.Shuttles.Components; // Forge-Change: POI capture zone
 using Content.Shared._Mono.Company;
@@ -39,6 +40,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _transform;
     private readonly RadarBlipsSystem _blips;
+    private List<BssGateRadarState> _bssGates = [];
 
     /// <summary>
     /// Used to transform all of the radar objects. Typically is a shuttle console parented to a grid.
@@ -550,6 +552,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         // End Frontier
 
         _docks = state.Docks;
+        _bssGates = state.BssGates;
 
         NfUpdateState(state); // Frontier Update State
     }
@@ -601,6 +604,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         // Draw shields
         DrawShields(handle, xform, worldToShuttle);
         DrawAnnihilatorZones(handle, worldToView, xform.MapID); // Forge-Change
+        DrawBssGateZones(handle, worldToView);
 
         // Frontier Corvax: north line drawing
         DrawNorthLine(handle, worldRot);
@@ -1003,6 +1007,24 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                 continue;
 
             DrawWorldZone(handle, worldToView, _transform.GetWorldPosition(xform), zoneComp.Radius, zoneComp.ZoneColor);
+        }
+    }
+
+    private void DrawBssGateZones(DrawingHandleScreen handle, Matrix3x2 worldToView)
+    {
+        foreach (var gate in _bssGates)
+        {
+            var color = Color.FromHex("#35c8ff");
+            DrawWorldZone(handle, worldToView, gate.WorldPosition, gate.Range, color);
+
+            var viewPosition = Vector2.Transform(gate.WorldPosition, worldToView);
+            var label = Loc.GetString("shuttle-console-bss-gate-radar-label");
+            var dimensions = handle.GetDimensions(Font, label, 1f);
+            handle.DrawString(
+                Font,
+                viewPosition - new Vector2(dimensions.X / 2f, dimensions.Y / 2f),
+                label,
+                color);
         }
     }
 

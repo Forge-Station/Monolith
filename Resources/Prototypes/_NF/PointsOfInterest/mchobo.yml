@@ -16,6 +16,7 @@
   minimumDistance: 6250
   maximumDistance: 7600
   spawnGroup: Scrapyard
+  spawnSectors: [ poiSouth ]
   gridPath: /Maps/_NF/POI/mchobo.yml
 
 - type: gameMap

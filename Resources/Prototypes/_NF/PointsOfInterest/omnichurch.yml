@@ -14,6 +14,7 @@
   name: "Маяк омникульта"
   minimumDistance: 4200
   maximumDistance: 6900
+  spawnSectors: [ wildEast ]
   gridPath: /Maps/_NF/POI/beacon.yml
   addComponents:
   - type: SolarPoweredGrid

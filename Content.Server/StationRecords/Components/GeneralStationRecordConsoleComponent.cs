@@ -1,5 +1,6 @@
 using Content.Server.StationRecords.Systems;
 using Content.Shared.StationRecords;
+using Content.Shared._Forge.Persistence;
 
 namespace Content.Server.StationRecords.Components;
 
@@ -24,4 +25,8 @@ public sealed partial class GeneralStationRecordConsoleComponent : Component
     /// </summary>
     [DataField]
     public bool CanDeleteEntries;
+
+    public List<HangarVesselCrewRecord>? ShuttleCrew;
+    public List<StationRecordsCrewCandidate>? ShuttleCrewCandidates;
+    public bool CanManageShuttleCrew;
 }

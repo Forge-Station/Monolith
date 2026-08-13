@@ -15,6 +15,7 @@
   minimumDistance: 7000
   maximumDistance: 13800 # Forge-change
   spawnGroup: ScienceLab
+  spawnSectors: [ poiSouth ]
   gridPath: /Maps/_Mono/POI/anomalouslab.yml
   addComponents:
   - type: SolarPoweredGrid

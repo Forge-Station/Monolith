@@ -160,4 +160,51 @@ public sealed class ForgeVars
     /// </summary>
     public static readonly CVarDef<float> AutoKickGuestAfkMinutes =
         CVarDef.Create("autokick.guest_afk_minutes", 25f, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Enables Forge world and shuttle persistence.
+    /// </summary>
+    public static readonly CVarDef<bool> PersistenceEnabled =
+        CVarDef.Create("forge.persistence.enabled", true, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Days a persisted world (POIs, outposts, and their contents) lasts before a full wipe.
+    /// Server restarts during this window keep the same world.
+    /// </summary>
+    public static readonly CVarDef<int> PersistenceCycleDays =
+        CVarDef.Create("forge.persistence.cycle_days", 7, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// BSS network used to create extra sector maps and linear warp gates.
+    /// </summary>
+    public static readonly CVarDef<string> BssNetwork =
+        CVarDef.Create("forge.bss.network", "ForgeBssNetwork", CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Minimum world-space distance from the map origin at which BSS gates are placed.
+    /// </summary>
+    public static readonly CVarDef<float> BssGateDistance =
+        CVarDef.Create("forge.bss.gate_distance", 5000f, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Maximum world-space distance from the map origin at which BSS gates are placed.
+    /// Each gate is spawned at a random distance between min and max.
+    /// </summary>
+    public static readonly CVarDef<float> BssGateDistanceMax =
+        CVarDef.Create("forge.bss.gate_distance_max", 10000f, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Root directory in server user data used by Forge persistence.
+    /// </summary>
+    public static readonly CVarDef<string> PersistenceRoot =
+        CVarDef.Create("forge.persistence.root", "/Persisted", CVar.SERVERONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> HangarEnabled =
+        CVarDef.Create("forge.hangar.enabled", true, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> HangarMaxSlots =
+        CVarDef.Create("forge.hangar.max_slots", 2, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> HangarRoundEndWarning =
+        CVarDef.Create("forge.hangar.round_end_warning", true, CVar.SERVERONLY | CVar.ARCHIVE);
 }

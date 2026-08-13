@@ -14,6 +14,7 @@
   minimumDistance: 10000
   maximumDistance: 20000
   spawnGroup: Optional
+  spawnSectors: [ wildEast ]
   gridPath: /Maps/_Mono/POI/Dungeons/ruin_tanker.yml
   addComponents:
   - type: IFF

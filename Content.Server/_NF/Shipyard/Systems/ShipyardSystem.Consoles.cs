@@ -552,6 +552,9 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             return;
         }
 
+        if (deed.PersistedVesselId is { } persistedVesselId)
+            DeletePersistedVessel(persistedVesselId);
+
         RemComp<ShuttleDeedComponent>(targetId);
 
         if (!voucherUsed)

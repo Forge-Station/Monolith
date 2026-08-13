@@ -1,5 +1,6 @@
 using Content.Server._Mono.Ships.Systems;
 using Content.Server._Mono.Shuttles.Components;
+using Content.Server._Forge.Bss;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
@@ -30,6 +31,7 @@ using Content.Server.Station.Components;
 using Content.Shared._Mono.FireControl;
 using Content.Shared._Mono.Shuttles; // Forge-Change - BioScan
 using Content.Shared._Mono.Ships.Components;
+using Content.Shared._Forge.Bss;
 using Content.Shared.Shuttles;
 using Content.Shared.Shuttles.Events;
 using Content.Shared.Verbs;
@@ -55,6 +57,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     [Dependency] private StationJobsSystem _stationJobs = default!;
     [Dependency] private ILogManager _log = default!;
     [Dependency] private CrewedShuttleSystem _crewedShuttle = default!;
+    [Dependency] private BssGateSystem _bssGates = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -91,6 +94,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             subs.Event<ShuttleConsoleFTLBeaconMessage>(OnBeaconFTLMessage);
             subs.Event<ShuttleConsoleFTLPositionMessage>(OnPositionFTLMessage);
             subs.Event<ShuttleConsoleBioScanPositionMessage>(OnBioScanPositionMessage); // Forge-Change - BioScan
+            subs.Event<BssGateJumpMessage>(OnBssGateJump);
             subs.Event<ToggleFTLLockRequestMessage>(OnToggleFTLLock);
             subs.Event<BoundUIClosedEvent>(OnConsoleUIClose);
         });
@@ -411,15 +415,20 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
         NavInterfaceState navState;
         ShuttleMapInterfaceState mapState;
+        BssSystemMapState systemMapState;
         dockState ??= GetDockState();
 
-        var includeMapLists = TryComp<ShuttleConsoleComponent>(consoleUid, out var shuttleCons) &&
-                              shuttleCons.BuiActiveTab == ShuttleConsoleUiTab.Map;
+        TryComp<ShuttleConsoleComponent>(consoleUid, out var shuttleCons);
+        var includeMapLists = shuttleCons?.BuiActiveTab == ShuttleConsoleUiTab.Map;
+        var includeSystemMap = shuttleCons?.BuiActiveTab == ShuttleConsoleUiTab.System;
 
         if (shuttleGridUid != null && entity != null)
         {
             navState = GetNavState(entity.Value, dockState.Docks);
             mapState = GetMapState(consoleUid, shuttleGridUid.Value, includeMapLists); // Forge-Change - BioScan
+            systemMapState = includeSystemMap
+                ? _bssGates.GetSystemMap(shuttleGridUid.Value)
+                : BssSystemMapState.Empty();
         }
         else
         {
@@ -433,9 +442,11 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
                 ShuttleBioScanStatus.None, // Forge-Change - BioScan
                 false, // Forge-Change - BioScan
                 includeBeaconExclusionLists: includeMapLists);
+            systemMapState = BssSystemMapState.Empty();
         }
 
         if (!mapState.IncludeBeaconExclusionLists &&
+            !includeSystemMap &&
             _shuttleBuiLastPush.TryGetValue(consoleUid, out var prev) &&
             prev.Ftl == mapState.FTLState &&
             prev.Bio == mapState.BioScanStatus &&
@@ -447,7 +458,10 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
         _shuttleBuiLastPush[consoleUid] = (_timing.CurTime, mapState.FTLState, mapState.BioScanStatus, CountDockPorts(dockState));
 
-        _ui.SetUiState(consoleUid, ShuttleConsoleUiKey.Key, new ShuttleBoundUserInterfaceState(navState, mapState, dockState));
+        _ui.SetUiState(
+            consoleUid,
+            ShuttleConsoleUiKey.Key,
+            new ShuttleBoundUserInterfaceState(navState, mapState, dockState, systemMapState));
     }
 
     private static int CountDockPorts(DockingInterfaceState? dockState)
@@ -479,6 +493,26 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         component.BuiActiveTab = args.Tab;
         DockingInterfaceState? dockState = null;
         UpdateState(uid, ref dockState);
+    }
+
+    private void OnBssGateJump(Entity<ShuttleConsoleComponent> ent, ref BssGateJumpMessage args)
+    {
+        var consoleUid = GetDroneConsole(ent.Owner);
+        if (consoleUid == null ||
+            _xformQuery.GetComponent(consoleUid.Value).GridUid is not { } shuttle ||
+            !shuttle.IsValid())
+        {
+            return;
+        }
+
+        if (!_bssGates.TryJump(shuttle, args.DestinationSector, out var reason) &&
+            args.Actor is { Valid: true } actor)
+        {
+            _popup.PopupClient(Loc.GetString(reason), actor);
+        }
+
+        DockingInterfaceState? dockState = null;
+        UpdateState(ent.Owner, ref dockState);
     }
 
     public override void Update(float frameTime)
@@ -616,7 +650,8 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             angle,
             docks,
             _shuttle.NfGetInertiaDampeningMode(entity), // Frontier: inertia dampening
-            portNames);
+            portNames,
+            _bssGates.GetRadarGates(entity.Comp2.MapUid));
         // Forge-Change: ShieldState removed from nav-state; client reads the networked emitter component directly.
     }
 

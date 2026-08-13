@@ -11,4 +11,5 @@ public enum ShuttleConsoleUiTab : byte
     Nav = 0,
     Map = 1,
     Dock = 2,
+    System = 3,
 }

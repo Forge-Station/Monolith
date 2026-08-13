@@ -11,6 +11,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Shared._Mono.Company;
 using Content.Shared._Forge.Company;
+using Content.Shared._Forge.Persistence;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Ghost.Roles;
@@ -1990,6 +1991,159 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
             await db.DbContext.SaveChangesAsync();
             return true;
+        }
+
+        #endregion
+
+        #region Forge Hangar
+
+        public async Task<List<HangarVesselRecord>> GetHangarVessels(
+            Guid player,
+            int characterSlot,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.HangarVessels
+                .Where(vessel => vessel.PlayerUserId == player && vessel.CharacterSlot == characterSlot)
+                .OrderBy(vessel => vessel.LastStored)
+                .Select(vessel => new HangarVesselRecord(
+                    vessel.VesselId,
+                    vessel.PlayerUserId,
+                    vessel.CharacterSlot,
+                    vessel.VesselPrototypeId,
+                    vessel.CustomName,
+                    vessel.SavePath,
+                    (HangarVesselState) vessel.State,
+                    vessel.LastStored))
+                .ToListAsync(cancel);
+        }
+
+        public async Task<HangarVesselRecord?> GetHangarVessel(
+            Guid vesselId,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.HangarVessels
+                .Where(vessel => vessel.VesselId == vesselId)
+                .Select(vessel => new HangarVesselRecord(
+                    vessel.VesselId,
+                    vessel.PlayerUserId,
+                    vessel.CharacterSlot,
+                    vessel.VesselPrototypeId,
+                    vessel.CustomName,
+                    vessel.SavePath,
+                    (HangarVesselState) vessel.State,
+                    vessel.LastStored))
+                .FirstOrDefaultAsync(cancel);
+        }
+
+        public async Task<bool> UpsertHangarVessel(HangarVesselRecord vessel, int maxSlots)
+        {
+            await using var db = await GetDb();
+            var entity = await db.DbContext.HangarVessels
+                .FirstOrDefaultAsync(existing => existing.VesselId == vessel.VesselId);
+
+            if (entity == null)
+            {
+                var count = await db.DbContext.HangarVessels.CountAsync(existing =>
+                    existing.PlayerUserId == vessel.PlayerUserId &&
+                    existing.CharacterSlot == vessel.CharacterSlot);
+                if (count >= Math.Max(0, maxSlots))
+                    return false;
+
+                entity = new HangarVessel { VesselId = vessel.VesselId };
+                db.DbContext.HangarVessels.Add(entity);
+            }
+
+            entity.PlayerUserId = vessel.PlayerUserId;
+            entity.CharacterSlot = vessel.CharacterSlot;
+            entity.VesselPrototypeId = vessel.VesselPrototypeId;
+            entity.CustomName = vessel.CustomName;
+            entity.SavePath = vessel.SavePath;
+            entity.State = (int) vessel.State;
+            entity.LastStored = vessel.LastStored;
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> SetHangarVesselState(Guid vesselId, HangarVesselState state)
+        {
+            await using var db = await GetDb();
+            var updated = await db.DbContext.HangarVessels
+                .Where(vessel => vessel.VesselId == vesselId)
+                .ExecuteUpdateAsync(update => update.SetProperty(vessel => vessel.State, (int) state));
+            return updated > 0;
+        }
+
+        public async Task<bool> DeleteHangarVessel(Guid vesselId)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.HangarVessels
+                .Where(vessel => vessel.VesselId == vesselId)
+                .ExecuteDeleteAsync() > 0;
+        }
+
+        public async Task<int> PurgeDeployedHangarVessels()
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.HangarVessels
+                .Where(vessel => vessel.State == (int) HangarVesselState.Deployed)
+                .ExecuteDeleteAsync();
+        }
+
+        public async Task<List<HangarVesselCrewRecord>> GetHangarVesselCrew(
+            Guid vesselId,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.HangarVesselCrew
+                .Where(member => member.VesselId == vesselId)
+                .OrderBy(member => member.CharacterName)
+                .Select(member => new HangarVesselCrewRecord(
+                    member.VesselId,
+                    member.PlayerUserId,
+                    member.CharacterSlot,
+                    member.CharacterName))
+                .ToListAsync(cancel);
+        }
+
+        public async Task<bool> AddHangarVesselCrew(HangarVesselCrewRecord member)
+        {
+            await using var db = await GetDb();
+            if (!await db.DbContext.HangarVessels.AnyAsync(vessel => vessel.VesselId == member.VesselId))
+                return false;
+
+            var existing = await db.DbContext.HangarVesselCrew.FindAsync(
+                member.VesselId,
+                member.PlayerUserId,
+                member.CharacterSlot);
+            if (existing != null)
+            {
+                existing.CharacterName = member.CharacterName;
+            }
+            else
+            {
+                db.DbContext.HangarVesselCrew.Add(new HangarVesselCrew
+                {
+                    VesselId = member.VesselId,
+                    PlayerUserId = member.PlayerUserId,
+                    CharacterSlot = member.CharacterSlot,
+                    CharacterName = member.CharacterName,
+                });
+            }
+
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveHangarVesselCrew(Guid vesselId, Guid player, int characterSlot)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.HangarVesselCrew
+                .Where(member => member.VesselId == vesselId &&
+                                 member.PlayerUserId == player &&
+                                 member.CharacterSlot == characterSlot)
+                .ExecuteDeleteAsync() > 0;
         }
 
         #endregion

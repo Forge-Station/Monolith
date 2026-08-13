@@ -493,6 +493,13 @@ public sealed partial class MapScreen : BoxContainer
 
         while (mapComps.MoveNext(out var mapUid, out var mapComp, out var mapXform, out var mapMetadata))
         {
+            // Forge-Change: MAP lists only the sector the shuttle is currently in.
+            // Intra-sector FTL to local objects remains; other BSS maps are gate-only.
+            if (mapComp.MapId != ourMap)
+            {
+                continue;
+            }
+
             if (_console != null && !_shuttles.CanFTLTo(_shuttleEntity.Value, mapComp.MapId, _console.Value))
             {
                 continue;

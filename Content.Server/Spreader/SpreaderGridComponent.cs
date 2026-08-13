@@ -13,6 +13,9 @@ public sealed partial class SpreaderGridComponent : Component
     [DataField]
     public float UpdateSpacing = 1f;
 
-    [DataField]
+    /// <summary>
+    /// Runtime spread work queue. Rebuilt on grid init; must not be serialized
+    /// because it stores live <see cref="Entity{T}"/> handles.
+    /// </summary>
     public Dictionary<ProtoId<EdgeSpreaderPrototype>, Queue<Entity<EdgeSpreaderComponent>>> SpreadQueues = new();
 }

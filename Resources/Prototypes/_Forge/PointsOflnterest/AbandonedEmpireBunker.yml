@@ -5,6 +5,7 @@
   minimumDistance: 10500
   maximumDistance: 11500
   spawnGroup: Required
+  spawnSectors: [ siv ]
   gridPath: /Maps/_Forge/POI/AbandonedEmpireBunker.yml
   addComponents:
   - type: IFF

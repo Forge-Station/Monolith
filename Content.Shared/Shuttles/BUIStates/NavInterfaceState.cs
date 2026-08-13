@@ -1,6 +1,7 @@
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 using Content.Shared._NF.Shuttles.Events; // Frontier - InertiaDampeningMode access
+using Content.Shared._Forge.Bss;
 // Forge-Change: ShieldState removed from this DTO; client HUD now reads ShipShieldEmitterComponent directly.
 
 namespace Content.Shared.Shuttles.BUIStates;
@@ -27,6 +28,7 @@ public sealed class NavInterfaceState
     /// Key is the port ID, value is the display name.
     /// </summary>
     public Dictionary<string, string> NetworkPortNames = new();
+    public List<BssGateRadarState> BssGates = [];
 
     // Frontier fields
     /// <summary>
@@ -53,7 +55,8 @@ public sealed class NavInterfaceState
         Angle? angle,
         Dictionary<NetEntity, List<DockingPortState>> docks,
         InertiaDampeningMode dampeningMode, // Frontier: add dampeningMode
-        Dictionary<string, string>? networkPortNames = null)
+        Dictionary<string, string>? networkPortNames = null,
+        List<BssGateRadarState>? bssGates = null)
     {
         MaxRange = maxRange;
         Coordinates = coordinates;
@@ -61,6 +64,7 @@ public sealed class NavInterfaceState
         Docks = docks;
         DampeningMode = dampeningMode; // Frontier
         NetworkPortNames = networkPortNames ?? new Dictionary<string, string>();
+        BssGates = bssGates ?? [];
     }
 }
 

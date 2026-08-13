@@ -804,6 +804,78 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("connection_log", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.HangarVessel", b =>
+                {
+                    b.Property<Guid>("VesselId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("vessel_id");
+
+                    b.Property<int>("CharacterSlot")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("character_slot");
+
+                    b.Property<string>("CustomName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("custom_name");
+
+                    b.Property<DateTime>("LastStored")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("last_stored");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<string>("SavePath")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("save_path");
+
+                    b.Property<int>("State")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("state");
+
+                    b.Property<string>("VesselPrototypeId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("vessel_prototype_id");
+
+                    b.HasKey("VesselId")
+                        .HasName("PK_hangar_vessels");
+
+                    b.HasIndex("PlayerUserId", "CharacterSlot");
+
+                    b.ToTable("hangar_vessels", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.HangarVesselCrew", b =>
+                {
+                    b.Property<Guid>("VesselId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("vessel_id");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("CharacterSlot")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("character_slot");
+
+                    b.Property<string>("CharacterName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("character_name");
+
+                    b.HasKey("VesselId", "PlayerUserId", "CharacterSlot")
+                        .HasName("PK_hangar_vessel_crew");
+
+                    b.HasIndex("PlayerUserId");
+
+                    b.ToTable("hangar_vessel_crew", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
                 {
                     b.Property<int>("Id")
@@ -1912,6 +1984,41 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Server");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.HangarVessel", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany("HangarVessels")
+                        .HasForeignKey("PlayerUserId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_hangar_vessels_player_player_user_id");
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.HangarVesselCrew", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany("HangarCrewMemberships")
+                        .HasForeignKey("PlayerUserId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_hangar_vessel_crew_player_player_id");
+
+                    b.HasOne("Content.Server.Database.HangarVessel", "Vessel")
+                        .WithMany("Crew")
+                        .HasForeignKey("VesselId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_hangar_vessel_crew_hangar_vessels_vessel_temp_id");
+
+                    b.Navigation("Player");
+
+                    b.Navigation("Vessel");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Job", b =>
                 {
                     b.HasOne("Content.Server.Database.Profile", "Profile")
@@ -2236,6 +2343,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("BanHits");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.HangarVessel", b =>
+                {
+                    b.Navigation("Crew");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Player", b =>
                 {
                     b.Navigation("AdminLogs");
@@ -2273,6 +2385,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("AdminWatchlistsReceived");
 
                     b.Navigation("CompanyMembers");
+
+                    b.Navigation("HangarCrewMemberships");
+
+                    b.Navigation("HangarVessels");
 
                     b.Navigation("JobWhitelists");
                 });

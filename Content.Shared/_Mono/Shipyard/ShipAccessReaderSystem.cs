@@ -11,6 +11,7 @@ using Content.Shared._NF.Whitelist.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared._NF.Shipyard.Components;
 using Content.Shared.Ghost;
+using Content.Shared._Forge.Persistence;
 using Content.Shared.Silicons.StationAi;
 using Robust.Shared.Map;
 
@@ -176,6 +177,11 @@ public sealed partial class ShipAccessReaderSystem : EntitySystem
                 }
             }
         }
+
+        var persistentCrewAccess = new PersistentShipCrewAccessEvent(user);
+        RaiseLocalEvent(gridUid, ref persistentCrewAccess);
+        if (persistentCrewAccess.Allowed)
+            return true;
 
         // Check if any of the user's ID cards have guest access to this ship
         if (TryComp<ShipGuestAccessComponent>(gridUid, out var guestAccess))

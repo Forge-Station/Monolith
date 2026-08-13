@@ -1,2 +1,14 @@
 radar-console-window-title = Консоль сканера массы
 shuttle-console-window-title = Консоль шаттла
+shuttle-console-bss-title = Карта системы
+shuttle-console-bss-network = Карта системы — {$network}
+shuttle-console-bss-select-destination = Выберите связанный сектор назначения.
+shuttle-console-bss-selected = Выбран сектор: {$sector}. Для прыжка подлетите к соответствующим БСС-вратам.
+shuttle-console-bss-jump = Начать БСС-прыжок
+shuttle-console-bss-no-network = Эта карта не подключена к сети БСС-врат.
+shuttle-console-bss-unavailable = БСС-прыжок сейчас недоступен.
+shuttle-console-bss-not-near-gate = Шаттл должен находиться в зоне действия соответствующих БСС-врат.
+shuttle-console-bss-route-offline = Выбранный БСС-маршрут или врата назначения недоступны.
+shuttle-console-bss-gate-radar-label = БСС-ВРАТА
+shuttle-console-bss-gate-name = БСС-врата → {$destination}
+shuttle-console-bss-map-hint = ПКМ — двигать карту, колесо — масштаб

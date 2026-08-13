@@ -95,3 +95,18 @@ shipyard-console-fallback-prevent-sale = Обнаружены ошибки кл�
 # Mono start
 shipyard-console-engine-NFR = NFR
 # Mono end
+
+shipyard-hangar-title = Ангар персонажа
+shipyard-hangar-slots = Слоты: {$used}/{$max}
+shipyard-hangar-empty = В ангаре нет шаттлов.
+shipyard-hangar-store-button = Отправить в ангар
+shipyard-hangar-retrieve-button = Вывести
+shipyard-hangar-no-deployed-vessel = На вставленной ID-карте нет активного шаттла.
+shipyard-hangar-save-failed = Не удалось сохранить шаттл в ангаре.
+shipyard-hangar-load-failed = Не удалось вывести шаттл из ангара.
+shipyard-hangar-slots-full = У этого персонажа нет свободных слотов ангара.
+shipyard-hangar-active-vessel = Сначала отправьте активный шаттл в ангар.
+shipyard-hangar-not-found = Этот шаттл больше недоступен в ангаре.
+shipyard-hangar-stored = {$name} отправлен в ангар.
+shipyard-hangar-retrieved = {$name} выведен из ангара.
+shipyard-hangar-round-end-warning = Активный шаттл не находится в ангаре и будет потерян в конце смены!

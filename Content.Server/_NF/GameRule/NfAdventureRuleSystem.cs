@@ -12,6 +12,8 @@ using Content.Server.Cargo.Components;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
 using Content.Server.GameTicking.Rules;
+using Content.Server._Forge.Bss;
+using Content.Server._Forge.Persistence;
 using Content.Shared._NF.Bank;
 using Content.Shared._NF.CCVar;
 using Content.Shared.GameTicking;
@@ -41,6 +43,8 @@ public sealed partial class NFAdventureRuleSystem : GameRuleSystem<NFAdventureRu
     [Dependency] private IBaseServer _baseServer = default!;
     [Dependency] private IEntitySystemManager _entSys = default!;
     [Dependency] private HyperwarRuleSystem _hyperwar = default!;
+    [Dependency] private PersistentWorldSystem _persistentWorld = default!;
+    [Dependency] private BssWorldSystem _bssWorld = default!;
 
     private readonly HttpClient _httpClient = new();
 
@@ -315,6 +319,15 @@ public sealed partial class NFAdventureRuleSystem : GameRuleSystem<NFAdventureRu
             return;
         }
 
+        // A restored world already contains its POIs. Spawning prototype POIs again
+        // would duplicate stations on every round.
+        if (_persistentWorld.HasLoadedWorld)
+        {
+            base.Started(uid, component, gameRule, args);
+            RaiseLocalEvent(EntityUid.Invalid, new StationsGeneratedEvent(), broadcast: true);
+            return;
+        }
+
         var mapUid = GameTicker.DefaultMap;
 
         //First, we need to grab the list and sort it into its respective spawning logics
@@ -357,16 +370,59 @@ public sealed partial class NFAdventureRuleSystem : GameRuleSystem<NFAdventureRu
                 }
             }
         }
-        _poi.GenerateDepots(mapUid, depotProtos, out component.CargoDepots);
-        _poi.GenerateMarkets(mapUid, marketProtos, out component.MarketStations);
-        _poi.GenerateRequireds(mapUid, requiredProtos, out component.RequiredPois);
-        _poi.GenerateOptionals(mapUid, optionalProtos, out component.OptionalPois);
-        _poi.GenerateUniques(mapUid, remainingUniqueProtosBySpawnGroup, out component.UniquePois);
+
+        var sectors = _bssWorld.GetLoadedSectors();
+        if (sectors.Count == 0)
+        {
+            sectors = [new BssLoadedSector("central", "Central Sector", mapUid, true)];
+        }
+
+        foreach (var sector in sectors)
+        {
+            SpawnPoisForSector(
+                sector,
+                depotProtos,
+                marketProtos,
+                requiredProtos,
+                optionalProtos,
+                remainingUniqueProtosBySpawnGroup,
+                component);
+        }
 
         base.Started(uid, component, gameRule, args);
 
         // Using invalid entity, we don't have a relevant entity to reference here.
         RaiseLocalEvent(EntityUid.Invalid, new StationsGeneratedEvent(), broadcast: true); // TODO: attach this to a meaningful entity.
+    }
+
+    private void SpawnPoisForSector(
+        BssLoadedSector sector,
+        List<PointOfInterestPrototype> depotProtos,
+        List<PointOfInterestPrototype> marketProtos,
+        List<PointOfInterestPrototype> requiredProtos,
+        List<PointOfInterestPrototype> optionalProtos,
+        Dictionary<string, List<PointOfInterestPrototype>> uniqueProtos,
+        NFAdventureRuleComponent component)
+    {
+        var depots = depotProtos.Where(proto => PointOfInterestSystem.MatchesSector(proto, sector.Id, sector.Primary)).ToList();
+        var markets = marketProtos.Where(proto => PointOfInterestSystem.MatchesSector(proto, sector.Id, sector.Primary)).ToList();
+        var required = requiredProtos.Where(proto => PointOfInterestSystem.MatchesSector(proto, sector.Id, sector.Primary)).ToList();
+        var optionals = optionalProtos.Where(proto => PointOfInterestSystem.MatchesSector(proto, sector.Id, sector.Primary)).ToList();
+        var uniques = uniqueProtos.ToDictionary(
+            pair => pair.Key,
+            pair => pair.Value.Where(proto => PointOfInterestSystem.MatchesSector(proto, sector.Id, sector.Primary)).ToList());
+
+        _poi.GenerateDepots(sector.MapId, depots, out var spawnedDepots, sector.Id);
+        _poi.GenerateMarkets(sector.MapId, markets, out var spawnedMarkets, sector.Id);
+        _poi.GenerateRequireds(sector.MapId, required, out var spawnedRequired, sector.Id);
+        _poi.GenerateOptionals(sector.MapId, optionals, out var spawnedOptionals, sector.Id);
+        _poi.GenerateUniques(sector.MapId, uniques, out var spawnedUniques, sector.Id);
+
+        component.CargoDepots.AddRange(spawnedDepots);
+        component.MarketStations.AddRange(spawnedMarkets);
+        component.RequiredPois.AddRange(spawnedRequired);
+        component.OptionalPois.AddRange(spawnedOptionals);
+        component.UniquePois.AddRange(spawnedUniques);
     }
 
     private async Task ReportRound(string message, int color = 0x77DDE7)

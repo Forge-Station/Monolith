@@ -15,6 +15,7 @@
   minimumDistance: 6250
   maximumDistance: 8600
   spawnGroup: Scrapyard
+  spawnSectors: [ poiWest ]
   gridPath: /Maps/_NF/POI/grifty.yml
   addComponents:
   - type: SolarPoweredGrid

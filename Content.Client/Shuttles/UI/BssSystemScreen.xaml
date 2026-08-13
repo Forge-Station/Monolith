@@ -1,0 +1,20 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
+              Orientation="Vertical"
+              HorizontalExpand="True"
+              VerticalExpand="True">
+    <Label Name="NetworkTitle"
+           Text="{Loc 'shuttle-console-bss-title'}"
+           StyleClasses="LabelHeading"/>
+    <ui:BssSystemMapControl Name="SystemMap"
+                            HorizontalExpand="True"
+                            VerticalExpand="True"/>
+    <Label Name="StatusLabel"
+           Text="{Loc 'shuttle-console-bss-select-destination'}"
+           Margin="4"/>
+    <Button Name="JumpButton"
+            Text="{Loc 'shuttle-console-bss-jump'}"
+            Disabled="True"
+            HorizontalAlignment="Center"
+            MinWidth="240"/>
+</BoxContainer>

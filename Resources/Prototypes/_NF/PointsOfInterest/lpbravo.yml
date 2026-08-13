@@ -15,6 +15,7 @@
   minimumDistance: 15000
   maximumDistance: 17000
   spawnGroup: SyndicateFOB
+  spawnSectors: [ vkr ]
   gridPath: /Maps/_NF/POI/lpbravo.yml
   hideWarp: true
   addComponents:

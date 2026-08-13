@@ -23,6 +23,7 @@ using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Utility;
 using Content.Shared.Doors.Components;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics;
 
 namespace Content.Server._NF.Shipyard.Systems;
 
@@ -87,6 +88,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         SubscribeLocalEvent<ShipyardConsoleComponent, EntRemovedFromContainerMessage>(OnItemSlotChanged);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<StationDeedSpawnerComponent, MapInitEvent>(OnInitDeedSpawner);
+        InitializeHangar();
     }
     public override void Shutdown()
     {
@@ -174,6 +176,15 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         {
             _sawmill.Error($"Unable to spawn shuttle {shuttlePath}");
             return false;
+        }
+
+        // Compatibility cleanup for hangar files saved before external
+        // station/docking references were detached.
+        if (TryComp<StationMemberComponent>(grid.Value.Owner, out var stationMember) &&
+            !Exists(stationMember.Station))
+        {
+            RemComp<StationMemberComponent>(grid.Value.Owner);
+            RemComp<JointComponent>(grid.Value.Owner);
         }
 
         _shuttleIndex += grid.Value.Comp.LocalAABB.Width + ShuttleSpawnBuffer;

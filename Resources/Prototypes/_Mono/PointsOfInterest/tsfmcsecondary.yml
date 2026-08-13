@@ -16,6 +16,7 @@
   maximumDistance: 14000
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
+  spawnSectors: [ tsf ]
   placementTags: [ TSF ]
   minDistanceFromTags:
     Renegates: 5000

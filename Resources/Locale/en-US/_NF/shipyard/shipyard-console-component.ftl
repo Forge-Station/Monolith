@@ -101,3 +101,18 @@ shipyard-console-engine-Bananium = Bananium
 # Mono start
 shipyard-console-engine-NFR = NFR
 # Mono end
+
+shipyard-hangar-title = Character hangar
+shipyard-hangar-slots = Slots: {$used}/{$max}
+shipyard-hangar-empty = No stored vessels.
+shipyard-hangar-store-button = Store vessel
+shipyard-hangar-retrieve-button = Retrieve
+shipyard-hangar-no-deployed-vessel = The inserted ID has no deployed vessel.
+shipyard-hangar-save-failed = The vessel could not be stored.
+shipyard-hangar-load-failed = The vessel could not be retrieved.
+shipyard-hangar-slots-full = This character has no free hangar slots.
+shipyard-hangar-active-vessel = Store your active vessel before retrieving another.
+shipyard-hangar-not-found = That vessel is no longer available in this hangar.
+shipyard-hangar-stored = {$name} has been stored in the hangar.
+shipyard-hangar-retrieved = {$name} has been deployed from the hangar.
+shipyard-hangar-round-end-warning = Your deployed vessel is not stored and will be lost when the shift ends!

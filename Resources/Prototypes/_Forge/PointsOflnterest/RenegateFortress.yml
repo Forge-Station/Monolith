@@ -6,6 +6,7 @@
   maximumDistance: 9500
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
+  spawnSectors: [ vkr ]
   placementTags: [ Renegates ]
   minDistanceFromTags:
     TSF: 5000

@@ -2,6 +2,8 @@ using Content.Shared._NF.ShuttleRecords.Components;
 using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Serialization;
+using Content.Shared._Forge.Persistence;
+using Content.Shared._NF.Shipyard.Components;
 
 namespace Content.Shared._NF.ShuttleRecords;
 
@@ -20,6 +22,16 @@ public abstract partial class SharedShuttleRecordsSystem : EntitySystem
     private void OnComponentInit(EntityUid uid, ShuttleRecordsConsoleComponent component, ComponentInit args)
     {
         _itemSlotsSystem.AddItemSlot(uid, ShuttleRecordsConsoleComponent.TargetIdCardSlotId, component.TargetIdSlot);
+    }
+
+    public void SetPersistentVessel(
+        Entity<ShuttleDeedComponent> deed,
+        Guid vesselId,
+        HangarVesselState state)
+    {
+        deed.Comp.PersistedVesselId = vesselId;
+        deed.Comp.HangarState = state;
+        Dirty(deed);
     }
 
     /// <summary>

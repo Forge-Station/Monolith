@@ -1,4 +1,5 @@
 using Robust.Shared.Serialization;
+using Content.Shared._Forge.Persistence;
 
 namespace Content.Shared._NF.Shipyard.BUI;
 
@@ -16,6 +17,8 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
     public readonly string ShipyardName;
     public readonly bool FreeListings;
     public readonly float SellRate;
+    public readonly List<HangarVesselUiEntry> HangarVessels;
+    public readonly int HangarMaxSlots;
 
     public ShipyardConsoleInterfaceState(
         int balance,
@@ -27,7 +30,9 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
         (List<string> available, List<string> unavailable) shipyardPrototypes,
         string shipyardName,
         bool freeListings,
-        float sellRate)
+        float sellRate,
+        List<HangarVesselUiEntry>? hangarVessels = null,
+        int hangarMaxSlots = 2)
     {
         Balance = balance;
         AccessGranted = accessGranted;
@@ -39,5 +44,14 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
         ShipyardName = shipyardName;
         FreeListings = freeListings;
         SellRate = sellRate;
+        HangarVessels = hangarVessels ?? [];
+        HangarMaxSlots = hangarMaxSlots;
     }
 }
+
+[NetSerializable, Serializable]
+public sealed record HangarVesselUiEntry(
+    Guid VesselId,
+    string Name,
+    string? VesselPrototypeId,
+    HangarVesselState State);

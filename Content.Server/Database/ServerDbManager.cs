@@ -25,6 +25,7 @@ using LogLevel = Robust.Shared.Log.LogLevel;
 using MSLogLevel = Microsoft.Extensions.Logging.LogLevel;
 using Content.Shared._Mono.Company;
 using Content.Shared._Forge.Company;
+using Content.Shared._Forge.Persistence;
 using Content.Server._Mono.Company; // Mono
 
 namespace Content.Server.Database
@@ -396,6 +397,23 @@ namespace Content.Server.Database
         Task<List<CompanyLog>> GetCompanyLogs(string companyId, int limit = 100, CancellationToken cancel = default);
         Task<string> GetCompanyBulletin(string companyId, CancellationToken cancel = default);
         Task SetCompanyBulletin(string companyId, string text);
+
+        #endregion
+
+        #region Forge Hangar
+
+        Task<List<HangarVesselRecord>> GetHangarVessels(
+            Guid player,
+            int characterSlot,
+            CancellationToken cancel = default);
+        Task<HangarVesselRecord?> GetHangarVessel(Guid vesselId, CancellationToken cancel = default);
+        Task<bool> UpsertHangarVessel(HangarVesselRecord vessel, int maxSlots);
+        Task<bool> SetHangarVesselState(Guid vesselId, HangarVesselState state);
+        Task<bool> DeleteHangarVessel(Guid vesselId);
+        Task<int> PurgeDeployedHangarVessels();
+        Task<List<HangarVesselCrewRecord>> GetHangarVesselCrew(Guid vesselId, CancellationToken cancel = default);
+        Task<bool> AddHangarVesselCrew(HangarVesselCrewRecord member);
+        Task<bool> RemoveHangarVesselCrew(Guid vesselId, Guid player, int characterSlot);
 
         #endregion
 
@@ -1341,6 +1359,65 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetCompanyBulletin(companyId, cancel));
+        }
+
+        public Task<List<HangarVesselRecord>> GetHangarVessels(
+            Guid player,
+            int characterSlot,
+            CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetHangarVessels(player, characterSlot, cancel));
+        }
+
+        public Task<HangarVesselRecord?> GetHangarVessel(Guid vesselId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetHangarVessel(vesselId, cancel));
+        }
+
+        public Task<bool> UpsertHangarVessel(HangarVesselRecord vessel, int maxSlots)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpsertHangarVessel(vessel, maxSlots));
+        }
+
+        public Task<bool> SetHangarVesselState(Guid vesselId, HangarVesselState state)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetHangarVesselState(vesselId, state));
+        }
+
+        public Task<bool> DeleteHangarVessel(Guid vesselId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteHangarVessel(vesselId));
+        }
+
+        public Task<int> PurgeDeployedHangarVessels()
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.PurgeDeployedHangarVessels());
+        }
+
+        public Task<List<HangarVesselCrewRecord>> GetHangarVesselCrew(
+            Guid vesselId,
+            CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetHangarVesselCrew(vesselId, cancel));
+        }
+
+        public Task<bool> AddHangarVesselCrew(HangarVesselCrewRecord member)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddHangarVesselCrew(member));
+        }
+
+        public Task<bool> RemoveHangarVesselCrew(Guid vesselId, Guid player, int characterSlot)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveHangarVesselCrew(vesselId, player, characterSlot));
         }
 
         public Task SetCompanyBulletin(string companyId, string text)

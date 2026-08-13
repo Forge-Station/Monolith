@@ -12,6 +12,7 @@ using Robust.Shared.Localization;   //Forge-Change: add localization manager
 using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using Robust.Client.UserInterface; //Forge-Change: wiki redirect button
+using Content.Shared._Forge.Persistence;
 
 namespace Content.Client._NF.Shipyard.UI;
 
@@ -26,6 +27,8 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
     public event Action<ButtonEventArgs>? OnUnassignDeed;
     public event Action<string>? OnRenameShip;
     public event Action<ButtonEventArgs>? OnPreviewShip;
+    public event Action? OnStoreHangar;
+    public event Action<Guid>? OnRetrieveHangar;
     private readonly ShipyardConsoleBoundUserInterface _menu;
     private readonly List<VesselSize> _categoryStrings = new();
     private readonly List<VesselClass> _classStrings = new();
@@ -53,6 +56,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
         UnassignDeedButton.OnPressed += (args) => { OnUnassignDeed?.Invoke(args); };
         RenameButton.OnPressed += OnRenameButtonPressed;
         ShipWikiButton.OnPressed += OnShipWikiButtonPressed; //Forge-Change: wiki redirect button
+        StoreHangarButton.OnPressed += _ => OnStoreHangar?.Invoke();
     }
 
 
@@ -352,5 +356,43 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
         _freeListings = state.FreeListings;
         _validId = state.IsTargetIdPresent;
         PopulateProducts(_lastAvailableProtos, _lastUnavailableProtos, _freeListings, _validId);
+        PopulateHangar(state);
+    }
+
+    private void PopulateHangar(ShipyardConsoleInterfaceState state)
+    {
+        HangarVessels.RemoveAllChildren();
+        HangarSlotsLabel.Text = Loc.GetString("shipyard-hangar-slots",
+            ("used", state.HangarVessels.Count),
+            ("max", state.HangarMaxSlots));
+        StoreHangarButton.Disabled = state.ShipDeedTitle == null ||
+                                     state.HangarVessels.Count >= state.HangarMaxSlots;
+
+        if (state.HangarVessels.Count == 0)
+        {
+            HangarVessels.AddChild(new Label { Text = Loc.GetString("shipyard-hangar-empty") });
+            return;
+        }
+
+        foreach (var vessel in state.HangarVessels)
+        {
+            if (vessel.State != HangarVesselState.InHangar)
+                continue;
+
+            var row = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                HorizontalExpand = true,
+            };
+            row.AddChild(new Label
+            {
+                Text = vessel.Name,
+                HorizontalExpand = true,
+            });
+            var retrieve = new Button { Text = Loc.GetString("shipyard-hangar-retrieve-button") };
+            retrieve.OnPressed += _ => OnRetrieveHangar?.Invoke(vessel.VesselId);
+            row.AddChild(retrieve);
+            HangarVessels.AddChild(row);
+        }
     }
 }

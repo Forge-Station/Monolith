@@ -43,6 +43,9 @@ public sealed class ShipyardConsoleBoundUserInterface : BoundUserInterface
         _menu.OnRenameShip += RenameShip;
         _menu.TargetIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent("ShipyardConsole-targetId"));
         _menu.OnPreviewShip += PreviewShip;
+        _menu.OnStoreHangar += StoreHangar;
+        _menu.OnRetrieveHangar += RetrieveHangar;
+        SendMessage(new ShipyardConsoleHangarRefreshMessage());
     }
 
     private void Populate(List<string> availablePrototypes, List<string> unavailablePrototypes, bool freeListings, bool validId)
@@ -116,5 +119,15 @@ public sealed class ShipyardConsoleBoundUserInterface : BoundUserInterface
         var vessel = row.Vessel;
         SendMessage(new ShipyardConsolePreviewMessage());
         _preview.TryPreviewGrid(vessel);
+    }
+
+    private void StoreHangar()
+    {
+        SendMessage(new ShipyardConsoleHangarStoreMessage());
+    }
+
+    private void RetrieveHangar(Guid vesselId)
+    {
+        SendMessage(new ShipyardConsoleHangarRetrieveMessage(vesselId));
     }
 }

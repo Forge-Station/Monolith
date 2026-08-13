@@ -1,0 +1,323 @@
+- type: parallax
+  id: BssParallaxNt
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_NF/Parallaxes/FrontierParallaxBG.png"
+      slowness: 0.998046875
+      scale: "1, 1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_NF/Parallaxes/FrontierParallaxNeb.png"
+      slowness: 0.995
+      scale: "1, 1"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_nt_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+      slowness: 0.996625
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_nt_stars_dim"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+      slowness: 0.989375
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_nt_stars_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars-2.toml"
+      slowness: 0.987265625
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_NF/Parallaxes/Asteroids.png"
+      slowness: 0.977
+      scale: 1.4, 1.4
+      scrolling: "0.012, 0.008"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxSiv
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/KettleParallaxBG.png"
+      slowness: 0.998046875
+      scale: "1.1, 1.1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/KettleParallaxNeb.png"
+      slowness: 0.968046875
+      scale: "1, 1"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_siv_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+      slowness: 0.986625
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_siv_stars_dim"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+      slowness: 0.979375
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/Asteroids.png"
+      slowness: 0.955
+      scale: "1.15, 1.15"
+      scrolling: "-0.01, 0.006"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxTsf
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/AspidParallaxBG.png"
+      slowness: 0.998046875
+      scale: "1, 1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/AspidParallaxNeb.png"
+      slowness: 0.967046875
+      scale: "1, 1"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_tsf_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+      slowness: 0.986625
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_tsf_stars_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars-2.toml"
+      slowness: 0.957265625
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/Asteroids.png"
+      slowness: 0.96
+      scale: "1.2, 1.2"
+      scrolling: "0.014, -0.007"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxVkr
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/layer1.png"
+      slowness: 0.998046875
+      scale: "0.7, 0.7"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/AspidParallaxNeb.png"
+      slowness: 0.972
+      scale: "1.25, 1.25"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_vkr_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+      slowness: 0.989
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_vkr_stars_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim-2.toml"
+      slowness: 0.954
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/Asteroids.png"
+      slowness: 0.948
+      scale: "1.6, 1.6"
+      scrolling: "-0.016, -0.01"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxPoi
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/layer1.png"
+      slowness: 0.998046875
+      scale: "0.5, 0.5"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_poi_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+      slowness: 0.996625
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/planet.png"
+      slowness: 0.994
+      scale: "1.6, 1.6"
+      tiled: false
+      controlHomePosition: "280, 220"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/Asteroids.png"
+      slowness: 0.968
+      scale: "1.3, 1.3"
+      scrolling: "0.01, 0.012"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxPoiEast
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/layer1.png"
+      slowness: 0.998046875
+      scale: "0.55, 0.55"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_poi_east_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+      slowness: 0.996
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/gas_giant.png"
+      slowness: 0.993
+      scale: "1.4, 1.4"
+      tiled: false
+      controlHomePosition: "420, 180"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/Asteroids.png"
+      slowness: 0.96
+      scale: "0.95, 0.95"
+      scrolling: "-0.011, 0.009"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxPoiSouth
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/layer1.png"
+      slowness: 0.998046875
+      scale: "0.45, 0.45"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_poi_south_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+      slowness: 0.99
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/core_planet.png"
+      slowness: 0.995
+      scale: "1.8, 1.8"
+      tiled: false
+      controlHomePosition: "340, 300"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_NF/Parallaxes/Asteroids.png"
+      slowness: 0.955
+      scale: "1.5, 1.5"
+      scrolling: "0.008, -0.013"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxWild
+  layers:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_wild_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+      slowness: 0.996625
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_wild_stars_dim"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+      slowness: 0.989375
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_wild_stars_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars-2.toml"
+      slowness: 0.972
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/noise.png"
+      slowness: 0.985
+      scale: "2.2, 2.2"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/Asteroids.png"
+      slowness: 0.94
+      scale: "1.8, 1.8"
+      scrolling: "-0.006, 0.014"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxWildEast
+  layers:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_wild_east_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+      slowness: 0.995
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_wild_east_stars_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim-2.toml"
+      slowness: 0.97
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/noise.png"
+      slowness: 0.988
+      scale: "1.7, 1.7"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/Asteroids.png"
+      slowness: 0.945
+      scale: "1.4, 1.4"
+      scrolling: "0.015, 0.004"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false

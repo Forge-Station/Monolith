@@ -134,6 +134,13 @@ public sealed partial class ShuttleSystem
                 continue;
             }
 
+            // Forge-Change: extra BSS sectors are gate-only; do not list them on the MAP tab.
+            if (TryComp<Content.Shared._Forge.Bss.BssSectorMapComponent>(gridXform.MapUid.Value, out var sector) &&
+                !sector.Primary)
+            {
+                continue;
+            }
+
             TryAddFTLDestination(gridXform.MapID, true, false, false, out _);
         }
     }

@@ -42,16 +42,16 @@ public sealed class LizardAccentSystem : EntitySystem
         // eckS
         message = RegexUpperEndX.Replace(message, "ECKS$1");
         //Forge-Localization-Start
-        message = RegexLowerC.Replace(message, "ссс");
-        message = RegexUpperC.Replace(message, "ССС");
-        message = RegexLowerZ.Replace(message, "ссс");       // для "з+" используются те же замены, что и для "с+"
-        message = RegexUpperZ.Replace(message, "ССС"); // для "З+" используются те же замены, что и для "С+"
-        message = RegexLowerSh.Replace(message, "шшш");
-        message = RegexUpperSh.Replace(message, "ШШШ");
-        message = RegexLowerCh.Replace(message, "ччч");
-        message = RegexUpperCh.Replace(message, "ЧЧЧ");
-        message = RegexLowerSch.Replace(message, "щщщ");
-        message = RegexUpperSch.Replace(message, "ЩЩЩ");
+        message = RegexLowerC.Replace(message, "сс");
+        message = RegexUpperC.Replace(message, "СС");
+        message = RegexLowerZ.Replace(message, "сс");
+        message = RegexUpperZ.Replace(message, "СС");
+        message = RegexLowerSh.Replace(message, "шш");
+        message = RegexUpperSh.Replace(message, "ШШ");
+        message = RegexLowerCh.Replace(message, "щщ");
+        message = RegexUpperCh.Replace(message, "ЩЩ");
+        message = RegexLowerSch.Replace(message, "щщ");
+        message = RegexUpperSch.Replace(message, "ЩЩ");
         //Forge-Localization-End
         args.Message = message;
     }

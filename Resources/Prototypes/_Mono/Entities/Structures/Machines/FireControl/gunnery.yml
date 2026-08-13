@@ -179,7 +179,7 @@
 
 - type: entity
   id: GunneryServerStation
-  parent: GunneryServerBase #Forge-Change
+  parent: [BaseStructureDisableToolUse, GunneryServerBase]
   name: station gunnery control server
   components:
   - type: Machine
@@ -206,7 +206,7 @@
 
 - type: entity
   id: GunneryServerStationConsolesEnforced
-  parent: GunneryServerBase #Forge-Change
+  parent: [BaseStructureDisableToolUse, GunneryServerBase]
   name: station gunnery control server
   suffix: Enforced Max Consoles
   components:

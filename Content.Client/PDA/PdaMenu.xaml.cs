@@ -241,8 +241,8 @@ namespace Content.Client.PDA
             /* #Forge-Change нам это пока не надо
             var warLevel = state.PdaOwnerInfo.WarLevel;
             WarLevelLabel.SetMarkup(warLevel != null ? warLevel : Loc.GetString("comp-pda-ui-station-war-level-unknown"));
-            */
             AddressLabel.Text = state.Address?.ToUpper() ?? " - ";
+            */
 
             EjectIdButton.IsActive = state.PdaOwnerInfo.IdOwner != null || state.PdaOwnerInfo.JobTitle != null;
             EjectPenButton.IsActive = state.HasPen;

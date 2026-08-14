@@ -74,12 +74,19 @@ public sealed partial class WorldgenConfigSystem : EntitySystem
             return;
 
         var target = _map.GetMapEntityId(_gameTicker.DefaultMap);
+        // Forge-Change-Start
+        if (HasComp<Content.Shared._Forge.Bss.BssSectorMapComponent>(target))
+            return;
+        // Forge-Change-End
+
         Log.Debug($"Trying to configure {_gameTicker.DefaultMap}, aka {ToPrettyString(target)} aka {target}");
 
+        // Forge-Change-Start
         // A persisted map already has WorldController/BiomeSelection. Adding them
         // again crashes; drop the saved copies and install a fresh worldgen index.
         RemComp<WorldControllerComponent>(target);
         RemComp<BiomeSelectionComponent>(target);
+        // Forge-Change-End
 
         var cfg = _proto.Index<WorldgenConfigPrototype>(_worldgenConfig);
 

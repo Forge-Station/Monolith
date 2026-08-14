@@ -30,6 +30,7 @@
 #   - id: BluespaceBrokenMcDelivery # Frontier. Mono edit - Disabled
     - id: SmugglingFax # Frontier
     - id: SnailMigration # Mono
+    - id: BssVoidGateEvent # Forge-Change
 
 # Frontier: not used!
 - type: entityTable

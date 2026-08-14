@@ -4,6 +4,8 @@ using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
 using Content.Server._NF.Shuttles.Components;
+using Content.Server.Worldgen.Components;
+using Content.Server.Worldgen.Prototypes;
 using Content.Shared._Forge;
 using Content.Shared._Forge.Bss;
 using Content.Shared._Forge.Persistence;
@@ -62,7 +64,10 @@ public sealed class BssWorldSystem : EntitySystem
     private void OnRoundStarting(RoundStartingEvent ev)
     {
         EnsureSectorMaps();
+        PurgeTransientRoutes();
+        ApplyWorldgen();
         SpawnGates();
+        PruneObsoleteGates();
     }
 
     public IReadOnlyList<BssLoadedSector> GetLoadedSectors()
@@ -150,10 +155,46 @@ public sealed class BssWorldSystem : EntitySystem
                 existing.Add((gate.Sector, gate.Gate));
         }
 
-        foreach (var link in network.Links)
+        foreach (var link in GetAllLinks(network))
         {
             SpawnGate(network, link.From, link.To.Sector, existing);
             SpawnGate(network, link.To, link.From.Sector, existing);
+        }
+    }
+
+    /// <summary>
+    /// Drops leftover gates whose endpoints are no longer in the prototype graph
+    /// (e.g. old green-to-green hops after a topology retune).
+    /// </summary>
+    private void PruneObsoleteGates()
+    {
+        if (!TryGetNetwork(out var network))
+            return;
+
+        var valid = new HashSet<(string Sector, string Gate)>();
+        foreach (var link in GetAllLinks(network))
+        {
+            valid.Add((link.From.Sector, link.From.Gate));
+            valid.Add((link.To.Sector, link.To.Gate));
+        }
+
+        var doomed = new List<EntityUid>();
+        var query = AllEntityQuery<BssGateComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var gate, out var xform))
+        {
+            if (gate.Network != network.ID)
+                continue;
+
+            if (valid.Contains((gate.Sector, gate.Gate)))
+                continue;
+
+            doomed.Add(xform.GridUid is { Valid: true } grid ? grid : uid);
+        }
+
+        foreach (var uid in doomed.Distinct())
+        {
+            if (Exists(uid))
+                Del(uid);
         }
     }
 
@@ -220,11 +261,16 @@ public sealed class BssWorldSystem : EntitySystem
         gate.JumpRange = GateJumpRange;
         gate.ArrivalOffset = new Vector2(ArrivalDistance, 0f);
         gate.Enabled = true;
+        gate.Persistent = source.Access != BssSystemAccess.Hidden
+                          && neighbor.Access != BssSystemAccess.Hidden;
         Dirty(grid.Owner, gate);
 
-        var persistent = EnsureComp<PersistentGridComponent>(grid.Owner);
-        persistent.Id = $"bss-gate-{endpoint.Sector}-{endpoint.Gate}";
-        persistent.MapKey = endpoint.Sector;
+        if (gate.Persistent)
+        {
+            var persistent = EnsureComp<PersistentGridComponent>(grid.Owner);
+            persistent.Id = $"bss-gate-{endpoint.Sector}-{endpoint.Gate}";
+            persistent.MapKey = endpoint.Sector;
+        }
 
         EnsureComp<ForceAnchorComponent>(grid.Owner);
         var protectedGrid = EnsureComp<ProtectedGridComponent>(grid.Owner);
@@ -236,7 +282,7 @@ public sealed class BssWorldSystem : EntitySystem
         gravity.Inherent = true;
         Dirty(grid.Owner, gravity);
 
-        _shuttles.SetIFFColor(grid.Owner, source.Color.A > 0.01f ? source.Color : Color.FromHex("#35c8ff"));
+        _shuttles.SetIFFColor(grid.Owner, network.ResolveColor(source));
         _shuttles.SetIFFReadOnly(grid.Owner, true);
 
         Spawn(GatePrototype, new EntityCoordinates(grid.Owner, Vector2.Zero));
@@ -259,6 +305,9 @@ public sealed class BssWorldSystem : EntitySystem
         var persistent = EnsureComp<PersistentMapComponent>(mapUid.Value);
         persistent.Id = sector.Id;
 
+        if (sector.Primary)
+            EnsureComp<BssDynamicRoutesComponent>(mapUid.Value);
+
         if (!string.IsNullOrEmpty(sector.Parallax))
         {
             var parallax = EnsureComp<ParallaxComponent>(mapUid.Value);
@@ -273,9 +322,251 @@ public sealed class BssWorldSystem : EntitySystem
         _sectorMaps[sector.Id] = mapId;
     }
 
-    private bool TryGetNetwork([NotNullWhen(true)] out BssNetworkPrototype? network)
+    public bool TryGetNetwork([NotNullWhen(true)] out BssNetworkPrototype? network)
     {
         return _prototypes.TryIndex(_cfg.GetCVar(ForgeVars.BssNetwork), out network) && network != null;
+    }
+
+    public IReadOnlyList<BssGateLinkDefinition> GetAllLinks(BssNetworkPrototype network)
+    {
+        if (!TryGetDynamicRoutes(out var routes) || routes.Links.Count == 0)
+            return network.Links;
+
+        var links = new List<BssGateLinkDefinition>(network.Links.Count + routes.Links.Count);
+        links.AddRange(network.Links);
+        links.AddRange(routes.Links);
+        return links;
+    }
+
+    public bool IsSystemDiscovered(BssNetworkPrototype network, string systemId)
+    {
+        var system = network.GetSystem(systemId);
+        if (system == null)
+            return false;
+
+        if (system.Access != BssSystemAccess.Hidden)
+            return true;
+
+        return GetAllLinks(network).Any(link =>
+            link.From.Sector == systemId || link.To.Sector == systemId);
+    }
+
+    public bool TryUnlockHiddenRoute(
+        string? preferredFrom,
+        string? preferredTo,
+        [NotNullWhen(true)] out string? fromId,
+        [NotNullWhen(true)] out string? toId,
+        out string reason)
+    {
+        fromId = null;
+        toId = null;
+        reason = "bss-void-no-network";
+
+        if (!TryGetNetwork(out var network))
+            return false;
+
+        EnsureSectorMaps();
+
+        var hidden = network.Sectors
+            .Where(system => system.Access == BssSystemAccess.Hidden && !IsSystemDiscovered(network, system.Id))
+            .ToList();
+        if (hidden.Count == 0)
+        {
+            reason = "bss-void-none-left";
+            return false;
+        }
+
+        var destination = hidden.FirstOrDefault(system => system.Id == preferredTo) ?? _random.Pick(hidden);
+        var redOrigins = network.Sectors
+            .Where(system => system.Group == "red" && system.Access != BssSystemAccess.Hidden)
+            .ToList();
+        if (redOrigins.Count == 0)
+        {
+            reason = "bss-void-no-origin";
+            return false;
+        }
+
+        var origin = redOrigins.FirstOrDefault(system => system.Id == preferredFrom) ?? _random.Pick(redOrigins);
+        var link = new BssGateLinkDefinition
+        {
+            From = new BssGateEndpoint { Sector = origin.Id, Gate = $"{origin.Id}-{destination.Id}" },
+            To = new BssGateEndpoint { Sector = destination.Id, Gate = $"{destination.Id}-{origin.Id}" },
+            Bidirectional = true,
+        };
+
+        var routes = EnsureDynamicRoutes();
+        if (routes.Links.Any(existing =>
+                existing.From.Sector == link.From.Sector && existing.To.Sector == link.To.Sector ||
+                existing.From.Sector == link.To.Sector && existing.To.Sector == link.From.Sector))
+        {
+            reason = "bss-void-already-open";
+            return false;
+        }
+
+        routes.Links.Add(link);
+        Dirty(GetRoutesEntity(), routes);
+        SpawnGates();
+
+        fromId = origin.Id;
+        toId = destination.Id;
+        reason = string.Empty;
+        Log.Info($"Opened hidden BSS route {origin.Id} -> {destination.Id}.");
+        return true;
+    }
+
+    public void PreparePersistenceSave()
+    {
+        PurgeTransientRoutes();
+    }
+
+    private void PurgeTransientRoutes()
+    {
+        if (TryGetDynamicRoutes(out var routes) && routes.Links.Count > 0)
+        {
+            routes.Links.Clear();
+            Dirty(GetRoutesEntity(), routes);
+        }
+
+        if (!TryGetNetwork(out var network))
+            return;
+
+        var doomed = new List<EntityUid>();
+        var query = AllEntityQuery<BssGateComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var gate, out var xform))
+        {
+            if (gate.Persistent && !IsTransientGate(network, gate))
+                continue;
+
+            doomed.Add(xform.GridUid is { Valid: true } grid ? grid : uid);
+        }
+
+        foreach (var uid in doomed.Distinct())
+        {
+            if (Exists(uid))
+                Del(uid);
+        }
+    }
+
+    private static bool IsTransientGate(BssNetworkPrototype network, BssGateComponent gate)
+    {
+        if (!gate.Persistent)
+            return true;
+
+        var system = network.GetSystem(gate.Sector);
+        if (system?.Access == BssSystemAccess.Hidden)
+            return true;
+
+        return network.Sectors.Any(candidate =>
+            candidate.Access == BssSystemAccess.Hidden &&
+            (gate.Sector == candidate.Id ||
+             gate.Gate.Contains(candidate.Id, StringComparison.Ordinal)));
+    }
+
+    private void ApplyWorldgen()
+    {
+        if (!TryGetNetwork(out var network))
+            return;
+
+        foreach (var system in network.Sectors)
+        {
+            if (!_sectorMaps.TryGetValue(system.Id, out var mapId) || !_maps.MapExists(mapId))
+                continue;
+
+            var mapUid = _maps.GetMap(mapId);
+            var biomes = ResolveBiomes(system);
+            if (biomes.Count == 0)
+            {
+                Log.Error($"No usable worldgen biomes for BSS system '{system.Id}'.");
+                continue;
+            }
+
+            RemComp<WorldControllerComponent>(mapUid);
+            RemComp<BiomeSelectionComponent>(mapUid);
+            EnsureComp<WorldControllerComponent>(mapUid);
+            AddComp(mapUid, new BiomeSelectionComponent { Biomes = biomes });
+        }
+    }
+
+    private List<string> ResolveBiomes(BssSectorDefinition system)
+    {
+        var biomes = new List<string>();
+        var configId = string.IsNullOrEmpty(system.Worldgen)
+            ? DefaultWorldgen(system.Group)
+            : system.Worldgen;
+
+        if (_prototypes.TryIndex<WorldgenConfigPrototype>(configId, out var config))
+        {
+            foreach (var data in config.Components.Values)
+            {
+                if (data.Component is not BiomeSelectionComponent selection)
+                    continue;
+
+                foreach (var biome in selection.Biomes)
+                {
+                    if (_prototypes.HasIndex<BiomePrototype>(biome))
+                        biomes.Add(biome);
+                    else
+                        Log.Warning($"Skipping missing biome '{biome}' for BSS system '{system.Id}'.");
+                }
+            }
+        }
+        else
+        {
+            Log.Error($"Missing worldgen config '{configId}' for BSS system '{system.Id}'.");
+        }
+
+        if (biomes.Count > 0)
+            return biomes;
+
+        foreach (var biome in FallbackBiomes(system.Group))
+        {
+            if (_prototypes.HasIndex<BiomePrototype>(biome))
+                biomes.Add(biome);
+        }
+
+        return biomes;
+    }
+
+    private static IEnumerable<string> FallbackBiomes(string group)
+    {
+        return group switch
+        {
+            "yellow" => ["MonoEmptyFallback", "MonoWorldgenAsteroidRing9km"],
+            "red" => ["MonoEmptyFallback", "MonoWildsCore"],
+            "black" => ["MonoEmptyFallback", "MonoWorldgenHyperwarAsteroidRing"],
+            _ => ["MonoEmptyFallback", "NFAsteroidsNear"],
+        };
+    }
+
+    private static string DefaultWorldgen(string group)
+    {
+        return group switch
+        {
+            "yellow" => "ForgeWorldgenYellow",
+            "red" => "ForgeWorldgenRed",
+            "black" => "ForgeWorldgenBlack",
+            _ => "ForgeWorldgenGreen",
+        };
+    }
+
+    private bool TryGetDynamicRoutes([NotNullWhen(true)] out BssDynamicRoutesComponent? routes)
+    {
+        var uid = GetRoutesEntity();
+        return TryComp(uid, out routes);
+    }
+
+    private BssDynamicRoutesComponent EnsureDynamicRoutes()
+    {
+        return EnsureComp<BssDynamicRoutesComponent>(GetRoutesEntity());
+    }
+
+    private EntityUid GetRoutesEntity()
+    {
+        var primary = GetPrimarySectorId();
+        if (primary != null && _sectorMaps.TryGetValue(primary, out var mapId) && _maps.MapExists(mapId))
+            return _maps.GetMap(mapId);
+
+        return _maps.GetMap(_ticker.DefaultMap);
     }
 
     private static BssSectorDefinition GetSector(BssNetworkPrototype network, string id)

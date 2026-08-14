@@ -30,4 +30,10 @@ public sealed partial class BssGateComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Enabled = true;
+
+    /// <summary>
+    /// Hidden/black routes are round-local and must not enter the weekly world snapshot.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Persistent = true;
 }

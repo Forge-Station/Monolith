@@ -1,0 +1,11 @@
+- type: entity
+  id: BssVoidGateEvent
+  parent: BaseStationEventNFModerateDelay
+  components:
+  - type: StationEvent
+    weight: 4
+    duration: 1
+    earliestStart: 40
+    reoccurrenceDelay: 90
+    maxOccurrences: 2
+  - type: BssVoidGateRule

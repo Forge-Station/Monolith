@@ -217,7 +217,7 @@ public sealed partial class ShipyardSystem
         }
 
         var savePath = new ResPath(record.SavePath);
-        if (!_gridPersistence.Exists(savePath) ||
+        if (!_gridPersistence.FileExists(savePath) ||
             _station.GetOwningStation(uid) is not { Valid: true } station ||
             !TryPurchaseShuttle(station, savePath, out var shuttleResult))
         {

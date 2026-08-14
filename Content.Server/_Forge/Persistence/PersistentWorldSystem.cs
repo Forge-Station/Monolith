@@ -1,15 +1,19 @@
+using System.Globalization;
 using System.Numerics;
 using System.IO;
 using System.Linq;
 using Content.Server._Forge.Bss;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
+using Content.Server.Gravity;
 using Content.Server.Maps;
+using Content.Server.Spreader;
 using Content.Server.Station.Systems;
 using Content.Shared._Forge;
 using Content.Shared._Forge.Bss;
 using Content.Shared._Forge.Persistence;
 using Content.Shared.CCVar;
+using Content.Shared.Gravity;
 using Content.Shared.Maps;
 using Content.Shared.Station.Components;
 using Content.Shared.GameTicking;
@@ -19,6 +23,8 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using YamlDotNet.Core;
+using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -39,13 +45,18 @@ public sealed class PersistentWorldSystem : EntitySystem
     [Dependency] private readonly GridPersistenceService _persistence = default!;
     [Dependency] private readonly BssWorldSystem _bssWorld = default!;
     [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private GravityGeneratorSystem _gravityGenerators = default!;
+    [Dependency] private SpreaderSystem _spreader = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
 
     private readonly ISerializer _serializer = new SerializerBuilder()
         .WithNamingConvention(UnderscoredNamingConvention.Instance)
+        .WithTypeConverter(new IsoDateTimeOffsetConverter())
         .Build();
 
     private readonly IDeserializer _deserializer = new DeserializerBuilder()
         .WithNamingConvention(UnderscoredNamingConvention.Instance)
+        .WithTypeConverter(new IsoDateTimeOffsetConverter())
         .IgnoreUnmatchedProperties()
         .Build();
 
@@ -116,7 +127,7 @@ public sealed class PersistentWorldSystem : EntitySystem
         }
 
         var mapEntries = manifest.Entries
-            .Where(entry => entry.Kind == PersistenceEntryKind.Map && _persistence.Exists(new ResPath(entry.SavePath)))
+            .Where(entry => entry.Kind == PersistenceEntryKind.Map && _persistence.FileExists(new ResPath(entry.SavePath)))
             .ToList();
 
         if (mapEntries.Count == 0)
@@ -184,7 +195,7 @@ public sealed class PersistentWorldSystem : EntitySystem
 
         foreach (var entry in _loadedManifest.Entries.Where(entry => entry.Kind == PersistenceEntryKind.Grid))
         {
-            if (!_persistence.Exists(new ResPath(entry.SavePath)))
+            if (!_persistence.FileExists(new ResPath(entry.SavePath)))
                 continue;
 
             if (existingGridIds.Contains(entry.Id))
@@ -213,6 +224,8 @@ public sealed class PersistentWorldSystem : EntitySystem
         }
 
         RestoreMissingStations();
+        RestoreGridGravity();
+        RestoreSpreaderGrids();
     }
 
     private void LoadExtraPersistedMaps()
@@ -227,7 +240,7 @@ public sealed class PersistentWorldSystem : EntitySystem
                 continue;
 
             var path = new ResPath(entry.SavePath);
-            if (!_persistence.Exists(path))
+            if (!_persistence.FileExists(path))
                 continue;
 
             if (!_persistence.LoadMap(path, out var map, out var grids))
@@ -318,6 +331,38 @@ public sealed class PersistentWorldSystem : EntitySystem
         _station.InitializeNewStation(config, [grid], MetaData(grid).EntityName);
     }
 
+    /// <summary>
+    /// GravityGenerator.GravityActive is runtime-only and resets on deserialize.
+    /// GravityComponent then refreshes against "no active generators" and turns the grid off.
+    /// Hangar retrieval already calls <see cref="GravityGeneratorSystem.SynchronizeGrid"/>; persisted maps need the same.
+    /// </summary>
+    private void RestoreGridGravity()
+    {
+        var query = AllEntityQuery<MapGridComponent, GravityComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out _, out var xform))
+        {
+            if (!_mapSystem.IsInitialized(xform.MapID))
+                continue;
+
+            _gravityGenerators.SynchronizeGrid(uid);
+        }
+    }
+
+    /// <summary>
+    /// Spreader queues are runtime-only and are not rebuilt because persisted maps skip GridInitialize.
+    /// </summary>
+    private void RestoreSpreaderGrids()
+    {
+        var query = AllEntityQuery<MapGridComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var xform))
+        {
+            if (!_mapSystem.IsInitialized(xform.MapID))
+                continue;
+
+            _spreader.RebuildGrid(uid);
+        }
+    }
+
     private void OnBeforeRoundRestart(BeforeRoundRestartPersistenceEvent ev)
     {
         if (!Enabled)
@@ -349,6 +394,8 @@ public sealed class PersistentWorldSystem : EntitySystem
             Log.Debug("Skipping persistence save: no persistent maps or grids are loaded.");
             return true;
         }
+
+        _bssWorld.PreparePersistenceSave();
 
         var entries = new List<PersistenceManifestEntry>();
         var ids = new HashSet<string>(StringComparer.Ordinal);
@@ -566,19 +613,23 @@ public sealed class PersistentWorldSystem : EntitySystem
         if (!_resources.UserData.Exists(_persistence.MapsPath) || !_resources.UserData.IsDir(_persistence.MapsPath))
             return false;
 
-        foreach (var entry in _resources.UserData.DirectoryEntries(_persistence.MapsPath))
+        foreach (var entry in _resources.UserData.DirectoryEntries(_persistence.MapsPath)
+                     .OrderByDescending(name => name.EndsWith(".yml.gz", StringComparison.OrdinalIgnoreCase)))
         {
-            if (!entry.EndsWith(".yml", StringComparison.OrdinalIgnoreCase))
-                continue;
-
             if (entry.StartsWith("manifest", StringComparison.OrdinalIgnoreCase))
                 continue;
 
-            var path = _persistence.MapsPath / entry;
-            var id = new ResPath(entry).FilenameWithoutExtension;
+            if (!GridPersistenceService.IsMapPayloadFile(entry))
+                continue;
+
+            var id = GridPersistenceService.IdFromMapFileName(entry);
             if (string.IsNullOrWhiteSpace(id))
                 continue;
 
+            if (manifest.Entries.Any(existing => existing.Id == id))
+                continue;
+
+            var path = _persistence.MapsPath / entry;
             manifest.Entries.Add(new PersistenceManifestEntry
             {
                 Id = id,
@@ -622,4 +673,32 @@ public enum PersistenceEntryKind : byte
 {
     Map,
     Grid,
+}
+
+/// <summary>
+/// Writes DateTimeOffset as a single ISO-8601 scalar instead of YamlDotNet's multi-field struct dump.
+/// </summary>
+internal sealed class IsoDateTimeOffsetConverter : IYamlTypeConverter
+{
+    public bool Accepts(Type type) => type == typeof(DateTimeOffset);
+
+    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer nestedObjectDeserializer)
+    {
+        if (parser.TryConsume<Scalar>(out var scalar))
+        {
+            if (string.IsNullOrWhiteSpace(scalar.Value))
+                return default(DateTimeOffset);
+
+            return DateTimeOffset.Parse(scalar.Value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+        }
+
+        nestedObjectDeserializer(typeof(Dictionary<string, object>));
+        return default(DateTimeOffset);
+    }
+
+    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer nestedObjectSerializer)
+    {
+        var stamp = value is DateTimeOffset dto ? dto : default;
+        emitter.Emit(new Scalar(stamp.ToString("o", CultureInfo.InvariantCulture)));
+    }
 }

@@ -321,3 +321,35 @@
         configPath: "/Prototypes/Parallaxes/parallax_config.toml"
       slowness: 0.875
   layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxVoid
+  layers:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_void_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+      slowness: 0.997
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_void_stars_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim-2.toml"
+      slowness: 0.96
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/noise.png"
+      slowness: 0.99
+      scale: "2.8, 2.8"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Parallaxes/Asteroids.png"
+      slowness: 0.93
+      scale: "2.1, 2.1"
+      scrolling: "-0.02, 0.01"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false

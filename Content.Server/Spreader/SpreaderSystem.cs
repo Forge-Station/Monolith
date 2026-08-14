@@ -117,7 +117,15 @@ public sealed partial class SpreaderSystem : EntitySystem
         if (_spreaderGridQuery.TryComp(xform.GridUid, out var spreaderGrid)
             && _spreaderQuery.TryComp(spreader, out var comp))
         {
-            spreaderGrid.SpreadQueues[comp.Id].Enqueue((spreader, comp));
+            // Forge-Change-Start: persisted grids skip GridInitialize, so queues may be missing.
+            if (!spreaderGrid.SpreadQueues.TryGetValue(comp.Id, out var queue))
+            {
+                queue = new Queue<Entity<EdgeSpreaderComponent>>();
+                spreaderGrid.SpreadQueues[comp.Id] = queue;
+            }
+
+            queue.Enqueue((spreader, comp));
+            // Forge-Change-End
         }
     }
 
@@ -138,9 +146,28 @@ public sealed partial class SpreaderSystem : EntitySystem
             if (!_spreaderQuery.TryComp(ent, out var spreader))
                 continue;
 
-            spreaderGrid.SpreadQueues[spreader.Id].Enqueue((ent, spreader));
+            // Forge-Change-Start: persisted grids skip GridInitialize, so queues may be missing.
+            if (!spreaderGrid.SpreadQueues.TryGetValue(spreader.Id, out var queue))
+            {
+                queue = new Queue<Entity<EdgeSpreaderComponent>>();
+                spreaderGrid.SpreadQueues[spreader.Id] = queue;
+            }
+
+            queue.Enqueue((ent, spreader));
+            // Forge-Change-End
         }
     }
+
+    // Forge-Change-Start
+    /// <summary>
+    /// Rebuilds runtime spread queues after a persisted grid load.
+    /// GridInitializeEvent does not fire for maps that were saved already initialized.
+    /// </summary>
+    public void RebuildGrid(EntityUid uid)
+    {
+        InitSpreaderGrid(uid);
+    }
+    // Forge-Change-End
 
     /// <inheritdoc/>
     public override void Update(float frameTime)

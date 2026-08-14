@@ -19,6 +19,7 @@ public sealed class BssGateSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMapSystem _maps = default!;
     [Dependency] private ShuttleSystem _shuttle = default!;
+    [Dependency] private BssWorldSystem _world = default!;
 
 #if DEBUG
     private EntityUid? _debugSourceGate;
@@ -49,19 +50,29 @@ public sealed class BssGateSystem : EntitySystem
         var nodes = new List<BssSystemMapNode>(network.Sectors.Count);
         foreach (var sector in network.Sectors)
         {
+            if (!_world.IsSystemDiscovered(network, sector.Id) && sector.Id != currentSector)
+                continue;
+
+            var group = network.GetGroup(sector.Group);
             nodes.Add(new BssSystemMapNode(
                 sector.Id,
                 sector.Name,
                 sector.Position,
                 sector.Id == currentSector,
                 IsAdjacent(network, currentSector, sector.Id),
-                IsSectorOnline(networkId, sector.Id),
-                sector.Color));
+                IsSectorOnline(networkId, sector.Id) || sector.Id == currentSector,
+                network.ResolveColor(sector),
+                sector.Group,
+                group?.Name ?? sector.Group));
         }
 
-        var edges = new List<BssSystemMapEdge>(network.Links.Count);
-        foreach (var link in network.Links)
+        var allLinks = _world.GetAllLinks(network);
+        var edges = new List<BssSystemMapEdge>(allLinks.Count);
+        foreach (var link in allLinks)
         {
+            if (nodes.All(node => node.Id != link.From.Sector) || nodes.All(node => node.Id != link.To.Sector))
+                continue;
+
             edges.Add(new BssSystemMapEdge(
                 link.From.Sector,
                 link.To.Sector,
@@ -70,7 +81,12 @@ public sealed class BssGateSystem : EntitySystem
                 TryFindGate(networkId, link.To, out _)));
         }
 
-        return new BssSystemMapState(networkId.Id, currentSector, nodes, edges);
+        var groups = network.Groups
+            .Where(group => nodes.Any(node => node.Group == group.Id))
+            .Select(group => new BssSystemMapGroup(group.Id, group.Name, group.Color))
+            .ToList();
+
+        return new BssSystemMapState(network.RegionName, network.RegionName, currentSector, nodes, edges, groups);
     }
 
     public List<BssGateRadarState> GetRadarGates(EntityUid? mapUid)
@@ -311,23 +327,23 @@ public sealed class BssGateSystem : EntitySystem
         return false;
     }
 
-    private static bool IsAdjacent(BssNetworkPrototype network, string current, string destination)
+    private bool IsAdjacent(BssNetworkPrototype network, string current, string destination)
     {
         if (current == destination)
             return false;
 
-        return network.Links.Any(link =>
+        return _world.GetAllLinks(network).Any(link =>
             link.From.Sector == current && link.To.Sector == destination ||
             link.Bidirectional && link.To.Sector == current && link.From.Sector == destination);
     }
 
-    private static bool TryResolveDestination(
+    private bool TryResolveDestination(
         BssNetworkPrototype network,
         BssGateComponent source,
         string destinationSector,
         out BssGateEndpoint destination)
     {
-        foreach (var link in network.Links)
+        foreach (var link in _world.GetAllLinks(network))
         {
             if (link.From.Sector == source.Sector &&
                 link.From.Gate == source.Gate &&

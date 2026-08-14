@@ -304,6 +304,7 @@
   cost: 50000
   recipeUnlocks:
   - MaterialSiloMachineCircuitboard
+  - WarehouseSiloMachineCircuitboard # Forge-Change
   technologyPrerequisites:
   - SuperParts
   position: -1, 6

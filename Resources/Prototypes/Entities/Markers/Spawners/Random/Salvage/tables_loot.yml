@@ -148,6 +148,8 @@
     #   weight: 0.5 # Frontier
     - id: ResearchDisk65000
       weight: 0.5
+    - id: BssVoidCoordinatesDisk # Forge-Change
+      weight: 0.35
     - id: SalvagePartsT2Spawner # Mono
       weight: 0.5
     - id: SalvagePartsT3Spawner # Mono

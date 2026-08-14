@@ -249,3 +249,10 @@
   parent: BaseGoldCircuitboardRecipe
   id: MaterialSiloMachineCircuitboard
   result: MaterialSiloMachineCircuitboard
+
+# Forge-Change-Start
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: WarehouseSiloMachineCircuitboard
+  result: WarehouseSiloMachineCircuitboard
+# Forge-Change-End

@@ -47,12 +47,15 @@
     - MonoTSFVouchersDynamic
     - MonoTSFMiscDynamic
     - MonoTSFGearDynamic
+    #Forge-Change-start: back USSP & Viper staff
     # USSP start
-    # - MonoUSSPArmorDynamic
-    # - MonoUSSPMiscDynamic
-    # - MonoUSSPWeaponsDynamicRanged
+    - MonoUSSPArmorDynamic
+    - MonoUSSPMiscDynamic
+    - MonoUSSPWeaponsDynamicRanged
+    - MonoUSSPVouchersDynamic
     # Viper Group start
-    # - MonoViperGroupDynamic
+    - MonoViperGroupDynamic
+    #Forge-Change-End
     # Universal shit (stuff like shipgun ammo)
     - UniversalRailgunAmmo
     - UniversalMissileAmmo
@@ -67,6 +70,13 @@
     - SecurityEquipment
     - SmartGun
     - NSCRecipes # Forge-Change
+    #Forge-Change-Start
+    #Ренегаты
+    - RenegateWeaponsDynamic
+    - RenegateEquipmentDynamic
+    - RenegateAmmoDynamic
+    - RenegateVoucherDynamic
+    #Forge-Change-End
   - type: MaterialStorage
     whitelist:
       tags:
@@ -294,6 +304,7 @@
     - MonoCentrifugeProcessingStatic
     dynamicPacks:
     - MonoUraniumProcessing
+    - MonoIriditeProcessing # Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:

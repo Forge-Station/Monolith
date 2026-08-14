@@ -1,4 +1,4 @@
-//using Content.Server._Mono.AlertLevel; //Forge-Change
+// using Content.Server._Mono.AlertLevel; // Forge-change
 using Content.Server.Access.Systems;
 using Content.Server.AlertLevel;
 using Content.Server.CartridgeLoader;
@@ -69,7 +69,7 @@ namespace Content.Server.PDA
             SubscribeLocalEvent<StationRenamedEvent>(OnStationRenamed);
             SubscribeLocalEvent<EntityRenamedEvent>(OnEntityRenamed, after: new[] { typeof(IdCardSystem) });
             SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
-            //SubscribeLocalEvent<WarLevelChangedEvent>(OnWarLevelChanged); //Forge-Change
+            // SubscribeLocalEvent<WarLevelChangedEvent>(OnWarLevelChanged); // Forge-change
 
             // Begin DeltaV additions
             Subs.CVar(_config,
@@ -169,12 +169,14 @@ namespace Content.Server.PDA
         {
             UpdateAllPdaUisOnStation();
         }
-        /* Forge-Change
-        private void OnWarLevelChanged(WarLevelChangedEvent args)
-        {
-            UpdateAllPdaUisOnStation();
-        }
-        */
+
+        // Forge-change-start
+        // private void OnWarLevelChanged(WarLevelChangedEvent args)
+        // {
+        //     UpdateAllPdaUisOnStation();
+        // }
+        // Forge-change-end
+
         private void UpdateAllPdaUisOnStation()
         {
             var query = AllEntityQuery<PdaComponent>();
@@ -374,16 +376,18 @@ namespace Content.Server.PDA
             if (alertComp.AlertLevels.Levels.TryGetValue(alertComp.CurrentLevel, out var details))
                 pda.StationAlertColor = details.Color;
         }
-        /* Forge-Change
+
         // Mono
-        private void UpdateWarLevel(EntityUid uid, PdaComponent pda)
-        {
-            var station = _sectorService.GetServiceEntity();
-            if (!TryComp(station, out WarLevelComponent? warComp))
-                return;
-            pda.WarLevel = warComp.PostWar ? Loc.GetString("comp-pda-ui-station-war-level-post") : Loc.GetString("comp-pda-ui-station-war-level-pre");
-        }
-        */
+        // Forge-change-start
+        // private void UpdateWarLevel(EntityUid uid, PdaComponent pda)
+        // {
+        //     var station = _sectorService.GetServiceEntity();
+        //     if (!TryComp(station, out WarLevelComponent? warComp))
+        //         return;
+        //     pda.WarLevel = warComp.PostWar ? Loc.GetString("comp-pda-ui-station-war-level-post") : Loc.GetString("comp-pda-ui-station-war-level-pre");
+        // }
+        // Forge-change-end
+
         private string? GetDeviceNetAddress(EntityUid uid)
         {
             string? address = null;

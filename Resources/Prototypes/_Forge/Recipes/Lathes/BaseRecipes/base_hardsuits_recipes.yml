@@ -1,0 +1,217 @@
+# Здесь собраны базовые рецепты для скафандров(на данный момент только для боевых)
+
+# Forge базовый рецепт для универсальных скафандров
+
+## Тир 1 - гражданский
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT1CivilianRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 10
+  materials:
+    Glass: 1500
+    Steel: 4000
+    Plastic: 3000
+    Silver: 200
+    Gold: 200
+
+## Тир 2 - гражданский
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT2CivilianRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 15
+  materials:
+    Glass: 2000
+    Steel: 4000
+    Plastic: 3000
+    Plasteel: 5000
+    Durathread: 2500
+    Silver: 500
+    Gold: 500
+
+## Тир 1 - компания
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT1CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 10
+  materials:
+    Glass: 1800
+    Steel: 4800
+    Plastic: 3600
+    Silver: 240
+    Gold: 240
+
+## Тир 2 - компания
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT2CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 15
+  materials:
+    Glass: 2000
+    Steel: 4000
+    Plastic: 3000
+    Plasteel: 5000
+    Durathread: 2500
+    Silver: 500
+    Gold: 500
+
+## Тир 1 - фракция
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT1FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 10
+  materials:
+    Glass: 1000
+    Steel: 5000
+    Plastic: 2000
+    Plasteel: 5500
+    Durathread: 2500
+    Silver: 500
+    Gold: 500
+    Diamond: 100
+
+## Тир 2 - фракция
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT2FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 15
+  materials:
+    Glass: 1000
+    Steel: 5000
+    Plastic: 2000
+    Plasteel: 5500
+    Durathread: 2500
+    Silver: 500
+    Gold: 500
+    Diamond: 100
+
+- type: latheRecipe
+  abstract: true
+  id: ForgeLightJuggernautRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Glass: 1000
+    Steel: 5000
+    Plastic: 2000
+    Plasteel: 5500
+    Durathread: 2500
+    Silver: 500
+    Gold: 500
+    Diamond: 100
+
+- type: latheRecipe
+  abstract: true
+  id: ForgeHeavyJuggernautRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 25
+  materials:
+    Glass: 1000
+    Steel: 5000
+    Plastic: 2000
+    Plasteel: 6500
+    Durathread: 2500
+    Silver: 1500
+    Gold: 1500
+    Plastitanium: 3000
+    UraniumDepleted: 500
+    UraniumFissile: 200
+
+- type: latheRecipe
+  abstract: true
+  id: ForgeStealthSuitRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 25
+  materials:
+    Plastic: 5000
+    Steel: 3000
+    Plasteel: 2000
+    Durathread: 3500
+    Silver: 4500
+    Gold: 4500
+    UraniumDepleted: 500
+    UraniumFissile: 100
+
+
+- type: latheRecipe
+  abstract: true
+  id: ForgeReflectSuitRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 25
+  materials:
+    Glass: 1000
+    Steel: 5000
+    Plastic: 2000
+    Plasteel: 3000
+    Durathread: 2500
+    Silver: 4500
+    Gold: 4500
+    Plastitanium: 1500
+    UraniumDepleted: 500
+    Diamond: 200
+    UraniumFissile: 100
+
+- type: latheRecipe
+  abstract: true
+  id: ForgeAdvancedLightSuitRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 25
+  materials:
+    Glass: 1000
+    Steel: 5000
+    Plastic: 2000
+    Plasteel: 3000
+    Durathread: 5500
+    Silver: 750
+    Gold: 750
+    Plastitanium: 1500
+    Diamond: 100

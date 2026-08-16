@@ -145,13 +145,13 @@
     # rare t4 parts
     - id: QuadraticCapacitorStockPart
       amount: 1 # Forge-Change
-      maxAmount: 5 # Forge-Change ## +1 к значению, ибо верхняя граница не попадает в диапозон
+      maxAmount: 5 # Forge-Change ## +1 to the value, since the upper bound is not included in the range.
     - id: FemtoManipulatorStockPart
       amount: 1 # Forge-Change
-      maxAmount: 3 # Forge-Change ## +1 к значению, ибо верхняя граница не попадает в диапозон
+      maxAmount: 3 # Forge-Change ## +1 to the value, since the upper bound is not included in the range.
     - id: BluespaceMatterBinStockPart
       amount: 1 # Forge-Change
-      maxAmount: 3 # Forge-Change ## +1 к значению, ибо верхняя граница не попадает в диапозон
+      maxAmount: 3 # Forge-Change ## +1 to the value, since the upper bound is not included in the range.
     - id: SpawnDungeonLootPowerCell
       prob: 0.6 # Forge-Change
     - id: PowerCellMicroreactor
@@ -164,7 +164,7 @@
     # Research disk, expected value 200k/drone
     - id: RogueSiliconResearchDisk50000
       amount: 2 # Forge-change
-      maxAmount: 4 # Forge-change ## +1 к значению, ибо верхняя граница не попадает в диапозон
+      maxAmount: 4 # Forge-change ## +1 to the value, since the upper bound is not included in the range.
     # Tech disk
     - id: SpawnLootTechDisksT3Mech
       prob: 0.6

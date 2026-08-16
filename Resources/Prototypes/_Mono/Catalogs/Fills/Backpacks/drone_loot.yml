@@ -102,7 +102,7 @@
       prob: 0.8 # Forge-Change
     # free shard
     - id: WeaponTurretShardFlatpack
-      prob: 0.5
+      prob: 0.5 # Forge-Change
     # no flatpacks or boards, just gamble scrap
     # Research disk, expected value ~80k/drone
     - id: RogueSiliconResearchDisk5000
@@ -153,13 +153,13 @@
       amount: 1 # Forge-Change
       maxAmount: 3 # Forge-Change ## +1 к значению, ибо верхняя граница не попадает в диапозон
     - id: SpawnDungeonLootPowerCell
-      prob: 0.6
+      prob: 0.6 # Forge-Change
     - id: PowerCellMicroreactor
     # free guns
     - id: WeaponTurretShardFlatpack
-      prob: 0.75
+      prob: 0.75 # Forge-Change
     - id: WeaponTurretPinholeFlatpack
-      prob: 0.5
+      prob: 0.5 # Forge-Change
     # no flatpacks or boards, just gamble scrap
     # Research disk, expected value 200k/drone
     - id: RogueSiliconResearchDisk50000

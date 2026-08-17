@@ -396,7 +396,7 @@ public sealed partial class GunComponent : Component
     /// Amount of times in seconds it takes to sabotage.
     /// </summary>
     [DataField]
-    public TimeSpan SabotageDelay = TimeSpan.FromSeconds(1);
+    public TimeSpan SabotageDelay = TimeSpan.FromSeconds(15);
 
     /// <summary>
     /// The tool quality needed to sabotage this gun.

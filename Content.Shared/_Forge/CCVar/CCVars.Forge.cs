@@ -49,4 +49,18 @@ public sealed partial class ForgeCVars
     /// </summary>
     public static readonly CVarDef<float> PoiCaptureSalesTaxRate =
         CVarDef.Create("forge.poi_capture.sales_tax_rate", 0.1f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Walkable client-side lobby hub. When enabled, the pre-round lobby is a local
+    ///     map the player walks around; character saves and chat still go to the server.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyHubEnabled =
+        CVarDef.Create("forge.lobby_hub.enabled", true, CVar.CLIENT | CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    /// <summary>
+    ///     Content path to the lobby hub grid YAML. Must be a single-grid map with a
+    ///     <c>LobbyHubSpawn</c> marker. Edit it in Mapping, then keep this CVar pointed at it.
+    /// </summary>
+    public static readonly CVarDef<string> LobbyHubMap =
+        CVarDef.Create("forge.lobby_hub.map", "/Maps/_Forge/Lobby/hub.yml", CVar.CLIENT | CVar.ARCHIVE | CVar.CLIENTONLY);
 }

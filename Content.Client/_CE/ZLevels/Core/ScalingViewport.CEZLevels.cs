@@ -96,6 +96,17 @@ public sealed partial class ScalingViewport
     private ShaderInstance? _transitBlitShader;
     private ShaderInstance? _cloudShader;
 
+    /// <summary>
+    /// Plain world blit used when Z-level compositing does not apply (lobby, menus, no attached player).
+    /// The stock <c>_viewport.Render()</c> in <see cref="Draw"/> is commented out in favor of this path.
+    /// </summary>
+    private void RenderSingleEye(IClydeViewport viewport)
+    {
+        viewport.Eye = _eye;
+        viewport.ClearColor = Color.Black;
+        viewport.Render();
+    }
+
     private void RenderZLevels(IRenderHandle renderHandle, IClydeViewport viewport)
     {
         if (_eye is null)
@@ -111,17 +122,16 @@ public sealed partial class ScalingViewport
         _zLevels ??= _entityManager.System<CEClientZLevelsSystem>();
         _mapSystem ??= _entityManager.System<SharedMapSystem>();
 
-        if (_player.LocalEntity is null)
+        // Lobby / character preview / any ScalingViewport without a spawned player.
+        // Returning without Render() left the render target uncleared (black hub).
+        if (_player.LocalEntity is null
+            || !_entityManager.TryGetComponent<CEZLevelViewerComponent>(_player.LocalEntity.Value, out var zLevelViewer)
+            || !_xformQuery.Value.TryComp(_player.LocalEntity, out var playerXform)
+            || playerXform.MapUid is null)
+        {
+            RenderSingleEye(viewport);
             return;
-
-        if (!_entityManager.TryGetComponent<CEZLevelViewerComponent>(_player.LocalEntity.Value, out var zLevelViewer))
-            return;
-
-        if (!_xformQuery.Value.TryComp(_player.LocalEntity, out var playerXform))
-            return;
-
-        if (playerXform.MapUid is null)
-            return;
+        }
 
         var playerMap = playerXform.MapUid.Value;
 

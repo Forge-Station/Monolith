@@ -1,0 +1,33 @@
+lobby-hub-hint = WASD to walk · E to use nearby objects
+lobby-hub-prompt-generic = E — Interact
+lobby-hub-prompt-character = E — Character setup
+lobby-hub-prompt-ready = E — Ready up ({$status})
+lobby-hub-prompt-join = E — Join the round
+lobby-hub-prompt-observe = E — Observe
+lobby-hub-prompt-options = E — Options
+lobby-hub-prompt-ahelp = E — Admin help
+lobby-hub-prompt-sponsor = E — Sponsorship
+lobby-hub-prompt-vote = E — Call a vote
+lobby-hub-prompt-leave = E — Disconnect
+lobby-hub-ready-yes = ready
+lobby-hub-ready-no = not ready
+
+ent-LobbyHubSpawn = lobby hub spawn
+    .desc = Where the player dummy appears. Place exactly one on the hub map.
+
+ent-LobbyHubCharacter = character terminal
+    .desc = Adjust your appearance, jobs, loadouts, and company.
+ent-LobbyHubReady = boarding console
+    .desc = Mark yourself ready, or join the round in progress.
+ent-LobbyHubObserve = observation booth
+    .desc = Enter the round as a ghost.
+ent-LobbyHubOptions = settings terminal
+    .desc = Game and client options.
+ent-LobbyHubAHelp = admin intercom
+    .desc = Contact the administration.
+ent-LobbyHubSponsor = sponsorship kiosk
+    .desc = View sponsorship perks.
+ent-LobbyHubVote = vote board
+    .desc = Call a map or gamemode vote.
+ent-LobbyHubLeave = departure airlock
+    .desc = Disconnect from the server.

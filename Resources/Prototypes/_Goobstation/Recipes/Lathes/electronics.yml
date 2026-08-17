@@ -71,7 +71,7 @@
   result: InteractorCircuitboard
 
 - type: latheRecipe
-  parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
+  parent: BaseCircuitboardRecipe
   id: VinylPlayerCircuitboard
   icon:
     sprite:  _Goobstation/Structures/Machines/StationRadio/vinylplayer.rsi
@@ -79,7 +79,7 @@
   result: VinylPlayerCircuitboard
 
 - type: latheRecipe
-  parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
+  parent: BaseCircuitboardRecipe
   id: TapeDeckCircuitboard
   icon:
     sprite:  _Goobstation/Structures/Machines/StationRadio/tapedeck.rsi
@@ -87,7 +87,7 @@
   result: TapeDeckCircuitboard
 
 - type: latheRecipe
-  parent: [ BaseGoldCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
+  parent: BaseGoldCircuitboardRecipe
   id: StationRadioServerCircuitboard
   icon:
     sprite:  _Goobstation/Structures/Machines/StationRadio/stationradioserver.rsi
@@ -95,7 +95,7 @@
   result: StationRadioServerCircuitboard
 
 - type: latheRecipe
-  parent: [ BaseSilverCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
+  parent: BaseSilverCircuitboardRecipe
   id: StationRadioRigCircuitboard
   icon:
     sprite:  _Goobstation/Structures/Machines/StationRadio/radiostationrig.rsi
@@ -103,7 +103,7 @@
   result: StationRadioRigCircuitboard
 
 - type: latheRecipe
-  parent: [ BaseCircuitboardRecipe, BaseMachineRecipeCategory ]
+  parent: BaseCircuitboardRecipe
   id: StationRadioCircuitboard
   icon:
     sprite:  _Goobstation/Structures/Machines/StationRadio/stationradio.rsi

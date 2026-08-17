@@ -1,4 +1,4 @@
-# Копия ClothingHeadHardsuitBase с убранным базовым nightvision для коррекного наследования.
+# Copy of ClothingHeadHardsuitBase with removed base nightvision for correct inheritance.
 - type: entity
   abstract: true
   id: ClothingHeadHardsuitBaseMillitary
@@ -42,7 +42,7 @@
     - HeadTop
     - HeadSide
 
-# Классы nightvision для различных скафандров, цифра означает число окуляров, приписка чья расцветка визора.
+# Classes of nightvision for different hardsuits, the number means the number of lenses, the suffix is the color of the visor.
 - type: entity
   id: ClothingNightVision1Normal
   abstract: true

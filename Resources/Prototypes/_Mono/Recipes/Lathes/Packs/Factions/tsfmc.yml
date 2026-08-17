@@ -1,13 +1,18 @@
 - type: latheRecipePack
   id: MonoTSFGearDynamic
   recipes:
-  - ClothingOuterHardsuitM82cTsf
-  - ClothingOuterHardsuitM82bTsf
-  - ClothingOuterHardsuitM86Tsf
-  - ClothingOuterHardsuitM92XTsf
+  - ClothingOuterHardsuitTSFMCM82c # Forge-change
+  - ClothingOuterHardsuitTSFMCM82b # Forge-change
+  - ClothingOuterHardsuitTSFMCM86 # Forge-change
+  - ClothingOuterHardsuitTSFMCLightJuggernaut # Forge-change
+  - ClothingOuterHardsuitTSFMCEnergyShield # Forge-change
+  - ClothingOuterHardsuitTSFMCStealth # Forge-change
+  - ClothingOuterHardsuitTSFMCReflectElite # Forge-change
+  - ClothingOuterHardsuitTSFMCAdvancedLight # Forge-change
+  - ClothingOuterHardsuitTSFMCHeavyJuggernaut # Forge-change
   - ClothingEyesNightVisionGoggles
-  - ClothingUniformTsfmcMoppTsf
-  - ClothingHandsGlovesMoppTsf
+  - ClothingUniformTsfmcMoppTsf # Forge-change
+  - ClothingHandsGlovesMoppTsf # Forge-change
 
 - type: latheRecipePack
   id: MonoTSFWeaponsDynamicMelee

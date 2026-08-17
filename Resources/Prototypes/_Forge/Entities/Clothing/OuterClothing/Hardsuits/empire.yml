@@ -238,7 +238,6 @@
         Shock: 0.75
         Radiation: 0.4
         Caustic: 0.5
-        Poison: 0.8
   - type: StaminaDamageResistance
     coefficient: 0.3
   - type: ClothingSpeedModifier
@@ -305,7 +304,6 @@
         Shock: 0.75
         Radiation: 0.3
         Caustic: 0.7
-        Poison: 0.8
   - type: StaminaDamageResistance
     coefficient: 0.3
   - type: ToggleableClothing
@@ -352,7 +350,6 @@
         Shock: 0.75
         Radiation: 0.15
         Caustic: 0.6
-        Poison: 0.8
   - type: StaminaDamageResistance
     coefficient: 0.2
   - type: ClothingSpeedModifier
@@ -394,7 +391,6 @@
         Shock: 0.75
         Radiation: 0.1
         Caustic: 0.6
-        Poison: 0.8
   - type: ClothingSpeedModifier
     walkModifier: 0.675
     sprintModifier: 0.675
@@ -429,7 +425,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
 
-# HV MP 9 «Бдительность»
+# HV MP 9 «Vigilance»
 - type: entity
   parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT3, ClothingFlightProfileEasy]
   id: ClothingOuterHardsuitHVReflectElite
@@ -460,7 +456,6 @@
         Heat: 0.4
         Radiation: 0.1
         Caustic: 0.8
-        Poison: 0.8
   - type: StaminaDamageResistance
     coefficient: 0.5
   - type: ClothingSpeedModifier
@@ -513,7 +508,6 @@
         Shock: 0.8
         Radiation: 0.3
         Caustic: 0.6
-        Poison: 0.8
   - type: StaminaDamageResistance
     coefficient: 0.2
   - type: ClothingSpeedModifier
@@ -537,7 +531,7 @@
       regenRate: 12.5
       spinupTime: 1
       breakCooldown: 17.5
-      powerDraw: 2
+      powerDraw: 0.02
       blockModifier:
         coefficients:
           Blunt: 1
@@ -552,7 +546,9 @@
     startingCharge: 100
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 2.5
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
   - type: UseDelay
     delay: 10
 
@@ -585,7 +581,6 @@
         Shock: 0.9
         Radiation: 0.55
         Caustic: 0.8
-        Poison: 0.8
   - type: StaminaDamageResistance
     coefficient: 0.4
   - type: ClothingSpeedModifier
@@ -604,7 +599,7 @@
     price: 12000
     vendPrice: 90000
 
-# продвинутый лёгкий скафандр RI-32m
+# advanced light hardsuit RI-32m
 - type: entity
   parent: [ForgeClothingOuterHardsuitBase, ClothingFlightProfileEasy]
   id: ClothingOuterHardsuitRI32m

@@ -1,4 +1,4 @@
-# Базовый скафандр без слота под бронеплиту.
+# Base hardsuit without armor plate slot.
 - type: entity
   abstract: true
   parent: [RecyclableItemClothHardsuit, Clothing, GeigerCounterClothing]

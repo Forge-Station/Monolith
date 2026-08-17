@@ -24,13 +24,20 @@
   # Light
   - ClothingOuterHardsuitRI14
   - ClothingOuterHardsuitRI14m
+  - ClothingOuterHardsuitRI14i
   # Battle
   - ClothingOuterHardsuitRI22
+  - ClothingOuterHardsuitRI22i
   # Heavy
   - ClothingOuterHardsuitHV7
+  - ClothingOuterHardsuitHV7i
   # HV
+  - ClothingOuterHardsuitHV2
+  - ClothingOuterHardsuitHV2Inq
   - ClothingOuterHardsuitHVMilitant
+  - ClothingOuterHardsuitHVReflectElite
   - ClothingOuterHardsuitHVStealh
+  - ClothingOuterHardsuitRI32m
 
 - type: latheRecipePack
   id: WeaponEmpirePack

@@ -1,4 +1,4 @@
-# Базовые профили полета для различных скафандров.
+# Base flight profiles for different hardsuits.
 - type: entity
   id: ClothingFlightProfileEasy
   abstract: true

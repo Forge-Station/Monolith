@@ -47,12 +47,15 @@
     - MonoTSFVouchersDynamic
     - MonoTSFMiscDynamic
     - MonoTSFGearDynamic
+    #Forge-Change-start: back USSP & Viper staff
     # USSP start
-    # - MonoUSSPArmorDynamic
-    # - MonoUSSPMiscDynamic
-    # - MonoUSSPWeaponsDynamicRanged
+    - MonoUSSPArmorDynamic
+    - MonoUSSPMiscDynamic
+    - MonoUSSPWeaponsDynamicRanged
+    - MonoUSSPVouchersDynamic
     # Viper Group start
-    # - MonoViperGroupDynamic
+    - MonoViperGroupDynamic
+    #Forge-Change-End
     # Universal shit (stuff like shipgun ammo)
     - UniversalRailgunAmmo
     - UniversalMissileAmmo
@@ -67,6 +70,13 @@
     - SecurityEquipment
     - SmartGun
     - NSCRecipes # Forge-Change
+    #Forge-Change-Start
+    #Ренегаты
+    - RenegateWeaponsDynamic
+    - RenegateEquipmentDynamic
+    - RenegateAmmoDynamic
+    - RenegateVoucherDynamic
+    #Forge-Change-End
   - type: MaterialStorage
     whitelist:
       tags:
@@ -87,6 +97,7 @@
   parent: BaseLatheLube
   name: USSP field assembler
   description: Capable of manufacturing equipment to USSP design specifications. Often issued throughout the Armed Forces to support the inherent industrial tendencies of its service members.
+  categories: [ HideSpawnMenu ] # Forge-change
   components:
   - type: Sprite
     sprite: _Mono/Structures/Machines/techfab.rsi
@@ -151,6 +162,7 @@
   parent: BaseLatheLube
   name: Viper Group precision lathe
   description: Capable of producing equipment to Viper Group standards. The parts making up the lathe are stamped with the logos of long-forgotten brands from the corporate era.
+  categories: [ HideSpawnMenu ] # Forge-change
   components:
   - type: Sprite
     sprite: _Mono/Structures/Machines/techfab.rsi
@@ -294,6 +306,7 @@
     - MonoCentrifugeProcessingStatic
     dynamicPacks:
     - MonoUraniumProcessing
+    - MonoIriditeProcessing # Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:

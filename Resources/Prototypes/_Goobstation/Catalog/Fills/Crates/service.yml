@@ -21,8 +21,8 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RandomVinylSleeve
-      rolls: !type:ConstantNumberSelector
-          value: 6
+        rolls: !type:ConstantNumberSelector
+          value: 12
 
 - type: entityTable
   id: RandomCDDisk

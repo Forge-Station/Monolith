@@ -1,9 +1,7 @@
 - type: technology
   id: RadioMusicCommunications
   name: research-technology-radio-music-communication
-  icon:
-  sprite: /Textures/_Goobstation/Structures/Machines/StationRadio/vinylplayer.rsi
-  state: icon
+  entityIcon: VinylPlayer
   discipline: CivilianServices
   tier: 2
   cost: 10000

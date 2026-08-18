@@ -13,14 +13,14 @@
 - type: latheRecipePack
   id: RenegateEquipmentDynamic
   recipes:
-  - ClothingOuterHardsuitRenegatebsii20Rogue
-  - ClothingOuterHardsuitRenegatebsii30Rogue
-  - ClothingOuterArmorRenegatesRogue
-  - ClothingHeadHelmetRenegateRogue
-  - ClothingShoesBootsMagRenegadeRogue
-  - ClothingOuterHardsuitRenegatecriii200Rogue
-  - ClothingOuterHardsuitRenegateoiii18Rogue
-  - ClothingOuterHardsuitRenegateyiv3020Rogue
+  - ClothingOuterHardsuitRenegatebsii20
+  - ClothingOuterHardsuitRenegateLightweightJuggernaut
+  - ClothingOuterHardsuitRenegatecriii200
+  - ClothingOuterHardsuitRenegateEnergyShield
+  - ClothingOuterHardsuitRenegateHeavyJuggernaut
+  - ClothingOuterHardsuitRenegateStealth
+  - ClothingOuterHardsuitRenegateAdvancedLight
+  - ClothingOuterHardsuitRenegateReflectElite
 
 - type: latheRecipePack
   id: RenegateAmmoDynamic

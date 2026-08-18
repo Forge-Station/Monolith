@@ -9,7 +9,7 @@
 - type: radioChannel
   id: RadioShow
   name: chat-radio-radioshow
-  keycode: 'p'
-  frequency: 1024
+  keycode: '0'
+  frequency: 1285
   color: "#bc1ac4"
   longRange: true

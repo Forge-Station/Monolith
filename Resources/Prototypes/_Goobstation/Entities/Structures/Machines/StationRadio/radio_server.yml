@@ -19,10 +19,11 @@
   - type: Rotatable
   - type: Machine
     board: StationRadioServerCircuitboard
-  - type: TelecomExempt #Forge-Change
+  - type: TelecomExempt
   - type: RadioMicrophone
     powerRequired: true
     broadcastChannel: RadioShow
+    frequency: 1285
     unobstructedRequired: true
 
 - type: entity

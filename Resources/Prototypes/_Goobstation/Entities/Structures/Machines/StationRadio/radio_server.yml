@@ -31,6 +31,7 @@
   parent: [ BaseMachinePowered, ConstructibleMachine ]
   name: station radio rig
   description: A collection of everything you need to play music over the station.
+  categories: [ DoNotMap ] #Forge-Change
   components:
   - type: Sprite
     sprite: _Goobstation/Structures/Machines/StationRadio/radiostationrig.rsi
@@ -47,3 +48,5 @@
   - type: Machine
     board: StationRadioRigCircuitboard
   - type: RadioRig
+  - type: Anchorable #Forge-Change
+    flags: Anchorable #Forge-Change

@@ -9,7 +9,7 @@
 - type: radioChannel
   id: RadioShow
   name: chat-radio-radioshow
-  keycode: '0'
+  keycode: '2'
   frequency: 1285
   color: "#bc1ac4"
   longRange: true

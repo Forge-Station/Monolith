@@ -126,20 +126,3 @@
   keycode: 'n'
   frequency: 7011
   color: "#1a5f9b"
-
-#radio
-- type: radioChannel
-  id: RadioShowTSF
-  name: chat-radio-radioshow
-  keycode: '1'
-  frequency: 1286
-  color: "#001694"
-  longRange: true
-
-- type: radioChannel
-  id: RadioShowEmpire
-  name: chat-radio-radioshow
-  keycode: '2'
-  frequency: 1287
-  color: "#c47f00"
-  longRange: true

@@ -3,8 +3,8 @@
   groups:
   - AirlockStandard
   - AirlockGlass
-  - AirlockHeavyStandard
-  - AirlockHeavyGlass
+  # - AirlockHeavyStandard # Forge-Change-Del
+  # - AirlockHeavyGlass # Forge-Change-Del
 
 - type: paintableGroupCategory
   id: Canisters

@@ -21,6 +21,6 @@ public sealed partial class StationRadioReceiverComponent : Component
     /// <summary>
     /// Default audio params for the played audio.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [AutoNetworkedField]
     public AudioParams DefaultParams = AudioParams.Default.WithVolume(3.5f).WithMaxDistance(8f); // 8 is just the edge of the screen usually
 }

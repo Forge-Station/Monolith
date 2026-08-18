@@ -19,7 +19,7 @@
   - type: Rotatable
   - type: Machine
     board: StationRadioServerCircuitboard
-  - type: TelecomExempt
+  - type: TelecomExempt #Forge-Change
   - type: RadioMicrophone
     powerRequired: true
     broadcastChannel: RadioShow

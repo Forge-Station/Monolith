@@ -79,14 +79,6 @@
   result: VinylPlayerCircuitboard
 
 - type: latheRecipe
-  parent: BaseCircuitboardRecipe
-  id: TapeDeckCircuitboard
-  icon:
-    sprite:  _Goobstation/Structures/Machines/StationRadio/tapedeck.rsi
-    state: icon
-  result: TapeDeckCircuitboard
-
-- type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
   id: StationRadioServerCircuitboard
   icon:

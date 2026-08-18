@@ -379,3 +379,23 @@
     layers:
     - state: crypt_nexus
     - state: nexus_label
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyRadioShow
+  suffix: RadioShow
+  name: radio encryption key
+  categories: [ DoNotMap ]
+  description: An encryption key for imperial command staff. Grants general imperial and command net access.
+  components:
+  - type: EncryptionKey
+    channels:
+    - RadioShow
+    defaultChannel: RadioShow
+  - type: Item
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_red_alt
+    - state: viper_label

@@ -8,10 +8,6 @@
       state: security
     - type: MachineBoard
       prototype: ShieldGeneratorSmall
-      componentRequirements:
-        AmeFuelContainer:
-          amount: 3
-          defaultPrototype: AmeJar
       stackRequirements:
         Glass: 10
         Steel: 10
@@ -28,10 +24,6 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGeneratorMedium
-    componentRequirements:
-      AmeFuelContainer:
-        amount: 5
-        defaultPrototype: AmeJar
     stackRequirements:
       Glass: 10
       Steel: 10
@@ -40,7 +32,7 @@
       Gold: 10
       Silver: 10
       UraniumFissile: 1
-
+  
 - type: entity
   id: MachineShieldMS500Circuitboard
   parent: ForgeShieldCircuitboardT4
@@ -51,15 +43,12 @@
     state: security
   - type: MachineBoard
     prototype: ShieldGenerator
-    componentRequirements:
-      AmeFuelContainer:
-        amount: 8
-        defaultPrototype: AmeJar
     stackRequirements:
       Glass: 30
       Steel: 30
       Plasma: 50
       Plasteel: 50
-      Gold: 15
-      Silver: 15
+      Gold: 20 #Forge-Change
+      Silver: 20 #Forge-Change
+      Bluespace: 4 #Forge-Change
       UraniumFissile: 2

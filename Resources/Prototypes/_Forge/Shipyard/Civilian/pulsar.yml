@@ -6,7 +6,7 @@
   price: 55750
   category: Medium
   group: Shipyard
-  shuttlePath: /Maps/_Forge/Shuttles/Civilian/pulsar.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Civilian/pulsar.yml
   guidebookPage: Null
   class:
   - Civilian
@@ -14,7 +14,7 @@
 - type: gameMap
   id: Pulsar
   mapName: 'Пульсар'
-  mapPath: /Maps/_Forge/Shuttles/Civilian/pulsar.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Civilian/pulsar.yml
   minPlayers: 0
   stations:
     Pulsar:

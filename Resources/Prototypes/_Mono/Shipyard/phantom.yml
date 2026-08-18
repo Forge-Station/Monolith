@@ -9,12 +9,12 @@
   parent: BaseVessel
   name: IB Phantom
   description: Experimental ship with enormous thruster power. CTLA-25s included.
-  price: 90000
+  price: 155146
   category: Small
   group: Medical
   access: Command # DoC exclusive.
   limit: 2
-  shuttlePath: /Maps/_Mono/Shuttles/phantom.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/phantom.yml
   guidebookPage: null
   class:
   - Medical
@@ -24,7 +24,7 @@
 - type: gameMap
   id: Phantom
   mapName: 'IB Phantom'
-  mapPath: /Maps/_Mono/Shuttles/phantom.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/phantom.yml
   minPlayers: 0
   stations:
     Phantom:

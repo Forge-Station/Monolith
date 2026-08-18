@@ -13,4 +13,4 @@ ent-WeaponEnergyTurretAI = { ent-WeaponEnergyTurretStationBase }
     .suffix = ИИ, Борги
 ent-WeaponEnergyTurretSyndicate = { ent-WeaponEnergyTurretStationBase }
     .suffix = Синдикат
-    .desc = Высокотехнологичная автономная система вооружения под непосредственным управлением местного синдиката.
+    .desc = Высокотехнологичная автономная система вооружения под непосредственным управлением местного Горлекса.

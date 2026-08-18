@@ -12,10 +12,10 @@
   parent: BaseVessel
   name: HES Phaeron
   description: Part of Horizon Energy's latest gas mining initiative, this gigantic gas tanker is able to harvest and store a frightening amount of gas. Perfect for plasma harvesting in the Colossus sector.
-  price: 52450
+  price: 82751
   category: Medium
   group: Shipyard
-  shuttlePath: /Maps/_Mono/Shuttles/phaeron.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/phaeron.yml
   guidebookPage: Null
   class:
   - Atmospherics
@@ -25,7 +25,7 @@
 - type: gameMap
   id: Phaeron
   mapName: 'HES Phaeron'
-  mapPath: /Maps/_Mono/Shuttles/phaeron.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/phaeron.yml
   minPlayers: 0
   stations:
     Phaeron:

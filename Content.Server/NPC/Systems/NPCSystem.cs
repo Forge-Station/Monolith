@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.NPC.Components;
 using Content.Server.NPC.HTN;
@@ -14,9 +13,8 @@ using Prometheus;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
-using Robust.Shared.Map;
+using Robust.Shared.Physics.Components; // Mono
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
 
 namespace Content.Server.NPC.Systems
 {
@@ -32,9 +30,9 @@ namespace Content.Server.NPC.Systems
         [Dependency] private IConfigurationManager _configurationManager = default!;
         [Dependency] private HTNSystem _htn = default!;
         [Dependency] private MobStateSystem _mobState = default!;
+        [Dependency] private NPCSteeringSystem _steering = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
         [Dependency] private IPlayerManager _playerManager = default!;
-        [Dependency] private IGameTiming _timing = default!;
-
 
         /// <summary>
         /// Whether any NPCs are allowed to run at all.
@@ -49,28 +47,6 @@ namespace Content.Server.NPC.Systems
         private float _playerPauseDistance;
         private float _playerDistanceCheckTimer;
         private const float PlayerDistanceCheckInterval = 2.0f; // Check every 2 seconds
-        private readonly List<EntityCoordinates> _cachedPlayerCoordinates = new();
-
-        private float _lodNearDistance;
-        private float _lodMidDistance;
-        private float _lodFarDistance;
-        private float _aiNearUpdateInterval;
-        private float _aiMidUpdateInterval;
-        private float _aiFarUpdateInterval;
-        private float _aiUpdateJitter;
-        private float _pathNearRepathInterval;
-        private float _pathMidRepathInterval;
-        private float _pathFarRepathInterval;
-        private float _pathRepathJitter;
-
-        [ViewVariables]
-        public int LastFrameHtnUpdates { get; private set; }
-
-        [ViewVariables]
-        public int LastFrameHtnCadenceSkips { get; private set; }
-
-        [ViewVariables]
-        public int MaxFrameHtnUpdates { get; private set; }
 
         /// <inheritdoc />
         public override void Initialize()
@@ -81,17 +57,6 @@ namespace Content.Server.NPC.Systems
             Subs.CVar(_configurationManager, CCVars.NPCMaxUpdates, obj => _maxUpdates = obj, true);
             Subs.CVar(_configurationManager, CCVars.NPCPauseWhenNoPlayersInRange, value => _pauseWhenNoPlayersInRange = value, true);
             Subs.CVar(_configurationManager, CCVars.NPCPlayerPauseDistance, value => _playerPauseDistance = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCAiLodNearDistance, value => _lodNearDistance = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCAiLodMidDistance, value => _lodMidDistance = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCAiLodFarDistance, value => _lodFarDistance = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCAiNearUpdateInterval, value => _aiNearUpdateInterval = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCAiMidUpdateInterval, value => _aiMidUpdateInterval = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCAiFarUpdateInterval, value => _aiFarUpdateInterval = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCAiUpdateJitter, value => _aiUpdateJitter = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCPathNearRepathInterval, value => _pathNearRepathInterval = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCPathMidRepathInterval, value => _pathMidRepathInterval = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCPathFarRepathInterval, value => _pathFarRepathInterval = value, true);
-            Subs.CVar(_configurationManager, CCVars.NPCPathRepathJitter, value => _pathRepathJitter = value, true);
         }
 
         public void OnPlayerNPCAttach(EntityUid uid, HTNComponent component, PlayerAttachedEvent args)
@@ -156,7 +121,6 @@ namespace Content.Server.NPC.Systems
 
             Log.Debug($"Waking {ToPrettyString(uid)}");
             EnsureComp<ActiveNPCComponent>(uid);
-            InitializeCadence(uid, component);
         }
 
         public void SleepNPC(EntityUid uid, HTNComponent? component = null)
@@ -209,23 +173,6 @@ namespace Content.Server.NPC.Systems
 
         private void CheckPlayerDistancesAndPauseNPCs()
         {
-            _cachedPlayerCoordinates.Clear();
-            var allPlayerData = _playerManager.GetAllPlayerData();
-            foreach (var playerData in allPlayerData)
-            {
-                var exists = _playerManager.TryGetSessionById(playerData.UserId, out var session);
-
-                if (!exists || session == null
-                    || session.AttachedEntity is not { Valid: true } playerEnt
-                    || HasComp<GhostComponent>(playerEnt)
-                    || TryComp<MobStateComponent>(playerEnt, out var playerState) && playerState.CurrentState != MobState.Alive)
-                {
-                    continue;
-                }
-
-                _cachedPlayerCoordinates.Add(Transform(playerEnt).Coordinates);
-            }
-
             // Get all NPCs with HTN components (both active and inactive).
             var npcQuery = EntityQueryEnumerator<HTNComponent, TransformComponent>();
 
@@ -240,28 +187,41 @@ namespace Content.Server.NPC.Systems
                 if (_mobState.IsIncapacitated(npcUid))
                     continue;
 
-                var minDistance = htn.SleepPlayerCheckRangeOverride ?? _playerPauseDistance; // Mono
-
                 var npcCoords = npcTransform.Coordinates;
                 var hasNearbyPlayer = false;
-                var nearestDistance = float.MaxValue;
 
-                // Forge-Change-Start
+                var minDistance = htn.SleepPlayerCheckRangeOverride ?? _playerPauseDistance; // Mono
+                // Mono
+                if (htn.SleepMaxGridSpeed is { } ms
+                    && TryComp<PhysicsComponent>(npcTransform.GridUid, out var gridBody)
+                    && gridBody.LinearVelocity.Length() > ms
+                    )
+                    hasNearbyPlayer = true;
+
                 // Check distance to all players.
-                foreach (var playerCoords in _cachedPlayerCoordinates)
+                if (!hasNearbyPlayer)
                 {
-                    if (!npcCoords.TryDistance(EntityManager, playerCoords, out var distance))
-                        continue;
-
-                    nearestDistance = Math.Min(nearestDistance, distance);
-
-                    if (distance <= minDistance)
+                    var allPlayerData = _playerManager.GetAllPlayerData();
+                    foreach (var playerData in allPlayerData)
                     {
-                        hasNearbyPlayer = true;
-                        break;
+                        var exists = _playerManager.TryGetSessionById(playerData.UserId, out var session);
+
+                        if (!exists || session == null
+                            || session.AttachedEntity is not { Valid: true } playerEnt
+                            || HasComp<GhostComponent>(playerEnt)
+                            || TryComp<MobStateComponent>(playerEnt, out var state) && state.CurrentState != MobState.Alive)
+                            continue;
+
+                        var playerCoords = Transform(playerEnt).Coordinates;
+
+                        if (npcCoords.TryDistance(EntityManager, playerCoords, out var distance) &&
+                            distance <= minDistance)
+                        {
+                            hasNearbyPlayer = true;
+                            break;
+                        }
                     }
                 }
-                // Forge-Change-End
 
                 var isAwake = IsAwake(npcUid, htn);
 
@@ -281,71 +241,7 @@ namespace Content.Server.NPC.Systems
                         WakeNPC(npcUid, htn);
                     }
                 }
-
-                ApplyLodSettings(npcUid, htn, nearestDistance);
             }
-        }
-
-        private void InitializeCadence(EntityUid uid, HTNComponent component)
-        {
-            component.UpdatePhaseSeed = uid.GetHashCode();
-            if (component.AiUpdateInterval <= 0f)
-            {
-                component.NextAiUpdateAt = _timing.CurTime;
-                return;
-            }
-
-            var phase = (Math.Abs(component.UpdatePhaseSeed) % 1000) / 1000f;
-            component.NextAiUpdateAt = _timing.CurTime + TimeSpan.FromSeconds(component.AiUpdateInterval * phase);
-        }
-
-        private void ApplyLodSettings(EntityUid uid, HTNComponent htn, float nearestDistance)
-        {
-            var tier = GetLodTier(nearestDistance);
-            float aiInterval;
-            float pathInterval;
-
-            switch (tier)
-            {
-                case NpcAiLodTier.Near:
-                    aiInterval = _aiNearUpdateInterval;
-                    pathInterval = _pathNearRepathInterval;
-                    break;
-                case NpcAiLodTier.Mid:
-                    aiInterval = _aiMidUpdateInterval;
-                    pathInterval = _pathMidRepathInterval;
-                    break;
-                default:
-                    aiInterval = _aiFarUpdateInterval;
-                    pathInterval = _pathFarRepathInterval;
-                    break;
-            }
-
-            if (nearestDistance > _lodFarDistance)
-            {
-                aiInterval *= 1.5f;
-                pathInterval *= 1.5f;
-            }
-
-            htn.AiUpdateInterval = Math.Max(0f, aiInterval);
-            htn.AiUpdateJitter = Math.Max(0f, _aiUpdateJitter);
-
-            if (TryComp<NPCSteeringComponent>(uid, out var steering))
-            {
-                steering.RepathInterval = Math.Max(0.01f, pathInterval);
-                steering.RepathJitter = Math.Max(0f, _pathRepathJitter);
-            }
-        }
-
-        private NpcAiLodTier GetLodTier(float nearestDistance)
-        {
-            if (nearestDistance <= _lodNearDistance)
-                return NpcAiLodTier.Near;
-
-            if (nearestDistance <= _lodMidDistance)
-                return NpcAiLodTier.Mid;
-
-            return NpcAiLodTier.Far;
         }
 
         public void OnMobStateChange(EntityUid uid, HTNComponent component, MobStateChangedEvent args)
@@ -364,12 +260,5 @@ namespace Content.Server.NPC.Systems
                     break;
             }
         }
-    }
-
-    public enum NpcAiLodTier : byte
-    {
-        Near,
-        Mid,
-        Far,
     }
 }

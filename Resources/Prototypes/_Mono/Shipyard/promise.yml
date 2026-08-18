@@ -9,10 +9,10 @@
   parent: BaseVessel
   name: DFNT Promise
   description: An old Medical Ship design dating back from the fracture era. It comes equipped with everything a hospital ship would want, as well as a spacious crew accomodations for long term shifts.
-  price: 106500
+  price: 142676
   category: Medium
   group: Medical
-  shuttlePath: /Maps/_Mono/Shuttles/promise.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/promise.yml
   guidebookPage: null
   class:
   - Medical
@@ -23,7 +23,7 @@
 - type: gameMap
   id: Promise
   mapName: 'DFNT Promise'
-  mapPath: /Maps/_Mono/Shuttles/promise.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/promise.yml
   minPlayers: 0
   stations:
     Promise:

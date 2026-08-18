@@ -14,8 +14,16 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
+    viewCircleCount: 4
+    viewCircleSpacing: 280
+    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
+    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
+    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+
   - type: Armor
     modifiers:
       coefficients:
@@ -75,8 +83,16 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 450 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
+    viewCircleCount: 4
+    viewCircleSpacing: 270
+    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
+    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
+    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+
   - type: Armor
     modifiers:
       coefficients:
@@ -107,8 +123,16 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
+    viewCircleCount: 4
+    viewCircleSpacing: 280
+    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
+    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
+    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+
   - type: Armor
     modifiers:
       coefficients:
@@ -138,8 +162,16 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
+    viewCircleCount: 4
+    viewCircleSpacing: 280
+    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
+    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
+    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+
   - type: Armor
     modifiers:
       coefficients:
@@ -169,8 +201,16 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
+    viewCircleCount: 4
+    viewCircleSpacing: 280
+    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
+    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
+    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+
   - type: Armor
     modifiers:
       coefficients:
@@ -201,8 +241,16 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
+    viewCircleCount: 4
+    viewCircleSpacing: 280
+    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
+    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
+    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+
   - type: Armor
     modifiers:
       coefficients:
@@ -233,8 +281,16 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
+    viewCircleCount: 4
+    viewCircleSpacing: 280
+    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
+    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
+    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+
   - type: Armor
     modifiers:
       coefficients:
@@ -264,8 +320,16 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
+    viewCircleCount: 4
+    viewCircleSpacing: 280
+    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
+    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
+    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+
   - type: Armor
     modifiers:
       coefficients:
@@ -295,8 +359,16 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: NightVision
-    flashDurationMultiplier: 3.5
-    isEquipment: true
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 650 #400 to 600 // это радиус обзора, тут он меньше чем у скафов выше, но лучше чем гражданский (максимальный радиус для ТСФ(800))
+    viewCircleCount: 3
+    viewCircleSpacing: 280
+    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
+    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
+    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+
   - type: Armor
     modifiers:
       coefficients:

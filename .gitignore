@@ -313,3 +313,5 @@ Resources/MapImages
 # Link Files
 *.lnk
 
+# Forge secrets
+/MonolithSecrets

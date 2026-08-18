@@ -5,13 +5,12 @@ namespace Content.Shared.PDA
 {
     [Serializable, NetSerializable]
     public sealed class PdaUpdateState : CartridgeLoaderUiState // WTF is this. what. I ... fuck me I just want net entities to work
-        // TODO purge this shit
-        //AAAAAAAAAAAAAAAA
+    // TODO purge this shit
+    // AAAAAAAAAAAAAAAA
     {
         public bool FlashlightEnabled;
         public bool HasPen;
         public bool HasPai;
-        public bool HasBook;
         public PdaIdInfoText PdaOwnerInfo;
         public string? StationName;
         public bool HasUplink;
@@ -26,7 +25,6 @@ namespace Content.Shared.PDA
             bool flashlightEnabled,
             bool hasPen,
             bool hasPai,
-            bool hasBook,
             PdaIdInfoText pdaOwnerInfo,
             int balance, // Frontier
             string? ownedShipName, // Frontier
@@ -39,7 +37,6 @@ namespace Content.Shared.PDA
             FlashlightEnabled = flashlightEnabled;
             HasPen = hasPen;
             HasPai = hasPai;
-            HasBook = hasBook;
             PdaOwnerInfo = pdaOwnerInfo;
             HasUplink = hasUplink;
             CanPlayMusic = canPlayMusic;
@@ -60,5 +57,7 @@ namespace Content.Shared.PDA
         public Color CompanyColor;
         public string? StationAlertLevel;
         public Color StationAlertColor;
+        // public string? WarLevel; // Forge-change
+        public DateTime? CurrentDate; // DeltaV - PDA date
     }
 }

@@ -5,11 +5,11 @@
   parent: BaseVesselAntag
   name: TSF-SKR Tumour
   description: Уродливый картофелеобразный авианосец. Практически не имеет собственного вооружения для самообороны, но оснащён фабрикаторами для снабжения и обслуживания своих истребителей и других кораблей. # Forge-Change
-  price: 68250
-  category: Small
+  price: 110110
+  category: Medium
   group: Security
   access: Security
-  shuttlePath: /Maps/_Mono/Shuttles/Nfsd/tumour.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/Nfsd/tumour.yml
   guidebookPage: Null
   class:
   - Capital
@@ -20,7 +20,7 @@
 - type: gameMap
   id: Tumour
   mapName: 'Tumour'
-  mapPath: /Maps/_Mono/Shuttles/Nfsd/tumour.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/Nfsd/tumour.yml
   minPlayers: 0
   stations:
     Tumour:

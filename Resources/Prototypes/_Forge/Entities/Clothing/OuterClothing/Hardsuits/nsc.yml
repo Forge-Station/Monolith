@@ -1,0 +1,144 @@
+- type: entity
+  parent: ClothingOuterHardsuitEngineeringWhite
+  id: ClothingOuterHardsuitNexusWorker
+  suffix: Нексус
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_worker_hardsuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_worker_hardsuit.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: equiped-OUTERCLOTH
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitNexusWorker
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitRenegatebsii20
+  id: ClothingOuterHardsuitNexusMilT1
+  suffix: Нексус
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: equiped-OUTERCLOTH
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitNexusMilT1
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: ClothingOuterHardsuitRenegatecriii200
+  id: ClothingOuterHardsuitNexusMilT2
+  suffix: Нексус
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t2_mil_hardsuit.rsi
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t2_mil_hardsuit.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  - type: ExplosionResistance
+    damageCoefficient: 0.475
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.475
+        Slash: 0.475
+        Piercing: 0.475
+        Heat: 0.7
+        Radiation: 0.5
+        Caustic: 0.8
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitNexusMilT2
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+
+- type: entity
+  parent: [ClothingOuterHardsuitJuggernaut, EnergyShieldClothing]
+  id: ClothingOuterHardsuitNexusMilT3
+  suffix: Нексус
+  components:
+  - type: Sprite
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t3_mil_hardsuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t3_mil_hardsuit.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING-sealed
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitNexusMilT3
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: PressureProtection
+    highPressureMultiplier: 0.2
+    lowPressureMultiplier: 1000
+  - type: FireProtection
+    reduction: 0.6
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.6
+        Heat: 0.7
+        Radiation: 0.5
+        Caustic: 0.8
+        Poison: 0.8
+  - type: ClothingSpeedModifier
+    walkModifier: 0.7
+    sprintModifier: 0.65
+  - type: StaminaDamageResistance
+    coefficient: 0.25
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.55
+        Heat: 0.55
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.55
+        Heat: 0.55
+      flatReductions:
+        Heat: 4
+        Piercing: 4
+    passiveBlockFraction: 0.5
+    activeBlockFraction: 0.5
+    isClothing: true
+  - type: Damageable
+    damageContainer: Shield
+  - type: Battery
+    maxCharge: 120
+    startingCharge: 120
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 1.6
+  - type: RechargeableBlocking
+  - type: UseDelay
+    delay: 12

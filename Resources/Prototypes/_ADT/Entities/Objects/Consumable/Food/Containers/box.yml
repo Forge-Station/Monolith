@@ -1,7 +1,7 @@
 - type: entity
   parent: BoxCardboard
   id: FoodBoxPizzaSyndi
-  name: коробка пиццы Синдиката
+  name: коробка пиццы Горлекса
   description: Коробка выполненная в чёрно-красном оттенке, придаёт стиль вкусу.
   components:
   - type: Sprite

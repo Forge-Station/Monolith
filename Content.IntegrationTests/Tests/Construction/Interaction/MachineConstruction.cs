@@ -2,6 +2,7 @@ using Content.IntegrationTests.Tests.Interaction;
 
 namespace Content.IntegrationTests.Tests.Construction.Interaction;
 
+// Mono - these checks are updated to use economy parts, i'm too lazy to put comments for the changed lines
 public sealed class MachineConstruction : InteractionTest
 {
     private const string MachineFrame = "MachineFrame";
@@ -52,7 +53,7 @@ public sealed class MachineConstruction : InteractionTest
         // Change it into an autolathe
         await InteractUsing("AutolatheMachineCircuitboard");
         AssertPrototype(MachineFrame);
-        await Interact(Bin1, Bin1, Bin1, Manipulator1, Glass, Screw);
+        await Interact(Bin1, Bin1, Bin1, Manipulator1, Glass, Beaker, Beaker, Screw);
         AssertPrototype("Autolathe");
     }
 
@@ -86,4 +87,3 @@ public sealed class MachineConstruction : InteractionTest
         }
     }
 }
-

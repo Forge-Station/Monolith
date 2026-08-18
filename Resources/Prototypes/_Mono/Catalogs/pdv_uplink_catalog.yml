@@ -301,22 +301,6 @@
           - PirateUplink
 
 - type: listing
-  id: UplinkPirateEnergyShield
-  name: uplink-pirate-energy-shield-name
-  description: uplink-pirate-energy-shield-desc
-  icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
-  productEntity: EnergyShield
-  cost:
-    Doubloon: 40
-  categories:
-  - UplinkPirateUtility
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - PirateUplink
-
-- type: listing
   id: UplinkPirateThrusterKit
   name: uplink-pirate-thruster-kit-name
   description: uplink-pirate-thruster-kit-desc
@@ -569,10 +553,10 @@
       - PirateUplink
 
 - type: listing
-  id: UplinkPirateAmmoBox45_magnum
-  name: uplink-pirate-magazine-box-45_magnum-name
-  description: uplink-pirate-magazine-box-45_magnum-desc
-  productEntity: BoxMagazine45_magnumFMJ
+  id: UplinkPirateAmmoBox357_magnum
+  name: uplink-pirate-magazine-box-357_magnum-name
+  description: uplink-pirate-magazine-box-357_magnum-desc
+  productEntity: BoxMagazine357_magnumFMJ
   cost:
     Doubloon: 5
   categories:
@@ -1257,7 +1241,22 @@
   description: uplink-pdv-t1-garm-voucher-desc
   productEntity: ShipVoucherGarm
   cost:
-    Doubloon: 80
+    Doubloon: 75
+  categories:
+  - UplinkPdvVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - FactionStaticUplinkPdv
+
+- type: listing
+  id: UplinkSecurityT1VoucherKalisto
+  name:  uplink-pdv-t1-kalisto-voucher-name
+  description: uplink-pdv-t1-kalisto-voucher-desc
+  productEntity: ShipVoucherKalisto
+  cost:
+    Doubloon: 95
   categories:
   - UplinkPdvVouchers
   conditions:
@@ -1272,7 +1271,7 @@
   description: uplink-pdv-t1-fenrir-voucher-desc
   productEntity: ShipVoucherFenrir
   cost:
-    Doubloon: 100
+    Doubloon: 80
   categories:
   - UplinkPdvVouchers
   conditions:
@@ -1287,7 +1286,7 @@
   description: uplink-pdv-t1-scorpion-voucher-desc
   productEntity: ShipVoucherScorpion
   cost:
-    Doubloon: 120
+    Doubloon: 85
   categories:
   - UplinkPdvVouchers
   conditions:
@@ -1302,7 +1301,7 @@
   description: uplink-pdv-t1-bastion-voucher-desc
   productEntity: ShipVoucherBastion
   cost:
-    Doubloon: 110
+    Doubloon: 80
   categories:
   - UplinkPdvVouchers
   conditions:
@@ -1317,7 +1316,22 @@
   description: uplink-pdv-t1-neptune-voucher-desc
   productEntity: ShipVoucherNeptune
   cost:
-    Doubloon: 130
+    Doubloon: 100
+  categories:
+  - UplinkPdvVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - FactionStaticUplinkPdv
+
+- type: listing
+  id: UplinkSecurityT1VoucherLayak
+  name:  uplink-pdv-t1-layak-voucher-name
+  description: uplink-pdv-t1-layak-voucher-desc
+  productEntity: ShipVoucherLayak
+  cost:
+    Doubloon: 100
   categories:
   - UplinkPdvVouchers
   conditions:
@@ -1336,7 +1350,22 @@
   description: uplink-pdv-t2-europa-voucher-desc
   productEntity: ShipVoucherEuropa
   cost:
-    Doubloon: 200
+    Doubloon: 180
+  categories:
+  - UplinkPdvVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - FactionStaticUplinkPdv
+
+- type: listing
+  id: UplinkSecurityT2VoucherGanymede
+  name:  uplink-pdv-t2-ganymede-voucher-name
+  description: uplink-pdv-t2-ganymede-voucher-desc
+  productEntity: ShipVoucherGanymede
+  cost:
+    Doubloon: 190
   categories:
   - UplinkPdvVouchers
   conditions:
@@ -1351,7 +1380,7 @@
   description: uplink-pdv-t2-vulture-voucher-desc
   productEntity: ShipVoucherVulture
   cost:
-    Doubloon: 200
+    Doubloon: 145
   categories:
   - UplinkPdvVouchers
   conditions:
@@ -1366,7 +1395,22 @@
   description: uplink-pdv-t2-motleyanne-voucher-desc
   productEntity: ShipVoucherMotleyAnne
   cost:
-    Doubloon: 200
+    Doubloon: 220
+  categories:
+  - UplinkPdvVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - FactionStaticUplinkPdv
+
+- type: listing
+  id: UplinkSecurityT2VoucherKortik
+  name:  uplink-pdv-t2-kortik-voucher-name
+  description: uplink-pdv-t2-kortik-voucher-desc
+  productEntity: ShipVoucherKortikT2
+  cost:
+    Doubloon: 180
   categories:
   - UplinkPdvVouchers
   conditions:
@@ -1384,6 +1428,21 @@
   name:  uplink-pdv-t3-saintie-voucher-name
   description: uplink-pdv-t3-saintie-voucher-desc
   productEntity: ShipVoucherSaintie
+  cost:
+    Doubloon: 400
+  categories:
+  - UplinkPdvVouchers
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - FactionStaticUplinkPdv
+
+- type: listing
+  id: UplinkSecurityT3VoucherKortik
+  name:  uplink-pdv-t3-kortik-voucher-name
+  description: uplink-pdv-t3-kortik-voucher-desc
+  productEntity: ShipVoucherKortik
   cost:
     Doubloon: 400
   categories:

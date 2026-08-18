@@ -1,4 +1,4 @@
-ent-ForgeBaseWeaponFramePistolCybersun = пистолет Cybersun
+ent-ForgeBaseWeaponFramePistolCybersun = пистолет Gorlex
 ent-ForgeBaseWeaponPistolChamber35HighCapacityOverpressure = пистолет .35 (увеличенный магазин, повышенное давление)
 ent-ForgeBaseWeaponPistolChamber35HighCapacityRubber = пистолет .35 (увеличенный магазин, резина)
 ent-ForgeBaseWeaponPistolChamber = базовый пистолет (патронник)

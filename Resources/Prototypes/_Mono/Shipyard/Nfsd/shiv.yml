@@ -1,31 +1,34 @@
-#Author: Eldritch_Pineapple on Github, Eldritch_Pineapple on Discord
+#Author:  Corrupt142 on Github, Theticalsteak49 on Discord
 
 - type: vessel
   id: Shiv
   parent: BaseVesselAntag
   name: TSF-PIN Shiv
   description: Рабочая лошадка промышленности соларианских флотов, оснащённая отсеком для исследования артефактов и обладающая хорошими возможностями для добычи ресурсов. # Forge-Change
-  price: 60000
+  price: 112458
   category: Small
+  hyperwarTimelock: 0
   group: Security
   access: Security
-  shuttlePath: /Maps/_Mono/Shuttles/Nfsd/shiv.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/Nfsd/shiv.yml
   guidebookPage: Null
   class:
   - Patrol
   - Salvage
-  - Science
   engine:
   - Plasma
 
 - type: gameMap
   id: Shiv
   mapName: 'Shiv'
-  mapPath: /Maps/_Mono/Shuttles/Nfsd/shiv.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/Nfsd/shiv.yml
   minPlayers: 0
   stations:
     Shiv:
       stationProto: StandardFrontierSecurityVessel
+      gridComponents:
+      - type: VesselInfo
+        description: "A vessel so rugged you can still see the radiation scarring after the new paintjob."
       components:
       - type: StationNameSetup
         mapNameTemplate: 'Шив TSF{1}' # Forge-Change

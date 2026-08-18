@@ -280,7 +280,7 @@ uplink-pistol-magazine-cobra-desc = Заполненный магазин для
 uplink-speedloader-magnum-non-ap-name = Быстрый Зарядник .45
 uplink-speedloader-magnum-non-ap-desc = Быстрый зарядник на 6 патронов калибра .45.
 
-uplink-syndicate-segway-name = Синдикатский Сигвей
+uplink-syndicate-segway-name = Сигвей Горлекса
 uplink-syndicate-segway-desc = Передвигайся со стилем, не пачкая свои кроваво-красные ботинки.
 
 uplink-pirate-nightvision-name = Очки ночного виденья

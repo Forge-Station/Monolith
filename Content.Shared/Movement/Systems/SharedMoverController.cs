@@ -11,6 +11,7 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Tag;
+using Content.Shared.Projectiles;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -148,12 +149,12 @@ public abstract partial class SharedMoverController : VirtualController
     }
 
     // Forge-Change-Start: per-tick caches to avoid repeated heavy lookups across HandleMobMovement / OnTileFriction / footstep paths
-    private bool GetWeightlessCached(EntityUid uid, PhysicsComponent physics, TransformComponent xform)
+    private bool GetWeightlessCached(EntityUid uid)
     {
         if (_weightlessCache.TryGetValue(uid, out var cached))
             return cached;
 
-        var weightless = _gravity.IsWeightless(uid, physics, xform);
+        var weightless = _gravity.IsWeightless(uid);
         _weightlessCache[uid] = weightless;
         return weightless;
     }
@@ -254,8 +255,8 @@ public abstract partial class SharedMoverController : VirtualController
         }
 
         // If the body is in air but isn't weightless then it can't move
-        // TODO: MAKE ISWEIGHTLESS EVENT BASED
-        var weightless = GetWeightlessCached(uid, physicsComponent, xform); // Forge-Change: use per-tick cache
+        // TODO: MAKE ISWEIGHTLESS EVENT BASED (done lol)
+        var weightless = GetWeightlessCached(uid);
         var inAirHelpless = false;
 
         if (physicsComponent.BodyStatus != BodyStatus.OnGround && !CanMoveInAirQuery.HasComponent(uid))
@@ -540,7 +541,8 @@ public abstract partial class SharedMoverController : VirtualController
                 !otherCollider.CanCollide ||
                 (collider.CollisionMask & otherCollider.CollisionLayer) == 0 &&
                 (otherCollider.CollisionMask & collider.CollisionLayer) == 0 ||
-                PullableQuery.TryComp(otherEntity, out var pullable) && pullable.BeingPulled)
+                PullableQuery.TryComp(otherEntity, out var pullable) && pullable.BeingPulled || /// Forge-Change
+                HasComp<ProjectileComponent>(otherEntity))                                      /// Forge-Change
             {
                 continue;
             }
@@ -713,8 +715,7 @@ public abstract partial class SharedMoverController : VirtualController
         if (!PhysicsQuery.TryComp(ent, out var physicsComponent) || !XformQuery.TryComp(ent, out var xform))
             return;
 
-        // TODO: Make IsWeightless event based!!!
-        if (physicsComponent.BodyStatus != BodyStatus.OnGround || GetWeightlessCached(ent, physicsComponent, xform))
+        if (physicsComponent.BodyStatus != BodyStatus.OnGround || GetWeightlessCached(ent.Owner))
             args.Modifier *= ent.Comp.BaseWeightlessFriction;
         else
             args.Modifier *= ent.Comp.BaseFriction;

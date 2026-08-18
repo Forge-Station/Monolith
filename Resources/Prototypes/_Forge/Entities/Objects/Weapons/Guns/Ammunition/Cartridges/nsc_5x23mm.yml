@@ -1,0 +1,22 @@
+- type: entity
+  parent: BaseCartridge
+  id: Cartridge5x23mm
+  name: cartridge (5x23mm)
+  suffix: Нексус
+  description: Caseless round for the NEX-SMG-4 Shebet.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - Cartridge5x23mm
+  - type: CartridgeAmmo
+    proto: Bullet5x23mm
+    deleteOnSpawn: true
+  - type: Sprite
+    noRot: false
+    sprite: _Mono/Objects/Weapons/Guns/Ammunition/Casings/caseless_ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals

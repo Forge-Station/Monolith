@@ -241,7 +241,9 @@
   - JumpsuitTurtleneckBlackSleeveless # Forge-Change
   - JumpsuitTurtleneckSalat # Forge-Change
   - JumpsuitTurtleneckSalatblack # Forge-Change
-
+  subgroups:
+  - MonoUSSPJumpsuit # Mono
+#  - VGJumpsuit # Mono, Forge-Change-Del
   fallbacks:
   - ContractorClothingUniformJumpsuitColorGrey
   - ContractorClothingUniformJumpskirtColorGrey
@@ -325,6 +327,9 @@
   - ContractorClothingBackpackDuffelMime
   - ContractorClothingBackpackSatchelMime
   - ContractorClothingBackpackMessengerMime
+  subgroups:
+  - MonoUSSPBackpack # Mono
+#  - VGBackpack # Mono, Forge-Change-Del
   fallbacks:
   - ContractorClothingBackpack
 
@@ -426,6 +431,9 @@
   - ContractorWetFloorSign
   - ContractorClothingOuterCoatExpensive
   - ContractorClothingOuterCoatSpaceAsshole
+  subgroups:
+  - MonoUSSPOuterClothing # Mono
+#  - VGOuterClothing # Mono, Forge-Change-Del
 
 - type: loadoutGroup
   id: ContractorBelt
@@ -614,6 +622,9 @@
   - ContractorClothingHeadHatTophat
   - ContractorClothingHeadHatUNSABeer
   - ContractorClothingHeadSanabi # Mono
+  subgroups:
+  - MonoUSSPHead # Mono
+#  - VGHead # Mono, Forge-Change-Del
 
 - type: loadoutGroup
   id: ContractorEars
@@ -636,7 +647,10 @@
   - ContractorClothingHeadsetAltEngineeringCommon
   - ContractorClothingHeadsetAltMedicalCommon
   - ContractorClothingHeadsetAltScienceCommon
-  - USSPHeadset # Mono
+  # - USSPHeadset # Mono
+  subgroups:
+  - USSPEars # Mono
+#  - VGEars # Mono, Forge-Change-Del
   fallbacks:
   - ContractorClothingHeadsetGreyCommon
 

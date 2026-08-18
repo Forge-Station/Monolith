@@ -8,7 +8,7 @@
   cost: 40000
   recipeUnlocks:
   - ShipVoucherPdvT0Recipe
-  - ShipVoucherPdvT1RandomRecipe
+  - ShipVoucherPdvT1Recipe
   - InertiaVoucherRogue
   - MockVoucherRogue
   - SnakeletVoucherRogue
@@ -19,12 +19,12 @@
 - type: technology
   id: PdvTierTwoVouchers
   name: research-technology-rogue-tier-two-vouchers
-  entityIcon: ShipVoucherPdvT2Random
+  entityIcon: ShipVoucherPdvT2
   discipline: Pdv
   tier: 1
   cost: 60000
   recipeUnlocks:
-  - ShipVoucherPdvT2RandomRecipe
+  - ShipVoucherPdvT2Recipe
   technologyPrerequisites:
   - PdvTierOneVouchers
   - UniversalMaterialResearchT2
@@ -39,6 +39,7 @@
   cost: 80000
   recipeUnlocks:
   - SaintieVoucherRogue
+  - KortikVoucherRogue
   - SaturnVoucherRogue
   technologyPrerequisites:
   - PdvTierTwoVouchers
@@ -108,9 +109,25 @@
   cost: 10000
   recipeUnlocks:
   - BasicBorgCombatModulePDV
+  - BorgIFFPDV
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 12, -4
+
+- type: technology
+  id: PDVBasicBionics
+  name: research-technology-pdv-ias
+  entityIcon: OrganInternalAirSystem
+  discipline: Pdv
+  tier: 2
+  cost: 20000
+  recipeUnlocks:
+  - AutosurgeonIASPDV
+  - AutosurgeonAdvHeartPDV
+  - AutosurgeonDermalArmorPDV
+  technologyPrerequisites:
+  - UniversalMaterialResearchT2
+  position: 13, -4
 
 - type: technology
   id: PDVAdvancedBorgModule

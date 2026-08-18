@@ -13,9 +13,16 @@
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: FlashImmunity
-  - type: NightVision
-    flashDurationMultiplier: 0.85
-    isEquipment: true
+  - type: NightVision # Gen 2
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
     modifiers:
       coefficients:
@@ -58,9 +65,16 @@
       enum.RadarConsoleUiKey.Key:
         type: RadarConsoleBoundUserInterface
   - type: FlashImmunity
-  - type: NightVision
-    flashDurationMultiplier: 0.85
-    isEquipment: true
+  - type: NightVision # Gen 2 quadtube
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
     modifiers:
       coefficients:
@@ -92,9 +106,16 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
-  - type: NightVision
-    flashDurationMultiplier: 0.85
-    isEquipment: true
+  - type: NightVision # Gen 2 monotube
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
+    viewCircleCount: 1
+    viewCircleSpacing: 280
+    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
     modifiers:
       coefficients:
@@ -126,9 +147,16 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
-  - type: NightVision
-    flashDurationMultiplier: 0.85
-    isEquipment: true
+  - type: NightVision # Gen 2
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
     modifiers:
       coefficients:
@@ -172,9 +200,16 @@
       enum.RadarConsoleUiKey.Key:
         type: RadarConsoleBoundUserInterface
   - type: FlashImmunity
-  - type: NightVision
-    flashDurationMultiplier: 0.85
-    isEquipment: true
+  - type: NightVision # Gen 4
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
+    viewCircleCount: 2
+    viewCircleSpacing: 280
+    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
     modifiers:
       coefficients:

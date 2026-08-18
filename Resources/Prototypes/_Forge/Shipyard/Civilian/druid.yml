@@ -6,7 +6,7 @@
   price: 69000
   category: Medium
   group: Shipyard
-  shuttlePath: /Maps/_Forge/Shuttles/Civilian/druid.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Civilian/druid.yml
   guidebookPage: Null
   class:
   - Civilian
@@ -14,7 +14,7 @@
 - type: gameMap
   id: Druid
   mapName: 'Друид'
-  mapPath: /Maps/_Forge/Shuttles/Civilian/druid.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Civilian/druid.yml
   minPlayers: 0
   stations:
     Druid:

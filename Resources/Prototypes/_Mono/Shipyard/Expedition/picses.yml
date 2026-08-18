@@ -9,10 +9,10 @@
   parent: BaseVessel
   name: SKR Picses
   description: A compact but capable expedition ship, with durable hull plating too. This ship has a military IFF designation.
-  price: 77150
+  price: 82520
   category: Medium
   group: Expedition
-  shuttlePath: /Maps/_Mono/Shuttles/Expedition/picses.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/Expedition/picses.yml
   guidebookPage: null
   class:
   - Expedition
@@ -22,7 +22,7 @@
 - type: gameMap
   id: Picses
   mapName: 'Picses'
-  mapPath: /Maps/_Mono/Shuttles/Expedition/picses.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/Expedition/picses.yml
   minPlayers: 0
   stations:
     Picses:

@@ -1,7 +1,7 @@
 ent-CrateHarvesterInjection = Ящик инжекторов
 ent-CrateHarvesterReagentPointSource = Ящик источник реагентов
 ent-CrateHarvesterAnomaly = Ящик аномалий
-ent-CrateHarvesterTurretSyndicate = Ящик турель синдиката
+ent-CrateHarvesterTurretSyndicate = Ящик турель Горлекса
 ent-CrateHarvesterArtifact = Ящик артефакт
 ent-CrateHarvesterCircuitboard = Ящик платы
 ent-CrateHarvesterBorg = Ящик борга

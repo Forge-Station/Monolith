@@ -11,10 +11,10 @@
   parent: BaseVessel
   name: SE Jitterbug
   description: A Botanical shuttle, comes with ten trays and some supplies to get you going. Comes in the unique shape of a bug, how cute.
-  price: 36050
+  price: 50580
   category: Small
   group: Shipyard
-  shuttlePath: /Maps/_Mono/Shuttles/jitterbug.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/jitterbug.yml
   guidebookPage: null
   class:
   - Civilian
@@ -25,7 +25,7 @@
 - type: gameMap
   id: Jitterbug
   mapName: 'SE Jitterbug'
-  mapPath: /Maps/_Mono/Shuttles/jitterbug.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/jitterbug.yml
   minPlayers: 0
   stations:
     Jitterbug:

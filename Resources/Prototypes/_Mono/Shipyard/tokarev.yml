@@ -1,6 +1,6 @@
 # Author Info
 # GitHub: Leon-Krol
-# Discord: Vinny Shick 
+# Discord: Vinny Shick
 
 # Shuttle Notes:
 #
@@ -9,10 +9,10 @@
   parent: BaseVessel
   name: VIN Tokarev
   description: A multipurpose ship that can acompany medical staff in exploring the new frontier in research while allways being ready to help those in need.
-  price: 120000
+  price: 156794
   category: Large
   group: Medical
-  shuttlePath: /Maps/_Mono/Shuttles/tokarev.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/tokarev.yml
   guidebookPage: null
   class:
   - Science
@@ -23,7 +23,7 @@
 - type: gameMap
   id: Tokarev
   mapName: 'VIN Tokarev'
-  mapPath: /Maps/_Mono/Shuttles/tokarev.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/tokarev.yml
   minPlayers: 0
   stations:
     Tokarev:

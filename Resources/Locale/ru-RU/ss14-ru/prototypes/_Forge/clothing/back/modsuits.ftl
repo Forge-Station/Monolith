@@ -1,7 +1,3 @@
-ent-ClothingModsuitVanguardNexusPowerCell = ядро модкостюма VSS «Авангард»
-    .desc = МОД костюм корпорации Vanguard Security Systems, производимый для сил охранения Нексуса. На удивление он довольно лёгкий.
-ent-ClothingModsuitVanguardNexus = ядро модкостюма VSS «Авангард»
-    .desc = МОД костюм корпорации Vanguard Security Systems, производимый для сил охранения Нексуса. На удивление он довольно лёгкий.
 ent-ClothingModsuitHMELightSuitPowerCell = ядро лёгкого модкостюма HME «Хранитель»
     .desc = Герметичный блок питания системы жизнеобеспечения и замков костюма «Хранитель».
 ent-ClothingModsuitHMELightSuit = ядро лёгкого модкостюма HME «Хранитель»

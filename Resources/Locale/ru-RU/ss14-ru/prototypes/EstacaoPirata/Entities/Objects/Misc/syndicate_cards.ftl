@@ -1,6 +1,6 @@
 ent-CardBaseSyndicate = карта
     .desc = { ent-CardBase.desc }
-ent-CardBoxSyndicate = коробка с картами Синдиката
+ent-CardBoxSyndicate = коробка с картами Горлекса
     .desc = { ent-CardBoxBase.desc }
 ent-CardDeckSyndicate = колода карт
     .suffix = НЕ МАППИТЬ

@@ -8,6 +8,7 @@
   - SciFlash
   - CyborgEndoskeleton
   - AiRemoteBrain
+  - Intellicard # Mono
 
 - type: latheRecipePack
   id: BorgModulesStatic
@@ -61,6 +62,8 @@
   id: Robotics
   recipes:
   - ProximitySensor
+  - BorgIFFTSF # _Mono
+  - BorgIFFPDV # _Mono
 
 - type: latheRecipePack
   id: BorgModules

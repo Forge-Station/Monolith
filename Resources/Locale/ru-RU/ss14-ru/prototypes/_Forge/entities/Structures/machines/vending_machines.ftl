@@ -26,3 +26,5 @@ ent-VendingMachineCompanyHME = автомат снабжения HME
 ent-VendingMachineNanotrasen = вендомат NT
     .desc = Здесь есть (почти) всё, что может понадобится представителю НТ. Кажется, его только недавно покрасили.
     .suffix = NT, Централ
+ent-VendingMachineFlatpackVendRadio = Популярный Упак-О-Мат
+    .desc = В нем есть все для того чтобы стать популярным.

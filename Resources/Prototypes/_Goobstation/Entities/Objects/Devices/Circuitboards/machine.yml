@@ -85,23 +85,9 @@
     prototype: VinylPlayer
     stackRequirements:
       Manipulator: 1
-      Steel: 1
-      WoodPlank: 3
-
-- type: entity
-  parent: BaseMachineCircuitboard
-  id: TapeDeckCircuitboard
-  name: tape deck machine board
-  description: A machine printed circuit board for a tape deck.
-  components:
-  - type: Sprite
-    state: service
-  - type: MachineBoard
-    prototype: TapeDeck
-    stackRequirements:
-      Manipulator: 2
-      Plastic: 3
-      WoodPlank: 5
+      Steel: 5
+      WoodPlank: 10 #Forge-Change
+      Plastic: 5 #Forge-Change
 
 - type: entity
   parent: BaseMachineCircuitboard
@@ -114,8 +100,8 @@
   - type: MachineBoard
     prototype: StationRadioServer
     stackRequirements:
-      Manipulator: 1
-      Steel: 10
+      Manipulator: 8 #Forge-Change
+      Steel: 30 #Forge-Change
       Plastic: 10
       Plasma: 5
       CableHV: 4
@@ -131,10 +117,11 @@
   - type: MachineBoard
     prototype: StationRadioRig
     stackRequirements:
-      Manipulator: 3
-      Steel: 5
-      Glass: 5
-      Cable: 2
+      Manipulator: 10 #Forge-Change
+      Steel: 20 #Forge-Change
+      Glass: 20 #Forge-Change
+      Plastic: 10 #Forge-Change
+      Cable: 5 #Forge-Change
 
 - type: entity
   parent: BaseMachineCircuitboard
@@ -147,6 +134,6 @@
   - type: MachineBoard
     prototype: StationRadioReceiver
     stackRequirements:
-      Manipulator: 1
+      Steel: 1 #Forge-Change
       Cable: 2
 

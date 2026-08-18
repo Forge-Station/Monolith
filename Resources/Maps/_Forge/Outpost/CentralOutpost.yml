@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/18/2026 11:40:51
-  entityCount: 12653
+  time: 08/18/2026 12:29:35
+  entityCount: 12655
 maps:
 - 786
 grids:
@@ -118,7 +118,7 @@ entities:
     - type: StationTransit
     - type: IFF
       readOnly: True
-      address: ' 57BC-AE3E'
+      address: ' 2B2E-916C'
     - type: ProtectedGrid
       hostileMobKillSound: !type:SoundPathSpecifier
         path: /Audio/Effects/holy.ogg
@@ -38316,7 +38316,7 @@ entities:
       pos: -12.5,59.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -77754.83
+      secondsUntilStateChange: -79949.97
       state: Opening
   - uid: 3923
     components:
@@ -45327,7 +45327,7 @@ entities:
       pos: -27.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -163075.19
+      secondsUntilStateChange: -165270.33
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -45736,7 +45736,7 @@ entities:
       pos: -43.5,70.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -31160.988
+      secondsUntilStateChange: -33356.125
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -47325,7 +47325,7 @@ entities:
       pos: 33.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -70808.195
+      secondsUntilStateChange: -73003.336
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -47366,7 +47366,7 @@ entities:
       pos: 24.5,23.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -117453.85
+      secondsUntilStateChange: -119648.99
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -65005,7 +65005,7 @@ entities:
       pos: -35.5,31.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -78392.46
+      secondsUntilStateChange: -80587.6
       state: Opening
   - uid: 11915
     components:
@@ -65013,7 +65013,7 @@ entities:
       pos: -34.5,31.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -78395.36
+      secondsUntilStateChange: -80590.5
       state: Opening
   - uid: 11916
     components:
@@ -65026,7 +65026,7 @@ entities:
       pos: -43.5,39.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -78374.73
+      secondsUntilStateChange: -80569.87
       state: Opening
   - uid: 11919
     components:
@@ -65034,7 +65034,7 @@ entities:
       pos: -42.5,12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -78366.33
+      secondsUntilStateChange: -80561.47
       state: Opening
   - uid: 11920
     components:
@@ -65047,7 +65047,7 @@ entities:
       pos: -31.5,23.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -59170.688
+      secondsUntilStateChange: -61365.824
       state: Opening
 - proto: InflatableWall
   entities:
@@ -65928,6 +65928,11 @@ entities:
     components:
     - type: Transform
       pos: 38.39971,31.725105
+      parent: 2
+  - uid: 12655
+    components:
+    - type: Transform
+      pos: 38.75498,31.406599
       parent: 2
 - proto: MiniStationAnchor
   entities:
@@ -78224,6 +78229,13 @@ entities:
     components:
     - type: Transform
       pos: -30.5,28.5
+      parent: 2
+- proto: VendingMachineFlatpackVendRadio
+  entities:
+  - uid: 12654
+    components:
+    - type: Transform
+      pos: 35.5,33.5
       parent: 2
 - proto: VendingMachineFuelVend
   entities:

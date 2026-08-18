@@ -11,10 +11,9 @@
   - InteractorCircuitboard
 
 - type: latheRecipePack
-  id: ServiceBoardsGoob
+  id: ServiceBoardsGoob 
   recipes:
   - VinylPlayerCircuitboard
-  - TapeDeckCircuitboard
   - StationRadioServerCircuitboard
   - StationRadioRigCircuitboard
   - StationRadioCircuitboard

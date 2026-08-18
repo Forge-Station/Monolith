@@ -21,7 +21,8 @@
                 </controls:LayoutContainer>
                 <!-- Forge-Change-End -->
                 <!-- Nav controls -->
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                <!-- Forge-Change-Start: sidebar stays 256px; extra width goes to the radar. -->
+                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="False" Margin="4 4 4 4">
                     <controls:PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#525252" BackgroundColor="#3d474d"/>
                     </controls:PanelContainer.PanelOverride>
@@ -30,13 +31,14 @@
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                         </controls:PanelContainer.PanelOverride>
                 <controls:BoxContainer Name="RightDisplayNav"
-                      VerticalAlignment="Top"
-                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
                       VerticalExpand="True"
                       MinWidth="256"
                       MaxWidth="256"
                       Margin="5 5 5 5"
                       Orientation="Vertical">
+                <!-- Forge-Change-End -->
                     <controls1:StripeBack
                         MinSize="48 48">
                         <controls:Label Name="NavDisplayLabel" Text="{controls:Loc 'shuttle-console-display-label'}"

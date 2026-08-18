@@ -160,6 +160,22 @@
     sprite: Forge/Objects/Vehicles/skates.rsi
   - type: Clothing
     sprite: Forge/Objects/Vehicles/skates.rsi
+  - type: Item
+    sprite: Forge/Objects/Vehicles/skates.rsi
+    
+- type: entity
+  parent: ClothingShoesSkates
+  id: ClothingShoesSkatesDarkCL
+  name: Ролликовые коньки
+  suffix: Chun Logistics
+  description: "Get your skates on!"
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Vehicles/skates_black.rsi
+  - type: Clothing
+    sprite: Forge/Objects/Vehicles/skates_black.rsi
+  - type: Item
+    sprite: Forge/Objects/Vehicles/skates_black.rsi
     
 - type: entity
   parent: BaseVehicleRideable

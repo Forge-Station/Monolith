@@ -158,7 +158,7 @@ public sealed class HandTests
         {
             var session = playerMan.Sessions.First();
             player = session.AttachedEntity!.Value;
-            if (entMan.TryGetComponent(player, out HandsComponent? existingHands) &&
+            if (entMan.TryGetComponent(player, out HandsComponent existingHands) &&
                 existingHands.Count > 0)
                 return;
 
@@ -178,7 +178,7 @@ public sealed class HandTests
         await pair.RunTicksSync(1);
         await server.WaitAssertion(() =>
         {
-            Assert.That(entMan.TryGetComponent(player, out HandsComponent? hands) && hands.Count > 0,
+            Assert.That(entMan.TryGetComponent(player, out HandsComponent hands) && hands.Count > 0,
                 "Failed to attach a player entity with initialized hands");
         });
 

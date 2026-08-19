@@ -51,6 +51,7 @@ public sealed partial class CompanySystem : EntitySystem
         // Add the company component with the player's saved company
         var companyComp = EnsureComp<CompanyComponent>(args.Mob);
 
+        var forcedCompany = false; // Forge-change
         var playerId = args.Player.UserId.ToString();
         var profileCompany = args.Profile.Company;
 
@@ -63,6 +64,7 @@ public sealed partial class CompanySystem : EntitySystem
         if (args.JobId != null && _prototypeManager.TryIndex<JobPrototype>(args.JobId, out var job))
         {
             companyComp.CompanyName = FactionCompanyResolver.ResolveSpawnCompany(job, profileCompany);
+            forcedCompany = FactionCompanyResolver.JobForcesCompany(job); // Forge-change
         }
         else
         {
@@ -72,6 +74,12 @@ public sealed partial class CompanySystem : EntitySystem
         }
 
         // Forge-change-start
+        if (!forcedCompany && companyComp.CompanyName != "None" && _prototypeManager.HasIndex<CompanyPrototype>(companyComp.CompanyName)
+            && !_manager.IsAllowed(args.Player, companyComp.CompanyName))
+        {
+            companyComp.CompanyName = "None";
+        }
+
         if (_prototypeManager.TryIndex<CompanyPrototype>(companyComp.CompanyName, out var proto))
         {
             foreach (var special in proto.Special)

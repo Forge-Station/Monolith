@@ -77,7 +77,7 @@
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashReaction #Forge-Change
     - reagents: [ Water ]
       methods: [ Touch ]
       effects:

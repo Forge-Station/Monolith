@@ -1,9 +1,11 @@
 trait-blindness-name = Слепота
 trait-blindness-desc = Вы совершенно слепы и не можете видеть дальше нескольких метров перед собой.
 trait-narcolepsy-name = Нарколепсия
+trait-lactozit-intolerance-name = Непереносимость лактозита
 trait-poor-vision-name = Близорукость
 trait-poor-vision-desc = Ваши глаза уже не те, что раньше, и вы с трудом видите предметы вдали без корректирующих очков.
 trait-narcolepsy-desc = Вас одолевают приступы сонливости
+trait-lactozit-intolerance-desc = Лактозит заставляет вас неконтролируемо пускать газы, блевать и рыгать.
 trait-pacifist-name = Пацифист
 trait-pacifist-desc = Вы не можете нападать и причинять вред живым существам.
 permanent-blindness-trait-examined = [color=lightblue]{ CAPITALIZE(POSS-PRONOUN($target)) } глаза остекленелые и расфокусированные. Не похоже, что { SUBJECT($target) } может хорошо вас видеть, если может вообще.[/color]
@@ -48,3 +50,5 @@ trait-painnumbness-desc = Вы не чувствуете боли и не осо
 # Mono
 trait-russian-name = Русский акцент
 trait-russian-desc = От вас ощутимо пахнет водкой.
+
+trait-lactozit-intolerance-fart = { CAPITALIZE(THE($entity)) } выпускает отвратительный залп газов!

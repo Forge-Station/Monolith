@@ -1,4 +1,4 @@
-namespace Content.Server._NF.Species.Components;
+namespace Content.Shared._NF.Species.Components;
 
 [RegisterComponent]
 public sealed partial class GoblinComponent : Component

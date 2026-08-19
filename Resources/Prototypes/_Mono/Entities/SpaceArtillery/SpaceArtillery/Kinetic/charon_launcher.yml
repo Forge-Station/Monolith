@@ -28,6 +28,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 350
     powerUsePassive: 1000

@@ -109,6 +109,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/120mm_mortar.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 125
@@ -292,6 +293,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 15000

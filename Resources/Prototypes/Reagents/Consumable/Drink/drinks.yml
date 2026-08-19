@@ -57,7 +57,11 @@
       effects:
       - !type:SatiateThirst
         factor: 1
-
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 - type: reagent
   id: CoconutWater
   name: reagent-name-coconut-water
@@ -85,6 +89,11 @@
       effects:
       - !type:SatiateThirst
         factor: 2
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: CafeLatte
@@ -109,6 +118,11 @@
         key: Drowsiness
         time: 2.0
         type: Remove
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: GreenTea
@@ -270,6 +284,11 @@
       effects:
       - !type:SatiateThirst
         factor: 4
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: MilkGoat
@@ -314,6 +333,11 @@
       effects:
       - !type:SatiateThirst
         factor: -2
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: Nothing
@@ -546,6 +570,11 @@
       effects:
         - !type:SatiateThirst
           factor: 1
+        # Forge-change-Start
+        - !type:AdjustReagent
+          reagent: Lactozit
+          amount: 0.01
+        # Forge-change-End
   fizziness: 0.3
 
 - type: reagent

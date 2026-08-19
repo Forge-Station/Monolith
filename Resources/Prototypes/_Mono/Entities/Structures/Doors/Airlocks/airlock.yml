@@ -61,7 +61,7 @@
   components:
   - type: Sprite
     sprite: _Mono/Structures/Doors/Airlocks/Standard/mieyo.rsi
-  - type: PaintableAirlock
-    department: Civilian # Forge-Change: disabled MMC
+  # - type: PaintableAirlock  # Forge-Change-Del
+  #   department: Civilian    # Forge-Change-Del
   - type: Wires
     layoutId: AirlockSecurity

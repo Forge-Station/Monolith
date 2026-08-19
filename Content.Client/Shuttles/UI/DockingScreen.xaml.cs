@@ -428,7 +428,8 @@ public sealed partial class DockingScreen : BoxContainer
                 ToggleMode = true,
                 Group = buttonGroup,
                 Margin = new Thickness(0f, 3f),
-                HorizontalExpand = true
+                HorizontalExpand = true,
+                VerticalExpand = false // Forge-Change: dock list buttons stay compact in the scroll sidebar
             };
 
             // Add the container with text and lock indicator to the button

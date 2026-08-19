@@ -126,35 +126,36 @@ public partial class NavMapControl : MapGridControl
         HorizontalExpand = true;
         VerticalExpand = true;
 
-        var topPanel = new PanelContainer()
-        {
-            PanelOverride = new StyleBoxFlat()
+            var topPanel = new PanelContainer()
             {
-                BackgroundColor = StyleNano.ButtonColorContext.WithAlpha(1f),
-                BorderColor = StyleNano.PanelDark
-            },
-            VerticalExpand = false,
-            HorizontalExpand = true,
-            SetWidth = 650f,
-            Children =
-            {
-                new BoxContainer()
+                PanelOverride = new StyleBoxFlat()
                 {
-                    Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                    Children =
+                    BackgroundColor = StyleNano.ButtonColorContext.WithAlpha(1f),
+                    BorderColor = StyleNano.PanelDark
+                },
+                VerticalExpand = false,
+                HorizontalExpand = true, // Forge-Change: fill the window; do not pin the toolbar at 650px.
+                Children =
+                {
+                    new BoxContainer()
                     {
-                        _zoom,
-                        _beacons,
-                        _recenter
+                        Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                        Children =
+                        {
+                            _zoom,
+                            _beacons,
+                            _recenter
+                        }
                     }
                 }
-            }
-        };
+            };
 
+        // Forge-Change-Start: drawing area expands with the station-map window.
         var topContainer = new BoxContainer()
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             HorizontalExpand = true,
+            VerticalExpand = true,
             Children =
             {
                 topPanel,
@@ -162,12 +163,15 @@ public partial class NavMapControl : MapGridControl
                 {
                     Name = "DrawingControl",
                     VerticalExpand = true,
+                    HorizontalExpand = true,
                     Margin = new Thickness(5f, 5f)
                 }
             }
         };
 
         AddChild(topContainer);
+        LayoutContainer.SetAnchorPreset(topContainer, LayoutPreset.Wide);
+        // Forge-Change-End
         topPanel.Measure(Vector2Helpers.Infinity);
 
         _recenter.OnPressed += args =>
@@ -458,7 +462,7 @@ public partial class NavMapControl : MapGridControl
             var rectBuffer = new Vector2(5f, 3f);
 
             // Calculate font size for current zoom level
-            var fontSize = (int)Math.Round(1 / WorldRange * DefaultDisplayedRange * UIScale * _targetFontsize, 0);
+            var fontSize = Math.Max(1, (int)Math.Round(1 / WorldRange * DefaultDisplayedRange * UIScale * _targetFontsize, 0)); // Forge-Change
             var font = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), fontSize);
 
             foreach (var beacon in _navMap.Beacons.Values)

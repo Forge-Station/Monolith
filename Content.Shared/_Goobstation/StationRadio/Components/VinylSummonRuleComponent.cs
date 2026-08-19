@@ -19,5 +19,5 @@ public sealed partial class VinylSummonRuleComponent : Component
     /// Sound played when the vinyl burns to ash.
     /// </summary>
     [DataField]
-    public SoundSpecifier BurnSound = new SoundPathSpecifier("/Audio/Effects/cig_snuff.ogg");
+    public SoundSpecifier BurnSound = new SoundPathSpecifier("/Audio/Weapons/guitarsmash.ogg");
 }

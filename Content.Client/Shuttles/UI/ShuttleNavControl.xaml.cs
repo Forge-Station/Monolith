@@ -732,25 +732,32 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                 var uiPosition = gridUiPosition; // Mono
 
                 // Confines the UI position within the viewport.
-                var uiXCentre = (int)Width / 2;
-                var uiYCentre = (int)Height / 2;
+                var uiXCentre = (int) Width / 2;
+                var uiYCentre = (int) Height / 2;
                 var uiXOffset = uiPosition.X - uiXCentre;
                 var uiYOffset = uiPosition.Y - uiYCentre;
-                var uiDistance = (int)Math.Sqrt(Math.Pow(uiXOffset, 2) + Math.Pow(uiYOffset, 2));
-                var uiX = uiXCentre * uiXOffset / uiDistance;
-                var uiY = uiYCentre * uiYOffset / uiDistance;
+                var uiDistance = (int) Math.Sqrt(Math.Pow(uiXOffset, 2) + Math.Pow(uiYOffset, 2));
 
-                var isOutsideRadarCircle = uiDistance > Math.Abs(uiX) && uiDistance > Math.Abs(uiY);
-                if (isOutsideRadarCircle)
+                // Forge-Change-Start: skip circle-clamp when the blip is at the radar origin (div-by-zero piled labels).
+                var isOutsideRadarCircle = false;
+                if (uiDistance > 0)
                 {
-                    // 0.95f for offsetting the icons slightly away from edge of radar so it doesnt clip.
-                    uiX = uiXCentre * uiXOffset / uiDistance * 0.95f;
-                    uiY = uiYCentre * uiYOffset / uiDistance * 0.95f;
-                    uiPosition = new Vector2(
-                        x: uiX + uiXCentre,
-                        y: uiY + uiYCentre
-                    );
+                    var uiX = uiXCentre * uiXOffset / uiDistance;
+                    var uiY = uiYCentre * uiYOffset / uiDistance;
+
+                    isOutsideRadarCircle = uiDistance > Math.Abs(uiX) && uiDistance > Math.Abs(uiY);
+                    if (isOutsideRadarCircle)
+                    {
+                        // 0.95f for offsetting the icons slightly away from edge of radar so it doesnt clip.
+                        uiX = uiXCentre * uiXOffset / uiDistance * 0.95f;
+                        uiY = uiYCentre * uiYOffset / uiDistance * 0.95f;
+                        uiPosition = new Vector2(
+                            x: uiX + uiXCentre,
+                            y: uiY + uiYCentre
+                        );
+                    }
                 }
+                // Forge-Change-End
 
                 var scaledMousePosition = GetMouseCoordinatesFromCenter().Position * UIScale;
                 var isMouseOver = Vector2.Distance(scaledMousePosition, uiPosition * UIScale) < 30f;

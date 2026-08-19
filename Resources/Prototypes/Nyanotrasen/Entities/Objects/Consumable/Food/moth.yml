@@ -1263,6 +1263,8 @@
           Quantity: 5
         - ReagentId: Vitamin
           Quantity: 1
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
   - type: MothFood # Frontier
   - type: Food
     requiresSpecialDigestion: true

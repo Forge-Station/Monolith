@@ -1610,8 +1610,6 @@ entities:
     - type: Transform
       pos: 6.5,28.5
       parent: 2
-    - type: PaintableAirlock
-      department: Science
 - proto: AirlockGlassShuttle
   entities:
   - uid: 780
@@ -1640,8 +1638,6 @@ entities:
     - type: Transform
       pos: -0.5,40.5
       parent: 2
-    - type: PaintableAirlock
-      department: null
     - type: Door
       secondsUntilStateChange: -25739.22
       state: Opening
@@ -1653,8 +1649,6 @@ entities:
     - type: Transform
       pos: 0.5,40.5
       parent: 2
-    - type: PaintableAirlock
-      department: null
     - type: Door
       secondsUntilStateChange: -25738.92
       state: Opening
@@ -1666,8 +1660,6 @@ entities:
     - type: Transform
       pos: 1.5,40.5
       parent: 2
-    - type: PaintableAirlock
-      department: null
     - type: Door
       secondsUntilStateChange: -25738.588
       state: Opening
@@ -1682,8 +1674,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 1.5,53.5
       parent: 2
-    - type: PaintableAirlock
-      department: Command
     - type: Door
       secondsUntilStateChange: -25725.488
       state: Opening
@@ -1701,8 +1691,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -0.5,53.5
       parent: 2
-    - type: PaintableAirlock
-      department: Command
     - type: Door
       secondsUntilStateChange: -25724.887
       state: Opening
@@ -1718,8 +1706,6 @@ entities:
     - type: Transform
       pos: -3.5,56.5
       parent: 2
-    - type: PaintableAirlock
-      department: Command
     - type: Door
       secondsUntilStateChange: -25716.088
       state: Opening
@@ -1731,8 +1717,6 @@ entities:
     - type: Transform
       pos: 4.5,56.5
       parent: 2
-    - type: PaintableAirlock
-      department: Command
     - type: Door
       secondsUntilStateChange: -25715.254
       state: Opening
@@ -1798,8 +1782,6 @@ entities:
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
-    - type: PaintableAirlock
-      department: Science
   - uid: 640
     components:
     - type: Transform
@@ -1812,8 +1794,6 @@ entities:
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
-    - type: PaintableAirlock
-      department: Medical
   - uid: 731
     components:
     - type: Transform
@@ -1850,8 +1830,6 @@ entities:
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
-    - type: PaintableAirlock
-      department: Engineering
   - uid: 765
     components:
     - type: Transform
@@ -1864,8 +1842,6 @@ entities:
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
-    - type: PaintableAirlock
-      department: Engineering
   - uid: 769
     components:
     - type: Transform
@@ -1878,8 +1854,6 @@ entities:
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
-    - type: PaintableAirlock
-      department: Cargo
   - uid: 770
     components:
     - type: Transform
@@ -1892,16 +1866,12 @@ entities:
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
-    - type: PaintableAirlock
-      department: Cargo
   - uid: 835
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -4.5,18.5
       parent: 2
-    - type: PaintableAirlock
-      department: Engineering
   - uid: 840
     components:
     - type: Transform

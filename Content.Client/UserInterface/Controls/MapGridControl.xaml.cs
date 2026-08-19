@@ -81,8 +81,21 @@ public partial class MapGridControl : LayoutContainer
     protected Vector2 MidPointVector => PixelSize / 2f;
 
     protected int MidPoint => SizeFull / 2;
-    protected int SizeFull => Math.Max(1, (int) MathF.Min(PixelWidth, PixelHeight));
-    protected int ScaledMinimapRadius => Math.Max(0, SizeFull / 2 - (int) (MinimapMargin * UIScale));
+    protected int SizeFull
+    {
+        get
+        {
+            var width = PixelWidth;
+            var height = PixelHeight;
+            if (width <= 1)
+                return Math.Max(1, height);
+            if (height <= 1)
+                return Math.Max(1, width);
+
+            return Math.Max(1, (int) MathF.Min(width, height));
+        }
+    }
+    protected int ScaledMinimapRadius => Math.Max(1, SizeFull / 2 - (int) (MinimapMargin * UIScale));
     // Forge-Change-End
     protected float MinimapScale => WorldRange != 0 ? ScaledMinimapRadius / WorldRange : 0f;
 

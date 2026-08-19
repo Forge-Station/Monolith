@@ -1,10 +1,18 @@
 ent-AirlockShuttleEmpire = { ent-AirlockShuttle }
     .desc = { ent-AirlockShuttle.desc }
-    .suffix = Империя, Стыковка
+    .suffix = Forge, Империя, Стыковка
 
 ent-AirlockGlassShuttleEmpire = { ent-AirlockGlassShuttle }
     .desc = { ent-AirlockGlassShuttle.desc }
-    .suffix = Империя, Стыковка, Стекло
+    .suffix = Forge, Империя, Стыковка, Стекло
+
+ent-AirlockShuttleRenegate = { ent-AirlockShuttle }
+    .desc = { ent-AirlockShuttle.desc }
+    .suffix = Ренегаты, Стыковка
+
+ent-AirlockGlassShuttleRenegate = { ent-AirlockGlassShuttle }
+    .desc = { ent-AirlockGlassShuttle.desc }
+    .suffix = Ренегаты, Стыковка, Стекло
 
 ent-AirlockExternalLockedRemnant = { ent-AirlockExternalLocked }
     .desc = { ent-AirlockExternalLocked.desc }

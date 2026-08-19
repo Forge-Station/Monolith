@@ -17,6 +17,25 @@
     containers:
       board: [ DoorElectronicsEmpire ]
 
+#Renegate
+- type: entity
+  parent: AirlockShuttleSyndicate
+  id: AirlockShuttleRenegate
+  suffix: Renegate, Docking
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRenegate ]
+
+- type: entity
+  parent: AirlockGlassShuttleSyndicate
+  id: AirlockGlassShuttleRenegate
+  suffix: Renegate, Glass, Docking
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRenegate ]
+
 # Remnant
 - type: entity
   parent: AirlockShuttleSyndicate

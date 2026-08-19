@@ -153,6 +153,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 350
@@ -212,6 +213,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 350
@@ -583,6 +585,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/autopulse_laser_fire_01.ogg
     soundEmpty:
       path: /Audio/Weapons/click.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 30000
@@ -659,6 +662,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/laserfire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRechargePause: true
     autoRechargePauseTime: 20
@@ -971,6 +975,7 @@
       path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: ShipGunClass
     shipClass: Heavy
   - type: HitscanBatteryAmmoProvider
@@ -1041,6 +1046,7 @@
       path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: ShipGunClass
     shipClass: Heavy
   - type: HitscanBatteryAmmoProvider
@@ -1123,6 +1129,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/glassing.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRechargePause: true
     autoRechargePauseTime: 60
@@ -1195,6 +1202,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 350
@@ -1276,6 +1284,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 800
@@ -1355,6 +1364,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 500

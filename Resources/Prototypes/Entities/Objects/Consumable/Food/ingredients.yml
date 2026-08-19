@@ -606,6 +606,17 @@
       - sweetdough
   - type: Sprite
     state: cakebatter
+  # Forge-change-Start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 18
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Lactozit
+          Quantity: 0.75
+  # Forge-Change-End
 
 - type: entity
   name: stick of butter
@@ -645,6 +656,10 @@
         reagents:
         - ReagentId: Butter
           Quantity: 15
+        # Forge-change-Start
+        - ReagentId: Lactozit
+          Quantity: 2.25
+        # Forge-Change-End
   - type: SliceableFood
     count: 3
     slice: FoodButterSlice
@@ -670,6 +685,10 @@
         reagents:
         - ReagentId: Butter
           Quantity: 5
+        # Forge-change-Start
+        - ReagentId: Lactozit
+          Quantity: 0.75
+        # Forge-Change-End
   - type: Tag
     tags:
     - Slice
@@ -694,6 +713,10 @@
           Quantity: 10
         - ReagentId: THC
           Quantity: 82
+        # Forge-change-Start
+        - ReagentId: Lactozit
+          Quantity: 2
+        # Forge-Change-End
   - type: Extractable
     grindableSolutionName: food
 

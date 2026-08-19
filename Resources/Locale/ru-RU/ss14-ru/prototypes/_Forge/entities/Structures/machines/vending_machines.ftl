@@ -28,3 +28,6 @@ ent-VendingMachineNanotrasen = вендомат NT
     .suffix = NT, Централ
 ent-VendingMachineFlatpackVendRadio = Популярный Упак-О-Мат
     .desc = В нем есть все для того чтобы стать популярным.
+ent-VendingMachineCompanyCL = вендомат Chun Logistics
+    .desc = Продаёт различные вещи компании Chun Logistics.
+    .suffix = Chun Logistics

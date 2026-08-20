@@ -95,7 +95,7 @@
     implant: MofficTranslatorImplant
 
 - type: entity
-  id: [ ValyrianStandardTranslatorImplanter ]
+  id: ValyrianStandardTranslatorImplanter
   parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: valyrian standard translator implant
   components:

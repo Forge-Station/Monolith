@@ -81,9 +81,13 @@
   - type: Tag
     tags:
       - ForceNoFixRotations
-  - type: PaintableAirlock
-    group: Shuttle
-    department: null
+  # Forge-Change-Start
+  # - type: PaintableAirlock
+  #   group: Shuttle
+  #   department: null
+  - type: Paintable
+    group: null
+  # Forge-Change-End
   - type: Construction
     graph: AirlockShuttle
     node: airlock
@@ -113,8 +117,12 @@
     sprite: Forge/Structures/Doors/Airlocks/Glass/shuttle.rsi # Forge-Change
   - type: Occluder
     enabled: false
-  - type: PaintableAirlock
-    group: ShuttleGlass
+  # Forge-Change-Start
+  # - type: PaintableAirlock
+  #   group: ShuttleGlass
+  - type: Paintable
+    group: null
+  # Forge-Change-End
   - type: Door
     occludes: false
   - type: Fixtures

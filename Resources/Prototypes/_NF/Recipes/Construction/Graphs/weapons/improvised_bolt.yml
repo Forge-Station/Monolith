@@ -211,5 +211,11 @@
           sprite: Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
           state: base
         doAfter: 1
+      - tag: ShellShotgun12_gaugeBuckshot
+        name: Shotgun shell
+        icon:
+          sprite: Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
+          state: base
+        doAfter: 1
   - node: CraftCrossbowBoltShrapnel
     entity: CrossbowBoltShrapnel

@@ -119,6 +119,8 @@
   id: ClosetSteelBase
   parent: ClosetBase
   components:
+  - type: Paintable   # Forge-Chane
+    group: Closet   # Forge-Chane
   - type: Construction
     graph: ClosetSteel
     node: done
@@ -200,6 +202,8 @@
     node: done
     containers:
     - entity_storage
+  - type: Paintable   # Forge-Change
+    group: WallCloset # Forge-Change
 
 #Wall locker
 - type: entity

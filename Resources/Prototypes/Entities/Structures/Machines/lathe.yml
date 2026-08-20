@@ -360,6 +360,7 @@
     - DrakeIndustriesCircuitBoards # Forge-change
     - ReactorCircuitboards # FH edit
     - BsEnergyCircuitsPack # Forge-Change
+    - ServiceBoardsGoob #Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:

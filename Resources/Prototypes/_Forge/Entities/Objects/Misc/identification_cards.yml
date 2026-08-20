@@ -268,3 +268,23 @@
     - state: idntmed
   - type: PresetIdCard
     job: NtMedic
+
+#region Remnant
+
+- type: entity
+  parent: IDCardStandard
+  id: RemnantKeycard
+  name: remnant keycard
+  description: A precursor access token. Opens remnant airlocks, hatches and docks.
+  suffix: Forge, Remnant
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Misc/id_cards.rsi
+    layers:
+    - state: gold
+    - state: idsr
+  - type: Access
+    tags:
+    - Remnant
+  - type: IdCard
+    jobTitle: remnant-keycard-job

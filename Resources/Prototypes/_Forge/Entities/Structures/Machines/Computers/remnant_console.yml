@@ -1,0 +1,48 @@
+- type: entity
+  parent: [BaseStructureDisableToolUse, BaseComputerAiAccess]
+  id: RemnantMultitoolConsole
+  name: remnant signal console
+  description: A precursor console with renameable signal buttons. Probe it with a multitool to read stored text. Button labels and Message are set in mapping.
+  suffix: Forge, Remnant
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: generic
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: ApcPowerReceiver
+    needsPower: false
+  - type: RemnantConsole
+    message: remnant-console-default-message
+    buttons:
+    - port: RemnantButton1
+      label: remnant-console-button-1
+    - port: RemnantButton2
+      label: remnant-console-button-2
+    - port: RemnantButton3
+      label: remnant-console-button-3
+    - port: RemnantButton4
+      label: remnant-console-button-4
+  - type: ActivatableUI
+    key: enum.RemnantConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RemnantConsoleUiKey.Key:
+        type: RemnantConsoleBoundUserInterface
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSource
+    ports:
+    - RemnantButton1
+    - RemnantButton2
+    - RemnantButton3
+    - RemnantButton4

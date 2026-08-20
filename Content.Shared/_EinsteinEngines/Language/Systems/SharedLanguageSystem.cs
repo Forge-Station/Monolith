@@ -1,4 +1,5 @@
 using System.Text;
+using Content.Shared._EinsteinEngines.Language.Components; // Forge-Change
 using Content.Shared.GameTicking;
 using Robust.Shared.Prototypes;
 
@@ -59,6 +60,18 @@ public abstract partial class SharedLanguageSystem : EntitySystem
         language.Obfuscation.Obfuscate(builder, message, this);
 
         return builder.ToString();
+    }
+
+    /// <summary>
+    ///     Whether the entity currently understands the given language.
+    /// </summary>
+    // Forge-Change: shared so client paper/UI can obfuscate unknown languages
+    public virtual bool CanUnderstand(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
+    {
+        if (language == PsychomanticPrototype || language == UniversalPrototype)
+            return true;
+
+        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.UnderstoodLanguages.Contains(language);
     }
 
     /// <summary>

@@ -1,0 +1,51 @@
+- type: entity
+  parent: APCBasic
+  id: APCRemnantEmpty
+  name: remnant APC
+  description: A precursor area power controller. It will not energize the local grid until an ancient battery is seated in the cell well.
+  suffix: Forge, Remnant, Empty
+  components:
+  - type: Sprite
+    sprite: Structures/Power/apc.rsi
+  - type: PointLight
+    color: "#4ad6c8"
+  - type: AccessReader
+    access: [["Remnant"]]
+  - type: ApcRequiresSlot
+    batterySlot:
+      name: remnant-apc-slot-name
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+      whitelistFailPopup: remnant-apc-slot-whitelist-fail
+      ejectOnBreak: true
+      whitelist:
+        tags:
+        - AncientBattery
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 7000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+
+- type: entity
+  parent: APCRemnantEmpty
+  id: APCRemnant
+  suffix: Forge, Remnant, Inserted
+  components:
+  - type: ApcRequiresSlot
+    batterySlot:
+      name: remnant-apc-slot-name
+      startingItem: AncientBattery
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+      whitelistFailPopup: remnant-apc-slot-whitelist-fail
+      ejectOnBreak: true
+      whitelist:
+        tags:
+        - AncientBattery

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ForgeClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1, add ForgeClothingOuterHardsuitBase
+  parent: [ForgeClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1, ClothingFlightProfileEasy] # Forge-change parent BaseFactionGearOtherFactionT1, add ForgeClothingOuterHardsuitBase, add ClothingFlightProfileEasy
   id: ClothingOuterHardsuitTrauma
   name: armed trauma unit T-23 tacsuit
   suffix: TTI # Forge
@@ -15,7 +15,7 @@
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.8 # Forge-change 0.5-> 0.8
   - type: Armor
     modifiers:
       coefficients:
@@ -43,7 +43,7 @@
     vendPrice: 10000
 
 - type: entity
-  parent: [ForgeClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1, add ForgeClothingOuterHardsuitBase
+  parent: [ForgeClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1, ClothingFlightProfileEasy] # Forge-change parent BaseFactionGearOtherFactionT1, add ForgeClothingOuterHardsuitBase, add ClothingFlightProfileEasy
   id: ClothingOuterHardsuitTraumaLeader
   name: armed trauma unit T-53 tacsuit
   suffix: TTI # Forge
@@ -63,17 +63,17 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.4
-        Heat: 0.55
+        Blunt: 0.5 # Forge-change 0.6-> 0.5
+        Slash: 0.5 # Forge-change 0.6-> 0.5
+        Piercing: 0.45 # Forge-change 0.4-> 0.45
+        Heat: 0.45 # Forge-change 0.55-> 0.45
         Radiation: 0.5
         Caustic: 0.6
   - type: StaminaDamageResistance
-    coefficient: 0.55
+    coefficient: 0.3 # Forge-change 0.55-> 0.3
   - type: ClothingSpeedModifier
-    walkModifier: 1.05
-    sprintModifier: 1.05
+    walkModifier: 1 # Forge-change 1.05-> 1
+    sprintModifier: 1 # Forge-change 1.05-> 1
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing

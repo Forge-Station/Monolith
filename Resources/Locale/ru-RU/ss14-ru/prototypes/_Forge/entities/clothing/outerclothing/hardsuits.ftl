@@ -118,3 +118,5 @@ ent-ClothingOuterHardsuitRenegateCommander = скафандр коммандор
 
 ent-ClothingOuterHardsuitUllmanMedical = тактический медицинский костюм U.I. "Unregistered" MkI
     .desc = Изменённая версия боевого скафандра Ullman Industries MKI с облегчённой броней, более заметным дизайном и встроенным медицинским визором. Самое то чтобы сбегать от федералов или служить вашим корпоративным владыкам.
+ent-ClothingOuterHardsuitUllmanLightJuggernaut = костюм облегчённого джаггернаута U.I. "Terminus"
+    .desc = Тёмный боевой скафандр U.I с укреплёнными бронепластинами. Кажется это простой скафандр мк1 с накинутым на нём тяжелым бронежилетом.

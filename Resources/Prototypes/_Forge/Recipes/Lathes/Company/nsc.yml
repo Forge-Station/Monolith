@@ -49,8 +49,8 @@
   - NSC
 
 - type: latheRecipe
-  abstract: true
-  id: NSCHardsuitT1Recipe
+  id: ClothingOuterHardsuitNexusWorker
+  result: ClothingOuterHardsuitNexusWorker
   parent: MonoHardsuitT1Recipe
   categories:
   - NSC
@@ -65,55 +65,17 @@
     Gold: 500
 
 - type: latheRecipe
-  abstract: true
-  id: NSCHardsuitT2Recipe
-  parent: MonoHardsuitT2Recipe
-  categories:
-  - NSC
-  completetime: 18
-  materials:
-    Glass: 300
-    Steel: 3500
-    Plastic: 1250
-    Plasteel: 5000
-    Durathread: 2500
-    Silver: 500
-    Gold: 500
-
-- type: latheRecipe
-  abstract: true
-  id: NSCHardsuitT3Recipe
-  parent: MonoHardsuitT3TsfRecipe
-  categories:
-  - NSC
-  completetime: 22
-  materials:
-    Plastic: 200
-    Steel: 3600
-    Plastitanium: 2250
-    Plasteel: 3600
-    Durathread: 2700
-    Silver: 450
-    Gold: 450
-    UraniumDepleted: 100
-
-- type: latheRecipe
-  parent: NSCHardsuitT1Recipe
-  id: ClothingOuterHardsuitNexusWorker
-  result: ClothingOuterHardsuitNexusWorker
-
-- type: latheRecipe
-  parent: NSCHardsuitT1Recipe
+  parent: ForgeUniversalSuitT1CompanyRecipe
   id: ClothingOuterHardsuitNexusMilT1
   result: ClothingOuterHardsuitNexusMilT1
 
 - type: latheRecipe
-  parent: NSCHardsuitT2Recipe
+  parent: ForgeUniversalSuitT2CompanyRecipe
   id: ClothingOuterHardsuitNexusMilT2
   result: ClothingOuterHardsuitNexusMilT2
 
 - type: latheRecipe
-  parent: NSCHardsuitT3Recipe
+  parent: ForgeEnergyShieldSuitT3CompanyRecipe
   id: ClothingOuterHardsuitNexusMilT3
   result: ClothingOuterHardsuitNexusMilT3
 

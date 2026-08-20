@@ -71,3 +71,8 @@ ent-ClothingHeadHelmetHardsuitRenegateReflectElite = шлем LRC-4034 "Приз
     .desc = Сменная система шлема для большинства скафандров LRC-4034 "Призма". В шлем встроено множество продвинутой электроники и особое светоотражающее покрытие.
 ent-ClothingHeadHelmetHardsuitRenegateCommander = шлем CRIII-278 "Последователь"
     .desc = Сменная система шлема для большинства скафандров CRIII-278 "Последователь". Имеет очень много высокотехнологичной электроники.
+
+ent-ClothingHeadHelmetHardsuitUllmanMedical = шлем скафандра U.I. "Unregistered" MkI
+    .desc = Шлем скафандра Enforcer MK1, с улучшенным ПНВ и дополнительным медицинским визором.
+ent-ClothingHeadHelmetHardsuitUllmanLightJuggernaut = шлем облегчённого джаггернаута U.I. "Terminus"
+    .desc = Шлем скафандра Enforcer MK1 с дополнительными бронеплитами. На шлеме есть записка "За боль в шее при его ношении ответственности не несём!"

@@ -1,36 +1,18 @@
 # Ullman Industries Clothing
 - type: latheRecipe
+  parent: ForgeUniversalSuitT2CompanyRecipe
   id: UllmanModsuit
   result: ClothingModsuitRoguePowerCell
-  completetime: 20
-  materialDiscountScale: 0
-  materials:
-    Plastic: 1500
-    Steel: 5000
-    Glass: 1250
-    Silver: 1500
-    Gold: 1500
-    UraniumDepleted: 750
-    Durathread: 2000
-    Diamond: 200
-    UraniumFissile: 100
-    Plasteel: 2000
 
 - type: latheRecipe
+  parent: ForgeUniversalLightSuitT3CompanyRecipe
   id: UllmanHardsuitMedical
   result: ClothingOuterHardsuitUllmanMedical
-  completetime: 20
-  materialDiscountScale: 0
-  materials:
-    Plastic: 3000
-    Steel: 5000
-    Glass: 1750
-    Silver: 500
-    Gold: 500
-    Durathread: 3000
-    Diamond: 100
-    UraniumFissile: 50
-    Plasteel: 1000
+
+- type: latheRecipe
+  parent: ForgeLightJuggernautT2CompanyRecipe
+  id: UllmanLightJuggernaut
+  result: ClothingOuterHardsuitUllmanLightJuggernaut
 
 - type: latheRecipe
   id: UllmanClothingMagboots

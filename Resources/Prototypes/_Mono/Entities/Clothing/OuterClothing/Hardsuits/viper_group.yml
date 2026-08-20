@@ -93,7 +93,7 @@
     - RogueHardsuit
 
 - type: entity
-  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile and replace ClothingOuterHardsuitBase by ClothingOuterHardsuitBaseWithoutArmorPlates
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileHard] # Forge-change add ClothingFlightProfile and replace ClothingOuterHardsuitBase by ClothingOuterHardsuitBaseWithoutArmorPlates
   id: ClothingOuterHardsuitViperGroupJuggernaut
   name: IMP mk.IV viper hardsuit
   description: A heavy combat hardsuit adorned with signature markings of the Viper Group. The armor features reinforced plating and padding fitting for close encounters.
@@ -112,17 +112,17 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6 # Forge-change 0.34 -> 0.6
-        Piercing: 0.475 # Forge-change 0.34 -> 0.475
-        Heat: 0.55 # Forge-change 0.6 -> 0.55
-        Radiation: 0.4 # Forge-change 0.5 -> 0.4
+        Blunt: 0.45 # Forge-change 0.6 -> 0.45
+        Slash: 0.45 # Forge-change 0.34 -> 0.45
+        Piercing: 0.325 # Forge-change 0.34 -> 0.325
+        Heat: 0.45 # Forge-change 0.6 -> 0.45
+        Radiation: 0.3 # Forge-change 0.5 -> 0.3
         Caustic: 0.25
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.3 # Forge-change 0.34 -> 0.3
+    coefficient: 0.1 # Forge-change 0.34 -> 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 0.775 # Forge-change 0.75 -> 0.775
-    sprintModifier: 0.775 # Forge-change 0.75 -> 0.775
+    walkModifier: 0.675 # Forge-change 0.75 -> 0.675
+    sprintModifier: 0.675 # Forge-change 0.75 -> 0.675
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing

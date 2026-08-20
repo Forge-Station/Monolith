@@ -80,7 +80,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision2Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMillitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision4Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
   id: ClothingHeadHelmetHardsuitViperGroupJuggernaut
   name: IMP mk.IV viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in identity tracking HUD complemented by a night-vision system.
@@ -110,9 +110,9 @@
   - type: Armor
     modifiers:
       flatReductions: # Forge-change
-        Blunt: 10 # Forge-change
-        Slash: 10 # Forge-change
-        Piercing: 10 # Forge-change
+        Blunt: 15 # Forge-change
+        Slash: 15 # Forge-change
+        Piercing: 15 # Forge-change
       # coefficients: # Forge-change
       #   Blunt: 0.9 # 0.95->0.9 Forge-Change
       #   Slash: 0.9 # 0.95->0.9 Forge-Change

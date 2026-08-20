@@ -52,7 +52,7 @@
   #  Silver: 2000 # 500 -> 2000 Forge-Change
 
 - type: latheRecipe
-  parent: ForgeLightJuggernautT2CompanyRecipe # Forge-Change
+  parent: ForgeHeavyJuggernautT3CompanyRecipe # Forge-Change
   id: ClothingOuterHardsuitViperGroupJuggernaut
   result: ClothingOuterHardsuitViperGroupJuggernaut
   # materials: # Forge-change

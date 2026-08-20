@@ -15,3 +15,51 @@
     collection: FootstepTile
   itemDrop: SheetPlastitaniumGlass1
   heatCapacity: 20000
+
+- type: tile
+  id: FloorShuttleWhiteIndestructible
+  name: tiles-white-shuttle-floor-indestructible
+  sprite: /Textures/Tiles/shuttlewhite.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  isSubfloor: false
+  footstepSounds:
+    collection: FootstepFloor
+  heatCapacity: 10000
+  indestructible: true
+
+- type: tile
+  id: FloorShuttleGreyIndestructible
+  name: tiles-grey-shuttle-floor-indestructible
+  sprite: /Textures/Tiles/shuttlegrey.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  isSubfloor: false
+  footstepSounds:
+    collection: FootstepFloor
+  heatCapacity: 10000
+  indestructible: true
+
+- type: tile
+  id: FloorShuttleBlackIndestructible
+  name: tiles-black-shuttle-floor-indestructible
+  sprite: /Textures/Tiles/shuttleblack.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  isSubfloor: false
+  footstepSounds:
+    collection: FootstepFloor
+  heatCapacity: 10000
+  indestructible: true

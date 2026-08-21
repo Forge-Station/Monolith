@@ -74,6 +74,7 @@ public sealed partial class MapScreen : BoxContainer
     // Mono
     public event Action<MapCoordinates, Angle>? RequestAutopilot;
     public event Action<MapCoordinates>? RequestBioScan; // Forge-Change - BioScan
+    public event Action<NetEntity>? OnTrackEntity; // Forge-Change: nav markers
 
     private readonly Dictionary<MapId, BoxContainer> _mapHeadings = new();
     private readonly Dictionary<MapId, List<IMapObject>> _mapObjects = new();
@@ -688,6 +689,9 @@ public sealed partial class MapScreen : BoxContainer
 
         var gridContainer = new BoxContainer()
         {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            HorizontalExpand = true,
+            SeparationOverride = 4,
             Children =
             {
                 new Control()
@@ -697,6 +701,36 @@ public sealed partial class MapScreen : BoxContainer
                 gridButton
             }
         };
+
+        // Forge-Change: track button for shuttle/grid objects
+        if (mapObj is GridMapObject gridMap && gridMap.Entity != _shuttleEntity)
+        {
+            var trackButton = new Button
+            {
+                Text = Loc.GetString("shuttle-console-map-track"),
+                StyleClasses = { "OpenBoth", "ButtonSquare" },
+                MinWidth = 36f,
+                ToolTip = Loc.GetString("shuttle-console-marker-track"),
+                ToggleMode = true,
+            };
+
+            if (_shuttleEntity != null &&
+                _entManager.TryGetComponent(_shuttleEntity, out Content.Shared._Forge.Shuttles.Components.ShuttleNavMarkerComponent? markers) &&
+                _entManager.TryGetNetEntity(gridMap.Entity, out var netEnt))
+            {
+                trackButton.Pressed = markers.Markers.Any(m =>
+                    m.Kind == Content.Shared._Forge.Shuttles.Components.ShuttleNavMarkerKind.Entity &&
+                    m.Target == netEnt);
+            }
+
+            trackButton.OnPressed += _ =>
+            {
+                if (_entManager.TryGetNetEntity(gridMap.Entity, out var tracked))
+                    OnTrackEntity?.Invoke(tracked.Value);
+            };
+
+            gridContainer.AddChild(trackButton);
+        }
 
         _mapObjectControls.Add(gridContainer, mapObj.Name);
         gridContents.AddChild(gridContainer);
@@ -775,6 +809,7 @@ public sealed partial class MapScreen : BoxContainer
             BioScanBar.Value = _bioScanStatus == ShuttleBioScanStatus.Clean || _bioScanStatus == ShuttleBioScanStatus.ThreatDetected ? 1 : 0;
         }
         // Forge-Change-end - BioScan
+        ForgeUpdateMapMarkers();
     }
 
     protected override void Draw(DrawingHandleScreen handle)

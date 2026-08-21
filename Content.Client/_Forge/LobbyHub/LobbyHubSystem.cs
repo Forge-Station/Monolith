@@ -14,6 +14,7 @@ using Robust.Client.Console;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
+using Robust.Client.Player;
 using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -45,6 +46,7 @@ public sealed partial class LobbyHubSystem : EntitySystem
     [Dependency] private IClientConsoleHost _console = default!;
     [Dependency] private IEyeManager _eyeManager = default!;
     [Dependency] private IInputManager _input = default!;
+    [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IStateManager _state = default!;
     [Dependency] private IUserInterfaceManager _ui = default!;
     [Dependency] private IClientPreferencesManager _prefs = default!;
@@ -67,7 +69,6 @@ public sealed partial class LobbyHubSystem : EntitySystem
     private Vector2 _avatarLocal = new(10.5f, 7.5f);
     private bool _activateHeld;
     private string? _previousContext;
-    private IEye? _previousEye;
 
     public bool IsActive { get; private set; }
 
@@ -103,7 +104,6 @@ public sealed partial class LobbyHubSystem : EntitySystem
 
             _previousContext = _input.Contexts.ActiveContext.Name;
             _input.Contexts.SetActiveContext("human");
-            _previousEye = _eyeManager.CurrentEye;
             _input.KeyBindStateChanged += OnKeyBindStateChanged;
 
             IsActive = true;
@@ -139,9 +139,7 @@ public sealed partial class LobbyHubSystem : EntitySystem
 
         _previousContext = null;
 
-        if (_previousEye != null)
-            _eyeManager.CurrentEye = _previousEye;
-        _previousEye = null;
+        RestoreEngineEye();
 
         if (lobby != null)
             lobby.HubViewport.Eye = null;
@@ -185,7 +183,7 @@ public sealed partial class LobbyHubSystem : EntitySystem
         _eye.SetDrawFov(dummy, false, eye);
         _eye.SetDrawLight((dummy, eye), false);
         _eye.SetZoom(dummy, new Vector2(1.15f, 1.15f), eye);
-        _eyeManager.CurrentEye = eye.Eye;
+        TryApplyHubCurrentEye();
 
         if (_prefs.Preferences?.SelectedCharacter is HumanoidCharacterProfile profile)
             _meta.SetEntityName(dummy, profile.Name);
@@ -212,11 +210,45 @@ public sealed partial class LobbyHubSystem : EntitySystem
 
     private void SyncEye(LobbyGui lobby)
     {
-        if (_avatar == null || !TryComp(_avatar.Value, out EyeComponent? eye))
+        if (_avatar == null || !TryComp(_avatar.Value, out EyeComponent? eye) || eye.Eye == null)
+            return;
+
+        lobby.HubViewport.Eye = eye.Eye;
+        TryApplyHubCurrentEye();
+    }
+
+    /// <summary>
+    /// Hub rendering uses HubViewport. Only drive the engine CurrentEye while unattached —
+    /// join already assigns the spawned mob's eye, and overwriting it leaves the main
+    /// viewport pointing at the lobby default eye in nullspace.
+    /// </summary>
+    private void TryApplyHubCurrentEye()
+    {
+        if (_avatar == null || !TryComp(_avatar.Value, out EyeComponent? eye) || eye.Eye == null)
+            return;
+
+        if (IsLocalPlayerAttachedElsewhere())
             return;
 
         _eyeManager.CurrentEye = eye.Eye;
-        lobby.HubViewport.Eye = eye.Eye;
+    }
+
+    private void RestoreEngineEye()
+    {
+        var local = _player.LocalEntity;
+        if (local != null && local != _avatar && TryComp(local.Value, out EyeComponent? eye) && eye.Eye != null)
+        {
+            _eyeManager.CurrentEye = eye.Eye;
+            return;
+        }
+
+        _eyeManager.ClearCurrentEye();
+    }
+
+    private bool IsLocalPlayerAttachedElsewhere()
+    {
+        var local = _player.LocalEntity;
+        return local != null && local != _avatar;
     }
 
     private bool TryLoadHubMap()

@@ -254,3 +254,6 @@
 
 - type: Tag
   id: ForgeCartridgeUllman127x85mm
+
+- type: Tag
+  id: GasCloudSiphonCell

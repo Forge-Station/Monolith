@@ -49,3 +49,4 @@ device-frequency-prototype-name-mothership = Материнский корабл
 
 ## camera frequencies
 device-address-prefix-turret = ТРЛ-
+device-address-prefix-gas-siphon = СИФ-

@@ -1,3 +1,4 @@
+using Content.Shared._Forge.Atmos.Components;
 using Content.Shared._NF.Atmos.Components;
 using Content.Shared.Atmos.Piping.Binary.Components;
 using Content.Shared.Construction.Components;
@@ -14,8 +15,14 @@ public abstract partial class SharedGasDepositSystem : EntitySystem
 {
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] protected SharedUserInterfaceSystem UI = default!;
+
+    /// <summary>
+    /// How far from the extractor we search for a gas cloud when anchoring.
+    /// </summary>
+    private const float CloudAnchorSearchRange = 24f;
 
     // The amount reported in a given extractor is a multiple of this.
     const float DrillExamineAmountRound = 1000.0f;
@@ -81,15 +88,30 @@ public abstract partial class SharedGasDepositSystem : EntitySystem
             if (otherEnt == ent)
                 continue;
 
-            // Is another storage entity is already anchored here?
             if (!HasComp<GasDepositComponent>(otherEnt))
+                continue;
+
+            var isCloud = HasComp<GasCloudComponent>(otherEnt);
+            var isSiphon = HasComp<GasCloudSiphonComponent>(ent);
+
+            // Drills harvest solid deposits; siphons harvest clouds.
+            if (isCloud != isSiphon)
                 continue;
 
             ent.Comp.DepositEntity = otherEnt.Value;
             return;
         }
 
-        _popup.PopupPredicted(Loc.GetString("gas-deposit-drill-no-resources"), ent, args.User);
+        if (HasComp<GasCloudSiphonComponent>(ent) && TryFindGasCloud(ent, xform, out var cloudUid))
+        {
+            ent.Comp.DepositEntity = cloudUid;
+            return;
+        }
+
+        var failKey = HasComp<GasCloudSiphonComponent>(ent)
+            ? "gas-cloud-siphon-no-cloud"
+            : "gas-deposit-drill-no-resources";
+        _popup.PopupPredicted(Loc.GetString(failKey), ent, args.User);
         args.Cancel();
     }
 
@@ -112,5 +134,34 @@ public abstract partial class SharedGasDepositSystem : EntitySystem
         }
 
         args.Handled = true;
+    }
+
+    private bool TryFindGasCloud(Entity<GasDepositExtractorComponent> ent, TransformComponent xform, out EntityUid cloudUid)
+    {
+        cloudUid = EntityUid.Invalid;
+        var extractorMap = _transform.GetMapCoordinates(ent.Owner, xform);
+        var bestDistance = CloudAnchorSearchRange;
+        var found = false;
+
+        var query = EntityQueryEnumerator<GasCloudComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var cloud, out var cloudXform))
+        {
+            if (cloud.CurrentRadius < 0.5f)
+                continue;
+
+            var cloudMap = _transform.GetMapCoordinates(uid, cloudXform);
+            if (cloudMap.MapId != extractorMap.MapId)
+                continue;
+
+            var distance = (cloudMap.Position - extractorMap.Position).Length();
+            if (distance > cloud.CurrentRadius || distance > bestDistance)
+                continue;
+
+            bestDistance = distance;
+            cloudUid = uid;
+            found = true;
+        }
+
+        return found;
     }
 }

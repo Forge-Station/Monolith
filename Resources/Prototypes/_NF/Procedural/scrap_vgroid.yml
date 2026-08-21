@@ -186,6 +186,11 @@
       maxCount: 7
       table: !type:NestedSelector
         tableId: VgroidGasDepositTable
+    - !type:EntityTableDunGen
+      minCount: 1
+      maxCount: 3
+      table: !type:NestedSelector
+        tableId: VgroidGasCloudTable
     # but has guaranteed frezon deposit
     - !type:EntityTableDunGen
       minCount: 1

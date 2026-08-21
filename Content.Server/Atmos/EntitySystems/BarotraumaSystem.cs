@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
+using Content.Shared._Forge.Atmos.Components;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Damage;
@@ -246,6 +247,10 @@ namespace Content.Server.Atmos.EntitySystems
                 {
                     pressure = MathF.Max(mixture.Pressure, 1f);
                 }
+
+                // Forge: dense gas clouds override vacuum / thin air with their own pressure.
+                if (TryComp<GasCloudAffectedComponent>(uid, out var cloudAffected) && cloudAffected.Pressure > pressure)
+                    pressure = cloudAffected.Pressure;
 
                 pressure = pressure switch
                 {

@@ -8,7 +8,9 @@ using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Power.Components;
+using Content.Server.PowerCell;
 using Content.Server.Stack;
+using Content.Shared._Forge.Atmos.Components;
 using Content.Shared._NF.Atmos.BUI;
 using Content.Shared._NF.Atmos.Components;
 using Content.Shared._NF.Atmos.Events;
@@ -40,6 +42,7 @@ public sealed partial class GasDepositSystem : SharedGasDepositSystem
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private NodeContainerSystem _nodeContainer = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
     [Dependency] private StackSystem _stack = default!;
 
     /// <summary>
@@ -132,7 +135,7 @@ public sealed partial class GasDepositSystem : SharedGasDepositSystem
     {
         if (!ent.Comp.Enabled
             || !TryComp(ent.Comp.DepositEntity, out GasDepositComponent? depositComp)
-            || TryComp<ApcPowerReceiverComponent>(ent, out var power) && !power.Powered
+            || !IsExtractorPowered(ent)
             || !_nodeContainer.TryGetNode(ent.Owner, ent.Comp.PortName, out PipeNode? port))
         {
             _ambientSound.SetAmbience(ent, false);
@@ -191,6 +194,14 @@ public sealed partial class GasDepositSystem : SharedGasDepositSystem
             SetDepositState(ent, GasDepositExtractorState.Low);
         else
             SetDepositState(ent, GasDepositExtractorState.On);
+    }
+
+    private bool IsExtractorPowered(EntityUid uid)
+    {
+        if (HasComp<GasCloudSiphonComponent>(uid))
+            return _powerCell.HasDrawCharge(uid);
+
+        return !TryComp<ApcPowerReceiverComponent>(uid, out var power) || power.Powered;
     }
 
     private void OnToggleStatusMessage(Entity<GasDepositExtractorComponent> ent,

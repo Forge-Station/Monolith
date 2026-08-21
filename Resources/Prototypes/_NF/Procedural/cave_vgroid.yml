@@ -153,6 +153,11 @@
       maxCount: 11
       table: !type:NestedSelector
         tableId: VgroidGasDepositTable
+    - !type:EntityTableDunGen
+      minCount: 2
+      maxCount: 4
+      table: !type:NestedSelector
+        tableId: VgroidGasCloudTable
 
 # Configs
 - type: dungeonConfig

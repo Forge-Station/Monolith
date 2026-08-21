@@ -4,6 +4,10 @@
   id: GasMiningStatic
   recipes:
   - GasMiningDrillFlatpack
+  - GasCloudSiphonFlatpack
+  - GasCloudSiphonCell
+  - GasCloudSiphonCellRechargerCircuitboard
+  - GasCloudSiphonCellRechargerFlatpack
   - GaslockFrameFlatpack
 
 - type: latheRecipePack

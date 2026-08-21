@@ -55,7 +55,7 @@
     group: yellow
     position: 20, 140
     mapKey: poiNorth
-    parallax: BssParallaxPoi
+    parallax: BssParallaxPoiNorth
     worldgen: ForgeWorldgenYellow
   - id: poiEast
     name: Восточный пояс
@@ -83,7 +83,7 @@
     group: red
     position: 25, -5
     mapKey: nexus
-    parallax: BssParallaxVkr
+    parallax: BssParallaxNexus
     worldgen: ForgeWorldgenRed
   - id: wildWest
     name: Западная глубь
@@ -113,7 +113,7 @@
     position: 290, 220
     mapKey: voidNorth
     access: Hidden
-    parallax: BssParallaxVoid
+    parallax: BssParallaxVoidNorth
     worldgen: ForgeWorldgenBlack
   - id: voidSouth
     name: Тень Юга
@@ -121,7 +121,7 @@
     position: 45, -340
     mapKey: voidSouth
     access: Hidden
-    parallax: BssParallaxVoid
+    parallax: BssParallaxVoidSouth
     worldgen: ForgeWorldgenBlack
   links:
   # HT: local yellow belt + VKR. Never a direct hop to СИВ/ТСФ.

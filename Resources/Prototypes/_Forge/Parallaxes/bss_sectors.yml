@@ -1,15 +1,12 @@
+# Unique per-sector skyboxes. Each uses its own BG/nebula (and belt planets),
+# so jumping the gate should actually look like a different patch of space.
 - type: parallax
   id: BssParallaxNt
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/_NF/Parallaxes/FrontierParallaxBG.png"
+        path: "/Textures/Forge/Parallax/BssNtBG.png"
       slowness: 0.998046875
-      scale: "1, 1"
-    - texture:
-        !type:ImageParallaxTextureSource
-        path: "/Textures/_NF/Parallaxes/FrontierParallaxNeb.png"
-      slowness: 0.995
       scale: "1, 1"
     - texture:
         !type:GeneratedParallaxTextureSource
@@ -22,16 +19,21 @@
         configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
       slowness: 0.989375
     - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssNtNeb.png"
+      slowness: 0.978
+      scale: "1, 1"
+    - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_nt_stars_fast"
         configPath: "/Prototypes/Parallaxes/parallax_config_stars-2.toml"
-      slowness: 0.987265625
+      slowness: 0.957265625
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/_NF/Parallaxes/Asteroids.png"
+        path: "/Textures/Forge/Parallax/BssNtDebris.png"
       slowness: 0.977
-      scale: 1.4, 1.4
-      scrolling: "0.012, 0.008"
+      scale: "1, 1"
+      scrolling: "0.008, 0.004"
   layersLQ:
     - texture:
         !type:GeneratedParallaxTextureSource
@@ -45,14 +47,9 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/KettleParallaxBG.png"
+        path: "/Textures/Forge/Parallax/BssSivBG.png"
       slowness: 0.998046875
-      scale: "1.1, 1.1"
-    - texture:
-        !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/KettleParallaxNeb.png"
-      slowness: 0.968046875
-      scale: "1, 1"
+      scale: "1.05, 1.05"
     - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_siv_stars"
@@ -65,10 +62,20 @@
       slowness: 0.979375
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/Asteroids.png"
-      slowness: 0.955
-      scale: "1.15, 1.15"
-      scrolling: "-0.01, 0.006"
+        path: "/Textures/Forge/Parallax/BssSivNeb.png"
+      slowness: 0.968
+      scale: "1, 1"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_siv_stars_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars-2.toml"
+      slowness: 0.954
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssSivDebris.png"
+      slowness: 0.96
+      scale: "1, 1"
+      scrolling: "-0.006, 0.01"
   layersLQ:
     - texture:
         !type:GeneratedParallaxTextureSource
@@ -82,13 +89,8 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/AspidParallaxBG.png"
+        path: "/Textures/Forge/Parallax/BssTsfBG.png"
       slowness: 0.998046875
-      scale: "1, 1"
-    - texture:
-        !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/AspidParallaxNeb.png"
-      slowness: 0.967046875
       scale: "1, 1"
     - texture:
         !type:GeneratedParallaxTextureSource
@@ -96,16 +98,26 @@
         configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
       slowness: 0.986625
     - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssTsfNeb.png"
+      slowness: 0.972
+      scale: "1, 1"
+    - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_tsf_stars_fast"
         configPath: "/Prototypes/Parallaxes/parallax_config_stars-2.toml"
       slowness: 0.957265625
     - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_tsf_stars_dim_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim-2.toml"
+      slowness: 0.95
+    - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/Asteroids.png"
-      slowness: 0.96
-      scale: "1.2, 1.2"
-      scrolling: "0.014, -0.007"
+        path: "/Textures/Forge/Parallax/BssTsfDebris.png"
+      slowness: 0.962
+      scale: "1, 1"
+      scrolling: "0.01, -0.005"
   layersLQ:
     - texture:
         !type:GeneratedParallaxTextureSource
@@ -119,19 +131,19 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/layer1.png"
+        path: "/Textures/Forge/Parallax/BssVkrBG.png"
       slowness: 0.998046875
-      scale: "0.7, 0.7"
-    - texture:
-        !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/AspidParallaxNeb.png"
-      slowness: 0.972
-      scale: "1.25, 1.25"
+      scale: "0.85, 0.85"
     - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_vkr_stars"
         configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
       slowness: 0.989
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssVkrNeb.png"
+      slowness: 0.97
+      scale: "1.15, 1.15"
     - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_vkr_stars_fast"
@@ -139,10 +151,48 @@
       slowness: 0.954
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/Asteroids.png"
+        path: "/Textures/Forge/Parallax/BssVkrDebris.png"
       slowness: 0.948
-      scale: "1.6, 1.6"
-      scrolling: "-0.016, -0.01"
+      scale: "1, 1"
+      scrolling: "-0.014, -0.008"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxNexus
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssNexusBG.png"
+      slowness: 0.998
+      scale: "1.1, 1.1"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_nexus_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+      slowness: 0.99
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssNexusNeb.png"
+      slowness: 0.965
+      scale: "1.2, 1.2"
+      scrolling: "0.004, -0.003"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_nexus_stars_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars-2.toml"
+      slowness: 0.94
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssNexusDebris.png"
+      slowness: 0.93
+      scale: "1, 1"
+      scrolling: "0.02, 0.012"
   layersLQ:
     - texture:
         !type:GeneratedParallaxTextureSource
@@ -156,27 +206,71 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/layer1.png"
+        path: "/Textures/Forge/Parallax/BssPoiWestBG.png"
       slowness: 0.998046875
-      scale: "0.5, 0.5"
+      scale: "0.7, 0.7"
     - texture:
         !type:GeneratedParallaxTextureSource
-        id: "bss_poi_stars"
+        id: "bss_poi_west_stars"
         configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
       slowness: 0.996625
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/planet.png"
+        path: "/Textures/Forge/Parallax/BssPoiWestPlanet.png"
       slowness: 0.994
-      scale: "1.6, 1.6"
+      scale: "1.7, 1.7"
       tiled: false
-      controlHomePosition: "280, 220"
+      worldHomePosition: "-420, 180"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/Asteroids.png"
+        path: "/Textures/Forge/Parallax/BssPoiWestNeb.png"
+      slowness: 0.975
+      scale: "1, 1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssPoiWestDebris.png"
       slowness: 0.968
-      scale: "1.3, 1.3"
+      scale: "1, 1"
       scrolling: "0.01, 0.012"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxPoiNorth
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssPoiNorthBG.png"
+      slowness: 0.998046875
+      scale: "0.65, 0.65"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_poi_north_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+      slowness: 0.995
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssPoiNorthPlanet.png"
+      slowness: 0.993
+      scale: "1.85, 1.85"
+      tiled: false
+      worldHomePosition: "260, 340"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssPoiNorthNeb.png"
+      slowness: 0.976
+      scale: "1.1, 1.1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssPoiNorthDebris.png"
+      slowness: 0.958
+      scale: "1, 1"
+      scrolling: "-0.009, 0.007"
   layersLQ:
     - texture:
         !type:GeneratedParallaxTextureSource
@@ -190,9 +284,9 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/layer1.png"
+        path: "/Textures/Forge/Parallax/BssPoiEastBG.png"
       slowness: 0.998046875
-      scale: "0.55, 0.55"
+      scale: "0.75, 0.75"
     - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_poi_east_stars"
@@ -200,16 +294,21 @@
       slowness: 0.996
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/gas_giant.png"
+        path: "/Textures/Forge/Parallax/BssPoiEastPlanet.png"
       slowness: 0.993
-      scale: "1.4, 1.4"
+      scale: "1.55, 1.55"
       tiled: false
-      controlHomePosition: "420, 180"
+      worldHomePosition: "480, -90"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/Asteroids.png"
+        path: "/Textures/Forge/Parallax/BssPoiEastNeb.png"
+      slowness: 0.974
+      scale: "1, 1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssPoiEastDebris.png"
       slowness: 0.96
-      scale: "0.95, 0.95"
+      scale: "1, 1"
       scrolling: "-0.011, 0.009"
   layersLQ:
     - texture:
@@ -224,9 +323,9 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/layer1.png"
+        path: "/Textures/Forge/Parallax/BssPoiSouthBG.png"
       slowness: 0.998046875
-      scale: "0.45, 0.45"
+      scale: "0.6, 0.6"
     - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_poi_south_stars"
@@ -234,16 +333,21 @@
       slowness: 0.99
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/core_planet.png"
+        path: "/Textures/Forge/Parallax/BssPoiSouthPlanet.png"
       slowness: 0.995
-      scale: "1.8, 1.8"
+      scale: "1.9, 1.9"
       tiled: false
-      controlHomePosition: "340, 300"
+      worldHomePosition: "-80, -360"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/_NF/Parallaxes/Asteroids.png"
+        path: "/Textures/Forge/Parallax/BssPoiSouthNeb.png"
+      slowness: 0.972
+      scale: "1.05, 1.05"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssPoiSouthDebris.png"
       slowness: 0.955
-      scale: "1.5, 1.5"
+      scale: "1, 1"
       scrolling: "0.008, -0.013"
   layersLQ:
     - texture:
@@ -257,15 +361,20 @@
   id: BssParallaxWild
   layers:
     - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssWildWestBG.png"
+      slowness: 0.997
+      scale: "1.2, 1.2"
+    - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_wild_stars"
         configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
       slowness: 0.996625
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "bss_wild_stars_dim"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
-      slowness: 0.989375
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssWildWestNeb.png"
+      slowness: 0.98
+      scale: "1.15, 1.15"
     - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_wild_stars_fast"
@@ -273,14 +382,9 @@
       slowness: 0.972
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/noise.png"
-      slowness: 0.985
-      scale: "2.2, 2.2"
-    - texture:
-        !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/Asteroids.png"
+        path: "/Textures/Forge/Parallax/BssWildWestDebris.png"
       slowness: 0.94
-      scale: "1.8, 1.8"
+      scale: "1, 1"
       scrolling: "-0.006, 0.014"
   layersLQ:
     - texture:
@@ -294,10 +398,20 @@
   id: BssParallaxWildEast
   layers:
     - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssWildEastBG.png"
+      slowness: 0.997
+      scale: "1.1, 1.1"
+    - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_wild_east_stars"
         configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
       slowness: 0.995
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssWildEastNeb.png"
+      slowness: 0.978
+      scale: "1.25, 1.25"
     - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_wild_east_stars_fast"
@@ -305,14 +419,9 @@
       slowness: 0.97
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/noise.png"
-      slowness: 0.988
-      scale: "1.7, 1.7"
-    - texture:
-        !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/Asteroids.png"
+        path: "/Textures/Forge/Parallax/BssWildEastDebris.png"
       slowness: 0.945
-      scale: "1.4, 1.4"
+      scale: "1, 1"
       scrolling: "0.015, 0.004"
   layersLQ:
     - texture:
@@ -326,10 +435,20 @@
   id: BssParallaxVoid
   layers:
     - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssVoidBG.png"
+      slowness: 0.9985
+      scale: "1.4, 1.4"
+    - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_void_stars"
         configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
       slowness: 0.997
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssVoidNeb.png"
+      slowness: 0.988
+      scale: "1.6, 1.6"
     - texture:
         !type:GeneratedParallaxTextureSource
         id: "bss_void_stars_fast"
@@ -337,15 +456,86 @@
       slowness: 0.96
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/noise.png"
-      slowness: 0.99
-      scale: "2.8, 2.8"
+        path: "/Textures/Forge/Parallax/BssVoidDebris.png"
+      slowness: 0.93
+      scale: "1, 1"
+      scrolling: "-0.02, 0.01"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxVoidNorth
+  layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/Asteroids.png"
-      slowness: 0.93
-      scale: "2.1, 2.1"
-      scrolling: "-0.02, 0.01"
+        path: "/Textures/Forge/Parallax/BssVoidBG.png"
+      slowness: 0.9985
+      scale: "1.6, 1.6"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_void_north_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+      slowness: 0.996
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssVoidNeb.png"
+      slowness: 0.985
+      scale: "1.9, 1.9"
+      scrolling: "0.003, 0.002"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_void_north_stars_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim-2.toml"
+      slowness: 0.955
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssVoidDebris.png"
+      slowness: 0.94
+      scale: "1, 1"
+      scrolling: "0.007, -0.009"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+- type: parallax
+  id: BssParallaxVoidSouth
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssVoidBG.png"
+      slowness: 0.998
+      scale: "1.25, 1.25"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_void_south_stars"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim-2.toml"
+      slowness: 0.994
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssVoidNeb.png"
+      slowness: 0.982
+      scale: "1.35, 1.35"
+      scrolling: "-0.004, 0.001"
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "bss_void_south_stars_fast"
+        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+      slowness: 0.948
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Forge/Parallax/BssVoidDebris.png"
+      slowness: 0.92
+      scale: "1, 1"
+      scrolling: "0.018, -0.016"
   layersLQ:
     - texture:
         !type:GeneratedParallaxTextureSource

@@ -135,3 +135,25 @@
   - type: Tag
     tags:
     - Trash
+
+- type: entity
+  id: GasCloudSiphonCellRechargerCircuitboard
+  parent: BaseMachineCircuitboard
+  name: siphon accumulator charger machine board
+  description: A machine printed circuit board for a siphon accumulator charger.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: charger_APC
+  - type: MachineBoard
+    prototype: GasCloudSiphonCellRecharger
+    requirements:
+      Capacitor: 2
+    stackRequirements:
+      Cable: 5
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 30
+      Plastic: 30
+  - type: StaticPrice
+    price: 20

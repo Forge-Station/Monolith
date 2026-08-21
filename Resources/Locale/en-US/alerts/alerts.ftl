@@ -13,6 +13,9 @@ alerts-low-pressure-desc = The air around you is [color=red]hazardously thin[/co
 alerts-high-pressure-name = [color=red]High Pressure[/color]
 alerts-high-pressure-desc = The air around you is [color=red]hazardously thick[/color]. A [color=green]pressurized suit[/color] would be enough protect you.
 
+alerts-gas-cloud-name = [color=orange]Gas Cloud[/color]
+alerts-gas-cloud-desc = You are standing in a [color=orange]dense gas cloud[/color]. It slows you down and makes you hungrier. A [color=green]hardsuit[/color] helps with pressure and temperature; [color=green]internals[/color] block toxins. Leave the cloud to drop the other effects.
+
 alerts-on-fire-name = [color=red]On Fire[/color]
 alerts-on-fire-desc = You're [color=red]on fire[/color]. Click the alert to stop, drop and roll to put the fire out or move to a vacuum area.
 

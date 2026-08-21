@@ -1,0 +1,47 @@
+- type: entity
+  parent: BaseItem
+  id: GasCloudSiphonCell
+  name: siphon accumulator
+  description: A sealed rechargeable pack made for gas cloud siphons. It will not fit a standard power cell slot or charger.
+  suffix: Full
+  components:
+  - type: Item
+    size: Large
+    storedRotation: -90
+  - type: Sprite
+    sprite: _Forge/Objects/Power/siphon_cell.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: cell
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Battery
+    maxCharge: 4800
+    startingCharge: 4800
+    pricePerJoule: 0.15
+  - type: PowerCell
+  - type: Appearance
+  - type: PowerCellVisuals
+  - type: Tag
+    tags:
+    - GasCloudSiphonCell
+  - type: StaticPrice
+    price: 200
+
+- type: entity
+  parent: GasCloudSiphonCell
+  id: GasCloudSiphonCellEmpty
+  suffix: Empty
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: cell
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: Battery
+    maxCharge: 4800
+    startingCharge: 0

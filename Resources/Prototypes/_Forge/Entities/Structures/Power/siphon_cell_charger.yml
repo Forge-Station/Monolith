@@ -1,0 +1,40 @@
+- type: entity
+  parent: BaseItemRecharger
+  id: GasCloudSiphonCellRecharger
+  name: siphon accumulator charger
+  description: Charges siphon accumulators and nothing else. Standard power cells will not fit.
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Power/siphon_cell_charger.rsi
+    layers:
+    - map: ["enum.PowerChargerVisualLayers.Base"]
+      state: "empty"
+    - map: ["enum.PowerChargerVisualLayers.Light"]
+      state: "light-off"
+      shader: "unshaded"
+    - state: open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+  - type: Machine
+    board: GasCloudSiphonCellRechargerCircuitboard
+  - type: WiresPanel
+  - type: GenericVisualizer
+    visuals:
+      enum.WiresVisuals.MaintenancePanelState:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Charger
+    chargeRate: 80
+  - type: PowerCellSlot
+    cellSlotId: charger_slot
+  - type: ItemSlots
+    slots:
+      charger_slot:
+        ejectOnInteract: true
+        name: gas-cloud-siphon-slot-cell
+        whitelist:
+          tags:
+          - GasCloudSiphonCell
+  - type: StaticPrice
+    price: 120

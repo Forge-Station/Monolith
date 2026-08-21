@@ -338,6 +338,28 @@
 
 - type: entity
   parent: BaseNFFlatpack
+  id: GasCloudSiphonFlatpack
+  name: gas cloud siphon flatpack
+  description: A flatpack used for constructing a gas cloud siphon.
+  components:
+  - type: Flatpack
+    entity: GasCloudSiphon
+  - type: StaticPrice
+    price: 350
+
+- type: entity
+  parent: PowerCellRechargerFlatpack
+  id: GasCloudSiphonCellRechargerFlatpack
+  name: siphon accumulator charger flatpack
+  description: A flatpack used for constructing a siphon accumulator charger.
+  components:
+  - type: Flatpack
+    entity: GasCloudSiphonCellRecharger
+  - type: StaticPrice
+    price: 80
+
+- type: entity
+  parent: BaseNFFlatpack
   id: GaslockFrameFlatpack
   name: portable gaslock flatpack
   description: A flatpack used for constructing a portable gaslock.

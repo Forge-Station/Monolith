@@ -9,20 +9,41 @@
 <GuideEntityEmbed Entity="GasDepositPlasma" Caption="месторождение плазмы"/>
 </Box>
 
+На некоторых астероидах газ выходит на поверхность в виде [color=orange]газовых облаков[/color]. Облако видно на местности и на радаре шаттла. Для добычи нужен [color=cyan]газовый сифон[/color] — закрепите его [bold]внутри облака[/bold], не обязательно в центре. Обычная буровая установка облака не берёт. Сифон питается от [color=cyan]аккумулятора сифона[/color]: обычные батареи не встанут, заряжать его можно только в [color=cyan]специальном заряднике[/color].
+
+<Box>
+<GuideEntityEmbed Entity="GasCloudOxygen" Caption="кислородное облако"/>
+<GuideEntityEmbed Entity="GasCloudPlasma" Caption="плазменное облако"/>
+<GuideEntityEmbed Entity="GasCloudFrezon" Caption="облако фрезона"/>
+<GuideEntityEmbed Entity="GasCloudSiphon" Caption="газовый сифон"/>
+<GuideEntityEmbed Entity="GasCloudSiphonCell" Caption="аккумулятор сифона"/>
+<GuideEntityEmbed Entity="GasCloudSiphonCellRecharger" Caption="зарядник"/>
+</Box>
+
+[bold]Осторожно:[/bold] внутри облака вы замедляетесь и быстрее голоднеете.
+- [color=red]Давление[/color] и [color=orange]температура[/color] (жар плазмы, холод фрезона) — [color=green]скафандр[/color] сильно снижает эффект.
+- [color=red]Токсины[/color] (плазма, аммиак, CO₂, N₂O) — нужны рабочие [color=green]маска и баллон[/color].
+Корпус шаттла защищает экипаж: эффекты действуют на тех, кто стоит на астероиде или в EVA.
+
 Атмосферные корабли, например, [color=yellow]Gasbender[/color] и [color=yellow]Ambition[/color], оснащены оборудованием, необходимым для добычи из этих месторождений. Ищите категорию [color=cyan]Atmospherics[/color] на [color=steelblue]консоли верфи[/color] при покупке кораблей.
 
 ## Необходимое оборудование
 
 Оборудование, которое вам понадобится:
-- Буровая установка для газа
+- Буровая установка для газа (твёрдые месторождения)
+- Газовый сифон (облака) и его [color=cyan]аккумулятор[/color]
+- Зарядник аккумулятора сифона (на станции или в флэтпаке)
 - Голопроектор
 - Сталь для труб
-- Источник питания (рекомендуется J.R.P.A.C.M.A.N.)
+- Источник питания для бура и газового шлюза (рекомендуется J.R.P.A.C.M.A.N.)
 - Низковольтный кабель
 - Сканер газовых месторождений (опционально)
 
 <Box>
 <GuideEntityEmbed Entity="GasMiningDrill"/>
+<GuideEntityEmbed Entity="GasCloudSiphon"/>
+<GuideEntityEmbed Entity="GasCloudSiphonCell"/>
+<GuideEntityEmbed Entity="GasCloudSiphonCellRecharger"/>
 <GuideEntityEmbed Entity="GaslockFrame"/>
 <GuideEntityEmbed Entity="PortableGeneratorJrPacman" Caption="источник питания"/>
 <GuideEntityEmbed Entity="GasDepositLocator"/>
@@ -36,7 +57,7 @@
 
 2. Разрушьте часть астероида и ищите [color=lightpink]вкрапления твердых элементов[/color].
 
-3. Закрепите вашу [color=khaki]буровую установку для газа[/color] на [color=lightpink]месторождении[/color].
+3. Закрепите [color=khaki]буровую установку[/color] на [color=lightpink]твёрдом месторождении[/color] или [color=cyan]газовый сифон[/color] [bold]внутри газового облака[/bold].
 
 4. Постройте [color=dodgerblue]систему труб[/color], соединяющую буровую установку с наиболее удобным краем астероида.
 
@@ -48,7 +69,7 @@
 
 8. Используя консоль шаттла, состыкуйте [color=cyan]газовый шлюз вашего шаттла[/color] с [color=mediumspringgreen]переносным газовым шлюзом[/color].
 
-9. Установите [color=orange]переносной генератор[/color] на астероиде, включите его и проложите [color=limegreen]кабели[/color] так, чтобы и [color=khaki]буровая установка[/color], и [color=mediumspringgreen]переносной газовый шлюз[/color] были подключены к питанию.
+9. Установите [color=orange]переносной генератор[/color] на астероиде, включите его и проложите [color=limegreen]кабели[/color] так, чтобы [color=khaki]буровая установка[/color] и [color=mediumspringgreen]переносной газовый шлюз[/color] были подключены к питанию. [color=cyan]Газовый сифон[/color] в сети не нуждается — вставьте [color=cyan]аккумулятор сифона[/color] и включите его в интерфейсе. Заряженный аккумулятор хватает примерно на одну облачную добычу; разряженный заряжайте в [color=cyan]заряднике аккумулятора сифона[/color].
 
 10. Установите целевое давление на вашей [color=khaki]буровой установке[/color].
 

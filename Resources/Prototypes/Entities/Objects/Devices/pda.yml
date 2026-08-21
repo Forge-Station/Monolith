@@ -113,9 +113,6 @@
     - WhitelistChameleonPDA
   - type: Input
     context: "human"
-  - type: SentienceTarget # sentient PDA = pAI lite
-    flavorKind: station-event-random-sentience-flavor-mechanical
-    weight: 0.001 # 1,000 PDAs = as likely to be picked as 1 regular animal
   - type: BlockMovement
     blockInteraction: false # lets the PDA toggle its own flashlight
   - type: TypingIndicator
@@ -135,10 +132,6 @@
   - type: CargoSellBlacklist # Frontier: Liltenhead moment
   - type: PirateBountyItem
     id: Pda
-  - type: ToggleableGhostRole # Frontier: Literally only for the wipe verb and nothing else.
-    wipeVerbText: pda-wipe-device-verb-text # Frontier
-    wipeVerbPopup: pda-wiped-device # Frontier
-    mindRoles: [] # Frontier: no default value here
   - type: ShipyardSellCondition # Frontier: Teleport to shipyard console on sale
     preserveOnSale: true
   - type: RetroMonitorView # Mono

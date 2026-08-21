@@ -313,7 +313,7 @@
     damageLimit: 225000 # Forge-Change
     damageOverloadTimePunishment: 120 # Forge-Change
     healPerSecond: 2250 # Forge-Change
-    damageExp: 5.5 # Forge-Change
+    damageExp: 1.05 # Forge-Change
     baseDraw: 60000 # Forge-Change
     maxDraw: 180000 # Forge-Change
     unpoweredBonus: 5 # Forge-Change

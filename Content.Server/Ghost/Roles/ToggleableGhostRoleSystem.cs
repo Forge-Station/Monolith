@@ -4,6 +4,7 @@ using Content.Shared.Interaction; // Goobstation
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.PDA; // Forge-Change
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 
@@ -35,6 +36,10 @@ public sealed partial class ToggleableGhostRoleSystem : EntitySystem
         if (args.Handled)
             return;
 
+        // Forge-Change: PDAs only had this component for the wipe verb; never open a ghost role or eat the PDA UI.
+        if (HasComp<PdaComponent>(uid))
+            return;
+
         args.Handled = true;
 
         // Goobstation - intentional conflict landmine: if you see conflicts here, move the new code to TryActivate()
@@ -45,6 +50,10 @@ public sealed partial class ToggleableGhostRoleSystem : EntitySystem
     private void OnActivateInWorld(EntityUid uid, ToggleableGhostRoleComponent component, ActivateInWorldEvent args)
     {
         if (args.Handled)
+            return;
+
+        // Forge-Change: clicking a PDA in the world must not turn it into a ghost role.
+        if (HasComp<PdaComponent>(uid))
             return;
 
         args.Handled = true;
@@ -141,6 +150,10 @@ public sealed partial class ToggleableGhostRoleSystem : EntitySystem
     // Goobstation
     public void TryActivate(EntityUid uid, ToggleableGhostRoleComponent component, EntityUid user)
     {
+        // Forge-Change: wipe-only entries (empty RoleName) and PDAs must not search for a ghost.
+        if (HasComp<PdaComponent>(uid) || string.IsNullOrWhiteSpace(component.RoleName))
+            return;
+
         // check if a mind is present
         if (TryComp<MindContainerComponent>(uid, out var mind) && mind.HasMind)
         {

@@ -29,7 +29,11 @@
             </ScrollContainer>
         </PanelContainer>
         <!-- Bottom buttons for editing -->
-        <BoxContainer Name="EditButtons" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
+        <BoxContainer Name="EditButtons" Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="6">
+            <!-- Forge-Change: outside the scroll area so the language popup can be clicked -->
+            <Label Name="LanguageLabel" VerticalAlignment="Center" Margin="0 0 8 0" Visible="False" />
+            <OptionButton Name="LanguageSelector" MinWidth="220" Visible="False" />
+            <Control HorizontalExpand="True" />
             <Button Name="SaveButton" />
         </BoxContainer>
     </BoxContainer>

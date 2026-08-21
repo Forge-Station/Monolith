@@ -124,3 +124,21 @@
     ClothingUniformJumpskirtHME: 4
     ClothingHeadHatBeretHME: 4
 
+# Vend Chun Logistics
+
+- type: vendingMachineInventory
+  id: CompanyVendInventoryChun
+  startingInventory:
+    VehicleATVNF: 4
+    VehicleKeyATV: 4
+    VehicleHoverbikeNFKeys: 4
+    ClothingShoesBootsGraviBootsCL: 4
+    ClothingShoesSkatesCL: 4
+    ClothingShoesSkatesDarkCL: 4
+    VehicleHoverboardCL: 4
+    VehicleGraviboardCL: 4
+    VehicleGraviscooterCL: 4
+    VehicleElectroscooterCL: 4
+    VehicleGravichairCL: 4
+    VehicleKeyCLUniversal: 8
+    

@@ -1,0 +1,227 @@
+- type: Tag
+  id: CLVehiclesKey
+
+- type: entity
+  parent: BaseItem
+  id: VehicleKeyCLUniversal
+  name: Универсальный ключ Chun Logistics
+  suffix: Chun Logistics
+  description: Универсальные ключи для всей ветки техники Chun Logistics.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - VehicleKey
+    - CLVehiclesKey
+  - type: Sprite
+    sprite: Forge/Objects/Vehicles/electroscooter.rsi
+    state: keys
+  - type: StaticPrice
+    price: 50
+
+- type: entity
+  parent: BaseVehicleRideable
+  id: VehicleElectroscooterCL
+  name: Электросамокат
+  suffix: Chun Logistics
+  description: Эти ебучие самокатчики добрались до космоса.
+  components:
+  - type: Vehicle
+    northOver: false
+    southOver: true
+  - type: Sprite
+    sprite: Forge/Objects/Vehicles/electroscooter.rsi
+    layers:
+    - state: vehicle
+    - state: engine
+      map: ["enum.VehicleVisualLayers.AutoAnimate"]
+    noRot: true
+  - type: MovementSpeedModifier
+    acceleration: 1
+    friction: 1
+    baseWalkSpeed: 3
+    baseSprintSpeed: 5.5
+  - type: Strap
+    buckleOffset: "0, 0"
+    # maxBuckleDistance: 1 # Umbra - buckling fix
+  - type: UnpoweredFlashlight
+  - type: PointLight
+    enabled: false
+    radius: 3.5
+    softness: 2
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+  - type: ItemSlots
+    slots:
+      key_slot:
+        name: vehicle-slot-component-slot-name-keys
+        whitelist:
+          requireAll: true
+          tags:
+          - VehicleKey
+          - CLVehiclesKey
+        insertSound:
+          path: /Audio/Effects/Vehicle/vehiclestartup.ogg
+          params:
+            volume: -3
+
+- type: entity
+  parent: VehicleElectroscooterCL
+  id: VehicleGraviscooterCL
+  name: Грависамокат
+  suffix: Chun Logistics
+  description: Теперь эти ебучие самокатчики еще и летают.
+  components:
+  - type: Vehicle
+    northOver: false
+    southOver: true
+  - type: Sprite
+    sprite: Forge/Objects/Vehicles/graviscooter.rsi
+    layers:
+    - state: vehicle
+    - state: engine
+      map: ["enum.VehicleVisualLayers.AutoAnimate"]
+    noRot: true
+  - type: MovementAlwaysTouching
+  - type: CanMoveInAir
+  - type: AmbientSound
+    sound: /Audio/Effects/shuttle_thruster.ogg
+    range: 8
+    volume: 5
+    enabled: false
+  - type: MovementSpeedModifier
+    baseAcceleration: 1.5
+    baseFriction: 1
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 6
+    baseWeightlessAcceleration: 1
+    baseWeightlessFriction: 0.05
+    weightlessFrictionNoInput: 0.05
+    baseWeightlessModifier: 3
+    
+- type: entity
+  parent: VehicleGraviscooterCL
+  id: VehicleGraviboardCL
+  name: Гравиборд
+  suffix: Chun Logistics
+  description: Летающая доска.
+  components:
+  - type: Vehicle
+    hasKey: true
+    northOver: false
+    southOver: true
+  - type: Sprite
+    sprite: Forge/Objects/Vehicles/graviboard.rsi
+    layers:
+    - state: vehicle
+    - state: engine
+      map: ["enum.VehicleVisualLayers.AutoAnimate"]
+    noRot: true
+    
+- type: entity
+  parent: BaseVehicleRideable
+  id: VehicleHoverboardCL
+  name: Ховерборд
+  suffix: Chun Logistics
+  description: Левитирующая доска.
+  components:
+  - type: Vehicle
+    hasKey: true
+    northOver: false
+    southOver: true
+  - type: Strap
+    buckleOffset: "0, 0"
+  - type: Sprite
+    sprite: Forge/Objects/Vehicles/hoverboard.rsi
+    layers:
+    - state: vehicle
+    - state: engine
+      map: ["enum.VehicleVisualLayers.AutoAnimate"]
+    noRot: true
+  - type: MovementSpeedModifier
+    baseAcceleration: 1.5
+    baseFriction: 0.1
+    baseWalkSpeed: 3
+    baseSprintSpeed: 5
+    baseWeightlessAcceleration: 1
+    baseWeightlessFriction: 0.1
+    weightlessFrictionNoInput: 0.1
+    baseWeightlessModifier: 3
+    
+- type: entity
+  parent: ClothingShoesSkates
+  id: ClothingShoesSkatesCL
+  name: Ролликовые коньки
+  suffix: Chun Logistics
+  description: "Get your skates on!"
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Vehicles/skates.rsi
+  - type: Clothing
+    sprite: Forge/Objects/Vehicles/skates.rsi
+  - type: Item
+    sprite: Forge/Objects/Vehicles/skates.rsi
+    
+- type: entity
+  parent: ClothingShoesSkates
+  id: ClothingShoesSkatesDarkCL
+  name: Ролликовые коньки
+  suffix: Chun Logistics
+  description: "Get your skates on!"
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Vehicles/skates_black.rsi
+  - type: Clothing
+    sprite: Forge/Objects/Vehicles/skates_black.rsi
+  - type: Item
+    sprite: Forge/Objects/Vehicles/skates_black.rsi
+    
+- type: entity
+  parent: BaseVehicleRideable
+  id: VehicleGravichairCL
+  name: Гравикресло
+  suffix: Chun Logistics
+  description: Левитирующее кресло, прямо как у доктора Соды из людей V. 
+  components:
+    - type: Vehicle
+      northOver: true
+      hasKey: true
+      northOverride: 0
+      southOverride: 0
+    - type: Sprite
+      sprite: Forge/Objects/Vehicles/gravichair.rsi
+      layers:
+      - state: vehicle
+      - state: engine
+        map: ["enum.VehicleVisualLayers.AutoAnimate"]
+        visible: false
+      noRot: true
+    - type: MovementSpeedModifier
+      baseAcceleration: 1.5
+      baseFriction: 0.5
+      baseWalkSpeed: 3
+      baseSprintSpeed: 4
+      baseWeightlessAcceleration: 1
+      baseWeightlessFriction: 0.5
+      weightlessFrictionNoInput: 0.5
+      baseWeightlessModifier: 3
+    - type: Strap
+      buckleOffset: "0,0"
+    
+- type: entity
+  parent: [ClothingShoesBootsMagBase]
+  id: ClothingShoesBootsGraviBootsCL
+  name: Гравиботинки
+  suffix: Chun Logistics
+  description: Магнитные ботинки, оснащенные технологией «блюспейс-привязи», позволяющей ходить в открытом космосе.
+  components:
+  - type: Magboots
+    requiresGrid: false
+  - type: Sprite
+    sprite: Forge/Objects/Vehicles/graviboot.rsi
+  - type: Clothing
+    sprite: Forge/Objects/Vehicles/graviboot.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.75
+    sprintModifier: 0.65

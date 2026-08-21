@@ -21,7 +21,9 @@ public static class ForgeUiSizing
     public const float DefaultStorageTextureScale = 2f;
     public const float DefaultStorageHalfTile = 8f;
 
-    private static readonly Regex FontSizeRegex = new(@"\[font\s+size\s*=\s*(\d+)\]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+    // Matches both [font size=12] and [font="NotoSans" size=12] / [font=NotoSans size=12]
+    // (speech/radio wraps set an explicit size on the quoted text; the old regex missed those tags).
+    private static readonly Regex FontSizeRegex = new(@"\[font([^\]]*?)size\s*=\s*(\d+)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     private static IConfigurationManager? _cfg;
     private static float _hudScale = 1f;
@@ -102,11 +104,11 @@ public static class ForgeUiSizing
     {
         markup = FontSizeRegex.Replace(markup, match =>
         {
-            if (!int.TryParse(match.Groups[1].Value, out var original))
+            if (!int.TryParse(match.Groups[2].Value, out var original))
                 return match.Value;
 
             var scaled = Math.Max(1, (int) MathF.Round(original * (fontSize / (float) DefaultFontSize)));
-            return $"[font size={scaled}]";
+            return $"[font{match.Groups[1].Value}size={scaled}";
         });
 
         return $"[font size={fontSize}]{markup}[/font]";

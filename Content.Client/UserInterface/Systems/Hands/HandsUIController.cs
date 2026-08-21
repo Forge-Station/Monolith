@@ -302,7 +302,7 @@ public sealed partial class HandsUIController : UIController, IOnStateEntered<Ga
 
     private HandButton AddHand(string handName, HandLocation location)
     {
-        var button = new HandButton(handName, location);
+        var button = new HandButton(handName, location) { UseHudScale = true }; // Forge-Change
         button.StoragePressed += StorageActivate;
         button.Pressed += HandPressed;
 

@@ -10,7 +10,28 @@ namespace Content.Client.UserInterface.Controls
 {
     public abstract class SlotControl : Control, IEntityControl
     {
-        public static int DefaultButtonSize => ForgeUiSizing.ButtonSize; // Forge-Change
+        public const int DefaultButtonSize = 64; // Forge-Change: HUD slots opt into scale via UseHudScale
+
+        // Forge-Change-Start: only HUD chrome follows the HUD scale slider.
+        /// <summary>
+        /// When true, this slot follows the HUD scale slider (hotbar, hands, inventory bar).
+        /// Stripping / character windows leave this false so the grid stays 64px.
+        /// </summary>
+        public bool UseHudScale
+        {
+            get => _useHudScale;
+            set
+            {
+                if (_useHudScale == value)
+                    return;
+
+                _useHudScale = value;
+                ApplyHudScale();
+            }
+        }
+
+        private bool _useHudScale;
+        // Forge-Change-End
 
         public TextureRect ButtonRect { get; }
         public TextureRect BlockedRect { get; }
@@ -209,15 +230,15 @@ namespace Content.Client.UserInterface.Controls
             base.ExitedTree();
         }
 
-        private static Vector2 GetHudButtonSize()
+        private Vector2 GetHudButtonSize()
         {
-            var size = DefaultButtonSize;
+            var size = _useHudScale ? ForgeUiSizing.ButtonSize : DefaultButtonSize; // Forge-Change
             return new Vector2(size, size);
         }
 
-        private static Vector2 GetHudTextureScale()
+        private Vector2 GetHudTextureScale()
         {
-            var scale = 2f * ForgeUiSizing.HudScale;
+            var scale = _useHudScale ? 2f * ForgeUiSizing.HudScale : 2f; // Forge-Change
             return new Vector2(scale, scale);
         }
 

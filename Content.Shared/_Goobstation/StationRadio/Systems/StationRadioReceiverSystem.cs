@@ -1,6 +1,5 @@
 using Content.Goobstation.Shared.StationRadio.Components;
 using Content.Goobstation.Shared.StationRadio.Events;
-using Content.Shared.Interaction;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Robust.Shared.Audio.Systems;
@@ -16,7 +15,6 @@ public sealed class StationRadioReceiverSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<StationRadioReceiverComponent, StationRadioMediaPlayedEvent>(OnMediaPlayed);
         SubscribeLocalEvent<StationRadioReceiverComponent, StationRadioMediaStoppedEvent>(OnMediaStopped);
-        SubscribeLocalEvent<StationRadioReceiverComponent, ActivateInWorldEvent>(OnRadioToggle);
         SubscribeLocalEvent<StationRadioReceiverComponent, PowerChangedEvent>(OnPowerChanged);
     }
 
@@ -26,13 +24,6 @@ public sealed class StationRadioReceiverSystem : EntitySystem
             _audio.SetGain(comp.SoundEntity, comp.Active ? comp.DefaultParams.Volume : 0f);
         else if(comp.SoundEntity != null)
             _audio.SetGain(comp.SoundEntity, 0);
-    }
-
-    private void OnRadioToggle(EntityUid uid, StationRadioReceiverComponent comp, ActivateInWorldEvent args)
-    {
-        comp.Active = !comp.Active;
-        if (comp.SoundEntity != null && _power.IsPowered(uid))
-            _audio.SetGain(comp.SoundEntity, comp.Active ? comp.DefaultParams.Volume : 0f);
     }
 
     private void OnMediaPlayed(EntityUid uid, StationRadioReceiverComponent comp, StationRadioMediaPlayedEvent args)

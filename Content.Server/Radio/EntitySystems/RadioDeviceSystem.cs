@@ -19,6 +19,7 @@ using Content.Shared.Radio.EntitySystems; // Нужно для SharedRadioDevice
 using Content.Shared.UserInterface; // Nuclear-14
 using Content.Shared.Verbs; // Frontier
 using Content.Shared._NC.Radio; // Nuclear-14
+using Content.Shared._Forge.Radio; // Forge-Change
 using Robust.Server.GameObjects; // Nuclear-14
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility; // Frontier
@@ -44,9 +45,9 @@ public sealed partial class RadioDeviceSystem : SharedRadioDeviceSystem
     // Used to prevent a shitter from using a bunch of radios to spam chat.
     private readonly HashSet<(string, EntityUid, RadioChannelPrototype)> _recentlySent = new();
 
-    // Frontier: minimum, maximum radio frequencies
-    private const int MinRadioFrequency = 1000;
-    private const int MaxRadioFrequency = 30000;
+    // Forge-Change: use the same frequency range as the configurable encryption key.
+    private const int MinRadioFrequency = RadioFrequencyPresetListPrototype.DefaultMinFrequency;
+    private const int MaxRadioFrequency = RadioFrequencyPresetListPrototype.DefaultMaxFrequency;
 
     public override void Initialize()
     {
@@ -358,7 +359,10 @@ public sealed partial class RadioDeviceSystem : SharedRadioDeviceSystem
 
         // Update frequency if valid and within range.
         if (args.Frequency >= MinRadioFrequency && args.Frequency <= MaxRadioFrequency)
+        {
             microphone.Comp.Frequency = args.Frequency;
+            Dirty(microphone);
+        }
         // Update UI with current frequency.
         UpdateHandheldRadioUi(microphone);
     }
@@ -370,9 +374,18 @@ public sealed partial class RadioDeviceSystem : SharedRadioDeviceSystem
 
         var micEnabled = radio.Comp.Enabled;
         var speakerEnabled = speakerComp?.Enabled ?? false;
-        var state = new HandheldRadioBoundUIState(micEnabled, speakerEnabled, frequency);
+        var state = new HandheldRadioBoundUIState(micEnabled, speakerEnabled, frequency, MinRadioFrequency, MaxRadioFrequency);
         if (TryComp<UserInterfaceComponent>(radio, out var uiComp))
             _ui.SetUiState((radio.Owner, uiComp), HandheldRadioUiKey.Key, state); // Frontier
+    }
+
+    public void SetMicrophoneFrequency(EntityUid uid, int frequency, RadioMicrophoneComponent? microphone = null)
+    {
+        if (!Resolve(uid, ref microphone, false))
+            return;
+
+        microphone.Frequency = frequency;
+        Dirty(uid, microphone);
     }
 
     #endregion

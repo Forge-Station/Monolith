@@ -1,1 +1,7 @@
 ent-Bullet8x65mmSKR = пуля (8x65мм СКР)
+ent-Bullet8x65mmSKRPractice = пуля (8x65мм СКР учебный)
+ent-Bullet8x65mmSKRIncendiary = пуля (8x65мм СКР зажигательный)
+ent-Bullet8x65mmSKRUranium = пуля (8x65мм СКР урановый)
+ent-Bullet8x65mmSKRHP = пуля (8x65мм СКР экспансивный)
+ent-Bullet8x65mmSKRRIP = пуля (8x65мм СКР RIP)
+ent-Bullet8x65mmSKRPlasteelAP = пуля (8x65мм СКР бронебойный)

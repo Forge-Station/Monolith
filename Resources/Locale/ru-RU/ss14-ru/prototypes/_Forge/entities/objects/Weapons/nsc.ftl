@@ -12,7 +12,7 @@ ent-Cartridge5x23mm = патрон (5x23мм безгильзовый)
 ent-Bullet5x23mm = пуля (5x23мм безгильзовая)
 
 ent-WeaponSniperRifleNexusDlan = NEX-SR-91 «Длань»
-    .desc = Тяжёлая снайперская винтовка калибра 15.4x114мм. Занимает много места в сумке.
+    .desc = Тяжёлая снайперская винтовка калибра 13.5x110мм. Занимает много места в сумке.
 
 ent-WeaponEnergyPistolNexusProjector = SLP-HG-18 «Проектор»
     .desc = Плазменный пистолет UcasCo с режимами одиночный, очередь и автомат. Батарея самозарядная.
@@ -23,15 +23,11 @@ ent-WeaponEnergyRifleNexusKiy = SLP-AR-4 «Кий»
 ent-WeaponEnergyShotgunNexusUdarnik = SLP-SG-4 «Ударник»
     .desc = Плазменный дробовик UcasCo с узкой рассеиванием. Нужно держать двумя руками.
 
-ent-Magazine154x114mmFMJ = магазин (15.4x114мм FMJ)
-ent-Magazine154x114mmHE = магазин (15.4x114мм HE)
-ent-Magazine154x114mmAP = магазин (15.4x114мм AP)
-ent-AmmoBox154x114mmFMJ = коробка боеприпасов (15.4x114мм FMJ)
-ent-AmmoBox154x114mmHE = коробка боеприпасов (15.4x114мм HE)
-ent-AmmoBox154x114mmAP = коробка боеприпасов (15.4x114мм AP)
-ent-Cartridge154x114mmFMJ = патрон (15.4x114мм FMJ)
+ent-Magazine135x110mm = магазин (13.5x110мм Антиматериальный)
+ent-Magazine135x110mmHE = магазин (13.5x110мм HE)
+ent-AmmoBox135x110mm = коробка боеприпасов (13.5x110мм Антиматериальный)
+ent-AmmoBox135x110mmHE = коробка боеприпасов (13.5x110мм HE)
+ent-Cartridge135x110mm = патрон (13.5x110мм Антиматериальный)
     .desc = Патрон с оболочкой для «Длани».
-ent-Cartridge154x114mmHE = патрон (15.4x114мм HE)
+ent-Cartridge135x110mmHE = патрон (13.5x110мм HE)
     .desc = Фугасный патрон для «Длани».
-ent-Cartridge154x114mmAP = патрон (15.4x114мм AP)
-    .desc = Бронебойный патрон для «Длани».

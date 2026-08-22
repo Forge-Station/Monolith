@@ -109,4 +109,4 @@
     damage:
       types:
         Piercing: 50
-    armorPenetration: 0.20
+    armorPenetration: 0.3 # Forge-change 0.20->0.3

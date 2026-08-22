@@ -43,7 +43,8 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 10 # Mono
+        Heat: 15 # Forge-change 10->15
+    armorPenetration: 0.1 # Forge-change
 
 - type: entity
   parent: BasicHitscan
@@ -53,7 +54,8 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 18 # Mono
+        Heat: 20 # Forge-change 18->20
+    armorPenetration: 0.15 # Forge-change
 
 - type: entity
   parent: BasicHitscan
@@ -63,7 +65,8 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 22 # Mono
+        Heat: 28 # Forge-change 22->28
+    armorPenetration: 0.15 # Forge-change
 
 - type: entity
   parent: BasicHitscan
@@ -73,7 +76,8 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 32 # Mono
+        Heat: 35 # Forge-change 32->35
+    armorPenetration: 0.25 # Forge-change
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
@@ -103,8 +107,9 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 14 # Mono
-        Radiation: 14 # Mono
+        Heat: 15 # Forge-change 14->15
+        Radiation: 15 # Forge-change 14->15
+    armorPenetration: 0.3 # Forge-change
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
@@ -124,8 +129,9 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 28 # Mono
-        Shock: 7
+        Heat: 35 # Forge-change 28->35
+        # Shock: 7 # Forge-change
+    armorPenetration: 0.3 # Forge-change
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi

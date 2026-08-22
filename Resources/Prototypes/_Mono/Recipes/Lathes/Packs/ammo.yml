@@ -55,7 +55,7 @@
   - AmmoBox762x51mmRIP
   - Magazine762x54mmRFMJ
   - Magazine762x54mmRPlasteelAP
-  - Magazine762x54mmRRubber
+#  - Magazine762x54mmRRubber # Forge-change
   - Magazine762x54mmRIncendiary
   - Magazine762x54mmRPractice
   - Magazine762x54mmREmpty
@@ -65,7 +65,7 @@
   - SpeedLoader762x54mmRFMJ
   - AmmoBox762x54mmRFMJ
   - AmmoBox762x54mmRPlasteelAP
-  - AmmoBox762x54mmRRubber
+#  - AmmoBox762x54mmRRubber # Forge-change
   - AmmoBox762x54mmRIncendiary
   - AmmoBox762x54mmRPractice
   - AmmoBox762x54mmRUranium
@@ -408,8 +408,8 @@
 
   - Magazine762x51mmRubber
   - AmmoBox762x51mmRubber
-  - Magazine762x54mmRRubber
-  - AmmoBox762x54mmRRubber
+#  - Magazine762x54mmRRubber # Forge-change
+#  - AmmoBox762x54mmRRubber # Forge-change
   - Magazine556x45mmRubber
   - SpeedLoader556x45mmRubber
   - AmmoBox556x45mmRubber
@@ -697,8 +697,8 @@
 
   - Magazine762x51mmRubber
   - AmmoBox762x51mmRubber
-  - Magazine762x54mmRRubber
-  - AmmoBox762x54mmRRubber
+#  - Magazine762x54mmRRubber # Forge-change
+#  - AmmoBox762x54mmRRubber # Forge-change
   - Magazine556x45mmRubber
   - SpeedLoader556x45mmRubber
   - AmmoBox556x45mmRubber

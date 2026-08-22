@@ -1,3 +1,8 @@
 ﻿ent-Bullet635x40mmCaseless = пуля (6.35x40мм безгильзовая)
 ent-Bullet635x40mmCaselessPractice = пуля (6.35x40мм безгильзовая учебный)
 ent-Bullet635x40mmCaselessRubber = пуля (6.35x40мм безгильзовая резиновый)
+ent-Bullet635x40mmCaselessIncendiary = пуля (6.35x40мм безгильзовая зажигательный)
+ent-Bullet635x40mmCaselessUranium = пуля (6.35x40мм безгильзовая урановый)
+ent-Bullet635x40mmCaselessHP = пуля (6.35x40мм безгильзовая экспансивный)
+ent-Bullet635x40mmCaselessRIP = пуля (6.35x40мм безгильзовая RIP)
+ent-Bullet635x40mmCaselessPlasteelAP = пуля (6.35x40мм безгильзовая бронебойный)

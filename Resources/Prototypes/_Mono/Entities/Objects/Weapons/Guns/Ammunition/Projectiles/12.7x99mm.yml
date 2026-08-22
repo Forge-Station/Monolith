@@ -7,8 +7,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 65
-        Structural: 100
+        Piercing: 55 # Forge-change 65->55
+        Structural: 70 # Forge-change 100->70
     armorPenetration: 0.4
   - type: Tracer
     color: "#FFFFFFFF"
@@ -24,7 +24,7 @@
     damage:
       types:
         Piercing: 10
-        Heat: 8
+        Heat: 10 # Forge-change 8->10
         Structural: 20
     armorPenetration: 0.15
   - type: ExplodeOnTrigger

@@ -125,8 +125,8 @@
 
 - type: latheRecipe
   parent: NSCRecipe
-  id: Magazine154x114mmFMJ
-  result: Magazine154x114mmFMJ
+  id: Magazine135x110mm
+  result: Magazine135x110mm
   completetime: 8
   materials:
     Steel: 500
@@ -135,8 +135,8 @@
 
 - type: latheRecipe
   parent: NSCRecipe
-  id: Magazine154x114mmHE
-  result: Magazine154x114mmHE
+  id: Magazine135x110mmHE
+  result: Magazine135x110mmHE
   completetime: 8
   materials:
     Steel: 500
@@ -145,8 +145,8 @@
 
 - type: latheRecipe
   parent: NSCRecipe
-  id: Magazine154x114mmAP
-  result: Magazine154x114mmAP
+  id: Magazine135x110mmAP
+  result: Magazine135x110mmAP
   completetime: 8
   materials:
     Steel: 600
@@ -155,8 +155,8 @@
 
 - type: latheRecipe
   parent: NSCRecipe
-  id: AmmoBox154x114mmFMJ
-  result: AmmoBox154x114mmFMJ
+  id: AmmoBox135x110mm
+  result: AmmoBox135x110mm
   completetime: 6
   materials:
     Steel: 2000
@@ -165,8 +165,8 @@
 
 - type: latheRecipe
   parent: NSCRecipe
-  id: AmmoBox154x114mmHE
-  result: AmmoBox154x114mmHE
+  id: AmmoBox135x110mmHE
+  result: AmmoBox135x110mmHE
   completetime: 6
   materials:
     Steel: 2000
@@ -175,8 +175,8 @@
 
 - type: latheRecipe
   parent: NSCRecipe
-  id: AmmoBox154x114mmAP
-  result: AmmoBox154x114mmAP
+  id: AmmoBox135x110mmAP
+  result: AmmoBox135x110mmAP
   completetime: 6
   materials:
     Steel: 2400

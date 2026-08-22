@@ -1,36 +1,38 @@
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: BaseBullet
-  id: Bullet154x114mmFMJ
-  name: bullet (15.4x114mm FMJ)
+  id: Bullet135x110mm
+  name: bullet (13.5x110mm)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 75
+        Piercing: 70
         Structural: 400
-    ignoreResistances: false
-    armorPenetration: 0.5
+    ignoreResistances: true
     penetrationThreshold: 400
     penetrationDamageTypeRequirement:
     - Structural
   - type: StaminaDamageOnCollide
-    damage: 55
+    damage: 40
   - type: Tracer
     color: "#FFFFFFFF"
     length: 3
+  - type: Reflective
+    reflective:
+    - None
 
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: BaseBulletTrigger
-  id: Bullet154x114mmHE
-  name: bullet (15.4x114mm HE)
+  id: Bullet135x110mmHE
+  name: bullet (13.5x110mm HE)
   components:
   - type: Projectile
     damage:
       types:
         Piercing: 10
-        Heat: 8
+        Heat: 10 
         Structural: 20
     armorPenetration: 0.15
   - type: ExplodeOnTrigger
@@ -38,23 +40,8 @@
     explosionType: Default
     maxIntensity: 5
     intensitySlope: 5
-    totalIntensity: 45
+    totalIntensity: 50
     maxTileBreak: 0
   - type: Tracer
     color: "#FFAA44FF"
     length: 3
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: Bullet154x114mmFMJ
-  id: Bullet154x114mmAP
-  name: bullet (15.4x114mm AP)
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 60
-        Structural: 500
-    ignoreResistances: false
-    armorPenetration: 1
-    penetrationThreshold: 0

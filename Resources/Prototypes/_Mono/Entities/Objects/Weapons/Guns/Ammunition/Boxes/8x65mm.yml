@@ -66,3 +66,57 @@
     layers:
     - state: incendiary
       map: ["enum.GunVisualLayers.Base"]
+
+# Forge-change-start
+- type: entity
+  id: AmmoBox8x65mmSKRUranium
+  name: ammunition box (8x65mm SKR uranium)
+  parent: BaseAmmoBox8x65mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge8x65mmSKRUranium
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Ammunition/Boxes/8x65mm.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+
+- type: entity
+  id: AmmoBox8x65mmSKRPlasteelAP
+  name: ammunition box (8x65mm SKR AP)
+  parent: BaseAmmoBox8x65mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge8x65mmSKRPlasteelAP
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Ammunition/Boxes/8x65mm.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+
+- type: entity
+  id: AmmoBox8x65mmSKRHP
+  name: ammunition box (8x65mm SKR hollow-point)
+  parent: BaseAmmoBox8x65mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge8x65mmSKRHP
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Ammunition/Boxes/8x65mm.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+
+- type: entity
+  id: AmmoBox8x65mmSKRRIP
+  name: ammunition box (8x65mm SKR RIP)
+  parent: BaseAmmoBox8x65mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge8x65mmSKRRIP
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Ammunition/Boxes/8x65mm.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+# Forge-change-end

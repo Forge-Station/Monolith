@@ -58,3 +58,64 @@
     - state: tip
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#f53b31"
+
+# Forge-change-start
+- type: entity
+  id: Cartridge8x65mmSKRUranium
+  name: cartridge (8x65mm SKR uranium)
+  parent: BaseCartridge8x65mmSKR
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet8x65mmSKRUranium
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#65fe08"
+
+- type: entity
+  id: Cartridge8x65mmSKRPlasteelAP
+  name: cartridge (8x65mm SKR AP)
+  parent: BaseCartridge8x65mmSKR
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet8x65mmSKRPlasteelAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#ff6e52"
+
+- type: entity
+  id: Cartridge8x65mmSKRHP
+  name: cartridge (8x65mm SKR hollow-point)
+  parent: BaseCartridge8x65mmSKR
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet8x65mmSKRHP
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#ff6e52"
+
+- type: entity
+  id: Cartridge8x65mmSKRRIP
+  name: cartridge (8x65mm SKR RIP)
+  parent: BaseCartridge8x65mmSKR
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet8x65mmSKRRIP
+  - type: Sprite
+    layers:
+    - state: base
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#ff6e52"
+# Forge-change-end

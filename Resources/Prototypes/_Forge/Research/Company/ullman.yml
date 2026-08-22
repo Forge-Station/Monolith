@@ -43,9 +43,9 @@
   cost: 75000
   recipeUnlocks:
   - UllmanSniperRifle
-  - UllmanMagazine127x85mm
-  - UllmanMagazine127x85mmEmpty
-  - UllmanAmmunitionBox127x85mm
+  - UllmanMagazine135x110mm
+  - UllmanMagazine135x110mmEmpty
+  - AmmoBox135x110mm
   technologyPrerequisites:
   - UllmanWeaponHiEnd
   position: 16, 1

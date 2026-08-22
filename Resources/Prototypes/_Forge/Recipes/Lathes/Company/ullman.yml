@@ -106,24 +106,16 @@
     Diamond: 100
 
 - type: latheRecipe
-  id: UllmanMagazine127x85mm
-  result: ForgeMagazineUllman127x85mm
+  id: UllmanMagazine135x110mm
+  result: ForgeMagazineUllman135x110mm
   completetime: 4
   materials:
     Steel: 1000
     Plasteel: 500
 
 - type: latheRecipe
-  id: UllmanMagazine127x85mmEmpty
-  result: ForgeMagazineUllman127x85mmEmpty
+  id: UllmanMagazine135x110mmEmpty
+  result: ForgeMagazineUllman135x110mmEmpty
   completetime: 4
   materials:
     Steel: 750
-
-- type: latheRecipe
-  id: UllmanAmmunitionBox127x85mm
-  result: AmmunitionBoxUllman127x85mm
-  completetime: 8
-  materials:
-    Steel: 250
-    Plasteel: 2000

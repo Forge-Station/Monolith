@@ -79,4 +79,25 @@ public sealed partial class ForgeCVars
     public static readonly CVarDef<float> StorageScale =
         CVarDef.Create("forge.ui.storage_scale", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
     // Forge-Change-End
+
+    // Forge-change-start
+    /// <summary>
+    ///     Radius of the inner worldgen zone (meters from map origin) that procedural drones must flee.
+    ///     Must stay in sync with MonoEmptyFallback distanceRange max in basic.yml (18000).
+    /// </summary>
+    public static readonly CVarDef<float> DroneInnerZoneRadius =
+        CVarDef.Create("forge.drone.inner_zone_radius", 18000f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Minimum seconds after flee starts before a procedural drone grid is deleted.
+    /// </summary>
+    public static readonly CVarDef<float> DroneInnerZoneFleeDeleteMin =
+        CVarDef.Create("forge.drone.inner_zone_flee_delete_min", 10f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Maximum seconds after flee starts before a procedural drone grid is deleted.
+    /// </summary>
+    public static readonly CVarDef<float> DroneInnerZoneFleeDeleteMax =
+        CVarDef.Create("forge.drone.inner_zone_flee_delete_max", 15f, CVar.SERVERONLY);
+    // Forge-change-end
 }

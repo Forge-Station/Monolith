@@ -10,7 +10,7 @@
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/Revolvers/argenti.rsi
   - type: Gun
-    fireRate: 2.5
+    fireRate: 10
     resetOnHandSelected: false
   - type: RevolverAmmoProvider
     whitelist:

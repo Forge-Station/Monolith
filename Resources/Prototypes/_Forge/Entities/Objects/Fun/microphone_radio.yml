@@ -16,4 +16,12 @@
     powerRequired: true
     broadcastChannel: RadioShow
     frequency: 1285
-    unobstructedRequired: true  
+    unobstructedRequired: true 
+    toggleOnInteract: false
+  - type: ActivatableUI
+    key: enum.StationRadioFrequencyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationRadioFrequencyUiKey.Key:
+        type: StationRadioFrequencyBoundUserInterface
+ 

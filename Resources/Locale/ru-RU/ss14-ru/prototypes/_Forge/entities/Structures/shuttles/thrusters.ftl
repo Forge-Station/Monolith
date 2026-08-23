@@ -22,3 +22,16 @@ ent-WorkedRustedThruster = ржавый двигатель
     .desc = Старый ржавый двигатель... И почему-то ещё работает...
 ent-GoblinThruster = двигатель "Тырчик"
     .desc = Кустарный шаттловый двигатель, собранн из сварки, огнетушителя и крепкого словца.
+ent-ThrusterPartsT3 = {ent-Thruster}
+    .desc = {ent-Thruster.desc}
+ent-ThrusterPartsT4 = {ent-Thruster}
+    .suffix = T4 parts, ТОЛЬКО АДС 
+    .desc = {ent-Thruster.desc}
+ent-GyroscopePartsT2 = {ent-Gyroscope}
+    .desc = {ent-Gyroscope.desc}
+ent-GyroscopePartsT3 = {ent-Gyroscope}
+    .desc = {ent-Gyroscope.desc}
+ent-GyroscopePartsT4 = {ent-Gyroscope}
+    .suffix = T4 parts, ТОЛЬКО АДС 
+    .desc = {ent-Gyroscope.desc}
+

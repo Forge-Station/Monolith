@@ -23,3 +23,52 @@
     - type: Construction
       graph: goblin_machinery
       node: goblinThruster
+
+- type: entity
+  parent: Thruster
+  id: ThrusterPartsT3
+  suffix: T3 Parts
+  components:
+  - type: Machine
+    partOverrides:
+      Capacitor: SuperCapacitorStockPart
+
+- type: entity
+  parent: Thruster
+  id: ThrusterPartsT4
+  suffix: T4 Parts, ADS ONLY
+  components:
+  - type: Machine
+    partOverrides:
+      Capacitor: QuadraticCapacitorStockPart
+
+- type: entity
+  parent: Gyroscope
+  id: GyroscopePartsT2
+  suffix: T2 parts
+  components:
+  - type: Machine
+    partOverrides:
+      Capacitor: AdvancedCapacitorStockPart
+      Manipulator: NanoManipulatorStockPart
+
+- type: entity
+  parent: Gyroscope
+  id: GyroscopePartsT3
+  suffix: T3 parts
+  components:
+  - type: Machine
+    partOverrides:
+      Capacitor: SuperCapacitorStockPart
+      Manipulator: PicoManipulatorStockPart
+
+- type: entity
+  parent: Gyroscope
+  id: GyroscopePartsT4
+  suffix: T4 parts, ADS ONLY
+  components:
+  - type: Machine
+    partOverrides:
+      Capacitor: QuadraticCapacitorStockPart
+      Manipulator: FemtoManipulatorStockPart
+

@@ -1,0 +1,17 @@
+- type: entity
+  parent: ThrusterLarge
+  id: ThrusterLargePartsT3
+  suffix: T3 Parts
+  components:
+  - type: Machine
+    partOverrides:
+      Capacitor: SuperCapacitorStockPart
+
+- type: entity
+  parent: ThrusterLarge
+  id: ThrusterLargePartsT4
+  suffix: T4 Parts, ADS ONLY
+  components:
+  - type: Machine
+    partOverrides:
+      Capacitor: QuadraticCapacitorStockPart

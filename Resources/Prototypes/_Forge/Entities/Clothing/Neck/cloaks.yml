@@ -378,9 +378,9 @@
   components:
   - type: Sprite
     scale: 0.6, 0.6
-    sprite: _Forge/Objects/HiveRobe/hivecloakicon.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/hivecloakicon.rsi
   - type: Clothing
-    sprite: _Forge/Objects/HiveRobe/hivecloak.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/hivecloak.rsi
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:Container

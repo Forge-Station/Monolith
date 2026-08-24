@@ -5,9 +5,9 @@
   description: A tattered purple robe of some cult.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/HiveRobe/hivecloakhelmet.rsi
+    sprite: _Forge/Clothing/Head/Cloaks/hivecloakhelmet.rsi
   - type: Clothing
-    sprite: _Forge/Objects/HiveRobe/hivecloakhelmet.rsi
+    sprite: _Forge/Clothing/Head/Cloaks/hivecloakhelmet.rsi
   - type: HideLayerClothing
     slots:
     - Hair

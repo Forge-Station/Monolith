@@ -99,5 +99,11 @@ public sealed partial class ForgeCVars
     /// </summary>
     public static readonly CVarDef<float> DroneInnerZoneFleeDeleteMax =
         CVarDef.Create("forge.drone.inner_zone_flee_delete_max", 15f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Seconds between scans for procedural drones inside the inner worldgen zone.
+    /// </summary>
+    public static readonly CVarDef<float> DroneInnerZoneCheckInterval =
+        CVarDef.Create("forge.drone.inner_zone_check_interval", 2f, CVar.SERVERONLY);
     // Forge-change-end
 }

@@ -47,6 +47,9 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
     private float _innerZoneRadius = 18_000f;
     private float _deleteMinSeconds = 10f;
     private float _deleteMaxSeconds = 15f;
+    private float _zoneCheckInterval = 2f;
+
+    private float _zoneCheckTimer;
 
     private readonly HashSet<EntityUid> _pendingDeletes = new();
     private readonly HashSet<EntityUid> _occupiedGrids = new();
@@ -70,15 +73,21 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
         Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneRadius, val => _innerZoneRadius = val, true);
         Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneFleeDeleteMin, val => _deleteMinSeconds = val, true);
         Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneFleeDeleteMax, val => _deleteMaxSeconds = val, true);
+        Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneCheckInterval, val => _zoneCheckInterval = MathF.Max(0.1f, val), true);
     }
 
     public override void Update(float frameTime)
     {
         RefreshOccupiedGrids();
         ProcessPendingDeletes();
-
         UpdateFleeingDrones();
-        TryStartFleeForInnerZoneDrones();
+
+        _zoneCheckTimer += frameTime;
+        if (_zoneCheckTimer >= _zoneCheckInterval)
+        {
+            _zoneCheckTimer = 0f;
+            TryStartFleeForInnerZoneDrones();
+        }
     }
 
     private void RefreshOccupiedGrids()

@@ -246,10 +246,7 @@
   id: Magazine135x110mm
 
 - type: Tag
-  id: Cartridge5x23mm
-
-- type: Tag
-  id: Magazine5x23mm
+  id: Magazine635x40mmCaselessNexus
 
 # Ullman Industries
 - type: Tag

@@ -16,14 +16,16 @@
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/SMGs/mla73.rsi
   - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -34
+    minAngle: -22 # Forge-change -20->-22
+    maxAngle: -30 # Forge-change -34->-30
   - type: Gun
     minAngle: 22
     maxAngle: 40
-    angleIncrease: 5
-    angleDecay: 20
-    fireRate: 8
+    projectileSpeed: 45 # Forge-change
+    angleIncrease: 1 # Forge-change 5->1
+    angleDecay: 8 # Forge-change 20->8
+    fireRate: 8 # Forge-change 8->8
+    damageModifier: 1 # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/mla_fire.ogg
   - type: ChamberMagazineAmmoProvider
@@ -137,6 +139,11 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Gun
     fireRate: 8.5
+    projectileSpeed: 40 # Forge-change
+    minAngle: 3 # Forge-change
+    maxAngle: 19 # Forge-change
+    angleIncrease: 1.25 # Forge-change
+    angleDecay: 10 # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/atreides_fire.ogg
   - type: MagazineVisuals
@@ -184,13 +191,17 @@
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    minAngle: -19
+    minAngle: -18 # Forge-change -19->-18
     maxAngle: -16
   - type: Gun
+    projectileSpeed: 45 # Forge-change
+    fireRate: 8 # Forge-change
     minAngle: 21
     maxAngle: 32
+    angleIncrease: 0.75 # Forge-change
+    angleDecay: 16 # Forge-change
     shotsPerBurst: 5
-    damageModifier: 0.85
+    damageModifier: 1 # Forge-change 0.85->1
     availableModes:
     - Burst
     - FullAuto

@@ -163,8 +163,8 @@
   cost: 35000
   recipeUnlocks:
   - WeaponSubMachineGunNexusShebet
-  - Magazine5x23mmNexus
-  - AmmoBox5x23mmNexus
+  - Magazine635x40mmCaselessNexus
+  - Magazine635x40mmCaselessNexusEmpty
   technologyPrerequisites:
   - NSCVSSEquipment
   position: 0, 2

@@ -7,8 +7,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 45 # Forge-change 35->45
-    armorPenetration: 0.3 # Forge-change 0.1->0.3
+        Piercing: 40 # Forge-change 35->40
+    armorPenetration: 0.2 # Forge-change 0.1->0.2
 
 - type: entity
   id: Bullet357_magnumPractice
@@ -68,8 +68,8 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 20 # Forge-change 15->20
-        Piercing: 30 # Forge-change 20->30
+        Radiation: 15
+        Piercing: 25 # Forge-change 20->25
     armorPenetration: -0.05 # Forge-change
 
 # Mono AP syst
@@ -111,6 +111,6 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 31 # Forge-change 20->31
+        Piercing: 28 # Forge-change 20->28
         Structural: 35 # Forge-change 70->35
-    armorPenetration: 0.6
+    armorPenetration: 0.5

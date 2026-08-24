@@ -103,15 +103,15 @@
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
   - type: Gun
-    fireRate: 5.5
-    minAngle: 1
-    maxAngle: 6
-    angleIncrease: 1.5
+    fireRate: 8.5 # Forge-change 5.5->8.5
+    minAngle: 2 # Forge-change 1->2
+    maxAngle: 12 # Forge-change 6->12
+    angleIncrease: 1 # Forge-change 1.5->1
     angleDecay: 6
     selectedMode: FullAuto
-    shotsPerBurst: 5
-    burstCooldown: 0.2
-    burstFireRate: 7
+    shotsPerBurst: 6 # Forge-change 5->6
+    burstCooldown: 0.3 # Forge-change 0.2->0.3
+    burstFireRate: 12 # Forge-change 7->12
     availableModes:
     - Burst
     - FullAuto

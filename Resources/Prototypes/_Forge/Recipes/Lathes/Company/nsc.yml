@@ -92,8 +92,8 @@
 
 - type: latheRecipe
   parent: NSCRecipe
-  id: Magazine5x23mmNexus
-  result: Magazine5x23mmNexus
+  id: Magazine635x40mmCaselessNexus
+  result: Magazine635x40mmCaselessNexus
   completetime: 6
   materials:
     Steel: 300
@@ -102,13 +102,11 @@
 
 - type: latheRecipe
   parent: NSCRecipe
-  id: AmmoBox5x23mmNexus
-  result: AmmoBox5x23mmNexus
+  id: Magazine635x40mmCaselessNexusEmpty
+  result: Magazine635x40mmCaselessNexusEmpty
   completetime: 6
   materials:
-    Steel: 1200
-    Plastic: 800
-    Plasteel: 800
+    Steel: 150
 
 - type: latheRecipe
   parent: NSCRecipe

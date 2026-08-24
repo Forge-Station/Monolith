@@ -114,6 +114,6 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 15 # Forge-change 9->15
+        Piercing: 16 # Forge-change 9->16
         Structural: 18 # Forge-change 30->18
     armorPenetration: 0.45 # Forge-change 0.9->0.45

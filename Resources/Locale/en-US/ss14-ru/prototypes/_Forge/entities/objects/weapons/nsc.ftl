@@ -1,16 +1,15 @@
 ent-WeaponEnergySwordNexusProtos = SLP-SRD-1 Protos
     .desc = A new UcasCo market release — a rigid plasma blade held in a force field. Briefly dropping the rear field lets you leap forward and finish a target.
 
-ent-WeaponSubMachineGunNexusShebet = NEX-SMG-4 Shebet
-    .desc = Suppressed PDW in 5x23mm caseless. 48-round extended magazine. Can fire one-handed with severe spread; wield for accurate fire.
-ent-Magazine5x23mmNexus = SMG magazine (5x23mm caseless)
+ent-WeaponSubMachineGunNexusShebet = NEX-SMG-4 Shebet (6.35x40mm)
+    .desc = Suppressed PDW in 6.35x40mm caseless. 48-round extended magazine. Can fire one-handed with severe spread; wield for accurate fire.
+ent-Magazine635x40mmCaselessNexus = SMG Shebet magazine (6.35x40mm caseless)
     .desc = Extended magazine for the Shebet SMG.
-ent-AmmoBox5x23mmNexus = large ammunition box (5x23mm caseless)
-    .desc = Caseless ammunition for the NEX-SMG-4 Shebet.
-ent-Cartridge5x23mm = cartridge (5x23mm)
-    .desc = Caseless round for the NEX-SMG-4 Shebet.
-ent-Bullet5x23mm = bullet (5x23mm)
-ent-WeaponSniperRifleNexusDlan = NEX-SR-91 Dlan
+ent-Magazine635x40mmCaselessNexusEmpty = SMG Shebet magazine (6.35x40mm)
+    .suffix = Empty
+    .desc = Extended magazine for the Shebet SMG.
+
+ent-WeaponSniperRifleNexusDlan = NEX-SR-91 Dlan (13.5x110mm)
     .desc = Heavy 13.5x110mm anti-materiel rifle. Takes up a lot of space in storage.
 
 ent-WeaponEnergyPistolNexusProjector = SLP-HG-18 Projector

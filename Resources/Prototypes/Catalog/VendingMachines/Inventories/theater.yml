@@ -37,6 +37,7 @@
     ClothingHeadPaperSack: 2
     ClothingHeadPaperSackSmile: 2
     ClothingEyesBlindfold: 1
+    ClothingEyesTransparentBlindfold: 1 # Forge-Change
     ClothingHeadRastaHat: 2
     ClothingUniformJumpsuitDameDane: 2
     ClothingShoesDameDane: 2

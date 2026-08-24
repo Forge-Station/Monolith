@@ -254,6 +254,9 @@
   # Forge-change: add icon, note & special's
   icon: TheHive # Forge-change
   special:
+  - !type:GiveItemSpecial
+    prototype:
+    - ClothingNeckCloakHive
   - !type:PlaySpawnSoundSpecial
     sound:
       path: /Audio/Ambience/ambimystery.ogg

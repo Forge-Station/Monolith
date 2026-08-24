@@ -1,0 +1,15 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHive
+  name: hive robe
+  description: A tattered purple robe of some cult.
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/HiveRobe/hivecloakhelmet.rsi
+  - type: Clothing
+    sprite: _Forge/Objects/HiveRobe/hivecloakhelmet.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide

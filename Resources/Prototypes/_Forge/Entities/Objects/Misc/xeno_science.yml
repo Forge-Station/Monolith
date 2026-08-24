@@ -1,0 +1,149 @@
+- type: entity
+  name: DNA glass
+  description: A glass with a DNA sample from an unknown creature.
+  parent: BaseItem
+  id: DNAglass
+  components:
+  - type: Tag
+    tags:
+    - CentrifugeCompatible
+  - type: FitsInDispenser
+    solution: beaker
+  - type: Sprite
+    sprite: _Forge/Objects/XenoScience.rsi
+    state: dnaglass
+  - type: Appearance
+  - type: Drink
+    solution: beaker
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 10
+  - type: MixableSolution
+    solution: beaker
+  - type: RefillableSolution
+    solution: beaker
+  - type: DrainableSolution
+    solution: beaker
+  - type: ExaminableSolution
+    solution: beaker
+  - type: DrawableSolution
+    solution: beaker
+  - type: SolutionTransfer
+    maxTransferAmount: 10
+    canChangeTransferAmount: true
+  - type: SolutionItemStatus
+    solution: beaker
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: Item
+    size: Tiny
+    sprite: _Forge/Objects/XenoScience.rsi
+    state: dnaglass
+    shape:
+    - 0,0,0,0
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    damage:
+      types:
+        Blunt: 0
+  - type: TrashOnSolutionEmpty
+    solution: beaker
+  - type: StaticPrice
+    price: 5 # Mono - thing fucks economy
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Spillable
+    solution: beaker
+  - type: DnaSubstanceTrace
+
+- type: entity
+  name: black blood
+  description: A sample of extremely rare black blood.
+  parent: BaseItem
+  id: BlackBlood
+  components:
+  - type: Tag
+    tags:
+    - CentrifugeCompatible
+  - type: FitsInDispenser
+    solution: beaker
+  - type: Sprite
+    sprite: _Forge/Objects/XenoScience.rsi
+    state: blackblood
+  - type: Appearance
+  - type: Drink
+    solution: beaker
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 10
+  - type: MixableSolution
+    solution: beaker
+  - type: RefillableSolution
+    solution: beaker
+  - type: DrainableSolution
+    solution: beaker
+  - type: ExaminableSolution
+    solution: beaker
+  - type: DrawableSolution
+    solution: beaker
+  - type: SolutionTransfer
+    maxTransferAmount: 10
+    canChangeTransferAmount: true
+  - type: SolutionItemStatus
+    solution: beaker
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: Item
+    size: Tiny
+    sprite: _Forge/Objects/XenoScience.rsi
+    state: blackblood
+    shape:
+    - 0,0,0,0
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    damage:
+      types:
+        Blunt: 0
+  - type: TrashOnSolutionEmpty
+    solution: beaker
+  - type: StaticPrice
+    price: 5 # Mono - thing fucks economy
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Spillable
+    solution: beaker
+  - type: DnaSubstanceTrace
+
+- type: entity
+  name: hive worm
+  description: A small, writhing creature from the hive.
+  parent: BaseItem
+  id: HiveWorm
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/XenoScience.rsi
+    state: hiveworm

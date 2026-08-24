@@ -63,7 +63,7 @@
   - type: StaticPrice
     price: 200
     vendPrice: 19000
-    
+
 #region Empire
 - type: entity
   parent: ClothingNeckBase
@@ -369,3 +369,26 @@
   components:
   - type: Sprite
     sprite: Forge/Clothing/Neck/Cloaks/witchcloak.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakHive
+  name: hive robe
+  description: A tattered purple robe of some cult.
+  components:
+  - type: Sprite
+    scale: 0.6, 0.6
+    sprite: _Forge/Objects/HiveRobe/hivecloakicon.rsi
+  - type: Clothing
+    sprite: _Forge/Objects/HiveRobe/hivecloak.rsi
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+      storagebase: !type:Container
+        ents: [ ]
+  - type: ToggleableClothing
+    requiredSlot: neck
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHatHive

@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.0
-  forkId: ""
-  forkVersion: ""
-  time: 03/09/2026 16:38:45
-  entityCount: 1456
+  engineVersion: 277.0.0
+  forkId: frontier_mapping
+  forkVersion: 0f9a1fbc6aafd7435a73f5eef1a0576276111d77
+  time: 08/24/2026 10:52:19
+  entityCount: 1463
 maps: []
 grids:
 - 1
@@ -85,7 +85,7 @@ entities:
         path: /Audio/Effects/alert.ogg
     - type: DecalGrid
       chunkCollection:
-        version: 2
+        version: 3
         nodes:
         - node:
             color: '#FFFFFFFF'
@@ -194,9 +194,9 @@ entities:
     - type: SpreaderGrid
       spreadQueues:
         Puddle: []
+        MetalFoam: []
         Smoke: []
         Kudzu: []
-        MetalFoam: []
     - type: GridAtmosphere
       version: 2
       data:
@@ -354,104 +354,32 @@ entities:
         uniqueMixes:
         - volume: 2500
           immutable: True
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+          moles: {}
+        - volume: 2500
+          temperature: 293.15
+          moles: {}
         - volume: 2500
           temperature: 293.15
           moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Plasma: 6666.982
         - volume: 2500
           temperature: 293.15
           moles:
-          - 0
-          - 0
-          - 0
-          - 6666.982
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          temperature: 293.15
-          moles:
-          - 0
-          - 0
-          - 0
-          - 2500
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Plasma: 2500
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ShipGridLock
       locked: False
+    - type: ThermalSignature
+    - type: ImplicitRoof
+    - type: ExplosionAirtightGrid
+    - type: ShipShieldGridState
 - proto: AirAlarm
   entities:
   - uid: 2
@@ -5493,6 +5421,16 @@ entities:
     - type: Transform
       pos: -5.5,11.5
       parent: 1
+  - uid: 1458
+    components:
+    - type: Transform
+      pos: -5.5,-2.5
+      parent: 1
+  - uid: 1463
+    components:
+    - type: Transform
+      pos: 4.5,-2.5
+      parent: 1
 - proto: MobSpawnMonolithicHellLocust
   entities:
   - uid: 1344
@@ -5748,22 +5686,54 @@ entities:
     - type: Transform
       pos: 0.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 1008
     components:
     - type: Transform
       pos: -1.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 1009
     components:
     - type: Transform
       pos: -2.5,12.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 1010
     components:
     - type: Transform
       pos: 1.5,12.5
       parent: 1
-- proto: ShieldGenerator
+    - type: DeltaPressure
+      gridUid: 1
+- proto: RogueSiliconResearchDisk10000
+  entities:
+  - uid: 1459
+    components:
+    - type: Transform
+      pos: 4.4438753,-2.5705051
+      parent: 1
+  - uid: 1460
+    components:
+    - type: Transform
+      pos: 4.4438753,-2.5705051
+      parent: 1
+  - uid: 1462
+    components:
+    - type: Transform
+      pos: 4.4722276,-2.5580149
+      parent: 1
+- proto: RogueSiliconResearchDisk25000
+  entities:
+  - uid: 1461
+    components:
+    - type: Transform
+      pos: 4.459342,-2.5212955
+      parent: 1
+- proto: ShieldGeneratorMedium
   entities:
   - uid: 1011
     components:
@@ -5811,6 +5781,13 @@ entities:
     components:
     - type: Transform
       pos: -1.5,-1.5
+      parent: 1
+- proto: SpawnLootTechDisksPrinterT4
+  entities:
+  - uid: 1457
+    components:
+    - type: Transform
+      pos: -5.518771,-2.4689627
       parent: 1
 - proto: SubstationBasicEmpty
   entities:

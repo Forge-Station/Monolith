@@ -2,9 +2,9 @@ meta:
   format: 7
   category: Grid
   engineVersion: 277.0.0
-  forkId: ""
-  forkVersion: ""
-  time: 07/11/2026 12:36:57
+  forkId: frontier_mapping
+  forkVersion: 0f9a1fbc6aafd7435a73f5eef1a0576276111d77
+  time: 08/24/2026 11:02:49
   entityCount: 8490
 maps: []
 grids:
@@ -199,9 +199,9 @@ entities:
     - type: ThermalSignature
     - type: SpreaderGrid
       spreadQueues:
-        Smoke: []
-        MetalFoam: []
         Puddle: []
+        MetalFoam: []
+        Smoke: []
         Kudzu: []
     - type: Shuttle
       dampingModifier: 0.25
@@ -41084,16 +41084,22 @@ entities:
     - type: Transform
       pos: 1.5,25.5
       parent: 1
+    missingComponents:
+    - Anchorable
   - uid: 5223
     components:
     - type: Transform
       pos: 2.5,25.5
       parent: 1
+    missingComponents:
+    - Anchorable
   - uid: 5224
     components:
     - type: Transform
       pos: 0.5,25.5
       parent: 1
+    missingComponents:
+    - Anchorable
 - proto: MagazinePowerHeavion
   entities:
   - uid: 5225

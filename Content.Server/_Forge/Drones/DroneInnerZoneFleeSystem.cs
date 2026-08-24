@@ -99,15 +99,17 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
         if (_pendingDeletes.Count == 0)
             return;
 
-        foreach (var gridUid in _pendingDeletes)
+        _pendingDeletes.RemoveWhere(gridUid =>
         {
-            if (TerminatingOrDeleted(gridUid) || HasPlayerOnGrid(gridUid))
-                continue;
+            if (TerminatingOrDeleted(gridUid))
+                return true;
+
+            if (HasPlayerOnGrid(gridUid))
+                return false;
 
             QueueDel(gridUid);
-        }
-
-        _pendingDeletes.Clear();
+            return true;
+        });
     }
 
     private void TryStartFleeForInnerZoneDrones()
@@ -119,10 +121,10 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
             if (_fleeQuery.HasComp(uid))
                 continue;
 
-            if (!IsDroneAiCore(uid))
+            if (xform.GridUid is not { } gridUid || !IsProceduralDroneGrid(gridUid))
                 continue;
 
-            if (xform.GridUid is not { } gridUid || !IsProceduralDroneGrid(gridUid))
+            if (!IsFleeEligibleAiCore(uid, gridUid))
                 continue;
 
             if (HasPlayerOnGrid(gridUid))
@@ -151,10 +153,9 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
                 continue;
             }
 
-            if (!IsDroneAiCore(uid) || !IsProceduralDroneGrid(gridUid))
+            if (!IsFleeEligibleAiCore(uid, gridUid))
             {
-                RemComp<DroneInnerZoneFleeComponent>(uid);
-                RemComp<DroneInnerZoneFleeGridComponent>(gridUid);
+                AbortFlee(gridUid, uid);
                 continue;
             }
 
@@ -163,6 +164,9 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
                 AbortFlee(gridUid, uid);
                 continue;
             }
+
+            if (_pendingDeletes.Contains(gridUid))
+                continue;
 
             if (_timing.CurTime >= flee.DeleteAt)
             {
@@ -233,7 +237,7 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
         if (_pendingDeletes.Contains(gridUid) || TerminatingOrDeleted(gridUid))
             return;
 
-        if (!IsDroneAiCore(aiUid) || !IsProceduralDroneGrid(gridUid) || HasPlayerOnGrid(gridUid))
+        if (!IsFleeEligibleAiCore(aiUid, gridUid) || HasPlayerOnGrid(gridUid))
             return;
 
         _steering.Stop((aiUid, null));
@@ -247,7 +251,6 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
         var coords = Transform(gridUid).Coordinates;
         _audio.PlayPvs(FleeSound, coords);
 
-        RemComp<DroneInnerZoneFleeComponent>(aiUid);
         _pendingDeletes.Add(gridUid);
     }
 
@@ -300,18 +303,23 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
     }
 
     /// <summary>
-    /// Worldgen drone cores only (NpcDroneAi*) — excludes station AI, shuttle autopilot, and player drones.
+    /// HTN cores on procedural drone grids. Many worldgen hulls use NpcStationAi* spawners (rammers, attackers),
+    /// so eligibility is tied to the grid marker rather than the NpcDroneAi* prefix alone.
+    /// Fixed POI station AI is excluded because those grids lack the SpawnDroneBase cleanup marker.
     /// </summary>
-    private bool IsDroneAiCore(EntityUid uid)
+    private bool IsFleeEligibleAiCore(EntityUid uid, EntityUid gridUid)
     {
         if (_shuttleConsoleQuery.HasComp(uid) || _droneControlQuery.HasComp(uid))
             return false;
 
-        var protoId = MetaData(uid).EntityPrototype?.ID;
-        if (protoId == null)
+        if (!_htnQuery.HasComp(uid))
             return false;
 
-        return protoId.StartsWith("NpcDroneAi", StringComparison.Ordinal);
+        if (IsProceduralDroneGrid(gridUid))
+            return true;
+
+        var protoId = MetaData(uid).EntityPrototype?.ID;
+        return protoId != null && protoId.StartsWith("NpcDroneAi", StringComparison.Ordinal);
     }
 
     /// <summary>

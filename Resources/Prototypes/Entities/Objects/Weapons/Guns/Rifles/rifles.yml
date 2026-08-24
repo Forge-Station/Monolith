@@ -84,10 +84,22 @@
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
   - type: Item # Mono
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Rifles/akm_inhands_32x.rsi
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/akm_inhands_32x.rsi # Mono
+  - type: GunRequiresWield # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
+    projectileSpeed: 50 # Forge-change
+    minAngle: 2 # Forge-change
+    maxAngle: 18 # Forge-change
+    angleIncrease: 1.75 # Forge-change
+    angleDecay: 9 # Forge-change
     fireRate: 5
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg

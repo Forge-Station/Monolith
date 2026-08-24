@@ -243,17 +243,27 @@
     - map: ["opticAttachment"] # Mono
   - type: Item # Mono
     sprite: _Mono/Objects/Weapons/Guns/Rifles/annie_inhands_32x.rsi
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/annie_inhands_32x.rsi
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
+    minAngle: 2 # Forge-change
+    maxAngle: 14 # Forge-change
+    angleIncrease: 1.5 # Forge-change
+    angleDecay: 10 # Forge-change
     availableModes:
     - FullAuto
     - Burst
-    burstFireRate: 12
-    burstCooldown: 0.8
+    burstFireRate: 10 # Forge-change 12->10
+    burstCooldown: 0.7 # Forge-change 0.8->0.7
     shotsPerBurst: 4
-    fireRate: 7
-    projectileSpeed: 42.5 # Mono
+    fireRate: 5.5 # Forge-change 7->5.5
+    projectileSpeed: 50 # Forge-change 42.5->50
     soundGunshot:
       path: /Audio/_Goobstation/Weapons/Guns/Gunshots/thock.ogg
   - type: ChamberMagazineAmmoProvider

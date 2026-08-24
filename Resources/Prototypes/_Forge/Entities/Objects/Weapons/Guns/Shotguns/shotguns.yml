@@ -260,13 +260,15 @@
     sprite: Forge/Objects/Weapons/Guns/Shotguns/Saigak_inhands_64x.rsi
   - type: Clothing
     sprite: Forge/Objects/Weapons/Guns/Shotguns/Saigak_inhands_64x.rsi
+    quickEquip: false
     slots:
     - Back
     - suitStorage
   - type: AmmoCounter
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
-    fireRate: 2.25
+    fireRate: 2.5
+    projectileSpeed: 25
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -333,7 +335,7 @@
         ents: []
   - type: Gun
     fireRate: 2.5
-    projectileSpeed: 45
+    projectileSpeed: 25
     selectedMode: FullAuto
     availableModes:
     - FullAuto

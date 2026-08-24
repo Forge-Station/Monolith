@@ -91,7 +91,20 @@
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/Rifles/gestio.rsi
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
+  - type: GunRequiresWield # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
+    minAngle: 5 # Forge-change
+    maxAngle: 15 # Forge-change
+    angleIncrease: 2.5 # Forge-change
+    angleDecay: 5 # Forge-change
+    projectileSpeed: 50 # Forge-change
     fireRate: 4
     burstFireRate: 8
     shotsPerBurst: 3
@@ -322,7 +335,20 @@
       map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/Rifles/gestio.rsi
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
+  - type: GunRequiresWield # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
+    minAngle: 5 # Forge-change
+    maxAngle: 15 # Forge-change
+    angleIncrease: 2.5 # Forge-change
+    angleDecay: 5 # Forge-change
+    projectileSpeed: 50 # Forge-change
     fireRate: 4
     burstFireRate: 8
     shotsPerBurst: 3

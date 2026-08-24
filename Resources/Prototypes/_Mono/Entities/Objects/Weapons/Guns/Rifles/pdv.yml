@@ -74,19 +74,26 @@
       map: ["enum.GunVisualLayers.Mag"]
     - map: ["opticAttachment"] # Mono
   - type: Item # Mono
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Rifles/wspr_inhands_32x.rsi
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/wspr_inhands_32x.rsi # Mono
   - type: GunWieldBonus
-    minAngle: -14
-    maxAngle: -41
+    minAngle: 0 # Forge-change -14->0
+    maxAngle: 0 # Forge-change -41->0
   - type: Gun
+    minAngle: 2 # Forge-change
+    maxAngle: 8 # Forge-change
+    angleIncrease: 1 # Forge-change
+    angleDecay: 10 # Forge-change
     availableModes:
     - Burst
     selectedMode: Burst
     burstFireRate: 20 # Mono
-    burstCooldown: 0.6 # Mono
-    projectileSpeed: 45 # Mono
+    burstCooldown: 0.5 # Forge-change 0.6->0.5
+    projectileSpeed: 50 # Forge-change 45->50
     fireRate: 7.5 # Mono, does nothing because its burst only but it makes it clear it can fire at this rate.
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/wspr_fire.ogg # Mono change - Changed audio path

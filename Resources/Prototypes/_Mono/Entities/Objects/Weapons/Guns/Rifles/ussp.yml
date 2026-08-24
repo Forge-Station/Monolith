@@ -12,15 +12,20 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
     - map: ["opticAttachment"]
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
   - type: GunWieldBonus
-    minAngle: -21
-    maxAngle: -47
+    minAngle: 0 # Forge-change -21->0
+    maxAngle: 0 # Forge-change -47->0
   - type: Gun
-    minAngle: 21
-    maxAngle: 52
-    angleIncrease: 6
-    angleDecay: 24
+    minAngle: 2 # Forge-change 21->2
+    maxAngle: 16 # Forge-change 52->16
+    angleIncrease: 2 # Forge-change 6->2
+    angleDecay: 10 # Forge-change 24->10
     fireRate: 5 # 300 rpm
+    projectileSpeed: 50 # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/ak_fire.ogg
   - type: ChamberMagazineAmmoProvider

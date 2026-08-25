@@ -1599,7 +1599,7 @@ entities:
       startingCharge: 0
     - type: ApcPowerReceiver
       powerLoad: 50
-- proto: GyroscopeSecurity
+- proto: GyroscopeADS # Forge-Change
   entities:
   - uid: 252
     components:
@@ -1969,7 +1969,7 @@ entities:
       canCollide: False
     - type: Fixtures
       fixtures: {}
-- proto: ThrusterSecurity
+- proto: ThrusterADS # Forge-Change
   entities:
   - uid: 302
     components:

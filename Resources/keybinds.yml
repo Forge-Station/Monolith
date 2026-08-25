@@ -614,7 +614,26 @@ binds:
 - function: MappingOpenContextMenu
   type: State
   key: MouseRight
+  mod1: Shift
+  mod2: Alt
   canFocus: true
+# Forge-Change-Start
+- function: MappingEyedropper
+  type: State
+  key: MouseRight
+  mod1: Shift
+  canFocus: true
+- function: MappingEyedropperTile
+  type: State
+  key: MouseRight
+  mod1: Alt
+  canFocus: true
+- function: MappingEyedropperDecal
+  type: State
+  key: MouseRight
+  mod1: Control
+  canFocus: true
+# Forge-Change-End
 # region Frontier
 - function: SwapHandsPrevious
   type: State

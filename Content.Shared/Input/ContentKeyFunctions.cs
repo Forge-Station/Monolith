@@ -159,5 +159,8 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction MappingRemoveDecal = "MappingRemoveDecal";
         public static readonly BoundKeyFunction MappingCancelEraseDecal = "MappingCancelEraseDecal";
         public static readonly BoundKeyFunction MappingOpenContextMenu = "MappingOpenContextMenu";
+        public static readonly BoundKeyFunction MappingEyedropper = "MappingEyedropper"; // Forge-Change
+        public static readonly BoundKeyFunction MappingEyedropperTile = "MappingEyedropperTile"; // Forge-Change
+        public static readonly BoundKeyFunction MappingEyedropperDecal = "MappingEyedropperDecal"; // Forge-Change
     }
 }

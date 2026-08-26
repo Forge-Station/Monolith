@@ -1,9 +1,13 @@
 # Imperial forces — NPC faction relations (see TSFMC / TSFMCTurret pattern)
+# EmpireTurret is intentionally NOT neutral to NanoTrasen: mercenaries, TSF
+# (via TSFMC), and other outsiders are valid targets. Only Empire personnel
+# are friendly. Pets / medics / contraband scanners stay ignored.
 
 - type: npcFaction
   id: Empire
+  friendly:
+  - EmpireTurret
   neutral:
-  - NanoTrasen
   - SimpleNeutral
   defaultHostile: true
 
@@ -12,10 +16,10 @@
   friendly:
   - Empire
   neutral:
-  - NanoTrasen
   - Cat
   - PetsNT
   - SimpleNeutral
   - MD
   - ContrabandDetection
+  - Mouse
   defaultHostile: true

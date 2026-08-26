@@ -623,14 +623,16 @@
 
 #region Renegate
 - type: entity
-  name: NEK'o AR-220 (5.56x45mm)
+  name: NEK'o AR-220 (6.8x52mm caseless) # 5.56x45mm->6.8x52mm caseless
   parent: BaseWeaponRifle
   suffix: Ренегаты
   id: WeaponRifleAR220
   description: Mass-produced battle rifle. Reliable enough and decent; an image of two stars can be seen on the grip. Firing the 5.56x45mm round. Also accepts 6.8x52mm STANAG magazines to assist with standardization.
   components:
   - type: Item # Mono
-    size: Huge
+    size: Large
+    shape:
+    - 0,0,3,3
     sprite: Forge/Objects/Weapons/Guns/Rifles/ar220_inhands_32x.rsi
   - type: Sprite
     sprite: Forge/Objects/Weapons/Guns/Rifles/ar220.rsi
@@ -644,7 +646,16 @@
   - type: ChamberMagazineAmmoProvider # Mono
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: GunWieldBonus
+    minAngle: -32
+    maxAngle: -32
   - type: Gun
+    minAngle: 35
+    maxAngle: 48
+    angleIncrease: 1.5
+    angleDecay: 8
+    projectileSpeed: 50
+    fireRate: 6
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/light_rifle_1.ogg # Mono
   - type: ItemSlots
@@ -688,7 +699,9 @@
   description: A prototype rifle. It accelerates bullets, but the acceleration device could very well be broken. A rare item, but in your case, it might even be useless.
   components:
   - type: Item # Mono
-    size: Huge
+    size: Large
+    shape:
+    - 0,0,3,3
     sprite: Forge/Objects/Weapons/Guns/Rifles/gauss_inhands_32x.rsi
   - type: Sprite
     sprite: Forge/Objects/Weapons/Guns/Rifles/gauss.rsi
@@ -702,7 +715,16 @@
   - type: ChamberMagazineAmmoProvider # Mono
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
+  - type: GunRequiresWield
   - type: Gun
+    minAngle: 2
+    maxAngle: 6
+    projectileSpeed: 50
+    damageModifier: 1.1
+    fireRate: 3.5
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/dmr.ogg # Mono
   - type: ItemSlots
@@ -752,6 +774,8 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     size: Large
+    shape:
+    - 0,0,3,3
     sprite: Forge/Objects/Weapons/Guns/Rifles/oar308_inhands_32x.rsi
   - type: Clothing
     sprite: Forge/Objects/Weapons/Guns/Rifles/oar308_inhands_32x.rsi
@@ -759,15 +783,17 @@
     - Back
     - suitStorage
   - type: GunWieldBonus
-    minAngle: -12
-    maxAngle: -18
+    minAngle: 0 # -12->0
+    maxAngle: 0 # -18->0
   - type: Gun
-    minAngle: 13
-    maxAngle: 20
-    angleIncrease: 5
-    angleDecay: 25
+    minAngle: 3 # 13->3
+    maxAngle: 18 # 20->18
+    angleIncrease: 2.25 # 5->2.25
+    angleDecay: 9 # 25->9
+    projectileSpeed: 50
     fireRate: 5.5
     shotsPerBurst: 4
+    burstFireRate: 8
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -879,3 +905,184 @@
   - type: AmmoCounter
   - type: BatterySlotRequiresToggle
     itemSlot: gun_magazine
+
+- type: entity
+  name:  SKR-WS MAR-24 "Seraphim" (5.56x45mm)
+  parent: BaseWeaponRifle
+  id: WeaponRifleSeraphim
+  description: An modern development of the imperial army. Accurate, fast and cheap automatic rifle will help crush the enemies of the empire.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Rifles/v78.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: GunWieldBonus
+    minAngle: -33
+    maxAngle: -33
+  - type: Gun
+    minAngle: 35
+    maxAngle: 45
+    angleIncrease: 1.25
+    angleDecay: 10
+    fireRate: 6
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/ak_fire.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine556x45mmFMJ
+        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/m16_magin.ogg
+        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/skm_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine556x45mmFMJ
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge556x45mmFMJ
+        priority: 1
+        whitelist:
+          tags:
+          - Cartridge556x45mmFMJ
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: _Mono/Objects/Weapons/Guns/Rifles/v78_inhands_32x.rsi
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,3,3
+    sprite: _Mono/Objects/Weapons/Guns/Rifles/v78_inhands_32x.rsi
+  - type: StaticPrice
+    price: 2000
+
+- type: entity
+  name: SKR-WS AAR-36 "Song" (5.56x45mm)
+  parent: BaseWeaponRifle
+  id: WeaponRifleSong
+  description: A modification of the Seraphim automatic rifle, created for long-range combat. It has a more accurate sight and greater destructive power, at the expense of fire rate.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Rifles/v79p.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - map: ["opticAttachment"]
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
+  - type: GunRequiresWield
+  - type: Gun
+    minAngle: 2
+    maxAngle: 6
+    angleIncrease: 0.5
+    angleDecay: 4
+    fireRate: 3.75
+    selectedMode: SemiAuto
+    damageModifier: 1.2
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/wt_fire.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine556x45mmFMJ
+        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/m16_magin.ogg
+        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/skm_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine556x45mmFMJ
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge556x45mmFMJ
+        priority: 1
+        whitelist:
+          tags:
+          - Cartridge556x45mmFMJ
+      attachment_optic:
+        insertSound: /Audio/Items/screwdriver2.ogg
+        ejectSound: /Audio/Items/screwdriver2.ogg
+        priority: 0
+        whitelist:
+          tags:
+          - MonoOpticErebusRailmount
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      attachment_optic: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: _Mono/Objects/Weapons/Guns/Rifles/v79p_inhands_32x.rsi
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,3,3
+    sprite: _Mono/Objects/Weapons/Guns/Rifles/v79p_inhands_32x.rsi
+  - type: StaticPrice
+    price: 2400
+  - type: ESAttachableGun
+    slots:
+    - name: es-gun-attachments-slot-name-optic
+      containerId: attachment_optic
+      whitelist:
+        tags:
+        - MonoOpticErebusRailmount
+  - type: ActivatableUI
+    key: enum.ESAttachableGunUiKey.Key
+    verbOnly: true
+    verbText: es-gun-attachments-verb-text
+  - type: UserInterface
+    interfaces:
+      enum.ESAttachableGunUiKey.Key:
+        type: ESGunAttachmentBui
+  - type: ESItemMapper
+    mappings:
+      opticAttachment:
+      - containerId: attachment_optic
+        state: optic2x
+        whitelist:
+          tags:
+          - MonoOptic2x
+      - containerId: attachment_optic
+        state: optic4x
+        whitelist:
+          tags:
+          - MonoOptic4x
+      - containerId: attachment_optic
+        state: optic8x
+        whitelist:
+          tags:
+          - MonoOptic8x

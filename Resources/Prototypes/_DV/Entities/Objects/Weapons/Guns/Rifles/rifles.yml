@@ -11,15 +11,20 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,3,3
   - type: GunWieldBonus
-    minAngle: -12
-    maxAngle: -18
+    minAngle: 0 # Forge-change -12->0
+    maxAngle: 0 # Forge-change -18->0
   - type: Gun
-    minAngle: 13
+    minAngle: 3 # Forge-change 13->3
     maxAngle: 20
-    angleIncrease: 5
-    angleDecay: 25
-    fireRate: 3.5 # Mono - 3.5
+    angleIncrease: 2.25 # Forge-change 5->2.25
+    angleDecay: 6 # Forge-change 25->6
+    projectileSpeed: 50 # Forge-change
+    fireRate: 4 # Forge-change 3.5->4
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

@@ -187,8 +187,20 @@
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/Rifles/novalitec1.rsi
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: -33 # Forge-change
+    maxAngle: -33 # Forge-change
   - type: Gun
-    fireRate: 5
+    minAngle: 38 # Forge-change
+    maxAngle: 52 # Forge-change
+    angleIncrease: 1.25 # Forge-change
+    angleDecay: 10 # Forge-change
+    projectileSpeed: 50 # Forge-change
+    fireRate: 6 # Forge-change
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto

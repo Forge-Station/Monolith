@@ -51,6 +51,8 @@
   components:
   - type: Item # Mono
     size: Huge
+    shape:
+    - 0,0,5,2
     sprite: Forge/Objects/Weapons/Guns/LMGs/ar400_inhands_32x.rsi
   - type: Sprite
     sprite: Forge/Objects/Weapons/Guns/LMGs/ar400.rsi
@@ -64,7 +66,18 @@
   - type: ChamberMagazineAmmoProvider # Mono
     soundRack:
       path: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
+  - type: GunRequiresWield
   - type: Gun
+    minAngle: 2
+    maxAngle: 25
+    angleIncrease: 1.25
+    angleDecay: 9
+    projectileSpeed: 50
+    fireRate: 8
+    damageModifier: 0.95
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/heavy_rifle_1.ogg # Mono
   - type: ItemSlots
@@ -97,14 +110,14 @@
     zeroVisible: true
   - type: HeldSpeedModifier
   - type: ClothingSpeedModifier
-    sprintModifier: 0.9
-    walkModifier: 0.9
+    sprintModifier: 0.95 # 0.9->0.95
+    walkModifier: 0.95 # 0.9->0.95
   - type: SpeedModifiedOnWield
-    walkModifier: 0.4
-    sprintModifier: 0.35
+    walkModifier: 0.7 # 0.4->0.7
+    sprintModifier: 0.7 # 0.35->0.7
   - type: WieldDelay
-    baseDelay: 2
-    modifiedDelay: 2
+    baseDelay: 1 # 2->1
+    modifiedDelay: 1 # 2->1
     preventFiring: true
   - type: Appearance
   - type: StaticPrice # Mono
@@ -119,6 +132,8 @@
   components:
   - type: Item # Mono
     size: Huge
+    shape:
+    - 0,0,5,2
     sprite: Forge/Objects/Weapons/Guns/LMGs/type99_inhands_32x.rsi
   - type: Sprite
     sprite: Forge/Objects/Weapons/Guns/LMGs/type99.rsi
@@ -132,7 +147,16 @@
   - type: ChamberMagazineAmmoProvider # Mono
     soundRack:
       path: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
   - type: Gun
+    minAngle: 3
+    maxAngle: 26
+    angleIncrease: 2.5
+    angleDecay: 8
+    projectileSpeed: 50
+    fireRate: 8
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/heavy_rifle_1.ogg # Mono
   - type: ItemSlots
@@ -162,6 +186,13 @@
     magState: mag
     steps: 1
     zeroVisible: true
+  - type: HeldSpeedModifier
+  - type: ClothingSpeedModifier
+    sprintModifier: 0.9
+    walkModifier: 0.9
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.6
+    sprintModifier: 0.6
   - type: WieldDelay
     baseDelay: 1
     modifiedDelay: 1

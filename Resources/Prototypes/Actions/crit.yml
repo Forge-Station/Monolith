@@ -45,3 +45,18 @@
     event: !type:CritLastWordsEvent
     startDelay: true
     useDelay: 10
+
+# Forge-Change-Start
+
+- type: entity
+  id: ActionActivateTranexamic
+  name: Activate Tranexamic Acid
+  description: Deliver a dose of Tranexamic acid to the user.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: Objects/Specific/Medical/medipen.rsi
+      state: morphen
+    event: !type:ActivateImplantEvent {}
+# Forge-Change-End

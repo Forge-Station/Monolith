@@ -51,6 +51,7 @@
       - UsspTrackingImplant # Mono
       - ForgeVoiceModuleImplant # Forge-Change
       - OverlordImplant # Forge-change
+      - TranexamicImplant # Forge-change
       deimplantFailureDamage:
         types:
 #          Cellular: 5 # 50->5 - Mono
@@ -327,3 +328,15 @@
 #  components:
 #  - type: Implanter
 #    implant: RadioImplantCentcomm
+
+# Forge imlanters - Forge-Change-Start
+
+- type: entity
+  id: TranexamicImplanter
+  parent: BaseImplantOnlyImplanter
+  suffix: Tranexamic One-Time
+  components:
+    - type: Implanter
+      implant: TranexamicImplant
+
+# Forge-Change-End

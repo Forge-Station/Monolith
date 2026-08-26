@@ -16,6 +16,7 @@ using Content.Server.Body.Components;
 using System.Linq;
 using Robust.Server.Audio;
 using Content.Shared.DoAfter; // Frontier
+using Content.Shared.Implants; /// Forge-change
 
 namespace Content.Server.Chemistry.EntitySystems;
 
@@ -32,7 +33,22 @@ public sealed partial class HypospraySystem : SharedHypospraySystem
         SubscribeLocalEvent<HyposprayComponent, MeleeHitEvent>(OnAttack);
         SubscribeLocalEvent<HyposprayComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<HyposprayComponent, HyposprayDoAfterEvent>(OnDoAfter); // Frontier - Upstream: #30704 - MIT
+        SubscribeLocalEvent<HyposprayComponent, ActivateImplantEvent>(OnImplantActivate); // Forge-change
     }
+
+/// Forge-change-start
+    private void OnImplantActivate(EntityUid uid, HyposprayComponent component, ActivateImplantEvent args)
+    {
+        if (!TryComp<TransformComponent>(uid, out var xform) || xform.ParentUid == EntityUid.Invalid)
+            return;
+
+        var target = xform.ParentUid;
+
+        Entity<HyposprayComponent> hyposprayEntity = (uid, component);
+
+        TryDoInject(hyposprayEntity, target, target);
+    }
+    /// Forge-change-end
 
     // Frontier - Upstream: #30704 - MIT
     private void OnDoAfter(Entity<HyposprayComponent> entity, ref HyposprayDoAfterEvent args)

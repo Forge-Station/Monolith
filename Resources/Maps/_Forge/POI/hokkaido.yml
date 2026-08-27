@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/27/2026 16:59:09
+  time: 08/27/2026 19:10:37
   entityCount: 5924
 maps: []
 grids:
@@ -2490,10 +2490,10 @@ entities:
             664: -5,1
     - type: SpreaderGrid
       spreadQueues:
-        Kudzu: []
         Smoke: []
         MetalFoam: []
         Puddle: []
+        Kudzu: []
     - type: GridAtmosphere
       version: 2
       data:
@@ -33339,6 +33339,13 @@ entities:
     - type: Transform
       pos: -37.5,13.5
       parent: 1
+- proto: VendingMachineCompanyCL
+  entities:
+  - uid: 4838
+    components:
+    - type: Transform
+      pos: -34.5,11.5
+      parent: 1
 - proto: VendingMachineDinnerware
   entities:
   - uid: 4908
@@ -33492,11 +33499,6 @@ entities:
     components:
     - type: Transform
       pos: -9.5,11.5
-      parent: 1
-  - uid: 4936
-    components:
-    - type: Transform
-      pos: -34.5,11.5
       parent: 1
   - uid: 4937
     components:

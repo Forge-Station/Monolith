@@ -89,7 +89,7 @@ public sealed partial class BotanySystem : EntitySystem
 
     private void OnSeedPrice(EntityUid uid, SeedComponent component, ref PriceCalculationEvent args)
     {
-        if (!TryGetSeed(component, out var seed))
+        if (!TryGetSeed(component, out var seed) || !seed.Unique)
             return;
 
         args.Price += GetCultivarExportBonus(seed);
@@ -97,12 +97,16 @@ public sealed partial class BotanySystem : EntitySystem
 
     private void OnProducePrice(EntityUid uid, ProduceComponent component, ref PriceCalculationEvent args)
     {
-        if (!TryGetSeed(component, out var seed))
+        if (!TryGetSeed(component, out var seed) || !seed.Unique)
             return;
 
         args.Price += GetCultivarExportBonus(seed) * 0.35;
     }
 
+    /// <summary>
+    /// Extra cargo value for a bred line. Stock packets (prototype seedId, Unique=false)
+    /// stay at StaticPrice so cargo seed crates cannot be bought and sold for profit.
+    /// </summary>
     public static double GetCultivarExportBonus(SeedData seed)
     {
         var bonus = Math.Max(0, seed.Potency - 10f) * 1.6;

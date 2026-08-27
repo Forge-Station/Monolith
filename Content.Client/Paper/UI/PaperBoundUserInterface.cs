@@ -52,20 +52,14 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
         base.UpdateState(state);
         var paperState = (PaperBoundUserInterfaceState) state;
         _mode = paperState.Mode;
+        if (_window != null && EntMan.TryGetComponent<PaperComponent>(Owner, out var paperComp))
+            _window.MaxInputLength = paperComp.ContentSize;
+
         var visuals = EntMan.System<PaperLanguageVisualsSystem>();
-        var contentSize = 6000;
-        if (EntMan.TryGetComponent<PaperComponent>(Owner, out var paperComp))
-            contentSize = paperComp.ContentSize;
 
-        // Forge-Change: keep already-written words on the page, only type new text below
-        if (_mode == PaperAction.Write)
-        {
-            _window?.ConfigureAppend(paperState.Text.Length,
-                paperState.Text.Length == 0 || paperState.Text.EndsWith('\n'),
-                contentSize);
-        }
-
-        if (visuals.TryFormatForReader(Owner, paperState, out var formatted))
+        // Obfuscate unknown languages only when reading. Writers need the real
+        // markup so pens (including CC / syndicate) can edit the page.
+        if (_mode != PaperAction.Write && visuals.TryFormatForReader(Owner, paperState, out var formatted))
             paperState = formatted;
 
         _window?.Populate(paperState);

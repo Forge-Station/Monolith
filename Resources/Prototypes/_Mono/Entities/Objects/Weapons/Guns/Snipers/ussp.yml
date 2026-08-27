@@ -14,6 +14,8 @@
     - map: ["opticAttachment"]
   - type: Item # Mono
     size: Huge
+    shape: # Forge-change
+    - 0,0,4,3 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Snipers/ak410_inhands_32x.rsi
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Snipers/ak410_inhands_32x.rsi
@@ -22,13 +24,17 @@
     - Back
     - suitStorage
   - type: GunWieldBonus
-    minAngle: -27
-    maxAngle: -36
+    minAngle: 0 # Forge-change -27->0
+    maxAngle: 0 # Forge-change -36->0
+  - type: GunRequiresWield # Forge-change
   - type: Gun
-    minAngle: 27
-    maxAngle: 39
-    fireRate: 2.25
-    damageModifier: 1.5
+    minAngle: 2 # Forge-change 27->2
+    maxAngle: 9 # Forge-change 39->9
+    angleIncrease: 1.75 # Forge-change
+    angleDecay: 7 # Forge-change
+    projectileSpeed: 55 # Forge-change
+    fireRate: 2.5 # Forge-change 2.25->2.5
+    damageModifier: 1 # Forge-change 1.5->1
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -121,6 +127,14 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
   - type: CursorOffsetRequiresWield
+  - type: Item # Forge-change
+    size: Huge # Forge-change
+    shape: # Forge-change
+    - 0,0,4,3 # Forge-change
+  - type: GunRequiresWield # Forge-change
+  - type: Gun # Forge-change
+    projectileSpeed: 55 # Forge-change
+    fireRate: 1.2 # Forge-change
   - type: EyeCursorOffset
     maxOffset: 1.5
     pvsIncrease: 0.15

@@ -281,8 +281,21 @@
     slots:
     - Back
     - suitStorage
+  - type: Item # Forge-change
+    size: Huge # Forge-change
+    shape: # Forge-change
+    - 0,0,4,3 # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
+  - type: GunRequiresWield # Forge-change
   - type: Gun
-    fireRate: 1.9
+    fireRate: 1.8 # Forge-change 1.9->1.8
+    projectileSpeed: 55 # Forge-change
+    angleIncrease: 1.5 # Forge-change
+    angleDecay: 2 # Forge-change
+    minAngle: 2 # Forge-change
+    maxAngle: 8 # Forge-change
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -324,8 +337,8 @@
     maxOffset: 1.5
     pvsIncrease: 0.15
   - type: SpeedModifiedOnWield # Mono
-    walkModifier: 0.95
-    sprintModifier: 0.95
+    walkModifier: 0.9 # Forge-change 0.95->0.9
+    sprintModifier: 0.9 # Forge-change 0.95->0.9
   - type: AltFireMelee
     attackType: Light
   - type: PirateBountyItem # Mono

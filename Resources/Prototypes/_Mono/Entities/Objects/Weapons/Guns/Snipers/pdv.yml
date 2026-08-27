@@ -8,9 +8,14 @@
     sprite: Objects/Weapons/Guns/Snipers/hristov.rsi
   - type: Clothing
     sprite: Objects/Weapons/Guns/Snipers/hristov.rsi
+  - type: Item # Forge-change
+    size: Ginormous # Forge-change
+    shape: # Forge-change
+    - 0,0,7,2 # Forge-change
   - type: GunRequiresWield
   - type: Gun
-    fireRate: 0.75
+    fireRate: 0.8 # Forge-change 0.75->0.8
+    projectileSpeed: 65 # Forge-change
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -24,8 +29,17 @@
     capacity: 5
     proto: Cartridge145x114mm
   - type: SpeedModifiedOnWield
-    walkModifier: 0.6
-    sprintModifier: 0.6
+    walkModifier: 0.7 # Forge-change 0.6->0.7
+    sprintModifier: 0.55 # Forge-change 0.6->0.55
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9 # Forge-change
+    sprintModifier: 0.9 # Forge-change
+  # Forge-change-start
+  - type: WieldDelay
+    baseDelay: 1.2
+    modifiedDelay: 1.2
+    preventFiring: true
+  # Forge-change-end
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 7

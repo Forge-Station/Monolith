@@ -12,14 +12,14 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -95
+    minAngle: -1
+    maxAngle: -2
   - type: Gun
-    minAngle: 5
-    maxAngle: 95
+    minAngle: 1
+    maxAngle: 2
     angleIncrease: 27
     angleDecay: 10
-    fireRate: 0.4
+    fireRate: 0.6 # Forge-change 0.4->0.6
     selectedMode: SemiAuto
     availableModes: SemiAuto
     soundGunshot:
@@ -59,12 +59,23 @@
     sprite: _Mono/Objects/Weapons/Guns/Snipers/shenzhen_inhands_32x.rsi
   - type: Item
     size: Ginormous
+    shape: # Forge-change
+    - 0,0,7,2 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Snipers/shenzhen_inhands_32x.rsi
   - type: StaticPrice
     price: 2400
   - type: SpeedModifiedOnWield
-    walkModifier: 0.3
-    sprintModifier: 0.3
+    walkModifier: 0.6 # Forge-change 0.3->0.6
+    sprintModifier: 0.45 # Forge-change 0.3->0.45
+  # Forge-change-start
+  - type: WieldDelay
+    baseDelay: 1.2
+    modifiedDelay: 1.2
+    preventFiring: true
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9 # Forge-change
+    sprintModifier: 0.9 # Forge-change
+  # Forge-change-end
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 7
@@ -90,15 +101,17 @@
     - map: ["gripAttachment"]
     - map: ["opticAttachment"]
   - type: GunWieldBonus
-    minAngle: -21
-    maxAngle: -47
+    minAngle: 0 # Forge-change -21->0
+    maxAngle: 0 # Forge-change -47->0
+  - type: GunRequiresWield # Forge-change
   - type: Gun
-    minAngle: 21
-    maxAngle: 48
-    angleIncrease: 27
-    angleDecay: 2
-    fireRate: 3 # 180 rpm
-    damageModifier: 1.5
+    minAngle: 2 # Forge-change 21->2
+    maxAngle: 18 # Forge-change 48->18
+    angleIncrease: 2.25 # Forge-change 27->2.25
+    angleDecay: 10 # Forge-change 2->10
+    fireRate: 2.5 # Forge-change 3->2.5
+    projectileSpeed: 60 # Forge-change
+    damageModifier: 1 # Forge-change 1.5->1
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -154,6 +167,9 @@
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/xian_inhands_32x.rsi
   - type: Item
+    size: Huge # Forge-change
+    shape: # Forge-change
+    - 0,0,4,3 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Rifles/xian_inhands_32x.rsi
   - type: StaticPrice
     price: 2400
@@ -231,14 +247,20 @@
     - map: ["opticAttachment"] # Mono
   - type: Clothing
     sprite: _Harmony/Objects/Weapons/Guns/Rifles/bandit.rsi
+  - type: Item # Forge-change
+    size: Huge # Forge-change
+    shape: # Forge-change
+    - 0,0,4,3 # Forge-change
   - type: GunWieldBonus # Mono
-    minAngle: -32
-    maxAngle: -51
+    minAngle: 0 # Forge-change -32->0
+    maxAngle: 0 # Forge-change -51->0
+  - type: GunRequiresWield # Forge-change
   - type: Gun
-    minAngle: 32 # Mono
-    maxAngle: 54 # Mono
-    angleIncrease: 14
-    angleDecay: 5
+    minAngle: 1 # Forge-change 32->1
+    maxAngle: 9 # Forge-change 51->9
+    angleIncrease: 1.5 # Forge-change 14->1.5
+    angleDecay: 8 # Forge-change 5->8
+    projectileSpeed: 60 # Forge-change
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

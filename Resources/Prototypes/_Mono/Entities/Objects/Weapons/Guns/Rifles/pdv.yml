@@ -485,8 +485,20 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item # Forge-change
+    size: Huge # Forge-change
+    shape: # Forge-change
+    - 0,0,5,2 # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change -3->0
+    maxAngle: 0 # Forge-change -54->0
   - type: Gun
-    fireRate: 1.7
+    minAngle: 4 # Forge-change 3->4
+    maxAngle: 21 # Forge-change 54->21
+    angleIncrease: 4 # Forge-change 5->4
+    angleDecay: 6 # Forge-change 25->6
+    fireRate: 2.8 # Forge-change 1.7->2.8
+    projectileSpeed: 55 # Forge-change
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
   - type: ChamberMagazineAmmoProvider
@@ -515,6 +527,15 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  # Forge-change-start
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.75
+    sprintModifier: 0.75
+  - type: WieldDelay
+    baseDelay: 1
+    modifiedDelay: 1
+    preventFiring: true
+  # Forge-change-end
   - type: MagazineVisuals
     magState: mag
     steps: 1

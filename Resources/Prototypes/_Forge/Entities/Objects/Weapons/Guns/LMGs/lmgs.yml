@@ -211,18 +211,19 @@
   - type: Item
     size: Huge
     shape:
-    - 0,0,4,4
+    - 0,0,5,2
     sprite: Forge/Objects/Weapons/Guns/LMGs/heavion_inhands.rsi
   - type: Wieldable
   - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -20
+    minAngle: 0 # -20->0
+    maxAngle: 0 # -20->0
   - type: Gun
-    minAngle: 24
-    maxAngle: 36
-    angleIncrease: 4
-    angleDecay: 16
-    fireRate: 5
+    minAngle: 1 # 24->1
+    maxAngle: 20 # 36->20
+    angleIncrease: 1.5 # 4->1.5
+    angleDecay: 8 # 16->8
+    fireRate: 6 # 5->6
+    projectileSpeed: 50
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -255,9 +256,16 @@
     - back
     - suitStorage
   - type: GunRequiresWield
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: WieldDelay
+    baseDelay: 0.8
+    modifiedDelay: 0.8
+    preventFiring: true
   - type: SpeedModifiedOnWield
-    walkModifier: 0.7
-    sprintModifier: 0.6
+    walkModifier: 0.9 # 0.7->0.9
+    sprintModifier: 0.75 # 0.6->0.75
   - type: AmmoCounter
   - type: BatterySlotRequiresToggle
     itemSlot: gun_magazine

@@ -18,4 +18,6 @@
   - UllmanSniperRifle
   - UllmanMagazine135x110mm
   - UllmanMagazine135x110mmEmpty
-  - UllmanAmmunitionBox135x110mm
+  - UllmanMagazine135x110mmHE
+  - AmmoBox135x110mmHE
+  - AmmoBox135x110mm

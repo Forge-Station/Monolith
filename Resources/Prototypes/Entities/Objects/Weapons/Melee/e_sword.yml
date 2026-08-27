@@ -118,6 +118,7 @@
     damage:
       types:
         Blunt: 4.5
+    armorPenetration: 0.3 # Forge-change
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
@@ -355,6 +356,7 @@
     damage:
       types:
         Blunt: 4.5
+    armorPenetration: 0.3 # Forge-change
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_sword_double.rsi
     layers:

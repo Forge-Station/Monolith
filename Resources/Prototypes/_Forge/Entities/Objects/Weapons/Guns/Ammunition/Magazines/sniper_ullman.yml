@@ -47,3 +47,11 @@
   components:
   - type: BallisticAmmoProvider
     proto: Cartridge135x110mm
+
+- type: entity
+  id: ForgeMagazineUllman135x110mmHE
+  name: "magazine (13.5x110mm HE)"
+  parent: BaseMagazineUllman135x110mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge135x110mmHE

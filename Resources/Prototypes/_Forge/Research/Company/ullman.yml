@@ -45,7 +45,9 @@
   - UllmanSniperRifle
   - UllmanMagazine135x110mm
   - UllmanMagazine135x110mmEmpty
+  - UllmanMagazine135x110mmHE
   - AmmoBox135x110mm
+  - AmmoBox135x110mmHE
   technologyPrerequisites:
   - UllmanWeaponHiEnd
   position: 16, 1

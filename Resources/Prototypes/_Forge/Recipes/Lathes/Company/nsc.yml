@@ -116,7 +116,8 @@
   materials:
     Steel: 3000
     Plasteel: 1500
-    Plastitanium: 500
+    Plastitanium: 2000
+    Diamond: 200
     Plastic: 400
     Silver: 400
     Gold: 200
@@ -143,16 +144,6 @@
 
 - type: latheRecipe
   parent: NSCRecipe
-  id: Magazine135x110mmAP
-  result: Magazine135x110mmAP
-  completetime: 8
-  materials:
-    Steel: 600
-    Plastitanium: 200
-    Silver: 150
-
-- type: latheRecipe
-  parent: NSCRecipe
   id: AmmoBox135x110mm
   result: AmmoBox135x110mm
   completetime: 6
@@ -170,16 +161,6 @@
     Steel: 2000
     Silver: 1000
     Plasma: 1400
-
-- type: latheRecipe
-  parent: NSCRecipe
-  id: AmmoBox135x110mmAP
-  result: AmmoBox135x110mmAP
-  completetime: 6
-  materials:
-    Steel: 2400
-    Plastitanium: 800
-    Silver: 600
 
 - type: latheRecipe
   parent: NSCRecipe

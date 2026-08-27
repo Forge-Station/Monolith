@@ -848,24 +848,25 @@
   description: An improved energy machine gun with reinforced components for sustained fire. Uses specialized power cells.
   components:
   - type: Item
-    size: Huge
+    size: Large
     shape:
-    - 0,0,4,2
+    - 0,0,3,3
     sprite: Forge/Objects/Weapons/Guns/Rifles/union_inhands.rsi
   - type: Wieldable
   - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -20
+    minAngle: 0 # -20->0
+    maxAngle: 0 # -20->0
   - type: Gun
-    minAngle: 21
-    maxAngle: 32
-    angleIncrease: 4
-    angleDecay: 16
-    fireRate: 6
+    minAngle: 1 # 21->1
+    maxAngle: 15 # 32->15
+    angleIncrease: 1 # 5->1
+    angleDecay: 12 # 25->12
+    fireRate: 5 # 6->5
+    projectileSpeed: 50
     selectedMode: Burst
     shotsPerBurst: 3
-    burstCooldown: 0.5
-    burstFireRate: 12
+    burstCooldown: 0.4 # 0.5->0.4
+    burstFireRate: 10 # 12->10
     availableModes:
     - SemiAuto
     - Burst
@@ -900,8 +901,8 @@
     - suitStorage
   - type: GunRequiresWield
   - type: SpeedModifiedOnWield
-    walkModifier: 0.7
-    sprintModifier: 0.6
+    walkModifier: 1 # 0.7->0.1
+    sprintModifier: 0.95 # 0.6->0.95
   - type: AmmoCounter
   - type: BatterySlotRequiresToggle
     itemSlot: gun_magazine

@@ -102,20 +102,30 @@
     Steel: 3000
     Glass: 1500
     Plasteel: 4000
-    Plastitanium: 3000
-    Diamond: 100
+    Plastitanium: 2000
+    Diamond: 200
 
 - type: latheRecipe
   id: UllmanMagazine135x110mm
   result: ForgeMagazineUllman135x110mm
-  completetime: 4
+  completetime: 8
   materials:
-    Steel: 1000
-    Plasteel: 500
+    Steel: 500
+    Plasteel: 400
+    Silver: 150
+
+- type: latheRecipe
+  id: UllmanMagazine135x110mmHE
+  result: ForgeMagazineUllman135x110mmHE
+  completetime: 8
+  materials:
+    Steel: 500
+    Silver: 250
+    Plasma: 350
 
 - type: latheRecipe
   id: UllmanMagazine135x110mmEmpty
   result: ForgeMagazineUllman135x110mmEmpty
-  completetime: 4
+  completetime: 8
   materials:
-    Steel: 750
+    Steel: 300

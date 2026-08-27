@@ -56,7 +56,8 @@ research-technology-empire-prototype-stealh = Военно-разведыват�
 research-technology-empire-basic-guns = Базовое вооружение
 research-technology-empire-subsonic = Безгильзовое вооружение
 research-technology-empire-advanced-guns = Продвинутое вооружение
-research-technology-empire-heavy-weapons = Тяжелое вооружение
+research-technology-empire-advanced-energy-guns = Продвинутое энергетическое оружие
+research-technology-empire-heavy-weapons = Эксперементальное вооружение
 research-technology-empire-melee-weapons = Продвинутое вооружение ближнего боя
 
 research-technology-empire-vouchers-t1-germes = Технология сборки "Гермес ES"

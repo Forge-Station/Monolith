@@ -15,39 +15,39 @@
       syndrome: ChronicPain
       severity: 90
 
-# - type: trait #не работает
-#   id: IpcLightrait
-#   name: trait-ipc-light-name
-#   description: trait-ipc-light-desc
-#   category: Physical
-#   cost: 2
-#   speciesBlacklist:
-#   - Human
-#   - Chitinid
-#   - Oni
-#   - Vulpkanin
-#   - Vox
-#   - Diona
-#   - Moth
-#   - Goblin
-#   - Arachnid
-#   - Resomi
-#   - Harpy
-#   - Reptilian
-#   - Hydrakin
-#   - Rodentia
-#   - Dwarf
-#   - SlimePerson
-#   - Felinid
-#   - Tajaran
-#   - Demon
-#   - Skrell
-#   - Ariral
-#   blacklist:
-#     components:
-#     - BorgChassis
-#   traitGear: IpcLightImplanter
-#   components: {}
+- type: trait
+  id: IpcLightrait
+  name: trait-ipc-light-name
+  description: trait-ipc-light-desc
+  category: Physical
+  cost: 2
+  speciesBlacklist:
+  - Human
+  - Chitinid
+  - Oni
+  - Vulpkanin
+  - Vox
+  - Diona
+  - Moth
+  - Goblin
+  - Arachnid
+  - Resomi
+  - Harpy
+  - Reptilian
+  - Hydrakin
+  - Rodentia
+  - Dwarf
+  - SlimePerson
+  - Felinid
+  - Tajaran
+  - Demon
+  - Skrell
+  - Ariral
+  blacklist:
+    components:
+    - BorgChassis
+  traitGear: IpcLightImplanter
+  #components: {}
  
 - type: trait
   id: IpcSoftBody

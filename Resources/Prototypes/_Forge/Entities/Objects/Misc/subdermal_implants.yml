@@ -209,8 +209,8 @@
     - type: SubdermalImplant
       implantAction: ActionToggleLight
       whitelist:
-        species:
-          - Ipc
+        components:
+          - DeadStartupButton #Only IPC
     - type: PointLight
       enabled: false
       radius: 10

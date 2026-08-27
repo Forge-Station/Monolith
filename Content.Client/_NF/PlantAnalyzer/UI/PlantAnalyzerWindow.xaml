@@ -25,6 +25,7 @@
 
                     <BoxContainer Orientation="Horizontal" Margin="10 8 10 0">
                         <Label Name="PlantNameLabel" StyleClasses="ConsoleSubHeading" HorizontalExpand="True"/>
+                        <BoxContainer Name="PrintLabelHost" MinHeight="26" Margin="0 0 8 0"/>
                         <Label Name="StatusLabel" StyleClasses="ConsoleText"/>
                     </BoxContainer>
 

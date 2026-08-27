@@ -100,3 +100,7 @@ plant-analyzer-field-low-p = Мин. давление
 plant-analyzer-field-high-p = Макс. давление
 plant-analyzer-field-pest-tol = Устойчивость к вредителям
 plant-analyzer-field-weed-tol = Устойчивость к сорнякам
+plant-analyzer-print-label = Этикетка
+plant-analyzer-print-ok = Пакет подписан: {$label}
+plant-analyzer-print-not-packet = Чтобы напечатать этикетку, просканируйте пакет семян.
+plant-analyzer-print-no-target = Нечего подписывать.

@@ -18,6 +18,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
     {
         base.Open();
         _window = this.CreateWindowCenteredLeft<PlantAnalyzerWindow>();
+        _window.OnPrintLabel += () => SendMessage(new PlantAnalyzerPrintLabelMessage());
     }
 
     protected override void ReceiveMessage(BoundUserInterfaceMessage message)

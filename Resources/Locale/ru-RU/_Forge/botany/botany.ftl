@@ -83,10 +83,93 @@ reagent-desc-atmo-phyte = Газоперерабатывающий фитохи�
 necrotoxin-sap-warning = Вены жжёт растительный токсин!
 
 ent-ClothingEyesGlassesBotany = ботанические очки анализатора
-    .desc = Зелёные очки, показывающие здоровье растений в гидролотках.
+    .desc = Зелёные очки: полоска HP и квадраты статуса на лотках — синий вода, зелёный сорняки, жёлтый урожай, золотой радиация.
 ent-AgroScanCartridge = картридж АгроСкан
     .desc = Программа, позволяющая КПК сканировать семена и лотки как анализатор растений.
 ent-ComputerHydroponics = консоль гидролотков
-    .desc = Показывает все лотки, подключённые сетевым конфигуратором: здоровье, атмосферу и мутации.
+    .desc = Список лотков с фильтрами урожай / вода / радиация / хищное и журналом сортов.
 ent-HydroponicsConsoleCircuitboard = плата консоли гидролотков
     .desc = Печатная плата компьютера для консоли гидролотков.
+ent-BotanyCultivarDisk = дискета сорта
+    .desc = Хранит именованную линию растения для журнала консоли гидропоники.
+
+hydroponics-console-alerts = Урожай {$harvest} · Вода {$water} · Рад {$rad} · Хищное {$grab}
+hydroponics-console-filter-all = Все
+hydroponics-console-filter-harvest = Урожай
+hydroponics-console-filter-water = Мало воды
+hydroponics-console-filter-rad = Радиация
+hydroponics-console-filter-grab = Хищное
+hydroponics-console-view-trays = Лотки
+hydroponics-console-view-journal = Журнал ({$count})
+hydroponics-console-journal-header = Сорта
+hydroponics-console-journal-empty = Нет сохранённых линий. Выберите лоток и нажмите «Сохранить линию».
+hydroponics-console-journal-none = Выберите сохранённую линию.
+hydroponics-console-journal-detail = Линия сорта
+hydroponics-console-journal-name-placeholder = Имя линии
+hydroponics-console-save-line = Сохранить линию
+hydroponics-console-rename-line = Переименовать
+hydroponics-console-print-packet = Печать пакета
+hydroponics-console-eject-disk = Дискета
+hydroponics-console-delete-line = Удалить
+hydroponics-console-cycle-light = День/тень
+hydroponics-console-field-light-mode = Свет
+hydroponics-console-field-ideal-light = Идеальный свет
+hydroponics-console-save-ok = Сохранена линия «{$name}».
+hydroponics-console-save-empty = В лотке нет растения.
+hydroponics-console-journal-full = Журнал полон (24 линии). Удалите одну.
+hydroponics-console-print-packet-ok = Напечатан пакет семян «{$name}».
+hydroponics-console-eject-disk-ok = «{$name}» записана на дискету.
+hydroponics-console-disk-blank = Дискета пустая.
+hydroponics-console-disk-imported = Импортирована линия «{$name}».
+
+botany-cultivar-disk-blank = Дискета пустая.
+botany-cultivar-disk-contents = Линия: [color=lightgreen]{$name}[/color] ({$plant})
+
+plant-holder-light-ambient = обычный
+plant-holder-light-day = день
+plant-holder-light-shade = тень
+plant-holder-light-verb = Свет: {$mode}
+plant-holder-light-mode-set = Режим света лотка: {$mode}.
+plant-holder-light-mode-examine = Режим света: [color=lightgreen]{$mode}[/color]
+
+plant-mutation-add-chemical-guidebook = Добавляет {$reagent} в урожай.
+plant-mutation-add-consume-gas-guidebook = Растение начинает потреблять {$gas}.
+plant-mutation-add-exude-gas-guidebook = Растение начинает выделять {$gas}.
+reagent-effect-guidebook-plant-lock-genes =
+    { $chance ->
+        [1] Закрепляет
+        *[other] закрепляют
+    } гены растения: мутаген больше не крутит эту линию
+
+reagent-name-gene-stabilizer = стабилизатор генов
+reagent-desc-gene-stabilizer = Ботанический фиксатив. Пшикни на живой куст — геном линии закрепится, нестабильный мутаген её больше не крутит.
+
+ent-GeneStabilizerChemistryBottle = бутылочка стабилизатора генов
+    .desc = Закрепляет гены растения: мутаген больше не крутит эту линию.
+ent-AloeCream1 = крем из алоэ
+    .desc = Мазь от ожогов.
+    .suffix = Одна
+ent-BotanyDriedProduce = сушёный урожай
+    .desc = Высушенная зелень. Цвет и вкус как у сорта, с которого сняли.
+
+hydroponics-console-rename-tray = Переименовать лоток
+hydroponics-console-tray-name-placeholder = пшеница-рад-3
+hydroponics-console-rename-tray-ok = Лоток переименован: «{$name}».
+hydroponics-console-warn-pest-eater = санитар
+hydroponics-console-warn-locked = гены закреплены
+
+plant-holder-component-pest-eater-warning = [color=lightgreen]Растение жрёт сорняки и жуков в лотке.[/color]
+plant-holder-component-gene-locked-warning = [color=cyan]Гены этой линии закреплены. Мутаген её не крутит.[/color]
+plant-analyzer-mutation-pest-eater = Санитар
+plant-analyzer-mutation-gene-locked = Гены закреплены
+
+botany-swab-from-packet = Вы снимаете пыльцу с пакета семян.
+botany-swab-graft-packet = Пыльца привита: мутации перешли на пакет {$name}.
+
+seed-component-gene-locked = [color=cyan]Гены закреплены — мутаген эту линию не крутит.[/color]
+
+botany-plant-cloth-name = волокно ({$name})
+botany-plant-juice-name = сок ({$name})
+botany-plant-dried-name = сушёный {$name}
+botany-aloe-tea-name = чай из алоэ ({$name})
+botany-antirad-tea-name = антирад-чай ({$name})

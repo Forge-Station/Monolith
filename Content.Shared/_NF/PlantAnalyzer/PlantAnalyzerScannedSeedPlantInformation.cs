@@ -1,3 +1,4 @@
+using Content.Shared._Forge.Botany;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._NF.PlantAnalyzer;
@@ -27,6 +28,7 @@ public sealed class PlantAnalyzerScannedSeedPlantInformation : BoundUserInterfac
     public bool ImproperPressure;
     public bool ImproperLight;
     public bool MissingGas;
+    public HydroponicsLightMode LightMode;
 
     //Basic tab
     public string? SeedName;
@@ -70,6 +72,8 @@ public enum MutationFlags : ushort
     Unviable = 16,
     Radioactive = 32,
     CarnivorousGrab = 64,
+    CarnivorousPestEater = 128,
+    GeneLocked = 256,
 }
 
 [Flags]

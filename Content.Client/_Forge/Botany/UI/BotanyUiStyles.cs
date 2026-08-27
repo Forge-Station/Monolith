@@ -109,4 +109,19 @@ public sealed class BotanyUiStyles
             Margin = new Thickness(0, 10, 0, 4)
         };
     }
+
+    public BotanyChipButton Chip(string text, bool selected)
+    {
+        var button = new BotanyChipButton(this, text, selected)
+        {
+            ToggleMode = true,
+            Margin = new Thickness(0, 0, 6, 0)
+        };
+        return button;
+    }
+
+    public BotanyChipButton Action(string text)
+    {
+        return new BotanyChipButton(this, text);
+    }
 }

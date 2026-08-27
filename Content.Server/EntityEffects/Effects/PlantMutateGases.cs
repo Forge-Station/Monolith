@@ -159,3 +159,67 @@ public static class PlantGasMutationHelpers
         }
     }
 }
+
+/// <summary>
+/// Adds a specific consumed gas (not a weighted random pick). Used for useful niches like CO2 filters.
+/// </summary>
+public sealed partial class PlantAddConsumeGas : EntityEffect
+{
+    [DataField(required: true)]
+    public Gas Gas;
+
+    [DataField]
+    public float MinValue = 0.08f;
+
+    [DataField]
+    public float MaxValue = 0.2f;
+
+    public override void Effect(EntityEffectBaseArgs args)
+    {
+        if (!args.EntityManager.TryGetComponent(args.TargetEntity, out PlantHolderComponent? holder) ||
+            holder.Seed == null)
+            return;
+
+        var random = IoCManager.Resolve<IRobustRandom>();
+        var amount = random.NextFloat(MinValue, MaxValue);
+        PlantGasMutationHelpers.AddGas(holder.Seed.ConsumeGasses, Gas, amount);
+        PlantGasMutationHelpers.ApplyAtmosSideEffects(holder.Seed, Gas, exude: false);
+    }
+
+    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    {
+        return Loc.GetString("plant-mutation-add-consume-gas-guidebook", ("gas", Gas.ToString()));
+    }
+}
+
+/// <summary>
+/// Adds a specific exuded gas. Used for useful niches like oxygen-producing plants.
+/// </summary>
+public sealed partial class PlantAddExudeGas : EntityEffect
+{
+    [DataField(required: true)]
+    public Gas Gas;
+
+    [DataField]
+    public float MinValue = 0.08f;
+
+    [DataField]
+    public float MaxValue = 0.25f;
+
+    public override void Effect(EntityEffectBaseArgs args)
+    {
+        if (!args.EntityManager.TryGetComponent(args.TargetEntity, out PlantHolderComponent? holder) ||
+            holder.Seed == null)
+            return;
+
+        var random = IoCManager.Resolve<IRobustRandom>();
+        var amount = random.NextFloat(MinValue, MaxValue);
+        PlantGasMutationHelpers.AddGas(holder.Seed.ExudeGasses, Gas, amount);
+        PlantGasMutationHelpers.ApplyAtmosSideEffects(holder.Seed, Gas, exude: true);
+    }
+
+    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    {
+        return Loc.GetString("plant-mutation-add-exude-gas-guidebook", ("gas", Gas.ToString()));
+    }
+}

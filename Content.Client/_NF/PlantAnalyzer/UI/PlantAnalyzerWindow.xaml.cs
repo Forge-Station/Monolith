@@ -17,6 +17,7 @@ public sealed partial class PlantAnalyzerWindow : BaseWindow
     [Dependency] private readonly IResourceCache _resCache = default!;
 
     private readonly BotanyUiStyles _styles;
+    private readonly BotanyChipButton _printLabel;
     private PlantAnalyzerScannedSeedPlantInformation? _scan;
     private AnalyzerSection _section = AnalyzerSection.Overview;
 
@@ -28,6 +29,8 @@ public sealed partial class PlantAnalyzerWindow : BaseWindow
         Tolerances,
         Mutations
     }
+
+    public event Action? OnPrintLabel;
 
     public PlantAnalyzerWindow()
     {
@@ -44,6 +47,11 @@ public sealed partial class PlantAnalyzerWindow : BaseWindow
         StatusLabel.Text = string.Empty;
 
         CloseButton.OnPressed += _ => Close();
+        _printLabel = _styles.Action(Loc.GetString("plant-analyzer-print-label"));
+        _printLabel.Margin = new Thickness(0, 0, 0, 0);
+        _printLabel.OnPressed += _ => OnPrintLabel?.Invoke();
+        _printLabel.Disabled = true;
+        PrintLabelHost.AddChild(_printLabel);
         ApplyChrome();
         RebuildSectionList();
         ShowNoData();
@@ -58,12 +66,14 @@ public sealed partial class PlantAnalyzerWindow : BaseWindow
             _scan = null;
             PlantNameLabel.Text = Loc.GetString("plant-analyzer-window-no-seed-information-text");
             StatusLabel.Text = string.Empty;
+            _printLabel.Disabled = true;
             RebuildSectionList();
             ShowNoData();
             return;
         }
 
         _scan = msg;
+        _printLabel.Disabled = msg.IsTray || msg.TargetEntity == null;
         var seedName = Loc.GetString(string.IsNullOrEmpty(msg.SeedName) ? "plant-analyzer-unknown-plant" : msg.SeedName);
         PlantNameLabel.Text = msg.IsTray
             ? Loc.GetString("plant-analyzer-window-label-name-scanned-plant", ("seedName", seedName))
@@ -189,6 +199,9 @@ public sealed partial class PlantAnalyzerWindow : BaseWindow
         DetailContainer.AddChild(_styles.KeyValue(Loc.GetString("hydroponics-console-field-toxins"), $"{msg.Toxins:0}", msg.Toxins >= 40 ? BotanyUiTheme.Danger : BotanyUiTheme.Text));
         DetailContainer.AddChild(_styles.KeyValue(Loc.GetString("hydroponics-console-field-weeds"), $"{msg.WeedLevel:0.#}", msg.WeedLevel >= 5 ? BotanyUiTheme.Warning : BotanyUiTheme.Text));
         DetailContainer.AddChild(_styles.KeyValue(Loc.GetString("hydroponics-console-field-pests"), $"{msg.PestLevel:0.#}", msg.PestLevel >= 5 ? BotanyUiTheme.Warning : BotanyUiTheme.Text));
+        DetailContainer.AddChild(_styles.KeyValue(Loc.GetString("hydroponics-console-field-light-mode"),
+            Loc.GetString($"plant-holder-light-{msg.LightMode.ToString().ToLowerInvariant()}"),
+            msg.ImproperLight ? BotanyUiTheme.Warning : BotanyUiTheme.Text));
 
         DetailContainer.AddChild(_styles.Section(Loc.GetString("hydroponics-console-section-warnings")));
         var extra = new List<string>();
@@ -252,6 +265,8 @@ public sealed partial class PlantAnalyzerWindow : BaseWindow
         flags.Add((Loc.GetString("plant-analyzer-mutation-unviable"), msg.Mutations.HasFlag(MutationFlags.Unviable)));
         flags.Add((Loc.GetString("plant-analyzer-mutation-radioactive"), msg.Mutations.HasFlag(MutationFlags.Radioactive)));
         flags.Add((Loc.GetString("plant-analyzer-mutation-grabber"), msg.Mutations.HasFlag(MutationFlags.CarnivorousGrab)));
+        flags.Add((Loc.GetString("plant-analyzer-mutation-pest-eater"), msg.Mutations.HasFlag(MutationFlags.CarnivorousPestEater)));
+        flags.Add((Loc.GetString("plant-analyzer-mutation-gene-locked"), msg.Mutations.HasFlag(MutationFlags.GeneLocked)));
 
         var any = false;
         foreach (var (name, on) in flags)

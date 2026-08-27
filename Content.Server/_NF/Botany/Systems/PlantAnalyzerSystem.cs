@@ -27,6 +27,8 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly Content.Server.Labels.LabelSystem _label = default!;
+    [Dependency] private readonly Content.Server.Popups.PopupSystem _popup = default!;
 
     private TimeSpan _nextUpdate = TimeSpan.Zero;
     private static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
@@ -42,6 +44,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         Subs.BuiEvents<PlantAnalyzerComponent>(PlantAnalyzerUiKey.Key, subs =>
         {
             subs.Event<BoundUIClosedEvent>(OnPlantAnalyzerUiClosed);
+            subs.Event<PlantAnalyzerPrintLabelMessage>(OnPrintLabel);
         });
     }
 
@@ -88,6 +91,54 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         UpdateScannedUser(ent, args.Args.Target.Value);
 
         args.Handled = true;
+    }
+
+    private void OnPrintLabel(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerPrintLabelMessage args)
+    {
+        if (ent.Comp.ScannedEntity is not { } target || TerminatingOrDeleted(target))
+        {
+            _popup.PopupEntity(Loc.GetString("plant-analyzer-print-no-target"), ent, args.Actor);
+            return;
+        }
+
+        if (!TryComp<SeedComponent>(target, out var seedComp))
+        {
+            _popup.PopupEntity(Loc.GetString("plant-analyzer-print-not-packet"), ent, args.Actor);
+            return;
+        }
+
+        SeedData? seed = null;
+        if (seedComp.Seed != null)
+            seed = seedComp.Seed;
+        else if (seedComp.SeedId != null && _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? proto))
+            seed = proto;
+
+        if (seed == null)
+        {
+            _popup.PopupEntity(Loc.GetString("plant-analyzer-print-no-target"), ent, args.Actor);
+            return;
+        }
+
+        var label = BuildSeedLabel(seed);
+        _label.Label(target, label);
+        _popup.PopupEntity(Loc.GetString("plant-analyzer-print-ok", ("label", label)), ent, args.Actor);
+    }
+
+    private static string BuildSeedLabel(SeedData seed)
+    {
+        var name = Robust.Shared.Localization.Loc.GetString(seed.Name);
+        var bits = new List<string> { $"P{seed.Potency:0}" };
+        if (seed.Radioactive)
+            bits.Add("rad");
+        if (seed.CarnivorousGrab)
+            bits.Add("grab");
+        if (seed.Ligneous)
+            bits.Add("wood");
+        foreach (var chem in seed.Chemicals.Keys.Take(2))
+            bits.Add(chem);
+
+        var label = $"{name} {string.Join(" ", bits)}";
+        return label.Length <= 48 ? label : label[..48];
     }
 
     private void OnPlantAnalyzerUiClosed(EntityUid uid, PlantAnalyzerComponent comp, BoundUIClosedEvent args)
@@ -248,6 +299,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         ret.ImproperPressure = plantComp.ImproperPressure;
         ret.ImproperLight = plantComp.ImproperLight;
         ret.MissingGas = plantComp.MissingGas > 0;
+        ret.LightMode = plantComp.LightMode;
     }
 
     /// <summary>
@@ -341,6 +393,10 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
             ret |= MutationFlags.Radioactive;
         if (plant.CarnivorousGrab)
             ret |= MutationFlags.CarnivorousGrab;
+        if (plant.CarnivorousPestEater)
+            ret |= MutationFlags.CarnivorousPestEater;
+        if (plant.GeneLocked)
+            ret |= MutationFlags.GeneLocked;
 
         return ret;
     }

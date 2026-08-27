@@ -14,5 +14,7 @@ namespace Content.Shared.Botany
         HarvestLight,
         HealthPercent,
         HasPlant,
+        WeedsHigh,
+        Radioactive,
     }
 }

@@ -30,6 +30,15 @@
                                HorizontalExpand="True" HorizontalAlignment="Right"/>
                     </BoxContainer>
 
+                    <Label Name="AlertLabel" StyleClasses="ConsoleText" Margin="10 4 10 0"/>
+
+                    <BoxContainer Name="ViewBar" Orientation="Horizontal" Margin="10 4 10 0"/>
+                    <BoxContainer Name="FilterBar" Orientation="Horizontal" Margin="10 4 10 0"/>
+
+                    <BoxContainer Name="JournalToolbar" Orientation="Horizontal" Visible="False" Margin="10 4 10 0">
+                        <LineEdit Name="LineNameEdit" HorizontalExpand="True" MinHeight="26" Margin="0 0 8 0"/>
+                    </BoxContainer>
+
                     <PanelContainer Name="MainDivider" StyleClasses="LowDivider" HorizontalExpand="True" Margin="10 6 10 6" SetHeight="2"/>
 
                     <BoxContainer Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="True" Margin="10 0 10 10">

@@ -83,10 +83,93 @@ reagent-desc-atmo-phyte = Gas-processing phytochemical from atmosphere-mutated p
 necrotoxin-sap-warning = Your veins burn with plant toxins!
 
 ent-ClothingEyesGlassesBotany = botanical analyzer glasses
-    .desc = Green-tinted goggles that overlay plant health on hydroponics trays.
+    .desc = Green-tinted goggles that overlay plant health and status squares on hydroponics trays: blue water, green weeds, yellow harvest, gold radiation.
 ent-AgroScanCartridge = AgroScan cartridge
     .desc = A program that lets a PDA scan seeds and hydroponics trays like a plant analyzer.
 ent-ComputerHydroponics = hydroponics tray console
-    .desc = Lists every hydroponics tray linked with a network configurator and reports plant health, atmosphere needs, and mutations.
+    .desc = Lists linked trays with harvest / water / radiation / grab alerts, and stores named cultivar lines.
 ent-HydroponicsConsoleCircuitboard = hydroponics tray console board
     .desc = A computer printed circuit board for a hydroponics tray console.
+ent-BotanyCultivarDisk = cultivar disk
+    .desc = Stores a named plant line for the hydroponics console journal.
+
+hydroponics-console-alerts = Harvest {$harvest} · Water {$water} · Rad {$rad} · Grab {$grab}
+hydroponics-console-filter-all = All
+hydroponics-console-filter-harvest = Harvest
+hydroponics-console-filter-water = Low water
+hydroponics-console-filter-rad = Radiation
+hydroponics-console-filter-grab = Carnivorous
+hydroponics-console-view-trays = Trays
+hydroponics-console-view-journal = Journal ({$count})
+hydroponics-console-journal-header = Cultivars
+hydroponics-console-journal-empty = No saved lines. Scan a tray and press Save line.
+hydroponics-console-journal-none = Select a saved line.
+hydroponics-console-journal-detail = Cultivar line
+hydroponics-console-journal-name-placeholder = Line name
+hydroponics-console-save-line = Save line
+hydroponics-console-rename-line = Rename
+hydroponics-console-print-packet = Print packet
+hydroponics-console-eject-disk = Eject disk
+hydroponics-console-delete-line = Delete
+hydroponics-console-cycle-light = Cycle day/shade
+hydroponics-console-field-light-mode = Light mode
+hydroponics-console-field-ideal-light = Ideal light
+hydroponics-console-save-ok = Saved cultivar "{$name}".
+hydroponics-console-save-empty = That tray has no plant to save.
+hydroponics-console-journal-full = Journal is full (24 lines). Delete one first.
+hydroponics-console-print-packet-ok = Printed seed packet for "{$name}".
+hydroponics-console-eject-disk-ok = Wrote "{$name}" to a cultivar disk.
+hydroponics-console-disk-blank = That disk is blank.
+hydroponics-console-disk-imported = Imported cultivar "{$name}".
+
+botany-cultivar-disk-blank = The disk is blank.
+botany-cultivar-disk-contents = Line: [color=lightgreen]{$name}[/color] ({$plant})
+
+plant-holder-light-ambient = ambient
+plant-holder-light-day = day
+plant-holder-light-shade = shade
+plant-holder-light-verb = Set light: {$mode}
+plant-holder-light-mode-set = Tray light set to {$mode}.
+plant-holder-light-mode-examine = Light mode: [color=lightgreen]{$mode}[/color]
+
+plant-mutation-add-chemical-guidebook = Adds {$reagent} to harvested produce.
+plant-mutation-add-consume-gas-guidebook = Makes the plant consume {$gas}.
+plant-mutation-add-exude-gas-guidebook = Makes the plant exude {$gas}.
+reagent-effect-guidebook-plant-lock-genes =
+    { $chance ->
+        [1] Locks
+        *[other] lock
+    } the plant's genes so mutagen no longer mutates that line
+
+reagent-name-gene-stabilizer = gene stabilizer
+reagent-desc-gene-stabilizer = Botanical fixative. Spray a living plant to lock its genome; unstable mutagen will no longer scramble that line.
+
+ent-GeneStabilizerChemistryBottle = gene stabilizer bottle
+    .desc = Locks a plant's genes so mutagen no longer mutates that line.
+ent-AloeCream1 = aloe cream
+    .desc = A topical cream for burns.
+    .suffix = Single
+ent-BotanyDriedProduce = dried produce
+    .desc = Sun-dried plant matter. Color and flavor follow the cultivar it came from.
+
+hydroponics-console-rename-tray = Rename tray
+hydroponics-console-tray-name-placeholder = wheat-rad-3
+hydroponics-console-rename-tray-ok = Tray renamed to "{$name}".
+hydroponics-console-warn-pest-eater = pest-eater
+hydroponics-console-warn-locked = genes locked
+
+plant-holder-component-pest-eater-warning = [color=lightgreen]The plant is eating weeds and pests in the tray.[/color]
+plant-holder-component-gene-locked-warning = [color=cyan]This line's genes are locked. Mutagen will not scramble it.[/color]
+plant-analyzer-mutation-pest-eater = Pest-eater
+plant-analyzer-mutation-gene-locked = Genes locked
+
+botany-swab-from-packet = You lift pollen from the seed packet.
+botany-swab-graft-packet = Pollen takes: mutations graft onto this {$name} packet.
+
+seed-component-gene-locked = [color=cyan]Genes locked — mutagen will not scramble this line.[/color]
+
+botany-plant-cloth-name = {$name} fiber
+botany-plant-juice-name = {$name} juice
+botany-plant-dried-name = dried {$name}
+botany-aloe-tea-name = {$name} aloe tea
+botany-antirad-tea-name = {$name} antirad tea

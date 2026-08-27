@@ -110,8 +110,49 @@ public sealed class PlantHealthBarOverlay : Robust.Client.Graphics.Overlay
 
             var pixelDarken = new Box2(new Vector2(startX, 2f) / EyeManager.PixelsPerMeter, new Vector2(xProgress, 3f) / EyeManager.PixelsPerMeter);
             handle.DrawRect(pixelDarken.Translated(position), Black.WithAlpha(128));
+
+            const float iconSize = 3.5f;
+            const float iconGap = 1.5f;
+            var iconY0 = 5f;
+            var iconY1 = iconY0 + iconSize;
+            var iconX = startX;
+
+            DrawStatusIcon(handle, position, ref iconX, iconY0, iconY1, iconSize, iconGap,
+                TryFlag(uid, appearance, PlantHolderVisuals.WaterLight), Color.FromHex("#4aa8ff"));
+            DrawStatusIcon(handle, position, ref iconX, iconY0, iconY1, iconSize, iconGap,
+                TryFlag(uid, appearance, PlantHolderVisuals.WeedsHigh), Color.FromHex("#7dce4a"));
+            DrawStatusIcon(handle, position, ref iconX, iconY0, iconY1, iconSize, iconGap,
+                TryFlag(uid, appearance, PlantHolderVisuals.HarvestLight), Color.FromHex("#e8d050"));
+            DrawStatusIcon(handle, position, ref iconX, iconY0, iconY1, iconSize, iconGap,
+                TryFlag(uid, appearance, PlantHolderVisuals.Radioactive), Color.FromHex("#f0c040"));
         }
 
         handle.SetTransform(Matrix3x2.Identity);
+    }
+
+    private bool TryFlag(EntityUid uid, AppearanceComponent appearance, PlantHolderVisuals key)
+    {
+        return _appearance.TryGetData(uid, key, out bool value, appearance) && value;
+    }
+
+    private static void DrawStatusIcon(
+        DrawingHandleWorld handle,
+        Vector2 position,
+        ref float iconX,
+        float iconY0,
+        float iconY1,
+        float iconSize,
+        float iconGap,
+        bool enabled,
+        Color color)
+    {
+        if (!enabled)
+            return;
+
+        var box = new Box2(
+            new Vector2(iconX, iconY0) / EyeManager.PixelsPerMeter,
+            new Vector2(iconX + iconSize, iconY1) / EyeManager.PixelsPerMeter);
+        handle.DrawRect(box.Translated(position), color);
+        iconX += iconSize + iconGap;
     }
 }

@@ -30,3 +30,11 @@
     Steel: 100
     Glass: 100
     Plastic: 100
+
+- type: latheRecipe
+  id: BotanyCultivarDisk
+  result: BotanyCultivarDisk
+  completetime: 1
+  materials:
+    Steel: 50
+    Plastic: 100

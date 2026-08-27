@@ -100,3 +100,7 @@ plant-analyzer-field-low-p = Min pressure
 plant-analyzer-field-high-p = Max pressure
 plant-analyzer-field-pest-tol = Pest tolerance
 plant-analyzer-field-weed-tol = Weed tolerance
+plant-analyzer-print-label = Print label
+plant-analyzer-print-ok = Labeled packet: {$label}
+plant-analyzer-print-not-packet = Scan a seed packet to print a label onto it.
+plant-analyzer-print-no-target = Nothing to label.

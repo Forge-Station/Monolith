@@ -15,39 +15,39 @@
       syndrome: ChronicPain
       severity: 90
 
-- type: trait #не работает
-  id: IpcLightrait
-  name: trait-ipc-light-name
-  description: trait-ipc-light-desc
-  category: Physical
-  cost: 2
-  speciesBlacklist:
-  - Human
-  - Chitinid
-  - Oni
-  - Vulpkanin
-  - Vox
-  - Diona
-  - Moth
-  - Goblin
-  - Arachnid
-  - Resomi
-  - Harpy
-  - Reptilian
-  - Hydrakin
-  - Rodentia
-  - Dwarf
-  - SlimePerson
-  - Felinid
-  - Tajaran
-  - Demon
-  - Skrell
-  - Ariral
-  blacklist:
-    components:
-    - BorgChassis
-  traitGear: IpcLightImplanter
-  components: {}
+# - type: trait #не работает
+#   id: IpcLightrait
+#   name: trait-ipc-light-name
+#   description: trait-ipc-light-desc
+#   category: Physical
+#   cost: 2
+#   speciesBlacklist:
+#   - Human
+#   - Chitinid
+#   - Oni
+#   - Vulpkanin
+#   - Vox
+#   - Diona
+#   - Moth
+#   - Goblin
+#   - Arachnid
+#   - Resomi
+#   - Harpy
+#   - Reptilian
+#   - Hydrakin
+#   - Rodentia
+#   - Dwarf
+#   - SlimePerson
+#   - Felinid
+#   - Tajaran
+#   - Demon
+#   - Skrell
+#   - Ariral
+#   blacklist:
+#     components:
+#     - BorgChassis
+#   traitGear: IpcLightImplanter
+#   components: {}
  
 - type: trait
   id: IpcSoftBody
@@ -132,9 +132,9 @@
     # - type: SlowOnDamage
     #   speedModifierThresholds:
     #     0: 0.1
-    - type: MovementSpeedModifier 
-      BaseWalkSpeed: 2.25 # -10%
-      BaseSprintSpeed: 4.05 # -10%
+    # - type: MovementSpeedModifier 
+    #   BaseWalkSpeed: 2.25 # -10%
+    #   BaseSprintSpeed: 4.05 # -10%
 
 - type: trait
   id: IpcWeldingFlashProtection
@@ -209,8 +209,8 @@
     # - type: SlowOnDamage
     #   speedModifierThresholds:
     #     0: 0.8
-    - type: MovementSpeedModifier 
-      BaseWalkSpeed: 2 # -20%
-      BaseSprintSpeed: 3.6 # -20%
+    # - type: MovementSpeedModifier 
+    #   BaseWalkSpeed: 2 # -20%
+    #   BaseSprintSpeed: 3.6 # -20%
     - type: DoAfterDelayMultiplier
       multiplier: 1.15 

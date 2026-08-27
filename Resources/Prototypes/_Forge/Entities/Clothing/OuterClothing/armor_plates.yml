@@ -5,7 +5,7 @@
   description: An armor module consisting of replacement brass plating for shedding weight. Increases your speed, but makes you vulnerable to most damage.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/ArmorPlate/armor_plates.rsi
+    sprite: _Mono/Clothing/ArmorPlate/armor_plates.rsi #заменить спрайты
     state: speed
   - type: Item
     sprite: _Mono/Clothing/ArmorPlate/armor_plates.rsi
@@ -48,7 +48,7 @@
   description: An armor module consisting of additional protective plasteel plating and shock absorbant plastic. Protects against blunt force and slash attacks. Vulnerable to heat.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/ArmorPlate/armor_plates.rsi
+    sprite: _Mono/Clothing/ArmorPlate/armor_plates.rsi #заменить спрайты
     state: blunt_slash
   - type: Item
     sprite: _Mono/Clothing/ArmorPlate/armor_plates.rsi

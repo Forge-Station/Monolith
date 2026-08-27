@@ -84,6 +84,10 @@ public sealed partial class MutationSystem : EntitySystem
         CrossBool(ref result.Ligneous, a.Ligneous);
         CrossBool(ref result.TurnIntoKudzu, a.TurnIntoKudzu);
         CrossBool(ref result.CanScream, a.CanScream);
+        CrossBool(ref result.Radioactive, a.Radioactive);
+        CrossBool(ref result.CarnivorousGrab, a.CarnivorousGrab);
+        CrossFloat(ref result.RadiationIntensity, a.RadiationIntensity);
+        CrossFloat(ref result.GrabRange, a.GrabRange);
 
         CrossGasses(ref result.ExudeGasses, a.ExudeGasses);
         CrossGasses(ref result.ConsumeGasses, a.ConsumeGasses);

@@ -61,6 +61,31 @@
 
 Чем больше нестабильного мутагена вы используете, тем больше мутаций вы получите. Поскольку многие гены важны для выживания, большинство мутаций приведут к гибели растения.
 
+Редкие мутации могут заставить растение [color=yellow]выделять газ при созревании[/color] (чем реже газ, тем меньше шанс), [color=yellow]требовать особую атмосферу[/color], [color=red]излучать радиацию[/color] или даже [color=red]хватать тех, кто подойдёт близко[/color]. Если лозы схватили вас — нажмите действие «Вырваться».
+
+<Box>
+<GuideEntityEmbed Entity="UnstableMutagenChemistryBottle"/>
+<GuideEntityEmbed Entity="PlantAnalyzer"/>
+<GuideEntityEmbed Entity="ClothingEyesGlassesBotany"/>
+<GuideEntityEmbed Entity="ComputerHydroponics"/>
+</Box>
+
+[color=cyan]Анализатор растений[/color] (или картридж АгроСкан в КПК) показывает гены, мутации, реагенты и состояние лотка. Окно остаётся открытым в неактивной руке или кармане. [color=cyan]Ботанические очки[/color] показывают здоровье растений в лотках. Лотки подключаются к [color=cyan]консоли гидропоники[/color] сетевым конфигуратором.
+
+## Уникальные фитохимикаты
+Эти реагенты появляются в урожае только если у растения уже есть нужные мутации или условия:
+
+- [color=lightgreen]Фитоэфир[/color]: потенция 50+
+- [color=lightgreen]Лигниновая смола[/color]: древесные растения
+- [color=lightgreen]Криохлорофилл[/color]: очень холодная идеальная температура
+- [color=lightgreen]Фотозим[/color]: высокая потребность в свете
+- [color=lightgreen]Некротоксиновый сок[/color]: мутация кудзу
+- [color=lightgreen]Экстракт радиоцвета[/color]: радиоактивные растения
+- [color=lightgreen]Лозовая лимфа[/color]: хищные лозы
+- [color=lightgreen]Атмофит[/color]: растения, которые потребляют или выделяют газ
+
+Стерильные палочки можно печатать в биогенераторе.
+
 <Box>
 <GuideEntityEmbed Entity="UnstableMutagenChemistryBottle"/>
 </Box>
@@ -73,8 +98,8 @@
 <GuideEntityEmbed Entity="DiseaseSwab"/>
 </Box>
 
-## Chemicals
-Some chemicals have special effects on plants.
+## Химикаты
+Некоторые химикаты особым образом влияют на растения.
 
 [textlink="Click here to see all botanical chemicals." link="Botanical"]
 

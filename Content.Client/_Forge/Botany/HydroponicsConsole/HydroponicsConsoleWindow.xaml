@@ -1,0 +1,13 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc hydroponics-console-title}"
+                      MinSize="520 420"
+                      SetSize="560 460">
+    <BoxContainer Orientation="Vertical" Margin="8 4 8 8">
+        <Label Name="StatusLabel" Text="{Loc hydroponics-console-no-trays}" Margin="0 0 0 6"/>
+        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+            <BoxContainer Name="TrayContainer" Orientation="Vertical"/>
+        </ScrollContainer>
+    </BoxContainer>
+</controls:FancyWindow>

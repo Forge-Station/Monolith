@@ -16,6 +16,9 @@
   - ReagentGrinderIndustrialMachineCircuitboard
   - PlantAnalyzer # Frontier
   - NFBlueprintPlantAnalyzer # Frontier
+  - ClothingEyesGlassesBotany
+  - HydroponicsConsoleCircuitboard
+  - AgroScanCartridge
   - NFBlueprintPlantBagOfHolding # Frontier
   # Mono edit start
   - FauxTileAstroGrass

@@ -63,6 +63,31 @@ Plants treated with [color=cyan]unstable mutagen[/color] will experience random 
 
 The more unstable mutagen you use, the more mutations you will get. Since many genes are vital to a plant's survival, most mutations will cause a plant to die.
 
+Rare mutations can make a plant [color=yellow]exude gas when it ripens[/color] (rarer gases are much less likely), [color=yellow]demand a specific atmosphere[/color], [color=red]emit radiation[/color], or even [color=red]grab nearby people[/color]. If vines seize you, use the Tear free action.
+
+<Box>
+<GuideEntityEmbed Entity="UnstableMutagenChemistryBottle"/>
+<GuideEntityEmbed Entity="PlantAnalyzer"/>
+<GuideEntityEmbed Entity="ClothingEyesGlassesBotany"/>
+<GuideEntityEmbed Entity="ComputerHydroponics"/>
+</Box>
+
+The [color=cyan]plant analyzer[/color] (or an AgroScan PDA cartridge) shows genes, mutations, reagents, and tray status. The window stays open in an inactive hand or pocket. [color=cyan]Botanical analyzer glasses[/color] overlay plant health on trays. Link trays to a [color=cyan]hydroponics console[/color] with a network configurator.
+
+## Unique phytochemicals
+These reagents only show up in produce when the plant already has matching mutations or growing conditions:
+
+- [color=lightgreen]Phyto-aether[/color]: potency 50+
+- [color=lightgreen]Lignin resin[/color]: ligneous plants
+- [color=lightgreen]Cryo-chlorophyll[/color]: very cold ideal temperature
+- [color=lightgreen]Photozyme[/color]: high light requirement
+- [color=lightgreen]Necrotoxin sap[/color]: kudzu mutation
+- [color=lightgreen]Radbloom extract[/color]: radioactive plants
+- [color=lightgreen]Vine ichor[/color]: carnivorous vines
+- [color=lightgreen]Atmophyte[/color]: plants that consume or exude gas
+
+A sterile swab can be printed from the biogenerator.
+
 <Box>
 <GuideEntityEmbed Entity="UnstableMutagenChemistryBottle"/>
 </Box>

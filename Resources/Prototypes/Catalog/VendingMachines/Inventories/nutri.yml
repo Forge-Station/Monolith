@@ -19,6 +19,9 @@
 #    DiseaseSwab: 20 # Mono - carpal tunnel go away
     BoxMouthSwab: 1 # Mono - much less painful to vend once
     BoxAgrichem: 1
+    PlantAnalyzer: 2
+    ClothingEyesGlassesBotany: 2
+    AgroScanCartridge: 2
     #TO DO:
     #plant analyzer
   contrabandInventory:

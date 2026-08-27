@@ -11,6 +11,7 @@
 			<ScrollContainer Name ="{Loc 'plant-analyzer-window-tab-basics'}">
                 <BoxContainer Orientation="Vertical" VerticalAlignment="Stretch" Margin="10 0 5 0">
                     <Label Name="PlantName" Margin="0 5 0 5"/>
+                    <Label Name="TrayStatus" Margin="0 5 0 5"/>
                     <Label Name="PlantYield" Margin="0 5 0 5"/>
                     <Label Name="Potency" Margin="0 5 0 5"/>
                     <Label Name="Repeat" Margin="0 5 0 5"/>

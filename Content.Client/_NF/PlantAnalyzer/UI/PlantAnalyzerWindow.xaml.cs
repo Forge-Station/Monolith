@@ -51,6 +51,30 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
             PlantName.Text = Loc.GetString("plant-analyzer-window-label-name-scanned-plant", ("seedName", Loc.GetString(string.IsNullOrEmpty(msg.SeedName) ? "plant-analyzer-unknown-plant" : msg.SeedName)));
         else
             PlantName.Text = Loc.GetString("plant-analyzer-window-label-name-scanned-seed", ("seedName", Loc.GetString(string.IsNullOrEmpty(msg.SeedName) ? "plant-analyzer-unknown-plant" : msg.SeedName)));
+
+        if (msg.IsTray)
+        {
+            var status = msg.Dead
+                ? Loc.GetString("plant-analyzer-tray-dead")
+                : msg.HarvestReady
+                    ? Loc.GetString("plant-analyzer-tray-harvest")
+                    : Loc.GetString("plant-analyzer-tray-growing");
+            TrayStatus.Visible = true;
+            TrayStatus.Text = Loc.GetString("plant-analyzer-tray-status",
+                ("status", status),
+                ("health", $"{msg.TrayHealth:0}"),
+                ("endurance", $"{msg.TrayEndurance:0}"),
+                ("age", msg.Age),
+                ("water", $"{msg.WaterLevel:0}"),
+                ("nutrition", $"{msg.NutritionLevel:0}"),
+                ("toxins", $"{msg.Toxins:0}"),
+                ("weeds", $"{msg.WeedLevel:0.#}"),
+                ("pests", $"{msg.PestLevel:0.#}"));
+        }
+        else
+        {
+            TrayStatus.Visible = false;
+        }
         // Basics
         PlantYield.Text = Loc.GetString("plant-analyzer-plant-yield-text", ("seedYield", $"{msg.SeedYield:D0}"));
         Potency.Text = Loc.GetString("plant-analyzer-plant-potency-text", ("seedPotency", $"{msg.SeedPotency:F0}"));
@@ -110,9 +134,59 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
             mutations.Append(Loc.GetString("plant-analyzer-mutation-unviable"));
         }
 
+        if (msg.Mutations.HasFlag(MutationFlags.Radioactive))
+        {
+            mutations.Append(IndentedNewline);
+            mutations.Append(Loc.GetString("plant-analyzer-mutation-radioactive"));
+        }
+
+        if (msg.Mutations.HasFlag(MutationFlags.CarnivorousGrab))
+        {
+            mutations.Append(IndentedNewline);
+            mutations.Append(Loc.GetString("plant-analyzer-mutation-grabber"));
+        }
+
+        if (msg.MutationNames is { Length: > 0 })
+        {
+            foreach (var name in msg.MutationNames)
+            {
+                mutations.Append(IndentedNewline);
+                mutations.Append(name);
+            }
+        }
+
         var traitsText = mutations.Length == 0 ? "-" : mutations.ToString();
 
         Traits.Text = Loc.GetString("plant-analyzer-plant-mutations-text", ("traits", traitsText));
+
+        var extra = new StringBuilder();
+        if (msg.IsTray)
+        {
+            if (msg.ImproperHeat)
+            {
+                extra.Append(IndentedNewline);
+                extra.Append(Loc.GetString("plant-analyzer-warning-heat"));
+            }
+            if (msg.ImproperPressure)
+            {
+                extra.Append(IndentedNewline);
+                extra.Append(Loc.GetString("plant-analyzer-warning-pressure"));
+            }
+            if (msg.ImproperLight)
+            {
+                extra.Append(IndentedNewline);
+                extra.Append(Loc.GetString("plant-analyzer-warning-light"));
+            }
+            if (msg.MissingGas)
+            {
+                extra.Append(IndentedNewline);
+                extra.Append(Loc.GetString("plant-analyzer-warning-gas"));
+            }
+        }
+
+        ExtraInfo.Text = extra.Length == 0
+            ? Loc.GetString("plant-analyzer-extra-none")
+            : Loc.GetString("plant-analyzer-extra-text", ("info", extra.ToString()));
 
 
         StringBuilder speciation = new();
@@ -179,6 +253,26 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         {
             output.Append(IndentedNewline);
             output.Append(Loc.GetString("gases-frezon"));
+        }
+        if (flags.HasFlag(GasFlags.BZ))
+        {
+            output.Append(IndentedNewline);
+            output.Append(Loc.GetString("gases-bz"));
+        }
+        if (flags.HasFlag(GasFlags.Healium))
+        {
+            output.Append(IndentedNewline);
+            output.Append(Loc.GetString("gases-healium"));
+        }
+        if (flags.HasFlag(GasFlags.Nitrium))
+        {
+            output.Append(IndentedNewline);
+            output.Append(Loc.GetString("gases-nitrium"));
+        }
+        if (flags.HasFlag(GasFlags.Pluoxium))
+        {
+            output.Append(IndentedNewline);
+            output.Append(Loc.GetString("gases-pluoxium"));
         }
         return output;
     }

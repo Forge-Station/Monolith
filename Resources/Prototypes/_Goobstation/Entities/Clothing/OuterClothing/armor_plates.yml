@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseItem
-  id: ArmorPlateSpeed
-  name: speed armor plate
+  id: ArmorPlateRadiation
+  name: radiation armor plate
   description: An armor module consisting of replacement brass plating for shedding weight. Increases your speed, but makes you vulnerable to most damage.
   components:
   - type: Sprite

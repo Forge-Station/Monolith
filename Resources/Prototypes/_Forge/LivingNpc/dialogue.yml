@@ -1,0 +1,299 @@
+- type: livingNpcDialogue
+  id: LivingNpcDialogueCivilian
+  greetings:
+  - living-npc-civilian-greet-1
+  - living-npc-civilian-greet-2
+  - living-npc-civilian-greet-3
+  farewells:
+  - living-npc-civilian-bye-1
+  - living-npc-civilian-bye-2
+  idle:
+  - living-npc-civilian-idle-1
+  - living-npc-civilian-idle-2
+  - living-npc-civilian-idle-3
+  - living-npc-civilian-idle-4
+  work:
+  - living-npc-civilian-work-1
+  - living-npc-civilian-work-2
+  hunger:
+  - living-npc-civilian-hunger-1
+  - living-npc-civilian-hunger-2
+  fear:
+  - living-npc-civilian-fear-1
+  - living-npc-civilian-fear-2
+  anger:
+  - living-npc-civilian-anger-1
+  - living-npc-civilian-anger-2
+  thanks:
+  - living-npc-civilian-thanks-1
+  insults:
+  - living-npc-civilian-insult-1
+  help:
+  - living-npc-civilian-help-1
+  - living-npc-civilian-help-2
+  smallTalk:
+  - living-npc-civilian-smalltalk-1
+  - living-npc-civilian-smalltalk-2
+  howAreYou:
+  - living-npc-civilian-howareyou-1
+  - living-npc-civilian-howareyou-2
+  npcChat:
+  - living-npc-civilian-npc-1
+  - living-npc-civilian-npc-2
+
+- type: livingNpcDialogue
+  id: LivingNpcDialogueBartender
+  greetings:
+  - living-npc-bartender-greet-1
+  - living-npc-bartender-greet-2
+  - living-npc-bartender-greet-3
+  farewells:
+  - living-npc-bartender-bye-1
+  idle:
+  - living-npc-bartender-idle-1
+  - living-npc-bartender-idle-2
+  - living-npc-bartender-idle-3
+  work:
+  - living-npc-bartender-work-1
+  - living-npc-bartender-work-2
+  hunger:
+  - living-npc-bartender-hunger-1
+  fear:
+  - living-npc-bartender-fear-1
+  anger:
+  - living-npc-bartender-anger-1
+  thanks:
+  - living-npc-bartender-thanks-1
+  insults:
+  - living-npc-bartender-insult-1
+  help:
+  - living-npc-bartender-help-1
+  smallTalk:
+  - living-npc-bartender-smalltalk-1
+  - living-npc-bartender-smalltalk-2
+  howAreYou:
+  - living-npc-bartender-howareyou-1
+  npcChat:
+  - living-npc-bartender-npc-1
+
+- type: livingNpcDialogue
+  id: LivingNpcDialogueJanitor
+  greetings:
+  - living-npc-janitor-greet-1
+  - living-npc-janitor-greet-2
+  farewells:
+  - living-npc-janitor-bye-1
+  idle:
+  - living-npc-janitor-idle-1
+  - living-npc-janitor-idle-2
+  work:
+  - living-npc-janitor-work-1
+  - living-npc-janitor-work-2
+  hunger:
+  - living-npc-janitor-hunger-1
+  fear:
+  - living-npc-janitor-fear-1
+  anger:
+  - living-npc-janitor-anger-1
+  thanks:
+  - living-npc-janitor-thanks-1
+  insults:
+  - living-npc-janitor-insult-1
+  help:
+  - living-npc-janitor-help-1
+  smallTalk:
+  - living-npc-janitor-smalltalk-1
+  howAreYou:
+  - living-npc-janitor-howareyou-1
+  npcChat:
+  - living-npc-janitor-npc-1
+
+- type: livingNpcDialogue
+  id: LivingNpcDialogueDockworker
+  greetings:
+  - living-npc-dock-greet-1
+  - living-npc-dock-greet-2
+  farewells:
+  - living-npc-dock-bye-1
+  idle:
+  - living-npc-dock-idle-1
+  - living-npc-dock-idle-2
+  work:
+  - living-npc-dock-work-1
+  - living-npc-dock-work-2
+  hunger:
+  - living-npc-dock-hunger-1
+  fear:
+  - living-npc-dock-fear-1
+  anger:
+  - living-npc-dock-anger-1
+  thanks:
+  - living-npc-dock-thanks-1
+  insults:
+  - living-npc-dock-insult-1
+  help:
+  - living-npc-dock-help-1
+  smallTalk:
+  - living-npc-dock-smalltalk-1
+  howAreYou:
+  - living-npc-dock-howareyou-1
+  npcChat:
+  - living-npc-dock-npc-1
+
+- type: livingNpcDialogue
+  id: LivingNpcDialogueMerchant
+  greetings:
+  - living-npc-merchant-greet-1
+  - living-npc-merchant-greet-2
+  farewells:
+  - living-npc-merchant-bye-1
+  idle:
+  - living-npc-merchant-idle-1
+  - living-npc-merchant-idle-2
+  work:
+  - living-npc-merchant-work-1
+  - living-npc-merchant-work-2
+  hunger:
+  - living-npc-merchant-hunger-1
+  fear:
+  - living-npc-merchant-fear-1
+  anger:
+  - living-npc-merchant-anger-1
+  thanks:
+  - living-npc-merchant-thanks-1
+  insults:
+  - living-npc-merchant-insult-1
+  help:
+  - living-npc-merchant-help-1
+  smallTalk:
+  - living-npc-merchant-smalltalk-1
+  howAreYou:
+  - living-npc-merchant-howareyou-1
+  npcChat:
+  - living-npc-merchant-npc-1
+
+- type: livingNpcDialogue
+  id: LivingNpcDialogueSecurity
+  greetings:
+  - living-npc-sec-greet-1
+  - living-npc-sec-greet-2
+  farewells:
+  - living-npc-sec-bye-1
+  idle:
+  - living-npc-sec-idle-1
+  - living-npc-sec-idle-2
+  work:
+  - living-npc-sec-work-1
+  - living-npc-sec-work-2
+  hunger:
+  - living-npc-sec-hunger-1
+  fear:
+  - living-npc-sec-fear-1
+  anger:
+  - living-npc-sec-anger-1
+  thanks:
+  - living-npc-sec-thanks-1
+  insults:
+  - living-npc-sec-insult-1
+  help:
+  - living-npc-sec-help-1
+  smallTalk:
+  - living-npc-sec-smalltalk-1
+  howAreYou:
+  - living-npc-sec-howareyou-1
+  npcChat:
+  - living-npc-sec-npc-1
+
+- type: livingNpcDialogue
+  id: LivingNpcDialogueScientist
+  greetings:
+  - living-npc-sci-greet-1
+  - living-npc-sci-greet-2
+  farewells:
+  - living-npc-sci-bye-1
+  idle:
+  - living-npc-sci-idle-1
+  - living-npc-sci-idle-2
+  work:
+  - living-npc-sci-work-1
+  hunger:
+  - living-npc-sci-hunger-1
+  fear:
+  - living-npc-sci-fear-1
+  anger:
+  - living-npc-sci-anger-1
+  thanks:
+  - living-npc-sci-thanks-1
+  insults:
+  - living-npc-sci-insult-1
+  help:
+  - living-npc-sci-help-1
+  smallTalk:
+  - living-npc-sci-smalltalk-1
+  howAreYou:
+  - living-npc-sci-howareyou-1
+  npcChat:
+  - living-npc-sci-npc-1
+
+- type: livingNpcDialogue
+  id: LivingNpcDialogueMedic
+  greetings:
+  - living-npc-medic-greet-1
+  - living-npc-medic-greet-2
+  farewells:
+  - living-npc-medic-bye-1
+  idle:
+  - living-npc-medic-idle-1
+  - living-npc-medic-idle-2
+  work:
+  - living-npc-medic-work-1
+  hunger:
+  - living-npc-medic-hunger-1
+  fear:
+  - living-npc-medic-fear-1
+  anger:
+  - living-npc-medic-anger-1
+  thanks:
+  - living-npc-medic-thanks-1
+  insults:
+  - living-npc-medic-insult-1
+  help:
+  - living-npc-medic-help-1
+  smallTalk:
+  - living-npc-medic-smalltalk-1
+  howAreYou:
+  - living-npc-medic-howareyou-1
+  npcChat:
+  - living-npc-medic-npc-1
+
+- type: livingNpcDialogue
+  id: LivingNpcDialogueClown
+  greetings:
+  - living-npc-clown-greet-1
+  - living-npc-clown-greet-2
+  farewells:
+  - living-npc-clown-bye-1
+  idle:
+  - living-npc-clown-idle-1
+  - living-npc-clown-idle-2
+  - living-npc-clown-idle-3
+  work:
+  - living-npc-clown-work-1
+  hunger:
+  - living-npc-clown-hunger-1
+  fear:
+  - living-npc-clown-fear-1
+  anger:
+  - living-npc-clown-anger-1
+  thanks:
+  - living-npc-clown-thanks-1
+  insults:
+  - living-npc-clown-insult-1
+  help:
+  - living-npc-clown-help-1
+  smallTalk:
+  - living-npc-clown-smalltalk-1
+  howAreYou:
+  - living-npc-clown-howareyou-1
+  npcChat:
+  - living-npc-clown-npc-1

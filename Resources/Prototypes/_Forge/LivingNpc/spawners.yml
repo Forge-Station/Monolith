@@ -1,0 +1,103 @@
+- type: entity
+  id: SpawnMobLivingNpcCivilian
+  parent: MarkerBase
+  name: living NPC spawner
+  suffix: Civilian
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Human/parts.rsi
+      state: full
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLivingNpcCivilian
+
+- type: entity
+  id: SpawnMobLivingNpcBartender
+  parent: SpawnMobLivingNpcCivilian
+  suffix: Bartender
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLivingNpcBartender
+
+- type: entity
+  id: SpawnMobLivingNpcJanitor
+  parent: SpawnMobLivingNpcCivilian
+  suffix: Janitor
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLivingNpcJanitor
+
+- type: entity
+  id: SpawnMobLivingNpcDockworker
+  parent: SpawnMobLivingNpcCivilian
+  suffix: Dock worker
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLivingNpcDockworker
+
+- type: entity
+  id: SpawnMobLivingNpcMerchant
+  parent: SpawnMobLivingNpcCivilian
+  suffix: Merchant
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLivingNpcMerchant
+
+- type: entity
+  id: SpawnMobLivingNpcSecurity
+  parent: SpawnMobLivingNpcCivilian
+  suffix: Security
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLivingNpcSecurity
+
+- type: entity
+  id: SpawnMobLivingNpcScientist
+  parent: SpawnMobLivingNpcCivilian
+  suffix: Scientist
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLivingNpcScientist
+
+- type: entity
+  id: SpawnMobLivingNpcMedic
+  parent: SpawnMobLivingNpcCivilian
+  suffix: Medic
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLivingNpcMedic
+
+- type: entity
+  id: SpawnMobLivingNpcClown
+  parent: SpawnMobLivingNpcCivilian
+  suffix: Clown
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLivingNpcClown
+
+- type: entity
+  id: SpawnMobLivingNpcRandom
+  parent: SpawnMobLivingNpcCivilian
+  suffix: Random
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLivingNpcCivilian
+    - MobLivingNpcBartender
+    - MobLivingNpcJanitor
+    - MobLivingNpcDockworker
+    - MobLivingNpcMerchant
+    - MobLivingNpcScientist
+    - MobLivingNpcMedic
+    - MobLivingNpcClown

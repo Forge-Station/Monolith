@@ -1,0 +1,67 @@
+- type: entity
+  id: LivingNpcSpotBase
+  parent: MarkerBase
+  name: living NPC spot
+  abstract: true
+  suffix: Living NPC
+  components:
+  - type: Sprite
+    state: pink
+  - type: LivingNpcSpot
+    kind: Work
+
+- type: entity
+  id: LivingNpcSpotWork
+  parent: LivingNpcSpotBase
+  name: living NPC work spot
+  suffix: Work
+  components:
+  - type: Sprite
+    state: green
+  - type: LivingNpcSpot
+    kind: Work
+
+- type: entity
+  id: LivingNpcSpotRest
+  parent: LivingNpcSpotBase
+  name: living NPC rest spot
+  suffix: Rest
+  components:
+  - type: Sprite
+    state: blue
+  - type: LivingNpcSpot
+    kind: Rest
+
+- type: entity
+  id: LivingNpcSpotSocial
+  parent: LivingNpcSpotBase
+  name: living NPC social spot
+  suffix: Social
+  components:
+  - type: Sprite
+    state: yellow
+  - type: LivingNpcSpot
+    kind: Social
+
+- type: entity
+  id: LivingNpcSpotPatrol
+  parent: LivingNpcSpotBase
+  name: living NPC patrol spot
+  suffix: Patrol
+  components:
+  - type: Sprite
+    state: red
+  - type: LivingNpcSpot
+    kind: Patrol
+
+- type: entity
+  id: LivingNpcAnchor
+  parent: MarkerBase
+  name: living NPC home
+  description: Living NPCs nearby treat this as home.
+  suffix: Living NPC
+  components:
+  - type: Sprite
+    state: pink
+  - type: LivingNpcAnchor
+    radius: 16

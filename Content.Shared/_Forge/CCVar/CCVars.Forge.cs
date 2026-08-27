@@ -91,4 +91,22 @@ public sealed partial class ForgeCVars
     public static readonly CVarDef<string> MappingPaletteRecents =
         CVarDef.Create("forge.mapping.palette_recents", "", CVar.CLIENTONLY | CVar.ARCHIVE);
     // Forge-Change-End
+
+    /// <summary>
+    ///     Master switch for the Forge living NPC brain. Does not affect HTN mobs.
+    /// </summary>
+    public static readonly CVarDef<bool> LivingNpcEnabled =
+        CVarDef.Create("forge.living_npc.enabled", true, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Maximum living NPC brains processed per tick.
+    /// </summary>
+    public static readonly CVarDef<int> LivingNpcMaxUpdates =
+        CVarDef.Create("forge.living_npc.max_updates", 64, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Sleep living NPCs when no players are within this range.
+    /// </summary>
+    public static readonly CVarDef<float> LivingNpcPauseDistance =
+        CVarDef.Create("forge.living_npc.pause_distance", 28f, CVar.SERVERONLY);
 }

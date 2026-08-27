@@ -1,0 +1,72 @@
+- type: startingGear
+  id: LivingNpcCivilianGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+    id: PassengerPDA
+
+- type: startingGear
+  id: LivingNpcBartenderGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBartender
+    shoes: ClothingShoesColorBlack
+    id: BartenderPDA
+    outerClothing: ClothingOuterVest
+
+- type: startingGear
+  id: LivingNpcJanitorGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJanitor
+    shoes: ClothingShoesGaloshes
+    id: JanitorPDA
+    belt: ClothingBeltJanitorFilled
+
+- type: startingGear
+  id: LivingNpcDockworkerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCargo
+    shoes: ClothingShoesBootsWork
+    id: CargoPDA
+    head: ClothingHeadHatHardhatYellow
+
+- type: startingGear
+  id: LivingNpcMerchantGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    shoes: ClothingShoesColorBrown
+    id: PassengerPDA
+    neck: ClothingNeckScarfStripedBrown
+
+- type: startingGear
+  id: LivingNpcSecurityGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    shoes: ClothingShoesBootsJack
+    id: SecurityPDA
+    head: ClothingHeadHelmetBasic
+    belt: ClothingBeltSecurityFilled
+
+- type: startingGear
+  id: LivingNpcScientistGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitScientist
+    shoes: ClothingShoesColorWhite
+    id: SciencePDA
+    outerClothing: ClothingOuterCoatRnd
+
+- type: startingGear
+  id: LivingNpcMedicGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMedicalDoctor
+    shoes: ClothingShoesColorWhite
+    id: MedicalPDA
+    belt: ClothingBeltMedicalFilled
+
+- type: startingGear
+  id: LivingNpcClownGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitClown
+    shoes: ClothingShoesClown
+    mask: ClothingMaskClown
+    id: ClownPDA
+    pocket1: BikeHorn

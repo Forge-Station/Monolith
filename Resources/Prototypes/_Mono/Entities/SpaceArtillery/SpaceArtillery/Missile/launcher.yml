@@ -120,6 +120,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier3HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   description: An odd weapon of the pre-fracture era, it projects a mass of electrons that seek out the positive charge of nearby targets, overloading systems and shattering sections of hull.
   components:
   - type: StaticPrice

@@ -69,8 +69,7 @@ public sealed partial class ShipyardServiceConsoleComponent : Component
         ["ShuttleWindow"] = "PlastitaniumWindow",
         ["ShuttleWindowDiagonal"] = "PlastitaniumWindowDiagonal",
         ["ReinforcedWindow"] = "PlastitaniumWindow",
-        ["ReinforcedWindowDiagonal"] = "PlastitaniumWindowDiagonal",
-        ["WindowReinforcedDirectional"] = "PlastitaniumWindow"
+        ["ReinforcedWindowDiagonal"] = "PlastitaniumWindowDiagonal"
     };
 
     [ViewVariables]

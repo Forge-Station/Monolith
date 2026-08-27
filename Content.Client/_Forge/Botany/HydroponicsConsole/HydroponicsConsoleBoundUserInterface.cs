@@ -17,7 +17,6 @@ public sealed class HydroponicsConsoleBoundUserInterface : BoundUserInterface
     {
         base.Open();
         _window = this.CreateWindow<HydroponicsConsoleWindow>();
-        _window.Title = Loc.GetString("hydroponics-console-title");
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

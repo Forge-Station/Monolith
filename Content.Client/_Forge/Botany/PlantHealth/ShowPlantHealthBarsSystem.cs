@@ -37,7 +37,7 @@ public sealed class ShowPlantHealthBarsSystem : EquipmentHudSystem<ShowPlantHeal
     }
 }
 
-public sealed class PlantHealthBarOverlay : Overlay
+public sealed class PlantHealthBarOverlay : Robust.Client.Graphics.Overlay
 {
     private readonly IEntityManager _entManager;
     private readonly SharedTransformSystem _transform;

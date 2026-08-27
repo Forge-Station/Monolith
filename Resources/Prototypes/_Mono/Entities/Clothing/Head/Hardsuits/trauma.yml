@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ClothingNightVision2TTI] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2TTI] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitTrauma
   name: armed trauma unit T-23 tacsuit helmet
   description: The standard combat suit of the Armed Trauma Unit, outfitted with a limited-range radar hud as well as a medical hud.
@@ -55,7 +55,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ClothingNightVision4TTI, ShowSecurityIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4TTI, ShowSecurityIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitTraumaLeader
   name: armed trauma unit T-53 tacsuit helmet
   description: The commander's tacsuit in the Armed Trauma Unit, outfitted with a medical and long-range radar hud as well as thermals and night vision.

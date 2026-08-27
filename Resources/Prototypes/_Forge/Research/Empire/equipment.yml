@@ -73,12 +73,12 @@
 - type: technology
   id: EmpireHardsuitStealh
   name: research-technology-empire-prototype-stealh
-  entityIcon: ClothingOuterHardsuitHVStealh
+  entityIcon: ClothingOuterHardsuitHVStealth
   discipline: Empire
   tier: 2
   cost: 150000
   recipeUnlocks:
-  - ClothingOuterHardsuitHVStealh
+  - ClothingOuterHardsuitHVStealth
   - ClothingOuterHardsuitHVReflectElite
   - ClothingOuterHardsuitRI32m
   technologyPrerequisites:

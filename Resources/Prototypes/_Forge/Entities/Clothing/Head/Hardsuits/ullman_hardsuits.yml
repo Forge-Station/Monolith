@@ -1,6 +1,6 @@
 # UI Advanced Light hardsuit helmet
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Ullman]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Ullman]
   id: ClothingHeadHelmetHardsuitUllmanMedical
   name: ullman medical hardsuit helmet
   description: The medical hardsuit helmet is used by the Ullman Industries medical staff.
@@ -42,7 +42,7 @@
 
 # UI Light Jagernaut hardsuit helmet
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingNightVision2Ullman, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Ullman, ShowMedicalIcons]
   id: ClothingHeadHelmetHardsuitUllmanLightJuggernaut
   name: ullman light juggernaut hardsuit helmet
   description: A helmet of the UI Light Jagernaut hardsuit "Terminus". Specialized in bullet protection.

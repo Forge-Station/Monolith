@@ -30,9 +30,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 14 # Forge-change 10->14
-        Heat: 9 # Forge-change 10->9
-    armorPenetration: 0.1 # Forge-change 0.65->0.1
+        Piercing: 22 # Forge-change 15->22
+        Heat: 14 # Forge-change 10->14
+    armorPenetration: 0 # Forge-change 0.65->0.1
 
 # Forge-change-start
 - type: entity

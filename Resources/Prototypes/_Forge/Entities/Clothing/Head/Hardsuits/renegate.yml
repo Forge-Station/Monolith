@@ -1,6 +1,6 @@
 # BSII-20 "Requiem" hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBaseMillitary, ClothingNightVision2Renegade ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Renegade ]
   id: ClothingHeadHelmetHardsuitRenegatebsii20
   name: BSII-20 "Requiem" helmet
   description: The interchangeable helmet system for the majority of BSII-20 hardsuits.
@@ -29,7 +29,7 @@
 
 # lightweight jauggernaut hardsuit BSII-300 "Locksmith"
 - type: entity
-  parent: [ ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ClothingNightVision2Renegade ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2Renegade ]
   id: ClothingHeadHelmetHardsuitRenegateLightweightJuggernaut
   name: BSII-300 "Locksmith" helmet
   description: The interchangeable helmet system for the majority of BSII-300 lightweight jauggernaut hardsuits.
@@ -57,7 +57,7 @@
 
 # CRIII-200 "Bug" hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ClothingNightVision2Renegade ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2Renegade ]
   id: ClothingHeadHelmetHardsuitRenegatecriii200
   name: CRIII-200 "Bug" helmet
   description: The interchangeable helmet system for the majority of CRIII-200 hardsuits.
@@ -86,7 +86,7 @@
 
 # OIII-18 "Omega" hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Renegade ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Renegade ]
   id: ClothingHeadHelmetHardsuitRenegateEnergyShield
   name: OIII-18 "Omega" helmet
   description: The interchangeable helmet system for the majority of OIII-18 hardsuits.
@@ -115,7 +115,7 @@
 
 # YIV3020 "Svyatogor" juggernaut suit
 - type: entity
-  parent: [ ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ClothingNightVision4Renegade ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Renegade ]
   id: ClothingHeadHelmetHardsuitRenegateHeavyJuggernaut
   name: YIV3020 "Svyatogor" helmet
   description: The interchangeable helmet system for the majority of YIV3020 hardsuits.
@@ -143,7 +143,7 @@
 
 # SYS-549 "Cloak"
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Renegade, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Renegade, ShowMedicalIcons]
   id: ClothingHeadHelmetHardsuitRenegateStealth 
   name: hardsuit SYS-549 "Cloak"
   description: The interchangeable helmet system for the majority of SYS-549 hardsuits. Has a stealth generator.
@@ -201,7 +201,7 @@
 
 # RMP-240 "Cicada"
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingNightVision4Renegade, ShowMedicalIcons, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Renegade, ShowMedicalIcons, ShowSecurityIcons]
   id: ClothingHeadHelmetHardsuitRenegateAdvancedLight
   name: hardsuit RMP-240 "Cicada"
   description: The interchangeable helmet system for the majority of RMP-240 hardsuits. Has a many visors and high quality NVG.
@@ -231,7 +231,7 @@
 
 # LRC-4034 "Prism"
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingNightVision4Renegade, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Renegade, ShowMedicalIcons]
   id: ClothingHeadHelmetHardsuitRenegateReflectElite
   name: hardsuit LRC-4034 "Prism"
   description: The interchangeable helmet system for the majority of LRC-4034 hardsuits. Has a many visors, high quality NVG and a reflective plate of armor.
@@ -267,7 +267,7 @@
 
 # CRIII-278 "Sequent"
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Renegade]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Renegade]
   id: ClothingHeadHelmetHardsuitRenegateCommander
   name: hardsuit CRIII-278 "Sequent"
   description: The interchangeable helmet system for the majority of CRIII-278 hardsuits. Has a many visors, high quality NVG and a thermal vision.

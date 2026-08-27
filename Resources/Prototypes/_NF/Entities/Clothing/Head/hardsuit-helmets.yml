@@ -5,7 +5,7 @@
 
 #Mercenary Hardsuit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Normal] # Forge-change add ClothingNightVision1Normal and replace ClothingHeadSuitWithLightBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Normal] # Forge-change add ClothingNightVision1Normal and replace ClothingHeadSuitWithLightBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitMercenary
   categories: [ HideSpawnMenu ]
   name: mercenary hardsuit helmet
@@ -65,7 +65,7 @@
 
 #ERT Mail Carrier Hardsuit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingNightVision2Normal] # Forge-change add ClothingNightVision2Normal and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Normal] # Forge-change add ClothingNightVision2Normal and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitERTMailCarrier
   name: ERT mail carrier hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.

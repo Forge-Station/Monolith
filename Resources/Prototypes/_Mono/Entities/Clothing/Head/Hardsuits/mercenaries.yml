@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingHeadSuitWithLightBase, ClothingNightVision2Normal, ShowMedicalIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision2Normal, ShowMedicalIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitMercenaryWarlord
   name: WL-01 helmet
   description: A heavy headgear piece accompanying the Warlord suit, it offers flash inmunity aswell mass scanner support.
@@ -47,7 +47,7 @@
 
 #SCAF Helmet
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingHeadSuitWithLightBase, ClothingNightVision2Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision2Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitScaf
   name: scaf hardsuit helmet
   description: A robust, strong helmet. On the inside smells of pent up anger.

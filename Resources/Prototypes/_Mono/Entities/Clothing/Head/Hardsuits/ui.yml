@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingNightVision2Ullman, ShowMedicalIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Ullman, ShowMedicalIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitUIEnforcer
   name: U.I. ENFORCER MKI helmet
   description: Flash-proof lining, in built night vision system, and looks good as hell. Other than information display port being snapped, what's more to ask for?
@@ -41,7 +41,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ClothingNightVision4Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitUIEnforcerMKII
   name: U.I. ENFORCER MKII Combat helmet
   description: This top of the line helmet comes with flashproof lining, a mass scanner and an inbuilt medical diagnostic system.
@@ -93,7 +93,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingNightVision1Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision1Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitUIEngineer
   name: U.I. engineering helmet
   description: A cheap and effective hardsuit helmet, just with an extra black market touch.
@@ -134,7 +134,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingNightVision2Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitUIPilot
   name: U.I. pilot helmet
   description: A helmet for Ullman Industry pilots.
@@ -176,7 +176,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ClothingNightVision4Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitUIDirector
   name: U.I. VK-1 experimental helmet
   description: A purpose built helmet designed by Felix Ullman, for Felix Ullman.

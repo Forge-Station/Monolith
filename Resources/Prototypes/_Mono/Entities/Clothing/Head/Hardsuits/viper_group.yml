@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision2Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision2Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitViperGroupStandard
   name: JACKAL mk.II viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in night-vision system complemented by flash resistant viewports.
@@ -42,7 +42,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitViperGroupMedic
   name: RIPPER mk.III viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in medical HUD complemented by thermal pulse systems.
@@ -80,7 +80,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision4Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision4Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitViperGroupJuggernaut
   name: IMP mk.IV viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in identity tracking HUD complemented by a night-vision system.
@@ -126,7 +126,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMillitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitViperGroupInitiate
   name: BROOD mk.I viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in navigation system complemented by flash resistant viewports.

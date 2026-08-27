@@ -1,6 +1,6 @@
 # TSFMC M82c hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseFactionGearTSFT2, ClothingFlightProfileEasy]
+  parent: [ ClothingOuterHardsuitBase, BaseFactionGearTSFT1, ClothingFlightProfileEasy]
   id: ClothingOuterHardsuitTSFMCM82c
   name: TSFMC M82c hardsuit
   description: A hardsuit issued to marines operating in low-pressure and high-risk environments. Specialized in bullet protection.
@@ -45,7 +45,7 @@
 
 # TSFMC M82b hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitTSFMCM82c, BaseFactionGearTSFT2, ClothingFlightProfileEasy]
+  parent: [ ClothingOuterHardsuitTSFMCM82c, BaseFactionGearTSFT1, ClothingFlightProfileEasy]
   id: ClothingOuterHardsuitTSFMCM82b
   name: TSFMC M82b hardsuit
   description: Corpsman variant of the M82c outfitted with caustic and radiological shielding. Some of the blunt-absorbent gel layer is sacrificed for the NBC protection.
@@ -82,7 +82,7 @@
   
 # TSFMC M86 Mk.3(R) hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseFactionGearTSFT3, ClothingFlightProfileMedium]
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearTSFT2, ClothingFlightProfileMedium]
   id: ClothingOuterHardsuitTSFMCM86
   name: TSFMC M86 Mk.3(R) hardsuit
   description: An armored hardsuit, designed to be an upgrade for the M82 series. The extra general armor gives it significant weight to move around.
@@ -105,7 +105,7 @@
         Slash: 0.45
         Piercing: 0.3
         Shock: 0.75
-        Heat: 0.65
+        Heat: 0.35
         Radiation: 0.4
         Caustic: 0.6
   - type: StaminaDamageResistance
@@ -128,7 +128,7 @@
 
 # TSFMC M88 Mk.1(T) lightened Juggernaut hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT2, ClothingFlightProfileMedium]
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearTSFT2, ClothingFlightProfileMedium]
   id: ClothingOuterHardsuitTSFMCLightJuggernaut
   name: TSFMC M88 Mk.1(T) lightened Juggernaut hardsuit
   description: A lightened Juggernaut hardsuit issued to the TSF for regular operations. More protection, less mobility.
@@ -173,7 +173,7 @@
 
 # TSFMC M86-C tacsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBaseNFNfsd, ClothingFlightProfileMedium]
+  parent: [ClothingOuterHardsuitBaseNFNfsd, BaseFactionGearTSFT3, ClothingFlightProfileMedium]
   id: ClothingOuterHardsuitTSFMCM86C
   name: TSFMC M86-C tacsuit
   description: A heavy, gilded tacsuit, stripped of its shield but now capable of taking a lot of physical damage. Usually assigned to commanding officers of TSF flagships.
@@ -213,16 +213,16 @@
 
 # TSFMC M92-X tacsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, MonoEnergyShieldClothing, BaseFactionGearTSFT3, ClothingFlightProfileMedium ] # Jugger Suit
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, MonoEnergyShieldClothing, BaseFactionGearTSFT3, ClothingFlightProfileMedium ]
   id: ClothingOuterHardsuitTSFMCEnergyShield
   name: TSFMC M92-X tacsuit
   description: An experimental modification of the M92 tacsuit for spec-ops units of the TSFMC. Durable, and comes with an integrated soft-shield along with numerous gadgets at the cost of insulation and solid armor.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi # Mono
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi # Mono
-  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
+  - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
@@ -233,11 +233,11 @@
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000
-  - type: FireProtection # Mono
+  - type: FireProtection
     reduction: 0.6
   - type: ExplosionResistance
     damageCoefficient: 0.45
-  - type: Armor # Mono - Armor Value Changes
+  - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.8
@@ -246,14 +246,14 @@
         Heat: 0.75
         Radiation: 0.25
         Caustic: 0.8
-  - type: ClothingSpeedModifier # Mono - Armor Value Changes
+  - type: ClothingSpeedModifier
     walkModifier: 0.85
     sprintModifier: 0.85
   - type: FactionClothing
     faction: NanoTrasen
-  - type: StaminaDamageResistance # Mono - Stamres
+  - type: StaminaDamageResistance
     coefficient: 0.1
-  - type: PirateBountyItem # Mono
+  - type: PirateBountyItem
     id: ClothingOuterHardsuitTacsuitHighValue
   - type: PersonalShield
     shield:
@@ -284,7 +284,7 @@
 
 # TSFMC M93-S stealth suit
 - type: entity
-  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT3, ClothingFlightProfileMedium]
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearTSFT3, ClothingFlightProfileMedium]
   id: ClothingOuterHardsuitTSFMCStealth
   name: TSFMC M93-S stealth suit
   suffix: TSFMC
@@ -331,7 +331,7 @@
 
 # TSFMC M95-R reflect suit
 - type: entity
-  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT3, ClothingFlightProfileEasy]
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearTSFT3, ClothingFlightProfileEasy]
   id: ClothingOuterHardsuitTSFMCReflectElite
   name: M95-R reflect suit
   suffix: TSFMC
@@ -385,7 +385,7 @@
 
 # TSFMC M90-M advanced light hardsuit
 - type: entity
-  parent: [ForgeClothingOuterHardsuitBase, ClothingFlightProfileEasy]
+  parent: [ForgeClothingOuterHardsuitBase, BaseFactionGearTSFT3, ClothingFlightProfileEasy]
   id: ClothingOuterHardsuitTSFMCAdvancedLight
   name: TSFMC M90-M advanced light hardsuit
   suffix: TSFMC
@@ -428,7 +428,7 @@
 
 # TSFMC M98-H heavy battle hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT3, ClothingFlightProfileHard]
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearTSFT3, ClothingFlightProfileHard]
   id: ClothingOuterHardsuitTSFMCHeavyJuggernaut
   name: TSFMC M98-H heavy battle hardsuit
   suffix: TSFMC

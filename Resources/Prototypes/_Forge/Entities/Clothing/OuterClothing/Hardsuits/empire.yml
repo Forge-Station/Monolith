@@ -555,7 +555,7 @@
 # HV MP-33R «Imperceptible»
 - type: entity
   parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT3, ClothingFlightProfileMedium]
-  id: ClothingOuterHardsuitHVStealh
+  id: ClothingOuterHardsuitHVStealth
   name: HV MP-33R «Imperceptible»
   suffix: Empire
   description: Higaris Victories' military prototype 33R, codenamed «Imperceptible».

@@ -69,5 +69,5 @@
 # region «Imperceptible» MP-33R
 - type: latheRecipe
   parent: ForgeStealthSuitT3FactionRecipe
-  id: ClothingOuterHardsuitHVStealh
-  result: ClothingOuterHardsuitHVStealh
+  id: ClothingOuterHardsuitHVStealth
+  result: ClothingOuterHardsuitHVStealth

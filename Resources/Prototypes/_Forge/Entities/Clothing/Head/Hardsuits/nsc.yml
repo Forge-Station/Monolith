@@ -20,7 +20,7 @@
 
 # ClothingHeadHelmetHardsuitNexusMilT1
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingNightVision1Nexus]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision1Nexus]
   id: ClothingHeadHelmetHardsuitNexusMilT1
   categories: [ HideSpawnMenu ]
   suffix: Нексус
@@ -43,7 +43,7 @@
 
 # ClothingHeadHelmetHardsuitNexusMilT2
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ClothingNightVision2Nexus]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Nexus]
   id: ClothingHeadHelmetHardsuitNexusMilT2
   categories: [ HideSpawnMenu ]
   suffix: Нексус
@@ -66,7 +66,7 @@
 
 # ClothingHeadHelmetHardsuitNexusMilT3
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMillitary, ShowMedicalIcons, ClothingNightVision4Nexus]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Nexus]
   id: ClothingHeadHelmetHardsuitNexusMilT3
   categories: [ HideSpawnMenu ]
   suffix: Нексус

@@ -495,9 +495,9 @@
   - type: Gun
     minAngle: 4 # Forge-change 3->4
     maxAngle: 21 # Forge-change 54->21
-    angleIncrease: 4 # Forge-change 5->4
-    angleDecay: 6 # Forge-change 25->6
-    fireRate: 2.8 # Forge-change 1.7->2.8
+    angleIncrease: 3 # Forge-change 5->3
+    angleDecay: 8 # Forge-change 25->8
+    fireRate: 3 # Forge-change 1.7->3
     projectileSpeed: 55 # Forge-change
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg

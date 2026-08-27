@@ -32,6 +32,7 @@ public sealed partial class MappingScreen : InGameScreen
     private bool _decalCleanable;
 
     private bool _decalAuto;
+    private FloatSpinBox _decalRotationSpin = default!; // Forge-Change
 
     public override ChatBox ChatBox => GetWidget<ChatBox>()!;
 
@@ -54,15 +55,15 @@ public sealed partial class MappingScreen : InGameScreen
         ScreenContainer.OnSplitResizeFinished += () =>
             OnChatResized?.Invoke(new Vector2(ScreenContainer.SplitFraction, 0));
 
-        var rotationSpinBox = new FloatSpinBox(90.0f, 0)
+        _decalRotationSpin = new FloatSpinBox(90.0f, 0)
         {
             HorizontalExpand = true
         };
-        DecalSpinBoxContainer.AddChild(rotationSpinBox);
+        DecalSpinBoxContainer.AddChild(_decalRotationSpin);
 
         DecalColorPicker.OnColorChanged += OnDecalColorPicked;
         DecalPickerOpen.OnPressed += OnDecalPickerOpenPressed;
-        rotationSpinBox.OnValueChanged += args =>
+        _decalRotationSpin.OnValueChanged += args =>
         {
             _decalRotation = args.Value;
             UpdateDecal();
@@ -150,23 +151,35 @@ public sealed partial class MappingScreen : InGameScreen
         DecalSystem.UpdateDecalInfo(id, _decalColor, _decalRotation, _decalSnap, _decalZIndex, _decalCleanable);
     }
 
-    public void SelectDecal(string decalId)
+    public void SelectDecal(string decalId, Decal? sampled = null) // Forge-Change
     {
         if (!_prototype.TryIndex<DecalPrototype>(decalId, out var decal))
             return;
 
         _id = decalId;
 
-        if (_decalAuto)
+        // Forge-Change-Start: keep the chosen color when switching decals; eyedropper still copies from the map.
+        if (sampled != null)
         {
-            _decalColor = Color.White;
+            _decalColor = sampled.Color ?? Color.White;
+            _decalRotation = (float) sampled.Angle.Degrees;
+            _decalZIndex = sampled.ZIndex;
+            _decalCleanable = sampled.Cleanable;
+            DecalColorPicker.Color = _decalColor;
+            _decalRotationSpin.Value = _decalRotation;
+            DecalZIndexSpinBox.Value = _decalZIndex;
+            DecalEnableCleanable.Pressed = _decalCleanable;
+        }
+        else if (_decalAuto)
+        {
             _decalCleanable = decal.DefaultCleanable;
             _decalSnap = decal.DefaultSnap;
-
-            DecalColorPicker.Color = _decalColor;
             DecalEnableCleanable.Pressed = _decalCleanable;
             DecalEnableSnap.Pressed = _decalSnap;
         }
+
+        DecalColorPicker.Color = _decalColor;
+        // Forge-Change-End
 
         UpdateDecal();
         RefreshList();

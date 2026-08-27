@@ -227,6 +227,11 @@ ui-options-function-editor-line-place = Place line
 ui-options-function-editor-rotate-object = Rotate
 ui-options-function-editor-flip-object = Flip
 ui-options-function-editor-copy-object = Copy
+# Forge-Change-Start
+ui-options-function-mapping-eyedropper = Mapping eyedropper (Shift+RMB)
+ui-options-function-mapping-eyedropper-tile = Mapping eyedropper tile (Alt+RMB)
+ui-options-function-mapping-eyedropper-decal = Mapping eyedropper decal (Ctrl+RMB)
+# Forge-Change-End
 
 ui-options-function-show-debug-console = Open Console
 ui-options-function-show-debug-monitors = Show Debug Monitors

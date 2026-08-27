@@ -38,7 +38,7 @@ public sealed class TTSSystem : EntitySystem
     private const float MinimalVolume = -10f;
 
     private float _volume = 0.0f;
-    private float _radioVolume = 0.0f; // Forge-Change
+    private float _radioVolume = 0.0f;
     private int _fileIdx = 0;
 
     public override void Initialize()
@@ -72,12 +72,10 @@ public sealed class TTSSystem : EntitySystem
         _volume = volume;
     }
 
-    // Forge-Change-Start
     private void OnTtsRadioVolumeChanged(float volume)
     {
         _radioVolume = volume;
     }
-    // Forge-Change-End
 
     private void OnPlayTTS(PlayTTSEvent ev)
     {
@@ -93,7 +91,7 @@ public sealed class TTSSystem : EntitySystem
         audioResource.Load(IoCManager.Instance!, Prefix / filePath);
 
         var audioParams = AudioParams.Default
-            .WithVolume(AdjustVolume(ev.IsWhisper, ev.IsRadio)) // Forge-Change
+            .WithVolume(AdjustVolume(ev.IsWhisper, ev.IsRadio))
             .WithMaxDistance(AdjustDistance(ev.IsWhisper));
 
         var soundSpecifier = new ResolvedPathSpecifier(Prefix / filePath);
@@ -101,7 +99,10 @@ public sealed class TTSSystem : EntitySystem
         if (ev.SourceUid != null)
         {
             if (!TryGetEntity(ev.SourceUid.Value, out _))
+            {
+                _contentRoot.RemoveFile(filePath);
                 return;
+            }
             var sourceUid = GetEntity(ev.SourceUid.Value);
             _audio.PlayEntity(audioResource.AudioStream, sourceUid, soundSpecifier, audioParams);
         }
@@ -113,9 +114,9 @@ public sealed class TTSSystem : EntitySystem
         _contentRoot.RemoveFile(filePath);
     }
 
-    private float AdjustVolume(bool isWhisper, bool isRadio = false) // Forge-Change
+    private float AdjustVolume(bool isWhisper, bool isRadio = false)
     {
-        var volume = MinimalVolume + SharedAudioSystem.GainToVolume(isRadio ? _radioVolume : _volume); // Forge-Change
+        var volume = MinimalVolume + SharedAudioSystem.GainToVolume(isRadio ? _radioVolume : _volume);
 
         if (isWhisper)
         {

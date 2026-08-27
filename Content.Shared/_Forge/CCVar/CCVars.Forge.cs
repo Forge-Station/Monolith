@@ -78,5 +78,17 @@ public sealed partial class ForgeCVars
     /// </summary>
     public static readonly CVarDef<float> StorageScale =
         CVarDef.Create("forge.ui.storage_scale", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Comma-separated mapping palette favorites in the form e:ProtoId,t:TileId,d:DecalId.
+    /// </summary>
+    public static readonly CVarDef<string> MappingPaletteFavorites =
+        CVarDef.Create("forge.mapping.palette_favorites", "", CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Comma-separated recently used mapping palette entries (same encoding as favorites).
+    /// </summary>
+    public static readonly CVarDef<string> MappingPaletteRecents =
+        CVarDef.Create("forge.mapping.palette_recents", "", CVar.CLIENTONLY | CVar.ARCHIVE);
     // Forge-Change-End
 }

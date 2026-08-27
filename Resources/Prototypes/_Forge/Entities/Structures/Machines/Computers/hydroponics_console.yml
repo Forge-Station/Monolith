@@ -1,0 +1,57 @@
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerHydroponics
+  name: hydroponics tray console
+  description: Lists every hydroponics tray linked with a network configurator and reports plant health, atmosphere needs, and mutations.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: generic
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: HydroponicsConsole
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: BasicDevice
+    prefix: device-address-prefix-hydroponics-console
+  - type: WiredNetworkConnection
+  - type: DeviceList
+    deviceLimit: 32
+  - type: ActivatableUI
+    key: enum.HydroponicsConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.HydroponicsConsoleUiKey.Key:
+        type: HydroponicsConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Computer
+    board: HydroponicsConsoleCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#67d64b"
+  - type: GuideHelp
+    guides:
+    - Botany
+  - type: ShipRepairable
+    repairTime: 4
+    repairCost: 8
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: HydroponicsConsoleCircuitboard
+  name: hydroponics tray console board
+  description: A computer printed circuit board for a hydroponics tray console.
+  components:
+  - type: Sprite
+    state: cpu_service
+  - type: ComputerBoard
+    prototype: ComputerHydroponics

@@ -294,7 +294,7 @@
 # High-End
 - type: entity
   id: ShieldGenerator
-  parent: ShieldGeneratorBase
+  parent: [ ShieldGeneratorBase , BaseFactionGearOtherFactionT3 ]  # Froge-change add parent forbidden ADS
   name: MS-500 "Titan" Shield Generator
   description: The Titan. Advanced shielding, with a quick recharge time, and excels against colisions.
   suffix: ADS ONLY

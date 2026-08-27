@@ -33,3 +33,11 @@
   price: 0
   equipment:
     eyes: ClothingEyesBallisticGlassesOrange
+
+# Forge-Change-Start
+- type: loadout
+  id: MercenaryClothingEyesTransparentBlindfold
+  price: 0
+  equipment:
+    eyes: ClothingEyesTransparentBlindfold
+# Forge-Change-End

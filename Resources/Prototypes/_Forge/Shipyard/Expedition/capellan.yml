@@ -17,6 +17,7 @@
   description: Крупногабаритный универсальный шаттл. Оборудован РНД отсеком, мед. отсеком, утилизационным оборудованием, майнинг-лазером и консолью экспедиций. Рекомендованный размер команды 3-6 человек.
   price: 230000 #sell 183k / 215500 = 85% / 100%
   category: Large
+  limit: 3
   group: Expedition
   shuttlePath: /SharedMaps/_Forge/Shuttles/Expedition/capellan.yml
 

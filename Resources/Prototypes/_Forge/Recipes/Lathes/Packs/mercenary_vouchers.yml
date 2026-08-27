@@ -1,0 +1,9 @@
+- type: latheRecipePack
+  id: ForgeMercenaryVouchers
+  recipes:
+  - ForgeShipVoucherCorvet
+  - ForgeShipVoucherSeeker
+  - ForgeShipVoucherHammerhead
+  - ForgeShipVoucherDreadnought
+  - ForgeShipVoucherAchilles
+  - ForgeShipVoucherBriar

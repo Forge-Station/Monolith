@@ -1,0 +1,98 @@
+- type: livingNpcPersonality
+  id: LivingNpcPersonalityCivilian
+  traits:
+    extraversion: 0.55
+    bravery: 0.35
+    curiosity: 0.6
+    agreeableness: 0.6
+    discipline: 0.4
+    temper: 0.35
+    humor: 0.45
+
+- type: livingNpcPersonality
+  id: LivingNpcPersonalityBartender
+  traits:
+    extraversion: 0.85
+    bravery: 0.4
+    curiosity: 0.5
+    agreeableness: 0.75
+    discipline: 0.55
+    temper: 0.25
+    humor: 0.7
+
+- type: livingNpcPersonality
+  id: LivingNpcPersonalityJanitor
+  traits:
+    extraversion: 0.4
+    bravery: 0.45
+    curiosity: 0.35
+    agreeableness: 0.5
+    discipline: 0.7
+    temper: 0.4
+    humor: 0.5
+
+- type: livingNpcPersonality
+  id: LivingNpcPersonalityDockworker
+  traits:
+    extraversion: 0.35
+    bravery: 0.55
+    curiosity: 0.3
+    agreeableness: 0.45
+    discipline: 0.75
+    temper: 0.4
+    humor: 0.3
+
+- type: livingNpcPersonality
+  id: LivingNpcPersonalityMerchant
+  traits:
+    extraversion: 0.8
+    bravery: 0.3
+    curiosity: 0.65
+    agreeableness: 0.7
+    discipline: 0.6
+    temper: 0.25
+    humor: 0.55
+
+- type: livingNpcPersonality
+  id: LivingNpcPersonalitySecurity
+  traits:
+    extraversion: 0.45
+    bravery: 0.85
+    curiosity: 0.4
+    agreeableness: 0.4
+    discipline: 0.8
+    temper: 0.55
+    humor: 0.25
+
+- type: livingNpcPersonality
+  id: LivingNpcPersonalityScientist
+  traits:
+    extraversion: 0.3
+    bravery: 0.3
+    curiosity: 0.9
+    agreeableness: 0.5
+    discipline: 0.65
+    temper: 0.25
+    humor: 0.35
+
+- type: livingNpcPersonality
+  id: LivingNpcPersonalityMedic
+  traits:
+    extraversion: 0.55
+    bravery: 0.5
+    curiosity: 0.45
+    agreeableness: 0.9
+    discipline: 0.7
+    temper: 0.2
+    humor: 0.4
+
+- type: livingNpcPersonality
+  id: LivingNpcPersonalityClown
+  traits:
+    extraversion: 0.95
+    bravery: 0.25
+    curiosity: 0.7
+    agreeableness: 0.65
+    discipline: 0.15
+    temper: 0.15
+    humor: 1.0

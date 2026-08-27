@@ -1,0 +1,170 @@
+- type: entity
+  id: MobLivingNpcBase
+  parent: BaseMobHuman
+  name: living person
+  description: They look like they actually have somewhere to be.
+  abstract: true
+  suffix: Living NPC
+  components:
+  - type: RandomHumanoidAppearance
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: ActiveListener
+    range: 8
+  - type: LivingNpc
+    personalityId: LivingNpcPersonalityCivilian
+    dialogueId: LivingNpcDialogueCivilian
+    jobTitle: living-npc-job-civilian
+    visionRange: 8
+    homeRadius: 14
+  - type: LivingNpcMemory
+  - type: LivingNpcSocial
+  - type: LivingNpcRoutine
+
+- type: entity
+  id: MobLivingNpcCivilian
+  parent: MobLivingNpcBase
+  name: civilian
+  description: Just trying to get through the shift.
+  components:
+  - type: Loadout
+    prototypes:
+    - LivingNpcCivilianGear
+
+- type: entity
+  id: MobLivingNpcBartender
+  parent: MobLivingNpcBase
+  name: bartender
+  description: Always has a story, and usually a drink to go with it.
+  components:
+  - type: Loadout
+    prototypes:
+    - LivingNpcBartenderGear
+  - type: LivingNpc
+    personalityId: LivingNpcPersonalityBartender
+    dialogueId: LivingNpcDialogueBartender
+    jobTitle: living-npc-job-bartender
+    group: service
+    homeRadius: 10
+    wanderRange: 4
+  - type: LivingNpcRoutine
+    workDuration: 35
+    restDuration: 10
+
+- type: entity
+  id: MobLivingNpcJanitor
+  parent: MobLivingNpcBase
+  name: janitor
+  description: The floor is never quite clean enough.
+  components:
+  - type: Loadout
+    prototypes:
+    - LivingNpcJanitorGear
+  - type: LivingNpc
+    personalityId: LivingNpcPersonalityJanitor
+    dialogueId: LivingNpcDialogueJanitor
+    jobTitle: living-npc-job-janitor
+    group: service
+    homeRadius: 18
+    wanderRange: 8
+
+- type: entity
+  id: MobLivingNpcDockworker
+  parent: MobLivingNpcBase
+  name: dock worker
+  description: Lives between crates, manifests, and coffee.
+  components:
+  - type: Loadout
+    prototypes:
+    - LivingNpcDockworkerGear
+  - type: LivingNpc
+    personalityId: LivingNpcPersonalityDockworker
+    dialogueId: LivingNpcDialogueDockworker
+    jobTitle: living-npc-job-dockworker
+    group: cargo
+    homeRadius: 16
+
+- type: entity
+  id: MobLivingNpcMerchant
+  parent: MobLivingNpcBase
+  name: merchant
+  description: Will greet you before you even decide to buy anything.
+  components:
+  - type: Loadout
+    prototypes:
+    - LivingNpcMerchantGear
+  - type: LivingNpc
+    personalityId: LivingNpcPersonalityMerchant
+    dialogueId: LivingNpcDialogueMerchant
+    jobTitle: living-npc-job-merchant
+    group: trade
+    homeRadius: 8
+    wanderRange: 3.5
+
+- type: entity
+  id: MobLivingNpcSecurity
+  parent: MobLivingNpcBase
+  name: security officer
+  description: Patrols like the next incident is already late.
+  components:
+  - type: Loadout
+    prototypes:
+    - LivingNpcSecurityGear
+  - type: LivingNpc
+    personalityId: LivingNpcPersonalitySecurity
+    dialogueId: LivingNpcDialogueSecurity
+    jobTitle: living-npc-job-security
+    group: security
+    willFight: true
+    visionRange: 10
+    homeRadius: 20
+    wanderRange: 9
+
+- type: entity
+  id: MobLivingNpcScientist
+  parent: MobLivingNpcBase
+  name: scientist
+  description: Lost in thought, and possibly in a maintenance tunnel.
+  components:
+  - type: Loadout
+    prototypes:
+    - LivingNpcScientistGear
+  - type: LivingNpc
+    personalityId: LivingNpcPersonalityScientist
+    dialogueId: LivingNpcDialogueScientist
+    jobTitle: living-npc-job-scientist
+    group: science
+
+- type: entity
+  id: MobLivingNpcMedic
+  parent: MobLivingNpcBase
+  name: medic
+  description: Checks you over even when you only asked for directions.
+  components:
+  - type: Loadout
+    prototypes:
+    - LivingNpcMedicGear
+  - type: LivingNpc
+    personalityId: LivingNpcPersonalityMedic
+    dialogueId: LivingNpcDialogueMedic
+    jobTitle: living-npc-job-medic
+    group: medical
+    homeRadius: 12
+
+- type: entity
+  id: MobLivingNpcClown
+  parent: MobLivingNpcBase
+  name: clown
+  description: Honk. Also, somehow, a person.
+  components:
+  - type: Loadout
+    prototypes:
+    - LivingNpcClownGear
+  - type: LivingNpc
+    personalityId: LivingNpcPersonalityClown
+    dialogueId: LivingNpcDialogueClown
+    jobTitle: living-npc-job-clown
+    group: service
+    homeRadius: 16
+    wanderRange: 7

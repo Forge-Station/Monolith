@@ -89,9 +89,6 @@
         Piercing: 65 # Forge-change 120->65
         Structural: 400 # Forge-change 500->400
     ignoreResistances: true # Forge-change
-    penetrationThreshold: 400 # Forge-change
-    penetrationDamageTypeRequirement: # Forge-change
-    - Structural # Forge-change
   - type: HitscanBasicRaycast
     maxDistance: 100 # Forge-change 200->100
     collisionMask:

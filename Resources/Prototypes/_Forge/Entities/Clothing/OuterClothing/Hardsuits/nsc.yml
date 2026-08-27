@@ -144,9 +144,6 @@
           Piercing: 1
           Heat: 1.25
           Radiation: 0.25
-    passiveBlockFraction: 1
-    activeBlockFraction: 1
-    isClothing: true
   - type: Damageable
     damageContainer: Shield
   - type: Battery

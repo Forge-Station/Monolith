@@ -1,0 +1,33 @@
+- type: entity
+  parent: BaseItem
+  id: ArmorPlateSpeed
+  name: speed armor plate
+  description: An armor module consisting of replacement brass plating for shedding weight. Increases your speed, but makes you vulnerable to most damage.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/ArmorPlate/armor_plates.rsi
+    state: speed
+  - type: Item
+    sprite: _Mono/Clothing/ArmorPlate/armor_plates.rsi
+    size: Normal
+  - type: ArmorPlateItem
+    maxDurability: 50
+    walkSpeedModifier: 0.9
+    sprintSpeedModifier: 0.9
+    staminaDamageMultiplier: 1
+    absorptionRatios:
+      Burn: 1.1
+      Piercing: 1.1
+      Blunt: 1.1
+      Slash: 1.1
+      Radiation: 0.1
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

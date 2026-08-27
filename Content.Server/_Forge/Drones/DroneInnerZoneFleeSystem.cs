@@ -2,13 +2,13 @@ using System.Numerics;
 using Content.Server._Forge.Drones.Components;
 using Content.Server._Mono.Cleanup;
 using Content.Server._Mono.NPC.HTN;
-using Content.Server.Damage.Systems;
 using Content.Server.NPC.HTN;
 using Content.Server.Physics.Controllers;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Crescent.DroneControl;
 using Content.Shared._Forge.CCVar;
-using Content.Shared.Damage.Components;
+using Content.Shared.Damage;
+using Content.Shared.Mind.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -17,27 +17,26 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using static Content.Shared.Damage.DamageableSystem;
 
 namespace Content.Server._Forge.Drones;
 
 /// <summary>
 /// Forces procedural core AI drones to flee the inner 0-18 km worldgen zone and despawn shortly after.
 /// </summary>
-public sealed class DroneInnerZoneFleeSystem : EntitySystem
+public sealed partial class DroneInnerZoneFleeSystem : EntitySystem
 {
-    [Dependency] private readonly CleanupHelperSystem _cleanupHelper = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly GodmodeSystem _godmode = default!;
-    [Dependency] private readonly HTNSystem _htn = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ShipSteeringSystem _steering = default!;
-    [Dependency] private readonly ShipTargetingSystem _targeting = default!;
+    [Dependency] private CleanupHelperSystem _cleanupHelper = default!;
+    [Dependency] private HTNSystem _htn = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ShipSteeringSystem _steering = default!;
+    [Dependency] private ShipTargetingSystem _targeting = default!;
 
     private static readonly SoundSpecifier FleeSound = new SoundPathSpecifier("/Audio/Effects/Shuttle/hyperspace_begin.ogg")
     {
@@ -56,9 +55,11 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
 
     private EntityQuery<DroneControlComponent> _droneControlQuery;
     private EntityQuery<GridCleanupGridComponent> _cleanupGridQuery;
-    private EntityQuery<DroneInnerZoneFleeComponent> _fleeQuery;
+    private EntityQuery<DroneInnerZoneFleeGridComponent> _fleeGridQuery;
     private EntityQuery<HTNComponent> _htnQuery;
     private EntityQuery<ShuttleConsoleComponent> _shuttleConsoleQuery;
+    private EntityQuery<MindContainerComponent> _mindQuery;
+    private EntityQuery<TransformComponent> _xformQuery;
 
     public override void Initialize()
     {
@@ -66,28 +67,59 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
 
         _droneControlQuery = GetEntityQuery<DroneControlComponent>();
         _cleanupGridQuery = GetEntityQuery<GridCleanupGridComponent>();
-        _fleeQuery = GetEntityQuery<DroneInnerZoneFleeComponent>();
+        _fleeGridQuery = GetEntityQuery<DroneInnerZoneFleeGridComponent>();
         _htnQuery = GetEntityQuery<HTNComponent>();
         _shuttleConsoleQuery = GetEntityQuery<ShuttleConsoleComponent>();
+        _mindQuery = GetEntityQuery<MindContainerComponent>();
+        _xformQuery = GetEntityQuery<TransformComponent>();
 
         Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneRadius, val => _innerZoneRadius = val, true);
-        Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneFleeDeleteMin, val => _deleteMinSeconds = val, true);
-        Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneFleeDeleteMax, val => _deleteMaxSeconds = val, true);
+        Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneFleeDeleteMin, val =>
+        {
+            _deleteMinSeconds = val;
+            ClampDeleteTimes();
+        }, true);
+        Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneFleeDeleteMax, val =>
+        {
+            _deleteMaxSeconds = val;
+            ClampDeleteTimes();
+        }, true);
         Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneCheckInterval, val => _zoneCheckInterval = MathF.Max(0.1f, val), true);
+        ClampDeleteTimes();
+
+        SubscribeLocalEvent<DamageableComponent, BeforeDamageChangedEvent>(OnFleeGridDamage);
     }
 
     public override void Update(float frameTime)
     {
-        RefreshOccupiedGrids();
+        _zoneCheckTimer += frameTime;
+        var scanZone = _zoneCheckTimer >= _zoneCheckInterval;
+        if (scanZone)
+            _zoneCheckTimer = 0f;
+
+        if (scanZone || _pendingDeletes.Count > 0 || AnyFleeing())
+            RefreshOccupiedGrids();
+
         ProcessPendingDeletes();
         UpdateFleeingDrones();
 
-        _zoneCheckTimer += frameTime;
-        if (_zoneCheckTimer >= _zoneCheckInterval)
-        {
-            _zoneCheckTimer = 0f;
+        if (scanZone)
             TryStartFleeForInnerZoneDrones();
-        }
+    }
+
+    private void ClampDeleteTimes()
+    {
+        if (_deleteMinSeconds > _deleteMaxSeconds)
+            (_deleteMinSeconds, _deleteMaxSeconds) = (_deleteMaxSeconds, _deleteMinSeconds);
+
+        _deleteMinSeconds = MathF.Max(0.1f, _deleteMinSeconds);
+        _deleteMaxSeconds = MathF.Max(_deleteMinSeconds, _deleteMaxSeconds);
+    }
+
+    private bool AnyFleeing()
+    {
+        var query = EntityQueryEnumerator<DroneInnerZoneFleeGridComponent>();
+        return query.MoveNext(out _, out _);
     }
 
     private void RefreshOccupiedGrids()
@@ -99,9 +131,9 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
     private bool HasPlayerOnGrid(EntityUid gridUid) => _occupiedGrids.Contains(gridUid);
 
     /// <summary>
-    /// Used by <see cref="ShuttleSystem"/> to skip impact damage for fleeing drone grids.
+    /// Used by shuttle impact handling to skip damage for fleeing drone grids.
     /// </summary>
-    public bool IsFleeingGrid(EntityUid uid) => HasComp<DroneInnerZoneFleeGridComponent>(uid);
+    public bool IsFleeingGrid(EntityUid uid) => _fleeGridQuery.HasComp(uid);
 
     private void ProcessPendingDeletes()
     {
@@ -123,31 +155,53 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
 
     private void TryStartFleeForInnerZoneDrones()
     {
-        var query = EntityQueryEnumerator<HTNComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<GridCleanupGridComponent, TransformComponent>();
 
-        while (query.MoveNext(out var uid, out _, out var xform))
+        while (query.MoveNext(out var gridUid, out var cleanup, out var gridXform))
         {
-            if (_fleeQuery.HasComp(uid))
+            if (!cleanup.IgnoreIFF || !cleanup.IgnorePowered)
                 continue;
 
-            if (xform.GridUid is not { } gridUid || !IsProceduralDroneGrid(gridUid))
-                continue;
-
-            if (!IsFleeEligibleAiCore(uid, gridUid))
+            if (_fleeGridQuery.HasComp(gridUid) || TerminatingOrDeleted(gridUid))
                 continue;
 
             if (HasPlayerOnGrid(gridUid))
                 continue;
 
-            var mapPos = _transform.GetMapCoordinates(uid, xform);
+            var mapPos = _transform.GetMapCoordinates(gridUid, gridXform);
             if (mapPos.Position.Length() >= _innerZoneRadius)
                 continue;
 
-            if (!_htnQuery.TryGetComponent(uid, out var htn))
+            if (!TryFindFleeAiCore(gridUid, out var aiUid, out var htn))
                 continue;
 
-            StartFlee((uid, htn), gridUid);
+            StartFlee((aiUid, htn), gridUid);
         }
+    }
+
+    private bool TryFindFleeAiCore(EntityUid gridUid, out EntityUid aiUid, out HTNComponent htn)
+    {
+        aiUid = default;
+        htn = default!;
+
+        if (!_xformQuery.TryGetComponent(gridUid, out var gridXform))
+            return false;
+
+        var enumerator = gridXform.ChildEnumerator;
+        while (enumerator.MoveNext(out var child))
+        {
+            if (!IsFleeEligibleAiCore(child, gridUid))
+                continue;
+
+            if (!_htnQuery.TryGetComponent(child, out var found))
+                continue;
+
+            aiUid = child;
+            htn = found;
+            return true;
+        }
+
+        return false;
     }
 
     private void UpdateFleeingDrones()
@@ -162,20 +216,12 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
                 continue;
             }
 
-            if (!IsFleeEligibleAiCore(uid, gridUid))
+            // Abort even after the BSS timer: a boarded player must restore the AI and cancel deletion.
+            if (!IsFleeEligibleAiCore(uid, gridUid) || HasPlayerOnGrid(gridUid))
             {
                 AbortFlee(gridUid, uid);
                 continue;
             }
-
-            if (HasPlayerOnGrid(gridUid))
-            {
-                AbortFlee(gridUid, uid);
-                continue;
-            }
-
-            if (_pendingDeletes.Contains(gridUid))
-                continue;
 
             if (_timing.CurTime >= flee.DeleteAt)
             {
@@ -183,13 +229,16 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
                 continue;
             }
 
+            if (_pendingDeletes.Contains(gridUid))
+                continue;
+
             UpdateFleeSteering(uid, flee, xform);
         }
     }
 
     private void StartFlee(Entity<HTNComponent> ent, EntityUid gridUid)
     {
-        if (HasPlayerOnGrid(gridUid))
+        if (HasPlayerOnGrid(gridUid) || _fleeGridQuery.HasComp(gridUid))
             return;
 
         _htn.ShutdownPlan(ent.Comp);
@@ -203,11 +252,10 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
 
         EnsureComp<CleanupImmuneComponent>(gridUid);
         EnsureComp<DroneInnerZoneFleeGridComponent>(gridUid);
-        ProtectGrid(gridUid);
 
         UpdateFleeSteering(ent, flee, Transform(ent));
 
-        Log.Debug($"Drone {ToPrettyString(ent)} started inner-zone flee, deleting grid {ToPrettyString(gridUid)} at {flee.DeleteAt}");
+        Log.Info($"Drone {ToPrettyString(ent)} started inner-zone flee, deleting grid {ToPrettyString(gridUid)} at {flee.DeleteAt}");
     }
 
     private void UpdateFleeSteering(EntityUid aiUid, DroneInnerZoneFleeComponent flee, TransformComponent aiXform)
@@ -255,7 +303,7 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
             piloted.InputSources.Remove(aiUid);
 
         if (TryComp<PhysicsComponent>(gridUid, out var body))
-            _physics.SetAwake(gridUid, body, false);
+            _physics.SetAwake((gridUid, body), false);
 
         var coords = Transform(gridUid).Coordinates;
         _audio.PlayPvs(FleeSound, coords);
@@ -272,26 +320,26 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
         return new EntityCoordinates(mapUid, pos + dir * fleeTargetDistance);
     }
 
-    private void ProtectGrid(EntityUid gridUid)
+    /// <summary>
+    /// Cancels damage on entities whose <see cref="TransformComponent.GridUid"/> is a fleeing drone grid.
+    /// Uses grid membership, not AABB overlap, and never applies godmode/Rejuvenate.
+    /// </summary>
+    private void OnFleeGridDamage(Entity<DamageableComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        _godmode.EnableGodmode(gridUid);
+        if (args.Cancelled)
+            return;
 
-        foreach (var entity in _lookup.GetEntitiesIntersecting(gridUid))
-        {
-            _godmode.EnableGodmode(entity);
-        }
-    }
+        if (!_xformQuery.TryGetComponent(ent, out var xform))
+            return;
 
-    private void UnprotectGrid(EntityUid gridUid)
-    {
-        if (HasComp<GodmodeComponent>(gridUid))
-            _godmode.DisableGodmode(gridUid);
+        var gridUid = xform.GridUid ?? ent.Owner;
+        if (!_fleeGridQuery.HasComp(gridUid))
+            return;
 
-        foreach (var entity in _lookup.GetEntitiesIntersecting(gridUid))
-        {
-            if (HasComp<GodmodeComponent>(entity))
-                _godmode.DisableGodmode(entity);
-        }
+        if (_mindQuery.TryGetComponent(ent, out var mind) && mind.HasMind)
+            return;
+
+        args.Cancelled = true;
     }
 
     private void AbortFlee(EntityUid gridUid, EntityUid aiUid)
@@ -305,16 +353,14 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
         RemComp<DroneInnerZoneFleeComponent>(aiUid);
         RemComp<DroneInnerZoneFleeGridComponent>(gridUid);
         RemComp<CleanupImmuneComponent>(gridUid);
-        UnprotectGrid(gridUid);
 
         if (TryComp<HTNComponent>(aiUid, out var htn))
             _htn.SetHTNEnabled((aiUid, htn), true);
     }
 
     /// <summary>
-    /// HTN cores on procedural drone grids. Many worldgen hulls use NpcStationAi* spawners (rammers, attackers),
-    /// so eligibility is tied to the grid marker rather than the NpcDroneAi* prefix alone.
-    /// Fixed POI station AI is excluded because those grids lack the SpawnDroneBase cleanup marker.
+    /// Worldgen drone hulls use NpcDroneAi* and NpcStationAi* cores. Eligibility also requires
+    /// the SpawnDroneBase cleanup marker so fixed POI station AI is ignored.
     /// </summary>
     private bool IsFleeEligibleAiCore(EntityUid uid, EntityUid gridUid)
     {
@@ -324,11 +370,15 @@ public sealed class DroneInnerZoneFleeSystem : EntitySystem
         if (!_htnQuery.HasComp(uid))
             return false;
 
-        if (IsProceduralDroneGrid(gridUid))
-            return true;
+        if (!IsProceduralDroneGrid(gridUid))
+            return false;
 
         var protoId = MetaData(uid).EntityPrototype?.ID;
-        return protoId != null && protoId.StartsWith("NpcDroneAi", StringComparison.Ordinal);
+        if (string.IsNullOrEmpty(protoId))
+            return false;
+
+        return protoId.StartsWith("NpcDroneAi", StringComparison.Ordinal)
+               || protoId.StartsWith("NpcStationAi", StringComparison.Ordinal);
     }
 
     /// <summary>

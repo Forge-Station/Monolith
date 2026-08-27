@@ -378,6 +378,7 @@
   - Hemophilia
   speciesBlacklist:
   - IPC
+  - Diona #Forge-Change
   blacklist:
     components:
     - BorgChassis

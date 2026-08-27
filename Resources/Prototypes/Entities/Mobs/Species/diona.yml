@@ -135,6 +135,16 @@
   - type: Carriable # Carrying system from nyanotrasen.
   - type: ProtectedFromStepTriggers # Frontier
   - type: FTLKnockdownImmune # Frontier
+  #Forge-Change-Start
+  - type: PlateletFactories #немного лучше фабрики тромбоцитов с черт
+    intervalSeconds: 5
+    damagePerInterval:
+      groups:
+        Brute: -8 # в фабрике с черт отрегенило бы 7,5
+        Burn: -7 # в фабрике с черт отрегенило бы 5
+    critMultiplier: .25
+  #Forge-Change-end
+
 
 - type: entity
   parent: BaseSpeciesDummy

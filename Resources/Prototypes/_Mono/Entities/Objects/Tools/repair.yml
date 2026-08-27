@@ -76,7 +76,7 @@
   id: ShipRepairDeviceRedacted
   name: pre-fracture SRD
   description: An arcane repair device that can repair ADS ships.
-  parent: ShipRepairDeviceRecharging
+  parent: [ ShipRepairDeviceRecharging, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   suffix: Recharging
   components:
   - type: Sprite

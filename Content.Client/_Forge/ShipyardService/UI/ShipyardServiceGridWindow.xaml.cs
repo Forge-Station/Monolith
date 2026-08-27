@@ -86,8 +86,10 @@ public sealed partial class ShipyardServiceGridWindow : FancyWindow
         };
 
         GridMap.SelectionChanged += RefreshSelection;
+        GridMap.HoveredChanged += RefreshHover;
         HintLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("shipyard-service-grid-hint")));
         RefreshSelection();
+        RefreshHover();
     }
 
     public void UpdateState(ShipyardServiceBoundUserInterfaceState state)
@@ -122,6 +124,48 @@ public sealed partial class ShipyardServiceGridWindow : FancyWindow
         }
 
         RefreshSelection();
+        RefreshHover();
+    }
+
+    private void RefreshHover()
+    {
+        ShipyardServiceUpgradeMarker? marker = null;
+        if (GridMap.HoveredId is { } hovered)
+        {
+            foreach (var candidate in GridMap.Markers)
+            {
+                if (candidate.Id != hovered)
+                    continue;
+
+                marker = candidate;
+                break;
+            }
+        }
+        else if (GridMap.Selected.Count > 0)
+        {
+            foreach (var candidate in GridMap.Markers)
+            {
+                if (!GridMap.Selected.Contains(candidate.Id) || !GridMap.IsVisible(candidate.Action))
+                    continue;
+
+                marker = candidate;
+            }
+        }
+
+        if (marker == null)
+        {
+            HoverLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("shipyard-service-grid-hover-empty")));
+            return;
+        }
+
+        var action = Loc.GetString($"shipyard-service-action-{marker.Action.ToString().ToLowerInvariant()}");
+        var detail = string.IsNullOrWhiteSpace(marker.Detail) ? marker.Label : marker.Detail;
+        HoverLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("shipyard-service-grid-hover",
+            ("action", FormattedMessage.EscapeText(action)),
+            ("name", FormattedMessage.EscapeText(marker.Label)),
+            ("detail", FormattedMessage.EscapeText(detail)),
+            ("count", marker.Count),
+            ("amount", BankSystemExtensions.ToSpesoString(marker.Cost)))));
     }
 
     private void RefreshSelection()
@@ -156,5 +200,6 @@ public sealed partial class ShipyardServiceGridWindow : FancyWindow
         ApplyButton.Disabled = count <= 0 ||
                                _state.Balance < cost ||
                                hasRepair && _state.Quote.RepairOnCooldown;
+        RefreshHover();
     }
 }

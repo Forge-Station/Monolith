@@ -31,6 +31,11 @@ public sealed class MappingPrototype
     /// </summary>
     public List<MappingPrototype>? Children;
 
+    /// <summary>
+    ///     Forge-Change: semantic palette folder this spawnable was sorted into.
+    /// </summary>
+    public MappingPrototype? PaletteGroup;
+
     public MappingPrototype(IPrototype? prototype, string name)
     {
         Prototype = prototype;

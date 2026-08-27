@@ -96,6 +96,24 @@ public sealed partial class ScalingViewport
     private ShaderInstance? _transitBlitShader;
     private ShaderInstance? _cloudShader;
 
+    // Forge-Change: free Z-level GPU resources when the control is torn down. The transit
+    // viewport is otherwise only disposed on size change (in RenderTransitOverhead), so it
+    // leaks a viewport + render target every time this control is destroyed.
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (!disposing)
+            return;
+
+        _transitViewport?.Dispose();
+        _transitViewport = null;
+        _transitBlitShader?.Dispose();
+        _transitBlitShader = null;
+        _cloudShader?.Dispose();
+        _cloudShader = null;
+    }
+
     private void RenderZLevels(IRenderHandle renderHandle, IClydeViewport viewport)
     {
         if (_eye is null)

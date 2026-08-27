@@ -338,4 +338,18 @@
   category: construction-category-goblin
   entityWhitelist: *goblinWhitelist
   objectType: Item
+
+- type: construction
+  name: weapon-goblin-trashbow
+  description: weapon-goblin-trashbow-desc
+  id: crossbowGoblinHand
+  icon:
+    sprite: _Forge/Objects/Weapons/Guns/Goblin/trashbow.rsi
+    state: icon
+  graph: crossbowGoblinHand
+  startNode: start
+  targetNode: crossbowGoblinHand
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
 # Forge-Change-End

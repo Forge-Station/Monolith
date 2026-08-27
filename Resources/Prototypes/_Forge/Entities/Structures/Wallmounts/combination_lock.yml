@@ -1,0 +1,66 @@
+- type: entity
+  id: RemnantCombinationLock
+  name: remnant combination lock
+  description: A precursor keypad. Set the Code field in mapping (default 1234). A correct entry pulses linked devices.
+  suffix: Forge, Remnant
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: WallMount
+    arc: 360
+  - type: Physics
+    canCollide: false
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/switch.rsi
+    state: dead
+  - type: CombinationLock
+    code: "1234"
+    maxLength: 8
+  - type: ActivatableUI
+    key: enum.CombinationLockUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.CombinationLockUiKey.Key:
+        type: CombinationLockBoundUserInterface
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSource
+    ports:
+    - Pressed
+    - Off
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: RemnantCombinationLock
+  id: RemnantCombinationLock0000
+  suffix: Forge, Remnant, 0000
+  components:
+  - type: CombinationLock
+    code: "0000"
+
+- type: entity
+  parent: RemnantCombinationLock
+  id: RemnantCombinationLock7319
+  suffix: Forge, Remnant, 7319
+  components:
+  - type: CombinationLock
+    code: "7319"

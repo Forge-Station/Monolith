@@ -51,7 +51,15 @@ namespace Content.Client.Paper.UI
 
         public event Action<string>? OnSaved;
 
+        // Forge-Change: language dropdown while writing
+        private readonly List<string> _languageIds = new();
+        private string? _pickedLanguage;
+
         private int _MaxInputLength = -1;
+        // Forge-Change: already-written characters that cannot be edited
+        private int _lockedLength;
+        private int _newlineOverhead;
+        private int _totalContentSize = -1;
         public int MaxInputLength
         {
             get
@@ -63,6 +71,15 @@ namespace Content.Client.Paper.UI
                 _MaxInputLength = value;
                 UpdateFillState();
             }
+        }
+
+        // Forge-Change: remaining room is ContentSize minus locked text (and a joining newline)
+        public void ConfigureAppend(int lockedLength, bool lockedEndsWithNewline, int totalContentSize)
+        {
+            _lockedLength = Math.Max(0, lockedLength);
+            _newlineOverhead = _lockedLength > 0 && !lockedEndsWithNewline ? 1 : 0;
+            _totalContentSize = totalContentSize;
+            MaxInputLength = Math.Max(0, totalContentSize - _lockedLength - _newlineOverhead);
         }
 
         public PaperWindow()
@@ -102,6 +119,16 @@ namespace Content.Client.Paper.UI
 
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
+            // Forge-Change: high-contrast language label + actually apply OptionButton selection
+            LanguageLabel.Text = Loc.GetString("paper-language-ui-language");
+            LanguageLabel.FontColorOverride = Color.FromHex("#F2F2F2");
+            LanguageSelector.Filterable = true;
+            LanguageSelector.OnItemSelected += args =>
+            {
+                LanguageSelector.SelectId(args.Id);
+                if (args.Id >= 0 && args.Id < _languageIds.Count)
+                    _pickedLanguage = _languageIds[args.Id];
+            };
         }
 
         /// <summary>
@@ -253,24 +280,7 @@ namespace Content.Client.Paper.UI
             var msg = new FormattedMessage();
             msg.AddMarkupPermissive(state.Text);
 
-            // For premade documents, we want to be able to edit them rather than
-            // replace them.
-            var shouldCopyText = 0 == Input.TextLength && 0 != state.Text.Length;
-            if (!wasEditing || shouldCopyText)
-            {
-                // We can get repeated messages with state.Mode == Write if another
-                // player opens the UI for reading. In this case, don't update the
-                // text input, as this player is currently writing new text and we
-                // don't want to lose any text they already input.
-                Input.TextRope = Rope.Leaf.Empty;
-                Input.CursorPosition = new TextEdit.CursorPos();
-                Input.InsertAtCursor(state.Text);
-            }
-
-            // for (var i = 0; i <= state.StampedBy.Count * 3 + 1; i++) // Frontier
-            // { // Frontier
-            //     msg.AddMarkupPermissive("\r\n"); // Frontier
-            // } // Frontier
+            // Forge-Change: do not copy existing words into the editor (append-only).
 
             // Frontier: signatures shouldn't walk off the page
             if (state.StampedBy.Count > 0)
@@ -282,8 +292,22 @@ namespace Content.Client.Paper.UI
 
             WrittenTextLabel.SetMessage(msg, _allowedTags, DefaultTextColor);
 
-            WrittenTextLabel.Visible = !isEditing && state.Text.Length > 0;
-            BlankPaperIndicator.Visible = !isEditing && state.Text.Length == 0;
+            // Forge-Change: existing text stays locked; the editor is only for new writing
+            if (isEditing)
+            {
+                WrittenTextLabel.Visible = state.Text.Length > 0;
+                BlankPaperIndicator.Visible = false;
+                if (!wasEditing)
+                {
+                    Input.TextRope = Rope.Leaf.Empty;
+                    Input.CursorPosition = new TextEdit.CursorPos();
+                }
+            }
+            else
+            {
+                WrittenTextLabel.Visible = state.Text.Length > 0;
+                BlankPaperIndicator.Visible = state.Text.Length == 0;
+            }
 
             StampDisplay.RemoveAllChildren();
             StampDisplay.RemoveStamps();
@@ -329,6 +353,75 @@ namespace Content.Client.Paper.UI
             return mode & _allowedResizeModes;
         }
 
+        // Forge-Change: languages the local player can write this page in
+        public void SetLanguageOptions(IReadOnlyList<(string Id, string Name)> languages, string? selectedId)
+        {
+            var visible = languages.Count > 0;
+            LanguageSelector.Visible = visible;
+            LanguageLabel.Visible = visible;
+            if (!visible)
+            {
+                _languageIds.Clear();
+                _pickedLanguage = null;
+                LanguageSelector.Clear();
+                return;
+            }
+
+            var sameList = _languageIds.Count == languages.Count;
+            if (sameList)
+            {
+                for (var i = 0; i < languages.Count; i++)
+                {
+                    if (_languageIds[i] != languages[i].Id)
+                    {
+                        sameList = false;
+                        break;
+                    }
+                }
+            }
+
+            if (!sameList)
+            {
+                LanguageSelector.Clear();
+                _languageIds.Clear();
+                for (var i = 0; i < languages.Count; i++)
+                {
+                    LanguageSelector.AddItem(languages[i].Name, i);
+                    _languageIds.Add(languages[i].Id);
+                }
+            }
+
+            var toSelect = _pickedLanguage != null && _languageIds.Contains(_pickedLanguage)
+                ? _pickedLanguage
+                : selectedId;
+
+            var selected = 0;
+            for (var i = 0; i < _languageIds.Count; i++)
+            {
+                if (_languageIds[i] == toSelect)
+                {
+                    selected = i;
+                    break;
+                }
+            }
+
+            _pickedLanguage = _languageIds[selected];
+            if (LanguageSelector.SelectedId != selected)
+                LanguageSelector.SelectId(selected);
+        }
+
+        public string? GetSelectedLanguage()
+        {
+            if (!LanguageSelector.Visible)
+                return null;
+
+            var id = LanguageSelector.SelectedId;
+            if (id < 0 || id >= _languageIds.Count)
+                return null;
+
+            return _languageIds[id];
+        }
+
         private void RunOnSaved()
         {
             // Prevent further saving while text processing still in
@@ -341,12 +434,15 @@ namespace Content.Client.Paper.UI
             if (MaxInputLength != -1)
             {
                 var inputLength = Input.TextLength;
+                var used = _totalContentSize > 0
+                    ? _lockedLength + _newlineOverhead + inputLength
+                    : inputLength;
+                var max = _totalContentSize > 0 ? _totalContentSize : MaxInputLength;
 
                 FillStatus.Text = Loc.GetString("paper-ui-fill-level",
-                    ("currentLength", inputLength),
-                    ("maxLength", MaxInputLength));
+                    ("currentLength", used),
+                    ("maxLength", max));
 
-                // Disable the save button if we've gone over the limit
                 SaveButton.Disabled = inputLength > MaxInputLength;
             }
             else

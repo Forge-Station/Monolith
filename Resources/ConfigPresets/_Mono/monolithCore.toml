@@ -50,6 +50,7 @@ expedition_rewards_enabled = true
 
 [nf14.respawn]
 time = 600
+ghost_role_time = 1800
 
 [hub]
 advertise = 1

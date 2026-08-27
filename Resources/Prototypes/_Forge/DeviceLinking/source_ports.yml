@@ -1,0 +1,23 @@
+- type: sourcePort
+  id: RemnantButton1
+  name: remnant-port-name-button-1
+  description: remnant-port-desc-button
+  defaultLinks: [ Toggle, Trigger, Open, On ]
+
+- type: sourcePort
+  id: RemnantButton2
+  name: remnant-port-name-button-2
+  description: remnant-port-desc-button
+  defaultLinks: [ Toggle, Trigger, Open, On ]
+
+- type: sourcePort
+  id: RemnantButton3
+  name: remnant-port-name-button-3
+  description: remnant-port-desc-button
+  defaultLinks: [ Toggle, Trigger, Close, Off ]
+
+- type: sourcePort
+  id: RemnantButton4
+  name: remnant-port-name-button-4
+  description: remnant-port-desc-button
+  defaultLinks: [ Toggle, Trigger, Timer ]

@@ -112,12 +112,13 @@
     minAngle: 0
     maxAngle: 1
     fireRate: 0.1
-    recoil: 25 
+    recoil: 25
     shootThermalSignature: 48000000 # ~7km after firing
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 1500

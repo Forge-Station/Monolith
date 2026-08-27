@@ -6,6 +6,6 @@
     HorizontalExpand="True"
     Title="Stripping"
     VerticalExpand="True"
->
+    MinSize="280 420"> <!-- Forge-Change: keep the back/belt row visible -->
     <controls:InventoryDisplay Name="InventoryButtons" Access="Public"/>
 </windows:StrippingWindow>

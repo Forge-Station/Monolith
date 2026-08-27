@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Content.Server._EinsteinEngines.Language;
 using Content.Server.Chat.Systems;
-using Content.Server.Radio.Components;
+using Content.Shared.Radio.Components;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
@@ -15,7 +15,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Server.Radio.Components;
+using Content.Shared.Radio.Components;
 
 namespace Content.Server._Forge.TTS;
 

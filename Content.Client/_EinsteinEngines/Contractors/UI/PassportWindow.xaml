@@ -1,0 +1,190 @@
+<passport:PassportWindow xmlns="https://spacestation14.io"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                         xmlns:passport="clr-namespace:Content.Client._EE.Contractors.UI"
+                         MouseFilter="Stop"
+                         MinSize="740 460"
+                         SetSize="760 480">
+    <PanelContainer Name="CoverPanel">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#3B1F1A" BorderColor="#C9A227" BorderThickness="3"/>
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="8 6 8 8">
+            <!-- Title bar -->
+            <BoxContainer Orientation="Horizontal" Margin="0 0 0 6">
+                <Button Name="PaperModeButton" Text="{Loc passport-ui-mode-paper}" ToggleMode="True" Pressed="True" MinWidth="90"/>
+                <Button Name="PdaModeButton" Text="{Loc passport-ui-mode-pda}" ToggleMode="True" MinWidth="90" Margin="6 0 0 0"/>
+                <Control HorizontalExpand="True"/>
+                <PanelContainer StyleClasses="AngleRect" VerticalAlignment="Center">
+                    <TextureButton Name="CloseButton" StyleClasses="windowCloseButton"/>
+                </PanelContainer>
+            </BoxContainer>
+
+            <!-- Paper booklet -->
+            <PanelContainer Name="PaperRoot" VerticalExpand="True" HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#E8D9B8" BorderColor="#C9A227" BorderThickness="2"/>
+                </PanelContainer.PanelOverride>
+
+                <BoxContainer Orientation="Vertical" Margin="10 8">
+                    <PanelContainer Name="BannerPanel" HorizontalExpand="True" MinHeight="52">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#5C1212"/>
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label Name="CountryLabel" Align="Center" StyleClasses="LabelHeading" FontColorOverride="#D4AF37"/>
+                            <Label Name="DocumentTitleLabel" Text="{Loc passport-ui-header-passport}" Align="Center" FontColorOverride="#F4E4C1"/>
+                        </BoxContainer>
+                    </PanelContainer>
+
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True" Margin="0 10 0 8">
+                        <!-- Left page: photo -->
+                        <BoxContainer Orientation="Vertical" SetWidth="220" Margin="4 0 12 0">
+                            <Label Name="PhotoCaptionLabel" Text="{Loc passport-ui-photo-caption}" Align="Center" FontColorOverride="#5A4630" StyleClasses="LabelSubText"/>
+                            <PanelContainer Name="PhotoOuterFrame" HorizontalAlignment="Center" Margin="0 4 0 0" SetSize="128 168">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat BackgroundColor="#2A2118" BorderColor="#8A7348" BorderThickness="3"/>
+                                </PanelContainer.PanelOverride>
+                                <PanelContainer Name="PhotoInnerFrame" Margin="4" RectClipContent="True">
+                                    <PanelContainer.PanelOverride>
+                                        <graphics:StyleBoxFlat BackgroundColor="#D7C7A7"/>
+                                    </PanelContainer.PanelOverride>
+                                    <SpriteView Name="PhotoView"
+                                                OverrideDirection="South"
+                                                Scale="6 6"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                SetSize="120 160"/>
+                                    <Label Name="PhotoMissingLabel"
+                                           Text="{Loc passport-ui-unregistered}"
+                                           Align="Center"
+                                           VAlign="Center"
+                                           FontColorOverride="#5A4630"
+                                           Visible="False"/>
+                                </PanelContainer>
+                            </PanelContainer>
+                            <Label Name="PhotoCodeLabel" Align="Center" FontColorOverride="#5A4630" StyleClasses="LabelSubText" Margin="0 6 0 0"/>
+                        </BoxContainer>
+
+                        <PanelContainer SetWidth="2" VerticalExpand="True" Margin="0 4">
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BackgroundColor="#C9A227"/>
+                            </PanelContainer.PanelOverride>
+                        </PanelContainer>
+
+                        <!-- Right page: identity fields -->
+                        <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="12 0 4 0">
+                            <BoxContainer Orientation="Horizontal" Margin="0 0 0 6">
+                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                    <Label Text="{Loc passport-ui-type}" StyleClasses="LabelSubText" FontColorOverride="#6B5535"/>
+                                    <Label Name="TypeValueLabel" Text="{Loc passport-ui-type-value}" FontColorOverride="#1A120C"/>
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                    <Label Text="{Loc passport-ui-code}" StyleClasses="LabelSubText" FontColorOverride="#6B5535"/>
+                                    <Label Name="CodeValueLabel" FontColorOverride="#1A120C"/>
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                    <Label Text="{Loc passport-ui-number}" StyleClasses="LabelSubText" FontColorOverride="#6B5535"/>
+                                    <Label Name="NumberValueLabel" FontColorOverride="#1A120C"/>
+                                </BoxContainer>
+                            </BoxContainer>
+
+                            <Label Text="{Loc passport-ui-surname}" StyleClasses="LabelSubText" FontColorOverride="#6B5535"/>
+                            <Label Name="SurnameLabel" StyleClasses="LabelHeading" FontColorOverride="#1A120C" Margin="0 0 0 4"/>
+                            <Label Text="{Loc passport-ui-given-names}" StyleClasses="LabelSubText" FontColorOverride="#6B5535"/>
+                            <Label Name="GivenNamesLabel" StyleClasses="LabelHeading" FontColorOverride="#1A120C" Margin="0 0 0 8"/>
+
+                            <BoxContainer Orientation="Horizontal" Margin="0 0 0 4">
+                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                    <Label Text="{Loc passport-ui-nationality}" StyleClasses="LabelSubText" FontColorOverride="#6B5535"/>
+                                    <Label Name="NationalityLabel" FontColorOverride="#1A120C"/>
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                    <Label Text="{Loc passport-ui-species}" StyleClasses="LabelSubText" FontColorOverride="#6B5535"/>
+                                    <Label Name="SpeciesLabel" FontColorOverride="#1A120C"/>
+                                </BoxContainer>
+                            </BoxContainer>
+
+                            <BoxContainer Orientation="Horizontal" Margin="0 0 0 4">
+                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                    <Label Text="{Loc passport-ui-date-of-birth}" StyleClasses="LabelSubText" FontColorOverride="#6B5535"/>
+                                    <Label Name="BirthLabel" FontColorOverride="#1A120C"/>
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                    <Label Text="{Loc passport-ui-sex}" StyleClasses="LabelSubText" FontColorOverride="#6B5535"/>
+                                    <Label Name="SexLabel" FontColorOverride="#1A120C"/>
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                    <Label Text="{Loc passport-ui-height}" StyleClasses="LabelSubText" FontColorOverride="#6B5535"/>
+                                    <Label Name="HeightLabel" FontColorOverride="#1A120C"/>
+                                </BoxContainer>
+                            </BoxContainer>
+
+                            <Label Text="{Loc passport-ui-authority}" StyleClasses="LabelSubText" FontColorOverride="#6B5535" Margin="0 4 0 0"/>
+                            <Label Name="AuthorityLabel" FontColorOverride="#1A120C"/>
+
+                            <Label Name="MarksCaptionLabel" Text="{Loc passport-ui-distinguishing}" StyleClasses="LabelSubText" FontColorOverride="#6B5535" Margin="0 8 0 0" Visible="False"/>
+                            <Label Name="MarksLabel" FontColorOverride="#3A2A1C" Visible="False"/>
+                        </BoxContainer>
+                    </BoxContainer>
+
+                    <PanelContainer Name="MrzPanel" HorizontalExpand="True" MinHeight="58">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#1F1812"/>
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical" Margin="8 6" VerticalAlignment="Center">
+                            <Label Name="MrzLine1Label" StyleClasses="monospace" FontColorOverride="#E8D9B8"/>
+                            <Label Name="MrzLine2Label" StyleClasses="monospace" FontColorOverride="#E8D9B8"/>
+                        </BoxContainer>
+                    </PanelContainer>
+                </BoxContainer>
+            </PanelContainer>
+
+            <!-- Electronic PDA view -->
+            <PanelContainer Name="PdaRoot" Visible="False" VerticalExpand="True" HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#0B1014" BorderColor="#3AA0A0" BorderThickness="2"/>
+                </PanelContainer.PanelOverride>
+
+                <BoxContainer Orientation="Vertical" Margin="12 10">
+                    <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
+                        <Label Name="PdaHeaderLabel" Text="{Loc passport-ui-pda-header}" StyleClasses="LabelHeading" FontColorOverride="#7CFFC8"/>
+                        <Control HorizontalExpand="True"/>
+                        <Label Name="PdaStatusLabel" FontColorOverride="#7CFFC8"/>
+                    </BoxContainer>
+
+                    <PanelContainer StyleClasses="LowDivider" Margin="0 0 0 10"/>
+
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+                        <PanelContainer SetSize="128 168" RectClipContent="True" Margin="0 0 14 0">
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BackgroundColor="#05080A" BorderColor="#3AA0A0" BorderThickness="2"/>
+                            </PanelContainer.PanelOverride>
+                            <SpriteView Name="PdaPhotoView"
+                                        OverrideDirection="South"
+                                        Scale="6 6"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        SetSize="120 160"/>
+                        </PanelContainer>
+
+                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                            <RichTextLabel Name="PdaNameLabel" Margin="0 0 0 4"/>
+                            <RichTextLabel Name="PdaNationalityLabel"/>
+                            <RichTextLabel Name="PdaSpeciesLabel"/>
+                            <RichTextLabel Name="PdaSexLabel"/>
+                            <RichTextLabel Name="PdaBirthLabel"/>
+                            <RichTextLabel Name="PdaHeightLabel"/>
+                            <RichTextLabel Name="PdaPidLabel" Margin="0 6 0 0"/>
+                            <Control VerticalExpand="True"/>
+                            <Label Name="PdaAuthLabel" Text="{Loc passport-ui-pda-auth}" FontColorOverride="#7CFFC8"/>
+                        </BoxContainer>
+                    </BoxContainer>
+
+                    <Label Name="PdaFooterLabel" Text="{Loc passport-ui-pda-footer}" StyleClasses="LabelSubText" FontColorOverride="#3AA0A0" Margin="0 8 0 0"/>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
+</passport:PassportWindow>

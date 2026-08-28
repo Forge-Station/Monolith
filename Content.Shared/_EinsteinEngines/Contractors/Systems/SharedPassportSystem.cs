@@ -4,20 +4,17 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Prototypes;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Preferences;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
-using Robust.Shared;
-using Content.Shared.CCVar;
 using Content.Shared.Roles;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 using Content.Shared.GameTicking;
-using Content.Shared.Humanoid;
+using Content.Shared.UserInterface;
+using Content.Shared._EE.Contractors;
 
 namespace Content.Shared._EE.Contractors.Systems;
 
@@ -25,9 +22,7 @@ public sealed class SharedPassportSystem : EntitySystem
 {
     public const int CurrentYear = 3026;
     const string PIDChars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789";
-    private static readonly TimeSpan ToggleCooldown = TimeSpan.FromSeconds(1);  // Forge-Change
 
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -35,15 +30,17 @@ public sealed class SharedPassportSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _sharedTransformSystem = default!;
     [Dependency] private readonly IConfigurationManager _configManager = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PassportComponent, UseInHandEvent>(OnUseInHand);
-        // SubscribeLocalEvent<PlayerLoadoutAppliedEvent>(OnPlayerLoadoutApplied);
-        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<PassportComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+        SubscribeLocalEvent<PassportComponent, BeforeActivatableUIOpenEvent>(OnBeforeUiOpen);
+        SubscribeLocalEvent<PassportComponent, BoundUIOpenedEvent>(OnUiOpened);
+        SubscribeLocalEvent<PassportComponent, BoundUIClosedEvent>(OnUiClosed);
     }
 
     private void OnExamined(EntityUid uid, PassportComponent component, ExaminedEvent args)
@@ -62,17 +59,11 @@ public sealed class SharedPassportSystem : EntitySystem
         args.PushMarkup(Loc.GetString("passport-year-of-birth", ("year", CurrentYear - component.OwnerProfile.Age)), 47);
 
         args.PushMarkup(
-            Loc.GetString("passport-pid", ("pid", GenerateIdentityString(component.OwnerProfile.Name
-            + component.OwnerProfile.Appearance.Height
-            + component.OwnerProfile.Age
-            + component.OwnerProfile.Appearance.Height
-            + component.OwnerProfile.FlavorText))),
+            Loc.GetString("passport-pid", ("pid", GetPassportId(component.OwnerProfile))),
             46);
     }
 
     // Forge-change-start
-    // private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev) =>
-    //     SpawnPassportForPlayer(ev.Mob, ev.Profile, ev.JobId);
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         if (!ShouldSpawnPassports)
@@ -147,28 +138,67 @@ public sealed class SharedPassportSystem : EntitySystem
     public void UpdatePassportProfile(Entity<PassportComponent> passport, HumanoidCharacterProfile profile)
     {
         passport.Comp.OwnerProfile = profile;
+        Dirty(passport);
         var evt = new PassportProfileUpdatedEvent(profile);
         RaiseLocalEvent(passport, ref evt);
+
+        if (_uiSystem.IsUiOpen(passport.Owner, PassportUiKey.Key))
+            UpdateUserInterface(passport);
     }
 
-    private void OnUseInHand(Entity<PassportComponent> passport, ref UseInHandEvent evt)
+    private void OnBeforeUiOpen(Entity<PassportComponent> passport, ref BeforeActivatableUIOpenEvent args)
     {
-        if (evt.Handled || !_timing.IsFirstTimePredicted)
+        UpdateUserInterface(passport);
+    }
+
+    private void OnUiOpened(Entity<PassportComponent> passport, ref BoundUIOpenedEvent args)
+    {
+        if (args.UiKey is not PassportUiKey)
             return;
 
-        evt.Handled = true;
+        SetClosed(passport, false);
+    }
 
-        // Forge-Change-start
-        // Cooldown prevents rapid open/close spam and also reduces client/server prediction desync.
-        if (_timing.CurTime < passport.Comp.ToggleCooldownEnd)
+    private void OnUiClosed(Entity<PassportComponent> passport, ref BoundUIClosedEvent args)
+    {
+        if (args.UiKey is not PassportUiKey)
             return;
 
-        passport.Comp.ToggleCooldownEnd = _timing.CurTime + ToggleCooldown;
-        // Forge-Change-end
-        passport.Comp.IsClosed = !passport.Comp.IsClosed;
+        if (_uiSystem.IsUiOpen(passport.Owner, PassportUiKey.Key))
+            return;
+
+        SetClosed(passport, true);
+    }
+
+    private void UpdateUserInterface(Entity<PassportComponent> passport)
+    {
+        var pid = passport.Comp.OwnerProfile != null
+            ? GetPassportId(passport.Comp.OwnerProfile)
+            : string.Empty;
+
+        _uiSystem.SetUiState(passport.Owner, PassportUiKey.Key,
+            new PassportBoundUserInterfaceState(passport.Comp.OwnerProfile, pid));
+    }
+
+    private void SetClosed(Entity<PassportComponent> passport, bool closed)
+    {
+        if (passport.Comp.IsClosed == closed)
+            return;
+
+        passport.Comp.IsClosed = closed;
+        Dirty(passport);
 
         var passportEvent = new PassportToggleEvent();
         RaiseLocalEvent(passport, ref passportEvent);
+    }
+
+    public static string GetPassportId(HumanoidCharacterProfile profile)
+    {
+        return GenerateIdentityString(profile.Name
+            + profile.Appearance.Height
+            + profile.Age
+            + profile.Appearance.Height
+            + profile.FlavorText);
     }
 
     private static string GenerateIdentityString(string seed)

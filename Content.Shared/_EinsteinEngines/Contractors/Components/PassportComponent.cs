@@ -1,21 +1,18 @@
-using System; // Forge-Change
 using Content.Shared.Preferences;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._EE.Contractors.Components;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class PassportComponent : Component
 {
-    public bool IsClosed;
-
     /// <summary>
-    /// Until when toggling open/closed is blocked (anti-spam + prediction correctness).
+    /// True while the booklet is closed. Opening the UI opens the booklet;
+    /// closing the last UI session closes it again.
     /// </summary>
-    /// Forge-Change
-    public TimeSpan ToggleCooldownEnd;
+    [DataField, AutoNetworkedField]
+    public bool IsClosed = true;
 
     [ViewVariables]
-    public HumanoidCharacterProfile OwnerProfile;
+    public HumanoidCharacterProfile? OwnerProfile;
 }

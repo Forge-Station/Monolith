@@ -27,3 +27,5 @@
     interfaces:
       enum.StationRadioFrequencyUiKey.Key:
         type: StationRadioFrequencyBoundUserInterface
+  - type: StaticPrice
+    price: 50

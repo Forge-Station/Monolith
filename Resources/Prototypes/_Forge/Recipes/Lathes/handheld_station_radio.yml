@@ -1,0 +1,10 @@
+- type: latheRecipe
+  id: StationRadioReceiverHandheld
+  icon:
+    sprite: _Forge/Objects/Devices/handheld_station_radio.rsi
+    state: base
+  result: StationRadioReceiverHandheld
+  completetime: 4
+  materials:
+    Steel: 100
+    Plastic: 10

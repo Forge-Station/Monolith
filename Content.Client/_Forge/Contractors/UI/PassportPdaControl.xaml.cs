@@ -1,3 +1,4 @@
+// Forge-Change-full
 using Content.Client.Humanoid;
 using Content.Shared._EE.Contractors.Prototypes;
 using Content.Shared._EE.Contractors.Systems;
@@ -11,7 +12,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._EinsteinEngines.Contractors.UI;
+namespace Content.Client._Forge.Contractors.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class PassportPdaControl : BoxContainer

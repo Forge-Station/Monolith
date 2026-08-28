@@ -3,9 +3,9 @@ using Content.Shared._EE.Contractors.Systems;
 using Robust.Client.GameObjects;
 using Robust.Shared.GameStates;
 
-
 namespace Content.Client._EE.Contractors.Systems;
 
+// Forge-change-start
 public sealed class PassportSystem : EntitySystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -73,3 +73,4 @@ public sealed class PassportSystem : EntitySystem
             sprite.LayerSetState(0, desiredStateName);
     }
 }
+// Forge-change-end

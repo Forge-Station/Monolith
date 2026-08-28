@@ -15,7 +15,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Content.Shared.GameTicking;
 using Content.Shared.UserInterface;
-using Content.Shared._EE.Contractors;
+using Content.Shared._Forge.Contractors;
 
 namespace Content.Shared._EE.Contractors.Systems;
 
@@ -39,15 +39,17 @@ public sealed class SharedPassportSystem : EntitySystem
 
         SubscribeLocalEvent<PassportComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+        // Forge-change-start
         SubscribeLocalEvent<PassportComponent, BeforeActivatableUIOpenEvent>(OnBeforeUiOpen);
         SubscribeLocalEvent<PassportComponent, BoundUIOpenedEvent>(OnUiOpened);
         SubscribeLocalEvent<PassportComponent, BoundUIClosedEvent>(OnUiClosed);
+        // Forge-change-end
     }
 
     private void OnExamined(EntityUid uid, PassportComponent component, ExaminedEvent args)
     {
         if (!args.IsInDetailsRange
-            || component.IsClosed
+            || component.IsClosed // Forge-Change
             || component.OwnerProfile == null)
             return;
 
@@ -95,7 +97,7 @@ public sealed class SharedPassportSystem : EntitySystem
         if (passportEntity == null)
             return;
 
-        RaiseLocalEvent(new PassportIssuedEvent(mob, profile, jobId, GetPassportId(profile)));
+        RaiseLocalEvent(new PassportIssuedEvent(mob, profile, jobId, GetPassportId(profile))); // Forge-Change
 
         bool passportStored = false;
 
@@ -131,6 +133,7 @@ public sealed class SharedPassportSystem : EntitySystem
     private bool ShouldSpawnPassports =>
         _configManager.GetCVar<bool>("contractors.enabled");
 
+    // Forge-Change
     public EntityUid? TryCreatePassport(HumanoidCharacterProfile profile, MapCoordinates coordinates)
     {
         if (!_prototypeManager.TryIndex(profile.Nationality, out NationalityPrototype? nationality) ||
@@ -150,10 +153,13 @@ public sealed class SharedPassportSystem : EntitySystem
         var evt = new PassportProfileUpdatedEvent(profile);
         RaiseLocalEvent(passport, ref evt);
 
+        // Forge-change-start
         if (_uiSystem.IsUiOpen(passport.Owner, PassportUiKey.Key))
             UpdateUserInterface(passport);
+        // Forge-change-end
     }
 
+    // Forge-change-start
     private void OnBeforeUiOpen(Entity<PassportComponent> passport, ref BeforeActivatableUIOpenEvent args)
     {
         UpdateUserInterface(passport);
@@ -199,6 +205,7 @@ public sealed class SharedPassportSystem : EntitySystem
         var passportEvent = new PassportToggleEvent();
         RaiseLocalEvent(passport, ref passportEvent);
     }
+    // Forge-change-end
 
     public static string GetPassportId(HumanoidCharacterProfile profile)
     {

@@ -1,13 +1,14 @@
+// Forge-Change-full
 using System.Linq;
-using Content.Shared._EE.Contractors;
-using Content.Shared._EE.Contractors.Components;
 using Content.Shared._EE.Contractors.Systems;
+using Content.Shared._Forge.Contractors;
+using Content.Shared._Forge.Contractors.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Preferences;
 
-namespace Content.Server._EE.Contractors;
+namespace Content.Server._Forge.Contractors;
 
 public sealed partial class PassportConsoleSystem : EntitySystem
 {

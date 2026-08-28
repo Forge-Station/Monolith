@@ -1,8 +1,9 @@
-using Content.Shared._EE.Contractors;
+// Forge-Change-full
+using Content.Shared._Forge.Contractors;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._EinsteinEngines.Contractors.UI;
+namespace Content.Client._Forge.Contractors.UI;
 
 [UsedImplicitly]
 public sealed class PassportConsoleBoundUserInterface : BoundUserInterface

@@ -1,0 +1,50 @@
+<console:PassportConsoleWindow xmlns="https://spacestation14.io"
+                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                               xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                               xmlns:console="clr-namespace:Content.Client._Forge.Contractors.UI"
+                               x:Class="Content.Client._Forge.Contractors.UI.PassportConsoleWindow"
+                               MouseFilter="Stop"
+                               MinSize="980 580"
+                               SetSize="1020 620">
+    <PanelContainer Name="CoverPanel">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#0D1824" BorderColor="#51D1C5" BorderThickness="3"/>
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="8 6 8 8">
+            <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
+                <Label Name="HeaderLabel" Text="{Loc 'passport-console-title'}" StyleClasses="LabelHeading" FontColorOverride="#51D1C5"/>
+                <Control HorizontalExpand="True"/>
+                <PanelContainer StyleClasses="AngleRect" VerticalAlignment="Center">
+                    <TextureButton Name="CloseButton" StyleClasses="windowCloseButton"/>
+                </PanelContainer>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+                <!-- Employee list -->
+                <PanelContainer SetWidth="280" VerticalExpand="True" Margin="0 0 8 0">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#101820" BorderColor="#51D1C5" BorderThickness="2"/>
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="8">
+                        <Label Text="{Loc 'passport-console-list-header'}" FontColorOverride="#51D1C5" StyleClasses="LabelHeading"/>
+                        <LineEdit Name="SearchEdit" PlaceHolder="{Loc 'passport-console-search'}" Margin="0 6 0 6"/>
+                        <ItemList Name="RecordList" VerticalExpand="True" SelectMode="Single" StyleClasses="transparentBackgroundItemList"/>
+                        <Label Name="EmptyLabel" Text="{Loc 'passport-console-empty'}" FontColorOverride="#3AA89E" Align="Center" Visible="False" Margin="0 8 0 0"/>
+                    </BoxContainer>
+                </PanelContainer>
+
+                <!-- Electronic passport view -->
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                    <console:PassportPdaControl Name="PdaDocument" VerticalExpand="True" HorizontalExpand="True"/>
+                    <Button Name="PrintButton"
+                            Text="{Loc 'passport-console-print'}"
+                            Disabled="True"
+                            HorizontalAlignment="Right"
+                            MinWidth="220"
+                            Margin="0 8 0 0"/>
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</console:PassportConsoleWindow>

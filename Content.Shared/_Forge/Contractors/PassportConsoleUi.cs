@@ -1,31 +1,13 @@
+// Forge-Change-full: passport registry console UI and round-wide issuance tracking.
 using Content.Shared.Preferences;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._EE.Contractors;
-
-[Serializable, NetSerializable]
-public enum PassportUiKey : byte
-{
-    Key,
-}
+namespace Content.Shared._Forge.Contractors;
 
 [Serializable, NetSerializable]
 public enum PassportConsoleUiKey : byte
 {
     Key,
-}
-
-[Serializable, NetSerializable]
-public sealed class PassportBoundUserInterfaceState : BoundUserInterfaceState
-{
-    public readonly HumanoidCharacterProfile? Profile;
-    public readonly string Pid;
-
-    public PassportBoundUserInterfaceState(HumanoidCharacterProfile? profile, string pid)
-    {
-        Profile = profile;
-        Pid = pid;
-    }
 }
 
 [Serializable, NetSerializable]
@@ -81,6 +63,9 @@ public sealed class PassportConsolePrintMessage : BoundUserInterfaceMessage
     }
 }
 
+/// <summary>
+/// Raised when a passport is first issued to a player this round (registry reprints do not raise this).
+/// </summary>
 public sealed class PassportIssuedEvent : EntityEventArgs
 {
     public EntityUid Mob;

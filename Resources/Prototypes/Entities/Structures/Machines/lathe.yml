@@ -275,9 +275,11 @@
     - SmartGun # Goobstation
     # Einstein Engines Packs
     - Translators
-    # Forge-change
+    # Forge-change-start
     - BSparts
     - ForgePublicWeapons
+    - StationRadioReceiverHandheld
+    #Forge-Change-end
 
   - type: EmagLatheRecipes
     emagDynamicPacks:

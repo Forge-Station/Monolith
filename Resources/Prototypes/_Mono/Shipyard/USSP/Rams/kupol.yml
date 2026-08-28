@@ -8,7 +8,7 @@
   purchasable: false # voucher only
   category: Small
   group: Custom
-  access: USSP
+  access: Mercenary # Forge-change: Ussp to Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/Ledokol/Attachments/kupol.yml
   guidebookPage: Null
 
@@ -22,7 +22,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Kupol USSP Ram{1}'
+          mapNameTemplate: 'Kupol MIL Ram{1}' # Forge-change: Ussp to MIL
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

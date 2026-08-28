@@ -296,6 +296,22 @@
     event: !type:ActivateImplantEvent
     useDelay: 1
 
+# Forge-Change-Start
+- type: entity
+  id: ActionActivateTranexamic
+  name: Activate Tranexamic Acid
+  description: Deliver a dose of Tranexamic acid from your implant.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    checkConsciousness: false
+    icon:
+      sprite: Objects/Specific/Medical/medipen.rsi
+      state: morphen
+    event: !type:ActivateImplantEvent
+# Forge-Change-End
+
 - type: entity
   id: ActionFireStarter
   name: Ignite

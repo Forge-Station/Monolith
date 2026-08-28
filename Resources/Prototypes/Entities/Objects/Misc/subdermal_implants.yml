@@ -365,13 +365,13 @@
 #    radioChannels:
 #    - CentCom
 
-# Forge implants - Forge-Change-Start TranexamicImplant
+# Forge implants - Forge-Change-Start
 
 - type: entity
   parent: BaseSubdermalImplant
   id: TranexamicImplant
   name: Tranexamic Acid Implant
-  description: This implant will deliver a dose of Tranexamic acid to the user if they are in critical condition.
+  description: Automatically injects Tranexamic acid and epinephrine when you enter critical condition. Can also be activated manually. Refillable via surgery after extraction.
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
@@ -393,10 +393,17 @@
             Quantity: 10
           - ReagentId: Epinephrine
             Quantity: 5
+    - type: RefillableSolution
+      solution: implant
+    - type: InjectableSolution
+      solution: implant
+    - type: ExaminableSolution
+      solution: implant
     - type: Hypospray
       solutionName: implant
       transferAmount: 15
       injectOnly: true
       onlyAffectsMobs: true
+      preventCombatInjection: true
 
 # Forge-Change-End

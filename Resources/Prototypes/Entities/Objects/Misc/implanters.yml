@@ -334,7 +334,7 @@
 - type: entity
   id: TranexamicImplanter
   parent: BaseImplantOnlyImplanter
-  suffix: Tranexamic One-Time
+  suffix: Tranexamic
   components:
     - type: Implanter
       implant: TranexamicImplant

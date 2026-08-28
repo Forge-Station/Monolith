@@ -129,9 +129,9 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 15
-        Structural: 35
-        Heat: 65
+        Radiation: 5
+        Structural: 10
+        Heat: 10
   - type: Sprite
     sprite: _Impstation/Objects/Weapons/Guns/Projectiles/energybolts.rsi
     layers:

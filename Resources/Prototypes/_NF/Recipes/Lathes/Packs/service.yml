@@ -30,6 +30,7 @@
   - BotanyCultivarDisk
   - JanicartFlatpack # Frontier
   - PlantBagOfHolding # Delta-V
+  - StationRadioReceiverHandheldRecipe #Forge-Change
 
 - type: latheRecipePack
   id: NFServiceBoardsStatic

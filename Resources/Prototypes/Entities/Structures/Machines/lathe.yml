@@ -278,7 +278,6 @@
     # Forge-change-start
     - BSparts
     - ForgePublicWeapons
-    - StationRadioReceiverHandheldRecipe
     #Forge-Change-end
 
   - type: EmagLatheRecipes

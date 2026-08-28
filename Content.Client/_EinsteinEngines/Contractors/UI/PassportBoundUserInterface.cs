@@ -2,7 +2,7 @@ using Content.Shared._EE.Contractors;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._EE.Contractors.UI;
+namespace Content.Client._EinsteinEngines.Contractors.UI;
 
 [UsedImplicitly]
 public sealed class PassportBoundUserInterface : BoundUserInterface

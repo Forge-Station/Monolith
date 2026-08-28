@@ -11,6 +11,7 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Roles;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Content.Shared.GameTicking;
 using Content.Shared.UserInterface;
@@ -82,24 +83,19 @@ public sealed class SharedPassportSystem : EntitySystem
 
     public void SpawnPassportForPlayer(EntityUid mob, HumanoidCharacterProfile profile, string? jobId)
     {
-        if (jobId == null || !_prototypeManager.TryIndex(
-                jobId,
-                out JobPrototype? jobPrototype)
-            // || !jobPrototype.CanHavePassport
+        if (jobId == null
+            || !_prototypeManager.HasIndex<JobPrototype>(jobId)
             || Deleted(mob)
             || !Exists(mob)
             || !ShouldSpawnPassports)
             return;
 
-        if (!_prototypeManager.TryIndex(
-            profile.Nationality,
-            out NationalityPrototype? nationalityPrototype) || !_prototypeManager.TryIndex(nationalityPrototype.PassportPrototype, out EntityPrototype? entityPrototype))
+        var coords = _sharedTransformSystem.GetMapCoordinates(mob);
+        var passportEntity = TryCreatePassport(profile, coords);
+        if (passportEntity == null)
             return;
 
-        var passportEntity = _entityManager.SpawnEntity(entityPrototype.ID, _sharedTransformSystem.GetMapCoordinates(mob));
-        var passportComponent = _entityManager.GetComponent<PassportComponent>(passportEntity);
-
-        UpdatePassportProfile(new(passportEntity, passportComponent), profile);
+        RaiseLocalEvent(new PassportIssuedEvent(mob, profile, jobId, GetPassportId(profile)));
 
         bool passportStored = false;
 
@@ -108,9 +104,9 @@ public sealed class SharedPassportSystem : EntitySystem
             _entityManager.TryGetComponent<StorageComponent>(wallet, out var walletStorage))
         // Try inserting the entity into the wallet
         {
-            if (_entityManager.TryGetComponent<ItemComponent>(passportEntity, out var itemComp) &&
-                _storage.CanInsert(wallet.Value, passportEntity, out _, walletStorage, itemComp) &&
-                _storage.Insert(wallet.Value, passportEntity, out _, playSound: false))
+            if (_entityManager.TryGetComponent<ItemComponent>(passportEntity.Value, out var itemComp) &&
+                _storage.CanInsert(wallet.Value, passportEntity.Value, out _, walletStorage, itemComp) &&
+                _storage.Insert(wallet.Value, passportEntity.Value, out _, playSound: false))
             {
                 passportStored = true;
             }
@@ -120,9 +116,9 @@ public sealed class SharedPassportSystem : EntitySystem
         if (passportStored != true && _inventory.TryGetSlotEntity(mob, "back", out var item) && _entityManager.TryGetComponent<StorageComponent>(item, out var inventory))
         // Try inserting the entity into the storage, if it can't, it leaves the loadout item on the ground
         {
-            if (!_entityManager.TryGetComponent<ItemComponent>(passportEntity, out var itemComp)
-                || !_storage.CanInsert(item.Value, passportEntity, out _, inventory, itemComp)
-                || !_storage.Insert(item.Value, passportEntity, out _, playSound: false))
+            if (!_entityManager.TryGetComponent<ItemComponent>(passportEntity.Value, out var itemComp)
+                || !_storage.CanInsert(item.Value, passportEntity.Value, out _, inventory, itemComp)
+                || !_storage.Insert(item.Value, passportEntity.Value, out _, playSound: false))
             {
                 _adminLogManager.Add(
                     LogType.EntitySpawn,
@@ -134,6 +130,18 @@ public sealed class SharedPassportSystem : EntitySystem
 
     private bool ShouldSpawnPassports =>
         _configManager.GetCVar<bool>("contractors.enabled");
+
+    public EntityUid? TryCreatePassport(HumanoidCharacterProfile profile, MapCoordinates coordinates)
+    {
+        if (!_prototypeManager.TryIndex(profile.Nationality, out NationalityPrototype? nationality) ||
+            !_prototypeManager.TryIndex(nationality.PassportPrototype, out EntityPrototype? prototype))
+            return null;
+
+        var passport = _entityManager.SpawnEntity(prototype.ID, coordinates);
+        var passportComp = _entityManager.GetComponent<PassportComponent>(passport);
+        UpdatePassportProfile(new Entity<PassportComponent>(passport, passportComp), profile);
+        return passport;
+    }
 
     public void UpdatePassportProfile(Entity<PassportComponent> passport, HumanoidCharacterProfile profile)
     {

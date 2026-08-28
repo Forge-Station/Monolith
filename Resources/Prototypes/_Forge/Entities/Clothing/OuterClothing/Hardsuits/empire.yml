@@ -527,7 +527,7 @@
     vendPrice: 60000
   - type: PersonalShield
     shield:
-      maxCharge: 624 # 520
+      maxCharge: 750 # 624 # 520
       regenRate: 12.5
       spinupTime: 1
       breakCooldown: 17.5

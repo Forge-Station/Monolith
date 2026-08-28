@@ -46,7 +46,7 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 21 # Forge-change 20->21
+        Heat: 24 # Forge-change 20->24
         Structural: 15 # Forge-change 10->15
     armorPenetration: 0.5 # Forge-change
   - type: HitscanBasicVisuals
@@ -71,7 +71,7 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 30 # Forge-change 35->30
+        Heat: 35
         Structural: 20 # Forge-change 50->20
     armorPenetration: 0.2 # Forge-change
   - type: HitscanBasicVisuals

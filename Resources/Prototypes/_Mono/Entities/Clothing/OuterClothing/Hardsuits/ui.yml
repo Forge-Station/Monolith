@@ -63,7 +63,7 @@
         Caustic: 0.7
   - type: PersonalShield
     shield:
-      maxCharge: 504 # Forge-change 600->504
+      maxCharge: 665 # Forge-change 600->665
       regenRate: 10.8 # Forge-change 6->10.8
       spinupTime: 1
       breakCooldown: 17.5 # Forge-change 30->17.5

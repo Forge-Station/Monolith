@@ -12,8 +12,8 @@
   - type: Explosive
     explosionType: Default
     maxIntensity: 7 # Forge-change 75->7
-    intensitySlope: 10 # Forge-change 4->10
-    totalIntensity: 21 # Forge-change 75->21
+    intensitySlope: 5 # Forge-change 4->5
+    totalIntensity: 40 # Forge-change 75->40
     maxTileBreak: 0
   - type: Projectile
     damage:

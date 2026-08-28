@@ -220,7 +220,7 @@
     minAngle: 27
     maxAngle: 39
     projectileSpeed: 70
-    fireRate: 0.2
+    fireRate: 0.5 # Forge-change 0.2->0.5
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

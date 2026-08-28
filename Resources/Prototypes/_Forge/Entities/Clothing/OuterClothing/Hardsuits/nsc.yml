@@ -132,7 +132,7 @@
     coefficient: 0.2
   - type: PersonalShield
     shield:
-      maxCharge: 456 # 380
+      maxCharge: 600 # 456 # 380
       regenRate: 13.2 # 11
       spinupTime: 1
       breakCooldown: 19

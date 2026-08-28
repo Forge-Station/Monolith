@@ -180,7 +180,7 @@
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: PersonalShield
     shield:
-      maxCharge: 528 # 440
+      maxCharge: 700 # 528 # 440
       regenRate: 15.6 # 13
       spinupTime: 1
       breakCooldown: 16

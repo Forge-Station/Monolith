@@ -723,13 +723,15 @@
 
 # Syndicate Medic Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile and ClothingOuterHardsuitSyndie->ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitSyndieMedic
   name: blood-red medic hardsuit
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
   components:
   - type: Sprite
     sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
+  - type: Item # Forge-change
+    size: Huge # Forge-change
   - type: Clothing
     sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
   - type: Armor # Mono

@@ -93,48 +93,48 @@
           Slash: 1.2
           Piercing: 1.2
 
-- type: trait
-  id: IpcHeavyBody
-  name: trait-ipc-heavy-body-name
-  description: trait-ipc-heavy-body-desc
-  category: Physical
-  cost: -2
-  mutuallyExclusiveTraits:
-  - IpcSoftBody
-  - IpcBadServo
-  - BionicLegs
-  speciesBlacklist:
-  - Human
-  - Chitinid
-  - Oni
-  - Vulpkanin
-  - Vox
-  - Diona
-  - Moth
-  - Goblin
-  - Arachnid
-  - Resomi
-  - Harpy
-  - Reptilian
-  - Hydrakin
-  - Rodentia
-  - Dwarf
-  - SlimePerson
-  - Felinid
-  - Tajaran
-  - Demon
-  - Skrell
-  - Ariral
-  blacklist:
-    components:
-    - BorgChassis
-  components:
-    # - type: SlowOnDamage
-    #   speedModifierThresholds:
-    #     0: 0.1
-    # - type: MovementSpeedModifier 
-    #   BaseWalkSpeed: 2.25 # -10%
-    #   BaseSprintSpeed: 4.05 # -10%
+# - type: trait №не работает пока что
+#   id: IpcHeavyBody
+#   name: trait-ipc-heavy-body-name
+#   description: trait-ipc-heavy-body-desc
+#   category: Physical
+#   cost: -2
+#   mutuallyExclusiveTraits:
+#   - IpcSoftBody
+#   - IpcBadServo
+#   - BionicLegs
+#   speciesBlacklist:
+#   - Human
+#   - Chitinid
+#   - Oni
+#   - Vulpkanin
+#   - Vox
+#   - Diona
+#   - Moth
+#   - Goblin
+#   - Arachnid
+#   - Resomi
+#   - Harpy
+#   - Reptilian
+#   - Hydrakin
+#   - Rodentia
+#   - Dwarf
+#   - SlimePerson
+#   - Felinid
+#   - Tajaran
+#   - Demon
+#   - Skrell
+#   - Ariral
+#   blacklist:
+#     components:
+#     - BorgChassis
+#   components:
+#     # - type: SlowOnDamage
+#     #   speedModifierThresholds:
+#     #     0: 0.1
+#     # - type: MovementSpeedModifier 
+#     #   BaseWalkSpeed: 2.25 # -10%
+#     #   BaseSprintSpeed: 4.05 # -10%
 
 - type: trait
   id: IpcWeldingFlashProtection

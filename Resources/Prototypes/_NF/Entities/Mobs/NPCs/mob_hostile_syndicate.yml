@@ -112,7 +112,7 @@
       prototypes:
         - SyndicateNavalCaptainGearD
     - type: BasicEntityAmmoProvider
-      proto: Bullet357_PlasteelAP # Forge-change Bullet357_magnumFMJ->Bullet357_PlasteelAP
+      proto: Bullet357_magnumPlasteelAP # Forge-change Bullet357_magnumFMJ->Bullet357_magnumPlasteelAP
       capacity: 1
       count: 1
 

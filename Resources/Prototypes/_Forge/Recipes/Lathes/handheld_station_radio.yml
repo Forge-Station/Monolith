@@ -1,5 +1,5 @@
 - type: latheRecipe
-  id: StationRadioReceiverHandheld
+  id: StationRadioReceiverHandheldRecipe
   icon:
     sprite: _Forge/Objects/Devices/handheld_station_radio.rsi
     state: base

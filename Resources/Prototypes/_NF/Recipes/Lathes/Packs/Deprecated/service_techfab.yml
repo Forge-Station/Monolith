@@ -165,7 +165,7 @@
       - PlantAnalyzer
       - JanicartFlatpack
       # - FireExtinguisherBluespace # DeltaV
-      - StationRadioReceiverHandheld #Forge-Change
+      - StationRadioReceiverHandheldRecipe #Forge-Change
 
 - type: latheRecipePack
   id: NFServiceTechfabDeprecatedEmagStatic

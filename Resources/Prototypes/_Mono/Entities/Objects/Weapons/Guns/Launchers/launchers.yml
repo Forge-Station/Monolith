@@ -205,7 +205,9 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
-    size: Huge
+    size: Ginormous # Forge-change
+    shape: # Forge-change
+    - 0,0,7,2 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Launchers/mk6-tpgl_inhands_32x.rsi
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Launchers/mk6-tpgl_inhands_32x.rsi

@@ -4,9 +4,9 @@
   name: Dr. Ist cigpack
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Medical/fakecig.rsi
+    sprite: _Forge/Objects/Specific/Medical/fakecig.rsi
   - type: Item
-    sprite: Forge/Objects/Specific/Medical/fakecig.rsi
+    sprite: _Forge/Objects/Specific/Medical/fakecig.rsi
   - type: StorageFill
     contents:
     - id: FakeCigarette

@@ -6,7 +6,7 @@
   suffix: Ренегаты
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/idprinter.rsi
+    sprite: _Forge/Structures/Machines/idprinter.rsi
     snapCardinals: true
     layers:
     - state: icon
@@ -35,7 +35,7 @@
   suffix: TSF
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/idprinter.rsi
+    sprite: _Forge/Structures/Machines/idprinter.rsi
     snapCardinals: true
     layers:
     - state: icon
@@ -63,7 +63,7 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/idprinter.rsi
+    sprite: _Forge/Structures/Machines/idprinter.rsi
     snapCardinals: true
     layers:
     - state: icon
@@ -91,7 +91,7 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/idprinter.rsi
+    sprite: _Forge/Structures/Machines/idprinter.rsi
     snapCardinals: true
     layers:
     - state: icon

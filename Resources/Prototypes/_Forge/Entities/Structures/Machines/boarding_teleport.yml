@@ -5,7 +5,7 @@
   description: Selects a hostile grid and landing point for linked boarding platforms.
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/boarding_teleport_computer.rsi
+    sprite: _Forge/Structures/Machines/boarding_teleport_computer.rsi
     layers:
     - map: ["computerLayerBody"]
       state: computer
@@ -72,7 +72,7 @@
         layer:
         - MachineLayer
   - type: Sprite
-    sprite: Forge/Structures/Machines/boarding_teleport_engine.rsi
+    sprite: _Forge/Structures/Machines/boarding_teleport_engine.rsi
     drawdepth: HighFloorObjects
     layers:
     - state: plinth
@@ -172,7 +172,7 @@
         layer:
         - MachineLayer
   - type: Sprite
-    sprite: Forge/Structures/Machines/boarding_teleport_engine.rsi
+    sprite: _Forge/Structures/Machines/boarding_teleport_engine.rsi
     layers:
     - state: plinth
     - state: ring
@@ -221,7 +221,7 @@
         mask:
         - MachineMask
   - type: Sprite
-    sprite: Forge/Structures/Machines/boarding_teleport_platform.rsi
+    sprite: _Forge/Structures/Machines/boarding_teleport_platform.rsi
     drawdepth: HighFloorObjects
     layers:
     - state: plinth

@@ -12,7 +12,7 @@
   - type: CartridgeAmmo
     proto: Bullet154x114mmFMJ
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Casings/nexus_154x114mm_casing.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Casings/nexus_154x114mm_casing.rsi
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]

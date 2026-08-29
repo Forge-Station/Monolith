@@ -20,7 +20,7 @@
     - Azaziba
   - type: StationAiWhitelist
   - type: Sprite
-    sprite: Forge/Structures/Machines/desintegrator.rsi
+    sprite: _Forge/Structures/Machines/desintegrator.rsi
     snapCardinals: true
     offset: 0, 0.5
     layers:
@@ -67,7 +67,7 @@
   suffix: 300
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/desintegrator.rsi
+    sprite: _Forge/Structures/Machines/desintegrator.rsi
     snapCardinals: true
     layers:
     - state: icon
@@ -84,7 +84,7 @@
   suffix: 32
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/mini_desintegrator.rsi
+    sprite: _Forge/Structures/Machines/mini_desintegrator.rsi
     snapCardinals: true
     layers:
     - state: icon

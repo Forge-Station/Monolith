@@ -14,7 +14,7 @@
   - type: MarketModifier
     mod: 8
   - type: Sprite
-    sprite: Forge/Structures/Machines/terminal_tl.rsi
+    sprite: _Forge/Structures/Machines/terminal_tl.rsi
     layers:
     - state: "off"
       map: [ "enum.VendingMachineVisualLayers.Base" ]
@@ -41,7 +41,7 @@
   - type: MarketModifier
     mod: 8
   - type: Sprite
-    sprite: Forge/Structures/Machines/terminal_nsc.rsi
+    sprite: _Forge/Structures/Machines/terminal_nsc.rsi
     layers:
     - state: "off"
       map: [ "enum.VendingMachineVisualLayers.Base" ]
@@ -69,7 +69,7 @@
   - type: MarketModifier
     mod: 8
   - type: Sprite
-    sprite: Forge/Structures/Specific/Syndicate/syndicatedataconventor.rsi
+    sprite: _Forge/Structures/Specific/Syndicate/syndicatedataconventor.rsi
     layers:
     - state: "server-nopower"
       map: [ "enum.VendingMachineVisualLayers.Base" ]
@@ -97,7 +97,7 @@
   - type: MarketModifier
     mod: 8
   - type: Sprite
-    sprite: Forge/Structures/Machines/VendingMachines/wallullman.rsi
+    sprite: _Forge/Structures/Machines/VendingMachines/wallullman.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -142,7 +142,7 @@
     energy: 1.6
     color: "#00FFFF"
   - type: Sprite
-    sprite: Forge/Structures/Machines/VendingMachines/hme_vend.rsi
+    sprite: _Forge/Structures/Machines/VendingMachines/hme_vend.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -172,7 +172,7 @@
   - type: MarketModifier
     mod: 8
   - type: Sprite
-    sprite: Forge/Structures/Machines/VendingMachines/drake_vendor.rsi
+    sprite: _Forge/Structures/Machines/VendingMachines/drake_vendor.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -199,7 +199,7 @@
   - type: MarketModifier
     mod: 8
   - type: Sprite
-    sprite: Forge/Structures/Machines/terminal_nt.rsi
+    sprite: _Forge/Structures/Machines/terminal_nt.rsi
     layers:
     - state: "off"
       map: [ "enum.VendingMachineVisualLayers.Base" ]
@@ -232,7 +232,7 @@
     energy: 1.6
     color: "#00FFFF"
   - type: Sprite
-    sprite: Forge/Structures/Machines/VendingMachines/cl_vendor.rsi
+    sprite: _Forge/Structures/Machines/VendingMachines/cl_vendor.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]

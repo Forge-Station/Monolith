@@ -23,7 +23,7 @@
     shieldColor: "#4ECDC4"
     collisionResistanceMultiplier: 0.5
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
     snapCardinals: false
     layers:
@@ -123,7 +123,7 @@
     shieldPassthroughFromStress: 0.38
     shieldPassthroughImmunityTicks: 4
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
     snapCardinals: false
     layers:
@@ -223,7 +223,7 @@
     shieldColor: "#F4D35E"
     collisionResistanceMultiplier: 0.5
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
     snapCardinals: false
     layers:

@@ -24,7 +24,7 @@
     - Hospital
     defaultChannel: Hospital
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_silver
     - state: hospital_label
@@ -43,9 +43,9 @@
     - Command
     defaultChannel: Common
   - type: Item
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_silver
     - state: pm_label
@@ -62,7 +62,7 @@
       - Renegade
       defaultChannel: Renegade
     - type: Sprite
-      sprite: Forge/Objects/Devices/encryption_keys.rsi
+      sprite: _Forge/Objects/Devices/encryption_keys.rsi
       layers:
         - state: crypt_renegade
         - state: ren_label
@@ -80,7 +80,7 @@
       - TechRenegade
       defaultChannel: TechRenegade
     - type: Sprite
-      sprite: Forge/Objects/Devices/encryption_keys.rsi
+      sprite: _Forge/Objects/Devices/encryption_keys.rsi
       layers:
         - state: crypt_renegade
         - state: techren_label
@@ -99,7 +99,7 @@
       - ComRenegade
       defaultChannel: ComRenegade
     - type: Sprite
-      sprite: Forge/Objects/Devices/encryption_keys.rsi
+      sprite: _Forge/Objects/Devices/encryption_keys.rsi
       layers:
         - state: crypt_renegade
         - state: comren_label
@@ -160,9 +160,9 @@
     - Empire
     defaultChannel: Empire
   - type: Item
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_silver
     - state: emp_label
@@ -181,9 +181,9 @@
     - EmpireCommand
     defaultChannel: EmpireCommand
   - type: Item
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_silver
     - state: emp_label
@@ -202,9 +202,9 @@
     - ViperGroup
     defaultChannel: ViperGroup
   - type: Item
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_red_alt
     - state: viper_label
@@ -222,9 +222,9 @@
     - PaycheckBratva
     defaultChannel: PaycheckBratva
   - type: Item
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_black
     - state: paycheck_label
@@ -242,9 +242,9 @@
     - MAC
     defaultChannel: MAC
   - type: Item
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_black
     - state: mac_label
@@ -262,9 +262,9 @@
     - UNSA
     defaultChannel: UNSA
   - type: Item
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_merc
     - state: unsa_label
@@ -282,9 +282,9 @@
     - Ullman
     defaultChannel: Ullman
   - type: Item
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_black
     - state: ullman_label
@@ -302,9 +302,9 @@
     - Blackhawk
     defaultChannel: Blackhawk
   - type: Item
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_merc
     - state: blackhawk_label
@@ -322,9 +322,9 @@
     - TL
     defaultChannel: TL
   - type: Item
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_merc
     - state: tl_label
@@ -340,7 +340,7 @@
     - Harmony
     defaultChannel: Harmony
   - type: Sprite
-    sprite: Forge/Objects/Devices/encryption_keys.rsi
+    sprite: _Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_silver
     - state: hme_label
@@ -373,9 +373,9 @@
     - Nexus
     defaultChannel: Nexus
   - type: Item
-    sprite: Forge/Objects/Devices/nexus_encryption_key.rsi
+    sprite: _Forge/Objects/Devices/nexus_encryption_key.rsi
   - type: Sprite
-    sprite: Forge/Objects/Devices/nexus_encryption_key.rsi
+    sprite: _Forge/Objects/Devices/nexus_encryption_key.rsi
     layers:
     - state: crypt_nexus
     - state: nexus_label

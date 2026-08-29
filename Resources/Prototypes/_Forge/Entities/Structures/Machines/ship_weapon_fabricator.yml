@@ -5,7 +5,7 @@
   description: An industrial assembly machine for building ship weapons from researched blueprints and loaded components.
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/shipWeaponFab.rsi
+    sprite: _Forge/Structures/Machines/shipWeaponFab.rsi
     offset: 1,-1
     layers:
     - state: base

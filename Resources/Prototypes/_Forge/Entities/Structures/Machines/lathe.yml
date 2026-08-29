@@ -6,7 +6,7 @@
   suffix: Ренегаты
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/ren_techfab.rsi
+    sprite: _Forge/Structures/Machines/ren_techfab.rsi
     layers:
     - state: icon
       map: ["enum.LatheVisualLayers.IsRunning"]
@@ -48,7 +48,7 @@
   description: Prints equipment for use by the medbay.
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/techfab.rsi
+    sprite: _Forge/Structures/Machines/techfab.rsi
     layers:
     - state: icon
       map: [ "enum.LatheVisualLayers.IsRunning" ]

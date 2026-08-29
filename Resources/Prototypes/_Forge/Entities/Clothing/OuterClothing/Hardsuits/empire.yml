@@ -6,11 +6,11 @@
   description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -55,9 +55,9 @@
   description: A hardsuit issued to Imperial guardian commander operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_commander.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empirelight_commander.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_commander.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empirelight_commander.rsi
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -77,9 +77,9 @@
   description: A hardsuit issued to Imperial Inquisitor operating in low-pressure and high-risk environments.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_violet.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empirelight_violet.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empirelight_violet.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empirelight_violet.rsi
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -101,11 +101,11 @@
   description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_light.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_light.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -146,9 +146,9 @@
   description: A hardsuit issued to Imperial guardian commander operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light_medic.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_light_medic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light_medic.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_light_medic.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -187,9 +187,9 @@
   description: A hardsuit issued to Imperial Inquisitor Squad operating in low-pressure and high-risk environments.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light_inq.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_light_inq.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_light_inq.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_light_inq.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -220,11 +220,11 @@
   description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_medium.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_medium.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_medium.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_medium.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.03
     lowPressureMultiplier: 1000
@@ -272,9 +272,9 @@
   description: A hardsuit issued to Imperial Inquisitor Squad operating in low-pressure and high-risk environments.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_inquisitor.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_inquisitor.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_inquisitor.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_inquisitor.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -306,9 +306,9 @@
   description: A hardsuit issued to Imperial Inquisitor Squad operating in low-pressure and high-risk environments.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_medium_lord.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_medium_lord.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_medium_lord.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_medium_lord.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -341,11 +341,11 @@
   description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy.rsi
     stripDelay: 15
     equipDelay: 15
   - type: PressureProtection
@@ -395,11 +395,11 @@
   description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_lord.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_lord.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_lord.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_lord.rsi
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -417,11 +417,11 @@
   description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_inq.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_inq.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_inq.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_inq.rsi
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -440,11 +440,11 @@
   description: Higaris Victories' military prototype 9, codenamed «Vigilance».
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_vigilance.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_vigilance.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_vigilance.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_vigilance.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.03
     lowPressureMultiplier: 1000
@@ -492,11 +492,11 @@
   description: Higaris Victories' military prototype 0-4, codenamed «Militant».
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_militant.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_militant.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_militant.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_militant.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.03
     lowPressureMultiplier: 1000
@@ -576,11 +576,11 @@
   description: Higaris Victories' military prototype 33R, codenamed «Imperceptible».
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_stealh.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_stealh.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/empire_stealh.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_stealh.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.03
     lowPressureMultiplier: 1000

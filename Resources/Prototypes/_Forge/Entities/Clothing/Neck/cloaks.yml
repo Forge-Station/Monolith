@@ -6,9 +6,9 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/tti_commander.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/tti_commander.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Neck/Cloaks/tti_commander.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/tti_commander.rsi
 # Parameds
 - type: entity
   parent: ClothingNeckBase
@@ -19,14 +19,14 @@
   - type: Item
     size: Small
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/paramed.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/paramed.rsi
     layers:
     - state: icon-off
     - state: icon-on
       color: "#a9b6bd"
       shader: unshaded
   - type: Clothing
-    sprite: Forge/Clothing/Neck/Cloaks/paramed.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/paramed.rsi
     clothingVisuals:
       neck:
       - state: equipped-NECK-off
@@ -46,14 +46,14 @@
   - type: Item
     size: Small
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/paramed-alt.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/paramed-alt.rsi
     layers:
     - state: icon-off
     - state: icon-on
       color: "#a9b6bd"
       shader: unshaded
   - type: Clothing
-    sprite: Forge/Clothing/Neck/Cloaks/paramed-alt.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/paramed-alt.rsi
     clothingVisuals:
       neck:
       - state: equipped-NECK-off
@@ -63,7 +63,7 @@
   - type: StaticPrice
     price: 200
     vendPrice: 19000
-    
+
 #region Empire
 - type: entity
   parent: ClothingNeckBase
@@ -73,7 +73,7 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/Empire/preafect.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -83,7 +83,7 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect_o.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/Empire/preafect_o.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -93,7 +93,7 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect_v.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/Empire/preafect_v.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -103,7 +103,7 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/Empire/preafect_d.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/Empire/preafect_d.rsi
 
 #region Renegate
 - type: entity
@@ -114,7 +114,7 @@
   description: Is it legal?
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/Renegade/renegade.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/Renegade/renegade.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -124,7 +124,7 @@
   description: Is it legal?
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/Renegade/renegadecaptain.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/Renegade/renegadecaptain.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -134,9 +134,9 @@
   description: Is it legal?
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/mantles/renegade.rsi
+    sprite: _Forge/Clothing/Neck/mantles/renegade.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Neck/mantles/renegade.rsi
+    sprite: _Forge/Clothing/Neck/mantles/renegade.rsi
 
 #region Other
 - type: entity
@@ -146,9 +146,9 @@
   description: Длинное, свободное одеяние цвета ночи, которое элегантно струится вокруг фигуры, добавляя образу таинственности и загадочности.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/darkcloakclose.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/darkcloakclose.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Neck/Cloaks/darkcloakclose.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/darkcloakclose.rsi
   - type: ToggleableClothing
     clothingPrototype: PlumberDarkHoodV
     requiredSlot:
@@ -165,9 +165,9 @@
   description: Длинное, свободное одеяние цвета ночи, которое элегантно струится вокруг фигуры, добавляя образу таинственности и загадочности.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/darkcloakopen.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/darkcloakopen.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Neck/Cloaks/darkcloakopen.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/darkcloakopen.rsi
   - type: ToggleableClothing
     clothingPrototype: PlumberDarkHoodV
     requiredSlot:
@@ -185,7 +185,7 @@
   description: Прочный плащ из современных материалов.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloak.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloak.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodModernCloak
     requiredSlot:
@@ -204,7 +204,7 @@
   description: Прочный плащ из современных материалов.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBlue.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBlue.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodModernCloakBlue
     requiredSlot:
@@ -223,7 +223,7 @@
   description: Прочный плащ из современных материалов.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakPink.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakPink.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodModernCloakPink
     requiredSlot:
@@ -242,7 +242,7 @@
   description: Прочный плащ из современных материалов.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBRed.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBRed.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodModernCloakBRed
     requiredSlot:
@@ -261,7 +261,7 @@
   description: Прочный плащ из современных материалов.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBYellow.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBYellow.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodModernCloakBYellow
     requiredSlot:
@@ -280,7 +280,7 @@
   description: Прочный плащ из современных материалов.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBPurple.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakBPurple.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodModernCloakBPurple
     requiredSlot:
@@ -299,7 +299,7 @@
   description: Прочный плащ из современных материалов.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakGrey.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakGrey.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodModernCloakGrey
     requiredSlot:
@@ -318,7 +318,7 @@
   description: Прочный плащ из современных материалов.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakRed.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakRed.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodModernCloakRed
     requiredSlot:
@@ -337,7 +337,7 @@
   description: Прочный плащ из современных материалов.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakDesert.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/ModernCloak/moderncloakDesert.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodModernCloakDesert
     requiredSlot:
@@ -357,9 +357,9 @@
   description: Shootouts with nukies are just another Tuesday for this Sheriff. This mantle is a symbol of commitment to the station.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/mantles/shermantle.rsi
+    sprite: _Forge/Clothing/Neck/mantles/shermantle.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Neck/mantles/shermantle.rsi
+    sprite: _Forge/Clothing/Neck/mantles/shermantle.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -368,4 +368,4 @@
   description: A long black cape, flowing in the wind like a shadow, envelops the wearer, giving his image a gloomy mystery.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Neck/Cloaks/witchcloak.rsi
+    sprite: _Forge/Clothing/Neck/Cloaks/witchcloak.rsi

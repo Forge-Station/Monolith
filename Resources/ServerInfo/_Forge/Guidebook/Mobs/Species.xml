@@ -10,7 +10,7 @@
     <GuideEntityEmbed Entity="MobHuman" Caption="Человек"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="MobMoth" Caption="Моль"/>
+    <GuideEntityEmbed Entity="MobMoth" Caption="Ниан"/>
     <GuideEntityEmbed Entity="MobReptilian" Caption="Унатх"/>
     <GuideEntityEmbed Entity="MobSlimePerson" Caption="Слайм"/>
     <GuideEntityEmbed Entity="MobVox" Caption="Вокс"/>
@@ -28,6 +28,7 @@
     <GuideEntityEmbed Entity="MobHarpy" Caption="Гарпия"/>
     <GuideEntityEmbed Entity="MobOni" Caption="Они"/>
     <GuideEntityEmbed Entity="MobChitinid" Caption="Хитинид"/>
+    <GuideEntityEmbed Entity="MobRodentia" Caption="Раткин"/>
   </Box>
 
   # Расы с Goobstation 
@@ -39,7 +40,7 @@
   <Box>
     <GuideEntityEmbed Entity="MobAriral" Caption="Арирал"/>
     <GuideEntityEmbed Entity="MobDemon" Caption="Аркана"/>
-    <GuideEntityEmbed Entity="Skrell" Caption="Скрелл"/>
+    <GuideEntityEmbed Entity="MobSkrell" Caption="Скрелл"/>
   </Box>
 
 </Document>

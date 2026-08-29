@@ -7,3 +7,8 @@
   id: Skrell
   name: species-name-skrell
   text: "/ServerInfo/_Forge/Guidebook/Mobs/_Wega/Skrell.xml"
+
+- type: guideEntry
+  id: Ariral
+  name: species-name-ariral
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_Wega/Ariral.xml"

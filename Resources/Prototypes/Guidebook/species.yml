@@ -4,6 +4,7 @@
   text: "/ServerInfo/_Forge/Guidebook/Mobs/Species.xml" # Forge-change
   children:
   - Arachnid
+  - Ariral
   - Demon # Wega
   - Vox
   - Vulpkanin # DeltaV

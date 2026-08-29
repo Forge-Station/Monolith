@@ -19,6 +19,8 @@
     Plastic: 300
     Gold: 150
     Silver: 150
+#    Epinephrine: 1000 # Раскоментить когда подружим Автолат с реагентами
+#    TranexamicAcid: 500 # Раскоментить когда подружим Автолат с реагентами
 
 - type: latheRecipe
   id: TranexamicImplanterDose
@@ -30,6 +32,7 @@
     Plastic: 300
     Gold: 150
     Silver: 150
+#    TranexamicAcid: 1500 # Раскоментить когда подружим Автолат с реагентами
 
 - type: latheRecipe
   id: ForgeSubdermalArmorImplant

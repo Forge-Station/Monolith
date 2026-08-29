@@ -10,6 +10,28 @@
     Silver: 150
 
 - type: latheRecipe
+  id: TranexamicImplanter
+  result: TranexamicImplanter
+  completetime: 4
+  materials:
+    Steel: 500
+    Glass: 500
+    Plastic: 300
+    Gold: 150
+    Silver: 150
+
+- type: latheRecipe
+  id: TranexamicImplanterDose
+  result: TranexamicImplanterDose
+  completetime: 4
+  materials:
+    Steel: 500
+    Glass: 500
+    Plastic: 300
+    Gold: 150
+    Silver: 150
+
+- type: latheRecipe
   id: ForgeSubdermalArmorImplant
   result: ForgeSubdermalArmorImplant
   completetime: 6

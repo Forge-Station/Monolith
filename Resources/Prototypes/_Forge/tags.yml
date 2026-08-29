@@ -1,3 +1,4 @@
+#region OMG PLS SOMEBODY SORTING THAT SHIT
 - type: Tag
   id: CartridgeVector22
 
@@ -241,7 +242,6 @@
 - type: Tag
   id: AncientBattery
 
-
 # NSC ammunition
 - type: Tag
   id: Cartridge154x114mm
@@ -261,3 +261,18 @@
 
 - type: Tag
   id: ForgeCartridgeUllman127x85mm
+
+- type: Tag
+  id: SeismicCharge
+
+- type: Tag
+  id: DrakePlasmaTank
+
+- type: Tag
+  id: Kanabo
+
+- type: Tag
+  id: Odati
+
+- type: Tag
+  id: Type3

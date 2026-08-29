@@ -2,7 +2,6 @@ research-discipline-nanotrasen-tti = Изучения Nanotrasen
 
 research-technology-nanotrasen-beginning = Жемчужина корпорации
 research-technology-nanotrasen-circuitboard = Законы ИИ
-research-technology-nanotrasen-flatpack-drill = Продвинутое бурение
 research-technology-nanotrasen-equipment-t1 = Одежда охраны
 research-technology-nanotrasen-equipment-t2 = Одежда начальства охраны
 research-technology-nanotrasen-equipment-t3 = Бронированные скафандры

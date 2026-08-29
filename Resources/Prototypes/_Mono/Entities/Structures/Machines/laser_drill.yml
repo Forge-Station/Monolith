@@ -65,20 +65,6 @@
     requireExpedition: true
     requireGround: false # works just fine on lattice
 
-# Forge start
-- type: entity
-  id: ForgeLaserDrill
-  name: automated laser drill
-  parent: [LaserDrillBase, ConstructibleMachine]
-  description: A large automated drill that digs up random materials when powered with 50 kW of HV. Only works on expedition planets.
-  components:
-  - type: PlanetMiner
-    requireExpedition: true
-    requireGround: false # works just fine on lattice
-  - type: Machine 
-    board: LaserDrillCircuitboard
-# Forge end
-
 - type: entity
   id: StationLaserDrill
   name: advanced automated laser drill

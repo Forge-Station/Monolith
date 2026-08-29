@@ -52,6 +52,7 @@
       - ForgeVoiceModuleImplant # Forge-Change
       - OverlordImplant # Forge-change
       - TranexamicImplant # Forge-change
+      - TranexamicImplantDose # Forge-change
       deimplantFailureDamage:
         types:
 #          Cellular: 5 # 50->5 - Mono
@@ -338,5 +339,13 @@
   components:
     - type: Implanter
       implant: TranexamicImplant
+
+- type: entity
+  id: TranexamicImplanterDose
+  parent: BaseImplantOnlyImplanter
+  suffix: Tranexamic Dose
+  components:
+    - type: Implanter
+      implant: TranexamicImplantDose
 
 # Forge-Change-End

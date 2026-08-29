@@ -297,10 +297,11 @@
     useDelay: 1
 
 # Forge-Change-Start
+
 - type: entity
   id: ActionActivateTranexamic
   name: Activate Tranexamic Acid
-  description: Deliver a dose of Tranexamic acid from your implant.
+  description: Deliver a Tranexamic acid and Ephinefrine from your implant.
   categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
@@ -310,6 +311,21 @@
       sprite: Objects/Specific/Medical/medipen.rsi
       state: morphen
     event: !type:ActivateImplantEvent
+
+- type: entity
+  id: ActionActivateTranexamicDose
+  name: Activate Tranexamic Acid (Dose)
+  description: Deliver 5u dose of Tranexamic acid from your implant.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    checkConsciousness: false
+    icon:
+      sprite: Objects/Specific/Medical/medipen.rsi
+      state: morphen
+    event: !type:ActivateImplantEvent {}
+
 # Forge-Change-End
 
 - type: entity

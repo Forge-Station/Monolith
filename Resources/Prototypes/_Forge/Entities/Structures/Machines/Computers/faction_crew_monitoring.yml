@@ -6,14 +6,14 @@
   suffix: Renegate
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/computers.rsi
+    sprite: _Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
       state: computer_renegate
     - map: ["computerLayerKeyboard"]
       state: renegate_key
     - map: ["computerLayerScreen"]
-      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      sprite: _Forge/Structures/Machines/factions_crew_monitors_screens.rsi
       state: crew-renegate
     - map: ["computerLayerKeys"]
       state: ren_key
@@ -37,7 +37,7 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      sprite: _Forge/Structures/Machines/factions_crew_monitors_screens.rsi
       state: crew-tsf
     - map: ["computerLayerKeys"]
       state: telesci_key
@@ -61,7 +61,7 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      sprite: _Forge/Structures/Machines/factions_crew_monitors_screens.rsi
       state: crew-nt
     - map: ["computerLayerKeys"]
       state: med_key
@@ -79,14 +79,14 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/computers.rsi
+    sprite: _Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
       state: computer_emp
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      sprite: Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      sprite: _Forge/Structures/Machines/factions_crew_monitors_screens.rsi
       state: crew-emp
     - map: ["computerLayerKeys"]
       state: emp_key

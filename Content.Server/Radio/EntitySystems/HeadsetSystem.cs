@@ -3,7 +3,7 @@ using Content.Shared._Mono.Radio;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
-using Content.Server._EinsteinEngines.Language;
+using Content.Server._EE.Language;
 using Content.Shared.Chat;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Network;

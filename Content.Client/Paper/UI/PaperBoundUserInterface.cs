@@ -1,4 +1,4 @@
-using Content.Client._EinsteinEngines.Language.Systems; // Forge-Change
+using Content.Client._EE.Language.Systems; // Forge-Change
 using Content.Client._Forge.Features; // Forge-Change
 using Content.Shared.Paper;
 using JetBrains.Annotations;

@@ -1,6 +1,6 @@
-using Content.Server._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Server._EE.Language;
+using Content.Shared._EE.Language;
+using Content.Shared._EE.Language.Systems;
 using Content.Shared._Forge.Features.Components;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;

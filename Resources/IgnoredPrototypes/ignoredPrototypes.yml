@@ -11,5 +11,5 @@
  - /Prototypes/Procedural/vgroid.yml # Frontier
  - /Prototypes/Procedural/salvage_loot.yml # Frontier
  - /Prototypes/Procedural/salvage_rewards.yml # Frontier
- - /Prototypes/_EinsteinEngines/Language/Standard # Forge-change: Replace _Forge variants (localization)
+ - /Prototypes/_EE/Language/Standard # Forge-change: Replace _Forge variants (localization)
  - /Prototypes/_Mono/Entities/Mobs/Ghostroles/Asakim/roles.yml # Forge-change: Rework asakim's

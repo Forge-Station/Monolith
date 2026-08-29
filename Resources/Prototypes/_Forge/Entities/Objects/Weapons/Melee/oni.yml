@@ -9,7 +9,7 @@
     sound:
       path: /Audio/_Goobstation/Items/handling/sabre_drop.ogg
   - type: Sprite
-    sprite: _Forge/OniMeleeWeapons/Odati/odatiItem.rsi
+    sprite: _Forge/Objects/Weapons/Melee/odatiItem.rsi
   - type: MeleeWeapon
     heavyStaminaCost: 5 # goob edit
     attackRate: 1
@@ -25,14 +25,14 @@
     reflectProb: 0.05
     spread: 90
   - type: Item
-    sprite: _Forge/OniMeleeWeapons/Odati/odati.rsi
+    sprite: _Forge/Objects/Weapons/Melee/odati.rsi
   - type: Tag
     tags:
     - Odati
   - type: DisarmMalus
     malus: 0.3
   - type: Clothing
-    sprite: _Forge/OniMeleeWeapons/Odati/odati.rsi
+    sprite: _Forge/Objects/Weapons/Melee/odati.rsi
     quickEquip: false
     slots:
     - back
@@ -56,7 +56,7 @@
     sound:
       path: /Audio/_Goobstation/Items/handling/sabre_drop.ogg
   - type: Sprite
-    sprite: _Forge/OniMeleeWeapons/Kanabo/kanaboItem.rsi
+    sprite: _Forge/Objects/Weapons/Melee/kanaboItem.rsi
   - type: MeleeWeapon
     heavyStaminaCost: 15 # goob edit
     attackRate: 0.25
@@ -68,14 +68,14 @@
     soundHit:
       collection: MetalThud
   - type: Item
-    sprite: _Forge/OniMeleeWeapons/Kanabo/kanabo.rsi
+    sprite: _Forge/Objects/Weapons/Melee/kanabo.rsi
   - type: Tag
     tags:
     - Kanabo
   - type: DisarmMalus
     malus: 0.3
   - type: Clothing
-    sprite: _Forge/OniMeleeWeapons/Kanabo/kanabo.rsi
+    sprite: _Forge/Objects/Weapons/Melee/kanabo.rsi
     quickEquip: false
     slots:
     - back
@@ -102,7 +102,7 @@
     sound:
       path: /Audio/_Goobstation/Items/handling/sabre_drop.ogg
   - type: Sprite
-    sprite: _Forge/OniMeleeWeapons/Sasymata/sasymataItem.rsi
+    sprite: _Forge/Objects/Weapons/Melee/sasymataItem.rsi
   - type: MeleeWeapon
     heavyStaminaCost: 5 # goob edit
     attackRate: 1
@@ -117,11 +117,11 @@
     damage: 15
     overtime: 40
   - type: Item
-    sprite: _Forge/OniMeleeWeapons/Sasymata/sasymata.rsi
+    sprite: _Forge/Objects/Weapons/Melee/sasymata.rsi
   - type: DisarmMalus
     malus: 0.3
   - type: Clothing
-    sprite: _Forge/OniMeleeWeapons/Sasymata/sasymata.rsi
+    sprite: _Forge/Objects/Weapons/Melee/sasymata.rsi
     quickEquip: false
     slots:
     - back
@@ -145,7 +145,7 @@
     sound:
       path: /Audio/_Goobstation/Items/handling/sabre_drop.ogg
   - type: Sprite
-    sprite: _Forge/OniMeleeWeapons/Type3/type3.rsi
+    sprite: _Forge/Objects/Weapons/Melee/type3.rsi
   - type: MeleeWeapon
     heavyStaminaCost: 2.5 # goob edit
     attackRate: 1.3
@@ -160,14 +160,14 @@
     reflectProb: 0.1
     spread: 90
   - type: Item
-    sprite: _Forge/OniMeleeWeapons/Type3/type3.rsi
+    sprite: _Forge/Objects/Weapons/Melee/type3.rsi
   - type: Tag
     tags:
     - Type3
   - type: DisarmMalus
     malus: 0.15
   - type: Clothing
-    sprite: _Forge/OniMeleeWeapons/Type3/type3.rsi
+    sprite: _Forge/Objects/Weapons/Melee/type3.rsi
     quickEquip: false
     slots:
     - back
@@ -191,7 +191,7 @@
     sound:
       path: /Audio/_Goobstation/Items/handling/sabre_drop.ogg
   - type: Sprite
-    sprite: _Forge/OniMeleeWeapons/Nahinati/nahinatiItem.rsi
+    sprite: _Forge/Objects/Weapons/Melee/nahinatiItem.rsi
   - type: MeleeWeapon
     heavyStaminaCost: 5 # goob edit
     attackRate: 1
@@ -203,11 +203,11 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
-    sprite: _Forge/OniMeleeWeapons/Nahinati/nahinati.rsi
+    sprite: _Forge/Objects/Weapons/Melee/nahinati.rsi
   - type: DisarmMalus
     malus: 0.3
   - type: Clothing
-    sprite: _Forge/OniMeleeWeapons/Nahinati/nahinati.rsi
+    sprite: _Forge/Objects/Weapons/Melee/nahinati.rsi
     quickEquip: false
     slots:
     - back

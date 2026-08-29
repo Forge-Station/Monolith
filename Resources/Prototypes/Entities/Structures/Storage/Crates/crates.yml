@@ -690,9 +690,9 @@
   name: crate BS
   components:
   - type: Icon
-    sprite: Forge/Structures/Storage/Crates/bluespace_crate.rsi
+    sprite: _Forge/Structures/Storage/Crates/bluespace_crate.rsi
   - type: Sprite
-    sprite: Forge/Structures/Storage/Crates/bluespace_crate.rsi
+    sprite: _Forge/Structures/Storage/Crates/bluespace_crate.rsi
   - type: Reflect
     reflects:
     - Energy

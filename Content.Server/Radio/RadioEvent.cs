@@ -1,5 +1,5 @@
 using Content.Shared.Chat;
-using Content.Shared._EinsteinEngines.Language;
+using Content.Shared._EE.Language;
 using Content.Shared.Radio;
 
 namespace Content.Server.Radio;

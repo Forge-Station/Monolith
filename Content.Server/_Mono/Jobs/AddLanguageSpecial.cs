@@ -1,5 +1,5 @@
 using Content.Shared.Roles;
-using Content.Server._EinsteinEngines.Language;
+using Content.Server._EE.Language;
 
 namespace Content.Server.Jobs;
 

@@ -6,9 +6,9 @@
   description: A revolver. Powerful, spectacular. Like any good revolver.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Pistols/magnus.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Pistols/magnus.rsi
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/Pistols/magnus.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Pistols/magnus.rsi
   - type: Gun
     selectedMode: SemiAuto
     fireRate: 2.5

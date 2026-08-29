@@ -36,7 +36,7 @@
         layer:
         - MachineLayer
   - type: Sprite
-    sprite: Forge/Structures/Storage/poistorage.rsi
+    sprite: _Forge/Structures/Storage/poistorage.rsi
     state: storage
     noRot: true
   - type: Appearance

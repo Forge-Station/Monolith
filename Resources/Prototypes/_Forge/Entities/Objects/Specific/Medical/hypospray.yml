@@ -29,7 +29,7 @@
   description: A single-use medipen containing chemicals that regenerate morphine addictive.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Medical/medipen.rsi
+    sprite: _Forge/Objects/Specific/Medical/medipen.rsi
     layers:
     - state: naloxone
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -60,7 +60,7 @@
   id: MethadoneMedipen
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Medical/medipen.rsi
+    sprite: _Forge/Objects/Specific/Medical/medipen.rsi
     layers:
     - state: methadone
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -91,7 +91,7 @@
   id: MorphineMedipen
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Medical/medipen.rsi
+    sprite: _Forge/Objects/Specific/Medical/medipen.rsi
     layers:
     - state: morphine
       map: ["enum.SolutionContainerLayers.Fill"]

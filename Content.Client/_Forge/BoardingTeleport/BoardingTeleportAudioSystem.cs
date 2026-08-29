@@ -1,5 +1,5 @@
 using Content.Client.Audio;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.BoardingTeleport.Components;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
@@ -17,13 +17,13 @@ public sealed class BoardingTeleportAudioSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<BoardingTeleportAudioComponent, ComponentStartup>(OnStartup);
-        _cfg.OnValueChanged(ForgeVars.BoardingTeleportVolume, OnVolumeChanged);
+        _cfg.OnValueChanged(ForgeCCVars.BoardingTeleportVolume, OnVolumeChanged);
     }
 
     public override void Shutdown()
     {
         base.Shutdown();
-        _cfg.UnsubValueChanged(ForgeVars.BoardingTeleportVolume, OnVolumeChanged);
+        _cfg.UnsubValueChanged(ForgeCCVars.BoardingTeleportVolume, OnVolumeChanged);
     }
 
     private void OnStartup(Entity<BoardingTeleportAudioComponent> ent, ref ComponentStartup args)
@@ -52,7 +52,7 @@ public sealed class BoardingTeleportAudioSystem : EntitySystem
 
     private float GetUserVolumeOffsetDb()
     {
-        var userGain = _cfg.GetCVar(ForgeVars.BoardingTeleportVolume) * ContentAudioSystem.BoardingTeleportMultiplier;
+        var userGain = _cfg.GetCVar(ForgeCCVars.BoardingTeleportVolume) * ContentAudioSystem.BoardingTeleportMultiplier;
         var referenceGain = ContentAudioSystem.BoardingTeleportMultiplier;
         return SharedAudioSystem.GainToVolume(userGain) - SharedAudioSystem.GainToVolume(referenceGain);
     }

@@ -18,7 +18,7 @@
     - RenegateEquipment
     - RenegateVouchers
   - type: Sprite
-    sprite: Forge/Structures/Machines/server.rsi
+    sprite: _Forge/Structures/Machines/server.rsi
     snapCardinals: true
     layers:
     - state: ren_server-off
@@ -39,7 +39,7 @@
   description: Contains the collective knowledge of the Phaethon Dynasty.
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/server.rsi
+    sprite: _Forge/Structures/Machines/server.rsi
     layers:
     - state: server
     - state: variant-empire

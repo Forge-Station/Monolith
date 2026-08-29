@@ -6,7 +6,7 @@
   description: UcasCo plasma shotgun with a tight spread. Must be wielded.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -19,10 +19,10 @@
     zeroVisible: false
   - type: Appearance
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun_inhand_x64.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun_inhand_x64.rsi
   - type: Item
     size: Large
-    sprite: Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun_inhand_x64.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun_inhand_x64.rsi
     shape:
     - 0,0,4,1
   - type: GunRequiresWield

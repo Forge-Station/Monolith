@@ -1,4 +1,4 @@
-using Content.Server._EinsteinEngines.Language;
+using Content.Server._EE.Language;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;

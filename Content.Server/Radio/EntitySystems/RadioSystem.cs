@@ -3,14 +3,14 @@ using Content.Server._Forge.Radio.EntitySystems; // Forge-Change: configurable e
 using Content.Goobstation.Shared.StationRadio.Components; // Forge-Change: station radio receiver frequency
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
-using Content.Server._EinsteinEngines.Language;
+using Content.Server._EE.Language;
 using Content.Server.Power.Components;
 using Content.Shared.Radio.Components;
 using Content.Shared._Mono.Radio;
 using Content.Shared.Chat;
 using Content.Shared.Database;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared._EE.Language;
+using Content.Shared._EE.Language.Systems;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Speech;
@@ -23,7 +23,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
 using Robust.Shared.Configuration;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Server._Forge.TTS;
 using Content.Shared._Forge.TTS;
 
@@ -103,7 +103,7 @@ public sealed partial class RadioSystem : EntitySystem
 
             // Forge-Change-Start
             var isOwnAudioRelay = uid == args.MessageSource;
-            var radioTtsEnabled = _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeVars.LocalRadioTTSEnabled);
+            var radioTtsEnabled = _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeCCVars.LocalRadioTTSEnabled);
 
             // Use the speaker's voice (MessageSource), not the listener's own — Forge-Change
             if(!isOwnAudioRelay && radioTtsEnabled && TryComp<TTSComponent>(args.MessageSource, out var tts) && !string.IsNullOrWhiteSpace(tts.VoicePrototypeId))

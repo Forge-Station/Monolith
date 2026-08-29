@@ -1,10 +1,10 @@
 using Content.Server.Administration;
-using Content.Server._EinsteinEngines.Language;
+using Content.Server._EE.Language;
 using Content.Shared.Administration;
 using Content.Shared.Emoting;
 using Content.Shared.Examine;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared._EE.Language.Components;
+using Content.Shared._EE.Language.Systems;
 using Content.Shared.Mind.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Speech;

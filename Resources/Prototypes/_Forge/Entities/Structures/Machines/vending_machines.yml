@@ -21,7 +21,7 @@
   - type: SpeakOnUIClosed
     pack: GetmoreChocolateCorpGoodbyes
   - type: Sprite
-    sprite: Forge/Structures/Machines/VendingMachines/donkvendNT.rsi
+    sprite: _Forge/Structures/Machines/VendingMachines/donkvendNT.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -58,7 +58,7 @@
   - type: SpeakOnUIClosed
     pack: GetmoreChocolateCorpGoodbyes
   - type: Sprite
-    sprite: Forge/Structures/Machines/VendingMachines/donkvendSY.rsi
+    sprite: _Forge/Structures/Machines/VendingMachines/donkvendSY.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]

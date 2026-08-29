@@ -6,9 +6,9 @@
   description: Cool Imperial consul uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/navy_gold.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/navy_gold.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/navy_gold.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/navy_gold.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -17,9 +17,9 @@
   description: Cool Imperial inquisitor uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tech.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_tech.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tech.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_tech.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -28,9 +28,9 @@
   description: Cool Imperial sweater.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_sweater.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_sweater.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_sweater.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_sweater.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -39,10 +39,10 @@
   description: Cool Imperial inquisitor uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/inquisitor.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor.rsi
-      
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/inquisitor.rsi
+
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitEmpireInqAlt
@@ -50,9 +50,9 @@
   description: Cool Imperial inquisitor uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/inquisitor_alt.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/inquisitor_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/inquisitor_alt.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -61,9 +61,9 @@
   description: Empire neophyte uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_neo.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_neo.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_neo.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_neo.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -72,9 +72,9 @@
   description: Empire neophyte uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_neo_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_neo_alt.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_neo_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_neo_alt.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -83,9 +83,9 @@
   description: Empire auxilia uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_aux.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_aux.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_aux.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_aux.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -94,9 +94,9 @@
   description: Empire auxilia uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_aux_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_aux_alt.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_aux_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_aux_alt.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -105,9 +105,9 @@
   description: Empire praetorian uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_pre.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_pre.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_pre.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_pre.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -116,9 +116,9 @@
   description: Empire praetorian uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_pre_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_pre_alt.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_pre_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_pre_alt.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -127,9 +127,9 @@
   description: Empire tessarian uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tessarian.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_tessarian.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tessarian.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_tessarian.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -138,9 +138,9 @@
   description: Empire tessarian uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tes_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_tes_alt.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_tes_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_tes_alt.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -149,9 +149,9 @@
   description: Empire lord uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_lord.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_lord.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -160,9 +160,9 @@
   description: Empire lord uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_lord_alt.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_alt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_lord_alt.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -171,9 +171,9 @@
   description: Empire lord uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_d.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_lord_d.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_d.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_lord_d.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -182,9 +182,9 @@
   description: Empire lord uniform.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_formal.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_lord_formal.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/empire_lord_formal.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/empire_lord_formal.rsi
 
 # region Renegates
 
@@ -196,9 +196,9 @@
   description: Uniform for renegate operatives performing tactical operations in deep space.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/renegate.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/renegate.rsi
 
 - type: entity
   parent: [UnsensoredClothingUniformBase]
@@ -208,9 +208,9 @@
   description: Uniform for renegate operatives performing tactical operations in deep space.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
 
 # region Company
 - type: entity
@@ -221,9 +221,9 @@
   suffix: Нексус
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_turtleneck.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/nexus_turtleneck.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_turtleneck.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/nexus_turtleneck.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -233,9 +233,9 @@
   suffix: Нексус
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_worker.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/nexus_worker.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_worker.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/nexus_worker.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -245,9 +245,9 @@
   suffix: Нексус
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_security.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/nexus_security.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/nexus_security.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/nexus_security.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -257,9 +257,9 @@
   description: Advanced armored jumpsuit used by special forces in special operations.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/jumpsuit_techniclogistic.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/jumpsuit_techniclogistic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/jumpsuit_techniclogistic.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/jumpsuit_techniclogistic.rsi
 
 #region Other
 - type: entity
@@ -269,9 +269,9 @@
   description: Call me master and bring me some beer.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpskirts/elegantmaid.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpskirts/elegantmaid.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpskirts/elegantmaid.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpskirts/elegantmaid.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -280,9 +280,9 @@
   description: Stylish and comfortable school skirt.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpskirts/schoolskirt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpskirts/schoolskirt.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpskirts/schoolskirt.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpskirts/schoolskirt.rsi
 
 - type: entity
   parent: [BaseC3SyndicateContraband, UnsensoredClothingUniformSkirtBase, ContrabandClothing ]
@@ -291,9 +291,9 @@
   description: юбка наивысшего качества ткани для деловых встреч.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpskirts/smugglerskirt.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpskirts/smugglerskirt.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpskirts/smugglerskirt.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpskirts/smugglerskirt.rsi
 
 - type: entity
   parent: [BaseC3SyndicateContraband, UnsensoredClothingUniformSkirtBase, ContrabandClothing ]
@@ -302,9 +302,9 @@
   description: юбка-комбинезон представлена командиром жнецов, украшена золотыми вставками. Не замедляет передвижения, притягиваем к себе взгляд.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpskirts/commanderskirt.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpskirts/commanderskirt.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpskirts/commanderskirt.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpskirts/commanderskirt.rsi
 
 - type: entity
   parent: [UnsensoredClothingUniformBase, BaseC3SyndicateContraband, ContrabandClothing]
@@ -313,9 +313,9 @@
   description: костюм наивысшего качества ткани для деловых встреч.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/smugglerjumpsuit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/smugglerjumpsuit.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/smugglerjumpsuit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/smugglerjumpsuit.rsi
 
 - type: entity
   parent: [UnsensoredClothingUniformBase, BaseC3SyndicateContraband, ContrabandClothing]
@@ -324,9 +324,9 @@
   description: костюм наивысшего качества ткани для деловых встреч. Очень удобный.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/smugglerjumpsuittactical.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/smugglerjumpsuittactical.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/smugglerjumpsuittactical.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/smugglerjumpsuittactical.rsi
 
 - type: entity
   parent: [UnsensoredClothingUniformBase, BaseC3SyndicateContraband, ContrabandClothing]
@@ -335,9 +335,9 @@
   description: комбинезон представлена командиром жнецов, украшена золотыми вставками. Не замедляет передвижения, притягиваем к себе взгляд.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/commanderjumpsuit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/commanderjumpsuit.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/commanderjumpsuit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/commanderjumpsuit.rsi
 
 - type: entity
   parent: [UnsensoredClothingUniformBase, BaseC3SyndicateContraband, ContrabandClothing]
@@ -346,9 +346,9 @@
   description: теплый и уютный комбинезон, создан для кровавых битв.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/stormtrooperjumpsuit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/stormtrooperjumpsuit.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/stormtrooperjumpsuit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/stormtrooperjumpsuit.rsi
 
 
 - type: entity
@@ -358,9 +358,9 @@
   description: практичный комбинезон санитара для полевых условий.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/medsynjumpsuit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/medsynjumpsuit.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/medsynjumpsuit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/medsynjumpsuit.rsi
 
 - type: entity
   parent: [UnsensoredClothingUniformBase, BaseC3SyndicateContraband, ContrabandClothing]
@@ -369,9 +369,9 @@
   description: прочный комбинезон защищающий владельца в любых условиях.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/engineersynjumpsuit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/engineersynjumpsuit.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/engineersynjumpsuit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/engineersynjumpsuit.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -381,9 +381,9 @@
   description: Old and dirty orange salvage jumpsuit with belts and harness system, belong to some crappy company named Scrap Tech.
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/scraptech.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/scraptech.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/scraptech.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/scraptech.rsi
 
 - type: entity
   parent: [ ClothingUniformBase, BaseCentcommContraband ]
@@ -392,9 +392,9 @@
   description: Special Operations Officer uniform, nothing like that. Although... If you have time to read this, it's too late...
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/dsoformal.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/dsoformal.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/dsoformal.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/dsoformal.rsi
 
 - type: entity
   parent: [ ClothingUniformBase, BaseCentcommContraband ]
@@ -403,9 +403,9 @@
   description: Special Operations Officer uniform, nothing like that. Although... If you have time to read this, it's too late...
   components:
     - type: Sprite
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/dso_official.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/dso_official.rsi
     - type: Clothing
-      sprite: Forge/Clothing/Uniforms/Jumpsuits/dso_official.rsi
+      sprite: _Forge/Clothing/Uniforms/Jumpsuits/dso_official.rsi
 
 # _Mono version contractor military jumpsuit
 - type: entity
@@ -501,9 +501,9 @@
   description: detective jumpsuit desc
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/detective.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/detective.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/detective.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/detective.rsi
 
 - type: entity
   parent: [BaseC2ContrabandUnredeemable, ClothingUniformBase]
@@ -512,9 +512,9 @@
   description: coroner jumpsuit desc
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/medical.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/medical.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/medical.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/medical.rsi
 
 - type: entity
   parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1]
@@ -524,9 +524,9 @@
   description: Standard fatigues of the Armed Trauma Unit.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_director.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/tti_director.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_director.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/tti_director.rsi
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals
@@ -539,9 +539,9 @@
   description: Standard fatigues of the Armed Trauma Unit.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_standard.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/tti_standard.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_standard.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/tti_standard.rsi
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals
@@ -554,9 +554,9 @@
   description: Standard fatigues of the Armed Trauma Unit.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_suit_blue.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/tti_suit_blue.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_suit_blue.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/tti_suit_blue.rsi
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals
@@ -570,9 +570,9 @@
   description: HME-jumpsuit-desc
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
   - type: StaticPrice
     price: 80
     vendPrice: 250
@@ -585,9 +585,9 @@
   description: coroner jumpsuit but that brigmedic desc
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/brigmedic.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/brigmedic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/brigmedic.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/brigmedic.rsi
 
 - type: entity
   parent: [BaseC2ContrabandUnredeemable, ClothingUniformBase]
@@ -596,9 +596,9 @@
   description: specialist jumpsuit desc
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/engineering.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/engineering.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/engineering.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/engineering.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -607,9 +607,9 @@
   description: It's got a plus on it, that's a good thing right?
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Old/Uniforms/Jumpsuits/paramedic.rsi # Старые текстуры
+    sprite: _Forge/Clothing/Old/Uniforms/Jumpsuits/paramedic.rsi # Старые текстуры
   - type: Clothing
-    sprite: Forge/Clothing/Old/Uniforms/Jumpsuits/paramedic.rsi # Старые текстуры
+    sprite: _Forge/Clothing/Old/Uniforms/Jumpsuits/paramedic.rsi # Старые текстуры
 
 - type: entity
   parent: ClothingUniformBase
@@ -618,9 +618,9 @@
   description: It's made of a special fiber that gives special protection against biohazards. It has a virologist rank stripe on it.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Old/Uniforms/Jumpsuits/virology.rsi
+    sprite: _Forge/Clothing/Old/Uniforms/Jumpsuits/virology.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Old/Uniforms/Jumpsuits/virology.rsi
+    sprite: _Forge/Clothing/Old/Uniforms/Jumpsuits/virology.rsi
 
 - type: entity
   parent: ClothingUniformJumpskirtHoP
@@ -629,9 +629,9 @@
   description: This first-class suit with trousers was created especially for a representative of the Frontier. No resources were spared for its manufacture, and each seam is made with the highest skill. The issuance of such a suit symbolizes the trust of the Central Command in its representative at this remote outpost.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/sr.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/sr.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/sr.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/sr.rsi
 
 # Viper company group
 
@@ -642,9 +642,9 @@
   description: VG-jumpsuit-desc
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_tanktop.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/viper_group_tanktop.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_tanktop.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/viper_group_tanktop.rsi
   - type: StaticPrice
     price: 0
     vendPrice: 1150

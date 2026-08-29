@@ -6,7 +6,7 @@ using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
-using Content.Server._EinsteinEngines.Language;
+using Content.Server._EE.Language;
 using Content.Shared.Access.Systems; // Frontier
 using Content.Shared.Chat;
 using Content.Shared.Examine;

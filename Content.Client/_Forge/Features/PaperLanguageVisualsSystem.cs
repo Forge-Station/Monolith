@@ -1,8 +1,8 @@
 using System.Text;
-using Content.Client._EinsteinEngines.Language.Systems;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Client._EE.Language.Systems;
+using Content.Shared._EE.Language;
+using Content.Shared._EE.Language.Components;
+using Content.Shared._EE.Language.Systems;
 using Content.Shared._Forge.Features.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Paper;

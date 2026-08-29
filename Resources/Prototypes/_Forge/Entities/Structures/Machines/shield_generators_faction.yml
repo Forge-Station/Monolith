@@ -27,7 +27,7 @@
   - type: ApcPowerReceiver
     powerLoad: 58320
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -70,7 +70,7 @@
   - type: ApcPowerReceiver
     powerLoad: 71280
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -112,7 +112,7 @@
   - type: ApcPowerReceiver
     powerLoad: 66744
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -157,7 +157,7 @@
   - type: ApcPowerReceiver
     powerLoad: 40500
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -200,7 +200,7 @@
   - type: ApcPowerReceiver
     powerLoad: 49500
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -243,7 +243,7 @@
   - type: ApcPowerReceiver
     powerLoad: 46350
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -288,7 +288,7 @@
   - type: ApcPowerReceiver
     powerLoad: 58320
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -331,7 +331,7 @@
   - type: ApcPowerReceiver
     powerLoad: 71280
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -374,7 +374,7 @@
   - type: ApcPowerReceiver
     powerLoad: 66744
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -419,7 +419,7 @@
   - type: ApcPowerReceiver
     powerLoad: 55620
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -462,7 +462,7 @@
   - type: ApcPowerReceiver
     powerLoad: 67980
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -505,7 +505,7 @@
   - type: ApcPowerReceiver
     powerLoad: 63654
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -551,7 +551,7 @@
   - type: ApcPowerReceiver
     powerLoad: 40500
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -595,7 +595,7 @@
   - type: ApcPowerReceiver
     powerLoad: 49500
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -639,7 +639,7 @@
   - type: ApcPowerReceiver
     powerLoad: 46350
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -684,7 +684,7 @@
   - type: ApcPowerReceiver
     powerLoad: 58320
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -729,7 +729,7 @@
   - type: ApcPowerReceiver
     powerLoad: 58320
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -772,7 +772,7 @@
   - type: ApcPowerReceiver
     powerLoad: 71280
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -814,7 +814,7 @@
   - type: ApcPowerReceiver
     powerLoad: 66744
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -857,7 +857,7 @@
   - type: ApcPowerReceiver
     powerLoad: 58320
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -900,7 +900,7 @@
   - type: ApcPowerReceiver
     powerLoad: 36000
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -943,7 +943,7 @@
   - type: ApcPowerReceiver
     powerLoad: 51840
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -986,7 +986,7 @@
   - type: ApcPowerReceiver
     powerLoad: 49440
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -1030,7 +1030,7 @@
   - type: ApcPowerReceiver
     powerLoad: 36000
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:

@@ -38,7 +38,7 @@
     shieldColor: "#58C6FF"
     collisionResistanceMultiplier: 0.6
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier1.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier1.rsi
     snapCardinals: false
     layers:
     - state: base
@@ -126,7 +126,7 @@
     shieldColor: "#3399FF"
     collisionResistanceMultiplier: 0.5
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier1.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier1.rsi
     snapCardinals: false
     layers:
     - state: base
@@ -214,7 +214,7 @@
     shieldColor: "#8E7DFF"
     collisionResistanceMultiplier: 0.5
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier1.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier1.rsi
     snapCardinals: false
     layers:
     - state: base
@@ -302,7 +302,7 @@
     shieldColor: "#41D4FF"
     collisionResistanceMultiplier: 0.3
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
     snapCardinals: false
     layers:
@@ -397,7 +397,7 @@
     shieldColor: "#62E86F"
     collisionResistanceMultiplier: 0.5
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
     snapCardinals: false
     layers:
@@ -492,7 +492,7 @@
     shieldColor: "#3CFFCC"
     collisionResistanceMultiplier: 0.3
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
     snapCardinals: false
     layers:
@@ -587,7 +587,7 @@
     shieldColor: "#FFD35A"
     collisionResistanceMultiplier: 0.5
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
     snapCardinals: false
     layers:
@@ -682,7 +682,7 @@
     shieldColor: "#FF9346"
     collisionResistanceMultiplier: 0.4
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -777,7 +777,7 @@
     shieldColor: "#C86BFF"
     collisionResistanceMultiplier: 0.4
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -872,7 +872,7 @@
     shieldColor: "#FF5E5E"
     collisionResistanceMultiplier: 0.4
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -967,7 +967,7 @@
     shieldColor: "#FF66D9"
     collisionResistanceMultiplier: 0.3
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier4.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier4.rsi
     offset: 1,-1
     snapCardinals: false
     layers:
@@ -1064,7 +1064,7 @@
     shieldColor: "#2DD4BF"
     collisionResistanceMultiplier: 0.4
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier4.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier4.rsi
     offset: 1,-1
     snapCardinals: false
     layers:
@@ -1165,7 +1165,7 @@
     shieldEmpDamageMultiplier: 0.2
     shieldExplosionDamageMultiplier: 0.2
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier4.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier4.rsi
     offset: 1,-1
     snapCardinals: false
     layers:
@@ -1264,7 +1264,7 @@
     shieldColor: "#7AC74F"
     collisionResistanceMultiplier: 0.5
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier1.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier1.rsi
     snapCardinals: false
     layers:
     - state: base
@@ -1354,7 +1354,7 @@
     shieldColor: "#9BB5CE"
     collisionResistanceMultiplier: 0.5
   - type: Sprite
-    sprite: Forge/Structures/Machines/shield_fsg_tier2.rsi
+    sprite: _Forge/Structures/Machines/shield_fsg_tier2.rsi
     offset: 0,0.5
     snapCardinals: false
     layers:

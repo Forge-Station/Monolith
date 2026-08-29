@@ -9,7 +9,7 @@ from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / "Resources/Textures/_EinsteinEngines/Mobs/Customization/ipc_screens.rsi"
+SOURCE = ROOT / "Resources/Textures/_EE/Mobs/Customization/ipc_screens.rsi"
 OUTPUT = ROOT / "Resources/Textures/_Forge/Mobs/Silicon/station_ai_ipc_screens.rsi"
 FRAME_SIZE = 32
 TARGET_X = 3

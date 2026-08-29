@@ -216,9 +216,9 @@
   description: Standard fatigues of the Armed Trauma Unit.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_suit.rsi # Forge-change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/tti_suit.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/tti_suit.rsi # Forge-change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/tti_suit.rsi # Forge-change
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals
@@ -233,9 +233,9 @@
   description: Durable overalls with zippers here and there. It bears the colors of Drake Industries.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_hauler.rsi # Forge-Change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/drake_hauler.rsi # Forge-Change
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_hauler.rsi # Forge-Change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/drake_hauler.rsi # Forge-Change
   - type: SuitSensor
     randomMode: true
 
@@ -248,9 +248,9 @@
   suffix: Drake # Forge-Change
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_trucker.rsi # Forge-Change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/drake_trucker.rsi # Forge-Change
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_trucker.rsi # Forge-Change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/drake_trucker.rsi # Forge-Change
   - type: SuitSensor
     randomMode: true
 
@@ -263,9 +263,9 @@
   suffix: Drake # Forge-Change
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_watchdog.rsi # Forge-Change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/drake_watchdog.rsi # Forge-Change
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/drake_watchdog.rsi # Forge-Change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/drake_watchdog.rsi # Forge-Change
   - type: SuitSensor
     randomMode: true
 
@@ -280,9 +280,9 @@
     price: 0
     vendPrice: 1150
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_uniform.rsi # Forge-change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/viper_group_uniform.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_uniform.rsi # Forge-change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/viper_group_uniform.rsi # Forge-change
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals
@@ -297,9 +297,9 @@
     price: 0
     vendPrice: 1150
   - type: Sprite
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_turtleneck.rsi # Forge-change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/viper_group_turtleneck.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Uniforms/Jumpsuits/viper_group_turtleneck.rsi # Forge-change
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/viper_group_turtleneck.rsi # Forge-change
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals

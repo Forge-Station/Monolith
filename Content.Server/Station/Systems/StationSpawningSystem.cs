@@ -32,7 +32,7 @@ using Content.Server._NF.Bank; // Frontier
 using Content.Server.Preferences.Managers; // Frontier
 using System.Linq;
 using Content.Shared.NameIdentifier; // Frontier
-using Content.Server._EinsteinEngines.Silicon.IPC;
+using Content.Server._EE.Silicon.IPC;
 using Content.Shared.Radio.Components; // Goobstation
 
 namespace Content.Server.Station.Systems;

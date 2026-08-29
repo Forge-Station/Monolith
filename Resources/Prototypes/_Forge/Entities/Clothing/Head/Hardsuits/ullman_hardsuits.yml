@@ -6,9 +6,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/ui_med_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/ui_med_hardsuit_helm.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/ui_med_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/ui_med_hardsuit_helm.rsi
   - type: PointLight
     color: "#4e88a6"
   - type: PressureProtection

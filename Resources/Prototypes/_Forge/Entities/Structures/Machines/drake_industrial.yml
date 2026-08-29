@@ -33,7 +33,7 @@
   suffix: Drake
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/drake_ore_processor_mk2.rsi
+    sprite: _Forge/Structures/Machines/drake_ore_processor_mk2.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:
@@ -71,7 +71,7 @@
   suffix: Drake
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/drake_scrap_processor.rsi
+    sprite: _Forge/Structures/Machines/drake_scrap_processor.rsi
   - type: Machine
     board: DrakeScrapProcessorMachineCircuitboard
   - type: MaterialStorage
@@ -90,7 +90,7 @@
   suffix: Drake
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/drake_uranium_centrifuge.rsi
+    sprite: _Forge/Structures/Machines/drake_uranium_centrifuge.rsi
     offset: 0.5,-0.5
     snapCardinals: false
     layers:

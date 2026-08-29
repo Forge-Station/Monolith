@@ -1,6 +1,6 @@
 using Content.Server.Abilities.Mime;
 using Content.Server.Chat.Systems;
-using Content.Server._EinsteinEngines.Language;
+using Content.Server._EE.Language;
 using Content.Server.Popups;
 using Content.Server.Speech.Components;
 using Content.Server.Speech.EntitySystems;

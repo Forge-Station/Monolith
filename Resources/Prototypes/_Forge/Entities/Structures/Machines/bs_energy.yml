@@ -53,7 +53,7 @@
   - type: Machine
     board: BsReceiverCircuitboardT1
   - type: Sprite
-    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    sprite: _Forge/Structures/Machines/bsEnergy.rsi
     layers:
     - state: receiver
       map: ["enabled"]
@@ -86,7 +86,7 @@
   - type: Machine
     board: BsReceiverCircuitboardT2
   - type: Sprite
-    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    sprite: _Forge/Structures/Machines/bsEnergy.rsi
     layers:
     - state: receiver
       map: ["enabled"]
@@ -134,7 +134,7 @@
   - type: Machine
     board: BsReceiverCircuitboardT3
   - type: Sprite
-    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    sprite: _Forge/Structures/Machines/bsEnergy.rsi
     layers:
     - state: receiver
       map: ["enabled"]
@@ -183,7 +183,7 @@
   - type: Machine
     board: BsTransmitterCircuitboardT1
   - type: Sprite
-    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    sprite: _Forge/Structures/Machines/bsEnergy.rsi
     layers:
     - state: transmitter
       map: ["enabled"]
@@ -219,7 +219,7 @@
   - type: Machine
     board: BsTransmitterCircuitboardT2
   - type: Sprite
-    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    sprite: _Forge/Structures/Machines/bsEnergy.rsi
     layers:
     - state: transmitter
       map: ["enabled"]
@@ -270,7 +270,7 @@
   - type: Machine
     board: BsTransmitterCircuitboardT3
   - type: Sprite
-    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    sprite: _Forge/Structures/Machines/bsEnergy.rsi
     layers:
     - state: transmitter
       map: ["enabled"]
@@ -321,7 +321,7 @@
   - type: Machine
     board: BsTransmitterCircuitboardT1
   - type: Sprite
-    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    sprite: _Forge/Structures/Machines/bsEnergy.rsi
     layers:
     - state: transmitter
       map: ["enabled"]
@@ -358,7 +358,7 @@
   - type: Machine
     board: BsTransmitterCircuitboardT2
   - type: Sprite
-    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    sprite: _Forge/Structures/Machines/bsEnergy.rsi
     layers:
     - state: transmitter
       map: ["enabled"]
@@ -410,7 +410,7 @@
   - type: Machine
     board: BsTransmitterCircuitboardT3
   - type: Sprite
-    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    sprite: _Forge/Structures/Machines/bsEnergy.rsi
     layers:
     - state: transmitter
       map: ["enabled"]

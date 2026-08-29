@@ -1,14 +1,14 @@
 using System.Linq;
 using Content.Server.Ghost.Roles.Components;
-using Content.Server._EinsteinEngines.Language;
+using Content.Server._EE.Language;
 using Content.Server.Speech.Components;
 using Content.Shared.EntityEffects;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared._EE.Language;
+using Content.Shared._EE.Language.Systems;
 using Content.Shared.Mind.Components;
 using Content.Shared.Humanoid;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Events;
+using Content.Shared._EE.Language.Components;
+using Content.Shared._EE.Language.Events;
 using Robust.Shared.Prototypes;
 using Content.Shared.Humanoid; //Delta-V - Banning humanoids from becoming ghost roles.
 

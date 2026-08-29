@@ -63,7 +63,7 @@
     allowedEmotes: ['Belch', 'Beep', 'Ping', 'Buzz'] # Frontier + Protogen stuff
     speechSounds: Pai
   - type: Vocal # Mono
-    wilhelm: "/Audio/_EinsteinEngines/Voice/IPC/wilhelm.ogg"
+    wilhelm: "/Audio/_EE/Voice/IPC/wilhelm.ogg"
     sounds:
       Male: UnisexIPC
       Female: UnisexIPC

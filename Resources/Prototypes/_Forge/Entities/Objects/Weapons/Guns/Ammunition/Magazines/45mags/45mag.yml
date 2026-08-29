@@ -48,7 +48,7 @@
     proto: ForgeCartridgePistol45
     capacity: 20
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -59,7 +59,7 @@
     steps: 7
     zeroVisible: false
   - type: Item
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
     inhandVisuals:
       left:
       - state: inhand-left-mag
@@ -91,7 +91,7 @@
   - type: BallisticAmmoProvider
     proto: ForgeCartridgePistol45Rubber
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
     layers:
     - state: rubber
     - state: mag-6
@@ -105,7 +105,7 @@
   - type: BallisticAmmoProvider
     proto: ForgeCartridgePistol45AP
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
     layers:
     - state: AP
     - state: mag-6
@@ -119,7 +119,7 @@
   - type: BallisticAmmoProvider
     proto: ForgeCartridgePistol45Emp
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
     layers:
     - state: EMP
     - state: mag-6
@@ -133,7 +133,7 @@
   - type: BallisticAmmoProvider
     proto: ForgeCartridgePistol45Uranium
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
     layers:
     - state: Uranium
     - state: mag-6
@@ -147,7 +147,7 @@
   - type: BallisticAmmoProvider
     proto: ForgeCartridgePistol45Practice
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
     layers:
     - state: Practice
     - state: mag-6
@@ -161,7 +161,7 @@
   - type: BallisticAmmoProvider
     proto: ForgeCartridgePistol45Overpressure
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
     layers:
     - state: Overpressure
     - state: mag-6
@@ -175,7 +175,7 @@
   - type: BallisticAmmoProvider
     proto: ForgeCartridgePistol45Incendiary
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/45magazine.rsi
     layers:
     - state: Incendiary
     - state: mag-6

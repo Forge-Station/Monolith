@@ -40,7 +40,7 @@
   - type: StaticPrice
     price: 22000
   - type: Sprite
-    sprite: Forge/Objects/ShuttleWeapons/drake_apollo_mk2.rsi
+    sprite: _Forge/Objects/ShuttleWeapons/drake_apollo_mk2.rsi
     layers:
     - state: space_artillery
   - type: Battery
@@ -70,7 +70,7 @@
   - type: StaticPrice
     price: 22000
   - type: Sprite
-    sprite: Forge/Objects/ShuttleWeapons/drake_apollo_mk2.rsi
+    sprite: _Forge/Objects/ShuttleWeapons/drake_apollo_mk2.rsi
     layers:
     - state: space_artillery
   - type: Battery

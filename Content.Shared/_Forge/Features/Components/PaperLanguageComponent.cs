@@ -1,4 +1,4 @@
-using Content.Shared._EinsteinEngines.Language;
+using Content.Shared._EE.Language;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;

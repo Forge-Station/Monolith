@@ -10,7 +10,7 @@ using Content.Server._Forge.Sponsor; // Forge-Change
 using Content.Server._Forge.Silicons.StationAi; // Forge-Change
 using Content.Server.Preferences.Managers; // Forge-Change
 using Content.Server.GameTicking;
-using Content.Server._EinsteinEngines.Language; // Einstein Engines - Language
+using Content.Server._EE.Language; // Einstein Engines - Language
 using Content.Server.Speech; // Einstein Engines - Language
 using Content.Server.Players.RateLimiting;
 using Content.Server.Speech.Prototypes;
@@ -26,7 +26,7 @@ using Content.Shared._Starlight.CollectiveMind; // Goobstation - Starlight colle
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
-using Content.Shared._EinsteinEngines.Language; // Einstein Engines - Language
+using Content.Shared._EE.Language; // Einstein Engines - Language
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Players;

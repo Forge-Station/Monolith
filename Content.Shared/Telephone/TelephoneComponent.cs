@@ -1,6 +1,6 @@
 using Content.Shared.Chat;
 using Content.Shared.Speech;
-using Content.Shared._EinsteinEngines.Language;
+using Content.Shared._EE.Language;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;

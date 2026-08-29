@@ -6,7 +6,7 @@
   - type: Sprite
     netsync: false
     noRot: true
-    sprite: Forge/Structures/Machines/ATM/ren_ATM.rsi
+    sprite: _Forge/Structures/Machines/ATM/ren_ATM.rsi
     layers:
     - map: ["computerLayerBody"]
       state: icon
@@ -21,7 +21,7 @@
   - type: Sprite
     netsync: false
     noRot: true
-    sprite: Forge/Structures/Machines/ATM/ren_ATM_wallmount.rsi
+    sprite: _Forge/Structures/Machines/ATM/ren_ATM_wallmount.rsi
     layers:
     - map: ["computerLayerBody"]
       state: icon

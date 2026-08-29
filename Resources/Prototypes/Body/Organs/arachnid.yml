@@ -63,8 +63,13 @@
     layers:
     - state: lung-l
     - state: lung-r
+  - type: OrganEffect #Forge-Change-add
   - type: Organ
     slotId: lungs
+    onAdd: #Forge-Change-add
+    - type: SlowedDown #Forge-Change
+      walkSpeedModifier: 1.15 #Forge-Change
+      sprintSpeedModifier: 1.15 #Forge-Change
   - type: Lung
   - type: Metabolizer
     updateInterval: 1.5

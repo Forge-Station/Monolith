@@ -33,7 +33,7 @@
         Piercing: 6
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: Ariral
+    damageModifierSet: ForgeAriral
   - type: Bloodstream
     bloodMaxVolume: 200
     bloodReagent: AriralBlood

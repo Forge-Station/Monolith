@@ -69,11 +69,3 @@ ent-RadioImplanter = { ent-BaseImplantOnlyImplanterSyndi }
 ent-OverlordImplanter = { ent-Implanter }
     .desc = { ent-BaseImplantOnlyImplanter.desc }
     .suffix = Оверлорд
-
-ent-TranexamicImplanter = Имплантер "Последний шанс"
-    .suffix = Транексамовая кислота и Эпинефрин единоразово.
-    .desc = Одноразовый шприц, предназначенный для введения автоимпланта разово вводящего весь свой состав химических веществ.
-ent-TranexamicImplanterDose = Имплантер "Отсрочка"
-    .suffix = Транексамовая кислота на трёхкратную активацию.
-    .desc = Одноразовый шприц, предназначенный для введения автоимпланта порционно вводящего свой состав химических веществ.
-

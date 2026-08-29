@@ -329,23 +329,3 @@
 #  components:
 #  - type: Implanter
 #    implant: RadioImplantCentcomm
-
-# Forge imlanters - Forge-Change-Start
-
-- type: entity
-  id: TranexamicImplanter
-  parent: BaseImplantOnlyImplanter
-  suffix: Tranexamic
-  components:
-    - type: Implanter
-      implant: TranexamicImplant
-
-- type: entity
-  id: TranexamicImplanterDose
-  parent: BaseImplantOnlyImplanter
-  suffix: Tranexamic Dose
-  components:
-    - type: Implanter
-      implant: TranexamicImplantDose
-
-# Forge-Change-End

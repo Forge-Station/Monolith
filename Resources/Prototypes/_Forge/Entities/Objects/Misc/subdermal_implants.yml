@@ -198,3 +198,79 @@
     - type: Rattle
       radioChannel: "Empire"
       language: "Freespeak"
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: TranexamicImplant
+  name: Tranexamic Acid Implant
+  description: Automatically injects Tranexamic acid and epinephrine when you enter critical condition. Can also be activated manually. Refillable via surgery after extraction.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SubdermalImplant
+      permanent: false
+      implantAction: ActionActivateTranexamic
+      whitelist:
+        components:
+        - MobState
+    - type: TriggerOnMobstateChange
+      mobState:
+      - Critical
+    - type: TriggerImplantAction
+    - type: SolutionContainerManager
+      solutions:
+        implant:
+          maxVol: 15
+          reagents:
+          - ReagentId: TranexamicAcid
+            Quantity: 5
+          - ReagentId: Epinephrine
+            Quantity: 10
+    - type: RefillableSolution
+      solution: implant
+    - type: InjectableSolution
+      solution: implant
+    - type: ExaminableSolution
+      solution: implant
+    - type: Hypospray
+      solutionName: implant
+      transferAmount: 15
+      injectOnly: true
+      onlyAffectsMobs: true
+      preventCombatInjection: true
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: TranexamicImplantDose
+  name: Tranexamic Acid Implant Dose
+  description: Automatically injects dose Tranexamic acid when you enter critical condition. Can also be activated manually. Refillable via surgery after extraction.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SubdermalImplant
+      permanent: false
+      implantAction: ActionActivateTranexamicDose
+      whitelist:
+        components:
+        - MobState
+    - type: TriggerOnMobstateChange
+      mobState:
+      - Critical
+    - type: TriggerImplantAction
+    - type: SolutionContainerManager
+      solutions:
+        implant:
+          maxVol: 15
+          reagents:
+          - ReagentId: TranexamicAcid
+            Quantity: 15
+    - type: RefillableSolution
+      solution: implant
+    - type: InjectableSolution
+      solution: implant
+    - type: ExaminableSolution
+      solution: implant
+    - type: Hypospray
+      solutionName: implant
+      transferAmount: 5
+      injectOnly: true
+      onlyAffectsMobs: true
+      preventCombatInjection: true

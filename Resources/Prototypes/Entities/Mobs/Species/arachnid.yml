@@ -130,11 +130,6 @@
   - type: Inventory
     templateId: arachnid
   - type: Carriable # Frontier: Carrying system from nyanotrasen.
-  #Forge-Change-Start
-  - type: MovementSpeedModifier
-  baseWalkSpeed: 2.25
-  baseSprintSpeed: 4.05
-  #Forge-Change-end
 
 
 - type: entity

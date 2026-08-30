@@ -5,9 +5,9 @@
   categories:
   - Weapons
   materials:
-    Steel: 25
-    Plasteel: 15
-    Plastic: 5
+    Steel: 2500
+    Plasteel: 1500
+    Plastic: 500
 
 - type: latheRecipe
   id: Kanabo
@@ -16,9 +16,9 @@
   categories:
   - Weapons
   materials:
-    Steel: 25
-    Plasteel: 15
-    Plastic: 5
+    Steel: 2500
+    Plasteel: 1500
+    Plastic: 500
 
 - type: latheRecipe
   id: Sasymata
@@ -27,9 +27,9 @@
   categories:
   - Weapons
   materials:
-    Steel: 25
-    Plasteel: 15
-    Plastic: 5
+    Steel: 2500
+    Plasteel: 1500
+    Plastic: 500
 
 - type: latheRecipe
   id: Type3
@@ -38,9 +38,9 @@
   categories:
   - Weapons
   materials:
-    Steel: 25
-    Plasteel: 15
-    Plastic: 5
+    Steel: 2500
+    Plasteel: 1500
+    Plastic: 500
 
 - type: latheRecipe
   id: Nahinati
@@ -49,9 +49,9 @@
   categories:
   - Weapons
   materials:
-    Steel: 25
-    Plasteel: 15
-    Plastic: 5
+    Steel: 2500
+    Plasteel: 1500
+    Plastic: 500
 
 #Sheaths
 - type: latheRecipe
@@ -61,7 +61,7 @@
   categories:
   - ClothesNF
   materials:
-    Cloth: 15
+    Cloth: 1500
 
 - type: latheRecipe
   id: Type3Sheath
@@ -70,4 +70,4 @@
   categories:
   - ClothesNF
   materials:
-    Cloth: 15
+    Cloth: 1500

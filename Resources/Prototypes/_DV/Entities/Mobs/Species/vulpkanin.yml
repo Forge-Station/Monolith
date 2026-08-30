@@ -22,10 +22,6 @@
   - type: Body
     prototype: Vulpkanin
     requiredLegs: 2
-    #Forge-Change-Start
-  - type: Damageable 
-    damageContainer: Biological 
-    damageModifierSet: ForgeVulpkanin 
   - type: Temperature
     heatDamageThreshold: 313 # ~ +40 °C
     coldDamageThreshold: 248 # ~ -25 °C
@@ -118,7 +114,7 @@
         Slash: 3
   - type: Perishable
   - type: Damageable
-    damageModifierSet: Vulpkanin
+    damageModifierSet: ForgeVulpkanin #Forge-Change
   # - type: TemperatureProtection #Forge-Change-remove: replaced by damageModiferSet
   #   coolingCoefficient: 0.1 # fur is insulating
   - type: Vocal

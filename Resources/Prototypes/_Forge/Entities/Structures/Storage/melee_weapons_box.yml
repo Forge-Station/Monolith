@@ -6,6 +6,10 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Anchorable
+  - type: Construction
+    graph: KanaboBox
+    node: kanaboBox
   - type: Clickable
   - type: InteractionOutline
   - type: Sprite

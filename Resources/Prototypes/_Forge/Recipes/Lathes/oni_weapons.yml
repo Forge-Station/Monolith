@@ -1,0 +1,73 @@
+﻿- type: latheRecipe
+  id: Odati
+  result: Odati
+  completetime: 5
+  categories:
+  - Weapons
+  materials:
+    Steel: 2500
+    Plasteel: 1500
+    Plastic: 500
+
+- type: latheRecipe
+  id: Kanabo
+  result: Kanabo
+  completetime: 5
+  categories:
+  - Weapons
+  materials:
+    Steel: 2500
+    Plasteel: 1500
+    Plastic: 500
+
+- type: latheRecipe
+  id: Sasymata
+  result: Sasymata
+  completetime: 5
+  categories:
+  - Weapons
+  materials:
+    Steel: 2500
+    Plasteel: 1500
+    Plastic: 500
+
+- type: latheRecipe
+  id: Type3
+  result: Type3
+  completetime: 5
+  categories:
+  - Weapons
+  materials:
+    Steel: 2500
+    Plasteel: 1500
+    Plastic: 500
+
+- type: latheRecipe
+  id: Nahinati
+  result: Nahinati
+  completetime: 5
+  categories:
+  - Weapons
+  materials:
+    Steel: 2500
+    Plasteel: 1500
+    Plastic: 500
+
+#Sheaths
+- type: latheRecipe
+  id: OdatiSheath
+  result: OdatiSheath
+  completetime: 2
+  categories:
+  - ClothesNF
+  materials:
+    Cloth: 1500
+
+- type: latheRecipe
+  id: Type3Sheath
+  result: Type3Sheath
+  completetime: 2
+  categories:
+  - ClothesNF
+  materials:
+    Cloth: 1500

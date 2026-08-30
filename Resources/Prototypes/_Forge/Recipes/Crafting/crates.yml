@@ -1,0 +1,10 @@
+﻿- type: construction
+  name: ящик для канабо
+  id: KanaboBox
+  graph: KanaboBox
+  startNode: start
+  targetNode: kanaboBox
+  category: construction-category-storage
+  description: Специальный ящик для канабо.
+  icon: { sprite: _Forge/OniMeleeWeapons/Kanabo/kanaboBox.rsi, state: closed }
+  objectType: Structure

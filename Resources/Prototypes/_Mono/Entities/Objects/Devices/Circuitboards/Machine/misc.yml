@@ -62,3 +62,18 @@
     prototype: MachineShipDrill
     stackRequirements:
       Steel: 7
+
+# Forge-add-start
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: ShipDrillDiamondMachineCircuitboard
+  name: ship drill diamond machine board
+  components:
+  - type: MachineBoard
+    prototype: MachineShipDrillDiamond
+    stackRequirements:
+      Steel: 10
+      Diamond: 2
+
+# Forge-add-end

@@ -66,7 +66,7 @@
   - type: Appearance
   - type: AmbientOnPowered
   - type: AmbientSound
-    volume: -9
+    volume: -8
     range: 2
     sound:
       path: /Audio/Effects/saw.ogg
@@ -76,7 +76,7 @@
   - type: ShipDrill
     drillType: !type:GatheringDrillType
   - type: Machine
-    board: ShipDrillMachineCircuitboard
+    board: ShipDrillDiamondMachineCircuitboard
   - type: Destructible
     thresholds:
     - trigger:

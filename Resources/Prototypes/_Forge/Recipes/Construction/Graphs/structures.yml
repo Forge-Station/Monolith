@@ -24,3 +24,31 @@
         steps:
           - tool: Welding
             doAfter: 5
+
+- type: constructionGraph
+  id: KanaboBox
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: kanaboBox
+      steps:
+      - material: Steel
+        amount: 5
+        doAfter: 5
+  - node: kanaboBox
+    entity: kanaboBox
+    edges:
+    - to: start
+      steps:
+      - tool: Screwing
+        doAfter: 5
+      conditions:
+      - !type:StorageWelded
+        welded: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 5
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity

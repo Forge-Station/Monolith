@@ -1,40 +1,61 @@
 ﻿using Content.Shared._Forge.ShowRoleInformation;
-using Robust.Shared.Player;
+using Robust.Client.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client._Forge.ShowRoleInformation;
 
 public sealed class RoleDescriptionSystem : EntitySystem
 {
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+
+    private readonly HashSet<ProtoId<ShowRoleInformationWindowData>> _skipWindows = [];
     private ShowRoleInformationWindow? _currentWindow;
-    private readonly HashSet<string> _skipWindows = [];
+    private EntityUid? _previousEntityUid;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<ShowRoleInformationAddSkipWindowLocalEvent>(OnAddSkipWindow);
+        SubscribeLocalEvent<ShowRoleInformationComponent, ShowRoleInformationAddSkipWindowLocalEvent>(OnAddSkipWindow);
         SubscribeNetworkEvent<ShowRoleInformationFromServerEvent>(OnOpenRoleInfoFromServer);
     }
 
-    private void OnAddSkipWindow(ShowRoleInformationAddSkipWindowLocalEvent msg)
+    public override void Update(float frameTime)
     {
-        _skipWindows.Add(msg.KeyWindow);
+        var currentEntityUid = _playerManager.LocalEntity;
+        if (currentEntityUid == _previousEntityUid)
+            return;
+
+        if (currentEntityUid == null)
+        {
+            _skipWindows.Clear();
+            _previousEntityUid = null;
+            return;
+        }
+
+        if (!TryComp<ShowRoleInformationComponent>(currentEntityUid, out var currentShowRoleInformationComponent)
+            || _skipWindows.Contains(currentShowRoleInformationComponent.Window)
+            || TryComp<ShowRoleInformationComponent>(_previousEntityUid, out var previousShowRoleInformationComponent)
+            && previousShowRoleInformationComponent.SkipWindows.Contains(currentShowRoleInformationComponent.Window))
+        {
+            _previousEntityUid = currentEntityUid;
+            return;
+        }
+
+        _previousEntityUid = currentEntityUid;
+        OpenWindow(currentShowRoleInformationComponent.Window, currentShowRoleInformationComponent.Duration);
+    }
+
+    private void OnAddSkipWindow(EntityUid uid, ShowRoleInformationComponent showRoleInformationComponent, ShowRoleInformationAddSkipWindowLocalEvent args)
+    {
+        _skipWindows.Add(args.Window);
     }
 
     private void OnOpenRoleInfoFromServer(ShowRoleInformationFromServerEvent msg, EntitySessionEventArgs args)
     {
-        OpenWindow(msg.RoleName, msg.Description, msg.Duration);
+        OpenWindow(msg.Window, msg.Duration);
     }
 
-    private void OnPlayerAttached(PlayerAttachedEvent args)
-    {
-        if (!TryComp<ShowRoleInformationComponent>(args.Entity, out var showRoleInformationComponent) ||
-            _skipWindows.Contains(string.Concat(showRoleInformationComponent.RoleName, showRoleInformationComponent.Description)))
-            return;
-
-        OpenWindow(showRoleInformationComponent.RoleName, showRoleInformationComponent.Description, showRoleInformationComponent.Duration);
-    }
-
-    private void OpenWindow(string roleName, string description, float duration)
+    private void OpenWindow(ProtoId<ShowRoleInformationWindowData> windowProto, float duration)
     {
         if (_currentWindow is { IsOpen: true })
         {
@@ -42,8 +63,10 @@ public sealed class RoleDescriptionSystem : EntitySystem
             _currentWindow.Close();
         }
 
+        var windowData = _prototypeManager.Index(windowProto);
+
         _currentWindow = new();
-        _currentWindow.SetRoleInfo(description, roleName);
+        _currentWindow.SetRoleInfo(windowData.Description, windowData.RoleName, windowData.ID);
         _currentWindow.SetDuration(duration);
         _currentWindow.OpenCentered();
     }

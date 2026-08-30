@@ -4,19 +4,20 @@ using Content.Shared.Administration;
 using Robust.Server.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.Administration.Commands;
 
 [AdminCommand(AdminFlags.Moderator)]
 public sealed partial class ShowRoleInformationCommand : IConsoleCommand
 {
-    [Dependency] private IEntityManager _entManager = default!;
-    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public string Command => "openroleinformation";
     public string Description => Loc.GetString("show-role-information-command-description");
     public string Help => Loc.GetString("show-role-information-command-help");
-    private float _duration;
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -45,24 +46,23 @@ public sealed partial class ShowRoleInformationCommand : IConsoleCommand
             return;
         }
 
-        _duration = showRoleInformationComponent.Duration;
+        var duration = showRoleInformationComponent.Duration;
 
         if (args.Length == 2)
         {
-            if (float.TryParse(args[1], out var duration) && duration >= 0)
-                _duration = duration;
+            if (float.TryParse(args[1], out var durationParse) && durationParse >= 0)
+                duration = durationParse;
             else
                 shell.WriteError(Loc.GetString("show-role-information-command-err-duration", ("time", args[1])));
         }
 
-        var evt = new ShowRoleInformationFromServerEvent
+        var ev = new ShowRoleInformationFromServerEvent
         {
-            RoleName = showRoleInformationComponent.RoleName,
-            Description = showRoleInformationComponent.Description,
-            Duration = _duration,
+            Window = showRoleInformationComponent.Window,
+            Duration = duration,
         };
 
-        _entManager.EntityNetManager.SendSystemNetworkMessage(evt, targetSession.Channel);
-        shell.WriteLine(Loc.GetString("show-role-information-command-success", ("player", targetSession.Name), ("duration", (int)_duration)));
+        _entManager.EntityNetManager.SendSystemNetworkMessage(ev, targetSession.Channel);
+        shell.WriteLine(Loc.GetString("show-role-information-command-success", ("player", targetSession.Name), ("duration", (int)duration)));
     }
 }

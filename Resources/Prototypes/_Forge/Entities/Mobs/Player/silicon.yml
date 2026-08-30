@@ -49,9 +49,10 @@
   abstract: true
   components:
   - type: ShowRoleInformation
-    roleName: show-role-information-borg-forerunner-name
-    description: show-role-information-borg-forerunner-description
+    window: RoleInformationBorgForerunner
     duration: 15
+    skipWindows:
+    - RoleInformationAiForerunner
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -316,9 +317,10 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ShowRoleInformation
-    roleName: show-role-information-ai-forerunner-name
-    description: show-role-information-ai-forerunner-description
+    window: RoleInformationAiForerunner
     duration: 15
+    skipWindows:
+    - RoleInformationBorgForerunner
   - type: IntrinsicRadioTransmitter
     channels:
     - Common

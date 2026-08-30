@@ -11,8 +11,7 @@
   components:
   # Forge-Change-Start
   - type: ShowRoleInformation
-    roleName: show-role-information-chimera-name
-    description: show-role-information-chimera-description
+    window: RoleInformationChimera
     duration: 15
   #Forge-Change-End
   - type: HTN

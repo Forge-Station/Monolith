@@ -21,7 +21,7 @@
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical" Margin="12 10" VerticalExpand="True">
                 <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" VerticalExpand="True" MinSize="0 280">
-                    <RichTextLabel Name="RoleDescriptionLabel" HorizontalAlignment="Left" HorizontalExpand="True" />
+                    <RichTextLabel Name="RoleDescriptionLabel" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalExpand="True"/>
                 </ScrollContainer>
             </BoxContainer>
         </PanelContainer>

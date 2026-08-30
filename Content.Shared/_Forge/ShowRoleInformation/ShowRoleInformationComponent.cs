@@ -1,16 +1,17 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Forge.ShowRoleInformation;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ShowRoleInformationComponent : Component
 {
-    [DataField("roleName"), AutoNetworkedField]
-    public string RoleName;
+    [DataField("window", required: true), AutoNetworkedField]
+    public ProtoId<ShowRoleInformationWindowData> Window;
 
-    [DataField("description"), AutoNetworkedField]
-    public string Description;
+    [DataField("skipWindows"), AutoNetworkedField]
+    public HashSet<ProtoId<ShowRoleInformationWindowData>> SkipWindows = [];
 
     [DataField("duration"), AutoNetworkedField]
-    public float Duration;
+    public float Duration = 15;
 }

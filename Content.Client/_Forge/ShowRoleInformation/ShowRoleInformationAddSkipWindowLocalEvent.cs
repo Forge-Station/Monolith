@@ -1,6 +1,9 @@
-﻿namespace Content.Client._Forge.ShowRoleInformation;
+﻿using Content.Shared._Forge.ShowRoleInformation;
+using Robust.Shared.Prototypes;
+
+namespace Content.Client._Forge.ShowRoleInformation;
 
 public sealed class ShowRoleInformationAddSkipWindowLocalEvent
 {
-    public string KeyWindow = string.Empty;
+    public ProtoId<ShowRoleInformationWindowData> Window;
 }

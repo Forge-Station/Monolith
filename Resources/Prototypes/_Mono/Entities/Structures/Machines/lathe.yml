@@ -48,6 +48,7 @@
     - MonoTSFMiscDynamic
     - MonoTSFGearDynamic
     #Forge-Change-start: back USSP & Viper staff
+    - OniMeleeWeapons
     # USSP start
     - MonoUSSPArmorDynamic
     - MonoUSSPMiscDynamic

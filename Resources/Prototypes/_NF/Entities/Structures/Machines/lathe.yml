@@ -156,6 +156,7 @@
     - StaticGrenades
     - MonoAttachmentsStatic # Mono
     dynamicPacks:
+    - OniMeleeWeapons # Forge-change
     - NFNfsdTechfabDeprecated
     - DynamicAmmoRecipePack
     # Mono start
@@ -201,10 +202,12 @@
     staticPacks:
     - NFMercenaryTechfabDeprecatedStatic
     - StaticAmmoRecipePack
-    - MonoRestraintsStatic # Mono
-    - RoundstartShipgunAmmo # Mono
+    # Mono start
+    - MonoRestraintsStatic
+    - RoundstartShipgunAmmo
+    - MonoAttachmentsStatic
+    # Mono end
     - StaticGrenades
-    - MonoAttachmentsStatic # Mono
     dynamicPacks:
     - NFMercenaryTechfabDeprecated
     - DynamicAmmoRecipePack
@@ -222,11 +225,14 @@
     - UniversalOrdinance
     - SecurityEquipment
     - SmartGun #Smart SMG
-    - NSCRecipes # Forge-Change
     # Mono end
-    - UllmanForgeRecipes # Forge-change
-    - MonoViperGroupDynamic #Forge-Change
-    - ForgeMercenaryVouchers # Forge-Change
+    # Forge-Change-start
+    - OniMeleeWeapons
+    - NSCRecipes
+    - UllmanForgeRecipes
+    - MonoViperGroupDynamic
+    - ForgeMercenaryVouchers
+    # Forge-Change-end
   - type: EmagLatheRecipes
     emagStaticPacks:
     - NFMercenaryTechfabDeprecatedEmag
@@ -274,10 +280,13 @@
     - NFHackedMercenaryTechfabDeprecatedStatic
     - StaticAmmoRecipePack
     - MonoRestraintsStatic
-    - RoundstartShipgunAmmo # Mono
+    # Mono start
+    - RoundstartShipgunAmmo
+    - MonoAttachmentsStatic
+    # Mono end
     - StaticGrenades
-    - MonoAttachmentsStatic # Mono
     dynamicPacks:
+    - OniMeleeWeapons # Forge-Change
     - NFHackedMercenaryTechfabDeprecated
     - DynamicAmmoRecipePack
     - SmartGun # Goobstation

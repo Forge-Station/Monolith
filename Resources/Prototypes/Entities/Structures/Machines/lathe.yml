@@ -538,13 +538,16 @@
     - StaticGrenades
     - SecurityWeaponsStatic
     dynamicPacks:
-    - NanotrasenWeapon # Forge-change
-    - NanotrasenEquipment # Forge-change
+    # Forge-change-start
+    - OniMeleeWeapons
+    - NanotrasenWeapon
+    - NanotrasenEquipment
+    - ForgePublicWeapons
+    # Forge-change-end
     - SecurityEquipment
     - SecurityExplosives
     - DynamicAmmoRecipePack
     - SecurityWeapons
-    - ForgePublicWeapons # Forge-change
     - SecurityDisablers
     - SMCybernetics
     # Mono - Mechs

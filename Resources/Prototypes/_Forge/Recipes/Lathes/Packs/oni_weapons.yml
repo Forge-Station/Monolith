@@ -1,0 +1,10 @@
+﻿- type: latheRecipePack
+  id: OniMeleeWeapons
+  recipes:
+  - Odati
+  - Kanabo
+  - Sasymata
+  - Type3
+  - Nahinati
+  - OdatiSheath
+  - Type3Sheath

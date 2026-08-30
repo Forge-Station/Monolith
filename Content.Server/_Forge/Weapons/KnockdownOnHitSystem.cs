@@ -1,8 +1,9 @@
-﻿using Content.Shared.Stunnable;
+﻿using Content.Shared._Forge.Weapons;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Random;
 
-namespace Content.Shared._Forge.Weapons;
+namespace Content.Server._Forge.Weapons;
 
 public sealed class KnockdownOnHitSystem : EntitySystem
 {

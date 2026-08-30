@@ -1,0 +1,18 @@
+﻿- type: technology
+  id: OniWeapons
+  name: research-technology-oni-weapons
+  entityIcon: Odati
+  discipline: Arsenal
+  tier: 1
+  cost: 15000
+  position: 0, 0
+  technologyPrerequisites:
+  - AdvancedRiotControl
+  recipeUnlocks:
+  - Odati
+  - Kanabo
+  - Sasymata
+  - Type3
+  - Nahinati
+  - OdatiSheath
+  - Type3Sheath

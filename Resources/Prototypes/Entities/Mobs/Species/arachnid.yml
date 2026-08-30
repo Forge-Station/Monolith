@@ -124,12 +124,17 @@
         state: body-overlay-2
         visible: false
       - map: [ "clownedon" ] # Dynamically generated
-        sprite: "Effects/creampie.rsi"
+        sprite: "Effects/creampie.rsifd"
         state: "creampie_arachnid"
         visible: false
   - type: Inventory
     templateId: arachnid
   - type: Carriable # Frontier: Carrying system from nyanotrasen.
+  #Forge-Change-Start
+  - type: MovementSpeedModifier
+  baseWalkSpeed: 2.25
+  baseSprintSpeed: 4.05
+  #Forge-Change-end
 
 
 - type: entity

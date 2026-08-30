@@ -22,6 +22,21 @@
   - type: Body
     prototype: Vulpkanin
     requiredLegs: 2
+    #Forge-Change-Start
+  - type: Damageable 
+    damageContainer: Biological 
+    damageModifierSet: ForgeVulpkanin 
+  - type: Temperature
+    heatDamageThreshold: 313 # ~ +40 °C
+    coldDamageThreshold: 248 # ~ -25 °C
+    currentTemperature: 310.15
+    coldDamage:
+      types:
+        Cold: 0.25
+    heatDamage:
+      types:
+        Heat: 0.35
+    #Forge-Change-end
   - type: Speech
     speechSounds: Vulpkanin
     speechVerb: Vulpkanin
@@ -104,8 +119,8 @@
   - type: Perishable
   - type: Damageable
     damageModifierSet: Vulpkanin
-  - type: TemperatureProtection
-    coolingCoefficient: 0.1 # fur is insulating
+  # - type: TemperatureProtection #Forge-Change-remove: replaced by damageModiferSet
+  #   coolingCoefficient: 0.1 # fur is insulating
   - type: Vocal
     sounds:
       Male: MaleVulpkanin

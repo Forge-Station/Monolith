@@ -62,7 +62,7 @@
     - Bubblish
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: Slime
+    damageModifierSet: ForgeSlime #Forge-Change
   - type: PassiveDamage # Around 8 damage a minute healed
     allowedStates:
     - Alive

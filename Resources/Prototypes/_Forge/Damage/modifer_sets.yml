@@ -49,7 +49,7 @@
     Cellular: 1
 
 - type: damageModifierSet
-  id: ForgeBVox
+  id: ForgeVox
   coefficients:
     Blunt: 1
     Slash: 1
@@ -202,7 +202,7 @@
     Cellular: 1
 
 - type: damageModifierSet
-  id: ForgeScrell
+  id: ForgeSkrell
   coefficients:
     Blunt: 0.8
     Slash: 1.1

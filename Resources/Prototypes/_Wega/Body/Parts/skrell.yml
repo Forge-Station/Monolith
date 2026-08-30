@@ -31,6 +31,13 @@
         Quantity: 10
       - ReagentId: SkrellBlood
         Quantity: 20
+  #Forge-Change-Start
+  - type: MovementBodyPartModifier
+    walkModifier: 0.95
+    sprintModifier: 0.95
+    group: torso
+  #Forge-Change-end
+
 
 - type: entity
   id: HeadSkrell

@@ -31,11 +31,12 @@
         Quantity: 10
       - ReagentId: CopperBlood
         Quantity: 20
-    #Forge-Change-Start
-  - type: MovementBodyPartModifier #Forge-Change-add
+  #Forge-Change-Start
+  - type: MovementBodyPartModifier
     walkModifier: 0.9
     sprintModifier: 0.9
-    #Forge-Change-end
+    group: torso
+  #Forge-Change-end
 
 - type: entity
   id: HeadArachnid

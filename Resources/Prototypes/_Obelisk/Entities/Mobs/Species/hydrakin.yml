@@ -26,7 +26,7 @@
   - type: Thirst
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: Hydrakin
+    damageModifierSet: ForgeHydrakin #Forge-Change
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -46,8 +46,8 @@
     prototype: Hydrakin
     requiredLegs: 2
   - type: Temperature
-    coldDamageThreshold: 10 # Mono - Absurd cold resistance
-    heatDamageThreshold: 332 # no. just no. suffer.
+    coldDamageThreshold: 10 # Mono - Absurd cold resistance # ~ -263
+    heatDamageThreshold: 332 # no. just no. suffer. # ~ +58
     coldDamage:
       types:
         Cold : 0.01 #per second, scales with temperature & other constants

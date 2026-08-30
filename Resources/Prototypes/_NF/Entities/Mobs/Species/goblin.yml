@@ -23,7 +23,7 @@
   - type: Body
     prototype: Goblin
   - type: Damageable
-    damageModifierSet: Goblin
+    damageModifierSet: ForgeGoblin #Forge-Change
   - type: MeleeWeapon
     soundHit:
       collection: Punch

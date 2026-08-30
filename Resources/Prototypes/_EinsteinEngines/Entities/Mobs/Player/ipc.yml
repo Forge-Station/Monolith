@@ -47,8 +47,8 @@
   - type: EncryptionHolderRequiresLock
   - type: SiliconEmitSoundOnDrained
     sound: "/Audio/_Goobstation/Voice/IPC/energy_low.ogg" # Goobstation - ipc audio
-    minInterval: 8
-    maxInterval: 12
+    minInterval: 15 #Forge-Change 8=>15
+    maxInterval: 30 #Forge-Change 12=>30
     popUp: "silicon-power-low"
   - type: Lock
     locked: true
@@ -132,9 +132,6 @@
   - type: TTS # Forge-Change
   - type: RetroMonitorView # Mono
    #Forge-Change-Start
-  # - type: MovementSpeedModifier 
-  #   BaseWalkSpeed: 2.875
-  #   BaseSprintSpeed: 4.7
   - type: ContainerContainer
     containers:
       storagebase: !type:Container

@@ -49,7 +49,7 @@
     soundsId: ReptilianBodyEmotes
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: Scale
+    damageModifierSet: ForgeReptilian #Forge-Change
   - type: MeleeWeapon
     soundHit:
       collection: AlienClaw

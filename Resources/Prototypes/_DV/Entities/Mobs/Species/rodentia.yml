@@ -97,7 +97,7 @@
         Blunt: 2
         Slash: 3
   - type: Damageable
-    damageModifierSet: Rodentia
+    damageModifierSet: ForgeRodentia #Forge-Change
   - type: Butcherable
     spawned:
     - id: FoodMeatRat

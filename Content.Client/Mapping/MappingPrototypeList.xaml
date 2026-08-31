@@ -1,18 +1,63 @@
 ﻿<mapping:MappingPrototypeList
     xmlns="https://spacestation14.io"
     xmlns:mapping="clr-namespace:Content.Client.Mapping">
-    <BoxContainer Orientation="Vertical">
-        <BoxContainer Orientation="Horizontal">
-            <Button Name="CollapseAllButton" Access="Public" Text="-" SetSize="48 48"
-                    StyleClasses="ButtonSquare" ToolTip="Collapse All" TooltipDelay="0" />
-            <LineEdit Name="SearchBar" SetHeight="48" HorizontalExpand="True" Access="Public" />
-            <Button Name="ClearSearchButton" Access="Public" Text="X" SetSize="48 48"
-                    StyleClasses="ButtonSquare" />
+    <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="2">
+        <!-- Forge-Change-Start -->
+        <Label Name="HintLabel" Access="Public" StyleClasses="LabelSubText" ClipText="True"
+               Text="{Loc mapping-palette-hint}" />
+        <PanelContainer StyleClasses="AngleRect" SetHeight="52">
+            <ScrollContainer Name="RecentsScroll" Access="Public" HScrollEnabled="True"
+                             VScrollEnabled="False" Margin="4">
+                <BoxContainer Name="RecentsBar" Access="Public" Orientation="Horizontal" SeparationOverride="4" />
+            </ScrollContainer>
+        </PanelContainer>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="0">
+            <Button Name="EntitiesTab" Access="Public" ToggleMode="True" Text="{Loc mapping-palette-tab-entities}"
+                    StyleClasses="OpenBoth" HorizontalExpand="True" SetHeight="32" />
+            <Button Name="TilesTab" Access="Public" ToggleMode="True" Text="{Loc mapping-palette-tab-tiles}"
+                    StyleClasses="OpenBoth" HorizontalExpand="True" SetHeight="32" />
+            <Button Name="DecalsTab" Access="Public" ToggleMode="True" Text="{Loc mapping-palette-tab-decals}"
+                    StyleClasses="OpenBoth" HorizontalExpand="True" SetHeight="32" />
+            <Button Name="FavoritesTab" Access="Public" ToggleMode="True" Text="{Loc mapping-palette-tab-favorites}"
+                    StyleClasses="OpenBoth" SetWidth="40" SetHeight="32" />
+            <Button Name="RecentsTab" Access="Public" ToggleMode="True" Text="{Loc mapping-palette-tab-recents}"
+                    StyleClasses="OpenBoth" HorizontalExpand="True" SetHeight="32" />
+            <Button Name="HierarchyTab" Access="Public" ToggleMode="True" Text="{Loc mapping-palette-tab-hierarchy}"
+                    StyleClasses="OpenBoth" HorizontalExpand="True" SetHeight="32" />
         </BoxContainer>
+        <!-- Forge-Change-End -->
+        <BoxContainer Orientation="Horizontal" SeparationOverride="0">
+            <Button Name="CollapseAllButton" Access="Public" Text="−" SetSize="36 36"
+                    StyleClasses="OpenRight" ToolTip="Collapse All" TooltipDelay="0" />
+            <LineEdit Name="SearchBar" SetHeight="36" HorizontalExpand="True" Access="Public" />
+            <Button Name="ClearSearchButton" Access="Public" Text="✕" SetSize="36 36"
+                    StyleClasses="OpenBoth" />
+            <!-- Forge-Change-Start -->
+            <Button Name="GridButton" Access="Public" ToggleMode="True" Text="{Loc mapping-palette-grid}"
+                    SetHeight="36" StyleClasses="OpenLeft"
+                    ToolTip="{Loc mapping-palette-grid-tooltip}" TooltipDelay="0" />
+            <!-- Forge-Change-End -->
+        </BoxContainer>
+        <!-- Forge-Change-Start -->
+        <PanelContainer StyleClasses="AngleRect">
+            <BoxContainer Orientation="Horizontal" Margin="6 4" SeparationOverride="6">
+                <Label Name="SelectionLabel" Access="Public" HorizontalExpand="True" ClipText="True"
+                       StyleClasses="LabelKeyText"
+                       Text="{Loc mapping-palette-none-selected}" />
+                <LineEdit Name="IdBox" Access="Public" SetWidth="160" SetHeight="28" Editable="False" />
+                <Button Name="ClearPlacementButton" Access="Public" Text="{Loc mapping-palette-clear}"
+                        SetHeight="28" StyleClasses="OpenLeft"
+                        ToolTip="{Loc mapping-palette-clear-tooltip}" TooltipDelay="0" />
+            </BoxContainer>
+        </PanelContainer>
+        <!-- Forge-Change-End -->
         <ScrollContainer Name="ScrollContainer" Access="Public" VerticalExpand="True"
                          ReserveScrollbarSpace="True">
             <BoxContainer Name="PrototypeList" Access="Public" Orientation="Vertical" />
             <PrototypeListContainer Name="SearchList" Access="Public" Visible="False" />
+            <!-- Forge-Change-Start -->
+            <GridContainer Name="PaletteGrid" Access="Public" Columns="5" Visible="False" />
+            <!-- Forge-Change-End -->
         </ScrollContainer>
         <mapping:MappingDoNotMeasure Visible="False">
             <mapping:MappingSpawnButton Name="MeasureButton" Access="Public" />

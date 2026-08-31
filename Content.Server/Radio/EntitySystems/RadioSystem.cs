@@ -1,10 +1,11 @@
 using Content.Server._NF.Radio; // Frontier
 using Content.Server._Forge.Radio.EntitySystems; // Forge-Change: configurable encryption key frequencies.
+using Content.Goobstation.Shared.StationRadio.Components; // Forge-Change: station radio receiver frequency
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server._EinsteinEngines.Language;
 using Content.Server.Power.Components;
-using Content.Server.Radio.Components;
+using Content.Shared.Radio.Components;
 using Content.Shared._Mono.Radio;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -75,6 +76,10 @@ public sealed partial class RadioSystem : EntitySystem
     {
         if (TryComp<RadioMicrophoneComponent>(source, out var radioMicrophone))
             return radioMicrophone.Frequency;
+
+        // Forge-Change: station radio receivers tune independently of the RadioShow channel default.
+        if (TryComp<StationRadioReceiverComponent>(source, out var stationRadio))
+            return stationRadio.Frequency;
 
         if (_configurableKeys.TryGetFrequency(source, channel.ID, out var keyFrequency)) // Forge-Change
             return keyFrequency;

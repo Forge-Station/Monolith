@@ -15,7 +15,7 @@
 
 - type: entity
   id: DisciplinesDiskBoardingTeleportTier4
-  parent: BaseItem
+  parent: [ BaseItem, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: tier-4 bluespace boarding technology disk
   description: Encrypted drone blackbox data for phase-shift boarding drives. Insert into a research server to unlock the experimental discipline and tier-4 recipes.
   components:

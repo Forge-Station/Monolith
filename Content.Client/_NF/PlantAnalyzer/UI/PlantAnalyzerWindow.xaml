@@ -1,48 +1,77 @@
-<controls:FancyWindow xmlns="https://spacestation14.io"
-   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-   Title="{Loc 'plant-analyzer-interface-title'}">
-    <!-- Margin="left,top,right,bottom" -->
-    <GridContainer Rows="2" Name ="GridCont" Margin="10 5 10 5">
-        <BoxContainer Name="Top">
-            <Label Name="NoData" Text="{Loc 'plant-analyzer-window-no-seed-information-text'}" Margin="10 0 0 0"/>
-        </BoxContainer>
-        <TabContainer Name="Tabs" VerticalExpand="True" HorizontalExpand="True" VerticalAlignment="Stretch" MinSize="300 400">
-			<ScrollContainer Name ="{Loc 'plant-analyzer-window-tab-basics'}">
-                <BoxContainer Orientation="Vertical" VerticalAlignment="Stretch" Margin="10 0 5 0">
-                    <Label Name="PlantName" Margin="0 5 0 5"/>
-                    <Label Name="PlantYield" Margin="0 5 0 5"/>
-                    <Label Name="Potency" Margin="0 5 0 5"/>
-                    <Label Name="Repeat" Margin="0 5 0 5"/>
-                    <Label Name="Lifespan" Margin="0 5 0 5"/>
-                    <Label Name="Maturation" Margin="0 5 0 5"/>
-                    <Label Name="Production" Margin="0 5 0 5"/>
-                    <Label Name="GrowthStages" Margin="0 5 0 5"/>
-                    <Label Name="Endurance" Margin="0 5 0 5"/>
-                    <Label Name="ConsumeGases" Margin="0 5 0 5" />
-                    <Label Name="ExudeGases" Margin="0 5 0 5" />
-                    <Label Name="Chemicals" Margin="0 5 0 5"/>
-                </BoxContainer>
-			</ScrollContainer>
+<ui:PlantAnalyzerWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:ui="clr-namespace:Content.Client._NF.PlantAnalyzer.UI"
+    SetSize="900 560"
+    MinSize="720 440"
+    MouseFilter="Stop">
 
-            <BoxContainer Name="{Loc 'plant-analyzer-window-tab-tolerances'}" Orientation="Vertical"  VerticalAlignment="Stretch" Margin="10 0 5 0">
-                <Label Name="NutrientUsage" Margin="0 5 0 5"/>
-                <Label Name="WaterUsage" Margin="0 5 0 5"/>
-                <Label Name="IdealHeat" Margin="0 5 0 5"/>
-                <Label Name="HeatTolerance" Margin="0 5 0 5"/>
-                <Label Name="IdealLight" Margin="0 5 0 5"/>
-                <Label Name="LightTolerance" Margin="0 5 0 5"/>
-                <Label Name="ToxinsTolerance" Margin="0 5 0 5"/>
-                <Label Name="LowPressureTolerance" Margin="0 5 0 5"/>
-                <Label Name="HighPressureTolerance" Margin="0 5 0 5"/>
-                <Label Name="PestTolerance" Margin="0 5 0 5"/>
-                <Label Name="WeedTolerance" Margin="0 5 0 5"/>
-            </BoxContainer>
-            <BoxContainer Name="{Loc 'plant-analyzer-window-tab-mutations'}" Orientation="Vertical"  VerticalAlignment="Stretch" Margin="10 0 5 0">
-                <Label Name="PlantSpeciation" Margin="0 5 0 5"/>
-                <Label Name="Traits" Margin="0 5 0 5"/>
-                <Label Name="ExtraInfo" Margin="0 5 0 5"/>
-            </BoxContainer>
-        </TabContainer>
-    </GridContainer>
-</controls:FancyWindow>
+    <PanelContainer Name="Background" StyleClasses="PdaBackgroundRect"/>
+    <PanelContainer Name="Border" StyleClasses="PdaBorderRect"/>
+
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+
+        <BoxContainer SetHeight="40" Margin="20 10 10 5" Orientation="Horizontal" HorizontalExpand="True">
+            <Label Name="TitleLabel" StyleClasses="ConsoleHeadingBig" HorizontalExpand="True"/>
+            <TextureButton Name="CloseButton" StyleClasses="windowCloseButton" VerticalAlignment="Center"/>
+        </BoxContainer>
+
+        <Control Margin="15 0 15 0" RectClipContent="True" VerticalExpand="True" HorizontalExpand="True">
+            <PanelContainer Name="ContentBorder" StyleClasses="PdaBackground"/>
+            <Control Margin="3 3" Modulate="#FFFFFF">
+                <PanelContainer Name="ContentBackground" StyleClasses="PdaContentBackground"/>
+
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+
+                    <BoxContainer Orientation="Horizontal" Margin="10 8 10 0">
+                        <Label Name="PlantNameLabel" StyleClasses="ConsoleSubHeading" HorizontalExpand="True"/>
+                        <BoxContainer Name="PrintLabelHost" MinHeight="26" Margin="0 0 8 0"/>
+                        <Label Name="StatusLabel" StyleClasses="ConsoleText"/>
+                    </BoxContainer>
+
+                    <PanelContainer Name="MainDivider" StyleClasses="LowDivider" HorizontalExpand="True" Margin="10 6 10 6" SetHeight="2"/>
+
+                    <BoxContainer Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="True" Margin="10 0 10 10">
+
+                        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="0 0 12 0">
+                            <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+                                <Label Name="DetailHeader" StyleClasses="ConsoleSubHeading"/>
+                            </BoxContainer>
+                            <PanelContainer Name="DetailPanel" StyleClasses="AngleRect" VerticalExpand="True" HorizontalExpand="True">
+                                <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
+                                    <BoxContainer Name="DetailContainer"
+                                                  Orientation="Vertical"
+                                                  VerticalExpand="True"
+                                                  HorizontalExpand="True"
+                                                  Margin="10"/>
+                                </ScrollContainer>
+                            </PanelContainer>
+                        </BoxContainer>
+
+                        <BoxContainer Orientation="Vertical" MinWidth="220" MaxWidth="260" VerticalExpand="True">
+                            <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+                                <Label Name="ListHeader" StyleClasses="ConsoleSubHeading"/>
+                            </BoxContainer>
+                            <PanelContainer Name="ListPanel" StyleClasses="AngleRect" VerticalExpand="True" HorizontalExpand="True">
+                                <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
+                                    <BoxContainer Name="ListContainer"
+                                                  Orientation="Vertical"
+                                                  VerticalExpand="True"
+                                                  HorizontalExpand="True"
+                                                  Margin="6"/>
+                                </ScrollContainer>
+                            </PanelContainer>
+                        </BoxContainer>
+
+                    </BoxContainer>
+
+                    <BoxContainer Orientation="Vertical" VerticalExpand="False">
+                        <controls:StripeBack HasBottomEdge="False" HasMargins="False" HorizontalExpand="True">
+                            <Label Name="OsLabel" HorizontalAlignment="Left" Margin="8 0" StyleClasses="LabelSubText"/>
+                        </controls:StripeBack>
+                    </BoxContainer>
+                </BoxContainer>
+            </Control>
+        </Control>
+    </BoxContainer>
+</ui:PlantAnalyzerWindow>

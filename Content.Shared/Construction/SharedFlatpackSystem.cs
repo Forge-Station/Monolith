@@ -114,7 +114,13 @@ public abstract partial class SharedFlatpackSystem : EntitySystem
     {
         if (!args.IsInDetailsRange)
             return;
-        args.PushMarkup(Loc.GetString("flatpack-examine"));
+        //Forge-Change-Start
+        if (PrototypeManager.TryIndex(ent.Comp.QualityNeeded, out var qualityProto))
+        {
+            var toolName = Loc.GetString(qualityProto.Name);
+            args.PushMarkup(Loc.GetString("flatpack-examine", ("tool", toolName)));
+        }
+        //Forge-Change-End
     }
 
     protected void SetupFlatpack(Entity<FlatpackComponent?> ent, EntProtoId proto, EntityUid board)

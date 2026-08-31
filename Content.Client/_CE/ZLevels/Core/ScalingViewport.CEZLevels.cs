@@ -96,15 +96,22 @@ public sealed partial class ScalingViewport
     private ShaderInstance? _transitBlitShader;
     private ShaderInstance? _cloudShader;
 
-    /// <summary>
-    /// Plain world blit used when Z-level compositing does not apply (lobby, menus, no attached player).
-    /// The stock <c>_viewport.Render()</c> in <see cref="Draw"/> is commented out in favor of this path.
-    /// </summary>
-    private void RenderSingleEye(IClydeViewport viewport)
+    // Forge-Change: free Z-level GPU resources when the control is torn down. The transit
+    // viewport is otherwise only disposed on size change (in RenderTransitOverhead), so it
+    // leaks a viewport + render target every time this control is destroyed.
+    protected override void Dispose(bool disposing)
     {
-        viewport.Eye = _eye;
-        viewport.ClearColor = Color.Black;
-        viewport.Render();
+        base.Dispose(disposing);
+
+        if (!disposing)
+            return;
+
+        _transitViewport?.Dispose();
+        _transitViewport = null;
+        _transitBlitShader?.Dispose();
+        _transitBlitShader = null;
+        _cloudShader?.Dispose();
+        _cloudShader = null;
     }
 
     private void RenderZLevels(IRenderHandle renderHandle, IClydeViewport viewport)

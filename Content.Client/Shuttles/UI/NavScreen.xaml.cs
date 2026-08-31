@@ -29,6 +29,7 @@ public sealed partial class NavScreen : BoxContainer
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         _xformSystem = _entManager.System<SharedTransformSystem>();
+        LayoutContainer.SetAnchorPreset(NavRadar, LayoutContainer.LayoutPreset.Wide); // Forge-Change
 
         IFFToggle.OnToggled += OnIFFTogglePressed;
         IFFToggle.Pressed = NavRadar.ShowIFF;
@@ -40,6 +41,7 @@ public sealed partial class NavScreen : BoxContainer
         DockToggle.Pressed = NavRadar.ShowDocks;
 
         NfInitialize(); // Frontier Initialization for the NavScreen
+        ForgeInitializeMarkers();
     }
 
     // Frontier - IFF search
@@ -135,6 +137,7 @@ public sealed partial class NavScreen : BoxContainer
     {
         base.FrameUpdate(args);
         ShieldPanel.Visible = ShieldBar.HasShield;
+        ForgeUpdateMarkers();
     }
     // Forge-Change-End
 

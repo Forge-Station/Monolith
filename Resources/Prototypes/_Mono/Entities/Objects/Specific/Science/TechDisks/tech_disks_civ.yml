@@ -2,7 +2,7 @@
 # Normal civ r&d recipes
 
 - type: entity
-  parent: TechDiskBase
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: TechDiskBluespaceBags
   name: pre-fracture bluespace storage tech disk
   description: A disk capable of adding advanced bluespace storage to a server's recipes.
@@ -167,7 +167,7 @@
     - MachineShieldMS100Circuitboard
 
 - type: entity
-  parent: TechDiskBase
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: TechDiskSpeedBoots
   name: pre-fracture speed manipulation tech disk
   description: A disk capable of adding speed boots to a server's recipes.
@@ -314,7 +314,7 @@
 
 # Forge-change
 - type: entity
-  parent: TechDiskBase
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: TechDiskTierBS4
   name: BS parts tech disk
   description: A disk capable of adding BS parts to a server's recipes.

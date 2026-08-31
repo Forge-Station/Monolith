@@ -1,0 +1,23 @@
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeLightSirenRemnant
+  suffix: "Empty, siren, Remnant"
+  components:
+  - type: AmbientSound
+    volume: 0
+    range: 10
+    sound:
+      path: "/Audio/Misc/bluealert.ogg"
+  - type: Advertise
+    pack: StrobeRemnantAds
+    maximumWait: 30
+    minimumWait: 30
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Vending
+  - type: LanguageSpeaker
+  - type: LanguageKnowledge
+    speaks:
+    - Draconic
+    understands:
+    - Draconic

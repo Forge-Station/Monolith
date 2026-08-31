@@ -1,0 +1,99 @@
+- type: entity
+  id: RemnantHatchBase
+  abstract: true
+  parent: BaseStructure
+  suffix: Forge, Remnant, Z-level
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: PortalAutoLink
+    linkKey: remnant-hatch
+  - type: LinkedTraverse
+    verbText: remnant-hatch-traverse-verb
+  - type: UseDelay
+    delay: 0.8
+
+- type: entity
+  parent: RemnantHatchBase
+  id: RemnantHatch
+  name: remnant hatch
+  description: A sealed precursor hatch. Walking onto a paired hatch, or interacting with it, transfers you to the linked Z-level.
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/stairs.rsi
+    state: stairs_stage_steel
+    drawdepth: FloorTiles
+  - type: Portal
+    canTeleportToOtherMaps: true
+    randomTeleport: false
+  - type: Fixtures
+    fixtures:
+      portalFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        hard: false
+
+- type: entity
+  parent: RemnantHatch
+  id: RemnantHatchAlpha
+  suffix: Forge, Remnant, Z-level, Alpha
+  components:
+  - type: PortalAutoLink
+    linkKey: remnant-hatch-alpha
+
+- type: entity
+  parent: RemnantHatch
+  id: RemnantHatchBeta
+  suffix: Forge, Remnant, Z-level, Beta
+  components:
+  - type: PortalAutoLink
+    linkKey: remnant-hatch-beta
+
+- type: entity
+  parent: RemnantHatchBase
+  id: RemnantLadder
+  name: remnant ladder
+  description: A precursor ladder. Interact with a paired ladder to climb between Z-levels.
+  components:
+  - type: Sprite
+    sprite: _CE/Structures/Architecture/Ladders/stone.rsi
+    state: straight
+    drawdepth: Mobs
+  - type: PortalAutoLink
+    linkKey: remnant-ladder
+  - type: LinkedTraverse
+    verbText: remnant-ladder-traverse-verb
+
+- type: entity
+  parent: RemnantLadder
+  id: RemnantLadderAlpha
+  suffix: Forge, Remnant, Z-level, Alpha
+  components:
+  - type: PortalAutoLink
+    linkKey: remnant-ladder-alpha
+
+- type: entity
+  parent: RemnantLadder
+  id: RemnantLadderBeta
+  suffix: Forge, Remnant, Z-level, Beta
+  components:
+  - type: PortalAutoLink
+    linkKey: remnant-ladder-beta
+
+- type: entity
+  parent:
+  - CEZLevelLadderBase
+  - CEZLevelsLadderStoneBase
+  id: RemnantZLevelLadder
+  name: remnant z-level ladder
+  description: A precursor ladder for CE z-level high ground. Place matching pieces on stacked maps when using the z-level network.
+  suffix: Forge, Remnant, CE Z-Level

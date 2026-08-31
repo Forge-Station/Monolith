@@ -1,5 +1,7 @@
+<!-- Forge-Change: VerticalExpand so the sector map fills a resized shuttle window. -->
 <controls:BoxContainer Visible="False"
        HorizontalExpand="True"
+       VerticalExpand="True"
        xmlns:controls="https://spacestation14.io"
        xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls"
        xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
@@ -10,7 +12,8 @@
                              HorizontalExpand="True"
                              VerticalExpand="True"
                              VerticalAlignment="Stretch"/>
-            <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+            <!-- Forge-Change-Start: sidebar stays 256px and scrolls when the window is short. -->
+            <controls:PanelContainer VerticalExpand="True" HorizontalExpand="False" Margin="4 4 4 4">
                 <controls:PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#525252" BackgroundColor="#3d474d"/>
                 </controls:PanelContainer.PanelOverride>
@@ -18,21 +21,27 @@
                     <controls:PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                     </controls:PanelContainer.PanelOverride>
+            <controls:ScrollContainer VerticalExpand="True"
+                                      HorizontalExpand="True"
+                                      HScrollEnabled="False"
+                                      VScrollEnabled="True"
+                                      MinWidth="256"
+                                      MaxWidth="256">
             <controls:BoxContainer Name="RightDisplayMap"
                           VerticalAlignment="Top"
-                          HorizontalAlignment="Center"
-                          MinWidth="256"
-                          MaxWidth="256"
+                          HorizontalAlignment="Stretch"
+                          MinWidth="240"
                           Margin="5 5 5 5"
                           Orientation="Vertical"
-                          VerticalExpand="True">
+                          VerticalExpand="False"
+                          HorizontalExpand="True">
                 <controls1:StripeBack
                     MinSize="48 48">
                     <controls:Label Name="MapDisplayLabel" Text="{controls:Loc 'shuttle-console-ftl-label'}"
-                                    VerticalExpand="True"
+                                    VerticalExpand="False"
                                     HorizontalAlignment="Center"/>
                 </controls1:StripeBack>
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                     <controls:PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                     </controls:PanelContainer.PanelOverride>
@@ -85,7 +94,7 @@
                     <controls:Label Name="SettingsLabel" Text="{controls:Loc 'shuttle-console-map-settings'}"
                            HorizontalAlignment="Center"/>
                 </controls1:StripeBack>
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                     <controls:PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                     </controls:PanelContainer.PanelOverride>
@@ -122,7 +131,7 @@
                 </controls:PanelContainer>
                 <!-- Forge-Change-Start -->
                 <!-- IFF search filter -->
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                     <controls:PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                     </controls:PanelContainer.PanelOverride>
@@ -132,29 +141,38 @@
                     </controls:BoxContainer>
                 </controls:PanelContainer>
                 <!-- Forge-Change-End -->
+                <!-- Forge-Change: nav markers -->
+                <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
+                    <controls:PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                    </controls:PanelContainer.PanelOverride>
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 4 4 4" SeparationOverride="4">
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                            <controls:Label Text="{controls:Loc 'shuttle-console-markers-label'}" HorizontalExpand="True"/>
+                            <controls:Label Name="MapMarkerCountLabel" Text="0/5" Align="Right"/>
+                        </controls:BoxContainer>
+                        <controls:BoxContainer Name="MapMarkerList" Orientation="Vertical" HorizontalExpand="True" SeparationOverride="2"/>
+                    </controls:BoxContainer>
+                </controls:PanelContainer>
+                <!-- End Forge-Change: nav markers -->
                 <!-- Map objects -->
                 <controls1:StripeBack MinSize="48 48">
                     <controls:Label Name="HyperspaceLabel" Text="{controls:Loc 'shuttle-console-map-objects'}"
                            HorizontalAlignment="Center"/>
                 </controls1:StripeBack>
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                     <controls:PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                     </controls:PanelContainer.PanelOverride>
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 2">
-                        <controls:PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
-                        </controls:PanelContainer.PanelOverride>
-                <controls:ScrollContainer VerticalExpand="True" HScrollEnabled="False"
-                                 ReturnMeasure="True">
                     <controls:BoxContainer Name="HyperspaceDestinations"
                                   Orientation="Vertical"
-                                  VerticalExpand="True"/>
-                </controls:ScrollContainer>
-                </controls:PanelContainer>
+                                  HorizontalExpand="True"
+                                  Margin="4"/>
                 </controls:PanelContainer>
             </controls:BoxContainer>
         </controls:BoxContainer>
+            </controls:ScrollContainer>
             </controls:PanelContainer>
             </controls:PanelContainer>
+            <!-- Forge-Change-End -->
 </controls:BoxContainer>

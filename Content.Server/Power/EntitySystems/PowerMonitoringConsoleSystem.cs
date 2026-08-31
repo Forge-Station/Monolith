@@ -16,6 +16,7 @@ using Robust.Shared.Containers;
 // Forge-Change-End
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
+using Robust.Shared.Map; // Forge-Change: GridRemovalEvent
 using Robust.Shared.Map.Components;
 using Robust.Shared.Utility;
 using System.Linq;
@@ -55,6 +56,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
         // Grid events
         SubscribeLocalEvent<GridSplitEvent>(OnGridSplit);
+        SubscribeLocalEvent<GridRemovalEvent>(OnGridRemoved); // Forge-Change: drop cable-chunk cache on grid delete
         SubscribeLocalEvent<CableComponent, CableAnchorStateChangedEvent>(OnCableAnchorStateChanged);
         SubscribeLocalEvent<PowerMonitoringDeviceComponent, AnchorStateChangedEvent>(OnDeviceAnchoringChanged);
         SubscribeLocalEvent<PowerMonitoringDeviceComponent, NodeGroupsRebuilt>(OnNodeGroupRebuilt);
@@ -159,6 +161,13 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
             RefreshPowerMonitoringCableNetworks(ent, entCableNetworks);
         }
     }
+
+    // Forge-Change-Start: _gridPowerCableChunks was never pruned when grids were deleted.
+    private void OnGridRemoved(GridRemovalEvent args)
+    {
+        _gridPowerCableChunks.Remove(args.EntityUid);
+    }
+    // Forge-Change-End
 
     public void OnCableAnchorStateChanged(EntityUid uid, CableComponent component, CableAnchorStateChangedEvent args)
     {
@@ -311,9 +320,11 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
         if (gridUid == null)
             return;
 
+        // Handhelds can change grids while held; rebuild metadata without resetting the
+        // selected tab/focus (upstream RefreshPowerMonitoringConsole always snaps back to generators).
         if (_tagSystem.HasTag(uid, "ForgeHandheldMonitoringConsole"))
         {
-            RefreshPowerMonitoringConsole(uid, component);
+            RefreshPowerMonitoringConsole(uid, component, resetFocus: false);
 
             if (TryComp<PowerMonitoringCableNetworksComponent>(uid, out var cableNetworks))
                 RefreshPowerMonitoringCableNetworks(uid, cableNetworks);
@@ -960,12 +971,16 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
         Dirty(uid, component);
     }
 
-    private void RefreshPowerMonitoringConsole(EntityUid uid, PowerMonitoringConsoleComponent component)
+    private void RefreshPowerMonitoringConsole(EntityUid uid, PowerMonitoringConsoleComponent component, bool resetFocus = true)
     {
-        component.Focus = null;
-        component.FocusGroup = PowerMonitoringConsoleGroup.Generator;
+        if (resetFocus)
+        {
+            component.Focus = null;
+            component.FocusGroup = PowerMonitoringConsoleGroup.Generator;
+            component.Flags = 0;
+        }
+
         component.PowerMonitoringDeviceMetaData.Clear();
-        component.Flags = 0;
 
         // Forge-Change-Start: use holder grid when the console is a handheld Forge monitor
         var gridUid = ForgeHandheldMonitoringHelper.GetMonitoringGrid(uid, EntityManager, _transformSystem, _containerSystem, _tagSystem);
@@ -973,6 +988,14 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
             return;
 
         var grid = gridUid.Value;
+
+        // Drop a stale focus if the player walked onto a different vessel.
+        if (!resetFocus &&
+            component.Focus != null &&
+            (!TryComp(component.Focus.Value, out TransformComponent? focusXform) || focusXform.GridUid != grid))
+        {
+            component.Focus = null;
+        }
         // Forge-Change-End
 
         var query = AllEntityQuery<PowerMonitoringDeviceComponent, TransformComponent>();

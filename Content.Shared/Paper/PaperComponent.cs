@@ -62,10 +62,15 @@ public sealed partial class PaperComponent : Component
     public sealed class PaperInputTextMessage : BoundUserInterfaceMessage
     {
         public readonly string Text;
+        /// <summary>
+        /// Language the writer chose for this page. Empty keeps the paper's current language.
+        /// </summary>
+        public readonly string Language; // Forge-Change
 
-        public PaperInputTextMessage(string text)
+        public PaperInputTextMessage(string text, string? language = null)
         {
             Text = text;
+            Language = language ?? string.Empty; // Forge-Change
         }
     }
 

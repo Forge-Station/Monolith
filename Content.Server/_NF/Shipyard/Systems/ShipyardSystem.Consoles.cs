@@ -245,18 +245,37 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         // Add company information to the shuttle from the ID card or voucher
         string? companyName = null;
 
-        // First try to get company from ID card
+        // Forge-Change-start: Add company from voucher
+        // First try to get company from ID card in the console slot
         if (TryComp<IdCardComponent>(targetId, out var idCardCompany) &&
-            !string.IsNullOrEmpty(idCardCompany.CompanyName))
+            !string.IsNullOrEmpty(idCardCompany.CompanyName) &&
+            idCardCompany.CompanyName != "None")
         {
             companyName = idCardCompany.CompanyName;
         }
-        // If no ID card company, try to get from voucher
+        // If no ID card company, try to get from voucher (faction LPCs)
         else if (TryComp<ShipyardVoucherComponent>(targetId, out var voucherCompany) &&
                  !string.IsNullOrEmpty(voucherCompany.CompanyName))
         {
             companyName = voucherCompany.CompanyName;
         }
+        // If no company on voucher, try get from user ID card, then from player company.
+        else if (voucherUsed)
+        {
+            if (_idSystem.TryFindIdCard(player, out var playerIdCard) &&
+                !string.IsNullOrEmpty(playerIdCard.Comp.CompanyName) &&
+                playerIdCard.Comp.CompanyName != "None")
+            {
+                companyName = playerIdCard.Comp.CompanyName;
+            }
+            else if (TryComp<CompanyComponent>(player, out var playerCompany) &&
+                     !string.IsNullOrEmpty(playerCompany.CompanyName) &&
+                     playerCompany.CompanyName != "None")
+            {
+                companyName = playerCompany.CompanyName;
+            }
+        }
+        // Forge-Change-end
 
         // Apply company to ship if we found one
         if (!string.IsNullOrEmpty(companyName))

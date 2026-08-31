@@ -43,6 +43,8 @@ public sealed partial class CompanySystem : EntitySystem
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args)
     {
         var companyComp = EnsureComp<CompanyComponent>(args.Mob);
+
+        var forcedCompany = false; // Forge-change
         var playerId = args.Player.UserId.ToString();
         var profileCompany = args.Profile.Company;
         var slot = ResolveCharacterSlot(args.Player.UserId, args.Profile);
@@ -61,22 +63,21 @@ public sealed partial class CompanySystem : EntitySystem
         // Faction jobs still force their company; otherwise membership wins and is synced to the doll/profile.
         if (jobForcesCompany)
         {
-            companyComp.CompanyName = spawnJob!.AssignedCompany;
-        }
-        else if (!string.IsNullOrEmpty(membershipCompany) && membershipCompany != "None")
-        {
-            companyComp.CompanyName = membershipCompany;
-            SyncProfileCompany(args.Player.UserId, slot, args.Profile, membershipCompany);
-        }
-        else if (spawnJob != null)
-        {
-            companyComp.CompanyName = FactionCompanyResolver.ResolveSpawnCompany(spawnJob, profileCompany);
+            companyComp.CompanyName = FactionCompanyResolver.ResolveSpawnCompany(job, profileCompany);
+            forcedCompany = FactionCompanyResolver.JobForcesCompany(job); // Forge-change
         }
         else
         {
             companyComp.CompanyName = FactionCompanyResolver.IsFactionCompany(profileCompany)
                 ? "None"
                 : string.IsNullOrEmpty(profileCompany) ? "None" : profileCompany;
+        }
+
+        // Forge-change-start
+        if (!forcedCompany && companyComp.CompanyName != "None" && _prototypeManager.HasIndex<CompanyPrototype>(companyComp.CompanyName)
+            && !_manager.IsAllowed(args.Player, companyComp.CompanyName))
+        {
+            companyComp.CompanyName = "None";
         }
 
         if (_prototypeManager.TryIndex<CompanyPrototype>(companyComp.CompanyName, out var proto))

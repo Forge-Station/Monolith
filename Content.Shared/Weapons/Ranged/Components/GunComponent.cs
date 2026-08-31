@@ -1,11 +1,15 @@
 using System.Numerics;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Whitelist; // Forge-Chanfe
+using Content.Shared.Whitelist; // Forge-Change
+using Content.Shared.Tools;
+using Content.Shared.DoAfter;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Weapons.Ranged.Components;
 
@@ -355,8 +359,67 @@ public sealed partial class GunComponent : Component
     /// </summary>
     [DataField]
     public bool WhitelistCheckOrgans = false;
-#endregion Forge-Change-end
+
+    /// <summary>
+    /// Forge: Whether the gun should delete itself after shooting.
+    /// </summary>
+    [DataField("DeleteOnShoot")]
+    [AutoNetworkedField]
+    public bool DeleteOnShoot = false;
+
+    /// <summary>
+    /// Forge: Can the gun be sabotaged with a screwdriver.
+    /// </summary>
+    [DataField("Sabotageable")]
+    [AutoNetworkedField]
+    public bool Sabotageable = true;
+
+    /// <summary>
+    /// Forge: Sound to play when the gun selfdestroyed.
+    /// </summary>
+	[DataField]
+    public SoundSpecifier? SoundDestroy = new SoundCollectionSpecifier("WoodDestroy");
+
+    /// <summary>
+    /// Forge: Text showed on examine when the gun is sabotaged.
+    /// </summary>
+    [DataField]
+    public LocId? ExamineTextSabotaged = "gun-component-on-examine-sabotaged";
+
+    /// <summary>
+    /// Forge: Sound to play when the gun is sabotaged.
+    /// </summary>
+	[DataField]
+    public SoundSpecifier? SoundSabotage = new SoundPathSpecifier("/Audio/Machines/screwdriverclose.ogg");
+
+    /// <summary>
+    /// Amount of times in seconds it takes to sabotage.
+    /// </summary>
+    [DataField]
+    public TimeSpan SabotageDelay = TimeSpan.FromSeconds(15);
+
+    /// <summary>
+    /// The tool quality needed to sabotage this gun.
+    /// </summary>
+    [DataField]
+    public ProtoId<ToolQualityPrototype> SabotageTool = "Screwing";
 }
+
+/// <summary>
+/// Event raised before a gun's DeleteOnShoot state is changed.
+/// </summary>
+[ByRefEvent]
+public record struct AttemptChangeDeleteOnShootEvent(bool DeleteOnShoot, EntityUid? User, bool Cancelled = false);
+
+/// <summary>
+/// Event raised when a gun's DeleteOnShoot state changes.
+/// </summary>
+[ByRefEvent]
+public readonly record struct DeleteOnShootChangedEvent(bool DeleteOnShoot);
+
+[Serializable, NetSerializable]
+public sealed partial class SabotageDoAfterEvent : SimpleDoAfterEvent;
+#endregion Forge-Change-end
 
 [Flags]
 public enum SelectiveFire : byte

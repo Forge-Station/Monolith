@@ -153,6 +153,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 350
@@ -212,6 +213,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 350
@@ -583,6 +585,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/autopulse_laser_fire_01.ogg
     soundEmpty:
       path: /Audio/Weapons/click.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 30000
@@ -659,6 +662,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/laserfire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRechargePause: true
     autoRechargePauseTime: 20
@@ -971,6 +975,7 @@
       path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: ShipGunClass
     shipClass: Heavy
   - type: HitscanBatteryAmmoProvider
@@ -1041,6 +1046,7 @@
       path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: ShipGunClass
     shipClass: Heavy
   - type: HitscanBatteryAmmoProvider
@@ -1077,6 +1083,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier5HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A devastating weapon, known for glassing whole fleets when used en masse
   components:
@@ -1123,6 +1130,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/glassing.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRechargePause: true
     autoRechargePauseTime: 60
@@ -1167,6 +1175,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A terrifying weapon to have aimed at you, the Reaper is an ancient piece of pre-fracture tech capable of shattering the strongest of hulls within one or two blasts.
   components:
@@ -1195,6 +1204,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 350
@@ -1247,6 +1257,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: One of the most powerful EMP weapons in sector, it is a sign of doom for its targets.
   components:
@@ -1276,6 +1287,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 800
@@ -1328,6 +1340,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A rarer, powerful cannon mounted on larger ADS units. Firing a singular particle of antimatter wrapped in energy. Annihalating sections of shuttles at a time.
   components:
@@ -1355,6 +1368,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 500
@@ -1401,6 +1415,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A potent proton cannon from before the Fracture, known for melting holes through both inorganic and organic matter with ease.
   components:
@@ -1464,6 +1479,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A burst firing neutron repeater, firing high-damage but slow balls of hell. A marvel of rapture weapons technology. Specializes in tunneling through anything that can't outmanuever it.
   components:
@@ -1532,6 +1548,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A unique pre-fracture weapon, the Flayer fires a storm of tungsten alloy darts at near the speed of light, barraging targets to pieces.
   components:

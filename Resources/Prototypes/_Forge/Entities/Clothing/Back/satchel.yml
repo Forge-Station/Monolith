@@ -96,7 +96,7 @@
     - 8,0,9,4
 
 - type: entity
-  parent: ClothingBackpackSatchel
+  parent: [ ClothingBackpackSatchel, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: ClothingBackpackSatchelAsakim
   name: сумка
   description: Приятная на ощупь сумка.

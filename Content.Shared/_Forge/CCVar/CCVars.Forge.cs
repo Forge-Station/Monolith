@@ -8,6 +8,9 @@ namespace Content.Shared._Forge.CCVar;
 [CVarDefs]
 public sealed partial class ForgeCVars
 {
+    public static readonly CVarDef<float> StationAiSsdGracePeriod =
+        CVarDef.Create("station_ai.ssd_grace_period", 300f, CVar.SERVERONLY);
+
     /// <summary>
     ///     Duration of a POI capture operation, in minutes.
     /// </summary>
@@ -63,4 +66,42 @@ public sealed partial class ForgeCVars
     /// </summary>
     public static readonly CVarDef<string> LobbyHubMap =
         CVarDef.Create("forge.lobby_hub.map", "/Maps/_Forge/Lobby/hub.yml", CVar.CLIENT | CVar.ARCHIVE | CVar.CLIENTONLY);
+    // Forge-Change-Start
+    /// <summary>
+    ///     Chat log font size in pixels. Independent from the global UI scale.
+    /// </summary>
+    public static readonly CVarDef<int> ChatFontSize =
+        CVarDef.Create("forge.ui.chat_font_size", 12, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Examine tooltip font size in pixels. Independent from the global UI scale.
+    /// </summary>
+    public static readonly CVarDef<int> ExamineFontSize =
+        CVarDef.Create("forge.ui.examine_font_size", 12, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Scale for HUD chrome: hotbar slots, hand slots, and action buttons.
+    ///     1 is the default 64px slot size.
+    /// </summary>
+    public static readonly CVarDef<float> HudScale =
+        CVarDef.Create("forge.ui.hud_scale", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Scale for bag/belt storage grid tiles. Independent from HUD scale.
+    /// </summary>
+    public static readonly CVarDef<float> StorageScale =
+        CVarDef.Create("forge.ui.storage_scale", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Comma-separated mapping palette favorites in the form e:ProtoId,t:TileId,d:DecalId.
+    /// </summary>
+    public static readonly CVarDef<string> MappingPaletteFavorites =
+        CVarDef.Create("forge.mapping.palette_favorites", "", CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Comma-separated recently used mapping palette entries (same encoding as favorites).
+    /// </summary>
+    public static readonly CVarDef<string> MappingPaletteRecents =
+        CVarDef.Create("forge.mapping.palette_recents", "", CVar.CLIENTONLY | CVar.ARCHIVE);
+    // Forge-Change-End
 }

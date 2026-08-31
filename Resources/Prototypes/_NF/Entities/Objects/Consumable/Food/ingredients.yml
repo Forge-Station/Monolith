@@ -256,6 +256,8 @@
           Quantity: 2
         - ReagentId: Sugar
           Quantity: 1
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
 
 - type: entity
   parent: FoodInjectableBase

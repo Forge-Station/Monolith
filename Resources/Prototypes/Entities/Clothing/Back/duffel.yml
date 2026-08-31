@@ -224,7 +224,7 @@
       tags: [] # ignore "WhitelistChameleon" tag
 
 - type: entity
-  parent: NFClothingDuffel # Frontier: ClothingBackpackDuffelNFClothingDuffel
+  parent: [ NFClothingDuffel, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS # Frontier: ClothingBackpackDuffelNFClothingDuffel
   id: ClothingBackpackDuffelHolding
   name: duffelbag of holding
   description: A duffelbag that opens into a localized pocket of bluespace.

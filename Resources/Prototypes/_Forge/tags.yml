@@ -235,6 +235,13 @@
 - type: Tag
   id: Overlord
 
+- type: Tag
+  id: BlacklistMachineFrame
+
+- type: Tag
+  id: AncientBattery
+
+
 # NSC ammunition
 - type: Tag
   id: Cartridge154x114mm

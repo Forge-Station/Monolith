@@ -1,3 +1,4 @@
+using Content.Server._Forge.Botany;
 using Content.Server.Botany.Components;
 using Content.Server.Botany.Systems;
 using Content.Shared.EntityEffects;
@@ -26,6 +27,9 @@ public sealed partial class PlantLockGenes : EntityEffect
             return;
 
         plantHolderComp.Seed.GeneLocked = true;
+        // Forge-Change-start
+        plantHolderComp.Seed.PinnedTraits = BotanyTraits.CollectTraitIds(plantHolderComp.Seed);
+        // Forge-Change-end
         plantHolderComp.MutationLevel = 0;
     }
 

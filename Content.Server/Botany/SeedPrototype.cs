@@ -279,6 +279,18 @@ public partial class SeedData
     /// </summary>
     [DataField] public bool GeneLocked;
 
+    // Forge-Change-start
+    /// <summary>
+    ///     Trait ids that were present when the genome was locked with gene stabilizer.
+    /// </summary>
+    [DataField] public List<string> PinnedTraits = new();
+
+    /// <summary>
+    ///     Printed cultivar lines cannot be archived back into the hydroponics journal.
+    /// </summary>
+    [DataField] public bool CultivarJournalLocked;
+    // Forge-Change-end
+
     /// <summary>
     ///     Range in tiles used when checking for grab victims.
     /// </summary>
@@ -354,6 +366,10 @@ public partial class SeedData
             CarnivorousGrab = CarnivorousGrab,
             CarnivorousPestEater = CarnivorousPestEater,
             GeneLocked = GeneLocked,
+            // Forge-Change-start
+            PinnedTraits = new List<string>(PinnedTraits),
+            CultivarJournalLocked = CultivarJournalLocked,
+            // Forge-Change-end
             GrabRange = GrabRange,
             Mutations = new List<RandomPlantMutation>(),
 
@@ -426,6 +442,10 @@ public partial class SeedData
             CarnivorousGrab = CarnivorousGrab,
             CarnivorousPestEater = CarnivorousPestEater,
             GeneLocked = GeneLocked,
+            // Forge-Change-start
+            PinnedTraits = new List<string>(PinnedTraits),
+            CultivarJournalLocked = CultivarJournalLocked,
+            // Forge-Change-end
             GrabRange = GrabRange,
             SplatPrototype = other.SplatPrototype,
 

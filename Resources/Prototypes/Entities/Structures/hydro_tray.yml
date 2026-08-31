@@ -73,6 +73,26 @@
       params:
         volume: -6
         variation: 0.20
+  # Forge-Change-start
+  - type: ItemSlots
+    slots:
+      harvestContainer:
+        name: plant-holder-harvest-container-slot
+        whitelist:
+          components:
+          - FitsInDispenser
+        insertSound:
+          path: /Audio/Effects/Fluids/slosh.ogg
+          params:
+            volume: -6
+        ejectSound:
+          path: /Audio/Effects/Fluids/slosh.ogg
+          params:
+            volume: -6
+  - type: ContainerContainer
+    containers:
+      harvestContainer: !type:ContainerSlot
+  # Forge-Change-end
   - type: Destructible
     thresholds:
     - trigger:

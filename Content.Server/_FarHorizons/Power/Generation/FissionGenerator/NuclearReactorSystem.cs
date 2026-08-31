@@ -85,6 +85,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
 
         // Signal events
         SubscribeLocalEvent<NuclearReactorComponent, SignalReceivedEvent>(OnSignalReceived);
+        SubscribeLocalEvent<NuclearReactorComponent, SignalReceivedEvent<LogicStatePayload>>(OnLogicSignalReceived);
         SubscribeLocalEvent<NuclearReactorComponent, PortDisconnectedEvent>(OnPortDisconnected);
 
         // Anchor events
@@ -853,12 +854,19 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
 
     private void OnSignalReceived(EntityUid uid, NuclearReactorComponent comp, ref SignalReceivedEvent args)
     {
-        var state = SignalState.Momentary;
-        args.Data?.TryGetValue(DeviceNetworkConstants.LogicState, out state);
+        ApplyRodSignal(uid, comp, args.Port, SignalState.Momentary, args.Trigger);
+    }
 
-        if (args.Port == comp.ControlRodInsertPort)
+    private void OnLogicSignalReceived(EntityUid uid, NuclearReactorComponent comp, ref SignalReceivedEvent<LogicStatePayload> args)
+    {
+        ApplyRodSignal(uid, comp, args.Port, args.Data.State, args.Trigger);
+    }
+
+    private void ApplyRodSignal(EntityUid uid, NuclearReactorComponent comp, string port, SignalState state, EntityUid? trigger)
+    {
+        if (port == comp.ControlRodInsertPort)
             comp.InsertPortState = state;
-        else if (args.Port == comp.ControlRodRetractPort)
+        else if (port == comp.ControlRodRetractPort)
             comp.RetractPortState = state;
 
         var logtext = "maintain";
@@ -867,7 +875,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
         else if (comp.RetractPortState != SignalState.Low && comp.InsertPortState == SignalState.Low)
             logtext = "retract";
 
-        _adminLog.Add(LogType.Action, $"{ToPrettyString(args.Trigger):trigger} set control rod insertion of {ToPrettyString(uid):target} to {logtext}");
+        _adminLog.Add(LogType.Action, $"{ToPrettyString(trigger):trigger} set control rod insertion of {ToPrettyString(uid):target} to {logtext}");
     }
 
     private void OnPortDisconnected(EntityUid uid, NuclearReactorComponent comp, ref PortDisconnectedEvent args)

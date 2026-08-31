@@ -1,6 +1,7 @@
 using Content.Server.Power.EntitySystems;
 using Content.Server.PowerCell;
 using Content.Server.Radio;
+using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Interaction;
 using Content.Shared.PowerCell.Components;
@@ -77,7 +78,7 @@ public sealed partial class JammerSystem : SharedJammerSystem
 
         _jammer.AddJammableNetwork(
             (ent, jammingComp),
-            DeviceNetworkComponent.DeviceNetIdDefaults.Wireless.ToString()
+            (int) DeviceNetIdDefaults.Wireless
         );
 
         /// Sync excluded frequencies from RadioJammerComponent

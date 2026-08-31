@@ -1,6 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Atmos.Monitor.Systems;
+using Content.Server.Atmos.Monitor.Payloads;
 using Content.Server.Atmos.Piping.Binary.Components;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.DeviceNetwork.Systems;
@@ -53,7 +53,7 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
             SubscribeLocalEvent<GasVolumePumpComponent, GasVolumePumpChangeTransferRateMessage>(OnTransferRateChangeMessage);
             SubscribeLocalEvent<GasVolumePumpComponent, GasVolumePumpToggleStatusMessage>(OnToggleStatusMessage);
 
-            SubscribeLocalEvent<GasVolumePumpComponent, DeviceNetworkPacketEvent>(OnPacketRecv);
+            SubscribeLocalEvent<GasVolumePumpComponent, DeviceNetworkPacketEvent<AtmosSyncPayload>>(OnSyncPayload);
 
             SubscribeLocalEvent<GasVolumePumpComponent, MapInitEvent>(OnMapInit); // Frontier
         }
@@ -204,23 +204,14 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
                 _appearance.SetData(uid, GasVolumePumpVisuals.State, GasVolumePumpState.On, appearance);
         }
 
-        private void OnPacketRecv(EntityUid uid, GasVolumePumpComponent component, DeviceNetworkPacketEvent args)
+        private void OnSyncPayload(Entity<GasVolumePumpComponent> ent, ref DeviceNetworkPacketEvent<AtmosSyncPayload> args)
         {
-            if (!TryComp(uid, out DeviceNetworkComponent? netConn)
-                || !args.Data.TryGetValue(DeviceNetworkConstants.Command, out var cmd))
-                return;
-
-            var payload = new NetworkPayload();
-
-            switch (cmd)
+            var data = new GasVolumePumpDataPayload
             {
-                case AtmosDeviceNetworkSystem.SyncData:
-                    payload.Add(DeviceNetworkConstants.Command, AtmosDeviceNetworkSystem.SyncData);
-                    payload.Add(AtmosDeviceNetworkSystem.SyncData, new GasVolumePumpData(component.LastMolesTransferred));
+                LastMolesTransferred = ent.Comp.LastMolesTransferred,
+            };
 
-                    _deviceNetwork.QueuePacket(uid, args.SenderAddress, payload, device: netConn);
-                    return;
-            }
+            _deviceNetwork.SendPacket(ent.Owner, args.SenderAddress, ref data);
         }
 
         private void OnMapInit(EntityUid uid, GasVolumePumpComponent pump, MapInitEvent args) // Frontier - Init on map

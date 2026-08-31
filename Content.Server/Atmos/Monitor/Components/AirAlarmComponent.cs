@@ -20,9 +20,15 @@ public sealed partial class AirAlarmComponent : Component
     public readonly HashSet<string> KnownDevices = new();
     public readonly Dictionary<string, GasVentPumpData> VentData = new();
     public readonly Dictionary<string, GasVentScrubberData> ScrubberData = new();
-    public readonly Dictionary<string, AtmosSensorData> SensorData = new();
+    public readonly Dictionary<string, AtmosMonitorData> SensorData = new();
 
     public bool CanSync = true;
+
+    /// <summary>
+    /// Whether the panic wire is cut, forcing the alarm into panic mode.
+    /// </summary>
+    [DataField]
+    public bool PanicWireCut;
 
     /// <summary>
     /// Previous alarm state for use with output ports.

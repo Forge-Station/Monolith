@@ -43,7 +43,7 @@ public sealed partial class DroneControlSystem : EntitySystem
         SubscribeLocalEvent<DroneControlConsoleComponent, DroneConsoleMoveMessage>(OnMoveMsg);
         SubscribeLocalEvent<DroneControlConsoleComponent, DroneConsoleTargetMessage>(OnTargetMsg);
 
-        SubscribeLocalEvent<DroneControlComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
+        SubscribeLocalEvent<DroneControlComponent, DeviceNetworkPacketEvent<DroneOrderPayload>>(OnPacketReceived);
 
         _controlQuery = GetEntityQuery<DroneControlComponent>();
     }
@@ -99,14 +99,13 @@ public sealed partial class DroneControlSystem : EntitySystem
         DoTargetedDroneOrder(ent, args.SelectedDrones, DroneOrderType.Target, GetCoordinates(args.TargetCoordinates), args.Actor);
     }
 
-    private void OnPacketReceived(Entity<DroneControlComponent> ent, ref DeviceNetworkPacketEvent args)
+    private void OnPacketReceived(Entity<DroneControlComponent> ent, ref DeviceNetworkPacketEvent<DroneOrderPayload> args)
     {
-        if (!args.Data.TryGetValue(DeviceNetworkConstants.Command, out string? cmd)
-            || !TryComp<HTNComponent>(ent, out var htn)
-            || !args.Data.TryGetValue(DroneConsoleConstants.TargetCoords, out EntityCoordinates coords)
-        )
+        if (string.IsNullOrEmpty(args.Data.Command) || !TryComp<HTNComponent>(ent, out var htn))
             return;
 
+        var cmd = args.Data.Command;
+        var coords = args.Data.Coordinates;
         var blackboard = htn.Blackboard;
 
         if (!blackboard.TryGetValue<string>(ent.Comp.OrderKey, out var nowCmd, EntityManager) || !nowCmd.Equals(cmd))
@@ -138,16 +137,16 @@ public sealed partial class DroneControlSystem : EntitySystem
                 break;
         }
 
-        var payload = new NetworkPayload
+        var payload = new DroneOrderPayload
         {
-            [DeviceNetworkConstants.Command] = command,
-            [DroneConsoleConstants.TargetCoords] = coordinates
+            Command = command,
+            Coordinates = coordinates,
         };
 
-        SendToSelected(console, selected, payload);
+        SendToSelected(console, selected, ref payload);
     }
 
-    private void SendToSelected(EntityUid source, HashSet<NetEntity> selected, NetworkPayload payload)
+    private void SendToSelected(EntityUid source, HashSet<NetEntity> selected, ref DroneOrderPayload payload)
     {
         if (!TryComp<DeviceListComponent>(source, out var devList))
             return;
@@ -157,7 +156,7 @@ public sealed partial class DroneControlSystem : EntitySystem
         foreach (var (name, droneUid) in linked)
         {
             if (selected.Contains(GetNetEntity(droneUid)) && TryComp<DeviceNetworkComponent>(droneUid, out var droneNet))
-                _deviceNetwork.QueuePacket(source, droneNet.Address, payload);
+                _deviceNetwork.SendPacket(source, droneNet.Address, ref payload);
         }
     }
 

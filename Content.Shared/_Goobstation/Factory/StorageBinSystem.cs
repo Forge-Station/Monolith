@@ -34,7 +34,7 @@ public sealed partial class StorageBinSystem : EntitySystem
         if (args.Container.ID != ContainerId)
             return;
 
-        _device.InvokePort(ent, ent.Comp.InsertedPort);
+        _device.InvokePort((ent.Owner, null), ent.Comp.InsertedPort);
     }
 
     private void OnEntRemoved(Entity<StorageBinComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -42,6 +42,6 @@ public sealed partial class StorageBinSystem : EntitySystem
         if (args.Container.ID != ContainerId)
             return;
 
-        _device.InvokePort(ent, ent.Comp.RemovedPort);
+        _device.InvokePort((ent.Owner, null), ent.Comp.RemovedPort);
     }
 }

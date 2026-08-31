@@ -1,4 +1,4 @@
-using Robust.Shared.Prototypes;
+using Content.Shared.DeviceNetwork;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
@@ -18,6 +18,7 @@ public sealed class RoboticsConsoleState : BoundUserInterfaceState
     /// Map of device network addresses to cyborg data.
     /// </summary>
     public Dictionary<string, CyborgControlData> Cyborgs;
+
     /// <summary>
     /// If the UI will have the buttons to disable and destroy.
     /// </summary>
@@ -90,6 +91,12 @@ public partial record struct CyborgControlData
     public float Charge;
 
     /// <summary>
+    /// HP level from 0 to 1.
+    /// </summary>
+    [DataField]
+    public float HpPercent; // 0.0 to 1.0
+
+    /// <summary>
     /// How many modules this borg has, just useful information for roboticists.
     /// Lets them keep track of the latejoin borgs that need new modules and stuff.
     /// </summary>
@@ -110,36 +117,47 @@ public partial record struct CyborgControlData
     public bool CanDisable;
 
     /// <summary>
+    /// Whether this cyborg can be possessed by a station AI.
+    /// </summary>
+    [DataField]
+    public bool IsAiControllable;
+
+    /// <summary>
     /// When this cyborg's data will be deleted.
     /// Set by the console when receiving the packet.
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan Timeout = TimeSpan.Zero;
 
-    // Corvax-Next-AiRemoteControl-Start
-    [DataField]
-    public bool IsAiControllable;
-    // Corvax-Next-AiRemoteControl-End
-
-    public CyborgControlData(SpriteSpecifier? chassisSprite, string chassisName, string name, float charge, int moduleCount, bool hasBrain, bool canDisable, bool isAiControllable) // Corvax-Next-AiRemoteControl
+    public CyborgControlData(SpriteSpecifier? chassisSprite, string chassisName, string name, float charge, float hpPercent, int moduleCount, bool hasBrain, bool canDisable, bool isAiControllable = false)
     {
         ChassisSprite = chassisSprite;
         ChassisName = chassisName;
         Name = name;
         Charge = charge;
+        HpPercent = hpPercent;
         ModuleCount = moduleCount;
         HasBrain = hasBrain;
         CanDisable = canDisable;
-        IsAiControllable = isAiControllable; // Corvax-Next-AiRemoteControl
+        IsAiControllable = isAiControllable;
     }
 }
 
-public static class RoboticsConsoleConstants
-{
-    // broadcast by cyborgs on Robotics Console frequency
-    public const string NET_CYBORG_DATA = "cyborg-data";
+/// <summary>
+/// Disables a borg when received.
+/// </summary>
+public partial record struct RoboticsCyborgDisablePayload : INetworkPayload;
 
-    // sent by robotics console to cyborgs on Cyborg Control frequency
-    public const string NET_DISABLE_COMMAND = "cyborg-disable";
-    public const string NET_DESTROY_COMMAND = "cyborg-destroy";
+/// <summary>
+/// Destroys a borg when received.
+/// </summary>
+public partial record struct RoboticsCyborgDestroyPayload : INetworkPayload;
+
+/// <summary>
+/// A wrapper for <see cref="CyborgControlData"/>
+/// </summary>
+public partial record struct RoboticsCyborgDataPayload : INetworkPayload
+{
+    [DataField]
+    public CyborgControlData Data;
 }

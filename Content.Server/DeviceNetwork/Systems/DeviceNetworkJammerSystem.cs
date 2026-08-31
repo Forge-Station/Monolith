@@ -27,13 +27,13 @@ public sealed partial class DeviceNetworkJammerSystem : SharedDeviceNetworkJamme
 
         while (query.MoveNext(out var uid, out var jammerComp, out var jammerXform))
         {
-            if (!_jammer.GetJammableNetworks((uid, jammerComp)).Contains(ev.NetworkId))
+            if (!_jammer.GetJammableNetworks((uid, jammerComp)).Contains(ev.NetId))
                 continue;
 
             if (_transform.InRange(jammerXform.Coordinates, ev.SenderTransform.Coordinates, jammerComp.Range)
                 || _transform.InRange(jammerXform.Coordinates, xform.Comp.Coordinates, jammerComp.Range))
             {
-                ev.Cancel();
+                ev.Cancelled = true;
                 return;
             }
         }

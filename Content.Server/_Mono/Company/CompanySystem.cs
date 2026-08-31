@@ -63,8 +63,8 @@ public sealed partial class CompanySystem : EntitySystem
         // Faction jobs still force their company; otherwise membership wins and is synced to the doll/profile.
         if (jobForcesCompany)
         {
-            companyComp.CompanyName = FactionCompanyResolver.ResolveSpawnCompany(job, profileCompany);
-            forcedCompany = FactionCompanyResolver.JobForcesCompany(job); // Forge-change
+            companyComp.CompanyName = FactionCompanyResolver.ResolveSpawnCompany(spawnJob!, profileCompany);
+            forcedCompany = FactionCompanyResolver.JobForcesCompany(spawnJob!); // Forge-change
         }
         else
         {

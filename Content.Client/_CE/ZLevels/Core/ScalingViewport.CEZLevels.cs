@@ -114,6 +114,17 @@ public sealed partial class ScalingViewport
         _cloudShader = null;
     }
 
+    /// <summary>
+    /// Plain world blit used when Z-level compositing does not apply (lobby, menus, no attached player).
+    /// The stock <c>_viewport.Render()</c> in <see cref="Draw"/> is commented out in favor of this path.
+    /// </summary>
+    private void RenderSingleEye(IClydeViewport viewport)
+    {
+        viewport.Eye = _eye;
+        viewport.ClearColor = Color.Black;
+        viewport.Render();
+    }
+
     private void RenderZLevels(IRenderHandle renderHandle, IClydeViewport viewport)
     {
         if (_eye is null)

@@ -133,6 +133,12 @@
   description: The Fortress. The latest and greatest in static, large-scale shielding.
   suffix: POI ONLY
   components:
+  - type: Anchorable
+    flags: None
+  - type: DisableToolUse
+    anchoring: true
+    prying: true
+    screwing: true
   - type: ShipShieldEmitter
     damageLimit: 300000 # Forge-Change
     healPerSecond: 3000 # Forge-Change

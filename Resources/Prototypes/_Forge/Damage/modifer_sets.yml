@@ -191,7 +191,7 @@
 - type: damageModifierSet
   id: ForgeResomi
   coefficients:
-    Blunt: 1.1
+    Blunt: 1.2
     Slash: 0.8
     Piercing: 0.85
     Cold: 0.75

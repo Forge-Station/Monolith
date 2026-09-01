@@ -2,7 +2,7 @@ using Content.Server._Forge.Shuttles.Systems;
 using Content.Server._NF.CrateMachine;
 using Content.Server._NF.Market.Components;
 using Content.Server._NF.Market.Extensions;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge.CCVar;
 using Content.Shared._NF.Market;
 using Content.Shared._NF.Market.Components;
 using Content.Shared._NF.Market.Events;
@@ -88,7 +88,7 @@ public sealed partial class MarketSystem
         _audio.PlayPredicted(consoleComponent.SuccessSound, consoleUid, null, AudioParams.Default.WithMaxDistance(5f));
 
         // Forge-Change: route a fraction of the market sale to the local POI treasury.
-        var poiTaxRate = _cfgManager.GetCVar(ForgeCCVars.PoiCaptureSalesTaxRate);
+        var poiTaxRate = _cfgManager.GetCVar(ForgeCVars.PoiCaptureSalesTaxRate);
         if (poiTaxRate > 0f)
         {
             var poiTax = (int) Math.Floor(spawnCost * poiTaxRate);

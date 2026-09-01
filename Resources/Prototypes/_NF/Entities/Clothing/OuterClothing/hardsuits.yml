@@ -107,9 +107,9 @@
   description: A protective hardsuit worn by the mail carriers of an emergency response team.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmailcarrier.rsi # Forge-change
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmailcarrier.rsi # Forge-change
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmailcarrier.rsi # Forge-change
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmailcarrier.rsi # Forge-change
   - type: PressureProtection # Forge start
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000

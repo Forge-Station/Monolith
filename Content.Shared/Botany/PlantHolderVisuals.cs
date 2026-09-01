@@ -12,9 +12,5 @@ namespace Content.Shared.Botany
         NutritionLight,
         AlertLight,
         HarvestLight,
-        HealthPercent,
-        HasPlant,
-        WeedsHigh,
-        Radioactive,
     }
 }

@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Client.UserInterface.Screens;
-using Content.Shared._Forge.CCVars; // Corvax-Frontier
+using Content.Shared._Forge; // Corvax-Frontier
 using Content.Shared._Mono.CCVar;
 using Content.Shared.CCVar;
 using Content.Shared.HUD;

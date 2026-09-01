@@ -4,10 +4,10 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_worker_hardsuit.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_worker_hardsuit.rsi
     state: icon
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_worker_hardsuit.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_worker_hardsuit.rsi
     clothingVisuals:
       outerClothing:
       - state: equiped-OUTERCLOTH
@@ -28,10 +28,10 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
     state: icon
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
     clothingVisuals:
       outerClothing:
       - state: equiped-OUTERCLOTH
@@ -64,9 +64,9 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t2_mil_hardsuit.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t2_mil_hardsuit.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t2_mil_hardsuit.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t2_mil_hardsuit.rsi
   - type: ClothingSpeedModifier
     walkModifier: 0.87
     sprintModifier: 0.87
@@ -96,10 +96,10 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t3_mil_hardsuit.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t3_mil_hardsuit.rsi
     state: icon
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t3_mil_hardsuit.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t3_mil_hardsuit.rsi
     clothingVisuals:
       outerClothing:
       - state: equipped-OUTERCLOTHING-sealed

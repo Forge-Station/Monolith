@@ -14,8 +14,7 @@
     storedRotation: -90
   - type: ActivatableUI
     key: enum.PlantAnalyzerUiKey.Key
-    inHandsOnly: false
-    requireActiveHand: false
+    inHandsOnly: true
   - type: UserInterface
     interfaces:
       enum.PlantAnalyzerUiKey.Key:
@@ -23,7 +22,6 @@
   - type: PlantAnalyzer
     settings:
       scanDelay: 0.8
-      exposeAdvancedData: true
     scanningEndSound:
       path: "/Audio/Items/Medical/healthscanner.ogg"
   - type: ItemToggle

@@ -1,6 +1,6 @@
 - type: entity
   name: kunisa-pattern plasma autopulser
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
+  parent: [BaseWeaponBattery, BaseGunWieldable]
   id: WeaponRifleAsakimAutopulserForge
   description: An advanced handheld plasma rifle. The design bears similarities to pre-fracture plasma weapons.
   suffix: Forge
@@ -68,7 +68,7 @@
   suffix: Forge
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimpistol.rsi
+    sprite: Forge/Objects/Weapons/Guns/Battery/asakimpistol.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -107,13 +107,13 @@
 
 - type: entity
   name: kunisa-pattern plasma pistol
-  parent: [ WeaponRifleADMPistolForge, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
+  parent: WeaponRifleADMPistolForge
   id: WeaponRifleAsakimPistolForge
   description: An advanced handheld plasma pistol. The design bears similarities to pre-fracture plasma weapons.
   suffix: Forge
   components:
   - type: Clothing
-    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimpistol.rsi
+    sprite: Forge/Objects/Weapons/Guns/Battery/asakimpistol.rsi
     whitelist:
       tags:
         - AsakimBrain

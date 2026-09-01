@@ -4,7 +4,7 @@
   name: empire silver ID card
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: imperial
     - state: idempsilver
@@ -17,7 +17,7 @@
   name: empire gold ID card
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: imperial
     - state: idempgold
@@ -30,7 +30,7 @@
   name: empire inquisitor ID card
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: imperial
     - state: idempinq
@@ -43,7 +43,7 @@
   name: empire commander ID card
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: imperial
     - state: idemplord
@@ -59,7 +59,7 @@
   name: renegates baron ID card
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: renegate
     - state: idrenbaron
@@ -73,7 +73,7 @@
   name: renegates draftsman ID card
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: renegate
     - state: idrendraftsman
@@ -87,7 +87,7 @@
   name: renegates overseer ID card
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: renegate
     - state: idrenoverseer
@@ -101,7 +101,7 @@
   name: renegates quack ID card
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: renegate
     - state: idrenquack
@@ -115,7 +115,7 @@
   name: renegates foreman ID card
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: renegate
     - state: idrenforeman
@@ -129,7 +129,7 @@
   name: renegates flunky ID card
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: renegate
     - state: idrenflunky
@@ -148,7 +148,7 @@
     layers:
     - sprite: _NF/Objects/Misc/id_cards.rsi
       state: nfsd
-    - sprite: _Forge/Objects/Misc/id_cards.rsi
+    - sprite: Forge/Objects/Misc/id_cards.rsi
       state: idtsfcom
   - type: PresetIdCard
     job: TsfCommandingOfficer
@@ -163,7 +163,7 @@
     layers:
     - sprite: _NF/Objects/Misc/id_cards.rsi
       state: nfsd
-    - sprite: _Forge/Objects/Misc/id_cards.rsi
+    - sprite: Forge/Objects/Misc/id_cards.rsi
       state: idtsfexec
   - type: PresetIdCard
     job: TsfExecutiveOfficer
@@ -178,7 +178,7 @@
     layers:
     - sprite: _NF/Objects/Misc/id_cards.rsi
       state: nfsd
-    - sprite: _Forge/Objects/Misc/id_cards.rsi
+    - sprite: Forge/Objects/Misc/id_cards.rsi
       state: idtsfsenior
   - type: PresetIdCard
     job: TsfSeniorOfficer
@@ -234,7 +234,7 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: tti
     - state: iddoc
@@ -248,7 +248,7 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: tti
     - state: idparamed
@@ -262,7 +262,7 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: tti
     - state: idntmed
@@ -279,7 +279,7 @@
   suffix: Forge, Remnant
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Misc/id_cards.rsi
+    sprite: Forge/Objects/Misc/id_cards.rsi
     layers:
     - state: gold
     - state: idsr

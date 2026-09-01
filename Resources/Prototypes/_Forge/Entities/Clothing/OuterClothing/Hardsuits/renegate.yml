@@ -7,11 +7,11 @@
   description: A second-generation hardsuit. The first variation for mass production, and your model has already seen several battles and owners, which doesn't make it any worse.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatelight.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatelight.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatelight.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatelight.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -53,11 +53,11 @@
   description: Modified version of BSII-20. Modified helmet from the skin of a large insect, and a chest from linked military locks. Heavy, but not unmanageable. You like heavy, right?
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatearmed.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatearmed.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatearmed.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatearmed.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -99,11 +99,11 @@
   description: An improved version of the second-generation hardsuits, with increased power, mobility, and protection made of polymer tungsten plates and threads. It bears the inscription "For authorized only."
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatecommand.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatecommand.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatecommand.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatecommand.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -145,11 +145,11 @@
   description: An advanced third-generation combat suit. Polymer plates and advanced electronics—all of this made this suit possible. You've just received a model, almost factory-fresh, manufactured on Ensis.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegateadvanced.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegateadvanced.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegateadvanced.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegateadvanced.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -215,9 +215,9 @@
   description: A heavy jauggernaut hardsuit of resistance. A literal walking coffin. Huge piece of armor that can protect you from most of the firearms shots.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatejuggernaut.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatejuggernaut.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatejuggernaut.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatejuggernaut.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000

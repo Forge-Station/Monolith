@@ -25,9 +25,6 @@
   recipes:
   - ServiceSelectiveDropper # Frontier
   - PlantAnalyzer # Frontier
-  - ClothingEyesGlassesBotany
-  - AgroScanCartridge
-  - BotanyCultivarDisk
   - JanicartFlatpack # Frontier
   - PlantBagOfHolding # Delta-V
 
@@ -48,4 +45,3 @@
   - SodaDispenserMachineCircuitboard
   - BiogeneratorMachineCircuitboard
   - DeepFryerMachineCircuitboard
-  - HydroponicsConsoleCircuitboard

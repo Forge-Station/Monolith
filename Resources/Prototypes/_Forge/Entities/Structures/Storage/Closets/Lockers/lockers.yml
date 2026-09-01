@@ -4,7 +4,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Storage/closet.rsi
+    sprite: Forge/Structures/Storage/closet.rsi
 
 # region Renegate
 - type: entity

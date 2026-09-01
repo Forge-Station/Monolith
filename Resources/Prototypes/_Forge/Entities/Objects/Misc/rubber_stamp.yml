@@ -101,5 +101,5 @@
     stampedColor: "#0f3b62"
     stampState: paper_stamp-nexus
   - type: Sprite
-    sprite: _Forge/Objects/Misc/stamps/nexus_stamp.rsi
+    sprite: Forge/Objects/Misc/stamps/nexus_stamp.rsi
     state: stamp-nexus

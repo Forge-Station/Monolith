@@ -3,7 +3,7 @@ using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.RandomMetadata;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge.CCVar;
 using Content.Shared._Forge.Silicons.StationAi;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -151,7 +151,7 @@ public sealed class StationAiPersonalitySystem : EntitySystem
             return;
         }
 
-        var timeout = Math.Max(1f, _configuration.GetCVar(ForgeCCVars.StationAiSsdGracePeriod));
+        var timeout = Math.Max(1f, _configuration.GetCVar(ForgeCVars.StationAiSsdGracePeriod));
         _ssdReleases[ent.Owner] = new SsdRelease(
             mind.Owner,
             args.Player.UserId,

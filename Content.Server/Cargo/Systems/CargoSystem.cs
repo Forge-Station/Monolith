@@ -22,7 +22,7 @@ using Content.Server._NF.SectorServices; // Frontier
 using Content.Shared.Whitelist;
 using Content.Server._Forge.Shuttles.Systems;
 using Content.Server._NF.Bank; // Frontier
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge.CCVar;
 using Robust.Shared.Configuration;
 
 namespace Content.Server.Cargo.Systems;

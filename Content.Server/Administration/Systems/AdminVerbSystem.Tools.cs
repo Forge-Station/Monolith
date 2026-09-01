@@ -138,7 +138,7 @@ public sealed partial class AdminVerbSystem
                 {
                     Text = "Spawn Passport",
                     Category = VerbCategory.Tricks,
-                    Icon = new SpriteSpecifier.Texture(new("/Textures/_Forge/Interface/Misc/spawnpassport.png")),
+                    Icon = new SpriteSpecifier.Texture(new("/Textures/Forge/Interface/Misc/spawnpassport.png")),
                     Act = () =>
                     {
                         var profile = _ticker.GetPlayerProfile(targetActor.PlayerSession);

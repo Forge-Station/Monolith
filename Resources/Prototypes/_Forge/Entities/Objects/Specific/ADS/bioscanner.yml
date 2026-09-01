@@ -5,7 +5,7 @@
   description: A small device. It can detect the presence of a biohazard in a patient's blood.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Devices/bioscanner.rsi
+    sprite: Forge/Objects/Devices/bioscanner.rsi
     state: icon
   - type: Item
     size: Small

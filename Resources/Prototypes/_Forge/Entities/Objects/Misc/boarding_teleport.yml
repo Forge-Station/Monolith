@@ -1,0 +1,40 @@
+- type: entity
+  parent: Paper
+  id: PaperBoardingTeleportInstructions
+  name: bluespace boarding instructions
+  description: A quick setup sheet for a bluespace boarding kit.
+  components:
+  - type: Paper
+    contentSize: 3000
+    content: boarding-teleport-instructions
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false
+
+- type: entity
+  id: DisciplinesDiskBoardingTeleportTier4
+  parent: BaseItem
+  name: tier-4 bluespace boarding technology disk
+  description: Encrypted drone blackbox data for phase-shift boarding drives. Insert into a research server to unlock the experimental discipline and tier-4 recipes.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - ForgeBoardingTeleportExperimental
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: bstp
+  - type: StaticPrice
+    price: 25000
+    vendPrice: 100000
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false

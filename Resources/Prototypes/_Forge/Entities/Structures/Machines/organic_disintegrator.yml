@@ -1,0 +1,105 @@
+- type: entity
+  id: AnnihilatorZone
+  components:
+  - type: AnnihilatorZoneVisuals
+  - type: Transform
+    noRot: false
+
+- type: entity
+  parent: [ BaseStructureDisableToolUse, BaseMachinePowered ]
+  id: BaseOrganicDesintegrator
+  name: organic disintegrator
+  description: A relic of the ancient civilization, when activated, it generates a molecular decay field that selectively destroys chimeric biomass. Within seconds, any aggressive organic forms within the zone are transformed into harmless, inert dust, without affecting the normal flora and fauna.
+  abstract: true
+  components:
+  - type: LanguageSpeaker
+  - type: LanguageKnowledge
+    speaks:
+    - Azaziba
+    understands:
+    - Azaziba
+  - type: StationAiWhitelist
+  - type: Sprite
+    sprite: Forge/Structures/Machines/desintegrator.rsi
+    snapCardinals: true
+    offset: 0, 0.5
+    layers:
+    - state: icon
+    - state: unlit
+      shader: unshaded
+  - type: Appearance
+  - type: AmbientSound
+    volume: 1
+    range: 7
+    sound:
+      path: /Audio/Ambience/Objects/hdd_buzz.ogg
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 750
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: LetoferolAnnihilatorZone
+    target: Chimera
+    updateInterval: 2
+    damage:
+      types:
+        Heat: 35
+
+- type: entity
+  parent: BaseOrganicDesintegrator
+  id: OrganicDesintegrator300
+  suffix: 300
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/desintegrator.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+    - state: logo_nt
+    - state: unlit
+      shader: unshaded
+  - type: LetoferolAnnihilatorZone
+    radius: 300
+    zoneColor: "#008200FF"
+
+- type: entity
+  parent: BaseOrganicDesintegrator
+  id: OrganicDesintegratorMini
+  suffix: 32
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/mini_desintegrator.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: LetoferolAnnihilatorZone
+    radius: 32
+    zoneColor: "#b63273FF"
+    target: Chimera
+    updateInterval: 2
+    damage:
+      types:
+        Heat: 35
+        Radiation: 10

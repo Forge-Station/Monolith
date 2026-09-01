@@ -6,7 +6,7 @@
   description: Some piece of light-orange cloth with gray lines, its covered with oil...
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Wallmounts/flags.rsi
+    sprite: Forge/Structures/Wallmounts/flags.rsi
     state: scrap_tech
 
 - type: entity
@@ -19,7 +19,7 @@
   - type: Sprite
     snapCardinals: false
     drawdepth: WallMountedItems
-    sprite: _Forge/Structures/Wallmounts/flags_64x32.rsi
+    sprite: Forge/Structures/Wallmounts/flags_64x32.rsi
     state: hev_flag
   - type: Fixtures
     fixtures:

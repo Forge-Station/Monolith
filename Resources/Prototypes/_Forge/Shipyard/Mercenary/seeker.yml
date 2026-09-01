@@ -7,7 +7,6 @@
   category: Medium
   group: Shipyard
   access: Mercenary
-  purchasable: false
   shuttlePath: /SharedMaps/_Forge/Shuttles/Mercenary/seeker.yml
   guidebookPage: Null
   class:

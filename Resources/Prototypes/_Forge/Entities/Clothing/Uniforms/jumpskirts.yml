@@ -7,9 +7,9 @@
   description: Uniform for elite syndicate operatives performing tactical operations in deep space.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/renegateskirt.rsi
 # Trauma Team
 - type: entity
   parent: [ClothingUniformBase, BaseFactionGearOtherFactionT1] # Forge-change parent BaseFactionGearOtherFactionT1
@@ -19,9 +19,9 @@
   description: Standard fatigues of the Trauma Armed Forces.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/tti_skirt_blue.rsi # Forge-change
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/tti_skirt_blue.rsi # Forge-change
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/tti_skirt_blue.rsi # Forge-change
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/tti_skirt_blue.rsi # Forge-change
   - type: SuitSensor
     randomMode: false
     mode: SensorVitals
@@ -34,9 +34,9 @@
   description: HME-jumpskirt-desc
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/hme_skirt.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/hme_skirt.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/hme_skirt.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/hme_skirt.rsi
   - type: StaticPrice
     price: 80
     vendPrice: 250
@@ -49,9 +49,9 @@
   description: detective jumpskirt desc
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/detective.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/detective.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/detective.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/detective.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -60,9 +60,9 @@
   description: coroner jumpskirt desc
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/medical.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/medical.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/medical.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/medical.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -71,9 +71,9 @@
   description: coroner jumpskirt but that brigmedic desc
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/brigmedic.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/brigmedic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/brigmedic.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/brigmedic.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -82,9 +82,9 @@
   description: specialist jumpskirt desc
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/engineering.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/engineering.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/engineering.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/engineering.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -93,9 +93,9 @@
   description: It's got a plus on it, that's a good thing right?
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Old/Uniforms/Jumpskirts/paramedic.rsi
+    sprite: Forge/Clothing/Old/Uniforms/Jumpskirts/paramedic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Old/Uniforms/Jumpskirts/paramedic.rsi
+    sprite: Forge/Clothing/Old/Uniforms/Jumpskirts/paramedic.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -104,9 +104,9 @@
   description: It's made of a special fiber that gives special protection against biohazards. It has a virologist rank stripe on it.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Old/Uniforms/Jumpskirts/virology.rsi
+    sprite: Forge/Clothing/Old/Uniforms/Jumpskirts/virology.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Old/Uniforms/Jumpskirts/virology.rsi
+    sprite: Forge/Clothing/Old/Uniforms/Jumpskirts/virology.rsi
 
 - type: entity
   parent: ClothingUniformJumpskirtHoP
@@ -115,6 +115,6 @@
   description: This first-class skirt was created especially for a representative of the Frontier. No expense was spared in making it, and every seam is made with impeccable craftsmanship. The fact that this skirt was issued indicates the high confidence of the Central Command in its representative at this remote post.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/sr.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/sr.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpskirts/sr.rsi
+    sprite: Forge/Clothing/Uniforms/Jumpskirts/sr.rsi

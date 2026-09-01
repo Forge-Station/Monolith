@@ -17,7 +17,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Boxes/nexus_135x110mm_box.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Boxes/nexus_135x110mm_box.rsi
     layers:
     - state: icon
       map: ["enum.GunVisualLayers.Base"]

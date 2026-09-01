@@ -7,10 +7,10 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: _Forge/Structures/Catwalk/darktile.rsi
+    sprite: Forge/Structures/Catwalk/darktile.rsi
     drawdepth: FloorTiles
   - type: Icon
-    sprite: _Forge/Structures/Catwalk/darktile.rsi
+    sprite: Forge/Structures/Catwalk/darktile.rsi
     state: catwalk_preview
   - type: Transform
     anchored: true
@@ -56,10 +56,10 @@
   description: Мостик закрывающий техническое пространство под плиткой.
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Catwalk/steeltile.rsi
+    sprite: Forge/Structures/Catwalk/steeltile.rsi
     drawdepth: FloorTiles
   - type: Icon
-    sprite: _Forge/Structures/Catwalk/steeltile.rsi
+    sprite: Forge/Structures/Catwalk/steeltile.rsi
     state: catwalk_preview
 
 - type: entity
@@ -69,8 +69,8 @@
   description: Мостик закрывающий техническое пространство под плиткой.
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Catwalk/whitetile.rsi
+    sprite: Forge/Structures/Catwalk/whitetile.rsi
     drawdepth: FloorTiles
   - type: Icon
-    sprite: _Forge/Structures/Catwalk/whitetile.rsi
+    sprite: Forge/Structures/Catwalk/whitetile.rsi
     state: catwalk_preview

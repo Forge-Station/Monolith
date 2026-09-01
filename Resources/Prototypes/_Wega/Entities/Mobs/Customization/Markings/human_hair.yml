@@ -1974,7 +1974,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: africanpigtails
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: africanpigtails_secondary
@@ -1984,7 +1984,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: afropuffdouble
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: afropuffdouble_secondary
@@ -1994,7 +1994,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: afropuffleft
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: afropuffleft_secondary
@@ -2004,7 +2004,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: afropuffright
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: afropuffright_secondary
@@ -2014,7 +2014,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: amazon
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: amazon_secondary
@@ -2024,7 +2024,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: astolfo
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: astolfo_secondary
@@ -2034,7 +2034,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: baum
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: baum_secondary
@@ -2044,7 +2044,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: beachwave
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: beachwave_secondary
@@ -2054,7 +2054,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: bluntbangs
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: bluntbangs_secondary
@@ -2064,7 +2064,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: bluntbangs_alt
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: bluntbangs_alt_secondary
@@ -2074,7 +2074,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: bobcutalt
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: bobcutalt_secondary
@@ -2084,7 +2084,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: bunhead4
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: bunhead4_secondary
@@ -2094,7 +2094,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: combed
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: combed_secondary
@@ -2104,7 +2104,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: combedbob
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: combedbob_secondary
@@ -2114,7 +2114,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: cotton
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: cotton_secondary
@@ -2124,7 +2124,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: curly
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: curly_secondary
@@ -2134,7 +2134,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: dave
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: dave_secondary
@@ -2144,7 +2144,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: diagonal_bangs
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: diagonal_bangs_secondary
@@ -2154,7 +2154,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: emoshort
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: emoshort_secondary
@@ -2164,7 +2164,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: fingerwave
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: fingerwave_secondary
@@ -2174,7 +2174,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: fluffy_short
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: fluffy_short_secondary
@@ -2184,7 +2184,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: fortuneteller
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: fortuneteller_secondary
@@ -2194,7 +2194,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: fortuneteller_alt
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: fortuneteller_alt_secondary
@@ -2204,7 +2204,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: froofylong
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: froofylong_secondary
@@ -2214,7 +2214,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: geisha
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: geisha_secondary
@@ -2224,7 +2224,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: gentle21
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: gentle21_secondary
@@ -2234,7 +2234,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: glammetal
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: glammetal_secondary
@@ -2244,7 +2244,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: gloomy_long
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: gloomy_long_secondary
@@ -2254,7 +2254,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: gloomy_medium
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: gloomy_medium_secondary
@@ -2264,7 +2264,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: grande
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: grande_secondary
@@ -2274,7 +2274,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: halfshave
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: halfshave_secondary
@@ -2284,7 +2284,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: halfshave_glamorous
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: halfshave_glamorous_secondary
@@ -2294,7 +2294,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: halfshave_long
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: halfshave_long_secondary
@@ -2304,7 +2304,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: halfshave_messy
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: halfshave_messy_secondary
@@ -2314,7 +2314,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: halfshave_messylong
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: halfshave_messylong_secondary
@@ -2324,7 +2324,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: halfshave_snout
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: halfshave_snout_secondary
@@ -2334,7 +2334,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: hightight
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: hightight_secondary
@@ -2344,7 +2344,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: hyenamane
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: hyenamane_secondary
@@ -2354,7 +2354,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: jessica
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: jessica_secondary
@@ -2364,7 +2364,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: long4
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: long4_secondary
@@ -2374,7 +2374,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: longdtails
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: longdtails_secondary
@@ -2384,7 +2384,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: longeralt
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: longeralt_secondary
@@ -2394,7 +2394,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: longovereye_alt
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: longovereye_alt_secondary
@@ -2404,7 +2404,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: longsidepartstraight
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: longsidepartstraight_secondary
@@ -2414,7 +2414,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: loose_slicked
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: loose_slicked_secondary
@@ -2424,7 +2424,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: mediumbraid
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: mediumbraid_secondary
@@ -2434,7 +2434,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: newyou
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: newyou_secondary
@@ -2444,7 +2444,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: ponytailalt
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: ponytailalt_secondary
@@ -2454,7 +2454,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: ponytailf
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: ponytailf_secondary
@@ -2464,7 +2464,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: poofy2
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: poofy2_secondary
@@ -2474,7 +2474,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: quadcurls
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: quadcurls_secondary
@@ -2484,7 +2484,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: sabitsuki
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: sabitsuki_secondary
@@ -2494,7 +2494,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: scully
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: scully_secondary
@@ -2504,7 +2504,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: shorthair4
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: shorthair4_secondary
@@ -2514,7 +2514,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: shy
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: shy_secondary
@@ -2524,7 +2524,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: simple_ponytail
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: simple_ponytail_secondary
@@ -2534,7 +2534,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: sleaze
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: sleaze_secondary
@@ -2544,7 +2544,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: slightlymessy
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: slightlymessy_secondary
@@ -2554,7 +2554,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: slimedroplet
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: slimedroplet_secondary
@@ -2564,7 +2564,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: slimedroplet_alt
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: slimedroplet_alt_secondary
@@ -2574,7 +2574,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: slimespikes
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: slimespikes_secondary
@@ -2584,7 +2584,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: slimetendrils
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: slimetendrils_secondary
@@ -2594,7 +2594,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: slimetendrils_alt
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: slimetendrils_alt_secondary
@@ -2604,7 +2604,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: spicy
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: spicy_secondary
@@ -2614,7 +2614,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: twintail_floor
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: twintail_floor_secondary
@@ -2624,7 +2624,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: veryshortovereye
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: veryshortovereye_secondary
@@ -2634,7 +2634,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: victory
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: victory_secondary
@@ -2644,7 +2644,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: viper
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: viper_secondary
@@ -2654,7 +2654,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: wife
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: wife_secondary
@@ -2664,7 +2664,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: _Forge/Mobs/Customization/human_hair.rsi
+    - sprite: Forge/Mobs/Customization/human_hair.rsi
       state: ziegler
     - sprite: _Wega/Mobs/Customization/human_hair.rsi
       state: ziegler_secondary

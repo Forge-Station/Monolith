@@ -1,5 +1,5 @@
 using Content.Client._Forge.TTS;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge;
 using Content.Shared._Forge.TTS;
 using Content.Shared.Humanoid;
 using Robust.Shared.Configuration;
@@ -12,7 +12,7 @@ public sealed partial class HumanoidProfileEditor
 
     private void RefreshTTS()
     {
-        if (_cfgManager.GetCVar(ForgeCCVars.TTSEnabled))
+        if (_cfgManager.GetCVar(ForgeVars.TTSEnabled))
         {
             if (_ttsTab != null)
                 return;

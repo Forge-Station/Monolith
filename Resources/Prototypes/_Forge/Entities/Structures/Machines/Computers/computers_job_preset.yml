@@ -78,7 +78,7 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      sprite: _Forge/Structures/Machines/job_preset_screens.rsi
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
       state: tsf
     - map: ["computerLayerKeys"]
       state: id_key
@@ -113,7 +113,7 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      sprite: _Forge/Structures/Machines/job_preset_screens.rsi
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
       state: nt
     - map: ["computerLayerKeys"]
       state: id_key
@@ -143,7 +143,7 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      sprite: _Forge/Structures/Machines/job_preset_screens.rsi
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
       state: tti
     - map: ["computerLayerKeys"]
       state: id_key
@@ -171,7 +171,7 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      sprite: _Forge/Structures/Machines/job_preset_screens.rsi
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
       state: usp
     - map: ["computerLayerKeys"]
       state: id_key
@@ -204,7 +204,7 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      sprite: _Forge/Structures/Machines/job_preset_screens.rsi
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
       state: rng
     - map: ["computerLayerKeys"]
       state: id_key
@@ -240,12 +240,12 @@
     sprite: Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
-      sprite: _Forge/Structures/Machines/computers.rsi
+      sprite: Forge/Structures/Machines/computers.rsi
       state: computer_emp
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      sprite: _Forge/Structures/Machines/job_preset_screens.rsi
+      sprite: Forge/Structures/Machines/job_preset_screens.rsi
       state: emp
     - map: ["computerLayerKeys"]
       state: id_key

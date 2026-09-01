@@ -1,4 +1,3 @@
-#region TL
 - type: vendingMachineInventory
   id: CompanyVendInventoryTL
   startingInventory:
@@ -15,7 +14,6 @@
     TelecomServerFlatpack: 1
     EncryptionKeyTechnicLogistic: 2
 
-#region Viper Group
 - type: vendingMachineInventory
   id: CompanyVendInventoryViper
   startingInventory:
@@ -31,7 +29,6 @@
     EncryptionKeyViperGroup: 3
     TelecomServerFlatpack: 1
 
-#region Ullman I.
 - type: vendingMachineInventory
   id: CompanyVendInventoryUllman
   startingInventory:
@@ -48,7 +45,6 @@
     ClothingEyesUIGoogles: 4294967295
     ClothingNeckCloakUllmanPoncho: 4
 
-#region USSP
 - type: vendingMachineInventory
   id: CompanyVendInventoryUSSP
   startingInventory:
@@ -90,7 +86,8 @@
     DisciplinesDiskUssp: 4
     FactionLatheFlatpack: 2
 
-#region Drake I.
+# Drake Industries
+
 - type: vendingMachineInventory
   id: CompanyVendInventoryDrake
   startingInventory:
@@ -115,7 +112,8 @@
     TelecomServerFlatpack: 1
     EncryptionKeyDrakeIndustries: 2
 
-#region Harmony M.E.
+# Vend Harmony Medical Enterprises
+
 - type: vendingMachineInventory
   id: CompanyVendInventoryHarmony
   startingInventory:
@@ -126,31 +124,8 @@
     ClothingUniformJumpskirtHME: 4
     ClothingHeadHatBeretHME: 4
 
-#region Nexus S.C.
-- type: vendingMachineInventory
-  id: CompanyVendInventoryNSC
-  startingInventory:
-    ClothingHeadHelmetNexus: 5
-    ClothingBalaclavaSkiMaskBlack: 5
-    ClothingHeadHatNexusBeret: 5
-    ClothingHeadHatNexusCap: 5
-    ClothingHeadHatNexusStarBeret: 5
-    ClothingHeadHatNexusGarrisonCap: 5
-    ClothingEyesGlassesNexus: 5
-    ClothingMaskGasNexus: 5
-    ClothingBeltWebbingsNormalNexus: 5
-    ClothingBeltWebbingsBigNexus: 5
-    ClothingOuterVestWebNexus: 5
-    ClothingOuterCoatNexusGreatcoat: 5
-    ClothingUniformJumpsuitNexusTurtleneck: 5
-    ClothingUniformJumpsuitNexusWorker: 5
-    ClothingUniformJumpsuitNexusSecurity: 5
-    ClothingHandsGlovesCombatNexus: 5
-    EncryptionKeyNexus: 2
-    TelecomServerFlatpack: 1
-    DisciplinesDiskNSC: 2
+# Vend Chun Logistics
 
-#region Chun Logistics
 - type: vendingMachineInventory
   id: CompanyVendInventoryChun
   startingInventory:
@@ -166,4 +141,4 @@
     VehicleElectroscooterCL: 4
     VehicleGravichairCL: 4
     VehicleKeyCLUniversal: 8
-
+    

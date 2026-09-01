@@ -187,7 +187,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
             {
                 Vessel = prototype,
                 VesselName = { Text = VesselDisplayLocale.GetLocalizedName(_localization, prototype!) }, // Forge-Change: add locale for vessel names
-                VesselDescription = { Text = VesselDisplayLocale.GetLocalizedDescription(_localization, prototype!) }, // Forge-Change: add locale for vessel descriptions
+                VesselDescription = { Text = prototype!.Description }, // Mono
                 Purchase = { Text = Loc.GetString("shipyard-console-purchase-available"), Disabled = !canPurchase },
                 Guidebook = { Disabled = prototype!.GuidebookPage is null, TooltipDelay = 0.2f, ToolTip = VesselDisplayLocale.GetLocalizedDescription(_localization, prototype) }, // Forge-Change: add locale for vessel names
                 Price = { Text = priceText },

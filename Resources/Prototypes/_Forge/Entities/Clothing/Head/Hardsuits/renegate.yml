@@ -7,9 +7,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/renegatelight.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/renegatelight.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/renegatelight.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/renegatelight.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -36,9 +36,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/renegatearmed.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/renegatearmed.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/renegatearmed.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/renegatearmed.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -64,9 +64,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/renegatecommand.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/renegatecommand.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/renegatecommand.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/renegatecommand.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -93,9 +93,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/renegateadvanced.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/renegateadvanced.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/renegateadvanced.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/renegateadvanced.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -122,9 +122,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/renegatejuggernaut.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/renegatejuggernaut.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/renegatejuggernaut.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/renegatejuggernaut.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -211,6 +211,7 @@
     sprite: _Mono/Clothing/Head/Hardsuits/syndieelite.rsi
   - type: Clothing
     sprite: _Mono/Clothing/Head/Hardsuits/syndieelite.rsi
+    equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000

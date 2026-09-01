@@ -10,9 +10,9 @@
     price: 1000
     vendPrice: 1500
   - type: Sprite
-    sprite: _Forge/Clothing/Belt/renegatewebbing.rsi
+    sprite: Forge/Clothing/Belt/renegatewebbing.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Belt/renegatewebbing.rsi
+    sprite: Forge/Clothing/Belt/renegatewebbing.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.5
 
@@ -27,9 +27,9 @@
     price: 1500
     vendPrice: 2500
   - type: Sprite
-    sprite: _Forge/Clothing/Belt/renegatewebbingbig.rsi
+    sprite: Forge/Clothing/Belt/renegatewebbingbig.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Belt/renegatewebbingbig.rsi
+    sprite: Forge/Clothing/Belt/renegatewebbingbig.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: Storage
@@ -50,9 +50,9 @@
     price: 1000
     vendPrice: 1500
   - type: Sprite
-    sprite: _Forge/Clothing/Belt/nexus_webbing.rsi
+    sprite: Forge/Clothing/Belt/nexus_webbing.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Belt/nexus_webbing.rsi
+    sprite: Forge/Clothing/Belt/nexus_webbing.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.5
 
@@ -67,9 +67,9 @@
     price: 1500
     vendPrice: 2500
   - type: Sprite
-    sprite: _Forge/Clothing/Belt/nexus_webbingbig.rsi
+    sprite: Forge/Clothing/Belt/nexus_webbingbig.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Belt/nexus_webbingbig.rsi
+    sprite: Forge/Clothing/Belt/nexus_webbingbig.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: Storage
@@ -86,9 +86,9 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Belt/tti_webbing.rsi
+    sprite: Forge/Clothing/Belt/tti_webbing.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Belt/tti_webbing.rsi
+    sprite: Forge/Clothing/Belt/tti_webbing.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.25
 
@@ -100,9 +100,9 @@
   description: Unloading of self-defense forces fighters TechnicLogistic.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Belt/belt_techniclogistic.rsi
+    sprite: Forge/Clothing/Belt/belt_techniclogistic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Belt/belt_techniclogistic.rsi
+    sprite: Forge/Clothing/Belt/belt_techniclogistic.rsi
 
 - type: entity
   parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]
@@ -113,9 +113,9 @@
   - type: StaticPrice
     vendPrice: 2000
   - type: Sprite
-    sprite: _Forge/Clothing/Belt/viper_group_webbing.rsi
+    sprite: Forge/Clothing/Belt/viper_group_webbing.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Belt/viper_group_webbing.rsi
+    sprite: Forge/Clothing/Belt/viper_group_webbing.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.5
 
@@ -128,9 +128,9 @@
   - type: StaticPrice
     vendPrice: 2500
   - type: Sprite
-    sprite: _Forge/Clothing/Belt/viper_group_webbingbig.rsi
+    sprite: Forge/Clothing/Belt/viper_group_webbingbig.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Belt/viper_group_webbingbig.rsi
+    sprite: Forge/Clothing/Belt/viper_group_webbingbig.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: Storage
@@ -147,9 +147,9 @@
   description: Ременно-плечевая система тактических ремней, которую носят настоящая элита тёмного интернета.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Belt/contractor_webbing.rsi
+    sprite: Forge/Clothing/Belt/contractor_webbing.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Belt/contractor_webbing.rsi
+    sprite: Forge/Clothing/Belt/contractor_webbing.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: Storage

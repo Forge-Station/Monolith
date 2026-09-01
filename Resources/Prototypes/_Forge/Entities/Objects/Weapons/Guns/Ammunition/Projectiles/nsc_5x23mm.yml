@@ -1,0 +1,10 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  id: Bullet5x23mm
+  name: bullet (5x23mm)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 15

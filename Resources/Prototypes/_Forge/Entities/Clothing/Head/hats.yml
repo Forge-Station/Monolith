@@ -7,9 +7,9 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/preafect.rsi
+    sprite: Forge/Clothing/Head/Hats/preafect.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/preafect.rsi
+    sprite: Forge/Clothing/Head/Hats/preafect.rsi
 
 - type: entity
   parent: ClothingHeadBase
@@ -19,9 +19,9 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/preafect_o.rsi
+    sprite: Forge/Clothing/Head/Hats/preafect_o.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/preafect_o.rsi
+    sprite: Forge/Clothing/Head/Hats/preafect_o.rsi
 
 - type: entity
   parent: ClothingHeadBase
@@ -31,10 +31,10 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/preafect_v.rsi
+    sprite: Forge/Clothing/Head/Hats/preafect_v.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/preafect_v.rsi
-
+    sprite: Forge/Clothing/Head/Hats/preafect_v.rsi
+    
 # region Renegate
 - type: entity
   parent: ClothingHeadBase
@@ -44,9 +44,9 @@
   description: A black beret with a white star emblem. For those that are more inclined towards style than safety.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/renegateberet.rsi
+    sprite: Forge/Clothing/Head/Hats/renegateberet.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/renegateberet.rsi
+    sprite: Forge/Clothing/Head/Hats/renegateberet.rsi
 
 - type: entity
   parent: ClothingHeadBase
@@ -55,9 +55,9 @@
   suffix: Ренегаты
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/renegatespadhelm.rsi
+    sprite: Forge/Clothing/Head/Hats/renegatespadhelm.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/renegatespadhelm.rsi
+    sprite: Forge/Clothing/Head/Hats/renegatespadhelm.rsi
   - type: HideLayerClothing
     slots:
     - Hair
@@ -72,9 +72,9 @@
   - type: Tag
     tags: [] # ignore "WhitelistChameleon" tag
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/renegatesears.rsi
+    sprite: Forge/Clothing/Head/Hats/renegatesears.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/renegatesears.rsi
+    sprite: Forge/Clothing/Head/Hats/renegatesears.rsi
   - type: AddAccentClothing
     accent: OwOAccent
 
@@ -87,9 +87,9 @@
   description: A black beret with a white star emblem. For those that are more inclined towards style than safety.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/nexus_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/nexus_beret.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/nexus_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/nexus_beret.rsi
 
 - type: entity
   parent: ClothingHeadHeadHatBaseFlippable
@@ -99,9 +99,9 @@
   description: "It's a baseball hat in a tasteless blue colour."
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/nexus_cap.rsi
+    sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/nexus_cap.rsi
+    sprite: Forge/Clothing/Head/Hats/nexus_cap.rsi
 
 - type: entity
   parent: ClothingHeadBase
@@ -111,9 +111,9 @@
   description: A beret issued to Nexus personnel.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/nexus_star_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/nexus_star_beret.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/nexus_star_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/nexus_star_beret.rsi
 
 - type: entity
   parent: ClothingHeadBase
@@ -123,9 +123,9 @@
   description: A peaked garrison cap issued to Nexus personnel.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/nexus_garrison_cap.rsi
+    sprite: Forge/Clothing/Head/Hats/nexus_garrison_cap.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/nexus_garrison_cap.rsi
+    sprite: Forge/Clothing/Head/Hats/nexus_garrison_cap.rsi
 # Trauma Team
 - type: entity
   parent: [ClothingHeadBase, BaseFactionGearOtherFactionT1]
@@ -135,9 +135,9 @@
   description: A black beret with a white star emblem. For those that are more inclined towards style than safety.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/tti_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/tti_beret.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/tti_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/tti_beret.rsi
 
 - type: entity
   parent: [ClothingHeadBase, BaseFactionGearOtherFactionT1]
@@ -147,9 +147,9 @@
   description: A black beret with a white star emblem. For those that are more inclined towards style than safety.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/tti_beret_director.rsi
+    sprite: Forge/Clothing/Head/Hats/tti_beret_director.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/tti_beret_director.rsi
+    sprite: Forge/Clothing/Head/Hats/tti_beret_director.rsi
 # Drake Industries company
 
 - type: entity
@@ -160,9 +160,9 @@
   suffix: Drake
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/drake_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/drake_beret.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/drake_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/drake_beret.rsi
   - type: StaticPrice
     price: 80
     vendPrice: 250
@@ -177,9 +177,9 @@
   suffix: HME
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/hme_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/hme_beret.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/hme_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/hme_beret.rsi
   - type: StaticPrice
     price: 80
     vendPrice: 250
@@ -192,9 +192,9 @@
   description: Takes the officer rank of sub-lieutenants of the Self-Defense Forces TechnicLogistic.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/beret_techniclogistic.rsi
+    sprite: Forge/Clothing/Head/Hats/beret_techniclogistic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/beret_techniclogistic.rsi
+    sprite: Forge/Clothing/Head/Hats/beret_techniclogistic.rsi
 
 # region U.I.
 - type: entity
@@ -204,9 +204,9 @@
   description: Common black baseball cap with a purple skull.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/ui_cap.rsi
+    sprite: Forge/Clothing/Head/Hats/ui_cap.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/ui_cap.rsi
+    sprite: Forge/Clothing/Head/Hats/ui_cap.rsi
   - type: StaticPrice
     price: 80
     vendPrice: 120
@@ -218,9 +218,9 @@
   description: Dark beret with the logo of Ullman Industries. Why do smugglers stand out?
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/ui_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/ui_beret.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/ui_beret.rsi
+    sprite: Forge/Clothing/Head/Hats/ui_beret.rsi
   - type: StaticPrice
     price: 80
     vendPrice: 120
@@ -233,9 +233,9 @@
   description: "ohayo, arillery?"
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/dsocap.rsi
+    sprite: Forge/Clothing/Head/Hats/dsocap.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/dsocap.rsi
+    sprite: Forge/Clothing/Head/Hats/dsocap.rsi
 
 - type: entity
   parent: [ ClothingHeadHatHardhatBase, BaseC2ContrabandUnredeemable ]
@@ -244,9 +244,9 @@
   description: An armored hard hat. Provides the best of both worlds in both protection & utility - perfect for the engineer on the frontlines.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Helmets/nfsd_armored.rsi
+    sprite: Forge/Clothing/Head/Helmets/nfsd_armored.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Helmets/nfsd_armored.rsi
+    sprite: Forge/Clothing/Head/Helmets/nfsd_armored.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -264,9 +264,9 @@
   description: A tall pointed hat, completely black, without unnecessary decorations, symbolizing the mystery and power of the witch.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hats/witchhat.rsi
+    sprite: Forge/Clothing/Head/Hats/witchhat.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hats/witchhat.rsi
+    sprite: Forge/Clothing/Head/Hats/witchhat.rsi
   - type: Tag
     tags:
     - ClothMade

@@ -6,7 +6,7 @@
   description: A new UcasCo market release — a rigid plasma blade held in a force field. Briefly dropping the rear field lets you leap forward and finish a target.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Melee/nexus_energie_sword.rsi
+    sprite: Forge/Objects/Weapons/Melee/nexus_energie_sword.rsi
     layers:
     - state: icon-off
     - state: icon-on
@@ -14,7 +14,7 @@
       shader: unshaded
       map: [ "blade" ]
   - type: Item
-    sprite: _Forge/Objects/Weapons/Melee/nexus_energie_sword.rsi
+    sprite: Forge/Objects/Weapons/Melee/nexus_energie_sword.rsi
     size: Small
     inhandVisuals:
       left:
@@ -67,5 +67,5 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Melee/nexus_energie_sword.rsi
+    sprite: Forge/Objects/Weapons/Melee/nexus_energie_sword.rsi
     state: icon-research

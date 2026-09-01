@@ -6,9 +6,9 @@
   description: Upgraded sunglasses that provide flash immunity and a security HUD.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Eyes/Glasses/blueglasses.rsi
+    sprite: Forge/Clothing/Eyes/Glasses/blueglasses.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Eyes/Glasses/blueglasses.rsi
+    sprite: Forge/Clothing/Eyes/Glasses/blueglasses.rsi
 
 - type: entity
   parent: ClothingEyesGlassesSecurity
@@ -17,9 +17,9 @@
   description: Upgraded sunglasses that provide flash immunity and a security HUD.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Eyes/Glasses/orangeglasses.rsi
+    sprite: Forge/Clothing/Eyes/Glasses/orangeglasses.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Eyes/Glasses/orangeglasses.rsi
+    sprite: Forge/Clothing/Eyes/Glasses/orangeglasses.rsi
 
 # region Renegate
 - type: entity
@@ -30,9 +30,9 @@
   description: Standard ballistic goggles mostly used by Renegates.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Eyes/Goggles/renegates.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/renegates.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Eyes/Goggles/renegates.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/renegates.rsi
 
 # region Company
 - type: entity
@@ -43,9 +43,9 @@
   description: Standard ballistic goggles mostly used by Nexus security forces.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Eyes/Goggles/nexus.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/nexus.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Eyes/Goggles/nexus.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/nexus.rsi
 
 - type: entity
   parent: [ClothingEyesGlassesSecurity, BaseFactionGearOtherFactionT0]
@@ -55,9 +55,9 @@
   description: There is an incomprehensible engraving on the glasses; all I can make out is the word "Nian"
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Eyes/Goggles/glasses_techniclogistic.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/glasses_techniclogistic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Eyes/Goggles/glasses_techniclogistic.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/glasses_techniclogistic.rsi
 
 #region Other
 - type: entity
@@ -67,9 +67,9 @@
   description: Green-tinted goggles using a proprietary polymer that provides protection from eye damage of all types.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Eyes/Goggles/engynfsd.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/engynfsd.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Eyes/Goggles/engynfsd.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/engynfsd.rsi
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -89,9 +89,9 @@
   description: A high tech heads up display purpose built for Nanotrasen officers. Usually issued to the commanding officer of a company.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Eyes/Goggles/ntrglasses.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/ntrglasses.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Eyes/Goggles/ntrglasses.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/ntrglasses.rsi
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
@@ -121,7 +121,7 @@
   description: Standard ballistic goggles mostly used by Viper Groups.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Eyes/Goggles/vipergroup.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/vipergroup.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Eyes/Goggles/vipergroup.rsi
+    sprite: Forge/Clothing/Eyes/Goggles/vipergroup.rsi
   - type: FlashImmunity

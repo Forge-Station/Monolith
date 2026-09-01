@@ -265,7 +265,7 @@
   name: thruster-goblin-name
   description: thruster-goblin-desc
   icon:
-    sprite: _Forge/Structures/Shuttles/thruster.rsi
+    sprite: Forge/Structures/Shuttles/thruster.rsi
     state: base_goblin
   id: goblinThruster
   entityWhitelist: *goblinWhitelist
@@ -283,7 +283,7 @@
   name: generator-goblin-name
   description: generator-goblin-desc
   icon:
-    sprite: _Forge/Structures/Power/generation.rsi
+    sprite: Forge/Structures/Power/generation.rsi
     state: clunker
   id: goblinClunker
   entityWhitelist: *goblinWhitelist

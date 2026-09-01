@@ -12,15 +12,15 @@
       visible: false
     - state: pok1
       map: ["pok1"]
-      sprite: _Forge/Objects/Consumable/Food/pokvisualizer.rsi
+      sprite: Forge/Objects/Consumable/Food/pokvisualizer.rsi
       visible: false
     - state: pok2
       map: ["pok2"]
-      sprite: _Forge/Objects/Consumable/Food/pokvisualizer.rsi
+      sprite: Forge/Objects/Consumable/Food/pokvisualizer.rsi
       visible: false
     - state: pok3
       map: ["pok3"]
-      sprite: _Forge/Objects/Consumable/Food/pokvisualizer.rsi
+      sprite: Forge/Objects/Consumable/Food/pokvisualizer.rsi
       visible: false
   - type: Tag
     tags:
@@ -60,6 +60,6 @@
   description:
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Consumable/Food/pockypacks.rsi
+    sprite: Forge/Objects/Consumable/Food/pockypacks.rsi
   - type: Item
-    sprite: _Forge/Objects/Consumable/Food/pockypacks.rsi
+    sprite: Forge/Objects/Consumable/Food/pockypacks.rsi

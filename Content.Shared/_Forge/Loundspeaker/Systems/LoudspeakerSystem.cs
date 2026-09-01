@@ -112,7 +112,7 @@ public sealed class LoudSpeakerSystem : EntitySystem
                 Dirty(ent);
             },
             Text = Loc.GetString("loudspeaker-toggle"),
-            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/_Forge/Interface/Misc/volume.png")),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Forge/Interface/Misc/volume.png")),
         };
 
         args.Verbs.Add(toggleLoudspeakerVerb);

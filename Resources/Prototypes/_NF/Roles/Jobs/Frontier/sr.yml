@@ -65,4 +65,4 @@
     - EncryptionKeyHospital # Forge
     - ShipVoucherFrontierGuard
     - PhoneInstrumentHigh
-    #- CCHandheldOverwatchConsole #Forge-Change-Remove
+    - CCHandheldOverwatchConsole

@@ -22,7 +22,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/nexus_135x110mm_mag.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/nexus_135x110mm_mag.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]

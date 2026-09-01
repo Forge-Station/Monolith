@@ -30,7 +30,7 @@
     - type: DisarmMalus
       malus: 0.6
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Melee/chainsaw-shield.rsi
+    sprite: Forge/Objects/Weapons/Melee/chainsaw-shield.rsi
     layers:
     - state: shield-icon
     - state: teeth-icon
@@ -46,7 +46,7 @@
     size: Huge
     shape:
     - 0,0,3,3
-    sprite: _Forge/Objects/Weapons/Melee/chainsaw-shield.rsi
+    sprite: Forge/Objects/Weapons/Melee/chainsaw-shield.rsi
   - type: ChainsawShieldVisuals
     inactiveInhandVisuals:
       left:
@@ -248,7 +248,7 @@
     - type: DisarmMalus
       malus: 0.6
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Melee/reinforced-chainsaw-shield.rsi
+    sprite: Forge/Objects/Weapons/Melee/reinforced-chainsaw-shield.rsi
     layers:
     - state: shield-icon
     - state: teeth-icon
@@ -261,10 +261,8 @@
       shader: unshaded
       map: [ "power" ]
   - type: Item
-    size: Huge
-    shape:
-    - 0,0,3,3
-    sprite: _Forge/Objects/Weapons/Melee/reinforced-chainsaw-shield.rsi
+    size: Normal
+    sprite: Forge/Objects/Weapons/Melee/reinforced-chainsaw-shield.rsi
   - type: ChainsawShieldVisuals
     inactiveInhandVisuals:
       left:
@@ -436,7 +434,7 @@
     useDelay: 1
     itemIconStyle: BigAction
     icon:
-      sprite: _Forge/Objects/Weapons/Melee/chainsaw-shield.rsi
+      sprite: Forge/Objects/Weapons/Melee/chainsaw-shield.rsi
       state: shield-icon
     event: !type:ReturnOnThrowActionEvent
 
@@ -449,6 +447,6 @@
     useDelay: 1
     itemIconStyle: BigAction
     icon:
-      sprite: _Forge/Objects/Weapons/Melee/reinforced-chainsaw-shield.rsi
+      sprite: Forge/Objects/Weapons/Melee/reinforced-chainsaw-shield.rsi
       state: shield-icon
     event: !type:ReturnOnThrowActionEvent

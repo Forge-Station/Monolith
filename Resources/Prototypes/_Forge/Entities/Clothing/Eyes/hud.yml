@@ -6,9 +6,9 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Eyes/Hud/tti.rsi
+    sprite: Forge/Clothing/Eyes/Hud/tti.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Eyes/Hud/tti.rsi
+    sprite: Forge/Clothing/Eyes/Hud/tti.rsi
   - type: SolutionScanner
   - type: ShowHealthBars
     damageContainers:

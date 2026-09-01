@@ -7,9 +7,9 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Hands/Gloves/nexus_gloves.rsi
+    sprite: Forge/Clothing/Hands/Gloves/nexus_gloves.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Hands/Gloves/nexus_gloves.rsi
+    sprite: Forge/Clothing/Hands/Gloves/nexus_gloves.rsi
   - type: Insulated
 
 - type: entity
@@ -20,9 +20,9 @@
   description: A pair of gloves made from the finest reinforced materials.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Hands/Gloves/hand_techniclogistic.rsi
+    sprite: Forge/Clothing/Hands/Gloves/hand_techniclogistic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Hands/Gloves/hand_techniclogistic.rsi
+    sprite: Forge/Clothing/Hands/Gloves/hand_techniclogistic.rsi
   - type: Insulated
   - type: Fiber
     fiberColor: fibers-red
@@ -45,9 +45,9 @@
   description: High-quality nitrile insulated gloves. Expensive medical PPE.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Hands/Gloves/isolnitrile.rsi
+    sprite: Forge/Clothing/Hands/Gloves/isolnitrile.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Hands/Gloves/isolnitrile.rsi
+    sprite: Forge/Clothing/Hands/Gloves/isolnitrile.rsi
   - type: Fiber
     fiberMaterial: fibers-nitrile
   - type: FingerprintMask
@@ -61,9 +61,9 @@
   suffix: v6st
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Hands/Gloves/combatgloves.rsi
+    sprite: Forge/Clothing/Hands/Gloves/combatgloves.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Hands/Gloves/combatgloves.rsi
+    sprite: Forge/Clothing/Hands/Gloves/combatgloves.rsi
   - type: MeleeWeapon
     autoAttack: false
     attackRate: 1
@@ -83,9 +83,9 @@
   description: Пара перчаток, изготовленных из лучших армированных материалов. Защищает от воздействия электричества, а также частично кислоты и огня. Покажите этим НТшным свиньям на пальцах, кто здесь главный!
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Hands/Gloves/synd_combat.rsi
+    sprite: Forge/Clothing/Hands/Gloves/synd_combat.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Hands/Gloves/synd_combat.rsi
+    sprite: Forge/Clothing/Hands/Gloves/synd_combat.rsi
   - type: Insulated
   - type: Fiber
     fiberColor: fibers-red
@@ -108,7 +108,7 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Hands/Gloves/tti_gloves.rsi
+    sprite: Forge/Clothing/Hands/Gloves/tti_gloves.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Hands/Gloves/tti_gloves.rsi
+    sprite: Forge/Clothing/Hands/Gloves/tti_gloves.rsi
   - type: Insulated

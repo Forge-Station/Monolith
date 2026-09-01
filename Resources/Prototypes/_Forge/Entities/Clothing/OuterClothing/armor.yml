@@ -6,9 +6,9 @@
   suffix: Ренегаты
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Armor/renegates.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/renegates.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Armor/renegates.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/renegates.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -33,9 +33,9 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Armor/nexus_vest.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/nexus_vest.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Armor/nexus_vest.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/nexus_vest.rsi
 
 - type: entity
   parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase, ClothingArmorPlate, BaseFactionGearOtherFactionT0]
@@ -45,9 +45,9 @@
   description: TechnicLogistic Self-Defense Forces Bulletproof Vest.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Armor/vest_techniclogistic.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/vest_techniclogistic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Armor/vest_techniclogistic.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/vest_techniclogistic.rsi
     equippedState: equipped-OUTHERCLOTHING
 
 #region Other
@@ -58,9 +58,9 @@
   description: A flak trenchcoat produced by Arcadia Industries, enhanced with a bulletproof alloy for some extra protection.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Armor/web_vest_sheriff.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/web_vest_sheriff.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Armor/web_vest_sheriff.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/web_vest_sheriff.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -84,9 +84,9 @@
   description: Limited production body armor reinforced with plastitanium alloy for additional protection.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Armor/msf_vest.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/msf_vest.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Armor/msf_vest.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/msf_vest.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -114,9 +114,9 @@
   description: Стильный синтетический бронежилет. Имеет прочные баллистические пластины.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Armor/tact_contractor.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/tact_contractor.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Armor/tact_contractor.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/tact_contractor.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -138,9 +138,9 @@
   description: Стильный синтетический бронежилет. Сшит из термостойких волокон и дополнительными баллистическими пластинами для настоящих элитных агентов.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Armor/elite_tact_contractor.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/elite_tact_contractor.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Armor/elite_tact_contractor.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/elite_tact_contractor.rsi
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1
@@ -167,9 +167,9 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Armor/tti_west.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/tti_west.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Armor/tti_west.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/tti_west.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -194,9 +194,9 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Armor/commander_tti_vest.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/commander_tti_vest.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Armor/commander_tti_vest.rsi
+    sprite: Forge/Clothing/OuterClothing/Armor/commander_tti_vest.rsi
   - type: Armor
     modifiers:
       coefficients:

@@ -12,7 +12,7 @@
     - BountyContractsCartridge
     - AstroNavCartridge
   - type: Sprite
-    sprite: _Forge/Objects/Devices/pda.rsi
+    sprite: Forge/Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda"
@@ -27,7 +27,7 @@
       shader: "unshaded"
       visible: false
   - type: Icon
-    sprite: _Forge/Objects/Devices/pda.rsi
+    sprite: Forge/Objects/Devices/pda.rsi
     state: pda
 
 - type: entity
@@ -125,7 +125,7 @@
     - BountyContractsCartridge
     - AstroNavCartridge
   - type: Sprite
-    sprite: _Forge/Objects/Devices/pda.rsi
+    sprite: Forge/Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda"
@@ -140,7 +140,7 @@
       shader: "unshaded"
       visible: false
   - type: Icon
-    sprite: _Forge/Objects/Devices/pda.rsi
+    sprite: Forge/Objects/Devices/pda.rsi
     state: pda
 
 - type: entity
@@ -376,7 +376,7 @@
     - BountyContractsCartridge
     - AstroNavCartridge
   - type: Sprite
-    sprite: _Forge/Objects/Devices/pda.rsi
+    sprite: Forge/Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda-tti"
@@ -389,7 +389,7 @@
       shader: "unshaded"
       visible: false
   - type: Icon
-    sprite: _Forge/Objects/Devices/pda.rsi
+    sprite: Forge/Objects/Devices/pda.rsi
     state: pda-tti
 
 - type: entity

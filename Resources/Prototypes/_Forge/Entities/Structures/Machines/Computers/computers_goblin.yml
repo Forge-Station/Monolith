@@ -1,0 +1,17 @@
+- type: entity
+  id: ComputerShuttleGoblin
+  parent: ComputerShuttle
+  name: computer-shuttle-goblin
+  description: computer-shuttle-goblin-desc
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: comptuter_goblin
+    - map: ["computerLayerScreen"]
+      state: goblin_deathscreen
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_goblin_panel_open
+  - type: Computer
+    board: GoblinComputerShuttleCircuitboard

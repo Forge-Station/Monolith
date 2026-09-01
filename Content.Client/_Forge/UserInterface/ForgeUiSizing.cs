@@ -1,6 +1,6 @@
 // Forge-Change-full
 using System.Text.RegularExpressions;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge.CCVar;
 using Robust.Shared.Configuration;
 
 namespace Content.Client._Forge.UserInterface;
@@ -91,10 +91,10 @@ public static class ForgeUiSizing
             return;
 
         _cfg = IoCManager.Resolve<IConfigurationManager>();
-        _cfg.OnValueChanged(ForgeCCVars.HudScale, OnHudScaleChanged, true);
-        _cfg.OnValueChanged(ForgeCCVars.StorageScale, OnStorageScaleChanged, true);
-        _cfg.OnValueChanged(ForgeCCVars.ChatFontSize, OnChatFontSizeChanged, true);
-        _cfg.OnValueChanged(ForgeCCVars.ExamineFontSize, OnExamineFontSizeChanged, true);
+        _cfg.OnValueChanged(ForgeCVars.HudScale, OnHudScaleChanged, true);
+        _cfg.OnValueChanged(ForgeCVars.StorageScale, OnStorageScaleChanged, true);
+        _cfg.OnValueChanged(ForgeCVars.ChatFontSize, OnChatFontSizeChanged, true);
+        _cfg.OnValueChanged(ForgeCVars.ExamineFontSize, OnExamineFontSizeChanged, true);
     }
 
     /// <summary>

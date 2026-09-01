@@ -226,7 +226,6 @@
     # Mono end
     - UllmanForgeRecipes # Forge-change
     - MonoViperGroupDynamic #Forge-Change
-    - ForgeMercenaryVouchers # Forge-Change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - NFMercenaryTechfabDeprecatedEmag

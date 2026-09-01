@@ -7,7 +7,7 @@
   description: Is it legal?
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/Cloaks/Renegade/renegadeponcho.rsi
+    sprite: Forge/Clothing/Neck/Cloaks/Renegade/renegadeponcho.rsi
 
 #region Other
 - type: entity
@@ -17,9 +17,9 @@
   description: paramedic poncho desc
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/Poncho/paramedic.rsi
+    sprite: Forge/Clothing/Neck/Poncho/paramedic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Neck/Poncho/paramedic.rsi
+    sprite: Forge/Clothing/Neck/Poncho/paramedic.rsi
   - type: PirateBountyItem
     id: PonchosAll
 
@@ -30,9 +30,9 @@
   description: Ты заново рождаешься в мире моды.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/Misc/poncho_cowboy_brown.rsi
+    sprite: Forge/Clothing/Neck/Misc/poncho_cowboy_brown.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Neck/Misc/poncho_cowboy_brown.rsi
+    sprite: Forge/Clothing/Neck/Misc/poncho_cowboy_brown.rsi
   - type: Construction
     graph: ClothingNeckPonchoWebGraph
     node: ClothingNeckPonchoWebNode
@@ -50,9 +50,9 @@
   description: Ты заново рождаешься в мире моды.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/Misc/poncho_cowboy_grey.rsi
+    sprite: Forge/Clothing/Neck/Misc/poncho_cowboy_grey.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Neck/Misc/poncho_cowboy_grey.rsi
+    sprite: Forge/Clothing/Neck/Misc/poncho_cowboy_grey.rsi
   - type: Construction
     graph: ClothingNeckPonchoWebGraph
     node: ClothingNeckPonchoWebNode
@@ -70,9 +70,9 @@
   description: Ты заново рождаешься в мире моды.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/Misc/poncho_cowboy_red.rsi
+    sprite: Forge/Clothing/Neck/Misc/poncho_cowboy_red.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Neck/Misc/poncho_cowboy_red.rsi
+    sprite: Forge/Clothing/Neck/Misc/poncho_cowboy_red.rsi
   - type: Construction
     graph: ClothingNeckPonchoWebGraph
     node: ClothingNeckPonchoWebNode
@@ -90,9 +90,9 @@
   description: Ты заново рождаешься в мире моды.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/Misc/poncho_web_white.rsi
+    sprite: Forge/Clothing/Neck/Misc/poncho_web_white.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Neck/Misc/poncho_web_white.rsi
+    sprite: Forge/Clothing/Neck/Misc/poncho_web_white.rsi
   - type: Construction
     graph: ClothingNeckPonchoWebGraph
     node: ClothingNeckPonchoWebNode
@@ -110,9 +110,9 @@
 #   description: Ты заново рождаешься в мире моды.
 #   components:
 #   - type: Sprite
-#     sprite: _Forge/Clothing/Neck/Misc/poncho_web_dark.rsi
+#     sprite: Forge/Clothing/Neck/Misc/poncho_web_dark.rsi
 #   - type: Clothing
-#     sprite: _Forge/Clothing/Neck/Misc/poncho_web_dark.rsi
+#     sprite: Forge/Clothing/Neck/Misc/poncho_web_dark.rsi
 #   - type: Construction
 #     graph: ClothingNeckPonchoWebGraph
 #     node: ClothingNeckPonchoWebNode

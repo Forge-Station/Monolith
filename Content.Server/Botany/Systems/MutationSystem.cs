@@ -52,9 +52,6 @@ public sealed partial class MutationSystem : EntitySystem
             return;
         }
 
-        if (seed.GeneLocked)
-            return;
-
         CheckRandomMutations(plantHolder, ref seed, severity);
     }
 
@@ -83,19 +80,10 @@ public sealed partial class MutationSystem : EntitySystem
         CrossFloat(ref result.Production, a.Production);
         CrossFloat(ref result.Potency, a.Potency);
 
-        if (a.HarvestRepeat > result.HarvestRepeat)
-            result.HarvestRepeat = a.HarvestRepeat;
-
         CrossBool(ref result.Seedless, a.Seedless);
         CrossBool(ref result.Ligneous, a.Ligneous);
         CrossBool(ref result.TurnIntoKudzu, a.TurnIntoKudzu);
         CrossBool(ref result.CanScream, a.CanScream);
-        CrossBool(ref result.Radioactive, a.Radioactive);
-        CrossBool(ref result.CarnivorousGrab, a.CarnivorousGrab);
-        CrossBool(ref result.CarnivorousPestEater, a.CarnivorousPestEater);
-        CrossBool(ref result.GeneLocked, a.GeneLocked);
-        CrossFloat(ref result.RadiationIntensity, a.RadiationIntensity);
-        CrossFloat(ref result.GrabRange, a.GrabRange);
 
         CrossGasses(ref result.ExudeGasses, a.ExudeGasses);
         CrossGasses(ref result.ConsumeGasses, a.ConsumeGasses);
@@ -119,87 +107,6 @@ public sealed partial class MutationSystem : EntitySystem
         }
 
         return result;
-    }
-
-    /// <summary>
-    /// Copy a seed for pollen / planting without sharing the live tray reference.
-    /// </summary>
-    public SeedData Duplicate(SeedData seed)
-    {
-        return seed.Clone();
-    }
-
-    /// <summary>
-    /// Copy mutation traits from pollen onto a host plant, keeping the host species.
-    /// Does not apply the hybrid seedless tax.
-    /// </summary>
-    public SeedData Graft(SeedData donor, SeedData host)
-    {
-        var result = host.Clone();
-
-        result.Ligneous |= donor.Ligneous;
-        result.CanScream |= donor.CanScream;
-        result.TurnIntoKudzu |= donor.TurnIntoKudzu;
-        result.Radioactive |= donor.Radioactive;
-        result.CarnivorousGrab |= donor.CarnivorousGrab;
-        result.CarnivorousPestEater |= donor.CarnivorousPestEater;
-        result.GeneLocked |= donor.GeneLocked;
-        if (donor.Radioactive)
-            result.RadiationIntensity = MathF.Max(result.RadiationIntensity, donor.RadiationIntensity);
-        if (donor.CarnivorousGrab)
-            result.GrabRange = MathF.Max(result.GrabRange, donor.GrabRange);
-        if (donor.HarvestRepeat > result.HarvestRepeat)
-            result.HarvestRepeat = donor.HarvestRepeat;
-
-        MergeChemicals(result.Chemicals, donor.Chemicals);
-        MergeGasses(result.ConsumeGasses, donor.ConsumeGasses);
-        MergeGasses(result.ExudeGasses, donor.ExudeGasses);
-
-        result.Mutations = result.Mutations.Union(donor.Mutations).DistinctBy(m => m.Name).ToList();
-
-        CrossFloat(ref result.Potency, donor.Potency);
-        CrossInt(ref result.Yield, donor.Yield);
-        CrossFloat(ref result.Endurance, donor.Endurance);
-        CrossFloat(ref result.Lifespan, donor.Lifespan);
-        CrossFloat(ref result.IdealHeat, donor.IdealHeat);
-        CrossFloat(ref result.IdealLight, donor.IdealLight);
-        CrossFloat(ref result.WaterConsumption, donor.WaterConsumption);
-        CrossFloat(ref result.NutrientConsumption, donor.NutrientConsumption);
-
-        return result;
-    }
-
-    private static void MergeChemicals(Dictionary<string, SeedChemQuantity> host, Dictionary<string, SeedChemQuantity> donor)
-    {
-        foreach (var (id, chem) in donor)
-        {
-            if (host.TryGetValue(id, out var existing))
-            {
-                if (chem.Max > existing.Max)
-                {
-                    var copy = chem;
-                    copy.Inherent = false;
-                    host[id] = copy;
-                }
-
-                continue;
-            }
-
-            var added = chem;
-            added.Inherent = false;
-            host[id] = added;
-        }
-    }
-
-    private static void MergeGasses(Dictionary<Gas, float> host, Dictionary<Gas, float> donor)
-    {
-        foreach (var (gas, amount) in donor)
-        {
-            if (host.TryGetValue(gas, out var existing))
-                host[gas] = MathF.Max(existing, amount);
-            else
-                host[gas] = amount;
-        }
     }
 
     private void CrossChemicals(ref Dictionary<string, SeedChemQuantity> val, Dictionary<string, SeedChemQuantity> other)

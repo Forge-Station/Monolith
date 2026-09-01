@@ -39,7 +39,7 @@
           mapNameTemplate: 'Ренегатский Аванпост'
         - type: ExtraStationInformation
           icon:
-            sprite: _Forge/Structures/Decoration/banner.rsi
+            sprite: Forge/Structures/Decoration/banner.rsi
             state: banner_renegate
           stationSubtext: 'frontier-lobby-renegate-subtext'
           stationDescription: 'frontier-lobby-renegate-description'

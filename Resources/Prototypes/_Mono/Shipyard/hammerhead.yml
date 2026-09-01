@@ -13,7 +13,6 @@
   category: Large
   group: Shipyard
   access: Mercenary
-  purchasable: false # Forge-change
   shuttlePath: /SharedMaps/_Mono/Shuttles/hammerhead.yml
   guidebookPage: Null
   class:

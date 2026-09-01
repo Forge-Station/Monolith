@@ -5,7 +5,7 @@
   id: HMEAdvancedMedkitCombat
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Specific/Medical/harmonymedkit.rsi
+    sprite: Forge/Objects/Specific/Medical/harmonymedkit.rsi
     state: blackkit
   - type: Storage
     maxItemSize: Small
@@ -28,7 +28,7 @@
     size: Normal
     shape:
     - 0,0,2,1
-    sprite: _Forge/Objects/Specific/Medical/harmonymedkit.rsi
+    sprite: Forge/Objects/Specific/Medical/harmonymedkit.rsi
     heldPrefix: blackkit
   - type: PhysicalComposition
     materialComposition:

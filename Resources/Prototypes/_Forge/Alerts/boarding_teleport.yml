@@ -1,7 +1,7 @@
 - type: alert
   id: BoardingTeleportReturn
   icons:
-  - sprite: _Forge/Effects/boarding_teleport_warmup.rsi
+  - sprite: Forge/Effects/boarding_teleport_warmup.rsi
     state: warmup
   name: alerts-boarding-teleport-return-name
   description: alerts-boarding-teleport-return-desc

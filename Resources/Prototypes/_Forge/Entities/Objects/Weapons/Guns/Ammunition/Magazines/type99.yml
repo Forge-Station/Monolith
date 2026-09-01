@@ -21,7 +21,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/type99mag.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/type99mag.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -113,7 +113,7 @@
   - type: BallisticAmmoProvider
     proto: Cartridge762x51mmRubber
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/type99mag.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/type99mag.rsi
     layers:
     - state: rubber
       map: ["enum.GunVisualLayers.Base"]

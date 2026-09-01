@@ -3,7 +3,7 @@
   name: research-discipline-empire
   color: "#ab7a52"
   icon:
-    sprite: _Forge/Misc/empire_research.rsi
+    sprite: Forge/Misc/empire_research.rsi
     state: weaponry
   tierPrerequisites:
     1: 0

@@ -106,8 +106,6 @@
         type: InstrumentBoundUserInterface
       enum.HealthAnalyzerUiKey.Key:
         type: HealthAnalyzerBoundUserInterface
-      enum.PlantAnalyzerUiKey.Key:
-        type: PlantAnalyzerBoundUserInterface
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -316,15 +314,6 @@
     accentVColor: "#00cc35"
   - type: Icon
     state: pda-hydro
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NewsReaderCartridge
-      - BountyContractsCartridge
-      - AstroNavCartridge
-      - AgroScanCartridge
 
 - type: entity
   parent: BasePDA
@@ -1525,7 +1514,5 @@
         type: InstrumentBoundUserInterface
       enum.HealthAnalyzerUiKey.Key:
         type: HealthAnalyzerBoundUserInterface
-      enum.PlantAnalyzerUiKey.Key:
-        type: PlantAnalyzerBoundUserInterface
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface

@@ -81,7 +81,7 @@ public partial struct SeedChemQuantity
 
 // TODO reduce the number of friends to a reasonable level. Requires ECS-ing things like plant holder component.
 [Virtual, DataDefinition]
-[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffect), typeof(MutationSystem), typeof(Content.Server._Forge.Botany.PlantGrab.PlantGrabSystem), typeof(Content.Server.EntityEffects.Effects.PlantGasMutationHelpers), typeof(Content.Server._Forge.Botany.HydroponicsConsole.HydroponicsConsoleSystem))]
+[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffect), typeof(MutationSystem))]
 public partial class SeedData
 {
     #region Tracking
@@ -253,37 +253,6 @@ public partial class SeedData
     [DataField] public bool TurnIntoKudzu;
     [DataField] public string? SplatPrototype { get; set; }
 
-    /// <summary>
-    ///     If true, the growing plant emits ionizing radiation.
-    /// </summary>
-    [DataField] public bool Radioactive;
-
-    /// <summary>
-    ///     Radiation intensity applied to the hydroponics tray while this plant is alive.
-    /// </summary>
-    [DataField] public float RadiationIntensity = 1.25f;
-
-    /// <summary>
-    ///     If true, the mature plant periodically seizes nearby mobs and damages them.
-    /// </summary>
-    [DataField] public bool CarnivorousGrab;
-
-    /// <summary>
-    ///     If true, the plant eats weeds and pests instead of damaging itself on them.
-    ///     Separate from <see cref="CarnivorousGrab"/> — grab vines still grab people.
-    /// </summary>
-    [DataField] public bool CarnivorousPestEater;
-
-    /// <summary>
-    ///     If true, mutagen and mutation-level reagents no longer scramble this line.
-    /// </summary>
-    [DataField] public bool GeneLocked;
-
-    /// <summary>
-    ///     Range in tiles used when checking for grab victims.
-    /// </summary>
-    [DataField] public float GrabRange = 1.5f;
-
     #endregion
 
     /// <summary>
@@ -349,12 +318,6 @@ public partial class SeedData
             CanScream = CanScream,
             TurnIntoKudzu = TurnIntoKudzu,
             SplatPrototype = SplatPrototype,
-            Radioactive = Radioactive,
-            RadiationIntensity = RadiationIntensity,
-            CarnivorousGrab = CarnivorousGrab,
-            CarnivorousPestEater = CarnivorousPestEater,
-            GeneLocked = GeneLocked,
-            GrabRange = GrabRange,
             Mutations = new List<RandomPlantMutation>(),
 
             // Newly cloned seed is unique. No need to unnecessarily clone if repeatedly modified.
@@ -421,12 +384,6 @@ public partial class SeedData
             PlantIconState = other.PlantIconState,
             CanScream = CanScream,
             TurnIntoKudzu = TurnIntoKudzu,
-            Radioactive = Radioactive,
-            RadiationIntensity = RadiationIntensity,
-            CarnivorousGrab = CarnivorousGrab,
-            CarnivorousPestEater = CarnivorousPestEater,
-            GeneLocked = GeneLocked,
-            GrabRange = GrabRange,
             SplatPrototype = other.SplatPrototype,
 
             // Newly cloned seed is unique. No need to unnecessarily clone if repeatedly modified.

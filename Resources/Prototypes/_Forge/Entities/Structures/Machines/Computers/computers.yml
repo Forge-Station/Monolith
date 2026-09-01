@@ -124,7 +124,7 @@
   suffix: Ренегаты
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Machines/computers.rsi
+    sprite: Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
       state: computer_renegate
@@ -181,7 +181,7 @@
   suffix: Ренегаты
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Machines/computers.rsi
+    sprite: Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
       state: computer_renegate
@@ -228,7 +228,7 @@
   suffix: Ренегаты
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Machines/computers.rsi
+    sprite: Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
       state: computer_renegate
@@ -245,7 +245,6 @@
     energy: 1.6
     color: "#c94242"
 
-#region Comms
 - type: entity
   parent: ComputerComms
   id: ComputerCommsTSF
@@ -314,7 +313,7 @@
   - type: Sprite
     layers:
     - map: ["computerLayerBody"]
-      sprite: _Forge/Structures/Machines/computers.rsi
+      sprite: Forge/Structures/Machines/computers.rsi
       state: computer_emp
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
@@ -459,7 +458,7 @@
     sprite: Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
-      sprite: _Forge/Structures/Machines/computers.rsi
+      sprite: Forge/Structures/Machines/computers.rsi
       state: computer_emp
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
@@ -477,210 +476,3 @@
     - EmpireInqusitor
     - EmpireCommander
     - EmpireDiplomacy
-
-#region Hydroponic
-- type: entity
-  parent: BaseComputerAiAccess
-  id: ComputerHydroponics
-  name: hydroponics tray console
-  description: Lists every hydroponics tray linked with a network configurator and reports plant health, atmosphere needs, and mutations.
-  components:
-  - type: Sprite
-    layers:
-    - map: ["computerLayerBody"]
-      state: computer
-    - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
-    - map: ["computerLayerScreen"]
-      state: generic
-    - map: ["computerLayerKeys"]
-      state: generic_keys
-    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
-      state: generic_panel_open
-  - type: HydroponicsConsole
-  - type: DeviceNetwork
-    deviceNetId: Wired
-    receiveFrequencyId: BasicDevice
-    prefix: device-address-prefix-hydroponics-console
-  - type: WiredNetworkConnection
-  - type: DeviceList
-    deviceLimit: 32
-  - type: ActivatableUI
-    key: enum.HydroponicsConsoleUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.HydroponicsConsoleUiKey.Key:
-        type: HydroponicsConsoleBoundUserInterface
-      enum.WiresUiKey.Key:
-        type: WiresBoundUserInterface
-  - type: Computer
-    board: HydroponicsConsoleCircuitboard
-  - type: PointLight
-    radius: 1.5
-    energy: 1.6
-    color: "#67d64b"
-  - type: GuideHelp
-    guides:
-    - Botany
-  - type: ShipRepairable
-    repairTime: 4
-    repairCost: 8
-
-- type: entity
-  parent: BaseComputerCircuitboard
-  id: HydroponicsConsoleCircuitboard
-  name: hydroponics tray console board
-  description: A computer printed circuit board for a hydroponics tray console.
-  components:
-  - type: Sprite
-    state: cpu_service
-  - type: ComputerBoard
-    prototype: ComputerHydroponics
-
-#region Other
-- type: entity
-  parent: [BaseStructureDisableToolUse, BaseComputerAiAccess]
-  id: RemnantMultitoolConsole
-  name: remnant signal console
-  description: A precursor console with renameable signal buttons. Probe it with a multitool to read stored text. Button labels and Message are set in mapping.
-  suffix: Forge, Remnant
-  components:
-  - type: Sprite
-    layers:
-    - map: ["computerLayerBody"]
-      state: computer
-    - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
-    - map: ["computerLayerScreen"]
-      state: generic
-    - map: ["computerLayerKeys"]
-      state: generic_keys
-    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
-      state: generic_panel_open
-  - type: ApcPowerReceiver
-    needsPower: false
-  - type: RemnantConsole
-    message: remnant-console-default-message
-    buttons:
-    - port: RemnantButton1
-      label: remnant-console-button-1
-    - port: RemnantButton2
-      label: remnant-console-button-2
-    - port: RemnantButton3
-      label: remnant-console-button-3
-    - port: RemnantButton4
-      label: remnant-console-button-4
-  - type: ActivatableUI
-    key: enum.RemnantConsoleUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.RemnantConsoleUiKey.Key:
-        type: RemnantConsoleBoundUserInterface
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-  - type: WirelessNetworkConnection
-    range: 200
-  - type: DeviceLinkSource
-    ports:
-    - RemnantButton1
-    - RemnantButton2
-    - RemnantButton3
-    - RemnantButton4
-
-- type: entity
-  id: ComputerShuttleGoblin
-  parent: ComputerShuttle
-  name: computer-shuttle-goblin
-  description: computer-shuttle-goblin-desc
-  components:
-  - type: Sprite
-    sprite: _Forge/Structures/Machines/computers.rsi
-    layers:
-    - map: ["computerLayerBody"]
-      state: comptuter_goblin
-    - map: ["computerLayerScreen"]
-      state: goblin_deathscreen
-    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
-      state: generic_goblin_panel_open
-  - type: Computer
-    board: GoblinComputerShuttleCircuitboard
-
-- type: entity
-  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, BaseComputerAiAccess]
-  id: ComputerIFFCapture
-  name: POI capture console
-  suffix: Capture
-  description: A dedicated console used to start and manage POI capture operations.
-  components:
-  - type: PoiCaptureConsole
-  - type: ActivatableUI
-    key: enum.PoiCaptureConsoleUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.PoiCaptureConsoleUiKey.Key:
-        type: PoiCaptureConsoleBoundUserInterface
-      enum.WiresUiKey.Key:
-        type: WiresBoundUserInterface
-  - type: Computer
-    board: Null
-  - type: Anchorable
-    flags: Unanchorable
-  - type: Sprite
-    layers:
-    - map: ["computerLayerBody"]
-      state: computer
-    - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
-    - map: ["computerLayerScreen"]
-      sprite: Structures/Shuttles/iff.rsi
-      state: helm
-    - map: ["computerLayerKeys"]
-      state: syndie_key
-
-- type: entity
-  id: ComputerCryptoSell
-  parent: [BaseStructureDisableToolUse, BaseComputerAiAccess]
-  name: crypto exchange console
-  description: Accepts mined bitcoins and sells them at the current station exchange rate.
-  components:
-  - type: Sprite
-    layers:
-    - map: ["computerLayerBody"]
-      state: computer
-    - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
-    - map: ["computerLayerScreen"]
-      state: supply
-    - map: ["computerLayerKeys"]
-      state: tech_key
-    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
-      state: generic_panel_open
-  - type: CryptoSellConsole
-    bitcoinSlot:
-      name: crypto-console-slot
-      ejectSound: /Audio/Machines/id_swipe.ogg
-      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-      ejectOnBreak: true
-      swap: false
-      whitelist:
-        components:
-        - CryptoCoin
-  - type: ActivatableUI
-    key: enum.CryptoSellConsoleUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.CryptoSellConsoleUiKey.Key:
-        type: CryptoSellConsoleBoundUserInterface
-      enum.WiresUiKey.Key:
-        type: WiresBoundUserInterface
-  - type: Computer
-    board: CargoSaleComputerCircuitboard
-  - type: PointLight
-    radius: 1.5
-    energy: 1.6
-    color: "#b89f25"
-  - type: ItemSlots
-  - type: ContainerContainer
-    containers:
-      board: !type:Container
-      CryptoSellConsole-bitcoin: !type:ContainerSlot

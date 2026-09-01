@@ -7,9 +7,9 @@
   description: The combat helmet is commonly used by renegates, is strong, light and smells like gunpowder and the urban sprawl.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Helmets/renegates.rsi
+    sprite: Forge/Clothing/Head/Helmets/renegates.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Helmets/renegates.rsi
+    sprite: Forge/Clothing/Head/Helmets/renegates.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -28,9 +28,9 @@
   description: The combat helmet is commonly used by renegates, is strong, light and smells like gunpowder and the urban sprawl.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Helmets/nexus_helmet.rsi
+    sprite: Forge/Clothing/Head/Helmets/nexus_helmet.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Helmets/nexus_helmet.rsi
+    sprite: Forge/Clothing/Head/Helmets/nexus_helmet.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -48,9 +48,9 @@
   description: A high-tech enclosed helmet, made in the color scheme of an active Trauma Team doctor. Provides excellent head protection and has a built-in respirator with air filtration.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Helmets/tti.rsi
+    sprite: Forge/Clothing/Head/Helmets/tti.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Helmets/tti.rsi
+    sprite: Forge/Clothing/Head/Helmets/tti.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -69,9 +69,9 @@
   description: A high-tech enclosed helmet, made in the color scheme of an active Trauma Team doctor. Provides excellent head protection and has a built-in respirator with air filtration.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_shooter.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_shooter.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_shooter.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_shooter.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -90,9 +90,9 @@
   description: A high-tech enclosed helmet, made in the color scheme of an active Trauma Team doctor. Provides excellent head protection and has a built-in respirator with air filtration.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
 
 - type: entity
   parent: ClothingHeadHelmetMercenary
@@ -102,9 +102,9 @@
   description: TechnicLogistic Self-Defense Forces helmet.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Helmets/helmet_techniclogistic.rsi
+    sprite: Forge/Clothing/Head/Helmets/helmet_techniclogistic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Helmets/helmet_techniclogistic.rsi
+    sprite: Forge/Clothing/Head/Helmets/helmet_techniclogistic.rsi
 
 #region Other
 - type: entity
@@ -114,9 +114,9 @@
   description: An armored hard hat. Provides the best of both worlds in both protection & utility - perfect for the engineer on the frontlines.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Helmets/armored.rsi
+    sprite: Forge/Clothing/Head/Helmets/armored.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Helmets/armored.rsi
+    sprite: Forge/Clothing/Head/Helmets/armored.rsi
   - type: Armor
     modifiers:
       coefficients:

@@ -65973,6 +65973,23 @@ entities:
     - type: Transform
       pos: -43.5,10.5
       parent: 2
+- proto: MicrophoneRadio
+  entities:
+  - uid: 12615
+    components:
+    - type: Transform
+      pos: 38.608116,31.599077
+      parent: 2
+  - uid: 12616
+    components:
+    - type: Transform
+      pos: 38.39971,31.725105
+      parent: 2
+  - uid: 12655
+    components:
+    - type: Transform
+      pos: 38.75498,31.406599
+      parent: 2
 - proto: MiniStationAnchor
   entities:
   - uid: 8372
@@ -66691,7 +66708,7 @@ entities:
       parent: 2
     - type: Paper
       content: >2-
-
+                                                    
 
 
                                                        Жалоба
@@ -66713,7 +66730,7 @@ entities:
       content: >-
         [head=3]Держите нейтралитет между всеми силами и формированиями в секторе.
 
-        Сохраняйте лицо корпорации перед гражданскими и храните аванпост в целостности.
+        Сохраняйте лицо корпорации перед гражданскими и храните аванпост в целостности. 
 
         Мы надеемся на вас, Представитель.
 - proto: PaperBin10

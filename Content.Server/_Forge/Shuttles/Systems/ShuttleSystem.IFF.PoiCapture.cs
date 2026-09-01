@@ -1,5 +1,5 @@
 using Content.Server.Shuttles.Components;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge.CCVar;
 using Content.Shared._Forge.Shuttles.Components;
 using Content.Shared._Mono.Company;
 using Content.Shared._NF.Shipyard.Components;
@@ -36,14 +36,14 @@ public sealed partial class ShuttleSystem
 
     private float GetForgePoiCaptureZoneRadiusMax()
     {
-        return MathF.Max(1f, _cfg.GetCVar(ForgeCCVars.PoiCaptureZoneRadiusMaxTiles));
+        return MathF.Max(1f, _cfg.GetCVar(ForgeCVars.PoiCaptureZoneRadiusMaxTiles));
     }
 
     private float ResolveForgePoiCaptureZoneRadius(float yamlRadius)
     {
         var max = GetForgePoiCaptureZoneRadiusMax();
         if (yamlRadius <= 0f)
-            return MathF.Min(MathF.Max(1f, _cfg.GetCVar(ForgeCCVars.PoiCaptureZoneRadiusTiles)), max);
+            return MathF.Min(MathF.Max(1f, _cfg.GetCVar(ForgeCVars.PoiCaptureZoneRadiusTiles)), max);
 
         return Math.Clamp(yamlRadius, 1f, max);
     }
@@ -195,13 +195,13 @@ public sealed partial class ShuttleSystem
 
     private TimeSpan GetForgePoiCaptureDuration()
     {
-        var minutes = _cfg.GetCVar(ForgeCCVars.PoiCaptureDurationMinutes);
+        var minutes = _cfg.GetCVar(ForgeCVars.PoiCaptureDurationMinutes);
         return TimeSpan.FromMinutes(Math.Max(0.1f, minutes));
     }
 
     private TimeSpan GetForgePoiRecaptureCooldown()
     {
-        var hours = _cfg.GetCVar(ForgeCCVars.PoiCaptureRecaptureCooldownHours);
+        var hours = _cfg.GetCVar(ForgeCVars.PoiCaptureRecaptureCooldownHours);
         return TimeSpan.FromHours(Math.Max(0f, hours));
     }
 

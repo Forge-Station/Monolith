@@ -15,15 +15,10 @@
     Syringe: 5
     RobustHarvestChemistryBottle: 8
     EZNutrientChemistryBottle: 3
-    GeneStabilizerChemistryBottle: 4
     Bucket: 3
 #    DiseaseSwab: 20 # Mono - carpal tunnel go away
     BoxMouthSwab: 1 # Mono - much less painful to vend once
     BoxAgrichem: 1
-    PlantAnalyzer: 2
-    ClothingEyesGlassesBotany: 2
-    AgroScanCartridge: 2
-    BotanyCultivarDisk: 4
     #TO DO:
     #plant analyzer
   contrabandInventory:

@@ -47,7 +47,6 @@
   - MercenaryClothingEyesBallisticGlassesRed
   - MercenaryClothingEyesBallisticGlassesGreen
   - MercenaryClothingEyesBallisticGlassesOrange
-  - MercenaryClothingEyesTransparentBlindfold # Forge-Change
 
 # - type: loadoutGroup # Forge-Change-Del
 #   id: MonoMercenaryHead # ONLY TO BE USED AS A SUBGROUP FOR _NF MERCENARY GROUPS

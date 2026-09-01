@@ -7,7 +7,7 @@
   components:
   - type: Sharp
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Melee/prazat_chainsword_icon.rsi
+    sprite: Forge/Objects/Weapons/Melee/prazat_chainsword_icon.rsi
     layers:
     - state: icon
     - state: icon_chainsword
@@ -28,7 +28,7 @@
       path: /Audio/Weapons/smash.ogg
     armorPenetration: 0.3
   - type: Item
-    sprite: _Forge/Objects/Weapons/Melee/prazat_chainsword.rsi
+    sprite: Forge/Objects/Weapons/Melee/prazat_chainsword.rsi
     size: Large
   - type: DisarmMalus
     malus: 0.7
@@ -123,7 +123,7 @@
   components:
   - type: Sharp
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Melee/prazat_chainsword_icon.rsi
+    sprite: Forge/Objects/Weapons/Melee/prazat_chainsword_icon.rsi
     layers:
     - state: icon
     - state: icon_chainsword
@@ -144,7 +144,7 @@
       path: /Audio/Weapons/smash.ogg
     armorPenetration: 0.3
   - type: Item
-    sprite: _Forge/Objects/Weapons/Melee/prazat_chainsword.rsi
+    sprite: Forge/Objects/Weapons/Melee/prazat_chainsword.rsi
     size: Large
   - type: DisarmMalus
     malus: 0.7

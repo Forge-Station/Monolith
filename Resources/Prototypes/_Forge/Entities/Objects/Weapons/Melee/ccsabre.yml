@@ -5,7 +5,7 @@
   description: A ceremonial weapon belonging to the captain of the station.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Melee/sheriff_sabre.rsi
+    sprite: Forge/Objects/Weapons/Melee/sheriff_sabre.rsi
   - type: MeleeWeapon
     attackRate: 1.5
     angle: 0
@@ -21,7 +21,7 @@
   - type: Item
     storedSprite:
       state: storage
-      sprite: _Forge/Objects/Weapons/Melee/sheriff_sabre_storage_64x.rsi #Done in 64x64 because it looks way too puny in 32x32
+      sprite: Forge/Objects/Weapons/Melee/sheriff_sabre_storage_64x.rsi #Done in 64x64 because it looks way too puny in 32x32
     shape:
     - 0,0,0,3
   - type: Tag
@@ -44,7 +44,7 @@
   description: A ceremonial weapon belonging to the captain of the station.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Melee/officer_sabre.rsi
+    sprite: Forge/Objects/Weapons/Melee/officer_sabre.rsi
   - type: MeleeWeapon
     attackRate: 1.5
     angle: 0
@@ -60,7 +60,7 @@
   - type: Item
     storedSprite:
       state: storage
-      sprite: _Forge/Objects/Weapons/Melee/officer_sabre_storage_64x.rsi #Done in 64x64 because it looks way too puny in 32x32
+      sprite: Forge/Objects/Weapons/Melee/officer_sabre_storage_64x.rsi #Done in 64x64 because it looks way too puny in 32x32
     shape:
     - 0,0,0,3
   - type: Tag

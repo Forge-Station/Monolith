@@ -1,0 +1,66 @@
+- type: entity
+  parent: Paper
+  id: PaperRemnant
+  name: remnant parchment
+  description: Brittle precursor paper. The script is unreadable unless you know the language.
+  suffix: Forge, Remnant, Draconic, Blank
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: paper
+      color: "#cbb27a"
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: PaperVisuals
+    backgroundImagePath: "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png"
+    contentImagePath: "/Textures/Interface/Paper/paper_content_lined.svg.96dpi.png"
+    backgroundModulate: "#cbb27a"
+    contentImageModulate: "#cbb27a"
+  - type: PaperLanguage
+    language: Draconic
+
+- type: entity
+  parent: PaperRemnant
+  id: PaperRemnantWritten
+  suffix: Forge, Remnant, Draconic, Written
+  components:
+  - type: Paper
+    content: remnant-inscription-default
+  - type: Sprite
+    layers:
+    - state: paper
+      color: "#cbb27a"
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+
+- type: entity
+  parent: PaperRemnantWritten
+  id: PaperRemnantWarning
+  suffix: Forge, Remnant, Draconic, Warning
+  components:
+  - type: Paper
+    content: remnant-inscription-warning
+
+- type: entity
+  parent: PaperRemnantWritten
+  id: PaperRemnantSecure
+  suffix: Forge, Remnant, Draconic, Secure
+  components:
+  - type: Paper
+    content: remnant-inscription-secure
+
+- type: entity
+  parent: PaperRemnantWritten
+  id: PaperRemnantVault
+  suffix: Forge, Remnant, Draconic, Vault
+  components:
+  - type: Paper
+    content: remnant-inscription-vault

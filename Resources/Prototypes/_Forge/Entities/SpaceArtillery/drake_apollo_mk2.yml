@@ -1,0 +1,102 @@
+# Drake Industries Apollo MK2 — slow heavy hitscan mining laser.
+
+- type: entity
+  parent: BasicHitscan
+  id: DrakeApolloMk2Laser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: muzzle_beam_heavy2
+    travelFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: beam_heavy2
+    impactFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: impact_beam_heavy2
+  - type: HitscanRadarSignature
+    radarColor: "#e67a22"
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 150
+        Structural: 100
+  - type: HitscanBasicRaycast
+    maxDistance: 1200
+  - type: MiningGatheringSoft
+  - type: MiningGatheringHard
+  - type: DrakeHitscanGathering
+    collectToGun: true
+    teleportOffset: 0, 0
+
+- type: entity
+  id: WeaponTurretDrakeApolloMk2
+  name: D-20 Apollo MK2 mining laser cannon
+  suffix: Drake, НЕ МАППИТЬ
+  description: A Drake Industries rework of the Apollo mining laser. Slower, heavier beams shatter asteroid and supercompacted rock, teleporting mined ore to a point just below the turret.
+  parent: WeaponLaserTurretApollo
+  components:
+  - type: StaticPrice
+    price: 22000
+  - type: Sprite
+    sprite: Forge/Objects/ShuttleWeapons/drake_apollo_mk2.rsi
+    layers:
+    - state: space_artillery
+  - type: Battery
+    maxCharge: 90000
+    startingCharge: 90000
+  - type: BatterySelfRecharger
+    autoRechargeRate: 90000
+  - type: Gun
+    fireRate: 4
+  - type: ShipGunClass
+    shipClass: Superheavy
+  - type: HitscanBatteryAmmoProvider
+    proto: DrakeApolloMk2Laser
+    fireCost: 150
+  - type: Rotatable
+    rotateWhilePulling: false
+    rotateWhileAnchored: true
+    increment: 90
+
+- type: entity
+  id: WeaponTurretDrakeApolloMk2Portable
+  parent: WeaponLaserTurretApolloPortable
+  name: D-20 Apollo MK2 mining laser cannon
+  suffix: Drake, НЕ МАППИТЬ
+  description: A Drake Industries rework of the Apollo mining laser. Slower, heavier beams shatter asteroid and supercompacted rock, teleporting mined ore to a point just below the turret.
+  components:
+  - type: StaticPrice
+    price: 22000
+  - type: Sprite
+    sprite: Forge/Objects/ShuttleWeapons/drake_apollo_mk2.rsi
+    layers:
+    - state: space_artillery
+  - type: Battery
+    maxCharge: 90000
+    startingCharge: 90000
+  - type: BatterySelfRecharger
+    autoRechargeRate: 90000
+  - type: Gun
+    fireRate: 4
+  - type: ShipGunClass
+    shipClass: Superheavy
+  - type: HitscanBatteryAmmoProvider
+    proto: DrakeApolloMk2Laser
+    fireCost: 150
+
+- type: entity
+  parent: ShuttleGunKineticFlatpack
+  id: WeaponTurretDrakeApolloMk2Flatpack
+  name: Apollo MK2 mining laser flatpack
+  suffix: Drake, НЕ МАППИТЬ
+  description: A flatpack used for constructing a Drake Industries Apollo MK2 mining laser cannon.
+  components:
+  - type: Flatpack
+    entity: WeaponTurretDrakeApolloMk2
+  - type: StaticPrice
+    price: 250
+  - type: Sprite
+    layers:
+    - state: supply_gun

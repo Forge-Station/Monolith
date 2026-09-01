@@ -7,9 +7,9 @@
   suffix: UI
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_med_hardsuit.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/ui_med_hardsuit.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_med_hardsuit.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/ui_med_hardsuit.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.6
   - type: Armor
@@ -59,11 +59,11 @@
   description: Dark combat hardsuit U.I with reinforced armor plates. It seems this is a simple MK1 hardsuit with a heavy armor suit on top of it.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_light_juggernaut_outer.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/ui_light_juggernaut_outer.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_light_juggernaut_outer.rsi
+    sprite: Forge/Clothing/OuterClothing/Hardsuits/ui_light_juggernaut_outer.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000

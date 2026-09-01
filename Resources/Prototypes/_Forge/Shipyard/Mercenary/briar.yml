@@ -13,8 +13,6 @@
   category: Large
   group: Shipyard
   access: Mercenary
-  purchasable: false
-  limit: 2
   shuttlePath: /SharedMaps/_Forge/Shuttles/Mercenary/briar.yml
   guidebookPage: Null
   class:

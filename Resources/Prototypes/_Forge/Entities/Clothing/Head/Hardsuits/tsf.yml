@@ -7,9 +7,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_kalenval.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_kalenval.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_kalenval.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_kalenval.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
@@ -37,9 +37,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_low.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_low.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_low.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_low.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
@@ -67,9 +67,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
@@ -98,9 +98,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_high.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_high.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_high.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_high.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
@@ -132,9 +132,9 @@
     isEquipment: true
     toggleAction: PulseThermalVision
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_midas.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_midas.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_midas.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_midas.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.3
@@ -158,9 +158,9 @@
   description: Heavily armored hardsuit helmet for TSFMC raids.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_vprysk.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_vprysk.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_vprysk.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_vprysk.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.3
@@ -184,9 +184,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_stealth_mark1.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_stealth_mark1.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_stealth_mark1.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_stealth_mark1.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
@@ -242,9 +242,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
@@ -278,9 +278,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_medic.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_medic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_medic.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_medic.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
@@ -308,9 +308,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_porshen.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_porshen.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_porshen.rsi
+    sprite: Forge/Clothing/Head/Hardsuits/tsf_porshen.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08

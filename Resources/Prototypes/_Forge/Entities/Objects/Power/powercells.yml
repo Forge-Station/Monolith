@@ -6,7 +6,7 @@
   suffix: DCN
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Power/power_cells.rsi
+    sprite: Forge/Objects/Power/power_cells.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: powerDCN

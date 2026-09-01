@@ -6,7 +6,7 @@
   suffix: Welding Fuel, Alcohol, 5 kW
   components:
     - type: Sprite
-      sprite: _Forge/Structures/Power/generation.rsi
+      sprite: Forge/Structures/Power/generation.rsi
       layers:
         - state: clunker
           map: [ "enum.GeneratorVisualLayers.Body" ]

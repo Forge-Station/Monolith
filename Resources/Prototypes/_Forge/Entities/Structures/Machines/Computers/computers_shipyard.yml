@@ -1,34 +1,3 @@
-#region Shipyard Service
-- type: entity
-  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, BaseComputer]
-  id: ComputerShipyardService
-  name: drydock service console
-  description: Repairs, restocks super parts, and reinforces a shuttle currently docked at a drydock lock.
-  components:
-  - type: Sprite
-    sprite: _NF/Structures/Machines/computers.rsi
-    layers:
-    - map: ["computerLayerBody"]
-      state: computer
-    - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
-    - map: ["computerLayerScreen"]
-      state: shipyard
-    - map: ["computerLayerKeys"]
-      state: telesci_key
-  - type: ShipyardServiceConsole
-  - type: ActivatableUI
-    key: enum.ShipyardServiceUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.ShipyardServiceUiKey.Key:
-        type: ShipyardServiceBoundUserInterface
-      enum.WiresUiKey.Key:
-        type: WiresBoundUserInterface
-  - type: Computer
-    board: Null
-
-#region Shipyard
 - type: entity
   id: ComputerShipyardRenegate
   parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, ComputerShipyardBase]
@@ -37,7 +6,7 @@
   suffix: Ренегаты
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Machines/computers.rsi
+    sprite: Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
       state: computer_renegate
@@ -62,7 +31,7 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Machines/computers.rsi
+    sprite: Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
       state: computer_emp
@@ -91,7 +60,7 @@
     - HEVInertia
     - HEVMock
   - type: Sprite
-    sprite: _Forge/Structures/Machines/computers.rsi
+    sprite: Forge/Structures/Machines/computers.rsi
     layers:
     - map: ["computerLayerBody"]
       state: computer_emp

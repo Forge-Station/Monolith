@@ -5,10 +5,10 @@
   description: Стильные ножны, предназначенные для хранения офицерской сабли.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Belt/synd_sheath.rsi
+    sprite: Forge/Clothing/Belt/synd_sheath.rsi
     state: sheath
   - type: Clothing
-    sprite: _Forge/Clothing/Belt/synd_sheath.rsi
+    sprite: Forge/Clothing/Belt/synd_sheath.rsi
   - type: Item
     size: Ginormous
   - type: ItemSlots
@@ -47,7 +47,7 @@
   description: Пластитановая сабля настоящего офицера Горлекса. Острие сабли настолько острое, что способно прорезать даже самую прочную защиту.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Melee/syndicate_sabre.rsi
+    sprite: Forge/Objects/Weapons/Melee/syndicate_sabre.rsi
   - type: MeleeWeapon
     attackRate: 1.5
     angle: 0
@@ -63,7 +63,7 @@
   - type: Item
     storedSprite:
       state: storage
-      sprite: _Forge/Objects/Weapons/Melee/syndicate_sabre_storage_64x.rsi
+      sprite: Forge/Objects/Weapons/Melee/syndicate_sabre_storage_64x.rsi
     shape:
     - 0,0,0,3
   - type: Tag

@@ -10,7 +10,7 @@
     layers:
     - sprite: Objects/Misc/diskcases.rsi
       state: icon_base
-    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+    - sprite: Forge/Objects/Specific/Research/disciplinesdisk.rsi
       state: nt
   - type: StaticPrice
     price: 0

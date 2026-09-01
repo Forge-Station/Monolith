@@ -3,7 +3,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Stack;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Item;
 using Content.Shared.Movement.Pulling.Events;
@@ -68,7 +68,7 @@ public sealed class PoiTreasurySystem : EntitySystem
     private TimeSpan GetRewardInterval(PoiTreasuryComponent comp)
     {
         var minutes = comp.RewardIntervalMinutes
-                      ?? _cfg.GetCVar(ForgeCCVars.PoiCaptureRewardIntervalMinutes);
+                      ?? _cfg.GetCVar(ForgeCVars.PoiCaptureRewardIntervalMinutes);
         return TimeSpan.FromMinutes(Math.Max(0.1f, minutes));
     }
 

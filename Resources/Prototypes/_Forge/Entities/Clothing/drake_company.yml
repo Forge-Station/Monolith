@@ -8,7 +8,7 @@
   description: A heavy company cloak in Drake Industries colors.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/Cloaks/drake_cloak.rsi
+    sprite: Forge/Clothing/Neck/Cloaks/drake_cloak.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -18,4 +18,4 @@
   description: A worn Drake Industries cloak, still good enough for the frontier.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/Cloaks/drake_cloak_ripped.rsi
+    sprite: Forge/Clothing/Neck/Cloaks/drake_cloak_ripped.rsi

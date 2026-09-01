@@ -9,7 +9,7 @@
   - type: Clickable
   - type: InteractionOutline
   - type: Sprite
-    sprite: _Forge/Objects/Storage/kanaboBox.rsi
+    sprite: _Forge/OniMeleeWeapons/Kanabo/kanaboBox.rsi
     snapCardinals: true
     layers:
     - map: ["enum.OpenableVisuals.Layer"]

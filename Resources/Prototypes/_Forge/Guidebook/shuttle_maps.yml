@@ -6,6 +6,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Guidebook/shuttle_maps/128x96.rsi
+    sprite: Forge/Guidebook/shuttle_maps/128x96.rsi
     state: domra
     scale: 1, 1

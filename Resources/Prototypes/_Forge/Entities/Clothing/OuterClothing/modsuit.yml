@@ -6,13 +6,13 @@
   parent: ClothingModsuitChestplateBase
   id: ClothingModsuitChestplateHMELightSuit
   name: HME light hardsuit "Preserver" chestplate
-  description: light-HME-modsuit-chestplate-desc
+  description: light-HME-modsuit-chestplate-desc 
   categories: [ HideSpawnMenu ]
   components:
   - type: Appearance
   - type: AllowSuitStorage
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Modsuits/hme_lightmod.rsi
+    sprite: Forge/Clothing/OuterClothing/Modsuits/hme_lightmod.rsi
     layers:
     - state: chestplate
     - state: chestplate-sealed
@@ -47,7 +47,7 @@
       outerClothing-resomi:
       - state: equipped-OUTERCLOTHING-sealed-resomi
       outerClothing-vox:
-      - state: equipped-OUTERCLOTHING-sealed-vox
+      - state: equipped-OUTERCLOTHING-sealed-vox     
   - type: ExplosionResistance
     damageCoefficient: 0.8
   - type: ClothingSpeedModifier
@@ -81,13 +81,13 @@
   parent: ClothingModsuitChestplateBase
   id: ClothingModsuitChestplateHMEHeavySuit
   name: HME heavy hardsuit "Intercessor" chestplate
-  description: heavy-HME-modsuit-chestplate-desc
+  description: heavy-HME-modsuit-chestplate-desc 
   categories: [ HideSpawnMenu ]
   components:
   - type: Appearance
   - type: AllowSuitStorage
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Modsuits/hme_heavymod.rsi
+    sprite: Forge/Clothing/OuterClothing/Modsuits/hme_heavymod.rsi
     layers:
     - state: chestplate
     - state: chestplate-sealed
@@ -122,7 +122,7 @@
       outerClothing-resomi:
       - state: equipped-OUTERCLOTHING-sealed-resomi
       outerClothing-vox:
-      - state: equipped-OUTERCLOTHING-sealed-vox
+      - state: equipped-OUTERCLOTHING-sealed-vox     
   - type: ExplosionResistance
     damageCoefficient: 0.6
   - type: ClothingSpeedModifier
@@ -161,7 +161,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Modsuits/omnissiamod.rsi
+    sprite: Forge/Clothing/OuterClothing/Modsuits/omnissiamod.rsi
     layers:
     - state: chestplate
     - state: chestplate-sealed

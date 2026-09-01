@@ -39,7 +39,7 @@
         - !type:DoActsBehavior
           acts: ["Destruction"]
     - type: Sprite
-      sprite: _Forge/Structures/Doors/Airlocks/Standard/firelock.rsi # Forge-Change
+      sprite: Forge/Structures/Doors/Airlocks/Standard/firelock.rsi # Forge-Change
       snapCardinals: true
       layers:
         - state: closed
@@ -177,7 +177,7 @@
   components:
     - type: StationAiWhitelist
     - type: Sprite
-      sprite: _Forge/Structures/Doors/Airlocks/Glass/firelock.rsi # Forge-Change
+      sprite: Forge/Structures/Doors/Airlocks/Glass/firelock.rsi # Forge-Change
     - type: Occluder
       enabled: false
     - type: Fixtures
@@ -203,7 +203,7 @@
   components:
     - type: StationAiWhitelist
     - type: Sprite
-      sprite: _Forge/Structures/Doors/edge_door_hazard.rsi # Forge-Change
+      sprite: Forge/Structures/Doors/edge_door_hazard.rsi # Forge-Change
       snapCardinals: false
     - type: Airtight
       airBlocked: false

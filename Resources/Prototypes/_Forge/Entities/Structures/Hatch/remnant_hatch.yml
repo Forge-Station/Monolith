@@ -24,7 +24,7 @@
   description: A sealed precursor hatch. Walking onto a paired hatch, or interacting with it, transfers you to the linked Z-level.
   components:
   - type: Sprite
-    sprite: _Forge/Structures/stairs.rsi
+    sprite: Forge/Structures/stairs.rsi
     state: stairs_stage_steel
     drawdepth: FloorTiles
   - type: Portal

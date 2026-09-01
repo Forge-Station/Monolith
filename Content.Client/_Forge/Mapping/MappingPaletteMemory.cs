@@ -1,5 +1,5 @@
 using System.Linq;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge.CCVar;
 using Robust.Shared.Configuration;
 
 namespace Content.Client._Forge.Mapping;
@@ -18,8 +18,8 @@ public sealed class MappingPaletteMemory
     public MappingPaletteMemory(IConfigurationManager cfg)
     {
         _cfg = cfg;
-        LoadSet(_favorites, ForgeCCVars.MappingPaletteFavorites);
-        LoadList(_recents, ForgeCCVars.MappingPaletteRecents);
+        LoadSet(_favorites, ForgeCVars.MappingPaletteFavorites);
+        LoadList(_recents, ForgeCVars.MappingPaletteRecents);
     }
 
     public bool IsFavorite(MappingPaletteRef? id)
@@ -32,7 +32,7 @@ public sealed class MappingPaletteMemory
         if (!_favorites.Add(id))
             _favorites.Remove(id);
 
-        Save(_favorites, ForgeCCVars.MappingPaletteFavorites);
+        Save(_favorites, ForgeCVars.MappingPaletteFavorites);
         return _favorites.Contains(id);
     }
 
@@ -44,7 +44,7 @@ public sealed class MappingPaletteMemory
         while (_recents.Count > MaxRecents)
             _recents.RemoveAt(_recents.Count - 1);
 
-        Save(_recents, ForgeCCVars.MappingPaletteRecents);
+        Save(_recents, ForgeCVars.MappingPaletteRecents);
     }
 
     private void LoadSet(HashSet<MappingPaletteRef> target, CVarDef<string> cvar)

@@ -5,9 +5,9 @@
   name: NFSD specialist badge
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/Scarfs/badges/engynfsd.rsi
+    sprite: Forge/Clothing/Neck/Scarfs/badges/engynfsd.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Neck/Scarfs/badges/engynfsd.rsi
+    sprite: Forge/Clothing/Neck/Scarfs/badges/engynfsd.rsi
 
 # region Company
 - type: entity
@@ -18,8 +18,8 @@
   description: A badge to show that the owner is a 'legitimate' lawyer who passed the NT bar exam required to practice law.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/Misc/lawyerbadge_techniclogistic.rsi
+    sprite: Forge/Clothing/Neck/Misc/lawyerbadge_techniclogistic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Neck/Misc/lawyerbadge_techniclogistic.rsi
+    sprite: Forge/Clothing/Neck/Misc/lawyerbadge_techniclogistic.rsi
   - type: TypingIndicatorClothing
     proto: lawyer

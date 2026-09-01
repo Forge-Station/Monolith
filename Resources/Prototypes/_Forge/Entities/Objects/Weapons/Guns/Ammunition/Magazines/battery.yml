@@ -8,7 +8,7 @@
   description: A power cell for energy shotguns that fires laser spreads.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/energyshotgun.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/energyshotgun.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: icon
@@ -35,7 +35,7 @@
   description: A power cell for energy LMGs that fires laser projectiles.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/heavion.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/heavion.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: icon
@@ -62,7 +62,7 @@
   description: A compact power cell for energy rifle's.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: icon
@@ -88,7 +88,7 @@
   description: A compact power cell for energy rifle's.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: xray
@@ -114,7 +114,7 @@
   description: A compact power cell for energy rifle's.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: disabler
@@ -141,7 +141,7 @@
   description: A compact power cell for energy rifle's.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: hitscan
@@ -167,7 +167,7 @@
   description: A compact power cell for energy rifle's.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: xray_hs
@@ -193,7 +193,7 @@
   description: A compact power cell for energy rifle's.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    sprite: Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: disabler_hs

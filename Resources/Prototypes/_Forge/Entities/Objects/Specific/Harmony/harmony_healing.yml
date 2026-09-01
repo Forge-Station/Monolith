@@ -9,10 +9,10 @@
     tags:
     - Ointment
   - type: Sprite
-    sprite: _Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
     state: synthfleshpack
   - type: Item
-    sprite: _Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
     heldPrefix: synthfleshpack
     storedRotation: -90
   - type: Healing
@@ -35,9 +35,9 @@
         variation: 0.125
   - type: Stack
     stackType: HMESynthFleshPack
-    count: 15
+    count: 15 
   - type: StackPrice
-    price: 200
+    price: 200 
 
 - type: entity
   id: HMESynthFleshPack1
@@ -59,10 +59,10 @@
     tags:
     - Brutepack
   - type: Sprite
-    sprite: _Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
     state: elasticgauge
   - type: Item
-    sprite: _Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
     heldPrefix: elasticgauge
     storedRotation: -90
   - type: Healing
@@ -85,9 +85,9 @@
         variation: 0.125
   - type: Stack
     stackType: HMEElasticGaugePack
-    count: 15
+    count: 15 
   - type: StackPrice
-    price: 200
+    price: 200 
 
 - type: entity
   id: HMEElasticGaugePack1
@@ -109,10 +109,10 @@
     tags:
     - Bloodpack
   - type: Sprite
-    sprite: _Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
     state: synthbloodpack
   - type: Item
-    sprite: _Forge/Objects/Specific/Medical/harmonyhealing.rsi
+    sprite: Forge/Objects/Specific/Medical/harmonyhealing.rsi
     heldPrefix: elasticgauge
     storedRotation: -90
   - type: Healing
@@ -137,7 +137,7 @@
     stackType: HMESynthBloodpack
     count: 15
   - type: StackPrice
-    price: 200
+    price: 200 
 
 - type: entity
   id: HMESynthBloodpack1

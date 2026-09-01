@@ -1,9 +1,4 @@
 botany-swab-from = You carefully collect pollen from the plant.
 botany-swab-to = You carefully dust pollen on the plant.
-botany-swab-planted = The pollen takes in the empty tray. A new {$name} sprout.
-botany-swab-graft = Pollen takes: mutations graft onto this {$name}.
-botany-swab-nothing = There is no living plant to swab.
-botany-swab-dead = You cannot graft onto dead plant matter.
 swab-used = This swab has been used to collect something.
-swab-used-line = This swab carries pollen from {$name}.
 swab-unused = This swab is clean and ready to be used.

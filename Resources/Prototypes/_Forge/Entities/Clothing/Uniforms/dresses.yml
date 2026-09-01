@@ -7,9 +7,9 @@
   description: Uniform for elite syndicate operatives performing tactical operations in deep space.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Dresses/renegatedress.rsi
+    sprite: Forge/Clothing/Uniforms/Dresses/renegatedress.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Dresses/renegatedress.rsi
+    sprite: Forge/Clothing/Uniforms/Dresses/renegatedress.rsi
 
 #region Other
 - type: entity
@@ -19,6 +19,6 @@
   description: A black witch's robe with a long hem and thin sleeves, complemented by an elegant green belt, giving the image completeness and lightness.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Dresses/witchdress.rsi
+    sprite: Forge/Clothing/Uniforms/Dresses/witchdress.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Dresses/witchdress.rsi
+    sprite: Forge/Clothing/Uniforms/Dresses/witchdress.rsi

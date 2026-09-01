@@ -6,9 +6,9 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/mantles/tti.rsi
+    sprite: Forge/Clothing/Neck/mantles/tti.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Neck/mantles/tti.rsi
+    sprite: Forge/Clothing/Neck/mantles/tti.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -17,9 +17,9 @@
   description: Mantle that covers the right side of the body, possibly under a hood or other equipment. # Мантия что скрывает правую часть тела, возможно под ней кобура или другое оборудование.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Neck/mantles/ui_mantle.rsi
+    sprite: Forge/Clothing/Neck/mantles/ui_mantle.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Neck/mantles/ui_mantle.rsi
+    sprite: Forge/Clothing/Neck/mantles/ui_mantle.rsi
   - type: StaticPrice
     price: 50
     vendPrice: 100

@@ -126,19 +126,3 @@
   keycode: 'n'
   frequency: 7011
   color: "#1a5f9b"
-
-# region Custom
-# Popular handheld / custom-key frequencies. Players pick one and tell others.
-- type: radioFrequencyPresetList
-  id: PopularHandheld
-  frequencies:
-  - 1330
-  - 1400
-  - 1500
-  - 1600
-  - 1700
-  - 1800
-  - 1900
-  - 2000
-  - 2500
-  - 3000

@@ -23,7 +23,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
 using Robust.Shared.Configuration;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge;
 using Content.Server._Forge.TTS;
 using Content.Shared._Forge.TTS;
 
@@ -103,7 +103,7 @@ public sealed partial class RadioSystem : EntitySystem
 
             // Forge-Change-Start
             var isOwnAudioRelay = uid == args.MessageSource;
-            var radioTtsEnabled = _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeCCVars.LocalRadioTTSEnabled);
+            var radioTtsEnabled = _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeVars.LocalRadioTTSEnabled);
 
             // Use the speaker's voice (MessageSource), not the listener's own — Forge-Change
             if(!isOwnAudioRelay && radioTtsEnabled && TryComp<TTSComponent>(args.MessageSource, out var tts) && !string.IsNullOrWhiteSpace(tts.VoicePrototypeId))

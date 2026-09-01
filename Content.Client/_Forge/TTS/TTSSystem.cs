@@ -1,4 +1,4 @@
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge;
 using Content.Shared._Forge.TTS;
 using Content.Shared.Chat;
 using Robust.Client.Audio;
@@ -50,16 +50,16 @@ public sealed class TTSSystem : EntitySystem
         }
 
         _sawmill = Logger.GetSawmill("tts");
-        _cfg.OnValueChanged(ForgeCCVars.TTSVolume, OnTtsVolumeChanged, true);
-        _cfg.OnValueChanged(ForgeCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged, true); // Forge-Change
+        _cfg.OnValueChanged(ForgeVars.TTSVolume, OnTtsVolumeChanged, true);
+        _cfg.OnValueChanged(ForgeVars.TTSRadioVolume, OnTtsRadioVolumeChanged, true); // Forge-Change
         SubscribeNetworkEvent<PlayTTSEvent>(OnPlayTTS);
     }
 
     public override void Shutdown()
     {
         base.Shutdown();
-        _cfg.UnsubValueChanged(ForgeCCVars.TTSVolume, OnTtsVolumeChanged);
-        _cfg.UnsubValueChanged(ForgeCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged); // Forge-Change
+        _cfg.UnsubValueChanged(ForgeVars.TTSVolume, OnTtsVolumeChanged);
+        _cfg.UnsubValueChanged(ForgeVars.TTSRadioVolume, OnTtsRadioVolumeChanged); // Forge-Change
     }
 
     public void RequestPreviewTTS(string voiceId)
@@ -79,7 +79,7 @@ public sealed class TTSSystem : EntitySystem
 
     private void OnPlayTTS(PlayTTSEvent ev)
     {
-        if (!_cfg.GetCVar(ForgeCCVars.LocalTTSEnabled))
+        if (!_cfg.GetCVar(ForgeVars.LocalTTSEnabled))
             return;
 
         _sawmill.Verbose($"Play TTS audio {ev.Data.Length} bytes from {ev.SourceUid} entity");

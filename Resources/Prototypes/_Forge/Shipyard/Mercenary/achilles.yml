@@ -15,8 +15,6 @@
   category: Medium
   group: Shipyard
   access: Mercenary
-  purchasable: false
-  limit: 3
   shuttlePath: /SharedMaps/_Forge/Shuttles/Mercenary/achilles.yml
   guidebookPage: Null
   class:

@@ -43,7 +43,6 @@
         map: [ "harvest_alert" ]
         visible: false
   - type: Appearance
-  - type: PlantHealthBarTarget
   - type: GenericVisualizer
     visuals:
       enum.PlantHolderVisuals.HealthLight:
@@ -98,12 +97,6 @@
     guides:
     - Botany
     - Chemicals
-  - type: DeviceNetwork
-    deviceNetId: Wired
-    receiveFrequencyId: BasicDevice
-    prefix: device-address-prefix-hydroponics
-    examinableAddress: true
-  - type: WiredNetworkConnection
   - type: PirateBountyItem # Frontier
     id: HydroponicsTray # Frontier
   #<Forge>

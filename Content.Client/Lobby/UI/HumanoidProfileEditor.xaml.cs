@@ -10,7 +10,7 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Sprite;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.UserInterface.Controls;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge;
 using Content.Shared._Mono.Company;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
@@ -428,7 +428,7 @@ namespace Content.Client.Lobby.UI
 
             #region Barks
             // Corvax-Frontier-Barks-Start
-            if (_cfgManager.GetCVar(ForgeCCVars.BarksEnabled))
+            if (_cfgManager.GetCVar(ForgeVars.BarksEnabled))
             {
                 BarksContainer.Visible = true;
                 InitializeBarkVoice();

@@ -764,7 +764,6 @@
     staticPacks:
     - BioGenIngredientsStatic
     - BioGenMaterialsStatic
-    - BioGenSwabsStatic
     - FriendlyCubesStatic # Frontier
     - NFBioGenIngredientsStatic # Frontier
     - NFBioGenMaterialsStatic # Frontier
@@ -917,7 +916,7 @@
   components:
   # Forge-change-start
   - type: Sprite
-    sprite: _Forge/Structures/Machines/organprinter.rsi
+    sprite: Forge/Structures/Machines/organprinter.rsi
     snapCardinals: true
     layers:
     - state: base

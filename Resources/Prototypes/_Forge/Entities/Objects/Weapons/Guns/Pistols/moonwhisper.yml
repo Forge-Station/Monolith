@@ -5,14 +5,14 @@
   description: This is a restoration of an unknown but very old model pistol, transformed into an elegant weapon with a built-in silencer. The slide is decorated with an engraving of the moon. You will look elegant with it.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Weapons/Guns/Pistols/moonwhisper.rsi
+    sprite: Forge/Objects/Weapons/Guns/Pistols/moonwhisper.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: _Forge/Objects/Weapons/Guns/Pistols/moonwhisper.rsi
+    sprite: Forge/Objects/Weapons/Guns/Pistols/moonwhisper.rsi
   - type: Gun
     fireRate: 4.5
     projectileSpeed: 35
@@ -20,7 +20,7 @@
     availableModes:
       - SemiAuto
     soundGunshot:
-      path: /Audio/_Forge/Weapons/Guns/Gunshots/moonwhisper.ogg
+      path: /Audio/Forge/Weapons/Guns/Gunshots/moonwhisper.ogg
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot

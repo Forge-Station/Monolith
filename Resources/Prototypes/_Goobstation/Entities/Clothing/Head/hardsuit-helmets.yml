@@ -41,9 +41,9 @@
   description: A helmet with plating for stealth operations.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/cybersunstealth.rsi # Forge-change
+    sprite: Forge/Clothing/Head/Hardsuits/cybersunstealth.rsi # Forge-change
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/cybersunstealth.rsi # Forge-change
+    sprite: Forge/Clothing/Head/Hardsuits/cybersunstealth.rsi # Forge-change
     equippedState: off-equipped-HELMET # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.08

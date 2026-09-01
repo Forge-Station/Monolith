@@ -14,13 +14,13 @@ public sealed partial class PlantAnalyzerComponent : Component
     public partial struct PlantAnalyzerSetting
     {
         [DataField]
-        public float ScanDelay = 0.8f;
+        public float ScanDelay;
 
         /// <summary>
         /// Whether extended seed gene information should be sent to the client.
         /// </summary>
         [DataField]
-        public bool ExposeAdvancedData = true;
+        public bool ExposeAdvancedData; // Forge-Change
     }
 
     [DataField, ViewVariables]
@@ -34,12 +34,6 @@ public sealed partial class PlantAnalyzerComponent : Component
 
     [DataField]
     public EntityUid? ScannedEntity;
-
-    /// <summary>
-    /// The user who scanned the plant. Used to keep the UI open while the analyzer stays on that person.
-    /// </summary>
-    [DataField]
-    public EntityUid? User;
 
     [DataField]
     public float MaxScanRange = 2.5f;

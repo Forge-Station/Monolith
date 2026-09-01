@@ -3,7 +3,7 @@
   parent: JobIcon
   id: JobIconEmpireNeophyte
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_neofit
   jobName: forge-job-name-neophyte
 
@@ -11,7 +11,7 @@
   parent: JobIcon
   id: JobIconEmpireAuxilia
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_auxil
   jobName: forge-job-name-auxilia
 
@@ -19,7 +19,7 @@
   parent: JobIcon
   id: JobIconEmpirePraetorian
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_pretor
   jobName: forge-job-name-praetorian
 
@@ -27,7 +27,7 @@
   parent: JobIcon
   id: JobIconEmpireTessarian
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_tes
   jobName: forge-job-name-tessarian
 
@@ -35,7 +35,7 @@
   parent: JobIcon
   id: JobIconEmpireConsul
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_diplomacy
   jobName: forge-job-name-consul
 
@@ -43,7 +43,7 @@
   parent: JobIcon
   id: JobIconEmpireInquisitor
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_inq
   jobName: forge-job-name-inquisitor
 
@@ -51,7 +51,7 @@
   parent: JobIcon
   id: JobIconEmpirePraefect
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_lord
   jobName: forge-job-name-praefect
 
@@ -59,7 +59,7 @@
   parent: JobIcon
   id: JobIconEmpireCardinal
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_astra
   jobName: forge-job-name-cardinal
 
@@ -67,7 +67,7 @@
   parent: JobIcon
   id: JobIconEmpireArbiter
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_arbitr
   jobName: forge-job-name-arbiter
 
@@ -75,7 +75,7 @@
   parent: JobIcon
   id: JobIconEmpireApotek
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_medic
   jobName: forge-job-name-apotek
 
@@ -83,7 +83,7 @@
   parent: JobIcon
   id: JobIconEmpireTechnican
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_tech
   jobName: forge-job-name-technican
 
@@ -91,7 +91,7 @@
   parent: JobIcon
   id: JobIconEmpireSmallInq
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: emp_inq_small
   jobName: forge-job-name-smallinq
 
@@ -101,7 +101,7 @@
   parent: JobIcon
   id: JobIconRenegateBaron
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: ren_baron
   jobName: forge-job-name-baron
 
@@ -109,7 +109,7 @@
   parent: JobIcon
   id: JobIconRenegateDraftsman
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: ren_draftsman
   jobName: forge-job-name-draftsman
 
@@ -117,7 +117,7 @@
   parent: JobIcon
   id: JobIconRenegateOverseer
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: ren_overseer
   jobName: forge-job-name-overseer
 
@@ -125,7 +125,7 @@
   parent: JobIcon
   id: JobIconRenegateForeman
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: ren_foreman
   jobName: forge-job-name-foreman
 
@@ -133,7 +133,7 @@
   parent: JobIcon
   id: JobIconRenegateQuack
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: ren_quack
   jobName: forge-job-name-quack
 
@@ -141,7 +141,7 @@
   parent: JobIcon
   id: JobIconRenegateFlunky
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: ren_flunky
   jobName: forge-job-name-flunky
 
@@ -149,7 +149,7 @@
   parent: JobIcon
   id: JobIconRenegateWatchman
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: ren_watchman
   jobName: forge-job-name-watchman
 
@@ -157,7 +157,7 @@
   parent: JobIcon
   id: JobIconRenegateMilitia
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: ren_militia
   jobName: forge-job-name-militia
 
@@ -167,7 +167,7 @@
   parent: JobIcon
   id: JobIconTsfCommandingOfficer
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: tsf_com
   jobName: job-name-tsf-commanding-officer
 
@@ -175,7 +175,7 @@
   parent: JobIcon
   id: JobIconTsfExecutiveOfficer
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: tsf_exec
   jobName: job-name-tsf-executive-officer
 
@@ -183,7 +183,7 @@
   parent: JobIcon
   id: JobIconTsfSeniorOfficer
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: tsf_sen
   jobName: job-name-tsf-senior-officer
 
@@ -199,7 +199,7 @@
   parent: JobIcon
   id: JobIconTsfAmbassador
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: tsf_diplomacy
   jobName: job-name-tsf-ambassador
 
@@ -223,7 +223,7 @@
   parent: JobIcon
   id: JobIconTsfSl
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: tsf_sl
   jobName: job-name-tsf-sl
 
@@ -231,7 +231,7 @@
   parent: JobIcon
   id: JobIconTsfCrew
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: tsf_crew
   jobName: job-name-tsf-crew
 
@@ -239,7 +239,7 @@
   parent: JobIcon
   id: JobIconTsfOfficerCrew
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: tsf_crewofficer
   jobName: job-name-tsf-crewofficer
 
@@ -249,7 +249,7 @@
   parent: JobIcon
   id: JobIconSr
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: nt_rep
   jobName: job-name-sr
 
@@ -257,7 +257,7 @@
   parent: JobIcon
   id: JobIconDoc
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: doc
   jobName: job-name-doc
 
@@ -265,7 +265,7 @@
   parent: JobIcon
   id: JobIconParamedic
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: paramed
   jobName: job-name-md-medic
 
@@ -273,7 +273,7 @@
   parent: JobIcon
   id: JobIconValet
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: nt_worker
   jobName: job-name-valet
 
@@ -281,7 +281,7 @@
   parent: JobIcon
   id: JobIconntmedic
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: ntmedic
   jobName: job-name-nt-medic
 
@@ -289,7 +289,7 @@
   parent: JobIcon
   id: JobIconntmedicpilot
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: nt_medpilot
   jobName: job-name-nt-medic-pilot
 
@@ -297,6 +297,6 @@
   parent: JobIcon
   id: JobIconntmedicgunner
   icon:
-    sprite: /Textures/_Forge/Interface/Misc/job_icons.rsi
+    sprite: /Textures/Forge/Interface/Misc/job_icons.rsi
     state: nt_medgunner
   jobName: job-name-nt-medic-gunner

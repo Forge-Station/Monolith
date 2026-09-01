@@ -589,7 +589,7 @@
 
 ## Holding
 - type: entity
-  parent: [ ClothingBackpackHolding, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
+  parent: ClothingBackpackHolding
   id: ClothingBackpackMessengerHolding
   name: messenger bag of holding
   description: A messenger bag that opens into a localized pocket of bluespace.

@@ -808,7 +808,7 @@
   description: Компактный скафандр и шлем способный помещатся в карманы. Прденазнвачен для защиты от враждебной среды космоса, не более... Имеется фирменный противогаз.
   productEntity: ClothingDuffelContractorForgeEVA
   discountCategory: veryRareDiscounts
-  icon: { sprite: /Textures/_Forge/Clothing/OuterClothing/Hardsuits/contractor_eva.rsi, state: icon }
+  icon: { sprite: /Textures/Forge/Clothing/OuterClothing/Hardsuits/contractor_eva.rsi, state: icon }
   discountDownTo:
     Telecrystal: 2
   cost:
@@ -822,7 +822,7 @@
   description: Костюм, оснащенный экзоскелетом вместе со стелс-технологией фазового покрова при полной активации.
   productEntity: ClothingDuffelContractorForgeStealh
   discountCategory: veryRareDiscounts
-  icon: { sprite: /Textures/_Forge/Clothing/OuterClothing/Hardsuits/contractor.rsi, state: icon }
+  icon: { sprite: /Textures/Forge/Clothing/OuterClothing/Hardsuits/contractor.rsi, state: icon }
   discountDownTo:
     Telecrystal: 20
   cost:
@@ -836,7 +836,7 @@
   description: Костюм, оснащенный экзоскелетом вместе со стелс-технологией фазового покрова при полной активации.
   productEntity: ClothingOuterHardsuitContractor
   discountCategory: veryRareDiscounts
-  icon: { sprite: /Textures/_Forge/Clothing/OuterClothing/Hardsuits/contractor.rsi, state: icon }
+  icon: { sprite: /Textures/Forge/Clothing/OuterClothing/Hardsuits/contractor.rsi, state: icon }
   discountDownTo:
     Telecrystal: 10
   cost:

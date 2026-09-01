@@ -5,7 +5,7 @@
   description: thruster-goblin-desc
   components:
     - type: Sprite
-      sprite: _Forge/Structures/Shuttles/thruster.rsi
+      sprite: Forge/Structures/Shuttles/thruster.rsi
       layers:
       - state: base_goblin
         map: ["enum.ThrusterVisualLayers.Base"]

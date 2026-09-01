@@ -185,7 +185,6 @@
     - NSC # Forge-change
     - ForgeBoardingTeleportExperimental
     - Empire # Forge-change
-    - MercenaryShipyard # Forge-change
 
 - type: entity
   parent: ResearchAndDevelopmentServer
@@ -200,17 +199,5 @@
     - state: variant-merc
     - state: server_o
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
-  # Forge-change-start
-  - type: TechnologyDatabase
-    supportedDisciplines:
-    - Industrial
-    - Arsenal
-    - Experimental
-    - ShipArmory
-    - CivilianServices
-    - MechaEngineering
-    - FactionUniversal
-    - MercenaryShipyard
-  # Forge-change-end
   - type: StaticPrice
     price: 4000

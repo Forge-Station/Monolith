@@ -38,7 +38,7 @@ using Content.Shared.Stacks; // Frontier
 using Content.Server.Stack;
 using Content.Server._Forge.Shuttles.Systems;
 using Content.Server._Mono.VendingMachine;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge.CCVar;
 using Content.Shared._Mono.Traits.Physical;
 using Robust.Shared.Containers; // Frontier
 
@@ -412,7 +412,7 @@ namespace Content.Server.VendingMachines
                         }
 
                         // Forge-Change: route POI sales tax to the local treasury, on top of sector tax.
-                        var poiTaxRate = _cfgManager.GetCVar(ForgeCCVars.PoiCaptureSalesTaxRate);
+                        var poiTaxRate = _cfgManager.GetCVar(ForgeCVars.PoiCaptureSalesTaxRate);
                         if (poiTaxRate > 0f)
                         {
                             var poiTax = (int)Math.Floor(totalPrice * poiTaxRate);

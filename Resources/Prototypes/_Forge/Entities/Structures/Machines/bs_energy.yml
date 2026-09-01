@@ -1,0 +1,446 @@
+﻿# base
+- type: entity
+  id: BsEnergyBase
+  parent: [BaseStructure, ConstructibleMachine]
+  abstract: true
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: Sprite
+  - type: Appearance
+  - type: GenericVisualizer
+  - type: Fixtures
+    fixtures:
+      fix1:
+        layer:
+        - MachineLayer
+        - BulletImpassable
+        - Opaque
+  - type: Anchorable
+  - type: InteractionOutline
+  - type: PointLight
+    enabled: false
+    color: "#0000FF"
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      hvPower:
+        !type:CableDeviceNode
+        nodeGroupID: HVPower
+  - type: UserInterface
+  - type: ActivatableUI
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+#BsReceiver
+- type: entity
+  name: bluespace energy receiver T1
+  description: Receives energy via bluespace up to 1 MW.
+  id: BsReceiverT1
+  parent: BsEnergyBase
+  components:
+  - type: BsReceiverEnergy
+    maxValue: 1000000
+    stepSize: 50000
+  - type: Machine
+    board: BsReceiverCircuitboardT1
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: receiver
+      map: ["enabled"]
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: receiver}
+          False: {state: receiverOff}
+  - type: PowerSupplier
+    supplyRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.ReceiverKey:
+        type: BsReceiverBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.ReceiverKey
+
+- type: entity
+  name: bluespace energy receiver T2
+  description: Receives energy via bluespace up to 5 MW.
+  id: BsReceiverT2
+  parent: BsEnergyBase
+  components:
+  - type: BsReceiverEnergy
+    maxValue: 5000000
+    stepSize: 100000
+  - type: Construction
+    graph: Machine2x2
+  - type: Machine
+    board: BsReceiverCircuitboardT2
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: receiver
+      map: ["enabled"]
+    offset: 0.5, -0.5
+    scale: 2, 2
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-1.45,1.45,0.45"
+        density: 500
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
+        - Opaque
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: receiver}
+          False: {state: receiverOff}
+  - type: PowerSupplier
+    supplyRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.ReceiverKey:
+        type: BsReceiverBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.ReceiverKey
+
+- type: entity
+  name: bluespace energy receiver T3
+  description: Receives energy via bluespace up to 10 MW.
+  id: BsReceiverT3
+  parent: BsEnergyBase
+  components:
+  - type: BsReceiverEnergy
+    maxValue: 10000000
+    stepSize: 1000000
+  - type: Construction
+    graph: Machine3x3
+  - type: Machine
+    board: BsReceiverCircuitboardT3
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: receiver
+      map: ["enabled"]
+    scale: 3, 3
+    offset: 1, -1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-2.45,2.45,0.45"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
+        - Opaque
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: receiver}
+          False: {state: receiverOff}
+  - type: PowerSupplier
+    supplyRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.ReceiverKey:
+        type: BsReceiverBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.ReceiverKey
+
+#BsTransmitter
+- type: entity
+  name: bluespace energy transmitter T1
+  description: Transmits energy via bluespace up to 1 MW.
+  id: BsTransmitterT1
+  parent: BsEnergyBase
+  components:
+  - type: BsTransmitterEnergy
+    maxValue: 1000000
+    maxConnected: 5
+    stepSize: 50000
+    enablePassiveIncome: false
+  - type: Machine
+    board: BsTransmitterCircuitboardT1
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: transmitter
+      map: ["enabled"]
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: transmitter}
+          False: {state: transmitterOff}
+  - type: PowerConsumer
+    voltage: High
+    drawRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.TransmitterKey:
+        type: BsTransmitterBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.TransmitterKey
+
+- type: entity
+  name: bluespace energy transmitter T2
+  description: Transmits energy via bluespace up to 5 MW.
+  id: BsTransmitterT2
+  parent: BsEnergyBase
+  components:
+  - type: BsTransmitterEnergy
+    maxValue: 5000000
+    maxConnected: 10
+    stepSize: 100000
+    enablePassiveIncome: false
+  - type: Construction
+    graph: Machine2x2
+  - type: Machine
+    board: BsTransmitterCircuitboardT2
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: transmitter
+      map: ["enabled"]
+    offset: 0.5, -0.5
+    scale: 2, 2
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-1.45,1.45,0.45"
+        density: 500
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
+        - Opaque
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: transmitter}
+          False: {state: transmitterOff}
+  - type: PowerConsumer
+    voltage: High
+    drawRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.TransmitterKey:
+        type: BsTransmitterBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.TransmitterKey
+
+- type: entity
+  name: bluespace energy transmitter T3
+  description: Transmits energy via bluespace up to 10 MW.
+  id: BsTransmitterT3
+  parent: BsEnergyBase
+  components:
+  - type: BsTransmitterEnergy
+    maxValue: 10000000
+    maxConnected: 15
+    stepSize: 1000000
+    enablePassiveIncome: false
+  - type: Construction
+    graph: Machine3x3
+  - type: Machine
+    board: BsTransmitterCircuitboardT3
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: transmitter
+      map: ["enabled"]
+    scale: 3, 3
+    offset: 1, -1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-2.45,2.45,0.45"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
+        - Opaque
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: transmitter}
+          False: {state: transmitterOff}
+  - type: PowerConsumer
+    voltage: High
+    drawRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.TransmitterKey:
+        type: BsTransmitterBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.TransmitterKey
+
+#BsTransmitter for stationary energy stations
+- type: entity
+  name: bluespace energy transmitter T1
+  suffix: for energy stations
+  description: Transmits energy via bluespace up to 1 MW.
+  id: BsTransmitterStationaryT1
+  parent: BsEnergyBase
+  components:
+  - type: BsTransmitterEnergy
+    maxValue: 1000000
+    maxConnected: 5
+    stepSize: 50000
+    enablePassiveIncome: true
+  - type: Machine
+    board: BsTransmitterCircuitboardT1
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: transmitter
+      map: ["enabled"]
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: transmitter}
+          False: {state: transmitterOff}
+  - type: PowerConsumer
+    voltage: High
+    drawRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.TransmitterKey:
+        type: BsTransmitterBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.TransmitterKey
+
+- type: entity
+  name: bluespace energy transmitter T2
+  suffix: for energy stations
+  description: Transmits energy via bluespace up to 5 MW.
+  id: BsTransmitterStationaryT2
+  parent: BsEnergyBase
+  components:
+  - type: BsTransmitterEnergy
+    maxValue: 5000000
+    maxConnected: 10
+    stepSize: 100000
+    enablePassiveIncome: true
+  - type: Construction
+    graph: Machine2x2
+  - type: Machine
+    board: BsTransmitterCircuitboardT2
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: transmitter
+      map: ["enabled"]
+    offset: 0.5, -0.5
+    scale: 2, 2
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-1.45,1.45,0.45"
+        density: 500
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
+        - Opaque
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: transmitter}
+          False: {state: transmitterOff}
+  - type: PowerConsumer
+    voltage: High
+    drawRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.TransmitterKey:
+        type: BsTransmitterBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.TransmitterKey
+
+- type: entity
+  name: bluespace energy transmitter T3
+  suffix: for energy stations
+  description: Transmits energy via bluespace up to 10 MW.
+  id: BsTransmitterStationaryT3
+  parent: BsEnergyBase
+  components:
+  - type: BsTransmitterEnergy
+    maxValue: 10000000
+    maxConnected: 15
+    stepSize: 1000000
+    enablePassiveIncome: true
+  - type: Construction
+    graph: Machine3x3
+  - type: Machine
+    board: BsTransmitterCircuitboardT3
+  - type: Sprite
+    sprite: _Forge/BsEnergy/bsEnergy.rsi
+    layers:
+    - state: transmitter
+      map: ["enabled"]
+    scale: 3, 3
+    offset: 1, -1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-2.45,2.45,0.45"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
+        - Opaque
+  - type: GenericVisualizer
+    visuals:
+      enum.BsEnergyVisuals.Enabled:
+        enabled:
+          True: {state: transmitter}
+          False: {state: transmitterOff}
+  - type: PowerConsumer
+    voltage: High
+    drawRate: 0
+  - type: UserInterface
+    interfaces:
+      enum.BsEnergyUiKey.TransmitterKey:
+        type: BsTransmitterBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BsEnergyUiKey.TransmitterKey

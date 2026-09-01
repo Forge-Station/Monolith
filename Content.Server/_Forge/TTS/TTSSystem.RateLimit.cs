@@ -1,6 +1,6 @@
 ﻿using Content.Server.Chat.Managers;
 using Content.Server.Players.RateLimiting;
-using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge;
 using Content.Shared.Players.RateLimiting;
 using Robust.Shared.Player;
 
@@ -17,8 +17,8 @@ public sealed partial class TTSSystem
     {
         _rateLimitManager.Register(RateLimitKey,
             new RateLimitRegistration(
-                ForgeCCVars.TTSRateLimitPeriod,
-                ForgeCCVars.TTSRateLimitCount,
+                ForgeVars.TTSRateLimitPeriod,
+                ForgeVars.TTSRateLimitCount,
                 RateLimitPlayerLimited)
             );
     }

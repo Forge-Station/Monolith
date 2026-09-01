@@ -6,9 +6,9 @@
   description: Windbreaker for empire guardians
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/empirewindbreaker.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/empirewindbreaker.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/empirewindbreaker.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/empirewindbreaker.rsi
   - type: Armor
     modifiers: {}
   - type: ExplosionResistance
@@ -58,9 +58,9 @@
   description: Windbreaker for empire inquisitor
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/empireinqwindbreaker.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/empireinqwindbreaker.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/empireinqwindbreaker.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/empireinqwindbreaker.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -117,9 +117,9 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/tti_robe.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/tti_robe.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/tti_robe.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/tti_robe.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -137,9 +137,9 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/tti_bomber.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/tti_bomber.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/tti_bomber.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/tti_bomber.rsi
 
 - type: entity
   parent: [ ClothingOuterStorageFoldableBase ]
@@ -148,9 +148,9 @@
   description: Trench for empire drone operator
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/operator.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/operator.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/operator.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/operator.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -190,9 +190,9 @@
   description: lord armored greatcoat
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/empirelord.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/empirelord.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/empirelord.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/empirelord.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -214,9 +214,9 @@
   description: empire preafect armored greatcoat
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/preafect.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/preafect.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/preafect.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/preafect.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -238,9 +238,9 @@
   description: empire preafect armored greatcoat
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/preafect_a.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/preafect_a.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/preafect_a.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/preafect_a.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -264,9 +264,9 @@
   description: A long greatcoat worn by Nexus personnel.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/nexus_greatcoat.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/nexus_greatcoat.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/nexus_greatcoat.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/nexus_greatcoat.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -276,9 +276,9 @@
   description: coat TL
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/coat_techniclogistic.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/coat_techniclogistic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/coat_techniclogistic.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/coat_techniclogistic.rsi
 
 #region Other
 - type: entity
@@ -288,9 +288,9 @@
   description: officer's armored greatcoat
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/dso.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/dso.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/dso.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/dso.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -312,9 +312,9 @@
   description: Стильный и защищённый тренч настоящего офицера Горлекса. Покажите этим корпоратам кто тут главный!
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Coats/syndicate.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/syndicate.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Coats/syndicate.rsi
+    sprite: Forge/Clothing/OuterClothing/Coats/syndicate.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -338,6 +338,6 @@
   description: A paramedic's trusty windbreaker, for all the space wind.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Old/OuterClothing/Coats/windbreaker_paramedic.rsi
+    sprite: Forge/Clothing/Old/OuterClothing/Coats/windbreaker_paramedic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Old/OuterClothing/Coats/windbreaker_paramedic.rsi
+    sprite: Forge/Clothing/Old/OuterClothing/Coats/windbreaker_paramedic.rsi

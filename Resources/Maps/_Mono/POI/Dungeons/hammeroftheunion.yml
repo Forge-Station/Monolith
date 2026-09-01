@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 277.0.0
-  forkId: frontier_mapping
-  forkVersion: 0f9a1fbc6aafd7435a73f5eef1a0576276111d77
-  time: 08/24/2026 10:47:35
-  entityCount: 3177
+  engineVersion: 264.0.0
+  forkId: ""
+  forkVersion: ""
+  time: 11/03/2025 00:47:27
+  entityCount: 3179
 maps: []
 grids:
 - 1
@@ -99,7 +99,7 @@ entities:
         path: Audio/Effects/alert.ogg
     - type: DecalGrid
       chunkCollection:
-        version: 3
+        version: 2
         nodes:
         - node:
             color: '#FFFFFFFF'
@@ -924,11 +924,6 @@ entities:
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: SpreaderGrid
-      spreadQueues:
-        Puddle: []
-        MetalFoam: []
-        Smoke: []
-        Kudzu: []
     - type: GravityShake
       shakeTimes: 10
     - type: GasTileOverlay
@@ -1189,15 +1184,49 @@ entities:
         uniqueMixes:
         - volume: 2500
           immutable: True
-          moles: {}
-        - volume: 2500
-          temperature: 293.15
-          moles: {}
+          moles:
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
         - volume: 2500
           temperature: 293.15
           moles:
-            Oxygen: 21.824879
-            Nitrogen: 82.10312
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+        - volume: 2500
+          temperature: 293.15
+          moles:
+          - 21.824879
+          - 82.10312
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
         chunkSize: 4
     - type: ShipGridLock
       locked: False
@@ -1237,8 +1266,6 @@ entities:
         6,4: 1
         6,0: 2170487694818476801
         5,0: 2155905024
-    - type: ThermalSignature
-    - type: ExplosionAirtightGrid
 - proto: AirAlarm
   entities:
   - uid: 2
@@ -1504,7 +1531,7 @@ entities:
       pos: 34.5,20.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -8790.854
+      secondsUntilStateChange: -8399.341
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1515,7 +1542,7 @@ entities:
       pos: 20.5,13.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -9153.5205
+      secondsUntilStateChange: -8762.008
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -9766,6 +9793,13 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
+- proto: ConstructionBox
+  entities:
+  - uid: 1232
+    components:
+    - type: Transform
+      pos: 33.5,29.5
+      parent: 1
 - proto: ConveyorBelt
   entities:
   - uid: 1233
@@ -14230,7 +14264,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 44.5,8.5
       parent: 1
-- proto: GunneryServerUltra
+- proto: GunneryServerOmega
   entities:
   - uid: 1811
     components:
@@ -14238,11 +14272,9 @@ entities:
       pos: 30.5,14.5
       parent: 1
     - type: Battery
-      startingCharge: 800
+      startingCharge: 0
     - type: ApcPowerReceiver
-      powerLoad: 50
-    - type: ApcPowerReceiverBattery
-      enabled: True
+      powerLoad: 100
 - proto: GyroscopeSecurity
   entities:
   - uid: 1812
@@ -14562,8 +14594,18 @@ entities:
         immutable: False
         temperature: 293.14923
         moles:
-          Oxygen: 1.7459903
-          Nitrogen: 6.568249
+        - 1.7459903
+        - 6.568249
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
 - proto: LootSpawnerMedicalClassy
   entities:
   - uid: 1951
@@ -14676,20 +14718,6 @@ entities:
     - type: Transform
       pos: 27.5,22.5
       parent: 1
-- proto: NFMagnetBoxConstruction
-  entities:
-  - uid: 1232
-    components:
-    - type: Transform
-      pos: 33.5,29.5
-      parent: 1
-- proto: NFMagnetBoxOre
-  entities:
-  - uid: 1859
-    components:
-    - type: Transform
-      pos: 32.5,29.5
-      parent: 1
 - proto: NitrogenCanister
   entities:
   - uid: 1855
@@ -14706,6 +14734,13 @@ entities:
     components:
     - type: Transform
       pos: 2.5,12.5
+      parent: 1
+- proto: OreBox
+  entities:
+  - uid: 1859
+    components:
+    - type: Transform
+      pos: 32.5,29.5
       parent: 1
 - proto: OxygenCanister
   entities:

@@ -1,5 +1,4 @@
 using Content.Shared.Chemistry.Components;
-using Content.Shared._Forge.Botany;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Audio;
 
@@ -122,17 +121,10 @@ public sealed partial class PlantHolderComponent : Component
     public bool ImproperPressure;
 
     /// <summary>
-    /// True if the plant is losing health because tray light mode does not match IdealLight.
+    /// Not currently used.
     /// </summary>
     [DataField]
     public bool ImproperLight;
-
-    /// <summary>
-    /// Forced day/shade setting used instead of a real lux sample.
-    /// Ambient matches typical station lighting (~7 cd).
-    /// </summary>
-    [DataField]
-    public HydroponicsLightMode LightMode;
 
     /// <summary>
     /// Set to true to force a plant update (visuals, component, etc.) regardless of the current

@@ -9,7 +9,7 @@
   components:
   - type: Appearance
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Modsuits/hme_lightmod.rsi
+    sprite: Forge/Clothing/Head/Modsuits/hme_lightmod.rsi
     layers:
     - state: helmet
     - state: helmet-sealed
@@ -116,7 +116,7 @@
   components:
   - type: Appearance
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Modsuits/hme_heavymod.rsi
+    sprite: Forge/Clothing/Head/Modsuits/hme_heavymod.rsi
     layers:
     - state: helmet
     - state: helmet-sealed
@@ -237,7 +237,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Modsuits/omnissiamod.rsi
+    sprite: Forge/Clothing/Head/Modsuits/omnissiamod.rsi
     layers:
     - state: helmet
     - state: helmet-sealed

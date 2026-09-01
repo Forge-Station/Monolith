@@ -37,8 +37,6 @@
     - type: NpcFactionMember
       factions:
       - TSFMC
-    - type: ChatRank
-      rank: tsf-o6
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TSFTrackingImplant ]
   - !type:AddComponentSpecial

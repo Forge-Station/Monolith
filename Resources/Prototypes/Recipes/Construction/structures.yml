@@ -770,7 +770,7 @@
   category: construction-category-structures
   description: This is a firelock - it locks an area when a fire alarm in the area is triggered. Don't get squished!
   icon:
-    sprite: _Forge/Structures/Doors/Airlocks/Standard/firelock.rsi # Forge-Change
+    sprite: Forge/Structures/Doors/Airlocks/Standard/firelock.rsi # Forge-Change
     state: closed
   objectType: Structure
   placementMode: SnapgridCenter
@@ -788,7 +788,7 @@
   category: construction-category-structures
   description: This is a firelock - it locks an area when a fire alarm in the area is triggered. Don't get squished!
   icon:
-    sprite: _Forge/Structures/Doors/Airlocks/Glass/firelock.rsi # Forge-Change
+    sprite: Forge/Structures/Doors/Airlocks/Glass/firelock.rsi # Forge-Change
     state: closed
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1274,7 +1274,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you.
   icon:
-    sprite: _Forge/Structures/Doors/Airlocks/Standard/basic.rsi # Forge-Change
+    sprite: Forge/Structures/Doors/Airlocks/Standard/basic.rsi # Forge-Change
     state: assembly
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1291,7 +1291,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you.
   icon:
-    sprite: _Forge/Structures/Doors/Airlocks/Glass/glass.rsi # Forge-Change
+    sprite: Forge/Structures/Doors/Airlocks/Glass/glass.rsi # Forge-Change
     state: assembly
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1308,7 +1308,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you.
   icon:
-    sprite: _Forge/Structures/Doors/Airlocks/Standard/clockwork_pinion.rsi # Forge-Change
+    sprite: Forge/Structures/Doors/Airlocks/Standard/clockwork_pinion.rsi # Forge-Change
     state: assembly
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1325,7 +1325,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you.
   icon:
-    sprite: _Forge/Structures/Doors/Airlocks/Glass/clockwork_pinion.rsi # Forge-Change
+    sprite: Forge/Structures/Doors/Airlocks/Glass/clockwork_pinion.rsi # Forge-Change
     state: assembly
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1342,7 +1342,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you. Necessary for connecting two space craft together.
   icon:
-    sprite: _Forge/Structures/Doors/Airlocks/Standard/shuttle.rsi # Frontier: Airlocks/Glass<Airlocks/Standard # Forge-Change
+    sprite: Forge/Structures/Doors/Airlocks/Standard/shuttle.rsi # Frontier: Airlocks/Glass<Airlocks/Standard # Forge-Change
     state: closed
   #  state: assembly
   objectType: Structure
@@ -1360,7 +1360,7 @@
   category: construction-category-structures
   description: It opens, it closes, and maybe crushes you. Necessary for connecting two space craft together. This one has a window.
   icon:
-    sprite: _Forge/Structures/Doors/Airlocks/Glass/shuttle.rsi # Forge-Change
+    sprite: Forge/Structures/Doors/Airlocks/Glass/shuttle.rsi # Forge-Change
     state: closed
   #  state: assembly
   objectType: Structure
@@ -1798,7 +1798,7 @@
   category: construction-category-structures
   description: Extra sturdy to resist the pressure of FTL or sustain damage from munitions.
   icon:
-    sprite: _Forge/Structures/Windows/shuttle_uran_window.rsi
+    sprite: Forge/Structures/Windows/shuttle_uran_window.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1820,7 +1820,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: _Forge/Structures/Windows/shuttle_uran_window_diagonal.rsi
+    sprite: Forge/Structures/Windows/shuttle_uran_window_diagonal.rsi
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1834,7 +1834,7 @@
   category: construction-category-structures
   description: Extra sturdy to resist the pressure of FTL or sustain damage from munitions.
   icon:
-    sprite: _Forge/Structures/Windows/shuttle_plasma_window.rsi
+    sprite: Forge/Structures/Windows/shuttle_plasma_window.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1856,7 +1856,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: _Forge/Structures/Windows/shuttle_plasma_window_diagonal.rsi
+    sprite: Forge/Structures/Windows/shuttle_plasma_window_diagonal.rsi
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter

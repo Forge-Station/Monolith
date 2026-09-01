@@ -7,9 +7,9 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Ears/Headsets/headset_emp.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_emp.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Ears/Headsets/headset_emp.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_emp.rsi
   - type: ContainerFill
     containers:
       key_slots:
@@ -24,9 +24,9 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Ears/Headsets/headset_emp.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_emp.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Ears/Headsets/headset_emp.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_emp.rsi
   - type: ContainerFill
     containers:
       key_slots:
@@ -48,9 +48,9 @@
       - EncryptionKeyRenegade
       - EncryptionKeyCommon
   - type: Sprite
-    sprite: _Forge/Clothing/Ears/Headsets/headset_renegade.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_renegade.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Ears/Headsets/headset_renegade.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_renegade.rsi
 
 - type: entity
   parent: [ClothingHeadsetAlt, BaseC3Contraband, ContrabandClothing]
@@ -65,9 +65,9 @@
       - EncryptionKeyRenegadeTech
       - EncryptionKeyCommon
   - type: Sprite
-    sprite: _Forge/Clothing/Ears/Headsets/headset_renegade.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_renegade.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Ears/Headsets/headset_renegade.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_renegade.rsi
 
 - type: entity
   parent: [ClothingHeadsetAlt, BaseC3Contraband, ContrabandClothing]
@@ -82,9 +82,9 @@
       - EncryptionKeyRenegadeCom
       - EncryptionKeyCommon
   - type: Sprite
-    sprite: _Forge/Clothing/Ears/Headsets/headset_renegade.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_renegade.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Ears/Headsets/headset_renegade.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_renegade.rsi
 
 # region Company
 - type: entity
@@ -99,9 +99,9 @@
       key_slots:
       - EncryptionKeyCommon
   - type: Sprite
-    sprite: _Forge/Clothing/Ears/Headsets/headset_techniclogistic.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_techniclogistic.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Ears/Headsets/headset_techniclogistic.rsi
+    sprite: Forge/Clothing/Ears/Headsets/headset_techniclogistic.rsi
 
 #region Other
 - type: entity

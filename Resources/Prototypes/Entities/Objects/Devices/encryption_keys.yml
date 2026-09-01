@@ -214,9 +214,9 @@
     - Service
     defaultChannel: Service
   - type: Item # Forge-change
-    sprite: _Forge/Objects/Devices/encryption_keys.rsi
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
   - type: Sprite # Forge-change
-    sprite: _Forge/Objects/Devices/encryption_keys.rsi
+    sprite: Forge/Objects/Devices/encryption_keys.rsi
     layers:
     - state: crypt_blue
     - state: nt_label

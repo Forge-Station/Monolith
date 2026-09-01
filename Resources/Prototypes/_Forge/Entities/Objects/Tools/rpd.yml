@@ -7,12 +7,12 @@
   description: A device used to rapidly deploy and remove atmospheric pipe networks using compressed matter cartridges.
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Tools/rpd.rsi
+    sprite: Forge/Objects/Tools/rpd.rsi
     state: icon
   - type: Item
-    sprite: _Forge/Objects/Tools/rpd.rsi
+    sprite: Forge/Objects/Tools/rpd.rsi
   - type: Clothing
-    sprite: _Forge/Objects/Tools/rpd.rsi
+    sprite: Forge/Objects/Tools/rpd.rsi
     quickEquip: false
     slots:
     - Belt

@@ -9,7 +9,7 @@
     - type: UseDelay
       delay: 0.5
     - type: Sprite
-      sprite: _Forge/Objects/Misc/passport.rsi
+      sprite: _EE/Contractors/Passport.rsi
       layers:
       - state: passport_biesel_open
     - type: Appearance
@@ -25,7 +25,7 @@
   id: SolFedPassport
   components:
     - type: Sprite
-      sprite: _Forge/Objects/Misc/passport.rsi
+      sprite: Forge/Passport.rsi
       layers:
       - state: passport_solfed_open # todo: allow people to toggle open and closed
     - type: ExtendDescription
@@ -54,7 +54,7 @@
           - !type:NationalityRequirement
             nationalities:
               - USSP
-      - description: passport-solfed-freecolonies
+      - description: passport-solfed-freedom
         fontSize: 12
         color: "#ad4141"
         requireDetailRange: true
@@ -68,7 +68,7 @@
   id: ImperialPassport
   components:
     - type: Sprite
-      sprite: _Forge/Objects/Misc/passport.rsi
+      sprite: Forge/Passport.rsi
       layers:
       - state: passport_imperial_open # todo: allow people to toggle open and closed
     - type: ExtendDescription
@@ -97,7 +97,7 @@
           - !type:NationalityRequirement
             nationalities:
               - USSP
-      - description: passport-imperial-freecolonies
+      - description: passport-imperial-freedom
         fontSize: 12
         color: "#ad4141"
         requireDetailRange: true
@@ -111,7 +111,7 @@
   id: USSPPassport
   components:
     - type: Sprite
-      sprite: _Forge/Objects/Misc/passport.rsi
+      sprite: Forge/Passport.rsi
       layers:
       - state: passport_ussp_open # todo: allow people to toggle open and closed
     - type: ExtendDescription
@@ -140,7 +140,7 @@
           - !type:NationalityRequirement
             nationalities:
               - USSP
-      - description: passport-ussp-freecolonies
+      - description: passport-ussp-freedom
         fontSize: 12
         color: "#ad4141"
         requireDetailRange: true
@@ -154,7 +154,7 @@
   id: FreeColoniesPassport
   components:
     - type: Sprite
-      sprite: _Forge/Objects/Misc/passport.rsi
+      sprite: Forge/Passport.rsi
       layers:
       - state: passport_freedom_open # todo: allow people to toggle open and closed
     - type: ExtendDescription

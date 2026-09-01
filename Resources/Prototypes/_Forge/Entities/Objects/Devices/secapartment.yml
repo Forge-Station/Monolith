@@ -6,7 +6,7 @@
   suffix: Powered
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Devices/secapartments/TSF.rsi
+    sprite: Forge/Objects/Devices/secapartments/TSF.rsi
     layers:
     - state: base
     - state: powered
@@ -76,7 +76,7 @@
   suffix: Powered
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Devices/secapartments/Ren.rsi
+    sprite: Forge/Objects/Devices/secapartments/Ren.rsi
     layers:
     - state: base
     - state: powered
@@ -146,7 +146,7 @@
   suffix: Powered
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Devices/secapartments/NT.rsi
+    sprite: Forge/Objects/Devices/secapartments/NT.rsi
     layers:
     - state: base
     - state: powered
@@ -217,7 +217,7 @@
   suffix: Powered
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Devices/secapartments/EMP.rsi
+    sprite: Forge/Objects/Devices/secapartments/EMP.rsi
     layers:
     - state: base
     - state: powered
@@ -287,7 +287,7 @@
   suffix: НЕ СПАВНИТЬ
   components:
   - type: Sprite
-    sprite: _Forge/Objects/Devices/secapartments/USSP.rsi
+    sprite: Forge/Objects/Devices/secapartments/USSP.rsi
     layers:
     - state: base
     - state: powered

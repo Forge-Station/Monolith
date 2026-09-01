@@ -34,24 +34,24 @@
   components:
   - type: EmitSoundOnUse
     sound:
-      path: /Audio/_Forge/Effects/buranya.ogg
+      path: /Audio/Forge/Effects/buranya.ogg
       params:
         volume: -5
         maxDistance: 12
   - type: EmitSoundOnCollide
     sound:
-      path: /Audio/_Forge/Effects/doridori.ogg
+      path: /Audio/Forge/Effects/doridori.ogg
       params:
         volume: 1
         maxDistance: 8
   - type: EmitSoundOnActivate
     sound:
-      path: /Audio/_Forge/Effects/buranya.ogg
+      path: /Audio/Forge/Effects/buranya.ogg
       params:
         volume: -5
         maxDistance: 12
   - type: Sprite
-    sprite: _Forge/Objects/Fun/nekoark.rsi
+    sprite: Forge/Objects/Fun/nekoark.rsi
     state: icon
     scale: 0.4, 0.4
     rotation: 35

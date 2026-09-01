@@ -36,9 +36,6 @@ public sealed partial class ShowRoleInformationWindow : FancyWindow
     {
         _currentKeyWindow = windowId;
 
-        if (string.IsNullOrWhiteSpace(description))
-            return;
-
         RoleNameLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("show-role-information-job-name", ("name", Loc.GetString(name)))));
         RoleDescriptionLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(description)));
         RoleAdditionalLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("show-role-information-additional")));

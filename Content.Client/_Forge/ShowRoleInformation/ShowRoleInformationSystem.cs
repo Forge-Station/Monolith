@@ -33,6 +33,7 @@ public sealed class RoleDescriptionSystem : EntitySystem
         }
 
         if (!TryComp<ShowRoleInformationComponent>(currentEntityUid, out var currentShowRoleInformationComponent)
+            || string.IsNullOrEmpty(currentShowRoleInformationComponent.Window.Id)
             || _skipWindows.Contains(currentShowRoleInformationComponent.Window)
             || TryComp<ShowRoleInformationComponent>(_previousEntityUid, out var previousShowRoleInformationComponent)
             && previousShowRoleInformationComponent.SkipWindows.Contains(currentShowRoleInformationComponent.Window))

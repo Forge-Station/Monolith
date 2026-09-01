@@ -4,7 +4,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Forge/Objects/Devices/tablet_atmos.rsi
+    sprite: _Forge/Objects/Devices/tablet_atmos.rsi
     layers:
     - state: tablet
     - state: generic
@@ -32,9 +32,9 @@
   parent: [BaseHandheldForgeNetworkMonitor, BaseHandheldComputer]
   components:
   - type: Sprite
-    sprite: Forge/Objects/Devices/tablet_atmos.rsi
+    sprite: _Forge/Objects/Devices/tablet_atmos.rsi
   - type: Item
-    sprite: Forge/Objects/Devices/tablet_atmos.rsi
+    sprite: _Forge/Objects/Devices/tablet_atmos.rsi
   - type: AtmosMonitoringConsole
     navMapTileColor: "#1a1a1a"
     navMapWallColor: "#404040"
@@ -68,9 +68,9 @@
   parent: [BaseHandheldForgeNetworkMonitor, BaseHandheldComputer]
   components:
   - type: Sprite
-    sprite: Forge/Objects/Devices/tablet_energy.rsi
+    sprite: _Forge/Objects/Devices/tablet_energy.rsi
   - type: Item
-    sprite: Forge/Objects/Devices/tablet_energy.rsi
+    sprite: _Forge/Objects/Devices/tablet_energy.rsi
   - type: PowerMonitoringConsole
   - type: PowerMonitoringCableNetworks
   - type: ActivatableUI

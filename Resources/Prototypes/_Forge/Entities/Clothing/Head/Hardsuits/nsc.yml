@@ -5,10 +5,10 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/nexus_worker_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/nexus_worker_hardsuit_helm.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/nexus_worker_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/nexus_worker_hardsuit_helm.rsi
     clothingVisuals:
       head:
       - state: equiped-HELMET
@@ -26,10 +26,10 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/nexus_t1_mil_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/nexus_t1_mil_hardsuit_helm.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/nexus_t1_mil_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/nexus_t1_mil_hardsuit_helm.rsi
     clothingVisuals:
       head:
       - state: equiped-HELMET
@@ -49,10 +49,10 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/nexus_t2_mil_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/nexus_t2_mil_hardsuit_helm.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/nexus_t2_mil_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/nexus_t2_mil_hardsuit_helm.rsi
     clothingVisuals:
       head:
       - state: equipped-HEAD
@@ -72,10 +72,10 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/nexus_t3_mil_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/nexus_t3_mil_hardsuit_helm.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/nexus_t3_mil_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/nexus_t3_mil_hardsuit_helm.rsi
     clothingVisuals:
       head:
       - state: equipped-HEAD-sealed

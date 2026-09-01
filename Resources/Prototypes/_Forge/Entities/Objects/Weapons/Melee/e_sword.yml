@@ -100,7 +100,7 @@
   description: На первый взгляд неприметный пласталевый клинок, с парой кнопок на рукояти.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Melee/tl_e_sword.rsi
+    sprite: _Forge/Objects/Weapons/Melee/tl_e_sword.rsi
 # region WIP
     layers:
     - state: e_sword
@@ -110,7 +110,7 @@
       shader: unshaded
       map: [ "blade" ]
   - type: Item
-    sprite: Forge/Objects/Weapons/Melee/tl_e_sword-inhands.rsi
+    sprite: _Forge/Objects/Weapons/Melee/tl_e_sword-inhands.rsi
   - type: EnergySword
     colorOptions:
       - "#ebf0e9"
@@ -126,7 +126,7 @@
     - "#2288ff" # can only be blue
 
 - type: entity
-  parent: BaseMeleeWeaponEnergy
+  parent: [ BaseMeleeWeaponEnergy, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: WeaponPhaseBladeForge
   name: nano-laminate phaseblade
   description: A heavy bladed weapon with a wicked edge, commonly seen in the hands of pre-fracture warriors. Can be activated to adjust to combat needs

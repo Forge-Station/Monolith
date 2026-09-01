@@ -6,6 +6,7 @@ using Content.Server.Popups;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Atmos;
 using Content.Shared.Botany;
+using Content.Shared._Forge.Botany;
 using Content.Shared.Burial.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates.Helpers;
@@ -15,6 +16,28 @@ using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Radiation.Components;
+using Content.Shared.Random;
+using Content.Shared.Tag;
+using Content.Shared.Verbs;
+using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+using Content.Server.Labels.Components;
+using Content.Shared.Containers.ItemSlots;
+using Content.Server._Forge.Botany.PlantGrab;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
+using Content.Shared.Hands.Components;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction;
+using Content.Shared.Popups;
+using Content.Shared.Radiation.Components;
 using Content.Shared.Random;
 using Content.Shared.Tag;
 using Robust.Server.GameObjects;
@@ -25,6 +48,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Server.Labels.Components;
 using Content.Shared.Containers.ItemSlots;
+using Content.Server._Forge.Botany.PlantGrab;
 
 namespace Content.Server.Botany.Systems;
 
@@ -43,6 +67,7 @@ public sealed partial class PlantHolderSystem : EntitySystem
     [Dependency] private RandomHelperSystem _randomHelper = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private PlantGrabSystem _plantGrab = default!;
 
 
     public const float HydroponicsSpeedMultiplier = 1f;
@@ -58,6 +83,7 @@ public sealed partial class PlantHolderSystem : EntitySystem
         SubscribeLocalEvent<PlantHolderComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<PlantHolderComponent, InteractHandEvent>(OnInteractHand);
         SubscribeLocalEvent<PlantHolderComponent, SolutionTransferredEvent>(OnSolutionTransferred);
+        SubscribeLocalEvent<PlantHolderComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
     }
 
     public override void Update(float frameTime)
@@ -132,6 +158,9 @@ public sealed partial class PlantHolderSystem : EntitySystem
             args.PushMarkup(Loc.GetString($"plant-holder-component-nutrient-level-message",
                 ("nutritionLevel", (int)component.NutritionLevel)));
 
+            args.PushMarkup(Loc.GetString("plant-holder-light-mode-examine",
+                ("mode", Loc.GetString($"plant-holder-light-{component.LightMode.ToString().ToLowerInvariant()}"))));
+
             if (component.DrawWarnings)
             {
                 if (component.Toxins > 40f)
@@ -148,8 +177,62 @@ public sealed partial class PlantHolderSystem : EntitySystem
 
                 if (component.MissingGas > 0)
                     args.PushMarkup(Loc.GetString("plant-holder-component-gas-missing-warning"));
+
+                if (component.Seed is { Radioactive: true })
+                    args.PushMarkup(Loc.GetString("plant-holder-component-radioactive-warning"));
+
+                if (component.Seed is { CarnivorousGrab: true })
+                    args.PushMarkup(Loc.GetString("plant-holder-component-grabber-warning"));
+
+                if (component.Seed is { CarnivorousPestEater: true })
+                    args.PushMarkup(Loc.GetString("plant-holder-component-pest-eater-warning"));
+
+                if (component.Seed is { GeneLocked: true })
+                    args.PushMarkup(Loc.GetString("plant-holder-component-gene-locked-warning"));
             }
         }
+    }
+
+    private void OnGetAltVerbs(Entity<PlantHolderComponent> entity, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        var uid = entity.Owner;
+        var component = entity.Comp;
+        var user = args.User;
+        var next = component.LightMode switch
+        {
+            HydroponicsLightMode.Ambient => HydroponicsLightMode.Day,
+            HydroponicsLightMode.Day => HydroponicsLightMode.Shade,
+            _ => HydroponicsLightMode.Ambient
+        };
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("plant-holder-light-verb",
+                ("mode", Loc.GetString($"plant-holder-light-{next.ToString().ToLowerInvariant()}"))),
+            Act = () =>
+            {
+                component.LightMode = next;
+                component.UpdateSpriteAfterUpdate = true;
+                UpdateSprite(uid, component);
+                _popup.PopupEntity(Loc.GetString("plant-holder-light-mode-set",
+                    ("mode", Loc.GetString($"plant-holder-light-{next.ToString().ToLowerInvariant()}"))),
+                    uid, user);
+            },
+            Priority = 2
+        });
+    }
+
+    public static float GetLightModeLux(HydroponicsLightMode mode)
+    {
+        return mode switch
+        {
+            HydroponicsLightMode.Day => 10f,
+            HydroponicsLightMode.Shade => 3f,
+            _ => 7f
+        };
     }
 
     private void OnInteractUsing(Entity<PlantHolderComponent> entity, ref InteractUsingEvent args)
@@ -560,6 +643,20 @@ public sealed partial class PlantHolderSystem : EntitySystem
             component.ImproperHeat = false;
         }
 
+        // Tray light mode vs IdealLight / LightTolerance (Photozyme and shade-loving lines).
+        var lux = GetLightModeLux(component.LightMode);
+        if (MathF.Abs(lux - component.Seed.IdealLight) > component.Seed.LightTolerance)
+        {
+            component.Health -= healthMod;
+            component.ImproperLight = true;
+            if (component.DrawWarnings)
+                component.UpdateSpriteAfterUpdate = true;
+        }
+        else
+        {
+            component.ImproperLight = false;
+        }
+
         // Gas production.
         var exudeCount = component.Seed.ExudeGasses.Count;
         if (exudeCount > 0)
@@ -586,11 +683,16 @@ public sealed partial class PlantHolderSystem : EntitySystem
                 component.UpdateSpriteAfterUpdate = true;
         }
 
-        // Weed levels.
+        // Pests.
         if (component.PestLevel > 0)
         {
-            // TODO: Carnivorous plants?
-            if (component.PestLevel > component.Seed.PestTolerance)
+            if (component.Seed.CarnivorousPestEater)
+            {
+                var eaten = MathF.Min(component.PestLevel, 2f * HydroponicsSpeedMultiplier);
+                component.PestLevel -= eaten;
+                component.NutritionLevel = MathF.Min(component.NutritionLevel + eaten * 0.5f, 100f);
+            }
+            else if (component.PestLevel > component.Seed.PestTolerance)
             {
                 component.Health -= HydroponicsSpeedMultiplier;
             }
@@ -599,11 +701,16 @@ public sealed partial class PlantHolderSystem : EntitySystem
                 component.UpdateSpriteAfterUpdate = true;
         }
 
-        // Weed levels.
+        // Weeds.
         if (component.WeedLevel > 0)
         {
-            // TODO: Parasitic plants.
-            if (component.WeedLevel >= component.Seed.WeedTolerance)
+            if (component.Seed.CarnivorousPestEater)
+            {
+                var eaten = MathF.Min(component.WeedLevel, 1.5f * HydroponicsSpeedMultiplier);
+                component.WeedLevel -= eaten;
+                component.NutritionLevel = MathF.Min(component.NutritionLevel + eaten * 0.4f, 100f);
+            }
+            else if (component.WeedLevel >= component.Seed.WeedTolerance)
             {
                 component.Health -= HydroponicsSpeedMultiplier;
             }
@@ -643,6 +750,7 @@ public sealed partial class PlantHolderSystem : EntitySystem
                 {
                     component.Harvest = true;
                     component.LastProduce = component.Age;
+                    EmitMaturationGases(uid, component);
                 }
             }
             else
@@ -791,6 +899,8 @@ public sealed partial class PlantHolderSystem : EntitySystem
         component.WeedLevel += 1 * HydroponicsSpeedMultiplier;
         component.PestLevel = 0;
         UpdateSprite(uid, component);
+        _plantGrab.ReleaseAllFrom(uid);
+        SyncRadiation(uid, component);
     }
 
     public void RemovePlant(EntityUid uid, PlantHolderComponent? component = null)
@@ -812,6 +922,8 @@ public sealed partial class PlantHolderSystem : EntitySystem
         component.ImproperHeat = false;
 
         UpdateSprite(uid, component);
+        _plantGrab.ReleaseAllFrom(uid);
+        SyncRadiation(uid, component);
     }
 
     public void AffectGrowth(EntityUid uid, int amount, PlantHolderComponent? component = null)
@@ -910,6 +1022,15 @@ public sealed partial class PlantHolderSystem : EntitySystem
                 _appearance.SetData(uid, PlantHolderVisuals.HealthLight, component.Health <= component.Seed.Endurance / 2f);
             }
 
+            var healthPercent = component.Seed.Endurance > 0
+                ? Math.Clamp(component.Health / component.Seed.Endurance, 0f, 1f)
+                : 0f;
+            if (component.Dead)
+                healthPercent = 0f;
+
+            _appearance.SetData(uid, PlantHolderVisuals.HasPlant, true, app);
+            _appearance.SetData(uid, PlantHolderVisuals.HealthPercent, healthPercent, app);
+
             if (component.Dead)
             {
                 _appearance.SetData(uid, PlantHolderVisuals.PlantRsi, component.Seed.PlantRsi.ToString(), app);
@@ -938,17 +1059,29 @@ public sealed partial class PlantHolderSystem : EntitySystem
         {
             _appearance.SetData(uid, PlantHolderVisuals.PlantState, "", app);
             _appearance.SetData(uid, PlantHolderVisuals.HealthLight, false, app);
+            _appearance.SetData(uid, PlantHolderVisuals.HasPlant, false, app);
+            _appearance.SetData(uid, PlantHolderVisuals.HealthPercent, 0f, app);
         }
 
+        var weedsHigh = component.WeedLevel >= 5;
+        var radioactive = component.Seed is { Radioactive: true } && !component.Dead && component.Seed != null;
+        _appearance.SetData(uid, PlantHolderVisuals.WeedsHigh, weedsHigh, app);
+        _appearance.SetData(uid, PlantHolderVisuals.Radioactive, radioactive, app);
+
         if (!component.DrawWarnings)
+        {
+            SyncRadiation(uid, component);
             return;
+        }
 
         _appearance.SetData(uid, PlantHolderVisuals.WaterLight, component.WaterLevel <= 15, app);
         _appearance.SetData(uid, PlantHolderVisuals.NutritionLight, component.NutritionLevel <= 8, app);
         _appearance.SetData(uid, PlantHolderVisuals.AlertLight,
             component.WeedLevel >= 5 || component.PestLevel >= 5 || component.Toxins >= 40 || component.ImproperHeat ||
-            component.ImproperLight || component.ImproperPressure || component.MissingGas > 0, app);
+            component.ImproperLight || component.ImproperPressure || component.MissingGas > 0 ||
+            component.Seed is { Radioactive: true } || component.Seed is { CarnivorousGrab: true }, app);
         _appearance.SetData(uid, PlantHolderVisuals.HarvestLight, component.Harvest, app);
+        SyncRadiation(uid, component);
     }
 
     /// <summary>
@@ -972,5 +1105,42 @@ public sealed partial class PlantHolderSystem : EntitySystem
         component.SkipAging++; // We're forcing an update cycle, so one age hasn't passed.
         component.ForceUpdate = true;
         Update(uid, component);
+    }
+
+    private void EmitMaturationGases(EntityUid uid, PlantHolderComponent component)
+    {
+        if (component.Seed == null || component.Seed.ExudeGasses.Count == 0)
+            return;
+
+        var environment = _atmosphere.GetContainingMixture(uid, true, true);
+        if (environment == null)
+            return;
+
+        var count = component.Seed.ExudeGasses.Count;
+        foreach (var (gas, amount) in component.Seed.ExudeGasses)
+        {
+            // Burst of gas on ripening: several times the slow cycle emission.
+            var moles = MathF.Max(2f, amount * MathF.Max(1f, component.Seed.Potency / 10f) / count);
+            environment.AdjustMoles(gas, moles);
+        }
+    }
+
+    private void SyncRadiation(EntityUid uid, PlantHolderComponent component)
+    {
+        var shouldIrradiate = component.Seed is { Radioactive: true } && !component.Dead && component.Seed != null;
+        if (shouldIrradiate)
+        {
+            var rad = EnsureComp<RadiationSourceComponent>(uid);
+            rad.Enabled = true;
+            rad.Intensity = MathF.Max(0.4f, component.Seed!.RadiationIntensity * MathF.Max(0.5f, component.Seed.Potency / 80f));
+            rad.Slope = 0.6f;
+            return;
+        }
+
+        if (TryComp<RadiationSourceComponent>(uid, out var existing))
+        {
+            existing.Enabled = false;
+            RemComp<RadiationSourceComponent>(uid);
+        }
     }
 }

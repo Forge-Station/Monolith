@@ -7,9 +7,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/ui_med_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/ui_med_hardsuit_helm.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/ui_med_hardsuit_helm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/ui_med_hardsuit_helm.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -49,9 +49,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/ui_light_juggernaut_helmet.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/ui_light_juggernaut_helmet.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/ui_light_juggernaut_helmet.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/ui_light_juggernaut_helmet.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000

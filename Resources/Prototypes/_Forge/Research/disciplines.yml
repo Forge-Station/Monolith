@@ -10,3 +10,16 @@
     2: 0.75
     3: 0.75
   uiName: ARM
+
+- type: techDiscipline
+  id: MercenaryShipyard
+  name: research-discipline-mercenaryshipyard
+  color: "#8b3a3a"
+  icon:
+    sprite: _Mono/Interface/Misc/research_disciplines_tsf.rsi
+    state: shipyard
+  tierPrerequisites:
+    1: 0
+    2: 0.75
+    3: 0.75
+  uiName: SHIP

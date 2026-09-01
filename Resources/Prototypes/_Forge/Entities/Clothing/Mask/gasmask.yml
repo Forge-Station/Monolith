@@ -9,9 +9,9 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Forge/Clothing/Mask/renegate.rsi
+    sprite: _Forge/Clothing/Mask/renegate.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/renegate.rsi
+    sprite: _Forge/Clothing/Mask/renegate.rsi
 # region Empire
 - type: entity
   parent: ClothingMaskGasSecurity
@@ -23,9 +23,9 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Forge/Clothing/Mask/empire.rsi
+    sprite: _Forge/Clothing/Mask/empire.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/empire.rsi
+    sprite: _Forge/Clothing/Mask/empire.rsi
 
 # region Company
 - type: entity
@@ -38,9 +38,9 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Forge/Clothing/Mask/nexus_mask.rsi
+    sprite: _Forge/Clothing/Mask/nexus_mask.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/nexus_mask.rsi
+    sprite: _Forge/Clothing/Mask/nexus_mask.rsi
 
 - type: entity
   parent: [ClothingMaskGas, BaseFactionGearOtherFactionT0]
@@ -52,9 +52,9 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Forge/Clothing/Mask/mask_techniclogistic.rsi
+    sprite: _Forge/Clothing/Mask/mask_techniclogistic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/mask_techniclogistic.rsi
+    sprite: _Forge/Clothing/Mask/mask_techniclogistic.rsi
 
 - type: entity
   parent: [ClothingMaskGasSecurity, BaseFactionGearOtherFactionT1]
@@ -66,9 +66,9 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Forge/Clothing/Mask/tti_medical.rsi
+    sprite: _Forge/Clothing/Mask/tti_medical.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/tti_medical.rsi
+    sprite: _Forge/Clothing/Mask/tti_medical.rsi
 
 - type: entity
   parent: ClothingMaskGasSecurity
@@ -80,10 +80,10 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Forge/Clothing/Mask/ui_gasmask.rsi
+    sprite: _Forge/Clothing/Mask/ui_gasmask.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/ui_gasmask.rsi
-    
+    sprite: _Forge/Clothing/Mask/ui_gasmask.rsi
+
 - type: entity
   parent: ClothingMaskGasSecurity
   id: ClothingMaskGasViperGroup
@@ -93,9 +93,9 @@
   - type: Item
     size: Small
   - type: Sprite
-    sprite: Forge/Clothing/Mask/viper_group.rsi
+    sprite: _Forge/Clothing/Mask/viper_group.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/viper_group.rsi
+    sprite: _Forge/Clothing/Mask/viper_group.rsi
 
 #region Other
 - type: entity
@@ -105,9 +105,9 @@
   description: Плотно прилегающая тактическая маска, которую можно подключить к дыхательному баллону.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Mask/gascontractor.rsi
+    sprite: _Forge/Clothing/Mask/gascontractor.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/gascontractor.rsi
+    sprite: _Forge/Clothing/Mask/gascontractor.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: Armor
@@ -125,9 +125,9 @@
   description: A alternative issue NFSD gas mask.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Mask/nfsd_alt.rsi
+    sprite: _Forge/Clothing/Mask/nfsd_alt.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/nfsd_alt.rsi
+    sprite: _Forge/Clothing/Mask/nfsd_alt.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -143,9 +143,9 @@
   description: NFSD coroner gas mask
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Mask/coroner.rsi
+    sprite: _Forge/Clothing/Mask/coroner.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/coroner.rsi
+    sprite: _Forge/Clothing/Mask/coroner.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: Armor
@@ -163,9 +163,9 @@
   description: Advanced issue NFSD gas mask.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Mask/nfsd_up.rsi
+    sprite: _Forge/Clothing/Mask/nfsd_up.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Mask/nfsd_up.rsi
+    sprite: _Forge/Clothing/Mask/nfsd_up.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: Armor

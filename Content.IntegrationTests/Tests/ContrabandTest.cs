@@ -1,3 +1,4 @@
+#nullable enable
 using Content.Shared.Contraband;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;

@@ -1428,6 +1428,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
             if (EntManager.HasComponent<FTLComponent>(gridUid))
                 continue;
 
+            if (EntManager.TryGetComponent<IFFComponent>(gridUid, out var iff) && (iff.Flags & IFFFlags.Hide) != 0 && consoleXform.GridUid != gridUid)
+                continue;
+
             var detectionLevel = _consoleEntity == null ? DetectionLevel.Detected : GetGridDetected(gridUid);
             if (detectionLevel == DetectionLevel.Undetected)
                 continue;
@@ -1471,6 +1474,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                 continue;
 
             if (!EntManager.TryGetComponent<TransformComponent>(gUid, out var parentXform))
+                continue;
+
+            if (EntManager.TryGetComponent<IFFComponent>(gUid, out var iff) && (iff.Flags & IFFFlags.Hide) != 0 && consoleXform.GridUid != gUid)
                 continue;
 
             var outline = ShipShieldOutline.GetVertices(grid.Comp, shieldState.Padding);

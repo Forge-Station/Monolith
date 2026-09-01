@@ -1,0 +1,63 @@
+- type: entity
+  id: MachineShieldPowerSourceT1Circuitboard
+  parent: BaseMachineCircuitboard
+  name: IPS-90 shield power source machine board
+  description: A machine printed circuit board for a tier-1 shield power source.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: ShieldPowerSourceT1
+    requirements:
+      Capacitor: 3
+      Manipulator: 1
+      MatterBin: 2
+    minimumStockPartRating: 1
+
+- type: entity
+  id: MachineShieldPowerSourceT2Circuitboard
+  parent: BaseMachineCircuitboard
+  name: IPS-180 shield power source machine board
+  description: A machine printed circuit board for a tier-2 shield power source.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: ShieldPowerSourceT2
+    requirements:
+      Capacitor: 4
+      Manipulator: 2
+      MatterBin: 2
+    minimumStockPartRating: 3
+
+- type: entity
+  id: MachineShieldPowerSourceT3Circuitboard
+  parent: BaseMachineCircuitboard
+  name: IPS-360 shield power source machine board
+  description: A machine printed circuit board for a tier-3 shield power source.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: ShieldPowerSourceT3
+    requirements:
+      Capacitor: 5
+      Manipulator: 2
+      MatterBin: 3
+    minimumStockPartRating: 4
+
+- type: entity
+  id: MachineShieldPowerSourceT4Circuitboard
+  parent: BaseMachineCircuitboard
+  name: IPS-870 shield power source machine board
+  description: A machine printed circuit board for a tier-4 shield power source.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: ShieldPowerSourceT4
+    requirements:
+      Capacitor: 6
+      Manipulator: 3
+      MatterBin: 3
+    minimumStockPartRating: 6

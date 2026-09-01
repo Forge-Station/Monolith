@@ -1,8 +1,10 @@
-using Content.Server.Power.Components;
 // Forge-Change: dropped Content.Server._Mono.FireControl + Content.Server.Shuttles.Systems imports;
 // shield state replicates via the networked ShipShieldEmitterComponent instead of console refreshes.
+// Forge-Change: shields draw from ShieldPowerConsumer / ИП instead of ApcPowerReceiver.
+using Content.Server._Forge.ShipShieldPower;
 using Content.Server.Station.Systems;
 using Content.Shared._Crescent.ShipShields;
+using Content.Shared._Forge.ShipShieldPower;
 using Content.Shared._Mono.SpaceArtillery;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
@@ -37,6 +39,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     [Dependency] private StationSystem _station = default!; // Forge-Change
     [Dependency] private SharedAudioSystem _audio = default!; // Forge-Change
     [Dependency] private IGameTiming _timing = default!; // Forge-Change
+    [Dependency] private ShieldPowerSystem _shieldPower = default!; // Forge-Change
 
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<ShipWeaponProjectileComponent> _shipWeaponProjectileQuery;
@@ -61,7 +64,8 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<ShipShieldEmitterComponent, ApcPowerReceiverComponent>();
+        // Forge-Change: ShieldPowerConsumer replaces ApcPowerReceiver — combat load stays off Pow3r.
+        var query = EntityQueryEnumerator<ShipShieldEmitterComponent, ShieldPowerConsumerComponent>();
         while (query.MoveNext(out var uid, out var emitter, out var power))
         {
             var interval = emitter.EmitterUpdateInterval > 0f ? emitter.EmitterUpdateInterval : 1.5f;
@@ -89,7 +93,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
 
             if (emitter.HealScalesWithPowerReceived && power.Powered)
             {
-                var ratio = Math.Clamp(power.PowerReceived / Math.Max(power.Load, 1f), 0f, 1f);
+                var ratio = Math.Clamp(power.PowerReceived / Math.Max(power.DesiredDraw, 1f), 0f, 1f);
                 healed *= ratio;
             }
 
@@ -104,7 +108,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
 
             emitter.Damage += emitter.PassiveShieldDamagePerSecond * interval;
 
-            AdjustEmitterLoad(uid, emitter, power);
+            _shieldPower.SyncDesiredDraw(uid, emitter, power);
 
             var parent = Transform(uid).GridUid;
 

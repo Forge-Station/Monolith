@@ -24,8 +24,6 @@
     unpoweredBonus: 5
     damageOverloadTimePunishment: 63
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -67,8 +65,6 @@
     maxDraw: 213840
     unpoweredBonus: 4
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 71280
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -109,8 +105,6 @@
     damageLimit: 118000
     baseDraw: 66744
     damageExp: 1.00
-  - type: ApcPowerReceiver
-    powerLoad: 66744
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -154,8 +148,6 @@
     unpoweredBonus: 5.5
     damageOverloadTimePunishment: 92
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 40500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -197,8 +189,6 @@
     unpoweredBonus: 4.4
     damageOverloadTimePunishment: 165
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 49500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -240,8 +230,6 @@
     maxDraw: 139050
     unpoweredBonus: 5.5
     damageOverloadTimePunishment: 181
-  - type: ApcPowerReceiver
-    powerLoad: 46350
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -285,8 +273,6 @@
     damageOverloadTimePunishment: 46
     unpoweredBonus: 5
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -328,8 +314,6 @@
     damageOverloadTimePunishment: 82
     unpoweredBonus: 4
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 71280
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -371,8 +355,6 @@
     maxDraw: 200232
     damageOverloadTimePunishment: 91
     unpoweredBonus: 5
-  - type: ApcPowerReceiver
-    powerLoad: 66744
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -416,8 +398,6 @@
     unpoweredBonus: 5
     damageOverloadTimePunishment: 71
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 55620
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -459,8 +439,6 @@
     damageOverloadTimePunishment: 127
     unpoweredBonus: 4
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 67980
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -502,8 +480,6 @@
     damageOverloadTimePunishment: 140
     damageExp: 1.00
     unpoweredBonus: 5
-  - type: ApcPowerReceiver
-    powerLoad: 63654
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -548,8 +524,6 @@
     unpoweredBonus: 5
     collisionResistanceMultiplier: 0.4
     powerModifier: 0.44
-  - type: ApcPowerReceiver
-    powerLoad: 40500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -592,8 +566,6 @@
     damageOverloadTimePunishment: 162
     collisionResistanceMultiplier: 0.4
     powerModifier: 0.44
-  - type: ApcPowerReceiver
-    powerLoad: 49500
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -636,8 +608,6 @@
     damageExp: 1.00
     unpoweredBonus: 5
     powerModifier: 0.44
-  - type: ApcPowerReceiver
-    powerLoad: 46350
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -681,8 +651,6 @@
     unpoweredBonus: 5
     damageOverloadTimePunishment: 81
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -726,8 +694,6 @@
     unpoweredBonus: 5
     damageOverloadTimePunishment: 63
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -769,8 +735,6 @@
     maxDraw: 213840
     unpoweredBonus: 4
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 71280
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -811,8 +775,6 @@
     damageLimit: 118000
     baseDraw: 66744
     damageExp: 1.00
-  - type: ApcPowerReceiver
-    powerLoad: 66744
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -854,8 +816,6 @@
     unpoweredBonus: 5
     damageOverloadTimePunishment: 81
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 58320
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -897,8 +857,6 @@
     unpoweredBonus: 5.5
     damageOverloadTimePunishment: 125
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 36000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -940,8 +898,6 @@
     unpoweredBonus: 5
     damageOverloadTimePunishment: 63
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 51840
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -983,8 +939,6 @@
     unpoweredBonus: 5
     damageOverloadTimePunishment: 97
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 49440
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5
@@ -1027,8 +981,6 @@
     unpoweredBonus: 5
     damageOverloadTimePunishment: 123
     collisionResistanceMultiplier: 0.4
-  - type: ApcPowerReceiver
-    powerLoad: 36000
   - type: Sprite
     sprite: Forge/Structures/Machines/shield_fsg_tier3.rsi
     offset: 0.5,-0.5

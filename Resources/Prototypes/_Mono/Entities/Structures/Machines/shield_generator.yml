@@ -1,9 +1,9 @@
 # Mono shield fixture density (1x1 bounds −0.45): MS-100 / Sentinel 190; MS-250 / Aegis 300; MS-500 / Titan 450;
 # LM-212 capital 550; FS-421 POI 700.
-# Base
+# Base — Forge-Change: powered by ShieldPowerConsumer / ИП, not ApcPowerReceiver / Pow3r.
 - type: entity
   id: ShieldGeneratorBase
-  parent: BaseMachinePowered
+  parent: BaseMachine
   name: Shield Generator
   abstract: true
   components:
@@ -77,9 +77,10 @@
     color: "#FF3333"
   - type: AnimationPlayer
   - type: LitOnPowered
-  - type: PowerSwitch
-  - type: ApcPowerReceiver
-    powerLoad: 60000
+  - type: ShieldPowerConsumer
+  - type: StationAiWhitelist
+  - type: LightningTarget
+    priority: 1
   - type: Appearance
   - type: WiresPanel
   - type: WiresVisuals
@@ -196,8 +197,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 1000
-  - type: ApcPowerReceiver
-    powerLoad: 100000 # Forge-Change
   - type: PointLight
     enabled: false
     castShadows: true
@@ -279,8 +278,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 1000
-  - type: ApcPowerReceiver
-    powerLoad: 80000 # Forge-Change
   - type: PointLight
     enabled: false
     castShadows: true
@@ -319,8 +316,6 @@
     unpoweredBonus: 5 # Forge-Change
     shieldColor: "#FF3333"
     collisionResistanceMultiplier: 0.5
-  - type: ApcPowerReceiver
-    powerLoad: 60000 # Forge-Change
   - type: ShipRepairable
     repairTime: 30
     repairCost: 300
@@ -399,8 +394,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 400
-  - type: ApcPowerReceiver
-    powerLoad: 40000
   - type: PointLight
     enabled: false
     castShadows: true
@@ -494,8 +487,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 300
-  - type: ApcPowerReceiver
-    powerLoad: 20000
   - type: PointLight
     enabled: false
     castShadows: true

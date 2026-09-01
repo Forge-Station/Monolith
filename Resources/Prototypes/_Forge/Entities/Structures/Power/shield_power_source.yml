@@ -1,0 +1,151 @@
+# Dedicated shield power banks (ИП). Feed ShieldPowerConsumer emitters on the same grid.
+# Not connected to APC / Pow3r — combat shield draw never hits the ship bus.
+
+- type: entity
+  id: ShieldPowerSourceBase
+  parent: [ BaseMachine, ConstructibleMachine ]
+  name: shield power source
+  description: A dedicated capacitor bank that supplies ship shield emitters. Independent from the vessel APC grid.
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Power/shield_power_source.rsi
+    snapCardinals: true
+    layers:
+    - state: base
+    - map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      state: powered
+      shader: unshaded
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  - type: Battery
+    startingCharge: 0
+  - type: ExaminableBattery
+  - type: ShieldPowerSource
+  - type: AmbientSound
+    volume: -7
+    range: 3
+    sound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: PointLight
+    radius: 1.5
+    energy: 1.4
+    color: "#58C6FF"
+    castShadows: false
+  - type: WiresPanel
+  - type: WiresVisuals
+  - type: LitOnPowered
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 2500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ExplodeBehavior
+    - trigger:
+        !type:DamageTrigger
+        damage: 1200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 80
+    intensitySlope: 4
+    totalIntensity: 120
+  - type: ShipRepairable
+    repairTime: 20
+    repairCost: 160
+
+- type: entity
+  id: ShieldPowerSourceT1
+  parent: ShieldPowerSourceBase
+  name: IPS-90 "Sparkcell" shield power source
+  suffix: tier 1
+  description: Compact shield capacitor bank for light vessels. Feeds same-grid shield emitters without tapping the APC bus.
+  components:
+  - type: Battery
+    maxCharge: 3000000
+    startingCharge: 3000000
+  - type: ShieldPowerSource
+    maxDischarge: 80000
+    idleRechargeRate: 15000
+  - type: Machine
+    board: MachineShieldPowerSourceT1Circuitboard
+  - type: PointLight
+    color: "#58C6FF"
+
+- type: entity
+  id: ShieldPowerSourceT2
+  parent: ShieldPowerSourceBase
+  name: IPS-180 "Keelcell" shield power source
+  suffix: tier 2
+  description: Mid-size shield capacitor bank sized for frigate-class emitters.
+  components:
+  - type: Battery
+    maxCharge: 6000000
+    startingCharge: 6000000
+  - type: ShieldPowerSource
+    maxDischarge: 150000
+    idleRechargeRate: 25000
+  - type: Machine
+    board: MachineShieldPowerSourceT2Circuitboard
+  - type: PointLight
+    color: "#3399FF"
+
+- type: entity
+  id: ShieldPowerSourceT3
+  parent: ShieldPowerSourceBase
+  name: IPS-360 "Bulkcell" shield power source
+  suffix: tier 3
+  description: Heavy shield capacitor bank for cruiser emitters and sustained combat load.
+  components:
+  - type: Battery
+    maxCharge: 12000000
+    startingCharge: 12000000
+  - type: ShieldPowerSource
+    maxDischarge: 250000
+    idleRechargeRate: 40000
+  - type: Machine
+    board: MachineShieldPowerSourceT3Circuitboard
+  - type: PointLight
+    color: "#FF9933"
+
+- type: entity
+  id: ShieldPowerSourceT4
+  parent: ShieldPowerSourceBase
+  name: IPS-870 "Anvilcell" shield power source
+  suffix: tier 4
+  description: Capital-grade shield capacitor bank. High discharge headroom for tier-4 emitters under continuous fire.
+  components:
+  - type: Battery
+    maxCharge: 25000000
+    startingCharge: 25000000
+  - type: ShieldPowerSource
+    maxDischarge: 400000
+    idleRechargeRate: 60000
+  - type: Machine
+    board: MachineShieldPowerSourceT4Circuitboard
+  - type: PointLight
+    color: "#FF3333"
+  - type: ShipRepairable
+    repairTime: 30
+    repairCost: 280

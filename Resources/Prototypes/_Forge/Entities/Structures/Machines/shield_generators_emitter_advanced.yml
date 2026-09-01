@@ -80,8 +80,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 400
-  - type: ApcPowerReceiver
-    powerLoad: 38000
   - type: PointLight
     enabled: false
     castShadows: true
@@ -180,8 +178,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 410
-  - type: ApcPowerReceiver
-    powerLoad: 42000
   - type: PointLight
     enabled: false
     castShadows: true
@@ -280,8 +276,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 420
-  - type: ApcPowerReceiver
-    powerLoad: 45000
   - type: PointLight
     enabled: false
     castShadows: true

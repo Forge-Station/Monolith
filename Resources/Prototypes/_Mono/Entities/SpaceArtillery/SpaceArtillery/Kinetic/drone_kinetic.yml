@@ -39,9 +39,6 @@
   - type: ProjectileBatteryAmmoProvider
     proto: ShipShardProjectile
     fireCost: 1500
-  - type: BatterySelfRecharger
-    autoRecharge: true
-    autoRechargeRate: 3000
   - type: ExtensionCableReceiver
   - type: ApcPowerReceiver
     powerLoad: 1500
@@ -81,9 +78,6 @@
     powerChargeRate: 4500
     powerUsePassive: 4500
     powerUseActive: 0
-  - type: BatterySelfRecharger
-    autoRecharge: true
-    autoRechargeRate: 6000
   - type: Battery
     maxCharge: 20000
     startingCharge: 20000
@@ -146,9 +140,6 @@
   - type: ProjectileBatteryAmmoProvider
     proto: ShipPinholeProjectile
     fireCost: 5000
-  - type: BatterySelfRecharger
-    autoRecharge: true
-    autoRechargeRate: 8000
   - type: Actions
   - type: RadarBlip
     radarColor: "#4080FF"

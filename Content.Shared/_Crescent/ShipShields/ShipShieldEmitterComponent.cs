@@ -44,7 +44,7 @@ public sealed partial class ShipShieldEmitterComponent : Component
     public float DamageLinearLoadCoefficient = 0f;
 
     /// <summary>
-    /// When true, healing per tick is scaled by <c>PowerReceived / Load</c> on the APC receiver (0–1).
+    /// When true, healing per tick is scaled by <c>PowerReceived / DesiredDraw</c> on the shield power consumer (0–1).
     /// </summary>
     [DataField]
     public bool HealScalesWithPowerReceived = false;

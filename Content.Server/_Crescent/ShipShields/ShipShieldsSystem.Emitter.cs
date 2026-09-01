@@ -1,9 +1,9 @@
 using Content.Server._Crescent.ShipShields.Components;
+using Content.Server._Forge.ShipShieldPower;
 using Content.Shared._Crescent.ShipShields;
-using Content.Server.Power.Components;
+using Content.Shared._Forge.ShipShieldPower;
 using Content.Shared.Damage;
 using Content.Shared.Projectiles;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Content.Server.Emp;
 using Content.Server.Explosion.EntitySystems;
@@ -11,8 +11,6 @@ using Content.Shared.Examine;
 using Content.Server.Explosion.Components;
 using Content.Shared.Explosion.Components;
 using Robust.Shared.Prototypes;
-using Content.Server.Station.Systems;
-using Robust.Shared.Audio.Systems;
 
 namespace Content.Server._Crescent.ShipShields;
 
@@ -81,7 +79,8 @@ public partial class ShipShieldsSystem
             toPool = Math.Min(toPool, emitter.ShieldHitDamageCap);
 
         emitter.Damage += toPool;
-        AdjustEmitterLoad(emitterUid, emitter);
+        // Forge-Change: defer load math to ShieldPowerSystem tick instead of Math.Pow on every hit.
+        _shieldPower.MarkLoadDirty(emitterUid);
 
         if (TryComp<EmpOnTriggerComponent>(projUid, out _))
             _trigger.Trigger(projUid);
@@ -151,14 +150,6 @@ public partial class ShipShieldsSystem
 
     private static float CalculateLoadDamage(ShipShieldEmitterComponent emitter)
     {
-        return (float)Math.Clamp(Math.Pow(emitter.Damage, emitter.DamageExp) * emitter.PowerModifier, 0f, emitter.MaxDraw);
-    }
-
-    private void AdjustEmitterLoad(EntityUid uid, ShipShieldEmitterComponent? emitter = null, ApcPowerReceiverComponent? receiver = null)
-    {
-        if (!Resolve(uid, ref emitter, ref receiver))
-            return;
-
-        receiver.Load = emitter.BaseDraw + ShipShieldEmitterMath.CalculateAdditionalLoad(emitter);
+        return ShipShieldEmitterMath.CalculateAdditionalLoad(emitter);
     }
 }

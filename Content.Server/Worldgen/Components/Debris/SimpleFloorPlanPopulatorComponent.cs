@@ -20,7 +20,7 @@ public sealed partial class SimpleFloorPlanPopulatorComponent : Component
     ///     The prototype facing floor plan populator entries.
     /// </summary>
     [DataField("entries", required: true,
-        customTypeSerializer: typeof(ProtoId<List<EntitySpawnEntry>, ContentTileDefinition>))]
+        customTypeSerializer: typeof(ProtoId<ContentTileDefinition>))]
     private Dictionary<string, List<EntitySpawnEntry>> _entries = default!;
 
     /// <summary>

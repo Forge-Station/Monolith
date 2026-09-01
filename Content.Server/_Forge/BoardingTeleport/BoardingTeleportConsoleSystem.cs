@@ -62,8 +62,6 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
     [Dependency] private readonly DeviceListSystem _deviceList = default!;
 
-    [Dependency] private readonly SharedMapSystem _mapManager = default!;
-
     [Dependency] private readonly SharedMapSystem _map = default!;
 
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -1166,7 +1164,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
     {
 
-        if (_mapManager.TryFindGridAt(coordinates, out targetGrid, out _))
+        if (_map.TryFindGridAt(coordinates, out targetGrid, out _))
 
             return true;
 

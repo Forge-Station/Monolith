@@ -168,9 +168,8 @@ public abstract partial class SharedCryostorageSystem : EntitySystem
         if (PausedMap != null && Exists(PausedMap))
             return;
 
-        var map = _mapManager.CreateMap();
-        _mapManager.SetMapPaused(map, true);
-        PausedMap = _mapManager.GetMap(map);
+        PausedMap = _mapManager.CreateMap();
+        _mapManager.SetPaused(PausedMap.Value, true);
     }
 
     public bool IsInPausedMap(Entity<TransformComponent?> entity)

@@ -97,9 +97,8 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
     {
         if (Deleted(_storageMap))
         {
-            var map = _mapManager.CreateMap();
-            _storageMap = _mapManager.GetMap(map);
-            _mapManager.SetMapPaused(map, true);
+            _storageMap = _mapManager.CreateMap();
+            _mapManager.SetPaused(_storageMap.Value, true);
         }
 
         return _storageMap.Value;

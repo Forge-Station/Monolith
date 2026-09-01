@@ -29,7 +29,7 @@ public sealed partial class DungeonSystem : SharedDungeonSystem
 {
     [Dependency] private IConfigurationManager _configManager = default!;
     [Dependency] private IConsoleHost _console = default!;
-    [Dependency] private SharedMapSystem _mapManager = default!;
+    [Dependency] private SharedMapSystem _maps = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ITileDefinitionManager _tileDefManager = default!;
@@ -39,7 +39,6 @@ public sealed partial class DungeonSystem : SharedDungeonSystem
     [Dependency] private TileSystem _tile = default!;
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private MapLoaderSystem _loader = default!;
-    [Dependency] private SharedMapSystem _maps = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly List<(Vector2i, Tile)> _tiles = new();

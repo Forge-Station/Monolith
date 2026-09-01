@@ -187,7 +187,7 @@ internal sealed partial class NFPowerSolarSystem : EntitySystem
         {
             var gridCoords = _transformSystem.WithEntityId(xform.Coordinates, gridUid.Value);
             // drop coverage to 0 if the solar panel is roofed
-            if (_roof.IsRooved((gridUid.Value, gridComp, roofComp), gridCoords.ToVector2i(EntityManager, _mapMan, _transformSystem)))
+            if (_roof.IsRooved((gridUid.Value, gridComp, roofComp), gridCoords.ToVector2i(EntityManager, _transformSystem)))
                 coverage = 0f;
         }
 

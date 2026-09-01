@@ -33,7 +33,6 @@ public sealed partial class GatewayGeneratorSystem : EntitySystem
     [Dependency] private DungeonSystem _dungeon = default!;
     [Dependency] private GatewaySystem _gateway = default!;
     [Dependency] private MetaDataSystem _metadata = default!;
-    [Dependency] private SharedMapSystem _maps = default!;
     [Dependency] private SharedSalvageSystem _salvage = default!;
     [Dependency] private TileSystem _tile = default!;
 
@@ -99,8 +98,7 @@ public sealed partial class GatewayGeneratorSystem : EntitySystem
         var tiles = new List<(Vector2i Index, Tile Tile)>();
         var seed = _random.Next();
         var random = new Random(seed);
-        var mapId = _mapManager.CreateMap();
-        var mapUid = _mapManager.GetMap(mapId);
+        var mapUid = _mapManager.CreateMap(out var mapId);
 
         var gatewayName = _salvage.GetFTLName(_protoManager.Index<LocalizedDatasetPrototype>(PlanetNames), seed);
         _metadata.SetEntityName(mapUid, gatewayName);
@@ -125,7 +123,7 @@ public sealed partial class GatewayGeneratorSystem : EntitySystem
         }
 
         // Clear area nearby as a sort of landing pad.
-        _maps.SetTiles(mapUid, grid, tiles);
+        _mapManager.SetTiles(mapUid, grid, tiles);
 
         _metadata.SetEntityName(mapUid, gatewayName);
         var originCoords = new EntityCoordinates(mapUid, origin);

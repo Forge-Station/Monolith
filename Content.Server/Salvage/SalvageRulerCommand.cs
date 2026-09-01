@@ -2,6 +2,7 @@ using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 
 namespace Content.Server.Salvage;
 
@@ -9,7 +10,6 @@ namespace Content.Server.Salvage;
 sealed partial class SalvageRulerCommand : IConsoleCommand
 {
     [Dependency] private IEntityManager _entities = default!;
-    [Dependency] private SharedMapSystem _maps = default!;
 
     public string Command => "salvageruler";
 
@@ -40,9 +40,10 @@ sealed partial class SalvageRulerCommand : IConsoleCommand
         }
 
         var entityTransform = _entities.GetComponent<TransformComponent>(entity.Value);
+        var maps = _entities.System<SharedMapSystem>();
         var total = Box2.UnitCentered;
         var first = true;
-        foreach (var mapGrid in _maps.GetAllGrids(entityTransform.MapID))
+        foreach (var mapGrid in maps.GetAllGrids(entityTransform.MapID))
         {
             var aabb = _entities.System<SharedTransformSystem>().GetWorldMatrix(mapGrid).TransformBox(mapGrid.Comp.LocalAABB);
             if (first)

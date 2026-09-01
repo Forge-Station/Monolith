@@ -11,11 +11,10 @@ public sealed partial class TileEmissionOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.BeforeLighting;
 
-    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IOverlayManager _overlay = default!;
 
-    private SharedMapSystem _mapSystem;
-    private SharedTransformSystem _xformSystem;
+    private readonly SharedMapSystem _mapSystem;
+    private readonly SharedTransformSystem _xformSystem;
 
     private readonly EntityLookupSystem _lookup;
 
@@ -50,7 +49,7 @@ public sealed partial class TileEmissionOverlay : Overlay
         var target = lightoverlay.GetCachedForViewport(args.Viewport).EnlargedLightTarget;
         var viewport = args.Viewport;
         _grids.Clear();
-        _mapManager.FindGridsIntersecting(mapId, bounds, ref _grids, approx: true);
+        _mapSystem.FindGridsIntersecting(mapId, bounds, ref _grids, approx: true);
 
         if (_grids.Count == 0)
             return;

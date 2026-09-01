@@ -423,29 +423,19 @@ public static class PaperPixelArtCodec
 
         if (value[0] == '#')
         {
-            var parsed = Color.TryFromHex(value);
-            if (parsed != null)
-            {
-                color = parsed.Value;
-                return true;
-            }
+            if (!Color.TryFromHex(value, out color))
+                return false;
 
-            color = default;
-            return false;
+            return true;
         }
 
         if (Color.TryFromName(value, out color))
             return true;
 
-        var fallback = Color.TryFromHex("#" + value);
-        if (fallback != null)
-        {
-            color = fallback.Value;
-            return true;
-        }
+        if (!Color.TryFromHex("#" + value, out color))
+            return false;
 
-        color = default;
-        return false;
+        return true;
     }
 
     private static List<Color> BuildPalette(IReadOnlyList<Color> pixels)
@@ -547,22 +537,13 @@ public static class PaperPixelArtCodec
 
         if (hex[0] == '#')
         {
-            var parsedPrefixed = Color.TryFromHex(hex);
-            if (parsedPrefixed == null)
-                return false;
-            color = parsedPrefixed.Value;
-            return true;
+            return Color.TryFromHex(hex, out color);
         }
 
         if (hex.Length > 8)
             return false;
 
-        var parsed = Color.TryFromHex("#" + hex);
-        if (parsed == null)
-            return false;
-
-        color = parsed.Value;
-        return true;
+        return Color.TryFromHex("#" + hex, out color);
     }
 
     private static bool TryReadHexIndex(string hex, out int value)

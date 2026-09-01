@@ -1,6 +1,7 @@
 using Content.Shared._Forge.BluespaceHarvester;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Server._Forge.BluespaceHarvester;
 
@@ -164,8 +165,8 @@ public sealed partial class BluespaceHarvesterComponent : Component
     public int TriplePointMaxLevel = 10;
 }
 
-[Serializable]
-public sealed class BluespaceHarvesterTap
+[DataDefinition, Serializable]
+public sealed partial class BluespaceHarvesterTap
 {
     /// <summary>
     /// The minimum level from which Visual is enabled.

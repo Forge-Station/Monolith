@@ -88,9 +88,11 @@ public sealed partial class FTLAntiCollisionSystem : EntitySystem
 
         // Find nearby grids
         var nearbyGrids = new List<(EntityUid Entity, float Distance)>();
-        foreach (var otherGrid in _mapManager.FindGridsIntersecting(mapId, new Box2(
+        var intersectingGrids = new List<Entity<MapGridComponent>>();
+        _mapManager.FindGridsIntersecting(mapId, new Box2(
             shuttlePosition - new Vector2(range, range),
-            shuttlePosition + new Vector2(range, range))))
+            shuttlePosition + new Vector2(range, range)), ref intersectingGrids);
+        foreach (var otherGrid in intersectingGrids)
         {
             // Skip self
             if (otherGrid.Owner == shuttle)
@@ -205,9 +207,11 @@ public sealed partial class FTLAntiCollisionSystem : EntitySystem
         var checkSize = shipSize + MinimumSafeDistance;
 
         // Check for grids in the area
-        foreach (var otherGrid in _mapManager.FindGridsIntersecting(mapId, new Box2(
+        var nearbyGrids = new List<Entity<MapGridComponent>>();
+        _mapManager.FindGridsIntersecting(mapId, new Box2(
             position - new Vector2(checkSize, checkSize),
-            position + new Vector2(checkSize, checkSize))))
+            position + new Vector2(checkSize, checkSize)), ref nearbyGrids);
+        foreach (var otherGrid in nearbyGrids)
         {
             // Skip self
             if (otherGrid.Owner == shuttle)

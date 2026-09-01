@@ -23,6 +23,7 @@ public sealed partial class ShipyardServiceGridControl : BaseShuttleControl
     public EntityUid? Shuttle;
     public List<ShipyardServiceUpgradeMarker> Markers = new();
     public readonly HashSet<int> Selected = new();
+    public int? HoveredId;
 
     public bool ShowReinforce = true;
     public bool ShowPlastitanium = true;
@@ -30,6 +31,7 @@ public sealed partial class ShipyardServiceGridControl : BaseShuttleControl
     public bool ShowRepair = true;
 
     public event Action? SelectionChanged;
+    public event Action? HoveredChanged;
 
     protected override bool Draggable => true;
 
@@ -64,37 +66,7 @@ public sealed partial class ShipyardServiceGridControl : BaseShuttleControl
             return;
 
         var localPixel = args.PointerLocation.Position - GlobalPixelPosition;
-        var gridLocal = InverseMapPosition(localPixel);
-        ShipyardServiceUpgradeMarker? closest = null;
-        var closestDist = 0.85f;
-
-        foreach (var marker in Markers)
-        {
-            if (!IsVisible(marker.Action))
-                continue;
-
-            var dist = (marker.LocalPosition - gridLocal).Length();
-            if (dist >= closestDist)
-                continue;
-
-            closest = marker;
-            closestDist = dist;
-        }
-
-        if (closest == null && EntManager.TryGetComponent(Shuttle.Value, out MapGridComponent? grid))
-        {
-            var tile = Maps.CoordinatesToTile(Shuttle.Value, grid, new EntityCoordinates(Shuttle.Value, gridLocal));
-            foreach (var marker in Markers)
-            {
-                if (marker.Tile == tile && IsVisible(marker.Action))
-                {
-                    closest = marker;
-                    break;
-                }
-            }
-        }
-
-        if (closest == null)
+        if (!TryPickMarker(InverseMapPosition(localPixel), out var closest))
             return;
 
         if (!Selected.Add(closest.Id))
@@ -102,6 +74,73 @@ public sealed partial class ShipyardServiceGridControl : BaseShuttleControl
 
         SelectionChanged?.Invoke();
         args.Handle();
+    }
+
+    protected override void MouseMove(GUIMouseMoveEventArgs args)
+    {
+        base.MouseMove(args);
+
+        if (Shuttle == null || Markers.Count == 0)
+        {
+            SetHovered(null);
+            return;
+        }
+
+        if (!TryPickMarker(InverseMapPosition(args.RelativePixelPosition), out var marker))
+        {
+            SetHovered(null);
+            return;
+        }
+
+        SetHovered(marker.Id);
+    }
+
+    private void SetHovered(int? id)
+    {
+        if (HoveredId == id)
+            return;
+
+        HoveredId = id;
+        HoveredChanged?.Invoke();
+    }
+
+    private bool TryPickMarker(Vector2 gridLocal, out ShipyardServiceUpgradeMarker marker)
+    {
+        marker = default!;
+        ShipyardServiceUpgradeMarker? closest = null;
+        var closestDist = 0.85f;
+
+        foreach (var candidate in Markers)
+        {
+            if (!IsVisible(candidate.Action))
+                continue;
+
+            var dist = (candidate.LocalPosition - gridLocal).Length();
+            if (dist >= closestDist)
+                continue;
+
+            closest = candidate;
+            closestDist = dist;
+        }
+
+        if (closest == null && Shuttle != null && EntManager.TryGetComponent(Shuttle.Value, out MapGridComponent? grid))
+        {
+            var tile = Maps.CoordinatesToTile(Shuttle.Value, grid, new EntityCoordinates(Shuttle.Value, gridLocal));
+            foreach (var candidate in Markers)
+            {
+                if (candidate.Tile == tile && IsVisible(candidate.Action))
+                {
+                    closest = candidate;
+                    break;
+                }
+            }
+        }
+
+        if (closest == null)
+            return false;
+
+        marker = closest;
+        return true;
     }
 
     public bool IsVisible(ShipyardServiceAction action)
@@ -178,9 +217,10 @@ public sealed partial class ShipyardServiceGridControl : BaseShuttleControl
             var bottom = Math.Max(p1.Y, p2.Y);
             var box = new UIBox2(left, top, right, bottom);
             var selected = Selected.Contains(marker.Id);
+            var hovered = HoveredId == marker.Id;
             var color = GetMarkerColor(marker.Action);
-            handle.DrawRect(box, color.WithAlpha(selected ? 0.9f : 0.42f));
-            handle.DrawRect(box, selected ? Color.White : color.WithAlpha(0.95f), false);
+            handle.DrawRect(box, color.WithAlpha(selected ? 0.9f : hovered ? 0.7f : 0.42f));
+            handle.DrawRect(box, selected || hovered ? Color.White : color.WithAlpha(0.95f), false);
         }
     }
 }

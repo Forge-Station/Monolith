@@ -1083,6 +1083,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier5HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A devastating weapon, known for glassing whole fleets when used en masse
   components:
@@ -1174,6 +1175,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A terrifying weapon to have aimed at you, the Reaper is an ancient piece of pre-fracture tech capable of shattering the strongest of hulls within one or two blasts.
   components:
@@ -1255,6 +1257,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: One of the most powerful EMP weapons in sector, it is a sign of doom for its targets.
   components:
@@ -1337,6 +1340,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A rarer, powerful cannon mounted on larger ADS units. Firing a singular particle of antimatter wrapped in energy. Annihalating sections of shuttles at a time.
   components:
@@ -1411,6 +1415,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A potent proton cannon from before the Fracture, known for melting holes through both inorganic and organic matter with ease.
   components:
@@ -1474,6 +1479,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A burst firing neutron repeater, firing high-damage but slow balls of hell. A marvel of rapture weapons technology. Specializes in tunneling through anything that can't outmanuever it.
   components:
@@ -1542,6 +1548,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A unique pre-fracture weapon, the Flayer fires a storm of tungsten alloy darts at near the speed of light, barraging targets to pieces.
   components:

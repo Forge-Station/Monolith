@@ -109,6 +109,11 @@
       - id: PlantBag ##Some maps don't have nutrivend
       - id: BoxMouthSwab
       - id: Dropper
+      - id: ClothingEyesGlassesBotany
+      - id: AgroScanCartridge
+      - id: NetworkConfigurator
+      - id: BotanyCultivarDisk
+        amount: 3
 #      - id: HandLabeler
 #      - id: ClothingUniformOveralls # Frontier
 #      - id: ClothingHeadHatTrucker # Frontier

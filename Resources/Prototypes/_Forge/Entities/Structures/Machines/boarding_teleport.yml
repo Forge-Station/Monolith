@@ -99,7 +99,7 @@
     includeChildren: false
 
 - type: entity
-  parent: BoardingTeleportEngine
+  parent: [ BoardingTeleportEngine, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: BoardingTeleportEngineExperimental
   name: experimental bluespace boarding engine
   description: Phase-shift tuned drive with higher risk tolerance and faster lock recovery.
@@ -300,7 +300,7 @@
     board: BoardingTeleportPlatformAdvancedMachineCircuitboard
 
 - type: entity
-  parent: BoardingTeleportPlatform
+  parent: [ BoardingTeleportPlatform, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: BoardingTeleportPlatformExperimental
   name: experimental bluespace boarding platform
   description: Higher destabilization risk, but phase-shift scatter control improves landing spread.

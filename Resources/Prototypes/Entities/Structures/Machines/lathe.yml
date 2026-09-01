@@ -764,6 +764,7 @@
     staticPacks:
     - BioGenIngredientsStatic
     - BioGenMaterialsStatic
+    - BioGenSwabsStatic
     - FriendlyCubesStatic # Frontier
     - NFBioGenIngredientsStatic # Frontier
     - NFBioGenMaterialsStatic # Frontier

@@ -50,7 +50,7 @@ namespace Content.Server.Tabletop
 
             TabletopMap = _mapManager.CreateMap();
             _tabletops = 0;
-            var mapUid = _mapManager.GetMapEntityId(TabletopMap);
+            var mapUid = _mapManager.GetMap(TabletopMap);
 
             var mapComp = EntityManager.GetComponent<MapComponent>(mapUid);
 

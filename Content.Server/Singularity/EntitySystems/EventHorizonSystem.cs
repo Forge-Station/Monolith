@@ -27,7 +27,7 @@ public sealed partial class EventHorizonSystem : SharedEventHorizonSystem
     #region Dependencies
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private SharedMapSystem _mapMan = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;

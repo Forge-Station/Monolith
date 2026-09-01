@@ -32,7 +32,7 @@ public sealed partial class EntityScreenshotGenerator
     [Dependency] private IGameController _gameController = default!;
     [Dependency] private IClientGameTiming _gameTiming = default!;
     [Dependency] private ILogManager _logManager = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IResourceManager _resourceManager = default!;
     [Dependency] private ISerializationManager _serialization = default!;

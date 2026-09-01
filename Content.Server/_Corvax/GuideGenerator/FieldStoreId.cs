@@ -6,11 +6,6 @@ using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Serialization.Markdown.Mapping;
 using Robust.Shared.Serialization.Markdown.Sequence;
 using Robust.Shared.Serialization.Markdown.Value;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 
 namespace Content.Server.Corvax.GuideGenerator;
 
@@ -151,30 +146,30 @@ public static class FieldStoreId
         var def = serializerType.GetGenericTypeDefinition();
         var args = serializerType.GetGenericArguments();
 
-        if ((def == typeof(PrototypeIdSerializer<>) || def == typeof(AbstractPrototypeIdSerializer<>)) &&
+        if ((def == typeof(ProtoId<>) || def == typeof(AbstractPrototypeIdSerializer<>)) &&
             args[0] == typeof(EntityPrototype))
         {
             kind = EntityPrototypeSerializerKind.Single;
             return true;
         }
 
-        if ((def == typeof(PrototypeIdListSerializer<>) || def == typeof(AbstractPrototypeIdListSerializer<>)
-             || def == typeof(PrototypeIdHashSetSerializer<>) || def == typeof(AbstractPrototypeIdHashSetSerializer<>)
-             || def == typeof(PrototypeIdArraySerializer<>) || def == typeof(AbstractPrototypeIdArraySerializer<>)) &&
+        if ((def == typeof(ProtoId<>) || def == typeof(AbstractPrototypeIdListSerializer<>)
+             || def == typeof(ProtoId<>) || def == typeof(AbstractPrototypeIdHashSetSerializer<>)
+             || def == typeof(ProtoId<>) || def == typeof(AbstractPrototypeIdArraySerializer<>)) &&
             args[0] == typeof(EntityPrototype))
         {
             kind = EntityPrototypeSerializerKind.Sequence;
             return true;
         }
 
-        if ((def == typeof(PrototypeIdDictionarySerializer<,>) || def == typeof(AbstractPrototypeIdDictionarySerializer<,>)) &&
+        if ((def == typeof(ProtoId<,>) || def == typeof(AbstractPrototypeIdDictionarySerializer<,>)) &&
             args[1] == typeof(EntityPrototype))
         {
             kind = EntityPrototypeSerializerKind.DictionaryKey;
             return true;
         }
 
-        if ((def == typeof(PrototypeIdValueDictionarySerializer<,>) || def == typeof(AbstractPrototypeIdValueDictionarySerializer<,>)) &&
+        if ((def == typeof(ProtoId<,>) || def == typeof(AbstractPrototypeIdValueDictionarySerializer<,>)) &&
             args[1] == typeof(EntityPrototype))
         {
             kind = EntityPrototypeSerializerKind.DictionaryValue;

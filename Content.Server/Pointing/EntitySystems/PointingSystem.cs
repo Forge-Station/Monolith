@@ -31,7 +31,7 @@ namespace Content.Server.Pointing.EntitySystems
     {
         [Dependency] private IConfigurationManager _config = default!;
         [Dependency] private IReplayRecordingManager _replay = default!;
-        [Dependency] private IMapManager _mapManager = default!;
+        [Dependency] private SharedMapSystem _mapManager = default!;
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
         [Dependency] private IGameTiming _gameTiming = default!;

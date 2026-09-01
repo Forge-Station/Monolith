@@ -6,7 +6,7 @@ namespace Content.Server._CE.ZLevels.Gravity;
 
 public sealed partial class CEAutoGridGravitySystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private SharedMapSystem _map = default!;
 
     public override void Initialize()

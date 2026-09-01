@@ -62,7 +62,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
     [Dependency] private readonly DeviceListSystem _deviceList = default!;
 
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly SharedMapSystem _mapManager = default!;
 
     [Dependency] private readonly SharedMapSystem _map = default!;
 

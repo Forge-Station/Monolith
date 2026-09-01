@@ -20,7 +20,7 @@ namespace Content.Server.Abilities.Mime
         [Dependency] private SharedActionsSystem _actionsSystem = default!;
         [Dependency] private AlertsSystem _alertsSystem = default!;
         [Dependency] private TurfSystem _turf = default!;
-        [Dependency] private IMapManager _mapMan = default!;
+        [Dependency] private SharedMapSystem _mapMan = default!;
         [Dependency] private SharedContainerSystem _container = default!;
         [Dependency] private IGameTiming _timing = default!;
 

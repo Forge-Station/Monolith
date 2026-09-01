@@ -30,7 +30,7 @@ public sealed partial class MapScreen : BoxContainer
 {
     [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     private readonly DetectionSystem _detection; // Mono
     private readonly SharedAudioSystem _audio;

@@ -8,7 +8,6 @@ namespace Content.Server.Drowsiness;
 
 public sealed partial class DrowsinessSystem : SharedDrowsinessSystem
 {
-    [ValidatePrototypeId<StatusEffectPrototype>]
     private const string SleepKey = "ForcedSleep"; // Same one used by N2O and other sleep chems.
 
     [Dependency] private IGameTiming _timing = default!;

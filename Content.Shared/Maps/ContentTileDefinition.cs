@@ -8,7 +8,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Maths; // Mono
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 using Robust.Shared.Utility;
 using System.Numerics; // Mono
@@ -18,7 +18,6 @@ namespace Content.Shared.Maps
     [Prototype("tile")]
     public sealed partial class ContentTileDefinition : IPrototype, IInheritingPrototype, ITileDefinition
     {
-        [ValidatePrototypeId<ToolQualityPrototype>]
         public const string PryingToolQuality = "Prying";
         public const string DiggingToolQuality = "Digging"; // Frontier
 
@@ -98,7 +97,7 @@ namespace Content.Shared.Maps
         // Heat capacity is opt-in, not opt-out.
         [DataField("heatCapacity")] public float HeatCapacity = Atmospherics.MinimumHeatCapacity;
 
-        [DataField("itemDrop", customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("itemDrop", customTypeSerializer:typeof(ProtoId<EntityPrototype>))]
         public string ItemDropPrototypeName { get; private set; } = "FloorTileItemSteel";
 
         // TODO rename data-field in yaml

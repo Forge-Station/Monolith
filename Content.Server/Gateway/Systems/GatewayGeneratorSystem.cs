@@ -25,7 +25,7 @@ public sealed partial class GatewayGeneratorSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfgManager = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ITileDefinitionManager _tileDefManager = default!;
@@ -37,7 +37,6 @@ public sealed partial class GatewayGeneratorSystem : EntitySystem
     [Dependency] private SharedSalvageSystem _salvage = default!;
     [Dependency] private TileSystem _tile = default!;
 
-    [ValidatePrototypeId<LocalizedDatasetPrototype>]
     private const string PlanetNames = "NamesBorer";
 
     // TODO:
@@ -101,7 +100,7 @@ public sealed partial class GatewayGeneratorSystem : EntitySystem
         var seed = _random.Next();
         var random = new Random(seed);
         var mapId = _mapManager.CreateMap();
-        var mapUid = _mapManager.GetMapEntityId(mapId);
+        var mapUid = _mapManager.GetMap(mapId);
 
         var gatewayName = _salvage.GetFTLName(_protoManager.Index<LocalizedDatasetPrototype>(PlanetNames), seed);
         _metadata.SetEntityName(mapUid, gatewayName);

@@ -39,7 +39,7 @@ public sealed class ContractorEvacuationSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly SharedMapSystem _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -47,9 +47,7 @@ public sealed class ContractorEvacuationSystem : EntitySystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
 
-    [ValidatePrototypeId<EntityPrototype>]
     private const string PortalPrototype = "ContractorEvacuationPortal";
-    [ValidatePrototypeId<ReagentPrototype>]
     private const string Drug = "THC";
 
     public override void Initialize()

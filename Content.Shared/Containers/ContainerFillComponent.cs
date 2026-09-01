@@ -5,7 +5,6 @@ using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown.Mapping;
 using Robust.Shared.Serialization.Markdown.Sequence;
 using Robust.Shared.Serialization.Markdown.Validation;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Robust.Shared.Serialization.TypeSerializers.Interfaces;
 
 namespace Content.Shared.Containers;
@@ -37,7 +36,7 @@ public sealed partial class ContainerFillComponent : Component
 // or a dictionary serializer that accepts a custom type serializer for the dictionary values
 public sealed class ContainerFillSerializer : ITypeValidator<Dictionary<string, List<string>>, MappingDataNode>
 {
-    private static PrototypeIdListSerializer<EntityPrototype> ListSerializer => new();
+    private static ProtoId<EntityPrototype> ListSerializer => new();
 
     public ValidationNode Validate(
         ISerializationManager serializationManager,

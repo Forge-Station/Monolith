@@ -117,7 +117,6 @@ namespace Content.Client.Lobby.UI
 
         private bool _profileEditorInitializing;
 
-        [ValidatePrototypeId<GuideEntryPrototype>]
         private const string DefaultSpeciesGuidebook = "Species";
 
         public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;

@@ -24,7 +24,7 @@ public sealed partial class StencilOverlay : Overlay
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IPrototypeManager _protoManager = default!;
     private readonly ParallaxSystem _parallax;
     private readonly SharedTransformSystem _transform;
@@ -52,7 +52,7 @@ public sealed partial class StencilOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        var mapUid = _mapManager.GetMapEntityId(args.MapId);
+        var mapUid = _mapManager.GetMap(args.MapId);
         var invMatrix = args.Viewport.GetWorldToLocalMatrix();
 
         var res = _resources.GetForViewport(args.Viewport, static _ => new CachedResources());

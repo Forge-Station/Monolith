@@ -20,7 +20,7 @@ namespace Content.Server._CE.ZLevels.Core;
 public sealed partial class CEZGridConnectorSystem : EntitySystem
 {
     [Dependency] private CEZLevelsSystem _zLevels = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
 

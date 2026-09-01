@@ -38,7 +38,7 @@ public sealed class MaterialArbitrageTest
         await server.WaitIdleAsync();
 
         var entManager = server.ResolveDependency<IEntityManager>();
-        var mapManager = server.ResolveDependency<IMapManager>();
+        var mapManager = server.ResolveDependency<SharedMapSystem>();
         var protoManager = server.ResolveDependency<IPrototypeManager>();
 
         var pricing = entManager.System<PricingSystem>();

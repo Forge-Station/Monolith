@@ -19,7 +19,6 @@ namespace Content.Server.Salvage;
 
 public sealed partial class SalvageSystem
 {
-    [ValidatePrototypeId<EntityPrototype>]
     public const string CoordinatesDisk = "CoordinatesDisk";
     private const float ShuttleFTLRange = 256f;
     private const float ShuttleFTLMassThreshold = 100f;

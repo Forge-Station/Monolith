@@ -15,7 +15,6 @@ public sealed partial class SalvageSystem
 {
     [Dependency] private IRuntimeLog _runtimeLog = default!;
 
-    [ValidatePrototypeId<RadioChannelPrototype>]
     private const string MagnetChannel = "Supply";
 
     private EntityQuery<SalvageMobRestrictionsComponent> _salvMobQuery;

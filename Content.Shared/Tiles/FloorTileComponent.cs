@@ -1,7 +1,7 @@
 using Content.Shared.Maps;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Tiles
 {
@@ -12,7 +12,7 @@ namespace Content.Shared.Tiles
     [RegisterComponent, NetworkedComponent]
     public sealed partial class FloorTileComponent : Component
     {
-        [DataField("outputs", customTypeSerializer: typeof(PrototypeIdListSerializer<ContentTileDefinition>))]
+        [DataField("outputs", customTypeSerializer: typeof(ProtoId<ContentTileDefinition>))]
         public List<string>? OutputTiles;
 
         [DataField("placeTileSound")] public SoundSpecifier PlaceTileSound =

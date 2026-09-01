@@ -11,7 +11,7 @@ namespace Content.Server._Mono.VendingMachine;
 /// </summary>
 public sealed partial class VendingMachinePurchaseSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
 
     public override void Initialize()
     {

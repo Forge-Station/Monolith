@@ -15,7 +15,7 @@ namespace Content.Server.Explosion.EntitySystems;
 /// </summary>
 public sealed partial class SmokeOnTriggerSystem : SharedSmokeOnTriggerSystem
 {
-    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private SharedMapSystem _mapMan = default!;
     [Dependency] private SmokeSystem _smoke = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private TransformSystem _transform = default!;

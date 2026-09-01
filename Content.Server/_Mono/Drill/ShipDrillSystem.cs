@@ -15,7 +15,7 @@ public partial class ShipDrillSystem : EntitySystem
     [Dependency] private EntityLookupSystem _look = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private ITileDefinitionManager _tileDef = default!;
     [Dependency] private TileSystem _tile = default!;
     [Dependency] private SharedDecalSystem _decal = default!;

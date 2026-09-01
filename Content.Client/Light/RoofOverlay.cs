@@ -14,7 +14,7 @@ namespace Content.Client.Light;
 public sealed partial class RoofOverlay : Overlay
 {
     private readonly IEntityManager _entManager;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IOverlayManager _overlay = default!;
 
     private readonly EntityLookupSystem _lookup;

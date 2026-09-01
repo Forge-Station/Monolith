@@ -4,8 +4,8 @@ using Content.Shared.FixedPoint;
 namespace Content.Shared._Forge.Trade;
 
 
-[Serializable]
-public sealed class ContractTargetServerData
+[Serializable, DataDefinition]
+public sealed partial class ContractTargetServerData
 {
     [DataField("match")]
     public PrototypeMatchMode MatchMode = PrototypeMatchMode.Exact;

@@ -19,7 +19,7 @@ namespace Content.Client.Viewport;
 
 public sealed partial class ScalingViewport
 {
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IEyeManager _eyeManager = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private ITileDefinitionManager _tile = default!;

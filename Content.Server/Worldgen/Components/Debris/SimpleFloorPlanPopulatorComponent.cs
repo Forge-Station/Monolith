@@ -1,9 +1,9 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.Worldgen.Systems.Debris;
 using Content.Server.Worldgen.Tools;
 using Content.Shared.Maps;
 using Content.Shared.Storage;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Worldgen.Components.Debris;
 
@@ -20,7 +20,7 @@ public sealed partial class SimpleFloorPlanPopulatorComponent : Component
     ///     The prototype facing floor plan populator entries.
     /// </summary>
     [DataField("entries", required: true,
-        customTypeSerializer: typeof(PrototypeIdDictionarySerializer<List<EntitySpawnEntry>, ContentTileDefinition>))]
+        customTypeSerializer: typeof(ProtoId<List<EntitySpawnEntry>, ContentTileDefinition>))]
     private Dictionary<string, List<EntitySpawnEntry>> _entries = default!;
 
     /// <summary>

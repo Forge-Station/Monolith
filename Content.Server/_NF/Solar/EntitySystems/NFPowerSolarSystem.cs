@@ -28,7 +28,7 @@ internal sealed partial class NFPowerSolarSystem : EntitySystem
     [Dependency] private SharedRoofSystem _roof = default!; // Mono
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private IGameTiming _gameTiming = default!; // Frontier
-    [Dependency] private IMapManager _mapMan = default!; // Mono
+    [Dependency] private SharedMapSystem _mapMan = default!; // Mono
 
     /// <summary>
     /// Maximum panel angular velocity range - used to stop people rotating panels fast enough that the lag prevention becomes noticable

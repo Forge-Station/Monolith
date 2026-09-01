@@ -46,7 +46,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
 {
     private readonly IEntityManager _entManager;
     private readonly IGameTiming _timing;
-    private readonly IMapManager _mapManager;
+    private readonly SharedMapSystem _mapManager;
     private readonly IPrototypeManager _prototypeManager;
     private readonly AnchorableSystem _anchorable;
     private readonly BiomeSystem _biome;
@@ -80,7 +80,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         double maxTime,
         IEntityManager entManager,
         IGameTiming timing,
-        IMapManager mapManager,
+        SharedMapSystem mapManager,
         IPrototypeManager protoManager,
         AnchorableSystem anchorable,
         BiomeSystem biome,

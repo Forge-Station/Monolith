@@ -20,8 +20,8 @@
     state: "torso_m"
   #Forge-Change-Start
   - type: MovementBodyPartModifier
-    walkModifier: 1.2
-    sprintModifier: 1.2
+    walkModifier: 1.3
+    sprintModifier: 1.3
     group: torso
   #Forge-Change-end
 

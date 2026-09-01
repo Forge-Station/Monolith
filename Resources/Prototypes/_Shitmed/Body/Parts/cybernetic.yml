@@ -141,6 +141,7 @@
   - type: MovementBodyPartModifier #Forge-Change-add
     walkModifier: 1.15
     sprintModifier: 1.15
+    group: leg
   - type: BodyPart
     onAdd:
     - type: NoSlip
@@ -158,11 +159,11 @@
   - type: MovementBodyPartModifier #Forge-Change-add
     walkModifier: 1.15
     sprintModifier: 1.15
+    group: leg
   - type: BodyPart
     onAdd:
     - type: NoSlip
     - type: ProtectedFromStepTriggers
-  - type: ClothingSpeedModifier
 
 - type: entity
   id: DexLeftHand

@@ -22,6 +22,7 @@
   - type: Body
     prototype: Vulpkanin
     requiredLegs: 2
+  #Forge-Change-start
   - type: Temperature
     heatDamageThreshold: 313 # ~ +40 °C
     coldDamageThreshold: 248 # ~ -25 °C

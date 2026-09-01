@@ -49,51 +49,51 @@
 #   traitGear: IpcLightImplanter #не работает, надо обязательно добавлять какой нибудь компонент иначе ничего не спавнит и выдает ошибку клиента об том что не смог применить null компонент
 #   #components: {}
  
-- type: trait
-  id: IpcSoftBody
-  name: trait-ipc-soft-body-name
-  description: trait-ipc-soft-body-desc
-  category: Physical
-  cost: -4
-  mutuallyExclusiveTraits:
-  - IpcHeavyBody
-  - DermalArmor
-  speciesBlacklist:
-  - Human
-  - Chitinid
-  - Oni
-  - Vulpkanin
-  - Vox
-  - Diona
-  - Moth
-  - Goblin
-  - Arachnid
-  - Resomi
-  - Harpy
-  - Reptilian
-  - Hydrakin
-  - Rodentia
-  - Dwarf
-  - SlimePerson
-  - Felinid
-  - Tajaran
-  - Demon
-  - Skrell
-  - Ariral
-  blacklist:
-    components:
-    - BorgChassis
-  components:
-  - type: DamageProtectionBuff
-    modifiers:
-      dermal:
-        id: DermalArmorTrait
-        coefficients:
-          Blunt: 1.2
-          Slash: 1.2
-          Piercing: 1.2
+# - type: trait
+#   id: IpcSoftBody
+#   name: trait-ipc-soft-body-name
+#   description: trait-ipc-soft-body-desc
+#   category: Physical
+#   cost: -4
+#   mutuallyExclusiveTraits:
+#   - IpcHeavyBody
+#   - DermalArmor
+#   speciesBlacklist:
+#   - Human
+#   - Chitinid
+#   - Oni
+#   - Vulpkanin
+#   - Vox
+#   - Diona
+#   - Moth
+#   - Goblin
+#   - Arachnid
+#   - Resomi
+#   - Harpy
+#   - Reptilian
+#   - Hydrakin
+#   - Rodentia
+#   - Dwarf
+#   - SlimePerson
+#   - Felinid
+#   - Tajaran
+#   - Demon
+#   - Skrell
+#   - Ariral
+#   blacklist:
+#     components:
+#     - BorgChassis
+#   components:
+#   - type: DamageProtectionBuff
+#     modifiers:
+#       dermal:
+#         id: DermalArmorTrait
+#         coefficients:
+#           Blunt: 1.2
+#           Slash: 1.2
+#           Piercing: 1.2
 
-# - type: trait №не работает пока что
+# - type: trait #не работает пока что
 #   id: IpcHeavyBody
 #   name: trait-ipc-heavy-body-name
 #   description: trait-ipc-heavy-body-desc
@@ -136,81 +136,81 @@
 #     #   BaseWalkSpeed: 2.25 # -10%
 #     #   BaseSprintSpeed: 4.05 # -10%
 
-- type: trait
-  id: IpcWeldingFlashProtection
-  name: trait-ipc-welding-flash-protection-name
-  description: trait-ipc-welding-flash-protection-desc
-  category: Physical
-  cost: 2
-  speciesBlacklist:
-  - Human
-  - Chitinid
-  - Oni
-  - Vulpkanin
-  - Vox
-  - Diona
-  - Moth
-  - Goblin
-  - Arachnid
-  - Resomi
-  - Harpy
-  - Reptilian
-  - Hydrakin
-  - Rodentia
-  - Dwarf
-  - SlimePerson
-  - Felinid
-  - Tajaran
-  - Demon
-  - Skrell
-  - Ariral
-  blacklist:
-    components:
-    - BorgChassis
-  components:
-    - type: FlashImmunity
-    - type: EyeProtection   
+# - type: trait
+#   id: IpcWeldingFlashProtection
+#   name: trait-ipc-welding-flash-protection-name
+#   description: trait-ipc-welding-flash-protection-desc
+#   category: Physical
+#   cost: 2
+#   speciesBlacklist:
+#   - Human
+#   - Chitinid
+#   - Oni
+#   - Vulpkanin
+#   - Vox
+#   - Diona
+#   - Moth
+#   - Goblin
+#   - Arachnid
+#   - Resomi
+#   - Harpy
+#   - Reptilian
+#   - Hydrakin
+#   - Rodentia
+#   - Dwarf
+#   - SlimePerson
+#   - Felinid
+#   - Tajaran
+#   - Demon
+#   - Skrell
+#   - Ariral
+#   blacklist:
+#     components:
+#     - BorgChassis
+#   components:
+#     - type: FlashImmunity
+#     - type: EyeProtection   
 
-- type: trait
-  id: IpcBadServo
-  name: trait-ipc-bad-servo-name
-  description: trait-ipc-bad-servo-desc
-  category: Physical
-  cost: -5
-  mutuallyExclusiveTraits:
-  - IpcHeavyBody
-  - BionicLegs
-  speciesBlacklist:
-  - Human
-  - Chitinid
-  - Oni
-  - Vulpkanin
-  - Vox
-  - Diona
-  - Moth
-  - Goblin
-  - Arachnid
-  - Resomi
-  - Harpy
-  - Reptilian
-  - Hydrakin
-  - Rodentia
-  - Dwarf
-  - SlimePerson
-  - Felinid
-  - Tajaran
-  - Demon
-  - Skrell
-  - Ariral
-  blacklist:
-    components:
-    - BorgChassis
-  components:
-    # - type: SlowOnDamage
-    #   speedModifierThresholds:
-    #     0: 0.8
-    # - type: MovementSpeedModifier 
-    #   BaseWalkSpeed: 2 # -20%
-    #   BaseSprintSpeed: 3.6 # -20%
-    - type: DoAfterDelayMultiplier
-      multiplier: 1.15 
+# - type: trait
+#   id: IpcBadServo
+#   name: trait-ipc-bad-servo-name
+#   description: trait-ipc-bad-servo-desc
+#   category: Physical
+#   cost: -5
+#   mutuallyExclusiveTraits:
+#   - IpcHeavyBody
+#   - BionicLegs
+#   speciesBlacklist:
+#   - Human
+#   - Chitinid
+#   - Oni
+#   - Vulpkanin
+#   - Vox
+#   - Diona
+#   - Moth
+#   - Goblin
+#   - Arachnid
+#   - Resomi
+#   - Harpy
+#   - Reptilian
+#   - Hydrakin
+#   - Rodentia
+#   - Dwarf
+#   - SlimePerson
+#   - Felinid
+#   - Tajaran
+#   - Demon
+#   - Skrell
+#   - Ariral
+#   blacklist:
+#     components:
+#     - BorgChassis
+#   components:
+#     # - type: SlowOnDamage
+#     #   speedModifierThresholds:
+#     #     0: 0.8
+#     # - type: MovementSpeedModifier 
+#     #   BaseWalkSpeed: 2 # -20%
+#     #   BaseSprintSpeed: 3.6 # -20%
+#     - type: DoAfterDelayMultiplier
+#       multiplier: 1.15 

@@ -6,9 +6,9 @@
   suffix: UI
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/ui_med_hardsuit.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_med_hardsuit.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/ui_med_hardsuit.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_med_hardsuit.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.8
   - type: Armor

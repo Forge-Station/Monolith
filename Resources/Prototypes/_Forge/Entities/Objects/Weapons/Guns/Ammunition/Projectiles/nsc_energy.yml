@@ -5,7 +5,7 @@
   name: nexus plasma bolt
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Projectiles/nexus_energie_projectile.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Projectiles/nexus_energie_projectile.rsi
     layers:
     - state: heavy
       shader: unshaded
@@ -113,7 +113,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Projectiles/nexus_energie_projectile.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Projectiles/nexus_energie_projectile.rsi
     layers:
     - state: plasma
       shader: unshaded

@@ -6,9 +6,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit.rsi # Forge-change
   - type: PointLight
     color: "#4e88a6"
   - type: NightVision
@@ -63,9 +63,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi # Forge-change
   - type: PointLight
     color: "#4e88a6"
   - type: PressureProtection

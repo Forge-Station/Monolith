@@ -74,7 +74,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Projectiles/energy.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Projectiles/energy.rsi
     layers:
     - state: shotgun
       color: "#ffd988"
@@ -108,7 +108,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Projectiles/energy.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Projectiles/energy.rsi
     layers:
     - state: assault_alt
       color: "#f0a32f"
@@ -131,7 +131,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Projectiles/energy.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Projectiles/energy.rsi
     layers:
     - state: assault_alt
       color: "#ffd988"
@@ -176,7 +176,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Projectiles/energy.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Projectiles/energy.rsi
     layers:
     - state: assault_alt
       color: "#4b692f"
@@ -223,7 +223,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Ammunition/Projectiles/energy.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Projectiles/energy.rsi
     layers:
     - state: assault_alt
       color: "#1b78cf"

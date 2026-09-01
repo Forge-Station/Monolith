@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Prometheus;
 using Robust.Shared.Configuration;
 
@@ -46,13 +46,13 @@ public sealed class TTSManager
     public void Initialize()
     {
         _sawmill = Logger.GetSawmill("tts");
-        _cfg.OnValueChanged(ForgeVars.TTSMaxCache, val =>
+        _cfg.OnValueChanged(ForgeCCVars.TTSMaxCache, val =>
         {
             _maxCachedCount = val;
             ResetCache();
         }, true);
-        _cfg.OnValueChanged(ForgeVars.TTSApiUrl, v => _apiUrl = v, true);
-        _cfg.OnValueChanged(ForgeVars.TTSApiToken, v => _apiToken = v, true);
+        _cfg.OnValueChanged(ForgeCCVars.TTSApiUrl, v => _apiUrl = v, true);
+        _cfg.OnValueChanged(ForgeCCVars.TTSApiToken, v => _apiToken = v, true);
     }
 
     /// <summary>
@@ -96,7 +96,7 @@ public sealed class TTSManager
 
         try
         {
-            var timeout = _cfg.GetCVar(ForgeVars.TTSApiTimeout);
+            var timeout = _cfg.GetCVar(ForgeCCVars.TTSApiTimeout);
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
 
             var url = $"{_apiUrl}?speaker={Uri.EscapeDataString(speaker)}" +

@@ -1,38 +1,36 @@
 # Author Info
-# GitHub: Junerisms
-# Discord: widdershins6094
+# GitHub: bluebrouny
+# Discord: half_spinning_monkey
 
 # Shuttle Notes:
-#
-#
-
 - type: vessel
-  id: Jitterbug
+  id: McChicken
   parent: BaseVessel
-  name: SE Jitterbug
-  description: A Botanical shuttle, comes with ten trays and some supplies to get you going. Comes in the unique shape of a bug, how cute.
-  price: 50580
-  category: Small
+  name: AES McChicken
+  description: A cheap, fried food ship. For those who enjoy ungodly ammounts of calories, now made on the go!.
+  price: 38485
+  category: Medium
   group: Shipyard
-  shuttlePath: /SharedMaps/_Mono/Shuttles/jitterbug.yml
-  guidebookPage: null
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Civilian/mcchicken.yml
+  guidebookPage: Null
   class:
   - Civilian
+  - Kitchen
   - Botany
   engine:
   - Uranium
 
 - type: gameMap
-  id: Jitterbug
-  mapName: 'SE Jitterbug'
-  mapPath: /SharedMaps/_Mono/Shuttles/jitterbug.yml
+  id: McChicken
+  mapName: 'AES McChicken'
+  mapPath: /SharedMaps/_Forge/Shuttles/Civilian/mcchicken.yml
   minPlayers: 0
   stations:
-    Jitterbug:
+    McChicken:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Jitterbug CIV{1}'
+          mapNameTemplate: 'McChicken CIV{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

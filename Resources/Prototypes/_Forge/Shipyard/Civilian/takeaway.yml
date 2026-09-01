@@ -13,7 +13,7 @@
   price: 80968
   category: Medium
   group: Shipyard
-  shuttlePath: /SharedMaps/_Mono/Shuttles/takeaway.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Civilian/takeaway.yml
   guidebookPage: ShipyardTakeaway
   class:
   - Civilian
@@ -29,7 +29,7 @@
 - type: gameMap
   id: Takeaway
   mapName: 'UW Takeaway'
-  mapPath: /SharedMaps/_Mono/Shuttles/takeaway.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Civilian/takeaway.yml
   minPlayers: 0
   stations:
     Takeaway:

@@ -1,38 +1,38 @@
 # Author Info
-# GitHub: tsunameme
-# Discord: tsunameme
+# GitHub: Junerisms
+# Discord: widdershins6094
 
 # Shuttle Notes:
 #
+#
 
 - type: vessel
-  id: Zeros
+  id: Jitterbug
   parent: BaseVessel
-  name: JIN Zeros
-  description: A truck stop diner ship designed to resemble a semi-truck, complete with a EVA accessable dining room and a small cargo bay.
-  price: 153578
-  category: Large
+  name: SE Jitterbug
+  description: A Botanical shuttle, comes with ten trays and some supplies to get you going. Comes in the unique shape of a bug, how cute.
+  price: 50580
+  category: Small
   group: Shipyard
-  shuttlePath: /SharedMaps/_Mono/Shuttles/zeros.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Civilian/jitterbug.yml
   guidebookPage: null
   class:
   - Civilian
-  - Kitchen
   - Botany
   engine:
-  - AME
+  - Uranium
 
 - type: gameMap
-  id: Zeros
-  mapName: 'JIN Zeros'
-  mapPath: /SharedMaps/_Mono/Shuttles/zeros.yml
+  id: Jitterbug
+  mapName: 'SE Jitterbug'
+  mapPath: /SharedMaps/_Forge/Shuttles/Civilian/jitterbug.yml
   minPlayers: 0
   stations:
-    Zeros:
+    Jitterbug:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Zeros CIV{1}'
+          mapNameTemplate: 'Jitterbug CIV{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

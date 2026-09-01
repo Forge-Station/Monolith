@@ -1,36 +1,38 @@
 # Author Info
-# GitHub: bluebrouny
-# Discord: half_spinning_monkey
+# GitHub: tsunameme
+# Discord: tsunameme
 
 # Shuttle Notes:
+#
+
 - type: vessel
-  id: McChicken
+  id: Zeros
   parent: BaseVessel
-  name: AES McChicken
-  description: A cheap, fried food ship. For those who enjoy ungodly ammounts of calories, now made on the go!.
-  price: 38485
-  category: Medium
+  name: JIN Zeros
+  description: A truck stop diner ship designed to resemble a semi-truck, complete with a EVA accessable dining room and a small cargo bay.
+  price: 153578
+  category: Large
   group: Shipyard
-  shuttlePath: /SharedMaps/_Mono/Shuttles/mcchicken.yml
-  guidebookPage: Null
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Civilian/zeros.yml
+  guidebookPage: null
   class:
   - Civilian
   - Kitchen
   - Botany
   engine:
-  - Uranium
+  - AME
 
 - type: gameMap
-  id: McChicken
-  mapName: 'AES McChicken'
-  mapPath: /SharedMaps/_Mono/Shuttles/mcchicken.yml
+  id: Zeros
+  mapName: 'JIN Zeros'
+  mapPath: /SharedMaps/_Forge/Shuttles/Civilian/zeros.yml
   minPlayers: 0
   stations:
-    McChicken:
+    Zeros:
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'McChicken CIV{1}'
+          mapNameTemplate: 'Zeros CIV{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

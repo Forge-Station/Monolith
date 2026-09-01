@@ -1,7 +1,7 @@
 - type: vessel
   id: gargantuan
   parent: BaseVessel
-  name: Исполин
+  name: «Исполин»
   description: Гениальное творение инженеров ВКР. Бич Империи. Угроза сектору. Цена снижена за мануальное управление стрельбой.
   price: 89250
   category: Small

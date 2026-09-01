@@ -1,7 +1,7 @@
 - type: vessel
   id: Falyko
   parent: BaseVessel
-  name: "ESP Фалько"
+  name: "ESP «Фалько»"
   description: Фалько - средний истребитель Империи, вооруженный одним орудием "Дравон", одним орудием "Tarnyx" и двумя пулеметами "Мародер"
   category: Small
   group: Empire

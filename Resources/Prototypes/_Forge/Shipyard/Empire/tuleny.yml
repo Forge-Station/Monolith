@@ -1,7 +1,7 @@
 - type: vessel
   id: tuleny
   parent: BaseVessel
-  name: EMF Тюлень
+  name: EMF «Тюлень»
   description: Среднеторпедный шаттл Империи — боевой корабль средней дальности, оснащённый торпедным вооружением для нанесения мощных ударов по вражеским целям.
   price: 222000 # 373 price fix
   category: Medium

@@ -1,7 +1,7 @@
 - type: vessel
   id: lizard
   parent: BaseVessel
-  name: Ящер
+  name: «Ящер»
   description: Малый разведчик повстанцев. Вооружен.. Он вроде вооружен. Для выстрела активировать таймер сигнала. Удачи
   price: 9000
   category: Small

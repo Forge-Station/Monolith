@@ -1,7 +1,7 @@
 - type: vessel
   id: Striks
   parent: BaseVessel
-  name: 'MBS Стрикс'
+  name: 'MBS «Стрикс»'
   description: Истребитель VG с хорошим курсовым вооружением. Рассчитан на экипаж 1-2 человека
   price: 49900
   category: Small

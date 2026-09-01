@@ -30,3 +30,4 @@ ent-WeaponShotgunEnforcerRegistered = { ent-WeaponShotgunEnforcer } (зарег�
     .desc = { ent-WeaponShotgunEnforcer.desc }
 ent-WeaponRifleMR3CRegistered = SKR-WS MR-3C «Бандит» (8×65 мм SKR) (зарегистр.)
     .desc = { ent-WeaponRifleMR3C.desc }
+    .suffix = Зарегистрировано

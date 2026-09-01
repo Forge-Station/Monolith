@@ -1,7 +1,7 @@
 #Survival boxes all replaced with mono versions with extended tanks.
 - type: loadout
   id: ContractorBoxSurvivalNFOxygenExtended
-  name: extended-oxygen survival box
+  name: loadout-name-ContractorBoxSurvivalNFOxygenExtended
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: OxygenBreatherNF
@@ -11,7 +11,7 @@
 
 - type: loadout
   id: ContractorBoxSurvivalNFNitrogenExtended
-  name: extended-nitrogen survival box
+  name: loadout-name-ContractorBoxSurvivalNFNitrogenExtended
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NitrogenBreatherNF

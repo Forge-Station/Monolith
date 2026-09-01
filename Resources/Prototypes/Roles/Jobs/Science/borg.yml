@@ -20,7 +20,7 @@
 
 - type: job
   id: Borg
-  name: job-name-borg
+  name: job-name-cyborg
   description: job-description-borg
   playTimeTracker: JobBorg
   setPreference: true

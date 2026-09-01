@@ -1,7 +1,7 @@
 - type: vessel
   id: Mushroom
   parent: BaseVesselAntag
-  name: TSF-Light Мухомор
+  name: TSF-Light «Мухомор»
   description: Малый патрульный шаттл ТСФ. Легко вооружен.
   category: Small
   group: Security

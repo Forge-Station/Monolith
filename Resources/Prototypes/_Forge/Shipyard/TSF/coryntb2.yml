@@ -1,7 +1,7 @@
 - type: vessel
   id: coryntb2
   parent: BaseVesselAntag
-  name: TSF-BS Корунт Б2
+  name: TSF-BS «Корунт Б2»
   description: Средний боевой шаттл ТСФ.
   price: 200000 # 373 price fix
   category: Medium

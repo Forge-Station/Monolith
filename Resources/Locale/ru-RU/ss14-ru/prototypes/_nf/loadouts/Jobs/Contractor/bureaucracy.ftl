@@ -1,1 +1,1 @@
-ent-ContractorStampsApprovedDenied = штампы «Одобрено» и «Отклонено»
+loadout-name-ContractorStampsApprovedDenied = штампы «Одобрено» и «Отклонено»

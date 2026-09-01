@@ -3,7 +3,7 @@
 - type: vessel
   id: Germes
   parent: BaseVessel
-  name: EES Гермес
+  name: EES «Гермес»
   description: Крайне быстрый и маневренный истребитель Империи. Вооружен двумя ЭМИ-пушками и 6 малыми лазерами на каждый борт.
   purchasable: false
   limit: 6

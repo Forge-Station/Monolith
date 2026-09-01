@@ -6,6 +6,7 @@
 
 - type: loadout
   id: TsfmcUtilityCap
+  name: loadout-name-TsfmcUtilityCap
   equipment:
     head: ClothingHeadHatUtilityTsfmc
 
@@ -29,5 +30,6 @@
 
 - type: loadout
   id: TsfmcBeretCommon
+  name: loadout-name-TsfmcBeretCommon
   equipment:
     head: ClothingHeadHatBeretCommon

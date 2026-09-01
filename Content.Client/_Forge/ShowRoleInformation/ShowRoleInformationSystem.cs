@@ -10,6 +10,7 @@ public sealed class RoleDescriptionSystem : EntitySystem
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     private readonly HashSet<ProtoId<ShowRoleInformationWindowData>> _skipWindows = [];
+    private readonly HashSet<EntityUid> _visitedEntities = [];
     private ShowRoleInformationWindow? _currentWindow;
     private EntityUid? _previousEntityUid;
 
@@ -28,6 +29,7 @@ public sealed class RoleDescriptionSystem : EntitySystem
         if (currentEntityUid == null)
         {
             _skipWindows.Clear();
+            _visitedEntities.Clear();
             _previousEntityUid = null;
             return;
         }
@@ -43,7 +45,9 @@ public sealed class RoleDescriptionSystem : EntitySystem
         }
 
         _previousEntityUid = currentEntityUid;
-        OpenWindow(currentShowRoleInformationComponent.Window, currentShowRoleInformationComponent.Duration);
+
+        if (_visitedEntities.Add(currentEntityUid.Value))
+            OpenWindow(currentShowRoleInformationComponent.Window, currentShowRoleInformationComponent.Duration);
     }
 
     private void OnAddSkipWindow(EntityUid uid, ShowRoleInformationComponent showRoleInformationComponent, ShowRoleInformationAddSkipWindowLocalEvent args)

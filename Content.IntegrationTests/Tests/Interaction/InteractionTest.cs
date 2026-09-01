@@ -170,7 +170,7 @@ public abstract partial class InteractionTest
         // server dependencies
         SEntMan = Server.ResolveDependency<IEntityManager>();
         TileMan = Server.ResolveDependency<ITileDefinitionManager>();
-        MapMan = Server.ResolveDependency<SharedMapSystem>();
+        MapMan = Server.System<SharedMapSystem>();
         ProtoMan = Server.ResolveDependency<IPrototypeManager>();
         Factory = Server.ResolveDependency<IComponentFactory>();
         STiming = Server.ResolveDependency<IGameTiming>();

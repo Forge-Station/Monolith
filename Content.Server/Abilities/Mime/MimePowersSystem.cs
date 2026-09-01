@@ -81,7 +81,7 @@ namespace Content.Server.Abilities.Mime
             var xform = Transform(uid);
             // Get the tile in front of the mime
             var offsetValue = xform.LocalRotation.ToWorldVec();
-            var coords = xform.Coordinates.Offset(offsetValue).SnapToGrid(EntityManager, _mapMan);
+            var coords = xform.Coordinates.Offset(offsetValue).SnapToGrid(EntityManager);
             var tile = _turf.GetTileRef(coords);
             if (tile == null)
                 return;

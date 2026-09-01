@@ -11,6 +11,20 @@
     color: "#4ad6c8"
   - type: AccessReader
     access: [["Remnant"]]
+  - type: ContainerContainer
+    containers:
+      ancient-battery-slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      ancient-battery-slot:
+        name: remnant-apc-slot-name
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelistFailPopup: remnant-apc-slot-whitelist-fail
+        ejectOnBreak: true
+        whitelist:
+          tags:
+          - AncientBattery
   - type: ApcRequiresSlot
     batterySlot:
       name: remnant-apc-slot-name
@@ -38,6 +52,10 @@
   id: APCRemnant
   suffix: Forge, Remnant, Inserted
   components:
+  - type: ItemSlots
+    slots:
+      ancient-battery-slot:
+        startingItem: AncientBattery
   - type: ApcRequiresSlot
     batterySlot:
       name: remnant-apc-slot-name

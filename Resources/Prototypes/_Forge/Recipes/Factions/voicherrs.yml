@@ -36,15 +36,15 @@
   result: ShipVoucherGalandec
   completetime: 10
   materials:
-    Steel: 40000
+    Steel: 65000
     Plasteel: 45000
     Plastic: 40000
-    Glass: 7000
-    Plasma: 400
-    UraniumFissile: 700
-    UraniumDepleted: 1500
-    Silver: 4000
-    Gold: 4000
+    Glass: 7500
+    Plasma: 650
+    UraniumFissile: 800
+    UraniumDepleted: 1700
+    Silver: 4200
+    Gold: 4200
 
 # Empire
 

@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.0
-  forkId: ""
-  forkVersion: ""
-  time: 08/10/2025 14:53:08
-  entityCount: 345
+  engineVersion: 277.0.0
+  forkId: frontier_mapping
+  forkVersion: c4c959b7d8fd73a965250be13c8f5c40f3ce0e47
+  time: 08/31/2026 13:02:45
+  entityCount: 346
 maps: []
 grids:
 - 1
@@ -70,14 +70,20 @@ entities:
       fixtures: {}
     - type: OccluderTree
     - type: SpreaderGrid
+      spreadQueues:
+        Smoke: []
+        MetalFoam: []
+        Puddle: []
+        Kudzu: []
     - type: Shuttle
+      dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
     - type: DecalGrid
       chunkCollection:
-        version: 2
+        version: 3
         nodes:
         - node:
             color: '#FFFFFFFF'
@@ -250,48 +256,16 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - volume: 2500
           temperature: 293.14996
           moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - volume: 2500
           immutable: True
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+          moles: {}
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
@@ -304,6 +278,8 @@ entities:
         -1,-1: 17940362829076922368
         0,-1: 4557430750550885120
     - type: NavMap
+    - type: ThermalSignature
+    - type: ExplosionAirtightGrid
 - proto: AirAlarm
   entities:
   - uid: 2
@@ -350,7 +326,7 @@ entities:
       pos: -0.5,3.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -2271.0325
+      secondsUntilStateChange: -2422.1672
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -959,6 +935,13 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 2.5,-3.5
       parent: 1
+- proto: CEWater
+  entities:
+  - uid: 143
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
 - proto: ChairOfficeDark
   entities:
   - uid: 112
@@ -1028,6 +1011,20 @@ entities:
     - type: Transform
       pos: -1.5535464,-2.5339754
       parent: 1
+- proto: ComputerHydroponics
+  entities:
+  - uid: 346
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,-1.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 55
+    - type: ApcPowerReceiverBattery
+      enabled: True
 - proto: ComputerTabletopRadar
   entities:
   - uid: 122
@@ -1052,18 +1049,6 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
-    - type: DeviceLinkSource
-      linkedPorts: {}
-      lastSignals: {}
-      ports:
-      - device-button-1
-      - device-button-2
-      - device-button-3
-      - device-button-4
-      - device-button-5
-      - device-button-6
-      - device-button-7
-      - device-button-8
 - proto: ComputerTabletopStationRecords
   entities:
   - uid: 124
@@ -1142,7 +1127,7 @@ entities:
       pos: 0.5,0.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -7906.97
+      secondsUntilStateChange: -8058.105
       state: Opening
 - proto: FenceMetalStraight
   entities:
@@ -1230,13 +1215,6 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: FloorWaterEntity
-  entities:
-  - uid: 143
-    components:
-    - type: Transform
-      pos: 4.5,1.5
-      parent: 1
 - proto: FoodContainerEgg
   entities:
   - uid: 144
@@ -1590,7 +1568,6 @@ entities:
     - type: Transform
       pos: -0.5,5.5
       parent: 1
-    - type: DeviceNetwork
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 191
@@ -1980,41 +1957,57 @@ entities:
     - type: Transform
       pos: -1.5,7.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 248
     components:
     - type: Transform
       pos: -0.5,7.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 249
     components:
     - type: Transform
       pos: 1.5,7.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 250
     components:
     - type: Transform
       pos: 2.5,7.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 251
     components:
     - type: Transform
       pos: 5.5,-1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 252
     components:
     - type: Transform
       pos: 5.5,-0.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 253
     components:
     - type: Transform
       pos: 5.5,1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 254
     components:
     - type: Transform
       pos: 5.5,0.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: ReinforcedWindow
   entities:
   - uid: 255
@@ -2022,16 +2015,22 @@ entities:
     - type: Transform
       pos: 1.5,3.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 256
     components:
     - type: Transform
       pos: -1.5,3.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 257
     components:
     - type: Transform
       pos: 2.5,3.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: SeedExtractor
   entities:
   - uid: 258
@@ -2561,11 +2560,13 @@ entities:
     - type: Transform
       pos: -1.5,-1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -2254.099
+      secondsUntilStateChange: -2405.234
       state: Opening
     - type: Airlock
       autoClose: False

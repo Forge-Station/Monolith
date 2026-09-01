@@ -3,6 +3,6 @@
   coefficients:
     Poison: 0
     Cold: 0.2
-    Heat: 1.25 #Forge-Change 1.5=>1.25
+    Heat: 1.5
     Shock: 2.5
-    Radiation: 1 # RIP #Forge-Change 0.5=>1
+    Radiation: 0.5 # RIP

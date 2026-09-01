@@ -1,6 +1,6 @@
 - type: entity
   id: MobIPC
-  parent: [PlayerSiliconHumanoidBase, ClothingArmorPlate] #Forge-Change: add ClothingArmorPlate
+  parent: [PlayerSiliconHumanoidBase] #, ClothingArmorPlate] #Forge-Change: add ClothingArmorPlate
   name: Urist McPositronic
   description: A positronic brain in a metal body.
   components:
@@ -47,8 +47,8 @@
   - type: EncryptionHolderRequiresLock
   - type: SiliconEmitSoundOnDrained
     sound: "/Audio/_Goobstation/Voice/IPC/energy_low.ogg" # Goobstation - ipc audio
-    minInterval: 15 #Forge-Change 8=>15
-    maxInterval: 30 #Forge-Change 12=>30
+    minInterval: 30 #Forge-Change 8=>30
+    maxInterval: 60 #Forge-Change 12=>60
     popUp: "silicon-power-low"
   - type: Lock
     locked: true
@@ -132,10 +132,10 @@
   - type: TTS # Forge-Change
   - type: RetroMonitorView # Mono
    #Forge-Change-Start
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: []
+  # - type: ContainerContainer
+  #   containers:
+  #     storagebase: !type:Container
+  #       ents: []
     #Forge-Change-End
 
 - type: entity

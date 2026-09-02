@@ -69,19 +69,19 @@
   - type: DrakePlasmaGasWeapon
     gasUsage: 0.105
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Basic/drake_industrial_cutter.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Basic/drake_industrial_cutter.rsi
     layers:
     - state: icon
     - state: icon
       visible: false
       map: [ "empty-icon" ]
   - type: Item
-    sprite: Forge/Objects/Weapons/Guns/Basic/drake_industrial_cutter.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Basic/drake_industrial_cutter.rsi
     size: Small
     shape:
     - 0,0,1,1
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/Basic/drake_industrial_cutter.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Basic/drake_industrial_cutter.rsi
     quickEquip: false
     slots: NONE
   - type: Gun
@@ -116,18 +116,18 @@
   suffix: Drake
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Launchers/drake_industrial_grenade_launcher.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Launchers/drake_industrial_grenade_launcher.rsi
     layers:
     - state: icon
       map: ["enum.GunVisualLayers.Base"]
   - type: Item
-    sprite: Forge/Objects/Weapons/Guns/Launchers/drake_industrial_grenade_launcher.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Launchers/drake_industrial_grenade_launcher.rsi
     size: Ginormous
   - type: HeldSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/Launchers/drake_industrial_grenade_launcher.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Launchers/drake_industrial_grenade_launcher.rsi
     slots:
     - Back
     - suitStorage
@@ -175,7 +175,7 @@
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser_wide.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser_wide.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -184,12 +184,12 @@
       shader: unshaded
       visible: false
   - type: Icon
-    sprite: Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser_wide.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser_wide.rsi
     state: icon
   - type: Item
-    sprite: Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser.rsi
     storedSprite:
-      sprite: Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser_wide.rsi
+      sprite: _Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser_wide.rsi
       state: icon
     size: Ginormous
     shape:
@@ -201,7 +201,7 @@
       - state: inhand-right
   - type: Clothing
     quickEquip: false
-    sprite: Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/drake_industrial_laser.rsi
     slots:
     - Back
     - suitStorage

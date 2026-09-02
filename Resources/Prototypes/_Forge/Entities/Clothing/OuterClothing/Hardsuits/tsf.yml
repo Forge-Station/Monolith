@@ -1,190 +1,474 @@
+# TSFMC M82c hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitM82c
-  id: ClothingOuterHardsuitTSFLow
-  name: TSF light hardsuit
-  description: A light issue TSF hardsuit tuned for mobility.
+  parent: [ ClothingOuterHardsuitBase, BaseFactionGearTSFT1, ClothingFlightProfileEasy]
+  id: ClothingOuterHardsuitTSFMCM82c
+  name: TSFMC M82c hardsuit
+  description: A hardsuit issued to marines operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi
+  - type: Item
+    size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.75
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.4
+        Heat: 0.5
+        Radiation: 0.3
+        Caustic: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.3
+  - type: ClothingSpeedModifier
+    walkModifier: 0.925
+    sprintModifier: 0.925
+  - type: HeldSpeedModifier
   - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitTSFLow
+      head: ClothingHeadHelmetHardsuitTSFMCM82c
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 7500
 
+# TSFMC M82b hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitM86
-  id: ClothingOuterHardsuitTSFMid
-  name: TSF standard hardsuit
-  description: A standard issue TSF hardsuit for general combat deployment.
+  parent: [ ClothingOuterHardsuitTSFMCM82c, BaseFactionGearTSFT1, ClothingFlightProfileEasy]
+  id: ClothingOuterHardsuitTSFMCM82b
+  name: TSFMC M82b hardsuit
+  description: Corpsman variant of the M82c outfitted with caustic and radiological shielding. Some of the blunt-absorbent gel layer is sacrificed for the NBC protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_mid.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_mid.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.75
   - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitTSFMid
+      head: ClothingHeadHelmetHardsuitTSFMCM82b
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.55
+        Heat: 0.45
+        Radiation: 0.3
+        Caustic: 0.5
+        Poison: 0.9
+  - type: StaminaDamageResistance
+    coefficient: 0.3
+  - type: ClothingSpeedModifier
+    walkModifier: 0.975
+    sprintModifier: 0.975
+  
+# TSFMC M86 Mk.3(R) hardsuit
+- type: entity
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearTSFT2, ClothingFlightProfileMedium]
+  id: ClothingOuterHardsuitTSFMCM86
+  name: TSFMC M86 Mk.3(R) hardsuit
+  description: An armored hardsuit, designed to be an upgrade for the M82 series. The extra general armor gives it significant weight to move around.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_mid.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_mid.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.35
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.45
+        Slash: 0.45
+        Piercing: 0.3
+        Shock: 0.75
+        Heat: 0.35
+        Radiation: 0.4
+        Caustic: 0.6
+  - type: StaminaDamageResistance
+    coefficient: 0.2
+  - type: ClothingSpeedModifier
+    walkModifier: 0.875
+    sprintModifier: 0.875
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitTSFMCM86
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 7500
+    vendPrice: 1000
 
+# TSFMC M88 Mk.1(T) lightened Juggernaut hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitNfsdSheriff
-  id: ClothingOuterHardsuitTSFHigh
-  name: TSF heavy hardsuit
-  description: A heavy TSF hardsuit with reinforced armor plating.
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearTSFT2, ClothingFlightProfileMedium]
+  id: ClothingOuterHardsuitTSFMCLightJuggernaut
+  name: TSFMC M88 Mk.1(T) lightened Juggernaut hardsuit
+  description: A lightened Juggernaut hardsuit issued to the TSF for regular operations. More protection, less mobility.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_high.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_high.rsi
+  - type: Item
+    size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_high.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_high.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.25
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.375
+        Heat: 0.45
+        Radiation: 0.325
+        Caustic: 0.5
+  - type: StaminaDamageResistance
+    coefficient: 0.2
+  - type: ClothingSpeedModifier
+    walkModifier: 0.76
+    sprintModifier: 0.76
+  - type: HeldSpeedModifier
   - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitTSFHigh
+      head: ClothingHeadHelmetHardsuitTSFMCLightJuggernaut
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 17800
+    vendPrice: 8500
 
+# TSFMC M86-C tacsuit
 - type: entity
-  parent: ClothingOuterHardsuitM82b
-  id: ClothingOuterHardsuitTSFMedic
-  name: TSF corpsman hardsuit
-  description: A TSF hardsuit with medical markings and field treatment accommodations.
+  parent: [ClothingOuterHardsuitBaseNFNfsd, BaseFactionGearTSFT3, ClothingFlightProfileMedium]
+  id: ClothingOuterHardsuitTSFMCM86C
+  name: TSFMC M86-C tacsuit
+  description: A heavy, gilded tacsuit, stripped of its shield but now capable of taking a lot of physical damage. Usually assigned to commanding officers of TSF flagships.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_medic.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_midas.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_medic.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_midas.rsi
   - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitTSFMedic
+      head:  ClothingHeadHelmetHardsuitTSFMCM86C
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: FireProtection
+    reduction: 0.5
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.45
+        Slash: 0.45
+        Piercing: 0.3
+        Heat: 0.35
+        Radiation: 0.3
+        Caustic: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: StaminaDamageResistance
+    coefficient: 0.2
+  - type: PirateBountyItem
+    id: ClothingOuterHardsuitTacsuitHighValue
 
+# TSFMC M92-X tacsuit
 - type: entity
-  parent: ClothingOuterHardsuitPilot
-  id: ClothingOuterHardsuitTSFKalenval
-  name: TSF TBS-4 Kalenval hardsuit
-  description: A scout-oriented TSF hardsuit built to stay nimble in vacuum.
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, MonoEnergyShieldClothing, BaseFactionGearTSFT3, ClothingFlightProfileMedium ]
+  id: ClothingOuterHardsuitTSFMCEnergyShield
+  name: TSFMC M92-X tacsuit
+  description: An experimental modification of the M92 tacsuit for spec-ops units of the TSFMC. Durable, and comes with an integrated soft-shield along with numerous gadgets at the cost of insulation and solid armor.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
   - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitTSFKalenval
+      head:  ClothingHeadHelmetHardsuitTSFMCEnergyShield
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: PressureProtection
+    highPressureMultiplier: 0.2
+    lowPressureMultiplier: 1000
+  - type: FireProtection
+    reduction: 0.6
+  - type: ExplosionResistance
+    damageCoefficient: 0.45
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.7
+        Heat: 0.75
+        Radiation: 0.25
+        Caustic: 0.8
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  - type: FactionClothing
+    faction: NanoTrasen
+  - type: StaminaDamageResistance
+    coefficient: 0.1
+  - type: PirateBountyItem
+    id: ClothingOuterHardsuitTacsuitHighValue
+  - type: PersonalShield
+    shield:
+      maxCharge: 775 # 648 # 540
+      regenRate: 14.4 # 12
+      spinupTime: 1
+      breakCooldown: 17.5
+      powerDraw: 0.02
+      blockModifier:
+        coefficients:
+          Blunt: 1
+          Slash: 1
+          Piercing: 1
+          Heat: 1.25
+          Radiation: 0.25
+  - type: Damageable
+    damageContainer: Shield
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
+  - type: UseDelay
+    delay: 10
 
+# TSFMC M93-S stealth suit
 - type: entity
-  parent: ClothingOuterHardsuitM86
-  id: ClothingOuterHardsuitTSFVprysk
-  name: TSF TBS-5 Vprysk hardsuit
-  description: A specialist TSF hardsuit with extra armor and breaching utility.
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearTSFT3, ClothingFlightProfileMedium]
+  id: ClothingOuterHardsuitTSFMCStealth
+  name: TSFMC M93-S stealth suit
+  suffix: TSFMC
+  description: Prototype of a stealth hardsuit issued to the TSF military forces. With it, special operators can conduct reconnaissance and sabotage without being exposed.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_stealth_mark1.rsi
+  - type: Item
+    size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
-  - type: ToggleableClothing
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_stealth_mark1.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.45
+        Heat: 0.5
+        Shock: 0.8
+        Radiation: 0.55
+        Caustic: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.3
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitTSFVprysk
+      head: ClothingHeadHelmetHardsuitTSFMCStealth
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 12000
+    vendPrice: 90000
 
+# TSFMC M95-R reflect suit
 - type: entity
-  parent: ClothingOuterHardsuitNfsdSheriff
-  id: ClothingOuterHardsuitTSFZazhiganie
-  name: TSF TBS-2 Zazhiganie hardsuit
-  description: A command-grade TSF hardsuit with enhanced communications support.
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearTSFT3, ClothingFlightProfileEasy]
+  id: ClothingOuterHardsuitTSFMCReflectElite
+  name: M95-R reflect suit
+  suffix: TSFMC
+  description: Prototype of a reflect suit issued to the TSF military forces. The suit is capable of long-lasting against laser weapons and partially reflecting them. It also has increased protection from radiation and explosions.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_zazhiganie.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_zazhiganie.rsi
+  - type: Item
+    size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_zazhiganie.rsi
-  - type: ToggleableClothing
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_zazhiganie.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.15
+  - type: FireProtection
+    reduction: 0.8
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.35
+        Shock: 0.75
+        Heat: 0.3
+        Radiation: 0.15
+        Caustic: 0.5
+  - type: StaminaDamageResistance
+    coefficient: 0.1
+  - type: ClothingSpeedModifier
+    walkModifier: 0.975
+    sprintModifier: 0.975
+  - type: HeldSpeedModifier
+  - type: Reflect
+    reflectProb: 0.3 # Mono EDIT
+    damageOnReflectModifier: 0
+    reflects:
+      - Energy
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitTSFZazhiganie
+      head: ClothingHeadHelmetHardsuitTSFMCReflectElite
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 90000
+    vendPrice: 50000
 
+# TSFMC M90-M advanced light hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitNfsdSheriff
-  id: ClothingOuterHardsuitTSFMidas
-  name: TSF UVP-1 Midas hardsuit
-  description: A commander's TSF hardsuit with top-tier protection.
+  parent: [ForgeClothingOuterHardsuitBase, BaseFactionGearTSFT3, ClothingFlightProfileEasy]
+  id: ClothingOuterHardsuitTSFMCAdvancedLight
+  name: TSFMC M90-M advanced light hardsuit
+  suffix: TSFMC
+  description: An advanced version of the regular TSF M86 hardsuit. Thanks to the new composites, it practically does not restrict movement, although it does not protect as well as the predecessor.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_midas.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_medic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_midas.rsi
-  - type: ToggleableClothing
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_medic.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.55
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.35
+        Heat: 0.4
+        Radiation: 0.45
+        Caustic: 0.3
+  - type: StaminaDamageResistance
+    coefficient: 0.2
+  - type: ClothingSpeedModifier
+    walkModifier: 0.975
+    sprintModifier: 0.975
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitTSFMidas
+      head: ClothingHeadHelmetHardsuitTSFMCAdvancedLight
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 15000
 
+# TSFMC M98-H heavy battle hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitContractorStealh
-  id: ClothingOuterHardsuitTSFStealthMark1
-  name: TSF stealth suit Mk.1
-  description: A stealth-focused TSF hardsuit with active camouflage support.
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearTSFT3, ClothingFlightProfileHard]
+  id: ClothingOuterHardsuitTSFMCHeavyJuggernaut
+  name: TSFMC M98-H heavy battle hardsuit
+  suffix: TSFMC
+  description: Prototype of a heavy Juggernaut hardsuit issued to the TSF military forces. The suit is capable of long-lasting against most calibers of firearm ammunition.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_stealth_mark1.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_porshen.rsi
+  - type: Item
+    size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_stealth_mark1.rsi
-  - type: ToggleableClothing
-    clothingPrototype: null
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_porshen.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.15
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.225
+        Heat: 0.3
+        Shock: 0.75
+        Radiation: 0.2
+        Caustic: 0.6
+  - type: StaminaDamageResistance
+    coefficient: 0.1
+  - type: ClothingSpeedModifier
+    walkModifier: 0.65
+    sprintModifier: 0.65
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitTSFStealthMark1
+      head: ClothingHeadHelmetHardsuitTSFMCHeavyJuggernaut
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
-
-- type: entity
-  parent: ClothingOuterHardsuitM86
-  id: ClothingOuterHardsuitTSFPorshen
-  name: TSF TBS-12 Porshen hardsuit
-  description: A heavily armored TSF breaching hardsuit.
-  components:
-  - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_porshen.rsi
-  - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_porshen.rsi
-  - type: ToggleableClothing
-    requiredSlot: outerclothing
-    blockUnequipWhenAttached: false
-    replaceCurrentClothing: true
-    clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitTSFPorshen
-      helmetcover: ClothingHeadHelmetCoverBlock
-      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 30000
+    vendPrice: 80000

@@ -1,0 +1,55 @@
+- type: entity
+  id: BaseMagazine635x40mmCaselessNexus
+  name: magazine (6.35x40mm caseless)
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - Magazine635x40mmCaselessNexus
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,1
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge635x40mmCaseless
+    capacity: 48
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/m7s_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazine635x40mmCaselessNexus
+  id: Magazine635x40mmCaselessNexus
+  name: SMG magazine (6.35x40mm caseless)
+  description: Extended magazine for the Shebet SMG.
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge635x40mmCaseless
+    proto: Cartridge635x40mmCaseless
+    capacity: 48
+
+- type: entity
+  parent: BaseMagazine635x40mmCaselessNexus
+  id: Magazine635x40mmCaselessNexusEmpty
+  name: SMG magazine (6.35x40mm)
+  suffix: Empty
+  description: Extended magazine for the Shebet SMG.

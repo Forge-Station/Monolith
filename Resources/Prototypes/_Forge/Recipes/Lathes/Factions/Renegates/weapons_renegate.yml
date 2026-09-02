@@ -106,3 +106,42 @@
     Plasteel: 3000
     Plastic: 400
     Plasma: 3000
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponRifleBurner
+  result: WeaponRifleBurner
+  categories:
+  - DMRs
+  - AntiMaterial
+  - Ballistic
+  - Weapons
+  - Antitank
+  materials:
+    Steel: 5000
+    Plasteel: 3500
+    Plastic: 1000
+    Silver: 2000
+    Uranium: 500
+    Plastitanium: 250
+
+- type: latheRecipe
+  parent: BaseAmmoFMJFullyPoweredAmmoBoxRecipe
+  id: AmmoBox127x99mm
+  result: AmmoBox127x99mm
+
+- type: latheRecipe
+  parent: BaseAmmoIncendiaryFullyPoweredAmmoBoxRecipe
+  id: AmmoBox127x99mmExplosive
+  result: AmmoBox127x99mmExplosive
+
+- type: latheRecipe
+  parent: BaseAmmoPlasteelAPFullyPoweredMagazineRecipe
+  id: Magazine127x99mm
+  result: Magazine127x99mm
+
+- type: latheRecipe
+  parent: BaseAmmoIncendiaryFullyPoweredMagazineRecipe
+  id: Magazine127x99mmExplosive
+  result: Magazine127x99mmExplosive
+

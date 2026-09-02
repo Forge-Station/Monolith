@@ -7,8 +7,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 24
-    armorPenetration: 0.075
+        Piercing: 28 # Forge-change 24->28
+    armorPenetration: 0.175 # Forge-change 0.075->0.175
 
 - type: entity
   id: Bullet68x52mmCaselessPractice
@@ -30,7 +30,37 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 3
+        Blunt: 4 # Forge-change 3->4
+  - type: StaminaDamageOnCollide # Forge-change
+    damage: 28 # Forge-change
+
+# Forge-change-start
+- type: entity
+  id: Bullet68x52mmCaselessIncendiary
+  name: bullet (6.8x52mm Caseless incendiary)
+  parent: BaseBulletIncendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 15
+        Heat: 8
+    armorPenetration: -0.1
+
+- type: entity
+  id: Bullet68x52mmCaselessUranium
+  name: bullet (6.8x52mm Caseless uranium)
+  parent: BaseBulletUranium
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 17
+        Radiation: 12
+    armorPenetration: -0.05
+# Forge-change-end
 
 # Mono AP syst
 # + 0.05 base AP
@@ -44,9 +74,9 @@
   - type: Projectile
     damage:
       types:
-        Slash: 4
-        Piercing: 29
-    armorPenetration: -0.525
+        Slash: 5 # Forge-change 4->5
+        Piercing: 31 # Forge-change 29->31
+    armorPenetration: -0.55 # Forge-change -0.525->-0.55
 
 - type: entity
   id: Bullet68x52mmCaselessRIP
@@ -57,9 +87,9 @@
   - type: Projectile
     damage:
       types:
-        Slash: 6
+        Slash: 8 # Forge-change 6->8
         Piercing: 35
-    armorPenetration: -0.8
+    armorPenetration: -0.9 # Forge-change -0.8->-0.9
 
 #armor-piercing:
 
@@ -72,6 +102,6 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 11
-        Structural: 35
-    armorPenetration: 0.65
+        Piercing: 20 # Forge-change 11->20
+        Structural: 28 # Forge-change 35->28
+    armorPenetration: 0.525 # Forge-change 0.65->0.525

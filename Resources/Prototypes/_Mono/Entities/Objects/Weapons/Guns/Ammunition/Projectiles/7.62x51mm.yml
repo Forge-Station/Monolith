@@ -7,8 +7,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 36
-    armorPenetration: 0.1
+        Piercing: 32 # Forge-change 36->32
+    armorPenetration: 0.25 # Forge-change 0.1->0.25
 
 - type: entity
   id: Bullet762x51mmPractice
@@ -31,6 +31,8 @@
     damage:
       types:
         Blunt: 6
+  - type: StaminaDamageOnCollide # Forge-change
+    damage: 30 # Forge-change
 
 - type: entity
   id: Bullet762x51mmIncendiary
@@ -41,8 +43,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20
-        Heat: 10
+        Piercing: 18 # Forge-change 20->18
+        Heat: 8 # Forge-change 10->8
+    armorPenetration: -0.075 # Forge-change
 
 - type: entity
   id: Bullet762x51mmUranium
@@ -53,8 +56,9 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 13
-        Piercing: 18
+        Radiation: 14 # Forge-change 13->14
+        Piercing: 19 # Forge-change 18->19
+    armorPenetration: -0.05 # Forge-change
 
 # Mono AP syst
 # + 0.05 base AP
@@ -68,8 +72,8 @@
   - type: Projectile
     damage:
       types:
-        Slash: 8
-        Piercing: 37
+        Slash: 6 # Forge-change 8->6
+        Piercing: 36 # Forge-change 37->36
     armorPenetration: -0.55
 
 - type: entity
@@ -81,8 +85,8 @@
   - type: Projectile
     damage:
       types:
-        Slash: 10
-        Piercing: 50
+        Slash: 9 # Forge-change 10->9
+        Piercing: 41 # Forge-change 50->41
     armorPenetration: -0.9
 
 #armor-piercing:
@@ -95,9 +99,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 13
-        Structural: 40
-    armorPenetration: 0.8
+        Piercing: 23 # Forge-change 13->23
+        Structural: 30 # Forge-change 40->30
+    armorPenetration: 0.6 # Forge-change 0.8->0.6
 
 #anti-structure (heavy balistic turrets):
 - type: entity
@@ -109,6 +113,6 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20
-        Structural: 40
+        Piercing: 32 # Forge-change 20->32
+        Structural: 35 # Forge-change 40->35
     armorPenetration: 0.3

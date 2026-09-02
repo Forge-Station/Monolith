@@ -378,7 +378,7 @@
 
 # Trauma
 - type: entity
-  parent: [ForgeClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1]
+  parent: [ForgeClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1, ClothingFlightProfileEasy]
   id: ClothingOuterHardsuitTraumaShooter
   name: armed trauma unit T-45 tacsuit
   suffix: TTI
@@ -394,21 +394,21 @@
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.4
+    damageCoefficient: 0.5
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.45
-        Heat: 0.6
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.475
+        Heat: 0.5
         Radiation: 0.5
         Caustic: 0.6
   - type: StaminaDamageResistance
-    coefficient: 0.5
+    coefficient: 0.25
   - type: ClothingSpeedModifier
-    walkModifier: 1.1
-    sprintModifier: 1.1
+    walkModifier: 0.975
+    sprintModifier: 0.975
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     requiredSlot: outerclothing

@@ -83,9 +83,8 @@
     impactEffect: BulletImpactEffectGold
     damage:
       types:
-        Heat: 11
-        Piercing: 2
-    armorPenetration: 0.15
+        Heat: 20
+    armorPenetration: 0.25
   - type: Tracer
     color: "#ffd988"
     length: 3
@@ -99,7 +98,7 @@
   - type: ProjectileSpread
     proto: HEVBulletEnergyShotgun
     count: 5
-    spread: 45
+    spread: 15
 
 - type: entity
   parent: ForgeBaseBulletLaser
@@ -117,9 +116,8 @@
     impactEffect: BulletImpactEffectGold
     damage:
       types:
-        Heat: 16
-        Piercing: 9
-    armorPenetration: 0.15
+        Heat: 24
+    armorPenetration: 0.4
   - type: Tracer
     color: "#f0a32f"
     length: 3
@@ -140,9 +138,8 @@
     impactEffect: BulletImpactEffectGold
     damage:
       types:
-        Heat: 16
-        Piercing: 9
-    armorPenetration: 0.15
+        Heat: 25
+    armorPenetration: 0.35
   - type: Tracer
     color: "#ffd988"
     length: 3
@@ -166,8 +163,8 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 19
-        Piercing: 3
+        Heat: 21
+    armorPenetration: 0.35
 
 - type: entity
   parent: HEVBulletEnergyRifle
@@ -185,10 +182,9 @@
     impactEffect: BulletImpactEffectGold
     damage:
       types:
-        Heat: 11
-        Piercing: 4
-        Radiation: 8
-    armorPenetration: 0.2
+        Heat: 13
+        Radiation: 12
+    armorPenetration: 0.3
   - type: Tracer
     color: "#4b692f"
     length: 3
@@ -213,8 +209,8 @@
     damage:
       types:
         Heat: 11
-        Piercing: 1
-        Radiation: 11
+        Radiation: 10
+    armorPenetration: 0.3
 
 - type: entity
   parent: HEVBulletEnergyRifle
@@ -238,9 +234,8 @@
         Heat: 8
     soundHit:
       collection: WeakHit
-    armorPenetration: 0.015
   - type: StaminaDamageOnCollide
-    damage: 22
+    damage: 28
 
 - type: entity
   parent: BasicHitscan
@@ -261,9 +256,9 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 7
+        Heat: 8
   - type: StaminaDamageOnCollide
-    damage: 18
+    damage: 24
 
 #region Disabler bolts
 - type: entity

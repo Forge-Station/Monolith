@@ -9,6 +9,8 @@
   - WeaponRifleAR220Rogue
   - WeaponShotgunSaigakRogue
   - WeaponRevolverMagnusRogue
+  - WeaponPistolTiran
+  - WeaponSubMachineGunAS103
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   - RogueRenegateEquipmentT1
@@ -25,6 +27,7 @@
   - WeaponLmgAR400Rogue
   - WeaponRifleGaussRifleRogue
   - WeaponShotgunDefensieRogue
+  - WeaponRifleVympelRogue
   technologyPrerequisites:
   - RogueRenegateWeaponsT1
   - UniversalMaterialResearchT2
@@ -66,3 +69,23 @@
   - RogueRenegateWeaponsT2
   - UniversalMaterialResearchT3
   position: 13, 4
+
+- type: technology
+  id: RogueRenegateWeaponsT3AntiMaterial
+  name: research-technology-rogue-renegate-weapons-t3-anti-material
+  entityIcon: WeaponRifleBurner
+  discipline: RenegateWeaponry
+  tier: 3
+  cost: 80000
+  recipeUnlocks:
+  - WeaponSniperHristovRogue
+  - AmmoBox145x114mm
+  - AmmoBox145x114mmBig
+  - AmmoBox127x99mm
+  - Magazine127x99mm
+  - AmmoBox127x99mmExplosive
+  - Magazine127x99mmExplosive
+  - WeaponRifleBurner
+  technologyPrerequisites:
+  - RogueRenegateWeaponsT3
+  position: 14, 4

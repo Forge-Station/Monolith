@@ -70,7 +70,7 @@
     proto: Cartridge8x65mmSKRIncendiary
   - type: Sprite
     layers:
-    - state: base
+    - state: red # Forge-change base->red
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -84,7 +84,7 @@
     proto: Cartridge8x65mmSKRPractice
   - type: Sprite
     layers:
-    - state: base
+    - state: practice # Forge-change base->practice
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -150,3 +150,61 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  
+# Forge-change-start
+- type: entity
+  id: Magazine8x65mmSKRUranium
+  name: magazine (8x65mm SKR uranium)
+  parent: BaseMagazine8x65mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge8x65mmSKRUranium
+  - type: Sprite
+    layers:
+    - state: uranium # Forge-change base->uranium
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: Magazine8x65mmSKRPlasteelAP
+  name: magazine (8x65mm SKR AP)
+  parent: BaseMagazine8x65mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge8x65mmSKRPlasteelAP
+  - type: Sprite
+    layers:
+    - state: steelAP # Forge-change base->steelAP
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: Magazine8x65mmSKRHP
+  name: magazine (8x65mm SKR hollow-point)
+  parent: BaseMagazine8x65mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge8x65mmSKRHP
+  - type: Sprite
+    layers:
+    - state: HP # Forge-change base->HP
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: Magazine8x65mmSKRRIP
+  name: magazine (8x65mm SKR RIP)
+  parent: BaseMagazine8x65mm
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge8x65mmSKRRIP
+  - type: Sprite
+    layers:
+    - state: RIP # Forge-change base->RIP
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+# Forge-change-end

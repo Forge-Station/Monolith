@@ -279,6 +279,6 @@ public sealed class ForgeCCVars
     ///     Seconds between scans for procedural drones inside the inner worldgen zone.
     /// </summary>
     public static readonly CVarDef<float> DroneInnerZoneCheckInterval =
-        CVarDef.Create("forge.drone.inner_zone_check_interval", 2f, CVar.SERVERONLY);
+        CVarDef.Create("forge.drone.inner_zone_check_interval", 15f, CVar.SERVERONLY);
     #endregion
 }

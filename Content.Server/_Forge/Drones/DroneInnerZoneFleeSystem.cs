@@ -46,7 +46,7 @@ public sealed partial class DroneInnerZoneFleeSystem : EntitySystem
     private float _innerZoneRadius = 18_000f;
     private float _deleteMinSeconds = 10f;
     private float _deleteMaxSeconds = 15f;
-    private float _zoneCheckInterval = 2f;
+    private float _zoneCheckInterval = 15f;
 
     private float _zoneCheckTimer;
 

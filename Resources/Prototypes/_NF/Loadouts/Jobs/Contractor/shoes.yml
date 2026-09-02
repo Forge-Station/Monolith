@@ -385,7 +385,7 @@
 
 - type: loadout
   id: ContractorClothingShoesBootsPunkRandomized
-  name: punk boots (random)
+  name: loadout-name-ContractorClothingShoesBootsPunkRandomized
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1

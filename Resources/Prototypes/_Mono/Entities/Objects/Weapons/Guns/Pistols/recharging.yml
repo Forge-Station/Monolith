@@ -69,10 +69,10 @@
     - suitStorage
     - Belt
   - type: Gun
-    fireRate: 1.5
-    projectileSpeed: 75
-    burstCooldown: 0.75
-    burstFireRate: 12
+    fireRate: 2.5 # Forge-change 1.5->2.5
+    projectileSpeed: 45 # Forge-change 75->45
+    burstCooldown: 0.5 # Forge-change 0.75->0.5
+    burstFireRate: 9 # Forge-change 12->9
     shotsPerBurst: 2
     selectedMode: SemiAuto
     minAngle: 1
@@ -109,4 +109,4 @@
     damage:
       types:
         Piercing: 50
-    armorPenetration: 0.20
+    armorPenetration: 0.3 # Forge-change 0.20->0.3

@@ -163,8 +163,8 @@
   cost: 35000
   recipeUnlocks:
   - WeaponSubMachineGunNexusShebet
-  - Magazine5x23mmNexus
-  - AmmoBox5x23mmNexus
+  - Magazine635x40mmCaselessNexus
+  - Magazine635x40mmCaselessNexusEmpty
   technologyPrerequisites:
   - NSCVSSEquipment
   position: 0, 2
@@ -178,12 +178,10 @@
   cost: 100000
   recipeUnlocks:
   - WeaponSniperRifleNexusDlan
-  - Magazine154x114mmFMJ
-  - Magazine154x114mmHE
-  - Magazine154x114mmAP
-  - AmmoBox154x114mmFMJ
-  - AmmoBox154x114mmHE
-  - AmmoBox154x114mmAP
+  - Magazine135x110mm
+  - Magazine135x110mmHE
+  - AmmoBox135x110mm
+  - AmmoBox135x110mmHE
   technologyPrerequisites:
   - NSCBallisticSMG
   - UniversalMaterialResearchT3

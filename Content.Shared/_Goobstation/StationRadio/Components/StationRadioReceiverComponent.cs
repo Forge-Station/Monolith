@@ -19,6 +19,12 @@ public sealed partial class StationRadioReceiverComponent : Component
     public bool Active = true;
 
     /// <summary>
+    /// Frequency this receiver is tuned to for music and RadioShow voice.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int Frequency = 1285;
+
+    /// <summary>
     /// Default audio params for the played audio.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]

@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseItem
+  id: AncientBattery
+  name: ancient battery
+  description: A sealed precursor power cell. Modern devices reject it, but remnant APCs still accept this design.
+  suffix: Forge, Remnant
+  components:
+  - type: Sprite
+    sprite: Objects/Power/power_cells.rsi
+    layers:
+    - state: antique
+    - state: o2
+      shader: unshaded
+  - type: Item
+    size: Large
+    storedRotation: -90
+  - type: Tag
+    tags:
+    - AncientBattery
+  - type: StaticPrice
+    price: 1500

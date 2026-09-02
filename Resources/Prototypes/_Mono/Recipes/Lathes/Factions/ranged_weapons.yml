@@ -466,6 +466,8 @@
     Plastic: 1000
     Silver: 2000
     Uranium: 400
+    Plastitanium: 2000 # Forge-change
+    Diamond: 200 # Forge-change
 
 # Ussp guns
 

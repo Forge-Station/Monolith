@@ -117,3 +117,23 @@
   #  reflectProb: 1
   #- type: RustRequiresPathStage
   #  pathStage: 10 # Ascension
+
+# Forge-change start (I'm too lazy to do this in our files)
+- type: entity
+  parent: WallNanolaminate
+  id: WallNanolaminateIndestructible
+  suffix: ADS ONLY, Indestructible
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+
+- type: entity
+  parent: WallNanolaminateDiagonal
+  id: WallNanolaminateDiagonalIndestructible
+  suffix: ADS ONLY, Diagonal, Indestructible
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+# Forge-change end

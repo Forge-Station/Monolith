@@ -1,3 +1,4 @@
+using Content.Shared._Forge.Botany;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._NF.PlantAnalyzer;
@@ -10,6 +11,24 @@ public sealed class PlantAnalyzerScannedSeedPlantInformation : BoundUserInterfac
 {
     public NetEntity? TargetEntity;
     public bool IsTray;
+
+    // Tray / plant status
+    public bool HasPlant = true;
+    public bool Dead;
+    public bool HarvestReady;
+    public float TrayHealth;
+    public float TrayEndurance;
+    public float WaterLevel;
+    public float NutritionLevel;
+    public float Toxins;
+    public float WeedLevel;
+    public float PestLevel;
+    public int Age;
+    public bool ImproperHeat;
+    public bool ImproperPressure;
+    public bool ImproperLight;
+    public bool MissingGas;
+    public HydroponicsLightMode LightMode;
 
     //Basic tab
     public string? SeedName;
@@ -24,6 +43,7 @@ public sealed class PlantAnalyzerScannedSeedPlantInformation : BoundUserInterfac
     public GasFlags ConsumeGases;
     public GasFlags ExudeGases;
     public string[]? SeedChem;
+    public string[]? MutationNames;
     //Tolerances tab
     public float NutrientConsumption;
     public float WaterConsumption;
@@ -41,9 +61,8 @@ public sealed class PlantAnalyzerScannedSeedPlantInformation : BoundUserInterfac
     public MutationFlags Mutations;
 }
 
-// Note: currently leaving out Viable.
 [Flags]
-public enum MutationFlags : byte
+public enum MutationFlags : ushort
 {
     None = 0,
     TurnIntoKudzu = 1,
@@ -51,10 +70,14 @@ public enum MutationFlags : byte
     Ligneous = 4,
     CanScream = 8,
     Unviable = 16,
+    Radioactive = 32,
+    CarnivorousGrab = 64,
+    CarnivorousPestEater = 128,
+    GeneLocked = 256,
 }
 
 [Flags]
-public enum GasFlags : short
+public enum GasFlags : int
 {
     None = 0,
     Nitrogen = 1,
@@ -66,6 +89,10 @@ public enum GasFlags : short
     Ammonia = 64,
     NitrousOxide = 128,
     Frezon = 256,
+    BZ = 512,
+    Healium = 1024,
+    Nitrium = 2048,
+    Pluoxium = 4096,
 }
 
 public enum AnalyzerHarvestType : byte

@@ -7,6 +7,11 @@ handheld-radio-component-chennel-examine = Выбранный канал: { $cha
 # Nuclear-14-Start
 handheld-radio-menu-title = Портативная рация
 handheld-radio-current-text-frequency = Частота передачи
+handheld-radio-popular-label = Популярные частоты
+handheld-radio-custom-label = Своя частота
+handheld-radio-custom-placeholder = {$min}-{$max} kHz
+handheld-radio-preset-custom = Своя
+handheld-radio-preset-option = Канал {$channel} ({$frequency} kHz)
 handheld-radio-button-text-mic = Мик.
 handheld-radio-button-text-speaker = Динам.
 handheld-radio-flavor-text-left = СвязНой, 1000-30000 kHz

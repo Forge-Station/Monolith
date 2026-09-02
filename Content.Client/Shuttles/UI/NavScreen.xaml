@@ -239,6 +239,31 @@
                     </controls:PanelContainer>
                     <!-- End Frontier - IFF search -->
 
+                    <!-- Forge-Change: nav markers -->
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
+                        <controls:PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                        </controls:PanelContainer.PanelOverride>
+                        <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 4 4 4" SeparationOverride="4">
+                            <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                <controls:Label Text="{controls:Loc 'shuttle-console-markers-label'}" HorizontalExpand="True"/>
+                                <controls:Label Name="MarkerCountLabel" Text="0/5" Align="Right"/>
+                            </controls:BoxContainer>
+                            <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="4">
+                                <controls:Label Text="{controls:Loc 'shuttle-console-marker-x'}"/>
+                                <controls:LineEdit Name="MarkerXEdit" HorizontalExpand="True" PlaceHolder="0.0"/>
+                                <controls:Label Text="{controls:Loc 'shuttle-console-marker-y'}"/>
+                                <controls:LineEdit Name="MarkerYEdit" HorizontalExpand="True" PlaceHolder="0.0"/>
+                            </controls:BoxContainer>
+                            <controls:Button Name="MarkerTrackButton"
+                                             Text="{controls:Loc 'shuttle-console-marker-track'}"
+                                             TextAlign="Center"
+                                             StyleClasses="ButtonSquare"/>
+                            <controls:BoxContainer Name="MarkerList" Orientation="Vertical" HorizontalExpand="True" SeparationOverride="2"/>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                    <!-- End Forge-Change: nav markers -->
+
                     <!-- Frontier - Maximum IFF Distance -->
                     <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                         <controls:PanelContainer.PanelOverride>

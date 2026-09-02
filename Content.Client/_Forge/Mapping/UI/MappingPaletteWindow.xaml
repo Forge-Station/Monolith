@@ -1,0 +1,46 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:mapping="clr-namespace:Content.Client.Mapping"
+               Title="{Loc mapping-palette-window-title}"
+               MinSize="440 640"
+               SetSize="500 780">
+    <BoxContainer Orientation="Vertical" Margin="6" SeparationOverride="6">
+        <mapping:MappingPrototypeList Name="Prototypes" Access="Public" VerticalExpand="True" />
+        <BoxContainer Name="DecalContainer" Access="Public" Orientation="Horizontal" Visible="False">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <ColorSelectorSliders Name="DecalColorPicker" IsAlphaVisible="True" />
+                <Button Name="DecalPickerOpen" Text="{Loc decal-placer-window-palette}"
+                        StyleClasses="OpenBoth" />
+            </BoxContainer>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="8 0 0 0">
+                <CheckBox Name="DecalEnableAuto" Margin="0 0 0 8"
+                          Text="{Loc decal-placer-window-enable-auto}" />
+                <CheckBox Name="DecalEnableSnap"
+                          Text="{Loc decal-placer-window-enable-snap}" />
+                <CheckBox Name="DecalEnableCleanable"
+                          Text="{Loc decal-placer-window-enable-cleanable}" />
+                <BoxContainer Name="DecalSpinBoxContainer" Orientation="Horizontal">
+                    <Label Text="{Loc decal-placer-window-rotation}" Margin="0 0 8 0" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc decal-placer-window-zindex}" Margin="0 0 8 0" />
+                    <SpinBox Name="DecalZIndexSpinBox" HorizontalExpand="True" />
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+        <BoxContainer Name="EntityContainer" Access="Public" Orientation="Horizontal" Visible="False"
+                      SeparationOverride="0">
+            <Button Name="EntityReplaceButton" Access="Public" ToggleMode="True" SetHeight="36"
+                    StyleClasses="OpenRight" Text="{Loc mapping-replace}" HorizontalExpand="True" />
+            <OptionButton Name="EntityPlacementMode" Access="Public" SetHeight="36"
+                          StyleClasses="OpenLeft" TooltipDelay="0"
+                          ToolTip="{Loc entity-spawn-window-override-menu-tooltip}"
+                          HorizontalExpand="True" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="0">
+            <Button Name="EraseEntityButton" Access="Public" HorizontalExpand="True" SetHeight="36"
+                    ToggleMode="True" Text="{Loc mapping-erase-entity}" StyleClasses="OpenRight Caution" />
+            <Button Name="EraseDecalButton" Access="Public" HorizontalExpand="True" SetHeight="36"
+                    ToggleMode="True" Text="{Loc mapping-erase-decal}" StyleClasses="OpenLeft Caution" />
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

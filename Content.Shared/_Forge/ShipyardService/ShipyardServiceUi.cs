@@ -74,6 +74,8 @@ public sealed class ShipyardServiceUpgradeMarker
     public int Cost;
     public int Count;
     public bool IsTile;
+    public string Label = string.Empty;
+    public string Detail = string.Empty;
 }
 
 [Serializable, NetSerializable]

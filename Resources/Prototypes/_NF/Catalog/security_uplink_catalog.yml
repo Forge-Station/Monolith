@@ -5,7 +5,7 @@
   name: uplink-security-hardsuit-m82c-name
   description: uplink-security-hardsuit-m82c-desc
   productEntity: ClothingOuterHardsuitTSFMCM82c # Forge Change
-  icon: { sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi, state: icon } # Forge Change
+  icon: { sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi, state: icon } # Forge Change
   cost:
     FederationMilitaryCredit: 10
   categories:
@@ -21,7 +21,7 @@
   name: uplink-security-hardsuit-m82b-name
   description: uplink-security-hardsuit-m82b-desc
   productEntity: ClothingOuterHardsuitTSFMCM82b # Forge Change
-  icon: { sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi, state: icon } # Forge Change
+  icon: { sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi, state: icon } # Forge Change
   cost:
     FederationMilitaryCredit: 10
   categories:

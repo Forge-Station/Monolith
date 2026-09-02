@@ -1,7 +1,7 @@
 # Base hardsuit without armor plate slot.
 - type: entity
   abstract: true
-  parent: [RecyclableItemClothHardsuit, Clothing, GeigerCounterClothing]
+  parent: [RecyclableItemClothHardsuit, ClothingOuterBase, GeigerCounterClothing, AllowSuitStorageClothing]
   id: ClothingOuterHardsuitBaseWithoutArmorPlates
   name: base hardsuit
   components:
@@ -33,6 +33,17 @@
         Heat: 0.90
         Radiation: 0.25
   - type: ToggleableClothing
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container {}
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.ToggleClothingUiKey.Key:
+        type: ToggleableClothingBoundUserInterface
   - type: GroupExamine
   - type: Tag
     tags:

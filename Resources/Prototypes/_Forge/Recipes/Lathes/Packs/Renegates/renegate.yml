@@ -18,6 +18,9 @@
 - type: latheRecipePack
   id: RenegateEquipmentDynamic
   recipes:
+  - ClothingOuterArmorRenegatesRogue
+  - ClothingHeadHelmetRenegateRogue
+  - ClothingShoesBootsMagRenegadeRogue
   - ClothingOuterHardsuitRenegatebsii20
   - ClothingOuterHardsuitRenegateLightweightJuggernaut
   - ClothingOuterHardsuitRenegatecriii200

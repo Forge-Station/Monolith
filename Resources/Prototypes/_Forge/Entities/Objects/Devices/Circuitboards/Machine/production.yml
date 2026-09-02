@@ -1,24 +1,4 @@
 - type: entity
-  id: LaserDrillCircuitboard
-  parent: BaseMachineCircuitboard
-  name: laser drill circuitboard
-  description: A machine printed circuit board for a trauma techfab.
-  components:
-    - type: Sprite
-      state: engineering
-    - type: MachineBoard
-      prototype: ForgeLaserDrill
-      requirements:
-        MatterBin: 3
-        Manipulator: 5
-      stackRequirements:
-        Glass: 30
-        Steel: 15
-        Gold: 10
-        Diamond: 2
-        Iridite: 5
-
-- type: entity
   id: PortableGeneratorClunkerCircuitboard
   parent: BaseMachineCircuitboard
   name: Clunker portable generator machine board

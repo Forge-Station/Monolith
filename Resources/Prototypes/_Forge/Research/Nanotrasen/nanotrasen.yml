@@ -36,19 +36,6 @@
   position: 13, -1
 
 - type: technology
-  id: NanotrasenLaserDrill
-  name: research-technology-nanotrasen-flatpack-drill
-  entityIcon: LaserDrill
-  discipline: Nanotrasen
-  tier: 1
-  cost: 30000
-  recipeUnlocks:
-  - LaserDrillCircuitboard
-  technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  position: 14, -1
-
-- type: technology
   id: NanotrasenArmorT1
   name: research-technology-nanotrasen-equipment-t1
   entityIcon: ClothingHeadHelmetJustice

@@ -1,7 +1,7 @@
 - type: vessel
   id: Karatel
   parent: BaseVessel
-  name: ESF Каратель
+  name: ESF «Каратель»
   description: Малый истребитель Империи,вооружен двумя пушкам "Лонгбоу" и двумя пулеметами 57мм
   price: 63700
   category: Small

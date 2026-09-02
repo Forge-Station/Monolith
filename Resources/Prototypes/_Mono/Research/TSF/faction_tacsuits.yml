@@ -1,13 +1,13 @@
 - type: technology
   id: TsfmcBasicEquipment
   name: research-technology-tsfmc-basic-equipment
-  entityIcon: ClothingOuterHardsuitM82c
+  entityIcon: ClothingOuterHardsuitTSFMCM82c # Forge-change
   discipline: Tsfmc
   tier: 1
-  cost: 20000
+  cost: 50000 # Forge-change 20000 -> 50000
   recipeUnlocks:
-  - ClothingOuterHardsuitM82cTsf
-  - ClothingOuterHardsuitM82bTsf
+  - ClothingOuterHardsuitTSFMCM82c # Forge-change
+  - ClothingOuterHardsuitTSFMCM82b # Forge-change
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 12, 1
@@ -15,12 +15,13 @@
 - type: technology
   id: TsfmcAdvancedEquipment
   name: research-technology-tsfmc-advanced-equipment
-  entityIcon: ClothingOuterHardsuitM86
+  entityIcon: ClothingOuterHardsuitTSFMCM86 # Forge-change
   discipline: Tsfmc
   tier: 2
-  cost: 35000
+  cost: 100000 # Forge-change 35000 -> 100000
   recipeUnlocks:
-  - ClothingOuterHardsuitM86Tsf
+  - ClothingOuterHardsuitTSFMCM86 # Forge-change
+  - ClothingOuterHardsuitTSFMCLightJuggernaut # Forge-change
   - MechIFFTSF
   technologyPrerequisites:
   - TsfmcBasicEquipment
@@ -30,12 +31,16 @@
 - type: technology
   id: TsfmcExperimentalEquipment
   name: research-technology-tsfmc-experimental-equipment
-  entityIcon: ClothingOuterHardsuitNfsdExperimental
+  entityIcon: ClothingOuterHardsuitTSFMCEnergyShield # Forge-change
   discipline: Tsfmc
   tier: 3
-  cost: 85000
+  cost: 200000 # Forge-change 85000 -> 200000
   recipeUnlocks:
-  - ClothingOuterHardsuitM92XTsf
+  - ClothingOuterHardsuitTSFMCEnergyShield # Forge-change
+  - ClothingOuterHardsuitTSFMCStealth # Forge-change
+  - ClothingOuterHardsuitTSFMCReflectElite # Forge-change
+  - ClothingOuterHardsuitTSFMCAdvancedLight # Forge-change
+  - ClothingOuterHardsuitTSFMCHeavyJuggernaut # Forge-change
   technologyPrerequisites:
   - TsfmcAdvancedEquipment
   - UniversalMaterialResearchT3

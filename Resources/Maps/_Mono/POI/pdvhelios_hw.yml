@@ -54309,7 +54309,7 @@ entities:
     - type: Transform
       pos: -16.478891,17.329605
       parent: 1
-- proto: WeaponCaseLongLightMachineGunL6
+- proto: WeaponCaseHeavyLightMachineGunL6 # Forge-change WeaponCaseLong->WeaponCaseHeavy
   entities:
   - uid: 8273
     components:

@@ -11,6 +11,8 @@
     sprite: _NF/Objects/Weapons/Guns/Revolvers/argenti.rsi
   - type: Gun
     fireRate: 2.5
+    projectileSpeed: 45 # Forge-change
+    damageModifier: 1.3 # Forge-change
     resetOnHandSelected: false
   - type: RevolverAmmoProvider
     whitelist:

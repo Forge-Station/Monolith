@@ -3,7 +3,7 @@
 - type: vessel
   id: Terit
   parent: BaseVessel
-  name: CWH Теритт
+  name: CWH «Теритт»
   description: Капитальное судно войны Империи с тяжелой броней
   purchasable: false
   limit: 1

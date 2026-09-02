@@ -1,0 +1,274 @@
+#Species
+- type: damageModifierSet
+  id: ForgeBaseSpeciesDamageSet
+  coefficients:
+    Blunt: 1
+    Slash: 1
+    Piercing: 1
+    Cold: 1
+    Heat: 1
+    Radiation: 1
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeArachnid
+  coefficients:
+    Blunt: 0.8
+    Slash: 1.2
+    Piercing: 0.7
+    Cold: 1
+    Heat: 1.3
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeAriral
+  coefficients:
+    Blunt: 1.2
+    Slash: 0.8
+    Piercing: 0.8
+    Cold: 1.3
+    Heat: 1.3
+    Shock: 1
+    Poison: 0.8
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeDemon
+  coefficients:
+    Blunt: 1
+    Slash: 1
+    Piercing: 0.9
+    Cold: 1
+    Heat: 1.15
+    Shock: 1
+    Poison: 0.85
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeVox
+  coefficients:
+    Blunt: 1
+    Slash: 1
+    Piercing: 1
+    Cold: 1
+    Heat: 1
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeVulpkanin
+  coefficients:
+    Blunt: 1.3
+    Slash: 1.15
+    Piercing: 1.15
+    Cold: 0.9
+    Heat: 1.3
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeHarpy
+  coefficients:
+    Blunt: 1.2
+    Slash: 1.3
+    Piercing: 1.1
+    Cold: 1
+    Heat: 1.4
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+  
+- type: damageModifierSet
+  id: ForgeHydrakin
+  coefficients:
+    Blunt: 1
+    Slash: 1.2
+    Piercing: 0.9
+    Cold: 0.1
+    Heat: 1.25
+    Radiation: 1.3
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeGoblin
+  coefficients:
+    Blunt: 1.35
+    Slash: 1.25
+    Piercing: 1.25
+    Cold: 1
+    Heat: 1
+    Radiation: 1.3
+    Shock: 1
+    Poison: 0.75
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeDwarf
+  coefficients:
+    Blunt: 0.9
+    Slash: 1.1
+    Piercing: 1
+    Cold: 0.9
+    Heat: 1.1
+    Radiation: 1.3
+    Shock: 1
+    Poison: 0.8
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeDiona
+  coefficients:
+    Blunt: 1.15
+    Slash: 1.25
+    Piercing: 1.15
+    Cold: 0.9
+    Heat: 1.3
+    Radiation: 1
+    Shock: 1.2
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeIPC
+  coefficients:
+    Blunt: 1.3
+    Slash: 0.8
+    Piercing: 0.9
+    Cold: 0
+    Heat: 1.3
+    Radiation: 1.3
+    Shock: 2.5
+    Poison: 0
+    Cellular: 0
+
+- type: damageModifierSet
+  id: ForgeMoth
+  coefficients:
+    Blunt: 1.25
+    Slash: 1.15
+    Piercing: 1.15
+    Cold: 0.7
+    Heat: 1.15
+    Radiation: 1
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeOni
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.6
+    Piercing: 0.6
+    Cold: 1.3
+    Heat: 1.3
+    Radiation: 1.4
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeRodentia
+  coefficients:
+    Blunt: 1.35
+    Slash: 1.25
+    Piercing: 1.2
+    Cold: 1
+    Heat: 1
+    Radiation: 1
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeResomi
+  coefficients:
+    Blunt: 1.2
+    Slash: 0.8
+    Piercing: 0.85
+    Cold: 0.75
+    Heat: 1.1
+    Radiation: 1
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeSkrell
+  coefficients:
+    Blunt: 0.8
+    Slash: 1.1
+    Piercing: 0.8
+    Cold: 1
+    Heat: 1.3
+    Radiation: 1
+    Shock: 0.75
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeSlime
+  coefficients:
+    Blunt: 0.6
+    Slash: 1.2
+    Piercing: 1.2
+    Cold: 1.3
+    Heat: 1
+    Radiation: 1
+    Shock: 1
+    Poison: 0.8
+    Cellular: 0.2
+
+- type: damageModifierSet
+  id: ForgeTajaran
+  coefficients:
+    Blunt: 1.25
+    Slash: 1.35
+    Piercing: 1.15
+    Cold: 0.8
+    Heat: 1.2
+    Radiation: 1
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeReptilian
+  coefficients:
+    Blunt: 1
+    Slash: 0.9
+    Piercing: 0.85
+    Cold: 1.3
+    Heat: 0.95
+    Radiation: 1
+    Shock: 1
+    Poison: 1
+    Cellular: 1
+
+- type: damageModifierSet
+  id: ForgeChitinid
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.7
+    Piercing: 0.7
+    Cold: 1.5
+    Heat: 1.5
+    Radiation: 0.2
+    Shock: 1.3
+    Poison: 1.5
+    Cellular: 1.5
+
+
+
+
+
+
+

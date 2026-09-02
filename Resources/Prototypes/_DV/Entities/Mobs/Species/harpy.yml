@@ -5,12 +5,12 @@
   id: MobHarpyBase
   abstract: true
   components:
-  - type: CEZFlyer # Mono: z-level flight
-    flightSpeed: 0.5
-    flightMoveSpeedModifier: 0.5
-    hoverStaminaDrain: 5
-  - type: CEControllableFlight
-    startFlightDoAfter: 1.5
+  # - type: CEZFlyer # Mono: z-level flight #Forge-Change-comment: uncomment when mono add working z-layers
+  #   flightSpeed: 0.5
+  #   flightMoveSpeedModifier: 0.5
+  #   hoverStaminaDrain: 5
+  # - type: CEControllableFlight
+  #   startFlightDoAfter: 1.5
   - type: HarpySinger
   - type: Instrument
     allowPercussion: false
@@ -109,7 +109,7 @@
   - type: Body
     prototype: Harpy
   - type: Damageable
-    damageModifierSet: Harpy
+    damageModifierSet: ForgeHarpy #Forge-Change 
   - type: MeleeWeapon
     soundHit:
       collection: AlienClaw

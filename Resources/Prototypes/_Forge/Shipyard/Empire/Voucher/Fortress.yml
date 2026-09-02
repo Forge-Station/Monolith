@@ -3,7 +3,7 @@
 - type: vessel
   id: Fortress
   parent: BaseVessel
-  name: CWH Крепость
+  name: CWH «Крепость»
   description: Огромный капитальный шаттл Империи.
   purchasable: false
   limit: 2

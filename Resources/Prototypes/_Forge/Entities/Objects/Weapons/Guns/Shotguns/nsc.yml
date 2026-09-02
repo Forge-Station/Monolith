@@ -24,11 +24,11 @@
     size: Large
     sprite: _Forge/Objects/Weapons/Guns/Shotguns/nexus_energie_shotgun_inhand_x64.rsi
     shape:
-    - 0,0,4,1
+    - 0,0,3,1
   - type: GunRequiresWield
   - type: Gun
     examineCaliber: gun-examine-energybolt-medium
-    projectileSpeed: 40
+    projectileSpeed: 35 # 40->35
     fireRate: 2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg

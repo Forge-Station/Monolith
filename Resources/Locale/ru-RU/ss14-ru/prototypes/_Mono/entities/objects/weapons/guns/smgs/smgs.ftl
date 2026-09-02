@@ -1,4 +1,4 @@
-ent-WeaponSubMachineGunMla73 = SKR-WS MLA-73 (635x40мм безгильзовый)
+ent-WeaponSubMachineGunMla73 = SKR-WS MLA-73 (6.35x40мм безгильзовый)
     .desc = Надёжная конструкция ПП, обычно выдаваемая пилотам и экипажам ББМ. Этот модифицирован встроенным глушителем. Легенды об этом оружии гласят, что это корпоративная схема, построенная династией Фаэтон.
 ent-WeaponSubMachineGunAK220 = NCI AK-220 (9x19мм)
     .desc = Массово производимый ПП 9x19мм буллпап. Дизайн происходит из СССП, но различные производители TSF и PDV производят его по лицензиям или подозрительно похожим "оригинальным" дизайнам.
@@ -6,8 +6,8 @@ ent-WeaponSubMachineGunVector9x19mm = LWC Вектор (9x19мм)
     .desc = Отличный полностью автоматический ПП. Использует боеприпасы 9x19mm.
 ent-WeaponSubMachineGunVector45_ACP = LWC Вектор (.45 ACP)
     .desc = Отличный полностью автоматический ПП. Использует боеприпасы .45 ACP.
-ent-WeaponSubMachineGunVectorNtsfHclm = NTSF-HCLM-45 (.45 магнум)
-    .desc = NTSF HCLM — тяжёлый ПП под .45 magnum для службы безопасности Nanotrasen и спецопераций NT, эпоха корпоративных войн.
+ent-WeaponSubMachineGunVectorNtsfHclm = NTSF-HCLM-45 (.357 магнум)
+    .desc = NTSF HCLM — тяжёлый ПП под .357 magnum для службы безопасности Nanotrasen и спецопераций NT, эпоха корпоративных войн.
 ent-WeaponSubMachineGunKnallstock = LWC Knallstock (9x19мм/.45 ACP)
     .desc = Прочный и надёжный ПП, использующий большие быстрые очереди. Принимает пистолетные магазины 9x19 или .45 ACP. Следите за расходом боеприпасов.
 ent-WeaponSubMachineGunTypewriterPMC = PA Клавиатура (.45 ACP)

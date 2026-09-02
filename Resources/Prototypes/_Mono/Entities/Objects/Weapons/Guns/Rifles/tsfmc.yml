@@ -12,15 +12,18 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: GunWieldBonus
-    minAngle: -14
-    maxAngle: -17
+    minAngle: -28 # Forge-change -14->-28
+    maxAngle: -27 # Forge-change -17->-27
   - type: Gun
-    minAngle: 18
-    maxAngle: 35
-    angleIncrease: 4
-    angleDecay: 40
-    fireRate: 11 # 660 rpm
+    minAngle: 30 # Forge-change 18->30
+    maxAngle: 42 # Forge-change 35->42
+    angleIncrease: 1.25 # Forge-change 4->1.25
+    angleDecay: 10 # Forge-change 40->10
+    projectileSpeed: 50 # Forge-change
+    fireRate: 6 # Forge-change 11->6
     shotsPerBurst: 3
+    burstFireRate: 11 # Forge-change
+    burstCooldown: 0.6 # Forge-change
     availableModes:
     - Burst
     - FullAuto
@@ -33,6 +36,9 @@
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/xlr556_inhands_32x.rsi
   - type: Item
+    size: Large # Forge-change Huge->Large
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Rifles/xlr556_inhands_32x.rsi
   - type: ItemSlots
     slots:
@@ -75,7 +81,9 @@
   description: The result of a project to make a new standard rifle for the branches of the TSF military. Accurate, easy to use, and firing the 6.8x52mm STANAG round. Also accepts 5.56x45mm magazines to assist with standardization. The barrel is threaded for suppressors, and an Erebus railmount is on the bottom for grips.
   components:
   - type: Item # Mono
-    size: Huge
+    size: Large # Forge-change Huge->Large
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Rifles/lecter_inhands_32x.rsi
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Rifles/lecter.rsi # Mono
@@ -92,7 +100,15 @@
   - type: ChamberMagazineAmmoProvider # Mono
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: GunWieldBonus # Forge-change
+    minAngle: -31 # Forge-change
+    maxAngle: -33 # Forge-change
   - type: Gun
+    minAngle: 35 # Forge-change
+    maxAngle: 48 # Forge-change
+    angleIncrease: 1.5 # Forge-change
+    angleDecay: 10 # Forge-change
+    projectileSpeed: 50 # Forge-change
     fireRate: 6 # Mono
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/light_rifle_1.ogg # Mono
@@ -107,7 +123,7 @@
         whitelist:
           tags:
           - Magazine68x52mmCaseless # Mono
-          - Magazine556x45mmFMJ # Mono
+          # - Magazine556x45mmFMJ # Forge-change
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -116,7 +132,7 @@
         whitelist:
           tags:
           - Cartridge68x52mmCaseless # Mono
-          - Cartridge556x45mmFMJ # Mono
+          # - Cartridge556x45mmFMJ # Forge-change
       # Mono
       attachment_grip:
         insertSound: /Audio/Items/screwdriver2.ogg
@@ -243,17 +259,27 @@
     - map: ["opticAttachment"] # Mono
   - type: Item # Mono
     sprite: _Mono/Objects/Weapons/Guns/Rifles/annie_inhands_32x.rsi
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/annie_inhands_32x.rsi
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
+    minAngle: 2 # Forge-change
+    maxAngle: 14 # Forge-change
+    angleIncrease: 1.5 # Forge-change
+    angleDecay: 10 # Forge-change
     availableModes:
     - FullAuto
     - Burst
-    burstFireRate: 12
-    burstCooldown: 0.8
+    burstFireRate: 10 # Forge-change 12->10
+    burstCooldown: 0.7 # Forge-change 0.8->0.7
     shotsPerBurst: 4
-    fireRate: 7
-    projectileSpeed: 42.5 # Mono
+    fireRate: 5.5 # Forge-change 7->5.5
+    projectileSpeed: 50 # Forge-change 42.5->50
     soundGunshot:
       path: /Audio/_Goobstation/Weapons/Guns/Gunshots/thock.ogg
   - type: ChamberMagazineAmmoProvider
@@ -395,6 +421,8 @@
   components:
   - type: Item
     size: Large
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Rifles/riversong_inhands_32x.rsi
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Rifles/riversong.rsi
@@ -411,8 +439,16 @@
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: GunWieldBonus
+    minAngle: -33 # Forge-change
+    maxAngle: -32 # Forge-change
   - type: Gun
-    fireRate: 6
+    minAngle: 35 # Forge-change
+    maxAngle: 48 # Forge-change
+    fireRate: 6.5 # Forge-change 6->6.5
+    angleIncrease: 1.25 # Forge-change 1->1.25
+    angleDecay: 8 # Forge-change 10->8
+    projectileSpeed: 50 # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/light_rifle_1.ogg # Mono
   - type: ItemSlots
@@ -553,7 +589,9 @@
   description: A heavy battle rifle used by FORECON in the early stage of Colossus expedition, this rifle packs an outstanding firepower in an otherwise compact frame. Chambered in 7.62x51mm it decimates anything brave enough to stand in our military conquest. The barrel is threaded for suppressors, and an Erebus railmount is on the carryhandle and on the bottom for optics and grips.
   components:
   - type: Item
-    size: Large
+    size: Huge # Forge-change Large->Huge
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Rifles/dragonfang_inhands_32x.rsi
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Rifles/dragonfang.rsi
@@ -571,14 +609,16 @@
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
   - type: GunWieldBonus
-    minAngle: -8
-    maxAngle: -30
+    minAngle: 0 # Forge-change -8->0
+    maxAngle: 0 # Forge-change -30->0
+  - type: GunRequiresWield
   - type: Gun
-    minAngle: 12
-    maxAngle: 33
-    angleIncrease: 4
-    angleDecay: 40
-    fireRate: 4
+    minAngle: 3 # Forge-change 12->3
+    maxAngle: 25 # Forge-change 33->25
+    angleIncrease: 2.5 # Forge-change 4->2.5
+    angleDecay: 10 # Forge-change 40->10
+    fireRate: 5 # Forge-change 4->5
+    projectileSpeed: 50 # Forge-change
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
   - type: ItemSlots

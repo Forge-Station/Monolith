@@ -75,7 +75,7 @@
     proto: Cartridge68x52mmCaseless
   - type: Sprite
     layers:
-    - state: red
+    - state: base # Forge-change red->base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -103,7 +103,7 @@
     proto: null
   - type: Sprite
     layers:
-    - state: practice
+    - state: base # Forge-change practice->base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -147,7 +147,7 @@
     proto: Cartridge68x52mmCaselessRubber
   - type: Sprite
     layers:
-    - state: base
+    - state: rubber # Forge-change base->rubber
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -164,7 +164,7 @@
     proto: Cartridge68x52mmCaselessHP
   - type: Sprite
     layers:
-    - state: red
+    - state: HP # Forge-change red->HP
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -178,7 +178,7 @@
     proto: Cartridge68x52mmCaselessRIP
   - type: Sprite
     layers:
-    - state: red
+    - state: RIP # Forge-change red->RIP
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -194,7 +194,37 @@
     proto: Cartridge68x52mmCaselessPlasteelAP
   - type: Sprite
     layers:
+    - state: steelAP # Forge-change red->steelAP
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+# Forge-change-start
+- type: entity
+  id: Magazine68x52mmCaselessIncendiary
+  name: magazine (6.8x52mm Caseless incendiary)
+  parent: BaseMagazine68x52mmCaseless
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge68x52mmCaselessIncendiary
+  - type: Sprite
+    layers:
     - state: red
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: Magazine68x52mmCaselessUranium
+  name: magazine (6.8x52mm Caseless uranium)
+  parent: BaseMagazine68x52mmCaseless
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge68x52mmCaselessUranium
+  - type: Sprite
+    layers:
+    - state: uranium
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+# Forge-change-end

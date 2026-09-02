@@ -8,3 +8,5 @@ ent-OreMagnetMachineCircuitboard = плата магнита руды
     .desc = Печатная плата для магнита руды.
 ent-ShipDrillMachineCircuitboard = плата бура шаттла
     .desc = Печатная плата для бура шаттла.
+ent-ShipDrillDiamondMachineCircuitboard = плата алмазного бура шаттла
+    .desc = Печатная плата для алмазного бура шаттла.

@@ -23,7 +23,7 @@
     interval: 0.65
     initialDelay: 0.35
   - type: ItemToggleSize
-    activatedSize: Normal
+    activatedSize: Huge
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -43,7 +43,9 @@
       shader: unshaded
       map: [ "power" ]
   - type: Item
-    size: Normal
+    size: Huge
+    shape:
+    - 0,0,3,3
     sprite: _Forge/Objects/Weapons/Melee/chainsaw-shield.rsi
   - type: ChainsawShieldVisuals
     inactiveInhandVisuals:
@@ -85,11 +87,11 @@
   - type: MeleeWeapon
     autoAttack: true
     wideAnimationRotation: -135
-    attackRate: 2
+    attackRate: 1
     damage:
       types:
-        Slash: 20
-        Structural: 25
+        Slash: 35
+        Structural: 30
     soundHit:
       collection: MetalThud
     soundNoDamage:
@@ -124,11 +126,10 @@
         volume: -6
     activatedDamage:
       types:
-        Slash: 32
-        Structural: 55
+        Blunt: 5
   - type: LandAtCursor
   - type: EmbeddableProjectile
-    removalTime: 2.5
+    removalTime: 1.5
   - type: ToggleableEmbedSound
     inactiveSound:
       path: /Audio/Weapons/bladeslice.ogg
@@ -139,17 +140,17 @@
       params:
         volume: -3
   - type: ToggleableEmbedEffect
-    walkSpeedModifier: 0.5
-    sprintSpeedModifier: 0.5
+    walkSpeedModifier: 0.85
+    sprintSpeedModifier: 0.85
   - type: ToggleableThrowDamage
     inactiveDamage:
       types:
-        Blunt: 18
-        Structural: 25
+        Structural: 35
+        Blunt: 25
     activeDamage:
       types:
-        Slash: 42
-        Structural: 80
+        Slash: 48
+        Structural: 50
   - type: ReturnOnThrow
     returnAction: ActionReturnChainsawShield
     returnSound:
@@ -166,13 +167,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 12000
+        damage: 300
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
-        damage: 10000
+        damage: 200
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -195,15 +196,23 @@
     color: green
   - type: ItemTogglePointLight
   - type: Blocking
+    passiveBlockFraction: 0.35
     passiveBlockModifier:
-      coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-      flatReductions:
-        Heat: 3
-        Piercing: 3
+        coefficients:
+          Blunt: 0.75
+          Slash: 0.75
+          Piercing: 0.75
+          Heat: 0.75
+    activeBlockFraction: 0
+    activeBlockModifier:
+        coefficients:
+          Blunt: 0.75
+          Slash: 0.75
+          Piercing: 0.75
+          Heat: 0.75
+  - type: ClothingSpeedModifier # Mono
+    sprintModifier: 0.95
+  - type: HeldSpeedModifier
   - type: StaticPrice
     price: 2500
 
@@ -252,7 +261,9 @@
       shader: unshaded
       map: [ "power" ]
   - type: Item
-    size: Normal
+    size: Huge
+    shape:
+    - 0,0,3,3
     sprite: _Forge/Objects/Weapons/Melee/reinforced-chainsaw-shield.rsi
   - type: ChainsawShieldVisuals
     inactiveInhandVisuals:
@@ -294,11 +305,11 @@
   - type: MeleeWeapon
     autoAttack: true
     wideAnimationRotation: -135
-    attackRate: 2
+    attackRate: 1.25
     damage:
       types:
-        Slash: 24
-        Structural: 35
+        Slash: 42
+        Structural: 40
     soundHit:
       collection: MetalThud
     soundNoDamage:
@@ -333,11 +344,10 @@
         volume: -6
     activatedDamage:
       types:
-        Slash: 40
-        Structural: 75
+        Blunt: 10
   - type: LandAtCursor
   - type: EmbeddableProjectile
-    removalTime: 2.5
+    removalTime: 1.5
   - type: ToggleableEmbedSound
     inactiveSound:
       path: /Audio/Weapons/bladeslice.ogg
@@ -348,17 +358,17 @@
       params:
         volume: -3
   - type: ToggleableEmbedEffect
-    walkSpeedModifier: 0.45
-    sprintSpeedModifier: 0.45
+    walkSpeedModifier: 0.8
+    sprintSpeedModifier: 0.8
   - type: ToggleableThrowDamage
     inactiveDamage:
       types:
-        Blunt: 24
-        Structural: 40
+        Blunt: 20
+        Structural: 30
     activeDamage:
       types:
         Slash: 56
-        Structural: 120
+        Structural: 80
   - type: ReturnOnThrow
     returnAction: ActionReturnReinforcedChainsawShield
     returnSound:
@@ -375,13 +385,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 12000
+        damage: 400
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
-        damage: 10000
+        damage: 300
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -404,15 +414,16 @@
     color: "#2EF8FF"
   - type: ItemTogglePointLight
   - type: Blocking
+    passiveBlockFraction: 0.45
     passiveBlockModifier:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-      flatReductions:
-        Heat: 3
-        Piercing: 3
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.65
+        Heat: 0.65
+  - type: ClothingSpeedModifier # Mono
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
   - type: StaticPrice
     price: 2000
 

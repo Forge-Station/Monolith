@@ -102,3 +102,34 @@
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#888888"
 
+# Forge-change-start
+- type: entity
+  id: Cartridge68x52mmCaselessIncendiary
+  name: cartridge (6.8x52mm Caseless incendiary)
+  parent: BaseCartridge68x52mmCaseless
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet68x52mmCaselessIncendiary
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#ff6e52"
+
+- type: entity
+  id: Cartridge68x52mmCaselessUranium
+  name: cartridge (6.8x52mm Caseless uranium)
+  parent: BaseCartridge68x52mmCaseless
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet68x52mmCaselessUranium
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#65fe08"
+# Forge-change-end

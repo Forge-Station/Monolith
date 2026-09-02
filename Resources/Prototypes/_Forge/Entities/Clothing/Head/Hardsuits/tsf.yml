@@ -1,108 +1,214 @@
+# TSFMC M82c hardsuit
 - type: entity
-  parent: [ NFClothingHeadHardsuitWithLightBaseNfsd, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitTSFLow
-  name: TSF light hardsuit helmet
-  description: A light TSF hardsuit helmet.
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_low.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_low.rsi
-
-- type: entity
-  parent: [ NFClothingHeadHardsuitWithLightBaseNfsd, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitTSFMid
-  name: TSF standard hardsuit helmet
-  description: A standard TSF hardsuit helmet.
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
-
-- type: entity
-  parent: [ NFClothingHeadHardsuitWithLightBaseNfsd, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitTSFHigh
-  name: TSF heavy hardsuit helmet
-  description: A heavily armored TSF hardsuit helmet.
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_high.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_high.rsi
-
-- type: entity
-  parent: [ NFClothingHeadHardsuitWithLightBaseNfsd, ShowMedicalIcons, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitTSFMedic
-  name: TSF corpsman hardsuit helmet
-  description: A TSF hardsuit helmet with medical overlays.
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_medic.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_medic.rsi
-  - type: PointLight
-    color: "#7fe8ff"
-    radius: 5
-
-- type: entity
-  parent: [ NFClothingHeadHardsuitWithLightBaseNfsd, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitTSFKalenval
-  name: TSF TBS-4 Kalenval helmet
-  description: A scout TSF hardsuit helmet.
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2TSFMC]
+  id: ClothingHeadHelmetHardsuitTSFMCM82c
+  name: TSFMC M82c helmet
+  description: A hardsuit helmet issued to the TSF military forces. Outfitted with a basic NVG system.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Forge/Clothing/Head/Hardsuits/tsf_kalenval.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Head/Hardsuits/tsf_kalenval.rsi
-  - type: PointLight
-    color: "#ffdbad"
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
 
+# TSFMC M82b hardsuit
 - type: entity
-  parent: [ NFClothingHeadHardsuitWithLightBaseNfsd, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitTSFVprysk
-  name: TSF TBS-5 Vprysk helmet
-  description: A specialist TSF hardsuit helmet.
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2TSFMC, ShowMedicalIcons]
+  id: ClothingHeadHelmetHardsuitTSFMCM82b
+  name: TSFMC M82b helmet
+  description: Improved version of the M82 helmet. Outfitted with a basic NVG system and medical overlays.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_low.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_low.rsi
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# M86 Mk.3(R) hardsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowSecurityIcons, ClothingNightVision2TSFMC]
+  id: ClothingHeadHelmetHardsuitTSFMCM86
+  name: TSFMC M86 helmet
+  description: Modified from M82 series helmets, outfitted with night-vision equipment and refined gel-layers.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_mid.rsi
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# TSFMC M88 Mk.1(T) lightened Juggernaut hardsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2TSFMC, ShowSecurityIcons]
+  id: ClothingHeadHelmetHardsuitTSFMCLightJuggernaut
+  name: TSFMC M88 Mk.1(T) helmet
+  suffix: TSFMC
+  description: Modified version of the M86 helmet. More protection in the same body.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_high.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_high.rsi
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      flatReductions:
+        Blunt: 10
+        Slash: 10
+        Piercing: 10
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# TSFMC M86 colonel tacsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4TSFMC]
+  id: ClothingHeadHelmetHardsuitTSFMCM86C
+  name: TSFMC M86-C tacsuit helmet
+  description: An armored tacsuit helmet used by command of the TSF military forces. Outfitted with a thermal vision system.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_midas.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_midas.rsi
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.3
+    lowPressureMultiplier: 1000
+  - type: EyeProtection
+    protectionTime: 15
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+
+# TSFMC M92-X tacsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4TSFMC]
+  id: ClothingHeadHelmetHardsuitTSFMCEnergyShield
+  categories: [ HideSpawnMenu ]
+  name: TSFMC M92-X tacsuit helmet
+  description: Heavily armored hardsuit helmet for TSFMC raids.
   components:
   - type: Sprite
     sprite: _Forge/Clothing/Head/Hardsuits/tsf_vprysk.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Head/Hardsuits/tsf_vprysk.rsi
-  - type: PointLight
-    color: "#ffb05c"
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.3
+    lowPressureMultiplier: 1000
+  - type: EyeProtection
+    protectionTime: 15
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
 
+# TSFMC M93-S stealth suit
 - type: entity
-  parent: [ NFClothingHeadHardsuitWithLightBaseNfsd, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitTSFZazhiganie
-  name: TSF TBS-2 Zazhiganie helmet
-  description: A command TSF hardsuit helmet.
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
-
-- type: entity
-  parent: [ NFClothingHeadHardsuitWithLightBaseNfsd, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitTSFMidas
-  name: TSF UVP-1 Midas helmet
-  description: A commander's TSF hardsuit helmet.
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_midas.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/tsf_midas.rsi
-
-- type: entity
-  parent: [ ClothingHeadHealmetContractorStealh, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitTSFStealthMark1
-  name: TSF stealth suit helmet Mk.1
-  description: A stealth TSF hardsuit helmet with active camouflage controls.
+  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4TSFMC, ShowSecurityIcons]
+  id: ClothingHeadHelmetHardsuitTSFMCStealth
+  name: TSFMC M93-S stealth suit helmet
+  description: A high-tech stealth suit developed by TSFMC for special operations. High stealth capabilities, but medium mobility and protection.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Forge/Clothing/Head/Hardsuits/tsf_stealth_mark1.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Head/Hardsuits/tsf_stealth_mark1.rsi
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
   - type: ToggleClothing
     action: ActionTogglePhaseCloak
     disableOnUnequip: true
@@ -111,22 +217,113 @@
     components:
     - type: Stealth
       minVisibility: 0.01
-      lastVisibility: 0.01
+      maxVisibility: 1
+      damageVisibilityModifier: 1
+      attackVisibilityModifier: 1
+    - type: StealthOnMove
+      passiveVisibilityRate: -0.2
+      movementVisibilityRate: 0
   - type: UseDelay
     delay: 2
   - type: PowerCellDraw
     drawRate: 2
   - type: ToggleCellDraw
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
 
+# TSFMC M95-R reflect suit
 - type: entity
-  parent: [ NFClothingHeadHardsuitWithLightBaseNfsd, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitTSFPorshen
-  name: TSF TBS-12 Porshen helmet
-  description: A heavy TSF breaching hardsuit helmet.
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4TSFMC, ShowSecurityIcons]
+  id: ClothingHeadHelmetHardsuitTSFMCReflectElite
+  name: TSFMC M95-R suit helmet
+  description: A high-tech reflect suit developed by TSFMC for special operations. Have many of different vision systems and protection from energy weapons.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_zazhiganie.rsi
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+      flatReductions:
+        Heat: 10
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide 
+
+# TSFMC M90-M advanced light suit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4TSFMC, ShowMedicalIcons, ShowSecurityIcons]
+  id: ClothingHeadHelmetHardsuitTSFMCAdvancedLight
+  name: TSFMC M90-M advanced light suit helmet
+  description: A high-tech advanced light suit developed by TSFMC for special operations.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_medic.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/tsf_medic.rsi
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# TSFMC M98-H heavy Juggernaut hardsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowSecurityIcons, ClothingNightVision4TSFMC]
+  id: ClothingHeadHelmetHardsuitTSFMCHeavyJuggernaut
+  name: TSFMC M98-H heavy Juggernaut hardsuit helmet
+  description: A high-tech heavy Juggernaut hardsuit developed by TSFMC for special operations.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Forge/Clothing/Head/Hardsuits/tsf_porshen.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Head/Hardsuits/tsf_porshen.rsi
-  - type: PointLight
-    color: "#ffb347"
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      flatReductions:
+        Blunt: 15
+        Slash: 15
+        Piercing: 15
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide

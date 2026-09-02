@@ -10,10 +10,12 @@
   id: Magazine762x54mmRPlasteelAP
   result: Magazine762x54mmRPlasteelAP
 
-- type: latheRecipe
-  parent: BaseAmmoRubberFullyPoweredMagazineRecipe
-  id: Magazine762x54mmRRubber
-  result: Magazine762x54mmRRubber
+# Forge-change-start
+#- type: latheRecipe
+#  parent: BaseAmmoRubberFullyPoweredMagazineRecipe
+#  id: Magazine762x54mmRRubber
+#  result: Magazine762x54mmRRubber
+# Forge-change-end
 
 - type: latheRecipe
   parent: BaseAmmoIncendiaryFullyPoweredMagazineRecipe
@@ -64,10 +66,12 @@
   id: AmmoBox762x54mmRPlasteelAP
   result: AmmoBox762x54mmRPlasteelAP
 
-- type: latheRecipe
-  parent: BaseAmmoRubberFullyPoweredAmmoBoxRecipe
-  id: AmmoBox762x54mmRRubber
-  result: AmmoBox762x54mmRRubber
+# Forge-change-start
+#- type: latheRecipe
+#  parent: BaseAmmoRubberFullyPoweredAmmoBoxRecipe
+#  id: AmmoBox762x54mmRRubber
+#  result: AmmoBox762x54mmRRubber
+# Forge-change-end
 
 - type: latheRecipe
   parent: BaseAmmoIncendiaryFullyPoweredAmmoBoxRecipe

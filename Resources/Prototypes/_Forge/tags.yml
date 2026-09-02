@@ -244,23 +244,17 @@
 
 # NSC ammunition
 - type: Tag
-  id: Cartridge154x114mm
+  id: Cartridge135x110mm
 
 - type: Tag
-  id: Magazine154x114mm
+  id: Magazine135x110mm
 
 - type: Tag
-  id: Cartridge5x23mm
-
-- type: Tag
-  id: Magazine5x23mm
+  id: Magazine635x40mmCaselessNexus
 
 # Ullman Industries
 - type: Tag
-  id: ForgeMagazineUllman127x85mm
-
-- type: Tag
-  id: ForgeCartridgeUllman127x85mm
+  id: ForgeMagazineUllman135x110mm
 
 - type: Tag
   id: SeismicCharge

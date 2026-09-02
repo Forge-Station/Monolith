@@ -10,6 +10,7 @@
   - StationRadioServerCircuitboard
   - StationRadioRigCircuitboard
   - StationRadioCircuitboard
+  - StationRadioReceiverHandheldRecipe
   position: -2, 14
   technologyPrerequisites:
   - AudioVisualCommunication

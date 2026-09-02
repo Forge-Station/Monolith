@@ -2439,7 +2439,7 @@ entities:
       powerLoad: 50
     - type: Battery
       startingCharge: 0
-- proto: GyroscopeSecurity
+- proto: GyroscopeADS # Forge-Change
   entities:
   - uid: 358
     components:
@@ -2865,7 +2865,7 @@ entities:
       canCollide: False
     - type: Fixtures
       fixtures: {}
-- proto: ThrusterSecurity
+- proto: ThrusterADS # Forge-Change
   entities:
   - uid: 412
     components:

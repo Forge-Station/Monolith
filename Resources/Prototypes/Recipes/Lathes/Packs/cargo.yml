@@ -29,6 +29,7 @@
   recipes:
   - OreProcessorIndustrialMachineCircuitboard
   - ShipDrillMachineCircuitboard # Mono
+  - ShipDrillDiamondMachineCircuitboard # Froge-change-add
   - OreMagnetMachineCircuitboard # Mono
   - MaterialSiloMachineCircuitboard
   # - CargoTelepadMachineCircuitboard # Frontier

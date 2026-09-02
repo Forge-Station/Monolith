@@ -1,7 +1,7 @@
 - type: vessel
   id: Izotop
   parent: BaseVessel
-  name: Изотоп-1
+  name: «Изотоп-1»
   description: Большой исследовательский шаттл с ядерным реактором, без автоматики. Только 1 шаттл на сектор.
   price: 240000
   limit: 1

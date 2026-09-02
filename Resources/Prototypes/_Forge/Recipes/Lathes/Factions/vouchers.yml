@@ -1,0 +1,121 @@
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: AzimutVoucherRenegat
+  result: ShipVoucherAzimut
+  completetime: 10
+  materials:
+    Steel: 42000
+    Plasteel: 55000
+    Plastic: 50000
+    Glass: 9000
+    Plasma: 500
+    UraniumFissile: 1000
+    UraniumDepleted: 5000
+    Silver: 5000
+    Gold: 5000
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: AzimutlateVoucherRenegat
+  result: ShipVoucherAzimutlate
+  completetime: 10
+  materials:
+    Steel: 30000
+    Plasteel: 35000
+    Plastic: 20000
+    Glass: 4000
+    Plasma: 200
+    UraniumFissile: 450
+    UraniumDepleted: 1500
+    Silver: 1500
+    Gold: 2700
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: GalandeVoucherRenegat
+  result: ShipVoucherGalandec
+  completetime: 10
+  materials:
+    Steel: 55000
+    Plasteel: 55000
+    Plastic: 40000
+    Glass: 7000
+    Plasma: 650
+    UraniumFissile: 750
+    UraniumDepleted: 1500
+    Silver: 4500
+    Gold: 5000
+
+# Empire
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: RecipeShipVoucherGermes
+  result: ShipVoucherGermes
+  completetime: 10
+  materials:
+    Steel: 15000
+    Plasteel: 10000
+    Plastic: 12000
+    Glass: 9000
+    Plasma: 600
+    UraniumFissile: 500
+    UraniumDepleted: 1500
+    Silver: 3000
+    Gold: 3200
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: RecipeShipVoucherFortress
+  result: ShipVoucherFortress
+  completetime: 10
+  materials:
+    Steel: 80000
+    Plasteel: 77000
+    Plastic: 52000
+    Glass: 55000
+    Plasma: 3100
+    UraniumFissile: 1100
+    UraniumDepleted: 5000
+    Silver: 33000
+    Gold: 22500
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: RecipeShipVoucherMirko
+  result: ShipVoucherMirko
+  completetime: 10
+  materials:
+    Steel: 65000
+    Plasteel: 60000
+    Plastic: 22000
+    Glass: 11000
+    Plasma: 1500
+    UraniumFissile: 900
+    UraniumDepleted: 2800
+    Silver: 5000
+    Gold: 4500
+
+- type: latheRecipe
+  parent: BaseVoucherRecipe
+  id: RecipeShipVoucherTerit
+  result: ShipVoucherTerit
+  completetime: 10
+  materials:
+    Steel: 70000
+    Plasteel: 72000
+    Plastic: 42000
+    Glass: 23000
+    Plasma: 1900
+    UraniumFissile: 1200
+    UraniumDepleted: 3800
+    Silver: 25000
+    Gold: 21500
+
+- type: latheRecipePack
+  id: EmpireVoucherRecipePack
+  recipes:
+  - RecipeShipVoucherTerit
+  - RecipeShipVoucherMirko
+  - RecipeShipVoucherFortress
+  - RecipeShipVoucherGermes

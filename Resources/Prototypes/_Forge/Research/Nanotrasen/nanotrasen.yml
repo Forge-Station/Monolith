@@ -3,7 +3,7 @@
   name: research-discipline-nanotrasen-tti
   color: "#143c7c"
   icon:
-    sprite: Forge/Interface/Misc/research_disciplines_nt.rsi
+    sprite: _Forge/Interface/Misc/research_disciplines_nt.rsi
     state: nt
   tierPrerequisites:
     1: 0
@@ -11,7 +11,7 @@
     3: 0.5
     4: 0.5
   uiName: NT-EQ
-  
+
 - type: technology
   id: NanotrasenCircuitBoard
   name: research-technology-nanotrasen-circuitboard
@@ -33,24 +33,11 @@
   - StationAiUploadCircuitboard
   technologyPrerequisites:
   - UniversalMaterialResearchT1
-  position: 13, -1  
-  
-- type: technology
-  id: NanotrasenLaserDrill
-  name: research-technology-nanotrasen-flatpack-drill
-  entityIcon: LaserDrill
-  discipline: Nanotrasen
-  tier: 1
-  cost: 30000
-  recipeUnlocks:
-  - LaserDrillCircuitboard
-  technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  position: 14, -1  
+  position: 13, -1
 
 - type: technology
   id: NanotrasenArmorT1
-  name: research-technology-nanotrasen-equipment-t1 
+  name: research-technology-nanotrasen-equipment-t1
   entityIcon: ClothingHeadHelmetJustice
   discipline: Nanotrasen
   tier: 1
@@ -88,7 +75,7 @@
   technologyPrerequisites:
   - NanotrasenArmorT1
   position: 14, 3
-  
+
 - type: technology
   id: NanotrasenArmorT3
   name: research-technology-nanotrasen-equipment-t3
@@ -98,7 +85,6 @@
   cost: 60000
   recipeUnlocks:
   - ClothingOuterHardsuitERTSecurity
-  - ClothingOuterHardsuitCBURN
   - ClothingUniformJumpsuitERTSecurity
   - ClothingUniformJumpsuitERTMedic
   - ClothingUniformJumpsuitERTMailCarrier
@@ -115,7 +101,7 @@
   - NanotrasenArmorT2
   - UniversalMaterialResearchT2
   position: 14, 5
-  
+
 - type: technology
   id: NanotrasenArmorT4
   name: research-technology-nanotrasen-equipment-t4
@@ -127,7 +113,7 @@
   - ClothingBackpackERTSecurity
   - ClothingBackpackERTMedical
   - ClothingBackpackERTChaplain
-  - ClothingBackpackERTMailCarrier 
+  - ClothingBackpackERTMailCarrier
   - ClothingBackpackERTEngineer
   - ClothingBackpackERTJanitor
   technologyPrerequisites:
@@ -149,7 +135,7 @@
   technologyPrerequisites:
   - NanotrasenArmorT3
   position: 14, 8
-  
+
 - type: technology
   id: NanotrasenArmorT6
   name: research-technology-nanotrasen-equipment-t6
@@ -159,14 +145,15 @@
   cost: 90000
   recipeUnlocks:
   - ClothingOuterHardsuitERTChaplain
+  - ClothingOuterHardsuitCBURN
   technologyPrerequisites:
   - NanotrasenArmorT5
   - UniversalMaterialResearchT3
   position: 13, 10
-  
+
 - type: technology
   id: NanotrasenWeaponT1
-  name: research-technology-nanotrasen-weapon-equipment-t1 
+  name: research-technology-nanotrasen-weapon-equipment-t1
   entityIcon: WeaponRevolverInspector
   discipline: Nanotrasen
   tier: 1
@@ -191,10 +178,10 @@
   technologyPrerequisites:
   - NanotrasenWeaponT1
   position: 19, 10
-  
+
 - type: technology
   id: NanotrasenWeaponT3
-  name: research-technology-nanotrasen-weapon-equipment-t3 
+  name: research-technology-nanotrasen-weapon-equipment-t3
   entityIcon: WeaponPulsePistol
   discipline: Nanotrasen
   tier: 2
@@ -221,7 +208,7 @@
   technologyPrerequisites:
   - NanotrasenWeaponT3
   position: 21, 9
-  
+
 - type: technology
   id: NanotrasenWeaponT5
   name: research-technology-nanotrasen-weapon-equipment-t5
@@ -256,10 +243,10 @@
   technologyPrerequisites:
   - NanotrasenWeaponT3
   position: 21, 11
-  
+
 - type: technology
   id: NanotrasenWeaponT7
-  name: research-technology-nanotrasen-weapon-equipment-t7 
+  name: research-technology-nanotrasen-weapon-equipment-t7
   entityIcon: WeaponHeavyPulseCannon
   discipline: Nanotrasen
   tier: 4
@@ -315,10 +302,10 @@
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 18, -1
-  
+
 - type: technology
   id: TTItechOmnisine
-  name: research-technology-tti-supplies-t2 
+  name: research-technology-tti-supplies-t2
   entityIcon: OmnizineChemistryBottle
   discipline: Nanotrasen
   tier: 1
@@ -329,7 +316,7 @@
   technologyPrerequisites:
   - TTItechMed
   position: 18, -2
-  
+
 - type: technology
   id: TTItechClothingT1
   name: research-technology-tti-equipment-t3
@@ -347,7 +334,7 @@
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 21, 0
-  
+
 - type: technology
   id: TTItechClothingT3
   name: research-technology-tti-equipment-t4
@@ -385,7 +372,7 @@
   - TTItechClothingT3
   - UniversalMaterialResearchT3
   position: 24, 0
-  
+
 - type: technology
   id: TTItechMachineT1
   name: research-technology-tti-circuitboard-t1
@@ -398,7 +385,7 @@
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 19, -1
-  
+
 - type: technology
   id: TTItechMachineT2
   name: research-technology-tti-circuitboard-t2
@@ -408,8 +395,8 @@
   cost: 40000
   recipeUnlocks:
   - CloningConsoleComputerCircuitboard
-  - MedicalBiofabMachineBoard 
-  - CloningPodMachineCircuitboard  
+  - MedicalBiofabMachineBoard
+  - CloningPodMachineCircuitboard
   - MedicalScannerMachineCircuitboard
   technologyPrerequisites:
   - TTItechMachineT1

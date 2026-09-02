@@ -1,7 +1,7 @@
 - type: vessel
   id: tsetse
   parent: BaseVessel
-  name: Це-Це
+  name: «Це-Це»
   description: Легкий истребитель восставших колоний. Ты правда собрался на этом воевать?
   price: 35000
   category: Small

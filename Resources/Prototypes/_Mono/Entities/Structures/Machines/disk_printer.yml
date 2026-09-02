@@ -175,11 +175,11 @@
     - TechDiskHristov
     - TechDiskMla73
     - TechDiskUniversalShipAmmoAdvanced
-    - TechDiskForgeFSGCivilianT3
     chance: 0.95
     offset: 0.0
     rarePrototypes:
-    - SpawnLootTechDisksPrinterT4
+    - SpawnLootTechDisksPrinterT4 
+    - TechDiskForgeFSGCivilianT3 #Forge-change
     rareChance: 0.15
 
 - type: entity
@@ -199,9 +199,9 @@
     prototypes:
     - TechDiskBluespaceBags
     - TechDiskTranslationPreFracture
-    - TechDiskForgeFSG900P
     chance: 0.95
     offset: 0.0
     rarePrototypes:
     - TechDiskSpeedBoots
+    - TechDiskForgeFSG900P #Forge-change
     rareChance: 0.1

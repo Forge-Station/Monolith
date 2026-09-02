@@ -54,6 +54,7 @@
   id: EngineeringBoardsStatic
   recipes:
   - SpaceHeaterMachineCircuitBoard
+  - MaterialReclaimerMachineCircuitboardRecipe # Forge-Change
 
 ## Dynamic
 

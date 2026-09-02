@@ -275,9 +275,10 @@
     - SmartGun # Goobstation
     # Einstein Engines Packs
     - Translators
-    # Forge-change
+    # Forge-change-start
     - BSparts
     - ForgePublicWeapons
+    #Forge-Change-end
 
   - type: EmagLatheRecipes
     emagDynamicPacks:
@@ -917,7 +918,7 @@
   components:
   # Forge-change-start
   - type: Sprite
-    sprite: Forge/Structures/Machines/organprinter.rsi
+    sprite: _Forge/Structures/Machines/organprinter.rsi
     snapCardinals: true
     layers:
     - state: base

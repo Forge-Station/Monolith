@@ -10,7 +10,7 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Sprite;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.UserInterface.Controls;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Mono.Company;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
@@ -427,7 +427,7 @@ namespace Content.Client.Lobby.UI
 
             #region Barks
             // Corvax-Frontier-Barks-Start
-            if (_cfgManager.GetCVar(ForgeVars.BarksEnabled))
+            if (_cfgManager.GetCVar(ForgeCCVars.BarksEnabled))
             {
                 BarksContainer.Visible = true;
                 InitializeBarkVoice();
@@ -991,7 +991,11 @@ namespace Content.Client.Lobby.UI
             SpeciesButton.Clear();
             _species.Clear();
 
-            _species.AddRange(_prototypeManager.EnumeratePrototypes<SpeciesPrototype>().Where(o => o.RoundStart));
+            _species.AddRange(
+                _prototypeManager.EnumeratePrototypes<SpeciesPrototype>()
+                .Where(o => o.RoundStart)
+                .OrderBy(o => Loc.GetString(o.Name))
+            );
             var speciesIds = _species.Select(o => o.ID).ToList();
 
             for (var i = 0; i < _species.Count; i++)

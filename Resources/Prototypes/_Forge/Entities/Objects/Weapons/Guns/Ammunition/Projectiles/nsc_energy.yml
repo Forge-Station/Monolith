@@ -5,15 +5,15 @@
   name: nexus plasma bolt
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Projectiles/nexus_energie_projectile.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Projectiles/nexus_energie_projectile.rsi
     layers:
     - state: heavy
       shader: unshaded
   - type: Projectile
     damage:
       types:
-        Heat: 13.5
-    armorPenetration: 0.1
+        Heat: 20
+    armorPenetration: 0.25
   - type: Tracer
     color: "#4fc3ff"
     length: 2
@@ -27,7 +27,8 @@
   - type: Projectile
     damage:
       types:
-        Heat: 20
+        Heat: 21
+    armorPenetration: 0.25
 
 - type: entity
   name: nexus projector plasma bolt
@@ -39,6 +40,7 @@
     damage:
       types:
         Heat: 22
+    armorPenetration: 0.25
 
 - type: entity
   name: paired nexus plasma bolts
@@ -60,7 +62,8 @@
   - type: Projectile
     damage:
       types:
-        Heat: 22
+        Heat: 26
+    armorPenetration: 0.3
 
 - type: entity
   name: kiy auto nexus plasma bolt
@@ -71,7 +74,8 @@
   - type: Projectile
     damage:
       types:
-        Heat: 12
+        Heat: 16
+    armorPenetration: 0.3
 
 - type: entity
   name: kiy paired nexus plasma bolts
@@ -113,7 +117,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Projectiles/nexus_energie_projectile.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Projectiles/nexus_energie_projectile.rsi
     layers:
     - state: plasma
       shader: unshaded

@@ -1,0 +1,363 @@
+# Copy of ClothingHeadHardsuitBase with removed base nightvision for correct inheritance.
+- type: entity
+  abstract: true
+  id: ClothingHeadHardsuitBaseMilitary
+  name: base hardsuit helmet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: BreathMask
+  - type: Sprite
+    state: icon
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Clothing
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
+    quickEquip: false
+    slots: [ HEAD ]
+  - type: PressureProtection
+    highPressureMultiplier: 0.3
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: GroupExamine
+  - type: IngestionBlocker
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# Classes of nightvision for different hardsuits, the number means the number of lenses, the suffix is the color of the visor.
+- type: entity
+  id: ClothingNightVision1Normal
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 500
+    viewCircleCount: 1
+    viewCircleSpacing: 0
+    phosphorColor: "#a6ffa6"
+    lightingColor: "#FFFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision1Viper
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 500
+    viewCircleCount: 1
+    viewCircleSpacing: 0
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision1Ullman
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 500
+    viewCircleCount: 1
+    viewCircleSpacing: 0
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.2
+  
+- type: entity
+  id: ClothingNightVision1Nexus
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 500
+    viewCircleCount: 1
+    viewCircleSpacing: 0
+    phosphorColor: "#41D7D9"
+    lightingColor: "#FFFFFF32"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision2TSFMC
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 525
+    viewCircleCount: 2
+    viewCircleSpacing: 400
+    phosphorColor: "#4ee293"
+    lightingColor: "#FFFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision2Empire
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 525
+    viewCircleCount: 2
+    viewCircleSpacing: 400
+    phosphorColor: "#aa9c00"
+    lightingColor: "#FFFFFF32"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision2Renegade
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 525
+    viewCircleCount: 2
+    viewCircleSpacing: 400
+    phosphorColor: "#aa9c00"
+    lightingColor: "#FFFFFF32"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision2TTI
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 525
+    viewCircleCount: 2
+    viewCircleSpacing: 400
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision2Nexus
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 525
+    viewCircleCount: 2
+    viewCircleSpacing: 400
+    phosphorColor: "#41D7D9"
+    lightingColor: "#FFFFFF32"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision2Viper
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 525
+    viewCircleCount: 2
+    viewCircleSpacing: 400
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision2Ullman
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 525
+    viewCircleCount: 2
+    viewCircleSpacing: 400
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision2Normal
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 525
+    viewCircleCount: 2
+    viewCircleSpacing: 400
+    phosphorColor: "#a6ffa6"
+    lightingColor: "#FFFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision4TSFMC
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 475
+    viewCircleCount: 4
+    viewCircleSpacing: 250
+    phosphorColor: "#4ee293"
+    lightingColor: "#FFFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision4Empire
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 475
+    viewCircleCount: 4
+    viewCircleSpacing: 250
+    phosphorColor: "#aa9c00"
+    lightingColor: "#FFFFFF32"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision4Renegade
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 475
+    viewCircleCount: 4
+    viewCircleSpacing: 250
+    phosphorColor: "#aa9c00"
+    lightingColor: "#FFFFFF32"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision4TTI
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 475
+    viewCircleCount: 4
+    viewCircleSpacing: 250
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision4Nexus
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 475
+    viewCircleCount: 4
+    viewCircleSpacing: 250
+    phosphorColor: "#41D7D9"
+    lightingColor: "#FFFFFF32"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision4Viper
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 475
+    viewCircleCount: 4
+    viewCircleSpacing: 250
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision4Ullman
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 475
+    viewCircleCount: 4
+    viewCircleSpacing: 250
+    phosphorColor: "#c2ffc2"
+    lightingColor: "#0EFFFFFF"
+    amplification: 1.2
+
+- type: entity
+  id: ClothingNightVision4Normal
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 475
+    viewCircleCount: 4
+    viewCircleSpacing: 250
+    phosphorColor: "#a6ffa6"
+    lightingColor: "#FFFFFFFF"
+    amplification: 1.2

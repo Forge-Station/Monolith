@@ -87,3 +87,18 @@
       tags:
       - DroneUsable
       - HighRiskItem
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: PassportRegistryComputerCircuitboard
+  name: passport registry console board
+  description: A computer printed circuit board for a passport registry console.
+  components:
+    - type: Sprite
+      state: cpu_command
+    - type: ComputerBoard
+      prototype: ComputerPassportRegistry
+    - type: Tag
+      tags:
+      - DroneUsable
+      - HighRiskItem

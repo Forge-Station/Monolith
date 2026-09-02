@@ -2,77 +2,77 @@
 
 - type: latheRecipe
   id: UllmanHardsuitPilot
-  parent: NFBaseEVASuitRecipe
-  completetime: 30
+  parent: ForgeUniversalLightSuitT1CompanyRecipe # Forge-change
+  # completetime: 30 # Forge-change
   categories:
   - CombatEva
   - EVASuits
   - ArmorNF
   result: ClothingOuterHardsuitUIPilot
-  materials:
-    Steel: 3000
-    Durathread: 2000
-    Plastic: 1000
-    Plasteel: 500
-    Silver: 250
-    Gold: 250
+  #materials: # Forge-change
+  #  Steel: 3000 # Forge-change
+  #  Durathread: 2000 # Forge-change
+  #  Plastic: 1000 # Forge-change
+  #  Plasteel: 500 # Forge-change
+  #  Silver: 250 # Forge-change
+  #  Gold: 250 # Forge-change
 
 - type: latheRecipe
   id: UllmanHardsuitEngineer
-  parent: NFBaseEVASuitRecipe
-  completetime: 30
+  parent: ForgeUniversalSuitT1CompanyRecipe # Forge-change
+  # completetime: 30 # Forge-change
   categories:
   - CombatEva
   - EVASuits
   - ArmorNF
   result: ClothingOuterHardsuitUllmanEngineer
-  materials:
-    Steel: 3500
-    Durathread: 1500
-    Plastic: 2000
-    Plasteel: 1500
-    Silver: 500
-    Gold: 500
-    Uranium: 500
+  # materials: # Forge-change
+  #  Steel: 3500 # Forge-change
+  #  Durathread: 1500 # Forge-change
+  #  Plastic: 2000 # Forge-change
+  #  Plasteel: 1500 # Forge-change
+  #  Silver: 500 # Forge-change
+  #  Gold: 500 # Forge-change
+  #  Uranium: 500 # Forge-change
 
 - type: latheRecipe
   id: UllmanHardsuitEnforcer
-  parent: NFBaseEVASuitRecipe
-  completetime: 30
+  parent: ForgeUniversalSuitT2CompanyRecipe # Forge-change
+  # completetime: 30 # Forge-change
   categories:
   - CombatEva
   - EVASuits
   - ArmorNF
   result: ClothingOuterHardsuitUIEnforcer
-  materials:
-    Steel: 5000
-    Durathread: 3000
-    Plastic: 2000
-    Plasteel: 2000
-    Silver: 500
-    Gold: 500
-    UraniumDepleted: 500
+  # materials: # Forge-change
+  #  Steel: 5000 # Forge-change
+  #  Durathread: 3000 # Forge-change
+  #  Plastic: 2000 # Forge-change
+  #  Plasteel: 2000 # Forge-change
+  #  Silver: 500 # Forge-change
+  #  Gold: 500 # Forge-change
+  #  UraniumDepleted: 500 # Forge-change
 
 - type: latheRecipe
   id: UllmanHardsuitEnforcerMKII
-  parent: NFBaseEVASuitRecipe
-  completetime: 30
+  parent: ForgeEnergyShieldSuitT3CompanyRecipe
+  # completetime: 30 # Forge-change
   categories:
   - CombatEva
   - EVASuits
   - ArmorNF
   result: ClothingOuterHardsuitUIEnforcerMKII
-  materials:
-    Steel: 5000
-    Durathread: 3000
-    Plastic: 2500
-    Plasteel: 1500
-    Silver: 1000
-    Gold: 1000
-    Glass: 1000
-    UraniumDepleted: 500
-    UraniumFissile: 100
-    Diamond: 200
+  # materials: # Forge-change
+  #  Steel: 5000 # Forge-change
+  #  Durathread: 3000 # Forge-change
+  #  Plastic: 2500 # Forge-change
+  #  Plasteel: 1500 # Forge-change
+  #  Silver: 1000 # Forge-change
+  #  Gold: 1000 # Forge-change
+  #  Glass: 1000 # Forge-change
+  #  UraniumDepleted: 500 # Forge-change
+  #  UraniumFissile: 100 # Forge-change
+  #  Diamond: 200 # Forge-change
 
 - type: latheRecipe
   id: UllmanWeaponPulsePistol

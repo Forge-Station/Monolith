@@ -17,6 +17,13 @@
   id: TorsoTajaran
   name: tajaran torso
   parent: [PartTajaran, BaseTorso]
+  #Forge-Change-Start
+  components:
+  - type: MovementBodyPartModifier
+    walkModifier: 1.3
+    sprintModifier: 1.3
+    group: torso
+  #Forge-Change-end
 
 - type: entity
   id: HeadTajaran

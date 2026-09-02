@@ -13,8 +13,11 @@
   - UllmanHeadHatCapUI
   - UllmanHeadHatBeretUI
   - UllmanHardsuitMedical
+  - UllmanLightJuggernaut
   - UllmanModsuit
   - UllmanSniperRifle
-  - UllmanMagazine127x85mm
-  - UllmanMagazine127x85mmEmpty
-  - UllmanAmmunitionBox127x85mm
+  - UllmanMagazine135x110mm
+  - UllmanMagazine135x110mmEmpty
+  - UllmanMagazine135x110mmHE
+  - AmmoBox135x110mmHE
+  - AmmoBox135x110mm

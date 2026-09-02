@@ -918,7 +918,7 @@
   components:
   # Forge-change-start
   - type: Sprite
-    sprite: Forge/Structures/Machines/organprinter.rsi
+    sprite: _Forge/Structures/Machines/organprinter.rsi
     snapCardinals: true
     layers:
     - state: base

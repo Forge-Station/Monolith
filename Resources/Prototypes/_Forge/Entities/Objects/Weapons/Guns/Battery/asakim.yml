@@ -68,7 +68,7 @@
   suffix: Forge
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Battery/asakimpistol.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimpistol.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -113,7 +113,7 @@
   suffix: Forge
   components:
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/Battery/asakimpistol.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimpistol.rsi
     whitelist:
       tags:
         - AsakimBrain

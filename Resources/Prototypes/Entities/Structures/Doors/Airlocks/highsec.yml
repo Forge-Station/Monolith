@@ -13,7 +13,7 @@
   - type: StationAiWhitelist
   - type: InteractionOutline
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/highsec/highsec.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/highsec/highsec.rsi # Forge-Change
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]

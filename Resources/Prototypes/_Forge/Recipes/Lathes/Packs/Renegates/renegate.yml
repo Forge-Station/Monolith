@@ -9,18 +9,26 @@
   - WeaponRifleGaussRifleRogue
   - HFKatanaRogue
   - WeaponLmgType99Rogue
+  - WeaponSniperHristovRogue
+  - WeaponRifleBurner
+  - WeaponPistolTiran
+  - WeaponSubMachineGunAS103
+  - WeaponRifleVympelRogue
 
 - type: latheRecipePack
   id: RenegateEquipmentDynamic
   recipes:
-  - ClothingOuterHardsuitRenegatebsii20Rogue
-  - ClothingOuterHardsuitRenegatebsii30Rogue
   - ClothingOuterArmorRenegatesRogue
   - ClothingHeadHelmetRenegateRogue
   - ClothingShoesBootsMagRenegadeRogue
-  - ClothingOuterHardsuitRenegatecriii200Rogue
-  - ClothingOuterHardsuitRenegateoiii18Rogue
-  - ClothingOuterHardsuitRenegateyiv3020Rogue
+  - ClothingOuterHardsuitRenegatebsii20
+  - ClothingOuterHardsuitRenegateLightweightJuggernaut
+  - ClothingOuterHardsuitRenegatecriii200
+  - ClothingOuterHardsuitRenegateEnergyShield
+  - ClothingOuterHardsuitRenegateHeavyJuggernaut
+  - ClothingOuterHardsuitRenegateStealth
+  - ClothingOuterHardsuitRenegateAdvancedLight
+  - ClothingOuterHardsuitRenegateReflectElite
 
 - type: latheRecipePack
   id: RenegateAmmoDynamic
@@ -35,6 +43,13 @@
   - Magazinetype99762x51mmHP
   - Magazinetype99762x51mmRIP
   - AmmoBox762x51mmBigFMJ
+  - AmmoBox127x99mm
+  - Magazine127x99mm
+  - AmmoBox127x99mmExplosive
+  - Magazine127x99mmExplosive
+  - AmmoBox145x114mm
+  - AmmoBox145x114mmBig
+
 
 - type: latheRecipePack
   id: RenegateVoucherDynamic

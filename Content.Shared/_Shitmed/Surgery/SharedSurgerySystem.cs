@@ -50,6 +50,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedCorticalBorerSystem _corticalBorer = default!;
 
+
+    /// <summary>
+    /// Cache of all surgery prototypes' singleton entities.
+    /// Cleared after a prototype reload.
+    /// </summary>
     private readonly Dictionary<EntProtoId, EntityUid> _surgeries = new();
     private readonly List<EntProtoId> _allSurgeries = new();
 
@@ -82,7 +87,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<SurgeryPartComponentConditionComponent, SurgeryValidEvent>(OnPartComponentConditionValid);
         SubscribeLocalEvent<SurgeryOrganOnAddConditionComponent, SurgeryValidEvent>(OnOrganOnAddConditionValid);
         //SubscribeLocalEvent<SurgeryRemoveLarvaComponent, SurgeryCompletedEvent>(OnRemoveLarva);
-        //SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         InitializeSteps();
 
@@ -120,6 +125,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         //args.Repeat = (HasComp<SurgeryRepeatableStepComponent>(step) && !IsStepComplete(ent, part, args.Step, surgery));
         var ev = new SurgeryStepEvent(args.User, ent, part, GetTools(args.User), surgery, step, complete);
         RaiseLocalEvent(step, ref ev);
+        RaiseLocalEvent(args.User, ref ev);
         RefreshUI(ent);
     }
 

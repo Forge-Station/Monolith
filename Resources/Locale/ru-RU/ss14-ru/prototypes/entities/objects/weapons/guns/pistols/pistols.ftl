@@ -33,7 +33,7 @@ ent-NFWeaponPistolPollock = Вальдшнеп
 ent-NFWeaponPistolPollockHighCapacityMag = Вальдшнеп
     .desc = Компактный боевой пистолет массового производства.
     .suffix = Пистолет, Повыш-магазин
-ent-WeaponPistolCobra = CS PT-72 Кобра (635x40мм)
+ent-WeaponPistolCobra = CS PT-72 Кобра (6.35x40мм)
     .desc = Надежный пистолет спецназа со встроенным глушителем. Использует безгильзовые патроны калибра 6,35х40 мм. Это обычное оружие имперцев Фаэтона, которое чаще всего встречается у абордажных команд или агентов.
 
 ent-WeaponPistolViper = LWC PT-45A Viper (9x19мм)

@@ -1,12 +1,12 @@
 - type: entity
-  id: BaseMagazine5x23mm
-  name: magazine (5x23mm)
+  id: BaseMagazine635x40mmCaselessNexus
+  name: magazine (6.35x40mm caseless)
   parent: BaseItem
   abstract: true
   components:
   - type: Tag
     tags:
-    - Magazine5x23mm
+    - Magazine635x40mmCaselessNexus
   - type: Item
     size: Small
     shape:
@@ -15,8 +15,7 @@
     mayTransfer: true
     whitelist:
       tags:
-      - Cartridge5x23mm
-    proto: Cartridge5x23mm
+      - Cartridge635x40mmCaseless
     capacity: 48
   - type: ContainerContainer
     containers:
@@ -35,7 +34,22 @@
   - type: Appearance
 
 - type: entity
-  parent: BaseMagazine5x23mm
-  id: Magazine5x23mmNexus
-  name: SMG magazine (5x23mm caseless)
+  parent: BaseMagazine635x40mmCaselessNexus
+  id: Magazine635x40mmCaselessNexus
+  name: SMG magazine (6.35x40mm caseless)
+  description: Extended magazine for the Shebet SMG.
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge635x40mmCaseless
+    proto: Cartridge635x40mmCaseless
+    capacity: 48
+
+- type: entity
+  parent: BaseMagazine635x40mmCaselessNexus
+  id: Magazine635x40mmCaselessNexusEmpty
+  name: SMG magazine (6.35x40mm)
+  suffix: Empty
   description: Extended magazine for the Shebet SMG.

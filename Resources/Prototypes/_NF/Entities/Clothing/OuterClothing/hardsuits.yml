@@ -1,6 +1,6 @@
 #Mercenary Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBaseNF
+  parent: [ClothingOuterHardsuitBaseNF, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitMercenary # stats are of luxury mining hardsuit
   name: mercenary hardsuit
   description: A special suit that protects from the danger of space, employed by mercenary forces. Certified to be blunderbuss-resistant.
@@ -13,19 +13,19 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5 # Removed 10%
+    damageCoefficient: 0.6 # Forge-change 0.5->0.6
   - type: Armor
     modifiers:
       coefficients: # Buffed to be more durable
-        Blunt: 0.65 #0.75->0.65
-        Slash: 0.6 #0.75->0.6
-        Piercing: 0.65 #0.75->0.65
-        Heat: 0.7 #0.80->0.7
-        Radiation: 0.75 # 0.6->0.75
+        Blunt: 0.65 # Forge-change 0.75->0.65
+        Slash: 0.65 # Forge-change 0.75->0.65
+        Piercing: 0.6 # Forge-change 0.75->0.6
+        Heat: 0.6 # Forge-change 0.80->0.6
+        Radiation: 0.6 # Forge-change 0.6->0.6
         Caustic: 0.8
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.85 # 0.8->0.85
+    walkModifier: 0.86 # Forge-change 0.9->0.86
+    sprintModifier: 0.86 # Forge-change 0.85->0.86
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -38,7 +38,7 @@
   - type: PirateBountyItem # Mono
     id: ClothingOuterHardsuitTacsuit
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.65
+    coefficient: 0.35 # Forge-change 0.65->0.35
 
 - type: entity
   parent: ClothingOuterHardsuitMercenary
@@ -101,7 +101,7 @@
 
 #ERT Mail Carrier Hardsuit
 - type: entity
-  parent: ForgeClothingOuterHardsuitBase # Forge-change
+  parent: [ForgeClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitERTMailCarrier
   name: ERT mail carrier's hardsuit
   description: A protective hardsuit worn by the mail carriers of an emergency response team.
@@ -116,21 +116,21 @@
   - type: Armor # Mono - Armor Value Changes
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.8
-        Heat: 0.9
+        Blunt: 0.85 # Forge-change 0.7->0.85
+        Slash: 0.85 # Forge-change 0.7->0.85
+        Piercing: 0.65 # Forge-change 0.8->0.65
+        Heat: 0.75 # Forge-change 0.9->0.75
         Cold: 0.9
-        Radiation: 0.8
+        Radiation: 0.5 # Forge-change 0.8->0.5
         Caustic: 0.8
-  - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.2
-  - type: SpaceFlightProfile
-    thrustMultiplier: 0.7
-    controlMultiplier: 1.15
-    fuelUsageMultiplier: 1.6
-    combatStabilityBonus: 0.1 # Forge end
+  - type: ClothingSpeedModifier 
+    walkModifier: 1.05 # Forge-change 1->1.05
+    sprintModifier: 1.05 # Forge-change 1.2->1.05
+  # - type: SpaceFlightProfile # Forge-change
+  #   thrustMultiplier: 0.7 # Forge-change
+  #   controlMultiplier: 1.15 # Forge-change
+  #   fuelUsageMultiplier: 1.6 # Forge-change
+  #   combatStabilityBonus: 0.1 # Forge-change
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false

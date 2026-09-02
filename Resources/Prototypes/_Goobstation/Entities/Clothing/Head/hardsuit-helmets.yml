@@ -33,9 +33,8 @@
         Caustic: 0.10
 
 # cybersun stealth
-
 - type: entity
-  parent: NFClothingHeadHardsuitWithLightBase # mono - stupid NF clothing parent.
+  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Normal, ShowSecurityIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitCybersunStealth
   suffix: stealth
   name: cybersun stealth hardsuit helmet
@@ -44,9 +43,8 @@
   - type: Sprite
     sprite: _Forge/Clothing/Head/Hardsuits/cybersunstealth.rsi # Forge-change
   - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/cybersunstealth.rsi # Forge-change
-  - type: PointLight
-    color: green
+    sprite: _Goobstation/Clothing/Head/Hardsuits/cybersunstealth.rsi # Forge-change
+    equippedState: off-equipped-HELMET # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -57,11 +55,41 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.95
-  - type: ClothingGrantComponent
-    component:
+  #Forge-change-start
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+  - type: ToggleClothing
+    action: ActionTogglePhaseCloak
+    disableOnUnequip: true
+  - type: ComponentToggler
+    parent: true
+    components:
     - type: Stealth
-      minVisibility: 0.15 # Mono: Changed to be not fully invisible
-      maxVisibility: 0.6 # Mono: Changed to be partially invisible
+      minVisibility: 0.01
+      maxVisibility: 1
+      damageVisibilityModifier: 1
+      attackVisibilityModifier: 1
     - type: StealthOnMove
-      passiveVisibilityRate: -0.4
-      movementVisibilityRate: 0.4
+      passiveVisibilityRate: -0.2
+      movementVisibilityRate: 0
+  - type: UseDelay
+    delay: 2
+  - type: PowerCellDraw
+    drawRate: 2
+  - type: ToggleCellDraw
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+  #Forge-change-end
+  #- type: ClothingGrantComponent # Forge-change
+  #  component: # Forge-change
+  #  - type: Stealth # Forge-change
+  #    minVisibility: 0.15 # Mono: Changed to be not fully invisible # Forge-change
+  #    maxVisibility: 0.6 # Mono: Changed to be partially invisible # Forge-change
+  #  - type: StealthOnMove # Forge-change
+  #    passiveVisibilityRate: -0.4 # Forge-change
+  #    movementVisibilityRate: 0.4 # Forge-change

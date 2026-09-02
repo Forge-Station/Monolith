@@ -1,20 +1,21 @@
+# Forge-del all
 #Survival boxes all replaced with mono versions with extended tanks.
-- type: loadout
-  id: ContractorBoxSurvivalNFOxygenExtended
-  name: extended-oxygen survival box
-  hideEffects:
-  - !type:GroupLoadoutEffect
-    proto: OxygenBreatherNF
-  storage:
-    back:
-    - BoxSurvivalMonoOxygenExtended
-
-- type: loadout
-  id: ContractorBoxSurvivalNFNitrogenExtended
-  name: extended-nitrogen survival box
-  hideEffects:
-  - !type:GroupLoadoutEffect
-    proto: NitrogenBreatherNF
-  storage:
-    back:
-    - BoxSurvivalMonoNitrogenExtended
+#- type: loadout
+#  id: ContractorBoxSurvivalNFOxygenExtended
+#  name: extended-oxygen survival box
+#  hideEffects:
+#  - !type:GroupLoadoutEffect
+#    proto: OxygenBreatherNF
+#  storage:
+#    back:
+#    - BoxSurvivalMonoOxygenExtended
+#
+#- type: loadout
+#  id: ContractorBoxSurvivalNFNitrogenExtended
+#  name: extended-nitrogen survival box
+#  hideEffects:
+#  - !type:GroupLoadoutEffect
+#    proto: NitrogenBreatherNF
+#  storage:
+#    back:
+#    - BoxSurvivalMonoNitrogenExtended

@@ -1,37 +1,38 @@
-#T0
-- type: loadout
-  id: ContractorMedicalTrackingImplanter
-  storage:
-    back:
-    - MedicalTrackingImplanter
-
-#T1
-- type: loadout
-  id: ContractorLightImplanter
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: ContractorT1
-  price: 1000
-  storage:
-    back:
-    - LightImplanter
-
-- type: loadout
-  id: ContractorBikeHornImplanter
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: ContractorT1
-  price: 1000
-  storage:
-    back:
-    - BikeHornImplanter
-
-- type: loadout
-  id: ContractorSadTromboneImplanter
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: ContractorT1
-  price: 1000
-  storage:
-    back:
-    - SadTromboneImplanter
+# Forge-del all
+##T0
+#- type: loadout
+#  id: ContractorMedicalTrackingImplanter
+#  storage:
+#    back:
+#    - MedicalTrackingImplanter
+#
+##T1
+#- type: loadout
+#  id: ContractorLightImplanter
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+#  price: 1000
+#  storage:
+#    back:
+#    - LightImplanter
+#
+#- type: loadout
+#  id: ContractorBikeHornImplanter
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+#  price: 1000
+#  storage:
+#    back:
+#    - BikeHornImplanter
+#
+#- type: loadout
+#  id: ContractorSadTromboneImplanter
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+#  price: 1000
+#  storage:
+#    back:
+#    - SadTromboneImplanter

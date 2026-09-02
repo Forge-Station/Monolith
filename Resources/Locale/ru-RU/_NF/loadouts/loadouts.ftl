@@ -1,7 +1,5 @@
 frontier-loadout-cost = Стоимость Снаряжения: {$cost}
 frontier-loadout-balance = Доступный Баланс: {$balance}
-loadout-contractor-clothing-eyes-punk-goggles = панк-очки (случайные)
-loadout-contractor-clothing-eyes-punk-infoshades = панк-инфоочки (случайные)
 loadout-contractor-belt-plant-empty = пояс ботаника (пустой)
 loadout-contractor-belt-plant-filled = пояс ботаника (заполненный)
 loadout-contractor-belt-chef-empty = пояс повара (пустой)
@@ -18,7 +16,5 @@ loadout-contractor-belt-pilot-empty = разгрузка пилота (пуст�
 loadout-contractor-belt-pilot-filled = разгрузка пилота (заполненная)
 loadout-contractor-belt-chaplain-empty = лента священника (пустая)
 loadout-contractor-belt-chaplain-filled = лента священника (заполненная)
-loadout-contractor-belt-punk-empty = панк-пояс (случайный, пустой)
-loadout-contractor-belt-punk-filled = панк-пояс (случайный, заполненный)
 # Undefined for some reason.
 loadout-group-species-restriction = Не может быть выбран вашей расой.

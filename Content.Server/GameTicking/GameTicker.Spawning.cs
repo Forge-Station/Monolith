@@ -34,10 +34,8 @@ namespace Content.Server.GameTicking
         [Dependency] private AdminSystem _admin = default!;
         [Dependency] private RespawnSystem _respawn = default!; // Frontier
 
-        [ValidatePrototypeId<EntityPrototype>]
         public const string ObserverPrototypeName = "MobObserver";
 
-        [ValidatePrototypeId<EntityPrototype>]
         public const string AdminObserverPrototypeName = "AdminObserver";
 
         /// <summary>
@@ -53,8 +51,13 @@ namespace Content.Server.GameTicking
         {
             var spawnableStations = new List<EntityUid>();
             var query = EntityQueryEnumerator<StationJobsComponent, StationSpawningComponent>();
-            while (query.MoveNext(out var uid, out _, out _))
+            while (query.MoveNext(out var uid, out var jobs, out _))
             {
+                // Frontier/POI stations inherit BaseStationJobsSpawning with an empty job list.
+                // Late-join used to pick those at random and then fall back to observer.
+                if (jobs.JobList.Count == 0)
+                    continue;
+
                 spawnableStations.Add(uid);
             }
 
@@ -164,20 +167,41 @@ namespace Content.Server.GameTicking
             if (DummyTicker)
                 return;
 
-            if (station == EntityUid.Invalid)
-            {
-                var stations = GetSpawnableStations();
-                _robustRandom.Shuffle(stations);
-                if (stations.Count == 0)
-                    station = EntityUid.Invalid;
-                else
-                    station = stations[0];
-            }
-
             if (lateJoin && DisallowLateJoin)
             {
                 JoinAsObserver(player);
                 return;
+            }
+
+            // Figure out job restrictions before picking a station so we skip jobless POIs.
+            var restrictedRoles = new HashSet<ProtoId<JobPrototype>>();
+            var disallowedEv = new GetDisallowedJobsEvent(player, restrictedRoles);
+            RaiseLocalEvent(ref disallowedEv);
+
+            var jobBans = _banManager.GetJobBans(player.UserId);
+            if (jobBans != null)
+                restrictedRoles.UnionWith(jobBans);
+
+            if (station == EntityUid.Invalid)
+            {
+                var stations = GetSpawnableStations();
+                _robustRandom.Shuffle(stations);
+
+                foreach (var candidate in stations)
+                {
+                    var candidateJob = jobId ?? _stationJobs.PickBestAvailableJobWithPriority(
+                        candidate,
+                        character.JobPriorities,
+                        true,
+                        restrictedRoles);
+
+                    if (candidateJob is null)
+                        continue;
+
+                    station = candidate;
+                    jobId = candidateJob;
+                    break;
+                }
             }
 
             // We raise this event to allow other systems to handle spawning this player themselves. (e.g. late-join wizard, etc)
@@ -191,16 +215,7 @@ namespace Content.Server.GameTicking
                 return;
             }
 
-            // Figure out job restrictions
-            var restrictedRoles = new HashSet<ProtoId<JobPrototype>>();
-            var ev = new GetDisallowedJobsEvent(player, restrictedRoles);
-            RaiseLocalEvent(ref ev);
-
-            var jobBans = _banManager.GetJobBans(player.UserId);
-            if (jobBans != null)
-                restrictedRoles.UnionWith(jobBans);
-
-            // Pick best job best on prefs.
+            // Pick best job based on prefs if a specific station was already provided.
             jobId ??= _stationJobs.PickBestAvailableJobWithPriority(station,
                 character.JobPriorities,
                 true,
@@ -456,7 +471,7 @@ namespace Content.Server.GameTicking
                 var spawn = _robustRandom.Pick(_possiblePositions);
                 var toMap = _transform.ToMapCoordinates(spawn);
 
-                if (_mapManager.TryFindGridAt(toMap, out var gridUid, out _))
+                if (_map.TryFindGridAt(toMap, out var gridUid, out _))
                 {
                     var gridXform = Transform(gridUid);
 
@@ -466,17 +481,17 @@ namespace Content.Server.GameTicking
                 return spawn;
             }
 
-            if (_mapManager.MapExists(DefaultMap))
+            if (_map.MapExists(DefaultMap))
             {
-                var mapUid = _mapManager.GetMapEntityId(DefaultMap);
+                var mapUid = _map.GetMap(DefaultMap);
                 if (!TerminatingOrDeleted(mapUid))
                     return new EntityCoordinates(mapUid, Vector2.Zero);
             }
 
             // Just pick a point at this point I guess.
-            foreach (var map in _mapManager.GetAllMapIds())
+            foreach (var map in _map.GetAllMapIds())
             {
-                var mapUid = _mapManager.GetMapEntityId(map);
+                var mapUid = _map.GetMap(map);
 
                 if (!metaQuery.TryGetComponent(mapUid, out var meta)
                     || meta.EntityPaused

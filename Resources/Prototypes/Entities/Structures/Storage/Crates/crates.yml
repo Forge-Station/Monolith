@@ -12,6 +12,8 @@
     - Energy
     reflectProb: 0.2
     spread: 90
+  - type: Paintable   # Forge-Change
+    group: CrateSteel # Forge-Change
   - type: RadiationBlockingContainer
     resistance: 2.5
 
@@ -20,6 +22,8 @@
   id: CratePlastic
   name: plastic crate
   components:
+  - type: Paintable     # Forge-Change
+    group: CratePlastic # Forge-Change
   - type: Icon
     sprite: Structures/Storage/Crates/plastic.rsi
   - type: Sprite
@@ -66,6 +70,8 @@
     node: done
     containers:
     - entity_storage
+  - type: Paintable                               # Forge-Change
+    group: null # not shaped like other lockers   # Forge-Change
 
 - type: entity
   parent: CratePlastic
@@ -603,7 +609,7 @@
     state: base
 
 - type: entity
-  parent: CrateGenericSteel
+  parent: [CrateGenericSteel, BaseFactionGearOtherFactionT1]
   id: CrateSyndicate
   name: Syndicate crate
   description: A dark steel crate with red bands and a letter S embossed on the front.
@@ -633,7 +639,10 @@
       sprite: Structures/Storage/Crates/labels.rsi
       offset: "0.0,0.03125"
       map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Paintable                               # Forge-Change
+    group: null # not shaped like other lockers   # Forge-Change
   - type: RatKingRummageable # Forge-Change
+
 
 - type: entity
   parent: CrateBaseSecure
@@ -660,6 +669,8 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: AccessReader
 #    access: [["Janitor"]]
+  - type: Paintable                               # Forge-Change
+    group: null # not shaped like other lockers   # Forge-Change
 
 - type: entity
   parent: CrateBaseWeldable
@@ -679,9 +690,9 @@
   name: crate BS
   components:
   - type: Icon
-    sprite: Forge/Structures/Storage/Crates/bluespace_crate.rsi
+    sprite: _Forge/Structures/Storage/Crates/bluespace_crate.rsi
   - type: Sprite
-    sprite: Forge/Structures/Storage/Crates/bluespace_crate.rsi
+    sprite: _Forge/Structures/Storage/Crates/bluespace_crate.rsi
   - type: Reflect
     reflects:
     - Energy

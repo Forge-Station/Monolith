@@ -17,7 +17,6 @@ namespace Content.Server.Mapping
     sealed partial class MappingCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entities = default!;
-        [Dependency] private IMapManager _map = default!;
         [Dependency] private IConfigurationManager _cfg = default!;
 
         public string Command => "mapping";
@@ -164,7 +163,9 @@ namespace Content.Server.Mapping
                 auto.ToggleAutosave(mapId, toLoad ?? "NEWMAP");
 
             shell.ExecuteCommand($"tp 0 0 {mapId}");
-            shell.RemoteExecuteCommand("mappingclientsidesetup");
+            // Forge-Change: mappingclientsidesetup turns off lights, force-shows subfloor and dumps mapping actions.
+            // That is more annoying than useful when running `mapping` as a ghost on a live server.
+            // Run `mappingclientsidesetup` manually if you actually want that setup.
             DebugTools.Assert(mapSys.IsPaused(mapId));
 
             if (args.Length != 2)

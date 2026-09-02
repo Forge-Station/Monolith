@@ -555,10 +555,11 @@
   id: CrossbowBoltShrapnelSpread
   categories: [ HideSpawnMenu, Spawner ] # Spawner category - this is intended to create other entities
   components:
-  - type: ScatteringGrenade
-    fillPrototype: Pellet12_gauge
-    capacity: 6
-    delayBeforeTriggerContents: 0
+  # Forge-Change-Start
+  - type: ProjectileGrenade
+    fillPrototype: Pellet12_gaugeSpread
+    capacity: 12
+  # Forge-Change-End
   - type: TriggerOnSpawn
   - type: ContainerContainer
     containers:

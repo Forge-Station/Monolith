@@ -1,10 +1,15 @@
+/// Forge-Chane-Start
+using Content.Shared.SprayPainter.Prototypes;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.Storage.Visualizers;
 
-public sealed class EntityStorageVisualizerSystem : VisualizerSystem<EntityStorageVisualsComponent>
+public sealed partial class EntityStorageVisualizerSystem : VisualizerSystem<EntityStorageVisualsComponent>
 {
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -23,51 +28,86 @@ public sealed class EntityStorageVisualizerSystem : VisualizerSystem<EntityStora
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
-        sprite.LayerSetState(StorageVisualLayers.Base, comp.StateBaseClosed);
-    }
-
-    protected override void OnAppearanceChange(EntityUid uid, EntityStorageVisualsComponent comp, ref AppearanceChangeEvent args)
-    {
-        if (args.Sprite == null
-        || !AppearanceSystem.TryGetData<bool>(uid, StorageVisuals.Open, out var open, args.Component))
+        // Preview / incomplete sprites may not have layers yet (map-load adds Sprite before CopyTo).
+        if (!SpriteSystem.LayerMapTryGet((uid, sprite), StorageVisualLayers.Base, out _, false))
             return;
 
+        SpriteSystem.LayerSetRsiState((uid, sprite), StorageVisualLayers.Base, comp.StateBaseClosed);
+    }
+
+    protected override void OnAppearanceChange(EntityUid uid,
+        EntityStorageVisualsComponent comp,
+        ref AppearanceChangeEvent args)
+    {
+        if (args.Sprite == null
+            || !AppearanceSystem.TryGetData<bool>(uid, StorageVisuals.Open, out var open, args.Component))
+            return;
+
+        var forceRedrawBase = false;
+        /// Forge-Change-Start
+        if (AppearanceSystem.TryGetData<string>(uid, PaintableVisuals.Prototype, out var prototype, args.Component))
+        {
+            if (_prototypeManager.TryIndex(prototype, out EntityPrototype? proto))
+            {
+                if (proto.TryGetComponent(out SpriteComponent? sprite, Factory) && sprite.BaseRSI != null)
+                {
+                    SpriteSystem.SetBaseRsi((uid, args.Sprite), sprite.BaseRSI);
+                }
+
+                if (proto.TryGetComponent(out EntityStorageVisualsComponent? visuals, Factory))
+                {
+                    comp.StateBaseOpen = visuals.StateBaseOpen;
+                    comp.StateBaseClosed = visuals.StateBaseClosed;
+                    comp.StateDoorOpen = visuals.StateDoorOpen;
+                    comp.StateDoorClosed = visuals.StateDoorClosed;
+                    forceRedrawBase = true;
+                }
+            }
+        }
+        /// Forge-Change-End
+
+        var hasBase = SpriteSystem.LayerMapTryGet((uid, args.Sprite), StorageVisualLayers.Base, out _, false);
+
         // Open/Closed state for the storage entity.
-        if (args.Sprite.LayerMapTryGet(StorageVisualLayers.Door, out _))
+        if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), StorageVisualLayers.Door, out _, false))
         {
             if (open)
             {
                 if (comp.OpenDrawDepth != null)
-                    args.Sprite.DrawDepth = comp.OpenDrawDepth.Value;
+                    SpriteSystem.SetDrawDepth((uid, args.Sprite), comp.OpenDrawDepth.Value);
 
                 if (comp.StateDoorOpen != null)
                 {
-                    args.Sprite.LayerSetState(StorageVisualLayers.Door, comp.StateDoorOpen);
-                    args.Sprite.LayerSetVisible(StorageVisualLayers.Door, true);
+                    SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Door, comp.StateDoorOpen);
+                    SpriteSystem.LayerSetVisible((uid, args.Sprite), StorageVisualLayers.Door, true);
                 }
                 else
                 {
-                    args.Sprite.LayerSetVisible(StorageVisualLayers.Door, false);
+                    SpriteSystem.LayerSetVisible((uid, args.Sprite), StorageVisualLayers.Door, false);
                 }
 
-                if (comp.StateBaseOpen != null)
-                    args.Sprite.LayerSetState(StorageVisualLayers.Base, comp.StateBaseOpen);
+                if (hasBase && comp.StateBaseOpen != null)
+                    SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Base, comp.StateBaseOpen);
+                else if (hasBase && forceRedrawBase && comp.StateBaseClosed != null)
+                    SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Base, comp.StateBaseClosed);
             }
             else
             {
                 if (comp.ClosedDrawDepth != null)
-                    args.Sprite.DrawDepth = comp.ClosedDrawDepth.Value;
+                    SpriteSystem.SetDrawDepth((uid, args.Sprite), comp.ClosedDrawDepth.Value);
 
                 if (comp.StateDoorClosed != null)
                 {
-                    args.Sprite.LayerSetState(StorageVisualLayers.Door, comp.StateDoorClosed);
-                    args.Sprite.LayerSetVisible(StorageVisualLayers.Door, true);
+                    SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Door, comp.StateDoorClosed);
+                    SpriteSystem.LayerSetVisible((uid, args.Sprite), StorageVisualLayers.Door, true);
                 }
                 else
-                    args.Sprite.LayerSetVisible(StorageVisualLayers.Door, false);
+                    SpriteSystem.LayerSetVisible((uid, args.Sprite), StorageVisualLayers.Door, false);
 
-                if (comp.StateBaseClosed != null)
-                    args.Sprite.LayerSetState(StorageVisualLayers.Base, comp.StateBaseClosed);
+                if (hasBase && comp.StateBaseClosed != null)
+                    SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Base, comp.StateBaseClosed);
+                else if (hasBase && forceRedrawBase && comp.StateBaseOpen != null)
+                    SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Base, comp.StateBaseOpen);
             }
         }
     }
@@ -78,3 +118,5 @@ public enum StorageVisualLayers : byte
     Base,
     Door
 }
+/// Forge-Chane-End
+///

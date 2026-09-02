@@ -16,6 +16,12 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 10
+        # Forge-Change-Start
+        - ReagentId: Lactozit
+          Quantity: 0.25
+        - ReagentId: Flavorol
+          Quantity: 3
+        # Forge-Change-End
 
 # Ice-cream
 
@@ -27,10 +33,23 @@
   components:
   - type: Sprite
     state: sandwich
+  # Forge-Change-Start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Lactozit
+          Quantity: 0.5
+        - ReagentId: Flavorol
+          Quantity: 3
+  # Forge-Change-End
 
 - type: entity
   name: strawberry ice-cream sandwich
-  parent: FoodFrozenBase
+  parent: FoodFrozenSandwich # Forge-Change
   id: FoodFrozenSandwichStrawberry
   description: Portable ice-cream in its own packaging of the strawberry variety.
   components:
@@ -45,6 +64,19 @@
   components:
   - type: Sprite
     state: spacefreezy
+  # Forge-Change-Start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Lactozit
+          Quantity: 0.75
+        - ReagentId: Flavorol
+          Quantity: 3
+  # Forge-Change-End
 
 - type: entity
   name: ice-cream sundae
@@ -53,7 +85,23 @@
   description: A classic dessert.
   components:
   - type: Sprite
-    state: spacefreezy
+  # Forge-Change-Start
+    state: sundae
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Lactozit
+          Quantity: 0.75
+        - ReagentId: Flavorol
+          Quantity: 3
+  - type: Food
+    trash:
+    - TrashCherryPit
+  # Forge-Change-End
 
 - type: entity
   name: cornuto
@@ -72,6 +120,12 @@
           Quantity: 10
         - ReagentId: Theobromine
           Quantity: 1
+       # Forge-Change-Start
+        - ReagentId: Lactozit
+          Quantity: 0.75
+        - ReagentId: Flavorol
+          Quantity: 3
+       # Forge-Change-End
 
 # Popsicle
 

@@ -69,6 +69,8 @@
     - ForgeVoiceModuleImplanter
     - ForgeSubdermalArmorImplant
     - ForgeReflectiveSubdermalArmorImplant
+    - TranexamicImplanter # Имплант на единоразовое введение с адреналином
+    - TranexamicImplanterDose # Имплант на трёхкратное применение без адреналина
 
 - type: entity
   parent: NFBaseBlueprintMedical

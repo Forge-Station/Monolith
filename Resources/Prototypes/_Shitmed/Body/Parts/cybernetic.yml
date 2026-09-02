@@ -135,9 +135,13 @@
   name: S.P.E.E.D left leg
   description: A cybernetic left leg that allows its wearer to run faster.
   components:
-  - type: MovementBodyPart
-    walkSpeed: 2.875 # Mono
-    sprintSpeed: 5.175 # Mono
+  #- type: MovementBodyPart #Forge-Change-Remove
+  #   walkSpeed: 2.875 # Mono
+  #   sprintSpeed: 5.175 # Mono
+  - type: MovementBodyPartModifier #Forge-Change-add
+    walkModifier: 1.15
+    sprintModifier: 1.15
+    group: leg
   - type: BodyPart
     onAdd:
     - type: NoSlip
@@ -147,11 +151,15 @@
   parent: RightLegCyberneticBase
   id: SpeedRightLeg
   name: S.P.E.E.D right leg
-  description: A cybernetic left leg that allows its wearer to run faster.
+  description: A cybernetic right leg that allows its wearer to run faster.
   components:
-  - type: MovementBodyPart
-    walkSpeed: 2.875 # Mono
-    sprintSpeed: 5.175 # Mono
+  #- type: MovementBodyPart #Forge-Change-Remove
+  #   walkSpeed: 2.875 # Mono
+  #   sprintSpeed: 5.175 # Mono
+  - type: MovementBodyPartModifier #Forge-Change-add
+    walkModifier: 1.15
+    sprintModifier: 1.15
+    group: leg
   - type: BodyPart
     onAdd:
     - type: NoSlip

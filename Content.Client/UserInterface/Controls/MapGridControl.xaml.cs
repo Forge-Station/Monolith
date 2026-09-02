@@ -6,7 +6,6 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Client.UserInterface.Controls;
@@ -20,8 +19,6 @@ public partial class MapGridControl : LayoutContainer
 {
     [Dependency] protected IEntityManager EntManager = default!;
     [Dependency] protected IGameTiming Timing = default!;
-    [Dependency] protected IPrototypeManager PrototypeManager = default!; // Mono
-    [Dependency] protected IClyde DisplayManager = default!; // Mono
 
     protected static readonly Color BackingColor = new Color(0.08f, 0.08f, 0.08f);
 
@@ -55,10 +52,11 @@ public partial class MapGridControl : LayoutContainer
     protected float RecenterMinimum = 0.05f;
 
     /// <summary>
-    /// UI pixel radius.
+    /// Fallback UI pixel radius used as a minimum display size. Actual drawing uses the control's pixel size.
     /// </summary>
     public const int UIDisplayRadius = 320;
     protected const int MinimapMargin = 4;
+    protected const int MinDisplaySize = 256; // Forge-Change
 
     protected float WorldMinRange;
     protected float WorldMaxRange;
@@ -79,16 +77,29 @@ public partial class MapGridControl : LayoutContainer
 
     public Vector2 MaxRadarRangeVector => new Vector2(MaxRadarRange, MaxRadarRange);
 
-    protected Vector2 MidPointVector => new Vector2(MidPoint, MidPoint);
+    // Forge-Change-Start: radar fills the resized window instead of a fixed 320px square.
+    protected Vector2 MidPointVector => PixelSize / 2f;
 
     protected int MidPoint => SizeFull / 2;
-    protected int SizeFull => (int)((UIDisplayRadius + MinimapMargin) * 2 * UIScale);
-    protected int ScaledMinimapRadius => (int)(UIDisplayRadius * UIScale);
+    protected int SizeFull
+    {
+        get
+        {
+            var width = PixelWidth;
+            var height = PixelHeight;
+            if (width <= 1)
+                return Math.Max(1, height);
+            if (height <= 1)
+                return Math.Max(1, width);
+
+            return Math.Max(1, (int) MathF.Min(width, height));
+        }
+    }
+    protected int ScaledMinimapRadius => Math.Max(1, SizeFull / 2 - (int) (MinimapMargin * UIScale));
+    // Forge-Change-End
     protected float MinimapScale => WorldRange != 0 ? ScaledMinimapRadius / WorldRange : 0f;
 
     public event Action<float>? WorldRangeChanged;
-
-    private readonly ShaderInstance _circleMaskShader; // Mono
 
     public MapGridControl() : this(32f, 32f, 32f) { }
 
@@ -96,7 +107,11 @@ public partial class MapGridControl : LayoutContainer
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        SetSize = new Vector2(SizeFull, SizeFull);
+        // Forge-Change-Start
+        MinSize = new Vector2(MinDisplaySize, MinDisplaySize);
+        HorizontalExpand = true;
+        VerticalExpand = true;
+        // Forge-Change-End
         RectClipContent = true;
         MouseFilter = MouseFilterMode.Stop;
         ActualRadarRange = WorldRange;
@@ -107,8 +122,7 @@ public partial class MapGridControl : LayoutContainer
 
         var cache = IoCManager.Resolve<IResourceCache>();
         _largerFont = new VectorFont(cache.GetResource<FontResource>("/EngineFonts/NotoSans/NotoSans-Regular.ttf"), 16);
-
-        _circleMaskShader = PrototypeManager.Index<ShaderPrototype>("CircleAlphaMask").InstanceUnique(); // Mono
+        // Forge-Change: removed unused CircleAlphaMask InstanceUnique() that leaked a shader per map control.
     }
 
     public void ForceRecenter()
@@ -150,8 +164,14 @@ public partial class MapGridControl : LayoutContainer
         if (!_draggin)
             return;
 
+        // Forge-Change-Start
+        var radius = ScaledMinimapRadius;
+        if (radius <= 0)
+            return;
+
         Recentering = false;
-        Offset -= new Vector2(args.Relative.X, -args.Relative.Y) / MidPoint * WorldRange;
+        Offset -= new Vector2(args.Relative.X, -args.Relative.Y) * UIScale / radius * WorldRange;
+        // Forge-Change-End
     }
 
     protected override void MouseWheel(GUIMouseWheelEventArgs args)

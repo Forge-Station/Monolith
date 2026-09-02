@@ -1,188 +1,4 @@
 - type: entity
-  name: SKR-WS MLA-73 (635x40mm caseless)
-  parent: [BaseWeaponSubMachineGun, BaseGunWieldable]
-  id: WeaponSubMachineGunMla73
-  description: A reliable PDW design, commonly issued to pilots and AFV crewmen. This one has been modified with an integral suppressor. Legends around this weapons say it's a Corporate-Era schematic that's been built by the Phaethon Dynasty. Can take 9x19mm smg magazines in a pinch. An Erebus railmount is present on the top and bottom of the handguard for optics and grips.
-  components:
-  - type: Sprite
-    sprite: _Mono/Objects/Weapons/Guns/SMGs/mla73.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-    - map: ["gripAttachment"]
-    - map: ["opticAttachment"]
-  - type: Clothing
-    sprite: _Mono/Objects/Weapons/Guns/SMGs/mla73.rsi
-  - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -34
-  - type: Gun
-    minAngle: 22
-    maxAngle: 40
-    angleIncrease: 5
-    angleDecay: 20
-    fireRate: 8
-    damageModifier: 0.9
-    soundGunshot:
-      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/mla_fire.ogg
-  - type: ChamberMagazineAmmoProvider
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: Magazine635x40mmCaseless
-        insertSound: /Audio/Weapons/Guns/MagIn/hpistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - Magazine635x40mmCaseless
-          - Magazine9x19mmSubMachineGunFMJ
-        whitelistFailPopup: gun-magazine-whitelist-fail
-      gun_chamber:
-        name: Chamber
-        startingItem: Cartridge635x40mmCaseless
-        priority: 1
-        whitelist:
-          tags:
-          - Cartridge635x40mmCaseless
-      attachment_grip:
-        insertSound: /Audio/Items/screwdriver2.ogg
-        ejectSound: /Audio/Items/screwdriver2.ogg
-        priority: 0
-        whitelist:
-          tags:
-          - MonoGripErebusRailmount
-      attachment_optic:
-        insertSound: /Audio/Items/screwdriver2.ogg
-        ejectSound: /Audio/Items/screwdriver2.ogg
-        priority: 0
-        whitelist:
-          tags:
-          - MonoOpticErebusRailmount
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-      attachment_grip: !type:ContainerSlot
-      attachment_optic: !type:ContainerSlot
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: ESAttachableGun
-    slots:
-    - name: es-gun-attachments-slot-name-grip
-      containerId: attachment_grip
-      whitelist:
-        tags:
-        - MonoGripErebusRailmount
-  - type: ActivatableUI
-    key: enum.ESAttachableGunUiKey.Key
-    verbOnly: true
-    verbText: es-gun-attachments-verb-text
-  - type: UserInterface
-    interfaces:
-      enum.ESAttachableGunUiKey.Key:
-        type: ESGunAttachmentBui
-  - type: ESItemMapper
-    mappings:
-      gripAttachment:
-      - containerId: attachment_grip
-        state: grip
-        whitelist:
-          tags:
-          - MonoGripVFG
-      - containerId: attachment_grip
-        state: lam
-        whitelist:
-          tags:
-          - MonoGripLAM
-      - containerId: attachment_grip
-        state: light
-        whitelist:
-          tags:
-          - MonoGripLight
-      opticAttachment:
-      - containerId: attachment_optic
-        state: optic2x
-        whitelist:
-          tags:
-          - MonoOptic2x
-      - containerId: attachment_optic
-        state: optic4x
-        whitelist:
-          tags:
-          - MonoOptic4x
-      - containerId: attachment_optic
-        state: optic8x
-        whitelist:
-          tags:
-          - MonoOptic8x
-
-- type: entity
-  name: NCI AK-220 (9x19mm)
-  parent: [BaseWeaponSubMachineGun, BaseGunWieldable]
-  id: WeaponSubMachineGunAK220
-  description: A mass produced 9x19mm bullpup SMG. The design originates from the USSP, but various TSF and PDV manufacturers produce it via licenses or suspiciously similar "original" designs.
-  components:
-  - type: Sprite
-    sprite: _Mono/Objects/Weapons/Guns/SMGs/ak220.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -34
-  - type: ChamberMagazineAmmoProvider
-    soundRack:
-      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
-  - type: Clothing
-    sprite: _Mono/Objects/Weapons/Guns/SMGs/ak220.rsi
-  - type: Gun
-    minAngle: 22
-    maxAngle: 40
-    fireRate: 6
-    angleIncrease: 21
-    angleDecay: 14
-    selectedMode: FullAuto
-    soundGunshot:
-      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/smg.ogg
-    availableModes:
-    - SemiAuto
-    - FullAuto
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: Magazine9x19mmSubMachineGunFMJ
-        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/cm82_magin.ogg
-        ejectSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagOut/pistol_alt_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - Magazine9x19mmSubMachineGunFMJ
-      gun_chamber:
-        name: Chamber
-        startingItem: Cartridge9x19mmFMJ
-        priority: 1
-        whitelist:
-          tags:
-          - Cartridge9x19mmFMJ
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: StaticPrice
-    price: 500
-
-- type: entity
   name: LWC Vector (9x19mm)
   parent: [BaseWeaponSubMachineGun, BaseGunWieldable]
   id: WeaponSubMachineGunVector9x19mm
@@ -198,12 +14,16 @@
       - map: ["gripAttachment"]
       - map: ["opticAttachment"]
   - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -5
+    minAngle: -12 # Forge-change -5->-12
+    maxAngle: -9 # Forge-change -5->-9
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/SMGs/vector.rsi
   - type: Gun
     fireRate: 7.5
+    projectileSpeed: 45 # Forge-change
+    angleIncrease: 1 # Forge-change
+    angleDecay: 12 # Forge-change
+    damageModifier: 1 # Forge-change 0.8->1
     selectedMode: Burst
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
@@ -211,8 +31,8 @@
     - Burst
     - SemiAuto
     - FullAuto
-    burstCooldown: 0.5
-    burstFireRate: 14
+    burstCooldown: 0.4 # Forge-change 0.5->0.4
+    burstFireRate: 11 # Forge-change 14->11
     shotsPerBurst: 3
   - type: ItemSlots
     slots:
@@ -323,12 +143,17 @@
       - map: ["gripAttachment"]
       - map: ["opticAttachment"]
   - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -5
+    minAngle: -18 # Forge-change -5->-18
+    maxAngle: -25 # Forge-change -5->-25
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/SMGs/vector.rsi
   - type: Gun
-    fireRate: 6
+    fireRate: 7 # Forge-change 6->7
+    projectileSpeed: 45 # Forge-change
+    angleIncrease: 1.25 # Forge-change
+    angleDecay: 16 # Forge-change
+    minAngle: 22 # Forge-change
+    maxAngle: 40 # Forge-change
     selectedMode: Burst
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
@@ -336,8 +161,8 @@
     - Burst
     - SemiAuto
     - FullAuto
-    burstCooldown: 0.5
-    burstFireRate: 14
+    burstCooldown: 0.4 # Forge-change 0.5->0.4
+    burstFireRate: 11 # Forge-change 14->11
     shotsPerBurst: 3
   - type: ItemSlots
     slots:
@@ -432,59 +257,6 @@
           tags:
           - MonoOptic8x
 
-# Corpo War .45 Mag Vector
-- type: entity
-  name: NTSF-HCLM-45 (.45 magnum)
-  parent: [BaseWeaponSubMachineGun, BaseGunWieldable]
-  id: WeaponSubMachineGunVectorNtsfHclm
-  description: The NTSF Heavy Caliber Light Machinegun. A very high-quality heavy SMG chambered in .45 magnum for use for the Nano Trasen Security Force and NT spec-ops, from the corporate war.
-  components:
-  - type: Sprite
-    sprite: _Mono/Objects/Weapons/Guns/SMGs/ntsf_hclm_45.rsi
-    layers:
-      - state: base
-        map: ["enum.GunVisualLayers.Base"]
-      - state: mag-0
-        map: ["enum.GunVisualLayers.Mag"]
-  - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -5
-  - type: Clothing
-    sprite: _Mono/Objects/Weapons/Guns/SMGs/ntsf_hclm_45.rsi
-  - type: Gun
-    fireRate: 6
-    selectedMode: FullAuto
-    soundGunshot:
-      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/dmr.ogg
-    availableModes:
-    - SemiAuto
-    - FullAuto
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: Magazine45_magnumPistolFMJ
-        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - Magazine45_magnumPistolFMJ
-            - Magazine45_magnumPistolHighCapacityFMJ
-            - Magazine45_magnumSubMachineGunFMJ
-      gun_chamber:
-        name: Chamber
-        startingItem: Cartridge45_magnumFMJ
-        priority: 1
-        whitelist:
-          tags:
-            - Cartridge45_magnumFMJ
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-
 # merc guns
 
 - type: entity
@@ -502,22 +274,23 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: GunWieldBonus
     minAngle: -17
-    maxAngle: -18
+    maxAngle: -11 # Forge-change -18->-11
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/SMGs/knallstock.rsi
   - type: Gun
-    fireRate: 6
+    fireRate: 7 # Forge-change 6->7
     minAngle: 19
     maxAngle: 21
-    angleIncrease: 16
-    angleDecay: 10
+    projectileSpeed: 45 # Forge-change
+    angleIncrease: 1 # Forge-change 16->1
+    angleDecay: 12 # Forge-change 10->12
     selectedMode: Burst
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
     availableModes:
     - Burst
     - FullAuto
-    burstCooldown: 0.4
+    burstCooldown: 0.5 # Forge-change 0.4->0.5
     burstFireRate: 13
     shotsPerBurst: 4
   - type: ItemSlots
@@ -559,14 +332,15 @@
   description: A modern take on the classic design used by mobsters throughout space and time. This one is an offbrand mercenary version of the typewritter nicknamed the "keyboard", its barrel heat rapidly which reduce accuracy. Uses .45 ACP ammo.
   components:
   - type: GunWieldBonus
-    minAngle: -27
-    maxAngle: -45
+    minAngle: -17 # Forge-change -27->-17
+    maxAngle: -11 # Forge-change -45->-11
   - type: Gun
+    damageModifier: 0.95 # Forge-change
     minAngle: 30
     maxAngle: 55
-    angleIncrease: 18
-    angleDecay: 4
-    fireRate: 7
+    angleIncrease: 1.75 # Forge-change 18->1.75
+    angleDecay: 18 # Forge-change 4->18
+    fireRate: 8 # Forge-change 7->8
   - type: StaticPrice
     price: 500
 
@@ -585,12 +359,17 @@
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
   - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -5
+    minAngle: -19 # Forge-change -5->-19
+    maxAngle: -20 # Forge-change -5->-20
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/SMGs/drozd.rsi
   - type: Gun
-    fireRate: 6
+    fireRate: 7 # Forge-change 6->7
+    projectileSpeed: 45 # Forge-change
+    angleIncrease: 1.25 # Forge-change
+    angleDecay: 10 # Forge-change
+    minAngle: 22 # Forge-change
+    maxAngle: 35 # Forge-change
     selectedMode: FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
@@ -636,18 +415,20 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Gun
     minAngle: 2
-    maxAngle: 15
-    angleIncrease: 2
-    angleDecay: 2
-    fireRate: 7.5
+    maxAngle: 14 # Forge-change 15->14
+    angleIncrease: 1 # Forge-change 2->1
+    angleDecay: 7 # Forge-change 2->7
+    fireRate: 9 # Forge-change 7.5->9
+    projectileSpeed: 40 # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/atreides_fire.ogg
     availableModes:
     - Burst
     - FullAuto
-    burstCooldown: 2
-    burstFireRate: 15
+    burstCooldown: 1.8 # Forge-change 2->1.8
+    burstFireRate: 17 # Forge-change 15->17
     shotsPerBurst: 10
+    damageModifier: 1 # Forge-change 0.85->1
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -659,18 +440,162 @@
     slots:
        gun_magazine:
           name: Magazine
-          startingItem: Magazine46x30mmSubMachineGunFMJ
+          startingItem: Magazine46x30mmSubMachineGunFMJ # Forge-change 9x19mm->4.6x30mm
           insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
           priority: 2
           whitelist:
             tags:
-              - Magazine46x30mmSubMachineGunFMJ
+              - Magazine46x30mmSubMachineGunFMJ # Forge-change 9x19mm->4.6x30mm
           whitelistFailPopup: gun-magazine-whitelist-fail
        gun_chamber:
           name: Chamber
-          startingItem: Cartridge46x30mmFMJ
+          startingItem: Cartridge46x30mmFMJ # Forge-change 9x19mm->4.6x30mm
           priority: 1
           whitelist:
             tags:
-              - Cartridge46x30mmFMJ
+              - Cartridge46x30mmFMJ # Forge-change 9x19mm->4.6x30mm
+
+- type: entity
+  name: MMC VK-550 Masamune (5.7x28mm)
+  parent: [BaseWeaponSubMachineGun, BaseGunWieldable]
+  id: WeaponSubMachineGunMasamune
+  description: A basic PDW for corporate security. No modularity whatsoever.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/SMGs/masamune.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: GunWieldBonus
+    minAngle: -10
+    maxAngle: -26
+  - type: Clothing
+    sprite: _Mono/Objects/Weapons/Guns/SMGs/masamune.rsi
+  - type: Gun
+    minAngle: 10
+    maxAngle: 32
+    angleIncrease: 2
+    angleDecay: 2
+    fireRate: 6.5
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/atreides_fire.ogg
+    availableModes:
+    - FullAuto
+    - SemiAuto
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine57x28mmSubMachineGunFMJ
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine57x28mmSubMachineGunFMJ
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge57x28mmFMJ
+        priority: 1
+        whitelist:
+          tags:
+          - Cartridge57x28mmFMJ
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  name: MMC Sakura Smart-SMG (.160 smart)
+  parent: BaseWeaponSubMachineGun
+  id: WeaponSubMachineGunSakura
+  description: A full production variant of the Abielle smart gun, fully developed by MMC.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/SMGs/sakura.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: base-unshaded
+      map: ["enum.GunVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: mag-unshaded-0
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: _Mono/Objects/Weapons/Guns/SMGs/sakura.rsi
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK
+      suitstorage:
+      - state: equipped-BACKPACK
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -38
+    maxAngle: -32
+  - type: Gun
+    projectileSpeed: 15
+    minAngle: 42
+    maxAngle: 64
+    fireRate: 10
+    burstFireRate: 40
+    shotsPerBurst: 5
+    burstCooldown: 0.5
+    damageModifier: 1.05
+    lockOnTargetBurst: true
+    cameraRecoilScalar: 0
+    selectedMode: Burst
+    soundGunshot:
+      path: /Audio/_Goobstation/Weapons/Guns/Gunshots/smartgun_shoot.ogg
+    availableModes:
+    - FullAuto
+    - Burst
+    - SemiAuto
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineSmart
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineSmart
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeSmart
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeSmart
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: true
+    zeroNoAmmo: true
+  - type: Appearance
+  - type: SmartGun
+    requiresWield: true
+  - type: LaserPointer
+  - type: StaticPrice
+    price: 1000
+  - type: Item
+    shape:
+    - 0,0,2,1
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
+      state: all

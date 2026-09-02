@@ -85,7 +85,7 @@
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.1,-0.1,0.1,0.1"
+          bounds: "-0.1,-0.1,0.1,0.3"
         hard: false
         mask:
         - Impassable
@@ -286,7 +286,7 @@
   - type: Ammo
     muzzleFlash: MuzzleFlashEffectOmnilaser #imp
   - type: StaminaDamageOnCollide
-    damage: 38 # Mono
+    damage: 40 # Forge-change 38->40
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -1029,7 +1029,7 @@
   - type: Ammo
     muzzleFlash: MuzzleFlashEffectOmnilaser #imp
   - type: StaminaDamageOnCollide
-    damage: 18 # Mono
+    damage: 30 # Forge-change 18->30
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -1382,6 +1382,7 @@
     impactEffect: BulletImpactEffectRedDisabler
     damage:
       types:
-        Heat: 25 # Mono - 20->25
+        Heat: 27 # Forge-change 25->27
+    armorPenetration: 0.25 # Forge-change
     soundHit:
       collection: MeatLaserImpact

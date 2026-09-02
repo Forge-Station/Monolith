@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingModsuitChestplateBase
+  parent: [ClothingModsuitChestplateBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
   id: ClothingModsuitChestplateUSSPVaryag
   name: Panzerkorps Varyag
   description: Thick plating fused with internal atmosphere control.
@@ -8,26 +8,26 @@
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Modsuits/ussp-varyag.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 0.90
-    sprintModifier: 0.85
+    walkModifier: 0.76 # Forge-change 0.90 -> 0.76
+    sprintModifier: 0.76 # Forge-change 0.85 -> 0.76
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.4 # Forge-change 0.5 -> 0.4
   - type: StaminaDamageResistance
     coefficient: 0.4
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.4 # Modsuits are pain to use. Needs some kind of benefit.
-        Heat: 0.75
-        Radiation: 0.5
+        Blunt: 0.575 # Forge-change 0.5 -> 0.575
+        Slash: 0.575 # Forge-change 0.5 -> 0.575
+        Piercing: 0.475 # Forge-change 0.4 -> 0.475
+        Heat: 0.575 # Forge-change 0.75 -> 0.575
+        Radiation: 0.4 # Forge-change 0.5 -> 0.4
         Caustic: 0.5
   - type: FireProtection
     reduction: 0.7
 
 - type: entity
-  parent: ClothingModsuitChestplateBase
+  parent: [ClothingModsuitChestplateBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
   id: ClothingModsuitChestplateUSSPZastavnik
   name: Brust Zastavnika
   description: An imposing armored shell designed to absorb punishment and maintain stability under pressure.
@@ -36,26 +36,26 @@
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Modsuits/ussp-zastavnik.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
+    walkModifier: 0.74 # Forge-change 0.75 -> 0.74
+    sprintModifier: 0.74 # Forge-change 0.75 -> 0.74
   - type: ExplosionResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.35 # Forge-change 0.3 -> 0.35
   - type: StaminaDamageResistance
-    coefficient: 0.4
+    coefficient: 0.3 # Forge-change 0.4 -> 0.3
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.45
-        Slash: 0.45
-        Piercing: 0.3 # It has a lot of slowdown, I want to jugglarp
-        Heat: 0.55
+        Blunt: 0.55 # Forge-change 0.45 -> 0.55
+        Slash: 0.55 # Forge-change 0.45 -> 0.55
+        Piercing: 0.425 # Forge-change 0.3 -> 0.425
+        Heat: 0.6 # Forge-change 0.55 -> 0.6
         Caustic: 0.4
-        Radiation: 0.35
+        Radiation: 0.375 # Forge-change 0.35 -> 0.375
   - type: FireProtection
     reduction: 0.5
 
 - type: entity
-  parent: ClothingModsuitChestplateBase  # Mono - add geiger # Forge-Change-delete: BaseFactionGearPDVT3
+  parent: [ClothingModsuitChestplateBase, ClothingFlightProfileMedium]  # Forge-change add ClothingFlightProfile
   id: ClothingModsuitChestplateRogue
   name: RX-01 modsuit chestplate
   description: The chestpiece has some warning label on the inside about radiation leaks- and a note next to it 'Remove this label in the final product - Felix
@@ -64,22 +64,22 @@
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Modsuits/rogue.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.45
+    damageCoefficient: 0.4 # Forge-change 0.45 -> 0.4
   - type: StaminaDamageResistance
     coefficient: 0.4
   - type: FireProtection
     reduction: 0.6
   - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
+    walkModifier: 0.875 # Forge-change 0.95 -> 0.875
+    sprintModifier: 0.875 # Forge-change 0.95 -> 0.875
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.45
         Slash: 0.45
-        Piercing: 0.525
-        Heat: 0.5
-        Radiation: 0.2
+        Piercing: 0.4 # Forge-change 0.525 -> 0.4
+        Heat: 0.45 # Forge-change 0.5 -> 0.45
+        Radiation: 0.4 # Forge-change 0.2 -> 0.4
         Caustic: 0.3
         Poison: 0.8
 
@@ -116,16 +116,15 @@
         Piercing: 0.65
         Heat: 0.5
         Shock: 0.9
-        Radiation: 0.01
+        Radiation: 0.1
   - type: StaminaDamageResistance
     coefficient: 0.9
   - type: FireProtection
     reduction: 0.0
 
 # Gallóglach
-
 - type: entity
-  parent: ClothingModsuitChestplateBase
+  parent: [ClothingModsuitChestplateBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingModsuitChestplateMercenary
   name: mercenary modsuit chestplate
   description: A well rounded modsuit that focuses on mobility with its Actuator Enhancement System allowing its wearer to leap across the battlefield for rapid redeployment.
@@ -148,15 +147,18 @@
       outerClothing-resomi:
       - state: equipped-OUTERCLOTHING-sealed-resomi
   - type: ExplosionResistance
-    damageCoefficient: 0.7 # Mono
+    damageCoefficient: 0.8 # Forge-change 0.7 -> 0.8
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.55
-        Slash: 0.55
-        Piercing: 0.55
-        Heat: 0.6
+        Blunt: 0.65 # Forge-change 0.55 -> 0.65
+        Slash: 0.65 # Forge-change 0.55 -> 0.65
+        Piercing: 0.6 # Forge-change 0.55 -> 0.6
+        Heat: 0.5 # Forge-change 0.6 -> 0.5
         Caustic: 0.45 # Mono
-        Radiation: 0.75 # Mono
+        Radiation: 0.4 # Forge-change 0.75 -> 0.4
   - type: StaminaDamageResistance
-    coefficient: 0.7 # Mono
+    coefficient: 0.4 # Forge-change 0.7 -> 0.4
+  - type: ClothingSpeedModifier # Forge-change
+    walkModifier: 0.95 # Forge-change
+    sprintModifier: 0.95 # Forge-change

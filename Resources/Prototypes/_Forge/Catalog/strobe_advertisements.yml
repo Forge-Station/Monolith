@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: StrobeRemnantAds
+  values:
+    prefix: advertisement-strobe-remnant-
+    count: 5

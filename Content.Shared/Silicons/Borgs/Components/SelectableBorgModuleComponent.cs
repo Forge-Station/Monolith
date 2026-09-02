@@ -1,7 +1,7 @@
 ﻿using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Silicons.Borgs.Components;
 
@@ -11,7 +11,7 @@ namespace Content.Shared.Silicons.Borgs.Components;
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedBorgSystem))]
 public sealed partial class SelectableBorgModuleComponent : Component
 {
-    [DataField("moduleSwapAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("moduleSwapAction", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string? ModuleSwapActionId = "ActionBorgSwapModule";
 
     /// <summary>

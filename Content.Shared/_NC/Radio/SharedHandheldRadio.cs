@@ -14,12 +14,16 @@ public sealed class HandheldRadioBoundUIState : BoundUserInterfaceState
     public bool MicEnabled;
     public bool SpeakerEnabled;
     public int Frequency;
+    public int MinFrequency;
+    public int MaxFrequency;
 
-    public HandheldRadioBoundUIState(bool micEnabled, bool speakerEnabled, int frequency)
+    public HandheldRadioBoundUIState(bool micEnabled, bool speakerEnabled, int frequency, int minFrequency, int maxFrequency)
     {
         MicEnabled = micEnabled;
         SpeakerEnabled = speakerEnabled;
         Frequency = frequency;
+        MinFrequency = minFrequency;
+        MaxFrequency = maxFrequency;
     }
 }
 

@@ -109,6 +109,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/120mm_mortar.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 125
@@ -183,11 +184,12 @@
         layer:
         - MachineLayer
   - type: Gun
-    projectileSpeed: 325
+    damageModifier: 1.3
+    projectileSpeed: 410
     recoil: 50 # 2x
     minAngle: 0
     maxAngle: 3
-    fireRate: 0.2
+    fireRate: 0.3
     burstCooldown: 10
     burstFireRate: 2
     shotsPerBurst: 3
@@ -281,7 +283,7 @@
         layer:
         - MachineLayer
   - type: Gun
-    projectileSpeed: 720
+    projectileSpeed: 450
     recoil: 100 # 4x
     minAngle: 0
     maxAngle: 1
@@ -291,6 +293,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 15000

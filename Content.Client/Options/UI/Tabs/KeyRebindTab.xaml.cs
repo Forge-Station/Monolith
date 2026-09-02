@@ -306,6 +306,9 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.EditorRotateObject);
             AddButton(ContentKeyFunctions.EditorFlipObject);
             AddButton(ContentKeyFunctions.EditorCopyObject);
+            AddButton(ContentKeyFunctions.MappingEyedropper); // Forge-Change
+            AddButton(ContentKeyFunctions.MappingEyedropperTile); // Forge-Change
+            AddButton(ContentKeyFunctions.MappingEyedropperDecal); // Forge-Change
 
             AddHeader("ui-options-header-dev");
             AddButton(EngineKeyFunctions.ShowDebugConsole);

@@ -1,18 +1,18 @@
 - type: entity
   id: Bullet635x40mmCaseless
-  name: bullet (635x40mm Caseless)
+  name: bullet (6.35x40mm Caseless)
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 19
-    armorPenetration: 0.085
+        Piercing: 22 # Forge-change 19->22
+    armorPenetration: 0.06 # Forge-change 0.085->0.06
 
 - type: entity
   id: Bullet635x40mmCaselessPractice
-  name: bullet (635x40mm Caseless practice)
+  name: bullet (6.35x40mm Caseless practice)
   parent: BaseBulletPractice
   categories: [ HideSpawnMenu ]
   components:
@@ -23,7 +23,7 @@
 
 - type: entity
   id: Bullet635x40mmCaselessRubber
-  name: bullet (635x40mm Caseless rubber)
+  name: bullet (6.35x40mm Caseless rubber)
   parent: BaseBulletRubber
   categories: [ HideSpawnMenu ]
   components:
@@ -31,3 +31,72 @@
     damage:
       types:
         Blunt: 3
+  - type: StaminaDamageOnCollide # Forge-change
+    damage: 18 # Forge-change
+
+# Forge-change-start
+- type: entity
+  id: Bullet635x40mmCaselessIncendiary
+  name: bullet (6.35x40mm Caseless incendiary)
+  parent: BaseBulletIncendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 11
+        Heat: 7
+    armorPenetration: -0.15
+
+- type: entity
+  id: Bullet635x40mmCaselessUranium
+  name: bullet (6.35x40mm Caseless uranium)
+  parent: BaseBulletUranium
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 15
+        Radiation: 7
+    armorPenetration: -0.1
+
+- type: entity
+  id: Bullet635x40mmCaselessHP
+  name: bullet (6.35x40mm Caseless hollow-point)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 22
+        Slash: 6
+    armorPenetration: -0.6
+
+- type: entity
+  id: Bullet635x40mmCaselessRIP
+  name: bullet (6.35x40mm Caseless RIP)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+        Slash: 8
+    armorPenetration: -0.95
+
+- type: entity
+  id: Bullet635x40mmCaselessPlasteelAP
+  name: bullet (6.35x40mm Caseless AP)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 15
+        Structural: 16
+    armorPenetration: 0.45
+# Forge-change-end

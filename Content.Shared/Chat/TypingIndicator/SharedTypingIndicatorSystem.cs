@@ -15,10 +15,6 @@ public abstract partial class SharedTypingIndicatorSystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IGameTiming _timing = default!;
 
-    /// <summary>
-    ///     Default ID of <see cref="TypingIndicatorPrototype"/>
-    /// </summary>
-    [ValidatePrototypeId<TypingIndicatorPrototype>]
     public const string InitialIndicatorId = "default";
 
     public override void Initialize()

@@ -51,6 +51,7 @@
 #  - SiikMaasTranslatorImplanter
 #  - MarishTranslatorImplanter
 #  - NewKinPidginTranslatorImplanter
+#  - CadrisTranslatorImplanter # Forge-Change
 #  - AnimalTranslator
 #  - XenoTranslator
 #  technologyPrerequisites:

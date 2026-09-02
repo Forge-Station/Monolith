@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/10/2026 17:50:37
-  entityCount: 2078
+  time: 08/18/2026 17:59:48
+  entityCount: 2080
 maps: []
 grids:
 - 1
@@ -109,10 +109,10 @@ entities:
     - type: ThermalSignature
     - type: SpreaderGrid
       spreadQueues:
-        Puddle: []
         Kudzu: []
-        Smoke: []
         MetalFoam: []
+        Puddle: []
+        Smoke: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -10009,12 +10009,6 @@ entities:
       parent: 1
 - proto: Railing
   entities:
-  - uid: 1489
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -0.5,2.5
-      parent: 1
   - uid: 1490
     components:
     - type: Transform
@@ -10513,6 +10507,18 @@ entities:
     - type: Transform
       pos: -1.5,9.5
       parent: 1
+- proto: StationRadioReceiver
+  entities:
+  - uid: 2063
+    components:
+    - type: Transform
+      pos: -0.5,2.5
+      parent: 1
+  - uid: 2080
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
 - proto: StructureGunRackMercenary
   entities:
   - uid: 1563
@@ -10576,6 +10582,12 @@ entities:
       parent: 1
 - proto: TableReinforced
   entities:
+  - uid: 1489
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -0.5,2.5
+      parent: 1
   - uid: 1573
     components:
     - type: Transform
@@ -13401,10 +13413,10 @@ entities:
       parent: 1
 - proto: WaterCooler
   entities:
-  - uid: 2063
+  - uid: 2079
     components:
     - type: Transform
-      pos: -0.5,2.5
+      pos: -0.5,1.5
       parent: 1
 - proto: WeaponTurretAK570
   entities:

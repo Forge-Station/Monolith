@@ -16,7 +16,7 @@
     - reagents: [Water, SpaceCleaner]
       methods: [Touch]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashReaction #Forge-Change
   - type: DamageOnHighSpeedImpact
     damage:
       types:
@@ -25,7 +25,7 @@
       path: /Audio/Effects/hit_kick.ogg
   - type: Damageable
     damageContainer: Silicon
-    damageModifierSet: IPC
+    damageModifierSet: ForgeIPC #forge-Change
   - type: InteractionOutline
   - type: MovementSpeedModifier
     baseWalkSpeed: 4

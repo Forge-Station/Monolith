@@ -51,6 +51,8 @@
       - UsspTrackingImplant # Mono
       - ForgeVoiceModuleImplant # Forge-Change
       - OverlordImplant # Forge-change
+      - TranexamicImplant # Forge-change
+      - TranexamicImplantDose # Forge-change
       deimplantFailureDamage:
         types:
 #          Cellular: 5 # 50->5 - Mono
@@ -140,7 +142,7 @@
 
 - type: entity
   id: BaseImplantOnlyImplanterSyndi
-  parent: BaseImplantOnlyImplanter
+  parent: [BaseImplantOnlyImplanter, BaseFactionGearOtherFactionT2]
   name: syndicate implanter
   description: A compact disposable syringe exclusively designed for the injection of subdermal implants.
   abstract: true

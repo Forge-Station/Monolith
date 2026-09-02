@@ -37,6 +37,11 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.05
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: Silverjack
@@ -175,3 +180,8 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.03
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End

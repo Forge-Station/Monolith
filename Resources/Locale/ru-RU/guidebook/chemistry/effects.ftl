@@ -291,6 +291,11 @@ reagent-effect-guidebook-reset-narcolepsy =
         [1] Предотвращает
        *[other] предотвращают
     } приступы нарколепсии
+reagent-effect-guidebook-lactozitium-reaction =
+    { $chance ->
+        [1] Вызывает
+       *[other] вызывают
+    } приступ газов, рвоты и отрыжки у существ с непереносимостью лактозита
 reagent-effect-guidebook-wash-cream-pie-reaction =
     { $chance ->
         [1] Смывает

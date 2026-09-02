@@ -23,6 +23,7 @@ using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Kitchen.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Audio;
 using Content.Server.Lightning;
@@ -74,7 +75,6 @@ namespace Content.Server.Kitchen.EntitySystems
         [Dependency] private IAdminLogManager _adminLogger = default!;
         [Dependency] private SharedSuicideSystem _suicide = default!;
 
-        [ValidatePrototypeId<EntityPrototype>]
         private const string MalfunctionSpark = "Spark";
 
         private static readonly ProtoId<TagPrototype> MetalTag = "Metal";

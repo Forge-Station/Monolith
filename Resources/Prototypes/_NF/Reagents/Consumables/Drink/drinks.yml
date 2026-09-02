@@ -274,3 +274,16 @@
   metamorphicMaxFillLevels: 8
   metamorphicFillBaseName: fill
   metamorphicChangeColor: false
+  # Forge-change-Start
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.06
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+  # Forge-change-End

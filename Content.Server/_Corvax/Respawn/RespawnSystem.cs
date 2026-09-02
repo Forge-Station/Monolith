@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices;
-using Content.Server.Ghost.Roles.Components;
 using Content.Shared._Corvax.Respawn;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -28,6 +27,7 @@ public sealed partial class RespawnSystem : EntitySystem
 
     private float _respawnTimeOnFirstCryo = 0f; // Frontier: shorter time for cryo respawns
     private float _respawnTime = 0f;
+    private float _ghostRoleRespawnTime = 0f; // Forge: penalty for ghosting from non-lobby bodies
 
     // Frontier: struct for respawn lookup
     private sealed class RespawnData
@@ -40,6 +40,12 @@ public sealed partial class RespawnSystem : EntitySystem
 
     [ViewVariables]
     private Dictionary<NetUserId, RespawnData> _respawnInfo = new(); // Frontier: struct for complete respawn info
+
+    /// <summary>
+    /// The body the player spawned into from the lobby this round. Ghosting from anything else uses the longer timer.
+    /// </summary>
+    private readonly Dictionary<NetUserId, NetEntity> _lobbySpawnEntities = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<MindContainerComponent, MobStateChangedEvent>(OnMobStateChanged);
@@ -47,12 +53,14 @@ public sealed partial class RespawnSystem : EntitySystem
         SubscribeLocalEvent<MindContainerComponent, CryosleepBeforeMindRemovedEvent>(OnCryoBeforeMindRemoved);
         SubscribeLocalEvent<MindContainerComponent, CryosleepWakeUpEvent>(OnCryoWakeUp);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart); // Frontier
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete); // Forge
 
         _admin.OnPermsChanged += OnAdminPermsChanged; // Frontier
         _player.PlayerStatusChanged += PlayerStatusChanged; // Frontier
 
         Subs.CVar(_cfg, NFCCVars.RespawnCryoFirstTime, OnRespawnCryoFirstTimeChanged, true); // Frontier
         Subs.CVar(_cfg, NFCCVars.RespawnTime, OnRespawnCryoTimeChanged, true); // Frontier
+        Subs.CVar(_cfg, NFCCVars.RespawnGhostRoleTime, OnRespawnGhostRoleTimeChanged, true); // Forge
     }
 
     // Frontier: CVar setters
@@ -65,6 +73,11 @@ public sealed partial class RespawnSystem : EntitySystem
     {
         _respawnTime = value;
     }
+
+    private void OnRespawnGhostRoleTimeChanged(float value)
+    {
+        _ghostRoleRespawnTime = value;
+    }
     // End Frontier
 
     private void OnMobStateChanged(EntityUid entity, MindContainerComponent component, MobStateChangedEvent e)
@@ -76,7 +89,7 @@ public sealed partial class RespawnSystem : EntitySystem
             return;
 
         var respawnData = GetRespawnData(session.UserId);
-        SetRespawnTime(session.UserId, ref respawnData, _timing.CurTime + TimeSpan.FromSeconds(_respawnTime));
+        SetRespawnTime(session.UserId, ref respawnData, _timing.CurTime + TimeSpan.FromSeconds(GetRespawnDelay(session.UserId, entity)));
     }
 
     private void OnMindRemoved(EntityUid entity, MindContainerComponent _, MindRemovedMessage e)
@@ -89,9 +102,6 @@ public sealed partial class RespawnSystem : EntitySystem
             return;
 
         // Frontier: extra conditions for respawn lenience
-        if (HasComp<GhostRoleComponent>(entity)) // Don't penalize user for exiting ghost roles
-            return; // Frontier: don't penalize user for exiting ghost roles
-
         if (HasComp<GhostComponent>(entity)) // Don't penalize user for reobserving
             return;
 
@@ -110,7 +120,7 @@ public sealed partial class RespawnSystem : EntitySystem
             return;
         // End Frontier
 
-        SetRespawnTime(userId, ref respawnInfo, _timing.CurTime + TimeSpan.FromSeconds(_respawnTime));
+        SetRespawnTime(userId, ref respawnInfo, _timing.CurTime + TimeSpan.FromSeconds(GetRespawnDelay(userId, entity)));
     }
 
     // Frontier: admin permissions handler: clear respawn data for admins
@@ -200,6 +210,31 @@ public sealed partial class RespawnSystem : EntitySystem
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
         _respawnInfo.Clear();
+        _lobbySpawnEntities.Clear();
     }
     // End Frontier
+
+    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
+    {
+        _lobbySpawnEntities[ev.Player.UserId] = GetNetEntity(ev.Mob);
+    }
+
+    /// <summary>
+    /// Lobby-joined characters keep the normal death timer. Anything else (ghost roles, possessed items, etc.)
+    /// uses the longer ghost-role respawn penalty.
+    /// </summary>
+    private float GetRespawnDelay(NetUserId userId, EntityUid entity)
+    {
+        if (IsOriginalLobbySpawn(userId, entity))
+            return _respawnTime;
+
+        return _ghostRoleRespawnTime;
+    }
+
+    private bool IsOriginalLobbySpawn(NetUserId userId, EntityUid entity)
+    {
+        return _lobbySpawnEntities.TryGetValue(userId, out var original)
+               && TryGetEntity(original, out var originalUid)
+               && originalUid == entity;
+    }
 }

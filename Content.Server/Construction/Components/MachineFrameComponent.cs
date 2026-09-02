@@ -5,7 +5,7 @@ using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary; // Frontier: upgradeable machine parts
+ // Frontier: upgradeable machine parts
 
 namespace Content.Server.Construction.Components
 {

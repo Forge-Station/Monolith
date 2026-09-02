@@ -1,5 +1,7 @@
+<!-- Forge-Change: VerticalExpand so the dock radar fills a resized shuttle window. -->
 <controls:BoxContainer Visible="False"
                HorizontalExpand="True"
+               VerticalExpand="True"
                xmlns:controls="https://spacestation14.io"
                xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls"
                xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
@@ -10,7 +12,8 @@
                        VerticalExpand="True"
                        HorizontalExpand="True"
                        Margin="5 4 10 5"/>
-    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+    <!-- Forge-Change-Start: sidebar stays 256px and scrolls when the window is short. -->
+    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="False" Margin="4 4 4 4">
         <controls:PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#525252" BackgroundColor="#3d474d"/>
         </controls:PanelContainer.PanelOverride>
@@ -18,71 +21,65 @@
             <controls:PanelContainer.PanelOverride>
                 <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
             </controls:PanelContainer.PanelOverride>
-    <controls:BoxContainer Name="RightDisplayDock"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Center"
-                           MinWidth="256"
-                           MaxWidth="256"
-                           Align="Center"
-                           Margin="5 5 5 5"
-                           Orientation="Vertical">
-        <!-- FTL Lock Section -->
-        <controls1:StripeBack MinSize="48 48">
-            <controls:Label Text="{controls:Loc 'shuttle-console-ftl-lock'}" HorizontalAlignment="Center"/>
-        </controls1:StripeBack>
-        <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-            <controls:PanelContainer.PanelOverride>
-                <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#121212"/>
-            </controls:PanelContainer.PanelOverride>
-        <controls:BoxContainer Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="5 5 5 5">
-            <controls:Button Name="FTLLockEnabledButton"
-                             Text="{controls:Loc 'shuttle-console-ftl-lock-enabled'}"
-                             ToggleMode="True"
-                             HorizontalExpand="True"
-                             StyleClasses="OpenRight"/>
-            <controls:Button Name="FTLLockDisabledButton"
-                             Text="{controls:Loc 'shuttle-console-ftl-lock-disabled'}"
-                             ToggleMode="True"
-                             HorizontalExpand="True"
-                             StyleClasses="OpenLeft"/>
-        </controls:BoxContainer>
-        </controls:PanelContainer>
+            <controls:ScrollContainer VerticalExpand="True"
+                                      HorizontalExpand="True"
+                                      HScrollEnabled="False"
+                                      VScrollEnabled="True"
+                                      MinWidth="256"
+                                      MaxWidth="256">
+                <controls:BoxContainer Name="RightDisplayDock"
+                                       VerticalAlignment="Top"
+                                       HorizontalAlignment="Stretch"
+                                       HorizontalExpand="True"
+                                       VerticalExpand="False"
+                                       MinWidth="240"
+                                       Margin="5 5 5 5"
+                                       Orientation="Vertical">
+                    <!-- FTL Lock Section -->
+                    <controls1:StripeBack MinSize="48 48">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-ftl-lock'}" HorizontalAlignment="Center"/>
+                    </controls1:StripeBack>
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
+                        <controls:PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#121212"/>
+                        </controls:PanelContainer.PanelOverride>
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="5 5 5 5">
+                            <controls:Button Name="FTLLockEnabledButton"
+                                             Text="{controls:Loc 'shuttle-console-ftl-lock-enabled'}"
+                                             ToggleMode="True"
+                                             HorizontalExpand="True"
+                                             VerticalExpand="False"
+                                             StyleClasses="OpenRight"/> <!-- Forge-Change: compact in the scroll sidebar -->
+                            <controls:Button Name="FTLLockDisabledButton"
+                                             Text="{controls:Loc 'shuttle-console-ftl-lock-disabled'}"
+                                             ToggleMode="True"
+                                             HorizontalExpand="True"
+                                             VerticalExpand="False"
+                                             StyleClasses="OpenLeft"/> <!-- Forge-Change: compact in the scroll sidebar -->
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
 
-        <!-- Docks Section -->
-        <controls1:StripeBack MinSize="48 48">
-            <controls:Label Text="{controls:Loc 'shuttle-console-docks-label'}" HorizontalAlignment="Center"/>
-        </controls1:StripeBack>
-        <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-            <controls:PanelContainer.PanelOverride>
-                <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
-            </controls:PanelContainer.PanelOverride>
-            <controls:BoxContainer Orientation="Vertical" HorizontalAlignment="Center" Margin="5 5 5 5">
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                    <controls:PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#121212"/>
-                    </controls:PanelContainer.PanelOverride>
-        <controls:Button Name="UndockAllButton"
-                         Text="{controls:Loc 'shuttle-console-undock-all'}"
-                         Margin="5 5 5 5"
-                         StyleClasses="ButtonSquare"/>
-                </controls:PanelContainer>
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
-                    <controls:PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#121212"/>
-                    </controls:PanelContainer.PanelOverride>
-            <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="1 1 1 1">
-                <controls:PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
-                </controls:PanelContainer.PanelOverride>
-        <controls:ScrollContainer VerticalExpand="True" HScrollEnabled="False"
-                                  ReturnMeasure="True"  Margin="2 2 2 2">
-            <controls:BoxContainer Name="DockPorts" Orientation="Vertical"/>
-        </controls:ScrollContainer>
+                    <!-- Docks Section -->
+                    <controls1:StripeBack MinSize="48 48">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-docks-label'}" HorizontalAlignment="Center"/>
+                    </controls1:StripeBack>
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
+                        <controls:PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                        </controls:PanelContainer.PanelOverride>
+                        <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="5 5 5 5">
+                            <controls:Button Name="UndockAllButton"
+                                             Text="{controls:Loc 'shuttle-console-undock-all'}"
+                                             HorizontalExpand="True"
+                                             VerticalExpand="False"
+                                             Margin="0 0 0 6"
+                                             StyleClasses="ButtonSquare"/> <!-- Forge-Change: compact; do not stretch to fill the sidebar -->
+                            <controls:BoxContainer Name="DockPorts" Orientation="Vertical" HorizontalExpand="True"/>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                </controls:BoxContainer>
+            </controls:ScrollContainer>
         </controls:PanelContainer>
-        </controls:PanelContainer>
-    </controls:BoxContainer>
-        </controls:PanelContainer>
-    </controls:BoxContainer>
     </controls:PanelContainer>
-    </controls:PanelContainer>
+    <!-- Forge-Change-End -->
 </controls:BoxContainer>

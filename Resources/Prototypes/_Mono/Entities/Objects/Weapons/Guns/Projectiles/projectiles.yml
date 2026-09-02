@@ -1,6 +1,6 @@
 - type: entity
-  name: 45_magnum bolt
-  id: BulletEnergyGun45_magnum
+  name: 357_magnum bolt
+  id: BulletEnergyGun357_magnum
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
@@ -33,6 +33,7 @@
     damage:
       types:
         Heat: 35
+    armorPenetration: 0.1 # Forge-change
     soundHit:
       collection: MeatLaserImpact
 
@@ -51,8 +52,9 @@
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Heat: 80
-        Structural: 1000 # So it can break cover
+        Heat: 50 # Forge-change 80->50
+        Structural: 100 # Forge-change 1000->100
+    armorPenetration: 0.25 # Forge-change
 
 - type: entity
   id: HeavyPulseExp
@@ -69,13 +71,13 @@
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Heat: 300
-        Structural: 4500 # So it can break shuttles
+        Heat: 30 # Forge-change 50->30
+        Structural: 50 # Forge-change 4500->50
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    totalIntensity: 50
-    intensitySlope: 2
+    totalIntensity: 125 # Forge-change 50->125
+    intensitySlope: 5 # Forge-change 2->5
     maxIntensity: 5
 
 - type: entity
@@ -93,8 +95,9 @@
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Heat: 55
-        Structural: 300
+        Heat: 60 # Forge-change 55->60
+        Structural: 175 # Forge-change 300->175
+    armorPenetration: 0.15 # Forge-change
 
 - type: entity
   id: BulletLaserPellet
@@ -111,8 +114,9 @@
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Heat: 15
-        Structural: 12
+        Heat: 18 # Forge-change 15->18
+        Structural: 35 # Forge-change 12->35
+    armorPenetration: 0.2 # Forge-change
 
 - type: entity
   id: BulletLaserSpreadMono

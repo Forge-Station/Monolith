@@ -95,7 +95,12 @@ namespace Content.Client.Inventory
 
             _strippingMenu.ClearButtons();
 
-            if (EntMan.TryGetComponent<InventoryComponent>(Owner, out var inv))
+            // Forge-Change: hoist so window sizing below can reuse the same components.
+            InventoryComponent? inv = null;
+            HandsComponent? handsComp = null;
+            EnsnareableComponent? snare = null;
+
+            if (EntMan.TryGetComponent(Owner, out inv))
             {
                 foreach (var slot in inv.Slots)
                 {
@@ -103,7 +108,7 @@ namespace Content.Client.Inventory
                 }
             }
 
-            if (EntMan.TryGetComponent<HandsComponent>(Owner, out var handsComp) && handsComp.CanBeStripped)
+            if (EntMan.TryGetComponent(Owner, out handsComp) && handsComp.CanBeStripped)
             {
                 // good ol hands shit code. there is a GuiHands comparer that does the same thing... but these are hands
                 // and not gui hands... which are different...
@@ -133,7 +138,7 @@ namespace Content.Client.Inventory
             }
 
             // snare-removal button. This is just the old button before the change to item slots. It is pretty out of place.
-            if (EntMan.TryGetComponent<EnsnareableComponent>(Owner, out var snare) && snare.IsEnsnared)
+            if (EntMan.TryGetComponent(Owner, out snare) && snare.IsEnsnared)
             {
                 var button = new Button()
                 {
@@ -146,16 +151,38 @@ namespace Content.Client.Inventory
                 _strippingMenu.SnareContainer.AddChild(button);
             }
 
-            // TODO fix layout container measuring (its broken atm).
-            // _strippingMenu.InvalidateMeasure();
-            // _strippingMenu.Contents.Measure(Vector2Helpers.Infinity);
+            // Forge-Change-Start: size the window from the visible slot grid so the back/belt row is never clipped.
+            // NPC templates park unstrippable slots at 20+ so they sit outside the vanilla window; do not grow to fit those.
+            const int hiddenSlotPos = 10;
+            var cell = SlotControl.DefaultButtonSize + ButtonSeparation;
+            var maxPos = Vector2i.Zero;
+            if (inv != null)
+            {
+                foreach (var slot in inv.Slots)
+                {
+                    var pos = slot.StrippingWindowPos;
+                    if (pos.X >= hiddenSlotPos || pos.Y >= hiddenSlotPos)
+                        continue;
 
-            // TODO allow windows to resize based on content's desired size
+                    maxPos = Vector2i.ComponentMax(maxPos, pos);
+                }
+            }
 
-            // for now: shit-code
-            // this breaks for drones (too many hands, lots of empty vertical space), and looks shit for monkeys and the like.
-            // but the window is realizable, so eh.
-            _strippingMenu.SetSize = new Vector2(300, snare?.IsEnsnared == true ? 550 : 530);
+            var hands = handsComp is { CanBeStripped: true } ? handsComp.Hands.Count : 0;
+            var width = Math.Max(220f, (maxPos.X + 1) * cell + 40f);
+            var height = (maxPos.Y + 1) * cell + 88f + hands * cell;
+            if (snare?.IsEnsnared == true)
+                height += 40f;
+
+            var viewport = _ui.WindowRoot.Size;
+            if (viewport.X > 1 && viewport.Y > 1)
+            {
+                width = Math.Min(width, MathF.Max(280f, viewport.X * 0.5f));
+                height = Math.Min(height, MathF.Max(360f, viewport.Y * 0.85f));
+            }
+
+            _strippingMenu.SetSize = new Vector2(width, height);
+            // Forge-Change-End
         }
 
         private void AddHandButton(Hand hand)

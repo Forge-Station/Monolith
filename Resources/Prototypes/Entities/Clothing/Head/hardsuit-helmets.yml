@@ -220,7 +220,7 @@
 
 #Security Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitSecurity
   name: security hardsuit helmet
   description: Armored hardsuit helmet for security needs.
@@ -237,14 +237,14 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
+        Blunt: 0.95 # Forge-change 0.9 -> 0.95
+        Slash: 0.95 # Forge-change 0.9 -> 0.95
+        Piercing: 0.95 # Forge-change 0.9 -> 0.95
+        Heat: 0.95 # Forge-change 0.9 -> 0.95
 
 #Brigmedic Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision2Normal ] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitBrigmedic
   name: brigmedic hardsuit helmet
   description: The lightweight helmet of the brigmedic hardsuit. Protects against viruses, and clowns.
@@ -262,15 +262,15 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.95
-        Radiation: 0.90
-        Caustic: 0.90
+        # Radiation: 0.90 # Forge-change
+        # Caustic: 0.90 # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
 
 #Warden's Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ClothingNightVision2Normal ] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitWarden
   name: warden's hardsuit helmet
   description: A modified riot helmet. Oddly comfortable.
@@ -286,26 +286,37 @@
     lowPressureMultiplier: 1000
   - type: Armor
     modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
+      flatReductions: # Forge-change
+        Blunt: 10 # Forge-change
+        Slash: 10 # Forge-change
+        Piercing: 10 # Forge-change
+      # coefficients: # Forge-change
+      #   Blunt: 0.9 # Forge-change
+      #   Slash: 0.9 # Forge-change
+      #   Piercing: 0.9 # Forge-change
+      #   Heat: 0.9 # Forge-change
 
 #Captain's Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Normal ] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitCap
   name: captain's hardsuit helmet
   description: Special hardsuit helmet, made for the captain of the station.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/capspace.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/capspace.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/capspace.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/capspace.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
+  - type: Armor # Forge-change
+    modifiers: # Forge-change
+      coefficients: # Forge-change
+        Blunt: 0.95 # Forge-change
+        Slash: 0.95 # Forge-change
+        Piercing: 0.95 # Forge-change
+        Heat: 0.95 # Forge-change
 
 #Chief Engineer's Hardsuit
 - type: entity
@@ -363,24 +374,24 @@
   - type: NightVision # Gen 4 quadtube-wide
     relayOverlay: true
     goggleEffect: true
-    viewCircleRadius: 450
-    viewCircleCount: 4
+    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
+    viewCircleCount: 2
     viewCircleSpacing: 280
-    action: ActionToggleNightVision
-    phosphorColor: "#41D7D9"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
 
 #Head of Security's hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision2Normal ] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitSecurityRed
   name: head of security's hardsuit helmet
   description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the HoS.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/security-red.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/security-red.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/security-red.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/security-red.rsi
   - type: PointLight
     color: "#ffeead"
   - type: PressureProtection
@@ -388,11 +399,15 @@
     lowPressureMultiplier: 1000
   - type: Armor
     modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
+      flatReductions: # Forge-change
+        Blunt: 10 # Forge-change
+        Slash: 10 # Forge-change
+        Piercing: 10 # Forge-change
+      # coefficients: # Forge-change
+      #   Blunt: 0.9 # Forge-change
+      #   Slash: 0.9 # Forge-change
+      #   Piercing: 0.9 # Forge-change
+      #   Heat: 0.9 # Forge-change
 
 #Luxury Mining Hardsuit
 - type: entity
@@ -416,15 +431,15 @@
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision2Normal ] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitSyndie
   name: blood-red hardsuit helmet
   description: A heavily armored helmet designed for work in special operations. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/syndicate.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/syndicate.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/syndicate.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/syndicate.rsi # Forge-change
   - type: PointLight
     radius: 5 # Mono
     color: green
@@ -441,15 +456,15 @@
 
 #Blood-red Medic Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase , ShowMedicalIcons]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase , ShowMedicalIcons, ClothingNightVision2Normal, ShowSecurityIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitSyndieMedic
   name: blood-red medic hardsuit helmet
   description: An advanced red hardsuit helmet specifically designed for field medic operations. Comes with a built-in medical HUD.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/syndiemedic.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/syndiemedic.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/syndiemedic.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/syndiemedic.rsi # Forge-change
   - type: PointLight
     radius: 5 # Mono
     color: green
@@ -466,48 +481,60 @@
 
 #Syndicate Elite Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision4Normal ] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitSyndieElite
   name: syndicate elite helmet
   description: An elite version of the blood-red hardsuit's helmet, with improved armor and fireproofing. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/syndieelite.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/syndieelite.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/syndieelite.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/syndieelite.rsi # Forge-change
   - type: PointLight
     radius: 5 # Mono
     color: red
+  - type: ThermalVision # Forge-change
+    flashDurationMultiplier: 2 # Forge-change
+    pulseTime: 3 # Forge-change
+    isEquipment: true # Forge-change
+    toggleAction: PulseThermalVision # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
     heatingCoefficient: 0.005
     coolingCoefficient: 0.005
-  - type: FireProtection
-    reduction: 0.2
+  # - type: FireProtection # Forge-change
+  #   reduction: 0.2 # Forge-change
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
-        Heat: 0.9
+        # Heat: 0.9 # Forge-change
+      flatReductions: # Forge-change
+        Heat: 10 # Forge-change
 
 #Syndicate Commander Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowSecurityIcons]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision4Normal, ShowMedicalIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary and add ShowMedicalIcons
   id: ClothingHeadHelmetHardsuitSyndieCommander
   name: syndicate commander helmet
   description: A bulked up version of the blood-red hardsuit's helmet, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/syndiecommander.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/syndiecommander.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/syndiecommander.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/syndiecommander.rsi # Forge-change
   - type: PointLight
     radius: 5 # Mono
     color: green
+  - type: ThermalVision # Forge-change
+    flashDurationMultiplier: 2 # Forge-change
+    pulseTime: 3 # Forge-change
+    isEquipment: true # Forge-change
+    toggleAction: PulseThermalVision # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -521,25 +548,29 @@
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowSecurityIcons, ClothingNightVision4Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitCybersun
   name: cybersun juggernaut helmet
   description: Made of compressed red matter, this helmet was designed in the Tau chromosphere facility.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/cybersun.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/cybersun.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/cybersun.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/cybersun.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
   - type: Armor
     modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
+      flatReductions: # Forge-change
+        Blunt: 15 # Forge-change
+        Slash: 15 # Forge-change
+        Piercing: 15 # Forge-change
+      # coefficients: # Forge-change
+      #   Blunt: 0.9 # Forge-change
+      #   Slash: 0.9 # Forge-change
+      #   Piercing: 0.9 # Forge-change
+      #   Heat: 0.9 # Forge-change
 
 #Wizard Hardsuit
 - type: entity
@@ -616,7 +647,7 @@
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndieCommander
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Normal, ShowSecurityIcons, ShowMedicalIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary and add ShowMedicalIcons
   id: ClothingHeadHelmetHardsuitERTLeader
   name: ERT leader hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -627,6 +658,11 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertleader.rsi
   - type: PointLight
     color: "#addbff"
+  - type: ThermalVision # Forge-change
+    flashDurationMultiplier: 2 # Forge-change
+    pulseTime: 3 # Forge-change
+    isEquipment: true # Forge-change
+    toggleAction: PulseThermalVision # Forge-change
   - type: Armor
     modifiers:
       coefficients:
@@ -637,7 +673,7 @@
 
 #ERT Chaplain Hardsuit
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitERTChaplain
   name: ERT chaplain hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -648,10 +684,16 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertchaplain.rsi
   - type: PointLight
     color: "#ffffff"
+  - type: Armor # Forge-change
+    modifiers: # Forge-change
+      flatReductions: # Forge-change
+        Blunt: 15 # Forge-change
+        Slash: 15 # Forge-change
+        Piercing: 15 # Forge-change
 
 #ERT Engineer Hardsuit
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitERTEngineer
   name: ERT engineer hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -672,7 +714,7 @@
 
 #ERT Medical Hardsuit
 - type: entity
-  parent: [ ClothingHeadHelmetHardsuitSyndieElite, ShowMedicalIcons ] # Mono - Added ShowMedicalIcons
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Normal, ShowSecurityIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary and add ShowMedicalIcons
   id: ClothingHeadHelmetHardsuitERTMedical
   name: ERT medic hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team. Comes with a built-in medical HUD. # Mono
@@ -683,10 +725,17 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertmedical.rsi
   - type: PointLight
     color: "#adffec"
+  - type: Armor # Forge-change
+    modifiers: # Forge-change
+      coefficients: # Forge-change
+        Blunt: 0.9 # Forge-change
+        Slash: 0.9 # Forge-change
+        Piercing: 0.9 # Forge-change
+        Heat: 0.9 # Forge-change
 
 #ERT Security Hardsuit
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary and add ShowMedicalIcons 
   id: ClothingHeadHelmetHardsuitERTSecurity
   name: ERT security hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -707,7 +756,7 @@
 
 #ERT Janitor Hardsuit
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitERTJanitor
   name: ERT janitor hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -718,10 +767,17 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertjanitor.rsi
   - type: PointLight
     color: "#cbadff"
+  - type: Armor # Forge-change
+    modifiers: # Forge-change
+      coefficients: # Forge-change
+        Blunt: 0.95 # Forge-change
+        Slash: 0.95 # Forge-change
+        Piercing: 0.95 # Forge-change
+        Heat: 0.95 # Forge-change
 
 #CBURN Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ClothingNightVision4Normal, ShowSecurityIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary and add ShowMedicalIcons  
   id: ClothingHeadHelmetCBURN
   name: CBURN exosuit helmet
   description: A pressure resistant and fireproof hood worn by special cleanup units.
@@ -756,7 +812,9 @@
         Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
-        Heat: 0.9
+        # Heat: 0.95 # Forge-change
+      flatReductions: # Forge-change
+        Heat: 10 # Forge-change
 
 #Deathsquad Hardsuit
 - type: entity

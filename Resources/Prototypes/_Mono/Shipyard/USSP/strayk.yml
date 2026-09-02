@@ -5,10 +5,10 @@
   parent: BaseVesselAntag
   name: NCS Strayk
   description: A poorly equipped and cramped strike craft. Outfitted with 2 torpedo launchers and 1 30mm chaingun, and capable of detecting invisible targets.
-  price: 45820
+  price: 66109
   category: Small
   group: Ussp
-  access: USSP
+  access: Mercenary # Forge-change: Ussp to Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/strayk.yml
   guidebookPage: Null
   class:
@@ -33,5 +33,6 @@
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-           USSPSergeant: [ 0, 0 ]
-           USSPRifleman: [ 0, 0 ]
+           Contractor: [ 0, 0 ] # Forge-change: Ussp Rolesto Contractor
+           Pilot: [ 0, 0 ] # Forge-change: Ussp Roles to Pilot
+           Mercenary: [ 0, 0 ] # Forge-change: Ussp Roles to Mercenary

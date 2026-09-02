@@ -229,8 +229,9 @@ public sealed partial class SalvageSystem
 
         component.ActiveMission = 0;
         component.Cooldown = true;
-        if (shuttle != null) // Frontier
-            UpdateConsoles(shuttle.Value, component); // Frontier
+        // Frontier: 4th arg is owning station (misnamed shuttle at call sites)
+        if (shuttle != null)
+            UpdateConsoles(shuttle.Value, component);
     }
 
     /// <summary>
@@ -315,7 +316,7 @@ public sealed partial class SalvageSystem
             SalvageJobTime,
             EntityManager,
             _timing,
-            _mapManager,
+            _mapSystem,
             _prototypeManager,
             _anchorable,
             _biome,
@@ -326,7 +327,6 @@ public sealed partial class SalvageSystem
             _metaData,
             this,
             _transform,
-            _mapSystem,
             station,
             coordinatesDisk,
             missionParams,

@@ -5,6 +5,11 @@
   id: BaseMobAsakim
   abstract: true
   components:
+  # Forge-Change-Start
+  - type: ShowRoleInformation
+    window: RoleInformationAsakim
+    duration: 15
+  #Forge-Change-End
   - type: HumanoidAppearance
     species: Asakim
     hideLayersOnEquip:
@@ -141,9 +146,6 @@
           32:
             sprite: _White/Mobs/Species/displacement.rsi
             state: shoes
-  - type: GuideHelp
-    guides:
-    - Asakim
     # WWDP-Edit-End
 
 - type: entity

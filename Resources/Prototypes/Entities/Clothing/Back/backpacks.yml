@@ -298,7 +298,7 @@
 
 #Special
 - type: entity
-  parent: NFClothingBackpack # Frontier: ClothingBackpack<NFClothingBackpack
+  parent: [ NFClothingBackpack, BaseFactionGearOtherFactionT3 ] # Frontier: ClothingBackpack<NFClothingBackpack // Forge forbidden ADS
   id: ClothingBackpackHolding
   name: bag of holding
   description: A backpack that opens into a localized pocket of bluespace.

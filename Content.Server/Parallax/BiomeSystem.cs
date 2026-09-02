@@ -27,7 +27,6 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
 {
     [Dependency] private IConfigurationManager _configManager = default!;
     [Dependency] private IConsoleHost _console = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IParallelManager _parallel = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
@@ -83,6 +82,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         SubscribeLocalEvent<BiomeComponent, MapInitEvent>(OnBiomeMapInit);
         SubscribeLocalEvent<FTLStartedEvent>(OnFTLStarted);
         SubscribeLocalEvent<ShuttleFlattenEvent>(OnShuttleFlatten);
+        SubscribeLocalEvent<EntityTerminatingEvent>(OnEntityTerminating);
         Subs.CVar(_configManager, CVars.NetMaxUpdateRange, SetLoadRange, true);
         InitializeChunkLoader();
         InitializeMarkerProcessor();
@@ -104,6 +104,37 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         var preloadArea = new Vector2(32f, 32f);
         var targetArea = new Box2(targetMap.Position - preloadArea, targetMap.Position + preloadArea);
         Preload(targetMapUid, biome, targetArea);
+    }
+
+    private void OnEntityTerminating(ref EntityTerminatingEvent ev)
+    {
+        var uid = ev.Entity.Owner;
+
+        if (!_xformQuery.TryGetComponent(uid, out var xform) ||
+            xform.GridUid is not { } gridUid ||
+            !_biomeQuery.TryGetComponent(gridUid, out var biome) ||
+            !TryComp<MapGridComponent>(gridUid, out var grid))
+        {
+            return;
+        }
+
+        var tile = _mapSystem.LocalToTile(gridUid, grid, xform.Coordinates);
+        var chunk = SharedMapSystem.GetChunkIndices(tile, ChunkSize) * ChunkSize;
+
+        if (biome.LoadedEntities.TryGetValue(chunk, out var loaded) && loaded.Remove(uid))
+        {
+            biome.ModifiedTiles.GetOrNew(chunk).Add(tile);
+            return;
+        }
+
+        foreach (var (chunkOrigin, entities) in biome.LoadedEntities)
+        {
+            if (!entities.Remove(uid, out var storedTile))
+                continue;
+
+            biome.ModifiedTiles.GetOrNew(chunkOrigin).Add(storedTile);
+            return;
+        }
     }
 
     private void OnShuttleFlatten(ref ShuttleFlattenEvent ev)

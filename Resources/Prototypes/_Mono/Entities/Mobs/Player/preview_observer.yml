@@ -16,6 +16,7 @@
     maxZoom: 8.916104, 8.916104
   - type: Eye
     drawFov: false
+    drawLight: false # Fullbright: preview map has no station lights until the shuttle grid loads.
   - type: Tag
     tags:
     - InstantDoAfters
@@ -38,8 +39,9 @@
         toggleAction: ActionPreviewShowMenu
   - type: PointLight
     netsync: false
-    radius: 6
-    enabled: false
+    radius: 15
+    energy: 1.5
+    enabled: true
   - type: Examiner
     skipChecks: true
   - type: ActionGrant

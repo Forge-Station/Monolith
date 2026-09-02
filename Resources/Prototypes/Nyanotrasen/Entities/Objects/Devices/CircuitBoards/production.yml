@@ -11,10 +11,6 @@
       requirements: # Frontier
         MatterBin: 2 # Frontier stackRequirements<requirements
         Manipulator: 2 # Frontier stackRequirements<requirements
-      tagRequirements:
-        GlassBeaker:
-          amount: 2
-          defaultPrototype: Beaker
 
 - type: entity
   id: ServiceTechFabCircuitboard
@@ -29,10 +25,6 @@
       requirements: # Frontier
         MatterBin: 2 # Frontier stackRequirements<requirements
         Manipulator: 2 # Frontier stackRequirements<requirements
-      tagRequirements:
-        GlassBeaker:
-          amount: 2
-          defaultPrototype: Beaker
 
 - type: entity
   id: DeepFryerMachineCircuitboard

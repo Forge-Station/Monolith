@@ -84,7 +84,7 @@
   - type: WirelessNetworkConnection
     range: 500
   - type: Gun
-    fireRate: 0.5
+    fireRate: 0.7
     recoil: 5 # 1/5x
     minAngle: 0
     maxAngle: 0
@@ -153,6 +153,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 350
@@ -212,6 +213,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 350
@@ -260,11 +262,12 @@
   - type: WirelessNetworkConnection
     range: 500
   - type: Gun
+    damageModifier: 2
     fireRate: 20
     recoil: 5 # 1/5x
     minAngle: 0
     maxAngle: 5
-    projectileSpeed: 220
+    projectileSpeed: 320
     shootThermalSignature: 500000 # ~5.6km with continuous fire
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/Gunshots/autopulse_laser_fire_01.ogg
@@ -272,7 +275,7 @@
       path: /Audio/Weapons/click.ogg
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 2250
+    autoRechargeRate: 1175
   - type: SpaceArtillery
     powerChargeRate: 700
     powerUsePassive: 100
@@ -322,6 +325,7 @@
     range: 500
   - type: FireControlRotate
   - type: Gun
+    damageModifier: 5
     fireRate: 5
     recoil: 2 # 2/25x
     projectileSpeed: 20
@@ -565,14 +569,15 @@
   - type: WirelessNetworkConnection
     range: 500
   - type: Gun
-    projectileSpeed: 240
+    damageModifier: 2
+    projectileSpeed: 350
     minAngle: 0
     maxAngle: 6
     fireRate: 1
     recoil: 10 # 2/5x
-    burstCooldown: 5.5
-    burstFireRate: 100
-    shotsPerBurst: 100
+    burstCooldown: 4.5
+    burstFireRate: 15
+    shotsPerBurst: 35
     selectedMode: Burst
     availableModes: Burst
     shootThermalSignature: 500000 # ~5.6km with continuous fire
@@ -580,6 +585,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/autopulse_laser_fire_01.ogg
     soundEmpty:
       path: /Audio/Weapons/click.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 30000
@@ -604,7 +610,7 @@
   - type: ShipGunType
     shipType: Energy
   - type: ShipGunClass
-    shipClass: Heavy
+    shipClass: SuperHeavy
   - type: ShipRepairable
     repairTime: 70
     repairCost: 150
@@ -656,6 +662,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/laserfire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRechargePause: true
     autoRechargePauseTime: 20
@@ -893,7 +900,7 @@
   - type: WirelessNetworkConnection
     range: 500
   - type: Gun
-    fireRate: 0.3
+    fireRate: 0.8
     recoil: 5
     minAngle: 0
     maxAngle: 0
@@ -949,19 +956,17 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
-    maxCharge: 56250 # 20 seconds of constant fire, 375 rock walls destroyed per full mag. 5 mining pulsers needed to equal its output.
+    maxCharge: 56250
     startingCharge: 56250
   - type: BatterySelfRecharger
-    autoRechargePause: true
-    autoRechargePauseTime: 30
     autoRecharge: true
-    autoRechargeRate: 56250
+    autoRechargeRate: 2500
   - type: FireControlRotate
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
   - type: Gun
-    fireRate: 20
+    fireRate: 25
     recoil: 0
     minAngle: 0
     maxAngle: 0
@@ -970,6 +975,7 @@
       path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: ShipGunClass
     shipClass: Heavy
   - type: HitscanBatteryAmmoProvider
@@ -1040,6 +1046,7 @@
       path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: ShipGunClass
     shipClass: Heavy
   - type: HitscanBatteryAmmoProvider
@@ -1076,6 +1083,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier5HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A devastating weapon, known for glassing whole fleets when used en masse
   components:
@@ -1122,6 +1130,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/glassing.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRechargePause: true
     autoRechargePauseTime: 60
@@ -1166,6 +1175,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A terrifying weapon to have aimed at you, the Reaper is an ancient piece of pre-fracture tech capable of shattering the strongest of hulls within one or two blasts.
   components:
@@ -1194,6 +1204,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 350
@@ -1246,6 +1257,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: One of the most powerful EMP weapons in sector, it is a sign of doom for its targets.
   components:
@@ -1275,6 +1287,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 800
@@ -1327,6 +1340,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier4HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A rarer, powerful cannon mounted on larger ADS units. Firing a singular particle of antimatter wrapped in energy. Annihalating sections of shuttles at a time.
   components:
@@ -1354,6 +1368,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 500
@@ -1400,6 +1415,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A potent proton cannon from before the Fracture, known for melting holes through both inorganic and organic matter with ease.
   components:
@@ -1463,6 +1479,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A burst firing neutron repeater, firing high-damage but slow balls of hell. A marvel of rapture weapons technology. Specializes in tunneling through anything that can't outmanuever it.
   components:
@@ -1531,6 +1548,7 @@
   parent:
   - BallisticArtilleryMapped # Forge-Change
   - BallisticArtilleryTier2HP
+  - BaseFactionGearOtherFactionT3 # Forge-change add parent forbidden ADS
   suffix: ADS ONLY, Для маппинга
   description: A unique pre-fracture weapon, the Flayer fires a storm of tungsten alloy darts at near the speed of light, barraging targets to pieces.
   components:

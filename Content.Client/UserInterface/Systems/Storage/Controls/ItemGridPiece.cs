@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._Forge.UserInterface; // Forge-Change
 using Content.Client.Items.Systems;
 using Content.Shared.Item;
 using Content.Shared.Storage;
@@ -113,7 +114,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
 
         var adjustedShape = _entityManager.System<ItemSystem>().GetAdjustedItemShape((Entity, itemComponent), Location.Rotation, Vector2i.Zero);
         var boundingGrid = adjustedShape.GetBoundingBox();
-        var size = _centerTexture!.Size * 2 * UIScale;
+        var size = _centerTexture!.Size * ForgeUiSizing.StorageTextureScale * UIScale; // Forge-Change
 
         var hovering = !_storageController.IsDragging && UserInterfaceManager.CurrentlyHovered == this;
         //yeah, this coloring is kinda hardcoded. deal with it. B)
@@ -169,18 +170,22 @@ public sealed class ItemGridPiece : Control, IEntityControl
 
         if (itemComponent.StoredSprite is { } storageSprite)
         {
-            var scale = 2 * UIScale;
+            var scale = ForgeUiSizing.StorageTextureScale * UIScale; // Forge-Change
             var offset = (((Box2) boundingGrid).Size - Vector2.One) * size;
             var sprite = _entityManager.System<SpriteSystem>().Frame0(storageSprite);
 
-            var spriteBox = new Box2Rotated(new Box2(0f, sprite.Height * scale, sprite.Width * scale, 0f), -iconRotation, Vector2.Zero);
+            // FromTwoPoints keeps bottom <= top. The old Box2(0, h, w, 0) inverted them and drew the icon one tile low.
+            var spriteBox = new Box2Rotated(
+                Box2.FromTwoPoints(Vector2.Zero, new Vector2(sprite.Width * scale, sprite.Height * scale)),
+                -iconRotation,
+                Vector2.Zero);
             var root = spriteBox.CalcBoundingBox().BottomLeft;
             var pos = PixelPosition * 2
                       + (Parent?.GlobalPixelPosition ?? Vector2.Zero)
                       + offset;
 
             handle.SetTransform(pos, iconRotation);
-            var box = new UIBox2(root, root + sprite.Size * scale);
+            var box = UIBox2.FromDimensions(root, sprite.Size * scale);
             handle.DrawTextureRect(sprite, box);
             handle.SetTransform(GlobalPixelPosition, Angle.Zero);
         }
@@ -189,7 +194,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
             _entityManager.System<SpriteSystem>().ForceUpdate(Entity);
             handle.DrawEntity(Entity,
                 PixelPosition + iconPosition,
-                Vector2.One * 2 * UIScale,
+                Vector2.One * ForgeUiSizing.StorageTextureScale * UIScale, // Forge-Change
                 Angle.Zero,
                 eyeRotation: iconRotation,
                 overrideDirection: Direction.South);
@@ -215,7 +220,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
     {
         foreach (var (texture, position) in _texturesPositions)
         {
-            if (!new Box2(position, position + texture.Size * 4).Contains(point))
+            if (!new Box2(position, position + texture.Size * (2f * ForgeUiSizing.StorageTextureScale)).Contains(point)) // Forge-Change
                 continue;
 
             return true;
@@ -288,7 +293,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
     {
         var boxSize = entMan.System<ItemSystem>().GetAdjustedItemShape(entity, location).GetBoundingBox().Size;
         var actualSize = new Vector2(boxSize.X + 1, boxSize.Y + 1);
-        return actualSize * new Vector2i(8, 8);
+        return actualSize * ForgeUiSizing.DefaultStorageHalfTile * ForgeUiSizing.StorageScale; // Forge-Change
     }
 
     public EntityUid? UiEntity => Entity;

@@ -328,7 +328,14 @@ public sealed partial class GunSystem : SharedGunSystem
                     Recoil(user, direction, gun.CameraRecoilScalarModified);
                     break;
             }
+        /// Forge-Change-Start
+        if(gun.DeleteOnShoot)
+        {
+            Audio.PlayPredicted(gun.SoundDestroy, gunUid, user);
         }
+
+        }
+        /// Forge-Change-End
     }
 
     private void Recoil(EntityUid? user, Vector2 recoil, float recoilScalar)

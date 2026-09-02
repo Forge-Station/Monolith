@@ -1,42 +1,38 @@
+# BSII-20 "Requiem" hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy]
   id: ClothingOuterHardsuitRenegatebsii20
   name: BSII-20 "Requiem" hardsuit
-  suffix: Ренегаты
+  suffix: Renegates
   description: A second-generation hardsuit. The first variation for mass production, and your model has already seen several battles and owners, which doesn't make it any worse.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatelight.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatelight.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatelight.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatelight.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.65
+    damageCoefficient: 0.6
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.60
-        Heat: 0.7
-        Radiation: 0.65
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.45
+        Heat: 0.55
+        Radiation: 0.4
         Caustic: 0.8
   - type: StaminaDamageResistance
-    coefficient: 0.25
+    coefficient: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.85
-  - type: SpaceFlightProfile
-    thrustMultiplier: 0.7
-    controlMultiplier: 1.15
-    fuelUsageMultiplier: 1.6
-    combatStabilityBonus: 0.1
+    walkModifier: 0.975
+    sprintModifier: 0.975
   - type: HeldSpeedModifier
-  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+  - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
@@ -48,95 +44,87 @@
     price: 5000
     vendPrice: 7500
 
+# lightweight jauggernaut hardsuit BSII-300 "Locksmith"
 - type: entity
-  parent: ClothingOuterHardsuitBase
-  id: ClothingOuterHardsuitRenegatebsii30
-  name: BSII-30 "Locksmith" hardsuit
-  suffix: Ренегаты
-  description: A modified version of the BSII-20. It's been modified with a helmet made from the hide of a large insect and a chestplate made from linked military locks. Heavy, but not unwieldy. You like heavy, right?
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileMedium]
+  id: ClothingOuterHardsuitRenegateLightweightJuggernaut
+  name: lightweight jauggernaut hardsuit BSII-300 "Locksmith"
+  suffix: Renegates
+  description: Modified version of BSII-20. Modified helmet from the skin of a large insect, and a chest from linked military locks. Heavy, but not unmanageable. You like heavy, right?
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatearmed.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatearmed.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatearmed.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatearmed.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.3
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.65
-        Slash: 0.65
-        Piercing: 0.60
-        Heat: 0.4
-        Radiation: 0.55
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.425
+        Heat: 0.5
+        Radiation: 0.275
         Caustic: 0.8
   - type: StaminaDamageResistance
-    coefficient: 0.3
+    coefficient: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.8
-    sprintModifier: 0.75
-  - type: SpaceFlightProfile
-    thrustMultiplier: 0.7
-    controlMultiplier: 1.15
-    fuelUsageMultiplier: 1.6
-    combatStabilityBonus: 0.1
+    sprintModifier: 0.8
   - type: HeldSpeedModifier
-  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+  - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitRenegatebsii30
+      head: ClothingHeadHelmetHardsuitRenegateLightweightJuggernaut
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
     price: 7000
     vendPrice: 9500
 
+# CRIII-200 "Bug" hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
-  id: ClothingOuterHardsuitRenegatecriii200 # добавить биолок если такой появится
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileMedium]
+  id: ClothingOuterHardsuitRenegatecriii200
   name: CRIII-200 "Bug" hardsuit
-  suffix: Ренегаты
+  suffix: Renegates
   description: An improved version of the second-generation hardsuits, with increased power, mobility, and protection made of polymer tungsten plates and threads. It bears the inscription "For authorized only."
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatecommand.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatecommand.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatecommand.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatecommand.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.4
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.7
-        Radiation: 0.5
+        Blunt: 0.45
+        Slash: 0.45
+        Piercing: 0.4
+        Heat: 0.4
+        Radiation: 0.3
         Caustic: 0.8
   - type: StaminaDamageResistance
     coefficient: 0.4
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
-  - type: SpaceFlightProfile
-    thrustMultiplier: 0.85
-    controlMultiplier: 1.05
-    fuelUsageMultiplier: 1.25
-    combatStabilityBonus: 0.05
+    walkModifier: 0.925
+    sprintModifier: 0.925
   - type: HeldSpeedModifier
-  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+  - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
@@ -148,103 +136,306 @@
     price: 8000
     vendPrice: 10000
 
+# OIII-18 "Omega" hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, EnergyShieldClothing ]
-  id: ClothingOuterHardsuitRenegateoiii18 # добавить биолок если такой появится
+  parent: [ ClothingOuterHardsuitBaseWithoutArmorPlates, MonoEnergyShieldClothing, ClothingFlightProfileMedium ] # добавить биолок если такой появится
+  id: ClothingOuterHardsuitRenegateEnergyShield
   name: OIII-18 "Omega" hardsuit
-  suffix: Ренегаты
+  suffix: Renegates
   description: An advanced third-generation combat suit. Polymer plates and advanced electronics—all of this made this suit possible. You've just received a model, almost factory-fresh, manufactured on Ensis.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegateadvanced.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegateadvanced.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegateadvanced.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegateadvanced.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.4
+    damageCoefficient: 0.525
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.45
-        Slash: 0.45
-        Piercing: 0.45
-        Heat: 0.8
-        Radiation: 0.7
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.75
+        Heat: 0.775
+        Radiation: 0.25
         Caustic: 0.8
   - type: StaminaDamageResistance
-    coefficient: 0.4
+    coefficient: 0.3
   - type: ClothingSpeedModifier
     walkModifier: 0.9
-    sprintModifier: 0.6
-  - type: SpaceFlightProfile
-    thrustMultiplier: 1
-    controlMultiplier: 1
-    fuelUsageMultiplier: 1
-    combatStabilityBonus: 0
+    sprintModifier: 0.9
   - type: HeldSpeedModifier
-  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+  - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitRenegateoiii18
+      head: ClothingHeadHelmetHardsuitRenegateEnergyShield
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: PersonalShield
+    shield:
+      maxCharge: 700 # 528 # 440
+      regenRate: 15.6 # 13
+      spinupTime: 1
+      breakCooldown: 16
+      powerDraw: 0.02
+      blockModifier:
+        coefficients:
+          Blunt: 1
+          Slash: 1
+          Piercing: 1
+          Heat: 1.25
+          Radiation: 0.25
+  - type: Damageable
+    damageContainer: Shield
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
   - type: StaticPrice
     price: 15000
     vendPrice: 25000
 
+# YIV3020 "Svyatogor" juggernaut suit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
-  id: ClothingOuterHardsuitRenegateyiv3020
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileHard]
+  id: ClothingOuterHardsuitRenegateHeavyJuggernaut
   name: YIV3020 "Svyatogor" juggernaut suit
-  suffix: Ренегаты
-  description: A dreadnought. A literal walking coffin. The suit is so heavy it's painful to wear. I hope this is the last thing you see. Massive horns, an artifact generator, heavy armor.
+  suffix: Renegates
+  description: A heavy jauggernaut hardsuit of resistance. A literal walking coffin. Huge piece of armor that can protect you from most of the firearms shots.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatejuggernaut.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatejuggernaut.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/renegatejuggernaut.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/renegatejuggernaut.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.2 # 0.3->0.2
-  - type: TemperatureProtection # Mono: Not fully insulated
+    damageCoefficient: 0.25
+  - type: TemperatureProtection
     heatingCoefficient: 0.01
     coolingCoefficient: 0.01
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.2
-        Slash: 0.2
-        Piercing: 0.2
-        Heat: 0.2
-        Radiation: 0.2
+        Blunt: 0.35
+        Slash: 0.35
+        Piercing: 0.25
+        Heat: 0.325
+        Radiation: 0.15
         Caustic: 0.2
   - type: ClothingSpeedModifier
-    walkModifier: 0.7
-    sprintModifier: 0.5
-  - type: SpaceFlightProfile
-    thrustMultiplier: 0.55
-    controlMultiplier: 1.25
-    fuelUsageMultiplier: 2.1
-    combatStabilityBonus: 0.14
+    walkModifier: 0.675
+    sprintModifier: 0.675
   - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitRenegateHeavyJuggernaut
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaminaDamageResistance
+    coefficient: 0.3
+  - type: StaticPrice
+    price: 25000
+    vendPrice: 30000
+
+# SYS-549 "Cloak"
+- type: entity
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT3, ClothingFlightProfileMedium]
+  id: ClothingOuterHardsuitRenegateStealth
+  name: hardsuit SYS-549 "Cloak"
+  suffix: Renegates
+  description: A secret prototype of the renegate hardsuit with a stealth generator. Intended for secret operations and sabotage.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/syndicate.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/syndicate.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.475
+        Heat: 0.525
+        Shock: 0.9
+        Radiation: 0.5
+        Caustic: 0.8
+        Poison: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.925
+    sprintModifier: 0.925
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitRenegateStealth
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 12000
+    vendPrice: 90000
+
+# RMP-240 "Cicada"
+- type: entity
+  parent: [ForgeClothingOuterHardsuitBase, ClothingFlightProfileEasy]
+  id: ClothingOuterHardsuitRenegateAdvancedLight
+  name: hardsuit RMP-240 "Cicada"
+  suffix: Renegates
+  description: The latest development of resistance! The hardsuit is not restricting movement and has good protective properties.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.65
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.425
+        Slash: 0.425
+        Piercing: 0.4
+        Heat: 0.425
+        Radiation: 0.35
+        Caustic: 0.3
+  - type: StaminaDamageResistance
+    coefficient: 0.4
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitRenegateAdvancedLight
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 15000
+
+# LRC-4034 "Prism"
+- type: entity
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT3, ClothingFlightProfileEasy]
+  id: ClothingOuterHardsuitRenegateReflectElite
+  name: hardsuit LRC-4034 "Prism"
+  suffix: Renegates
+  description: Based on stolen Imperial blueprints, a copy of the "Prism" hardsuit was developed. The hardsuit is capable of partially reflecting laser weapons and can withstand explosions and radiation.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/pdv_medic.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/pdv_medic.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.03
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: FireProtection
+    reduction: 0.8
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.45
+        Shock: 0.75
+        Heat: 0.4
+        Radiation: 0.05
+        Caustic: 0.8
+        Poison: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: HeldSpeedModifier
+  - type: Reflect
+    reflectProb: 0.3
+    damageOnReflectModifier: 0
+    reflects:
+      - Energy
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitRenegateReflectElite
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 90000
+    vendPrice: 50000
+
+# CRIII-278 "Sequent"
+- type: entity
+  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT3, ClothingFlightProfileMedium]
+  id: ClothingOuterHardsuitRenegateCommander
+  name: hardsuit CRIII-278 "Sequent"
+  suffix: Renegates
+  description: An improved version of the CRIII-200 "Beetle" hardsuit, developed specifically for resistance commanders.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/pdv_vizier.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/pdv_vizier.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.45
+        Slash: 0.45
+        Piercing: 0.375
+        Heat: 0.35
+        Shock: 0.75
+        Radiation: 0.3
+        Caustic: 0.7
+  - type: StaminaDamageResistance
+    coefficient: 0.3
+  - type: ClothingSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.95
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
     replaceCurrentClothing: true
     clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitRenegateyiv3020
+      head: ClothingHeadHelmetHardsuitRenegateCommander
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
-  - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.4
   - type: StaticPrice
-    price: 25000
-    vendPrice: 30000
+    price: 2000
+    vendPrice: 5000

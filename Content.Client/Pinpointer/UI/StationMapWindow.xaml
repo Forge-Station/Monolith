@@ -2,10 +2,11 @@
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                       xmlns:ui="clr-namespace:Content.Client.Pinpointer.UI"
                       Title="{Loc 'station-map-window-title'}"
-                      Resizable="False"
+                      Resizable="True"
                       SetSize="868 748"
-                      MinSize="868 748">
-    <BoxContainer Orientation="Vertical">
+                      MinSize="640 520"> <!-- Forge-Change: resizable; map fills instead of a 256px strip. -->
+    <!-- Forge-Change-Start: map fills the window instead of sitting in a 256px strip. -->
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
         <!-- Station name -->
         <controls:StripeBack>
             <PanelContainer>
@@ -13,10 +14,15 @@
             </PanelContainer>
         </controls:StripeBack>
 
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalAlignment="Top">
-            <ui:NavMapControl Name="NavMapScreen"/>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+            <ui:NavMapControl Name="NavMapScreen"
+                              HorizontalExpand="True"
+                              VerticalExpand="True"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              MinSize="480 400"/>
 
-            <BoxContainer Orientation="Vertical" SetWidth="200">
+            <BoxContainer Orientation="Vertical" SetWidth="200" VerticalExpand="True">
                 <!-- Search bar -->
                 <LineEdit Name="FilterBar" PlaceHolder="{Loc 'station-map-filter-placeholder'}" Margin="0 0 10 10" HorizontalExpand="True"/>
 
@@ -26,6 +32,7 @@
                 </ScrollContainer>
             </BoxContainer>
         </BoxContainer>
+        <!-- Forge-Change-End -->
 
         <!-- Footer -->
         <BoxContainer Orientation="Vertical">

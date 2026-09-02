@@ -1,0 +1,58 @@
+- type: entity
+  parent: BaseSign
+  id: RemnantInscription
+  name: remnant inscription
+  description: Precursor writing. Those who do not know the language see only scrambled glyphs. Set Text and Language in mapping.
+  suffix: Forge, Remnant
+  components:
+  - type: Sprite
+    sprite: Structures/Wallmounts/signs.rsi
+    state: xenoarch
+  - type: Inscription
+    text: remnant-inscription-default
+    language: Draconic
+
+- type: entity
+  parent: RemnantInscription
+  id: RemnantInscriptionBlank
+  suffix: Forge, Remnant, Blank
+  components:
+  - type: Inscription
+    text: ""
+    language: Draconic
+
+- type: entity
+  parent: RemnantInscription
+  id: RemnantInscriptionWarning
+  name: remnant warning inscription
+  suffix: Forge, Remnant, Warning
+  components:
+  - type: Sprite
+    state: biohazard
+  - type: Inscription
+    text: remnant-inscription-warning
+    language: Draconic
+
+- type: entity
+  parent: RemnantInscription
+  id: RemnantInscriptionSecure
+  name: remnant secure inscription
+  suffix: Forge, Remnant, Secure
+  components:
+  - type: Sprite
+    state: securearea
+  - type: Inscription
+    text: remnant-inscription-secure
+    language: Draconic
+
+- type: entity
+  parent: RemnantInscription
+  id: RemnantInscriptionVault
+  name: remnant vault inscription
+  suffix: Forge, Remnant, Vault
+  components:
+  - type: Sprite
+    state: vault
+  - type: Inscription
+    text: remnant-inscription-vault
+    language: Draconic

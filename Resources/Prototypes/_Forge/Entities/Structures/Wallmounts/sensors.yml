@@ -1,0 +1,129 @@
+- type: entity
+  id: RemnantPressurePlate
+  name: remnant pressure plate
+  description: A precursor pressure plate. Stepping on it sends a device-link pulse that can be wired with a multitool.
+  suffix: Forge, Remnant
+  parent: BaseStructureDisableAnchoring
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RequiresGrid
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _Mono/Objects/Weapons/Traps/pressureplate.rsi
+    state: pressure_plate
+  - type: Physics
+    bodyType: Static
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        hard: false
+        layer:
+        - SlipLayer
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.15
+    ignoreWeightless: true
+    stepOn: true
+  - type: AllowStepTrigger
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSource
+    ports:
+    - Pressed
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: RemnantPressurePlate
+  id: RemnantPressurePlateInvisible
+  name: remnant pressure plate
+  description: An almost invisible precursor pressure plate. Stepping on it still sends a device-link pulse.
+  suffix: Forge, Remnant, Invisible
+  components:
+  - type: Sprite
+    color: "#FFFFFF00"
+    drawdepth: FloorObjects
+    sprite: _Mono/Objects/Weapons/Traps/pressureplate.rsi
+    state: pressure_plate
+
+- type: entity
+  id: RemnantMotionSensor
+  name: remnant motion sensor
+  description: A wall-mounted precursor motion sensor. Moving nearby triggers a device-link pulse.
+  suffix: Forge, Remnant
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: WallMount
+    arc: 360
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        density: 50
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/camera.rsi
+    state: camera
+  - type: TriggerOnProximity
+    enabled: true
+    requiresAnchored: true
+    repeating: true
+    cooldown: 2
+    triggerSpeed: 1
+    shape:
+      !type:PhysShapeCircle
+      radius: 2.5
+  - type: DeviceLinkOnTrigger
+    port: Pressed
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSource
+    ports:
+    - Pressed
+  - type: Appearance
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

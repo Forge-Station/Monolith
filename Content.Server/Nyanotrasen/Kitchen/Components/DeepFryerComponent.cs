@@ -11,8 +11,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 using Content.Shared.Nyanotrasen.Kitchen.Prototypes;
 
 namespace Content.Server.Nyanotrasen.Kitchen.Components
@@ -75,14 +73,14 @@ namespace Content.Server.Nyanotrasen.Kitchen.Components
         /// into this.
         /// </remarks>
         [ViewVariables(VVAccess.ReadWrite)]
-        [DataField("charredPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("charredPrototype", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string? CharredPrototype { get; set; }
 
         /// <summary>
         /// What reagents are considered valid cooking oils?
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
-        [DataField("fryingOils", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<ReagentPrototype>))]
+        [DataField("fryingOils", customTypeSerializer: typeof(ProtoId<ReagentPrototype>))]
         public HashSet<string> FryingOils { get; set; } = new();
 
         /// <summary>
@@ -113,14 +111,14 @@ namespace Content.Server.Nyanotrasen.Kitchen.Components
         /// What flavors go well with deep frying?
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
-        [DataField("goodFlavors", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<FlavorPrototype>))]
+        [DataField("goodFlavors", customTypeSerializer: typeof(ProtoId<FlavorPrototype>))]
         public HashSet<string> GoodFlavors { get; set; } = new();
 
         /// <summary>
         /// What flavors don't go well with deep frying?
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
-        [DataField("badFlavors", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<FlavorPrototype>))]
+        [DataField("badFlavors", customTypeSerializer: typeof(ProtoId<FlavorPrototype>))]
         public HashSet<string> BadFlavors { get; set; } = new();
 
         /// <summary>
@@ -214,7 +212,7 @@ namespace Content.Server.Nyanotrasen.Kitchen.Components
         /// <summary>
         /// What upgradeable machine part dictates the quality of the storage size?
         /// </summary>
-        [DataField("machinePartStorageMax", customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
+        [DataField("machinePartStorageMax", customTypeSerializer: typeof(ProtoId<MachinePartPrototype>))]
         public string MachinePartStorageMax = "MatterBin";
 
         /// <summary>
@@ -242,7 +240,7 @@ namespace Content.Server.Nyanotrasen.Kitchen.Components
         /// Frontier: crispiness level set to use for examination and shaders
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
-        [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<CrispinessLevelSetPrototype>))]
+        [DataField(customTypeSerializer: typeof(ProtoId<CrispinessLevelSetPrototype>))]
         public string CrispinessLevelSet = "Crispy";
     }
 }

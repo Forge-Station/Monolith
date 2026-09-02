@@ -25,6 +25,8 @@ shuttle-console-signature-unknown =
        *[other] Unknown
     }
 
+shuttle-console-company-unknown = UNAFFILIATED
+
 # Network Port Buttons
 shuttle-console-network-ports = Network Ports
 shuttle-console-network-connect-tooltip = The buttons on the shuttle console send a signal when pressed, use a multitool on the console and connect it up to a device!
@@ -38,3 +40,19 @@ shuttle-console-device-button-5 = Port 5
 shuttle-console-device-button-6 = Port 6
 shuttle-console-device-button-7 = Port 7
 shuttle-console-device-button-8 = Port 8
+
+shuttle-console-markers-label = Markers
+shuttle-console-marker-x = X
+shuttle-console-marker-y = Y
+shuttle-console-marker-track = Track
+shuttle-console-marker-remove = Remove
+shuttle-console-marker-count = {$current}/{$max}
+shuttle-console-marker-full = Marker limit reached (5).
+shuttle-console-marker-invalid = Invalid coordinates.
+shuttle-console-marker-coord-name = Marker {$id}
+shuttle-console-marker-entity-name = Track: {$name}
+shuttle-console-map-track = ⌖
+shuttle-console-marker-autopilot = AP
+shuttle-console-marker-autopilot-tooltip = Send autopilot to this marker
+shuttle-console-marker-focus-tooltip = Center map on this marker
+shuttle-console-marker-wrong-map = Autopilot only works on the current map.

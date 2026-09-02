@@ -24,6 +24,8 @@
   recipeUnlocks:
   - WeaponRifleAnnieTSF
   - WeaponLMGGrizzlyTSF
+  - WeaponRifleRiversongTSF
+  - WeaponRifleDragonfangTSF
   - WeaponDEWCalico
   - Magazine700Thz
   - AmmoBox700Thz
@@ -44,14 +46,14 @@
   recipeUnlocks:
   - WeaponRifleXlr556Tsf
   - WeaponRifleMR8CTSF
-  - WeaponAMRShenzhenTSF
+  # - WeaponAMRShenzhenTSF # Forge-change
   - WeaponLauncherTSFAnubis
   - WeaponDEWSmilodon
   - WeaponLauncherTSFOsiris
   - Magazine35mmGrenade
   - LargePowerCell400Thz # For smilodon
   - LargePowerCell700Thz # For smilodon
-  - AmmoBoxShenzhenBig
+  # - AmmoBoxShenzhenBig # Forge-change
   technologyPrerequisites:
   - TsfAdvancedWeapons
   - UniversalMaterialResearchT3

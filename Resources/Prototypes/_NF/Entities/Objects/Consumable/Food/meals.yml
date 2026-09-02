@@ -132,6 +132,10 @@
           Quantity: 10
         - ReagentId: Ichor
           Quantity: 12
+        # Forge-change-Start
+        - ReagentId: Lactozit
+          Quantity: 2
+        # Forge-Change-End
   - type: Tag
     tags:
     - Meat

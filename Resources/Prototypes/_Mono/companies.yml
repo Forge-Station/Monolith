@@ -50,26 +50,6 @@
   color: "#008CE3"
   whitelisted: true
   hidden: true # Forge-change
-  # Just write to Forge-admins and we will add you to TSFHC
-  # logins: # admins only here !!! or your PR will be CLOSED!!!! also serves as a example for ur whitelisted factions
-  # - localhost@Ark
-  # - Ark
-  # - DisguisedBear
-  # - JuneCat
-  # - AwareFoxy
-  # - Avalon_Proto
-  # - Archylle
-  # - Arcticular
-  # - ArtemisYK
-  # - NigelSugar
-  # - Reverence
-  # - BluHNT
-  # - DrOktober
-  # - Archylle
-  # - neoscav
-  # - UnhipPaladin
-  # - Onezero0
-# DO NOT TOUCH
 
 # ====TSF / Protag. Companies====
 
@@ -151,6 +131,12 @@
         volume: -5
         variation: 0.2
   image: /Textures/_Mono/Companies/USSP.png
+
+- type: company
+  id: MMC
+  name: Mieyo Manufacturing Concern
+  color: "#EEEEEE"
+  hidden: true
 
 # Major companies
 
@@ -299,17 +285,6 @@
   image: /Textures/_Mono/Companies/CSP.png
   whitelisted: true
   hidden: true # Forge-change: hide
-  # logins:
-  #   - GoobieWoob
-  #   - Coolzman
-  #   - Lumpy_the_Clown
-  #   - coolfied
-  #   - Callington
-  #   - Operator_Talon5
-  #   - CdrGreenwall
-  #   - MarssSett18
-  #   - Administratorx # Hopefully this doesnt get denied because it has adminstrator in it smh
-  #   - MSMarvin
 
 - type: company
   id: TheViperGroup
@@ -345,25 +320,12 @@
   image: /Textures/_Mono/Companies/redsailcorsairs.png
   whitelisted: true
   hidden: true # Forge-change: hide
-  # logins: # 20 total
-  # - Corrupt
-  # - Jasos
-  # - Luksu
-  # - FervantTwo8
-  # - Wawa_pull
-  # - Pffy
-  # - SouthernSaint
-  # - Birdadoido
-  # - Abbyssl
-  # - MSMarvin
-  # - Dusky
-  # - Middleagedman
-  # - EmmaFaith
-  # - soulvapor
-  # - Ether
-  # - MapleSilk
-  # - Spacepeing
-  # - zigcraft
-  # - burrrkeye
-  # - enkidienne
-  # - chugaa
+
+- type: company
+  id: PLXCOR
+  name: PLXCOR
+  description: plxcor-description
+  color: "#B500B5"
+  image: /Textures/_Mono/Companies/PLXCOR.png
+  whitelisted: true
+  hidden: true # Forge-change: hide

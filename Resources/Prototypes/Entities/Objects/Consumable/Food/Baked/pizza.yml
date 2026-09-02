@@ -165,6 +165,17 @@
     - state: mushroom
   - type: SliceableFood
     slice: FoodPizzaMushroomSlice
+  # Forge-Change-Start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+        - ReagentId: Flavorol
+          Quantity: 15
+  # Forge-Change-End
 
 - type: entity
   name: slice of mushroom pizza
@@ -180,6 +191,17 @@
   - type: Sprite
     layers:
     - state: mushroom-slice
+  # Forge-Change-Start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3.8
+        - ReagentId: Flavorol
+          Quantity: 2         # Forge-change 3>2
+  # Forge-Change-End
 # Tastes like crust, tomato, cheese, mushroom.
 
 - type: entity
@@ -214,8 +236,6 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 10        # Forge-change 15>10
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 1         # Forge-change
 
 - type: entity
   name: slice of vegetable pizza
@@ -248,8 +268,6 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 3
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 0.125     # Forge-change
 
 # Tastes like crust, tomato, cheese, carrot.
 
@@ -449,6 +467,19 @@
     tags:
     - Meat
     - Pizza
+  # Forge-Change-Start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Vitamin
+          Quantity: 5
+        - ReagentId: Flavorol
+          Quantity: 15
+  # Forge-Change-End
 
 - type: entity
   name: slice of Hawaiian pizza
@@ -471,6 +502,20 @@
     - Meat
     - Pizza
     - Slice
+    # Forge-Change-Start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        # Note: Keep FoodPizzaMoldySlice & FoodPizzaSliceBase roughly in sync
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Vitamin
+          Quantity: 0.8
+        - ReagentId: Flavorol
+          Quantity: 2         # Forge-change 3>2
+    # Forge-Change-End
 # Tastes like crust, tomato, cheese, pineapple, ham.
 
 #TODO: This is a meme pizza from /tg/. It has specially coded mechanics.
@@ -616,13 +661,11 @@
         maxVol: 40
         reagents:
         - ReagentId: Nutriment
-          Quantity: 19        # Forge-change 20>19       
+          Quantity: 19        # Forge-change 20>19
         - ReagentId: Radium
           Quantity: 4
         - ReagentId: Uranium
           Quantity: 16
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 1         # Forge-change
   # - type: RadiationSource # Frontier
   #   intensity: 0.1 # Frontier
   #   slope: 3 # Frontier
@@ -661,8 +704,6 @@
           Quantity: 0.5
         - ReagentId: Uranium
           Quantity: 2
-        - ReagentId: Lactozit # Forge-change
-          Quantity: 0.125     # Forge-change
   # - type: RadiationSource # Frontier
   #   intensity: 0.1 # Frontier
   #   slope: 3 # Frontier

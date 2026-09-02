@@ -10,6 +10,7 @@
     Food:
       metabolismRate: 0.25
       effects:
+      - !type:LactozitIntolerance
       - !type:SatiateThirst
         factor: -0.1
       - !type:EvenHealthChange

@@ -265,7 +265,7 @@
   name: thruster-goblin-name
   description: thruster-goblin-desc
   icon:
-    sprite: Forge/Structures/Shuttles/thruster.rsi
+    sprite: _Forge/Structures/Shuttles/thruster.rsi
     state: base_goblin
   id: goblinThruster
   entityWhitelist: *goblinWhitelist
@@ -283,7 +283,7 @@
   name: generator-goblin-name
   description: generator-goblin-desc
   icon:
-    sprite: Forge/Structures/Power/generation.rsi
+    sprite: _Forge/Structures/Power/generation.rsi
     state: clunker
   id: goblinClunker
   entityWhitelist: *goblinWhitelist
@@ -335,6 +335,20 @@
   graph: goblin_makeshift_circuit
   startNode: start
   targetNode: goblinComputerShuttleCircuitboard
+  category: construction-category-goblin
+  entityWhitelist: *goblinWhitelist
+  objectType: Item
+
+- type: construction
+  name: weapon-goblin-trashbow
+  description: weapon-goblin-trashbow-desc
+  id: crossbowGoblinHand
+  icon:
+    sprite: _Forge/Objects/Weapons/Guns/Goblin/trashbow.rsi
+    state: icon
+  graph: crossbowGoblinHand
+  startNode: start
+  targetNode: crossbowGoblinHand
   category: construction-category-goblin
   entityWhitelist: *goblinWhitelist
   objectType: Item

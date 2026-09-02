@@ -11,6 +11,8 @@
     sprite: _NF/Objects/Weapons/Guns/Revolvers/argenti.rsi
   - type: Gun
     fireRate: 2.5
+    projectileSpeed: 45 # Forge-change
+    damageModifier: 1.3 # Forge-change
     resetOnHandSelected: false
   - type: RevolverAmmoProvider
     whitelist:
@@ -35,19 +37,3 @@
     chambers: [ True, True, True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null, null, null ]
 
-- type: entity
-  parent: WeaponRevolverDeckard
-  id: WeaponRevolverDeckardNonlethal
-  suffix: Non-lethal
-  components:
-  - type: RevolverAmmoProvider
-    capacity: 5
-    proto: Cartridge45_magnumRubber
-    chambers: [ True, True, True, True, True ]
-    ammoSlots: [ null, null, null, null, null ]
-
-- type: entity
-  parent: WeaponRevolverDeckardExpedition
-  id: WeaponRevolverDeckardExpeditionGrifty
-  categories: [ HideSpawnMenu ]
-  name: Customer Service Resolver

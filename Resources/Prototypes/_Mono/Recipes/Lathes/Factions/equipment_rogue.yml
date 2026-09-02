@@ -28,14 +28,14 @@
 
 - type: latheRecipe
   id: ClothingOuterHardsuitCybersunStealthRogue
-  parent: MonoHardsuitT3Recipe
+  parent: ForgeStealthSuitT3CompanyRecipe # Forge-change
   result: ClothingOuterHardsuitCybersunStealth
 
 # T3 plastitanium
 
 - type: latheRecipe
   id: ClothingOuterHardsuitJuggernautRogue
-  parent: MonoHardsuitT3TsfRecipe
+  parent: ForgeHeavyJuggernautT3CompanyRecipe # Forge-change
   result: ClothingOuterHardsuitJuggernaut
 
 - type: latheRecipe

@@ -51,10 +51,6 @@
     requirements:
       Capacitor: 4
       Manipulator: 2
-    componentRequirements:
-      AmeFuelContainer:
-        amount: 3
-        defaultPrototype: AmeJar
     stackRequirements:
       Glass: 10
       Steel: 10
@@ -266,10 +262,6 @@
     requirements:
       Capacitor: 8
       Manipulator: 4
-    componentRequirements:
-      AmeFuelContainer:
-        amount: 3
-        defaultPrototype: AmeJar
     stackRequirements:
       Glass: 20
       Steel: 20
@@ -288,10 +280,6 @@
     requirements:
       Capacitor: 8
       Manipulator: 4
-    componentRequirements:
-      AmeFuelContainer:
-        amount: 3
-        defaultPrototype: AmeJar
     stackRequirements:
       Glass: 20
       Steel: 20
@@ -303,6 +291,9 @@
   name: large thruster machine board
   description: A large circuitboard for a 2x2 machine frame.
   components:
+  - type: Tag
+    tags: 
+      - MachineBoard2x2 #Forge-Change
   - type: MachineBoard
     prototype: ThrusterLarge
     frameSize: 2x2

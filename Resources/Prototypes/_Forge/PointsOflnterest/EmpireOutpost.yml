@@ -40,7 +40,7 @@
           mapNameTemplate: 'Оплот СИВ «Каструм Аврелий»'
         - type: ExtraStationInformation
           icon:
-            sprite: Forge/Structures/Decoration/banner.rsi
+            sprite: _Forge/Structures/Decoration/banner.rsi
             state: banner_empire
           stationSubtext: 'frontier-lobby-empire-subtext'
           stationDescription: 'frontier-lobby-empire-description'

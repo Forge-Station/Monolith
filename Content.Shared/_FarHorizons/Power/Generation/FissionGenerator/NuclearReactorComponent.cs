@@ -5,7 +5,7 @@ using Content.Shared.Atmos;
 using Robust.Shared.Prototypes;
 using Content.Shared.Materials;
 using Content.Shared.DeviceLinking;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using System.Numerics;
 
@@ -290,13 +290,13 @@ public sealed partial class NuclearReactorComponent : Component
     /// <summary>
     /// The proto ID of the "Retract Control Rods" sink port
     /// </summary>
-    [DataField("controlRodRetractPort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
+    [DataField("controlRodRetractPort", customTypeSerializer: typeof(ProtoId<SinkPortPrototype>))]
     public string ControlRodRetractPort = "RetractControlRods";
 
     /// <summary>
     /// The proto ID of the "Insert Control Rods" sink port
     /// </summary>
-    [DataField("controlRodInsertPort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
+    [DataField("controlRodInsertPort", customTypeSerializer: typeof(ProtoId<SinkPortPrototype>))]
     public string ControlRodInsertPort = "InsertControlRods";
 
     /// <summary>

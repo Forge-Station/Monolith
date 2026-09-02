@@ -10,7 +10,7 @@
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - sprite: Forge/Structures/Decoration/banner.rsi
+    - sprite: _Forge/Structures/Decoration/banner.rsi
       state: banner_empire
 
 - type: entity
@@ -90,7 +90,7 @@
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - sprite: Forge/Structures/Decoration/banner.rsi
+    - sprite: _Forge/Structures/Decoration/banner.rsi
       state: banner_renegate
 
 - type: entity

@@ -14,7 +14,8 @@
                         <TextureButton Name="HeaderImage" HorizontalAlignment="Center" VerticalAlignment="Top" MouseFilter="Ignore"/>
                         <Control Name="TextAlignmentPadding" VerticalAlignment="Top"/>
                         <RichTextLabel Name="BlankPaperIndicator" StyleClasses="LabelSecondaryColor" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                        <RichTextLabel StyleClasses="PaperWrittenText" Name="WrittenTextLabel" VerticalAlignment="Top"/>
+                        <RichTextLabel StyleClasses="PaperWrittenText" Name="WrittenTextLabel" Visible="False" VerticalAlignment="Top"/>
+                        <BoxContainer Name="WrittenContent" Orientation="Vertical" VerticalAlignment="Top"/>
                         <BoxContainer Name="InputContainer" Orientation="Vertical" VerticalExpand="True" VerticalAlignment="Stretch">
                             <PanelContainer StyleClasses="TransparentBorderedWindowPanel" MinHeight="100"
                                 VerticalAlignment="Stretch" VerticalExpand="True" HorizontalExpand="True">
@@ -29,7 +30,12 @@
             </ScrollContainer>
         </PanelContainer>
         <!-- Bottom buttons for editing -->
-        <BoxContainer Name="EditButtons" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
+        <BoxContainer Name="EditButtons" Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="6">
+            <!-- Forge-Change: outside the scroll area so the language popup can be clicked -->
+            <Label Name="LanguageLabel" VerticalAlignment="Center" Margin="0 0 8 0" Visible="False" />
+            <OptionButton Name="LanguageSelector" MinWidth="220" Visible="False" />
+            <Control HorizontalExpand="True" />
+            <Button Name="InsertImageButton" Margin="0 0 8 0" />
             <Button Name="SaveButton" />
         </BoxContainer>
     </BoxContainer>

@@ -34,6 +34,11 @@
       effects:
       - !type:SatiateThirst
         factor: 3
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: BubbleTea
@@ -57,3 +62,8 @@
       - !type:AdjustReagent
         reagent: Nutriment
         amount: 0.1
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End

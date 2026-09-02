@@ -18,7 +18,6 @@ namespace Content.Client.Shuttles.UI;
 public sealed partial class ShuttleDockControl : BaseShuttleControl
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     private readonly DockingSystem _dockSystem;
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _xformSystem;
@@ -53,7 +52,7 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
     private TimeSpan _nextDockChange;
 
     public event Action<NetEntity>? OnViewDock;
-    public event Action<NetEntity, NetEntity>? DockRequest;
+    public event Action<NetEntity, NetEntity, bool>? DockRequest; // Forge-Change
     public event Action<NetEntity>? UndockRequest;
 
     public ShuttleDockControl() : base(2f, 32f, 8f)
@@ -62,7 +61,7 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
         _dockSystem = EntManager.System<DockingSystem>();
         _shuttles = EntManager.System<SharedShuttleSystem>();
         _xformSystem = EntManager.System<SharedTransformSystem>();
-        MinSize = new Vector2(SizeFull, SizeFull);
+        MinSize = new Vector2(MinDisplaySize, MinDisplaySize); // Forge-Change
     }
 
     public void SetViewedDock(DockingPortState? dockState)
@@ -120,7 +119,7 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
         // Draw nearby grids
         var controlBounds = PixelSizeBox;
         _grids.Clear();
-        _mapManager.FindGridsIntersecting(gridXform.MapID, viewBoundsWorld, ref _grids);
+        Maps.FindGridsIntersecting(gridXform.MapID, viewBoundsWorld, ref _grids);
 
         // offset the dotted-line position to the bounds.
         Vector2? viewedDockPos = _viewedState != null ? MidPointVector : null;
@@ -322,13 +321,14 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
         var invertedPosition = Vector2.Zero;
         invertedPosition.Y = -invertedPosition.Y;
         var rotation = Matrix3Helpers.CreateRotation(-_angle.Value + MathF.PI);
-        var ourDockConnection = new UIBox2(
-            ScalePosition(Vector2.Transform(new Vector2(-0.2f, -0.7f), rotation)),
-            ScalePosition(Vector2.Transform(new Vector2(0.2f, -0.5f), rotation)));
+        // Rotation can invert corners; UIBox2 asserts Left <= Right / Top <= Bottom.
+        var connPosA = ScalePosition(Vector2.Transform(new Vector2(-0.2f, -0.7f), rotation));
+        var connPosB = ScalePosition(Vector2.Transform(new Vector2(0.2f, -0.5f), rotation));
+        var ourDockConnection = new UIBox2(Vector2.Min(connPosA, connPosB), Vector2.Max(connPosA, connPosB));
 
-        var ourDock = new UIBox2(
-            ScalePosition(Vector2.Transform(new Vector2(-0.5f, 0.5f), rotation)),
-            ScalePosition(Vector2.Transform(new Vector2(0.5f, -0.5f), rotation)));
+        var dockPosA = ScalePosition(Vector2.Transform(new Vector2(-0.5f, 0.5f), rotation));
+        var dockPosB = ScalePosition(Vector2.Transform(new Vector2(0.5f, -0.5f), rotation));
+        var ourDock = new UIBox2(Vector2.Min(dockPosA, dockPosB), Vector2.Max(dockPosA, dockPosB));
 
         var dockColor = _viewedState?.HighlightedRadarColor ?? Color.Magenta; // Frontier - use ViewedState
         var connectionColor = Color.Pink;
@@ -446,7 +446,8 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
                                 return;
 
                             _nextDockChange = _timing.CurTime + DockChangeCooldown;
-                            DockRequest?.Invoke(ViewedDock.Value, dock.Entity);
+                            var shipyard = dock.ShipyardService || (_viewedState?.ShipyardService ?? false); // Forge-Change
+                            DockRequest?.Invoke(ViewedDock.Value, dock.Entity, shipyard); // Forge-Change
                         };
                     }
 

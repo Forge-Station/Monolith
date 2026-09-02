@@ -3,7 +3,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Weapons.Ranged.Components;
 
@@ -37,8 +37,8 @@ public sealed partial class RevolverAmmoProviderComponent : AmmoProviderComponen
     [DataField("chambers")]
     public bool?[] Chambers = Array.Empty<bool?>();
 
-    [DataField("proto", customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string? FillPrototype = "Cartridge45_magnumFMJ";
+    [DataField("proto", customTypeSerializer:typeof(ProtoId<EntityPrototype>))]
+    public string? FillPrototype = "Cartridge357_magnumFMJ";
 
     [DataField("soundEject")]
     public SoundSpecifier? SoundEject = new SoundPathSpecifier("/Audio/Weapons/Guns/MagOut/revolver_magout.ogg");

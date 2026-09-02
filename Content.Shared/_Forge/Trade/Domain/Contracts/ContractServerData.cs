@@ -1,7 +1,7 @@
 namespace Content.Shared._Forge.Trade;
 
-
-public sealed class ContractServerData
+[DataDefinition]
+public sealed partial class ContractServerData
 {
     [DataField("match")]
     public PrototypeMatchMode MatchMode = PrototypeMatchMode.Exact;

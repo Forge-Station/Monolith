@@ -4,6 +4,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Systems;
+using Content.Shared._Forge.ShipyardService.Components; // Forge-Change
 using Content.Shared._NF.Shuttles.Events; // Frontier
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
@@ -383,6 +384,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
                 HighlightedRadarColor = comp.HighlightedRadarColor, // Frontier
                 DockType = comp.DockType, // Frontier
                 ReceiveOnly = comp.ReceiveOnly, // Frontier
+                ShipyardService = HasComp<ShipyardDockComponent>(uid), // Forge-Change
             };
 
             gridDocks.Add(state);
@@ -515,6 +517,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     private void OnConsoleShutdown(EntityUid uid, ShuttleConsoleComponent component, ComponentShutdown args)
     {
         ClearPilots(component);
+        _shuttleBuiLastPush.Remove(uid); // Forge-Change: BUI throttle cache leaked deleted consoles
     }
 
     public void AddPilot(EntityUid uid, EntityUid entity, ShuttleConsoleComponent component)

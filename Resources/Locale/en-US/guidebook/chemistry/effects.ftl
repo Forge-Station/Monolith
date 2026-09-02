@@ -342,6 +342,12 @@ reagent-effect-guidebook-reset-narcolepsy =
         *[other] temporarily stave
     } off narcolepsy
 
+reagent-effect-guidebook-lactozitium-reaction =
+    { $chance ->
+        [1] Triggers
+        *[other] trigger
+    } farting, vomiting, and burping in Lactozit-intolerant metabolisms
+
 reagent-effect-guidebook-wash-cream-pie-reaction =
     { $chance ->
         [1] Washes

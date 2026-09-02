@@ -1,7 +1,7 @@
 - type: vessel
   id: medtape
   parent: BaseVessel
-  name: EMMS Пластырь
+  name: EMMS «Пластырь»
   description: Медицинский шаттл Империи. Слабое вооружение.
   category: Small
   group: Empire

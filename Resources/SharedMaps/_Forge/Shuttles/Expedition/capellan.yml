@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 06/30/2026 09:36:15
-  entityCount: 2697
+  time: 08/18/2026 18:04:07
+  entityCount: 2701
 maps: []
 grids:
 - 1
@@ -125,9 +125,9 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
       spreadQueues:
-        Puddle: []
         Kudzu: []
         MetalFoam: []
+        Puddle: []
         Smoke: []
     - type: Shuttle
       dampingModifier: 0.25
@@ -3456,11 +3456,6 @@ entities:
     components:
     - type: Transform
       pos: 2.5,33.5
-      parent: 1
-  - uid: 321
-    components:
-    - type: Transform
-      pos: 1.5,21.5
       parent: 1
   - uid: 322
     components:
@@ -8040,7 +8035,7 @@ entities:
   - uid: 1157
     components:
     - type: Transform
-      pos: -7.4158444,5.617656
+      pos: -6.840414,5.595691
       parent: 1
   - uid: 1158
     components:
@@ -11957,6 +11952,13 @@ entities:
     - type: Transform
       pos: -2.5,25.5
       parent: 1
+- proto: NFMagnetBoxOre
+  entities:
+  - uid: 1687
+    components:
+    - type: Transform
+      pos: -1.5,21.5
+      parent: 1
 - proto: NitrogenCanister
   entities:
   - uid: 1685
@@ -11977,13 +11979,6 @@ entities:
       parent: 1
     - type: Lock
       locked: False
-- proto: OreBox
-  entities:
-  - uid: 1687
-    components:
-    - type: Transform
-      pos: -1.5,21.5
-      parent: 1
 - proto: OreProcessor
   entities:
   - uid: 1688
@@ -12361,11 +12356,6 @@ entities:
     components:
     - type: Transform
       pos: -1.5,-1.5
-      parent: 1
-  - uid: 1752
-    components:
-    - type: Transform
-      pos: 2.5,-1.5
       parent: 1
 - proto: PottedPlantRandom
   entities:
@@ -15296,6 +15286,33 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
+- proto: StationRadioReceiver
+  entities:
+  - uid: 1752
+    components:
+    - type: Transform
+      pos: 1.5,21.5
+      parent: 1
+  - uid: 2698
+    components:
+    - type: Transform
+      pos: 3.5,32.5
+      parent: 1
+  - uid: 2699
+    components:
+    - type: Transform
+      pos: -7.5,5.5
+      parent: 1
+  - uid: 2700
+    components:
+    - type: Transform
+      pos: 3.5,8.5
+      parent: 1
+  - uid: 2701
+    components:
+    - type: Transform
+      pos: 2.5,-1.5
+      parent: 1
 - proto: Stool
   entities:
   - uid: 2241
@@ -15727,6 +15744,11 @@ entities:
       parent: 1
 - proto: TableReinforced
   entities:
+  - uid: 321
+    components:
+    - type: Transform
+      pos: 1.5,21.5
+      parent: 1
   - uid: 2307
     components:
     - type: Transform

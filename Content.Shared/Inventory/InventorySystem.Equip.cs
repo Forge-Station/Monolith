@@ -39,7 +39,6 @@ public abstract partial class InventorySystem
     [Dependency] private SharedStrippableSystem _strippable = default!;
     [Dependency] private SharedBodySystem _body = default!; // Mono
 
-    [ValidatePrototypeId<ItemSizePrototype>]
     private const string PocketableItemSize = "Small";
 
     private void InitializeEquip()
@@ -195,7 +194,7 @@ public abstract partial class InventorySystem
 
         Dirty(target, inventory);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(target);
+        _movementSpeed.RefreshMovementSpeedModifiers(target, alsoFriction: true); // Mono
 
         return true;
     }
@@ -519,7 +518,7 @@ public abstract partial class InventorySystem
 
         Dirty(target, inventory);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(target);
+        _movementSpeed.RefreshMovementSpeedModifiers(target, alsoFriction: true); // Mono
 
         return true;
     }

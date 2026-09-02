@@ -1,7 +1,7 @@
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Dragon
 {
@@ -37,7 +37,7 @@ namespace Content.Server.Dragon
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite), DataField("maxAccumulator")] public float RiftMaxAccumulator = 99999999999f; // Mono edit
 
-        [DataField("spawnRiftAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("spawnRiftAction", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string SpawnRiftAction = "ActionSpawnRift";
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Content.Server.Dragon
         [DataField("spawnRiftActionEntity")]
         public EntityUid? SpawnRiftActionEntity;
 
-        [ViewVariables(VVAccess.ReadWrite), DataField("riftPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [ViewVariables(VVAccess.ReadWrite), DataField("riftPrototype", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string RiftPrototype = "CarpRift";
 
         [ViewVariables(VVAccess.ReadWrite), DataField("soundDeath")]

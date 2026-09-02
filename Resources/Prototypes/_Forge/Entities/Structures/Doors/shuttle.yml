@@ -17,6 +17,25 @@
     containers:
       board: [ DoorElectronicsEmpire ]
 
+#Renegate
+- type: entity
+  parent: AirlockShuttleSyndicate
+  id: AirlockShuttleRenegate
+  suffix: Renegate, Docking
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRenegate ]
+
+- type: entity
+  parent: AirlockGlassShuttleSyndicate
+  id: AirlockGlassShuttleRenegate
+  suffix: Renegate, Glass, Docking
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRenegate ]
+
 # Remnant
 - type: entity
   parent: AirlockShuttleSyndicate
@@ -53,3 +72,51 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsRemnant ]
+
+- type: entity
+  parent: AirlockShuttleSyndicate
+  id: AirlockShuttleRemnantIndestructible
+  suffix: Remnant, Docking, Indestructible
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRemnant ]
+  - type: Destructible
+    thresholds:
+    - trigger:
+
+- type: entity
+  parent: AirlockGlassShuttleSyndicate
+  id: AirlockGlassShuttleRemnantIndestructible
+  suffix: Remnant, Glass, Docking, Indestructible
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRemnant ]
+  - type: Destructible
+    thresholds:
+    - trigger:
+
+- type: entity
+  parent: AirlockExternal
+  id: AirlockExternalLockedRemnantIndestructible
+  suffix: Remnant, External, Locked, Indestructible
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRemnant ]
+  - type: Destructible
+    thresholds:
+    - trigger:
+
+- type: entity
+  parent: AirlockExternalGlass
+  id: AirlockExternalGlassLockedRemnantIndestructible
+  suffix: Remnant, External, Glass, Locked, Indestructible
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRemnant ]
+  - type: Destructible
+    thresholds:
+    - trigger:

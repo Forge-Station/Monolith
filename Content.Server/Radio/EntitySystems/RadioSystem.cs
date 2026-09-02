@@ -1,10 +1,11 @@
 using Content.Server._NF.Radio; // Frontier
 using Content.Server._Forge.Radio.EntitySystems; // Forge-Change: configurable encryption key frequencies.
+using Content.Goobstation.Shared.StationRadio.Components; // Forge-Change: station radio receiver frequency
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server._EinsteinEngines.Language;
 using Content.Server.Power.Components;
-using Content.Server.Radio.Components;
+using Content.Shared.Radio.Components;
 using Content.Shared._Mono.Radio;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -22,7 +23,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
 using Robust.Shared.Configuration;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Server._Forge.TTS;
 using Content.Shared._Forge.TTS;
 
@@ -76,6 +77,10 @@ public sealed partial class RadioSystem : EntitySystem
         if (TryComp<RadioMicrophoneComponent>(source, out var radioMicrophone))
             return radioMicrophone.Frequency;
 
+        // Forge-Change: station radio receivers tune independently of the RadioShow channel default.
+        if (TryComp<StationRadioReceiverComponent>(source, out var stationRadio))
+            return stationRadio.Frequency;
+
         if (_configurableKeys.TryGetFrequency(source, channel.ID, out var keyFrequency)) // Forge-Change
             return keyFrequency;
 
@@ -98,7 +103,7 @@ public sealed partial class RadioSystem : EntitySystem
 
             // Forge-Change-Start
             var isOwnAudioRelay = uid == args.MessageSource;
-            var radioTtsEnabled = _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeVars.LocalRadioTTSEnabled);
+            var radioTtsEnabled = _cfg.GetClientCVar(actor.PlayerSession.Channel, ForgeCCVars.LocalRadioTTSEnabled);
 
             // Use the speaker's voice (MessageSource), not the listener's own — Forge-Change
             if(!isOwnAudioRelay && radioTtsEnabled && TryComp<TTSComponent>(args.MessageSource, out var tts) && !string.IsNullOrWhiteSpace(tts.VoicePrototypeId))
@@ -216,9 +221,16 @@ public sealed partial class RadioSystem : EntitySystem
         var ev = new RadioReceiveEvent(messageSource, channel, msg, notUdsMsg, language, radioSource);
         // Einstein Engines - Language end
 
-        var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
+        var transmitFrequency = frequency ?? GetFrequency(messageSource, channel);
+
+        var sendAttemptEv = new RadioSendAttemptEvent(
+            channel,
+            radioSource,
+            transmitFrequency);
+
         RaiseLocalEvent(ref sendAttemptEv);
         RaiseLocalEvent(radioSource, ref sendAttemptEv);
+
         var canSend = !sendAttemptEv.Cancelled;
 
         var sourceMapId = Transform(radioSource).MapID;

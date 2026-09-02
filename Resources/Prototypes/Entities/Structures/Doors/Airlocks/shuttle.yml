@@ -29,7 +29,7 @@
           position: "0,-0.5"
         hard: false
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/shuttle.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Standard/shuttle.rsi # Forge-Change
     snapCardinals: false
     # Forge-Change-Start
     layers:
@@ -81,9 +81,13 @@
   - type: Tag
     tags:
       - ForceNoFixRotations
-  - type: PaintableAirlock
-    group: Shuttle
-    department: null
+  # Forge-Change-Start
+  # - type: PaintableAirlock
+  #   group: Shuttle
+  #   department: null
+  - type: Paintable
+    group: null
+  # Forge-Change-End
   - type: Construction
     graph: AirlockShuttle
     node: airlock
@@ -110,11 +114,15 @@
   description: Necessary for connecting two space craft together.
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/shuttle.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/shuttle.rsi # Forge-Change
   - type: Occluder
     enabled: false
-  - type: PaintableAirlock
-    group: ShuttleGlass
+  # Forge-Change-Start
+  # - type: PaintableAirlock
+  #   group: ShuttleGlass
+  - type: Paintable
+    group: null
+  # Forge-Change-End
   - type: Door
     occludes: false
   - type: Fixtures
@@ -138,7 +146,7 @@
     noRot: false
   - type: Rotatable
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/shuttle.rsi # Frontier: Glass<Standard # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Standard/shuttle.rsi # Frontier: Glass<Standard # Forge-Change
     state: closed
     snapCardinals: false
   - type: Construction
@@ -153,7 +161,7 @@
   description: Necessary for connecting two space craft together.
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/shuttle_syndicate.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/shuttle_syndicate.rsi # Forge-Change
 
 - type: entity
   parent: AirlockShuttle
@@ -163,4 +171,12 @@
   description: Necessary for connecting two space craft together.
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/shuttle_syndicate.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Standard/shuttle_syndicate.rsi # Forge-Change
+
+# Xenoborg shuttle airlock
+- type: entity
+  parent: AirlockShuttle
+  id: AirlockShuttleXenoborg
+  components:
+  - type: Sprite
+    sprite: Structures/Doors/Airlocks/Standard/shuttle_xenoborg.rsi

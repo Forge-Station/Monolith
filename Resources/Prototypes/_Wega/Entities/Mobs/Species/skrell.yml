@@ -23,7 +23,7 @@
   - type: SolutionScanner
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: Skrell
+    damageModifierSet: ForgeSkrell #Forge-Change
   - type: Bloodstream
     bloodReagent: SkrellBlood
   - type: Reactive
@@ -35,7 +35,7 @@
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashReaction #Forge-Change
     - reagents: [ Water ]
       methods: [ Touch ]
       effects:

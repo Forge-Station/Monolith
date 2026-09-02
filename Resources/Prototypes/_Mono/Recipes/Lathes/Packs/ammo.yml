@@ -55,7 +55,7 @@
   - AmmoBox762x51mmRIP
   - Magazine762x54mmRFMJ
   - Magazine762x54mmRPlasteelAP
-  - Magazine762x54mmRRubber
+#  - Magazine762x54mmRRubber # Forge-change
   - Magazine762x54mmRIncendiary
   - Magazine762x54mmRPractice
   - Magazine762x54mmREmpty
@@ -65,7 +65,7 @@
   - SpeedLoader762x54mmRFMJ
   - AmmoBox762x54mmRFMJ
   - AmmoBox762x54mmRPlasteelAP
-  - AmmoBox762x54mmRRubber
+#  - AmmoBox762x54mmRRubber # Forge-change
   - AmmoBox762x54mmRIncendiary
   - AmmoBox762x54mmRPractice
   - AmmoBox762x54mmRUranium
@@ -123,32 +123,23 @@
   - AmmoBox762x39mmSubsonic
   - AmmoBox762x39mmHP
   - AmmoBox762x39mmRIP
-  - Magazine45_magnumPistolFMJ
-  - Magazine45_magnumPistolPlasteelAP
-  - Magazine45_magnumPistolRubber
-  - Magazine45_magnumPistolIncendiary
-  - Magazine45_magnumPistolPractice
-  - Magazine45_magnumPistolEmpty
-  - Magazine45_magnumPistolUranium
-  - Magazine45_magnumPistolHP
-  - Magazine45_magnumPistolRIP
-  - SpeedLoader45_magnumFMJ
-  - SpeedLoader45_magnumPlasteelAP
-  - SpeedLoader45_magnumRubber
-  - SpeedLoader45_magnumIncendiary
-  - SpeedLoader45_magnumPractice
-  - SpeedLoader45_magnumEmpty
-  - SpeedLoader45_magnumUranium
-  - SpeedLoader45_magnumHP
-  - SpeedLoader45_magnumRIP
-  - AmmoBox45_magnumPlasteelAP
-  - AmmoBox45_magnumRubber
-  - AmmoBox45_magnumIncendiary
-  - AmmoBox45_magnumPractice
-  - AmmoBox45_magnumUranium
-  - AmmoBox45_magnumAP
-  - AmmoBox45_magnumHP
-  - AmmoBox45_magnumRIP
+  - SpeedLoader357_magnumFMJ
+  - SpeedLoader357_magnumPlasteelAP
+  - SpeedLoader357_magnumRubber
+  - SpeedLoader357_magnumIncendiary
+  - SpeedLoader357_magnumPractice
+  - SpeedLoader357_magnumEmpty
+  - SpeedLoader357_magnumUranium
+  - SpeedLoader357_magnumHP
+  - SpeedLoader357_magnumRIP
+  - AmmoBox357_magnumPlasteelAP
+  - AmmoBox357_magnumRubber
+  - AmmoBox357_magnumIncendiary
+  - AmmoBox357_magnumPractice
+  - AmmoBox357_magnumUranium
+  - AmmoBox357_magnumAP
+  - AmmoBox357_magnumHP
+  - AmmoBox357_magnumRIP
   - Magazine68x52mmRubber
   - Magazine68x52mmPractice
   - AmmoBox68x52mmRubber
@@ -287,6 +278,8 @@
   - MagazineShenzhen
   - AmmoBoxShenzhen
   - AmmoBoxShenzhenBig
+  - Magazine127x99mm
+  - AmmoBox127x99mm
 
 #Uranium recipes
 
@@ -302,9 +295,8 @@
   - AmmoBox556x45mmUranium
   - Magazine762x39mmUranium
   - AmmoBox762x39mmUranium
-  - Magazine45_magnumPistolUranium
-  - SpeedLoader45_magnumUranium
-  - AmmoBox45_magnumUranium
+  - SpeedLoader357_magnumUranium
+  - AmmoBox357_magnumUranium
   - Magazine46x30mmPistolUranium
   - Magazine46x30mmSubMachineGunUranium
   - AmmoBox46x30mmUranium
@@ -318,6 +310,12 @@
   - Magazine45_ACPPistolUranium
   - Magazine45_ACPSubMachineGunUranium
   - AmmoBox45_ACPUranium
+  - Magazine635x40mmCaselessUranium # Forge-change
+  - AmmoBox635x40mmCaselessUranium # Forge-change
+  - Magazine8x65mmSKRUranium # Forge-change
+  - AmmoBox8x65mmSKRUranium # Forge-change
+  - Magazine68x52mmCaselessUranium # Forge-change
+  - AmmoBox68x52mmCaselessUranium # Forge-change
 
 #Empty recipes
 
@@ -328,8 +326,7 @@
   - Magazine556x45mmEmpty
   - SpeedLoader556x45mmEmpty
   - Magazine762x39mmEmpty
-  - Magazine45_magnumPistolEmpty
-  - SpeedLoader45_magnumEmpty
+  - SpeedLoader357_magnumEmpty
   - Magazine68x52mmEmpty
   - Magazine46x30mmPistolEmpty
   - Magazine46x30mmSubMachineGunEmpty
@@ -362,9 +359,8 @@
   - AmmoBox556x45mmPractice
   - Magazine762x39mmPractice
   - AmmoBox762x39mmPractice
-  - Magazine45_magnumPistolPractice
-  - SpeedLoader45_magnumPractice
-  - AmmoBox45_magnumPractice
+  - SpeedLoader357_magnumPractice
+  - AmmoBox357_magnumPractice
   - Magazine68x52mmPractice
   - AmmoBox68x52mmPractice
   - Magazine46x30mmPistolPractice
@@ -397,9 +393,8 @@
   - AmmoBox556x45mmIncendiary
   - Magazine762x39mmIncendiary
   - AmmoBox762x39mmIncendiary
-  - Magazine45_magnumPistolIncendiary
-  - SpeedLoader45_magnumIncendiary
-  - AmmoBox45_magnumIncendiary
+  - SpeedLoader357_magnumIncendiary
+  - AmmoBox357_magnumIncendiary
   - Magazine46x30mmPistolIncendiary
   - Magazine46x30mmSubMachineGunIncendiary
   - AmmoBox46x30mmIncendiary
@@ -414,21 +409,24 @@
   - Magazine45_ACPSubMachineGunIncendiary
   - AmmoBox45_ACPIncendiary
   - AmmoBox23x75mmFlashbang
+  - Magazine635x40mmCaselessIncendiary # Forge-change
+  - AmmoBox635x40mmCaselessIncendiary # Forge-change
+  - Magazine68x52mmCaselessIncendiary # Forge-change
+  - AmmoBox68x52mmCaselessIncendiary # Forge-change
 
 #Rubber recipes
 
   - Magazine762x51mmRubber
   - AmmoBox762x51mmRubber
-  - Magazine762x54mmRRubber
-  - AmmoBox762x54mmRRubber
+#  - Magazine762x54mmRRubber # Forge-change
+#  - AmmoBox762x54mmRRubber # Forge-change
   - Magazine556x45mmRubber
   - SpeedLoader556x45mmRubber
   - AmmoBox556x45mmRubber
   - Magazine762x39mmRubber
   - AmmoBox762x39mmRubber
-  - Magazine45_magnumPistolRubber
-  - SpeedLoader45_magnumRubber
-  - AmmoBox45_magnumRubber
+  - SpeedLoader357_magnumRubber
+  - AmmoBox357_magnumRubber
   - Magazine68x52mmRubber
   - AmmoBox68x52mmRubber
   - Magazine46x30mmPistolRubber
@@ -464,9 +462,8 @@
   - Magazine762x39mmFMJ
   - SpeedLoader762x39mmFMJ
   - AmmoBox762x39mmFMJ
-  - Magazine45_magnumPistolFMJ
-  - SpeedLoader45_magnumFMJ
-  - AmmoBox45_magnumFMJ
+  - SpeedLoader357_magnumFMJ
+  - AmmoBox357_magnumFMJ
   - Magazine68x52mmFMJ
   - AmmoBox68x52mmFMJ
   - Magazine46x30mmPistolFMJ
@@ -506,11 +503,10 @@
   - AmmoBox556x45mmPlasteelAP
   - Magazine762x39mmPlasteelAP
   - AmmoBox762x39mmPlasteelAP
-  - Magazine45_magnumPistolPlasteelAP
-  - AmmoBox45_magnumPlasteelAP
+  - AmmoBox357_magnumPlasteelAP
+  - SpeedLoader357_magnumPlasteelAP
   - Magazine68x52mmPlasteelAP
   - AmmoBox68x52mmPlasteelAP
-  - SpeedLoader45_magnumPlasteelAP
   - Magazine46x30mmPistolPlasteelAP
   - Magazine46x30mmSubMachineGunPlasteelAP
   - AmmoBox46x30mmPlasteelAP
@@ -529,6 +525,10 @@
   - AmmoBox23x75mmFlechette
   - Magazine12_gaugeFlechette
   - AmmoBox12_gaugeFlechette
+  - Magazine635x40mmCaselessPlasteelAP # Forge-change
+  - AmmoBox635x40mmCaselessPlasteelAP # Forge-change
+  - Magazine8x65mmSKRPlasteelAP # Forge-change
+  - AmmoBox8x65mmSKRPlasteelAP # Forge-change
 
 #HP recipes
 
@@ -540,9 +540,8 @@
   - AmmoBox556x45mmHP
   - Magazine762x39mmHP
   - AmmoBox762x39mmHP
-  - Magazine45_magnumPistolHP
-  - SpeedLoader45_magnumHP
-  - AmmoBox45_magnumHP
+  - SpeedLoader357_magnumHP
+  - AmmoBox357_magnumHP
   - Magazine68x52mmHP
   - AmmoBox68x52mmHP
   - Magazine46x30mmPistolHP
@@ -557,6 +556,10 @@
   - Magazine45_ACPPistolHP
   - Magazine45_ACPSubMachineGunHP
   - AmmoBox45_ACPHP
+  - Magazine635x40mmCaselessHP # Forge-change
+  - AmmoBox635x40mmCaselessHP # Forge-change
+  - Magazine8x65mmSKRHP # Forge-change
+  - AmmoBox8x65mmSKRHP # Forge-change
 
 #RIP recipes
 
@@ -571,9 +574,8 @@
   - AmmoBox556x45mmRIP
   - Magazine762x39mmRIP
   - AmmoBox762x39mmRIP
-  - Magazine45_magnumPistolRIP
-  - SpeedLoader45_magnumRIP
-  - AmmoBox45_magnumRIP
+  - SpeedLoader357_magnumRIP
+  - AmmoBox357_magnumRIP
   - Magazine68x52mmRIP
   - AmmoBox68x52mmRIP
   - Magazine46x30mmPistolRIP
@@ -588,6 +590,10 @@
   - Magazine45_ACPPistolRIP
   - Magazine45_ACPSubMachineGunRIP
   - AmmoBox45_ACPRIP
+  - Magazine635x40mmCaselessRIP # Forge-change
+  - AmmoBox635x40mmCaselessRIP # Forge-change
+  - Magazine8x65mmSKRRIP # Forge-change
+  - AmmoBox8x65mmSKRRIP # Forge-change
 
 #civilian = FMJ + practice + empty + rubber + HP + Steel AP
 # MARK: Static
@@ -611,9 +617,8 @@
   - Magazine762x39mmFMJ
   - SpeedLoader762x39mmFMJ
   - AmmoBox762x39mmFMJ
-  - Magazine45_magnumPistolFMJ
-  - SpeedLoader45_magnumFMJ
-  - AmmoBox45_magnumFMJ
+  - SpeedLoader357_magnumFMJ
+  - AmmoBox357_magnumFMJ
   - Magazine68x52mmFMJ
   - AmmoBox68x52mmFMJ
   - Magazine46x30mmPistolFMJ
@@ -665,9 +670,8 @@
   - AmmoBox556x45mmPractice
   - Magazine762x39mmPractice
   - AmmoBox762x39mmPractice
-  - Magazine45_magnumPistolPractice
-  - SpeedLoader45_magnumPractice
-  - AmmoBox45_magnumPractice
+  - SpeedLoader357_magnumPractice
+  - AmmoBox357_magnumPractice
   - Magazine68x52mmPractice
   - AmmoBox68x52mmPractice
   - Magazine46x30mmPistolPractice
@@ -694,8 +698,7 @@
   - Magazine556x45mmEmpty
   - SpeedLoader556x45mmEmpty
   - Magazine762x39mmEmpty
-  - Magazine45_magnumPistolEmpty
-  - SpeedLoader45_magnumEmpty
+  - SpeedLoader357_magnumEmpty
   - Magazine68x52mmEmpty
   - Magazine46x30mmPistolEmpty
   - Magazine46x30mmSubMachineGunEmpty
@@ -716,16 +719,15 @@
 
   - Magazine762x51mmRubber
   - AmmoBox762x51mmRubber
-  - Magazine762x54mmRRubber
-  - AmmoBox762x54mmRRubber
+#  - Magazine762x54mmRRubber # Forge-change
+#  - AmmoBox762x54mmRRubber # Forge-change
   - Magazine556x45mmRubber
   - SpeedLoader556x45mmRubber
   - AmmoBox556x45mmRubber
   - Magazine762x39mmRubber
   - AmmoBox762x39mmRubber
-  - Magazine45_magnumPistolRubber
-  - SpeedLoader45_magnumRubber
-  - AmmoBox45_magnumRubber
+  - SpeedLoader357_magnumRubber
+  - AmmoBox357_magnumRubber
   - Magazine68x52mmRubber
   - AmmoBox68x52mmRubber
   - Magazine46x30mmPistolRubber
@@ -755,9 +757,8 @@
   - AmmoBox556x45mmHP
   - Magazine762x39mmHP
   - AmmoBox762x39mmHP
-  - Magazine45_magnumPistolHP
-  - SpeedLoader45_magnumHP
-  - AmmoBox45_magnumHP
+  - SpeedLoader357_magnumHP
+  - AmmoBox357_magnumHP
   - Magazine46x30mmPistolHP
   - Magazine46x30mmSubMachineGunHP
   - AmmoBox46x30mmHP
@@ -772,6 +773,10 @@
   - AmmoBox45_ACPHP
   - Magazine68x52mmHP
   - AmmoBox68x52mmHP
+  - Magazine635x40mmCaselessHP # Forge-change
+  - AmmoBox635x40mmCaselessHP # Forge-change
+  - Magazine8x65mmSKRHP # Forge-change
+  - AmmoBox8x65mmSKRHP # Forge-change
 
 # Energy
   - Magazine700Thz
@@ -798,9 +803,8 @@
   - AmmoBox556x45mmUranium
   - Magazine762x39mmUranium
   - AmmoBox762x39mmUranium
-  - Magazine45_magnumPistolUranium
-  - SpeedLoader45_magnumUranium
-  - AmmoBox45_magnumUranium
+  - SpeedLoader357_magnumUranium
+  - AmmoBox357_magnumUranium
   - Magazine46x30mmPistolUranium
   - Magazine46x30mmSubMachineGunUranium
   - AmmoBox46x30mmUranium
@@ -814,6 +818,12 @@
   - Magazine45_ACPPistolUranium
   - Magazine45_ACPSubMachineGunUranium
   - AmmoBox45_ACPUranium
+  - Magazine635x40mmCaselessUranium # Forge-change
+  - AmmoBox635x40mmCaselessUranium # Forge-change
+  - Magazine8x65mmSKRUranium # Forge-change
+  - AmmoBox8x65mmSKRUranium # Forge-change
+  - Magazine68x52mmCaselessUranium # Forge-change
+  - AmmoBox68x52mmCaselessUranium # Forge-change
 
 #Incendiary recipes
 
@@ -831,9 +841,8 @@
   - AmmoBox556x45mmIncendiary
   - Magazine762x39mmIncendiary
   - AmmoBox762x39mmIncendiary
-  - Magazine45_magnumPistolIncendiary
-  - SpeedLoader45_magnumIncendiary
-  - AmmoBox45_magnumIncendiary
+  - SpeedLoader357_magnumIncendiary
+  - AmmoBox357_magnumIncendiary
   - Magazine46x30mmPistolIncendiary
   - Magazine46x30mmSubMachineGunIncendiary
   - AmmoBox46x30mmIncendiary
@@ -848,6 +857,10 @@
   - Magazine45_ACPSubMachineGunIncendiary
   - AmmoBox45_ACPIncendiary
   - AmmoBox23x75mmFlashbang
+  - Magazine635x40mmCaselessIncendiary # Forge-change
+  - AmmoBox635x40mmCaselessIncendiary # Forge-change
+  - Magazine68x52mmCaselessIncendiary # Forge-change
+  - AmmoBox68x52mmCaselessIncendiary # Forge-change
 
 #Plasteel AP recipes
 
@@ -859,9 +872,8 @@
   - AmmoBox556x45mmPlasteelAP
   - Magazine762x39mmPlasteelAP
   - AmmoBox762x39mmPlasteelAP
-  - Magazine45_magnumPistolPlasteelAP
-  - AmmoBox45_magnumPlasteelAP
-  - SpeedLoader45_magnumPlasteelAP
+  - AmmoBox357_magnumPlasteelAP
+  - SpeedLoader357_magnumPlasteelAP
   - Magazine68x52mmPlasteelAP
   - AmmoBox68x52mmPlasteelAP
   - Magazine46x30mmPistolPlasteelAP
@@ -882,6 +894,10 @@
   - AmmoBox23x75mmFlechette
   - Magazine12_gaugeFlechette
   - AmmoBox12_gaugeFlechette
+  - Magazine635x40mmCaselessPlasteelAP # Forge-change
+  - AmmoBox635x40mmCaselessPlasteelAP # Forge-change
+  - Magazine8x65mmSKRPlasteelAP # Forge-change
+  - AmmoBox8x65mmSKRPlasteelAP # Forge-change
 
 #RIP recipes
 
@@ -896,9 +912,8 @@
   - AmmoBox556x45mmRIP
   - Magazine762x39mmRIP
   - AmmoBox762x39mmRIP
-  - Magazine45_magnumPistolRIP
-  - SpeedLoader45_magnumRIP
-  - AmmoBox45_magnumRIP
+  - SpeedLoader357_magnumRIP
+  - AmmoBox357_magnumRIP
   - Magazine68x52mmRIP
   - AmmoBox68x52mmRIP
   - Magazine46x30mmPistolRIP
@@ -913,6 +928,10 @@
   - Magazine45_ACPPistolRIP
   - Magazine45_ACPSubMachineGunRIP
   - AmmoBox45_ACPRIP
+  - Magazine635x40mmCaselessRIP # Forge-change
+  - AmmoBox635x40mmCaselessRIP # Forge-change
+  - Magazine8x65mmSKRRIP # Forge-change
+  - AmmoBox8x65mmSKRRIP # Forge-change
 
 #Misc
   - Magazine762x39mmSubsonic
@@ -930,6 +949,9 @@
   - AmmoBox145x114mm
   - AmmoBox145x114mmBig
   - Magazine35mmGrenade
+  - Magazine127x99mm
+  - AmmoBox127x99mm
+  - Magazine762x39mmBox
 
 #DP
   - MagazineDP29
@@ -948,7 +970,7 @@
   - AmmoBox762x54mmRBigFMJ
   - AmmoBox9x19mmBigFMJ
   - AmmoBox45_ACPBigFMJ
-  - AmmoBox45_magnumBigFMJ
+  - AmmoBox357_magnumBigFMJ
   - AmmoBox46x30mmBigFMJ
   - AmmoBox556x45mmBigFMJ
   - AmmoBox57x28mmBigFMJ

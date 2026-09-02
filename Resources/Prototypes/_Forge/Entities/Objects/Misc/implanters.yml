@@ -22,7 +22,31 @@
     - type: Implanter
       implant: ImplantGuard
 
-# Implanters factions tracking
+#region Job Reassignment
+- type: entity
+  parent: BaseItem
+  id: JobReassignmentInjector
+  name: reassignment injector
+  description: A disposable injector encoded with a reassignment profile.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Medical/nt_implanter.rsi
+    state: implanter1
+    layers:
+    - state: implanter0
+    - state: implanter1
+  - type: Item
+    sprite: _Goobstation/Objects/Specific/Medical/nt_implanter.rsi
+    heldPrefix: 0
+    size: Small
+  - type: JobReassignmentInjector
+  - type: Tag
+    tags:
+    - Trash
+  - type: StaticPrice
+    price: 35
+
+#region Factions tracking
 - type: entity
   id: RenegadeTrackingImplanter
   suffix: renegade tracking
@@ -62,3 +86,29 @@
   components:
   - type: Implanter
     implant: EmpireTrackingImplant
+
+# - type: entity
+#   id: IpcLightImplanter
+#   name: ipc light implanter
+#   description: The light is brighter than that of a standard flashlight implant, at the cost of draining the IPC battery.
+#   suffix: IPC
+#   parent: BaseImplantOnlyImplanter
+#   components:
+#   - type: Implanter
+#     implant: IpcLightImplant
+
+- type: entity
+  id: TranexamicImplanter
+  parent: BaseImplantOnlyImplanter
+  suffix: Tranexamic
+  components:
+    - type: Implanter
+      implant: TranexamicImplant
+
+- type: entity
+  id: TranexamicImplanterDose
+  parent: BaseImplantOnlyImplanter
+  suffix: Tranexamic Dose
+  components:
+    - type: Implanter
+      implant: TranexamicImplantDose

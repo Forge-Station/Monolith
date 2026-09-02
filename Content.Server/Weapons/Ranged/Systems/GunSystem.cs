@@ -195,6 +195,12 @@ public sealed partial class GunSystem : SharedGunSystem
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        /// Forge-Change-Start
+        if(gun.DeleteOnShoot)
+        {
+            QueueDel(gunUid);
+        }
+        /// Forge-Change-Start
         }
 
         RaiseLocalEvent(gunUid, new AmmoShotEvent()

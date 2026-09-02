@@ -10,7 +10,7 @@ public sealed partial class ShipShieldOverlaySystem : EntitySystem
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!; // Forge-Change
+    [Dependency] private readonly SharedMapSystem _mapManager = default!; // Forge-Change
 
     public override void Initialize()
     {

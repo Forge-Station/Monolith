@@ -35,7 +35,8 @@
         layer:
         - MachineLayer
   - type: Gun
-    projectileSpeed: 275
+    damageModifier: 2
+    projectileSpeed: 380
     minAngle: 0
     maxAngle: 1
     fireRate: 0.2
@@ -50,6 +51,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 1500
@@ -81,6 +83,38 @@
   - type: ShipRepairable
     repairTime: 30
     repairCost: 150
+
+- type: entity
+  id: WeaponTurretCyrexaHomingCluster
+  name: CYREXA 220mm cannon
+  parent: WeaponTurretCyrexa
+  suffix: Large, T4, Infinite HMNG-CLST
+  components:
+  - type: BallisticAmmoProvider
+    infiniteUnspawned: true
+    whitelist:
+      tags:
+      - 220mmCartridge
+    capacity: 24
+    proto: 220mmCartridgeSmartCluster
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+
+- type: entity
+  id: WeaponTurretCyrexaHECluster
+  name: CYREXA 220mm cannon
+  parent: WeaponTurretCyrexa
+  suffix: Large, T4, Infinite HE-CLST
+  components:
+  - type: BallisticAmmoProvider
+    infiniteUnspawned: true
+    whitelist:
+      tags:
+      - 220mmCartridge
+    capacity: 24
+    proto: 220mmCartridgeHECluster
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
 
 # AK820 120mm
 
@@ -123,7 +157,7 @@
     projectileSpeed: 360
     minAngle: 0
     maxAngle: 0.5
-    fireRate: 2.5
+    fireRate: 3.5
     recoil: 10
     selectedMode: FullAuto
     availableModes: FullAuto
@@ -132,6 +166,7 @@
       collection: 120mmAutocannonAK820
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
   - type: Actions
   - type: RadarBlip
@@ -219,6 +254,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 1500
@@ -286,7 +322,7 @@
         layer:
         - MachineLayer
   - type: Gun
-    projectileSpeed: 350
+    projectileSpeed: 550
     minAngle: 0
     maxAngle: 1
     fireRate: 0.1
@@ -296,6 +332,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 2000
@@ -374,6 +411,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 2000
@@ -444,7 +482,7 @@
         layer:
         - MachineLayer
   - type: Gun
-    projectileSpeed: 350
+    projectileSpeed: 550
     minAngle: 0
     maxAngle: 0
     fireRate: 0.2
@@ -459,6 +497,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 12000
@@ -537,6 +576,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -615,6 +655,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/120mm_mortar.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 1500
@@ -698,6 +739,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/120mm_mortar.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 1500

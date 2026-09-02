@@ -2,10 +2,10 @@ meta:
   format: 7
   category: Grid
   engineVersion: 277.0.0
-  forkId: ""
-  forkVersion: ""
-  time: 06/01/2026 14:45:08
-  entityCount: 2807
+  forkId: frontier_mapping
+  forkVersion: a7c699b5cee261d941ce28969846b2e98ca517cb
+  time: 06/02/2026 01:23:14
+  entityCount: 2830
 maps: []
 grids:
 - 2
@@ -51,8 +51,6 @@ entities:
     - type: Transform
       pos: -2.09375,0.15625
       parent: invalid
-    - type: BecomesStation
-      id: ForgeVulcan
     - type: MapGrid
       chunks:
         0,0:
@@ -117,10 +115,10 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
       spreadQueues:
-        Puddle: []
+        Kudzu: []
         MetalFoam: []
         Smoke: []
-        Kudzu: []
+        Puddle: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -674,7 +672,6 @@ entities:
             1529: 23,-22
             1530: 26,-24
             1531: 26,-25
-            1532: 24,-24
             1533: 22,-24
             1534: 21,-25
             1535: 21,-25
@@ -974,21 +971,6 @@ entities:
             761: 31,-5
             762: 32,-5
         - node:
-            color: '#B1B1B1FF'
-            id: N2ShiptestMarking
-          decals:
-            520: 20.587532,-23.945045
-        - node:
-            color: '#B1B1B1FF'
-            id: N2oShiptestMarking
-          decals:
-            521: 20.97295,-17.99591
-        - node:
-            color: '#B1B1B1FF'
-            id: O2ShiptestMarking
-          decals:
-            519: 23.545866,-23.945045
-        - node:
             cleanable: True
             color: '#FFFFFF6C'
             id: Rust
@@ -1090,9 +1072,7 @@ entities:
             489: 46,-10
             508: 22,-18
             509: 22,-19
-            516: 21,-24
             517: 25,-24
-            518: 24,-24
             541: 26,-18
             542: 26,-19
             543: 26,-20
@@ -1101,6 +1081,8 @@ entities:
             777: 33,-6
             1140: 42,3
             1324: 27,-1
+            2387: 24,-24
+            2388: 21,-24
         - node:
             color: '#FFFFFFFF'
             id: TechFullCornerE
@@ -1569,8 +1551,6 @@ entities:
             498: 21,-14
             506: 20,-18
             507: 20,-19
-            514: 20,-24
-            515: 23,-24
             537: 24,-21
             538: 24,-20
             539: 24,-19
@@ -1580,14 +1560,14 @@ entities:
             1161: 45,-6
             1302: -10,-13
             1323: 19,-1
+            2385: 20,-24
+            2386: 23,-24
         - node:
             color: '#9B8700FF'
             id: TrimWarnEast
           decals:
             570: 20,-9
             800: 33,-6
-            923: 23,-24
-            924: 20,-24
             925: 20,-18
             926: 20,-19
             1039: 15,-1
@@ -1602,6 +1582,8 @@ entities:
             1320: 22,-1
             1321: 23,-1
             1322: 24,-1
+            2391: 20,-24
+            2392: 23,-24
         - node:
             color: '#9B8700FF'
             id: TrimWarnNorth
@@ -1715,7 +1697,6 @@ entities:
             793: 26,-6
             927: 22,-18
             928: 22,-19
-            929: 24,-24
             1041: 17,-1
             1060: 7,-10
             1061: 7,-9
@@ -1730,10 +1711,11 @@ entities:
             1242: 57,-11
             1295: -9,0
             1298: -9,-12
-            1316: 21,-24
             1317: 24,-1
             1318: 23,-1
             1319: 22,-1
+            2389: 21,-24
+            2390: 24,-24
         - node:
             color: '#9B8700FF'
             id: TrimlineEast
@@ -2400,14 +2382,12 @@ entities:
             1968: 22.728582,-13.127896
             1969: 24.822332,-13.220224
             1970: 24.337957,-15.7998295
-            1971: 20.556707,-18.403746
             1972: 20.900457,-16.6956
             1973: 21.322332,-17.040352
             1974: 20.119207,-17.055576
             1975: 22.181707,-17.243076
             1976: 21.884832,-18.305576
             1977: 20.322332,-18.836826
-            1978: 20.416082,-18.555576
             1979: 20.259832,-21.992285
             1980: 20.791082,-21.493265
             1981: 22.525457,-21.731197
@@ -2423,13 +2403,9 @@ entities:
             1991: 24.275457,-18.746744
             1992: 25.541082,-24.98112
             1993: 25.837957,-24.152994
-            1994: 23.775457,-23.63737
             1995: 23.509832,-24.902994
-            1996: 23.181707,-24.277994
             1997: 19.322332,-24.590494
             1998: 21.306707,-22.903032
-            1999: 20.759832,-24.374546
-            2000: 20.494207,-24.201765
             2001: 26.812397,-11.265662
             2002: 27.626005,-11.281245
             2003: 26.391474,-11.500001
@@ -3391,7 +3367,7 @@ entities:
       pos: 16.5,-1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1277.6549
+      secondsUntilStateChange: -1852.556
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -9894,6 +9870,18 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 24.5,-0.5
       parent: 2
+- proto: ComputerIFFCapture
+  entities:
+  - uid: 2808
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 39.5,-10.5
+      parent: 2
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 0
 - proto: ComputerPowerMonitoring
   entities:
   - uid: 1256
@@ -14928,7 +14916,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 48.5,-0.5
       parent: 2
-- proto: GunneryServerUltra
+- proto: GunneryServerOmega
   entities:
   - uid: 1281
     components:
@@ -14966,6 +14954,13 @@ entities:
     components:
     - type: Transform
       pos: 52.479332,-5.1790175
+      parent: 2
+- proto: LandMineExplosive
+  entities:
+  - uid: 2809
+    components:
+    - type: Transform
+      pos: 31.193773,-5.3333282
       parent: 2
 - proto: LockerFreezerBase
   entities:
@@ -15213,6 +15208,13 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 26.547308,-18.45557
+      parent: 2
+- proto: PoiTreasuryMiningDrill
+  entities:
+  - uid: 2807
+    components:
+    - type: Transform
+      pos: 38.5,-10.5
       parent: 2
 - proto: PottedPlant11
   entities:
@@ -15805,6 +15807,118 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -8.5,-12.5
+      parent: 2
+- proto: RandomPosterAny
+  entities:
+  - uid: 2810
+    components:
+    - type: Transform
+      pos: 29.5,-11.5
+      parent: 2
+  - uid: 2811
+    components:
+    - type: Transform
+      pos: 22.5,-11.5
+      parent: 2
+  - uid: 2812
+    components:
+    - type: Transform
+      pos: 19.5,-11.5
+      parent: 2
+  - uid: 2813
+    components:
+    - type: Transform
+      pos: 16.5,-3.5
+      parent: 2
+  - uid: 2814
+    components:
+    - type: Transform
+      pos: 18.5,-1.5
+      parent: 2
+  - uid: 2815
+    components:
+    - type: Transform
+      pos: 21.5,1.5
+      parent: 2
+  - uid: 2816
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,-2.5
+      parent: 2
+  - uid: 2817
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 41.5,1.5
+      parent: 2
+  - uid: 2818
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 48.5,-3.5
+      parent: 2
+  - uid: 2819
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 48.5,-4.5
+      parent: 2
+  - uid: 2820
+    components:
+    - type: Transform
+      pos: 52.5,-7.5
+      parent: 2
+  - uid: 2821
+    components:
+    - type: Transform
+      pos: 57.5,-2.5
+      parent: 2
+  - uid: 2822
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 58.5,-11.5
+      parent: 2
+  - uid: 2823
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 41.5,-11.5
+      parent: 2
+  - uid: 2824
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,-9.5
+      parent: 2
+  - uid: 2825
+    components:
+    - type: Transform
+      pos: 5.5,-3.5
+      parent: 2
+  - uid: 2826
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -0.5,-4.5
+      parent: 2
+  - uid: 2827
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -4.5,-7.5
+      parent: 2
+  - uid: 2828
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -12.5,-5.5
+      parent: 2
+  - uid: 2829
+    components:
+    - type: Transform
+      pos: -10.5,-2.5
       parent: 2
 - proto: ResearchAndDevelopmentServer
   entities:
@@ -20225,12 +20339,12 @@ entities:
     - type: Transform
       pos: 2.5,-2.5
       parent: 2
-- proto: WarpPoint
+- proto: WarpPointBeacon
   entities:
-  - uid: 2807
+  - uid: 2830
     components:
     - type: Transform
-      pos: 19.5,-8.5
+      pos: 10.5,-5.5
       parent: 2
 - proto: WeaponTurretAK570
   entities:
@@ -20278,7 +20392,17 @@ entities:
     - type: Transform
       pos: 27.5,-27.5
       parent: 2
-  - uid: 1308
+- proto: WeaponTurretAK570Circuitboard
+  entities:
+  - uid: 1174
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 23.622557,-6.9231777
+      parent: 2
+- proto: WeaponTurretAK570Portable
+  entities:
+  - uid: 1309
     components:
     - type: Transform
       anchored: False
@@ -20289,15 +20413,7 @@ entities:
       currentDelay: 10
     - type: Physics
       bodyType: Dynamic
-- proto: WeaponTurretAK570Circuitboard
-  entities:
-  - uid: 1174
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 23.622557,-6.9231777
-      parent: 2
-- proto: WeaponTurretBoforsPortable
+- proto: WeaponTurretBofors
   entities:
   - uid: 2217
     components:
@@ -20305,24 +20421,37 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 32.5,-22.5
       parent: 2
-  - uid: 2343
+  - uid: 2218
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -0.5,7.5
       parent: 2
-  - uid: 2344
+  - uid: 2220
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 48.5,7.5
       parent: 2
-  - uid: 2345
+  - uid: 2221
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 14.5,-22.5
       parent: 2
+- proto: WeaponTurretBoforsPortable
+  entities:
+  - uid: 1307
+    components:
+    - type: Transform
+      anchored: False
+      rot: 1.5707963267948966 rad
+      pos: 29.5,-4.5
+      parent: 2
+    - type: Anchorable
+      currentDelay: 10
+    - type: Physics
+      bodyType: Dynamic
 - proto: WeaponTurretDravonCircuitboard
   entities:
   - uid: 1890
@@ -20331,9 +20460,54 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 13.263182,-8.360678
       parent: 2
-- proto: WeaponTurretFang
+- proto: WeaponTurretLongbowCircuitboard
   entities:
-  - uid: 1309
+  - uid: 1192
+    components:
+    - type: Transform
+      pos: 26.544432,-8.423178
+      parent: 2
+- proto: WeaponTurretTovek
+  entities:
+  - uid: 2287
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 20.5,7.5
+      parent: 2
+  - uid: 2343
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 17.5,-25.5
+      parent: 2
+  - uid: 2344
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 27.5,7.5
+      parent: 2
+  - uid: 2345
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,-25.5
+      parent: 2
+- proto: WeaponTurretTovekPortable
+  entities:
+  - uid: 1308
+    components:
+    - type: Transform
+      anchored: False
+      pos: 31.5,-4.5
+      parent: 2
+    - type: Anchorable
+      currentDelay: 10
+    - type: Physics
+      bodyType: Dynamic
+- proto: WeaponTurretVesperaPortable
+  entities:
+  - uid: 1306
     components:
     - type: Transform
       anchored: False
@@ -20344,62 +20518,6 @@ entities:
       currentDelay: 10
     - type: Physics
       bodyType: Dynamic
-- proto: WeaponTurretL85Autocannon
-  entities:
-  - uid: 1306
-    components:
-    - type: Transform
-      anchored: False
-      pos: 29.5,-4.5
-      parent: 2
-    - type: Anchorable
-      currentDelay: 10
-    - type: Physics
-      bodyType: Dynamic
-  - uid: 1307
-    components:
-    - type: Transform
-      anchored: False
-      rot: -1.5707963267948966 rad
-      pos: 31.5,-4.5
-      parent: 2
-    - type: Anchorable
-      currentDelay: 10
-    - type: Physics
-      bodyType: Dynamic
-- proto: WeaponTurretLongbowCircuitboard
-  entities:
-  - uid: 1192
-    components:
-    - type: Transform
-      pos: 26.544432,-8.423178
-      parent: 2
-- proto: WeaponTurretTovekPortable
-  entities:
-  - uid: 2218
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 27.5,7.5
-      parent: 2
-  - uid: 2220
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 17.5,-25.5
-      parent: 2
-  - uid: 2221
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 29.5,-25.5
-      parent: 2
-  - uid: 2287
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 20.5,7.5
-      parent: 2
 - proto: WebNest
   entities:
   - uid: 2128

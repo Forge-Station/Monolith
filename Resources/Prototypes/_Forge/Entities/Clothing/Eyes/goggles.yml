@@ -6,9 +6,9 @@
   description: Imperial Operator visor that allows for ID card identification, rapid equipment diagnostics, and drone control within a two-kilometer radius.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/operator.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/operator.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/operator.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/operator.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: IdentityBlocker
@@ -49,9 +49,9 @@
   description: There is an incomprehensible engraving on the glasses; all I can make out is the word "Nian"
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision_techniclogistic.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/diagnostic_nightvision_techniclogistic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision_techniclogistic.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/diagnostic_nightvision_techniclogistic.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: StaticPrice
@@ -65,8 +65,8 @@
     viewCircleRadius: 600 #400 to 600 // это радиус обзора
     viewCircleCount: 2
     viewCircleSpacing: 280
-    phosphorColor: "#ba8207"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#ba8207" #Forge-change #ba8207 to #ffc83b
+    lightingColor: "#0FFFFFFF" #Forge-change #FFFFFF32 to #0FFFFFFF
     amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
 
 #region Other
@@ -77,9 +77,9 @@
   description: An advanced heads-up display which provides id data and vision in complete darkness.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/nightvision.rsi
   - type: FlashImmunity
   - type: StaticPrice
     price: 30
@@ -93,8 +93,8 @@
     viewCircleRadius: 600 #350 to 600 // это радиус обзора
     viewCircleCount: 2
     viewCircleSpacing: 280
-    phosphorColor: "#77DD77"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#a6ffa6" #Forge-change #77DD77 to #a6ffa6
+    lightingColor: "#0FFFFFFF" #Forge-change #FFFFFF32 to #0FFFFFFF
     amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
 
 
@@ -105,9 +105,9 @@
   description: An advanced heads-up display which provides id data and vision in complete darkness.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/medical_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/medical_nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/medical_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/medical_nightvision.rsi
   - type: FlashImmunity
   - type: StaticPrice
     price: 30
@@ -122,8 +122,8 @@
     viewCircleRadius: 600 #400 to 600 // это радиус обзора
     viewCircleCount: 2
     viewCircleSpacing: 280
-    phosphorColor: "#42AAFF"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#80d4ff" #Forge-change #42AAFF to #80d4ff
+    lightingColor: "#0FFFFFFF" #Forge-change ##FFFFFF32 to #0FFFFFFF
     amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
 
 
@@ -134,9 +134,9 @@
   description: An advanced heads-up display which provides id data and vision in complete darkness.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/security_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/security_nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/security_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/security_nightvision.rsi
   - type: FlashImmunity
   - type: StaticPrice
     price: 30
@@ -149,8 +149,8 @@
     viewCircleRadius: 600 #400 to 600 // это радиус обзора
     viewCircleCount: 2
     viewCircleSpacing: 280
-    phosphorColor: "#AB4E52"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#ff1a25" #Forge-change #AB4E52 to #ff1a25
+    lightingColor: "#FFFFFFFF" #Forge-change #FFFFFF32 to #FFFFFFFF
     amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
 
 
@@ -161,9 +161,9 @@
   description: An advanced heads-up display which provides id data and vision in complete darkness.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/diagnostic_nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/diagnostic_nightvision.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: StaticPrice
@@ -176,8 +176,8 @@
     viewCircleRadius: 600 #400 to 600 // это радиус обзора
     viewCircleCount: 2
     viewCircleSpacing: 280
-    phosphorColor: "#ddba00"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#ffaa00" #Forge-change #ddba00 to #ffaa00
+    lightingColor: "#FFFFFFFF" #Forge-change #FFFFFF32 to #FFFFFFFF
     amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
 
 
@@ -202,9 +202,9 @@
     action: ActionToggleNightVision
     viewCircleRadius: 800 #400 to 800 // это радиус обзора (максимальный радиус для ТСФ)
     viewCircleCount: 4
-    viewCircleSpacing: 280
-    phosphorColor: "#2E8B57"
-    lightingColor: "#0CFFFF32" # #FFFFFF32 to #0CFFFF32//
+    viewCircleSpacing: 100 #Forge-change 280 to 100
+    phosphorColor: "#4ee293" #Forge-change #2E8B57 to #4ee293
+    lightingColor: "#FFFFFFFF" # #FFFFFF32 to #0CFFFF32 // (hotFix1) to #FFFFFFFF
     amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
 
 
@@ -281,9 +281,9 @@
   description: Усовершенствованный сенсорный дисплей, который выдает идентификационные данные и обеспечивает видимость в полной темноте.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/dcn_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/dcn_nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/dcn_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/dcn_nightvision.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: StaticPrice
@@ -300,8 +300,8 @@
     viewCircleRadius: 600 #400 to 600 // это радиус обзора
     viewCircleCount: 2
     viewCircleSpacing: 280
-    phosphorColor: "#aa9c00"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#d9ff00" #Forge-change #aa9c00 to #d9ff00
+    lightingColor: "#FFFFFFFF" #Forge-change #FFFFFF32 to #FFFFFFFF
     amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
 
 
@@ -312,9 +312,9 @@
   description: Now you can see in the dark everyone!
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: StaticPrice
@@ -344,9 +344,9 @@
   description: Стильные фиолетовые очки с возможностью просмотра профессии и компаний
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/uiglasses.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/uiglasses.rsi
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5

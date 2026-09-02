@@ -1,8 +1,8 @@
-﻿using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
+using Robust.Shared.Prototypes;
+
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization; // Frontier
 
@@ -24,13 +24,13 @@ namespace Content.Shared.Kitchen
         [DataField]
         public string Group = "Other";
 
-        [DataField("reagents", customTypeSerializer:typeof(PrototypeIdDictionarySerializer<FixedPoint2, ReagentPrototype>))]
+        [DataField("reagents", customTypeSerializer:typeof(ProtoId<ReagentPrototype>))]
         private Dictionary<string, FixedPoint2> _ingsReagents = new();
 
-        [DataField("solids", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, EntityPrototype>))]
+        [DataField("solids", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         private Dictionary<string, FixedPoint2> _ingsSolids = new ();
 
-        [DataField("result", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("result", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string Result { get; private set; } = string.Empty;
 
         // Frontier
@@ -88,6 +88,7 @@ namespace Content.Shared.Kitchen
         Assembler = 4,
         MedicalAssembler = 8,
         ArcFurnace = 16,
+        PrecisionAssembler = 32,
     }
 
     public sealed class MicrowaveRecipeTypeFlags { }

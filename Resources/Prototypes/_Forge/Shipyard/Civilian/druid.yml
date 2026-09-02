@@ -1,7 +1,7 @@
 - type: vessel
   id: Druid
   parent: BaseVessel
-  name: Друид
+  name: «Друид»
   description: Ботанический шаттл с химической лабораторией.
   price: 69000
   category: Medium

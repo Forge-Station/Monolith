@@ -11,6 +11,9 @@ public sealed partial class PlantAdjustMutationLevel : PlantAdjustAttribute
         if (!CanMetabolize(args.TargetEntity, out var plantHolderComp, args.EntityManager))
             return;
 
+        if (plantHolderComp.Seed is { GeneLocked: true })
+            return;
+
         plantHolderComp.MutationLevel += Amount * plantHolderComp.MutationMod;
     }
 }

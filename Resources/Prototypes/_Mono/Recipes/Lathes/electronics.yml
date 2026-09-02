@@ -135,6 +135,13 @@
   id: ShipDrillMachineCircuitboard
   result: ShipDrillMachineCircuitboard
 
+#Forge-change-add-start
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: ShipDrillDiamondMachineCircuitboard
+  result: ShipDrillDiamondMachineCircuitboard
+#Forge-change-add-end
+
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
   id: LargeThrusterMachineCircuitboard
@@ -197,6 +204,36 @@
   id: OreMagnetMachineCircuitboard
   result: OreMagnetMachineCircuitboard
 
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: IndustrialFurnaceEconomyCompactCircuitboard
+  result: IndustrialFurnaceEconomyCompactCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: PrecisionAssemblerEconomyCompactCircuitboard
+  result: PrecisionAssemblerEconomyCompactCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: IndustrialPressEconomyElectronicsMachineCircuitboard
+  result: IndustrialPressEconomyElectronicsMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: IndustrialPressEconomyPlatesMachineCircuitboard
+  result: IndustrialPressEconomyPlatesMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: IndustrialPressEconomyElectronicsMMCMachineCircuitboard
+  result: IndustrialPressEconomyElectronicsMMCMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: IndustrialPressEconomyPlatesMMCMachineCircuitboard
+  result: IndustrialPressEconomyPlatesMMCMachineCircuitboard
+
 # faction-specific RWR shuttle consoles - can be made by anyone because it doesnt do shit gameplay wise
 
 - type: latheRecipe
@@ -213,3 +250,9 @@
   parent: ShuttleConsoleCircuitboard
   id: ShuttleConsoleCircuitboardANALR67RWR
   result: ShuttleConsoleCircuitboardANALR67RWR
+
+# silo
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MaterialSiloMachineCircuitboard
+  result: MaterialSiloMachineCircuitboard

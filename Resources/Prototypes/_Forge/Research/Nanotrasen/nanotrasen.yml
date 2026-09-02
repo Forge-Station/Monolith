@@ -3,7 +3,7 @@
   name: research-discipline-nanotrasen-tti
   color: "#143c7c"
   icon:
-    sprite: Forge/Interface/Misc/research_disciplines_nt.rsi
+    sprite: _Forge/Interface/Misc/research_disciplines_nt.rsi
     state: nt
   tierPrerequisites:
     1: 0
@@ -99,7 +99,6 @@
   cost: 60000
   recipeUnlocks:
   - ClothingOuterHardsuitERTSecurity
-  - ClothingOuterHardsuitCBURN
   - ClothingUniformJumpsuitERTSecurity
   # - ClothingUniformJumpsuitERTMedic
   # - ClothingUniformJumpsuitERTMailCarrier
@@ -176,7 +175,6 @@
   cost: 15000
   recipeUnlocks:
   - WeaponRevolverInspector
-  - WeaponRevolverDeckard
   - WeaponFlareGunSecurity
   technologyPrerequisites:
   - UniversalMaterialResearchT1
@@ -190,7 +188,7 @@
   tier: 2
   cost: 30000
   recipeUnlocks:
-  - WeaponPistolN1984
+  - WeaponPistolMk58
   - WeaponRevolverMateba
   technologyPrerequisites:
   - NanotrasenWeaponT1
@@ -422,3 +420,5 @@
 #   technologyPrerequisites:
 #   - TTItechMachineT1
 #   position: 19, -2
+
+# Я убрал мержконфликты, главное не забыть потом переделать КАК НАДО. А не как вышло. Мне лень было разбираться.

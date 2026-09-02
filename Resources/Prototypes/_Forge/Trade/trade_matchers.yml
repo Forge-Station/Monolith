@@ -21,7 +21,6 @@
     state: icon
   items:
   - WeaponCaseShortMk58Expedition
-  - WeaponCaseShortN1984Expedition
   - WeaponCaseShortViper
   - WeaponCaseShortUniversalExpedition
   - WeaponCaseShortPollockExpedition
@@ -89,11 +88,11 @@
   - WeaponCaseLongEnergyGunExpedition
   - WeaponCaseLongLaserCannonExpedition
   - WeaponCaseLongXrayCannonExpedition
-  - WeaponCaseLongHristovExpedition
+  - WeaponCaseHeavyHristovExpedition
   - WeaponCaseLongSniperCeremonialExpedition
   - WeaponCaseLongLauncherRocketExpedition
   - WeaponCaseLongLauncherChinaLake
-  - WeaponCaseLongLightMachineGunL6
+  - WeaponCaseHeavyLightMachineGunL6
   - WeaponCaseShortEnergyShieldExpedition
   - WeaponCaseShortEnergySwordExpedition
   - WeaponCaseShortEnergyDaggerExpedition

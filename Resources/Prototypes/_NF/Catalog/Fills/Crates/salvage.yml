@@ -9,7 +9,7 @@
       entity_storage: !type:NestedSelector
         tableId: NFSalvageAssortedGoodies
         rolls: !type:RangeNumberSelector
-          range: -1, 3 # -1 used because of strange counting, actual values: [0, 1, 2, 3], ~25% chance of each.
+          range: 0, 3 # Forge-Change -1 make chance of empty 40%. 0 is working as intended. ## -1 used because of strange counting, actual values: [0, 1, 2, 3], ~25% chance of each.
 
 - type: entityTable
   id: NFSalvageAssortedGoodies
@@ -31,6 +31,10 @@
     - id: MaterialCloth
     - id: MaterialDurathread
       weight: 0.1 #0.01 >> 0.1
+    - id: SheetCopper50 # Forge-Change
+      weight: 0.5 # Forge-Change
+    - id: SheetLithium50 # Forge-Change
+      weight: 0.35 # Forge-Change
     - id: MaterialCardboard
       weight: 0.1
     - id: SheetPaper

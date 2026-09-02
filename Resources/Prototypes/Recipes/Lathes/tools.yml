@@ -150,15 +150,25 @@
   parent: BaseBigToolRecipe
   id: GasAnalyzer
   result: GasAnalyzer
+# Forge-Change-Start
 
 - type: latheRecipe
   parent: BaseToolRecipe
   id: SprayPainter
-  result: SprayPainter
+  result: SprayPainterEmpty
   materials:
     Steel: 300
     Plastic: 100
 
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SprayPainterAmmo
+  result: SprayPainterAmmo
+  materials:
+    Steel: 150
+    Plastic: 50
+
+# Forge-Change-End
 - type: latheRecipe
   parent: BaseToolRecipe
   id: UtilityBelt

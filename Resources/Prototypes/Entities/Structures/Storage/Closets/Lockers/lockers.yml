@@ -16,6 +16,8 @@
       path: /Audio/Effects/woodenclosetclose.ogg
     openSound:
       path: /Audio/Effects/woodenclosetopen.ogg
+  - type: Paintable                               # Forge-Change
+    group: null # not shaped like other lockers   # Forge-Change
 
 # Basic
 - type: entity
@@ -174,6 +176,8 @@
     node: done
     containers:
     - entity_storage
+  - type: Paintable                               # Forge-Change
+    group: null # not shaped like other lockers   # Forge-Change
 
 - type: entity
   id: LockerFreezer

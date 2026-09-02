@@ -902,6 +902,9 @@
     quantityPerUpdate: 25
     growthDelay: 30
   - type: ExaminableHunger
+  - type: Hunger
+    baseDecayRate: 10 # always hungry
+    starvingSlowdownModifier: 1
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -1479,7 +1482,7 @@
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashReaction #Forge-Change
   - type: LabGrown # Frontier
 
 

@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._Forge.UserInterface; // Forge-Change
 using Content.Client.Cooldown;
 using Content.Client.UserInterface.Systems.Inventory.Controls;
 using Robust.Client.UserInterface;
@@ -9,7 +10,28 @@ namespace Content.Client.UserInterface.Controls
 {
     public abstract class SlotControl : Control, IEntityControl
     {
-        public static int DefaultButtonSize = 64;
+        public const int DefaultButtonSize = 64; // Forge-Change: HUD slots opt into scale via UseHudScale
+
+        // Forge-Change-Start: only HUD chrome follows the HUD scale slider.
+        /// <summary>
+        /// When true, this slot follows the HUD scale slider (hotbar, hands, inventory bar).
+        /// Stripping / character windows leave this false so the grid stays 64px.
+        /// </summary>
+        public bool UseHudScale
+        {
+            get => _useHudScale;
+            set
+            {
+                if (_useHudScale == value)
+                    return;
+
+                _useHudScale = value;
+                ApplyHudScale();
+            }
+        }
+
+        private bool _useHudScale;
+        // Forge-Change-End
 
         public TextureRect ButtonRect { get; }
         public TextureRect BlockedRect { get; }
@@ -118,16 +140,16 @@ namespace Content.Client.UserInterface.Controls
         {
             IoCManager.InjectDependencies(this);
             Name = "SlotButton_null";
-            MinSize = new Vector2(DefaultButtonSize, DefaultButtonSize);
+            ForgeUiSizing.EnsureInitialized(); // Forge-Change
             AddChild(ButtonRect = new TextureRect
             {
-                TextureScale = new Vector2(2, 2),
+                TextureScale = GetHudTextureScale(), // Forge-Change
                 MouseFilter = MouseFilterMode.Stop
             });
             AddChild(HighlightRect = new TextureRect
             {
                 Visible = false,
-                TextureScale = new Vector2(2, 2),
+                TextureScale = GetHudTextureScale(), // Forge-Change
                 MouseFilter = MouseFilterMode.Ignore
             });
 
@@ -136,15 +158,15 @@ namespace Content.Client.UserInterface.Controls
 
             AddChild(SpriteView = new SpriteView
             {
-                Scale = new Vector2(2, 2),
-                SetSize = new Vector2(DefaultButtonSize, DefaultButtonSize),
+                Scale = GetHudTextureScale(), // Forge-Change
+                SetSize = GetHudButtonSize(), // Forge-Change
                 OverrideDirection = Direction.South
             });
 
             AddChild(HoverSpriteView = new SpriteView
             {
-                Scale = new Vector2(2, 2),
-                SetSize = new Vector2(DefaultButtonSize, DefaultButtonSize),
+                Scale = GetHudTextureScale(), // Forge-Change
+                SetSize = GetHudButtonSize(), // Forge-Change
                 OverrideDirection = Direction.South
             });
 
@@ -185,14 +207,67 @@ namespace Content.Client.UserInterface.Controls
 
             AddChild(BlockedRect = new TextureRect
             {
-                TextureScale = new Vector2(2, 2),
+                TextureScale = GetHudTextureScale(), // Forge-Change
                 MouseFilter = MouseFilterMode.Stop,
                 Visible = false
             });
 
             HighlightTexturePath = "slot_highlight";
             BlockedTexturePath = "blocked";
+            ApplyHudScale(); // Forge-Change
         }
+
+        // Forge-Change-Start
+        protected override void EnteredTree()
+        {
+            base.EnteredTree();
+            ForgeUiSizing.HudScaleChanged += ApplyHudScale;
+        }
+
+        protected override void ExitedTree()
+        {
+            ForgeUiSizing.HudScaleChanged -= ApplyHudScale;
+            base.ExitedTree();
+        }
+
+        private Vector2 GetHudButtonSize()
+        {
+            var size = _useHudScale ? ForgeUiSizing.ButtonSize : DefaultButtonSize; // Forge-Change
+            return new Vector2(size, size);
+        }
+
+        private Vector2 GetHudTextureScale()
+        {
+            var scale = _useHudScale ? 2f * ForgeUiSizing.HudScale : 2f; // Forge-Change
+            return new Vector2(scale, scale);
+        }
+
+        private void ApplyHudScale()
+        {
+            var size = GetHudButtonSize();
+            var textureScale = GetHudTextureScale();
+
+            MinSize = size;
+            MaxSize = size;
+
+            if (ButtonRect != null)
+                ButtonRect.TextureScale = textureScale;
+            if (HighlightRect != null)
+                HighlightRect.TextureScale = textureScale;
+            if (BlockedRect != null)
+                BlockedRect.TextureScale = textureScale;
+            if (SpriteView != null)
+            {
+                SpriteView.Scale = textureScale;
+                SpriteView.SetSize = size;
+            }
+            if (HoverSpriteView != null)
+            {
+                HoverSpriteView.Scale = textureScale;
+                HoverSpriteView.SetSize = size;
+            }
+        }
+        // Forge-Change-End
 
         public void ClearHover()
         {

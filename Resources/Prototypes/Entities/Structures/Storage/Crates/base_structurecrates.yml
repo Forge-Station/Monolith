@@ -108,6 +108,8 @@
   id: CrateBaseSecure
   suffix: Secure
   components:
+  - type: Paintable     # Forge-Change
+    group: CrateSecure  # Forge-Change
   - type: Lock
   - type: LockVisuals
   - type: AccessReader

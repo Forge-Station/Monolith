@@ -1,12 +1,13 @@
 using Robust.Shared.Serialization;
 using Content.Shared.FixedPoint;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Content.Shared._Forge.Trade;
 
 
-[Serializable, NetSerializable,]
-public sealed class ContractTargetClientData
+[Serializable, NetSerializable, DataDefinition]
+public sealed partial class ContractTargetClientData
 {
     [DataField("match")]
     public PrototypeMatchMode MatchMode = PrototypeMatchMode.Exact;

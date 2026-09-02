@@ -117,6 +117,8 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction ShuttleRotateLeft = "ShuttleRotateLeft";
         public static readonly BoundKeyFunction ShuttleRotateRight = "ShuttleRotateRight";
         public static readonly BoundKeyFunction ShuttleBrake = "ShuttleBrake";
+        public static readonly BoundKeyFunction ShuttleAscend = "ShuttleAscend"; // Mono
+        public static readonly BoundKeyFunction ShuttleDescend = "ShuttleDescend"; // Mono
 
         public static readonly BoundKeyFunction Hotbar0 = "Hotbar0";
         public static readonly BoundKeyFunction Hotbar1 = "Hotbar1";
@@ -157,5 +159,8 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction MappingRemoveDecal = "MappingRemoveDecal";
         public static readonly BoundKeyFunction MappingCancelEraseDecal = "MappingCancelEraseDecal";
         public static readonly BoundKeyFunction MappingOpenContextMenu = "MappingOpenContextMenu";
+        public static readonly BoundKeyFunction MappingEyedropper = "MappingEyedropper"; // Forge-Change
+        public static readonly BoundKeyFunction MappingEyedropperTile = "MappingEyedropperTile"; // Forge-Change
+        public static readonly BoundKeyFunction MappingEyedropperDecal = "MappingEyedropperDecal"; // Forge-Change
     }
 }

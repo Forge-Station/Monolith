@@ -27,7 +27,7 @@
   parent: Paper
   components:
   - type: Paper
-    content: book-text-cargo-outage # Temporary until economy updates are merged.
+    content: book-text-cargo-instructions
   - type: TimedDespawn # So you cant spam it to lag the server.
     lifetime: 120
 

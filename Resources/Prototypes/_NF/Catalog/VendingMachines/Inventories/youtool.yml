@@ -17,6 +17,7 @@
     trayScanner: 4294967295 # Frontier: 15<Infinite
     GasAnalyzer: 4294967295 # Frontier: 15<Infinite
     SprayPainter: 4294967295 # Frontier: 15<Infinite
+    SprayPainterAmmo: 4294967295 # Frontier: 15<Infinite # Forge-Change
   # Some engineer forgot to take the multitool out the youtool when working on it, happens.
   contrabandInventory:
     Multitool: 4294967295 # Frontier: 5<Infinite

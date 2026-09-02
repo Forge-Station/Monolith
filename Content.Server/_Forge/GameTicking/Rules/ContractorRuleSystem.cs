@@ -50,21 +50,8 @@ namespace Content.Server.GameTicking.Rules
         [Dependency] private readonly SharedJobSystem _jobSystem = default!;
         [Dependency] private readonly LoadoutSystem _loadout = default!;
 
-        // Validation in case of changes
-//        [ValidatePrototypeId<NpcFactionPrototype>]
-//        private const string Pirate = " ";
-//        [ValidatePrototypeId<NpcFactionPrototype>]
-//        private const string Syndicate = " ";
-
-//        [ValidatePrototypeId<JobPrototype>]
-//        private const string Mercenary = " "; // ID профессии наёмника. Измените, если он другой.
-
-        [ValidatePrototypeId<EntityPrototype>]
         private const string MindRole = "MindRoleContractor";
-        [ValidatePrototypeId<EntityPrototype>]
         private const string Uplink = "ContractorUplink";
-
-        [ValidatePrototypeId<StartingGearPrototype>]
         private const string Gear = "ContractorGear";
 
         public override void Initialize()

@@ -3,6 +3,12 @@ using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Database;
+using Content.Shared.Interaction;
+using Content.Shared.Tools.Systems;
+using Content.Shared.UserInterface;
+using Content.Shared.DoAfter;
+using Content.Shared._NF.Species.Components;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -25,6 +31,13 @@ public abstract partial class SharedGunSystem
 
             //args.PushMarkup(Loc.GetString("gun-fire-rate-examine", ("color", FireRateExamineColor), // Emberfall
             //    ("fireRate", $"{component.FireRateModified:0.0}"))); // Emberfall
+            /// Forge-Change-Start
+            if (component.DeleteOnShoot)
+            {
+                if (!string.IsNullOrEmpty(component.ExamineTextSabotaged))
+                    args.PushMarkup(Loc.GetString(component.ExamineTextSabotaged));
+            }
+            /// Forge-Change-End
         }
     }
 
@@ -144,4 +157,68 @@ public abstract partial class SharedGunSystem
         component.NextFire = minimum;
         Dirty(uid, component);
     }
+    /// Forge-Change-Start
+
+    private void OnScrewdriverSabotage(EntityUid uid, GunComponent gun, SabotageDoAfterEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!SabotageGun(uid, gun, !gun.DeleteOnShoot, args.User))
+            return;
+
+        Logs.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(args.User):user} screwed {ToPrettyString(uid):target}'s gun to {(gun.DeleteOnShoot ? "sabotage" : "defuse")}");
+
+        Audio.PlayPredicted(gun.SoundSabotage, uid, args.User);
+        args.Handled = true;
+    }
+
+    private void OnInteractUsing(Entity<GunComponent> gun, ref InteractUsingEvent args)
+    {
+        /// <summary>
+        /// Forge: screwdriver can sabotage the gun.
+        /// </summary>
+        if(!gun.Comp.Sabotageable)
+            return;
+
+        if (!Tool.HasQuality(args.Used, gun.Comp.SabotageTool))
+            return;
+
+        if (!CanSabotaged(gun, args.User))
+            return;
+
+        if (!(HasComp<GoblinComponent>(args.User) && Tool.UseTool(
+                args.Used,
+                args.User,
+                gun,
+                (float) gun.Comp.SabotageDelay.TotalSeconds,
+                gun.Comp.SabotageTool,
+                new SabotageDoAfterEvent())))
+        {
+            return;
+        }
+
+        Logs.Add(LogType.Action, LogImpact.Low,
+            $"{ToPrettyString(args.User):user} is screwing {ToPrettyString(gun):target}'s gun that was {(gun.Comp.DeleteOnShoot ? "sabotaged" : "defused")} at {Transform(gun).Coordinates:targetlocation}");
+        args.Handled = true;
+    }
+
+    public bool SabotageGun(EntityUid uid, GunComponent gun, bool sabotaged, EntityUid? user = null)
+    {
+        if (!CanSabotaged((uid, gun), user))
+            return false;
+
+        gun.DeleteOnShoot = sabotaged;
+        Dirty(uid, gun);
+
+        return true;
+    }
+
+    public bool CanSabotaged(Entity<GunComponent> ent, EntityUid? user)
+    {
+        var attempt = new AttemptChangeDeleteOnShootEvent(ent.Comp.DeleteOnShoot, user);
+        RaiseLocalEvent(ent, ref attempt);
+        return !attempt.Cancelled;
+    }
+    /// Forge-Change-End
 }

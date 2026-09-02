@@ -1,0 +1,4 @@
+# - type: guideEntry #Forge-Change-remove: add when mono add working z-layers
+#   id: Flight
+#   name: Flight
+#   text: "/ServerInfo/_CE/Flight.xml"

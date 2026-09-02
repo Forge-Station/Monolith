@@ -1,9 +1,12 @@
 using System.Numerics;
 using Content.Shared._Mono.CCVar; // Forge-Change
+using Content.Server._Mono.Projectiles.TargetGuided;
+using Content.Server._Mono.Projectiles.TargetSeeking;
 using Content.Shared._Mono.Radar;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Configuration; // Forge-Change
+using Robust.Shared.Enums; // Forge-Change: prune radar request throttle on disconnect
 using Robust.Shared.Map;
 using Robust.Shared.Player; // Forge-Change
 using Robust.Shared.Physics.Components;
@@ -24,6 +27,7 @@ public sealed partial class RadarBlipSystem : EntitySystem
 
     // Pooled collections to avoid per-request heap churn
     private readonly List<BlipNetData> _tempBlipsCache = new();
+    private readonly List<MissileVectorNetData> _tempMissileCache = new();
     private readonly List<HitscanNetData> _tempHitscansCache = new();
     private readonly List<EntityUid> _tempSourcesCache = new();
     private readonly List<Vector2> _tempSourcePositionsCache = new(); // Forge-Change: precomputed source world positions
@@ -45,7 +49,24 @@ public sealed partial class RadarBlipSystem : EntitySystem
         base.Initialize();
         SubscribeNetworkEvent<RequestBlipsEvent>(OnBlipsRequested);
         SubscribeLocalEvent<RadarBlipComponent, ComponentShutdown>(OnBlipShutdown);
+        _playerManager.PlayerStatusChanged += OnPlayerStatusChanged; // Forge-Change
     }
+
+    // Forge-Change-Start: _lastRequestByUser grew forever across reconnects.
+    public override void Shutdown()
+    {
+        _playerManager.PlayerStatusChanged -= OnPlayerStatusChanged;
+        base.Shutdown();
+    }
+
+    private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs e)
+    {
+        if (e.NewStatus != SessionStatus.Disconnected)
+            return;
+
+        _lastRequestByUser.Remove(e.Session.UserId);
+    }
+    // Forge-Change-End
 
     private void OnBlipsRequested(RequestBlipsEvent ev, EntitySessionEventArgs args)
     {
@@ -84,10 +105,11 @@ public sealed partial class RadarBlipSystem : EntitySystem
         AssembleHitscanReport((EntityUid)radarUid, _tempSourcePositionsCache, radar);
 
         // Combine the blips and hitscan lines
-        var giveEv = new GiveBlipsEvent(_tempPaletteCache, _tempBlipsCache, _tempHitscansCache);
+        var giveEv = new GiveBlipsEvent(_tempPaletteCache, _tempBlipsCache, _tempMissileCache, _tempHitscansCache);
         RaiseNetworkEvent(giveEv, args.SenderSession);
 
         _tempBlipsCache.Clear();
+        _tempMissileCache.Clear();
         _tempHitscansCache.Clear();
         _tempSourcesCache.Clear();
         _tempSourcePositionsCache.Clear();
@@ -174,6 +196,27 @@ public sealed partial class RadarBlipSystem : EntitySystem
                             configIdx,
                             gridConfigIdx));
         }
+
+        var missileQuery = EntityQueryEnumerator<TargetSeekingComponent, RadarBlipComponent, TransformComponent>();
+        while (missileQuery.MoveNext(out var missile, out var seeker, out var missileBlip, out var missileBlipXform))
+        {
+            var netMissileUid = GetNetEntity(missile);
+            var missileArc = MathHelper.DegreesToRadians(seeker.ScanArc);
+            if (seeker.ArcLines)
+                _tempMissileCache.Add(new(netMissileUid,
+                    (float)(seeker.MaxSpeed * 0.2),
+                    missileArc));
+        }
+        // Check for SACLOS/mouse-guided missiles to add their directional lines to the console.
+        var saclosQuery = EntityQueryEnumerator<TargetGuidedComponent, RadarBlipComponent, TransformComponent>();
+        while (saclosQuery.MoveNext(out var missile, out var seeker, out var missileBlip, out var missileBlipXform))
+        {
+            var netMissileUid = GetNetEntity(missile);
+            if (seeker.RadarLines)
+                _tempMissileCache.Add(new(netMissileUid,
+                    (float)(seeker.CurrentSpeed * 0.2),
+                    0));
+        }
     }
 
     private GridFrameCache GetGridFrame(EntityUid grid)
@@ -223,7 +266,9 @@ public sealed partial class RadarBlipSystem : EntitySystem
             if (!hitscan.Enabled)
                 continue;
 
-            if (!NearAnySources(hitscan.StartPosition, sourcePositions, component.MaxRange) && NearAnySources(hitscan.EndPosition, sourcePositions, component.MaxRange))
+            // Skip only when neither endpoint is in range of any radar source.
+            if (!NearAnySources(hitscan.StartPosition, sourcePositions, component.MaxRange)
+                && !NearAnySources(hitscan.EndPosition, sourcePositions, component.MaxRange))
                 continue;
 
             _tempHitscansCache.Add(new(hitscan.StartPosition, hitscan.EndPosition, hitscan.LineThickness, hitscan.RadarColor));

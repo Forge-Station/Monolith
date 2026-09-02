@@ -4,6 +4,8 @@
   name: maintenance wall closet
   description: It's a storage unit.
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
@@ -16,6 +18,8 @@
   parent: BaseWallCloset
   description: It's a storage unit for emergency breath masks and O2 tanks.
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: emergency
@@ -28,6 +32,8 @@
   parent: BaseWallCloset
   description: It's a storage unit for fire-fighting supplies.
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: fire
@@ -40,6 +46,8 @@
   name: blue wall closet
   description: "A wardrobe packed with stylish blue clothing."
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
@@ -52,6 +60,8 @@
   name: pink wall closet
   description: "A wardrobe packed with fabulous pink clothing."
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
@@ -64,6 +74,8 @@
   name: black wall closet
   description: "A wardrobe packed with stylish black clothing."
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
@@ -76,6 +88,8 @@
   name: green wall closet
   description: "A wardrobe packed with stylish green clothing."
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
@@ -87,6 +101,8 @@
   parent: BaseWallCloset
   name: prison wall closet
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
@@ -99,6 +115,8 @@
   name: yellow wall closet
   description: "A wardrobe packed with stylish yellow clothing."
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
@@ -111,6 +129,8 @@
   name: white wall closet
   description: "A wardrobe packed with stylish white clothing."
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
@@ -123,6 +143,8 @@
   name: grey wall closet
   description: "A wardrobe packed with a tide of grey clothing."
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
@@ -135,6 +157,8 @@
   name: mixed wall closet
   description: "A wardrobe packed with a mix of colorful clothing."
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
@@ -146,6 +170,8 @@
   parent: BaseWallCloset
   name: atmospherics wall closet
   components:
+  - type: Paintable   # Forge-Chane
+    group: WallCloset   # Forge-Chane
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic

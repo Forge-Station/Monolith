@@ -62,6 +62,7 @@ public sealed partial class ThrusterSystem : EntitySystem
         SubscribeLocalEvent<ThrusterComponent, RefreshPartsEvent>(OnRefreshParts);
         SubscribeLocalEvent<ThrusterComponent, UpgradeExamineEvent>(OnUpgradeExamine);
         SubscribeLocalEvent<ThrusterComponent, SignalReceivedEvent>(OnSignalReceived); // Frontier
+        SubscribeLocalEvent<ThrusterComponent, DamageChangedEvent>(OnThrusterDamaged); // Forge-Change
     }
 
     // Frontier: signal handler
@@ -326,13 +327,19 @@ public sealed partial class ThrusterSystem : EntitySystem
         if (component.IsOn ||
             !Resolve(uid, ref xform))
         {
+            // Forge-Change: a repaired engine can already be IsOn with a leftover exhaust plume.
+            if (component.IsOn)
+                SyncThrusterFiring(uid, component, xform);
             return;
         }
 
         component.IsOn = true;
 
         if (!EntityManager.TryGetComponent(xform.GridUid, out ShuttleComponent? shuttleComponent))
+        {
+            SyncThrusterFiring(uid, component, xform); // Forge-Change
             return;
+        }
 
         // Logger.DebugS("thruster", $"Enabled thruster {uid}");
 
@@ -377,6 +384,7 @@ public sealed partial class ThrusterSystem : EntitySystem
 
         _ambient.SetAmbience(uid, true);
         RefreshCenter(uid, shuttleComponent);
+        SyncThrusterFiring(uid, component, xform); // Forge-Change: don't inherit a plume unless the shuttle is actually thrusting
     }
 
     /// <summary>
@@ -472,6 +480,7 @@ public sealed partial class ThrusterSystem : EntitySystem
         }
 
         component.Colliding.Clear();
+        SetThrusterFiring(uid, component, false); // Forge-Change: DisableThruster used to leave Firing/Thrusting set
         RefreshCenter(uid, shuttleComponent);
     }
 
@@ -658,6 +667,49 @@ public sealed partial class ThrusterSystem : EntitySystem
     {
         args.AddPercentageUpgrade("thruster-comp-upgrade-thrust", component.Thrust / component.BaseThrust);
     }
+
+    // Forge-Change-Start: repaired / re-powered thrusters used to keep a leftover exhaust plume (and burn damage)
+    // even when the shuttle was docked and not thrusting.
+    private void OnThrusterDamaged(EntityUid uid, ThrusterComponent component, DamageChangedEvent args)
+    {
+        if (args.DamageIncreased)
+            return;
+
+        SyncThrusterFiring(uid, component);
+    }
+
+    /// <summary>
+    /// Matches exhaust visuals and burn damage to whether this shuttle is actually thrusting that way.
+    /// </summary>
+    public void SyncThrusterFiring(EntityUid uid, ThrusterComponent? component = null, TransformComponent? xform = null)
+    {
+        if (!Resolve(uid, ref component, ref xform, false))
+            return;
+
+        if (!component.IsOn || xform.GridUid == null || !TryComp(xform.GridUid.Value, out ShuttleComponent? shuttle))
+        {
+            SetThrusterFiring(uid, component, false);
+            return;
+        }
+
+        if (component.Type == ThrusterType.Angular)
+        {
+            // Angular firing is reapplied every physics tick while rotating; turn it off on repair/power-up.
+            SetThrusterFiring(uid, component, false);
+            return;
+        }
+
+        var dirFlag = xform.LocalRotation.GetCardinalDir().AsFlag();
+        SetThrusterFiring(uid, component, (shuttle.ThrustDirections & dirFlag) != DirectionFlag.None);
+    }
+
+    private void SetThrusterFiring(EntityUid uid, ThrusterComponent component, bool firing)
+    {
+        component.Firing = firing;
+        if (TryComp(uid, out AppearanceComponent? appearance))
+            _appearance.SetData(uid, ThrusterVisualState.Thrusting, firing, appearance);
+    }
+    // Forge-Change-End
 
     //private void OnEmpPulse(EntityUid uid, ThrusterComponent component, ref EmpPulseEvent args)
     //{

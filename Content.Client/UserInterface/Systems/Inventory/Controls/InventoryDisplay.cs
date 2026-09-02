@@ -11,7 +11,8 @@ public sealed class InventoryDisplay : LayoutContainer
     private int Rows = 0;
     private const int MarginThickness = 10;
     private const int ButtonSpacing = 5;
-    private const int ButtonSize = 75;
+    // Forge-Change: character window stays on vanilla 64px slots; HUD scale is opt-in on SlotControl.
+    private static int ButtonSize => SlotControl.DefaultButtonSize + ButtonSpacing;
     private readonly Control resizer;
 
     private readonly Dictionary<string, (SlotControl, Vector2i)> _buttons = new();

@@ -5,9 +5,9 @@
   description: A special hardsuit helmet worn by Director of Care.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/DOC.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/DOC.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/DOC.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/DOC.rsi
   - type: PointLight
     color: "#adffe1"
 
@@ -19,7 +19,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/paramedhelm.rsi #Corvax-Frontier-Resprite
+    sprite: _Forge/Clothing/Head/Hardsuits/paramedhelm.rsi #Corvax-Frontier-Resprite
   - type: HandheldLight
     addPrefix: false
   - type: ToggleableLightVisuals
@@ -74,9 +74,9 @@
   components:
   - type: BreathMask
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/mercenaryelitehelm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/mercenaryelitehelm.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/mercenaryelitehelm.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/mercenaryelitehelm.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -103,9 +103,9 @@
   description: ╨в╤П╨╢╨╡╨╗╨╛╨▒╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╤И╨╗╨╡╨╝, ╨┐╤А╨╡╨┤╨╜╨░╨╖╨╜╨░╤З╨╡╨╜╨╜╤Л╨╣ ╨┤╨╗╤П ╤Н╨╗╨╕╤В╨╜╤Л╤Е ╨╛╨┐╨╡╤А╨░╤Ж╨╕╨╣. ╨б╨╛╨▒╤Б╤В╨▓╨╡╨╜╨╜╨╛╤Б╤В╤М ╨г╨┤╨░╤А╨╜╨╛╨│╨╛ ╨┐╨╛╨┤╤А╨░╨╖╨┤╨╡╨╗╨╡╨╜╨╕╤П ╨б╨╕╨╜╨┤╨╕╨║╨░╤В╨░.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/syndicate_strike_team.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/syndicate_strike_team.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/syndicate_strike_team.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/syndicate_strike_team.rsi
     equippedPrefix: off
     clothingVisuals:
       head:
@@ -134,9 +134,9 @@
   description: ╨в╤П╨╢╨╡╨╗╨╛╨▒╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╤И╨╗╨╡╨╝, ╨┐╤А╨╡╨┤╨╜╨░╨╖╨╜╨░╤З╨╡╨╜╨╜╤Л╨╣ ╨┤╨╗╤П ╤Н╨╗╨╕╤В╨╜╤Л╤Е ╨╛╨┐╨╡╤А╨░╤Ж╨╕╨╣.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/contractor.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/contractor.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/contractor.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/contractor.rsi
   - type: PointLight
     color: yellow
     radius: 7
@@ -160,9 +160,9 @@
   components:
   - type: BreathMask
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/contractor.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/contractor.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/contractor.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/contractor.rsi
     equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
@@ -204,9 +204,9 @@
     shape:
     - 0,0,1,1
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/contractor_eva.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/contractor_eva.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/contractor_eva.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/contractor_eva.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -241,37 +241,21 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4TTI, ShowSecurityIcons]
   id: ClothingHeadHelmetHardsuitTraumaShooter
   name: armed trauma unit T-44 tacsuit helmet
   description: The shooter's tacsuit in the Armed Trauma Unit, outfitted with a medical and long-range radar hud as well as thermals and night vision.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_shooter.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_shooter.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_shooter.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_shooter.rsi
   - type: PointLight
     color: "#4e88a6"
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 #400 to 600 // это радиус обзора
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#42AAFF"
-    lightingColor: "#FFFFFF32"
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
-  - type: ThermalVision
-    flashDurationMultiplier: 2
-    pulseTime: 3
-    isEquipment: true
-    toggleAction: PulseThermalVision
   - type: RadarConsole
     followEntity: true
     noRotate: true

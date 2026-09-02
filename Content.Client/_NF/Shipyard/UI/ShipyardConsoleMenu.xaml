@@ -44,7 +44,7 @@
         <!-- Forge - g33ka end-->
         </PanelContainer>
         <BoxContainer Orientation="Horizontal">
-            <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="0 8 0 2">
+            <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="0 8 0 2">
                 <PanelContainer.PanelOverride>
                     <gfx:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#141414"/>
                 </PanelContainer.PanelOverride>
@@ -57,7 +57,7 @@
             </PanelContainer>
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="0 8 0 2">
+            <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="0 8 0 2">
                 <PanelContainer.PanelOverride>
                     <gfx:StyleBoxFlat BorderThickness="3" BorderColor="#333333" BackgroundColor="#333333"/>
                 </PanelContainer.PanelOverride>
@@ -70,16 +70,19 @@
                           Prefix="{Loc 'shipyard-console-menu-size-label'}"
                           StyleClasses="ButtonSquare"
                           Margin="2 2 2 2"
+                          MinHeight="32"
                           HorizontalExpand="True" />
             <OptionButton Name="Classes"
                           Prefix="{Loc 'shipyard-console-menu-class-label'}"
                           StyleClasses="ButtonSquare"
                           Margin="2 2 2 2"
+                          MinHeight="32"
                           HorizontalExpand="True" />
             <OptionButton Name="Engines"
                           Prefix="{Loc 'shipyard-console-menu-engine-label'}"
                           StyleClasses="ButtonSquare"
                           Margin="2 2 2 2"
+                          MinHeight="32"
                           HorizontalExpand="True" />
                     </BoxContainer>
                 </PanelContainer>
@@ -95,7 +98,7 @@
                 <!-- Vessels get added here by code -->
             </BoxContainer>
         </ScrollContainer>
-        <PanelContainer VerticalExpand="True" HorizontalExpand="False" Margin="0 8 0 2">
+        <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="0 8 0 2">
             <PanelContainer.PanelOverride>
                 <gfx:StyleBoxFlat BorderThickness="3" BorderColor="#333333" BackgroundColor="#333333"/>
             </PanelContainer.PanelOverride>
@@ -105,18 +108,23 @@
                 </PanelContainer.PanelOverride>
         <GridContainer Columns="4" HorizontalExpand="True" Margin="2 2 2 2">
             <Button Name="TargetIdButton" Access="Public"
-                    StyleClasses="ButtonSquare"/>
+                    Text="{Loc 'id-card-console-window-insert-button'}"
+                    StyleClasses="ButtonSquare"
+                    MinHeight="32"
+                    MinWidth="80"/>
             <controls:ConfirmButton Name="SellShipButton"
                 Text="{Loc 'shipyard-console-sell-button'}"
                 ConfirmationText="{Loc 'shipyard-console-confirm-unassign'}"
                 StyleClasses="ButtonSquare"
+                MinHeight="32"
                 Disabled="True" />
             <controls:ConfirmButton Name="UnassignDeedButton"
                 Text="{Loc 'shipyard-console-unassign-deed'}"
                 ConfirmationText="{Loc 'shipyard-console-confirm-unassign'}"
                 StyleClasses="ButtonSquare"
+                MinHeight="32"
                 Disabled="True" />
-            <BoxContainer Orientation="Vertical">
+            <BoxContainer Orientation="Vertical" MinHeight="32">
                 <Label Text="{Loc 'shipyard-console-deed-label'}" />
                 <Label Name="DeedTitle"
                     Text=""/>

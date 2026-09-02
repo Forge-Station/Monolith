@@ -128,7 +128,7 @@
 # POI
 - type: entity
   id: ShieldGeneratorPOI
-  parent: ShieldGeneratorBase
+  parent: [ShieldGeneratorBase, BaseStructureDisableToolUse] # Forge-Change
   name: FS-421 "Fortress" Outpost Shield Generator
   description: The Fortress. The latest and greatest in static, large-scale shielding.
   suffix: POI ONLY
@@ -294,7 +294,7 @@
 # High-End
 - type: entity
   id: ShieldGenerator
-  parent: ShieldGeneratorBase
+  parent: [ ShieldGeneratorBase , BaseFactionGearOtherFactionT3 ]  # Froge-change add parent forbidden ADS
   name: MS-500 "Titan" Shield Generator
   description: The Titan. Advanced shielding, with a quick recharge time, and excels against colisions.
   suffix: ADS ONLY
@@ -310,12 +310,12 @@
         layer:
         - MachineLayer
   - type: ShipShieldEmitter
-    damageLimit: 145000 # Forge-Change
+    damageLimit: 225000 # Forge-Change
     damageOverloadTimePunishment: 120 # Forge-Change
-    healPerSecond: 1850 # Forge-Change
+    healPerSecond: 2250 # Forge-Change
     damageExp: 1.05 # Forge-Change
-    baseDraw: 100000 # Forge-Change
-    maxDraw: 200000 # Forge-Change
+    baseDraw: 60000 # Forge-Change
+    maxDraw: 180000 # Forge-Change
     unpoweredBonus: 5 # Forge-Change
     shieldColor: "#FF3333"
     collisionResistanceMultiplier: 0.5

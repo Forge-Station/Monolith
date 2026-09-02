@@ -4,7 +4,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Devour.Components;
 
@@ -12,7 +12,7 @@ namespace Content.Shared.Devour.Components;
 [Access(typeof(SharedDevourSystem))]
 public sealed partial class DevourerComponent : Component
 {
-    [DataField("devourAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("devourAction", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string? DevourAction = "ActionDevour";
 
     [DataField("devourActionEntity")]
@@ -62,7 +62,7 @@ public sealed partial class DevourerComponent : Component
     /// <summary>
     /// The chemical ID injected upon devouring
     /// </summary>
-    [DataField("chemical", customTypeSerializer: typeof(PrototypeIdSerializer<ReagentPrototype>))]
+    [DataField("chemical", customTypeSerializer: typeof(ProtoId<ReagentPrototype>))]
     public string Chemical = "Ichor";
 
     /// <summary>

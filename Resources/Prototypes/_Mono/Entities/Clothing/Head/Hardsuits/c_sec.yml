@@ -1,12 +1,16 @@
 - type: entity
   parent: ClothingHeadHardsuitBase
-  id: ClothingHelmetHardsuitCsecMpeva
-  name: CSEC MP-EVA helmet
+  id: ClothingHelmetHardsuitCCTCMedium
+  name: MP-EVA CSW-19 "Century" tacsuit helmet
   description: Heavy all-environment sealed helmet. Outfitted with basic NVD equipment.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Head/Hardsuits/csec-mp-eva.rsi
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/cctc_lstar.rsi
+    state: "icon-helmet"
+  - type: Icon
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/cctc_lstar.rsi
+    state: "icon-helmet"
   - type: Clothing
     clothingVisuals:
       head:
@@ -33,8 +37,54 @@
     relayOverlay: true
     goggleEffect: true
     action: ActionToggleNightVision
-    viewCircleRadius: 400
+    viewCircleRadius: 600 #Forge-change 400 to 600
     viewCircleCount: 2
     viewCircleSpacing: 260
-    phosphorColor: "#41D7D9"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#6bffff" #Forge-change #41D7D9 to #6bffff
+    lightingColor: "#FFFFFFFF" #Forge-change #FFFFFF32 to #FFFFFFFF
+
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHelmetHardsuitCCTCMediumPremium
+  name: MP-EVA CSW-21 "Centurion" tacsuit helmet
+  description: Heavy all-environment sealed helmet. Outfitted with basic NVD equipment.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/cctc_lstarpremium.rsi
+    state: "icon-helmet"
+  - type: Icon
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/cctc_lstarpremium.rsi
+    state: "icon-helmet"
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: equipped-head
+      - state: equipped-head-unshaded
+        shader: unshaded
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: NightVision # Gen 4 dual tube
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 590
+    viewCircleCount: 1
+    viewCircleSpacing: 260
+    phosphorColor: "#6bffff" #Forge-change #41D7D9 to #6bffff
+    lightingColor: "#FFFFFFFF" #Forge-change #FFFFFF32 to #FFFFFFFF"
+    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света

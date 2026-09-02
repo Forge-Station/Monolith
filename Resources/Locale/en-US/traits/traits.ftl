@@ -7,6 +7,9 @@ trait-poor-vision-desc = Your eyes are not what they once were, you have difficu
 trait-narcolepsy-name = Narcolepsy
 trait-narcolepsy-desc = You fall asleep randomly.
 
+trait-lactozit-intolerance-name = Lactozit intolerance
+trait-lactozit-intolerance-desc = Lactozitium makes you fart, vomit, and burp uncontrollably.
+
 trait-pacifist-name = Pacifist
 trait-pacifist-desc = You cannot attack or hurt any living beings.
 
@@ -69,3 +72,5 @@ trait-painnumbness-desc = You lack any sense of feeling pain, being unaware of h
 # Mono
 trait-russian-name = Russian accent
 trait-russian-desc = You reek of vodka smell.
+
+trait-lactozit-intolerance-fart = { CAPITALIZE(THE($entity)) } lets out an awful burst of gas!

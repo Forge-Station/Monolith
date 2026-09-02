@@ -26,7 +26,7 @@
   - type: Thirst
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: Hydrakin
+    damageModifierSet: ForgeHydrakin #Forge-Change
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -46,20 +46,20 @@
     prototype: Hydrakin
     requiredLegs: 2
   - type: Temperature
-    coldDamageThreshold: 10 # Mono - Absurd cold resistance
-    heatDamageThreshold: 332 # no. just no. suffer.
+    coldDamageThreshold: 10 # Mono - Absurd cold resistance # ~ -263
+    heatDamageThreshold: 332 # no. just no. suffer. # ~ +58
     coldDamage:
       types:
         Cold : 0.01 #per second, scales with temperature & other constants
   - type: TemperatureSpeed
     thresholds:
       90: 0.9
-      40: 0.75
-      10: 0.6
+      40: 0.8 #Forge-Change
+      10: 0.7 #Forge-Change
   - type: HumanoidAppearance
     species: Hydrakin
   - type: ThermalRegulator #Todo, implement hydrakin thermal movement generation
-    metabolismHeat: 1600
+    metabolismHeat: 400 #Forge-Change
     radiatedHeat: 100
     implicitHeatRegulation: 250
     sweatHeatRegulation: 400
@@ -67,6 +67,16 @@
     normalBodyTemperature: 210.15
     thermalRegulationTemperatureThreshold: 30
     processWhileCrit: false
+    # Goob
+  - type: PassiveHeatGeneration
+    watts: 800 # ~ +0.3 heat per second #Forge-Change
+    mobStateModifier:
+      Alive: 1
+      Critical: 0
+      Dead: 0
+    minimumTemperature: 27.15
+    ignoreHeatResistance: true
+    # Goob end
   - type: PressureProtection
     lowPressureMultiplier: 1.2
   - type: LanguageKnowledge
@@ -100,7 +110,18 @@
           32:
             sprite: _Obelisk/Mobs/Species/Hydrakin/displacement.rsi
             state: head
-  - type: Carriable # Frontier: Carrying system from nyanotrasen.
+      neck: # Goob
+        sizeMaps:
+          32:
+            sprite: _Obelisk/Mobs/Species/Hydrakin/displacement.rsi
+            state: neck
+      outerClothing: # Mono 
+        sizeMaps:
+          32:
+            sprite: _Obelisk/Mobs/Species/Hydrakin/displacement.rsi
+            state: outerClothing
+ # Frontier: Carrying system from nyanotrasen.
+  - type: Carriable
   - type: Speech
     speechSounds: Hydrakin
     speechVerb: Reptilian
@@ -144,3 +165,13 @@
           32:
             sprite: _Obelisk/Mobs/Species/Hydrakin/displacement.rsi
             state: head
+      neck: # Goob
+        sizeMaps:
+          32:
+            sprite: _Obelisk/Mobs/Species/Hydrakin/displacement.rsi
+            state: neck
+      outerClothing: # Mono 
+        sizeMaps:
+          32:
+            sprite: _Obelisk/Mobs/Species/Hydrakin/displacement.rsi
+            state: outerClothing

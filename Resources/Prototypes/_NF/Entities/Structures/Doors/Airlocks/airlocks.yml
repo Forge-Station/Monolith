@@ -5,7 +5,7 @@
   suffix: Mercenary
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/mercenary.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Standard/mercenary.rsi # Forge-Change
   - type: Wires
     layoutId: AirlockSecurity
 
@@ -15,7 +15,7 @@
   suffix: TSFMC
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/nfsd.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Standard/nfsd.rsi # Forge-Change
 # endregion
 
 # region Glass
@@ -25,9 +25,9 @@
   suffix: Mercenary
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/mercenary.rsi # Forge-Change
-  - type: PaintableAirlock
-    group: Glass
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/mercenary.rsi # Forge-Change
+  # - type: PaintableAirlock # Forge-Change-Del
+    # group: Glass # Forge-Change-Del
   - type: Wires
     layoutId: AirlockSecurity
 
@@ -37,10 +37,10 @@
   suffix: TSFMC
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/nfsd.rsi # Forge-Change
-  - type: PaintableAirlock
-    department: Security
-    group: Glass
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/nfsd.rsi # Forge-Change
+  # - type: PaintableAirlock # Forge-Change-Del
+    # department: Security # Forge-Change-Del
+    # group: Glass # Forge-Change-Del
   - type: Wires
     layoutId: AirlockSecurity
 

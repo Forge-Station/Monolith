@@ -1,7 +1,7 @@
 - type: vessel
   id: RedBrigand
   parent: BaseVesselAntag
-  name: Диверсант
+  name: «Диверсант»
   description: Крепкий орешек. Среднего размера, но вооружен до зубов.
   price: 155999
   category: Medium

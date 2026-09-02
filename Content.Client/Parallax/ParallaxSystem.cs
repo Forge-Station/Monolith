@@ -10,11 +10,10 @@ namespace Content.Client.Parallax;
 
 public sealed partial class ParallaxSystem : SharedParallaxSystem
 {
-    [Dependency] private IMapManager _map = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private IParallaxManager _parallax = default!;
 
-    [ValidatePrototypeId<ParallaxPrototype>]
     private const string Fallback = "Default";
 
     public const int ParallaxZIndex = 0;
@@ -25,6 +24,7 @@ public sealed partial class ParallaxSystem : SharedParallaxSystem
         _overlay.AddOverlay(new ParallaxOverlay());
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnReload);
         SubscribeLocalEvent<ParallaxComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
+        SubscribeLocalEvent<ParallaxComponent, ComponentShutdown>(OnParallaxShutdown); // Forge-Change: unload unused parallax
     }
 
     private void OnReload(PrototypesReloadedEventArgs obj)
@@ -56,14 +56,32 @@ public sealed partial class ParallaxSystem : SharedParallaxSystem
         }
     }
 
+    // Forge-Change-Start: unload named parallax when the last component using it shuts down.
+    private void OnParallaxShutdown(EntityUid uid, ParallaxComponent component, ComponentShutdown args)
+    {
+        var name = component.Parallax;
+        if (string.IsNullOrEmpty(name) || name == Fallback)
+            return;
+
+        var query = EntityQueryEnumerator<ParallaxComponent>();
+        while (query.MoveNext(out var otherUid, out var other))
+        {
+            if (otherUid != uid && other.Parallax == name)
+                return;
+        }
+
+        _parallax.UnloadParallax(name);
+    }
+    // Forge-Change-End
+
     public ParallaxLayerPrepared[] GetParallaxLayers(MapId mapId)
     {
-        return _parallax.GetParallaxLayers(GetParallax(_map.GetMapEntityId(mapId)));
+        return _parallax.GetParallaxLayers(GetParallax(_map.GetMap(mapId)));
     }
 
     public string GetParallax(MapId mapId)
     {
-        return GetParallax(_map.GetMapEntityId(mapId));
+        return GetParallax(_map.GetMap(mapId));
     }
 
     public string GetParallax(EntityUid mapUid)

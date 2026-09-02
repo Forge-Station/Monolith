@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 using Content.Server._EinsteinEngines.Language;
 using Content.Server.Chat.Systems;
-using Content.Server.Radio.Components;
+using Content.Shared.Radio.Components;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.TTS;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
@@ -15,7 +15,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Server.Radio.Components;
+using Content.Shared.Radio.Components;
 
 namespace Content.Server._Forge.TTS;
 
@@ -53,7 +53,7 @@ public sealed partial class TTSSystem : EntitySystem
 
     public override void Initialize()
     {
-        _cfg.OnValueChanged(ForgeVars.TTSEnabled, v => _isEnabled = v, true);
+        _cfg.OnValueChanged(ForgeCCVars.TTSEnabled, v => _isEnabled = v, true);
 
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
@@ -95,7 +95,7 @@ public sealed partial class TTSSystem : EntitySystem
             && mind.UserId is { } userId
             && _player.TryGetSessionById(userId, out var session))
         {
-            if (!_netCfg.GetClientCVar(session.Channel, ForgeVars.LocalTTSEnabled))
+            if (!_netCfg.GetClientCVar(session.Channel, ForgeCCVars.LocalTTSEnabled))
                 return;
         }
 
@@ -194,7 +194,7 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async Task OnlyPlayerTTSAsync(EntityUid source, string message, string? voiceId, ICommonSession session, bool ifWhisper, LanguagePrototype language, bool isRadio = false)
     {
-        if (!_netCfg.GetClientCVar(session.Channel, ForgeVars.LocalTTSEnabled))
+        if (!_netCfg.GetClientCVar(session.Channel, ForgeCCVars.LocalTTSEnabled))
             return;
 
         if (HasComp<ActiveRadioComponent>(source))

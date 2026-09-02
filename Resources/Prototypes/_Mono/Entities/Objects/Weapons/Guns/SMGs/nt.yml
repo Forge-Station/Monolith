@@ -1,0 +1,55 @@
+# Corpo War .45 Mag Vector
+- type: entity
+  name: wayward HCLM-357 (.357 magnum)
+  parent: [BaseWeaponRevolver, BaseGunWieldable, BaseFactionGearOtherFactionT3]
+  id: WeaponSubMachineGunVectorNtsfHclm
+  description: An anomalous Heavy Caliber Light Machinegun. A very high-quality heavy SMG chambered in .357 magnum. While awkward to use and quick to run out of ammo, it can be very devastating.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/SMGs/ntsf_hclm_45.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: GunWieldBonus
+    minAngle: -20 # Forge-change -2->-20
+    maxAngle: -25 # Forge-change -2->-25
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: _Mono/Objects/Weapons/Guns/SMGs/ntsf_hclm_45.rsi
+  - type: Gun
+    damageModifier: 0.9 # Forge-change 0.8->0.9
+    fireRate: 5 # Forge-change 6->5
+    minAngle: 25 # Forge-change
+    maxAngle: 45 # Forge-change
+    angleIncrease: 2.5 # Forge-change
+    angleDecay: 8 # Forge-change
+    selectedMode: FullAuto
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/dmr.ogg
+    availableModes:
+    - SemiAuto
+    - FullAuto
+  - type: ContainerContainer
+    containers:
+      revolver-ammo: !type:Container
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - Cartridge357_magnumFMJ
+      - SpeedLoader357_magnumFMJ
+    mayTransfer: true
+    proto: Cartridge357_magnumFMJ
+    capacity: 12 # Forge-change 18->12
+    chambers: [ True, True, True, True, True, True, True, True, True, True, True, True ] # Forge-change 18->12
+    ammoSlots: [ null, null, null, null, null, null, null, null, null, null, null, null ] # Forge-change 18->12
+    soundEject:
+      path: /Audio/Weapons/Guns/MagOut/revolver_magout.ogg
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
+  - type: Appearance
+  - type: LaserPointer
+    targetedColor: "#03c2fc"
+    defaultColor: "#03c2fc"

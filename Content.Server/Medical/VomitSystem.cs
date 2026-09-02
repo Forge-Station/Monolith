@@ -31,7 +31,6 @@ namespace Content.Server.Medical
         [Dependency] private ForensicsSystem _forensics = default!;
         [Dependency] private BloodstreamSystem _bloodstream = default!;
 
-        [ValidatePrototypeId<SoundCollectionPrototype>]
         private const string VomitCollection = "Vomit";
 
         private readonly SoundSpecifier _vomitSound = new SoundCollectionSpecifier(VomitCollection,

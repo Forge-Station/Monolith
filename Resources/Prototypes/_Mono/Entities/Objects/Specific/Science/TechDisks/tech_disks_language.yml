@@ -34,7 +34,7 @@
     - NewKinPidginTranslator # Vox
 
 - type: entity
-  parent: TechDiskBase
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: TechDiskTranslationPreFracture
   name: pre-fracture advanced translation technology disk
   description: A disk capable of adding translators and implant translators to a server's recipes.

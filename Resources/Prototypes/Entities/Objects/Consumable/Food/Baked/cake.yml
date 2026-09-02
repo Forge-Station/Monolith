@@ -23,6 +23,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 20
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 1.25             # Forge-change
   - type: Item
     size: Normal
   - type: Tag
@@ -63,6 +65,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 4
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
   - type: Item
     size: Tiny
   - type: Tag
@@ -154,6 +158,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 5
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 1.25             # Forge-change
   - type: Tag
     tags:
     - Cake
@@ -170,7 +176,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 6
+        maxVol: 7                 # Forge-change
         reagents:
         - ReagentId: JuiceCarrot
           Quantity: 3
@@ -180,6 +186,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 1
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
   - type: Tag
     tags:
     - Cake
@@ -239,7 +247,7 @@
         - ReagentId: Flavorol
           Quantity: 20
         - ReagentId: Lactozit
-          Quantity: 3
+          Quantity: 2.5
   # Forge-change-end
   - type: SliceableFood
     slice: FoodCakeCheeseSlice
@@ -265,7 +273,7 @@
         - ReagentId: Flavorol
           Quantity: 4
         - ReagentId: Lactozit
-          Quantity: 0.75
+          Quantity: 0.5
   # Forge-change-end
 # Tastes like sweetness, cream cheese.
 
@@ -381,6 +389,8 @@
           Quantity: 5
         - ReagentId: Milk
           Quantity: 5
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 2.5           # Forge-change
   - type: Tag
     tags:
     - Cake
@@ -409,6 +419,8 @@
           Quantity: 1
         - ReagentId: Milk
           Quantity: 1
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.5           # Forge-change
   - type: Tag
     tags:
     - Cake
@@ -438,6 +450,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 20
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 1.25             # Forge-change
 
 - type: entity
   name: slice of chocolate cake
@@ -459,6 +473,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 4
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
 # Tastes like sweetness, cake, chocolate.
 
 - type: entity
@@ -542,6 +558,8 @@
           Quantity: 11
         - ReagentId: Flavorol
           Quantity: 20
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 1.25             # Forge-change
   - type: Tag
     tags:
     - Cake
@@ -566,6 +584,8 @@
           Quantity: 2.2
         - ReagentId: Flavorol
           Quantity: 4
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
   - type: Tag
     tags:
     - Cake
@@ -646,7 +666,8 @@
           Quantity: 15
         - ReagentId: Flavorol
           Quantity: 20
-
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 1.25             # Forge-change
 - type: entity
   name: slice of vanilla cake
   parent: FoodCakeSliceBase
@@ -668,6 +689,8 @@
           Quantity: 3
         - ReagentId: Flavorol
           Quantity: 4
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
 # Tastes like sweetness, cake, vanilla.
 
 - type: entity
@@ -693,7 +716,8 @@
           Quantity: 15
         - ReagentId: Flavorol
           Quantity: 20
-
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 1.25             # Forge-change
 - type: entity
   name: slice of clown cake
   parent: FoodCakeSliceBase
@@ -715,6 +739,8 @@
           Quantity: 3
         - ReagentId: Flavorol
           Quantity: 4
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
 # Tastes like sweetness, cake, clown.
 
 - type: entity
@@ -738,6 +764,8 @@
           Quantity: 5
         - ReagentId: PolypyryliumOligomers
           Quantity: 15
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 1.25             # Forge-change
 
 - type: entity
   name: slice of spaceman's cake
@@ -758,6 +786,8 @@
           Quantity: 1
         - ReagentId: PolypyryliumOligomers
           Quantity: 3
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
 # Tastes like sweetness, cake, jam.
 
 - type: entity
@@ -782,6 +812,8 @@
           Quantity: 20
         - ReagentId: Vitamin
           Quantity: 5
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 1.25             # Forge-change
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -865,10 +897,12 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 48
+        maxVol: 50                # Forge-change
         reagents:
         - ReagentId: Flavorol
           Quantity: 48
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 1.25             # Forge-change
   - type: Food
     transferAmount: 12
   - type: Item
@@ -889,10 +923,12 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 12
+        maxVol: 14                # Forge-change
         reagents:
         - ReagentId: Flavorol
           Quantity: 12
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
   - type: Food
     transferAmount: 3
   - type: PointLight

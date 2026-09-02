@@ -7,8 +7,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 35
-    armorPenetration: 0.1
+        Piercing: 40 # Forge-change 35->40
+    armorPenetration: 0.2 # Forge-change 0.1->0.2
 
 - type: entity
   id: Bullet357_magnumPractice
@@ -30,9 +30,9 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 3
+        Blunt: 5 # Forge-change 3->5
   - type: StaminaDamageOnCollide
-    damage: 35 # 3 hits to stun cuz revolver
+    damage: 50 # Forge-change 35->50
 
 - type: entity
   id: Bullet357_magnumIncendiary
@@ -43,8 +43,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20
+        Piercing: 25 # Forge-change 20->25
         Heat: 10
+    armorPenetration: -0.1 # Forge-change
 
 - type: entity
   id: Bullet357_magnumAP
@@ -68,7 +69,8 @@
     damage:
       types:
         Radiation: 15
-        Piercing: 20
+        Piercing: 25 # Forge-change 20->25
+    armorPenetration: -0.05 # Forge-change
 
 # Mono AP syst
 # + 0.05 base AP
@@ -82,8 +84,8 @@
   - type: Projectile
     damage:
       types:
-        Slash: 8
-        Piercing: 37
+        Slash: 10 # Forge-change 8->10
+        Piercing: 40 # Forge-change 37->40
     armorPenetration: -0.5
 
 - type: entity
@@ -95,9 +97,9 @@
   - type: Projectile
     damage:
       types:
-        Slash: 10
-        Piercing: 50
-    armorPenetration: -0.9
+        Slash: 15 # Forge-change 10->15
+        Piercing: 45 # Forge-change 50->45
+    armorPenetration: -0.95 # Forge-change -0.9->-0.95
 
 #armor-piercing:
 - type: entity
@@ -109,6 +111,6 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20
-        Structural: 70
-    armorPenetration: 0.6
+        Piercing: 28 # Forge-change 20->28
+        Structural: 35 # Forge-change 70->35
+    armorPenetration: 0.5

@@ -1,3 +1,8 @@
 ﻿ent-Bullet68x52mmCaseless = пуля (6.8x52мм безгильзовая)
 ent-Bullet68x52mmCaselessPractice = пуля (6.8x52mm безгильзовая учебный)
 ent-Bullet68x52mmCaselessRubber = пуля (6.8x52mm безгильзовая резиновый)
+ent-Bullet68x52mmCaselessIncendiary = пуля (6.8x52mm безгильзовая зажигательный)
+ent-Bullet68x52mmCaselessUranium = пуля (6.8x52mm безгильзовая урановый)
+ent-Bullet68x52mmCaselessHP = пуля (6.8x52mm безгильзовая экспансивный)
+ent-Bullet68x52mmCaselessRIP = пуля (6.8x52mm безгильзовая RIP)
+ent-Bullet68x52mmCaselessPlasteelAP = пуля (6.8x52mm безгильзовая бронебойный)

@@ -5,7 +5,7 @@
 
 #Mercenary Hardsuit
 - type: entity
-  parent: NFClothingHeadHardsuitWithLightBase
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Normal] # Forge-change add ClothingNightVision1Normal and replace ClothingHeadSuitWithLightBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitMercenary
   categories: [ HideSpawnMenu ]
   name: mercenary hardsuit helmet
@@ -16,6 +16,7 @@
     sprite: _NF/Clothing/Head/Hardsuits/mercenary.rsi
   - type: Clothing
     sprite: _NF/Clothing/Head/Hardsuits/mercenary.rsi
+    equippedState: off-equipped-HELMET # Forge-change
   - type: PointLight
     color: "#ffeead"
   - type: PressureProtection
@@ -24,10 +25,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
+        Blunt: 0.95 # Forge-change 0.9->0.95
+        Slash: 0.95 # Forge-change 0.9->0.95
+        Piercing: 0.95 # Forge-change 0.9->0.95
+        Heat: 0.95 # Forge-change 0.9->0.95
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitMercenary
@@ -39,6 +40,7 @@
     sprite: _NF/Clothing/Head/Hardsuits/private_security.rsi
   - type: Clothing
     sprite: _NF/Clothing/Head/Hardsuits/private_security.rsi
+    equippedState: off-equipped-HELMET # Forge-change
   - type: PointLight
     color: "#ffff00"
 
@@ -63,7 +65,7 @@
 
 #ERT Mail Carrier Hardsuit
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Normal] # Forge-change add ClothingNightVision2Normal and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitERTMailCarrier
   name: ERT mail carrier hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -75,6 +77,13 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertsecurity.rsi # Forge-change
   - type: PointLight
     color: "#cbadff"
+  - type: Armor # Forge-change
+    modifiers: # Forge-change
+      coefficients: # Forge-change
+        Blunt: 0.95 # Forge-change
+        Slash: 0.95 # Forge-change
+        Piercing: 0.95 # Forge-change
+        Heat: 0.95 # Forge-change
 
 # MAXIM helmet, but with light
 - type: entity

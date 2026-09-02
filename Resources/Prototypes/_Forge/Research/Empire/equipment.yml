@@ -32,6 +32,7 @@
   recipeUnlocks:
   - ClothingOuterHardsuitRI14
   - ClothingOuterHardsuitRI14m
+  - ClothingOuterHardsuitRI14i
   technologyPrerequisites:
   - EmpireBasicClothing
   position: 10, 14
@@ -45,6 +46,9 @@
   cost: 80000
   recipeUnlocks:
   - ClothingOuterHardsuitRI22
+  - ClothingOuterHardsuitRI22i
+  - ClothingOuterHardsuitHV2
+  - ClothingOuterHardsuitHV2Inq
   technologyPrerequisites:
   - EmpireBasicEquipment
   - UniversalMaterialResearchT2
@@ -59,6 +63,7 @@
   cost: 250000
   recipeUnlocks:
   - ClothingOuterHardsuitHV7
+  - ClothingOuterHardsuitHV7i
   - ClothingOuterHardsuitHVMilitant
   technologyPrerequisites:
   - EmpireAdvancedEquipment
@@ -68,12 +73,14 @@
 - type: technology
   id: EmpireHardsuitStealh
   name: research-technology-empire-prototype-stealh
-  entityIcon: ClothingOuterHardsuitHVStealh
+  entityIcon: ClothingOuterHardsuitHVStealth
   discipline: Empire
   tier: 2
   cost: 150000
   recipeUnlocks:
-  - ClothingOuterHardsuitHVStealh
+  - ClothingOuterHardsuitHVStealth
+  - ClothingOuterHardsuitHVReflectElite
+  - ClothingOuterHardsuitRI32m
   technologyPrerequisites:
   - EmpireAdvancedEquipment
   - UniversalMaterialResearchT3

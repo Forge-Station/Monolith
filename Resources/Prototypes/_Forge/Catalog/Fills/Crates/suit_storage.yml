@@ -113,22 +113,6 @@
     access: [["Renegate"]]
 
 - type: entity
-  id: SuitStoragebsii30
-  parent: SuitStorageBase
-  suffix: BSII-30 "Locksmith" Hardsuit, Ренегаты
-  components:
-  - type: StorageFill
-    contents:
-    - id: OxygenTankFilled
-    - id: NitrogenTankFilled
-    - id: ClothingOuterHardsuitRenegatebsii30
-    - id: JetpackBlackFilled
-    - id: ClothingShoesBootsMagRenegade
-    - id: ClothingMaskGasRenegate
-  - type: AccessReader
-    access: [["Renegate"]]
-
-- type: entity
   id: SuitStoragecriii200
   parent: SuitStorageBase
   suffix: CRIII-200 "Bug" Hardsuit, Commander, Ренегаты
@@ -153,7 +137,7 @@
     contents:
     - id: OxygenTankFilled
     - id: NitrogenTankFilled
-    - id: ClothingOuterHardsuitRenegateoiii18
+    - id: ClothingOuterHardsuitRenegateEnergyShield
     - id: JetpackBlackFilled
     - id: ClothingShoesBootsMagRenegade
     - id: ClothingMaskGasRenegate
@@ -169,7 +153,7 @@
     contents:
     - id: OxygenTankFilled
     - id: NitrogenTankFilled
-    - id: ClothingOuterHardsuitRenegateyiv3020
+    - id: ClothingOuterHardsuitRenegateHeavyJuggernaut
     - id: JetpackBlackFilled
     - id: ClothingShoesBootsMagRenegade
     - id: ClothingMaskGasRenegate

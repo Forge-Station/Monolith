@@ -822,8 +822,8 @@
   - AmmoBox635x40mmCaselessUranium # Forge-change
   - Magazine8x65mmSKRUranium # Forge-change
   - AmmoBox8x65mmSKRUranium # Forge-change
-  - Magazine68x52mmUranium # Forge-change
-  - AmmoBox68x52mmUranium # Forge-change
+  - Magazine68x52mmCaselessUranium # Forge-change
+  - AmmoBox68x52mmCaselessUranium # Forge-change
 
 #Incendiary recipes
 
@@ -859,8 +859,8 @@
   - AmmoBox23x75mmFlashbang
   - Magazine635x40mmCaselessIncendiary # Forge-change
   - AmmoBox635x40mmCaselessIncendiary # Forge-change
-  - Magazine68x52mmIncendiary # Forge-change
-  - AmmoBox68x52mmIncendiary # Forge-change
+  - Magazine68x52mmCaselessIncendiary # Forge-change
+  - AmmoBox68x52mmCaselessIncendiary # Forge-change
 
 #Plasteel AP recipes
 

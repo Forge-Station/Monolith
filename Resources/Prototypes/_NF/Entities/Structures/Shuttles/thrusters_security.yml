@@ -50,24 +50,6 @@
   - type: Machine
     board: GyroscopeSecurityMachineCircuitboard
 
-# Forge-Change-Start
-
-- type: entity
-  id: GyroscopeADS
-  parent: [Gyroscope, BaseStructureDisableToolUse]
-  name : gyroscope ADS
-  suffix: ADS
-  components:
-  - type: Sprite
-    sprite: _NF/Structures/Shuttles/gyroscope.rsi
-  - type: Machine
-    board: GyroscopeSecurityMachineCircuitboard
-    partOverrides:
-      Capacitor: QuadraticCapacitorStockPart
-      Manipulator: FemtoManipulatorStockPart
-
-# Forge-Change-End
-
 - type: entity
   id: DebugGyroscopeSecurity
   parent: DebugGyroscope # Mono - Removed BaseStructureDisableAnchoring

@@ -27,11 +27,12 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Tayfun USSP{1}'
+          mapNameTemplate: 'Tayfun MIL{1}' # Forge-change: Ussp to MIL
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-           USSPSergeant: [ 0, 0 ]
-           USSPRifleman: [ 0, 0 ]
+           Contractor: [ 0, 0 ] # Forge-change: Ussp Rolesto Contractor
+           Pilot: [ 0, 0 ] # Forge-change: Ussp Roles to Pilot
+           Mercenary: [ 0, 0 ] # Forge-change: Ussp Roles to Mercenary

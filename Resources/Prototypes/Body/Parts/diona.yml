@@ -18,6 +18,13 @@
   components:
   - type: Sprite
     state: "torso_m"
+  #Forge-Change-Start
+  - type: MovementBodyPartModifier
+    walkModifier: 1.3
+    sprintModifier: 1.3
+    group: torso
+  #Forge-Change-end
+
 
 - type: entity
   id: HeadDiona

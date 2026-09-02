@@ -1,7 +1,7 @@
 - type: vessel
   id: Nightlight
   parent: BaseVessel
-  name: Ночник
+  name: «Ночник»
   description: Небольшой гражданский шаттл-ресторан с баром, кухней и гидропоникой
   price: 50850
   category: Medium

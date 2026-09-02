@@ -9,6 +9,7 @@
   cost: 10000 # Mono
   recipeUnlocks:
   - MiningDrill
+  - ShipDrillMachineCircuitboard # Forge-change
   - WeaponGrapplingGun # Frontier
   - MineralScannerEmpty
   - OreProcessorIndustrialMachineCircuitboard
@@ -244,7 +245,7 @@
   recipeUnlocks:
   - OreBagOfHolding
   - MiningDrillDiamond
-  - ShipDrillMachineCircuitboard
+  - ShipDrillDiamondMachineCircuitboard #Forge-change
   - AdvancedMineralScannerEmpty
   - NFBlueprintOreBagOfHolding # Frontier
   - NFBlueprintMiningDrillDiamond # Frontier

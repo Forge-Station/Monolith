@@ -6,11 +6,11 @@
   description: A hardsuit issued to marines operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -51,9 +51,9 @@
   description: Corpsman variant of the M82c outfitted with caustic and radiological shielding. Some of the blunt-absorbent gel layer is sacrificed for the NBC protection.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.75
   - type: ToggleableClothing
@@ -88,11 +88,11 @@
   description: An armored hardsuit, designed to be an upgrade for the M82 series. The extra general armor gives it significant weight to move around.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_mid.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_mid.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_mid.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_mid.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.03
     lowPressureMultiplier: 1000
@@ -134,11 +134,11 @@
   description: A lightened Juggernaut hardsuit issued to the TSF for regular operations. More protection, less mobility.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_high.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_high.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_high.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_high.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -179,9 +179,9 @@
   description: A heavy, gilded tacsuit, stripped of its shield but now capable of taking a lot of physical damage. Usually assigned to commanding officers of TSF flagships.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_midas.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_midas.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_midas.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_midas.rsi
   - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -219,9 +219,9 @@
   description: An experimental modification of the M92 tacsuit for spec-ops units of the TSFMC. Durable, and comes with an integrated soft-shield along with numerous gadgets at the cost of insulation and solid armor.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_vprysk.rsi
   - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -291,11 +291,11 @@
   description: Prototype of a stealth hardsuit issued to the TSF military forces. With it, special operators can conduct reconnaissance and sabotage without being exposed.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_stealth_mark1.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_stealth_mark1.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_stealth_mark1.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_stealth_mark1.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.03
     lowPressureMultiplier: 1000
@@ -338,11 +338,11 @@
   description: Prototype of a reflect suit issued to the TSF military forces. The suit is capable of long-lasting against laser weapons and partially reflecting them. It also has increased protection from radiation and explosions.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_zazhiganie.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_zazhiganie.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_zazhiganie.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_zazhiganie.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.03
     lowPressureMultiplier: 1000
@@ -392,9 +392,9 @@
   description: An advanced version of the regular TSF M86 hardsuit. Thanks to the new composites, it practically does not restrict movement, although it does not protect as well as the predecessor.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_medic.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_medic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_medic.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_medic.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -435,11 +435,11 @@
   description: Prototype of a heavy Juggernaut hardsuit issued to the TSF military forces. The suit is capable of long-lasting against most calibers of firearm ammunition.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_porshen.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_porshen.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/tsf_porshen.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_porshen.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.03
     lowPressureMultiplier: 1000

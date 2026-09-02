@@ -145,7 +145,7 @@
   result: ClothingOuterHardsuitERTChaplain
 
 - type: latheRecipe
-  parent: ForgeUniversalLightSuitT3CompanyRecipe
+  parent: ForgeReflectSuitT3CompanyRecipe
   id: ClothingOuterHardsuitCBURN
   result: ClothingOuterHardsuitCBURN
     

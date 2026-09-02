@@ -1,0 +1,30 @@
+- type: technology
+  id: ForgeMercenaryShipyardTier1
+  name: research-technology-forge-mercenary-shipyard-tier-1
+  entityIcon: ShipVoucherCorvet
+  discipline: MercenaryShipyard
+  tier: 1
+  cost: 50000
+  recipeUnlocks:
+  - ForgeShipVoucherCorvet
+  - ForgeShipVoucherSeeker
+  - ForgeShipVoucherHammerhead
+  technologyPrerequisites:
+  - UniversalMaterialResearchT2
+  position: 0, 0
+
+- type: technology
+  id: ForgeMercenaryShipyardTier2
+  name: research-technology-forge-mercenary-shipyard-tier-2
+  entityIcon: ShipVoucherBriar
+  discipline: MercenaryShipyard
+  tier: 2
+  cost: 75000
+  recipeUnlocks:
+  - ForgeShipVoucherDreadnought
+  - ForgeShipVoucherAchilles
+  - ForgeShipVoucherBriar
+  technologyPrerequisites:
+  - ForgeMercenaryShipyardTier1
+  - UniversalMaterialResearchT3
+  position: 0, 6

@@ -119,7 +119,7 @@
 #  - type: NoSlip # Frontier
 
 - type: entity
-  parent: [ClothingShoesBase, PowerCellSlotSmallItem, BaseToggleClothing]
+  parent: [ ClothingShoesBase, PowerCellSlotSmallItem, BaseToggleClothing, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: ClothingShoesBootsSpeed
   name: speed boots
   description: High-tech boots with interwoven bluespace fibers, able to convert electricity into pure speed!

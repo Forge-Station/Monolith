@@ -145,6 +145,14 @@
         minValue: 30
         maxValue: 100
         steps: 5
+    - name: ChangeIdealLight
+      baseOdds: 0.018
+      persists: false
+      effect: !type:PlantChangeStat
+        targetValue: IdealLight
+        minValue: 2
+        maxValue: 12
+        steps: 5
     - name: ChangeSeedless
       baseOdds: 0.036
       persists: false
@@ -170,14 +178,119 @@
       persists: false
       effect: !type:PlantMutateChemicals
     - name: ChangeExudeGasses
-      baseOdds: 0.0145
+      baseOdds: 0.01
       persists: false
       effect: !type:PlantMutateExudeGasses
     - name: ChangeConsumeGasses
-      baseOdds: 0.0036
+      baseOdds: 0.008
       persists: false
       effect: !type:PlantMutateConsumeGasses
     - name: ChangeHarvest
       baseOdds: 0.036
       persists: false
       effect: !type:PlantMutateHarvest
+    - name: Radioactive
+      baseOdds: 0.0015
+      appliesToProduce: false
+      persists: false
+      effect: !type:PlantChangeStat
+        targetValue: Radioactive
+    - name: CarnivorousGrab
+      baseOdds: 0.004
+      appliesToProduce: false
+      persists: false
+      effect: !type:PlantChangeStat
+        targetValue: CarnivorousGrab
+    - name: CarbonFilter
+      baseOdds: 0.005
+      appliesToProduce: false
+      effect: !type:PlantAddConsumeGas
+        gas: CarbonDioxide
+        minValue: 0.1
+        maxValue: 0.22
+    - name: AntiradFruit
+      baseOdds: 0.003
+      appliesToProduce: false
+      effect: !type:PlantMutateAddChemical
+        reagent: Hyronalin
+        min: 1
+        max: 4
+    - name: DroughtTolerant
+      baseOdds: 0.012
+      appliesToProduce: false
+      effect: !type:PlantChangeStat
+        targetValue: WaterConsumption
+        minValue: 0.2
+        maxValue: 0.2
+        steps: 1
+    - name: NitrogenFixer
+      baseOdds: 0.012
+      appliesToProduce: false
+      effect: !type:PlantChangeStat
+        targetValue: NutrientConsumption
+        minValue: 0.15
+        maxValue: 0.15
+        steps: 1
+    - name: ShadeAdapted
+      baseOdds: 0.012
+      appliesToProduce: false
+      effect: !type:PlantChangeStat
+        targetValue: IdealLight
+        minValue: 3
+        maxValue: 3
+        steps: 1
+    - name: SunLover
+      baseOdds: 0.012
+      appliesToProduce: false
+      effect: !type:PlantChangeStat
+        targetValue: IdealLight
+        minValue: 10
+        maxValue: 10
+        steps: 1
+    - name: Perennial
+      baseOdds: 0.01
+      appliesToProduce: false
+      persists: false
+      effect: !type:PlantMutateHarvest
+    - name: PestWard
+      baseOdds: 0.01
+      appliesToProduce: false
+      effect: !type:PlantChangeStat
+        targetValue: PestTolerance
+        minValue: 12
+        maxValue: 12
+        steps: 1
+    - name: ThinAir
+      baseOdds: 0.008
+      appliesToProduce: false
+      effect: !type:PlantChangeStat
+        targetValue: LowPressureTolerance
+        minValue: 50
+        maxValue: 50
+        steps: 1
+    - name: OxygenBloom
+      baseOdds: 0.006
+      appliesToProduce: false
+      effect: !type:PlantAddExudeGas
+        gas: Oxygen
+        minValue: 0.12
+        maxValue: 0.28
+    - name: AloeSap
+      baseOdds: 0.005
+      appliesToProduce: false
+      effect: !type:PlantMutateAddChemical
+        reagent: Dermaline
+        min: 1
+        max: 4
+    - name: BitterAntidote
+      baseOdds: 0.005
+      appliesToProduce: false
+      effect: !type:PlantMutateAddChemical
+        reagent: Dylovene
+        min: 1
+        max: 4
+    - name: PestEater
+      baseOdds: 0.006
+      appliesToProduce: false
+      effect: !type:PlantChangeStat
+        targetValue: CarnivorousPestEater

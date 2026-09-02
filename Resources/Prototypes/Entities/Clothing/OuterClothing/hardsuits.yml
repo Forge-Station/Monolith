@@ -602,9 +602,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/security-red.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/security-red.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/security-red.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/security-red.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000
@@ -682,11 +682,11 @@
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndicate.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndicate.rsi # Forge-change
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndicate.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndicate.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -729,11 +729,11 @@
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
   - type: Item # Forge-change
     size: Huge # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
   - type: Armor # Mono
     modifiers:
       coefficients:
@@ -771,9 +771,9 @@
   description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -823,9 +823,9 @@
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -868,9 +868,9 @@
   description: A suit originally made by the cutting edge R&D department at cybersun to be hyper resilient, now recycled and used by the Phaethon Dynasty. Hefty and durable, but not fully insulated.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/cybersun.rsi  # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/cybersun.rsi  # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/cybersun.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/cybersun.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000
@@ -1392,26 +1392,31 @@
     heatingCoefficient: 0.001
     coolingCoefficient: 0.001
   - type: ExplosionResistance
-    damageCoefficient: 0.8 # Forge-change 0.7 -> 0.8
+    damageCoefficient: 0.25 # Forge-change 0.7 -> 0.25
   - type: FireProtection # Forge-change
     reduction: 0.2
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.45 # Forge-change 0.7 -> 0.45
-        Slash: 0.45 # Forge-change 0.5 -> 0.45
-        Piercing: 0.6 
-        Heat: 0.45 # Forge-change 0.3 -> 0.45
+        Blunt: 0.525 # Forge-change 0.7 -> 0.525
+        Slash: 0.525 # Forge-change 0.5 -> 0.525
+        Piercing: 0.475 # Forge-change 0.6 -> 0.475
+        Heat: 0.35 # Forge-change 0.3 -> 0.35
         Cold: 0.3
         Shock: 0.3
-        Radiation: 0.4 # Forge-change 0.1 -> 0.4
+        Radiation: 0.15 # Forge-change 0.1 -> 0.15
         Caustic: 0
   - type: ClothingSpeedModifier 
-    walkModifier: 0.95 # Forge-change 1.0 -> 0.95
-    sprintModifier: 0.95 # Forge-change 0.9 -> 0.95
+    walkModifier: 0.965 # Forge-change 1.0 -> 0.965
+    sprintModifier: 0.965 # Forge-change 0.9 -> 0.965
+  - type: Reflect # Forge-change
+    reflectProb: 0.25 # Forge-change
+    damageOnReflectModifier: 0 # Forge-change
+    reflects: # Forge-change
+      - Energy # Forge-change
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.4 # Forge-change 0.5 -> 0.4
+    coefficient: 0.25 # Forge-change 0.5 -> 0.25
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false

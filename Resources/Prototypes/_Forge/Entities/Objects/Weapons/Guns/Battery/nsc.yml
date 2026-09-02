@@ -6,7 +6,7 @@
   description: UcasCo plasma pistol with semi-auto, burst, and full-auto modes. Self-recharging battery.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_pistol.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/nexus_energie_pistol.rsi
     layers:
     - state: icon
       visible: false
@@ -16,10 +16,10 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_pistol.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/nexus_energie_pistol.rsi
   - type: Item
     size: Small
-    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_pistol.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/nexus_energie_pistol.rsi
     shape:
     - 0,0,1,1
     inhandVisuals:
@@ -77,7 +77,7 @@
   description: UcasCo pistol with plasma bolts and a charged EMP shot. EMP mode uses most of the battery per shot.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_emp_pistol.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/nexus_emp_pistol.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -85,7 +85,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_emp_pistol.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/nexus_emp_pistol.rsi
   - type: MagazineVisuals
     magState: mag
     steps: 4
@@ -120,7 +120,7 @@
   description: UcasCo plasma rifle. Semi-auto fires one heavy bolt; full auto fires two lighter bolts per shot.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -128,10 +128,10 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle_inhand_x64.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle_inhand_x64.rsi
   - type: Item
     size: Large
-    sprite: Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle_inhand_x64.rsi
+    sprite: _Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle_inhand_x64.rsi
     shape:
     - 0,0,3,2
   - type: Gun

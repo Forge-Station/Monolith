@@ -175,15 +175,11 @@
   name: loadout-group-contractor-outerclothing
   minLimit: 0
   loadouts:
-  - ContractorClothingOuterHardsuitSalvage
-  - ContractorClothingOuterHardsuitVoidParamed
+  - MercenaryClothingOuterHardsuitMercenaryWarlord
   - ContractorClothingOuterHardsuitSpatio
+  - ContractorClothingOuterHardsuitVoidParamed
   - ContractorClothingOuterHoodieGrey
   - ContractorClothingOuterVestHazard
-  - ContractorClothingOuterApron
-  - ContractorClothingOuterApronBar
-  - ContractorClothingOuterApronBotanist
-  - ContractorClothingOuterApronChef
   - ContractorClothingOuterHoodieBlack
   - ContractorClothingOuterCoatJensen
   - ContractorClothingOuterCoatGentle
@@ -431,6 +427,12 @@
   name: loadout-group-contractor-gloves
   minLimit: 0
   loadouts:
+  - MercenaryClothingHandsGlovesTacticalCombatBlack
+  - MercenaryClothingHandsGlovesTacticalCombatTan
+  - MercenaryClothingHandsGlovesTacticalCombatRangerGreen
+  - MercenaryClothingHandsGlovesTacticalCombatOlive
+  - MercenaryClothingHandsGlovesTacticalCombatCoyoteBrown
+  - MercenaryClothingHandsGlovesTacticalCombatWhite
   - ContractorClothingHandsGlovesLeather
   - ContractorClothingHandsGlovesFingerless
   - ContractorClothingHandsGlovesLatex
@@ -473,16 +475,6 @@
   - ContractorClothingNeckCloakMoth
   - ContractorClothingNeckScarfChaplainStole
   - ContractorClothingNeckStoleChaplain
-  - ContractorClothingNeckCloakTrans
-  - ContractorClothingNeckCloakAro
-  - ContractorClothingNeckCloakAce
-  - ContractorClothingNeckCloakBi
-  - ContractorClothingNeckCloakIntersex
-  - ContractorClothingNeckCloakEnby
-  - ContractorClothingNeckCloakPan
-  - ContractorClothingNeckCloakGay
-  - ContractorClothingNeckCloakLesbian
-  - ContractorBedsheetRainbow
   - ContractorClothingNeckIFFNeutral
   - ContractorClothingNeckIFFGreen
   - ContractorClothingNeckIFFRed
@@ -548,8 +540,9 @@
   name: loadout-group-contractor-glasses
   minLimit: 0
   loadouts:
+  - MercenaryClothingEyesGlassesMercenary
+  - MercenaryClothingEyesGlassesSunglasses
   - ContractorClothingEyesGlasses
-  - ContractorClothingEyesGlassesCheapSunglasses
   - ContractorClothingEyesBlindfold
   - ContractorClothingEyesEyepatch
   - ContractorClothingEyesGlassesJamjar
@@ -614,15 +607,14 @@
   id: ContractorFace
   name: loadout-group-contractor-face
   loadouts:
-  - ContractorClothingMaskCOG
   - ContractorClothingMaskBreath
   - ContractorClothingMaskBreathMedical
   - ContractorClothingMaskSterile
   - ContractorClothingMaskGas
+  - ContractorClothingMaskGasSecurity
   - ContractorClothingMaskGasExplorer
   - ContractorClothingMaskGasCaptain
   - ContractorClothingMaskGasAtmos
-  - ContractorClothingMaskDrakeIndustries
   - ContractorClothingMaskPlague
   - ContractorClothingMaskMime
   - ContractorClothingMaskScaredMime
@@ -630,7 +622,6 @@
   - ContractorClothingMaskClown
   - ContractorClothingMaskNeckGaiter
   - ContractorClothingMaskNeckGaiterRed
-  - ContractorClothingMaskGasSecurity
   fallbacks:
   - ContractorClothingMaskBreath
 

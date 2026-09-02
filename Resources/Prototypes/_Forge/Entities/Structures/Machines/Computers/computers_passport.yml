@@ -1,0 +1,37 @@
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerPassportRegistry
+  name: passport registry console
+  description: Immigration database of issued passports. Can reprint a lost document.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: id
+    - map: ["computerLayerKeys"]
+      state: id_key
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: PassportConsole
+  - type: ActivatableUI
+    key: enum.PassportConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PassportConsoleUiKey.Key:
+        type: PassportConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#c9a227"
+  - type: Computer
+    board: PassportRegistryComputerCircuitboard
+  - type: ShipRepairable
+    repairTime: 4
+    repairCost: 8

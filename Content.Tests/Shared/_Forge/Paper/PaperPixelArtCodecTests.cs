@@ -105,6 +105,26 @@ public sealed class PaperPixelArtCodecTests
         Assert.That(art.Pixels[4], Is.EqualTo(Color.FromHex("#0000ff")));
     }
 
+    [Test]
+    public void GetImageSizesAndSummarizeKeepTextReadable()
+    {
+        var pixels = new[] { Color.Red, Color.Green, Color.Blue, Color.Red };
+        var tag = PaperPixelArtCodec.Encode(2, pixels);
+        var markup = $"Memo\n{tag}\n- Officer";
+
+        Assert.That(PaperPixelArtCodec.ContainsPixelArt(markup), Is.True);
+        var sizes = PaperPixelArtCodec.GetImageSizes(markup);
+        Assert.That(sizes, Is.EqualTo(new[] { (2, 2) }));
+        Assert.That(PaperPixelArtCodec.FormatImageSizes(sizes), Is.EqualTo("2x2"));
+
+        var summary = PaperPixelArtCodec.SummarizeForLogs(markup);
+        Assert.That(summary, Is.EqualTo("Memo\n[image 2x2]\n- Officer"));
+        Assert.That(summary, Does.Not.Contain("[px"));
+        Assert.That(PaperPixelArtCodec.SummarizeForLogs("plain note"), Is.EqualTo("plain note"));
+        Assert.That(PaperPixelArtCodec.GetImageSizes("plain note"), Is.Empty);
+        Assert.That(PaperPixelArtCodec.GetImageSizes(null), Is.Empty);
+    }
+
     private static string BuildColorGrid(int width, int height, Func<int, int, Color> pixel)
     {
         var builder = new StringBuilder(width * height * 24);

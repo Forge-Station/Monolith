@@ -1,9 +1,9 @@
 - type: entity
-  name: NEX-SR-91 Dlan (15.4x114mm)
+  name: NEX-SR-91 Dlan (13.5x110mm)
   parent: [ForgeBaseWeaponFrameRifleSniper, BaseGunWieldable]
   id: WeaponSniperRifleNexusDlan
   suffix: Нексус
-  description: Heavy 15.4x114mm anti-materiel rifle. Takes up a lot of space in storage.
+  description: Heavy 13.5x110mm anti-materiel rifle. Takes up a lot of space in storage.
   components:
   - type: Sprite
     sprite: _Forge/Objects/Weapons/Guns/Snipers/nexus_bal_snipe.rsi
@@ -53,21 +53,21 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: Magazine154x114mmFMJ
+        startingItem: Magazine135x110mm
         insertSound: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - Magazine154x114mm
+          - Magazine135x110mm
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: Cartridge154x114mmFMJ
+        startingItem: Cartridge135x110mm
         priority: 1
         whitelist:
           tags:
-          - Cartridge154x114mm
+          - Cartridge135x110mm
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot

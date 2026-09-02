@@ -4,6 +4,11 @@
   id: MobCorticalBorer
   description: A worm that burrows into brains and lays its eggs
   components:
+  # Forge-Change-Start
+  - type: ShowRoleInformation
+    window: RoleInformationCorticalBorer
+    duration: 15
+  #Forge-Change-End
   - type: GhostRole
     makeSentient: true
     allowSpeech: False

@@ -1,7 +1,7 @@
 - type: vessel
   id: redeemer
   parent: BaseVessel
-  name: EMF Искупитель
+  name: EMF «Искупитель»
   description: Середний Истребитель Империи
   price: 105500 # 373 fix
   category: Medium

@@ -8,10 +8,18 @@
     - type: Passport
     - type: UseDelay
       delay: 0.5
+    - type: ActivatableUI
+      key: enum.PassportUiKey.Key
+      requiresComplex: false
+      verbText: passport-ui-verb-open
+    - type: UserInterface
+      interfaces:
+        enum.PassportUiKey.Key:
+          type: PassportBoundUserInterface
     - type: Sprite
       sprite: _Forge/Objects/Misc/passport.rsi
       layers:
-      - state: passport_biesel_open
+      - state: passport_biesel_closed
     - type: Appearance
     - type: EmitSoundOnPickup
       sound: /Audio/_Goobstation/Items/handling/book_pickup.ogg
@@ -27,7 +35,7 @@
     - type: Sprite
       sprite: _Forge/Objects/Misc/passport.rsi
       layers:
-      - state: passport_solfed_open # todo: allow people to toggle open and closed
+      - state: passport_solfed_closed
     - type: ExtendDescription
       descriptionList:
       - description: passport-solfed-tsf
@@ -70,7 +78,7 @@
     - type: Sprite
       sprite: _Forge/Objects/Misc/passport.rsi
       layers:
-      - state: passport_imperial_open # todo: allow people to toggle open and closed
+      - state: passport_imperial_closed
     - type: ExtendDescription
       descriptionList:
       - description: passport-imperial-tsf
@@ -113,7 +121,7 @@
     - type: Sprite
       sprite: _Forge/Objects/Misc/passport.rsi
       layers:
-      - state: passport_ussp_open # todo: allow people to toggle open and closed
+      - state: passport_ussp_closed
     - type: ExtendDescription
       descriptionList:
       - description: passport-ussp-tsf
@@ -156,7 +164,7 @@
     - type: Sprite
       sprite: _Forge/Objects/Misc/passport.rsi
       layers:
-      - state: passport_freedom_open # todo: allow people to toggle open and closed
+      - state: passport_freedom_closed
     - type: ExtendDescription
       descriptionList:
       - description: passport-freecolonies-tsf

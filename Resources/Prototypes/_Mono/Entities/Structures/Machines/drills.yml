@@ -36,3 +36,63 @@
     drillType: !type:GatheringDrillType
   - type: Machine
     board: ShipDrillMachineCircuitboard
+
+# Forge-change-start
+
+- type: entity
+  id: MachineShipDrillDiamond
+  parent: [ConstructibleMachine, BaseMachinePowered]
+  name: ship drill diamond
+  description: A small ship diamond drill, capable of digging into asteroids.
+  components:
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Rotatable
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/drillsdiamond.rsi
+    layers:
+    - state: drilldiamond
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { state: drilldiamond_on }
+          False: { state: drilldiamond }
+  - type: ApcPowerReceiver
+    powerLoad: 1250
+  - type: ExtensionCableReceiver
+  - type: Appearance
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -8
+    range: 2
+    sound:
+      path: /Audio/Effects/saw.ogg
+  - type: ShipRepairable
+    repairTime: 20
+    repairCost: 60
+  - type: ShipDrill
+    drillType: !type:GatheringDrillType
+  - type: Machine
+    board: ShipDrillDiamondMachineCircuitboard
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+# Forge-change-end

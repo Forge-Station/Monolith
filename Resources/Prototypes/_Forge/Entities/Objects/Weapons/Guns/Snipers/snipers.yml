@@ -1,8 +1,8 @@
 - type: entity
-  name: Zenith (12.7x85mm)
+  name: Zenith (13.5x110mm)
   parent: [BaseWeaponRifle, BaseGunWieldable]
   id: WeaponSniperUllman
-  description: A portable anti-material rifle. Fires high velocity 12.7mm shells. Uses 12.7x85mm ammo.
+  description: A portable anti-material rifle. Fires high velocity 12.7mm shells. Uses 13.5x110mm ammo.
   components:
   - type: Sprite
     sprite: _Forge/Objects/Weapons/Guns/Snipers/ui_heavy_bal_sniper_icon.rsi
@@ -36,21 +36,21 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: ForgeMagazineUllman127x85mm
+        startingItem: ForgeMagazineUllman135x110mm
         insertSound: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-            - ForgeMagazineUllman127x85mm
+            - ForgeMagazineUllman135x110mm
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: ForgeCartridgeUllman127x85mm
+        startingItem: Cartridge135x110mm
         priority: 1
         whitelist:
           tags:
-            - ForgeCartridgeUllman127x85mm
+            - Cartridge135x110mm
   - type: ChamberMagazineAmmoProvider
     autoCycle: false
     soundRack:

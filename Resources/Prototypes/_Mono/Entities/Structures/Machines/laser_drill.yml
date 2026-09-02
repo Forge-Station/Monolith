@@ -74,7 +74,7 @@
   - type: Anchorable
     flags: None # 1984
   - type: ItemMiner
-    interval: 1 # previously 20
+    interval: 10 # Forge-chance
   - type: PowerConsumer
     voltage: High
     drawRate: 150000

@@ -85,7 +85,6 @@
   cost: 60000
   recipeUnlocks:
   - ClothingOuterHardsuitERTSecurity
-  - ClothingOuterHardsuitCBURN
   - ClothingUniformJumpsuitERTSecurity
   - ClothingUniformJumpsuitERTMedic
   - ClothingUniformJumpsuitERTMailCarrier
@@ -146,6 +145,7 @@
   cost: 90000
   recipeUnlocks:
   - ClothingOuterHardsuitERTChaplain
+  - ClothingOuterHardsuitCBURN
   technologyPrerequisites:
   - NanotrasenArmorT5
   - UniversalMaterialResearchT3

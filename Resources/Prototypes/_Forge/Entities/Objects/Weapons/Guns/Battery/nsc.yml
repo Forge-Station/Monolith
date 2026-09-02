@@ -38,6 +38,7 @@
     burstCooldown: 0.35
     shotsPerBurst: 3
     fireRate: 3
+    projectileSpeed: 45
   - type: ProjectileBatteryAmmoProvider
     proto: BulletNexusPlasmaProjector
     fireCost: 60
@@ -94,6 +95,7 @@
     shape:
     - 0,0,1,1
   - type: Gun
+    projectileSpeed: 45
     examineCaliber: gun-examine-energybolt-low
   - type: ProjectileBatteryAmmoProvider
     proto: BulletNexusPlasmaDoznavatel
@@ -131,8 +133,9 @@
     size: Large
     sprite: _Forge/Objects/Weapons/Guns/Battery/nexus_energie_rifle_inhand_x64.rsi
     shape:
-    - 0,0,4,1
+    - 0,0,3,2
   - type: Gun
+    projectileSpeed: 45
     examineCaliber: gun-examine-energybolt-medium
     selectedMode: SemiAuto
     availableModes:

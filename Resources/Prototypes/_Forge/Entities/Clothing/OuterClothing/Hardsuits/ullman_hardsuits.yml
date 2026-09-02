@@ -1,5 +1,6 @@
+# UI Advanced Light hardsuit
 - type: entity
-  parent: [RecyclableItemClothHardsuit, ClothingOuterBase, GeigerCounterClothing, AllowSuitStorageClothing, BaseFactionGearOtherFactionT2]
+  parent: [RecyclableItemClothHardsuit, ClothingOuterBase, GeigerCounterClothing, BaseFactionGearOtherFactionT2, ClothingFlightProfileEasy]
   id: ClothingOuterHardsuitUllmanMedical
   name: ullman medical hardsuit
   description: A standard issue Ullman medical hardsuit.
@@ -10,24 +11,24 @@
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_med_hardsuit.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.8
+    damageCoefficient: 0.6
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.7
-        Radiation: 0.5
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.6
+        Heat: 0.5
+        Radiation: 0.45
         Caustic: 0.4
   - type: ClothingSpeedModifier
-    walkModifier: 1.1
-    sprintModifier: 1.1
+    walkModifier: 0.975
+    sprintModifier: 0.975
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: StaminaDamageResistance
-    coefficient: 0.5
+    coefficient: 0.25
   - type: TemperatureProtection
     heatingCoefficient: 0.001
     coolingCoefficient: 0.001
@@ -49,3 +50,48 @@
         ents: []
   - type: StaticPrice
     price: 7500
+
+# UI Light Jagernaut hardsuit
+- type: entity
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT2]
+  id: ClothingOuterHardsuitUllmanLightJuggernaut
+  name: ullman light juggernaut hardsuit
+  description: Dark combat hardsuit U.I with reinforced armor plates. It seems this is a simple MK1 hardsuit with a heavy armor suit on top of it.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_light_juggernaut_outer.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_light_juggernaut_outer.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.475
+        Heat: 0.525
+        Radiation: 0.35
+        Caustic: 0.5
+  - type: StaminaDamageResistance
+    coefficient: 0.25
+  - type: ClothingSpeedModifier
+    walkModifier: 0.77
+    sprintModifier: 0.77
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitUllmanLightJuggernaut
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 17800
+    vendPrice: 8500

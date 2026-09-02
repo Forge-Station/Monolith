@@ -86,3 +86,29 @@
   components:
   - type: Implanter
     implant: EmpireTrackingImplant
+
+# - type: entity
+#   id: IpcLightImplanter
+#   name: ipc light implanter
+#   description: The light is brighter than that of a standard flashlight implant, at the cost of draining the IPC battery.
+#   suffix: IPC
+#   parent: BaseImplantOnlyImplanter
+#   components:
+#   - type: Implanter
+#     implant: IpcLightImplant
+
+- type: entity
+  id: TranexamicImplanter
+  parent: BaseImplantOnlyImplanter
+  suffix: Tranexamic
+  components:
+    - type: Implanter
+      implant: TranexamicImplant
+
+- type: entity
+  id: TranexamicImplanterDose
+  parent: BaseImplantOnlyImplanter
+  suffix: Tranexamic Dose
+  components:
+    - type: Implanter
+      implant: TranexamicImplantDose

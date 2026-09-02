@@ -13,14 +13,15 @@
     - map: ["gripAttachment"]
     - map: ["opticAttachment"]
   - type: GunWieldBonus
-    minAngle: -24
-    maxAngle: -20
+    minAngle: 0 # Forge-change -24->0
+    maxAngle: 0 # Forge-change -20->0
   - type: Gun
-    minAngle: 24
-    maxAngle: 46
-    angleIncrease: 5
-    angleDecay: 34
-    fireRate: 6 # 360 rpm
+    minAngle: 4 # Forge-change 24->4
+    maxAngle: 16 # Forge-change 46->16
+    angleIncrease: 3 # Forge-change 5->3
+    angleDecay: 2 # Forge-change 34->2
+    projectileSpeed: 50 # Forge-change
+    fireRate: 5 # Forge-change 6->5
     selectedMode: FullAuto
     availableModes:
     - SemiAuto
@@ -74,6 +75,9 @@
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Rifles/xian_inhands_32x.rsi
   - type: Item
+    size: Huge # Forge-change
+    shape: # Forge-change
+    - 0,0,5,2 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Rifles/xian_inhands_32x.rsi
   - type: StaticPrice
     price: 2500
@@ -167,9 +171,9 @@
     maxAngle: 0
   - type: Gun
     minAngle: 1 # forcewield anyways
-    maxAngle: 12
-    angleIncrease: 1
-    angleDecay: 12
+    maxAngle: 24 # Forge-change 12->24
+    angleIncrease: 1.5 # Forge-change 1->1.5
+    angleDecay: 6 # Forge-change 12->6
     fireRate: 8 # same as L6, but more accurate and heavier
     selectedMode: FullAuto
     availableModes:
@@ -230,9 +234,9 @@
     sprintModifier: 0.95
     walkModifier: 0.95
   - type: SpeedModifiedOnWield
-    walkModifier: 0.5
-    sprintModifier: 0.4
+    walkModifier: 0.7 # Forge-change 0.5->0.7
+    sprintModifier: 0.7 # Forge-change 0.4->0.7
   - type: WieldDelay
-    baseDelay: 1.2
-    modifiedDelay: 1.2
+    baseDelay: 1 # Forge-change 1.2->1
+    modifiedDelay: 1 # Forge-change 1.2->1
     preventFiring: true

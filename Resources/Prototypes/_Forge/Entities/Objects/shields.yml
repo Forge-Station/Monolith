@@ -7,9 +7,9 @@
   id: EnergyShieldAdvanced
   components:
     - type: Sprite
-      sprite: Forge/Objects/Weapons/Melee/cc_e_shield.rsi
+      sprite: _Forge/Objects/Weapons/Melee/cc_e_shield.rsi
     - type: Item
-      sprite: Forge/Objects/Weapons/Melee/cc_e_shield.rsi
+      sprite: _Forge/Objects/Weapons/Melee/cc_e_shield.rsi
     - type: PointLight
       color: red
     - type: Reflect

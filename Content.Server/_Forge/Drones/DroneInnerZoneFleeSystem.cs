@@ -6,7 +6,7 @@ using Content.Server.NPC.HTN;
 using Content.Server.Physics.Controllers;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Crescent.DroneControl;
-using Content.Shared._Forge.CCVar;
+using Content.Shared._Forge.CCVars;
 using Content.Shared.Damage;
 using Content.Shared.Mind.Components;
 using Robust.Shared.Audio;
@@ -73,18 +73,18 @@ public sealed partial class DroneInnerZoneFleeSystem : EntitySystem
         _mindQuery = GetEntityQuery<MindContainerComponent>();
         _xformQuery = GetEntityQuery<TransformComponent>();
 
-        Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneRadius, val => _innerZoneRadius = val, true);
-        Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneFleeDeleteMin, val =>
+        Subs.CVar(_cfg, ForgeCCVars.DroneInnerZoneRadius, val => _innerZoneRadius = val, true);
+        Subs.CVar(_cfg, ForgeCCVars.DroneInnerZoneFleeDeleteMin, val =>
         {
             _deleteMinSeconds = val;
             ClampDeleteTimes();
         }, true);
-        Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneFleeDeleteMax, val =>
+        Subs.CVar(_cfg, ForgeCCVars.DroneInnerZoneFleeDeleteMax, val =>
         {
             _deleteMaxSeconds = val;
             ClampDeleteTimes();
         }, true);
-        Subs.CVar(_cfg, ForgeCVars.DroneInnerZoneCheckInterval, val => _zoneCheckInterval = MathF.Max(0.1f, val), true);
+        Subs.CVar(_cfg, ForgeCCVars.DroneInnerZoneCheckInterval, val => _zoneCheckInterval = MathF.Max(0.1f, val), true);
         ClampDeleteTimes();
 
         SubscribeLocalEvent<DamageableComponent, BeforeDamageChangedEvent>(OnFleeGridDamage);

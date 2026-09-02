@@ -303,7 +303,7 @@
 
 #Security Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitSecurity
   name: security hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
@@ -316,21 +316,22 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.4
+    damageCoefficient: 0.65 # Forge-change 0.4 -> 0.65
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6 # 0.5 -> 0.6 Forge-change
-        Slash: 0.6
-        Piercing: 0.5
+        Blunt: 0.65 # Forge-change 0.6 -> 0.65
+        Slash: 0.65 # Forge-change 0.6 -> 0.65
+        Piercing: 0.55 # Forge-change 0.5 -> 0.55
         Caustic: 0.8
-        Heat: 0.7 # Goobstation
+        Heat: 0.625 # Forge-change 0.7 -> 0.625
+        Radiation: 0.6 # Forge-change
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.75 # 0.85 -> 0.75 Forge-change
+    walkModifier: 0.925 # Forge-change 0.85 -> 0.925
+    sprintModifier: 0.925 # Forge-change 0.85 -> 0.925
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.4
+    coefficient: 0.3 # Forge-change 0.4 -> 0.3
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -342,7 +343,7 @@
 
 #Brigmedic Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitBrigmedic
   name: brigmedic hardsuit
   description: Special hardsuit of the guardian angel of the brig. It is the medical version of the security hardsuit.
@@ -354,17 +355,20 @@
   - type: PressureProtection
     highPressureMultiplier: 0.06
     lowPressureMultiplier: 1000
+  - type: ExplosionResistance # Forge-change
+    damageCoefficient: 0.85 # Forge-change
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.65
-        Slash: 0.65
+        Blunt: 0.7 # Forge-change 0.65 -> 0.7
+        Slash: 0.7 # Forge-change 0.65 -> 0.7
         Piercing: 0.6
         Caustic: 0.3
-        Heat: 0.75 # Goobstation
+        Heat: 0.5 # Forge-change 0.75 -> 0.5
+        Radiation: 0.5 # Forge-change
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.95 # Forge-change 0.9 -> 0.95
+    sprintModifier: 0.95 # Forge-change 0.9 -> 0.95
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -379,7 +383,7 @@
 
 #Warden's Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile and replace ClothingOuterHardsuitBase by ClothingOuterHardsuitBaseWithoutArmorPlates
   id: ClothingOuterHardsuitWarden
   name: warden's hardsuit
   description: A specialized riot suit geared to combat low pressure environments.
@@ -396,14 +400,15 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.35
-        Slash: 0.45
-        Piercing: 0.40
+        Blunt: 0.55 # Forge-change 0.35 -> 0.55
+        Slash: 0.55 # Forge-change 0.45 -> 0.55
+        Piercing: 0.475 # Forge-change 0.40 -> 0.475
         Caustic: 0.7
-        Heat: 0.55 # Goobstation
+        Heat: 0.55 # Forge-change 0.7 -> 0.55
+        Radiation: 0.35 # Forge-change
   - type: ClothingSpeedModifier
-    walkModifier: 0.7
-    sprintModifier: 0.7
+    walkModifier: 0.75 # Forge-change 0.7 -> 0.75
+    sprintModifier: 0.75 # Forge-change 0.7 -> 0.75
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.3
@@ -418,7 +423,7 @@
 
 #Captain's Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitCap
   name: captain's armored spacesuit
   description: A formal armored spacesuit, made for the station's captain.
@@ -431,22 +436,22 @@
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.6 # Forge-change 0.5 -> 0.6
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.6
-        Heat: 0.5
-        Radiation: 0.5
+        Blunt: 0.6 # Forge-change 0.8 -> 0.6
+        Slash: 0.6 # Forge-change 0.8 -> 0.6
+        Piercing: 0.55 # Forge-change 0.6 -> 0.55
+        Heat: 0.55 # Forge-change 0.5 -> 0.55
+        Radiation: 0.6 # Forge-change 0.5 -> 0.6
         Caustic: 0.6
   - type: ClothingSpeedModifier
-    walkModifier: 0.9 # Mono
-    sprintModifier: 0.9 # Mono
+    walkModifier: 0.84 # Forge-change 0.9 -> 0.84
+    sprintModifier: 0.84 # Forge-change 0.9 -> 0.84
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.3
+    coefficient: 0.4 # Forge-change 0.3 -> 0.4
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -591,32 +596,32 @@
 
 #Head of Security's Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile and replace ClothingOuterHardsuitBase by ClothingOuterHardsuitBaseWithoutArmorPlates
   id: ClothingOuterHardsuitSecurityRed
   name: head of security's hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/security-red.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/security-red.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/security-red.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/security-red.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.6
+    damageCoefficient: 0.45 # Forge-change 0.6 -> 0.45
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.6
-        Slash: 0.5
-        Piercing: 0.5 # 0.45 -> 0.5 Forge-change
-        Radiation: 0.4 # 0.5 -> 0.4 Forge-change
+        Slash: 0.6 # Forge-change 0.5 -> 0.6
+        Piercing: 0.45 # Forge-change 0.5 -> 0.45
+        Radiation: 0.4 # Forge-change 0.5 -> 0.4
         Caustic: 0.6
-        Heat: 0.55 # Goobstation
+        Heat: 0.525 # Forge-change 0.55 -> 0.525
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.8 # 0.85 -> 0.8 Forge-change
+    walkModifier: 0.775 # Forge-change 0.85 -> 0.775
+    sprintModifier: 0.775 # Forge-change 0.8 -> 0.775
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.4
@@ -671,17 +676,17 @@
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT3]
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitSyndie
   name: blood-red hardsuit
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndicate.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndicate.rsi # Forge-change
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndicate.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndicate.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -692,13 +697,13 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.5
+        Piercing: 0.45 # Forge-change 0.5 -> 0.45
         Heat: 0.5
         Radiation: 0.5
         Caustic: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 0.8 # 0.9->0.8 Forge-change
-    sprintModifier: 0.8 # 0.9->0.8 Forge-change
+    walkModifier: 0.85 # Forge-change 0.8 -> 0.85
+    sprintModifier: 0.85 # Forge-change 0.8 -> 0.85
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -714,31 +719,37 @@
     - Hardsuit
     - WhitelistChameleon
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.5
+    coefficient: 0.3 # Forge-change 0.5 -> 0.3
 
 # Syndicate Medic Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitSyndie, BaseFactionGearOtherFactionT1]
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile and ClothingOuterHardsuitSyndie->ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitSyndieMedic
   name: blood-red medic hardsuit
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
+  - type: Item # Forge-change
+    size: Huge # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # Forge-change
   - type: Armor # Mono
     modifiers:
       coefficients:
-        Blunt: 0.55
-        Slash: 0.55
-        Piercing: 0.55 # 0.5->0.55 Forge-change
-        Heat: 0.55 # 0.5->0.55 Forge-change
-        Radiation: 0.35
+        Blunt: 0.5 # Forge-change 0.55 -> 0.5
+        Slash: 0.5 # Forge-change 0.55 -> 0.5
+        Piercing: 0.55
+        Heat: 0.5 # Forge-change 0.55 -> 0.5
+        Radiation: 0.5 # Forge-change 0.35 -> 0.5
         Caustic: 0.2
+  - type: StaminaDamageResistance # Forge-change
+    coefficient: 0.3 # Forge-change
+  - type: ExplosionResistance # Forge-change
+    damageCoefficient: 0.7 # Forge-change
   - type: ClothingSpeedModifier # Mono
-    walkModifier: 0.9 # 0.93->0.9 Forge-change
-    sprintModifier: 0.9 # 0.93->0.9 Forge-change
+    walkModifier: 0.975 # 0.9->0.975 Forge-change
+    sprintModifier: 0.975 # 0.9->0.975 Forge-change
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -754,15 +765,15 @@
 
 #Syndicate Elite Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT3]
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile and replace ClothingOuterHardsuitBase by ClothingOuterHardsuitBaseWithoutArmorPlates
   id: ClothingOuterHardsuitSyndieElite
   name: syndicate elite hardsuit
   description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -778,18 +789,23 @@
       coefficients:
         Blunt: 0.6
         Slash: 0.6
-        Piercing: 0.6
-        Heat: 0.35
-        Radiation: 0.1 # Mono: 0.01 -> 0.1
+        Piercing: 0.5 # Forge-change 0.6 -> 0.5
+        Heat: 0.4 # Forge-change 0.35 -> 0.4
+        Radiation: 0.15 # Forge-change 0.1 -> 0.15
         Caustic: 0.5
   - type: Item
     size: Huge
   - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0 # 0.9-> 1 Mono
+    walkModifier: 0.975 # Forge-change 1.0 -> 0.975
+    sprintModifier: 0.975 # Forge-change 1.0-> 0.975
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.45
+    coefficient: 0.15 # Forge-change 0.2 -> 0.15
+  - type: Reflect # Forge-change
+    reflectProb: 0.25 # Forge-change
+    damageOnReflectModifier: 0 # Forge-change
+    reflects: # Forge-change
+      - Energy # Forge-change
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -801,37 +817,37 @@
 
 #Syndicate Commander Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitSyndieCommander
   name: syndicate commander hardsuit
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.4 # Forge-change 0.5 -> 0.4
   - type: Armor # Mono - Armor Value Changes
     modifiers:
       coefficients:
-        Blunt: 0.35
-        Slash: 0.35
-        Piercing: 0.35 # 0.27 -> 0.35 Forge-change
-        Heat: 0.5 # 0.6 -> 0.5 Forge-change
-        Radiation: 0.1 # 0.25 -> 0.1 Forge-change
+        Blunt: 0.4 # Forge-change 0.35 -> 0.4
+        Slash: 0.4 # Forge-change 0.35 -> 0.4
+        Piercing: 0.35 # Forge-change 0.27 -> 0.35
+        Heat: 0.4 # Forge-change 0.6 -> 0.4
+        Radiation: 0.4 # Forge-change 0.25 -> 0.4
         Caustic: 0.4
   - type: ClothingSpeedModifier 
-    walkModifier: 1.0
-    sprintModifier: 0.9
-  - type: SpaceFlightProfile
-    thrustMultiplier: 0.7
-    controlMultiplier: 1.15
-    fuelUsageMultiplier: 1.6
-    combatStabilityBonus: 0.1
+    walkModifier: 0.925 # Forge-change 1.0 -> 0.925
+    sprintModifier: 0.925 # Forge-change 0.9 -> 0.925
+  # - type: SpaceFlightProfile # Forge-change
+  #   thrustMultiplier: 0.7 # Forge-change
+  #   controlMultiplier: 1.15 # Forge-change
+  #   fuelUsageMultiplier: 1.6 # Forge-change
+  #   combatStabilityBonus: 0.1 # Forge-change
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -846,40 +862,40 @@
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileHard] # Forge-change add ClothingFlightProfile and replace ClothingOuterHardsuitBase by ClothingOuterHardsuitBaseWithoutArmorPlates 
   id: ClothingOuterHardsuitJuggernaut
   name: cybersun juggernaut suit
   description: A suit originally made by the cutting edge R&D department at cybersun to be hyper resilient, now recycled and used by the Phaethon Dynasty. Hefty and durable, but not fully insulated.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/cybersun.rsi  # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/cybersun.rsi  # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/cybersun.rsi # Forge-change
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/cybersun.rsi # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.2 # 0.3->0.2
+    damageCoefficient: 0.3 # Forge-change 0.2 -> 0.3
   - type: TemperatureProtection # Mono: Not fully insulated
     heatingCoefficient: 0.01
     coolingCoefficient: 0.01
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.2
-        Slash: 0.2
-        Piercing: 0.2
-        Heat: 0.2
+        Blunt: 0.4 # Forge-change 0.2 -> 0.4
+        Slash: 0.4 # Forge-change 0.2 -> 0.4
+        Piercing: 0.3 # Forge-change 0.2 -> 0.3
+        Heat: 0.4 # Forge-change 0.2 -> 0.4
         Radiation: 0.2
         Caustic: 0.2
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.6 # 0.65-> 0.6 Mono
-  - type: SpaceFlightProfile
-    thrustMultiplier: 0.55
-    controlMultiplier: 1.25
-    fuelUsageMultiplier: 2.1
-    combatStabilityBonus: 0.14
+    walkModifier: 0.65 # Forge-change 0.9 -> 0.65
+    sprintModifier: 0.65 # Forge-change 0.6 -> 0.65
+  # - type: SpaceFlightProfile # Forge-change
+  #   thrustMultiplier: 0.55 # Forge-change
+  #   controlMultiplier: 1.25 # Forge-change
+  #   fuelUsageMultiplier: 2.1 # Forge-change
+  #   combatStabilityBonus: 0.14 # Forge-change
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -890,7 +906,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.4
+    coefficient: 0.2 # Forge-change 0.4 -> 0.2
 
 #Wizard Hardsuit
 - type: entity
@@ -1054,7 +1070,7 @@
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase # Forge-change
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitERTLeader
   name: ERT leader's hardsuit
   description: A protective hardsuit worn by the leader of an emergency response team.
@@ -1069,20 +1085,19 @@
   - type: Armor # Mono - Armor Value Changes
     modifiers:
       coefficients:
-        Blunt: 0.4
-        Slash: 0.4
-        Piercing: 0.4
-        Heat: 0.5
-        Cold: 0.5
+        Blunt: 0.45 # Forge-change 0.4 -> 0.45
+        Slash: 0.45 # Forge-change 0.4 -> 0.45
+        Piercing: 0.4 
+        Heat: 0.45 # Forge-change 0.5 -> 0.45
         Shock: 0.8
-        Radiation: 0.1
+        Radiation: 0.5 # Forge-change 0.1 -> 0.5
         Caustic: 0.7
   - type: ClothingSpeedModifier 
-    walkModifier: 1.0
+    walkModifier: 0.9 # Forge-change 1.0 -> 0.9
     sprintModifier: 0.9
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance 
-    coefficient: 0.2
+    coefficient: 0.3 # Forge-change 0.2 -> 0.3
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: FireProtection
@@ -1098,7 +1113,7 @@
 
 #ERT Chaplain Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase # Forge-change
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileHard] # Forge-change add ClothingFlightProfile and replace ClothingOuterHardsuitBase by ClothingOuterHardsuitBaseWithoutArmorPlates
   id: ClothingOuterHardsuitERTChaplain
   name: ERT chaplain's hardsuit
   description: A protective hardsuit worn by the chaplains of an Emergency Response Team.
@@ -1113,22 +1128,22 @@
   - type: Armor # Mono - Armor Value Changes
     modifiers:
       coefficients:
-        Blunt: 0.2
-        Slash: 0.2
-        Piercing: 0.2
-        Heat: 0.2
+        Blunt: 0.375 # Forge-change 0.2 -> 0.375
+        Slash: 0.375 # Forge-change 0.2 -> 0.375
+        Piercing: 0.3 # Forge-change 0.2 -> 0.3
+        Heat: 0.375 # Forge-change 0.2 -> 0.375
         Cold: 0.2
-        Shock: 0.6
-        Radiation: 0.2
+        # Shock: 0.6 # Forge-change
+        Radiation: 0.225 # Forge-change 0.2 -> 0.225
         Caustic: 0.2
   - type: ClothingSpeedModifier 
-    walkModifier: 0.9
-    sprintModifier: 0.5 # Forge-change 0.6 -> 0.5
+    walkModifier: 0.625 # Forge-change 0.9 -> 0.625
+    sprintModifier: 0.625 # Forge-change 0.5 -> 0.625
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance 
-    coefficient: 0.5 
+    coefficient: 0.25 # Forge-change 0.5 -> 0.25
   - type: ExplosionResistance
-    damageCoefficient: 0.2
+    damageCoefficient: 0.325 # Forge-change 0.2 -> 0.325
   - type: FireProtection
     reduction: 0.8 # Forge end
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
@@ -1142,7 +1157,7 @@
 
 #ERT Engineer Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase # Forge-change
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitERTEngineer
   name: ERT engineer's hardsuit
   description: A protective hardsuit worn by the engineers of an emergency response team.
@@ -1157,22 +1172,22 @@
   - type: Armor # Mono - Armor Value Changes
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.6
-        Heat: 0.3
+        Blunt: 0.6 # Forge-change 0.7 -> 0.6
+        Slash: 0.6 # Forge-change 0.7 -> 0.6
+        Piercing: 0.8 # Forge-change 0.6 -> 0.8
+        Heat: 0.8 # Forge-change 0.3 -> 0.8
         Cold: 0.3
         Shock: 0.6
-        Radiation: 0.1
+        Radiation: 0.05 # Forge-change 0.1 -> 0.05
         Caustic: 0.8
   - type: ClothingSpeedModifier 
-    walkModifier: 1.0
-    sprintModifier: 0.85
+    walkModifier: 0.95 # Forge-change 1.0 -> 0.95
+    sprintModifier: 0.95 # Forge-change 0.85 -> 0.95
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance 
-    coefficient: 0.5 
+    coefficient: 0.75 # Forge-change 0.5 -> 0.75
   - type: ExplosionResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.4 # Forge-change 0.1 -> 0.4
   - type: FireProtection
     reduction: 0.1 # Forge end
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
@@ -1186,7 +1201,7 @@
 
 #ERT Medic Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase # Forge-change
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitERTMedical
   name: ERT medic's hardsuit
   description: A protective hardsuit worn by the medics of an emergency response team.
@@ -1201,20 +1216,20 @@
   - type: Armor # Mono - Armor Value Changes
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
+        Blunt: 0.55 # Forge-change 0.6 -> 0.55
+        Slash: 0.55 # Forge-change 0.6 -> 0.55
         Piercing: 0.5
-        Heat: 0.5
-        Radiation: 0.4
+        Heat: 0.55 # Forge-change 0.5 -> 0.55
+        Radiation: 0.55 # Forge-change 0.4 -> 0.55
         Caustic: 0.2
   - type: ClothingSpeedModifier 
-    walkModifier: 1.0
-    sprintModifier: 0.9 # Forge-change 0.95 -> 0.9
+    walkModifier: 0.975 # Forge-change 1.0 -> 0.975
+    sprintModifier: 0.975 # Forge-change 0.9 -> 0.975
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance 
-    coefficient: 0.5 
+    coefficient: 0.3 # Forge-change 0.5 -> 0.3
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.65 # Forge-change 0.5 -> 0.65
   - type: FireProtection
     reduction: 0.5 # Forge end
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
@@ -1228,7 +1243,7 @@
 
 #ERT Security Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase # Forge-change
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitERTSecurity
   name: ERT security's hardsuit
   description: A protective hardsuit worn by the security officers of an emergency response team.
@@ -1245,19 +1260,19 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-        Cold: 0.9
-        Radiation: 0.7
+        Piercing: 0.475 # Forge-change 0.5 -> 0.475
+        Heat: 0.475 # Forge-change 0.5 -> 0.475
+        # Cold: 0.9 # Forge-change
+        Radiation: 0.45 # Forge-change 0.7 -> 0.45
         Caustic: 0.8
   - type: ClothingSpeedModifier 
-    walkModifier: 1.0
-    sprintModifier: 0.8 # Forge-change 0.9 -> 0.8
+    walkModifier: 0.875 # Forge-change 1.0 -> 0.875
+    sprintModifier: 0.875 # Forge-change 0.8 -> 0.875
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance 
-    coefficient: 0.5 
+    coefficient: 0.25 # Forge-change 0.5 -> 0.25
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.45 # Forge-change 0.5 -> 0.45
   - type: FireProtection
     reduction: 0.5 # Forge end
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
@@ -1275,7 +1290,7 @@
 
 #ERT Janitor Hardsuit
 - type: entity
-  parent: ForgeClothingOuterHardsuitBase # Forge-change
+  parent: [ForgeClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitERTJanitor
   name: ERT janitor's hardsuit
   description: A protective hardsuit worn by the janitors of an emergency response team.
@@ -1290,21 +1305,21 @@
   - type: Armor # Mono - Armor Value Changes
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.7
-        Heat: 0.5
-        Cold: 0.5
+        Blunt: 0.75 # Forge-change 0.9 -> 0.75
+        Slash: 0.75 # Forge-change 0.9 -> 0.75
+        Piercing: 0.75 # Forge-change 0.7 -> 0.75
+        Heat: 0.75 # Forge-change 0.5 -> 0.75
+        # Cold: 0.5 # Forge-change
         Radiation: 0.5
         Caustic: 0
   - type: ClothingSpeedModifier 
-    walkModifier: 1.2  # Forge-change
-    sprintModifier: 1.2  # Forge-change
-  - type: SpaceFlightProfile
-    thrustMultiplier: 0.7
-    controlMultiplier: 1.15
-    fuelUsageMultiplier: 1.6
-    combatStabilityBonus: 0.1 # Forge end
+    walkModifier: 1.1 # Forge-change 1.2 -> 1.1
+    sprintModifier: 1.1 # Forge-change 1.2 -> 1.1
+  # - type: SpaceFlightProfile # Forge-change
+  #   thrustMultiplier: 0.7 # Forge-change
+  #   controlMultiplier: 1.15 # Forge-change
+  #   fuelUsageMultiplier: 1.6 # Forge-change
+  #   combatStabilityBonus: 0.1 # Forge-change
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -1361,7 +1376,7 @@
 
 #CBURN Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitCBURN
   name: CBURN exosuit
   description: A lightweight yet strong exosuit used for special cleanup operations.
@@ -1377,26 +1392,31 @@
     heatingCoefficient: 0.001
     coolingCoefficient: 0.001
   - type: ExplosionResistance
-    damageCoefficient: 0.7
+    damageCoefficient: 0.25 # Forge-change 0.7 -> 0.25
   - type: FireProtection # Forge-change
     reduction: 0.2
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.5 # 0.7 -> 0.5 Forge-change
-        Piercing: 0.6 
-        Heat: 0.3 # 0.1 -> 0.3 Forge-change
-        Cold: 0.3 # 0.1 -> 0.3 Forge-change
-        Shock: 0.3 # 0.1 -> 0.3 Forge-change
-        Radiation: 0.1
-        Caustic: 0 # 0.1 -> 0 Forge-change
+        Blunt: 0.525 # Forge-change 0.7 -> 0.525
+        Slash: 0.525 # Forge-change 0.5 -> 0.525
+        Piercing: 0.475 # Forge-change 0.6 -> 0.475
+        Heat: 0.35 # Forge-change 0.3 -> 0.35
+        Cold: 0.3
+        Shock: 0.3
+        Radiation: 0.15 # Forge-change 0.1 -> 0.15
+        Caustic: 0
   - type: ClothingSpeedModifier 
-    walkModifier: 1.0
-    sprintModifier: 0.9 # 1.0 -> 0.9 Forge-change
+    walkModifier: 0.965 # Forge-change 1.0 -> 0.965
+    sprintModifier: 0.965 # Forge-change 0.9 -> 0.965
+  - type: Reflect # Forge-change
+    reflectProb: 0.25 # Forge-change
+    damageOnReflectModifier: 0 # Forge-change
+    reflects: # Forge-change
+      - Energy # Forge-change
   - type: HeldSpeedModifier
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.5 # 0.15 -> 0.5 Forge-change
+    coefficient: 0.25 # Forge-change 0.5 -> 0.25
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false

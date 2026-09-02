@@ -1,0 +1,132 @@
+- type: entity
+  parent: Paper
+  id: PaperBoardingTeleportInstructions
+  name: bluespace boarding instructions
+  description: A quick setup sheet for a bluespace boarding kit.
+  components:
+  - type: Paper
+    contentSize: 3000
+    content: boarding-teleport-instructions
+  - type: GuideHelp
+    guides:
+    - BoardingTeleport
+    - BoardingTeleportBalanceTable
+    includeChildren: false
+
+- type: entity
+  parent: Paper
+  id: PaperRemnant
+  name: remnant parchment
+  description: Brittle precursor paper. The script is unreadable unless you know the language.
+  suffix: Forge, Remnant, Draconic, Blank
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: paper
+      color: "#cbb27a"
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: PaperVisuals
+    backgroundImagePath: "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png"
+    contentImagePath: "/Textures/Interface/Paper/paper_content_lined.svg.96dpi.png"
+    backgroundModulate: "#cbb27a"
+    contentImageModulate: "#cbb27a"
+  - type: PaperLanguage
+    language: Draconic
+
+- type: entity
+  parent: PaperRemnant
+  id: PaperRemnantWritten
+  suffix: Forge, Remnant, Draconic, Written
+  components:
+  - type: Paper
+    content: remnant-inscription-default
+  - type: Sprite
+    layers:
+    - state: paper
+      color: "#cbb27a"
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+
+- type: entity
+  parent: PaperRemnantWritten
+  id: PaperRemnantWarning
+  suffix: Forge, Remnant, Draconic, Warning
+  components:
+  - type: Paper
+    content: remnant-inscription-warning
+
+- type: entity
+  parent: PaperRemnantWritten
+  id: PaperRemnantSecure
+  suffix: Forge, Remnant, Draconic, Secure
+  components:
+  - type: Paper
+    content: remnant-inscription-secure
+
+- type: entity
+  parent: PaperRemnantWritten
+  id: PaperRemnantVault
+  suffix: Forge, Remnant, Draconic, Vault
+  components:
+  - type: Paper
+    content: remnant-inscription-vault
+
+#region Company
+- type: entity
+  parent: BriefcaseBrown
+  id: BriefcaseNexus
+  name: Nexus briefcase
+  suffix: Нексус
+  description: A corporate briefcase in Nexus Star Consortium livery. Useful for hauling paperwork across the sector.
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Misc/briefcases/nexus_briefcase.rsi
+    state: icon
+  - type: Item
+    sprite: _Forge/Objects/Misc/briefcases/nexus_briefcase.rsi
+
+- type: entity
+  parent: PenCentcom
+  id: PenNexus
+  name: Nexus pen
+  suffix: Нексус
+  description: NSC liaison pen with a diamond tip. Writes over stamped documents, doubles as a screwdriver, and stabs about as well as CentComm's legal department intended.
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Misc/pens.rsi
+    state: pen_nexus
+  - type: Item
+    sprite: _Forge/Objects/Misc/pens.rsi
+    heldPrefix: pen_nexus
+
+- type: entity
+  parent: BoxFolderClipboard
+  id: BoxFolderClipboardNexus
+  name: Nexus clipboard
+  suffix: Нексус
+  description: Standard NSC clipboard for forms, manifests, and field reports.
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Misc/clipboards/nexus_clipboard.rsi
+    layers:
+    - state: clipboard
+    - state: clipboard_paper
+      map: ["clipboard_paper"]
+      visible: false
+    - state: clipboard_pen
+      map: ["clipboard_pen"]
+      visible: false
+    - state: clipboard_over
+  - type: Item
+    sprite: _Forge/Objects/Misc/clipboards/nexus_clipboard.rsi
+  - type: Clothing
+    sprite: _Forge/Objects/Misc/clipboards/nexus_clipboard.rsi

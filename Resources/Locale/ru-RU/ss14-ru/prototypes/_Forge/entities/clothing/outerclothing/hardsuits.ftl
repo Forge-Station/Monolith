@@ -112,7 +112,7 @@ ent-ClothingOuterHardsuitRenegateAdvancedLight = скафандр RMP-240 "Ст�
 ent-ClothingOuterHardsuitRenegateReflectElite = скафандр LRC-4034 "Призма"
     .desc = Сделанный на основе украденных имперских чертежей, отражающий скафандр LRC-4034 "Призма". С помощью него силы сопротивления могут бороться с энергетическим оружием имперской гвардии.
     .suffix = Ренегаты
-ent-ClothingOuterHardsuitRenegateCommander = скафандр коммандора CRIII-278 "Последователь"
+ent-ClothingOuterHardsuitRenegateCommander = скафандр коммодора CRIII-278 "Последователь"
     .desc = Улучшенная версия скафандра СRIII-200 "Жук". Поставлялся малой партией для коммандиров сил сопротивления из-за дороговизны материалов и встроенного оборудования.
     .suffix = Ренегаты
 

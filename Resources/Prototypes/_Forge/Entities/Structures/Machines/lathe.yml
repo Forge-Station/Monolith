@@ -1,3 +1,62 @@
+#region Federation
+- type: entity
+  id: TSFIDPrinter
+  parent: BaseLatheLube
+  name: TSF ID printer
+  description: a printer that produces ID cards and TSF encryption keys.
+  suffix: TSF
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/idprinter.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: TSFIDPrinterCircuitboard
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    staticPacks:
+    - TSFIDStatic
+    - TSFHeadsetStatic
+    - Bureaucracytatic
+
+#region Empire
+- type: entity
+  id: EmpireIDPrinter
+  parent: BaseLatheLube
+  name: Empire ID printer
+  description: a printer that produces ID cards and Empire encryption keys.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/idprinter.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: EmpireIDPrinterCircuitboard
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    staticPacks:
+    - EmpireIDStatic
+    - EmpireHeadsetStatic
+    - Bureaucracytatic
+
+#region Renegate
 - type: entity
   id: RenegateTechFab
   parent: FactionLathe
@@ -6,7 +65,7 @@
   suffix: Ренегаты
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/ren_techfab.rsi
+    sprite: _Forge/Structures/Machines/ren_techfab.rsi
     layers:
     - state: icon
       map: ["enum.LatheVisualLayers.IsRunning"]
@@ -42,13 +101,42 @@
   suffix: Ренегаты
 
 - type: entity
+  id: RenegateIDPrinter
+  parent: BaseLatheLube
+  name: renegate ID printer
+  description: a printer that produces ID cards and Renegade encryption keys.
+  suffix: Ренегаты
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/idprinter.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: RenegateIDPrinterCircuitboard
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    staticPacks:
+    - RenegateIDStatic
+    - RenegateHeadsetStatic
+    - Bureaucracytatic
+
+#region TTI
+- type: entity
   id: TraumaTechFab
   parent: [BlueprintReceiverBase, BaseLatheLube]
   name: trauma techfab
   description: Prints equipment for use by the medbay.
   components:
   - type: Sprite
-    sprite: Forge/Structures/Machines/techfab.rsi
+    sprite: _Forge/Structures/Machines/techfab.rsi
     layers:
     - state: icon
       map: [ "enum.LatheVisualLayers.IsRunning" ]
@@ -86,3 +174,249 @@
     - TranslatorImplanters # Language
   - type: Machine
     board: TraumaTechFabCircuitboard
+
+- type: entity
+  id: TTIIDPrinter
+  parent: BaseLatheLube
+  name: TTI ID printer
+  description: a printer that produces ID cards and TTI encryption keys.
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/idprinter.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: TTIIDPrinterCircuitboard
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    staticPacks:
+    - TTIIDStatic
+    - TTIHeadsetStatic
+    - Bureaucracytatic
+
+#region Company
+- type: entity
+  id: DrakeMachine2x2Base
+  abstract: true
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    offset: 0.5,-0.5
+    snapCardinals: false
+  - type: Construction
+    graph: Machine2x2
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "1.25,0.25,-0.25,-1.25"
+        density: 250
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  parent: [OreProcessorIndustrial, DrakeMachine2x2Base]
+  id: DrakeOreProcessorMk2
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/drake_ore_processor_mk2.rsi
+    offset: 0.5,-0.5
+    snapCardinals: false
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: DrakeOreProcessorMk2MachineCircuitboard
+  - type: Lathe
+    materialUseMultiplier: 0.65
+    timeMultiplier: 0.25
+    idleState: icon
+    runningState: building
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "1.25,0.25,-0.25,-1.25"
+        density: 250
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  parent: ScrapProcessor
+  id: DrakeScrapProcessor
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/drake_scrap_processor.rsi
+  - type: Machine
+    board: DrakeScrapProcessorMachineCircuitboard
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Ore
+  - type: Lathe
+    materialUseMultiplier: 0.85
+    timeMultiplier: 0.5
+    staticPacks:
+    - NFScrapStatic
+
+- type: entity
+  parent: [CentrifugeLatheMini, DrakeMachine2x2Base]
+  id: DrakeUraniumCentrifuge
+  suffix: Drake
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/drake_uranium_centrifuge.rsi
+    offset: 0.5,-0.5
+    snapCardinals: false
+    layers:
+    - state: icon
+      map: [ "enum.LatheVisualLayers.IsRunning" ]
+    - state: unlit
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: DrakeUraniumCentrifugeMachineCircuitboard
+  - type: Lathe
+    materialUseMultiplier: 0.85
+    timeMultiplier: 0.5
+    staticPacks:
+    - MonoCentrifugeProcessingStatic
+    dynamicPacks:
+    - MonoUraniumProcessing
+    - DrakeCentrifugeUraniumProcessing
+    - DrakeCentrifugePlastitaniumProcessing
+    - MonoIriditeProcessing
+    - DrakeCentrifugeIriditeProcessing
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "1.25,0.25,-0.25,-1.25"
+        density: 250
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+#region Shipweapon
+- type: entity
+  id: ShipWeaponFabricator
+  parent: [BaseMachinePowered, ConstructibleMachine]
+  name: naval weapon fabricator
+  description: An industrial assembly machine for building ship weapons from researched blueprints and loaded components.
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/shipWeaponFab.rsi
+    offset: 1,-1
+    layers:
+    - state: base
+    - state: screen
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+    - state: packing
+      map: ["fabricating"]
+      visible: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "2.25,0.25,-0.25,-2.25"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+      enum.ShipWeaponFabricatorVisuals.Fabricating:
+        fabricating:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 150000
+  - type: Machine
+    board: ShipWeaponFabricatorCircuitboard
+  - type: ShipWeaponFabricator
+    boardWhitelist:
+      components:
+      - ShipWeaponBoard
+    maxBoardQueue: 8
+    powerLoadIdle: 1500
+    powerLoadActive: 12000
+    outputFlatpackPrototype: ForgeShipWeaponFlatpack
+  - type: ActivatableUI
+    key: enum.ShipWeaponFabricatorUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ShipWeaponFabricatorUiKey.Key:
+        type: ShipWeaponFabricatorBoundUserInterface
+  - type: WiresPanel
+  - type: WiresVisuals
+  - type: AmbientSound
+    enabled: false
+    volume: 4
+    range: 3
+    sound:
+      path: /Audio/Items/rped.ogg
+  - type: MaterialStorage
+    storageLimit: 9000000
+    canEjectStoredMaterials: true # Forge-Change: allow manual resource extraction from fabricator
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+      - Ore
+  - type: OreSiloClient
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      weapon_board: !type:Container
+      weapon_parts: !type:Container
+  - type: Construction
+    graph: Machine3x3
+    containers:
+    - machine_parts
+    - machine_board
+    - weapon_board
+    - weapon_parts

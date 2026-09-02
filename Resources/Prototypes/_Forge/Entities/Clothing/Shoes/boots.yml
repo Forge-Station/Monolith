@@ -7,6 +7,6 @@
   description: Robust combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Boots/boots_techniclogistic.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/boots_techniclogistic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Shoes/Boots/boots_techniclogistic.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/boots_techniclogistic.rsi

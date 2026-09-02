@@ -1,0 +1,54 @@
+- type: entity
+  id: BaseMagazine135x110mm
+  name: magazine (13.5x110mm)
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - Magazine135x110mm
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,1
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge135x110mm
+    proto: Cartridge135x110mm
+    capacity: 5
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/nexus_135x110mm_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazine135x110mm
+  id: Magazine135x110mm
+  name: magazine (13.5x110mm FMJ)
+
+- type: entity
+  parent: BaseMagazine135x110mm
+  id: Magazine135x110mmHE
+  name: magazine (13.5x110mm HE)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge135x110mmHE
+  - type: Sprite
+    layers:
+    - state: HE
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

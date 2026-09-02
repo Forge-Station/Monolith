@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision2Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitViperGroupStandard
   name: JACKAL mk.II viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in night-vision system complemented by flash resistant viewports.
@@ -13,16 +13,16 @@
     color: "#eb772a"
     radius: 6 # Forge-Change
     energy: 4 # Forge-Change
-  - type: NightVision # Gen 4 dualtube
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#c2ffc2" # Forge-Change #41D7D9 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
-    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
-    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+  # - type: NightVision # Gen 4 dualtube # Forge-change
+  #  relayOverlay: true # Forge-change
+  #  goggleEffect: true # Forge-change
+  #  action: ActionToggleNightVision # Forge-change
+  #  viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора # Forge-change
+  #  viewCircleCount: 2 # Forge-change
+  #  viewCircleSpacing: 280 # Forge-change
+  #  phosphorColor: "#c2ffc2" # Forge-Change #41D7D9 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет # Forge-change
+  #  lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте # Forge-change
+  #  amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -42,7 +42,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitViperGroupMedic
   name: RIPPER mk.III viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in medical HUD complemented by thermal pulse systems.
@@ -56,11 +56,11 @@
     color: "#eb772a"
     radius: 6 # Forge-Change
     energy: 4 # Forge-Change
-  - type: ThermalVision
-    flashDurationMultiplier: 2
-    pulseTime: 4
-    isEquipment: true
-    toggleAction: PulseThermalVision
+  #- type: ThermalVision
+  #  flashDurationMultiplier: 2
+  #  pulseTime: 4
+  #  isEquipment: true
+  #  toggleAction: PulseThermalVision
   - type: ShowHealthBars
   - type: PressureProtection
     highPressureMultiplier: 0.08
@@ -80,7 +80,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision4Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitViperGroupJuggernaut
   name: IMP mk.IV viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in identity tracking HUD complemented by a night-vision system.
@@ -94,26 +94,30 @@
     color: "#eb772a"
     radius: 6 # Forge-Change
     energy: 4 # Forge-Change
-  - type: NightVision # Gen 4 dualtube
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#c2ffc2" # Forge-Change #41D7D9 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
-    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
-    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+  # - type: NightVision # Gen 4 dualtube # Forge-change
+  #   relayOverlay: true # Forge-change
+  #   goggleEffect: true # Forge-change
+  #  action: ActionToggleNightVision # Forge-change
+  #  viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора # Forge-change
+  #  viewCircleCount: 2 # Forge-change
+  #  viewCircleSpacing: 280 # Forge-change
+  #  phosphorColor: "#c2ffc2" # Forge-Change #41D7D9 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+  #  lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+  #  amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: Armor
     modifiers:
-      coefficients:
-        Blunt: 0.9 # 0.95->0.9 Forge-Change
-        Slash: 0.9 # 0.95->0.9 Forge-Change
-        Piercing: 0.9 # 0.95->0.9 Forge-Change
-        Heat: 0.9 # 0.95->0.9 Forge-Change
+      flatReductions: # Forge-change
+        Blunt: 15 # Forge-change
+        Slash: 15 # Forge-change
+        Piercing: 15 # Forge-change
+      # coefficients: # Forge-change
+      #   Blunt: 0.9 # 0.95->0.9 Forge-Change
+      #   Slash: 0.9 # 0.95->0.9 Forge-Change
+      #   Piercing: 0.9 # 0.95->0.9 Forge-Change
+      #   Heat: 0.9 # 0.95->0.9 Forge-Change
   - type: HideLayerClothing
     slots:
     - Hair
@@ -122,7 +126,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitViperGroupInitiate
   name: BROOD mk.I viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in navigation system complemented by flash resistant viewports.
@@ -152,10 +156,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9 # 0.95->0.9 Forge-Change
-        Slash: 0.9 # 0.95->0.9 Forge-Change
-        Piercing: 0.9 # 0.95->0.9 Forge-Change
-        Heat: 0.9 # 0.95->0.9 Forge-Change
+        Blunt: 0.95 # 0.9->0.95 Forge-Change
+        Slash: 0.95 # 0.9->0.95 Forge-Change
+        Piercing: 0.95 # 0.9->0.95 Forge-Change
+        Heat: 0.95 # 0.9->0.95 Forge-Change
   - type: FlashImmunity
   - type: HideLayerClothing
     slots:

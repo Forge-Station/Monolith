@@ -1,5 +1,3 @@
-
-
 - type: entity
   id: ForgeCartridgeRifle60AP
   name: cartridge (.60 пробивные)
@@ -466,20 +464,3 @@
     layers:
       - state: base
         map: [ "enum.AmmoVisualLayers.Base" ]
-
-# for ullman sniper rifle
-- type: entity
-  id: ForgeCartridgeUllman127x85mm
-  name: cartridge (12.7x85mm)
-  parent: ForgeBaseCartridgeRifle60
-  components:
-  - type: CartridgeAmmo
-    proto: ForgeBulletUllman127x85mm
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-  - type: Tag
-    tags:
-      - Cartridge
-      - ForgeCartridgeUllman127x85mm

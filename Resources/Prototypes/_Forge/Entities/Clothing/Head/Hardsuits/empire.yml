@@ -1,9 +1,9 @@
-#region HV Prototype 2
+# костюм облегчённого джаггернаута HV-2
 - type: entity
-  parent: ClothingHeadHardsuitBase
-  id: ClothingHeadHelmetHardsuitHVp2
-  name: HV-p2 helmet
-  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Empire, ShowMedicalIcons]
+  id: ClothingHeadHelmetHardsuitHV2
+  name: шлем костюма HV-2 # HV-2 helmet
+  description: Шлем облегчённого джаггернаута HV-2. Иммет встроенные визоры для удобства. # A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -13,24 +13,12 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
-    viewCircleCount: 4
-    viewCircleSpacing: 280
-    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
-    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
   - type: Armor
     modifiers:
-      coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+      flatReductions:
+        Blunt: 10
+        Slash: 10
+        Piercing: 10
   - type: HideLayerClothing
     slots:
     - Hair
@@ -38,38 +26,40 @@
     - HeadTop
     - HeadSide
 
+# костюм облегчённого джаггернаута HV-2c
 - type: entity
-  parent: ClothingHeadHelmetHardsuitHVp2
-  id: ClothingHeadHelmetHardsuitHVp2Com
-  name: HV-p2 helmet
-  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  parent: ClothingHeadHelmetHardsuitHV2
+  id: ClothingHeadHelmetHardsuitHV2Com
+  name: шлем костюма HV-2c # HV-2c helmet
+  description: Шлем облегчённого джаггернаута HV-2c. Имеет встроенные визоры для удобства. # A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Forge/Clothing/Head/Hardsuits/empirelight_commander.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/empirelight_commander.rsi
-
-- type: entity
-  parent: ClothingHeadHelmetHardsuitHVp2
-  id: ClothingHeadHelmetHardsuitHVp2Inq
-  name: HV-p2 helmet
-  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/empirelight_violet.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/empirelight_violet.rsi
   - type: ThermalVision
     flashDurationMultiplier: 2
     pulseTime: 3
     isEquipment: true
     toggleAction: PulseThermalVision
+  - type: Clothing
+    sprite: Forge/Clothing/Head/Hardsuits/empirelight_commander.rsi
 
-#region RI-14 Light
+# костюм облегчённого джаггернаута HV-2i
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: ClothingHeadHelmetHardsuitHV2
+  id: ClothingHeadHelmetHardsuitHV2Inq
+  name: шлем костюма HV-2i # HV-2i helmet
+  description: Шлем облегчённого джаггернаута HV-2i. Имеет встроенные визоры для удобства. # A hardsuit issued to Imperial Inquisitor operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/empirelight_violet.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/empirelight_violet.rsi
+
+# RI-14 light hardsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Empire]
   id: ClothingHeadHelmetHardsuitRI14
   name: RI-14 helmet
   description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
@@ -82,17 +72,235 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 450 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
-    viewCircleCount: 4
-    viewCircleSpacing: 270
-    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
-    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
 
+# RI-14m light medical hardsuit
+- type: entity
+  parent: [ClothingHeadHelmetHardsuitRI14, ShowMedicalIcons]
+  id: ClothingHeadHelmetHardsuitRI14m
+  name: RI-14m helmet
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Have a medical visor.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 10000
+
+# RI-22 battle hardsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2Empire]
+  id: ClothingHeadHelmetHardsuitRI22
+  name: RI-22 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/medium.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/medium.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# RI-22c lord-commander battle hardsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Empire]
+  id: ClothingHeadHelmetHardsuitRI22c
+  name: RI-22c helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/medium_lord.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/medium_lord.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# RI-22i inquisitor battle hardsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2Empire]
+  id: ClothingHeadHelmetHardsuitRI22i
+  name: RI-22 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/medium_inquisitor.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/medium_inquisitor.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# HV-7 heavy battle hardsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Empire]
+  id: ClothingHeadHelmetHardsuitHV7
+  name: HV-7 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/heavy.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/heavy.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      flatReductions:
+        Blunt: 15
+        Slash: 15
+        Piercing: 15
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# HV-7 commander heavy battle hardsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Empire]
+  id: ClothingHeadHelmetHardsuitHV7c
+  name: HV-7 helmet
+  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/heavy.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/heavy.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+  - type: Armor
+    modifiers:
+      flatReductions:
+        Blunt: 15
+        Slash: 15
+        Piercing: 15
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# HV MP 9 «Vigilance»
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Empire, ShowMedicalIcons]
+  id: ClothingHeadHelmetHardsuitHVReflectElite
+  name: helmet HV MP 9 «Vigilance»
+  description: Higaris Victories' military prototype 9, codenamed «Vigilance». A high-tech reflect suit developed by Higaris Victories for special operations. Partial reflect capabilities against laser weapons.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/empire_vigilance.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/empire_vigilance.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+      flatReductions:
+        Heat: 10
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# HV MP 0-4 «Militant»
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Empire]
+  id: ClothingHeadHelmetHardsuitHVMilitant
+  name: HV MP 0-4 «Militant» helmet
+  description: Higaris Victories' military prototype 0-4, codenamed «Militant».
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/empire_militant.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/empire_militant.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
   - type: Armor
     modifiers:
       coefficients:
@@ -107,245 +315,9 @@
     - HeadTop
     - HeadSide
 
-# region RI-22 Medium
+# HV MP-33R «Imperceptible»
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons]
-  id: ClothingHeadHelmetHardsuitRI22
-  name: RI-22 helmet
-  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/medium.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/medium.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
-    viewCircleCount: 4
-    viewCircleSpacing: 280
-    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
-    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-  - type: HideLayerClothing
-    slots:
-    - Hair
-    - Snout
-    - HeadTop
-    - HeadSide
-
-- type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons]
-  id: ClothingHeadHelmetHardsuitRI22c
-  name: RI-22c helmet
-  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/medium_lord.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/medium_lord.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
-    viewCircleCount: 4
-    viewCircleSpacing: 280
-    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
-    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-  - type: HideLayerClothing
-    slots:
-    - Hair
-    - Snout
-    - HeadTop
-    - HeadSide
-
-- type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons]
-  id: ClothingHeadHelmetHardsuitRI22i
-  name: RI-22 helmet
-  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/medium_inquisitor.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/medium_inquisitor.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
-    viewCircleCount: 4
-    viewCircleSpacing: 280
-    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
-    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-  - type: HideLayerClothing
-    slots:
-    - Hair
-    - Snout
-    - HeadTop
-    - HeadSide
-
-# region HV-7 Heavy
-- type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons]
-  id: ClothingHeadHelmetHardsuitHV7
-  name: HV-7 helmet
-  description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/heavy.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/heavy.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
-    viewCircleCount: 4
-    viewCircleSpacing: 280
-    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
-    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-  - type: HideLayerClothing
-    slots:
-    - Hair
-    - Snout
-    - HeadTop
-    - HeadSide
-
-# region Higaris Victories
-- type: entity
-  parent: ClothingHeadHardsuitBase
-  id: ClothingHeadHelmetHardsuitHVVigilance
-  name: HV MP 9 «Vigilance» helmet
-  description: Higaris Victories' military prototype 9, codenamed «Vigilance».
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/empire_vigilance.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/empire_vigilance.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
-    viewCircleCount: 4
-    viewCircleSpacing: 280
-    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
-    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-  - type: HideLayerClothing
-    slots:
-    - Hair
-    - Snout
-    - HeadTop
-    - HeadSide
-
-- type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons]
-  id: ClothingHeadHelmetHardsuitHVMilitant
-  name: HV MP 0-4 «Militant» helmet
-  description: Higaris Victories' military prototype 0-4, codenamed «Militant».
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/empire_militant.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Head/Hardsuits/empire_militant.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 750 #400 to 750 // это радиус обзора (максимальный радиус для ТСФ(800))
-    viewCircleCount: 4
-    viewCircleSpacing: 280
-    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
-    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-  - type: HideLayerClothing
-    slots:
-    - Hair
-    - Snout
-    - HeadTop
-    - HeadSide
-
-- type: entity
-  parent: [ClothingHeadHardsuitBase, BaseToggleClothing, PowerCellSlotSmallItem]
+  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Empire, ShowMedicalIcons]
   id: ClothingHeadHelmetHardsuitHVStealh
   name: HV MP-33R «Imperceptible» helmet
   description: Higaris Victories' military prototype 33R, codenamed «Imperceptible».
@@ -358,30 +330,24 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 650 #400 to 600 // это радиус обзора, тут он меньше чем у скафов выше, но лучше чем гражданский (максимальный радиус для ТСФ(800))
-    viewCircleCount: 3
-    viewCircleSpacing: 280
-    phosphorColor: "#d9ff00" #Forge-change Сделал как у ДСН // Слишком темно #aa9c00 увеличено #d9ff00
-    lightingColor: "#FFFFFFFF" #Forge-change Сделал как у ДСН // Слишком темно #FFFFFF32 увеличено #FFFFFFFF
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
   - type: HideLayerClothing
     slots:
     - Hair
     - Snout
     - HeadTop
     - HeadSide
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
   - type: ToggleClothing
     action: ActionTogglePhaseCloak
     disableOnUnequip: true
@@ -405,3 +371,32 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
+
+# advanced light hardsuit RI-32m
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Empire, ShowMedicalIcons, ShowSecurityIcons]
+  id: ClothingHeadHelmetHardsuitRI32m
+  name: шлем RI-32m # RI-32m helmet
+  description: Шлем для скафандра RI-32m. # The interchangeable helmet system for the majority of HVE-14m hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/medium.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/medium.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide

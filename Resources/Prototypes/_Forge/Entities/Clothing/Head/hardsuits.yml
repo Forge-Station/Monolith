@@ -241,7 +241,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4TTI, ShowSecurityIcons]
   id: ClothingHeadHelmetHardsuitTraumaShooter
   name: armed trauma unit T-44 tacsuit helmet
   description: The shooter's tacsuit in the Armed Trauma Unit, outfitted with a medical and long-range radar hud as well as thermals and night vision.
@@ -256,22 +256,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 #400 to 600 // это радиус обзора
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#80d4ff" #Forge-change #42AAFF to #80d4ff
-    lightingColor: "#FFFFFFFF" #Forge-change #FFFFFF32 to #FFFFFFFF
-    amplification: 1.2 #32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
-  - type: ThermalVision
-    flashDurationMultiplier: 2
-    pulseTime: 3
-    isEquipment: true
-    toggleAction: PulseThermalVision
   - type: RadarConsole
     followEntity: true
     noRotate: true

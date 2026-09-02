@@ -1,1 +1,0 @@
-ent-AmmunitionBoxUllman127x85mm = коробка патронов (12.7x85мм)

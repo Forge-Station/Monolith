@@ -1,24 +1,4 @@
 - type: latheRecipe
-  id: ClothingOuterHardsuitRenegatebsii20Rogue
-  parent: MonoHardsuitT1Recipe
-  result: ClothingOuterHardsuitRenegatebsii20
-  completetime: 10
-
-- type: latheRecipe
-  id: ClothingOuterHardsuitRenegatebsii30Rogue
-  parent: MonoHardsuitT1Recipe
-  result: ClothingOuterHardsuitRenegatebsii30
-  completetime: 15
-  materials:
-    Glass: 800
-    Steel: 3000
-    Plastic: 1500
-    Plasteel: 4000
-    Durathread: 2250 # very slightly higher durathread cost
-    Silver: 500
-    Gold: 500
-
-- type: latheRecipe
   id: ClothingOuterArmorRenegatesRogue
   categories:
   - ArmorNF
@@ -53,40 +33,50 @@
     Plasma: 350
     Uranium: 100
 
+# BSII-20 "Requiem" hardsuit
 - type: latheRecipe
-  id: ClothingOuterHardsuitRenegatecriii200Rogue
-  parent: MonoHardsuitT2Recipe
+  parent: ForgeUniversalSuitT1FactionRecipe
+  id: ClothingOuterHardsuitRenegatebsii20
+  result: ClothingOuterHardsuitRenegatebsii20
+
+# lightweight jauggernaut hardsuit BSII-300 "Locksmith"
+- type: latheRecipe
+  parent: ForgeLightJuggernautT2FactionRecipe
+  id: ClothingOuterHardsuitRenegateLightweightJuggernaut
+  result: ClothingOuterHardsuitRenegateLightweightJuggernaut
+
+# CRIII-200 "Bug" hardsuit
+- type: latheRecipe
+  parent: ForgeUniversalSuitT2FactionRecipe
+  id: ClothingOuterHardsuitRenegatecriii200
   result: ClothingOuterHardsuitRenegatecriii200
-  completetime: 18
 
+# OIII-18 "Omega" hardsuit
 - type: latheRecipe
-  id: ClothingOuterHardsuitRenegateoiii18Rogue
-  parent: MonoHardsuitT3TsfRecipe
-  result: ClothingOuterHardsuitRenegateoiii18
-  completetime: 22
-  materials:
-    Plastic: 200
-    Steel: 2500
-    Plastitanium: 1500
-    Plasteel: 2500
-    Durathread: 2000
-    Silver: 300
-    Gold: 300
-    UraniumDepleted: 50
+  parent: ForgeEnergyShieldSuitT3FactionRecipe
+  id: ClothingOuterHardsuitRenegateEnergyShield
+  result: ClothingOuterHardsuitRenegateEnergyShield
 
+# YIV3020 "Svyatogor" heavy jauggernaut hardsuit
 - type: latheRecipe
-  id: ClothingOuterHardsuitRenegateyiv3020Rogue
-  parent: MonoHardsuitT3TsfRecipe
-  result: ClothingOuterHardsuitRenegateyiv3020
-  completetime: 30
-  materials:
-    Plastic: 1300
-    Steel: 4500
-    Plastitanium: 1500
-    Plasteel: 5500
-    Durathread: 3500
-    Silver: 500
-    Gold: 500
-    Brass: 1000
-    UraniumDepleted: 50
-    UraniumFissile: 100
+  parent: ForgeHeavyJuggernautT3FactionRecipe
+  id: ClothingOuterHardsuitRenegateHeavyJuggernaut
+  result: ClothingOuterHardsuitRenegateHeavyJuggernaut
+
+# SYS-549 "Cloak" hardsuit
+- type: latheRecipe
+  parent: ForgeStealthSuitT3FactionRecipe
+  id: ClothingOuterHardsuitRenegateStealth
+  result: ClothingOuterHardsuitRenegateStealth
+
+# RMP-240 "Cicada" hardsuit
+- type: latheRecipe
+  parent: ForgeUniversalLightSuitT3FactionRecipe
+  id: ClothingOuterHardsuitRenegateAdvancedLight
+  result: ClothingOuterHardsuitRenegateAdvancedLight
+
+# LRC-4034 "Prism" hardsuit
+- type: latheRecipe
+  parent: ForgeReflectSuitT3FactionRecipe
+  id: ClothingOuterHardsuitRenegateReflectElite
+  result: ClothingOuterHardsuitRenegateReflectElite

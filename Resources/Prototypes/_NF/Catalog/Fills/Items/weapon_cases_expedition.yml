@@ -451,8 +451,8 @@
       amount: 2
 
 - type: entity
-  parent: WeaponCaseLong
-  id: WeaponCaseLongHristovExpedition
+  parent: WeaponCaseHeavy # Forge-change WeaponCaseLong->WeaponCaseHeavy
+  id: WeaponCaseHeavyHristovExpedition # Forge-change WeaponCaseLong->WeaponCaseHeavy
   suffix: Dungeon, Hristov
   components:
   - type: StorageFill
@@ -525,8 +525,8 @@
 
 # LMG
 - type: entity
-  parent: WeaponCaseLong
-  id: WeaponCaseLongLightMachineGunL6
+  parent: WeaponCaseHeavy # Forge-change WeaponCaseLong->WeaponCaseHeavy
+  id: WeaponCaseHeavyLightMachineGunL6 # Forge-change WeaponCaseLong->WeaponCaseHeavy
   suffix: Dungeon, L6
   components:
   - type: StorageFill

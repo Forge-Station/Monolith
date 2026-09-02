@@ -27,11 +27,29 @@
     prototype: Tajaran
     requiredLegs: 2
   - type: Damageable
-    damageModifierSet: Tajaran
+    damageModifierSet: ForgeTajaran #Forge-Change
   - type: SlowOnDamage
     speedModifierThresholds:
       60: 0.85  # 0.7 is base speed.
       80: 0.75  # 0.5 is base speed.
+  #Forge-Change-start
+  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 10 damage a minute.
+    allowedStates:
+    - Alive
+    damageCap: 40
+    damage:
+      types:
+        Heat: -0.17
+      groups:
+        Brute: -0.17
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      120: Critical
+      180: Dead
+  - type: CrawlUnderObjects
+    actionProto: ActionToggleSneakMode
+  #Forge-Change-end
   - type: CESoftPaws # Mono: Cats usually land on their feet. At least, I think this is a cat.
   - type: Carriable # Carrying system from nyanotrasen.
   - type: Butcherable

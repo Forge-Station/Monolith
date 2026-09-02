@@ -23,8 +23,7 @@
 - type: loadout
   id: ContractorStampsApprovedDenied
   price: 1000
-  name: approved and denied stamps
-  description: A pair of stamps used for reviewing forms.
+  name: loadout-name-ContractorStampsApprovedDenied
   previewEntity: RubberStampApproved
   storage:
     back:

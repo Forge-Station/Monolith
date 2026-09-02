@@ -46,8 +46,9 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 20
-        Structural: 10
+        Heat: 24 # Forge-change 20->24
+        Structural: 15 # Forge-change 10->15
+    armorPenetration: 0.5 # Forge-change
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
@@ -71,7 +72,8 @@
     damage:
       types:
         Heat: 35
-        Structural: 50
+        Structural: 20 # Forge-change 50->20
+    armorPenetration: 0.2 # Forge-change
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: _Mono/Objects/Weapons/Guns/Projectiles/lasers.rsi
@@ -94,8 +96,9 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Radiation: 45
+        Radiation: 40 # Forge-change 45->40
         Heat: 15
+    armorPenetration: 0.4 # Forge-change
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: _Mono/Objects/Weapons/Guns/Projectiles/lasers.rsi

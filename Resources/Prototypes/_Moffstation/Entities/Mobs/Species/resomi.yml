@@ -80,7 +80,7 @@
       types:
         Slash: 5
   - type: Damageable # Resomi damage modifiers
-    damageModifierSet: Resomi
+    damageModifierSet: ForgeResomi #Forge-Change
   - type: Temperature
     coldDamageThreshold: 195.4 # Freezing point of ammonia is -77.75°C
     heatDamageThreshold: 320.15 # Space chickens can't tolerate reasonable temperatures, but requiring them to stay icy would be cringe, so instead make their heat damage threshold dangerously close to standard atmos, at 47°C

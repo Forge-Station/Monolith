@@ -73,7 +73,7 @@
         Radiation: 0.6
 
 - type: entity
-  parent: ClothingModsuitChestplateBase
+  parent: [ClothingModsuitChestplateBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
   id: ClothingModsuitChestplateSecurity
   name: soldat MODsuit chestplate
   description: A robust modular suit cover with ceramic inserts for extra protection.
@@ -94,20 +94,20 @@
       outerClothing-vox:
       - state: equipped-OUTERCLOTHING-sealed-vox
   - type: ClothingSpeedModifier
-    walkModifier: 0.87
-    sprintModifier: 0.87
+    walkModifier: 0.825 # Forge-change 0.87 -> 0.825
+    sprintModifier: 0.825 # Forge-change 0.87 -> 0.825
   - type: ExplosionResistance
-    damageCoefficient: 0.4
+    damageCoefficient: 0.45 # Forge-change 0.4 -> 0.45
   - type: StaminaDamageResistance
-    coefficient: 0.6
+    coefficient: 0.2 # Forge-change 0.6 -> 0.2
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.50
-        Slash: 0.50
-        Piercing: 0.45
-        Heat: 0.5
-        Radiation: 0.7
+        Blunt: 0.525 # Forge-change 0.5 -> 0.525
+        Slash: 0.525 # Forge-change 0.5 -> 0.525
+        Piercing: 0.425 # Forge-change 0.45 -> 0.425
+        Heat: 0.45 # Forge-change 0.5 -> 0.45
+        Radiation: 0.45 # Forge-change 0.7 -> 0.45
         Caustic: 0.5
   - type: ComponentToggler
     components:
@@ -120,9 +120,8 @@
   - type: FireProtection
     reduction: 0.5
 
-
 - type: entity
-  parent: ClothingModsuitChestplateBase
+  parent: [ClothingModsuitChestplateBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
   id: ClothingModsuitChestplateHeadOfSecurity
   name: bulwark modsuit chestplate
   description: A robust modular suit cover with EXTRA ceramic inserts for slightly more protection.
@@ -143,20 +142,20 @@
       outerClothing-vox:
       - state: equipped-OUTERCLOTHING-sealed-vox
   - type: ClothingSpeedModifier
-    walkModifier: 0.90
-    sprintModifier: 0.90
+    walkModifier: 0.85 # Forge-change 0.9 -> 0.85
+    sprintModifier: 0.85 # Forge-change 0.9 -> 0.85
   - type: ExplosionResistance
-    damageCoefficient: 0.4
+    damageCoefficient: 0.5 # Forge-change 0.4 -> 0.5
   - type: StaminaDamageResistance
-    coefficient: 0.7
+    coefficient: 0.25 # Forge-change 0.7 -> 0.25
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.45
-        Slash: 0.30
-        Piercing: 0.4
-        Heat: 0.65
-        Radiation: 0.6
+        Blunt: 0.475 # Forge-change 0.45 -> 0.475
+        Slash: 0.475 # Forge-change 0.3 -> 0.475
+        Piercing: 0.4 # Forge-change 0.4 -> 0.4
+        Heat: 0.475 # Forge-change 0.65 -> 0.475
+        Radiation: 0.4 # Forge-change 0.6 -> 0.4
         Caustic: 0.35
   - type: ComponentToggler
     components:
@@ -326,7 +325,7 @@
     coefficient: 0.9
 
 - type: entity
-  parent: ClothingModsuitChestplateBase
+  parent: [ClothingModsuitChestplateBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingModsuitChestplateCaptain
   name: magnate modsuit chestplate
   description: This shit is made out of DIAMONDS, man, this armor was forged with GEMS.
@@ -347,17 +346,17 @@
       outerClothing-vox:
       - state: equipped-OUTERCLOTHING-sealed-vox
   - type: ClothingSpeedModifier
-    walkModifier: 0.90
-    sprintModifier: 0.90
+    walkModifier: 0.825 # Forge-change 0.9 -> 0.825
+    sprintModifier: 0.825 # Forge-change 0.9 -> 0.825
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.6 # Forge-change 0.5 -> 0.6
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.65
-        Slash: 0.65
+        Blunt: 0.55 # Forge-change 0.65 -> 0.55
+        Slash: 0.55 # Forge-change 0.65 -> 0.55
         Piercing: 0.5
-        Heat: 0.5
-        Radiation: 0.4
+        Heat: 0.55 # Forge-change 0.5 -> 0.55
+        Radiation: 0.55 # Forge-change 0.4 -> 0.55
   - type: StaminaDamageResistance
-    coefficient: 0.7
+    coefficient: 0.35 # Forge-change 0.7 -> 0.35

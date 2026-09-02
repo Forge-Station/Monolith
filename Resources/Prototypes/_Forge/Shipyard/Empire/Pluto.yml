@@ -1,7 +1,7 @@
 - type: vessel
   id: Pluto
   parent: BaseVessel
-  name: "ESP Нептун"
+  name: "ESP «Нептун»"
   description: Опасный морской царь имперцев. Из какого моря выползла эта тварь?
   category: Small
   group: Empire

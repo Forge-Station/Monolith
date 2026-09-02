@@ -16281,7 +16281,7 @@ entities:
     - type: Transform
       pos: -2.5,6.5
       parent: 1
-- proto: SuitStoragebsii30
+- proto: SuitStoragebsii20
   entities:
   - uid: 2294
     components:

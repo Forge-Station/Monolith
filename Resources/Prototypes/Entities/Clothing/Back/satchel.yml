@@ -160,7 +160,7 @@
       sprite: Clothing/Back/Satchels/salvage.rsi
 
 - type: entity
-  parent: ClothingBackpackSatchel
+  parent: [ ClothingBackpackSatchel, BaseFactionGearOtherFactionT3 ] # Forge-change forbidden ADS
   id: ClothingBackpackSatchelHolding
   name: satchel of holding
   description: A satchel that opens into a localized pocket of bluespace.

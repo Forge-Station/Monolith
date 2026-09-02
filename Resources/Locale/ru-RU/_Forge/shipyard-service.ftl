@@ -24,7 +24,7 @@ shipyard-service-click-nothing = Здесь нечего улучшать. Кл�
 shipyard-service-grid-button = Карта шаттла
 shipyard-service-grid-window-title = Карта верфи
 shipyard-service-grid-window-title-named = Карта верфи — { $name }
-shipyard-service-grid-hint = ЛКМ — пометить тайл. ПКМ — двигать карту. Колесо — масштаб. Цвета: [color=#e05050]починка[/color], [color=#d4a017]укрепление[/color], [color=#7ec8e3]пластитан[/color], [color=#e07a3d]детали[/color].
+shipyard-service-grid-hint = ЛКМ — пометить тайл. Наведите или кликните по иконке, чтобы увидеть, что именно улучшается. ПКМ — двигать карту. Колесо — масштаб. Цвета: [color=#e05050]починка[/color], [color=#d4a017]укрепление[/color], [color=#7ec8e3]пластитан[/color], [color=#e07a3d]детали[/color].
 shipyard-service-grid-filter-repair = Починка
 shipyard-service-grid-filter-reinforce = Укрепление
 shipyard-service-grid-filter-plastitanium = Пластитан
@@ -33,6 +33,13 @@ shipyard-service-grid-select-all = Отметить все
 shipyard-service-grid-clear = Снять отметки
 shipyard-service-grid-apply = Применить отмеченное
 shipyard-service-grid-selection = Отмечено: { $count } · [color=#7ec8e3]{ $amount }[/color]
+shipyard-service-grid-hover-empty = Наведите на иконку на карте, чтобы увидеть, что будет улучшено.
+shipyard-service-grid-hover = [color=#ffd34f]{ $action }[/color] — { $name }. { $detail } · { $amount }
+shipyard-service-marker-floor = Пол
+shipyard-service-marker-repair = Починка повреждений или плитки
+shipyard-service-marker-parts = Комплектующие «{ $name }»: { $count } шт. ниже супер-уровня
+shipyard-service-marker-reinforce = «{ $name }» → «{ $next }»
+shipyard-service-marker-plastitanium = «{ $name }» → «{ $next }»
 shipyard-service-action-marked = Отмеченные работы
 shipyard-service-action-repair = Ремонт
 shipyard-service-action-upgradeparts = Улучшение комплектующих

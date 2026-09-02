@@ -41,6 +41,7 @@ public sealed partial class NavScreen : BoxContainer
         DockToggle.Pressed = NavRadar.ShowDocks;
 
         NfInitialize(); // Frontier Initialization for the NavScreen
+        ForgeInitializeMarkers();
     }
 
     // Frontier - IFF search
@@ -136,6 +137,7 @@ public sealed partial class NavScreen : BoxContainer
     {
         base.FrameUpdate(args);
         ShieldPanel.Visible = ShieldBar.HasShield;
+        ForgeUpdateMarkers();
     }
     // Forge-Change-End
 

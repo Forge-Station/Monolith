@@ -7,13 +7,12 @@
   description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Misc/voucher.rsi
+    sprite: _Forge/Misc/voucher.rsi
     layers:
     - state: voucherenegat
   - type: ShipyardVoucher
     destroyOnEmpty: true
     consoleType: Renegate
-    companyName: Renegate
     vessels:
     - azimut
   - type: StaticPrice
@@ -27,13 +26,12 @@
   description: A small card that contains the data for the procurement of a Azimutlate-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Misc/voucher.rsi
+    sprite: _Forge/Misc/voucher.rsi
     layers:
     - state: voucherenegat
   - type: ShipyardVoucher
     destroyOnEmpty: true
     consoleType: Renegate
-    companyName: Renegate
     vessels:
     - azimutlate
   - type: StaticPrice
@@ -47,13 +45,12 @@
   description: A small card that contains the data for the procurement of a Galandec-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Misc/voucher.rsi
+    sprite: _Forge/Misc/voucher.rsi
     layers:
     - state: voucherenegat
   - type: ShipyardVoucher
     destroyOnEmpty: true
     consoleType: Renegate
-    companyName: Renegate
     vessels:
     - galandec
   - type: StaticPrice
@@ -69,13 +66,12 @@
   description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    sprite: _Forge/Objects/Misc/emp_lpc.rsi
     layers:
     - state: etech
   - type: ShipyardVoucher
     destroyOnEmpty: true
     consoleType: Empire
-    companyName: Empire
     vessels:
     - Germes
   - type: StaticPrice
@@ -90,13 +86,12 @@
   description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    sprite: _Forge/Objects/Misc/emp_lpc.rsi
     layers:
     - state: etech
   - type: ShipyardVoucher
     destroyOnEmpty: true
     consoleType: Empire
-    companyName: Empire
     vessels:
     - Fortress
   - type: StaticPrice
@@ -110,13 +105,12 @@
   description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    sprite: _Forge/Objects/Misc/emp_lpc.rsi
     layers:
     - state: etech
   - type: ShipyardVoucher
     destroyOnEmpty: true
     consoleType: Empire
-    companyName: Empire
     vessels:
     - Terit
   - type: StaticPrice
@@ -130,16 +124,154 @@
   description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    sprite: _Forge/Objects/Misc/emp_lpc.rsi
     layers:
     - state: etech
   - type: ShipyardVoucher
     destroyOnEmpty: true
     consoleType: Empire
-    companyName: Empire
     vessels:
     - Mirko
   - type: StaticPrice
     vendPrice: 640000
   # region Empire
-# Forge/Objects/Misc/emp_lpc.rsi # empire lpc textures
+# _Forge/Objects/Misc/emp_lpc.rsi # empire lpc textures
+
+# region Mercenary
+- type: entity
+  parent: BaseShipLPCOneUse
+  id: ShipVoucherDreadnought
+  name: Mercenary Dreadnought LPC
+  description: A small card that contains the data for the procurement of a Dreadnought-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon
+    - state: screen
+      color: "#2E6F40"
+    - state: screen7
+      color: "#0C7004"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Shipyard
+    vessels:
+    - dreadnought
+  - type: StaticPrice
+    vendPrice: 220000
+
+- type: entity
+  parent: BaseShipLPCOneUse
+  id: ShipVoucherBriar
+  name: Mercenary Briar LPC
+  description: A small card that contains the data for the procurement of a Briar-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon
+    - state: screen
+      color: "#2E6F40"
+    - state: screen9
+      color: "#0C7004"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Shipyard
+    vessels:
+    - briar
+  - type: StaticPrice
+    vendPrice: 278000
+
+- type: entity
+  parent: BaseShipLPCOneUse
+  id: ShipVoucherAchilles
+  name: Mercenary Achilles LPC
+  description: A small card that contains the data for the procurement of a Achilles-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon
+    - state: screen
+      color: "#2E6F40"
+    - state: screen8
+      color: "#0C7004"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Shipyard
+    vessels:
+    - achilles
+  - type: StaticPrice
+    vendPrice: 215000
+
+- type: entity
+  parent: BaseShipLPCOneUse
+  id: ShipVoucherCorvet
+  name: Mercenary Corvet LPC
+  description: A small card that contains the data for the procurement of a Corvet-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon_fighter
+    - state: screen
+      color: "#2E6F40"
+    - state: screen3
+      color: "#0C7004"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Shipyard
+    vessels:
+    - Corvet
+  - type: StaticPrice
+    vendPrice: 100000
+
+- type: entity
+  parent: BaseShipLPCOneUse
+  id: ShipVoucherSeeker
+  name: Mercenary Seeker LPC
+  description: A small card that contains the data for the procurement of a Seeker-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon_fighter
+    - state: screen
+      color: "#2E6F40"
+    - state: screen4
+      color: "#0C7004"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Shipyard
+    vessels:
+    - seeker
+  - type: StaticPrice
+    vendPrice: 165000
+
+- type: entity
+  parent: BaseShipLPCOneUse
+  id: ShipVoucherHammerhead
+  name: Mercenary Hammerhead LPC
+  description: A small card that contains the data for the procurement of a Hammerhead-class destroyer from the flagship's reserves.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon_fighter
+    - state: screen
+      color: "#2E6F40"
+    - state: screen5
+      color: "#0C7004"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Shipyard
+    vessels:
+    - Hammerhead
+  - type: StaticPrice
+    vendPrice: 264616

@@ -44,6 +44,11 @@ namespace Content.Client.Input
 
             // Not in engine, because engine cannot check for sanbox/admin status before starting placement.
             common.AddFunction(ContentKeyFunctions.EditorCopyObject);
+            common.AddFunction(ContentKeyFunctions.MappingUnselect); // Forge-Change
+            common.AddFunction(ContentKeyFunctions.MappingEyedropper); // Forge-Change
+            common.AddFunction(ContentKeyFunctions.MappingEyedropperTile); // Forge-Change
+            common.AddFunction(ContentKeyFunctions.MappingEyedropperDecal); // Forge-Change
+            common.AddFunction(ContentKeyFunctions.MappingRemoveDecal); // Forge-Change
 
             // Not in engine because the engine doesn't understand what a flipped object is
             common.AddFunction(ContentKeyFunctions.EditorFlipObject);

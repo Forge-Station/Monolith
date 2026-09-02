@@ -35,6 +35,7 @@ using Robust.Shared.Collections;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Roles.Jobs;
 using Content.Server._NF.Players.GhostRole.Events; // Frontier
+using Content.Shared.PDA; // Forge-Change
 
 namespace Content.Server.Ghost.Roles;
 
@@ -318,6 +319,10 @@ public sealed partial class GhostRoleSystem : EntitySystem
 
     public void RegisterGhostRole(Entity<GhostRoleComponent> role)
     {
+        // Forge-Change: PDAs must never appear as ghost roles (use-in-hand used to flood the list).
+        if (HasComp<PdaComponent>(role.Owner))
+            return;
+
         if (_ghostRoles.ContainsValue(role))
             return;
 
@@ -576,7 +581,8 @@ public sealed partial class GhostRoleSystem : EntitySystem
     public int GetGhostRoleCount()
     {
         var metaQuery = GetEntityQuery<MetaDataComponent>();
-        return _ghostRoles.Count(pair => metaQuery.GetComponent(pair.Value.Owner).EntityPaused == false);
+        return _ghostRoles.Count(pair => metaQuery.GetComponent(pair.Value.Owner).EntityPaused == false
+                                        && !HasComp<PdaComponent>(pair.Value.Owner)); // Forge-Change
     }
 
     /// <summary>
@@ -593,6 +599,10 @@ public sealed partial class GhostRoleSystem : EntitySystem
         foreach (var (id, (uid, role)) in _ghostRoles)
         {
             if (metaQuery.GetComponent(uid).EntityPaused)
+                continue;
+
+            // Forge-Change: hide leftover PDA ghost roles from the list.
+            if (HasComp<PdaComponent>(uid))
                 continue;
 
 
@@ -765,7 +775,8 @@ public sealed partial class GhostRoleSystem : EntitySystem
     {
         return Resolve(uid, ref component, false) &&
                !component.Taken &&
-               !MetaData(uid).EntityPaused;
+               !MetaData(uid).EntityPaused &&
+               !HasComp<PdaComponent>(uid); // Forge-Change: PDAs cannot be taken as ghost roles
     }
 
     private void OnTakeoverTakeRole(EntityUid uid, GhostTakeoverAvailableComponent component, ref TakeGhostRoleEvent args)

@@ -49,3 +49,10 @@
     channels:
     - RadioShow
   - type: StationRadioReceiver
+    frequency: 1285
+  - type: ActivatableUI
+    key: enum.StationRadioFrequencyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationRadioFrequencyUiKey.Key:
+        type: StationRadioFrequencyBoundUserInterface

@@ -1,11 +1,10 @@
-using System.Text;
 using Content.Server._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Systems;
-using Content.Shared._Forge.Features;
 using Content.Shared._Forge.Features.Components;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared._Forge.Paper;
 using Content.Shared.Paper;
 using Robust.Shared.Prototypes;
 
@@ -57,51 +56,35 @@ public sealed partial class PaperLanguageSystem : EntitySystem
 
     private void OnInputText(Entity<PaperLanguageComponent> paper, ref PaperComponent.PaperInputTextMessage args)
     {
-        if (string.IsNullOrEmpty(args.Language))
+        var submitted = PaperPixelArtCodec.Compress(args.Text);
+        if (TryComp<PaperComponent>(paper.Owner, out var paperComp) &&
+            submitted.Length > paperComp.ContentSize)
             return;
 
         ProtoId<LanguagePrototype> language = args.Language;
-        if (language == SharedLanguageSystem.UniversalPrototype || _language.GetLanguagePrototype(language) == null)
-            return;
-
-        var canWrite = HasComp<GhostComponent>(args.Actor)
-                       || TryComp<UniversalLanguageSpeakerComponent>(args.Actor, out var uni) && uni.Enabled
-                       || _language.CanSpeak(args.Actor, language);
-        if (!canWrite)
-            return;
-
-        TryComp<PaperComponent>(paper.Owner, out var paperComp);
-        var currentContent = paperComp?.Content ?? string.Empty;
-        var fragment = PaperLanguageFormatting.GetAppendedFragment(
-            PaperLanguageFormatting.Join(paper.Comp.Segments),
-            args.Text);
-
-        if (paper.Comp.Segments.Count == 0)
+        if (string.IsNullOrEmpty(args.Language) ||
+            language == SharedLanguageSystem.UniversalPrototype ||
+            _language.GetLanguagePrototype(language) == null)
         {
-            var prior = currentContent;
-            if (!string.IsNullOrEmpty(fragment) && currentContent.EndsWith(fragment, StringComparison.Ordinal))
-                prior = currentContent[..^fragment.Length].TrimEnd('\r', '\n');
-
-            if (!string.IsNullOrEmpty(prior) && prior != fragment)
-                paper.Comp.Segments.Add(new PaperLanguageSegment { Text = prior, Language = paper.Comp.Language });
-        }
-
-        if (string.IsNullOrWhiteSpace(fragment))
-        {
-            paper.Comp.Language = language;
-            Dirty(paper);
-            return;
-        }
-
-        if (paper.Comp.Segments.Count > 0 && paper.Comp.Segments[^1].Language == language)
-        {
-            var last = paper.Comp.Segments[^1];
-            var separator = last.Text.Length == 0 || last.Text.EndsWith('\n') ? string.Empty : "\n";
-            last.Text += separator + fragment;
+            language = paper.Comp.Language;
         }
         else
         {
-            paper.Comp.Segments.Add(new PaperLanguageSegment { Text = fragment, Language = language });
+            var canWrite = HasComp<GhostComponent>(args.Actor)
+                           || TryComp<UniversalLanguageSpeakerComponent>(args.Actor, out var uni) && uni.Enabled
+                           || _language.CanSpeak(args.Actor, language);
+            if (!canWrite)
+                language = paper.Comp.Language;
+        }
+
+        paper.Comp.Segments.Clear();
+        if (!string.IsNullOrWhiteSpace(submitted))
+        {
+            paper.Comp.Segments.Add(new PaperLanguageSegment
+            {
+                Text = submitted,
+                Language = language
+            });
         }
 
         paper.Comp.Language = language;

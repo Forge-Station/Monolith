@@ -35,6 +35,15 @@ public sealed class ShipyardPreviewSystem : SharedShipyardPreviewSystem
     {
         CachePreviewMap();
 
+        // Forge-Change: delete the previously previewed grid before loading a new one.
+        // Otherwise every preview click leaks a full client-side shuttle grid onto the
+        // (persistent) preview map, since Dispose() only ever deletes the last CurrentGrid.
+        if (CurrentGrid != null)
+        {
+            Del(CurrentGrid.Value.Owner);
+            CurrentGrid = null;
+        }
+
         var opts = new DeserializationOptions();
         if (!_loader.TryLoadGrid(_previewMap,
                 vessel.ShuttlePath,

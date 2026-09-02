@@ -203,6 +203,11 @@ ui-options-function-editor-line-place = Размещать в линию
 ui-options-function-editor-rotate-object = Повернуть
 ui-options-function-editor-flip-object = Перевернуть
 ui-options-function-editor-copy-object = Копировать
+# Forge-Change-Start
+ui-options-function-mapping-eyedropper = Пипетка маппинга (Shift+ПКМ)
+ui-options-function-mapping-eyedropper-tile = Пипетка маппинга, тайл (Alt+ПКМ)
+ui-options-function-mapping-eyedropper-decal = Пипетка маппинга, декаль (Ctrl+ПКМ)
+# Forge-Change-End
 ui-options-function-show-debug-console = Открыть консоль
 ui-options-function-show-debug-monitors = Показать дебаг информацию
 ui-options-function-inspect-entity = Изучить сущность

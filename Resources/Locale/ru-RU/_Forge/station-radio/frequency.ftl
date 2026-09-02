@@ -1,0 +1,10 @@
+station-radio-frequency-listen-title = Станционное радио
+station-radio-frequency-music-title = Радиоустановка
+station-radio-frequency-voice-title = Радиосервер
+station-radio-frequency-listen-label = Частота прослушивания
+station-radio-frequency-music-label = Частота вещания музыки
+station-radio-frequency-voice-label = Частота голосового эфира
+station-radio-frequency-receiver-on = Радио включено
+station-radio-frequency-receiver-off = Радио выключено
+station-radio-frequency-examine-listen = Настроено на частоту {$frequency}.
+station-radio-frequency-examine-music = Музыка вещается на частоте {$frequency}.

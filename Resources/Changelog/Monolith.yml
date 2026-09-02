@@ -23481,3 +23481,9 @@ Entries:
   id: 2586
   time: '2026-08-03T20:54:51.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4439
+- author: Forge
+  changes:
+    - type: Add
+      message: Expanded botany tools — full plant analyzer readouts that stay open in a pocket, AgroScan PDA cartridge, botanical health glasses, hydroponics tray console, unique phytochemicals, harvest gas bursts, atmospheric growing needs, rare radioactive and vine-grab mutations, and sterile swabs in the biogenerator.
+  id: 2587
+  time: '2026-08-27T04:00:00.0000000+00:00'

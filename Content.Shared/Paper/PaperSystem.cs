@@ -9,6 +9,7 @@ using Content.Shared.Tag;
 using Robust.Shared.Player;
 using Robust.Shared.Audio.Systems;
 using static Content.Shared.Paper.PaperComponent;
+using Content.Shared._Forge.Paper; // Forge-Change
 using Content.Shared.Timing; // Frontier
 using Content.Shared.Access.Systems; // Frontier
 using Content.Shared.Verbs; // Frontier
@@ -244,46 +245,27 @@ public sealed partial class PaperSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        if (args.Text.Length <= entity.Comp.ContentSize)
+        // Forge-Change: compact pixel-art markup before the 6k limit is applied
+        var submitted = PaperPixelArtCodec.Compress(args.Text);
+        if (submitted.Length <= entity.Comp.ContentSize)
         {
-            // Forge-Change: already-written text cannot be replaced, only appended
-            var content = AppendPaperContent(entity.Comp.Content, args.Text);
-            if (content.Length <= entity.Comp.ContentSize)
-            {
-                SetContent(entity, content);
+            SetContent(entity, submitted);
 
-                if (TryComp<AppearanceComponent>(entity, out var appearance))
-                    _appearance.SetData(entity, PaperVisuals.Status, PaperStatus.Written, appearance);
+            if (TryComp<AppearanceComponent>(entity, out var appearance))
+                _appearance.SetData(entity, PaperVisuals.Status, PaperStatus.Written, appearance);
 
-                if (TryComp(entity, out MetaDataComponent? meta))
-                    _metaSystem.SetEntityDescription(entity, "", meta);
+            if (TryComp(entity, out MetaDataComponent? meta))
+                _metaSystem.SetEntityDescription(entity, "", meta);
 
-                _adminLogger.Add(LogType.Chat,
-                    LogImpact.Low,
-                    $"{ToPrettyString(args.Actor):player} has written on {ToPrettyString(entity):entity} the following text: {args.Text}");
+            _adminLogger.Add(LogType.Chat,
+                LogImpact.Low,
+                $"{ToPrettyString(args.Actor):player} has written on {ToPrettyString(entity):entity} the following text: {submitted}");
 
-                _audio.PlayPvs(entity.Comp.Sound, entity);
-            }
+            _audio.PlayPvs(entity.Comp.Sound, entity);
         }
 
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
-    }
-
-    // Forge-Change: keep existing words; new input is added at the end
-    private static string AppendPaperContent(string existing, string added)
-    {
-        if (string.IsNullOrEmpty(existing))
-            return added;
-
-        if (string.IsNullOrWhiteSpace(added))
-            return existing;
-
-        if (added.StartsWith(existing, StringComparison.Ordinal))
-            return added;
-
-        var separator = existing.EndsWith('\n') ? string.Empty : "\n";
-        return existing + separator + added;
     }
 
     private void OnPaperWrite(Entity<ActivateOnPaperOpenedComponent> entity, ref PaperWriteEvent args)

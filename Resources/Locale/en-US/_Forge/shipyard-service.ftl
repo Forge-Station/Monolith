@@ -24,7 +24,7 @@ shipyard-service-click-nothing = Nothing to upgrade here. Click a wall, window, 
 shipyard-service-grid-button = Shuttle map
 shipyard-service-grid-window-title = Drydock map
 shipyard-service-grid-window-title-named = Drydock map — { $name }
-shipyard-service-grid-hint = LMB marks a tile. RMB pans. Scroll zooms. Colors: [color=#e05050]repair[/color], [color=#d4a017]reinforce[/color], [color=#7ec8e3]plastitanium[/color], [color=#e07a3d]parts[/color].
+shipyard-service-grid-hint = LMB marks a tile. Hover or click an icon to see what will be upgraded. RMB pans. Scroll zooms. Colors: [color=#e05050]repair[/color], [color=#d4a017]reinforce[/color], [color=#7ec8e3]plastitanium[/color], [color=#e07a3d]parts[/color].
 shipyard-service-grid-filter-repair = Repair
 shipyard-service-grid-filter-reinforce = Reinforce
 shipyard-service-grid-filter-plastitanium = Plastitanium
@@ -33,6 +33,13 @@ shipyard-service-grid-select-all = Mark all
 shipyard-service-grid-clear = Clear marks
 shipyard-service-grid-apply = Apply marked
 shipyard-service-grid-selection = Marked: { $count } · [color=#7ec8e3]{ $amount }[/color]
+shipyard-service-grid-hover-empty = Hover an icon on the map to see what will be upgraded.
+shipyard-service-grid-hover = [color=#ffd34f]{ $action }[/color] — { $name }. { $detail } · { $amount }
+shipyard-service-marker-floor = Floor
+shipyard-service-marker-repair = Repair damage or tiling
+shipyard-service-marker-parts = Components on "{ $name }": { $count } below super rating
+shipyard-service-marker-reinforce = "{ $name }" → "{ $next }"
+shipyard-service-marker-plastitanium = "{ $name }" → "{ $next }"
 shipyard-service-action-marked = Marked work
 shipyard-service-action-repair = Repair
 shipyard-service-action-upgradeparts = Component upgrade

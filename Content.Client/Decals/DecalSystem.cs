@@ -6,6 +6,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameStates;
+using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Utility;
 using static Content.Shared.Decals.DecalGridComponent;
 
@@ -282,5 +283,62 @@ namespace Content.Client.Decals
 
             _overlay?.InvalidateGridChunks(gridId, chunks);
         }
+
+        // Forge-Change-Start: allow the mapping palette eyedropper to read decals on the client.
+        public override HashSet<(uint Index, Decal Decal)> GetDecalsInRange(EntityUid gridId, Vector2 position, float distance = 0.75f, Func<Decal, bool>? validDelegate = null)
+        {
+            var decalIds = new HashSet<(uint, Decal)>();
+            var chunkCollection = ChunkCollection(gridId);
+            var chunkIndices = GetChunkIndices(position);
+            if (chunkCollection == null || !chunkCollection.TryGetValue(chunkIndices, out var chunk))
+                return decalIds;
+
+            foreach (var (uid, decal) in chunk.Decals)
+            {
+                if ((position - decal.Coordinates - new Vector2(0.5f, 0.5f)).Length() > distance)
+                    continue;
+
+                if (validDelegate == null || validDelegate(decal))
+                    decalIds.Add((uid, decal));
+            }
+
+            return decalIds;
+        }
+
+        /// <summary>
+        ///     Eyedropper lookup: neighbouring chunks included, so clicks near chunk edges still hit.
+        /// </summary>
+        public HashSet<(uint Index, Decal Decal)> GetDecalsNear(EntityUid gridId, Vector2 position, float range = 1.25f)
+        {
+            var decalIds = new HashSet<(uint, Decal)>();
+            var chunkCollection = ChunkCollection(gridId);
+            if (chunkCollection == null)
+                return decalIds;
+
+            var rangeVec = new Vector2(range, range);
+            var bounds = new Box2(position - rangeVec, position + rangeVec);
+            var chunks = new ChunkIndicesEnumerator(bounds, ChunkSize);
+
+            while (chunks.MoveNext(out var chunkOrigin))
+            {
+                if (!chunkCollection.TryGetValue(chunkOrigin.Value, out var chunk))
+                    continue;
+
+                foreach (var (uid, decal) in chunk.Decals)
+                {
+                    // Sprites are drawn from Coordinates as the bottom-left; keep anything the cursor could sit on.
+                    var origin = decal.Coordinates;
+                    if (position.X < origin.X - 0.15f || position.Y < origin.Y - 0.15f)
+                        continue;
+                    if (position.X > origin.X + range || position.Y > origin.Y + range)
+                        continue;
+
+                    decalIds.Add((uid, decal));
+                }
+            }
+
+            return decalIds;
+        }
+        // Forge-Change-End
     }
 }

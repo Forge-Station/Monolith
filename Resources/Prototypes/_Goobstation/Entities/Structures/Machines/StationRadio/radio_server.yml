@@ -25,6 +25,13 @@
     broadcastChannel: RadioShow
     frequency: 1285
     unobstructedRequired: true
+    toggleOnInteract: false
+  - type: ActivatableUI
+    key: enum.StationRadioFrequencyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationRadioFrequencyUiKey.Key:
+        type: StationRadioFrequencyBoundUserInterface
 
 - type: entity
   id: StationRadioRig
@@ -47,3 +54,10 @@
   - type: Machine
     board: StationRadioRigCircuitboard
   - type: RadioRig
+    frequency: 1285
+  - type: ActivatableUI
+    key: enum.StationRadioFrequencyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationRadioFrequencyUiKey.Key:
+        type: StationRadioFrequencyBoundUserInterface

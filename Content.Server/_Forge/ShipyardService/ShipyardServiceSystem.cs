@@ -31,6 +31,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._Forge.ShipyardService;
 
@@ -53,6 +54,7 @@ public sealed class ShipyardServiceSystem : EntitySystem
     [Dependency] private readonly StackSystem _stacks = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly ITileDefinitionManager _tiles = default!;
 
     private static readonly ProtoId<TagPrototype> WallT1Tag = "WallT1";
     private static readonly ProtoId<TagPrototype> WallT2Tag = "WallT2";
@@ -165,7 +167,7 @@ public sealed class ShipyardServiceSystem : EntitySystem
         }
 
         var quote = BuildQuote(ent, shuttle);
-        var (count, cost, ok) = args.Action switch
+        var (count, quotedCost, ok) = args.Action switch
         {
             ShipyardServiceAction.Repair => (quote.RepairCount, quote.RepairCost, !quote.RepairOnCooldown && quote.RepairCount > 0),
             ShipyardServiceAction.UpgradeParts => (quote.PartCount, quote.PartCost, quote.PartCount > 0),
@@ -174,7 +176,7 @@ public sealed class ShipyardServiceSystem : EntitySystem
             _ => (0, 0, false)
         };
 
-        if (!ok || cost <= 0)
+        if (!ok || quotedCost <= 0)
         {
             if (args.Action == ShipyardServiceAction.Repair && quote.RepairOnCooldown)
             {
@@ -186,9 +188,9 @@ public sealed class ShipyardServiceSystem : EntitySystem
             return;
         }
 
-        if (bank.Balance < cost || !_bank.TryBankWithdraw(actor, cost))
+        if (bank.Balance < quotedCost)
         {
-            _popup.PopupEntity(Loc.GetString("shipyard-service-insufficient-funds", ("amount", cost)), ent, actor);
+            _popup.PopupEntity(Loc.GetString("shipyard-service-insufficient-funds", ("amount", quotedCost)), ent, actor);
             return;
         }
 
@@ -200,6 +202,21 @@ public sealed class ShipyardServiceSystem : EntitySystem
             ShipyardServiceAction.Plastitanium => ApplyStructureUpgrades(ent, shuttle, regular: false),
             _ => 0
         };
+
+        if (applied <= 0)
+        {
+            _popup.PopupEntity(Loc.GetString("shipyard-service-nothing-to-do"), ent, actor);
+            RefreshUi(ent, actor);
+            return;
+        }
+
+        var cost = ComputeActionCost(ent, shuttle, args.Action, applied);
+        if (cost > 0 && !_bank.TryBankWithdraw(actor, cost))
+        {
+            _popup.PopupEntity(Loc.GetString("shipyard-service-insufficient-funds", ("amount", cost)), ent, actor);
+            RefreshUi(ent, actor);
+            return;
+        }
 
         if (args.Action == ShipyardServiceAction.Repair)
             MarkOccupancyCharged(shuttle);
@@ -232,8 +249,8 @@ public sealed class ShipyardServiceSystem : EntitySystem
         var current = CollectMarkers(ent, shuttle);
         var jobs = new List<ShipyardServiceUpgradeMarker>();
         var seen = new HashSet<(NetEntity Entity, Vector2i Tile, ShipyardServiceAction Action, bool IsTile)>();
-        var repairCost = 0;
-        var upgradeCost = 0;
+        var quotedRepairCost = 0;
+        var quotedUpgradeCost = 0;
         var totalCount = 0;
         var hasRepair = false;
 
@@ -262,11 +279,11 @@ public sealed class ShipyardServiceSystem : EntitySystem
             if (match.Action == ShipyardServiceAction.Repair)
             {
                 hasRepair = true;
-                repairCost += match.Cost;
+                quotedRepairCost += match.Cost;
             }
             else
             {
-                upgradeCost += match.Cost;
+                quotedUpgradeCost += match.Cost;
             }
 
             jobs.Add(match);
@@ -274,12 +291,12 @@ public sealed class ShipyardServiceSystem : EntitySystem
         }
 
         GetVesselInfo(shuttle, out _, out var vesselPrice, out _, out _);
-        repairCost = ShipyardServicePricing.CapRepairWork(repairCost, vesselPrice);
+        quotedRepairCost = ShipyardServicePricing.CapRepairWork(quotedRepairCost, vesselPrice);
         var occupancyCharge = 0;
         if (hasRepair && TryGetOccupancyFee(shuttle, out var occupancyFee) && occupancyFee > 0)
             occupancyCharge = occupancyFee;
 
-        var totalCost = ShipyardServicePricing.CapRepairTotal(repairCost, occupancyCharge, vesselPrice) + upgradeCost;
+        var quotedCost = ShipyardServicePricing.CapRepairTotal(quotedRepairCost, occupancyCharge, vesselPrice) + quotedUpgradeCost;
 
         if (hasRepair)
         {
@@ -290,27 +307,22 @@ public sealed class ShipyardServiceSystem : EntitySystem
             }
         }
 
-        if (jobs.Count == 0 || totalCost <= 0)
+        if (jobs.Count == 0 || quotedCost <= 0)
         {
             _popup.PopupEntity(Loc.GetString("shipyard-service-click-nothing"), ent, actor);
             return;
         }
 
-        if (bank.Balance < totalCost || !_bank.TryBankWithdraw(actor, totalCost))
+        if (bank.Balance < quotedCost)
         {
-            _popup.PopupEntity(Loc.GetString("shipyard-service-insufficient-funds", ("amount", totalCost)), ent, actor);
+            _popup.PopupEntity(Loc.GetString("shipyard-service-insufficient-funds", ("amount", quotedCost)), ent, actor);
             return;
         }
 
         var applied = 0;
-        foreach (var job in jobs)
-        {
-            if (job.Action != ShipyardServiceAction.Repair)
-                continue;
-
-            EntityUid? entity = TryGetEntity(job.Entity, out var uid) ? uid : null;
-            applied += _shipRepair.TryApplyRepairWork(shuttle, job.Tile, job.LocalPosition, entity, job.IsTile);
-        }
+        var appliedRepairCost = 0;
+        var appliedUpgradeCost = 0;
+        var appliedRepair = false;
 
         foreach (var job in jobs)
         {
@@ -320,16 +332,57 @@ public sealed class ShipyardServiceSystem : EntitySystem
             if (!TryGetEntity(job.Entity, out var target) || TerminatingOrDeleted(target.Value))
                 continue;
 
-            applied += job.Action switch
+            var upgraded = job.Action switch
             {
                 ShipyardServiceAction.UpgradeParts => ApplyPartUpgradesOnMachine(ent, target.Value),
                 ShipyardServiceAction.Reinforce => ApplyStructureUpgradeOnEntity(ent, target.Value, regular: true),
                 ShipyardServiceAction.Plastitanium => ApplyStructureUpgradeOnEntity(ent, target.Value, regular: false),
                 _ => 0
             };
+
+            if (upgraded <= 0)
+                continue;
+
+            applied += upgraded;
+            appliedUpgradeCost += job.Cost;
         }
 
-        if (hasRepair)
+        foreach (var job in jobs)
+        {
+            if (job.Action != ShipyardServiceAction.Repair)
+                continue;
+
+            EntityUid? entity = TryGetEntity(job.Entity, out var uid) ? uid : null;
+            var repaired = _shipRepair.TryApplyRepairWork(shuttle, job.Tile, job.LocalPosition, entity, job.IsTile);
+            if (repaired <= 0)
+                continue;
+
+            applied += repaired;
+            appliedRepairCost += job.Cost;
+            appliedRepair = true;
+        }
+
+        if (applied <= 0)
+        {
+            _popup.PopupEntity(Loc.GetString("shipyard-service-click-nothing"), ent, actor);
+            RefreshUi(ent, actor);
+            return;
+        }
+
+        appliedRepairCost = ShipyardServicePricing.CapRepairWork(appliedRepairCost, vesselPrice);
+        var appliedOccupancy = 0;
+        if (appliedRepair && TryGetOccupancyFee(shuttle, out var appliedFee) && appliedFee > 0)
+            appliedOccupancy = appliedFee;
+
+        var totalCost = ShipyardServicePricing.CapRepairTotal(appliedRepairCost, appliedOccupancy, vesselPrice) + appliedUpgradeCost;
+        if (totalCost > 0 && !_bank.TryBankWithdraw(actor, totalCost))
+        {
+            _popup.PopupEntity(Loc.GetString("shipyard-service-insufficient-funds", ("amount", totalCost)), ent, actor);
+            RefreshUi(ent, actor);
+            return;
+        }
+
+        if (appliedRepair)
             MarkOccupancyCharged(shuttle);
 
         _adminLog.Add(LogType.ShipYardUsage, LogImpact.Low,
@@ -360,6 +413,7 @@ public sealed class ShipyardServiceSystem : EntitySystem
                 ? _map.LocalToTile(shuttle, grid, xform.Coordinates)
                 : default;
 
+            var (label, detail) = DescribeUpgradeMarker(console, uid, action, count);
             list.Add(new ShipyardServiceUpgradeMarker
             {
                 Id = nextId++,
@@ -368,7 +422,9 @@ public sealed class ShipyardServiceSystem : EntitySystem
                 Tile = tile,
                 Action = action,
                 Cost = cost,
-                Count = count
+                Count = count,
+                Label = label,
+                Detail = detail
             });
         }
 
@@ -408,7 +464,9 @@ public sealed class ShipyardServiceSystem : EntitySystem
                 Action = ShipyardServiceAction.Repair,
                 Cost = cost,
                 Count = 1,
-                IsTile = item.IsTile
+                IsTile = item.IsTile,
+                Label = DescribeRepairLabel(shuttle, item),
+                Detail = Loc.GetString("shipyard-service-marker-repair")
             });
         }
 
@@ -437,7 +495,9 @@ public sealed class ShipyardServiceSystem : EntitySystem
                 Tile = tile,
                 Action = ShipyardServiceAction.Repair,
                 Cost = cost,
-                Count = 1
+                Count = 1,
+                Label = Name(uid),
+                Detail = Loc.GetString("shipyard-service-marker-repair")
             });
         }
     }
@@ -492,7 +552,7 @@ public sealed class ShipyardServiceSystem : EntitySystem
             return;
         }
 
-        if (bank.Balance < cost || !_bank.TryBankWithdraw(actor, cost))
+        if (bank.Balance < cost)
         {
             _popup.PopupEntity(Loc.GetString("shipyard-service-insufficient-funds", ("amount", cost)), actor, actor);
             return;
@@ -509,6 +569,12 @@ public sealed class ShipyardServiceSystem : EntitySystem
         if (applied <= 0)
         {
             _popup.PopupEntity(Loc.GetString("shipyard-service-click-nothing"), actor, actor);
+            return;
+        }
+
+        if (!_bank.TryBankWithdraw(actor, cost))
+        {
+            _popup.PopupEntity(Loc.GetString("shipyard-service-insufficient-funds", ("amount", cost)), actor, actor);
             return;
         }
 
@@ -779,7 +845,7 @@ public sealed class ShipyardServiceSystem : EntitySystem
 
     private int CountUpgradeablePartsOnMachine(Entity<ShipyardServiceConsoleComponent> console, EntityUid uid)
     {
-        if (!TryComp<MachineComponent>(uid, out var machine))
+        if (!TryComp<MachineComponent>(uid, out var machine) || !MachineUsesPartUpgrades(uid))
             return 0;
 
         var count = 0;
@@ -803,7 +869,7 @@ public sealed class ShipyardServiceSystem : EntitySystem
 
     private int ApplyPartUpgradesOnMachine(Entity<ShipyardServiceConsoleComponent> console, EntityUid uid)
     {
-        if (!TryComp<MachineComponent>(uid, out var machine))
+        if (!TryComp<MachineComponent>(uid, out var machine) || !MachineUsesPartUpgrades(uid))
             return 0;
 
         var existing = new List<EntityUid>(machine.PartContainer.ContainedEntities);
@@ -937,23 +1003,129 @@ public sealed class ShipyardServiceSystem : EntitySystem
 
     private bool ReplaceEntity(EntityUid uid, EntProtoId next)
     {
+        if (TerminatingOrDeleted(uid) || !_prototypes.HasIndex(next))
+            return false;
+
         var xform = Transform(uid);
-        var coords = xform.Coordinates;
+        if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
+            return false;
+
         var rotation = xform.LocalRotation;
         var anchored = xform.Anchored;
-        var grid = xform.GridUid;
+        var tile = _map.CoordinatesToTile(gridUid, grid, xform.Coordinates);
+        var coords = _map.GridTileToLocal(gridUid, grid, tile);
 
-        var spawned = Spawn(next, coords);
+        var spawned = SpawnAttachedTo(next, coords, rotation: rotation);
+        if (TerminatingOrDeleted(spawned))
+            return false;
+
         var spawnedXform = Transform(spawned);
-        _transform.SetLocalRotation(spawnedXform, rotation);
-        if (anchored)
-            _transform.AnchorEntity(spawned, spawnedXform);
+        if (spawnedXform.Anchored)
+            _transform.Unanchor(spawned, spawnedXform);
 
-        if (grid != null)
-            _shipRepair.RetargetSnapshotEntity(grid.Value, uid, spawned);
+        if (anchored && !_transform.AnchorEntity((spawned, spawnedXform), (gridUid, grid), tile))
+        {
+            Del(spawned);
+            return false;
+        }
 
-        QueueDel(uid);
+        _shipRepair.RetargetSnapshotEntity(gridUid, uid, spawned);
+        Del(uid);
         return true;
+    }
+
+    private bool MachineUsesPartUpgrades(EntityUid uid)
+    {
+        var markup = new FormattedMessage();
+        RaiseLocalEvent(uid, new UpgradeExamineEvent(ref markup));
+        return !markup.IsEmpty;
+    }
+
+    private int ComputeActionCost(
+        Entity<ShipyardServiceConsoleComponent> console,
+        EntityUid shuttle,
+        ShipyardServiceAction action,
+        int applied)
+    {
+        if (applied <= 0)
+            return 0;
+
+        GetVesselInfo(shuttle, out _, out var price, out var classes, out _);
+        return action switch
+        {
+            ShipyardServiceAction.Repair => ComputeRepairCost(console, shuttle, applied, price, classes),
+            ShipyardServiceAction.UpgradeParts => ShipyardServicePricing.ApplyMultiplier(
+                console.Comp.PartUpgradeCost * applied,
+                ShipyardServicePricing.GetPartUpgradeMultiplier(classes)),
+            ShipyardServiceAction.Reinforce => ShipyardServicePricing.ApplyMultiplier(
+                console.Comp.ReinforceCost * applied,
+                ShipyardServicePricing.GetReinforceMultiplier(classes)),
+            ShipyardServiceAction.Plastitanium => ShipyardServicePricing.ApplyMultiplier(
+                console.Comp.PlastitaniumCost * applied,
+                ShipyardServicePricing.GetReinforceMultiplier(classes)),
+            _ => 0
+        };
+    }
+
+    private int ComputeRepairCost(
+        Entity<ShipyardServiceConsoleComponent> console,
+        EntityUid shuttle,
+        int applied,
+        int price,
+        List<VesselClass> classes)
+    {
+        var work = ShipyardServicePricing.CapRepairWork(
+            ShipyardServicePricing.ApplyMultiplier(
+                console.Comp.RepairBaseCost + console.Comp.RepairPerObjectCost * applied,
+                ShipyardServicePricing.GetRepairMultiplier(classes)),
+            price);
+        var occupancy = TryGetOccupancyFee(shuttle, out var fee) && fee > 0 ? fee : 0;
+        return ShipyardServicePricing.CapRepairTotal(work, occupancy, price);
+    }
+
+    private (string Label, string Detail) DescribeUpgradeMarker(
+        Entity<ShipyardServiceConsoleComponent> console,
+        EntityUid uid,
+        ShipyardServiceAction action,
+        int count)
+    {
+        var name = Name(uid);
+        return action switch
+        {
+            ShipyardServiceAction.UpgradeParts => (
+                name,
+                Loc.GetString("shipyard-service-marker-parts", ("name", name), ("count", count))),
+            ShipyardServiceAction.Reinforce when TryGetStructureUpgrade(console, uid, regular: true, out var next) => (
+                name,
+                Loc.GetString("shipyard-service-marker-reinforce", ("name", name), ("next", GetProtoName(next)))),
+            ShipyardServiceAction.Plastitanium when TryGetStructureUpgrade(console, uid, regular: false, out var next) => (
+                name,
+                Loc.GetString("shipyard-service-marker-plastitanium", ("name", name), ("next", GetProtoName(next)))),
+            _ => (name, Loc.GetString($"shipyard-service-action-{action.ToString().ToLowerInvariant()}"))
+        };
+    }
+
+    private string DescribeRepairLabel(EntityUid shuttle, ShipRepairWork item)
+    {
+        if (item.Entity is { } uid && !TerminatingOrDeleted(uid))
+            return Name(uid);
+
+        if (item.IsTile && TryComp<MapGridComponent>(shuttle, out var grid))
+        {
+            var tile = _map.GetTileRef(shuttle, grid, item.Tile).Tile;
+            if (tile.TypeId != Tile.Empty.TypeId)
+                return Loc.GetString(_tiles[tile.TypeId].Name);
+        }
+
+        return Loc.GetString("shipyard-service-marker-floor");
+    }
+
+    private string GetProtoName(EntProtoId id)
+    {
+        if (_prototypes.TryIndex(id, out var proto))
+            return Loc.GetString(proto.Name);
+
+        return id.Id;
     }
 
     #endregion

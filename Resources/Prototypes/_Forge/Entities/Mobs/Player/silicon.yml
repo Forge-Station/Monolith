@@ -48,6 +48,11 @@
   parent: BaseFactionBorgChassis
   abstract: true
   components:
+  - type: ShowRoleInformation
+    window: RoleInformationBorgForerunner
+    duration: 15
+    skipWindows:
+    - RoleInformationAiForerunner
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -311,6 +316,11 @@
   parent: AiHeldForge
   categories: [ HideSpawnMenu ]
   components:
+  - type: ShowRoleInformation
+    window: RoleInformationAiForerunner
+    duration: 15
+    skipWindows:
+    - RoleInformationBorgForerunner
   - type: IntrinsicRadioTransmitter
     channels:
     - Common

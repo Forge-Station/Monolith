@@ -3,7 +3,7 @@ using Content.Server._Forge.Discord;
 using Content.Server.Connection;
 using Content.Server.Connection.Whitelist;
 using Content.Server.Connection.Whitelist.Conditions;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.JoinQueue;
 using Content.Shared.CCVar;
 using Prometheus;
@@ -68,7 +68,7 @@ public sealed class JoinQueueManager
             _isQueueUpdateMessageRegistered = true;
         }
 
-        _configuration.OnValueChanged(ForgeVars.QueueEnabled, OnQueueCVarChanged, true);
+        _configuration.OnValueChanged(ForgeCCVars.QueueEnabled, OnQueueCVarChanged, true);
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
         _discordAuth.PlayerVerified += OnPlayerVerified;
     }

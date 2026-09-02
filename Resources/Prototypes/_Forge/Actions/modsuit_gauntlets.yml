@@ -5,5 +5,5 @@
   components:
   - type: InstantAction
     clientExclusive: true
-    icon: { sprite: Forge/Clothing/Hands/Modsuits/omnissiamod.rsi, state: gauntlets }
+    icon: { sprite: _Forge/Clothing/Hands/Modsuits/omnissiamod.rsi, state: gauntlets }
     event: !type:OpenModsuitGauntletToolsMenuActionEvent {}

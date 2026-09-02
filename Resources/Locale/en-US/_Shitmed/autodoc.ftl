@@ -48,6 +48,11 @@ autodoc-add-step = ADD STEP 添加一步
 autodoc-remove-step = REMOVE STEP
 # Chinese text translates approximately to "Launch the Glorious People's Project" (as with all these long sentences, im not super sure on the translation making sense)
 autodoc-start-program = START PROGRAM
+# Chinese text translates approximately to "import program")
+autodoc-import-program = IMPORT PROGRAM 进口计划
+# Chinese text translates approximately to "import program")
+autodoc-export-program = EXPORT PROGRAM 出口计划
+
 
 # Chinese text translates approximately to "Start Surgical Operation"
 autodoc-add-step-surgery = PERFORM SURGERY

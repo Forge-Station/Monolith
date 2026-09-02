@@ -51,14 +51,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private SharedCorticalBorerSystem _corticalBorer = default!;
 
     private readonly Dictionary<EntProtoId, EntityUid> _surgeries = new();
+    private readonly List<EntProtoId> _allSurgeries = new();
 
     /// <summary>
     /// Every surgery entity prototype id.
     /// Kept in sync with prototype reloads.
     /// </summary>
     public IReadOnlyList<EntProtoId> AllSurgeries => _allSurgeries;
-    private readonly List<EntProtoId> _allSurgeries = new();
-
+    
     public override void Initialize()
     {
         base.Initialize();
@@ -82,8 +82,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<SurgeryPartComponentConditionComponent, SurgeryValidEvent>(OnPartComponentConditionValid);
         SubscribeLocalEvent<SurgeryOrganOnAddConditionComponent, SurgeryValidEvent>(OnOrganOnAddConditionValid);
         //SubscribeLocalEvent<SurgeryRemoveLarvaComponent, SurgeryCompletedEvent>(OnRemoveLarva);
+        //SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         InitializeSteps();
+
+        LoadPrototypes();
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)

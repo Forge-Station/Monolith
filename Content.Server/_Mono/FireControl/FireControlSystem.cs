@@ -35,6 +35,7 @@ public sealed partial class FireControlSystem : EntitySystem
     [Dependency] private PowerReceiverSystem _power = default!;
     [Dependency] private RotateToFaceSystem _rotateToFace = default!;
     [Dependency] private ShipWeaponHomeGridSystem _shipWeaponHomeGrid = default!; // Forge-Change
+    [Dependency] private ForgeTorpedoLauncherSystem _forgeTorpedoLauncher = default!; // Forge-Change
     /// <summary>
     /// Dictionary of entities that have visualization enabled
     /// </summary>
@@ -43,6 +44,7 @@ public sealed partial class FireControlSystem : EntitySystem
     private EntityQuery<SpaceArtilleryComponent> _artilleryQuery;
     private EntityQuery<FireControlRotateComponent> _fireRotateQuery;
     private EntityQuery<GunComponent> _gunQuery;
+    private EntityQuery<ForgeTorpedoLauncherComponent> _forgeTorpedoLauncherQuery; // Forge-Change
 
     public override void Initialize()
     {
@@ -66,6 +68,7 @@ public sealed partial class FireControlSystem : EntitySystem
         _artilleryQuery = GetEntityQuery<SpaceArtilleryComponent>();
         _fireRotateQuery = GetEntityQuery<FireControlRotateComponent>();
         _gunQuery = GetEntityQuery<GunComponent>();
+        _forgeTorpedoLauncherQuery = GetEntityQuery<ForgeTorpedoLauncherComponent>(); // Forge-Change
     }
 
     private void OnPowerChanged(EntityUid uid, FireControlServerComponent component, PowerChangedEvent args)
@@ -533,6 +536,24 @@ public sealed partial class FireControlSystem : EntitySystem
 
         // Calculate direction
         var direction = targetPos - weaponPos;
+
+        // Forge-Change-Start: static torpedo tubes use the cursor only to pick a target grid.
+        var isTorpedoLauncher = _forgeTorpedoLauncherQuery.TryComp(weapon, out var torpedoLauncher);
+        if (isTorpedoLauncher)
+        {
+            direction = _forgeTorpedoLauncher.GetLaunchDirection(weaponXform);
+
+            return _forgeTorpedoLauncher.TryQueueLaunch(
+                    weapon,
+                    user,
+                    coords,
+                    direction,
+                    torpedoLauncher,
+                    weaponXform,
+                    noServer);
+        }
+        // Forge-Change-End
+
         var distance = direction.Length();
         if (distance <= float.Epsilon)
             return false; // Can't fire at the same position
@@ -553,13 +574,12 @@ public sealed partial class FireControlSystem : EntitySystem
         }
 
         // Try to get a gun component and fire the weapon
-        if (_gunQuery.TryComp(weapon, out var gun))
-        {
-            _gun.AttemptShots(user, weapon, gun, coords, TimeSpan.FromSeconds(0.2));
-            return true;
-        }
+        if (!_gunQuery.TryComp(weapon, out var gun))
+            return false;
 
-        return false;
+        _gun.AttemptShots(user, weapon, gun, coords, TimeSpan.FromSeconds(0.2));
+
+        return true;
     }
 
     /// <summary>

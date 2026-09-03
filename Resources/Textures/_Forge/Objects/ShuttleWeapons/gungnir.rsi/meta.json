@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "theg33ka for Forge-station",
+  "size": {
+    "x": 32,
+    "y": 86
+  },
+  "states": [
+    {
+      "name": "space_artillery",
+      "directions": 1
+    }
+  ]
+}

@@ -252,6 +252,19 @@
   - ForgeShipWeaponResearchSerpent
   position: -11, 8
 
+- type: technology
+  id: ForgeShipWeaponResearchHeavyTorpedo
+  name: forge-research-technology-shipweapon-heavy-torpedo
+  entityIcon: WeaponTurretForgeHeavyTorpedo
+  discipline: ShipArmory
+  tier: 3
+  cost: 32000
+  recipeUnlocks:
+  - WeaponTurretForgeHeavyTorpedoCircuitboard
+  technologyPrerequisites:
+  - ForgeShipWeaponResearchTrident
+  position: -11, 9
+
 # --- Column -18: mining ---
 
 - type: technology

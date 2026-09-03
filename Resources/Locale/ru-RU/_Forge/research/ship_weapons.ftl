@@ -14,6 +14,7 @@ forge-research-technology-shipweapon-prometheus = Лазер «Прометей�
 forge-research-technology-shipweapon-serpent = Торпедный аппарат «Змея»
 forge-research-technology-shipweapon-tovek = Ракетная установка TOVEK
 forge-research-technology-shipweapon-trident = Торпедная установка «Трезубец»
+forge-research-technology-shipweapon-heavy-torpedo = Тяжёлая торпедная установка «Гунгнир»
 forge-research-technology-shipweapon-light-munitions-bay = Лёгкий бомболюк
 forge-research-technology-shipweapon-longbow = Автопушка Longbow
 forge-research-technology-shipweapon-cyrexa = Пушка CYREXA

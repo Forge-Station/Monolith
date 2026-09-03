@@ -296,7 +296,7 @@ public sealed partial class TargetSeekingSystem : EntitySystem
     public Angle ApplyPredictiveTracking(Entity<TargetSeekingComponent, PhysicsComponent, TransformComponent> ent, Entity<PhysicsComponent, TransformComponent> target, float frameTime)
     {
         // Get current positions
-        var currentTargetPosition = _transform.GetWorldPosition(target.Comp2);
+        var currentTargetPosition = GetTargetWorldPosition(target.Owner, target.Comp2); // Forge-Change
         var sourcePosition = _transform.GetWorldPosition(ent.Comp3);
 
         // Calculate current distance
@@ -335,7 +335,7 @@ public sealed partial class TargetSeekingSystem : EntitySystem
         var ownVel = _physics.GetMapLinearVelocity(ent, ent.Comp2, ent.Comp3);
         var ownPos = _transform.GetWorldPosition(ent.Comp3);
         var targetVel = _physics.GetMapLinearVelocity(target, target.Comp1, target.Comp2);
-        var targetPos = _transform.GetWorldPosition(target.Comp2);
+        var targetPos = GetTargetWorldPosition(target.Owner, target.Comp2); // Forge-Change
         var relVel = targetVel - ownVel;
         var relPos = targetPos - ownPos;
 
@@ -380,7 +380,7 @@ public sealed partial class TargetSeekingSystem : EntitySystem
     public Angle ApplyDirectTracking(Entity<TransformComponent> ent, Entity<TransformComponent> target, float frameTime)
     {
         // Get the angle directly toward the target
-        var angleToTarget = (_transform.GetWorldPosition(target.Comp) - _transform.GetWorldPosition(ent.Comp)).ToWorldAngle();
+        var angleToTarget = (GetTargetWorldPosition(target.Owner, target.Comp) - _transform.GetWorldPosition(ent.Comp)).ToWorldAngle(); // Forge-Change
 
         return angleToTarget;
     }

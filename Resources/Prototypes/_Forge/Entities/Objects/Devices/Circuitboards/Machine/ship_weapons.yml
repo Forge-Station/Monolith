@@ -360,6 +360,18 @@
     prototype: WeaponLaserTurretApolloPortable
   
 - type: entity
+  id: WeaponTurretForgeHeavyTorpedoCircuitboard
+  parent: ForgeShipWeaponCircuitboardT4
+  name: FHT-300 Gungnir heavy torpedo launcher machine board
+  description: A machine printed circuit board for an FHT-300 Gungnir heavy torpedo launcher.
+  components:
+  - type: MachineBoard
+    prototype: WeaponTurretForgeHeavyTorpedoPortable
+  - type: Tag
+    tags:
+    - MachineBoard2x2
+
+- type: entity
   id: WeaponTurretDrakeApolloMk2Circuitboard
   parent: ForgeShipWeaponCircuitboardT4
   name: Apollo MK2 mining laser machine board

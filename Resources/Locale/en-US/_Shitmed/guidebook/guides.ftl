@@ -1,2 +1,6 @@
 guide-entry-autodoc = Autodoc
 guide-entry-abductors = Abductors
+guide-entry-surgery = Surgery
+guide-entry-partmanipulation = Part Manipulation
+guide-entry-organmanipulation = Organ Manipulation
+guide-entry-utilitysurgeries = Utility Surgeries

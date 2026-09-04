@@ -145,7 +145,9 @@ public sealed class CloakingShuttleSystem : EntitySystem
             && cloakingShuttleComponent.TimeCooldown != default
             && _timing.CurTime < cloakingShuttleComponent.TimeCooldown.End
             || !TryGetDevice(gridUid, out var deviceUid)
-            || !TryComp<CloakingShuttleDeviceComponent>(deviceUid, out var cloakingShuttleDeviceComponent))
+            || !TryComp<CloakingShuttleDeviceComponent>(deviceUid, out var cloakingShuttleDeviceComponent)
+            || !TryComp<IFFComponent>(gridUid, out var iffComponent)
+            || (iffComponent.Flags & IFFFlags.IsPlayerShuttle) == 0)
             return;
 
         cloakingShuttleComponent.DeviceCooldown = MathF.Max(cloakingShuttleDeviceComponent.Cooldown, 0f);

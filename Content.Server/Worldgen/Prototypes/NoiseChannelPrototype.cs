@@ -1,6 +1,7 @@
 using System.Numerics;
 using Robust.Shared.Noise;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager.Attributes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Server.Worldgen.Prototypes;
@@ -9,7 +10,8 @@ namespace Content.Server.Worldgen.Prototypes;
 ///     This is a config for noise channels, used by worldgen.
 /// </summary>
 [Virtual]
-public class NoiseChannelConfig
+[ImplicitDataDefinitionForInheritors]
+public partial class NoiseChannelConfig
 {
     /// <summary>
     ///     The noise type used by the noise generator.

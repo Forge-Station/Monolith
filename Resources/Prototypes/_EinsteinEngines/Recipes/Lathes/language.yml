@@ -316,3 +316,14 @@
     Plastic: 100
     Gold: 50
     Silver: 50
+
+- type: latheRecipe
+  id: CadrisTranslatorImplanter
+  result: CadrisTranslatorImplanter
+  completetime: 2
+  materials:
+    Steel: 500
+    Glass: 500
+    Plastic: 100
+    Gold: 50
+    Silver: 50

@@ -26,7 +26,7 @@
   - type: Thirst
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: ForgeHydrakin #Forge-Change
+    damageModifierSet: Hydrakin
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -46,20 +46,20 @@
     prototype: Hydrakin
     requiredLegs: 2
   - type: Temperature
-    coldDamageThreshold: 10 # Mono - Absurd cold resistance # ~ -263
-    heatDamageThreshold: 332 # no. just no. suffer. # ~ +58
+    coldDamageThreshold: 10 # Mono - Absurd cold resistance
+    heatDamageThreshold: 332 # no. just no. suffer.
     coldDamage:
       types:
         Cold : 0.01 #per second, scales with temperature & other constants
   - type: TemperatureSpeed
     thresholds:
       90: 0.9
-      40: 0.8 #Forge-Change
-      10: 0.7 #Forge-Change
+      40: 0.75
+      10: 0.6
   - type: HumanoidAppearance
     species: Hydrakin
   - type: ThermalRegulator #Todo, implement hydrakin thermal movement generation
-    metabolismHeat: 400 #Forge-Change
+    metabolismHeat: 1600
     radiatedHeat: 100
     implicitHeatRegulation: 250
     sweatHeatRegulation: 400
@@ -69,7 +69,7 @@
     processWhileCrit: false
     # Goob
   - type: PassiveHeatGeneration
-    watts: 800 # ~ +0.3 heat per second #Forge-Change
+    watts: 3900
     mobStateModifier:
       Alive: 1
       Critical: 0

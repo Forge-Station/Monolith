@@ -40,7 +40,7 @@ namespace Content.Server.Electrocution;
 public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
 {
     [Dependency] private IAdminLogManager _adminLogger = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private DamageableSystem _damageable = default!;
@@ -59,10 +59,8 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private TurfSystem _turf = default!;
 
-    [ValidatePrototypeId<StatusEffectPrototype>]
     private const string StatusEffectKey = "Electrocution";
 
-    [ValidatePrototypeId<DamageTypePrototype>]
     private const string DamageType = "Shock";
 
     // Yes, this is absurdly small for a reason.

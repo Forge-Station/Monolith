@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -216,6 +217,7 @@ namespace Content.IntegrationTests.Tests
             if (!resourceManager.TryContentFileRead(rootedPath, out var fileStream))
             {
                 Assert.Fail($"Map not found: {rootedPath}");
+                return;
             }
 
             using var reader = new StreamReader(fileStream);
@@ -302,7 +304,7 @@ namespace Content.IntegrationTests.Tests
                     var protoId = yamlEntity["proto"].AsString();
 
                     // This doesn't properly handle prototype migrations, but thats not a significant issue.
-                    if (!protoManager.TryIndex(protoId, out var proto, false))
+                    if (!protoManager.TryIndex(new EntProtoId(protoId), out EntityPrototype? proto))
                         continue;
 
                     Assert.That(!proto.Categories.Contains(dnmCategory) || IsWhitelistedForMap(protoId, map),
@@ -352,7 +354,7 @@ namespace Content.IntegrationTests.Tests
             });
             var server = pair.Server;
 
-            var mapManager = server.ResolveDependency<IMapManager>();
+            var mapManager = server.System<SharedMapSystem>();
             var entManager = server.ResolveDependency<IEntityManager>();
             var mapLoader = entManager.System<MapLoaderSystem>();
             var mapSystem = entManager.System<SharedMapSystem>();
@@ -437,13 +439,13 @@ namespace Content.IntegrationTests.Tests
 
                     var spawnPoints = entManager.EntityQuery<SpawnPointComponent>()
                         .Where(x => x.SpawnType == SpawnPointType.Job && x.Job != null)
-                        .Select(x => x.Job.Value);
+                        .Select(x => x.Job!.Value);
 
                     jobs.ExceptWith(spawnPoints);
 
                     spawnPoints = entManager.EntityQuery<ContainerSpawnPointComponent>()
                         .Where(x => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset && x.Job != null)
-                        .Select(x => x.Job.Value);
+                        .Select(x => x.Job!.Value);
 
                     jobs.ExceptWith(spawnPoints);
 

@@ -290,8 +290,8 @@ public enum PrototypeMatchMode : byte
     Reagent = 3
 }
 
-[Serializable]
-public sealed class ListingConditionPrototype
+[Serializable, DataDefinition]
+public sealed partial class ListingConditionPrototype
 {
     [DataField("condition")]
     public object? Condition;

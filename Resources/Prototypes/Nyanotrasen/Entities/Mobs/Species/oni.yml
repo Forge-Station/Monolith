@@ -28,7 +28,7 @@
         Piercing: 1.2
         Asphyxiation: 1.2
   - type: Damageable
-    damageModifierSet: ForgeOni #Forge-Change
+    damageModifierSet: Oni
   - type: Body
     prototype: Human
   - type: Fixtures

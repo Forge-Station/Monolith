@@ -5,7 +5,6 @@ namespace Content.Shared.Eye.Blinding.Systems;
 
 public sealed partial class TemporaryBlindnessSystem : EntitySystem
 {
-    [ValidatePrototypeId<StatusEffectPrototype>]
     public const string BlindingStatusEffect = "TemporaryBlindness";
 
     [Dependency] private BlindableSystem _blindableSystem = default!;

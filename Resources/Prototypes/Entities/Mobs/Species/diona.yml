@@ -32,7 +32,7 @@
       RightFoot: 0.05
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: ForgeDiona #Forge-Change
+    damageModifierSet: Diona
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:
@@ -135,7 +135,6 @@
   - type: Carriable # Carrying system from nyanotrasen.
   - type: ProtectedFromStepTriggers # Frontier
   - type: FTLKnockdownImmune # Frontier
-
 
 - type: entity
   parent: BaseSpeciesDummy

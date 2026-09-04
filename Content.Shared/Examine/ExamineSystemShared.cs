@@ -211,10 +211,11 @@ namespace Content.Shared.Examine
                     continue;
                 }
 
-                var bBox = o.BoundingBox;
-                bBox = bBox.Translated(_transform.GetWorldPosition(result.HitEntity));
+                if (!TryComp(result.HitEntity, out TransformComponent? xform))
+                    return false;
 
-                if (bBox.Contains(origin.Position) || bBox.Contains(other.Position))
+                if (_occluder.ContainsPoint(o, xform, origin.Position) ||
+                    _occluder.ContainsPoint(o, xform, other.Position))
                 {
                     continue;
                 }

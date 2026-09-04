@@ -136,7 +136,7 @@
       regenRate: 13.2 # 11
       spinupTime: 1
       breakCooldown: 19
-      powerDraw: 0.02
+      powerDraw: 0.1
       blockModifier:
         coefficients:
           Blunt: 1

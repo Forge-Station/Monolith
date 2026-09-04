@@ -117,7 +117,6 @@ namespace Content.Client.Lobby.UI
 
         private bool _profileEditorInitializing;
 
-        [ValidatePrototypeId<GuideEntryPrototype>]
         private const string DefaultSpeciesGuidebook = "Species";
 
         public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
@@ -992,11 +991,7 @@ namespace Content.Client.Lobby.UI
             SpeciesButton.Clear();
             _species.Clear();
 
-            _species.AddRange(
-                _prototypeManager.EnumeratePrototypes<SpeciesPrototype>()
-                .Where(o => o.RoundStart)
-                .OrderBy(o => Loc.GetString(o.Name))
-            );
+            _species.AddRange(_prototypeManager.EnumeratePrototypes<SpeciesPrototype>().Where(o => o.RoundStart));
             var speciesIds = _species.Select(o => o.ID).ToList();
 
             for (var i = 0; i < _species.Count; i++)

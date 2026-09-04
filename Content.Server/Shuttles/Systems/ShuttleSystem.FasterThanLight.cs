@@ -368,7 +368,7 @@ public sealed partial class ShuttleSystem
         string? priorityTag = null)
     {
         // TODO: Validation
-        if (!TryComp<FTLDestinationComponent>(_mapManager.GetMapEntityId(_transform.GetMapId(target)), out var dest))
+        if (!TryComp<FTLDestinationComponent>(_mapManager.GetMap(_transform.GetMapId(target)), out var dest))
         {
             return;
         }
@@ -861,12 +861,12 @@ public sealed partial class ShuttleSystem
         _audio.SetGridAudio(audio);
 
         // Re-enable map if it was paused.
-        if (TryComp<FTLDestinationComponent>(_mapManager.GetMapEntityId(mapId), out var dest))
+        if (TryComp<FTLDestinationComponent>(_mapManager.GetMap(mapId), out var dest))
         {
             dest.Enabled = true;
         }
 
-        _mapManager.SetMapPaused(mapId, false);
+        _mapManager.SetPaused(mapId, false);
         Smimsh(uid, xform: xform);
 
         // Add cooldown before removing the FTL component

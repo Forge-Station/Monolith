@@ -2,7 +2,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.GameStates;
 using Content.Shared.Access.Components;
 using Content.Shared.Containers.ItemSlots;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.PDA
 {
@@ -25,7 +25,7 @@ namespace Content.Shared.PDA
         // Really this should just be using ItemSlot.StartingItem. However, seeing as we have so many different starting
         // PDA's and no nice way to inherit the other fields from the ItemSlot data definition, this makes the yaml much
         // nicer to read.
-        [DataField("id", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("id", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string? IdCard;
 
         [ViewVariables] public EntityUid? ContainedId;

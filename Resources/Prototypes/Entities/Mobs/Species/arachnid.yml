@@ -45,9 +45,6 @@
   # Damage (Self)
   - type: Bloodstream
     bloodReagent: CopperBlood
-  - type: Damageable #Forge-Change-add
-    damageContainer: Biological #Forge-Change
-    damageModifierSet: ForgeArachnid #Forge-Change
   # Damage (Others)
   - type: MeleeWeapon
     animation: WeaponArcBite

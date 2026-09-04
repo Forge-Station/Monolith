@@ -6,6 +6,8 @@ using Content.Server.Power.EntitySystems;
 using Content.Shared.Decals;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 
 namespace Content.Server._Mono.Drill;
 
@@ -15,7 +17,6 @@ public partial class ShipDrillSystem : EntitySystem
     [Dependency] private EntityLookupSystem _look = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private ITileDefinitionManager _tileDef = default!;
     [Dependency] private TileSystem _tile = default!;
     [Dependency] private SharedDecalSystem _decal = default!;
@@ -65,20 +66,21 @@ public partial class ShipDrillSystem : EntitySystem
                 angle,
                 coords.Position);
 
-            var grids = _mapManager.FindGridsIntersecting(_xform.GetMapId(dGrid.Value), worldBox);
+            var grids = new List<Entity<MapGridComponent>>();
+            _map.FindGridsIntersecting(_xform.GetMapId(dGrid.Value), worldBox.CalcBoundingBox(), ref grids);
 
             foreach (var grid in grids)
             {
                 if (grid.Owner == dGrid)
                     continue;
 
-                var tiles = _map.GetTilesIntersecting(grid.Owner, grid, tileWorldBox);
+                var tiles = _map.GetTilesIntersecting(grid.Owner, grid.Comp, tileWorldBox);
                 _look.GetEntitiesIntersecting(grid.Owner, worldBox, _ents, LookupFlags.Static);
 
                 foreach (var ent in _ents)
                 {
                     comp.DrillType?.Drill(ent, uid, this, EntityManager);
-                    var tileRef = _map.GetTileRef(grid.Owner, grid, Transform(ent).Coordinates);
+                    var tileRef = _map.GetTileRef(grid.Owner, grid.Comp, Transform(ent).Coordinates);
                     _nonEmptyTiles.Add(tileRef);
                 }
 

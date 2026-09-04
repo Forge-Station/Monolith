@@ -1,6 +1,6 @@
-﻿using Content.Server.Xenoarchaeology.XenoArtifacts.Effects.Systems;
+using Content.Server.Xenoarchaeology.XenoArtifacts.Effects.Systems;
 using Content.Shared.Chemistry.Reagent;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Xenoarchaeology.XenoArtifacts.Effects.Components;
 
@@ -14,7 +14,7 @@ public sealed partial class FoamArtifactComponent : Component
     /// The list of reagents that will randomly be picked from
     /// to choose the foam reagent
     /// </summary>
-    [DataField("reagents", required: true, customTypeSerializer: typeof(PrototypeIdListSerializer<ReagentPrototype>))]
+    [DataField("reagents", required: true, customTypeSerializer: typeof(ProtoId<ReagentPrototype>))]
     public List<string> Reagents = new();
 
     /// <summary>

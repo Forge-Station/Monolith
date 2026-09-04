@@ -1,46 +1,45 @@
 <Document>
-  # Расы
+  # Species
 
-  На фронтире можно встретить множество различных рас
+  Nanotrasen employs a variety of sapient species.
 
   <Box>
-    <GuideEntityEmbed Entity="MobArachnid" Caption="Арахнид"/>
-    <GuideEntityEmbed Entity="MobDiona" Caption="Диона"/>
-    <GuideEntityEmbed Entity="MobDwarf" Caption="Дворф"/>
-    <GuideEntityEmbed Entity="MobHuman" Caption="Человек"/>
+    <GuideEntityEmbed Entity="MobArachnid" Caption="Arachnid"/>
+    <GuideEntityEmbed Entity="MobDiona" Caption="Diona"/>
+    <GuideEntityEmbed Entity="MobDwarf" Caption="Dwarf"/>
+    <GuideEntityEmbed Entity="MobHuman" Caption="Human"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="MobMoth" Caption="Ниан"/>
-    <GuideEntityEmbed Entity="MobReptilian" Caption="Унатх"/>
-    <GuideEntityEmbed Entity="MobSlimePerson" Caption="Слайм"/>
-    <GuideEntityEmbed Entity="MobVox" Caption="Вокс"/>
-    <GuideEntityEmbed Entity="MobResomi" Caption="Резоми"/>
-    <GuideEntityEmbed Entity="MobIPCDummy" Caption="КПБ"/>
+    <GuideEntityEmbed Entity="MobMoth" Caption="Moth Person"/>
+    <GuideEntityEmbed Entity="MobReptilian" Caption="Reptilian"/>
+    <GuideEntityEmbed Entity="MobSlimePerson" Caption="Slime Person"/>
+    <GuideEntityEmbed Entity="MobVox" Caption="Vox"/>
+    <GuideEntityEmbed Entity="MobResomi" Caption="Resomi"/>
+    <GuideEntityEmbed Entity="MobIPCDummy" Caption="I.P.C."/>
   </Box>
 
-  # Расы с New-Frontier 
+  # Frontier specific species
   <Box>
-    <GuideEntityEmbed Entity="MobGoblin" Caption="Гоблин"/>
+    <GuideEntityEmbed Entity="MobGoblin" Caption="Goblin"/>
   </Box>
-  # Расы с Delta-V
+  # Delta-V specific species
   <Box>
-    <GuideEntityEmbed Entity="MobVulpkanin" Caption="Вульпканин"/>
-    <GuideEntityEmbed Entity="MobHarpy" Caption="Гарпия"/>
-    <GuideEntityEmbed Entity="MobOni" Caption="Они"/>
-    <GuideEntityEmbed Entity="MobChitinid" Caption="Хитинид"/>
-    <GuideEntityEmbed Entity="MobRodentia" Caption="Раткин"/>
-  </Box>
-
-  # Расы с Goobstation 
-  <Box>
-    <GuideEntityEmbed Entity="MobTajaran" Caption="Таяран"/>
+    <GuideEntityEmbed Entity="MobVulpkanin" Caption="Vulpkanin"/>
+    <GuideEntityEmbed Entity="MobFelinid" Caption="Felinid"/>
+    <GuideEntityEmbed Entity="MobHarpy" Caption="Harpy"/>
+    <GuideEntityEmbed Entity="MobOni" Caption="Oni"/>
+    <GuideEntityEmbed Entity="MobChitinid" Caption="Chitinid"/>
   </Box>
 
-  #Расы с Wega
+  # Monolith specific species
   <Box>
-    <GuideEntityEmbed Entity="MobAriral" Caption="Арирал"/>
-    <GuideEntityEmbed Entity="MobDemon" Caption="Аркана"/>
-    <GuideEntityEmbed Entity="MobSkrell" Caption="Скрелл"/>
+    <GuideEntityEmbed Entity="MobProtogen" Caption="Protogen"/>
+  </Box>
+
+  # Goobstation specific species
+  <Box>
+    <GuideEntityEmbed Entity="MobTajaran" Caption="Tajaran"/>
+    <GuideEntityEmbed Entity="MobYowie" Caption="Yowie"/>
   </Box>
 
 </Document>

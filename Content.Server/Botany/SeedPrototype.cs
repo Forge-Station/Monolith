@@ -5,8 +5,8 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Random;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
+
 using Robust.Shared.Utility;
 
 namespace Content.Server.Botany;
@@ -130,13 +130,13 @@ public partial class SeedData
     /// <summary>
     ///     The entity prototype that is spawned when this type of seed is extracted from produce using a seed extractor.
     /// </summary>
-    [DataField("packetPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("packetPrototype", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string PacketPrototype = "SeedBase";
 
     /// <summary>
     ///     The entity prototype this seed spawns when it gets harvested.
     /// </summary>
-    [DataField("productPrototypes", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
+    [DataField("productPrototypes", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public List<string> ProductPrototypes = new();
 
     [DataField] public Dictionary<string, SeedChemQuantity> Chemicals = new();
@@ -248,7 +248,7 @@ public partial class SeedData
 
     [DataField("screaming")] public bool CanScream;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))] public string KudzuPrototype = "WeakKudzu";
+    [DataField(customTypeSerializer: typeof(ProtoId<EntityPrototype>))] public string KudzuPrototype = "WeakKudzu";
 
     [DataField] public bool TurnIntoKudzu;
     [DataField] public string? SplatPrototype { get; set; }
@@ -294,7 +294,7 @@ public partial class SeedData
     /// <summary>
     ///     The seed prototypes this seed may mutate into when prompted to.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<SeedPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<SeedPrototype>))]
     public List<string> MutationPrototypes = new();
 
     public SeedData Clone()

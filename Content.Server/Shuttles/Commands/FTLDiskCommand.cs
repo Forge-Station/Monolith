@@ -25,10 +25,8 @@ public sealed partial class FTLDiskCommand : LocalizedCommands
 
     public override string Command => "ftldisk";
 
-    [ValidatePrototypeId<EntityPrototype>]
     public const string CoordinatesDisk = "CoordinatesDisk";
 
-    [ValidatePrototypeId<EntityPrototype>]
     public const string DiskCase = "DiskCase";
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {

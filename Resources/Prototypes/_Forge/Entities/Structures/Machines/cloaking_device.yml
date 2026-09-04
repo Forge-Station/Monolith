@@ -1,0 +1,173 @@
+﻿- type: entity
+  id: CloakingDeviceBase
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: PointLight
+    enabled: false
+    color: "#349BEB"
+    radius: 2
+    energy: 1.5
+  - type: LitOnPowered
+  - type: ExtensionCableReceiver
+  - type: Appearance
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/anomaly_generator.ogg
+  - type: WiresPanel
+  - type: WiresVisuals
+  - type: StaticPrice
+    price: 2000
+
+- type: entity
+  id: CloakingDeviceStick
+  parent: CloakingDeviceBase
+  name: CDM-S "Stick"
+  description: The latest device for absorbing and dissipating heat and waves emitted by shuttles, which is popular in the civilian market.
+  components:
+  - type: Sprite
+    sprite: _Forge/CloakingDevice/cloackingDeviceStick.rsi
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: light
+      map: ["cloakingLightLayer"]
+      visible: false
+      shader: unshaded
+    - state: symbol
+      map: ["cloakingSymbolLayer"]
+      visible: false
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        cloakingLightLayer:
+          True: { visible: true }
+          False: { visible: false }
+        cloakingSymbolLayer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.WiresVisualLayers.MaintenancePanel:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: true }
+          False: { visible: false }
+  - type: CloakingShuttleDevice
+  - type: ApcPowerReceiver
+    powerLoad: 3000
+  - type: Machine
+    board: MachineDriveCTLA25Circuitboard
+
+- type: entity
+  id: CloakingDeviceChameleon
+  parent: CloakingDeviceBase
+  name: CDM-A "Chameleon"
+  description: An advanced concealment device featuring improved heat sinks, which makes its design more expensive, complex, and energy intensive.
+  components:
+  - type: Sprite
+    sprite: _Forge/CloakingDevice/cloackingDeviceChameleon.rsi
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: light
+      map: ["cloakingLightLayer"]
+      visible: false
+      shader: unshaded
+    - state: symbol
+      map: ["cloakingSymbolLayer"]
+      visible: false
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        cloakingLightLayer:
+          True: { visible: true }
+          False: { visible: false }
+        cloakingSymbolLayer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.WiresVisualLayers.MaintenancePanel:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: true }
+          False: { visible: false }
+  - type: CloakingShuttleDevice
+  - type: ApcPowerReceiver
+    powerLoad: 3000
+  - type: Machine
+    board: MachineDriveCTLA25Circuitboard
+
+- type: entity
+  id: CloakingDeviceWeepingAngel
+  parent: CloakingDeviceBase
+  name: ADSCDM "Weeping Angel"
+  description: The Forerunner device, which is extremely expensive to build and maintain, features a massive heat sink and rapid heat dissipation.
+  components:
+  - type: Sprite
+    sprite: _Forge/CloakingDevice/cloackingDeviceWeepingAngel.rsi
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: light
+      map: ["cloakingLightLayer"]
+      visible: false
+      shader: unshaded
+    - state: lighting_animation
+      map: ["cloakingLightingAnimationLayer"]
+      visible: false
+      shader: unshaded
+    - state: sphere_animation
+      map: ["cloakingSphereAnimationLayer"]
+      visible: false
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+    offset: 0.5, -0.5
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        cloakingLightLayer:
+          True: { visible: true }
+          False: { visible: false }
+        cloakingLightingAnimationLayer:
+          True: { visible: true }
+          False: { visible: false }
+        cloakingSphereAnimationLayer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.WiresVisualLayers.MaintenancePanel:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-1.45,1.45,0.45"
+        density: 500
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
+        - Opaque
+  - type: CloakingShuttleDevice
+  - type: ApcPowerReceiver
+    powerLoad: 3000
+  - type: Machine
+    board: MachineDriveCTLA25Circuitboard

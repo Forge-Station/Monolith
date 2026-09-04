@@ -6,7 +6,6 @@ using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
-using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -19,7 +18,6 @@ public sealed partial class MappingManager : IPostInjectInit
 {
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private ILogManager _log = default!;
-    [Dependency] private IMapManager _map = default!;
     [Dependency] private IServerNetManager _net = default!;
     [Dependency] private IPlayerManager _players = default!;
     [Dependency] private IEntitySystemManager _systems = default!;

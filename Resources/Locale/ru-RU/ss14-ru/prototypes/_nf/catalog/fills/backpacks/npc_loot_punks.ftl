@@ -10,4 +10,5 @@ ent-ClothingBackpackPunkLootC = { ent-ClothingBackpackPunkLootA }
 ent-ClothingBackpackPunkLootD = { ent-ClothingBackpackPunkLootA }
     .desc = { ent-ClothingBackpackPunkLootA.desc }
 
-ent-ClothingBackpackPunkLootBoss = ClothingBackpackPunkLootBoss
+ent-ClothingBackpackPunkLootBoss = { ent-ClothingBackpackPunkLootA }
+    .desc = { ent-ClothingBackpackPunkLootA.desc }

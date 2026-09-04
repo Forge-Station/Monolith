@@ -3,7 +3,7 @@ using Content.Shared.Database;
 using Content.Shared.EntityEffects;
 using Content.Shared.Explosion;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 using System.Text.Json.Serialization;
 
 namespace Content.Server.EntityEffects.Effects;
@@ -14,7 +14,7 @@ public sealed partial class ExplosionReactionEffect : EntityEffect
     /// <summary>
     ///     The type of explosion. Determines damage types and tile break chance scaling.
     /// </summary>
-    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdSerializer<ExplosionPrototype>))]
+    [DataField(required: true, customTypeSerializer: typeof(ProtoId<ExplosionPrototype>))]
     public string ExplosionType = default!;
 
     /// <summary>

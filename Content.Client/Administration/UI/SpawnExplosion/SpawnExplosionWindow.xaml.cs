@@ -19,7 +19,7 @@ namespace Content.Client.Administration.UI.SpawnExplosion;
 public sealed partial class SpawnExplosionWindow : DefaultWindow
 {
     [Dependency] private IClientConsoleHost _conHost = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    private readonly SharedMapSystem _mapSystem;
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IEntityManager _entMan = default!;
@@ -38,6 +38,7 @@ public sealed partial class SpawnExplosionWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        _mapSystem = _entMan.System<SharedMapSystem>();
         _transform = _entMan.System<TransformSystem>();
         _eui = eui;
 
@@ -87,7 +88,7 @@ public sealed partial class SpawnExplosionWindow : DefaultWindow
     {
         _mapData.Clear();
         MapOptions.Clear();
-        foreach (var map in _mapManager.GetAllMapIds())
+        foreach (var map in _mapSystem.GetAllMapIds())
         {
             _mapData.Add(map);
             MapOptions.AddItem(map.ToString());

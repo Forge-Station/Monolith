@@ -1,6 +1,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Bible.Components
 {
@@ -24,7 +24,7 @@ namespace Content.Server.Bible.Components
         /// <summary>
         /// Used for a special item only the Chaplain can summon. Usually a mob, but supports regular items too.
         /// </summary>
-        [DataField("specialItem", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("specialItem", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string? SpecialItemPrototype = null;
         public bool AlreadySummoned = false;
 
@@ -37,7 +37,7 @@ namespace Content.Server.Bible.Components
         [ViewVariables]
         public EntityUid? Summon = null;
 
-        [DataField("summonAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("summonAction", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string SummonAction = "ActionBibleSummon";
 
         [DataField("summonActionEntity")]

@@ -1,27 +1,26 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2TTI] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitTrauma
   name: armed trauma unit T-23 tacsuit helmet
   description: The standard combat suit of the Armed Trauma Unit, outfitted with a limited-range radar hud as well as a medical hud.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit.rsi # Forge-change
   - type: PointLight
     color: "#4e88a6"
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
-    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
-    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
+  # - type: NightVision # Forge-change  
+  #   relayOverlay: true # Forge-change
+  #   goggleEffect: true # Forge-change
+  #   action: ActionToggleNightVision # Forge-change
+  #   viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
+  #   viewCircleCount: 2 # Forge-change
+  #   viewCircleSpacing: 280 # Forge-change
+  #   phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+  #   lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+  #   amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -56,31 +55,31 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4TTI, ShowSecurityIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitTraumaLeader
   name: armed trauma unit T-53 tacsuit helmet
   description: The commander's tacsuit in the Armed Trauma Unit, outfitted with a medical and long-range radar hud as well as thermals and night vision.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi # Forge-change
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi # Forge-change
+    sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi # Forge-change
   - type: PointLight
     color: "#4e88a6"
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision # Gen 4 quadtube
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
-    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
-    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+  # - type: NightVision # Gen 4 quadtube # Forge-change
+  #   relayOverlay: true # Forge-change
+  #   goggleEffect: true # Forge-change
+  #   action: ActionToggleNightVision # Forge-change
+  #   viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
+  #   viewCircleCount: 2 # Forge-change
+  #   viewCircleSpacing: 280 # Forge-change
+  #   phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+  #   lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+  #   amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: ThermalVision
     flashDurationMultiplier: 2
     pulseTime: 3

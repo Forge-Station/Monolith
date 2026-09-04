@@ -9,17 +9,14 @@ public abstract class SharedApcRequiresSlotSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ApcRequiresSlotComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ApcRequiresSlotComponent, ComponentRemove>(OnRemove);
-    }
-
-    private void OnInit(EntityUid uid, ApcRequiresSlotComponent component, ComponentInit args)
-    {
-        _slots.AddItemSlot(uid, ApcRequiresSlotComponent.BatterySlotId, component.BatterySlot);
     }
 
     private void OnRemove(EntityUid uid, ApcRequiresSlotComponent component, ComponentRemove args)
     {
-        _slots.RemoveItemSlot(uid, component.BatterySlot);
+        if (!_slots.TryGetSlot(uid, ApcRequiresSlotComponent.BatterySlotId, out var slot))
+            return;
+
+        _slots.RemoveItemSlot(uid, slot);
     }
 }

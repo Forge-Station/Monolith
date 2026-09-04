@@ -15,3 +15,9 @@
     Steel: 500
     Glass: 200
     Plastic: 100
+
+- type: latheRecipe
+  id: MaterialReclaimerMachineCircuitboardRecipe
+  parent: BaseCircuitboardRecipe
+  result: MaterialReclaimerMachineCircuitboard
+  

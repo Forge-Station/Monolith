@@ -140,9 +140,9 @@ public sealed partial class NcContractSystem : EntitySystem
         Entity<MapGridComponent> grid;
         try
         {
-            grid = _mapManager.CreateGridEntity(generationMapId);
+            grid = _map.CreateGridEntity(generationMapId);
             _xform.SetMapCoordinates(grid, new MapCoordinates(Vector2.Zero, generationMapId));
-            _mapManager.DoMapInitialize(generationMapId);
+            _map.InitializeMap(generationMapId);
         }
         catch (Exception e)
         {
@@ -358,7 +358,7 @@ public sealed partial class NcContractSystem : EntitySystem
             .Enlarged(Math.Max(0f, safetyRadius));
 
         _huntDebrisPlacementGridScratch.Clear();
-        _mapManager.FindGridsIntersecting(
+        _map.FindGridsIntersecting(
             coords.MapId,
             bounds,
             ref _huntDebrisPlacementGridScratch,
@@ -411,7 +411,7 @@ public sealed partial class NcContractSystem : EntitySystem
             .Enlarged(Math.Max(0f, safetyRadius));
 
         _huntDebrisPlacementGridScratch.Clear();
-        _mapManager.FindGridsIntersecting(
+        _map.FindGridsIntersecting(
             xform.MapID,
             bounds,
             ref _huntDebrisPlacementGridScratch,

@@ -7,7 +7,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Effects
-    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    sprite: _Forge/Effects/boarding_teleport_warmup.rsi
     layers:
     - state: warmup
       shader: unshaded
@@ -28,7 +28,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Effects
-    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    sprite: _Forge/Effects/boarding_teleport_warmup.rsi
     layers:
     - state: warmup
       shader: unshaded
@@ -50,7 +50,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Effects
-    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    sprite: _Forge/Effects/boarding_teleport_warmup.rsi
     layers:
     - state: warmup
       shader: unshaded
@@ -72,7 +72,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Effects
-    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    sprite: _Forge/Effects/boarding_teleport_warmup.rsi
     layers:
     - state: warmup
       shader: unshaded
@@ -94,7 +94,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Effects
-    sprite: Forge/Effects/boarding_teleport_warmup.rsi
+    sprite: _Forge/Effects/boarding_teleport_warmup.rsi
     layers:
     - state: flash
       shader: unshaded

@@ -64,10 +64,13 @@
           True: { visible: true }
           False: { visible: false }
   - type: CloakingShuttleDevice
+    duration: 45
+    cooldown: 120
+    shieldDisablingInCloaking: true
   - type: ApcPowerReceiver
-    powerLoad: 3000
+    powerLoad: 20000
   - type: Machine
-    board: MachineDriveCTLA25Circuitboard
+    board: MachineCloakingCDMSCircuitboard
 
 - type: entity
   id: CloakingDeviceChameleon
@@ -105,10 +108,13 @@
           True: { visible: true }
           False: { visible: false }
   - type: CloakingShuttleDevice
+    duration: 30
+    cooldown: 30
+    shieldDisablingInCloaking: true
   - type: ApcPowerReceiver
-    powerLoad: 3000
+    powerLoad: 40000
   - type: Machine
-    board: MachineDriveCTLA25Circuitboard
+    board: MachineCloakingChameleonCircuitboard
 
 - type: entity
   id: CloakingDeviceWeepingAngel
@@ -167,7 +173,12 @@
         - BulletImpassable
         - Opaque
   - type: CloakingShuttleDevice
+    duration: 120
+    cooldown: 30
+    shieldDisablingInCloaking: false
   - type: ApcPowerReceiver
-    powerLoad: 3000
+    powerLoad: 60000
+  - type: Construction
+    graph: Machine2x2
   - type: Machine
-    board: MachineDriveCTLA25Circuitboard
+    board: MachineCloakingWeepingAngelCircuitboard

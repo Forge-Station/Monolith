@@ -3,12 +3,12 @@
 [RegisterComponent]
 public sealed partial class CloakingShuttleDeviceComponent : Component
 {
-    [DataField("cooldown")]
-    public float Cooldown = 15f;
-
     [DataField("duration")]
-    public float Duration = 30f;
+    public float Duration = 45f;
+
+    [DataField("cooldown")]
+    public float Cooldown = 120f;
 
     [DataField("shieldDisablingInCloaking")]
-    public bool ShieldDisablingInCloaking;
+    public bool ShieldDisablingInCloaking = true;
 }

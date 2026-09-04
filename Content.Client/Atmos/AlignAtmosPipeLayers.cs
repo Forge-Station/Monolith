@@ -118,7 +118,14 @@ public sealed partial class AlignAtmosPipeLayers : SnapgridCenter
     {
         var gridUid = _entityManager.System<SharedTransformSystem>().GetGrid(MouseCoords);
 
-        if (gridUid == null || Grid == null)
+        // Forge-Change: keep Grid in sync so SnapgridCenter.Render never sees a stale Grid.
+        if (gridUid == null)
+        {
+            Grid = null;
+            return;
+        }
+
+        if (Grid == null)
             return;
 
         // Forge-Change: shared pipe-layer guide positions
@@ -157,8 +164,13 @@ public sealed partial class AlignAtmosPipeLayers : SnapgridCenter
 
         var gridId = _transformSystem.GetGrid(MouseCoords);
 
+        // Forge-Change: clear Grid so SnapgridCenter.Render does not NRE when the
+        // cursor leaves the grid (same failure mode as AlignRCDConstruction).
         if (!_entityManager.TryGetComponent<MapGridComponent>(gridId, out var mapGrid))
+        {
+            Grid = null;
             return;
+        }
 
         CurrentTile = _mapSystem.GetTileRef(gridId.Value, mapGrid, MouseCoords);
         GridDistancing = mapGrid.TileSize;

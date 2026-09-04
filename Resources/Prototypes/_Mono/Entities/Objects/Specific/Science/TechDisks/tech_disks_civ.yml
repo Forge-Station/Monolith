@@ -333,3 +333,23 @@
     - BluespaceMatterBinStockPart
     - QuadraticCapacitorStockPart
     - FemtoManipulatorStockPart
+
+# Forge-change
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
+  id: TechDiskCloaking
+  name: disc with cloaking technology ADSCDM "Weeping Angel"
+  description: A disk containing a cloaking device ADSCDM "Weeping Angel"
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base"]
+      color: "#d4d4d4"
+    - state: label
+    - state: protect
+    - state: holo
+      shader: unshaded
+  - type: TechnologyDisk
+    recipes:
+    - MachineCloakingWeepingAngelCircuitboard

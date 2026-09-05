@@ -41,6 +41,14 @@
   - type: StaticPrice
     price: 1400
     vendPrice: 10000
+  - type: Tag # Forge-change
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: engraving-TTIStaff
+    hasEngravingText: forge-engraving-generic-has-message
 
 - type: entity
   parent: [ForgeClothingOuterHardsuitBase, BaseFactionGearOtherFactionT1, ClothingFlightProfileEasy] # Forge-change parent BaseFactionGearOtherFactionT1, add ForgeClothingOuterHardsuitBase, add ClothingFlightProfileEasy
@@ -86,3 +94,11 @@
   - type: StaticPrice
     price: 4200
     vendPrice: 25000
+  - type: Tag # Forge-change
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: engraving-TTIStaff
+    hasEngravingText: forge-engraving-generic-has-message

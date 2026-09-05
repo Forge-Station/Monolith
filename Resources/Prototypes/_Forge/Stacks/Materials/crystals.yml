@@ -1,0 +1,6 @@
+- type: stack
+  id: TTIMedicalCredit
+  name: tti medical credit
+  icon: { sprite: /Textures/Forge/Objects/Materials/TTI/ttiuplinkcoin.rsi, state: coin }
+  spawn: TTIMedicalCredit1
+  maxCount: 100

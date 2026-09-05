@@ -15,3 +15,9 @@
     - Inorganic
     - Silicon
     - Biological
+  - type: Tag
+    tags:
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: engraving-TTIStaff
+    hasEngravingText: forge-engraving-generic-has-message

@@ -1,0 +1,16 @@
+- type: entity
+  parent: BaseVendingMachineRestock
+  id: VendingMachineRestockMedicalTTI
+  name: NanoMed restock box
+  description: Slot into your department's NanoMed or NanoMedPlus to dispense. Handle with care. A label reads "THE BOX IS TAMPER-PROOF AND WILL DESTROY ITS CONTENT ON HARM." # Frontier: add angry label
+  components:
+  - type: VendingMachineRestock
+    canRestock:
+    - TTIMedInventory
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Service/vending_machine_restock.rsi
+    layers:
+    - state: base
+    - state: green_bit
+      shader: unshaded
+    - state: refill_tti

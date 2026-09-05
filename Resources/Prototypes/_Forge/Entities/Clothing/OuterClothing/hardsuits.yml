@@ -421,3 +421,11 @@
   - type: StaticPrice
     price: 2800
     vendPrice: 20000
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: engraving-TTIStaff
+    hasEngravingText: forge-engraving-generic-has-message

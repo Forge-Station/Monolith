@@ -1,0 +1,55 @@
+- type: entity
+  parent: [StorePresetTTIUplink, VendingMachine]
+  id: VendingMachineTTIUplink
+  name: TTI equipment requisition station
+  description: A central TSFMC material access lift. Lets you access deep storage at the cost of FMC, which represent merit and accumulated resources.
+  components:
+  - type: VendingMachine
+    cashSlot: Null
+    offState: tti
+    brokenState: broken
+    normalState: normal-unshaded
+    ejectState: eject-unshaded
+    denyState: deny-unshaded
+  - type: Advertise
+    pack: FactionUplinkAds
+  - type: Sprite
+    sprite: Forge/Structures/Machines/VendingMachines/tti_vendor.rsi
+    noRot: true
+    layers:
+    - state: tti
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: normal-unshaded
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: panel
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.3
+    color: "#00d1a0"
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: Store
+    categories:
+    - UplinkTTIUtility
+    - UplinkTTIHardsuits
+    - UplinkTTIWeapons
+    - UplinkTTIAmmo
+    - UplinkTTIBundles
+    - UplinkTTIBlueprints
+    balance:
+      TTIMedicalCredit: 25
+  - type: AccessReader
+    access: [["Medical"]]
+  - type: CompanyAccessReader
+    requiredCompanies:
+    - MD
+    popupMessage: company-md-access-denied
+  - type: Tag
+    tags:
+    - FactionStaticUplinkTTI

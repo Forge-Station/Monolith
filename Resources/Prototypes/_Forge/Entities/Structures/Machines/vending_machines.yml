@@ -105,6 +105,48 @@
   - type: MarketModifier
     mod: 25
 
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineMedicalTTI
+  name: TTIMed
+  description: It's a medical drug dispenser. Natural chemicals only!
+  components:
+  - type: VendingMachine
+    pack: TTIMedInventory
+    requiresCash: true
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    ejectState: eject-unshaded
+    denyState: deny-unshaded
+    ejectDelay: 0.6
+    taxAccounts:
+      Frontier: 0.1
+      Medical: 0.9
+  - type: Advertise
+    pack: NanoMedAds
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/vending_medical_tti.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: MarketModifier # Frontier
+    mod: 3 # 5->3 Mono
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#9dc5c9"
+  - type: GuideHelp
+    guides:
+    - MedicalDoctor
+
 #region Company staff
 - type: entity
   parent: [VendingMachineAstroVend, BaseStructureDisableToolUse, BaseStructureAccessReaderImmuneToEmag]

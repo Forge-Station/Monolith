@@ -102,3 +102,21 @@
   components:
     - type: Implanter
       implant: TranexamicImplantDose
+
+- type: entity
+  parent: BaseImplantOnlyImplanter
+  id: TTIPremiumTrackingImplanter
+  suffix: TTI
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Medical/implanter.rsi
+  - type: Item
+    sprite: _Forge/Objects/Specific/Medical/implanter.rsi
+  - type: Implanter
+    implant: TTIPremiumTrackingImplant
+  - type: Engraveable
+    engravedMessage: engraving-TTIStaff
+    HasEngravingText: forge-engraving-generic-has-message
+  - type: StaticPrice
+    price: 100
+    vendPrice: 10000

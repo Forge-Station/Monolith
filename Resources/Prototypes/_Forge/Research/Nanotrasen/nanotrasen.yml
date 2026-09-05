@@ -33,7 +33,21 @@
   - StationAiUploadCircuitboard
   technologyPrerequisites:
   - UniversalMaterialResearchT1
-  position: 13, -1
+  position: 2, 0
+
+# Не заслужили
+# - type: technology
+#   id: NanotrasenLaserDrill
+#   name: research-technology-nanotrasen-flatpack-drill
+#   entityIcon: LaserDrill
+#   discipline: Nanotrasen
+#   tier: 1
+#   cost: 30000
+#   recipeUnlocks:
+#   - LaserDrillCircuitboard
+#   technologyPrerequisites:
+#   - UniversalMaterialResearchT1
+#   position: 14, -1
 
 - type: technology
   id: NanotrasenArmorT1
@@ -51,7 +65,7 @@
   - ClothingOuterHardsuitSecurity
   technologyPrerequisites:
   - UniversalMaterialResearchT1
-  position: 14, 1
+  position: 0, 0
 
 - type: technology
   id: NanotrasenArmorT2
@@ -74,7 +88,7 @@
   - ClothingOuterHardsuitSecurityRed
   technologyPrerequisites:
   - NanotrasenArmorT1
-  position: 14, 3
+  position: 0, 1
 
 - type: technology
   id: NanotrasenArmorT3
@@ -86,21 +100,21 @@
   recipeUnlocks:
   - ClothingOuterHardsuitERTSecurity
   - ClothingUniformJumpsuitERTSecurity
-  - ClothingUniformJumpsuitERTMedic
-  - ClothingUniformJumpsuitERTMailCarrier
-  - ClothingUniformJumpsuitERTEngineer
+  # - ClothingUniformJumpsuitERTMedic
+  # - ClothingUniformJumpsuitERTMailCarrier
+  # - ClothingUniformJumpsuitERTEngineer
   - ClothingUniformJumpsuitERTJanitor
-  - ClothingUniformJumpsuitERTChaplain
+  # - ClothingUniformJumpsuitERTChaplain
   - ClothingHeadHelmetERTSecurity
-  - ClothingHeadHelmetERTMedic
-  - ClothingHeadHelmetERTMailCarrier
-  - ClothingHeadHelmetERTEngineer
+  # - ClothingHeadHelmetERTMedic
+  # - ClothingHeadHelmetERTMailCarrier
+  # - ClothingHeadHelmetERTEngineer
   - ClothingHeadHelmetERTJanitor
   - ClothingMaskGasERT
   technologyPrerequisites:
   - NanotrasenArmorT2
   - UniversalMaterialResearchT2
-  position: 14, 5
+  position: 0, 2
 
 - type: technology
   id: NanotrasenArmorT4
@@ -111,45 +125,46 @@
   cost: 40000
   recipeUnlocks:
   - ClothingBackpackERTSecurity
-  - ClothingBackpackERTMedical
-  - ClothingBackpackERTChaplain
-  - ClothingBackpackERTMailCarrier
-  - ClothingBackpackERTEngineer
+  # - ClothingBackpackERTMedical
+  # - ClothingBackpackERTChaplain
+  # - ClothingBackpackERTMailCarrier
+  # - ClothingBackpackERTEngineer
   - ClothingBackpackERTJanitor
   technologyPrerequisites:
   - NanotrasenArmorT3
-  position: 15, 7
+  position: 0, 3
 
-- type: technology
-  id: NanotrasenArmorT5
-  name: research-technology-nanotrasen-equipment-t5
-  entityIcon: ClothingOuterHardsuitERTJanitor
-  discipline: Nanotrasen
-  tier: 3
-  cost: 70000
-  recipeUnlocks:
-  - ClothingOuterHardsuitERTMedical
-  - ClothingOuterHardsuitERTJanitor
-  - ClothingOuterHardsuitERTEngineer
-  - ClothingOuterHardsuitERTMailCarrier
-  technologyPrerequisites:
-  - NanotrasenArmorT3
-  position: 14, 8
+# Не заслужили
+# - type: technology
+#   id: NanotrasenArmorT5
+#   name: research-technology-nanotrasen-equipment-t5
+#   entityIcon: ClothingOuterHardsuitERTJanitor
+#   discipline: Nanotrasen
+#   tier: 3
+#   cost: 70000
+#   recipeUnlocks:
+#   - ClothingOuterHardsuitERTMedical
+#   - ClothingOuterHardsuitERTJanitor
+#   - ClothingOuterHardsuitERTEngineer
+#   - ClothingOuterHardsuitERTMailCarrier
+#   technologyPrerequisites:
+#   - NanotrasenArmorT3
+#   position: 14, 8
 
-- type: technology
-  id: NanotrasenArmorT6
-  name: research-technology-nanotrasen-equipment-t6
-  entityIcon: ClothingOuterHardsuitERTChaplain
-  discipline: Nanotrasen
-  tier: 3
-  cost: 90000
-  recipeUnlocks:
-  - ClothingOuterHardsuitERTChaplain
-  - ClothingOuterHardsuitCBURN
-  technologyPrerequisites:
-  - NanotrasenArmorT5
-  - UniversalMaterialResearchT3
-  position: 13, 10
+# Не заслужили
+# - type: technology
+#   id: NanotrasenArmorT6
+#   name: research-technology-nanotrasen-equipment-t6
+#   entityIcon: ClothingOuterHardsuitERTChaplain
+#   discipline: Nanotrasen
+#   tier: 3
+#   cost: 90000
+#   recipeUnlocks:
+#   - ClothingOuterHardsuitERTChaplain
+#   technologyPrerequisites:
+#   - NanotrasenArmorT5
+#   - UniversalMaterialResearchT3
+#   position: 13, 10
 
 - type: technology
   id: NanotrasenWeaponT1
@@ -163,7 +178,7 @@
   - WeaponFlareGunSecurity
   technologyPrerequisites:
   - UniversalMaterialResearchT1
-  position: 18, 10
+  position: 1, 0
 
 - type: technology
   id: NanotrasenWeaponT2
@@ -177,7 +192,7 @@
   - WeaponRevolverMateba
   technologyPrerequisites:
   - NanotrasenWeaponT1
-  position: 19, 10
+  position: 1, 1
 
 - type: technology
   id: NanotrasenWeaponT3
@@ -193,7 +208,7 @@
   technologyPrerequisites:
   - NanotrasenWeaponT2
   - UniversalMaterialResearchT3
-  position: 20, 10
+  position: 1, 2
 
 - type: technology
   id: NanotrasenWeaponT4
@@ -207,197 +222,203 @@
   - WeaponEnergyShotgun
   technologyPrerequisites:
   - NanotrasenWeaponT3
-  position: 21, 9
+  position: 1, 3
 
-- type: technology
-  id: NanotrasenWeaponT5
-  name: research-technology-nanotrasen-weapon-equipment-t5
-  entityIcon: WeaponPulseCarbine
-  discipline: Nanotrasen
-  tier: 3
-  cost: 80000
-  recipeUnlocks:
-  - WeaponPulseCarbine
-  - WeaponRifleNtsfLtr
-  - WeaponSubMachineGunVectorNtsfHclm
-  - Magazine45_ACPPistolHighCapacityFMJ
-  - Magazine45_ACPPistolHighCapacityEmpty
-  technologyPrerequisites:
-  - NanotrasenWeaponT3
-  position: 21, 10
+# Не заслужили
+# - type: technology
+#   id: NanotrasenWeaponT5
+#   name: research-technology-nanotrasen-weapon-equipment-t5
+#   entityIcon: WeaponPulseCarbine
+#   discipline: Nanotrasen
+#   tier: 3
+#   cost: 80000
+#   recipeUnlocks:
+#   - WeaponPulseCarbine
+#   - WeaponRifleNtsfLtr
+#   - WeaponSubMachineGunVectorNtsfHclm
+#   - Magazine45_magnumPistolHighCapacityFMJ
+#   - Magazine45_magnumPistolHighCapacityEmpty
+#   technologyPrerequisites:
+#   - NanotrasenWeaponT3
+#   position: 21, 10
 
-- type: technology
-  id: NanotrasenWeaponT6
-  name: research-technology-nanotrasen-weapon-equipment-t6
-  entityIcon: WeaponLRC21PPL
-  discipline: Nanotrasen
-  tier: 3
-  cost: 65000
-  recipeUnlocks:
-  - WeaponLRC21PPL
-  - PulsedPlasmaLaserCanister
-  - WeaponPulseRifle
-  - WeaponLauncherMPSSM
-  - CartridgeMPSSMHEAT
-  - CartridgeMPSSMMissile
-  technologyPrerequisites:
-  - NanotrasenWeaponT3
-  position: 21, 11
+# Не заслужили
+# - type: technology
+#   id: NanotrasenWeaponT6
+#   name: research-technology-nanotrasen-weapon-equipment-t6
+#   entityIcon: WeaponLRC21PPL
+#   discipline: Nanotrasen
+#   tier: 3
+#   cost: 65000
+#   recipeUnlocks:
+#   - WeaponLRC21PPL
+#   - PulsedPlasmaLaserCanister
+#   - WeaponPulseRifle
+#   - WeaponLauncherMPSSM
+#   - CartridgeMPSSMHEAT
+#   - CartridgeMPSSMMissile
+#   technologyPrerequisites:
+#   - NanotrasenWeaponT3
+#   position: 21, 11
 
-- type: technology
-  id: NanotrasenWeaponT7
-  name: research-technology-nanotrasen-weapon-equipment-t7
-  entityIcon: WeaponHeavyPulseCannon
-  discipline: Nanotrasen
-  tier: 4
-  cost: 100000
-  recipeUnlocks:
-  - WeaponMechCombatPulseRifleTSF
-  - WeaponLauncherMk348
-  - WeaponHeavyPulseCannon
-  technologyPrerequisites:
-  - NanotrasenWeaponT4
-  - NanotrasenWeaponT5
-  - NanotrasenWeaponT6
-  position: 22, 10
+# Не заслужили
+# - type: technology
+#   id: NanotrasenWeaponT7
+#   name: research-technology-nanotrasen-weapon-equipment-t7
+#   entityIcon: WeaponHeavyPulseCannon
+#   discipline: Nanotrasen
+#   tier: 4
+#   cost: 100000
+#   recipeUnlocks:
+#   - WeaponMechCombatPulseRifleTSF
+#   - WeaponLauncherMk348
+#   - WeaponHeavyPulseCannon
+#   technologyPrerequisites:
+#   - NanotrasenWeaponT4
+#   - NanotrasenWeaponT5
+#   - NanotrasenWeaponT6
+#   position: 22, 10
 
-- type: technology
-  id: TTItechGypoT1
-  name: research-technology-tti-equipment-t1
-  entityIcon: HypoMiniLimitedEdition
-  discipline: Nanotrasen
-  tier: 1
-  cost: 30000
-  recipeUnlocks:
-  - HypoBrigmedic
-  - HypoMiniLimitedEdition
-  technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  position: 17, -1
+# Ну и всё что ниже тоже не заслужили
+# - type: technology
+#   id: TTItechGypoT1
+#   name: research-technology-tti-equipment-t1
+#   entityIcon: HypoMiniLimitedEdition
+#   discipline: Nanotrasen
+#   tier: 1
+#   cost: 30000
+#   recipeUnlocks:
+#   - HypoBrigmedic
+#   - HypoMiniLimitedEdition
+#   technologyPrerequisites:
+#   - UniversalMaterialResearchT1
+#   position: 17, -1
 
-- type: technology
-  id: TTItechGypoT2
-  name: research-technology-tti-equipment-t2
-  entityIcon: CentCommHypo
-  discipline: Nanotrasen
-  tier: 1
-  cost: 70000
-  recipeUnlocks:
-  - Hypospray
-  - CentCommHypo
-  technologyPrerequisites:
-  - TTItechGypoT1
-  position: 17, -2
+# - type: technology
+#   id: TTItechGypoT2
+#   name: research-technology-tti-equipment-t2
+#   entityIcon: CentCommHypo
+#   discipline: Nanotrasen
+#   tier: 1
+#   cost: 70000
+#   recipeUnlocks:
+#   - Hypospray
+#   - CentCommHypo
+#   technologyPrerequisites:
+#   - TTItechGypoT1
+#   position: 17, -2
 
-- type: technology
-  id: TTItechMed
-  name: research-technology-tti-supplies-t1
-  entityIcon: MedicatedSuture
-  discipline: Nanotrasen
-  tier: 1
-  cost: 20000
-  recipeUnlocks:
-  - BrutepackAdvanced1
-  - OintmentAdvanced1
-  technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  position: 18, -1
+# - type: technology
+#   id: TTItechMed
+#   name: research-technology-tti-supplies-t1
+#   entityIcon: MedicatedSuture
+#   discipline: Nanotrasen
+#   tier: 1
+#   cost: 20000
+#   recipeUnlocks:
+#   - BrutepackAdvanced1
+#   - OintmentAdvanced1
+#   technologyPrerequisites:
+#   - UniversalMaterialResearchT1
+#   position: 18, -1
 
-- type: technology
-  id: TTItechOmnisine
-  name: research-technology-tti-supplies-t2
-  entityIcon: OmnizineChemistryBottle
-  discipline: Nanotrasen
-  tier: 1
-  cost: 50000
-  recipeUnlocks:
-  - OmnizineChemistryBottle
-  - JugOmnizine
-  technologyPrerequisites:
-  - TTItechMed
-  position: 18, -2
+# - type: technology
+#   id: TTItechOmnisine
+#   name: research-technology-tti-supplies-t2
+#   entityIcon: OmnizineChemistryBottle
+#   discipline: Nanotrasen
+#   tier: 1
+#   cost: 50000
+#   recipeUnlocks:
+#   - OmnizineChemistryBottle
+#   - JugOmnizine
+#   technologyPrerequisites:
+#   - TTItechMed
+#   position: 18, -2
 
-- type: technology
-  id: TTItechClothingT1
-  name: research-technology-tti-equipment-t3
-  entityIcon: ClothingUniformJumpsuitATU
-  discipline: Nanotrasen
-  tier: 1
-  cost: 30000
-  recipeUnlocks:
-  - ClothingUniformJumpsuitATU
-  - ClothingUniformJumpskirtTAF
-  - ClothingUniformJumpsuitTraumaBlue
-  - ClothingUniformJumpskirtTraumaBlue
-  - ClothingUniformJumpsuitTraumaStandart
-  - ClothingUniformJumpsuitTraumaDirector
-  technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  position: 21, 0
+# - type: technology
+#   id: TTItechClothingT1
+#   name: research-technology-tti-equipment-t3
+#   entityIcon: ClothingUniformJumpsuitATU
+#   discipline: Nanotrasen
+#   tier: 1
+#   cost: 30000
+#   recipeUnlocks:
+#   - ClothingUniformJumpsuitATU
+#   - ClothingUniformJumpskirtTAF
+#   - ClothingUniformJumpsuitTraumaBlue
+#   - ClothingUniformJumpskirtTraumaBlue
+#   - ClothingUniformJumpsuitTraumaStandart
+#   - ClothingUniformJumpsuitTraumaDirector
+#   technologyPrerequisites:
+#   - UniversalMaterialResearchT1
+#   position: 21, 0
 
-- type: technology
-  id: TTItechClothingT3
-  name: research-technology-tti-equipment-t4
-  entityIcon: ClothingOuterRobeTraumaBomber
-  discipline: Nanotrasen
-  tier: 1
-  cost: 50000
-  recipeUnlocks:
-  - ClothingOuterRobeTraumaBomber
-  - ClothingOuterCoatTrauma
-  - ClothingMaskSterileTrauma
-  - ClothingNeckCloakTrauma
-  - ClothingNeckMantleTrauma
-  - ClothingHeadHatTraumaDirectorBeret
-  - ClothingHeadHatTraumaBeret
-  technologyPrerequisites:
-  - TTItechClothingT1
-  position: 23, 0
+# - type: technology
+#   id: TTItechClothingT3
+#   name: research-technology-tti-equipment-t4
+#   entityIcon: ClothingOuterRobeTraumaBomber
+#   discipline: Nanotrasen
+#   tier: 1
+#   cost: 50000
+#   recipeUnlocks:
+#   - ClothingOuterRobeTraumaBomber
+#   - ClothingOuterCoatTrauma
+#   - ClothingMaskSterileTrauma
+#   - ClothingNeckCloakTrauma
+#   - ClothingNeckMantleTrauma
+#   - ClothingHeadHatTraumaDirectorBeret
+#   - ClothingHeadHatTraumaBeret
+#   technologyPrerequisites:
+#   - TTItechClothingT1
+#   position: 23, 0
 
-- type: technology
-  id: TTItechClothingT2
-  name: research-technology-tti-equipment-t5
-  entityIcon: ClothingOuterHardsuitTrauma
-  discipline: Nanotrasen
-  tier: 1
-  cost: 70000
-  recipeUnlocks:
-  - ClothingOuterHardsuitTrauma
-  - ClothingOuterHardsuitTraumaShooter
-  - ClothingOuterArmorBodyTrauma
-  - ClothingHeadHatArmoredTrauma
-  - ClothingHeadHatArmoredTraumaShooter
-  - ClothingShoesBootsMagTrauma
-  technologyPrerequisites:
-  - TTItechClothingT3
-  - UniversalMaterialResearchT3
-  position: 24, 0
+# - type: technology
+#   id: TTItechClothingT2
+#   name: research-technology-tti-equipment-t5
+#   entityIcon: ClothingOuterHardsuitTrauma
+#   discipline: Nanotrasen
+#   tier: 1
+#   cost: 70000
+#   recipeUnlocks:
+#   - ClothingOuterHardsuitTrauma
+#   - ClothingOuterHardsuitTraumaShooter
+#   - ClothingOuterArmorBodyTrauma
+#   - ClothingHeadHatArmoredTrauma
+#   - ClothingHeadHatArmoredTraumaShooter
+#   - ClothingShoesBootsMagTrauma
+#   technologyPrerequisites:
+#   - TTItechClothingT3
+#   - UniversalMaterialResearchT3
+#   position: 24, 0
 
-- type: technology
-  id: TTItechMachineT1
-  name: research-technology-tti-circuitboard-t1
-  entityIcon: MedicalTechFabCircuitboard
-  discipline: Nanotrasen
-  tier: 1
-  cost: 15000
-  recipeUnlocks:
-  - MedicalTechFabCircuitboard
-  technologyPrerequisites:
-  - UniversalMaterialResearchT1
-  position: 19, -1
+# - type: technology
+#   id: TTItechMachineT1
+#   name: research-technology-tti-circuitboard-t1
+#   entityIcon: MedicalTechFabCircuitboard
+#   discipline: Nanotrasen
+#   tier: 1
+#   cost: 15000
+#   recipeUnlocks:
+#   - MedicalTechFabCircuitboard
+#   technologyPrerequisites:
+#   - UniversalMaterialResearchT1
+#   position: 19, -1
 
-- type: technology
-  id: TTItechMachineT2
-  name: research-technology-tti-circuitboard-t2
-  entityIcon: CloningConsoleComputerCircuitboard
-  discipline: Nanotrasen
-  tier: 1
-  cost: 40000
-  recipeUnlocks:
-  - CloningConsoleComputerCircuitboard
-  - MedicalBiofabMachineBoard
-  - CloningPodMachineCircuitboard
-  - MedicalScannerMachineCircuitboard
-  technologyPrerequisites:
-  - TTItechMachineT1
-  position: 19, -2
+# - type: technology
+#   id: TTItechMachineT2
+#   name: research-technology-tti-circuitboard-t2
+#   entityIcon: CloningConsoleComputerCircuitboard
+#   discipline: Nanotrasen
+#   tier: 1
+#   cost: 40000
+#   recipeUnlocks:
+#   - CloningConsoleComputerCircuitboard
+#   - MedicalBiofabMachineBoard
+#   - CloningPodMachineCircuitboard
+#   - MedicalScannerMachineCircuitboard
+#   technologyPrerequisites:
+#   - TTItechMachineT1
+#   position: 19, -2
+
+# Я убрал мержконфликты, главное не забыть потом переделать КАК НАДО. А не как вышло. Мне лень было разбираться.

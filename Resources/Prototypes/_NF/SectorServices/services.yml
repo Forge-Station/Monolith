@@ -30,8 +30,8 @@
         increasePerSecond: 65 # ~234K per hour, about enough for minimum wage for the default TSFMC size
       Medical:
         !type:SectorBankAccountInfo
-        balance: 8000
-        increasePerSecond: 18 # ~65K per hour, a bit over for the DOC MOM's wage.
+        balance: 20000 # Forge-change: 8000 to 20k
+        increasePerSecond: 7 # Forge-change: ~25K per hour
 #      Mieyo: # Forge-Change: disabled MMC
 #        !type:SectorBankAccountInfo
 #        balance: 150000

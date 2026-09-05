@@ -83,3 +83,55 @@ forge-uplink-security-researchpoointsmall-name = диск исследовате
 forge-uplink-security-researchpoointsmall-desc = Диск для сервера РНД, содержащий 1000 очков.
 forge-uplink-security-researchpoointmedium-name = диск исследовательских очков (5000)
 forge-uplink-security-researchpoointmedium-desc = Диск для сервера РНД, содержащий 5000 очков.
+
+store-category-ttiutility = Утилиты
+store-category-ttihardsuits = Скафандры
+store-category-ttiweapons = Оружие
+store-category-ttiammo = Боеприпасы
+store-category-ttibundles = Наборы
+store-category-ttiblueprints = Чертежи
+# Weapon
+uplink-tti-launchersyringe-name = Шприцемёт
+uplink-tti-launchersyringe-desc = Лучшее оружие любого медика! Наверное...
+# Ammo
+uplink-tti-minisyringe-name = Набор мини-шприцов
+uplink-tti-minisyringe-desc = Включает в себя 8 мини-шприцов и кейс.
+# Utility
+uplink-tti-hypobrigmedic-name = Мини-гипоспрей
+uplink-tti-hypobrigmedic-desc = Не лучшая версия гипоспрея, но со своими задачами справляется. Вмещает 25 единиц.
+uplink-tti-medicaltechfabcircuitboard-name = Медицинский ТехФаб
+uplink-tti-medicaltechfabcircuitboard-desc = Машинная плата медицинского ТехФаба.
+uplink-tti-hypospray-name = Гипоспрей
+uplink-tti-hypospray-desc = Обычный гипоспрей. Вмещает 30 единиц. Что ты ещё ожидал здесь увидеть?
+uplink-tti-clothingshoesbootsmagtrauma-name = Магнитные ботинки
+uplink-tti-clothingshoesbootsmagtrauma-desc = Фирменные магнитные ботинки TTI.
+uplink-tti-cloningconsolecomputercircuitboard-name = Консоль клонирования
+uplink-tti-cloningconsolecomputercircuitboard-desc = Консольная плата консоли клонирования. Смешная тавтология, ну, или не очень.
+uplink-tti-medicalbiofabmachineboard-name = Медицинский биофабрикатор
+uplink-tti-medicalbiofabmachineboard-desc = Машинная плата медицинского биофабрикатора.
+uplink-tti-cloningpodmachinecircuitboard-name = Капсула клонирования
+uplink-tti-cloningpodmachinecircuitboard-desc = Машинная плата капсулы клонирования.
+uplink-tti-medicalscannermachinecircuitboard-name = Медицинский сканер
+uplink-tti-medicalscannermachinecircuitboard-desc = Машинная плата медицинского сканера.
+uplink-tti-omnizinechemistrybottle-name = Бутылочка омнизина
+uplink-tti-omnizinechemistrybottle-desc = Невозможное возможно! Кто-то научился производить омнизин, но это, к сожалению, оказались не вы.
+uplink-tti-restock-name = набор поплнение МедВенда от компании TTI
+uplink-tti-restock-desc = Набор пополнения вендомата с которого компания TTI получает огромный процент от продаж в свой бюджет. Постарайтесь, чтоб вендоматы TTI были заполнены всегда.
+# Hardsuits (Armor)
+uplink-tti-clothingheadhatarmoredtrauma-name = Шлем
+uplink-tti-clothingheadhatarmoredtrauma-desc = Фирменный шлем для врачей.
+uplink-tti-clothingheadhatarmoredtraumashooter-name = Шлем
+uplink-tti-clothingheadhatarmoredtraumashooter-desc = Фирменный шлем для стрелков.
+uplink-tti-clothingouterarmorbodytrauma-name = Бронежилет
+uplink-tti-clothingouterarmorbodytrauma-desc = Фирменный бронежилет и для врачей, и для стрелков.
+uplink-tti-clothingouterhardsuittrauma-name = Скафандр
+uplink-tti-clothingouterhardsuittrauma-desc = Фирменный скафандр для врачей.
+uplink-tti-clothingouterhardsuittraumashooter-name = Скафандр
+uplink-tti-clothingouterhardsuittraumashooter-desc = Фирменный скафандр для стрелков.
+# Blueprints
+uplink-tti-blueprinttechmed-name = Продвинутые медикаменты
+uplink-tti-blueprinttechmed-desc = Рецепт продвинутых медикаментов. Включает в себя регенеративную сеть и медицинскую нить.
+uplink-tti-blueprinttticlothing-name = Униформа
+uplink-tti-blueprinttticlothing-desc = Чертёж униформы. Включает в себя... Да много чего он в себя включает.
+uplink-tti-blueprintttiouterclothing-name = Экипировка
+uplink-tti-blueprintttiouterclothing-desc = Чертёж экипировки.

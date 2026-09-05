@@ -1,0 +1,74 @@
+- type: entity
+  name: TTI Medical Credit
+  parent: BaseItem
+  id: TTIMedicalCredit
+  suffix: 100 TMC
+  description: A token awarded to TTI personnel for turning in contraband. It can be exchanged in an TSFMC uplink device for a variety of law enforcement tools.
+  components:
+  - type: Sprite
+    sprite: Forge/Objects/Materials/TTI/ttiuplinkcoin.rsi
+    state: coin_5
+    layers:
+    - state: coin_5
+      map: ["base"]
+  - type: Item
+    sprite: Forge/Objects/Materials/TTI/ttiuplinkcoin.rsi
+    size: Tiny
+  - type: Stack
+    count: 100
+    stackType: TTIMedicalCredit
+    baseLayer: base
+    layerStates:
+    - coin
+    - coin_2
+    - coin_3
+    - coin_4
+    - coin_5
+  - type: StaticPrice
+    price: 0
+  - type: StackPrice
+    price: 40
+  - type: Currency
+    price:
+      TTIMedicalCredit: 1
+  - type: Appearance
+
+- type: entity
+  parent: TTIMedicalCredit
+  id: TTIMedicalCredit1
+  suffix: 1 TMC
+  components:
+  - type: Sprite
+    state: coin
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: TTIMedicalCredit
+  id: TTIMedicalCredit5
+  suffix: 5 TMC
+  components:
+  - type: Sprite
+    state: coin_2
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: TTIMedicalCredit
+  id: TTIMedicalCredit25
+  suffix: 25 TMC
+  components:
+  - type: Sprite
+    state: coin_3
+  - type: Stack
+    count: 25
+
+- type: entity
+  parent: TTIMedicalCredit
+  id: TTIMedicalCredit50
+  suffix: 50 TMC
+  components:
+  - type: Sprite
+    state: coin_4
+  - type: Stack
+    count: 50

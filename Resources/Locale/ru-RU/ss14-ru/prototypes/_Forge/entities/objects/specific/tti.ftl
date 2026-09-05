@@ -1,0 +1,15 @@
+ent-TTIMedicalCredit = медицинский кредит TTI
+    .desc = Жетон, выдаваемый сотрудникам TTI за спасение умерших. Может быть обменян через станцию запроса оборудования TTI на различные инструменты и снаряжение для медицинской деятельности.
+    .suffix = 100
+ent-TTIMedicalCredit1 = { ent-TTIMedicalCredit }
+    .suffix = 1
+    .desc = { ent-TTIMedicalCredit.desc }
+ent-TTIMedicalCredit5 = { ent-TTIMedicalCredit }
+    .suffix = 5
+    .desc = { ent-TTIMedicalCredit.desc }
+ent-TTIMedicalCredit25 = { ent-TTIMedicalCredit }
+    .suffix = 25
+    .desc = { ent-TTIMedicalCredit.desc }
+ent-TTIMedicalCredit50 = { ent-TTIMedicalCredit }
+    .suffix = 50
+    .desc = { ent-TTIMedicalCredit.desc }

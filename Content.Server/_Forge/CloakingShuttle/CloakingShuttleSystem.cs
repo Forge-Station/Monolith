@@ -1,6 +1,7 @@
 ﻿using Content.Server._Crescent.ShipShields.Components;
 using Content.Server._Mono.SpaceArtillery.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Server.Radio;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Forge.CloakingShuttle;
 using Content.Shared.Power;
@@ -25,12 +26,31 @@ public sealed class CloakingShuttleSystem : EntitySystem
         SubscribeLocalEvent<ShuttleConsoleComponent, CloakingShuttleMessage>(OnShuttleConsoleActivate);
         SubscribeLocalEvent<SpaceArtilleryComponent, GunShotEvent>(OnSpaceArtilleryShot);
 
+        SubscribeLocalEvent<RadioSendAttemptEvent>(OnRadioSendAttempt);
+        SubscribeLocalEvent<RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
+
         SubscribeLocalEvent<CloakingShuttleDeviceComponent, ComponentStartup>(OnDeviceStartup);
         SubscribeLocalEvent<CloakingShuttleDeviceComponent, ComponentShutdown>(OnDeviceShutdown);
         SubscribeLocalEvent<CloakingShuttleDeviceComponent, AnchorStateChangedEvent>(OnDeviceAnchorChanged);
         SubscribeLocalEvent<CloakingShuttleDeviceComponent, PowerChangedEvent>(OnDevicePowerChanged);
 
         SubscribeLocalEvent<CloakingShuttleComponent, ComponentShutdown>(OnCloakShutdown);
+    }
+
+    private void OnRadioReceiveAttempt(ref RadioReceiveAttemptEvent ev)
+    {
+        var gridUid = Transform(ev.RadioReceiver).GridUid;
+        if (TryComp<CloakingShuttleComponent>(gridUid, out var cloakingShuttleComponent)
+            && cloakingShuttleComponent is { Active: true, DeviceRadioReceiveBlocking: true })
+            ev.Cancelled = true;
+    }
+
+    private void OnRadioSendAttempt(ref RadioSendAttemptEvent ev)
+    {
+        var gridUid = Transform(ev.RadioSource).GridUid;
+        if (TryComp<CloakingShuttleComponent>(gridUid, out var cloakingShuttleComponent)
+            && cloakingShuttleComponent is { Active: true, DeviceRadioSendBlocking: true })
+            ev.Cancelled = true;
     }
 
     private void OnCloakShutdown(EntityUid uid, CloakingShuttleComponent cloakingShuttleDeviceComponent, ComponentShutdown args)
@@ -153,6 +173,8 @@ public sealed class CloakingShuttleSystem : EntitySystem
         cloakingShuttleComponent.DeviceCooldown = MathF.Max(cloakingShuttleDeviceComponent.Cooldown, 0f);
         cloakingShuttleComponent.DeviceDuration = MathF.Max(cloakingShuttleDeviceComponent.Duration, 0.1f);
         cloakingShuttleComponent.DeviceShieldDisabling = cloakingShuttleDeviceComponent.ShieldDisablingInCloaking;
+        cloakingShuttleComponent.DeviceRadioSendBlocking = cloakingShuttleDeviceComponent.RadioSendBlockingInCloaking;
+        cloakingShuttleComponent.DeviceRadioReceiveBlocking = cloakingShuttleDeviceComponent.RadioReceiveBlockingInCloaking;
 
         cloakingShuttleComponent.Active = true;
         cloakingShuttleComponent.TimeCooldown = default;
@@ -182,11 +204,6 @@ public sealed class CloakingShuttleSystem : EntitySystem
     }
 
     private void OnShuttleConsoleActivate(EntityUid uid, ShuttleConsoleComponent shuttleConsoleComponent, CloakingShuttleMessage args)
-    {
-        ToggleCloakFromConsole(uid);
-    }
-
-    private void OnIFFConsoleActivate(EntityUid uid, IFFConsoleComponent iffConsoleComponent, CloakingShuttleMessage args)
     {
         ToggleCloakFromConsole(uid);
     }

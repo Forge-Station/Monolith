@@ -11,4 +11,10 @@ public sealed partial class CloakingShuttleDeviceComponent : Component
 
     [DataField("shieldDisablingInCloaking")]
     public bool ShieldDisablingInCloaking = true;
+
+    [DataField("radioSendBlockingInCloaking")]
+    public bool RadioSendBlockingInCloaking = true;
+
+    [DataField("radioReceiveBlockingInCloaking")]
+    public bool RadioReceiveBlockingInCloaking = false;
 }

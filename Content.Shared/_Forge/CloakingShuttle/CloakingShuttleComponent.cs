@@ -10,15 +10,6 @@ public sealed partial class CloakingShuttleComponent : Component
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public bool Active;
 
-    //[ViewVariables(VVAccess.ReadWrite)]
-    //public float Cooldown;
-
-    //[ViewVariables(VVAccess.ReadWrite)]
-    //public float Duration;
-
-    //[ViewVariables(VVAccess.ReadWrite)]
-    //public bool ShieldDisablingInCloaking;
-
     [ViewVariables(VVAccess.ReadWrite)]
     public StartEndTime TimeActive;
 
@@ -33,6 +24,12 @@ public sealed partial class CloakingShuttleComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)]
     public bool DeviceShieldDisabling;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool DeviceRadioSendBlocking;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool DeviceRadioReceiveBlocking;
 
     [ViewVariables(VVAccess.ReadWrite)]
     public ShuttleCloakingStatus Status = ShuttleCloakingStatus.None;

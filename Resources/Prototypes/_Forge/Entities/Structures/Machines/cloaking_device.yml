@@ -67,6 +67,8 @@
     duration: 45
     cooldown: 120
     shieldDisablingInCloaking: true
+    radioSendBlockingInCloaking: true
+    radioReceiveBlockingInCloaking: false
   - type: ApcPowerReceiver
     powerLoad: 20000
   - type: Machine
@@ -111,6 +113,8 @@
     duration: 30
     cooldown: 30
     shieldDisablingInCloaking: true
+    radioSendBlockingInCloaking: true
+    radioReceiveBlockingInCloaking: false
   - type: ApcPowerReceiver
     powerLoad: 40000
   - type: Machine
@@ -176,6 +180,8 @@
     duration: 120
     cooldown: 30
     shieldDisablingInCloaking: false
+    radioSendBlockingInCloaking: true
+    radioReceiveBlockingInCloaking: false
   - type: ApcPowerReceiver
     powerLoad: 60000
   - type: Construction

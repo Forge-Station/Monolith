@@ -1,0 +1,338 @@
+# KoT-change-start
+#region Research Disk
+
+- type: blackMarketContract
+  id: BMContractOtherResearchDisk35000
+  category: Other
+  price: 70000
+  name: black-market-contract-research-disc-35000
+  description: black-market-contract-research-disc-35000-desc
+  icon: ResearchDisk35000
+  purchaseLimit: 0
+  dynamicPrice: false
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 75000
+  contents:
+  - proto: ResearchDisk35000
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherResearchDisk65000
+  category: Other
+  price: 130000
+  name: black-market-contract-research-disc-65000
+  description: black-market-contract-research-disc-65000-desc
+  icon: ResearchDisk65000
+  purchaseLimit: 0
+  dynamicPrice: false
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 135000
+  contents:
+  - proto: ResearchDisk65000
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherResearchDisk100000
+  category: Other
+  price: 200000
+  name: black-market-contract-research-disc-100000
+  description: black-market-contract-research-disc-100000-desc
+  icon: ResearchDisk100000
+  purchaseLimit: 0
+  dynamicPrice: false
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 205000
+  contents:
+  - proto: ResearchDisk100000
+    amount: 1
+
+#region Encryption Key F
+
+- type: blackMarketContract
+  id: BMContractOtherEncryptionKeyNfsd
+  category: Other
+  price: 1000000
+  name: black-market-contract-encryption-key-nfsd
+  description: black-market-contract-encryption-key-nfsd-desc
+  icon: EncryptionKeyNfsd
+  purchaseLimit: 2
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.10
+  dynamicPriceMax: 2000000
+  contents:
+  - proto: EncryptionKeyNfsd
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherEncryptionKeyEmpire
+  category: Other
+  price: 1000000
+  name: black-market-contract-encryption-key-empire
+  description: black-market-contract-encryption-key-empire-desc
+  icon: EncryptionKeyEmpire
+  purchaseLimit: 2
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.10
+  dynamicPriceMax: 2000000
+  contents:
+  - proto: EncryptionKeyEmpire
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherEncryptionKeyRenegade
+  category: Other
+  price: 2000000
+  name: black-market-contract-encryption-key-renegade
+  description: black-market-contract-encryption-key-renegade-desc
+  icon: EncryptionKeyRenegade
+  purchaseLimit: 2
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.20
+  dynamicPriceMax: 4000000
+  contents:
+  - proto: EncryptionKeyRenegade
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherEncryptionKeyService
+  category: Other
+  price: 100000
+  name: black-market-contract-encryption-key-service
+  description: black-market-contract-encryption-key-service-desc
+  icon: EncryptionKeyService
+  purchaseLimit: 4
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.10
+  dynamicPriceMax: 200000
+  contents:
+  - proto: EncryptionKeyService
+    amount: 1
+
+#region Encription Key C
+
+- type: blackMarketContract
+  id: BMContractOtherEncryptionKeyDrakeIndustries
+  category: Other
+  price: 100000
+  name: black-market-contract-encryption-key-drake-industries
+  description: black-market-contract-encryption-key-drake-industries-desc
+  icon: EncryptionKeyDrakeIndustries
+  purchaseLimit: 3
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 200000
+  contents:
+  - proto: EncryptionKeyDrakeIndustries
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherEncryptionKeyNexus
+  category: Other
+  price: 100000
+  name: black-market-contract-encryption-key-nexus
+  description: black-market-contract-encryption-key-nexus-desc
+  icon: EncryptionKeyNexus
+  purchaseLimit: 3
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 200000
+  contents:
+  - proto: EncryptionKeyNexus
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherEncryptionKeyUllmanIndustries
+  category: Other
+  price: 100000
+  name: black-market-contract-encryption-key-ullman-industries
+  description: black-market-contract-encryption-key-ullman-industries-desc
+  icon: EncryptionKeyUllmanIndustries
+  purchaseLimit: 3
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 200000
+  contents:
+  - proto: EncryptionKeyUllmanIndustries
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherEncryptionKeyHarmony
+  category: Other
+  price: 100000
+  name: black-market-contract-encryption-key-harmony
+  description: black-market-contract-encryption-key-harmony-desc
+  icon: EncryptionKeyHarmony
+  purchaseLimit: 3
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 200000
+  contents:
+  - proto: EncryptionKeyHarmony
+    amount: 1
+
+#region Tecnologies Disc
+
+- type: blackMarketContract
+  id: BMContractOtherDisciplinesDiskDrakeIndustries # ЗАМЕНИТЬ НА ПРОТОТИПЫ ДРУГИХ ДИСКОВ ВСЕ ДИСКИ КОМПАНИЙ
+  category: Other
+  price: 100000
+  name: black-market-contract-disciplines-disk-drake-industries
+  description: black-market-contract-disciplines-disk-drake-industries-desc
+  icon: DisciplinesDiskDrakeIndustries
+  purchaseLimit: 5
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.30
+  dynamicPriceMax: 500000
+  contents:
+  - proto: DisciplinesDiskDrakeIndustries
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherDisciplinesDiskUllman # ЗАМЕНИТЬ НА ПРОТОТИПЫ ДРУГИХ ДИСКОВ ВСЕ ДИСКИ КОМПАНИЙ
+  category: Other
+  price: 100000
+  name: black-market-contract-disciplines-disk-ullman
+  description: black-market-contract-disciplines-disk-ullman-desc
+  icon: DisciplinesDiskUllman
+  purchaseLimit: 5
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.30
+  dynamicPriceMax: 500000
+  contents:
+  - proto: DisciplinesDiskUllman
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherDisciplinesDiskNSC # ЗАМЕНИТЬ НА ПРОТОТИПЫ ДРУГИХ ДИСКОВ ВСЕ ДИСКИ КОМПАНИЙ
+  category: Other
+  price: 100000
+  name: black-market-contract-disciplines-disk-NSC
+  description: black-market-contract-disciplines-disk-NSC-desc
+  icon: DisciplinesDiskNSC
+  purchaseLimit: 5
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.30
+  dynamicPriceMax: 500000
+  contents:
+  - proto: DisciplinesDiskNSC
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherDisciplinesDiskNanotrasen # ЗАМЕНИТЬ НА ПРОТОТИПЫ ДРУГИХ ДИСКОВ ВСЕ ДИСКИ КОМПАНИЙ
+  category: Other
+  price: 150000
+  name: black-market-contract-disciplines-disk-nanotrasen
+  description: black-market-contract-disciplines-disk-nanotrasen-desc
+  icon: DisciplinesDiskNanotrasen
+  purchaseLimit: 5
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.30
+  dynamicPriceMax: 500000
+  contents:
+  - proto: DisciplinesDiskNanotrasen
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherDisciplinesDiskHME # ЗАМЕНИТЬ НА ПРОТОТИПЫ ДРУГИХ ДИСКОВ ВСЕ ДИСКИ КОМПАНИЙ
+  category: Other
+  price: 100000
+  name: black-market-contract-disciplines-disk-HME
+  description: black-market-contract-disciplines-disk-HME-desc
+  icon: DisciplinesDiskHME
+  purchaseLimit: 5
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.30
+  dynamicPriceMax: 500000
+  contents:
+  - proto: DisciplinesDiskHME
+    amount: 1
+
+#region Other/Fun
+
+- type: blackMarketContract
+  id: BMContractOtherSpaceCashCounterfeit
+  category: Other
+  price: 100000
+  name: black-market-contract-space-cash-counterfeit
+  description: black-market-contract-space-cash-counterfeit-desc
+  icon: SpaceCashCounterfeit
+  purchaseLimit: 0
+  dynamicPrice: false
+  dynamicPriceIncreasePercent: 0.01
+  dynamicPriceMax: 200000
+  contents:
+  - proto: SpaceCashCounterfeit
+    amount: 300000 #KoT-change 200000 to 300000
+
+- type: blackMarketContract
+  id: BMContractOtherPillSpaceDrugs
+  category: Other
+  price: 500
+  name: black-market-contract-pill-space-drugs
+  description: black-market-contract-pill-space-drugs-desc
+  icon: PillSpaceDrugs
+  purchaseLimit: 30
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 10000
+  contents:
+  - proto: PillSpaceDrugs
+    amount: 5
+
+- type: blackMarketContract
+  id: BMContractOtherSyringeMorphine
+  category: Other
+  price: 1000
+  name: black-market-contract-syringe-morphine
+  description: black-market-contract-syringe-morphine-desc
+  icon: SyringeMorphine
+  purchaseLimit: 20
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 15000
+  contents:
+  - proto: SyringeMorphine
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractOtherOmnizineChemistryBottle
+  category: Other
+  price: 15000
+  name: black-market-contract-omnizine-chemistry-bottle
+  description: black-market-contract-omnizine-chemistry-bottle-desc
+  icon: OmnizineChemistryBottle
+  purchaseLimit: 20
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.30
+  dynamicPriceMax: 150000
+  contents:
+  - proto: OmnizineChemistryBottle
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractOtherDrinkPremiumRumBottleFull
+  category: Other
+  price: 300
+  name: black-market-contract-drink-premium-rum-bottle-full
+  description: black-market-contract-drink-premium-rum-bottle-full-desc
+  icon: DrinkPremiumRumBottleFull
+  purchaseLimit: 10
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 5000
+  contents:
+  - proto: DrinkPremiumRumBottleFull
+    amount: 1
+
+# KoT-change-end
+
+#region Stub Contract
+- type: blackMarketContract
+  id: BMContractStubOther
+  category: Other
+  stub: true
+  price: 0
+  name: black-market-contract-stub-name
+  description: black-market-contract-stub-desc
+  icon: Paper
+  contents: []

@@ -1,0 +1,200 @@
+# Hardsuits
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitERTLeader
+  category: Weapons
+  price: 2500000
+  name: black-market-contract-hardsuit-ert-leader
+  description: black-market-contract-hardsuit-ert-leader-desc
+  icon: ClothingOuterHardsuitERTLeader
+  purchaseLimit: 1
+  dynamicPrice: false
+  contents:
+  - proto: ClothingOuterHardsuitERTLeader
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitSyndieCommander
+  category: Weapons
+  price: 2250000
+  name: black-market-contract-hardsuit-syndie-commander
+  description: black-market-contract-hardsuit-syndie-commander-desc
+  icon: ClothingOuterHardsuitSyndieCommander
+  purchaseLimit: 1
+  dynamicPrice: false
+  contents:
+  - proto: ClothingOuterHardsuitSyndieCommander
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitSyndieMedic
+  category: Weapons
+  price: 1300000
+  name: black-market-contract-hardsuit-syndie-medic
+  description: black-market-contract-hardsuit-syndie-medic-desc
+  icon: ClothingOuterHardsuitSyndieMedic
+  purchaseLimit: 5
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 1650000
+  contents:
+  - proto: ClothingOuterHardsuitSyndieMedic
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitCybersunStealth
+  category: Weapons
+  price: 1400000
+  name: black-market-contract-hardsuit-cybersun-stealth
+  description: black-market-contract-hardsuit-cybersun-stealth-desc
+  icon: ClothingOuterHardsuitCybersunStealth
+  purchaseLimit: 4
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 1900000
+  contents:
+  - proto: ClothingOuterHardsuitCybersunStealth
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitUsspL30
+  category: Weapons
+  price: 1800000
+  name: black-market-contract-hardsuit-ussp-l30
+  description: black-market-contract-hardsuit-ussp-l30-desc
+  icon: ClothingOuterHardsuitUsspL30
+  purchaseLimit: 1
+  dynamicPrice: false
+  contents:
+  - proto: ClothingOuterHardsuitUsspL30
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitM82c
+  category: Weapons
+  price: 800000
+  name: black-market-contract-hardsuit-m82c
+  description: black-market-contract-hardsuit-m82c-desc
+  icon: ClothingOuterHardsuitM82c
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 1200000
+  contents:
+  - proto: ClothingOuterHardsuitM82c
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitRI14
+  category: Weapons
+  price: 900000
+  name: black-market-contract-hardsuit-ri14
+  description: black-market-contract-hardsuit-ri14-desc
+  icon: ClothingOuterHardsuitRI14
+  purchaseLimit: 6
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 1300000
+  contents:
+  - proto: ClothingOuterHardsuitRI14
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitTraumaShooter
+  category: Weapons
+  price: 1100000
+  name: black-market-contract-hardsuit-trauma-shooter
+  description: black-market-contract-hardsuit-trauma-shooter-desc
+  icon: ClothingOuterHardsuitTraumaShooter
+  purchaseLimit: 4
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 1550000
+  contents:
+  - proto: ClothingOuterHardsuitTraumaShooter
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitSyndie
+  category: Weapons
+  price: 1000000
+  name: black-market-contract-hardsuit-syndie
+  description: black-market-contract-hardsuit-syndie-desc
+  icon: ClothingOuterHardsuitSyndie
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 1500000
+  contents:
+  - proto: ClothingOuterHardsuitSyndie
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingModsuitHeadOfSecurity
+  category: Weapons
+  price: 980000
+  name: black-market-contract-modsuit-head-of-security
+  description: black-market-contract-modsuit-head-of-security-desc
+  icon: ClothingModsuitHeadOfSecurity
+  purchaseLimit: 4
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 1400000
+  contents:
+  - proto: ClothingModsuitHeadOfSecurity
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitNexusMilT3
+  category: Weapons
+  price: 1650000
+  name: black-market-contract-hardsuit-nexus-mil-t3
+  description: black-market-contract-hardsuit-nexus-mil-t3-desc
+  icon: ClothingOuterHardsuitNexusMilT3
+  purchaseLimit: 5
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 1900000
+  contents:
+  - proto: ClothingOuterHardsuitNexusMilT3
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingModsuitUSSPZastavnik
+  category: Weapons
+  price: 1150000
+  name: black-market-contract-modsuit-ussp-zastavnik
+  description: black-market-contract-modsuit-ussp-zastavnik-desc
+  icon: ClothingModsuitUSSPZastavnik
+  purchaseLimit: 8
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 1455000
+  contents:
+  - proto: ClothingModsuitUSSPZastavnik
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractClothingOuterHardsuitERTSecurity
+  category: Weapons
+  price: 1025000
+  name: black-market-contract-hardsuit-ert-security
+  description: black-market-contract-hardsuit-ert-security-desc
+  icon: ClothingOuterHardsuitERTSecurity
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 1535000
+  contents:
+  - proto: ClothingOuterHardsuitERTSecurity
+    amount: 1
+
+# Stub Contract
+- type: blackMarketContract
+  id: BMContractStubArmory
+  category: Armory
+  stub: true
+  price: 0
+  name: black-market-contract-stub-name
+  description: black-market-contract-stub-desc
+  icon: Paper
+  contents: []

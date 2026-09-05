@@ -1,0 +1,62 @@
+<BoxContainer xmlns="https://spacestation14.io"
+
+              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+
+              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+
+              Margin="10 10 10 0"
+
+              HorizontalExpand="True">
+
+    <PanelContainer StyleClasses="AngleRect" HorizontalExpand="True">
+
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+
+                <EntityPrototypeView Name="IconView"
+
+                                     SetSize="64 64"
+
+                                     VerticalAlignment="Center"
+
+                                     Margin="0 0 8 0" />
+
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+
+                    <RichTextLabel Name="CategoryLabel" />
+
+                    <RichTextLabel Name="NameLabel" />
+
+                    <RichTextLabel Name="PriceLabel" />
+
+                    <RichTextLabel Name="LimitLabel" />
+
+                </BoxContainer>
+
+                <Control MinWidth="10" />
+
+                <BoxContainer Orientation="Vertical" MinWidth="120">
+
+                    <Button Name="PurchaseButton"
+
+                            Text="{Loc 'black-market-console-purchase-button'}"
+
+                            HorizontalAlignment="Right" />
+
+                    <RichTextLabel Name="TimerLabel" HorizontalAlignment="Right" Margin="0 4 5 0" />
+
+                </BoxContainer>
+
+            </BoxContainer>
+
+            <customControls:HSeparator Margin="5 10 5 10" />
+
+            <RichTextLabel Name="DescriptionLabel" />
+
+        </BoxContainer>
+
+    </PanelContainer>
+
+</BoxContainer>
+

@@ -1,0 +1,206 @@
+#region Melee Weapons
+- type: blackMarketContract
+  id: BMContractADTWeaponMeleePrasatChainsword
+  category: Weapons
+  price: 680000
+  name: black-market-contract-chainsword
+  description: black-market-contract-chainsword-desc
+  icon: ADTWeaponMeleePrasatChainsword
+  purchaseLimit: 3
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 950000
+  contents:
+  - proto: ADTWeaponMeleePrasatChainsword
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractEnergySwordDouble
+  category: Weapons
+  price: 775000
+  name: black-market-contract-energy-sword-double
+  description: black-market-contract-energy-sword-double-desc
+  icon: EnergySwordDouble
+  purchaseLimit: 3
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 1000000
+  contents:
+  - proto: EnergySwordDouble
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractReinforcedChainsawShield
+  category: Weapons
+  price: 400000
+  name: black-market-contract-chainsaw-shield
+  description: black-market-contract-chainsaw-shield-desc
+  icon: ReinforcedChainsawShield
+  purchaseLimit: 10
+  dynamicPrice: false
+  contents:
+  - proto: ReinforcedChainsawShield
+    amount: 1
+
+#region Ranged Weapons
+
+- type: blackMarketContract
+  id: BMContractWeaponShotgunBulldog
+  category: Weapons
+  price: 450000
+  name: black-market-contract-shotgun-bulldog
+  description: black-market-contract-shotgun-bulldog-desc
+  icon: WeaponShotgunBulldog
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 625000
+  contents:
+  - proto: WeaponShotgunBulldog
+    amount: 1
+  - proto: Magazine12_gaugeBuckshot
+    amount: 2
+  - proto: AmmoBox12_gaugeBuckshot
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractWeaponLMGHammer
+  category: Weapons
+  price: 500000
+  name: black-market-contract-lmg-hammer
+  description: black-market-contract-lmg-hammer-desc
+  icon: WeaponLMGHammer
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 750000
+  contents:
+  - proto: WeaponLMGHammer
+    amount: 1
+  - proto: Magazine762x39mmBox
+    amount: 2
+  - proto: AmmoBox762x39mmBigFMJ
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractWeaponLightMachineGunL6
+  category: Weapons
+  price: 600000
+  name: black-market-contract-lmg-l6
+  description: black-market-contract-lmg-l6-desc
+  icon: WeaponLightMachineGunL6
+  purchaseLimit: 3
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 800000
+  contents:
+  - proto: WeaponLightMachineGunL6
+    amount: 1
+  - proto: Magazine762x39mmBox
+    amount: 2
+  - proto: AmmoBox762x39mmBigFMJ
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractWeaponLauncherChinaLake
+  category: Weapons
+  price: 700000
+  name: black-market-contract-launcher-china-lake
+  description: black-market-contract-launcher-china-lake-desc
+  icon: WeaponLauncherChinaLake
+  purchaseLimit: 3
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.2
+  dynamicPriceMax: 900000
+  contents:
+  - proto: WeaponLauncherChinaLake
+    amount: 1
+  - proto: 40mmGrenadeThermobaric
+    amount: 4
+  - proto: 40mmGrenadeFragmentation
+    amount: 3
+  - proto: 40mmGrenadeEMP
+    amount: 3
+
+- type: blackMarketContract
+  id: BMContractWeaponRevolverMagnus
+  category: Weapons
+  price: 800000
+  name: black-market-contract-revolver-magnus
+  description: black-market-contract-revolver-magnus-desc
+  icon: WeaponRevolverMagnus
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 1000000
+  contents:
+  - proto: WeaponRevolverMagnus
+    amount: 1
+  - proto: SpeedLoader357_magnumFMJ
+    amount: 2
+  - proto: AmmoBox357_magnumFMJ
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractWeaponDEWBasilisk
+  category: Weapons
+  price: 1000000
+  name: black-market-contract-dew-basilisk
+  description: black-market-contract-dew-basilisk-desc
+  icon: WeaponDEWBasilisk
+  purchaseLimit: 2
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.5
+  dynamicPriceMax: 1500000
+  contents:
+  - proto: WeaponDEWBasilisk
+    amount: 1
+  - proto: Magazine10Phz
+    amount: 2
+  - proto: AmmoBox10Phz
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractWeaponDEWCalico
+  category: Weapons
+  price: 700000
+  name: black-market-contract-dew-calico
+  description: black-market-contract-dew-calico-desc
+  icon: WeaponDEWCalico
+  purchaseLimit: 5
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.2
+  dynamicPriceMax: 900000
+  contents:
+  - proto: WeaponDEWCalico
+    amount: 1
+  - proto: Magazine700Thz
+    amount: 2
+  - proto: AmmoBox700Thz
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractWeaponPulsePistol
+  category: Weapons
+  price: 435000
+  name: black-market-contract-pulse-pistol
+  description: black-market-contract-pulse-pistol-desc
+  icon: WeaponPulsePistol
+  purchaseLimit: 10
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.1
+  dynamicPriceMax: 650000
+  contents:
+  - proto: WeaponPulsePistol
+    amount: 1
+
+# Stub Contract
+- type: blackMarketContract
+  id: BMContractStubWeapons
+  category: Weapons
+  stub: true
+  price: 0
+  name: black-market-contract-stub-name
+  description: black-market-contract-stub-desc
+  icon: Paper
+  contents: []

@@ -1,0 +1,12 @@
+- type: entity
+  parent: CrateMachine
+  id: BlackMarketCrateMachine
+  name: black market cargo lift
+  description: Delivers contraband crates for the black market console.
+  components:
+  - type: MarketItemSpawner
+    removed: true
+  - type: BlackMarketCrateSpawner
+  - type: CrateMachine
+    kind: BlackMarket
+    cratePrototype: CrateSyndicate

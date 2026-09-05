@@ -1,0 +1,75 @@
+- type: weightedRandom
+  id: BlackMarketPoolWeapons
+  weights:
+    BMContractADTWeaponMeleePrasatChainsword: 0.5
+    BMContractEnergySwordDouble: 0.6
+    BMContractReinforcedChainsawShield: 1
+    BMContractWeaponShotgunBulldog: 0.9
+    BMContractWeaponLMGHammer: 0.5
+    BMContractWeaponLightMachineGunL6: 0.4
+    #BMContractForgeWeaponEnergyPistolLaserAntique: 0.8
+    BMContractWeaponLauncherChinaLake: 0.4
+    BMContractWeaponRevolverMagnus: 0.65
+    BMContractWeaponDEWBasilisk: 0.1
+    BMContractWeaponDEWCalico: 0.3
+    BMContractWeaponPulsePistol: 0.5
+
+- type: weightedRandom
+  id: BlackMarketPoolArmory
+  weights:
+    BMContractClothingOuterHardsuitERTLeader: 0.05
+    BMContractClothingOuterHardsuitSyndieCommander: 0.08
+    BMContractClothingOuterHardsuitSyndieMedic: 0.5
+    BMContractClothingOuterHardsuitCybersunStealth: 0.2
+    BMContractClothingOuterHardsuitUsspL30: 0.15
+    BMContractClothingOuterHardsuitM82c: 1.5
+    BMContractClothingOuterHardsuitRI14: 1.2
+    BMContractClothingOuterHardsuitTraumaShooter: 0.4
+    BMContractClothingOuterHardsuitSyndie: 1
+    BMContractClothingModsuitHeadOfSecurity: 1.1
+    BMContractClothingOuterHardsuitNexusMilT2: 1
+    BMContractClothingModsuitUSSPZastavnik: 0.6
+    BMContractClothingOuterHardsuitERTSecurity: 1
+
+- type: weightedRandom
+  id: BlackMarketPoolResources
+  weights:
+    BMContractResourcesSheetSteel: 1
+    BMContractResourcesSheetGlass: 1
+    BMContractResourcesSheetPlastic: 1
+    BMContractResourcesMaterialCloth: 1
+    BMContractResourcesIngotSilver: 1
+    BMContractResourcesIngotGold: 1
+    BMContractResourcesMaterialDiamond: 1
+    BMContractResourcesMaterialBluespace: 1
+    BMContractResourcesSheetUranium: 1
+    BMContractResourcesSheetPlasma: 1
+    BMContractResourcesMaterialDurathread: 1
+    BMContractResourcesSheetPlasteel: 1
+    BMContractResourcesSheetPlastitanium: 1
+    BMContractResourcesSheetIridite10: 1
+
+- type: weightedRandom
+  id: BlackMarketPoolOther
+  weights:
+    BMContractOtherResearchDisk35000: 1
+    BMContractOtherResearchDisk65000: 1
+    BMContractOtherResearchDisk100000: 1
+    BMContractOtherEncryptionKeyNfsd: 1
+    BMContractOtherEncryptionKeyEmpire: 1
+    BMContractOtherEncryptionKeyRenegade: 1
+    BMContractOtherEncryptionKeyService: 1
+    BMContractOtherEncryptionKeyDrakeIndustries: 1
+    BMContractOtherEncryptionKeyNexus: 1
+    BMContractOtherEncryptionKeyUllmanIndustries: 1
+    BMContractOtherEncryptionKeyHarmony: 1
+    BMContractOtherDisciplinesDiskDrakeIndustries: 1 # ЗАМЕНИТЬ НА ПРОТОТИПЫ ДРУГИХ ДИСКОВ ВСЕ ДИСКИ КОМПАНИЙ
+    BMContractOtherDisciplinesDiskUllman: 1
+    BMContractOtherDisciplinesDiskNSC: 1
+    BMContractOtherDisciplinesDiskNanotrasen: 1
+    BMContractOtherDisciplinesDiskHME: 1 # КОНЕЦ ТЕХНОЛОГИЙ КОМПАНИЙ
+    BMContractOtherSpaceCashCounterfeit: 1
+    BMContractOtherPillSpaceDrugs: 1
+    BMContractOtherSyringeMorphine: 1
+    BMContractOtherOmnizineChemistryBottle: 1
+    BMContractOtherDrinkPremiumRumBottleFull: 1

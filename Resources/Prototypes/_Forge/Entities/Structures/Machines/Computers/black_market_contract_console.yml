@@ -1,0 +1,45 @@
+- type: entity
+  parent: BaseComputer
+  id: ComputerForgeBlackMarketContracts
+  name: black market contract console
+  description: Purchase rotating contraband contracts with bank credits.
+  components:
+  - type: Sprite
+    sprite: _NF/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer_blackmarket
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: piratebounty
+    - map: ["computerLayerKeys"]
+      state: blackmarket_key
+  - type: BlackMarketConsole
+    categorySlots:
+      Weapons: 2
+      Armory: 2
+      Resources: 2 #KoT-change-add
+      Other: 2 #KoT-change-add
+    cratePrototype: CrateGenericSteel #KoT-change CrateSyndicate to CrateGenericSteel
+    maxCrateMachineDistance: 8
+    purchaseSound:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+      params:
+        volume: -5
+        variation: 0.2
+  - type: ActivatableUI
+    singleUser: true
+    key: enum.BlackMarketConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.BlackMarketConsoleUiKey.Key:
+        type: BlackMarketConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Computer
+    board: Null
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"

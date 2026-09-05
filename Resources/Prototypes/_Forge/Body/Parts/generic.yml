@@ -53,3 +53,60 @@
     carryAssistSlowdownPenaltyModifier: 0.2
     pullingAssistSlowdownPenaltyModifier: 0.1
     pullingAssistMassPenaltyModifier: 0.1
+
+#IPC Trait bodyparts
+- type: entity
+  parent: LeftArmCyberneticBase
+  id: IPCBadServoLeftArm
+  name: bad servo left arm
+  description: Very low-quality left arm.
+  components:
+    - type: GenerateChildPart
+      id: IPCBadServoLeftHand
+
+- type: entity
+  parent: LeftHandCybernetic
+  id: IPCBadServoLeftHand
+  name: bad servo left arm
+  description: Very low-quality left hand.
+  components:
+  - type: DoAfterDelayMultiplier
+  multiplier: 1.15
+
+- type: entity
+  parent: RightArmCyberneticBase
+  id: IPCBadServoRightArm
+  name: bad servo right arm
+  description: Very low-quality right arm.
+  components:
+    - type: GenerateChildPart
+      id: IPCBadServoRightHand
+
+- type: entity
+  parent: RightHandCybernetic
+  id: IPCBadServoRightHand
+  name: bad servo right arm
+  description: Very low-quality right hand.
+  components:
+  - type: DoAfterDelayMultiplier
+  multiplier: 1.15
+
+- type: entity
+  parent: LeftLegCyberneticBase
+  id: IPCBadServoLeftLeg
+  name: bad servo left leg
+  description: Very low-quaity left leg.
+  components:
+  - type: MovementBodyPart
+    walkSpeed: 2 #-20%
+    sprintSpeed: 3.6 #-20%
+
+- type: entity
+  parent: RightLegCyberneticBase
+  id: IPCBadServoRightLeg
+  name: bad servo right leg
+  description: Very low-quaity right leg.
+  components:
+  - type: MovementBodyPart
+    walkSpeed: 2 #-20%
+    sprintSpeed: 3.6 #-20%

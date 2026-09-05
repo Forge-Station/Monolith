@@ -271,5 +271,9 @@
 - type: Tag
   id: Type3
 
+#region TTI
 - type: Tag
   id: FactionStaticUplinkTTI
+
+- type: Tag
+  id: TTIEquip

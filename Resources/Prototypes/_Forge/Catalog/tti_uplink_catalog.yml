@@ -180,6 +180,21 @@
         tags:
           - FactionStaticUplinkTTI
 
+- type: listing
+  id: UplinkTTIVendingMachineRestockMedicalTTI
+  name: uplink-tti-restock-name
+  description: uplink-tti-restock-desc
+  productEntity: VendingMachineRestockMedicalTTI
+  cost:
+    TTIMedicalCredit: 8
+  categories:
+    - UplinkTTIUtility
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
 # region Hardsuits (Armor)
 
 - type: listing

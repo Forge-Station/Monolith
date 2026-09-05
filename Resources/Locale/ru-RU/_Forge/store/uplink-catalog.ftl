@@ -115,6 +115,8 @@ uplink-tti-medicalscannermachinecircuitboard-name = Медицинский ск�
 uplink-tti-medicalscannermachinecircuitboard-desc = Машинная плата медицинского сканера.
 uplink-tti-omnizinechemistrybottle-name = Бутылочка омнизина
 uplink-tti-omnizinechemistrybottle-desc = Невозможное возможно! Кто-то научился производить омнизин, но это, к сожалению, оказались не вы.
+uplink-tti-restock-name = набор поплнение МедВенда от компании TTI
+uplink-tti-restock-desc = Набор пополнения вендомата с которого компания TTI получает огромный процент от продаж в свой бюджет. Постарайтесь, чтоб вендоматы TTI были заполнены всегда.
 # Hardsuits (Armor)
 uplink-tti-clothingheadhatarmoredtrauma-name = Шлем
 uplink-tti-clothingheadhatarmoredtrauma-desc = Фирменный шлем для врачей.

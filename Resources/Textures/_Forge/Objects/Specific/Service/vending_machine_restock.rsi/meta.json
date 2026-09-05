@@ -1,14 +1,23 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Unknown, but update by Eifall",
+  "copyright": "Original source: https://github.com/tgstation/tgstation/blob/master/icons/obj/vending_restock.dmi @ commit 014c44ef6279beb02a5f3e76824439fa57181c22, refill_donksnack by Eifall, refill_tti by vsixst",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
+      "name": "base"
+    },
+    {
+      "name": "green_bit"
+    },
+    {
       "name": "refill_donksnack"
+    },
+    {
+      "name": "refill_tii"
     },
     {
       "name": "inhand-left",

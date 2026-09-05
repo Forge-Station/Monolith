@@ -128,6 +128,12 @@
         Piercing: 0.7
         Heat: 0.8
         Caustic: 0.25
+  - type: Tag
+    tags:
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: engraving-TTIStaff
+    hasEngravingText: forge-engraving-generic-has-message
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBase, BaseFactionGearOtherFactionT1]
@@ -140,6 +146,12 @@
     sprite: _Forge/Clothing/OuterClothing/Coats/tti_bomber.rsi
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Coats/tti_bomber.rsi
+  - type: Tag
+    tags:
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: engraving-TTIStaff
+    hasEngravingText: forge-engraving-generic-has-message
 
 - type: entity
   parent: [ ClothingOuterStorageFoldableBase ]

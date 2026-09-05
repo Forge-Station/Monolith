@@ -14,9 +14,11 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Power;
+using Content.Shared.Tag;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -41,6 +43,8 @@ public sealed partial class MedicalBountySystem : EntitySystem
     [Dependency] PowerReceiverSystem _power = default!;
     [Dependency] SharedAppearanceSystem _appearance = default!;
     [Dependency] BankSystem _bank = default!;
+    [Dependency] InventorySystem _inventory = default!;
+    [Dependency] TagSystem _tag = default!;
 
     private List<MedicalBountyPrototype> _cachedPrototypes = new();
 
@@ -51,7 +55,7 @@ public sealed partial class MedicalBountySystem : EntitySystem
         _proto.PrototypesReloaded += OnPrototypesReloaded;
 
         SubscribeLocalEvent<MedicalBountyComponent, ComponentStartup>(InitializeMedicalBounty);
-        
+
         SubscribeLocalEvent<MedicalBountyRedemptionComponent, RedeemMedicalBountyMessage>(RedeemMedicalBounty);
         SubscribeLocalEvent<MedicalBountyRedemptionComponent, EntInsertedIntoContainerMessage>(OnEntityInserted);
         SubscribeLocalEvent<MedicalBountyRedemptionComponent, EntRemovedFromContainerMessage>(OnEntityRemoved);
@@ -208,6 +212,15 @@ public sealed partial class MedicalBountySystem : EntitySystem
             {
                 _bank.TrySectorDeposit(account, (int)(bountyPayout * taxCoeff), LedgerEntryType.MedicalBountyTax);
             }
+
+            // Forge-change-statr: pay bonus reward if the redeemer wearing have tag TTIEquip
+            if (bounty.BonusReward != null && _inventory.HasEquippedTag(ev.Actor, bounty.BonusRewardTag))
+            {
+                var bonusAmount = (int)Math.Floor(bountyPayout * (bounty.BonusRewardPercent / 100f));
+                if (bonusAmount > 0)
+                    _stack.SpawnMultiple(bounty.BonusReward.Value.Id, bonusAmount, Transform(uid).Coordinates);
+            }
+            // Forge-change-end
         }
 
         QueueDel(bountyUid);

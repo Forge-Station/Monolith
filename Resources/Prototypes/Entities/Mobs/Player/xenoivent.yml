@@ -115,6 +115,7 @@
   - type: Tag 
     tags: 
     - XenoEmotions
+    - XenoIvent
   - type: Vocal
     sounds:
       Unsexed: SoundsXeno
@@ -131,6 +132,11 @@
   color: "#189e0e"
   boilingPoint: 165
   meltingPoint: -87
+  tileReactions:
+  - !type:CreateEntityTileReaction
+    entity: Xenoresin
+    maxOnTileWhitelist:
+      tags: [ XenoIventResin ]
   reactiveEffects:
     Acidic:
       methods: [ Touch ]
@@ -296,6 +302,7 @@
   - type: Tag 
     tags: 
     - XenoEmotions
+    - XenoIvent
   - type: Vocal
     sounds:
       Unsexed: SoundsXeno
@@ -415,13 +422,14 @@
   - type: Tag 
     tags: 
     - XenoEmotions
+    - XenoIvent
   - type: Vocal
     sounds:
       Unsexed: SoundsXeno
 
 
 
-- type: soundCollection
+- type: soundCollection #нужно создать отдельную папку
   id: XenoRoars
   files:
     - /Audio/Weapons/Xeno/alien_roar1.ogg
@@ -518,3 +526,116 @@
 
 - type: Tag
   id: XenoEmotions
+
+- type: Tag
+  id: XenoIvent
+- type: Tag
+  id: XenoIventResin
+
+
+
+- type: entity
+  id: Xenoresin
+  name: resin
+  parent: BaseKudzu
+  description: A rapidly growing resin . WHY ARE YOU STOPPING TO LOOK AT IT?!
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg"
+  - type: Sprite
+    sprite: _Forge/Mobs/Player/IventXenos/xenoresinfloor.rsi
+    state: hive_weed0
+    drawdepth: FloorObjects
+  - type: Clickable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        density: 7
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - MidImpassable
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: TrayScanReveal
+  - type: Kudzu
+    growthTickChance: 0.2
+    spreadChance: 0.35
+    # Heals each time it manages to do a growth tick:
+    damageRecovery:
+      types:
+        Slash: -1
+        Heat: -1
+        Cold: -1
+        Blunt: -1.25
+  - type: DamageContacts
+    damage:
+      types:
+        Slash: -3
+        Piercing: -3
+        Blunt: -3
+        Heat: -3
+        Caustic: -3
+    whitelist:
+      tags:
+      - XenoIvent
+  - type: Flammable
+    fireSpread: true
+    alwaysCombustible: true
+    minIgnitionTemperature: 200
+    damage:
+      types:
+        Heat: 9
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+    reactions:
+    - reagents: [Mesotaxinide]
+      methods: [Touch]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        damage:
+          groups:
+            Burn: -60
+          types:
+            Heat: -30
+  - type: AtmosExposed
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.45
+    sprintSpeedModifier: 0.45
+    ignoreWhitelist:
+      tags:
+      - XenoIvent
+  - type: Food # delightfully devilish !
+    delay: 0.5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: NaturalLetoferol
+          Quantity: 15
+        - ReagentId: Protein
+          Quantity: 7
+  - type: Tag
+    tags:
+    - XenoIvent
+    - XenoIventResin
+  - type: ChimeraCleanable

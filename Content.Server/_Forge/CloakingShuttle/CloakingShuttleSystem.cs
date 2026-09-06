@@ -18,6 +18,7 @@ public sealed class CloakingShuttleSystem : EntitySystem
 {
     [Dependency] private readonly SharedShuttleSystem _sharedShuttleSystem = default!;
     [Dependency] private readonly PowerReceiverSystem _powerReceiverSystem = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -104,6 +105,7 @@ public sealed class CloakingShuttleSystem : EntitySystem
         {
             case not ShuttleCloakingStatus.None when !hasDevice:
                 Deactivate(grid, cloakingShuttleComponent);
+                UpdateAppearanceInGrid(grid);
                 cloakingShuttleComponent.Status = ShuttleCloakingStatus.None;
                 break;
 
@@ -111,6 +113,11 @@ public sealed class CloakingShuttleSystem : EntitySystem
                 cloakingShuttleComponent.Status = cloakingShuttleComponent.TimeCooldown != default
                     ? ShuttleCloakingStatus.Cooldown
                     : ShuttleCloakingStatus.Ready;
+                UpdateAppearanceInGrid(grid);
+                break;
+
+            default:
+                UpdateAppearanceInGrid(grid);
                 break;
         }
 
@@ -139,6 +146,23 @@ public sealed class CloakingShuttleSystem : EntitySystem
         return true;
     }
 
+    private void UpdateAppearanceInGrid(EntityUid gridUid)
+    {
+        var query = EntityQueryEnumerator<CloakingShuttleDeviceComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var transformComponent))
+        {
+            if (transformComponent.GridUid != gridUid || !TryComp<CloakingShuttleComponent>(gridUid, out var cloakingShuttleComponent))
+                continue;
+
+            var status = cloakingShuttleComponent.Status;
+            _appearance.SetData(uid, ShuttleCloakingStatus.Ready, status == ShuttleCloakingStatus.Ready);
+            _appearance.SetData(uid, ShuttleCloakingStatus.Active, status == ShuttleCloakingStatus.Active);
+            _appearance.SetData(uid, ShuttleCloakingStatus.Cooldown, status == ShuttleCloakingStatus.Cooldown);
+            _appearance.SetData(uid, ShuttleCloakingStatus.None, status == ShuttleCloakingStatus.None);
+
+        }
+    }
+
     private void Deactivate(EntityUid gridUid, CloakingShuttleComponent cloakingShuttleComponent)
     {
         if (!cloakingShuttleComponent.Active)
@@ -151,6 +175,7 @@ public sealed class CloakingShuttleSystem : EntitySystem
 
         Dirty(gridUid, cloakingShuttleComponent);
         _sharedShuttleSystem.RemoveIFFFlag(gridUid, IFFFlags.Hide);
+        UpdateAppearanceInGrid(gridUid);
 
         if (cloakingShuttleComponent.DeviceShieldDisabling)
             RemComp<ShipShieldDisabledGridComponent>(gridUid);
@@ -183,6 +208,7 @@ public sealed class CloakingShuttleSystem : EntitySystem
 
         Dirty(gridUid, cloakingShuttleComponent);
         _sharedShuttleSystem.AddIFFFlag(gridUid, IFFFlags.Hide);
+        UpdateAppearanceInGrid(gridUid);
 
         if (cloakingShuttleComponent.DeviceShieldDisabling)
             EnsureComp<ShipShieldDisabledGridComponent>(gridUid);
@@ -228,6 +254,7 @@ public sealed class CloakingShuttleSystem : EntitySystem
                 cloakingShuttleComponent.TimeCooldown = default;
                 cloakingShuttleComponent.Status = ShuttleCloakingStatus.Ready;
                 RaiseLocalEvent(uid, new CloakingShuttleStateChangedEvent(), true);
+                UpdateAppearanceInGrid(uid);
             }
         }
     }

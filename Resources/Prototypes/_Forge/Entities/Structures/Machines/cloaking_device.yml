@@ -63,6 +63,26 @@
         enum.WiresVisualLayers.MaintenancePanel:
           True: { visible: true }
           False: { visible: false }
+      enum.ShuttleCloakingStatus.Ready:
+        cloakingLightLayer:
+          True:  { color: "#FFFFFF" }
+        cloakingSymbolLayer:
+          True:  { color: "#FFFFFF" }
+      enum.ShuttleCloakingStatus.Active:
+        cloakingLightLayer:
+          True:  { color: "#0000FF" }
+        cloakingSymbolLayer:
+          True:  { color: "#90EE90" }
+      enum.ShuttleCloakingStatus.Cooldown:
+        cloakingLightLayer:
+          True:  { color: "#FF0000" }
+        cloakingSymbolLayer:
+          True:  { color: "#FFFFFF" }
+      enum.ShuttleCloakingStatus.None:
+        cloakingLightLayer:
+          True: { color: "#FFFFFF" }
+        cloakingSymbolLayer:
+          True: { color: "#FFFFFF" }
   - type: CloakingShuttleDevice
     duration: 45
     cooldown: 120
@@ -109,6 +129,26 @@
         enum.WiresVisualLayers.MaintenancePanel:
           True: { visible: true }
           False: { visible: false }
+      enum.ShuttleCloakingStatus.Ready:
+        cloakingLightLayer:
+          True:  { color: "#FFFFFF" }
+        cloakingSymbolLayer:
+          True:  { color: "#FFFFFF" }
+      enum.ShuttleCloakingStatus.Active:
+        cloakingLightLayer:
+          True:  { color: "#0000FF" }
+        cloakingSymbolLayer:
+          True:  { color: "#F5F5F5" }
+      enum.ShuttleCloakingStatus.Cooldown:
+        cloakingLightLayer:
+          True:  { color: "#FF0000" }
+        cloakingSymbolLayer:
+          True:  { color: "#FFFFFF" }
+      enum.ShuttleCloakingStatus.None:
+        cloakingLightLayer:
+          True: { color: "#FFFFFF" }
+        cloakingSymbolLayer:
+          True: { color: "#FFFFFF" }
   - type: CloakingShuttleDevice
     duration: 30
     cooldown: 30
@@ -153,16 +193,28 @@
         cloakingLightLayer:
           True: { visible: true }
           False: { visible: false }
-        cloakingLightingAnimationLayer:
-          True: { visible: true }
-          False: { visible: false }
-        cloakingSphereAnimationLayer:
-          True: { visible: true }
-          False: { visible: false }
       enum.WiresVisualLayers.MaintenancePanel:
         enum.WiresVisualLayers.MaintenancePanel:
           True: { visible: true }
           False: { visible: false }
+      enum.ShuttleCloakingStatus.Ready:
+        cloakingLightLayer:
+          True:  { color: "#87CEEB" }
+      enum.ShuttleCloakingStatus.Active:
+        cloakingLightingAnimationLayer:
+          True: { visible: true, color: "#87CEEB" }
+          False: { visible: false }
+        cloakingSphereAnimationLayer:
+          True: { visible: true, color: "#87CEEB" }
+          False: { visible: false }
+        cloakingLightLayer:
+          True:  { color: "#00FF00" }
+      enum.ShuttleCloakingStatus.Cooldown:
+        cloakingLightLayer:
+          True:  { color: "#FF0000" }
+      enum.ShuttleCloakingStatus.None:
+        cloakingLightLayer:
+          True: { color: "#FFFFFF" }
   - type: Fixtures
     fixtures:
       fix1:

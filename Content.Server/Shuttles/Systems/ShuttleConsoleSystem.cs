@@ -1,3 +1,4 @@
+using Content.Server._Forge.CloakingShuttle; // Forge-Change - Cloaking
 using Content.Server._Mono.Ships.Systems;
 using Content.Server._Mono.Shuttles.Components;
 using Content.Server.Power.EntitySystems;
@@ -28,6 +29,7 @@ using Content.Shared.Access.Systems; // Frontier
 using Content.Shared.Construction.Components; // Frontier
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Components;
+using Content.Shared._Forge.CloakingShuttle; // Forge-Change - Cloaking
 using Content.Shared._Mono.FireControl;
 using Content.Shared._Mono.Shuttles; // Forge-Change - BioScan
 using Content.Shared._Mono.Ships.Components;
@@ -60,7 +62,12 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     private ISawmill _sawmill = default!;
 
     private static readonly TimeSpan ShuttleBuiThrottleInterval = TimeSpan.FromSeconds(0.15);
-    private readonly Dictionary<EntityUid, (TimeSpan At, FTLState Ftl, ShuttleBioScanStatus Bio, int DockPorts)> _shuttleBuiLastPush = new();
+    private readonly Dictionary<EntityUid, (TimeSpan At,
+        FTLState Ftl,
+        ShuttleBioScanStatus Bio,
+        ShuttleCloakingStatus Cloak,
+        ShuttleConsoleMapScreenMode MapScreenMode,
+        int DockPorts)> _shuttleBuiLastPush = new();
 
     private EntityQuery<MetaDataComponent> _metaQuery;
     private EntityQuery<TransformComponent> _xformQuery;
@@ -85,6 +92,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         SubscribeLocalEvent<ShuttleConsoleComponent, PowerChangedEvent>(OnConsolePowerChange);
         SubscribeLocalEvent<ShuttleConsoleComponent, AnchorStateChangedEvent>(OnConsoleAnchorChange);
         SubscribeLocalEvent<ShuttleConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt);
+        //SubscribeLocalEvent<ShuttleConsoleComponent, MapToggleModShuttleMessage>(OnMapToggleModShuttleMessage);
         Subs.BuiEvents<ShuttleConsoleComponent>(ShuttleConsoleUiKey.Key, subs =>
         {
             subs.Event<BoundUIOpenedEvent>(OnShuttleBuiOpened);
@@ -92,6 +100,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             subs.Event<ShuttleConsoleFTLBeaconMessage>(OnBeaconFTLMessage);
             subs.Event<ShuttleConsoleFTLPositionMessage>(OnPositionFTLMessage);
             subs.Event<ShuttleConsoleBioScanPositionMessage>(OnBioScanPositionMessage); // Forge-Change - BioScan
+            subs.Event<MapToggleModShuttleMessage>(OnMapToggleModShuttleMessage); // Forge-Change - Cloaking
             subs.Event<ToggleFTLLockRequestMessage>(OnToggleFTLLock);
             subs.Event<BoundUIClosedEvent>(OnConsoleUIClose);
         });
@@ -112,11 +121,32 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         SubscribeLocalEvent<FTLDestinationComponent, ComponentStartup>(OnFtlDestStartup);
         SubscribeLocalEvent<FTLDestinationComponent, ComponentShutdown>(OnFtlDestShutdown);
 
+        SubscribeLocalEvent<CloakingShuttleComponent, CloakingShuttleStateChangedEvent>(OnCloakingChanged); // Forge-Change - Cloaking
+
         InitializeFTL();
         InitializeBioScan(); // Forge-Change - BioScan
 
         InitializeNFDrone(); // Frontier: add our drone subscriptions
     }
+
+    // Forge-Change-start - Cloaking
+    private void OnMapToggleModShuttleMessage(EntityUid uid, ShuttleConsoleComponent component, MapToggleModShuttleMessage args)
+    {
+        component.MapScreenMode = component.MapScreenMode switch
+        {
+            ShuttleConsoleMapScreenMode.BioScan => ShuttleConsoleMapScreenMode.Cloaking,
+            _ => ShuttleConsoleMapScreenMode.BioScan,
+        };
+
+        DockingInterfaceState? dockState = null;
+        UpdateState(uid, ref dockState);
+    }
+
+    private void OnCloakingChanged(EntityUid gridUid, CloakingShuttleComponent component, CloakingShuttleStateChangedEvent args)
+    {
+        RefreshShuttleConsoles(gridUid);
+    }
+    // Forge-Change-end - Cloaking
 
     private void OnFtlDestStartup(EntityUid uid, FTLDestinationComponent component, ComponentStartup args)
     {
@@ -434,6 +464,10 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
                 default, // Forge-Change - BioScan
                 ShuttleBioScanStatus.None, // Forge-Change - BioScan
                 false, // Forge-Change - BioScan
+                default, // Forge-Change - Cloaking
+                default, // Forge-Change - Cloaking
+                ShuttleCloakingStatus.None, // Forge-Change - Cloaking
+                ShuttleConsoleMapScreenMode.BioScan, // Forge-Change - Cloaking
                 includeBeaconExclusionLists: includeMapLists);
         }
 
@@ -441,13 +475,21 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             _shuttleBuiLastPush.TryGetValue(consoleUid, out var prev) &&
             prev.Ftl == mapState.FTLState &&
             prev.Bio == mapState.BioScanStatus &&
+            prev.Cloak == mapState.CloakingStatus &&
+            prev.MapScreenMode == mapState.MapScreenMapScreenMode &&
             prev.DockPorts == CountDockPorts(dockState) &&
             _timing.CurTime - prev.At < ShuttleBuiThrottleInterval)
         {
             return;
         }
 
-        _shuttleBuiLastPush[consoleUid] = (_timing.CurTime, mapState.FTLState, mapState.BioScanStatus, CountDockPorts(dockState));
+        _shuttleBuiLastPush[consoleUid] = (
+            _timing.CurTime,
+            mapState.FTLState,
+            mapState.BioScanStatus,
+            mapState.CloakingStatus,
+            mapState.MapScreenMapScreenMode,
+            CountDockPorts(dockState));
 
         _ui.SetUiState(consoleUid, ShuttleConsoleUiKey.Key, new ShuttleBoundUserInterfaceState(navState, mapState, dockState));
     }
@@ -643,6 +685,10 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         StartEndTime bioScanTime = default; // Forge-Change - BioScan
         var bioScanStatus = ShuttleBioScanStatus.None; // Forge-Change - BioScan
         var bioScanAvailable = false; // Forge-Change - BioScan
+        StartEndTime cloakingTimeActive = default; // Forge-Change - Cloaking
+        StartEndTime cloakingTimeCooldown = default; // Forge-Change - Cloaking
+        var cloakingState = ShuttleCloakingStatus.None; // Forge-Change - Cloaking
+        var mapScreenMode = ShuttleConsoleMapScreenMode.BioScan; // Forge-Change - Cloaking
 
         if (Resolve(shuttle, ref shuttle.Comp, false) && shuttle.Comp.LifeStage < ComponentLifeStage.Stopped)
         {
@@ -671,7 +717,17 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             bioScanTime = console.BioScanTime;
             bioScanStatus = console.BioScanStatus;
             bioScanAvailable = CanUseBioScan((consoleUid, console), shuttle.Owner);
+            mapScreenMode = console.MapScreenMode;
         }
+
+        // Forge-Change-start - Cloaking
+        if (TryComp<CloakingShuttleComponent>(Transform(consoleUid).GridUid, out var cloakingShuttleComponent))
+        {
+            cloakingTimeActive = cloakingShuttleComponent.TimeActive;
+            cloakingTimeCooldown = cloakingShuttleComponent.TimeCooldown;
+            cloakingState = cloakingShuttleComponent.Status;
+        }
+        // Forge-Change-end - Cloaking
 
         return new ShuttleMapInterfaceState(
             ftlState,
@@ -681,6 +737,10 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             bioScanTime,
             bioScanStatus,
             bioScanAvailable,
+            cloakingTimeActive, // Forge-Change - Cloaking
+            cloakingTimeCooldown, // Forge-Change - Cloaking
+            cloakingState, // Forge-Change - Cloaking
+            mapScreenMode, // Forge-Change - Cloaking
             includeBeaconExclusionLists);
         // Forge-Change-end - BioScan
     }

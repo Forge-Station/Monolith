@@ -214,5 +214,8 @@
     # FSG-870R / FSG-950M: same loot path as other fracture disks, weight ~1/1500 of a common line (see GroupSelector totals)
     - id: TechDiskForgeFSGT4Specialists
       weight: 0.5
+    # Forge-Change: cloaking tech disk — ~5% per trunk opening.
+    - id: TechDiskCloaking
+      weight: 3.17
     - id: TechDiskFtl
     - id: TechDiskTranslationPreFracture

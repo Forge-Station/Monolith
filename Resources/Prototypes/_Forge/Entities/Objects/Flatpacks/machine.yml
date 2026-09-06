@@ -85,6 +85,49 @@
     layers:
     - state: command_airlock
 
+#region Cloaking
+- type: entity
+  parent: BaseNFFlatpack
+  id: CloakingCDMSFlatpack
+  name: CDM-S "Stick" flatpack
+  description: Packaging containing a CDM-S "Stick"
+  components:
+  - type: Flatpack
+    entity: CloakingDeviceStick
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    layers:
+    - state: power_console_ame
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: CloakingChameleonFlatpack
+  name: CDM-A "Chameleon" flatpack
+  description: Packaging containing a CDM-A "Chameleon"
+  components:
+  - type: Flatpack
+    entity: CloakingDeviceChameleon
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    layers:
+    - state: power_console_ame
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: CloakingWeepingAngelFlatpack
+  name: ADSCDM "Weeping Angel" flatpack
+  description: Packaging containing a ADSCDM "Weeping Angel"
+  components:
+  - type: Flatpack
+    entity: CloakingDeviceWeepingAngel
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    layers:
+    - state: power_console_ame
+
 #region Radio
 - type: entity
   parent: BaseNFFlatpack

@@ -55,6 +55,9 @@ public sealed partial class MapScreen : BoxContainer
     private bool _bioScanTargeting = false; // Forge-Change - BioScan
     private StartEndTime _bioScanTime; // Forge-Change - BioScan
     private ShuttleBioScanStatus _bioScanStatus = ShuttleBioScanStatus.None; // Forge-Change - BioScan
+    private ShuttleCloakingStatus _cloakingStatus = ShuttleCloakingStatus.None; // Forge-Change - Cloaking
+    private StartEndTime _cloakingTimeActive = default; // Forge-Change - Cloaking
+    private StartEndTime _cloakingTimeCooldown = default; // Forge-Change - Cloaking
 
     private float _minMapDequeue = 0.05f;
     private float _maxMapDequeue = 0.25f;
@@ -74,6 +77,8 @@ public sealed partial class MapScreen : BoxContainer
     public event Action<MapCoordinates, Angle>? RequestAutopilot;
     public event Action<MapCoordinates>? RequestBioScan; // Forge-Change - BioScan
     public event Action<NetEntity>? OnTrackEntity; // Forge-Change: nav markers
+    public event Action? OnCloaking; // Forge-Change: Cloaking
+    public event Action? OnMapToggleMod; // Forge-Change: Cloaking
 
     private readonly Dictionary<MapId, BoxContainer> _mapHeadings = new();
     private readonly Dictionary<MapId, List<IMapObject>> _mapObjects = new();
@@ -104,6 +109,8 @@ public sealed partial class MapScreen : BoxContainer
         MapFTLButton.OnToggled += FtlPreviewToggled;
         MapAutopilotButton.OnToggled += AutopilotPreviewToggled; // Mono
         MapBioScanButton.OnToggled += BioScanPreviewToggled; // Forge-Change - BioScan
+        MapCloakButton.OnPressed += MapCloakPressed; // Forge-Change - Cloaking
+        MapToggleModButton.OnPressed += MapToggleModPressed; // Forge-Change - Cloaking
 
         _ftlStyle = new StyleBoxFlat(Color.LimeGreen);
         FTLBar.ForegroundStyleBoxOverride = _ftlStyle;
@@ -144,6 +151,22 @@ public sealed partial class MapScreen : BoxContainer
         // Forge-Change-End
     }
 
+    // Forge-Change-start - Cloaking
+    private void SetVisibleBioScanUiElements(bool visible)
+    {
+        BioScanBar.Visible = visible;
+        MapBioScanState.Visible = visible;
+        MapBioScanButton.Visible = visible;
+    }
+
+    private void SetVisibleCloakingUiElements(bool visible)
+    {
+        CloakingBar.Visible = visible;
+        MapCloakingState.Visible = visible;
+        MapCloakButton.Visible = visible;
+    }
+    // Forge-Change-end - Cloaking
+
     public void UpdateState(ShuttleMapInterfaceState state)
     {
         // Only network the accumulator due to ping making the thing fonky.
@@ -157,10 +180,28 @@ public sealed partial class MapScreen : BoxContainer
         _ftlTime = state.FTLTime;
         _bioScanTime = state.BioScanTime; // Forge-Change - BioScan
         _bioScanStatus = state.BioScanStatus; // Forge-Change - BioScan
+        _cloakingStatus = state.CloakingStatus; // Forge-Change - Cloaking
+        _cloakingTimeActive = state.CloakingTimeActive; // Forge-Change - Cloaking
+        _cloakingTimeCooldown = state.CloakingTimeCooldown; // Forge-Change - Cloaking
+        MapCloakButton.Disabled = state.CloakingStatus is not (ShuttleCloakingStatus.Ready or ShuttleCloakingStatus.Active); // Forge-Change - Cloaking
         MapRadar.InFtl = true;
         MapFTLState.Text = Loc.GetString($"shuttle-console-ftl-state-{_state.ToString()}");
         MapBioScanState.Text = Loc.GetString($"shuttle-console-bioscan-status-{_bioScanStatus.ToString()}"); // Forge-Change - BioScan
         MapBioScanButton.Disabled = _bioScanStatus == ShuttleBioScanStatus.InProgress || !state.BioScanAvailable; // Forge-Change - BioScan
+
+        // Forge-Change-start - Cloaking
+        if (state.MapScreenMapScreenMode == ShuttleConsoleMapScreenMode.BioScan)
+        {
+            SetVisibleBioScanUiElements(true);
+            SetVisibleCloakingUiElements(false);
+        }
+
+        if (state.MapScreenMapScreenMode == ShuttleConsoleMapScreenMode.Cloaking)
+        {
+            SetVisibleBioScanUiElements(false);
+            SetVisibleCloakingUiElements(true);
+        }
+        // Forge-Change-end - Cloaking
 
         //frontier - we only allow pre-approved vessels to FTL
         if (!_entManager.HasComponent<ShuttleFTLComponent>(_shuttleEntity))
@@ -355,6 +396,18 @@ public sealed partial class MapScreen : BoxContainer
         MapRadar.SetMap(coordinates.MapId, coordinates.Position, recentering: true);
     }
     // Forge-Change-End
+
+    // Forge-Change-start - Cloaking
+    private void MapCloakPressed(BaseButton.ButtonEventArgs obj)
+    {
+        OnCloaking?.Invoke();
+    }
+
+    private void MapToggleModPressed(BaseButton.ButtonEventArgs obj)
+    {
+        OnMapToggleMod?.Invoke();
+    }
+    // Forge-Change-end - Cloaking
 
     // Forge-Change-start - BioScan
     private void BioScanPreviewToggled(BaseButton.ButtonToggledEventArgs obj)
@@ -808,6 +861,35 @@ public sealed partial class MapScreen : BoxContainer
             BioScanBar.Value = _bioScanStatus == ShuttleBioScanStatus.Clean || _bioScanStatus == ShuttleBioScanStatus.ThreatDetected ? 1 : 0;
         }
         // Forge-Change-end - BioScan
+
+        // Forge-Change-start - Cloaking
+        var cloakingTimeActiveProgress = _cloakingTimeActive.ProgressAt(curTime);
+        var cloakingTimeCooldownProgress = _cloakingTimeCooldown.ProgressAt(curTime);
+
+        if (_cloakingStatus == ShuttleCloakingStatus.None)
+        {
+            CloakingBar.Value = 0;
+            MapCloakingState.Text = Loc.GetString("shuttle-console-cloak-none");
+        }
+
+        if (_cloakingStatus == ShuttleCloakingStatus.Ready)
+        {
+            CloakingBar.Value = 0;
+            MapCloakingState.Text = Loc.GetString("shuttle-console-cloak-ready");
+        }
+
+        if (_cloakingStatus == ShuttleCloakingStatus.Active)
+        {
+            CloakingBar.Value = float.IsFinite(cloakingTimeActiveProgress) ? 1 - cloakingTimeActiveProgress : 0;
+            MapCloakingState.Text = Loc.GetString("shuttle-console-cloak-active");
+        }
+
+        if (_cloakingStatus == ShuttleCloakingStatus.Cooldown)
+        {
+            CloakingBar.Value = float.IsFinite(cloakingTimeCooldownProgress) ? cloakingTimeCooldownProgress : 0;
+            MapCloakingState.Text = Loc.GetString("shuttle-console-cloak-cooldown");
+        }
+        // Forge-Change-end - Cloaking
         ForgeUpdateMapMarkers();
     }
 

@@ -14,13 +14,14 @@
     - type: StartSyndrome
       syndrome: ChronicPain
       severity: 90
- 
+
+#region IPC traits 
 - type: trait
   id: IpcSoftBody
   name: trait-ipc-soft-body-name
   description: trait-ipc-soft-body-desc
   category: Physical
-  cost: -4
+  cost: -6
   mutuallyExclusiveTraits:
   - DermalArmor
   speciesBlacklist:
@@ -174,3 +175,83 @@
         prototype: IPCBadServoLeftArm
       - slot: right arm
         prototype: IPCBadServoRightArm
+
+- type: trait
+  id: IpcLaserGunTrait
+  name: trait-ipc-laser-gun-name
+  description: trait-ipc-laser-gun-desc
+  category: Physical
+  cost: 3
+  mutuallyExclusiveTraits:
+  - IpcBadServo
+  speciesBlacklist:
+  - Human
+  - Chitinid
+  - Oni
+  - Vulpkanin
+  - Vox
+  - Diona
+  - Moth
+  - Goblin
+  - Arachnid
+  - Resomi
+  - Harpy
+  - Reptilian
+  - Hydrakin
+  - Rodentia
+  - Dwarf
+  - SlimePerson
+  - Felinid
+  - Tajaran
+  - Demon
+  - Skrell
+  - Ariral
+  blacklist:
+    components:
+    - BorgChassis
+  components:
+    - type: BodyPartReplacement
+      replacements:
+      - slot: right arm
+        prototype: IPCLaserGunRightArm
+
+# - type: trait ебаные губы не могут без щиткода
+#   id: IpcMantisBladeTrait
+#   name: trait-ipc-mantis-blade-name
+#   description: trait-ipc-mantis-blade-desc
+#   category: Physical
+#   cost: 5
+#   mutuallyExclusiveTraits:
+#   - IpcBadServo
+#   speciesBlacklist:
+#   - Human
+#   - Chitinid
+#   - Oni
+#   - Vulpkanin
+#   - Vox
+#   - Diona
+#   - Moth
+#   - Goblin
+#   - Arachnid
+#   - Resomi
+#   - Harpy
+#   - Reptilian
+#   - Hydrakin
+#   - Rodentia
+#   - Dwarf
+#   - SlimePerson
+#   - Felinid
+#   - Tajaran
+#   - Demon
+#   - Skrell
+#   - Ariral
+#   blacklist:
+#     components:
+#     - BorgChassis
+#   components:
+#     - type: BodyPartReplacement
+#       replacements:
+#       - slot: right arm
+#         prototype: IPCMantisBladeRightArm
+#       - slot: left arm
+#         prototype: IPCMantisBladeLeftArm

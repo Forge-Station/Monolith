@@ -92,7 +92,7 @@
       60: 0.9 #Forge-Change 0.7=>0.9
       90: 0.8 #Forge-Change 0.5=>0.8
       120: 0.7 #Forge-Change 0.3=>0.7
-      160: 0.6 #Forge-Change
+      150: 0.5 #Forge-Change
   - type: SiliconDownOnDead
   - type: Inventory
     templateId: ipc

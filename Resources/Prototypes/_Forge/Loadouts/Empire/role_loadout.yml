@@ -3,6 +3,7 @@
   id: JobNeophyte # Cadet
   groups:
   - EmpireNeck
+  - EmpireHead
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava
@@ -32,6 +33,7 @@
   id: JobAuxilia # Soldier
   groups:
   - EmpireNeck
+  - EmpireHead
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava
@@ -60,6 +62,7 @@
 - type: roleLoadout
   id: JobPraetorian # Officer
   groups:
+  - EmpireOfficerHead
   - EmpireNeck
   - EmpireFace
   - EmpireGlasses
@@ -89,7 +92,8 @@
 - type: roleLoadout
   id: JobCardinal # Officer
   groups:
-  - EmpireNeck
+  - EmpireTessarianNeck
+  - EmpireCommanderHead
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava
@@ -118,7 +122,8 @@
 - type: roleLoadout
   id: JobArbiter # Officer
   groups:
-  - EmpireNeck
+  - EmpireTessarianNeck
+  - EmpireCommanderHead
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava
@@ -149,6 +154,7 @@
   id: JobConsul # Diplomacy
   groups:
   - EmpireNeckConsul
+  - EmpireCommanderHead
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava
@@ -207,6 +213,7 @@
   id: JobPraefect # Lord
   groups:
   - EmpireNeckPreafect
+  - EmpireCommanderHead
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava

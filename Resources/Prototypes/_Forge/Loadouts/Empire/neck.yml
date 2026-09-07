@@ -4,6 +4,16 @@
     neck: ClothingNeckIFFOrange
 
 - type: loadout
+  id: ClothingNeckCloakShoulderEmpire
+  equipment:
+    neck: ClothingNeckCloakShoulderEmpire
+
+- type: loadout
+  id: ClothingNeckCloakTrenchEmpire
+  equipment:
+    neck: ClothingNeckCloakTrenchEmpire
+
+- type: loadout
   id: EmpireIFFPurple
   equipment:
     neck: ClothingNeckIFFPurple

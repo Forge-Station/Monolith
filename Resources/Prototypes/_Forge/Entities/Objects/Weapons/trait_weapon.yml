@@ -1,7 +1,7 @@
 - type: entity
   id: IPCLaserGun
-  name: Лазер из глаз
-  description: Выстреливает лучом из глаз
+  name: laser arm
+  description: shoot laser from your arm
   categories: [ HideSpawnMenu ]
   components:
   - type: RechargeBasicEntityAmmo
@@ -9,7 +9,7 @@
     rechargeSound:
       path: /Audio/_Goobstation/Weapons/Effects/laserpointer.ogg
   - type: BasicEntityAmmoProvider
-    proto: RedLaser
+    proto: RedLaser #TO-DO: заменить лазер на более крутой
     capacity: 1
     count: 2
   - type: Gun

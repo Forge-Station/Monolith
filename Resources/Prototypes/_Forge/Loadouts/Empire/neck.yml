@@ -18,6 +18,12 @@
   equipment:
     neck: ClothingNeckIFFPurple
 
+- type: loadout
+  id: ClothingNeckCloakVulpcaninCloakEmpire
+  price: 30000
+  equipment:
+    neck: ClothingNeckCloakVulpcaninCloakEmpire
+
 #region Preafect
 - type: loadout
   id: ClothingNeckCloakEmpirePreafect

@@ -149,6 +149,7 @@
   - ClothingNeckCloakEmpirePreafectOrange
   - ClothingNeckCloakShoulderEmpire
   - ClothingNeckCloakTrenchEmpire
+  - ClothingNeckCloakVulpcaninCloakEmpire
   fallbacks:
   - ClothingNeckCloakEmpirePreafect
 
@@ -246,6 +247,7 @@
   - ClothingNeckCloakTrenchEmpire
   - ClothingNeckCloakShoulderEmpire
   - ClothingNeckCloakEmpirePreafectViolet
+  - ClothingNeckCloakVulpcaninCloakEmpire
   fallbacks:
   - ClothingNeckCloakEmpirePreafectViolet
 
@@ -267,6 +269,7 @@
   minLimit: 1
   loadouts:
   - EmpireIFFPurple
+  - ClothingNeckCloakVulpcaninCloakEmpire
 
 # region Consul
 - type: loadoutGroup

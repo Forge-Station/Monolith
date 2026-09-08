@@ -3815,20 +3815,17 @@
     storedOffset: 0,0
     shape:
       - 0, 0, 3, 3
-  #Forge-Change
-  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.
+  #Forge-Change-start
+  - type: PassiveDamage
     allowedStates:
     - Alive
     damageCap: 50
     damage:
       types:
-        Heat: -0.1
+        Heat: -0.3
       groups:
-        Brute: -0.1
-  - type: Barotrauma
-    damage:
-      types:
-        Blunt: 0.2 #per second, scales with pressure and other constants, base 0.5
+        Brute: -0.3
+  #Forge-Change-end
 
 - type: entity
   parent: MobDionaNymph

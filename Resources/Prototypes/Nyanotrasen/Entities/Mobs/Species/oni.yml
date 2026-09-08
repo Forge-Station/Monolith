@@ -52,6 +52,7 @@
     speedModifierThresholds:
       60: 0.8 #base 0.7
       80: 0.7 #base 0.5
+  #Forge-Change-end
 
 - type: entity
   save: false

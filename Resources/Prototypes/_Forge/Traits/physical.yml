@@ -136,9 +136,10 @@
   name: trait-ipc-bad-servo-name
   description: trait-ipc-bad-servo-desc
   category: Physical
-  cost: -5
+  cost: -4
   mutuallyExclusiveTraits:
   - BionicLegs
+  - IpcLaserGunTrait
   speciesBlacklist:
   - Human
   - Chitinid

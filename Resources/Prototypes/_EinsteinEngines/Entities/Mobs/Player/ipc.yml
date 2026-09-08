@@ -1,6 +1,6 @@
 - type: entity
   id: MobIPC
-  parent: [PlayerSiliconHumanoidBase, ClothingArmorPlate] #Forge-Change: add ClothingArmorPlate
+  parent: [PlayerSiliconHumanoidBase] #, ClothingArmorPlate] #Forge-Change: add ClothingArmorPlate
   name: Urist McPositronic
   description: A positronic brain in a metal body.
   components:
@@ -91,8 +91,8 @@
     speedModifierThresholds:
       60: 0.9 #Forge-Change 0.7=>0.9
       90: 0.8 #Forge-Change 0.5=>0.8
-      120: 0.7 #Forge-Change 0.3=>0.7
-      150: 0.5 #Forge-Change
+      120: 0.6 #Forge-Change 0.3=>0.6
+      150: 0.4 #Forge-Change
   - type: SiliconDownOnDead
   - type: Inventory
     templateId: ipc
@@ -133,11 +133,11 @@
   - type: TTS # Forge-Change
   - type: RetroMonitorView # Mono
   #Forge-Change-start
-  - type: BodyArmorPlate
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: []
+  # - type: BodyArmorPlate
+  # - type: ContainerContainer
+  #   containers:
+  #     storagebase: !type:Container
+  #       ents: []
    #Forge-Change-end
 
 - type: entity

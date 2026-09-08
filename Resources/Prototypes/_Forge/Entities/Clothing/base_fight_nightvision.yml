@@ -134,8 +134,8 @@
     viewCircleRadius: 525
     viewCircleCount: 2
     viewCircleSpacing: 400
-    phosphorColor: "#aa9c00"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#C4E833FF"
+    lightingColor: "#FFFFFFFF"
     amplification: 1.2
 
 - type: entity
@@ -150,8 +150,8 @@
     viewCircleRadius: 525
     viewCircleCount: 2
     viewCircleSpacing: 400
-    phosphorColor: "#aa9c00"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#C4E833FF"
+    lightingColor: "#FFFFFFFF"
     amplification: 1.2
 
 - type: entity

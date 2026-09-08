@@ -1,2 +1,2 @@
-ent-ActionIPCLaserGun = лазер из руки
-    .desc = Стреляет лазером из твоей руки.
+ent-ActionIPCLaserGun = Лазер из руки
+    .desc = Стреляет лазером прямо из твоей руки.

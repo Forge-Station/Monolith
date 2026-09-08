@@ -73,7 +73,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: DoAfterDelayMultiplier
-  multiplier: 1.15
+    multiplier: 1.15
 
 - type: entity
   parent: RightArmCyberneticBase
@@ -93,7 +93,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: DoAfterDelayMultiplier
-  multiplier: 1.15
+    multiplier: 1.15
 
 - type: entity
   parent: LeftLegCyberneticBase
@@ -121,20 +121,7 @@
   parent: RightArmCyberneticBase
   id: IPCLaserGunRightArm
   name: right ipc arm with laser
-  description: Just common ipc right arm with a built-in laser gun. 
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: BodyPart
-    onAdd:
-    - type: ActionGun
-      action: ActionIPCLaserGun
-      gunProto: IPCLaserGun
-
-- type: entity
-  parent: RightArmCyberneticBase
-  id: IPCLaserGunRightArm
-  name: right ipc arm with laser
-  description: Just common ipc right arm with a built-in laser gun. 
+  description: Just common ipc right arm with a built-in laser gun.
   categories: [ HideSpawnMenu ]
   components:
   - type: BodyPart

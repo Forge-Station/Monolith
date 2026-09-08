@@ -5,11 +5,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 4
+    rechargeCooldown: 10
     rechargeSound:
       path: /Audio/_Goobstation/Weapons/Effects/laserpointer.ogg
   - type: BasicEntityAmmoProvider
-    proto: RedLaser #TO-DO: заменить лазер на более крутой
+    proto: RedMediumLaser #28 heat damage, 0.15 armor penetration
     capacity: 1
     count: 2
   - type: Gun

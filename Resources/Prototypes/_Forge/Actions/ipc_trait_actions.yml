@@ -5,7 +5,7 @@
   description: Fires a laser from arm at the designated point.
   components:
   - type: WorldTargetAction
-    icon: { sprite : _NF/Objects/Weapons/Guns/Battery/laser_pistol.rsi}
+    icon: _NF/Objects/Weapons/Guns/Battery/laser_pistol.rsi
     event: !type:ActionGunShootEvent
     priority: 2
     checkCanAccess: false

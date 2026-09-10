@@ -51,6 +51,7 @@
   id: SalvageLocator
   name: salvage locator
   description: Locates salvage.
+  categories: [HideSpawnMenu] #Forge-Change
   components:
   - type: SalvageMagnet
   - type: ApcPowerReceiver

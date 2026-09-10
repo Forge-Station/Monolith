@@ -3,6 +3,7 @@
   id: SalvageMagnet
   name: salvage magnet
   description: Pulls in salvage.
+  categories: [HideSpawnMenu] #Forge-Change
   components:
   - type: Sprite
     sprite: Structures/Machines/salvage.rsi

@@ -347,7 +347,7 @@ public abstract class SharedAutodocSystem : EntitySystem
         return _mobState.IsAlive(uid) && !HasComp<SleepingComponent>(uid);
     }
 
-     /// <summary>
+    /// <summary>
     /// Creates a new program and populates it using another AutodocProgram.
     /// Will return false on fail. True on success.
     /// </summary>

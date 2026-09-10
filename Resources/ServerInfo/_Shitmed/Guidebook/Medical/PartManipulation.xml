@@ -9,7 +9,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
   ## Анатомия
 
-  Обычно тело имеет 11 основных частей. Это:
+  Обычно тело имеет 10 основных частей. Это:
 
   <Box>
   <GuideEntityEmbed Entity="HeadHuman" Caption="голова"/>
@@ -17,8 +17,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <Box>
   <GuideEntityEmbed Entity="RightHandHuman" Caption="правая рука"/>
   <GuideEntityEmbed Entity="RightArmHuman" Caption="правое предплечье"/>
-  <GuideEntityEmbed Entity="ChestHuman" Caption="торс"/>
-  <GuideEntityEmbed Entity="GroinHuman" Caption="пах"/>
+  <GuideEntityEmbed Entity="TorsoHuman" Caption="торс"/>
   <GuideEntityEmbed Entity="LeftArmHuman" Caption="левое предплечье"/>
   <GuideEntityEmbed Entity="LeftHandHuman" Caption="левая рука"/>
   </Box>

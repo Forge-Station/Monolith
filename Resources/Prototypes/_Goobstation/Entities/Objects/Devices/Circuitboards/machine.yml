@@ -144,7 +144,7 @@
   name: station UwU radio machine board
   components:
     - type: MachineBoard
-      prototype: StationRadioUwUReceiver
+      prototype: StationRadioReceiverUwU
       stackRequirements:
         Steel: 1 #Forge-Change
         Cable: 2

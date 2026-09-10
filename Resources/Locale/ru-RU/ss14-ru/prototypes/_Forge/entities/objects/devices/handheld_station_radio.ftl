@@ -1,2 +1,2 @@
-ent-StationRadioReceiverHandheld = портативное { ent-StationRadioReceiverUwu }
-    .desc = { ent-StationRadioReceiverUwu.desc }
+ent-StationRadioReceiverHandheld = портативное { ent-StationRadioReceiverUwU }
+    .desc = { ent-StationRadioReceiverUwU.desc }

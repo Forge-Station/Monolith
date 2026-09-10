@@ -227,7 +227,8 @@ public abstract class SharedAutodocSystem : EntitySystem
 
     public bool GrabItem(Entity<AutodocComponent, HandsComponent> ent, EntityUid item)
     {
-        return _hands.TryPickup(ent, item, ent.Comp1.ItemSlot, animate: false, handsComp: ent.Comp2);
+        // Machines bypass player action blockers when running programmed steps.
+        return _hands.TryPickup(ent, item, ent.Comp1.ItemSlot, checkActionBlocker: false, animate: false, handsComp: ent.Comp2);
     }
 
     public void GrabItemOrThrow(Entity<AutodocComponent, HandsComponent> ent, EntityUid item)
@@ -239,6 +240,8 @@ public abstract class SharedAutodocSystem : EntitySystem
     public void StoreItemOrThrow(Entity<AutodocComponent, HandsComponent> ent)
     {
         var item = GetHeldOrThrow(ent);
+        // Ensure the held item hand is active so storage insert / hand transfer is consistent.
+        _hands.TrySetActiveHand(ent.Owner, ent.Comp1.ItemSlot, ent.Comp2);
         if (!_storage.Insert(ent, item, out _))
             throw new AutodocError("storage-full");
     }
@@ -323,13 +326,14 @@ public abstract class SharedAutodocSystem : EntitySystem
         if (!_surgery.TryDoSurgeryStep(patient, part, ent, surgeryId, nextStep, out var error))
         {
             // if the omnitool is held inserting organ etc will fail
-            // may need to swap hands to the selected item instead of omnitool
-            // if that works then it'll swap back automatically for the next step
+            // switch to the surgery-specific hand (organs/parts), then fall back to cycling hands
             if (error != StepInvalidReason.MissingTool && error != StepInvalidReason.ToolInvalid)
                 throw new AutodocError($"step-invalid-{error}");
 
             var hands = Comp<HandsComponent>(ent);
-            _hands.SwapHands((ent.Owner, hands));
+            if (!_hands.TrySetActiveHand(ent.Owner, ent.Comp.ItemSlot, hands))
+                _hands.SwapHands((ent.Owner, hands));
+
             if (!_surgery.TryDoSurgeryStep(patient, part, ent, surgeryId, nextStep, out error))
                 throw new AutodocError($"step-invalid-{error}"); // no trying again just fail
         }

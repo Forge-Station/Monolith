@@ -123,7 +123,9 @@ public sealed partial class AddStepWindow : FancyWindow
             _wait = new DialogWindow(WaitButton.Text!, entries);
             _wait.OnConfirmed += responses =>
             {
-                var length = int.Parse(responses[field].Trim());
+                if (!int.TryParse(responses[field].Trim(), out var length))
+                    return;
+
                 if (length < 1 || length > 30)
                     return;
 

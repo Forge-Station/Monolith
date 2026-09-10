@@ -975,8 +975,11 @@ public abstract partial class SharedSurgerySystem
         }
 
         //var tool = _hands.GetActiveItemOrSelf(user);
-        if (!CanPerformStep(user, body, part, step, true, out _, out _, out var validTools))
+        if (!CanPerformStep(user, body, part, step, true, out _, out var reason, out var validTools))
+        {
+            error = reason;
             return false;
+        }
 
         var speed = 1f;
         //var toolComp = _toolQuery.CompOrNull(tool);

@@ -29,7 +29,7 @@ public sealed class HandsFillSystem : EntitySystem
                 continue;
 
             var uid = Spawn(id, coords);
-            if (!_hands.TryPickup(ent, uid, name, animate: false, handsComp: hands))
+            if (!_hands.TryPickup(ent, uid, name, checkActionBlocker: false, animate: false, handsComp: hands))
             {
                 Log.Error($"Entity {ToPrettyString(ent)} couldn't pick up item {id} into its '{name}' hand!");
                 Del(uid);

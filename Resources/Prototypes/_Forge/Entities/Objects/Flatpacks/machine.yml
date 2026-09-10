@@ -149,7 +149,7 @@
   description: Packaging containing a station Uwu radio.
   components:
   - type: Flatpack
-    entity: StationRadioReceiverUwu
+    entity: StationRadioReceiverUwU
   - type: StaticPrice
     price: 40
   - type: Sprite

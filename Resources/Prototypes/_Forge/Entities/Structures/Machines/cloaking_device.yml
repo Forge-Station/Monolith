@@ -89,6 +89,7 @@
     shieldDisablingInCloaking: true
     radioSendBlockingInCloaking: true
     radioReceiveBlockingInCloaking: false
+    priority: 1
   - type: ApcPowerReceiver
     powerLoad: 20000
   - type: Machine
@@ -155,6 +156,7 @@
     shieldDisablingInCloaking: true
     radioSendBlockingInCloaking: true
     radioReceiveBlockingInCloaking: false
+    priority: 2
   - type: ApcPowerReceiver
     powerLoad: 40000
   - type: Machine
@@ -247,6 +249,7 @@
     shieldDisablingInCloaking: false
     radioSendBlockingInCloaking: true
     radioReceiveBlockingInCloaking: false
+    priority: 3
   - type: ApcPowerReceiver
     powerLoad: 60000
   - type: Construction

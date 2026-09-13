@@ -17,4 +17,11 @@ public sealed partial class CloakingShuttleDeviceComponent : Component
 
     [DataField("radioReceiveBlockingInCloaking")]
     public bool RadioReceiveBlockingInCloaking = false;
+
+    /// <summary>
+    /// Higher value wins when several powered devices are on the same grid.
+    /// UID is only used as a tie-breaker.
+    /// </summary>
+    [DataField("priority")]
+    public int Priority = 0;
 }

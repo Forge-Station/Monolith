@@ -4,6 +4,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Radio;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Forge.CloakingShuttle;
+using Content.Shared._Mono.Ships.Components;
 using Content.Shared.Power;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
@@ -54,13 +55,13 @@ public sealed class CloakingShuttleSystem : EntitySystem
             ev.Cancelled = true;
     }
 
-    private void OnCloakShutdown(EntityUid uid, CloakingShuttleComponent cloakingShuttleDeviceComponent, ComponentShutdown args)
+    private void OnCloakShutdown(EntityUid uid, CloakingShuttleComponent component, ComponentShutdown args)
     {
-        var gridUid = Transform(uid).GridUid;
-        if (gridUid is not { } grid)
-            return;
+        // CloakingShuttleComponent lives on the grid itself.
+        _sharedShuttleSystem.RemoveIFFFlag(uid, IFFFlags.Hide);
 
-        _sharedShuttleSystem.RemoveIFFFlag(grid, IFFFlags.Hide);
+        if (component.DeviceShieldDisabling)
+            RemComp<ShipShieldDisabledGridComponent>(uid);
     }
 
     private void OnDevicePowerChanged(EntityUid uid, CloakingShuttleDeviceComponent cloakingShuttleDeviceComponent, PowerChangedEvent args)
@@ -128,15 +129,21 @@ public sealed class CloakingShuttleSystem : EntitySystem
     {
         device = default;
         var best = EntityUid.Invalid;
+        var bestPriority = int.MinValue;
 
         var query = EntityQueryEnumerator<CloakingShuttleDeviceComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out _, out var transformComponent))
+        while (query.MoveNext(out var uid, out var deviceComp, out var transformComponent))
         {
             if (transformComponent.GridUid != gridUid || !transformComponent.Anchored || !_powerReceiverSystem.IsPowered(uid))
                 continue;
 
-            if (best == EntityUid.Invalid || uid.CompareTo(best) < 0)
-                best = uid;
+            if (best != EntityUid.Invalid
+                && (deviceComp.Priority < bestPriority
+                    || deviceComp.Priority == bestPriority && uid.CompareTo(best) >= 0))
+                continue;
+
+            best = uid;
+            bestPriority = deviceComp.Priority;
         }
 
         if (best == EntityUid.Invalid)
@@ -185,14 +192,20 @@ public sealed class CloakingShuttleSystem : EntitySystem
 
     private void Activate(EntityUid gridUid, CloakingShuttleComponent cloakingShuttleComponent)
     {
-        if (cloakingShuttleComponent.Active
-            || cloakingShuttleComponent.Status == ShuttleCloakingStatus.Cooldown
+        if (cloakingShuttleComponent.Active)
+            return;
+
+        if (cloakingShuttleComponent.Status == ShuttleCloakingStatus.Cooldown
             && cloakingShuttleComponent.TimeCooldown != default
-            && _timing.CurTime < cloakingShuttleComponent.TimeCooldown.End
-            || !TryGetDevice(gridUid, out var deviceUid)
+            && _timing.CurTime < cloakingShuttleComponent.TimeCooldown.End)
+            return;
+
+        if (!TryGetDevice(gridUid, out var deviceUid)
             || !TryComp<CloakingShuttleDeviceComponent>(deviceUid, out var cloakingShuttleDeviceComponent)
             || !TryComp<IFFComponent>(gridUid, out var iffComponent)
-            || (iffComponent.Flags & IFFFlags.IsPlayerShuttle) == 0)
+            || (iffComponent.Flags & IFFFlags.IsPlayerShuttle) == 0
+            || iffComponent.ReadOnly
+            || HasComp<CloakSuppressionComponent>(gridUid))
             return;
 
         cloakingShuttleComponent.DeviceCooldown = MathF.Max(cloakingShuttleDeviceComponent.Cooldown, 0f);
@@ -239,12 +252,23 @@ public sealed class CloakingShuttleSystem : EntitySystem
         var query = EntityQueryEnumerator<CloakingShuttleComponent>();
         while (query.MoveNext(out var uid, out var cloakingShuttleComponent))
         {
-            if (cloakingShuttleComponent is { Active: true, Status: ShuttleCloakingStatus.Active }
-                && cloakingShuttleComponent.TimeActive != default
-                && _timing.CurTime >= cloakingShuttleComponent.TimeActive.End)
+            if (cloakingShuttleComponent is { Active: true, Status: ShuttleCloakingStatus.Active })
             {
-                Deactivate(uid, cloakingShuttleComponent);
-                continue;
+                // CloakHeat (and similar) can strip Hide without talking to this system.
+                // CloakHunter suppression is temporary — keep Active so Hide can be restored.
+                if (!HasComp<CloakSuppressionComponent>(uid)
+                    && (!TryComp<IFFComponent>(uid, out var iff) || (iff.Flags & IFFFlags.Hide) == 0))
+                {
+                    Deactivate(uid, cloakingShuttleComponent);
+                    continue;
+                }
+
+                if (cloakingShuttleComponent.TimeActive != default
+                    && _timing.CurTime >= cloakingShuttleComponent.TimeActive.End)
+                {
+                    Deactivate(uid, cloakingShuttleComponent);
+                    continue;
+                }
             }
 
             if (cloakingShuttleComponent.Status == ShuttleCloakingStatus.Cooldown

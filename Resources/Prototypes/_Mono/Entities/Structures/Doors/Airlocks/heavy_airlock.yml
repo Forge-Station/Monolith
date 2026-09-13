@@ -47,6 +47,8 @@
     node: airlock
   - type: Wires
     layoutId: HighSec
+  - type: Airlock
+    openUnlitVisible: false # Forge-Change
 
 - type: entity
   parent: AirlockGlass

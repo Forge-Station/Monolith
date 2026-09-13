@@ -813,6 +813,9 @@
   - type: PlaceableSurface # DeltaV: Allow ore bags to dump into it directly
     isPlaceable: false # but not place on it if you just click it with a random item
   - type: OreSiloClient #Gives silo access to ore holding
+  # Forge-Change: accept ore from disposal trunks into MaterialStorage.
+  - type: OrePipeOutlet
+    maxInsertPerFlush: 40
 
 - type: entity
   parent: OreProcessor

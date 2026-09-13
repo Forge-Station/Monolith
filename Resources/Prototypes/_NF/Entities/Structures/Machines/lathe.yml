@@ -408,6 +408,9 @@
     productValueModifier: null
     staticPacks:
     - NFScrapStatic
+  # Forge-Change: accept scrap/ore from disposal trunks into MaterialStorage.
+  - type: OrePipeOutlet
+    maxInsertPerFlush: 40
 
 - type: entity
   id: BiogeneratorFill

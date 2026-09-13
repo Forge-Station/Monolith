@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Paradise at https://github.com/ParadiseSS13/Paradise/commit/f9815fac410eda828448e1e438021e7bba37f575 and https://github.com/ParadiseSS13/Paradise/blob/f9815fac410eda828448e1e438021e7bba37f575/icons/mob/body_accessory.dmi, converted to black and white and split into seperate sprites for fringes with slight edits by Monotheonist South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "skrell_fringetail_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_fringetail_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "skrell_fringetail_fringe_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_fringetail_fringe_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "skrell_longfringetail_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_longfringetail_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "skrell_longfringetail_fringe_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_longfringetail_fringe_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "skrell_shortfringetail_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_shortfringetail_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "skrell_shortfringetail_fringe_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_shortfringetail_fringe_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_long_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_long_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_short_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_short_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_xlong_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_xlong_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "skrell_xlongfringetail_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "skrell_xlongfringetail_FRONT",
+      "directions": 4
+    }
+  ]
+}

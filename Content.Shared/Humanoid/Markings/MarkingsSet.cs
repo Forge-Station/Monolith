@@ -72,6 +72,7 @@ public sealed partial class MarkingSet
         }
 
         Points = MarkingPoints.CloneMarkingPointDictionary(points.Points);
+        LimitUndergarments(Points); // WOLFGATE
 
         foreach (var marking in markings)
         {
@@ -119,6 +120,7 @@ public sealed partial class MarkingSet
         }
 
         Points = MarkingPoints.CloneMarkingPointDictionary(points.Points);
+        LimitUndergarments(Points); // WOLFGATE
     }
 
     /// <summary>
@@ -136,6 +138,26 @@ public sealed partial class MarkingSet
         }
 
         Points = MarkingPoints.CloneMarkingPointDictionary(other.Points);
+    }
+
+    /// <summary>
+    /// WOLFGATE - one undergarment top and one bottom per character, for every species. Works on the cloned points,
+    /// never the prototype's: a missing entry becomes an optional budget of 1 with no default markings, and an
+    /// entry above 1 is lowered to 1.
+    /// </summary>
+    private static void LimitUndergarments(Dictionary<MarkingCategories, MarkingPoints> points)
+    {
+        LimitToOne(points, MarkingCategories.UndergarmentTop);
+        LimitToOne(points, MarkingCategories.UndergarmentBottom);
+    }
+
+    /// <summary>WOLFGATE - caps one category of a cloned points dictionary at a single marking.</summary>
+    private static void LimitToOne(Dictionary<MarkingCategories, MarkingPoints> points, MarkingCategories category)
+    {
+        if (!points.TryGetValue(category, out var limit))
+            points[category] = new MarkingPoints { Points = 1, Required = false };
+        else if (limit.Points > 1)
+            limit.Points = 1;
     }
 
     /// <summary>
@@ -242,9 +264,12 @@ public sealed partial class MarkingSet
     {
         IoCManager.Resolve(ref markingManager);
 
-        var toRemove = new List<int>();
         foreach (var (category, list) in Markings)
         {
+            // WOLFGATE: collected per category and removed from the back. This used to be one list for the
+            // whole set, so indices found in one category were removed again from every later category, and
+            // removing front to back shifted the remaining indices onto the wrong markings.
+            var toRemove = new List<int>();
             for (var i = 0; i < list.Count; i++)
             {
                 if (!markingManager.TryGetMarking(list[i], out var marking))
@@ -255,15 +280,59 @@ public sealed partial class MarkingSet
 
                 if (marking.Sprites.Count != list[i].MarkingColors.Count)
                 {
-                    list[i] = new Marking(marking.ID, marking.Sprites.Count);
+                    // WOLFGATE - keep saved colours when a marking gains colour-linked sprites (e.g. a split tail).
+                    list[i] = TryPadLinkedColors(marking, list[i], out var padded)
+                        ? padded
+                        : new Marking(marking.ID, marking.Sprites.Count);
                 }
             }
 
-            foreach (var i in toRemove)
+            for (var i = toRemove.Count - 1; i >= 0; i--)
             {
-                Remove(category, i);
+                Remove(category, toRemove[i]);
             }
         }
+    }
+
+    /// <summary>WOLFGATE - pads missing colours from their colorLinks parents; false if any missing sprite has no linked parent.</summary>
+    private static bool TryPadLinkedColors(MarkingPrototype proto, Marking saved, [NotNullWhen(true)] out Marking? padded)
+    {
+        padded = null;
+        var savedCount = saved.MarkingColors.Count;
+        if (savedCount == 0 || savedCount >= proto.Sprites.Count)
+            return false;
+
+        if (proto.ColorLinks is not { Count: > 0 } links)
+            return false;
+
+        var colors = new List<Color>(saved.MarkingColors);
+        for (var j = savedCount; j < proto.Sprites.Count; j++)
+        {
+            if (proto.Sprites[j] is not SpriteSpecifier.Rsi rsi
+                || !links.TryGetValue(rsi.RsiState, out var parentState))
+            {
+                return false;
+            }
+
+            // The parent must be one of the saved sprites.
+            var parent = -1;
+            for (var k = 0; k < savedCount; k++)
+            {
+                if (proto.Sprites[k] is SpriteSpecifier.Rsi candidate && candidate.RsiState == parentState)
+                {
+                    parent = k;
+                    break;
+                }
+            }
+
+            if (parent < 0)
+                return false;
+
+            colors.Add(saved.MarkingColors[parent]);
+        }
+
+        padded = new Marking(proto.ID, colors) { Visible = saved.Visible, Forced = saved.Forced };
+        return true;
     }
 
     /// <summary>

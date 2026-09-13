@@ -9,7 +9,7 @@ namespace Content.Shared.SSDIndicator;
 ///     Shows status icon when player in SSD
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(true)] // WOLFGATE - raise AfterAutoHandleState so anatomy visuals follow disconnects
 public sealed partial class SSDIndicatorComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite)]

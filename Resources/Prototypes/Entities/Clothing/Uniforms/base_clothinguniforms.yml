@@ -3,6 +3,7 @@
   parent: [Clothing, RecyclableItemClothBasic] # Frontier: added RecyclableItemClothBasic
   id: UnsensoredClothingUniformBase
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
   # Goobstation edit start
   - type: EmitSoundOnPickup
     sound:

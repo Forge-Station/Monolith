@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using System.Collections.Concurrent; // Forge-Change
 using System.IO;
 using System.Net;
 using System.Text.Json;
@@ -23,6 +22,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using LogLevel = Robust.Shared.Log.LogLevel;
 using MSLogLevel = Microsoft.Extensions.Logging.LogLevel;
+using Content.Shared._Common.Consent; // WOLFGATE
 using Content.Shared._Mono.Company;
 using Content.Server._Mono.Company; // Mono
 
@@ -45,9 +45,6 @@ namespace Content.Server.Database
         Task SaveCharacterSlotAsync(NetUserId userId, ICharacterProfile? profile, int slot);
 
         Task SaveAdminOOCColorAsync(NetUserId userId, Color color);
-
-        // Forge-Change: persist sponsor cosmetic preferences.
-        Task SaveSponsorPreferencesAsync(NetUserId userId, Color oocColor, Color loocColor, string ghostSkin);
 
         // Single method for two operations for transaction.
         Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot);
@@ -348,6 +345,16 @@ namespace Content.Server.Database
 
         #endregion
 
+        // WOLFGATE - consent system ported from HardLight
+        #region Consent Settings
+
+        Task<int> SavePlayerConsentSettingsAsync(NetUserId userId, PlayerConsentSettings consentSettings);
+        Task<ConsentSettings> GetPlayerConsentSettingsAsync(NetUserId userId);
+        Task<ConsentFreetextReadReceipt> UpdatePlayerConsentReadReceipt(NetUserId readerUserId, int readConsentSettingsId);
+
+        #endregion
+        // End WOLFGATE
+
         #region IPintel
 
         Task<bool> UpsertIPIntelCache(DateTime time, IPAddress ip, float score);
@@ -387,6 +394,19 @@ namespace Content.Server.Database
         /// </remarks>
         /// <param name="notification">The notification to send.</param>
         Task SendNotification(DatabaseNotification notification);
+
+        #endregion
+
+        #region Wayfarer Safety Deposit Box
+
+        Task<WayfarerSafetyDepositBox> PurchaseSafetyDepositBox(Guid ownerUserId, int characterIndex, string ownerName, string boxSize, CancellationToken cancel = default);
+        Task<List<WayfarerSafetyDepositBox>> GetPlayerSafetyDepositBoxes(Guid ownerUserId, int characterIndex, CancellationToken cancel = default);
+        Task<WayfarerSafetyDepositBox?> GetSafetyDepositBox(Guid boxId, CancellationToken cancel = default);
+        Task DepositSafetyDepositBoxItems(Guid boxId, List<string> entityDataList, CancellationToken cancel = default);
+        Task UpdateSafetyDepositBoxNickname(Guid boxId, string? nickname, CancellationToken cancel = default);
+        Task ClearSafetyDepositBoxItems(Guid boxId, int roundId, CancellationToken cancel = default);
+        Task<int> DeleteStaleSafetyDepositBoxes(int daysStale, CancellationToken cancel = default);
+        Task DeleteSafetyDepositBox(Guid boxId, CancellationToken cancel = default);
 
         #endregion
     }
@@ -442,7 +462,6 @@ namespace Content.Server.Database
         // When running in integration tests, we'll use a single in-memory SQLite database connection.
         // This is that connection, close it when we shut down.
         private SqliteConnection? _sqliteInMemoryConnection;
-        private readonly ConcurrentDictionary<(Guid UserId, int Slot), SemaphoreSlim> _characterSlotWriteLocks = new(); // Forge-Change
 
         private readonly List<Action<DatabaseNotification>> _notificationHandlers = [];
 
@@ -502,26 +521,19 @@ namespace Content.Server.Database
         public Task SaveCharacterSlotAsync(NetUserId userId, ICharacterProfile? profile, int slot)
         {
             DbWriteOpsMetric.Inc();
-            return RunCharacterSlotWriteLocked(userId, slot, () => RunDbCommand(() => _db.SaveCharacterSlotAsync(userId, profile, slot))); // Forge-Change
+            return RunDbCommand(() => _db.SaveCharacterSlotAsync(userId, profile, slot));
         }
 
         public Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot)
         {
             DbWriteOpsMetric.Inc();
-            return RunCharacterSlotWriteLocked(userId, deleteSlot, () => RunDbCommand(() => _db.DeleteSlotAndSetSelectedIndex(userId, deleteSlot, newSlot))); // Forge-Change
+            return RunDbCommand(() => _db.DeleteSlotAndSetSelectedIndex(userId, deleteSlot, newSlot));
         }
 
         public Task SaveAdminOOCColorAsync(NetUserId userId, Color color)
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.SaveAdminOOCColorAsync(userId, color));
-        }
-
-        // Forge-Change: persist sponsor cosmetic preferences.
-        public Task SaveSponsorPreferencesAsync(NetUserId userId, Color oocColor, Color loocColor, string ghostSkin)
-        {
-            DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.SaveSponsorPreferencesAsync(userId, oocColor, loocColor, ghostSkin));
         }
 
         public Task<PlayerPreferences?> GetPlayerPreferencesAsync(NetUserId userId, CancellationToken cancel)
@@ -1078,6 +1090,7 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveJobWhitelist(player, job));
         }
+
         // Frontier: ghost role DB ops
         public Task AddGhostRoleWhitelist(Guid player, ProtoId<GhostRolePrototype> ghostRole)
         {
@@ -1177,6 +1190,82 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.SendNotification(notification));
         }
 
+        #region Wayfarer Safety Deposit Box
+
+        public Task<WayfarerSafetyDepositBox> PurchaseSafetyDepositBox(Guid ownerUserId, int characterIndex, string ownerName, string boxSize, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.PurchaseSafetyDepositBox(ownerUserId, characterIndex, ownerName, boxSize, cancel));
+        }
+
+        public Task<List<WayfarerSafetyDepositBox>> GetPlayerSafetyDepositBoxes(Guid ownerUserId, int characterIndex, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetPlayerSafetyDepositBoxes(ownerUserId, characterIndex, cancel));
+        }
+
+        public Task<WayfarerSafetyDepositBox?> GetSafetyDepositBox(Guid boxId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetSafetyDepositBox(boxId, cancel));
+        }
+
+        public Task DepositSafetyDepositBoxItems(Guid boxId, List<string> entityDataList, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DepositSafetyDepositBoxItems(boxId, entityDataList, cancel));
+        }
+
+        public Task UpdateSafetyDepositBoxNickname(Guid boxId, string? nickname, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpdateSafetyDepositBoxNickname(boxId, nickname, cancel));
+        }
+
+        public Task ClearSafetyDepositBoxItems(Guid boxId, int roundId, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.ClearSafetyDepositBoxItems(boxId, roundId, cancel));
+        }
+
+        public Task<int> DeleteStaleSafetyDepositBoxes(int daysStale, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteStaleSafetyDepositBoxes(daysStale, cancel));
+        }
+
+        public Task DeleteSafetyDepositBox(Guid boxId, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteSafetyDepositBox(boxId, cancel));
+        }
+
+        #endregion
+
+        // WOLFGATE - consent system ported from HardLight
+        #region Consent Settings
+
+        public Task<int> SavePlayerConsentSettingsAsync(NetUserId userId, PlayerConsentSettings consentSettings)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SavePlayerConsentSettingsAsync(userId, consentSettings));
+        }
+
+        public Task<ConsentSettings> GetPlayerConsentSettingsAsync(NetUserId userId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetPlayerConsentSettingsAsync(userId));
+        }
+
+        public Task<ConsentFreetextReadReceipt> UpdatePlayerConsentReadReceipt(NetUserId readerUserId, int readConsentSettingsId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpdatePlayerConsentReadReceipt(readerUserId, readConsentSettingsId));
+        }
+
+        #endregion
+        // End WOLFGATE
+
         private async void HandleDatabaseNotification(DatabaseNotification notification)
         {
             lock (_notificationHandlers)
@@ -1218,21 +1307,7 @@ namespace Content.Server.Database
 
             await Task.Run(command);
         }
-        // Forge-Change-start
-        private async Task RunCharacterSlotWriteLocked(NetUserId userId, int slot, Func<Task> command)
-        {
-            var gate = _characterSlotWriteLocks.GetOrAdd((userId.UserId, slot), _ => new SemaphoreSlim(1, 1));
-            await gate.WaitAsync();
-            try
-            {
-                await command();
-            }
-            finally
-            {
-                gate.Release();
-            }
-        }
-        // Forge-Change-end
+
         private static T RunDbCommandCoreSync<T>(Func<T> command) where T : IAsyncResult
         {
             var task = command();

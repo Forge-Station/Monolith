@@ -1,0 +1,44 @@
+# Global anatomy settings, read through SharedGenitalsSystem.Settings.
+
+- type: genitalSettings
+  id: Default
+  adultAge: 18
+  excludedSpecies: [ IPC ]      # positronic chassis
+  partialArousal: 30
+  fullArousal: 70
+  vaginaArousedFrom: Full       # the aroused vulva art is only drawn at full arousal
+  minLengthCm: 5
+  maxLengthCm: 60
+  defaultLengthCm: 15
+  lengthStepMaxCm: [ 17, 24, 32, 44 ]
+  defaultTesticleSize: 2
+  defaultCup: 3
+  testiclesShape: GenitalShapeTesticlesPair
+  stripDelay: 3
+  stripCooldown: 30
+  requestInterval: 0.1
+  requestBurst: 3
+  stripConsent: UndergarmentStrip   # consent.yml; unset would refuse every undergarment removal by others
+  surgeryConsent: AnatomySurgery    # consent.yml; unset would refuse every anatomy surgery by others
+  # Measured on the south-facing torso sprites against Human, in pixels (+y up). Chest follows the female torso top
+  # (first row at least 5 px wide), Groin the male crotch (lowest torso row in the leg gap). Species that share a body
+  # share the values. Provisional until each species is checked in the client.
+  speciesOffsets:
+    Resomi: { Chest: "0,-4", Groin: "0,-3" }        # torso top 4 px lower, crotch 3 px lower
+    ProtoResomi: { Chest: "0,-4", Groin: "0,-3" }
+    Vox: { Chest: "0,-2" }                          # shoulders 2 px lower, crotch matches
+    ProtoVox: { Chest: "0,-2" }
+    Felionoid: { Chest: "0,-2" }
+    ProtoFeline: { Chest: "0,-2" }
+    Hydrakin: { Chest: "0,-2" }
+    Arachnid: { Groin: "0,1" }                      # crotch 1 px higher, shoulders match
+    ProtoArachnid: { Groin: "0,1" }
+    Protogen: { Groin: "0,1" }
+    Shadekin: { Groin: "0,1" }
+    ProtoKin: { Groin: "0,1" }
+    Thaven: { Chest: "0,1", Groin: "0,1" }          # torso 1 px higher
+    ProtoThaven: { Chest: "0,1", Groin: "0,1" }
+    Skrell: { Chest: "0,1", Groin: "0,1" }
+    Diona: { Chest: "0,1", Groin: "0,1" }
+    ProtoDionae: { Chest: "0,1", Groin: "0,1" }
+  adultOnlyMarkings: [ Pregnant-1, Pregnant-2, Pregnant-3, Pregnant-4 ]

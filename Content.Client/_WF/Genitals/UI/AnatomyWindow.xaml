@@ -1,0 +1,77 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:ui="clr-namespace:Content.Client._WF.Genitals.UI"
+                      Title="{Loc 'wf-anatomy-window-title'}"
+                      MinSize="420 400"
+                      SetSize="520 640">
+    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="8">
+        <!-- Shown instead of the controls while the master switch is off or the body has no anatomy. -->
+        <PanelContainer Name="GatePanel" StyleClasses="CreatorCard" Visible="False">
+            <RichTextLabel Name="GateLabel" />
+        </PanelContainer>
+        <ScrollContainer Name="ContentScroll" VerticalExpand="True" HScrollEnabled="False">
+            <BoxContainer Orientation="Vertical" SeparationOverride="8" HorizontalExpand="True">
+                <PanelContainer StyleClasses="CreatorCard">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                        <Label Text="{Loc 'wf-anatomy-reveal'}" StyleClasses="CreatorFieldLabel" />
+                        <CheckBox Name="RevealUndergarmentsButton" Text="{Loc 'wf-anatomy-reveal-undergarments'}" />
+                        <CheckBox Name="RevealClothingButton" Text="{Loc 'wf-anatomy-reveal-clothing'}"
+                                  ToolTip="{Loc 'wf-anatomy-reveal-clothing-tooltip'}" />
+                        <Label Text="{Loc 'wf-anatomy-undergarments'}" StyleClasses="CreatorFieldLabel" Margin="0 4 0 0" />
+                        <BoxContainer Orientation="Horizontal" SeparationOverride="0">
+                            <Label Text="{Loc 'wf-anatomy-undergarment-top'}" MinWidth="80" VAlign="Center" />
+                            <Button Name="TopWornButton" Text="{Loc 'wf-anatomy-undergarment-worn'}" ToggleMode="True"
+                                    StyleClasses="OpenRight" />
+                            <Button Name="TopRemovedButton" Text="{Loc 'wf-anatomy-undergarment-removed'}" ToggleMode="True"
+                                    StyleClasses="OpenLeft" />
+                            <Label Name="TopNoneLabel" Text="{Loc 'wf-anatomy-undergarment-none'}" StyleClasses="CreatorFieldLabel"
+                                   VAlign="Center" Visible="False" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal" SeparationOverride="0">
+                            <Label Text="{Loc 'wf-anatomy-undergarment-bottom'}" MinWidth="80" VAlign="Center" />
+                            <Button Name="BottomWornButton" Text="{Loc 'wf-anatomy-undergarment-worn'}" ToggleMode="True"
+                                    StyleClasses="OpenRight" />
+                            <Button Name="BottomRemovedButton" Text="{Loc 'wf-anatomy-undergarment-removed'}" ToggleMode="True"
+                                    StyleClasses="OpenLeft" />
+                            <Label Name="BottomNoneLabel" Text="{Loc 'wf-anatomy-undergarment-none'}" StyleClasses="CreatorFieldLabel"
+                                   VAlign="Center" Visible="False" />
+                        </BoxContainer>
+                        <BoxContainer Name="StripConsentBox" Orientation="Horizontal" SeparationOverride="0" Margin="0 4 0 0">
+                            <Label Text="{Loc 'wf-anatomy-strip-consent'}" ToolTip="{Loc 'wf-anatomy-strip-consent-tooltip'}"
+                                   HorizontalExpand="True" VAlign="Center" />
+                            <Button Name="StripOffButton" Text="{Loc 'wf-anatomy-toggle-off'}" ToggleMode="True"
+                                    StyleClasses="OpenRight" />
+                            <Button Name="StripOnButton" Text="{Loc 'wf-anatomy-toggle-on'}" ToggleMode="True"
+                                    StyleClasses="OpenLeft" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+                <!-- Only for bodies with a penis or vagina: nothing else reacts to arousal. -->
+                <PanelContainer Name="ArousalCard" StyleClasses="CreatorCard">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc 'wf-anatomy-arousal'}" StyleClasses="CreatorFieldLabel" HorizontalExpand="True" />
+                            <Label Name="ArousalValueLabel" />
+                        </BoxContainer>
+                        <ui:AnatomyArousalSlider Name="ArousalSlider" MinValue="0" MaxValue="100" Rounded="True"
+                                                 HorizontalExpand="True" />
+                        <ui:AnatomyArousalTicks Name="ArousalTicks" MinHeight="6" HorizontalExpand="True" />
+                        <BoxContainer Orientation="Horizontal" SeparationOverride="0">
+                            <Button Name="SnapNoneButton" Text="{Loc 'wf-anatomy-arousal-snap-none'}" StyleClasses="OpenRight" />
+                            <Button Name="SnapPartialButton" Text="{Loc 'wf-anatomy-arousal-snap-partial'}" StyleClasses="OpenBoth" />
+                            <Button Name="SnapFullButton" Text="{Loc 'wf-anatomy-arousal-snap-full'}" StyleClasses="OpenLeft" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+                <Label Name="NoOrgansLabel" Text="{Loc 'wf-anatomy-no-organs'}" StyleClasses="CreatorFieldLabel" Visible="False" />
+                <BoxContainer Name="OrganRows" Orientation="Vertical" SeparationOverride="6" />
+            </BoxContainer>
+        </ScrollContainer>
+        <PanelContainer StyleClasses="LowDivider" />
+        <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+            <Button Name="SaveDefaultsButton" Text="{Loc 'wf-anatomy-save-defaults'}" />
+            <Control HorizontalExpand="True" />
+            <Button Name="ConsentSettingsButton" Text="{Loc 'wf-anatomy-consent-settings'}" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

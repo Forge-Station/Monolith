@@ -95,8 +95,15 @@ public sealed partial class VocalSystem : EntitySystem
 
         sex ??= CompOrNull<HumanoidAppearanceComponent>(uid)?.Sex ?? Sex.Unsexed;
 
-        if (!component.Sounds.TryGetValue(sex.Value, out var protoId))
+        // WOLFGATE: every species offers Unsexed now, but most Vocal components only list Male and Female.
+        // Fall back rather than leaving those characters with no emote sounds at all.
+        if (!component.Sounds.TryGetValue(sex.Value, out var protoId) &&
+            !component.Sounds.TryGetValue(Sex.Unsexed, out protoId) &&
+            !component.Sounds.TryGetValue(Sex.Male, out protoId) &&
+            !component.Sounds.TryGetValue(Sex.Female, out protoId))
+        {
             return;
+        }
         _proto.TryIndex(protoId, out component.EmoteSounds);
     }
 }

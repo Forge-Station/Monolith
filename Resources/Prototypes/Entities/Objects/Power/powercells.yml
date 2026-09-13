@@ -36,6 +36,9 @@
   - type: HitscanBatteryAmmoProvider
     proto: RedLightLaser
     fireCost: 50
+  # WOLFGATE: lets synths and IPCs eat a charged cell.
+  - type: BatteryDrinkerSource
+    drinkSpeedMulti: 2
 
 - type: entity
   name: potato battery

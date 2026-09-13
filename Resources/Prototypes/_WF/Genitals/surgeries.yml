@@ -1,0 +1,214 @@
+# Anatomy surgeries: remove or insert one genital organ through the torso incision with Shitmed's generic organ
+# steps (the brain recipe without bone sawing). SurgeryGenitalConsentCondition hides them unless the patient has
+# anatomy and adult content on; GenitalSurgery marks them for the server surgeon check and the client list filter.
+# No surgery-popup-procedure-SurgeryWF* key may exist, so bystanders only see the generic organ popups.
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryWFRemovePenis
+  name: Remove penis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepRemoveOrgan
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryOrganCondition
+    organ:
+    - type: PenisOrgan
+  - type: SurgeryGenitalConsentCondition
+  - type: GenitalSurgery
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryWFInsertPenis
+  name: Insert penis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepInsertOrgan
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryOrganSlotCondition
+    organSlot: wf_genital_penis
+  - type: SurgeryOrganCondition
+    organ:
+    - type: PenisOrgan
+    inverse: true
+    reattaching: true
+  - type: SurgeryGenitalConsentCondition
+  - type: GenitalSurgery
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryWFRemoveTesticles
+  name: Remove testicles
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepRemoveOrgan
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryOrganCondition
+    organ:
+    - type: TesticlesOrgan
+  - type: SurgeryGenitalConsentCondition
+  - type: GenitalSurgery
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryWFInsertTesticles
+  name: Insert testicles
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepInsertOrgan
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryOrganSlotCondition
+    organSlot: wf_genital_testicles
+  - type: SurgeryOrganCondition
+    organ:
+    - type: TesticlesOrgan
+    inverse: true
+    reattaching: true
+  - type: SurgeryGenitalConsentCondition
+  - type: GenitalSurgery
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryWFRemoveVagina
+  name: Remove vagina
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepRemoveOrgan
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryOrganCondition
+    organ:
+    - type: VaginaOrgan
+  - type: SurgeryGenitalConsentCondition
+  - type: GenitalSurgery
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryWFInsertVagina
+  name: Insert vagina
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepInsertOrgan
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryOrganSlotCondition
+    organSlot: wf_genital_vagina
+  - type: SurgeryOrganCondition
+    organ:
+    - type: VaginaOrgan
+    inverse: true
+    reattaching: true
+  - type: SurgeryGenitalConsentCondition
+  - type: GenitalSurgery
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryWFRemoveWomb
+  name: Remove womb
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepRemoveOrgan
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryOrganCondition
+    organ:
+    - type: WombOrgan
+  - type: SurgeryGenitalConsentCondition
+  - type: GenitalSurgery
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryWFInsertWomb
+  name: Insert womb
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepInsertOrgan
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryOrganSlotCondition
+    organSlot: wf_genital_womb
+  - type: SurgeryOrganCondition
+    organ:
+    - type: WombOrgan
+    inverse: true
+    reattaching: true
+  - type: SurgeryGenitalConsentCondition
+  - type: GenitalSurgery
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryWFRemoveBreasts
+  name: Remove breast tissue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepRemoveOrgan
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryOrganCondition
+    organ:
+    - type: BreastsOrgan
+  - type: SurgeryGenitalConsentCondition
+  - type: GenitalSurgery
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryWFInsertBreasts
+  name: Insert breast tissue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepInsertOrgan
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryOrganSlotCondition
+    organSlot: wf_genital_breasts
+  - type: SurgeryOrganCondition
+    organ:
+    - type: BreastsOrgan
+    inverse: true
+    reattaching: true
+  - type: SurgeryGenitalConsentCondition
+  - type: GenitalSurgery

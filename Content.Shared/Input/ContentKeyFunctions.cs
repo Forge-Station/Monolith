@@ -32,6 +32,8 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction NanoChatNavigateDownUnread = "NanoChatNavigateDownUnread";
         // DeltaV - End NanoChat keybinds
         public static readonly BoundKeyFunction OpenCharacterMenu = "OpenCharacterMenu";
+        public static readonly BoundKeyFunction OpenConsentWindow = "OpenConsentWindow"; // WOLFGATE - consent system
+        public static readonly BoundKeyFunction OpenAnatomyPanel = "OpenAnatomyPanel"; // WOLFGATE - anatomy panel
         public static readonly BoundKeyFunction OpenEmotesMenu = "OpenEmotesMenu";
         public static readonly BoundKeyFunction OpenCraftingMenu = "OpenCraftingMenu";
         public static readonly BoundKeyFunction OpenLanguageMenu = "OpenLanguageMenu"; // Einstein Engines - Language

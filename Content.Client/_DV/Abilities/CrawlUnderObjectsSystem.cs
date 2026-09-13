@@ -1,13 +1,16 @@
 using Content.Shared._DV.Abilities;
-using Content.Shared.Popups;
 using Robust.Client.GameObjects;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._DV.Abilities;
 
+/// <summary>
+/// Client half of sneaking: drops the sprite to the depth mice use while the appearance data says the mob is
+/// sneaking, and puts the old depth back afterwards.
+/// </summary>
 public sealed partial class HideUnderTableAbilitySystem : SharedCrawlUnderObjectsSystem
 {
-    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -16,29 +19,26 @@ public sealed partial class HideUnderTableAbilitySystem : SharedCrawlUnderObject
         SubscribeLocalEvent<CrawlUnderObjectsComponent, AppearanceChangeEvent>(OnAppearanceChange);
     }
 
-    private void OnAppearanceChange(EntityUid uid,
-        CrawlUnderObjectsComponent component,
-        AppearanceChangeEvent args)
+    private void OnAppearanceChange(Entity<CrawlUnderObjectsComponent> ent, ref AppearanceChangeEvent args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite))
+        if (args.Sprite is not { } sprite || !args.AppearanceData.TryGetValue(SneakMode.Enabled, out var value))
             return;
 
-        _appearance.TryGetData(uid, SneakMode.Enabled, out bool enabled);
-        if (enabled)
+        if (value is true)
         {
-            if (component.OriginalDrawDepth != null)
+            if (ent.Comp.OriginalDrawDepth != null)
                 return;
 
-            component.OriginalDrawDepth = sprite.DrawDepth;
-            sprite.DrawDepth = (int) DrawDepth.SmallMobs;
+            ent.Comp.OriginalDrawDepth = sprite.DrawDepth;
+            _sprite.SetDrawDepth((ent.Owner, sprite), (int) DrawDepth.SmallMobs);
         }
         else
         {
-            if (component.OriginalDrawDepth == null)
+            if (ent.Comp.OriginalDrawDepth is not { } original)
                 return;
 
-            sprite.DrawDepth = (int) component.OriginalDrawDepth;
-            component.OriginalDrawDepth = null;
+            _sprite.SetDrawDepth((ent.Owner, sprite), original);
+            ent.Comp.OriginalDrawDepth = null;
         }
     }
 }

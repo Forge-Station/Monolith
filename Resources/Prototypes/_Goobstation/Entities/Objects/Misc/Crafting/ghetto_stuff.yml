@@ -393,6 +393,8 @@
   name: makeshift light vest
   description: A light handmade vest made with steel and cables. Durable, but not that efficient.
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
+    regions: Chest
   - type: Sprite
     sprite: _Goobstation/Clothing/Armor/light_armor.rsi
   - type: Clothing
@@ -419,6 +421,8 @@
   name: makeshift heavy vest
   description: A heavy makeshift vest, made to withstand bullets.
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
+    regions: Chest
   - type: Sprite
     sprite: _Goobstation/Clothing/Armor/heavy_armor.rsi
   - type: Clothing

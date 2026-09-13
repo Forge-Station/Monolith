@@ -1,0 +1,519 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Bubberstation at https://github.com/Bubberstation/Bubberstation/blob/fd10a0c6082e3a35afe94f2a765216c0429fe23b/modular_skyrat/master_files/icons/mob/sprite_accessory/wings.dmi South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 45,
+    "y": 34
+  },
+  "states": [
+    {
+      "name": "m_wings_arfelharpy_top_front_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_arfelharpy_top_front_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_bat_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_bat_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_bee_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_bee_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_beetle_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_beetle_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonalt1_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonalt1_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonalt1_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonalt1_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonalt2_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonalt2_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonalt2_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonalt2_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonsynth_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonsynth_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonsynth_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonsynth_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonsynth_behind_tertiary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_dragonsynth_behind_tertiary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_extra_succubus_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_extra_succubus_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_fairy_behind_BEHIND",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "m_wings_fairy_behind_FRONT",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "m_wings_feathery_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_feathery_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_feathery_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_feathery_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_feathery_behind_tertiary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_feathery_behind_tertiary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_featheryalt1_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_featheryalt1_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_featheryalt1_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_featheryalt1_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_featheryalt1_behind_tertiary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_featheryalt1_behind_tertiary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_featheryalt2_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_featheryalt2_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_featheryalt2_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_featheryalt2_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpy_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpy_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpy_top_front_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpy_top_front_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpyalt_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpyalt_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpyalt_fluffless_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpyalt_fluffless_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpyalt_fluffless_top_front_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpyalt_fluffless_top_front_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpyalt_top_front_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpyalt_top_front_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_behind_tertiary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_behind_tertiary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_fluffless_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_fluffless_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_fluffless_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_fluffless_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_fluffless_top_front_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_fluffless_top_front_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_fluffless_top_front_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_fluffless_top_front_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_top_front_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_top_front_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_top_front_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_top_front_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_top_front_tertiary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_harpybat_top_front_tertiary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_insect_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_insect_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_jewel_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_jewel_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_jewel_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_jewel_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_jewel_behind_tertiary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_jewel_behind_tertiary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_tri_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_tri_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_tri_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_tri_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_tri_behind_tertiary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_low_tri_behind_tertiary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_minibat_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_minibat_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_minifeather_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_minifeather_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_pterodactyl_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_pterodactyl_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_pterodactyl_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_pterodactyl_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_renamon_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_renamon_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_renamon_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_renamon_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_robowing_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_robowing_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_robowing_behind_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_robowing_behind_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_spider_legs_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_spider_legs_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_succubus_behind_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_succubus_behind_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_tinybat_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_tinybat_behind_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_tinyfeather_behind_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "m_wings_tinyfeather_behind_FRONT",
+      "directions": 4
+    }
+  ]
+}

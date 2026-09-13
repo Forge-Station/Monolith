@@ -1,0 +1,311 @@
+# Wolfgate: BlockInjection here is a bare marker that blocks syringes only, so
+# HardLight's blockHypospray/blockInjectOnProjectile/blockReason are dropped.
+# Wolfgate: HardLight's intrinsicChannels field does not exist on Wolfgate's radio
+# components; the Trinary channel still works through `channels`.
+# Wolfgate: HardLight's OfferItem, StunVisuals components dropped - neither feature exists in this fork,
+# and no other Wolfgate mob carries them.
+- type: entity
+  parent: [ BaseMobSpecies, MobBloodstream, MobAtmosStandard, MobFlammable ]
+  id: BaseMobSynth
+  name: Urist McBeeper
+  abstract: true
+  components:
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic # Wolfgate: HardLight's GalacticCommon is TauCetiBasic here
+    - Machine
+    understands:
+    - TauCetiBasic
+    - Machine
+  - type: Icon # It will not have an icon in the adminspawn menu without this. Body parts seem fine for whatever reason.
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: full
+  - type: Sprite
+    layers:
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - moved first so the tail back half is drawn behind the body
+    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.Genital" ] # WOLFGATE - moved below undergarments and clothing (anatomy layer order)
+    - map: [ "enum.HumanoidVisualLayers.Penis" ] # WOLFGATE - moved below undergarments and clothing (anatomy layer order)
+    - map: [ "enum.HumanoidVisualLayers.Breasts" ] # WOLFGATE - moved below undergarments and clothing (anatomy layer order)
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.LFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.RFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.LHand" ]
+    - map: [ "enum.HumanoidVisualLayers.RHand" ]
+    - map: [ "gloves" ]
+    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "eyes" ]
+    - map: [ "outerClothing" ]
+    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
+    - map: [ "belt" ]
+    - map: [ "id" ]
+    - map: [ "back" ]
+    - map: [ "neck" ]
+    - map: [ "misc" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    # WOLFGATE - TailBehind and the Genital/Penis/Breasts bookmarks moved lower in the draw order (see above)
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ]
+    - map: [ "enum.HumanoidVisualLayers.Tail" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+  - type: Damageable
+    damageModifierSet: Synth
+    damageContainer: Synth
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#3f1b66cc"
+  - type: ZombieImmune
+  - type: Sanitized
+  - type: Uncloneable
+  - type: HumanoidAppearance
+    species: Synth
+  - type: Hunger
+    baseDecayRate: 0.0085
+    starvingSlowdownModifier: 0.75
+  - type: Puller
+    needsHands: false
+  - type: Thirst
+  - type: Body
+    prototype: Synth
+    requiredLegs: 2
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: OrganSynthAppendix
+      amount: 5
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    animation: WeaponArcFist
+    damage:
+      types:
+        Blunt: 6
+  - type: Inventory
+    speciesId: synth
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: jumpsuit
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: outerclothing
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: shoes
+      head:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: head
+      mask:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: mask
+      neck:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: neck
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: gloves
+  - type: Carriable
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Borg
+    allowedEmotes: ['Purr', 'Thump', 'Beep', 'Ping', 'Buzz', 'Buzz-Two', 'Chime', 'Honk', 'Whirr']
+  - type: Vocal
+    sounds:
+      Male: UnisexSynth
+      Female: UnisexSynth
+      Unsexed: UnisexSynth
+  - type: BodyEmotes
+    soundsId: ReptilianBodyEmotes
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Trinary
+  - type: ActiveRadio
+    channels:
+    - Trinary
+  - type: Bloodstream
+    bloodReagent: SynthBlood
+    bloodMaxVolume: 300
+    bloodRefreshAmount: 0.0
+    bloodlossDamage:
+      types:
+        Bloodloss: 0.5
+    bloodlossHealDamage:
+      types:
+        Bloodloss: -1
+  - type: BlockInjection
+  - type: SynthBloodstream
+    minBloodLevel: 0.3
+    fullEfficiencyBloodLevel: 0.9
+    minBloodEfficiency: 0.1
+    minHunger: 50
+    hungerCostPerRepair: 1.5
+    hungerCostPerBleed: 2
+    bleedReductionAmount: 0.25
+    damage:
+      groups:
+        Brute: -2.5 # -1.25 after modifiers
+        Burn: -3 # -1.5 after modifiers
+      types:
+        Bloodloss: -0.2 # -0.1 after modifiers
+        Cellular: -0.07 # -0.035 after modifiers
+    bloodRegeneration:
+      targetBloodLevel: 1
+      bloodRefreshAmount: 0.3
+      hungerCostPerUnit: 0.5
+  - type: SynthBattery
+    organSlot: battery
+    startingBattery: PowerCellMedium
+    drawRate: 0.4
+    nutrimentChargeMultiplier: 7.2
+    batteryLowText: synth-battery-low
+    batteryDeadText: synth-battery-dead
+    warningPercentages: [20, 10]
+    batteryLowSound:
+      params:
+        maxDistance: 5
+      path: /Audio/Machines/twobeep.ogg
+    batteryDeadSound:
+      params:
+        maxDistance: 5
+      path: /Audio/Machines/buzz-two.ogg
+  # WOLFGATE: drain APCs and loose power cells to recharge.
+  - type: BatteryDrinker
+    drinkSpeed: 2
+  - type: SynthShock
+    batteryChargeMultiplier: 10.8
+    cellularDamageMultiplier: 0.2
+  - type: BatteryAlert
+    batteryAlert: BorgBattery
+    noBatteryAlert: BorgBatteryNone
+  - type: UniversalHealModifier
+    modifier: 0.5 # reduces the effectiveness of most healing sources by 50%
+  - type: ThermalRegulator
+    metabolismHeat: 500
+    radiatedHeat: 150
+    implicitHeatRegulation: 700
+    sweatHeatRegulation: 1200
+    shiveringHeatRegulation: 400
+    normalBodyTemperature: 310.15
+    thermalRegulationTemperatureThreshold: 4
+  - type: Temperature
+    currentTemperature: 310.15
+    specificHeat: 30
+    heatDamageThreshold: 360
+    coldDamageThreshold: 220
+    coldDamage:
+      types:
+        Cold: 0.1 # per second, scales with temperature & other constants
+    heatDamage:
+      types:
+        Heat: 1.5 # per second, scales with temperature & other constants
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.7 # per second, halved compared to normal
+  - type: TemperatureSpeed
+    thresholds:
+      260: 0.9
+      240: 0.8
+      220: 0.7
+  - type: Blindable
+  - type: FireVisuals
+    alternateState: Standing
+  - type: LayingDown
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    - AnomalyHost
+    - SiliconEmotes
+    - Synth
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobSynthDummy
+  name: Synth Dummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Inventory
+    speciesId: synth
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: jumpsuit
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: outerclothing
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: shoes
+      head:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: head
+      mask:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: mask
+      neck:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: neck
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _HL/Mobs/Species/Synth/displacement.rsi
+            state: gloves

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by SuperJoelD00D, Protogen species by Malice-Risu. Busywork of chopping the sprite up into markings by QuirkyTurtle",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "shoulderplates_right_trim_protogen",
+      "directions": 4
+    },
+    {
+      "name": "shoulderplates_right_screen_protogen",
+      "directions": 4
+    },
+    {
+      "name": "shoulderplates_right_glow_protogen",
+      "directions": 4
+    }
+  ]
+}

@@ -15,7 +15,7 @@
   id: HijabFashionable
   bodyPart: Hair
   markingCategory: Hair
-  speciesRestriction: [Human, Dwarf, SlimePerson, Oni, Goblin, Felinid, Vulpkanin] # Frontier: add Oni, Goblin, Felinid, Vulpkanin
+  speciesRestriction: [Human, Dwarf, SlimePerson, Oni, Goblin, Felinid, Vulpkanin, Canine] # Frontier: add Oni, Goblin, Felinid, Vulpkanin
   sprites:
   - sprite: _Impstation/Mobs/Customization/headcovers.rsi
     state: hijabchic
@@ -24,7 +24,7 @@
   id: HijabSimple
   bodyPart: Hair
   markingCategory: Hair
-  speciesRestriction: [Human, Dwarf, SlimePerson, Oni, Goblin, Felinid, Vulpkanin] # Frontier: add Oni, Goblin, Felinid, Vulpkanin
+  speciesRestriction: [Human, Dwarf, SlimePerson, Oni, Goblin, Felinid, Vulpkanin, Canine] # Frontier: add Oni, Goblin, Felinid, Vulpkanin
   sprites:
   - sprite: _Impstation/Mobs/Customization/headcovers.rsi
     state: hijabsimple
@@ -42,7 +42,7 @@
   id: TichelFashionable
   bodyPart: Hair
   markingCategory: Hair
-  speciesRestriction: [Human, Dwarf, SlimePerson, Oni, Goblin, Felinid, Vulpkanin] # Frontier: add Oni, Goblin, Felinid, Vulpkanin
+  speciesRestriction: [Human, Dwarf, SlimePerson, Oni, Goblin, Felinid, Vulpkanin, Canine] # Frontier: add Oni, Goblin, Felinid, Vulpkanin
   sprites:
   - sprite: _Impstation/Mobs/Customization/headcovers.rsi
     state: tichelfashionable
@@ -51,7 +51,7 @@
   id: TichelSimple
   bodyPart: Hair
   markingCategory: Hair
-  speciesRestriction: [Human, Dwarf, SlimePerson, Oni, Goblin, Felinid, Vulpkanin] # Frontier: add Oni, Goblin, Felinid, Vulpkanin
+  speciesRestriction: [Human, Dwarf, SlimePerson, Oni, Goblin, Felinid, Vulpkanin, Canine] # Frontier: add Oni, Goblin, Felinid, Vulpkanin
   sprites:
   - sprite: _Impstation/Mobs/Customization/headcovers.rsi
     state: tichelsimple

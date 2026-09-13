@@ -1,0 +1,14 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'wf-anatomy-notice-title'}"
+                      MinSize="420 180">
+    <!-- A set width, so the notice text wraps. -->
+    <BoxContainer Orientation="Vertical" Margin="12" SeparationOverride="12" SetWidth="440">
+        <RichTextLabel Name="NoticeLabel" />
+        <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+            <Button Name="OpenConsentButton" Text="{Loc 'wf-anatomy-notice-open-consent'}" />
+            <Control HorizontalExpand="True" />
+            <Button Name="OkButton" Text="{Loc 'wf-anatomy-notice-ok'}" MinWidth="80" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

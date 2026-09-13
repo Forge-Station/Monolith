@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "by Discord gravastardragon (662064921151930389) South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "core_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "core_FRONT",
+      "directions": 4
+    }
+  ]
+}

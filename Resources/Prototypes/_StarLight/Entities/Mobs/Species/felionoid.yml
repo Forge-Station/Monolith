@@ -1,0 +1,212 @@
+- type: entity
+  name: Urist McFelionoid
+  parent: BaseMobHuman
+  # removed BaseSpeciesPickupable, handled by another engine
+  id: BaseMobFelionoid
+  abstract: true
+  components:
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic # Wolfgate: HardLight's GalacticCommon is TauCetiBasic here
+    - Nekomimetic
+    understands:
+    - TauCetiBasic
+    - Nekomimetic
+    - Cat
+  # - type: Absorbable # HL: component not available in this codebase
+  # copied from felinid
+  - type: Sprite
+    scale: 0.8, 0.8
+  - type: HumanoidAppearance
+    species: Felionoid
+    hideLayersOnEquip: # Frontier
+    - Hair # Frontier
+    - HeadTop # Frontier
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 110
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Body
+    prototype: Felionoid
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Vox
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      51: 0.7 # 60%
+      68: 0.5 # 80%
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    angle: 30
+    animation: WeaponArcClaw
+    attackRate: 2
+    damage:
+      types:
+        Slash: 3
+  - type: Speech
+    speechVerb: Felionoid
+    allowedEmotes: ['Mew', 'Hiss', 'Meow', 'Growl', 'Purr', 'Trill']
+  - type: OwOAccent # HL: matches Starlight; combines with (does not override) other accents
+  - type: DamageOnHighSpeedImpact # Landing on all fours!
+    damage:
+      types:
+        Blunt: 1
+  - type: Stamina
+  - type: TypingIndicator
+    proto: felinid
+  - type: PseudoItem
+    storedOffset: 0,17
+    shape:
+      - 0,0,1,4
+      - 0,2,3,4
+      - 4,0,5,4
+  - type: Vocal
+    sounds:
+      Male: MaleFelionoid
+      Female: FemaleFelionoid
+      Unsexed: MaleFelionoid
+  - type: Felinid
+  - type: NoShoesSilentFootsteps
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+    - Felinid # Frontier
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water, SpaceCleaner ]
+      methods: [ Touch ]
+      effects:
+      - !type:WashCreamPieReaction
+      - !type:Emote
+        emote: Hiss
+        showInChat: false
+  - type: Icon
+    sprite: _Starlight/Mobs/Species/Felionoid/parts.rsi
+    state: felionoid
+    requiredLegs: 2
+  - type: MobThresholds
+    allowRevives: true
+    thresholds:
+      0: Alive
+      85: Critical
+      170: Dead
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatHuman
+      amount: 3
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#7a8bf2"
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    - AnomalyHost
+    - Felionoid
+  - type: Inventory
+    speciesId: felionoid
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: hand
+      head:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: head
+      back:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: shoes
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobFelionoidDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: Felionoid
+  - type: Body
+    prototype: Felionoid
+  - type: Inventory
+    speciesId: felionoid
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: hand
+      head:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: head
+      back:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: shoes

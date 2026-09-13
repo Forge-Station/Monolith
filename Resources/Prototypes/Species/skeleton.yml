@@ -16,6 +16,11 @@
   sprites:
     Head: MobSkeletonHead
     Chest: MobSkeletonTorso
+    UndergarmentTop: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    UndergarmentBottom: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Genital: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Penis: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Breasts: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
     LArm: MobSkeletonLArm
     RArm: MobSkeletonRArm
     LHand: MobSkeletonLHand

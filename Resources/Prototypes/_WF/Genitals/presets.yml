@@ -1,0 +1,98 @@
+# Typical anatomy per species group, offered by the creator's preset menu and used to seed a newly included organ.
+# Never applied automatically. Colours are not stored here: GenitalColorDefaults applies them when a preset is used.
+# Every roundstart species except the excluded ones must be listed exactly once (GenitalPresetTest).
+
+- type: genitalPreset
+  id: GenitalPresetDefault
+  fallback: true
+  explicitFallback: [ Human, Dwarf, Goblin, Oni, Diona, SlimePerson, Synth, Protogen, ProtoHumie, ProtoKin, ProtoDawi, ProtoDionae, ProtoSlimePerson, ProtoThaven, Thaven, Shadekin ]
+  male:
+    penis: { shape: GenitalShapePenisHuman, lengthCm: 15 }
+    testicles: { type: External, size: 2 }
+  female:
+    vagina: { shape: GenitalShapeVaginaHuman }
+    womb: true
+    breasts: { shape: GenitalShapeBreastsPair, cup: 3 }
+
+- type: genitalPreset
+  id: GenitalPresetCanine
+  species: [ Vulpkanin, Canine, ProtoVulp ]
+  male:
+    penis: { shape: GenitalShapePenisKnotted, lengthCm: 15, sheath: Sheath }
+    testicles: { type: External, size: 2 }
+  female:
+    vagina: { shape: GenitalShapeVaginaHuman }
+    womb: true
+    breasts: { shape: GenitalShapeBreastsPair, cup: 2 }
+
+- type: genitalPreset
+  id: GenitalPresetFeline
+  species: [ Felinid, Tajaran, Felionoid, ProtoFeline ]
+  male:
+    penis: { shape: GenitalShapePenisBarbKnot, lengthCm: 13, sheath: Sheath }
+    testicles: { type: External, size: 2 }
+  female:
+    vagina: { shape: GenitalShapeVaginaHuman }
+    womb: true
+    breasts: { shape: GenitalShapeBreastsPair, cup: 2 }
+
+- type: genitalPreset
+  id: GenitalPresetReptile
+  species: [ Reptilian, Hydrakin, ProtoReptile ]
+  male:
+    penis: { shape: GenitalShapePenisHemi, lengthCm: 15, sheath: Slit }
+    testicles: { type: Internal }
+  female:
+    vagina: { shape: GenitalShapeVaginaSlit }
+    womb: true
+
+- type: genitalPreset
+  id: GenitalPresetAquatic
+  species: [ Feroxi ]
+  male:
+    penis: { shape: GenitalShapePenisTapered, lengthCm: 15, sheath: Slit }
+    testicles: { type: Internal }
+  female:
+    vagina: { shape: GenitalShapeVaginaSlit }
+    womb: true
+
+- type: genitalPreset
+  id: GenitalPresetAmphibian
+  species: [ Skrell ]
+  male:
+    penis: { shape: GenitalShapePenisNondescript, lengthCm: 12, sheath: Slit }
+    testicles: { type: Internal }
+  female:
+    vagina: { shape: GenitalShapeVaginaSlit }
+    womb: true
+
+- type: genitalPreset
+  id: GenitalPresetAvian
+  species: [ Avali, Harpy, ProtoAvali, Vox, Resomi, ProtoVox, ProtoResomi ]
+  male:
+    penis: { shape: GenitalShapePenisNondescript, lengthCm: 10, sheath: Slit }
+    testicles: { type: Internal }
+  female:
+    vagina: { shape: GenitalShapeVaginaSlit }
+    womb: true
+
+- type: genitalPreset
+  id: GenitalPresetArthropod
+  species: [ Arachnid, Moth, Chitinid, ProtoMoth, ProtoArachnid ]
+  male:
+    penis: { shape: GenitalShapePenisNondescript, lengthCm: 12, sheath: Slit }
+    testicles: { type: Internal }
+  female:
+    vagina: { shape: GenitalShapeVaginaSlit }
+    womb: true
+
+- type: genitalPreset
+  id: GenitalPresetRodent
+  species: [ Rodentia ]
+  male:
+    penis: { shape: GenitalShapePenisNondescript, lengthCm: 12, sheath: Sheath }
+    testicles: { type: External, size: 2 }
+  female:
+    vagina: { shape: GenitalShapeVaginaHuman }
+    womb: true
+    breasts: { shape: GenitalShapeBreastsPair, cup: 1 }

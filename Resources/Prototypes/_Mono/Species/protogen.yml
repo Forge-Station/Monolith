@@ -1,7 +1,7 @@
 - type: species
   id: Protogen
   name: species-name-protogen
-  roundStart: false
+  roundStart: true # Wolfgate: was false, so only the subspecies were playable
   prototype: MobProtogen
   sprites: MobProtogenSprites
   defaultSkinTone: "#ffda93"
@@ -16,9 +16,16 @@
     Hair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobProtogenTorso
+    UndergarmentTop: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    UndergarmentBottom: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Genital: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Penis: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Breasts: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
+    TailBehind: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
+    TailOversuit: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
     Eyes: MobHumanoidEyes
     LArm: MobProtogenLArm
     RArm: MobProtogenRArm

@@ -1,0 +1,8 @@
+# Wolfgate: consent system ported from HardLight.
+# Only toggles that have mechanics in this fork are defined here.
+
+- type: consentToggle
+  id: GenitalMarkings   # WOLFGATE: id kept so stored "on" rows survive; now the adult content master switch
+  name: Adult content
+  description: Show anatomy content, such as anatomy options, sprites and descriptions. Others can only remove your undergarments or perform anatomy surgery on you if you also turn on those toggles. Off by default.
+  sortKey: 0-adult-0

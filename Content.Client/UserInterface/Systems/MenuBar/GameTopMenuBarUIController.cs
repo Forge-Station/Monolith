@@ -1,3 +1,5 @@
+using Content.Client._Common.Consent.UI; // WOLFGATE
+using Content.Client._WF.Genitals.UI; // WOLFGATE - anatomy panel
 using Content.Client.UserInterface.Systems.Actions;
 using Content.Client.UserInterface.Systems.Admin;
 using Content.Client.UserInterface.Systems.Bwoink;
@@ -21,6 +23,8 @@ public sealed partial class GameTopMenuBarUIController : UIController
     [Dependency] private CharacterUIController _character = default!;
     [Dependency] private CraftingUIController _crafting = default!;
     [Dependency] private AHelpUIController _ahelp = default!;
+    [Dependency] private ConsentUiController _consent = default!; // WOLFGATE - consent system
+    [Dependency] private AnatomyUIController _anatomy = default!; // WOLFGATE - anatomy panel
     [Dependency] private ActionUIController _action = default!;
     [Dependency] private SandboxUIController _sandbox = default!;
     [Dependency] private GuidebookUIController _guidebook = default!;
@@ -46,6 +50,8 @@ public sealed partial class GameTopMenuBarUIController : UIController
         _character.UnloadButton();
         _crafting.UnloadButton();
         _ahelp.UnloadButton();
+        _consent.UnloadButton(); // WOLFGATE - consent system
+        _anatomy.UnloadButton(); // WOLFGATE - anatomy panel
         _action.UnloadButton();
         _sandbox.UnloadButton();
         _emotes.UnloadButton();
@@ -60,6 +66,8 @@ public sealed partial class GameTopMenuBarUIController : UIController
         _character.LoadButton();
         _crafting.LoadButton();
         _ahelp.LoadButton();
+        _consent.LoadButton(); // WOLFGATE - consent system
+        _anatomy.LoadButton(); // WOLFGATE - anatomy panel, after the cog so it can take the cog's slot
         _action.LoadButton();
         _sandbox.LoadButton();
         _emotes.LoadButton();

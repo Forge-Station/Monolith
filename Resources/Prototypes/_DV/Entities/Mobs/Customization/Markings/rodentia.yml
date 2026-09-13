@@ -24,9 +24,15 @@
   coloring:
     default:
       type: !type:TattooColoring
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    mouse_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    mouse_BEHIND: mouse_FRONT
   sprites:
-    - sprite: _DV/Mobs/Customization/Rodentia/tail_markings.rsi
-      state: mouse
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Rodentia/tail_markings.rsi # WOLFGATE - split art
+      state: mouse_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Rodentia/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+      state: mouse_BEHIND
 
 ## EARS
 
@@ -335,9 +341,15 @@
   markingCategory: Tail
   bodyPart: Tail
   speciesRestriction: [Rodentia]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    mouse_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    mouse_BEHIND: mouse_FRONT
   sprites:
-    - sprite: _DV/Mobs/Customization/Rodentia/tail_markings.rsi
-      state: mouse
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Rodentia/tail_markings.rsi # WOLFGATE - split art
+      state: mouse_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Rodentia/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+      state: mouse_BEHIND
 
 - type: marking
   id: RodentiaTailRabbit
@@ -364,9 +376,15 @@
   markingCategory: Tail
   bodyPart: Tail
   speciesRestriction: [Rodentia]
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    short_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    short_BEHIND: short_FRONT
   sprites:
-    - sprite: _DV/Mobs/Customization/Rodentia/tail_markings.rsi
-      state: short
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Rodentia/tail_markings.rsi # WOLFGATE - split art, anatomy zone only
+      state: short_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Rodentia/tail_markings.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: short_BEHIND
 
 - type: marking
   id: RodentiaTailSquirrel

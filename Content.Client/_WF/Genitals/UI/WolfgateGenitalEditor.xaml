@@ -1,0 +1,163 @@
+<wfg:WolfgateGenitalEditor xmlns="https://spacestation14.io"
+                           xmlns:wfg="clr-namespace:Content.Client._WF.Genitals.UI"
+                           Orientation="Vertical"
+                           SeparationOverride="8"
+                           HorizontalExpand="True">
+    <!-- Shown instead of every control while a gate applies: kill switch, offline, consent, age or species. -->
+    <PanelContainer Name="GateCard" StyleClasses="CreatorCard" HorizontalExpand="True" Visible="False">
+        <BoxContainer Orientation="Vertical" SeparationOverride="8">
+            <Label Text="{Loc 'wf-genitals-tab'}" StyleClasses="CreatorHeading" />
+            <RichTextLabel Name="GateLabel" HorizontalExpand="True" />
+            <Button Name="OpenConsentButton" Text="{Loc 'wf-genitals-open-consent'}" HorizontalAlignment="Left" Visible="False" />
+        </BoxContainer>
+    </PanelContainer>
+    <BoxContainer Name="EditorBody" Orientation="Vertical" SeparationOverride="8" HorizontalExpand="True">
+        <!-- Preview, typical anatomy, reveal mode and notices -->
+        <PanelContainer StyleClasses="CreatorCard" HorizontalExpand="True">
+            <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                <Label Text="{Loc 'wf-genitals-tab'}" StyleClasses="CreatorHeading" />
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                    <Label Text="{Loc 'wf-genitals-preview'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                    <BoxContainer Name="PreviewModeRow" Orientation="Horizontal" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                    <Label Text="{Loc 'wf-genitals-preview-arousal'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                    <BoxContainer Name="PreviewArousalRow" Orientation="Horizontal" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                    <Label Name="PresetLabel" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                    <!-- One-shot actions, never lit; the entry matching the character's sex says so in its tooltip. -->
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                        <Button Name="PresetMaleButton" Text="{Loc 'wf-genitals-preset-male'}" />
+                        <Button Name="PresetFemaleButton" Text="{Loc 'wf-genitals-preset-female'}" />
+                        <Button Name="PresetClearButton" Text="{Loc 'wf-genitals-preset-clear'}" />
+                    </BoxContainer>
+                </BoxContainer>
+                <!-- Inline confirmation, so the question sits next to the settings it replaces. -->
+                <BoxContainer Name="PresetConfirm" Orientation="Horizontal" SeparationOverride="8" Visible="False">
+                    <RichTextLabel Name="PresetConfirmLabel" HorizontalExpand="True" VerticalAlignment="Center" />
+                    <Button Name="PresetApplyButton" Text="{Loc 'wf-genitals-preset-apply'}" StyleClasses="CreatorPrimary" />
+                    <Button Name="PresetCancelButton" Text="{Loc 'wf-genitals-preset-cancel'}" />
+                </BoxContainer>
+                <BoxContainer Name="RevealRow" Orientation="Horizontal" SeparationOverride="8">
+                    <Label Text="{Loc 'wf-genitals-reveal'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                    <BoxContainer Name="RevealButtons" Orientation="Horizontal" />
+                </BoxContainer>
+                <BoxContainer Name="UndergarmentNotice" Orientation="Horizontal" SeparationOverride="8" Visible="False">
+                    <RichTextLabel Name="UndergarmentNoticeLabel" HorizontalExpand="True" VerticalAlignment="Center" />
+                    <Button Name="ChooseUndergarmentsButton" Text="{Loc 'wf-genitals-choose-undergarments'}" />
+                </BoxContainer>
+                <RichTextLabel Name="SpeciesUndergarmentNote" Visible="False" />
+                <RichTextLabel Name="PregnancyNote" StyleClasses="CreatorWarning" Visible="False" />
+                <RichTextLabel Name="LoadFailedWarning" StyleClasses="CreatorWarning" Visible="False" />
+                <RichTextLabel Name="GeneralWarning" StyleClasses="CreatorWarning" Visible="False" />
+            </BoxContainer>
+        </PanelContainer>
+        <!-- Penis, with testicles as its linked option -->
+        <PanelContainer StyleClasses="CreatorCard" HorizontalExpand="True">
+            <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                    <Label Text="{Loc 'wf-genitals-penis'}" StyleClasses="CreatorHeading" HorizontalExpand="True" VAlign="Center" />
+                    <Button Name="PenisInclude" Text="{Loc 'wf-genitals-include'}" ToggleMode="True" StyleClasses="CreatorToggle" />
+                </BoxContainer>
+                <RichTextLabel Name="PenisWarning" StyleClasses="CreatorWarning" Visible="False" />
+                <BoxContainer Name="PenisBody" Orientation="Vertical" SeparationOverride="6">
+                    <Label Text="{Loc 'wf-genitals-shape'}" StyleClasses="CreatorFieldLabel" />
+                    <GridContainer Name="PenisShapes" Columns="6" HSeparationOverride="4" VSeparationOverride="4" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                        <Label Text="{Loc 'wf-genitals-length'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                        <Slider Name="LengthSlider" MinValue="5" MaxValue="60" Rounded="True" HorizontalExpand="True" VerticalAlignment="Center" />
+                        <Label Name="LengthValue" MinWidth="120" VAlign="Center" />
+                    </BoxContainer>
+                    <RichTextLabel Name="LengthWarning" StyleClasses="CreatorWarning" Visible="False" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                        <Label Text="{Loc 'wf-genitals-sheath'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                        <BoxContainer Name="SheathRow" Orientation="Horizontal" />
+                    </BoxContainer>
+                    <RichTextLabel Name="SheathWarning" StyleClasses="CreatorWarning" Visible="False" />
+                    <BoxContainer Name="PenisColourRow" Orientation="Vertical" />
+                    <BoxContainer Name="SheathColourRow" Orientation="Vertical" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                        <Label Text="{Loc 'wf-genitals-visibility'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                        <BoxContainer Name="PenisVisibilityRow" Orientation="Horizontal" />
+                    </BoxContainer>
+                    <PanelContainer StyleClasses="CreatorGroup" HorizontalExpand="True">
+                        <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                            <Label Text="{Loc 'wf-genitals-testicles'}" StyleClasses="CreatorCardTitle" />
+                            <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                                <Label Text="{Loc 'wf-genitals-testicles-type'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="140" />
+                                <BoxContainer Name="TesticleTypeRow" Orientation="Horizontal" />
+                            </BoxContainer>
+                            <RichTextLabel Name="TesticleInternalNote" Visible="False" />
+                            <BoxContainer Name="TesticleDetails" Orientation="Vertical" SeparationOverride="6">
+                                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                                    <Label Text="{Loc 'wf-genitals-testicle-size'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="140" />
+                                    <Slider Name="TesticleSizeSlider" MinValue="1" MaxValue="5" Rounded="True" HorizontalExpand="True" VerticalAlignment="Center" />
+                                    <Label Name="TesticleSizeValue" MinWidth="120" VAlign="Center" />
+                                </BoxContainer>
+                                <RichTextLabel Name="TesticleWarning" StyleClasses="CreatorWarning" Visible="False" />
+                                <BoxContainer Name="TesticleColourRow" Orientation="Vertical" />
+                                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                                    <Label Text="{Loc 'wf-genitals-visibility'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="140" />
+                                    <BoxContainer Name="TesticleVisibilityRow" Orientation="Horizontal" />
+                                </BoxContainer>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </PanelContainer>
+                </BoxContainer>
+            </BoxContainer>
+        </PanelContainer>
+        <!-- Vagina and womb -->
+        <PanelContainer StyleClasses="CreatorCard" HorizontalExpand="True">
+            <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                    <Label Text="{Loc 'wf-genitals-vagina'}" StyleClasses="CreatorHeading" HorizontalExpand="True" VAlign="Center" />
+                    <Button Name="VaginaInclude" Text="{Loc 'wf-genitals-include'}" ToggleMode="True" StyleClasses="CreatorToggle" />
+                </BoxContainer>
+                <RichTextLabel Name="VaginaWarning" StyleClasses="CreatorWarning" Visible="False" />
+                <BoxContainer Name="VaginaBody" Orientation="Vertical" SeparationOverride="6">
+                    <Label Text="{Loc 'wf-genitals-shape'}" StyleClasses="CreatorFieldLabel" />
+                    <GridContainer Name="VaginaShapes" Columns="6" HSeparationOverride="4" VSeparationOverride="4" />
+                    <BoxContainer Name="VaginaColourRow" Orientation="Vertical" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                        <Label Text="{Loc 'wf-genitals-womb'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                        <CheckBox Name="WombCheck" Text="{Loc 'wf-genitals-womb-present'}" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                        <Label Text="{Loc 'wf-genitals-visibility'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                        <BoxContainer Name="VaginaVisibilityRow" Orientation="Horizontal" />
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+        </PanelContainer>
+        <!-- Breasts -->
+        <PanelContainer StyleClasses="CreatorCard" HorizontalExpand="True">
+            <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                    <Label Text="{Loc 'wf-genitals-breasts'}" StyleClasses="CreatorHeading" HorizontalExpand="True" VAlign="Center" />
+                    <Button Name="BreastsInclude" Text="{Loc 'wf-genitals-include'}" ToggleMode="True" StyleClasses="CreatorToggle" />
+                </BoxContainer>
+                <BoxContainer Name="BreastsBody" Orientation="Vertical" SeparationOverride="6">
+                    <Label Text="{Loc 'wf-genitals-shape'}" StyleClasses="CreatorFieldLabel" />
+                    <GridContainer Name="BreastShapes" Columns="6" HSeparationOverride="4" VSeparationOverride="4" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                        <Label Text="{Loc 'wf-genitals-cup'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                        <Slider Name="CupSlider" MinValue="1" MaxValue="19" Rounded="True" HorizontalExpand="True" VerticalAlignment="Center" />
+                        <Label Name="CupValue" MinWidth="120" VAlign="Center" />
+                    </BoxContainer>
+                    <RichTextLabel Name="UddersNote" Visible="False" />
+                    <RichTextLabel Name="CupWarning" StyleClasses="CreatorWarning" Visible="False" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                        <Label Text="{Loc 'wf-genitals-lactation'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                        <CheckBox Name="LactationCheck" Text="{Loc 'wf-genitals-lactating'}" />
+                    </BoxContainer>
+                    <BoxContainer Name="BreastColourRow" Orientation="Vertical" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                        <Label Text="{Loc 'wf-genitals-visibility'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="150" />
+                        <BoxContainer Name="BreastVisibilityRow" Orientation="Horizontal" />
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</wfg:WolfgateGenitalEditor>

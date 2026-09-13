@@ -1,185 +1,217 @@
 <BoxContainer xmlns="https://spacestation14.io"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:humanoid="clr-namespace:Content.Client.Humanoid"
-         xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-         xmlns:ui="clr-namespace:Content.Client.Lobby.UI"
-         HorizontalExpand="True">
-        <!-- Left side -->
-        <BoxContainer Orientation="Vertical" Margin="10 10 10 10" HorizontalExpand="True">
-            <!-- Middle container -->
-            <BoxContainer Orientation="Horizontal" SeparationOverride="10" HorizontalExpand="True">
-                <!-- Name box-->
-                <BoxContainer Orientation="Vertical">
-                    <ui:HighlightedContainer>
-                        <BoxContainer Orientation="Vertical">
-                            <ui:HighlightedContainer>
-                                <BoxContainer Orientation="Vertical">
-                                    <BoxContainer Orientation="Horizontal" VerticalExpand="True">
-                                        <Label Text="{Loc 'humanoid-profile-editor-name-label'}" />
-                                        <LineEdit Name="NameEdit" MinSize="270 0" VerticalAlignment="Center" Margin="5 0 0 0" />
-                                        <Button Name="NameRandomize" Text="{Loc 'humanoid-profile-editor-name-random-button'}" />
-                                    </BoxContainer>
-                                    <Button Name="RandomizeEverythingButton" HorizontalAlignment="Center"
-                                            HorizontalExpand="False" MaxWidth="256"
-                                            Text="{Loc 'humanoid-profile-editor-randomize-everything-button'}" />
-                                    <RichTextLabel Name="WarningLabel" HorizontalExpand="False"
-                                                   VerticalExpand="True" MaxWidth="425"
-                                                   HorizontalAlignment="Left" />
-                                </BoxContainer>
-                            </ui:HighlightedContainer>
-                        </BoxContainer>
-                    </ui:HighlightedContainer>
+         xmlns:wfh="clr-namespace:Content.Client._WF.Humanoid"
+         xmlns:wfg="clr-namespace:Content.Client._WF.Genitals.UI"
+         HorizontalExpand="True"
+         SeparationOverride="0">
+    <!-- WOLFGATE: creator rebuilt as cards with a preview column. Control names and tab order are unchanged
+         because the code-behind binds to them (tabs: Species, Appearance, Jobs, Traits, Company, Markings, then Description). -->
+    <!-- Editor column -->
+    <BoxContainer Orientation="Vertical" Margin="12 12 12 12" HorizontalExpand="True" SeparationOverride="8">
+        <PanelContainer StyleClasses="CreatorCard">
+            <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                    <Label Text="{Loc 'humanoid-profile-editor-name-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" />
+                    <LineEdit Name="NameEdit" HorizontalExpand="True" MinWidth="240" VerticalAlignment="Center" />
+                    <Button Name="NameRandomize" Text="{Loc 'humanoid-profile-editor-name-random-button'}" />
+                    <Button Name="RandomizeEverythingButton" Text="{Loc 'humanoid-profile-editor-randomize-everything-button'}" />
                 </BoxContainer>
-                <!-- Import/Export -->
-                <BoxContainer Orientation="Vertical" MinSize="60 0" HorizontalExpand="True" HorizontalAlignment="Right">
-                    <ui:HighlightedContainer Name="ProfileHighlight">
-                        <BoxContainer Orientation="Vertical">
-                            <Button Name="SaveButton" Text="{Loc 'humanoid-profile-editor-save-button'}"/>
-                            <Button Name="ResetButton" Disabled="True" Text="{Loc 'humanoid-profile-editor-reset-button'}"/>
-                            <Button Name="ImportButton" Text="{Loc 'humanoid-profile-editor-import-button'}"/>
-                            <Button Name="ExportButton" Text="{Loc 'humanoid-profile-editor-export-button'}"/>
-                            <Button Name="ExportImageButton" Text="{Loc 'humanoid-profile-editor-export-image-button'}"/>
-                            <Button Name="OpenImagesButton" Text="{Loc 'humanoid-profile-editor-open-image-button'}"/>
-                        </BoxContainer>
-                    </ui:HighlightedContainer>
-                </BoxContainer>
+                <RichTextLabel Name="WarningLabel" StyleClasses="CreatorWarning" />
             </BoxContainer>
-            <Control MinHeight="10" />
-            <!-- tabContainer -->
-            <TabContainer Name="TabContainer" VerticalExpand="True">
-                <BoxContainer Orientation="Vertical">
-                    <ScrollContainer VerticalExpand="True">
-                        <!-- appearanceList -->
-                        <BoxContainer Orientation="Vertical">
-                            <BoxContainer Margin="10" Orientation="Vertical" HorizontalExpand="True">
-                                <!-- Species -->
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-species-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <TextureButton Name="SpeciesInfoButton" Scale="0.3 0.3"
-                                                   VerticalAlignment="Center"
-                                                   ToolTip="{Loc 'humanoid-profile-editor-guidebook-button-tooltip'}"/>
-                                    <OptionButton Name="SpeciesButton" HorizontalAlignment="Right" />
+        </PanelContainer>
+        <TabContainer Name="TabContainer" VerticalExpand="True" StyleClasses="CreatorTabs">
+            <!-- Species -->
+            <BoxContainer Orientation="Vertical">
+                <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                    <BoxContainer Orientation="Vertical" Margin="8" HorizontalExpand="True">
+                        <wfh:WolfgateSpeciesPicker Name="SpeciesPicker" HorizontalExpand="True" />
+                    </BoxContainer>
+                </ScrollContainer>
+            </BoxContainer>
+            <!-- Appearance -->
+            <BoxContainer Orientation="Vertical">
+                <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="8" HorizontalExpand="True">
+                        <BoxContainer Orientation="Horizontal" SeparationOverride="8" HorizontalExpand="True">
+                            <!-- Identity -->
+                            <PanelContainer StyleClasses="CreatorCard" HorizontalExpand="True">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                                    <!-- WOLFGATE: sex moved out of its own row and into the heading, as icon boxes. -->
+                                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="6">
+                                        <Label Text="{Loc 'wf-creator-identity'}" StyleClasses="CreatorHeading" VAlign="Center" />
+                                        <Control HorizontalExpand="True" />
+                                        <wfh:WolfgateSexSelector Name="SexSelector" VerticalAlignment="Center" />
+                                    </BoxContainer>
+                                    <BoxContainer HorizontalExpand="True" SeparationOverride="6">
+                                        <Label Text="{Loc 'humanoid-profile-editor-species-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" />
+                                        <Control HorizontalExpand="True" />
+                                        <TextureButton Name="SpeciesInfoButton" Scale="0.3 0.3" VerticalAlignment="Center"
+                                                       ToolTip="{Loc 'humanoid-profile-editor-guidebook-button-tooltip'}" />
+                                        <OptionButton Name="SpeciesButton" MinWidth="180" />
+                                    </BoxContainer>
+                                    <!-- WOLFGATE: overrides the species name wherever it is shown. -->
+                                    <BoxContainer HorizontalExpand="True" SeparationOverride="6">
+                                        <Label Text="{Loc 'wf-creator-custom-species-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" />
+                                        <Control HorizontalExpand="True" />
+                                        <LineEdit Name="CustomSpeciesNameEdit" MinWidth="180" />
+                                    </BoxContainer>
+                                    <BoxContainer HorizontalExpand="True">
+                                        <Label Text="{Loc 'humanoid-profile-editor-age-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" />
+                                        <Control HorizontalExpand="True" />
+                                        <LineEdit Name="AgeEdit" MinWidth="80" />
+                                    </BoxContainer>
+                                    <BoxContainer HorizontalExpand="True">
+                                        <Label Text="{Loc 'humanoid-profile-editor-pronouns-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" />
+                                        <Control HorizontalExpand="True" />
+                                        <OptionButton Name="PronounsButton" MinWidth="180" />
+                                    </BoxContainer>
+                                    <BoxContainer HorizontalExpand="True">
+                                        <Label Text="{Loc 'humanoid-profile-editor-spawn-priority-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" />
+                                        <Control HorizontalExpand="True" />
+                                        <OptionButton Name="SpawnPriorityButton" MinWidth="180" />
+                                    </BoxContainer>
                                 </BoxContainer>
-                                <!-- _EE: Nationality -->
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-nationality-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <TextureButton Name="NationalityInfoButton" Scale="0.3 0.3" VerticalAlignment="Center"
-                                                ToolTip="{Loc 'humanoid-profile-editor-guidebook-button-tooltip'}"/>
-                                    <OptionButton Name="NationalityButton" HorizontalAlignment="Right" />
+                            </PanelContainer>
+                            <!-- Body -->
+                            <PanelContainer StyleClasses="CreatorCard" HorizontalExpand="True">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                                    <Label Text="{Loc 'wf-creator-body'}" StyleClasses="CreatorHeading" />
+                                    <BoxContainer HorizontalExpand="True" SeparationOverride="6">
+                                        <Label Text="{Loc 'humanoid-profile-editor-height-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="60" />
+                                        <Slider Name="HeightSlider" MinValue="0.8" MaxValue="1.2" Value="1.0" HorizontalExpand="True" VerticalAlignment="Center" />
+                                        <Button Name="HeightResetButton" Text="{Loc 'humanoid-profile-editor-reset-button'}" StyleClasses="LinkButton" />
+                                    </BoxContainer>
+                                    <BoxContainer HorizontalExpand="True" SeparationOverride="6">
+                                        <Label Text="{Loc 'humanoid-profile-editor-width-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="60" />
+                                        <Slider Name="WidthSlider" MinValue="0.8" MaxValue="1.2" Value="1.0" HorizontalExpand="True" VerticalAlignment="Center" />
+                                        <Button Name="WidthResetButton" Text="{Loc 'humanoid-profile-editor-reset-button'}" StyleClasses="LinkButton" />
+                                    </BoxContainer>
+                                    <Label Text="{Loc 'humanoid-profile-editor-skin-color-label'}" StyleClasses="CreatorFieldLabel" Margin="0 6 0 0" />
+                                    <Slider HorizontalExpand="True" Name="Skin" MinValue="0" MaxValue="100" Value="20" />
+                                    <BoxContainer Name="RgbSkinColorContainer" Visible="False" Orientation="Vertical" HorizontalExpand="True" />
                                 </BoxContainer>
-                                <BoxContainer HorizontalExpand="False">
-                                    <RichTextLabel Name="NationalityDescriptionLabel" Text="" HorizontalExpand="False" MaxWidth="600"/>
-                                </BoxContainer>
-                                <!-- Age -->
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-age-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <LineEdit Name="AgeEdit" MinSize="40 0" HorizontalAlignment="Right" />
-                                </BoxContainer>
-                                <!-- Sex -->
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-sex-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="SexButton" HorizontalAlignment="Right" />
-                                </BoxContainer>
-                                <!-- Pronouns -->
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-pronouns-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="PronounsButton" HorizontalAlignment="Right" />
-                                </BoxContainer>
-                                <!-- Show clothing -->
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-clothing'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <Button Name="ShowClothes" Pressed="True" ToggleMode="True" Text="{Loc 'humanoid-profile-editor-clothing-show'}" HorizontalAlignment="Right" />
-                                </BoxContainer>
-                                <!-- Spawn Priority -->
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-spawn-priority-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="SpawnPriorityButton" HorizontalAlignment="Right" />
-                                </BoxContainer>
-                                <!-- Height -->
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-height-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <Slider Name="HeightSlider" MinValue="0.8" MaxValue="1.2" Value="1.0" HorizontalAlignment="Right" MinSize="200 0" />
-                                    <Button Name="HeightResetButton" Text="{Loc 'humanoid-profile-editor-reset-button'}" HorizontalAlignment="Right" />
-                                </BoxContainer>
-                                <!-- Width -->
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-width-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <Slider Name="WidthSlider" MinValue="0.8" MaxValue="1.2" Value="1.0" HorizontalAlignment="Right" MinSize="200 0" />
-                                    <Button Name="WidthResetButton" Text="{Loc 'humanoid-profile-editor-reset-button'}" HorizontalAlignment="Right" />
-                                </BoxContainer>
-                                <!-- Corvax-Frontier-Barks-Start -->
-                                <BoxContainer HorizontalExpand="True" Visible="False" Name="BarksContainer">
-                                    <Label Text="{Loc 'humanoid-profile-editor-voice-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="BarkVoiceButton" HorizontalAlignment="Right" />
-                                    <Button Name="BarkVoicePlayButton" Text="{Loc 'humanoid-profile-editor-BarkVoice-play'}" MaxWidth="80" />
-                                </BoxContainer>
-                                <!-- Corvax-Frontier-Barks-End -->
+                            </PanelContainer>
+                        </BoxContainer>
+                        <!-- Hair -->
+                        <PanelContainer Name="HairCard" StyleClasses="CreatorCard" HorizontalExpand="True">
+                            <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                                <Label Text="{Loc 'wf-creator-hair'}" StyleClasses="CreatorHeading" />
+                                <!-- WOLFGATE: a Grid, not a horizontal Box. A BoxContainer hands a stretching child
+                                     its full desired width once that exceeds its share, starving the sibling, and each
+                                     picker's desired width tracks its own tile-column count - so the two boxes settled
+                                     at wildly different widths. Grid columns always split evenly. -->
+                                <GridContainer Columns="2" HSeparationOverride="16" HorizontalExpand="True">
+                                    <wfh:WolfgateSlotMarkingPicker Name="HairStylePicker" Category="Hair" HorizontalExpand="True" />
+                                    <wfh:WolfgateSlotMarkingPicker Name="FacialHairPicker" Category="FacialHair" HorizontalExpand="True" />
+                                </GridContainer>
                             </BoxContainer>
-                            <!-- Skin -->
-                            <BoxContainer Margin="10" HorizontalExpand="True" Orientation="Vertical">
-                                <Label Text="{Loc 'humanoid-profile-editor-skin-color-label'}" />
-                                <Slider HorizontalExpand="True" Name="Skin" MinValue="0" MaxValue="100" Value="20" />
-                                <BoxContainer Name="RgbSkinColorContainer" Visible="False" Orientation="Vertical" HorizontalExpand="True"></BoxContainer>
-                            </BoxContainer>
-                            <!-- Hair -->
-                            <BoxContainer Margin="10" Orientation="Horizontal">
-                                <humanoid:SingleMarkingPicker Name="HairStylePicker" Category="Hair" />
-                                <humanoid:SingleMarkingPicker Name="FacialHairPicker" Category="FacialHair" />
-                            </BoxContainer>
-                            <!-- Eyes -->
-                            <BoxContainer Margin="10" Orientation="Vertical">
-                                <Label Text="{Loc 'humanoid-profile-editor-eyes-label'}" />
+                        </PanelContainer>
+                        <!-- Eyes -->
+                        <PanelContainer StyleClasses="CreatorCard" HorizontalExpand="True">
+                            <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                                <Label Text="{Loc 'humanoid-profile-editor-eyes-label'}" StyleClasses="CreatorHeading" />
                                 <humanoid:EyeColorPicker Name="EyeColorPicker" />
                             </BoxContainer>
+                        </PanelContainer>
+                    </BoxContainer>
+                </ScrollContainer>
+            </BoxContainer>
+            <!-- Jobs -->
+            <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+                <OptionButton Name="PreferenceUnavailableButton" />
+                <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                    <BoxContainer Name="JobList" Orientation="Vertical" />
+                </ScrollContainer>
+            </BoxContainer>
+            <!-- Traits -->
+            <BoxContainer Orientation="Vertical" Margin="8">
+                <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                    <BoxContainer Name="TraitsList" Orientation="Vertical" />
+                </ScrollContainer>
+            </BoxContainer>
+            <!-- Company (Monolith) -->
+            <BoxContainer Orientation="Vertical" Margin="8">
+                <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="8">
+                        <PanelContainer StyleClasses="CreatorCard">
+                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                <Label Text="{Loc 'humanoid-profile-editor-company-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" />
+                                <Control HorizontalExpand="True" />
+                                <OptionButton Name="CompanyButton" MinWidth="220" />
+                            </BoxContainer>
+                        </PanelContainer>
+                        <PanelContainer StyleClasses="CreatorCard" MaxWidth="1200">
+                            <RichTextLabel Name="CompanyDescriptionLabel" VerticalAlignment="Top" HorizontalExpand="True" />
+                        </PanelContainer>
+                        <BoxContainer HorizontalAlignment="Center">
+                            <TextureRect Name="CompanyImage" HorizontalAlignment="Center" Stretch="KeepAspect"
+                                         MinWidth="500" MaxWidth="500" MinHeight="400" MaxHeight="400" Visible="False" />
                         </BoxContainer>
-                    </ScrollContainer>
-                </BoxContainer>
-                <BoxContainer Orientation="Vertical">
-                    <!-- Jobs -->
-                    <OptionButton Name="PreferenceUnavailableButton" />
-                    <ScrollContainer VerticalExpand="True">
-                        <BoxContainer Name="JobList" Orientation="Vertical" />
-                    </ScrollContainer>
-                </BoxContainer>
-                <!-- Frontier: no Antags tab
-                <BoxContainer Orientation="Vertical" Margin="10">
-                    <! - - Antags  - - >
-                    <ScrollContainer VerticalExpand="True">
-                        <BoxContainer Name="AntagList" Orientation="Vertical" />
-                    </ScrollContainer>
-                </BoxContainer>
-                End Frontier -->
-                <BoxContainer Orientation="Vertical" Margin="10">
-                    <!-- Traits -->
-                    <ScrollContainer VerticalExpand="True">
-                        <BoxContainer Name="TraitsList" Orientation="Vertical" />
-                    </ScrollContainer>
-                </BoxContainer>
-                <BoxContainer Name="MarkingsTab" Orientation="Vertical" Margin="10">
-                    <!-- Markings -->
-                    <ScrollContainer VerticalExpand="True">
-                        <humanoid:MarkingPicker Name="Markings" IgnoreCategories="Hair,FacialHair" />
-                    </ScrollContainer>
-                </BoxContainer>
-            </TabContainer>
-        </BoxContainer>
-        <!-- Right side -->
-        <BoxContainer Orientation="Vertical" VerticalExpand="True" VerticalAlignment="Center">
-            <SpriteView Name="SpriteView" Scale="8 8" Margin="4" SizeFlagsStretchRatio="1" />
-            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
+                    </BoxContainer>
+                </ScrollContainer>
+            </BoxContainer>
+            <!-- Markings -->
+            <BoxContainer Name="MarkingsTab" Orientation="Vertical" Margin="8">
+                <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                    <!-- WOLFGATE: Genital ignored, so leftover genital markings never show here; anatomy has its own tab. -->
+                    <wfh:WolfgateMarkingPicker Name="Markings" IgnoreCategories="Hair,FacialHair,Genital" />
+                </ScrollContainer>
+            </BoxContainer>
+            <!-- WOLFGATE: anatomy tab (xmlns:wfg), appended last so tabs 0-5 keep their indices -->
+            <BoxContainer Name="GenitalsTab" Orientation="Vertical" Margin="8">
+                <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                    <wfg:WolfgateGenitalEditor Name="GenitalEditor" HorizontalExpand="True" />
+                </ScrollContainer>
+            </BoxContainer>
+        </TabContainer>
+    </BoxContainer>
+    <!-- Preview column -->
+    <PanelContainer StyleClasses="CreatorPreview" Margin="0 12 12 12" MinWidth="320">
+        <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="14 12">
+            <Label Text="{Loc 'wf-creator-preview'}" StyleClasses="CreatorHeading" />
+            <!-- WOLFGATE: fixed box. SpriteView sizes itself from the sprite's rotated bounding box, so a
+                 species whose required marking uses a wide RSI (Shadekin's 64x32 tail) blew the whole pane
+                 out. Fit shrinks those to the box instead. -->
+            <SpriteView Name="SpriteView" Scale="8 8" Margin="4" HorizontalAlignment="Center"
+                        SetSize="288 288" Stretch="Fit" SizeFlagsStretchRatio="1" />
+            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" SeparationOverride="0">
                 <Button Name="SpriteRotateLeft" Text="◀" StyleClasses="OpenRight" />
-                <cc:VSeparator Margin="2 0 3 0" />
                 <Button Name="SpriteRotateRight" Text="▶" StyleClasses="OpenLeft" />
             </BoxContainer>
+            <Button Name="ShowClothes" Pressed="True" ToggleMode="True" StyleClasses="CreatorToggle"
+                    Text="{Loc 'humanoid-profile-editor-clothing'}" HorizontalAlignment="Center" />
+            <!-- WOLFGATE: description moved out of its own tab and under the preview. The editor is capped
+                 and scrolls, so a long description cannot stretch the pane; Expand opens a full-size editor. -->
+            <BoxContainer Name="DescriptionBox" Orientation="Vertical" SeparationOverride="4" Margin="0 6 0 0">
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                    <Label Text="{Loc 'humanoid-profile-editor-flavortext-tab'}" StyleClasses="CreatorFieldLabel" VAlign="Center" />
+                    <Control HorizontalExpand="True" />
+                    <Button Name="DescriptionExpand" Text="{Loc 'wf-creator-description-expand'}" StyleClasses="LinkButton" />
+                </BoxContainer>
+                <PanelContainer StyleClasses="CreatorInset" HorizontalExpand="True">
+                    <ScrollContainer HScrollEnabled="False" ReturnMeasure="True" MinHeight="96" MaxHeight="96" HorizontalExpand="True">
+                        <TextEdit Name="DescriptionEdit" HorizontalExpand="True" />
+                    </ScrollContainer>
+                </PanelContainer>
+                <!-- WOLFGATE: live length and the square bracket note, so neither surprises the player at save time. -->
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                    <Label Name="DescriptionWarning" StyleClasses="Danger" VAlign="Center" Visible="False" />
+                    <Control HorizontalExpand="True" />
+                    <Label Name="DescriptionCounter" StyleClasses="CreatorFieldLabel" VAlign="Center" />
+                </BoxContainer>
+            </BoxContainer>
+            <Control VerticalExpand="True" />
+            <Button Name="SaveButton" Text="{Loc 'humanoid-profile-editor-save-button'}" StyleClasses="CreatorPrimary" />
+            <Button Name="ResetButton" Disabled="True" Text="{Loc 'humanoid-profile-editor-reset-button'}" />
+            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" SeparationOverride="4">
+                <Button Name="ImportButton" Text="{Loc 'humanoid-profile-editor-import-button'}" StyleClasses="LinkButton" />
+                <Button Name="ExportButton" Text="{Loc 'humanoid-profile-editor-export-button'}" StyleClasses="LinkButton" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" SeparationOverride="4">
+                <Button Name="ExportImageButton" Text="{Loc 'humanoid-profile-editor-export-image-button'}" StyleClasses="LinkButton" />
+                <Button Name="OpenImagesButton" Text="{Loc 'humanoid-profile-editor-open-image-button'}" StyleClasses="LinkButton" />
+            </BoxContainer>
         </BoxContainer>
+    </PanelContainer>
 </BoxContainer>

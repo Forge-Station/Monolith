@@ -8,6 +8,18 @@
   },
   "states": [
     {
+      "name": "equipped-head-avali",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-light-avali",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-unshaded-avali",
+      "directions": 4
+    },
+    {
       "name": "icon"
     },
     {
@@ -18,7 +30,15 @@
       "directions": 4
     },
     {
+      "name": "off-equipped-HELMET-hydrakin",
+      "directions": 4
+    },
+    {
       "name": "off-equipped-HELMET-vox",
+      "directions": 4
+    },
+    {
+      "name": "off-equipped-HELMET-vulpkanin",
       "directions": 4
     },
     {
@@ -26,23 +46,15 @@
       "directions": 4
     },
     {
-      "name": "on-equipped-HELMET-vox",
-      "directions": 4
-    },
-    {
-      "name": "off-equipped-HELMET-hydrakin",
-      "directions": 4
-    },
-    {
       "name": "on-equipped-HELMET-hydrakin",
       "directions": 4
     },
     {
-      "name": "on-equipped-HELMET-vulpkanin",
+      "name": "on-equipped-HELMET-vox",
       "directions": 4
     },
     {
-      "name": "off-equipped-HELMET-vulpkanin",
+      "name": "on-equipped-HELMET-vulpkanin",
       "directions": 4
     }
   ]

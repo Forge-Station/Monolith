@@ -49,3 +49,54 @@
   sprites:
   - sprite: Mobs/Customization/scars.rsi
     state: scar_chest
+
+# Wolfgate: ported from HardLight
+- type: marking
+  id: ScarNeck
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Skrell, Thaven, Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Tajaran, Canine] # Frontier: added Felinid, Oni, Goblin, Rodentia
+  followSkinColor: true
+  sprites:
+  - sprite: Mobs/Customization/scars.rsi
+    state: scar_neck
+
+- type: marking
+  id: ScarChestBullets
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Skrell, Thaven, Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Tajaran, Canine] # Frontier: added Felinid, Oni, Goblin, Rodentia
+  followSkinColor: true
+  sprites:
+  - sprite: Mobs/Customization/scars.rsi
+    state: scar_chest_bullets
+
+- type: marking
+  id: ScarStomachBullets
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Skrell, Thaven, Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Tajaran, Canine] # Frontier: added Felinid, Oni, Goblin, Rodentia
+  followSkinColor: true
+  sprites:
+  - sprite: Mobs/Customization/scars.rsi
+    state: scar_stomach_bullets
+
+- type: marking
+  id: ScarFace1
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Skrell, Thaven, Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Tajaran, Canine] # Frontier: added Felinid, Oni, Goblin, Rodentia
+  followSkinColor: true
+  sprites:
+  - sprite: Mobs/Customization/scars.rsi
+    state: scar_face_1
+
+- type: marking
+  id: ScarFace2
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Skrell, Thaven, Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Tajaran, Canine] # Frontier: added Felinid, Oni, Goblin, Rodentia
+  followSkinColor: true
+  sprites:
+  - sprite: Mobs/Customization/scars.rsi
+    state: scar_face_2

@@ -1,0 +1,590 @@
+# Antennas
+
+- type: marking
+  id: SynthAntenna
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/antenna.rsi
+    state: antenna_synth
+
+- type: marking
+  id: SynthAntennaCurl
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/antenna.rsi
+    state: antenna_curl
+
+- type: marking
+  id: SynthAntennaCurlSoft
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/antenna.rsi
+    state: antenna_curl_soft
+
+- type: marking
+  id: SynthAntennaLight
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/antenna.rsi
+    state: antenna_light
+
+- type: marking
+  id: SynthAntennaMajestic
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/antenna.rsi
+    state: antenna_majestic
+
+- type: marking
+  id: SynthAntennaSharp
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/antenna.rsi
+    state: antenna_sharp
+
+- type: marking
+  id: SynthAntennaSlash
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/antenna.rsi
+    state: antenna_slash
+
+- type: marking
+  id: SynthAntennaThick
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/antenna.rsi
+    state: antenna_thick
+
+- type: marking
+  id: SynthAntennaTwin
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/antenna.rsi
+    state: antenna_twin
+
+# Arms
+
+- type: marking
+  id: SynthLArmCore
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/arms.rsi
+    state: arm_core_l
+
+- type: marking
+  id: SynthRArmCore
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/arms.rsi
+    state: arm_core_r
+
+- type: marking
+  id: SynthLArmLight
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/arms.rsi
+    state: arm_light_l
+
+- type: marking
+  id: SynthRArmLight
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/arms.rsi
+    state: arm_light_r
+
+- type: marking
+  id: SynthLArmStarPauldron
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/arms.rsi
+    state: star_pauldron_l
+
+- type: marking
+  id: SynthRArmStarPauldron
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/arms.rsi
+    state: star_pauldron_r
+
+- type: marking
+  id: SynthLArmStreak
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/arms.rsi
+    state: arm_streak_l
+
+- type: marking
+  id: SynthRArmStreak
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/arms.rsi
+    state: arm_streak_r
+
+# Chest
+
+- type: marking
+  id: SynthChestComposite
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/chest.rsi
+    state: composite
+  - sprite: _HL/Mobs/Customization/Synth/chest.rsi
+    state: composite_frame
+
+- type: marking
+  id: SynthChestCore
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/chest.rsi
+    state: core
+
+- type: marking
+  id: SynthChestCross
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/chest.rsi
+    state: cross
+
+- type: marking
+  id: SynthChestFracture
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/chest.rsi
+    state: fracture
+
+- type: marking
+  id: SynthChestLight
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/chest.rsi
+    state: chest_light
+
+- type: marking
+  id: SynthChestScutes
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/chest.rsi
+    state: scutes
+
+- type: marking
+  id: SynthChestStar
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/chest.rsi
+    state: star
+
+- type: marking
+  id: SynthChestStarCross
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/chest.rsi
+    state: star_cross
+
+- type: marking
+  id: SynthChestStreak
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/chest.rsi
+    state: streak
+
+# Eyes
+
+- type: marking
+  id: SynthEyesHeterochromia
+  bodyPart: Eyes
+  markingCategory: Head
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/eyes.rsi
+    state: heterochromia_l
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/eyes.rsi
+    state: heterochromia_r
+
+# Head
+
+- type: marking
+  id: SynthHeadCore
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/head.rsi
+    state: core
+
+- type: marking
+  id: SynthHeadFracture
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/head.rsi
+    state: fracture
+
+- type: marking
+  id: SynthHeadStreak
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/head.rsi
+    state: streak
+
+- type: marking
+  id: SynthJawComposite
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/head.rsi
+    state: jaw_composite
+
+- type: marking
+  id: SynthVisor
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/head.rsi
+    state: visor
+  - sprite: _HL/Mobs/Customization/Synth/head.rsi
+    state: visor_frame
+  - sprite: _HL/Mobs/Customization/Synth/head.rsi
+    state: visor_plate
+
+- type: marking
+  id: SynthVisorStarCross
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/head.rsi
+    state: visor
+  - sprite: _HL/Mobs/Customization/Synth/head.rsi
+    state: visor_frame
+  - sprite: _HL/Mobs/Customization/Synth/head.rsi
+    state: visor_plate_star_cross
+
+# Head Side
+
+- type: marking
+  id: SynthCompositeHood
+  bodyPart: HeadSide
+  markingCategory: HeadSide
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/headside.rsi
+    state: composite_hood
+
+- type: marking
+  id: SynthCompositeHoodLight
+  bodyPart: HeadSide
+  markingCategory: HeadSide
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/headside.rsi
+    state: composite_hood_light
+
+- type: marking
+  id: SynthSolarFans
+  bodyPart: HeadSide
+  markingCategory: HeadSide
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/headside.rsi
+    state: solar_fans
+
+# Legs
+
+- type: marking
+  id: SynthLFootToes
+  bodyPart: LFoot
+  markingCategory: Legs
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/feet.rsi
+    state: toes_l
+
+- type: marking
+  id: SynthLLegCore
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/legs.rsi
+    state: leg_core_l
+
+- type: marking
+  id: SynthLLegLight
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/legs.rsi
+    state: leg_light_l
+
+- type: marking
+  id: SynthLLegStreak
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/legs.rsi
+    state: leg_streak_l
+
+- type: marking
+  id: SynthRFootToes
+  bodyPart: RFoot
+  markingCategory: Legs
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/feet.rsi
+    state: toes_r
+
+- type: marking
+  id: SynthRLegCore
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/legs.rsi
+    state: leg_core_r
+
+- type: marking
+  id: SynthRLegLight
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/legs.rsi
+    state: leg_light_r
+
+- type: marking
+  id: SynthRLegStreak
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/Orchids/legs.rsi
+    state: leg_streak_r
+
+# Snout
+
+- type: marking
+  id: SynthSnout
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/snout.rsi
+    state: nose
+  - sprite: _HL/Mobs/Customization/Synth/snout.rsi
+    state: chin
+
+- type: marking
+  id: SynthSnoutBox
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Synth ]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Synth/snout.rsi
+    state: nose_box
+  - sprite: _HL/Mobs/Customization/Synth/snout.rsi
+    state: chin
+
+# Tails
+
+- type: marking
+  id: SynthTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Synth ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    factory_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    factory_BEHIND: factory_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - split art
+    state: factory_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - south frame on TailBehind
+    state: factory_BEHIND
+
+- type: marking
+  id: SynthTailComposite
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Synth ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    factory_composite_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    factory_composite_BEHIND: factory_composite_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - split art
+    state: factory_composite_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - south frame on TailBehind
+    state: factory_composite_BEHIND
+
+- type: marking
+  id: SynthTailCore
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Synth ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    core_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    core_BEHIND: core_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/Orchids/tail.rsi # WOLFGATE - split art
+    state: core_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/Orchids/tail.rsi # WOLFGATE - south frame on TailBehind
+    state: core_BEHIND
+
+- type: marking
+  id: SynthTailLarge
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Synth ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    large_BEHIND: TailBehind
+    large_composite_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    large_BEHIND: large_FRONT
+    large_composite_BEHIND: large_composite_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - split art
+    state: large_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - split art
+    state: large_composite_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - south frame on TailBehind
+    state: large_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - south frame on TailBehind
+    state: large_composite_BEHIND
+
+- type: marking
+  id: SynthTailXenoCurl
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Synth ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    xeno_curl_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    xeno_curl_BEHIND: xeno_curl_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - split art
+    state: xeno_curl_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - south frame on TailBehind
+    state: xeno_curl_BEHIND
+
+- type: marking
+  id: SynthTailXenoLight
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Synth ]
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    xeno_light_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    xeno_light_BEHIND: xeno_light_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - split art, anatomy zone only
+    state: xeno_light_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+    state: xeno_light_BEHIND
+
+- type: marking
+  id: SynthTailXenoSpike
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Synth ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    xeno_spike_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    xeno_spike_BEHIND: xeno_spike_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - split art
+    state: xeno_spike_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/tail.rsi # WOLFGATE - south frame on TailBehind
+    state: xeno_spike_BEHIND
+
+# Wings
+
+- type: marking
+  id: SynthWingsDragon
+  bodyPart: Tail
+  markingCategory: Chest
+  speciesRestriction: [Synth, Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    dragon_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    dragon_BEHIND: dragon_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/wings.rsi # WOLFGATE - split art
+    state: dragon_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/wings.rsi # WOLFGATE - south frame on TailBehind
+    state: dragon_BEHIND
+
+- type: marking
+  id: SynthWingsDragonLight
+  bodyPart: Tail
+  markingCategory: Chest
+  speciesRestriction: [ Synth ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    dragon_light_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    dragon_light_BEHIND: dragon_light_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/wings.rsi # WOLFGATE - split art
+    state: dragon_light_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Synth/wings.rsi # WOLFGATE - south frame on TailBehind
+    state: dragon_light_BEHIND

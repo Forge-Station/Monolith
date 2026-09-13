@@ -1,0 +1,1222 @@
+# Wolfgate: the 14 Protogen subspecies, ported from HardLight.
+# The 20 base-Protogen prototypes are deliberately NOT taken - Wolfgate already defines them
+# under _Mono and they are what existing Protogen characters use.
+# Adapted here: HardLight's subspecies-dropdown fields and loadout are dropped (Wolfgate shows
+# these as ordinary species), localizedDataset name lists are remapped to Wolfgate's plain
+# datasets, and the Eyes slot points at MobHumanoidEyes.
+
+- type: species
+  id: ProtoVulp
+  name: subspecies-name-protovulp
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoVulp
+  sprites: MobProtoVulpSprites
+  defaultSkinTone: "#ffda93"
+  markingLimits: MobProtoVulpMarkingLimits
+  dollPrototype: MobProtoVulpDummy
+  skinColoration: AnyColour # Hardlight
+
+- type: speciesBaseSprites
+  id: MobProtoVulpSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Hair: MobHumanoidAnyMarking
+    Head: MobProtoVulpHead
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    Chest: MobProtoVulpTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    LArm: MobProtoVulpLArm
+    RArm: MobProtoVulpRArm
+    LHand: MobProtoVulpLHand
+    RHand: MobProtoVulpRHand
+    LLeg: MobProtoVulpLLeg
+    RLeg: MobProtoVulpRLeg
+    LFoot: MobProtoVulpLFoot
+    RFoot: MobProtoVulpRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoVulpMarkingLimits
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtoVulpMediumArmor, ProtoVulpVisor, ProtoVulpLights, ProtoVulpLEDFace ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ ProtogenTail ]
+    HeadTop:
+      points: 1
+      required: true
+      defaultMarkings: [ FoxEar ]
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpMarkingMatchSkin
+  markingsMatchSkin: false
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpHead
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpHeadMale
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpHeadFemale
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: head_f
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpTorso
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpTorsoMale
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpTorsoFemale
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: torso_f
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpLLeg
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpLArm
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpLHand
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpLFoot
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpRLeg
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpRArm
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpRHand
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobProtoVulpRFoot
+  baseSprite:
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: r_foot
+
+#region VOX ####
+
+- type: species
+  id: ProtoVox
+  name: subspecies-name-protovox
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoVox
+  sprites: MobProtoVoxSprites
+  defaultSkinTone: "#6c741d"
+  markingLimits: MobProtoVoxMarkingLimits
+  dollPrototype: MobProtoVoxDummy
+  skinColoration: AnyColour # Hardlight
+  sexes:
+  - Unsexed
+  maleFirstNames: names_vox
+  femaleFirstNames: names_vox
+  naming: First
+
+- type: speciesBaseSprites
+  id: MobProtoVoxSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Hair: MobHumanoidAnyMarking
+    Head: MobVoxHead
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    Chest: MobVoxTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    LArm: MobVoxLArm
+    RArm: MobVoxRArm
+    LHand: MobVoxLHand
+    RHand: MobVoxRHand
+    LLeg: MobVoxLLeg
+    RLeg: MobVoxRLeg
+    LFoot: MobVoxLFoot
+    RFoot: MobVoxRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoVoxMarkingLimits
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtoVoxMediumArmor, ProtoVoxVisor, ProtoVoxLights, ProtoVoxLEDFace ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ VoxTail ]
+    HeadTop:
+      points: 1
+      required: false
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 1
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+
+- type: humanoidBaseSprite
+  id: MobProtoVoxMarkingMatchSkin
+  markingsMatchSkin: false
+
+#region THAVEN ####
+
+- type: species
+  id: ProtoThaven
+  name: subspecies-name-protothaven
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoThaven
+  sprites: MobProtoThavenSprites
+  defaultSkinTone: "#ffffff"
+  markingLimits: MobProtoThavenMarkingLimits
+  dollPrototype: MobProtoThavenDummy
+  skinColoration: AnyColour # Hardlight
+  maleFirstNames: NamesThaven
+  femaleFirstNames: NamesThaven
+  naming: First
+  sexes:
+  - Male
+  - Female
+  - Unsexed
+
+- type: speciesBaseSprites
+  id: MobProtoThavenSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Hair: MobHumanoidAnyMarking
+    Head: MobThavenHead
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Snout: MobHumanoidAnyMarking
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    Chest: MobThavenTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking # Wolfgate: as MobThavenSprites, so undergarment markings draw
+    UndergarmentBottom: MobHumanoidAnyMarking # Wolfgate
+    Tail: MobHumanoidAnyMarking
+    LArm: MobThavenLArm
+    RArm: MobThavenRArm
+    LHand: MobThavenLHand
+    RHand: MobThavenRHand
+    LLeg: MobThavenLLeg
+    RLeg: MobThavenRLeg
+    LFoot: MobThavenLFoot
+    RFoot: MobThavenRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoThavenMarkingLimits
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtoThavenMediumArmor, ProtoThavenVisor, ProtoThavenLights, ProtoThavenLEDFace ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: false
+    HeadTop:
+      points: 1
+      required: false
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 1
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+
+#region LASPI ####
+
+- type: species
+  id: ProtoSlimePerson
+  name: subspecies-name-protoslimeperson
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoSlimePerson
+  sprites: MobProtoSlimePersonSprites
+  defaultSkinTone: "#b8b8b8"
+  markingLimits: MobProtoSlimePersonMarkingLimits
+  dollPrototype: MobProtoSlimePersonDummy
+  skinColoration: AnyColour # Hardlight
+
+- type: speciesBaseSprites
+  id: MobProtoSlimePersonSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Hair: MobSlimeMarkingFollowSkin
+    Head: MobSlimeHead
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    Chest: MobSlimeTorso
+    HeadTop: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    LArm: MobSlimeLArm
+    RArm: MobSlimeRArm
+    LHand: MobSlimeLHand
+    RHand: MobSlimeRHand
+    LLeg: MobSlimeLLeg
+    RLeg: MobSlimeRLeg
+    LFoot: MobSlimeLFoot
+    RFoot: MobSlimeRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoSlimePersonMarkingLimits
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtoSlimePersonMediumArmor, ProtoSlimePersonVisor, ProtogenLights, ProtoSlimePersonLEDFace ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: false
+    HeadTop:
+      points: 1
+      required: false
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 4
+      required: false
+    Arms:
+      points: 4
+      required: false
+
+#region SHADEKIN ####
+
+- type: species
+  id: ProtoKin
+  name: subspecies-name-protokin
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoKin
+  sprites: MobProtoKinSprites
+  defaultSkinTone: "#ffffff"
+  markingLimits: MobProtoKinMarkingLimits
+  dollPrototype: MobProtoKinDummy
+  skinColoration: AnyColour # Hardlight
+  maleFirstNames: names_shadekin
+  femaleFirstNames: names_shadekin
+  naming: First
+  minAge: 18
+  maxAge: 300
+  youngAge: 30
+  oldAge: 250
+
+- type: speciesBaseSprites
+  id: MobProtoKinSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Hair: MobHumanoidAnyMarking
+    Head: MobShadekinHead
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    Chest: MobShadekinTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    LArm: MobShadekinLArm
+    RArm: MobShadekinRArm
+    LHand: MobShadekinLHand
+    RHand: MobShadekinRHand
+    LLeg: MobShadekinLLeg
+    RLeg: MobShadekinRLeg
+    LFoot: MobShadekinLFoot
+    RFoot: MobShadekinRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoKinMarkingLimits
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtoKinMediumArmor, ProtoKinVisor, ProtoKinLights, ProtoKinLEDFace ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [TailShadekin]
+    HeadTop:
+      points: 1
+      required: true
+      defaultMarkings: [EarsShadekin]
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 1
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+
+#region RESOMI ####
+
+- type: species
+  id: ProtoResomi
+  name: subspecies-name-protoresomi
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoResomi
+  sprites: MobProtoResomiSprites
+  defaultSkinTone: "#faf7f7"
+  markingLimits: MobProtoResomiMarkingLimits
+  dollPrototype: MobProtoResomiDummy
+  skinColoration: AnyColour # Hardlight
+  maleFirstNames: NamesResomiUnisex
+  femaleFirstNames: NamesResomiUnisex
+  naming: First
+  sexes:
+  - Unsexed
+  - Male
+  - Female
+  minAge: 23
+  youngAge: 103
+  oldAge: 257
+  maxAge: 430
+
+- type: speciesBaseSprites
+  id: MobProtoResomiSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Hair: MobHumanoidAnyMarking
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Head: MobResomiHead
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    Chest: MobResomiTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    LArm: MobResomiLArm
+    RArm: MobResomiRArm
+    LHand: MobResomiLHand
+    RHand: MobResomiRHand
+    LLeg: MobResomiLLeg
+    RLeg: MobResomiRLeg
+    LFoot: MobResomiLFoot
+    RFoot: MobResomiRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoResomiMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtoResomiMediumArmor, ProtoResomiVisor, ProtoResomiLights, ProtoResomiLEDFace ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 2
+      required: false
+    HeadTop:
+      points: 1
+      required: false
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+
+#region REPTILIAN ####
+
+- type: species
+  id: ProtoReptile
+  name: subspecies-name-protoreptile
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoReptile
+  sprites: MobProtoReptileSprites
+  defaultSkinTone: "#faf7f7"
+  markingLimits: MobProtoReptileMarkingLimits
+  dollPrototype: MobProtoReptileDummy
+  skinColoration: AnyColour # Hardlight
+  maleFirstNames: names_reptilian_male
+  femaleFirstNames: names_reptilian_female
+  naming: FirstDashFirst
+
+- type: speciesBaseSprites
+  id: MobProtoReptileSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Head: MobReptilianHead
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    Chest: MobReptilianTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    LArm: MobReptilianLArm
+    RArm: MobReptilianRArm
+    LHand: MobReptilianLHand
+    RHand: MobReptilianRHand
+    LLeg: MobReptilianLLeg
+    RLeg: MobReptilianRLeg
+    LFoot: MobReptilianLFoot
+    RFoot: MobReptilianRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoReptileMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtogenMediumArmor, ProtoVulpVisor, ProtogenLights, ProtoReptileLEDFaceBoxy ]
+    Hair:
+      points: 0
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ LizardTailSmooth ]
+    HeadTop:
+      points: 1
+      required: false
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+
+#region MOTH ####
+
+- type: species
+  id: ProtoMoth
+  name: subspecies-name-protomoth
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoMoth
+  sprites: MobProtoMothSprites
+  defaultSkinTone: "#ffda93"
+  markingLimits: MobProtoMothMarkingLimits
+  dollPrototype: MobProtoMothDummy
+  skinColoration: AnyColour # Hardlight
+  maleFirstNames: names_moth_first_male
+  femaleFirstNames: names_moth_first_female
+  lastNames: names_moth_last
+
+- type: speciesBaseSprites
+  id: MobProtoMothSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Head: MobMothHead
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    Chest: MobMothTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    LArm: MobMothLArm
+    RArm: MobMothRArm
+    LHand: MobMothLHand
+    RHand: MobMothRHand
+    LLeg: MobMothLLeg
+    RLeg: MobMothRLeg
+    LFoot: MobMothLFoot
+    RFoot: MobMothRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoMothMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtoMothMediumArmor, ProtoMothVisor, ProtoMothLights, ProtoMothLEDFace ]
+    Hair:
+      points: 0
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 2
+      required: false # if you want to combine a tail with a wing, needs to turn off requirment. Wingless moths..
+    HeadTop:
+      points: 1
+      required: true
+      defaultMarkings: [ MothAntennasDefault ]
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+
+#region HUMAN ####
+
+- type: species
+  id: ProtoHumie
+  name: subspecies-name-protohumie
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoHumie
+  sprites: MobProtoHumieSprites
+  defaultSkinTone: "#ffda93"
+  markingLimits: MobProtoHumieMarkingLimits
+  dollPrototype: MobProtoHumieDummy
+  skinColoration: AnyColour # Hardlight
+
+- type: speciesBaseSprites
+  id: MobProtoHumieSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Head: MobHumanHead
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    Chest: MobHumanTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    LArm: MobHumanLArm
+    RArm: MobHumanRArm
+    LHand: MobHumanLHand
+    RHand: MobHumanRHand
+    LLeg: MobHumanLLeg
+    RLeg: MobHumanRLeg
+    LFoot: MobHumanLFoot
+    RFoot: MobHumanRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoHumieMarkingLimits
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtogenMediumArmor, ProtogenVisorRound, ProtogenLights, ProtogenLEDFaceRound ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: false
+    HeadTop:
+      points: 2
+      required: false
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+
+#region FELINID ####
+
+- type: species
+  id: ProtoFeline
+  name: subspecies-name-protofeline
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoFeline
+  sprites: MobProtoFelineSprites
+  defaultSkinTone: "#666666"
+  markingLimits: MobProtoFelineMarkingLimits
+  dollPrototype: MobProtoFelineDummy
+  skinColoration: AnyColour # Hardlight
+  maleFirstNames: names_felionoid
+  femaleFirstNames: names_felionoid
+  naming: First
+
+- type: speciesBaseSprites
+  id: MobProtoFelineSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Head: MobFelionoidHead
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    Chest: MobFelionoidTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    LArm: MobFelionoidLArm
+    RArm: MobFelionoidRArm
+    LHand: MobFelionoidLHand
+    RHand: MobFelionoidRHand
+    LLeg: MobFelionoidLLeg
+    RLeg: MobFelionoidRLeg
+    LFoot: MobFelionoidLFoot
+    RFoot: MobFelionoidRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoFelineMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtoFelineMediumArmor, ProtoFelineVisor, ProtoFelineLights, ProtoFelineLEDFace ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ FelionoidTailAnimated ]
+    HeadTop:
+      points: 2
+      required: false
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 4
+      required: false
+    Arms:
+      points: 4
+      required: false
+
+#region DWARF ####
+
+- type: species
+  id: ProtoDawi
+  name: subspecies-name-protodawi
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoDawi
+  sprites: MobProtoHumieSprites
+  markingLimits: MobProtoDawiMarkingLimits
+  dollPrototype: MobProtoDawiDummy
+  defaultSkinTone: "#666666"
+  skinColoration: AnyColour # Hardlight
+
+- type: markingPoints
+  id: MobProtoDawiMarkingLimits
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtogenMediumArmor, ProtogenVisorRound, ProtogenLights, ProtogenLEDFaceRound ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 1 # dwarfs and beards go together like milk and cookies
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: false
+    HeadTop:
+      points: 2
+      required: false
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+
+#region DIONA ####
+
+- type: species
+  id: ProtoDionae
+  name: subspecies-name-protodionae
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoDionae
+  sprites: MobProtoDionaeSprites
+  markingLimits: MobProtoDionaeMarkingLimits
+  dollPrototype: MobProtoDionaeDummy
+  defaultSkinTone: "#cdb369"
+  skinColoration: AnyColour # Hardlight
+  maleFirstNames: DionaFirst
+  femaleFirstNames: DionaFirst
+  lastNames: DionaLast
+  naming: TheFirstofLast
+
+- type: speciesBaseSprites
+  id: MobProtoDionaeSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Head: MobDionaHead
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Chest: MobDionaTorso
+    LArm: MobDionaLArm
+    RArm: MobDionaRArm
+    LHand: MobDionaLHand
+    RHand: MobDionaRHand
+    LLeg: MobDionaLLeg
+    RLeg: MobDionaRLeg
+    LFoot: MobDionaLFoot
+    RFoot: MobDionaRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoDionaeMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtoDionaeMediumArmor, ProtoDionaeVisor, ProtoDionaeLights, ProtoDionaeLEDFace ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: false
+    HeadTop:
+      points: 2
+      required: false
+    Head:
+      points: 2
+      required: false
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+    Overlay:
+      points: 2
+      required: false
+
+#region AVALI ####
+
+- type: species
+  id: ProtoAvali
+  name: subspecies-name-protoavali
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoAvali
+  sprites: MobProtoAvaliSprites
+  markingLimits: MobProtoAvaliMarkingLimits
+  dollPrototype: MobProtoAvaliDummy
+  defaultSkinTone: "#D2B48C"
+  skinColoration: AnyColour # Hardlight
+  maleFirstNames: names_avali_first
+  femaleFirstNames: names_avali_first
+  lastNames: names_avali_packs
+  naming: FirstLast
+  minAge: 23
+  youngAge: 103
+  oldAge: 257
+  maxAge: 430
+
+- type: speciesBaseSprites
+  id: MobProtoAvaliSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Head: MobAvaliHead
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Chest: MobAvaliTorso
+    Tail: MobHumanoidAnyMarking
+    LArm: MobAvaliLArm
+    RArm: MobAvaliRArm
+    LHand: MobAvaliLHand
+    RHand: MobAvaliRHand
+    LLeg: MobAvaliLLeg
+    RLeg: MobAvaliRLeg
+    LFoot: MobAvaliLFoot
+    RFoot: MobAvaliRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoAvaliMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtoAvaliMediumArmor, ProtoAvaliVisor, ProtoAvaliLights, ProtoAvaliLEDFace ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ AvaliTailBase ]
+    HeadTop:
+      points: 2
+      required: false
+    Head:
+      points: 2
+      required: false
+    HeadSide:
+      points: 1
+      required: true
+      defaultMarkings: [ AvaliEarsBase ]
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 4
+      required: false
+
+#region ARACHNID ####
+
+- type: species
+  id: ProtoArachnid
+  name: subspecies-name-protoarachnid
+  roundStart: true
+  subspeciesOf: Protogen # Wolfgate: groups it under Protogen in the creator
+  prototype: MobProtoArachnid
+  sprites: MobProtoArachnidSprites
+  markingLimits: MobProtoArachnidMarkingLimits
+  dollPrototype: MobProtoArachnidDummy
+  defaultSkinTone: "#385878"
+  skinColoration: AnyColour # Hardlight
+  maleFirstNames: names_arachnid_first
+  femaleFirstNames: names_arachnid_first
+  lastNames: names_arachnid_last
+  sexes:
+  - Unsexed
+
+- type: speciesBaseSprites
+  id: MobProtoArachnidSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking #HL modifcation
+    TailOversuit: MobHumanoidAnyMarking #HL modifcation
+    Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
+    Head: MobArachnidHead
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
+    UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
+    Genital: MobHumanoidAnyMarking #HL modifcation
+    Penis: MobHumanoidAnyMarking #HL modifcation
+    Breasts: MobHumanoidAnyMarking #HL modifcation
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Chest: MobArachnidTorso
+    Tail: MobHumanoidAnyMarking
+    LArm: MobArachnidLArm
+    RArm: MobArachnidRArm
+    LHand: MobArachnidLHand
+    RHand: MobArachnidRHand
+    LLeg: MobArachnidLLeg
+    RLeg: MobArachnidRLeg
+    LFoot: MobArachnidLFoot
+    RFoot: MobArachnidRFoot
+    RArmExtension: MobHumanoidAnyMarking # Hardlight: enables harpy/bat wings for all species
+
+- type: markingPoints
+  id: MobProtoArachnidMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Special:
+      points: 4
+      required: true
+      defaultMarkings: [ ProtogenMediumArmor, ProtoArachnidVisor, ProtogenLights, ProtoArachnidLEDFace ]
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Snout:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ ArachnidAppendagesDefault ]
+    HeadTop:
+      points: 2
+      required: false
+    Head:
+      points: 2
+      required: false
+    HeadSide:
+      points: 1
+      required: true
+      defaultMarkings: [ ArachnidCheliceraeDownwards ]
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false

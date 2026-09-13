@@ -1,0 +1,208 @@
+- type: entity
+  id: BaseSynthOrgan
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/organs.rsi
+  - type: Organ
+  - type: SynthOrgan
+  - type: Extractable
+    grindableSolutionName: organ
+  - type: SolutionContainerManager
+    solutions:
+      organ:
+        reagents:
+        - ReagentId: Nanites
+          Quantity: 10
+  - type: Item
+    size: Small
+
+- type: entity
+  id: OrganSynthBrain
+  parent: BaseItem
+  name: synth ccu
+  suffix: Synth
+  description: "Effectively a Synth's brain. It's somehow smoother than yours."
+  components:
+  - type: LanguageSpeaker
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic # Wolfgate: HardLight's GalacticCommon is TauCetiBasic here
+    - Machine
+    understands:
+    - TauCetiBasic
+    - Machine
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/organs.rsi
+    state: brain
+    scale: 0.65, 0.65
+  - type: Organ
+    slotId: brain
+  - type: SynthOrgan
+  - type: Brain
+  - type: Input
+    context: "ghost"
+  - type: Examiner
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechSounds: Pai
+  - type: BlockMovement
+  - type: OrganBrainSynth
+  - type: BorgBrain
+
+- type: entity
+  id: OrganSynthEyes
+  parent: BaseSynthOrgan
+  name: camera gimbal
+  suffix: Synth
+  description: "A small mechanical gimbal featuring several multi-spectrum cameras, responsible for Synth vision."
+  components:
+  - type: Sprite
+    state: eyes
+    scale: 0.8, 0.8
+  - type: Organ
+    slotId: eyes
+  - type: Eyes
+  - type: OrganEyesSynth
+
+- type: entity
+  id: OrganSynthTongue
+  parent: BaseSynthOrgan
+  name: synth tongue
+  suffix: Synth
+  description: "It's a tongue, capable of unspeakable things. It has a small logo on the back of an offensively pink Synth. You don't know why you find it offensive."
+  components:
+  - type: Sprite
+    state: tongue
+
+- type: entity
+  id: OrganSynthAppendix
+  parent: BaseSynthOrgan
+  name: red brick
+  suffix: Synth
+  description: "If you see this, it's already too late. I'm sorry."
+  components:
+  - type: Sprite
+    state: appendix
+    scale: 0.6, 0.6
+  - type: Organ
+    slotId: appendix
+
+- type: entity
+  id: OrganSynthEars
+  parent: BaseSynthOrgan
+  name: audio pack
+  suffix: Synth
+  description: "A sensor pack designed to be installed in a Synth. This one contains audio sensors."
+  components:
+  - type: Sprite
+    state: ears
+    scale: 0.7, 0.7
+  - type: Organ
+    slotId: ears
+
+- type: entity
+  id: OrganSynthLungs
+  parent: BaseSynthOrgan
+  name: synth lungs
+  suffix: Synth
+  description: "Synth lungs simulating organic functions for internal cooling. Not very interesting on their own."
+  components:
+  - type: Sprite
+    state: lungs
+  - type: Organ
+    slotId: lungs
+  - type: OrganLungsSynth
+
+- type: entity
+  id: OrganSynthHeart
+  parent: BaseSynthOrgan
+  name: synth heart
+  suffix: Synth
+  description: "A Synth heart. It doesn't do anything interesting yet."
+  components:
+  - type: Sprite
+    state: heart
+  - type: Organ
+    slotId: heart
+  - type: Heart
+  - type: OrganHeartSynth
+  - type: Metabolizer
+    maxReagents: 2
+    metabolizerTypes: [ Synth ]
+    groups:
+    - id: Medicine
+    - id: Poison
+    - id: Narcotic
+
+- type: entity
+  id: OrganSynthStomach
+  parent: BaseSynthOrgan
+  name: synth stomach
+  suffix: Synth
+  description: "A Synth stomach. It can convert minerals to nutriment and nutriment to nanites."
+  components:
+  - type: Sprite
+    state: stomach
+  - type: Organ
+    slotId: stomach
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 50
+      organ:
+        reagents:
+        - ReagentId: Nanites
+          Quantity: 10
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - RawMaterial
+      - ConstructionMaterial
+      - Ore
+    isSpecialDigestibleExclusive: false
+  - type: Metabolizer
+    maxReagents: 5
+    metabolizerTypes: [ Synth ]
+    groups:
+    - id: Food
+    - id: Drink
+
+- type: entity
+  id: OrganSynthLiver
+  parent: BaseSynthOrgan
+  name: synth liver
+  suffix: Synth
+  description: "A Synth liver. It prevents poisoning from alcohol."
+  components:
+  - type: Sprite
+    state: liver
+    scale: 0.8, 0.8
+  - type: Organ
+    slotId: liver
+  - type: Liver
+  - type: OrganLiverSynth
+  - type: Metabolizer
+    maxReagents: 1
+    metabolizerTypes: [ Synth ]
+    groups:
+    - id: Alcohol
+
+- type: entity
+  id: OrganSynthKidneys
+  parent: BaseSynthOrgan
+  name: energy coil
+  suffix: Synth
+  description: "A Synth energy coil. It doesn't seem to do anything interesting yet."
+  components:
+  - type: Sprite
+    state: kidneys
+    scale: 1.1, 1.1
+  - type: Organ
+    slotId: kidneys
+  - type: Metabolizer
+    maxReagents: 5
+    metabolizerTypes: [ Synth ]
+    removeEmpty: true

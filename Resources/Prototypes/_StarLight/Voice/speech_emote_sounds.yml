@@ -1,0 +1,147 @@
+# Wolfgate: ported from HardLight
+- type: emoteSounds
+  id: MaleFelionoid
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FelionoidScreams
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Mew:
+      collection: FelionoidMews
+    Hiss:
+      collection: FelionoidHisses
+    Meow:
+      collection: FelionoidMeows
+    Purr:
+      collection: FelionoidPurrs
+    Growl:
+      collection: FelionoidGrowls
+    Trill:
+      collection: FelionoidTrills
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+
+- type: emoteSounds
+  id: FemaleFelionoid
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FelionoidScreams
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    Crying:
+      collection: FemaleCry
+    Sigh:
+      collection: FemaleSigh
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Whistle:
+      collection: Whistles
+    Mew:
+      collection: FelionoidMews
+    Hiss:
+      collection: FelionoidHisses
+    Meow:
+      collection: FelionoidMeows
+    Purr:
+      collection: FelionoidPurrs
+    Growl:
+      collection: FelionoidGrowls
+    Trill:
+      collection: FelionoidTrills
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+
+# Wolfgate: ported from HardLight
+- type: emoteSounds
+  parent: UnisexAvali
+  id: MaleAvali
+  params:
+    variation: 0.125
+  sounds:
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Sigh:
+      collection: MaleSigh
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+    Crying:
+      path: /Audio/_Starlight/Voice/Avali/avali_cry.ogg
+
+- type: emoteSounds
+  parent: UnisexAvali
+  id: FemaleAvali
+  params:
+    variation: 0.125
+  sounds:
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Sigh:
+      collection: FemaleSigh
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+    Crying:
+      path: /Audio/_Starlight/Voice/Avali/avali_cry.ogg

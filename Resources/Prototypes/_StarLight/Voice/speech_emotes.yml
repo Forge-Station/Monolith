@@ -1,6 +1,7 @@
 - type: emote
   id: Whine
   name: chat-emote-name-whine
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: whine } # Wolfgate: was the default scream icon
   category: Vocal
   available: false
   chatMessages: [chat-emote-msg-whine] #Forge-Change
@@ -19,6 +20,7 @@
 - type: emote
   id: Yip
   name: chat-emote-name-yip
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: bark } # Wolfgate: was the default scream icon
   category: Vocal
   available: false
   chatMessages: [chat-emote-msg-yip] #Forge-Change

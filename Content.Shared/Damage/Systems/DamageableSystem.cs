@@ -1,3 +1,4 @@
+using Content.Shared._FarHorizons.Damage; // WOLFGATE
 using Content.Shared._Shitmed.Targeting;
 // Shitmed Change
 using Content.Shared.Body.Systems;
@@ -243,6 +244,16 @@ namespace Content.Shared.Damage
                     return damage;
                 }
             }
+
+            // WOLFGATE - ported from HardLight: let healing be adjusted even when resistances are
+            // ignored. Synths use this to be immune to organic medicine.
+            if (!ignoreGlobalModifiers && damage.GetTotal() < 0)
+            {
+                var healEv = new HealModifyEvent(damage, origin);
+                RaiseLocalEvent(uid.Value, healEv);
+                damage = healEv.Damage;
+            }
+            // End WOLFGATE
 
             if (!ignoreGlobalModifiers)
                 damage = ApplyUniversalAllModifiers(damage);

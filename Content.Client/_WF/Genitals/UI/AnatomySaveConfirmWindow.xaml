@@ -1,0 +1,12 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'wf-genitals-save-confirm-title'}"
+                      MinSize="380 140">
+    <BoxContainer Orientation="Vertical" Margin="12" SeparationOverride="10">
+        <RichTextLabel Name="MessageLabel" HorizontalExpand="True" />
+        <BoxContainer Orientation="Horizontal" SeparationOverride="8" HorizontalAlignment="Right">
+            <Button Name="ConfirmButton" Text="{Loc 'wf-genitals-save-confirm-save'}" StyleClasses="CreatorPrimary" />
+            <Button Name="CancelButton" Text="{Loc 'wf-genitals-save-confirm-cancel'}" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

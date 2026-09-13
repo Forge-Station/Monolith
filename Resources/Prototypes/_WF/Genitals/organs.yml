@@ -1,0 +1,80 @@
+# Genital organs, built by GenitalOrganSystem into the runtime torso slots wf_genital_*.
+# Every organ has the same neutral name, description and icon for every viewer; the type shows only in the
+# admin spawn-menu suffix and in the consent-gated examine line. Not parented on BaseHumanOrgan, which adds
+# Food, Extractable, a Meat tag and a price.
+
+- type: entity
+  id: BaseWFGenitalOrgan
+  parent: BaseItem
+  abstract: true
+  name: organ tissue
+  description: A piece of excised organ tissue.
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+    state: muscle
+  - type: Item
+    size: Small
+  - type: EmitSoundOnPickup
+    sound:
+      collection: OrganInteraction
+  - type: EmitSoundOnDrop
+    sound:
+      collection: OrganInteraction
+  - type: Organ
+    toolName: an organ
+
+- type: entity
+  parent: BaseWFGenitalOrgan
+  id: OrganWFPenis
+  suffix: Penis
+  components:
+  - type: Organ
+    slotId: wf_genital_penis
+  - type: GenitalOrgan
+    slot: Penis
+  - type: PenisOrgan
+
+- type: entity
+  parent: BaseWFGenitalOrgan
+  id: OrganWFTesticles
+  suffix: Testicles
+  components:
+  - type: Organ
+    slotId: wf_genital_testicles
+  - type: GenitalOrgan
+    slot: Testicles
+  - type: TesticlesOrgan
+
+- type: entity
+  parent: BaseWFGenitalOrgan
+  id: OrganWFVagina
+  suffix: Vagina
+  components:
+  - type: Organ
+    slotId: wf_genital_vagina
+  - type: GenitalOrgan
+    slot: Vagina
+  - type: VaginaOrgan
+
+- type: entity
+  parent: BaseWFGenitalOrgan
+  id: OrganWFWomb
+  suffix: Womb
+  components:
+  - type: Organ
+    slotId: wf_genital_womb
+  - type: GenitalOrgan
+    slot: Womb
+  - type: WombOrgan
+
+- type: entity
+  parent: BaseWFGenitalOrgan
+  id: OrganWFBreasts
+  suffix: Breasts
+  components:
+  - type: Organ
+    slotId: wf_genital_breasts
+  - type: GenitalOrgan
+    slot: Breasts
+  - type: BreastsOrgan

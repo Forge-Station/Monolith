@@ -149,9 +149,15 @@
           category: Hair
       fallbackTypes:
         - !type:SimpleColoring
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    whitescale_forked_tailfin_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    whitescale_forked_tailfin_BEHIND: whitescale_forked_tailfin_FRONT
   sprites:
-    - sprite: _EE/Mobs/Customization/Harpy/harpy_tails.rsi
-      state: whitescale_forked_tailfin
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - split art, anatomy zone only
+      state: whitescale_forked_tailfin_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: whitescale_forked_tailfin_BEHIND
 
 - type: marking
   id: HarpyTailForkedHuescale
@@ -165,9 +171,15 @@
           category: Hair
       fallbackTypes:
         - !type:SimpleColoring
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    huescale_forked_tailfin_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    huescale_forked_tailfin_BEHIND: huescale_forked_tailfin_FRONT
   sprites:
-    - sprite: _EE/Mobs/Customization/Harpy/harpy_tails.rsi
-      state: huescale_forked_tailfin
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - split art, anatomy zone only
+      state: huescale_forked_tailfin_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: huescale_forked_tailfin_BEHIND
 
 - type: marking
   id: HarpyTailPeacock
@@ -181,11 +193,21 @@
           category: Hair
       fallbackTypes:
         - !type:SimpleColoring
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    peacock_tail_feathers_BEHIND: TailBehind
+    peacock_tail_eyes_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    peacock_tail_feathers_BEHIND: peacock_tail_feathers_FRONT
+    peacock_tail_eyes_BEHIND: peacock_tail_eyes_FRONT
   sprites:
-    - sprite: _EE/Mobs/Customization/Harpy/harpy_tails48x48.rsi
-      state: peacock_tail_feathers
-    - sprite: _EE/Mobs/Customization/Harpy/harpy_tails48x48.rsi
-      state: peacock_tail_eyes
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails48x48.rsi # WOLFGATE - split art
+      state: peacock_tail_feathers_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails48x48.rsi # WOLFGATE - split art
+      state: peacock_tail_eyes_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails48x48.rsi # WOLFGATE - south frame on TailBehind
+      state: peacock_tail_feathers_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails48x48.rsi # WOLFGATE - south frame on TailBehind
+      state: peacock_tail_eyes_BEHIND
 
 - type: marking
   id: HarpyTailHaven
@@ -199,11 +221,21 @@
           category: Hair
       fallbackTypes:
         - !type:SimpleColoring
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    haven_tone_1_BEHIND: TailBehind
+    haven_tone_2_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    haven_tone_1_BEHIND: haven_tone_1_FRONT
+    haven_tone_2_BEHIND: haven_tone_2_FRONT
   sprites:
-    - sprite: _EE/Mobs/Customization/Harpy/harpy_tails.rsi
-      state: haven_tone_1
-    - sprite: _EE/Mobs/Customization/Harpy/harpy_tails.rsi
-      state: haven_tone_2
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - split art, anatomy zone only
+      state: haven_tone_1_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - split art, anatomy zone only
+      state: haven_tone_2_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: haven_tone_1_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: haven_tone_2_BEHIND
 
 - type: marking
   id: HarpyTailForkedLong
@@ -217,9 +249,15 @@
           category: Hair
       fallbackTypes:
         - !type:SimpleColoring
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    forked_long_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    forked_long_BEHIND: forked_long_FRONT
   sprites:
-    - sprite: _EE/Mobs/Customization/Harpy/harpy_tails.rsi
-      state: forked_long
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - split art, anatomy zone only
+      state: forked_long_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: forked_long_BEHIND
 
 - type: marking
   id: HarpyTailSwallow
@@ -233,9 +271,15 @@
           category: Hair
       fallbackTypes:
         - !type:SimpleColoring
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    swallow_tail_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    swallow_tail_BEHIND: swallow_tail_FRONT
   sprites:
-    - sprite: _EE/Mobs/Customization/Harpy/harpy_tails.rsi
-      state: swallow_tail
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - split art, anatomy zone only
+      state: swallow_tail_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_EE/Mobs/Customization/Harpy/harpy_tails.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: swallow_tail_BEHIND
 
 - type: marking
   id: HarpyWing2ToneClassic
@@ -316,3 +360,21 @@
     - sprite: _EE/Mobs/Customization/Harpy/harpy_wings.rsi
       state: bionic_wings_tone_2
       shader: unshaded
+
+# Wolfgate: ported from HardLight
+- type: marking
+  id: HarpyWingFoldedWhitescale2
+  bodyPart: RArmExtension # Frontier: RArm<RArmExtension
+  markingCategory: Arms
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+          category: Hair
+      fallbackTypes:
+        - !type:SimpleColoring
+          color: "#964b00"
+  sprites:
+    - sprite: _EE/Mobs/Customization/Harpy/harpy_wings.rsi
+      state: whitescale_harpy_folded2

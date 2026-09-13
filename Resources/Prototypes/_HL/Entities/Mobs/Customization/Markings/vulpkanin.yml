@@ -1,0 +1,9 @@
+# Wolfgate: ported from HardLight
+- type: marking
+  id: VulpEarSpaniel
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, ProtoVulp, Canine]
+  sprites:
+    - sprite: _HL/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: spaniel

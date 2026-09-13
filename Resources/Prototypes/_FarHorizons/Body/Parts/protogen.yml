@@ -1,0 +1,173 @@
+# Wolfgate: ported from HardLight - Protogen subspecies.
+# The base Protogen prototypes are NOT taken; Wolfgate already has its own under _Mono.
+# Each gets an explicit Icon so it does not inherit the _Mono protogen icon.
+
+- type: entity
+  id: TorsoProtoVulp
+  name: "proto-vulp torso"
+  parent: TorsoProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "torso_m"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "torso_m"
+
+- type: entity
+  id: HeadProtoVulp
+  name: "proto-vulp head"
+  parent: HeadProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "head_m"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "head_m"
+
+- type: entity
+  id: LeftArmProtoVulp
+  name: "left proto-vulp arm"
+  parent: LeftArmProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "l_arm"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "l_arm"
+
+- type: entity
+  id: RightArmProtoVulp
+  name: "right proto-vulp arm"
+  parent: RightArmProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "r_arm"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "r_arm"
+
+- type: entity
+  id: LeftHandProtoVulp
+  name: "left proto-vulp hand"
+  parent: LeftHandProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "l_hand"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "l_hand"
+
+- type: entity
+  id: RightHandProtoVulp
+  name: "right proto-vulp hand"
+  parent: RightHandProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "r_hand"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "r_hand"
+
+- type: entity
+  id: LeftLegProtoVulp
+  name: "left proto-vulp leg"
+  parent: LeftLegProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "l_leg"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "l_leg"
+
+- type: entity
+  id: RightLegProtoVulp
+  name: "right proto-vulp leg"
+  parent: RightLegProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "r_leg"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "r_leg"
+
+- type: entity
+  id: LeftFootProtoVulp
+  name: "left proto-vulp foot"
+  parent: LeftFootProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "l_foot"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "l_foot"
+
+- type: entity
+  id: RightFootProtoVulp
+  name: "right proto-vulp foot"
+  parent: RightFootProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "r_foot"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: "r_foot"
+
+#### Vox ####
+
+- type: entity
+  id: LeftHandProtoVox
+  name: "left proto-vox hand"
+  parent: LeftHandProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vox/parts.rsi
+    state: "l_hand"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vox/parts.rsi
+    state: "l_hand"
+
+- type: entity
+  id: RightHandProtoVox
+  name: "right proto-vox hand"
+  parent: RightHandProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vox/parts.rsi
+    state: "r_hand"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vox/parts.rsi
+    state: "r_hand"
+
+- type: entity
+  id: LeftFootProtoVox
+  name: "left proto-vox foot"
+  parent: LeftFootProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vox/parts.rsi
+    state: "l_foot"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vox/parts.rsi
+    state: "l_foot"
+
+- type: entity
+  id: RightFootProtoVox
+  name: "right proto-vox foot"
+  parent: RightFootProtogen
+  components:
+  - type: Sprite
+    sprite: _FarHorizons/Mobs/Species/Proto-Vox/parts.rsi
+    state: "r_foot"
+  - type: Icon # Wolfgate: else it inherits PartProtogen's _Mono icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vox/parts.rsi
+    state: "r_foot"

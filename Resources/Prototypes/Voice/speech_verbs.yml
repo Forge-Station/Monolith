@@ -1,4 +1,4 @@
-﻿- type: speechVerb
+- type: speechVerb
   id: Default
   name: chat-speech-verb-name-default
   speechVerbStrings:
@@ -172,3 +172,10 @@
   - chat-speech-verb-electricity-1
   - chat-speech-verb-electricity-2
   - chat-speech-verb-electricity-3
+
+# Wolfgate: ported from HardLight
+- type: speechVerb
+  id: Shadowkin
+  name: chat-speech-verb-name-shadowkin
+  speechVerbStrings:
+  - chat-speech-verb-shadowkin-1

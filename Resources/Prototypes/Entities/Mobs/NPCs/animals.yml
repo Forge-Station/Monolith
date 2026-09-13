@@ -1372,6 +1372,7 @@
     drawdepth: Mobs
     layers:
     # Shitmed Change Start
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - the south frame of a split tail draws here
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -1403,6 +1404,7 @@
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - split tail layers
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
     - map: [ "head" ]

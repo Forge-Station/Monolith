@@ -3,6 +3,7 @@
   parent: [ Clothing, AllowSuitStorageClothing, RecyclableItemClothDurable ] # Frontier: added AllowSuitStorageClothing and RecyclableItemClothDurable
   id: ClothingOuterBase
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
   # Goobstation edit start
   - type: EmitSoundOnPickup
     sound:
@@ -69,6 +70,8 @@
   parent: [RecyclableItemClothBasic, ClothingOuterStorageBase, BaseFoldable] # Frontier: added RecyclableItemClothBasic
   id: ClothingOuterStorageFoldableBase
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
+    foldedRegions: None
   - type: Appearance
   - type: Foldable
     canFoldInsideContainer: true

@@ -1,0 +1,21 @@
+# Sheath and slit art (ported from NovaSector). Outer states take the sheath colour, inner states the penis colour.
+
+- type: genitalSheath
+  id: Sheath
+  sheathType: Sheath
+  sprite: _WF/Mobs/Customization/Markings/Genital/sheath.rsi
+  retractedOuter: sheath_normal_0_FRONT
+  retractedInner: sheath_normal_0_FRONT_inner
+  emergingOuter: sheath_normal_1_FRONT
+  emergingInner: sheath_normal_1_FRONT_inner
+  erectOuter: sheath_normal_1_FRONT     # the sheath stays at the base; confirm _0 against _1 in the screenshot harness
+
+- type: genitalSheath
+  id: Slit
+  sheathType: Slit
+  sprite: _WF/Mobs/Customization/Markings/Genital/sheath.rsi
+  retractedOuter: sheath_slit_0_FRONT        # intentionally empty padding state
+  retractedInner: sheath_slit_0_FRONT_inner  # the closed slit line
+  emergingOuter: sheath_slit_1_FRONT         # empty padding state (its slit pixel was moved to the inner layer)
+  emergingInner: sheath_slit_1_FRONT_inner
+  # no erectOuter: a slit is not visible once the shaft is out

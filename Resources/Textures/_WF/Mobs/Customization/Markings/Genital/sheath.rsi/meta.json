@@ -1,0 +1,43 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Converted from NovaSector (https://github.com/NovaSector/NovaSector) modular_nova/master_files/icons/mob/sprite_accessory/genitals/sheath_onmob.dmi at commit cbf8dc1ad6f63825326ed0f3d301788e3817236a; the same pixels exist in Skyrat-tg (https://github.com/Skyrat-SS13/Skyrat-tg) modular_skyrat/master_files/icons/mob/sprite_accessory/genitals/penis_onmob.dmi (m_penis_sheath_*, m_penis_slit_*) at commit 85d18769f98d261404216a80dc163e1148e13099, where the sheath art was first added in PR #1032. Colour layers split into separate states: _FRONT is the source secondary layer, _FRONT_inner the primary layer. sheath_slit_0_FRONT is an empty padding state. For Wolfgate the lower slit pixel of sheath_slit_1 was moved to the inner layer.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "sheath_normal_0_FRONT",
+            "directions": 4
+        },
+        {
+            "name": "sheath_normal_0_FRONT_inner",
+            "directions": 4
+        },
+        {
+            "name": "sheath_normal_1_FRONT",
+            "directions": 4
+        },
+        {
+            "name": "sheath_normal_1_FRONT_inner",
+            "directions": 4
+        },
+        {
+            "name": "sheath_slit_0_FRONT",
+            "directions": 4
+        },
+        {
+            "name": "sheath_slit_0_FRONT_inner",
+            "directions": 4
+        },
+        {
+            "name": "sheath_slit_1_FRONT",
+            "directions": 4
+        },
+        {
+            "name": "sheath_slit_1_FRONT_inner",
+            "directions": 4
+        }
+    ]
+}

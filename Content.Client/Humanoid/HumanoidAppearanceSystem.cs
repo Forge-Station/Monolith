@@ -1,5 +1,6 @@
 using System.Numerics;
-using System.Linq; // Forge-Change Corvax-Wega-Hair-Extended
+using Content.Client._WF.Genitals; // WOLFGATE
+using Content.Shared._WF.Genitals; // WOLFGATE
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
@@ -13,10 +14,9 @@ namespace Content.Client.Humanoid;
 
 public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 {
-
-    private const string AnimatedMarkingSuffix = "Animated"; // Forge-Change
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private MarkingManager _markingManager = default!;
+    [Dependency] private GenitalsVisualizerSystem _genitalsVisuals = default!; // WOLFGATE - anatomy undergarment hiding
 
     public override void Initialize()
     {
@@ -27,15 +27,27 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
 
     private void OnHandleState(EntityUid uid, HumanoidAppearanceComponent component, ref AfterAutoHandleStateEvent args)
     {
-        UpdateSprite(component, Comp<SpriteComponent>(uid));
+        UpdateSprite(uid, component, Comp<SpriteComponent>(uid)); // WOLFGATE - entity id threaded through (Component.Owner is obsolete)
     }
 
-    private void UpdateSprite(HumanoidAppearanceComponent component, SpriteComponent sprite)
+    private void UpdateSprite(EntityUid uid, HumanoidAppearanceComponent component, SpriteComponent sprite) // WOLFGATE - entity id for the anatomy hooks
     {
         UpdateLayers(component, sprite);
-        ApplyMarkingSet(component, sprite);
+        ApplyMarkingSet(uid, component, sprite); // WOLFGATE
 
         sprite[sprite.LayerMapReserveBlank(HumanoidVisualLayers.Eyes)].Color = component.EyeColor;
+
+        // WOLFGATE - anatomy visuals follow marking rebuilds (GenitalsVisualizerSystem).
+        RaiseLocalEvent(uid, new HumanoidMarkingsAppliedEvent());
+    }
+
+    /// <summary>
+    /// WOLFGATE - re-runs the sprite and marking rebuild, e.g. when the undergarments a viewer sees as removed change.
+    /// </summary>
+    public void RefreshMarkings(EntityUid uid)
+    {
+        if (TryComp<HumanoidAppearanceComponent>(uid, out var humanoid) && TryComp<SpriteComponent>(uid, out var sprite))
+            UpdateSprite(uid, humanoid, sprite);
     }
 
     private static bool IsHidden(HumanoidAppearanceComponent humanoid, HumanoidVisualLayers layer)
@@ -153,11 +165,10 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
 
         // We need to ensure hair before applying it or coloring can try depend on markings that can be invalid
         var hairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.Hair, out var hairAlpha, _prototypeManager)
-            ? new List<Color> { profile.Appearance.SkinColor.WithAlpha(hairAlpha) } // Forge-Change Corvax-Wega-Hair-Extended
-                .Concat(profile.Appearance.HairColor.Skip(1)).ToList() // Forge-Change Corvax-Wega-Hair-Extended
-            : profile.Appearance.HairColor; // Forge-Change Corvax-Wega-Hair-Extended
+            ? profile.Appearance.SkinColor.WithAlpha(hairAlpha)
+            : profile.Appearance.HairColor;
         var hair = new Marking(profile.Appearance.HairStyleId,
-            hairColor); // Forge-Change Corvax-Wega-Hair-Extended
+            new[] { hairColor });
 
         var facialHairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.FacialHair, out var facialHairAlpha, _prototypeManager)
             ? profile.Appearance.SkinColor.WithAlpha(facialHairAlpha)
@@ -215,10 +226,13 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         var height = profile.Appearance.Height <= 0.005f ? 1.0f : profile.Appearance.Height;
         sprite.Scale = new Vector2(width, height);
 
-        UpdateSprite(humanoid, Comp<SpriteComponent>(uid));
+        UpdateSprite(uid, humanoid, Comp<SpriteComponent>(uid)); // WOLFGATE
+
+        // WOLFGATE - lets GenitalPreviewSystem fill the doll's anatomy from the profile.
+        RaiseLocalEvent(uid, new GenitalPreviewProfileLoadedEvent(profile));
     }
 
-    private void ApplyMarkingSet(HumanoidAppearanceComponent humanoid, SpriteComponent sprite)
+    private void ApplyMarkingSet(EntityUid uid, HumanoidAppearanceComponent humanoid, SpriteComponent sprite) // WOLFGATE - entity id for the anatomy hooks
     {
         // I am lazy and I CBF resolving the previous mess, so I'm just going to nuke the markings.
         // Really, markings should probably be a separate component altogether.
@@ -229,7 +243,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             foreach (var marking in markingList)
             {
                 if (_markingManager.TryGetMarking(marking, out var markingPrototype))
-                    ApplyMarking(markingPrototype, marking.MarkingColors, marking.Visible, humanoid, sprite);
+                    ApplyMarking(uid, markingPrototype, marking.MarkingColors, marking.Visible, humanoid, sprite); // WOLFGATE
             }
         }
 
@@ -242,7 +256,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         {
             foreach (var marking in markingList)
             {
-                ClearMarking(marking, sprite); // Forge-Change
+                RemoveMarking(marking, sprite);
             }
         }
 
@@ -252,31 +266,10 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         {
             foreach (var marking in markingList)
             {
-                ClearMarking(marking, sprite); // Forge-Change
+                RemoveMarking(marking, sprite);
             }
         }
     }
-
-    // Forge-Change-start: remove stale static/animated counterpart layers when refreshing markings.
-    private void ClearMarking(Marking marking, SpriteComponent spriteComp)
-    {
-        RemoveMarking(marking, spriteComp);
-        RemoveAnimatedCounterpart(marking, spriteComp);
-    }
-
-    private void RemoveAnimatedCounterpart(Marking marking, SpriteComponent spriteComp)
-    {
-        var markingId = marking.MarkingId;
-        var counterpartId = markingId.EndsWith(AnimatedMarkingSuffix, StringComparison.Ordinal)
-            ? markingId[..^AnimatedMarkingSuffix.Length]
-            : $"{markingId}{AnimatedMarkingSuffix}";
-
-        if (!_prototypeManager.TryIndex<MarkingPrototype>(counterpartId, out var counterpart))
-            return;
-
-        RemoveMarking(counterpart, spriteComp);
-    }
-    // Forge-Change-end
 
     private void RemoveMarking(Marking marking, SpriteComponent spriteComp)
     {
@@ -285,12 +278,6 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             return;
         }
 
-        RemoveMarking(prototype, spriteComp); // Forge-Change
-    }
-
-    // Forge-Change-start: allow removing layers from a prototype without a live marking instance.
-    private void RemoveMarking(MarkingPrototype prototype, SpriteComponent spriteComp)
-    {
         foreach (var sprite in prototype.Sprites)
         {
             if (sprite is not SpriteSpecifier.Rsi rsi)
@@ -298,7 +285,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
                 continue;
             }
 
-            var layerId = $"{prototype.ID}-{rsi.RsiState}";
+            var layerId = $"{marking.MarkingId}-{rsi.RsiState}";
             if (!spriteComp.LayerMapTryGet(layerId, out var index))
             {
                 continue;
@@ -308,15 +295,14 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             spriteComp.RemoveLayer(index);
         }
     }
-    // Forge-Change-end
-
-    private void ApplyMarking(MarkingPrototype markingPrototype,
+    private void ApplyMarking(EntityUid uid, // WOLFGATE - entity id for the anatomy undergarment check
+        MarkingPrototype markingPrototype,
         IReadOnlyList<Color>? colors,
         bool visible,
         HumanoidAppearanceComponent humanoid,
         SpriteComponent sprite)
     {
-        if (!sprite.LayerMapTryGet(markingPrototype.BodyPart, out int targetLayer))
+        if (!sprite.LayerMapTryGet(markingPrototype.BodyPart, out int _))
         {
             return;
         }
@@ -324,6 +310,18 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         visible &= !IsHidden(humanoid, markingPrototype.BodyPart);
         visible &= humanoid.BaseLayers.TryGetValue(markingPrototype.BodyPart, out var setting)
            && setting.AllowsMarkings;
+
+        // WOLFGATE - anatomy: a removed undergarment is not drawn for viewers who pass the anatomy gate.
+        if (_genitalsVisuals.IsUndergarmentHidden(uid, markingPrototype.MarkingCategory))
+            visible = false;
+
+        // WOLFGATE - ported from HardLight/Floof: resolve per-sprite colours through colorLinks so a
+        // multi-sprite marking (e.g. a tail split across two layers) is coloured as one unit.
+        var linkedColors = ResolveMarkingColors(markingPrototype, colors);
+        // Sprites of one marking may land in different layers; count within each layer separately so
+        // ordering is unchanged for ordinary single-layer markings.
+        var slotOffsets = new Dictionary<HumanoidVisualLayers, int>();
+        // End WOLFGATE
 
         for (var j = 0; j < markingPrototype.Sprites.Count; j++)
         {
@@ -336,9 +334,27 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
 
             var layerId = $"{markingPrototype.ID}-{rsi.RsiState}";
 
+            // WOLFGATE - a marking may redirect individual sprites into other layers.
+            var layerSlot = markingPrototype.BodyPart;
+            if (markingPrototype.Layering != null
+                && markingPrototype.Layering.TryGetValue(rsi.RsiState, out var layerName)
+                && Enum.TryParse<HumanoidVisualLayers>(layerName, out var parsedSlot))
+            {
+                layerSlot = parsedSlot;
+            }
+
+            if (!sprite.LayerMapTryGet(layerSlot, out var targetLayer))
+            {
+                continue;
+            }
+
+            var slotOffset = slotOffsets.TryGetValue(layerSlot, out var o) ? o : 0;
+            slotOffsets[layerSlot] = slotOffset + 1;
+            // End WOLFGATE
+
             if (!sprite.LayerMapTryGet(layerId, out _))
             {
-                var layer = sprite.AddLayer(markingSprite, targetLayer + j + 1);
+                var layer = sprite.AddLayer(markingSprite, targetLayer + slotOffset + 1);
                 sprite.LayerMapSet(layerId, layer);
                 sprite.LayerSetSprite(layerId, rsi);
             }
@@ -359,15 +375,30 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             // Okay so if the marking prototype is modified but we load old marking data this may no longer be valid
             // and we need to check the index is correct.
             // So if that happens just default to white?
-            if (colors != null && j < colors.Count)
+            // WOLFGATE - colours come from the colorLinks-resolved list rather than straight from colors.
+            if (linkedColors != null && j < linkedColors.Count)
             {
-                sprite.LayerSetColor(layerId, colors[j]);
+                sprite.LayerSetColor(layerId, linkedColors[j]);
             }
             else
             {
                 sprite.LayerSetColor(layerId, Color.White);
             }
+            // End WOLFGATE
         }
+    }
+
+    /// <summary>
+    /// WOLFGATE - ported from HardLight/Floof. Returns the per-sprite colours for a marking with
+    /// <see cref="MarkingPrototype.ColorLinks"/> applied, so linked sprites take their parent's
+    /// colour. Returns <paramref name="colors"/> unchanged when the marking has no links.
+    /// </summary>
+    private static IReadOnlyList<Color>? ResolveMarkingColors(MarkingPrototype prototype, IReadOnlyList<Color>? colors)
+    {
+        if (prototype.ColorLinks is not { Count: > 0 } || colors == null)
+            return colors;
+
+        return prototype.ResolveLinkedColors(colors);
     }
 
     public override void SetSkinColor(EntityUid uid, Color skinColor, bool sync = true, bool verify = true, HumanoidAppearanceComponent? humanoid = null)
@@ -421,7 +452,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             foreach (var marking in markingList)
             {
                 if (_markingManager.TryGetMarking(marking, out var markingPrototype) && markingPrototype.BodyPart == layer)
-                    ApplyMarking(markingPrototype, marking.MarkingColors, marking.Visible, ent, sprite);
+                    ApplyMarking(ent.Owner, markingPrototype, marking.MarkingColors, marking.Visible, ent, sprite); // WOLFGATE
             }
         }
     }

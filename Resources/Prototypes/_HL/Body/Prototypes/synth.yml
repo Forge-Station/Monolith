@@ -1,0 +1,53 @@
+- type: body
+  id: Synth
+  name: "synth"
+  root: torso
+  slots:
+    head:
+      part: HeadSynth
+      connections:
+      - torso
+      organs:
+        brain: OrganSynthBrain
+        eyes: OrganSynthEyes
+        tongue: OrganSynthTongue
+        ears: OrganSynthEars
+    torso:
+      part: TorsoSynth
+      connections:
+      - right arm
+      - left arm
+      - right leg
+      - left leg
+      - head # Shitmed
+      organs:
+        heart: OrganSynthHeart
+        lungs: OrganSynthLungs
+        stomach: OrganSynthStomach
+        liver: OrganSynthLiver
+        kidneys: OrganSynthKidneys
+        appendix: OrganSynthAppendix
+    right arm:
+      part: RightArmSynth
+      connections:
+      - right hand
+    left arm:
+      part: LeftArmSynth
+      connections:
+      - left hand
+    right hand:
+      part: RightHandSynth
+    left hand:
+      part: LeftHandSynth
+    right leg:
+      part: RightLegSynth
+      connections:
+      - right foot
+    left leg:
+      part: LeftLegSynth
+      connections:
+      - left foot
+    right foot:
+      part: RightFootSynth
+    left foot:
+      part: LeftFootSynth

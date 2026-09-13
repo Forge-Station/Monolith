@@ -114,7 +114,7 @@
   id: TattooEyeRight
   bodyPart: Eyes
   markingCategory: Head
-  speciesRestriction: [Human, SlimePerson, Reptilian, Dwarf, Goblin, Felinid, Vulpkanin, Oni, Harpy, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Oni, Harpy; Goob - Tajaran
+  speciesRestriction: [Human, SlimePerson, Reptilian, Dwarf, Goblin, Felinid, Vulpkanin, Oni, Harpy, Rodentia, Tajaran, Feroxi, Canine] # Delta V - Felinid, Vulpkanin, Oni, Harpy; Goob - Tajaran
   coloring:
     default:
       type:
@@ -128,7 +128,7 @@
   id: TattooEyeLeft
   bodyPart: Eyes
   markingCategory: Head
-  speciesRestriction: [Human, SlimePerson, Reptilian, Dwarf, Goblin, Felinid, Vulpkanin, Oni, Harpy, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Oni, Harpy; Goob - Tajaran
+  speciesRestriction: [Human, SlimePerson, Reptilian, Dwarf, Goblin, Felinid, Vulpkanin, Oni, Harpy, Rodentia, Tajaran, Feroxi, Canine] # Delta V - Felinid, Vulpkanin, Oni, Harpy; Goob - Tajaran
   coloring:
     default:
       type:
@@ -137,3 +137,28 @@
   sprites:
   - sprite: Mobs/Customization/tattoos.rsi
     state: tattoo_eye_l
+
+# Wolfgate: ported from HardLight
+- type: marking
+  id: TattooEyeMothRight
+  bodyPart: Eyes
+  markingCategory: Overlay
+  speciesRestriction: [Skrell,Thaven, Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine] # Frontier: added Goblin and afterwards
+  coloring:
+    default:
+      type: !type:EyeColoring
+  sprites:
+    - sprite: Mobs/Customization/tattoos.rsi
+      state: tattoo_eye_moth_r
+
+- type: marking
+  id: TattooEyeMothLeft
+  bodyPart: Eyes
+  markingCategory: Overlay
+  speciesRestriction: [Skrell,Thaven, Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine] # Frontier: added Goblin and afterwards
+  coloring:
+    default:
+      type: !type:EyeColoring
+  sprites:
+    - sprite: Mobs/Customization/tattoos.rsi
+      state: tattoo_eye_moth_l

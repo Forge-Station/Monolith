@@ -4,6 +4,8 @@
   name: valet vest
   description: A goofy red vest almost certainly designed with the sole purpose of being demeaning.
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
+    regions: Chest
   - type: Sprite
     sprite: Nyanotrasen/Clothing/OuterClothing/Vests/valet.rsi
   - type: Clothing

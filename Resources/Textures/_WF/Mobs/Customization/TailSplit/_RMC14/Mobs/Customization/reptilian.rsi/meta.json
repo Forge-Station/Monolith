@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Dragon wings from cosmatic-drift-14 by Github KittenColony / Discord kittencolony (297865728374210561), dragonwings_membrane by github Kadeo64 South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "body_dragonwings_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "body_dragonwings_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "body_dragonwings_membrane_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "body_dragonwings_membrane_FRONT",
+      "directions": 4
+    }
+  ]
+}

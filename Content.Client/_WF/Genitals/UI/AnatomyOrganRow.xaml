@@ -1,0 +1,14 @@
+<PanelContainer xmlns="https://spacestation14.io"
+                StyleClasses="CreatorCard"
+                HorizontalExpand="True">
+    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+        <Label Name="DescriptionLabel" />
+        <Label Name="StatusLabel" StyleClasses="CreatorFieldLabel" />
+        <BoxContainer Name="VisibilityBox" Orientation="Horizontal" SeparationOverride="0">
+            <Label Text="{Loc 'wf-anatomy-visibility'}" StyleClasses="CreatorFieldLabel" MinWidth="80" VAlign="Center" />
+            <Button Name="NormalButton" Text="{Loc 'wf-anatomy-visibility-normal'}" ToggleMode="True" StyleClasses="OpenRight" />
+            <Button Name="HiddenButton" Text="{Loc 'wf-anatomy-visibility-hidden'}" ToggleMode="True" StyleClasses="OpenBoth" />
+            <Button Name="ThroughButton" Text="{Loc 'wf-anatomy-visibility-through'}" ToggleMode="True" StyleClasses="OpenLeft" />
+        </BoxContainer>
+    </BoxContainer>
+</PanelContainer>

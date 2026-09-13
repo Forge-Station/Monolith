@@ -1,0 +1,257 @@
+- type: entity
+  id: OrganSkrellStomach
+  parent: BaseAnimalOrgan
+  name: stomach
+  description: "Now you can sea food! Gross."
+  components:
+  - type: Organ # Shitmed Change
+    slotId: stomach # Shitmed Change
+  - type: Sprite
+    layers:
+    - sprite: Mobs/Species/Arachnid/organs.rsi # Acts as the base for the "tint layer" so that the sprite texture shows below the tint.
+      state: stomach
+    - color: '#0000FFFF' # The "tint layer". Do not go below 100% for the alpha (FF) unless you want the sprites *slightly* tinted. Try it at 99% (FC) first before going lower with how drastic the change is.
+      sprite: Mobs/Species/Arachnid/organs.rsi # Acts as the "tint layer's" reference.
+      state: stomach
+  - type: Item
+    size: Small
+    heldPrefix: stomach
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 50
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 5
+  - type: Stomach
+  # The stomach metabolizes stuff like foods and drinks.
+  # TODO: Have it work off of the ent's solution container, and move this
+  # to intestines instead.
+  - type: Metabolizer
+    # mm yummy
+    maxReagents: 3
+    metabolizerTypes: [Animal]
+    groups:
+    - id: Food
+    - id: Drink
+
+- type: entity
+  id: OrganSkrellLungs
+  parent: BaseHumanOrgan
+  name: lungs
+  description: "These used to be not needed as much in the not-too-distant past where gills were more relied on instead."
+  components:
+  - type: Organ # Shitmed Change
+    slotId: lungs # Shitmed Change
+  - type: Sprite
+    layers:
+    - sprite: Mobs/Species/Human/organs.rsi
+      state: lung-l
+    - color: '#0000FFFF'
+      sprite: Mobs/Species/Human/organs.rsi
+      state: lung-l
+    - sprite: Mobs/Species/Human/organs.rsi
+      state: lung-r
+    - color: '#0000FFFF'
+      sprite: Mobs/Species/Human/organs.rsi
+      state: lung-r
+  - type: Item
+    size: Small
+    heldPrefix: lungs
+  - type: Lung
+  - type: Metabolizer
+    removeEmpty: true
+    solutionOnBody: false
+    solution: "Lung"
+    metabolizerTypes: [Human]
+    groups:
+    - id: Gas
+      rateModifier: 100.0
+  - type: SolutionContainerManager
+    solutions:
+      organ:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+      Lung:
+        maxVol: 100.0
+        canReact: false
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 5
+
+- type: entity
+  id: OrganSkrellHeart
+  parent: BaseArachnidOrgan
+  name: heart
+  description: "A squishy little biological pump for amphibians."
+  components:
+  - type: Heart # Shitmed Change
+  - type: Organ # Shitmed Change
+    slotId: heart # Shitmed Change
+  - type: Sprite
+    layers:
+    - sprite: Mobs/Species/Arachnid/organs.rsi
+      state: heart-on
+    - color: '#0000FFFF'
+      sprite: Mobs/Species/Arachnid/organs.rsi
+      state: heart-on
+  # The heart 'metabolizes' medicines and poisons that aren't filtered out by other organs.
+  # This is done because these chemicals need to have some effect even if they aren't being filtered out of your body.
+  # You're technically 'immune to poison' without a heart, but.. uhh, you'll have bigger problems on your hands.
+  - type: Metabolizer
+    maxReagents: 2
+    metabolizerTypes: [Arachnid]
+    groups:
+    - id: Medicine
+    - id: Cryogenic # Frontier
+    - id: Poison
+    - id: Narcotic
+  - type: Item
+    size: Small
+    heldPrefix: heart
+
+- type: entity
+  id: OrganSkrellLiver
+  parent: BaseHumanOrgan
+  name: liver
+  description: "Don't let the crows get to this."
+  components:
+  - type: Liver # Shitmed Change
+  - type: Organ # Shitmed Change
+    slotId: liver # Shitmed Change
+  - type: Sprite
+    layers:
+    - sprite: Mobs/Species/Human/organs.rsi
+      state: liver
+    - color: '#0000FFFF'
+      sprite: Mobs/Species/Human/organs.rsi
+      state: liver
+  - type: Item
+    size: Small
+    heldPrefix: liver
+  - type: Metabolizer # The liver metabolizes certain chemicals only, like alcohol.
+    maxReagents: 1
+    metabolizerTypes: [Animal]
+    groups:
+    - id: Alcohol
+      rateModifier: 0.1 # removes alcohol very slowly along with the stomach removing it as a drink
+
+- type: entity
+  id: OrganSkrellKidneys
+  parent: BaseHumanOrgan
+  name: kidneys
+  description: "Very good at turning water into... a less-pleasant kind of water."
+  components:
+  - type: Organ # Shitmed
+    slotId: kidneys
+  - type: Sprite
+    layers:
+    - sprite: Mobs/Species/Human/organs.rsi
+      state: kidney-l
+    - color: '#0000FFFF'
+      sprite: Mobs/Species/Human/organs.rsi
+      state: kidney-l
+    - sprite: Mobs/Species/Human/organs.rsi
+      state: kidney-r
+    - color: '#0000FFFF'
+      sprite: Mobs/Species/Human/organs.rsi
+      state: kidney-r
+  - type: Item
+    size: Small
+    heldPrefix: kidneys
+  - type: Metabolizer
+    updateInterval: 1.5
+    maxReagents: 5
+    metabolizerTypes: [Animal]
+    removeEmpty: true
+
+- type: entity
+  id: OrganSkrellBrain
+  parent: BaseHumanOrganUnGibbable
+  name: brain
+  description: "The source of incredible, unending intelligence. Ribbit."
+  components:
+  - type: Sprite
+    layers:
+    - sprite: Mobs/Species/Human/organs.rsi
+      state: brain
+    - color: '#0000FFFF'
+      sprite: Mobs/Species/Human/organs.rsi
+      state: brain
+  - type: Organ
+    slotId: brain # Shitmed Change
+  - type: Input
+    context: "ghost"
+  - type: Brain
+  - type: InputMover
+  - type: Examiner
+  - type: BlockMovement
+  - type: BadFood
+  - type: Tag
+    tags:
+    - Meat
+  - type: SolutionContainerManager
+    solutions:
+      organ:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: GreyMatter
+          Quantity: 5
+  - type: FlavorProfile
+    flavors:
+    - people
+  - type: FoodSequenceElement
+    entries:
+      Burger: Brain
+      Taco: Brain
+  - type: Item
+    size: Small
+    heldPrefix: brain
+
+- type: entity
+  id: OrganSkrellEyes
+  parent: BaseHumanOrgan
+  name: eyes
+  description: "Two big ol' springtime peepers."
+  components:
+  - type: Organ # Shitmed Change
+    slotId: eyes # Shitmed Change
+  - type: Eyes # Shitmed Change
+  - type: Sprite
+    layers:
+    - sprite: Mobs/Species/Human/organs.rsi
+      state: eyeball-l
+    - color: '#0000FFFF'
+      sprite: Mobs/Species/Human/organs.rsi
+      state: eyeball-l
+    - sprite: Mobs/Species/Human/organs.rsi
+      state: eyeball-r
+    - color: '#0000FFFF'
+      sprite: Mobs/Species/Human/organs.rsi
+      state: eyeball-r
+  - type: Item
+    size: Small
+    heldPrefix: eyeballs
+
+- type: entity
+  id: OrganSkrellTongue
+  parent: BaseArachnidOrgan
+  name: tongue
+  description: "Time flies when you talk."
+  components:
+  - type: Sprite
+    layers:
+    - sprite: Mobs/Species/Arachnid/organs.rsi
+      state: tongue
+    - color: '#0000FFFF'
+      sprite: Mobs/Species/Arachnid/organs.rsi
+      state: tongue

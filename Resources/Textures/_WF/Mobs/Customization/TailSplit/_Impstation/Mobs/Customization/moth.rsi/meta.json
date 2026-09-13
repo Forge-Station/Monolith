@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "drawn by Snavian and Carousel for Impstation South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wings_backstabbed_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "wings_backstabbed_FRONT",
+      "directions": 4
+    }
+  ]
+}

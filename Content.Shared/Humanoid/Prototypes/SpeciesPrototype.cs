@@ -33,6 +33,14 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField(required: true)]
     public bool RoundStart { get; private set; } = false;
 
+    /// <summary>
+    /// WOLFGATE - the species this one is a variant of, if any. Purely cosmetic: the character creator
+    /// lists a subspecies under its parent instead of on its own. Subspecies are ordinary species in
+    /// every other respect.
+    /// </summary>
+    [DataField]
+    public ProtoId<SpeciesPrototype>? SubspeciesOf { get; private set; }
+
     // The below two are to avoid fetching information about the species from the entity
     // prototype.
 
@@ -82,6 +90,13 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField(required: true)]
     public HumanoidSkinColor SkinColoration { get; private set; }
 
+    /// <summary>
+    /// WOLFGATE - ported from HardLight/Starlight: how this species' eye colour is constrained.
+    /// Shadekin use this to keep their eyes dark.
+    /// </summary>
+    [DataField]
+    public HumanoidEyeColor EyeColoration { get; private set; } = HumanoidEyeColor.Standard;
+
     [DataField]
     public string MaleFirstNames { get; private set; } = "names_first_male";
 
@@ -94,8 +109,12 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField]
     public SpeciesNaming Naming { get; private set; } = SpeciesNaming.FirstLast;
 
+    /// <summary>
+    /// WOLFGATE - Unsexed is offered by default. Species that are genuinely sexless (Vox, Arachnid, IPC)
+    /// still declare `sexes: [Unsexed]` and are unaffected.
+    /// </summary>
     [DataField]
-    public List<Sex> Sexes { get; private set; } = new() { Sex.Male, Sex.Female };
+    public List<Sex> Sexes { get; private set; } = new() { Sex.Male, Sex.Female, Sex.Unsexed };
 
     /// <summary>
     ///     Characters younger than this are too young to be hired by Nanotrasen.

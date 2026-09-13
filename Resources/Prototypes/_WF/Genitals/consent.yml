@@ -1,0 +1,15 @@
+# Anatomy consent toggles. Both only matter while the Adult content master switch (GenitalMarkings) is on.
+
+- type: consentToggle
+  id: UndergarmentStrip
+  name: Others may remove my undergarments
+  description: Lets other players who have Adult content on remove or put back your undergarments, including while you are unconscious or restrained. Needs Adult content. Turning it off puts back anything others removed.
+  sortKey: 0-adult-1
+  requires: GenitalMarkings
+
+- type: consentToggle
+  id: AnatomySurgery
+  name: Others may perform anatomy surgery on me
+  description: Lets other players who have Adult content on remove or insert anatomy organs on you by surgery, including while you are unconscious or restrained. Needs Adult content.
+  sortKey: 0-adult-2
+  requires: GenitalMarkings

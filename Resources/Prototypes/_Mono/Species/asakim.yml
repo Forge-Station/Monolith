@@ -19,7 +19,14 @@
     Head: MobAsakimHead
     HeadTop: MobAsakimAnyMarking
     Chest: MobAsakimTorso
+    UndergarmentTop: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    UndergarmentBottom: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Genital: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Penis: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Breasts: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
     Tail: MobHumanoidAnyMarking
+    TailBehind: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
+    TailOversuit: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
     Eyes: MobAsakimEyes
     LArm: MobAsakimLArm
     RArm: MobAsakimRArm

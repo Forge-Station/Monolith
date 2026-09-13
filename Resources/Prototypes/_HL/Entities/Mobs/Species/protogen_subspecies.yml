@@ -1,0 +1,2481 @@
+# Wolfgate: Protogen subspecies mobs, ported from HardLight.
+# The base Protogen mobs are NOT taken - Wolfgate has its own under _Mono, and they are
+# what existing Protogen players use.
+
+- type: entity
+  parent: BaseMobProtogen
+  id: BaseMobProtoVulp
+  name: Urist McVulpster
+  abstract: true
+  components:
+  - type: Wagging
+  - type: Hunger
+    thresholds:
+      Overfed: 250
+      Okay: 200
+      Peckish: 150
+      Starving: 100
+      Dead: 0
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
+    state: full
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: ProtoVulp
+  - type: Body
+    prototype: ProtoVulp
+    requiredLegs: 2
+  - type: HumanoidAppearance
+    species: ProtoVulp
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: Inventory
+    speciesId: protovulp #to be replaced with proto[species] when new sprites are made
+    templateId: protogen
+    displacements:
+      head:
+        sizeMaps:
+          32:
+            sprite: _FarHorizons/Mobs/Species/Proto-Vulp/displacement.rsi
+            state: head
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _FarHorizons/Mobs/Species/Proto-Vulp/displacement.rsi #temp "fix"
+            state: outerClothing
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _FarHorizons/Mobs/Species/Proto-Vulp/displacement.rsi
+            state: jumpsuit
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _FarHorizons/Mobs/Species/Proto-Vulp/displacement.rsi
+            state: shoes
+  - type: ContentEye
+    targetZoom: "1.125, 1.125"
+    maxZoom: "1.125, 1.125"
+  - type: ActionGrant # Wolfgate: JumpAbility here does not grant its own action
+    actions:
+    - ActionGravityJump
+  - type: JumpAbility
+    jumpDistance: 3
+    jumpSound:
+      path: /Audio/Weapons/punchmiss.ogg
+      params:
+        pitch: 1.33
+        volume: -5
+        variation: 0.05
+  - type: Vocal # Starlight: protogen recreated audio
+    sounds:
+      Male: ProtoVulpMSounds
+      Female: ProtoVulpFSounds
+      Unsexed: ProtoVulpMSounds
+  - type: Tag
+    tags:
+      - CanPilot
+      - FootstepSound
+      - DoorBumpOpener
+      - AnomalyHost
+      - Protogen
+      - Vulpkanin
+      - Humanoid # Wolfgate: Tag replaces rather than merges
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoVulpDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Inventory
+    speciesId: protovulp #to be replaced with proto[species] when new sprites are made
+    templateId: protogen
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _FarHorizons/Mobs/Species/Proto-Vulp/displacement.rsi
+            state: jumpsuit
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _FarHorizons/Mobs/Species/Proto-Vulp/displacement.rsi
+            state: shoes
+
+#region VOX ####
+
+- type: entity
+  parent: BaseMobProtogen
+  id: BaseMobProtoVox
+  name: Urist McVoxster
+  abstract: true
+  components:
+  - type: Wagging # Wolfgate: this species has wag-capable tails but had no Wagging Tail action
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Vox/parts.rsi
+    state: full
+  - type: Body
+    prototype: ProtoVox
+    requiredLegs: 2
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: ProtoVox
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatChicken
+      amount: 5
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damageCap: 25
+    damage:
+      types:
+        Heat: -0.07
+        Poison: -0.2
+      groups:
+        Brute: -0.07
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#7a8bf2"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: Vocal # Starlight: protogen recreated audio
+    sounds:
+      Male: ProtoVoxMSounds
+      Female: ProtoVoxFSounds
+      Unsexed: ProtoVoxMSounds
+  - type: Bloodstream
+    bloodReagent: AmmoniaBlood
+  - type: Sprite # Need to redefine the whole order to draw the tail over their gas tank
+    layers:
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ]  # HL Modification
+    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.Genital" ] # HL Modification
+    - map: [ "enum.HumanoidVisualLayers.Breasts" ] # HL Modification
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+    - map: [ "enum.HumanoidVisualLayers.Penis" ] # HL Modification
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.LFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.RFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.LHand" ]
+    - map: [ "enum.HumanoidVisualLayers.RHand" ]
+    - map: [ "gloves" ]
+    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "eyes" ]
+    - map: [ "outerClothing" ]
+    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
+    - map: [ "belt" ]
+    - map: [ "id" ]
+    - map: [ "back" ]
+    - map: [ "neck" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # HL Modification; WOLFGATE - drawn above the neck slot so cloaks do not cover the tail
+    - map: [ "suitstorage" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.HumanoidVisualLayers.Tail" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_vox" # Not default
+      visible: false
+  - type: HumanoidAppearance
+    species: ProtoVox
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: Inventory
+    speciesId: vox #to be replaced with proto[species] when new sprites are made
+    templateId: protogen
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: hand
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: head
+      neck:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: neck
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: shoes
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: Mobs/Species/Vox/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: Mobs/Species/Vox/displacement.rsi
+          state: hand_r
+  - type: Tag
+    tags:
+      - CanPilot
+      - FootstepSound
+      - DoorBumpOpener
+      - AnomalyHost
+      - Protogen
+      - Vox
+      - Humanoid # Wolfgate: Tag replaces rather than merges
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoVoxDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: ProtoVox #to be replaced with proto[species] when new sprites are made
+  - type: Body
+    prototype: ProtoVox
+  - type: Inventory
+    speciesId: vox
+    templateId: protogen
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: hand
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: head
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: shoes
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: Mobs/Species/Vox/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: Mobs/Species/Vox/displacement.rsi
+          state: hand_r
+
+#region THAVEN ####
+
+- type: entity
+  save: false
+  parent: BaseMobProtogen
+  id: BaseMobProtoThaven
+  name: Urist McEarster
+  abstract: true
+  components:
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Thaven/parts.rsi
+    state: full
+  - type: ThavenMoodsBound
+  - type: UserInterface # WOLFGATE - the moods action opens this key; it had been registered on Proto-Kin instead
+    interfaces:
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.SurgeryUIKey.Key:
+        type: SurgeryBui
+      enum.ThavenMoodsUiKey.Key:
+        type: ThavenMoodsBoundUserInterface
+        requireInputValidation: false
+  - type: Body
+    prototype: ProtoThaven
+    requiredLegs: 2
+  - type: HumanoidAppearance
+    species: ProtoThaven
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: MeleeWeapon
+    attackRate: 0.55
+    soundHit:
+      collection: Punch
+    angle: 30
+    animation: WeaponArcPunch
+    damage:
+      types:
+        Blunt: 0
+  - type: StaminaDamageOnHit
+    damage: 18
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+      - id: FoodThavenMeat
+        amount: 5
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: ProtoThaven
+  - type: Inventory
+    templateId: protogen
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Thaven/displacement.rsi #HL
+            state: jumpsuit
+      head:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Thaven/displacement.rsi #HL
+            state: head
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Thaven/displacement.rsi #HL
+            state: head
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Thaven/displacement.rsi #HL
+            state: outerclothing_hardsuit
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Thaven/displacement.rsi #HL
+            state: hands
+  - type: Tag
+    tags:
+      - CanPilot
+      - FootstepSound
+      - DoorBumpOpener
+      - AnomalyHost
+      - Protogen
+      - Thaven
+      - Humanoid # Wolfgate: Tag replaces rather than merges
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoThavenDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    scale: 1, 1
+  - type: Inventory
+    templateId: protogen
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Thaven/displacement.rsi #HL
+            state: jumpsuit
+      head:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Thaven/displacement.rsi #HL
+            state: head
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Thaven/displacement.rsi #HL
+            state: head
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Thaven/displacement.rsi #HL
+            state: outerclothing_hardsuit
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Thaven/displacement.rsi #HL
+            state: hands
+
+#region LASPI ####
+
+- type: entity
+  parent: BaseMobProtogen
+  id: BaseMobProtoSlimePerson
+  name: Urist McSlimester
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: ProtoSlimePerson
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+      enum.SurgeryUIKey.Key:
+        type: SurgeryBui
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+        requireInputValidation: false
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Slime/parts.rsi
+    state: full
+  - type: Body
+    prototype: Slime # Replace when I figure out more complex sprites for proto-[species]
+    requiredLegs: 2
+  - type: Storage
+    clickInsert: false
+    openOnActivate: false # Wolfgate: matches MobSlimePerson
+    grid:
+    - 0,0,1,2
+    maxItemSize: Large
+    storageInsertSound:
+      path: /Audio/Voice/Slime/slime_squish.ogg
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UseDelay
+    delay: 0.5
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: ProtoSlimePerson
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damageCap: 65
+    damage:
+      types:
+        Heat: -0.14
+      groups:
+        Brute: -0.14
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#2cf274"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: Bloodstream
+    bloodReagent: Slime
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.55
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+#        scaleByQuantity: true
+        damage:
+          types:
+            Heat: 0.1
+      - !type:PopupMessage
+        type: Local
+        visualType: Large
+        messages: [ "slime-hurt-by-water-popup" ]
+        probability: 0.25
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatSlime
+      amount: 5
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 0.2
+    damageRecovery:
+      types:
+        Asphyxiation: -1.0
+    maxSaturation: 15
+  - type: Inventory
+    templateId: protogen
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+  - type: ShowThirstIcons
+  - type: SolutionScanner
+  - type: Wagging
+  - type: Tag
+    tags:
+      - CanPilot
+      - FootstepSound
+      - DoorBumpOpener
+      - AnomalyHost
+      - Protogen
+      - SlimePerson
+      - Humanoid # Wolfgate: Tag replaces rather than merges
+
+- type: entity
+  parent: MobHumanDummy
+  id: MobProtoSlimePersonDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: ProtoSlimePerson
+  - type: Inventory
+    templateId: protogen
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
+#region SHADEKIN ####
+# Todo: Give unique abilites maybe? I could totally see them trying to "fix" themselves with cybernetics, with limited success perhaps.
+
+- type: entity
+  save: false
+  name: Urist McDuskin #pronounced Dusk-Kin
+  parent: [MobBloodstream, MobAtmosStandard, MobFlammable, BaseMobSpecies] #These fucks have no lungs, can't just inherent from protogen..
+  id: BaseMobProtoKin
+  abstract: true
+  components:
+    - type: Repairable # So welder is just a special little snowflake in the code. I tried making healing with welder work through ConditionalHealing component, but it would require too many changes in too many places. So we will keep on the trend and have brute healing defined here. /shrug
+      doAfterDelay: 1 # Faster than normal so using welding to heal isn't absolute ass for protogens
+      allowSelfRepair: true
+      fuelCost: 10
+      damage:
+        groups:
+          Brute: -30 # 5 for each type with reduction applied
+    - type: Hunger
+    - type: Thirst
+    - type: HumanoidAppearance
+      species: ProtoKin
+      hideLayersOnEquip:
+      - Hair
+      # HL start: Hide genital markings on equip
+      - Genital
+      - Penis
+      - Breasts
+      # HL end
+    - type: Icon
+      sprite: _FarHorizons/Mobs/Species/Proto-Kin/parts.rsi
+      state: full
+    - type: Body
+      prototype: ProtoKin
+      requiredLegs: 2
+    - type: HarpySinger # Closest EE equivalant to FH midi player on protogens.
+    - type: Instrument
+      allowPercussion: false
+      program: 52
+    - type: SwappableInstrument
+      instrumentList:
+        "Voice": {52: 0}
+        "Trumpet": {56: 0}
+        "Electric": {27: 0}
+        "Bass": {33: 0}
+        "Rock": {29: 0}
+        "Acoustic": {24: 0}
+        "Flute": {73: 0}
+        "Sax": {66: 0}
+        "Piano": {1: 0}
+        "Church Organ": {19: 0}
+        "Harp": {46: 0}
+    - type: UserInterface
+      interfaces:
+        enum.HumanoidMarkingModifierKey.Key:
+          type: HumanoidMarkingModifierBoundUserInterface
+        enum.StrippingUiKey.Key:
+          type: StrippableBoundUserInterface
+        enum.StoreUiKey.Key:
+          type: StoreBoundUserInterface
+        enum.SurgeryUIKey.Key:
+          type: SurgeryBui
+        enum.InstrumentUiKey.Key:
+          type: InstrumentBoundUserInterface
+          requireInputValidation: false
+    - type: TypingIndicator
+      proto: robot
+    - type: Speech
+      speechVerb: Robotic
+      speechSounds: Borg
+      # Starlight start: protogen recreated audio
+      allowedEmotes: ['Chirp', 'Squish', 'Purr', 'Growl', 'Trill', 'Scree', 'Call', 'Squawk', 'Bark', 'Snarl', 'Whine', 'Howl', 'Yip', 'Mew', 'Meow','Thump', "Marr", "Wurble", 'Chitter', 'Squeak', 'Click', 'Beep', 'Ping', 'Buzz', 'Buzz-Two', 'Chime', 'Honk']
+      # Starlight end
+    - type: Vocal # Starlight: protogen recreated audio
+      sounds:
+        Male: ProtoShadekinMSounds
+        Female: ProtoShadekinFSounds
+        Unsexed: ProtoShadekinMSounds
+    - type: MeleeWeapon
+      soundHit:
+        collection: AlienClaw
+      angle: 30
+      animation: WeaponArcClaw
+      damage:
+        types:
+          Piercing: 2
+          Slash: 3
+    - type: Damageable
+      damageContainer: Biological
+      damageModifierSet: ProtoKin
+    - type: Bloodstream
+      bloodlossDamage:
+        types:
+          Bloodloss: 1
+      bloodlossHealDamage:
+        types:
+          Bloodloss: -0.25
+    - type: Flammable
+      damage:
+        types:
+          Heat: 1.5
+    - type: PassiveDamage
+      allowedStates:
+        - Alive
+      damageCap: 20
+      damage:
+        groups:
+          Brute: -0.07
+          Burn: -0.07
+    - type: Destructible
+      thresholds:
+        - trigger: !type:DamageTypeTrigger
+            damageType: Blunt
+            damage: 400
+          behaviors:
+            - !type:GibBehavior {}
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                ShadekinShadow:
+                  min: 1
+                  max: 1
+        - trigger: !type:DamageTypeTrigger
+            damageType: Heat
+            damage: 1500
+          behaviors:
+            - !type:SpawnEntitiesBehavior
+              spawnInContainer: true
+              spawn:
+                Ash:
+                  min: 1
+                  max: 1
+                ShadekinShadow:
+                  min: 1
+                  max: 1
+            - !type:BurnBodyBehavior {}
+
+    - type: Barotrauma
+      damage:
+        types:
+          Blunt: 0.25 #per second, halved compared to normal.
+          Heat: 0.1
+    - type: Fingerprint
+    - type: Blindable
+    # Other
+    - type: Temperature
+      currentTemperature: 310.15
+      specificHeat: 42
+      heatDamageThreshold: 325
+      coldDamageThreshold: 260
+      coldDamage:
+        types:
+          Cold: 0.1 #per second, scales with temperature & other constants
+      heatDamage:
+        types:
+          Heat: 1.5 #per second, scales with temperature & other constants
+    - type: TemperatureSpeed
+      thresholds:
+       280: 0.9
+       250: 0.8
+       230: 0.7
+    - type: ThermalRegulator
+      metabolismHeat: 800
+      radiatedHeat: 100
+      implicitHeatRegulation: 500
+      sweatHeatRegulation: 2000
+      shiveringHeatRegulation: 2000
+      normalBodyTemperature: 310.15
+      thermalRegulationTemperatureThreshold: 2
+    - type: Perishable
+    - type: Butcherable
+      butcheringType: Spike
+      spawned:
+        - id: FoodMeat
+          amount: 5
+    - type: FireVisuals
+      alternateState: Standing
+    - type: UniversalHealModifier
+      modifier: 0.5
+    - type: Tag
+      tags:
+        - CanPilot
+        - FootstepSound
+        - DoorBumpOpener
+        - AnomalyHost
+        - Protogen
+        - Shadekin
+        - Humanoid # Wolfgate: Tag replaces rather than merges
+
+- type: entity
+  save: false
+  parent: BaseSpeciesDummy
+  id: MobProtoKinDummy
+  categories: [HideSpawnMenu]
+  description: A dummy protokin meant to be used in character setup.
+  components:
+    - type: HumanoidAppearance
+      species: ProtoKin
+
+#region RESOMI ####
+
+- type: entity
+  name: Urist McRapster
+  parent: BaseMobProtogen
+  id: BaseMobProtoResomi
+  abstract: true
+  components:
+  - type: ActionGrant # Wolfgate: JumpAbility here does not grant its own action
+    actions:
+    - ActionGravityJump
+  - type: JumpAbility
+    jumpDistance: 3.5
+    jumpSound:
+      path: /Audio/Weapons/punchmiss.ogg
+      params:
+        pitch: 1.33
+        volume: -5
+        variation: 0.05
+  - type: Sprite # Need to redefine the whole order to draw the tail over their gas tank
+    layers:
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ]  # HL Modification
+    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.Genital" ] # HL Modification
+    - map: [ "enum.HumanoidVisualLayers.Breasts" ] # HL Modification
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+    - map: [ "enum.HumanoidVisualLayers.Penis" ] # HL Modification
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.LFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.RFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.LHand" ]
+    - map: [ "enum.HumanoidVisualLayers.RHand" ]
+    - map: [ "gloves" ]
+    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "eyes" ]
+    - map: [ "outerClothing" ]
+    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
+    - map: [ "belt" ]
+    - map: [ "id" ]
+    - map: [ "back" ]
+    - map: [ "neck" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # HL Modification; WOLFGATE - drawn above the neck slot so cloaks do not cover the tail
+    - map: [ "suitstorage" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.HumanoidVisualLayers.Tail" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_vox" # Not default
+      visible: false
+  - type: DamageVisuals
+    thresholds: [ 25, 50, 75, 100 ] # Wolfgate: matches the _Moffstation sheets
+    targetLayers:
+    - "enum.HumanoidVisualLayers.Chest"
+    - "enum.HumanoidVisualLayers.Head"
+    - "enum.HumanoidVisualLayers.LArm"
+    - "enum.HumanoidVisualLayers.LLeg"
+    - "enum.HumanoidVisualLayers.RArm"
+    - "enum.HumanoidVisualLayers.RLeg"
+    - "enum.HumanoidVisualLayers.RHand"
+    - "enum.HumanoidVisualLayers.LHand"
+    - "enum.HumanoidVisualLayers.RFoot"
+    - "enum.HumanoidVisualLayers.LFoot"
+    damageOverlayGroups:
+      Brute:
+        sprite: _Moffstation/Mobs/Effects/Resomi/brute_damage.rsi
+        color: "#C048C2"
+      Burn:
+        sprite: _Moffstation/Mobs/Effects/Resomi/burn_damage.rsi
+  - type: Bloodstream
+    bloodReagent: AmmoniaBlood
+  - type: FireVisuals
+    sprite: _Moffstation/Mobs/Effects/onfire.rsi
+    normalState: Resomi_minor_burning
+    alternateState: Resomi_burning
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: ProtoResomi
+  - type: Vocal # Starlight: protogen recreated audio
+    sounds:
+      Male: ProtoResomiMSounds
+      Female: ProtoResomiFSounds
+      Unsexed: ProtoResomiMSounds
+  - type: HumanoidAppearance
+    species: ProtoResomi
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 100
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Puller
+    needsHands: false
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Resomi/parts.rsi
+    state: full
+  - type: Body
+    prototype: ProtoResomi
+    requiredLegs: 2
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatChicken
+      amount: 3
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      85: Critical
+      170: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      51: 0.7
+      68: 0.5
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+          state: inHandLeft
+  - type: Inventory
+    speciesId: resomi #to be replaced with proto[species] when new sprites are made
+    templateId: protogen
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: jumpsuit
+      head:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: head
+      eyes:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: hands
+      back:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: feet
+      neck:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: neck
+      mask:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: mask
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: outerClothing
+      suitstorage:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: suitStorage
+      belt:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: belt
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: jumpsuit
+      head:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: head
+      eyes:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: hands
+      back:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: feet
+      neck:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: neck
+      mask:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: mask
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: outerClothing
+      suitstorage:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: suitStorage
+      belt:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: belt
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    - AnomalyHost
+    - Resomi
+    - Protogen
+    - Humanoid # Wolfgate: Tag replaces rather than merges
+  - type: NightVision
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoResomiDummy
+  categories: [ HideSpawnMenu ]
+  description: A dummy proto-resomi meant to be used in character setup.
+  components:
+  - type: HumanoidAppearance
+    species: ProtoResomi
+  - type: Inventory
+    speciesId: resomi #to be replaced with proto[species] when new sprites are made
+    templateId: protogen
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: hands
+      head:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: head
+      back:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: feet
+      neck:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: neck
+      mask:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: mask
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: outerClothing
+      suitstorage:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: suitStorage
+      belt:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: belt
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: hands
+      head:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: head
+      back:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: feet
+      neck:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: neck
+      mask:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: mask
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: outerClothing
+      suitstorage:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: suitStorage
+      belt:
+        sizeMaps:
+          32:
+            sprite: _Moffstation/Mobs/Species/Resomi/displacement.rsi
+            state: belt
+
+#region REPTILIAN ####
+
+- type: entity
+  save: false
+  name: Urisst' Mztosster
+  parent: BaseMobProtogen
+  id: BaseMobProtoReptile
+  abstract: true
+  components:
+  - type: Wagging # Wolfgate: this species has wag-capable tails but had no Wagging Tail action
+  - type: HumanoidAppearance
+    species: ProtoReptile
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: Puller
+    needsHands: false
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Reptile/parts.rsi
+    state: full
+  - type: Body
+    prototype: ProtoReptile
+    requiredLegs: 2
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatLizard
+      amount: 5
+  - type: LizardAccent
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: ProtoReptile
+  - type: Temperature
+    currentTemperature: 310.15
+    specificHeat: 42
+    heatDamageThreshold: 400
+    coldDamageThreshold: 285
+    coldDamage:
+      types:
+        Cold : 1.5 #per second, scales with temperature & other constants
+    heatDamage: # Swaps heat for cold, lizards thrive in hot temps
+      types:
+        Heat : 0.1 #per second, scales with temperature & other constants
+  - type: TemperatureSpeed
+    thresholds:
+      301: 0.9
+      295: 0.8
+      285: 0.7
+  - type: Vocal # Starlight: protogen recreated audio
+    sounds:
+      Male: ProtoReptilianMSounds
+      Female: ProtoReptilianFSounds
+      Unsexed: ProtoReptilianMSounds
+  - type: Inventory
+    speciesId: reptilian
+    templateId: protogen
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: head
+      mask:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: mask
+    displacements:
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: head
+      mask:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: mask
+  - type: Tag
+    tags:
+      - CanPilot
+      - FootstepSound
+      - DoorBumpOpener
+      - AnomalyHost
+      - Protogen
+      - Reptilian
+      - Humanoid # Wolfgate: Tag replaces rather than merges
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoReptileDummy
+  categories: [ HideSpawnMenu ]
+  description: A dummy proto-reptile meant to be used in character setup.
+  components:
+  - type: HumanoidAppearance
+    species: ProtoReptile
+  - type: Inventory
+    speciesId: reptilian
+    templateId: protogen
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: jumpsuit-female
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: head
+      mask:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: mask
+    displacements:
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: head
+      mask:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: mask
+
+#region MOTH ####
+
+- type: entity
+  save: false
+  name: Urist McFluffster
+  parent: BaseMobProtogen
+  id: BaseMobProtoMoth
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: ProtoMoth
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Moth/parts.rsi
+    state: full
+  - type: Body
+    prototype: ProtoMoth
+    requiredLegs: 2
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: ProtoMoth
+  - type: ZombieAccentOverride
+    accent: zombieMoth
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeat
+      amount: 5
+  - type: Bloodstream
+    bloodReagent: InsectBlood
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#808A51"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: MothAccent
+  - type: MovementSpeedModifier
+    baseWeightlessAcceleration: 1.5
+    baseWeightlessFriction: 1
+    baseWeightlessModifier: 1
+  - type: Flammable
+    damage:
+      types:
+        Heat: 2.5
+  - type: Temperature
+    currentTemperature: 310.15
+    specificHeat: 46
+    heatDamageThreshold: 320
+    coldDamageThreshold: 230
+    coldDamage:
+      types:
+        Cold : 0.05 #per second, scales with temperature & other constants
+    heatDamage:
+      types:
+        Heat : 3 #per second, scales with temperature & other constants
+  - type: TemperatureSpeed
+    thresholds:
+      289: 0.9
+      275: 0.8
+      250: 0.7
+  - type: Vocal # Starlight: protogen recreated audio
+    sounds:
+      Male: ProtoMothMSounds
+      Female: ProtoMothFSounds
+      Unsexed: ProtoMothMSounds
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    layers:
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - split tail layers ported from HardLight/Floof
+    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.Genital" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.Breasts" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.Penis" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: ["jumpsuit"]
+    - map: ["enum.HumanoidVisualLayers.LFoot"]
+    - map: ["enum.HumanoidVisualLayers.RFoot"]
+    - map: ["enum.HumanoidVisualLayers.LHand"]
+    - map: ["enum.HumanoidVisualLayers.RHand"]
+    - map: [ "gloves" ]
+    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "id" ] # Mono - move from between belt and back
+    - map: [ "outerClothing" ] # mono - i hate you upstream
+    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
+    - map: [ "eyes" ]
+    - map: [ "belt" ]
+    - map: [ "back" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.HumanoidVisualLayers.Wings" ] # For IPC wings porting from SimpleStation
+    - map: [ "balaclava" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "neck" ]
+    - map: [ "neck2" ]
+    - map: [ "neck3" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
+    - map: [ "enum.HumanoidVisualLayers.Tail" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
+    - map: [ "helmetcover" ]
+    - map: [ "helmetattachment" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: ["enum.HumanoidVisualLayers.Handcuffs"]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "clownedon" ] # Dynamically generated
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_moth"
+      visible: false
+  - type: Inventory
+    speciesId: moth
+    templateId: protogen
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: jumpsuit-female
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: back
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: outerclothing
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: hand
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: shoes
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: jumpsuit-male
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: back
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: outerclothing
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: hand
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: shoes
+  - type: Tag
+    tags:
+      - CanPilot
+      - FootstepSound
+      - DoorBumpOpener
+      - AnomalyHost
+      - Protogen
+      - Moth
+      - Humanoid # Wolfgate: Tag replaces rather than merges
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoMothDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: ProtoMoth
+  - type: Inventory
+    speciesId: moth
+    templateId: protogen
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: jumpsuit-female
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: back
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: outerclothing
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: hand
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: shoes
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: jumpsuit-male
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: back
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: outerclothing
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: hand
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: shoes
+
+#region HUMAN ####
+
+- type: entity
+  parent: BaseMobProtogen
+  id: BaseMobProtoHumie
+  name: Urist McHandster
+  abstract: true
+  components:
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Humie/parts.rsi
+    state: full
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatHuman
+      amount: 5
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    angle: 30
+    animation: WeaponArcFist
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 5
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: ProtoHumie
+  - type: HumanoidAppearance
+    species: ProtoHumie
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: Inventory
+    templateId: protogen
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+  - type: Vocal # Starlight: protogen recreated audio
+    sounds:
+      Male: ProtoHumanMSounds
+      Female: ProtoHumanFSounds
+      Unsexed: ProtoHumanMSounds
+  - type: Wagging
+  - type: Tag
+    tags:
+      - CanPilot
+      - FootstepSound
+      - DoorBumpOpener
+      - AnomalyHost
+      - Protogen
+      - Human
+      - Humanoid # Wolfgate: Tag replaces rather than merges
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoHumieDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Inventory
+    templateId: protogen
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
+#region FELIONOID ####
+
+- type: entity
+  parent: BaseMobProtogen
+  id: BaseMobProtoFeline
+  name: Urist McFelinster
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: ProtoFeline
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Feline/parts.rsi
+    state: fullcat
+  - type: Body
+    prototype: ProtoFeline
+    requiredLegs: 2
+  - type: OwOAccent
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      75: Critical
+      150: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      45: 0.7
+      60: 0.5
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatHuman
+      amount: 3
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: ProtoFeline
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#7a8bf2"
+      Burn: # Wolfgate: re-added, a Brute-only dict replaces the inherited pair
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    angle: 30
+    animation: WeaponArcClaw
+    attackRate: 2
+    damage:
+      types:
+        Slash: 3
+  - type: Vocal # Starlight: protogen recreated audio
+    sounds:
+      Male: ProtoFelionoidMSounds
+      Female: ProtoFelionoidFSounds
+      Unsexed: ProtoFelionoidMSounds
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    - AnomalyHost
+    - Felionoid
+    - Protogen
+    - Humanoid # Wolfgate: Tag replaces rather than merges
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 110
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Inventory
+    speciesId: felionoid # Change when there's unique sprites
+    templateId: protogen
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: hand
+      head:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: head
+      back:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: shoes
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoFelineDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: ProtoFeline
+  - type: Body
+    prototype: ProtoFeline
+  - type: Inventory
+    templateId: protogen
+    speciesId: felionoid #Change when there's unique sprites
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: hand
+      head:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: head
+      back:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Starlight/Mobs/Species/Felionoid/displacement.rsi
+            state: shoes
+
+#region DWARF ####
+
+- type: entity
+  save: false
+  name: Urist McHands The ProtoDawi
+  parent: BaseMobProtogen
+  id: BaseMobProtoDawi
+  abstract: true
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      110: Critical
+      220: Dead
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Humie/parts.rsi
+    state: full
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 2
+    damageRecovery:
+      types:
+        Asphyxiation: -1.0
+  - type: Body
+    prototype: ProtoDawi
+    requiredLegs: 2
+  - type: Fixtures
+    fixtures: # TODO: This needs a second fixture just for mob collisions.
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        # they r smaller
+        density: 120
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: ReplacementAccent
+    accent: dwarf
+  - type: HumanoidAppearance
+    species: ProtoDawi
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: Inventory
+    templateId: protogen
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+  - type: Tag
+    tags:
+      - CanPilot
+      - FootstepSound
+      - DoorBumpOpener
+      - AnomalyHost
+      - Protogen
+      - Dwarf
+      - Humanoid # Wolfgate: Tag replaces rather than merges
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoDawiDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Inventory
+    templateId: protogen
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
+#region DIONA ####
+
+- type: entity
+  save: false
+  name: Urist McPlantster
+  parent: BaseMobProtogen
+  id: BaseMobProtoDionae
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    - AnomalyHost
+    - Diona
+    - Protogen
+    - Humanoid # Wolfgate: Tag replaces rather than merges
+  - type: HumanoidAppearance
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+    species: ProtoDionae
+  - type: Hunger
+    baseDecayRate: 0.0083
+  - type: Thirst
+    baseDecayRate: 0.0083
+  - type: Icon
+    sprite: _FarHorizons/Mobs/Species/Proto-Dionae/parts.rsi
+    state: full
+  - type: Body
+    prototype: ProtoDionae
+    requiredLegs: 2
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: ProtoDionae
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#cd7314"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+      - id: FoodMeatPlant
+        amount: 5
+  - type: Bloodstream
+    bloodReagent: Sap
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+      Acidic: [Touch, Ingestion]
+    reactions:
+    - reagents: [ PlantBGone ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+#        scaleByQuantity: true
+        damage:
+          types:
+            Blunt: 0.1
+            Slash: 0.1
+            Piercing: 0.15
+      - !type:PopupMessage
+        type: Local
+        visualType: Large
+        messages: [ "diona-hurt-by-herbicide-popup" ]
+        probability: 0.66
+    - reagents: [ WeedKiller ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+#        scaleByQuantity: true
+        damage:
+          types:
+            Poison: 0.25
+      - !type:PopupMessage
+        type: Local
+        visualType: Large
+        messages: [ "diona-hurt-by-herbicide-popup" ]
+        probability: 0.66
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 300 #weighs more than humans because wood
+        restitution: 0.0
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: IgnoreKudzu
+  - type: ProtectedFromStepTriggers # Frontier cross port from the base species
+  - type: FTLKnockdownImmune # Frontier cross port from the base species
+  - type: IgniteOnHeatDamage
+    fireStacks: 1
+    threshold: 12
+  - type: GibAction
+    actionPrototype: DionaGibAction
+    allowedStates:
+    - Dead
+  - type: Vocal # Starlight: protogen recreated audio
+    sounds:
+      Male: ProtoDionaMSounds
+      Female: ProtoDionaFSounds
+      Unsexed: ProtoDionaMSounds
+  - type: Inventory
+    templateId: protodionae
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoDionaeDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: ProtoDionae
+  - type: Inventory
+    templateId: protodionae
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
+#region AVALI ####
+
+- type: entity
+  save: false
+  name: Urist McAvalister
+  parent: BaseMobProtogen
+  id: BaseMobProtoAvali
+  abstract: true
+  components:
+    - type: Wagging # Wolfgate: this species has wag-capable tails but had no Wagging Tail action
+    - type: Tag
+      tags:
+        - CanPilot
+        - FootstepSound
+        - DoorBumpOpener
+        - AnomalyHost
+        - Avali
+        - Protogen
+        - Humanoid # Wolfgate: Tag replaces rather than merges
+    - type: HumanoidAppearance
+      species: ProtoAvali
+      hideLayersOnEquip:
+      - Hair
+      # HL start: Hide genital markings on equip
+      - Genital
+      - Penis
+      - Breasts
+      # HL end
+    - type: Sprite
+      layers:
+      - map: [ "enum.HumanoidVisualLayers.TailBehind" ]  # HL Modification
+      - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
+      - map: [ "enum.HumanoidVisualLayers.Chest" ]
+      - map: [ "enum.HumanoidVisualLayers.Head" ]
+      - map: [ "enum.HumanoidVisualLayers.Snout" ]
+      - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+      - map: [ "enum.HumanoidVisualLayers.RArm" ]
+      - map: [ "enum.HumanoidVisualLayers.LArm" ]
+      - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+      - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+      - map: [ "enum.HumanoidVisualLayers.Genital" ] # HL Modification
+      - map: [ "enum.HumanoidVisualLayers.Breasts" ] # HL Modification
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+      - map: [ "enum.HumanoidVisualLayers.Penis" ] # HL Modification
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+      - map: ["jumpsuit"]
+      - map: ["enum.HumanoidVisualLayers.LFoot"]
+      - map: ["enum.HumanoidVisualLayers.RFoot"]
+      - map: ["enum.HumanoidVisualLayers.LHand"]
+      - map: ["enum.HumanoidVisualLayers.RHand"]
+      - map: [ "gloves" ]
+      - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
+      - map: [ "shoes" ]
+      - map: [ "outerClothing" ]
+      - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
+      - map: [ "belt" ]
+      - map: [ "id" ]
+      - map: [ "back" ]
+      - map: [ "neck" ]
+      - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # HL Modification; WOLFGATE - drawn above the neck slot so cloaks do not cover the tail
+      - map: [ "enum.HumanoidVisualLayers.Tail" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
+      - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+      - map: [ "enum.HumanoidVisualLayers.Hair" ]
+      - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+      - map: [ "ears" ]
+      - map: [ "eyes" ]
+      - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+      - map: [ "mask" ]
+      - map: [ "head" ]
+      - map: [ "pocket1" ]
+      - map: [ "pocket2" ]
+      - map: ["enum.HumanoidVisualLayers.Handcuffs"]
+        color: "#ffffff"
+        sprite: Objects/Misc/handcuffs.rsi
+        state: body-overlay-2
+        visible: false
+    - type: Hunger
+      thresholds:
+        Overfed: 250
+        Okay: 200
+        Peckish: 150
+        Starving: 100
+        Dead: 0
+      baseDecayRate: 0.03
+    - type: Icon
+      sprite: _FarHorizons/Mobs/Species/Proto-Avali/parts.rsi
+      state: full
+    - type: Body
+      prototype: ProtoAvali
+      requiredLegs: 2
+    - type: Inventory
+      speciesId: avali
+      templateId: protogen
+      displacements:
+        jumpsuit:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: jumpsuit
+        shoes:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: feet
+        head:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: head
+        hand:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: hand
+        back:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: back
+    - type: Butcherable
+      butcheringType: Spike
+      spawned:
+        - id: FoodMeatChicken
+          amount: 3
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        90: Critical
+        180: Dead
+    - type: TemperatureSpeed
+      thresholds:
+        250: 0.9
+        230: 0.8
+        223: 0.6
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeCircle
+            radius: 0.35
+          density: 95 #tiny
+          restitution: 0.0
+          mask:
+            - MobMask
+          layer:
+            - MobLayer
+    - type: MovementSpeedModifier
+      weightlessAcceleration: 1.7 # Avalis are specifically built to fly in low-g environments
+      weightlessFriction: 1
+      weightlessModifier: 1
+    - type: Damageable
+      damageContainer: Biological
+      damageModifierSet: ProtoAvali
+    - type: DamageVisuals
+      damageOverlayGroups:
+        Brute:
+          sprite: Mobs/Effects/brute_damage.rsi
+          color: "#6C3BAA"
+    - type: Bloodstream
+      bloodReagent: AmmoniaBlood
+    - type: Temperature
+      currentTemperature: 261
+      specificHeat: 48
+      heatDamageThreshold: 310
+      coldDamageThreshold: 223
+    - type: ThermalRegulator
+      metabolismHeat: 400 # icebirb go brrr
+      radiatedHeat: 100
+      implicitHeatRegulation: 1500
+      sweatHeatRegulation: 2000
+      shiveringHeatRegulation: 2000
+      normalBodyTemperature: 261
+      thermalRegulationTemperatureThreshold: 1
+    - type: Vocal # Starlight: protogen recreated audio
+      sounds:
+        Male: ProtoAvaliMSounds
+        Female: ProtoAvaliFSounds
+        Unsexed: ProtoAvaliMSounds
+    - type: Stasis
+      enterStasisAction: ActionStasisEnter
+      exitStasisAction: ActionStasisExit
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoAvaliDummy
+  categories: [ HideSpawnMenu ]
+  description: A dummy proto-avali meant to be used in character setup.
+  components:
+    - type: HumanoidAppearance
+      species: ProtoAvali
+    - type: Inventory
+      speciesId: avali
+      displacements:
+        jumpsuit:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: jumpsuit
+        shoes:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: feet
+        head:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: head
+        hand:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: hand
+        back:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: back
+        outerClothing:
+          sizeMaps:
+            32:
+              sprite: _Starlight/Mobs/Species/Avali/displacement.rsi
+              state: outerclothing
+
+#region ARACHNID ####
+
+- type: entity
+  save: false
+  name: Urist McWebster
+  parent: BaseMobProtogen
+  id: BaseMobProtoArachnid
+  abstract: true
+  components:
+  - type: Sericulture
+    action: ActionSericulture
+    productionLength: 2
+    entityProduced: MaterialWebSilk1
+    hungerCost: 4 # Should total to 25 total silk on full hunger
+  - type: IgnoreSpiderWeb
+  - type: Body
+    prototype: ProtoArachnid
+    requiredLegs: 2
+  - type: HumanoidAppearance
+    species: ProtoArachnid
+    hideLayersOnEquip:
+    - Hair
+    # HL start: Hide genital markings on equip
+    - Genital
+    - Penis
+    - Breasts
+    # HL end
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    - SpiderCraft
+    - AnomalyHost
+    - Arachnid
+    - Protogen
+    - Humanoid # Wolfgate: Tag replaces rather than merges
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+      - id: FoodMeatSpider
+        amount: 5
+  - type: Reactive
+    reactions:
+    - reagents: [Water]
+      methods: [Touch]
+      effects:
+      - !type:WearableReaction
+        slot: head
+        prototypeID: WaterDropletHat
+    - reagents: [Water, SpaceCleaner]
+      methods: [Touch]
+      effects:
+      - !type:WashCreamPieReaction
+  # Damage (Self)
+  - type: Bloodstream
+    bloodReagent: CopperBlood
+  # Damage (Others)
+  - type: MeleeWeapon
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Slash: 5
+  # Visual & Audio
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#162581"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: Vocal # Starlight: protogen recreated audio
+    sounds:
+      Male: ProtoArachnidMSounds
+      Female: ProtoArachnidFSounds
+      Unsexed: ProtoArachnidMSounds
+  - type: Sprite
+    layers:
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - split tail layers ported from HardLight/Floof
+    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.Genital" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.Breasts" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.Penis" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: ["jumpsuit"]
+    - map: ["enum.HumanoidVisualLayers.LFoot"]
+    - map: ["enum.HumanoidVisualLayers.RFoot"]
+    - map: ["enum.HumanoidVisualLayers.LHand"]
+    - map: ["enum.HumanoidVisualLayers.RHand"]
+    - map: [ "gloves" ]
+    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "id" ] # Mono - move from between belt and back
+    - map: [ "outerClothing" ] # mono - i hate you upstream
+    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
+    - map: [ "eyes" ]
+    - map: [ "belt" ]
+    - map: [ "back" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.HumanoidVisualLayers.Wings" ] # For IPC wings porting from SimpleStation
+    - map: [ "balaclava" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "neck" ]
+    - map: [ "neck2" ]
+    - map: [ "neck3" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
+    - map: [ "enum.HumanoidVisualLayers.Tail" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
+    - map: [ "helmetcover" ]
+    - map: [ "helmetattachment" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: ["enum.HumanoidVisualLayers.Handcuffs"]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "clownedon" ] # Dynamically generated
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_arachnid"
+      visible: false
+  - type: Inventory
+    templateId: protoarachnid
+    speciesId: arachnid
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobProtoArachnidDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: ProtoArachnid
+  - type: Inventory
+    templateId: protoarachnid
+    speciesId: arachnid

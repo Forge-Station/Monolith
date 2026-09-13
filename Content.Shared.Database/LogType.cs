@@ -491,11 +491,14 @@ public enum LogType
     /// </summary>
     Instrument = 103,
 
-    // RMC14
-    RMCTelephone = 10042,
+    /// <summary>
+    /// Players changing their consent settings.
+    /// </summary>
+    // WOLFGATE - ported from HardLight; the high id avoids clashing with upstream additions.
+    Consent = 12489,
 
     /// <summary>
-    /// A player wrote on paper. Image uploads are Medium impact so they can be filtered.
+    /// Anatomy organs and settings.
     /// </summary>
-    Paper = 300, // Forge
+    WFAnatomy = 12490, // WOLFGATE - anatomy organs and settings
 }

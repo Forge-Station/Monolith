@@ -5,6 +5,8 @@
   name: light bulletproof vest
   description: A simple kevlar vest of unknown origin. This one is a simple bulletproof vest made to resist low caliber rounds.
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
+    regions: Chest
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Armor/bulletproof_light.rsi
   - type: Clothing
@@ -35,6 +37,8 @@
   name: medium bulletproof vest
   description: A simple kevlar vest of unknown origin. This one is more heavily reinforced against bullets at the cost of it being cumbersome.
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
+    regions: Chest
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Armor/bulletproof_medium.rsi
   - type: Clothing
@@ -67,6 +71,8 @@
   name: heavy bulletproof vest
   description: A simple kevlar vest of unknown origin. This juggernaut vest makes you practically a walking tank, at the cost of heat protection and extreme bulk.
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
+    regions: Chest
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Armor/bulletproof_heavy.rsi
   - type: Clothing
@@ -100,6 +106,8 @@
   name: polyvalent bulletproof vest
   description: A simple kevlar vest of unknown origin. This one isn't made to protect against a specific type of threat.
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
+    regions: Chest
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Armor/bulletproof_polyvalent.rsi
   - type: Clothing
@@ -130,6 +138,8 @@
   name: stabproof bulletproof vest
   description: A simple kevlar vest of unknown origin. This one is reinforced against stabbings.
   components:
+  - type: GenitalCoverage # WOLFGATE - anatomy coverage
+    regions: Chest
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Armor/bulletproof_stabproof.rsi
   - type: Clothing

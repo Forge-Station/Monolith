@@ -311,7 +311,11 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
         }
     }
 
-    private void OpenSavePanel()
+    /// <summary>
+    /// WOLFGATE: asks about unsaved changes, then runs <paramref name="onContinue"/>. Used by closing the editor,
+    /// switching character and creating one, so none of them can drop edits silently. Cancel keeps the editor.
+    /// </summary>
+    private void OpenSavePanel(Action onContinue)
     {
         if (_savePanel is { IsOpen: true })
             return;
@@ -320,19 +324,35 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
         _savePanel.SaveButton.OnPressed += _ =>
         {
+            // WOLFGATE - the editor's anatomy confirmation guards this save too; Cancel returns to the editor unsaved.
+            if (_profileEditor != null && _profileEditor.AnatomyClearedOnSave())
+            {
+                _savePanel.Close();
+                _profileEditor.OpenAnatomySaveConfirm(() =>
+                {
+                    SaveProfile();
+                    onContinue();
+                });
+                return;
+            }
+            // End WOLFGATE
+
             SaveProfile();
 
             _savePanel.Close();
 
-            CloseProfileEditor();
+            onContinue();
         };
 
         _savePanel.NoSaveButton.OnPressed += _ =>
         {
             _savePanel.Close();
 
-            CloseProfileEditor();
+            onContinue();
         };
+
+        // WOLFGATE: Cancel goes back to the editor with the edits intact.
+        _savePanel.CancelButton.OnPressed += _ => _savePanel.Close();
 
         _savePanel.OpenCentered();
     }
@@ -368,7 +388,7 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
             // Open the save panel if we have unsaved changes.
             if (_profileEditor.Profile != null && _profileEditor.IsDirty)
             {
-                OpenSavePanel();
+                OpenSavePanel(CloseProfileEditor);
 
                 return;
             }
@@ -381,8 +401,32 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
         _characterSetup.SelectCharacter += args =>
         {
-            _preferencesManager.SelectCharacter(args);
-            ReloadCharacterSetup();
+            // WOLFGATE: switching used to drop unsaved edits without asking.
+            void Switch()
+            {
+                _preferencesManager.SelectCharacter(args);
+                ReloadCharacterSetup();
+            }
+
+            if (_profileEditor.Profile != null && _profileEditor.IsDirty)
+                OpenSavePanel(Switch);
+            else
+                Switch();
+        };
+
+        // WOLFGATE: creating a character used to drop unsaved edits without asking.
+        _characterSetup.NewCharacter += () =>
+        {
+            void Create()
+            {
+                _preferencesManager.CreateCharacter(HumanoidCharacterProfile.Random());
+                _characterSetup?.ReloadCharacterPickers();
+            }
+
+            if (_profileEditor.Profile != null && _profileEditor.IsDirty)
+                OpenSavePanel(Create);
+            else
+                Create();
         };
 
         _characterSetup.DeleteCharacter += args =>
@@ -536,6 +580,18 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
     public EntityUid LoadProfileEntity(HumanoidCharacterProfile? humanoid, JobPrototype? job, bool jobClothes)
     {
         EntityUid dummyEnt;
+
+        // WOLFGATE: a character saved on a build that has a species this one does not must not throw. The picker list
+        // is built in one loop that ends with the create-character button, so one bad profile used to hide every
+        // character after it and the button with them.
+        if (humanoid != null && !_prototypeManager.HasIndex<SpeciesPrototype>(humanoid.Species))
+        {
+            _logManager.GetSawmill("lobby").Warning(
+                $"Character \"{humanoid.Name}\" uses unknown species {humanoid.Species}; previewing it as {SharedHumanoidAppearanceSystem.DefaultSpecies}.");
+
+            humanoid = humanoid.WithSpecies(SharedHumanoidAppearanceSystem.DefaultSpecies);
+        }
+        // End WOLFGATE
 
         EntProtoId? previewEntity = null;
         if (humanoid != null && jobClothes)

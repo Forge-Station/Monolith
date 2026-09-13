@@ -1,0 +1,10 @@
+# Wolfgate: Wolfgate's language system has no icons or obfuscation fonts, so those
+# fields are dropped.
+# Wolfgate: ported from HardLight
+- type: language
+  id: Machine
+  speech:
+    color: "#6174ff"
+    fontId: Octatrax
+  obfuscation:
+    !type:RandomObfuscation

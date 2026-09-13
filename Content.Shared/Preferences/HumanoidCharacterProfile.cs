@@ -1,14 +1,14 @@
-using Content.Shared._Forge.TTS;
-using Content.Shared._Forge.Company;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Content.Shared._Mono.Company;
 using Content.Shared._NF.Bank;
+using Content.Shared._WF.Genitals; // WOLFGATE
+using Content.Shared._WF.Genitals.Migration; // WOLFGATE
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences.Loadouts;
-using Content.Shared._Forge.Barks; // Corvax-Frontier-Barks
-using Content.Shared._Forge.TTS; // Corvax-Frontier-Barks
 using Content.Shared.Roles;
 using Content.Shared.Traits;
 using Robust.Shared.Collections;
@@ -19,8 +19,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Content.Shared.Preferences
 {
@@ -31,12 +29,12 @@ namespace Content.Shared.Preferences
     [Serializable, NetSerializable]
     public sealed partial class HumanoidCharacterProfile : ICharacterProfile
     {
-        private static readonly Regex RestrictedNameRegex = new("[^а-яА-Яa-zA-Z-'0-9\\ ]"); // Corvax-Localization
+        private static readonly Regex RestrictedNameRegex = new(@"[^A-Za-z0-9 '\-]");
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
         public const int MaxNameLength = 32;
         public const int MaxLoadoutNameLength = 32;
-        public const int MaxDescLength = 512;
+        public const int MaxDescLength = 4096; // WOLFGATE: was 512
 
         public const int DefaultBalance = 75000;
 
@@ -90,10 +88,6 @@ namespace Content.Shared.Preferences
         [DataField]
         public ProtoId<SpeciesPrototype> Species { get; set; } = SharedHumanoidAppearanceSystem.DefaultSpecies;
 
-        // Forge-change: _EE nationality
-        [DataField]
-        public string Nationality { get; set; } = SharedHumanoidAppearanceSystem.DefaultNationality;
-
         [DataField]
         public int Age { get; set; } = 18;
 
@@ -145,24 +139,31 @@ namespace Content.Shared.Preferences
         public PreferenceUnavailableMode PreferenceUnavailable { get; private set; } =
             PreferenceUnavailableMode.SpawnAsOverflow;
 
-        [DataField] // Corvax-Frontier-Barks
-        public string BarkVoice { get; set; } = SharedHumanoidAppearanceSystem.DefaultBarkVoice; // Corvax-Frontier-Barks
-
-        [DataField] // Corvax-TTS
-        public string Voice { get; set; } = SharedHumanoidAppearanceSystem.DefaultVoice; // Corvax-TTS
-
         /// <summary>
         /// The company affiliation of the character
         /// </summary>
         [DataField]
         public string Company { get; private set; } = "None";
 
+        /// <summary>
+        /// WOLFGATE - shown instead of the species name wherever the species is displayed. Empty means
+        /// the species' own name is used.
+        /// </summary>
+        [DataField]
+        public string CustomSpeciesName { get; private set; } = string.Empty;
+
+        public const int MaxCustomSpeciesNameLength = 32;
+
+        /// <summary>
+        /// WOLFGATE - creator anatomy. Absent data (old exports, old code paths) means not yet migrated.
+        /// </summary>
+        [DataField]
+        public GenitalProfile Genitals { get; private set; } = GenitalProfile.Unmigrated;
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
             string species,
-            string nationality, // Forge-change: _EE nationality
-            string voice, // Corvax-TTS
             int age,
             Sex sex,
             Gender gender,
@@ -174,14 +175,13 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
-            string barkVoice, // Corvax-Frontier-Barks
-            string company = "None")
+            string company = "None",
+            string customSpeciesName = "",
+            GenitalProfile? genitals = null) // WOLFGATE
         {
             Name = name;
             FlavorText = flavortext;
             Species = species;
-            Nationality = nationality; // Forge-change: _EE nationality
-            Voice = voice; // Corvax-TTS
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -193,8 +193,9 @@ namespace Content.Shared.Preferences
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
-            BarkVoice = barkVoice; // Corvax-Frontier-Barks
             Company = company;
+            CustomSpeciesName = customSpeciesName;
+            Genitals = genitals ?? GenitalProfile.Unmigrated; // WOLFGATE
         }
 
         /// <summary>Copy constructor but with overridable references (to prevent useless copies)</summary>
@@ -204,8 +205,9 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts)
-            : this(other.Name, other.FlavorText, other.Species, other.Nationality, other.Voice, other.Age, other.Sex, other.Gender, other.BankBalance, other.Appearance, other.SpawnPriority,
-                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.BarkVoice, other.Company)
+            : this(other.Name, other.FlavorText, other.Species, other.Age, other.Sex, other.Gender, other.BankBalance, other.Appearance, other.SpawnPriority,
+                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company, other.CustomSpeciesName,
+                other.Genitals) // WOLFGATE - GenitalProfile is immutable, so copies share it
         {
         }
 
@@ -214,8 +216,6 @@ namespace Content.Shared.Preferences
             : this(other.Name,
                 other.FlavorText,
                 other.Species,
-                other.Nationality, // Forge-change: _EE nationality
-                other.Voice, // Forge-Change
                 other.Age,
                 other.Sex,
                 other.Gender,
@@ -227,8 +227,9 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
-                other.BarkVoice, // Corvax-Frontier-Barks
-                other.Company)
+                other.Company,
+                other.CustomSpeciesName,
+                other.Genitals.Clone()) // WOLFGATE
         {
         }
 
@@ -251,7 +252,7 @@ namespace Content.Shared.Preferences
             return new()
             {
                 Species = species,
-                Nationality = SharedHumanoidAppearanceSystem.DefaultNationality, // Forge-change: _EE nationality
+                Genitals = GenitalProfile.Empty, // WOLFGATE - nothing to migrate
             };
         }
 
@@ -296,12 +297,6 @@ namespace Content.Shared.Preferences
             }
 
             var name = GetName(species, gender);
-            // Forge-Change-Start
-            var barkvoiceId = SharedHumanoidAppearanceSystem.DefaultBarkVoice;
-            var barks = prototypeManager.EnumeratePrototypes<BarkPrototype>().Where(o => o.RoundStart).ToArray();
-            if (barks.Length > 0) // Forge-Change
-                barkvoiceId = random.Pick(barks).ID;
-            // Forge-Change-End
             return new HumanoidCharacterProfile()
             {
                 Name = name,
@@ -310,7 +305,7 @@ namespace Content.Shared.Preferences
                 Gender = gender,
                 Species = species,
                 Appearance = HumanoidCharacterAppearance.Random(species, sex),
-                BarkVoice = barkvoiceId, // Corvax-Frontier-Barks
+                Genitals = GenitalProfile.Empty, // WOLFGATE - random profiles have no anatomy
             };
         }
 
@@ -323,7 +318,6 @@ namespace Content.Shared.Preferences
         {
             return new(this) { FlavorText = flavorText };
         }
-        public HumanoidCharacterProfile WithNationality(string nationality) => new(this) { Nationality = nationality }; // Forge-change: _EE nationality
 
         public HumanoidCharacterProfile WithAge(int age)
         {
@@ -362,20 +356,6 @@ namespace Content.Shared.Preferences
         {
             return new(this) { SpawnPriority = spawnPriority };
         }
-
-        // Corvax-TTS-Start
-        public HumanoidCharacterProfile WithVoice(string voice)
-        {
-            return new(this) { Voice = voice };
-        }
-        // Corvax-TTS-End
-
-        // Corvax-Frontier-Barks-start
-        public HumanoidCharacterProfile WithBarkVoice(string barkVoice)
-        {
-            return new(this) { BarkVoice = barkVoice };
-        }
-        // Corvax-Frontier-Barks-end
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
         {
@@ -433,6 +413,18 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithPreferenceUnavailable(PreferenceUnavailableMode mode)
         {
             return new(this) { PreferenceUnavailable = mode };
+        }
+
+        /// <summary>WOLFGATE</summary>
+        public HumanoidCharacterProfile WithCustomSpeciesName(string customSpeciesName)
+        {
+            return new(this) { CustomSpeciesName = customSpeciesName };
+        }
+
+        /// <summary>WOLFGATE - replaces the creator anatomy.</summary>
+        public HumanoidCharacterProfile WithGenitals(GenitalProfile genitals)
+        {
+            return new(this) { Genitals = genitals };
         }
 
         public HumanoidCharacterProfile WithCompany(string company)
@@ -555,19 +547,10 @@ namespace Content.Shared.Preferences
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (SpawnPriority != other.SpawnPriority) return false;
             if (Species != other.Species) return false;
-            if (Nationality != other.Nationality) return false; // Forge-change: _EE nationality
             if (Company != other.Company) return false;
-            if (Voice != other.Voice) return false; // Corvax-TTS
-            if (BarkVoice != other.BarkVoice) return false; // Corvax-Frontier-Barks
-            // Forge-Change-Start
-            if (_jobPriorities.Count != other._jobPriorities.Count)
-                return false;
-            foreach (var (jobId, priority) in _jobPriorities)
-            {
-                if (!other._jobPriorities.TryGetValue(jobId, out var otherPriority) || otherPriority != priority)
-                    return false;
-            }
-            // Forge-Change-End
+            if (CustomSpeciesName != other.CustomSpeciesName) return false; // WOLFGATE
+            if (!Genitals.MemberwiseEquals(other.Genitals)) return false; // WOLFGATE
+            if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
             if (FlavorText != other.FlavorText) return false;
@@ -581,8 +564,8 @@ namespace Content.Shared.Preferences
             {
                 if (!other.Loadouts.TryGetValue(key, out var otherLoadout))
                     return false;
-                // Forge-Change
-                if (!loadout.Equals(otherLoadout))
+
+                if (loadout != otherLoadout)
                     return false;
             }
 
@@ -614,6 +597,16 @@ namespace Content.Shared.Preferences
 
             var age = Math.Clamp(Age, speciesPrototype.MinAge, speciesPrototype.MaxAge);
 
+            // WOLFGATE - anatomy: convert legacy genital markings and drop adult-only markings below the adult age, then
+            // apply the adult gate and organ rules. This runs before marking validation, which would keep or drop the old ids.
+            var wfContext = LegacyGenitalMarkings.ContextFor(Species, Appearance.SkinColor, prototypeManager);
+            var (wfAppearance, wfGenitals) = LegacyGenitalMarkings.Migrate(Appearance,
+                Genitals ?? GenitalProfile.Unmigrated, // crafted network data can deliver null
+                wfContext);
+            wfAppearance = GenitalAdultMarkings.StripIfMinor(wfAppearance, age, prototypeManager);
+            wfGenitals = GenitalProfileValidator.EnsureValid(wfGenitals, age, Species, prototypeManager);
+            // End WOLFGATE
+
             var gender = Gender switch
             {
                 Gender.Epicene => Gender.Epicene,
@@ -641,7 +634,7 @@ namespace Content.Shared.Preferences
 
             if (configManager.GetCVar(CCVars.RestrictedNames) && Species != "IPC")
             {
-                // name = Regex.Replace(name, @"[^\u0041-\u005A,\u0061-\u007A,\u00C0-\u00D6,\u00D8-\u00F6,\u00F8-\u00FF,\u0100-\u017F, -]", string.Empty);
+                name = Regex.Replace(name, @"[^\u0041-\u005A,\u0061-\u007A,\u00C0-\u00D6,\u00D8-\u00F6,\u00F8-\u00FF,\u0100-\u017F, -]", string.Empty);
                 /*
                  * 0041-005A  Basic Latin: Uppercase Latin Alphabet
                  * 0061-007A  Basic Latin: Lowercase Latin Alphabet
@@ -650,7 +643,6 @@ namespace Content.Shared.Preferences
                  * 00F8-00FF  Latin-1 Supplement: Letters III
                  * 0100-017F  Latin Extended A: European Latin
                  */
-                 name = RestrictedNameRegex.Replace(name, string.Empty);
             }
 
             if (configManager.GetCVar(CCVars.ICNameCase))
@@ -664,15 +656,11 @@ namespace Content.Shared.Preferences
                 name = GetName(Species, gender);
             }
 
-            string flavortext;
-            if (FlavorText.Length > MaxDescLength)
-            {
-                flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText)[..MaxDescLength];
-            }
-            else
-            {
-                flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText);
-            }
+            // WOLFGATE: permissive, because RemoveMarkupOrThrow threw on text like "[]" and the save handler is
+            // async void, so the character silently failed to save. Stray tags are stripped instead.
+            var flavortext = FormattedMessage.RemoveMarkupPermissive(FlavorText);
+            if (flavortext.Length > MaxDescLength)
+                flavortext = flavortext[..MaxDescLength];
 
             // Frontier
             //make sure theres no funny bank stuff going on
@@ -683,7 +671,7 @@ namespace Content.Shared.Preferences
             }
             // End Frontier
 
-            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex);
+            var appearance = HumanoidCharacterAppearance.EnsureValid(wfAppearance, Species, Sex); // WOLFGATE - wfAppearance
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
@@ -736,7 +724,17 @@ namespace Content.Shared.Preferences
             Gender = gender;
             BankBalance = bankBalance;
             Appearance = appearance;
+            Genitals = wfGenitals; // WOLFGATE
             SpawnPriority = spawnPriority;
+
+            // WOLFGATE: the custom species name is free text, so it gets the same treatment as the
+            // character name: trimmed, length-capped and stripped of anything that is not printable.
+            CustomSpeciesName = new string(CustomSpeciesName
+                    .Trim()
+                    .Where(c => !char.IsControl(c))
+                    .Take(MaxCustomSpeciesNameLength)
+                    .ToArray())
+                .Trim();
 
             // Check if the company exists, if not set to "None"
             if (!string.IsNullOrEmpty(Company) &&
@@ -752,8 +750,6 @@ namespace Content.Shared.Preferences
             {
                 _jobPriorities.Add(job, priority);
             }
-
-            Company = FactionCompanyResolver.SanitizeProfileCompany(this, prototypeManager);
 
             PreferenceUnavailable = prefsUnavailableMode;
 
@@ -822,15 +818,6 @@ namespace Content.Shared.Preferences
             return result;
         }
 
-
-        // Corvax-TTS-Start
-        // SHOULD BE NOT PUBLIC, BUT....
-        public static bool CanHaveVoice(TTSVoicePrototype voice, Sex sex)
-        {
-            return voice.RoundStart && sex == Sex.Unsexed || (voice.Sex == sex || voice.Sex == Sex.Unsexed);
-        }
-        // Corvax-TTS-End
-
         public ICharacterProfile Validated(ICommonSession session, IDependencyCollection collection)
         {
             var profile = new HumanoidCharacterProfile(this);
@@ -848,28 +835,26 @@ namespace Content.Shared.Preferences
 
         public override bool Equals(object? obj)
         {
-            return ReferenceEquals(this, obj) || obj is HumanoidCharacterProfile other && Equals(other);
+            // WOLFGATE - MemberwiseEquals: Equals(other) resolved to this override and recursed forever.
+            return ReferenceEquals(this, obj) || obj is HumanoidCharacterProfile other && MemberwiseEquals(other);
         }
 
         public override int GetHashCode()
         {
+            // WOLFGATE - only fields MemberwiseEquals compares by value, so profiles that are Equal hash alike.
+            // The collections and Appearance hashed by reference, which broke that once Equals became value equality.
             var hashCode = new HashCode();
-            hashCode.Add(_jobPriorities);
-            hashCode.Add(_antagPreferences);
-            hashCode.Add(_traitPreferences);
-            hashCode.Add(_loadouts);
             hashCode.Add(Name);
             hashCode.Add(FlavorText);
             hashCode.Add(Species);
-            hashCode.Add(Nationality); // Forge-change: _EE nationality
             hashCode.Add(Age);
             hashCode.Add((int)Sex);
             hashCode.Add((int)Gender);
-            hashCode.Add(Appearance);
             hashCode.Add(BankBalance); // Frontier
-            hashCode.Add(BarkVoice); // Corvax-Frontier-Barks
             hashCode.Add((int)SpawnPriority);
             hashCode.Add((int)PreferenceUnavailable);
+            hashCode.Add(Company); // WOLFGATE
+            hashCode.Add(CustomSpeciesName); // WOLFGATE
             return hashCode.ToHashCode();
         }
 

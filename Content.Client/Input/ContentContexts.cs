@@ -27,6 +27,8 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.EscapeContext);
             common.AddFunction(ContentKeyFunctions.ExamineEntity);
             common.AddFunction(ContentKeyFunctions.OpenAHelp);
+            common.AddFunction(ContentKeyFunctions.OpenConsentWindow); // WOLFGATE - consent system
+            common.AddFunction(ContentKeyFunctions.OpenAnatomyPanel); // WOLFGATE - anatomy panel
             common.AddFunction(ContentKeyFunctions.TakeScreenshot);
             common.AddFunction(ContentKeyFunctions.TakeScreenshotNoUI);
             common.AddFunction(ContentKeyFunctions.ToggleFullscreen);

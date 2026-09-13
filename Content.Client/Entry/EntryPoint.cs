@@ -1,5 +1,6 @@
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
+using Content.Client._Common.Consent; // WOLFGATE
 using Content.Client.Chat.Managers;
 using Content.Client.DebugMon;
 using Content.Client.Eui;
@@ -68,6 +69,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly IOverlayManager _overlayManager = default!;
         [Dependency] private readonly IChatManager _chatManager = default!;
         [Dependency] private readonly IClientPreferencesManager _clientPreferencesManager = default!;
+        [Dependency] private readonly IClientConsentManager _clientConsentManager = default!; // WOLFGATE
         [Dependency] private readonly EuiManager _euiManager = default!;
         [Dependency] private readonly IVoteManager _voteManager = default!;
         [Dependency] private readonly DocumentParsingManager _documentParsingManager = default!;
@@ -182,6 +184,7 @@ namespace Content.Client.Entry
             _overlayManager.AddOverlay(new EmpBlastOverlay()); // Frontier
             _chatManager.Initialize();
             _clientPreferencesManager.Initialize();
+            _clientConsentManager.Initialize(); // WOLFGATE - consent system
             _euiManager.Initialize();
             _voteManager.Initialize();
             _userInterfaceManager.SetDefaultTheme("SS14DefaultTheme");

@@ -1,0 +1,27 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "belly_pregnant-1,-2,-3,-4 by SeaborneProto on Github",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "belly_pregnant-1",
+            "directions": 4
+        },
+        {
+            "name": "belly_pregnant-2",
+            "directions": 4
+        },
+        {
+            "name": "belly_pregnant-3",
+            "directions": 4
+        },
+        {
+            "name": "belly_pregnant-4",
+            "directions": 4
+        }
+    ]
+}

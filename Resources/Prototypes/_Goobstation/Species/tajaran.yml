@@ -49,6 +49,11 @@
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobTajaranTorso
+    UndergarmentTop: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    UndergarmentBottom: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Genital: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Penis: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    Breasts: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
     Eyes: MobTajaranEyes
     LArm: MobTajaranLArm
     RArm: MobTajaranRArm
@@ -57,6 +62,8 @@
     LLeg: MobTajaranLLeg
     RLeg: MobTajaranRLeg
     Tail: MobHumanoidAnyMarking
+    TailBehind: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
+    TailOversuit: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
     LFoot: MobTajaranLFoot
     RFoot: MobTajaranRFoot
 

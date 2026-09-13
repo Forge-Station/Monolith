@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/tgstation/tgstation/commit/a92719210eb834cf284c571b3b3d94c2d82c26ea | aspen from https://github.com/fulpstation/fulpstation/commit/b21af07f57c2c4fb1cdcdb4162ca222da97ed54c | mint made by Floofers South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "aspen_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "aspen_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "atlas_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "atlas_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "brown_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "brown_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "deathshead_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "deathshead_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "feathery_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "feathery_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "gothic_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "gothic_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "jungle_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "jungle_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "lovers_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "lovers_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "luna_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "luna_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "mint_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "mint_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "moffra_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "moffra_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "monarch_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "monarch_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "moonfly_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "moonfly_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "oakworm_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "oakworm_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "plain_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "plain_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "plasmafire_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "plasmafire_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "poison_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "poison_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "ragged_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "ragged_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "reddish_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "reddish_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "rosy_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "rosy_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "royal_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "royal_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "snow_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "snow_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "whitefly_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "whitefly_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "witchking_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "witchking_FRONT",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+# Wolfgate: Canine. Vulpkanin in every respect except the head, which is the human one so the muzzle is a
+# marking you pick rather than art baked into the species. Everything else - torso, limbs, body, names,
+# marking budget - is Vulpkanin's.
+- type: species
+  id: Canine
+  name: species-name-canine
+  roundStart: true
+  prototype: MobCanine
+  sprites: MobCanineSprites
+  defaultSkinTone: "#985629"
+  markingLimits: MobCanineMarkingLimits
+  dollPrototype: MobCanineDummy
+  skinColoration: Hues
+  maleFirstNames: names_vulpkanin_male
+  femaleFirstNames: names_vulpkanin_female
+  lastNames: names_vulpkanin_last
+
+- type: speciesBaseSprites
+  id: MobCanineSprites
+  sprites:
+    Head: MobCanineHead # the only difference from Vulpkanin: a snoutless head
+    Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
+    Snout: MobHumanoidAnyMarking
+    Chest: MobVulpkaninTorso
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
+    Genital: MobHumanoidAnyMarking
+    Penis: MobHumanoidAnyMarking
+    Breasts: MobHumanoidAnyMarking
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    TailBehind: MobHumanoidAnyMarking
+    TailOversuit: MobHumanoidAnyMarking
+    Eyes: MobHumanoidEyes
+    LArm: MobVulpkaninLArm
+    RArm: MobVulpkaninRArm
+    LHand: MobVulpkaninLHand
+    RHand: MobVulpkaninRHand
+    LLeg: MobVulpkaninLLeg
+    RLeg: MobVulpkaninRLeg
+    LFoot: MobVulpkaninLFoot
+    RFoot: MobVulpkaninRFoot
+
+- type: humanoidBaseSprite
+  id: MobCanineHead
+  baseSprite:
+    sprite: _WF/Mobs/Species/Canine/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobCanineHeadMale
+  baseSprite:
+    sprite: _WF/Mobs/Species/Canine/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobCanineHeadFemale
+  baseSprite:
+    sprite: _WF/Mobs/Species/Canine/parts.rsi
+    state: head_f
+
+- type: markingPoints
+  id: MobCanineMarkingLimits
+  points:
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ VulpTail ]
+    Head:
+      points: 3
+      required: false
+    Legs:
+      points: 1
+      required: false
+    Arms:
+      points: 1
+      required: false
+    Snout:
+      # Unlike Vulpkanin this is a real slot: the head has no muzzle of its own, so the snout marking is
+      # the whole muzzle and swapping it actually changes the face.
+      points: 1
+      required: true
+      defaultMarkings: [ SnoutLCanid ]
+    HeadTop:
+      points: 1
+      required: true
+      defaultMarkings: [ VulpEar ]

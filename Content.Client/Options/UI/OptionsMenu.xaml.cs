@@ -10,6 +10,9 @@ namespace Content.Client.Options.UI
     {
         [Dependency] private IClientAdminManager _adminManager = default!;
 
+        /// <summary>WOLFGATE: index of the consent tab, so the HUD button can open straight to it.</summary>
+        public const int ConsentTabIndex = 7;
+
         public OptionsMenu()
         {
             RobustXamlLoader.Load(this);
@@ -22,6 +25,7 @@ namespace Content.Client.Options.UI
             Tabs.SetTabTitle(4, Loc.GetString("ui-options-tab-accessibility"));
             Tabs.SetTabTitle(5, Loc.GetString("ui-options-tab-admin"));
             Tabs.SetTabTitle(6, Loc.GetString("ui-options-tab-extra")); // Extra settings
+            Tabs.SetTabTitle(ConsentTabIndex, Loc.GetString("ui-options-tab-consent")); // WOLFGATE
 
             UpdateTabs();
         }
@@ -36,6 +40,7 @@ namespace Content.Client.Options.UI
             AccessibilityTab.Control.ReloadValues();
             AudioTab.Control.ReloadValues();
             AdminOptionsTab.Control.ReloadValues();
+            ConsentTab.Refresh(); // WOLFGATE
         }
     }
 }

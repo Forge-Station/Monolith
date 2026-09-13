@@ -1,0 +1,41 @@
+# Wolfgate: converted from HardLight localizedDataset - Wolfgate species use plain datasets.
+- type: dataset
+  id: names_avali_first
+  values:
+  - Ko
+  - Nomi
+  - Jasyo
+  - Nesuli
+  - Eikii
+  - Runo
+  - Khauni
+  - Eilun
+  - Rhaun
+  - Halan
+  - Nahami
+  - Halyu
+  - Kala
+  - Renala
+  - Eitun
+  - Nesomi
+  - Ralomi
+  - Kazo
+  - Jasuni
+  - Ruko
+- type: dataset
+  id: names_avali_packs
+  values:
+  - Aviator Pack
+  - Screenpeckers Pack
+  - Hullguard Pack
+  - Irontalon Pack
+  - Hatchguard Pack
+  - Sprinter Pack
+  - Plasmatalon Pack
+  - Ironclaw Pack
+  - Steelnest Pack
+  - Silverfeather Pack
+  - Mineclaw Pack
+  - Hunter Pack
+  - Darkfeathers Pack
+  - Maintsnest Pack

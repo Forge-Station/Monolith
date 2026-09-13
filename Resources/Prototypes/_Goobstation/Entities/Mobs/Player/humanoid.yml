@@ -255,7 +255,7 @@
 
 - type: randomHumanoidSettings
   id: NavyOfficer
-  parent: EventHumanoidMindShielded
+  parent: [ EventHumanoidMindShielded ]
   randomizeName: false
   components:
   - type: GhostRole
@@ -299,7 +299,7 @@
 
 - type: randomHumanoidSettings
   id: NavyCaptain
-  parent: EventHumanoidMindShielded
+  parent: [ EventHumanoidMindShielded ]
   randomizeName: false
   components:
   - type: GhostRole
@@ -338,7 +338,7 @@
 
 - type: randomHumanoidSettings
   id: NavyOfficerUndercover
-  parent: EventHumanoidMindShielded
+  parent: [ EventHumanoidMindShielded ]
   randomizeName: false
   components:
   - type: GhostRole
@@ -383,7 +383,7 @@
 
 - type: randomHumanoidSettings
   id: SpecialOperationsOfficer
-  parent: EventHumanoidMindShielded
+  parent: [ EventHumanoidMindShielded ]
   randomizeName: false
   components:
   - type: GhostRole
@@ -427,7 +427,7 @@
 
 - type: randomHumanoidSettings
   id: DiplomatGear
-  parent: EventHumanoidMindShielded
+  parent: [ EventHumanoidMindShielded ]
   randomizeName: false
   components:
   - type: GhostRole

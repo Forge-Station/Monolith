@@ -4,7 +4,7 @@ using Content.Shared.Research.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Fax.Components;
 
@@ -199,7 +199,7 @@ public sealed partial class FaxPrintout
     [DataField(required: true)]
     public string Content { get; private set; } = default!;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>), required: true)]
+    [DataField(customTypeSerializer: typeof(ProtoId<EntityPrototype>), required: true)]
     public string PrototypeId { get; private set; } = default!;
 
     [DataField("stampState")]

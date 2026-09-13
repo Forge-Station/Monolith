@@ -1,4 +1,4 @@
-﻿using Content.Client.Examine;
+using Content.Client.Examine;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -15,7 +15,6 @@ namespace Content.Client.Power.Generation.Teg;
 /// <seealso cref="TegCirculatorComponent"/>
 public sealed class TegSystem : EntitySystem
 {
-    [ValidatePrototypeId<EntityPrototype>]
     private const string ArrowPrototype = "TegCirculatorArrow";
 
     public override void Initialize()

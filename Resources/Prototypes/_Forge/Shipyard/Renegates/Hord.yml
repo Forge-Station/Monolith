@@ -1,7 +1,7 @@
 - type: vessel
   id: Hord
   parent: BaseVessel
-  name: Хорд
+  name: «Хорд»
   description: Среднегабаритный боевой шаттл Ренегатов
   price: 97000
   category: Medium

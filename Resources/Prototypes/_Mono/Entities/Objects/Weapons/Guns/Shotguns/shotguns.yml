@@ -15,6 +15,7 @@
     sprite: _Mono/Objects/Weapons/Guns/Shotguns/BigLeady.rsi
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
+    projectileSpeed: 25 # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/bigshotgun_fire.ogg
     #fireRate: 1 # Goobstation
@@ -54,6 +55,7 @@
     sprite: _Mono/Objects/Weapons/Guns/Shotguns/BigJohnny.rsi
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
+    projectileSpeed: 25 # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/bigshotgun_fire.ogg
     #fireRate: 1 # Goobstation
@@ -145,6 +147,7 @@
     sprite: _Mono/Objects/Weapons/Guns/Shotguns/BigBuddy.rsi
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
+    projectileSpeed: 25 # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/bigshotgun_fire.ogg
     #fireRate: 1 # Goobstation
@@ -194,6 +197,7 @@
     angleIncrease: 4
     angleDecay: 16
     fireRate: 2
+    projectileSpeed: 25 # Forge-change
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -245,9 +249,10 @@
   - type: Gun
     minAngle: 3
     maxAngle: 12
-    fireRate: 1.2
+    fireRate: 1.5 # Forge-change 1.2->1.5
     angleIncrease: 4
     angleDecay: 4
+    projectileSpeed: 25 # Forge-change
   - type: Tag
     tags:
     - WeaponShotgunHelepolis

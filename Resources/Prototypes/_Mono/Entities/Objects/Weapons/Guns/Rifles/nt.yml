@@ -1,7 +1,7 @@
 #Corporate War Lecter
 
 - type: entity
-  name: wayward NTSF-LTR-556 (5.56x45mm,6.8x52mm Caseless)
+  name: wayward NTSF-LTR-556 (5.56x45mm) # Forge-change 6.8x52mm Caseless->5.56x45mm
   parent: [BaseWeaponRifle, BaseFactionGearOtherFactionT3]
   id: WeaponRifleNtsfLtr
   description: An anomalous rifle. A Light Tactical Rifle ready for use by special forces operatives, chambered in 5.56x45mm. Also accepts 6.8x52mm due to it being a prototype. But... how do you know all this?
@@ -18,16 +18,21 @@
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: Item # Forge-change
+    size: Large # Forge-change Huge->Large
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
   - type: GunWieldBonus
-    minAngle: -32
-    maxAngle: -52
+    minAngle: -33 # Forge-change -32->-33
+    maxAngle: -35 # Forge-change -52->-35
   - type: Gun
-    minAngle: 45
-    maxAngle: 62
-    angleIncrease: 6
-    angleDecay: 40
+    minAngle: 35 # Forge-change 45->35
+    maxAngle: 45 # Forge-change 62->45
+    angleIncrease: 1.25 # Forge-change 6->1.25
+    angleDecay: 10 # Forge-change 40->10
     cameraRecoilScalar: 0
-    fireRate: 9
+    fireRate: 7 # Forge-change 9->7
+    projectileSpeed: 50 # Forge-change
     availableModes:
     - FullAuto
     soundGunshot:
@@ -42,7 +47,7 @@
         priority: 2
         whitelist:
           tags:
-          - Magazine68x52mmCaseless
+          # - Magazine68x52mmCaseless # Forge-change
           - Magazine556x45mmFMJ
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
@@ -51,7 +56,7 @@
         priority: 1
         whitelist:
           tags:
-          - Cartridge68x52mmCaseless
+          # - Cartridge68x52mmCaseless # Forge-change
           - Cartridge556x45mmFMJ
   - type: ContainerContainer
     containers:

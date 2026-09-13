@@ -1,7 +1,7 @@
 using Content.Client.Audio;
 using Content.Shared._Forge.Barks;
 using Content.Shared.Chat;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Robust.Client.Audio;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
@@ -51,7 +51,7 @@ public sealed class BarkSystem : EntitySystem
                 return;
         }
 
-        var userVolume = _cfg.GetCVar(ForgeVars.BarksVolume);
+        var userVolume = _cfg.GetCVar(ForgeCCVars.BarksVolume);
         var baseVolume = SharedAudioSystem.GainToVolume(userVolume * ContentAudioSystem.BarksMultiplier);
 
         float volume = MinimalVolume + baseVolume;

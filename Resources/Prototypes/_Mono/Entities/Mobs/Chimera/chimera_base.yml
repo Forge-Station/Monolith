@@ -9,6 +9,11 @@
   description: A horribly mutated whatever-this-once-was.
   abstract: true
   components:
+  # Forge-Change-Start
+  - type: ShowRoleInformation
+    window: RoleInformationChimera
+    duration: 15
+  #Forge-Change-End
   - type: HTN
     rootTask:
       task: ChimeraHostileCompound

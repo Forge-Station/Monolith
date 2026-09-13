@@ -17,7 +17,6 @@ namespace Content.Server.Mapping
     sealed partial class MappingCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entities = default!;
-        [Dependency] private IMapManager _map = default!;
         [Dependency] private IConfigurationManager _cfg = default!;
 
         public string Command => "mapping";

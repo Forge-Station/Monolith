@@ -7,8 +7,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 27.5
-    armorPenetration: 0.65
+        Piercing: 45 # Forge-change 27.5->45
+    armorPenetration: 0.4 # Forge-change 0.65->0.4
 
 - type: entity
   id: Bullet8x65mmSKRPractice
@@ -30,6 +30,60 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 15
-        Heat: 10
-    armorPenetration: 0.65
+        Piercing: 22 # Forge-change 15->22
+        Heat: 14 # Forge-change 10->14
+    armorPenetration: 0 # Forge-change 0.65->0.1
+
+# Forge-change-start
+- type: entity
+  id: Bullet8x65mmSKRUranium
+  name: bullet (8x65mm SKR uranium)
+  parent: BaseBulletUranium
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 26
+        Radiation: 20
+    armorPenetration: 0.1
+
+- type: entity
+  id: Bullet8x65mmSKRHP
+  parent: BaseBullet
+  name: bullet (8x65mm SKR hollow-point)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Slash: 7
+        Piercing: 48
+    armorPenetration: -0.5
+
+- type: entity
+  id: Bullet8x65mmSKRRIP
+  parent: BaseBullet
+  name: bullet (8x65mm SKR RIP)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Slash: 12
+        Piercing: 58
+    armorPenetration: -0.9
+
+- type: entity
+  id: Bullet8x65mmSKRPlasteelAP
+  parent: BaseBullet
+  name: bullet (8x65mm SKR AP)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 23
+        Structural: 55
+    armorPenetration: 0.95
+# Forge-change-end

@@ -54,6 +54,7 @@
   cost: 50000
   recipeUnlocks:
   - UllmanHardsuitEnforcer
+  - UllmanLightJuggernaut # Forge-change
   - UllmanHardsuitEnforcerMKII
   - UllmanHardsuitMedical # Forge-change
   technologyPrerequisites:

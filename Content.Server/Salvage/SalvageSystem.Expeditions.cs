@@ -183,8 +183,6 @@ public sealed partial class SalvageSystem
 
     private void FinishExpedition(SalvageExpeditionDataComponent component, EntityUid uid, SalvageExpeditionComponent expedition, EntityUid? shuttle)
     {
-        component.NextOffer = _timing.CurTime + TimeSpan.FromSeconds(_cooldown);
-        Announce(uid, Loc.GetString("salvage-expedition-mission-completed"));
         // Finish mission cleanup.
         switch (expedition.MissionParams.MissionType)
         {
@@ -216,21 +214,26 @@ public sealed partial class SalvageSystem
         {
             Log.Debug($"Completed mission {expedition.MissionParams.MissionType} with seed {expedition.MissionParams.Seed}");
             component.NextOffer = _timing.CurTime + TimeSpan.FromSeconds(_cooldown);
-            Announce(uid, Loc.GetString("salvage-expedition-mission-completed"));
             GiveRewards(expedition);
         }
         else
         {
             Log.Debug($"Failed mission {expedition.MissionParams.MissionType} with seed {expedition.MissionParams.Seed}");
             component.NextOffer = _timing.CurTime + TimeSpan.FromSeconds(_failedCooldown);
-            Announce(uid, Loc.GetString("salvage-expedition-mission-failed"));
         }
 
-
+        // Unlock the console before any map-bound announce: this runs during map teardown,
+        // so Announce may no-op. Never leave ActiveMission set or the claim button sticks forever.
         component.ActiveMission = 0;
         component.Cooldown = true;
-        if (shuttle != null) // Frontier
-            UpdateConsoles(shuttle.Value, component); // Frontier
+        // Frontier: 4th arg is owning station (misnamed shuttle at call sites)
+        if (shuttle != null)
+            UpdateConsoles(shuttle.Value, component);
+
+        // Crew already FTL'd out; announce is best-effort and safe if the map is gone.
+        Announce(uid, expedition.Completed
+            ? Loc.GetString("salvage-expedition-mission-completed")
+            : Loc.GetString("salvage-expedition-mission-failed"));
     }
 
     /// <summary>
@@ -315,7 +318,7 @@ public sealed partial class SalvageSystem
             SalvageJobTime,
             EntityManager,
             _timing,
-            _mapManager,
+            _mapSystem,
             _prototypeManager,
             _anchorable,
             _biome,
@@ -326,7 +329,6 @@ public sealed partial class SalvageSystem
             _metaData,
             this,
             _transform,
-            _mapSystem,
             station,
             coordinatesDisk,
             missionParams,

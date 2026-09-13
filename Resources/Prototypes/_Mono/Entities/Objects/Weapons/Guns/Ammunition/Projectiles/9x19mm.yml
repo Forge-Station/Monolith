@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 24
+        Piercing: 21 # Forge-change 24->21
     armorPenetration: 0.05
 
 - type: entity
@@ -31,6 +31,8 @@
     damage:
       types:
         Blunt: 3
+  - type: StaminaDamageOnCollide # Forge-change
+    damage: 18 # Forge-change
 
 - type: entity
   id: Bullet9x19mmIncendiary
@@ -41,8 +43,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
-        Heat: 5
+        Piercing: 11 # Forge-change 10->11
+        Heat: 6 # Forge-change 5->6
     armorPenetration: -0.15
 
 - type: entity
@@ -54,7 +56,7 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 8
+        Radiation: 9 # Forge-change 8->9
         Piercing: 13
     armorPenetration: -0.1
 
@@ -82,8 +84,8 @@
     damage:
       types:
         Slash: 3
-        Piercing: 26
-    armorPenetration: -0.6
+        Piercing: 25 # Forge-change 26->25
+    armorPenetration: -0.6 
 
 - type: entity
   id: Bullet9x19mmRIP
@@ -95,7 +97,7 @@
     damage:
       types:
         Slash: 5
-        Piercing: 35
+        Piercing: 30 # Forge-change 35->30
     armorPenetration: -0.95
 
 #armor-piercing:
@@ -109,6 +111,6 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 7
-        Structural: 25
-    armorPenetration: 0.9
+        Piercing: 15 # Forge-change 7->15
+        Structural: 15 # Forge-change 25->15
+    armorPenetration: 0.4 # Forge-change 0.9->0.4

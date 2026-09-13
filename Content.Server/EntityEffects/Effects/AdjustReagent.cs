@@ -4,7 +4,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.EntityEffects.Effects
 {
@@ -14,7 +14,7 @@ namespace Content.Server.EntityEffects.Effects
         /// <summary>
         ///     The reagent ID to remove. Only one of this and <see cref="Group"/> should be active.
         /// </summary>
-        [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<ReagentPrototype>))]
+        [DataField(customTypeSerializer: typeof(ProtoId<ReagentPrototype>))]
         public string? Reagent = null;
         // TODO use ReagentId
 
@@ -22,7 +22,7 @@ namespace Content.Server.EntityEffects.Effects
         ///     The metabolism group to remove, if the reagent satisfies any.
         ///     Only one of this and <see cref="Reagent"/> should be active.
         /// </summary>
-        [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<MetabolismGroupPrototype>))]
+        [DataField(customTypeSerializer: typeof(ProtoId<MetabolismGroupPrototype>))]
         public string? Group = null;
 
         [DataField(required: true)]

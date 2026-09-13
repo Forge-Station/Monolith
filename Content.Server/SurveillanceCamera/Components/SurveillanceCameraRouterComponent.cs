@@ -1,6 +1,5 @@
 using Content.Shared.DeviceNetwork;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SurveillanceCamera;
 
@@ -23,9 +22,9 @@ public sealed partial class SurveillanceCameraRouterComponent : Component
     [ViewVariables]
     // The frequency that talks to this router's subnet.
     public uint SubnetFrequency;
-    [DataField("subnetFrequency", customTypeSerializer:typeof(PrototypeIdSerializer<DeviceFrequencyPrototype>))]
+    [DataField("subnetFrequency", customTypeSerializer:typeof(ProtoId<DeviceFrequencyPrototype>))]
     public string? SubnetFrequencyId { get; set;  }
 
-    [DataField("setupAvailableNetworks", customTypeSerializer:typeof(PrototypeIdListSerializer<DeviceFrequencyPrototype>))]
+    [DataField("setupAvailableNetworks", customTypeSerializer:typeof(ProtoId<DeviceFrequencyPrototype>))]
     public List<string> AvailableNetworks { get; private set; } = new();
 }

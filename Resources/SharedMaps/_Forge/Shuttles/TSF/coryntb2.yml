@@ -3475,7 +3475,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClothingOuterHardsuitM82c
+- proto: ClothingOuterHardsuitTSFMCM82c # Forge Change
   entities:
   - uid: 1031
     components:

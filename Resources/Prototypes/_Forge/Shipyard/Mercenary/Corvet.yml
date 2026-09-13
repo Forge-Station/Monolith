@@ -1,7 +1,7 @@
 - type: vessel
   id: Corvet
   parent: BaseVessel
-  name: 'MBS Корвет'
+  name: 'MBS «Корвет»'
   description: Средний шаттл наемников с оригинальной системой защиты.
   price: 100000
   category: Medium

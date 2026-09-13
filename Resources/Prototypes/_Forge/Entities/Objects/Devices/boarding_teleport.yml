@@ -5,11 +5,11 @@
   description: A handheld trigger for a linked boarding platform.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Devices/boarding_teleport_remote.rsi
+    sprite: _Forge/Objects/Devices/boarding_teleport_remote.rsi
     state: icon
   - type: Item
     size: Small
-    sprite: Forge/Objects/Devices/boarding_teleport_remote.rsi
+    sprite: _Forge/Objects/Devices/boarding_teleport_remote.rsi
   - type: Signaller
   - type: DeviceNetwork
     deviceNetId: Wireless

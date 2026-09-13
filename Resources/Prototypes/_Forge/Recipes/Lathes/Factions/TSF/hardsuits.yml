@@ -1,0 +1,53 @@
+# M82c hardsuit
+- type: latheRecipe
+  parent: ForgeUniversalSuitT1FactionRecipe
+  id: ClothingOuterHardsuitTSFMCM82c
+  result: ClothingOuterHardsuitTSFMCM82c
+
+# M82b hardsuit
+- type: latheRecipe
+  parent: ForgeUniversalLightSuitT1FactionRecipe
+  id: ClothingOuterHardsuitTSFMCM82b
+  result: ClothingOuterHardsuitTSFMCM82b
+
+# M86 hardsuit
+- type: latheRecipe
+  parent: ForgeUniversalSuitT2FactionRecipe
+  id: ClothingOuterHardsuitTSFMCM86
+  result: ClothingOuterHardsuitTSFMCM86
+
+# M88-T hardsuit
+- type: latheRecipe
+  parent: ForgeLightJuggernautT2FactionRecipe
+  id: ClothingOuterHardsuitTSFMCLightJuggernaut
+  result: ClothingOuterHardsuitTSFMCLightJuggernaut
+
+# M98-H hardsuit
+- type: latheRecipe
+  parent: ForgeHeavyJuggernautT3FactionRecipe
+  id: ClothingOuterHardsuitTSFMCHeavyJuggernaut
+  result: ClothingOuterHardsuitTSFMCHeavyJuggernaut
+
+# M92-X hardsuit
+- type: latheRecipe
+  parent: ForgeEnergyShieldSuitT3FactionRecipe
+  id: ClothingOuterHardsuitTSFMCEnergyShield
+  result: ClothingOuterHardsuitTSFMCEnergyShield
+
+# M93-S hardsuit
+- type: latheRecipe
+  parent: ForgeStealthSuitT3FactionRecipe
+  id: ClothingOuterHardsuitTSFMCStealth
+  result: ClothingOuterHardsuitTSFMCStealth
+
+# M90-M hardsuit
+- type: latheRecipe
+  parent: ForgeUniversalLightSuitT3FactionRecipe
+  id: ClothingOuterHardsuitTSFMCAdvancedLight
+  result: ClothingOuterHardsuitTSFMCAdvancedLight
+
+# M95-R hardsuit
+- type: latheRecipe
+  parent: ForgeReflectSuitT3FactionRecipe
+  id: ClothingOuterHardsuitTSFMCReflectElite
+  result: ClothingOuterHardsuitTSFMCReflectElite

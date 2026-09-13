@@ -7,7 +7,7 @@
   description: A large duffel bag for storing things.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Back/Duffels/renegade.rsi
+    sprite: _Forge/Clothing/Back/Duffels/renegade.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.9
 
@@ -20,7 +20,7 @@
   description: A large duffel bag for holding any army goods.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Back/Duffels/duffel_bag_techniclogistic.rsi
+    sprite: _Forge/Clothing/Back/Duffels/duffel_bag_techniclogistic.rsi
   - type: Storage
     grid:
     - 0,0,7,4
@@ -34,7 +34,7 @@
   description: A large duffel bag for holding any army goods.
   components:
   - type: Sprite
-    sprite: Forge/Back/Duffels/military.rsi
+    sprite: _Forge/Clothing/Back/Duffels/military.rsi
   - type: Storage
     grid:
     - 0,0,7,4
@@ -48,9 +48,9 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Back/Duffels/tti.rsi
+    sprite: _Forge/Clothing/Back/Duffels/tti.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Back/Duffels/tti.rsi
+    sprite: _Forge/Clothing/Back/Duffels/tti.rsi
   - type: Storage
     grid:
     - 0,0,7,4
@@ -65,7 +65,7 @@
   description: Большой вещмешок для хранения предтательских предметов. Выглядит стильно и оригинально.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Back/Duffels/contractor.rsi
+    sprite: _Forge/Clothing/Back/Duffels/contractor.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: Storage

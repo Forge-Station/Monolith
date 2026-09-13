@@ -5,7 +5,7 @@
   suffix: Non-lethal
   components:
   - type: BallisticAmmoProvider # Inherit whitelist, capacity from parent
-    proto: Cartridge762x54mmRRubber
+    proto: Cartridge357_magnumRubber # Forge-change Cartridge762x54mmRRubber->Cartridge357_magnumRubber
 
 # Frontier
 - type: entity
@@ -16,6 +16,7 @@
   components:
   - type: Sprite
     sprite: _NF/Objects/Weapons/Guns/Snipers/repeater.rsi
+  - type: GunRequiresWield # Forge-change
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/Snipers/repeater.rsi
   - type: StaticPrice

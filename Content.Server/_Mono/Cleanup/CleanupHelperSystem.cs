@@ -13,7 +13,7 @@ namespace Content.Server._Mono.Cleanup;
 /// </summary>
 public sealed partial class CleanupHelperSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private SharedMapSystem _mapMan = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IGameTiming _timing = default!;

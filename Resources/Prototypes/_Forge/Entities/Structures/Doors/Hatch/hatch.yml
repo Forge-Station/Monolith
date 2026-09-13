@@ -42,7 +42,7 @@
   suffix: Ренегаты, Locked
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Hatch/ren_hatch.rsi
+    sprite: _Forge/Structures/Doors/Hatch/ren_hatch.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsRenegate ]
@@ -54,7 +54,7 @@
   suffix: Forge, Remnant
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/remnant_hatch.rsi
+    sprite: _Forge/Structures/Doors/Airlocks/Standard/remnant_hatch.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsRemnant ]

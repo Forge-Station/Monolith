@@ -6,10 +6,10 @@
   suffix: Forge
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Belt/prazat_sheath.rsi
+    sprite: _Forge/Clothing/Belt/prazat_sheath.rsi
     state: sheath
   - type: Clothing
-    sprite: Forge/Clothing/Belt/prazat_sheath.rsi
+    sprite: _Forge/Clothing/Belt/prazat_sheath.rsi
   - type: Item
     size: Ginormous
   - type: ItemSlots

@@ -6,6 +6,6 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Belt/tti_belt.rsi
+    sprite: _Forge/Clothing/Belt/tti_belt.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Belt/tti_belt.rsi
+    sprite: _Forge/Clothing/Belt/tti_belt.rsi

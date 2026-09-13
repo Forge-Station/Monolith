@@ -3,6 +3,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
+using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Server.Atmos
 {
@@ -11,7 +12,8 @@ namespace Content.Server.Atmos
     ///     You shouldn't use this directly, use <see cref="AtmosphereSystem"/> instead.
     /// </summary>
     [Access(typeof(AtmosphereSystem), typeof(GasTileOverlaySystem), typeof(AtmosDebugOverlaySystem))]
-    public sealed class TileAtmosphere : IGasMixtureHolder
+    [ImplicitDataDefinitionForInheritors]
+    public sealed partial class TileAtmosphere : IGasMixtureHolder
     {
         [ViewVariables]
         public int ArchivedCycle;

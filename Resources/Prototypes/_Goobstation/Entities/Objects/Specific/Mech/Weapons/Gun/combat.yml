@@ -9,7 +9,7 @@
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_pulse
   - type: Gun
-    fireRate: 1.5
+    fireRate: 2.5 # Forge-change 1.5->2.5
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -55,7 +55,7 @@
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_laser
   - type: Gun
-    fireRate: 1.5 # Mono
+    fireRate: 2 # Forge-change 1.5->2
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -78,7 +78,7 @@
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_laser
   - type: Gun
-    fireRate: 2 # Mono
+    fireRate: 3 # Forge-change 2->3
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -86,7 +86,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: HitscanBatteryAmmoProvider
     proto: RedMediumLaser # Mono
-    fireCost: 15 # Mono
+    fireCost: 20 # Forge-change 15->20
   - type: Appearance
   - type: AmmoCounter
 
@@ -174,7 +174,7 @@
     state: mecha_scatter
   - type: Gun
     fireRate: 1.5 # 0.5->1.5 Mono
-    projectileSpeed: 40 # Mono
+    projectileSpeed: 25 # Forge-change 40->25
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -198,7 +198,7 @@
     state: mecha_carbine
   - type: Gun
     fireRate: 1.8 # 1.2->1.8 Mono
-    projectileSpeed: 40 # Mono
+    projectileSpeed: 25 # Forge-change 40->25
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -221,8 +221,8 @@
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_uac2
   - type: Gun
-    fireRate: 4.5 # 3->4.5 Mono
-    projectileSpeed: 55 # Mono
+    fireRate: 5.5 # Forge-change 4.5->5.5
+    projectileSpeed: 50 # Forge-change 55->50
     selectedMode: FullAuto
     availableModes:
       - FullAuto

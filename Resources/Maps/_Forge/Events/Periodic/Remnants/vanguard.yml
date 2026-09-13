@@ -12373,7 +12373,7 @@ entities:
       startingCharge: 0
     - type: ApcPowerReceiver
       powerLoad: 100
-- proto: GyroscopeSecurity
+- proto: GyroscopeADS # Forge-Change
   entities:
   - uid: 2171
     components:
@@ -14461,7 +14461,7 @@ entities:
     - type: Transform
       pos: 0.49465197,-10.583868
       parent: 1
-- proto: ThrusterLargeRogue
+- proto: ThrusterLargeADS # Forge-Change
   entities:
   - uid: 2484
     components:

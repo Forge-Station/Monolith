@@ -3,7 +3,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.Utility;
 using Robust.Shared.Serialization;
 
@@ -26,12 +25,12 @@ namespace Content.Shared.Damage
 
         // These exist solely so the wiki works. Please do not touch them or use them.
         [JsonPropertyName("types")]
-        [DataField("types", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, DamageTypePrototype>))]
+        [DataField("types", customTypeSerializer: typeof(ProtoId<DamageTypePrototype>))]
         [UsedImplicitly]
         private Dictionary<string,FixedPoint2>? _damageTypeDictionary;
 
         [JsonPropertyName("groups")]
-        [DataField("groups", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, DamageGroupPrototype>))]
+        [DataField("groups", customTypeSerializer: typeof(ProtoId<DamageGroupPrototype>))]
         [UsedImplicitly]
         private Dictionary<string, FixedPoint2>? _damageGroupDictionary;
 

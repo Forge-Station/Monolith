@@ -12,7 +12,7 @@
   suffix: USSP Secure, Locked
   components:
   - type: AccessReader
-    access: [["USSPHigh"]]
+    access: [["Mercenary"], ["Captain"]] # Forge-Change
 
 - type: entity
   parent: DoorElectronics
@@ -20,7 +20,7 @@
   suffix: USSP Command, Locked
   components:
   - type: AccessReader
-    access: [["USSPCommand"]]
+    access: [["Mercenary"], ["Captain"]] # Forge-Change
 
 - type: entity
   parent: DoorElectronics
@@ -60,7 +60,7 @@
   suffix: Viper Group Command, Locked
   components:
   - type: AccessReader
-    access: [["ViperCommand"]]
+    access: [["Mercenary"], ["Captain"]] # Forge-Change
 
 # Forge-Change: disabled MMC — default unlocked DoorElectronics (no Mieyo access)
 - type: entity

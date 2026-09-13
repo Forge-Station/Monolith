@@ -35,7 +35,7 @@
 
 - type: loadout
   id: ContractorClothingMaskPunkHalf
-  name: punk halfmask (random)
+  name: loadout-name-ContractorClothingMaskPunkHalf
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1

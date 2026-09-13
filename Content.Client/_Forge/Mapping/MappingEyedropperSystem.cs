@@ -13,7 +13,6 @@ namespace Content.Client._Forge.Mapping;
 
 public sealed class MappingEyedropperSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _maps = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -114,7 +113,7 @@ public sealed class MappingEyedropperSystem : EntitySystem
 
         var mapPos = _transform.ToMapCoordinates(coords, logError: false);
 
-        if (!_maps.TryFindGridAt(mapPos, out var gridUid, out var grid) ||
+        if (!_mapSystem.TryFindGridAt(mapPos, out var gridUid, out var grid) ||
             !_mapSystem.TryGetTileRef(gridUid, grid, coords, out var tileRef))
         {
             return false;
@@ -133,7 +132,7 @@ public sealed class MappingEyedropperSystem : EntitySystem
 
         var mapPos = _transform.ToMapCoordinates(coords, logError: false);
 
-        if (!_maps.TryFindGridAt(mapPos, out var gridUid, out _))
+        if (!_mapSystem.TryFindGridAt(mapPos, out var gridUid, out _))
             return false;
 
         var local = _transform.ToCoordinates(gridUid, mapPos);

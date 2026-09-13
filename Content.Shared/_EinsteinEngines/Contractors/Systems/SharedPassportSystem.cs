@@ -4,20 +4,18 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Prototypes;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Preferences;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
-using Robust.Shared;
-using Content.Shared.CCVar;
 using Content.Shared.Roles;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 using Content.Shared.GameTicking;
-using Content.Shared.Humanoid;
+using Content.Shared.UserInterface;
+using Content.Shared._Forge.Contractors;
 
 namespace Content.Shared._EE.Contractors.Systems;
 
@@ -25,9 +23,7 @@ public sealed class SharedPassportSystem : EntitySystem
 {
     public const int CurrentYear = 3026;
     const string PIDChars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789";
-    private static readonly TimeSpan ToggleCooldown = TimeSpan.FromSeconds(1);  // Forge-Change
 
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -35,21 +31,25 @@ public sealed class SharedPassportSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _sharedTransformSystem = default!;
     [Dependency] private readonly IConfigurationManager _configManager = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PassportComponent, UseInHandEvent>(OnUseInHand);
-        // SubscribeLocalEvent<PlayerLoadoutAppliedEvent>(OnPlayerLoadoutApplied);
-        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<PassportComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+        // Forge-change-start
+        SubscribeLocalEvent<PassportComponent, BeforeActivatableUIOpenEvent>(OnBeforeUiOpen);
+        SubscribeLocalEvent<PassportComponent, BoundUIOpenedEvent>(OnUiOpened);
+        SubscribeLocalEvent<PassportComponent, BoundUIClosedEvent>(OnUiClosed);
+        // Forge-change-end
     }
 
     private void OnExamined(EntityUid uid, PassportComponent component, ExaminedEvent args)
     {
         if (!args.IsInDetailsRange
-            || component.IsClosed
+            || component.IsClosed // Forge-Change
             || component.OwnerProfile == null)
             return;
 
@@ -62,17 +62,11 @@ public sealed class SharedPassportSystem : EntitySystem
         args.PushMarkup(Loc.GetString("passport-year-of-birth", ("year", CurrentYear - component.OwnerProfile.Age)), 47);
 
         args.PushMarkup(
-            Loc.GetString("passport-pid", ("pid", GenerateIdentityString(component.OwnerProfile.Name
-            + component.OwnerProfile.Appearance.Height
-            + component.OwnerProfile.Age
-            + component.OwnerProfile.Appearance.Height
-            + component.OwnerProfile.FlavorText))),
+            Loc.GetString("passport-pid", ("pid", GetPassportId(component.OwnerProfile))),
             46);
     }
 
     // Forge-change-start
-    // private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev) =>
-    //     SpawnPassportForPlayer(ev.Mob, ev.Profile, ev.JobId);
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         if (!ShouldSpawnPassports)
@@ -91,24 +85,19 @@ public sealed class SharedPassportSystem : EntitySystem
 
     public void SpawnPassportForPlayer(EntityUid mob, HumanoidCharacterProfile profile, string? jobId)
     {
-        if (jobId == null || !_prototypeManager.TryIndex(
-                jobId,
-                out JobPrototype? jobPrototype)
-            // || !jobPrototype.CanHavePassport
+        if (jobId == null
+            || !_prototypeManager.HasIndex<JobPrototype>(jobId)
             || Deleted(mob)
             || !Exists(mob)
             || !ShouldSpawnPassports)
             return;
 
-        if (!_prototypeManager.TryIndex(
-            profile.Nationality,
-            out NationalityPrototype? nationalityPrototype) || !_prototypeManager.TryIndex(nationalityPrototype.PassportPrototype, out EntityPrototype? entityPrototype))
+        var coords = _sharedTransformSystem.GetMapCoordinates(mob);
+        var passportEntity = TryCreatePassport(profile, coords);
+        if (passportEntity == null)
             return;
 
-        var passportEntity = _entityManager.SpawnEntity(entityPrototype.ID, _sharedTransformSystem.GetMapCoordinates(mob));
-        var passportComponent = _entityManager.GetComponent<PassportComponent>(passportEntity);
-
-        UpdatePassportProfile(new(passportEntity, passportComponent), profile);
+        RaiseLocalEvent(new PassportIssuedEvent(mob, profile, jobId, GetPassportId(profile))); // Forge-Change
 
         bool passportStored = false;
 
@@ -117,9 +106,9 @@ public sealed class SharedPassportSystem : EntitySystem
             _entityManager.TryGetComponent<StorageComponent>(wallet, out var walletStorage))
         // Try inserting the entity into the wallet
         {
-            if (_entityManager.TryGetComponent<ItemComponent>(passportEntity, out var itemComp) &&
-                _storage.CanInsert(wallet.Value, passportEntity, out _, walletStorage, itemComp) &&
-                _storage.Insert(wallet.Value, passportEntity, out _, playSound: false))
+            if (_entityManager.TryGetComponent<ItemComponent>(passportEntity.Value, out var itemComp) &&
+                _storage.CanInsert(wallet.Value, passportEntity.Value, out _, walletStorage, itemComp) &&
+                _storage.Insert(wallet.Value, passportEntity.Value, out _, playSound: false))
             {
                 passportStored = true;
             }
@@ -129,9 +118,9 @@ public sealed class SharedPassportSystem : EntitySystem
         if (passportStored != true && _inventory.TryGetSlotEntity(mob, "back", out var item) && _entityManager.TryGetComponent<StorageComponent>(item, out var inventory))
         // Try inserting the entity into the storage, if it can't, it leaves the loadout item on the ground
         {
-            if (!_entityManager.TryGetComponent<ItemComponent>(passportEntity, out var itemComp)
-                || !_storage.CanInsert(item.Value, passportEntity, out _, inventory, itemComp)
-                || !_storage.Insert(item.Value, passportEntity, out _, playSound: false))
+            if (!_entityManager.TryGetComponent<ItemComponent>(passportEntity.Value, out var itemComp)
+                || !_storage.CanInsert(item.Value, passportEntity.Value, out _, inventory, itemComp)
+                || !_storage.Insert(item.Value, passportEntity.Value, out _, playSound: false))
             {
                 _adminLogManager.Add(
                     LogType.EntitySpawn,
@@ -144,31 +133,87 @@ public sealed class SharedPassportSystem : EntitySystem
     private bool ShouldSpawnPassports =>
         _configManager.GetCVar<bool>("contractors.enabled");
 
+    // Forge-Change
+    public EntityUid? TryCreatePassport(HumanoidCharacterProfile profile, MapCoordinates coordinates)
+    {
+        if (!_prototypeManager.TryIndex(profile.Nationality, out NationalityPrototype? nationality) ||
+            !_prototypeManager.TryIndex(nationality.PassportPrototype, out EntityPrototype? prototype))
+            return null;
+
+        var passport = _entityManager.SpawnEntity(prototype.ID, coordinates);
+        var passportComp = _entityManager.GetComponent<PassportComponent>(passport);
+        UpdatePassportProfile(new Entity<PassportComponent>(passport, passportComp), profile);
+        return passport;
+    }
+
     public void UpdatePassportProfile(Entity<PassportComponent> passport, HumanoidCharacterProfile profile)
     {
         passport.Comp.OwnerProfile = profile;
+        Dirty(passport);
         var evt = new PassportProfileUpdatedEvent(profile);
         RaiseLocalEvent(passport, ref evt);
+
+        // Forge-change-start
+        if (_uiSystem.IsUiOpen(passport.Owner, PassportUiKey.Key))
+            UpdateUserInterface(passport);
+        // Forge-change-end
     }
 
-    private void OnUseInHand(Entity<PassportComponent> passport, ref UseInHandEvent evt)
+    // Forge-change-start
+    private void OnBeforeUiOpen(Entity<PassportComponent> passport, ref BeforeActivatableUIOpenEvent args)
     {
-        if (evt.Handled || !_timing.IsFirstTimePredicted)
+        UpdateUserInterface(passport);
+    }
+
+    private void OnUiOpened(Entity<PassportComponent> passport, ref BoundUIOpenedEvent args)
+    {
+        if (args.UiKey is not PassportUiKey)
             return;
 
-        evt.Handled = true;
+        SetClosed(passport, false);
+    }
 
-        // Forge-Change-start
-        // Cooldown prevents rapid open/close spam and also reduces client/server prediction desync.
-        if (_timing.CurTime < passport.Comp.ToggleCooldownEnd)
+    private void OnUiClosed(Entity<PassportComponent> passport, ref BoundUIClosedEvent args)
+    {
+        if (args.UiKey is not PassportUiKey)
             return;
 
-        passport.Comp.ToggleCooldownEnd = _timing.CurTime + ToggleCooldown;
-        // Forge-Change-end
-        passport.Comp.IsClosed = !passport.Comp.IsClosed;
+        if (_uiSystem.IsUiOpen(passport.Owner, PassportUiKey.Key))
+            return;
+
+        SetClosed(passport, true);
+    }
+
+    private void UpdateUserInterface(Entity<PassportComponent> passport)
+    {
+        var pid = passport.Comp.OwnerProfile != null
+            ? GetPassportId(passport.Comp.OwnerProfile)
+            : string.Empty;
+
+        _uiSystem.SetUiState(passport.Owner, PassportUiKey.Key,
+            new PassportBoundUserInterfaceState(passport.Comp.OwnerProfile, pid));
+    }
+
+    private void SetClosed(Entity<PassportComponent> passport, bool closed)
+    {
+        if (passport.Comp.IsClosed == closed)
+            return;
+
+        passport.Comp.IsClosed = closed;
+        Dirty(passport);
 
         var passportEvent = new PassportToggleEvent();
         RaiseLocalEvent(passport, ref passportEvent);
+    }
+    // Forge-change-end
+
+    public static string GetPassportId(HumanoidCharacterProfile profile)
+    {
+        return GenerateIdentityString(profile.Name
+            + profile.Appearance.Height
+            + profile.Age
+            + profile.Appearance.Height
+            + profile.FlavorText);
     }
 
     private static string GenerateIdentityString(string seed)

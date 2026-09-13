@@ -6,6 +6,7 @@ using Content.Shared._Crescent.ShipShields;
 using Content.Shared._Mono.SpaceArtillery;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
+using Content.Shared.Wires;
 using Robust.Server.GameObjects;
 // Forge-Change: Robust.Server.GameStates dropped along with PvsOverrideSystem.
 using Robust.Shared.Map;
@@ -106,12 +107,28 @@ public sealed partial class ShipShieldsSystem : EntitySystem
 
             AdjustEmitterLoad(uid, emitter, power);
 
-            var parent = Transform(uid).GridUid;
+            var xform = Transform(uid);
+            var parent = xform.GridUid;
+
+            // Forge-Change: drop stale bubble refs (deleted during deconstruct / FTL) so power-restore
+            // after a BSS jump cannot treat a dead EntityUid as an active shield.
+            if (emitter.Shield is { } existingShield && TerminatingOrDeleted(existingShield))
+            {
+                emitter.Shield = null;
+                emitter.Shielded = null;
+            }
 
             if (parent == null)
+            {
+                DropEmitterShield(uid, emitter);
+                UpdateReplicatedEmitterState(uid, emitter, null);
                 continue;
+            }
 
             var filter = _station.GetInOwningStation(uid);
+            var disabledGrid = HasComp<ShipShieldDisabledGridComponent>(parent.Value);
+            // Forge-Change: open maintenance panel / unanchored frame must not keep a combat shield up.
+            var operational = IsEmitterOperational(uid, xform);
 
             if (emitter.Damage > emitter.DamageLimit)
             {
@@ -122,7 +139,17 @@ public sealed partial class ShipShieldsSystem : EntitySystem
                 emitter.OverloadAccumulator = pun;
             }
 
-            if (!emitter.Recharging && emitter.Shield is null && emitter.OverloadAccumulator < 1)
+            if (!operational || disabledGrid || emitter.Recharging || emitter.OverloadAccumulator > 0)
+            {
+                if (emitter.Shield is not null || emitter.Shielded is not null
+                    || (TryComp<ShipShieldedComponent>(parent.Value, out var shielded) && shielded.Source == uid))
+                {
+                    DropEmitterShield(uid, emitter);
+                    if (operational && !disabledGrid)
+                        _audio.PlayGlobal(emitter.PowerDownSound, filter, true, emitter.PowerUpSound.Params);
+                }
+            }
+            else if (emitter.Shield is null)
             {
                 var shield = ShieldEntity(parent.Value, uid);
                 if (shield != EntityUid.Invalid)
@@ -131,22 +158,57 @@ public sealed partial class ShipShieldsSystem : EntitySystem
                     emitter.Shielded = parent.Value;
                 }
             }
-            else if ((emitter.Recharging || emitter.OverloadAccumulator > 0) && emitter.Shield is not null || HasComp<ShipShieldDisabledGridComponent>(Transform(uid).GridUid))
-            {
-                UnshieldEntity(parent.Value);
-                emitter.Shield = null;
-                emitter.Shielded = null;
-                if (!HasComp<ShipShieldDisabledGridComponent>(Transform(uid).GridUid))
-                    _audio.PlayGlobal(emitter.PowerDownSound, filter, true, emitter.PowerUpSound.Params);
-            }
 
             // Forge-Change-Start
             // Replicate emitter state via the networked component instead of pushing a full BUI refresh
             // to every shuttle/fire-control console on the grid each tick.
-            var gridUid = Transform(uid).GridUid;
-            UpdateReplicatedEmitterState(uid, emitter, gridUid);
+            UpdateReplicatedEmitterState(uid, emitter, parent);
             // Forge-Change-End
         }
+    }
+
+    /// <summary>
+    /// Forge-Change: emitters only raise a field while bolted, intact, and with the panel closed.
+    /// </summary>
+    private bool IsEmitterOperational(EntityUid uid, TransformComponent xform)
+    {
+        if (TerminatingOrDeleted(uid) || !xform.Anchored || xform.GridUid == null)
+            return false;
+
+        if (TryComp<WiresPanelComponent>(uid, out var panel) && panel.Open)
+            return false;
+
+        return true;
+    }
+
+    /// <summary>
+    /// Forge-Change: tear down this emitter's bubble and clear local refs (grid + orphan Source lookup).
+    /// </summary>
+    private void DropEmitterShield(EntityUid uid, ShipShieldEmitterComponent emitter)
+    {
+        if (emitter.Shielded is { } shieldedGrid)
+            UnshieldEntity(shieldedGrid);
+
+        if (emitter.Shield is { } bubble && !TerminatingOrDeleted(bubble))
+            TryQueueDel(bubble);
+
+        // Orphan bubbles / ShipShieldedComponent that still name this emitter as Source.
+        var shieldedQuery = AllEntityQuery<ShipShieldedComponent>();
+        while (shieldedQuery.MoveNext(out var gridUid, out var shielded))
+        {
+            if (shielded.Source == uid)
+                UnshieldEntity(gridUid, shielded);
+        }
+
+        var bubbleQuery = AllEntityQuery<ShipShieldComponent>();
+        while (bubbleQuery.MoveNext(out var bubbleUid, out var shieldComp))
+        {
+            if (shieldComp.Source == uid && !TerminatingOrDeleted(bubbleUid))
+                TryQueueDel(bubbleUid);
+        }
+
+        emitter.Shield = null;
+        emitter.Shielded = null;
     }
 
     // Forge-Change-Start: compute Online/RechargeEndTime/HP and Dirty only when something meaningfully changed.
@@ -253,10 +315,17 @@ public sealed partial class ShipShieldsSystem : EntitySystem
             return;
         }
 
-        if (!TryComp<ShipShieldGridStateComponent>(gridUid, out var gridState) || !gridState.HasEmitter)
+        if (!TryComp<ShipShieldGridStateComponent>(gridUid, out var gridState))
+            return;
+
+        // Forge-Change: clear Online as well — otherwise radar keeps drawing a dead field after deconstruct/FTL.
+        if (!gridState.HasEmitter && !gridState.Online && !gridState.Recharging)
             return;
 
         gridState.HasEmitter = false;
+        gridState.Online = false;
+        gridState.Recharging = false;
+        gridState.RechargeEndTime = null;
         Dirty(gridUid, gridState);
     }
 
@@ -322,6 +391,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         // Forge-Change: keep grid snapshot in sync when emitters are added or re-anchored.
         SubscribeLocalEvent<ShipShieldEmitterComponent, ComponentStartup>(OnEmitterStartup);
         SubscribeLocalEvent<ShipShieldEmitterComponent, AnchorStateChangedEvent>(OnEmitterAnchorChanged);
+        SubscribeLocalEvent<ShipShieldEmitterComponent, PanelChangedEvent>(OnEmitterPanelChanged);
 
         InitializeCommands();
         InitializeEmitters();
@@ -335,14 +405,35 @@ public sealed partial class ShipShieldsSystem : EntitySystem
             RefreshGridShieldState(gridUid.Value);
     }
 
-    private void OnEmitterAnchorChanged(EntityUid uid, ShipShieldEmitterComponent _, ref AnchorStateChangedEvent args)
+    private void OnEmitterAnchorChanged(EntityUid uid, ShipShieldEmitterComponent emitter, ref AnchorStateChangedEvent args)
     {
         if (!args.Anchored)
+        {
+            DropEmitterShield(uid, emitter);
+            var grid = Transform(uid).GridUid;
+            if (grid != null)
+                RefreshGridShieldState(grid.Value);
             return;
+        }
 
         var gridUid = Transform(uid).GridUid;
         if (gridUid != null)
             RefreshGridShieldState(gridUid.Value);
+    }
+
+    private void OnEmitterPanelChanged(EntityUid uid, ShipShieldEmitterComponent emitter, ref PanelChangedEvent args)
+    {
+        if (!args.Open)
+            return;
+
+        var hadShield = emitter.Shield != null || emitter.Shielded != null;
+        DropEmitterShield(uid, emitter);
+        if (hadShield)
+            _audio.PlayGlobal(emitter.PowerDownSound, _station.GetInOwningStation(uid), true, emitter.PowerUpSound.Params);
+
+        var panelGrid = Transform(uid).GridUid;
+        if (panelGrid != null)
+            RefreshGridShieldState(panelGrid.Value);
     }
     // Forge-Change-End
 
@@ -383,12 +474,9 @@ public sealed partial class ShipShieldsSystem : EntitySystem
 
     private void OnEmitterShutdown(EntityUid uid, ShipShieldEmitterComponent emitter, ComponentShutdown args) // Mono
     {
-        if (emitter.Shielded != null)
-        {
-            UnshieldEntity(emitter.Shielded.Value);
-            emitter.Shield = null;
-            emitter.Shielded = null;
-        }
+        // Forge-Change: always scrub orphans — ChangeEntity/QueueDel during crowbar deconstruct can leave
+        // a live bubble whose Source still points at this emitter across a BSS jump.
+        DropEmitterShield(uid, emitter);
 
         // Forge-Change: drop replicated-state snapshot; component removal already propagates to clients.
         _lastNet.Remove(uid);
@@ -408,7 +496,16 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     private EntityUid ShieldEntity(EntityUid entity, EntityUid? source = null, MapGridComponent? mapGrid = null)
     {
         if (TryComp<ShipShieldedComponent>(entity, out var existingShielded))
-            return existingShielded.Shield;
+        {
+            // Forge-Change: only reuse the bubble when it still belongs to this emitter.
+            if (source != null && existingShielded.Source != null && existingShielded.Source != source)
+                return EntityUid.Invalid;
+
+            if (existingShielded.Shield is { } existingBubble && !TerminatingOrDeleted(existingBubble))
+                return existingBubble;
+
+            RemComp<ShipShieldedComponent>(entity);
+        }
 
         if (!Resolve(entity, ref mapGrid, false) || HasComp<ShipShieldDisabledGridComponent>(Transform(entity).GridUid))
             return EntityUid.Invalid;

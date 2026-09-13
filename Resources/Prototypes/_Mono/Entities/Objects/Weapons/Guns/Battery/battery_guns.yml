@@ -14,7 +14,9 @@
     - Back
     - SuitStorage
   - type: Gun
-    fireRate: 2
+    minAngle: 1 # Forge-change
+    maxAngle: 2 # Forge-change
+    fireRate: 1.35 # Forge-change 2->1.35
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: ProjectileBatteryAmmoProvider
@@ -29,13 +31,15 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,3,0
+    - 0,0,3,1 # Forge-change 0,0,3,0->0,0,3,1
     sprite: _Mono/Objects/Weapons/Guns/Battery/dignity_shotgun.rsi
   - type: Battery
     maxCharge: 1200
     startingCharge: 1200
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 24
+    autoRechargeRate: 50
+    autoRechargePause: true
+    autoRechargePauseTime: 10
   - type: GunSpreadModifier
     spread: 0.8

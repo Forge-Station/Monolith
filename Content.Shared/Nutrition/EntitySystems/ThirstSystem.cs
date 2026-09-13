@@ -23,13 +23,10 @@ public sealed partial class ThirstSystem : EntitySystem
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
     [Dependency] private SharedJetpackSystem _jetpack = default!;
 
-    [ValidatePrototypeId<SatiationIconPrototype>]
     private const string ThirstIconOverhydratedId = "ThirstIconOverhydrated";
 
-    [ValidatePrototypeId<SatiationIconPrototype>]
     private const string ThirstIconThirstyId = "ThirstIconThirsty";
 
-    [ValidatePrototypeId<SatiationIconPrototype>]
     private const string ThirstIconParchedId = "ThirstIconParched";
 
     public override void Initialize()

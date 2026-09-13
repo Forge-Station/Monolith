@@ -1,0 +1,35 @@
+- type: entity
+  id: ThrusterADS
+  name: thruster ADS
+  parent: [ThrusterSecurity, BaseStructureDisableToolUse]
+  suffix: ADS
+  components:
+  - type: Sprite
+    sprite: _Mono/Structures/Shuttles/thrusterrogue.rsi
+  - type: Machine
+    board: ThrusterRogueMachineCircuitboard
+    partOverrides:
+      Capacitor: QuadraticCapacitorStockPart
+
+- type: entity
+  id: ThrusterLargeADS
+  name: large thruster ADS
+  parent: ThrusterADS
+  suffix: ADS
+  components:
+  - type: Sprite
+    sprite: _Mono/Structures/Shuttles/thrusterrogue_large.rsi
+
+- type: entity
+  id: GyroscopeADS
+  parent: [Gyroscope, BaseStructureDisableToolUse]
+  name : gyroscope ADS
+  suffix: ADS
+  components:
+  - type: Sprite
+    sprite: _NF/Structures/Shuttles/gyroscope.rsi
+  - type: Machine
+    board: GyroscopeSecurityMachineCircuitboard
+    partOverrides:
+      Capacitor: QuadraticCapacitorStockPart
+      Manipulator: FemtoManipulatorStockPart

@@ -128,7 +128,7 @@
 # POI
 - type: entity
   id: ShieldGeneratorPOI
-  parent: ShieldGeneratorBase
+  parent: [ShieldGeneratorBase, BaseStructureDisableToolUse] # Forge-Change
   name: FS-421 "Fortress" Outpost Shield Generator
   description: The Fortress. The latest and greatest in static, large-scale shielding.
   suffix: POI ONLY

@@ -2,7 +2,7 @@ using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Forge.Demon.Components;
 
@@ -12,7 +12,7 @@ public sealed partial class DamageOnActionComponent : Component
     [DataField(required: true), AutoNetworkedField]
     public DamageSpecifier Damage = default!;
 
-    [DataField("action", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("action", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string? Action = "InstantRegeneration";
 
     [DataField("actionEntity")]

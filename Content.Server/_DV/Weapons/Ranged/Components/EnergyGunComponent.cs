@@ -1,5 +1,5 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+
 using Content.Server._DV.Weapons.Ranged.Systems;
 
 namespace Content.Server._DV.Weapons.Ranged.Components;
@@ -34,7 +34,7 @@ public sealed partial class EnergyWeaponFireMode
     /// <summary>
     /// The projectile prototype associated with this firing mode
     /// </summary>
-    [DataField("proto", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("proto", required: true, customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string Prototype = default!;
 
     /// <summary>

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision2Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitUsspL27
   name: USSP L-27 tacsuit helmet
   description: The standard combat suit of USSP naval operations, outfitted with a medical hud too!
@@ -17,10 +17,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        Blunt: 0.9 # Forge-change 0.95 -> 0.9
+        Slash: 0.9 # Forge-change 0.95 -> 0.9
+        Piercing: 0.9 # Forge-change 0.95 -> 0.9
+        Heat: 0.9 # Forge-change 0.95 -> 0.9
   - type: HideLayerClothing
     slots:
     - Hair
@@ -29,7 +29,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitUsspL10
   name: USSP L-10 lightsuit helmet
   description: An old USSP model of combat suit that is still in use in the frontlines.
@@ -59,7 +59,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ClothingNightVision2Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitUsspL10A
   name: USSP L-10-A lightsuit helmet
   description: An old USSP model of combat suit that is still in use in the frontlines.
@@ -89,7 +89,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase,]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision2Normal, ShowMedicalIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitUsspM10
   name: USSP M-10 scoutsuit helmet
   description: A new prototype of combat suit using the old L-10 as a baseline. It has a integrated mass scanner in his helmet.
@@ -117,10 +117,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.90
-        Slash: 0.90
-        Piercing: 0.90
-        Heat: 0.90
+        Blunt: 0.95 # Forge-change 0.9 -> 0.95
+        Slash: 0.95 # Forge-change 0.9 -> 0.95
+        Piercing: 0.95 # Forge-change 0.9 -> 0.95
+        Heat: 0.95 # Forge-change 0.9 -> 0.95
   - type: HideLayerClothing
     slots:
     - Hair
@@ -129,7 +129,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitUsspL30
   name: USSP L-30 Commissar parade hardsuit tactical helmet
   description: The commissar's parade hardsuit helmet, outfitted with a medical hud too to check on the troops!
@@ -147,10 +147,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        Blunt: 0.9 # Forge-change 0.95 -> 0.9
+        Slash: 0.9 # Forge-change 0.95 -> 0.9
+        Piercing: 0.9 # Forge-change 0.95 -> 0.9
+        Heat: 0.9 # Forge-change 0.95 -> 0.9
   - type: HideLayerClothing
     slots:
     - Hair
@@ -159,7 +159,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ClothingNightVision2Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitOfficerCombat
   name: USSP UF-16 "Voenkom" commissar tacsuit helmet
   description: Cold, imposing, and unmistakably Union -- developed to instill discipline and fear. It's visor grants enhanced battlefield awareness with It's built-in command control map. Ideal for Commissars overseeing frontline operations.
@@ -187,10 +187,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        Blunt: 0.9 # Forge-change 0.95 -> 0.9
+        Slash: 0.9 # Forge-change 0.95 -> 0.9
+        Piercing: 0.9 # Forge-change 0.95 -> 0.9
+        Heat: 0.9 # Forge-change 0.95 -> 0.9
   - type: HideLayerClothing
     slots:
     - Hair

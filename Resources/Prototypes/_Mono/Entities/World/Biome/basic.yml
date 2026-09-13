@@ -236,9 +236,11 @@
     - id: NFWreckDebrisBrassMedium
       prob: 0.006
       orGroup: wreck
-    - id: MonoDroneSpawnerT0
-      prob: 0.075
-      orGroup: wreck
+    # Forge-change-start - Disabled drone spawners
+    #- id: MonoDroneSpawnerT0
+    #  prob: 0.075
+    #  orGroup: wreck
+    # Forge-change-end
 
 - type: spaceBiome
   id: MonoWilds
@@ -345,12 +347,14 @@
     - id: NFWreckDebrisBrassMedium
       prob: 0.006
       orGroup: wreck
-    - id: MonoDroneSpawnerT1
-      prob: 0.05
-      orGroup: wreck
-    - id: MonoDroneSpawnerT2Inner
-      prob: 0.025
-      orGroup: wreck
+    # Forge-change-start - Disabled drone spawners
+    #- id: MonoDroneSpawnerT1
+    #  prob: 0.05
+    #  orGroup: wreck
+    #- id: MonoDroneSpawnerT2Inner
+    #  prob: 0.025
+    #  orGroup: wreck
+    # Forge-change-end
 
 - type: spaceBiome
   id: MonoWildsOutskirts
@@ -403,9 +407,11 @@
     - id: NFWreckDebrisExtraLarge
       prob: 1
       orGroup: wreck
-    - id: MonoDroneSpawnerT1
-      prob: 0.005
-      orGroup: wreck
+    # Forge-change-start - Disabled drone spawners
+    #- id: MonoDroneSpawnerT1
+    #  prob: 0.005
+    #  orGroup: wreck
+    # Forge-change-end
 
 - type: spaceBiome
   id: MonoEmptyFallback # We need nothing to generate under 18000, but Far Reaches 4 would generate instead, so we need a useless thing.

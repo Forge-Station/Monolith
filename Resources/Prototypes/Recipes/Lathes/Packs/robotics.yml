@@ -39,6 +39,8 @@
   - ForgeVoiceModuleImplanter # Forge-Change
   - ForgeSubdermalArmorImplant # Forge-Change
   - ForgeReflectiveSubdermalArmorImplant # Forge-Change
+  - TranexamicImplanter # Forge-Change
+  - TranexamicImplanterDose # Forge-Change
   - ForgeMilLeftHand # Forge-Change
   - ForgeMilRightHand # Forge-Change
   - ForgeRiplyLeftHand # Forge-Change

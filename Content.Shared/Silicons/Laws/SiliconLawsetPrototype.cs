@@ -1,7 +1,6 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Shared.Silicons.Laws;
 
@@ -71,7 +70,7 @@ public sealed partial class SiliconLawsetPrototype : IPrototype
     /// <summary>
     /// List of law prototype ids in this lawset.
     /// </summary>
-    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdListSerializer<SiliconLawPrototype>))]
+    [DataField(required: true, customTypeSerializer: typeof(ProtoId<SiliconLawPrototype>))]
     public List<string> Laws = new();
 
     /// <summary>

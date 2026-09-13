@@ -45,3 +45,7 @@ ent-ClothingHeadHatBeretCommander = командирский берет
     .desc = Чёрный берет с эмблемой командирского звания.
 ent-CampaignHat = полевая фуражка TSFMC
     .desc = Йиихаа, партнёр.
+ent-ClothingHeadHatBeretCommon = синий берет КМП ТСФ
+    .desc = Тёмно-синий берет бойца Корпуса морской пехоты ТСФ.
+ent-ClothingHeadHatUtilityTsfmc = полевая кепка КМП ТСФ
+    .desc = Стандартная полевая кепка Корпуса морской пехоты ТСФ.

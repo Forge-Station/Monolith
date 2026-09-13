@@ -75,7 +75,6 @@ namespace Content.Server.Kitchen.EntitySystems
         [Dependency] private IAdminLogManager _adminLogger = default!;
         [Dependency] private SharedSuicideSystem _suicide = default!;
 
-        [ValidatePrototypeId<EntityPrototype>]
         private const string MalfunctionSpark = "Spark";
 
         private static readonly ProtoId<TagPrototype> MetalTag = "Metal";

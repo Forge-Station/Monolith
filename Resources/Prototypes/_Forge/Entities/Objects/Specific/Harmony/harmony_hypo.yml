@@ -5,10 +5,10 @@
   id: HMEBasicHypo
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Medical/harmonybasichypo.rsi
+    sprite: _Forge/Objects/Specific/Medical/harmonybasichypo.rsi
     state: hypo
   - type: Item
-    sprite: Forge/Objects/Specific/Medical/harmonybasichypo.rsi
+    sprite: _Forge/Objects/Specific/Medical/harmonybasichypo.rsi
   - type: SolutionContainerManager
     solutions:
       hypospray:
@@ -31,10 +31,10 @@
   id: HMEStandartHypo
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Medical/harmonystandarthypo.rsi
+    sprite: _Forge/Objects/Specific/Medical/harmonystandarthypo.rsi
     state: hypo
   - type: Item
-    sprite: Forge/Objects/Specific/Medical/harmonystandarthypo.rsi
+    sprite: _Forge/Objects/Specific/Medical/harmonystandarthypo.rsi
   - type: SolutionContainerManager
     solutions:
       hypospray:

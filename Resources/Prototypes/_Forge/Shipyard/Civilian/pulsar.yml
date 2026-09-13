@@ -1,7 +1,7 @@
 - type: vessel
   id: Pulsar
   parent: BaseVessel
-  name: Пульсар
+  name: «Пульсар»
   description: Гражданский научно-исследовательский шаттл, любимый многими учеными за универсальность и генератор аномалий
   price: 55750
   category: Medium

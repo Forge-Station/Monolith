@@ -14,7 +14,8 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Pistols/mk32.rsi
   - type: Gun
-    fireRate: 4 # Frontier: 3<4
+    fireRate: 5 # Forge-change 4->5
+    damageModifier: 1.1 # Forge-change
     availableModes:
     - SemiAuto
     soundGunshot:
@@ -58,6 +59,7 @@
     sprite: _DV/Objects/Weapons/Guns/Pistols/pollock.rsi
   - type: Gun
     fireRate: 5
+    damageModifier: 1.1 # Forge-change
     availableModes:
     - SemiAuto
   - type: ItemSlots

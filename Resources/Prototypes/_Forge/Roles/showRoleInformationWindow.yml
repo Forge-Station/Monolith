@@ -1,0 +1,24 @@
+﻿- type: showRoleInformationWindow
+  id: RoleInformationAsakim
+  roleName: show-role-information-asakim-name
+  description: show-role-information-asakim-description
+
+- type: showRoleInformationWindow
+  id: RoleInformationAiForerunner
+  roleName: show-role-information-ai-forerunner-name
+  description: show-role-information-ai-forerunner-description
+
+- type: showRoleInformationWindow
+  id: RoleInformationBorgForerunner
+  roleName: show-role-information-borg-forerunner-name
+  description: show-role-information-borg-forerunner-description
+
+- type: showRoleInformationWindow
+  id: RoleInformationChimera
+  roleName: show-role-information-chimera-name
+  description: show-role-information-chimera-description
+
+- type: showRoleInformationWindow
+  id: RoleInformationCorticalBorer
+  roleName: show-role-information-cortical-borer-name
+  description: show-role-information-cortical-borer-description

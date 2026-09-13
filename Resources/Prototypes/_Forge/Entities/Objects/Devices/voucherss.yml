@@ -7,7 +7,7 @@
   description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Misc/voucher.rsi
+    sprite: _Forge/Misc/voucher.rsi
     layers:
     - state: voucherenegat
   - type: ShipyardVoucher
@@ -26,7 +26,7 @@
   description: A small card that contains the data for the procurement of a Azimutlate-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Misc/voucher.rsi
+    sprite: _Forge/Misc/voucher.rsi
     layers:
     - state: voucherenegat
   - type: ShipyardVoucher
@@ -45,7 +45,7 @@
   description: A small card that contains the data for the procurement of a Galandec-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Misc/voucher.rsi
+    sprite: _Forge/Misc/voucher.rsi
     layers:
     - state: voucherenegat
   - type: ShipyardVoucher
@@ -66,7 +66,7 @@
   description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    sprite: _Forge/Objects/Misc/emp_lpc.rsi
     layers:
     - state: etech
   - type: ShipyardVoucher
@@ -86,7 +86,7 @@
   description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    sprite: _Forge/Objects/Misc/emp_lpc.rsi
     layers:
     - state: etech
   - type: ShipyardVoucher
@@ -105,7 +105,7 @@
   description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    sprite: _Forge/Objects/Misc/emp_lpc.rsi
     layers:
     - state: etech
   - type: ShipyardVoucher
@@ -124,7 +124,7 @@
   description: A small card that contains the data for the procurement of a Azimut-class destroyer from the flagship's reserves.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Misc/emp_lpc.rsi
+    sprite: _Forge/Objects/Misc/emp_lpc.rsi
     layers:
     - state: etech
   - type: ShipyardVoucher
@@ -135,7 +135,7 @@
   - type: StaticPrice
     vendPrice: 640000
   # region Empire
-# Forge/Objects/Misc/emp_lpc.rsi # empire lpc textures
+# _Forge/Objects/Misc/emp_lpc.rsi # empire lpc textures
 
 # region Mercenary
 - type: entity

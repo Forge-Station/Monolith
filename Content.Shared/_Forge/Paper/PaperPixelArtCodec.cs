@@ -135,6 +135,82 @@ public static class PaperPixelArtCodec
         return parts;
     }
 
+    /// <summary>
+    /// Cheap check for a <c>[px]</c> tag. False positives are possible if someone
+    /// types that text; <see cref="GetImageSizes"/> confirms a real drawing.
+    /// </summary>
+    public static bool ContainsPixelArt([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] string? markup)
+    {
+        return !string.IsNullOrEmpty(markup) &&
+               markup.IndexOf("[px", StringComparison.OrdinalIgnoreCase) >= 0;
+    }
+
+    /// <summary>
+    /// Decoded width/height of every valid drawing on the page.
+    /// </summary>
+    public static List<(int Width, int Height)> GetImageSizes(string? markup)
+    {
+        var sizes = new List<(int Width, int Height)>();
+        if (!ContainsPixelArt(markup))
+            return sizes;
+
+        foreach (var part in SplitDocument(markup))
+        {
+            if (part.Art is { } art)
+                sizes.Add((art.Width, art.Height));
+        }
+
+        return sizes;
+    }
+
+    /// <summary>
+    /// Replaces decoded drawings with <c>[image WxH]</c> so admin logs and
+    /// console output stay readable instead of dumping hex palettes.
+    /// </summary>
+    public static string SummarizeForLogs(string markup)
+    {
+        if (!ContainsPixelArt(markup))
+            return markup;
+
+        var builder = new StringBuilder(markup.Length);
+        foreach (var part in SplitDocument(markup))
+        {
+            if (part.Art is { } art)
+            {
+                builder.Append("[image ");
+                builder.Append(art.Width);
+                builder.Append('x');
+                builder.Append(art.Height);
+                builder.Append(']');
+                continue;
+            }
+
+            if (part.Text != null)
+                builder.Append(part.Text);
+        }
+
+        return builder.ToString();
+    }
+
+    public static string FormatImageSizes(IReadOnlyList<(int Width, int Height)> sizes)
+    {
+        if (sizes.Count == 0)
+            return string.Empty;
+
+        var builder = new StringBuilder();
+        for (var i = 0; i < sizes.Count; i++)
+        {
+            if (i > 0)
+                builder.Append(", ");
+
+            builder.Append(sizes[i].Width);
+            builder.Append('x');
+            builder.Append(sizes[i].Height);
+        }
+
+        return builder.ToString();
+    }
+
     public static string Encode(int width, IReadOnlyList<Color> pixels, int? scale = null)
     {
         if (width <= 0 || pixels.Count == 0 || pixels.Count % width != 0)
@@ -423,29 +499,19 @@ public static class PaperPixelArtCodec
 
         if (value[0] == '#')
         {
-            var parsed = Color.TryFromHex(value);
-            if (parsed != null)
-            {
-                color = parsed.Value;
-                return true;
-            }
+            if (!Color.TryFromHex(value, out color))
+                return false;
 
-            color = default;
-            return false;
+            return true;
         }
 
         if (Color.TryFromName(value, out color))
             return true;
 
-        var fallback = Color.TryFromHex("#" + value);
-        if (fallback != null)
-        {
-            color = fallback.Value;
-            return true;
-        }
+        if (!Color.TryFromHex("#" + value, out color))
+            return false;
 
-        color = default;
-        return false;
+        return true;
     }
 
     private static List<Color> BuildPalette(IReadOnlyList<Color> pixels)
@@ -547,22 +613,13 @@ public static class PaperPixelArtCodec
 
         if (hex[0] == '#')
         {
-            var parsedPrefixed = Color.TryFromHex(hex);
-            if (parsedPrefixed == null)
-                return false;
-            color = parsedPrefixed.Value;
-            return true;
+            return Color.TryFromHex(hex, out color);
         }
 
         if (hex.Length > 8)
             return false;
 
-        var parsed = Color.TryFromHex("#" + hex);
-        if (parsed == null)
-            return false;
-
-        color = parsed.Value;
-        return true;
+        return Color.TryFromHex("#" + hex, out color);
     }
 
     private static bool TryReadHexIndex(string hex, out int value)

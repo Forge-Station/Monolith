@@ -1,14 +1,14 @@
 using Content.Shared._Goobstation.Construction;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.DoAfter;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Construction.Components
 {
     [RegisterComponent, Access(typeof(ConstructionSystem))]
     public sealed partial class ConstructionComponent : SharedConstructionComponent // Goobstation
     {
-        [DataField("graph", required:true, customTypeSerializer:typeof(PrototypeIdSerializer<ConstructionGraphPrototype>))]
+        [DataField("graph", required:true, customTypeSerializer:typeof(ProtoId<ConstructionGraphPrototype>))]
         public string Graph { get; set; } = string.Empty;
 
         [DataField("node", required:true)]

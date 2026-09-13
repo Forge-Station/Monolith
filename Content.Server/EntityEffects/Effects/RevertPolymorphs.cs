@@ -3,7 +3,7 @@ using Content.Server.Polymorph.Systems;
 using Content.Shared.EntityEffects;
 using Content.Shared.Polymorph;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.EntityEffects.Effects;
 
@@ -12,7 +12,7 @@ public sealed partial class RevertPolymorph : EntityEffect
     /// <summary>
     ///     What polymorph prototype is used on effect
     /// </summary>
-    [DataField("prototype", customTypeSerializer:typeof(PrototypeIdSerializer<PolymorphPrototype>))]
+    [DataField("prototype", customTypeSerializer:typeof(ProtoId<PolymorphPrototype>))]
     public string PolymorphPrototype { get; set; }
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)

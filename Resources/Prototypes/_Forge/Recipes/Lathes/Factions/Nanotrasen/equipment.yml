@@ -125,71 +125,29 @@
   result: ClothingHeadHelmetERTSecurity
   
 - type: latheRecipe
-  parent: MonoHardsuitT1Recipe
+  parent: ForgeUniversalSuitT1CompanyRecipe
   id: ClothingOuterHardsuitSecurityRed
   result: ClothingOuterHardsuitSecurityRed
-  materials:
-    Glass: 3000
-    Steel: 3500
-    Plastic: 1000
-    Plasteel: 4000
-    Durathread: 1000
-    Silver: 2000
-    Gold: 2000
     
 - type: latheRecipe
-  parent: MonoHardsuitT2Recipe
+  parent: ForgeUniversalSuitT2CompanyRecipe
   id: ClothingOuterHardsuitERTSecurity
   result: ClothingOuterHardsuitERTSecurity
-  materials:
-    Glass: 3000
-    Steel: 5000
-    Plasteel: 3000
-    Durathread: 3000
-    Silver: 1000
-    Gold: 1000
-    Uranium: 1000
-    UraniumDepleted: 500
     
 - type: latheRecipe
-  parent: MonoHardsuitT2Recipe
+  parent: ForgeUniversalLightSuitT3CompanyRecipe
   id: ClothingOuterHardsuitERTMedical
   result: ClothingOuterHardsuitERTMedical
-  materials:
-    Glass: 3000
-    Steel: 4000
-    Plasteel: 2000
-    Durathread: 3000
-    Silver: 1000
-    Gold: 1000
-    Uranium: 2000
-    UraniumDepleted: 500
     
 - type: latheRecipe
-  parent: MonoHardsuitT3Recipe
+  parent: ForgeHeavyJuggernautT3CompanyRecipe
   id: ClothingOuterHardsuitERTChaplain
   result: ClothingOuterHardsuitERTChaplain
-  materials:
-    Glass: 3000
-    Steel: 6000
-    Plasteel: 6000
-    Durathread: 3000
-    Silver: 3000
-    Gold: 3000
-    UraniumFissile: 100
 
 - type: latheRecipe
-  parent: MonoHardsuitT2Recipe
+  parent: ForgeReflectSuitT3CompanyRecipe
   id: ClothingOuterHardsuitCBURN
   result: ClothingOuterHardsuitCBURN
-  materials:
-    Glass: 2000
-    Steel: 4000
-    Plasteel: 1000
-    Durathread: 5000
-    Silver: 3000
-    Gold: 3000
-    UraniumDepleted: 500
     
 - type: latheRecipe
   parent: MonoHardsuitT2Recipe
@@ -270,24 +228,15 @@
     Steel: 2000
     Plastic: 2000
     Plasteel: 2000
-    Durathread: 3000
+    Durathread: 4500 # 3000->4500
     Silver: 2000
     Gold: 2000
-    UraniumFissile: 100
+    UraniumFissile: 50 # 100->50
 
 - type: latheRecipe
-  parent: MonoHardsuitT3Recipe
+  parent: ForgeUniversalLightSuitT2CompanyRecipe
   id: ClothingOuterHardsuitTraumaShooter
   result: ClothingOuterHardsuitTraumaShooter
-  materials:
-    Glass: 1000
-    Steel: 4500
-    Plastic: 2500
-    Plasteel: 4000
-    Durathread: 5000
-    Silver: 3000
-    Gold: 3000
-    UraniumFissile: 100
     
 - type: latheRecipe
   parent: BaseJumpsuitRecipe

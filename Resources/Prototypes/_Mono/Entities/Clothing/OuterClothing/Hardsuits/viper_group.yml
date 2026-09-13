@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitViperGroupStandard
   name: JACKAL mk.II viper hardsuit
   description: A combat hardsuit adorned with signature markings of the Viper Group. The armor is remarkably flexible for the protection it offers.
@@ -14,21 +14,21 @@
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.45 # Forge-change 0.5 -> 0.45
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.67
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.67
-        Radiation: 0.5
+        Blunt: 0.55 # Forge-change 0.67 -> 0.55
+        Slash: 0.55 # Forge-change 0.5 -> 0.55
+        Piercing: 0.475 # Forge-change 0.5 -> 0.475
+        Heat: 0.525 # Forge-change 0.67 -> 0.525
+        Radiation: 0.45 # Forge-change 0.5 -> 0.45
         Caustic: 0.5
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.5
+    coefficient: 0.3 # Forge-change 0.5 -> 0.3
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.875 # Forge-change 0.9 -> 0.875
+    sprintModifier: 0.875 # Forge-change 0.9 -> 0.875
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -46,7 +46,7 @@
     - RogueHardsuit
 
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitViperGroupMedic
   name: RIPPER mk.III viper hardsuit
   description: A combat medical hardsuit adorned with signature markings of the Viper Group. The armor features various reinforced plating in vital areas.
@@ -61,21 +61,21 @@
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.75
+    damageCoefficient: 0.8 # Forge-change 0.75 -> 0.8
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.67
-        Slash: 0.34
-        Piercing: 0.6 # 0.67 -> 0.6 Forge-Change
-        Heat: 0.34 # 0.4 -> 0.34 Forge-Change
-        Radiation: 0.25
+        Blunt: 0.55 # Forge-change 0.67 -> 0.55
+        Slash: 0.55 # Forge-change 0.34 -> 0.55
+        Piercing: 0.525 # Forge-change 0.67 -> 0.525
+        Heat: 0.475 # Forge-change 0.4 -> 0.475
+        Radiation: 0.5 # Forge-change 0.25 -> 0.5
         Caustic: 0.1
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.67
+    coefficient: 0.3 # Forge-change 0.67 -> 0.3
   - type: ClothingSpeedModifier
-    walkModifier: 0.9 # 0.95 -> 0.9 Forge-Change
-    sprintModifier: 0.9 # 0.95 -> 0.9 Forge-Change
+    walkModifier: 0.95 # Forge-change 0.9 -> 0.95
+    sprintModifier: 0.95 # Forge-change 0.9 -> 0.95
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -93,7 +93,7 @@
     - RogueHardsuit
 
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileHard] # Forge-change add ClothingFlightProfile and replace ClothingOuterHardsuitBase by ClothingOuterHardsuitBaseWithoutArmorPlates
   id: ClothingOuterHardsuitViperGroupJuggernaut
   name: IMP mk.IV viper hardsuit
   description: A heavy combat hardsuit adorned with signature markings of the Viper Group. The armor features reinforced plating and padding fitting for close encounters.
@@ -108,21 +108,21 @@
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.4
+    damageCoefficient: 0.35 # Forge-change 0.4 -> 0.35
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.34
-        Piercing: 0.34
-        Heat: 0.5 # 0.6 -> 0.5 Forge-Change
-        Radiation: 0.5
+        Blunt: 0.45 # Forge-change 0.6 -> 0.45
+        Slash: 0.45 # Forge-change 0.34 -> 0.45
+        Piercing: 0.325 # Forge-change 0.34 -> 0.325
+        Heat: 0.45 # Forge-change 0.6 -> 0.45
+        Radiation: 0.3 # Forge-change 0.5 -> 0.3
         Caustic: 0.25
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.34
+    coefficient: 0.1 # Forge-change 0.34 -> 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 0.8 # 0.75 -> 0.8 Forge-Change
-    sprintModifier: 0.8 # 0.75 -> 0.8 Forge-Change
+    walkModifier: 0.675 # Forge-change 0.75 -> 0.675
+    sprintModifier: 0.675 # Forge-change 0.75 -> 0.675
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -140,7 +140,7 @@
     - RogueHardsuit
 
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ClothingOuterHardsuitBase, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitViperGroupInitiate
   name: BROOD mk.I viper hardsuit
   description: A combat hardsuit adorned with signature markings of the Viper Group. Commonly worn by privateers recently awakened from cryosleep.
@@ -155,21 +155,21 @@
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.625 # Forge-change 0.5 -> 0.625
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.88
-        Piercing: 0.67
-        Heat: 0.67 # 0.84 -> 0.67 Forge-Change
-        Radiation: 0.5
+        Blunt: 0.65 # Forge-change 0.8 -> 0.65
+        Slash: 0.65 # Forge-change 0.88 -> 0.65
+        Piercing: 0.6 # Forge-change 0.67 -> 0.6
+        Heat: 0.65 # Forge-change 0.84 -> 0.65
+        Radiation: 0.55 # Forge-change 0.5 -> 0.55
         Caustic: 0.5
   - type: StaminaDamageResistance # Mono - Stamres
-    coefficient: 0.67
+    coefficient: 0.35 # Forge-change 0.67 -> 0.35
   - type: ClothingSpeedModifier
-    walkModifier: 1.0 # 0.95 -> 1.0 Forge-change
-    sprintModifier: 1.0  # 0.95 -> 1.0 Forge-change
+    walkModifier: 0.925 # Forge-change 0.95 -> 0.925
+    sprintModifier: 0.925  # Forge-change 0.95 -> 0.925
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing

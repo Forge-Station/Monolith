@@ -4,10 +4,10 @@
   suffix: Filled
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Medical/firstaidkits.rsi
+    sprite: _Forge/Objects/Specific/Medical/firstaidkits.rsi
     state: antiaddict
   - type: Item
-    sprite: Forge/Objects/Specific/Medical/firstaidkits.rsi
+    sprite: _Forge/Objects/Specific/Medical/firstaidkits.rsi
     heldPrefix: antiaddict
   - type: StorageFill
     contents:

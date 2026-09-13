@@ -1,0 +1,7 @@
+# Forge-Change: Scrap ore stack (referenced by ScrapOre entities; needed for ore filter UI).
+- type: stack
+  id: ScrapOre
+  name: materials-raw-scrap
+  icon: { sprite: /Textures/_NF/Objects/Materials/ore.rsi, state: scrapore }
+  spawn: ScrapOre1
+  maxCount: 100

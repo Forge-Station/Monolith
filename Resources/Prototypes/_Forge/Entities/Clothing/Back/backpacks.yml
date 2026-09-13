@@ -7,7 +7,7 @@
   description: A comfortable and practical backpack.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Back/Backpacks/renegade.rsi
+    sprite: _Forge/Clothing/Back/Backpacks/renegade.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.9
 
@@ -19,7 +19,7 @@
   description: A spacious backpack with lots of pockets, worn by military structures.
   components:
   - type: Sprite
-    sprite: Forge/Back/Backpacks/military.rsi
+    sprite: _Forge/Clothing/Back/Backpacks/military.rsi
   - type: Storage
     grid:
     - 0,0,6,3
@@ -33,9 +33,9 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Back/Backpacks/tti.rsi
+    sprite: _Forge/Clothing/Back/Backpacks/tti.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Back/Backpacks/tti.rsi
+    sprite: _Forge/Clothing/Back/Backpacks/tti.rsi
   - type: Storage
     grid:
     - 0,0,6,3
@@ -50,7 +50,7 @@
   description: Удобный, практичный рюкзак.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Back/Backpacks/syndicate.rsi
+    sprite: _Forge/Clothing/Back/Backpacks/syndicate.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: Storage
@@ -64,7 +64,7 @@
   description: Удобный рюкзак для ваших медицинских пренадлежностей.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Back/Backpacks/syndicatemed.rsi
+    sprite: _Forge/Clothing/Back/Backpacks/syndicatemed.rsi
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: Storage
@@ -78,7 +78,7 @@
   description: Удобный рюкзак для ваших предательских вещей. Выглядит стильно и оригинально.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Back/Backpacks/contractor.rsi
+    sprite: _Forge/Clothing/Back/Backpacks/contractor.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: Storage

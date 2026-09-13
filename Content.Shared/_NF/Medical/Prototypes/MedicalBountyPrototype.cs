@@ -2,7 +2,6 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
 namespace Content.Shared._NF.Medical.Prototypes;
 
@@ -27,13 +26,13 @@ public sealed partial class MedicalBountyPrototype : IPrototype
     /// <summary>
     /// Damage types to be added to a bountied entity and the bonus/penalties associated with them
     /// </summary>
-    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdDictionarySerializer<RandomDamagePreset, DamageTypePrototype>))]
+    [DataField(required: true, customTypeSerializer: typeof(ProtoId<DamageTypePrototype>))]
     public Dictionary<string, RandomDamagePreset> DamageSets = new();
 
     /// <summary>
     /// Damage types to be added to a bountied entity and the bonus/penalties associated with them
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdDictionarySerializer<RandomReagentPreset, ReagentPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<ReagentPrototype>))]
     public Dictionary<string, RandomReagentPreset> Reagents = new();
 
     /// <summary>

@@ -31,16 +31,23 @@ public sealed class BluespaceTomatoSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<BluespaceTomatoComponent, UseInHandEvent>(OnUseInHandEvent);
+        SubscribeLocalEvent<BluespaceTomatoComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<BluespaceTomatoComponent, LandEvent>(OnLanded);
         SubscribeLocalEvent<BluespaceTomatoComponent, StartCollideEvent>(OnStartCollide);
+        SubscribeLocalEvent<BluespaceTomatoComponent, ThrownEvent>(OnThrown);
         SubscribeLocalEvent<PlantHarvestedEvent>(OnPlantHarvested);
+    }
+
+    private void OnThrown(EntityUid uid, BluespaceTomatoComponent bluespaceTomatoComponent, ThrownEvent args)
+    {
+        bluespaceTomatoComponent.Spent = false;
     }
 
     private void OnPlantHarvested(PlantHarvestedEvent ev)
     {
         var playerUid = ev.Uid;
         var products = ev.Products;
+        var plantholder = ev.Plantholder ?? EntityUid.Invalid;
 
         foreach (var product in products)
         {
@@ -55,7 +62,7 @@ public sealed class BluespaceTomatoSystem : EntitySystem
                 return;
             }
 
-            Teleport(playerUid, coordinates, ev.Plantholder, bluespaceTomatoComponent.SoundOnTeleport);
+            Teleport(playerUid, coordinates, plantholder, bluespaceTomatoComponent.SoundOnTeleport);
             return;
         }
     }
@@ -81,13 +88,14 @@ public sealed class BluespaceTomatoSystem : EntitySystem
 
     private void OnLanded(EntityUid uid, BluespaceTomatoComponent bluespaceTomatoComponent, LandEvent args)
     {
-        if (!Exists(args.User))
+        if (!Exists(args.User) || bluespaceTomatoComponent.Spent)
             return;
 
+        bluespaceTomatoComponent.Spent = true;
         TeleportToLanding(args.User.Value, uid, bluespaceTomatoComponent);
     }
 
-    private void OnUseInHandEvent(EntityUid uid, BluespaceTomatoComponent bluespaceTomatoComponent, UseInHandEvent args)
+    private void OnUseInHand(EntityUid uid, BluespaceTomatoComponent bluespaceTomatoComponent, UseInHandEvent args)
     {
         TeleportOnUse(uid, bluespaceTomatoComponent, args.User);
         args.Handled = true;

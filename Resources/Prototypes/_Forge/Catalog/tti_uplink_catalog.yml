@@ -253,6 +253,36 @@
     - !type:ListingLimitedStockCondition
       stock: 3
 
+- type: listing
+  id: UplinkTTIDefibrillatorCompact
+  productEntity: DefibrillatorCompact
+  cost:
+    TTIMedicalCredit: 30
+  categories:
+    - UplinkTTIUtility
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 5
+
+- type: listing
+  id: UplinkTTIOmnimedTool
+  productEntity: OmnimedTool
+  cost:
+    TTIMedicalCredit: 20
+  categories:
+    - UplinkTTIUtility
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 3
+
 # region Hardsuits (Armor)
 
 - type: listing

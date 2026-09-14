@@ -8,10 +8,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_black.rsi #Forge-Change
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_black.rsi #Forge-Change
     #Forge-Change-Del // color: "#1F1F1F"
   - type: Clothing
-    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_black.rsi #Forge-Change
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_black.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -32,10 +32,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_gray.rsi #Forge-Change
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_gray.rsi #Forge-Change
     #Forge-Change-Del // color: "#6A6A6A"
   - type: Clothing
-    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_gray.rsi #Forge-Change
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_gray.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -220,10 +220,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_ranger_green.rsi #Forge-Change
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_ranger_green.rsi #Forge-Change
     #Forge-Change-Del // color: "#4A5A49"
   - type: Clothing
-    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_ranger_green.rsi #Forge-Change
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_ranger_green.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA

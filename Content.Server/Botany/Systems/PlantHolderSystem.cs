@@ -817,7 +817,7 @@ public sealed partial class PlantHolderSystem : EntitySystem
                 return false;
             }
 
-            _botany.Harvest(component.Seed, user, component.YieldMod);
+            _botany.Harvest(component.Seed, user, plantholder, component.YieldMod); // Forge-Change (add arg plantholder)
             AfterHarvest(plantholder, component);
             return true;
         }

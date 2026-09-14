@@ -20,6 +20,7 @@ using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Server._Forge.Botany.Events; // Forge-Change
 using Content.Server._NF.Contraband.Systems; // Frontier
 using Robust.Shared.Maths;
 
@@ -178,7 +179,7 @@ public sealed partial class BotanySystem : EntitySystem
         return Enumerable.Empty<EntityUid>();
     }
 
-    public IEnumerable<EntityUid> Harvest(SeedData proto, EntityUid user, int yieldMod = 1)
+    public IEnumerable<EntityUid> Harvest(SeedData proto, EntityUid user, EntityUid plantholder, int yieldMod = 1) // Forge-Change (add arg plantholder)
     {
         if (proto.ProductPrototypes.Count == 0 || proto.Yield <= 0)
         {
@@ -188,7 +189,9 @@ public sealed partial class BotanySystem : EntitySystem
 
         var name = Loc.GetString(proto.DisplayName);
         _popupSystem.PopupCursor(Loc.GetString("botany-harvest-success-message", ("name", name)), user, PopupType.Medium);
-        return GenerateProduct(proto, Transform(user).Coordinates, yieldMod);
+        var products = GenerateProduct(proto, Transform(user).Coordinates, yieldMod);
+        RaiseLocalEvent(user, new PlantHarvestedEvent(user, proto, plantholder, products), true); // Forge-Change
+        return products;
     }
 
     public IEnumerable<EntityUid> GenerateProduct(SeedData proto, EntityCoordinates position, int yieldMod = 1)
@@ -209,8 +212,14 @@ public sealed partial class BotanySystem : EntitySystem
         if (totalYield > 1 || proto.HarvestRepeat != HarvestType.NoRepeat)
             proto.Unique = false;
 
+        if (proto.FixedSingleYield > 0) // Forge-Change
+            totalYield = proto.FixedSingleYield; // Forge-Change
+
         for (var i = 0; i < totalYield; i++)
         {
+            if (proto.HarvestChance < 1f && !_robustRandom.Prob(proto.HarvestChance)) // Forge-Change
+                continue; // Forge-Change
+
             var product = _robustRandom.Pick(proto.ProductPrototypes);
 
             var entity = SpawnAtPosition(product, position); // Frontier: Spawn<SpawnAtPosition

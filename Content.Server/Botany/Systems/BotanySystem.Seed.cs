@@ -4,8 +4,10 @@ using Content.Server.Kitchen.Components;
 using Content.Shared.Kitchen.Components;
 using Content.Server.Popups;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Containers.ItemSlots;// Forge-Change
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Botany;
+using Content.Shared._Forge.Botany;// Forge-Change
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
@@ -35,6 +37,7 @@ public sealed partial class BotanySystem : EntitySystem
     [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private RandomHelperSystem _randomHelper = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;// Forge-Change
     public override void Initialize()
     {
         base.Initialize();
@@ -143,7 +146,19 @@ public sealed partial class BotanySystem : EntitySystem
             args.PushMarkup(Loc.GetString($"seed-component-plant-yield-text", ("seedYield", seed.Yield)));
             args.PushMarkup(Loc.GetString($"seed-component-plant-potency-text", ("seedPotency", seed.Potency)));
             if (seed.GeneLocked)
-                args.PushMarkup(Loc.GetString("seed-component-gene-locked"));
+            {
+                // Forge-Change-start
+                var pinned = seed.PinnedTraits.Count > 0
+                    ? string.Join(", ", seed.PinnedTraits.Select(BotanyLocalization.GetMutationName))
+                    : Loc.GetString("plant-analyzer-mutation-gene-locked");
+                args.PushMarkup(Loc.GetString("seed-component-gene-locked", ("traits", pinned)));
+                // Forge-Change-end
+            }
+
+            // Forge-Change-start
+            if (seed.CultivarJournalLocked)
+                args.PushMarkup(Loc.GetString("seed-component-cultivar-journal-locked"));
+            // Forge-Change-end
         }
     }
 
@@ -169,16 +184,17 @@ public sealed partial class BotanySystem : EntitySystem
         return seed;
     }
 
-    public IEnumerable<EntityUid> AutoHarvest(SeedData proto, EntityCoordinates position, int yieldMod = 1)
+    // Forge-Change-start
+    public IEnumerable<EntityUid> AutoHarvest(SeedData proto, EntityCoordinates position, int yieldMod = 1, EntityUid? plantholder = null)
     {
         if (position.IsValid(EntityManager) &&
             proto.ProductPrototypes.Count > 0)
-            return GenerateProduct(proto, position, yieldMod);
+            return GenerateProduct(proto, position, yieldMod, plantholder);
 
         return Enumerable.Empty<EntityUid>();
     }
 
-    public IEnumerable<EntityUid> Harvest(SeedData proto, EntityUid user, int yieldMod = 1)
+    public IEnumerable<EntityUid> Harvest(SeedData proto, EntityUid user, int yieldMod = 1, EntityUid? plantholder = null)
     {
         if (proto.ProductPrototypes.Count == 0 || proto.Yield <= 0)
         {
@@ -188,10 +204,15 @@ public sealed partial class BotanySystem : EntitySystem
 
         var name = Loc.GetString(proto.DisplayName);
         _popupSystem.PopupCursor(Loc.GetString("botany-harvest-success-message", ("name", name)), user, PopupType.Medium);
-        return GenerateProduct(proto, Transform(user).Coordinates, yieldMod);
+        var position = plantholder != null
+            ? Transform(plantholder.Value).Coordinates
+            : Transform(user).Coordinates;
+        return GenerateProduct(proto, position, yieldMod, plantholder, user);
     }
 
-    public IEnumerable<EntityUid> GenerateProduct(SeedData proto, EntityCoordinates position, int yieldMod = 1)
+    public IEnumerable<EntityUid> GenerateProduct(SeedData proto, EntityCoordinates position, int yieldMod = 1,
+        EntityUid? plantholder = null, EntityUid? user = null)
+    // Forge-Change-end
     {
         var totalYield = 0;
         if (proto.Yield > -1)
@@ -248,12 +269,15 @@ public sealed partial class BotanySystem : EntitySystem
             }
         }
 
-        SpawnHarvestExtras(proto, position, products);
+        // Forge-Change
+        SpawnHarvestExtras(proto, position, products, plantholder, user);
 
         return products;
     }
 
-    private void SpawnHarvestExtras(SeedData proto, EntityCoordinates position, List<EntityUid> products)
+    // Forge-Change-start
+    private void SpawnHarvestExtras(SeedData proto, EntityCoordinates position, List<EntityUid> products,
+        EntityUid? plantholder = null, EntityUid? user = null)
     {
         var tint = GetPlantTint(proto);
         var plantName = Loc.GetString(proto.Name);
@@ -271,23 +295,24 @@ public sealed partial class BotanySystem : EntitySystem
                 products.Add(extra);
             }
 
-            SpawnHerbalDrink(position, products, "botany-aloe-tea-name", plantName, "Dermaline", proto.Potency);
-            spawnedDrink = true;
+            if (TryPourHerbalDrinkIntoContainer(plantholder, "botany-aloe-tea-name", plantName, "Dermaline", proto.Potency, products, user))
+                spawnedDrink = true;
+            else
+                NotifyHarvestContainerMissed(plantholder, user);
         }
 
         if (proto.Potency >= 45f && proto.Chemicals.ContainsKey("Hyronalin"))
         {
-            SpawnHerbalDrink(position, products, "botany-antirad-tea-name", plantName, "Hyronalin", proto.Potency);
-            spawnedDrink = true;
+            if (TryPourHerbalDrinkIntoContainer(plantholder, "botany-antirad-tea-name", plantName, "Hyronalin", proto.Potency, products, user))
+                spawnedDrink = true;
+            else
+                NotifyHarvestContainerMissed(plantholder, user);
         }
 
         if (!spawnedDrink && proto.Potency >= 40f && proto.Chemicals.Count > 0)
         {
-            var juice = SpawnAtPosition("DrinkGlass", position);
-            _randomHelper.RandomOffset(juice, 0.25f);
-            FillHarvestSolution(juice, "drink", proto, 30);
-            _metaData.SetEntityName(juice, Loc.GetString("botany-plant-juice-name", ("name", plantName)));
-            products.Add(juice);
+            if (!TryPourJuiceIntoContainer(plantholder, proto, 30, "botany-plant-juice-name", plantName, products, user))
+                NotifyHarvestContainerMissed(plantholder, user);
         }
 
         if (proto.Potency >= 55f)
@@ -301,24 +326,121 @@ public sealed partial class BotanySystem : EntitySystem
         }
     }
 
-    private void SpawnHerbalDrink(EntityCoordinates position, List<EntityUid> products, string nameLoc, string plantName, string reagent, float potency)
+    private bool TryPourHerbalDrinkIntoContainer(EntityUid? plantholder, string nameLoc, string plantName,
+        string reagent, float potency, List<EntityUid> products, EntityUid? user = null)
     {
-        var drink = SpawnAtPosition("DrinkGlass", position);
-        _randomHelper.RandomOffset(drink, 0.25f);
-        if (_solutionContainerSystem.EnsureSolutionEntity(drink, "drink", out var solEnt) && solEnt != null)
-        {
-            var sol = solEnt.Value.Comp.Solution;
-            sol.RemoveAllSolution();
-            sol.MaxVolume = 30;
-            var medicine = FixedPoint2.New(Math.Clamp(potency / 8f, 4f, 12f));
-            sol.AddReagent("Tea", FixedPoint2.New(30) - medicine);
-            sol.AddReagent(reagent, medicine);
-            _solutionContainerSystem.UpdateChemicals(solEnt.Value);
-        }
+        if (!TryGetHarvestContainer(plantholder, out var container, out var solEnt, out var sol) || sol == null || solEnt == null)
+            return false;
 
-        _metaData.SetEntityName(drink, Loc.GetString(nameLoc, ("name", plantName)));
-        products.Add(drink);
+        if (sol.AvailableVolume < 10)
+            return false;
+
+        var maxVol = Math.Min(30, sol.MaxVolume.Float());
+        sol.RemoveAllSolution();
+        sol.MaxVolume = maxVol;
+        var medicine = FixedPoint2.New(Math.Clamp(potency / 8f, 4f, 12f));
+        var total = FixedPoint2.New(maxVol);
+        sol.AddReagent("Tea", total - medicine);
+        sol.AddReagent(reagent, medicine);
+        _solutionContainerSystem.UpdateChemicals(solEnt.Value);
+        _metaData.SetEntityName(container, Loc.GetString(nameLoc, ("name", plantName)));
+
+        if (!products.Contains(container))
+            products.Add(container);
+
+        NotifyHarvestContainerFilled(plantholder, user, plantName);
+        return true;
     }
+
+    private bool TryGetHarvestContainer(EntityUid? plantholder, out EntityUid container,
+        out Entity<SolutionComponent>? solEnt, out Solution? solution)
+    {
+        container = default;
+        solEnt = null;
+        solution = null;
+
+        if (plantholder == null)
+            return false;
+
+        var item = _itemSlots.GetItemOrNull(plantholder.Value, PlantHolderComponent.HarvestContainerSlotId);
+        if (item == null)
+            return false;
+
+        if (!_solutionContainerSystem.TryGetFitsInDispenser(item.Value, out solEnt, out solution))
+            return false;
+
+        container = item.Value;
+        return true;
+    }
+
+    private bool TryPourJuiceIntoContainer(EntityUid? plantholder, SeedData proto, int targetMaxVol, string nameLoc,
+        string plantName, List<EntityUid> products, EntityUid? user = null)
+    {
+        if (!TryGetHarvestContainer(plantholder, out var container, out var solEnt, out var sol) || sol == null || solEnt == null)
+            return false;
+
+        var pourAmount = FixedPoint2.Min(FixedPoint2.New(targetMaxVol), sol.AvailableVolume);
+        if (pourAmount <= 0)
+            return false;
+
+        AddHarvestReagents(sol, proto, pourAmount);
+        _solutionContainerSystem.UpdateChemicals(solEnt.Value);
+        _metaData.SetEntityName(container, Loc.GetString(nameLoc, ("name", plantName)));
+
+        if (!products.Contains(container))
+            products.Add(container);
+
+        NotifyHarvestContainerFilled(plantholder, user, plantName);
+        return true;
+    }
+
+    private void NotifyHarvestContainerMissed(EntityUid? plantholder, EntityUid? user)
+    {
+        if (plantholder is not { } tray || !tray.IsValid())
+            return;
+
+        string msg;
+        if (_itemSlots.GetItemOrNull(tray, PlantHolderComponent.HarvestContainerSlotId) == null)
+            msg = Loc.GetString("plant-holder-harvest-container-missing");
+        else
+            msg = Loc.GetString("plant-holder-harvest-container-full");
+
+        if (user is { } recipient && recipient.IsValid())
+            _popupSystem.PopupEntity(msg, tray, recipient, PopupType.Medium);
+        else
+            _popupSystem.PopupEntity(msg, tray, PopupType.Medium);
+    }
+
+    private void NotifyHarvestContainerFilled(EntityUid? plantholder, EntityUid? user, string plantName)
+    {
+        if (plantholder is not { } tray || !tray.IsValid())
+            return;
+
+        var msg = Loc.GetString("plant-holder-harvest-container-filled", ("name", plantName));
+        if (user is { } recipient && recipient.IsValid())
+            _popupSystem.PopupEntity(msg, tray, recipient);
+        else
+            _popupSystem.PopupEntity(msg, tray);
+    }
+
+    private static void AddHarvestReagents(Solution sol, SeedData proto, FixedPoint2 totalVolume)
+    {
+        var remaining = totalVolume;
+        foreach (var (chem, quantity) in proto.Chemicals)
+        {
+            if (remaining <= 0)
+                break;
+
+            var amount = FixedPoint2.New(quantity.Min);
+            if (quantity.PotencyDivisor > 0 && proto.Potency > 0)
+                amount += FixedPoint2.New(proto.Potency / quantity.PotencyDivisor);
+            amount = FixedPoint2.New(MathHelper.Clamp(amount.Float(), quantity.Min, quantity.Max));
+            amount = FixedPoint2.Min(amount, remaining);
+            sol.AddReagent(chem, amount);
+            remaining -= amount;
+        }
+    }
+    // Forge-Change-end
 
     private void FillHarvestSolution(EntityUid uid, string solutionName, SeedData proto, int maxVol)
     {

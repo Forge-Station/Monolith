@@ -2,7 +2,7 @@
   id: MachineShipDrill
   parent: [ConstructibleMachine, BaseMachinePowered]
   name: ship drill
-  description: A small ship drill, capable of digging into asteroids.
+  description: A ship-mounted asteroid drill. Mined ore drops into the pipes beneath and follows the arrows to ore storage.
   components:
   - type: Transform
     anchored: true
@@ -10,9 +10,22 @@
   - type: Rotatable
   - type: Sprite
     sprite: _Mono/Structures/Machines/drills.rsi
+    offset: 0, 0.3
     layers:
     - state: drill
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          # Shifted +0.3 local Y with the mount / sprite offset.
+          bounds: "-0.45,-0.15,0.45,0.75"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: GenericVisualizer
     visuals:
       enum.PowerDeviceVisuals.Powered:
@@ -34,6 +47,11 @@
     repairCost: 30
   - type: ShipDrill
     drillType: !type:GatheringDrillType
+    drillOffsets: 0, 1.3
+  # Forge-Change: ore-pipe inlet + buffer — drill requires DisposalTrunk → DisposalPipe → ore storage.
+  - type: OrePipeInlet
+  - type: OrePipeBuffer
+    maxTotalCount: 200
   - type: Machine
     board: ShipDrillMachineCircuitboard
 
@@ -43,7 +61,7 @@
   id: MachineShipDrillDiamond
   parent: [ConstructibleMachine, BaseMachinePowered]
   name: ship drill diamond
-  description: A small ship diamond drill, capable of digging into asteroids.
+  description: A reinforced diamond drill for hard rock. Mined ore drops into the pipes beneath and follows the arrows to ore storage.
   components:
   - type: Transform
     anchored: true
@@ -51,9 +69,22 @@
   - type: Rotatable
   - type: Sprite
     sprite: _Forge/Structures/Machines/drillsdiamond.rsi
+    offset: 0, 0.3
     layers:
     - state: drilldiamond
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          # Shifted +0.3 local Y with the mount / sprite offset.
+          bounds: "-0.45,-0.15,0.45,0.75"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: GenericVisualizer
     visuals:
       enum.PowerDeviceVisuals.Powered:
@@ -75,6 +106,11 @@
     repairCost: 60
   - type: ShipDrill
     drillType: !type:GatheringDrillType
+    drillOffsets: 0, 1.3
+  # Forge-Change: ore-pipe inlet + buffer — drill requires DisposalTrunk → DisposalPipe → ore storage.
+  - type: OrePipeInlet
+  - type: OrePipeBuffer
+    maxTotalCount: 300
   - type: Machine
     board: ShipDrillDiamondMachineCircuitboard
   - type: Destructible

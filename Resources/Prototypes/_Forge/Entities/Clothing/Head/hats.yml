@@ -35,6 +35,42 @@
   - type: Clothing
     sprite: _Forge/Clothing/Head/Hats/preafect_v.rsi
 
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatEmpireTricorne
+  name: tricorne hat
+  description: Cool tricorne hat, worn by officers
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hats/tricorne_hat.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hats/tricorne_hat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatEmpireCap
+  name: Empire cap
+  description: Cool cap, worn by soldiers
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hats/empire_cap.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hats/empire_cap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatEmpireBeret
+  name: Empire cap
+  description: Cool beret, worn by officers
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hats/empire_beret.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hats/empire_beret.rsi
+
 # region Renegate
 - type: entity
   parent: ClothingHeadBase

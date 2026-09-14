@@ -15,6 +15,13 @@ ent-ClothingNeckCloakEmpirePreafectViolet = плащ экклезиарха
     .desc = Роскошный плащ экклезиарха, символизирующий его преданность церкви.
 ent-ClothingNeckCloakEmpirePreafectDiplomacy = плащ консула
     .desc = Роскошный плащ консула, символизирующий его преданность дипломатическому делу.
+ent-ClothingNeckCloakTrenchEmpire = плащ-тренч Империи
+    .desc = Длинный офицерский тренч, который вам хочется накинуть на плечи как плащ
+ent-ClothingNeckCloakShoulderEmpire = наплечная накидка Империи
+    .desc = Накидка на плечо, которую носят высокопоставленные люди Империи
+ent-ClothingNeckCloakVulpcaninCloakEmpire = плащ из шкуры вульпканина
+    .desc = Из натуральных материалов
+
 
 ent-ClothingNeckMantleUI = мантия U.I.
     .desc = Удобная мантия что скрывает правую часть тела, возможно под ней кобура.

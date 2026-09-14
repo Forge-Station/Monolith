@@ -105,6 +105,36 @@
   - type: Sprite
     sprite: _Forge/Clothing/Neck/Cloaks/Empire/preafect_d.rsi
 
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakShoulderEmpire
+  name: Empire shoulder cloak
+  description: Luxurious cloak, worn by officers
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Cloaks/Empire/shoulder_cloak.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakTrenchEmpire
+  name: Empire trench cloak
+  description: A trench coat draped over the shoulders.
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Cloaks/Empire/trench_cloak.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakVulpcaninCloakEmpire
+  name: vulpcanin cloak
+  description: Natural materials
+  suffix: Empire
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Cloaks/Empire/vulpcanin_cloak.rsi
+
 #region Renegate
 - type: entity
   parent: ClothingNeckBase

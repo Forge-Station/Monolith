@@ -8,14 +8,14 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
-    color: "#1F1F1F"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_black.rsi #Forge-Change
+    #Forge-Change-Del // color: "#1F1F1F"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_black.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#1F1F1F"
+       #Forge-Change-Del // color: "#1F1F1F"
   - type: Item
     inhandVisuals:
       left:
@@ -32,14 +32,14 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
-    color: "#6A6A6A"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_gray.rsi #Forge-Change
+    #Forge-Change-Del // color: "#6A6A6A"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_gray.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#6A6A6A"
+       #Forge-Change-Del // color: "#6A6A6A"
   - type: Item
     inhandVisuals:
       left:
@@ -220,14 +220,14 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
-    color: "#4A5A49"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_ranger_green.rsi #Forge-Change
+    #Forge-Change-Del // color: "#4A5A49"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_ranger_green.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#4A5A49"
+         #Forge-Change-Del // color: "#4A5A49"
   - type: Item
     inhandVisuals:
       left:

@@ -435,8 +435,8 @@ public partial class SeedData
 
             Endurance = Endurance,
             Yield = Yield,
-            FixedSingleYield = FixedSingleYield, // Forge-Change
-            HarvestChance = HarvestChance, // Forge-Change
+            FixedSingleYield = other.FixedSingleYield, // Forge-Change
+            HarvestChance = other.HarvestChance, // Forge-Change
             Lifespan = Lifespan,
             Maturation = Maturation,
             Production = Production,

@@ -30,6 +30,17 @@
       - material: Steel
         amount: 2
         doAfter: 1
+    # Forge-Change: ore disposal filter
+    - to: oreFilter
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+    - to: oreFilterFlipped
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
     # DisposalJunction
     - to: junction
       steps:
@@ -130,6 +141,31 @@
         doAfter: 1
   - node: routerflipped
     entity: DisposalRouterFlipped
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+  # Forge-Change: ore disposal filter
+  - node: oreFilter
+    entity: OreDisposalFilter
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+  - node: oreFilterFlipped
+    entity: OreDisposalFilterFlipped
     edges:
     - to: start
       completed:

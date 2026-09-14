@@ -2660,8 +2660,4 @@
     tags:
     - Fruit
     - Vegetable
-  - type: FoodSequenceElement
-    entries:
-      Burger: BluespaceTomato # Forge-Change
-      Taco: BluespaceTomato # Forge-Change
 # Forge-Change-end

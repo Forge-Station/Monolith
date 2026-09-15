@@ -31,6 +31,8 @@
   - ShipDrillMachineCircuitboard # Mono
   - ShipDrillDiamondMachineCircuitboard # Froge-change-add
   - OreMagnetMachineCircuitboard # Mono
+  - OrePipeStorageMachineCircuitboard # Forge-Change
+  - OreHoldModuleMachineCircuitboard # Forge-Change
   - MaterialSiloMachineCircuitboard
   # - CargoTelepadMachineCircuitboard # Frontier
   - ShuttleGunKineticCircuitboard

@@ -25,6 +25,7 @@
     ClothingBalaclavaSkiMaskGreen: 4294967295 # Infinite
     ClothingBalaclavaSkiMaskBlue: 4294967295 # Infinite
     ClothingBalaclavaSkiMaskPurple: 4294967295 # Infinite
+    ClothingBalaclavaSkiMaskPink: 4294967295 # Infinite #Forge-Change
     ClothingBalaclavaSkiMaskYellow: 4294967295 # Infinite
     ClothingBalaclavaSkiMaskTan: 4294967295 # Infinite
     ClothingBalaclavaSkiMaskMerc: 4294967295 # Infinite #Forge-Change
@@ -50,10 +51,10 @@
     ClothingBalaclavaClassicGreen: 4294967295 # Infinite
     ClothingBalaclavaClassicBlue: 4294967295 # Infinite
     ClothingBalaclavaClassicPurple: 4294967295 # Infinite
-    ClothingBalaclavaClassicPink: 4294967295 # Infinite
+    ClothingBalaclavaClassicPink: 4294967295 # Infinite #Forge-Change
     ClothingBalaclavaClassicYellow: 4294967295 # Infinite
     ClothingBalaclavaClassicTan: 4294967295 # Infinite
-    ClothingBalaclavaClassicMerc: 4294967295 # Infinite
+    ClothingBalaclavaClassicMerc: 4294967295 # Infinite #Forge-Change
     ClothingBalaclavaClassicRangerGreen: 4294967295 # Infinite
     ClothingBalaclavaClassicCoyoteBrown: 4294967295 # Infinite
     ClothingBalaclavaClassicMouthBlack: 4294967295 # Infinite
@@ -63,10 +64,10 @@
     ClothingBalaclavaClassicMouthGreen: 4294967295 # Infinite
     ClothingBalaclavaClassicMouthBlue: 4294967295 # Infinite
     ClothingBalaclavaClassicMouthPurple: 4294967295 # Infinite
-    ClothingBalaclavaClassicMouthPink: 4294967295 # Infinite
+    ClothingBalaclavaClassicMouthPink: 4294967295 # Infinite #Forge-Change
     ClothingBalaclavaClassicMouthYellow: 4294967295 # Infinite
     ClothingBalaclavaClassicMouthTan: 4294967295 # Infinite
-    ClothingBalaclavaClassicMouthMerc: 4294967295 # Infinite
+    ClothingBalaclavaClassicMouthMerc: 4294967295 # Infinite #Forge-Change
     ClothingBalaclavaClassicMouthRangerGreen: 4294967295 # Infinite
     ClothingBalaclavaClassicMouthCoyoteBrown: 4294967295 # Infinite
     # region Belts

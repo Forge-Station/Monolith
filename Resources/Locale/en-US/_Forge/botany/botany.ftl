@@ -83,7 +83,7 @@ reagent-desc-atmo-phyte = Gas-processing phytochemical from atmosphere-mutated p
 necrotoxin-sap-warning = Your veins burn with plant toxins!
 
 ent-ClothingEyesGlassesBotany = botanical analyzer glasses
-    .desc = Green-tinted goggles that overlay plant health and status squares on hydroponics trays: blue water, green weeds, yellow harvest, gold radiation.
+    .desc = Green-tinted goggles that overlay plant health, water, and nutrient bars on hydroponics trays, plus harvest, radiation, weed, and alert indicators.
 ent-AgroScanCartridge = AgroScan cartridge
     .desc = A program that lets a PDA scan seeds and hydroponics trays like a plant analyzer.
 ent-ComputerHydroponics = hydroponics tray console
@@ -117,13 +117,20 @@ hydroponics-console-field-ideal-light = Ideal light
 hydroponics-console-save-ok = Saved cultivar "{$name}".
 hydroponics-console-save-empty = That tray has no plant to save.
 hydroponics-console-journal-full = Journal is full (24 lines). Delete one first.
-hydroponics-console-print-packet-ok = Printed seed packet for "{$name}".
+hydroponics-console-print-packet-ok = Printed seed packet for "{$name}". Prints remaining: {$remaining}.
+hydroponics-console-print-limit = This cultivar line has reached the 5-print limit.
+hydroponics-console-print-remaining = Seed prints
+hydroponics-console-print-remaining-value = {$used} / 5 used ({$remaining} left)
+hydroponics-console-save-already-archived = This plant's data was already saved to the journal.
+hydroponics-console-save-printed-seeds = Printed cultivar seeds cannot be archived in the journal — use a pollen swab to share genes.
+hydroponics-console-save-unavailable = This plant cannot be saved to the journal.
 hydroponics-console-eject-disk-ok = Wrote "{$name}" to a cultivar disk.
 hydroponics-console-disk-blank = That disk is blank.
 hydroponics-console-disk-imported = Imported cultivar "{$name}".
 
 botany-cultivar-disk-blank = The disk is blank.
 botany-cultivar-disk-contents = Line: [color=lightgreen]{$name}[/color] ({$plant})
+botany-cultivar-disk-prints = Seed prints used: {$used} / 5 ({$remaining} remaining)
 
 plant-holder-light-ambient = ambient
 plant-holder-light-day = day
@@ -152,6 +159,13 @@ ent-AloeCream1 = aloe cream
 ent-BotanyDriedProduce = dried produce
     .desc = Sun-dried plant matter. Color and flavor follow the cultivar it came from.
 
+plant-holder-harvest-container-slot = harvest vessel
+plant-holder-harvest-container-filled = Harvest poured into the vessel: {$name}.
+plant-holder-harvest-container-examine = Harvest vessel: [color=lightgreen]{$container}[/color]
+plant-holder-harvest-container-empty-examine = [color=gray]No harvest vessel inserted — insert a beaker or glass to collect juice on harvest.[/color]
+plant-holder-harvest-container-missing = No harvest vessel in the tray — juice was not collected.
+plant-holder-harvest-container-full = The harvest vessel is full — juice was not collected.
+
 hydroponics-console-rename-tray = Rename tray
 hydroponics-console-tray-name-placeholder = wheat-rad-3
 hydroponics-console-rename-tray-ok = Tray renamed to "{$name}".
@@ -159,14 +173,51 @@ hydroponics-console-warn-pest-eater = pest-eater
 hydroponics-console-warn-locked = genes locked
 
 plant-holder-component-pest-eater-warning = [color=lightgreen]The plant is eating weeds and pests in the tray.[/color]
-plant-holder-component-gene-locked-warning = [color=cyan]This line's genes are locked. Mutagen will not scramble it.[/color]
+plant-holder-component-gene-locked-warning = [color=cyan]Pinned genes: {$traits}. Mutagen will not scramble this line.[/color]
 plant-analyzer-mutation-pest-eater = Pest-eater
 plant-analyzer-mutation-gene-locked = Genes locked
+
+hydroponics-console-warn-locked-detail = pinned: {$traits}
+
+plant-mutation-name-change-water-consumption = Water consumption shift
+plant-mutation-name-change-nutrient-consumption = Nutrient consumption shift
+plant-mutation-name-change-ideal-heat = Ideal heat shift
+plant-mutation-name-change-heat-tolerance = Heat tolerance shift
+plant-mutation-name-change-toxins-tolerance = Toxin tolerance shift
+plant-mutation-name-change-low-pressure-tolerance = Low pressure tolerance shift
+plant-mutation-name-change-high-pressure-tolerance = High pressure tolerance shift
+plant-mutation-name-change-pest-tolerance = Pest tolerance shift
+plant-mutation-name-change-weed-tolerance = Weed tolerance shift
+plant-mutation-name-change-endurance = Endurance shift
+plant-mutation-name-change-yield = Yield shift
+plant-mutation-name-change-lifespan = Lifespan shift
+plant-mutation-name-change-maturation = Maturation shift
+plant-mutation-name-change-production = Production shift
+plant-mutation-name-change-potency = Potency shift
+plant-mutation-name-change-ideal-light = Ideal light shift
+plant-mutation-name-change-chemicals = Chemical shift
+plant-mutation-name-change-exude-gasses = Exude gas shift
+plant-mutation-name-change-consume-gasses = Consume gas shift
+plant-mutation-name-change-harvest = Harvest shift
+plant-mutation-name-change-species = Species change
+plant-mutation-name-carbon-filter = Carbon filter
+plant-mutation-name-antirad-fruit = Antirad fruit
+plant-mutation-name-drought-tolerant = Drought tolerant
+plant-mutation-name-nitrogen-fixer = Nitrogen fixer
+plant-mutation-name-shade-adapted = Shade adapted
+plant-mutation-name-sun-lover = Sun lover
+plant-mutation-name-perennial = Perennial
+plant-mutation-name-pest-ward = Pest ward
+plant-mutation-name-thin-air = Thin air
+plant-mutation-name-oxygen-bloom = Oxygen bloom
+plant-mutation-name-aloe-sap = Aloe sap
+plant-mutation-name-bitter-antidote = Bitter antidote
 
 botany-swab-from-packet = You lift pollen from the seed packet.
 botany-swab-graft-packet = Pollen takes: mutations graft onto this {$name} packet.
 
-seed-component-gene-locked = [color=cyan]Genes locked — mutagen will not scramble this line.[/color]
+seed-component-gene-locked = [color=cyan]Pinned genes: {$traits}. Mutagen will not scramble this line.[/color]
+seed-component-cultivar-journal-locked = [color=gray]Printed cultivar — cannot be archived in the hydroponics journal.[/color]
 
 botany-plant-cloth-name = {$name} fiber
 botany-plant-juice-name = {$name} juice

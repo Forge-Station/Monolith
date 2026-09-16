@@ -69,7 +69,7 @@ public sealed partial class CCVars
     ///     Grids with fewer tiles than this will not be rendered to avoid clutter.
     /// </summary>
     public static readonly CVarDef<int> DrawGridMinTiles =
-        CVarDef.Create("shuttle.draw_grid_min_tiles", 10, CVar.SERVERONLY | CVar.REPLICATED); /// Forge-Change
+        CVarDef.Create("shuttle.draw_grid_min_tiles", 10, CVar.SERVER | CVar.REPLICATED); /// Forge-Change
 
     /// <summary>
     ///     Whether to automatically spawn escape shuttles.

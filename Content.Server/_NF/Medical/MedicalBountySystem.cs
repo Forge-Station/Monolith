@@ -216,7 +216,7 @@ public sealed partial class MedicalBountySystem : EntitySystem
             // Forge-change-statr: pay bonus reward if the redeemer wearing have tag TTIEquip
             if (bounty.BonusReward != null && _inventory.HasEquippedTag(ev.Actor, bounty.BonusRewardTag))
             {
-                var bonusAmount = Math.Max(1, (int)Math.Floor(bountyPayout * (bounty.BonusRewardPercent / 100f)));
+                var bonusAmount = Math.Max(1, (int)Math.Floor(bountyPayout * bounty.BonusRewardPercent));
                 if (bonusAmount > 0)
                     _stack.SpawnMultiple(bounty.BonusReward.Value.Id, bonusAmount, Transform(uid).Coordinates);
             }

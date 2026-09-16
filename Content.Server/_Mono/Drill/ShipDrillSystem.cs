@@ -13,6 +13,7 @@ using Content.Shared.Tiles;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Content.Shared.SubFloor;
 
 namespace Content.Server._Mono.Drill;
 
@@ -102,12 +103,10 @@ public partial class ShipDrillSystem : EntitySystem
                     _nonEmptyTiles.Add(tileRef);
                 }
 
-                // Forge-Change: ore crabs / golems in the drill cone take damage; loot goes into the pipe buffer.
+                // Forge-Change: deal damage to all mobs (NPCs, players) in the drill cone.
+                // Ore crabs/golems deposit loot into the pipe buffer when killed.
                 foreach (var mob in _mobs)
                 {
-                    if (!HasComp<OreDrillHarvestTargetComponent>(mob))
-                        continue;
-
                     _damageable.TryChangeDamage(mob, OreMobDrillDamage, ignoreResistances: true, origin: uid);
                 }
 
@@ -121,14 +120,10 @@ public partial class ShipDrillSystem : EntitySystem
                     if (comp.TileWhitelist != null && !comp.TileWhitelist.Contains(tileDef.ID))
                         continue;
 
-                    // Forge-Change: remove gas deposits (and other RequiresTile ents) with the asteroid tile.
+                    // Forge-Change: remove all anchored entities (gas deposits, rocks, crystals, etc.) with the asteroid tile.
                     foreach (var anchored in _map.GetAnchoredEntities(grid.Owner, grid.Comp, tileRef.GridIndices))
                     {
-                        if (HasComp<GasDepositComponent>(anchored)
-                            || HasComp<RequiresTileComponent>(anchored))
-                        {
-                            QueueDel(anchored);
-                        }
+                        QueueDel(anchored);
                     }
 
                     _map.SetTile(grid.Owner, grid, tileRef.GridIndices, Tile.Empty);

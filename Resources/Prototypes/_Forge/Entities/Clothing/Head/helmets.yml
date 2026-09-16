@@ -60,6 +60,13 @@
         Heat: 0.85
   - type: ExplosionResistance
     damageCoefficient: 0.9
+  - type: Tag
+    tags:
+    - HelmetEVA
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: Trauma Team International
+    hasEngravingText: forge-engraving-generic-has-message
 
 - type: entity
   parent: [ClothingHeadEVAHelmetBase, BaseFactionGearOtherFactionT1]
@@ -81,6 +88,13 @@
         Heat: 0.85
   - type: ExplosionResistance
     damageCoefficient: 0.9
+  - type: Tag
+    tags:
+    - HelmetEVA
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: Trauma Team International
+    hasEngravingText: forge-engraving-generic-has-message
 
 - type: entity
   parent: [ClothingHeadEVAHelmetBase, BaseFactionGearOtherFactionT1]
@@ -93,6 +107,13 @@
     sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Head/Hardsuits/tti_hardsuit_command.rsi
+  - type: Tag
+    tags:
+    - HelmetEVA
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: Trauma Team International
+    hasEngravingText: forge-engraving-generic-has-message
 
 - type: entity
   parent: ClothingHeadHelmetMercenary

@@ -2,6 +2,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Content.Shared.Tag; // Forge-change
 
 namespace Content.Shared._NF.Medical.Prototypes;
 
@@ -46,6 +47,26 @@ public sealed partial class MedicalBountyPrototype : IPrototype
     /// </summary>
     [DataField]
     public int MaximumDamageToRedeem = 99;
+
+    // Forge-change-start
+    /// <summary>
+    /// Bonus reward prototype
+    /// </summary>
+    [DataField]
+    public ProtoId<EntityPrototype>? BonusReward = "TTIMedicalCredit1";
+
+    /// <summary>
+    /// Bonus reward percentage. Name has a logic to it...
+    /// </summary>
+    [DataField]
+    public float BonusRewardPercent = 0.01f;
+
+    /// <summary>
+    /// Bonus reward for turning in a body equipped with gear bearing the TTIEquip tag
+    /// </summary>
+    [DataField(customTypeSerializer: typeof(ProtoId<TagPrototype>))]
+    public string BonusRewardTag = "TTIEquip";
+    // Forge-change-end
 }
 
 [DataDefinition, Serializable, NetSerializable]

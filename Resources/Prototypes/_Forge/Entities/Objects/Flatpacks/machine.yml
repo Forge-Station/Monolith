@@ -141,3 +141,17 @@
   - type: Sprite
     layers:
     - state: command_airlock
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: StationRadioReceiverUwuFlatpack
+  name: station Uwu radio flatpack
+  description: Packaging containing a station Uwu radio.
+  components:
+  - type: Flatpack
+    entity: StationRadioReceiverUwU
+  - type: StaticPrice
+    price: 40
+  - type: Sprite
+    layers:
+    - state: command_airlock

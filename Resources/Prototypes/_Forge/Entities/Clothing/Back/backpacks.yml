@@ -84,3 +84,13 @@
   - type: Storage
     grid:
     - 0,0,7,4
+
+- type: entity
+  parent: NFClothingBackpack
+  id: ClothingBackpackNexus
+  name: nexus backpack
+  suffix: Nexus
+  description: Nexus branded backpack
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Back/Backpacks/backpacks_nexus.rsi

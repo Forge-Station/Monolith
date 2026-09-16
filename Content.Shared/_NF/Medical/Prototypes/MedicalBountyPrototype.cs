@@ -59,7 +59,7 @@ public sealed partial class MedicalBountyPrototype : IPrototype
     /// Bonus reward percentage. Name has a logic to it...
     /// </summary>
     [DataField]
-    public float BonusRewardPercent = 0.01f;
+    public float BonusRewardPercent = 0.005f;
 
     /// <summary>
     /// Bonus reward for turning in a body equipped with gear bearing the TTIEquip tag

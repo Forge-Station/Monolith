@@ -276,7 +276,7 @@
     - !type:EntSelector
       id: BluespaceOre1
       amount: !type:ConstantNumberSelector
-        value: 5
+        value: 2
 
 # Research loot 
 - type: entityTable

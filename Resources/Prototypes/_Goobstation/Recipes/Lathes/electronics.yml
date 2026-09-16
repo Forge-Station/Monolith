@@ -102,3 +102,12 @@
     state: icon
   result: StationRadioCircuitboard
 
+#Forge-Change-UwU-start
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: StationRadioUwUCircuitboard
+  icon:
+    sprite:  _Forge/Structures/Machines/StationRadio/stationradioUwu.rsi
+    state: icon
+  result: StationRadioUwUCircuitboard
+#Forge-Change-UwU-end

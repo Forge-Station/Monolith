@@ -107,7 +107,7 @@
   parent: BaseCircuitboardRecipe
   id: StationRadioUwUCircuitboard
   icon:
-    sprite:  _Forge/Structures/Machines/StationRadio/stationradioUwu.rsi
+    sprite:  _Forge/Structures/Machines/StationRadio/stationradioUwU.rsi
     state: icon
   result: StationRadioUwUCircuitboard
 #Forge-Change-UwU-end

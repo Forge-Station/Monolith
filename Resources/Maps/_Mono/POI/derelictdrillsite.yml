@@ -4,8 +4,8 @@ meta:
   engineVersion: 289.0.0
   forkId: frontier_mapping
   forkVersion: cec9bb57ecd70d45d61cd08c5722cc0744606bd1
-  time: 09/09/2026 08:14:09
-  entityCount: 6433
+  time: 09/16/2026 08:02:42
+  entityCount: 6430
 maps: []
 grids:
 - 1
@@ -206,10 +206,10 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
       spreadQueues:
-        Puddle: []
-        Kudzu: []
-        MetalFoam: []
         Smoke: []
+        Kudzu: []
+        Puddle: []
+        MetalFoam: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -8943,11 +8943,6 @@ entities:
     - type: Transform
       parent: 1
       pos: 17.5,16.5
-  - uid: 1232
-    components:
-    - type: Transform
-      parent: 1
-      pos: 20.5,8.5
   - uid: 1233
     components:
     - type: Transform
@@ -9702,12 +9697,6 @@ entities:
       parent: 1
       rot: 1.5707963267948966 rad
       pos: 19.5,7.5
-  - uid: 1384
-    components:
-    - type: Transform
-      parent: 1
-      rot: 1.5707963267948966 rad
-      pos: 19.5,8.5
   - uid: 1385
     components:
     - type: Transform
@@ -15262,7 +15251,7 @@ entities:
       pos: 16.5,23.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -27950.678
+      secondsUntilStateChange: -27985.635
   - uid: 2146
     components:
     - type: Transform
@@ -17355,11 +17344,6 @@ entities:
     - type: Transform
       parent: 1
       pos: 20.5,7.5
-  - uid: 2434
-    components:
-    - type: Transform
-      parent: 1
-      pos: 20.5,8.5
 - proto: SpawnDungeonLootBriefcase
   entities:
   - uid: 2435

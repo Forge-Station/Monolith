@@ -56,7 +56,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
     private readonly DungeonSystem _dungeon;
     private readonly MetaDataSystem _metaData;
     private readonly ShuttleSystem _shuttle;
-    private readonly StationSystem _stationSystem;
+    private readonly ServerStationSystem _stationSystem;
     private readonly SalvageSystem _salvage;
     private readonly SharedTransformSystem _xforms;
 
@@ -88,7 +88,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         WeatherSystem weather,
         DungeonSystem dungeon,
         ShuttleSystem shuttle,
-        StationSystem stationSystem,
+        ServerStationSystem stationSystem,
         MetaDataSystem metaData,
         SalvageSystem salvage,
         SharedTransformSystem xform,

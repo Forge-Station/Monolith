@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking.Rules.Components;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Objectives.Components;
 using Content.Shared.Mind;

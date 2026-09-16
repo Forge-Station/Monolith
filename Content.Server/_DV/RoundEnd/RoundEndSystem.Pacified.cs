@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using Content.Server.Explosion.Components;
 using Content.Server.GameTicking;
 using Content.Shared.CombatMode;

@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using Content.Server.Afk.Events;
 using Content.Server.GameTicking;
 using Content.Shared.CCVar;
@@ -19,7 +20,7 @@ public sealed partial class AFKSystem : EntitySystem
     [Dependency] private IConfigurationManager _configManager = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
 
     private float _checkDelay;
     private TimeSpan _checkTime;

@@ -1,3 +1,4 @@
+using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server._NF.Shuttles.Components;
 using Content.Shared._Crescent.ShipShields;

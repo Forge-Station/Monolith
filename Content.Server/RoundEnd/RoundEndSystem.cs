@@ -37,11 +37,11 @@ namespace Content.Server.RoundEnd
         [Dependency] private IGameTiming _gameTiming = default!;
         [Dependency] private IPrototypeManager _protoManager = default!;
         [Dependency] private ChatSystem _chatSystem = default!;
-        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private ServerGameTicker _gameTicker = default!;
         [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
         [Dependency] private EmergencyShuttleSystem _shuttle = default!;
         [Dependency] private SharedAudioSystem _audio = default!;
-        [Dependency] private StationSystem _stationSystem = default!;
+        [Dependency] private ServerStationSystem _stationSystem = default!;
         [Dependency] private SectorServiceSystem _sectorService = default!; // Frontier: sector-wide alerts
 
         public TimeSpan DefaultCooldownDuration { get; set; } = TimeSpan.FromSeconds(30);
@@ -95,7 +95,7 @@ namespace Content.Server.RoundEnd
         }
 
         /// <summary>
-        ///     Attempts to get the MapUid of the station using <see cref="StationSystem.GetLargestGrid"/>
+        ///     Attempts to get the MapUid of the station using <see cref="ServerStationSystem.GetLargestGrid"/>
         /// </summary>
         public EntityUid? GetStation()
         {
@@ -302,7 +302,7 @@ namespace Content.Server.RoundEnd
         /// <param name="sender"></param>
         /// <param name="textCall"></param>
         /// <param name="textAnnounce"></param>
-        public void DoRoundEndBehavior(RoundEndBehavior behavior,
+        public void DoRoundEndBehavior(Content.Shared.RoundEnd.RoundEndBehavior behavior,
             TimeSpan time,
             string sender = "comms-console-announcement-title-centcom",
             string textCall = "round-end-system-shuttle-called-announcement",
@@ -310,10 +310,10 @@ namespace Content.Server.RoundEnd
         {
             switch (behavior)
             {
-                case RoundEndBehavior.InstantEnd:
+                case Content.Shared.RoundEnd.RoundEndBehavior.InstantEnd:
                     EndRound();
                     break;
-                case RoundEndBehavior.ShuttleCall:
+                case Content.Shared.RoundEnd.RoundEndBehavior.ShuttleCall:
                     // Check is shuttle called or not. We should only dispatch announcement if it's already called
                     if (IsRoundEndRequested())
                     {

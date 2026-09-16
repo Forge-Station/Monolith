@@ -86,7 +86,7 @@ namespace Content.Server.Explosion.EntitySystems
         [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private InventorySystem _inventory = default!;
         [Dependency] private ElectrocutionSystem _electrocution = default!;
-        [Dependency] private StationSystem _station = default!; // Frontier: medical insurance
+        [Dependency] private ServerStationSystem _station = default!; // Frontier: medical insurance
         [Dependency] private SharedMapSystem _map = default!; // Frontier: medical insurance
 
         public override void Initialize()

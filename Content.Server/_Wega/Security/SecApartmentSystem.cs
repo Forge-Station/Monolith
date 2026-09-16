@@ -61,7 +61,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
     private const int MaxSquadNameLength = 16;
     private const int MaxSquadDescriptionLength = 512;
 
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly ServerStationSystem _station = default!;
     [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly IRobustRandom _random = default!;

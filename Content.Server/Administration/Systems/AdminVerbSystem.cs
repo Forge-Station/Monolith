@@ -1,3 +1,4 @@
+using Content.Shared.Station.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.UI;
@@ -63,7 +64,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private AdminSystem _adminSystem = default!;
         [Dependency] private DisposalTubeSystem _disposalTubes = default!;
         [Dependency] private EuiManager _euiManager = default!;
-        [Dependency] private GameTicker _ticker = default!;
+        [Dependency] private ServerGameTicker _ticker = default!;
         [Dependency] private GhostRoleSystem _ghostRoleSystem = default!;
         [Dependency] private ArtifactSystem _artifactSystem = default!;
         [Dependency] private UserInterfaceSystem _uiSystem = default!;
@@ -72,7 +73,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private ToolshedManager _toolshed = default!;
         [Dependency] private RejuvenateSystem _rejuvenate = default!;
         [Dependency] private SharedPopupSystem _popup = default!;
-        [Dependency] private StationSystem _stations = default!;
+        [Dependency] private ServerStationSystem _stations = default!;
         [Dependency] private StationSpawningSystem _spawning = default!;
         [Dependency] private ExamineSystemShared _examine = default!;
         [Dependency] private AdminFrozenSystem _freeze = default!;

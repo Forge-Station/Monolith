@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking.Events;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
@@ -65,7 +66,7 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
     [Dependency] private RoundEndSystem _roundEnd = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ShuttleSystem _shuttle = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private TransformSystem _transformSystem = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
 

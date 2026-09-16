@@ -44,7 +44,7 @@ public sealed partial class SuitSensorSystem : EntitySystem
     [Dependency] private MobStateSystem _mobStateSystem = default!;
     [Dependency] private PopupSystem _popupSystem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    // [Dependency] private StationSystem _stationSystem = default!; // Frontier
+    // [Dependency] private ServerStationSystem _stationSystem = default!; // Frontier
     [Dependency] private MetaDataSystem _metaData = default!; // Frontier
     [Dependency] private SingletonDeviceNetServerSystem _singletonServerSystem = default!;
     [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;

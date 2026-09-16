@@ -16,6 +16,7 @@ using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.Screens;
+using Content.Shared.Station.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Content.Server._NF.SectorServices; // Frontier
@@ -31,7 +32,7 @@ namespace Content.Server.Communications
         [Dependency] private EmergencyShuttleSystem _emergency = default!;
         [Dependency] private PopupSystem _popupSystem = default!;
         [Dependency] private RoundEndSystem _roundEndSystem = default!;
-        [Dependency] private StationSystem _stationSystem = default!;
+        [Dependency] private ServerStationSystem _stationSystem = default!;
         [Dependency] private UserInterfaceSystem _uiSystem = default!;
         [Dependency] private IConfigurationManager _cfg = default!;
         [Dependency] private IAdminLogManager _adminLogger = default!;

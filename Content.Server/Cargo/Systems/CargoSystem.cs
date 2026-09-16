@@ -44,7 +44,7 @@ public sealed partial class CargoSystem : SharedCargoSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ShuttleConsoleSystem _console = default!;
     [Dependency] private StackSystem _stack = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private MetaDataSystem _metaSystem = default!;
     [Dependency] private SectorServiceSystem _sectorService = default!; // Frontier

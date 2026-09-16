@@ -67,6 +67,12 @@
   # - type: VocalizerRequiresPower
   # - type: DatasetVocalizer
   #   dataset: SlotMachineAds
+  #Forge-Change-start
+  - type: Advertise
+    minimumWait: 8
+    maximumWait: 10
+    pack: SlotMachineAds
+  #Forge-Change-end
   - type: ContainerContainer
     containers:
       money: !type:ContainerSlot
@@ -245,6 +251,12 @@
   # - type: VocalizerRequiresPower
   # - type: DatasetVocalizer
   #   dataset: SlotMachineAds
+  #Forge-Change-start
+  - type: Advertise
+    minimumWait: 8
+    maximumWait: 10
+    pack: SlotMachineAds
+  #Forge-Change-end
   - type: ContainerContainer
     containers:
       money: !type:ContainerSlot
@@ -366,6 +378,12 @@
   # - type: VocalizerRequiresPower
   # - type: DatasetVocalizer
   #   dataset: SlotMachineAds
+  #Forge-Change-start
+  - type: Advertise
+    minimumWait: 8
+    maximumWait: 10
+    pack: SlotMachineAds
+  #Forge-Change-end
   - type: LanguageSpeaker # Einstein Engines - Languages
   - type: LanguageKnowledge # Einstein Engines - Languages
     speaks:

@@ -89,6 +89,7 @@ public sealed partial class MaterialDisplay : PanelContainer
                 Access = AccessLevel.Public,
                 Text = Loc.GetString($"{sheetsToEject}"),
                 MinWidth = 45,
+                MinHeight = 32,
                 StyleClasses = { styleClass }
             };
 

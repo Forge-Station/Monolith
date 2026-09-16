@@ -71,7 +71,6 @@
     panel_closedVisible: false
     emergency_open_unlitVisible: false # Forge-Change-End
 
-
 - type: entity
   parent: AirlockMieyoGlass
   id: AirlockMieyoGlassLocked

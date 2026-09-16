@@ -1,0 +1,19 @@
+- type: entity
+  name: asakim corpse
+  id: SpawnAsakimCorpse
+  parent: MarkerBasePlaceFree
+  suffix: Dead
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - sprite: Structures/Storage/Crates/coffin.rsi
+      state: base
+    - sprite: _Mono/Mobs/Species/Asakim/parts.rsi
+      state: full
+  - type: RandomSpawner
+    prototypes:
+    - AsakimCorpse
+    chance: 0.5
+    offset: 0.0

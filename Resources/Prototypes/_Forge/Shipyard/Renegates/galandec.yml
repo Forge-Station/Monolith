@@ -4,7 +4,7 @@
   name: «Голландец»
   description: Шаттл Артелерийской поддержки, отличающийся крупным курсовым вооружением . Рекомендованный состав 5-6 человек
 
-  price: 389050
+  price: 500000 # Price bigger than cost of the ship!!
   purchasable: false
   limit: 5
   category: Large

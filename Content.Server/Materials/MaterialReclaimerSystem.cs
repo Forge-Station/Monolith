@@ -3,6 +3,8 @@ using Content.Server.Administration.Logs;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Ghost;
 using Content.Server.Popups;
+using Content.Shared._Forge.Shipyard.Components; // Forge-change
+using Content.Shared._NF.Whitelist.Components; // Forge-change
 using Content.Shared.Repairable;
 using Content.Server.Stack;
 using Content.Server.Wires;
@@ -102,6 +104,17 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         }
 
         args.Handled = TryStartProcessItem(entity.Owner, args.Used, entity.Comp, args.User, predictSound: false); // Frontier: add predictSound: false
+
+        // Forge-change-start
+        if (!args.Handled
+            && HasComp<NFShipyardVoucherComponent>(args.Used)
+            && args.User is { } user
+            && !CanStart(entity.Owner, entity.Comp))
+        {
+            _popup.PopupClient(Loc.GetString("shipyard-voucher-reclaim-reclaimer-off"), entity, user);
+            args.Handled = true;
+        }
+        // Forge-change-end
     }
 
     private void OnSuicideByEnvironment(Entity<MaterialReclaimerComponent> entity, ref SuicideByEnvironmentEvent args)
@@ -198,7 +211,10 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
 
         var xform = Transform(uid);
 
-        SpawnMaterialsFromComposition(uid, item, completion * component.Efficiency, xform: xform);
+        // Forge-change-start: unused vouchers reclaim full lathe material value.
+        var efficiency = HasComp<ShipyardVoucherFullReclaimComponent>(item) ? 1f : component.Efficiency;
+        SpawnMaterialsFromComposition(uid, item, completion * efficiency, xform: xform);
+        // Forge-change-end
 
         if (CanGib(uid, item, component))
         {

@@ -56,3 +56,22 @@
     interfaces:
       enum.StationRadioFrequencyUiKey.Key:
         type: StationRadioFrequencyBoundUserInterface
+
+#Forge-Change-UwU-start
+- type: entity
+  id: StationRadioReceiverUwU
+  name: station UwU radio
+  suffix: UwU
+  parent: StationRadioReceiver
+  components:
+    - type: Sprite
+      sprite: _Forge/Structures/Machines/StationRadio/stationradioUwU.rsi
+      layers:
+      - state: icon
+      - state: unlit
+        shader: unshaded
+        map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      drawdepth: SmallObjects
+    - type: Machine
+      board: StationRadioUwUCircuitboard
+#Forge-Change-UwU-end

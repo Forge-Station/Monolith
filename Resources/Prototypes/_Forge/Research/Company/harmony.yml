@@ -16,10 +16,10 @@
 - type: technology
   id: HMEAdvancedMedkits
   name: research-technology-advanced-medkits
-  entityIcon: HMEAdvancedMedkitCombat # Заменить
+  entityIcon: HMEAdvancedMedkitCombat
   discipline: HME
   tier: 2
-  cost: 40000
+  cost: 25000
   recipeUnlocks:
   - HMEAdvancedMedkitCombat
   technologyPrerequisites:
@@ -32,7 +32,7 @@
   entityIcon: HMESynthFleshPack
   discipline: HME
   tier: 3
-  cost: 100000
+  cost: 60000
   recipeUnlocks:
   - HMESynthFleshPack1
   - HMEElasticGaugePack1
@@ -48,7 +48,7 @@
   entityIcon: HMEAdvancedCompactDefibrillator
   discipline: HME
   tier: 3
-  cost: 45000
+  cost: 30000
   recipeUnlocks:
   - HMEAdvancedCompactDefibrillator
   technologyPrerequisites:
@@ -62,7 +62,7 @@
   entityIcon: HMEBasicHypo
   discipline: HME
   tier: 3
-  cost: 75000
+  cost: 45000
   recipeUnlocks:
   - HMEBasicHypo
   technologyPrerequisites:
@@ -76,7 +76,7 @@
   entityIcon: HMEStandartHypo
   discipline: HME
   tier: 3
-  cost: 100000
+  cost: 80000
   recipeUnlocks:
   - HMEStandartHypo
   technologyPrerequisites:
@@ -89,7 +89,7 @@
   entityIcon: ClothingUniformJumpsuitHME
   discipline: HME
   tier: 2
-  cost: 25000
+  cost: 10000
   recipeUnlocks:
   - HMEJumpsuit
   - HMEJumpskirt
@@ -104,11 +104,13 @@
   entityIcon: ClothingModsuitHMELightSuit
   discipline: HME
   tier: 3
-  cost: 60000
+  cost: 40000
   recipeUnlocks:
   - HMELightModsuit
   technologyPrerequisites:
   - HMEBasicClothing
+  - HMEAdvancedFirstAidEquipement
+  - HighEndSurgery
   - SuperParts
   position: -9, 12
 
@@ -118,7 +120,7 @@
   entityIcon: ClothingModsuitHMELightSuit
   discipline: HME
   tier: 3
-  cost: 100000
+  cost: 75000
   recipeUnlocks:
   - HMEHeavyModsuit
   technologyPrerequisites:

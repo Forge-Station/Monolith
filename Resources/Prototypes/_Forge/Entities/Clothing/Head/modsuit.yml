@@ -1,7 +1,7 @@
 # Harmony Medical Enterprises
 
 - type: entity
-  parent: BaseClothingModsuitHelmet
+  parent: [BaseClothingModsuitHelmet, ClothingFlightProfileEasy, ClothingNightVision2Normal]
   id: ClothingModsuitHelmetHMELightSuit
   name: HME light hardsuit "Preserver" helmet
   description: light-HME-modsuit-helmet-desc
@@ -33,16 +33,27 @@
     - Inorganic
     - Silicon
     - Biological
+  - type: RadarConsole
+    followEntity: true
+    noRotate: true
+  - type: DetectionRangeMultiplier
+    infraredMultiplier: 0.5
+    visualMultiplier: 0.75
   - type: ActivatableUI
-    key: enum.CrewMonitoringUIKey.Key
+    key: enum.RadarConsoleUiKey.Key
+    inHandsOnly: false # Mono
+    singleUser: true
   - type: UserInterface
     interfaces:
-      enum.CrewMonitoringUIKey.Key:
-        type: CrewMonitoringBoundUserInterface
-  - type: CrewMonitoringConsole
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: ActionGrant
+    actions:
+    - ActionHardsuitMassScanner
+  - type: ItemActionGrant
+    actions:
+    - ActionHardsuitMassScanner
+    activeIfWorn: true
   - type: Armor
     modifiers:
       coefficients:
@@ -50,7 +61,6 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.95
-        Radiation: 0.90
   - type: ComponentToggler
     components:
     - type: BreathMask
@@ -108,7 +118,7 @@
     autoRechargeRate: 2
 
 - type: entity
-  parent: BaseClothingModsuitHelmet
+  parent: [BaseClothingModsuitHelmet, ClothingFlightProfileMedium, ClothingNightVision4Normal]
   id: ClothingModsuitHelmetHMEHeavySuit
   name: HME heavy hardsuit "Intercessor" helmet
   description: heavy-HME-modsuit-helmet-desc
@@ -153,24 +163,35 @@
     - Inorganic
     - Silicon
     - Biological
+  - type: RadarConsole
+    followEntity: true
+    noRotate: true
+  - type: DetectionRangeMultiplier
+    infraredMultiplier: 0.5
+    visualMultiplier: 0.75
   - type: ActivatableUI
-    key: enum.CrewMonitoringUIKey.Key
+    key: enum.RadarConsoleUiKey.Key
+    inHandsOnly: false # Mono
+    singleUser: true
   - type: UserInterface
     interfaces:
-      enum.CrewMonitoringUIKey.Key:
-        type: CrewMonitoringBoundUserInterface
-  - type: CrewMonitoringConsole
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: ActionGrant
+    actions:
+    - ActionHardsuitMassScanner
+  - type: ItemActionGrant
+    actions:
+    - ActionHardsuitMassScanner
+    activeIfWorn: true
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.90
-        Slash: 0.90
-        Piercing: 0.90
-        Heat: 0.90
-        Radiation: 0.90
+        Piercing: 0.9
+        Heat: 0.9
+      flatReductions:
+        Blunt: 7.5
+        Slash: 7.5
   - type: ComponentToggler
     components:
     - type: BreathMask

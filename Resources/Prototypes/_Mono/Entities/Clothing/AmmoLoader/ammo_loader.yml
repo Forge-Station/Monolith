@@ -1,6 +1,6 @@
 - type: entity
   id: AmmoLoader
-  parent: BaseMachinePowered
+  parent: [BaseMachinePowered, ConstructibleMachine] #Forge-change
   name: ammo loader
   description: A pneumatic ammunition loading system manufactured by Erebus HI. Link it to ship artillery with a multitool to transfer ammunition. This model supports 8 guns.
   placement:
@@ -72,10 +72,13 @@
   - type: ShipRepairable
     repairTime: 6
     repairCost: 16
+  #Forge-change
+  - type: Machine
+    board: AmmoLoaderMachineCircuitboard
 
 - type: entity
   id: AmmoLoaderSmall
-  parent: AmmoLoader
+  parent: [AmmoLoader, ConstructibleMachine] #Forge-change
   name: small ammo loader
   description: A pneumatic ammunition loading system manufactured by Erebus HI. Link it to ship artillery with a multitool to transfer ammunition. This model supports only 2 guns, but is more durable.
   components:
@@ -110,3 +113,6 @@
   - type: AmmoLoader
     maxConnections: 2
     maxCapacity: 1000
+  #Forge-change
+  - type: Machine
+    board: AmmoLoaderSmallMachineCircuitboard

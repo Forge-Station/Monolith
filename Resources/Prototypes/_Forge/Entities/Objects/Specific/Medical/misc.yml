@@ -25,3 +25,13 @@
         reagents:
           - ReagentId: Tabex
             Quantity: 10
+
+- type: entity
+  id: SyringeCaseMiniSyringeFilled
+  parent: SyringeCase
+  suffix: Filled, MiniSyringe
+  components:
+  - type: StorageFill
+    contents:
+    - id: MiniSyringe
+      amount: 8

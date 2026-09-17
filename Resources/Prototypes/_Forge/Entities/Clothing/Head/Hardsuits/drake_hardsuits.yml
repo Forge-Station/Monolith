@@ -19,10 +19,10 @@
         type: RadarConsoleBoundUserInterface
   - type: ActionGrant
     actions:
-    - ActionDrakeHardsuitMassScanner
+    - ActionHardsuitMassScanner
   - type: ItemActionGrant
     actions:
-    - ActionDrakeHardsuitMassScanner
+    - ActionHardsuitMassScanner
     activeIfWorn: true
 
 - type: entity

@@ -225,6 +225,18 @@
   parent: PlayerStationAiEmpty
   suffix: Ghost Role, Forerunner, T1 only
   components:
+  - type: StationAiCore
+    remoteEntityProto: StationAiHoloADS
+  - type: Sprite
+    sprite: _Forge/Mobs/Silicon/station_ai.rsi
+    layers:
+    - state: ai_empty
+      map: ["enum.StationAiScreenLayer.Background"]
+    - state: ai_empty
+      map: ["enum.StationAiScreenLayer.Screen"]
+      shader: unshaded
+    - state: base
+      map: ["enum.StationAiScreenLayer.Frame"]
   - type: Speech
     speechSounds: SyndieBorg
     allowedEmotes:
@@ -234,6 +246,7 @@
       Unsexed: UnisexSiliconSyndicate
   - type: StationAiScreen
     force-name-prefix: ADC
+    defaultScreen: StationAiScreenDefaultADS
   - type: ContainerComp
     proto: AiHeldForerunner
     container: station_ai_mind_slot
@@ -312,10 +325,67 @@
     prototype: ForerunnerAICoreWhitelist
 
 - type: entity
+  parent:
+  - Incorporeal
+  - BaseMob
+  id: StationAiHoloADS
+  name: AI eye
+  description: The AI's viewer.
+  categories: [ HideSpawnMenu, DoNotMap ]
+  components:
+  - type: Eye
+    pvsScale: 1.5
+  - type: Visibility
+    layer: 2
+  - type: Sprite
+    sprite: _Forge/Mobs/Silicon/station_ai.rsi
+    layers:
+    - state: ai_camera
+      shader: unshaded
+      map: ["base"]
+
+- type: entity
   id: AiHeldForerunner
-  parent: AiHeldForge
   categories: [ HideSpawnMenu ]
   components:
+  - type: IntrinsicRadioReceiver
+  - type: IgnoreUIRange
+  - type: StationAiHeld
+  - type: StationAiOverlay
+  - type: ShowElectrocutionHUD
+  - type: ActionGrant
+    actions:
+    - ActionJumpToCoreADS
+    - ActionSurvCameraLightsADS
+    - ActionAIViewLawsADS
+    - ActionOpenRemoteDevicesMenuADS
+    - ActionCustomizeStationAiADS
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+      enum.SiliconLawsUiKey.Key:
+        type: SiliconLawBoundUserInterface
+      enum.RemoteDeviceUiKey.Key:
+        type: RemoteDevicesBoundUserInterface
+      enum.StationAiCustomizationUiKey.Key:
+        type: StationAiCustomizationBoundUserInterface
+  - type: IntrinsicUI
+    uis:
+      enum.RadarConsoleUiKey.Key:
+        toggleAction: ActionAGhostShowRadarADS
+  - type: RadarConsole
+    followEntity: false
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewMonitor
+    transmitFrequencyId: ShuttleTimer
+  - type: HolographicAvatar
+    layerData:
+    - sprite: Mobs/Silicon/station_ai.rsi
+      state: default
+  - type: ShowJobIcons
+  - type: AdvancedPilot
   - type: ShowRoleInformation
     window: RoleInformationAiForerunner
     duration: 15

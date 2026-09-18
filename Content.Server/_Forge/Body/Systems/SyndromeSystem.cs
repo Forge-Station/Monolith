@@ -288,12 +288,19 @@ public sealed partial class SyndromeSystem : EntitySystem
 
     public void SuppressFlare(EntityUid uid, string protoId, float duration)
     {
-        if (!TryGetHolder(uid, out var holder))
-            return;
-        if (!holder.Syndromes.TryGetValue(protoId, out var syndrome))
+        if (!_prototypes.TryIndex<SyndromePrototype>(protoId, out var proto))
             return;
 
-        syndrome.FlareSupressed = _timing.CurTime + TimeSpan.FromSeconds(duration);
+        foreach (var target in OrganResolver.Resolve(uid, proto.Organ, _body, EntityManager))
+        {
+            if (!TryGetHolder(target, out var holder))
+                continue;
+            if (!holder.Syndromes.TryGetValue(protoId, out var syndrome))
+                continue;
+
+            syndrome.FlareSupressed = _timing.CurTime + TimeSpan.FromSeconds(duration);
+            _sawmill.Debug($"{protoId} suppressed on {ToPrettyString(target)}");
+        }
     }
 
     public void ModifySeverity(EntityUid uid, string protoId, float delta)

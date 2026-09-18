@@ -1,5 +1,7 @@
 using Robust.Shared.Timing;
+using Robust.Shared.Prototypes;
 using Content.Shared.Body.Systems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared._Forge.Body.Components;
 using Content.Shared._Forge.Body.Syndromes;
 
@@ -9,8 +11,9 @@ public sealed partial class ToleranceSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
-    public void AddTolerance(EntityUid uid, string reagentId, float amount, Organ target = Organ.Body)
+    public void AddTolerance(EntityUid uid, ProtoId<ReagentPrototype> reagentId, float amount, Organ target = Organ.Body)
     {
         var targets = OrganResolver.Resolve(uid, target, _body, EntityManager);
 
@@ -28,7 +31,7 @@ public sealed partial class ToleranceSystem : EntitySystem
         }
     }
 
-    public void RemoveTolerance(EntityUid uid, string reagentId, float amount, Organ target = Organ.Body)
+    public void RemoveTolerance(EntityUid uid, ProtoId<ReagentPrototype> reagentId, float amount, Organ target = Organ.Body)
     {
         var targets = OrganResolver.Resolve(uid, target, _body, EntityManager);
 
@@ -51,7 +54,7 @@ public sealed partial class ToleranceSystem : EntitySystem
     }
 
     // Get average tolerance.. Method name makes sense..
-    public float GetAverageTolerance(EntityUid uid, string reagentId, Organ target = Organ.Body)
+    public float GetAverageTolerance(EntityUid uid, ProtoId<ReagentPrototype> reagentId, Organ target = Organ.Body)
     {
         var targets = OrganResolver.Resolve(uid, target, _body, EntityManager);
         var total = 0f;
@@ -74,7 +77,7 @@ public sealed partial class ToleranceSystem : EntitySystem
     }
 
     // Get highest tolerance from all targets
-    public float GetMaxTolerance(EntityUid uid, string reagentId, Organ target = Organ.Body)
+    public float GetMaxTolerance(EntityUid uid, ProtoId<ReagentPrototype> reagentId, Organ target = Organ.Body)
     {
         var targets = OrganResolver.Resolve(uid, target, _body, EntityManager);
         var max = 0f;
@@ -93,7 +96,7 @@ public sealed partial class ToleranceSystem : EntitySystem
     }
 
     // Sum of tolerance from all targets, capped at 1
-    public float GetTotalTolerance(EntityUid uid, string reagentId, Organ target = Organ.Body)
+    public float GetTotalTolerance(EntityUid uid, ProtoId<ReagentPrototype> reagentId, Organ target = Organ.Body)
     {
         var targets = OrganResolver.Resolve(uid, target, _body, EntityManager);
         var total = 0f;
@@ -109,7 +112,7 @@ public sealed partial class ToleranceSystem : EntitySystem
         return Math.Min(total, 1f);
     }
 
-    private float GetToleranceFromHolder(EntityUid uid, string reagentId, IPhysiologyHolder holder)
+    private float GetToleranceFromHolder(EntityUid uid, ProtoId<ReagentPrototype> reagentId, IPhysiologyHolder holder)
     {
         if (!holder.Tolerances.TryGetValue(reagentId, out var tolerance))
             return 0f;
@@ -125,28 +128,22 @@ public sealed partial class ToleranceSystem : EntitySystem
         return tolerance.Value;
     }
 
-    private void AddToleranceToHolder(EntityUid uid, string reagentId, float amount, IPhysiologyHolder holder)
+    private void AddToleranceToHolder(EntityUid uid, ProtoId<ReagentPrototype> reagentId, float amount, IPhysiologyHolder holder)
     {
         if (!holder.Tolerances.TryGetValue(reagentId, out var tolerance))
         {
-            tolerance = new ToleranceData();
+            tolerance = new ToleranceData
+            { DecayRate = _prototypes.Index(reagentId).DecayRate };
             holder.Tolerances[reagentId] = tolerance;
         }
 
         RefreshTolerance(tolerance);
 
-        if (tolerance.Value <= 0f)
-        {
-            holder.Tolerances.Remove(reagentId);
-            tolerance = new ToleranceData();
-            holder.Tolerances[reagentId] = tolerance;
-        }
-
         tolerance.Value = Math.Clamp(tolerance.Value + amount, 0f, 1f);
         tolerance.LastChanged = _timing.CurTime;
     }
 
-    private void RemoveToleranceFromHolder(string reagentId, float amount, IPhysiologyHolder holder)
+    private void RemoveToleranceFromHolder(ProtoId<ReagentPrototype> reagentId, float amount, IPhysiologyHolder holder)
     {
         if (!holder.Tolerances.TryGetValue(reagentId, out var tolerance))
             return;

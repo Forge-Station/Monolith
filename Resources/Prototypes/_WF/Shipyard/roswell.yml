@@ -1,0 +1,43 @@
+- type: vessel
+  id: WFRoswell
+  parent: BaseVesselAntag
+  name: Judge Roswell
+  description: A compact arrestor and patrol vessel fitted with tractor beam equipment.
+  price: 174669
+  purchasable: false
+  category: Medium
+  group: Sr
+  access: Brig
+  mapchecker_group_override: Security
+  shuttlePath: /Maps/_WF/Shuttles/roswell.yml
+  guidebookPage: null
+  class:
+  - Patrol
+  - Pursuit
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: WFRoswell
+  mapName: Roswell
+  mapPath: /Maps/_WF/Shuttles/roswell.yml
+  minPlayers: 0
+  stations:
+    WFRoswell:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Roswell Judge{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+
+- type: entity
+  parent: ShipVoucherFrontierGuard
+  id: WFShipVoucherRoswell
+  name: Judge Roswell ship voucher
+  description: Redeem for a Roswell-class arrestor at the Frontier Staff Shipyard.
+  components:
+  - type: ShipyardVoucher
+    vessels:
+    - WFRoswell

@@ -13,6 +13,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using DependencyAttribute = Robust.Shared.IoC.DependencyAttribute;
+using Robust.Shared.Map.Components;
 using Prometheus;
 using DroneConsoleComponent = Content.Server.Shuttles.DroneConsoleComponent;
 
@@ -27,21 +28,11 @@ public sealed partial class MoverController : SharedMoverController
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ThrusterSystem _thruster = default!;
 
-    // Forge-Change-Start
-    // Reusable buffers to avoid per-tick allocations in HandleShuttleMovement.
-    private readonly List<ShuttleInput> _shuttleInputsBuffer = new();
-    private readonly List<EntityUid> _shuttlePilotRemoveBuffer = new();
+    private Dictionary<EntityUid, (ShuttleComponent, List<(EntityUid, PilotComponent, InputMoverComponent, TransformComponent)>)> _shuttlePilots = new();
 
-    // Cardinal directions are the only ones HandleShuttleMovement iterates;
-    // cached to avoid Enum.GetValues reflection + array allocation each shuttle each tick.
-    private static readonly DirectionFlag[] CardinalDirectionFlags =
-    {
-        DirectionFlag.South,
-        DirectionFlag.East,
-        DirectionFlag.North,
-        DirectionFlag.West,
-    };
-    // Forge-Change-End
+    // WOLFGATE: Propulsion queued by the ordinary helm path this tick. Late station keeping can
+    // replace its braking after tractor recoil without doubling the same engine budget.
+    private readonly Dictionary<EntityUid, (Vector2 LinearInput, float AngularInput, Vector2 Force, float Torque)> _shuttlePropulsion = new();
 
     [Dependency] private EntityQuery<ActiveInputMoverComponent> _activeQuery = default!;
     [Dependency] private EntityQuery<DroneConsoleComponent> _droneQuery = default!;
@@ -184,9 +175,9 @@ public sealed partial class MoverController : SharedMoverController
 
     private void PilotedShuttleRelayEvent<TEvent>(Entity<PilotedShuttleComponent> entity, ref TEvent args)
     {
-        var relayEv = new PilotedShuttleRelayedEvent<TEvent>(args); // Forge-Change: hoisted out of loop
         foreach (var pilot in entity.Comp.InputSources)
         {
+            var relayEv = new PilotedShuttleRelayedEvent<TEvent>(args);
             RaiseLocalEvent(pilot, ref relayEv);
         }
     }
@@ -483,15 +474,13 @@ public sealed partial class MoverController : SharedMoverController
 
     private void HandleShuttleMovement(float frameTime)
     {
+        _shuttlePropulsion.Clear(); // WOLFGATE
         var shuttleQuery = EntityQueryEnumerator<ShuttleComponent, PilotedShuttleComponent, PhysicsComponent>();
         while (shuttleQuery.MoveNext(out var uid, out var shuttle, out var piloted, out var body))
         {
-            // Forge-Change-Start: reuse buffers — clear instead of allocating per shuttle per tick.
-            _shuttleInputsBuffer.Clear();
-            _shuttlePilotRemoveBuffer.Clear();
-            var inputs = _shuttleInputsBuffer;
-            var toRemove = _shuttlePilotRemoveBuffer;
-            // Forge-Change-End
+            var inputs = new List<ShuttleInput>();
+            // query all our pilots for input
+            var toRemove = new List<EntityUid>();
 
             var angularMul = 0f;
             var accelMul = 0f;
@@ -527,6 +516,7 @@ public sealed partial class MoverController : SharedMoverController
             if (count == 0)
             {
                 _thruster.DisableLinearThrusters(shuttle);
+                _thruster.SetAngularThrust(shuttle, false); // WOLFGATE
                 PhysicsSystem.SetSleepingAllowed(uid, body, true);
                 shuttle.AngularMultiplier = shuttle.AccelerationMultiplier = 1f;
                 continue;
@@ -551,54 +541,65 @@ public sealed partial class MoverController : SharedMoverController
             accelMul /= count;
             if (setMaxVel != null)
                 setMaxVel /= count;
+
+            var linearBrakeInput = brakeInput; // WOLFGATE
+            var angularBrakeInput = brakeInput; // WOLFGATE
             shuttle.AngularMultiplier = angularMul;
             shuttle.AccelerationMultiplier = accelMul;
 
+            var forceBefore = body.Force; // WOLFGATE
+            var torqueBefore = body.Torque; // WOLFGATE
+
             var shuttleNorthAngle = _transform.GetWorldRotation(uid);
-            var negShuttleNorthAngle = -shuttleNorthAngle; // Forge-Change: cache negated angle, reused below
 
             var xform = Transform(uid);
 
+            // WOLFGATE START: Track linear/angular braking and show the correct counterthrust directions.
             // handle movement: brake
-            if (brakeInput > 0f)
+            if (linearBrakeInput > 0f || angularBrakeInput > 0f)
             {
-                if (body.LinearVelocity.Length() > 0f)
+                if (linearBrakeInput > 0f && body.LinearVelocity.Length() > 0f)
                 {
                     // Minimum brake velocity for a direction to show its thrust appearance.
                     const float appearanceThreshold = 0.1f;
 
                     // Get velocity relative to the shuttle so we know which thrusters to fire
-                    var shuttleVelocity = negShuttleNorthAngle.RotateVec(body.LinearVelocity); // Forge-Change: use cached negShuttleNorthAngle
+                    var shuttleVelocity = (-shuttleNorthAngle).RotateVec(body.LinearVelocity);
                     var force = GetDirectionThrust(-shuttleVelocity, shuttle, body, xform);
 
-                    if (force.X < 0f)
-                    {
-                        _thruster.DisableLinearThrustDirection(shuttle, DirectionFlag.West);
-                        if (shuttleVelocity.X < -appearanceThreshold)
-                            _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.East);
-                    }
-                    else if (force.X > 0f)
+                    if (force.X < 0f && shuttleVelocity.X > appearanceThreshold)
                     {
                         _thruster.DisableLinearThrustDirection(shuttle, DirectionFlag.East);
-                        if (shuttleVelocity.X > appearanceThreshold)
-                            _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.West);
+                        _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.West);
+                    }
+                    else if (force.X > 0f && shuttleVelocity.X < -appearanceThreshold)
+                    {
+                        _thruster.DisableLinearThrustDirection(shuttle, DirectionFlag.West);
+                        _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.East);
+                    }
+                    else
+                    {
+                        _thruster.DisableLinearThrustDirection(shuttle, DirectionFlag.East);
+                        _thruster.DisableLinearThrustDirection(shuttle, DirectionFlag.West);
                     }
 
-                    if (shuttleVelocity.Y < 0f)
+                    if (force.Y > 0f && shuttleVelocity.Y < -appearanceThreshold)
                     {
                         _thruster.DisableLinearThrustDirection(shuttle, DirectionFlag.South);
-                        if (shuttleVelocity.Y < -appearanceThreshold)
-                            _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.North);
+                        _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.North);
                     }
-                    else if (shuttleVelocity.Y > 0f)
+                    else if (force.Y < 0f && shuttleVelocity.Y > appearanceThreshold)
                     {
                         _thruster.DisableLinearThrustDirection(shuttle, DirectionFlag.North);
-                        if (shuttleVelocity.Y > appearanceThreshold)
-                            _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.South);
-
+                        _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.South);
+                    }
+                    else
+                    {
+                        _thruster.DisableLinearThrustDirection(shuttle, DirectionFlag.North);
+                        _thruster.DisableLinearThrustDirection(shuttle, DirectionFlag.South);
                     }
 
-                    var impulse = force * brakeInput * ShuttleComponent.BrakeCoefficient;
+                    var impulse = force * linearBrakeInput * ShuttleComponent.BrakeCoefficient;
                     impulse = shuttleNorthAngle.RotateVec(impulse);
                     var maxForce = body.LinearVelocity.Length() * body.Mass / frameTime;
 
@@ -616,9 +617,9 @@ public sealed partial class MoverController : SharedMoverController
                     _thruster.DisableLinearThrusters(shuttle);
                 }
 
-                if (body.AngularVelocity != 0f)
+                if (angularBrakeInput > 0f && body.AngularVelocity != 0f)
                 {
-                    var torque = shuttle.AngularThrust * brakeInput * (body.AngularVelocity > 0f ? -1f : 1f) * ShuttleComponent.BrakeCoefficient;
+                    var torque = shuttle.AngularThrust * angularBrakeInput * (body.AngularVelocity > 0f ? -1f : 1f) * ShuttleComponent.BrakeCoefficient;
                     var torqueMul = body.InvI * frameTime;
 
                     if (body.AngularVelocity > 0f)
@@ -642,9 +643,10 @@ public sealed partial class MoverController : SharedMoverController
                 }
             }
 
+            // WOLFGATE END
             if (linearInput.Length().Equals(0f))
             {
-                if (brakeInput.Equals(0f))
+                if (linearBrakeInput.Equals(0f)) // WOLFGATE
                     _thruster.DisableLinearThrusters(shuttle);
             }
             else
@@ -655,17 +657,28 @@ public sealed partial class MoverController : SharedMoverController
 
                 var totalForce = GetDirectionThrust(linearInput, shuttle, body, xform);
 
-                // Forge-Change-Start: replaced Enum.GetValues(typeof(DirectionFlag)) per-tick allocation with cached cardinals array
-                foreach (var dir in CardinalDirectionFlags)
+                // Won't just do cardinal directions.
+                foreach (DirectionFlag dir in Enum.GetValues(typeof(DirectionFlag)))
                 {
+                    // Brain no worky but I just want cardinals
+                    switch (dir)
+                    {
+                        case DirectionFlag.South:
+                        case DirectionFlag.East:
+                        case DirectionFlag.North:
+                        case DirectionFlag.West:
+                            break;
+                        default:
+                            continue;
+                    }
+
                     if ((dir & dockFlag) == 0x0)
                         _thruster.DisableLinearThrustDirection(shuttle, dir);
                     else
                         _thruster.EnableLinearThrustDirection(shuttle, dir);
                 }
-                // Forge-Change-End
 
-                var localVel = negShuttleNorthAngle.RotateVec(body.LinearVelocity); // Forge-Change: use cached negShuttleNorthAngle
+                var localVel = (-shuttleNorthAngle).RotateVec(body.LinearVelocity);
                 if (setMaxVel is { } speed && localVel.LengthSquared() != 0f && totalForce.LengthSquared() != 0f)
                 {
                     // vector of max velocity we can be traveling with along current direction
@@ -691,7 +704,7 @@ public sealed partial class MoverController : SharedMoverController
 
             if (MathHelper.CloseTo(angularInput, 0f))
             {
-                if (brakeInput <= 0f)
+                if (angularBrakeInput <= 0f) // WOLFGATE
                     _thruster.SetAngularThrust(shuttle, false);
             }
             else
@@ -712,15 +725,83 @@ public sealed partial class MoverController : SharedMoverController
                     _thruster.SetAngularThrust(shuttle, true);
                 }
             }
+
+            _shuttlePropulsion[uid] = (linearInput, angularInput, body.Force - forceBefore, body.Torque - torqueBefore); // WOLFGATE
         }
     }
 
-    // Forge-Change-Start: removed per-tick Dictionary + tuple-list allocations; iterate pilots directly and call AddPilot inline.
+    // WOLFGATE START: Powered station keeping after tractor recoil.
+    /// <summary>
+    /// Recalculate normal powered braking after tractor impulses, including forces still
+    /// queued for this physics step. Manual steering retains control of each axis and any
+    /// earlier helm braking is replaced, so engines cannot spend their thrust budget twice.
+    /// </summary>
+    public void ApplyStationKeeping(EntityUid uid, float frameTime, ShuttleComponent shuttle, PhysicsComponent body)
+    {
+        if (frameTime <= 0 || !float.IsFinite(frameTime) || body.InvMass <= 0)
+            return;
+
+        _shuttlePropulsion.TryGetValue(uid, out var propulsion);
+        var rotation = _transform.GetWorldRotation(uid);
+        var xform = Transform(uid);
+        PhysicsSystem.SetSleepingAllowed(uid, body, false);
+
+        if (propulsion.LinearInput == Vector2.Zero)
+        {
+            // Exclude the brake force we are replacing. Tractor reaction impulses are
+            // already in LinearVelocity; gravity/other queued forces still need integration.
+            var velocity = body.LinearVelocity + (body.Force - propulsion.Force) * body.InvMass * frameTime;
+            var localVelocity = (-rotation).RotateVec(velocity);
+            var available = GetDirectionThrust(-localVelocity, shuttle, body, xform) * ShuttleComponent.BrakeCoefficient;
+            var required = velocity.Length() * body.Mass / frameTime;
+            var force = rotation.RotateVec(available);
+            if (force.LengthSquared() > required * required)
+                force = required > 0 ? force.Normalized() * required : Vector2.Zero;
+
+            var change = force - propulsion.Force;
+            PhysicsSystem.ApplyForce(uid, change, body: body);
+            shuttle.LastThrust += change / body.FixturesMass;
+            SetStationKeepingThrust(shuttle, (-rotation).RotateVec(force));
+        }
+
+        if (propulsion.AngularInput == 0f && body.InvI > 0)
+        {
+            var angularVelocity = body.AngularVelocity + (body.Torque - propulsion.Torque) * body.InvI * frameTime;
+            var limit = shuttle.AngularThrust * ShuttleComponent.BrakeCoefficient;
+            var torque = Math.Clamp(-angularVelocity / (body.InvI * frameTime), -limit, limit);
+            PhysicsSystem.ApplyTorque(uid, torque - propulsion.Torque, body: body);
+            _thruster.SetAngularThrust(shuttle, torque != 0f);
+        }
+    }
+
+    private void SetStationKeepingThrust(ShuttleComponent shuttle, Vector2 localForce)
+    {
+        // Even a slow resisting ship can require substantial thrust. Show actual force,
+        // not a velocity threshold, so a stationary arrestor's counterthrust remains visible.
+        SetDirection(DirectionFlag.East, localForce.X > 0);
+        SetDirection(DirectionFlag.West, localForce.X < 0);
+        SetDirection(DirectionFlag.North, localForce.Y > 0);
+        SetDirection(DirectionFlag.South, localForce.Y < 0);
+        return;
+
+        void SetDirection(DirectionFlag direction, bool firing)
+        {
+            if (firing)
+                _thruster.EnableLinearThrustDirection(shuttle, direction);
+            else
+                _thruster.DisableLinearThrustDirection(shuttle, direction);
+        }
+    }
+
+    // WOLFGATE END
+
     private void HandleShuttlePilot(float frameTime)
     {
+        var newPilots = new Dictionary<EntityUid, (ShuttleComponent Shuttle, List<(EntityUid PilotUid, PilotComponent Pilot, InputMoverComponent Mover, TransformComponent ConsoleXform)>)>();
+
         // We just mark off their movement and the shuttle itself does its own movement
         var activePilotQuery = EntityQueryEnumerator<PilotComponent, InputMoverComponent>();
-        while (activePilotQuery.MoveNext(out var uid, out var pilot, out _))
+        while (activePilotQuery.MoveNext(out var uid, out var pilot, out var mover))
         {
             var consoleEnt = pilot.Console;
 
@@ -738,10 +819,28 @@ public sealed partial class MoverController : SharedMoverController
                 !shuttleComponent.Enabled)
                 continue;
 
-            AddPilot(gridId.Value, uid);
+            if (!newPilots.TryGetValue(gridId.Value, out var pilots))
+            {
+                pilots = (shuttleComponent, new List<(EntityUid, PilotComponent, InputMoverComponent, TransformComponent)>());
+                newPilots[gridId.Value] = pilots;
+            }
+
+            pilots.Item2.Add((uid, pilot, mover, xform));
+        }
+
+        _shuttlePilots = newPilots;
+
+
+        // Collate all of the linear / angular velocites for a shuttle
+        // then do the movement input once for it.
+        foreach (var (shuttleUid, (shuttle, pilots)) in _shuttlePilots)
+        {
+            foreach (var (pilotUid, _, _, _) in pilots)
+            {
+                AddPilot(shuttleUid, pilotUid);
+            }
         }
     }
-    // Forge-Change-End
 
     /// <summary>
     /// Registers an entity as an input source for a shuttle.

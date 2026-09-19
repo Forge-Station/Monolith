@@ -1,4 +1,5 @@
 using Content.Server.Atmos.EntitySystems;
+using System.Linq;// Forge-Change
 using Content.Server.Botany.Components;
 using Content.Server.Kitchen.Components;
 using Content.Shared.Kitchen.Components;
@@ -161,6 +162,22 @@ public sealed partial class PlantHolderSystem : EntitySystem
             args.PushMarkup(Loc.GetString("plant-holder-light-mode-examine",
                 ("mode", Loc.GetString($"plant-holder-light-{component.LightMode.ToString().ToLowerInvariant()}"))));
 
+            // Forge-Change-start
+            if (component.DrawWarnings)
+            {
+                var harvestContainer = _itemSlots.GetItemOrNull(entity.Owner, PlantHolderComponent.HarvestContainerSlotId);
+                if (harvestContainer != null)
+                {
+                    args.PushMarkup(Loc.GetString("plant-holder-harvest-container-examine",
+                        ("container", MetaData(harvestContainer.Value).EntityName)));
+                }
+                else
+                {
+                    args.PushMarkup(Loc.GetString("plant-holder-harvest-container-empty-examine"));
+                }
+            }
+            // Forge-Change-end
+
             if (component.DrawWarnings)
             {
                 if (component.Toxins > 40f)
@@ -188,7 +205,14 @@ public sealed partial class PlantHolderSystem : EntitySystem
                     args.PushMarkup(Loc.GetString("plant-holder-component-pest-eater-warning"));
 
                 if (component.Seed is { GeneLocked: true })
-                    args.PushMarkup(Loc.GetString("plant-holder-component-gene-locked-warning"));
+                {
+                    // Forge-Change-start
+                    var pinned = component.Seed.PinnedTraits.Count > 0
+                        ? string.Join(", ", component.Seed.PinnedTraits.Select(BotanyLocalization.GetMutationName))
+                        : Loc.GetString("plant-analyzer-mutation-gene-locked");
+                    args.PushMarkup(Loc.GetString("plant-holder-component-gene-locked-warning", ("traits", pinned)));
+                    // Forge-Change-end
+                }
             }
         }
     }
@@ -254,6 +278,7 @@ public sealed partial class PlantHolderSystem : EntitySystem
                     ("seedNoun", noun)), args.User, PopupType.Medium);
 
                 component.Seed = seed;
+                component.CultivarArchived = false; // Forge-Change
                 component.Dead = false;
                 component.Age = 1;
                 if (seeds.HealthOverride != null)
@@ -474,7 +499,18 @@ public sealed partial class PlantHolderSystem : EntitySystem
         }
 
         // Weeds like water and nutrients! They may appear even if there's not a seed planted.
-        if (component.WaterLevel > 10 && component.NutritionLevel > 5)
+        // Forge-Change-start
+        var sanitary = component.Seed?.CarnivorousPestEater == true;
+        if (sanitary && component.Seed != null)
+        {
+            component.Seed.TurnIntoKudzu = false;
+            component.Seed.CarnivorousGrab = false;
+            component.WeedLevel = 0;
+            component.PestLevel = 0;
+        }
+
+        if (!sanitary && component.WaterLevel > 10 && component.NutritionLevel > 5)
+        // Forge-Change-end
         {
             var chance = 0f;
             if (component.Seed == null)
@@ -491,7 +527,8 @@ public sealed partial class PlantHolderSystem : EntitySystem
                 component.UpdateSpriteAfterUpdate = true;
         }
 
-        if (component.Seed != null && component.Seed.TurnIntoKudzu
+        // Forge-Change
+        if (!sanitary && component.Seed != null && component.Seed.TurnIntoKudzu
             && component.WeedLevel >= component.Seed.WeedHighLevelThreshold)
         {
             Spawn(component.Seed.KudzuPrototype, Transform(uid).Coordinates.SnapToGrid(EntityManager));
@@ -518,7 +555,8 @@ public sealed partial class PlantHolderSystem : EntitySystem
 
         // There's a small chance the pest population increases.
         // Can only happen when there's a live seed planted.
-        if (_random.Prob(0.01f))
+        // Forge-Change
+        if (!sanitary && _random.Prob(0.01f))
         {
             component.PestLevel += 0.5f * HydroponicsSpeedMultiplier;
             if (component.DrawWarnings)
@@ -817,7 +855,8 @@ public sealed partial class PlantHolderSystem : EntitySystem
                 return false;
             }
 
-            _botany.Harvest(component.Seed, user, component.YieldMod);
+            // Forge-Change
+            _botany.Harvest(component.Seed, user, component.YieldMod, plantholder);
             AfterHarvest(plantholder, component);
             return true;
         }
@@ -851,7 +890,8 @@ public sealed partial class PlantHolderSystem : EntitySystem
         if (component.Seed == null || !component.Harvest)
             return;
 
-        _botany.AutoHarvest(component.Seed, Transform(uid).Coordinates);
+        // Forge-Change
+        _botany.AutoHarvest(component.Seed, Transform(uid).Coordinates, component.YieldMod, uid);
         AfterHarvest(uid, component);
     }
 
@@ -917,6 +957,7 @@ public sealed partial class PlantHolderSystem : EntitySystem
         component.LastProduce = 0;
         component.Sampled = false;
         component.Harvest = false;
+        component.CultivarArchived = false; // Forge-Change
         component.ImproperLight = false;
         component.ImproperPressure = false;
         component.ImproperHeat = false;
@@ -1030,6 +1071,10 @@ public sealed partial class PlantHolderSystem : EntitySystem
 
             _appearance.SetData(uid, PlantHolderVisuals.HasPlant, true, app);
             _appearance.SetData(uid, PlantHolderVisuals.HealthPercent, healthPercent, app);
+            // Forge-Change-start
+            _appearance.SetData(uid, PlantHolderVisuals.WaterPercent, Math.Clamp(component.WaterLevel / 100f, 0f, 1f), app);
+            _appearance.SetData(uid, PlantHolderVisuals.NutritionPercent, Math.Clamp(component.NutritionLevel / 100f, 0f, 1f), app);
+            // Forge-Change-end
 
             if (component.Dead)
             {
@@ -1061,6 +1106,10 @@ public sealed partial class PlantHolderSystem : EntitySystem
             _appearance.SetData(uid, PlantHolderVisuals.HealthLight, false, app);
             _appearance.SetData(uid, PlantHolderVisuals.HasPlant, false, app);
             _appearance.SetData(uid, PlantHolderVisuals.HealthPercent, 0f, app);
+            // Forge-Change-start
+            _appearance.SetData(uid, PlantHolderVisuals.WaterPercent, 0f, app);
+            _appearance.SetData(uid, PlantHolderVisuals.NutritionPercent, 0f, app);
+            // Forge-Change-end
         }
 
         var weedsHigh = component.WeedLevel >= 5;

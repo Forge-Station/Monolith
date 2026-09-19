@@ -33,6 +33,11 @@
   equipment:
     balaclava: ClothingBalaclavaSkiMaskPurple
 
+- type: loadout                             #Forge-Change-Start
+  id: MercenaryClothingBalaclavaSkiMaskPink
+  equipment:
+    balaclava: ClothingBalaclavaSkiMaskPink #Forge-Change-End
+
 - type: loadout
   id: MercenaryClothingBalaclavaSkiMaskYellow
   equipment:
@@ -42,6 +47,11 @@
   id: MercenaryClothingBalaclavaSkiMaskTan
   equipment:
     balaclava: ClothingBalaclavaSkiMaskTan
+
+- type: loadout                             #Forge-Change-Start
+  id: MercenaryClothingBalaclavaSkiMaskMerc
+  equipment:
+    balaclava: ClothingBalaclavaSkiMaskMerc #Forge-Change-End
 
 - type: loadout
   id: MercenaryClothingBalaclavaSkiMaskRangerGreen

@@ -988,12 +988,13 @@
           Brute: -0.25
           Burn: -0.25
           Toxin: -0.12
-      - !type:AdjustReagent # Mono: Overdose, penalize metabolism
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        reagent: Tricordrazine
-        amount: -0.8
+      # Forge-change: we have another penalize
+      # - !type:AdjustReagent # Mono: Overdose, penalize metabolism
+      #   conditions:
+      #   - !type:ReagentThreshold
+      #     min: 15
+      #   reagent: Tricordrazine
+      #   amount: -0.8
       # Forge-change-start
       - !type:SuppressEffect
         # hidden: true
@@ -1046,6 +1047,7 @@
   physicalDesc: reagent-physical-desc-soothing
   flavor: medicine
   color: "#fcf7f9"
+  decayRate: 0.06 # Forge-change
   metabolisms:
     Medicine:
       effects:
@@ -1788,9 +1790,11 @@
         syndrome: SedativeAddiction
         severity: 0.25
       - !type:SuppressEffect
-        hidden: true
         syndrome: StimulantAddiction
-        duration: 280
+        duration: 180
+      - !type:RemoveSyndromeEffect
+        syndrome: StimulantAddiction
+        severity: 0.3
       - !type:GenericDescEffect
         description: forge-reagent-tolerance-addiction
         # Forge-change-end

@@ -369,3 +369,13 @@
   components:
   - type: Sprite
     sprite: _Forge/Clothing/Neck/Cloaks/witchcloak.rsi
+
+#Company branded
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakNexus
+  name: nexus cloak
+  description: A Nexus cloak.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Cloaks/cloaks_nexus.rsi

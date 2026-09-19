@@ -161,6 +161,10 @@
         variation: 0.20
   - type: PlantHealthBarTarget
   - type: ShowPlantHealthBars
+  - type: CollectiveMind
+    channels:
+    - RootMind
+    defaultChannel: RootMind
   #Forge-Change-end
 
 - type: entity

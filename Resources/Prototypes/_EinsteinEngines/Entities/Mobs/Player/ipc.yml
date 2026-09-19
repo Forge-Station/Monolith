@@ -132,6 +132,13 @@
   - type: WeldingHealable
   - type: TTS # Forge-Change
   - type: RetroMonitorView # Mono
+  #Forge-Change-start
+  - type: CollectiveMind
+    channels:
+    - Binary
+    defaultChannel: Binary
+  #Forge-Change-end
+  
 
 - type: entity
   save: false

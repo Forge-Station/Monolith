@@ -1,0 +1,10 @@
+# - type: construction
+#   id: CdRack
+#   graph: CdRackGraph
+#   targetNode: CdRackNode
+#   category: construction-category-furniture
+#   objectType: Structure
+#   placementMode: SnapgridCenter
+#   canBuildInImpassable: true
+#   conditions:
+#     - !type:TileNotBlocked

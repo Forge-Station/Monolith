@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Pixel art for Corvax Forge leviathans.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "starfire"
+    },
+    {
+      "name": "gravity"
+    },
+    {
+      "name": "swallow"
+    },
+    {
+      "name": "warp"
+    },
+    {
+      "name": "tempest"
+    },
+    {
+      "name": "flare"
+    },
+    {
+      "name": "coil"
+    },
+    {
+      "name": "brood"
+    },
+    {
+      "name": "latch"
+    },
+    {
+      "name": "ion"
+    },
+    {
+      "name": "bloom"
+    },
+    {
+      "name": "stasis"
+    },
+    {
+      "name": "polyp"
+    }
+  ]
+}

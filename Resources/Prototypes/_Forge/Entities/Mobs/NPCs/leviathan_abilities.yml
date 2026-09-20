@@ -1,0 +1,364 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: ForgeVoidDrakeStarfireGun
+  name: drake starfire lung
+  description: For breathing dying stars.
+  components:
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 1.4
+    rechargeSound:
+      path: /Audio/Animals/space_dragon_roar.ogg
+  - type: BasicEntityAmmoProvider
+    proto: ProjectileForgeVoidDrakeStarfire
+    capacity: 1
+    count: 1
+  - type: Gun
+    soundGunshot:
+      path: /Audio/Magic/fireball.ogg
+    soundEmpty: null
+    projectileSpeed: 32
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletTrigger
+  id: ProjectileForgeVoidDrakeStarfire
+  name: starfire
+  description: A condensed shard of a dying star.
+  components:
+  - type: PointLight
+    color: "#C44DFF"
+    radius: 3.5
+    energy: 6.0
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/projectiles.rsi
+    layers:
+    - state: starfire
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Heat: 80
+        Structural: 1400
+  - type: IgnitionSource
+    temperature: 1200
+    ignited: true
+  - type: RepeatingTrigger
+    delay: 0.4
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 120
+    intensitySlope: 4
+    maxIntensity: 40
+    canCreateVacuum: false
+    deleteAfterExplosion: false
+    repeatable: true
+  - type: TimedDespawn
+    lifetime: 4
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: ForgeVoidWormAcidGun
+  name: void worm gland
+  description: Spits cosmic acid.
+  components:
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 4
+    rechargeSound:
+      path: /Audio/Effects/Fluids/splat.ogg
+  - type: BasicEntityAmmoProvider
+    proto: ProjectileForgeVoidWormAcid
+    capacity: 1
+    count: 1
+  - type: Gun
+    soundGunshot:
+      path: /Audio/Effects/Fluids/splat.ogg
+    soundEmpty: null
+    projectileSpeed: 16
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletTrigger
+  id: ProjectileForgeVoidWormAcid
+  name: void acid
+  description: Do not lick.
+  components:
+  - type: PointLight
+    color: "#5DFFC8"
+    radius: 2.2
+    energy: 3.5
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/projectiles.rsi
+    layers:
+    - state: acid
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: true
+    damage:
+      types:
+        Caustic: 28
+        Poison: 8
+        Structural: 25
+  - type: TimedDespawn
+    lifetime: 3.5
+
+- type: entity
+  id: ActionForgeVoidDrakeStarfire
+  name: "[color=#c44dff]Starfire Breath[/color]"
+  description: Exhale a shard of a dying star. Melts hulls and cooks anyone in the way.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: starfire
+    event: !type:ActionGunShootEvent
+    priority: 2
+    checkCanAccess: false
+    checkCanInteract: false
+    range: 0
+    itemIconStyle: BigAction
+
+- type: entity
+  id: ActionForgeVoidDrakeGravityWell
+  name: "[color=#9B4DFF]Gravity Well[/color]"
+  description: Collapse nearby mass toward your maw. Ships, crew, debris — all fall in.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: gravity
+    event: !type:VoidDrakeGravityWellEvent
+    useDelay: 14
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: 3
+
+- type: entity
+  id: ActionForgeVoidDrakeWingTempest
+  name: "[color=#9ad8ff]Wing Tempest[/color]"
+  description: Beat your wings and hurl everything nearby into the void.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: tempest
+    event: !type:VoidDrakeWingTempestEvent
+    useDelay: 16
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: 4
+
+- type: entity
+  id: ActionForgeVoidDrakeSolarFlare
+  name: "[color=#ffd24a]Solar Flare[/color]"
+  description: Ignite like a miniature sun. Blind, scorch, and EMP everything around you.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: flare
+    event: !type:VoidDrakeSolarFlareEvent
+    useDelay: 22
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: 5
+
+- type: entity
+  id: ActionForgeVoidWormAcid
+  name: "[color=#5DFFC8]Acid Spittle[/color]"
+  description: Spit a glob of cosmic acid that eats flesh and plating alike.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: swallow
+    event: !type:ActionGunShootEvent
+    priority: 2
+    checkCanAccess: false
+    checkCanInteract: false
+    range: 0
+    itemIconStyle: BigAction
+
+- type: entity
+  id: ActionForgeVoidWormWarpBreach
+  name: "[color=#7dffcc]Warp Breach[/color]"
+  description: Tear a hole in space and reappear at the target, detonating the tunnel behind you.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: warp
+    event: !type:VoidWormWarpBreachEvent
+    useDelay: 12
+    range: 16
+    checkCanAccess: false
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: 3
+
+- type: entity
+  id: ActionForgeVoidWormCoilSmash
+  name: "[color=#c8f5e0]Coil Smash[/color]"
+  description: Contract your entire bulk and crush everything caught in the coil.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: coil
+    event: !type:VoidWormCoilSmashEvent
+    useDelay: 18
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: 4
+
+- type: entity
+  id: ActionForgeVoidWormBroodBurst
+  name: "[color=#9bffc8]Brood Burst[/color]"
+  description: Tear off living segments that hunt as wormlings.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: brood
+    event: !type:VoidWormBroodBurstEvent
+    useDelay: 45
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: 5
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: ForgeVoidMedusaIonGun
+  name: medusa ion organ
+  description: Spits a harpoon of living lightning.
+  components:
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 2.4
+    rechargeSound:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+  - type: BasicEntityAmmoProvider
+    proto: ProjectileForgeVoidMedusaIon
+    capacity: 1
+    count: 1
+  - type: Gun
+    soundGunshot:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+    soundEmpty: null
+    projectileSpeed: 28
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletTrigger
+  id: ProjectileForgeVoidMedusaIon
+  name: ion harpoon
+  description: A living bolt that kills electronics, not plating.
+  components:
+  - type: PointLight
+    color: "#88a0ff"
+    radius: 3.2
+    energy: 5.0
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/projectiles.rsi
+    layers:
+    - state: ion
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: true
+    damage:
+      types:
+        Shock: 40
+  - type: EmpOnTrigger
+    range: 3.5
+    energyConsumption: 800000
+    disableDuration: 8
+  - type: TimedDespawn
+    lifetime: 4.5
+
+- type: entity
+  id: ActionForgeVoidMedusaIonHarpoon
+  name: "[color=#88a0ff]Ion Harpoon[/color]"
+  description: Spear a shuttle with living lightning. EMP on impact — hulls stay, systems die.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: ion
+    event: !type:ActionGunShootEvent
+    priority: 2
+    checkCanAccess: false
+    checkCanInteract: false
+    range: 0
+    itemIconStyle: BigAction
+
+- type: entity
+  id: ActionForgeVoidMedusaLatch
+  name: "[color=#c9a0ff]Tentacle Latch[/color]"
+  description: Grapple a shuttle and drag it toward the bell. The ship comes to you.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: latch
+    event: !type:VoidMedusaLatchEvent
+    useDelay: 6
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: 3
+
+- type: entity
+  id: ActionForgeVoidMedusaIonBloom
+  name: "[color=#7a5cff]Ion Bloom[/color]"
+  description: The bell detonates an EMP flower. Consoles, guns, thrusters — all go dark.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: bloom
+    event: !type:VoidMedusaIonBloomEvent
+    useDelay: 16
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: 4
+
+- type: entity
+  id: ActionForgeVoidMedusaStasisVeil
+  name: "[color=#a8e4ff]Stasis Veil[/color]"
+  description: Freeze nearby crew and damp a latched shuttle so it cannot thrust away.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: stasis
+    event: !type:VoidMedusaStasisVeilEvent
+    useDelay: 14
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: 5
+
+- type: entity
+  id: ActionForgeVoidMedusaPolypRain
+  name: "[color=#6ec8ff]Polyp Rain[/color]"
+  description: Shed shock-jellies that hunt hulls and EMP when they die.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Actions/leviathans.rsi
+      state: polyp
+    event: !type:VoidMedusaPolypRainEvent
+    useDelay: 32
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: 6

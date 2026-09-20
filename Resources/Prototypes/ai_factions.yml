@@ -98,4 +98,10 @@
   - Mothership
   defaultHostile: true
 
+# Forge-Change-Start
+- type: npcFaction
+  id: Leviathan
+  defaultHostile: true
+# Forge-Change-End
+
 # Mono edit end.

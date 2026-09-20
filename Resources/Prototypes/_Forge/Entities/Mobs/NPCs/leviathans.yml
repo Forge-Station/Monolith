@@ -1,0 +1,868 @@
+# Forge leviathans: unique megafauna, not the carp space dragon.
+
+- type: entity
+  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
+  id: BaseMobForgeLeviathan
+  abstract: true
+  suffix: Forge
+  components:
+  - type: InputMover
+  - type: MobMover
+  - type: CombatMode
+  - type: Physics
+    bodyType: KinematicController
+  - type: NpcFactionMember
+    factions:
+    - Leviathan
+  - type: HTN
+    sleepPlayerCheckRangeOverride: 4000
+    sleepMaxGridSpeed: 10
+    rootTask:
+      task: XenoCompound
+    blackboard:
+      NavInteract: !type:Bool
+        false
+      NavPry: !type:Bool
+        false
+      NavSmash: !type:Bool
+        true
+      VisionRadius: !type:Single
+        80
+      AggroVisionRadius: !type:Single
+        80
+  - type: Speech
+    speechVerb: LargeMob
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: LanguageKnowledge
+    speaks:
+    - Xeno
+    understands:
+    - Xeno
+  - type: Body
+    prototype: Animal
+  - type: Bloodstream
+    bloodMaxVolume: 1200
+  - type: StatusEffects
+    allowed:
+    - SlowedDown
+    - Stutter
+    - Electrocution
+    - ForcedSleep
+    - TemporaryBlindness
+    - Pacified
+    - RadiationProtection
+    - Drowsiness
+    - Adrenaline
+  - type: Flammable
+    damage:
+      types: {}
+  - type: Temperature
+    heatDamageThreshold: 2000
+    coldDamageThreshold: -250
+  - type: Insulated
+  - type: FlashImmunity
+  - type: NoSlip
+  - type: Puller
+    needsHands: false
+  - type: NightVision
+    relayOverlay: false
+    goggleEffect: true
+    viewCircleRadius: 450
+    viewCircleCount: 4
+    viewCircleSpacing: 280
+    action: ActionToggleNightVision
+    phosphorColor: "#66F5FF"
+    lightingColor: "#FFFFFF32"
+  - type: RadarBlip
+    visibleFromOtherGrids: true
+    radarColor: "#9B4DFF"
+    scale: 4
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: IntrinsicUI
+    uis:
+      enum.RadarConsoleUiKey.Key:
+        toggleAction: ActionObserverShowRadar
+  - type: RadarConsole
+    followEntity: true
+    noRotate: true
+    maxIffRange: 0
+    hideCoords: false
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Appearance
+  - type: Damageable
+    damageContainer: Leviathan
+  - type: ExplosionResistance
+    damageCoefficient: 0.35
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 2000000
+      behaviors:
+      - !type:GibBehavior { }
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 110
+    baseSprintSpeed: 120
+    baseWeightlessModifier: 1.0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      92000: Critical
+      100000: Dead
+  - type: MobState
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+      - ActionCritLastWords
+
+- type: entity
+  parent: BaseMobForgeLeviathan
+  id: MobForgeVoidDrake
+  name: void drake
+  description: An astral leviathan of horned wings and starfire. Not a carp dragon — a hunger that learned to fly between stars.
+  components:
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: ghost-role-information-forge-void-drake-name
+    description: ghost-role-information-forge-void-drake-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/void_drake.rsi
+    noRot: true
+    drawdepth: OverMobs
+    scale: 1, 1
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: alive-unshaded
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+        BaseUnshaded: alive-unshaded
+      Critical:
+        Base: crit
+      Dead:
+        Base: dead
+        BaseUnshaded: dead-unshaded
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 14
+        density: 280
+        mask:
+        - FlyingMobMask
+        - MapGrid
+        layer:
+        - FlyingMobLayer
+  - type: Damageable
+    damageContainer: Leviathan
+  - type: ExplosionResistance
+    damageCoefficient: 0.35
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 2000000
+      behaviors:
+      - !type:GibBehavior { }
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 110
+    baseSprintSpeed: 120
+    baseWeightlessModifier: 1.0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      92000: Critical
+      100000: Dead
+  - type: MeleeWeapon
+    altDisarm: false
+    attackRate: 0.7
+    range: 10
+    animation: WeaponArcClaw
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Slash: 28
+        Heat: 12
+        Structural: 220
+  - type: PointLight
+    radius: 22
+    energy: 3.8
+    color: "#3ad0c8"
+    castShadows: false
+  - type: Devourer
+    foodPreference: Humanoid
+    shouldStoreDevoured: true
+    chemical: Ichor
+    healRate: 18.0
+    whitelist:
+      components:
+      - MobState
+      - Door
+      tags:
+      - Wall
+  - type: VoidDrake
+    huntSpeed: 110
+    minHealth: 100000
+    maxHealth: 1000000
+  - type: ActionGrant
+    actions:
+    - ActionForgeVoidDrakeGravityWell
+    - ActionForgeVoidDrakeWingTempest
+    - ActionForgeVoidDrakeSolarFlare
+  - type: ActionGun
+    action: ActionForgeVoidDrakeStarfire
+    gunProto: ForgeVoidDrakeStarfireGun
+  - type: RadarBlip
+    visibleFromOtherGrids: true
+    radarColor: "#3ad0c8"
+    scale: 8
+  - type: InteractionPopup
+    successChance: 0.08
+    interactSuccessString: petting-success-forge-void-drake
+    interactFailureString: petting-failure-forge-void-drake
+    interactFailureSound:
+      path: /Audio/Animals/space_dragon_roar.ogg
+    soundPerceivedByOthers: false
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatForgeLeviathan
+      amount: 6
+  - type: MobPrice
+    price: 12000
+
+- type: entity
+  parent: MobForgeVoidDrake
+  id: MobForgeVoidDrakeAI
+  suffix: AI, Forge
+  components:
+  - type: GhostRole
+    prob: 0
+  - type: GhostTakeoverAvailable
+
+- type: entity
+  parent: BaseMobForgeLeviathan
+  id: MobForgeVoidWorm
+  name: void worm
+  description: A colossal cosmic worm six tiles thick and a cruiser long. Its maw is a tunnel, its body a living corridor of teeth.
+  components:
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/void_worm.rsi
+    noRot: false
+    drawdepth: OverMobs
+    scale: 2, 2
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: alive-unshaded
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+        BaseUnshaded: alive-unshaded
+      Critical:
+        Base: crit
+      Dead:
+        Base: dead
+        BaseUnshaded: dead-unshaded
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 3
+        density: 400
+        mask:
+        - FlyingMobMask
+        - MapGrid
+        layer:
+        - FlyingMobLayer
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 110
+    baseSprintSpeed: 120
+    baseWeightlessModifier: 1.0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      92000: Critical
+      100000: Dead
+  - type: MeleeWeapon
+    altDisarm: false
+    attackRate: 0.55
+    range: 4
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/demon_consume.ogg
+    damage:
+      types:
+        Piercing: 32
+        Blunt: 18
+        Caustic: 8
+        Structural: 260
+  - type: PointLight
+    radius: 10
+    energy: 3.2
+    color: "#c8a090"
+    castShadows: false
+  - type: RadarBlip
+    visibleFromOtherGrids: true
+    radarColor: "#d8c4b0"
+    scale: 2
+    shape: Circle
+  - type: Devourer
+    foodPreference: All
+    shouldStoreDevoured: true
+    chemical: Ichor
+    healRate: 22.0
+    devourTime: 2.4
+    structureDevourTime: 7.0
+    whitelist:
+      components:
+      - MobState
+      - Door
+      tags:
+      - Wall
+  - type: VoidWorm
+    minLength: 100
+    maxLength: 300
+    segmentSpacing: 5.4
+    huntSpeed: 110
+    minHealth: 100000
+    maxHealth: 1000000
+    segmentMinHealth: 50000
+    segmentMaxHealth: 200000
+  - type: ActionGrant
+    actions:
+    - ActionForgeVoidWormWarpBreach
+    - ActionForgeVoidWormCoilSmash
+    - ActionForgeVoidWormBroodBurst
+  - type: ActionGun
+    action: ActionForgeVoidWormAcid
+    gunProto: ForgeVoidWormAcidGun
+  - type: InteractionPopup
+    successChance: 0.04
+    interactSuccessString: petting-success-forge-void-worm
+    interactFailureString: petting-failure-forge-void-worm
+    interactFailureSound:
+      path: /Audio/Effects/demon_consume.ogg
+    soundPerceivedByOthers: false
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatForgeLeviathan
+      amount: 8
+  - type: MobPrice
+    price: 15000
+
+- type: entity
+  parent: MobForgeVoidWorm
+  id: MobForgeVoidWormAI
+  suffix: AI, Forge
+  components:
+  - type: VoidWorm
+    headPrototype: MobForgeVoidWormAI
+
+- type: entity
+  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
+  id: MobForgeVoidWormling
+  name: void wormling
+  description: A freshly torn brood-spawn of a void worm. Small only by leviathan standards.
+  suffix: Forge
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Leviathan
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavSmash: !type:Bool
+        true
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/void_wormling.rsi
+    noRot: true
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4.2
+    baseSprintSpeed: 5.6
+    baseWeightlessModifier: 2.0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Dead
+  - type: MeleeWeapon
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 10
+        Caustic: 4
+        Structural: 30
+  - type: PointLight
+    radius: 2
+    energy: 1.4
+    color: "#c8a090"
+    castShadows: false
+  - type: Speech
+    speechVerb: LargeMob
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatForgeLeviathan
+      amount: 1
+  - type: TimedDespawn
+    lifetime: 180
+  - type: MobPrice
+    price: 800
+
+- type: entity
+  abstract: true
+  id: BaseMobForgeVoidWormSegment
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: Kinematic
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 3
+        density: 80
+        hard: false
+        mask:
+        - FlyingMobMask
+        - MapGrid
+        layer:
+        - FlyingMobLayer
+  - type: Sprite
+    noRot: false
+    drawdepth: OverMobs
+    scale: 3, 3
+  - type: Damageable
+    damageContainer: Leviathan
+  - type: ExplosionResistance
+    damageCoefficient: 0.35
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50000: Dead
+  - type: Appearance
+  - type: VoidWormSegment
+  - type: Clickable
+  - type: RadarBlip
+    visibleFromOtherGrids: true
+    radarColor: "#d8c4b0"
+    scale: 2
+    shape: Circle
+
+- type: entity
+  parent: BaseMobForgeVoidWormSegment
+  id: MobForgeVoidWormSegment
+  name: void worm segment
+  components:
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/void_worm_segment.rsi
+    state: alive
+    scale: 3, 3
+
+- type: entity
+  parent: BaseMobForgeVoidWormSegment
+  id: MobForgeVoidWormSegmentAlt
+  name: void worm segment
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/void_worm_segment.rsi
+    state: alive_alt
+    scale: 3, 3
+
+- type: entity
+  parent: BaseMobForgeVoidWormSegment
+  id: MobForgeVoidWormTail
+  name: void worm tail
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/void_worm_tail.rsi
+    state: alive
+    scale: 3, 3
+
+- type: entity
+  parent: BaseMobForgeLeviathan
+  id: MobForgeVoidMedusa
+  name: void medusa
+  description: A hanging lantern of living vacuum. Tentacles drink thrust from ships; the bell blooms ion fire. It does not chew hulls — it steals them.
+  components:
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/void_medusa.rsi
+    noRot: true
+    drawdepth: OverMobs
+    scale: 1, 1
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: alive-unshaded
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+        BaseUnshaded: alive-unshaded
+      Critical:
+        Base: crit
+      Dead:
+        Base: dead
+        BaseUnshaded: dead-unshaded
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 12
+        density: 220
+        mask:
+        - FlyingMobMask
+        - MapGrid
+        layer:
+        - FlyingMobLayer
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 42
+    baseSprintSpeed: 48
+    baseWeightlessModifier: 1.0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      92000: Critical
+      100000: Dead
+  - type: MeleeWeapon
+    altDisarm: false
+    attackRate: 0.8
+    range: 8
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+    damage:
+      types:
+        Shock: 36
+  - type: PointLight
+    radius: 26
+    energy: 4.4
+    color: "#19ffff"
+    castShadows: false
+  - type: RadarBlip
+    visibleFromOtherGrids: true
+    radarColor: "#19ffff"
+    scale: 7
+  - type: VoidMedusa
+    huntSpeed: 42
+    minHealth: 100000
+    maxHealth: 1000000
+  - type: ActionGrant
+    actions:
+    - ActionForgeVoidMedusaLatch
+    - ActionForgeVoidMedusaIonBloom
+    - ActionForgeVoidMedusaStasisVeil
+    - ActionForgeVoidMedusaPolypRain
+  - type: ActionGun
+    action: ActionForgeVoidMedusaIonHarpoon
+    gunProto: ForgeVoidMedusaIonGun
+  - type: InteractionPopup
+    successChance: 0.06
+    interactSuccessString: petting-success-forge-void-medusa
+    interactFailureString: petting-failure-forge-void-medusa
+    interactFailureSound:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+    soundPerceivedByOthers: false
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatForgeLeviathan
+      amount: 7
+  - type: MobPrice
+    price: 14000
+
+- type: entity
+  parent: MobForgeVoidMedusa
+  id: MobForgeVoidMedusaAI
+  suffix: AI, Forge
+  components:
+  - type: VoidMedusa
+
+- type: entity
+  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
+  id: MobForgeVoidMedusaPolyp
+  name: void polyp
+  description: A torn fragment of the medusa's bell. It wants a hull to cling to, then a fuse to die on.
+  suffix: Forge
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Leviathan
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavSmash: !type:Bool
+        true
+  - type: Sprite
+    sprite: _Forge/Mobs/Leviathans/void_medusa_polyp.rsi
+    noRot: true
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: alive-unshaded
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+        BaseUnshaded: alive-unshaded
+      Dead:
+        Base: dead
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        density: 40
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.6
+    baseSprintSpeed: 4.8
+    baseWeightlessModifier: 2.0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      90: Dead
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+    damage:
+      types:
+        Shock: 14
+  - type: PointLight
+    radius: 2.4
+    energy: 1.8
+    color: "#88a0ff"
+    castShadows: false
+  - type: VoidMedusaPolyp
+  - type: Speech
+    speechVerb: LargeMob
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatForgeLeviathan
+      amount: 1
+  - type: TimedDespawn
+    lifetime: 140
+  - type: MobPrice
+    price: 600
+
+- type: entity
+  parent: FoodMeatDragon
+  id: FoodMeatForgeLeviathan
+  name: leviathan flesh
+  description: Dense meat veined with starlight ichor. Eating it feels like swallowing a small gravity well.
+
+- type: entity
+  name: void drake spawner
+  id: SpawnMobForgeVoidDrake
+  parent: MarkerBase
+  suffix: Ghost Role, Forge
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Forge/Mobs/Leviathans/void_drake.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobForgeVoidDrake
+
+- type: entity
+  name: void worm spawner
+  id: SpawnMobForgeVoidWorm
+  parent: MarkerBase
+  suffix: AI, Forge
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Forge/Mobs/Leviathans/void_worm.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobForgeVoidWorm
+
+- type: entity
+  name: leviathan spawner
+  id: SpawnMobForgeLeviathanRandom
+  parent: MarkerBase
+  suffix: Random, Forge
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Forge/Mobs/Leviathans/void_drake.rsi
+      state: alive
+  - type: RandomSpawner
+    prototypes:
+    - MobForgeVoidDrakeAI
+    - MobForgeVoidWorm
+    - MobForgeVoidMedusaAI
+    chance: 1
+
+- type: entity
+  name: void drake AI spawner
+  id: SpawnMobForgeVoidDrakeAI
+  parent: MarkerBase
+  suffix: AI, Forge
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Forge/Mobs/Leviathans/void_drake.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobForgeVoidDrakeAI
+
+- type: entity
+  name: void worm AI spawner
+  id: SpawnMobForgeVoidWormAI
+  parent: MarkerBase
+  suffix: AI, Forge
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Forge/Mobs/Leviathans/void_worm.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobForgeVoidWormAI
+
+- type: entity
+  name: void medusa spawner
+  id: SpawnMobForgeVoidMedusa
+  parent: MarkerBase
+  suffix: AI, Forge
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Forge/Mobs/Leviathans/void_medusa.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobForgeVoidMedusa
+
+- type: entity
+  name: void medusa AI spawner
+  id: SpawnMobForgeVoidMedusaAI
+  parent: MarkerBase
+  suffix: AI, Forge
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Forge/Mobs/Leviathans/void_medusa.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobForgeVoidMedusaAI
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  parent: BaseAntagSpawner
+  id: SpawnPointGhostForgeVoidDrake
+  components:
+  - type: GhostRole
+    name: ghost-role-information-forge-void-drake-name
+    description: ghost-role-information-forge-void-drake-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Forge/Mobs/Leviathans/void_drake.rsi
+      state: alive
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  parent: BaseAntagSpawner
+  id: SpawnPointGhostForgeVoidWorm
+  components:
+  - type: GhostRole
+    name: ghost-role-information-forge-void-worm-name
+    description: ghost-role-information-forge-void-worm-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Forge/Mobs/Leviathans/void_worm.rsi
+      state: alive

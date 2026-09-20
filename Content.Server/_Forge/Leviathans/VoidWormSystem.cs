@@ -66,6 +66,11 @@ public sealed partial class VoidWormSystem : EntitySystem
 
             UpdateChain(uid, worm);
             PruneBrood(worm);
+            if (TryComp<PhysicsComponent>(uid, out var body))
+            {
+                worm.LastVelocity = body.LinearVelocity;
+                worm.LastSpeed = body.LinearVelocity.Length();
+            }
             TryRam(uid, worm);
             TryWrapCrush(uid, worm);
 
@@ -187,7 +192,15 @@ public sealed partial class VoidWormSystem : EntitySystem
         if (!IsGridOrStructure(args.OtherEntity))
             return;
 
-        TryRam(ent, ent.Comp, force: true);
+        var speed = ent.Comp.LastSpeed;
+        if (TryComp<PhysicsComponent>(ent, out var body))
+        {
+            speed = MathF.Max(speed, body.LinearVelocity.Length());
+            if (TryComp<PhysicsComponent>(args.OtherEntity, out var otherBody))
+                speed = MathF.Max(speed, (body.LinearVelocity - otherBody.LinearVelocity).Length());
+        }
+
+        TryRam(ent, ent.Comp, force: true, impactSpeed: speed);
     }
 
     private bool TryWarp(EntityUid uid, VoidWormComponent worm, EntityCoordinates target)
@@ -299,13 +312,47 @@ public sealed partial class VoidWormSystem : EntitySystem
         }
     }
 
-    private void TryRam(EntityUid uid, VoidWormComponent worm, bool force = false)
+    private void TryRam(EntityUid uid, VoidWormComponent worm, bool force = false, float? impactSpeed = null)
     {
         if (!force && _timing.CurTime < worm.NextRam)
             return;
 
         worm.NextRam = _timing.CurTime + worm.RamInterval;
-        _smash.Chew(uid, _transform.GetMapCoordinates(uid), worm.RamRadius);
+        var coords = _transform.GetMapCoordinates(uid);
+        var speed = impactSpeed ?? worm.LastSpeed;
+        var dir = worm.LastVelocity;
+        if (dir.LengthSquared() > 0.01f)
+            dir = dir.Normalized();
+        else
+            dir = Vector2.Zero;
+        if (TryComp<PhysicsComponent>(uid, out var body))
+            speed = MathF.Max(speed, body.LinearVelocity.Length());
+
+        if (speed >= worm.SwallowSpeed)
+        {
+            _smash.Swallow(uid, coords, worm.SwallowRadius);
+            if (dir != Vector2.Zero && worm.SwallowReach > 0f)
+            {
+                var step = MathF.Max(1.6f, worm.SwallowRadius * 0.65f);
+                for (var d = step; d <= worm.SwallowReach; d += step)
+                {
+                    _smash.Swallow(uid,
+                        new MapCoordinates(coords.Position + dir * d, coords.MapId),
+                        worm.SwallowRadius);
+                }
+            }
+
+            if (_timing.CurTime >= worm.NextSwallowPopup)
+            {
+                worm.NextSwallowPopup = _timing.CurTime + TimeSpan.FromSeconds(1.6);
+                _popup.PopupEntity(Loc.GetString("forge-leviathan-worm-swallow"), uid, PopupType.LargeCaution);
+                _audio.PlayPvs(worm.SoundRoar, uid);
+            }
+
+            return;
+        }
+
+        _smash.Chew(uid, coords, worm.RamRadius);
     }
 
     private void TryWrapCrush(EntityUid uid, VoidWormComponent worm)

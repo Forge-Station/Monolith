@@ -78,7 +78,7 @@ public sealed partial class VoidMedusaComponent : Component
     public int MaxHealth = 1000000;
 
     [DataField]
-    public float ShootRange = 180f;
+    public float ShootRange = 90f;
 
     [DataField]
     public TimeSpan ShootInterval = TimeSpan.FromSeconds(2.4);

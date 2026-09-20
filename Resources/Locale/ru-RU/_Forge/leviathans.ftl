@@ -23,6 +23,7 @@ forge-leviathan-worm-warp = Пустотный червь рвёт дыру в �
 forge-leviathan-worm-coil = Пустотный червь сжимается в кольцо и КРУШИТ!
 forge-leviathan-worm-brood = Пустотный червь сбрасывает живой выводок!
 forge-leviathan-worm-crush = Пустотный червь обхватывает корпус и ДАВИТ!
+forge-leviathan-worm-swallow = Пустотный червь бьёт на скорости и ГЛОТАЕТ корпус целиком!
 forge-leviathan-worm-split = Пустотный червь рвётся надвое — две пасти вместо одной!
 
 forge-leviathan-medusa-latch = Пустотная медуза цепляет корпус и ТАЩИТ!

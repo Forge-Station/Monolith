@@ -2,6 +2,7 @@ using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using System.Numerics;
 
 namespace Content.Shared._Forge.Leviathans.Components;
 
@@ -104,6 +105,25 @@ public sealed partial class VoidWormComponent : Component
     public TimeSpan RamInterval = TimeSpan.FromSeconds(0.05);
 
     /// <summary>
+    /// Hit a shuttle this fast or faster and the maw swallows hull like a singularity.
+    /// </summary>
+    [DataField]
+    public float SwallowSpeed = 50f;
+
+    [DataField]
+    public float SwallowRadius = 4.6f;
+
+    /// <summary>
+    /// Extra tunnel length along the worm's velocity, in tiles.
+    /// </summary>
+    [DataField]
+    public float SwallowReach = 8f;
+
+    public TimeSpan NextSwallowPopup;
+    public float LastSpeed;
+    public Vector2 LastVelocity;
+
+    /// <summary>
     /// How many segments must hug a grid, and cover all four sides, before crush starts.
     /// </summary>
     [DataField]
@@ -135,6 +155,12 @@ public sealed partial class VoidWormComponent : Component
     public float HuntSpeed = 110f;
 
     [DataField]
+    public float ShootRange = 90f;
+
+    [DataField]
+    public TimeSpan ShootInterval = TimeSpan.FromSeconds(3.5);
+
+    [DataField]
     public int MinHealth = 100000;
 
     [DataField]
@@ -159,6 +185,7 @@ public sealed partial class VoidWormComponent : Component
     public TimeSpan NextRam;
     public TimeSpan NextCrush;
     public TimeSpan NextCrushPopup;
+    public TimeSpan NextShot;
 
     public readonly List<EntityUid> Segments = new();
     public readonly List<EntityUid> Brood = new();

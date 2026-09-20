@@ -3,12 +3,14 @@ using Content.Server.NPC.HTN;
 using Content.Server.NPC;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Forge.Leviathans.Components;
+using Content.Shared.CombatMode;
 using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -27,6 +29,7 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -46,6 +49,13 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
 
             Steer(uid, xform, physics, dest, worm.HuntSpeed, weave: true);
             RememberTarget(uid, target, dest);
+
+            var wormOrigin = _transform.GetMapCoordinates(uid, xform);
+            var wormDist = wormOrigin.MapId == dest.MapId
+                ? (dest.Position - wormOrigin.Position).Length()
+                : float.MaxValue;
+            if (wormDist <= worm.ShootRange && _timing.CurTime >= worm.NextShot && TryShoot(uid, target, dest))
+                worm.NextShot = _timing.CurTime + worm.ShootInterval;
         }
 
         var drakeQuery = EntityQueryEnumerator<VoidDrakeComponent, TransformComponent, PhysicsComponent>();
@@ -71,14 +81,8 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
             if (dist > drake.ShootRange || _timing.CurTime < drake.NextShot)
                 continue;
 
-            if (!TryComp<ActionGunComponent>(uid, out var actionGun) ||
-                actionGun.Gun is not { } gunUid ||
-                !TryComp<GunComponent>(gunUid, out var gun))
-                continue;
-
-            var to = _transform.ToCoordinates(new MapCoordinates(dest.Position, dest.MapId));
-            _gun.AttemptShoot(uid, gunUid, gun, to, target);
-            drake.NextShot = _timing.CurTime + drake.ShootInterval;
+            if (TryShoot(uid, target, dest))
+                drake.NextShot = _timing.CurTime + drake.ShootInterval;
         }
 
         var medusaQuery = EntityQueryEnumerator<VoidMedusaComponent, TransformComponent, PhysicsComponent>();
@@ -119,14 +123,8 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
             if (dist > medusa.ShootRange || _timing.CurTime < medusa.NextShot)
                 continue;
 
-            if (!TryComp<ActionGunComponent>(uid, out var actionGun) ||
-                actionGun.Gun is not { } gunUid ||
-                !TryComp<GunComponent>(gunUid, out var gun))
-                continue;
-
-            var to = _transform.ToCoordinates(new MapCoordinates(dest.Position, dest.MapId));
-            _gun.AttemptShoot(uid, gunUid, gun, to, target);
-            medusa.NextShot = _timing.CurTime + medusa.ShootInterval;
+            if (TryShoot(uid, target, dest))
+                medusa.NextShot = _timing.CurTime + medusa.ShootInterval;
         }
     }
 
@@ -225,6 +223,26 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
         _physics.SetLinearVelocity(uid, dir * speed, body: physics);
         if (rotate)
             _transform.SetWorldRotation(uid, dir.ToWorldAngle());
+    }
+
+    private bool TryShoot(EntityUid uid, EntityUid target, MapCoordinates dest)
+    {
+        if (!TryComp<ActionGunComponent>(uid, out var actionGun) ||
+            actionGun.Gun is not { } gunUid ||
+            !TryComp<GunComponent>(gunUid, out var gun))
+            return false;
+
+        if (TryComp<CombatModeComponent>(uid, out var combat))
+            _combat.SetInCombatMode(uid, true, combat);
+
+        var ammo = new GetAmmoCountEvent();
+        RaiseLocalEvent(gunUid, ref ammo);
+        if (ammo.Count <= 0)
+            return false;
+
+        var to = _transform.ToCoordinates(dest);
+        _gun.AttemptShoot(uid, gunUid, gun, to, target);
+        return true;
     }
 
     private void RememberTarget(EntityUid uid, EntityUid target, MapCoordinates dest)

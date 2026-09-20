@@ -78,7 +78,7 @@ public sealed partial class VoidDrakeComponent : Component
     public int MaxHealth = 1000000;
 
     [DataField]
-    public float ShootRange = 220f;
+    public float ShootRange = 100f;
 
     [DataField]
     public TimeSpan ShootInterval = TimeSpan.FromSeconds(1.6);

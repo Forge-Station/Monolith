@@ -23,6 +23,7 @@ forge-leviathan-worm-warp = The void worm tears a hole through space!
 forge-leviathan-worm-coil = The void worm coils and SMASHES!
 forge-leviathan-worm-brood = The void worm sheds a living brood!
 forge-leviathan-worm-crush = The void worm wraps the hull and CRUSHES!
+forge-leviathan-worm-swallow = The void worm hits at speed and SWALLOWS the hull whole!
 forge-leviathan-worm-split = The void worm splits — two hungers where one was!
 
 forge-leviathan-medusa-latch = The void medusa latches the hull and DRAGS!

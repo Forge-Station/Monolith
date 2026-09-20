@@ -34,6 +34,22 @@ public sealed partial class LeviathanSmashSystem : EntitySystem
         Smash(user, coords, radius, null, destroyTiles: true, wallsOnly: false);
     }
 
+    /// <summary>
+    /// Instant singularity-style deletion: tiles, walls, windows, machines — gone.
+    /// </summary>
+    public void Swallow(EntityUid user, MapCoordinates coords, float radius)
+    {
+        Smash(user, coords, radius, null, destroyTiles: true, wallsOnly: false);
+
+        foreach (var ent in _lookup.GetEntitiesInRange(coords, radius, LookupFlags.Static | LookupFlags.Sundries | LookupFlags.Uncontained))
+        {
+            if (!CanSmash(user, ent))
+                continue;
+
+            QueueDel(ent);
+        }
+    }
+
     public void Crush(EntityUid user, MapCoordinates coords, float radius, DamageSpecifier damage)
     {
         Smash(user, coords, radius, damage, destroyTiles: false, wallsOnly: true);

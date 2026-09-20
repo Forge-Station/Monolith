@@ -16,7 +16,7 @@
     soundGunshot:
       path: /Audio/Magic/fireball.ogg
     soundEmpty: null
-    projectileSpeed: 32
+    projectileSpeed: 100
 
 - type: entity
   categories: [ HideSpawnMenu ]
@@ -27,10 +27,11 @@
   components:
   - type: PointLight
     color: "#C44DFF"
-    radius: 3.5
-    energy: 6.0
+    radius: 8
+    energy: 8.0
   - type: Sprite
     sprite: _Forge/Mobs/Leviathans/projectiles.rsi
+    scale: 3, 3
     layers:
     - state: starfire
       shader: unshaded
@@ -54,7 +55,7 @@
     deleteAfterExplosion: false
     repeatable: true
   - type: TimedDespawn
-    lifetime: 4
+    lifetime: 8
 
 - type: entity
   categories: [ HideSpawnMenu ]
@@ -74,7 +75,7 @@
     soundGunshot:
       path: /Audio/Effects/Fluids/splat.ogg
     soundEmpty: null
-    projectileSpeed: 16
+    projectileSpeed: 55
 
 - type: entity
   categories: [ HideSpawnMenu ]
@@ -89,6 +90,7 @@
     energy: 3.5
   - type: Sprite
     sprite: _Forge/Mobs/Leviathans/projectiles.rsi
+    scale: 3, 3
     layers:
     - state: acid
       shader: unshaded
@@ -100,7 +102,7 @@
         Poison: 8
         Structural: 25
   - type: TimedDespawn
-    lifetime: 3.5
+    lifetime: 6
 
 - type: entity
   id: ActionForgeVoidDrakeStarfire
@@ -252,7 +254,7 @@
     soundGunshot:
       path: /Audio/Effects/Lightning/lightningbolt.ogg
     soundEmpty: null
-    projectileSpeed: 28
+    projectileSpeed: 90
 
 - type: entity
   categories: [ HideSpawnMenu ]
@@ -267,6 +269,7 @@
     energy: 5.0
   - type: Sprite
     sprite: _Forge/Mobs/Leviathans/projectiles.rsi
+    scale: 3, 3
     layers:
     - state: ion
       shader: unshaded
@@ -280,7 +283,7 @@
     energyConsumption: 800000
     disableDuration: 8
   - type: TimedDespawn
-    lifetime: 4.5
+    lifetime: 8
 
 - type: entity
   id: ActionForgeVoidMedusaIonHarpoon

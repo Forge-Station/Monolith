@@ -152,7 +152,25 @@ public sealed partial class VoidWormComponent : Component
     public float HuntRange = 2048f;
 
     [DataField]
-    public float HuntSpeed = 110f;
+    public float HuntSpeed = 60f;
+
+    /// <summary>
+    /// Units per second squared. The worm ramps up instead of instantly hitting hunt speed.
+    /// </summary>
+    [DataField]
+    public float HuntAcceleration = 18f;
+
+    /// <summary>
+    /// After piercing a shuttle, keep flying this far before turning around.
+    /// </summary>
+    [DataField]
+    public float PassMin = 200f;
+
+    [DataField]
+    public float PassMax = 300f;
+
+    public Vector2? PassWaypoint;
+    public EntityUid PassTarget;
 
     [DataField]
     public float ShootRange = 90f;

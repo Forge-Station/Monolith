@@ -141,20 +141,39 @@ public sealed partial class VoidMedusaSystem : EntitySystem
             return;
         }
 
+        if (_timing.CurTime < medusa.LatchRestUntil)
+        {
+            medusa.LatchedGrid = null;
+            return;
+        }
+
         if (!TryFindGrid(dest, out var grid))
         {
             medusa.LatchedGrid = null;
             return;
         }
 
-        var wasLatched = medusa.LatchedGrid == grid;
-        medusa.LatchedGrid = grid;
-
-        if (!wasLatched && _timing.CurTime >= medusa.NextLatchAnnounce)
+        if (medusa.LatchedGrid == grid)
         {
-            medusa.NextLatchAnnounce = _timing.CurTime + medusa.LatchAnnounceCooldown;
-            _popup.PopupEntity(Loc.GetString("forge-leviathan-medusa-latch"), uid, PopupType.LargeCaution);
-            _audio.PlayPvs(medusa.SoundLatch, uid);
+            if (_timing.CurTime >= medusa.LatchUntil)
+            {
+                medusa.LatchedGrid = null;
+                medusa.LatchRestUntil = _timing.CurTime + medusa.LatchRestDuration;
+                _popup.PopupEntity(Loc.GetString("forge-leviathan-medusa-release"), uid, PopupType.MediumCaution);
+                return;
+            }
+        }
+        else
+        {
+            medusa.LatchedGrid = grid;
+            medusa.LatchUntil = _timing.CurTime + medusa.LatchHoldDuration;
+
+            if (_timing.CurTime >= medusa.NextLatchAnnounce)
+            {
+                medusa.NextLatchAnnounce = _timing.CurTime + medusa.LatchAnnounceCooldown;
+                _popup.PopupEntity(Loc.GetString("forge-leviathan-medusa-latch"), uid, PopupType.LargeCaution);
+                _audio.PlayPvs(medusa.SoundLatch, uid);
+            }
         }
 
         PullGrid(uid, medusa, grid, origin);
@@ -173,6 +192,7 @@ public sealed partial class VoidMedusaSystem : EntitySystem
             return false;
 
         medusa.LatchedGrid = grid;
+        medusa.LatchUntil = _timing.CurTime + medusa.LatchHoldDuration;
         PullGrid(uid, medusa, grid, origin);
 
         if (announce)
@@ -264,9 +284,10 @@ public sealed partial class VoidMedusaSystem : EntitySystem
         if (dist < 0.2f)
             return;
 
-        var pull = (delta / dist) * medusa.LatchPull;
-        _physics.SetLinearVelocity(grid, body.LinearVelocity * 0.82f + pull, body: body);
-        _physics.SetAngularVelocity(grid, body.AngularVelocity * 0.72f, body: body);
+        var inward = (delta / dist) * medusa.LatchPull;
+        var tangent = new Vector2(-delta.Y, delta.X) / dist * medusa.LatchSpin;
+        _physics.SetLinearVelocity(grid, body.LinearVelocity * 0.82f + inward + tangent, body: body);
+        _physics.SetAngularVelocity(grid, body.AngularVelocity * 0.72f + medusa.LatchSpin * 0.04f, body: body);
     }
 
     private void DampGrid(EntityUid grid, float factor)

@@ -61,7 +61,18 @@ public sealed partial class VoidDrakeSystem : EntitySystem
             if (_mobState.IsDead(uid))
                 continue;
 
-            TryRam(uid, drake);
+            if (!drake.Enraged &&
+                TryComp<DamageableComponent>(uid, out var damage) &&
+                _thresholds.TryGetThresholdForState(uid, MobState.Dead, out var dead) &&
+                damage.TotalDamage >= dead.Value * drake.EnrageHealthFraction)
+            {
+                drake.Enraged = true;
+                _popup.PopupEntity(Loc.GetString("forge-leviathan-drake-enrage"), uid, PopupType.LargeCaution);
+                _audio.PlayPvs(drake.SoundRoar, uid);
+            }
+
+            if (drake.Enraged)
+                TryRam(uid, drake);
 
             if (IsPlayerControlled(uid) || _timing.CurTime < drake.NextNpcCheck)
                 continue;
@@ -70,6 +81,9 @@ public sealed partial class VoidDrakeSystem : EntitySystem
 
             var nearShuttle = _hunt.TryGetHuntTarget(uid, 120f, out _, out _);
             if (!nearShuttle && !HasNearbyPrey(uid, drake.GravityRange + 2f))
+                continue;
+
+            if (!drake.Enraged)
                 continue;
 
             if (_timing.CurTime >= drake.NextGravity)
@@ -90,7 +104,7 @@ public sealed partial class VoidDrakeSystem : EntitySystem
 
     private void OnRamCollide(Entity<VoidDrakeComponent> ent, ref StartCollideEvent args)
     {
-        if (_mobState.IsDead(ent) || _timing.CurTime < ent.Comp.NextRam)
+        if (_mobState.IsDead(ent) || !ent.Comp.Enraged || _timing.CurTime < ent.Comp.NextRam)
             return;
 
         if (!HasComp<MapGridComponent>(args.OtherEntity) && !Transform(args.OtherEntity).Anchored)

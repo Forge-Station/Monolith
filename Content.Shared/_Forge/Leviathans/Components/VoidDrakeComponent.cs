@@ -69,7 +69,24 @@ public sealed partial class VoidDrakeComponent : Component
     public float HuntRange = 2048f;
 
     [DataField]
-    public float HuntSpeed = 110f;
+    public float HuntSpeed = 78f;
+
+    /// <summary>
+    /// Charge speed once the drake is below half health.
+    /// </summary>
+    [DataField]
+    public float EnrageSpeed = 130f;
+
+    /// <summary>
+    /// Stage 1 keep-away distance while kiting and shooting.
+    /// </summary>
+    [DataField]
+    public float StandoffRange = 92f;
+
+    [DataField]
+    public float EnrageHealthFraction = 0.5f;
+
+    public bool Enraged;
 
     [DataField]
     public int MinHealth = 100000;
@@ -78,7 +95,7 @@ public sealed partial class VoidDrakeComponent : Component
     public int MaxHealth = 1000000;
 
     [DataField]
-    public float ShootRange = 100f;
+    public float ShootRange = 140f;
 
     [DataField]
     public TimeSpan ShootInterval = TimeSpan.FromSeconds(1.6);

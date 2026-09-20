@@ -226,7 +226,9 @@
       tags:
       - Wall
   - type: VoidDrake
-    huntSpeed: 110
+    huntSpeed: 78
+    enrageSpeed: 130
+    standoffRange: 92
     minHealth: 100000
     maxHealth: 1000000
   - type: ActionGrant
@@ -304,8 +306,8 @@
         layer:
         - FlyingMobLayer
   - type: MovementSpeedModifier
-    baseWalkSpeed: 110
-    baseSprintSpeed: 120
+    baseWalkSpeed: 60
+    baseSprintSpeed: 65
     baseWeightlessModifier: 1.0
   - type: MobThresholds
     thresholds:
@@ -352,7 +354,10 @@
     minLength: 100
     maxLength: 300
     segmentSpacing: 5.4
-    huntSpeed: 110
+    huntSpeed: 60
+    huntAcceleration: 18
+    passMin: 200
+    passMax: 300
     minHealth: 100000
     maxHealth: 1000000
     segmentMinHealth: 50000

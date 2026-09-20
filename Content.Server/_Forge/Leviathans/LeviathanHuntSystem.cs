@@ -17,17 +17,19 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.Leviathans;
 
 /// <summary>
-/// Steers AI leviathans at player shuttles and lets the drake shoot them.
+/// Steers AI leviathans at player shuttles and lets them shoot.
 /// </summary>
 public sealed partial class LeviathanHuntSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedCombatModeSystem _combat = default!;
     [Dependency] private SharedGunSystem _gun = default!;
@@ -45,9 +47,12 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
                 continue;
 
             if (!TryGetHuntTarget(uid, worm.HuntRange, out var target, out var dest))
+            {
+                worm.PassWaypoint = null;
                 continue;
+            }
 
-            Steer(uid, xform, physics, dest, worm.HuntSpeed, weave: true);
+            TickWorm(uid, worm, xform, physics, target, dest, frameTime);
             RememberTarget(uid, target, dest);
 
             var wormOrigin = _transform.GetMapCoordinates(uid, xform);
@@ -72,7 +77,7 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
                 ? (dest.Position - origin.Position).Length()
                 : float.MaxValue;
 
-            Steer(uid, xform, physics, dest, drake.HuntSpeed, weave: false, orbit: dist < drake.ShootRange && dist > 18f);
+            TickDrake(uid, drake, xform, physics, dest, dist, frameTime);
             RememberTarget(uid, target, dest);
 
             if (origin.MapId != dest.MapId)
@@ -99,22 +104,7 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
                 ? (dest.Position - origin.Position).Length()
                 : float.MaxValue;
 
-            if (dist < 16f && origin.MapId == dest.MapId)
-            {
-                var away = origin.Position - dest.Position;
-                if (away.LengthSquared() > 0.01f)
-                    dest = new MapCoordinates(origin.Position + away.Normalized() * 40f, dest.MapId);
-            }
-
-            Steer(
-                uid,
-                xform,
-                physics,
-                dest,
-                medusa.HuntSpeed,
-                weave: false,
-                orbit: dist < medusa.ShootRange && dist > 16f,
-                rotate: false);
+            TickMedusa(uid, medusa, xform, physics, dest, dist, frameTime);
             RememberTarget(uid, target, dest);
 
             if (origin.MapId != dest.MapId)
@@ -188,13 +178,152 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
         return found;
     }
 
+    private void TickWorm(
+        EntityUid uid,
+        VoidWormComponent worm,
+        TransformComponent xform,
+        PhysicsComponent physics,
+        EntityUid target,
+        MapCoordinates dest,
+        float frameTime)
+    {
+        var origin = _transform.GetMapCoordinates(uid, xform);
+        if (origin.MapId != dest.MapId)
+            return;
+
+        if (worm.PassTarget != target ||
+            !worm.PassWaypoint.HasValue ||
+            (worm.PassWaypoint.Value - dest.Position).Length() > worm.PassMax * 1.6f)
+            BeginWormPass(worm, origin.Position, dest.Position, target);
+
+        var waypoint = worm.PassWaypoint!.Value;
+        var wayDist = (waypoint - origin.Position).Length();
+
+        if (wayDist <= 28f)
+        {
+            BeginWormPass(worm, origin.Position, dest.Position, target);
+            waypoint = worm.PassWaypoint!.Value;
+        }
+
+        Steer(
+            uid,
+            xform,
+            physics,
+            new MapCoordinates(waypoint, dest.MapId),
+            worm.HuntSpeed,
+            frameTime,
+            worm.HuntAcceleration);
+    }
+
+    private void BeginWormPass(VoidWormComponent worm, Vector2 origin, Vector2 shuttle, EntityUid target)
+    {
+        var delta = shuttle - origin;
+        var dir = delta.LengthSquared() > 0.01f
+            ? delta.Normalized()
+            : _random.NextAngle().ToVec();
+        var overshoot = _random.NextFloat(worm.PassMin, worm.PassMax);
+        worm.PassWaypoint = shuttle + dir * overshoot;
+        worm.PassTarget = target;
+    }
+
+    private void TickDrake(
+        EntityUid uid,
+        VoidDrakeComponent drake,
+        TransformComponent xform,
+        PhysicsComponent physics,
+        MapCoordinates dest,
+        float dist,
+        float frameTime)
+    {
+        if (drake.Enraged)
+        {
+            var origin = _transform.GetMapCoordinates(uid, xform);
+            if (origin.MapId != dest.MapId)
+                return;
+
+            var delta = dest.Position - origin.Position;
+            var through = dest;
+            if (delta.LengthSquared() > 1f)
+                through = new MapCoordinates(dest.Position + delta.Normalized() * 36f, dest.MapId);
+
+            Steer(uid, xform, physics, through, drake.EnrageSpeed, frameTime, weave: true);
+            return;
+        }
+
+        var origin = _transform.GetMapCoordinates(uid, xform);
+        if (origin.MapId != dest.MapId)
+            return;
+
+        var standoff = drake.StandoffRange;
+        if (dist < standoff - 12f)
+        {
+            var away = origin.Position - dest.Position;
+            if (away.LengthSquared() < 0.01f)
+                away = _transform.GetWorldRotation(uid).ToVec();
+            var kite = new MapCoordinates(origin.Position + away.Normalized() * 48f, dest.MapId);
+            Steer(uid, xform, physics, kite, drake.HuntSpeed, frameTime, weave: false);
+            return;
+        }
+
+        Steer(uid, xform, physics, dest, drake.HuntSpeed, frameTime, weave: false, orbit: dist < standoff + 18f);
+    }
+
+    private void TickMedusa(
+        EntityUid uid,
+        VoidMedusaComponent medusa,
+        TransformComponent xform,
+        PhysicsComponent physics,
+        MapCoordinates dest,
+        float dist,
+        float frameTime)
+    {
+        var latched = medusa.LatchedGrid != null;
+        var resting = _timing.CurTime < medusa.LatchRestUntil;
+
+        if (latched)
+        {
+            Steer(uid, xform, physics, dest, medusa.HuntSpeed, frameTime, weave: false, orbit: true, rotate: false);
+            return;
+        }
+
+        if (resting || dist < medusa.HoverRange)
+        {
+            if (dist < medusa.HoverRange * 0.55f)
+            {
+                var origin = _transform.GetMapCoordinates(uid, xform);
+                var away = origin.Position - dest.Position;
+                if (away.LengthSquared() < 0.01f)
+                    away = Vector2.UnitX;
+                dest = new MapCoordinates(origin.Position + away.Normalized() * 40f, dest.MapId);
+                Steer(uid, xform, physics, dest, medusa.HuntSpeed, frameTime, weave: false, rotate: false);
+                return;
+            }
+
+            Steer(uid, xform, physics, dest, medusa.HuntSpeed, frameTime, weave: false, orbit: true, rotate: false);
+            return;
+        }
+
+        Steer(
+            uid,
+            xform,
+            physics,
+            dest,
+            medusa.HuntSpeed,
+            frameTime,
+            weave: false,
+            orbit: dist < medusa.ShootRange && dist > medusa.HoverRange,
+            rotate: false);
+    }
+
     private void Steer(
         EntityUid uid,
         TransformComponent xform,
         PhysicsComponent physics,
         MapCoordinates dest,
         float speed,
-        bool weave,
+        float frameTime,
+        float acceleration = 0f,
+        bool weave = false,
         bool orbit = false,
         bool rotate = true)
     {
@@ -211,7 +340,7 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
         if (orbit)
         {
             var tangent = new Vector2(-dir.Y, dir.X);
-            dir = (dir * 0.22f + tangent * 0.98f).Normalized();
+            dir = (dir * 0.18f + tangent * 0.98f).Normalized();
         }
         else if (weave)
         {
@@ -220,9 +349,28 @@ public sealed partial class LeviathanHuntSystem : EntitySystem
             dir = (dir + tangent * wave).Normalized();
         }
 
-        _physics.SetLinearVelocity(uid, dir * speed, body: physics);
-        if (rotate)
-            _transform.SetWorldRotation(uid, dir.ToWorldAngle());
+        var desired = dir * speed;
+        Vector2 vel;
+        if (acceleration <= 0f)
+        {
+            vel = desired;
+        }
+        else
+        {
+            var current = physics.LinearVelocity;
+            var change = desired - current;
+            var maxStep = acceleration * MathF.Max(frameTime, 0.001f);
+            vel = change.Length() <= maxStep
+                ? desired
+                : current + change.Normalized() * maxStep;
+        }
+
+        _physics.SetLinearVelocity(uid, vel, body: physics);
+        if (!rotate)
+            return;
+
+        var face = vel.LengthSquared() > 1f ? vel : dir;
+        _transform.SetWorldRotation(uid, face.ToWorldAngle());
     }
 
     private bool TryShoot(EntityUid uid, EntityUid target, MapCoordinates dest)

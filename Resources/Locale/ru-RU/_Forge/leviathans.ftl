@@ -18,6 +18,7 @@ station-event-forge-void-medusa-start = Связь тонет в статике.
 forge-leviathan-drake-gravity = Пустотный дрейк схлопывает пространство вокруг себя!
 forge-leviathan-drake-tempest = Пустотный дрейк бьёт крыльями, поднимая бурю!
 forge-leviathan-drake-flare = Пустотный дрейк вспыхивает, как умирающая звезда!
+forge-leviathan-drake-enrage = Пустотный дрейк взревел и бросается на корпус!
 
 forge-leviathan-worm-warp = Пустотный червь рвёт дыру в пространстве!
 forge-leviathan-worm-coil = Пустотный червь сжимается в кольцо и КРУШИТ!
@@ -27,6 +28,7 @@ forge-leviathan-worm-swallow = Пустотный червь бьёт на ск�
 forge-leviathan-worm-split = Пустотный червь рвётся надвое — две пасти вместо одной!
 
 forge-leviathan-medusa-latch = Пустотная медуза цепляет корпус и ТАЩИТ!
+forge-leviathan-medusa-release = Пустотная медуза разжимает щупальца и отпускает корпус.
 forge-leviathan-medusa-ion = Пустотная медуза расцветает — все консоли орут статикой!
 forge-leviathan-medusa-stasis = Пустотная медуза накрывает сектор пеленой стазиса!
 forge-leviathan-medusa-polyp = Пустотная медуза сбрасывает дождь живых полипов!

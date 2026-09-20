@@ -26,6 +26,18 @@ public sealed partial class VoidMedusaComponent : Component
     [DataField]
     public float LatchPull = 22f;
 
+    /// <summary>
+    /// Tangential shove so a latched shuttle is swung around the bell, not just yanked inward.
+    /// </summary>
+    [DataField]
+    public float LatchSpin = 10f;
+
+    [DataField]
+    public TimeSpan LatchHoldDuration = TimeSpan.FromSeconds(11);
+
+    [DataField]
+    public TimeSpan LatchRestDuration = TimeSpan.FromSeconds(7);
+
     [DataField]
     public TimeSpan LatchAnnounceCooldown = TimeSpan.FromSeconds(8);
 
@@ -87,6 +99,8 @@ public sealed partial class VoidMedusaComponent : Component
     public TimeSpan NpcAbilityRangeCheck = TimeSpan.FromSeconds(1.4);
 
     public EntityUid? LatchedGrid;
+    public TimeSpan LatchUntil;
+    public TimeSpan LatchRestUntil;
     public TimeSpan NextLatchAnnounce;
     public TimeSpan NextIon;
     public TimeSpan NextStasis;

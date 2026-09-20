@@ -18,6 +18,7 @@ station-event-forge-void-medusa-start = Comms fill with static. A void medusa is
 forge-leviathan-drake-gravity = The void drake collapses space around itself!
 forge-leviathan-drake-tempest = The void drake beats its wings into a tempest!
 forge-leviathan-drake-flare = The void drake ignites like a dying star!
+forge-leviathan-drake-enrage = The void drake shrieks and dives on the hull!
 
 forge-leviathan-worm-warp = The void worm tears a hole through space!
 forge-leviathan-worm-coil = The void worm coils and SMASHES!
@@ -27,6 +28,7 @@ forge-leviathan-worm-swallow = The void worm hits at speed and SWALLOWS the hull
 forge-leviathan-worm-split = The void worm splits — two hungers where one was!
 
 forge-leviathan-medusa-latch = The void medusa latches the hull and DRAGS!
+forge-leviathan-medusa-release = The void medusa unclenches and lets the hull go.
 forge-leviathan-medusa-ion = The void medusa blooms — every console screams static!
 forge-leviathan-medusa-stasis = The void medusa veils the sector in stasis!
 forge-leviathan-medusa-polyp = The void medusa sheds a rain of living polyps!

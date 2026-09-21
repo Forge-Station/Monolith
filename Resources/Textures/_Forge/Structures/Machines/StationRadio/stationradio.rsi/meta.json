@@ -1,14 +1,14 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Unknown, recolored to blue, split the display animation into its own layer by rouden_ (discord), resprited by asiashvee(discord)",
+  "copyright": "Taken from Unknown, recolored to blue, split the display animation into its own layer by rouden_ (discord). Side states by user hinzomnia (discord).",
     "size": {
         "x": 32,
         "y": 32
     },
   "states": [
     {
-      "name": "icon-2",
+      "name": "icon-1",
       "directions": 4
     },
     {

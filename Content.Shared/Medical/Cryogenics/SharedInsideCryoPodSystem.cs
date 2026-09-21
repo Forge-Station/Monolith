@@ -14,7 +14,8 @@ public abstract partial class SharedCryoPodSystem
     // Must stand in the cryo pod
     private void HandleDown(EntityUid uid, InsideCryoPodComponent component, DownAttemptEvent args)
     {
-        args.Cancel();
+        if (entity.Comp.LifeStage < ComponentLifeStage.Stopping)
+            args.Cancel();
     }
 
     private void OnEntGotRemovedFromContainer(EntityUid uid, InsideCryoPodComponent component, EntGotRemovedFromContainerMessage args)

@@ -10,8 +10,8 @@
     - state: icon
     - state: powered
       map: [ "enum.PowerDeviceVisualLayers.Powered" ]
-    - state: decharging
-      map: [ "enum.PowerDeviceVisualLayers.Charging" ]
+    # - state: decharging # Forge-change
+    #   map: [ "enum.PowerDeviceVisualLayers.Charging" ]
       visible: false
   - type: ChameleonProjector
     whitelist:
@@ -44,54 +44,22 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.BatteryVisuals.State:
+      # Forge-change-start
+      enum.PowerCellSlotVisuals.Enabled:
         enum.PowerDeviceVisualLayers.Powered:
-          Full: { visible: true }
-          Neither: { visible: true }
-          Empty: { visible: false }
-      enum.BatteryVisuals.Charging:
-        enum.PowerDeviceVisualLayers.Charging:
-          Charging: { visible: false }
-          Decharging: { visible: true }
-          Constant: { visible: false }
-  - type: BatteryVisuals
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellMedium
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: PowerCellDraw
-    drawRate: 4 # About 3 minutes with a medium cell.
-  - type: ToggleCellDraw
-  - type: ItemToggle
-    onActivate: false
-    onUse: false
-
-- type: entity
-  parent: ChameleonProjectorNoBattery
-  id: ChameleonProjector
-  name: chameleon projector
-  description: Holoparasite technology used to create a hard-light replica of any object around you. Disguise is destroyed when picked up or deactivated.
-  suffix: Battery
-  components:
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.BatteryVisuals.State:
-        enum.PowerDeviceVisualLayers.Powered:
-          Full: { visible: true }
-          Neither: { visible: true }
-          Empty: { visible: false }
-      enum.BatteryVisuals.Charging:
-        enum.PowerDeviceVisualLayers.Charging:
-          Charging: { visible: false }
-          Decharging: { visible: true }
-          Constant: { visible: false }
+          True: { visible: true }
+          False: { visible: false }
+      # enum.BatteryVisuals.State:
+      #   enum.PowerDeviceVisualLayers.Powered:
+      #     Full: { visible: true }
+      #     Neither: { visible: true }
+      #     Empty: { visible: false }
+      # enum.BatteryVisuals.Charging:
+      #   enum.PowerDeviceVisualLayers.Charging:
+      #     Charging: { visible: false }
+      #     Decharging: { visible: true }
+      #     Constant: { visible: false }
+      # Forge-change-end
   - type: BatteryVisuals
   - type: ContainerContainer
     containers:

@@ -275,9 +275,10 @@
     - SmartGun # Goobstation
     # Einstein Engines Packs
     - Translators
-    # Forge-change
+    # Forge-change-start
     - BSparts
     - ForgePublicWeapons
+    #Forge-Change-end
 
   - type: EmagLatheRecipes
     emagDynamicPacks:
@@ -812,6 +813,9 @@
   - type: PlaceableSurface # DeltaV: Allow ore bags to dump into it directly
     isPlaceable: false # but not place on it if you just click it with a random item
   - type: OreSiloClient #Gives silo access to ore holding
+  # Forge-Change: accept ore from disposal trunks into MaterialStorage.
+  - type: OrePipeOutlet
+    maxInsertPerFlush: 40
 
 - type: entity
   parent: OreProcessor
@@ -917,7 +921,7 @@
   components:
   # Forge-change-start
   - type: Sprite
-    sprite: Forge/Structures/Machines/organprinter.rsi
+    sprite: _Forge/Structures/Machines/organprinter.rsi
     snapCardinals: true
     layers:
     - state: base

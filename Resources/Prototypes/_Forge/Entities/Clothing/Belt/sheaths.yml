@@ -5,10 +5,10 @@
   description: Ножны предназначенные для одати
   components:
   - type: Sprite
-    sprite: _Forge/OniMeleeWeapons/Odati/odatiSheathItem.rsi
+    sprite: _Forge/Clothing/Belt/odatiSheathItem.rsi
     state: sheath
   - type: Clothing
-    sprite: _Forge/OniMeleeWeapons/Odati/odatiSheath.rsi
+    sprite: _Forge/Clothing/Belt/odatiSheath.rsi
   - type: ItemSlots
     slots:
       item:
@@ -35,10 +35,10 @@
   description: Ножны предназначенные для меча тип 3
   components:
   - type: Sprite
-    sprite: _Forge/OniMeleeWeapons/Type3/type3Sheath.rsi
+    sprite: _Forge/Clothing/Belt/type3Sheath.rsi
     state: sheath
   - type: Clothing
-    sprite: _Forge/OniMeleeWeapons/Type3/type3Sheath.rsi
+    sprite: _Forge/Clothing/Belt/type3Sheath.rsi
   - type: ItemSlots
     slots:
       item:

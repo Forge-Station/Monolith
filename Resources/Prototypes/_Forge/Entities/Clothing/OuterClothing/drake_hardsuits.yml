@@ -36,9 +36,9 @@
   suffix: Drake
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk4.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/drake_mk4.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk4.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/drake_mk4.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: Armor
@@ -80,9 +80,9 @@
   suffix: Drake
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk8.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/drake_mk8.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk8.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/drake_mk8.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.4
   - type: Armor
@@ -135,9 +135,9 @@
   suffix: Drake
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk16.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/drake_mk16.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/drake_mk16.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/drake_mk16.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.3
   - type: Armor

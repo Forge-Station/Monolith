@@ -128,8 +128,7 @@
 
 - type: loadout
   id: ContractorBible
-  name: bible and faith implanter
-  description: For the budding chaplain. Perform miracles, proselytize, and grow your flock.
+  name: loadout-name-ContractorBible
   previewEntity: Bible
   effects:
   - !type:GroupLoadoutEffect
@@ -154,8 +153,7 @@
 
 - type: loadout
   id: ContractorMonkeyCubeWrapped
-  name: monkey cube
-  description: Unwrap this to get a monkey cube.
+  name: loadout-name-ContractorMonkeyCubeWrapped
   previewEntity: MonkeyCubeWrapped
   effects:
   - !type:GroupLoadoutEffect
@@ -166,8 +164,7 @@
 
 - type: loadout
   id: ContractorKoboldCubeWrapped
-  name: kobold cube
-  description: Unwrap this to get a kobold cube.
+  name: loadout-name-ContractorKoboldCubeWrapped
   previewEntity: KoboldCubeWrapped
   effects:
   - !type:GroupLoadoutEffect

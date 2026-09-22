@@ -375,7 +375,7 @@ public sealed partial class ShuttleSystem
         string? priorityTag = null)
     {
         // TODO: Validation
-        if (!TryComp<FTLDestinationComponent>(_mapManager.GetMapEntityId(_transform.GetMapId(target)), out var dest))
+        if (!TryComp<FTLDestinationComponent>(_mapManager.GetMap(_transform.GetMapId(target)), out var dest))
         {
             return;
         }
@@ -868,12 +868,12 @@ public sealed partial class ShuttleSystem
         _audio.SetGridAudio(audio);
 
         // Re-enable map if it was paused.
-        if (TryComp<FTLDestinationComponent>(_mapManager.GetMapEntityId(mapId), out var dest))
+        if (TryComp<FTLDestinationComponent>(_mapManager.GetMap(mapId), out var dest))
         {
             dest.Enabled = true;
         }
 
-        _mapManager.SetMapPaused(mapId, false);
+        _mapManager.SetPaused(mapId, false);
         Smimsh(uid, xform: xform);
 
         // Add cooldown before removing the FTL component
@@ -1244,44 +1244,30 @@ public sealed partial class ShuttleSystem
             foreach (var grid in grids)
             {
                 var collidingBox = _transform.GetWorldMatrix(grid).TransformBox(Comp<MapGridComponent>(grid).LocalAABB);
+                // Forge-Change: degenerate / inverted grid AABBs can invert Left/Right after TransformBox and crash Box2 setters.
+                if (collidingBox.Width <= 0f || collidingBox.Height <= 0f)
+                    continue;
+
+                var width = Math.Max(targetAABB.Width, 0.01f);
+                var height = Math.Max(targetAABB.Height, 0.01f);
+                var left = targetAABB.Left;
+                var bottom = targetAABB.Bottom;
 
                 if (positiveX == true)
-                {
-                    var newLeft = Math.Max(targetAABB.Left, collidingBox.Right + _random.NextFloat(minMargin, maxMargin));
-                    targetAABB.Right = newLeft + targetAABB.Width;
-                    targetAABB.Left = newLeft;
-                }
+                    left = Math.Max(left, collidingBox.Right + _random.NextFloat(minMargin, maxMargin));
                 else if (positiveX == false)
-                {
-                    var newRight = Math.Min(targetAABB.Right, collidingBox.Left - _random.NextFloat(minMargin, maxMargin));
-                    targetAABB.Left = newRight - targetAABB.Width;
-                    targetAABB.Right = newRight;
-                }
+                    left = Math.Min(left + width, collidingBox.Left - _random.NextFloat(minMargin, maxMargin)) - width;
                 else
-                {
-                    var margin = _random.NextFloat(-maxMargin, maxMargin);
-                    targetAABB.Left += margin;
-                    targetAABB.Right += margin;
-                }
+                    left += _random.NextFloat(-maxMargin, maxMargin);
 
                 if (positiveY == true)
-                {
-                    var newBottom = Math.Max(targetAABB.Bottom, collidingBox.Top + _random.NextFloat(minMargin, maxMargin));
-                    targetAABB.Top = newBottom + targetAABB.Height;
-                    targetAABB.Bottom = newBottom;
-                }
+                    bottom = Math.Max(bottom, collidingBox.Top + _random.NextFloat(minMargin, maxMargin));
                 else if (positiveY == false)
-                {
-                    var newTop = Math.Min(targetAABB.Top, collidingBox.Bottom - _random.NextFloat(minMargin, maxMargin));
-                    targetAABB.Bottom = newTop - targetAABB.Height;
-                    targetAABB.Top = newTop;
-                }
+                    bottom = Math.Min(bottom + height, collidingBox.Bottom - _random.NextFloat(minMargin, maxMargin)) - height;
                 else
-                {
-                    var margin = _random.NextFloat(-maxMargin, maxMargin);
-                    targetAABB.Bottom += margin;
-                    targetAABB.Top += margin;
-                }
+                    bottom += _random.NextFloat(-maxMargin, maxMargin);
+
+                targetAABB = new Box2(left, bottom, left + width, bottom + height);
             }
             iteration++;
         }

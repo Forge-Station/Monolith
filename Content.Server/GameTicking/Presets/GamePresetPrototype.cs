@@ -1,8 +1,8 @@
 
 using Content.Server.Maps;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
+
 
 namespace Content.Server.GameTicking.Presets
 {
@@ -33,14 +33,14 @@ namespace Content.Server.GameTicking.Presets
         [DataField("maxPlayers")]
         public int? MaxPlayers;
 
-        [DataField("rules", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
+        [DataField("rules", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public IReadOnlyList<string> Rules { get; private set; } = Array.Empty<string>();
 
         /// <summary>
         /// If specified, the gamemode will only be run with these maps.
         /// If none are elligible, the global fallback will be used.
         /// </summary>
-        [DataField("supportedMaps", customTypeSerializer: typeof(PrototypeIdSerializer<GameMapPoolPrototype>))]
+        [DataField("supportedMaps", customTypeSerializer: typeof(ProtoId<GameMapPoolPrototype>))]
         public string? MapPool;
 
         /// <summary>

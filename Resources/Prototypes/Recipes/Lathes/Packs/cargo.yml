@@ -10,7 +10,7 @@
   id: CargoBoardsStatic
   recipes:
   - OreProcessorMachineCircuitboard
-  - SalvageMagnetMachineCircuitboard
+  #- SalvageMagnetMachineCircuitboard #Forge-Change-remove
   - SmartArmoryCircuitboard # Mono
 
 ## Dynamic
@@ -29,7 +29,10 @@
   recipes:
   - OreProcessorIndustrialMachineCircuitboard
   - ShipDrillMachineCircuitboard # Mono
+  - ShipDrillDiamondMachineCircuitboard # Froge-change-add
   - OreMagnetMachineCircuitboard # Mono
+  - OrePipeStorageMachineCircuitboard # Forge-Change
+  - OreHoldModuleMachineCircuitboard # Forge-Change
   - MaterialSiloMachineCircuitboard
   - WarehouseSiloMachineCircuitboard # Forge-Change
   # - CargoTelepadMachineCircuitboard # Frontier

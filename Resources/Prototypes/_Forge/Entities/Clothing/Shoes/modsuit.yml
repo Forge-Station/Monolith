@@ -4,12 +4,12 @@
   parent: ClothingShoesBase
   id: ClothingModsuitBootsHMELightSuit
   name: HME light hardsuit "Preserver" boots
-  description: light-HME-modsuit-boots-desc 
+  description: light-HME-modsuit-boots-desc
   categories: [ HideSpawnMenu ]
   components:
   - type: Appearance
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Modsuits/hme_lightmod.rsi
+    sprite: _Forge/Clothing/Shoes/Modsuits/hme_lightmod.rsi
     layers:
     - state: boots
     - state: boots-sealed
@@ -46,12 +46,12 @@
   parent: ClothingShoesBase
   id: ClothingModsuitBootsHMEHeavySuit
   name: HME heavy hardsuit "Intercessor" boots
-  description: heavy-HME-modsuit-boots-desc 
+  description: heavy-HME-modsuit-boots-desc
   categories: [ HideSpawnMenu ]
   components:
   - type: Appearance
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Modsuits/hme_heavymod.rsi
+    sprite: _Forge/Clothing/Shoes/Modsuits/hme_heavymod.rsi
     layers:
     - state: boots
     - state: boots-sealed
@@ -93,7 +93,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Modsuits/omnissiamod.rsi
+    sprite: _Forge/Clothing/Shoes/Modsuits/omnissiamod.rsi
     layers:
     - state: boots
     - state: boots-sealed

@@ -3,14 +3,14 @@ ent-BaseWeaponRevolver = BaseWeaponRevolver
 ent-NFWeaponRevolverDeckard = Декард
     .desc = Легальное гражданское оружие. Редкий, изготавливаемый на заказ револьвер. Используйте, когда нет времени на тест Войта-Кампфа. Использует патроны калибра .45 магнум.
     .suffix = Револьвер
-ent-NFWeaponRevolverInspector = Инспектор
-    .desc = Лучший друг детектива. Использует патроны калибра .45 магнум.
+ent-NFWeaponRevolverInspector = Инспектор (.357 магнум)
+    .desc = Лучший друг детектива. Использует патроны калибра .357 магнум.
     .suffix = Револьвер
-ent-NFWeaponRevolverWard45 = Матеба
-    .desc = Знаковое оружие элиты корпорации. Использует патроны калибра .45 магнум.
+ent-NFWeaponRevolverWard45 = Матеба (.357 магнум)
+    .desc = Знаковое оружие элиты корпорации. Использует патроны калибра .357 магнум.
     .suffix = Револьвер
-ent-NFWeaponRevolverRitland45 = Питон
-    .desc = Нелегальное оружие. Надёжный револьвер, предпочитаемый агентами Горлекса. Использует патроны калибра .45 магнум.
+ent-NFWeaponRevolverRitland45 = Питон (.357 магнум)
+    .desc = Нелегальное оружие. Надёжный револьвер, предпочитаемый агентами Горлекса. Использует патроны калибра .357 магнум.
     .suffix = Револьвер
 ent-WeaponRevolverPython = { ent-NFWeaponRevolverRitland45 }
     .desc = { ent-NFWeaponRevolverRitland45.desc }
@@ -24,7 +24,7 @@ ent-WeaponRevolverPythonAP = { ent-NFWeaponRevolverRitland45 }
 
 
 ent-NFWeaponRevolverPirate = Пиратский револьвер
-    .desc = Нелегальное оружие. Странный дульнозарядный револьвер, который использовали пираты. Использует патроны калибра .45 магнум.
+    .desc = Нелегальное оружие. Странный дульнозарядный револьвер, который использовали пираты. Использует патроны калибра .357 магнум.
     .suffix = Револьвер
 
 ent-NFWeaponRevolverArgenti = Аргенти
@@ -41,4 +41,4 @@ ent-NFWeaponRevolverLucky = Счастливчик
     .suffix = Револьвер
 ent-WeaponRevolverMatebaAP = NT { ent-NFWeaponRevolverWard45 }
     .desc = { ent-NFWeaponRevolverWard45.desc }
-    .suffix = .45 магнум, бронебойные
+    .suffix = .357 магнум, бронебойные

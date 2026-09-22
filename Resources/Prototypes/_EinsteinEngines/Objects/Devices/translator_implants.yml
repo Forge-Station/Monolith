@@ -246,3 +246,20 @@
     - NewKinPidgin
     requires:
     - TauCetiBasic
+
+# Forge-Change-Start
+- type: entity
+  parent: BaseSubdermalImplant
+  id: CadrisTranslatorImplant
+  name: cadris translator implant
+  description: An implant giving the ability to understand and speak cadris. For the Empire!
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TranslatorImplant
+    understood:
+    - Freespeak
+    spoken:
+    - Freespeak
+    requires:
+    - TauCetiBasic
+# Forge-Change-En

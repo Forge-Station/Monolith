@@ -22,15 +22,19 @@
     unwieldOnUse: false
   - type: GunWieldBonus
     minAngle: -19
-    maxAngle: -20 # -16 -> -20 - Mono
+    maxAngle: -26 # Forge-change -20->-26
   - type: ChamberMagazineAmmoProvider # Mono
     soundRack:
       path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
   - type: Gun
-    minAngle: 21
-    maxAngle: 32
-    fireRate: 7 # Mono
+    minAngle: 22 # Forge-change 21->22
+    maxAngle: 40 # Forge-change 32->40
+    fireRate: 6 # Forge-change 7->6
     burstFireRate: 12
+    angleIncrease: 1.25 # Forge-change
+    angleDecay: 16 # Forge-change
+    projectileSpeed: 45 # Forge-change
+    damageModifier: 1.05 # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/smg.ogg # Mono
     availableModes:

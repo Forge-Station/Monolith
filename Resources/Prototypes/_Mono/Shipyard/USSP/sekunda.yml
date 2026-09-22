@@ -8,7 +8,7 @@
   price: 110505
   category: Medium
   group: Ussp
-  access: USSP
+  access: Mercenary # Forge-change: Ussp to Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/sekunda.yml
   guidebookPage: Null
   class:
@@ -27,12 +27,13 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Sekunda USSP{1}'
+          mapNameTemplate: 'Sekunda USSP{1}'  
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-           USSPSergeant: [ 0, 0 ]
-           USSPRifleman: [ 0, 0 ]
+           Contractor: [ 0, 0 ] # Forge-change: Ussp Rolesto Contractor
+           Pilot: [ 0, 0 ] # Forge-change: Ussp Roles to Pilot
+           Mercenary: [ 0, 0 ] # Forge-change: Ussp Roles to Mercenary
 #Idfk what im doing I will not lie at all. What am I doing? Hello? Mooooooooooooom? AAAAAAAAAAAAAAAAA! *crashes your entire game and dies*

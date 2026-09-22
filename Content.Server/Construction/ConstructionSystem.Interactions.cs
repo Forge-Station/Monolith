@@ -11,9 +11,11 @@ using Content.Shared.Interaction;
 using Content.Shared.Prying.Systems;
 using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Temperature;
+using Content.Shared.Tools;
 using Content.Shared.Tools.Systems;
 using Content.Shared._Mono.NoDeconstruct;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 #if EXCEPTION_TOLERANCE
 // ReSharper disable once RedundantUsingDirective
@@ -369,7 +371,7 @@ namespace Content.Server.Construction
                         interactUsing.User,
                         uid,
                         TimeSpan.FromSeconds(toolInsertStep.DoAfter),
-                        new [] { toolInsertStep.Tool },
+                        new ProtoId<ToolQualityPrototype>[] { toolInsertStep.Tool },
                         new ConstructionInteractDoAfterEvent(EntityManager, interactUsing),
                         out var doAfter,
                         toolInsertStep.Fuel);

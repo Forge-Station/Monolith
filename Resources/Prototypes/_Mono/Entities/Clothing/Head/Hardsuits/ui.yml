@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Ullman, ShowMedicalIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitUIEnforcer
   name: U.I. ENFORCER MKI helmet
   description: Flash-proof lining, in built night vision system, and looks good as hell. Other than information display port being snapped, what's more to ask for?
@@ -13,16 +13,16 @@
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: FlashImmunity
-  - type: NightVision # Gen 2
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
-    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
-    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+  # - type: NightVision # Gen 2 # Forge-change
+  #   relayOverlay: true # Forge-change
+  #   goggleEffect: true # Forge-change
+  #   action: ActionToggleNightVision # Forge-change
+  #   viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора # Forge-change
+  #   viewCircleCount: 2 # Forge-change
+  #   viewCircleSpacing: 280 # Forge-change
+  #   phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+  #   lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+  #   amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
     modifiers:
       coefficients:
@@ -41,7 +41,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitUIEnforcerMKII
   name: U.I. ENFORCER MKII Combat helmet
   description: This top of the line helmet comes with flashproof lining, a mass scanner and an inbuilt medical diagnostic system.
@@ -65,16 +65,16 @@
       enum.RadarConsoleUiKey.Key:
         type: RadarConsoleBoundUserInterface
   - type: FlashImmunity
-  - type: NightVision # Gen 2 quadtube
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
-    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
-    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+  # - type: NightVision # Gen 2 quadtube # Forge-change
+  #   relayOverlay: true # Forge-change
+  #   goggleEffect: true # Forge-change
+  #   action: ActionToggleNightVision # Forge-change
+  #   viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
+  #   viewCircleCount: 2 # Forge-change
+  #   viewCircleSpacing: 280 # Forge-change
+  #   phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+  #   lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+  #   amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
     modifiers:
       coefficients:
@@ -93,7 +93,7 @@
     - HeadSide
 
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision1Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitUIEngineer
   name: U.I. engineering helmet
   description: A cheap and effective hardsuit helmet, just with an extra black market touch.
@@ -106,16 +106,16 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
-  - type: NightVision # Gen 2 monotube
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
-    viewCircleCount: 1
-    viewCircleSpacing: 280
-    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
-    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
-    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+  # - type: NightVision # Gen 2 monotube # Forge-change
+  #  relayOverlay: true # Forge-change
+  #   goggleEffect: true # Forge-change
+  #   action: ActionToggleNightVision # Forge-change
+  #   viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
+  #   viewCircleCount: 1 # Forge-change
+  #   viewCircleSpacing: 280 # Forge-change
+  #   phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+  #   lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+  #   amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
     modifiers:
       coefficients:
@@ -134,7 +134,7 @@
     - HeadSide
 
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitUIPilot
   name: U.I. pilot helmet
   description: A helmet for Ullman Industry pilots.
@@ -147,24 +147,24 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
-  - type: NightVision # Gen 2
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
-    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
-    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+  # - type: NightVision # Gen 2 # Forge-change
+  #   relayOverlay: true # Forge-change
+  #   goggleEffect: true # Forge-change
+  #   action: ActionToggleNightVision # Forge-change
+  #   viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора # Forge-change
+  #   viewCircleCount: 2 # Forge-change
+  #   viewCircleSpacing: 280 # Forge-change
+  #   phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+  #   lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+  #   amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-        Radiation: 0.9
+        Blunt: 0.95 # Forge-change
+        Slash: 0.95 # Forge-change
+        Piercing: 0.95 # Forge-change
+        Heat: 0.95 # Forge-change
+        # Radiation: 0.9 # Forge-change
   - type: HideLayerClothing
     slots:
     - Hair
@@ -176,7 +176,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHelmetHardsuitUIDirector
   name: U.I. VK-1 experimental helmet
   description: A purpose built helmet designed by Felix Ullman, for Felix Ullman.
@@ -200,24 +200,28 @@
       enum.RadarConsoleUiKey.Key:
         type: RadarConsoleBoundUserInterface
   - type: FlashImmunity
-  - type: NightVision # Gen 4
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
-    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
-    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
+  # - type: NightVision # Gen 4 # Forge-change
+  #   relayOverlay: true # Forge-change
+  #   goggleEffect: true # Forge-change
+  #   action: ActionToggleNightVision # Forge-change
+  #   viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора # Forge-change
+  #   viewCircleCount: 2 # Forge-change
+  #   viewCircleSpacing: 280 # Forge-change
+  #   phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+  #   lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+  #   amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
     modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-        Radiation: 0.9
+      # coefficients: # Forge-change
+      #   Blunt: 0.9 # Forge-change
+      #   Slash: 0.9 # Forge-change
+      #   Piercing: 0.9 # Forge-change
+      #   Heat: 0.9 # Forge-change
+      #   Radiation: 0.9 # Forge-change
+      flatReductions: # Forge-change
+        Blunt: 15 # Forge-change
+        Slash: 15 # Forge-change
+        Piercing: 15 # Forge-change
   - type: HideLayerClothing
     slots:
     - Hair

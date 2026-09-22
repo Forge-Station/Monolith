@@ -2,6 +2,11 @@ ent-BaseMagazine635x40mmCaseless = магазин (6.35x40мм безгильз�
 ent-Magazine635x40mmCaseless = { ent-BaseMagazine635x40mmCaseless }
 ent-Magazine635x40mmCaselessRubber = магазин (6.35x40мм безгильзовые резиновые)
 ent-Magazine635x40mmCaselessPractice = магазин (6.35x40мм безгильзовые учебные)
+ent-Magazine635x40mmCaselessIncendiary = магазин (6.35x40мм безгильзовые зажигательные)
+ent-Magazine635x40mmCaselessUranium = магазин (6.35x40мм безгильзовые урановые)
+ent-Magazine635x40mmCaselessHP = магазин (6.35x40мм безгильзовые экспансивные)
+ent-Magazine635x40mmCaselessRIP = магазин (6.35x40мм безгильзовые RIP)
+ent-Magazine635x40mmCaselessPlasteelAP = магазин (6.35x40мм безгильзовые бронебойные)
 ent-Magazine635x40mmCaselessBig = боксовый магазин (6.35x40мм безгильзовые)
 
 ent-Magazine635x40mmCaselessPistolPractice = пистолетный магазин (6.35x40мм безгильзовые учебные)

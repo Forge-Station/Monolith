@@ -9,10 +9,13 @@
   cost: 10000 # Mono
   recipeUnlocks:
   - MiningDrill
+  - ShipDrillMachineCircuitboard # Forge-change
   - WeaponGrapplingGun # Frontier
   - MineralScannerEmpty
   - OreProcessorIndustrialMachineCircuitboard
   - OreMagnetMachineCircuitboard
+  - OrePipeStorageMachineCircuitboard # Forge-Change: ore hold hub
+  - OreHoldModuleMachineCircuitboard # Forge-Change: expandable capacity
   - ClothingMaskWeldingGas
   - ClothingShoesBootsJump
   - MechEquipmentDrill # Goobstation
@@ -244,7 +247,7 @@
   recipeUnlocks:
   - OreBagOfHolding
   - MiningDrillDiamond
-  - ShipDrillMachineCircuitboard
+  - ShipDrillDiamondMachineCircuitboard #Forge-change
   - AdvancedMineralScannerEmpty
   - NFBlueprintOreBagOfHolding # Frontier
   - NFBlueprintMiningDrillDiamond # Frontier

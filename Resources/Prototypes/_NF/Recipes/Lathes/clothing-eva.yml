@@ -303,23 +303,23 @@
 
 - type: latheRecipe
   id: ClothingOuterHardsuitMercenary
-  parent: NFBaseHardSuitRecipe
+  parent: ForgeUniversalSuitT1CivilianRecipe # Forge-change
   result: ClothingOuterHardsuitMercenary
 
 - type: latheRecipe
   id: ClothingOuterHardsuitPrivateSecurity
-  parent: NFBaseHardSuitRecipe
+  parent: ForgeUniversalSuitT1CivilianRecipe # Forge-change
   result: ClothingOuterHardsuitPrivateSecurity
 
 - type: latheRecipe
   id: ClothingOuterHardsuitBrigmedic
-  parent: NFBaseHardSuitRecipe
+  parent: ForgeUniversalLightSuitT1CompanyRecipe # Forge-change
   result: ClothingOuterHardsuitBrigmedic
 
 # Departmental heads hardsuits (T3 research)
 - type: latheRecipe
   id: ClothingOuterHardsuitCap
-  parent: NFBaseHardSuitArmoredRecipe
+  parent: ForgeUniversalSuitT1CivilianRecipe # Forge-change
   result: ClothingOuterHardsuitCap
   categories: # Mono
   - ArmorNF
@@ -327,7 +327,7 @@
 
 - type: latheRecipe
   id: ClothingOuterHardsuitScaf
-  parent: NFBaseHardSuitArmoredRecipe
+  parent: ForgeUniversalSuitT2CivilianRecipe # Forge-change
   result: ClothingOuterHardsuitScaf
 
 - type: latheRecipe
@@ -386,19 +386,19 @@
 
 - type: latheRecipe
   id: ClothingOuterHardsuitSecurity
-  parent: MonoHardsuitT1Recipe # Forge-change
+  parent: ForgeUniversalSuitT1CompanyRecipe # Forge-change
   result: ClothingOuterHardsuitSecurity
-  materials:
-    Glass: 5000
-    Plastic: 2000
-    Plasteel: 3000
-    Durathread: 2000
-    Silver: 1000
-    Gold: 2000
+  # materials: # Forge-change
+  #  Glass: 5000 # Forge-change
+  #  Plastic: 2000 # Forge-change
+  #  Plasteel: 3000 # Forge-change
+  #  Durathread: 2000 # Forge-change
+  #  Silver: 1000 # Forge-change
+  #  Gold: 2000 # Forge-change
 
 - type: latheRecipe
   id: ClothingOuterHardsuitWarden
-  parent: NFBaseHardSuitArmoredRecipe
+  parent: ForgeLightJuggernautT2CompanyRecipe # Forge-change
   result: ClothingOuterHardsuitWarden
 
 # Magboots

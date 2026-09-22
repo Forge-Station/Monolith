@@ -40,6 +40,10 @@
   - Magazine12_gaugeFlechette
   - AmmoBox12_gaugeFlechette
   - ForgeBlueprintAPAmmo # Forge-change
+  - Magazine635x40mmCaselessPlasteelAP # Forge-change
+  - AmmoBox635x40mmCaselessPlasteelAP # Forge-change
+  - Magazine8x65mmSKRPlasteelAP # Forge-change
+  - AmmoBox8x65mmSKRPlasteelAP # Forge-change
 
 #- type: technology
 #  id: UniversalSynthalloyCore
@@ -115,6 +119,10 @@
   - Magazine45_ACPSubMachineGunRIP
   - AmmoBox45_ACPRIP
   - ForgeBlueprintRIPAmmo # Forge-change
+  - Magazine635x40mmCaselessRIP # Forge-change
+  - AmmoBox635x40mmCaselessRIP # Forge-change
+  - Magazine8x65mmSKRRIP # Forge-change
+  - AmmoBox8x65mmSKRRIP # Forge-change
 
 - type: technology
   id: DraconicMunitions
@@ -155,6 +163,10 @@
   - AmmoBox45_ACPIncendiary
   - AmmoBox23x75mmFlashbang
   - ForgeBlueprintIncendiaryAmmo # Forge-change
+  - Magazine635x40mmCaselessIncendiary # Forge-change
+  - AmmoBox635x40mmCaselessIncendiary # Forge-change
+  - Magazine68x52mmCaselessIncendiary # Forge-change
+  - AmmoBox68x52mmCaselessIncendiary # Forge-change
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 9, -1
@@ -195,6 +207,12 @@
   - Magazine45_ACPSubMachineGunUranium
   - AmmoBox45_ACPUranium
   - ForgeBlueprintUraniumAmmo # Forge-change
+  - Magazine635x40mmCaselessUranium # Forge-change
+  - AmmoBox635x40mmCaselessUranium # Forge-change
+  - Magazine68x52mmCaselessUranium # Forge-change
+  - AmmoBox68x52mmCaselessUranium # Forge-change
+  - Magazine8x65mmSKRUranium # Forge-change
+  - AmmoBox8x65mmSKRUranium # Forge-change
   technologyPrerequisites:
   - UniversalPlastitaniumCore
   position: 7, 5

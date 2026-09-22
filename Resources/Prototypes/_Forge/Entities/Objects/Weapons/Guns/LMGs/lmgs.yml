@@ -5,14 +5,14 @@
   description: The RPK-L2 is a heavy machine gun from the TechnicLogistic family, designed based on the well-known L6. This machine gun stands out for its increased accuracy and low production cost. However, its design features have made it very bulky.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/LMGs/L2RPK.rsi
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/L2RPK.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-3
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/LMGs/L2RPK.rsi
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/L2RPK.rsi
     quickEquip: false
     slots:
     - Back
@@ -51,20 +51,33 @@
   components:
   - type: Item # Mono
     size: Huge
-    sprite: Forge/Objects/Weapons/Guns/LMGs/ar400_inhands_32x.rsi
+    shape:
+    - 0,0,5,2
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/ar400_inhands_32x.rsi
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/LMGs/ar400.rsi
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/ar400.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/LMGs/ar400_inhands_32x.rsi
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/ar400_inhands_32x.rsi
   - type: ChamberMagazineAmmoProvider # Mono
     soundRack:
       path: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
+  - type: GunRequiresWield
   - type: Gun
+    minAngle: 2
+    maxAngle: 25
+    angleIncrease: 1.25
+    angleDecay: 9
+    projectileSpeed: 50
+    fireRate: 8
+    damageModifier: 0.95
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/heavy_rifle_1.ogg # Mono
   - type: ItemSlots
@@ -97,14 +110,14 @@
     zeroVisible: true
   - type: HeldSpeedModifier
   - type: ClothingSpeedModifier
-    sprintModifier: 0.9
-    walkModifier: 0.9
+    sprintModifier: 0.95 # 0.9->0.95
+    walkModifier: 0.95 # 0.9->0.95
   - type: SpeedModifiedOnWield
-    walkModifier: 0.4
-    sprintModifier: 0.35
+    walkModifier: 0.7 # 0.4->0.7
+    sprintModifier: 0.7 # 0.35->0.7
   - type: WieldDelay
-    baseDelay: 2
-    modifiedDelay: 2
+    baseDelay: 1 # 2->1
+    modifiedDelay: 1 # 2->1
     preventFiring: true
   - type: Appearance
   - type: StaticPrice # Mono
@@ -119,20 +132,31 @@
   components:
   - type: Item # Mono
     size: Huge
-    sprite: Forge/Objects/Weapons/Guns/LMGs/type99_inhands_32x.rsi
+    shape:
+    - 0,0,5,2
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/type99_inhands_32x.rsi
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/LMGs/type99.rsi
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/type99.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/LMGs/type99_inhands_32x.rsi
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/type99_inhands_32x.rsi
   - type: ChamberMagazineAmmoProvider # Mono
     soundRack:
       path: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
   - type: Gun
+    minAngle: 3
+    maxAngle: 26
+    angleIncrease: 2.5
+    angleDecay: 8
+    projectileSpeed: 50
+    fireRate: 8
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/heavy_rifle_1.ogg # Mono
   - type: ItemSlots
@@ -162,6 +186,13 @@
     magState: mag
     steps: 1
     zeroVisible: true
+  - type: HeldSpeedModifier
+  - type: ClothingSpeedModifier
+    sprintModifier: 0.9
+    walkModifier: 0.9
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.6
+    sprintModifier: 0.6
   - type: WieldDelay
     baseDelay: 1
     modifiedDelay: 1
@@ -180,18 +211,19 @@
   - type: Item
     size: Huge
     shape:
-    - 0,0,4,4
-    sprite: Forge/Objects/Weapons/Guns/LMGs/heavion_inhands.rsi
+    - 0,0,5,2
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/heavion_inhands.rsi
   - type: Wieldable
   - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -20
+    minAngle: 0 # -20->0
+    maxAngle: 0 # -20->0
   - type: Gun
-    minAngle: 24
-    maxAngle: 36
-    angleIncrease: 4
-    angleDecay: 16
-    fireRate: 5
+    minAngle: 1 # 24->1
+    maxAngle: 20 # 36->20
+    angleIncrease: 1.5 # 4->1.5
+    angleDecay: 8 # 16->8
+    fireRate: 6 # 5->6
+    projectileSpeed: 50
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -206,7 +238,7 @@
           tags:
           - HEVPowerCellLMG
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/LMGs/heavion.rsi
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/heavion.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -218,15 +250,22 @@
     zeroVisible: true
   - type: Appearance
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/LMGs/heavion_inhands.rsi
+    sprite: _Forge/Objects/Weapons/Guns/LMGs/heavion_inhands.rsi
     quickEquip: false
     slots:
     - back
     - suitStorage
   - type: GunRequiresWield
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: WieldDelay
+    baseDelay: 0.8
+    modifiedDelay: 0.8
+    preventFiring: true
   - type: SpeedModifiedOnWield
-    walkModifier: 0.7
-    sprintModifier: 0.6
+    walkModifier: 0.9 # 0.7->0.9
+    sprintModifier: 0.75 # 0.6->0.75
   - type: AmmoCounter
   - type: BatterySlotRequiresToggle
     itemSlot: gun_magazine

@@ -1,7 +1,7 @@
 - type: vessel
   id: badment
   parent: BaseVesselAntag
-  name: TSF-EMP Бэдмент
+  name: TSF-EMP «Бэдмент»
   description: перехватчик ТСФ, находящийся уже некоторое время в эксплуатации , призван обездвижить цель для более удобной атаки союзников, чаще всего его можно увидеть в сопровождении фрегатов
   price: 84500
   category: Small

@@ -14,14 +14,16 @@
   - type: Clothing
     sprite: _DV/Objects/Weapons/Guns/SMGs/typewriter.rsi
   - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -30
+    minAngle: -27 # Forge-change -20->-27
+    maxAngle: -34 # Forge-change -30->-34
   - type: Gun
-    minAngle: 21
-    maxAngle: 45
-    angleIncrease: 5
+    minAngle: 30 # Forge-change 21->30
+    maxAngle: 55 # Forge-change 45->55
+    angleIncrease: 1.75 # Forge-change 5->1.75
     angleDecay: 20
     fireRate: 8
+    projectileSpeed: 45 # Forge-change
+    damageModifier: 0.9 # Forge-change
     soundGunshot:
       path: /Audio/_DV/Weapons/Guns/Gunshots/typewriter.ogg
   - type: ChamberMagazineAmmoProvider

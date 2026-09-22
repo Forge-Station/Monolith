@@ -1,7 +1,7 @@
 using Content.Shared.Examine;
 using Content.Shared.Tools;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Construction.Steps
 {

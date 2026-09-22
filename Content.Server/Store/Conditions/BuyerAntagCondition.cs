@@ -1,7 +1,7 @@
 using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Shared.Store;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Store.Conditions;
 
@@ -15,13 +15,13 @@ public sealed partial class BuyerAntagCondition : ListingCondition
     /// <summary>
     /// A whitelist of antag roles that can purchase this listing. Only one needs to be found.
     /// </summary>
-    [DataField("whitelist", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<AntagPrototype>))]
+    [DataField("whitelist", customTypeSerializer: typeof(ProtoId<AntagPrototype>))]
     public HashSet<string>? Whitelist;
 
     /// <summary>
     /// A blacklist of antag roles that cannot purchase this listing. Only one needs to be found.
     /// </summary>
-    [DataField("blacklist", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<AntagPrototype>))]
+    [DataField("blacklist", customTypeSerializer: typeof(ProtoId<AntagPrototype>))]
     public HashSet<string>? Blacklist;
 
     public override bool Condition(ListingConditionArgs args)

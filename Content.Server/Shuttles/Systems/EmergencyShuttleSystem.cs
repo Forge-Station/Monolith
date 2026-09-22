@@ -72,7 +72,6 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
 
     private bool _emergencyShuttleEnabled;
 
-    [ValidatePrototypeId<TagPrototype>]
     private const string DockTag = "DockEmergency";
 
     public override void Initialize()

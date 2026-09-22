@@ -22,41 +22,23 @@ public sealed partial class IonStormSystem : EntitySystem
     [Dependency] private IRobustRandom _robustRandom = default!;
 
     // funny
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Threats = "IonStormThreats";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Objects = "IonStormObjects";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Crew = "IonStormCrew";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>]
     private const string Adjectives = "IonStormAdjectives";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Verbs = "IonStormVerbs";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string NumberBase = "IonStormNumberBase";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string NumberMod = "IonStormNumberMod";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Areas = "IonStormAreas";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Feelings = "IonStormFeelings";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string FeelingsPlural = "IonStormFeelingsPlural";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Musts = "IonStormMusts";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Requires = "IonStormRequires";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Actions = "IonStormActions";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Allergies = "IonStormAllergies";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string AllergySeverities = "IonStormAllergySeverities";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Concepts = "IonStormConcepts";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Drinks = "IonStormDrinks";
-    [ValidatePrototypeId<LocalizedDatasetPrototype>] // Forge-Change
     private const string Foods = "IonStormFoods";
 
     /// <summary>

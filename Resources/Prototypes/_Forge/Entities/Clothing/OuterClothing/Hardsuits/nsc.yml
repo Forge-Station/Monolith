@@ -4,10 +4,10 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_worker_hardsuit.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_worker_hardsuit.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_worker_hardsuit.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_worker_hardsuit.rsi
     clothingVisuals:
       outerClothing:
       - state: equiped-OUTERCLOTH
@@ -21,40 +21,55 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
 
+# ClothingOuterHardsuitNexusMilT1
 - type: entity
   parent: ClothingOuterHardsuitRenegatebsii20
   id: ClothingOuterHardsuitNexusMilT1
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
     clothingVisuals:
       outerClothing:
       - state: equiped-OUTERCLOTH
+  - type: ExplosionResistance
+    damageCoefficient: 0.65
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.625
+        Slash: 0.625
+        Piercing: 0.575
+        Heat: 0.6
+        Radiation: 0.5
+        Caustic: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.3
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.925
+    sprintModifier: 0.925
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitNexusMilT1
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
 
+# ClothingOuterHardsuitNexusMilT2
 - type: entity
   parent: ClothingOuterHardsuitRenegatecriii200
   id: ClothingOuterHardsuitNexusMilT2
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t2_mil_hardsuit.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t2_mil_hardsuit.rsi
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t2_mil_hardsuit.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t2_mil_hardsuit.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 0.87
+    sprintModifier: 0.87
   - type: ExplosionResistance
     damageCoefficient: 0.475
   - type: Armor
@@ -63,25 +78,28 @@
         Blunt: 0.475
         Slash: 0.475
         Piercing: 0.475
-        Heat: 0.7
+        Heat: 0.5
         Radiation: 0.5
         Caustic: 0.8
+  - type: StaminaDamageResistance
+    coefficient: 0.3
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitNexusMilT2
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
 
+# ClothingOuterHardsuitNexusMilT3
 - type: entity
-  parent: [ClothingOuterHardsuitJuggernaut, EnergyShieldClothing]
+  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, MonoEnergyShieldClothing, ClothingFlightProfileMedium]
   id: ClothingOuterHardsuitNexusMilT3
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t3_mil_hardsuit.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t3_mil_hardsuit.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/OuterClothing/Hardsuits/nexus_t3_mil_hardsuit.rsi
+    sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t3_mil_hardsuit.rsi
     clothingVisuals:
       outerClothing:
       - state: equipped-OUTERCLOTHING-sealed
@@ -96,49 +114,45 @@
   - type: FireProtection
     reduction: 0.6
   - type: ExplosionResistance
-    damageCoefficient: 0.4
+    damageCoefficient: 0.5
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.6
-        Heat: 0.7
-        Radiation: 0.5
+        Blunt: 0.75
+        Slash: 0.75
+        Piercing: 0.7
+        Heat: 0.775
+        Radiation: 0.275
         Caustic: 0.8
         Poison: 0.8
   - type: ClothingSpeedModifier
-    walkModifier: 0.7
-    sprintModifier: 0.65
+    walkModifier: 0.85
+    sprintModifier: 0.85
   - type: StaminaDamageResistance
-    coefficient: 0.25
-  - type: Blocking
-    passiveBlockModifier:
-      coefficients:
-        Blunt: 0.55
-        Slash: 0.55
-        Piercing: 0.55
-        Heat: 0.55
-    activeBlockModifier:
-      coefficients:
-        Blunt: 0.55
-        Slash: 0.55
-        Piercing: 0.55
-        Heat: 0.55
-      flatReductions:
-        Heat: 4
-        Piercing: 4
-    passiveBlockFraction: 0.5
-    activeBlockFraction: 0.5
-    isClothing: true
+    coefficient: 0.2
+  - type: PersonalShield
+    shield:
+      maxCharge: 600 # 456 # 380
+      regenRate: 13.2 # 11
+      spinupTime: 1
+      breakCooldown: 19
+      powerDraw: 0.1
+      blockModifier:
+        coefficients:
+          Blunt: 1
+          Slash: 1
+          Piercing: 1
+          Heat: 1.25
+          Radiation: 0.25
   - type: Damageable
     damageContainer: Shield
   - type: Battery
-    maxCharge: 120
-    startingCharge: 120
+    maxCharge: 100
+    startingCharge: 100
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 1.6
-  - type: RechargeableBlocking
+    autoRechargePause: true
+    autoRechargePauseTime: 8
+    autoRechargeRate: 100
   - type: UseDelay
-    delay: 12
+    delay: 10

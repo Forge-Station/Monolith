@@ -10,9 +10,11 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 34
-        Structural: 200
-    armorPenetration: 0.2
+        Piercing: 45 # Forge-change 34->45
+        Structural: 50 # Forge-change 200->50
+    armorPenetration: 0.15 # Forge-change 0.2->0.15
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.6 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeBeanbag
@@ -26,10 +28,12 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 10
-    armorPenetration: -0.2
+        Blunt: 7 # Forge-change 10->7
+    armorPenetration: 0 # Forge-change -0.2->0
   - type: StaminaDamageOnCollide
-    damage: 30 # 4 hits to stun
+    damage: 55 # Forge-change 30->55
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.6 # Forge-change
 
 - type: entity
   id: Pellet12_gauge
@@ -43,7 +47,10 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 11
+        Piercing: 15 # Forge-change 11->15
+    armorPenetration: -0.1 # Forge-change
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.33 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeSpread
@@ -68,9 +75,12 @@
     damage:
       types:
         Piercing: 5
-        Heat: 4
+        Heat: 5 # Forge-change 4->5
+    armorPenetration: -0.1 # Forge-change
   - type: IgnitionSource
     ignited: true
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.33 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeIncendiarySpread
@@ -95,6 +105,8 @@
     damage:
       types:
         Blunt: 1
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.33 # Forge-change
 
 - type: entity
   id: Pellet12_gaugePracticeSpread
@@ -121,6 +133,8 @@
         Piercing: 7
         Slash: 5
     armorPenetration: -0.2
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.33 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeImprovisedSpread
@@ -158,6 +172,8 @@
     solution: ammo
   - type: InjectableSolution
     solution: ammo
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.6 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeFlare
@@ -218,9 +234,11 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 5
-        Piercing: 7
-    armorPenetration: -0.1
+        Radiation: 7 # Forge-change 5->7
+        Piercing: 9 # Forge-change 7->9
+    armorPenetration: -0.1 # Forge-change
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.42 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeUraniumSpread
@@ -249,6 +267,8 @@
       types:
         Piercing: 25
         Structural: 5
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.42 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeGrapeshotSpread
@@ -280,6 +300,8 @@
       types:
         Slash: 25
     armorPenetration: -0.2
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.33 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeGlassSpread
@@ -305,8 +327,10 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 25
+        Piercing: 34 # Forge-change 25->34
     armorPenetration: -0.5
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.33 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeOOBuckshotSpread
@@ -330,9 +354,11 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 80
-        Structural: 300
+        Piercing: 90 # Forge-change 80->90
+        # Structural: 300 # Forge-change
     armorPenetration: -0.9
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.42 # Forge-change
 
 #armor-piercing ammo
 - type: entity
@@ -347,12 +373,14 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 28
-        Structural: 250
-    armorPenetration: 0.6
+        Piercing: 35 # Forge-change 28->35
+        Structural: 100 # Forge-change 250->100
+    armorPenetration: 0.35 # Forge-change 0.6->0.35
   - type: Tracer
     color: "#6f7c82ff"
     length: 3
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.6 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeFlechette
@@ -366,12 +394,14 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 7
-        Structural: 40
-    armorPenetration: 0.6
+        Piercing: 8 # Forge-change 7->8
+        Structural: 10 # Forge-change 40->10
+    armorPenetration: 0.5 # Forge-change 0.6->0.5
   - type: Tracer
     color: "#6f7c82ff"
     length: 3
+  - type: TimedDespawn # Forge-change
+    lifetime: 0.42 # Forge-change
 
 - type: entity
   id: Pellet12_gaugeFlechetteSpread

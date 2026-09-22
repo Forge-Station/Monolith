@@ -2,7 +2,7 @@ using System.Numerics;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Vehicle.Components;
 
@@ -49,7 +49,7 @@ public sealed partial class VehicleComponent : Component
 
     /// Use ambient sound component for the idle sound.
 
-    [DataField("hornAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("hornAction", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string? HornAction = "ActionVehicleHorn";
 
     /// <summary>

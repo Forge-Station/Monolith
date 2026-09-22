@@ -1,7 +1,7 @@
 - type: vessel
   id: PlutoRen
   parent: BaseVessel
-  name: Не-Царь
+  name: «Не-Царь»
   description: Захваченный "Плутон" Империи. Теперь это наш морской царь!
   limit: 3
   price: 265000

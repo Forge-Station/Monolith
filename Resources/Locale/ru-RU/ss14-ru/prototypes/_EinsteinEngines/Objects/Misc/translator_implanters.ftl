@@ -54,3 +54,6 @@ ent-NovaCygniTranslatorImplanter = имплантер переводчика Nov
 
 ent-NewKinPidginTranslatorImplanter = имплантер переводчика ка'ракк
     .desc = { ent-BaseTranslatorImplanter.desc }
+
+ent-CadrisTranslatorImplanter = имплантер переводчика кадриса
+    .desc = { ent-BaseTranslatorImplanter.desc }

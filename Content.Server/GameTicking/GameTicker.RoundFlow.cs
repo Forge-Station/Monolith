@@ -1231,8 +1231,6 @@ namespace Content.Server.GameTicking
 
             EntityManager.FlushEntities();
 
-            _mapManager.Restart();
-
             _banManager.Restart();
 
             _gameMapManager.ClearSelectedMap();

@@ -1,7 +1,7 @@
 - type: vessel
   id: Atoll
   parent: BaseVesselAntag
-  name: TSF-RND Атолл
+  name: TSF-RND «Атолл»
   description: Научный шаттл ТСФ
   category: Medium
   group: Security

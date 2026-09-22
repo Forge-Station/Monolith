@@ -10,3 +10,5 @@ ent-TtiRankComputerCircuitboard = плата консоли должностей
     .desc = Печатная плата компьютера для консоли должностей TTI.
 ent-UspRankComputerCircuitboard = плата консоли должностей USSP
     .desc = Печатная плата компьютера для консоли должностей USSP.
+ent-PassportRegistryComputerCircuitboard = плата консоли реестра паспортов
+    .desc = Печатная плата компьютера для консоли реестра паспортов.

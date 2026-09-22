@@ -1,5 +1,5 @@
 using Content.Server.Chat.Systems;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.Barks;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
@@ -29,7 +29,7 @@ public sealed class BarkSystem : EntitySystem
     {
         if (comp.VoicePrototypeId is null ||
             !_prototypeManager.TryIndex<BarkPrototype>(comp.VoicePrototypeId, out var barkProto) ||
-            !_configurationManager.GetCVar(ForgeVars.BarksEnabled))
+            !_configurationManager.GetCVar(ForgeCCVars.BarksEnabled))
             return;
 
         var sourceEntity = _entityManager.GetNetEntity(uid);
@@ -40,7 +40,7 @@ public sealed class BarkSystem : EntitySystem
     private async void OnRequestPreviewBark(RequestPreviewBarkEvent ev, EntitySessionEventArgs args)
     {
         if (string.IsNullOrEmpty(ev.BarkVoiceId) || !_prototypeManager.TryIndex<BarkPrototype>(ev.BarkVoiceId, out var barkProto)
-            || !_configurationManager.GetCVar(ForgeVars.BarksEnabled))
+            || !_configurationManager.GetCVar(ForgeCCVars.BarksEnabled))
             return;
 
         var soundPath = barkProto.SoundFiles[new Random().Next(barkProto.SoundFiles.Count)];

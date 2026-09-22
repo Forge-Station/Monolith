@@ -1,0 +1,49 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseAmmoBox135x110mm
+  name: ammunition box (13.5x110mm)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge135x110mm
+    proto: Cartridge135x110mm
+    capacity: 20
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Boxes/nexus_135x110mm_box.rsi
+    layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  parent: BaseAmmoBox135x110mm
+  id: AmmoBox135x110mm
+  name: ammunition box (13.5x110mm)
+
+- type: entity
+  parent: BaseAmmoBox135x110mm
+  id: AmmoBox135x110mmHE
+  name: ammunition box (13.5x110mm HE)
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge135x110mmHE
+  - type: Sprite
+    layers:
+    - state: icon_HE
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

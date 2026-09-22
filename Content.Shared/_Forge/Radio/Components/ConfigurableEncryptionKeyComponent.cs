@@ -1,6 +1,6 @@
 using Content.Shared.Radio;
 using Content.Shared._Forge.Radio;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Forge.Radio.Components;
 
@@ -19,7 +19,7 @@ public sealed partial class ConfigurableEncryptionKeyComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public int MaxFrequency = RadioFrequencyPresetListPrototype.DefaultMaxFrequency;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<RadioChannelPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<RadioChannelPrototype>))]
     [ViewVariables(VVAccess.ReadWrite)]
     public string Channel = "Handheld";
 }

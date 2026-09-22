@@ -13,11 +13,12 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: GunWieldBonus
-    minAngle: -35
-    maxAngle: -50
+    minAngle: -1 # Forge-change -35->-1
+    maxAngle: -2 # Forge-change -50->-2
+  - type: GunRequiresWield # Forge-change
   - type: Gun
-    minAngle: 35
-    maxAngle: 53
+    minAngle: 1 # Forge-change 35->1
+    maxAngle: 2 # Forge-change 53->2
     fireRate: 1
     selectedMode: SemiAuto
     availableModes:
@@ -59,12 +60,18 @@
     sprite: _Mono/Objects/Weapons/Guns/Rifles/calico_inhands_32x.rsi
   - type: Item
     size: Huge
+    shape: # Forge-change
+    - 0,0,4,3 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Rifles/calico_inhands_32x.rsi
   - type: StaticPrice
     price: 2400
   - type: SpeedModifiedOnWield
     walkModifier: 0.8
-    sprintModifier: 0.7
+    sprintModifier: 0.8 # Forge-change 0.7->0.8
+  - type: WieldDelay # Forge-change
+    baseDelay: 0.8 # Forge-change
+    modifiedDelay: 0.8 # Forge-change
+    preventFiring: true
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 12

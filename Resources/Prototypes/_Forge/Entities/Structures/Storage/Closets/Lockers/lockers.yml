@@ -4,7 +4,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Forge/Structures/Storage/closet.rsi
+    sprite: _Forge/Structures/Storage/closet.rsi
 
 # region Renegate
 - type: entity
@@ -19,6 +19,9 @@
     stateDoorClosed: renegate_com_door
   - type: AccessReader
     access: [["RenegateOfficer"]]
+  - type: StorageFill
+    contents:
+    - id: ClothingOuterHardsuitRenegateCommander
 
 - type: entity
   id: LockerRenRnd

@@ -9,7 +9,6 @@ namespace Content.Server.Traits.Assorted;
 /// </summary>
 public sealed partial class NarcolepsySystem : EntitySystem
 {
-    [ValidatePrototypeId<StatusEffectPrototype>]
     private const string StatusEffectKey = "ForcedSleep"; // Same one used by N2O and other sleep chems.
 
     [Dependency] private StatusEffectsSystem _statusEffects = default!;

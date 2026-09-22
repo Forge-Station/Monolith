@@ -30,12 +30,10 @@ public abstract partial class SharedChatSystem : EntitySystem
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units /// Forge-Change
     public const int WhisperMuffledRange = 5; // how far whisper goes at all, in world units /// Forge-Change
 
-    [ValidatePrototypeId<RadioChannelPrototype>]
     public const string CommonChannel = "Common";
 
     public static string DefaultChannelPrefix = $"{RadioChannelPrefix}{DefaultChannelKey}";
 
-    [ValidatePrototypeId<SpeechVerbPrototype>]
     public const string DefaultSpeechVerb = "Default";
 
     [Dependency] private IPrototypeManager _prototypeManager = default!;

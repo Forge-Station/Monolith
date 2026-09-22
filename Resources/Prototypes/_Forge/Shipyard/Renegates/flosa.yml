@@ -1,7 +1,7 @@
 - type: vessel
   id: flosa
   parent: BaseVessel
-  name: Фолса
+  name: «Фолса»
   description: Середнегабаритный боевой шаттл Ренегатов, оснащённый двумя Цирексами и двумя бофарсами и двумя ЛонгБолами и щитём Т2.
   price: 240000 # 373 price fix
   category: Medium

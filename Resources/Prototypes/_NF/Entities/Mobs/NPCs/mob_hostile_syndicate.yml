@@ -112,7 +112,7 @@
       prototypes:
         - SyndicateNavalCaptainGearD
     - type: BasicEntityAmmoProvider
-      proto: Bullet357_magnumFMJ
+      proto: Bullet357_magnumPlasteelAP # Forge-change Bullet357_magnumFMJ->Bullet357_magnumPlasteelAP
       capacity: 1
       count: 1
 
@@ -297,8 +297,8 @@
       prototypes:
         - SyndicateNavalSecondOfficerGearD
     - type: HitscanBatteryAmmoProvider
-      proto: RedLaser
-      fireCost: 50
+      proto: RedHeavyLaser # Forge-change RedLaser->RedHeavyLaser
+      fireCost: 150 # Forge-change 50->150
 
 # Syndicate Security Operative, "armed" with Atreides SMG
 - type: entity
@@ -316,7 +316,7 @@
       rechargeSound:
         path: /Audio/_NF/Effects/silence.ogg
     - type: BasicEntityAmmoProvider
-      proto: Bullet9x19mmFMJ
+      proto: Bullet556x45mmFMJ # Forge-change Bullet9x19mmFMJ->Bullet556x45mmFMJ
       capacity: 7
       count: 7
     - type: Gun
@@ -348,6 +348,10 @@
     - type: Loadout
       prototypes:
         - SyndicateNavalOperatorGearC
+    - type: BasicEntityAmmoProvider # Forge-change
+      proto: Bullet556x45mmPlasteelAP # Forge-change
+      capacity: 7 # Forge-change
+      count: 7 # Forge-change
 
 - type: entity
   parent: MobSyndicateNavalOperatorA
@@ -357,6 +361,10 @@
     - type: Loadout
       prototypes:
         - SyndicateNavalOperatorGearD
+    - type: BasicEntityAmmoProvider # Forge-change
+      proto: Bullet556x45mmUranium # Forge-change
+      capacity: 7 # Forge-change
+      count: 7 # Forge-change 
 
 # Syndicate Grenadier, "armed" with china lake
 - type: entity
@@ -541,8 +549,8 @@
         path: /Audio/_NF/Effects/silence.ogg
     - type: BasicEntityAmmoProvider
       proto: Cartridge762x39mmFMJ
-      capacity: 4
-      count: 4
+      capacity: 6 # Forge-change 4->6
+      count: 6 # Forge-change 4->6
     - type: Gun
       showExamineText: false
       fireRate: 5
@@ -560,9 +568,9 @@
       prototypes:
         - SyndicateNavalCommanderGearB
     - type: BasicEntityAmmoProvider
-      proto: Cartridge556x45mmFMJ
-      capacity: 4
-      count: 4
+      proto: Cartridge762x39mmPlasteelAP # Forge-change Cartridge556x45mmFMJ->Cartridge762x39mmPlasteelAP
+      capacity: 6 # Forge-change 4->6
+      count: 6 # Forge-change 4->6
     - type: Gun
       showExamineText: false
       fireRate: 5
@@ -579,6 +587,10 @@
     - type: Loadout
       prototypes:
         - SyndicateNavalCommanderGearC
+    - type: BasicEntityAmmoProvider # Forge-change
+      proto: Cartridge762x51mmFMJ # Forge-change
+      capacity: 4 # Forge-change
+      count: 4 # Forge-change
 
 - type: entity
   parent: MobSyndicateNavalCommanderB
@@ -588,6 +600,10 @@
     - type: Loadout
       prototypes:
         - SyndicateNavalCommanderGearD
+    - type: BasicEntityAmmoProvider # Forge-change
+      proto: Cartridge762x51mmPlasteelAP # Forge-change
+      capacity: 4 # Forge-change
+      count: 4 # Forge-change
 
 # Syndicate Deckhand, "armed" with Viper
 - type: entity
@@ -606,11 +622,11 @@
         path: /Audio/_NF/Effects/silence.ogg
     - type: BasicEntityAmmoProvider
       proto: Bullet9x19mmFMJ
-      capacity: 4
-      count: 4
+      capacity: 6 # Forge-change 4->6
+      count: 6 # Forge-change 4->6
     - type: Gun
       showExamineText: false
-      fireRate: 0.5
+      fireRate: 2 # Forge-change 0.5->2
       selectedMode: FullAuto
       availableModes:
       - FullAuto
@@ -624,6 +640,10 @@
     - type: Loadout
       prototypes:
         - SyndicateNavalDeckhandGearB
+    - type: BasicEntityAmmoProvider # Forge-change
+      proto: Bullet9x19mmPlasteelAP # Forge-change
+      capacity: 6 # Forge-change
+      count: 6 # Forge-change
 
 - type: entity
   parent: MobSyndicateNavalDeckhandA
@@ -633,6 +653,10 @@
     - type: Loadout
       prototypes:
         - SyndicateNavalDeckhandGearC
+    - type: BasicEntityAmmoProvider # Forge-change
+      proto: Bullet9x19mmFMJ # Forge-change
+      capacity: 6 # Forge-change
+      count: 6 # Forge-change
 
 - type: entity
   parent: MobSyndicateNavalDeckhandA
@@ -642,6 +666,10 @@
     - type: Loadout
       prototypes:
         - SyndicateNavalDeckhandGearD
+    - type: BasicEntityAmmoProvider # Forge-change
+      proto: Bullet9x19mmUranium # Forge-change
+      capacity: 6 # Forge-change
+      count: 6 # Forge-change
 
 # Syndicate Mime, melee, "armed" with chainsaw
 - type: entity

@@ -11,15 +11,20 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item # Forge-change
+    size: Huge # Forge-change
+    shape: # Forge-change
+    - 0,0,5,2 # Forge-change
   - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -20
+    minAngle: 0 # Forge-change -20->0
+    maxAngle: 0 # Forge-change -20->0
   - type: Gun
-    minAngle: 22
-    maxAngle: 40
-    angleIncrease: 2
-    angleDecay: 22
-    fireRate: 8
+    minAngle: 4 # Forge-change 22->4
+    maxAngle: 28 # Forge-change 40->28
+    angleIncrease: 1.75 # Forge-change 2->1.75
+    angleDecay: 5 # Forge-change 22->5
+    fireRate: 7 # Forge-change 8->7
+    projectileSpeed: 50 # Forge-change
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -59,6 +64,9 @@
   - type: StaticPrice
     price: 1750
     vendPrice: 50000
+  - type: ClothingSpeedModifier # Forge-change
+    sprintModifier: 0.9 # Forge-change
+    walkModifier: 0.9 # Forge-change
   - type: SpeedModifiedOnWield
     walkModifier: 0.8
     sprintModifier: 0.65
@@ -78,15 +86,18 @@
     - state: mag-3
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
+    size: Huge # Forge-change
+    shape: # Forge-change
+    - 0,0,5,2 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/LMGs/HAMMER/hammer-inhands.rsi
   - type: GunWieldBonus
-    minAngle: -23
-    maxAngle: -28
+    minAngle: 0 # Forge-change -23->0
+    maxAngle: 0 # Forge-change -28->0
   - type: Gun
-    minAngle: 24
-    maxAngle: 36
-    angleIncrease: 3
-    angleDecay: 34
+    minAngle: 2 # Forge-change 24->2
+    maxAngle: 26 # Forge-change 36->26
+    angleIncrease: 1.75 # Forge-change 3->1.75
+    angleDecay: 8 # Forge-change 34->8
     fireRate: 6 # 360 rpm
     selectedMode: FullAuto
     availableModes:
@@ -130,7 +141,10 @@
     sprite: _Mono/Objects/Weapons/Guns/LMGs/HAMMER/hammer-inhands.rsi
   - type: StaticPrice
     price: 8000
+  - type: ClothingSpeedModifier # Forge-change
+    sprintModifier: 0.95 # Forge-change
+    walkModifier: 0.95 # Forge-change
   - type: SpeedModifiedOnWield
-    walkModifier: 0.65
-    sprintModifier: 0.65
+    walkModifier: 0.85 # Forge-change 0.65->0.85
+    sprintModifier: 0.7 # Forge-change 0.65->0.7
   - type: GunRequiresWield

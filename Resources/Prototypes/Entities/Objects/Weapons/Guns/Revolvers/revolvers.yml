@@ -80,6 +80,8 @@
     sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
   - type: Clothing
     sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
+  - type: Gun # Forge-change
+    fireRate: 1.5 # Forge-change
   - type: RevolverAmmoProvider
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
@@ -96,10 +98,10 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Revolvers/mateba.rsi
   - type: Gun
-    fireRate: 0.5
+    fireRate: 3 # Forge-change 0.5->3
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/Gunshots/bigshot.ogg
-    damageModifier: 3
+    damageModifier: 1.1 # Forge-change 3->1.1
 
 - type: entity
   parent: WeaponRevolverMateba
@@ -120,19 +122,19 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Revolvers/python.rsi
   - type: Gun
-    selectedMode: Burst
-    fireRate: 2
-    burstCooldown: 0.2
-    burstFireRate: 10
-    shotsPerBurst: 2
+    selectedMode: SemiAuto # Forge-change Burst->SemiAuto
+    fireRate: 3 # Forge-change 2->3
+    # burstCooldown: 0.2 # Forge-change
+    # burstFireRate: 10 # Forge-change
+    #shotsPerBurst: 2 # Forge-change
     availableModes:
     - SemiAuto
-    - Burst
+    # - Burst # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/python_fire.ogg
       params:
         volume: 2.25
-    damageModifier: 0.8
+    damageModifier: 1.1 # Forge-change 0.8->1.1
   - type: StaticPrice
     price: 1
 

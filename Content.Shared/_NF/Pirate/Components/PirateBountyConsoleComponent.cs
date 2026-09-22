@@ -2,7 +2,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._NF.Pirate.Components;
 
@@ -12,13 +12,13 @@ public sealed partial class PirateBountyConsoleComponent : Component
     /// <summary>
     /// The id of the label entity spawned by the print label button.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string BountyLabelId = "PaperPirateBountyManifest"; // TODO: make some paper 
+    [DataField(customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
+    public string BountyLabelId = "PaperPirateBountyManifest"; // TODO: make some paper
     /// <summary>
     /// The id of the label entity spawned by the print label button.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string BountyCrateId = "CratePirateBounty"; // TODO: make some paper 
+    [DataField(customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
+    public string BountyCrateId = "CratePirateBounty"; // TODO: make some paper
 
     /// <summary>
     /// The time at which the console will be able to print a label again.

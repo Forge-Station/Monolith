@@ -117,8 +117,11 @@ public sealed class ShipyardConsoleBoundUserInterface : BoundUserInterface
         }
 
         var vessel = row.Vessel;
+        // Load the client-side grid first. Visiting the preview map with no grid looks like a black screen.
+        if (!_preview.TryPreviewGrid(vessel))
+            return;
+
         SendMessage(new ShipyardConsolePreviewMessage());
-        _preview.TryPreviewGrid(vessel);
     }
 
     private void StoreHangar()

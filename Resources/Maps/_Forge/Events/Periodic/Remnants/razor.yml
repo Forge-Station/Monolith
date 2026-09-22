@@ -1832,7 +1832,7 @@ entities:
     - type: Transform
       pos: 0.5,5.5
       parent: 1
-- proto: SmallGyroscopeSecurity
+- proto: GyroscopeADS # Forge-Change
   entities:
   - uid: 281
     components:
@@ -1914,7 +1914,7 @@ entities:
     - type: Transform
       pos: 0.5,9.5
       parent: 1
-- proto: ThrusterLargeRogue
+- proto: ThrusterLargeADS # Forge-Change
   entities:
   - uid: 295
     components:
@@ -1940,7 +1940,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 8.5,1.5
       parent: 1
-- proto: ThrusterRogue
+- proto: ThrusterADS # Forge-Change
   entities:
   - uid: 299
     components:

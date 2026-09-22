@@ -141,3 +141,13 @@
   components:
   - type: Implanter
     implant: NewKinPidginTranslatorImplant
+
+# Forge-Change-Start
+- type: entity
+  id: CadrisTranslatorImplanter
+  parent: [ BaseTranslatorImplanter ]
+  name: cadris translator implant
+  components:
+  - type: Implanter
+    implant: CadrisTranslatorImplant
+# Forge-Change-En

@@ -1,6 +1,6 @@
 using Content.Shared.Store;
 using Robust.Shared.Audio;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._NF.Security.Components;
 
@@ -13,7 +13,7 @@ public sealed partial class ContrabandPriceGunComponent : Component
     /// <summary>
     /// The currency that scanned items will be checked for.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<CurrencyPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<CurrencyPrototype>))]
     public string Currency = "FederationMilitaryCredit";
 
     /// <summary>

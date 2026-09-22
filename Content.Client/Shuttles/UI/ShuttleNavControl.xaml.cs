@@ -33,7 +33,6 @@ namespace Content.Client.Shuttles.UI;
 [Virtual]
 public partial class ShuttleNavControl : BaseShuttleControl // Mono
 {
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IUserInterfaceManager _uiManager = default!;
     private readonly DetectionSystem _detection; // Mono
     private readonly StationSystem _station; // Frontier
@@ -658,7 +657,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         var viewAABB = viewBounds.CalcBoundingBox();
 
         _grids.Clear();
-        _mapManager.FindGridsIntersecting(xform.MapID, new Box2(mapPos.Position - MaxRadarRangeVector, mapPos.Position + MaxRadarRangeVector), ref _grids, approx: true, includeMap: false);
+        Maps.FindGridsIntersecting(xform.MapID, new Box2(mapPos.Position - MaxRadarRangeVector, mapPos.Position + MaxRadarRangeVector), ref _grids, approx: true, includeMap: false);
 
         DrawPoiCaptureZones(handle, worldToView, ourGridId, _grids, bodyQuery);
 
@@ -1470,7 +1469,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         var viewBounds = new Box2(mapPos.Position - MaxRadarRangeVector, mapPos.Position + MaxRadarRangeVector);
 
         _grids.Clear();
-        _mapManager.FindGridsIntersecting(consoleXform.MapID, viewBounds, ref _grids, approx: true, includeMap: false);
+        Maps.FindGridsIntersecting(consoleXform.MapID, viewBounds, ref _grids, approx: true, includeMap: false);
 
         foreach (var grid in _grids)
         {

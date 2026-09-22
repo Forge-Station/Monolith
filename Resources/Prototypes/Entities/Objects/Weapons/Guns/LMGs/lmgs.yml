@@ -105,14 +105,33 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-3
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item # Forge-change
+    size: Huge # Forge-change
+    shape: # Forge-change
+    - 0,0,5,2 # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: MagazineVisuals
     magState: mag
     steps: 4
     zeroVisible: true
   - type: Appearance
   - type: Gun # Mono change - Sound for L6 saw
+    minAngle: 2 # Forge-change
+    maxAngle: 25 # Forge-change
+    angleIncrease: 2 # Forge-change
+    angleDecay: 7 # Forge-change
+    fireRate: 8 # Forge-change
+    projectileSpeed: 50 # Forge-change
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/l6_fire.ogg
+  - type: ClothingSpeedModifier # Forge-change
+    sprintModifier: 0.95 # Forge-change
+    walkModifier: 0.95 # Forge-change
+  - type: SpeedModifiedOnWield # Forge-change
+    walkModifier: 0.85 # Forge-change
+    sprintModifier: 0.7 # Forge-change
 
 - type: entity
   name: PA L6C ROW (7.62x39mm)

@@ -25,13 +25,10 @@ public sealed partial class HungerSystem : EntitySystem
     [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private SharedJetpackSystem _jetpack = default!;
 
-    [ValidatePrototypeId<SatiationIconPrototype>]
     private const string HungerIconOverfedId = "HungerIconOverfed";
 
-    [ValidatePrototypeId<SatiationIconPrototype>]
     private const string HungerIconPeckishId = "HungerIconPeckish";
 
-    [ValidatePrototypeId<SatiationIconPrototype>]
     private const string HungerIconStarvingId = "HungerIconStarving";
 
     public override void Initialize()

@@ -1,35 +1,36 @@
 - type: entity
-  name: NEX-SMG-4 Shebet (5x23mm)
+  name: NEX-SMG-4 Shebet (6.35x40mm)
   parent: [ForgeBaseWeaponFrameSubMachineGunNanotrasen, BaseGunWieldable]
   id: WeaponSubMachineGunNexusShebet
   suffix: Нексус
-  description: Suppressed PDW in 5x23mm caseless. Extended 48-round magazines. Can fire one-handed, but spread is severe; wield for accurate fire.
+  description: Suppressed PDW in 6.35x40mm caseless. Extended 48-round magazines. Can fire one-handed, but spread is severe; wield for accurate fire.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Guns/SMGs/nexus_bal_smg.rsi
+    sprite: _Forge/Objects/Weapons/Guns/SMGs/nexus_bal_smg.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: Forge/Objects/Weapons/Guns/SMGs/nexus_bal_smg_inhand_x64.rsi
+    sprite: _Forge/Objects/Weapons/Guns/SMGs/nexus_bal_smg_inhand_x64.rsi
   - type: Item
     size: Large
-    sprite: Forge/Objects/Weapons/Guns/SMGs/nexus_bal_smg_inhand_x64.rsi
+    sprite: _Forge/Objects/Weapons/Guns/SMGs/nexus_bal_smg_inhand_x64.rsi
     shape:
     - 0,0,3,1
   - type: GunWieldBonus
-    minAngle: -38
-    maxAngle: -55
-    angleIncrease: -10
-    angleDecay: 10
+    minAngle: -20 # -38->-20
+    maxAngle: -26 # -55->-26
+    # angleIncrease: -10
+    # angleDecay: 10
   - type: Gun
-    minAngle: 38
-    maxAngle: 58
-    angleIncrease: 14
-    angleDecay: 6
-    fireRate: 9
+    minAngle: 22 # 38->22
+    maxAngle: 40 # 58->40
+    angleIncrease: 1.25 # 14->1.25
+    angleDecay: 10 # 6->10
+    fireRate: 7.5 # 9->7.5
+    projectileSpeed: 45
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/mla_fire.ogg
   - type: ChamberMagazineAmmoProvider
@@ -38,21 +39,21 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: Magazine5x23mmNexus
+        startingItem: Magazine635x40mmCaselessNexus
         insertSound: /Audio/Weapons/Guns/MagIn/hpistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - Magazine5x23mm
+          - Magazine635x40mmCaselessNexus
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: Cartridge5x23mm
+        startingItem: Cartridge635x40mmCaseless
         priority: 1
         whitelist:
           tags:
-          - Cartridge5x23mm
+          - Cartridge635x40mmCaseless
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot

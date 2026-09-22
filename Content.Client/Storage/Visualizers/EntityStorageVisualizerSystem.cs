@@ -28,6 +28,10 @@ public sealed partial class EntityStorageVisualizerSystem : VisualizerSystem<Ent
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
+        // Preview / incomplete sprites may not have layers yet (map-load adds Sprite before CopyTo).
+        if (!SpriteSystem.LayerMapTryGet((uid, sprite), StorageVisualLayers.Base, out _, false))
+            return;
+
         SpriteSystem.LayerSetRsiState((uid, sprite), StorageVisualLayers.Base, comp.StateBaseClosed);
     }
 
@@ -62,6 +66,8 @@ public sealed partial class EntityStorageVisualizerSystem : VisualizerSystem<Ent
         }
         /// Forge-Change-End
 
+        var hasBase = SpriteSystem.LayerMapTryGet((uid, args.Sprite), StorageVisualLayers.Base, out _, false);
+
         // Open/Closed state for the storage entity.
         if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), StorageVisualLayers.Door, out _, false))
         {
@@ -80,9 +86,9 @@ public sealed partial class EntityStorageVisualizerSystem : VisualizerSystem<Ent
                     SpriteSystem.LayerSetVisible((uid, args.Sprite), StorageVisualLayers.Door, false);
                 }
 
-                if (comp.StateBaseOpen != null)
+                if (hasBase && comp.StateBaseOpen != null)
                     SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Base, comp.StateBaseOpen);
-                else if (forceRedrawBase && comp.StateBaseClosed != null)
+                else if (hasBase && forceRedrawBase && comp.StateBaseClosed != null)
                     SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Base, comp.StateBaseClosed);
             }
             else
@@ -98,9 +104,9 @@ public sealed partial class EntityStorageVisualizerSystem : VisualizerSystem<Ent
                 else
                     SpriteSystem.LayerSetVisible((uid, args.Sprite), StorageVisualLayers.Door, false);
 
-                if (comp.StateBaseClosed != null)
+                if (hasBase && comp.StateBaseClosed != null)
                     SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Base, comp.StateBaseClosed);
-                else if (forceRedrawBase && comp.StateBaseOpen != null)
+                else if (hasBase && forceRedrawBase && comp.StateBaseOpen != null)
                     SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Base, comp.StateBaseOpen);
             }
         }

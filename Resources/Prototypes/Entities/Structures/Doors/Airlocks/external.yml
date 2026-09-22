@@ -15,7 +15,7 @@
     denySound:
       path: /Audio/Machines/airlock_deny.ogg
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/external.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Standard/external.rsi # Forge-Change
   # Forge-Change-Start
   # - type: PaintableAirlock
   #   group: External
@@ -36,7 +36,7 @@
   - type: Occluder
     enabled: false
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/external.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/external.rsi # Forge-Change
   # - type: PaintableAirlock # Forge-Change-Del
     # group: ExternalGlass # Forge-Change-Del
   - type: Fixtures

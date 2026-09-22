@@ -10,7 +10,7 @@
   purchasable: false # voucher only
   category: Large
   group: Ussp
-  access: USSP
+  access: Mercenary # Forge-change: Ussp to Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/Ledokol/ledokol.yml
   guidebookPage: Null
   class:
@@ -41,5 +41,6 @@
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-           USSPSergeant: [ 0, 0 ]
-           USSPRifleman: [ 0, 0 ]
+           Contractor: [ 0, 0 ] # Forge-change: Ussp Rolesto Contractor
+           Pilot: [ 0, 0 ] # Forge-change: Ussp Roles to Pilot
+           Mercenary: [ 0, 0 ] # Forge-change: Ussp Roles to Mercenary

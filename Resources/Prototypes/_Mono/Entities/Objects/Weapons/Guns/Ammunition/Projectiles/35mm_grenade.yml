@@ -11,13 +11,17 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    maxIntensity: 75
-    intensitySlope: 4
-    totalIntensity: 75
+    maxIntensity: 7 # Forge-change 75->7
+    intensitySlope: 5 # Forge-change 4->5
+    totalIntensity: 40 # Forge-change 75->40
     maxTileBreak: 0
   - type: Projectile
     damage:
       types:
-        Structural: 100
-        Piercing: 45
-    armorPenetration: 0.1
+        Structural: 200 # Forge-change 100->200
+        Piercing: 30 # Forge-change 45->30
+    ignoreResistances: true # Forge-change
+  - type: Reflective # Forge-change
+    reflective: # Forge-change
+    - None # Forge-change
+

@@ -19,14 +19,15 @@
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/LMGs/ratel/Ratel-inhands.rsi
   - type: GunWieldBonus
-    minAngle: -25
-    maxAngle: -35
+    minAngle: 0 # Forge-change -25->0
+    maxAngle: 0 # Forge-change -35->0
   - type: Gun
-    minAngle: 25
-    maxAngle: 40
-    angleIncrease: 7
-    angleDecay: 28
+    minAngle: 3 # Forge-change 25->3
+    maxAngle: 28 # Forge-change 40->28
+    angleIncrease: 2.75 # Forge-change 7->2.75
+    angleDecay: 6 # Forge-change 28->6
     fireRate: 6 # 360 rpm
+    projectileSpeed: 50 # Forge-change
     selectedMode: FullAuto
     availableModes:
     - SemiAuto
@@ -77,12 +78,15 @@
   - type: Appearance
   - type: StaticPrice
     price: 2500
+  - type: ClothingSpeedModifier # Forge-change
+    sprintModifier: 0.9 # Forge-change
+    walkModifier: 0.9 # Forge-change
   - type: SpeedModifiedOnWield
     walkModifier: 0.6
-    sprintModifier: 0.5 # lower firerate than grizzly but more accurate and bit more damage
+    sprintModifier: 0.6 # Forge-change 0.5->0.6
   - type: WieldDelay
-    baseDelay: 0.8
-    modifiedDelay: 0.8
+    baseDelay: 1.2 # Forge-change 0.8->1.2
+    modifiedDelay: 1.2 # Forge-change 0.8->1.2
     preventFiring: true
   # Attachment slop
   - type: ESAttachableGun

@@ -5,7 +5,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssNtBG.png"
+        path: "/Textures/_Forge/Parallax/BssNtBG.png"
       slowness: 0.998046875
       scale: "1, 1"
     - texture:
@@ -20,7 +20,7 @@
       slowness: 0.989375
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssNtNeb.png"
+        path: "/Textures/_Forge/Parallax/BssNtNeb.png"
       slowness: 0.978
       scale: "1, 1"
     - texture:
@@ -30,7 +30,7 @@
       slowness: 0.957265625
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssNtDebris.png"
+        path: "/Textures/_Forge/Parallax/BssNtDebris.png"
       slowness: 0.977
       scale: "1, 1"
       scrolling: "0.008, 0.004"
@@ -47,7 +47,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssSivBG.png"
+        path: "/Textures/_Forge/Parallax/BssSivBG.png"
       slowness: 0.998046875
       scale: "1.05, 1.05"
     - texture:
@@ -62,7 +62,7 @@
       slowness: 0.979375
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssSivNeb.png"
+        path: "/Textures/_Forge/Parallax/BssSivNeb.png"
       slowness: 0.968
       scale: "1, 1"
     - texture:
@@ -72,7 +72,7 @@
       slowness: 0.954
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssSivDebris.png"
+        path: "/Textures/_Forge/Parallax/BssSivDebris.png"
       slowness: 0.96
       scale: "1, 1"
       scrolling: "-0.006, 0.01"
@@ -89,7 +89,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssTsfBG.png"
+        path: "/Textures/_Forge/Parallax/BssTsfBG.png"
       slowness: 0.998046875
       scale: "1, 1"
     - texture:
@@ -99,7 +99,7 @@
       slowness: 0.986625
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssTsfNeb.png"
+        path: "/Textures/_Forge/Parallax/BssTsfNeb.png"
       slowness: 0.972
       scale: "1, 1"
     - texture:
@@ -114,7 +114,7 @@
       slowness: 0.95
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssTsfDebris.png"
+        path: "/Textures/_Forge/Parallax/BssTsfDebris.png"
       slowness: 0.962
       scale: "1, 1"
       scrolling: "0.01, -0.005"
@@ -131,7 +131,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVkrBG.png"
+        path: "/Textures/_Forge/Parallax/BssVkrBG.png"
       slowness: 0.998046875
       scale: "0.85, 0.85"
     - texture:
@@ -141,7 +141,7 @@
       slowness: 0.989
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVkrNeb.png"
+        path: "/Textures/_Forge/Parallax/BssVkrNeb.png"
       slowness: 0.97
       scale: "1.15, 1.15"
     - texture:
@@ -151,7 +151,7 @@
       slowness: 0.954
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVkrDebris.png"
+        path: "/Textures/_Forge/Parallax/BssVkrDebris.png"
       slowness: 0.948
       scale: "1, 1"
       scrolling: "-0.014, -0.008"
@@ -168,7 +168,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssNexusBG.png"
+        path: "/Textures/_Forge/Parallax/BssNexusBG.png"
       slowness: 0.998
       scale: "1.1, 1.1"
     - texture:
@@ -178,7 +178,7 @@
       slowness: 0.99
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssNexusNeb.png"
+        path: "/Textures/_Forge/Parallax/BssNexusNeb.png"
       slowness: 0.965
       scale: "1.2, 1.2"
       scrolling: "0.004, -0.003"
@@ -189,7 +189,7 @@
       slowness: 0.94
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssNexusDebris.png"
+        path: "/Textures/_Forge/Parallax/BssNexusDebris.png"
       slowness: 0.93
       scale: "1, 1"
       scrolling: "0.02, 0.012"
@@ -206,7 +206,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiWestBG.png"
+        path: "/Textures/_Forge/Parallax/BssPoiWestBG.png"
       slowness: 0.998046875
       scale: "0.7, 0.7"
     - texture:
@@ -216,19 +216,19 @@
       slowness: 0.996625
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiWestPlanet.png"
+        path: "/Textures/_Forge/Parallax/BssPoiWestPlanet.png"
       slowness: 0.994
       scale: "1.7, 1.7"
       tiled: false
       worldHomePosition: "-420, 180"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiWestNeb.png"
+        path: "/Textures/_Forge/Parallax/BssPoiWestNeb.png"
       slowness: 0.975
       scale: "1, 1"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiWestDebris.png"
+        path: "/Textures/_Forge/Parallax/BssPoiWestDebris.png"
       slowness: 0.968
       scale: "1, 1"
       scrolling: "0.01, 0.012"
@@ -245,7 +245,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiNorthBG.png"
+        path: "/Textures/_Forge/Parallax/BssPoiNorthBG.png"
       slowness: 0.998046875
       scale: "0.65, 0.65"
     - texture:
@@ -255,19 +255,19 @@
       slowness: 0.995
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiNorthPlanet.png"
+        path: "/Textures/_Forge/Parallax/BssPoiNorthPlanet.png"
       slowness: 0.993
       scale: "1.85, 1.85"
       tiled: false
       worldHomePosition: "260, 340"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiNorthNeb.png"
+        path: "/Textures/_Forge/Parallax/BssPoiNorthNeb.png"
       slowness: 0.976
       scale: "1.1, 1.1"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiNorthDebris.png"
+        path: "/Textures/_Forge/Parallax/BssPoiNorthDebris.png"
       slowness: 0.958
       scale: "1, 1"
       scrolling: "-0.009, 0.007"
@@ -284,7 +284,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiEastBG.png"
+        path: "/Textures/_Forge/Parallax/BssPoiEastBG.png"
       slowness: 0.998046875
       scale: "0.75, 0.75"
     - texture:
@@ -294,19 +294,19 @@
       slowness: 0.996
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiEastPlanet.png"
+        path: "/Textures/_Forge/Parallax/BssPoiEastPlanet.png"
       slowness: 0.993
       scale: "1.55, 1.55"
       tiled: false
       worldHomePosition: "480, -90"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiEastNeb.png"
+        path: "/Textures/_Forge/Parallax/BssPoiEastNeb.png"
       slowness: 0.974
       scale: "1, 1"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiEastDebris.png"
+        path: "/Textures/_Forge/Parallax/BssPoiEastDebris.png"
       slowness: 0.96
       scale: "1, 1"
       scrolling: "-0.011, 0.009"
@@ -323,7 +323,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiSouthBG.png"
+        path: "/Textures/_Forge/Parallax/BssPoiSouthBG.png"
       slowness: 0.998046875
       scale: "0.6, 0.6"
     - texture:
@@ -333,19 +333,19 @@
       slowness: 0.99
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiSouthPlanet.png"
+        path: "/Textures/_Forge/Parallax/BssPoiSouthPlanet.png"
       slowness: 0.995
       scale: "1.9, 1.9"
       tiled: false
       worldHomePosition: "-80, -360"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiSouthNeb.png"
+        path: "/Textures/_Forge/Parallax/BssPoiSouthNeb.png"
       slowness: 0.972
       scale: "1.05, 1.05"
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssPoiSouthDebris.png"
+        path: "/Textures/_Forge/Parallax/BssPoiSouthDebris.png"
       slowness: 0.955
       scale: "1, 1"
       scrolling: "0.008, -0.013"
@@ -362,7 +362,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssWildWestBG.png"
+        path: "/Textures/_Forge/Parallax/BssWildWestBG.png"
       slowness: 0.997
       scale: "1.2, 1.2"
     - texture:
@@ -372,7 +372,7 @@
       slowness: 0.996625
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssWildWestNeb.png"
+        path: "/Textures/_Forge/Parallax/BssWildWestNeb.png"
       slowness: 0.98
       scale: "1.15, 1.15"
     - texture:
@@ -382,7 +382,7 @@
       slowness: 0.972
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssWildWestDebris.png"
+        path: "/Textures/_Forge/Parallax/BssWildWestDebris.png"
       slowness: 0.94
       scale: "1, 1"
       scrolling: "-0.006, 0.014"
@@ -399,7 +399,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssWildEastBG.png"
+        path: "/Textures/_Forge/Parallax/BssWildEastBG.png"
       slowness: 0.997
       scale: "1.1, 1.1"
     - texture:
@@ -409,7 +409,7 @@
       slowness: 0.995
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssWildEastNeb.png"
+        path: "/Textures/_Forge/Parallax/BssWildEastNeb.png"
       slowness: 0.978
       scale: "1.25, 1.25"
     - texture:
@@ -419,7 +419,7 @@
       slowness: 0.97
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssWildEastDebris.png"
+        path: "/Textures/_Forge/Parallax/BssWildEastDebris.png"
       slowness: 0.945
       scale: "1, 1"
       scrolling: "0.015, 0.004"
@@ -436,7 +436,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVoidBG.png"
+        path: "/Textures/_Forge/Parallax/BssVoidBG.png"
       slowness: 0.9985
       scale: "1.4, 1.4"
     - texture:
@@ -446,7 +446,7 @@
       slowness: 0.997
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVoidNeb.png"
+        path: "/Textures/_Forge/Parallax/BssVoidNeb.png"
       slowness: 0.988
       scale: "1.6, 1.6"
     - texture:
@@ -456,7 +456,7 @@
       slowness: 0.96
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVoidDebris.png"
+        path: "/Textures/_Forge/Parallax/BssVoidDebris.png"
       slowness: 0.93
       scale: "1, 1"
       scrolling: "-0.02, 0.01"
@@ -473,7 +473,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVoidBG.png"
+        path: "/Textures/_Forge/Parallax/BssVoidBG.png"
       slowness: 0.9985
       scale: "1.6, 1.6"
     - texture:
@@ -483,7 +483,7 @@
       slowness: 0.996
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVoidNeb.png"
+        path: "/Textures/_Forge/Parallax/BssVoidNeb.png"
       slowness: 0.985
       scale: "1.9, 1.9"
       scrolling: "0.003, 0.002"
@@ -494,7 +494,7 @@
       slowness: 0.955
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVoidDebris.png"
+        path: "/Textures/_Forge/Parallax/BssVoidDebris.png"
       slowness: 0.94
       scale: "1, 1"
       scrolling: "0.007, -0.009"
@@ -511,7 +511,7 @@
   layers:
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVoidBG.png"
+        path: "/Textures/_Forge/Parallax/BssVoidBG.png"
       slowness: 0.998
       scale: "1.25, 1.25"
     - texture:
@@ -521,7 +521,7 @@
       slowness: 0.994
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVoidNeb.png"
+        path: "/Textures/_Forge/Parallax/BssVoidNeb.png"
       slowness: 0.982
       scale: "1.35, 1.35"
       scrolling: "-0.004, 0.001"
@@ -532,7 +532,7 @@
       slowness: 0.948
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Forge/Parallax/BssVoidDebris.png"
+        path: "/Textures/_Forge/Parallax/BssVoidDebris.png"
       slowness: 0.92
       scale: "1, 1"
       scrolling: "0.018, -0.016"

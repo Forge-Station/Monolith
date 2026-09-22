@@ -6,7 +6,7 @@ using Content.Client.UserInterface.Systems.Bwoink;
 using Content.Client.UserInterface.Systems.EscapeMenu;
 using Content.Client.UserInterface.Systems.Viewport;
 using Content.Client.Voting.UI;
-using Content.Shared._Forge.CCVar;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.LobbyHub;
 using Content.Shared.Input;
 using Content.Shared.Preferences;
@@ -86,7 +86,7 @@ public sealed partial class LobbyHubSystem : EntitySystem
 
     public void Start(LobbyGui lobby)
     {
-        if (IsActive || !_cfg.GetCVar(ForgeCVars.LobbyHubEnabled))
+        if (IsActive || !_cfg.GetCVar(ForgeCCVars.LobbyHubEnabled))
             return;
 
         try
@@ -255,7 +255,7 @@ public sealed partial class LobbyHubSystem : EntitySystem
     {
         ClearHub();
 
-        var path = new ResPath(_cfg.GetCVar(ForgeCVars.LobbyHubMap));
+        var path = new ResPath(_cfg.GetCVar(ForgeCCVars.LobbyHubMap));
         _mapUid = _map.CreateMap(out _mapId);
         _map.SetAmbientLight(_mapId, HubAmbient);
 

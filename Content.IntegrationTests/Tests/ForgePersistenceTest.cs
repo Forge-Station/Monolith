@@ -26,7 +26,6 @@ public sealed class ForgePersistenceTest
         var server = pair.Server;
         var entities = server.ResolveDependency<IEntityManager>();
         var resources = server.ResolveDependency<IResourceManager>();
-        var mapManager = server.ResolveDependency<IMapManager>();
         var mapSystem = entities.System<SharedMapSystem>();
         var persistence = entities.System<GridPersistenceService>();
         var path = persistence.GetHangarSavePath(Guid.NewGuid());
@@ -34,7 +33,7 @@ public sealed class ForgePersistenceTest
         await server.WaitAssertion(() =>
         {
             mapSystem.CreateMap(out var mapId);
-            var grid = mapManager.CreateGridEntity(mapId);
+            var grid = mapSystem.CreateGridEntity(mapId);
             var station = entities.SpawnEntity(null, MapCoordinates.Nullspace);
             entities.AddComponent<StationRecordsComponent>(station);
             entities.AddComponent(grid, new StationMemberComponent { Station = station });
@@ -64,7 +63,6 @@ public sealed class ForgePersistenceTest
         var server = pair.Server;
         var entities = server.ResolveDependency<IEntityManager>();
         var resources = server.ResolveDependency<IResourceManager>();
-        var mapManager = server.ResolveDependency<IMapManager>();
         var mapSystem = entities.System<SharedMapSystem>();
         var persistence = entities.System<PersistentWorldSystem>();
         var files = entities.System<GridPersistenceService>();
@@ -77,7 +75,7 @@ public sealed class ForgePersistenceTest
                 var mapUid = mapSystem.CreateMap(out var mapId);
                 createdMaps.Add(mapId);
                 entities.AddComponent(mapUid, new PersistentMapComponent { Id = $"integration-{i}" });
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSystem.CreateGridEntity(mapId);
                 entities.AddComponent(grid, new WorldPersistableComponent());
                 if (i == 0)
                 {
@@ -133,7 +131,6 @@ public sealed class ForgePersistenceTest
         var server = pair.Server;
         var entities = server.ResolveDependency<IEntityManager>();
         var resources = server.ResolveDependency<IResourceManager>();
-        var mapManager = server.ResolveDependency<IMapManager>();
         var mapSystem = entities.System<SharedMapSystem>();
         var files = entities.System<GridPersistenceService>();
         var loader = entities.System<MapLoaderSystem>();
@@ -142,7 +139,7 @@ public sealed class ForgePersistenceTest
         {
             var mapUid = mapSystem.CreateMap(out var mapId);
             entities.AddComponent(mapUid, new PersistentMapComponent { Id = "gzip-loader" });
-            var grid = mapManager.CreateGridEntity(mapId);
+            var grid = mapSystem.CreateGridEntity(mapId);
             entities.AddComponent(grid, new WorldPersistableComponent());
 
             var path = files.GetMapSavePath("gzip-loader");
@@ -170,7 +167,6 @@ public sealed class ForgePersistenceTest
         var server = pair.Server;
         var entities = server.ResolveDependency<IEntityManager>();
         var resources = server.ResolveDependency<IResourceManager>();
-        var mapManager = server.ResolveDependency<IMapManager>();
         var mapSystem = entities.System<SharedMapSystem>();
         var persistence = entities.System<PersistentWorldSystem>();
         var files = entities.System<GridPersistenceService>();
@@ -181,7 +177,7 @@ public sealed class ForgePersistenceTest
             var mapUid = mapSystem.CreateMap(out var mapId);
             entities.AddComponent(mapUid, new PersistentMapComponent { Id = "filter-map" });
 
-            var keep = mapManager.CreateGridEntity(mapId);
+            var keep = mapSystem.CreateGridEntity(mapId);
             entities.AddComponent(keep, new WorldPersistableComponent());
             entities.AddComponent(keep, new VendingMachineComponent
             {
@@ -194,7 +190,7 @@ public sealed class ForgePersistenceTest
                 },
             });
 
-            var junk = mapManager.CreateGridEntity(mapId);
+            var junk = mapSystem.CreateGridEntity(mapId);
             meta.SetEntityName(junk, "AbandonedJunkShuttle");
 
             Assert.That(persistence.SaveWorld(), Is.True);

@@ -11,6 +11,7 @@ using Content.Server.Spreader;
 using Content.Server.Station.Systems;
 using Content.Shared._Forge;
 using Content.Shared._Forge.Bss;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.Persistence;
 using Content.Shared.CCVar;
 using Content.Shared.Gravity;
@@ -92,13 +93,13 @@ public sealed class PersistentWorldSystem : EntitySystem
         base.Shutdown();
     }
 
-    private bool Enabled => _configuration.GetCVar(ForgeVars.PersistenceEnabled);
+    private bool Enabled => _configuration.GetCVar(ForgeCCVars.PersistenceEnabled);
 
     private TimeSpan CycleLength
     {
         get
         {
-            var days = Math.Max(1, _configuration.GetCVar(ForgeVars.PersistenceCycleDays));
+            var days = Math.Max(1, _configuration.GetCVar(ForgeCCVars.PersistenceCycleDays));
             return TimeSpan.FromDays(days);
         }
     }

@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.Company;
 using Content.Shared._Forge.Sponsor;
 using Content.Shared.StatusIcon;
@@ -73,7 +74,7 @@ public sealed partial class CompanyManagementUiFragment : BoxContainer
         _sponsors = IoCManager.Resolve<ISharedSponsorManager>();
         _players = IoCManager.Resolve<IPlayerManager>();
 
-        var initialPalette = ResolvePalette(_cfg.GetCVar(ForgeVars.CompanyUiPalette));
+        var initialPalette = ResolvePalette(_cfg.GetCVar(ForgeCCVars.CompanyUiPalette));
         _styles = new CompanyManagementStyles(
             IoCManager.Resolve<IResourceCache>(),
             IoCManager.Resolve<IUserInterfaceManager>(),
@@ -122,8 +123,8 @@ public sealed partial class CompanyManagementUiFragment : BoxContainer
         }
 
         var fallback = _proto.Index<CompanyUiPalettePrototype>(CompanyManagementStyles.DefaultPaletteId);
-        if (_cfg.GetCVar(ForgeVars.CompanyUiPalette) != fallback.ID)
-            _cfg.SetCVar(ForgeVars.CompanyUiPalette, fallback.ID);
+        if (_cfg.GetCVar(ForgeCCVars.CompanyUiPalette) != fallback.ID)
+            _cfg.SetCVar(ForgeCCVars.CompanyUiPalette, fallback.ID);
         return fallback;
     }
 
@@ -197,7 +198,7 @@ public sealed partial class CompanyManagementUiFragment : BoxContainer
         PaletteOption.Clear();
         _paletteIds.Clear();
 
-        var selectedId = ResolvePalette(_cfg.GetCVar(ForgeVars.CompanyUiPalette)).ID;
+        var selectedId = ResolvePalette(_cfg.GetCVar(ForgeCCVars.CompanyUiPalette)).ID;
         var selectedIndex = 0;
         var i = 0;
         foreach (var palette in _proto.EnumeratePrototypes<CompanyUiPalettePrototype>().OrderBy(p => p.RequiresSponsor).ThenBy(p => p.ID))
@@ -237,7 +238,7 @@ public sealed partial class CompanyManagementUiFragment : BoxContainer
             }
 
             PaletteOption.ToolTip = Loc.GetString("company-ui-palette-tooltip");
-            _cfg.SetCVar(ForgeVars.CompanyUiPalette, id);
+            _cfg.SetCVar(ForgeCCVars.CompanyUiPalette, id);
             ApplyPalette(palette);
         };
     }

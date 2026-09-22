@@ -5,6 +5,7 @@ using Content.Server.GameTicking.Events;
 using Content.Server._Forge.Persistence;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.Persistence;
 using Content.Shared._Mono.FireControl;
 using Content.Shared._Mono.Ships.Components;
@@ -44,8 +45,8 @@ public sealed partial class ShipyardSystem
 
     private void OnHangarRoundEndWarning(BeforeRoundRestartWarningEvent ev)
     {
-        if (!_configManager.GetCVar(ForgeVars.HangarEnabled) ||
-            !_configManager.GetCVar(ForgeVars.HangarRoundEndWarning))
+        if (!_configManager.GetCVar(ForgeCCVars.HangarEnabled) ||
+            !_configManager.GetCVar(ForgeCCVars.HangarRoundEndWarning))
         {
             return;
         }
@@ -67,7 +68,7 @@ public sealed partial class ShipyardSystem
 
     private async void OnHangarRoundStarting(RoundStartingEvent ev)
     {
-        if (!_configManager.GetCVar(ForgeVars.HangarEnabled))
+        if (!_configManager.GetCVar(ForgeCCVars.HangarEnabled))
             return;
 
         var purged = await _hangarDatabase.PurgeDeployedHangarVessels();
@@ -91,7 +92,7 @@ public sealed partial class ShipyardSystem
         ShipyardConsoleComponent component,
         ShipyardConsoleHangarStoreMessage args)
     {
-        if (!_configManager.GetCVar(ForgeVars.HangarEnabled) ||
+        if (!_configManager.GetCVar(ForgeCCVars.HangarEnabled) ||
             args.Actor is not { Valid: true } actor ||
             !TryGetCharacter(actor, out var playerId, out var characterSlot))
         {
@@ -152,7 +153,7 @@ public sealed partial class ShipyardSystem
             HangarVesselState.InHangar,
             DateTime.UtcNow);
 
-        var maxSlots = Math.Max(0, _configManager.GetCVar(ForgeVars.HangarMaxSlots));
+        var maxSlots = Math.Max(0, _configManager.GetCVar(ForgeCCVars.HangarMaxSlots));
         if (!await _hangarDatabase.UpsertHangarVessel(record, maxSlots))
         {
             _gridPersistence.Delete(savePath);
@@ -186,7 +187,7 @@ public sealed partial class ShipyardSystem
         ShipyardConsoleComponent component,
         ShipyardConsoleHangarRetrieveMessage args)
     {
-        if (!_configManager.GetCVar(ForgeVars.HangarEnabled) ||
+        if (!_configManager.GetCVar(ForgeCCVars.HangarEnabled) ||
             args.Actor is not { Valid: true } actor ||
             !TryGetCharacter(actor, out var playerId, out var characterSlot))
         {
@@ -316,7 +317,7 @@ public sealed partial class ShipyardSystem
                 current.FreeListings,
                 current.SellRate,
                 entries,
-                Math.Max(0, _configManager.GetCVar(ForgeVars.HangarMaxSlots))));
+                Math.Max(0, _configManager.GetCVar(ForgeCCVars.HangarMaxSlots))));
     }
 
     private bool TryGetCharacter(EntityUid actor, out Guid playerId, out int characterSlot)

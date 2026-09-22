@@ -20,6 +20,7 @@ using Content.Server._Forge.Persistence;
 using Content.Server._NF.ShuttleRecords;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.Persistence;
 using Content.Shared._Mono.Ships.Components;
 using Content.Shared._NF.Shipyard.Components;
@@ -325,7 +326,7 @@ public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
             HangarVesselState.Deployed,
             DateTime.UtcNow);
 
-        var maxSlots = Math.Max(0, _configuration.GetCVar(ForgeVars.HangarMaxSlots));
+        var maxSlots = Math.Max(0, _configuration.GetCVar(ForgeCCVars.HangarMaxSlots));
         return (await _database.UpsertHangarVessel(record, maxSlots), vesselId);
     }
 

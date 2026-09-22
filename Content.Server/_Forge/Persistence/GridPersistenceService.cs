@@ -9,6 +9,7 @@ using Content.Server.Spreader;
 using Content.Server.Station.Components;
 using Content.Server.Worldgen.Components;
 using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.Persistence;
 using Content.Shared._Mono;
 using Content.Shared.Damage;
@@ -42,7 +43,7 @@ public sealed class GridPersistenceService : EntitySystem
     [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private WorldPersistFilterSystem _worldFilter = default!;
 
-    public ResPath RootPath => NormalizeRoot(_configuration.GetCVar(ForgeVars.PersistenceRoot));
+    public ResPath RootPath => NormalizeRoot(_configuration.GetCVar(ForgeCCVars.PersistenceRoot));
     public ResPath MapsPath => RootPath / "maps";
     public ResPath HangarPath => RootPath / "hangar";
 

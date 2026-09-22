@@ -44,12 +44,6 @@ public sealed class ForgeCCVars
     #endregion
 
     /// <summary>
-    /// Client volume slider for boarding teleport countdown and arrival sounds.
-    /// </summary>
-    public static readonly CVarDef<float> BoardingTeleportVolume =
-        CVarDef.Create("forge.boarding_teleport_volume", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
-
-    /// <summary>
     /// Selected company PDA UI palette prototype id. Colored palettes require sponsor.
     /// </summary>
     public static readonly CVarDef<string> CompanyUiPalette =
@@ -81,6 +75,20 @@ public sealed class ForgeCCVars
     /// </summary>
     public static readonly CVarDef<string> MappingPaletteRecents =
         CVarDef.Create("forge.mapping.palette_recents", "", CVar.CLIENTONLY | CVar.ARCHIVE);
+    #endregion
+
+    #region Lobby
+    /// <summary>
+    ///     Enables the client-side walkable lobby hub.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyHubEnabled =
+        CVarDef.Create("forge.lobby_hub.enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Resource path of the single-grid YAML used as the lobby hub.
+    /// </summary>
+    public static readonly CVarDef<string> LobbyHubMap =
+        CVarDef.Create("forge.lobby_hub.map", "/Maps/_Forge/Lobby/hub.yml", CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
     #endregion
 
     #region Physic
@@ -287,11 +295,6 @@ public sealed class ForgeCCVars
     public static readonly CVarDef<float> DroneInnerZoneFleeDeleteMax =
         CVarDef.Create("forge.drone.inner_zone_flee_delete_max", 15f, CVar.SERVERONLY);
 
-    /// <summary>
-    ///     Seconds between scans for procedural drones inside the inner worldgen zone.
-    /// </summary>
-    public static readonly CVarDef<float> AutoKickGuestAfkMinutes =
-        CVarDef.Create("autokick.guest_afk_minutes", 25f, CVar.SERVERONLY);
 
     /// <summary>
     /// Enables Forge world and shuttle persistence.

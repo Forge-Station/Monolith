@@ -56,7 +56,7 @@ public abstract partial class SharedShuttleSystem : EntitySystem
 
         // Forge-Change: do not allow MAP-tab FTL between BSS sector maps; use warp gates.
         if (HasComp<Content.Shared._Forge.Bss.BssSectorMapComponent>(mapUid) &&
-            HasComp<Content.Shared._Forge.Bss.BssSectorMapComponent>(_mapManager.GetMapEntityId(shuttleMap)))
+            HasComp<Content.Shared._Forge.Bss.BssSectorMapComponent>(Maps.GetMap(shuttleMap)))
         {
             return false;
         }

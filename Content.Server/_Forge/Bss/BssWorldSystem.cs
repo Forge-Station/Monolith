@@ -8,6 +8,7 @@ using Content.Server.Worldgen.Components;
 using Content.Server.Worldgen.Prototypes;
 using Content.Shared._Forge;
 using Content.Shared._Forge.Bss;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.Persistence;
 using Content.Shared.GameTicking;
 using Content.Shared.Gravity;
@@ -40,7 +41,6 @@ public sealed class BssWorldSystem : EntitySystem
 
     [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
@@ -217,13 +217,13 @@ public sealed class BssWorldSystem : EntitySystem
             direction = new Vector2(1f, 0f);
         direction = Vector2.Normalize(direction);
 
-        var minDistance = MathF.Max(0f, _cfg.GetCVar(ForgeVars.BssGateDistance));
-        var maxDistance = MathF.Max(minDistance, _cfg.GetCVar(ForgeVars.BssGateDistanceMax));
+        var minDistance = MathF.Max(0f, _cfg.GetCVar(ForgeCCVars.BssGateDistance));
+        var maxDistance = MathF.Max(minDistance, _cfg.GetCVar(ForgeCCVars.BssGateDistanceMax));
         var distance = minDistance >= maxDistance
             ? minDistance
             : _random.NextFloat(minDistance, maxDistance);
         var worldPosition = direction * distance;
-        var grid = _mapManager.CreateGridEntity(mapId);
+        var grid = _maps.CreateGridEntity(mapId);
         _transform.SetWorldPosition(grid.Owner, worldPosition);
         _transform.SetWorldRotation(grid.Owner, direction.ToWorldAngle());
 
@@ -324,7 +324,7 @@ public sealed class BssWorldSystem : EntitySystem
 
     public bool TryGetNetwork([NotNullWhen(true)] out BssNetworkPrototype? network)
     {
-        return _prototypes.TryIndex(_cfg.GetCVar(ForgeVars.BssNetwork), out network) && network != null;
+        return _prototypes.TryIndex(_cfg.GetCVar(ForgeCCVars.BssNetwork), out network) && network != null;
     }
 
     public IReadOnlyList<BssGateLinkDefinition> GetAllLinks(BssNetworkPrototype network)

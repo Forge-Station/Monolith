@@ -1,4 +1,5 @@
-# Unlocked via ForgeBoardingTeleport* technologies; must appear on a lathe dynamic pack (AllTechPrintableTest).
+# Unlocked via ForgeBoardingTeleport* technologies, except the scrambler (TechDiskBoardingScrambler).
+# Every recipe must appear on a lathe dynamic pack (AllTechPrintableTest).
 - type: latheRecipePack
   id: ForgeBoardingTeleportRecipes
   recipes:

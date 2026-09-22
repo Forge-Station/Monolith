@@ -1,0 +1,30 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+
+- type: entity
+  id: DnaModifierScannerMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: DNA modifier scanner machine board
+  description: A machine printed circuit board for a DNA modifier scanner.
+  components:
+  - type: Sprite
+    state: medical
+  - type: MachineBoard
+    prototype: DnaModifierScanner
+    requirements:
+      Capacitor: 1
+    stackRequirements:
+      Glass: 5
+      Cable: 1
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: GeneticsConsoleComputerCircuitboard
+  name: genetics console computer board
+  description: A computer printed circuit board for a genetics console.
+  components:
+  - type: Sprite
+    state: cpu_medical
+  - type: ComputerBoard
+    prototype: ComputerGeneticsConsole

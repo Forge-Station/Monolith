@@ -1,0 +1,595 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+
+# Good
+
+- type: gene
+  id: GeneHulk
+  name: gene-hulk-name
+  description: gene-hulk-desc
+  quality: Good
+  instability: 40
+  branch: Physical
+  sequenceLength: 7
+  glowColor: "#3DFF4C"
+  glowEnergy: 0.6
+  visualScale: 1.14
+  conflicts:
+  - GeneWeak
+  components:
+  - type: GeneticHulk
+  - type: BonusMeleeDamage
+    bonusDamage:
+      types:
+        Blunt: 12
+    applyIfUser: true
+
+- type: gene
+  id: GeneXray
+  name: gene-xray-name
+  description: gene-xray-desc
+  quality: Good
+  instability: 25
+  branch: Vision
+  sequenceLength: 7
+  overlayColor: "#FF303030"
+  components:
+  - type: ThermalSight
+
+- type: gene
+  id: GeneNightVision
+  name: gene-night-vision-name
+  description: gene-night-vision-desc
+  quality: Good
+  instability: 20
+  branch: Vision
+  sequenceLength: 4
+  overlayColor: "#40FF4028"
+  components:
+  - type: NightVision
+    enabled: true
+    relayOverlay: false
+
+- type: gene
+  id: GeneHaste
+  name: gene-haste-name
+  description: gene-haste-desc
+  quality: Good
+  instability: 15
+  branch: Physical
+  sequenceLength: 4
+  overlayColor: "#40E8FF55"
+  glowColor: "#40E8FF"
+  glowEnergy: 1.1
+  conflicts:
+  - GeneSlow
+  components:
+  - type: GeneticMovespeed
+    walkModifier: 1.25
+    sprintModifier: 1.3
+
+- type: gene
+  id: GeneRegen
+  name: gene-regen-name
+  description: gene-regen-desc
+  quality: Good
+  instability: 30
+  branch: Metabolism
+  sequenceLength: 7
+  overlayColor: "#40FF7060"
+  glowColor: "#33FF88"
+  glowEnergy: 2.4
+  components:
+  - type: GeneticRegen
+    healPerTick: 2
+    interval: 3s
+
+- type: gene
+  id: GeneNoBreath
+  name: gene-no-breath-name
+  description: gene-no-breath-desc
+  quality: Good
+  instability: 25
+  branch: Metabolism
+  sequenceLength: 4
+  overlayColor: "#88CCFF40"
+  components:
+  - type: BreathingImmunity
+
+- type: gene
+  id: GeneShockProof
+  name: gene-shock-proof-name
+  description: gene-shock-proof-desc
+  quality: Good
+  instability: 15
+  branch: Adaptation
+  sequenceLength: 4
+  overlayColor: "#FFE04035"
+  glowColor: "#FFE040"
+  glowEnergy: 0.8
+  components:
+  - type: Insulated
+    coefficient: 0
+
+- type: gene
+  id: GeneHeatResist
+  name: gene-heat-resist-name
+  description: gene-heat-resist-desc
+  quality: Good
+  instability: 12
+  branch: Adaptation
+  sequenceLength: 4
+  overlayColor: "#FF802040"
+  components:
+  - type: DamageProtectionBuff
+    modifiers:
+      heat:
+        id: GeneHeatResist
+        coefficients:
+          Heat: 0.35
+
+- type: gene
+  id: GeneSpaceAdapt
+  name: gene-space-adapt-name
+  description: gene-space-adapt-desc
+  quality: Good
+  instability: 35
+  branch: Adaptation
+  sequenceLength: 7
+  overlayColor: "#A0C8FF50"
+  glowColor: "#A0C8FF"
+  glowEnergy: 1.3
+  components:
+  - type: PressureImmunity
+
+- type: gene
+  id: GeneColdResist
+  name: gene-cold-resist-name
+  description: gene-cold-resist-desc
+  quality: Good
+  instability: 12
+  branch: Adaptation
+  sequenceLength: 4
+  overlayColor: "#80C8FF40"
+  components:
+  - type: DamageProtectionBuff
+    modifiers:
+      cold:
+        id: GeneColdResist
+        coefficients:
+          Cold: 0.35
+
+- type: gene
+  id: GeneRadResist
+  name: gene-rad-resist-name
+  description: gene-rad-resist-desc
+  quality: Good
+  instability: 18
+  branch: Adaptation
+  sequenceLength: 4
+  overlayColor: "#C8FF4040"
+  components:
+  - type: DamageProtectionBuff
+    modifiers:
+      rad:
+        id: GeneRadResist
+        coefficients:
+          Radiation: 0.35
+
+- type: gene
+  id: GeneNoSlip
+  name: gene-no-slip-name
+  description: gene-no-slip-desc
+  quality: Good
+  instability: 10
+  branch: Physical
+  sequenceLength: 3
+  overlayColor: "#90A0C040"
+  components:
+  - type: NoSlip
+
+- type: gene
+  id: GeneFlashProof
+  name: gene-flash-proof-name
+  description: gene-flash-proof-desc
+  quality: Good
+  instability: 12
+  branch: Vision
+  sequenceLength: 4
+  overlayColor: "#FFFF8035"
+  components:
+  - type: FlashImmunity
+
+- type: gene
+  id: GeneAlcoholProof
+  name: gene-alcohol-proof-name
+  description: gene-alcohol-proof-desc
+  quality: Good
+  instability: 8
+  branch: Metabolism
+  sequenceLength: 3
+  overlayColor: "#C0804040"
+  conflicts:
+  - GeneDrunkLite
+  components:
+  - type: AlcoholTolerance
+    visualScaleMultiplier: 0.25
+
+- type: gene
+  id: GeneDermal
+  name: gene-dermal-name
+  description: gene-dermal-desc
+  quality: Good
+  instability: 22
+  branch: Physical
+  sequenceLength: 7
+  overlayColor: "#A0908055"
+  components:
+  - type: DamageProtectionBuff
+    modifiers:
+      dermal:
+        id: GeneDermal
+        coefficients:
+          Blunt: 0.75
+          Slash: 0.75
+          Piercing: 0.75
+
+# Bad
+
+- type: gene
+  id: GeneBlind
+  name: gene-blind-name
+  description: gene-blind-desc
+  quality: Bad
+  instability: 0
+  weight: 1.2
+  branch: Vision
+  sequenceLength: 3
+  overlayColor: "#00000090"
+  conflicts:
+  - GeneNearsight
+  components:
+  - type: PermanentBlindness
+
+- type: gene
+  id: GeneClumsy
+  name: gene-clumsy-name
+  description: gene-clumsy-desc
+  quality: Bad
+  weight: 1.2
+  branch: Neural
+  sequenceLength: 3
+  overlayColor: "#FF66AA30"
+  components:
+  - type: Clumsy
+
+- type: gene
+  id: GeneEpilepsy
+  name: gene-epilepsy-name
+  description: gene-epilepsy-desc
+  quality: Bad
+  weight: 1.1
+  branch: Neural
+  sequenceLength: 3
+  overlayColor: "#FF202050"
+  visualFlicker: true
+  components:
+  - type: GeneticEpilepsy
+
+- type: gene
+  id: GeneCough
+  name: gene-cough-name
+  description: gene-cough-desc
+  quality: Bad
+  branch: Metabolism
+  sequenceLength: 3
+  overlayColor: "#C8A07040"
+  components:
+  - type: GeneticCough
+    emote: Cough
+
+- type: gene
+  id: GeneMute
+  name: gene-mute-name
+  description: gene-mute-desc
+  quality: Bad
+  branch: Neural
+  sequenceLength: 3
+  overlayColor: "#60608040"
+  components:
+  - type: Muted
+
+- type: gene
+  id: GeneWeak
+  name: gene-weak-name
+  description: gene-weak-desc
+  quality: Bad
+  branch: Physical
+  sequenceLength: 4
+  overlayColor: "#80809050"
+  visualScale: 0.92
+  conflicts:
+  - GeneHulk
+  components:
+  - type: GeneticDamageModifier
+    coefficient: 1.3
+  - type: BonusMeleeDamage
+    applyIfUser: true
+    damageModifierSet:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+
+- type: gene
+  id: GeneSlow
+  name: gene-slow-name
+  description: gene-slow-desc
+  quality: Bad
+  branch: Physical
+  sequenceLength: 4
+  overlayColor: "#40406045"
+  conflicts:
+  - GeneHaste
+  components:
+  - type: GeneticMovespeed
+    walkModifier: 0.8
+    sprintModifier: 0.75
+
+- type: gene
+  id: GeneNarcolepsy
+  name: gene-narcolepsy-name
+  description: gene-narcolepsy-desc
+  quality: Bad
+  weight: 1.1
+  branch: Neural
+  sequenceLength: 4
+  overlayColor: "#40408050"
+  components:
+  - type: Narcolepsy
+    timeBetweenIncidents: 180, 420
+    durationOfIncident: 8, 20
+
+- type: gene
+  id: GeneNearsight
+  name: gene-nearsight-name
+  description: gene-nearsight-desc
+  quality: Bad
+  branch: Vision
+  sequenceLength: 3
+  overlayColor: "#80809050"
+  conflicts:
+  - GeneBlind
+  components:
+  - type: PermanentBlindness
+    blindness: 4
+
+- type: gene
+  id: GeneParacusia
+  name: gene-paracusia-name
+  description: gene-paracusia-desc
+  quality: Bad
+  weight: 1.1
+  branch: Neural
+  sequenceLength: 4
+  overlayColor: "#7050A050"
+  visualFlicker: true
+  components:
+  - type: Paracusia
+    minTimeBetweenIncidents: 8
+    maxTimeBetweenIncidents: 90
+    maxSoundDistance: 7
+    sounds:
+      collection: Paracusia
+
+- type: gene
+  id: GeneUnrevivable
+  name: gene-unrevivable-name
+  description: gene-unrevivable-desc
+  quality: Bad
+  instability: 0
+  weight: 0.8
+  branch: Metabolism
+  sequenceLength: 4
+  overlayColor: "#30303060"
+  components:
+  - type: Unrevivable
+
+- type: gene
+  id: GeneDrunkLite
+  name: gene-drunk-lite-name
+  description: gene-drunk-lite-desc
+  quality: Bad
+  branch: Metabolism
+  sequenceLength: 3
+  overlayColor: "#C0703050"
+  conflicts:
+  - GeneAlcoholProof
+  components:
+  - type: LightweightDrunk
+    boozeStrengthMultiplier: 2.5
+
+- type: gene
+  id: GeneSneeze
+  name: gene-sneeze-name
+  description: gene-sneeze-desc
+  quality: Bad
+  branch: Metabolism
+  sequenceLength: 3
+  overlayColor: "#D0D0C040"
+  components:
+  - type: GeneticCough
+    emote: Sneeze
+
+# Neutral
+
+- type: gene
+  id: GeneUnstable
+  name: gene-unstable-name
+  description: gene-unstable-desc
+  quality: Neutral
+  instability: 20
+  weight: 0.6
+  branch: Metabolism
+  sequenceLength: 4
+  overlayColor: "#C040FF66"
+  glowColor: "#C040FF"
+  glowEnergy: 1.6
+  visualFlicker: true
+  components:
+  - type: GeneticDamageModifier
+    coefficient: 1.05
+
+- type: gene
+  id: GenePacifist
+  name: gene-pacifist-name
+  description: gene-pacifist-desc
+  quality: Neutral
+  instability: 8
+  branch: Neural
+  sequenceLength: 4
+  overlayColor: "#E8D09045"
+  components:
+  - type: Pacified
+
+- type: gene
+  id: GeneMindlock
+  name: gene-mindlock-name
+  description: gene-mindlock-desc
+  quality: Neutral
+  instability: 20
+  weight: 0.7
+  branch: Neural
+  sequenceLength: 7
+  overlayColor: "#80A0E050"
+  components:
+  - type: MindShield
+
+- type: gene
+  id: GeneHysteria
+  name: gene-hysteria-name
+  description: gene-hysteria-desc
+  quality: Neutral
+  instability: 6
+  branch: Neural
+  sequenceLength: 3
+  overlayColor: "#FFB0C040"
+  components:
+  - type: GeneticCough
+    emote: Laugh
+    minInterval: 8
+    maxInterval: 22
+
+- type: gene
+  id: GenePainMute
+  name: gene-pain-mute-name
+  description: gene-pain-mute-desc
+  quality: Neutral
+  instability: 10
+  branch: Neural
+  sequenceLength: 4
+  overlayColor: "#A0A0B045"
+  conflicts:
+  - GeneSensitive
+  components:
+  - type: PainNumbness
+
+- type: gene
+  id: GeneSensitive
+  name: gene-sensitive-name
+  description: gene-sensitive-desc
+  quality: Bad
+  instability: 15
+  branch: Neural
+  sequenceLength: 7
+  conflicts:
+  - GenePainMute
+  components:
+  - type: GeneticDamageModifier
+    coefficient: 1.45
+
+- type: gene
+  id: GeneThermalSkin
+  name: gene-thermal-skin-name
+  description: gene-thermal-skin-desc
+  quality: Neutral
+  instability: 10
+  branch: Adaptation
+  sequenceLength: 4
+  overlayColor: "#FFC09040"
+  components:
+  - type: TemperatureProtection
+    heatingCoefficient: 0.55
+    coolingCoefficient: 0.55
+
+# Morphs — exact phenotype (which tail, which form) is picked per shift.
+
+- type: gene
+  id: GenePrimalForm
+  name: gene-primal-form-name
+  description: gene-primal-form-desc
+  quality: Neutral
+  instability: 30
+  weight: 0.7
+  sequenceLength: 7
+  overlayColor: "#8B5A2B55"
+  branch: Morphology
+  lockBranch: true
+  polymorphPool:
+  - GeneForcedMonkey
+
+- type: gene
+  id: GeneBestialTail
+  name: gene-bestial-tail-name
+  description: gene-bestial-tail-desc
+  quality: Neutral
+  instability: 12
+  sequenceLength: 4
+  overlayColor: "#4C8C4050"
+  markingPool:
+  - LizardTailSmooth
+  - LizardTailSpikes
+  - LizardTailLTiger
+  - LizardTailDTiger
+  - LizardTailLarge
+
+- type: gene
+  id: GeneCranialHorns
+  name: gene-cranial-horns-name
+  description: gene-cranial-horns-desc
+  quality: Neutral
+  instability: 12
+  sequenceLength: 4
+  overlayColor: "#C8A07050"
+  markingPool:
+  - LizardHornsCurled
+  - LizardHornsRam
+  - LizardHornsAngler
+  - LizardHornsDemonic
+  - LizardHornsBighorn
+
+- type: gene
+  id: GeneMothWings
+  name: gene-moth-wings-name
+  description: gene-moth-wings-desc
+  quality: Neutral
+  instability: 18
+  sequenceLength: 7
+  overlayColor: "#D0A06045"
+  markingPool:
+  - MothWingsDefault
+  - MothWingsFirewatch
+  - MothWingsGothic
+  - MothWingsFeathery
+  - MothWingsDeathhead
+
+- type: gene
+  id: GeneAberrantLimb
+  name: gene-aberrant-limb-name
+  description: gene-aberrant-limb-desc
+  quality: Neutral
+  instability: 22
+  sequenceLength: 7
+  overlayColor: "#A0408055"
+  replaceLimb: true

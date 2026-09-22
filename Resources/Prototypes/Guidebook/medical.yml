@@ -7,6 +7,10 @@
   - MedicalDoctor
   - Chemist
   - Cloning
+  # New Frontiers - Genetics - DNA modifier guidebook
+  # This code is licensed under AGPLv3. See LICENSE
+  - Genetics
+  # End of modified code
   - Cryogenics # Note: Frontier changes inside
   - Surgery # Shitmed Change
   - MedicalBounties # Frontier
@@ -20,6 +24,14 @@
   id: Cloning
   name: guide-entry-cloning
   text: "/ServerInfo/_Forge/Guidebook/Medical/Cloning.xml" # Forge-change
+
+# New Frontiers - Genetics - DNA modifier guidebook
+# This code is licensed under AGPLv3. See LICENSE
+- type: guideEntry
+  id: Genetics
+  name: guide-entry-genetics
+  text: "/ServerInfo/_Forge/Guidebook/Medical/Genetics.xml"
+# End of modified code
 
 - type: guideEntry
   id: Cryogenics

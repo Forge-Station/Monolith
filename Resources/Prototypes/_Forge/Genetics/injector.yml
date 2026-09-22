@@ -1,0 +1,28 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+
+- type: entity
+  parent: BaseItem
+  id: DnaInjector
+  name: DNA injector
+  description: A one-use syringe that writes an isolated gene into a living genome — or strips it out.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/hypospray.rsi
+    state: hypo
+  - type: Item
+    sprite: Objects/Specific/Medical/hypospray.rsi
+    size: Small
+  - type: DnaInjector
+  - type: StaticPrice
+    price: 250
+
+- type: entity
+  parent: DnaInjector
+  id: DnaInjectorFilledHulk
+  suffix: Hulk
+  components:
+  - type: DnaInjector
+    genes:
+    - GeneHulk

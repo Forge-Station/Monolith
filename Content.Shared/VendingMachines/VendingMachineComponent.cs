@@ -256,15 +256,21 @@ namespace Content.Shared.VendingMachines
         public bool RequiresCash = false;
     }
 
-    [Serializable, NetSerializable]
-    public sealed class VendingMachineInventoryEntry
+    // WOLFGATE: a data definition, so a live machine's stock can be written out with its grid.
+    [Serializable, NetSerializable, DataDefinition]
+    public sealed partial class VendingMachineInventoryEntry
     {
-        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField, ViewVariables(VVAccess.ReadWrite)]
         public InventoryType Type;
-        [ViewVariables(VVAccess.ReadWrite)]
-        public string ID;
-        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField, ViewVariables(VVAccess.ReadWrite)]
+        public string ID = string.Empty;
+        [DataField, ViewVariables(VVAccess.ReadWrite)]
         public uint Amount;
+
+        public VendingMachineInventoryEntry()
+        {
+        }
+
         public VendingMachineInventoryEntry(InventoryType type, string id, uint amount)
         {
             Type = type;

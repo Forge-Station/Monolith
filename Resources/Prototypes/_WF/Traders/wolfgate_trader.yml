@@ -1,0 +1,53 @@
+# WOLFGATE - John Wolfgate, who sells everything the Wolfgate Vending Machine stocks.
+- type: humanoidProfile
+  id: WFTraderWolfgateProfile
+  profile:
+    name: John Wolfgate
+    species: Human
+    age: 47
+    sex: Male
+    gender: Male
+    appearance:
+      hair: HumanHairCombover
+      hairColor: "#3B3128"
+      facialHair: HumanFacialHairFullbeard
+      facialHairColor: "#3B3128"
+      eyeColor: "#6B7F8C"
+      skinColor: "#C99A73"
+
+- type: startingGear
+  id: WFTraderWolfgateGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitQMFormal
+    outerClothing: ClothingOuterCoatTrench
+    shoes: ClothingShoesColorBlack
+    neck: ClothingNeckTieRed
+
+- type: traderDialogue
+  id: WFTraderWolfgateDialogue
+  greeting: trader-wolfgate-greeting
+  farewell: trader-wolfgate-farewell
+  options:
+  - prompt: trader-wolfgate-prompt-shop
+    response: trader-wolfgate-response-shop
+    action: OpenShop
+  - prompt: trader-wolfgate-prompt-who
+    response: trader-wolfgate-response-who
+    action: None
+
+- type: entity
+  id: WFTraderWolfgate
+  parent: WFBaseTrader
+  name: John Wolfgate
+  description: The name on the sign. If Wolfgate makes it, he sells it.
+  suffix: Trader, Wolfgate
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFTraderWolfgateProfile
+  - type: Loadout
+    prototypes: [ WFTraderWolfgateGear ]
+  - type: Trader
+    dialogue: WFTraderWolfgateDialogue
+  - type: TraderShop
+    vendors: [ VendingMachineWolfgate ]

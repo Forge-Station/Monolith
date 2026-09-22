@@ -1,0 +1,54 @@
+# WOLFGATE - Otho Kessler, the EVA outfitter at Caelestinus Central.
+- type: humanoidProfile
+  id: WFTraderAstroProfile
+  profile:
+    name: Otho Kessler
+    species: Human
+    age: 58
+    sex: Male
+    gender: Male
+    appearance:
+      hair: HumanHairBalding
+      hairColor: "#9C9990"
+      facialHair: HumanFacialHairFullbeard
+      facialHairColor: "#9C9990"
+      eyeColor: "#7C93A0"
+      skinColor: "#B98862"
+
+- type: startingGear
+  id: WFTraderAstroGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPilot
+    outerClothing: ClothingOuterCoatBomber
+    shoes: ClothingShoesBootsPilot
+    neck: ClothingNeckScarfPilot
+    eyes: ClothingEyesGlassesPilot
+
+- type: traderDialogue
+  id: WFTraderAstroDialogue
+  greeting: trader-astro-greeting
+  farewell: trader-astro-farewell
+  options:
+  - prompt: trader-astro-prompt-shop
+    response: trader-astro-response-shop
+    action: OpenShop
+  - prompt: trader-astro-prompt-who
+    response: trader-astro-response-who
+    action: None
+
+- type: entity
+  id: WFTraderAstro
+  parent: WFBaseTrader
+  name: Otho Kessler
+  description: Fits crews for vacuum work; sells EVA suits, hardsuits and pilot's kit.
+  suffix: Trader, Astro
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFTraderAstroProfile
+  - type: Loadout
+    prototypes: [ WFTraderAstroGear ]
+  - type: Trader
+    dialogue: WFTraderAstroDialogue
+  - type: TraderShop
+    vendors: [ VendingMachineAstroVendPOI ]

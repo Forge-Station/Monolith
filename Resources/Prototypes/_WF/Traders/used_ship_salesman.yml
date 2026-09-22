@@ -1,0 +1,57 @@
+# WOLFGATE - Benny Sokolov, the used ship salesman at Caelestinus Central.
+- type: humanoidProfile
+  id: WFTraderUsedShipsProfile
+  profile:
+    name: Benny Sokolov
+    species: Human
+    age: 37
+    sex: Male
+    gender: Male
+    appearance:
+      hair: HumanHairPompadour
+      hairColor: "#171310"
+      facialHair: HumanFacialHairMoustache
+      facialHairColor: "#171310"
+      eyeColor: "#6B5340"
+      skinColor: "#E0B38C"
+
+- type: startingGear
+  id: WFTraderUsedShipsGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLawyerRed
+    shoes: ClothingShoesColorBlack
+
+- type: traderDialogue
+  id: WFTraderUsedShipsDialogue
+  greeting: trader-used-greeting
+  farewell: trader-used-farewell
+  options:
+  - prompt: trader-used-prompt-lot
+    response: trader-used-response-lot
+    action: UsedShips
+  - prompt: trader-used-prompt-sell
+    response: trader-used-response-sell
+    action: SellShip
+    requires: DeedId
+  - prompt: trader-used-prompt-who
+    response: trader-used-response-who
+    action: None
+
+- type: entity
+  id: WFTraderUsedShips
+  parent: WFBaseTraderShipyard
+  name: Benny Sokolov
+  description: A used ship salesman in a jacket you can hear from two decks away.
+  suffix: Trader, Used Ships
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFTraderUsedShipsProfile
+  - type: Loadout
+    prototypes: [ WFTraderUsedShipsGear ]
+  - type: Trader
+    dialogue: WFTraderUsedShipsDialogue
+  - type: TraderUsedShips
+    console: ComputerShipyard
+    usedShipMarkup: 0.05
+    relistDelay: 60

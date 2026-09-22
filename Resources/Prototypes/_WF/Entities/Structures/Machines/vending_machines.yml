@@ -1,0 +1,25 @@
+# WOLFGATE - Placeholder vendomat sprite until the machine gets its own.
+- type: entity
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, VendingMachine]
+  id: VendingMachineWolfgate
+  name: Wolfgate Vending Machine
+  description: Stocks everything that carries the Wolfgate name.
+  components:
+  - type: VendingMachine
+    pack: WolfgateVendInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    ejectState: eject-unshaded
+    denyState: deny-unshaded
+    requiresCash: true
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/vendomat.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]

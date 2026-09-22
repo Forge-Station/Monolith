@@ -1,31 +1,52 @@
-using Content.Shared.Damage.Prototypes;
+﻿using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Serialization.Markdown.Mapping;
 using Robust.Shared.Serialization.Markdown.Validation;
 using Robust.Shared.Serialization.Markdown.Value;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.Serialization.TypeSerializers.Interfaces;
 
 namespace Content.Shared.Damage;
 
-//todo writing
-public sealed class DamageSpecifierDictionarySerializer : ITypeReader<Dictionary<string, FixedPoint2>, MappingDataNode>
+public sealed class DamageSpecifierDictionarySerializer : ITypeReader<Dictionary<string, FixedPoint2>, MappingDataNode>,
+    ITypeWriter<Dictionary<string, FixedPoint2>> // WOLFGATE: writes the non-zero types back out
 {
+    public DataNode Write(ISerializationManager serializationManager, Dictionary<string, FixedPoint2> value,
+        IDependencyCollection dependencies, bool alwaysWrite = false, ISerializationContext? context = null)
+    {
+        var types = new MappingDataNode();
+        foreach (var (type, amount) in value)
+        {
+            if (amount != FixedPoint2.Zero)
+                types.Add(type, new ValueDataNode(amount.ToString()));
+        }
+
+        var node = new MappingDataNode();
+        if (types.Count > 0)
+            node.Add("types", types);
+
+        return node;
+    }
+
+    private ITypeValidator<Dictionary<string, FixedPoint2>, MappingDataNode> _damageTypeSerializer = new PrototypeIdDictionarySerializer<FixedPoint2, DamageTypePrototype>();
+    private ITypeValidator<Dictionary<string, FixedPoint2>, MappingDataNode> _damageGroupSerializer = new PrototypeIdDictionarySerializer<FixedPoint2, DamageGroupPrototype>();
+
     public ValidationNode Validate(ISerializationManager serializationManager, MappingDataNode node,
         IDependencyCollection dependencies, ISerializationContext? context = null)
     {
         var vals = new Dictionary<ValidationNode, ValidationNode>();
         if (node.TryGet<MappingDataNode>("types", out var typesNode))
         {
-            vals.Add(new ValidatedValueNode(new ValueDataNode("types")), ValidateDamageTypes(serializationManager, typesNode, dependencies, context));
+            vals.Add(new ValidatedValueNode(new ValueDataNode("types")), _damageTypeSerializer.Validate(serializationManager, typesNode, dependencies, context));
         }
 
         if (node.TryGet<MappingDataNode>("groups", out var groupsNode))
         {
-            vals.Add(new ValidatedValueNode(new ValueDataNode("groups")), ValidateDamageGroups(serializationManager, groupsNode, dependencies, context));
+            vals.Add(new ValidatedValueNode(new ValueDataNode("groups")), _damageGroupSerializer.Validate(serializationManager, groupsNode, dependencies, context));
         }
 
         return new ValidatedMappingNode(vals);
@@ -74,42 +95,5 @@ public sealed class DamageSpecifierDictionarySerializer : ITypeReader<Dictionary
         }
 
         return dict;
-    }
-
-    private static ValidationNode ValidateDamageTypes(
-        ISerializationManager serializationManager,
-        MappingDataNode node,
-        IDependencyCollection dependencies,
-        ISerializationContext? context)
-    {
-        return ValidateProtoDictionary<DamageTypePrototype>(serializationManager, node, dependencies, context);
-    }
-
-    private static ValidationNode ValidateDamageGroups(
-        ISerializationManager serializationManager,
-        MappingDataNode node,
-        IDependencyCollection dependencies,
-        ISerializationContext? context)
-    {
-        return ValidateProtoDictionary<DamageGroupPrototype>(serializationManager, node, dependencies, context);
-    }
-
-    private static ValidationNode ValidateProtoDictionary<TPrototype>(
-        ISerializationManager serializationManager,
-        MappingDataNode node,
-        IDependencyCollection dependencies,
-        ISerializationContext? context) where TPrototype : class, IPrototype
-    {
-        var mapping = new Dictionary<ValidationNode, ValidationNode>();
-        foreach (var (key, val) in node.Children)
-        {
-            var keyNode = node.GetKeyNode(key);
-            var keyValidation = keyNode is ValueDataNode valueNode
-                ? ProtoIdSerializer<TPrototype>.Validate(dependencies, valueNode)
-                : new ErrorNode(keyNode, "Expected value node");
-            mapping.Add(keyValidation, serializationManager.ValidateNode<FixedPoint2>(val, context));
-        }
-
-        return new ValidatedMappingNode(mapping);
     }
 }

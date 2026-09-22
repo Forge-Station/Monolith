@@ -1,0 +1,54 @@
+# WOLFGATE - Pip Yoon, the hardware store clerk at Caelestinus Central.
+- type: humanoidProfile
+  id: WFTraderToolsProfile
+  profile:
+    name: Pip Yoon
+    species: Human
+    age: 23
+    sex: Female
+    gender: Female
+    appearance:
+      hair: HumanHairPonytail2
+      hairColor: "#151515"
+      facialHair: FacialHairShaved
+      facialHairColor: "#151515"
+      eyeColor: "#3A2A20"
+      skinColor: "#E8B98E"
+
+- type: startingGear
+  id: WFTraderToolsGear
+  equipment:
+    jumpsuit: ClothingUniformOveralls
+    head: ClothingHeadHatWelding
+    gloves: ClothingHandsGlovesColorYellow
+    shoes: ClothingShoesBootsWork
+    belt: ClothingBeltUtility
+
+- type: traderDialogue
+  id: WFTraderToolsDialogue
+  greeting: trader-tools-greeting
+  farewell: trader-tools-farewell
+  options:
+  - prompt: trader-tools-prompt-shop
+    response: trader-tools-response-shop
+    action: OpenShop
+  - prompt: trader-tools-prompt-who
+    response: trader-tools-response-who
+    action: None
+
+- type: entity
+  id: WFTraderTools
+  parent: WFBaseTrader
+  name: Pip Yoon
+  description: The hardware store clerk; tools, cable and engineering parts.
+  suffix: Trader, Tools
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFTraderToolsProfile
+  - type: Loadout
+    prototypes: [ WFTraderToolsGear ]
+  - type: Trader
+    dialogue: WFTraderToolsDialogue
+  - type: TraderShop
+    vendors: [ VendingMachineYouToolPOI, VendingMachineEngivendPOI ]

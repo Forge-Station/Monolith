@@ -261,6 +261,10 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         bill = (int)_pricing.AppraiseGrid(shuttleUid, LacksPreserveOnSaleComp);
 
+        // WOLFGATE: last look at the grid, with its deed, before it goes. See _WF/Shipyard.
+        var soldEv = new _WF.Shipyard.ShipSoldEvent(shuttleUid, consoleUid, stationUid, bill);
+        RaiseLocalEvent(ref soldEv);
+
         QueueDel(shuttleUid);
         _sawmill.Info($"Sold shuttle {shuttleUid} for {bill}");
 

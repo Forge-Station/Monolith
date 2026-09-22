@@ -1,0 +1,91 @@
+# WOLFGATE - Dara Voss, the fuel dock trader at Caelestinus Central.
+
+# Paste recipe for humanoidProfile prototypes, for when a mapper builds a trader's look in the
+# character editor and hits Export (Content.Shared/Humanoid/HumanoidProfileExport.cs):
+#   1. The exported file is `{ forkId, version, profile: {...} }`. Drop forkId and version -
+#      only the *contents* of `profile:` get pasted as this prototype's own `profile:` block.
+#   2. SharedHumanoidAppearanceSystem.LoadProfile (the code path that actually reads a
+#      humanoidProfile onto a mob) only ever touches: species, sex, gender, age, and under
+#      appearance: hair, hairColor, facialHair, facialHairColor, eyeColor, skinColor, markings,
+#      height, width. Keep those verbatim from the export - they were already validated against
+#      the species by the editor, and nothing re-validates them here (LoadProfile skips
+#      HumanoidCharacterAppearance.EnsureValid, unlike loading a player's own profile).
+#   3. Everything else the export includes is dead weight for a static NPC and safe to delete:
+#      name (cosmetic only - the entity's own `name:` is what actually displays), flavorText,
+#      bankBalance, spawnPriority, preferenceUnavailable, company, customSpeciesName (unless you
+#      deliberately renamed the species), flags, components, items, and the round-start
+#      preference sets (_jobPriorities, _antagPreferences, _traitPreferences, _loadouts). None of
+#      these fail to load - HumanoidCharacterProfile happily deserializes them - they're just
+#      never read for a mob whose look comes from a humanoidProfile instead of a player session.
+#   4. genitals is optional: keep it if you set it deliberately, otherwise leave it out.
+- type: humanoidProfile
+  id: WFTraderFuelTechnicianProfile
+  profile:
+    name: Dara Voss
+    species: Human
+    age: 45
+    sex: Female
+    gender: Female
+    appearance:
+      hair: HumanHairPixie
+      hairColor: "#5A5248"
+      facialHair: FacialHairShaved
+      facialHairColor: "#5A5248"
+      eyeColor: "#7C8B96"
+      skinColor: "#A6714B"
+
+- type: startingGear
+  id: WFTraderFuelTechnicianGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEngineering
+    outerClothing: ClothingOuterVestHazard
+    head: ClothingHeadHatHardhatYellow
+    shoes: ClothingShoesBootsWork
+    gloves: ClothingHandsGlovesColorBlack
+    belt: ClothingBeltUtility
+
+- type: traderDialogue
+  id: WFTraderFuelTechnicianDialogue
+  greeting: trader-fuel-tech-greeting
+  farewell: trader-fuel-tech-farewell
+  options:
+  - prompt: trader-fuel-tech-prompt-shop
+    response: trader-fuel-tech-response-shop
+    action: OpenShop
+  - prompt: trader-fuel-tech-prompt-refuel
+    response: trader-fuel-tech-response-refuel
+    action: Refuel
+    requires: DeedId
+  - prompt: trader-fuel-tech-prompt-who
+    response: trader-fuel-tech-response-who
+    action: None
+
+- type: entity
+  id: WFTraderFuelTechnician
+  parent: WFBaseTrader
+  name: Dara Voss
+  description: The fuel dock's quartermaster, sun-weathered and unbothered.
+  suffix: Trader, Fuel
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFTraderFuelTechnicianProfile
+  - type: Loadout
+    prototypes: [ WFTraderFuelTechnicianGear ]
+  - type: Trader
+    dialogue: WFTraderFuelTechnicianDialogue
+  - type: TraderShop
+    vendors: [ VendingMachineFuelVend ]
+  - type: TraderRefuel
+    vendor: VendingMachineFuelVend
+    fuels:
+    - material: FuelGradePlasma
+      item: FuelPlasma
+    - material: FuelGradeUranium
+      item: FuelUranium
+    - material: FuelGradeBananium
+      item: FuelBananium
+    - reagent: WeldingFuel
+      item: JerryCanWeldingFuel
+    - antimatter: true
+      item: AmeJar

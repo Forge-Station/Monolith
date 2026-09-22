@@ -1,0 +1,54 @@
+# WOLFGATE - Reeva Okafor, the salvage equipment dealer at Caelestinus Central.
+- type: humanoidProfile
+  id: WFTraderSalvageProfile
+  profile:
+    name: Reeva Okafor
+    species: Human
+    age: 34
+    sex: Female
+    gender: Female
+    appearance:
+      hair: HumanHairBraid
+      hairColor: "#3B2A1E"
+      facialHair: FacialHairShaved
+      facialHairColor: "#3B2A1E"
+      eyeColor: "#4B3B2C"
+      skinColor: "#8C5A3C"
+
+- type: startingGear
+  id: WFTraderSalvageGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    shoes: ClothingShoesBootsSalvage
+    head: ClothingHeadHatFedoraBrown
+    gloves: ClothingHandsGlovesColorBrown
+    belt: ClothingBeltUtility
+
+- type: traderDialogue
+  id: WFTraderSalvageDialogue
+  greeting: trader-salvage-greeting
+  farewell: trader-salvage-farewell
+  options:
+  - prompt: trader-salvage-prompt-shop
+    response: trader-salvage-response-shop
+    action: OpenShop
+  - prompt: trader-salvage-prompt-who
+    response: trader-salvage-response-who
+    action: None
+
+- type: entity
+  id: WFTraderSalvage
+  parent: WFBaseTrader
+  name: Reeva Okafor
+  description: Runs the salvage equipment stall; drills, crushers and mining gear for the field.
+  suffix: Trader, Salvage
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFTraderSalvageProfile
+  - type: Loadout
+    prototypes: [ WFTraderSalvageGear ]
+  - type: Trader
+    dialogue: WFTraderSalvageDialogue
+  - type: TraderShop
+    vendors: [ VendingMachineSalvagePOI ]

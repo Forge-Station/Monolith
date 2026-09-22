@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._NF.LoggingExtensions;
+using Content.Shared._WF.Interaction; // WOLFGATE
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -756,6 +757,15 @@ namespace Content.Shared.Interaction
             {
                 return ev.InRange;
             }
+
+            // WOLFGATE: let the target extend the reach range (e.g. traders trading across a table).
+            if (range > 0f)
+            {
+                var bonusEv = new InteractionRangeBonusEvent(origin, other);
+                RaiseLocalEvent(other.Owner, ref bonusEv);
+                range += bonusEv.Bonus;
+            }
+            // WOLFGATE end
 
             return InRangeUnobstructed(origin,
                 other,

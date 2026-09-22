@@ -1,0 +1,54 @@
+# WOLFGATE - Wilhelmina Farrow, the clothier at Caelestinus Central.
+- type: humanoidProfile
+  id: WFTraderClothesProfile
+  profile:
+    name: Wilhelmina Farrow
+    species: Human
+    age: 52
+    sex: Female
+    gender: Female
+    appearance:
+      hair: HumanHairBun
+      hairColor: "#C8C2B8"
+      facialHair: FacialHairShaved
+      facialHairColor: "#C8C2B8"
+      eyeColor: "#5C7A6B"
+      skinColor: "#D9A876"
+
+- type: startingGear
+  id: WFTraderClothesGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLoungewear
+    outerClothing: ClothingOuterVest
+    head: ClothingHeadHatBowlerHat
+    shoes: ClothingShoesBootsLaceup
+    gloves: ClothingHandsGlovesColorWhite
+
+- type: traderDialogue
+  id: WFTraderClothesDialogue
+  greeting: trader-clothes-greeting
+  farewell: trader-clothes-farewell
+  options:
+  - prompt: trader-clothes-prompt-shop
+    response: trader-clothes-response-shop
+    action: OpenShop
+  - prompt: trader-clothes-prompt-who
+    response: trader-clothes-response-who
+    action: None
+
+- type: entity
+  id: WFTraderClothes
+  parent: WFBaseTrader
+  name: Wilhelmina Farrow
+  description: Runs the clothing stall; sturdy uniforms and work boots.
+  suffix: Trader, Clothes
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFTraderClothesProfile
+  - type: Loadout
+    prototypes: [ WFTraderClothesGear ]
+  - type: Trader
+    dialogue: WFTraderClothesDialogue
+  - type: TraderShop
+    vendors: [ VendingMachineClothing ]

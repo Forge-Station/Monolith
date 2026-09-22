@@ -1,0 +1,66 @@
+# WOLFGATE - Corwin Ashgrove, the new ship dealer at Caelestinus Central.
+- type: humanoidProfile
+  id: WFTraderShipyardProfile
+  profile:
+    name: Corwin Ashgrove
+    species: Human
+    age: 41
+    sex: Male
+    gender: Male
+    appearance:
+      hair: HumanHairBusiness
+      hairColor: "#2E2A26"
+      facialHair: FacialHairShaved
+      facialHairColor: "#2E2A26"
+      eyeColor: "#4A6B7C"
+      skinColor: "#C79C6E"
+
+- type: startingGear
+  id: WFTraderShipyardGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLawyerBlack
+    shoes: ClothingShoesColorBlack
+
+- type: traderDialogue
+  id: WFTraderShipyardDialogue
+  greeting: trader-shipyard-greeting
+  farewell: trader-shipyard-farewell
+  options:
+  - prompt: trader-shipyard-prompt-civilian
+    response: trader-shipyard-response-civilian
+    action: BuyShip
+    argument: ComputerShipyard
+    requires: Id
+  - prompt: trader-shipyard-prompt-expedition
+    response: trader-shipyard-response-expedition
+    action: BuyShip
+    argument: ComputerShipyardExpedition
+    requires: Id
+  - prompt: trader-shipyard-prompt-sr
+    response: trader-shipyard-response-sr
+    action: BuyShip
+    argument: ComputerShipyardSr
+    requires: Id
+  - prompt: trader-shipyard-prompt-who
+    response: trader-shipyard-response-who
+    action: None
+
+- type: entity
+  id: WFTraderShipyard
+  parent: WFBaseTraderShipyard
+  name: Corwin Ashgrove
+  description: A shipyard sales rep with a pressed collar and a practised smile.
+  suffix: Trader, Shipyard
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFTraderShipyardProfile
+  - type: Loadout
+    prototypes: [ WFTraderShipyardGear ]
+  - type: Trader
+    dialogue: WFTraderShipyardDialogue
+  - type: TraderShipyard
+    consoles:
+    - console: ComputerShipyard
+    - console: ComputerShipyardExpedition
+    - console: ComputerShipyardSr

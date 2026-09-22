@@ -1,0 +1,130 @@
+# WOLFGATE - base prototypes for NPC traders.
+
+- type: entity
+  id: WFBaseTrader
+  parent: BaseMobHuman
+  abstract: true
+  save: true # humanoids default to save: false, which drops mapped traders from savemap
+  components:
+  - type: Trader
+  # Solid: customers walk around the counter, not through the trader.
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        - Impassable
+  - type: UserInterface
+    # BaseMobSpecies (parent of BaseMobHuman) already registers these three interfaces on
+    # UserInterface. That dictionary is AlwaysPushInheritance, so an override here replaces it
+    # wholesale rather than merging - carry the inherited entries forward alongside the trader's
+    # own two BUI keys so admin marking edits, stripping and surgery keep working.
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      # Shitmed
+      enum.SurgeryUIKey.Key:
+        type: SurgeryBui
+      enum.TraderUiKey.Dialogue:
+        type: TraderBoundUserInterface
+        interactionRange: 3.5
+      enum.TraderUiKey.Shop:
+        type: TraderBoundUserInterface
+        interactionRange: 3.5
+      enum.TraderUiKey.UsedShips:
+        type: TraderBoundUserInterface
+        interactionRange: 3.5
+
+# A trader that fronts shipyard console listings hosts the console's own UI, so it has to declare
+# every shipyard key up front - the interfaces dictionary cannot be added to at runtime. Carries
+# WFBaseTrader's entries forward, same reason as above.
+- type: entity
+  id: WFBaseTraderShipyard
+  parent: WFBaseTrader
+  abstract: true
+  components:
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      # Shitmed
+      enum.SurgeryUIKey.Key:
+        type: SurgeryBui
+      enum.TraderUiKey.Dialogue:
+        type: TraderBoundUserInterface
+        interactionRange: 3.5
+      enum.TraderUiKey.Shop:
+        type: TraderBoundUserInterface
+        interactionRange: 3.5
+      enum.TraderUiKey.UsedShips:
+        type: TraderBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Shipyard:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Security:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Syndicate:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.BlackMarket:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Expedition:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Scrap:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Sr:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Medical:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Ussp:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.SHM:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Mieyo:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.DrakeIndustries:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Viper:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+      enum.ShipyardConsoleUiKey.Custom:
+        type: ShipyardConsoleBoundUserInterface
+        interactionRange: 3.5
+
+- type: entity
+  id: WFTraderBarterZone
+  name: barter zone
+  description: A marked-off patch of floor.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: _WF/Traders/barter_zone.rsi
+    state: zone
+    shader: unshaded
+    # Above tables/furniture (Objects), below carried items (Items) - DrawDepth.SmallObjects sits
+    # exactly between the two.
+    drawdepth: SmallObjects

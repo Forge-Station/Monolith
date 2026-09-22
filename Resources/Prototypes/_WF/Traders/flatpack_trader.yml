@@ -1,0 +1,53 @@
+# WOLFGATE - Marcus Delgado, the flatpack wholesaler at Caelestinus Central.
+- type: humanoidProfile
+  id: WFTraderFlatpackProfile
+  profile:
+    name: Marcus Delgado
+    species: Human
+    age: 50
+    sex: Male
+    gender: Male
+    appearance:
+      hair: HumanHairCombover
+      hairColor: "#2E2420"
+      facialHair: HumanFacialHairMoustache
+      facialHairColor: "#2E2420"
+      eyeColor: "#3D2B1F"
+      skinColor: "#C79A73"
+
+- type: startingGear
+  id: WFTraderFlatpackGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitQMFormal
+    outerClothing: ClothingOuterCoatTrench
+    neck: ClothingNeckTieRed
+    shoes: ClothingShoesColorBlack
+
+- type: traderDialogue
+  id: WFTraderFlatpackDialogue
+  greeting: trader-flatpack-greeting
+  farewell: trader-flatpack-farewell
+  options:
+  - prompt: trader-flatpack-prompt-shop
+    response: trader-flatpack-response-shop
+    action: OpenShop
+  - prompt: trader-flatpack-prompt-who
+    response: trader-flatpack-response-who
+    action: None
+
+- type: entity
+  id: WFTraderFlatpack
+  parent: WFBaseTrader
+  name: Marcus Delgado
+  description: Machine flatpack wholesaler; ships fabricators and station hardware flat-packed.
+  suffix: Trader, Flatpack
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFTraderFlatpackProfile
+  - type: Loadout
+    prototypes: [ WFTraderFlatpackGear ]
+  - type: Trader
+    dialogue: WFTraderFlatpackDialogue
+  - type: TraderShop
+    vendors: [ FlatpackVendPremium ]

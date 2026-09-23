@@ -12,6 +12,7 @@
   - StationRadioCircuitboard
   - StationRadioUwUCircuitboard #Forge-Change-UwU
   - StationRadioReceiverHandheldRecipe
+  - SmartVinylCircuitboard
   position: -2, 14
   technologyPrerequisites:
   - AudioVisualCommunication

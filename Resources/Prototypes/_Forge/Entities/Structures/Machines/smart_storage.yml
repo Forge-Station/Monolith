@@ -2,10 +2,10 @@
   parent: BaseSmartStorage
   id: SmartVinylStorage
   name: SmartVinyl
-  description: Stores a lot of combat-related items & tools.
+  description: Stores a lot of vinyls and cds.
   components:
-  # - type: Machine
-  #   board: SmartArmoryCircuitboard #поменять
+  - type: Machine
+    board: SmartVinylCircuitboard
   - type: Sprite
     sprite: _Forge/Structures/Machines/smartvinylstorage.rsi
     snapCardinals: true
@@ -19,36 +19,36 @@
       map: ["enum.StorageVisualLayers.Door"]
       shader: unshaded
   - type: PointLight
-    color: "#9dc5c9"
+    color: "#4feffd"
   - type: SmartFridge
-    flavorText: smart-fridge-request-armory #поменять
+    flavorText: smart-fridge-request-vinyl
     whitelist:
       components:
       - Vinyl
       tags:
       - CD
       - VinylSleeveFit
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Breakage"]
-    - trigger:
-        !type:DamageTrigger
-        damage: 500
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          SheetSteel1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-  - type: ExplosionResistance
-    damageCoefficient: 0.1
+  # - type: Destructible
+  #   thresholds:
+  #   - trigger:
+  #       !type:DamageTrigger
+  #       damage: 200
+  #     behaviors:
+  #     - !type:DoActsBehavior
+  #       acts: ["Breakage"]
+  #   - trigger:
+  #       !type:DamageTrigger
+  #       damage: 500
+  #     behaviors:
+  #     - !type:SpawnEntitiesBehavior
+  #       spawn:
+  #         SheetSteel1:
+  #           min: 1
+  #           max: 1
+  #     - !type:DoActsBehavior
+  #       acts: [ "Destruction" ]
+  #     - !type:PlaySoundBehavior
+  #       sound:
+  #         collection: MetalBreak
+  # - type: ExplosionResistance
+  #   damageCoefficient: 0.1

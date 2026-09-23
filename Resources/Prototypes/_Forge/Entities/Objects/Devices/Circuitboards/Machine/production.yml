@@ -98,6 +98,34 @@
     tags:
     - Trash
 
+- type: entity
+  id: PortableGeneratorClunkerCircuitboard
+  parent: BaseMachineCircuitboard
+  name: Clunker portable generator machine board
+  components:
+    - type: Sprite
+      state: makeshift
+    - type: MachineBoard
+      prototype: PortableGeneratorClunker
+      requirements: # Frontier
+        Capacitor: 1 # Frontier stackRequirements<requirements
+      stackRequirements:
+        Cable: 10
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 200
+      chemicalComposition:
+        Silicon: 20
+    - type: StaticPrice
+      price: 40
+    - type: Construction
+      graph: goblin_makeshift_circuit
+      node: clunkerScrapCircuit
+    - type: Tag
+      tags:
+      - PortableGeneratorClunkerCircuitboard
+      - Trash
+
 #region BsTransmitter
 - type: entity
   id: BsTransmitterCircuitboardT1

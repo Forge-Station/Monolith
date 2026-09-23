@@ -90,7 +90,7 @@
 
 # TSFMC M88 Mk.1(T) lightened Juggernaut hardsuit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2TSFMC, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2TSFMC, ShowSecurityIcons, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitTSFMCLightJuggernaut
   name: TSFMC M88 Mk.1(T) helmet
   suffix: TSFMC
@@ -120,7 +120,7 @@
 
 # TSFMC M86 colonel tacsuit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4TSFMC]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4TSFMC, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitTSFMCM86C
   name: TSFMC M86-C tacsuit helmet
   description: An armored tacsuit helmet used by command of the TSF military forces. Outfitted with a thermal vision system.
@@ -151,7 +151,7 @@
 
 # TSFMC M92-X tacsuit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4TSFMC]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4TSFMC, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitTSFMCEnergyShield
   categories: [ HideSpawnMenu ]
   name: TSFMC M92-X tacsuit helmet
@@ -177,7 +177,7 @@
 
 # TSFMC M93-S stealth suit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4TSFMC, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4TSFMC, ShowSecurityIcons, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitTSFMCStealth
   name: TSFMC M93-S stealth suit helmet
   description: A high-tech stealth suit developed by TSFMC for special operations. High stealth capabilities, but medium mobility and protection.
@@ -216,26 +216,30 @@
     parent: true
     components:
     - type: Stealth
-      minVisibility: 0.01
+      minVisibility: -1.5
       maxVisibility: 1
-      damageVisibilityModifier: 1
-      attackVisibilityModifier: 1
+      damageVisibilityModifier: 0.5
+      attackVisibilityModifier: 1.5
     - type: StealthOnMove
-      passiveVisibilityRate: -0.2
-      movementVisibilityRate: 0
+      passiveVisibilityRate: -0.33
+      movementVisibilityRate: 0.17
   - type: UseDelay
     delay: 2
   - type: PowerCellDraw
-    drawRate: 2
+    drawRate: 0.5
   - type: ToggleCellDraw
+  - type: ClothingBatteryAlert
   - type: ItemSlots
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellInternalHardsuit
+        disableEject: true
+        swap: false
 
 # TSFMC M95-R reflect suit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4TSFMC, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4TSFMC, ShowSecurityIcons, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitTSFMCReflectElite
   name: TSFMC M95-R suit helmet
   description: A high-tech reflect suit developed by TSFMC for special operations. Have many of different vision systems and protection from energy weapons.
@@ -271,7 +275,7 @@
 
 # TSFMC M90-M advanced light suit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4TSFMC, ShowMedicalIcons, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4TSFMC, ShowMedicalIcons, ShowSecurityIcons, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitTSFMCAdvancedLight
   name: TSFMC M90-M advanced light suit helmet
   description: A high-tech advanced light suit developed by TSFMC for special operations.
@@ -301,7 +305,7 @@
 
 # TSFMC M98-H heavy Juggernaut hardsuit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowSecurityIcons, ClothingNightVision4TSFMC]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowSecurityIcons, ClothingNightVision4TSFMC, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitTSFMCHeavyJuggernaut
   name: TSFMC M98-H heavy Juggernaut hardsuit helmet
   description: A high-tech heavy Juggernaut hardsuit developed by TSFMC for special operations.

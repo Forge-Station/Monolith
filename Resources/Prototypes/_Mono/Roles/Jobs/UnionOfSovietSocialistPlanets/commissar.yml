@@ -41,10 +41,6 @@
     - NovaCygniBasic
     languagesUnderstood:
     - NovaCygniBasic
-  # Forge-Change-start
-  access:
-  - TurretCommandUSSP
-  # Forge-Change-end
   accessGroups:
   - GeneralAccess
   - USSPAA

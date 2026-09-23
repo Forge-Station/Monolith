@@ -3,8 +3,16 @@
   name: id-card-access-level-turret-command-tsf
 
 - type: accessLevel
+  id: TurretCommandTSFShuttle
+  name: id-card-access-level-turret-command-tsf-shuttle
+
+- type: accessLevel
   id: TurretCommandNT
   name: id-card-access-level-turret-command-nt
+
+- type: accessLevel
+  id: TurretCommandNTShuttle
+  name: id-card-access-level-turret-command-nt-shuttle
 
 - type: accessLevel
   id: TurretCommandUSSP

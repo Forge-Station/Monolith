@@ -2,7 +2,7 @@
   parent: BaseComputerAiAccess
   id: ComputerTurretCommandTSF
   name: TSF turret command console
-  description: Sets the doctrine and friend or foe list for TSF turrets on this grid. Only the commanding officer can open it.
+  description: Sets the doctrine and friend or foe list for TSF turrets on this grid. Officers and above can open it.
   components:
   - type: TurretCommandServer
     faction: TSF
@@ -38,19 +38,19 @@
   parent: ComputerTurretCommandTSF
   id: ComputerTurretCommandEmpire
   name: imperial turret command console
-  description: Sets the doctrine and friend or foe list for imperial turrets on this grid. Only the praefect can open it.
+  description: Sets the doctrine and friend or foe list for imperial turrets on this grid. Officers and above can open it.
   components:
   - type: TurretCommandServer
     faction: Empire
     accent: "#e0c878"
   - type: AccessReader
-    access: [["EmpireCommander"]]
+    access: [["EmpireOfficer"]]
 
 - type: entity
   parent: ComputerTurretCommandTSF
   id: ComputerTurretCommandNT
   name: NanoTrasen turret command console
-  description: Sets the doctrine and friend or foe list for NanoTrasen turrets on this grid. Only the station representative can open it.
+  description: Sets the doctrine and friend or foe list for NanoTrasen turrets on this grid. The station representative can open it.
   components:
   - type: TurretCommandServer
     faction: NT
@@ -62,49 +62,49 @@
   parent: ComputerTurretCommandTSF
   id: ComputerTurretCommandUSSP
   name: USSP turret command console
-  description: Sets the doctrine and friend or foe list for USSP turrets on this grid. Only the commissar can open it.
+  description: Sets the doctrine and friend or foe list for USSP turrets on this grid. Sergeants and the commissar can open it.
   components:
   - type: TurretCommandServer
     faction: USSP
     accent: "#c8a868"
   - type: AccessReader
-    access: [["TurretCommandUSSP"]]
+    access: [["USSPHigh"]]
 
 - type: entity
   parent: ComputerTurretCommandTSF
   id: ComputerTurretCommandRenegate
   name: renegade turret command console
-  description: Sets the doctrine and friend or foe list for renegade turrets on this grid. Only the baron can open it.
+  description: Sets the doctrine and friend or foe list for renegade turrets on this grid. Officers and above can open it.
   components:
   - type: TurretCommandServer
     faction: Renegate
     accent: "#d08838"
   - type: AccessReader
-    access: [["TurretCommandRenegate"]]
+    access: [["RenegateOfficer"]]
 
 - type: entity
   parent: ComputerTurretCommandTSF
   id: ComputerTurretCommandPDV
   name: PDV turret command console
-  description: Sets the doctrine and friend or foe list for PDV turrets on this grid. Only the tarkhan can open it.
+  description: Sets the doctrine and friend or foe list for PDV turrets on this grid. Officers and above can open it.
   components:
   - type: TurretCommandServer
     faction: PDV
     accent: "#c87820"
   - type: AccessReader
-    access: [["GrandVizier"]]
+    access: [["PDVCommand"]]
 
 - type: entity
   parent: ComputerTurretCommandTSF
   id: ComputerTurretCommandVG
   name: Viper Group turret command console
-  description: Sets the doctrine and friend or foe list for Viper Group turrets on this grid. Only the commander can open it.
+  description: Sets the doctrine and friend or foe list for Viper Group turrets on this grid. Lieutenants and the commander can open it.
   components:
   - type: TurretCommandServer
     faction: VG
     accent: "#6a9a48"
   - type: AccessReader
-    access: [["TurretCommandVG"]]
+    access: [["ViperCommand"]]
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -140,3 +140,74 @@
       state: generic_keys
     - map: ["enum.WiresVisualLayers.MaintenancePanel"]
       state: generic_panel_open
+
+# Faction shuttle consoles. Any member of the faction can open one, including cadets.
+- type: entity
+  parent: ComputerTurretCommandTSF
+  id: ComputerTurretCommandTSFShuttle
+  name: TSF shuttle turret command console
+  suffix: Shuttle
+  description: Sets the doctrine and friend or foe list for TSF turrets on this shuttle. Any TSF member can open it.
+  components:
+  - type: AccessReader
+    access: [["TurretCommandTSFShuttle"]]
+
+- type: entity
+  parent: ComputerTurretCommandEmpire
+  id: ComputerTurretCommandEmpireShuttle
+  name: imperial shuttle turret command console
+  suffix: Shuttle
+  description: Sets the doctrine and friend or foe list for imperial turrets on this shuttle. Any imperial can open it.
+  components:
+  - type: AccessReader
+    access: [["Empire"]]
+
+- type: entity
+  parent: ComputerTurretCommandNT
+  id: ComputerTurretCommandNTShuttle
+  name: NanoTrasen shuttle turret command console
+  suffix: Shuttle
+  description: Sets the doctrine and friend or foe list for NanoTrasen turrets on this shuttle. Any NanoTrasen crew member can open it.
+  components:
+  - type: AccessReader
+    access: [["TurretCommandNTShuttle"]]
+
+- type: entity
+  parent: ComputerTurretCommandUSSP
+  id: ComputerTurretCommandUSSPShuttle
+  name: USSP shuttle turret command console
+  suffix: Shuttle
+  description: Sets the doctrine and friend or foe list for USSP turrets on this shuttle. Any USSP member can open it.
+  components:
+  - type: AccessReader
+    access: [["USSP"]]
+
+- type: entity
+  parent: ComputerTurretCommandRenegate
+  id: ComputerTurretCommandRenegateShuttle
+  name: renegade shuttle turret command console
+  suffix: Shuttle
+  description: Sets the doctrine and friend or foe list for renegade turrets on this shuttle. Any renegade can open it.
+  components:
+  - type: AccessReader
+    access: [["Renegate"]]
+
+- type: entity
+  parent: ComputerTurretCommandPDV
+  id: ComputerTurretCommandPDVShuttle
+  name: PDV shuttle turret command console
+  suffix: Shuttle
+  description: Sets the doctrine and friend or foe list for PDV turrets on this shuttle. Any PDV member can open it.
+  components:
+  - type: AccessReader
+    access: [["Pirate"]]
+
+- type: entity
+  parent: ComputerTurretCommandVG
+  id: ComputerTurretCommandVGShuttle
+  name: Viper Group shuttle turret command console
+  suffix: Shuttle
+  description: Sets the doctrine and friend or foe list for Viper Group turrets on this shuttle. Any Viper Group member can open it.
+  components:
+  - type: AccessReader
+    access: [["Viper"]]

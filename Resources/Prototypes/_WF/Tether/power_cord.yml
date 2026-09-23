@@ -1,0 +1,242 @@
+# Power cords: non load bearing rope that carries a power net between two hulls.
+# The cord applies no force at all; once stretched past its limit it simply parts.
+
+- type: ropeType
+  id: PowerCordHV
+  name: power-cord-name-hv
+  stiffness: 0
+  dampingRatio: 0
+  maxStretch: 0.15
+  breakForce: 0
+  maxLength: 20
+  loadBearing: false
+  color: "#b45f18"
+  tautColor: "#ff9226"
+  width: 0.14
+  segmentsPerMetre: 3
+  stackType: WFPowerCordHV
+  breakSound:
+    collection: sparks
+
+- type: ropeType
+  id: PowerCordMV
+  name: power-cord-name-mv
+  stiffness: 0
+  dampingRatio: 0
+  maxStretch: 0.15
+  breakForce: 0
+  maxLength: 20
+  loadBearing: false
+  color: "#b39b2c"
+  tautColor: "#ffe14d"
+  width: 0.12
+  segmentsPerMetre: 3
+  stackType: WFPowerCordMV
+  breakSound:
+    collection: sparks
+
+- type: ropeType
+  id: PowerCordLV
+  name: power-cord-name-lv
+  stiffness: 0
+  dampingRatio: 0
+  maxStretch: 0.15
+  breakForce: 0
+  maxLength: 20
+  loadBearing: false
+  color: "#278f40"
+  tautColor: "#3ecc5f"
+  width: 0.1
+  segmentsPerMetre: 3
+  stackType: WFPowerCordLV
+  breakSound:
+    collection: sparks
+
+- type: stack
+  id: WFPowerCordHV
+  name: power-cord-name-hv
+  icon: { sprite: "/Textures/_WF/Tether/power_cord_coils.rsi", state: hv }
+  spawn: PowerCordCoilHV1
+  maxCount: 20
+
+- type: stack
+  id: WFPowerCordMV
+  name: power-cord-name-mv
+  icon: { sprite: "/Textures/_WF/Tether/power_cord_coils.rsi", state: mv }
+  spawn: PowerCordCoilMV1
+  maxCount: 20
+
+- type: stack
+  id: WFPowerCordLV
+  name: power-cord-name-lv
+  icon: { sprite: "/Textures/_WF/Tether/power_cord_coils.rsi", state: lv }
+  spawn: PowerCordCoilLV1
+  maxCount: 20
+
+# Coils. One unit is one metre; clamps are bolted on automatically by the first and second click.
+
+- type: entity
+  id: PowerCordCoilHV
+  parent: BaseItem
+  name: HV power cord
+  description: A heavy coil of high voltage cord. Use it on powered machinery or cable, then on another hull's, to run a line between them.
+  components:
+  - type: Sprite
+    sprite: _WF/Tether/power_cord_coils.rsi
+    state: hv
+  - type: Item
+    sprite: Objects/Tools/cable-coils.rsi
+    heldPrefix: coilhv
+    size: Small
+    storedRotation: -90
+  - type: Stack
+    stackType: WFPowerCordHV
+    count: 20
+  - type: RopeCoil
+    ropeType: PowerCordHV
+    metresPerUnit: 1
+    slack: 1.15
+  - type: StaticPrice
+    price: 0
+  - type: StackPrice
+    price: 12
+
+- type: entity
+  id: PowerCordCoilHV1
+  parent: PowerCordCoilHV
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  id: PowerCordCoilMV
+  parent: PowerCordCoilHV
+  name: MV power cord
+  description: A coil of medium voltage cord. Use it on powered machinery or cable, then on another hull's, to run a line between them.
+  components:
+  - type: Sprite
+    state: mv
+  - type: Item
+    sprite: Objects/Tools/cable-coils.rsi
+    heldPrefix: coilmv
+    size: Small
+    storedRotation: -90
+  - type: Stack
+    stackType: WFPowerCordMV
+    count: 20
+  - type: RopeCoil
+    ropeType: PowerCordMV
+  - type: StaticPrice
+    price: 0
+  - type: StackPrice
+    price: 8
+
+- type: entity
+  id: PowerCordCoilMV1
+  parent: PowerCordCoilMV
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  id: PowerCordCoilLV
+  parent: PowerCordCoilHV
+  name: LV power cord
+  description: A light coil of low voltage cord. Use it on an APC or extension cable, then on another hull's, to run a line between them.
+  components:
+  - type: Sprite
+    state: lv
+  - type: Item
+    sprite: Objects/Tools/cable-coils.rsi
+    heldPrefix: coillv
+    size: Small
+    storedRotation: -90
+  - type: Stack
+    stackType: WFPowerCordLV
+    count: 20
+  - type: RopeCoil
+    ropeType: PowerCordLV
+  - type: StaticPrice
+    price: 0
+  - type: StackPrice
+    price: 5
+
+- type: entity
+  id: PowerCordCoilLV1
+  parent: PowerCordCoilLV
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+# Clamps. Bolted onto the tile the coil was used on; they tap that tile's power net and merge it
+# with the far clamp's while a cord is tied. Non colliding, and deleted once nothing is tied.
+
+- type: entity
+  id: PowerCordClampHV
+  name: HV cord clamp
+  description: A bolted clamp biting into high voltage cable. A cord runs from here to another hull.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _WF/Tether/power_cord_clamps.rsi
+    state: hv
+    drawdepth: HighFloorObjects
+  - type: RopeAttachPoint
+    maxRopes: 1
+  - type: PowerCordClamp
+    cordType: PowerCordHV
+    voltage: HVPower
+    nodeName: cord
+  - type: NodeContainer
+    nodes:
+      cord:
+        !type:PowerCordNode
+        nodeGroupID: HVPower
+
+- type: entity
+  id: PowerCordClampMV
+  parent: PowerCordClampHV
+  name: MV cord clamp
+  description: A bolted clamp biting into medium voltage cable. A cord runs from here to another hull.
+  components:
+  - type: Sprite
+    sprite: _WF/Tether/power_cord_clamps.rsi
+    state: mv
+    drawdepth: HighFloorObjects
+  - type: PowerCordClamp
+    cordType: PowerCordMV
+    voltage: MVPower
+    nodeName: cord
+  - type: NodeContainer
+    nodes:
+      cord:
+        !type:PowerCordNode
+        nodeGroupID: MVPower
+
+- type: entity
+  id: PowerCordClampLV
+  parent: PowerCordClampHV
+  name: LV cord clamp
+  description: A bolted clamp biting into an APC extension cable. A cord runs from here to another hull.
+  components:
+  - type: Sprite
+    sprite: _WF/Tether/power_cord_clamps.rsi
+    state: lv
+    drawdepth: HighFloorObjects
+  - type: PowerCordClamp
+    cordType: PowerCordLV
+    voltage: Apc
+    nodeName: cord
+  - type: NodeContainer
+    nodes:
+      cord:
+        !type:PowerCordNode
+        nodeGroupID: Apc

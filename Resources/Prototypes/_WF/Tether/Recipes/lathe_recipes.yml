@@ -1,0 +1,57 @@
+# Lathe recipes for the rope coils and the tether installer. Cargo-free: craftable from cloth,
+# plastic and steel. Registered onto the autolathe via the TetherStatic pack (lathe_pack.yml)
+# and a WOLFGATE-marked addition to its staticPacks list.
+- type: latheRecipe
+  id: RopeHempCoil
+  result: RopeHempCoil1
+  categories:
+  - Tools
+  completetime: 2
+  materials:
+    Cloth: 30
+
+- type: latheRecipe
+  id: RopeSyntheticCoil
+  result: RopeSyntheticCoil1
+  categories:
+  - Tools
+  completetime: 2
+  materials:
+    Plastic: 40
+
+- type: latheRecipe
+  id: RopeBungeeCoil
+  result: RopeBungeeCoil1
+  categories:
+  - Tools
+  completetime: 2
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: RopeSteelCableCoil
+  result: RopeSteelCableCoil1
+  categories:
+  - Tools
+  completetime: 3
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: RopeTowCableCoil
+  result: RopeTowCableCoil1
+  categories:
+  - Tools
+  completetime: 4
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  id: TetherInstaller
+  result: TetherInstaller
+  categories:
+  - Tools
+  completetime: 4
+  materials:
+    Steel: 150
+    Plastic: 50

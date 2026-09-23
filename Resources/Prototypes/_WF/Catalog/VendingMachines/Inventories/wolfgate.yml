@@ -1,4 +1,15 @@
 # WOLFGATE - Everything added through Wolfgate is stocked here; John Wolfgate sells the same list.
 - type: vendingMachineInventory
   id: WolfgateVendInventory
-  startingInventory: {}
+  startingInventory:
+    RopeHempCoil: 6
+    RopeSyntheticCoil: 6
+    RopeBungeeCoil: 4
+    RopeSteelCableCoil: 4
+    RopeTowCableCoil: 2
+    TetherInstaller: 3
+    PowerCordCoilLV: 4
+    PowerCordCoilMV: 4
+    PowerCordCoilHV: 4
+    ShipHarpoonTurretFlatpack: 2
+    ShipHarpoon: 8

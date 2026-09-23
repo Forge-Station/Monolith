@@ -39,6 +39,11 @@
   - CableStack
   - CableMVStack
   - CableHVStack
+  # WOLFGATE START: power cord coils
+  - WFPowerCordCoilHV
+  - WFPowerCordCoilMV
+  - WFPowerCordCoilLV
+  # WOLFGATE END
 
 ## Dynamic
 

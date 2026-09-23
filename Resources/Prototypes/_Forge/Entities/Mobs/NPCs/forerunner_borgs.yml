@@ -1,0 +1,260 @@
+# Weaker AI remnant/forerunner cyborgs for mapped ruins and containment.
+# These are not player chassis — they do not take ghost roles or modules.
+
+- type: entity
+  parent: MobSiliconBase
+  id: MobForerunnerBorgBase
+  name: remnant cyborg
+  description: An ancient automated tender. Time has not made it friendly.
+  abstract: true
+  suffix: Forge, Remnant, AI
+  components:
+  - type: CombatMode
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavClimb: !type:Bool
+        false
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    sprite: Mobs/Silicon/chassis.rsi
+    layers:
+    - state: robot
+      map: ["enum.DamageStateVisualLayers.Base", "movement"]
+    - state: robot_e
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: robot
+      Dead:
+        Base: robot
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Dead: BorgDead
+    showOverlays: false
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      40: 0.7
+      60: 0.5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.4
+    baseSprintSpeed: 3.2
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcPunch
+    attackRate: 0.9
+    damage:
+      types:
+        Blunt: 10
+        Structural: 8
+    soundHit:
+      collection: MetalThud
+  - type: Speech
+    speechSounds: SyndieBorg
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepBorg
+  - type: NoSlip
+  - type: Insulated
+  - type: Access
+    tags:
+    - Remnant
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+- type: entity
+  parent: MobForerunnerBorgBase
+  id: MobForerunnerBorg
+  name: remnant cyborg
+  description: A scavenged precursor chassis running on leftover directives. Weaker than a living tender, still happy to cave a skull in.
+  suffix: Forge, Remnant, AI
+
+- type: entity
+  parent: MobForerunnerBorgBase
+  id: MobForerunnerBorgEngineer
+  name: remnant engineer cyborg
+  description: An ancient engineering chassis. Its tools are crude now, but it still knows how to take a wall apart.
+  suffix: Forge, Remnant, AI, Engineer
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    sprite: Mobs/Silicon/chassis.rsi
+    layers:
+    - state: synd_engi
+      map: ["enum.DamageStateVisualLayers.Base", "movement"]
+    - state: synd_engi_e
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: synd_engi
+      Dead:
+        Base: synd_engi
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Dead: BorgDead
+    showOverlays: false
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      50: 0.7
+      75: 0.5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 2.8
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcPunch
+    attackRate: 0.8
+    damage:
+      types:
+        Blunt: 8
+        Heat: 4
+        Structural: 18
+    soundHit:
+      collection: MetalThud
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+- type: entity
+  parent: MobForerunnerBorgBase
+  id: MobForerunnerBorgAssault
+  name: remnant assault cyborg
+  description: A stripped assault chassis. Its gun still works. Barely.
+  suffix: Forge, Remnant, AI, Assault
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+    blackboard:
+      NavClimb: !type:Bool
+        false
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    sprite: Mobs/Silicon/chassis.rsi
+    layers:
+    - state: synd_sec
+      map: ["enum.DamageStateVisualLayers.Base", "movement"]
+    - state: synd_sec_e
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: synd_sec
+      Dead:
+        Base: synd_sec
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      120: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Dead: BorgDead
+    showOverlays: false
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      60: 0.7
+      90: 0.5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.3
+    baseSprintSpeed: 3.0
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcPunch
+    attackRate: 0.85
+    damage:
+      types:
+        Blunt: 8
+        Heat: 6
+        Structural: 10
+    soundHit:
+      collection: MetalThud
+  - type: Gun
+    showExamineText: false
+    useKey: false
+    fireRate: 0.45
+    minAngle: 4
+    maxAngle: 18
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: RedMediumLaser
+    fireCost: 80
+  - type: Battery
+    maxCharge: 800
+    startingCharge: 800
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 40
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 120
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak

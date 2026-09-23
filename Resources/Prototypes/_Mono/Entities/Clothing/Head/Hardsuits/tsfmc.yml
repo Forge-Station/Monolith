@@ -80,6 +80,11 @@
   id: ClothingHeadHelmetHardsuitM86Mk4
   categories: [ HideSpawnMenu ]
   components:
+  - type: ThermalVision # Forge-change
+    flashDurationMultiplier: 2 # Forge-change
+    pulseTime: 3 # Forge-change
+    isEquipment: true # Forge-change
+    toggleAction: PulseThermalVision # Forge-change
   - type: NightVision # Gen 4 quadtube-wide
     relayOverlay: true
     goggleEffect: true

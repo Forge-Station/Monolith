@@ -39,6 +39,22 @@ salvage-expedition-difficulty-Minor = Minor
 salvage-expedition-difficulty-Moderate = Moderate
 salvage-expedition-difficulty-Hazardous = Hazardous
 salvage-expedition-difficulty-Extreme = Extreme
+# Forge-Change-Start
+salvage-expedition-difficulty-ExtraHard = EXTRA-HARD
+salvage-expedition-hive-warning-title = Extra-hard expedition
+salvage-expedition-hive-warning =
+    This deployment is extremely difficult. You cannot clear it alone.
+    You need very good equipment and a team.
+    These are not the old xenomorphs that cannot do anything. These are much more capable versions.
+salvage-expedition-hive-warning-accept = Claim anyway
+salvage-expedition-hive-warning-cancel = Cancel
+salvage-biome-mod-hive = Hive
+salvage-dungeon-mod-hive = Overrun expedition post
+salvage-faction-forge-xeno = Hive xenomorphs
+salvage-light-mod-hive = Dim resin light
+salvage-time-mod-hive = Long deployment, 20 minutes
+# Forge-Change-End
+
 
 # Runner
 salvage-expedition-not-all-present = Not all salvagers are aboard the shuttle!

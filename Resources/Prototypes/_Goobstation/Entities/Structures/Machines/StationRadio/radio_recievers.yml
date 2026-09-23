@@ -6,9 +6,9 @@
   components:
   - type: Appearance
   - type: Sprite
-    sprite: _Goobstation/Structures/Machines/StationRadio/stationradio.rsi
+    sprite: _Forge/Structures/Machines/StationRadio/stationradio.rsi
     layers:
-    - state: icon
+    - state: icon-1
     - state: unlit
       shader: unshaded
       map: [ "enum.PowerDeviceVisualLayers.Powered" ]
@@ -67,7 +67,7 @@
     - type: Sprite
       sprite: _Forge/Structures/Machines/StationRadio/stationradioUwU.rsi
       layers:
-      - state: icon
+      - state: icon-2
       - state: unlit
         shader: unshaded
         map: [ "enum.PowerDeviceVisualLayers.Powered" ]

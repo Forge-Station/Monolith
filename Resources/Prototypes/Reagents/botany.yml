@@ -306,6 +306,36 @@
     Poison:
       effects:
       - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Plant
+          shouldHave: false
         damage:
           types:
             Caustic: 1
+      - !type:HealthChange
+        damage:
+          types:
+            Blunt: -1
+            Slash: -1
+            Piercing: -1
+        conditions:
+        - !type:OrganType
+          type: Plant
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Plant
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          types:
+            Asphyxiation: 1
+            Heat: 2
+            Poison: 1
+      - !type:MovespeedModifier
+        conditions:
+        - !type:OrganType
+          type: Plant
+        walkSpeedModifier: 1.1
+        sprintSpeedModifier: 1.1

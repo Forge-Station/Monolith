@@ -143,6 +143,36 @@ gene-beast-butterfly-name = Бабочка
 gene-beast-bat-name = Летучая мышь
 gene-beast-bee-name = Пчелиная форма
 
+gene-fauna-desc = Геном схлопывает тело в эту фауну. Природное оружие остаётся при плоти, разум — при субъекте. Снимается только той же комбинацией.
+gene-fauna-spider-name = Космический паук
+gene-fauna-dragon-name = Космический дракон
+gene-fauna-bear-name = Космический медведь
+gene-fauna-carp-name = Космический карп
+gene-fauna-cobra-name = Космическая кобра
+gene-fauna-goliath-name = Голиаф
+gene-fauna-watcher-name = Наблюдатель
+gene-fauna-xeno-name = Ксено-бегун
+gene-fauna-shark-name = Акула-пескарь
+
+ent-MobGeneSpaceSpider = космический паук
+    .desc = Он так светится, что выглядит опасным.
+ent-MobGeneSpaceDragon = космический дракон
+    .desc = Летающий левиафан, дальний родственник космических карпов. Разлома у этого нет.
+ent-MobGeneSpaceBear = космический медведь
+    .desc = Выглядит дружелюбно. Почему бы его не обнять?
+ent-MobGeneSpaceCarp = космический карп
+    .desc = Это космический карп.
+ent-MobGeneSpaceCobra = космическая кобра
+    .desc = Длинные клыки, светящийся капюшон и взгляд, который так и манит подойти ближе.
+ent-MobGeneGoliath = голиаф
+    .desc = Массивный зверь, который хватает добычу длинными щупальцами.
+ent-MobGeneWatcher = наблюдатель
+    .desc = Кажется, будто он смотрит сквозь вас.
+ent-MobGeneXenoRunner = бегун
+    .desc = Они в основном приходят ночью. В основном.
+ent-MobGeneShark = акула-пескарь
+    .desc = Опасная акула из черноты бесконечного космоса, которая любит пить кровь.
+
 gene-marking-extra-desc = Черта проступает на теле. Какой именно рисунок — случай этой смены.
 gene-ears-feline-name = Кошачьи уши
 gene-tail-feline-name = Кошачий хвост

@@ -143,6 +143,36 @@ gene-beast-butterfly-name = Butterfly
 gene-beast-bat-name = Bat
 gene-beast-bee-name = Bee form
 
+gene-fauna-desc = The genome collapses the body into this fauna. The flesh keeps its natural weapons; the mind stays the subject's. It comes off only with the same combination.
+gene-fauna-spider-name = Space spider
+gene-fauna-dragon-name = Space dragon
+gene-fauna-bear-name = Space bear
+gene-fauna-carp-name = Space carp
+gene-fauna-cobra-name = Space cobra
+gene-fauna-goliath-name = Goliath
+gene-fauna-watcher-name = Watcher
+gene-fauna-xeno-name = Xeno runner
+gene-fauna-shark-name = Sharkminnow
+
+ent-MobGeneSpaceSpider = space spider
+    .desc = It's so glowing, it looks dangerous.
+ent-MobGeneSpaceDragon = space dragon
+    .desc = A flying leviathan, loosely related to space carps. This one has no rift.
+ent-MobGeneSpaceBear = space bear
+    .desc = It looks friendly. Why don't you give it a hug?
+ent-MobGeneSpaceCarp = space carp
+    .desc = It's a space carp.
+ent-MobGeneSpaceCobra = space cobra
+    .desc = Long fangs and a glowing hood, and the alluring look begs to come closer.
+ent-MobGeneGoliath = goliath
+    .desc = A massive beast that uses long tentacles to ensnare its prey.
+ent-MobGeneWatcher = watcher
+    .desc = It's like it's staring right through you.
+ent-MobGeneXenoRunner = runner
+    .desc = They mostly come at night. Mostly.
+ent-MobGeneShark = sharkminnow
+    .desc = A dangerous shark from the blackness of endless space, who loves to drink blood.
+
 gene-marking-extra-desc = The trait grows in on the body. Which pattern appears is rolled for this shift.
 gene-ears-feline-name = Feline ears
 gene-tail-feline-name = Feline tail

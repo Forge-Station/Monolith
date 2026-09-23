@@ -185,18 +185,6 @@
   speciesTarget: Goblin
 
 - type: gene
-  id: GeneFormIPC
-  name: species-name-ipc
-  description: gene-form-desc
-  quality: Neutral
-  instability: 26
-  sequenceLength: 7
-  overlayColor: "#C8B09050"
-  branch: Morphology
-  lockBranch: true
-  speciesTarget: IPC
-
-- type: gene
   id: GeneFormSkrell
   name: species-name-skrell
   description: gene-form-desc

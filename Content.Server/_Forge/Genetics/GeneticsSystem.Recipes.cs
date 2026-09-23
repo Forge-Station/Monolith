@@ -75,6 +75,8 @@ public sealed partial class GeneticsSystem
 
         foreach (var proto in selected)
         {
+            if (proto.SpeciesTarget != null && IsSteelSpecies(proto.SpeciesTarget.Value))
+                continue;
             var length = Math.Clamp(proto.SequenceLength, 2, DnaSequence.BranchLength);
             var recipe = BuildUniqueRecipe(length, used, usedRecipes, out var offset);
             usedRecipes.Add((offset, recipe));
@@ -140,7 +142,7 @@ public sealed partial class GeneticsSystem
         var options = new List<ProtoId<SpeciesPrototype>>();
         foreach (var species in Prototypes.EnumeratePrototypes<SpeciesPrototype>())
         {
-            if (!species.RoundStart || species.ID == exclude)
+            if (!species.RoundStart || species.ID == exclude || IsSteelSpecies(species.ID))
                 continue;
 
             if (requireRoot != null && !HasGraftSprites(species, requireRoot.Value))

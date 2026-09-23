@@ -267,6 +267,7 @@ genetics-injector-mode-clean = cleaner
 genetics-injector-examine = A DNA injector ({$mode}).
 genetics-injector-examine-gene = Contains: {$gene}
 genetics-injector-no-genome = {$target} has no genome to modify.
+genetics-steel-no-mutate = Steel does not mutate.
 genetics-injector-success = The injector clicks as it rewrites {$target}'s genome.
 
 # Entities

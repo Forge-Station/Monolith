@@ -63,6 +63,12 @@ public sealed class DnaInjectorSystem : EntitySystem
             return;
         }
 
+        if (_genetics.IsSteel(target))
+        {
+            _popup.PopupEntity(Loc.GetString("genetics-steel-no-mutate"), target, args.User);
+            return;
+        }
+
         if (!HasComp<GenomeComponent>(target))
         {
             _popup.PopupEntity(Loc.GetString("genetics-injector-no-genome", ("target", Identity.Name(target, EntityManager, args.User))), target, args.User);

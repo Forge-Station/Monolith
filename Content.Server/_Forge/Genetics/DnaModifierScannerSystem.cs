@@ -13,6 +13,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Server.Power.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Verbs;
 using Robust.Server.Containers;
@@ -28,9 +29,11 @@ public sealed class DnaModifierScannerSystem : EntitySystem
     [Dependency] private readonly ContainerSystem _containers = default!;
     [Dependency] private readonly Content.Server.DeviceLinking.Systems.DeviceLinkSystem _deviceLink = default!;
     [Dependency] private readonly GeneticsConsoleSystem _console = default!;
+    [Dependency] private readonly GeneticsSystem _genetics = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private const float UpdateRate = 1f;
     private float _updateDif;
@@ -66,7 +69,7 @@ public sealed class DnaModifierScannerSystem : EntitySystem
 
     public bool CanInsert(EntityUid target)
     {
-        return HasComp<BodyComponent>(target);
+        return HasComp<BodyComponent>(target) && _genetics.CanMutate(target);
     }
 
     private void OnRelayMovement(Entity<DnaModifierScannerComponent> ent, ref ContainerRelayMovementEntityEvent args)
@@ -226,10 +229,15 @@ public sealed class DnaModifierScannerSystem : EntitySystem
             return;
 
         if (scanner.BodyContainer.ContainedEntity != null || !CanInsert(toInsert))
+        {
+            if (scanner.BodyContainer.ContainedEntity == null && _genetics.IsSteel(toInsert))
+                _popup.PopupEntity(Loc.GetString("genetics-steel-no-mutate"), toInsert);
             return;
+        }
 
         _containers.Insert(toInsert, scanner.BodyContainer);
-        EnsureComp<GenomeComponent>(toInsert);
+        if (!HasComp<GenomeComponent>(toInsert))
+            EnsureComp<GenomeComponent>(toInsert);
         UpdateAppearance((uid, scanner));
         if (scanner.ConnectedConsole != null)
             _console.UpdateUserInterface(scanner.ConnectedConsole.Value);

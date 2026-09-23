@@ -1,11 +1,16 @@
 using System.Linq;
+using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared._Forge.Genetics;
 using Content.Shared._Forge.Genetics.Components;
 using Content.Shared.Cloning;
 using Content.Shared.Damage;
 using Content.Shared.Forensics.Components;
+using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
@@ -20,6 +25,9 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+
+    private const string SteelDamageContainer = "Silicon";
 
     public override void Initialize()
     {
@@ -88,9 +96,43 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
         return state;
     }
 
+    /// <summary>
+    /// IPC, borgs, drones and other steel bodies have no genome to rewrite.
+    /// </summary>
+    public bool IsSteel(EntityUid uid)
+    {
+        if (HasComp<SiliconComponent>(uid) || HasComp<BorgChassisComponent>(uid) || _tag.HasTag(uid, "Bot"))
+            return true;
+
+        if (TryComp<DamageableComponent>(uid, out var damage) && damage.DamageContainerID == SteelDamageContainer)
+            return true;
+
+        return TryComp<HumanoidAppearanceComponent>(uid, out var appearance) && IsSteelSpecies(appearance.Species);
+    }
+
+    public bool IsSteelSpecies(ProtoId<SpeciesPrototype> speciesId)
+    {
+        if (!Prototypes.TryIndex(speciesId, out var species))
+            return false;
+
+        if (!Prototypes.TryIndex<EntityPrototype>(species.Prototype, out var mob))
+            return false;
+
+        if (mob.TryGetComponent<SiliconComponent>(out _, EntityManager.ComponentFactory))
+            return true;
+
+        return mob.TryGetComponent<DamageableComponent>(out var damage, EntityManager.ComponentFactory)
+               && damage.DamageContainerID == SteelDamageContainer;
+    }
+
+    public bool CanMutate(EntityUid uid)
+    {
+        return !IsSteel(uid);
+    }
+
     public bool TryActivateGene(EntityUid uid, string geneId, GenomeComponent? genome = null, bool requireComplete = true)
     {
-        if (!Resolve(uid, ref genome))
+        if (!CanMutate(uid) || !Resolve(uid, ref genome))
             return false;
 
         if (!Prototypes.TryIndex<GenePrototype>(geneId, out var proto))
@@ -257,12 +299,18 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
 
     public bool CanIrradiate(EntityUid uid)
     {
-        return !_mobState.IsCritical(uid);
+        return CanMutate(uid) && !_mobState.IsCritical(uid);
     }
 
     public void PulseBranchBlock(EntityUid uid, string geneId, int blockIndex, GenomeComponent? genome = null)
     {
-        if (!CanIrradiate(uid))
+        if (!CanMutate(uid))
+        {
+            _popup.PopupEntity(Loc.GetString("genetics-steel-no-mutate"), uid);
+            return;
+        }
+
+        if (_mobState.IsCritical(uid))
         {
             _popup.PopupEntity(Loc.GetString("genetics-irradiate-critical"), uid);
             return;
@@ -283,7 +331,7 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
 
     public void PulseBranchBlock(EntityUid uid, GeneBranch branch, int blockIndex, GenomeComponent? genome = null)
     {
-        if (!Resolve(uid, ref genome))
+        if (!CanMutate(uid) || !Resolve(uid, ref genome))
             return;
 
         EnsureBranches(genome);
@@ -299,7 +347,7 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
 
     public void MutateRandom(EntityUid uid, int completionDelta, bool activateOnComplete, GenomeComponent? genome = null)
     {
-        if (!Resolve(uid, ref genome))
+        if (!CanMutate(uid) || !Resolve(uid, ref genome))
             return;
 
         EnsureBranches(genome);

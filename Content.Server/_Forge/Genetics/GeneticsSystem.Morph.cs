@@ -118,6 +118,8 @@ public sealed partial class GeneticsSystem
             return;
 
         var target = payload.SpeciesForm.Value;
+        if (IsSteelSpecies(target))
+            return;
         if (humanoid.Species == target)
             return;
 
@@ -165,6 +167,9 @@ public sealed partial class GeneticsSystem
 
             speciesId = fallback.Value;
         }
+
+        if (IsSteelSpecies(speciesId))
+            return;
 
         if (!Prototypes.TryIndex(speciesId, out SpeciesPrototype? species))
             return;

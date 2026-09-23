@@ -267,6 +267,7 @@ genetics-injector-mode-clean = очиститель
 genetics-injector-examine = ДНК-инъектор ({$mode}).
 genetics-injector-examine-gene = Содержит: {$gene}
 genetics-injector-no-genome = У {$target} нет генома для изменения.
+genetics-steel-no-mutate = Сталь не мутирует.
 genetics-injector-success = Инъектор щёлкает, переписывая геном {$target}.
 
 # Сущности

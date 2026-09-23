@@ -26,7 +26,13 @@ public sealed partial class GeneticsSystem
 
     public void IrradiateSubject(EntityUid uid, int completionDelta = 25)
     {
-        if (!CanIrradiate(uid))
+        if (!CanMutate(uid))
+        {
+            _popup.PopupEntity(Loc.GetString("genetics-steel-no-mutate"), uid);
+            return;
+        }
+
+        if (_mobState.IsCritical(uid))
         {
             _popup.PopupEntity(Loc.GetString("genetics-irradiate-critical"), uid);
             return;

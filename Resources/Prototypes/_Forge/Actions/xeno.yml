@@ -281,8 +281,9 @@
       sprite: _CM/Interface/Actions/xeno_actions.rsi
       state: charge
     event: !type:ForgeXenoLeapActionEvent
+      smash: true
       plasmaCost: 40
-      speed: 14
+      speed: 20
       stunSeconds: 2.5
       hitDamage:
         types:

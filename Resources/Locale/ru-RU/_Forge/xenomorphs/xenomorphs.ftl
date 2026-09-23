@@ -11,3 +11,7 @@ forge-xeno-acid = Кислота въедается в цель.
 
 alerts-forge-xeno-plasma-name = Плазма
 alerts-forge-xeno-plasma-desc = Топливо улья. Способности его тратят. Сорняки и отдых восполняют.
+
+ent-SpaceCashExpeditionT6 = кредиты (300 000)
+    .desc = Оплата за зачистку улья. Пахнет кислотой и очень большими деньгами.
+

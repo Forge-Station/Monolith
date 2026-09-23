@@ -4,7 +4,7 @@
   parent: BaseShutter
   id: DoorXenoResin
   name: resin door
-  description: A living resin sphincter. It will not open for you. Smash it, or pulse it from a linked button.
+  description: A living resin sphincter. A crowbar forces it open. Xenomorphs pass through.
   suffix: Forge, Xeno, CM
   components:
   - type: Sprite
@@ -15,7 +15,7 @@
   - type: Door
     bumpOpen: false
     clickOpen: false
-    canPry: false
+    canPry: true
     crushDamage:
       types:
         Blunt: 15
@@ -68,7 +68,7 @@
   parent: DoorXenoResin
   id: DoorXenoResinThick
   name: thick resin door
-  description: A thicker resin sphincter. Even less interested in letting you through.
+  description: A thicker resin sphincter. A crowbar still forces it open. Xenomorphs pass through.
   suffix: Forge, Xeno, CM
   components:
   - type: Sprite
@@ -79,7 +79,7 @@
   - type: Door
     bumpOpen: false
     clickOpen: false
-    canPry: false
+    canPry: true
     crushDamage:
       types:
         Blunt: 15
@@ -318,6 +318,47 @@
     - trigger:
         !type:DamageTrigger
         damage: 40
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: XenoWeeds
+  id: XenoWeedsChoke
+  name: thick hive weeds
+  description: A choking mat of resin. You have to break through it. Xenomorphs slip past.
+  suffix: Forge, Xeno, CM, Corridor
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _CM/Structures/Xenos/xeno_weeds.rsi
+    layers:
+    - state: hive_weed0
+    - state: weednode
+  - type: Icon
+    sprite: _CM/Structures/Xenos/xeno_weeds.rsi
+    state: hive_weed0
+  - type: IconSmooth
+    key: xeno_weeds_choke
+    base: hive_weed
+    mode: CardinalFlags
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 80
+        hard: true
+        mask:
+        - MobMask
+        layer:
+        - MidImpassable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]

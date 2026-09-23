@@ -26,6 +26,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -75,6 +76,7 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
         SubscribeLocalEvent<ForgeXenoGutActionEvent>(OnGut);
         SubscribeLocalEvent<ForgeXenoSpitActionEvent>(OnSpit);
         SubscribeLocalEvent<ForgeXenoLeapActionEvent>(OnLeap);
+        SubscribeLocalEvent<ForgeXenoChargeComponent, PreventCollideEvent>(OnChargeCollide);
         SubscribeLocalEvent<ForgeXenoConstructActionEvent>(OnConstruct);
         SubscribeLocalEvent<ForgeXenoConstructDoAfterEvent>(OnConstructFinished);
 
@@ -353,8 +355,15 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
             return;
         }
 
-        var travel = Math.Min(length, 8f);
         var dir = delta / length;
+        if (args.Smash)
+        {
+            StartCharge(uid, dir, Math.Min(length, 8f), args);
+            args.Handled = true;
+            return;
+        }
+
+        var travel = Math.Min(length, 8f);
         var ray = new CollisionRay(origin, dir, (int) (CollisionGroup.Impassable | CollisionGroup.InteractImpassable));
         var hits = _physics.IntersectRay(xform.MapID, ray, travel, uid, false).ToList();
 
@@ -371,6 +380,132 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
             PinLeap(uid, new MapCoordinates(landing, xform.MapID), args);
 
         args.Handled = true;
+    }
+
+    private void StartCharge(EntityUid uid, Vector2 direction, float distance, ForgeXenoLeapActionEvent args)
+    {
+        var charge = EnsureComp<ForgeXenoChargeComponent>(uid);
+        charge.Direction = direction;
+        charge.Speed = 3f;
+        charge.MaxSpeed = Math.Max(args.Speed, 8f);
+        charge.Acceleration = 42f;
+        charge.DistanceLeft = distance;
+        charge.StunSeconds = args.StunSeconds;
+        charge.HitDamage = args.HitDamage;
+        charge.Hit.Clear();
+
+        if (TryComp<PhysicsComponent>(uid, out var body))
+        {
+            _physics.SetBodyStatus(uid, body, BodyStatus.InAir);
+            _physics.SetLinearVelocity(uid, direction * charge.Speed, body: body);
+        }
+
+        _transform.SetWorldRotation(uid, direction.ToWorldAngle());
+        _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/gib2.ogg"), uid, uid);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<ForgeXenoChargeComponent, TransformComponent, PhysicsComponent>();
+        var stopping = new List<(EntityUid, PhysicsComponent)>();
+        while (query.MoveNext(out var uid, out var charge, out var xform, out var body))
+        {
+            if (charge.Direction == Vector2.Zero || charge.DistanceLeft <= 0f)
+            {
+                stopping.Add((uid, body));
+                continue;
+            }
+
+            charge.Speed = MathF.Min(charge.MaxSpeed, charge.Speed + charge.Acceleration * frameTime);
+            var step = charge.Speed * frameTime;
+            var origin = _transform.GetWorldPosition(xform);
+            var dir = charge.Direction;
+            SmashAhead(uid, origin, dir, xform.MapID, charge);
+
+            var stopAt = BarrierDistance(uid, xform.MapID, origin, dir, step + 0.45f);
+            if (stopAt <= step + 0.05f)
+            {
+                var travel = MathF.Max(0f, stopAt - 0.4f);
+                if (travel > 0.02f)
+                    _transform.SetWorldPosition(uid, origin + dir * travel);
+
+                stopping.Add((uid, body));
+                continue;
+            }
+
+            _physics.SetBodyStatus(uid, body, BodyStatus.InAir);
+            _physics.SetLinearVelocity(uid, dir * charge.Speed, body: body);
+            charge.DistanceLeft -= step;
+        }
+
+        foreach (var (uid, body) in stopping)
+            StopCharge(uid, body);
+    }
+
+    private void OnChargeCollide(Entity<ForgeXenoChargeComponent> ent, ref PreventCollideEvent args)
+    {
+        if (HasComp<ForgeXenoWeedsComponent>(args.OtherEntity) || HasComp<MobStateComponent>(args.OtherEntity))
+            args.Cancelled = true;
+    }
+
+    private void SmashAhead(EntityUid uid, Vector2 origin, Vector2 dir, MapId mapId, ForgeXenoChargeComponent charge)
+    {
+        var nose = new MapCoordinates(origin + dir * 0.75f, mapId);
+        foreach (var other in _lookup.GetEntitiesInRange(nose, 0.9f))
+        {
+            if (other == uid || !charge.Hit.Add(other))
+                continue;
+
+            if (HasComp<ForgeXenoWeedsComponent>(other))
+            {
+                if (_net.IsServer && charge.HitDamage != null)
+                    _damage.TryChangeDamage(other, charge.HitDamage, origin: uid);
+                continue;
+            }
+
+            if (!HasComp<MobStateComponent>(other))
+                continue;
+
+            if (!_net.IsServer)
+                continue;
+
+            if (charge.HitDamage != null)
+                _damage.TryChangeDamage(other, charge.HitDamage, origin: uid);
+
+            if (charge.StunSeconds > 0f)
+                _stun.TryParalyze(other, TimeSpan.FromSeconds(charge.StunSeconds), true);
+
+            _throwing.TryThrow(other, dir * 2.5f, 12f, uid, doSpin: false);
+            if (TryComp<PhysicsComponent>(other, out var victim))
+                _physics.SetLinearVelocity(other, dir * 12f, body: victim);
+        }
+    }
+
+    private float BarrierDistance(EntityUid uid, MapId mapId, Vector2 origin, Vector2 dir, float maxDist)
+    {
+        var mask = (int) (CollisionGroup.Impassable | CollisionGroup.HighImpassable | CollisionGroup.MidImpassable | CollisionGroup.InteractImpassable);
+        var ray = new CollisionRay(origin, dir, mask);
+        var best = maxDist;
+
+        foreach (var hit in _physics.IntersectRay(mapId, ray, maxDist, uid, false))
+        {
+            if (HasComp<ForgeXenoWeedsComponent>(hit.HitEntity) || HasComp<MobStateComponent>(hit.HitEntity))
+                continue;
+
+            if (hit.Distance < best)
+                best = hit.Distance;
+        }
+
+        return best;
+    }
+
+    private void StopCharge(EntityUid uid, PhysicsComponent body)
+    {
+        _physics.SetLinearVelocity(uid, Vector2.Zero, body: body);
+        _physics.SetBodyStatus(uid, body, BodyStatus.OnGround);
+        RemComp<ForgeXenoChargeComponent>(uid);
     }
 
     private void PinLeap(EntityUid uid, MapCoordinates landing, ForgeXenoLeapActionEvent args)

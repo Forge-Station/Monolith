@@ -11,3 +11,7 @@ forge-xeno-acid = Acid eats into the target.
 
 alerts-forge-xeno-plasma-name = Plasma
 alerts-forge-xeno-plasma-desc = The hive's fuel. Abilities spend it. Weeds and rest refill it.
+
+ent-SpaceCashExpeditionT6 = credits (300,000)
+    .desc = Pay for clearing a hive. It smells like acid and a lot of money.
+

@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 
@@ -39,6 +40,36 @@ public sealed partial class ForgeXenoLeapComponent : Component
 
 [RegisterComponent]
 public sealed partial class ForgeXenoWeedsComponent : Component;
+
+/// <summary>
+/// A ram that speeds up, throws whatever it can pass, and stops on a solid barrier.
+/// </summary>
+[RegisterComponent]
+public sealed partial class ForgeXenoChargeComponent : Component
+{
+    [DataField]
+    public Vector2 Direction;
+
+    [DataField]
+    public float Speed = 3f;
+
+    [DataField]
+    public float MaxSpeed = 18f;
+
+    [DataField]
+    public float Acceleration = 40f;
+
+    [DataField]
+    public float DistanceLeft = 8f;
+
+    [DataField]
+    public float StunSeconds = 2.5f;
+
+    [DataField]
+    public DamageSpecifier? HitDamage;
+
+    public HashSet<EntityUid> Hit = new();
+}
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ForgeXenoPheromonesComponent : Component

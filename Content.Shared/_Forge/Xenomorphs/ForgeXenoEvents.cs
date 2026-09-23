@@ -132,6 +132,12 @@ public sealed partial class ForgeXenoLeapActionEvent : WorldTargetActionEvent
 
     [DataField]
     public DamageSpecifier? HitDamage;
+
+    /// <summary>
+    /// Rush with speed instead of blinking to the target. Stops on walls.
+    /// </summary>
+    [DataField]
+    public bool Smash;
 }
 
 public sealed partial class ForgeXenoConstructActionEvent : WorldTargetActionEvent

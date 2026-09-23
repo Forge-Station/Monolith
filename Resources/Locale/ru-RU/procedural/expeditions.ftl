@@ -40,6 +40,22 @@ salvage-expedition-difficulty-players = Рекомендовано утилиз�
 salvage-expedition-difficulty-Moderate = Умеренная
 salvage-expedition-difficulty-Hazardous = Высокая
 salvage-expedition-difficulty-Extreme = Экстремальная
+# Forge-Change-Start
+salvage-expedition-difficulty-ExtraHard = ЭКСТРА-СЛОЖНЫЙ
+salvage-expedition-hive-warning-title = Экстра-сложная экспедиция
+salvage-expedition-hive-warning =
+    Эта высадка очень сложная. В одиночку её не пройти.
+    Нужна очень хорошая экипировка и команда из 3-ёх смельчаков минимум.
+    Это не те старые ксеноморфы, которые ничего не умеют. Это намного улучшенные версии.
+salvage-expedition-hive-warning-accept = Всё равно принять
+salvage-expedition-hive-warning-cancel = Отмена
+salvage-biome-mod-hive = Улей
+salvage-dungeon-mod-hive = Захваченный экспедиционный пост
+salvage-faction-forge-xeno = Ксеноморфы улья
+salvage-light-mod-hive = Тусклый смоляной свет
+salvage-time-mod-hive = Долгая высадка, 20 минут
+# Forge-Change-End
+
 # Runner
 salvage-expedition-not-all-present = Не все утилизаторы вернулись на борт шаттла!
 # Runner

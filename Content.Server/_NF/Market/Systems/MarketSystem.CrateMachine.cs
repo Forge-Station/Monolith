@@ -23,7 +23,6 @@ public sealed partial class MarketSystem
     private void InitializeCrateMachine()
     {
         SubscribeLocalEvent<MarketConsoleComponent, MarketPurchaseMessage>(OnMarketConsolePurchaseCrateMessage);
-        SubscribeLocalEvent<CrateMachineComponent, CrateMachineOpenedEvent>(OnCrateMachineOpened);
     }
 
     private void OnMarketConsolePurchaseCrateMessage(EntityUid consoleUid,
@@ -36,7 +35,14 @@ public sealed partial class MarketSystem
             marketMod = marketModComponent.Mod;
         }
 
-        if (!_crateMachine.FindNearestUnoccupied(consoleUid, component.MaxCrateMachineDistance, out var machineUid) || !_entityManager.TryGetComponent<CrateMachineComponent> (machineUid, out var comp))
+        // Forge-change-start New search logic
+        if (!_crateMachine.FindNearestUnoccupied(
+                consoleUid,
+                component.MaxCrateMachineDistance,
+                CrateMachineKind.Cargo,
+                out var machineUid,
+                out var comp))
+        // Forge-change-end
         {
             _popup.PopupEntity(Loc.GetString("market-no-crate-machine-available"), consoleUid, Filter.PvsExcept(consoleUid), true);
             _audio.PlayPredicted(component.ErrorSound, consoleUid, null, AudioParams.Default.WithMaxDistance(5f));
@@ -99,40 +105,5 @@ public sealed partial class MarketSystem
         itemSpawner.ItemsToSpawn = consoleComponent.CartDataList;
         consoleComponent.CartDataList = [];
         _crateMachine.OpenFor(crateMachineUid, component);
-    }
-
-    private void SpawnCrateItems(List<MarketData> spawnList, EntityUid targetCrate)
-    {
-        var coordinates = Transform(targetCrate).Coordinates;
-        foreach (var data in spawnList)
-        {
-            if (data.StackPrototype != null && _prototypeManager.TryIndex(data.StackPrototype, out var stackPrototype))
-            {
-                var entityList = _stackSystem.SpawnMultiple(stackPrototype.Spawn, data.Quantity, coordinates);
-                foreach (var entity in entityList)
-                {
-                    _crateMachine.InsertIntoCrate(entity, targetCrate);
-                }
-            }
-            else
-            {
-                // Spawn the requested quantity of non-stackable items
-                for (int i = 0; i < data.Quantity; i++)
-                {
-                    var spawn = Spawn(data.Prototype, coordinates);
-                    _crateMachine.InsertIntoCrate(spawn, targetCrate);
-                }
-            }
-        }
-    }
-
-    private void OnCrateMachineOpened(EntityUid uid, CrateMachineComponent component, CrateMachineOpenedEvent args)
-    {
-        if (!TryComp<MarketItemSpawnerComponent>(uid, out var itemSpawner))
-            return;
-
-        var targetCrate = _crateMachine.SpawnCrate(uid, component);
-        SpawnCrateItems(itemSpawner.ItemsToSpawn, targetCrate);
-        itemSpawner.ItemsToSpawn = [];
     }
 }

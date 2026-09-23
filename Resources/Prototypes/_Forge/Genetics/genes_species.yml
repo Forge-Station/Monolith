@@ -1,0 +1,317 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+#
+# Full-body species rewrites. Always on the Morphology branch.
+
+- type: gene
+  id: GeneFormHuman
+  name: species-name-human
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Human
+
+- type: gene
+  id: GeneFormDwarf
+  name: species-name-dwarf
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Dwarf
+
+- type: gene
+  id: GeneFormMoth
+  name: species-name-moth
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Moth
+
+- type: gene
+  id: GeneFormReptilian
+  name: species-name-reptilian
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Reptilian
+
+- type: gene
+  id: GeneFormVox
+  name: species-name-vox
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Vox
+
+- type: gene
+  id: GeneFormSlimePerson
+  name: species-name-slime
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: SlimePerson
+
+- type: gene
+  id: GeneFormArachnid
+  name: species-name-arachnid
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Arachnid
+
+- type: gene
+  id: GeneFormDiona
+  name: species-name-diona
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Diona
+
+- type: gene
+  id: GeneFormVulpkanin
+  name: species-name-vulpkanin
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Vulpkanin
+
+- type: gene
+  id: GeneFormHarpy
+  name: species-name-harpy
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Harpy
+
+- type: gene
+  id: GeneFormRodentia
+  name: species-name-rodentia
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Rodentia
+
+- type: gene
+  id: GeneFormChitinid
+  name: species-name-chitinid
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Chitinid
+
+- type: gene
+  id: GeneFormTajaran
+  name: species-name-tajaran
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Tajaran
+
+- type: gene
+  id: GeneFormOni
+  name: species-name-oni
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Oni
+
+- type: gene
+  id: GeneFormGoblin
+  name: species-name-goblin
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Goblin
+
+- type: gene
+  id: GeneFormSkrell
+  name: species-name-skrell
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Skrell
+
+- type: gene
+  id: GeneFormDemon
+  name: species-name-demon
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Demon
+
+- type: gene
+  id: GeneFormAriral
+  name: species-name-ariral
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Ariral
+
+- type: gene
+  id: GeneFormResomi
+  name: species-name-resomi
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Resomi
+
+- type: gene
+  id: GeneFormHydrakin
+  name: species-name-hydrakin
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Hydrakin
+
+- type: gene
+  id: GeneFormFelinid
+  name: species-name-felinid
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Felinid
+
+- type: gene
+  id: GeneFormYowie
+  name: species-name-yowie
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Yowie
+
+- type: gene
+  id: GeneFormGingerbread
+  name: species-name-gingerbread
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Gingerbread
+
+- type: gene
+  id: GeneFormSkeleton
+  name: species-name-skeleton
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Skeleton
+
+- type: gene
+  id: GeneFormAsakim
+  name: species-name-asakim
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Asakim
+
+- type: gene
+  id: GeneFormProtogen
+  name: species-name-protogen
+  description: gene-form-desc
+  quality: Neutral
+  instability: 26
+  sequenceLength: 7
+  overlayColor: "#C8B09050"
+  branch: Morphology
+  lockBranch: true
+  speciesTarget: Protogen

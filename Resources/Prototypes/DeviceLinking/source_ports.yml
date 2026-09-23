@@ -66,6 +66,15 @@
   name: signal-port-name-med-scanner-sender
   description: signal-port-description-med-scanner-sender
 
+# New Frontiers - Genetics - DNA modifier scanner link
+# This code is licensed under AGPLv3. See LICENSE
+- type: sourcePort
+  id: GeneticsScannerSender
+  name: signal-port-name-genetics-scanner-sender
+  description: signal-port-description-genetics-scanner-sender
+  defaultLinks: [ GeneticsScannerReceiver ]
+# End of modified code
+
 - type: sourcePort
   id: ArtifactAnalyzerSender
   name: signal-port-name-artifact-analyzer-sender

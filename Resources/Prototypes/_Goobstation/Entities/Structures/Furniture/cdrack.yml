@@ -5,7 +5,6 @@
   parent: BaseStructure
   name: CD rack
   description: Mostly filled with CDs.
-  categories: [HideSpawnMenu] #Forge-Change
   components:
   - type: Sprite
     sprite: _Goobstation/Structures/Furniture/cdrack.rsi
@@ -19,7 +18,7 @@
     maxFillLevels: 11
     fillBaseName: cd
   - type: Damageable
-    damageModifierSet: Wood
+    damageModifierSet: StructuralMetallic #Forge-Change
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -41,7 +40,7 @@
           collection: WoodDestroyHeavy
       - !type:SpawnEntitiesBehavior
         spawn:
-          MaterialWoodPlank:
+          SheetSteel1: #Forge-Change
             min: 2
             max: 3
       - !type:DoActsBehavior
@@ -49,7 +48,7 @@
   - type: Tag
     tags:
     - Structure
-    - Wooden
+    #- Wooden #Forge-Change-remove
   - type: Transform
     anchored: true
     noRot: true

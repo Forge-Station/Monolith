@@ -1,10 +1,17 @@
-# - type: construction
-#   id: CdRack
-#   graph: CdRackGraph
-#   targetNode: CdRackNode
-#   category: construction-category-furniture
-#   objectType: Structure
-#   placementMode: SnapgridCenter
-#   canBuildInImpassable: true
-#   conditions:
-#     - !type:TileNotBlocked
+#Forge-Change изначальнный вариант с губов не работал, я его весь переписал.
+- type: construction
+  id: CdRack
+  name: CD rack
+  description: Mostly filled with CDs.
+  graph: CdRackGraph
+  startNode: start
+  targetNode: CdRackNode
+  category: construction-category-furniture
+  icon:
+    sprite: _Goobstation/Structures/Furniture/cdrack.rsi
+    state: base
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:TileNotBlocked

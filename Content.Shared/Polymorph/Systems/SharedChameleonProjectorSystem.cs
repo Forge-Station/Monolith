@@ -147,6 +147,15 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
             return;
 
         var xform = Transform(uid);
+
+        // Forge-change-start: NoRot ONLY if we anchor. Otherwise, if we move in NoRot, we have crash.
+        if (!xform.NoLocalRotation && !xform.Anchored)
+        {
+            _popup.PopupClient(Loc.GetString("chameleon-projector-norot-needs-anchor"), args.Performer, args.Performer);
+            return;
+        }
+        // Forge-change-end
+
         _xform.SetLocalRotationNoLerp(uid, 0, xform);
         xform.NoLocalRotation = !xform.NoLocalRotation;
         args.Handled = true;
@@ -159,7 +168,12 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
 
         var xform = Transform(uid);
         if (xform.Anchored)
+        {
             _xform.Unanchor(uid, xform);
+
+            if (xform.NoLocalRotation) // Forge-change: disable NoRot option when we dont anchor.
+                xform.NoLocalRotation = false;
+        }
         else
             _xform.AnchorEntity((uid, xform));
 
@@ -294,7 +308,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
     /// <summary>
     /// Try to get a single component from the source entity/prototype.
     /// </summary>
-    private bool GetSrcComp<T>(ChameleonDisguiseComponent comp, [NotNullWhen(true)] out T? src) where T : Component, new()
+    protected bool GetSrcComp<T>(ChameleonDisguiseComponent comp, [NotNullWhen(true)] out T? src) where T : Component, new()
     {
         if (TryComp(comp.SourceEntity, out src))
             return true;
@@ -305,7 +319,31 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
         if (!_proto.TryIndex<EntityPrototype>(protoId, out var proto))
             return false;
 
-        return proto.TryGetComponent(out src, EntityManager.ComponentFactory);
+        return proto.TryComp(out src, EntityManager.ComponentFactory);
+    }
+
+    /// <summary>
+    /// Forge-change: fix from space-wizards#45689
+    /// Try to get a single component, paired with its owning entity, from the source entity/prototype.
+    /// </summary>
+    protected bool GetSrcEntity<T>(ChameleonDisguiseComponent comp, out Entity<T?> src) where T : Component, new()
+    {
+        if (TryComp<T>(comp.SourceEntity, out var liveComp))
+        {
+            src = (comp.SourceEntity, liveComp);
+            return true;
+        }
+
+        if (comp.SourceProto is { } protoId
+            && ProtoMan.TryIndex<EntityPrototype>(protoId, out var proto)
+            && proto.TryComp<T>(out var protoComp, EntityManager.ComponentFactory))
+        {
+            src = (EntityUid.Invalid, protoComp);
+            return true;
+        }
+
+        src = default;
+        return false;
     }
 }
 

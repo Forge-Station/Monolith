@@ -1,5 +1,4 @@
 # Harmony Medical Enterprises
-
 - type: entity
   parent: ClothingHandsBase
   id: ClothingModsuitGauntletsHMELightSuit
@@ -23,6 +22,18 @@
     damageProtection:
       flatReductions:
         Heat: 10
+  - type: ModsuitGauntletTools
+    enabledSlots: [ Urk, Omnitool ]
+    usePrototypeMenuIcons: true
+    urkProto: HMEAdvancedCompactDefibrillator
+    omnitoolProto: OmnimedTool
+  - type: ActionGrant
+    actions:
+    - ActionHMEGauntletToolsMenu
+  - type: ItemActionGrant
+    actions:
+    - ActionHMEGauntletToolsMenu
+    activeIfWorn: true
   - type: Insulated
   - type: Fiber
     fiberMaterial: fibers-modular
@@ -62,6 +73,18 @@
     damageProtection:
       flatReductions:
         Heat: 10
+  - type: ModsuitGauntletTools
+    enabledSlots: [ Urk, Omnitool ]
+    usePrototypeMenuIcons: true
+    urkProto: HMEAdvancedCompactDefibrillator
+    omnitoolProto: OmnimedTool
+  - type: ActionGrant
+    actions:
+    - ActionHMEGauntletToolsMenu
+  - type: ItemActionGrant
+    actions:
+    - ActionHMEGauntletToolsMenu
+    activeIfWorn: true
   - type: Insulated
   - type: Fiber
     fiberMaterial: fibers-modular
@@ -77,8 +100,8 @@
       - state: equipped-HAND-sealed
       gloves-vox:
       - state: equipped-HAND-sealed-vox
-# ARS Omnissia
 
+# ARS Omnissia
 - type: entity
   parent: ClothingModsuitGauntletsBase
   id: ClothingModsuitGauntletsOmnissia

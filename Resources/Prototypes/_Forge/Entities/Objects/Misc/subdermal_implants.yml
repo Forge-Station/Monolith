@@ -274,3 +274,32 @@
       injectOnly: true
       onlyAffectsMobs: true
       preventCombatInjection: true
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: TTIPremiumTrackingImplant
+  name: premium TTI tracking implant
+  description: This implant has a tracking device monitor for the TTI radio channel.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SubdermalImplant
+    - type: SuitSensor
+      randomMode: false
+      controlsLocked: true
+      mode: SensorCords
+      activationContainer: "implant"
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: SuitNanotrasenSensor
+    - type: TriggerOnMobstateChange
+      mobState:
+      - Critical
+      - Dead
+    - type: Rattle
+      radioChannel: "Hospital"
+      reviveMessage: medical-revive-implant-revive-message
+      critMessage: medical-revive-implant-critical-message
+      deathMessage: medical-revive-implant-dead-message
+    - type: ReviveReward
+      reward: 5000
+      perTileBonus: 5

@@ -33,6 +33,7 @@
   color: "#00d1a0" # Forge-change
   whitelisted: true
   hidden: true # Forge-change: hide cauz' i dont have description and im lazy to create it. If u add the desc: please switch to false
+  companyUplinkCurrency: TTIMedicalCredit # Forge-change
 
 - type: company
   id: Colonial
@@ -292,6 +293,7 @@
   color: "#B82121"
   image: /Textures/_Mono/Companies/thevipergroup.png # Example
   whitelisted: true
+  hidden: true # Forge-change
   # Forge-change: delete logins, add icon, note & special's
   note: viper-group-company-note
   icon: ViperGroup

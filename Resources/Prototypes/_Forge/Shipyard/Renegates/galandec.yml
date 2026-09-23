@@ -3,8 +3,7 @@
   parent: BaseVessel
   name: «Голландец»
   description: Шаттл Артелерийской поддержки, отличающийся крупным курсовым вооружением . Рекомендованный состав 5-6 человек
-
-  price: 389050
+  price: 500000
   purchasable: false
   limit: 5
   category: Large
@@ -13,7 +12,7 @@
   shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/galandec.yml
   guidebookPage: Null
   class:
-  - Fighter  
+  - Fighter
   engine:
   - AME
 

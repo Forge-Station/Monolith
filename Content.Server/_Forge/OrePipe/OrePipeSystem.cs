@@ -13,8 +13,10 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._Forge.OrePipe;
 
@@ -56,7 +58,11 @@ public sealed partial class OrePipeSystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
-        args.PushMarkup(Loc.GetString(TryGetTrunkOnTile(uid, out _)
+        // Forge-Change: Only show "connected" if there's a complete path to an outlet
+        var hasTrunk = TryGetTrunkOnTile(uid, out var trunk);
+        var hasPath = hasTrunk && IsPipePathClosed(trunk);
+
+        args.PushMarkup(Loc.GetString(hasPath
             ? "ore-pipe-examine-connected"
             : "ore-pipe-examine-disconnected"));
     }
@@ -92,7 +98,7 @@ public sealed partial class OrePipeSystem : EntitySystem
     }
 
     /// <summary>
-    /// Drill may run when it has a same-tile disposal trunk and free buffer space.
+    /// Drill may run when it has a same-tile disposal trunk, free buffer space, and a valid closed pipe path to an outlet.
     /// Pipe direction is handled by real disposal travel after flush.
     /// </summary>
     public bool CanDrillOperate(EntityUid drill)
@@ -100,13 +106,20 @@ public sealed partial class OrePipeSystem : EntitySystem
         if (!HasComp<OrePipeInletComponent>(drill))
             return false;
 
-        if (!TryGetTrunkOnTile(drill, out _))
+        if (!TryGetTrunkOnTile(drill, out var trunk))
             return false;
 
         if (!TryComp<OrePipeBufferComponent>(drill, out var buffer))
             return false;
 
-        return buffer.TotalCount < buffer.MaxTotalCount;
+        if (buffer.TotalCount >= buffer.MaxTotalCount)
+            return false;
+
+        // Forge-Change: Verify there's a valid closed pipe path from drill to an outlet/hold
+        if (!IsPipePathClosed(trunk))
+            return false;
+
+        return true;
     }
 
     public bool TryDepositOre(EntityUid uid, EntProtoId oreProto, int count, OrePipeBufferComponent? buffer = null)
@@ -500,5 +513,188 @@ public sealed partial class OrePipeSystem : EntitySystem
         grid = mapGrid;
         tile = _map.TileIndicesFor(gid, mapGrid, xform.Coordinates);
         return true;
+    }
+
+    /// <summary>
+    /// Checks if there's a valid closed pipe path from the trunk to at least one outlet/hold.
+    /// A closed path means there's a connected route from the trunk to a valid outlet (OreHold or OrePipeOutlet with MaterialStorage)
+    /// following the actual pipe flow direction.
+    /// </summary>
+    private bool IsPipePathClosed(EntityUid trunk)
+    {
+        if (!TryGetGridTile(trunk, out var gridUid, out var grid, out var tile))
+            return false;
+
+        // Get initial direction from trunk
+        var trunkXform = Transform(trunk);
+        var initialDirection = trunkXform.LocalRotation.GetDir();
+
+        // Find the first tube connected to the trunk
+        var firstTube = FindConnectedTube(gridUid, grid, tile, initialDirection);
+        if (firstTube == null)
+            return false;
+
+        // BFS to find if there's a path to any outlet following pipe flow direction
+        var visited = new HashSet<EntityUid>();
+        var queue = new Queue<(EntityUid tube, Direction fromDirection)>();
+
+        queue.Enqueue((firstTube.Value, initialDirection.GetOpposite()));
+        visited.Add(firstTube.Value);
+
+        while (queue.Count > 0)
+        {
+            var (currentTube, fromDirection) = queue.Dequeue();
+
+            // Check if this tube is connected to an outlet/hold
+            if (CheckTileForOutletWithDirection(gridUid, grid, currentTube, fromDirection))
+                return true;
+
+            // Get the next direction this tube will push entities
+            var nextDirection = GetNextTubeDirection(currentTube, fromDirection);
+            if (nextDirection == Direction.Invalid)
+                continue;
+
+            // Find the next tube in the flow direction
+            var nextTube = FindConnectedTube(gridUid, grid, _map.TileIndicesFor(gridUid, grid, Transform(currentTube).Coordinates), nextDirection);
+            if (nextTube.HasValue && !visited.Contains(nextTube.Value))
+            {
+                visited.Add(nextTube.Value);
+                queue.Enqueue((nextTube.Value, nextDirection.GetOpposite()));
+            }
+        }
+
+        // No outlet found in the connected pipe network following flow direction
+        return false;
+    }
+
+    /// <summary>
+    /// Gets the next direction a disposal holder will take when exiting this tube.
+    /// </summary>
+    private Direction GetNextTubeDirection(EntityUid tube, Direction fromDirection)
+    {
+        var holder = new DisposalHolderComponent
+        {
+            PreviousDirection = fromDirection.GetOpposite()
+        };
+        var ev = new GetDisposalsNextDirectionEvent(holder);
+        RaiseLocalEvent(tube, ref ev);
+        return ev.Next;
+    }
+
+    /// <summary>
+    /// Check if there's an outlet/hold reachable from this tube in the specified direction.
+    /// </summary>
+    private bool CheckTileForOutletWithDirection(EntityUid gridUid, MapGridComponent grid, EntityUid tube, Direction fromDirection)
+    {
+        var tubeXform = Transform(tube);
+        var tubeTile = _map.TileIndicesFor(gridUid, grid, tubeXform.Coordinates);
+
+        // Check if this tube itself is on the same tile as an outlet
+        foreach (var ent in _map.GetAnchoredEntities(gridUid, grid, tubeTile))
+        {
+            if (HasComp<OreHoldComponent>(ent) ||
+                (HasComp<OrePipeOutletComponent>(ent) && HasComp<MaterialStorageComponent>(ent)))
+            {
+                return true;
+            }
+        }
+
+        // Get the next direction this tube will push entities
+        var nextDirection = GetNextTubeDirection(tube, fromDirection);
+        if (nextDirection == Direction.Invalid)
+            return false;
+
+        // Check if there's an outlet in the flow direction
+        var targetTile = SharedMapSystem.GetDirection(tubeTile, nextDirection);
+        foreach (var ent in _map.GetAnchoredEntities(gridUid, grid, targetTile))
+        {
+            if (HasComp<OreHoldComponent>(ent) ||
+                (HasComp<OrePipeOutletComponent>(ent) && HasComp<MaterialStorageComponent>(ent)))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Enhanced check that verifies the tube can actually connect in the specified direction.
+    /// </summary>
+    private bool CanTubeConnectInDirection(EntityUid tube, Direction direction)
+    {
+        var ev = new GetDisposalsConnectableDirectionsEvent();
+        RaiseLocalEvent(tube, ref ev);
+        return ev.Connectable.Contains(direction);
+    }
+
+    private EntityUid? FindConnectedTube(EntityUid gridUid, MapGridComponent grid, Vector2i tile, Direction direction)
+    {
+        var targetTile = SharedMapSystem.GetDirection(tile, direction);
+        var oppositeDirection = direction.GetOpposite();
+
+        foreach (var ent in _map.GetAnchoredEntities(gridUid, grid, targetTile))
+        {
+            if (HasComp<DisposalTubeComponent>(ent) && CanTubeConnectInDirection(ent, oppositeDirection))
+                return ent;
+        }
+        return null;
+    }
+
+    private List<EntityUid> GetAllConnectedTubes(EntityUid gridUid, MapGridComponent grid, EntityUid tube)
+    {
+        var connectedTubes = new List<EntityUid>();
+        var tubeXform = Transform(tube);
+        var tubeTile = _map.TileIndicesFor(gridUid, grid, tubeXform.Coordinates);
+
+        // Get all directions this tube can connect to
+        var ev = new GetDisposalsConnectableDirectionsEvent();
+        RaiseLocalEvent(tube, ref ev);
+
+        foreach (var direction in ev.Connectable)
+        {
+            var connectedTube = FindConnectedTube(gridUid, grid, tubeTile, direction);
+            if (connectedTube.HasValue && !connectedTubes.Contains(connectedTube.Value))
+            {
+                connectedTubes.Add(connectedTube.Value);
+            }
+        }
+
+        return connectedTubes;
+    }
+
+    private bool CheckTileForOutlet(EntityUid gridUid, MapGridComponent grid, EntityUid tube)
+    {
+        var tubeXform = Transform(tube);
+        var tubeTile = _map.TileIndicesFor(gridUid, grid, tubeXform.Coordinates);
+
+        // Check if this tube itself is on the same tile as an outlet
+        foreach (var ent in _map.GetAnchoredEntities(gridUid, grid, tubeTile))
+        {
+            if (HasComp<OreHoldComponent>(ent) ||
+                (HasComp<OrePipeOutletComponent>(ent) && HasComp<MaterialStorageComponent>(ent)))
+            {
+                return true;
+            }
+        }
+
+        // Get all directions this tube can connect to
+        var ev = new GetDisposalsConnectableDirectionsEvent();
+        RaiseLocalEvent(tube, ref ev);
+
+        foreach (var direction in ev.Connectable)
+        {
+            var targetTile = SharedMapSystem.GetDirection(tubeTile, direction);
+            foreach (var ent in _map.GetAnchoredEntities(gridUid, grid, targetTile))
+            {
+                if (HasComp<OreHoldComponent>(ent) ||
+                    (HasComp<OrePipeOutletComponent>(ent) && HasComp<MaterialStorageComponent>(ent)))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

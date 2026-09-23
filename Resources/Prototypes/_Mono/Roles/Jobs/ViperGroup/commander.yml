@@ -32,6 +32,10 @@
     - NovaCygniBasic
     languagesUnderstood:
     - NovaCygniBasic
+  # Forge-Change-start
+  access:
+  - TurretCommandVG
+  # Forge-Change-end
   accessGroups:
   - GeneralAccess
   - ViperHigh

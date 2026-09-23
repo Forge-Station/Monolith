@@ -16,7 +16,8 @@ ent-WeaponTurretLaserHostileNF = лазерная турель
     .suffix = Фронтир, Враждебная
     .desc = { ent-WeaponTurretLaserSyndicateNF.desc }
 ent-WeaponTurretAsmgtNtDeployed = АСПТ
-    .desc = Автономная Сторожевая Пулеметная Турель (АСПТ) — это магазинная турель с стволами, совместимыми с патронами калибра .20, .25, .30 и .35. Используйте отвертку для разборки.
+    # Forge-Change
+    .desc = Автономная Сторожевая Пулеметная Турель (АСПТ). Слушается консоли турелей на этом гриде: режим и списки свои/чужие задаются с неё. Используйте отвертку для разборки.
     .suffix = НТ
 ent-WeaponTurretAsmgtNtPacked = упакованная АСПТ
     .desc = Разобранная и упакованная Автономная Сторожевая Пулеметная Турель (АСПТ).
@@ -25,7 +26,8 @@ ent-WeaponTurretAsmgtHostileUniversallyDeployed = { ent-WeaponTurretAsmgtNtDeplo
   .suffix = Враждебная
   .desc = { ent-WeaponTurretAsmgtNtDeployed.desc }
 ent-WeaponTurretAsmgtHostileUniversallyPacked = { ent-WeaponTurretAsmgtNtPacked }
-  .desc = Разобранная и упакованная Автономная Сторожевая Пулеметная Турель (АСПТ). ВНИМАНИЕ! Разобранная турель будет враждебной к любому, кто не находился рядом (в пределах 3 м) после распаковки!
+  # Forge-Change
+  .desc = Разобранная и упакованная Автономная Сторожевая Пулеметная Турель (АСПТ). После установки слушается консоли турелей на этом гриде.
   .suffix = Враждебная, Упакованная
 
 ent-WeaponTurretLaserNanoTrasenPackingGraph = WeaponTurretLaserNanoTrasenPackingGraph

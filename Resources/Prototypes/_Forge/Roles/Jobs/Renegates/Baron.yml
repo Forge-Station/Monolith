@@ -29,6 +29,7 @@
   access:
   - RenegateOfficer
   - RenegateSecApartment
+  - TurretCommandRenegate
   accessGroups:
   - CommandRenegateAccess
   special:

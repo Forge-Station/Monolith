@@ -55,6 +55,7 @@
   - type: NpcFactionMember
     factions:
     - AllHostile
+  - type: TurretCommandLink # Forge-Change
 
 - type: entity
   parent: WeaponEnergyTurretStationControlPanel
@@ -96,6 +97,10 @@
   - type: DeviceNetwork
     receiveFrequencyId: TurretControlAITSF
     transmitFrequencyId: TurretAITSF
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: TSF
+  # Forge-Change-end
 
 - type: deviceFrequency
   id: TurretControlAITSF
@@ -141,6 +146,10 @@
   - type: DeviceNetwork
     receiveFrequencyId: TurretControlAIPDV
     transmitFrequencyId: TurretAIPDV
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: PDV
+  # Forge-Change-end
 
 - type: deviceFrequency
   id: TurretControlAIPDV
@@ -186,6 +195,10 @@
   - type: DeviceNetwork
     receiveFrequencyId: TurretControlAIUSSP
     transmitFrequencyId: TurretAIUSSP
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: USSP
+  # Forge-Change-end
 
 - type: deviceFrequency
   id: TurretControlAIUSSP
@@ -282,6 +295,10 @@
   - type: DeviceNetwork
     receiveFrequencyId: TurretControlAIVG
     transmitFrequencyId: TurretAIVG
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: VG
+  # Forge-Change-end
 
 - type: deviceFrequency
   id: TurretControlAIVG

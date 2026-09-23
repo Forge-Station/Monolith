@@ -55,7 +55,10 @@
   - type: NpcFactionMember
     factions:
     - AllHostile
-  - type: TurretCommandLink # Forge-Change
+  # Forge-Change-start
+  - type: TurretCommandLink
+    managed: false
+  # Forge-Change-end
 
 - type: entity
   parent: WeaponEnergyTurretStationControlPanel

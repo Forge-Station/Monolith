@@ -15,8 +15,8 @@ ent-WeaponTurretLaserSyndicateNF = лазерная турель
 ent-WeaponTurretLaserHostileNF = лазерная турель
     .suffix = Фронтир, Враждебная
     .desc = { ent-WeaponTurretLaserSyndicateNF.desc }
+# Forge-Change
 ent-WeaponTurretAsmgtNtDeployed = АСПТ
-    # Forge-Change
     .desc = Автономная Сторожевая Пулеметная Турель (АСПТ). Слушается консоли турелей на этом гриде: режим и списки свои/чужие задаются с неё. Используйте отвертку для разборки.
     .suffix = НТ
 ent-WeaponTurretAsmgtNtPacked = упакованная АСПТ
@@ -25,8 +25,8 @@ ent-WeaponTurretAsmgtNtPacked = упакованная АСПТ
 ent-WeaponTurretAsmgtHostileUniversallyDeployed = { ent-WeaponTurretAsmgtNtDeployed }
   .suffix = Враждебная
   .desc = { ent-WeaponTurretAsmgtNtDeployed.desc }
+# Forge-Change
 ent-WeaponTurretAsmgtHostileUniversallyPacked = { ent-WeaponTurretAsmgtNtPacked }
-  # Forge-Change
   .desc = Разобранная и упакованная Автономная Сторожевая Пулеметная Турель (АСПТ). После установки слушается консоли турелей на этом гриде.
   .suffix = Враждебная, Упакованная
 

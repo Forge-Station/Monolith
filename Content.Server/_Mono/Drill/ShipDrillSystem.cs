@@ -1,13 +1,19 @@
 using System.Linq;
 using System.Numerics;
-using System.Transactions;
+using Content.Server._Forge.OrePipe;
 using Content.Server.Gatherable;
 using Content.Server.Power.EntitySystems;
+using Content.Shared._Forge.OrePipe;
+using Content.Shared._NF.Atmos.Components;
+using Content.Shared.Damage;
 using Content.Shared.Decals;
+using Content.Shared.FixedPoint;
 using Content.Shared.Maps;
+using Content.Shared.Tiles;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Content.Shared.SubFloor;
 
 namespace Content.Server._Mono.Drill;
 
@@ -21,8 +27,16 @@ public partial class ShipDrillSystem : EntitySystem
     [Dependency] private TileSystem _tile = default!;
     [Dependency] private SharedDecalSystem _decal = default!;
     [Dependency] private GatherableSystem _gather = default!;
+    [Dependency] private OrePipeSystem _orePipe = default!; // Forge-Change
+    [Dependency] private DamageableSystem _damageable = default!; // Forge-Change: ore crabs/golems
+
+    private static readonly DamageSpecifier OreMobDrillDamage = new()
+    {
+        DamageDict = new() { ["Blunt"] = FixedPoint2.New(40) },
+    };
 
     private HashSet<EntityUid> _ents = new();
+    private HashSet<EntityUid> _mobs = new();
     private HashSet<TileRef> _nonEmptyTiles = new();
 
     private float _updateCooldown = 0.25f;
@@ -42,6 +56,10 @@ public partial class ShipDrillSystem : EntitySystem
         while (eQe.MoveNext(out var uid, out var comp))
         {
             if (!this.IsPowered(uid, EntityManager))
+                continue;
+
+            // Forge-Change: drill runs only with DisposalPipe link to ore storage (not magnets).
+            if (!_orePipe.CanDrillOperate(uid))
                 continue;
 
             var coords = _xform.GetMapCoordinates(uid);
@@ -76,12 +94,20 @@ public partial class ShipDrillSystem : EntitySystem
 
                 var tiles = _map.GetTilesIntersecting(grid.Owner, grid.Comp, tileWorldBox);
                 _look.GetEntitiesIntersecting(grid.Owner, worldBox, _ents, LookupFlags.Static);
+                _look.GetEntitiesIntersecting(grid.Owner, worldBox, _mobs, LookupFlags.Dynamic);
 
                 foreach (var ent in _ents)
                 {
                     comp.DrillType?.Drill(ent, uid, this, EntityManager);
                     var tileRef = _map.GetTileRef(grid.Owner, grid.Comp, Transform(ent).Coordinates);
                     _nonEmptyTiles.Add(tileRef);
+                }
+
+                // Forge-Change: deal damage to all mobs (NPCs, players) in the drill cone.
+                // Ore crabs/golems deposit loot into the pipe buffer when killed.
+                foreach (var mob in _mobs)
+                {
+                    _damageable.TryChangeDamage(mob, OreMobDrillDamage, ignoreResistances: true, origin: uid);
                 }
 
                 var tilesToDelete = tiles.ToList();
@@ -94,13 +120,19 @@ public partial class ShipDrillSystem : EntitySystem
                     if (comp.TileWhitelist != null && !comp.TileWhitelist.Contains(tileDef.ID))
                         continue;
 
+                    // Forge-Change: remove all anchored entities (gas deposits, rocks, crystals, etc.) with the asteroid tile.
+                    foreach (var anchored in _map.GetAnchoredEntities(grid.Owner, grid.Comp, tileRef.GridIndices))
+                    {
+                        QueueDel(anchored);
+                    }
+
                     _map.SetTile(grid.Owner, grid, tileRef.GridIndices, Tile.Empty);
                 }
 
                 _ents.Clear();
+                _mobs.Clear();
                 _nonEmptyTiles.Clear();
             }
         }
     }
 }
-

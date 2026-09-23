@@ -1310,6 +1310,7 @@
   id: SalvageMagnetMachineCircuitboard
   name: salvage magnet machine board
   description: A machine printed circuit board for a salvage magnet.
+  categories: [HideSpawnMenu] #Forge-Change
   components:
   - type: Sprite
     state: supply

@@ -25,6 +25,9 @@
       - Dead
     - type: Rattle
       radioChannel: "Medical"
+    - type: ReviveReward # Forge-change
+      reward: 1000
+      perTileBonus: 1
 
 - type: entity
   parent: BaseSubdermalImplant

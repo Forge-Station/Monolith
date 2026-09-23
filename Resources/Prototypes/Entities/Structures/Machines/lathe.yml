@@ -250,6 +250,8 @@
     - ScienceWeapons
     - Mining
     - ForgeEngineeringTools # Forge-Change: handheld monitors
+    - ForgeTurretAdventurer # Forge-Change
+    - ForgeTurretKits # Forge-Change
     - ResearchedExplosives # Mono
     # - EngineeringWeapons # Frontier
     - Chemistry
@@ -352,6 +354,7 @@
     - ForgeShipWeaponsDynamic # Forge-Change
     - ForgeAdvancedShuttleComponents # Forge-Change
     - ForgeBoardingTeleportRecipes # Forge-Change
+    - CloakingShuttleCircuitsPack # Forge-Change
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
@@ -541,6 +544,8 @@
     dynamicPacks:
     - NanotrasenWeapon # Forge-change
     - NanotrasenEquipment # Forge-change
+    - ForgeTurretNT # Forge-Change
+    - ForgeTurretKits # Forge-Change
     - SecurityEquipment
     - SecurityExplosives
     - DynamicAmmoRecipePack

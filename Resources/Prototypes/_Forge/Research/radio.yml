@@ -10,6 +10,7 @@
   - StationRadioServerCircuitboard
   - StationRadioRigCircuitboard
   - StationRadioCircuitboard
+  - StationRadioUwUCircuitboard #Forge-Change-UwU
   - StationRadioReceiverHandheldRecipe
   position: -2, 14
   technologyPrerequisites:

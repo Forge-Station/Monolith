@@ -14,3 +14,245 @@
     - type: StartSyndrome
       syndrome: ChronicPain
       severity: 90
+
+#region IPC traits 
+- type: trait
+  id: IpcSoftBody
+  name: trait-ipc-soft-body-name
+  description: trait-ipc-soft-body-desc
+  category: Physical
+  cost: -6
+  mutuallyExclusiveTraits:
+  - DermalArmor
+  speciesBlacklist:
+  - Human
+  - Chitinid
+  - Oni
+  - Vulpkanin
+  - Vox
+  - Diona
+  - Moth
+  - Goblin
+  - Arachnid
+  - Resomi
+  - Harpy
+  - Reptilian
+  - Hydrakin
+  - Rodentia
+  - Dwarf
+  - SlimePerson
+  - Felinid
+  - Tajaran
+  - Demon
+  - Skrell
+  - Ariral
+  blacklist:
+    components:
+    - BorgChassis
+  components:
+  - type: DamageProtectionBuff
+    modifiers:
+      dermal:
+        id: DermalArmorTrait
+        coefficients:
+          Blunt: 1.2
+          Slash: 1.2
+          Piercing: 1.2
+
+# - type: trait
+#   id: IpcHeavyBody
+#   name: trait-ipc-heavy-body-name
+#   description: trait-ipc-heavy-body-desc
+#   category: Physical
+#   cost: -4
+#   speciesBlacklist:
+#   - Human
+#   - Chitinid
+#   - Oni
+#   - Vulpkanin
+#   - Vox
+#   - Diona
+#   - Moth
+#   - Goblin
+#   - Arachnid
+#   - Resomi
+#   - Harpy
+#   - Reptilian
+#   - Hydrakin
+#   - Rodentia
+#   - Dwarf
+#   - SlimePerson
+#   - Felinid
+#   - Tajaran
+#   - Demon
+#   - Skrell
+#   - Ariral
+#   blacklist:
+#     components:
+#     - BorgChassis
+#   components:
+#     - type: BodyPartReplacement
+#       replacements:
+#       - slot: torso
+#         prototype: IPCHeavyTorso
+
+- type: trait
+  id: IpcWeldingFlashProtection
+  name: trait-ipc-welding-flash-protection-name
+  description: trait-ipc-welding-flash-protection-desc
+  category: Physical
+  cost: 2
+  speciesBlacklist:
+  - Human
+  - Chitinid
+  - Oni
+  - Vulpkanin
+  - Vox
+  - Diona
+  - Moth
+  - Goblin
+  - Arachnid
+  - Resomi
+  - Harpy
+  - Reptilian
+  - Hydrakin
+  - Rodentia
+  - Dwarf
+  - SlimePerson
+  - Felinid
+  - Tajaran
+  - Demon
+  - Skrell
+  - Ariral
+  blacklist:
+    components:
+    - BorgChassis
+  components:
+    - type: FlashImmunity
+    - type: EyeProtection   
+
+- type: trait
+  id: IpcBadServo
+  name: trait-ipc-bad-servo-name
+  description: trait-ipc-bad-servo-desc
+  category: Physical
+  cost: -4
+  mutuallyExclusiveTraits:
+  - BionicLegs
+  - IpcLaserGunTrait
+  speciesBlacklist:
+  - Human
+  - Chitinid
+  - Oni
+  - Vulpkanin
+  - Vox
+  - Diona
+  - Moth
+  - Goblin
+  - Arachnid
+  - Resomi
+  - Harpy
+  - Reptilian
+  - Hydrakin
+  - Rodentia
+  - Dwarf
+  - SlimePerson
+  - Felinid
+  - Tajaran
+  - Demon
+  - Skrell
+  - Ariral
+  blacklist:
+    components:
+    - BorgChassis
+  components:
+    - type: BodyPartReplacement
+      replacements:
+      - slot: left leg
+        prototype: IPCBadServoLeftLeg
+      - slot: right leg
+        prototype: IPCBadServoRightLeg
+      - slot: left arm
+        prototype: IPCBadServoLeftArm
+      - slot: right arm
+        prototype: IPCBadServoRightArm
+
+- type: trait
+  id: IpcLaserGunTrait
+  name: trait-ipc-laser-gun-name
+  description: trait-ipc-laser-gun-desc
+  category: Physical
+  cost: 3
+  mutuallyExclusiveTraits:
+  - IpcBadServo
+  speciesBlacklist:
+  - Human
+  - Chitinid
+  - Oni
+  - Vulpkanin
+  - Vox
+  - Diona
+  - Moth
+  - Goblin
+  - Arachnid
+  - Resomi
+  - Harpy
+  - Reptilian
+  - Hydrakin
+  - Rodentia
+  - Dwarf
+  - SlimePerson
+  - Felinid
+  - Tajaran
+  - Demon
+  - Skrell
+  - Ariral
+  blacklist:
+    components:
+    - BorgChassis
+  components:
+    - type: BodyPartReplacement
+      replacements:
+      - slot: right arm
+        prototype: IPCLaserGunRightArm
+
+# - type: trait ебаные губы не могут без щиткода
+#   id: IpcMantisBladeTrait
+#   name: trait-ipc-mantis-blade-name
+#   description: trait-ipc-mantis-blade-desc
+#   category: Physical
+#   cost: 5
+#   mutuallyExclusiveTraits:
+#   - IpcBadServo
+#   speciesBlacklist:
+#   - Human
+#   - Chitinid
+#   - Oni
+#   - Vulpkanin
+#   - Vox
+#   - Diona
+#   - Moth
+#   - Goblin
+#   - Arachnid
+#   - Resomi
+#   - Harpy
+#   - Reptilian
+#   - Hydrakin
+#   - Rodentia
+#   - Dwarf
+#   - SlimePerson
+#   - Felinid
+#   - Tajaran
+#   - Demon
+#   - Skrell
+#   - Ariral
+#   blacklist:
+#     components:
+#     - BorgChassis
+#   components:
+#     - type: BodyPartReplacement
+#       replacements:
+#       - slot: right arm
+#         prototype: IPCMantisBladeRightArm
+#       - slot: left arm
+#         prototype: IPCMantisBladeLeftArm

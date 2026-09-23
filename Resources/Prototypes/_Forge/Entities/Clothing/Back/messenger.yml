@@ -41,3 +41,20 @@
     maxItemSize: Huge
     grid:
     - 0,0,7,7
+
+- type: entity
+  parent: ClothingBackpackMessenger
+  id: ClothingBackpackMessengerNexus
+  name: Nexus messenger bag
+  description: Trendy messenger bag in a stylish color palette
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Back/Messenger/messenger_nexus.rsi
+  - type: Storage
+    grid:
+    - 0,0,1,1
+    - 0,3,1,4
+    - 3,0,6,3
+    - 8,0,9,1
+    - 8,3,9,4
+    maxItemSize: Huge

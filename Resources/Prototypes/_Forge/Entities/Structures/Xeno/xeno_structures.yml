@@ -1,0 +1,566 @@
+# Colonial Marines hive structures, doors, and floor growth for mapping.
+
+- type: entity
+  parent: BaseShutter
+  id: DoorXenoResin
+  name: resin door
+  description: A living resin sphincter. A crowbar forces it open. Xenomorphs pass through.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/xeno_resin_door.rsi
+    layers:
+    - state: resin
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Door
+    bumpOpen: false
+    clickOpen: false
+    canPry: true
+    crushDamage:
+      types:
+        Blunt: 15
+    openSpriteState: resinopen
+    closedSpriteState: resin
+    openingSpriteState: resinopening
+    closingSpriteState: resinclosing
+    openingAnimationTime: 1.1
+    closingAnimationTime: 1.1
+    openSound:
+      path: /Audio/Effects/gib1.ogg
+    closeSound:
+      path: /Audio/Effects/gib2.ogg
+  - type: IconSmooth
+    key: xeno_resin
+    mode: NoSprite
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+  - type: Occluder
+  - type: RadiationBlocker
+    resistance: 3
+  - type: ForgeXenoResinDoor
+
+- type: entity
+  parent: DoorXenoResin
+  id: DoorXenoResinOpen
+  suffix: Forge, Xeno, CM, Open
+  components:
+  - type: Door
+    state: Open
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false
+
+- type: entity
+  parent: DoorXenoResin
+  id: DoorXenoResinThick
+  name: thick resin door
+  description: A thicker resin sphincter. A crowbar still forces it open. Xenomorphs pass through.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/xeno_resin_door.rsi
+    layers:
+    - state: thick_resin
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Door
+    bumpOpen: false
+    clickOpen: false
+    canPry: true
+    crushDamage:
+      types:
+        Blunt: 15
+    openSpriteState: thick_resinopen
+    closedSpriteState: thick_resin
+    openingSpriteState: thick_resinopening
+    closingSpriteState: thick_resinclosing
+    openingAnimationTime: 1.1
+    closingAnimationTime: 1.1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 900
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+
+- type: entity
+  parent: DoorXenoResinThick
+  id: DoorXenoResinThickOpen
+  suffix: Forge, Xeno, CM, Open
+  components:
+  - type: Door
+    state: Open
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false
+
+- type: entity
+  parent: XenoHiveStructureBase
+  id: XenoRecoveryTower
+  name: xeno recovery tower
+  description: A pulsing resin spire. Something in the hive uses it to knit wounds.
+  suffix: Forge, Xeno
+  components:
+  - type: Sprite
+    sprite: Structures/Specific/xeno_building.rsi
+    noRot: true
+    layers:
+    - state: recoverytower
+
+- type: entity
+  parent: XenoHiveStructureBase
+  id: XenoFrenzyTower
+  name: xeno frenzy tower
+  description: A jagged resin spire. Standing near it feels like a bad idea.
+  suffix: Forge, Xeno
+  components:
+  - type: Sprite
+    sprite: Structures/Specific/xeno_building.rsi
+    noRot: true
+    layers:
+    - state: frenzytower
+
+- type: entity
+  abstract: true
+  id: XenoHiveStructureBase
+  suffix: Forge, Xeno, CM
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection: MeatBulletImpact
+    soundTypes:
+      Heat:
+        collection: MeatLaserImpact
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    noRot: true
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 1000
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+
+- type: entity
+  parent: XenoHiveStructureBase
+  id: XenoHiveCore
+  name: hive core
+  description: The heart of a xenomorph hive. It should not be here.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/hive_structures.rsi
+    noRot: true
+    layers:
+    - state: core
+
+- type: entity
+  parent: XenoHiveStructureBase
+  id: XenoEggMorpher
+  name: egg morpher
+  description: A swollen resin organ that grows eggs for the hive.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/hive_structures.rsi
+    noRot: true
+    layers:
+    - state: eggmorph
+
+- type: entity
+  parent: XenoHiveStructureBase
+  id: XenoRecoveryNode
+  name: recovery node
+  description: A resin node that weeps healing plasma.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/hive_structures.rsi
+    noRot: true
+    layers:
+    - state: recovery
+
+- type: entity
+  parent: XenoHiveStructureBase
+  id: XenoHivePylon
+  name: hive pylon
+  description: A resin pylon anchoring the hive's presence.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/hive_structures.rsi
+    noRot: true
+    layers:
+    - state: pylon
+
+- type: entity
+  parent: XenoHiveStructureBase
+  id: XenoHiveCluster
+  name: hive cluster
+  description: A dense cluster of living resin.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/hive_cluster.rsi
+    noRot: true
+    layers:
+    - state: hive_cluster_idle
+
+- type: entity
+  parent: XenoHiveStructureBase
+  id: XenoPlasmaCollector
+  name: plasma collector
+  description: A resin organ that gathers plasma from the weeds.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/hive_structures.rsi
+    noRot: true
+    layers:
+    - state: collector
+
+- type: entity
+  id: XenoWeeds
+  name: hive weeds
+  description: A carpet of living resin. It sticks to boots and walls alike.
+  suffix: Forge, Xeno, CM
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: _CM/Structures/Xenos/xeno_weeds.rsi
+    state: weed0
+  - type: Icon
+    sprite: _CM/Structures/Xenos/xeno_weeds.rsi
+    state: weednode
+  - type: IconSmooth
+    key: xeno_weeds
+    base: weed
+    mode: CardinalFlags
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        hard: false
+        layer:
+        - SlipLayer
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.85
+    sprintSpeedModifier: 0.85
+    ignoreWhitelist:
+      components:
+      - ForgeXeno
+  - type: ForgeXenoWeeds
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: XenoWeeds
+  id: XenoWeedsChoke
+  name: thick hive weeds
+  description: A choking mat of resin. You have to break through it. Xenomorphs slip past.
+  suffix: Forge, Xeno, CM, Corridor
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _CM/Structures/Xenos/xeno_weeds.rsi
+    layers:
+    - state: hive_weed0
+    - state: weednode
+  - type: Icon
+    sprite: _CM/Structures/Xenos/xeno_weeds.rsi
+    state: hive_weed0
+  - type: IconSmooth
+    key: xeno_weeds_choke
+    base: hive_weed
+    mode: CardinalFlags
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 80
+        hard: true
+        mask:
+        - MobMask
+        layer:
+        - MidImpassable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: XenoWeeds
+  id: XenoWeedNode
+  name: hive weed node
+  description: A swollen node feeding weeds across the hive.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _CM/Structures/Xenos/xeno_weeds.rsi
+    layers:
+    - state: weed0
+    - state: weednode
+
+- type: entity
+  parent: XenoWeeds
+  id: XenoStickyResin
+  name: sticky resin
+  description: Thick, clinging slime. Moving through it is a struggle.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _CM/Structures/Xenos/xeno_floor_resins.rsi
+    state: sticky
+  - type: Icon
+    sprite: _CM/Structures/Xenos/xeno_floor_resins.rsi
+    state: sticky
+  - type: IconSmooth
+    key: xeno_sticky
+    mode: NoSprite
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.35
+    sprintSpeedModifier: 0.35
+    ignoreWhitelist:
+      components:
+      - ForgeXeno
+
+- type: entity
+  parent: XenoWeeds
+  id: XenoFastResin
+  name: fast resin
+  description: Slick hive resin. Xenomorphs would love this. You will not.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _CM/Structures/Xenos/xeno_floor_resins.rsi
+    state: fast
+  - type: Icon
+    sprite: _CM/Structures/Xenos/xeno_floor_resins.rsi
+    state: fast
+  - type: IconSmooth
+    key: xeno_fast
+    mode: NoSprite
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 1.35
+    sprintSpeedModifier: 1.35
+
+- type: entity
+  parent: XenoWeeds
+  id: XenoResinSpikes
+  name: resin spikes
+  description: Jagged resin thorns. Walking onto them is a mistake.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _CM/Structures/Xenos/xeno_resin_spikes.rsi
+    state: resin_spike
+  - type: Icon
+    sprite: _CM/Structures/Xenos/xeno_resin_spikes.rsi
+    state: resin_spike
+  - type: IconSmooth
+    key: xeno_spikes
+    mode: NoSprite
+  - type: DamageContacts
+    damage:
+      types:
+        Piercing: 4
+        Slash: 2
+    ignoreWhitelist:
+      components:
+      - ForgeXeno
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.7
+    sprintSpeedModifier: 0.7
+    ignoreWhitelist:
+      components:
+      - ForgeXeno
+
+- type: entity
+  parent: BaseStructure
+  id: XenoEgg
+  name: xenomorph egg
+  description: A leathery alien egg. Something inside wants out.
+  suffix: Forge, Xeno, CM
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/xeno_egg.rsi
+    state: egg
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.3
+        density: 40
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: Damageable
+    damageContainer: Biological
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MobXenoCMLarva:
+            min: 0
+            max: 1
+
+- type: entity
+  parent: XenoEgg
+  id: XenoEggOpened
+  name: opened xenomorph egg
+  description: The egg has already hatched. The occupant is someone else's problem now.
+  suffix: Forge, Xeno, CM, Opened
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/xeno_egg.rsi
+    state: egg_opened
+    noRot: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: BaseStructure
+  id: XenoTunnel
+  name: xenomorph tunnel
+  description: A hole chewed through resin and deck plating. It does not lead anywhere useful... unless a mapper linked it.
+  suffix: Forge, Xeno, CM
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: _CM/Structures/Xenos/xeno_tunnel.rsi
+    state: hole
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.3,0.3,0.3"
+        density: 20
+        mask:
+        - MachineMask
+        layer:
+        - LowImpassable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

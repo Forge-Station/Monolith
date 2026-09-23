@@ -10,7 +10,7 @@
   id: CargoBoardsStatic
   recipes:
   - OreProcessorMachineCircuitboard
-  - SalvageMagnetMachineCircuitboard
+  #- SalvageMagnetMachineCircuitboard #Forge-Change-remove
   - SmartArmoryCircuitboard # Mono
 
 ## Dynamic

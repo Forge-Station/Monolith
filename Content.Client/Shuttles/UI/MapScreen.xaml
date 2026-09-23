@@ -71,6 +71,11 @@
                                 Text="{controls:Loc 'shuttle-console-bioscan-status-None'}"
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Center"/>
+                <!-- Forge-Change - Cloaking -->
+                <controls:Label Name="MapCloakingState"
+                                Text="{controls:Loc 'shuttle-console-bioscan-status-None'}"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Center"/>
                 <controls1:StripeBack
                     Margin="5 5 5 5"
                     HorizontalExpand="False"
@@ -80,6 +85,12 @@
                         <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
                     </controls:PanelContainer.PanelOverride>
                 <controls:ProgressBar Name="BioScanBar" HorizontalExpand="True"
+                                      Margin="5"
+                                      MinValue="0.0"
+                                      MaxValue="1.0"
+                                      Value="0.0"/>
+                <!-- Forge-Change - Cloaking -->
+                <controls:ProgressBar Name="CloakingBar" HorizontalExpand="True"
                                       Margin="5"
                                       MinValue="0.0"
                                       MaxValue="1.0"
@@ -117,6 +128,16 @@
                                  Text="{controls:Loc 'shuttle-console-autopilot-button'}"
                                  TextAlign="Center"
                                  StyleClasses="ButtonSquare"/>
+                <!-- Forge-Change-start - Cloaking -->
+                <controls:Button Name="MapToggleModButton"
+                                 Text="{controls:Loc 'shuttle-console-toggle-mod-button'}"
+                                 TextAlign="Center"
+                                 StyleClasses="ButtonSquare"/>
+                <controls:Button Name="MapCloakButton"
+                                 Text="{controls:Loc 'shuttle-console-cloak-button'}"
+                                 TextAlign="Center"
+                                 StyleClasses="ButtonSquare"/>
+                <!-- Forge-Change-end - Cloaking -->
                 <!-- Forge-Change - BioScan -->
                 <controls:Button Name="MapBioScanButton"
                                  ToggleMode="True"

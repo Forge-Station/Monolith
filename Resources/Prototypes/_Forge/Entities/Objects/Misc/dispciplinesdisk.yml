@@ -237,3 +237,27 @@
     - BoardingTeleport
     - BoardingTeleportBalanceTable
     includeChildren: false
+
+#region Broken Disks
+
+- type: entity
+  id: DisciplinesDiskDrakeIndustriesBrokenTest
+  parent: BaseItem
+  name: broken technology disk (Drake Industries)
+  suffix: Drake
+  description: Broken disk with Drake Industries research disciplines. Insert it into the R&D server to unlock certain Drake Industries technologies.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - DrakeIndustries
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 50000

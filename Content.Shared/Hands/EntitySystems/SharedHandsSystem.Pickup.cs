@@ -190,7 +190,7 @@ public abstract partial class SharedHandsSystem : EntitySystem
         if (TryComp(entity, out PhysicsComponent? physics) && physics.BodyType == BodyType.Static && !item.PickupStatic) // Mono
             return false;
 
-        if (checkActionBlocker && !_actionBlocker.CanPickup(uid, entity))
+        if (checkActionBlocker && !_actionBlocker.CanPickup(uid, entity, showPopup))
             return false;
 
         if (ContainerSystem.TryGetContainingContainer((entity, null, null), out var container))

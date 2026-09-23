@@ -10,8 +10,9 @@
     - state: icon
     - state: powered
       map: [ "enum.PowerDeviceVisualLayers.Powered" ]
-    # - state: decharging # Forge-change
-    #   map: [ "enum.PowerDeviceVisualLayers.Charging" ]
+      visible: false
+    - state: decharging
+      map: [ "enum.PowerDeviceVisualLayers.Charging" ]
       visible: false
   - type: ChameleonProjector
     whitelist:
@@ -44,23 +45,14 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      # Forge-change-start
-      enum.PowerCellSlotVisuals.Enabled:
+      # ItemToggle sets this only while the disguise is drawing power.
+      enum.ToggleableVisuals.Enabled:
         enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
           False: { visible: false }
-      # enum.BatteryVisuals.State:
-      #   enum.PowerDeviceVisualLayers.Powered:
-      #     Full: { visible: true }
-      #     Neither: { visible: true }
-      #     Empty: { visible: false }
-      # enum.BatteryVisuals.Charging:
-      #   enum.PowerDeviceVisualLayers.Charging:
-      #     Charging: { visible: false }
-      #     Decharging: { visible: true }
-      #     Constant: { visible: false }
-      # Forge-change-end
-  - type: BatteryVisuals
+        enum.PowerDeviceVisualLayers.Charging:
+          True: { visible: true }
+          False: { visible: false }
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot

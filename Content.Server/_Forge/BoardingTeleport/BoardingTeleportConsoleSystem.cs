@@ -446,7 +446,11 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             ShuttleBioScanStatus.None,
 
-            true);
+            true,
+            default, // Forge-Change - Cloaking
+            default, // Forge-Change - Cloaking
+            ShuttleCloakingStatus.None, // Forge-Change - Cloaking
+            ShuttleConsoleMapScreenMode.BioScan); // Forge-Change - Cloaking
 
 
 

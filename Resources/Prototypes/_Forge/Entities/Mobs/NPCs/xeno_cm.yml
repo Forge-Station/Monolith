@@ -1,0 +1,715 @@
+# Colonial Marines xenomorphs.
+# CM stats. Hostile AI uses the combat abilities; they are not ghost roles.
+
+- type: entity
+  parent: MobXeno
+  id: MobXenoCMBase
+  abstract: true
+  suffix: Forge, CM, AI
+  components:
+  - type: ForgeXeno
+  - type: LayingDown
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMLarva
+  name: xenomorph larva
+  description: A squirming chestburster. Small, fast, and already angry.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/larva.rsi
+    offset: 0,0.1
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Critical
+      100: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 6
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 12
+    attackRate: 1.4
+  - type: ForgeXenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    regen: 0
+    regenOnWeeds: 0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMLesserDrone
+  name: xenomorph lesser drone
+  description: An undersized hive worker. Still has claws, and a little plasma.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/lesser_drone.rsi
+    offset: 0,0.15
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Critical
+      250: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 4
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 16
+  - type: ForgeXenoPlasma
+    plasma: 400
+    maxPlasma: 400
+    regenOnWeeds: 3
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStab
+    - ActionForgeXenoAcidWeak
+    - ActionForgeXenoPlantWeeds
+    - ActionForgeXenoResinWall
+    - ActionForgeXenoResinMembrane
+    - ActionForgeXenoResinDoor
+    - ActionForgeXenoStickyResin
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMDrone
+  name: xenomorph drone
+  description: A hive builder. 500 health, a full plasma pool, and the resin kit.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/drone.rsi
+    offset: 0,0.2
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 4
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5
+  - type: ForgeXenoPlasma
+    plasma: 1000
+    maxPlasma: 1000
+    regenOnWeeds: 4.5
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStab
+    - ActionForgeXenoAcidWeak
+    - ActionForgeXenoPheromones
+    - ActionForgeXenoTransferPlasma
+    - ActionForgeXenoPlantWeeds
+    - ActionForgeXenoResinWall
+    - ActionForgeXenoResinMembrane
+    - ActionForgeXenoResinDoor
+    - ActionForgeXenoStickyResin
+    - ActionForgeXenoFastResin
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMRunner
+  name: xenomorph runner
+  description: All legs and teeth. Fast enough to close before you finish aiming.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/runner.rsi
+    offset: 0,0.25
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      230: Critical
+      330: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5.5
+    baseSprintSpeed: 10
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5
+    attackRate: 1.4
+  - type: ForgeXenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    regen: 0
+    regenOnWeeds: 0
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStab
+    - ActionForgeXenoHide
+    - ActionForgeXenoLeap
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.32
+        density: 85
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMSentinel
+  name: xenomorph sentinel
+  description: A spit caste. Acid, a slowing glob, and a tail.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/sentinel.rsi
+    offset: 0,0.2
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 4
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5
+  - type: ForgeXenoPlasma
+    plasma: 400
+    maxPlasma: 400
+    regenOnWeeds: 3
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStab
+    - ActionForgeXenoAcidWeak
+    - ActionForgeXenoSpit
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMSpitter
+  name: xenomorph spitter
+  description: A meaner spit caste. The acid is worse, and it has more of it.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/spitter.rsi
+    offset: 0,0.25
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      450: Critical
+      550: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 4
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5
+  - type: ForgeXenoPlasma
+    plasma: 600
+    maxPlasma: 600
+    regenOnWeeds: 4
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStab
+    - ActionForgeXenoAcid
+    - ActionForgeXenoSpit
+    - ActionForgeXenoSpitHeavy
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMBoiler
+  name: xenomorph boiler
+  description: Bloated artillery. Slow, tough, and full of acid.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/boiler.rsi
+    offset: 0,0.3
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.6
+    baseSprintSpeed: 2.5
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 27.5
+  - type: ForgeXenoPlasma
+    plasma: 800
+    maxPlasma: 800
+    regenOnWeeds: 4
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStabHeavy
+    - ActionForgeXenoAcid
+    - ActionForgeXenoSpitHeavy
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 900
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMWarrior
+  name: xenomorph warrior
+  description: A compact killer caste. Punch, lunge, fling.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/warrior.rsi
+    offset: 0,0.25
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 4.2
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 35
+  - type: ForgeXenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    regen: 0
+    regenOnWeeds: 0
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStabHeavy
+    - ActionForgeXenoPunch
+    - ActionForgeXenoLunge
+    - ActionForgeXenoFling
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMLurker
+  name: xenomorph lurker
+  description: A stalker caste. It hides, then it is on top of you.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/lurker.rsi
+    offset: 0,0.25
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      450: Critical
+      550: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 5
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 35
+    attackRate: 0.75
+  - type: ForgeXenoPlasma
+    plasma: 400
+    maxPlasma: 400
+    regenOnWeeds: 4.5
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStabHeavy
+    - ActionForgeXenoPounce
+    - ActionForgeXenoHide
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMDefender
+  name: xenomorph defender
+  description: A living shield. Fortify and the crest barely lets damage through.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/defender.rsi
+    offset: 0,0.2
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      600: Critical
+      700: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.8
+    baseSprintSpeed: 3
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 30
+  - type: ForgeXenoPlasma
+    plasma: 200
+    maxPlasma: 200
+    regenOnWeeds: 2
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStab
+    - ActionForgeXenoFortify
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMRavager
+  name: xenomorph ravager
+  description: A berserker caste. If it reaches you, the experiment is over.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/ravager.rsi
+    offset: 0,0.35
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      650: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.4
+    baseSprintSpeed: 4.6
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 45
+  - type: ForgeXenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    regen: 0
+    regenOnWeeds: 0
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStabHeavy
+    - ActionForgeXenoCharge
+    - ActionForgeXenoStomp
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 1400
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMPraetorian
+  name: xenomorph praetorian
+  description: A royal guard. Acid, spit, and a screech that drops a room.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/praetorian.rsi
+    offset: 0,0.35
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      550: Critical
+      650: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.6
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 35
+  - type: ForgeXenoPlasma
+    plasma: 800
+    maxPlasma: 800
+    regenOnWeeds: 4
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStabHeavy
+    - ActionForgeXenoAcid
+    - ActionForgeXenoSpit
+    - ActionForgeXenoPheromones
+    - ActionForgeXenoScreech
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 1600
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMCrusher
+  name: xenomorph crusher
+  description: A living battering ram. Charge, then stomp whatever is left.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/crusher.rsi
+    offset: 0,0.35
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      700: Critical
+      800: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.66
+    baseSprintSpeed: 3
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
+      types:
+        Structural: 40
+  - type: ForgeXenoPlasma
+    plasma: 400
+    maxPlasma: 400
+    regenOnWeeds: 4
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStabHeavy
+    - ActionForgeXenoCharge
+    - ActionForgeXenoStomp
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.5
+        density: 2400
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+
+- type: entity
+  parent: MobXenoCMDrone
+  id: MobXenoCMHivelord
+  name: xenomorph hivelord
+  description: A swollen builder. More plasma, thicker resin, and the structures to match.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/hivelord.rsi
+    offset: 0,0.3
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      550: Critical
+      650: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.2
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 27.5
+  - type: ForgeXenoPlasma
+    plasma: 1200
+    maxPlasma: 1200
+    regenOnWeeds: 5
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStab
+    - ActionForgeXenoAcid
+    - ActionForgeXenoPheromones
+    - ActionForgeXenoTransferPlasma
+    - ActionForgeXenoPlantWeeds
+    - ActionForgeXenoResinWall
+    - ActionForgeXenoResinMembrane
+    - ActionForgeXenoResinDoor
+    - ActionForgeXenoStickyResin
+    - ActionForgeXenoFastResin
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMCarrier
+  name: xenomorph carrier
+  description: A walking egg rack. The hive's logistics caste, with claws.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/carrier.rsi
+    offset: 0,0.3
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      450: Critical
+      550: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.5
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 25
+  - type: ForgeXenoPlasma
+    plasma: 600
+    maxPlasma: 600
+    regenOnWeeds: 3.5
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStab
+    - ActionForgeXenoLayEgg
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMBurrower
+  name: xenomorph burrower
+  description: A digging caste. It plants tunnels and weeds, then leaves.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/burrower.rsi
+    offset: 0,0.2
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      450: Critical
+      550: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 4
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 27.5
+  - type: ForgeXenoPlasma
+    plasma: 600
+    maxPlasma: 600
+    regenOnWeeds: 4
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStab
+    - ActionForgeXenoPlantWeeds
+
+- type: entity
+  parent: MobXenoCMBase
+  id: MobXenoCMQueen
+  name: xenomorph queen
+  description: The hive mother. Screech, acid, construction, and a gutting tail.
+  components:
+  - type: Sprite
+    sprite: _CM/Mobs/Xenonids/queen.rsi
+    offset: 0,0.4
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.4
+    baseSprintSpeed: 2.5
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
+  - type: ForgeXenoPlasma
+    plasma: 1000
+    maxPlasma: 1000
+    regenOnWeeds: 4
+  - type: ForgeXenoAi
+    actions:
+    - ActionForgeXenoRest
+    - ActionForgeXenoTailStabQueen
+    - ActionForgeXenoAcid
+    - ActionForgeXenoSpit
+    - ActionForgeXenoPheromones
+    - ActionForgeXenoScreech
+    - ActionForgeXenoGut
+    - ActionForgeXenoZoom
+    - ActionForgeXenoTransferPlasma
+    - ActionForgeXenoPlantWeeds
+    - ActionForgeXenoResinWall
+    - ActionForgeXenoResinMembrane
+    - ActionForgeXenoResinDoor
+    - ActionForgeXenoLayEgg
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.5
+        density: 4000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer

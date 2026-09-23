@@ -185,6 +185,23 @@ public partial class SeedData
     [DataField] public float Potency = 1f;
 
     /// <summary>
+    ///     Forge: if greater than zero, harvesting always yields exactly this many
+    ///     produce entities — the count is taken directly from this field,
+    ///     ignoring <see cref="Yield"/>, yieldMod (fertilizers, tray bonuses)
+    ///     and mutations. Zero (default) disables the override: the harvest
+    ///     count falls back to the regular <see cref="Yield"/>-based calculation.
+    /// </summary>
+    [DataField] public int FixedSingleYield = 0; // Forge-Change
+
+    /// <summary>
+    ///     chance (0..1) that harvest actually spawns produce.
+    ///     1 = always (default), 0.5 = 50% chance, 0 = never.
+    ///     checked for each product.
+    /// </summary>
+    [DataField]
+    public float HarvestChance = 1f; // Forge-Change
+
+    /// <summary>
     ///     If true, cannot be harvested for seeds. Balances hybrids and
     ///     mutations.
     /// </summary>
@@ -341,6 +358,8 @@ public partial class SeedData
 
             Endurance = Endurance,
             Yield = Yield,
+            FixedSingleYield = FixedSingleYield, // Forge-Change
+            HarvestChance = HarvestChance, // Forge-Change
             Lifespan = Lifespan,
             Maturation = Maturation,
             Production = Production,
@@ -416,6 +435,8 @@ public partial class SeedData
 
             Endurance = Endurance,
             Yield = Yield,
+            FixedSingleYield = other.FixedSingleYield, // Forge-Change
+            HarvestChance = other.HarvestChance, // Forge-Change
             Lifespan = Lifespan,
             Maturation = Maturation,
             Production = Production,

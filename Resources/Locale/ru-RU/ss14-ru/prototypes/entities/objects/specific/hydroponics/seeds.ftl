@@ -146,3 +146,5 @@ ent-AvocadoSeeds = пакет семян (авокадо)
     .desc = Эти семена — косточки.
 ent-WorldPeaSeeds = пакет семян (горох мира)
     .desc = Эти довольно крупные семена испускают успокаивающее голубое свечение.
+ent-BluespaceTomatoSeeds = пакет семян (блюспейс томат)
+    .desc = { ent-SeedBase.desc }

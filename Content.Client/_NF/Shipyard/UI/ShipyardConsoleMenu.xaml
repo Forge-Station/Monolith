@@ -27,8 +27,11 @@
         </BoxContainer>
         <BoxContainer Orientation="Vertical">
             <BoxContainer Orientation="Horizontal">
-                <Label Text="{Loc 'shipyard-console-appraisal-label'}"
+                <!-- Forge-change-start -->
+                <Label Name="ShipAppraisalKeyLabel"
+                    Text="{Loc 'shipyard-console-appraisal-label'}"
                     StyleClasses="LabelKeyText" />
+                <!-- Forge-change end-->
                 <Label Name="ShipAppraisalLabel"
                     Text="{Loc 'shipyard-console-no-deed'}" />
             </BoxContainer>

@@ -1,5 +1,5 @@
 ent-OrganXenoBase = xenomorph gland
-    .desc = A wet gland cut from a xenomorph. Whatever it knew how to do, it still does. A foreign body will take no more than two.
+    .desc = A wet gland cut from a xenomorph. It is silent in a hand or a pocket: a surgeon has to graft it into a body. A foreign body will take no more than two.
 ent-OrganXenoRest = xenomorph rest gland
     .desc = A slow gland. The owner can lie down and knit itself back together.
 ent-OrganXenoTail = xenomorph tail gland
@@ -49,8 +49,9 @@ ent-OrganXenoStomp = xenomorph stomp gland
 ent-OrganXenoEgg = xenomorph ovipositor gland
     .desc = Grows an egg.
 
-xeno-graft-implant-self = Graft into yourself
-xeno-graft-extract = Extract { $organ }
+xeno-graft-examine = Silent in hand. Graft surgically: patient down → scalpel → Start surgery → open ribcage → Graft Xenomorph Gland (gland in hand) → cauterize. Two max. No plasma for people; hide and combat wait ~1 min.
 xeno-graft-full = This body already carries two glands. A third will not take.
 xeno-graft-xeno = A xenomorph grows its own glands. It will not take a harvested one.
 xeno-graft-done = The gland takes.
+xeno-graft-need-hand = Hold a xenomorph gland in your hand.
+xeno-graft-insert-fail = The gland would not seat. Try again.

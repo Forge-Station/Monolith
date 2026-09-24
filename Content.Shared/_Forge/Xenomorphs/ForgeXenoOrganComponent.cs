@@ -1,3 +1,4 @@
+using Content.Shared._Shitmed.Medical.Surgery.Tools;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -5,18 +6,28 @@ namespace Content.Shared._Forge.Xenomorphs;
 
 /// <summary>
 /// A harvested gland. Its actions belong to whoever is hosting it:
-/// the xenomorph that grew it, a person holding it, or a body it was grafted into.
+/// the xenomorph that grew it, or a body a surgeon grafted it into.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class ForgeXenoOrganComponent : Component
+public sealed partial class ForgeXenoOrganComponent : Component, ISurgeryToolComponent
 {
-    [DataField(required: true), AutoNetworkedField]
+    // Not required:true — SurgeryStep tool registries instantiate this type as a marker.
+    [DataField, AutoNetworkedField]
     public List<EntProtoId> Actions = new();
 
     /// <summary>Spawned action entities. Not the host's copy.</summary>
     public List<EntityUid> ActionEntities = new();
 
     public EntityUid? Host;
+
+    [DataField]
+    public string ToolName { get; set; } = "a xenomorph gland";
+
+    [DataField]
+    public float Speed { get; set; } = 1f;
+
+    [DataField]
+    public bool? Used { get; set; }
 }
 
 /// <summary>
@@ -30,14 +41,4 @@ public sealed partial class ForgeXenoOrganHostComponent : Component
 
     [DataField(required: true)]
     public List<EntProtoId> Organs = new();
-}
-
-/// <summary>
-/// A person carrying grafted xenomorph glands. The xenomorph's own organs do not use this.
-/// </summary>
-[RegisterComponent]
-public sealed partial class ForgeXenoGraftHostComponent : Component
-{
-    public const string ContainerId = "xeno_grafts";
-    public const int MaxGrafts = 2;
 }

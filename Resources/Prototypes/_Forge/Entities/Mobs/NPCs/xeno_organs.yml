@@ -1,19 +1,21 @@
 # Glands that carry a caste's abilities. A xenomorph grows them;
-# butchering drops each one with a 5% chance. Holding the gland grants the actions.
-# A person can graft one into a humanoid body. Two glands at most, counting ones still in the hands.
+# butchering drops each one with a 5% chance. A hand or a pocket grants nothing.
+# A surgeon grafts one into a humanoid torso (ribcage open). Two glands at most.
 
 - type: entity
   parent: BaseItem
   id: OrganXenoBase
   abstract: true
   name: xenomorph gland
-  description: A wet gland cut from a xenomorph. Whatever it knew how to do, it still does.
+  description: A wet gland cut from a xenomorph. Silent until a surgeon grafts it into a body.
   components:
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
     state: stomach
   - type: Item
     size: Small
+  - type: Organ
+    slotId: xeno_graft_a
   - type: ForgeXenoOrgan
     actions: []
 

@@ -143,3 +143,46 @@
   - type: GuideHelp
     guides:
     - Genetics
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: MachineGeneticsServer
+  name: DNA server
+  description: Stores gene sequences isolated on this grid. Other stations cannot read it.
+  components:
+  - type: GeneticsServer
+  - type: Sprite
+    sprite: Structures/Machines/server.rsi
+    layers:
+      - state: server
+      - state: variant-research
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: ExtensionCableReceiver
+  - type: Machine
+    board: GeneticsServerMachineCircuitboard
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Appearance
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/server_fans.ogg
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: GuideHelp
+    guides:
+    - Genetics

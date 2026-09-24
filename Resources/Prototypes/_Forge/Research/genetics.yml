@@ -12,6 +12,7 @@
   recipeUnlocks:
   - DnaModifierScannerMachineCircuitboard
   - GeneticsConsoleComputerCircuitboard
+  - GeneticsServerMachineCircuitboard
   technologyPrerequisites:
   - BiochemicalStasis
   position: -5, 12

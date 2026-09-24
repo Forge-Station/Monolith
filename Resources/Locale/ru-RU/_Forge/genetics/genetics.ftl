@@ -299,6 +299,7 @@ genetics-injector-examine-gene = Содержит: {$gene}
 genetics-injector-no-genome = У {$target} нет генома для изменения.
 genetics-steel-no-mutate = Сталь не мутирует.
 genetics-injector-success = Инъектор щёлкает, переписывая геном {$target}.
+genetics-no-server = На этом гриде нет сервера ДНК. Последовательность не записана.
 
 # Сущности
 
@@ -310,6 +311,10 @@ ent-DnaModifierScannerMachineCircuitboard = ДНК-модификатор (ма�
     .desc = Печатная плата для ДНК-модификатора.
 ent-GeneticsConsoleComputerCircuitboard = консоль генетики (консольная плата)
     .desc = Печатная плата для консоли генетики.
+ent-MachineGeneticsServer = сервер ДНК
+    .desc = Хранит последовательности генов, выделенные на этом гриде. Другие станции их не видят.
+ent-GeneticsServerMachineCircuitboard = сервер ДНК (машинная плата)
+    .desc = Печатная плата для сервера ДНК.
 ent-DnaInjector = ДНК-инъектор
     .desc = Одноразовый шприц, который вписывает изолированный ген в живой геном — или вырезает его.
 ent-DnaInjectorFilledHulk = ДНК-инъектор

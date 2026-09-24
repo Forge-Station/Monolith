@@ -59,6 +59,7 @@
     DefenseStructure: XenoHiveCore
     Mining: Xenos
     Megafauna: MobXenoCMQueen
+  maxMobsPerRoom: 5
 
 - type: salvageBiomeMod
   id: ForgeXenoHive

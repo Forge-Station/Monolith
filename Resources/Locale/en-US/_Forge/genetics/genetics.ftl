@@ -299,6 +299,7 @@ genetics-injector-examine-gene = Contains: {$gene}
 genetics-injector-no-genome = {$target} has no genome to modify.
 genetics-steel-no-mutate = Steel does not mutate.
 genetics-injector-success = The injector clicks as it rewrites {$target}'s genome.
+genetics-no-server = No DNA server on this grid. The sequence was not recorded.
 
 # Entities
 
@@ -310,6 +311,10 @@ ent-DnaModifierScannerMachineCircuitboard = DNA modifier scanner machine board
     .desc = A machine printed circuit board for a DNA modifier scanner.
 ent-GeneticsConsoleComputerCircuitboard = genetics console computer board
     .desc = A computer printed circuit board for a genetics console.
+ent-MachineGeneticsServer = DNA server
+    .desc = Stores gene sequences isolated on this grid. Other stations cannot read it.
+ent-GeneticsServerMachineCircuitboard = DNA server machine board
+    .desc = A machine printed circuit board for a DNA server.
 ent-DnaInjector = DNA injector
     .desc = A one-use syringe that writes an isolated gene into a living genome — or strips it out.
 ent-DnaInjectorFilledHulk = DNA injector

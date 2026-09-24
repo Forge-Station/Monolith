@@ -210,7 +210,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (!_prototypes.TryIndex<GenePrototype>(geneId, out var proto))
             return;
 
-        if (!_genetics.IsDiscovered(geneId))
+        if (!_genetics.IsDiscovered(ent, geneId))
             return;
 
         if (requireAssembled)
@@ -237,7 +237,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             return _genetics.TryGetPrintableGene(occupant, branch, requireAssembled, out geneId);
 
         geneId = selectedId;
-        return _prototypes.HasIndex<GenePrototype>(selectedId) && _genetics.IsDiscovered(selectedId);
+        return _prototypes.HasIndex<GenePrototype>(selectedId) && _genetics.IsDiscovered(occupant, selectedId);
     }
 
     public void RecheckRange(EntityUid uid, GeneticsConsoleComponent? console = null)
@@ -318,7 +318,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
                         var active = genome.Genes.TryGetValue(geneId, out var geneState) && geneState.Active;
                         expressed |= active;
 
-                        if (!_genetics.IsDiscovered(geneId))
+                        if (!_genetics.IsDiscovered(uid, geneId))
                             continue;
 
                         discovered = true;
@@ -370,7 +370,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             }
         }
 
-        state.Discoveries = _genetics.GetDiscoveryJournal();
+        state.Discoveries = _genetics.GetDiscoveryJournal(uid);
 
         _ui.SetUiState(uid, GeneticsConsoleUiKey.Key, state);
     }

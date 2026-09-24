@@ -85,11 +85,17 @@ public partial class ShipDrillSystem : EntitySystem
                 coords.Position);
 
             var grids = new List<Entity<MapGridComponent>>();
-            _map.FindGridsIntersecting(_xform.GetMapId(dGrid.Value), worldBox.CalcBoundingBox(), ref grids);
+            // includeMap: false — after IMapManager removal, planet/map-as-grid entities are
+            // returned by default and drilling them freezes (full-map tile/entity queries).
+            _map.FindGridsIntersecting(_xform.GetMapId(dGrid.Value), worldBox.CalcBoundingBox(), ref grids, includeMap: false);
 
             foreach (var grid in grids)
             {
                 if (grid.Owner == dGrid)
+                    continue;
+
+                // Belt-and-suspenders: never treat a map entity as a drillable asteroid grid.
+                if (HasComp<MapComponent>(grid.Owner))
                     continue;
 
                 var tiles = _map.GetTilesIntersecting(grid.Owner, grid.Comp, tileWorldBox);

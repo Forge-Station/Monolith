@@ -26,6 +26,7 @@
   - Chemistry
   - TsfmcEngineering
   - TsfSecApartment
+  - TurretCommandTSF
   accessGroups:
   - TsfGeneralAccess
   special:

@@ -78,6 +78,14 @@
   name: signal-port-name-med-scanner-receiver
   description: signal-port-description-med-scanner-receiver
 
+# New Frontiers - Genetics - DNA modifier scanner link
+# This code is licensed under AGPLv3. See LICENSE
+- type: sinkPort
+  id: GeneticsScannerReceiver
+  name: signal-port-name-genetics-scanner-receiver
+  description: signal-port-description-genetics-scanner-receiver
+# End of modified code
+
 - type: sinkPort
   id: ArtifactAnalyzerReceiver
   name: signal-port-name-artifact-analyzer-receiver

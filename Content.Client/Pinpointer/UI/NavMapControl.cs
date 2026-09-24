@@ -72,6 +72,8 @@ public partial class NavMapControl : MapGridControl
     protected Color BackgroundColor;
     protected float BackgroundOpacity = 0.9f;
     private int _targetFontsize = 8;
+    private VectorFont? _beaconFont;
+    private int _beaconFontSize;
 
     private Dictionary<Vector2i, Vector2i> _horizLines = new();
     private Dictionary<Vector2i, Vector2i> _horizLinesReversed = new();
@@ -461,9 +463,18 @@ public partial class NavMapControl : MapGridControl
         {
             var rectBuffer = new Vector2(5f, 3f);
 
-            // Calculate font size for current zoom level
+            // Calculate font size for current zoom level.
+            // Beacons are on by default, so this runs every frame the map is open.
+            // VectorFont is cached by size inside the font manager, but a new wrapper
+            // every frame still allocates, and each distinct size sticks around for the session.
             var fontSize = Math.Max(1, (int)Math.Round(1 / WorldRange * DefaultDisplayedRange * UIScale * _targetFontsize, 0)); // Forge-Change
-            var font = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), fontSize);
+            if (_beaconFont == null || _beaconFontSize != fontSize)
+            {
+                _beaconFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), fontSize);
+                _beaconFontSize = fontSize;
+            }
+
+            var font = _beaconFont;
 
             foreach (var beacon in _navMap.Beacons.Values)
             {

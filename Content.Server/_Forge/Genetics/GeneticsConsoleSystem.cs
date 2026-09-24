@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server._Forge.Genetics.Components;
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Power.EntitySystems;
@@ -43,46 +42,67 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
     private void OnInit(Entity<GeneticsConsoleComponent> ent, ref ComponentInit args)
     {
-        _deviceLink.EnsureSourcePorts(ent, GeneticsConsoleComponent.ScannerPort);
+        _deviceLink.EnsureSourcePorts(ent, GeneticsConsoleComponent.ScannerPort, GeneticsConsoleComponent.ServerPort);
     }
 
     private void OnMapInit(Entity<GeneticsConsoleComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp<DeviceLinkSourceComponent>(ent, out var source))
-            return;
-
-        foreach (var port in source.Outputs.Values.SelectMany(static ports => ports))
-        {
-            if (!TryComp<DnaModifierScannerComponent>(port, out var scanner))
-                continue;
-
-            ent.Comp.Scanner = port;
-            scanner.ConnectedConsole = ent;
-        }
-
+        RefreshLinks(ent);
         RecheckRange(ent);
         UpdateUserInterface(ent);
     }
 
     private void OnNewLink(Entity<GeneticsConsoleComponent> ent, ref NewLinkEvent args)
     {
-        if (!TryComp<DnaModifierScannerComponent>(args.Sink, out var scanner) ||
-            args.SourcePort != GeneticsConsoleComponent.ScannerPort)
+        if (args.SourcePort != GeneticsConsoleComponent.ScannerPort &&
+            args.SourcePort != GeneticsConsoleComponent.ServerPort)
             return;
 
-        ent.Comp.Scanner = args.Sink;
-        scanner.ConnectedConsole = ent;
+        RefreshLinks(ent);
         RecheckRange(ent);
         UpdateUserInterface(ent);
     }
 
     private void OnPortDisconnected(Entity<GeneticsConsoleComponent> ent, ref PortDisconnectedEvent args)
     {
-        if (args.Port != GeneticsConsoleComponent.ScannerPort)
+        if (args.Port != GeneticsConsoleComponent.ScannerPort &&
+            args.Port != GeneticsConsoleComponent.ServerPort)
             return;
 
-        ent.Comp.Scanner = null;
+        RefreshLinks(ent);
+        RecheckRange(ent);
         UpdateUserInterface(ent);
+    }
+
+    private void RefreshLinks(Entity<GeneticsConsoleComponent> ent)
+    {
+        if (ent.Comp.Scanner is { } previous
+            && TryComp<DnaModifierScannerComponent>(previous, out var previousScanner)
+            && previousScanner.ConnectedConsole == ent.Owner)
+            previousScanner.ConnectedConsole = null;
+
+        ent.Comp.Scanner = null;
+        ent.Comp.Servers.Clear();
+
+        if (!TryComp<DeviceLinkSourceComponent>(ent, out var source))
+            return;
+
+        foreach (var (sink, links) in source.LinkedPorts)
+        {
+            foreach (var (sourcePort, _) in links)
+            {
+                if (sourcePort == GeneticsConsoleComponent.ScannerPort
+                    && TryComp<DnaModifierScannerComponent>(sink, out var scanner))
+                {
+                    ent.Comp.Scanner = sink;
+                    scanner.ConnectedConsole = ent;
+                }
+
+                if (sourcePort == GeneticsConsoleComponent.ServerPort
+                    && HasComp<GeneticsServerComponent>(sink))
+                    ent.Comp.Servers.Add(sink);
+            }
+        }
     }
 
     private void OnAnchor(Entity<GeneticsConsoleComponent> ent, ref AnchorStateChangedEvent args)

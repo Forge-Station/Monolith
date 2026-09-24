@@ -73,6 +73,12 @@
   name: signal-port-name-genetics-scanner-sender
   description: signal-port-description-genetics-scanner-sender
   defaultLinks: [ GeneticsScannerReceiver ]
+
+- type: sourcePort
+  id: GeneticsServerSender
+  name: signal-port-name-genetics-server-sender
+  description: signal-port-description-genetics-server-sender
+  defaultLinks: [ GeneticsServerReceiver ]
 # End of modified code
 
 - type: sourcePort

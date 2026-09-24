@@ -31,6 +31,13 @@
   id: Genetics
   name: guide-entry-genetics
   text: "/ServerInfo/_Forge/Guidebook/Medical/Genetics.xml"
+  children:
+  - GeneticsGenes
+
+- type: guideEntry
+  id: GeneticsGenes
+  name: guide-entry-genetics-genes
+  text: "/ServerInfo/_Forge/Guidebook/Medical/GeneticsGenes.xml"
 # End of modified code
 
 - type: guideEntry

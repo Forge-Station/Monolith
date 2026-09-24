@@ -1,5 +1,6 @@
 # Glands that carry a caste's abilities. A xenomorph grows them;
 # butchering drops each one with a 5% chance. Holding the gland grants the actions.
+# A person can graft one into a humanoid body. Two glands at most, counting ones still in the hands.
 
 - type: entity
   parent: BaseItem

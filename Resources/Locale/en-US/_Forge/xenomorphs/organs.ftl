@@ -1,5 +1,5 @@
 ent-OrganXenoBase = xenomorph gland
-    .desc = A wet gland cut from a xenomorph. Whatever it knew how to do, it still does.
+    .desc = A wet gland cut from a xenomorph. Whatever it knew how to do, it still does. A foreign body will take no more than two.
 ent-OrganXenoRest = xenomorph rest gland
     .desc = A slow gland. The owner can lie down and knit itself back together.
 ent-OrganXenoTail = xenomorph tail gland
@@ -48,3 +48,9 @@ ent-OrganXenoStomp = xenomorph stomp gland
     .desc = A charge and a stomp.
 ent-OrganXenoEgg = xenomorph ovipositor gland
     .desc = Grows an egg.
+
+xeno-graft-implant-self = Graft into yourself
+xeno-graft-extract = Extract { $organ }
+xeno-graft-full = This body already carries two glands. A third will not take.
+xeno-graft-xeno = A xenomorph grows its own glands. It will not take a harvested one.
+xeno-graft-done = The gland takes.

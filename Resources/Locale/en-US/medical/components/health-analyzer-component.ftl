@@ -11,6 +11,8 @@ health-analyzer-window-entity-temperature-text = Temperature:
 health-analyzer-window-entity-blood-level-text = Blood Level:
 health-analyzer-window-entity-status-text = Status:
 health-analyzer-window-entity-damage-total-text = Total Damage:
+health-analyzer-window-entity-genes-text = Active genes:
+health-analyzer-window-gene-text = · {$gene}
 
 health-analyzer-window-damage-group-text = {$damageGroup}: {$amount}
 health-analyzer-window-damage-type-text = {$damageType}: {$amount}

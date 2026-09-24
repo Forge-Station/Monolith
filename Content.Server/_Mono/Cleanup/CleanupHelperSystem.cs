@@ -113,7 +113,7 @@ public sealed partial class CleanupHelperSystem : EntitySystem
         var pos = mapPos.Position;
 
         _gridsFound.Clear();
-        _mapMan.FindGridsIntersecting(mapPos.MapId, new Box2(pos - rangeVec, pos + rangeVec), ref _gridsFound, true);
+        _mapMan.FindGridsIntersecting(mapPos.MapId, new Box2(pos - rangeVec, pos + rangeVec), ref _gridsFound, approx: true, includeMap: false);
 
         return _gridsFound.Count > 0;
     }

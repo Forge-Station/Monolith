@@ -90,7 +90,11 @@ public sealed partial class GhostGui : UIWidget
 
         if (roles != null)
         {
-            GhostRolesButton.Text = Loc.GetString("ghost-gui-ghost-roles-button", ("count", roles));
+            var rolesText = Loc.GetString("ghost-gui-ghost-roles-button", ("count", roles));
+            // Button.Text always invalidates measure, even when the string is unchanged.
+            if (GhostRolesButton.Text != rolesText)
+                GhostRolesButton.Text = rolesText;
+
             if (roles > 0)
             {
                 GhostRolesButton.StyleClasses.Add(StyleBase.ButtonCaution);
@@ -101,24 +105,36 @@ public sealed partial class GhostGui : UIWidget
             }
         }
 
-        TargetWindow.Populate();
+        // Rebuilding every warp button dirties the UI even while the window is closed.
+        if (TargetWindow.IsOpen)
+            TargetWindow.Populate();
 
         CryosleepReturnButton.Disabled = !canUncryo;
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
     {
+        string text;
+        bool disabled;
+
         if (_respawnTime is null || _gameTiming.CurTime > _respawnTime)
         {
-            GhostRespawnButton.Text = Loc.GetString("ghost-gui-respawn-button-allowed");
-            GhostRespawnButton.Disabled = false;
+            text = Loc.GetString("ghost-gui-respawn-button-allowed");
+            disabled = false;
         }
         else
         {
             double delta = (_respawnTime.Value - _gameTiming.CurTime).TotalSeconds;
-            GhostRespawnButton.Text = Loc.GetString("ghost-gui-respawn-button-denied", ("time", $"{delta:f1}"));
-            GhostRespawnButton.Disabled = true;
+            text = Loc.GetString("ghost-gui-respawn-button-denied", ("time", $"{delta:f1}"));
+            disabled = true;
         }
+
+        // This runs every frame while ghosted. An unchanged label still invalidates the whole HUD.
+        if (GhostRespawnButton.Text != text)
+            GhostRespawnButton.Text = text;
+
+        if (GhostRespawnButton.Disabled != disabled)
+            GhostRespawnButton.Disabled = disabled;
     }
 
     protected override void Dispose(bool disposing)

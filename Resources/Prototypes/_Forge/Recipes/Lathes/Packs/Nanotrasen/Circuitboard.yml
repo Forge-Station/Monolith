@@ -17,3 +17,6 @@
   - MedicalBiofabMachineBoard 
   - CloningPodMachineCircuitboard  
   - MedicalScannerMachineCircuitboard
+  - DnaModifierScannerMachineCircuitboard
+  - GeneticsConsoleComputerCircuitboard
+  - GeneticsServerMachineCircuitboard

@@ -1,0 +1,27 @@
+- type: entity
+  abstract: true
+  id: BaseClothingHelmetMassScanner
+  name: base helmet mass scanner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RadarConsole
+    followEntity: true
+    noRotate: true
+  - type: DetectionRangeMultiplier
+    infraredMultiplier: 0.5
+    visualMultiplier: 0.75
+  - type: ActivatableUI
+    key: enum.RadarConsoleUiKey.Key
+    inHandsOnly: false # Mono
+    singleUser: true
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: ActionGrant
+    actions:
+    - ActionHardsuitMassScanner
+  - type: ItemActionGrant
+    actions:
+    - ActionHardsuitMassScanner
+    activeIfWorn: true

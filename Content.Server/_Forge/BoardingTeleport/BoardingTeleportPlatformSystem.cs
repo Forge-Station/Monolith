@@ -542,7 +542,7 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
 
         TickPendingCountdownFeedback(ent.Owner, ent.Comp, user);
 
-        if (!returning && console != null)
+        if (!returning && console != null && mode != BoardingTeleportInsertionMode.Stealth)
             TrySpawnDetectionBlip(ent.Owner, ent.Comp, console);
 
         if (returning)

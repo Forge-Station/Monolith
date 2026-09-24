@@ -1,0 +1,172 @@
+# Colonial Marines / RMC-14 resin walls for mapping.
+# Sprites taken from RMC-14 (cmss13 xeno wall masks).
+
+- type: entity
+  parent: BaseWallTierOne
+  id: WallXeno
+  name: xeno chitin wall
+  description: Hardened alien chitin grown into a solid barrier.
+  suffix: Forge, Xeno, Chitin
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/xeno.rsi
+  - type: Icon
+    sprite: Structures/Walls/xeno.rsi
+  - type: IconSmooth
+    key: chitin
+    base: solid
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection: MeatBulletImpact
+    soundTypes:
+      Heat:
+        collection: MeatLaserImpact
+
+- type: entity
+  parent: WallReinforcedChitin
+  id: WallXenoReinforced
+  name: reinforced xeno chitin wall
+  description: Layers of alien chitin packed until they rival bulkheads.
+  suffix: Forge, Xeno, Chitin, Reinforced
+
+- type: entity
+  parent: BaseWallTierOne
+  id: WallXenoResin
+  name: resin wall
+  description: Weird slime solidified into a wall.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _CM/Structures/Xenos/xeno_resin_wall.rsi
+    state: resin
+  - type: IconSmooth
+    key: xeno_resin
+    base: resin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 900
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection: MeatBulletImpact
+    soundTypes:
+      Heat:
+        collection: MeatLaserImpact
+  - type: ArmorThickness
+    thickness: 4
+
+- type: entity
+  parent: WallXenoResin
+  id: WallXenoResinThick
+  name: thick resin wall
+  description: Weird slime packed into a thick, stubborn wall.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _CM/Structures/Xenos/xeno_resin_wall.rsi
+    state: thickresin
+  - type: IconSmooth
+    key: xeno_resin
+    base: thickresin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1350
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+  - type: ArmorThickness
+    thickness: 6
+
+- type: entity
+  parent: WallXenoResin
+  id: WallXenoMembrane
+  name: resin membrane
+  description: Translucent slime that still holds atmosphere.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _CM/Structures/Xenos/xeno_resin_wall.rsi
+    state: membrane
+  - type: IconSmooth
+    key: xeno_resin
+    base: membrane
+  - type: Occluder
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+        density: 1000
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+
+- type: entity
+  parent: WallXenoMembrane
+  id: WallXenoMembraneThick
+  name: thick resin membrane
+  description: Thick slime that is only just translucent enough to let light through.
+  suffix: Forge, Xeno, CM
+  components:
+  - type: Sprite
+    sprite: _CM/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _CM/Structures/Xenos/xeno_resin_wall.rsi
+    state: thickmembrane
+  - type: IconSmooth
+    key: xeno_resin
+    base: thickmembrane
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+
+- type: entity
+  parent: WallXenoResin
+  id: WallXenoResinIndestructible
+  suffix: Forge, Xeno, CM, Indestructible
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:

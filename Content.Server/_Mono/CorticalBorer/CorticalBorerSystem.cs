@@ -326,11 +326,17 @@ public sealed partial class CorticalBorerSystem : SharedCorticalBorerSystem
             infestedComp.OrigininalMindId = null;
         }
 
+        // Forge: GhostTakeoverAvailable re-opens the worm on MindRemoved via deferred
+        // ReregisterGhostRole. Disable that before TransferTo so controlling a mindless
+        // host (e.g. Alexander) does not spawn a "deputy worm" ghost role.
+        if (TryComp<GhostRoleComponent>(worm, out var ghostRole))
+        {
+            _ghost.SetReregisterOnGhost((worm, ghostRole), false);
+            _ghost.UnregisterGhostRole((worm, ghostRole));
+        }
+
         comp.ControlingHost = true;
         _mind.TransferTo(wormMind, host);
-
-        if (TryComp<GhostRoleComponent>(worm, out var ghostRole))
-            _ghost.UnregisterGhostRole((worm, ghostRole)); // prevent players from taking the worm role once mind isn't in the worm
 
         // add the end control and vomit egg action
         if (_actions.AddAction(host, "ActionEndControlHost") is {} actionEnd)
@@ -399,14 +405,21 @@ public sealed partial class CorticalBorerSystem : SharedCorticalBorerSystem
             infestedComp.RemovedReformAction = null;
         }
 
-        if (TryComp<GhostRoleComponent>(worm, out var ghostRole))
-            _ghost.RegisterGhostRole((worm, ghostRole)); // re-enable the ghost role after you return to the body
-
-        // Return everyone to their own bodies
+        // Return everyone to their own bodies before restoring ghost-role availability.
+        // Registering first briefly reopened the empty worm for takeover ("зам червяка").
         if (!TerminatingOrDeleted(infestedComp.BorerMindId))
             _mind.TransferTo(infestedComp.BorerMindId, infestedComp.Borer);
         if (!TerminatingOrDeleted(infestedComp.OrigininalMindId) && infestedComp.OrigininalMindId.HasValue)
             _mind.TransferTo(infestedComp.OrigininalMindId.Value, host);
+
+        // Forge: restore legitimate ghost-role reregistration once possession ends.
+        // Only reopen if the worm body is still vacant (e.g. original mind deleted).
+        if (TryComp<GhostRoleComponent>(worm, out var ghostRole))
+        {
+            _ghost.SetReregisterOnGhost((worm, ghostRole), true);
+            if (!_mind.TryGetMind(worm, out _, out _))
+                _ghost.RegisterGhostRole((worm, ghostRole));
+        }
 
         if (!infestedComp.HadHivemind)
             _collective.RemoveCollectiveMind(host, worm.Comp.HivemindChannel);

@@ -302,6 +302,17 @@ public sealed partial class SalvageSystem
                 break;
             }
         }
+
+        // Forge-Change-Start: the hive is always offered as its own extra-hard column.
+        var hiveIndex = component.NextIndex++;
+        component.Missions[hiveIndex] = new SalvageMissionParams
+        {
+            Index = hiveIndex,
+            MissionType = configs[_random.Next(configs.Count)],
+            Seed = _random.Next(),
+            Difficulty = DifficultyRating.ExtraHard,
+        };
+        // Forge-Change-End
     }
 
     private SalvageExpeditionConsoleState GetState(SalvageExpeditionDataComponent component)

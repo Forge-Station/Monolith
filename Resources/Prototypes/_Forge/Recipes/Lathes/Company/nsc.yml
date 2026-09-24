@@ -68,16 +68,22 @@
   parent: ForgeUniversalSuitT1CompanyRecipe
   id: ClothingOuterHardsuitNexusMilT1
   result: ClothingOuterHardsuitNexusMilT1
+  categories:
+  - NSC
 
 - type: latheRecipe
   parent: ForgeUniversalSuitT2CompanyRecipe
   id: ClothingOuterHardsuitNexusMilT2
   result: ClothingOuterHardsuitNexusMilT2
+  categories:
+  - NSC
 
 - type: latheRecipe
   parent: ForgeEnergyShieldSuitT3CompanyRecipe
   id: ClothingOuterHardsuitNexusMilT3
   result: ClothingOuterHardsuitNexusMilT3
+  categories:
+  - NSC
 
 - type: latheRecipe
   parent: NSCRecipe

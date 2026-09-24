@@ -1,0 +1,145 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+
+- type: entity
+  id: DnaModifierScanner
+  parent: BaseMachinePowered
+  name: DNA modifier scanner
+  description: A bulky scanner that exposes a subject's genome for irradiation and isolation. Pour unstable mutagen into it to fuel the emitter.
+  components:
+  - type: DnaModifierScanner
+  - type: SolutionContainerManager
+    solutions:
+      mutagen:
+        maxVol: 1000
+  - type: RefillableSolution
+    solution: mutagen
+  - type: ExaminableSolution
+    solution: mutagen
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: BasicDevice
+  - type: DeviceList
+  - type: DeviceLinkSink
+    ports:
+    - GeneticsScannerReceiver
+  - type: Sprite
+    sprite: Structures/Machines/scanner.rsi
+    snapCardinals: true
+    layers:
+    - state: open
+      map: [machineLayer]
+    - state: idle_unlit
+      map: [terminalLayer]
+  - type: GenericVisualizer
+    visuals:
+      enum.MedicalScannerVisuals.Status:
+        machineLayer:
+          Off: {state: "closed"}
+          Open: {state: "open"}
+          Red: {state: "occupied"}
+          Death: {state: "occupied"}
+          Green: {state: "occupied"}
+          Yellow: {state: "occupied"}
+        terminalLayer:
+          Off: {state: "off_unlit"}
+          Open: {state: "idle_unlit"}
+          Red: {state: "red_unlit"}
+          Death: {state: "off_unlit"}
+          Green: {state: "idle_unlit"}
+          Yellow: {state: "maint_unlit"}
+  - type: Physics
+    bodyType: Static
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: ContainerContainer
+    containers:
+      scanner-bodyContainer: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StrongMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Machine
+    board: DnaModifierScannerMachineCircuitboard
+  - type: WiresPanel
+  - type: Appearance
+  - type: Climbable
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - scanner-bodyContainer
+  - type: GuideHelp
+    guides:
+    - Genetics
+
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerGeneticsConsole
+  name: genetics console
+  description: Isolates, activates, and prints DNA injectors from a linked DNA modifier scanner.
+  components:
+  - type: GeneticsConsole
+  - type: DeviceList
+  - type: DeviceNetwork
+    deviceNetId: Wired
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: dna
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: ApcPowerReceiver
+    powerLoad: 800
+  - type: Computer
+    board: GeneticsConsoleComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#1f8c28"
+  - type: DeviceLinkSource
+    range: 4
+    ports:
+    - GeneticsScannerSender
+  - type: ActivatableUI
+    key: enum.GeneticsConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.GeneticsConsoleUiKey.Key:
+        type: GeneticsConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Pai
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: GuideHelp
+    guides:
+    - Genetics

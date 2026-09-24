@@ -255,7 +255,7 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
     private bool HasCollisions(MapId mapId, Box2 point)
     {
         _mapGrids.Clear();
-        _mapManager.FindGridsIntersecting(mapId, point, ref _mapGrids);
+        _mapManager.FindGridsIntersecting(mapId, point, ref _mapGrids, includeMap: false);
         return _mapGrids.Count > 0;
     }
 

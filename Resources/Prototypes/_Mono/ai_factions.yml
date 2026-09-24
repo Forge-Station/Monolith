@@ -2,6 +2,11 @@
   id: CC
   hostile:
   - SimpleHostile
+  # Forge-Change-start
+  - Dragon
+  - Xeno
+  - Xenoborg
+  # Forge-Change-end
   - Zombie
   - Chimera
 

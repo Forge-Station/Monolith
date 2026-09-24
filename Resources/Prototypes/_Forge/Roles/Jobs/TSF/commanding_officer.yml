@@ -31,6 +31,8 @@
   access:
   - TsfmcEngineering
   - TsfSecApartment
+  - TurretCommandTSF
+  - TurretCommandTSFShuttle
   special:
   - !type:AddComponentSpecial
     components:

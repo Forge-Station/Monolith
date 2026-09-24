@@ -284,9 +284,14 @@ public sealed partial class ExplosionSystem
         var box = Box2.CenteredAround(epicenter.Position, new Vector2(radius, radius));
 
         _grids.Clear();
-        _map.FindGridsIntersecting(epicenter.MapId, box, ref _grids);
+        // includeMap: false — after IMapManager removal, map-as-grid (planets) would otherwise
+        // become the explosion reference grid and freeze on edge/tile flood-fill (AME / ship bombs).
+        _map.FindGridsIntersecting(epicenter.MapId, box, ref _grids, includeMap: false);
         foreach (var grid in _grids)
         {
+            if (HasComp<MapComponent>(grid.Owner))
+                continue;
+
             if (TryComp(grid.Owner, out PhysicsComponent? physics) && physics.FixturesMass > mass)
             {
                 mass = physics.Mass;
@@ -306,15 +311,18 @@ public sealed partial class ExplosionSystem
         radius *= 4;
         box = Box2.CenteredAround(epicenter.Position, new Vector2(radius, radius));
         _grids.Clear();
-        _map.FindGridsIntersecting(epicenter.MapId, box, ref _grids);
-        var grids = _grids.Select(x => x.Owner).ToList();
+        _map.FindGridsIntersecting(epicenter.MapId, box, ref _grids, includeMap: false);
+        var grids = _grids.Where(x => !HasComp<MapComponent>(x.Owner)).Select(x => x.Owner).ToList();
 
         if (referenceGrid != null)
             return (grids, referenceGrid, radius);
 
-        // We still don't have are reference grid. So lets also look in the enlarged region
+        // We still don't have a reference grid. So lets also look in the enlarged region
         foreach (var grid in _grids)
         {
+            if (HasComp<MapComponent>(grid.Owner))
+                continue;
+
             if (TryComp(grid.Owner, out PhysicsComponent? physics) && physics.Mass > mass)
             {
                 mass = physics.FixturesMass;

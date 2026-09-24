@@ -282,6 +282,10 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
             }
 
             expedition.DungeonLocation = dungeonOffset;
+
+            // Forge-Change: carve a resin-door tunnel from the dungeon out into the hive caves.
+            if (biome != null)
+                _biome.ConnectXenoHive(mapUid, grid, biome, dungeon);
         }
 
         // Frontier: get map bounding box

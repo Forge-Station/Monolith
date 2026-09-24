@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Unknown, recolored to blue, split the display animation into its own layer by rouden_ (discord). Side states by user hinzomnia (discord).",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+  "states": [
+    {
+      "name": "icon-1",
+      "directions": 4
+    },
+    {
+      "name": "unlit",
+      "directions": 4,
+      "delays": [
+        [
+          1.8,
+          0.1,
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          1.8,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          6.0
+        ],
+        [
+          6.0
+        ],
+        [
+          6.0
+        ]
+      ]
+    }
+  ]
+}

@@ -44,6 +44,7 @@ guide-entry-brute =
     механических повреждений
 guide-entry-botanicals = Ботаника
 guide-entry-cloning = Клонирование
+guide-entry-genetics = Генетика
 guide-entry-cryogenics = Криогеника
 guide-entry-survival = Выживание
 guide-entry-technologies = Технологии

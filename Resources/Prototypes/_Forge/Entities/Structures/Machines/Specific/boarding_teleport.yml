@@ -122,7 +122,7 @@
   parent: BoardingTeleportEngine
   id: BoardingTeleportEngineTier3
   name: military bluespace boarding engine
-  description: A hardened drive that can pierce tier-1 and tier-2 ship shields while establishing a boarding lock.
+  description: A hardened drive. Live shields add less scatter and risk than a civilian engine.
   components:
   - type: BoardingTeleportEngine
     range: 400
@@ -133,7 +133,7 @@
   parent: BoardingTeleportEngine
   id: BoardingTeleportEngineAdvanced
   name: advanced bluespace boarding engine
-  description: Extended acquisition range and tier-2 shield penetration.
+  description: Extended acquisition range. Punches a matched shield with only a light jolt to the lock.
   components:
   - type: BoardingTeleportEngine
     range: 750
@@ -253,7 +253,7 @@
           Charging: { visible: true, state: charging, shader: unshaded }
   - type: BoardingTeleportPlatform
     cooldown: 30
-    departureDelay: 15
+    departureDelay: 12
     returnWindowSeconds: 240
     maxReturnDistance: 550
     warmupEffect: BoardingTeleportWarmupEffect
@@ -291,7 +291,7 @@
   components:
   - type: BoardingTeleportPlatform
     cooldown: 25
-    departureDelay: 12
+    departureDelay: 10
     returnWindowSeconds: 210
     maxReturnDistance: 800
   - type: ApcPowerReceiver
@@ -309,7 +309,7 @@
     experimentalScatterControl: true
     experimentalRisk: true
     cooldown: 20
-    departureDelay: 10
+    departureDelay: 8
     returnWindowSeconds: 180
     maxReturnDistance: 2000
   - type: ApcPowerReceiver

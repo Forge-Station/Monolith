@@ -559,11 +559,50 @@
   packetPrototype: BlueTomatoSeeds
   productPrototypes:
     - FoodBlueTomato
+  mutationPrototypes: # Forge-Change
+  - bluespaceTomato # Forge-Change
   harvestRepeat: Repeat
   lifespan: 25
   maturation: 8
   production: 6
   yield: 2
+  potency: 10
+  waterConsumption: 0.60
+  nutrientConsumption: 0.70
+  idealLight: 8
+  idealHeat: 298
+  splatPrototype: PuddleSplatter
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 5
+      PotencyDivisor: 20
+    SpaceLube:
+      Min: 5
+      Max: 15
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+# Forge-Change-start
+- type: seed
+  id: bluespaceTomato
+  name: seeds-bluespacetomato-name
+  noun: seeds-noun-seeds
+  displayName: seeds-bluespacetomato-display-name
+  plantRsi: _Forge/Objects/Specific/bluespace_tomato.rsi
+  packetPrototype: BluespaceTomatoSeeds
+  productPrototypes:
+  - FoodBluespaceTomato
+  harvestRepeat: Repeat
+  lifespan: 25
+  maturation: 8
+  production: 6
+  yield: 1
+  fixedSingleYield: 1 # Forge-Change
+  harvestChance: 0.50 # Forge-Change
   potency: 10
   waterConsumption: 0.60
   nutrientConsumption: 0.70

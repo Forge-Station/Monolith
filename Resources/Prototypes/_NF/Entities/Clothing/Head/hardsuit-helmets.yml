@@ -65,7 +65,7 @@
 
 #ERT Mail Carrier Hardsuit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Normal] # Forge-change add ClothingNightVision2Normal and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Normal, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision2Normal and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary, add BaseClothingHelmetMassScanner
   id: ClothingHeadHelmetHardsuitERTMailCarrier
   name: ERT mail carrier hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.

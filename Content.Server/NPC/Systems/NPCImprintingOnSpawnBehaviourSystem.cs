@@ -24,6 +24,11 @@ public sealed partial class NPCImprintingOnSpawnBehaviourSystem : SharedNPCImpri
 
     private void OnMapInit(Entity<NPCImprintingOnSpawnBehaviourComponent> imprinting, ref MapInitEvent args)
     {
+        // Forge-Change-start
+        if (imprinting.Comp.SpawnFriendsSearchRadius <= 0)
+            return;
+        // Forge-Change-end
+
         HashSet<EntityUid> friends = new();
         _lookup.GetEntitiesInRange(imprinting, imprinting.Comp.SpawnFriendsSearchRadius, friends);
 

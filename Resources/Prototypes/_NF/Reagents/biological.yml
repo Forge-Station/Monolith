@@ -78,3 +78,91 @@
         - !type:GenericStatusEffect
           key: Stutter
           component: ScrambledAccent
+
+
+- type: reagent
+  parent: Blood
+  id: SpaceSnakesAcid
+  name: snake's acid
+  group: Biological
+  desc: Looks like acid...
+  flavor: bitter
+  color: "#364500"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-pungent
+  footstepSound:
+    collection: FootstepBlood
+    params:
+      volume: 6
+  metabolisms:
+    Narcotic:
+      effects:
+      - !type:MovespeedModifier
+        conditions:
+        walkSpeedModifier: 0.35
+        sprintSpeedModifier: 0.45
+      - !type:PopupMessage
+        type: Local
+        messages:
+        - generic-reagent-effect-burning-eyes
+        - generic-reagent-effect-burning-eyes-a-bit
+        - generic-reagent-effect-tearing-up
+        - norepinephricacid-effect-eyelids
+        - norepinephricacid-effect-eyes-itch
+        - norepinephricacid-effect-vision-fade
+        - norepinephricacid-effect-vision-fail
+        probability: 0.08
+      - !type:PopupMessage
+        visualType: MediumCaution
+        type: Local
+        messages:
+        - norepinephricacid-effect-eye-disconnect
+        - norepinephricacid-effect-eye-pain
+        - norepinephricacid-effect-darkness
+        - norepinephricacid-effect-blindness
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+        probability: 0.03      
+      - !type:GenericStatusEffect
+        key: TemporaryBlindness
+        component: TemporaryBlindness
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+    Poison:
+        effects:
+        - !type:Emote
+          emote: Yawn
+          showInChat: true
+          probability: 0.1
+        - !type:MovespeedModifier
+          conditions:
+          - !type:OrganType
+            type: Yowie
+            shouldHave: false
+          walkSpeedModifier: 0.35
+          sprintSpeedModifier: 0.45
+        - !type:GenericStatusEffect
+          conditions:
+          - !type:OrganType 
+            type: Yowie
+            shouldHave: false
+          key: Drowsiness
+          component: Drowsiness
+          time: 1
+          type: Add
+          refresh: false
+        - !type:GenericStatusEffect
+          conditions:
+          - !type:OrganType 
+            type: Yowie
+            shouldHave: false
+          - !type:ReagentThreshold
+            reagent: Gestalzitine
+            min: 30
+          key: ForcedSleep
+          component: ForcedSleeping
+          refresh: false
+          type: Add
+

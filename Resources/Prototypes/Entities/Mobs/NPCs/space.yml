@@ -360,8 +360,8 @@
       solutions:
         melee:
           reagents:
-          - ReagentId: NorepinephricAcid
-            Quantity: 90
+          - ReagentId: SpaceSnakesAcid
+            Quantity: 100
     - type: MeleeChemicalInjector
       solution: melee
       transferAmount: 6

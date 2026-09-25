@@ -804,6 +804,15 @@
     - id: MonoDroneSpawnerT2Middle
       prob: 1.5
       orGroup: wreck
+    - id: SpawnMobForgeVoidWormAI
+      prob: 0.06
+      orGroup: wreck
+    - id: SpawnMobForgeVoidDrakeAI
+      prob: 0.04
+      orGroup: wreck
+    - id: SpawnMobForgeVoidMedusaAI
+      prob: 0.05
+      orGroup: wreck
 
 - type: spaceBiome
   id: MonoWorldgenVeryFarT2Far
@@ -832,4 +841,13 @@
       orGroup: wreck
     - id: MonoDroneSpawnerT2Far
       prob: 1
+      orGroup: wreck
+    - id: SpawnMobForgeVoidWormAI
+      prob: 0.12
+      orGroup: wreck
+    - id: SpawnMobForgeVoidDrakeAI
+      prob: 0.08
+      orGroup: wreck
+    - id: SpawnMobForgeVoidMedusaAI
+      prob: 0.10
       orGroup: wreck

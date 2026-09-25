@@ -1,0 +1,10 @@
+- type: damageContainer
+  id: Leviathan
+  supportedGroups:
+  - Brute
+  - Burn
+  - Toxin
+  - Airloss
+  - Genetic
+  supportedTypes:
+  - Structural

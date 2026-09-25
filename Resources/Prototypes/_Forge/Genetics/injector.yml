@@ -15,8 +15,6 @@
     sprite: Objects/Specific/Medical/hypospray.rsi
     size: Small
   - type: DnaInjector
-  - type: StaticPrice
-    price: 250
 
 - type: entity
   parent: DnaInjector

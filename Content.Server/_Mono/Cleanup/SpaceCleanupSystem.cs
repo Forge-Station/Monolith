@@ -71,6 +71,11 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
         if (!_xformQuery.TryGetComponent(uid, out var xform) || xform.MapUid == null)
             return false;
 
+        // Forge-Change: expedition planets are the map grid. Rivers, structures and room
+        // fills parented to that grid are not space debris, even when no shuttle is nearby.
+        if (xform.GridUid != null)
+            return false;
+
         return xform.ParentUid == xform.MapUid;
     }
 
@@ -84,7 +89,8 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
         if (!_xformQuery.TryGetComponent(uid, out var xform))
             return false;
 
-        var inSpace = xform.ParentUid == xform.MapUid;
+        // Forge-Change: only true vacuum counts as space. A planet map is its own grid.
+        var inSpace = xform.GridUid == null && xform.ParentUid == xform.MapUid;
         if (!inSpace && !GetWallStuck((uid, xform)))
             return false;
 

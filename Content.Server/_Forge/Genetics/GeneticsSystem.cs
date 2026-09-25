@@ -26,6 +26,7 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly GeneticsServerSystem _servers = default!;
 
     private const string SteelDamageContainer = "Silicon";
 
@@ -166,8 +167,10 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
         RaiseLocalEvent(uid, ref ev);
         MaybeGoHostile(GetMorphedBody(uid), proto);
 
-        var alreadyKnown = IsDiscovered(geneId);
-        Discover(geneId);
+        var alreadyKnown = IsDiscovered(uid, geneId);
+        var recorded = Discover(uid, geneId);
+        if (!recorded)
+            _popup.PopupEntity(Loc.GetString("genetics-no-server"), uid);
         if (alreadyKnown)
         {
             _popup.PopupEntity(Loc.GetString("genetics-gene-activated", ("gene", Loc.GetString(proto.Name))), uid);
@@ -239,7 +242,7 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
         var ev = new GeneDeactivatedEvent(geneId);
         RaiseLocalEvent(uid, ref ev);
 
-        if (IsDiscovered(geneId))
+        if (IsDiscovered(uid, geneId))
             _popup.PopupEntity(Loc.GetString("genetics-gene-deactivated", ("gene", Loc.GetString(proto.Name))), uid);
         else
             _popup.PopupEntity(Loc.GetString("genetics-gene-reverted"), uid);

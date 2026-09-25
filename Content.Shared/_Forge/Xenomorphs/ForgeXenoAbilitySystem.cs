@@ -295,6 +295,10 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
 
         if (!TryComp<ForgeXenoPlasmaComponent>(args.Performer, out var source) || source.Plasma < args.Amount)
         {
+            // A person has nothing to give. Spend the click so the grafted cooldown still applies.
+            if (!HasComp<ForgeXenoComponent>(args.Performer))
+                args.Handled = true;
+
             Deny(args.Performer);
             return;
         }
@@ -554,6 +558,23 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
+        // Grafted hosts have no plasma pool and a long action cooldown instead of a build do-after.
+        // The do-after + BreakOnMove combination cancelled every attempt and still burned the minute wait.
+        if (!HasComp<ForgeXenoComponent>(args.Performer))
+        {
+            if (!_plasma.TryUse(args.Performer, args.PlasmaCost))
+            {
+                Deny(args.Performer);
+                return;
+            }
+
+            if (_net.IsServer)
+                Spawn(args.Prototype, args.Target.SnapToGrid(EntityManager));
+
+            args.Handled = true;
+            return;
+        }
+
         if (!TryComp<ForgeXenoPlasmaComponent>(args.Performer, out var plasma) || plasma.Plasma < args.PlasmaCost)
         {
             Deny(args.Performer);
@@ -582,6 +603,12 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
             return;
 
         if (!_plasma.TryUse(args.User, args.PlasmaCost))
+        {
+            Deny(args.User);
+            return;
+        }
+
+        if (_net.IsClient)
             return;
 
         var coords = GetCoordinates(args.Target).SnapToGrid(EntityManager);

@@ -1,0 +1,79 @@
+# Surgical install/remove for harvested xenomorph glands (max 2 on a torso).
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepInsertXenoGraft
+  name: Graft xenomorph gland
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: ForgeXenoOrgan
+    duration: 6
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/manipulation.rsi
+    state: insertion
+  - type: SurgeryInsertXenoGraftStep
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepAffixXenoGraft
+  name: Seal graft
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Cautery
+    duration: 2
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/cautery.rsi
+    state: cautery
+  - type: SurgeryAffixXenoGraftStep
+  - type: SurgeryStepEmoteEffect
+  - type: SurgeryDamageChangeEffect
+    damage:
+      types:
+        Heat: -5
+    sleepModifier: 2
+
+- type: entity
+  parent: SurgeryStepRemoveOrgan
+  id: SurgeryStepRemoveXenoGraft
+  name: Extract xenomorph gland
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryRemoveXenoGraftStep
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryInsertXenoGraft
+  name: Graft Xenomorph Gland
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepInsertXenoGraft
+    - SurgeryStepAffixXenoGraft
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryXenoGraftCondition
+    inverse: true
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryRemoveXenoGraft
+  name: Extract Xenomorph Gland
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepRemoveXenoGraft
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryXenoGraftCondition

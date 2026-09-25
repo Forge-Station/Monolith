@@ -72,6 +72,7 @@ guide-entry-brute = Advanced Brute Medication
 guide-entry-botanicals = Botanicals
 guide-entry-cloning = Cloning
 guide-entry-genetics = Genetics
+guide-entry-genetics-genes = Genes
 guide-entry-cryogenics = Cryogenics
 guide-entry-science = Science
 guide-entry-technologies = Technologies

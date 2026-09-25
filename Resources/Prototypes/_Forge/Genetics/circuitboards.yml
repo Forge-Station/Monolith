@@ -28,3 +28,17 @@
     state: cpu_medical
   - type: ComputerBoard
     prototype: ComputerGeneticsConsole
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: GeneticsServerMachineCircuitboard
+  name: DNA server machine board
+  description: A machine printed circuit board for a DNA server.
+  components:
+  - type: Sprite
+    state: medical
+  - type: MachineBoard
+    prototype: MachineGeneticsServer
+    stackRequirements:
+      Glass: 2
+      Cable: 2

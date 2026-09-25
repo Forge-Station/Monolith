@@ -2,6 +2,7 @@
   id: NuclearReactorSmallConstructable
   parent: NuclearReactorSmall
   name: small nuclear reactor
+  suffix: Constructable
   components:
   - type: Fixtures
     fixtures:

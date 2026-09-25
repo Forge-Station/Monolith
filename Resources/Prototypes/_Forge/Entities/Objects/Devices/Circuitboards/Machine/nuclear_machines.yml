@@ -34,17 +34,18 @@
   - type: MachineBoard
     prototype: TurbineSmallConstructable
     frameSize: 3x2
-    minimumStockPartRating: 1
+    minimumStockPartRating: 4
     flatpackable: false
     requirements:
-      Capacitor: 5
+      Capacitor: 10
     stackRequirements:
-      Steel: 200
+      Steel: 100
       Plastic: 50
       Plasteel: 50
       Plastitanium: 20
       Copper: 50
       Gold: 20
+      CableHV: 30
   - type: Tag
     tags:
     - MachineBoard3x2

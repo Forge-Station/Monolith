@@ -2,6 +2,7 @@
   id: TurbineSmallConstructable
   parent: TurbineSmall
   name: small gas turbine
+  suffix: Constructable
   components:
   - type: Fixtures
     fixtures:

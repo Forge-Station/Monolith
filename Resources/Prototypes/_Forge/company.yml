@@ -41,3 +41,17 @@
   description: renegate-resistance-description
   color: "#6B2D2D"
   whitelisted: true
+
+- type: company
+  id: Longsword
+  form: Protagonist
+  name: Longsword International
+  description: company-longsword-description
+  note: company-longsword-note
+  color: "#FFFFE0"
+  icon: Nexus
+  whitelisted: true
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyLongsword

@@ -1,0 +1,24 @@
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyLongsword
+  name: Longsword International encryption key
+  description: An encryption key used by LI.
+  components:
+    - type: EncryptionKey
+      channels:
+        - LongswordInternational
+      defaultChannel: LongswordInternational
+    - type: Item
+      sprite: _Forge/Objects/Longsword/longsword_encryption_key.rsi
+    - type: Sprite
+      sprite: _Forge/Objects/Longsword/longsword_encryption_key.rsi
+      layers:
+        - state: crypt_longsword
+        - state: longsword_label
+
+- type: radioChannel
+  id: LongswordInternational
+  name: chat-radio-longsword
+  keycode: 'l'
+  frequency: 2749
+  color: "#FFFFE0"

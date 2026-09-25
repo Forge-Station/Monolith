@@ -1,0 +1,361 @@
+- type: entity
+  id: WeaponRifleLIR12
+  name: LIR-12 Alglorian (5.56x45 mm)
+  parent: BaseWeaponRifle
+  description: Modern rifle for Longsword International.
+  suffix: Longsword
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Longsword/longswordautomatrifle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item # Mono
+    size: Huge
+    sprite: _Forge/Objects/Longsword/longswordautomatrifle.rsi
+  - type: Clothing
+    sprite: _Forge/Objects/Longsword/longswordautomatrifle.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: GunWieldBonus
+    minAngle: -33
+    maxAngle: -35
+  - type: Gun
+    minAngle: 35
+    maxAngle: 45
+    angleIncrease: 0.5
+    angleDecay: 9
+    cameraRecoilScalar: 0.5
+    fireRate: 4
+    projectileSpeed: 30 
+    availableModes:
+    - FullAuto
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: Magazine556x45mmFMJ
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - Magazine556x45mmFMJ
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge556x45mmFMJ
+        priority: 1
+        whitelist:
+          tags:
+            - Cartridge556x45mmFMJ
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: SpeedModifiedOnWield # Mono
+    walkModifier: 1
+    sprintModifier: 1
+  - type: StaticPrice
+    price: 800
+    vendPrice: 12500
+
+
+- type: entity
+  id: Bullet10x99mmCaseless
+  name: bullet (10x99mm Caseless)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+        Structural: 250
+    armorPenetration: 0.6
+
+- type: entity
+  id: Bullet10x99mmPlaststeel
+  name: bullet (10x99mm Caseless)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+        Structural: 380
+    armorPenetration: 0.7
+
+- type: entity
+  id: Bullet10x99mmTrash
+  name: bullet (10x99mm trash bullet)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+        Structural: 150
+    armorPenetration: 0.3
+  
+- type: Tag
+  id: Magazine10x99mmCaseless
+
+- type: Tag
+  id: Cartridge10x99mmCaseless
+
+- type: Tag
+  id: PowerCellLIR31
+
+- type: entity
+  id: BaseCartridge10x99mmCaseless
+  name: cartridge 10x99mm
+  description: Cartridge? created by Longsword International.
+  parent: BaseCartridge
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - Cartridge10x99mmCaseless
+  - type: HitscanAmmo
+    casingPrototype: ChemicalSlop
+  - type: Sprite
+    noRot: false
+    sprite: _Mono/Objects/Weapons/Guns/Ammunition/Casings/big_ammo_casing_steel.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 1
+
+
+
+- type: entity
+  name: LIR-31 Reqonqista (10x99mm)
+  parent: [BaseWeaponRifle, BaseGunWieldable, BaseC2ContrabandUnredeemable]
+  id: WeaponLIR31
+  description: Longsword International Relsotrone, it use ammo and energy.
+  suffix: Longsword
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Longsword/longswordrailgun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: GunWieldBonus
+    minAngle: -2
+    maxAngle: -1
+  - type: Gun
+    minAngle: 1
+    maxAngle: 1.5
+    angleIncrease: 20
+    angleDecay: 9
+    fireRate: 0.8
+    selectedMode: SemiAuto
+    availableModes: SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/batrifle_cock.ogg
+  
+  - type: GunBatteryAmmo
+    fireCost: 50
+  - type: PowerCellSlot
+    cellSlotId: gun_battery
+    fitsInCharger: true
+  
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineLIR31
+        insertSound: /Audio/Weapons/Guns/MagIn/sfrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/hpistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - Magazine10x99mmCaseless
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge10x99mmCaseless
+        priority: 1
+        whitelist:
+          tags:
+          - Cartridge10x99mmCaseless
+      
+      gun_battery:
+        name: Battery
+        startingItem: PowerCellLIR31
+        insertSound: /Audio/Weapons/Guns/MagIn/sfrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/hpistol_magout.ogg
+        priority: 3
+        whitelist:
+          tags:
+          - PowerCellLIR31
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      gun_battery: !type:ContainerSlot   
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: _Forge/Objects/Longsword/longswordrailgunequipped.rsi
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,7,2
+    sprite: _Forge/Objects/Longsword/longswordrailgunequipped.rsi
+  - type: StaticPrice
+    price: 2400
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.6
+    sprintModifier: 0.45
+  - type: WieldDelay
+    baseDelay: 1.2
+    modifiedDelay: 1.2
+    preventFiring: true
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 7
+    pvsIncrease: 0.7
+  - type: GunRequiresWield
+  - type: LaserPointer
+    targetedColor: "#463C5EFF"
+    defaultColor: "#463C5EFF"
+
+- type: entity
+  id: MagazineLIR31
+  name: LIR-31 magazine
+  description: Magazine for LIR-31. 10 ammo.
+  parent: [BaseItem, RecyclableItemSteelTiny]
+  components:
+  - type: Tag
+    tags:
+      - Magazine10x99mmCaseless
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    proto: Cartridge10x99mmCaseless
+    capacity: 10
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge10x99mmCaseless
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Ammunition/Magazine/134x92mm/shenzhen_5rnd_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: MagazineLIR31Pls
+  name: LIR-31 plaststeel magazin
+  parent: MagazineLIR31
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge10x99mmPlaststeel
+    capacity: 10
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge10x99mmCaseless
+
+- type: entity
+  id: MagazineLIR31trs
+  name: LIR-31 trash magazin
+  parent: MagazineLIR31
+  components:
+  - type: BallisticAmmoProvider
+    proto: Cartridge10x99mmTrash
+    capacity: 10
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge10x99mmCaseless
+
+- type: entity
+  id: PowerCellLIR31
+  name: power cell LIR-31
+  description: Power cell for 
+  parent: PowerCellSmall 
+  components:
+  - type: Battery
+    maxCharge: 500
+    startingCharge: 500
+  - type: StaticPrice
+    price: 300
+  - type: Tag
+    tags:
+     - PowerCellLIR31
+
+- type: entity
+  id: Cartridge10x99mmCaseless
+  name: cartridge (10x99mm)
+  parent: BaseCartridge10x99mmCaseless
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet10x99mmCaseless
+    deleteOnSpawn: true
+
+- type: entity
+  id: Cartridge10x99mmPlaststeel
+  name: plaststeel cartridge (10x99mm)
+  parent: BaseCartridge10x99mmCaseless
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet10x99mmPlaststeel
+    deleteOnSpawn: true
+
+- type: entity
+  id: Cartridge10x99mmTrash
+  name: trash cartridge (10x99mm)
+  parent: BaseCartridge10x99mmCaseless
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet10x99mmTrash
+    deleteOnSpawn: true

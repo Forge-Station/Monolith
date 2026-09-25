@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprted by Tatarus? longsword flag-capitan",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "crypt_longsword"
+    },
+    {
+      "name": "longsword_label"
+    }
+  ]
+}

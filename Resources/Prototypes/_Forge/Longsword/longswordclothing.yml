@@ -1,0 +1,29 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBereLI
+  name: LI beret
+  description: LI-beret-desc
+  suffix: Longsword
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Longsword/beret_longsword.rsi
+  - type: Clothing
+    sprite: _Forge/Objects/Longsword/beret_longsword.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 250
+
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitLI
+  name: longsword jumpsuit
+  description: A jumpsuit made of strong material, providing Angel protection.
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Longsword/longsword_uniform.rsi
+  - type: Clothing
+    sprite: _Forge/Objects/Longsword/longsword_uniform.rsi
+  - type: Item
+    sprite: _Forge/Objects/Longsword/longsword_uniform.rsi
+

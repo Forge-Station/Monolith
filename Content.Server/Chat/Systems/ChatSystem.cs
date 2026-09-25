@@ -144,42 +144,24 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
     }
 
-    /// <summary>
-    ///     Sends an in-character chat message to relevant clients.
-    /// </summary>
-    /// <param name="source">The entity that is speaking</param>
-    /// <param name="message">The message being spoken or emoted</param>
-    /// <param name="desiredType">The chat type</param>
-    /// <param name="hideChat">Whether or not this message should appear in the chat window</param>
-    /// <param name="hideLog">Whether or not this message should appear in the adminlog window</param>
-    /// <param name="shell"></param>
-    /// <param name="player">The player doing the speaking</param>
-    /// <param name="nameOverride">The name to use for the speaking entity. Usually this should just be modified via <see cref="TransformSpeakerNameEvent"/>. If this is set, the event will not get raised.</param>
-    public void TrySendInGameICMessage(
+    /// <inheritdoc />
+    public override void TrySendInGameICMessage(
         EntityUid source,
         string message,
         InGameICChatType desiredType,
-        bool hideChat, bool hideLog = false,
+        bool hideChat,
+        bool hideLog = false,
         IConsoleShell? shell = null,
-        ICommonSession? player = null, string? nameOverride = null,
+        ICommonSession? player = null,
+        string? nameOverride = null,
         bool checkRadioPrefix = true,
         bool ignoreActionBlocker = false)
     {
         TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, hideLog, shell, player, nameOverride, checkRadioPrefix, ignoreActionBlocker);
     }
 
-    /// <summary>
-    ///     Sends an in-character chat message to relevant clients.
-    /// </summary>
-    /// <param name="source">The entity that is speaking</param>
-    /// <param name="message">The message being spoken or emoted</param>
-    /// <param name="desiredType">The chat type</param>
-    /// <param name="range">Conceptual range of transmission, if it shows in the chat window, if it shows to far-away ghosts or ghosts at all...</param>
-    /// <param name="shell"></param>
-    /// <param name="player">The player doing the speaking</param>
-    /// <param name="nameOverride">The name to use for the speaking entity. Usually this should just be modified via <see cref="TransformSpeakerNameEvent"/>. If this is set, the event will not get raised.</param>
-    /// <param name="ignoreActionBlocker">If set to true, action blocker will not be considered for whether an entity can send this message.</param>
-    public void TrySendInGameICMessage(
+    /// <inheritdoc />
+    public override void TrySendInGameICMessage(
         EntityUid source,
         string message,
         InGameICChatType desiredType,

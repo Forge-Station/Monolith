@@ -71,6 +71,11 @@
         whitelist:
           tags:
           - VinylSleeveFit
+  #Forge-Change-Start
+  - type: Tag
+    tags:
+      - VinylSleeve
+  #Forge-Change-end
 
 # Vinyls
 #Forge-Change-remove: moved to _Forge

@@ -1,0 +1,50 @@
+- type: entity
+  id: NuclearReactorSmallMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: small nuclear reactor machine board
+  description: A machine printed circuit board for a small nuclear reactor.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: NuclearReactorSmallConstructable
+    frameSize: 3x3
+    minimumStockPartRating: 4
+    flatpackable: false
+    requirements:
+      MatterBin: 10
+    stackRequirements:
+      Steel: 200
+      Plastic: 50
+      Plasteel: 100
+      Plastitanium: 20
+      ReinforcedPlasmaGlass: 25
+  - type: Tag
+    tags:
+    - MachineBoard3x3
+
+- type: entity
+  id: TurbineSmallMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: small turbine machine board
+  description: A machine printed circuit board for a small turbine.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: TurbineSmallConstructable
+    frameSize: 3x2
+    minimumStockPartRating: 1
+    flatpackable: false
+    requirements:
+      Capacitor: 5
+    stackRequirements:
+      Steel: 200
+      Plastic: 50
+      Plasteel: 50
+      Plastitanium: 20
+      Copper: 50
+      Gold: 20
+  - type: Tag
+    tags:
+    - MachineBoard3x2

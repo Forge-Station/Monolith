@@ -1,0 +1,46 @@
+- type: entity
+  id: TurbineSmallConstructable
+  parent: TurbineSmall
+  name: small gas turbine
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-1.5,2.5,0.5"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Turbine
+    arrowPrototype: TurbineSmallFlowArrowConstructable
+  - type: Sprite
+    offset: 1, -0.5
+  - type: Machine
+    board: TurbineSmallMachineCircuitboard
+  - type: Construction
+    graph: Machine3x2
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+
+- type: entity
+  id: TurbineSmallFlowArrowConstructable
+  parent: TurbineFlowArrow
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      layers:
+        - state: arrow
+          rotation: 180
+          offset: 2, -2
+        - state: arrow
+          rotation: 0
+          offset: 0, -2

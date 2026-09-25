@@ -1,6 +1,8 @@
 - type: latheRecipePack
   id: ReactorCircuitboards
   recipes:
+  - NuclearReactorSmallMachineCircuitboard #Forge-Change
+  - TurbineSmallMachineCircuitboard #Forge-Change
   - NuclearFabricatorMachineCircuitboard
   - NuclearCentrifugeMachineCircuitboard
   - NuclearReactorMonitorComputerCircuitboard

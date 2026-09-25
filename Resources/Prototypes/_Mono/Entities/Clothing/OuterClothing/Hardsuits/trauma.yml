@@ -28,8 +28,8 @@
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.45
   - type: ClothingSpeedModifier
-    walkModifier: 1.15
-    sprintModifier: 1.15
+    walkModifier: 1.1 # Forge-change 1.15-> 1.1
+    sprintModifier: 1.1 # Forge-change 1.15-> 1.1
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -73,7 +73,7 @@
       coefficients:
         Blunt: 0.5 # Forge-change 0.6-> 0.5
         Slash: 0.5 # Forge-change 0.6-> 0.5
-        Piercing: 0.45 # Forge-change 0.4-> 0.45
+        Piercing: 0.4
         Heat: 0.45 # Forge-change 0.55-> 0.45
         Radiation: 0.5
         Caustic: 0.6

@@ -23487,3 +23487,13 @@ Entries:
       message: Expanded botany tools — full plant analyzer readouts that stay open in a pocket, AgroScan PDA cartridge, botanical health glasses, hydroponics tray console, unique phytochemicals, harvest gas bursts, atmospheric growing needs, rare radioactive and vine-grab mutations, and sterile swabs in the biogenerator.
   id: 2587
   time: '2026-08-27T04:00:00.0000000+00:00'
+- author: Forge
+  changes:
+    - type: Tweak
+      message: Bluespace boarding no longer needs the target shield down. A live shield adds risk and scatter; a stronger drive punches through cleaner.
+    - type: Tweak
+      message: Boarding charges are shorter, stealth jumps do not mark the target on radar, and a lock lasts longer before it rots.
+    - type: Tweak
+      message: The bluespace boarding scrambler is no longer open research. It drops as a rare precursor tech disk on the same salvage table as shield disks.
+  id: 2588
+  time: '2026-09-22T02:35:00.0000000+00:00'

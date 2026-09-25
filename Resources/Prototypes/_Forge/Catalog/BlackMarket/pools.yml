@@ -1,0 +1,84 @@
+- type: weightedRandom
+  id: BlackMarketPoolWeapons
+  weights:
+    BMContractADTWeaponMeleePrasatChainsword: 0.3
+    BMContractEnergySwordDouble: 0.5
+    BMContractReinforcedChainsawShield: 1.2
+    BMContractWeaponShotgunBulldog: 1
+    BMContractWeaponLMGHammer: 1.2
+    BMContractWeaponLightMachineGunL6: 0.6
+    BMContractWeaponLauncherChinaLake: 0.7
+    BMContractWeaponRevolverMagnus: 1.2
+    BMContractWeaponDEWBasilisk: 0.2
+    BMContractWeaponDEWCalico: 0.5
+    BMContractWeaponPulsePistol: 0.7
+
+- type: weightedRandom
+  id: BlackMarketPoolArmory
+  weights:
+    BMContractClothingOuterHardsuitERTLeader: 0.1
+    BMContractClothingOuterHardsuitSyndieCommander: 0.1
+    BMContractClothingOuterHardsuitSyndieMedic: 0.8
+    BMContractClothingOuterHardsuitCybersunStealth: 0.3
+    BMContractClothingOuterHardsuitUsspL30: 0.2
+    BMContractClothingOuterHardsuitTSFMCM82c: 1.5
+    BMContractClothingOuterHardsuitRI14: 1
+    BMContractClothingOuterHardsuitTraumaShooter: 0.6
+    BMContractClothingOuterHardsuitSyndie: 0.9
+    BMContractClothingModsuitHeadOfSecurity: 0.9
+    BMContractClothingOuterHardsuitNexusMilT3: 0.4
+#   BMContractClothingModsuitUSSPZastavnik: 0.25
+    BMContractClothingOuterHardsuitERTSecurity: 0.8
+    BMContractClothingOuterModsuitUSSPVaryag: 0.8 #KoT-change-add
+
+- type: weightedRandom
+  id: BlackMarketPoolResources
+  weights:
+    BMContractResourcesSheetSteel: 1
+    BMContractResourcesSheetGlass: 1
+    BMContractResourcesSheetPlastic: 1
+    BMContractResourcesMaterialCloth: 1
+    BMContractResourcesIngotSilver: 1
+    BMContractResourcesIngotGold: 1
+    BMContractResourcesMaterialDiamond: 0.4
+    BMContractResourcesMaterialBluespace: 0.65
+    BMContractResourcesSheetUranium: 1
+    BMContractResourcesSheetPlasma: 1
+    BMContractResourcesMaterialDurathread: 1
+    BMContractResourcesSheetPlasteel: 1
+    BMContractResourcesSheetPlastitanium: 0.5
+    BMContractResourcesSheetIridite10: 0.25
+
+- type: weightedRandom
+  id: BlackMarketPoolOther
+  weights:
+    BMContractOtherResearchDisk35000: 1
+    BMContractOtherResearchDisk65000: 1
+    BMContractOtherResearchDisk100000: 1
+    BMContractOtherEncryptionKeyNfsd: 0.3
+    BMContractOtherEncryptionKeyEmpire: 0.3
+    BMContractOtherEncryptionKeyRenegade: 0.3
+    BMContractOtherEncryptionKeyService: 0.3
+    BMContractOtherEncryptionKeyDrakeIndustries: 0.3
+    BMContractOtherEncryptionKeyNexus: 0.3
+    BMContractOtherEncryptionKeyUllmanIndustries: 0.3
+    BMContractOtherEncryptionKeyHarmony: 0.3
+    BMContractOtherDisciplinesDiskDrakeIndustries1: 0.75
+    BMContractOtherDisciplinesDiskDrakeIndustries2: 0.75
+    BMContractOtherDisciplinesDiskDrakeIndustries3: 0.75
+    BMContractOtherDisciplinesDiskUllman1: 0.75
+    BMContractOtherDisciplinesDiskUllman2: 0.75
+    BMContractOtherDisciplinesDiskNSC1: 0.75
+    BMContractOtherDisciplinesDiskNSC2: 0.75
+    BMContractOtherDisciplinesDiskNSC3: 0.75
+    BMContractOtherDisciplinesDiskNanotrasen1: 0.5
+    BMContractOtherDisciplinesDiskNanotrasen2: 0.5
+    BMContractOtherDisciplinesDiskNanotrasen3: 0.5
+    BMContractOtherDisciplinesDiskHME1: 0.75
+    BMContractOtherDisciplinesDiskHME2: 0.75
+    BMContractOtherSpaceCashCounterfeit: 1.2
+    BMContractOtherPillSpaceDrugs: 1.2
+    BMContractOtherSyringeMorphine: 1
+    BMContractOtherOmnizineChemistryBottle: 0.9
+    BMContractOtherDrinkPremiumRumBottleFull: 1
+    BMContractOtherCircuitImprinterHyperConvectionMachineCircuitboard: 0.25

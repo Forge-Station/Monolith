@@ -23,6 +23,7 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using System.Numerics;
 
 using Content.Server._Mono.Cleanup;
@@ -74,6 +75,10 @@ public sealed partial class ShuttleSystem
     private HashSet<EntityUid> _intersecting = new();
     // for _adminLogSpacing
     private Dictionary<EntityUid, TimeSpan> _impactedAt = new();
+    // One heavy impact pass per grid-pair per tick — fixture contacts after IMapManager/physics
+    // bumps otherwise re-run ThrowEntitiesOnGrid for every overlapping fixture (ram / drill scrape / AME debris).
+    private readonly HashSet<(EntityUid, EntityUid)> _impactsThisTick = new();
+    private GameTick _impactTick;
 
     private void InitializeImpact()
     {
@@ -120,6 +125,22 @@ public sealed partial class ShuttleSystem
         )
             return;
 
+        // Map-as-grid entities must never go through shuttle impact (planet maps after IMapManager removal).
+        if (HasComp<MapComponent>(args.OurEntity) || HasComp<MapComponent>(args.OtherEntity))
+            return;
+
+        if (_impactTick != _gameTiming.CurTick)
+        {
+            _impactTick = _gameTiming.CurTick;
+            _impactsThisTick.Clear();
+        }
+
+        var impactPair = args.OurEntity.CompareTo(args.OtherEntity) <= 0
+            ? (args.OurEntity, args.OtherEntity)
+            : (args.OtherEntity, args.OurEntity);
+        if (!_impactsThisTick.Add(impactPair))
+            return;
+
         var ourBody = args.OurBody;
         var otherBody = args.OtherBody;
 
@@ -144,6 +165,9 @@ public sealed partial class ShuttleSystem
             // Get the velocity in relation to the contact normal
             // If this still causes issues see https://box2d.org/posts/2020/06/ghost-collisions/
             // This should only be a potential problem on chunk seams.
+            if (jungleDiff < float.Epsilon || worldNormal.LengthSquared() < float.Epsilon)
+                continue;
+
             var dotProduct = MathF.Abs(Vector2.Dot(topDiff.Normalized(), worldNormal.Normalized()));
             jungleDiff *= dotProduct;
 
@@ -271,7 +295,8 @@ public sealed partial class ShuttleSystem
         _physics.ApplyLinearImpulse(ent, deltaV * body.FixturesMass, body: body);
 
         // process tile and entity damage
-        ProcessImpactZone(ent, grid, tile, energy, deltaV.Normalized(), radius);
+        var dir = deltaV.LengthSquared() > float.Epsilon ? deltaV.Normalized() : Vector2.Zero;
+        ProcessImpactZone(ent, grid, tile, energy, dir, radius);
 
         // throw every entity on grid if the impulse is not negligible
         if (deltaV.Length() > _minImpulseVelocity)

@@ -30,7 +30,7 @@ public sealed partial class GeneticsSystem
                 continue;
 
             any = true;
-            if (proto.OverlayColor.A > 0)
+            if (proto.ScreenTint && proto.OverlayColor.A > 0)
                 overlay = Blend(overlay, proto.OverlayColor);
 
             if (proto.GlowColor.A > 0 || proto.GlowEnergy > 0)

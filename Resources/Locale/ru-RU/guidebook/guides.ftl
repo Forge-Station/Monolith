@@ -45,6 +45,7 @@ guide-entry-brute =
 guide-entry-botanicals = Ботаника
 guide-entry-cloning = Клонирование
 guide-entry-genetics = Генетика
+guide-entry-genetics-genes = Гены
 guide-entry-cryogenics = Криогеника
 guide-entry-survival = Выживание
 guide-entry-technologies = Технологии

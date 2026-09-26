@@ -45,7 +45,7 @@ public sealed class DnaInjectorSystem : EntitySystem
 
         foreach (var gene in ent.Comp.Genes)
         {
-            if (_genetics.IsDiscovered(gene) && _prototypes.TryIndex(gene, out var proto))
+            if (_prototypes.TryIndex(gene, out var proto))
                 args.PushMarkup(Loc.GetString("genetics-injector-examine-gene", ("gene", Loc.GetString(proto.Name))));
             else
                 args.PushMarkup(Loc.GetString("genetics-injector-examine-gene", ("gene", Loc.GetString("genetics-gene-unknown"))));

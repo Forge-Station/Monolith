@@ -11,7 +11,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Human
@@ -23,7 +22,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Dwarf
@@ -35,7 +33,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Moth
@@ -47,7 +44,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Reptilian
@@ -59,7 +55,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Vox
@@ -71,7 +66,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: SlimePerson
@@ -83,7 +77,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Arachnid
@@ -95,7 +88,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Diona
@@ -107,7 +99,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Vulpkanin
@@ -119,7 +110,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Harpy
@@ -131,7 +121,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Rodentia
@@ -143,7 +132,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Chitinid
@@ -155,7 +143,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Tajaran
@@ -167,7 +154,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Oni
@@ -179,7 +165,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Goblin
@@ -191,7 +176,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Skrell
@@ -203,7 +187,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Demon
@@ -215,7 +198,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Ariral
@@ -227,7 +209,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Resomi
@@ -239,7 +220,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Hydrakin
@@ -251,7 +231,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Felinid
@@ -263,7 +242,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Yowie
@@ -275,7 +253,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Gingerbread
@@ -287,7 +264,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Skeleton
@@ -299,7 +275,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Asakim
@@ -311,7 +286,6 @@
   quality: Neutral
   instability: 26
   sequenceLength: 7
-  overlayColor: "#C8B09050"
   branch: Morphology
   lockBranch: true
   speciesTarget: Protogen

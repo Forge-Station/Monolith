@@ -81,15 +81,12 @@
     maxPlasma: 400
     regenOnWeeds: 3
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoAcidWeak
-    - ActionForgeXenoPlantWeeds
-    - ActionForgeXenoResinWall
-    - ActionForgeXenoResinMembrane
-    - ActionForgeXenoResinDoor
-    - ActionForgeXenoStickyResin
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTail
+    - OrganXenoAcidWeak
+    - OrganXenoResin
 
 - type: entity
   parent: MobXenoCMBase
@@ -120,18 +117,13 @@
     maxPlasma: 1000
     regenOnWeeds: 4.5
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoAcidWeak
-    - ActionForgeXenoPheromones
-    - ActionForgeXenoTransferPlasma
-    - ActionForgeXenoPlantWeeds
-    - ActionForgeXenoResinWall
-    - ActionForgeXenoResinMembrane
-    - ActionForgeXenoResinDoor
-    - ActionForgeXenoStickyResin
-    - ActionForgeXenoFastResin
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTail
+    - OrganXenoAcidWeak
+    - OrganXenoPheromoneTransfer
+    - OrganXenoResinFast
 
 - type: entity
   parent: MobXenoCMBase
@@ -164,11 +156,12 @@
     regen: 0
     regenOnWeeds: 0
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoHide
-    - ActionForgeXenoLeap
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTail
+    - OrganXenoHide
+    - OrganXenoLeap
   - type: Fixtures
     fixtures:
       fix1:
@@ -210,11 +203,11 @@
     maxPlasma: 400
     regenOnWeeds: 3
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoAcidWeak
-    - ActionForgeXenoSpit
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTail
+    - OrganXenoAcidSpit
 
 - type: entity
   parent: MobXenoCMBase
@@ -245,12 +238,11 @@
     maxPlasma: 600
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoAcid
-    - ActionForgeXenoSpit
-    - ActionForgeXenoSpitHeavy
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTail
+    - OrganXenoSpitter
 
 - type: entity
   parent: MobXenoCMBase
@@ -281,11 +273,11 @@
     maxPlasma: 800
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoAcid
-    - ActionForgeXenoSpitHeavy
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTailHeavy
+    - OrganXenoBoiler
   - type: Fixtures
     fixtures:
       fix1:
@@ -328,12 +320,11 @@
     regen: 0
     regenOnWeeds: 0
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoPunch
-    - ActionForgeXenoLunge
-    - ActionForgeXenoFling
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTailHeavy
+    - OrganXenoWarrior
 
 - type: entity
   parent: MobXenoCMBase
@@ -365,11 +356,12 @@
     maxPlasma: 400
     regenOnWeeds: 4.5
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoPounce
-    - ActionForgeXenoHide
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTailHeavy
+    - OrganXenoPounce
+    - OrganXenoHide
 
 - type: entity
   parent: MobXenoCMBase
@@ -400,10 +392,11 @@
     maxPlasma: 200
     regenOnWeeds: 2
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoFortify
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTail
+    - OrganXenoFortify
 
 - type: entity
   parent: MobXenoCMBase
@@ -435,11 +428,11 @@
     regen: 0
     regenOnWeeds: 0
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoCharge
-    - ActionForgeXenoStomp
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTailHeavy
+    - OrganXenoStomp
   - type: Fixtures
     fixtures:
       fix1:
@@ -481,13 +474,12 @@
     maxPlasma: 800
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoAcid
-    - ActionForgeXenoSpit
-    - ActionForgeXenoPheromones
-    - ActionForgeXenoScreech
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTailHeavy
+    - OrganXenoPraetorianAcid
+    - OrganXenoScreech
   - type: Fixtures
     fixtures:
       fix1:
@@ -531,11 +523,11 @@
     maxPlasma: 400
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoCharge
-    - ActionForgeXenoStomp
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTailHeavy
+    - OrganXenoStomp
   - type: Fixtures
     fixtures:
       fix1:
@@ -577,18 +569,13 @@
     maxPlasma: 1200
     regenOnWeeds: 5
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoAcid
-    - ActionForgeXenoPheromones
-    - ActionForgeXenoTransferPlasma
-    - ActionForgeXenoPlantWeeds
-    - ActionForgeXenoResinWall
-    - ActionForgeXenoResinMembrane
-    - ActionForgeXenoResinDoor
-    - ActionForgeXenoStickyResin
-    - ActionForgeXenoFastResin
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTail
+    - OrganXenoAcid
+    - OrganXenoPheromoneTransfer
+    - OrganXenoResinFast
 
 - type: entity
   parent: MobXenoCMBase
@@ -619,10 +606,11 @@
     maxPlasma: 600
     regenOnWeeds: 3.5
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoLayEgg
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTail
+    - OrganXenoEgg
 
 - type: entity
   parent: MobXenoCMBase
@@ -653,10 +641,11 @@
     maxPlasma: 600
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoPlantWeeds
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTail
+    - OrganXenoWeeds
 
 - type: entity
   parent: MobXenoCMBase
@@ -687,21 +676,14 @@
     maxPlasma: 1000
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabQueen
-    - ActionForgeXenoAcid
-    - ActionForgeXenoSpit
-    - ActionForgeXenoPheromones
-    - ActionForgeXenoScreech
-    - ActionForgeXenoGut
-    - ActionForgeXenoZoom
-    - ActionForgeXenoTransferPlasma
-    - ActionForgeXenoPlantWeeds
-    - ActionForgeXenoResinWall
-    - ActionForgeXenoResinMembrane
-    - ActionForgeXenoResinDoor
-    - ActionForgeXenoLayEgg
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoRest
+    - OrganXenoTailQueen
+    - OrganXenoPraetorianAcid
+    - OrganXenoQueen
+    - OrganXenoResin
+    - OrganXenoEgg
   - type: Fixtures
     fixtures:
       fix1:

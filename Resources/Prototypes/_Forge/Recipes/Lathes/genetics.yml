@@ -11,3 +11,8 @@
   parent: BaseCircuitboardRecipe
   id: GeneticsConsoleComputerCircuitboard
   result: GeneticsConsoleComputerCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: GeneticsServerMachineCircuitboard
+  result: GeneticsServerMachineCircuitboard

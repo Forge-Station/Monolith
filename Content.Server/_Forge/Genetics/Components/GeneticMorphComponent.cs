@@ -30,4 +30,19 @@ public sealed partial class GeneticSpeciesSnapshot
 
     [DataField]
     public MarkingSet Markings = new();
+
+    /// <summary>
+    /// Damage modifier the body had before this form. Restored when the gene drops.
+    /// </summary>
+    [DataField]
+    public string? DamageModifierSet;
+
+    [DataField]
+    public bool RevertDamageModifier;
+
+    /// <summary>
+    /// The rewrite stuck. Deactivating the gene does not restore the old species.
+    /// </summary>
+    [DataField]
+    public bool Locked;
 }

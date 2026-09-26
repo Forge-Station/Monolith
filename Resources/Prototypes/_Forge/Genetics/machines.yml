@@ -123,9 +123,10 @@
     energy: 1.6
     color: "#1f8c28"
   - type: DeviceLinkSource
-    range: 4
+    range: 30
     ports:
     - GeneticsScannerSender
+    - GeneticsServerSender
   - type: ActivatableUI
     key: enum.GeneticsConsoleUiKey.Key
   - type: UserInterface
@@ -140,6 +141,56 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: GuideHelp
+    guides:
+    - Genetics
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: MachineGeneticsServer
+  name: DNA server
+  description: Stores gene sequences for consoles linked to it with a multitool or network configurator.
+  components:
+  - type: GeneticsServer
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: BasicDevice
+  - type: DeviceList
+  - type: DeviceLinkSink
+    ports:
+    - GeneticsServerReceiver
+  - type: Sprite
+    sprite: Structures/Machines/server.rsi
+    layers:
+      - state: server
+      - state: variant-research
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: ExtensionCableReceiver
+  - type: Machine
+    board: GeneticsServerMachineCircuitboard
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Appearance
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/server_fans.ogg
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
   - type: GuideHelp
     guides:
     - Genetics

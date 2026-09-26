@@ -28,6 +28,9 @@
         offset: 0
   - type: StaticPrice
     price: 30
+  - type: Tag # Forge-change
+    tags:
+      - NoGridGodmode
 
 - type: entity
   parent: BaseSign

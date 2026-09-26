@@ -1,0 +1,494 @@
+- type: entity
+  parent: BaseWeaponTurret
+  id: BaseWeaponCommandBallisticTurret
+  name: ballistic turret
+  description: A command ballistic turret. It deploys empty; load a cartridge kit before it can fire.
+  abstract: true
+  components:
+  - type: Gun
+    fireRate: 6
+    projectileSpeed: 55
+    maxAngle: 15
+    minAngle: 4
+    angleIncrease: -1.2
+    angleDecay: -4
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+  - type: MagazineAmmoProvider
+    autoEject: false
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineTurretBallistic
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+
+- type: entity
+  parent: BaseWeaponTurret
+  id: BaseWeaponShotgunTurret
+  name: shotgun turret
+  description: A short-range sentry that fires a spread of buckshot. It deploys empty; load a buckshot kit before it can fire.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    drawdepth: Mobs
+    layers:
+    - state: syndie_shotgun
+  - type: Gun
+    fireRate: 0.85
+    projectileSpeed: 28
+    maxAngle: 26
+    minAngle: 14
+    angleIncrease: 1.5
+    angleDecay: 3
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+  - type: MagazineAmmoProvider
+    autoEject: false
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineTurretShotgun
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+
+- type: entity
+  parent: BaseWeaponTurret
+  id: BaseWeaponSniperTurret
+  name: sniper turret
+  description: A slow sentry that fires a single accurate heavy round. It deploys empty; load a sniper kit before it can fire.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    drawdepth: Mobs
+    layers:
+    - state: syndie_sniper
+  - type: Gun
+    fireRate: 0.35
+    projectileSpeed: 110
+    maxAngle: 1
+    minAngle: 0.2
+    angleIncrease: 0.1
+    angleDecay: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+  - type: MagazineAmmoProvider
+    autoEject: false
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineTurretSniper
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+
+- type: entity
+  parent: BaseWeaponTurret
+  id: BaseWeaponMachinegunTurret
+  name: machine gun turret
+  description: A fast sentry with a wide cone of fire. It deploys empty; load a machine-gun kit before it can fire.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    drawdepth: Mobs
+    layers:
+    - state: syndie_mg
+  - type: Gun
+    fireRate: 9
+    projectileSpeed: 48
+    maxAngle: 34
+    minAngle: 18
+    angleIncrease: 2
+    angleDecay: 2
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
+  - type: MagazineAmmoProvider
+    autoEject: false
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineTurretMachinegun
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretEmpireShotgun
+  name: imperial shotgun turret
+  suffix: Империя
+  components:
+  - type: NpcFactionMember
+    factions:
+    - EmpireTurret
+  - type: TurretCommandLink
+    faction: Empire
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretEmpireShotgunPackingGraph
+    node: WeaponTurretEmpireShotgunPacked
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretEmpireSniper
+  name: imperial sniper turret
+  suffix: Империя
+  components:
+  - type: NpcFactionMember
+    factions:
+    - EmpireTurret
+  - type: TurretCommandLink
+    faction: Empire
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretEmpireSniperPackingGraph
+    node: WeaponTurretEmpireSniperPacked
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretEmpireMachinegun
+  name: imperial machine gun turret
+  suffix: Империя
+  components:
+  - type: NpcFactionMember
+    factions:
+    - EmpireTurret
+  - type: TurretCommandLink
+    faction: Empire
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretEmpireMachinegunPackingGraph
+    node: WeaponTurretEmpireMachinegunPacked
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretTSFShotgun
+  name: TSF shotgun turret
+  suffix: TSF
+  components:
+  - type: NpcFactionMember
+    factions:
+    - TSFMCTurret
+  - type: TurretCommandLink
+    faction: TSF
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTSFShotgunPackingGraph
+    node: WeaponTurretTSFShotgunPacked
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretTSFSniper
+  name: TSF sniper turret
+  suffix: TSF
+  components:
+  - type: NpcFactionMember
+    factions:
+    - TSFMCTurret
+  - type: TurretCommandLink
+    faction: TSF
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTSFSniperPackingGraph
+    node: WeaponTurretTSFSniperPacked
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretTSFMachinegun
+  name: TSF machine gun turret
+  suffix: TSF
+  components:
+  - type: NpcFactionMember
+    factions:
+    - TSFMCTurret
+  - type: TurretCommandLink
+    faction: TSF
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTSFMachinegunPackingGraph
+    node: WeaponTurretTSFMachinegunPacked
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretCCShotgun
+  name: Colossus shotgun turret
+  suffix: CC
+  components:
+  - type: NpcFactionMember
+    factions:
+    - CC
+  - type: TurretCommandLink
+    faction: CC
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretCCShotgunPackingGraph
+    node: WeaponTurretCCShotgunPacked
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretCCSniper
+  name: Colossus sniper turret
+  suffix: CC
+  components:
+  - type: NpcFactionMember
+    factions:
+    - CC
+  - type: TurretCommandLink
+    faction: CC
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretCCSniperPackingGraph
+    node: WeaponTurretCCSniperPacked
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretCCMachinegun
+  name: Colossus machine gun turret
+  suffix: CC
+  components:
+  - type: NpcFactionMember
+    factions:
+    - CC
+  - type: TurretCommandLink
+    faction: CC
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretCCMachinegunPackingGraph
+    node: WeaponTurretCCMachinegunPacked
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretUSSPShotgun
+  name: USSP shotgun turret
+  suffix: USSP
+  components:
+  - type: NpcFactionMember
+    factions:
+    - USSPTurret
+  - type: TurretCommandLink
+    faction: USSP
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretUSSPShotgunPackingGraph
+    node: WeaponTurretUSSPShotgunPacked
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretUSSPSniper
+  name: USSP sniper turret
+  suffix: USSP
+  components:
+  - type: NpcFactionMember
+    factions:
+    - USSPTurret
+  - type: TurretCommandLink
+    faction: USSP
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretUSSPSniperPackingGraph
+    node: WeaponTurretUSSPSniperPacked
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretUSSPMachinegun
+  name: USSP machine gun turret
+  suffix: USSP
+  components:
+  - type: NpcFactionMember
+    factions:
+    - USSPTurret
+  - type: TurretCommandLink
+    faction: USSP
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretUSSPMachinegunPackingGraph
+    node: WeaponTurretUSSPMachinegunPacked
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretPDVShotgun
+  name: PDV shotgun turret
+  suffix: PDV
+  components:
+  - type: NpcFactionMember
+    factions:
+    - PirateNF
+  - type: TurretCommandLink
+    faction: PDV
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretPDVShotgunPackingGraph
+    node: WeaponTurretPDVShotgunPacked
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretPDVSniper
+  name: PDV sniper turret
+  suffix: PDV
+  components:
+  - type: NpcFactionMember
+    factions:
+    - PirateNF
+  - type: TurretCommandLink
+    faction: PDV
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretPDVSniperPackingGraph
+    node: WeaponTurretPDVSniperPacked
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretPDVMachinegun
+  name: PDV machine gun turret
+  suffix: PDV
+  components:
+  - type: NpcFactionMember
+    factions:
+    - PirateNF
+  - type: TurretCommandLink
+    faction: PDV
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretPDVMachinegunPackingGraph
+    node: WeaponTurretPDVMachinegunPacked
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretVGShotgun
+  name: Viper Group shotgun turret
+  suffix: VG
+  components:
+  - type: NpcFactionMember
+    factions:
+    - VGTurret
+  - type: TurretCommandLink
+    faction: VG
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretVGShotgunPackingGraph
+    node: WeaponTurretVGShotgunPacked
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretVGSniper
+  name: Viper Group sniper turret
+  suffix: VG
+  components:
+  - type: NpcFactionMember
+    factions:
+    - VGTurret
+  - type: TurretCommandLink
+    faction: VG
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretVGSniperPackingGraph
+    node: WeaponTurretVGSniperPacked
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretVGMachinegun
+  name: Viper Group machine gun turret
+  suffix: VG
+  components:
+  - type: NpcFactionMember
+    factions:
+    - VGTurret
+  - type: TurretCommandLink
+    faction: VG
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretVGMachinegunPackingGraph
+    node: WeaponTurretVGMachinegunPacked
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretNTShotgun
+  name: NanoTrasen shotgun turret
+  suffix: NanoTrasen
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: TurretCommandLink
+    faction: NT
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretNTShotgunPackingGraph
+    node: WeaponTurretNTShotgunPacked
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretNTSniper
+  name: NanoTrasen sniper turret
+  suffix: NanoTrasen
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: TurretCommandLink
+    faction: NT
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretNTSniperPackingGraph
+    node: WeaponTurretNTSniperPacked
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretNTMachinegun
+  name: NanoTrasen machine gun turret
+  suffix: NanoTrasen
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: TurretCommandLink
+    faction: NT
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretNTMachinegunPackingGraph
+    node: WeaponTurretNTMachinegunPacked

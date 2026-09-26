@@ -73,6 +73,10 @@ ui-options-storage-scale = Масштаб слотов сумок и поясо�
 # Forge-Change-End
 ui-options-scale-auto = Автоматическое ({ TOSTRING($scale, "P0") })
 ui-options-scale-75 = 75%
+ui-options-scale-80 = 80%
+ui-options-scale-85 = 85%
+ui-options-scale-90 = 90%
+ui-options-scale-95 = 95%
 ui-options-scale-100 = 100%
 ui-options-scale-125 = 125%
 ui-options-scale-150 = 150%

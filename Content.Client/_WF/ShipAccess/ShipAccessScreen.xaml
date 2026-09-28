@@ -1,0 +1,146 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:access="clr-namespace:Content.Client._WF.ShipAccess"
+              xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              Visible="False"
+              HorizontalExpand="True">
+    <!-- Door diagram: takes whatever width the side column leaves, with the rule legend under it. -->
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="5 4 5 5">
+        <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#0a0a0a"/>
+            </PanelContainer.PanelOverride>
+            <access:ShipAccessDoorMapControl Name="DoorMap" HorizontalExpand="True" VerticalExpand="True"/>
+        </PanelContainer>
+        <RichTextLabel Name="DoorsEmptyLabel" HorizontalExpand="True" Margin="4 4 4 0" Visible="False"/>
+        <GridContainer Name="LegendContainer" Columns="4" HorizontalAlignment="Center" Margin="0 6 0 0"/>
+    </BoxContainer>
+    <!-- Side column. The scroll container reports no width of its own, so the panel fixes it. -->
+    <PanelContainer MinWidth="400" VerticalExpand="True" Margin="4 4 4 4">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#525252" BackgroundColor="#3d474d"/>
+        </PanelContainer.PanelOverride>
+        <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 2">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+            </PanelContainer.PanelOverride>
+            <ScrollContainer VerticalExpand="True"
+                             HorizontalExpand="True"
+                             VScrollEnabled="True"
+                             HScrollEnabled="False">
+                <BoxContainer Orientation="Vertical"
+                              VerticalAlignment="Top"
+                              HorizontalExpand="True"
+                              Margin="5 5 5 5">
+                    <controls:StripeBack MinSize="48 48">
+                        <Label Text="{Loc 'ship-access-title'}" VerticalExpand="True" HorizontalAlignment="Center"/>
+                    </controls:StripeBack>
+                    <PanelContainer HorizontalExpand="True" Margin="4 4 4 4">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
+                        </PanelContainer.PanelOverride>
+                        <GridContainer Columns="2" HorizontalExpand="True" Margin="6 6 6 6">
+                            <Label Text="{Loc 'ship-access-owner'}" FontColorOverride="#00ff2a"/>
+                            <Label Name="OwnerLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a"/>
+                            <Label Text="{Loc 'ship-access-mode'}" FontColorOverride="#00ff2a"/>
+                            <Label Name="ModeLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a"/>
+                            <Label Text="{Loc 'ship-access-lock'}" FontColorOverride="#00ff2a" VerticalAlignment="Center"/>
+                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                <Label Name="LockedLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a"/>
+                                <CheckBox Name="LockedCheck"
+                                          Text="{Loc 'ship-access-locked-check'}"
+                                          HorizontalExpand="True"
+                                          HorizontalAlignment="Right"
+                                          Visible="False"/>
+                            </BoxContainer>
+                        </GridContainer>
+                    </PanelContainer>
+                    <Label Name="ReadOnlyLabel"
+                           Text="{Loc 'ship-access-read-only'}"
+                           StyleClasses="LabelSecondaryColor"
+                           HorizontalAlignment="Center"
+                           Margin="4 4 4 4"/>
+                    <BoxContainer Name="CodeBox" Orientation="Vertical" Margin="8 4 8 4" Visible="False">
+                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                            <Label Text="{Loc 'ship-access-ship-code'}" FontColorOverride="#00ff2a" VerticalAlignment="Center"/>
+                            <Label Name="ShipCodeLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a" VerticalAlignment="Center" Margin="0 0 8 0"/>
+                            <Button Name="ShipCodeRevealButton" Text="{Loc 'ship-access-code-reveal'}" ToggleMode="True" StyleClasses="ButtonSquare" MinWidth="70"/>
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 4 0 0">
+                            <LineEdit Name="ShipCodeEdit" PlaceHolder="{Loc 'ship-access-code-placeholder'}" HorizontalExpand="True"/>
+                            <Button Name="ShipCodeSetButton" Text="{Loc 'ship-access-code-set'}" StyleClasses="ButtonSquare" MinWidth="60" Disabled="True"/>
+                            <Button Name="ShipCodeClearButton" Text="{Loc 'ship-access-code-clear'}" StyleClasses="ButtonSquare" MinWidth="60"/>
+                        </BoxContainer>
+                        <RichTextLabel Name="ShipCodeHint" HorizontalExpand="True" Margin="0 2 0 0"/>
+                        <Label Name="CodeAlertLabel" Text="" FontColorOverride="#ff8038" HorizontalAlignment="Center" Margin="0 4 0 0" Visible="False"/>
+                    </BoxContainer>
+                    <controls:StripeBack MinSize="48 48" Margin="0 8 0 0">
+                        <Label Text="{Loc 'ship-access-allow-list'}" VerticalExpand="True" HorizontalAlignment="Center"/>
+                    </controls:StripeBack>
+                    <BoxContainer Name="AllowListContainer" Orientation="Vertical" Margin="8 4 8 4" SeparationOverride="2"/>
+                    <Label Name="AllowListEmptyLabel"
+                           Text="{Loc 'ship-access-allow-list-empty'}"
+                           StyleClasses="LabelSecondaryColor"
+                           HorizontalAlignment="Center"
+                           Margin="4 4 4 4"/>
+                    <BoxContainer Name="NearbyBox" Orientation="Vertical" Visible="False">
+                        <Label Text="{Loc 'ship-access-nearby'}" FontColorOverride="#00ff2a" Margin="8 6 8 2"/>
+                        <BoxContainer Name="NearbyContainer" Orientation="Vertical" Margin="8 0 8 4" SeparationOverride="2"/>
+                        <Label Name="NearbyEmptyLabel"
+                               Text="{Loc 'ship-access-nearby-empty'}"
+                               StyleClasses="LabelSecondaryColor"
+                               HorizontalAlignment="Center"
+                               Margin="4 4 4 4"/>
+                    </BoxContainer>
+                    <controls:StripeBack MinSize="48 48" Margin="0 8 0 0">
+                        <Label Text="{Loc 'ship-access-door'}" VerticalExpand="True" HorizontalAlignment="Center"/>
+                    </controls:StripeBack>
+                    <Label Name="DoorNoneLabel"
+                           Text="{Loc 'ship-access-door-none'}"
+                           StyleClasses="LabelSecondaryColor"
+                           HorizontalAlignment="Center"
+                           Margin="4 4 4 4"/>
+                    <BoxContainer Name="DoorBox" Orientation="Vertical" Margin="4 4 4 4" Visible="False">
+                        <PanelContainer HorizontalExpand="True">
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
+                            </PanelContainer.PanelOverride>
+                            <GridContainer Columns="2" HorizontalExpand="True" Margin="6 6 6 6">
+                                <Label Text="{Loc 'ship-access-door-name'}" FontColorOverride="#00ff2a"/>
+                                <Label Name="DoorNameLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a"/>
+                                <Label Text="{Loc 'ship-access-door-rule'}" FontColorOverride="#00ff2a"/>
+                                <Label Name="DoorRuleLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a"/>
+                            </GridContainer>
+                        </PanelContainer>
+                        <BoxContainer Orientation="Vertical" Margin="4 4 4 0">
+                            <OptionButton Name="DoorRuleButton" HorizontalExpand="True" Visible="False"/>
+                            <RichTextLabel Name="DoorRuleHint" HorizontalExpand="True" Margin="0 4 0 4"/>
+                            <BoxContainer Name="DoorPlayersBox" Orientation="Vertical" Visible="False">
+                                <Label Text="{Loc 'ship-access-door-players'}" FontColorOverride="#00ff2a" Margin="0 4 0 2"/>
+                                <BoxContainer Name="DoorPlayersContainer" Orientation="Vertical" SeparationOverride="2"/>
+                                <Label Name="DoorPlayersEmptyLabel"
+                                       Text="{Loc 'ship-access-door-players-empty'}"
+                                       StyleClasses="LabelSecondaryColor"
+                                       HorizontalAlignment="Center"
+                                       Margin="4 4 4 4"/>
+                            </BoxContainer>
+                            <BoxContainer Name="DoorCodeBox" Orientation="Vertical" Visible="False">
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 4 0 0">
+                                    <Label Text="{Loc 'ship-access-door-code'}" FontColorOverride="#00ff2a" VerticalAlignment="Center"/>
+                                    <Label Name="DoorCodeLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a" VerticalAlignment="Center" Margin="0 0 8 0"/>
+                                    <Button Name="DoorCodeRevealButton" Text="{Loc 'ship-access-code-reveal'}" ToggleMode="True" StyleClasses="ButtonSquare" MinWidth="70"/>
+                                </BoxContainer>
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 4 0 0">
+                                    <LineEdit Name="DoorCodeEdit" PlaceHolder="{Loc 'ship-access-code-placeholder'}" HorizontalExpand="True"/>
+                                    <Button Name="DoorCodeSetButton" Text="{Loc 'ship-access-code-set'}" StyleClasses="ButtonSquare" MinWidth="60" Disabled="True"/>
+                                    <Button Name="DoorCodeClearButton" Text="{Loc 'ship-access-code-clear'}" StyleClasses="ButtonSquare" MinWidth="60"/>
+                                </BoxContainer>
+                                <RichTextLabel Name="DoorCodeHint" HorizontalExpand="True" Margin="0 2 0 0"/>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                </BoxContainer>
+            </ScrollContainer>
+        </PanelContainer>
+    </PanelContainer>
+</BoxContainer>

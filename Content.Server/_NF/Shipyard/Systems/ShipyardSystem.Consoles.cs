@@ -1003,6 +1003,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         var deedID = EnsureComp<ShuttleDeedComponent>(uid);
         AssignShuttleDeedProperties(deedID, shuttleDeed.ShuttleUid, shuttleDeed.ShuttleName, shuttleDeed.ShuttleOwner, shuttleDeed.PurchasedWithVoucher, shuttleDeed.PurchaseVoucherUid);
+        Dirty(uid, deedID); // WOLFGATE(ShipAccess): the ship link is networked, and this card may already have held a deed
     }
     #endregion
 

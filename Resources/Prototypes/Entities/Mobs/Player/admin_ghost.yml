@@ -41,6 +41,7 @@
     - SyndicateAgent
     - CentralCommand
     - Pirate # Frontier
+    - WFShipLocked # WOLFGATE(ShipAccess): admin ghosts open locked ship doors, as they open every other airlock
   - type: UserInterface
     interfaces:
       enum.SolarControlConsoleUiKey.Key:

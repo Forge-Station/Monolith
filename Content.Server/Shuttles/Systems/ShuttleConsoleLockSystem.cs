@@ -16,6 +16,7 @@ using Content.Shared.Interaction;
 using Content.Shared.PDA;
 using Robust.Shared.Audio;
 using Robust.Shared.Map.Components;
+using Content.Server._WF.ShipAccess; // WOLFGATE(ShipAccess)
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -28,6 +29,7 @@ public sealed partial class ShuttleConsoleLockSystem : SharedShuttleConsoleLockS
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private HandsSystem _handsSystem = default!;
     [Dependency] private ShuttleSystem _shuttleSystem = default!;
+    [Dependency] private WFShipAccessServerSystem _wfShipAccess = default!; // WOLFGATE(ShipAccess)
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -817,6 +819,7 @@ public sealed partial class ShuttleConsoleLockSystem : SharedShuttleConsoleLockS
             // Log.Debug("TryGrantGuestAccess: Granted guest access to ID card {0}", cardUid);
         }
         Dirty(gridUid, guestAccess);
+        _wfShipAccess.OnGuestAccessGranted(gridUid, user); // WOLFGATE(ShipAccess): a guest's card also joins the allow list
 
         // Log.Debug("TryGrantGuestAccess: Successfully granted guest access to user {0} on grid {1}", user, gridUid);
 
@@ -867,6 +870,11 @@ public sealed partial class ShuttleConsoleLockSystem : SharedShuttleConsoleLockS
 
         var gridUid = consoleTransform.GridUid.Value;
 
+        // WOLFGATE(ShipAccess) START: a held voucher with the deed, or a player the ship is registered to, holds deed access too
+        if (_wfShipAccess.IsOwner(user, gridUid))
+            return true;
+        // WOLFGATE END
+
         // Check if this is a ship with a deed
         if (!TryComp<ShuttleDeedComponent>(gridUid, out var shipDeed))
             return false;
@@ -910,6 +918,16 @@ public sealed partial class ShuttleConsoleLockSystem : SharedShuttleConsoleLockS
             return;
         }
 
+        // WOLFGATE(ShipAccess) START: resetting guests also empties the allow list, and that alone counts as a reset
+        var wfCleared = _wfShipAccess.ClearAllowList(gridUid);
+        if (wfCleared > 0 && (!TryComp<ShipGuestAccessComponent>(gridUid, out var wfGuests) || wfGuests.GuestIdCards.Count + wfGuests.GuestCyborgs.Count == 0))
+        {
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Machines/id_swipe.ogg"), console);
+            Popup.PopupEntity(Loc.GetString("ship-access-allow-list-cleared", ("count", wfCleared)), console, user);
+            return;
+        }
+        // WOLFGATE END
+
         // Check if there's a guest access component
         if (!TryComp<ShipGuestAccessComponent>(gridUid, out var guestAccess))
         {
@@ -946,6 +964,11 @@ public sealed partial class ShuttleConsoleLockSystem : SharedShuttleConsoleLockS
             return false;
 
         var gridUid = consoleTransform.GridUid.Value;
+
+        // WOLFGATE(ShipAccess) START: a ship with Wolfgate access keeps its lock on the grid, not in Mono's readers
+        if (_wfShipAccess.TryGetLocked(gridUid, out var wfLocked))
+            return wfLocked;
+        // WOLFGATE END
 
         // Get all entities on the grid using transform children
         var gridTransform = Transform(gridUid);
@@ -999,6 +1022,16 @@ public sealed partial class ShuttleConsoleLockSystem : SharedShuttleConsoleLockS
         }
 
         // Toggle ship access
+        // WOLFGATE(ShipAccess) START: Locked on the grid is the source of truth and flips the readers itself
+        var wfHandled = _wfShipAccess.TrySetLocked(Transform(consoleUid).GridUid, enable, out var wfRefused);
+        if (wfRefused)
+        {
+            Popup.PopupEntity(Loc.GetString("ship-access-no-owner-key"), consoleUid, user);
+            return;
+        }
+
+        if (!wfHandled)
+        // WOLFGATE END
         ToggleShipAccess(consoleUid, enable);
 
         // Play sound and show popup

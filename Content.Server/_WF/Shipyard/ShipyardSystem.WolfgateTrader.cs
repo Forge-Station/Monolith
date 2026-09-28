@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Numerics;
 using Content.Server._Mono.Shuttles.Components;
+using Content.Server._WF.ShipAccess;
 using Content.Server.Physics.Controllers;
 using Content.Server.Shuttles.Components;
 using Content.Server.StationEvents.Components;
@@ -31,6 +32,7 @@ public sealed partial class ShipyardSystem
 {
     [Dependency] private IComponentFactory _wfComponentFactory = default!;
     [Dependency] private ItemSlotsSystem _wfItemSlots = default!;
+    [Dependency] private WFShipAccessServerSystem _wfShipAccess = default!;
 
     /// <summary>
     /// Everything a shipyard console prototype carries that the purchase and sale handlers read.
@@ -188,8 +190,9 @@ public sealed partial class ShipyardSystem
         RemComp<CompanyComponent>(grid);
         RemComp<FTLComponent>(grid);
 
-        // Guests the seller waved aboard, by card and by borg.
+        // Guests the seller waved aboard, by card and by borg, and the seller's allow list, codes, door rules and seals.
         RemComp<ShipGuestAccessComponent>(grid);
+        _wfShipAccess.ClearForResale(grid);
 
         // Job slots and the station they were counted against; the console saves them again on power loss.
         RemComp<ShuttleConsoleJobSlotsComponent>(grid);

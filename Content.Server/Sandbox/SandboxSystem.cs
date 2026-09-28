@@ -15,6 +15,7 @@ using Robust.Server.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Server._WF.ShipAccess; // WOLFGATE(ShipAccess)
 
 namespace Content.Server.Sandbox
 {
@@ -122,6 +123,7 @@ namespace Content.Server.Sandbox
 
             var allAccess = PrototypeManager
                 .EnumeratePrototypes<AccessLevelPrototype>()
+                .Where(p => p.ID != WFShipAccessServerSystem.LockedAccess) // WOLFGATE(ShipAccess): all access is not a key to every locked ship
                 .Select(p => new ProtoId<AccessLevelPrototype>(p.ID)).ToList();
 
             if (_inventory.TryGetSlotEntity(attached, "id", out var slotEntity))

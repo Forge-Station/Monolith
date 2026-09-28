@@ -1,7 +1,11 @@
+<!-- WOLFGATE(Shuttles): xmlns:wf and xmlns:tractor for _WF shuttle and tractor beam controls -->
+<!-- WOLFGATE(ShipAccess): xmlns:access for the access tab -->
 <controls:FancyWindow xmlns="https://spacestation14.io"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                       xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
                       xmlns:wf="clr-namespace:Content.Client._WF.Shuttles.UI"
+                      xmlns:tractor="clr-namespace:Content.Client._WF.TractorBeam.UI"
+                      xmlns:access="clr-namespace:Content.Client._WF.ShipAccess"
                       xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                       Title="{Loc 'shuttle-console-window-title'}"
                       SetSize="1000 1000"
@@ -16,9 +20,9 @@
                     <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                 </PanelContainer.PanelOverride>
         <BoxContainer Orientation="Vertical" HorizontalAlignment="Center">
-        <!-- WOLFGATE: collision warning, across every mode -->
+        <!-- WOLFGATE(Shuttles): collision warning, across every mode -->
         <wf:CollisionWarningBanner Name="CollisionBanner" SetWidth="970"/>
-        <wf:TractorCaptureBanner Name="CaptureBanner" SetWidth="970"/> <!-- WOLFGATE -->
+        <tractor:TractorCaptureBanner Name="CaptureBanner" SetWidth="970"/> <!-- WOLFGATE(TractorBeam) -->
         <!-- Top row mode buttons -->
         <PanelContainer VerticalExpand="False" HorizontalExpand="True" SetWidth="970">
             <PanelContainer.PanelOverride>
@@ -36,13 +40,22 @@
                     VerticalExpand="True"
                     Text="NAV"
                     StyleClasses="ButtonSquare"/>
-            <!-- WOLFGATE -->
+            <!-- WOLFGATE(Shuttles) START: ship mode button -->
             <Button Name="ShipModeButton"
                     ToggleMode="True"
                     HorizontalExpand="True"
                     VerticalExpand="True"
                     Text="{Loc 'shuttle-console-ship-mode'}"
                     StyleClasses="ButtonSquare"/>
+            <!-- WOLFGATE END -->
+            <!-- WOLFGATE(ShipAccess) START: access tab button -->
+            <Button Name="AccessModeButton"
+                    ToggleMode="True"
+                    HorizontalExpand="True"
+                    VerticalExpand="True"
+                    Text="{Loc 'ship-access-mode-button'}"
+                    StyleClasses="ButtonSquare"/>
+            <!-- WOLFGATE END -->
             <Button Name="MapModeButton"
                     ToggleMode="True"
                     HorizontalExpand="True"
@@ -57,13 +70,15 @@
                     StyleClasses="ButtonSquare"/>
         </BoxContainer>
         </PanelContainer>
+        <wf:ShuttleCameraBar Name="CameraBar" SetWidth="970"/> <!-- WOLFGATE(Shuttles): hull camera views -->
         <!-- Contents box -->
         <BoxContainer Name="Contents"
                       HorizontalAlignment="Stretch"
                       VerticalExpand="True"
                       Margin="5">
             <ui:NavScreen Name="NavContainer" Visible="False"/>
-            <wf:ShipScreen Name="ShipContainer" Visible="False"/> <!-- WOLFGATE -->
+            <wf:ShipScreen Name="ShipContainer" Visible="False"/> <!-- WOLFGATE(Shuttles) -->
+            <access:ShipAccessScreen Name="AccessContainer" Visible="False"/> <!-- WOLFGATE(ShipAccess) -->
             <ui:MapScreen Name="MapContainer" Visible="False"/>
             <ui:DockingScreen Name="DockContainer" Visible="False"/>
         </BoxContainer>

@@ -53,6 +53,6 @@
   storage:
     back:
     - Magazine45_ACPPistolFMJ
-    - BaseSecurityUplinkRadioCaptain
+    # - BaseSecurityUplinkRadioCaptain # Forge-Change
     - RadioHandheldNF
     - TSFSecApartmentTablet

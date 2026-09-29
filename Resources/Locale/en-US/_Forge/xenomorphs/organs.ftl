@@ -1,7 +1,5 @@
 ent-OrganXenoBase = xenomorph gland
     .desc = A wet gland cut from a xenomorph. It is silent in a hand or a pocket: a surgeon has to graft it into a body. A foreign body will take no more than two.
-ent-OrganXenoRest = xenomorph rest gland
-    .desc = A slow gland. The owner can lie down and knit itself back together.
 ent-OrganXenoTail = xenomorph tail gland
     .desc = The muscle that drives a tail stab.
 ent-OrganXenoTailHeavy = xenomorph heavy tail gland

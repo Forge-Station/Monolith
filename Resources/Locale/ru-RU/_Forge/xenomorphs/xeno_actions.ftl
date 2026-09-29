@@ -1,6 +1,3 @@
-ent-ActionForgeXenoRest = Отдых
-    .desc = Лечь, чтобы быстрее восстанавливать плазму и раны. Ещё раз — встать.
-
 ent-ActionForgeXenoTailStab = Удар хвостом
     .desc = Пронзить ближайшую цель хвостом.
 

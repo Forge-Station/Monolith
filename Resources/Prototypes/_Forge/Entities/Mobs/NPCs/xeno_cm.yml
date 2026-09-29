@@ -83,7 +83,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTail
     - OrganXenoAcidWeak
     - OrganXenoResin
@@ -119,7 +118,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTail
     - OrganXenoAcidWeak
     - OrganXenoPheromoneTransfer
@@ -158,7 +156,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTail
     - OrganXenoHide
     - OrganXenoLeap
@@ -205,7 +202,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTail
     - OrganXenoAcidSpit
 
@@ -240,7 +236,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTail
     - OrganXenoSpitter
 
@@ -275,7 +270,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTailHeavy
     - OrganXenoBoiler
   - type: Fixtures
@@ -322,7 +316,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTailHeavy
     - OrganXenoWarrior
 
@@ -358,7 +351,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTailHeavy
     - OrganXenoPounce
     - OrganXenoHide
@@ -394,7 +386,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTail
     - OrganXenoFortify
 
@@ -430,7 +421,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTailHeavy
     - OrganXenoStomp
   - type: Fixtures
@@ -476,7 +466,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTailHeavy
     - OrganXenoPraetorianAcid
     - OrganXenoScreech
@@ -525,7 +514,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTailHeavy
     - OrganXenoStomp
   - type: Fixtures
@@ -571,7 +559,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTail
     - OrganXenoAcid
     - OrganXenoPheromoneTransfer
@@ -608,7 +595,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTail
     - OrganXenoEgg
 
@@ -643,7 +629,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTail
     - OrganXenoWeeds
 
@@ -678,7 +663,6 @@
   - type: ForgeXenoAi
   - type: ForgeXenoOrganHost
     organs:
-    - OrganXenoRest
     - OrganXenoTailQueen
     - OrganXenoPraetorianAcid
     - OrganXenoQueen

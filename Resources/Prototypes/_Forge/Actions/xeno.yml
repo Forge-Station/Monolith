@@ -2,19 +2,6 @@
 # Icons taken from RMC-14.
 
 - type: entity
-  id: ActionForgeXenoRest
-  name: Rest
-  description: Lie down to recover plasma and wounds faster. Use again to stand.
-  components:
-  - type: InstantAction
-    itemIconStyle: NoItem
-    icon:
-      sprite: _CM/Interface/Actions/xeno_actions.rsi
-      state: resting
-    event: !type:ForgeXenoRestActionEvent
-    useDelay: 1
-
-- type: entity
   id: ActionForgeXenoTailStab
   name: Tail stab
   description: Impale a nearby target with your tail.

@@ -1,6 +1,4 @@
 forge-xeno-no-plasma = Not enough plasma.
-forge-xeno-rest-down = You settle onto the resin.
-forge-xeno-rest-up = You rise.
 forge-xeno-hide-on = You fade from sight.
 forge-xeno-hide-off = You drop the shroud.
 forge-xeno-fortify-on = You lock your crest. Moving is almost impossible.

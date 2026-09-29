@@ -163,12 +163,15 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
         RefreshVisuals(uid, genome);
         Dirty(uid, genome);
 
+        // Discover BEFORE morph — GeneActivatedEvent polymorphs the body onto a paused map,
+        // and Discover/FindConsole then fail to resolve the DNA server from the scanner.
+        var alreadyKnown = IsDiscovered(uid, geneId);
+        var recorded = Discover(uid, geneId);
+
         var ev = new GeneActivatedEvent(geneId);
         RaiseLocalEvent(uid, ref ev);
         MaybeGoHostile(GetMorphedBody(uid), proto);
 
-        var alreadyKnown = IsDiscovered(uid, geneId);
-        var recorded = Discover(uid, geneId);
         if (!recorded)
             _popup.PopupEntity(Loc.GetString("genetics-no-server"), uid);
         if (alreadyKnown)

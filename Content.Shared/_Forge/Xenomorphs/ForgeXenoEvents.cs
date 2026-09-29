@@ -7,8 +7,6 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._Forge.Xenomorphs;
 
-public sealed partial class ForgeXenoRestActionEvent : InstantActionEvent;
-
 public sealed partial class ForgeXenoHideActionEvent : InstantActionEvent;
 
 public sealed partial class ForgeXenoFortifyActionEvent : InstantActionEvent;

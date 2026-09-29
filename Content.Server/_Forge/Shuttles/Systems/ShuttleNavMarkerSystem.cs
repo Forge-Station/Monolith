@@ -1,6 +1,7 @@
 using Content.Server.Popups;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
+using Content.Shared._Forge.CloakingShuttle;
 using Content.Shared._Forge.Shuttles.Components;
 using Content.Shared._Forge.Shuttles.Events;
 using Content.Shared.Popups;
@@ -51,13 +52,26 @@ public sealed class ShuttleNavMarkerSystem : EntitySystem
         while (query.MoveNext(out var uid, out var markers))
         {
             var changed = false;
-            foreach (var marker in markers.Markers)
+            for (var i = markers.Markers.Count - 1; i >= 0; i--)
             {
+                var marker = markers.Markers[i];
                 if (marker.Kind != ShuttleNavMarkerKind.Entity || marker.Target is not { } net)
                     continue;
 
                 if (!TryGetEntity(net, out var target) || !Exists(target.Value))
+                {
+                    markers.Markers.RemoveAt(i);
+                    changed = true;
                     continue;
+                }
+
+                // Full stealth (IFF Hide / active cloak) — marker must not reveal the ship.
+                if (IsFullyStealthed(target.Value))
+                {
+                    markers.Markers.RemoveAt(i);
+                    changed = true;
+                    continue;
+                }
 
                 var mapPos = _transform.GetMapCoordinates(target.Value);
                 if ((mapPos.Position - marker.Coordinates).LengthSquared() < 0.25f &&
@@ -72,6 +86,15 @@ public sealed class ShuttleNavMarkerSystem : EntitySystem
             if (changed)
                 Dirty(uid, markers);
         }
+    }
+
+    private bool IsFullyStealthed(EntityUid target)
+    {
+        if (TryComp<CloakingShuttleComponent>(target, out var cloak) && cloak.Active)
+            return true;
+
+        // IFF Hide = vessel fully invisible on nav (full stealth / "vessel" toggle).
+        return TryComp(target, out IFFComponent? iff) && (iff.Flags & IFFFlags.Hide) != 0;
     }
 
     private void OnAddCoordinate(EntityUid uid, ShuttleConsoleComponent component, AddShuttleNavCoordinateMarkerMessage args)

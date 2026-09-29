@@ -4,9 +4,6 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._Forge.Xenomorphs;
 
-[RegisterComponent, NetworkedComponent]
-public sealed partial class ForgeXenoRestingComponent : Component;
-
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ForgeXenoFortifyComponent : Component
 {

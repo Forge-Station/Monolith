@@ -21,18 +21,6 @@
 
 - type: entity
   parent: OrganXenoBase
-  id: OrganXenoRest
-  name: xenomorph rest gland
-  description: A slow gland. The owner can lie down and knit itself back together.
-  components:
-  - type: Sprite
-    state: liver
-  - type: ForgeXenoOrgan
-    actions:
-    - ActionForgeXenoRest
-
-- type: entity
-  parent: OrganXenoBase
   id: OrganXenoTail
   name: xenomorph tail gland
   description: The muscle that drives a tail stab.

@@ -5,9 +5,9 @@
   suffix: TSFMC, Docking
   description: An incomplete structure necessary for connecting two space craft together.
   components:
-  - type: Sprite
-    sprite: _NF/Structures/Doors/Airlocks/Standard/docknfsd.rsi
-    state: closed
+  # - type: Sprite # Forge-change
+  #   sprite: _NF/Structures/Doors/Airlocks/Standard/docknfsd.rsi
+  #   state: closed
   - type: Construction
     graph: AirlockShuttleNfsd
     node: assembly
@@ -19,8 +19,8 @@
   suffix: TSFMC, Glass, Docking
   description: Necessary for connecting two space craft together.
   components:
-  - type: Sprite
-    sprite: _NF/Structures/Doors/Airlocks/Glass/docknfsd.rsi
+  # - type: Sprite # Forge-change
+  #   sprite: _NF/Structures/Doors/Airlocks/Glass/docknfsd.rsi
   - type: Construction
     graph: AirlockShuttleNfsd
     node: airlockGlass
@@ -32,8 +32,8 @@
   suffix: TSFMC, Docking
   description: Necessary for connecting two space craft together.
   components:
-  - type: Sprite
-    sprite: _NF/Structures/Doors/Airlocks/Standard/docknfsd.rsi
+  # - type: Sprite # Forge-change
+  #   sprite: _NF/Structures/Doors/Airlocks/Standard/docknfsd.rsi
   - type: Construction
     graph: AirlockShuttleNfsd
     node: airlock

@@ -31,9 +31,9 @@
   - type: AtmosAlarmableVisuals
     layerMap: "fireAlarmState"
     alarmStates:
-      Normal: fire_off
-      Warning: fire_off # shouldn't be alarming at a warning
-      Danger: fire_on
+      Normal: fire_0
+      Warning: fire_0 # shouldn't be alarming at a warning
+      Danger: fire_2
       Emagged: fire_emagged
     hideOnDepowered: [ "fireAlarmState" ]
   - type: Tag

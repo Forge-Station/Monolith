@@ -8,7 +8,9 @@
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: Structures/Wallmounts/posters.rsi
-    snapCardinals: true
+    snapCardinals: false # Forge-change: switch true < false
+    offset: 0, -0.27 # Forge-change: add offset
+    scale: 0.6, 0.6 # Forge-change: add scale
   - type: Destructible
     thresholds:
     - trigger:

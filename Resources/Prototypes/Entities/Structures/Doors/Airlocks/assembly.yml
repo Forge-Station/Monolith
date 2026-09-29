@@ -46,9 +46,9 @@
   - type: Sprite
     sprite: _Forge/Structures/Doors/Airlocks/Standard/clockwork_pinion.rsi # Forge-Change
     state: "assembly"
-  - type: Construction
-    graph: PinionAirlock
-    node: assembly
+  # - type: Construction # Forge-Change
+  #   graph: PinionAirlock
+  #   node: assembly
   placement:
     mode: SnapgridCenter
 

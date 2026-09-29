@@ -737,7 +737,7 @@
   - type: Sprite
     layers:
     - state: rock_bananium
-      sprite: Structures/Walls/stone-ore.rsi
+      sprite: _Forge/Structures/Walls/rock_old.rsi # Forge-change
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -790,21 +790,27 @@
   name: basalt
   parent: WallRock
   components:
-  - type: Icon
-    sprite: Structures/Walls/rock.rsi
-    state: rock_wall
-  - type: Sprite
-    sprite: Structures/Walls/rock.rsi
-    layers:
-    - state: rock_wall
-    - map: [ "enum.EdgeLayer.South" ]
-      state: rock_wall_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: rock_wall_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: rock_wall_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: rock_wall_west
+  - type: Icon # Forge-change
+    sprite: Structures/Walls/stone.rsi
+    state: full
+  - type: Sprite # Forge-change
+    sprite: Structures/Walls/stone.rsi
+    drawdepth: Walls
+  # - type: Icon
+  #   sprite: _Forge/Structures/Walls/rock_old.rsi # Forge-change
+  #   state: rock_wall
+  # - type: Sprite
+  #   sprite: _Forge/Structures/Walls/rock_old.rsi # Forge-change
+  #   layers:
+  #   - state: rock_wall
+  #   - map: [ "enum.EdgeLayer.South" ]
+  #     state: rock_wall_south
+  #   - map: [ "enum.EdgeLayer.East" ]
+  #     state: rock_wall_east
+  #   - map: [ "enum.EdgeLayer.North" ]
+  #     state: rock_wall_north
+  #   - map: [ "enum.EdgeLayer.West" ]
+  #     state: rock_wall_west
 
 - type: entity
   id: WallRockBasaltCoal
@@ -1571,21 +1577,27 @@
   name: andesite
   parent: NFWallRockOre # Frontier: WallRock<NFWallRockOre
   components:
-  - type: Icon
-    sprite: Structures/Walls/rock.rsi
-    state: rock_andesite
-  - type: Sprite
-    sprite: Structures/Walls/rock.rsi
-    layers:
-    - state: rock_andesite
-    - map: [ "enum.EdgeLayer.South" ]
-      state: rock_andesite_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: rock_andesite_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: rock_andesite_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: rock_andesite_west
+  - type: Icon # Forge-change
+    sprite: Structures/Walls/stone.rsi
+    state: full
+  - type: Sprite # Forge-change
+    sprite: Structures/Walls/stone.rsi
+    drawdepth: Walls
+  # - type: Icon
+  #   sprite: Structures/Walls/rock.rsi
+  #   state: rock_andesite
+  # - type: Sprite
+  #   sprite: Structures/Walls/rock.rsi
+  #   layers:
+  #   - state: rock_andesite
+  #   - map: [ "enum.EdgeLayer.South" ]
+  #     state: rock_andesite_south
+  #   - map: [ "enum.EdgeLayer.East" ]
+  #     state: rock_andesite_east
+  #   - map: [ "enum.EdgeLayer.North" ]
+  #     state: rock_andesite_north
+  #   - map: [ "enum.EdgeLayer.West" ]
+  #     state: rock_andesite_west
 
 - type: entity
   id: WallRockAndesiteCoal

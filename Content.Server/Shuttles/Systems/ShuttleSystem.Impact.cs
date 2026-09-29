@@ -80,6 +80,12 @@ public sealed partial class ShuttleSystem
     private readonly HashSet<(EntityUid, EntityUid)> _impactsThisTick = new();
     private GameTick _impactTick;
 
+    /// <summary>
+    /// Tile breaks must not run inside StartCollide / physics contact generation — SetTiles rebuilds
+    /// grid chunk fixtures and leaves stale Broadphase proxies (Entity 0 crash on client+server).
+    /// </summary>
+    private readonly List<(EntityUid Grid, List<(Vector2i, Tile)> Broken, List<Vector2i> Sparks)> _deferredTileBreaks = new();
+
     private void InitializeImpact()
     {
         SubscribeLocalEvent<ShuttleComponent, StartCollideEvent>(OnShuttleCollide);
@@ -107,6 +113,25 @@ public sealed partial class ShuttleSystem
         Subs.CVar(_cfg, MonoCVars.ImpactSweepRadius, val => _sweepRadius = val, true);
 
         _platingMass = _protoManager.Index(_platingId).Mass;
+    }
+
+    /// <summary>
+    /// Apply deferred impact tile breaks after physics has finished the current collide pass.
+    /// </summary>
+    private void UpdateDeferredImpactTileBreaks()
+    {
+        if (_deferredTileBreaks.Count == 0)
+            return;
+
+        foreach (var (gridUid, broken, sparks) in _deferredTileBreaks)
+        {
+            if (TerminatingOrDeleted(gridUid) || !TryComp(gridUid, out MapGridComponent? grid))
+                continue;
+
+            ProcessBrokenTilesAndSparks(gridUid, grid, broken, sparks);
+        }
+
+        _deferredTileBreaks.Clear();
     }
 
     /// <summary>
@@ -423,11 +448,10 @@ public sealed partial class ShuttleSystem
 
         ProcessTileBatch(uid, grid, tilesToProcess, dir, 0, tilesToProcess.Count, brokenTiles, sparkTiles);
 
-        // Only proceed with visual effects if the entity still exists
-        if (Exists(uid))
-        {
-            ProcessBrokenTilesAndSparks(uid, grid, brokenTiles, sparkTiles);
-        }
+        // Defer SetTiles — breaking floors mid-StartCollide rebuilds grid fixtures while
+        // BroadphaseContactJob still holds stale proxies (Entity 0 / invalid contact crashes).
+        if (brokenTiles.Count > 0 || sparkTiles.Count > 0)
+            _deferredTileBreaks.Add((uid, brokenTiles, sparkTiles));
     }
 
     /// <summary>

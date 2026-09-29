@@ -12,7 +12,7 @@
   components:
     - type: Sprite
       drawdepth: Walls
-      sprite: Structures/Walls/grille-new.rsi
+      sprite: Structures/Walls/grille.rsi
       layers:
       - state: electrified
         sprite: Effects/electricity.rsi
@@ -26,7 +26,7 @@
       - state: dirtheavy
         sprite: Decals/dirty.rsi
     - type: Icon # Forge-change
-      sprite: Structures/Walls/grille-new.rsi
+      sprite: Structures/Walls/grille.rsi
       state: full
 #    - type: Fixtures # Mono - No longer blocks lasers
 #      fixtures:

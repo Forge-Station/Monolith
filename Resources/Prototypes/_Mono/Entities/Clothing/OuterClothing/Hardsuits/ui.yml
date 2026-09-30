@@ -21,7 +21,8 @@
         Piercing: 0.4
         Heat: 0.45 # Forge-change 0.65->0.45
         Radiation: 0.55 # Forge-change 0.65->0.55
-        Caustic: 0.65
+        Shock: 0.9 # Forge-change
+        Caustic: 0.5 # Forge-change 0.65 -> 0.5
   - type: ClothingSpeedModifier
     walkModifier: 0.85
     sprintModifier: 0.85 # Forge-change 0.825->0.85
@@ -60,7 +61,8 @@
         Piercing: 0.65 # Forge-change 0.6->0.65
         Heat: 0.65 # Forge-change 0.5->0.65
         Radiation: 0.4 # Forge-change 0.6->0.4
-        Caustic: 0.7
+        Shock: 0.8 # Forge-change
+        Caustic: 0.6 # Forge-change 0.7 -> 0.6
   - type: PersonalShield
     shield:
       maxCharge: 665 # Forge-change 600->665
@@ -108,6 +110,8 @@
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_engineer.rsi # Ullman sprites
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_engineer.rsi #Ullman sprites
+  - type: Item # Forge-change
+    size: Huge # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -121,7 +125,7 @@
         Piercing: 0.6 # Forge-change 0.7->0.6
         Heat: 0.55 # Forge-change 0.6->0.55
         Radiation: 0.5 # Forge-change 0.1->0.5
-        Caustic: 0.7
+        Caustic: 0.75 # Forge-change 0.7 -> 0.75
   - type: ClothingSpeedModifier
     walkModifier: 0.9 # Forge-change 1->0.9
     sprintModifier: 0.9 # Forge-change 0.8->0.9
@@ -147,6 +151,8 @@
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_pilot.rsi
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_pilot.rsi
+  - type: Item # Forge-change
+    size: Huge # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -161,7 +167,7 @@
         Heat: 0.55 # Forge-change 0.6->0.55
         Shock: 0.8
         Radiation: 0.6 # Forge-change 0.5->0.6
-        Caustic: 0.5
+        Caustic: 0.75 # Forge-change 0.5 -> 0.75
   - type: ClothingSpeedModifier
     walkModifier: 0.925 # Forge-change 0.95->0.925
     sprintModifier: 0.925 # Forge-change 0.9->0.925
@@ -192,6 +198,8 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.3 # Forge-change 0.1->0.3
+  - type: FireProtection # Forge-change
+    reduction: 0.85 # Forge-change
   - type: Armor
     modifiers:
       coefficients:
@@ -200,7 +208,8 @@
         Piercing: 0.3 # Forge-change 0.45->0.3
         Heat: 0.4 # Forge-change 0.5->0.4
         Radiation: 0.225 # Forge-change 0->0.225
-        Caustic: 0.2
+        Caustic: 0.4 # Forge-change 0.2 -> 0.4
+        Shock: 0.6 # Forge-change
   - type: ClothingSpeedModifier
     walkModifier: 0.625 # Forge-change 0.8->0.625
     sprintModifier: 0.625 # Forge-change 0.8->0.625

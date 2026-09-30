@@ -69,8 +69,8 @@
     sprintModifier: 0.45 # Forge-change 0.3->0.45
   # Forge-change-start
   - type: WieldDelay
-    baseDelay: 1.2
-    modifiedDelay: 1.2
+    baseDelay: 0.9 # Forge-change 1.2->0.9
+    modifiedDelay: 0.9 # Forge-change 1.2->0.9
     preventFiring: true
   - type: ClothingSpeedModifier
     walkModifier: 0.9 # Forge-change
@@ -109,7 +109,7 @@
     maxAngle: 18 # Forge-change 48->18
     angleIncrease: 2.25 # Forge-change 27->2.25
     angleDecay: 10 # Forge-change 2->10
-    fireRate: 2.5 # Forge-change 3->2.5
+    fireRate: 3
     projectileSpeed: 60 # Forge-change
     damageModifier: 1 # Forge-change 1.5->1
     selectedMode: SemiAuto

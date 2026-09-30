@@ -51028,7 +51028,7 @@ entities:
     - type: Transform
       pos: 28.5,20.5
       parent: 1
-- proto: SuitStorageM86
+- proto: SuitStorageM82b
   entities:
   - uid: 7787
     components:

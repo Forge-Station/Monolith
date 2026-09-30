@@ -2995,7 +2995,7 @@ entities:
         181:
         - - Pressed
           - Toggle
-- proto: SuitStorageEmpire14m
+- proto: SuitStorageRI14
   entities:
   - uid: 145
     components:

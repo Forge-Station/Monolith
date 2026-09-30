@@ -238,8 +238,8 @@
   - type: Wieldable
   - type: GunRequiresWield
   - type: WieldDelay
-    baseDelay: 1.1
-    modifiedDelay: 1.1
+    baseDelay: 0.75 # Forge-change 1.1->0.75
+    modifiedDelay: 0.75 # Forge-change 1.1->0.75
     preventFiring: true
   - type: ItemSlots
     slots:

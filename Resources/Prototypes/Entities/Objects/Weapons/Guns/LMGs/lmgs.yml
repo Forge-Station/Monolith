@@ -132,6 +132,10 @@
   - type: SpeedModifiedOnWield # Forge-change
     walkModifier: 0.85 # Forge-change
     sprintModifier: 0.7 # Forge-change
+  - type: WieldDelay # Forge-change
+    baseDelay: 0.9 # Forge-change
+    modifiedDelay: 0.9 # Forge-change
+    preventFiring: true # Forge-change
 
 - type: entity
   name: PA L6C ROW (7.62x39mm)

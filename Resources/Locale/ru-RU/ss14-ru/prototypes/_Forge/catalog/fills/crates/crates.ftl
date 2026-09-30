@@ -1,7 +1,7 @@
 ent-CrateContractorSpaceKit = космический набор подрядчика
     .desc = Ящик с экипировкой подрядчика ДСН.
 
-ent-SuitStorageEmpire14m = { ent-SuitStorageBase }
+ent-SuitStorageRI14 = { ent-SuitStorageBase }
     .suffix = Империя, RI-14
     .desc = { ent-SuitStorageBase.desc }
 ent-SuitStorageRI14i = { ent-SuitStorageBase }

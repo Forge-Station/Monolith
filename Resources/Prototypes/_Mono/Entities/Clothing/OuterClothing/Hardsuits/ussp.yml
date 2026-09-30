@@ -6,8 +6,8 @@
   components:
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ussp_combat.rsi
-  - type: Item
-    size: Huge
+  #- type: Item # Forge-change
+  #  size: Huge # Forge-change
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ussp_combat.rsi
   - type: PressureProtection
@@ -23,7 +23,8 @@
         Piercing: 0.4 # Forge-change 0.45 -> 0.4
         Heat: 0.5 # Forge-change 0.65 -> 0.5
         Radiation: 0.55 # Forge-change 0.8 -> 0.55
-        Caustic: 0.6
+        Shock: 0.9 # Forge-change
+        Caustic: 0.5 # Forge-change 0.6 -> 0.5
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.35 # Forge-change 0.3 -> 0.35
   - type: ClothingSpeedModifier
@@ -67,7 +68,7 @@
         Piercing: 0.55 # Forge-change 0.8 -> 0.55
         Heat: 0.625 # Forge-change 0.75 -> 0.625
         Radiation: 0.6 # Forge-change 0.7 -> 0.6
-        Caustic: 0.7
+        Caustic: 0.75 # Forge-change 0.7 -> 0.75
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.4 # Forge-change 0.2 -> 0.4
   - type: ClothingSpeedModifier
@@ -111,7 +112,7 @@
         Piercing: 0.6 # Forge-change 0.75 -> 0.6
         Heat: 0.5 # Forge-change 0.7 -> 0.5
         Radiation: 0.5 # Forge-change 0.7 -> 0.5
-        Caustic: 0.7
+        Caustic: 0.75 # Forge-change 0.7 -> 0.75
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.4 # Forge-change 0.5 -> 0.4
   - type: ClothingSpeedModifier
@@ -155,7 +156,7 @@
         Piercing: 0.675 # Forge-change 0.7 -> 0.675
         Heat: 0.55 # Forge-change 0.7 -> 0.55
         Radiation: 0.55 # Forge-change 0.7 -> 0.55
-        Caustic: 0.7
+        Caustic: 0.75 # Forge-change 0.7 -> 0.75
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.5
   - type: ClothingSpeedModifier
@@ -198,7 +199,7 @@
         Piercing: 0.55 # Forge-change 0.4 -> 0.55
         Heat: 0.5 # Forge-change 0.8 -> 0.5
         Radiation: 0.5 # Forge-change 0.6 -> 0.5
-        Caustic: 0.6
+        Caustic: 0.3 # Forge-change 0.6 -> 0.3
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.3 # Forge-change 0.45 -> 0.3
   - type: ClothingSpeedModifier
@@ -225,8 +226,8 @@
   components:
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ussp_officer_combat.rsi
-  - type: Item
-    size: Huge
+  #- type: Item # Forge-change
+  #  size: Huge # Forge-change
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ussp_officer_combat.rsi
   - type: PressureProtection
@@ -242,7 +243,8 @@
         Piercing: 0.45 # Forge-change 0.35 -> 0.45
         Heat: 0.5 # Forge-change 0.75 -> 0.5
         Radiation: 0.5 # Forge-change 0.55 -> 0.5
-        Caustic: 0.55
+        Shock: 0.8 # Forge-change
+        Caustic: 0.5 # Forge-change 0.55 -> 0.5
   - type: StaminaDamageResistance
     coefficient: 0.3 # Forge-change 0.35 -> 0.3
   - type: ClothingSpeedModifier

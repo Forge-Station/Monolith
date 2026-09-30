@@ -4727,7 +4727,7 @@ entities:
     - type: Transform
       pos: 1.9381976,-4.4065943
       parent: 1
-- proto: ClothingOuterHardsuitRI22
+- proto: ClothingOuterHardsuitRI14
   entities:
   - uid: 673
     components:
@@ -8045,7 +8045,7 @@ entities:
           - 675
           - 676
           - 673
-- proto: SuitStorageEmpire14m
+- proto: SuitStorageRI14
   entities:
   - uid: 1092
     components:

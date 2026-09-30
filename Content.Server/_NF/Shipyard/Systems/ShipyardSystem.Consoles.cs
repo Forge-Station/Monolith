@@ -437,7 +437,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         _tagSystem.TryAddTags(shuttleUid, vessel.Tags);
 
         if (vessel.Classes.Contains(VesselClass.Capital) || _tagSystem.HasTag(shuttleUid, CrewedShuttleTag))
-            vessel.RequireCrew = true;
+            vessel.RequireCrew = false;
 
         if (vessel.RequireCrew)
             EnsureComp<CrewedShuttleComponent>(shuttleUid);

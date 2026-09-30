@@ -235,33 +235,34 @@
     oreChance: 1.0
     currentOre: NFOreScrap
   - type: Icon
-    sprite: _NF/Structures/Walls/rock.rsi
-    state: scraprock01
+    sprite: _Forge/Structures/Walls/scrap.rsi # Forge-change
+    state: full
   - type: Sprite
-    sprite: _NF/Structures/Walls/rock.rsi
+    sprite: _Forge/Structures/Walls/scrap.rsi # Forge-change
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - state: rock_scrap
+      sprite: _NF/Structures/Walls/rock.rsi # Forge-change
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
-  - type: RandomSprite
-    available:
-      - scraprock_variant:
-          scraprock01: ""
-          scraprock02: ""
-          scraprock03: ""
-          scraprock04: ""
-          scraprock05: ""
-          scraprock06: ""
-          scraprock07: ""
+  # - type: RandomSprite # Forge-change
+  #   available:
+  #     - scraprock_variant:
+  #         scraprock01: ""
+  #         scraprock02: ""
+  #         scraprock03: ""
+  #         scraprock04: ""
+  #         scraprock05: ""
+  #         scraprock06: ""
+  #         scraprock07: ""
 
 - type: entity
   id: WallRockScrapPileBot
@@ -282,16 +283,16 @@
     currentOre: NFOreCoal
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - sprite: Structures/Walls/stone-ore.rsi
       state: rock_coal
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -315,16 +316,16 @@
     currentOre: NFOreGold
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - sprite: Structures/Walls/stone-ore.rsi
       state: rock_gold
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -348,16 +349,16 @@
     currentOre: OreDiamond
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - sprite: Structures/Walls/stone-ore.rsi
       state: rock_diamond
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -381,16 +382,16 @@
     currentOre: NFOrePlasma
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - sprite: Structures/Walls/stone-ore.rsi
       state: rock_phoron
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -414,16 +415,16 @@
     currentOre: NFOreSpaceQuartz
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - sprite: Structures/Walls/stone-ore.rsi
       state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -447,16 +448,16 @@
     currentOre: NFOreSilver
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - sprite: Structures/Walls/stone-ore.rsi
       state: rock_silver
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -480,16 +481,16 @@
     currentOre: NFOreSteel
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - sprite: Structures/Walls/stone-ore.rsi
       state: rock_tin
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -513,16 +514,16 @@
     currentOre: NFOreUranium
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - sprite: Structures/Walls/stone-ore.rsi
       state: rock_uranium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -546,18 +547,18 @@
     currentOre: NFOreBananium
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
-    - sprite: Structures/Walls/stone-ore.rsi
-      state: rock_bananium
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
+    - state: rock_bananium
+      sprite: _Forge/Structures/Walls/rock_old.rsi # Forge-change
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -579,16 +580,16 @@
     currentOre: NFOreSalt
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - sprite: Structures/Walls/stone-ore.rsi
       state: rock_salt
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -612,16 +613,16 @@
     currentOre: OreArtifactFragment
   - type: Sprite
     layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    # - state: scraprock01 # Forge-change
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - sprite: Structures/Walls/stone-ore.rsi
       state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -644,18 +645,19 @@
     oreChance: 1.0
     currentOre: NFOreBluespace
   - type: Sprite
-    layers:
-    - state: scraprock01
-      map: [ "scraprock_variant" ]
-    - map: [ "enum.EdgeLayer.South" ]
-      state: scraprock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: scraprock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: scraprock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: scraprock_west
+    layers: # Forge-change
+    # - state: scraprock01
+    #   map: [ "scraprock_variant" ]
+    # - map: [ "enum.EdgeLayer.South" ]
+    #   state: scraprock_south
+    # - map: [ "enum.EdgeLayer.East" ]
+    #   state: scraprock_east
+    # - map: [ "enum.EdgeLayer.North" ]
+    #   state: scraprock_north
+    # - map: [ "enum.EdgeLayer.West" ]
+    #   state: scraprock_west
     - state: rock_bluespace
+      sprite: _NF/Structures/Walls/rock.rsi # Forge-change
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity

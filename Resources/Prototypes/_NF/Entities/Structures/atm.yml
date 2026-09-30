@@ -129,7 +129,11 @@
   components:
   - type: Sprite
     netsync: false
-    sprite: _NF/Structures/Machines/atm/wall_atm.rsi
+    # Forge-change-start
+    offset: 0, -0.25
+    drawdepth: WallMountedItems
+    sprite: _Forge/Structures/Machines/ATM/wall_atm.rsi
+    # Forge-change-end
     layers:
       - map: ["computerLayerBody"]
         state: icon
@@ -143,7 +147,11 @@
   components:
   - type: Sprite
     netsync: false
-    sprite: _NF/Structures/Machines/atm/wall_atm.rsi
+    # Forge-change-start
+    offset: 0, -0.25
+    drawdepth: WallMountedItems
+    sprite: _Forge/Structures/Machines/ATM/wall_atm.rsi
+    # Forge-change-end
     layers:
       - map: ["computerLayerBody"]
         state: icon
@@ -157,7 +165,11 @@
   components:
   - type: Sprite
     netsync: false
-    sprite: _NF/Structures/Machines/atm/wall_atm.rsi
+    # Forge-change-start
+    offset: 0, -0.25
+    drawdepth: WallMountedItems
+    sprite: _Forge/Structures/Machines/ATM/wall_atm.rsi
+    # Forge-change-end
     layers:
       - map: ["computerLayerBody"]
         state: icon
@@ -201,7 +213,11 @@
   components:
   - type: Sprite
     netsync: false
-    sprite: _NF/Structures/Machines/atm/wall_illegal_atm.rsi
+    # Forge-change-start
+    offset: 0, -0.25
+    drawdepth: WallMountedItems
+    sprite: _Forge/Structures/Machines/ATM/wall_illegal_atm.rsi
+    # Forge-change-end
     layers:
     - map: ["computerLayerBody"]
       state: icon

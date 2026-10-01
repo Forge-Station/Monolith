@@ -733,85 +733,85 @@ public abstract partial class SharedSurgerySystem
     /// Do a surgery step on a part, if it can be done.
     /// Returns true if it succeeded.
     /// </summary>
-    public bool TryDoSurgeryStep(EntityUid body, EntityUid targetPart, EntityUid user, EntProtoId surgeryId, EntProtoId stepId)
-    {
-        if (!IsSurgeryValid(body, targetPart, surgeryId, stepId, user, out var surgery, out var part, out var step))
-            return false;
+    // public bool TryDoSurgeryStep(EntityUid body, EntityUid targetPart, EntityUid user, EntProtoId surgeryId, EntProtoId stepId)
+    // {
+    //     if (!IsSurgeryValid(body, targetPart, surgeryId, stepId, user, out var surgery, out var part, out var step))
+    //         return false;
 
-        if (!PreviousStepsComplete(body, part, surgery, stepId) ||
-            IsStepComplete(body, part, stepId, surgery))
-            return false;
+    //     if (!PreviousStepsComplete(body, part, surgery, stepId) ||
+    //         IsStepComplete(body, part, stepId, surgery))
+    //         return false;
 
-        if (!CanPerformStep(user, body, part, step, true, out _, out _, out var validTools))
-            return false;
+    //     if (!CanPerformStep(user, body, part, step, true, out _, out _, out var validTools))
+    //         return false;
 
-        var speed = 1f;
-        var usedEv = new SurgeryToolUsedEvent(user, body);
-        // We need to check for nullability because of surgeries that dont require a tool, like Cavity Implants
-        if (validTools?.Count > 0)
-        {
-            foreach (var (tool, toolSpeed) in validTools)
-            {
-                RaiseLocalEvent(tool, ref usedEv);
-                if (usedEv.Cancelled)
-                    return false;
+    //     var speed = 1f;
+    //     var usedEv = new SurgeryToolUsedEvent(user, body);
+    //     // We need to check for nullability because of surgeries that dont require a tool, like Cavity Implants
+    //     if (validTools?.Count > 0)
+    //     {
+    //         foreach (var (tool, toolSpeed) in validTools)
+    //         {
+    //             RaiseLocalEvent(tool, ref usedEv);
+    //             if (usedEv.Cancelled)
+    //                 return false;
 
-                speed *= toolSpeed;
-            }
+    //             speed *= toolSpeed;
+    //         }
 
-            if (_net.IsServer)
-            {
-                foreach (var tool in validTools.Keys)
-                {
-                    if (TryComp(tool, out SurgeryToolComponent? toolComp) &&
-                        toolComp.StartSound != null)
-                    {
-                        _audio.PlayPvs(toolComp.StartSound, tool);
-                    }
-                }
-            }
-        }
+    //         if (_net.IsServer)
+    //         {
+    //             foreach (var tool in validTools.Keys)
+    //             {
+    //                 if (TryComp(tool, out SurgeryToolComponent? toolComp) &&
+    //                     toolComp.StartSound != null)
+    //                 {
+    //                     _audio.PlayPvs(toolComp.StartSound, tool);
+    //                 }
+    //             }
+    //         }
+    //     }
 
-        if (TryComp(body, out TransformComponent? xform))
-            _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
+    //     if (TryComp(body, out TransformComponent? xform))
+    //         _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
 
-        var ev = new SurgeryDoAfterEvent(surgeryId, stepId);
-        // TODO: Move 2 seconds to a field of SurgeryStepComponent
-        var duration = GetSurgeryDuration(step, user, body, speed);
+    //     var ev = new SurgeryDoAfterEvent(surgeryId, stepId);
+    //     // TODO: Move 2 seconds to a field of SurgeryStepComponent
+    //     var duration = GetSurgeryDuration(step, user, body, speed);
 
-        if (TryComp(user, out SurgerySpeedModifierComponent? surgerySpeedMod)
-            && surgerySpeedMod is not null)
-            duration = duration / surgerySpeedMod.SpeedModifier;
-        if (user == body)
-            duration = duration * 4;
+    //     if (TryComp(user, out SurgerySpeedModifierComponent? surgerySpeedMod)
+    //         && surgerySpeedMod is not null)
+    //         duration = duration / surgerySpeedMod.SpeedModifier;
+    //     if (user == body)
+    //         duration = duration * 4;
 
-        var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(duration), ev, body, part)
-        {
-            BreakOnMove = true,
-            //BreakOnTargetMove = true, I fucking hate wizden dude.
-            CancelDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
-            NeedHand = true,
-            BreakOnHandChange = true,
-        };
+    //     var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(duration), ev, body, part)
+    //     {
+    //         BreakOnMove = true,
+    //         //BreakOnTargetMove = true, I fucking hate wizden dude.
+    //         CancelDuplicate = true,
+    //         DuplicateCondition = DuplicateConditions.SameEvent,
+    //         NeedHand = true,
+    //         BreakOnHandChange = true,
+    //     };
 
-        if (!_doAfter.TryStartDoAfter(doAfter))
-            return false;
+    //     if (!_doAfter.TryStartDoAfter(doAfter))
+    //         return false;
 
-        var userName = Identity.Entity(user, EntityManager);
-        var targetName = Identity.Entity(body, EntityManager);
+    //     var userName = Identity.Entity(user, EntityManager);
+    //     var targetName = Identity.Entity(body, EntityManager);
 
-        var locName = $"surgery-popup-procedure-{surgeryId}-step-{stepId}";
-        var locResult = Loc.GetString(locName,
-            ("user", userName), ("target", targetName), ("part", part));
+    //     var locName = $"surgery-popup-procedure-{surgeryId}-step-{stepId}";
+    //     var locResult = Loc.GetString(locName,
+    //         ("user", userName), ("target", targetName), ("part", part));
 
-        if (locResult == locName)
-            locResult = Loc.GetString($"surgery-popup-step-{stepId}",
-                ("user", userName), ("target", targetName), ("part", part));
+    //     if (locResult == locName)
+    //         locResult = Loc.GetString($"surgery-popup-step-{stepId}",
+    //             ("user", userName), ("target", targetName), ("part", part));
 
-        _popup.PopupEntity(locResult, user);
-        return true;
-    }
+    //     _popup.PopupEntity(locResult, user);
+    //     return true;
+    // }
 
     private float GetSurgeryDuration(EntityUid surgeryStep, EntityUid user, EntityUid target, float toolSpeed)
     {

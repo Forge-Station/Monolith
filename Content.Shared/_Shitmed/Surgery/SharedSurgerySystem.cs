@@ -20,6 +20,7 @@ using Content.Shared.Humanoid.Markings;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Content.Shared.Standing;
 using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;

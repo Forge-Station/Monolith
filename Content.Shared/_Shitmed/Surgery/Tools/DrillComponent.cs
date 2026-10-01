@@ -6,7 +6,6 @@ namespace Content.Shared._Shitmed.Medical.Surgery.Tools;
 public sealed partial class DrillComponent : Component, ISurgeryToolComponent
 {
     public string ToolName => "a drill";
-    [DataField]
     public bool? Used { get; set; } = null;
     
     /// <summary>

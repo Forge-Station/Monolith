@@ -307,7 +307,7 @@ public sealed partial class SurgeryBui : BoundUserInterface
                 stepButton.Button.Modulate = Color.White;
                 if (_player.LocalEntity is { } player
                     && status == StepStatus.Next
-                    && !_system.CanPerformStepWithHeld(player, Owner, _part.Value, stepButton.Step, false, out var popup))
+                    && !_system.CanPerformStep(player, Owner, _part.Value, stepButton.Step, false, out var popup, out var reason, out _))
                     stepButton.ToolTip = popup;
             }
 

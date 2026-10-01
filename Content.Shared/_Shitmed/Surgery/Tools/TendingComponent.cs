@@ -9,7 +9,6 @@ namespace Content.Shared._Shitmed.Medical.Surgery.Tools;
 public sealed partial class TendingComponent : Component, ISurgeryToolComponent
 {
     public string ToolName => "a wound tender";
-    [DataField]
     public bool? Used { get; set; } = null;
     [DataField]
     public float Speed { get; set; } = 1f;
